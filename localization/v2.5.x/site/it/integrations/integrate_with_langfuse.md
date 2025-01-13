@@ -4,9 +4,9 @@ summary: >-
   Questo è un semplice ricettario che dimostra come utilizzare l'integrazione
   LlamaIndex Langfuse. Utilizza Milvus Lite per memorizzare i documenti e le
   query.
-title: Ricettario LlamaIndex e integrazione Milvus
+title: Utilizzo di Langfuse per valutare la qualità dei RAG
 ---
-<h1 id="Cookbook---LlamaIndex--Milvus-Integration" class="common-anchor-header">Ricettario - Integrazione LlamaIndex e Milvus<button data-href="#Cookbook---LlamaIndex--Milvus-Integration" class="anchor-icon" translate="no">
+<h1 id="Using-Langfuse-to-Trace-Queries-in-RAG" class="common-anchor-header">Usare Langfuse per tracciare le query in RAG<button data-href="#Using-Langfuse-to-Trace-Queries-in-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +24,10 @@ title: Ricettario LlamaIndex e integrazione Milvus
     </button></h1><p><a target="_blank" href="https://colab.research.google.com/github/langfuse/langfuse-docs/blob/main/cookbook/integration_llama-index_milvus-lite.ipynb">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a></p>
-<p>Questo è un semplice ricettario che dimostra come utilizzare l'<a href="https://langfuse.com/docs/integrations/llama-index/get-started">integrazione LlamaIndex Langfuse</a>. Utilizza Milvus Lite per memorizzare i documenti e le query.</p>
-<p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Lite</a> è la versione leggera di Milvus, un database vettoriale open-source che alimenta le applicazioni di intelligenza artificiale con incorporazioni vettoriali e ricerca di similarità.</p>
+<p>Questo è un semplice ricettario che dimostra come usare Langfuse per tracciare le query in RAG. La pipeline di RAG è implementata con LlamaIndex e Milvus Lite per memorizzare e recuperare i documenti.</p>
+<p>In questo quickstart, vi mostreremo come configurare un'applicazione LlamaIndex utilizzando Milvus Lite come archivio vettoriale. Vi mostreremo anche come utilizzare l'integrazione Langfuse LlamaIndex per tracciare la vostra applicazione.</p>
+<p><a href="https://github.com/langfuse/langfuse">Langfuse</a> è una piattaforma di progettazione LLM open-source che aiuta i team a collaborare al debug, all'analisi e all'iterazione delle loro applicazioni LLM. Tutte le funzionalità della piattaforma sono integrate in modo nativo per accelerare il flusso di lavoro dello sviluppo.</p>
+<p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Lite</a> è la versione leggera di Milvus, un database vettoriale open-source che alimenta le applicazioni di intelligenza artificiale con embeddings vettoriali e ricerca di similarità.</p>
 <h2 id="Setup" class="common-anchor-header">Configurazione<button data-href="#Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +43,7 @@ title: Ricettario LlamaIndex e integrazione Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Assicurarsi di avere installato sia <code translate="no">llama-index</code> che <code translate="no">langfuse</code>.</p>
+    </button></h2><p>Assicurarsi di aver installato sia <code translate="no">llama-index</code> che <code translate="no">langfuse</code>.</p>
 <pre><code translate="no" class="language-python">$ pip install llama-index langfuse llama-index-vector-stores-milvus --upgrade
 <button class="copy-code-btn"></button></code></pre>
 <p>Inizializzare l'integrazione. Ottenere le chiavi API dalle <a href="https://cloud.langfuse.com">impostazioni</a> del <a href="https://cloud.langfuse.com">progetto Langfuse</a> e sostituire public_key secret_key con i valori delle chiavi. Questo esempio utilizza OpenAI per le incorporazioni e il completamento della chat, quindi è necessario specificare la chiave OpenAI nella variabile d'ambiente.</p>

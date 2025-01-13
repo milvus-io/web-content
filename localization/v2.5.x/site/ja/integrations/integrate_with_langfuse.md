@@ -3,9 +3,9 @@ id: integrate_with_langfuse.md
 summary: >-
   これはLlamaIndex Langfuse統合の使い方を示すシンプルなクックブックです。ドキュメントとQueryの保存にはMilvus
   Liteを使用しています。
-title: クックブック LlamaIndexとmilvusの統合
+title: Langfuseを使用したRAGの品質評価
 ---
-<h1 id="Cookbook---LlamaIndex--Milvus-Integration" class="common-anchor-header">クックブック - LlamaIndexとmilvusの統合<button data-href="#Cookbook---LlamaIndex--Milvus-Integration" class="anchor-icon" translate="no">
+<h1 id="Using-Langfuse-to-Trace-Queries-in-RAG" class="common-anchor-header">RAGでクエリをトレースするためにLangfuseを使う<button data-href="#Using-Langfuse-to-Trace-Queries-in-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,10 @@ title: クックブック LlamaIndexとmilvusの統合
     </button></h1><p><a target="_blank" href="https://colab.research.google.com/github/langfuse/langfuse-docs/blob/main/cookbook/integration_llama-index_milvus-lite.ipynb">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a></p>
-<p>このクックブックは<a href="https://langfuse.com/docs/integrations/llama-index/get-started">LlamaIndexとLangfuseの統合の</a>使い方を説明したものです。ドキュメントとQueryの保存にはMilvus Liteを使用しています。</p>
-<p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Liteは</a>Milvusの軽量版です。Milvusはオープンソースのベクトルデータベースで、ベクトル埋め込みと類似性検索でAIアプリケーションを強化します。</p>
+<p>これはRAGでクエリをトレースするためにLangfuseを使用する方法を示す簡単なクックブックです。RAGパイプラインはLlamaIndexとMilvus Liteで実装され、ドキュメントの保存と取得を行います。</p>
+<p>このクイックスタートでは、Milvus Liteをベクターストアとして使用したLlamaIndexアプリケーションのセットアップ方法を紹介します。また、Langfuse LlamaIndexインテグレーションを使用してアプリケーションをトレースする方法も紹介します。</p>
+<p><a href="https://github.com/langfuse/langfuse">Langfuseは</a>オープンソースのLLMエンジニアリングプラットフォームであり、LLMアプリケーションのデバッグ、分析、反復を共同で行うことができます。すべてのプラットフォーム機能がネイティブに統合されており、開発ワークフローを加速します。</p>
+<p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Liteは</a>Milvusの軽量版です。Milvusはオープンソースのベクトルデータベースで、ベクトル埋め込みと類似性検索によってAIアプリケーションを強化します。</p>
 <h2 id="Setup" class="common-anchor-header">セットアップ<button data-href="#Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

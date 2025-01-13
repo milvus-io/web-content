@@ -4,9 +4,9 @@ summary: >-
   Este es un simple libro de cocina que demuestra cómo utilizar la integración
   LlamaIndex Langfuse. Utiliza Milvus Lite para almacenar los documentos y
   Query.
-title: Cookbook Integración de LlamaIndex y Milvus
+title: Uso de Langfuse para evaluar la calidad de los GAR
 ---
-<h1 id="Cookbook---LlamaIndex--Milvus-Integration" class="common-anchor-header">Libro de cocina - Integración de LlamaIndex y Milvus<button data-href="#Cookbook---LlamaIndex--Milvus-Integration" class="anchor-icon" translate="no">
+<h1 id="Using-Langfuse-to-Trace-Queries-in-RAG" class="common-anchor-header">Uso de Langfuse para rastrear consultas en RAG<button data-href="#Using-Langfuse-to-Trace-Queries-in-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +24,10 @@ title: Cookbook Integración de LlamaIndex y Milvus
     </button></h1><p><a target="_blank" href="https://colab.research.google.com/github/langfuse/langfuse-docs/blob/main/cookbook/integration_llama-index_milvus-lite.ipynb">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a></p>
-<p>Este es un sencillo libro de cocina que demuestra cómo utilizar la <a href="https://langfuse.com/docs/integrations/llama-index/get-started">integración LlamaIndex Langfuse</a>. Utiliza Milvus Lite para almacenar los documentos y las consultas.</p>
-<p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Lite</a> es la versión ligera de Milvus, una base de datos vectorial de código abierto que potencia las aplicaciones de IA con incrustaciones vectoriales y búsqueda por similitud.</p>
+<p>Este es un sencillo libro de cocina que demuestra cómo usar Langfuse para rastrear tus consultas en RAG. La tubería RAG se implementa con LlamaIndex y Milvus Lite para almacenar y recuperar los documentos.</p>
+<p>En esta guía rápida, le mostraremos cómo configurar una aplicación LlamaIndex utilizando Milvus Lite como almacén de vectores. También le mostraremos cómo utilizar la integración Langfuse LlamaIndex para rastrear su aplicación.</p>
+<p><a href="https://github.com/langfuse/langfuse">Langfuse</a> es una plataforma de ingeniería LLM de código abierto que ayuda a los equipos a depurar, analizar e iterar sus aplicaciones LLM de forma colaborativa. Todas las características de la plataforma están integradas de forma nativa para acelerar el flujo de trabajo de desarrollo.</p>
+<p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Lite</a> es la versión ligera de Milvus, una base de datos vectorial de código abierto que potencia las aplicaciones de IA con incrustaciones vectoriales y búsqueda de similitudes.</p>
 <h2 id="Setup" class="common-anchor-header">Configurar<button data-href="#Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

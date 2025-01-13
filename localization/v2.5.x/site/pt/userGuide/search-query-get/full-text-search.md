@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A pesquisa de texto integral é uma funcionalidade que recupera documentos que contêm termos ou frases específicos em conjuntos de dados de texto, classificando depois os resultados com base na relevância. Esta funcionalidade ultrapassa as limitações da pesquisa semântica, que pode ignorar termos precisos, garantindo que recebe os resultados mais exactos e contextualmente relevantes. Além disso, simplifica as pesquisas vectoriais ao aceitar a entrada de texto em bruto, convertendo automaticamente os seus dados de texto em embeddings esparsos sem a necessidade de gerar manualmente embeddings vectoriais.</p>
+    </button></h1><p>A pesquisa de texto integral é uma funcionalidade que recupera documentos que contêm termos ou frases específicos em conjuntos de dados de texto e, em seguida, classifica os resultados com base na relevância. Esta funcionalidade ultrapassa as limitações da pesquisa semântica, que pode ignorar termos precisos, garantindo que recebe os resultados mais exactos e contextualmente relevantes. Além disso, simplifica as pesquisas vectoriais ao aceitar a entrada de texto em bruto, convertendo automaticamente os seus dados de texto em embeddings esparsos sem a necessidade de gerar manualmente embeddings vectoriais.</p>
 <p>Utilizando o algoritmo BM25 para pontuação de relevância, esta funcionalidade é particularmente valiosa em cenários de geração aumentada de recuperação (RAG), onde dá prioridade a documentos que correspondem a termos de pesquisa específicos.</p>
 <div class="alert note">
 <ul>
@@ -47,11 +47,11 @@ summary: >-
       </svg>
     </button></h2><p>A pesquisa de texto completo simplifica o processo de pesquisa baseado em texto, eliminando a necessidade de incorporação manual. Esta funcionalidade funciona através do seguinte fluxo de trabalho.</p>
 <ol>
-<li><p><strong>Entrada de texto</strong>: Insere documentos de texto em bruto ou fornece texto de consulta sem qualquer necessidade de incorporação manual.</p></li>
-<li><p><strong>Análise de texto</strong>: O Milvus utiliza um analisador para transformar o texto de entrada em termos individuais e pesquisáveis. Para obter mais informações sobre analisadores, consulte <a href="/docs/pt/analyzer-overview.md">Visão geral do analisador</a>.</p></li>
+<li><p><strong>Entrada de texto</strong>: Insere documentos de texto em bruto ou fornece texto de consulta sem necessidade de os incorporar manualmente.</p></li>
+<li><p><strong>Análise de texto</strong>: O Milvus usa um analisador para tokenizar o texto de entrada em termos individuais e pesquisáveis. Para obter mais informações sobre analisadores, consulte <a href="/docs/pt/analyzer-overview.md">Visão geral do analisador</a>.</p></li>
 <li><p><strong>Processamento de funções</strong>: A função incorporada recebe os termos tokenizados e converte-os em representações vectoriais esparsas.</p></li>
 <li><p><strong>Armazenamento de colecções</strong>: O Milvus armazena esses embeddings esparsos em uma coleção para uma recuperação eficiente.</p></li>
-<li><p><strong>Pontuação BM25</strong>: Durante uma pesquisa, o Milvus aplica o algoritmo BM25 para calcular as pontuações dos documentos armazenados e classifica os resultados correspondentes com base na relevância para o texto da consulta.</p></li>
+<li><p><strong>Pontuação BM25</strong>: Durante uma pesquisa, o Milvus aplica o algoritmo BM25 para calcular as pontuações dos documentos armazenados e classifica os resultados correspondentes com base na sua relevância para o texto da consulta.</p></li>
 </ol>
 <p>
   
@@ -176,7 +176,7 @@ schema.addField(AddFieldReq.builder()
 <ul>
 <li><p><code translate="no">id</code>: serve como chave primária e é gerado automaticamente com <code translate="no">auto_id=True</code>.</p></li>
 <li><p><code translate="no">text</code>: armazena os seus dados de texto em bruto para operações de pesquisa de texto completo. O tipo de dados deve ser <code translate="no">VARCHAR</code>, uma vez que <code translate="no">VARCHAR</code> é o tipo de dados de cadeia de caracteres do Milvus para armazenamento de texto. Defina <code translate="no">enable_analyzer=True</code> para permitir que o Milvus tokenize o texto. Por defeito, o Milvus utiliza o <a href="/docs/pt/standard-analyzer.md">analisador padrão</a> para a análise de texto. Para configurar um analisador diferente, consulte <a href="/docs/pt/analyzer-overview.md">Visão geral</a>.</p></li>
-<li><p><code translate="no">sparse</code>Campo vetorial: um campo vetorial reservado para armazenar as incorporações esparsas geradas internamente para operações de pesquisa de texto completo. O tipo de dados deve ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">sparse</code>Campo vetorial: um campo vetorial reservado para armazenar as incorporações esparsas geradas internamente para operações de pesquisa de texto completo. O tipo de dados tem de ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <p>Agora, defina uma função que converterá o seu texto em representações vectoriais esparsas e, em seguida, adicione-a ao esquema.</p>
 <div class="multipleCode">
@@ -304,7 +304,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 </th></tr></thead><tbody><tr><td data-block-token="UxxWdkIBPoSbjOx7MO8csiFEn5d" colspan="1" rowspan="1"><p data-block-token="NYODddTbmoYoBrxPQ8ectvGxnPe"><code translate="no">field_name</code></p>
 </td><td data-block-token="L2ZGdkB2voKhmsx8ezecoPxmnVf" colspan="1" rowspan="1"><p data-block-token="Y16fdZ6hPoXVlgxSTQjctsTonac">O nome do campo vetorial a indexar. Para pesquisa de texto completo, este deve ser o campo que armazena os vectores esparsos gerados. Neste exemplo, defina o valor para <code translate="no">sparse</code>.</p>
 </td></tr><tr><td data-block-token="Wn1rdzso5o8AmqxqxiqccBpCnD4" colspan="1" rowspan="1"><p data-block-token="WLDrdOzSXoiKEOxoDREctDounRf"><code translate="no">index_type</code></p>
-</td><td data-block-token="I9TpdLWlXozM3Hx2Z9mcWvDHnNc" colspan="1" rowspan="1"><p data-block-token="Q3cgdK7OTo3kzXxQ1Y2cSarZned">O tipo de índice a criar. <code translate="no">AUTOINDEX</code> permite ao Milvus otimizar automaticamente as definições do índice. Se precisar de mais controlo sobre as definições do índice, pode escolher entre vários tipos de índices disponíveis para vectores esparsos no Milvus. Para mais informações, consulte <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Índices suportados no Milvus</a>.</p>
+</td><td data-block-token="I9TpdLWlXozM3Hx2Z9mcWvDHnNc" colspan="1" rowspan="1"><p data-block-token="Q3cgdK7OTo3kzXxQ1Y2cSarZned">O tipo de índice a criar. <code translate="no">AUTOINDEX</code> permite ao Milvus otimizar automaticamente as definições do índice. Se necessitar de mais controlo sobre as definições do índice, pode escolher entre vários tipos de índices disponíveis para vectores esparsos no Milvus. Para mais informações, consulte <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Índices suportados no Milvus</a>.</p>
 </td></tr><tr><td data-block-token="KJfgdQmD1odMgdxkG6uczBYknQh" colspan="1" rowspan="1"><p data-block-token="XVCsdz9Ulo93A2xavPtcF9Bvnec"><code translate="no">metric_type</code></p>
 </td><td data-block-token="S3NHds6MTodtrsxRILIc8E1wngh" colspan="1" rowspan="1"><p data-block-token="G9i7dPczzoyJRHxyXbecrWBBn0d">O valor deste parâmetro deve ser definido como <code translate="no">BM25</code> especificamente para a funcionalidade de pesquisa de texto completo.</p>
 </td></tr></tbody></table>

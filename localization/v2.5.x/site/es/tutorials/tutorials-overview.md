@@ -46,5 +46,7 @@ title: Visión general de los tutoriales
 <tr><td><a href="/docs/es/text_search_engine.md">Buscador de texto</a></td><td>Búsqueda semántica</td><td>búsqueda vectorial</td></tr>
 <tr><td><a href="/docs/es/text_image_search.md">Búsqueda de imágenes por texto</a></td><td>Búsqueda semántica</td><td>búsqueda vectorial</td></tr>
 <tr><td><a href="/docs/es/image_deduplication_system.md">Deduplicación de imágenes</a></td><td>Deduplicación</td><td>búsqueda vectorial</td></tr>
+<tr><td><a href="/docs/es/quickstart_with_attu.md">Inicio rápido con Attu</a></td><td>Inicio rápido</td><td>búsqueda vectorial</td></tr>
+<tr><td><a href="/docs/es/use-async-milvus-client-with-asyncio.md">Utilizar AsyncMilvusClient con asyncio</a></td><td>AsyncIO</td><td>AsyncIO, búsqueda vectorial</td></tr>
 </tbody>
 </table>

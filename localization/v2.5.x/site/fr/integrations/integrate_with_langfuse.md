@@ -1,12 +1,12 @@
 ---
 id: integrate_with_langfuse.md
 summary: >-
-  Il s'agit d'un simple livre de recettes qui montre comment utiliser
+  Il s'agit d'un simple livre de recettes qui démontre comment utiliser
   l'intégration LlamaIndex Langfuse. Il utilise Milvus Lite pour stocker les
   documents et les requêtes.
-title: Cookbook Intégration de LlamaIndex et Milvus
+title: Utilisation de Langfuse pour évaluer la qualité du RAG
 ---
-<h1 id="Cookbook---LlamaIndex--Milvus-Integration" class="common-anchor-header">Livre de recettes - Intégration LlamaIndex &amp; Milvus<button data-href="#Cookbook---LlamaIndex--Milvus-Integration" class="anchor-icon" translate="no">
+<h1 id="Using-Langfuse-to-Trace-Queries-in-RAG" class="common-anchor-header">Utilisation de Langfuse pour tracer les requêtes dans RAG<button data-href="#Using-Langfuse-to-Trace-Queries-in-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +24,10 @@ title: Cookbook Intégration de LlamaIndex et Milvus
     </button></h1><p><a target="_blank" href="https://colab.research.google.com/github/langfuse/langfuse-docs/blob/main/cookbook/integration_llama-index_milvus-lite.ipynb">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a></p>
-<p>Il s'agit d'un simple livre de recettes qui montre comment utiliser l'<a href="https://langfuse.com/docs/integrations/llama-index/get-started">intégration LlamaIndex Langfuse</a>. Il utilise Milvus Lite pour stocker les documents et les requêtes.</p>
-<p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Lite</a> est la version allégée de Milvus, une base de données vectorielle open-source qui alimente les applications d'intelligence artificielle avec des embeddings vectoriels et des recherches de similarité.</p>
+<p>Il s'agit d'un simple livre de recettes qui démontre comment utiliser Langfuse pour tracer vos requêtes dans RAG. Le pipeline RAG est implémenté avec LlamaIndex et Milvus Lite pour stocker et récupérer les documents.</p>
+<p>Dans ce quickstart, nous allons vous montrer comment mettre en place une application LlamaIndex en utilisant Milvus Lite comme magasin de vecteurs. Nous vous montrerons également comment utiliser l'intégration Langfuse LlamaIndex pour tracer votre application.</p>
+<p><a href="https://github.com/langfuse/langfuse">Langfuse</a> est une plateforme d'ingénierie LLM open-source qui aide les équipes à collaborer pour déboguer, analyser et faire évoluer leurs applications LLM. Toutes les fonctionnalités de la plateforme sont intégrées de manière native afin d'accélérer le flux de développement.</p>
+<p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Lite</a> est la version allégée de Milvus, une base de données vectorielles open-source qui alimente les applications d'intelligence artificielle avec des embeddings vectoriels et des recherches de similarité.</p>
 <h2 id="Setup" class="common-anchor-header">Configuration<button data-href="#Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

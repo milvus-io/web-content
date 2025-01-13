@@ -211,7 +211,7 @@
             "children": []
           },
           {
-            "label": "Archiviazione/Computing",
+            "label": "Storage/Computing",
             "id": "four_layers.md",
             "order": 1,
             "children": []
@@ -1375,7 +1375,7 @@
             "children": []
           },
           {
-            "label": "Compattazione del clustering",
+            "label": "Compattazione dei cluster",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1737,6 +1737,12 @@
             "id": "build_RAG_with_milvus_and_ollama.md",
             "order": 7,
             "children": []
+          },
+          {
+            "label": "DeepSeek",
+            "id": "build_RAG_with_milvus_and_deepseek.md",
+            "order": 8,
+            "children": []
           }
         ]
       },
@@ -2081,6 +2087,18 @@
         "children": []
       },
       {
+        "label": "Avvio rapido con Attu",
+        "id": "quickstart_with_attu.md",
+        "order": 14,
+        "children": []
+      },
+      {
+        "label": "Utilizzare AsyncMilvusClient con asyncio",
+        "id": "use-async-milvus-client-with-asyncio.md",
+        "order": 15,
+        "children": []
+      },
+      {
         "label": "Per saperne di più",
         "id": "explore-more",
         "order": 99,
@@ -2104,7 +2122,7 @@
             "children": []
           },
           {
-            "label": "Ricerca di somiglianza audio",
+            "label": "Ricerca della somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

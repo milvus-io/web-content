@@ -46,5 +46,7 @@ title: 튜토리얼 개요
 <tr><td><a href="/docs/ko/text_search_engine.md">텍스트 검색 엔진</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/text_image_search.md">텍스트로 이미지 검색</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/image_deduplication_system.md">이미지 중복 제거</a></td><td>중복 제거</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/quickstart_with_attu.md">Attu로 빠르게 시작하기</a></td><td>퀵스타트</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/use-async-milvus-client-with-asyncio.md">asyncio와 함께 AsyncMilvusClient 사용</a></td><td>AsyncIO</td><td>AsyncIO, 벡터 검색</td></tr>
 </tbody>
 </table>

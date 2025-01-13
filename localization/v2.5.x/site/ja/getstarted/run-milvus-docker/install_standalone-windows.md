@@ -61,7 +61,7 @@ title: DockerでMilvusを実行する(Linux)
 <ol>
 <li><p>右クリックして管理者モードでDocker Desktopを開き、<strong>管理者として実行を</strong>選択します。</p></li>
 <li><p>インストールスクリプトをダウンロードし、<code translate="no">standalone.bat</code> として保存します。</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/milvus/blob/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
+<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>ダウンロードしたスクリプトを実行し、MilvusをDockerコンテナとして起動する。</p>
@@ -197,7 +197,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="common-anchor-header"><code translate="no">Docker Engine stopped</code> エラーの対処方法を教えてください。</h3><p>WindowsにDocker Desktopをインストールした後、お使いのコンピュータが正しく設定されていない場合、<code translate="no">Docker Engine stopped</code> エラーが発生することがあります。この場合、以下の確認を行う必要があります。</p>
+    </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="common-anchor-header"><code translate="no">Docker Engine stopped</code> エラーの対処方法を教えてください。</h3><p>WindowsにDocker Desktopをインストールした後、お使いのコンピュータが正しく設定されていない場合、<code translate="no">Docker Engine stopped</code> のエラーが発生することがあります。この場合、以下の確認を行う必要があります。</p>
 <ol>
 <li><p>仮想化が有効になっているか確認してください。</p>
 <p>仮想化が有効になっているかどうかは、<strong>タスクマネージャの</strong> <strong>パフォーマンス</strong>タブで確認できます。</p>
@@ -251,7 +251,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 <h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Milvusの起動時にボリューム関連のエラーが表示され、<code translate="no">Read config failed</code> 。</h3><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
-   </span> <span class="img-wrapper"> <span>Milvus起動時に表示されるRead config failedエラーのプロンプトについて</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Milvus起動時のRead config failedエラーのプロンプト</span> </span></p>
 <p>Milvus起動時に表示される「Read config failed」というエラーに対処するには、Milvusコンテナにマウントされているボリュームが正しいかどうかを確認する必要があります。ボリュームが正しくコンテナにマウントされていれば、<code translate="no">docker exec</code> コマンドでコンテナに入り、以下のように<strong>/milvus/configs</strong>フォルダをリストアップすることができる。</p>
 <p>
   
@@ -295,7 +295,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 </ul></li>
 <li><p><a href="/docs/ja/milvus-webui.md">Milvusの</a>観測と管理のための直感的なWebインターフェースである<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご覧ください。</p></li>
 <li><p><a href="/docs/ja/milvus_backup_overview.md">Milvus</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
-<li><p>Milvusのデバッグとダイナミックなコンフィギュレーション更新のためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
+<li><p><a href="/docs/ja/birdwatcher_overview.md">Birdwatcher</a>：Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール。</p></li>
 <li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://milvus.io/docs/attu.md">Attuを</a>ご紹介します。</p></li>
 <li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

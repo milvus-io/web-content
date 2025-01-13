@@ -1,9 +1,7 @@
 ---
 id: integrate_with_camel.md
-summary: >-
-  このガイドでは、MilvusベクトルデータベースとBentoCloud上でオープンソースの埋め込みモデルと大規模言語モデルを使用して、RAG（Retrieval
-  Augmented Generation）アプリケーションを構築する方法を紹介します。
-title: MilvusとBentoMLによる検索補強型生成(RAG)
+summary: このガイドでは、CAMELとmilvusを使用したRAG（Retrieval-Augmented Generation）システムの構築方法を説明します。
+title: MilvusとCamelを使用した検索拡張ジェネレーション（RAG）
 ---
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="common-anchor-header">MilvusとCamelを使用した検索拡張ジェネレーション（RAG）<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="anchor-icon" translate="no">
       <svg translate="no"

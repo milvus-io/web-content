@@ -1340,7 +1340,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Seguimiento de Jaeger",
+                "label": "Rastreo de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -1737,6 +1737,12 @@
             "id": "build_RAG_with_milvus_and_ollama.md",
             "order": 7,
             "children": []
+          },
+          {
+            "label": "DeepSeek",
+            "id": "build_RAG_with_milvus_and_deepseek.md",
+            "order": 8,
+            "children": []
           }
         ]
       },
@@ -1956,7 +1962,7 @@
             "children": []
           },
           {
-            "label": "Sin estructurar",
+            "label": "No estructurado",
             "id": "rag_with_milvus_and_unstructured.md",
             "order": 3,
             "children": []
@@ -2078,6 +2084,18 @@
         "label": "Búsqueda en embudo con incrustaciones de matrioskas",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
+        "children": []
+      },
+      {
+        "label": "Inicio rápido con Attu",
+        "id": "quickstart_with_attu.md",
+        "order": 14,
+        "children": []
+      },
+      {
+        "label": "Utilizar AsyncMilvusClient con asyncio",
+        "id": "use-async-milvus-client-with-asyncio.md",
+        "order": 15,
         "children": []
       },
       {

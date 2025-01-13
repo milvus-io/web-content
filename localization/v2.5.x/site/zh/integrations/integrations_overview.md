@@ -73,5 +73,6 @@ title: 集成概述
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_gemini.md">使用 Milvus 和 Gemini 构建 RAG</a></td><td>LLMs</td><td>Milvus、Gemini</td></tr>
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_ollama.md">使用 Milvus 和 Ollama 构建 RAG</a></td><td>LLMs</td><td>Milvus、Ollama</td></tr>
 <tr><td><a href="/docs/zh/milvus_rag_with_dynamiq.md">开始使用 Dynamiq 和 Milvus</a></td><td>协调</td><td>Milvus、Dynamiq</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_deepseek.md">使用 Milvus 和 DeepSeek 构建 RAG</a></td><td>LLMs</td><td>Milvus、DeepSeek</td></tr>
 </tbody>
 </table>

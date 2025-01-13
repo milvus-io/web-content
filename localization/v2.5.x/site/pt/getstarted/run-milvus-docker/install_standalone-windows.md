@@ -63,7 +63,7 @@ title: Executar o Milvus no Docker (Linux)
 <ol>
 <li><p>Abra o Docker Desktop no modo de administrador clicando com o botão direito do rato e selecionando <strong>Executar como administrador</strong>.</p></li>
 <li><p>Descarregue o script de instalação e guarde-o como <code translate="no">standalone.bat</code>.</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/milvus/blob/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
+<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Execute o script descarregado para iniciar o Milvus como um contentor Docker.</p>
@@ -202,7 +202,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
     </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="common-anchor-header">Como posso lidar com o erro <code translate="no">Docker Engine stopped</code>?</h3><p>Depois de instalar o Docker Desktop no Windows, poderá encontrar o erro <code translate="no">Docker Engine stopped</code> se o seu computador não estiver configurado corretamente. Nesse caso, pode ser necessário fazer as seguintes verificações.</p>
 <ol>
 <li><p>Verificar se a virtualização está activada.</p>
-<p>Pode verificar se a virtualização está activada consultando o separador <strong>Desempenho</strong> no <strong>Gestor de Tarefas</strong>.</p>
+<p>Pode verificar se a virtualização está activada consultando o separador <strong>Desempenho</strong> no Gestor <strong>de Tarefas</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
@@ -239,7 +239,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 </ol>
 <h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">Como posso lidar com problemas relacionados com a WSL durante a implementação do Milvus?</h3><p>Se encontrou problemas relacionados com a WSL enquanto executava o Milvus a partir da WSL 2, poderá ter de verificar se configurou o Docker Desktop para utilizar o motor baseado na WSL 2 da seguinte forma.</p>
 <ol>
-<li><p>Certifique-se de que a opção "Usar o mecanismo baseado na WSL 2" está marcada em <strong>Configurações</strong> &gt; <strong>Geral</strong>. </p>
+<li><p>Certifique-se de que a opção "Usar o mecanismo baseado na WSL 2" esteja marcada em <strong>Configurações</strong> &gt; <strong>Geral</strong>. </p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />

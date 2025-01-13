@@ -1,9 +1,9 @@
 ---
 id: integrate_with_langfuse.md
 summary: 这是一本演示如何使用 LlamaIndex Langfuse 集成的简单食谱。它使用 Milvus Lite 来存储文档和查询。
-title: Cookbook LlamaIndex 与 Milvus 集成
+title: 使用 Langfuse 评估 RAG 质量
 ---
-<h1 id="Cookbook---LlamaIndex--Milvus-Integration" class="common-anchor-header">烹饪手册 - LlamaIndex 与 Milvus 集成<button data-href="#Cookbook---LlamaIndex--Milvus-Integration" class="anchor-icon" translate="no">
+<h1 id="Using-Langfuse-to-Trace-Queries-in-RAG" class="common-anchor-header">使用 Langfuse 在 RAG 中跟踪查询<button data-href="#Using-Langfuse-to-Trace-Queries-in-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,10 @@ title: Cookbook LlamaIndex 与 Milvus 集成
     </button></h1><p><a target="_blank" href="https://colab.research.google.com/github/langfuse/langfuse-docs/blob/main/cookbook/integration_llama-index_milvus-lite.ipynb">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a></p>
-<p>这是一本演示如何使用<a href="https://langfuse.com/docs/integrations/llama-index/get-started">LlamaIndex Langfuse 集成的</a>简单食谱。它使用 Milvus Lite 来存储文档和查询。</p>
-<p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Lite</a>是 Milvus 的轻量级版本，Milvus 是一个开源向量数据库，通过向量嵌入和相似性搜索为人工智能应用提供动力。</p>
+<p>这是一本简单的烹饪手册，演示了如何使用 Langfuse 在 RAG 中跟踪查询。RAG 管道是通过 LlamaIndex 和 Milvus Lite 来实现文档的存储和检索的。</p>
+<p>在本快速入门中，我们将向您展示如何使用 Milvus Lite 作为向量存储设置 LlamaIndex 应用程序。我们还将向你展示如何使用 Langfuse LlamaIndex 集成来跟踪你的应用程序。</p>
+<p><a href="https://github.com/langfuse/langfuse">Langfuse</a>是一个开源 LLM 工程平台，可帮助团队协作调试、分析和迭代 LLM 应用程序。所有平台功能均已集成，以加快开发工作流程。</p>
+<p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Lite</a>是 Milvus 的轻量级版本，<a href="https://github.com/milvus-io/milvus-lite/">Milvus</a>是一个开源向量数据库，可通过向量嵌入和相似性搜索为人工智能应用提供支持。</p>
 <h2 id="Setup" class="common-anchor-header">设置<button data-href="#Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

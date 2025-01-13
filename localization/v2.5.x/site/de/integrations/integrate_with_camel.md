@@ -1,10 +1,9 @@
 ---
 id: integrate_with_camel.md
 summary: >-
-  Dieser Leitfaden zeigt, wie man ein Open-Source-Einbettungsmodell und ein
-  Großsprachenmodell auf BentoCloud mit der Milvus-Vektordatenbank verwendet, um
-  eine Retrieval Augmented Generation (RAG)-Anwendung zu erstellen.
-title: Retrieval-Augmented Generation (RAG) mit Milvus und BentoML
+  Dieser Leitfaden zeigt, wie ein Retrieval-Augmented Generation (RAG)-System
+  mit CAMEL und Milvus aufgebaut wird.
+title: Retrieval-erweiterte Generierung (RAG) mit Milvus und Camel
 ---
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="common-anchor-header">Retrieval-erweiterte Generierung (RAG) mit Milvus und Camel<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="anchor-icon" translate="no">
       <svg translate="no"

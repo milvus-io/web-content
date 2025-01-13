@@ -964,7 +964,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "모니터링",
+            "label": "Monitoring",
             "id": "monitoring",
             "order": 0,
             "isMenu": true,

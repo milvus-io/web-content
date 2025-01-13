@@ -46,5 +46,7 @@ title: Panoramica dei tutorial
 <tr><td><a href="/docs/it/text_search_engine.md">Motore di ricerca testuale</a></td><td>Ricerca semantica</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/text_image_search.md">Ricerca di immagini per testo</a></td><td>Ricerca semantica</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/image_deduplication_system.md">Deduplicazione delle immagini</a></td><td>Deduplicazione</td><td>ricerca vettoriale</td></tr>
+<tr><td><a href="/docs/it/quickstart_with_attu.md">Avvio rapido con Attu</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
+<tr><td><a href="/docs/it/use-async-milvus-client-with-asyncio.md">Utilizzare AsyncMilvusClient con asyncio</a></td><td>AsyncIO</td><td>AsyncIO, ricerca vettoriale</td></tr>
 </tbody>
 </table>

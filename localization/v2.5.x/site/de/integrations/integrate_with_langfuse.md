@@ -4,9 +4,9 @@ summary: >-
   Dies ist ein einfaches Kochbuch, das demonstriert, wie die LlamaIndex
   Langfuse-Integration verwendet wird. Es verwendet Milvus Lite, um die
   Dokumente und Query zu speichern.
-title: Kochbuch LlamaIndex &amp; Milvus Integration
+title: Verwendung von Langfuse zur Bewertung der RAG-Qualität
 ---
-<h1 id="Cookbook---LlamaIndex--Milvus-Integration" class="common-anchor-header">Kochbuch - LlamaIndex &amp; Milvus-Integration<button data-href="#Cookbook---LlamaIndex--Milvus-Integration" class="anchor-icon" translate="no">
+<h1 id="Using-Langfuse-to-Trace-Queries-in-RAG" class="common-anchor-header">Verwendung von Langfuse zur Verfolgung von Abfragen in RAG<button data-href="#Using-Langfuse-to-Trace-Queries-in-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,9 +24,11 @@ title: Kochbuch LlamaIndex &amp; Milvus Integration
     </button></h1><p><a target="_blank" href="https://colab.research.google.com/github/langfuse/langfuse-docs/blob/main/cookbook/integration_llama-index_milvus-lite.ipynb">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a></p>
-<p>Dies ist ein einfaches Kochbuch, das die Verwendung der <a href="https://langfuse.com/docs/integrations/llama-index/get-started">LlamaIndex Langfuse Integration</a> demonstriert. Es verwendet Milvus Lite, um die Dokumente und Abfragen zu speichern.</p>
-<p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Lite</a> ist die leichtgewichtige Version von Milvus, einer Open-Source-Vektordatenbank, die KI-Anwendungen mit Vektoreinbettungen und Ähnlichkeitssuche unterstützt.</p>
-<h2 id="Setup" class="common-anchor-header">Einrichten von<button data-href="#Setup" class="anchor-icon" translate="no">
+<p>Dies ist ein einfaches Kochbuch, das demonstriert, wie man Langfuse verwendet, um seine Abfragen in RAG zu verfolgen. Die RAG-Pipeline ist mit LlamaIndex und Milvus Lite implementiert, um die Dokumente zu speichern und abzurufen.</p>
+<p>In diesem Quickstart zeigen wir Ihnen, wie Sie eine LlamaIndex-Anwendung mit Milvus Lite als Vektorspeicher einrichten. Außerdem zeigen wir Ihnen, wie Sie die Langfuse LlamaIndex-Integration nutzen können, um Ihre Anwendung zu verfolgen.</p>
+<p><a href="https://github.com/langfuse/langfuse">Langfuse</a> ist eine Open-Source-LLM-Engineering-Plattform, die Teams beim gemeinsamen Debuggen, Analysieren und Iterieren ihrer LLM-Anwendungen unterstützt. Alle Plattformfunktionen sind nativ integriert, um den Entwicklungsworkflow zu beschleunigen.</p>
+<p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Lite</a> ist die schlanke Version von Milvus, einer Open-Source-Vektordatenbank, die KI-Anwendungen mit Vektoreinbettungen und Ähnlichkeitssuche unterstützt.</p>
+<h2 id="Setup" class="common-anchor-header">Einrichten<button data-href="#Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,7 +46,7 @@ title: Kochbuch LlamaIndex &amp; Milvus Integration
     </button></h2><p>Stellen Sie sicher, dass Sie sowohl <code translate="no">llama-index</code> als auch <code translate="no">langfuse</code> installiert haben.</p>
 <pre><code translate="no" class="language-python">$ pip install llama-index langfuse llama-index-vector-stores-milvus --upgrade
 <button class="copy-code-btn"></button></code></pre>
-<p>Initialisieren Sie die Integration. Holen Sie sich Ihre API-Schlüssel aus den <a href="https://cloud.langfuse.com">Langfuse Projekteinstellungen</a> und ersetzen Sie public_key secret_key durch Ihre Schlüsselwerte. Dieses Beispiel verwendet OpenAI für Einbettungen und Chatvervollständigungen, daher müssen Sie auch Ihren OpenAI-Schlüssel in der Umgebungsvariable angeben.</p>
+<p>Initialisieren Sie die Integration. Holen Sie sich Ihre API-Schlüssel aus den <a href="https://cloud.langfuse.com">Langfuse Projekteinstellungen</a> und ersetzen Sie public_key secret_key durch Ihre Schlüsselwerte. Dieses Beispiel verwendet OpenAI für Einbettungen und Chatvervollständigungen, daher müssen Sie auch Ihren OpenAI-Schlüssel in einer Umgebungsvariablen angeben.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Get keys for your project from the project settings page</span>

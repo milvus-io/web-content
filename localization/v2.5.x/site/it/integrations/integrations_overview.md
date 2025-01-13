@@ -67,7 +67,7 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/rag_with_milvus_and_unstructured.md">Costruire una RAG con Milvus e fonti di dati non strutturati</a></td><td>Fonti di dati non strutturati</td><td>Milvus, non strutturato</td></tr>
 <tr><td><a href="/docs/it/RAG_with_pii_and_milvus.md">Costruire un RAG con Milvus + PII Masker</a></td><td>Fonti di dati</td><td>Milvus, PII Masker</td></tr>
 <tr><td><a href="/docs/it/use_milvus_in_private_gpt.md">Utilizzare Milvus in PrivateGPT</a></td><td>Ochestrazione</td><td>ricerca vettoriale</td></tr>
-<tr><td><a href="/docs/it/quickstart_mem0_with_milvus.md">Come iniziare con Mem0 e Milvus</a></td><td>Agenti</td><td>Mem0, Milvus</td></tr>
+<tr><td><a href="/docs/it/quickstart_mem0_with_milvus.md">Per iniziare con Mem0 e Milvus</a></td><td>Agenti</td><td>Mem0, Milvus</td></tr>
 <tr><td><a href="/docs/it/knowledge_table_with_milvus.md">Tabella della conoscenza con Milvus</a></td><td>Ingegneria della conoscenza</td><td>Tabella della conoscenza, Milvus</td></tr>
 <tr><td><a href="/docs/it/use_milvus_in_docsgpt.md">Utilizzare Milvus in DocsGPT</a></td><td>Ochestrazione</td><td>DocsGPT, Milvus</td></tr>
 <tr><td><a href="/docs/it/use_milvus_with_sambanova.md">Utilizzare Milvus con SambaNova</a></td><td>Orchestrazione</td><td>Milvus, SambaNova</td></tr>
@@ -75,5 +75,6 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_gemini.md">Costruire RAG con Milvus e Gemini</a></td><td>LLM</td><td>Milvus, Gemini</td></tr>
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_ollama.md">Costruire RAG con Milvus e Ollama</a></td><td>LLM</td><td>Milvus, Ollama</td></tr>
 <tr><td><a href="/docs/it/milvus_rag_with_dynamiq.md">Iniziare con Dynamiq e Milvus</a></td><td>Orchestrazione</td><td>Milvus, Dynamiq</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_deepseek.md">Costruire RAG con Milvus e DeepSeek</a></td><td>LLM</td><td>Milvus, DeepSeek</td></tr>
 </tbody>
 </table>

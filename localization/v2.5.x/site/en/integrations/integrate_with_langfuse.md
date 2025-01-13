@@ -3,9 +3,9 @@ id: integrate_with_langfuse.md
 summary: >-
   This is a simple cookbook that demonstrates how to use the LlamaIndex Langfuse
   integration. It uses Milvus Lite to store the documents and Query.
-title: Cookbook LlamaIndex & Milvus Integration
+title: Using Langfuse to Evaluate RAG Quality
 ---
-<h1 id="Cookbook---LlamaIndex--Milvus-Integration" class="common-anchor-header">Cookbook - LlamaIndex &amp; Milvus Integration<button data-href="#Cookbook---LlamaIndex--Milvus-Integration" class="anchor-icon" translate="no">
+<h1 id="Using-Langfuse-to-Trace-Queries-in-RAG" class="common-anchor-header">Using Langfuse to Trace Queries in RAG<button data-href="#Using-Langfuse-to-Trace-Queries-in-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,7 +23,9 @@ title: Cookbook LlamaIndex & Milvus Integration
     </button></h1><p><a target="_blank" href="https://colab.research.google.com/github/langfuse/langfuse-docs/blob/main/cookbook/integration_llama-index_milvus-lite.ipynb">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a></p>
-<p>This is a simple cookbook that demonstrates how to use the <a href="https://langfuse.com/docs/integrations/llama-index/get-started">LlamaIndex Langfuse integration</a>. It uses Milvus Lite to store the documents and Query.</p>
+<p>This is a simple cookbook that demonstrates how to use Langfuse to trace your queries in RAG. The RAG pipeline is implemented with LlamaIndex and Milvus Lite to store and retrieve the documents.</p>
+<p>In this quickstart, we’ll show you how to set up a LlamaIndex application using Milvus Lite as the vector store. We’ll also show you how to use the Langfuse LlamaIndex integration to trace your application.</p>
+<p><a href="https://github.com/langfuse/langfuse">Langfuse</a> is an open-source LLM engineering platform that helps teams collaboratively debug, analyze, and iterate on their LLM applications. All platform features are natively integrated to accelerate the development workflow.</p>
 <p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Lite</a> is the lightweight version of Milvus, an open-source vector database that powers AI applications with vector embeddings and similarity search.</p>
 <h2 id="Setup" class="common-anchor-header">Setup<button data-href="#Setup" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -348,7 +348,7 @@
             "children": []
           },
           {
-            "label": "Create Collection Instantly",
+            "label": "コレクションを即座に作成",
             "id": "create-collection-instantly.md",
             "order": 2,
             "children": []
@@ -433,7 +433,7 @@
             "children": []
           },
           {
-            "label": "数字フィールド",
+            "label": "番号フィールド",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -833,7 +833,7 @@
             "children": []
           },
           {
-            "label": "インストラクター",
+            "label": "講師",
             "id": "embed-with-instructor.md",
             "order": 9,
             "children": []
@@ -1737,6 +1737,12 @@
             "id": "build_RAG_with_milvus_and_ollama.md",
             "order": 7,
             "children": []
+          },
+          {
+            "label": "ディープシーク",
+            "id": "build_RAG_with_milvus_and_deepseek.md",
+            "order": 8,
+            "children": []
           }
         ]
       },
@@ -2081,6 +2087,18 @@
         "children": []
       },
       {
+        "label": "Attuのクイックスタート",
+        "id": "quickstart_with_attu.md",
+        "order": 14,
+        "children": []
+      },
+      {
+        "label": "asyncioでAsyncMilvusClientを使う",
+        "id": "use-async-milvus-client-with-asyncio.md",
+        "order": 15,
+        "children": []
+      },
+      {
         "label": "もっと見る",
         "id": "explore-more",
         "order": 99,
@@ -2092,7 +2110,7 @@
             "children": []
           },
           {
-            "label": "推薦システム",
+            "label": "レコメンダー・システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

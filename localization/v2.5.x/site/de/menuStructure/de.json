@@ -547,7 +547,7 @@
                     "children": []
                   },
                   {
-                    "label": "Cnalphanumnur",
+                    "label": "Cnalphanumonly",
                     "id": "cnalphanumonly-filter.md",
                     "order": 3,
                     "children": []
@@ -1737,6 +1737,12 @@
             "id": "build_RAG_with_milvus_and_ollama.md",
             "order": 7,
             "children": []
+          },
+          {
+            "label": "DeepSeek",
+            "id": "build_RAG_with_milvus_and_deepseek.md",
+            "order": 8,
+            "children": []
           }
         ]
       },
@@ -2078,6 +2084,18 @@
         "label": "Trichtersuche mit Matrjoschka-Einbettungen",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
+        "children": []
+      },
+      {
+        "label": "Schnellstart mit Attu",
+        "id": "quickstart_with_attu.md",
+        "order": 14,
+        "children": []
+      },
+      {
+        "label": "AsyncMilvusClient mit asyncio verwenden",
+        "id": "use-async-milvus-client-with-asyncio.md",
+        "order": 15,
         "children": []
       },
       {

@@ -75,5 +75,6 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_gemini.md">Criar RAG com Milvus e Gemini</a></td><td>LLMs</td><td>Milvus, Gemini</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_ollama.md">Construir RAG com Milvus e Ollama</a></td><td>LLMs</td><td>Milvus, Ollama</td></tr>
 <tr><td><a href="/docs/pt/milvus_rag_with_dynamiq.md">Introdução ao Dynamiq e ao Milvus</a></td><td>Orquestração</td><td>Milvus, Dynamiq</td></tr>
+<tr><td><a href="/docs/pt/build_RAG_with_milvus_and_deepseek.md">Construir RAG com Milvus e DeepSeek</a></td><td>LLMs</td><td>Milvus, DeepSeek</td></tr>
 </tbody>
 </table>

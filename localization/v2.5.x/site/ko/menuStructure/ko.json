@@ -1715,7 +1715,7 @@
             "children": []
           },
           {
-            "label": "SiliconFlow",
+            "label": "실리콘 플로우",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []
@@ -1736,6 +1736,12 @@
             "label": "Ollama",
             "id": "build_RAG_with_milvus_and_ollama.md",
             "order": 7,
+            "children": []
+          },
+          {
+            "label": "DeepSeek",
+            "id": "build_RAG_with_milvus_and_deepseek.md",
+            "order": 8,
             "children": []
           }
         ]
@@ -2078,6 +2084,18 @@
         "label": "마트료시카 임베딩을 사용한 퍼널 검색",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
+        "children": []
+      },
+      {
+        "label": "Attu로 빠르게 시작하기",
+        "id": "quickstart_with_attu.md",
+        "order": 14,
+        "children": []
+      },
+      {
+        "label": "asyncio와 함께 AsyncMilvusClient 사용",
+        "id": "use-async-milvus-client-with-asyncio.md",
+        "order": 15,
         "children": []
       },
       {

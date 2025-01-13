@@ -976,7 +976,7 @@
                 "children": []
               },
               {
-                "label": "Distribuzione dei servizi di monitoraggio",
+                "label": "Deploy Monitoring Services",
                 "id": "monitor.md",
                 "order": 1,
                 "children": []
@@ -1729,7 +1729,7 @@
             "children": []
           },
           {
-            "label": "Ricerca della somiglianza audio",
+            "label": "Ricerca di somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

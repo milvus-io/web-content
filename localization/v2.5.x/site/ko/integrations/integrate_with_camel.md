@@ -1,9 +1,7 @@
 ---
 id: integrate_with_camel.md
-summary: >-
-  이 가이드에서는 Milvus 벡터 데이터베이스와 함께 BentoCloud에서 오픈 소스 임베딩 모델과 대규모 언어 모델을 사용하여 검색 증강
-  생성(RAG) 애플리케이션을 구축하는 방법을 설명합니다.
-title: '검색 증강 세대(RAG), Milvus 및 BentoML 사용'
+summary: 이 가이드에서는 CAMEL과 Milvus를 사용하여 검색 증강 세대(RAG) 시스템을 구축하는 방법을 설명합니다.
+title: Milvus와 Camel을 사용한 검색 증강 생성(RAG)
 ---
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="common-anchor-header">Milvus와 Camel을 사용한 검색 증강 생성(RAG)<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -166,7 +164,7 @@ vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
 <p>여러분이 해야 할 일은</p>
 <ul>
 <li>콘텐츠 입력 경로를 설정합니다(로컬 경로 또는 원격 URL일 수 있음).</li>
-<li>Milvus의 원격 URL 및 API 키를 설정합니다.</li>
+<li>Milvus의 원격 URL과 API 키를 설정합니다.</li>
 <li>쿼리 제공</li>
 </ul>
 <p>자동 RAG 파이프라인은 지정된 콘텐츠 입력 경로에 대한 컬렉션을 생성하고, 컬렉션 이름은 콘텐츠 입력 경로 이름에 따라 자동으로 설정되며, 컬렉션이 존재하는 경우 직접 검색을 수행합니다.</p>

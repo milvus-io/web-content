@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Die Volltextsuche ist eine Funktion, die Dokumente mit bestimmten Begriffen oder Phrasen in Textdatensätzen abruft und die Ergebnisse dann nach Relevanz einstuft. Diese Funktion überwindet die Beschränkungen der semantischen Suche, bei der präzise Begriffe übersehen werden können, und stellt sicher, dass Sie die genauesten und kontextuell relevanten Ergebnisse erhalten. Darüber hinaus vereinfacht es die Vektorsuche, indem es Rohtexteingaben akzeptiert und Ihre Textdaten automatisch in spärliche Einbettungen konvertiert, ohne dass Sie manuell Vektoreinbettungen erstellen müssen.</p>
+    </button></h1><p>Die Volltextsuche ist eine Funktion, die Dokumente abruft, die bestimmte Begriffe oder Phrasen in Textdatensätzen enthalten, und dann die Ergebnisse nach Relevanz einstuft. Diese Funktion überwindet die Einschränkungen der semantischen Suche, bei der präzise Begriffe übersehen werden können, und stellt sicher, dass Sie die genauesten und kontextrelevanten Ergebnisse erhalten. Darüber hinaus vereinfacht es die Vektorsuche, indem es Rohtexteingaben akzeptiert und Ihre Textdaten automatisch in spärliche Einbettungen konvertiert, ohne dass Sie manuell Vektoreinbettungen erstellen müssen.</p>
 <p>Durch die Verwendung des BM25-Algorithmus für die Relevanzbewertung ist diese Funktion besonders wertvoll in Retrieval-Augmented-Generating-Szenarien (RAG), bei denen Dokumente mit hoher Übereinstimmung mit bestimmten Suchbegriffen priorisiert werden.</p>
 <div class="alert note">
 <ul>
@@ -47,11 +47,11 @@ summary: >-
       </svg>
     </button></h2><p>Die Volltextsuche vereinfacht den Prozess der textbasierten Suche, indem sie die Notwendigkeit der manuellen Einbettung eliminiert. Diese Funktion funktioniert über den folgenden Arbeitsablauf.</p>
 <ol>
-<li><p><strong>Texteingabe</strong>: Sie fügen Rohtextdokumente ein oder stellen Abfragetext bereit, ohne dass eine manuelle Einbettung erforderlich ist.</p></li>
+<li><p><strong>Texteingabe</strong>: Sie fügen Rohtextdokumente ein oder stellen Abfragetext zur Verfügung, ohne diesen manuell einbetten zu müssen.</p></li>
 <li><p><strong>Text-Analyse</strong>: Milvus verwendet einen Analyzer, der den eingegebenen Text in einzelne, durchsuchbare Begriffe zerlegt. Weitere Informationen zu Analyzern finden Sie unter <a href="/docs/de/analyzer-overview.md">Analyzer-Übersicht</a>.</p></li>
-<li><p><strong>Funktionsverarbeitung</strong>: Die integrierte Funktion empfängt tokenisierte Begriffe und konvertiert sie in spärliche Vektordarstellungen.</p></li>
+<li><p><strong>Funktionsverarbeitung</strong>: Die eingebaute Funktion empfängt tokenisierte Begriffe und konvertiert sie in spärliche Vektordarstellungen.</p></li>
 <li><p><strong>Sammlungsspeicher</strong>: Milvus speichert diese spärlichen Einbettungen in einer Sammlung, um sie effizient abrufen zu können.</p></li>
-<li><p><strong>BM25-Bewertung</strong>: Während einer Suche wendet Milvus den BM25-Algorithmus an, um die Punktzahlen für die gespeicherten Dokumente zu berechnen und die übereinstimmenden Ergebnisse nach ihrer Relevanz für den Abfragetext zu ordnen.</p></li>
+<li><p><strong>BM25-Bewertung</strong>: Während einer Suche wendet Milvus den BM25-Algorithmus an, um Scores für die gespeicherten Dokumente zu berechnen, und ordnet die übereinstimmenden Ergebnisse auf der Grundlage ihrer Relevanz für den Abfragetext ein.</p></li>
 </ol>
 <p>
   
@@ -347,7 +347,7 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-text-data" class="common-anchor-header">Einfügen von Textdaten<button data-href="#Insert-text-data" class="anchor-icon" translate="no">
+<h2 id="Insert-text-data" class="common-anchor-header">Textdaten einfügen<button data-href="#Insert-text-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

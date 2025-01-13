@@ -61,7 +61,7 @@ title: 在 Docker（Linux）中运行 Milvus
 <ol>
 <li><p>在管理员模式下右击并选择以<strong>管理员身份运行</strong>，打开 Docker Desktop。</p></li>
 <li><p>下载安装脚本并将其保存为<code translate="no">standalone.bat</code> 。</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/milvus/blob/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
+<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>运行下载的脚本，将 Milvus 作为 Docker 容器启动。</p>
@@ -75,7 +75,7 @@ title: 在 Docker（Linux）中运行 Milvus
 <ul>
 <li><p>名为<strong>Milvus-standalone</strong>的 docker 容器已在<strong>19530</strong> 端口启动。</p></li>
 <li><p>嵌入式 etcd 与 Milvus 安装在同一个容器中，服务端口为<strong>2379</strong>。其配置文件被映射到当前文件夹中的<strong>embedEtcd.yaml</strong>。</p></li>
-<li><p>Milvus 数据卷映射到当前文件夹中的<strong>volumes/milvus</strong>。</p></li>
+<li><p>Milvus 数据卷被映射到当前文件夹中的<strong>volumes/milvus</strong>。</p></li>
 </ul>
 <p>可以使用以下命令管理 Milvus 容器和存储的数据。</p>
 <pre><code translate="no" class="language-powershell"><span class="hljs-comment"># Stop Milvus​</span>

@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La búsqueda de texto completo es una función que recupera documentos que contienen términos o frases específicos en conjuntos de datos de texto y, a continuación, clasifica los resultados en función de su relevancia. Esta función supera las limitaciones de la búsqueda semántica, que puede pasar por alto términos precisos, garantizando que usted reciba los resultados más exactos y contextualmente relevantes. Además, simplifica las búsquedas vectoriales al aceptar la entrada de texto sin formato, convirtiendo automáticamente los datos de texto en incrustaciones dispersas sin necesidad de generar manualmente incrustaciones vectoriales.</p>
+    </button></h1><p>La búsqueda de texto completo es una función que recupera documentos que contienen términos o frases específicos en conjuntos de datos de texto y, a continuación, clasifica los resultados en función de su relevancia. Esta función supera las limitaciones de la búsqueda semántica, que puede pasar por alto términos precisos, garantizando que usted reciba los resultados más exactos y contextualmente relevantes. Además, simplifica las búsquedas vectoriales al aceptar la entrada de texto sin formato, convirtiendo automáticamente sus datos de texto en incrustaciones dispersas sin necesidad de generar manualmente incrustaciones vectoriales.</p>
 <p>Esta función, que utiliza el algoritmo BM25 para la puntuación de la relevancia, es especialmente valiosa en escenarios de generación de recuperación aumentada (RAG), donde da prioridad a los documentos que coinciden estrechamente con términos de búsqueda específicos.</p>
 <div class="alert note">
 <ul>
@@ -45,13 +45,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La búsqueda de texto completo simplifica el proceso de búsqueda basada en texto eliminando la necesidad de incrustación manual. Esta función funciona mediante el siguiente flujo de trabajo.</p>
+    </button></h2><p>La búsqueda de texto completo simplifica el proceso de búsqueda basado en texto eliminando la necesidad de incrustación manual. Esta función funciona mediante el siguiente flujo de trabajo.</p>
 <ol>
-<li><p><strong>Entrada de texto</strong>: Usted inserta documentos de texto sin procesar o proporciona texto de consulta sin necesidad de incrustación manual.</p></li>
+<li><p><strong>Entrada de texto</strong>: Usted inserta documentos de texto sin procesar o proporciona texto de consulta sin necesidad de incrustarlos manualmente.</p></li>
 <li><p><strong>Análisis del texto</strong>: Milvus utiliza un analizador para convertir el texto de entrada en términos individuales susceptibles de búsqueda. Para obtener más información sobre los analizadores, consulte <a href="/docs/es/analyzer-overview.md">Descripción general del analizador</a>.</p></li>
 <li><p><strong>Procesamiento de funciones</strong>: La función incorporada recibe los términos tokenizados y los convierte en representaciones vectoriales dispersas.</p></li>
 <li><p><strong>Almacenamiento de colecciones</strong>: Milvus almacena estas incrustaciones dispersas en una colección para una recuperación eficiente.</p></li>
-<li><p><strong>Puntuación BM25</strong>: Durante una búsqueda, Milvus aplica el algoritmo BM25 para calcular las puntuaciones de los documentos almacenados y clasifica los resultados coincidentes en función de su relevancia para el texto consultado.</p></li>
+<li><p><strong>Puntuación BM25</strong>: Durante una búsqueda, Milvus aplica el algoritmo BM25 para calcular las puntuaciones de los documentos almacenados y clasifica los resultados coincidentes en función de su relevancia para el texto de la consulta.</p></li>
 </ol>
 <p>
   
@@ -176,7 +176,7 @@ schema.addField(AddFieldReq.builder()
 <ul>
 <li><p><code translate="no">id</code>: sirve como clave primaria y se genera automáticamente con <code translate="no">auto_id=True</code>.</p></li>
 <li><p><code translate="no">text</code>: almacena los datos de texto sin procesar para las operaciones de búsqueda de texto completo. El tipo de datos debe ser <code translate="no">VARCHAR</code>, ya que <code translate="no">VARCHAR</code> es el tipo de datos de cadena de Milvus para el almacenamiento de texto. Establezca <code translate="no">enable_analyzer=True</code> para permitir que Milvus tokenice el texto. Por defecto, Milvus utiliza el <a href="/docs/es/standard-analyzer.md">analizador estándar</a> para el análisis de texto. Para configurar un analizador diferente, consulte <a href="/docs/es/analyzer-overview.md">Visión general</a>.</p></li>
-<li><p><code translate="no">sparse</code>Campo vectorial : un campo vectorial reservado para almacenar incrustaciones dispersas generadas internamente para operaciones de búsqueda de texto completo. El tipo de datos debe ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">sparse</code>Un campo vectorial reservado para almacenar incrustaciones dispersas generadas internamente para operaciones de búsqueda de texto completo. El tipo de datos debe ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <p>Ahora, defina una función que convierta su texto en representaciones vectoriales dispersas y añádala al esquema.</p>
 <div class="multipleCode">
@@ -496,6 +496,6 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
 </td></tr><tr><td data-block-token="O4OVdL9BIollH1xORz3czhInnSh" colspan="1" rowspan="1"><p data-block-token="CYdGd82dRopaWrxfJ9ycWQQnnPc"><code translate="no">anns_field</code></p>
 </td><td data-block-token="MsKIdxGj6oWeBExoFurcxWCnnGh" colspan="1" rowspan="1"><p data-block-token="RsMDdgo0roTSBuxYwm6cGw3inZd">El nombre del campo que contiene los vectores dispersos generados internamente.</p>
 </td></tr><tr><td data-block-token="G0ewd9TQ1o1RQRxZA9ucMO9tnBK" colspan="1" rowspan="1"><p data-block-token="JOyTdUmLIo5aV0x4ChOcLiDQnLh"><code translate="no">limit</code></p>
-</td><td data-block-token="H21hdYGZQoQe5FxYnwCch58qn0g" colspan="1" rowspan="1"><p data-block-token="ATKidHgXoo7c7dxM7cgcE46engb">Número máximo de primeras coincidencias a devolver.</p>
+</td><td data-block-token="H21hdYGZQoQe5FxYnwCch58qn0g" colspan="1" rowspan="1"><p data-block-token="ATKidHgXoo7c7dxM7cgcE46engb">Número máximo de coincidencias que se devolverán.</p>
 </td></tr></tbody></table>
 <p></p>

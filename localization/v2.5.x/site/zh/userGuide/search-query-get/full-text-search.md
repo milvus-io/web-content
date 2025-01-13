@@ -19,7 +19,7 @@ summary: 全文搜索是一种在文本数据集中检索包含特定术语或�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>全文搜索是一种在文本数据集中检索包含特定术语或短语的文档，然后根据相关性对结果进行排序的功能。该功能克服了语义搜索的局限性（语义搜索可能会忽略精确的术语），确保您获得最准确且与上下文最相关的结果。此外，它还通过接受原始文本输入来简化向量搜索，自动将您的文本数据转换为稀疏嵌入，而无需手动生成向量嵌入。</p>
+    </button></h1><p>全文搜索是一种在文本数据集中检索包含特定术语或短语的文档，然后根据相关性对结果进行排序的功能。该功能克服了语义搜索可能会忽略精确术语的局限性，确保您获得最准确且与上下文最相关的结果。此外，它还通过接受原始文本输入来简化向量搜索，自动将您的文本数据转换为稀疏嵌入，而无需手动生成向量嵌入。</p>
 <p>该功能使用 BM25 算法进行相关性评分，在检索增强生成 (RAG) 场景中尤为重要，它能优先处理与特定搜索词密切匹配的文档。</p>
 <div class="alert note">
 <ul>
@@ -48,7 +48,7 @@ summary: 全文搜索是一种在文本数据集中检索包含特定术语或�
 <li><p><strong>文本分析</strong>：有关分析器的更多信息，请参阅分析器<a href="/docs/zh/analyzer-overview.md">概述</a>。</p></li>
 <li><p><strong>函数处理</strong>：内置函数接收标记化术语，并将其转换为稀疏向量表示。</p></li>
 <li><p><strong>Collections 存储</strong>：Milvus 将这些稀疏嵌入存储在 Collections 中，以便高效检索。</p></li>
-<li><p><strong>BM25 评分</strong>：在搜索过程中，Milvus 应用 BM25 算法为存储的文档计算分数，并根据与查询文本的相关性对匹配结果进行排序。</p></li>
+<li><p><strong>BM25 评分</strong>：在搜索过程中，Milvus 应用 BM25 算法为存储的文档计算分数，并根据匹配结果与查询文本的相关性进行排序。</p></li>
 </ol>
 <p>
   
@@ -56,7 +56,7 @@ summary: 全文搜索是一种在文本数据集中检索包含特定术语或�
    </span> <span class="img-wrapper"> <span>全文搜索</span> </span></p>
 <p>要使用全文搜索，请遵循以下主要步骤。</p>
 <ol>
-<li><p><a href="#Create-a-collection-for-full-text-search">创建 Collections</a>：用必要的字段设置一个 Collections，并定义一个函数将原始文本转换为稀疏嵌入。</p></li>
+<li><p><a href="#Create-a-collection-for-full-text-search">创建 Collections</a>：设置一个带有必要字段的 Collections，并定义一个将原始文本转换为稀疏嵌入的函数。</p></li>
 <li><p><a href="#Insert-text-data">插入数据</a>：将原始文本文档插入 Collections。</p></li>
 <li><p><a href="#Perform-full-text-search">执行搜索</a>：使用查询文本搜索你的 Collections 并检索相关结果。</p></li>
 </ol>
@@ -173,7 +173,7 @@ schema.addField(AddFieldReq.builder()
 <ul>
 <li><p><code translate="no">id</code>: 作为主键，由<code translate="no">auto_id=True</code> 自动生成。</p></li>
 <li><p><code translate="no">text</code>:存储原始文本数据，用于全文搜索操作。数据类型必须是<code translate="no">VARCHAR</code> ，因为<code translate="no">VARCHAR</code> 是 Milvus 用于文本存储的字符串数据类型。设置<code translate="no">enable_analyzer=True</code> 以允许 Milvus 对文本进行标记化。默认情况下，Milvus 使用<a href="/docs/zh/standard-analyzer.md">标准分析器</a>进行文本分析。要配置不同的分析器，请参阅<a href="/docs/zh/analyzer-overview.md">概述</a>。</p></li>
-<li><p><code translate="no">sparse</code>矢量字段：预留矢量字段，用于存储内部生成的稀疏嵌入，以进行全文搜索操作。数据类型必须是<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
+<li><p><code translate="no">sparse</code>矢量字段：保留一个矢量字段，用于存储内部生成的稀疏嵌入，以进行全文搜索操作。数据类型必须是<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
 </ul>
 <p>现在，定义一个将文本转换为稀疏向量表示的函数，然后将其添加到 Schema 中。</p>
 <div class="multipleCode">

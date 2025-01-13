@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La ricerca full text è una funzione che recupera i documenti contenenti termini o frasi specifiche nei dataset di testo, classificando poi i risultati in base alla rilevanza. Questa funzione supera le limitazioni della ricerca semantica, che potrebbe trascurare termini precisi, garantendo la ricezione dei risultati più accurati e contestualmente rilevanti. Inoltre, semplifica le ricerche vettoriali accettando input di testo grezzo, convertendo automaticamente i dati testuali in embedding sparsi senza la necessità di generare manualmente embedding vettoriali.</p>
+    </button></h1><p>La ricerca full text è una funzione che recupera i documenti contenenti termini o frasi specifiche nei dataset di testo e classifica i risultati in base alla rilevanza. Questa funzione supera le limitazioni della ricerca semantica, che potrebbe trascurare termini precisi, garantendo la ricezione dei risultati più accurati e contestualmente rilevanti. Inoltre, semplifica le ricerche vettoriali accettando input di testo grezzo, convertendo automaticamente i dati testuali in embedding sparsi senza la necessità di generare manualmente embedding vettoriali.</p>
 <p>Utilizzando l'algoritmo BM25 per il punteggio di rilevanza, questa funzione è particolarmente preziosa negli scenari di retrieval-augmented generation (RAG), dove dà priorità ai documenti che corrispondono strettamente a termini di ricerca specifici.</p>
 <div class="alert note">
 <ul>
@@ -47,11 +47,11 @@ summary: >-
       </svg>
     </button></h2><p>La ricerca full text semplifica il processo di ricerca basato sul testo eliminando la necessità di incorporazione manuale. Questa funzione funziona attraverso il seguente flusso di lavoro.</p>
 <ol>
-<li><p><strong>Inserimento del testo</strong>: L'utente inserisce documenti di testo grezzi o fornisce un testo di query senza necessità di incorporazione manuale.</p></li>
+<li><p><strong>Inserimento del testo</strong>: L'utente inserisce documenti di testo grezzi o fornisce testo di query senza doverli incorporare manualmente.</p></li>
 <li><p><strong>Analisi del testo</strong>: Milvus utilizza un analizzatore per tokenizzare il testo in ingresso in singoli termini ricercabili. Per ulteriori informazioni sugli analizzatori, consultare la sezione <a href="/docs/it/analyzer-overview.md">Panoramica degli analizzatori</a>.</p></li>
 <li><p><strong>Elaborazione della funzione</strong>: La funzione integrata riceve i termini tokenizzati e li converte in rappresentazioni vettoriali rade.</p></li>
 <li><p><strong>Memorizzazione delle collezioni</strong>: Milvus memorizza queste rappresentazioni rade in una raccolta per un recupero efficiente.</p></li>
-<li><p><strong>Punteggio BM25</strong>: Durante la ricerca, Milvus applica l'algoritmo BM25 per calcolare i punteggi dei documenti memorizzati e classifica i risultati corrispondenti in base alla pertinenza con il testo dell'interrogazione.</p></li>
+<li><p><strong>Punteggio BM25</strong>: Durante la ricerca, Milvus applica l'algoritmo BM25 per calcolare i punteggi dei documenti memorizzati e classifica i risultati corrispondenti in base alla loro rilevanza rispetto al testo della query.</p></li>
 </ol>
 <p>
   

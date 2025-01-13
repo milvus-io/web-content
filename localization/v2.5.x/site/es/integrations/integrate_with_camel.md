@@ -1,11 +1,9 @@
 ---
 id: integrate_with_camel.md
 summary: >-
-  Esta guía demuestra cómo utilizar un modelo de incrustación de código abierto
-  y un modelo de gran lenguaje en BentoCloud con la base de datos vectorial
-  Milvus para construir una aplicación de Generación Aumentada de Recuperación
-  (RAG).
-title: Generación mejorada por recuperación (RAG) con Milvus y BentoML
+  Esta guía muestra cómo construir un sistema de Generación Aumentada por
+  Recuperación (RAG) utilizando CAMEL y Milvus.
+title: Retrieval-Augmented Generation (RAG) con Milvus y Camel
 ---
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="common-anchor-header">Retrieval-Augmented Generation (RAG) con Milvus y Camel<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="anchor-icon" translate="no">
       <svg translate="no"

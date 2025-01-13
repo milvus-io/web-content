@@ -61,7 +61,7 @@ title: Eseguire Milvus in Docker (Linux)
 <ol>
 <li><p>Aprire Docker Desktop in modalità amministratore facendo clic con il pulsante destro del mouse e selezionando <strong>Esegui come amministratore</strong>.</p></li>
 <li><p>Scaricare lo script di installazione e salvarlo come <code translate="no">standalone.bat</code>.</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/milvus/blob/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
+<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Eseguire lo script scaricato per avviare Milvus come contenitore Docker.</p>
@@ -153,7 +153,7 @@ Creating milvus-minio ... <span class="hljs-keyword">done</span>​
 Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>A seconda della connessione di rete, il download delle immagini per l'installazione di Milvus potrebbe richiedere un po' di tempo. Una volta che i contenitori denominati <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> sono attivi, si può notare che</p>
+<p>A seconda della connessione di rete, il download delle immagini per l'installazione di Milvus potrebbe richiedere un po' di tempo. Una volta che i contenitori denominati <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> sono attivi, si può osservare che</p>
 <ul>
 <li><p>Il contenitore <strong>milvus-etcd</strong> non espone alcuna porta all'host e mappa i suoi dati nei <strong>volumi/etcd</strong> della cartella corrente.</p></li>
 <li><p>Il contenitore <strong>milvus-minio</strong> serve le porte <strong>9090</strong> e <strong>9091</strong> localmente con le credenziali di autenticazione predefinite e mappa i suoi dati su <strong>volumi/minio</strong> nella cartella corrente.</p></li>

@@ -73,5 +73,6 @@ title: インテグレーション概要
 <tr><td><a href="/docs/ja/build_RAG_with_milvus_and_gemini.md">MilvusとGeminiによるRAGの構築</a></td><td>LLM</td><td>Milvus、Gemini</td></tr>
 <tr><td><a href="/docs/ja/build_RAG_with_milvus_and_ollama.md">MilvusとOllamaによるRAGの構築</a></td><td>LLM</td><td>Milvus、Ollama</td></tr>
 <tr><td><a href="/docs/ja/milvus_rag_with_dynamiq.md">DynamiqとMilvusを使い始める</a></td><td>オーケストレーション</td><td>Milvus、Dynamiq</td></tr>
+<tr><td><a href="/docs/ja/build_RAG_with_milvus_and_deepseek.md">MilvusとDeepSeekによるRAGの構築</a></td><td>LLM</td><td>Milvus、DeepSeek</td></tr>
 </tbody>
 </table>

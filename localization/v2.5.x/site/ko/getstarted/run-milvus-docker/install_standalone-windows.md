@@ -61,7 +61,7 @@ title: Docker에서 Milvus 실행(Linux)
 <ol>
 <li><p>마우스 오른쪽 버튼을 클릭하고 <strong>관리자 권한으로 실행을</strong> 선택하여 관리자 모드에서 Docker Desktop을 엽니다.</p></li>
 <li><p>설치 스크립트를 다운로드하여 <code translate="no">standalone.bat</code> 에 저장합니다.</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/milvus/blob/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
+<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>다운로드한 스크립트를 실행하여 Milvus를 Docker 컨테이너로 시작합니다.</p>
@@ -248,7 +248,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>Docker Desktop 설정에서 WSL 2 배포를 선택합니다</span> </span>.</p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header"><code translate="no">Read config failed</code>Milvus 시작 시 다음과 같은 볼륨 관련 오류 메시지가 표시되는 경우 어떻게 처리할 수 있나요?</h3><p>
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Milvus 시작 시 <code translate="no">Read config failed</code> 라는 볼륨 관련 오류 메시지가 표시되는 경우 어떻게 처리하나요?</h3><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>Milvus 시작 시 구성 실패 오류 프롬프트 읽기</span> </span></p>
@@ -276,7 +276,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
     </button></h2><p>Docker에 Milvus를 설치했으면 다음을 수행할 수 있습니다:</p>
 <ul>
 <li><p><a href="/docs/ko/quickstart.md">빠른 시작을</a> 확인하여 Milvus가 수행할 수 있는 작업을 확인합니다.</p></li>
-<li><p>Milvus의 기본 작동에 대해 알아보세요:</p>
+<li><p>Milvus의 기본 동작에 대해 알아보세요:</p>
 <ul>
 <li><a href="/docs/ko/manage_databases.md">데이터베이스 관리</a></li>
 <li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>

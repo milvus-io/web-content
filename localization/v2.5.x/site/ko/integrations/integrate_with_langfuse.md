@@ -3,9 +3,9 @@ id: integrate_with_langfuse.md
 summary: >-
   이 문서는 라마인덱스 랑퓨즈 통합을 사용하는 방법을 보여주는 간단한 쿡북입니다. 문서와 쿼리를 저장하기 위해 Milvus Lite를
   사용합니다.
-title: 쿡북 라마인덱스 &amp; 밀버스 통합
+title: Langfuse를 사용하여 RAG 품질 평가하기
 ---
-<h1 id="Cookbook---LlamaIndex--Milvus-Integration" class="common-anchor-header">쿡북 - 라마인덱스와 밀버스 통합<button data-href="#Cookbook---LlamaIndex--Milvus-Integration" class="anchor-icon" translate="no">
+<h1 id="Using-Langfuse-to-Trace-Queries-in-RAG" class="common-anchor-header">Langfuse를 사용하여 RAG에서 쿼리 추적하기<button data-href="#Using-Langfuse-to-Trace-Queries-in-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,10 @@ title: 쿡북 라마인덱스 &amp; 밀버스 통합
     </button></h1><p><a target="_blank" href="https://colab.research.google.com/github/langfuse/langfuse-docs/blob/main/cookbook/integration_llama-index_milvus-lite.ipynb">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a></p>
-<p>이 쿡북은 <a href="https://langfuse.com/docs/integrations/llama-index/get-started">라마인덱스 랑퓨즈 통합을</a> 사용하는 방법을 설명하는 간단한 쿡북입니다. 문서와 쿼리를 저장하기 위해 Milvus Lite를 사용합니다.</p>
-<p>Milvus<a href="https://github.com/milvus-io/milvus-lite/">Lite는</a> 벡터 임베딩 및 유사도 검색을 통해 AI 애플리케이션을 지원하는 오픈 소스 벡터 데이터베이스인 Milvus의 경량 버전입니다.</p>
+<p>이 문서는 Langfuse를 사용해 RAG에서 쿼리를 추적하는 방법을 보여주는 간단한 쿡북입니다. RAG 파이프라인은 문서를 저장하고 검색하기 위해 LlamaIndex와 Milvus Lite로 구현됩니다.</p>
+<p>이 빠른 시작에서는 Milvus Lite를 벡터 저장소로 사용하여 LlamaIndex 애플리케이션을 설정하는 방법을 보여드리겠습니다. 또한 Langfuse LlamaIndex 통합을 사용하여 애플리케이션을 추적하는 방법도 보여드리겠습니다.</p>
+<p><a href="https://github.com/langfuse/langfuse">Langfuse는</a> 팀이 LLM 애플리케이션을 공동으로 디버그, 분석 및 반복할 수 있도록 지원하는 오픈 소스 LLM 엔지니어링 플랫폼입니다. 모든 플랫폼 기능이 기본적으로 통합되어 개발 워크플로를 가속화합니다.</p>
+<p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Lite는</a> 벡터 임베딩 및 유사성 검색을 통해 AI 애플리케이션을 지원하는 오픈 소스 벡터 데이터베이스인 Milvus의 경량 버전입니다.</p>
 <h2 id="Setup" class="common-anchor-header">설정<button data-href="#Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -126,7 +128,7 @@ response = index.as_query_engine().query(<span class="hljs-string">&quot;What di
 response = index.as_chat_engine().chat(<span class="hljs-string">&quot;What did he do growing up?&quot;</span>)
 <span class="hljs-built_in">print</span>(response)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Explore-traces-in-Langfuse" class="common-anchor-header">Langfuse에서 추적 탐색<button data-href="#Explore-traces-in-Langfuse" class="anchor-icon" translate="no">
+<h2 id="Explore-traces-in-Langfuse" class="common-anchor-header">Langfuse에서 추적 탐색하기<button data-href="#Explore-traces-in-Langfuse" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -1,10 +1,9 @@
 ---
 id: integrate_with_camel.md
 summary: >-
-  Este guia demonstra como utilizar um modelo de incorporação de código aberto e
-  um modelo de linguagem grande no BentoCloud com a base de dados vetorial
-  Milvus para criar uma aplicação Retrieval Augmented Generation (RAG).
-title: Geração Aumentada por Recuperação (RAG) com Milvus e BentoML
+  Este guia demonstra como construir um sistema RAG (Retrieval-Augmented
+  Generation) utilizando CAMEL e Milvus.
+title: Geração Aumentada por Recuperação (RAG) com Milvus e Camel
 ---
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="common-anchor-header">Geração Aumentada por Recuperação (RAG) com Milvus e Camel<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -166,7 +165,7 @@ vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
     </button></h2><p>Nesta secção, vamos executar o <code translate="no">AutoRetriever</code> com as definições predefinidas. Utiliza <code translate="no">OpenAIEmbedding</code> como modelo de incorporação predefinido e <code translate="no">Milvus</code> como armazenamento vetorial predefinido.</p>
 <p>O que você precisa fazer é:</p>
 <ul>
-<li>Definir os caminhos de entrada do conteúdo, que podem ser caminhos locais ou URLs remotos</li>
+<li>Definir caminhos de entrada de conteúdo, que podem ser caminhos locais ou URLs remotos</li>
 <li>Definir o URL remoto e a chave da API para o Milvus</li>
 <li>Fornecer uma consulta</li>
 </ul>

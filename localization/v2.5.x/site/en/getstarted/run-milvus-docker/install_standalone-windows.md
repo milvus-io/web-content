@@ -61,7 +61,7 @@ title: Run Milvus in Docker (Linux)
 <ol>
 <li><p>Open Docker Desktop in administrator mode by right-clicking and selecting <strong>Run as administrator</strong>.​</p></li>
 <li><p>Download the installation script and save it as <code translate="no">standalone.bat</code>.​</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/milvus/blob/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
+<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Run the downloaded script to start Milvus as a Docker container.​</p>

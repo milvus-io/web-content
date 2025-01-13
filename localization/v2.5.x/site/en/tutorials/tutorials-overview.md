@@ -46,5 +46,7 @@ title: Tutorials Overview
 <tr><td><a href="/docs/text_search_engine.md">Text Search Engine</a></td><td>Semantic Search</td><td>vector search</td></tr>
 <tr><td><a href="/docs/text_image_search.md">Search Image by Text</a></td><td>Semantic Search</td><td>vector search</td></tr>
 <tr><td><a href="/docs/image_deduplication_system.md">Image Deduplication</a></td><td>Deduplication</td><td>vector search</td></tr>
+<tr><td><a href="/docs/quickstart_with_attu.md">Quickstart with Attu</a></td><td>Quickstart</td><td>vector search</td></tr>
+<tr><td><a href="/docs/use-async-milvus-client-with-asyncio.md">Use AsyncMilvusClient with asyncio</a></td><td>AsyncIO</td><td>AsyncIO, vector search</td></tr>
 </tbody>
 </table>

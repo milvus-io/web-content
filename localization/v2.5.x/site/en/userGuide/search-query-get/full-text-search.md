@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranking the results based on relevance. This feature overcomes semantic search limitations, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.​</p>
+    </button></h1><p>Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranks the results based on relevance. This feature overcomes the limitations of semantic search, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.​</p>
 <p>Using the BM25 algorithm for relevance scoring, this feature is particularly valuable in retrieval-augmented generation (RAG) scenarios, where it prioritizes documents that closely match specific search terms.​</p>
 <div class="alert note">
 <ul>
@@ -47,11 +47,11 @@ summary: >-
       </svg>
     </button></h2><p>Full text search simplifies the process of text-based searching by eliminating the need for manual embedding. This feature operates through the following workflow:​</p>
 <ol>
-<li><p><strong>Text input</strong>: You insert raw text documents or provide query text without any need for manual embedding.​</p></li>
-<li><p><strong>Text analysis</strong>: Milvus uses an analyzer to tokenize input text into individual, searchable terms.​ For more information on analyzers, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a>.</p></li>
+<li><p><strong>Text input</strong>: You insert raw text documents or provide query text without needing to manually embed them.​</p></li>
+<li><p><strong>Text analysis</strong>: Milvus uses an analyzer to tokenize the input text into individual, searchable terms.​ For more information on analyzers, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a>.</p></li>
 <li><p><strong>Function processing</strong>: The built-in function receives tokenized terms and converts them into sparse vector representations.​</p></li>
 <li><p><strong>Collection store</strong>: Milvus stores these sparse embeddings in a collection for efficient retrieval.​</p></li>
-<li><p><strong>BM25 scoring</strong>: During a search, Milvus applies the BM25 algorithm to calculate scores for the stored documents and ranks matched results based on relevance to the query text.​</p></li>
+<li><p><strong>BM25 scoring</strong>: During a search, Milvus applies the BM25 algorithm to calculate scores for the stored documents and ranks matched results based on their relevance to the query text.​</p></li>
 </ol>
 <p>
   <span class="img-wrapper">

@@ -1,7 +1,7 @@
 ---
 id: integrate_with_camel.md
-summary: 本指南演示了如何使用 BentoCloud 上的开源嵌入模型和大语言模型与 Milvus 向量数据库来构建检索增强生成（RAG）应用程序。
-title: 使用 Milvus 和 BentoML 的检索增强生成（RAG）
+summary: 本指南演示了如何使用 CAMEL 和 Milvus 建立检索增强生成（RAG）系统。
+title: 使用 Milvus 和 Camel 的检索增强生成 (RAG) 系统
 ---
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="common-anchor-header">使用 Milvus 和 Camel 的检索增强生成 (RAG) 系统<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ title: 使用 Milvus 和 BentoML 的检索增强生成（RAG）
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>本指南演示了如何使用 Camel 和 Milvus 构建检索-增强生成（RAG）系统。</p>
+<p>本指南演示了如何使用 Camel 和 Milvus 建立一个检索-增强生成（RAG）系统。</p>
 <p>RAG 系统将检索系统与生成模型相结合，根据给定提示生成新文本。该系统首先使用 Milvus 从语料库中检索相关文档，然后使用生成模型根据检索到的文档生成新文本。</p>
 <p><a href="https://www.camel-ai.org/">Camel</a>是一个多 Agents 框架。<a href="https://milvus.io/">Milvus</a>是世界上最先进的开源向量数据库，专为支持 Embeddings 相似性搜索和人工智能应用而构建。</p>
 <p>在本笔记本中，我们将展示 CAMEL 检索模块的定制方式和自动方式的用法。我们还将展示如何将<code translate="no">AutoRetriever</code> 与<code translate="no">ChatAgent</code> 结合起来，并通过使用<code translate="no">Function Calling</code> 进一步将<code translate="no">AutoRetriever</code> 与<code translate="no">RolePlaying</code> 结合起来。</p>
@@ -214,7 +214,7 @@ Retrieved Context:
         ></path>
       </svg>
     </button></h2><p>在本节中，我们将展示如何将<code translate="no">AutoRetriever</code> 与一个<code translate="no">ChatAgent</code> 结合起来。</p>
-<p>让我们设置一个 Agents 函数，在此函数中，我们可以通过向该代理提供查询来获取响应。</p>
+<p>让我们设置一个 Agents 函数，在该函数中，我们可以通过向该代理提供查询来获取响应。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.agents <span class="hljs-keyword">import</span> ChatAgent
 <span class="hljs-keyword">from</span> camel.messages <span class="hljs-keyword">import</span> BaseMessage
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> RoleType

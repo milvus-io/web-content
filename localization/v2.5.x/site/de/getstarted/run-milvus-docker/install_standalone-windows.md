@@ -63,7 +63,7 @@ title: Milvus in Docker ausführen (Linux)
 <ol>
 <li><p>Öffnen Sie Docker Desktop im Administratormodus, indem Sie mit der rechten Maustaste klicken und <strong>Als Administrator ausführen</strong> wählen.</p></li>
 <li><p>Laden Sie das Installationsskript herunter und speichern Sie es unter <code translate="no">standalone.bat</code>.</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/milvus/blob/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
+<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Führen Sie das heruntergeladene Skript aus, um Milvus als Docker-Container zu starten.</p>
@@ -141,7 +141,7 @@ Delete successfully.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sobald Sie Docker Desktop unter Microsoft Windows installiert haben, können Sie über die PowerShell oder die Windows-Eingabeaufforderung im <strong>Administratormodus</strong> auf die Docker CLI zugreifen. Sie können Docker Compose entweder in PowerShell, der Windows-Eingabeaufforderung oder WSL 2 ausführen, um Milvus zu starten.</p>
+    </button></h2><p>Sobald Sie Docker Desktop unter Microsoft Windows installiert haben, können Sie über die PowerShell oder die Windows-Eingabeaufforderung im <strong>Administratormodus</strong> auf die Docker-CLI zugreifen. Sie können Docker Compose entweder in PowerShell, der Windows-Eingabeaufforderung oder WSL 2 ausführen, um Milvus zu starten.</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Von PowerShell oder der Windows-Eingabeaufforderung aus</h3><ol>
 <li><p>Öffnen Sie Docker Desktop im Administratormodus, indem Sie mit der rechten Maustaste klicken und <strong>Als Administrator ausführen</strong> wählen.</p></li>
 <li><p>Führen Sie die folgenden Befehle in PowerShell oder der Windows-Eingabeaufforderung aus, um die Docker Compose-Konfigurationsdatei für Milvus Standalone herunterzuladen und Milvus zu starten.</p>
@@ -216,7 +216,7 @@ The Docker <span class="hljs-keyword">for</span> Windows Service service <span c
 The Docker <span class="hljs-keyword">for</span> Windows Service service was started successfully.​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Überprüfen Sie, ob die WSL ordnungsgemäß installiert wurde.</p>
+<li><p>Prüfen Sie, ob die WSL ordnungsgemäß installiert wurde.</p>
 <p>Sie können den folgenden Befehl ausführen, um den WSL 2-Befehl zu installieren oder zu aktualisieren.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
 Checking <span class="hljs-keyword">for</span> updates.​

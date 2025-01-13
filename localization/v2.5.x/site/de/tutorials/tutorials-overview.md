@@ -28,7 +28,7 @@ title: Übersicht Tutorials
 <tbody>
 <tr><td><a href="/docs/de/build-rag-with-milvus.md">RAG mit Milvus erstellen</a></td><td>RAG</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/how_to_enhance_your_rag.md">Erweiterte RAG</a></td><td>RAG</td><td>Vektorsuche</td></tr>
-<tr><td><a href="/docs/de/full_text_search_with_milvus.md">Volltextsuche mit Milvus</a></td><td>Schnellstart</td><td>Volltext-Suche</td></tr>
+<tr><td><a href="/docs/de/full_text_search_with_milvus.md">Volltextsuche mit Milvus</a></td><td>Schnellstart</td><td>Volltextsuche</td></tr>
 <tr><td><a href="/docs/de/hybrid_search_with_milvus.md">Hybride Suche mit Milvus</a></td><td>Hybride Suche</td><td>Hybride Suche, Multivektor, dichte Einbettung, spärliche Einbettung</td></tr>
 <tr><td><a href="/docs/de/image_similarity_search.md">Bildsuche mit Milvus</a></td><td>Semantische Suche</td><td>Vektorsuche, dynamisches Feld</td></tr>
 <tr><td><a href="/docs/de/multimodal_rag_with_milvus.md">Multimodale RAG mit Milvus</a></td><td>RAG</td><td>Vektorsuche, dynamisches Feld</td></tr>
@@ -48,5 +48,7 @@ title: Übersicht Tutorials
 <tr><td><a href="/docs/de/text_search_engine.md">Text-Suchmaschine</a></td><td>Semantische Suche</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/text_image_search.md">Bildsuche nach Text</a></td><td>Semantische Suche</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/image_deduplication_system.md">Bild-Deduplizierung</a></td><td>Deduplizierung</td><td>Vektorsuche</td></tr>
+<tr><td><a href="/docs/de/quickstart_with_attu.md">Schnellstart mit Attu</a></td><td>Schnellstart</td><td>Vektorsuche</td></tr>
+<tr><td><a href="/docs/de/use-async-milvus-client-with-asyncio.md">AsyncMilvusClient mit Asyncio verwenden</a></td><td>AsyncIO</td><td>AsyncIO, Vektorsuche</td></tr>
 </tbody>
 </table>

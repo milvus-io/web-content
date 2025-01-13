@@ -1,6 +1,6 @@
 [
   {
-    "label": "Sobre Milvus",
+    "label": "About Milvus",
     "id": "about",
     "isMenu": true,
     "order": 0,
@@ -1763,7 +1763,7 @@
     ]
   },
   {
-    "label": "Perguntas frequentes",
+    "label": "FAQs",
     "id": "faq",
     "isMenu": true,
     "order": 9,

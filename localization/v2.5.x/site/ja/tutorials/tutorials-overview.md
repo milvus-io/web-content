@@ -46,5 +46,7 @@ title: チュートリアル概要
 <tr><td><a href="/docs/ja/text_search_engine.md">テキスト検索エンジン</a></td><td>セマンティック検索</td><td>ベクトル検索</td></tr>
 <tr><td><a href="/docs/ja/text_image_search.md">テキストによる画像検索</a></td><td>セマンティック検索</td><td>ベクトル検索</td></tr>
 <tr><td><a href="/docs/ja/image_deduplication_system.md">画像の重複排除</a></td><td>重複排除</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/quickstart_with_attu.md">クイックスタート</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/use-async-milvus-client-with-asyncio.md">asyncioでAsyncMilvusClientを使う</a></td><td>非同期IO</td><td>AsyncIO、ベクトル検索</td></tr>
 </tbody>
 </table>

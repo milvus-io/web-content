@@ -1737,6 +1737,12 @@
             "id": "build_RAG_with_milvus_and_ollama.md",
             "order": 7,
             "children": []
+          },
+          {
+            "label": "DeepSeek",
+            "id": "build_RAG_with_milvus_and_deepseek.md",
+            "order": 8,
+            "children": []
           }
         ]
       },
@@ -2081,6 +2087,18 @@
         "children": []
       },
       {
+        "label": "Início rápido com o Attu",
+        "id": "quickstart_with_attu.md",
+        "order": 14,
+        "children": []
+      },
+      {
+        "label": "Utilizar AsyncMilvusClient com asyncio",
+        "id": "use-async-milvus-client-with-asyncio.md",
+        "order": 15,
+        "children": []
+      },
+      {
         "label": "Explorar mais",
         "id": "explore-more",
         "order": 99,
@@ -2138,7 +2156,7 @@
     ]
   },
   {
-    "label": "Perguntas frequentes",
+    "label": "FAQs",
     "id": "faq",
     "isMenu": true,
     "order": 9,

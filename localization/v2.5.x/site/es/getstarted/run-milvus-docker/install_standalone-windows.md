@@ -61,7 +61,7 @@ title: Ejecutar Milvus en Docker (Linux)
 <ol>
 <li><p>Abra Docker Desktop en modo administrador haciendo clic con el botón derecho y seleccionando <strong>Ejecutar como administrador</strong>.</p></li>
 <li><p>Descargue el script de instalación y guárdelo como <code translate="no">standalone.bat</code>.</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/milvus/blob/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
+<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Ejecute el script descargado para iniciar Milvus como contenedor Docker.</p>
@@ -252,7 +252,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>Error de lectura de configuración en el arranque de Milvus</span> </span></p>
-<p>Para solucionar el error que aparece durante el arranque de Milvus y que dice "Read config failed", debe comprobar si el volumen montado en el contenedor Milvus es correcto. Si el volumen está montado correctamente en el contenedor, puede utilizar el comando <code translate="no">docker exec</code> para entrar en el contenedor y listar la carpeta <strong>/milvus/configs</strong> como se indica a continuación.</p>
+<p>Para solucionar el error que aparece durante el inicio de Milvus y que dice "Read config failed", debe comprobar si el volumen montado en el contenedor Milvus es correcto. Si el volumen está montado correctamente en el contenedor, puede utilizar el comando <code translate="no">docker exec</code> para entrar en el contenedor y listar la carpeta <strong>/milvus/configs</strong> como se indica a continuación.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />

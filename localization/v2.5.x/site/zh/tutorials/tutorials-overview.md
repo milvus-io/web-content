@@ -29,7 +29,7 @@ title: 教程概览
 <tr><td><a href="/docs/zh/full_text_search_with_milvus.md">使用 Milvus 进行全文检索</a></td><td>快速入门</td><td>全文搜索</td></tr>
 <tr><td><a href="/docs/zh/hybrid_search_with_milvus.md">使用 Milvus 进行混合搜索</a></td><td>混合搜索</td><td>混合搜索、多向量、密集嵌入、稀疏嵌入</td></tr>
 <tr><td><a href="/docs/zh/image_similarity_search.md">使用 Milvus 进行图像搜索</a></td><td>语义搜索</td><td>向量搜索、Dynamic Field</td></tr>
-<tr><td><a href="/docs/zh/multimodal_rag_with_milvus.md">使用 Milvus 的多模式 RAG</a></td><td>RAG</td><td>向量搜索，动态字段</td></tr>
+<tr><td><a href="/docs/zh/multimodal_rag_with_milvus.md">使用 Milvus 的多模态 RAG</a></td><td>RAG</td><td>向量搜索，动态字段</td></tr>
 <tr><td><a href="/docs/zh/multimodal_rag_with_milvus.md">使用多向量进行多模态搜索</a></td><td>语义搜索</td><td>多向量、混合搜索</td></tr>
 <tr><td><a href="/docs/zh/graph_rag_with_milvus.md">使用 Milvus 的图 RAG</a></td><td>RAG</td><td>图搜索</td></tr>
 <tr><td><a href="/docs/zh/contextual_retrieval_with_milvus.md">使用 Milvus 进行上下文检索</a></td><td>快速启动</td><td>向量检索</td></tr>
@@ -46,5 +46,7 @@ title: 教程概览
 <tr><td><a href="/docs/zh/text_search_engine.md">文本搜索引擎</a></td><td>语义搜索</td><td>向量搜索</td></tr>
 <tr><td><a href="/docs/zh/text_image_search.md">文本搜索图像</a></td><td>语义搜索</td><td>向量搜索</td></tr>
 <tr><td><a href="/docs/zh/image_deduplication_system.md">重复数据删除</a></td><td>重复数据删除</td><td>向量搜索</td></tr>
+<tr><td><a href="/docs/zh/quickstart_with_attu.md">使用 Attu 快速入门</a></td><td>快速启动</td><td>向量搜索</td></tr>
+<tr><td><a href="/docs/zh/use-async-milvus-client-with-asyncio.md">将 AsyncMilvusClient 与 asyncio 结合使用</a></td><td>AsyncIO</td><td>AsyncIO、向量搜索</td></tr>
 </tbody>
 </table>

@@ -75,5 +75,6 @@ title: Integrations Overview
 <tr><td><a href="/docs/build_RAG_with_milvus_and_gemini.md">Build RAG with Milvus and Gemini</a></td><td>LLMs</td><td>Milvus, Gemini</td></tr>
 <tr><td><a href="/docs/build_RAG_with_milvus_and_ollama.md">Build RAG with Milvus and Ollama</a></td><td>LLMs</td><td>Milvus, Ollama</td></tr>
 <tr><td><a href="/docs/milvus_rag_with_dynamiq.md">Getting Started with Dynamiq and Milvus</a></td><td>Orchestration</td><td>Milvus, Dynamiq</td></tr>
+<tr><td><a href="/docs/build_RAG_with_milvus_and_deepseek.md">Build RAG with Milvus and DeepSeek</a></td><td>LLMs</td><td>Milvus, DeepSeek</td></tr>
 </tbody>
 </table>
