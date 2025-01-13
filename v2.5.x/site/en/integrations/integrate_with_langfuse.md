@@ -1,16 +1,20 @@
 ---
 id: integrate_with_langfuse.md
 summary: This is a simple cookbook that demonstrates how to use the LlamaIndex Langfuse integration. It uses Milvus Lite to store the documents and Query.
-title: Cookbook LlamaIndex & Milvus Integration
+title: Using Langfuse to Evaluate RAG Quality
 ---
 
-# Cookbook - LlamaIndex & Milvus Integration
+# Using Langfuse to Trace Queries in RAG
 
 <a target="_blank" href="https://colab.research.google.com/github/langfuse/langfuse-docs/blob/main/cookbook/integration_llama-index_milvus-lite.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-This is a simple cookbook that demonstrates how to use the [LlamaIndex Langfuse integration](https://langfuse.com/docs/integrations/llama-index/get-started). It uses Milvus Lite to store the documents and Query. 
+This is a simple cookbook that demonstrates how to use Langfuse to trace your queries in RAG. The RAG pipeline is implemented with LlamaIndex and Milvus Lite to store and retrieve the documents. 
+
+In this quickstart, we’ll show you how to set up a LlamaIndex application using Milvus Lite as the vector store. We’ll also show you how to use the Langfuse LlamaIndex integration to trace your application.
+
+[Langfuse](https://github.com/langfuse/langfuse) is an open-source LLM engineering platform that helps teams collaboratively debug, analyze, and iterate on their LLM applications. All platform features are natively integrated to accelerate the development workflow.
 
 [Milvus Lite](https://github.com/milvus-io/milvus-lite/) is the lightweight version of Milvus, an open-source vector database that powers AI applications with vector embeddings and similarity search.
 

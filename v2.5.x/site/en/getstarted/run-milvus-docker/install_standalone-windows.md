@@ -31,7 +31,7 @@ If you are more familiar with PowerShell or Windows Command Prompt, the command 
 2. Download the installation script and save it as `standalone.bat`.​
 
     ```powershell
-    C:\>Invoke-WebRequest https://github.com/milvus-io/milvus/blob/master/scripts/standalone_embed.bat -OutFile standalone.bat​
+    C:\>Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
     ```
 

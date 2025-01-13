@@ -59,3 +59,4 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Build RAG with Milvus and Gemini](build_RAG_with_milvus_and_gemini.md) | LLMs | Milvus, Gemini |
 | [Build RAG with Milvus and Ollama](build_RAG_with_milvus_and_ollama.md) | LLMs | Milvus, Ollama |
 | [Getting Started with Dynamiq and Milvus](milvus_rag_with_dynamiq.md) | Orchestration | Milvus, Dynamiq |
+| [Build RAG with Milvus and DeepSeek](build_RAG_with_milvus_and_deepseek.md) | LLMs | Milvus, DeepSeek |

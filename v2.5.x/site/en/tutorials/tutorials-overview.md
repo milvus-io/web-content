@@ -32,4 +32,6 @@ This page provides a list of tutorials for you to interact with Milvus.
 | [Text Search Engine](text_search_engine.md) | Semantic Search | vector search |
 | [Search Image by Text](text_image_search.md) | Semantic Search | vector search |
 | [Image Deduplication](image_deduplication_system.md) | Deduplication | vector search |
+| [Quickstart with Attu](quickstart_with_attu.md) | Quickstart | vector search |
+| [Use AsyncMilvusClient with asyncio](use-async-milvus-client-with-asyncio.md) | AsyncIO | AsyncIO, vector search |
 

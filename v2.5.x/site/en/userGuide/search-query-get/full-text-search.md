@@ -7,7 +7,7 @@ summary: Full text search is a feature that retrieves documents containing speci
 
 # Full Text Search​
 
-Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranking the results based on relevance. This feature overcomes semantic search limitations, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.​
+Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranks the results based on relevance. This feature overcomes the limitations of semantic search, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.​
 
 Using the BM25 algorithm for relevance scoring, this feature is particularly valuable in retrieval-augmented generation (RAG) scenarios, where it prioritizes documents that closely match specific search terms.​
 
@@ -22,15 +22,15 @@ Using the BM25 algorithm for relevance scoring, this feature is particularly val
 
 Full text search simplifies the process of text-based searching by eliminating the need for manual embedding. This feature operates through the following workflow:​
 
-1. **Text input**: You insert raw text documents or provide query text without any need for manual embedding.​
+1. **Text input**: You insert raw text documents or provide query text without needing to manually embed them.​
 
-2. **Text analysis**: Milvus uses an analyzer to tokenize input text into individual, searchable terms.​ For more information on analyzers, refer to [Analyzer Overview](analyzer-overview.md).
+2. **Text analysis**: Milvus uses an analyzer to tokenize the input text into individual, searchable terms.​ For more information on analyzers, refer to [Analyzer Overview](analyzer-overview.md).
 
 3. **Function processing**: The built-in function receives tokenized terms and converts them into sparse vector representations.​
 
 4. **Collection store**: Milvus stores these sparse embeddings in a collection for efficient retrieval.​
 
-5. **BM25 scoring**: During a search, Milvus applies the BM25 algorithm to calculate scores for the stored documents and ranks matched results based on relevance to the query text.​
+5. **BM25 scoring**: During a search, Milvus applies the BM25 algorithm to calculate scores for the stored documents and ranks matched results based on their relevance to the query text.​
 
 ![Full text search](../../../../assets/full-text-search.png)
 
