@@ -212,7 +212,7 @@ export const generateMenuStructureLocales = async (params) => {
   console.log("Translating menu structure...");
   for (let version of versions) {
     const sourceMenuPath = `${version}/site/en/menuStructure/en.json`;
-    const stats = fs.statSync(sourceMenuPath);
+    const modifiedTime = await getFileUpdatedTime(sourceMenuPath);
 
     const cache =
       useCache && fs.existsSync(CACHE_FILE)
@@ -221,10 +221,11 @@ export const generateMenuStructureLocales = async (params) => {
     const cacheOutdated = useCache
       ? !cache[version] ||
         !cache[version][sourceMenuPath] ||
-        new Date(cache[version][sourceMenuPath]) < stats.mtime
+        new Date(cache[version][sourceMenuPath]) < new Date(modifiedTime)
       : true;
 
     if (!cacheOutdated) {
+      console.info("-> Skip: menu structure is up-to-date.")
       continue;
     }
 
