@@ -155,28 +155,6 @@ Optionally, you can use `:19530` instead of `27017:19530` in the above command t
 
 By default, kubectl's port-forwarding only listens on `localhost`. Use the `address` flag if you want Milvus to listen on the selected or all IP addresses. The following command makes port-forward listen on all IP addresses on the host machine.
 
-Now, you can connect to Milvus using the forwarded port.
-
-## Access Milvus WebUI
-
-Milvus ships with a built-in GUI tool called Milvus WebUI that you can access through your browser. Milvus Web UI enhances system observability with a simple and intuitive interface. You can use Milvus Web UI to observe the statistics and metrics of the components and dependencies of Milvus, check database and collection details, and list detailed Milvus configurations. For details about Milvus Web UI, see [Milvus WebUI](milvus-webui.md)
-
-To enable the access to the Milvus Web UI, you need to port-forward the proxy pod to a local port.
-
-```shell
-$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091
-Forwarding from 0.0.0.0:27018 -> 9091
-```
-
-Now, you can access Milvus Web UI at `http://localhost:27018`.
-
-```bash
-$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
-Forwarding from 0.0.0.0:27017 -> 19530
-```
-
-Now, you can connect to Milvus using the forwarded port.
-
 ## Access Milvus WebUI
 
 Milvus ships with a built-in GUI tool called Milvus WebUI that you can access through your browser. Milvus Web UI enhances system observability with a simple and intuitive interface. You can use Milvus Web UI to observe the statistics and metrics of the components and dependencies of Milvus, check database and collection details, and list detailed Milvus configurations. For details about Milvus Web UI, see [Milvus WebUI](milvus-webui.md)
