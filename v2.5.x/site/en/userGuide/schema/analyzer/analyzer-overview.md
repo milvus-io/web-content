@@ -28,6 +28,12 @@ An analyzer in Milvus consists of exactly one **tokenizer** and **zero or more**
 
 - **Filters**: Filters can be applied to tokens to further refine them, for example, by making them lowercase or removing common words.​
 
+<div class="alert note">
+
+Tokenizers support only UTF-8 format. Support for other formats will be added in future releases.
+
+</div>
+
 The workflow below shows how an analyzer processes text.​
 
 <img src="../../../../../assets/analyzer-overview.png" alt="analyzer-overview" width="400"/>
