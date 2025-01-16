@@ -642,14 +642,14 @@ curl --request POST \​
       </svg>
     </button></h2><h3 id="Insert-and-Delete-Entities​" class="common-anchor-header">Insert and Delete Entities​</h3><p>You can perform insert, upsert, and delete operations in specific operations. For details, refer to​</p>
 <ul>
-<li><p>Insert Entities into Partition​</p></li>
-<li><p>Upsert Entities into Partition​</p></li>
-<li><p>Delete Entities from Partition​</p></li>
+<li><p><a href="/docs/insert-update-delete.md#Insert-Entities-into-a-Partition">Insert Entities into Partition​</a></p></li>
+<li><p><a href="/docs/upsert-entities.md#Upsert-Entities-in-a-Partition">Upsert Entities into Partition​</a></p></li>
+<li><p><a href="/docs/delete-entities.md#Delete-Entities-from-Partitions">Delete Entities from Partition​</a></p></li>
 </ul>
 <h3 id="Search-and-Query​" class="common-anchor-header">Search and Query​</h3><p>You can conduct searches and queries within specific partitions. For details, refer to ​</p>
 <ul>
-<li><p>Conduct ANN Searches within Partitions​</p></li>
-<li><p>Conduct Metadata Filtering within Partitions​</p></li>
+<li><p><a href="/docs/single-vector-search.md#ANN-Search-in-Partition">Conduct ANN Searches within Partitions​</a></p></li>
+<li><p><a href="/docs/filtered-search.md">Conduct Metadata Filtering within Partitions​</a></p></li>
 </ul>
 <h2 id="Drop-Partition​" class="common-anchor-header">Drop Partition​<button data-href="#Drop-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"
