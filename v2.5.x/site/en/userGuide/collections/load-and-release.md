@@ -181,6 +181,12 @@ curl --request POST \​
 
 Milvus can load only the fields involved in searches and queries, reducing memory usage and improving search performance.​
 
+<div class="alert note">
+
+Partial collection loading is currently in beta and not recommended for production use.
+
+</div>
+
 The following code snippet assumes that you have created a collection named **customized_setup_2**, and there are two fields named **my_id** and **my_vector** in the collection.​
 
 <div class="multipleCode">
