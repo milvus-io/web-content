@@ -69,4 +69,4 @@ However, indexing a VARCHAR field does not speed up:
 You can:
 
 - Check out [Milvus](https://github.com/milvus-io/milvus/issues) on GitHub. Feel free to ask questions, share ideas, and help others.
-- Join our [Slack Channel](https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk) to find support and engage with our open-source community.
+- Join our [Discord Server](https://discord.com/invite/8uyFbECzPX) to find support and engage with our open-source community.

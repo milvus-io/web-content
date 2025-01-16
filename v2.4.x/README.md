@@ -86,11 +86,7 @@ Reference to cite when you use Milvus in a research paper:
 
 ## Get in touch
 
-Join the Milvus community on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ) to share your suggestions, advice, or questions with our engineering team.
-
-<a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">
-    <img src="https://zilliz-cms.s3.us-west-2.amazonaws.com/readme_slack_4a07c4c92f.png" alt="Miluvs Slack Channel"  height="150" width="500">
-</a>
+Join the Milvus community on [Discord](https://discord.com/invite/8uyFbECzPX) to share your suggestions, advice, or questions with our engineering team.
 
 Subscribe to Milvus's mailing lists:
 

@@ -191,7 +191,7 @@ The output of the above code snippet includes the names of the partitions within
 
 ## Create Partitions
 
-You can add more partitions to the collection. A collection can have up to 1,024 partitions.
+You can add more partitions to the collection. A collection can have up to 4,096 partitions.
 
 <div class="language-python">
 

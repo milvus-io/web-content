@@ -32,7 +32,7 @@ The following metrics are available for alerting configuration:
 | Process Opened Fds   | The current number of used file descriptors.  | /    |
 
 ## Set up alerts
-This guide takes the example of creating an alert for the memory usage of Milvus components. To create other types of alerts, please adjust your commands accordingly. If you encounter any problems during the process, feel free to ask in the [Milvus forum](https://discuss.milvus.io/) or initiate a discussion on [Slack](https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ).
+This guide takes the example of creating an alert for the memory usage of Milvus components. To create other types of alerts, please adjust your commands accordingly. If you encounter any problems during the process, feel free to ask in [Github discussions](https://github.com/milvus-io/milvus/discussions) or start a thread on [Discord](https://discord.com/invite/8uyFbECzPX).
 
 ### Prerequisites
 This tutorial assumes that you have Grafana installed and configured. If not, we recommend reading the [monitoring guide](monitor.md). 

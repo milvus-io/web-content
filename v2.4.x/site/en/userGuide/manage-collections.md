@@ -63,6 +63,12 @@ For quick setup, use the [`createCollection()`](https://milvus.io/api-reference/
 
 </div>
 
+<div class="language-go">
+
+For quick setup, use the [`CreateCollection()`](https://milvus.io/api-reference/go/v2.4.x/Collection/CreateCollection.md) on an instance of the `Client` interface using [`NewClient()`](https://milvus.io/api-reference/go/v2.4.x/Connections/NewClient.md) method, to create a collection with the specified name and dimension.
+
+</div>
+
 <div class="language-shell">
 
 For quick setup, use the [`POST /v2/vectordb/collections/create`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md) API endpoint to create a collection with the specified name and dimension.
@@ -73,6 +79,7 @@ For quick setup, use the [`POST /v2/vectordb/collections/create`](https://milvus
   <a href="#python">Python </a>
   <a href="#java">Java</a>
   <a href="#javascript">Node.js</a>
+  <a href="#go">Go</a>
   <a href="#shell">cURL</a>
 </div>
 
@@ -171,6 +178,51 @@ console.log(res.state)
 // 
 ```
 
+```Go
+import (
+  "context"
+  "fmt"
+  "log"
+  "time"
+
+  milvusClient "github.com/milvus-io/milvus-sdk-go/v2/client" // milvusClient is an alias for milvus client package
+  "github.com/milvus-io/milvus-sdk-go/v2/entity"
+)
+
+func main() {
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
+	defer cancel()
+	// 1. Set up a Milvus client
+	client, err := milvusClient.NewClient(ctx, milvusClient.Config{
+		Address: "localhost:19530",
+	})
+	if err != nil {
+		log.Fatal("failed to connect to milvus:", err.Error())
+	}
+    defer client.Close()
+    
+    // 2. Create a collection in quick setup mode
+    err = client.NewCollection(ctx, "quick_setup", 5)
+	if err != nil {
+		log.Fatal("failed to create collection:", err.Error())
+	}
+    
+    stateLoad, err := client.GetLoadState(context.Background(), "quick_setup", []string{})
+	if err != nil {
+		log.Fatal("failed to get load state:", err.Error())
+	}
+	fmt.Println(stateLoad)
+    // Output
+    // 3
+    
+    // LoadStateNotExist -> LoadState = 0
+    // LoadStateNotLoad  -> LoadState = 1
+    // LoadStateLoading  -> LoadState = 2
+    // LoadStateLoaded   -> LoadState = 3
+}
+```
+
 ```shell
 $ export MILVUS_URI="localhost:19530"
 
@@ -241,6 +293,14 @@ To set up a schema, use [`createCollection()`](https://milvus.io/api-reference/n
 
 </div>
 
+</div>
+
+<div class="language-go">
+
+To set up a schema, use `entity.NewSchema()` to create a schema object and `schema.WithField()` to add fields to the schema.
+
+</div>
+
 <div class="language-shell">
 
 To set up a schema, you need to define a JSON object that follows the schema format as displayed on the [`POST /v2/vectordb/collections/create`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md) API endpoint reference page.
@@ -251,6 +311,7 @@ To set up a schema, you need to define a JSON object that follows the schema for
   <a href="#python">Python </a>
   <a href="#java">Java</a>
   <a href="#javascript">Node.js</a>
+  <a href="#go">Go</a>
   <a href="#shell">cURL</a>
 </div>
 
@@ -308,6 +369,26 @@ const fields = [
         dim: 5
     },
 ]
+```
+
+```go
+// 3. Create a collection in customized setup mode
+
+// 3.1 Create schema
+schema := entity.NewSchema()
+
+// 3.2. Add fields to schema
+schema.WithField(
+    entity.NewField().
+        WithName("my_id").
+        WithDataType(entity.FieldTypeInt64).
+        WithIsPrimaryKey(false).
+        WithIsAutoID(true)).
+    WithField(
+        entity.NewField().
+            WithName("my_vector").
+            WithDataType(entity.FieldTypeFloatVector).
+            WithDim(5))
 ```
 
 ```shell
@@ -422,6 +503,37 @@ export fields='[{ \
   </tbody>
 </table>
 
+<table class="language-go">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>WithName()</code></td>
+      <td>The name of the field.</td>
+    </tr>
+    <tr>
+      <td><code>WithDataType()</code></td>
+      <td>The data type of the field.</td>
+    </tr>
+    <tr>
+      <td><code>WithIsPrimaryKey()</code></td>
+      <td>Whether the current field is the primary field in a collection.<br/>Each collection has only one primary field. A primary field should be of either the <strong>entity.FieldTypeInt64</strong> type or the <strong>entity.FieldTypeVarChar</strong> type.</td>
+    </tr>
+    <tr>
+      <td><code>WithIsAutoID()</code></td>
+      <td>Whether the primary field automatically increments upon data insertions into this collection.<br/>The value defaults to <strong>false</strong>. Setting this to <strong>true</strong> makes the primary field automatically increment. Skip this parameter if you need to set up a collection with a customized schema.</td>
+    </tr>
+    <tr>
+      <td><code>WithDim()</code></td>
+      <td>The dimensionality of the collection field that holds vector embeddings.<br/>The value should be an integer greater than 1 and is usually determined by the model you use to generate vector embeddings.</td>
+    </tr>
+  </tbody>
+</table>
+
 <table class="language-shell">
   <thead>
     <tr>
@@ -475,6 +587,12 @@ To set up index parameters, use [`createIndex()`](https://milvus.io/api-referenc
 
 </div>
 
+<div class="language-go">
+
+To set up index parameters, use [`CreateIndex()`](https://milvus.io/api-reference/go/v2.4.x/Index/CreateIndex.md).
+
+</div>
+
 <div class="language-shell">
 
 To set up index parameters, you need to define a JSON object that follows the index parameters format as displayed on the [`POST /v2/vectordb/collections/create`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md) API endpoint reference page.
@@ -485,6 +603,7 @@ To set up index parameters, you need to define a JSON object that follows the in
   <a href="#python">Python </a>
   <a href="#java">Java</a>
   <a href="#javascript">Node.js</a>
+  <a href="#go">Go</a>
   <a href="#shell">cURL</a>
 </div>
 
@@ -538,6 +657,16 @@ const index_params = [{
     metric_type: "IP",
     params: { nlist: 1024}
 }]
+```
+
+```go
+// 3.3 Prepare index parameters
+idxID := entity.NewScalarIndexWithType(entity.Sorted)
+
+idxVector, err := entity.NewIndexIvfFlat(entity.IP, 1024)
+if err != nil {
+  log.Fatal("failed to new index:", err.Error())
+}
 ```
 
 ```shell
@@ -635,6 +764,29 @@ export indexParams='[{ \
     <tr>
       <td><code>params</code></td>
       <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="language-go">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>index_type</code></td>
+      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+    </tr>
+    <tr>
+      <td><code>metric_type</code></td>
+      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+    </tr>
+    <tr>
+      <td><code>nlist</code></td>
+      <td>Number of cluster units. Cluster units are used in IVF (Inverted File) based indexes in Milvus. For IVF_FLAT, the index divides vector data into `nlist` cluster units, and then compares distances between the target input vector and the center of each cluster1. Must be between 1 and 65536.</td>
     </tr>
   </tbody>
 </table>
@@ -858,6 +1010,7 @@ Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#shell">cURL</a>
     </div>
 
@@ -917,6 +1070,26 @@ Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections
     // 
     ```
 
+    ```go
+    // 3.4 Create a collection and index it seperately
+    schema.CollectionName = "customized_setup_2"
+  	client.CreateCollection(ctx, schema, entity.DefaultShardNumber)
+  
+  	stateLoad, err := client.GetLoadState(context.Background(), "customized_setup_2", []string{})
+  	if err != nil {
+  		log.Fatal("failed to get load state:", err.Error())
+  	}
+  	fmt.Println(stateLoad)
+
+    // Output
+  	// 1
+  
+  	// LoadStateNotExist -> LoadState = 0
+  	// LoadStateNotLoad  -> LoadState = 1
+  	// LoadStateLoading  -> LoadState = 2
+  	// LoadStateLoaded   -> LoadState = 3
+    ```
+    
     ```shell
     $ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/create" \
     -H "Content-Type: application/json" \
@@ -1035,6 +1208,29 @@ Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections
     </tbody>
     </table>
 
+    <table class="language-go">
+    <thead>
+        <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td><code>schema.CollectionName</code></td>
+        <td>The name of the collection.</td>
+        </tr>
+        <tr>
+        <td><code>schema</code></td>
+        <td>The schema of this collection.</td>
+        </tr>
+        <tr>
+        <td><code>index_params</code></td>
+        <td>The index parameters for the collection to create.</td>
+        </tr>
+    </tbody>
+    </table>
+
     <table class="language-shell">
     <thead>
         <tr>
@@ -1092,6 +1288,7 @@ Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#shell">cURL</a>
     </div>
 
@@ -1158,6 +1355,25 @@ Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections
     // 
     // LoadStateNotLoad
     //
+    ```
+
+    ```go
+    // 3.5 Create index
+    client.CreateIndex(ctx, "customized_setup_2", "my_id", idxID, false)
+  	client.CreateIndex(ctx, "customized_setup_2", "my_vector", idxVector, false)
+  
+  	stateLoad, err = client.GetLoadState(context.Background(), "customized_setup_2", []string{})
+  	if err != nil {
+  		log.Fatal("failed to get load state:", err.Error())
+  	}
+  	fmt.Println(stateLoad)
+    // Output
+  	// 1
+  
+  	// LoadStateNotExist -> LoadState = 0
+  	// LoadStateNotLoad  -> LoadState = 1
+  	// LoadStateLoading  -> LoadState = 2
+  	// LoadStateLoaded   -> LoadState = 3
     ```
 
     ```shell
@@ -1268,6 +1484,37 @@ Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections
   </tbody>
 </table>
 
+<table class="language-go">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>collName</code></td>
+      <td>The name of the collection.</td>
+    </tr>
+    <tr>
+      <td><code>fieldName</code></td>
+      <td>The name of the field in which to create an index.</td>
+    </tr>
+    <tr>
+      <td><code>idx</code></td>
+      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+    </tr>
+    <tr>
+      <td><code>async</code></td>
+      <td>Whether this operation is asynchronous.</td>
+    </tr>
+    <tr>
+      <td><code>opts</code></td>
+      <td>The fine-tuning parameters for the specified index type. You can include multiple `entity.IndexOption` in this request. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
 <table class="language-shell">
     <thead>
         <tr>
@@ -1300,7 +1547,7 @@ Use [createCollection()](https://milvus.io/api-reference/node/v2.4.x/Collections
         <td><code>indexParams.indexConfig.index_type</code></td>
         <td>The type of the index to create.</td>
         </tr>
-        <tr>
+        <tr.>
         <td><code>indexParams.indexConfig.nlist</code></td>
         <td>The number of cluster units. This applies to IVF-related index types.</td>
         </tr>
@@ -1327,6 +1574,12 @@ To check the details of an existing collection, use [describeCollection()](https
 
 </div>
 
+<div class="language-go">
+
+To check the details of an existing collection, use [DescribeCollection()](https://milvus.io/api-reference/go/v2.4.x/Collection/DescribeCollection.md).
+
+</div>
+
 <div class="language-shell">
 
 To view the definition of a collection, you can use the [`POST /v2/vectordb/collections/describe`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md) and the [`POST /v2/vectordb/collections/list`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md) API endpoints.
@@ -1337,6 +1590,7 @@ To view the definition of a collection, you can use the [`POST /v2/vectordb/coll
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#shell">cURL</a>
 </div>
 
@@ -1481,6 +1735,34 @@ console.log(res)
 // 
 ```
 
+```Go
+// 4. View collections
+
+res, err := client.DescribeCollection(ctx, "customized_setup_2")
+if err != nil {
+	log.Fatal("failed to describe collection:", err.Error())
+}
+fmt.Printf("ConsistencyLevel: %v\nID: %v\nLoaded: %v\nName: %v\nPhysicalChannels: %v\nProperties: %v\nSchemaField1: %v\nSchemaField2: %v\nShardNum: %v\nVirtualChannels: %v\nSchemaAutoID: %v\nSchemaCollectionName: %v\nSchemaDescription: %v",
+	res.ConsistencyLevel, res.ID, res.Loaded, res.Name, res.PhysicalChannels,
+	res.Properties, res.Schema.Fields[0], res.Schema.Fields[1], res.ShardNum,
+	res.VirtualChannels, res.Schema.AutoID, res.Schema.CollectionName, res.Schema.Description)
+
+// Output:
+// ConsistencyLevel: 2
+// ID: 453858520413977280
+// Loaded: false
+// Name: customized_setup_2
+// PhysicalChannels: [by-dev-rootcoord-dml_14]
+// Properties: map[]
+// SchemaField1: &{100 my_id true false  int64 map[] map[] false false false undefined}
+// SchemaField2: &{101 my_vector false false  []float32 map[dim:5] map[] false false false undefined}
+// ShardNum: 1
+// VirtualChannels: [by-dev-rootcoord-dml_14_453858520413977280v0]
+// SchemaAutoID: false
+// SchemaCollectionName: customized_setup_2
+// SchemaDescription: 2024/11/12 14:06:53 my_rag_collection
+```
+
 ```shell
 curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/describe" \
 -H "Content-Type: application/json" \
@@ -1546,6 +1828,7 @@ To list all existing collections, you can do as follows:
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#shell">cURL</a>
 </div>
 
@@ -1594,6 +1877,21 @@ System.out.println(listCollectionsRes.getCollectionNames());
 // ]
 ```
 
+```Go
+// 5. List all collection names
+collections, err := client.ListCollections(ctx)
+if err != nil {
+	log.Fatal("failed to list collection:", err.Error())
+}
+for _, c := range collections {
+	log.Println(c.Name)
+}
+
+// Output:
+// customized_setup_2
+// quick_setup
+```
+
 ```shell
 $ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/list" \
 -H "Content-Type: application/json" \
@@ -1638,6 +1936,12 @@ To load a collection, use the [`loadCollection()`](https://milvus.io/api-referen
 
 </div>
 
+<div class="language-go">
+
+To load a collection, use the [`LoadCollection()`](https://milvus.io/api-reference/go/v2.4.x/Collection/LoadCollection.md) method, specifying the collection name.
+
+</div>
+
 <div class="language-shell">
 
 To load a collection, you can use the [`POST /v2/vectordb/collections/load`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Load.md) and the [`POST /v2/vectordb/collections/get_load_state`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md) API endpoints.
@@ -1648,6 +1952,7 @@ To load a collection, you can use the [`POST /v2/vectordb/collections/load`](htt
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#shell">cURL</a>
 </div>
 
@@ -1721,6 +2026,30 @@ console.log(res.state)
 // 
 // LoadStateLoaded
 // 
+```
+
+```go
+// 6. Load the collection
+
+err = client.LoadCollection(ctx, "customized_setup_2", false)
+if err != nil {
+	log.Fatal("failed to laod collection:", err.Error())
+}
+
+// 7. Get load state of the collection
+stateLoad, err := client.GetLoadState(context.Background(), "customized_setup_2", []string{})
+if err != nil {
+	log.Fatal("failed to get load state:", err.Error())
+}
+fmt.Println(stateLoad)
+
+// Output:
+// 3
+
+// LoadStateNotExist -> LoadState = 0
+// LoadStateNotLoad  -> LoadState = 1
+// LoadStateLoading  -> LoadState = 2
+// LoadStateLoaded   -> LoadState = 3
 ```
 
 ```shell
@@ -1811,6 +2140,12 @@ To release a collection, use the [`releaseCollection()`](https://milvus.io/api-r
 
 </div>
 
+<div class="language-go">
+
+To release a collection, use the [`ReleaseCollection()`](https://milvus.io/api-reference/go/v2.4.x/Collection/ReleaseCollection.md) method, specifying the collection name.
+
+</div>
+
 <div class="language-shell">
 
 To release a collection, you can use the [`POST /v2/vectordb/collections/release`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Release.md) and the [`POST /v2/vectordb/collections/get_load_state`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md) API endpoints.
@@ -1821,6 +2156,7 @@ To release a collection, you can use the [`POST /v2/vectordb/collections/release
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#shell">cURL</a>
 </div>
 
@@ -1886,6 +2222,25 @@ console.log(res.state)
 // 
 // LoadStateNotLoad
 // 
+```
+
+```go
+// 8. Release the collection
+errRelease := client.ReleaseCollection(context.Background(), "customized_setup_2")
+if errRelease != nil {
+	log.Fatal("failed to release collection:", errRelease.Error())
+}
+fmt.Println(errRelease)
+stateLoad, err = client.GetLoadState(context.Background(), "customized_setup_2", []string{})
+if err != nil {
+	log.Fatal("failed to get load state:", err.Error())
+}
+fmt.Println(stateLoad)
+
+// Output:
+// 1
+
+// meaning not loaded
 ```
 
 ```shell
@@ -2722,6 +3077,12 @@ To drop a collection, use the [`dropCollection()`](https://milvus.io/api-referen
 
 </div>
 
+<div class="language-go">
+
+To drop a collection, use the [`DropCollection()`](https://milvus.io/api-reference/go/v2.4.x/Collection/DropCollection.md) method, specifying the collection name.
+
+</div>
+
 <div class="language-shell">
 
 To drop a collection, you can use the [`POST /v2/vectordb/collections/drop`](https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md) API endpoint.
@@ -2732,6 +3093,7 @@ To drop a collection, you can use the [`POST /v2/vectordb/collections/drop`](htt
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#go">Go</a>
     <a href="#shell">cURL</a>
 </div>
 
@@ -2808,6 +3170,19 @@ console.log(res.error_code)
 // 
 // Success
 // 
+```
+
+```go
+// 10. Drop collections
+
+err = client.DropCollection(ctx, "quick_setup")
+if err != nil {
+	log.Fatal("failed to drop collection:", err.Error())
+}
+err = client.DropCollection(ctx, "customized_setup_2")
+if err != nil {
+	log.Fatal("failed to drop collection:", err.Error())
+}
 ```
 
 ```shell

@@ -170,5 +170,5 @@ Currently, Milvus 2.4.x does not support specifying default values for scalar or
 You can:
 
 - Check out [Milvus](https://github.com/milvus-io/milvus/issues) on GitHub. You're welcome to raise questions, share ideas, and help others.
-- Join our [Slack community](https://slack.milvus.io/) to find support and engage with our open-source community.
+- Join our [Discord Server](https://discord.com/invite/8uyFbECzPX) to find support and engage with our open-source community.
 
