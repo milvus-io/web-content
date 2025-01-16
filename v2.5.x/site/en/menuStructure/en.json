@@ -1472,29 +1472,29 @@
             "isMenu": true,
             "children": [
               {
+                "label": "Backup and Restore in One Instance",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              }, 
+              {
                 "label": "Migrate Between Instances in One Bucket",
                 "id": "shared-bucket-backup-and-restore.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Migrate Between Instances Across Buckets",
                 "id": "cross-bucket-backup-and-restore.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Migrate Between Instances Across S3 Environments",
                 "id": "multi-storage-backup-and-restore.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Backup and Restore in One Instance",
-                "id": "single-instance-backup-and-restore.md",
                 "order": 3,
                 "children": []
-              }              
+              }             
             ]
           }
         ]
