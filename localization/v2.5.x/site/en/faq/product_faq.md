@@ -95,6 +95,28 @@ title: Product FAQ
     serverMaxRecvSize: <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>By default, the maximum size of each RPC request is 64MB. Therefore, the total size of the input vectors, including their dimensional data and metadata, must be less than this limit to ensure successful execution.</p>
+<h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">How can I get all the unique value of a given scalar field from a collection？</h4><p>Currently, there is no direct method to achieve this. As a workaround, we recommend using a query_iterator to retrieve all values for a specific field, and then perform deduplication manually. We plan to add direct support for this feature in Milvus 2.6. Example use of query_iterator:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># set up iterator</span>
+iterator = client.query_iterator(
+    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;target&quot;</span>]
+)
+<span class="hljs-comment"># do iteration and store target values into value_set </span>
+value_set = <span class="hljs-built_in">set</span>()
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    res = iterator.<span class="hljs-built_in">next</span>()
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res) == <span class="hljs-number">0</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;query iteration finished, close&quot;</span>)
+        iterator.close()
+        <span class="hljs-keyword">break</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(res)):
+        value_set.add(res[i][<span class="hljs-string">&quot;target&quot;</span>])
+
+<span class="hljs-comment"># value_set will contain unique values for target column    </span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-are-the-limitations-of-using-dynamic-fields-For-example-are-there-size-limits-modification-methods-or-indexing-restrictions" class="common-anchor-header">What are the limitations of using dynamic fields? For example, are there size limits, modification methods, or indexing restrictions?</h4><p>Dynamic fields are represented internally using JSON fields, with a size limit of 65,536 bytes. They support upsert modifications, allowing you to add or update fields. However, as of Milvus 2.5.1, dynamic fields do not support indexing. Support for adding indexes for JSON will be introduced in future releases.</p>
+<h4 id="Does-Milvus-support-schema-changes" class="common-anchor-header">Does Milvus support schema changes?</h4><p>As of Milvus version 2.5.0, schema changes are limited to specific modifications, such as adjusting properties like the <code translate="no">mmap</code> parameter. Users can also modify the <code translate="no">max_length</code> for varchar fields and <code translate="no">max_capacity</code> for array fields. However, the ability to add or remove fields in schemas is planned for future releases, enhancing the flexibility of schema management within Milvus.</p>
+<h4 id="Does-modifying-maxlength-for-VarChar-require-data-reorganization" class="common-anchor-header">Does modifying max_length for VarChar require data reorganization?</h4><p>No, modifying the <code translate="no">max_length</code> for a VarChar field does not necessitate data reorganization, such as compaction or reorganization. This adjustment primarily updates the validation criteria for any new data being inserted into the field, leaving existing data unaffected. As a result, this change is considered lightweight and does not impose significant overhead on the system.</p>
 <h4 id="Still-have-questions" class="common-anchor-header">Still have questions?</h4><p>You can:</p>
 <ul>
 <li>Check out <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> on GitHub. You’re welcome to raise questions, share ideas, and help others.</li>
