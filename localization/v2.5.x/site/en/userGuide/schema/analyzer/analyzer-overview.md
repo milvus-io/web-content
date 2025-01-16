@@ -52,6 +52,9 @@ summary: >-
 <li><p><strong>Tokenizer</strong>: The tokenizer breaks input text into discrete units called tokens. These tokens could be words or phrases, depending on the tokenizer type.​</p></li>
 <li><p><strong>Filters</strong>: Filters can be applied to tokens to further refine them, for example, by making them lowercase or removing common words.​</p></li>
 </ul>
+<div class="alert note">
+<p>Tokenizers support only UTF-8 format. Support for other formats will be added in future releases.</p>
+</div>
 <p>The workflow below shows how an analyzer processes text.​</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/analyzer-overview.png" alt="analyzer-overview" width="400"/></p>
 <h2 id="Analyzer-types​" class="common-anchor-header">Analyzer types​<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">
