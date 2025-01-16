@@ -627,19 +627,19 @@ curl --request POST \​
 
 You can perform insert, upsert, and delete operations in specific operations. For details, refer to​
 
-- Insert Entities into Partition​
+- [Insert Entities into Partition​](insert-update-delete.md#Insert-Entities-into-a-Partition)
 
-- Upsert Entities into Partition​
+- [Upsert Entities into Partition​](upsert-entities.md#Upsert-Entities-in-a-Partition)
 
-- Delete Entities from Partition​
+- [Delete Entities from Partition​](delete-entities.md#Delete-Entities-from-Partitions)
 
 ### Search and Query​
 
 You can conduct searches and queries within specific partitions. For details, refer to ​
 
-- Conduct ANN Searches within Partitions​
+- [Conduct ANN Searches within Partitions​](single-vector-search.md#ANN-Search-in-Partition)
 
-- Conduct Metadata Filtering within Partitions​
+- [Conduct Metadata Filtering within Partitions​](filtered-search.md)
 
 ## Drop Partition​
 
