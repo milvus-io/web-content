@@ -206,6 +206,43 @@ proxy:
 
 By default, the maximum size of each RPC request is 64MB. Therefore, the total size of the input vectors, including their dimensional data and metadata, must be less than this limit to ensure successful execution.
 
+#### How can I get all the unique value of a given scalar field from a collection？
+
+Currently, there is no direct method to achieve this. As a workaround, we recommend using a query_iterator to retrieve all values for a specific field, and then perform deduplication manually. We plan to add direct support for this feature in Milvus 2.6. Example use of query_iterator:
+
+```python
+# set up iterator
+iterator = client.query_iterator(
+    collection_name="demo_collection",
+    output_fields=["target"]
+)
+# do iteration and store target values into value_set 
+value_set = set()
+while True:
+    res = iterator.next()
+    if len(res) == 0:
+        print("query iteration finished, close")
+        iterator.close()
+        break
+    for i in range(len(res)):
+        value_set.add(res[i]["target"])
+
+# value_set will contain unique values for target column    
+```
+
+#### What are the limitations of using dynamic fields? For example, are there size limits, modification methods, or indexing restrictions?
+
+Dynamic fields are represented internally using JSON fields, with a size limit of 65,536 bytes. They support upsert modifications, allowing you to add or update fields. However, as of Milvus 2.5.1, dynamic fields do not support indexing. Support for adding indexes for JSON will be introduced in future releases.
+
+#### Does Milvus support schema changes?
+
+As of Milvus version 2.5.0, schema changes are limited to specific modifications, such as adjusting properties like the `mmap` parameter. Users can also modify the `max_length` for varchar fields and `max_capacity` for array fields. However, the ability to add or remove fields in schemas is planned for future releases, enhancing the flexibility of schema management within Milvus.
+
+#### Does modifying max_length for VarChar require data reorganization?
+
+No, modifying the `max_length` for a VarChar field does not necessitate data reorganization, such as compaction or reorganization. This adjustment primarily updates the validation criteria for any new data being inserted into the field, leaving existing data unaffected. As a result, this change is considered lightweight and does not impose significant overhead on the system.
+
+
 #### Still have questions?
 
 You can:

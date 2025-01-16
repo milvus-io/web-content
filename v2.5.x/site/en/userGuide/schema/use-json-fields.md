@@ -544,3 +544,4 @@ Additionally, Milvus supports advanced JSON filtering operators such as `JSON_CO
 
 - **Handling Nested Dictionaries**: Any nested dictionaries within JSON field values are treated as strings.​
 
+- **JSON Field Size Limit**: JSON fields are limited to 65,536 bytes.
