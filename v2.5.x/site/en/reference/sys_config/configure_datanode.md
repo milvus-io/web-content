@@ -413,6 +413,24 @@ summary: Learn how to configure dataNode for Milvus.
 </table>
 
 
+## `dataNode.import.maxTaskSlotNum`
+
+<table id="dataNode.import.maxTaskSlotNum">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The maximum number of slots occupied by each import/pre-import task.      </td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `dataNode.compaction.levelZeroBatchMemoryRatio`
 
 <table id="dataNode.compaction.levelZeroBatchMemoryRatio">
@@ -425,7 +443,7 @@ summary: Learn how to configure dataNode for Milvus.
   <tbody>
     <tr>
       <td>        The minimal memory ratio of free memory for level zero compaction executing in batch mode      </td>
-      <td>0.05</td>
+      <td>0.5</td>
     </tr>
   </tbody>
 </table>
@@ -444,6 +462,42 @@ summary: Learn how to configure dataNode for Milvus.
     <tr>
       <td>        Max batch size refers to the max number of L1/L2 segments in a batch when executing L0 compaction. Default to -1, any value that is less than 1 means no limit. Valid range: >= 1.      </td>
       <td>-1</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataNode.compaction.useMergeSort`
+
+<table id="dataNode.compaction.useMergeSort">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Whether to enable mergeSort mode when performing mixCompaction.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataNode.compaction.maxSegmentMergeSort`
+
+<table id="dataNode.compaction.maxSegmentMergeSort">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The maximum number of segments to be merged in mergeSort mode.      </td>
+      <td>30</td>
     </tr>
   </tbody>
 </table>
@@ -497,7 +551,7 @@ summary: Learn how to configure dataNode for Milvus.
   <tbody>
     <tr>
       <td>        The ratio of memory buffer of clustering compaction. Data larger than threshold will be flushed to storage.      </td>
-      <td>0.1</td>
+      <td>0.3</td>
     </tr>
   </tbody>
 </table>
@@ -516,6 +570,42 @@ summary: Learn how to configure dataNode for Milvus.
     <tr>
       <td>        worker pool size for one clustering compaction job.      </td>
       <td>8</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataNode.bloomFilterApplyParallelFactor`
+
+<table id="dataNode.bloomFilterApplyParallelFactor">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        parallel factor when to apply pk to bloom filter, default to 4*CPU_CORE_NUM      </td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataNode.storage.deltalog`
+
+<table id="dataNode.storage.deltalog">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        deltalog format, options: [json, parquet]      </td>
+      <td>json</td>
     </tr>
   </tbody>
 </table>

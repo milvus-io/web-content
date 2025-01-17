@@ -91,6 +91,24 @@ If you don't set mq.type field as default, there is a note about enabling priori
 </table>
 
 
+## `mq.pursuitBufferTime`
+
+<table id="mq.pursuitBufferTime">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        pursuit mode buffer time in seconds      </td>
+      <td>60</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `mq.mqBufSize`
 
 <table id="mq.mqBufSize">
@@ -158,6 +176,60 @@ If you don't set mq.type field as default, there is a note about enabling priori
     <tr>
       <td>        Default value: "3", the timeout(in seconds) that target sends msgPack      </td>
       <td>3</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `mq.dispatcher.maxDispatcherNumPerPchannel`
+
+<table id="mq.dispatcher.maxDispatcherNumPerPchannel">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The maximum number of dispatchers per physical channel, primarily to limit the number of consumers and prevent performance issues(e.g., during recovery when a large number of channels are watched).      </td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `mq.dispatcher.retrySleep`
+
+<table id="mq.dispatcher.retrySleep">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        register retry sleep time in seconds      </td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `mq.dispatcher.retryTimeout`
+
+<table id="mq.dispatcher.retryTimeout">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        register retry timeout in seconds      </td>
+      <td>60</td>
     </tr>
   </tbody>
 </table>

@@ -81,7 +81,7 @@ If you want to enable kafka, needs to comment the pulsar configs
 
 kafka:
 
-  brokerList: 
+  brokerList: localhost:9092
 
   saslUsername: 
 
@@ -185,9 +185,15 @@ See [grpc-related Configurations](configure_grpc.md) for detailed description fo
 
 ### `tls`
 
-Configure the proxy tls enable.
+Configure external tls.
 
 See [tls-related Configurations](configure_tls.md) for detailed description for each parameter under this section.
+
+### `internaltls`
+
+Configure internal tls.
+
+See [internaltls-related Configurations](configure_internaltls.md) for detailed description for each parameter under this section.
 
 ### `common`
 
@@ -242,4 +248,22 @@ See [trace-related Configurations](configure_trace.md) for detailed description 
 #maxMemSize will the whole available GPU memory.
 
 See [gpu-related Configurations](configure_gpu.md) for detailed description for each parameter under this section.
+
+### `streamingNode`
+
+Any configuration related to the streaming node server.
+
+See [streamingNode-related Configurations](configure_streamingnode.md) for detailed description for each parameter under this section.
+
+### `streaming`
+
+Any configuration related to the streaming service.
+
+See [streaming-related Configurations](configure_streaming.md) for detailed description for each parameter under this section.
+
+### `knowhere`
+
+Any configuration related to the knowhere vector search engine
+
+See [knowhere-related Configurations](configure_knowhere.md) for detailed description for each parameter under this section.
 

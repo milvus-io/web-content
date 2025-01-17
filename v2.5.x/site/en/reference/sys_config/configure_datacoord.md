@@ -27,24 +27,6 @@ summary: Learn how to configure dataCoord for Milvus.
 </table>
 
 
-## `dataCoord.channel.balanceWithRpc`
-
-<table id="dataCoord.channel.balanceWithRpc">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Whether to enable balance with RPC, default to use etcd watch      </td>
-      <td>true</td>
-    </tr>
-  </tbody>
-</table>
-
-
 ## `dataCoord.channel.legacyVersionWithoutRPCWatch`
 
 <table id="dataCoord.channel.legacyVersionWithoutRPCWatch">
@@ -189,6 +171,24 @@ summary: Learn how to configure dataCoord for Milvus.
 </table>
 
 
+## `dataCoord.segment.sealProportionJitter`
+
+<table id="dataCoord.segment.sealProportionJitter">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        segment seal proportion jitter ratio, default value 0.1(10%), if seal proportion is 12%, with jitter=0.1, the actuall applied ratio will be 10.8~12%      </td>
+      <td>0.1</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `dataCoord.segment.assignmentExpiration`
 
 <table id="dataCoord.segment.assignmentExpiration">
@@ -294,8 +294,8 @@ summary: Learn how to configure dataCoord for Milvus.
   <tbody>
     <tr>
       <td>
-        <li>The max number of binlog file for one segment, the segment will be sealed if</li>      
-        <li>the number of binlog file reaches to max value.</li>      </td>
+        <li>The max number of binlog (which is equal to the binlog file num of primary key) for one segment, </li>      
+        <li>the segment will be sealed if the number of binlog file reaches to max value.</li>      </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -452,6 +452,262 @@ summary: Learn how to configure dataCoord for Milvus.
         <li>Switch value to control if to enable automatic segment compaction during which data coord locates and merges compactable segments in the background.</li>      
         <li>This configuration takes effect only when dataCoord.enableCompaction is set as true.</li>      </td>
       <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.taskPrioritizer`
+
+<table id="dataCoord.compaction.taskPrioritizer">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>compaction task prioritizer, options: [default, level, mix]. </li>      
+        <li>default is FIFO.</li>      
+        <li>level is prioritized by level: L0 compactions first, then mix compactions, then clustering compactions.</li>      
+        <li>mix is prioritized by level: mix compactions first, then L0 compactions, then clustering compactions.</li>      </td>
+      <td>default</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.taskQueueCapacity`
+
+<table id="dataCoord.compaction.taskQueueCapacity">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        compaction task queue size      </td>
+      <td>100000</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.dropTolerance`
+
+<table id="dataCoord.compaction.dropTolerance">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Compaction task will be cleaned after finish longer than this time(in seconds)      </td>
+      <td>86400</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.gcInterval`
+
+<table id="dataCoord.compaction.gcInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The time interval in seconds for compaction gc      </td>
+      <td>1800</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.mix.triggerInterval`
+
+<table id="dataCoord.compaction.mix.triggerInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The time interval in seconds to trigger mix compaction      </td>
+      <td>60</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.levelzero.triggerInterval`
+
+<table id="dataCoord.compaction.levelzero.triggerInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The time interval in seconds for trigger L0 compaction      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.levelzero.forceTrigger.minSize`
+
+<table id="dataCoord.compaction.levelzero.forceTrigger.minSize">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The minmum size in bytes to force trigger a LevelZero Compaction, default as 8MB      </td>
+      <td>8388608</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.levelzero.forceTrigger.maxSize`
+
+<table id="dataCoord.compaction.levelzero.forceTrigger.maxSize">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The maxmum size in bytes to force trigger a LevelZero Compaction, default as 64MB      </td>
+      <td>67108864</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum`
+
+<table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The minimum number of deltalog files to force trigger a LevelZero Compaction      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum`
+
+<table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The maxmum number of deltalog files to force trigger a LevelZero Compaction, default as 30      </td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.single.ratio.threshold`
+
+<table id="dataCoord.compaction.single.ratio.threshold">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The ratio threshold of a segment to trigger a single compaction, default as 0.2      </td>
+      <td>0.2</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.single.deltalog.maxsize`
+
+<table id="dataCoord.compaction.single.deltalog.maxsize">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The deltalog size of a segment to trigger a single compaction, default as 16MB      </td>
+      <td>16777216</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.single.deltalog.maxnum`
+
+<table id="dataCoord.compaction.single.deltalog.maxnum">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The deltalog count of a segment to trigger a compaction, default as 200      </td>
+      <td>200</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.compaction.single.expiredlog.maxsize`
+
+<table id="dataCoord.compaction.single.expiredlog.maxsize">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The expired log size of a segment to trigger a compaction, default as 10MB      </td>
+      <td>10485760</td>
     </tr>
   </tbody>
 </table>
@@ -673,78 +929,6 @@ summary: Learn how to configure dataCoord for Milvus.
 </table>
 
 
-## `dataCoord.compaction.levelzero.forceTrigger.minSize`
-
-<table id="dataCoord.compaction.levelzero.forceTrigger.minSize">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        The minmum size in bytes to force trigger a LevelZero Compaction, default as 8MB      </td>
-      <td>8388608</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `dataCoord.compaction.levelzero.forceTrigger.maxSize`
-
-<table id="dataCoord.compaction.levelzero.forceTrigger.maxSize">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        The maxmum size in bytes to force trigger a LevelZero Compaction, default as 64MB      </td>
-      <td>67108864</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum`
-
-<table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        The minimum number of deltalog files to force trigger a LevelZero Compaction      </td>
-      <td>10</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum`
-
-<table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        The maxmum number of deltalog files to force trigger a LevelZero Compaction, default as 30      </td>
-      <td>30</td>
-    </tr>
-  </tbody>
-</table>
-
-
 ## `dataCoord.syncSegmentsInterval`
 
 <table id="dataCoord.syncSegmentsInterval">
@@ -758,6 +942,24 @@ summary: Learn how to configure dataCoord for Milvus.
     <tr>
       <td>        The time interval for regularly syncing segments      </td>
       <td>300</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.index.memSizeEstimateMultiplier`
+
+<table id="dataCoord.index.memSizeEstimateMultiplier">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        When the memory size is not setup by index procedure, multiplier to estimate the memory size of index data      </td>
+      <td>2</td>
     </tr>
   </tbody>
 </table>
@@ -1045,6 +1247,24 @@ summary: Learn how to configure dataCoord for Milvus.
   <tbody>
     <tr>
       <td>        The maximum number of files allowed per single import request.      </td>
+      <td>1024</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `dataCoord.import.maxImportJobNum`
+
+<table id="dataCoord.import.maxImportJobNum">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Maximum number of import jobs that are executing or pending.      </td>
       <td>1024</td>
     </tr>
   </tbody>

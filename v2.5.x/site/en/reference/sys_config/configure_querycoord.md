@@ -245,6 +245,26 @@ Related configuration of queryCoord, used to manage topology and load balancing 
 </table>
 
 
+## `queryCoord.collectionChannelCountFactor`
+
+<table id="queryCoord.collectionChannelCountFactor">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>the channel count weight used when balancing channels among queryNodes, </li>      
+        <li>		A higher value reduces the likelihood of assigning channels from the same collection to the same QueryNode. Set to 1 to disable this feature.</li>      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `queryCoord.segmentCountMaxSteps`
 
 <table id="queryCoord.segmentCountMaxSteps">
@@ -670,7 +690,7 @@ Related configuration of queryCoord, used to manage topology and load balancing 
   </thead>
   <tbody>
     <tr>
-      <td>        5m, max interval for updating collection loaded status      </td>
+      <td>        5m, max interval of updating collection loaded status for check health      </td>
       <td>5</td>
     </tr>
   </tbody>

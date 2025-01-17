@@ -7,5 +7,5 @@ summary: Learn how to configure tls for Milvus.
 
 # tls-related Configurations
 
-Configure the proxy tls enable.
+Configure external tls.
 

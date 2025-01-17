@@ -156,6 +156,24 @@ Related configuration of queryNode, used to run hybrid search between vector and
 </table>
 
 
+## `queryNode.segcore.multipleChunkedEnable`
+
+<table id="queryNode.segcore.multipleChunkedEnable">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Enable multiple chunked search      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `queryNode.segcore.knowhereScoreConsistency`
 
 <table id="queryNode.segcore.knowhereScoreConsistency">
@@ -270,9 +288,9 @@ Related configuration of queryNode, used to run hybrid search between vector and
 </table>
 
 
-## `queryNode.mmap.mmapEnabled`
+## `queryNode.mmap.vectorField`
 
-<table id="queryNode.mmap.mmapEnabled">
+<table id="queryNode.mmap.vectorField">
   <thead>
     <tr>
       <th class="width80">Description</th>
@@ -281,8 +299,80 @@ Related configuration of queryNode, used to run hybrid search between vector and
   </thead>
   <tbody>
     <tr>
-      <td>        Enable mmap for loading data      </td>
+      <td>        Enable mmap for loading vector data      </td>
       <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.mmap.vectorIndex`
+
+<table id="queryNode.mmap.vectorIndex">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Enable mmap for loading vector index      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.mmap.scalarField`
+
+<table id="queryNode.mmap.scalarField">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Enable mmap for loading scalar data      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.mmap.scalarIndex`
+
+<table id="queryNode.mmap.scalarIndex">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Enable mmap for loading scalar index      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.mmap.chunkCache`
+
+<table id="queryNode.mmap.chunkCache">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Enable mmap for chunk cache (raw vector retrieving).      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -299,7 +389,10 @@ Related configuration of queryNode, used to run hybrid search between vector and
   </thead>
   <tbody>
     <tr>
-      <td>        Enable mmap for using in growing raw data      </td>
+      <td>
+        <li>Enable memory mapping (mmap) to optimize the handling of growing raw data. </li>      
+        <li>By activating this feature, the memory overhead associated with newly added or modified data will be significantly minimized. </li>      
+        <li>However, this optimization may come at the cost of a slight decrease in query latency for the affected data segments.</li>      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -450,6 +543,24 @@ Related configuration of queryNode, used to run hybrid search between vector and
 </table>
 
 
+## `queryNode.indexOffsetCacheEnabled`
+
+<table id="queryNode.indexOffsetCacheEnabled">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        enable index offset cache for some scalar indexes, now is just for bitmap index, enable this param can improve performance for retrieving raw data from index      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `queryNode.scheduler.maxReadConcurrentRatio`
 
 <table id="queryNode.scheduler.maxReadConcurrentRatio">
@@ -570,6 +681,42 @@ Related configuration of queryNode, used to run hybrid search between vector and
 </table>
 
 
+## `queryNode.levelZeroForwardPolicy`
+
+<table id="queryNode.levelZeroForwardPolicy">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        delegator level zero deletion forward policy, possible option["FilterByBF", "RemoteLoad"]      </td>
+      <td>FilterByBF</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.streamingDeltaForwardPolicy`
+
+<table id="queryNode.streamingDeltaForwardPolicy">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        delegator streaming deletion forward policy, possible option["FilterByBF", "Direct"]      </td>
+      <td>FilterByBF</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `queryNode.dataSync.flowGraph.maxQueueLength`
 
 <table id="queryNode.dataSync.flowGraph.maxQueueLength">
@@ -624,6 +771,42 @@ Related configuration of queryNode, used to run hybrid search between vector and
 </table>
 
 
+## `queryNode.queryStreamBatchSize`
+
+<table id="queryNode.queryStreamBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        return min batch size of stream query      </td>
+      <td>4194304</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `queryNode.queryStreamMaxBatchSize`
+
+<table id="queryNode.queryStreamMaxBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        return max batch size of stream query      </td>
+      <td>134217728</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `queryNode.bloomFilterApplyParallelFactor`
 
 <table id="queryNode.bloomFilterApplyParallelFactor">
@@ -637,24 +820,6 @@ Related configuration of queryNode, used to run hybrid search between vector and
     <tr>
       <td>        parallel factor when to apply pk to bloom filter, default to 4*CPU_CORE_NUM      </td>
       <td>4</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `queryNode.queryStreamBatchSize`
-
-<table id="queryNode.queryStreamBatchSize">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        return batch size of stream query      </td>
-      <td>4194304</td>
     </tr>
   </tbody>
 </table>

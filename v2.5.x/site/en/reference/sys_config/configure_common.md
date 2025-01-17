@@ -241,8 +241,206 @@ summary: Learn how to configure common for Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        default password for root user      </td>
+      <td>        default password for root user. The maximum length is 72 characters, and double quotes are required.      </td>
       <td>Milvus</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.security.rootShouldBindRole`
+
+<table id="common.security.rootShouldBindRole">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Whether the root user should bind a role when the authorization is enabled.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.security.rbac.overrideBuiltInPrivilegeGroups.enabled`
+
+<table id="common.security.rbac.overrideBuiltInPrivilegeGroups.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Whether to override build-in privilege groups      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.security.rbac.cluster.readonly.privileges`
+
+<table id="common.security.rbac.cluster.readonly.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Cluster level readonly privileges      </td>
+      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.security.rbac.cluster.readwrite.privileges`
+
+<table id="common.security.rbac.cluster.readwrite.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Cluster level readwrite privileges      </td>
+      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.security.rbac.cluster.admin.privileges`
+
+<table id="common.security.rbac.cluster.admin.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Cluster level admin privileges      </td>
+      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups,BackupRBAC,RestoreRBAC,CreateDatabase,DropDatabase,CreateOwnership,DropOwnership,ManageOwnership,CreateResourceGroup,DropResourceGroup,UpdateUser,RenameCollection,CreatePrivilegeGroup,DropPrivilegeGroup,OperatePrivilegeGroup</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.security.rbac.database.readonly.privileges`
+
+<table id="common.security.rbac.database.readonly.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Database level readonly privileges      </td>
+      <td>ShowCollections,DescribeDatabase</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.security.rbac.database.readwrite.privileges`
+
+<table id="common.security.rbac.database.readwrite.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Database level readwrite privileges      </td>
+      <td>ShowCollections,DescribeDatabase,AlterDatabase</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.security.rbac.database.admin.privileges`
+
+<table id="common.security.rbac.database.admin.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Database level admin privileges      </td>
+      <td>ShowCollections,DescribeDatabase,AlterDatabase,CreateCollection,DropCollection</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.security.rbac.collection.readonly.privileges`
+
+<table id="common.security.rbac.collection.readonly.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Collection level readonly privileges      </td>
+      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.security.rbac.collection.readwrite.privileges`
+
+<table id="common.security.rbac.collection.readwrite.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Collection level readwrite privileges      </td>
+      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases,Load,Release,Insert,Delete,Upsert,Import,Flush,Compaction,LoadBalance,CreateIndex,DropIndex,CreatePartition,DropPartition</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.security.rbac.collection.admin.privileges`
+
+<table id="common.security.rbac.collection.admin.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Collection level admin privileges      </td>
+      <td>Query,Search,IndexDetail,GetFlushState,GetLoadState,GetLoadingProgress,HasPartition,ShowPartitions,DescribeCollection,DescribeAlias,GetStatistics,ListAliases,Load,Release,Insert,Delete,Upsert,Import,Flush,Compaction,LoadBalance,CreateIndex,DropIndex,CreatePartition,DropPartition,CreateAlias,DropAlias</td>
     </tr>
   </tbody>
 </table>
@@ -338,6 +536,24 @@ summary: Learn how to configure common for Milvus.
 </table>
 
 
+## `common.locks.maxWLockConditionalWaitTime`
+
+<table id="common.locks.maxWLockConditionalWaitTime">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        maximum seconds for waiting wlock conditional      </td>
+      <td>600</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `common.ttMsgEnabled`
 
 <table id="common.ttMsgEnabled">
@@ -395,6 +611,24 @@ summary: Learn how to configure common for Milvus.
 </table>
 
 
+## `common.bloomFilterType`
+
+<table id="common.bloomFilterType">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        bloom filter type, support BasicBloomFilter and BlockedBloomFilter      </td>
+      <td>BlockedBloomFilter</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `common.maxBloomFalsePositive`
 
 <table id="common.maxBloomFalsePositive">
@@ -413,24 +647,6 @@ summary: Learn how to configure common for Milvus.
 </table>
 
 
-## `common.bloomFilterType`
-
-<table id="common.bloomFilterType">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        bloom filter type, support BasicBloomFilter and BlockedBloomFilter      </td>
-      <td>BasicBloomFilter</td>
-    </tr>
-  </tbody>
-</table>
-
-
 ## `common.bloomFilterApplyBatchSize`
 
 <table id="common.bloomFilterApplyBatchSize">
@@ -444,6 +660,24 @@ summary: Learn how to configure common for Milvus.
     <tr>
       <td>        batch size when to apply pk to bloom filter      </td>
       <td>1000</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.collectionReplicateEnable`
+
+<table id="common.collectionReplicateEnable">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Whether to enable collection replication.      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -498,6 +732,42 @@ summary: Learn how to configure common for Milvus.
     <tr>
       <td>        if true, enable vector clustering key and vector clustering compaction      </td>
       <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.localRPCEnabled`
+
+<table id="common.localRPCEnabled">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        enable local rpc for internal communication when mix or standalone mode.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `common.sync.taskPoolReleaseTimeoutSeconds`
+
+<table id="common.sync.taskPoolReleaseTimeoutSeconds">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The maximum time to wait for the task to finish and release resources in the pool      </td>
+      <td>60</td>
     </tr>
   </tbody>
 </table>

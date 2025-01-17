@@ -218,11 +218,34 @@ We refer to the storage service as MinIO/S3 in the following description for sim
     <tr>
       <td>
         <li>Cloud Provider of S3. Supports: "aws", "gcp", "aliyun".</li>      
+        <li>Cloud Provider of Google Cloud Storage. Supports: "gcpnative".</li>      
         <li>You can use "aws" for other cloud provider supports S3 API with signature v4, e.g.: minio</li>      
         <li>You can use "gcp" for other cloud provider supports S3 API with signature v2</li>      
         <li>You can use "aliyun" for other cloud provider uses virtual host style bucket</li>      
+        <li>You can use "gcpnative" for the Google Cloud Platform provider. Uses service account credentials</li>      
+        <li>for authentication.</li>      
         <li>When useIAM enabled, only "aws", "gcp", "aliyun" is supported for now</li>      </td>
       <td>aws</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `minio.gcpCredentialJSON`
+
+<table id="minio.gcpCredentialJSON">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>The JSON content contains the gcs service account credentials.</li>      
+        <li>Used only for the "gcpnative" cloud provider.</li>      </td>
+      <td></td>
     </tr>
   </tbody>
 </table>

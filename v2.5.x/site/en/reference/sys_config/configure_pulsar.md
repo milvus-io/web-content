@@ -81,9 +81,9 @@ Related configuration of pulsar, used to manage Milvus logs of recent mutation o
     <tr>
       <td>
         <li>The maximum size of each message in Pulsar. Unit: Byte.</li>      
-        <li>By default, Pulsar can transmit at most 5 MB of data in a single message. When the size of inserted data is greater than this value, proxy fragments the data into multiple messages to ensure that they can be transmitted correctly.</li>      
+        <li>By default, Pulsar can transmit at most 2MB of data in a single message. When the size of inserted data is greater than this value, proxy fragments the data into multiple messages to ensure that they can be transmitted correctly.</li>      
         <li>If the corresponding parameter in Pulsar remains unchanged, increasing this configuration will cause Milvus to fail, and reducing it produces no advantage.</li>      </td>
-      <td>5242880</td>
+      <td>2097152</td>
     </tr>
   </tbody>
 </table>

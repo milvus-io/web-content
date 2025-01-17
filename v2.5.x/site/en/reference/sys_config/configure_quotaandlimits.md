@@ -176,6 +176,24 @@ If necessary, you can also manually force to deny RW requests.
 </table>
 
 
+## `quotaAndLimits.limits.maxGroupSize`
+
+<table id="quotaAndLimits.limits.maxGroupSize">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        maximum size for one single group when doing search group by      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `quotaAndLimits.ddl.enabled`
 
 <table id="quotaAndLimits.ddl.enabled">
@@ -1229,7 +1247,7 @@ If necessary, you can also manually force to deny RW requests.
   <tbody>
     <tr>
       <td>        l0 segment row count quota, low water level      </td>
-      <td>32768</td>
+      <td>30000000</td>
     </tr>
   </tbody>
 </table>
@@ -1246,8 +1264,116 @@ If necessary, you can also manually force to deny RW requests.
   </thead>
   <tbody>
     <tr>
-      <td>        l0 segment row count quota, low water level      </td>
+      <td>        l0 segment row count quota, high water level      </td>
+      <td>50000000</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `quotaAndLimits.limitWriting.deleteBufferRowCountProtection.enabled`
+
+<table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        switch to enable delete buffer row count quota      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `quotaAndLimits.limitWriting.deleteBufferRowCountProtection.lowWaterLevel`
+
+<table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.lowWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        delete buffer row count quota, low water level      </td>
+      <td>32768</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `quotaAndLimits.limitWriting.deleteBufferRowCountProtection.highWaterLevel`
+
+<table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.highWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        delete buffer row count quota, high water level      </td>
       <td>65536</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `quotaAndLimits.limitWriting.deleteBufferSizeProtection.enabled`
+
+<table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        switch to enable delete buffer size quota      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `quotaAndLimits.limitWriting.deleteBufferSizeProtection.lowWaterLevel`
+
+<table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.lowWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        delete buffer size quota, low water level      </td>
+      <td>134217728</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `quotaAndLimits.limitWriting.deleteBufferSizeProtection.highWaterLevel`
+
+<table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.highWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        delete buffer size quota, high water level      </td>
+      <td>268435456</td>
     </tr>
   </tbody>
 </table>
@@ -1268,93 +1394,6 @@ If necessary, you can also manually force to deny RW requests.
         <li>forceDeny false means dql requests are allowed (except for some</li>      
         <li>specific conditions, such as collection has been dropped), true means always reject all dql requests.</li>      </td>
       <td>false</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold`
-
-<table id="quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>nqInQueueThreshold indicated that the system was under backpressure for Search/Query path.</li>      
-        <li>If NQ in any QueryNode's queue is greater than nqInQueueThreshold, search&query rates would gradually cool off</li>      
-        <li>until the NQ in queue no longer exceeds nqInQueueThreshold. We think of the NQ of query request as 1.</li>      
-        <li>int, default no limit</li>      </td>
-      <td>-1</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold`
-
-<table id="quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>queueLatencyThreshold indicated that the system was under backpressure for Search/Query path.</li>      
-        <li>If dql latency of queuing is greater than queueLatencyThreshold, search&query rates would gradually cool off</li>      
-        <li>until the latency of queuing no longer exceeds queueLatencyThreshold.</li>      
-        <li>The latency here refers to the averaged latency over a period of time.</li>      
-        <li>milliseconds, default no limit</li>      </td>
-      <td>-1</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `quotaAndLimits.limitReading.resultProtection.maxReadResultRate`
-
-<table id="quotaAndLimits.limitReading.resultProtection.maxReadResultRate">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>maxReadResultRate indicated that the system was under backpressure for Search/Query path.</li>      
-        <li>If dql result rate is greater than maxReadResultRate, search&query rates would gradually cool off</li>      
-        <li>until the read result rate no longer exceeds maxReadResultRate.</li>      
-        <li>MB/s, default no limit</li>      </td>
-      <td>-1</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## `quotaAndLimits.limitReading.coolOffSpeed`
-
-<table id="quotaAndLimits.limitReading.coolOffSpeed">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>colOffSpeed is the speed of search&query rates cool off.</li>      
-        <li>(0, 1]</li>      </td>
-      <td>0.9</td>
     </tr>
   </tbody>
 </table>

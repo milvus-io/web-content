@@ -209,6 +209,42 @@ Related configuration of proxy, used to validate client requests and reduce the 
 </table>
 
 
+## `proxy.ddlConcurrency`
+
+<table id="proxy.ddlConcurrency">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The concurrent execution number of DDL at proxy.      </td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `proxy.dclConcurrency`
+
+<table id="proxy.dclConcurrency">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The concurrent execution number of DCL at proxy.      </td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## `proxy.mustUsePartitionKey`
 
 <table id="proxy.mustUsePartitionKey">
