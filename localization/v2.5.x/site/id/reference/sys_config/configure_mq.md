@@ -144,6 +144,35 @@ summary: Pelajari cara mengonfigurasi mq untuk Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="mqpursuitBufferTime" class="common-anchor-header"><code translate="no">mq.pursuitBufferTime</code><button data-href="#mqpursuitBufferTime" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="mq.pursuitBufferTime">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        waktu buffer mode pengejaran dalam detik     </td>
+      <td>60</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="mqmqBufSize" class="common-anchor-header"><code translate="no">mq.mqBufSize</code><button data-href="#mqmqBufSize" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -257,6 +286,93 @@ summary: Pelajari cara mengonfigurasi mq untuk Milvus.
     <tr>
       <td>        Nilai default: "3", batas waktu (dalam detik) yang digunakan target untuk mengirim msgPack      </td>
       <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="mqdispatchermaxDispatcherNumPerPchannel" class="common-anchor-header"><code translate="no">mq.dispatcher.maxDispatcherNumPerPchannel</code><button data-href="#mqdispatchermaxDispatcherNumPerPchannel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="mq.dispatcher.maxDispatcherNumPerPchannel">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Jumlah maksimum pengirim per saluran fisik, terutama untuk membatasi jumlah konsumen dan mencegah masalah kinerja (misalnya, selama pemulihan ketika sejumlah besar saluran ditonton).      </td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="mqdispatcherretrySleep" class="common-anchor-header"><code translate="no">mq.dispatcher.retrySleep</code><button data-href="#mqdispatcherretrySleep" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="mq.dispatcher.retrySleep">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        mendaftarkan waktu tidur coba ulang dalam detik     </td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="mqdispatcherretryTimeout" class="common-anchor-header"><code translate="no">mq.dispatcher.retryTimeout</code><button data-href="#mqdispatcherretryTimeout" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="mq.dispatcher.retryTimeout">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        mendaftarkan batas waktu coba ulang dalam detik     </td>
+      <td>60</td>
     </tr>
   </tbody>
 </table>

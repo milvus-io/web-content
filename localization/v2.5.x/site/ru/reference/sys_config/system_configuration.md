@@ -38,7 +38,7 @@ summary: Узнайте о конфигурации системы Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Для удобства обслуживания Milvus классифицирует свои конфигурации на %s разделов, основываясь на своих компонентах, зависимостях и общем использовании.</p>
+    </button></h2><p>Для удобства обслуживания Milvus классифицирует свои конфигурации на %s разделов, основываясь на компонентах, зависимостях и общем использовании.</p>
 <h3 id="etcd" class="common-anchor-header"><code translate="no">etcd</code></h3><p>Связанная конфигурация etcd, используемая для хранения метаданных Milvus и обнаружения сервисов.</p>
 <p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_etcd.md">Конфигурации, связанные с etcd</a>.</p>
 <h3 id="metastore" class="common-anchor-header"><code translate="no">metastore</code></h3><p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_metastore.md">Конфигурации, связанные с метахранилищем</a>.</p>
@@ -62,7 +62,7 @@ summary: Узнайте о конфигурации системы Milvus.
 <p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_pulsar.md">Конфигурации, связанные с pulsar</a>.</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>Если вы хотите включить kafka, необходимо закомментировать конфигурацию pulsar</p>
 <p>kafka:</p>
-<p>brokerList:</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername:</p>
 <p>saslPassword:</p>
 <p>saslMechanisms:</p>
@@ -100,9 +100,11 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>Настройка вывода системного журнала.</p>
 <p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_log.md">Конфигурации, связанные с журналом</a>.</p>
 <h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_grpc.md">Конфигурации, связанные с grpc</a>.</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Настройка включения прокси-сервера tls.</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Настройка внешнего tls.</p>
 <p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_tls.md">Конфигурации, связанные с tls</a>.</p>
-<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>Конфигурации, <a href="/docs/ru/configure_common.md">связанные с common</a>, для подробного описания каждого параметра в этом разделе.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code></h3><p>Настроить внутренний tls.</p>
+<p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_internaltls.md">Конфигурации, связанные с internaltls</a>.</p>
+<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>Конфигурации, <a href="/docs/ru/configure_common.md">связанные с общим,</a> см. в разделе Конфигурации, связанные <a href="/docs/ru/configure_common.md">с общим</a>, для подробного описания каждого параметра в этом разделе.</p>
 <h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig, настройка квот и лимитов Milvus.</p>
 <p>По умолчанию мы включаем:</p>
 <ol>
@@ -127,3 +129,9 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#milvus автоматически инициализирует половину доступной памяти GPU,</p>
 <p>#maxMemSize - всю доступную память GPU.</p>
 <p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_gpu.md">Конфигурации, связанные с gpu</a>.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>Любая конфигурация, связанная с сервером потокового узла.</p>
+<p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_streamingnode.md">Конфигурации, связанные с потоковым узлом</a>.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>Любая конфигурация, связанная со службой потоковой передачи.</p>
+<p>Подробное описание каждого параметра в этом разделе см. в разделе <a href="/docs/ru/configure_streaming.md">Конфигурации, связанные с потоковой передачей</a>.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>Любая конфигурация, связанная с векторной поисковой системой knowhere.</p>
+<p>См. <a href="/docs/ru/configure_knowhere.md">Конфигурации, связанные с knowhere</a>, для подробного описания каждого параметра в этом разделе.</p>

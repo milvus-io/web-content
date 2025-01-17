@@ -93,7 +93,7 @@ title: Risoluzione dei problemi
         ></path>
       </svg>
     </button></h2><h3 id="1-etcd-pod-pending" class="common-anchor-header">1. pod etcd in attesa</h3><p>Il cluster etcd utilizza pvc per impostazione predefinita. StorageClass deve essere preconfigurato per il cluster Kubernetes.</p>
-<h3 id="2-etcd-pod-crash" class="common-anchor-header">2. Arresto del pod etcd</h3><p>Quando un pod etcd si blocca con <code translate="no">Error: bad member ID arg (strconv.ParseUint: parsing &quot;&quot;: invalid syntax), expecting ID in Hex</code>, è possibile accedere a questo pod e cancellare il file <code translate="no">/bitnami/etcd/data/member_id</code>.</p>
+<h3 id="2-etcd-pod-crash" class="common-anchor-header">2. Arresto del pod etcd</h3><p>Quando un pod etcd si blocca con <code translate="no">Error: bad member ID arg (strconv.ParseUint: parsing &quot;&quot;: invalid syntax), expecting ID in Hex</code>, è possibile accedere a questo pod ed eliminare il file <code translate="no">/bitnami/etcd/data/member_id</code>.</p>
 <h3 id="3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="common-anchor-header">3. Più pod continuano ad andare in crash mentre <code translate="no">etcd-0</code> è ancora in esecuzione</h3><p>È possibile eseguire il codice seguente se più pod continuano ad andare in crash mentre <code translate="no">etcd-0</code> è ancora in esecuzione.</p>
 <pre><code translate="no">kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">1</span>
 <span class="hljs-comment"># delete the pvc for etcd-1 and etcd-2</span>
@@ -107,8 +107,8 @@ kubectl kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">
 <span class="hljs-comment"># restore the backup data</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><br/></p>
-<p>Se avete bisogno di aiuto per risolvere un problema, non esitate a farlo:</p>
+<p>Se avete bisogno di aiuto per risolvere un problema, sentitevi liberi di farlo:</p>
 <ul>
-<li>Iscriversi al nostro <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">canale Slack</a> e richiedere il supporto del team Milvus.</li>
-<li><a href="https://github.com/milvus-io/milvus/issues/new/choose">Presentare un problema</a> su GitHub che includa i dettagli del problema.</li>
+<li>Unirsi al nostro <a href="https://discord.com/invite/8uyFbECzPX">server Discord</a> e chiedere il supporto del team Milvus.</li>
+<li><a href="https://github.com/milvus-io/milvus/issues/new/choose">Segnalare un problema</a> su GitHub con i dettagli del problema.</li>
 </ul>

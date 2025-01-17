@@ -29,8 +29,8 @@ title: 製品に関するFAQ
 <h4 id="Why-is-there-no-vector-data-in-etcd" class="common-anchor-header">なぜetcdにはベクターデータがないのか？</h4><p>etcdにはMilvusモジュールのメタデータが格納され、MinIOにはエンティティが格納されます。</p>
 <h4 id="Does-Milvus-support-inserting-and-searching-data-simultaneously" class="common-anchor-header">Milvusはデータの挿入と検索を同時にサポートしていますか？</h4><p>挿入操作と検索操作は、互いに独立した2つのモジュールによって処理されます。クライアントから見ると、挿入されたデータがメッセージキューに入った時点で挿入操作は完了します。しかし、挿入されたデータはクエリ・ノードにロードされるまで検索できません。セグメントサイズがインデックス構築のしきい値（デフォルトでは512MB）に達しない場合、Milvusはブルートフォース検索に頼り、クエリのパフォーマンスが低下する可能性があります。</p>
 <h4 id="Can-vectors-with-duplicate-primary-keys-be-inserted-into-Milvus" class="common-anchor-header">主キーが重複しているベクターをMilvusに挿入できますか?</h4><p>はい。Milvusはベクターの主キーが重複しているかどうかをチェックしません。</p>
-<h4 id="When-vectors-with-duplicate-primary-keys-are-inserted-does-Milvus-treat-it-as-an-update-operation" class="common-anchor-header">主キーが重複しているベクターが挿入された場合、Milvusはそれを更新操作として扱いますか?</h4><p>いいえ。Milvusは現在更新操作に対応しておらず、エンティティの主キーが重複しているかどうかのチェックも行っていません。エンティティの主キーが一意であることを確認するのはお客様の責任であり、そうでない場合、Milvusには主キーが重複した複数のエンティティが含まれる可能性があります。</p>
-<p>このような場合、クエリ時にどのデータコピーが返されるかは未知のままです。この制限は将来のリリースで修正される予定です。</p>
+<h4 id="When-vectors-with-duplicate-primary-keys-are-inserted-does-Milvus-treat-it-as-an-update-operation" class="common-anchor-header">主キーが重複しているベクターが挿入された場合、Milvusはそれを更新操作として扱いますか?</h4><p>いいえ。Milvusは現在更新操作に対応しておらず、エンティティのプライマリキーが重複しているかどうかのチェックも行っていません。エンティティの主キーが一意であることを確認するのはお客様の責任であり、そうでない場合、Milvusには主キーが重複した複数のエンティティが含まれる可能性があります。</p>
+<p>このような場合、クエリが実行されたときにどのデータコピーが返されるかは未知のままです。この制限は将来のリリースで修正される予定です。</p>
 <h4 id="What-is-the-maximum-length-of-self-defined-entity-primary-keys" class="common-anchor-header">自分で定義したエンティティの主キーの最大長は?</h4><p>エンティティ主キーは非負の64ビット整数でなければなりません。</p>
 <h4 id="What-is-the-maximum-amount-of-data-that-can-be-added-per-insert-operation" class="common-anchor-header">1回の挿入操作で追加できるデータ量の上限は?</h4><p>挿入操作のサイズは1,024 MBを超えてはなりません。これはgRPCによる制限です。</p>
 <h4 id="Does-collection-size-impact-query-performance-when-searching-in-a-specific-partition" class="common-anchor-header">特定のパーティションで検索する場合、コレクション・サイズはクエリ・パフォーマンスに影響しますか?</h4><p>いいえ。検索用のパーティションが指定されている場合、Milvusは指定されたパーティションのみを検索します。</p>
@@ -40,7 +40,7 @@ title: 製品に関するFAQ
 <li>すべてのパーティションを検索したい場合は、<code translate="no">load_collection()</code> を呼び出して、すべてのパーティションを含むコレクション全体をロードします。</li>
 <li>検索前にコレクションまたは特定のパーティションをロードしなかった場合、Milvusはエラーを返します。</li>
 </ul>
-<h4 id="Can-indexes-be-created-after-inserting-vectors" class="common-anchor-header">ベクター挿入後にインデックスを作成することはできますか?</h4><p>Milvusは、以前<code translate="no">create_index()</code> 、コレクションに対してインデックスを作成したことがある場合、その後に挿入されたベクターに対しても自動的にインデックスを作成します。ただし、Milvusは、新しく挿入されたベクターがセグメント全体を満たし、新しく作成されたインデックスファイルが以前のものから分離されるまで、インデックスを作成しません。</p>
+<h4 id="Can-indexes-be-created-after-inserting-vectors" class="common-anchor-header">ベクター挿入後にインデックスを作成できますか?</h4><p>Milvusは、以前<code translate="no">create_index()</code> 、コレクションに対してインデックスを作成したことがある場合、その後に挿入されたベクターに対しても自動的にインデックスを作成します。ただし、Milvusは、新しく挿入されたベクターがセグメント全体を満たし、新しく作成されたインデックスファイルが以前のものから分離されるまで、インデックスを作成しません。</p>
 <h4 id="How-are-the-FLAT-and-IVFFLAT-indexes-different" class="common-anchor-header">FLATインデックスとIVF_FLATインデックスの違いは何ですか？</h4><p>IVF_FLATインデックスはベクター空間をリスト・クラスターに分割します。デフォルトのリスト値16,384の場合、Milvusはターゲットベクトルと16,384クラスタすべてのセントロイド間の距離を比較し、最も近いクラスタを返します。その後、Milvusはターゲットベクトルと選択されたクラスタ内のベクトルとの距離を比較し、最近接ベクトルを取得します。IVF_FLATとは異なり、FLATはターゲットベクトルと他のすべてのベクトルとの距離を直接比較します。</p>
 <p>ベクトルの総数がnlistにほぼ等しい場合、IVF_FLATとFLATの間には計算要件と探索性能の点でほとんど差がありません。しかし、ベクトル数が nlist の 2 倍以上になると、IVF_FLAT の方が性能面で有利になります。</p>
 <p>詳細は<a href="/docs/ja/index.md">ベクターインデックスを</a>参照してください。</p>
@@ -56,11 +56,11 @@ title: 製品に関するFAQ
 <p><code translate="no">nlist</code> と<code translate="no">topk</code> が大きく、nprobe が小さい場合、nprobe クラスタ内のベクトル数が<code translate="no">k</code> より少なくなることがあります。そのため、<code translate="no">topk</code> に最も近いベクトルを検索すると、返されるベクトル数が<code translate="no">k</code> より少なくなります。</p>
 <p>これを避けるには、<code translate="no">nprobe</code> を大きく、<code translate="no">nlist</code> と<code translate="no">k</code> を小さく設定してみてください。</p>
 <p>詳しくは<a href="/docs/ja/index.md">ベクトル・インデックス</a>をご覧ください。</p>
-<h4 id="What-is-the-maximum-vector-dimension-supported-in-Milvus" class="common-anchor-header">Milvusでサポートされる最大ベクトル次元は?</h4><p>Milvusはデフォルトで32,768次元までのベクターを管理できます。<code translate="no">Proxy.maxDimension</code> の値を大きくすることで、より大きな次元のベクトルを扱うことができます。</p>
+<h4 id="What-is-the-maximum-vector-dimension-supported-in-Milvus" class="common-anchor-header">Milvusでサポートされている最大ベクトル次元は?</h4><p>Milvusはデフォルトで32,768次元までのベクターを管理できます。<code translate="no">Proxy.maxDimension</code> の値を大きくすることで、より大きな次元のベクトルを扱うことができます。</p>
 <h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">MilvusはApple M1 CPUをサポートしていますか？</h4><p>現在のMilvusはApple M1 CPUを直接サポートしておりません。Milvus 2.3以降では、ARM64アーキテクチャ用のDockerイメージが提供されます。</p>
 <h4 id="What-data-types-does-Milvus-support-on-the-primary-key-field" class="common-anchor-header">Milvusはプライマリキーフィールドでどのようなデータタイプをサポートしていますか？</h4><p>現在のリリースでは、MilvusはINT64と文字列の両方をサポートしています。</p>
 <h4 id="Is-Milvus-scalable" class="common-anchor-header">Milvusはスケーラブルですか？</h4><p>Kubernetes上のHelm Chartを利用することで、複数ノードのMilvusクラスタをデプロイすることができます。詳しくは<a href="/docs/ja/scaleout.md">スケールガイドを</a>ご参照ください。</p>
-<h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">growing segmentとsealed segmentとは何ですか？</h4><p>Milvusは検索要求が来ると、インクリメンタルデータとヒストリカルデータの両方を検索します。増分データは最近更新されたデータで、オブジェクトストレージに永続化される閾値に達する前にメモリにバッファリングされ、より効率的なインデックスが構築される成長セグメントに保存されます。一方、履歴データは少し前に更新されたもので、オブジェクト・ストレージに永続化される前にメモリ上にバッファリングされる。インクリメンタルデータとヒストリカルデータは、検索用のデータセット全体を構成する。この設計により、Milvusに取り込まれたデータは即座に検索可能となる。Milvus Distributedの場合、インジェストされたばかりのレコードがいつ検索結果に表示されるかは、より複雑な要因によって決定される。その詳細については<a href="https://milvus.io/docs/consistency.md">一貫性レベルを</a>ご覧ください。</p>
+<h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">growing segmentとsealed segmentとは何ですか？</h4><p>Milvusは検索要求が来ると、インクリメンタルデータとヒストリカルデータの両方を検索します。増分データは最近更新されたデータで、オブジェクトストレージに永続化される閾値に達する前にメモリにバッファリングされ、より効率的なインデックスが構築される成長セグメントに保存されます。一方、履歴データは少し前に更新されたもので、オブジェクト・ストレージに永続化される前にメモリ上にバッファリングされ、より効率的なインデックスが作成される。インクリメンタルデータとヒストリカルデータは、検索用のデータセット全体を構成する。この設計により、Milvusに取り込まれたデータは即座に検索可能となる。Milvus Distributedの場合、インジェストされたばかりのレコードがいつ検索結果に表示されるかは、より複雑な要因によって決定される。その詳細については<a href="https://milvus.io/docs/consistency.md">一貫性レベルを</a>ご覧ください。</p>
 <h4 id="Is-Milvus-available-for-concurrent-search" class="common-anchor-header">Milvusは同時検索に対応していますか？</h4><p>はい。Milvusは、同じコレクションに対するクエリの場合、インクリメンタルデータと履歴データを同時に検索します。ただし、異なるコレクションに対するクエリは直列に行われます。履歴データは非常に巨大なデータセットになる可能性がありますが、履歴データに対する検索は比較的時間がかかり、基本的に直列に実行されます。</p>
 <h4 id="Why-does-the-data-in-MinIO-remain-after-the-corresponding-collection-is-dropped" class="common-anchor-header">対応するコレクションが削除された後も、MinIOのデータが残るのはなぜですか？</h4><p>MinIOのデータは、データのロールバックの便宜のため、一定期間残るように設計されています。</p>
 <h4 id="Does-Milvus-support-message-engines-other-than-Pulsar" class="common-anchor-header">MilvusはPulsar以外のメッセージ・エンジンをサポートしていますか？</h4><p>はい。Milvus 2.1.0ではKafkaがサポートされています。</p>
@@ -72,9 +72,9 @@ title: 製品に関するFAQ
 <li>Float32ベクトル：10進数約7桁の精度で格納される。Float64の値もFloat32の精度で格納されるため、検索時に精度が低下する可能性がある。</li>
 <li>Float16 および BFloat16 ベクタ：精度とメモリ使用量が低減されている。Float16は帯域幅とストレージが限られたアプリケーションに適しており、BFloat16は範囲と効率のバランスが取れており、精度に大きな影響を与えることなく計算量を減らすためにディープラーニングでよく使用されます。</li>
 </ul>
-<h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvusはスカラーフィールドやベクトルフィールドのデフォルト値の指定に対応していますか？</h4><p>現在、Milvus 2.4.xではスカラーフィールドやベクトルフィールドのデフォルト値の指定はサポートしていません。この機能は将来のリリースを予定しています。</p>
+<h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvusはスカラーフィールドやベクトルフィールドのデフォルト値の指定に対応していますか？</h4><p>現在のところ、Milvus 2.4.xではスカラーフィールドやベクトルフィールドのデフォルト値の指定はサポートしていません。この機能は将来のリリースを予定しています。</p>
 <h4 id="Still-have-questions" class="common-anchor-header">まだ質問がありますか？</h4><p>できます：</p>
 <ul>
 <li>GitHubで<a href="https://github.com/milvus-io/milvus/issues">Milvusを</a>チェックしてください。質問を投げかけたり、アイデアを共有したり、他の人を助けたりすることができます。</li>
-<li><a href="https://slack.milvus.io/">Slackのコミュニティに</a>参加して、オープンソースコミュニティに参加してください。</li>
+<li>私たちの<a href="https://discord.com/invite/8uyFbECzPX">Discordサーバーに</a>参加して、サポートを探したり、私たちのオープンソースコミュニティに参加してください。</li>
 </ul>

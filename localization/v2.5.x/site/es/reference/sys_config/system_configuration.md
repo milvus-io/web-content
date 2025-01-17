@@ -62,7 +62,7 @@ En la versión actual, todos los parámetros tienen efecto sólo después de ser
 <p>Consulte <a href="/docs/es/configure_pulsar.md">Configuraciones relacionadas con</a> pulsar para obtener una descripción detallada de cada parámetro de esta sección.</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>Si desea habilitar kafka, necesita comentar las configuraciones de pulsar</p>
 <p>kafka:</p>
-<p>brokerList:</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername:</p>
 <p>saslContraseña:</p>
 <p>saslMecanismos:</p>
@@ -99,11 +99,13 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>Vea <a href="/docs/es/configure_msgchannel.md">Configuraciones relacionadas con msgChannel</a> para una descripción detallada de cada parámetro bajo esta sección.</p>
 <h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>Configura la salida de registro del sistema.</p>
 <p>Vea <a href="/docs/es/configure_log.md">Configuraciones relacionadas con log</a> para una descripción detallada de cada parámetro bajo esta sección.</p>
-<h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>Ver <a href="/docs/es/configure_grpc.md">Configuraciones relacionadas con grpc</a> para una descripción detallada de cada parámetro en esta sección.</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Configura el proxy tls enable.</p>
-<p>Consulte <a href="/docs/es/configure_tls.md">Configuraciones relacionadas con tls</a> para obtener una descripción detallada de cada parámetro de esta sección.</p>
-<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>Vea <a href="/docs/es/configure_common.md">Configuraciones relacionadas con common</a> para una descripción detallada de cada parámetro en esta sección.</p>
-<h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig, configura las cuotas y límites de Milvus.</p>
+<h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>Vea <a href="/docs/es/configure_grpc.md">Configuraciones relacionadas con grpc</a> para una descripción detallada de cada parámetro bajo esta sección.</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Configura tls externo.</p>
+<p>Ver <a href="/docs/es/configure_tls.md">Configuraciones relacionadas con tls</a> para una descripción detallada de cada parámetro en esta sección.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code></h3><p>Configurar tls interno.</p>
+<p>Ver <a href="/docs/es/configure_internaltls.md">Configuraciones relacionadas con tls interno</a> para una descripción detallada de cada parámetro en esta sección.</p>
+<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>Ver <a href="/docs/es/configure_common.md">configuraciones comunes</a> para una descripción detallada de cada parámetro en esta sección.</p>
+<h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig, configuraciones de cuota y límites de Milvus.</p>
 <p>Por defecto, habilitamos:</p>
 <ol>
 <li><p>Protección TT;</p></li>
@@ -127,3 +129,9 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#milvus inicializará automáticamente la mitad de la memoria disponible en la GPU,</p>
 <p>#maxMemSize lo hará con toda la memoria disponible de la GPU.</p>
 <p>Ver <a href="/docs/es/configure_gpu.md">Configuraciones relacionadas con la gpu</a> para una descripción detallada de cada parámetro en esta sección.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>Cualquier configuración relacionada con el servidor del nodo de streaming.</p>
+<p>Ver <a href="/docs/es/configure_streamingnode.md">Configuraciones relacionadas con el nodo de streaming</a> para una descripción detallada de cada parámetro en esta sección.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>Cualquier configuración relacionada con el servicio de streaming.</p>
+<p>Consulte <a href="/docs/es/configure_streaming.md">Configuraciones relacionadas con streaming</a> para obtener una descripción detallada de cada parámetro de esta sección.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>Cualquier configuración relacionada con el motor de búsqueda de vectores knowhere.</p>
+<p>Consulte <a href="/docs/es/configure_knowhere.md">Configuraciones relacionadas con knowhere</a> para obtener una descripción detallada de cada parámetro en esta sección.</p>

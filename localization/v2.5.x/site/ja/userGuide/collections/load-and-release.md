@@ -199,7 +199,10 @@ curl --request POST \​
         ></path>
       </svg>
     </button></h2><p>Milvusは検索やクエリに関係するフィールドのみをロードすることができ、メモリ使用量を削減し、検索パフォーマンスを向上させます。</p>
-<p>次のコード・スニペットは、<strong>customized_setup_2という</strong>名前のコレクションを作成し、コレクション内に<strong>my_idと</strong> <strong>my_vectorという</strong>2つのフィールドがあると仮定しています。</p>
+<div class="alert note">
+<p>部分的なコレクションのロードは現在ベータ版であり、実運用での使用は推奨されていません。</p>
+</div>
+<p>以下のコードスニペットは、<strong>customized_setup_2</strong> という名前のコレクションを作成し、その中に<strong>my_id</strong>と<strong>my_vector</strong>という2つのフィールドがあると仮定しています。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_collection(​

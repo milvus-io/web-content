@@ -88,7 +88,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   <tbody>
     <tr>
       <td>
-        <li>quotaCenterCollectInterval é o intervalo de tempo em que o quotaCenter</li>      
+        <li>quotaCenterCollectInterval é o intervalo de tempo que o quotaCenter</li>      
         <li>recolhe métricas de Proxies, Cluster de consulta e Cluster de dados.</li>      
         <li>segundos, (0 ~ 65536)</li>      </td>
       <td>3</td>
@@ -269,6 +269,35 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="quotaAndLimitslimitsmaxGroupSize" class="common-anchor-header"><code translate="no">quotaAndLimits.limits.maxGroupSize</code><button data-href="#quotaAndLimitslimitsmaxGroupSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limits.maxGroupSize">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        tamanho máximo de um único grupo quando se efectua uma pesquisa agrupada por   </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="quotaAndLimitsddlenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.ddl.enabled</code><button data-href="#quotaAndLimitsddlenabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -294,7 +323,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   <tbody>
     <tr>
       <td>        Se a limitação dos pedidos DDL está activada.      </td>
-      <td>false</td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -356,7 +385,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
     <tr>
       <td>
         <li>Número máximo de solicitações DDL relacionadas à partição por segundo.</li>      
-        <li>Definir este item como 10 indica que o Milvus não processa mais do que 10 pedidos relacionados com a partição por segundo, incluindo pedidos de criação de partições, pedidos de eliminação de partições, pedidos de carregamento de partições e pedidos de libertação de partições.</li>      
+        <li>Definir este item como 10 indica que o Milvus não processa mais de 10 pedidos relacionados com a partição por segundo, incluindo pedidos de criação de partições, pedidos de eliminação de partições, pedidos de carregamento de partições e pedidos de libertação de partições.</li>      
         <li>Para usar essa configuração, defina quotaAndLimits.ddl.enabled como true ao mesmo tempo.</li>      </td>
       <td>-1</td>
     </tr>
@@ -714,7 +743,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        qps do nível db, predefinição sem limite, taxa para manualCompaction      </td>
+      <td>        qps do nível db, predefinição sem limite, taxa para compactação manual      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1073,7 +1102,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
     <tr>
       <td>
         <li>Taxa máxima de eliminação de dados por segundo.</li>      
-        <li>Definir este item como 0,1 indica que o Milvus só permite a eliminação de dados de qualquer coleção a uma taxa de 0,1 MB/s.</li>      
+        <li>Definir este item como 0,1 indica que o Milvus só permite a eliminação de dados de qualquer coleção a uma velocidade de 0,1 MB/s.</li>      
         <li>Para usar esta configuração, defina quotaAndLimits.dml.enabled para true ao mesmo tempo.</li>      </td>
       <td>-1</td>
     </tr>
@@ -1190,7 +1219,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, por defeito sem limite, ainda não suportado. TODO: limitar a taxa de bulkLoad da coleção      </td>
+      <td>        MB/s, predefinição sem limite, ainda não suportado. TODO: limitar a taxa de bulkLoad da coleção      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1280,7 +1309,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
       <td>
         <li>Número máximo de vectores a pesquisar por segundo.</li>      
         <li>Definir este item como 100 indica que o Milvus só permite a pesquisa de 100 vectores por segundo, independentemente de estes 100 vectores estarem todos numa única pesquisa ou dispersos por várias pesquisas.</li>      
-        <li>Para utilizar esta definição, defina quotaAndLimits.dql.enabled para true ao mesmo tempo.</li>      </td>
+        <li>Para usar esta configuração, defina quotaAndLimits.dql.enabled para true ao mesmo tempo.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1910,7 +1939,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        switch para ativar a quota de contagem de linhas do segmento l0  </td>
+      <td>        para ativar a quota de contagem de linhas do segmento l0  </td>
       <td>falso</td>
     </tr>
   </tbody>
@@ -1940,7 +1969,7 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   <tbody>
     <tr>
       <td>        quota de contagem de linhas do segmento l0, nível de água baixo     </td>
-      <td>32768</td>
+      <td>30000000</td>
     </tr>
   </tbody>
 </table>
@@ -1968,8 +1997,182 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        quota de contagem de linhas do segmento l0, nível de água baixo     </td>
+      <td>        quota de contagem de linhas do segmento l0, nível de água elevado      </td>
+      <td>50000000</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferRowCountProtectionenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferRowCountProtection.enabled</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferRowCountProtectionenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        comutador para ativar a quota de contagem de linhas da memória intermédia de eliminação      </td>
+      <td>falso</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferRowCountProtectionlowWaterLevel" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferRowCountProtection.lowWaterLevel</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferRowCountProtectionlowWaterLevel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.lowWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        eliminar quota de contagem de linhas da memória intermédia, nível de água baixo     </td>
+      <td>32768</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferRowCountProtectionhighWaterLevel" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferRowCountProtection.highWaterLevel</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferRowCountProtectionhighWaterLevel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.highWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        eliminar quota de contagem de linhas da memória intermédia, nível de água elevado      </td>
       <td>65536</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferSizeProtectionenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferSizeProtection.enabled</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferSizeProtectionenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        comutador para ativar a quota de tamanho da memória intermédia de eliminação      </td>
+      <td>falso</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferSizeProtectionlowWaterLevel" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferSizeProtection.lowWaterLevel</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferSizeProtectionlowWaterLevel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.lowWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        eliminar quota de tamanho da memória intermédia, nível de água baixo     </td>
+      <td>134217728</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferSizeProtectionhighWaterLevel" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferSizeProtection.highWaterLevel</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferSizeProtectionhighWaterLevel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.highWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        eliminar quota de tamanho da memória intermédia, nível de água elevado      </td>
+      <td>268435456</td>
     </tr>
   </tbody>
 </table>
@@ -2001,137 +2204,6 @@ summary: Saiba como configurar o quotaAndLimits para o Milvus.
         <li>forceDeny false significa que os pedidos dql são permitidos (exceto para algumas</li>      
         <li>condições específicas, como a recolha ter sido abandonada), true significa que rejeita sempre todos os pedidos dql.</li>      </td>
       <td>false</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold" class="common-anchor-header"><code translate="no">quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code><button data-href="#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold">
-  <thead>
-    <tr>
-      <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>nqInQueueThreshold indica que o sistema estava sob contrapressão para o caminho de pesquisa/consulta.</li>      
-        <li>Se o NQ na fila de qualquer QueryNode for superior a nqInQueueThreshold, as taxas de pesquisa e consulta arrefeceriam gradualmente</li>      
-        <li>até que o NQ na fila deixe de exceder o nqInQueueThreshold. Consideramos o NQ do pedido de consulta como 1.</li>      
-        <li>int, predefinição sem limite</li>      </td>
-      <td>-1</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold" class="common-anchor-header"><code translate="no">quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</code><button data-href="#quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold">
-  <thead>
-    <tr>
-      <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>queueLatencyThreshold indicava que o sistema estava sob contrapressão para o caminho de pesquisa/consulta.</li>      
-        <li>Se a latência da fila de espera for superior a queueLatencyThreshold, as taxas de pesquisa e consulta arrefecerão gradualmente</li>      
-        <li>até que a latência do enfileiramento deixasse de exceder o queueLatencyThreshold.</li>      
-        <li>A latência aqui refere-se à latência média durante um período de tempo.</li>      
-        <li>milissegundos, predefinição sem limite</li>      </td>
-      <td>-1</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="quotaAndLimitslimitReadingresultProtectionmaxReadResultRate" class="common-anchor-header"><code translate="no">quotaAndLimits.limitReading.resultProtection.maxReadResultRate</code><button data-href="#quotaAndLimitslimitReadingresultProtectionmaxReadResultRate" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="quotaAndLimits.limitReading.resultProtection.maxReadResultRate">
-  <thead>
-    <tr>
-      <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>maxReadResultRate indicava que o sistema estava sob contrapressão para o caminho de pesquisa/consulta.</li>      
-        <li>Se a taxa de resultados de dql for superior a maxReadResultRate, as taxas de pesquisa e consulta arrefecerão gradualmente</li>      
-        <li>até que a taxa de resultados de leitura não exceda mais a maxReadResultRate.</li>      
-        <li>MB/s, predefinição sem limite</li>      </td>
-      <td>-1</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="quotaAndLimitslimitReadingcoolOffSpeed" class="common-anchor-header"><code translate="no">quotaAndLimits.limitReading.coolOffSpeed</code><button data-href="#quotaAndLimitslimitReadingcoolOffSpeed" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="quotaAndLimits.limitReading.coolOffSpeed">
-  <thead>
-    <tr>
-      <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>colOffSpeed é a velocidade de arrefecimento das taxas de pesquisa e consulta.</li>      
-        <li>(0, 1]</li>      </td>
-      <td>0.9</td>
     </tr>
   </tbody>
 </table>

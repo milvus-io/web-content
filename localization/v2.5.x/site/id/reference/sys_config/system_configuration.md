@@ -62,9 +62,9 @@ Pada rilis saat ini, semua parameter hanya berlaku setelah dikonfigurasi pada sa
 <p>Lihat <a href="/docs/id/configure_pulsar.md">Konfigurasi terkait pulsar</a> untuk penjelasan rinci untuk setiap parameter pada bagian ini.</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>Jika Anda ingin mengaktifkan kafka, Anda perlu mengomentari konfigurasi pulsar</p>
 <p>kafka:</p>
-<p>brokerList:</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername:</p>
-<p>saslKata Sandi:</p>
+<p>saslKata sandi:</p>
 <p>saslMechanisms:</p>
 <p>securityProtocol:</p>
 <p>ssl:</p>
@@ -83,7 +83,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code></h3><p>konfigurasi natsmq.</p>
 <p>detail lebih lanjut: https://docs.nats.io/running-a-nats-service/configuration</p>
 <p>Lihat <a href="/docs/id/configure_natsmq.md">Konfigurasi terkait natsmq</a> untuk penjelasan mendetail untuk setiap parameter pada bagian ini.</p>
-<h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code></h3><p>Konfigurasi terkait rootCoord, yang digunakan untuk menangani permintaan bahasa definisi data (DDL) dan bahasa kontrol data (DCL)</p>
+<h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code></h3><p>Konfigurasi terkait rootCoord, digunakan untuk menangani permintaan bahasa definisi data (DDL) dan bahasa kontrol data (DCL)</p>
 <p>Lihat <a href="/docs/id/configure_rootcoord.md">Konfigurasi terkait rootCoord</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
 <h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code></h3><p>Konfigurasi terkait proxy, digunakan untuk memvalidasi permintaan klien dan mengurangi hasil yang dikembalikan.</p>
 <p>Lihat <a href="/docs/id/configure_proxy.md">Konfigurasi terkait proxy</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
@@ -100,8 +100,10 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>Mengkonfigurasi output log sistem.</p>
 <p>Lihat <a href="/docs/id/configure_log.md">Konfigurasi terkait log</a> untuk penjelasan rinci untuk setiap parameter dalam bagian ini.</p>
 <h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>Lihat <a href="/docs/id/configure_grpc.md">Konfigurasi terkait grpc</a> untuk penjelasan rinci untuk setiap parameter dalam bagian ini.</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Mengonfigurasi pengaktifan tls proxy.</p>
-<p>Lihat <a href="/docs/id/configure_tls.md">Konfigurasi terkait tls</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Mengkonfigurasi tls eksternal.</p>
+<p>Lihat <a href="/docs/id/configure_tls.md">Konfigurasi terkait tls</a> untuk penjelasan rinci untuk setiap parameter pada bagian ini.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code></h3><p>Mengonfigurasi tls internal.</p>
+<p>Lihat <a href="/docs/id/configure_internaltls.md">Konfigurasi terkait tls internal</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
 <h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>Lihat <a href="/docs/id/configure_common.md">Konfigurasi terkait umum</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
 <h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig, konfigurasi kuota dan batas Milvus.</p>
 <p>Secara default, kami mengaktifkan:</p>
@@ -126,4 +128,10 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#Jika initMemSize dan MaxMemSize keduanya bernilai nol,</p>
 <p>#milvus akan secara otomatis menginisialisasi setengah dari memori GPU yang tersedia,</p>
 <p>#maxMemSize akan menginisialisasi seluruh memori GPU yang tersedia.</p>
-<p>Lihat <a href="/docs/id/configure_gpu.md">Konfigurasi terkait GPU</a> untuk penjelasan rinci untuk setiap parameter pada bagian ini.</p>
+<p>Lihat <a href="/docs/id/configure_gpu.md">Konfigurasi terkait GPU</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>Konfigurasi apa pun yang terkait dengan server node streaming.</p>
+<p>Lihat <a href="/docs/id/configure_streamingnode.md">Konfigurasi terkait streamingNode</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>Konfigurasi apa pun yang terkait dengan layanan streaming.</p>
+<p>Lihat <a href="/docs/id/configure_streaming.md">Konfigurasi terkait streaming</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>Konfigurasi apa pun yang terkait dengan mesin pencari vektor knowhere</p>
+<p>Lihat <a href="/docs/id/configure_knowhere.md">Konfigurasi terkait knowhere</a> untuk penjelasan rinci untuk setiap parameter di bagian ini.</p>

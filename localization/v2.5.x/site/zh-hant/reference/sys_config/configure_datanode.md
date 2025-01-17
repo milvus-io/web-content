@@ -665,6 +665,35 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
     </tr>
   </tbody>
 </table>
+<h2 id="dataNodeimportmaxTaskSlotNum" class="common-anchor-header"><code translate="no">dataNode.import.maxTaskSlotNum</code><button data-href="#dataNodeimportmaxTaskSlotNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.import.maxTaskSlotNum">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        每個匯入/匯入前工作佔用的最大插槽數。      </td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataNodecompactionlevelZeroBatchMemoryRatio" class="common-anchor-header"><code translate="no">dataNode.compaction.levelZeroBatchMemoryRatio</code><button data-href="#dataNodecompactionlevelZeroBatchMemoryRatio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -690,7 +719,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   <tbody>
     <tr>
       <td>        以批次模式執行第零層壓縮的最小可用記憶體比率      </td>
-      <td>0.05</td>
+      <td>0.5</td>
     </tr>
   </tbody>
 </table>
@@ -720,6 +749,64 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
     <tr>
       <td>        最大批次大小指執行 L0 壓縮時，批次中 L1/L2 區段的最大數目。預設值為 -1，任何小於 1 的值表示沒有限制。有效範圍：&gt;= 1.  </td>
       <td>-1</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodecompactionuseMergeSort" class="common-anchor-header"><code translate="no">dataNode.compaction.useMergeSort</code><button data-href="#dataNodecompactionuseMergeSort" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.useMergeSort">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        執行 mixCompaction 時，是否啟用 mergeSort 模式。      </td>
+      <td>假</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodecompactionmaxSegmentMergeSort" class="common-anchor-header"><code translate="no">dataNode.compaction.maxSegmentMergeSort</code><button data-href="#dataNodecompactionmaxSegmentMergeSort" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.maxSegmentMergeSort">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        在 mergeSort 模式中要合併的最大區段數。      </td>
+      <td>30</td>
     </tr>
   </tbody>
 </table>
@@ -806,7 +893,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   <tbody>
     <tr>
       <td>        叢集壓縮的記憶體緩衝區比率。大於臨界值的資料會被沖到儲存區。      </td>
-      <td>0.1</td>
+      <td>0.3</td>
     </tr>
   </tbody>
 </table>
@@ -839,6 +926,64 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
     </tr>
   </tbody>
 </table>
+<h2 id="dataNodebloomFilterApplyParallelFactor" class="common-anchor-header"><code translate="no">dataNode.bloomFilterApplyParallelFactor</code><button data-href="#dataNodebloomFilterApplyParallelFactor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.bloomFilterApplyParallelFactor">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        將 pk 應用於 bloom filter 時的平行因子，預設為 4*CPU_CORE_NUM      </td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodestoragedeltalog" class="common-anchor-header"><code translate="no">dataNode.storage.deltalog</code><button data-href="#dataNodestoragedeltalog" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.storage.deltalog">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        deltalog 格式，選項：[json, parquet］      </td>
+      <td>json</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataNodeip" class="common-anchor-header"><code translate="no">dataNode.ip</code><button data-href="#dataNodeip" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -863,7 +1008,7 @@ summary: 瞭解如何為 Milvus 設定 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        dataNode 的 TCP/IP 位址。如果未指定，則使用第一個可單點傳送的位址。      </td>
+      <td>        dataNode 的 TCP/IP 位址。如果未指定，則使用第一個可單點傳送的位址      </td>
       <td></td>
     </tr>
   </tbody>

@@ -62,8 +62,8 @@ In der aktuellen Version werden alle Parameter erst wirksam, nachdem sie beim St
 <p>Siehe <a href="/docs/de/configure_pulsar.md">pulsar-bezogene Konfigurationen</a> für eine detaillierte Beschreibung der einzelnen Parameter in diesem Abschnitt.</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>Wenn Sie kafka aktivieren wollen, müssen Sie die pulsar-Konfigurationen kommentieren</p>
 <p>kafka:</p>
-<p>brokerList:</p>
-<p>saslUsername:</p>
+<p>brokerList: localhost:9092</p>
+<p>saslBenutzername:</p>
 <p>saslPassword:</p>
 <p>saslMechanisms:</p>
 <p>securityProtocol:</p>
@@ -100,9 +100,11 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>Konfiguriert die Ausgabe des Systemprotokolls.</p>
 <p>Siehe <a href="/docs/de/configure_log.md">log-bezogene Konfigurationen</a> für eine detaillierte Beschreibung der einzelnen Parameter in diesem Abschnitt.</p>
 <h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>Siehe <a href="/docs/de/configure_grpc.md">grpc-bezogene Konfigurationen</a> für eine ausführliche Beschreibung der einzelnen Parameter in diesem Abschnitt.</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Konfiguriert den Proxy tls enable.</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Konfigurieren Sie externes tls.</p>
 <p>Siehe <a href="/docs/de/configure_tls.md">tls-bezogene Konfigurationen</a> für eine ausführliche Beschreibung der einzelnen Parameter in diesem Abschnitt.</p>
-<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>Eine ausführliche Beschreibung der einzelnen Parameter in diesem Abschnitt finden Sie unter <a href="/docs/de/configure_common.md">Konfigurationen für allgemeine Zwecke</a>.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code></h3><p>Internes tls konfigurieren.</p>
+<p>Siehe <a href="/docs/de/configure_internaltls.md">internaltls-bezogene Konfigurationen</a> für eine ausführliche Beschreibung der einzelnen Parameter in diesem Abschnitt.</p>
+<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>Eine ausführliche Beschreibung der einzelnen Parameter in diesem Abschnitt finden Sie unter <a href="/docs/de/configure_common.md">Konfigurationen im Zusammenhang mit common-related</a>.</p>
 <h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig, Konfigurationen der Milvus-Quote und -Limits.</p>
 <p>Standardmäßig sind aktiviert:</p>
 <ol>
@@ -127,3 +129,9 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>wird #milvus automatisch die Hälfte des verfügbaren GPU-Speichers initialisieren,</p>
 <p>#maxMemSize wird der gesamte verfügbare GPU-Speicher.</p>
 <p>Siehe <a href="/docs/de/configure_gpu.md">gpu-bezogene Konfigurationen</a> für eine detaillierte Beschreibung für jeden Parameter in diesem Abschnitt.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>Jede Konfiguration, die sich auf den Streaming Node Server bezieht.</p>
+<p>Siehe <a href="/docs/de/configure_streamingnode.md">streamingNode-related Configurations</a> für eine detaillierte Beschreibung der einzelnen Parameter in diesem Abschnitt.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>Alle Konfigurationen, die sich auf den Streaming-Dienst beziehen.</p>
+<p>Siehe <a href="/docs/de/configure_streaming.md">Streaming-bezogene Konfigurationen</a> für eine detaillierte Beschreibung der einzelnen Parameter in diesem Abschnitt.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>Alle Konfigurationen, die sich auf die knowhere-Vektorsuchmaschine beziehen</p>
+<p>Siehe <a href="/docs/de/configure_knowhere.md">knowhere-bezogene Konfigurationen</a> für eine detaillierte Beschreibung der einzelnen Parameter in diesem Abschnitt.</p>

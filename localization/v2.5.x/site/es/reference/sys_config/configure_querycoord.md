@@ -399,6 +399,37 @@ summary: Aprenda a configurar queryCoord para Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="queryCoordcollectionChannelCountFactor" class="common-anchor-header"><code translate="no">queryCoord.collectionChannelCountFactor</code><button data-href="#queryCoordcollectionChannelCountFactor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryCoord.collectionChannelCountFactor">
+  <thead>
+    <tr>
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>El peso del recuento de canales utilizado para equilibrar los canales entre los nodos de consulta, </li>      
+        <li>        Un valor más alto reduce la probabilidad de asignar canales de la misma colección al mismo QueryNode. Establézcalo a 1 para desactivar esta función.</li>      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryCoordsegmentCountMaxSteps" class="common-anchor-header"><code translate="no">queryCoord.segmentCountMaxSteps</code><button data-href="#queryCoordsegmentCountMaxSteps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -423,7 +454,7 @@ summary: Aprenda a configurar queryCoord para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        pasos máximos del generador de planes basado en el recuento de segmentos      </td>
+      <td>        recuento de segmentos basado en el generador de planes pasos máximos      </td>
       <td>50</td>
     </tr>
   </tbody>
@@ -655,7 +686,7 @@ summary: Aprenda a configurar queryCoord para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        10s, Sólo están disponibles los QueryNodes que obtuvieron latidos dentro de esa duración      </td>
+      <td>        10s, Sólo están disponibles los QueryNodes que obtuvieron latidos dentro de la duración      </td>
       <td>10000</td>
     </tr>
   </tbody>
@@ -1090,7 +1121,7 @@ summary: Aprenda a configurar queryCoord para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        5m, intervalo máximo para actualizar el estado cargado de la colección      </td>
+      <td>        5m, intervalo máximo de actualización del estado cargado de la colección para comprobar la salud     </td>
       <td>5</td>
     </tr>
   </tbody>

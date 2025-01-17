@@ -50,7 +50,7 @@ summary: Grafana에서 Milvus 서비스에 대한 알림을 만드는 방법을 
 </thead>
 <tbody>
 <tr><td>CPU 사용량</td><td>CPU의 실행 시간으로 표시되는 Milvus 컴포넌트의 CPU 사용량입니다.</td><td>초</td></tr>
-<tr><td>Memory</td><td>Milvus 컴포넌트가 사용한 메모리 리소스입니다.</td><td>MB</td></tr>
+<tr><td>Memory</td><td>Milvus 컴포넌트가 소비하는 메모리 리소스입니다.</td><td>MB</td></tr>
 <tr><td>고루틴</td><td>GO 언어로 동시에 실행되는 활동.</td><td>/</td></tr>
 <tr><td>OS 스레드</td><td>운영 체제의 스레드 또는 경량 프로세스.</td><td>/</td></tr>
 <tr><td>프로세스 열린 Fds</td><td>현재 사용된 파일 디스크립터의 개수입니다.</td><td>/</td></tr>
@@ -71,8 +71,8 @@ summary: Grafana에서 Milvus 서비스에 대한 알림을 만드는 방법을 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 가이드에서는 Milvus 컴포넌트의 메모리 사용량에 대한 알림을 생성하는 예제를 사용합니다. 다른 유형의 경고를 생성하려면 그에 맞게 명령을 조정하세요. 이 과정에서 문제가 발생하면 언제든지 <a href="https://discuss.milvus.io/">Milvus 포럼에서</a> 질문하거나 <a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">Slack에서</a> 토론을 시작하세요.</p>
-<h3 id="Prerequisites" class="common-anchor-header">전제 조건</h3><p>이 튜토리얼에서는 Grafana가 설치 및 구성되어 있다고 가정합니다. 그렇지 않은 경우 <a href="/docs/ko/monitor.md">모니터링 가이드를</a> 읽어보시기 바랍니다.</p>
+    </button></h2><p>이 가이드에서는 Milvus 컴포넌트의 메모리 사용량에 대한 알림을 생성하는 예제를 사용합니다. 다른 유형의 경고를 생성하려면 그에 맞게 명령을 조정하세요. 이 과정에서 문제가 발생하면 언제든지 <a href="https://github.com/milvus-io/milvus/discussions">Github 토론에서</a> 질문하거나 <a href="https://discord.com/invite/8uyFbECzPX">Discord에서</a> 스레드를 시작하세요.</p>
+<h3 id="Prerequisites" class="common-anchor-header">전제 조건</h3><p>이 튜토리얼은 Grafana가 설치 및 구성되었다고 가정합니다. 그렇지 않은 경우 <a href="/docs/ko/monitor.md">모니터링 가이드를</a> 읽어보시기 바랍니다.</p>
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. 새 쿼리 추가하기</h3><p>Milvus 구성 요소의 메모리 사용량에 대한 알림을 추가하려면 메모리 패널을 편집합니다. 그런 다음 메트릭을 사용하여 새 쿼리를 추가합니다: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   

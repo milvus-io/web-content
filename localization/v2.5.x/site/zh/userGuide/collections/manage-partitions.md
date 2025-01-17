@@ -617,14 +617,14 @@ curl --request POST \​
       </svg>
     </button></h2><h3 id="Insert-and-Delete-Entities​" class="common-anchor-header">插入和删除实体</h3><p>您可以在特定操作符中执行插入、向上插入和删除操作。有关详情，请参阅</p>
 <ul>
-<li><p>将实体插入分区</p></li>
-<li><p>将实体倒插入分区</p></li>
-<li><p>从分区删除实体</p></li>
+<li><p><a href="/docs/zh/insert-update-delete.md#Insert-Entities-into-a-Partition">将实体插入分区</a></p></li>
+<li><p><a href="/docs/zh/upsert-entities.md#Upsert-Entities-in-a-Partition">将实体倒插入分区</a></p></li>
+<li><p><a href="/docs/zh/delete-entities.md#Delete-Entities-from-Partitions">从分区删除实体</a></p></li>
 </ul>
 <h3 id="Search-and-Query​" class="common-anchor-header">搜索和查询</h3><p>可以在特定分区内进行搜索和查询。详情请参阅</p>
 <ul>
-<li><p>在分区内进行 ANN 搜索</p></li>
-<li><p>在分区内进行元数据过滤</p></li>
+<li><p><a href="/docs/zh/single-vector-search.md#ANN-Search-in-Partition">在分区内进行 ANN 搜索</a></p></li>
+<li><p><a href="/docs/zh/filtered-search.md">在分区内进行元数据过滤</a></p></li>
 </ul>
 <h2 id="Drop-Partition​" class="common-anchor-header">删除分区<button data-href="#Drop-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -565,7 +565,7 @@
                     "children": []
                   },
                   {
-                    "label": "Остановите",
+                    "label": "Остановить",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -1472,26 +1472,26 @@
             "isMenu": true,
             "children": [
               {
+                "label": "Резервное копирование и восстановление в одном экземпляре",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "Миграция между экземплярами в одном ведре",
                 "id": "shared-bucket-backup-and-restore.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Миграция между экземплярами и ведрами",
                 "id": "cross-bucket-backup-and-restore.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Миграция между экземплярами в средах S3",
                 "id": "multi-storage-backup-and-restore.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Резервное копирование и восстановление в одном экземпляре",
-                "id": "single-instance-backup-and-restore.md",
                 "order": 3,
                 "children": []
               }

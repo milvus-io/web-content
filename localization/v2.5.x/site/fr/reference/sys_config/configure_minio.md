@@ -2,7 +2,7 @@
 id: configure_minio.md
 related_key: configure
 group: system_configuration.md
-summary: Apprenez à configurer minio pour Milvus.
+summary: Découvrez comment configurer minio pour Milvus.
 ---
 <h1 id="minio-related-Configurations" class="common-anchor-header">Configurations liées à Minio<button data-href="#minio-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -340,11 +340,45 @@ summary: Apprenez à configurer minio pour Milvus.
     <tr>
       <td>
         <li>Fournisseur de cloud pour S3. Prend en charge : "aws", "gcp", "aliyun".</li>      
+        <li>Fournisseur en nuage de Google Cloud Storage. Prend en charge : "aws", "gcp", "aliyun" : "gcpnative".</li>      
         <li>Vous pouvez utiliser "aws" pour un autre fournisseur de cloud qui prend en charge l'API S3 avec la signature v4, par exemple : minio.</li>      
         <li>Vous pouvez utiliser "gcp" pour un autre fournisseur de cloud qui prend en charge l'API S3 avec la signature v2.</li>      
         <li>Vous pouvez utiliser "aliyun" pour un autre fournisseur de cloud qui utilise un bucket de type hôte virtuel.</li>      
+        <li>Vous pouvez utiliser "gcpnative" pour le fournisseur Google Cloud Platform. Utilise les informations d'identification du compte de service</li>      
+        <li>pour l'authentification.</li>      
         <li>Lorsque l'option useIAM est activée, seuls "aws", "gcp" et "aliyun" sont pris en charge pour l'instant.</li>      </td>
       <td>aws</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="miniogcpCredentialJSON" class="common-anchor-header"><code translate="no">minio.gcpCredentialJSON</code><button data-href="#miniogcpCredentialJSON" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="minio.gcpCredentialJSON">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Le contenu JSON contient les informations d'identification du compte du service gcs.</li>      
+        <li>Utilisé uniquement pour le fournisseur de cloud "gcpnative".</li>      </td>
+      <td></td>
     </tr>
   </tbody>
 </table>
@@ -374,7 +408,7 @@ summary: Apprenez à configurer minio pour Milvus.
     <tr>
       <td>
         <li>Point de terminaison personnalisé pour récupérer les informations d'identification du rôle IAM lorsque useIAM est vrai et que cloudProvider est "aws".</li>      
-        <li>Laissez-le vide si vous voulez utiliser le point de terminaison par défaut d'AWS.</li>      </td>
+        <li>Laissez-le vide si vous souhaitez utiliser le point de terminaison par défaut d'AWS.</li>      </td>
       <td></td>
     </tr>
   </tbody>
@@ -403,7 +437,7 @@ summary: Apprenez à configurer minio pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Niveau de journalisation pour le journal du sdk d'aws. Niveaux pris en charge : off, fatal, error, warn, info, debug, trace     </td>
+      <td>        Niveau de journal pour le journal du sdk d'aws. Niveaux pris en charge : off, fatal, error, warn, info, debug, trace     </td>
       <td>fatal</td>
     </tr>
   </tbody>

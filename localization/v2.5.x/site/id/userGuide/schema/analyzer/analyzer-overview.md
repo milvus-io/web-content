@@ -52,9 +52,12 @@ summary: >-
 <li><p><strong>Tokenizer</strong>: Tokenizer memecah teks masukan menjadi unit-unit diskrit yang disebut token. Token-token ini dapat berupa kata atau frasa, tergantung pada jenis tokenizer.</p></li>
 <li><p><strong>Filter</strong>: Filter dapat diterapkan pada token untuk menyempurnakannya lebih lanjut, misalnya, dengan membuatnya menjadi huruf kecil atau menghapus kata-kata umum.</p></li>
 </ul>
+<div class="alert note">
+<p>Tokenizer hanya mendukung format UTF-8. Dukungan untuk format lain akan ditambahkan dalam rilis mendatang.</p>
+</div>
 <p>Alur kerja di bawah ini menunjukkan bagaimana penganalisis memproses teks.</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/analyzer-overview.png" alt="analyzer-overview" width="400"/></p>
-<h2 id="Analyzer-types​" class="common-anchor-header">Jenis-jenis penganalisis<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">
+<h2 id="Analyzer-types​" class="common-anchor-header">Tipe-tipe penganalisis<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +74,7 @@ summary: >-
       </svg>
     </button></h2><p>Milvus menyediakan dua jenis penganalisis untuk memenuhi kebutuhan pemrosesan teks yang berbeda.</p>
 <ul>
-<li><p><strong>Penganalisis bawaan</strong>: Ini adalah konfigurasi yang telah ditentukan sebelumnya yang mencakup tugas pemrosesan teks umum dengan pengaturan minimal. Penganalisis bawaan ideal untuk pencarian tujuan umum, karena tidak memerlukan konfigurasi yang rumit.</p></li>
+<li><p><strong>Penganalisis bawaan</strong>: Ini adalah konfigurasi yang sudah ditentukan sebelumnya yang mencakup tugas pemrosesan teks umum dengan pengaturan minimal. Penganalisis bawaan ideal untuk pencarian tujuan umum, karena tidak memerlukan konfigurasi yang rumit.</p></li>
 <li><p><strong>Penganalisis khusus</strong>: Untuk kebutuhan yang lebih canggih, penganalisis khusus memungkinkan Anda untuk menentukan konfigurasi Anda sendiri dengan menentukan tokenizer dan nol atau lebih filter. Tingkat kustomisasi ini sangat berguna untuk kasus penggunaan khusus yang membutuhkan kontrol yang tepat atas pemrosesan teks.</p></li>
 </ul>
 <div class="alert note">
@@ -153,7 +156,7 @@ analyzerParams.<span class="hljs-title function_">put</span>(<span class="hljs-s
 <li><p><code translate="no">english</code>: Dioptimalkan untuk teks berbahasa Inggris, dengan dukungan untuk stop words dalam bahasa Inggris.</p></li>
 <li><p><code translate="no">chinese</code>: Khusus untuk memproses teks bahasa Mandarin, termasuk tokenisasi yang diadaptasi untuk struktur bahasa Mandarin.</p></li>
 </ul>
-<h3 id="Custom-analyzer​" class="common-anchor-header">Penganalisis khusus</h3><p>Untuk pemrosesan teks yang lebih canggih, penganalisis khusus di Milvus memungkinkan Anda untuk membuat pipeline penanganan teks yang disesuaikan dengan menentukan <strong>tokenizer</strong> dan filter. Pengaturan ini ideal untuk kasus penggunaan khusus yang membutuhkan kontrol yang tepat.</p>
+<h3 id="Custom-analyzer​" class="common-anchor-header">Penganalisis khusus</h3><p>Untuk pemrosesan teks yang lebih canggih, penganalisis khusus di Milvus memungkinkan Anda untuk membuat pipeline penanganan teks yang disesuaikan dengan menentukan <strong>tokenizer</strong> dan filter. Pengaturan ini ideal untuk kasus penggunaan khusus yang memerlukan kontrol yang tepat.</p>
 <h4 id="Tokenizer​" class="common-anchor-header">Tokenizer</h4><p><strong>Tokenizer</strong> adalah komponen <strong>wajib</strong> untuk penganalisis khusus, yang memulai pipeline penganalisis dengan memecah teks input menjadi unit diskrit atau <strong>token</strong>. Tokenisasi mengikuti aturan khusus, seperti pemisahan dengan spasi atau tanda baca, tergantung pada jenis tokenizer. Proses ini memungkinkan penanganan yang lebih tepat dan independen untuk setiap kata atau frasa.</p>
 <p>Sebagai contoh, tokenizer akan mengubah teks <code translate="no">&quot;Vector Database Built for Scale&quot;</code> menjadi token-token yang terpisah.</p>
 <pre><code translate="no" class="language-Plain Text">[<span class="hljs-string">&quot;Vector&quot;</span>, <span class="hljs-string">&quot;Database&quot;</span>, <span class="hljs-string">&quot;Built&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>, <span class="hljs-string">&quot;Scale&quot;</span>]​

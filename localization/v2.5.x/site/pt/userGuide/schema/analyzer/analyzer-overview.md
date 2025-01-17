@@ -52,6 +52,9 @@ summary: >-
 <li><p><strong>Tokenizador</strong>: O tokenizador divide o texto de entrada em unidades discretas chamadas tokens. Esses tokens podem ser palavras ou frases, dependendo do tipo de tokenizador.</p></li>
 <li><p><strong>Filtros</strong>: Os filtros podem ser aplicados aos tokens para refiná-los ainda mais, por exemplo, tornando-os minúsculos ou removendo palavras comuns.</p></li>
 </ul>
+<div class="alert note">
+<p>Os Tokenizers suportam apenas o formato UTF-8. O suporte para outros formatos será adicionado em versões futuras.</p>
+</div>
 <p>O fluxo de trabalho abaixo mostra como um analisador processa o texto.</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/analyzer-overview.png" alt="analyzer-overview" width="400"/></p>
 <h2 id="Analyzer-types​" class="common-anchor-header">Tipos de analisadores<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">
@@ -69,7 +72,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus fornece dois tipos de analisadores para atender a diferentes necessidades de processamento de texto.</p>
+    </button></h2><p>O Milvus fornece dois tipos de analisadores para responder a diferentes necessidades de processamento de texto.</p>
 <ul>
 <li><p><strong>Analisador incorporado</strong>: Trata-se de configurações predefinidas que abrangem tarefas comuns de processamento de texto com um mínimo de configuração. Os analisadores incorporados são ideais para pesquisas de carácter geral, uma vez que não requerem uma configuração complexa.</p></li>
 <li><p><strong>Analisador personalizado</strong>: Para requisitos mais avançados, os analisadores personalizados permitem-lhe definir a sua própria configuração, especificando o tokenizador e zero ou mais filtros. Este nível de personalização é especialmente útil para casos de utilização especializados em que é necessário um controlo preciso do processamento de texto.</p></li>
@@ -77,7 +80,7 @@ summary: >-
 <div class="alert note">
 <p>Se omitir as configurações do analisador durante a criação da coleção, o Milvus utiliza por defeito o analisador <code translate="no">standard</code> para todo o processamento de texto. Para obter detalhes, consulte <a href="/docs/pt/standard-analyzer.md">Padrão</a>.</p>
 </div>
-<h3 id="Built-in-analyzer​" class="common-anchor-header">Analisador incorporado</h3><p>Os analisadores incorporados no Milvus são pré-configurados com tokenizadores e filtros específicos, permitindo a sua utilização imediata sem necessidade de definir estes componentes. Cada analisador incorporado serve como um modelo que inclui um tokenizador e filtros predefinidos, com parâmetros opcionais para personalização.</p>
+<h3 id="Built-in-analyzer​" class="common-anchor-header">Analisador incorporado</h3><p>Os analisadores incorporados no Milvus são pré-configurados com tokenizadores e filtros específicos, permitindo a sua utilização imediata sem necessidade de definir estes componentes. Cada analisador integrado serve como um modelo que inclui um tokenizador e filtros predefinidos, com parâmetros opcionais para personalização.</p>
 <p>Por exemplo, para usar o analisador interno <code translate="no">standard</code>, basta especificar seu nome <code translate="no">standard</code> como <code translate="no">type</code> e, opcionalmente, incluir configurações extras específicas para esse tipo de analisador, como <code translate="no">stop_words</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -150,7 +153,7 @@ analyzerParams.<span class="hljs-title function_">put</span>(<span class="hljs-s
 <p>O Milvus oferece os seguintes analisadores integrados, cada um dos quais pode ser utilizado diretamente especificando o seu nome como parâmetro <code translate="no">type</code>.</p>
 <ul>
 <li><p><code translate="no">standard</code>: Adequado para processamento de texto de uso geral, aplicando tokenização padrão e filtragem de minúsculas.</p></li>
-<li><p><code translate="no">english</code>: Optimizado para texto em inglês, com suporte para stop words em inglês.</p></li>
+<li><p><code translate="no">english</code>: Optimizado para texto em inglês, com suporte para palavras de paragem em inglês.</p></li>
 <li><p><code translate="no">chinese</code>: Especializado para o processamento de texto chinês, incluindo tokenização adaptada às estruturas da língua chinesa.</p></li>
 </ul>
 <h3 id="Custom-analyzer​" class="common-anchor-header">Analisador personalizado</h3><p>Para um processamento de texto mais avançado, os analisadores personalizados no Milvus permitem-lhe construir um pipeline de tratamento de texto personalizado, especificando tanto um <strong>tokenizador</strong> como filtros. Esta configuração é ideal para casos de utilização especializados em que é necessário um controlo preciso.</p>
@@ -275,7 +278,7 @@ analyzerParams.<span class="hljs-title function_">put</span>(<span class="hljs-s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Neste exemplo, definimos um esquema de coleção com um campo vetorial para incorporações e dois campos <code translate="no">VARCHAR</code> para capacidades de processamento de texto. Cada campo <code translate="no">VARCHAR</code> é configurado com as suas próprias definições de analisador para lidar com diferentes necessidades de processamento.</p>
+    </button></h2><p>Neste exemplo, definimos um esquema de coleção com um campo de vetor para incorporações e dois campos <code translate="no">VARCHAR</code> para capacidades de processamento de texto. Cada campo <code translate="no">VARCHAR</code> é configurado com as suas próprias definições de analisador para lidar com diferentes necessidades de processamento.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​

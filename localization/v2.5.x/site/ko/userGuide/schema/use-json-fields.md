@@ -519,4 +519,5 @@ System.out.println(resp.getSearchResults());​
 <li><p><strong>이름 지정 제한</strong>: 다른 문자는 필터링이나 검색 중에 문제를 일으킬 수 있으므로 JSON 키의 이름을 지정할 때는 문자, 숫자, 밑줄만 사용하는 것이 좋습니다.</p></li>
 <li><p><strong>문자열 값 처리하기</strong>: 문자열 값(<code translate="no">VARCHAR</code>)의 경우, Milvus는 의미 변환 없이 JSON 필드 문자열을 그대로 저장합니다. 예를 들어 <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, <code translate="no">&quot;a\\&quot;b&quot;</code> 은 입력한 대로 저장되지만 <code translate="no">'a'b'</code> 과 <code translate="no">&quot;a&quot;b&quot;</code> 은 유효하지 않은 것으로 간주됩니다.</p></li>
 <li><p><strong>중첩된 사전 처리</strong>: JSON 필드 값 내에 중첩된 사전은 모두 문자열로 처리됩니다.</p></li>
+<li><p><strong>JSON 필드 크기 제한</strong>: JSON 필드는 65,536바이트로 제한됩니다.</p></li>
 </ul>

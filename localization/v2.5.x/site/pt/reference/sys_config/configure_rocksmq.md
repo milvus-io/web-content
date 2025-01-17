@@ -21,7 +21,7 @@ summary: Saiba como configurar o rocksmq para o Milvus.
       </svg>
     </button></h1><p>Se quiser ativar o kafka, tem de comentar as configurações do pulsar</p>
 <p>kafka:</p>
-<p>brokerList:</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername:</p>
 <p>saslPassword:</p>
 <p>saslMechanisms:</p>
@@ -63,7 +63,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
   <tbody>
     <tr>
       <td>
-        <li>Prefixo da chave onde o Milvus armazena os dados no RocksMQ.</li>      
+        <li>Prefixo da chave para onde o Milvus armazena os dados no RocksMQ.</li>      
         <li>Atenção: Alterar este parâmetro depois de usar o Milvus por um período de tempo afetará o acesso a dados antigos.</li>      
         <li>Recomenda-se alterar este parâmetro antes de iniciar o Milvus pela primeira vez.</li>      
         <li>Defina um prefixo de chave raiz fácil de identificar para o Milvus se o serviço etcd já existir.</li>      </td>
@@ -124,7 +124,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
   </thead>
   <tbody>
     <tr>
-      <td>        O tamanho máximo de mensagens em cada página no RocksMQ. As mensagens no RocksMQ são verificadas e apagadas (quando expiradas) em lote com base nesses parâmetros. Unidade: Byte.      </td>
+      <td>        O tamanho máximo de mensagens em cada página no RocksMQ. As mensagens no RocksMQ são verificadas e apagadas (quando expiradas) em lote com base nestes parâmetros. Unidade: Byte.      </td>
       <td>67108864</td>
     </tr>
   </tbody>

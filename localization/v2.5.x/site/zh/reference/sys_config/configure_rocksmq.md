@@ -21,7 +21,7 @@ summary: 了解如何为 Milvus 配置 rocksmq。
       </svg>
     </button></h1><p>如果要启用 kafka，需要对 pulsar 配置进行注释</p>
 <p>kafka：</p>
-<p>brokerList：</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername：</p>
 <p>saslPassword：</p>
 <p>saslMechanisms：</p>
@@ -240,7 +240,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
   </thead>
   <tbody>
     <tr>
-      <td>        压缩类型，只支持使用 0、7。0 表示不压缩，7 表示使用 zstd。类型的长度表示 rocksdb 级别的数量。      </td>
+      <td>        压缩类型，只支持使用 0、7。0 表示不压缩，7 表示使用 zstd。类型的长度表示 rockdb 级别的数量。      </td>
       <td>0,0,7,7,7</td>
     </tr>
   </tbody>

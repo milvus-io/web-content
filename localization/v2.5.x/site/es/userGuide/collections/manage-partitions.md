@@ -617,14 +617,14 @@ curl --request POST \​
       </svg>
     </button></h2><h3 id="Insert-and-Delete-Entities​" class="common-anchor-header">Insertar y Borrar Entidades</h3><p>Puede realizar operaciones de inserción, inserción ascendente y eliminación en operaciones específicas. Para más detalles, consulte</p>
 <ul>
-<li><p>Insertar Entidades en una Partición</p></li>
-<li><p>Insertar Entidades en la Partición</p></li>
-<li><p>Borrar Entidades de la Partición</p></li>
+<li><p><a href="/docs/es/insert-update-delete.md#Insert-Entities-into-a-Partition">Insertar Entidades en una Partición</a></p></li>
+<li><p><a href="/docs/es/upsert-entities.md#Upsert-Entities-in-a-Partition">Insertar Entidades en la Partición</a></p></li>
+<li><p><a href="/docs/es/delete-entities.md#Delete-Entities-from-Partitions">Borrar Entidades de la Partición</a></p></li>
 </ul>
 <h3 id="Search-and-Query​" class="common-anchor-header">Búsqueda y Consulta</h3><p>Puede realizar búsquedas y consultas dentro de particiones específicas. Para más detalles, consulte</p>
 <ul>
-<li><p>Realizar Búsquedas RNA dentro de Particiones</p></li>
-<li><p>Filtrado de metadatos en particiones</p></li>
+<li><p><a href="/docs/es/single-vector-search.md#ANN-Search-in-Partition">Realizar Búsquedas RNA dentro de Particiones</a></p></li>
+<li><p><a href="/docs/es/filtered-search.md">Filtrado de metadatos en particiones</a></p></li>
 </ul>
 <h2 id="Drop-Partition​" class="common-anchor-header">Eliminar particiones<button data-href="#Drop-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"

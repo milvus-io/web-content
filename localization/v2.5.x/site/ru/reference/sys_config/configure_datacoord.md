@@ -43,37 +43,8 @@ summary: 'Узнайте, как настроить dataCoord для Milvus.'
   </thead>
   <tbody>
     <tr>
-      <td>        Таймаут на просмотр каналов (в секундах). При обновлении тиклера Датанод прогресс просмотра сбрасывает таймер таймаута.      </td>
+      <td>        Таймаут на просмотр каналов (в секундах). При обновлении тиклеров Датанод прогресс просмотра сбрасывает таймер таймаута.      </td>
       <td>300</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="dataCoordchannelbalanceWithRpc" class="common-anchor-header"><code translate="no">dataCoord.channel.balanceWithRpc</code><button data-href="#dataCoordchannelbalanceWithRpc" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.channel.balanceWithRpc">
-  <thead>
-    <tr>
-      <th class="width80">Описание</th>
-      <th class="width20">Значение по умолчанию</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Включать ли балансировку с помощью RPC, по умолчанию используется etcd watch     </td>
-      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -101,7 +72,7 @@ summary: 'Узнайте, как настроить dataCoord для Milvus.'
   </thead>
   <tbody>
     <tr>
-      <td>        Датаноды &lt;= этой версии считаются устаревшими узлами, у которых нет rpc watch(). Это используется только во время скользящего обновления, когда устаревшие узлы не получат новых каналов.      </td>
+      <td>        Датаноды &lt;= этой версии считаются устаревшими узлами, у которых нет rpc watch(). Это значение используется только во время скользящего обновления, когда устаревшие узлы не будут получать новые каналы.      </td>
       <td>2.4.1</td>
     </tr>
   </tbody>
@@ -309,6 +280,35 @@ summary: 'Узнайте, как настроить dataCoord для Milvus.'
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordsegmentsealProportionJitter" class="common-anchor-header"><code translate="no">dataCoord.segment.sealProportionJitter</code><button data-href="#dataCoordsegmentsealProportionJitter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.segment.sealProportionJitter">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        коэффициент дрожания пропорции уплотнения сегмента, значение по умолчанию 0.1(10%), если пропорция уплотнения равна 12%, с дрожанием=0.1, то фактический применяемый коэффициент будет 10.8~12%.      </td>
+      <td>0.1</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordsegmentassignmentExpiration" class="common-anchor-header"><code translate="no">dataCoord.segment.assignmentExpiration</code><button data-href="#dataCoordsegmentassignmentExpiration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -482,8 +482,8 @@ summary: 'Узнайте, как настроить dataCoord для Milvus.'
   <tbody>
     <tr>
       <td>
-        <li>Максимальное количество файлов binlog для одного сегмента, сегмент будет закрыт, если</li>      
-        <li>количество файлов binlog достигнет максимального значения.</li>      </td>
+        <li>Максимальное количество binlog (которое равно номеру файла binlog в первичном ключе) для одного сегмента, </li>      
+        <li>сегмент будет закрыт, если количество файлов binlog достигнет максимального значения.</li>      </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -695,7 +695,7 @@ summary: 'Узнайте, как настроить dataCoord для Milvus.'
     <tr>
       <td>
         <li>Значение переключателя для управления включением уплотнения сегментов. </li>      
-        <li>При уплотнении сегменты небольшого размера объединяются в большой сегмент, а удаленные сущности очищаются за время, превышающее длительность аренды Time Travel.</li>      </td>
+        <li>При уплотнении сегменты небольшого размера объединяются в большой сегмент, а удаленные сущности очищаются за пределами времени аренды Time Travel.</li>      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -728,6 +728,416 @@ summary: 'Узнайте, как настроить dataCoord для Milvus.'
         <li>Значение переключателя для управления включением автоматического уплотнения сегментов, во время которого data coord находит и объединяет уплотняемые сегменты в фоновом режиме.</li>      
         <li>Эта настройка действует только в том случае, если dataCoord.enableCompaction имеет значение true.</li>      </td>
       <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactiontaskPrioritizer" class="common-anchor-header"><code translate="no">dataCoord.compaction.taskPrioritizer</code><button data-href="#dataCoordcompactiontaskPrioritizer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.taskPrioritizer">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>compaction task prioritizer, options: [default, level, mix]. </li>      
+        <li>По умолчанию используется FIFO.</li>      
+        <li>level - приоритет по уровню: сначала уплотнения L0, затем уплотнения mix, затем уплотнения кластеризации.</li>      
+        <li>mix - приоритет по уровню: сначала смешанные компакты, затем L0 компакты, затем кластерные компакты.</li>      </td>
+      <td>по умолчанию</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactiontaskQueueCapacity" class="common-anchor-header"><code translate="no">dataCoord.compaction.taskQueueCapacity</code><button data-href="#dataCoordcompactiontaskQueueCapacity" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.taskQueueCapacity">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        размер очереди задач уплотнения      </td>
+      <td>100000</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactiondropTolerance" class="common-anchor-header"><code translate="no">dataCoord.compaction.dropTolerance</code><button data-href="#dataCoordcompactiondropTolerance" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.dropTolerance">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Задача уплотнения будет очищена после завершения дольше этого времени (в секундах)      </td>
+      <td>86400</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactiongcInterval" class="common-anchor-header"><code translate="no">dataCoord.compaction.gcInterval</code><button data-href="#dataCoordcompactiongcInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.gcInterval">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Временной интервал в секундах для уплотнения gc  </td>
+      <td>1800</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionmixtriggerInterval" class="common-anchor-header"><code translate="no">dataCoord.compaction.mix.triggerInterval</code><button data-href="#dataCoordcompactionmixtriggerInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.mix.triggerInterval">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Временной интервал в секундах для запуска уплотнения смеси      </td>
+      <td>60</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzerotriggerInterval" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.triggerInterval</code><button data-href="#dataCoordcompactionlevelzerotriggerInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.triggerInterval">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Интервал времени в секундах для запуска уплотнения L0  </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzeroforceTriggerminSize" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.minSize</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerminSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.minSize">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Минимальный размер в байтах для принудительного запуска LevelZero Compaction, по умолчанию 8MB   </td>
+      <td>8388608</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzeroforceTriggermaxSize" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.maxSize</code><button data-href="#dataCoordcompactionlevelzeroforceTriggermaxSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.maxSize">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Максимальный размер в байтах для принудительного запуска LevelZero Compaction, по умолчанию 64MB    </td>
+      <td>67108864</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzeroforceTriggerdeltalogMinNum" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerdeltalogMinNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Минимальное количество файлов deltalog для принудительного запуска LevelZero Compaction      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzeroforceTriggerdeltalogMaxNum" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerdeltalogMaxNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Максимальное количество файлов дельталога для принудительного запуска LevelZero Compaction, по умолчанию 30  </td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionsingleratiothreshold" class="common-anchor-header"><code translate="no">dataCoord.compaction.single.ratio.threshold</code><button data-href="#dataCoordcompactionsingleratiothreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.single.ratio.threshold">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Пороговое значение отношения сегментов для запуска одиночного уплотнения, по умолчанию 0,2   </td>
+      <td>0.2</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionsingledeltalogmaxsize" class="common-anchor-header"><code translate="no">dataCoord.compaction.single.deltalog.maxsize</code><button data-href="#dataCoordcompactionsingledeltalogmaxsize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.single.deltalog.maxsize">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Размер дельталога сегмента для запуска одиночного уплотнения, по умолчанию 16 МБ.     </td>
+      <td>16777216</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionsingledeltalogmaxnum" class="common-anchor-header"><code translate="no">dataCoord.compaction.single.deltalog.maxnum</code><button data-href="#dataCoordcompactionsingledeltalogmaxnum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.single.deltalog.maxnum">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Количество дельталогов в сегменте для запуска уплотнения, по умолчанию 200   </td>
+      <td>200</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionsingleexpiredlogmaxsize" class="common-anchor-header"><code translate="no">dataCoord.compaction.single.expiredlog.maxsize</code><button data-href="#dataCoordcompactionsingleexpiredlogmaxsize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.single.expiredlog.maxsize">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Размер журнала с истекшим сроком хранения сегмента для запуска уплотнения, по умолчанию 10 МБ.     </td>
+      <td>10485760</td>
     </tr>
   </tbody>
 </table>
@@ -1079,122 +1489,6 @@ summary: 'Узнайте, как настроить dataCoord для Milvus.'
     </tr>
   </tbody>
 </table>
-<h2 id="dataCoordcompactionlevelzeroforceTriggerminSize" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.minSize</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerminSize" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.minSize">
-  <thead>
-    <tr>
-      <th class="width80">Описание</th>
-      <th class="width20">Значение по умолчанию</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Минимальный размер в байтах для принудительного запуска LevelZero Compaction, по умолчанию 8MB   </td>
-      <td>8388608</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="dataCoordcompactionlevelzeroforceTriggermaxSize" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.maxSize</code><button data-href="#dataCoordcompactionlevelzeroforceTriggermaxSize" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.maxSize">
-  <thead>
-    <tr>
-      <th class="width80">Описание</th>
-      <th class="width20">Значение по умолчанию</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Максимальный размер в байтах для принудительного запуска LevelZero Compaction, по умолчанию 64MB    </td>
-      <td>67108864</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="dataCoordcompactionlevelzeroforceTriggerdeltalogMinNum" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerdeltalogMinNum" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum">
-  <thead>
-    <tr>
-      <th class="width80">Описание</th>
-      <th class="width20">Значение по умолчанию</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Минимальное количество файлов deltalog для принудительного запуска LevelZero Compaction      </td>
-      <td>10</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="dataCoordcompactionlevelzeroforceTriggerdeltalogMaxNum" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerdeltalogMaxNum" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum">
-  <thead>
-    <tr>
-      <th class="width80">Описание</th>
-      <th class="width20">Значение по умолчанию</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Максимальное количество файлов дельталога для принудительного запуска LevelZero Compaction, по умолчанию 30  </td>
-      <td>30</td>
-    </tr>
-  </tbody>
-</table>
 <h2 id="dataCoordsyncSegmentsInterval" class="common-anchor-header"><code translate="no">dataCoord.syncSegmentsInterval</code><button data-href="#dataCoordsyncSegmentsInterval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1219,8 +1513,37 @@ summary: 'Узнайте, как настроить dataCoord для Milvus.'
   </thead>
   <tbody>
     <tr>
-      <td>        Временной интервал для регулярной синхронизации сегментов      </td>
+      <td>        Интервал времени для регулярной синхронизации сегментов      </td>
       <td>300</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordindexmemSizeEstimateMultiplier" class="common-anchor-header"><code translate="no">dataCoord.index.memSizeEstimateMultiplier</code><button data-href="#dataCoordindexmemSizeEstimateMultiplier" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.index.memSizeEstimateMultiplier">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Если размер памяти не задан процедурой индексации, множитель для оценки размера памяти индексных данных      </td>
+      <td>2</td>
     </tr>
   </tbody>
 </table>
@@ -1684,6 +2007,35 @@ summary: 'Узнайте, как настроить dataCoord для Milvus.'
   <tbody>
     <tr>
       <td>        Максимальное количество файлов, разрешенное для одного запроса на импорт.      </td>
+      <td>1024</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordimportmaxImportJobNum" class="common-anchor-header"><code translate="no">dataCoord.import.maxImportJobNum</code><button data-href="#dataCoordimportmaxImportJobNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.import.maxImportJobNum">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Максимальное количество выполняющихся или ожидающих выполнения заданий импорта.      </td>
       <td>1024</td>
     </tr>
   </tbody>

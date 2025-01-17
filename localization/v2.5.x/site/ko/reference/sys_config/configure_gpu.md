@@ -50,7 +50,7 @@ summary: Milvus용 GPU를 구성하는 방법을 알아보세요.
   <tbody>
     <tr>
       <td>        GPU 메모리 풀 초기화 크기      </td>
-      <td></td>
+      <td>2048</td>
     </tr>
   </tbody>
 </table>
@@ -79,7 +79,7 @@ summary: Milvus용 GPU를 구성하는 방법을 알아보세요.
   <tbody>
     <tr>
       <td>        GPU 메모리 풀 최대 크기      </td>
-      <td></td>
+      <td>4096</td>
     </tr>
   </tbody>
 </table>

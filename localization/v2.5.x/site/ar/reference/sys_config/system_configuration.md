@@ -59,10 +59,10 @@ summary: تعرف على تكوين نظام ميلفوس.
 </ol>
 <p>انظر <a href="/docs/ar/configure_mq.md">التكوينات المتعلقة بـ mq</a> للحصول على وصف تفصيلي لكل معلمة تحت هذا القسم.</p>
 <h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code></h3><p>التكوينات ذات الصلة بـ pulsar، وتستخدم لإدارة سجلات ميلفوس لعمليات الطفرات الأخيرة، وسجل تدفق الإخراج، وتوفير خدمات نشر-اشتراك السجل.</p>
-<p>انظر <a href="/docs/ar/configure_pulsar.md">التكوينات المتعلقة</a> بـ <a href="/docs/ar/configure_pulsar.md">pulsar</a> للحصول على وصف مفصل لكل معلمة تحت هذا القسم.</p>
+<p>راجع <a href="/docs/ar/configure_pulsar.md">التكوينات المتعلقة</a> بـ <a href="/docs/ar/configure_pulsar.md">pulsar</a> للحصول على وصف مفصل لكل معلمة تحت هذا القسم.</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>إذا كنت ترغب في تمكين كافكا، تحتاج إلى التعليق على تكوينات النابض</p>
-<p>kafka:</p>
-<p>brokerList:</p>
+<p>كافكا</p>
+<p>الوسيط: المضيف المحلي: 9092</p>
 <p>saslUsername:</p>
 <p>saslPassword:</p>
 <p>saslMechanisms:</p>
@@ -100,10 +100,12 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>تكوين إخراج سجل النظام.</p>
 <p>راجع <a href="/docs/ar/configure_log.md">التكوينات المتعلقة بالسجل</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
 <h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>راجع <a href="/docs/ar/configure_grpc.md">التكوينات المتعلقة</a> بـ <a href="/docs/ar/configure_grpc.md">grpc</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>تكوين تمكين tls الوكيل tls.</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>تكوين tls الخارجي.</p>
 <p>راجع <a href="/docs/ar/configure_tls.md">التكوينات المتعلقة بـ tls</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
-<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>راجع <a href="/docs/ar/configure_common.md">التكوينات المتعلقة</a> بـ <a href="/docs/ar/configure_common.md">common-related Configurations</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
-<h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig، تكوينات حصة ميلفوس وحدودها.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code></h3><p>تكوين tls الداخلي.</p>
+<p>راجع <a href="/docs/ar/configure_internaltls.md">التكوينات المرتبطة بـ tls الداخلية</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
+<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>راجع <a href="/docs/ar/configure_common.md">التكوينات المرتبطة</a> بـ tls للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
+<h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig، تكوينات الحصة والحدود الخاصة بـ Milvus.</p>
 <p>بشكل افتراضي، نقوم بتمكين:</p>
 <ol>
 <li><p>حماية TT;</p></li>
@@ -127,3 +129,9 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>سيقوم #milvus تلقائيًا بتهيئة نصف ذاكرة وحدة معالجة الرسومات المتاحة,</p>
 <p>سيقوم #maxMemSemSize بتهيئة كامل ذاكرة وحدة معالجة الرسومات المتوفرة.</p>
 <p>انظر <a href="/docs/ar/configure_gpu.md">التكوينات المتعلقة بوحدة معالجة الرسومات</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>أي تكوين متعلق بخادم عقدة التدفق.</p>
+<p>راجع <a href="/docs/ar/configure_streamingnode.md">التكوينات المتعلقة بعقدة البث</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>أي تكوين متعلق بخدمة البث.</p>
+<p>راجع <a href="/docs/ar/configure_streaming.md">التكوينات المتعلقة بالبث</a> للحصول على وصف تفصيلي لكل معلمة ضمن هذا القسم.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>أي تكوين متعلق بمحرك البحث الناقل لـ knowhere</p>
+<p>راجع <a href="/docs/ar/configure_knowhere.md">التكوينات المتعلقة</a> بـ <a href="/docs/ar/configure_knowhere.md">knowhere</a> للحصول على وصف تفصيلي لكل معلمة تحت هذا القسم.</p>

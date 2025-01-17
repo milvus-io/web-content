@@ -428,7 +428,7 @@ System.out.println(resp.getQueryResults());​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>В приведенном выше запросе Milvus отфильтровывает сущности, в которых поле <code translate="no">metadata</code> имеет категорию <code translate="no">&quot;electronics&quot;</code> и цену ниже 150, возвращая сущности, соответствующие этим критериям.</p>
-<h3 id="Vector-search-with-JSON-filtering​" class="common-anchor-header">Векторный поиск с фильтрацией JSON</h3><p>Комбинируя векторное сходство с фильтрацией JSON, вы можете убедиться, что полученные данные не только соответствуют семантике, но и отвечают конкретным бизнес-условиям, делая результаты поиска более точными и соответствующими потребностям пользователей.</p>
+<h3 id="Vector-search-with-JSON-filtering​" class="common-anchor-header">Векторный поиск с фильтрацией JSON</h3><p>Комбинируя векторное сходство с фильтрацией JSON, вы можете гарантировать, что полученные данные не только соответствуют семантике, но и отвечают конкретным бизнес-условиям, делая результаты поиска более точными и соответствующими потребностям пользователей.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;brand&quot;] == &quot;BrandA&quot;&#x27;</span>​
@@ -521,4 +521,5 @@ System.out.println(resp.getSearchResults());​
 <li><p><strong>Ограничения на именование</strong>: При именовании JSON-ключей рекомендуется использовать только буквы, цифры и символы подчеркивания, так как другие символы могут вызвать проблемы при фильтрации или поиске.</p></li>
 <li><p><strong>Работа со строковыми значениями</strong>: Для строковых значений (<code translate="no">VARCHAR</code>) Milvus хранит строки полей JSON как есть, без семантического преобразования. Например: <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code> и <code translate="no">&quot;a\\&quot;b&quot;</code> сохраняются в том виде, в котором они были введены; однако <code translate="no">'a'b'</code> и <code translate="no">&quot;a&quot;b&quot;</code> считаются недействительными.</p></li>
 <li><p><strong>Работа с вложенными словарями</strong>: Любые вложенные словари в значениях полей JSON рассматриваются как строки.</p></li>
+<li><p><strong>Ограничение размера поля JSON</strong>: размер полей JSON ограничен 65 536 байтами.</p></li>
 </ul>

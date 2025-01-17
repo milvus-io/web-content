@@ -500,7 +500,7 @@ System.out.println(resp.getSearchResults());​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Dans cet exemple, Milvus renvoie les 5 entités les plus similaires au vecteur de la requête, le champ <code translate="no">metadata</code> contenant une marque de <code translate="no">&quot;BrandA&quot;</code>.</p>
-<p>En outre, Milvus prend en charge des opérateurs de filtrage JSON avancés tels que <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, et <code translate="no">JSON_CONTAINS_ANY</code>, qui permettent d'améliorer encore les capacités de requête. Pour plus de détails, voir <a href="/docs/fr/boolean.md">Filtrage des métadonnées</a>.</p>
+<p>En outre, Milvus prend en charge des opérateurs de filtrage JSON avancés tels que <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, et <code translate="no">JSON_CONTAINS_ANY</code>, qui permettent d'améliorer encore les capacités d'interrogation. Pour plus de détails, voir <a href="/docs/fr/boolean.md">Filtrage des métadonnées</a>.</p>
 <h2 id="Limits​" class="common-anchor-header">Limites<button data-href="#Limits​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -521,5 +521,6 @@ System.out.println(resp.getSearchResults());​
 <li><p><strong>Correspondance des types de données</strong>: si la valeur clé d'un champ JSON est un nombre entier ou un nombre à virgule flottante, elle ne peut être comparée qu'à une autre clé entière ou flottante ou aux champs <code translate="no">INT32/64</code> ou <code translate="no">FLOAT32/64</code>. Si la valeur de la clé est une chaîne de caractères (<code translate="no">VARCHAR</code>), elle ne peut être comparée qu'à une autre clé de type chaîne de caractères.</p></li>
 <li><p><strong>Restrictions de dénomination</strong>: Pour nommer les clés JSON, il est recommandé de n'utiliser que des lettres, des caractères numériques et des traits de soulignement, car les autres caractères peuvent poser des problèmes lors du filtrage ou de la recherche.</p></li>
 <li><p><strong>Traitement des valeurs de chaîne</strong>: Pour les valeurs de chaîne (<code translate="no">VARCHAR</code>), Milvus stocke les chaînes de champ JSON telles quelles sans conversion sémantique. Par exemple, Milvus stocke les chaînes de champ JSON telles quelles, sans conversion sémantique : <code translate="no">'a&quot;b'</code> <code translate="no">&quot;a'b&quot;</code> , <code translate="no">'a\\'b'</code> et <code translate="no">&quot;a\\&quot;b&quot;</code> sont stockés tels qu'ils ont été saisis, mais <code translate="no">'a'b'</code> et <code translate="no">&quot;a&quot;b&quot;</code> sont considérés comme non valides.</p></li>
-<li><p><strong>Traitement des dictionnaires imbriqués</strong>: Tous les dictionnaires imbriqués dans les valeurs des champs JSON sont traités comme des chaînes.</p></li>
+<li><p><strong>Traitement des dictionnaires imbriqués</strong>: Les dictionnaires imbriqués dans les valeurs des champs JSON sont traités comme des chaînes de caractères.</p></li>
+<li><p><strong>Limite de taille des champs JSON</strong>: les champs JSON sont limités à 65 536 octets.</p></li>
 </ul>

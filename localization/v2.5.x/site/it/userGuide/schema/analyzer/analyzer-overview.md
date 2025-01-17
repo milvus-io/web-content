@@ -28,7 +28,7 @@ summary: >-
 <div class="alert note">
 <p>L'uso degli analizzatori può influire sulle prestazioni.</p>
 <ul>
-<li><p><strong>Ricerca a testo completo:</strong> Per la ricerca full text, i canali DataNode e <strong>QueryNode</strong> consumano i dati più lentamente perché devono attendere il completamento della tokenizzazione. Di conseguenza, i dati appena ingeriti impiegano più tempo per diventare disponibili per la ricerca.</p></li>
+<li><p><strong>Ricerca a testo pieno:</strong> Per la ricerca full text, i canali DataNode e <strong>QueryNode</strong> consumano i dati più lentamente perché devono attendere il completamento della tokenizzazione. Di conseguenza, i dati appena ingeriti impiegano più tempo per diventare disponibili per la ricerca.</p></li>
 <li><p><strong>Corrispondenza di testo:</strong> Per la corrispondenza del testo, anche la creazione dell'indice è più lenta, poiché la tokenizzazione deve essere completata prima di poter costruire un indice.</p></li>
 </ul>
 </div>
@@ -52,6 +52,9 @@ summary: >-
 <li><p><strong>Tokenizzatore</strong>: Il tokenizer spezza il testo in ingresso in unità discrete chiamate tokens. Questi token possono essere parole o frasi, a seconda del tipo di tokenizer.</p></li>
 <li><p><strong>Filtri</strong>: I filtri possono essere applicati ai token per affinarli ulteriormente, ad esempio rendendoli minuscoli o rimuovendo parole comuni.</p></li>
 </ul>
+<div class="alert note">
+<p>I tokenizzatori supportano solo il formato UTF-8. Il supporto per altri formati sarà aggiunto nelle versioni future.</p>
+</div>
 <p>Il flusso di lavoro seguente mostra come un analizzatore elabora il testo.</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/analyzer-overview.png" alt="analyzer-overview" width="400"/></p>
 <h2 id="Analyzer-types​" class="common-anchor-header">Tipi di analizzatori<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">
@@ -71,13 +74,13 @@ summary: >-
       </svg>
     </button></h2><p>Milvus offre due tipi di analizzatori per soddisfare le diverse esigenze di elaborazione del testo.</p>
 <ul>
-<li><p><strong>Analizzatore integrato</strong>: Si tratta di configurazioni predefinite che coprono le attività comuni di elaborazione del testo con una configurazione minima. Gli analizzatori integrati sono ideali per le ricerche generiche, poiché non richiedono una configurazione complessa.</p></li>
+<li><p><strong>Analizzatore integrato</strong>: Si tratta di configurazioni predefinite che coprono le attività comuni di elaborazione del testo con una configurazione minima. Gli analizzatori integrati sono ideali per le ricerche generiche, in quanto non richiedono una configurazione complessa.</p></li>
 <li><p><strong>Analizzatore personalizzato</strong>: Per i requisiti più avanzati, gli analizzatori personalizzati consentono di definire la propria configurazione specificando sia il tokenizer che zero o più filtri. Questo livello di personalizzazione è particolarmente utile per casi d'uso specializzati in cui è necessario un controllo preciso sull'elaborazione del testo.</p></li>
 </ul>
 <div class="alert note">
 <p>Se si omettono le configurazioni dell'analizzatore durante la creazione della raccolta, Milvus utilizza l'analizzatore <code translate="no">standard</code> per l'elaborazione del testo. Per maggiori dettagli, consultare <a href="/docs/it/standard-analyzer.md">Standard</a>.</p>
 </div>
-<h3 id="Built-in-analyzer​" class="common-anchor-header">Analizzatore integrato</h3><p>Gli analizzatori integrati in Milvus sono preconfigurati con tokenizer e filtri specifici, consentendo di utilizzarli immediatamente senza doverli definire personalmente. Ogni analizzatore integrato è un modello che include un tokenizer e dei filtri preimpostati, con parametri opzionali per la personalizzazione.</p>
+<h3 id="Built-in-analyzer​" class="common-anchor-header">Analizzatore integrato</h3><p>Gli analizzatori integrati in Milvus sono preconfigurati con tokenizer e filtri specifici, il che consente di utilizzarli immediatamente senza doverli definire personalmente. Ogni analizzatore integrato è un modello che include un tokenizer e dei filtri preimpostati, con parametri opzionali per la personalizzazione.</p>
 <p>Per esempio, per usare l'analizzatore incorporato <code translate="no">standard</code>, basta specificare il nome <code translate="no">standard</code> come <code translate="no">type</code> e includere facoltativamente configurazioni aggiuntive specifiche per questo tipo di analizzatore, come <code translate="no">stop_words</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -213,7 +216,7 @@ analyzerParams.<span class="hljs-title function_">put</span>(<span class="hljs-s
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Filtri personalizzati</strong>: I filtri personalizzati consentono configurazioni specifiche. È possibile definire un filtro personalizzato scegliendo un tipo di filtro valido (<code translate="no">filter.type</code>) e aggiungendo impostazioni specifiche per ogni tipo di filtro. Esempi di tipi di filtro che supportano la personalizzazione.</p>
 <ul>
-<li><p><code translate="no">stop</code>: Rimuove le parole comuni specificate impostando un elenco di parole di arresto (ad esempio, <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). Per i dettagli, fare riferimento a <a href="/docs/it/stop-filter.md">Stop</a>.</p></li>
+<li><p><code translate="no">stop</code>: Rimuove le parole comuni specificate impostando un elenco di parole di arresto (ad esempio, <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). Per ulteriori informazioni, consultare <a href="/docs/it/stop-filter.md">Stop</a>.</p></li>
 <li><p><code translate="no">length</code>: Esclude i token in base a criteri di lunghezza, come l'impostazione di una lunghezza massima dei token. Per i dettagli, vedere <a href="/docs/it/length-filter.md">Lunghezza</a>.</p></li>
 <li><p><code translate="no">stemmer</code>: Riduce le parole alla loro forma radicale per una corrispondenza più flessibile. Per ulteriori informazioni, vedere <a href="/docs/it/stemmer-filter.md">Stemmer</a>.</p></li>
 </ul>

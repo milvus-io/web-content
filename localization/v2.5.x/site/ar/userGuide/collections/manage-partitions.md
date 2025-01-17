@@ -617,14 +617,14 @@ curl --request POST \​
       </svg>
     </button></h2><h3 id="Insert-and-Delete-Entities​" class="common-anchor-header">إدراج الكيانات وحذفها</h3><p>يمكنك إجراء عمليات إدراج وإدراج وحذف في عمليات محددة. لمزيد من التفاصيل، راجع</p>
 <ul>
-<li><p>إدراج كيانات في القسم</p></li>
-<li><p>إدراج كيانات في القسم</p></li>
-<li><p>حذف كيانات من القسم</p></li>
+<li><p><a href="/docs/ar/insert-update-delete.md#Insert-Entities-into-a-Partition">إدراج كيانات في القسم</a></p></li>
+<li><p><a href="/docs/ar/upsert-entities.md#Upsert-Entities-in-a-Partition">إدراج كيانات في القسم</a></p></li>
+<li><p><a href="/docs/ar/delete-entities.md#Delete-Entities-from-Partitions">حذف كيانات من القسم</a></p></li>
 </ul>
 <h3 id="Search-and-Query​" class="common-anchor-header">البحث والاستعلام</h3><p>يمكنك إجراء عمليات بحث واستعلامات داخل أقسام محددة. لمزيد من التفاصيل، راجع</p>
 <ul>
-<li><p>إجراء عمليات البحث والاستعلام داخل الأقسام</p></li>
-<li><p>إجراء تصفية بيانات التعريف داخل الأقسام</p></li>
+<li><p><a href="/docs/ar/single-vector-search.md#ANN-Search-in-Partition">إجراء عمليات البحث والاستعلام داخل الأقسام</a></p></li>
+<li><p><a href="/docs/ar/filtered-search.md">إجراء تصفية بيانات التعريف داخل الأقسام</a></p></li>
 </ul>
 <h2 id="Drop-Partition​" class="common-anchor-header">إسقاط قسم<button data-href="#Drop-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"

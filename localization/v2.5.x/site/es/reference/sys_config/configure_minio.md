@@ -340,11 +340,45 @@ summary: Aprenda a configurar minio para Milvus.
     <tr>
       <td>
         <li>Proveedor de nube de S3. Soporta: "aws", "gcp", "aliyun".</li>      
-        <li>Puede utilizar "aws" para otro proveedor de nube soporta S3 API con la firma v4, por ejemplo: minio</li>      
-        <li>Puede utilizar "gcp" para otro proveedor de nube compatible con la API de S3 con firma v2</li>      
-        <li>Puede utilizar "aliyun" si otro proveedor de servicios en la nube utiliza un bucket de estilo de host virtual.</li>      
-        <li>Cuando useIAM está activado, sólo "aws", "gcp", "aliyun" es compatible por ahora</li>      </td>
+        <li>Proveedor de nube de Google Cloud Storage. Soporta: "gcpnative".</li>      
+        <li>Puede utilizar "aws" para otro proveedor de nube compatible con la API de S3 con firma v4, por ejemplo: minio</li>      
+        <li>Puede utilizar "gcp" para otro proveedor de nube compatible con la API de S3 con la firma v2</li>      
+        <li>Puede utilizar "aliyun" para otro proveedor de nube utiliza cubo de estilo de host virtual</li>      
+        <li>Puede utilizar "gcpnative" para el proveedor Google Cloud Platform. Utiliza las credenciales de la cuenta de servicio</li>      
+        <li>para la autenticación.</li>      
+        <li>Cuando useIAM está habilitado, sólo "aws", "gcp", "aliyun" es compatible por ahora</li>      </td>
       <td>aws</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="miniogcpCredentialJSON" class="common-anchor-header"><code translate="no">minio.gcpCredentialJSON</code><button data-href="#miniogcpCredentialJSON" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="minio.gcpCredentialJSON">
+  <thead>
+    <tr>
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>El contenido JSON contiene las credenciales de la cuenta del servicio gcs.</li>      
+        <li>Sólo se utiliza para el proveedor de nube "gcpnative".</li>      </td>
+      <td></td>
     </tr>
   </tbody>
 </table>
@@ -373,8 +407,8 @@ summary: Aprenda a configurar minio para Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Punto final personalizado para obtener credenciales de rol IAM. cuando useIAM es true y cloudProvider es "aws".</li>      
-        <li>Déjalo vacío si quieres usar el endpoint por defecto de AWS</li>      </td>
+        <li>Endpoint personalizado para obtener credenciales de rol IAM. cuando useIAM es true y cloudProvider es "aws".</li>      
+        <li>Déjelo vacío si desea utilizar el punto final predeterminado de AWS.</li>      </td>
       <td></td>
     </tr>
   </tbody>

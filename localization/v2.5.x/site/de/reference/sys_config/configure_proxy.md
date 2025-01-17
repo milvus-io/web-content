@@ -19,7 +19,7 @@ summary: 'Erfahren Sie, wie Sie den Proxy für Milvus konfigurieren.'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Proxy-bezogene Konfiguration, die dazu dient, Client-Anfragen zu validieren und die zurückgegebenen Ergebnisse zu reduzieren.</p>
+    </button></h1><p>Zugehörige Konfiguration des Proxys, der zur Validierung von Client-Anfragen und zur Reduzierung der zurückgegebenen Ergebnisse verwendet wird.</p>
 <h2 id="proxytimeTickInterval" class="common-anchor-header"><code translate="no">proxy.timeTickInterval</code><button data-href="#proxytimeTickInterval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -338,6 +338,64 @@ summary: 'Erfahren Sie, wie Sie den Proxy für Milvus konfigurieren.'
     <tr>
       <td>        Die maximale Anzahl von Aufgaben in der Aufgabenwarteschlange des Proxys.      </td>
       <td>1024</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="proxyddlConcurrency" class="common-anchor-header"><code translate="no">proxy.ddlConcurrency</code><button data-href="#proxyddlConcurrency" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="proxy.ddlConcurrency">
+  <thead>
+    <tr>
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Die Anzahl der gleichzeitigen Ausführung von DDL am Proxy.      </td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="proxydclConcurrency" class="common-anchor-header"><code translate="no">proxy.dclConcurrency</code><button data-href="#proxydclConcurrency" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="proxy.dclConcurrency">
+  <thead>
+    <tr>
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Die Anzahl der gleichzeitigen Ausführung von DCL am Proxy.      </td>
+      <td>16</td>
     </tr>
   </tbody>
 </table>

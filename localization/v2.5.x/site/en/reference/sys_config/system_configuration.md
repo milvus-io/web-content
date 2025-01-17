@@ -63,7 +63,7 @@ In current release, all parameters take effect only after being configured at th
 <p>See <a href="/docs/configure_pulsar.md">pulsar-related Configurations</a> for detailed description for each parameter under this section.</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>If you want to enable kafka, needs to comment the pulsar configs</p>
 <p>kafka:</p>
-<p>brokerList:</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername:</p>
 <p>saslPassword:</p>
 <p>saslMechanisms:</p>
@@ -101,8 +101,10 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>Configures the system log output.</p>
 <p>See <a href="/docs/configure_log.md">log-related Configurations</a> for detailed description for each parameter under this section.</p>
 <h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>See <a href="/docs/configure_grpc.md">grpc-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Configure the proxy tls enable.</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Configure external tls.</p>
 <p>See <a href="/docs/configure_tls.md">tls-related Configurations</a> for detailed description for each parameter under this section.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code></h3><p>Configure internal tls.</p>
+<p>See <a href="/docs/configure_internaltls.md">internaltls-related Configurations</a> for detailed description for each parameter under this section.</p>
 <h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>See <a href="/docs/configure_common.md">common-related Configurations</a> for detailed description for each parameter under this section.</p>
 <h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig, configurations of Milvus quota and limits.</p>
 <p>By default, we enable:</p>
@@ -128,3 +130,9 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#milvus will automatically initialize half of the available GPU memory,</p>
 <p>#maxMemSize will the whole available GPU memory.</p>
 <p>See <a href="/docs/configure_gpu.md">gpu-related Configurations</a> for detailed description for each parameter under this section.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>Any configuration related to the streaming node server.</p>
+<p>See <a href="/docs/configure_streamingnode.md">streamingNode-related Configurations</a> for detailed description for each parameter under this section.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>Any configuration related to the streaming service.</p>
+<p>See <a href="/docs/configure_streaming.md">streaming-related Configurations</a> for detailed description for each parameter under this section.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>Any configuration related to the knowhere vector search engine</p>
+<p>See <a href="/docs/configure_knowhere.md">knowhere-related Configurations</a> for detailed description for each parameter under this section.</p>

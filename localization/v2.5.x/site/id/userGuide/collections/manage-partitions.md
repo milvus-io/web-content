@@ -617,14 +617,14 @@ curl --request POST \​
       </svg>
     </button></h2><h3 id="Insert-and-Delete-Entities​" class="common-anchor-header">Menyisipkan dan Menghapus Entitas</h3><p>Anda dapat melakukan operasi penyisipan, penambahan, dan penghapusan dalam operasi tertentu. Untuk detailnya, lihat</p>
 <ul>
-<li><p>Menyisipkan Entitas ke dalam Partisi</p></li>
-<li><p>Menambah Entitas ke dalam Partisi</p></li>
-<li><p>Menghapus Entitas dari Partisi</p></li>
+<li><p><a href="/docs/id/insert-update-delete.md#Insert-Entities-into-a-Partition">Menyisipkan Entitas ke dalam Partisi</a></p></li>
+<li><p><a href="/docs/id/upsert-entities.md#Upsert-Entities-in-a-Partition">Menambah Entitas ke dalam Partisi</a></p></li>
+<li><p><a href="/docs/id/delete-entities.md#Delete-Entities-from-Partitions">Menghapus Entitas dari Partisi</a></p></li>
 </ul>
 <h3 id="Search-and-Query​" class="common-anchor-header">Pencarian dan Kueri</h3><p>Anda dapat melakukan pencarian dan kueri di dalam partisi tertentu. Untuk detailnya, lihat</p>
 <ul>
-<li><p>Melakukan Pencarian ANN dalam Partisi</p></li>
-<li><p>Melakukan Pemfilteran Metadata di dalam Partisi</p></li>
+<li><p><a href="/docs/id/single-vector-search.md#ANN-Search-in-Partition">Melakukan Pencarian ANN dalam Partisi</a></p></li>
+<li><p><a href="/docs/id/filtered-search.md">Melakukan Pemfilteran Metadata di dalam Partisi</a></p></li>
 </ul>
 <h2 id="Drop-Partition​" class="common-anchor-header">Menghapus Partisi<button data-href="#Drop-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"

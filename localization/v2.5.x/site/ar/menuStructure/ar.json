@@ -1472,26 +1472,26 @@
             "isMenu": true,
             "children": [
               {
+                "label": "النسخ الاحتياطي والاستعادة في مثيل واحد",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "الترحيل بين المثيلات في دلو واحد",
                 "id": "shared-bucket-backup-and-restore.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "الترحيل بين المثيلات عبر الدلاء",
                 "id": "cross-bucket-backup-and-restore.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "الترحيل بين المثيلات عبر بيئات S3",
                 "id": "multi-storage-backup-and-restore.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "النسخ الاحتياطي والاستعادة في مثيل واحد",
-                "id": "single-instance-backup-and-restore.md",
                 "order": 3,
                 "children": []
               }

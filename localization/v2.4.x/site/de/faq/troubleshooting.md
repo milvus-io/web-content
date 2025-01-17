@@ -1,7 +1,7 @@
 ---
 id: troubleshooting.md
 summary: >-
-  Erfahren Sie mehr über häufige Probleme, die mit Milvus auftreten können, und
+  Erfahren Sie mehr über häufige Probleme, die bei Milvus auftreten können, und
   wie Sie diese lösen können.
 title: Fehlersuche
 ---
@@ -107,8 +107,8 @@ kubectl kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">
 <span class="hljs-comment"># restore the backup data</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><br/></p>
-<p>Wenn Sie Hilfe bei der Lösung eines Problems benötigen, können Sie das gerne tun:</p>
+<p>Wenn Sie Hilfe bei der Lösung eines Problems benötigen, können Sie sich gerne an uns wenden:</p>
 <ul>
-<li>Treten Sie unserem <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack-Kanal</a> bei und fordern Sie Unterstützung durch das Milvus-Team an.</li>
-<li><a href="https://github.com/milvus-io/milvus/issues/new/choose">Reichen Sie einen Issue</a> auf GitHub<a href="https://github.com/milvus-io/milvus/issues/new/choose">ein</a>, der Details zu Ihrem Problem enthält.</li>
+<li>Treten Sie unserem <a href="https://discord.com/invite/8uyFbECzPX">Discord-Server</a> bei und fordern Sie Unterstützung durch das Milvus-Team an.</li>
+<li><a href="https://github.com/milvus-io/milvus/issues/new/choose">Reichen Sie ein Issue</a> auf GitHub<a href="https://github.com/milvus-io/milvus/issues/new/choose">ein</a>, das Details zu Ihrem Problem enthält.</li>
 </ul>

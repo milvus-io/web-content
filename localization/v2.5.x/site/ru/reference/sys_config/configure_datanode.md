@@ -218,7 +218,7 @@ summary: 'Узнайте, как настроить dataNode для Milvus.'
   <tbody>
     <tr>
       <td>
-        <li>Максимальный размер каждого файла бинлога в сегменте, буферизованном в памяти. Файлы бинлога, размер которых превышает это значение, затем сбрасываются в службу MinIO или S3.</li>      
+        <li>Максимальный размер каждого файла binlog в сегменте, буферизованном в памяти. Файлы бинлога, размер которых превышает это значение, затем сбрасываются в службу MinIO или S3.</li>      
         <li>Единица измерения: Байт .</li>      
         <li>Слишком маленькое значение этого параметра приводит к тому, что система слишком часто сохраняет небольшой объем данных. Слишком большое значение увеличивает потребность системы в памяти.</li>      </td>
       <td>16777216</td>
@@ -665,6 +665,35 @@ summary: 'Узнайте, как настроить dataNode для Milvus.'
     </tr>
   </tbody>
 </table>
+<h2 id="dataNodeimportmaxTaskSlotNum" class="common-anchor-header"><code translate="no">dataNode.import.maxTaskSlotNum</code><button data-href="#dataNodeimportmaxTaskSlotNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.import.maxTaskSlotNum">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Максимальное количество слотов, занимаемых каждой задачей импорта/преимпорта.      </td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataNodecompactionlevelZeroBatchMemoryRatio" class="common-anchor-header"><code translate="no">dataNode.compaction.levelZeroBatchMemoryRatio</code><button data-href="#dataNodecompactionlevelZeroBatchMemoryRatio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -690,7 +719,7 @@ summary: 'Узнайте, как настроить dataNode для Milvus.'
   <tbody>
     <tr>
       <td>        Минимальный коэффициент свободной памяти для уплотнения нулевого уровня, выполняемого в пакетном режиме      </td>
-      <td>0.05</td>
+      <td>0.5</td>
     </tr>
   </tbody>
 </table>
@@ -723,6 +752,64 @@ summary: 'Узнайте, как настроить dataNode для Milvus.'
     </tr>
   </tbody>
 </table>
+<h2 id="dataNodecompactionuseMergeSort" class="common-anchor-header"><code translate="no">dataNode.compaction.useMergeSort</code><button data-href="#dataNodecompactionuseMergeSort" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.useMergeSort">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Включать ли режим mergeSort при выполнении mixCompaction.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodecompactionmaxSegmentMergeSort" class="common-anchor-header"><code translate="no">dataNode.compaction.maxSegmentMergeSort</code><button data-href="#dataNodecompactionmaxSegmentMergeSort" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.maxSegmentMergeSort">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Максимальное количество сегментов, которые будут объединены в режиме mergeSort.      </td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataNodegracefulStopTimeout" class="common-anchor-header"><code translate="no">dataNode.gracefulStopTimeout</code><button data-href="#dataNodegracefulStopTimeout" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -747,7 +834,7 @@ summary: 'Узнайте, как настроить dataNode для Milvus.'
   </thead>
   <tbody>
     <tr>
-      <td>        секунд. принудительная остановка узла без грациозной остановки      </td>
+      <td>        секунд. принудительная остановка узла без изящной остановки      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -806,7 +893,7 @@ summary: 'Узнайте, как настроить dataNode для Milvus.'
   <tbody>
     <tr>
       <td>        Коэффициент буфера памяти для кластерного уплотнения. Данные, превышающие пороговое значение, будут выгружаться в хранилище.      </td>
-      <td>0.1</td>
+      <td>0.3</td>
     </tr>
   </tbody>
 </table>
@@ -836,6 +923,64 @@ summary: 'Узнайте, как настроить dataNode для Milvus.'
     <tr>
       <td>        размер рабочего пула для одного задания по уплотнению кластеризации.      </td>
       <td>8</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodebloomFilterApplyParallelFactor" class="common-anchor-header"><code translate="no">dataNode.bloomFilterApplyParallelFactor</code><button data-href="#dataNodebloomFilterApplyParallelFactor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.bloomFilterApplyParallelFactor">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        коэффициент параллельности при применении pk к bloom-фильтру, по умолчанию 4*CPU_CORE_NUM      </td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodestoragedeltalog" class="common-anchor-header"><code translate="no">dataNode.storage.deltalog</code><button data-href="#dataNodestoragedeltalog" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.storage.deltalog">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        формат дельталога, опции: [json, parquet].      </td>
+      <td>json</td>
     </tr>
   </tbody>
 </table>

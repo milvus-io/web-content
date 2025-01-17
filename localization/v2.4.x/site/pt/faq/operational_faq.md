@@ -21,7 +21,7 @@ title: FAQ operacional
         ></path>
       </svg>
     </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">E se eu não conseguir extrair a imagem do Milvus Docker do Docker Hub?</h4><p>Se não conseguiu extrair a imagem do Milvus Docker do Docker Hub, tente adicionar outros espelhos de registo.</p>
-<p>Os utilizadores da China Continental podem adicionar o URL "https://registry.docker-cn.com" ao array registry-mirrors em <strong>/etc.docker/daemon.json</strong>.</p>
+<p>Os utilizadores da China continental podem adicionar o URL "https://registry.docker-cn.com" à matriz registry-mirrors em <strong>/etc.docker/daemon.json</strong>.</p>
 <pre><code translate="no">{
   <span class="hljs-string">&quot;registry-mirrors&quot;</span>: [<span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span>]
 }
@@ -101,6 +101,6 @@ title: FAQ operacional
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">Ainda tem dúvidas?</h4><p>Você pode:</p>
 <ul>
-<li>Verificar o <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> no GitHub. Sinta-se à vontade para fazer perguntas, partilhar ideias e ajudar os outros.</li>
-<li>Junte-se ao nosso <a href="https://discuss.milvus.io/">Fórum Milvus</a> ou <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Canal Slack</a> para encontrar apoio e envolver-se com a nossa comunidade de código aberto.</li>
+<li>Verificar <a href="https://github.com/milvus-io/milvus/issues">o Milvus</a> no GitHub. Sinta-se à vontade para fazer perguntas, partilhar ideias e ajudar os outros.</li>
+<li>Junte-se ao nosso <a href="https://discord.com/invite/8uyFbECzPX">servidor Discord</a> para encontrar apoio e envolver-se com a nossa comunidade de código aberto.</li>
 </ul>

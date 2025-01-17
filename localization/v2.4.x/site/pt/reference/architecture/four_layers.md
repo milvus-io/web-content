@@ -1,7 +1,7 @@
 ---
 id: four_layers.md
 summary: Estrutura de desagregação de armazenamento/computação em Milvus.
-title: Desagregação de armazenamento/computação
+title: Desagregação Armazenamento/Computação
 ---
 <h1 id="StorageComputing-Disaggregation" class="common-anchor-header">Desagregação Armazenamento/Computação<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,10 +74,10 @@ title: Desagregação de armazenamento/computação
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os braços e as pernas. Os nós de trabalho são executores burros que seguem as instruções do serviço coordenador e executam comandos de linguagem de manipulação de dados (DML) do proxy. Os nós de trabalho não têm estado graças à separação do armazenamento e da computação, e podem facilitar a expansão do sistema e a recuperação de desastres quando implantados no Kubernetes. Há três tipos de nós de trabalho:</p>
-<h3 id="Query-node" class="common-anchor-header">Nó de consulta</h3><p>O nó de consulta recupera dados de registo incrementais e transforma-os em segmentos crescentes ao subscrever o corretor de registo, carrega dados históricos do armazenamento de objectos e executa uma pesquisa híbrida entre dados vectoriais e escalares.</p>
-<h3 id="Data-node" class="common-anchor-header">Nó de dados</h3><p>O nó de dados recupera dados de registo incrementais através da subscrição do corretor de registos, processa pedidos de mutação e agrupa os dados de registo em instantâneos de registo e armazena-os no armazenamento de objectos.</p>
-<h3 id="Index-node" class="common-anchor-header">Nó de índice</h3><p>O nó de índice constrói índices.  Os nós de índice não precisam ser residentes na memória e podem ser implementados com a estrutura sem servidor.</p>
+    </button></h2><p>Os nós de trabalho são executores "burros" que seguem as instruções do serviço de coordenação e executam comandos de linguagem de manipulação de dados (DML) a partir do proxy. Os nós de trabalho não têm estado graças à separação do armazenamento e da computação e podem facilitar a expansão do sistema e a recuperação de desastres quando implantados no Kubernetes. Há três tipos de nós de trabalho:</p>
+<h3 id="Query-node" class="common-anchor-header">Nó de consulta</h3><p>Os nós de consulta recuperam dados de registo incrementais e transformam-nos em segmentos crescentes, subscrevendo o corretor de registo, carregam dados históricos do armazenamento de objectos e executam uma pesquisa híbrida entre dados vectoriais e escalares.</p>
+<h3 id="Data-node" class="common-anchor-header">Nó de dados</h3><p>Os nós de dados recuperam dados de registo incrementais subscrevendo o corretor de registos, processam pedidos de mutação e empacotam dados de registo em instantâneos de registo e armazenam-nos no armazenamento de objectos.</p>
+<h3 id="Index-node" class="common-anchor-header">Nó de índice</h3><p>Os nós de índice criam índices. Eles não precisam ser residentes na memória e podem ser implementados com a estrutura sem servidor.</p>
 <h2 id="Storage" class="common-anchor-header">Armazenamento<button data-href="#Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,11 +93,11 @@ title: Desagregação de armazenamento/computação
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O armazenamento é o osso do sistema, responsável pela persistência dos dados. Inclui meta-armazenamento, corretor de registos e armazenamento de objectos.</p>
-<h3 id="Meta-storage" class="common-anchor-header">Meta-armazenamento</h3><p>O meta-armazenamento armazena instantâneos de metadados, como o esquema de coleção e os pontos de verificação do consumo de mensagens. O armazenamento de metadados exige uma disponibilidade extremamente elevada, uma forte consistência e suporte de transacções, pelo que a Milvus escolheu o etcd para o meta storage. A Milvus também utiliza o etcd para registo de serviços e verificação da sua integridade.</p>
+    </button></h2><p>O armazenamento é o osso do sistema, responsável pela persistência dos dados. É composto por meta storage, log broker e object storage.</p>
+<h3 id="Meta-storage" class="common-anchor-header">Meta-armazenamento</h3><p>O meta-armazenamento armazena instantâneos de metadados, como o esquema de coleção e os pontos de verificação do consumo de mensagens. O armazenamento de metadados exige uma disponibilidade extremamente elevada, uma forte consistência e suporte de transacções, pelo que o Milvus escolheu o etcd para este fim. A Milvus também utiliza o etcd para registo de serviços e verificações de saúde.</p>
 <h3 id="Object-storage" class="common-anchor-header">Armazenamento de objectos</h3><p>O armazenamento de objectos armazena ficheiros de instantâneos de registos, ficheiros de índice para dados escalares e vectoriais e resultados de consultas intermédias. O Milvus utiliza o MinIO como armazenamento de objectos e pode ser facilmente implementado no AWS S3 e no Azure Blob, dois dos serviços de armazenamento mais populares e económicos do mundo. No entanto, o armazenamento de objectos tem uma latência de acesso elevada e cobra pelo número de consultas. Para melhorar o seu desempenho e reduzir os custos, a Milvus planeia implementar a separação de dados cold-hot num conjunto de cache baseado em memória ou SSD.</p>
-<h3 id="Log-broker" class="common-anchor-header">Corretor de registos</h3><p>O corretor de registos é um sistema pub-sub que suporta a reprodução. É responsável pela persistência de dados de streaming e pela notificação de eventos. Ele também garante a integridade dos dados incrementais quando os nós de trabalho se recuperam de uma falha no sistema. O cluster Milvus utiliza o Pulsar como corretor de registos; o Milvus standalone utiliza o RocksDB como corretor de registos. Além disso, o corretor de registos pode ser facilmente substituído por plataformas de armazenamento de dados em fluxo contínuo, como o Kafka.</p>
-<p>O Milvus é construído em torno do corretor de registos e segue o princípio "registo como dados", pelo que não mantém uma tabela física, mas garante a fiabilidade dos dados através da persistência do registo e dos registos instantâneos.</p>
+<h3 id="Log-broker" class="common-anchor-header">Corretor de registos</h3><p>O corretor de registos é um sistema pub-sub que suporta a reprodução. É responsável pela persistência de dados de streaming e pela notificação de eventos. Ele também garante a integridade dos dados incrementais quando os nós de trabalho se recuperam de uma falha no sistema. O Milvus Distributed utiliza o Pulsar como corretor de registos, enquanto o Milvus Standalone utiliza o RocksDB. O corretor de logs pode ser prontamente substituído por plataformas de armazenamento de dados de streaming, como o Kafka.</p>
+<p>O Milvus segue o princípio do "registo como dados", pelo que não mantém uma tabela física, mas garante a fiabilidade dos dados através da persistência do registo e de registos instantâneos.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />

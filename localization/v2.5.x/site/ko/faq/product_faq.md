@@ -57,7 +57,7 @@ title: 제품 FAQ
 <p>이를 방지하려면 <code translate="no">nprobe</code> 을 더 크게, <code translate="no">nlist</code> 과 <code translate="no">k</code> 을 더 작게 설정해 보세요.</p>
 <p>자세한 내용은 <a href="/docs/ko/index.md">벡터 색인을</a> 참조하세요.</p>
 <h4 id="What-is-the-maximum-vector-dimension-supported-in-Milvus" class="common-anchor-header">Milvus에서 지원되는 최대 벡터 크기는 얼마인가요?</h4><p>Milvus는 기본적으로 최대 32,768개의 차원으로 벡터를 관리할 수 있습니다. <code translate="no">Proxy.maxDimension</code> 값을 늘려 더 큰 차원의 벡터를 허용할 수 있습니다.</p>
-<h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">Milvus는 Apple M1 CPU를 지원하나요?</h4><p>현재 Milvus 릴리스는 Apple M1 CPU를 직접 지원하지 않습니다. Milvus 2.3 이후에는 ARM64 아키텍처용 Docker 이미지를 제공합니다.</p>
+<h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">Milvus는 Apple M1 CPU를 지원하나요?</h4><p>현재 Milvus 릴리스에서는 Apple M1 CPU를 직접 지원하지 않습니다. Milvus 2.3 이후에는 ARM64 아키텍처용 Docker 이미지를 제공합니다.</p>
 <h4 id="What-data-types-does-Milvus-support-on-the-primary-key-field" class="common-anchor-header">Milvus는 기본 키 필드에서 어떤 데이터 유형을 지원하나요?</h4><p>현재 릴리스에서 Milvus는 INT64와 문자열을 모두 지원합니다.</p>
 <h4 id="Is-Milvus-scalable" class="common-anchor-header">Milvus는 확장 가능한가요?</h4><p>예. Kubernetes의 헬름 차트를 통해 여러 노드가 있는 Milvus 클러스터를 배포할 수 있습니다. 자세한 지침은 <a href="/docs/ko/scaleout.md">스케일 가이드를</a> 참조하세요.</p>
 <h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">성장 세그먼트와 봉인된 세그먼트는 무엇인가요?</h4><p>검색 요청이 오면 Milvus는 증분 데이터와 과거 데이터를 모두 검색합니다. 증분 데이터는 최근 업데이트이며, 증가하는 세그먼트에 저장되어 객체 스토리지에 유지될 임계값에 도달하기 전에 메모리에 버퍼링되어 보다 효율적인 인덱스가 구축되는 반면, 기록 데이터는 오래 전에 업데이트된 데이터입니다. 이 데이터는 오브젝트 스토리지에 보존된 봉인된 세그먼트에 있습니다. 증분 데이터와 기록 데이터가 함께 검색을 위한 전체 데이터 세트를 구성합니다. 이러한 설계 덕분에 Milvus에 수집된 모든 데이터를 즉시 검색할 수 있습니다. Milvus Distributed의 경우, 방금 수집된 레코드가 검색 결과에 표시되는 시점을 결정하는 더 복잡한 요소들이 있습니다. <a href="https://milvus.io/docs/consistency.md">일관성 수준에서</a> 이에 대한 자세한 뉘앙스를 알아보세요.</p>
@@ -75,10 +75,10 @@ title: 제품 FAQ
 <h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvus는 스칼라 또는 벡터 필드에 대한 기본값 지정을 지원하나요?</h4><p>현재 Milvus 2.4.x는 스칼라 또는 벡터 필드에 대한 기본값 지정을 지원하지 않습니다. 이 기능은 향후 릴리스에 추가될 예정입니다.</p>
 <h4 id="Is-storage-space-released-right-after-data-deletion-in-Milvus" class="common-anchor-header">Milvus에서 데이터를 삭제하면 저장 공간이 바로 해제되나요?</h4><p>아니요, Milvus에서 데이터를 삭제하면 저장 공간이 즉시 해제되지 않습니다. 데이터를 삭제하면 엔티티가 '논리적으로 삭제됨'으로 표시되지만 실제 공간은 즉시 해제되지 않을 수 있습니다. 그 이유는 다음과 같습니다:</p>
 <ul>
-<li><strong>압축</strong>: Milvus는 백그라운드에서 데이터를 자동으로 압축합니다. 이 프로세스는 작은 데이터 세그먼트를 큰 데이터 세그먼트로 병합하고 논리적으로 삭제된 데이터(삭제 표시된 엔티티) 또는 TTL(Time-To-Live)을 초과한 데이터를 제거합니다. 그러나 압축은 새로운 세그먼트를 생성하는 동시에 이전 세그먼트를 "삭제됨"으로 표시합니다.</li>
+<li><strong>압축</strong>: Milvus는 백그라운드에서 데이터를 자동으로 압축합니다. 이 프로세스는 작은 데이터 세그먼트를 큰 데이터 세그먼트로 병합하고 논리적으로 삭제된 데이터(삭제 표시된 엔티티) 또는 TTL(Time-To-Live)을 초과한 데이터를 제거합니다. 그러나 압축은 새 세그먼트를 생성하는 동시에 이전 세그먼트를 "삭제됨"으로 표시합니다.</li>
 <li><strong>가비지 컬렉션</strong>: 가비지 컬렉션(GC)이라는 별도의 프로세스가 주기적으로 이러한 '삭제된' 세그먼트를 제거하여 해당 세그먼트가 차지하고 있던 스토리지 공간을 확보합니다. 이렇게 하면 저장 공간을 효율적으로 사용할 수 있지만 삭제와 공간 확보 사이에 약간의 지연이 발생할 수 있습니다.</li>
 </ul>
-<h4 id="Can-I-see-inserted-deleted-or-upserted-data-immediately-after-the-operation-without-waiting-for-a-flush" class="common-anchor-header">플러시를 기다리지 않고 작업 후 즉시 삽입, 삭제 또는 업서트된 데이터를 볼 수 있나요?</h4><p>예. Milvus에서는 스토리지-컴퓨팅 분리 아키텍처로 인해 데이터 가시성이 플러시 작업과 직접적으로 연결되지 않습니다. 일관성 수준을 사용하여 데이터 가독성을 관리할 수 있습니다.</p>
+<h4 id="Can-I-see-inserted-deleted-or-upserted-data-immediately-after-the-operation-without-waiting-for-a-flush" class="common-anchor-header">플러시를 기다리지 않고 작업 후 즉시 삽입, 삭제 또는 업서트된 데이터를 볼 수 있나요?</h4><p>예. Milvus에서는 스토리지-컴퓨팅 분리 아키텍처로 인해 데이터 가시성이 플러시 작업과 직접적으로 연계되어 있지 않습니다. 일관성 수준을 사용하여 데이터 가독성을 관리할 수 있습니다.</p>
 <p>일관성 수준을 선택할 때는 일관성과 성능 간의 장단점을 고려하세요. 즉각적인 가시성이 필요한 작업의 경우 '강력' 일관성 수준을 사용하세요. 더 빠른 쓰기를 원한다면 약한 일관성(데이터가 즉시 표시되지 않을 수 있음)을 우선순위로 정하세요. 자세한 내용은 <a href="/docs/ko/consistency.md">일관성을</a> 참조하세요.</p>
 <h4 id="After-enabling-the-partition-key-feature-what-is-the-default-value-of-numpartitions-in-Milvus-and-why" class="common-anchor-header">파티션 키 기능을 활성화한 후 Milvus에서 <code translate="no">num_partitions</code> 의 기본값은 무엇이며 그 이유는 무엇인가요?</h4><p>파티션 키 기능이 활성화되면 Milvus에서 <code translate="no">num_partitions</code> 의 기본값은 <code translate="no">16</code> 으로 설정됩니다. 이 기본값은 안정성 및 성능상의 이유로 선택됩니다. 필요에 따라 <code translate="no">create_collection</code> 함수에서 <code translate="no">num_partitions</code> 값을 지정하여 조정할 수 있습니다.</p>
 <h4 id="Is-there-a-maximum-length-limit-for-scalar-filtering-expressions" class="common-anchor-header">스칼라 필터링 표현식의 최대 길이 제한이 있나요?</h4><p>예. 스칼라 필터링 표현식의 최대 길이는 <code translate="no">milvus.yaml</code> 구성 파일에 정의된 RPC 전송 제한에 의해 제한됩니다. 특히 이 제한은 프록시 섹션 아래의 <code translate="no">serverMaxRecvSize</code> 매개변수에 의해 설정됩니다:</p>
@@ -92,7 +92,29 @@ title: 제품 FAQ
   grpc:
     serverMaxRecvSize: <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>기본적으로 각 RPC 요청의 최대 크기는 64MB입니다. 따라서 성공적으로 실행하려면 차원 데이터와 메타데이터를 포함한 입력 벡터의 총 크기가 이 제한보다 작아야 합니다.</p>
+<p>기본적으로 각 RPC 요청의 최대 크기는 64MB입니다. 따라서 성공적인 실행을 위해서는 차원 데이터와 메타데이터를 포함한 입력 벡터의 총 크기가 이 제한보다 작아야 합니다.</p>
+<h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">컬렉션에서 주어진 스칼라 필드의 모든 고유 값을 얻으려면 어떻게 해야 하나요?</h4><p>현재로서는 이를 달성할 수 있는 직접적인 방법이 없습니다. 해결 방법으로 쿼리_이터레이터를 사용하여 특정 필드에 대한 모든 값을 검색한 다음 수동으로 중복 제거를 수행하는 것이 좋습니다. Milvus 2.6에서는 이 기능을 직접 지원할 계획입니다. 쿼리_이터레이터의 사용 예시:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># set up iterator</span>
+iterator = client.query_iterator(
+    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;target&quot;</span>]
+)
+<span class="hljs-comment"># do iteration and store target values into value_set </span>
+value_set = <span class="hljs-built_in">set</span>()
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    res = iterator.<span class="hljs-built_in">next</span>()
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res) == <span class="hljs-number">0</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;query iteration finished, close&quot;</span>)
+        iterator.close()
+        <span class="hljs-keyword">break</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(res)):
+        value_set.add(res[i][<span class="hljs-string">&quot;target&quot;</span>])
+
+<span class="hljs-comment"># value_set will contain unique values for target column    </span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-are-the-limitations-of-using-dynamic-fields-For-example-are-there-size-limits-modification-methods-or-indexing-restrictions" class="common-anchor-header">동적 필드 사용의 제한 사항은 무엇인가요? 예를 들어 크기 제한, 수정 방법 또는 인덱싱 제한이 있나요?</h4><p>동적 필드는 내부적으로 65,536바이트의 크기 제한이 있는 JSON 필드를 사용하여 표현됩니다. 업서트 수정을 지원하므로 필드를 추가하거나 업데이트할 수 있습니다. 그러나 Milvus 2.5.1부터 동적 필드는 인덱싱을 지원하지 않습니다. JSON에 대한 인덱스 추가 지원은 향후 릴리스에서 도입될 예정입니다.</p>
+<h4 id="Does-Milvus-support-schema-changes" class="common-anchor-header">Milvus는 스키마 변경을 지원하나요?</h4><p>Milvus 버전 2.5.0부터 스키마 변경은 <code translate="no">mmap</code> 매개변수와 같은 속성 조정과 같은 특정 수정으로 제한됩니다. 사용자는 또한 varchar 필드의 경우 <code translate="no">max_length</code>, 배열 필드의 경우 <code translate="no">max_capacity</code> 을 수정할 수 있습니다. 그러나 스키마에서 필드를 추가하거나 제거하는 기능은 향후 릴리스에 추가될 예정이므로 Milvus 내에서 스키마 관리의 유연성이 향상될 것입니다.</p>
+<h4 id="Does-modifying-maxlength-for-VarChar-require-data-reorganization" class="common-anchor-header">VarChar에 대해 max_length를 수정하면 데이터를 재구성해야 하나요?</h4><p>아니요, VarChar 필드에 대해 <code translate="no">max_length</code> 을 수정한다고 해서 압축이나 재구성 등의 데이터 재구성이 필요하지 않습니다. 이 조정은 주로 필드에 삽입되는 새 데이터에 대한 유효성 검사 기준을 업데이트하며 기존 데이터는 영향을 받지 않습니다. 따라서 이 변경은 가벼운 것으로 간주되며 시스템에 큰 오버헤드를 부과하지 않습니다.</p>
 <h4 id="Still-have-questions" class="common-anchor-header">아직 질문이 있으신가요?</h4><p>언제든지 문의하세요:</p>
 <ul>
 <li>GitHub에서 <a href="https://github.com/milvus-io/milvus/issues">Milvus를</a> 확인하세요. 질문을 제기하고, 아이디어를 공유하고, 다른 사람들을 도울 수 있습니다.</li>

@@ -46,9 +46,12 @@ summary: >-
     </button></h2><p>Milvus 的分析器由一个<strong>标记化器</strong>和<strong>零个或多个</strong>过滤器组成。</p>
 <ul>
 <li><p><strong>标记化器</strong>：标记器将输入文本分解为称为标记的离散单元。根据标记符类型的不同，这些标记符可以是单词或短语。</p></li>
-<li><p><strong>过滤器</strong>：可以对标记符进行过滤，进一步细化标记符，例如，将标记符变成小写或删除常用词。</p></li>
+<li><p><strong>过滤器</strong>：可以对标记符进行过滤，进一步细化标记符，例如将标记符变成小写或删除常用词。</p></li>
 </ul>
-<p>下面的工作流程显示了分析器是如何处理文本的。</p>
+<div class="alert note">
+<p>标记符仅支持 UTF-8 格式。未来版本将增加对其他格式的支持。</p>
+</div>
+<p>下面的工作流程显示了分析器如何处理文本。</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/analyzer-overview.png" alt="analyzer-overview" width="400"/></p>
 <h2 id="Analyzer-types​" class="common-anchor-header">分析器类型<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,7 +70,7 @@ summary: >-
       </svg>
     </button></h2><p>Milvus 提供两种类型的分析器，以满足不同的文本处理需求。</p>
 <ul>
-<li><p><strong>内置分析器</strong>：这些是预定义的配置，只需最少的设置即可完成常见的文本处理任务。内置分析器不需要复杂的配置，是通用搜索的理想选择。</p></li>
+<li><p><strong>内置分析器</strong>：这些是预定义配置，只需最少的设置即可完成常见的文本处理任务。内置分析器不需要复杂的配置，是通用搜索的理想选择。</p></li>
 <li><p><strong>自定义分析器</strong>：对于更高级的需求，自定义分析器允许你通过指定标记器和零个或多个过滤器来定义自己的配置。这种自定义级别对于需要精确控制文本处理的特殊用例尤其有用。</p></li>
 </ul>
 <div class="alert note">
@@ -149,7 +152,7 @@ analyzerParams.<span class="hljs-title function_">put</span>(<span class="hljs-s
 <li><p><code translate="no">english</code>:针对英语文本进行了优化，支持英语停止词。</p></li>
 <li><p><code translate="no">chinese</code>:专门用于处理中文文本，包括针对中文语言结构的标记化。</p></li>
 </ul>
-<h3 id="Custom-analyzer​" class="common-anchor-header">自定义分析器</h3><p>对于更高级的文本处理，Milvus 中的自定义分析器允许您通过指定<strong>标记化器</strong>和过滤器来构建定制的文本处理管道。这种设置非常适合需要精确控制的特殊用例。</p>
+<h3 id="Custom-analyzer​" class="common-anchor-header">自定义分析器</h3><p>对于更高级的文本处理，Milvus 中的自定义分析器允许您通过指定<strong>标记符号化器</strong>和过滤器来建立一个定制的文本处理管道。这种设置非常适合需要精确控制的特殊用例。</p>
 <h4 id="Tokenizer​" class="common-anchor-header">标记器</h4><p><strong>标记化器</strong>是自定义分析器的<strong>必备</strong>组件，它通过将输入文本分解为离散单元或<strong>标记来</strong>启动分析器管道。标记化遵循特定的规则，例如根据标记化器的类型用空白或标点符号分割。这一过程可以更精确、更独立地处理每个单词或短语。</p>
 <p>例如，标记化器会将文本<code translate="no">&quot;Vector Database Built for Scale&quot;</code> 转换为单独的标记。</p>
 <pre><code translate="no" class="language-Plain Text">[<span class="hljs-string">&quot;Vector&quot;</span>, <span class="hljs-string">&quot;Database&quot;</span>, <span class="hljs-string">&quot;Built&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>, <span class="hljs-string">&quot;Scale&quot;</span>]​
@@ -172,7 +175,7 @@ analyzerParams.<span class="hljs-title function_">put</span>(<span class="hljs-s
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Filter​" class="common-anchor-header">过滤器</h4><p><strong>过滤器</strong>是<strong>可选</strong>组件，用于处理标记化器生成的标记，并根据需要对其进行转换或细化。例如，在对标记化术语<code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> 应用<code translate="no">lowercase</code> 过滤器后，结果可能是。</p>
+<h4 id="Filter​" class="common-anchor-header">过滤器</h4><p><strong>过滤器</strong>是<strong>可选</strong>组件，用于处理标记化器生成的标记，根据需要对其进行转换或细化。例如，在对标记化术语<code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> 应用<code translate="no">lowercase</code> 过滤器后，结果可能是。</p>
 <pre><code translate="no">[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;database&quot;</span>, <span class="hljs-string">&quot;built&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>, <span class="hljs-string">&quot;scale&quot;</span>]​
 <button class="copy-code-btn"></button></code></pre>
 <p>自定义分析器中的过滤器可以是<strong>内置的</strong>，也可以是<strong>自定义的</strong>，具体取决于配置需求。</p>

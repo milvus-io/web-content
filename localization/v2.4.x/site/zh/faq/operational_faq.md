@@ -28,14 +28,14 @@ title: 操作常见问题
 <h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">影响召回率的主要因素是什么？</h4><p>召回率主要受索引类型和搜索参数的影响。</p>
 <p>对于 FLAT 索引，Milvus 在一个 Collection 内进行穷举扫描，100% 返回。</p>
 <p>对于 IVF 索引，nprobe 参数决定了 Collections 内的搜索范围。增加 nprobe 会增加搜索到的向量比例和召回率，但会降低查询性能。</p>
-<p>对于 HNSW 索引，ef 参数决定图搜索的广度。增加 ef 会增加在图上搜索的点数和召回率，但会降低查询性能。</p>
+<p>对于 HNSW 索引，ef 参数决定图搜索的广度。增加 ef 会增加在图中搜索的点数和召回率，但会降低查询性能。</p>
 <p>有关详细信息，请参阅<a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">向量索引</a>。</p>
 <h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">为什么我对配置文件的修改没有生效？</h4><p>Milvus 不支持在运行期间修改配置文件。您必须重新启动 Milvus Docker，配置文件的更改才能生效。</p>
 <h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">如何知道 Milvus 是否已成功启动？</h4><p>如果使用 Docker Compose 启动 Milvus，请运行<code translate="no">docker ps</code> 观察有多少 Docker 容器正在运行，并检查 Milvus 服务是否正确启动。</p>
 <p>对于 Milvus Standalone，应该至少能观察到三个运行中的 Docker 容器，其中一个是 Milvus 服务，其他两个是 etcd 管理和存储服务。更多信息，请参阅<a href="/docs/zh/install_standalone-docker.md">安装 Milvus Standalone</a>。</p>
 <h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">为什么日志文件中的时间与系统时间不同？</h4><p>时间不同通常是由于主机不使用协调世界时（UTC）。</p>
 <p>Docker 映像中的日志文件默认使用 UTC。如果您的主机不使用 UTC，可能会出现这个问题。</p>
-<h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">我如何知道我的 CPU 是否支持 Milvus？</h4><p>Milvus 的操作符取决于 CPU 对 SIMD（单指令、多数据）扩展指令集的支持。您的中央处理器是否支持 SIMD 扩展指令集对 Milvus 中的索引建立和向量相似性搜索至关重要。确保 CPU 至少支持以下一种 SIMD 指令集：</p>
+<h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">我如何知道我的 CPU 是否支持 Milvus？</h4><p>Milvus 的操作符取决于 CPU 对 SIMD（单指令、多数据）扩展指令集的支持。您的中央处理器是否支持 SIMD 扩展指令集对 Milvus 中的索引建立和向量相似性搜索至关重要。请确保您的 CPU 至少支持以下一种 SIMD 指令集：</p>
 <ul>
 <li>SSE4.2</li>
 <li>AVX</li>
@@ -58,7 +58,7 @@ title: 操作常见问题
 <h4 id="Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances" class="common-anchor-header">能否在多个 Milvus 实例之间共享一个 Pulsar 实例？</h4><p>可以，你可以在多个 Milvus 实例之间共享一个 Pulsar 实例。为此，你可以</p>
 <ul>
 <li>如果在你的 Pulsar 实例上启用了多租户，考虑为每个 Milvus 实例分配一个单独的租户或命名空间。为此，你需要在启动 Milvus 实例之前，将其配置文件中的<code translate="no">pulsar.tenant</code> 或<code translate="no">pulsar.namespace</code> 改为每个实例的唯一值。</li>
-<li>如果不打算在 Pulsar 实例上启用多租户功能，可以考虑在启动 Milvus 实例之前，将其配置文件中的<code translate="no">msgChannel.chanNamePrefix.cluster</code> 更改为每个实例的唯一值。</li>
+<li>如果不打算在 Pulsar 实例上启用多租户功能，可考虑在启动 Milvus 实例之前，将其配置文件中的<code translate="no">msgChannel.chanNamePrefix.cluster</code> 更改为每个实例的唯一值。</li>
 </ul>
 <h4 id="Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances" class="common-anchor-header">我可以在多个 Milvus 实例之间共享一个 MinIO 实例吗？</h4><p>可以，您可以在多个 Milvus 实例之间共享一个 MinIO 实例。为此，您需要在启动每个 Milvus 实例之前，在每个实例的配置文件中将<code translate="no">minio.rootPath</code> 更改为唯一值。</p>
 <h4 id="How-do-I-handle-the-error-message-pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345" class="common-anchor-header">如何处理<code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code> 错误信息？</h4><p>错误信息<code translate="no">Illegal uri [example.db]</code> 表明你正在尝试使用早期版本的 PyMilvus 连接 Milvus Lite，而早期版本的 PyMilvus 不支持这种连接类型。要解决这个问题，请将你的 PyMilvus 安装升级到至少 2.4.2 版本，其中包括对连接 Milvus Lite 的支持。</p>
@@ -69,10 +69,10 @@ title: 操作常见问题
 <ul>
 <li><p><strong>数据有限</strong>：Collections 可能没有足够的实体来满足您要求的限制。如果 Collections 中的实体总数少于限制，您收到的结果自然也会减少。</p></li>
 <li><p><strong>主键重复</strong>：在搜索过程中遇到主键重复时，Milvus 会优先处理特定实体。这种行为根据搜索类型而有所不同：</p></li>
-<li><p><strong>查询（完全匹配）</strong>：Milvus 选择具有匹配 PK 的最新实体。 ANN 搜索：Milvus 会选择相似度得分最高的实体，即使实体共享相同的 PK。 如果您的 Collections 有很多重复的主键，这种优先级可能会导致唯一结果少于限制。</p></li>
+<li><p><strong>查询（精确匹配）</strong>：Milvus 选择具有匹配 PK 的最新实体。 ANN 搜索：Milvus 会选择相似度得分最高的实体，即使实体共享相同的 PK。 如果您的 Collections 有很多重复的主键，这种优先级可能会导致唯一结果少于限制。</p></li>
 <li><p><strong>匹配不足</strong>：您的搜索过滤表达式可能过于严格，导致符合相似性阈值的实体较少。如果为搜索设置的条件限制性太强，匹配的实体就不够多，导致结果比预期的少。</p></li>
 </ul>
-<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>.什么原因导致这种情况，如何解决？</h4><p>当你尝试在 Windows 平台上使用 Milvus Lite 时，就会出现这个错误。Milvus Lite 主要为 Linux 环境设计，可能不支持 Windows。</p>
+<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>.什么原因导致这种情况，如何解决？</h4><p>当您尝试在 Windows 平台上使用 Milvus Lite 时，会出现此错误。Milvus Lite 主要为 Linux 环境设计，可能不支持 Windows。</p>
 <p>解决办法是使用 Linux 环境：</p>
 <ul>
 <li>使用基于 Linux 的操作系统或虚拟机来运行 Milvus Lite。</li>
@@ -100,5 +100,5 @@ title: 操作常见问题
 <h4 id="Still-have-questions" class="common-anchor-header">还有问题？</h4><p>你可以</p>
 <ul>
 <li>查看 GitHub 上的<a href="https://github.com/milvus-io/milvus/issues">Milvus</a>。随时提问、分享想法并帮助其他用户。</li>
-<li>加入我们的<a href="https://discuss.milvus.io/">Milvus 论坛</a>或<a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 频道</a>，寻求支持并与我们的开源社区互动。</li>
+<li>加入我们的<a href="https://discord.com/invite/8uyFbECzPX">Discord 服务器</a>，寻求支持并参与我们的开源社区。</li>
 </ul>

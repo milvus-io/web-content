@@ -617,14 +617,14 @@ curl --request POST \​
       </svg>
     </button></h2><h3 id="Insert-and-Delete-Entities​" class="common-anchor-header">Inserir e excluir entidades</h3><p>É possível realizar operações de inserção, upsert e exclusão em operações específicas. Para obter detalhes, consulte</p>
 <ul>
-<li><p>Inserir entidades na partição</p></li>
-<li><p>Inserir entidades na partição</p></li>
-<li><p>Excluir entidades da partição</p></li>
+<li><p><a href="/docs/pt/insert-update-delete.md#Insert-Entities-into-a-Partition">Inserir entidades na partição</a></p></li>
+<li><p><a href="/docs/pt/upsert-entities.md#Upsert-Entities-in-a-Partition">Inserir entidades na partição</a></p></li>
+<li><p><a href="/docs/pt/delete-entities.md#Delete-Entities-from-Partitions">Excluir entidades da partição</a></p></li>
 </ul>
 <h3 id="Search-and-Query​" class="common-anchor-header">Pesquisa e consulta</h3><p>É possível realizar pesquisas e consultas em partições específicas. Para obter detalhes, consulte</p>
 <ul>
-<li><p>Realizar pesquisas ANN dentro de partições</p></li>
-<li><p>Realizar filtragem de metadados em partições</p></li>
+<li><p><a href="/docs/pt/single-vector-search.md#ANN-Search-in-Partition">Realizar pesquisas ANN dentro de partições</a></p></li>
+<li><p><a href="/docs/pt/filtered-search.md">Realizar filtragem de metadados em partições</a></p></li>
 </ul>
 <h2 id="Drop-Partition​" class="common-anchor-header">Eliminar partição<button data-href="#Drop-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"

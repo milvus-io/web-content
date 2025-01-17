@@ -21,7 +21,7 @@ summary: تعرف على كيفية تهيئة rocksmq لـ Milvus.
       </svg>
     </button></h1><p>إذا كنت ترغب في تمكين كافكا، تحتاج إلى التعليق على تكوينات بولسار</p>
 <p>كافكا</p>
-<p>brokerList:</p>
+<p>قائمة الوسطاء: المضيف المحلي: 9092</p>
 <p>saslUsername:</p>
 <p>saslPassword:</p>
 <p>saslMechanisms:</p>

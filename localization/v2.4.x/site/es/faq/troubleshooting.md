@@ -109,6 +109,6 @@ kubectl kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">
 <p><br/></p>
 <p>Si necesitas ayuda para resolver un problema, no dudes en hacerlo:</p>
 <ul>
-<li>Únase a nuestro <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">canal de Slack</a> y solicite ayuda al equipo de Milvus.</li>
+<li>Únase a nuestro <a href="https://discord.com/invite/8uyFbECzPX">servidor Discord</a> y solicite ayuda al equipo de Milvus.</li>
 <li><a href="https://github.com/milvus-io/milvus/issues/new/choose">Presentar una incidencia</a> en GitHub que incluya detalles sobre su problema.</li>
 </ul>

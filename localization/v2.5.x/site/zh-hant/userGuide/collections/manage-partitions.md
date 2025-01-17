@@ -33,12 +33,12 @@ title: 管理磁碟分割
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當建立一個集合時，Milvus 也會在集合中建立一個名為<strong>_default</strong>的分割區。如果您不打算添加任何其他分区，所有插入到集合中的实体都会进入默认分区，所有搜索和查询也会在默认分区中进行。</p>
+    </button></h2><p>當建立一個集合時，Milvus 也會在集合中建立一個名為<strong>_default</strong>的分區。如果您不打算添加任何其他分区，所有插入到集合中的实体都会进入默认分区，所有搜索和查询也会在默认分区中进行。</p>
 <p>您可以新增更多分區，並根據特定條件將實體插入其中。然後，您可以在特定的分割區內限制搜尋和查詢，以改善搜尋效能。</p>
 <p>一個資料集最多可有 1,024 個分割區。</p>
 <div class="alert note">
 <p><strong>分區鑰匙</strong>功能是基於分區的搜尋最佳化，並允許 Milvus 根據特定標量欄位中的值，將實體分配到不同的分區中。此功能有助於實現面向分區的多租戶，並改善搜尋效能。</p>
-<p>本頁面不會討論此功能。要瞭解更多資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md">使用分區鑰匙</a>。</p>
+<p>本頁面不會討論此功能。要瞭解更多資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md">使用分割區金鑰</a>。</p>
 </div>
 <h2 id="List-Partitions​" class="common-anchor-header">列出分區<button data-href="#List-Partitions​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -617,14 +617,14 @@ curl --request POST \​
       </svg>
     </button></h2><h3 id="Insert-and-Delete-Entities​" class="common-anchor-header">插入與刪除實體</h3><p>您可以在特定的作業中執行插入、倒插和刪除作業。如需詳細資訊，請參閱</p>
 <ul>
-<li><p>將實體插入分割區</p></li>
-<li><p>將實體上載到磁碟分割</p></li>
-<li><p>從分區刪除實體</p></li>
+<li><p><a href="/docs/zh-hant/insert-update-delete.md#Insert-Entities-into-a-Partition">將實體插入分割區</a></p></li>
+<li><p><a href="/docs/zh-hant/upsert-entities.md#Upsert-Entities-in-a-Partition">將實體上載到磁碟分割</a></p></li>
+<li><p><a href="/docs/zh-hant/delete-entities.md#Delete-Entities-from-Partitions">從分區刪除實體</a></p></li>
 </ul>
 <h3 id="Search-and-Query​" class="common-anchor-header">搜尋和查詢</h3><p>您可以在特定分区内进行搜索和查询。詳情請參閱</p>
 <ul>
-<li><p>在分區中進行 ANN 搜尋</p></li>
-<li><p>在分割區內進行元資料篩選</p></li>
+<li><p><a href="/docs/zh-hant/single-vector-search.md#ANN-Search-in-Partition">在分區中進行 ANN 搜尋</a></p></li>
+<li><p><a href="/docs/zh-hant/filtered-search.md">在分割區內進行元資料篩選</a></p></li>
 </ul>
 <h2 id="Drop-Partition​" class="common-anchor-header">刪除分割區<button data-href="#Drop-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"

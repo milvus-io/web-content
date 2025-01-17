@@ -43,7 +43,7 @@ Na versão atual, todos os parâmetros só têm efeito depois de serem configura
 <p>Ver <a href="/docs/pt/configure_etcd.md">Configurações relacionadas com o etcd</a> para uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="metastore" class="common-anchor-header"><code translate="no">metastore</code></h3><p>Ver Configurações <a href="/docs/pt/configure_metastore.md">relacionadas com o metastore</a> para uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="tikv" class="common-anchor-header"><code translate="no">tikv</code></h3><p>Configuração relacionada do tikv, usado para armazenar metadados do Milvus.</p>
-<p>Note que quando o TiKV está ativado para o metastore, continua a ser necessário ter o etcd para a descoberta de serviços.</p>
+<p>Note que quando o TiKV é ativado para o metastore, continua a ser necessário ter o etcd para a descoberta de serviços.</p>
 <p>O TiKV é uma boa opção quando o tamanho dos metadados requer uma melhor escalabilidade horizontal.</p>
 <p>Consulte <a href="/docs/pt/configure_tikv.md">Configurações relacionadas com o tikv</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="localStorage" class="common-anchor-header"><code translate="no">localStorage</code></h3><p>Consulte Configurações <a href="/docs/pt/configure_localstorage.md">relacionadas com o localStorage</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
@@ -62,7 +62,7 @@ Na versão atual, todos os parâmetros só têm efeito depois de serem configura
 <p>Consulte <a href="/docs/pt/configure_pulsar.md">Configurações relacionadas com o pulsar</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>Se quiser ativar o kafka, tem de comentar as configurações do pulsar</p>
 <p>kafka:</p>
-<p>brokerList:</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername:</p>
 <p>saslPassword:</p>
 <p>saslMechanisms:</p>
@@ -84,10 +84,10 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>mais detalhes: https://docs.nats.io/running-a-nats-service/configuration</p>
 <p>Ver <a href="/docs/pt/configure_natsmq.md">Configurações relacionadas com natsmq</a> para uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code></h3><p>Configuração relacionada com o rootCoord, utilizada para tratar os pedidos de linguagem de definição de dados (DDL) e de linguagem de controlo de dados (DCL)</p>
-<p>Consulte Configurações <a href="/docs/pt/configure_rootcoord.md">relacionadas com rootCoord</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
+<p>Consulte Configurações <a href="/docs/pt/configure_rootcoord.md">relacionadas com rootCoord</a> para obter uma descrição pormenorizada de cada parâmetro desta secção.</p>
 <h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code></h3><p>Configuração relacionada do proxy, utilizada para validar os pedidos dos clientes e reduzir os resultados devolvidos.</p>
-<p>Consulte as <a href="/docs/pt/configure_proxy.md">Configurações relacionadas com o proxy</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
-<h3 id="queryCoord" class="common-anchor-header"><code translate="no">queryCoord</code></h3><p>Configuração relacionada de queryCoord, utilizada para gerir a topologia e o equilíbrio de carga para os nós de consulta e a transferência de segmentos em crescimento para segmentos selados.</p>
+<p>Consulte <a href="/docs/pt/configure_proxy.md">as Configurações relacionadas com o proxy</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
+<h3 id="queryCoord" class="common-anchor-header"><code translate="no">queryCoord</code></h3><p>Configuração relacionada de queryCoord, usada para gerenciar a topologia e o balanceamento de carga para os nós de consulta e a transferência de segmentos crescentes para segmentos selados.</p>
 <p>Consulte <a href="/docs/pt/configure_querycoord.md">Configurações relacionadas com queryCoord</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="queryNode" class="common-anchor-header"><code translate="no">queryNode</code></h3><p>Configuração relacionada de queryNode, usada para executar pesquisa híbrida entre dados vetoriais e escalares.</p>
 <p>Consulte <a href="/docs/pt/configure_querynode.md">Configurações relacionadas com queryNode</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
@@ -96,12 +96,14 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <h3 id="dataCoord" class="common-anchor-header"><code translate="no">dataCoord</code></h3><p>Ver Configurações <a href="/docs/pt/configure_datacoord.md">relacionadas com o dataCoord</a> para uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="dataNode" class="common-anchor-header"><code translate="no">dataNode</code></h3><p>Consulte <a href="/docs/pt/configure_datanode.md">Configurações relacionadas com dataNode</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="msgChannel" class="common-anchor-header"><code translate="no">msgChannel</code></h3><p>Este tópico apresenta as configurações do Milvus relacionadas com o canal de mensagens.</p>
-<p>Ver <a href="/docs/pt/configure_msgchannel.md">msgChannel-related Configurations</a> para uma descrição detalhada de cada parâmetro desta secção.</p>
+<p>Veja <a href="/docs/pt/configure_msgchannel.md">msgChannel-related Configurations</a> para uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>Configura a saída de log do sistema.</p>
 <p>Ver <a href="/docs/pt/configure_log.md">Configurações relacionadas com o log</a> para uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>Ver Configurações <a href="/docs/pt/configure_grpc.md">relacionadas com o grpc</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Configurar a ativação do proxy tls.</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Configurar o tls externo.</p>
 <p>Consulte Configurações <a href="/docs/pt/configure_tls.md">relacionadas com tls</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code></h3><p>Configurar tls interno.</p>
+<p>Ver Configurações <a href="/docs/pt/configure_internaltls.md">relacionadas com internaltls</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>Ver Configurações <a href="/docs/pt/configure_common.md">relacionadas com common</a> para uma descrição detalhada de cada parâmetro desta secção.</p>
 <h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig, configurações de quotas e limites do Milvus.</p>
 <p>Por defeito, activamos:</p>
@@ -126,4 +128,10 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#se initMemSize e MaxMemSize estão ambos a zero,</p>
 <p>#milvus inicializará automaticamente metade da memória disponível da GPU,</p>
 <p>#maxMemSize irá toda a memória disponível da GPU.</p>
-<p>Veja <a href="/docs/pt/configure_gpu.md">Configurações relacionadas com o gpu</a> para uma descrição detalhada de cada parâmetro nesta secção.</p>
+<p>Consulte <a href="/docs/pt/configure_gpu.md">Configurações relacionadas com o gpu</a> para obter uma descrição detalhada de cada parâmetro nesta secção.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>Qualquer configuração relacionada ao servidor do nó de streaming.</p>
+<p>Consulte <a href="/docs/pt/configure_streamingnode.md">Configurações relacionadas com o streamingNode</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>Qualquer configuração relacionada com o serviço de streaming.</p>
+<p>Consulte <a href="/docs/pt/configure_streaming.md">Configurações relacionadas com o streaming</a> para obter uma descrição detalhada de cada parâmetro desta secção.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>Qualquer configuração relacionada ao mecanismo de pesquisa vetorial do knowhere</p>
+<p>Consulte <a href="/docs/pt/configure_knowhere.md">Configurações relacionadas com o know</a> here para obter uma descrição detalhada de cada parâmetro desta secção.</p>

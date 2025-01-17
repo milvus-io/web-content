@@ -119,7 +119,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   </thead>
   <tbody>
     <tr>
-      <td>        속도 제한에서 순방향 데이터 할당 삭제가 실패한 경우 재시도 시간      </td>
+      <td>        속도 제한에서 순방향 데이터 할당 삭제 실패 시 재시도 시간      </td>
       <td>15</td>
     </tr>
   </tbody>
@@ -177,7 +177,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   </thead>
   <tbody>
     <tr>
-      <td>        리미터에 의한 복합 삭제 체크 포워드 데이터 삭제 여부      </td>
+      <td>        리미터에 의한 복합 삭제 정방향 데이터 확인 여부      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -266,6 +266,35 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
     <tr>
       <td>        쿼리 노드의 최대 리소스 그룹 수   </td>
       <td>1024</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitsmaxGroupSize" class="common-anchor-header"><code translate="no">quotaAndLimits.limits.maxGroupSize</code><button data-href="#quotaAndLimitslimitsmaxGroupSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limits.maxGroupSize">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        검색 그룹을 기준으로 할 때 하나의 단일 그룹에 대한 최대 크기      </td>
+      <td>10</td>
     </tr>
   </tbody>
 </table>
@@ -1940,7 +1969,7 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   <tbody>
     <tr>
       <td>        L0 세그먼트 행 수 할당량, 저수위      </td>
-      <td>32768</td>
+      <td>30000000</td>
     </tr>
   </tbody>
 </table>
@@ -1968,8 +1997,182 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
   </thead>
   <tbody>
     <tr>
-      <td>        L0 세그먼트 행 수 할당량, 낮은 수위      </td>
+      <td>        L0 세그먼트 행 수 할당량, 높은 수위      </td>
+      <td>50000000</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferRowCountProtectionenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferRowCountProtection.enabled</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferRowCountProtectionenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.enabled">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        버퍼 행 수 할당량 삭제를 사용하도록 전환합니다.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferRowCountProtectionlowWaterLevel" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferRowCountProtection.lowWaterLevel</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferRowCountProtectionlowWaterLevel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.lowWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        버퍼 행 수 할당량 삭제, 낮은 수위      </td>
+      <td>32768</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferRowCountProtectionhighWaterLevel" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferRowCountProtection.highWaterLevel</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferRowCountProtectionhighWaterLevel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.highWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        버퍼 행 수 할당량 삭제, 높은 수위      </td>
       <td>65536</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferSizeProtectionenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferSizeProtection.enabled</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferSizeProtectionenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.enabled">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        삭제 버퍼 크기 할당량을 사용하도록 전환합니다.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferSizeProtectionlowWaterLevel" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferSizeProtection.lowWaterLevel</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferSizeProtectionlowWaterLevel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.lowWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        버퍼 크기 할당량 삭제, 낮은 수위      </td>
+      <td>134217728</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferSizeProtectionhighWaterLevel" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferSizeProtection.highWaterLevel</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferSizeProtectionhighWaterLevel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.highWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        버퍼 크기 할당량 삭제, 높은 수위      </td>
+      <td>268435456</td>
     </tr>
   </tbody>
 </table>
@@ -2001,137 +2204,6 @@ summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보�
         <li>forceDeny false는 dql 요청이 허용됨을 의미하며(일부 특정 조건 제외</li>      
         <li>특정 조건 제외), true는 항상 모든 dql 요청을 거부함을 의미합니다.</li>      </td>
       <td>false</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold" class="common-anchor-header"><code translate="no">quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code><button data-href="#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold">
-  <thead>
-    <tr>
-      <th class="width80">설명</th>
-      <th class="width20">기본값</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>nqInQueueThreshold는 시스템이 검색/쿼리 경로에 대해 백압을 받고 있음을 나타냅니다.</li>      
-        <li>어떤 쿼리 노드의 큐에 있는 NQ가 nqInQueueThreshold보다 크면, 검색 및 쿼리 속도가 서서히 낮아집니다.</li>      
-        <li>대기열의 NQ가 더 이상 nqInQueueThreshold를 초과하지 않을 때까지 서서히 냉각됩니다. 쿼리 요청의 NQ를 1로 간주합니다.</li>      
-        <li>int, 기본값 제한 없음</li>      </td>
-      <td>-1</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold" class="common-anchor-header"><code translate="no">quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</code><button data-href="#quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold">
-  <thead>
-    <tr>
-      <th class="width80">설명</th>
-      <th class="width20">기본값</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>queueLatencyThreshold는 시스템이 검색/쿼리 경로에 대한 역압박을 받고 있음을 나타냅니다.</li>      
-        <li>큐 큐잉 대기 시간이 queueLatencyThreshold보다 큰 경우, 검색 및 쿼리 속도가 점차적으로 냉각됩니다.</li>      
-        <li>대기 시간이 더 이상 queueLatencyThreshold를 초과하지 않을 때까지 검색 및 쿼리 속도가 점차 낮아집니다.</li>      
-        <li>여기서 지연 시간은 일정 기간 동안의 평균 지연 시간을 의미합니다.</li>      
-        <li>밀리초, 기본값은 제한 없음</li>      </td>
-      <td>-1</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="quotaAndLimitslimitReadingresultProtectionmaxReadResultRate" class="common-anchor-header"><code translate="no">quotaAndLimits.limitReading.resultProtection.maxReadResultRate</code><button data-href="#quotaAndLimitslimitReadingresultProtectionmaxReadResultRate" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="quotaAndLimits.limitReading.resultProtection.maxReadResultRate">
-  <thead>
-    <tr>
-      <th class="width80">설명</th>
-      <th class="width20">기본값</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>maxReadResultRate는 시스템이 검색/쿼리 경로에 대해 백압을 받고 있음을 나타냅니다.</li>      
-        <li>dql 결과 속도가 maxReadResultRate보다 큰 경우, 검색 및 쿼리 속도가 점차적으로 낮아집니다.</li>      
-        <li>읽기 결과 속도가 더 이상 maxReadResultRate를 초과하지 않을 때까지 서서히 냉각됩니다.</li>      
-        <li>MB/s, 기본값 제한 없음</li>      </td>
-      <td>-1</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="quotaAndLimitslimitReadingcoolOffSpeed" class="common-anchor-header"><code translate="no">quotaAndLimits.limitReading.coolOffSpeed</code><button data-href="#quotaAndLimitslimitReadingcoolOffSpeed" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="quotaAndLimits.limitReading.coolOffSpeed">
-  <thead>
-    <tr>
-      <th class="width80">설명</th>
-      <th class="width20">기본값</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>colOffSpeed는 검색 및 쿼리 속도가 냉각되는 속도입니다.</li>      
-        <li>(0, 1]</li>      </td>
-      <td>0.9</td>
     </tr>
   </tbody>
 </table>

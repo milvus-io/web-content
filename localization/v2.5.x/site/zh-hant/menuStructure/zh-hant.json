@@ -925,7 +925,7 @@
     ]
   },
   {
-    "label": "Milvus 移動",
+    "label": "Milvus 遷移",
     "id": "milvus_migration",
     "isMenu": true,
     "order": 6,
@@ -1472,26 +1472,26 @@
             "isMenu": true,
             "children": [
               {
+                "label": "在一個實例中備份和還原",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "在單一儲存桶中的實體間遷移",
                 "id": "shared-bucket-backup-and-restore.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "跨儲存桶在實體間遷移",
                 "id": "cross-bucket-backup-and-restore.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "在跨 S3 環境的 Instances 之間遷移",
                 "id": "multi-storage-backup-and-restore.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "在一個實例中備份和還原",
-                "id": "single-instance-backup-and-restore.md",
                 "order": 3,
                 "children": []
               }
@@ -1907,7 +1907,7 @@
         "order": 6,
         "children": [
           {
-            "label": "拉格",
+            "label": "拉格舞曲",
             "id": "integrate_with_ragas.md",
             "order": 0,
             "children": []

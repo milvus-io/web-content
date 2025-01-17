@@ -27,7 +27,7 @@ title: FAQ opérationnelle
 }
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">Docker est-il le seul moyen d'installer et d'exécuter Milvus ?</h4><p>Docker est un moyen efficace de déployer Milvus, mais ce n'est pas le seul. Vous pouvez également déployer Milvus à partir du code source. Cela nécessite Ubuntu (18.04 ou supérieur) ou CentOS (7 ou supérieur). Voir <a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">Construire Milvus à partir du code source</a> pour plus d'informations.</p>
-<h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">Quels sont les principaux facteurs qui affectent le rappel ?</h4><p>Le rappel est principalement affecté par le type d'index et les paramètres de recherche.</p>
+<h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">Quels sont les principaux facteurs affectant le rappel ?</h4><p>Le rappel est principalement affecté par le type d'index et les paramètres de recherche.</p>
 <p>Pour les index FLAT, Milvus effectue un balayage exhaustif dans une collection, avec un retour de 100 %.</p>
 <p>Pour les index IVF, le paramètre nprobe détermine l'étendue d'une recherche dans la collection. L'augmentation de nprobe accroît la proportion de vecteurs recherchés et le rappel, mais diminue les performances de la requête.</p>
 <p>Pour l'index HNSW, le paramètre ef détermine l'étendue de la recherche dans le graphe. L'augmentation de ef augmente le nombre de points recherchés dans le graphe et le rappel, mais diminue les performances de la requête.</p>
@@ -102,5 +102,5 @@ title: FAQ opérationnelle
 <h4 id="Still-have-questions" class="common-anchor-header">Vous avez encore des questions ?</h4><p>Vous pouvez le faire :</p>
 <ul>
 <li>Consulter <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> sur GitHub. N'hésitez pas à poser des questions, à partager des idées et à aider les autres.</li>
-<li>Rejoignez notre <a href="https://discuss.milvus.io/">forum Milvus</a> ou notre <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">canal Slack</a> pour trouver de l'aide et vous engager avec notre communauté open-source.</li>
+<li>Rejoindre notre <a href="https://discord.com/invite/8uyFbECzPX">serveur Discord</a> pour trouver de l'aide et participer à notre communauté open-source.</li>
 </ul>

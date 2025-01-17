@@ -48,35 +48,6 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
     </tr>
   </tbody>
 </table>
-<h2 id="dataCoordchannelbalanceWithRpc" class="common-anchor-header"><code translate="no">dataCoord.channel.balanceWithRpc</code><button data-href="#dataCoordchannelbalanceWithRpc" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.channel.balanceWithRpc">
-  <thead>
-    <tr>
-      <th class="width80">Deskripsi</th>
-      <th class="width20">Nilai Default</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Apakah akan mengaktifkan keseimbangan dengan RPC, default untuk menggunakan arloji etcd    </td>
-      <td>benar</td>
-    </tr>
-  </tbody>
-</table>
 <h2 id="dataCoordchannellegacyVersionWithoutRPCWatch" class="common-anchor-header"><code translate="no">dataCoord.channel.legacyVersionWithoutRPCWatch</code><button data-href="#dataCoordchannellegacyVersionWithoutRPCWatch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -101,7 +72,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Datanode &lt;= versi ini dianggap sebagai node lama, yang tidak memiliki watch() berbasis rpc. Ini hanya digunakan selama peningkatan bergilir di mana node lama tidak akan mendapatkan saluran baru    </td>
+      <td>        Datanode &lt;= versi ini dianggap sebagai node lama, yang tidak memiliki watch() berbasis rpc. Ini hanya digunakan selama peningkatan bergulir di mana node lama tidak akan mendapatkan saluran baru    </td>
       <td>2.4.1</td>
     </tr>
   </tbody>
@@ -309,6 +280,35 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordsegmentsealProportionJitter" class="common-anchor-header"><code translate="no">dataCoord.segment.sealProportionJitter</code><button data-href="#dataCoordsegmentsealProportionJitter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.segment.sealProportionJitter">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        rasio jitter proporsi segel segmen, nilai default 0,1 (10%), jika proporsi segel adalah 12%, dengan jitter = 0,1, rasio yang diterapkan secara aktual adalah 10,8 ~ 12  </td>
+      <td>0.1</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordsegmentassignmentExpiration" class="common-anchor-header"><code translate="no">dataCoord.segment.assignmentExpiration</code><button data-href="#dataCoordsegmentassignmentExpiration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -328,7 +328,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   <thead>
     <tr>
       <th class="width80">Deskripsi</th>
-      <th class="width20">Nilai Default</th> 
+      <th class="width20">Nilai default</th> 
     </tr>
   </thead>
   <tbody>
@@ -482,8 +482,8 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Jumlah maksimum file binlog untuk satu segmen, segmen akan disegel jika</li>      
-        <li>jumlah file binlog mencapai nilai maksimal.</li>      </td>
+        <li>Jumlah maksimum binlog (yang sama dengan jumlah file binlog dari kunci utama) untuk satu segmen, </li>      
+        <li>segmen akan disegel jika jumlah file binlog mencapai nilai maksimal.</li>      </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -728,6 +728,416 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
         <li>Alihkan nilai untuk mengontrol apakah akan mengaktifkan pemadatan segmen otomatis selama data coord menempatkan dan menggabungkan segmen yang dapat dipadatkan di latar belakang.</li>      
         <li>Konfigurasi ini hanya berlaku jika dataCoord.enableCompaction disetel sebagai true.</li>      </td>
       <td>true</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactiontaskPrioritizer" class="common-anchor-header"><code translate="no">dataCoord.compaction.taskPrioritizer</code><button data-href="#dataCoordcompactiontaskPrioritizer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.taskPrioritizer">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>prioritas tugas pemadatan, opsi: [default, level, mix]. </li>      
+        <li>default adalah FIFO.</li>      
+        <li>level diprioritaskan berdasarkan level: Pemadatan L0 terlebih dahulu, kemudian pemadatan campuran, lalu pemadatan pengelompokan.</li>      
+        <li>mix diprioritaskan berdasarkan level: pemadatan campuran terlebih dahulu, kemudian pemadatan L0, lalu pemadatan pengelompokan.</li>      </td>
+      <td>default</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactiontaskQueueCapacity" class="common-anchor-header"><code translate="no">dataCoord.compaction.taskQueueCapacity</code><button data-href="#dataCoordcompactiontaskQueueCapacity" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.taskQueueCapacity">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        ukuran antrian tugas pemadatan      </td>
+      <td>100000</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactiondropTolerance" class="common-anchor-header"><code translate="no">dataCoord.compaction.dropTolerance</code><button data-href="#dataCoordcompactiondropTolerance" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.dropTolerance">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Tugas pemadatan akan dibersihkan setelah selesai lebih lama dari waktu ini (dalam detik)      </td>
+      <td>86400</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactiongcInterval" class="common-anchor-header"><code translate="no">dataCoord.compaction.gcInterval</code><button data-href="#dataCoordcompactiongcInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.gcInterval">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Interval waktu dalam detik untuk pemadatan gc  </td>
+      <td>1800</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionmixtriggerInterval" class="common-anchor-header"><code translate="no">dataCoord.compaction.mix.triggerInterval</code><button data-href="#dataCoordcompactionmixtriggerInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.mix.triggerInterval">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Interval waktu dalam detik untuk memicu pemadatan campuran      </td>
+      <td>60</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzerotriggerInterval" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.triggerInterval</code><button data-href="#dataCoordcompactionlevelzerotriggerInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.triggerInterval">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Interval waktu dalam detik untuk memicu pemadatan L0  </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzeroforceTriggerminSize" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.minSize</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerminSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.minSize">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Ukuran minimum dalam byte untuk memicu pemicu Pemadatan LevelNol secara paksa, standarnya adalah 8MB   </td>
+      <td>8388608</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzeroforceTriggermaxSize" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.maxSize</code><button data-href="#dataCoordcompactionlevelzeroforceTriggermaxSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.maxSize">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Ukuran maksimum dalam byte untuk memaksa memicu Pemadatan LevelNol, standarnya 64MB    </td>
+      <td>67108864</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzeroforceTriggerdeltalogMinNum" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerdeltalogMinNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Jumlah minimum file deltalog yang dipaksa untuk memicu Pemadatan LevelNol      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzeroforceTriggerdeltalogMaxNum" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerdeltalogMaxNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Jumlah maksimum file deltalog yang dipaksa untuk memicu Pemadatan LevelNol, nilai defaultnya adalah 30  </td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionsingleratiothreshold" class="common-anchor-header"><code translate="no">dataCoord.compaction.single.ratio.threshold</code><button data-href="#dataCoordcompactionsingleratiothreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.single.ratio.threshold">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Ambang batas rasio segmen untuk memicu pemadatan tunggal, standarnya adalah 0,2   </td>
+      <td>0.2</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionsingledeltalogmaxsize" class="common-anchor-header"><code translate="no">dataCoord.compaction.single.deltalog.maxsize</code><button data-href="#dataCoordcompactionsingledeltalogmaxsize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.single.deltalog.maxsize">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Ukuran deltalog segmen untuk memicu pemadatan tunggal, standarnya adalah 16MB    </td>
+      <td>16777216</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionsingledeltalogmaxnum" class="common-anchor-header"><code translate="no">dataCoord.compaction.single.deltalog.maxnum</code><button data-href="#dataCoordcompactionsingledeltalogmaxnum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.single.deltalog.maxnum">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Jumlah deltalog segmen untuk memicu pemadatan, standarnya adalah 200   </td>
+      <td>200</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionsingleexpiredlogmaxsize" class="common-anchor-header"><code translate="no">dataCoord.compaction.single.expiredlog.maxsize</code><button data-href="#dataCoordcompactionsingleexpiredlogmaxsize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.single.expiredlog.maxsize">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Ukuran log kedaluwarsa dari sebuah segmen untuk memicu pemadatan, standarnya adalah 10MB    </td>
+      <td>10485760</td>
     </tr>
   </tbody>
 </table>
@@ -1079,122 +1489,6 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
     </tr>
   </tbody>
 </table>
-<h2 id="dataCoordcompactionlevelzeroforceTriggerminSize" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.minSize</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerminSize" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.minSize">
-  <thead>
-    <tr>
-      <th class="width80">Deskripsi</th>
-      <th class="width20">Nilai Default</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Ukuran minimum dalam byte untuk memicu pemaksaan Pemadatan LevelNol, nilai defaultnya adalah 8MB   </td>
-      <td>8388608</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="dataCoordcompactionlevelzeroforceTriggermaxSize" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.maxSize</code><button data-href="#dataCoordcompactionlevelzeroforceTriggermaxSize" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.maxSize">
-  <thead>
-    <tr>
-      <th class="width80">Deskripsi</th>
-      <th class="width20">Nilai Default</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Ukuran maksimum dalam byte untuk memaksa memicu Pemadatan LevelNol, standarnya 64MB    </td>
-      <td>67108864</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="dataCoordcompactionlevelzeroforceTriggerdeltalogMinNum" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerdeltalogMinNum" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum">
-  <thead>
-    <tr>
-      <th class="width80">Deskripsi</th>
-      <th class="width20">Nilai Default</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Jumlah minimum file deltalog yang dipaksa untuk memicu Pemadatan LevelNol      </td>
-      <td>10</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="dataCoordcompactionlevelzeroforceTriggerdeltalogMaxNum" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerdeltalogMaxNum" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum">
-  <thead>
-    <tr>
-      <th class="width80">Deskripsi</th>
-      <th class="width20">Nilai Default</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Jumlah maksimum file deltalog yang dipaksa untuk memicu Pemadatan LevelNol, nilai defaultnya adalah 30  </td>
-      <td>30</td>
-    </tr>
-  </tbody>
-</table>
 <h2 id="dataCoordsyncSegmentsInterval" class="common-anchor-header"><code translate="no">dataCoord.syncSegmentsInterval</code><button data-href="#dataCoordsyncSegmentsInterval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1224,6 +1518,35 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordindexmemSizeEstimateMultiplier" class="common-anchor-header"><code translate="no">dataCoord.index.memSizeEstimateMultiplier</code><button data-href="#dataCoordindexmemSizeEstimateMultiplier" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.index.memSizeEstimateMultiplier">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Ketika ukuran memori tidak diatur oleh prosedur indeks, pengali untuk memperkirakan ukuran memori data indeks      </td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordenableGarbageCollection" class="common-anchor-header"><code translate="no">dataCoord.enableGarbageCollection</code><button data-href="#dataCoordenableGarbageCollection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1248,7 +1571,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Mengalihkan nilai untuk mengontrol apakah akan mengaktifkan pengumpulan sampah untuk menghapus data yang dibuang dalam layanan MinIO atau S3.      </td>
+      <td>        Nilai sakelar untuk mengontrol apakah akan mengaktifkan pengumpulan sampah untuk menghapus data yang dibuang dalam layanan MinIO atau S3.      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -1688,6 +2011,35 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordimportmaxImportJobNum" class="common-anchor-header"><code translate="no">dataCoord.import.maxImportJobNum</code><button data-href="#dataCoordimportmaxImportJobNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.import.maxImportJobNum">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Jumlah maksimum pekerjaan impor yang sedang dijalankan atau tertunda.      </td>
+      <td>1024</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordimportwaitForIndex" class="common-anchor-header"><code translate="no">dataCoord.import.waitForIndex</code><button data-href="#dataCoordimportwaitForIndex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1712,7 +2064,7 @@ summary: Pelajari cara mengonfigurasi dataCoord untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Menunjukkan apakah operasi impor menunggu selesainya pembuatan indeks.      </td>
+      <td>        Menunjukkan apakah operasi impor menunggu penyelesaian pembuatan indeks.      </td>
       <td>true</td>
     </tr>
   </tbody>

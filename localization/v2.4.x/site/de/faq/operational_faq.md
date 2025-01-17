@@ -18,7 +18,7 @@ title: Häufig gestellte Fragen zum Betrieb
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Was ist, wenn ich das Milvus-Docker-Abbild nicht von Docker Hub ziehen konnte?</h4><p>Wenn Sie das Milvus-Docker-Abbild nicht von Docker Hub abrufen konnten, versuchen Sie, andere Registry-Mirrors hinzuzufügen.</p>
+    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Was ist, wenn ich das Milvus-Docker-Abbild nicht von Docker Hub abrufen konnte?</h4><p>Wenn Sie das Milvus-Docker-Abbild nicht von Docker Hub abrufen konnten, versuchen Sie, andere Registry-Mirrors hinzuzufügen.</p>
 <p>Benutzer aus Festlandchina können die URL "https://registry.docker-cn.com" zum Array registry-mirrors in <strong>/etc.docker/daemon.json</strong> hinzufügen.</p>
 <pre><code translate="no">{
   <span class="hljs-string">&quot;registry-mirrors&quot;</span>: [<span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span>]
@@ -28,7 +28,7 @@ title: Häufig gestellte Fragen zum Betrieb
 <h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">Welches sind die Hauptfaktoren, die den Abruf beeinflussen?</h4><p>Der Abruf wird hauptsächlich durch den Indextyp und die Suchparameter beeinflusst.</p>
 <p>Bei FLAT-Indizes führt Milvus einen vollständigen Scan innerhalb einer Sammlung durch, mit einer 100%igen Rückgabe.</p>
 <p>Bei IVF-Indizes bestimmt der Parameter nprobe den Umfang einer Suche innerhalb der Sammlung. Eine Erhöhung von nprobe erhöht den Anteil der durchsuchten Vektoren und den Rücklauf, verschlechtert aber die Abfrageleistung.</p>
-<p>Beim HNSW-Index bestimmt der Parameter ef die Breite der Graphensuche. Eine Erhöhung von ef erhöht die Anzahl der im Graphen gesuchten Punkte und die Wiederauffindbarkeit, verschlechtert jedoch die Abfrageleistung.</p>
+<p>Beim HNSW-Index bestimmt der Parameter ef die Breite der Graphensuche. Eine Erhöhung von ef erhöht die Anzahl der gesuchten Punkte im Graphen und die Wiederauffindbarkeit, verschlechtert jedoch die Abfrageleistung.</p>
 <p>Weitere Informationen finden Sie unter <a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">Vektorindizierung</a>.</p>
 <h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">Warum sind meine Änderungen an den Konfigurationsdateien nicht wirksam geworden?</h4><p>Milvus unterstützt keine Änderungen an den Konfigurationsdateien während der Laufzeit. Sie müssen Milvus Docker neu starten, damit Änderungen an den Konfigurationsdateien wirksam werden.</p>
 <h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">Woher weiß ich, ob Milvus erfolgreich gestartet wurde?</h4><p>Wenn Milvus unter Verwendung von Docker Compose gestartet wurde, führen Sie <code translate="no">docker ps</code> aus, um zu beobachten, wie viele Docker-Container ausgeführt werden, und um zu überprüfen, ob die Milvus-Dienste korrekt gestartet wurden.</p>
@@ -100,5 +100,5 @@ title: Häufig gestellte Fragen zum Betrieb
 <h4 id="Still-have-questions" class="common-anchor-header">Haben Sie noch Fragen?</h4><p>Sie können:</p>
 <ul>
 <li>Schauen Sie sich <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> auf GitHub an. Sie können Fragen stellen, Ideen austauschen und anderen helfen.</li>
-<li>Treten Sie unserem <a href="https://discuss.milvus.io/">Milvus Forum</a> oder <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack Channel</a> bei, um Unterstützung zu erhalten und sich mit unserer Open-Source-Community auszutauschen.</li>
+<li>Treten Sie unserem <a href="https://discord.com/invite/8uyFbECzPX">Discord-Server</a> bei, um Unterstützung zu erhalten und sich mit unserer Open-Source-Community auszutauschen.</li>
 </ul>

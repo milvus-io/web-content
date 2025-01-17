@@ -218,7 +218,7 @@ summary: Aprenda a configurar dataNode para Milvus.
   <tbody>
     <tr>
       <td>
-        <li>El tamaño máximo de cada archivo binlog en un segmento almacenado en búfer en la memoria. Los archivos binlog cuyo tamaño supere este valor se vaciarán al servicio MinIO o S3.</li>      
+        <li>El tamaño máximo de cada archivo binlog en un segmento almacenado en búfer en la memoria. Los archivos binlog cuyo tamaño supere este valor se vaciarán en el servicio MinIO o S3.</li>      
         <li>Unidad Byte</li>      
         <li>Establecer este parámetro demasiado pequeño hace que el sistema almacene una pequeña cantidad de datos con demasiada frecuencia. Establecerlo demasiado grande aumenta la demanda de memoria del sistema.</li>      </td>
       <td>16777216</td>
@@ -665,6 +665,35 @@ summary: Aprenda a configurar dataNode para Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataNodeimportmaxTaskSlotNum" class="common-anchor-header"><code translate="no">dataNode.import.maxTaskSlotNum</code><button data-href="#dataNodeimportmaxTaskSlotNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.import.maxTaskSlotNum">
+  <thead>
+    <tr>
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        El número máximo de ranuras ocupadas por cada tarea de importación/preimportación.      </td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataNodecompactionlevelZeroBatchMemoryRatio" class="common-anchor-header"><code translate="no">dataNode.compaction.levelZeroBatchMemoryRatio</code><button data-href="#dataNodecompactionlevelZeroBatchMemoryRatio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -690,7 +719,7 @@ summary: Aprenda a configurar dataNode para Milvus.
   <tbody>
     <tr>
       <td>        La proporción mínima de memoria libre para la compactación de nivel cero que se ejecuta en modo por lotes     </td>
-      <td>0.05</td>
+      <td>0.5</td>
     </tr>
   </tbody>
 </table>
@@ -720,6 +749,64 @@ summary: Aprenda a configurar dataNode para Milvus.
     <tr>
       <td>        Tamaño máximo de lote se refiere al número máximo de segmentos L1/L2 en un lote cuando se ejecuta la compactación L0. Por defecto -1, cualquier valor inferior a 1 significa que no hay límite. Rango válido: &gt;= 1.  </td>
       <td>-1</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodecompactionuseMergeSort" class="common-anchor-header"><code translate="no">dataNode.compaction.useMergeSort</code><button data-href="#dataNodecompactionuseMergeSort" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.useMergeSort">
+  <thead>
+    <tr>
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Si se activa el modo mergeSort al realizar mixCompaction.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodecompactionmaxSegmentMergeSort" class="common-anchor-header"><code translate="no">dataNode.compaction.maxSegmentMergeSort</code><button data-href="#dataNodecompactionmaxSegmentMergeSort" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.maxSegmentMergeSort">
+  <thead>
+    <tr>
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        El número máximo de segmentos a combinar en el modo mergeSort.      </td>
+      <td>30</td>
     </tr>
   </tbody>
 </table>
@@ -806,7 +893,7 @@ summary: Aprenda a configurar dataNode para Milvus.
   <tbody>
     <tr>
       <td>        Proporción del búfer de memoria de la compactación en clúster. Los datos mayores que el umbral se enviarán al almacenamiento.      </td>
-      <td>0.1</td>
+      <td>0.3</td>
     </tr>
   </tbody>
 </table>
@@ -836,6 +923,64 @@ summary: Aprenda a configurar dataNode para Milvus.
     <tr>
       <td>        Tamaño del grupo de trabajadores para un trabajo de compactación en clúster.      </td>
       <td>8</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodebloomFilterApplyParallelFactor" class="common-anchor-header"><code translate="no">dataNode.bloomFilterApplyParallelFactor</code><button data-href="#dataNodebloomFilterApplyParallelFactor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.bloomFilterApplyParallelFactor">
+  <thead>
+    <tr>
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        factor paralelo cuando aplicar pk al filtro bloom, por defecto 4*CPU_CORE_NUM      </td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodestoragedeltalog" class="common-anchor-header"><code translate="no">dataNode.storage.deltalog</code><button data-href="#dataNodestoragedeltalog" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.storage.deltalog">
+  <thead>
+    <tr>
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        formato deltalog, opciones: [json, parquet]      </td>
+      <td>json</td>
     </tr>
   </tbody>
 </table>

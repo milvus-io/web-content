@@ -1472,26 +1472,26 @@
             "isMenu": true,
             "children": [
               {
+                "label": "하나의 인스턴스에서 백업 및 복원",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "하나의 버킷에서 인스턴스 간 마이그레이션",
                 "id": "shared-bucket-backup-and-restore.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "버킷 간 인스턴스 마이그레이션",
                 "id": "cross-bucket-backup-and-restore.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "S3 환경 전반의 인스턴스 간 마이그레이션",
                 "id": "multi-storage-backup-and-restore.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "하나의 인스턴스에서 백업 및 복원",
-                "id": "single-instance-backup-and-restore.md",
                 "order": 3,
                 "children": []
               }

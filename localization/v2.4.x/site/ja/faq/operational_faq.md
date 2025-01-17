@@ -49,7 +49,7 @@ title: 運用に関するFAQ
 <p><a href="/docs/ja/prerequisite-docker.md">CPUのSIMD命令セット対応</a>状況をご覧ください。</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">MilvusをWindowsにインストールできますか？</h4><p>MilvusをWindowsにインストールするには、ソースコードからコンパイルする方法とバイナリパッケージからコンパイルする方法があります。</p>
 <p>WindowsにMilvusをインストールする方法については「<a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">WindowsでMilvusを動かす</a>」を参照してください。</p>
-<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">Windowsにpymilvusをインストールする際にエラーが発生しました。どうすればよいですか？</h4><p>WindowsにPyMilvusをインストールすることは推奨されません。しかし、WindowsにPyMilvusをインストールしなければならないのにエラーが出る場合は、<a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a>環境にインストールしてみてください。Conda環境にPyMilvusをインストールする方法の詳細については、<a href="/docs/ja/install-pymilvus.md">Milvus SDKのインストールを</a>参照してください。</p>
+<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">Windowsにpymilvusをインストールする際にエラーが発生しました。どうすればよいですか？</h4><p>WindowsにPyMilvusをインストールすることは推奨されません。しかし、WindowsにPyMilvusをインストールしなければならないのにエラーが出る場合は、<a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a>環境にインストールしてみてください。Conda環境にPyMilvusをインストールする方法については、<a href="/docs/ja/install-pymilvus.md">Milvus SDKのインストールを</a>参照してください。</p>
 <h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">Milvusはインターネットに接続していない状態でもデプロイできますか？</h4><p>Milvusはオフライン環境でインストールすることができます。詳細は<a href="/docs/ja/install_offline-helm.md">Milvusのオフラインインストールを</a>参照してください。</p>
 <h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Milvusが生成したログはどこにありますか?</h4><p>Milvusのログはデフォルトでstout(標準出力)とstderr(標準エラー)に出力されますが、本番環境ではログを永続ボリュームにリダイレクトすることを強く推奨します。そのためには、<strong>milvus.yamlの</strong> <code translate="no">log.file.rootPath</code> 。また、milvusを<code translate="no">milvus-helm</code> チャートでデプロイする場合、<code translate="no">--set log.persistence.enabled=true</code> を使ってログの永続化を有効にする必要があります。</p>
 <p>設定を変更していない場合は、kubectl logs &lt;pod-name&gt;やdocker logs CONTAINERを使ってもログを見つけることができます。</p>
@@ -60,14 +60,14 @@ title: 運用に関するFAQ
 <li>Pulsarインスタンスでマルチ・テナントが有効になっている場合は、Milvusインスタンスごとに個別のテナントまたはネームスペースを割り当てることを検討してください。そのためには、Milvusインスタンスを起動する前に、Milvusインスタンスの設定ファイル内の<code translate="no">pulsar.tenant</code> または<code translate="no">pulsar.namespace</code> をそれぞれ固有の値に変更する必要があります。</li>
 <li>Pulsarインスタンスでマルチテナントを有効にする予定がない場合は、Milvusインスタンスを起動する前に、Milvusインスタンスの構成ファイル内の<code translate="no">msgChannel.chanNamePrefix.cluster</code> 。</li>
 </ul>
-<h4 id="Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances" class="common-anchor-header">複数のMilvusインスタンス間でMinIOインスタンスを共有できますか？</h4><p>複数のMilvusインスタンス間でMinIOインスタンスを共有することは可能です。そのためには、Milvusインスタンスを起動する前に、それぞれのMilvusインスタンスの設定ファイルで、<code translate="no">minio.rootPath</code> を一意な値に変更する必要があります。</p>
+<h4 id="Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances" class="common-anchor-header">複数のMilvusインスタンス間でMinIOインスタンスを共有できますか？</h4><p>はい、複数のMilvusインスタンス間でMinIOインスタンスを共有することができます。そのためには、Milvusインスタンスを起動する前に、それぞれのMilvusインスタンスの設定ファイルで、<code translate="no">minio.rootPath</code> を一意な値に変更する必要があります。</p>
 <h4 id="How-do-I-handle-the-error-message-pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345" class="common-anchor-header">エラーメッセージ<code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code> の対処方法は?</h4><p>エラーメッセージ<code translate="no">Illegal uri [example.db]</code> は、この接続タイプをサポートしていない以前のバージョンのPyMilvusを使ってMilvus Liteに接続しようとしていることを示しています。この問題を解決するには、インストールしたPyMilvusを、Milvus Liteへの接続がサポートされているバージョン2.4.2以上にアップグレードしてください。</p>
 <p>PyMilvus は以下のコマンドでアップグレードできます：</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">検索/クエリで設定した<code translate="no">limit</code> よりも少ない結果しか得られないのはなぜですか？</h4><p>指定した<code translate="no">limit</code> より少ない結果しか得られない理由はいくつかあります：</p>
+<h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">検索/クエリで設定した<code translate="no">limit</code> より少ない結果しか得られないのはなぜですか？</h4><p>指定した<code translate="no">limit</code> より少ない結果しか得られない理由はいくつかあります：</p>
 <ul>
-<li><p><strong>データが限られている</strong>：限られたデータ： コレクションには、要求した制限を満たすのに十分なエンティティがない可能性があります。コレクション内のエンティティの総数が制限を下回ると、当然、結果が少なくなります。</p></li>
+<li><p><strong>データが限られている</strong>：限られたデータ： コレクションには、要求した制限を満たすのに十分なエンティティがない可能性があります。コレクション内のエンティティの総数が制限を下回ると、当然、結果の数も少なくなります。</p></li>
 <li><p><strong>主キーの重複</strong>：Milvusは、検索中に主キーの重複に遭遇した場合、特定のエンティティを優先します。この動作は検索タイプによって異なります：</p></li>
 <li><p><strong>クエリ (完全一致)：</strong>ANN検索：Milvusは、同じPKを持つエンティティであっても、最も高い類似度スコアを持つエンティティを選択します。 この優先順位付けにより、重複する主キーが多いコレクションでは、ユニークな検索結果が制限数より少なくなる可能性があります。</p></li>
 <li><p><strong>不十分な一致</strong>：検索フィルタリング式が厳しすぎるため、類似度のしきい値を満たすエンティティが少なくなっている可能性があります。検索に設定する条件が厳しすぎると、一致するエンティティが少なくなり、期待される結果よりも少なくなります。</p></li>
@@ -76,7 +76,7 @@ title: 運用に関するFAQ
 <p>解決策としては、Linux環境を利用することです：</p>
 <ul>
 <li>Linuxベースのオペレーティングシステムまたは仮想マシンを使用してMilvus Liteを実行してください。</li>
-<li>この方法により、ライブラリの依存関係や機能との互換性が確保されます。</li>
+<li>この方法により、ライブラリの依存関係や機能との互換性を確保することができます。</li>
 </ul>
 <h4 id="What-are-the-length-exceeds-max-length-errors-in-Milvus-and-how-can-they-be-understood-and-addressed" class="common-anchor-header">Milvusの "length exceeds max length "エラーとは何ですか？</h4><p>Milvusの "Length exceeds max length "エラーは、データ要素のサイズがコレクションまたはフィールドの最大許容サイズを超えた場合に発生します。以下はその例と説明です：</p>
 <ul>
@@ -100,5 +100,5 @@ title: 運用に関するFAQ
 <h4 id="Still-have-questions" class="common-anchor-header">まだ質問がありますか？</h4><p>できます：</p>
 <ul>
 <li>GitHubで<a href="https://github.com/milvus-io/milvus/issues">Milvusを</a>チェックしてください。自由に質問したり、アイデアを共有したり、他の人を助けたりしてください。</li>
-<li><a href="https://discuss.milvus.io/">Milvusフォーラムや</a> <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slackチャンネルに</a>参加して、オープンソースコミュニティに参加しましょう。</li>
+<li>私たちの<a href="https://discord.com/invite/8uyFbECzPX">Discordサーバーに</a>参加して、サポートを探したり、私たちのオープンソースコミュニティに参加してください。</li>
 </ul>

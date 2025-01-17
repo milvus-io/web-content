@@ -55,7 +55,7 @@ title: 파티션 관리
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션을 만들 때 Milvus는 컬렉션에 <strong>_default라는</strong> 이름의 파티션도 생성합니다. 컬렉션의 파티션을 다음과 같이 나열할 수 있습니다.</p>
+    </button></h2><p>컬렉션을 만들 때 Milvus는 컬렉션에 <strong>_default라는</strong> 이름의 파티션도 생성합니다. 컬렉션의 파티션은 다음과 같이 나열할 수 있습니다.</p>
 <div class="multipleCode">
  <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
@@ -615,16 +615,16 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Insert-and-Delete-Entities​" class="common-anchor-header">엔티티 삽입 및 삭제</h3><p>특정 작업에서 삽입, 업서트 및 삭제 작업을 수행할 수 있습니다. 자세한 내용은 다음을 참조하세요.</p>
+    </button></h2><h3 id="Insert-and-Delete-Entities​" class="common-anchor-header">엔티티 삽입 및 삭제</h3><p>특정 작업에서 삽입, 업서트, 삭제 작업을 수행할 수 있습니다. 자세한 내용은 다음을 참조하세요.</p>
 <ul>
-<li><p>파티션에 엔티티 삽입</p></li>
-<li><p>파티션에 엔티티 삽입</p></li>
-<li><p>파티션에서 엔티티 삭제</p></li>
+<li><p><a href="/docs/ko/insert-update-delete.md#Insert-Entities-into-a-Partition">파티션에 엔티티 삽입</a></p></li>
+<li><p><a href="/docs/ko/upsert-entities.md#Upsert-Entities-in-a-Partition">파티션에 엔티티 삽입</a></p></li>
+<li><p><a href="/docs/ko/delete-entities.md#Delete-Entities-from-Partitions">파티션에서 엔티티 삭제</a></p></li>
 </ul>
 <h3 id="Search-and-Query​" class="common-anchor-header">검색 및 쿼리</h3><p>특정 파티션 내에서 검색 및 쿼리를 수행할 수 있습니다. 자세한 내용은 다음을 참조하세요.</p>
 <ul>
-<li><p>파티션 내에서 ANN 검색 수행하기</p></li>
-<li><p>파티션 내에서 메타데이터 필터링 수행하기</p></li>
+<li><p><a href="/docs/ko/single-vector-search.md#ANN-Search-in-Partition">파티션 내에서 ANN 검색 수행하기</a></p></li>
+<li><p><a href="/docs/ko/filtered-search.md">파티션 내에서 메타데이터 필터링 수행하기</a></p></li>
 </ul>
 <h2 id="Drop-Partition​" class="common-anchor-header">파티션 삭제<button data-href="#Drop-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"

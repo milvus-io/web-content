@@ -138,9 +138,9 @@ summary: Pelajari cara mengonfigurasi pulsar untuk Milvus.
     <tr>
       <td>
         <li>Ukuran maksimum setiap pesan dalam Pulsar. Unit: Byte.</li>      
-        <li>Secara default, Pulsar dapat mengirimkan paling banyak 5 MB data dalam satu pesan. Ketika ukuran data yang dimasukkan lebih besar dari nilai ini, proxy akan memecah data menjadi beberapa pesan untuk memastikan data tersebut dapat dikirim dengan benar.</li>      
+        <li>Secara default, Pulsar dapat mengirimkan paling banyak 2MB data dalam satu pesan. Ketika ukuran data yang dimasukkan lebih besar dari nilai ini, proxy akan memecah data menjadi beberapa pesan untuk memastikan data tersebut dapat dikirim dengan benar.</li>      
         <li>Jika parameter yang sesuai di Pulsar tetap tidak berubah, meningkatkan konfigurasi ini akan menyebabkan Milvus gagal, dan menguranginya tidak menghasilkan keuntungan.</li>      </td>
-      <td>5242880</td>
+      <td>2097152</td>
     </tr>
   </tbody>
 </table>

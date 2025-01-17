@@ -25,7 +25,7 @@ summary: >-
 <p>#هنا، يمكنك تعيين حجم الذاكرة التي يشغلها تجمع الذاكرة، على أن تكون الوحدة ميغابايت.</p>
 <p># لاحظ أن هناك احتمال تعطل Milvus عندما يتجاوز الطلب الفعلي على الذاكرة القيمة التي تم تعيينها بواسطة maxMemSize.</p>
 <p>#إذا تم تعيين كل من initMemSize و MaxMemSize على صفر,</p>
-<p>سيقوم #milvus تلقائيًا بتهيئة نصف ذاكرة وحدة معالجة الرسومات المتاحة,</p>
+<p>فسيقوم #milvus تلقائيًا بتهيئة نصف ذاكرة وحدة معالجة الرسومات المتاحة,</p>
 <p>سيستخدم #maxMemSemSize ذاكرة وحدة معالجة الرسومات المتوفرة بالكامل.</p>
 <h2 id="gpuinitMemSize" class="common-anchor-header"><code translate="no">gpu.initMemSize</code><button data-href="#gpuinitMemSize" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +52,7 @@ summary: >-
   <tbody>
     <tr>
       <td>        حجم بدء تجمع ذاكرة وحدة معالجة الرسومات      </td>
-      <td></td>
+      <td>2048</td>
     </tr>
   </tbody>
 </table>
@@ -81,7 +81,7 @@ summary: >-
   <tbody>
     <tr>
       <td>        الحجم الأقصى لتجمع ذاكرة وحدة معالجة الرسومات      </td>
-      <td></td>
+      <td>4096</td>
     </tr>
   </tbody>
 </table>

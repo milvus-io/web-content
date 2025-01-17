@@ -21,7 +21,7 @@ summary: Apprenez à configurer rocksmq pour Milvus.
       </svg>
     </button></h1><p>Si vous souhaitez activer kafka, vous devez commenter les configurations de pulsar</p>
 <p>kafka :</p>
-<p>brokerList :</p>
+<p>brokerList : localhost:9092</p>
 <p>saslUsername :</p>
 <p>saslPassword :</p>
 <p>saslMechanisms :</p>
@@ -176,7 +176,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
     </button></h2><table id="rocksmq.retentionSizeInMB">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description de l'option</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>

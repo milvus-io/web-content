@@ -21,7 +21,7 @@ summary: 學習如何為 Milvus 配置 rocksmq。
       </svg>
     </button></h1><p>如果要啟用 kafka，需要註解 pulsar 配置</p>
 <p>kafka：</p>
-<p>brokerList：</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername：</p>
 <p>saslPassword：</p>
 <p>saslMechanisms：</p>

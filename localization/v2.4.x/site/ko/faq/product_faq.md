@@ -28,8 +28,8 @@ title: 제품 FAQ
 <p>메타데이터는 Milvus 내에서 생성됩니다. 각 Milvus 모듈에는 etcd에 저장되는 자체 메타데이터가 있습니다.</p>
 <h4 id="Why-is-there-no-vector-data-in-etcd" class="common-anchor-header">etcd에 벡터 데이터가 없는 이유는 무엇인가요?</h4><p>etcd는 Milvus 모듈 메타데이터를 저장하고, MinIO는 엔티티를 저장합니다.</p>
 <h4 id="Does-Milvus-support-inserting-and-searching-data-simultaneously" class="common-anchor-header">Milvus는 데이터 삽입과 검색을 동시에 지원하나요?</h4><p>예. 삽입 작업과 쿼리 작업은 상호 독립적인 두 개의 개별 모듈에서 처리됩니다. 클라이언트 관점에서 삽입 작업은 삽입된 데이터가 메시지 큐에 들어가면 완료됩니다. 그러나 삽입된 데이터는 쿼리 노드에 로드될 때까지 검색할 수 없습니다. 세그먼트 크기가 인덱스 구축 임계값(기본값 512MB)에 도달하지 않으면 Milvus는 무차별 대입 검색을 사용하며 쿼리 성능이 저하될 수 있습니다.</p>
-<h4 id="Can-vectors-with-duplicate-primary-keys-be-inserted-into-Milvus" class="common-anchor-header">기본 키가 중복된 벡터를 Milvus에 삽입할 수 있나요?</h4><p>예. Milvus는 벡터 기본 키가 중복되는지 확인하지 않습니다.</p>
-<h4 id="When-vectors-with-duplicate-primary-keys-are-inserted-does-Milvus-treat-it-as-an-update-operation" class="common-anchor-header">기본 키가 중복된 벡터가 삽입되면 Milvus는 이를 업데이트 작업으로 처리하나요?</h4><p>아니요. Milvus는 현재 업데이트 작업을 지원하지 않으며 엔티티 기본 키가 중복되는지 여부를 확인하지 않습니다. 엔티티 기본 키가 고유한지 확인할 책임은 사용자에게 있으며, 그렇지 않은 경우 Milvus에 기본 키가 중복된 엔티티가 여러 개 포함될 수 있습니다.</p>
+<h4 id="Can-vectors-with-duplicate-primary-keys-be-inserted-into-Milvus" class="common-anchor-header">기본 키가 중복된 벡터를 Milvus에 삽입할 수 있나요?</h4><p>예. Milvus는 벡터 기본 키가 중복되는지 여부를 확인하지 않습니다.</p>
+<h4 id="When-vectors-with-duplicate-primary-keys-are-inserted-does-Milvus-treat-it-as-an-update-operation" class="common-anchor-header">기본 키가 중복된 벡터가 삽입되면 Milvus는 이를 업데이트 작업으로 처리하나요?</h4><p>아니요. Milvus는 현재 업데이트 작업을 지원하지 않으며 엔티티 기본 키가 중복되는지 확인하지 않습니다. 엔티티 기본 키가 고유한지 확인할 책임은 사용자에게 있으며, 그렇지 않은 경우 Milvus에 기본 키가 중복된 엔티티가 여러 개 포함될 수 있습니다.</p>
 <p>이 경우 쿼리 시 어떤 데이터 사본이 반환될지는 알 수 없습니다. 이 제한은 향후 릴리스에서 수정될 예정입니다.</p>
 <h4 id="What-is-the-maximum-length-of-self-defined-entity-primary-keys" class="common-anchor-header">자체 정의된 엔티티 기본 키의 최대 길이는 어떻게 되나요?</h4><p>엔티티 기본 키는 음수가 아닌 64비트 정수여야 합니다.</p>
 <h4 id="What-is-the-maximum-amount-of-data-that-can-be-added-per-insert-operation" class="common-anchor-header">삽입 작업당 추가할 수 있는 최대 데이터 양은 얼마입니까?</h4><p>삽입 작업의 크기는 1,024MB를 초과하지 않아야 합니다. 이것은 gRPC에 의해 부과된 제한입니다.</p>
@@ -57,7 +57,7 @@ title: 제품 FAQ
 <p>이를 방지하려면 <code translate="no">nprobe</code> 을 더 크게, <code translate="no">nlist</code> 과 <code translate="no">k</code> 을 더 작게 설정해 보세요.</p>
 <p>자세한 내용은 <a href="/docs/ko/index.md">벡터 색인을</a> 참조하세요.</p>
 <h4 id="What-is-the-maximum-vector-dimension-supported-in-Milvus" class="common-anchor-header">Milvus에서 지원되는 최대 벡터 크기는 얼마인가요?</h4><p>Milvus는 기본적으로 최대 32,768개의 차원으로 벡터를 관리할 수 있습니다. <code translate="no">Proxy.maxDimension</code> 값을 늘려 더 큰 차원의 벡터를 허용할 수 있습니다.</p>
-<h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">Milvus는 Apple M1 CPU를 지원하나요?</h4><p>현재 Milvus 릴리스는 Apple M1 CPU를 직접 지원하지 않습니다. Milvus 2.3 이후에는 ARM64 아키텍처용 Docker 이미지를 제공합니다.</p>
+<h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">Milvus는 Apple M1 CPU를 지원하나요?</h4><p>현재 Milvus 릴리스에서는 Apple M1 CPU를 직접 지원하지 않습니다. Milvus 2.3 이후에는 ARM64 아키텍처용 Docker 이미지를 제공합니다.</p>
 <h4 id="What-data-types-does-Milvus-support-on-the-primary-key-field" class="common-anchor-header">Milvus는 기본 키 필드에서 어떤 데이터 유형을 지원하나요?</h4><p>현재 릴리스에서 Milvus는 INT64와 문자열을 모두 지원합니다.</p>
 <h4 id="Is-Milvus-scalable" class="common-anchor-header">Milvus는 확장 가능한가요?</h4><p>예. Kubernetes의 헬름 차트를 통해 여러 노드가 있는 Milvus 클러스터를 배포할 수 있습니다. 자세한 지침은 <a href="/docs/ko/scaleout.md">스케일 가이드를</a> 참조하세요.</p>
 <h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">성장 세그먼트와 봉인된 세그먼트는 무엇인가요?</h4><p>검색 요청이 오면 Milvus는 증분 데이터와 과거 데이터를 모두 검색합니다. 증분 데이터는 최근 업데이트이며, 증가하는 세그먼트에 저장되어 객체 스토리지에 유지될 임계값에 도달하기 전에 메모리에 버퍼링되어 보다 효율적인 인덱스가 구축되는 반면, 기록 데이터는 오래 전에 업데이트된 데이터입니다. 이 데이터는 오브젝트 스토리지에 보존된 봉인된 세그먼트에 있습니다. 증분 데이터와 기록 데이터가 함께 검색을 위한 전체 데이터 세트를 구성합니다. 이러한 설계 덕분에 Milvus에 수집된 모든 데이터를 즉시 검색할 수 있습니다. Milvus Distributed의 경우, 방금 수집된 레코드가 검색 결과에 표시되는 시점을 결정하는 더 복잡한 요소들이 있습니다. <a href="https://milvus.io/docs/consistency.md">일관성 수준에서</a> 이에 대한 자세한 뉘앙스를 알아보세요.</p>
@@ -70,11 +70,11 @@ title: 제품 FAQ
 <ul>
 <li>바이너리 벡터: 이진 데이터는 이미지 처리와 정보 검색에 사용되는 0과 1의 시퀀스로 저장합니다.</li>
 <li>Float32 벡터: 소수점 이하 7자리 정도의 정밀도를 가진 기본 저장소입니다. Float64 값도 Float32 정밀도로 저장되므로 검색 시 정밀도 손실이 발생할 수 있습니다.</li>
-<li>Float16 및 BFloat16 벡터: 정밀도와 메모리 사용량이 감소합니다. Float16은 대역폭과 저장 공간이 제한된 애플리케이션에 적합하며, BFloat16은 정확도에 큰 영향을 주지 않으면서 계산 요구 사항을 줄이기 위해 딥 러닝에서 일반적으로 사용되는 범위와 효율성의 균형을 맞추는 데 적합합니다.</li>
+<li>Float16 및 BFloat16 벡터: 정밀도와 메모리 사용량이 감소합니다. Float16은 대역폭과 스토리지가 제한된 애플리케이션에 적합하며, BFloat16은 정확도에 큰 영향을 주지 않으면서 계산 요구 사항을 줄이기 위해 딥 러닝에서 일반적으로 사용되는 범위와 효율성의 균형을 맞추는 데 적합합니다.</li>
 </ul>
 <h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvus는 스칼라 또는 벡터 필드에 대한 기본값 지정을 지원하나요?</h4><p>현재 Milvus 2.4.x는 스칼라 또는 벡터 필드에 대한 기본값 지정을 지원하지 않습니다. 이 기능은 향후 릴리스에 추가될 예정입니다.</p>
 <h4 id="Still-have-questions" class="common-anchor-header">아직 질문이 있으신가요?</h4><p>언제든지 문의하세요:</p>
 <ul>
-<li>GitHub에서 <a href="https://github.com/milvus-io/milvus/issues">Milvus를</a> 확인하세요. 질문을 제기하고 아이디어를 공유하며 다른 사람들을 도울 수 있습니다.</li>
-<li><a href="https://slack.milvus.io/">Slack 커뮤니티에</a> 가입하여 지원을 찾고 오픈 소스 커뮤니티에 참여하세요.</li>
+<li>GitHub에서 <a href="https://github.com/milvus-io/milvus/issues">Milvus를</a> 확인하세요. 질문을 제기하고, 아이디어를 공유하고, 다른 사람들을 도울 수 있습니다.</li>
+<li><a href="https://discord.com/invite/8uyFbECzPX">Discord 서버에</a> 가입하여 지원을 찾고 오픈 소스 커뮤니티에 참여하세요.</li>
 </ul>

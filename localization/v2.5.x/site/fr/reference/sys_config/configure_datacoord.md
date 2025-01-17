@@ -43,37 +43,8 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Délai d'attente pour l'observation des canaux (en secondes). La progression de la surveillance de la mise à jour du tickler d'un code de données réinitialise le délai d'attente.      </td>
+      <td>        Délai d'attente pour l'observation des chaînes (en secondes). La progression de la surveillance de la mise à jour du tickler d'un code de données réinitialise le délai d'attente.      </td>
       <td>300</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="dataCoordchannelbalanceWithRpc" class="common-anchor-header"><code translate="no">dataCoord.channel.balanceWithRpc</code><button data-href="#dataCoordchannelbalanceWithRpc" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.channel.balanceWithRpc">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Valeur par défaut</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Activation ou non de l'équilibrage avec RPC, par défaut utilisation de etcd watch     </td>
-      <td>vrai</td>
     </tr>
   </tbody>
 </table>
@@ -95,13 +66,13 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
     </button></h2><table id="dataCoord.channel.legacyVersionWithoutRPCWatch">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Les noeuds de données &lt;= cette version sont considérés comme des noeuds legacy, qui n'ont pas de watch() basé sur RPC. Ceci n'est utilisé que lors d'une mise à jour progressive où les nœuds anciens ne recevront pas de nouveaux canaux.      </td>
+      <td>        Les datanodes &lt;= cette version sont considérés comme des nœuds anciens, qui n'ont pas de watch() basé sur rpc. Cette valeur n'est utilisée que lors d'une mise à jour progressive, lorsque les nœuds anciens ne reçoivent pas de nouveaux canaux.      </td>
       <td>2.4.1</td>
     </tr>
   </tbody>
@@ -309,6 +280,35 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordsegmentsealProportionJitter" class="common-anchor-header"><code translate="no">dataCoord.segment.sealProportionJitter</code><button data-href="#dataCoordsegmentsealProportionJitter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.segment.sealProportionJitter">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Rapport de gigue de la proportion de scellement du segment, valeur par défaut 0,1(10%), si la proportion de scellement est de 12%, avec gigue=0,1, le rapport appliqué sera de 10,8~12%.      </td>
+      <td>0.1</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordsegmentassignmentExpiration" class="common-anchor-header"><code translate="no">dataCoord.segment.assignmentExpiration</code><button data-href="#dataCoordsegmentassignmentExpiration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -333,7 +333,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Temps d'expiration de l'assignation du segment, unité : ms  </td>
+      <td>        Temps d'expiration de l'assignation de segment, unité : ms  </td>
       <td>2000</td>
     </tr>
   </tbody>
@@ -356,7 +356,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
     </button></h2><table id="dataCoord.segment.allocLatestExpireAttempt">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
@@ -482,8 +482,8 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Le nombre maximum de fichiers binlog pour un segment, le segment sera scellé si le nombre de fichiers binlog atteint la valeur maximum.</li>      
-        <li>le segment sera scellé si le nombre de fichiers binlog atteint la valeur maximale.</li>      </td>
+        <li>Nombre maximal de fichiers journaux (égal au nombre de fichiers journaux de la clé primaire) pour un segment, </li>      
+        <li>le segment sera fermé si le nombre de fichiers binlog atteint la valeur maximale.</li>      </td>
       <td>32</td>
     </tr>
   </tbody>
@@ -506,13 +506,13 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
     </button></h2><table id="dataCoord.segment.smallProportion">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Le segment est considéré comme "petit segment" lorsque le nombre de lignes est inférieur à  </td>
+      <td>        Le segment est considéré comme "petit segment" lorsque son nombre de lignes est inférieur à  </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -635,7 +635,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        si la mise à jour automatique de l'index du segment vers la version du moteur d'indexation est nécessaire      </td>
+      <td>        si la mise à jour automatique de l'index des segments vers la version du moteur d'indexation est nécessaire      </td>
       <td>faux</td>
     </tr>
   </tbody>
@@ -731,6 +731,416 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordcompactiontaskPrioritizer" class="common-anchor-header"><code translate="no">dataCoord.compaction.taskPrioritizer</code><button data-href="#dataCoordcompactiontaskPrioritizer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.taskPrioritizer">
+  <thead>
+    <tr>
+      <th class="width80">Description de la configuration</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>compaction task prioritizer, options : [default, level, mix]. </li>      
+        <li>La valeur par défaut est FIFO.</li>      
+        <li>Le niveau est priorisé par niveau : Les compactions L0 d'abord, puis les compactions de mélange, puis les compactions de regroupement.</li>      
+        <li>mix est priorisé par niveau : d'abord les compactions mix, puis les compactions L0, puis les compactions clustering.</li>      </td>
+      <td>défaut</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactiontaskQueueCapacity" class="common-anchor-header"><code translate="no">dataCoord.compaction.taskQueueCapacity</code><button data-href="#dataCoordcompactiontaskQueueCapacity" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.taskQueueCapacity">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        taille de la file d'attente des tâches de compactage      </td>
+      <td>100000</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactiondropTolerance" class="common-anchor-header"><code translate="no">dataCoord.compaction.dropTolerance</code><button data-href="#dataCoordcompactiondropTolerance" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.dropTolerance">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        La tâche de compactage sera nettoyée après une durée supérieure à ce délai (en secondes).      </td>
+      <td>86400</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactiongcInterval" class="common-anchor-header"><code translate="no">dataCoord.compaction.gcInterval</code><button data-href="#dataCoordcompactiongcInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.gcInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Intervalle de temps en secondes pour le compactage gc  </td>
+      <td>1800</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionmixtriggerInterval" class="common-anchor-header"><code translate="no">dataCoord.compaction.mix.triggerInterval</code><button data-href="#dataCoordcompactionmixtriggerInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.mix.triggerInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Intervalle de temps en secondes pour déclencher le compactage du mélange      </td>
+      <td>60</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzerotriggerInterval" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.triggerInterval</code><button data-href="#dataCoordcompactionlevelzerotriggerInterval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.triggerInterval">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Intervalle de temps en secondes pour déclencher le compactage L0  </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzeroforceTriggerminSize" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.minSize</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerminSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.minSize">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        La taille minimale en octets pour forcer le déclenchement d'un compactage de niveau zéro, par défaut 8MB   </td>
+      <td>8388608</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzeroforceTriggermaxSize" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.maxSize</code><button data-href="#dataCoordcompactionlevelzeroforceTriggermaxSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.maxSize">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        La taille maximale en octets pour forcer le déclenchement d'un compactage LevelZero, par défaut 64MB    </td>
+      <td>67108864</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzeroforceTriggerdeltalogMinNum" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerdeltalogMinNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Le nombre minimum de fichiers deltalog pour forcer le déclenchement d'un compactage LevelZero      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionlevelzeroforceTriggerdeltalogMaxNum" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerdeltalogMaxNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Le nombre maximum de fichiers deltalog pour forcer le déclenchement d'un LevelZero Compaction, par défaut 30  </td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionsingleratiothreshold" class="common-anchor-header"><code translate="no">dataCoord.compaction.single.ratio.threshold</code><button data-href="#dataCoordcompactionsingleratiothreshold" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.single.ratio.threshold">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Le seuil de rapport d'un segment pour déclencher un seul compactage, par défaut 0.2   </td>
+      <td>0.2</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionsingledeltalogmaxsize" class="common-anchor-header"><code translate="no">dataCoord.compaction.single.deltalog.maxsize</code><button data-href="#dataCoordcompactionsingledeltalogmaxsize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.single.deltalog.maxsize">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        La taille deltalog d'un segment pour déclencher un seul compactage, par défaut 16MB    </td>
+      <td>16777216</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionsingledeltalogmaxnum" class="common-anchor-header"><code translate="no">dataCoord.compaction.single.deltalog.maxnum</code><button data-href="#dataCoordcompactionsingledeltalogmaxnum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.single.deltalog.maxnum">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Le nombre de deltalogues d'un segment pour déclencher un compactage, par défaut 200   </td>
+      <td>200</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataCoordcompactionsingleexpiredlogmaxsize" class="common-anchor-header"><code translate="no">dataCoord.compaction.single.expiredlog.maxsize</code><button data-href="#dataCoordcompactionsingleexpiredlogmaxsize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.compaction.single.expiredlog.maxsize">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        La taille du journal expiré d'un segment pour déclencher un compactage, par défaut 10MB    </td>
+      <td>10485760</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordcompactionclusteringenable" class="common-anchor-header"><code translate="no">dataCoord.compaction.clustering.enable</code><button data-href="#dataCoordcompactionclusteringenable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -749,14 +1159,14 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
     </button></h2><table id="dataCoord.compaction.clustering.enable">
   <thead>
     <tr>
-      <th class="width80">Description de la configuration</th>
+      <th class="width80">Description de la valeur par défaut</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Activer le compactage par regroupement      </td>
-      <td>true</td>
+      <td>        Activer le compactage du clustering      </td>
+      <td>vrai</td>
     </tr>
   </tbody>
 </table>
@@ -929,7 +1339,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        ratio maximum de taille de données dans le train Kmeans, s'il est supérieur, l'échantillonnage sera réduit pour respecter cette limite.      </td>
+      <td>        ratio maximum de taille de données dans le train Kmeans, s'il est plus grand, l'échantillonnage sera réduit pour respecter cette limite.      </td>
       <td>0.8</td>
     </tr>
   </tbody>
@@ -1079,122 +1489,6 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
     </tr>
   </tbody>
 </table>
-<h2 id="dataCoordcompactionlevelzeroforceTriggerminSize" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.minSize</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerminSize" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.minSize">
-  <thead>
-    <tr>
-      <th class="width80">Description de la valeur par défaut</th>
-      <th class="width20">Valeur par défaut</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        La taille minimale en octets pour forcer le déclenchement d'un compactage LevelZero, par défaut 8MB   </td>
-      <td>8388608</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="dataCoordcompactionlevelzeroforceTriggermaxSize" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.maxSize</code><button data-href="#dataCoordcompactionlevelzeroforceTriggermaxSize" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.maxSize">
-  <thead>
-    <tr>
-      <th class="width80">Description de la valeur par défaut</th>
-      <th class="width20">Valeur par défaut</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        La taille maximale en octets pour forcer le déclenchement d'un compactage LevelZero, par défaut 64MB    </td>
-      <td>67108864</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="dataCoordcompactionlevelzeroforceTriggerdeltalogMinNum" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerdeltalogMinNum" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMinNum">
-  <thead>
-    <tr>
-      <th class="width80">Description de la valeur par défaut</th>
-      <th class="width20">Valeur par défaut</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Le nombre minimum de fichiers deltalog pour forcer le déclenchement d'un compactage LevelZero      </td>
-      <td>10</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="dataCoordcompactionlevelzeroforceTriggerdeltalogMaxNum" class="common-anchor-header"><code translate="no">dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum</code><button data-href="#dataCoordcompactionlevelzeroforceTriggerdeltalogMaxNum" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="dataCoord.compaction.levelzero.forceTrigger.deltalogMaxNum">
-  <thead>
-    <tr>
-      <th class="width80">Description de la valeur par défaut</th>
-      <th class="width20">Valeur par défaut</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        Le nombre maximum de fichiers deltalog pour forcer le déclenchement d'un LevelZero Compaction, par défaut 30  </td>
-      <td>30</td>
-    </tr>
-  </tbody>
-</table>
 <h2 id="dataCoordsyncSegmentsInterval" class="common-anchor-header"><code translate="no">dataCoord.syncSegmentsInterval</code><button data-href="#dataCoordsyncSegmentsInterval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1224,6 +1518,35 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordindexmemSizeEstimateMultiplier" class="common-anchor-header"><code translate="no">dataCoord.index.memSizeEstimateMultiplier</code><button data-href="#dataCoordindexmemSizeEstimateMultiplier" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.index.memSizeEstimateMultiplier">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Lorsque la taille de la mémoire n'est pas définie par la procédure d'indexation, multiplicateur pour estimer la taille de la mémoire des données d'index.      </td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordenableGarbageCollection" class="common-anchor-header"><code translate="no">dataCoord.enableGarbageCollection</code><button data-href="#dataCoordenableGarbageCollection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1248,7 +1571,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Valeur du commutateur permettant d'activer le ramassage des ordures pour effacer les données rejetées dans le service MinIO ou S3.      </td>
+      <td>        Valeur de commutation permettant de contrôler l'activation du ramassage des ordures pour effacer les données rejetées dans le service MinIO ou S3.      </td>
       <td>vrai</td>
     </tr>
   </tbody>
@@ -1480,7 +1803,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Intervalle de vérification de la balance automatique configuré      </td>
+      <td>        Intervalle de vérification de l'équilibre automatique configuré      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1688,6 +2011,35 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataCoordimportmaxImportJobNum" class="common-anchor-header"><code translate="no">dataCoord.import.maxImportJobNum</code><button data-href="#dataCoordimportmaxImportJobNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataCoord.import.maxImportJobNum">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Nombre maximal de tâches d'importation en cours d'exécution ou en attente.      </td>
+      <td>1024</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataCoordimportwaitForIndex" class="common-anchor-header"><code translate="no">dataCoord.import.waitForIndex</code><button data-href="#dataCoordimportwaitForIndex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1712,7 +2064,7 @@ summary: Découvrez comment configurer dataCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Indique si l'opération d'importation doit attendre la fin de la construction de l'index.      </td>
+      <td>        Indique si l'opération d'importation attend la fin de la construction de l'index.      </td>
       <td>vrai</td>
     </tr>
   </tbody>

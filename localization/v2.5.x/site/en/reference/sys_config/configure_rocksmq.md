@@ -21,7 +21,7 @@ summary: Learn how to configure rocksmq for Milvus.
       </svg>
     </button></h1><p>If you want to enable kafka, needs to comment the pulsar configs</p>
 <p>kafka:</p>
-<p>brokerList:</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername:</p>
 <p>saslPassword:</p>
 <p>saslMechanisms:</p>

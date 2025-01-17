@@ -36,7 +36,7 @@ title: 产品常见问题
 <h4 id="Does-collection-size-impact-query-performance-when-searching-in-a-specific-partition" class="common-anchor-header">在特定分区中搜索时，Collection 的大小会影响查询性能吗？</h4><p>不会。如果为搜索指定了分区，Milvus 只搜索指定的分区。</p>
 <h4 id="Does-Milvus-need-to-load-the-entire-collection-when-partitions-are-specified-for-a-search" class="common-anchor-header">为搜索指定分区时，Milvus 是否需要加载整个 Collections？</h4><p>这取决于搜索需要哪些数据。搜索前必须加载搜索结果中可能显示的所有分区。</p>
 <ul>
-<li>例如，如果只想搜索特定分区，则无需加载所有分区。调用<code translate="no">load_partition()</code> 加载目标分区，<em>然后</em>在<code translate="no">search()</code> 方法调用中指定分区。</li>
+<li>例如，如果只想搜索特定分区，则不需要加载所有分区。调用<code translate="no">load_partition()</code> 加载目标分区，<em>然后</em>在<code translate="no">search()</code> 方法调用中指定分区。</li>
 <li>如果要搜索所有分区，请调用<code translate="no">load_collection()</code> 加载包括所有分区在内的整个 Collections。</li>
 <li>如果在搜索前未加载 Collections 或特定分区，Milvus 将返回错误。</li>
 </ul>
@@ -47,20 +47,20 @@ title: 产品常见问题
 <h4 id="How-does-Milvus-flush-data" class="common-anchor-header">Milvus 如何刷新数据？</h4><p>当插入的数据被摄取到消息队列时，Milvus 返回成功。但是，数据尚未刷新到磁盘。然后，Milvus 的数据节点会将消息队列中的数据作为增量日志写入持久存储。如果调用<code translate="no">flush()</code> ，数据节点就会被迫立即将消息队列中的所有数据写入持久化存储。</p>
 <h4 id="What-is-normalization-Why-is-normalization-needed" class="common-anchor-header">什么是规范化？为什么需要规范化？</h4><p>归一化指的是转换向量使其法等于 1 的过程。如果使用内积计算向量相似性，则必须对向量进行归一化。归一化后，内积等于余弦相似度。</p>
 <p>更多信息，请参见<a href="https://en.wikipedia.org/wiki/Unit_vector">维基百科</a>。</p>
-<h4 id="Why-do-Euclidean-distance-L2-and-inner-product-IP-return-different-results" class="common-anchor-header">为什么欧氏距离（L2）和内积（IP）返回的结果不同？</h4><p>对于归一化向量，欧氏距离（L2）在数学上等同于内积（IP）。如果这些相似性度量返回不同的结果，请检查您的向量是否归一化</p>
-<h4 id="Is-there-a-limit-to-the-total-number-of-collections-and-partitions-in-Milvus" class="common-anchor-header">Milvus 中的 Collections 和分区总数有限制吗？</h4><p>有。您最多可以在 Milvus 实例中创建 65,535 个集合。计算现有集合数量时，Milvus 会计算所有包含分片和分区的集合。</p>
+<h4 id="Why-do-Euclidean-distance-L2-and-inner-product-IP-return-different-results" class="common-anchor-header">为什么欧氏距离（L2）和内积（IP）返回的结果不同？</h4><p>对于归一化向量，欧氏距离（L2）在数学上等同于内积（IP）。如果这些相似度度量返回不同的结果，请检查您的向量是否归一化</p>
+<h4 id="Is-there-a-limit-to-the-total-number-of-collections-and-partitions-in-Milvus" class="common-anchor-header">Milvus 中的 Collections 和分区总数有限制吗？</h4><p>有。您最多可以在 Milvus 实例中创建 65,535 个集合。在计算现有集合数量时，Milvus 会计算所有包含分片和分区的集合。</p>
 <p>例如，假设您已经创建了 100 个 Collection，其中 60 个 Collection 有 2 个分片和 4 个分区，其余 40 个 Collection 有 1 个分片和 12 个分区。当前的 Collections 数量可以计算如下：</p>
 <pre><code translate="no">60 * 2 * 4 + 40 * 1 * 12 = 960
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Why-do-I-get-fewer-than-k-vectors-when-searching-for-topk-vectors" class="common-anchor-header">在搜索<code translate="no">topk</code> 向量时，为什么得到的向量少于 k 个？</h4><p>在 Milvus 支持的索引中，IVF_FLAT 和 IVF_SQ8 实现了 k-means 聚类方法。数据空间被划分为<code translate="no">nlist</code> 个簇，插入的向量被分配到这些簇中。然后，Milvus 选择离其最近的<code translate="no">nprobe</code> 个簇，并比较目标向量与所选簇中所有向量之间的距离，返回最终结果。</p>
-<p>如果<code translate="no">nlist</code> 和<code translate="no">topk</code> 较大，而 nprobe 较小，则 nprobe 簇中的向量数量可能少于<code translate="no">k</code> 。因此，当搜索<code translate="no">topk</code> 最近的向量时，返回的向量数量少于<code translate="no">k</code> 。</p>
-<p>为避免这种情况，可尝试将<code translate="no">nprobe</code> 设置得大一些，将<code translate="no">nlist</code> 和<code translate="no">k</code> 设置得小一些。</p>
+<p>如果<code translate="no">nlist</code> 和<code translate="no">topk</code> 较大，而 nprobe 较小，则 nprobe 簇中的向量数量可能会少于<code translate="no">k</code> 。因此，当搜索<code translate="no">topk</code> 最近的向量时，返回的向量数量会少于<code translate="no">k</code> 。</p>
+<p>为避免这种情况，请尝试将<code translate="no">nprobe</code> 设置得大一些，将<code translate="no">nlist</code> 和<code translate="no">k</code> 设置得小一些。</p>
 <p>更多信息请参见<a href="/docs/zh/index.md">向量索引</a>。</p>
 <h4 id="What-is-the-maximum-vector-dimension-supported-in-Milvus" class="common-anchor-header">Milvus 支持的最大向量维度是多少？</h4><p>默认情况下，Milvus 最多可管理 32,768 维的向量。你可以增加<code translate="no">Proxy.maxDimension</code> 的值，以允许更大维度的向量。</p>
-<h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">Milvus 是否支持苹果 M1 CPU？</h4><p>目前的 Milvus 版本不直接支持苹果 M1 CPU。Milvus 2.3 之后，Milvus 会提供 ARM64 架构的 Docker 镜像。</p>
+<h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">Milvus 支持苹果 M1 CPU 吗？</h4><p>目前的 Milvus 版本不直接支持苹果 M1 CPU。Milvus 2.3 之后，Milvus 会提供 ARM64 架构的 Docker 镜像。</p>
 <h4 id="What-data-types-does-Milvus-support-on-the-primary-key-field" class="common-anchor-header">Milvus 在主键字段上支持哪些数据类型？</h4><p>在当前版本中，Milvus 同时支持 INT64 和字符串。</p>
 <h4 id="Is-Milvus-scalable" class="common-anchor-header">Milvus 可以扩展吗？</h4><p>是的。您可以在 Kubernetes 上使用 Helm Chart 部署多节点的 Milvus 集群。更多说明请参阅《<a href="/docs/zh/scaleout.md">扩展指南》</a>。</p>
-<h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">什么是增长段和封存段？</h4><p>当有搜索请求时，Milvus 会同时搜索增量数据和历史数据。增量数据是最近更新的数据，它们存储在增长段中，在达到在对象存储中持久化的阈值之前在内存中缓冲，并为它们建立更高效的索引。历史数据是一段时间前的更新，它们位于已在对象存储中持久化的封存段中。增量数据和历史数据共同构成了整个搜索数据集。这种设计使任何数据输入 Milvus 后都能立即搜索。对于 Milvus Distributed 而言，有更复杂的因素来决定刚录入的记录何时可以显示在搜索结果中。在<a href="https://milvus.io/docs/consistency.md">一致性级别</a>了解更多细微差别。</p>
+<h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">什么是增长段和封存段？</h4><p>当有搜索请求时，Milvus 会同时搜索增量数据和历史数据。增量数据是最近更新的数据，它们存储在增长段中，在达到在对象存储中持久化的阈值之前在内存中缓冲，并为它们建立更高效的索引。历史数据是一段时间前的更新，它们位于已在对象存储中持久化的封存段中。增量数据和历史数据共同构成了整个搜索数据集。这种设计使任何输入到 Milvus 的数据都可以即时搜索。对于 Milvus Distributed 而言，有更复杂的因素来决定刚录入的记录何时可以显示在搜索结果中。在<a href="https://milvus.io/docs/consistency.md">一致性级别</a>了解更多细微差别。</p>
 <h4 id="Is-Milvus-available-for-concurrent-search" class="common-anchor-header">Milvus 可用于并发搜索吗？</h4><p>是的。对于同一 Collections 的查询，Milvus 会同时搜索增量数据和历史数据。不过，对不同 Collection 的查询是串联进行的。历史数据可能是一个极其庞大的数据集，因此对历史数据的搜索相对更耗时，而且基本上是串联进行的。</p>
 <h4 id="Why-does-the-data-in-MinIO-remain-after-the-corresponding-collection-is-dropped" class="common-anchor-header">为什么相应的 Collections 丢弃后，MinIO 中的数据仍会保留？</h4><p>MinIO 中的数据被设计为保留一段时间，以方便数据回滚。</p>
 <h4 id="Does-Milvus-support-message-engines-other-than-Pulsar" class="common-anchor-header">Milvus 是否支持 Pulsar 以外的消息引擎？</h4><p>支持。Milvus 2.1.0 支持 Kafka。</p>
@@ -69,7 +69,7 @@ title: 产品常见问题
 <h4 id="How-does-Milvus-handle-vector-data-types-and-precision" class="common-anchor-header">Milvus 如何处理向量数据类型和精度？</h4><p>Milvus 支持二进制、Float32、Float16 和 BFloat16 向量类型。</p>
 <ul>
 <li>二进制向量：将二进制数据存储为 0 和 1 的序列，用于图像处理和信息检索。</li>
-<li>Float32 向量：默认存储精度约为十进制 7 位数。即使是 Float64 值也是以 Float32 精度存储的，这可能会导致检索时的精度损失。</li>
+<li>Float32 向量：默认存储精度约为小数点后 7 位。即使是 Float64 值，也是以 Float32 精度存储的，因此在检索时可能会丢失精度。</li>
 <li>Float16 和 BFloat16 向量：可降低精度和内存使用量。Float16 适用于带宽和存储有限的应用，而 BFloat16 则兼顾了范围和效率，常用于深度学习，在不显著影响精度的情况下降低计算要求。</li>
 </ul>
 <h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvus 是否支持为标量或向量场指定默认值？</h4><p>目前，Milvus 2.4.x 不支持为标量或向量场指定默认值。该功能计划在未来版本中推出。</p>
@@ -93,7 +93,29 @@ title: 产品常见问题
     serverMaxRecvSize: <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>默认情况下，每个 RPC 请求的最大大小为 64MB。因此，输入向量（包括其维度数据和元数据）的总大小必须小于此限制，以确保成功执行。</p>
-<h4 id="Still-have-questions" class="common-anchor-header">还有问题？</h4><p>您可以</p>
+<h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">如何从 Collections 中获取给定标量字段的所有唯一值？</h4><p>目前还没有直接的方法来实现这一目标。作为一种变通方法，我们建议使用查询迭代器获取特定字段的所有值，然后手动执行重复数据删除。我们计划在 Milvus 2.6 中添加对该功能的直接支持。使用 query_iterator 的示例：</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># set up iterator</span>
+iterator = client.query_iterator(
+    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;target&quot;</span>]
+)
+<span class="hljs-comment"># do iteration and store target values into value_set </span>
+value_set = <span class="hljs-built_in">set</span>()
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    res = iterator.<span class="hljs-built_in">next</span>()
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res) == <span class="hljs-number">0</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;query iteration finished, close&quot;</span>)
+        iterator.close()
+        <span class="hljs-keyword">break</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(res)):
+        value_set.add(res[i][<span class="hljs-string">&quot;target&quot;</span>])
+
+<span class="hljs-comment"># value_set will contain unique values for target column    </span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-are-the-limitations-of-using-dynamic-fields-For-example-are-there-size-limits-modification-methods-or-indexing-restrictions" class="common-anchor-header">使用动态字段有什么限制？例如，是否有大小限制、修改方法或索引限制？</h4><p>动态字段在内部使用 JSON 字段表示，大小限制为 65,536 字节。它们支持向上插入修改，允许您添加或更新字段。不过，从 Milvus 2.5.1 开始，动态字段不支持索引。未来版本将支持为 JSON 添加索引。</p>
+<h4 id="Does-Milvus-support-schema-changes" class="common-anchor-header">Milvus 支持 Schema 更改吗？</h4><p>从 Milvus 2.5.0 版开始，模式更改仅限于特定的修改，如调整<code translate="no">mmap</code> 参数等属性。用户还可以修改 varchar 字段的<code translate="no">max_length</code> 和数组字段的<code translate="no">max_capacity</code> 。不过，计划在今后的版本中实现在模式中添加或删除字段的功能，增强 Milvus 内模式管理的灵活性。</p>
+<h4 id="Does-modifying-maxlength-for-VarChar-require-data-reorganization" class="common-anchor-header">修改 VarChar 的 max_length 是否需要重新组织数据？</h4><p>不需要，修改 VarChar 字段的<code translate="no">max_length</code> 不需要进行数据重组，如压缩或重组。这一调整主要是更新插入字段的新数据的验证标准，现有数据不受影响。因此，这一更改被认为是轻量级的，不会给系统带来显著的开销。</p>
+<h4 id="Still-have-questions" class="common-anchor-header">仍有问题？</h4><p>您可以</p>
 <ul>
 <li>在 GitHub 上查看<a href="https://github.com/milvus-io/milvus/issues">Milvus</a>。欢迎提出问题、分享想法并帮助其他用户。</li>
 <li>加入我们的<a href="https://slack.milvus.io/">Slack 社区</a>，寻求支持并参与我们的开源社区。</li>

@@ -60,12 +60,12 @@ summary: Milvusのシステム構成についてご紹介します。
 <p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_mq.md">mq関連設定を</a>参照してください。</p>
 <h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code></h3><p>最近の突然変異操作のMilvusログを管理し、ストリーミング・ログを出力し、ログ・パブリッシュ・サブスクライブ・サービスを提供するために使用されるpulsarの関連設定。</p>
 <p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_pulsar.md">pulsar関連設定を</a>参照してください。</p>
-<h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>kafkaを有効にしたい場合は、pulsarコンフィギュレーションにコメントを付ける必要があります。</p>
+<h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>kafkaを有効にする場合、pulsarコンフィギュレーションにコメントを付ける必要があります。</p>
 <p>kafka：</p>
-<p>brokerList：</p>
-<p>saslUsername：</p>
+<p>brokerList: localhost:9092</p>
+<p>saslユーザ名</p>
 <p>saslPassword：</p>
-<p>saslMechanisms</p>
+<p>saslMechanisms：</p>
 <p>securityProtocol：</p>
 <p>ssl：</p>
 <pre><code translate="no">enabled: false # whether to enable ssl mode
@@ -99,10 +99,12 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>このセクションの各パラメータの詳細については、「<a href="/docs/ja/configure_msgchannel.md">msgChannel関連設定</a>」を参照してください。</p>
 <h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>システムログ出力の設定を行います。</p>
 <p>このセクションの各パラメータの詳細については、「<a href="/docs/ja/configure_log.md">ログ関連設定</a>」を参照してください。</p>
-<h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_grpc.md">grpc 関連の設定を</a>参照してください。</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>プロキシ tls enable を設定します。</p>
-<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_tls.md">tls 関連の設定を</a>参照してください。</p>
-<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>この節の各パラメータの詳細については、<a href="/docs/ja/configure_common.md">共通関連の設定を</a>参照のこと。</p>
+<h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_grpc.md">grpc 関連設定を</a>参照してください。</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>外部 tls を設定します。</p>
+<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_tls.md">tls 関連設定を</a>参照のこと。</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code></h3><p>内部 tls を設定する。</p>
+<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_internaltls.md">internaltls関連の設定を</a>参照してください。</p>
+<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_common.md">共通関連の設定を</a>参照してください。</p>
 <h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig、Milvusのクォータとリミットの設定。</p>
 <p>デフォルトでは</p>
 <ol>
@@ -127,3 +129,9 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#milvusは利用可能なGPUメモリの半分を自動的に初期化します、</p>
 <p>#maxMemSizeは利用可能なGPUメモリ全体を初期化します。</p>
 <p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_gpu.md">gpu関連の設定を</a>参照してください。</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>ストリーミングノードサーバーに関する設定。</p>
+<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_streamingnode.md">streamingNode関連設定を</a>参照してください。</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>ストリーミングサービスに関する設定。</p>
+<p>この節の各パラメータの詳細については、<a href="/docs/ja/configure_streaming.md">ストリーミング関連設定 を</a>参照のこと。</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>knowhere ベクトル検索エンジンに関する設定。</p>
+<p>この節の各パラメータの詳細については、<a href="/docs/ja/configure_knowhere.md">Knowhere 関連設定を</a>参照してください。</p>

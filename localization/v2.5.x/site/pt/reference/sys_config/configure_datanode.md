@@ -486,7 +486,7 @@ summary: Saiba como configurar o dataNode para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        a duração do intervalo (em segundos) para que o nó de dados actualize o ponto de verificação de cada canal     </td>
+      <td>        a duração do intervalo (em segundos) para o nó de dados atualizar o ponto de verificação do canal de cada canal     </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -665,6 +665,35 @@ summary: Saiba como configurar o dataNode para Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataNodeimportmaxTaskSlotNum" class="common-anchor-header"><code translate="no">dataNode.import.maxTaskSlotNum</code><button data-href="#dataNodeimportmaxTaskSlotNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.import.maxTaskSlotNum">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        O número máximo de faixas horárias ocupadas por cada tarefa de importação/pré-importação.      </td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataNodecompactionlevelZeroBatchMemoryRatio" class="common-anchor-header"><code translate="no">dataNode.compaction.levelZeroBatchMemoryRatio</code><button data-href="#dataNodecompactionlevelZeroBatchMemoryRatio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -689,8 +718,8 @@ summary: Saiba como configurar o dataNode para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        O rácio de memória mínima da memória livre para a compactação de nível zero executada em modo batch     </td>
-      <td>0.05</td>
+      <td>        O rácio mínimo de memória livre para a compactação de nível zero executada em modo batch     </td>
+      <td>0.5</td>
     </tr>
   </tbody>
 </table>
@@ -723,6 +752,64 @@ summary: Saiba como configurar o dataNode para Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="dataNodecompactionuseMergeSort" class="common-anchor-header"><code translate="no">dataNode.compaction.useMergeSort</code><button data-href="#dataNodecompactionuseMergeSort" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.useMergeSort">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Se deve ativar o modo mergeSort ao executar mixCompaction.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodecompactionmaxSegmentMergeSort" class="common-anchor-header"><code translate="no">dataNode.compaction.maxSegmentMergeSort</code><button data-href="#dataNodecompactionmaxSegmentMergeSort" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.maxSegmentMergeSort">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        O número máximo de segmentos a serem fundidos no modo mergeSort.      </td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataNodegracefulStopTimeout" class="common-anchor-header"><code translate="no">dataNode.gracefulStopTimeout</code><button data-href="#dataNodegracefulStopTimeout" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -742,7 +829,7 @@ summary: Saiba como configurar o dataNode para Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor predefinido</th> 
+      <th class="width20">Valor por defeito</th> 
     </tr>
   </thead>
   <tbody>
@@ -805,8 +892,8 @@ summary: Saiba como configurar o dataNode para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        O rácio do buffer de memória da compactação de clustering. Os dados maiores do que o limite serão descarregados para o armazenamento.      </td>
-      <td>0.1</td>
+      <td>        O rácio do buffer de memória da compactação de clusters. Os dados maiores do que o limite serão descarregados para o armazenamento.      </td>
+      <td>0.3</td>
     </tr>
   </tbody>
 </table>
@@ -834,8 +921,66 @@ summary: Saiba como configurar o dataNode para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Tamanho do pool de trabalhadores para um trabalho de compactação de clustering.      </td>
+      <td>        tamanho do pool de trabalhadores para um trabalho de compactação de clustering.      </td>
       <td>8</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodebloomFilterApplyParallelFactor" class="common-anchor-header"><code translate="no">dataNode.bloomFilterApplyParallelFactor</code><button data-href="#dataNodebloomFilterApplyParallelFactor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.bloomFilterApplyParallelFactor">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        fator paralelo quando aplicar pk ao filtro bloom, predefinição para 4*CPU_CORE_NUM      </td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodestoragedeltalog" class="common-anchor-header"><code translate="no">dataNode.storage.deltalog</code><button data-href="#dataNodestoragedeltalog" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.storage.deltalog">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        formato deltalog, opções: [json, parquet]      </td>
+      <td>json</td>
     </tr>
   </tbody>
 </table>
@@ -863,7 +1008,7 @@ summary: Saiba como configurar o dataNode para Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Endereço TCP/IP do dataNode. Se não for especificado, utilizar o primeiro endereço não transmissível      </td>
+      <td>        Endereço TCP/IP do dataNode. Se não for especificado, utilizar o primeiro endereço unicastable      </td>
       <td></td>
     </tr>
   </tbody>

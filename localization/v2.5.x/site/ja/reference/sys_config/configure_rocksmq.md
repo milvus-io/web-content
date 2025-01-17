@@ -20,11 +20,11 @@ summary: Milvus用のrocksmqの設定方法について説明します。
         ></path>
       </svg>
     </button></h1><p>kafkaを有効にしたい場合は、pulsarのコンフィグをコメントする必要がある。</p>
-<p>kafka：</p>
-<p>brokerList：</p>
-<p>saslUsername：</p>
-<p>saslPassword：</p>
-<p>saslMechanisms</p>
+<p>kafka</p>
+<p>brokerList: localhost:9092</p>
+<p>saslユーザー名</p>
+<p>saslPassword</p>
+<p>saslMechanisms：</p>
 <p>securityProtocol：</p>
 <p>ssl：</p>
 <pre><code translate="no">enabled: false # whether to enable ssl mode

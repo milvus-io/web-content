@@ -399,6 +399,37 @@ summary: Découvrez comment configurer queryCoord pour Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="queryCoordcollectionChannelCountFactor" class="common-anchor-header"><code translate="no">queryCoord.collectionChannelCountFactor</code><button data-href="#queryCoordcollectionChannelCountFactor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryCoord.collectionChannelCountFactor">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>le poids du nombre de canaux utilisé lors de l'équilibrage des canaux entre les nœuds de requête, </li>      
+        <li>        Une valeur plus élevée réduit la probabilité d'attribuer des canaux de la même collection au même QueryNode. Une valeur plus élevée réduit la probabilité d'attribuer des canaux d'une même collection à un même nœud de requête. La valeur 1 désactive cette fonction.</li>      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryCoordsegmentCountMaxSteps" class="common-anchor-header"><code translate="no">queryCoord.segmentCountMaxSteps</code><button data-href="#queryCoordsegmentCountMaxSteps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -417,13 +448,13 @@ summary: Découvrez comment configurer queryCoord pour Milvus.
     </button></h2><table id="queryCoord.segmentCountMaxSteps">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        générateur de plan basé sur le nombre de segments pas max   </td>
+      <td>        segment count based plan generator max steps     </td>
       <td>50</td>
     </tr>
   </tbody>
@@ -1090,7 +1121,7 @@ summary: Découvrez comment configurer queryCoord pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        5m, intervalle maximum pour la mise à jour de l'état de chargement de la collection      </td>
+      <td>        5m, intervalle maximum de mise à jour de l'état de chargement de la collection pour le contrôle de l'état de santé      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -1113,7 +1144,7 @@ summary: Découvrez comment configurer queryCoord pour Milvus.
     </button></h2><table id="queryCoord.cleanExcludeSegmentInterval">
   <thead>
     <tr>
-      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width80">Description</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>

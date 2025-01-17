@@ -617,14 +617,14 @@ curl --request POST \​
       </svg>
     </button></h2><h3 id="Insert-and-Delete-Entities​" class="common-anchor-header">Insérer et supprimer des entités</h3><p>Vous pouvez effectuer des opérations d'insertion, d'upsert et de suppression dans des opérations spécifiques. Pour plus de détails, voir</p>
 <ul>
-<li><p>Insérer des entités dans une partition</p></li>
-<li><p>Insertion d'entités dans une partition</p></li>
-<li><p>Supprimer des entités d'une partition</p></li>
+<li><p><a href="/docs/fr/insert-update-delete.md#Insert-Entities-into-a-Partition">Insérer des entités dans une partition</a></p></li>
+<li><p><a href="/docs/fr/upsert-entities.md#Upsert-Entities-in-a-Partition">Insertion d'entités dans une partition</a></p></li>
+<li><p><a href="/docs/fr/delete-entities.md#Delete-Entities-from-Partitions">Supprimer des entités d'une partition</a></p></li>
 </ul>
 <h3 id="Search-and-Query​" class="common-anchor-header">Recherche et interrogation</h3><p>Vous pouvez effectuer des recherches et des requêtes dans des partitions spécifiques. Pour plus d'informations, reportez-vous à la section</p>
 <ul>
-<li><p>Effectuer des recherches ANN dans les partitions</p></li>
-<li><p>Filtrage des métadonnées dans les partitions</p></li>
+<li><p><a href="/docs/fr/single-vector-search.md#ANN-Search-in-Partition">Effectuer des recherches ANN dans les partitions</a></p></li>
+<li><p><a href="/docs/fr/filtered-search.md">Filtrage des métadonnées dans les partitions</a></p></li>
 </ul>
 <h2 id="Drop-Partition​" class="common-anchor-header">Abandonner une partition<button data-href="#Drop-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -50,7 +50,7 @@ summary: Imparare a configurare la gpu per Milvus.
   <tbody>
     <tr>
       <td>        Dimensione iniziale del pool di memoria Gpu   </td>
-      <td></td>
+      <td>2048</td>
     </tr>
   </tbody>
 </table>
@@ -79,7 +79,7 @@ summary: Imparare a configurare la gpu per Milvus.
   <tbody>
     <tr>
       <td>        Pool di memoria Gpu Dimensione massima      </td>
-      <td></td>
+      <td>4096</td>
     </tr>
   </tbody>
 </table>

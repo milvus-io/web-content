@@ -1,6 +1,6 @@
 ---
 id: analyzer-overview.md
-title: Analyzer Überblick
+title: Analyzer Übersicht
 summary: >-
   In der Textverarbeitung ist ein Analysator eine entscheidende Komponente, die
   Rohtext in ein strukturiertes, durchsuchbares Format umwandelt. Jeder Analyzer
@@ -8,7 +8,7 @@ summary: >-
   wandeln sie den Eingabetext in Token um, verfeinern diese Token und bereiten
   sie für eine effiziente Indizierung und Abfrage vor.
 ---
-<h1 id="Analyzer-Overview​" class="common-anchor-header">Analyzer Überblick<button data-href="#Analyzer-Overview​" class="anchor-icon" translate="no">
+<h1 id="Analyzer-Overview​" class="common-anchor-header">Analyzer Übersicht<button data-href="#Analyzer-Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -32,7 +32,7 @@ summary: >-
 <li><p><strong>Textabgleich:</strong> Beim Textabgleich ist die Indexerstellung ebenfalls langsamer, da die Tokenisierung erst abgeschlossen werden muss, bevor ein Index erstellt werden kann.</p></li>
 </ul>
 </div>
-<h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">Anatomie eines Analysators<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">
+<h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">Anatomie eines Analyzers<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -50,8 +50,11 @@ summary: >-
     </button></h2><p>Ein Analyzer in Milvus besteht aus genau einem <strong>Tokenizer</strong> und <strong>null oder mehr</strong> Filtern.</p>
 <ul>
 <li><p><strong>Tokenisierer</strong>: Der Tokenisierer zerlegt den Eingabetext in diskrete Einheiten, die Token genannt werden. Diese Token können Wörter oder Phrasen sein, je nach Tokenizer-Typ.</p></li>
-<li><p><strong>Filter</strong>: Filter können auf Token angewandt werden, um sie weiter zu verfeinern, z. B. indem sie kleingeschrieben oder gemeinsame Wörter entfernt werden.</p></li>
+<li><p><strong>Filter</strong>: Filter können auf Token angewandt werden, um sie weiter zu verfeinern, z. B. durch Kleinschreibung oder das Entfernen häufiger Wörter.</p></li>
 </ul>
+<div class="alert note">
+<p>Tokenizer unterstützen nur das UTF-8-Format. Die Unterstützung für andere Formate wird in zukünftigen Versionen hinzugefügt werden.</p>
+</div>
 <p>Der folgende Arbeitsablauf zeigt, wie ein Analysator Text verarbeitet.</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/analyzer-overview.png" alt="analyzer-overview" width="400"/></p>
 <h2 id="Analyzer-types​" class="common-anchor-header">Analyzer-Typen<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">

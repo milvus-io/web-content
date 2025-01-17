@@ -396,8 +396,327 @@ summary: تعلم كيفية تهيئة المشترك لميلفوس.
   </thead>
   <tbody>
     <tr>
-      <td>        كلمة المرور الافتراضية للمستخدم الجذر      </td>
+      <td>        كلمة المرور الافتراضية للمستخدم الجذر. الحد الأقصى للطول هو 72 حرفاً، ويلزم وجود علامات اقتباس مزدوجة.      </td>
       <td>ميلفوس</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrootShouldBindRole" class="common-anchor-header"><code translate="no">common.security.rootShouldBindRole</code><button data-href="#commonsecurityrootShouldBindRole" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rootShouldBindRole">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        ما إذا كان يجب ربط المستخدم الجذر بدور عند تمكين التخويل.      </td>
+      <td>خطأ</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbacoverrideBuiltInPrivilegeGroupsenabled" class="common-anchor-header"><code translate="no">common.security.rbac.overrideBuiltInPrivilegeGroups.enabled</code><button data-href="#commonsecurityrbacoverrideBuiltInPrivilegeGroupsenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.overrideBuiltInPrivilegeGroups.enabled">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        ما إذا كان يجب تجاوز مجموعات الامتيازات المضمنة      </td>
+      <td>خطأ</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbacclusterreadonlyprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.cluster.readonly.privileges</code><button data-href="#commonsecurityrbacclusterreadonlyprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.cluster.readonly.privileges">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        امتيازات للقراءة فقط على مستوى المجموعة      </td>
+      <td>سرد قواعد البيانات,تحديدالملكية,تحديدالملكية,تحديد المستخدم,وصفمجموعة الموارد,سرد مجموعات الموارد,سرد مجموعات الامتيازات</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbacclusterreadwriteprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.cluster.readwrite.privileges</code><button data-href="#commonsecurityrbacclusterreadwriteprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.cluster.readwrite.privileges">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        امتيازات الكتابة للقراءة على مستوى المجموعة      </td>
+      <td>ListDatabase,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbacclusteradminprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.cluster.admin.privileges</code><button data-href="#commonsecurityrbacclusteradminprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.cluster.admin.privileges">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        امتيازات المسؤول على مستوى المجموعة      </td>
+      <td>ListDatabase,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,TransferReplica,UpdateResourceGroups,BackupRBAC,RestoreRBAC,CreateDatabase,إسقاط قاعدة البيانات،إنشاء الملكية،إسقاط الملكية،إسقاط الملكية،إدارة الملكية،إنشاءمجموعة الموارد،إسقاط مجموعة الموارد،تحديثالمستخدم،إعادة تسمية المجموعة،إنشاءمجموعة الامتياز،إسقاط مجموعة الامتياز،تشغيل مجموعة الامتياز</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbacdatabasereadonlyprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.database.readonly.privileges</code><button data-href="#commonsecurityrbacdatabasereadonlyprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.database.readonly.privileges">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        امتيازات للقراءة فقط على مستوى قاعدة البيانات      </td>
+      <td>إظهار المجموعات، وصف قاعدة البيانات</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbacdatabasereadwriteprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.database.readwrite.privileges</code><button data-href="#commonsecurityrbacdatabasereadwriteprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.database.readwrite.privileges">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        امتيازات الكتابة للقراءة على مستوى قاعدة البيانات      </td>
+      <td>إظهار المجموعات,وصف قاعدة البيانات,وصف قاعدة البيانات,تعديل قاعدة البيانات</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbacdatabaseadminprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.database.admin.privileges</code><button data-href="#commonsecurityrbacdatabaseadminprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.database.admin.privileges">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        امتيازات المسؤول على مستوى قاعدة البيانات      </td>
+      <td>إظهار المجموعات، وصف قاعدة البيانات، وصف قاعدة البيانات، تغيير قاعدة البيانات، إنشاء مجموعة، إسقاط مجموعة</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbaccollectionreadonlyprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.collection.readonly.privileges</code><button data-href="#commonsecurityrbaccollectionreadonlyprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.collection.readonly.privileges">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        امتيازات مستوى المجموعة للقراءة فقط      </td>
+      <td>استعلام،بحث،تفصيل الفهرس،حصول على حالة التدفق،حصول على حالة التحميل،حصول على تقدم التحميل،وجود قسم،إظهار الأقسام،وصف المجموعة،وصف الخواص ،حصول على الإحصائيات،قائمة الخواص</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbaccollectionreadwriteprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.collection.readwrite.privileges</code><button data-href="#commonsecurityrbaccollectionreadwriteprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.collection.readwrite.privileges">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        امتيازات الكتابة للقراءة على مستوى المجموعة      </td>
+      <td>استعلام، بحث، بحث، تفاصيل الفهرس، احصل على حالة التدفق، احصل على حالة التحميل، احصل على تقدم التحميل، لديها قسم، اعرض الأقسام، وصف المجموعة، وصف البوليصة، احصل على الإحصائيات، قائمة البواليع، تحميل، تحرير، تحرير، إدراج، حذف، حذف، رفع، استيراد، تدفق، ضغط، ضغط، تحميل توازن، إنشاء فهرس، إسقاط فهرس، إنشاء قسم، إسقاط قسم</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbaccollectionadminprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.collection.admin.privileges</code><button data-href="#commonsecurityrbaccollectionadminprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.collection.admin.privileges">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        امتيازات مسؤول مستوى المجموعة      </td>
+      <td>استعلام، بحث، بحث، تفاصيل الفهرس، احصل على حالة التدفق، احصل على حالة التحميل، احصل على حالة التحميل، احصل على تقدم التحميل، يحتوي على قسم، إظهار الأقسام، وصف المجموعة، وصف الخواص، الحصول على الإحصائيات، قائمة الخواص ،تحميل،إطلاق،إدراج،إدراج، حذف،إدراج، استيراد، استيراد، تدفُّق، ضغط، تحميل توازن، إنشاء فهرس، إسقاط فهرس، إنشاء قسم، إسقاط قسم، إنشاء خواص، إسقاط خواص</td>
     </tr>
   </tbody>
 </table>
@@ -546,6 +865,35 @@ summary: تعلم كيفية تهيئة المشترك لميلفوس.
     </tr>
   </tbody>
 </table>
+<h2 id="commonlocksmaxWLockConditionalWaitTime" class="common-anchor-header"><code translate="no">common.locks.maxWLockConditionalWaitTime</code><button data-href="#commonlocksmaxWLockConditionalWaitTime" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.locks.maxWLockConditionalWaitTime">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        الحد الأقصى للثواني لانتظار Wlock الشرطي      </td>
+      <td>600</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="commonttMsgEnabled" class="common-anchor-header"><code translate="no">common.ttMsgEnabled</code><button data-href="#commonttMsgEnabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -573,7 +921,7 @@ summary: تعلم كيفية تهيئة المشترك لميلفوس.
       <td>
         <li>ما إذا كان سيتم تعطيل آلية المراسلة الزمنية الداخلية للنظام. </li>      
         <li>في حالة تعطيلها (تعيينها إلى خطأ)، لن يسمح النظام بعمليات DML، بما في ذلك الإدراج والحذف والاستعلامات وعمليات البحث. </li>      
-        <li>يساعد هذا الأمر Milvus-CDC على مزامنة البيانات الإضافية</li>      </td>
+        <li>هذا يساعد Milvus-CDC على مزامنة البيانات الإضافية</li>      </td>
       <td>صحيح</td>
     </tr>
   </tbody>
@@ -636,6 +984,35 @@ summary: تعلم كيفية تهيئة المشترك لميلفوس.
     </tr>
   </tbody>
 </table>
+<h2 id="commonbloomFilterType" class="common-anchor-header"><code translate="no">common.bloomFilterType</code><button data-href="#commonbloomFilterType" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.bloomFilterType">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        نوع فلتر التفتح، دعم BasicBloomFilter و BlockedBloomFilter      </td>
+      <td>فلتر التفتح المحظور</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="commonmaxBloomFalsePositive" class="common-anchor-header"><code translate="no">common.maxBloomFalsePositive</code><button data-href="#commonmaxBloomFalsePositive" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -662,35 +1039,6 @@ summary: تعلم كيفية تهيئة المشترك لميلفوس.
     <tr>
       <td>        أقصى معدل إيجابي كاذب لمرشح التفتح      </td>
       <td>0.001</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="commonbloomFilterType" class="common-anchor-header"><code translate="no">common.bloomFilterType</code><button data-href="#commonbloomFilterType" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="common.bloomFilterType">
-  <thead>
-    <tr>
-      <th class="width80">الوصف</th>
-      <th class="width20">القيمة الافتراضية</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        نوع فلتر التفتح، دعم BasicBloomFilter و BlockedBloomFilter      </td>
-      <td>الفلتر الأساسيBloomFilter</td>
     </tr>
   </tbody>
 </table>
@@ -723,6 +1071,35 @@ summary: تعلم كيفية تهيئة المشترك لميلفوس.
     </tr>
   </tbody>
 </table>
+<h2 id="commoncollectionReplicateEnable" class="common-anchor-header"><code translate="no">common.collectionReplicateEnable</code><button data-href="#commoncollectionReplicateEnable" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.collectionReplicateEnable">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        سواء لتمكين النسخ المتماثل للتجميع.      </td>
+      <td>خاطئة</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="commonusePartitionKeyAsClusteringKey" class="common-anchor-header"><code translate="no">common.usePartitionKeyAsClusteringKey</code><button data-href="#commonusePartitionKeyAsClusteringKey" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -747,7 +1124,7 @@ summary: تعلم كيفية تهيئة المشترك لميلفوس.
   </thead>
   <tbody>
     <tr>
-      <td>        إذا كان صوابًا، قم بإجراء ضغط التجميع وتشذيب المقطع على حقل مفتاح التقسيم      </td>
+      <td>        إذا كانت صواب، القيام بضغط التجميع وتشذيب المقطع في حقل مفتاح التقسيم      </td>
       <td>خطأ</td>
     </tr>
   </tbody>
@@ -807,6 +1184,64 @@ summary: تعلم كيفية تهيئة المشترك لميلفوس.
     <tr>
       <td>        إذا كانت صواب، تمكين مفتاح تجميع المتجهات وضغط تجميع المتجهات      </td>
       <td>خطأ</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonlocalRPCEnabled" class="common-anchor-header"><code translate="no">common.localRPCEnabled</code><button data-href="#commonlocalRPCEnabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.localRPCEnabled">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        تمكين rpc المحلي للاتصال الداخلي عند المزج أو الوضع المستقل.      </td>
+      <td>خطأ</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsynctaskPoolReleaseTimeoutSeconds" class="common-anchor-header"><code translate="no">common.sync.taskPoolReleaseTimeoutSeconds</code><button data-href="#commonsynctaskPoolReleaseTimeoutSeconds" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.sync.taskPoolReleaseTimeoutSeconds">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        الحد الأقصى لوقت انتظار انتهاء المهمة وتحرير الموارد في المجموعة      </td>
+      <td>60</td>
     </tr>
   </tbody>
 </table>

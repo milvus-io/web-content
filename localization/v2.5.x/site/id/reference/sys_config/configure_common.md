@@ -396,8 +396,327 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        kata sandi default untuk pengguna root    </td>
+      <td>        kata sandi default untuk pengguna root. Panjang maksimum adalah 72 karakter, dan harus menggunakan tanda kutip ganda.      </td>
       <td>Milvus</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrootShouldBindRole" class="common-anchor-header"><code translate="no">common.security.rootShouldBindRole</code><button data-href="#commonsecurityrootShouldBindRole" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rootShouldBindRole">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Apakah pengguna root harus mengikat peran saat otorisasi diaktifkan.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbacoverrideBuiltInPrivilegeGroupsenabled" class="common-anchor-header"><code translate="no">common.security.rbac.overrideBuiltInPrivilegeGroups.enabled</code><button data-href="#commonsecurityrbacoverrideBuiltInPrivilegeGroupsenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.overrideBuiltInPrivilegeGroups.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Apakah akan mengesampingkan grup hak istimewa bawaan      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbacclusterreadonlyprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.cluster.readonly.privileges</code><button data-href="#commonsecurityrbacclusterreadonlyprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.cluster.readonly.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Hak istimewa hanya-baca tingkat cluster      </td>
+      <td>DaftarDatabase, PilihKepemilikan, PilihPengguna, JelaskanKelompokSumberDaya, DaftarKelompokSumberDaya, DaftarKelompokHakKhusus</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbacclusterreadwriteprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.cluster.readwrite.privileges</code><button data-href="#commonsecurityrbacclusterreadwriteprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.cluster.readwrite.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Hak istimewa baca-tulis tingkat cluster      </td>
+      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbacclusteradminprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.cluster.admin.privileges</code><button data-href="#commonsecurityrbacclusteradminprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.cluster.admin.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Hak istimewa admin tingkat cluster      </td>
+      <td>ListDatabases,SelectOwnership,SelectUser,DescribeResourceGroup,ListResourceGroups,ListPrivilegeGroups,FlushAll,TransferNode,TransferReplica,UpdateResourceGroups,BackupRBAC,RestoreRBAC,CreateDatabase,JatuhkanBasis Data, BuatKepemilikan, JatuhkanKepemilikan, KelolaKepemilikan, BuatKelompokSumberDaya, JatuhkanKelompokSumberDaya, PerbaruiPengguna, GantiNamaKoleksi, BuatKelompokHakKhusus, JatuhkanKelompokHakKhusus, OperasikanKelompokHakKhusus</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbacdatabasereadonlyprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.database.readonly.privileges</code><button data-href="#commonsecurityrbacdatabasereadonlyprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.database.readonly.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Hak istimewa hanya-baca tingkat basis data    </td>
+      <td>TampilkanKoleksi,JelaskanDatabase</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbacdatabasereadwriteprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.database.readwrite.privileges</code><button data-href="#commonsecurityrbacdatabasereadwriteprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.database.readwrite.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Hak istimewa baca-tulis tingkat basis data    </td>
+      <td>TampilkanKoleksi, JelaskanDatabase, UbahDatabase</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbacdatabaseadminprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.database.admin.privileges</code><button data-href="#commonsecurityrbacdatabaseadminprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.database.admin.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Hak istimewa admin tingkat basis data    </td>
+      <td>TampilkanKoleksi, JelaskanDatabase, UbahDatabase, BuatKoleksi, HapusKoleksi</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbaccollectionreadonlyprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.collection.readonly.privileges</code><button data-href="#commonsecurityrbaccollectionreadonlyprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.collection.readonly.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Keistimewaan hanya-baca tingkat koleksi      </td>
+      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection, DescribeAlias, GetStatistics, ListAlias</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbaccollectionreadwriteprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.collection.readwrite.privileges</code><button data-href="#commonsecurityrbaccollectionreadwriteprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.collection.readwrite.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Hak istimewa baca-tulis tingkat koleksi      </td>
+      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection, DescribeAlias, GetStatistics, ListAliases, Load, Release, Insert, Delete, Upsert, Import, Flush, Compaction, LoadBalance, CreateIndex, DropIndex, CreatePartition, DropPartition</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsecurityrbaccollectionadminprivileges" class="common-anchor-header"><code translate="no">common.security.rbac.collection.admin.privileges</code><button data-href="#commonsecurityrbaccollectionadminprivileges" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.security.rbac.collection.admin.privileges">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Keistimewaan admin tingkat koleksi      </td>
+      <td>Query, Search, IndexDetail, GetFlushState, GetLoadState, GetLoadingProgress, HasPartition, ShowPartitions, DescribeCollection, DescribeAlias, GetStatistics, ListAlias, Load, Release, Insert, Delete, Upsert, Import, Flush, Compaction, LoadBalance, CreateIndex, DropIndex, CreatePartition, DropPartition, CreateAlias, DropAlias</td>
     </tr>
   </tbody>
 </table>
@@ -425,7 +744,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        nilai ttl saat sesi memberikan izin untuk mendaftarkan layanan      </td>
+      <td>        nilai ttl saat sesi memberikan sewa untuk mendaftarkan layanan      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -546,6 +865,35 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="commonlocksmaxWLockConditionalWaitTime" class="common-anchor-header"><code translate="no">common.locks.maxWLockConditionalWaitTime</code><button data-href="#commonlocksmaxWLockConditionalWaitTime" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.locks.maxWLockConditionalWaitTime">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        detik maksimum untuk menunggu wlock bersyarat      </td>
+      <td>600</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="commonttMsgEnabled" class="common-anchor-header"><code translate="no">common.ttMsgEnabled</code><button data-href="#commonttMsgEnabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -571,7 +919,7 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   <tbody>
     <tr>
       <td>
-        <li>Apakah akan menonaktifkan mekanisme pesan waktu internal untuk sistem. </li>      
+        <li>Apakah akan menonaktifkan mekanisme pengiriman pesan waktu internal untuk sistem. </li>      
         <li>Jika dinonaktifkan (diatur ke false), sistem tidak akan mengizinkan operasi DML, termasuk penyisipan, penghapusan, kueri, dan pencarian. </li>      
         <li>Hal ini membantu Milvus-CDC menyinkronkan data tambahan</li>      </td>
       <td>benar</td>
@@ -636,35 +984,6 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
     </tr>
   </tbody>
 </table>
-<h2 id="commonmaxBloomFalsePositive" class="common-anchor-header"><code translate="no">common.maxBloomFalsePositive</code><button data-href="#commonmaxBloomFalsePositive" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="common.maxBloomFalsePositive">
-  <thead>
-    <tr>
-      <th class="width80">Deskripsi</th>
-      <th class="width20">Nilai Default</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        tingkat positif palsu maksimum untuk filter mekar     </td>
-      <td>0.001</td>
-    </tr>
-  </tbody>
-</table>
 <h2 id="commonbloomFilterType" class="common-anchor-header"><code translate="no">common.bloomFilterType</code><button data-href="#commonbloomFilterType" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -690,7 +1009,36 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   <tbody>
     <tr>
       <td>        jenis filter mekar, mendukung BasicBloomFilter dan BlockedBloomFilter      </td>
-      <td>BasicBloomFilter</td>
+      <td>Filter Mekar yang Diblokir (BlockedBloomFilter)</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonmaxBloomFalsePositive" class="common-anchor-header"><code translate="no">common.maxBloomFalsePositive</code><button data-href="#commonmaxBloomFalsePositive" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.maxBloomFalsePositive">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        tingkat positif palsu maksimum untuk filter bloom     </td>
+      <td>0.001</td>
     </tr>
   </tbody>
 </table>
@@ -718,8 +1066,37 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        ukuran batch kapan harus menerapkan pk ke filter mekar     </td>
+      <td>        ukuran batch kapan harus menerapkan pk ke filter bloom     </td>
       <td>1000</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commoncollectionReplicateEnable" class="common-anchor-header"><code translate="no">common.collectionReplicateEnable</code><button data-href="#commoncollectionReplicateEnable" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.collectionReplicateEnable">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Apakah akan mengaktifkan replikasi koleksi.      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -747,8 +1124,8 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        jika benar, lakukan pemadatan pengelompokan dan pemangkasan segmen pada bidang kunci partisi      </td>
-      <td>salah</td>
+      <td>        jika benar, lakukan pemadatan clustering dan pemangkasan segmen pada bidang kunci partisi      </td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -807,6 +1184,64 @@ summary: Pelajari cara mengonfigurasi umum untuk Milvus.
     <tr>
       <td>        jika benar, aktifkan kunci pengelompokan vektor dan pemadatan pengelompokan vektor      </td>
       <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonlocalRPCEnabled" class="common-anchor-header"><code translate="no">common.localRPCEnabled</code><button data-href="#commonlocalRPCEnabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.localRPCEnabled">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        aktifkan rpc lokal untuk komunikasi internal saat mode campuran atau mandiri.      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="commonsynctaskPoolReleaseTimeoutSeconds" class="common-anchor-header"><code translate="no">common.sync.taskPoolReleaseTimeoutSeconds</code><button data-href="#commonsynctaskPoolReleaseTimeoutSeconds" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="common.sync.taskPoolReleaseTimeoutSeconds">
+  <thead>
+    <tr>
+      <th class="width80">Deskripsi</th>
+      <th class="width20">Nilai Default</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Waktu maksimum untuk menunggu tugas selesai dan melepaskan sumber daya dalam pool    </td>
+      <td>60</td>
     </tr>
   </tbody>
 </table>

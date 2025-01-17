@@ -341,6 +341,64 @@ summary: تعرف على كيفية تكوين الوكيل لـ Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="proxyddlConcurrency" class="common-anchor-header"><code translate="no">proxy.ddlConcurrency</code><button data-href="#proxyddlConcurrency" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="proxy.ddlConcurrency">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        عدد التنفيذ المتزامن لـ DDL في الوكيل.      </td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="proxydclConcurrency" class="common-anchor-header"><code translate="no">proxy.dclConcurrency</code><button data-href="#proxydclConcurrency" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="proxy.dclConcurrency">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        رقم التنفيذ المتزامن ل DCL عند الوكيل.      </td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="proxymustUsePartitionKey" class="common-anchor-header"><code translate="no">proxy.mustUsePartitionKey</code><button data-href="#proxymustUsePartitionKey" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -365,7 +423,7 @@ summary: تعرف على كيفية تكوين الوكيل لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        مفتاح تبديل لما إذا كان يجب على الوكيل استخدام مفتاح التقسيم للمجموعة      </td>
+      <td>        مفتاح التبديل لما إذا كان يجب على الوكيل استخدام مفتاح التقسيم للمجموعة      </td>
       <td>خطأ</td>
     </tr>
   </tbody>
@@ -945,7 +1003,7 @@ summary: تعرف على كيفية تكوين الوكيل لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        واجهة برمجة تطبيقات مرنة عالية المستوى، ما إذا كان بإمكان عميل http التعامل مع int64     </td>
+      <td>        واجهة برمجة التطبيقات المريحة عالية المستوى، ما إذا كان بإمكان عميل http التعامل مع int64     </td>
       <td>صحيح</td>
     </tr>
   </tbody>

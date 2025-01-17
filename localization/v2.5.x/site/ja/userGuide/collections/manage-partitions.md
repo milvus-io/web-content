@@ -617,14 +617,14 @@ curl --request POST \​
       </svg>
     </button></h2><h3 id="Insert-and-Delete-Entities​" class="common-anchor-header">エンティティの挿入と削除</h3><p>特定の操作で、挿入、アップサート、削除を実行できます。詳細は</p>
 <ul>
-<li><p>パーティションへのエンティティの挿入</p></li>
-<li><p>パーティションへのエンティティのアップサート</p></li>
-<li><p>パーティションからエンティティを削除する</p></li>
+<li><p><a href="/docs/ja/insert-update-delete.md#Insert-Entities-into-a-Partition">パーティションへのエンティティの挿入</a></p></li>
+<li><p><a href="/docs/ja/upsert-entities.md#Upsert-Entities-in-a-Partition">パーティションへのエンティティのアップサート</a></p></li>
+<li><p><a href="/docs/ja/delete-entities.md#Delete-Entities-from-Partitions">パーティションからエンティティを削除する</a></p></li>
 </ul>
 <h3 id="Search-and-Query​" class="common-anchor-header">検索とクエリ</h3><p>特定のパーティション内で検索とクエリを実行できます。詳細は</p>
 <ul>
-<li><p>パーティション内でANN検索を行う</p></li>
-<li><p>パーティション内でメタデータ・フィルタリングを行う</p></li>
+<li><p><a href="/docs/ja/single-vector-search.md#ANN-Search-in-Partition">パーティション内でANN検索を行う</a></p></li>
+<li><p><a href="/docs/ja/filtered-search.md">パーティション内でメタデータ・フィルタリングを行う</a></p></li>
 </ul>
 <h2 id="Drop-Partition​" class="common-anchor-header">パーティションの削除<button data-href="#Drop-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"

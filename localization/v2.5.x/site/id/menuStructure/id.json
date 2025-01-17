@@ -1472,26 +1472,26 @@
             "isMenu": true,
             "children": [
               {
+                "label": "Cadangkan dan Pulihkan dalam Satu Instansi",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "Migrasi Antar Instance dalam Satu Bucket",
                 "id": "shared-bucket-backup-and-restore.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Migrasi Antar Instance di Seluruh Bucket",
                 "id": "cross-bucket-backup-and-restore.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Migrasi Antar Instance di Seluruh Lingkungan S3",
                 "id": "multi-storage-backup-and-restore.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Cadangkan dan Pulihkan dalam Satu Instansi",
-                "id": "single-instance-backup-and-restore.md",
                 "order": 3,
                 "children": []
               }

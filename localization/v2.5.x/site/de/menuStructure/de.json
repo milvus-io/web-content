@@ -547,7 +547,7 @@
                     "children": []
                   },
                   {
-                    "label": "Cnalphanumonly",
+                    "label": "Cnalphanumnur",
                     "id": "cnalphanumonly-filter.md",
                     "order": 3,
                     "children": []
@@ -1472,26 +1472,26 @@
             "isMenu": true,
             "children": [
               {
+                "label": "Sicherung und Wiederherstellung in einer Instanz",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "Migrieren zwischen Instanzen in einem Bucket",
                 "id": "shared-bucket-backup-and-restore.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Migrieren zwischen Instanzen über Buckets hinweg",
                 "id": "cross-bucket-backup-and-restore.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Migrieren zwischen Instanzen über S3-Umgebungen hinweg",
                 "id": "multi-storage-backup-and-restore.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Sicherung und Wiederherstellung in einer Instanz",
-                "id": "single-instance-backup-and-restore.md",
                 "order": 3,
                 "children": []
               }

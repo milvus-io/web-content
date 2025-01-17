@@ -218,7 +218,7 @@ summary: 了解如何为 Milvus 配置 dataNode。
   <tbody>
     <tr>
       <td>
-        <li>内存缓冲段中每个 Binlog 文件的最大大小。超过此值的日志文件将被刷新到 MinIO 或 S3 服务。</li>      
+        <li>内存缓冲区段中每个 Binlog 文件的最大大小。超过此值的日志文件将被刷新到 MinIO 或 S3 服务。</li>      
         <li>单位：字节字节</li>      
         <li>将此参数设置得过小，会导致系统过于频繁地存储少量数据。设置过大则会增加系统对内存的需求。</li>      </td>
       <td>16777216</td>
@@ -486,7 +486,7 @@ summary: 了解如何为 Milvus 配置 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        数据节点更新每个通道的通道检查点的间隔时间（以秒为单位      </td>
+      <td>        数据节点更新每个通道的通道检查点的时间间隔（以秒为单位      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -665,6 +665,35 @@ summary: 了解如何为 Milvus 配置 dataNode。
     </tr>
   </tbody>
 </table>
+<h2 id="dataNodeimportmaxTaskSlotNum" class="common-anchor-header"><code translate="no">dataNode.import.maxTaskSlotNum</code><button data-href="#dataNodeimportmaxTaskSlotNum" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.import.maxTaskSlotNum">
+  <thead>
+    <tr>
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        每个导入/预导入任务占用的最大槽位数。      </td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataNodecompactionlevelZeroBatchMemoryRatio" class="common-anchor-header"><code translate="no">dataNode.compaction.levelZeroBatchMemoryRatio</code><button data-href="#dataNodecompactionlevelZeroBatchMemoryRatio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -689,8 +718,8 @@ summary: 了解如何为 Milvus 配置 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        在批处理模式下执行零级压缩时可用内存的最小内存比率      </td>
-      <td>0.05</td>
+      <td>        以批处理模式执行零级压缩时可用内存的最小内存比率      </td>
+      <td>0.5</td>
     </tr>
   </tbody>
 </table>
@@ -720,6 +749,64 @@ summary: 了解如何为 Milvus 配置 dataNode。
     <tr>
       <td>        最大批量大小是指执行 L0 压缩时，批量中 L1/L2 段的最大数量。默认值为-1，任何小于 1 的值都表示没有限制。有效范围&gt;= 1.  </td>
       <td>-1</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodecompactionuseMergeSort" class="common-anchor-header"><code translate="no">dataNode.compaction.useMergeSort</code><button data-href="#dataNodecompactionuseMergeSort" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.useMergeSort">
+  <thead>
+    <tr>
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        执行 mixCompaction 时是否启用 mergeSort（合并排序）模式。      </td>
+      <td>假</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodecompactionmaxSegmentMergeSort" class="common-anchor-header"><code translate="no">dataNode.compaction.maxSegmentMergeSort</code><button data-href="#dataNodecompactionmaxSegmentMergeSort" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.compaction.maxSegmentMergeSort">
+  <thead>
+    <tr>
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        在合并排序模式下要合并的最大数据段数。      </td>
+      <td>30</td>
     </tr>
   </tbody>
 </table>
@@ -805,8 +892,8 @@ summary: 了解如何为 Milvus 配置 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        集群压缩的内存缓冲区比率。大于阈值的数据将被刷新到存储空间。      </td>
-      <td>0.1</td>
+      <td>        集群压缩内存缓冲区的比率。大于阈值的数据将被刷新到存储空间。      </td>
+      <td>0.3</td>
     </tr>
   </tbody>
 </table>
@@ -839,6 +926,64 @@ summary: 了解如何为 Milvus 配置 dataNode。
     </tr>
   </tbody>
 </table>
+<h2 id="dataNodebloomFilterApplyParallelFactor" class="common-anchor-header"><code translate="no">dataNode.bloomFilterApplyParallelFactor</code><button data-href="#dataNodebloomFilterApplyParallelFactor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.bloomFilterApplyParallelFactor">
+  <thead>
+    <tr>
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        将 pk 应用于 bloom 过滤器时的并行因子，默认为 4*CPU_CORE_NUM      </td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="dataNodestoragedeltalog" class="common-anchor-header"><code translate="no">dataNode.storage.deltalog</code><button data-href="#dataNodestoragedeltalog" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="dataNode.storage.deltalog">
+  <thead>
+    <tr>
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        deltalog 格式，选项[json, parquet］      </td>
+      <td>json</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="dataNodeip" class="common-anchor-header"><code translate="no">dataNode.ip</code><button data-href="#dataNodeip" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -863,7 +1008,7 @@ summary: 了解如何为 Milvus 配置 dataNode。
   </thead>
   <tbody>
     <tr>
-      <td>        数据节点的 TCP/IP 地址。如果未指定，则使用第一个单播地址      </td>
+      <td>        数据节点的 TCP/IP 地址。如果未指定，则使用第一个可单播地址      </td>
       <td></td>
     </tr>
   </tbody>

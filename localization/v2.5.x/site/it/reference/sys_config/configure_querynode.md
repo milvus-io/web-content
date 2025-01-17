@@ -44,7 +44,7 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        L'intervallo in cui il nodo di query pubblica le informazioni sulle statistiche del nodo, tra cui lo stato del segmento, l'uso della cpu, l'uso della memoria, lo stato di salute, ecc. Unità: ms.      </td>
+      <td>        L'intervallo in cui il nodo di query pubblica le informazioni statistiche del nodo, tra cui lo stato del segmento, l'uso della cpu, l'uso della memoria, lo stato di salute, ecc. Unità: ms.      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -255,6 +255,35 @@ summary: Imparare a configurare queryNode per Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodesegcoremultipleChunkedEnable" class="common-anchor-header"><code translate="no">queryNode.segcore.multipleChunkedEnable</code><button data-href="#queryNodesegcoremultipleChunkedEnable" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.multipleChunkedEnable">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Abilita la ricerca multipla chunked      </td>
+      <td>vero</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodesegcoreknowhereScoreConsistency" class="common-anchor-header"><code translate="no">queryNode.segcore.knowhereScoreConsistency</code><button data-href="#queryNodesegcoreknowhereScoreConsistency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -279,7 +308,7 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Abilita la logica di calcolo del punteggio di consistenza forte di knowhere      </td>
+      <td>        Abilita la logica di calcolo del punteggio di consistenza forte di Knowhere      </td>
       <td>falso</td>
     </tr>
   </tbody>
@@ -435,7 +464,7 @@ summary: Imparare a configurare queryNode per Milvus.
     </tr>
   </tbody>
 </table>
-<h2 id="queryNodemmapmmapEnabled" class="common-anchor-header"><code translate="no">queryNode.mmap.mmapEnabled</code><button data-href="#queryNodemmapmmapEnabled" class="anchor-icon" translate="no">
+<h2 id="queryNodemmapvectorField" class="common-anchor-header"><code translate="no">queryNode.mmap.vectorField</code><button data-href="#queryNodemmapvectorField" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -450,7 +479,7 @@ summary: Imparare a configurare queryNode per Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table id="queryNode.mmap.mmapEnabled">
+    </button></h2><table id="queryNode.mmap.vectorField">
   <thead>
     <tr>
       <th class="width80">Descrizione</th>
@@ -459,8 +488,124 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Abilita mmap per il caricamento dei dati    </td>
+      <td>        Abilita mmap per il caricamento dei dati vettoriali      </td>
       <td>falso</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodemmapvectorIndex" class="common-anchor-header"><code translate="no">queryNode.mmap.vectorIndex</code><button data-href="#queryNodemmapvectorIndex" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.mmap.vectorIndex">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Abilita mmap per il caricamento dell'indice del vettore      </td>
+      <td>falso</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodemmapscalarField" class="common-anchor-header"><code translate="no">queryNode.mmap.scalarField</code><button data-href="#queryNodemmapscalarField" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.mmap.scalarField">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Abilita mmap per il caricamento di dati scalari      </td>
+      <td>falso</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodemmapscalarIndex" class="common-anchor-header"><code translate="no">queryNode.mmap.scalarIndex</code><button data-href="#queryNodemmapscalarIndex" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.mmap.scalarIndex">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Abilita mmap per il caricamento di indici scalari      </td>
+      <td>falso</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodemmapchunkCache" class="common-anchor-header"><code translate="no">queryNode.mmap.chunkCache</code><button data-href="#queryNodemmapchunkCache" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.mmap.chunkCache">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Abilita mmap per la cache dei chunk (recupero di vettori grezzi).      </td>
+      <td>vero</td>
     </tr>
   </tbody>
 </table>
@@ -488,7 +633,10 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Abilita mmap per l'utilizzo di dati grezzi in crescita      </td>
+      <td>
+        <li>Abilita la mappatura della memoria (mmap) per ottimizzare la gestione dei dati grezzi in crescita. </li>      
+        <li>Attivando questa funzione, l'overhead di memoria associato ai dati aggiunti o modificati sarà significativamente ridotto. </li>      
+        <li>Tuttavia, questa ottimizzazione può comportare una leggera diminuzione della latenza delle query per i segmenti di dati interessati.</li>      </td>
       <td>falso</td>
     </tr>
   </tbody>
@@ -517,7 +665,7 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Dimensione del file tmp per il gestore dei chunk di mmap    </td>
+      <td>        dimensione del file tmp per mmap chunk manager      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -725,6 +873,35 @@ summary: Imparare a configurare queryNode per Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodeindexOffsetCacheEnabled" class="common-anchor-header"><code translate="no">queryNode.indexOffsetCacheEnabled</code><button data-href="#queryNodeindexOffsetCacheEnabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.indexOffsetCacheEnabled">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        abilita la cache degli offset dell'indice per alcuni indici scalari, ora è solo per gli indici bitmap, abilitare questo parametro può migliorare le prestazioni per il recupero dei dati grezzi dall'indice      </td>
+      <td>falso</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodeschedulermaxReadConcurrentRatio" class="common-anchor-header"><code translate="no">queryNode.scheduler.maxReadConcurrentRatio</code><button data-href="#queryNodeschedulermaxReadConcurrentRatio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -750,8 +927,8 @@ summary: Imparare a configurare queryNode per Milvus.
   <tbody>
     <tr>
       <td>
-        <li>maxReadConcurrentRatio è il rapporto di concorrenza dei task di lettura (task di ricerca e task di query).</li>      
-        <li>La concurrency massima di lettura è il valore di hardware.GetCPUNum * maxReadConcurrentRatio.</li>      
+        <li>maxReadConcurrentRatio è il rapporto di concorrenza dei task di lettura (task di ricerca e task di interrogazione).</li>      
+        <li>La massima concomitanza di lettura è il valore di hardware.GetCPUNum * maxReadConcurrentRatio.</li>      
         <li>L'impostazione predefinita è 2,0, il che significa che la concomitanza massima di lettura sarà il valore di hardware.GetCPUNum * 2.</li>      
         <li>La massima velocità di lettura deve essere maggiore o uguale a 1 e minore o uguale a hardware.GetCPUNum * 100.</li>      
         <li>(0, 100]</li>      </td>
@@ -877,7 +1054,7 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Abilita il raggruppamento trasversale degli utenti quando si usa il criterio di polling dei compiti dell'utente. (Disabilitarlo se i task dell'utente non possono unirsi l'un l'altro)      </td>
+      <td>        Abilita il raggruppamento trasversale degli utenti quando si usa il criterio di polling dei compiti dell'utente. (Disabilitarlo se le attività dell'utente non possono unirsi l'una all'altra)      </td>
       <td>falso</td>
     </tr>
   </tbody>
@@ -906,8 +1083,66 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Attività massima in attesa per utente nello scheduler      </td>
+      <td>        Attività massima in sospeso per utente nello scheduler      </td>
       <td>1024</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodelevelZeroForwardPolicy" class="common-anchor-header"><code translate="no">queryNode.levelZeroForwardPolicy</code><button data-href="#queryNodelevelZeroForwardPolicy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.levelZeroForwardPolicy">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        politica di inoltro della cancellazione a livello di delegatore, opzione possibile["FilterByBF", "RemoteLoad"].      </td>
+      <td>FiltroByBF</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodestreamingDeltaForwardPolicy" class="common-anchor-header"><code translate="no">queryNode.streamingDeltaForwardPolicy</code><button data-href="#queryNodestreamingDeltaForwardPolicy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.streamingDeltaForwardPolicy">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        criterio di inoltro per la cancellazione dello streaming del delegatore, opzione possibile["FilterByBF", "Direct"].      </td>
+      <td>FiltroByBF</td>
     </tr>
   </tbody>
 </table>
@@ -935,7 +1170,7 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Dimensione massima della cache della coda delle attività nel grafico di flusso nel nodo di interrogazione.      </td>
+      <td>        La dimensione massima della cache delle code di attività nel grafo dei flussi nel nodo di interrogazione.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -993,37 +1228,8 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        usa le statistiche della partizione per sfrondare i dati nella ricerca/query sul delegatore di shard     </td>
+      <td>        utilizza le statistiche di partizione per sfrondare i dati nella ricerca/query sul delegatore di shard     </td>
       <td>falso</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="queryNodebloomFilterApplyParallelFactor" class="common-anchor-header"><code translate="no">queryNode.bloomFilterApplyParallelFactor</code><button data-href="#queryNodebloomFilterApplyParallelFactor" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="queryNode.bloomFilterApplyParallelFactor">
-  <thead>
-    <tr>
-      <th class="width80">Descrizione</th>
-      <th class="width20">Valore predefinito</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        fattore parallelo quando applicare il pk al filtro bloom, predefinito a 4*CPU_CORE_NUM      </td>
-      <td>4</td>
     </tr>
   </tbody>
 </table>
@@ -1051,8 +1257,66 @@ summary: Imparare a configurare queryNode per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        dimensione del batch di ritorno della query di flusso      </td>
+      <td>        restituisce la dimensione minima del batch della query di flusso      </td>
       <td>4194304</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodequeryStreamMaxBatchSize" class="common-anchor-header"><code translate="no">queryNode.queryStreamMaxBatchSize</code><button data-href="#queryNodequeryStreamMaxBatchSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.queryStreamMaxBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        restituisce la dimensione massima del batch della query di flusso      </td>
+      <td>134217728</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodebloomFilterApplyParallelFactor" class="common-anchor-header"><code translate="no">queryNode.bloomFilterApplyParallelFactor</code><button data-href="#queryNodebloomFilterApplyParallelFactor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.bloomFilterApplyParallelFactor">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        fattore parallelo quando applicare pk al filtro bloom, predefinito a 4*CPU_CORE_NUM      </td>
+      <td>4</td>
     </tr>
   </tbody>
 </table>

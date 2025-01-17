@@ -211,7 +211,7 @@
             "children": []
           },
           {
-            "label": "Storage/Computing",
+            "label": "Archiviazione/Computing",
             "id": "four_layers.md",
             "order": 1,
             "children": []
@@ -1472,26 +1472,26 @@
             "isMenu": true,
             "children": [
               {
+                "label": "Backup e ripristino in un'unica istanza",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "Migrazione tra istanze in un unico bucket",
                 "id": "shared-bucket-backup-and-restore.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Migrazione tra istanze e bucket",
                 "id": "cross-bucket-backup-and-restore.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Migrazione tra istanze in ambienti S3",
                 "id": "multi-storage-backup-and-restore.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Backup e ripristino in un'unica istanza",
-                "id": "single-instance-backup-and-restore.md",
                 "order": 3,
                 "children": []
               }

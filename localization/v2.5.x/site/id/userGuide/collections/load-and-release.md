@@ -199,6 +199,9 @@ curl --request POST \​
         ></path>
       </svg>
     </button></h2><p>Milvus hanya dapat memuat bidang yang terlibat dalam pencarian dan kueri, sehingga mengurangi penggunaan memori dan meningkatkan kinerja pencarian.</p>
+<div class="alert note">
+<p>Pemuatan sebagian koleksi saat ini masih dalam versi beta dan tidak direkomendasikan untuk penggunaan produksi.</p>
+</div>
 <p>Cuplikan kode berikut ini mengasumsikan bahwa Anda telah membuat koleksi bernama <strong>customized_setup_2</strong>, dan ada dua field bernama <strong>my_id</strong> dan <strong>my_vector</strong> di dalam koleksi tersebut.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>

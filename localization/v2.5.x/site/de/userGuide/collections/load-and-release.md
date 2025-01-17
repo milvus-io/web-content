@@ -199,7 +199,10 @@ curl --request POST \​
         ></path>
       </svg>
     </button></h2><p>Milvus kann nur die Felder laden, die in Suchen und Abfragen involviert sind, was die Speichernutzung reduziert und die Suchleistung verbessert.</p>
-<p>Das folgende Codeschnipsel geht davon aus, dass Sie eine Sammlung mit dem Namen <strong>customized_setup_2</strong> erstellt haben und die Sammlung zwei Felder namens <strong>my_id</strong> und <strong>my_vector</strong> enthält.</p>
+<div class="alert note">
+<p>Das partielle Laden von Sammlungen befindet sich derzeit in der Beta-Phase und wird für den produktiven Einsatz nicht empfohlen.</p>
+</div>
+<p>Das folgende Codeschnipsel geht davon aus, dass Sie eine Sammlung mit dem Namen <strong>customized_setup_2</strong> erstellt haben und dass sich in der Sammlung zwei Felder mit den Namen <strong>my_id</strong> und <strong>my_vector</strong> befinden.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_collection(​

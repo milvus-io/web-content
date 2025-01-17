@@ -255,6 +255,35 @@ summary: 'Узнайте, как настроить queryNode для Milvus.'
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodesegcoremultipleChunkedEnable" class="common-anchor-header"><code translate="no">queryNode.segcore.multipleChunkedEnable</code><button data-href="#queryNodesegcoremultipleChunkedEnable" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.multipleChunkedEnable">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Включить множественный поиск в кусках      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodesegcoreknowhereScoreConsistency" class="common-anchor-header"><code translate="no">queryNode.segcore.knowhereScoreConsistency</code><button data-href="#queryNodesegcoreknowhereScoreConsistency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -279,7 +308,7 @@ summary: 'Узнайте, как настроить queryNode для Milvus.'
   </thead>
   <tbody>
     <tr>
-      <td>        Включить логику вычисления баллов сильной согласованности в knowhere      </td>
+      <td>        Включить логику вычисления баллов сильной согласованности knowhere      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -435,7 +464,7 @@ summary: 'Узнайте, как настроить queryNode для Milvus.'
     </tr>
   </tbody>
 </table>
-<h2 id="queryNodemmapmmapEnabled" class="common-anchor-header"><code translate="no">queryNode.mmap.mmapEnabled</code><button data-href="#queryNodemmapmmapEnabled" class="anchor-icon" translate="no">
+<h2 id="queryNodemmapvectorField" class="common-anchor-header"><code translate="no">queryNode.mmap.vectorField</code><button data-href="#queryNodemmapvectorField" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -450,7 +479,7 @@ summary: 'Узнайте, как настроить queryNode для Milvus.'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table id="queryNode.mmap.mmapEnabled">
+    </button></h2><table id="queryNode.mmap.vectorField">
   <thead>
     <tr>
       <th class="width80">Описание</th>
@@ -459,8 +488,124 @@ summary: 'Узнайте, как настроить queryNode для Milvus.'
   </thead>
   <tbody>
     <tr>
-      <td>        Включить mmap для загрузки данных      </td>
+      <td>        Включить mmap для загрузки векторных данных      </td>
       <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodemmapvectorIndex" class="common-anchor-header"><code translate="no">queryNode.mmap.vectorIndex</code><button data-href="#queryNodemmapvectorIndex" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.mmap.vectorIndex">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Включить mmap для загрузки индекса вектора      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodemmapscalarField" class="common-anchor-header"><code translate="no">queryNode.mmap.scalarField</code><button data-href="#queryNodemmapscalarField" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.mmap.scalarField">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Включить mmap для загрузки скалярных данных      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodemmapscalarIndex" class="common-anchor-header"><code translate="no">queryNode.mmap.scalarIndex</code><button data-href="#queryNodemmapscalarIndex" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.mmap.scalarIndex">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Включить mmap для загрузки скалярного индекса      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodemmapchunkCache" class="common-anchor-header"><code translate="no">queryNode.mmap.chunkCache</code><button data-href="#queryNodemmapchunkCache" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.mmap.chunkCache">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Включить mmap для кэша чанков (получение сырого вектора).      </td>
+      <td>true</td>
     </tr>
   </tbody>
 </table>
@@ -488,8 +633,11 @@ summary: 'Узнайте, как настроить queryNode для Milvus.'
   </thead>
   <tbody>
     <tr>
-      <td>        Включить mmap для использования при выращивании сырых данных      </td>
-      <td>false</td>
+      <td>
+        <li>Включите отображение памяти (mmap) для оптимизации обработки растущих необработанных данных. </li>      
+        <li>Активация этой функции позволяет значительно минимизировать затраты памяти, связанные с новыми добавленными или измененными данными. </li>      
+        <li>Однако эта оптимизация может быть достигнута ценой небольшого снижения задержки запросов для затронутых сегментов данных.</li>      </td>
+      <td>ложный</td>
     </tr>
   </tbody>
 </table>
@@ -725,6 +873,35 @@ summary: 'Узнайте, как настроить queryNode для Milvus.'
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodeindexOffsetCacheEnabled" class="common-anchor-header"><code translate="no">queryNode.indexOffsetCacheEnabled</code><button data-href="#queryNodeindexOffsetCacheEnabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.indexOffsetCacheEnabled">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        включить кэш смещения индекса для некоторых скалярных индексов, сейчас это только для растровых индексов, включение этого параметра может улучшить производительность при извлечении необработанных данных из индекса      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodeschedulermaxReadConcurrentRatio" class="common-anchor-header"><code translate="no">queryNode.scheduler.maxReadConcurrentRatio</code><button data-href="#queryNodeschedulermaxReadConcurrentRatio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -750,10 +927,10 @@ summary: 'Узнайте, как настроить queryNode для Milvus.'
   <tbody>
     <tr>
       <td>
-        <li>maxReadConcurrentRatio - коэффициент параллелизма для задачи чтения (задачи поиска и запроса).</li>      
+        <li>maxReadConcurrentRatio - соотношение параллельности задач чтения (задач поиска и запросов).</li>      
         <li>Максимальный параллелизм чтения будет равен значению hardware.GetCPUNum * maxReadConcurrentRatio.</li>      
         <li>По умолчанию он равен 2.0, что означает, что максимальный обмен данными при чтении будет равен значению hardware.GetCPUNum * 2.</li>      
-        <li>Максимальный обмен данными должен быть больше или равен 1 и меньше или равен hardware.GetCPUNum * 100.</li>      
+        <li>Максимальный обмен данными при чтении должен быть больше или равен 1 и меньше или равен hardware.GetCPUNum * 100.</li>      
         <li>(0, 100]</li>      </td>
       <td>1</td>
     </tr>
@@ -911,6 +1088,64 @@ summary: 'Узнайте, как настроить queryNode для Milvus.'
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodelevelZeroForwardPolicy" class="common-anchor-header"><code translate="no">queryNode.levelZeroForwardPolicy</code><button data-href="#queryNodelevelZeroForwardPolicy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.levelZeroForwardPolicy">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Политика пересылки нулевого удаления на уровне делегата, возможные варианты["FilterByBF", "RemoteLoad"].      </td>
+      <td>FilterByBF</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodestreamingDeltaForwardPolicy" class="common-anchor-header"><code translate="no">queryNode.streamingDeltaForwardPolicy</code><button data-href="#queryNodestreamingDeltaForwardPolicy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.streamingDeltaForwardPolicy">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        политика пересылки потокового удаления делегата, возможная опция["FilterByBF", "Direct"]      </td>
+      <td>FilterByBF</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodedataSyncflowGraphmaxQueueLength" class="common-anchor-header"><code translate="no">queryNode.dataSync.flowGraph.maxQueueLength</code><button data-href="#queryNodedataSyncflowGraphmaxQueueLength" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -935,7 +1170,7 @@ summary: 'Узнайте, как настроить queryNode для Milvus.'
   </thead>
   <tbody>
     <tr>
-      <td>        Максимальный размер кэша очереди задач в графе потока в узле запроса.      </td>
+      <td>        Максимальный размер кэша очереди задач в графе потоков в узле запроса.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -998,6 +1233,64 @@ summary: 'Узнайте, как настроить queryNode для Milvus.'
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodequeryStreamBatchSize" class="common-anchor-header"><code translate="no">queryNode.queryStreamBatchSize</code><button data-href="#queryNodequeryStreamBatchSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.queryStreamBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        возвращать минимальный размер пакета для потокового запроса      </td>
+      <td>4194304</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodequeryStreamMaxBatchSize" class="common-anchor-header"><code translate="no">queryNode.queryStreamMaxBatchSize</code><button data-href="#queryNodequeryStreamMaxBatchSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.queryStreamMaxBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        возврат максимального размера партии для потокового запроса      </td>
+      <td>134217728</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodebloomFilterApplyParallelFactor" class="common-anchor-header"><code translate="no">queryNode.bloomFilterApplyParallelFactor</code><button data-href="#queryNodebloomFilterApplyParallelFactor" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1027,35 +1320,6 @@ summary: 'Узнайте, как настроить queryNode для Milvus.'
     </tr>
   </tbody>
 </table>
-<h2 id="queryNodequeryStreamBatchSize" class="common-anchor-header"><code translate="no">queryNode.queryStreamBatchSize</code><button data-href="#queryNodequeryStreamBatchSize" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="queryNode.queryStreamBatchSize">
-  <thead>
-    <tr>
-      <th class="width80">Описание</th>
-      <th class="width20">Значение по умолчанию</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        возвращаемый размер пакета для потокового запроса      </td>
-      <td>4194304</td>
-    </tr>
-  </tbody>
-</table>
 <h2 id="queryNodeworkerPoolingsize" class="common-anchor-header"><code translate="no">queryNode.workerPooling.size</code><button data-href="#queryNodeworkerPoolingsize" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1080,7 +1344,7 @@ summary: 'Узнайте, как настроить queryNode для Milvus.'
   </thead>
   <tbody>
     <tr>
-      <td>        размер клиентского пула рабочего узла запроса      </td>
+      <td>        размер клиентского пула рабочих querynode      </td>
       <td>10</td>
     </tr>
   </tbody>

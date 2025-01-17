@@ -93,11 +93,14 @@ title: Verwalten von Sammlungen
 <div class="language-javascript">
 <p>Für eine schnelle Einrichtung verwenden Sie die <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> Methode der Klasse <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> Klasse, um eine Sammlung mit dem angegebenen Namen und der angegebenen Dimension zu erstellen.</p>
 </div>
+<div class="language-go">
+<p>Für eine schnelle Einrichtung verwenden Sie die Methode <a href="https://milvus.io/api-reference/go/v2.4.x/Collection/CreateCollection.md"><code translate="no">CreateCollection()</code></a> auf eine Instanz der Schnittstelle <code translate="no">Client</code> mit der Methode <a href="https://milvus.io/api-reference/go/v2.4.x/Connections/NewClient.md"><code translate="no">NewClient()</code></a> um eine Sammlung mit dem angegebenen Namen und der angegebenen Dimension zu erstellen.</p>
+</div>
 <div class="language-shell">
 <p>Für eine schnelle Einrichtung verwenden Sie den <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API-Endpunkt, um eine Sammlung mit dem angegebenen Namen und der angegebenen Dimension zu erstellen.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
@@ -187,6 +190,49 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateLoaded</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-Go"><span class="hljs-keyword">import</span> (
+  <span class="hljs-string">&quot;context&quot;</span>
+  <span class="hljs-string">&quot;fmt&quot;</span>
+  <span class="hljs-string">&quot;log&quot;</span>
+  <span class="hljs-string">&quot;time&quot;</span>
+
+  milvusClient <span class="hljs-string">&quot;github.com/milvus-io/milvus-sdk-go/v2/client&quot;</span> <span class="hljs-comment">// milvusClient is an alias for milvus client package</span>
+  <span class="hljs-string">&quot;github.com/milvus-io/milvus-sdk-go/v2/entity&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+    ctx := context.Background()
+    ctx, cancel := context.WithTimeout(ctx, <span class="hljs-number">2</span>*time.Second)
+    <span class="hljs-keyword">defer</span> cancel()
+    <span class="hljs-comment">// 1. Set up a Milvus client</span>
+    client, err := milvusClient.NewClient(ctx, milvusClient.Config{
+        Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+    })
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus:&quot;</span>, err.Error())
+    }
+    <span class="hljs-keyword">defer</span> client.Close()
+    
+    <span class="hljs-comment">// 2. Create a collection in quick setup mode</span>
+    err = client.NewCollection(ctx, <span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-number">5</span>)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(<span class="hljs-string">&quot;failed to create collection:&quot;</span>, err.Error())
+    }
+    
+    stateLoad, err := client.GetLoadState(context.Background(), <span class="hljs-string">&quot;quick_setup&quot;</span>, []<span class="hljs-type">string</span>{})
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(<span class="hljs-string">&quot;failed to get load state:&quot;</span>, err.Error())
+    }
+    fmt.Println(stateLoad)
+    <span class="hljs-comment">// Output</span>
+    <span class="hljs-comment">// 3</span>
+    
+    <span class="hljs-comment">// LoadStateNotExist -&gt; LoadState = 0</span>
+    <span class="hljs-comment">// LoadStateNotLoad  -&gt; LoadState = 1</span>
+    <span class="hljs-comment">// LoadStateLoading  -&gt; LoadState = 2</span>
+    <span class="hljs-comment">// LoadStateLoaded   -&gt; LoadState = 3</span>
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
 
 $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/create&quot;</span> \
@@ -236,11 +282,15 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <div class="language-javascript">
 <p>Um ein Schema einzurichten, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
+</div>
+<div class="language-go">
+<p>Um ein Schema einzurichten, verwenden Sie <code translate="no">entity.NewSchema()</code>, um ein Schemaobjekt zu erstellen, und <code translate="no">schema.WithField()</code>, um dem Schema Felder hinzuzufügen.</p>
+</div>
 <div class="language-shell">
 <p>Um ein Schema einzurichten, müssen Sie ein JSON-Objekt definieren, das dem Schemaformat entspricht, das auf der <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API-Endpunkt-Referenzseite angezeigt wird.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 
 <span class="hljs-comment"># 3.1. Create schema</span>
@@ -290,6 +340,24 @@ schema.addField(AddFieldReq.builder()
         <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>
     },
 ]
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// 3. Create a collection in customized setup mode</span>
+
+<span class="hljs-comment">// 3.1 Create schema</span>
+schema := entity.NewSchema()
+
+<span class="hljs-comment">// 3.2. Add fields to schema</span>
+schema.WithField(
+    entity.NewField().
+        WithName(<span class="hljs-string">&quot;my_id&quot;</span>).
+        WithDataType(entity.FieldTypeInt64).
+        WithIsPrimaryKey(<span class="hljs-literal">false</span>).
+        WithIsAutoID(<span class="hljs-literal">true</span>)).
+    WithField(
+        entity.NewField().
+            WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
+            WithDataType(entity.FieldTypeFloatVector).
+            WithDim(<span class="hljs-number">5</span>))
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> fields=<span class="hljs-string">&#x27;[{ \
     &quot;fieldName&quot;: &quot;my_id&quot;, \
@@ -394,7 +462,37 @@ schema.addField(AddFieldReq.builder()
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>Die Dimensionalität des Sammlungsfeldes, das die Vektoreinbettungen enthält.<br/>Der Wert sollte eine ganze Zahl größer als 1 sein und wird in der Regel durch das Modell bestimmt, das Sie zur Erzeugung von Vektoreinbettungen verwenden.</td>
+      <td>Die Dimensionalität des Sammlungsfelds, das die Vektoreinbettungen enthält.<br/>Der Wert sollte eine ganze Zahl größer als 1 sein und wird in der Regel durch das Modell bestimmt, das Sie zur Erzeugung von Vektoreinbettungen verwenden.</td>
+    </tr>
+  </tbody>
+</table>
+<table class="language-go">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Beschreibung</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code translate="no">WithName()</code></td>
+      <td>Der Name des Feldes.</td>
+    </tr>
+    <tr>
+      <td><code translate="no">WithDataType()</code></td>
+      <td>Der Datentyp des Feldes.</td>
+    </tr>
+    <tr>
+      <td><code translate="no">WithIsPrimaryKey()</code></td>
+      <td>Ob das aktuelle Feld das Primärfeld in einer Sammlung ist.<br/>Jede Sammlung hat nur ein Primärfeld. Ein Primärfeld sollte entweder vom Typ <strong>entity.FieldTypeInt64</strong> oder vom Typ <strong>entity.FieldTypeVarChar</strong> sein.</td>
+    </tr>
+    <tr>
+      <td><code translate="no">WithIsAutoID()</code></td>
+      <td>Ob das Primärfeld beim Einfügen von Daten in diese Sammlung automatisch inkrementiert wird.<br/>Der Standardwert ist <strong>false</strong>. Wenn Sie diesen Wert auf <strong>true</strong> setzen, wird das Primärfeld automatisch inkrementiert. Überspringen Sie diesen Parameter, wenn Sie eine Sammlung mit einem benutzerdefinierten Schema einrichten müssen.</td>
+    </tr>
+    <tr>
+      <td><code translate="no">WithDim()</code></td>
+      <td>Die Dimensionalität des Sammlungsfelds, das die Vektoreinbettungen enthält.<br/>Der Wert sollte eine ganze Zahl größer als 1 sein und wird in der Regel durch das Modell bestimmt, das Sie zur Erzeugung von Vektoreinbettungen verwenden.</td>
     </tr>
   </tbody>
 </table>
@@ -438,11 +536,14 @@ schema.addField(AddFieldReq.builder()
 <div class="language-javascript">
 <p>Um Index-Parameter einzurichten, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
+<div class="language-go">
+<p>Um Index-Parameter einzurichten, verwenden Sie <a href="https://milvus.io/api-reference/go/v2.4.x/Index/CreateIndex.md"><code translate="no">CreateIndex()</code></a>.</p>
+</div>
 <div class="language-shell">
 <p>Um Index-Parameter einzurichten, müssen Sie ein JSON-Objekt definieren, das dem Format der Index-Parameter entspricht, das auf der <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API-Endpunkt-Referenzseite angezeigt wird.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-meta"># 3.3. Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -488,6 +589,14 @@ indexParams.add(indexParamForVectorField);
     metric_type: <span class="hljs-string">&quot;IP&quot;</span>,
     <span class="hljs-keyword">params</span>: { nlist: <span class="hljs-number">1024</span>}
 }]
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// 3.3 Prepare index parameters</span>
+idxID := entity.NewScalarIndexWithType(entity.Sorted)
+
+idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">1024</span>)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+  log.Fatal(<span class="hljs-string">&quot;failed to new index:&quot;</span>, err.Error())
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> indexParams=<span class="hljs-string">&#x27;[{ \
     &quot;fieldName&quot;: &quot;my_id&quot;, \
@@ -580,6 +689,28 @@ indexParams.add(indexParamForVectorField);
     <tr>
       <td><code translate="no">params</code></td>
       <td>Die Feinabstimmungsparameter für den angegebenen Indextyp. Einzelheiten zu den möglichen Schlüsseln und Wertebereichen finden Sie unter <a href="https://milvus.io/docs/index.md">In-Memory-Index</a>.</td>
+    </tr>
+  </tbody>
+</table>
+<table class="language-go">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Beschreibung</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code translate="no">index_type</code></td>
+      <td>Der Name des Algorithmus, der für die Anordnung der Daten in einem bestimmten Feld verwendet wird. Anwendbare Algorithmen finden Sie unter <a href="https://milvus.io/docs/index.md">In-Memory-Index</a> und <a href="https://milvus.io/docs/disk_index.md">On-Disk-Index</a>.</td>
+    </tr>
+    <tr>
+      <td><code translate="no">metric_type</code></td>
+      <td>Der Algorithmus, der zur Messung der Ähnlichkeit zwischen Vektoren verwendet wird. Mögliche Werte sind <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. Diese Option ist nur verfügbar, wenn das angegebene Feld ein Vektorfeld ist. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">In Milvus unterstützte Indizes</a>.</td>
+    </tr>
+    <tr>
+      <td><code translate="no">nlist</code></td>
+      <td>Anzahl der Cluster-Einheiten. Cluster-Einheiten werden in IVF (Inverted File) basierten Indizes in Milvus verwendet. Bei IVF_FLAT unterteilt der Index die Vektordaten in "nlist"-Cluster-Einheiten und vergleicht dann die Abstände zwischen dem Ziel-Eingangsvektor und dem Zentrum jedes Clusters1. Der Wert muss zwischen 1 und 65536 liegen.</td>
     </tr>
   </tbody>
 </table>
@@ -770,7 +901,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <p>Die oben erstellte Sammlung wird automatisch geladen. Weitere Informationen zum Laden und Freigeben einer Sammlung finden Sie unter <a href="/docs/de/manage-collections.md#Load--Release-Collection">Laden und Freigeben einer Sammlung</a>.</p></li>
 <li><p><strong>Erstellen Sie eine Sammlung und eine Indexdatei separat.</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -820,6 +951,24 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// </span>
 <span class="hljs-comment">// LoadStateNotLoad</span>
 <span class="hljs-comment">// </span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// 3.4 Create a collection and index it seperately</span>
+schema.CollectionName = <span class="hljs-string">&quot;customized_setup_2&quot;</span>
+client.CreateCollection(ctx, schema, entity.DefaultShardNumber)
+
+stateLoad, err := client.GetLoadState(context.Background(), <span class="hljs-string">&quot;customized_setup_2&quot;</span>, []<span class="hljs-type">string</span>{})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to get load state:&quot;</span>, err.Error())
+}
+fmt.Println(stateLoad)
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">// 1</span>
+
+<span class="hljs-comment">// LoadStateNotExist -&gt; LoadState = 0</span>
+<span class="hljs-comment">// LoadStateNotLoad  -&gt; LoadState = 1</span>
+<span class="hljs-comment">// LoadStateLoading  -&gt; LoadState = 2</span>
+<span class="hljs-comment">// LoadStateLoaded   -&gt; LoadState = 3</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/create&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -933,6 +1082,28 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
+<p><table class="language-go">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code translate="no">schema.CollectionName</code></td>
+<td>Der Name der Sammlung.</td>
+</tr>
+<tr>
+<td><code translate="no">schema</code></td>
+<td>Das Schema dieser Sammlung.</td>
+</tr>
+<tr>
+<td><code translate="no">index_params</code></td>
+<td>Die Indexparameter für die zu erstellende Sammlung.</td>
+</tr>
+</tbody>
+</table></p>
 <p><table class="language-shell">
 <thead>
 <tr>
@@ -983,9 +1154,9 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
-<p>Die oben erstellte Sammlung wird nicht automatisch geladen. Sie können einen Index für die Sammlung wie folgt erstellen. Wenn Sie einen Index für die Sammlung auf separate Weise erstellen, wird die Sammlung nicht automatisch geladen. Einzelheiten finden Sie unter <a href="/docs/de/manage-collections.md">Laden und Freigeben der Sammlung</a>.</p>
+<p>Die oben erstellte Sammlung wird nicht automatisch geladen. Sie können einen Index für die Sammlung wie folgt erstellen. Wenn Sie einen Index für die Sammlung auf separate Weise erstellen, wird die Sammlung nicht automatisch geladen. Details finden Sie unter <a href="/docs/de/manage-collections.md">Laden und Freigeben der Sammlung</a>.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>
 client.create_index(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -1044,6 +1215,23 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// </span>
 <span class="hljs-comment">// LoadStateNotLoad</span>
 <span class="hljs-comment">//</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// 3.5 Create index</span>
+client.CreateIndex(ctx, <span class="hljs-string">&quot;customized_setup_2&quot;</span>, <span class="hljs-string">&quot;my_id&quot;</span>, idxID, <span class="hljs-literal">false</span>)
+client.CreateIndex(ctx, <span class="hljs-string">&quot;customized_setup_2&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>, idxVector, <span class="hljs-literal">false</span>)
+
+stateLoad, err = client.GetLoadState(context.Background(), <span class="hljs-string">&quot;customized_setup_2&quot;</span>, []<span class="hljs-type">string</span>{})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to get load state:&quot;</span>, err.Error())
+}
+fmt.Println(stateLoad)
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">// 1</span>
+
+<span class="hljs-comment">// LoadStateNotExist -&gt; LoadState = 0</span>
+<span class="hljs-comment">// LoadStateNotLoad  -&gt; LoadState = 1</span>
+<span class="hljs-comment">// LoadStateLoading  -&gt; LoadState = 2</span>
+<span class="hljs-comment">// LoadStateLoaded   -&gt; LoadState = 3</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/indexes/create&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -1150,6 +1338,36 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
     </tr>
   </tbody>
 </table>
+<table class="language-go">
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Beschreibung</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code translate="no">collName</code></td>
+      <td>Der Name der Sammlung.</td>
+    </tr>
+    <tr>
+      <td><code translate="no">fieldName</code></td>
+      <td>Der Name des Feldes, in dem ein Index erstellt werden soll.</td>
+    </tr>
+    <tr>
+      <td><code translate="no">idx</code></td>
+      <td>Der Name des Algorithmus, der zur Anordnung der Daten in dem betreffenden Feld verwendet wird. Anwendbare Algorithmen finden Sie unter <a href="https://milvus.io/docs/index.md">In-Memory-Index</a> und <a href="https://milvus.io/docs/disk_index.md">On-Disk-Index</a>.</td>
+    </tr>
+    <tr>
+      <td><code translate="no">async</code></td>
+      <td>Ob dieser Vorgang asynchron ist.</td>
+    </tr>
+    <tr>
+      <td><code translate="no">opts</code></td>
+      <td>Die Feinabstimmungsparameter für den angegebenen Indextyp. Sie können mehrere `entity.IndexOption` in diese Anfrage aufnehmen. Einzelheiten zu den möglichen Schlüsseln und Wertebereichen finden Sie unter <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+    </tr>
+  </tbody>
+</table>
 <table class="language-shell">
     <thead>
         <tr>
@@ -1182,7 +1400,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
         <td><code translate="no">indexParams.indexConfig.index_type</code></td>
         <td>Der Typ des zu erstellenden Indexes.</td>
         </tr>
-        <tr>
+        <tr.>
         <td><code translate="no">indexParams.indexConfig.nlist</code></td>
         <td>Die Anzahl der Cluster-Einheiten. Dies gilt für IVF-bezogene Indextypen.</td>
         </tr>
@@ -1210,13 +1428,16 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <p>Um die Details einer bestehenden Sammlung zu überprüfen, verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeCollection.md">describeCollection()</a>.</p>
 </div>
 <div class="language-javascript">
-<p>Um die Details einer bestehenden Sammlung zu prüfen, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md">describeCollection()</a>.</p>
+<p>Um die Details einer bestehenden Sammlung zu überprüfen, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md">describeCollection()</a>.</p>
+</div>
+<div class="language-go">
+<p>Um die Details einer bestehenden Sammlung zu prüfen, verwenden Sie <a href="https://milvus.io/api-reference/go/v2.4.x/Collection/DescribeCollection.md">DescribeCollection()</a>.</p>
 </div>
 <div class="language-shell">
-<p>Um die Definition einer Sammlung zu sehen, können Sie die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/collections/describe</code></a> und die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md"><code translate="no">POST /v2/vectordb/collections/list</code></a> API-Endpunkte verwenden.</p>
+<p>Um die Definition einer Sammlung zu sehen, können Sie die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/collections/describe</code></a> und die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md"><code translate="no">POST /v2/vectordb/collections/list</code></a> API-Endpunkte.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. View Collections</span>
 res = client.describe_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
@@ -1352,6 +1573,32 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// }</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-Go"><span class="hljs-comment">// 4. View collections</span>
+
+res, err := client.DescribeCollection(ctx, <span class="hljs-string">&quot;customized_setup_2&quot;</span>)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to describe collection:&quot;</span>, err.Error())
+}
+fmt.Printf(<span class="hljs-string">&quot;ConsistencyLevel: %v\nID: %v\nLoaded: %v\nName: %v\nPhysicalChannels: %v\nProperties: %v\nSchemaField1: %v\nSchemaField2: %v\nShardNum: %v\nVirtualChannels: %v\nSchemaAutoID: %v\nSchemaCollectionName: %v\nSchemaDescription: %v&quot;</span>,
+    res.ConsistencyLevel, res.ID, res.Loaded, res.Name, res.PhysicalChannels,
+    res.Properties, res.Schema.Fields[<span class="hljs-number">0</span>], res.Schema.Fields[<span class="hljs-number">1</span>], res.ShardNum,
+    res.VirtualChannels, res.Schema.AutoID, res.Schema.CollectionName, res.Schema.Description)
+
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// ConsistencyLevel: 2</span>
+<span class="hljs-comment">// ID: 453858520413977280</span>
+<span class="hljs-comment">// Loaded: false</span>
+<span class="hljs-comment">// Name: customized_setup_2</span>
+<span class="hljs-comment">// PhysicalChannels: [by-dev-rootcoord-dml_14]</span>
+<span class="hljs-comment">// Properties: map[]</span>
+<span class="hljs-comment">// SchemaField1: &amp;{100 my_id true false  int64 map[] map[] false false false undefined}</span>
+<span class="hljs-comment">// SchemaField2: &amp;{101 my_vector false false  []float32 map[dim:5] map[] false false false undefined}</span>
+<span class="hljs-comment">// ShardNum: 1</span>
+<span class="hljs-comment">// VirtualChannels: [by-dev-rootcoord-dml_14_453858520413977280v0]</span>
+<span class="hljs-comment">// SchemaAutoID: false</span>
+<span class="hljs-comment">// SchemaCollectionName: customized_setup_2</span>
+<span class="hljs-comment">// SchemaDescription: 2024/11/12 14:06:53 my_rag_collection</span>
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/describe&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
@@ -1411,7 +1658,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <p>Um alle vorhandenen Sammlungen aufzulisten, können Sie wie folgt vorgehen:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6. List all collection names</span>
 res = client.list_collections()
 
@@ -1450,6 +1697,19 @@ System.out.println(listCollectionsRes.getCollectionNames());
 <span class="hljs-comment">//     &quot;quick_setup&quot;,</span>
 <span class="hljs-comment">//     &quot;customized_setup_2&quot;</span>
 <span class="hljs-comment">// ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-Go"><span class="hljs-comment">// 5. List all collection names</span>
+collections, err := client.ListCollections(ctx)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to list collection:&quot;</span>, err.Error())
+}
+<span class="hljs-keyword">for</span> _, c := <span class="hljs-keyword">range</span> collections {
+    log.Println(c.Name)
+}
+
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// customized_setup_2</span>
+<span class="hljs-comment">// quick_setup</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/list&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -1495,11 +1755,14 @@ System.out.println(listCollectionsRes.getCollectionNames());
 <div class="language-javascript">
 <p>Um eine Sammlung zu laden, verwenden Sie die <a href="https://milvus.io/api-reference/node/v2.4.x/Management/loadCollection.md"><code translate="no">loadCollection()</code></a> Methode und geben Sie den Namen der Sammlung an.</p>
 </div>
+<div class="language-go">
+<p>Um eine Sammlung zu laden, verwenden Sie die Methode <a href="https://milvus.io/api-reference/go/v2.4.x/Collection/LoadCollection.md"><code translate="no">LoadCollection()</code></a> Methode unter Angabe des Sammlungsnamens.</p>
+</div>
 <div class="language-shell">
 <p>Um eine Sammlung zu laden, können Sie die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Load.md"><code translate="no">POST /v2/vectordb/collections/load</code></a> und die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a> API-Endpunkte verwenden.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
 client.load_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -1566,6 +1829,28 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateLoaded</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// 6. Load the collection</span>
+
+err = client.LoadCollection(ctx, <span class="hljs-string">&quot;customized_setup_2&quot;</span>, <span class="hljs-literal">false</span>)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to laod collection:&quot;</span>, err.Error())
+}
+
+<span class="hljs-comment">// 7. Get load state of the collection</span>
+stateLoad, err := client.GetLoadState(context.Background(), <span class="hljs-string">&quot;customized_setup_2&quot;</span>, []<span class="hljs-type">string</span>{})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to get load state:&quot;</span>, err.Error())
+}
+fmt.Println(stateLoad)
+
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// 3</span>
+
+<span class="hljs-comment">// LoadStateNotExist -&gt; LoadState = 0</span>
+<span class="hljs-comment">// LoadStateNotLoad  -&gt; LoadState = 1</span>
+<span class="hljs-comment">// LoadStateLoading  -&gt; LoadState = 2</span>
+<span class="hljs-comment">// LoadStateLoaded   -&gt; LoadState = 3</span>
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/load&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
@@ -1629,11 +1914,14 @@ res = client.get_load_state(
 <div class="language-javascript">
 <p>Um eine Sammlung freizugeben, verwenden Sie die <a href="https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> Methode und geben Sie den Namen der Sammlung an.</p>
 </div>
+<div class="language-go">
+<p>Um eine Sammlung freizugeben, verwenden Sie die <a href="https://milvus.io/api-reference/go/v2.4.x/Collection/ReleaseCollection.md"><code translate="no">ReleaseCollection()</code></a> Methode und geben Sie den Namen der Sammlung an.</p>
+</div>
 <div class="language-shell">
 <p>Um eine Sammlung freizugeben, können Sie die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Release.md"><code translate="no">POST /v2/vectordb/collections/release</code></a> und die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a> API-Endpunkte verwenden.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 8. Release the collection</span>
 client.release_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
@@ -1691,6 +1979,23 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// </span>
 <span class="hljs-comment">// LoadStateNotLoad</span>
 <span class="hljs-comment">// </span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// 8. Release the collection</span>
+errRelease := client.ReleaseCollection(context.Background(), <span class="hljs-string">&quot;customized_setup_2&quot;</span>)
+<span class="hljs-keyword">if</span> errRelease != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to release collection:&quot;</span>, errRelease.Error())
+}
+fmt.Println(errRelease)
+stateLoad, err = client.GetLoadState(context.Background(), <span class="hljs-string">&quot;customized_setup_2&quot;</span>, []<span class="hljs-type">string</span>{})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to get load state:&quot;</span>, err.Error())
+}
+fmt.Println(stateLoad)
+
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// 1</span>
+
+<span class="hljs-comment">// meaning not loaded</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/release&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -2395,13 +2700,16 @@ collection.set_properties(
 <p>Um eine Sammlung zu löschen, verwenden Sie die <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> und geben Sie dabei den Namen der Sammlung an.</p>
 </div>
 <div class="language-javascript">
-<p>Um eine Sammlung zu löschen, verwenden Sie die <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> Methode unter Angabe des Sammlungsnamens.</p>
+<p>Um eine Sammlung zu löschen, verwenden Sie die <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> Methode und geben Sie den Namen der Sammlung an.</p>
+</div>
+<div class="language-go">
+<p>Um eine Sammlung zu löschen, verwenden Sie die <a href="https://milvus.io/api-reference/go/v2.4.x/Collection/DropCollection.md"><code translate="no">DropCollection()</code></a> Methode unter Angabe des Sammlungsnamens.</p>
 </div>
 <div class="language-shell">
-<p>Um eine Sammlung zu löschen, können Sie den <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/collections/drop</code></a> API-Endpunkt verwenden.</p>
+<p>Um eine Sammlung zu löschen, können Sie den <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/collections/drop</code></a> API-Endpunkt.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 10. Drop the collections</span>
 client.drop_collection(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>
@@ -2470,6 +2778,17 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// </span>
 <span class="hljs-comment">// Success</span>
 <span class="hljs-comment">// </span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// 10. Drop collections</span>
+
+err = client.<span class="hljs-title class_">DropCollection</span>(ctx, <span class="hljs-string">&quot;quick_setup&quot;</span>)
+<span class="hljs-keyword">if</span> err != nil {
+    log.<span class="hljs-title class_">Fatal</span>(<span class="hljs-string">&quot;failed to drop collection:&quot;</span>, err.<span class="hljs-title class_">Error</span>())
+}
+err = client.<span class="hljs-title class_">DropCollection</span>(ctx, <span class="hljs-string">&quot;customized_setup_2&quot;</span>)
+<span class="hljs-keyword">if</span> err != nil {
+    log.<span class="hljs-title class_">Fatal</span>(<span class="hljs-string">&quot;failed to drop collection:&quot;</span>, err.<span class="hljs-title class_">Error</span>())
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/drop&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \

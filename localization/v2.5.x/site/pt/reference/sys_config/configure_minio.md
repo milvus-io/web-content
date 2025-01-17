@@ -103,7 +103,7 @@ summary: Saiba como configurar o minio para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
@@ -238,7 +238,7 @@ summary: Saiba como configurar o minio para o Milvus.
         <li>Nome do bucket onde Milvus armazena os dados em MinIO ou S3.</li>      
         <li>O Milvus 2.0.0 não suporta o armazenamento de dados em vários buckets.</li>      
         <li>O bucket com este nome será criado se não existir. Se o bucket já existir e estiver acessível, será utilizado diretamente. Caso contrário, ocorrerá um erro.</li>      
-        <li>Para partilhar uma instância MinIO entre várias instâncias Milvus, considere alterar este valor para um valor diferente para cada instância Milvus antes de as iniciar. Para mais pormenores, consulte FAQs sobre operações.</li>      
+        <li>Para partilhar uma instância MinIO entre várias instâncias Milvus, considere alterar este valor para um valor diferente para cada instância Milvus antes de as iniciar. Para mais pormenores, consulte as FAQs da operação.</li>      
         <li>Os dados serão armazenados no Docker local se o Docker for usado para iniciar o serviço MinIO localmente. Certifique-se de que há espaço de armazenamento suficiente.</li>      
         <li>Um nome de bucket é globalmente único numa instância MinIO ou S3.</li>      </td>
       <td>a-bucket</td>
@@ -340,11 +340,45 @@ summary: Saiba como configurar o minio para o Milvus.
     <tr>
       <td>
         <li>Fornecedor de nuvem do S3. Suporta: "aws", "gcp", "aliyun".</li>      
+        <li>Fornecedor de nuvem do Google Cloud Storage. Suporta: "gcpnative".</li>      
         <li>Pode utilizar "aws" para outro fornecedor de serviços em nuvem que suporte a API S3 com assinatura v4, por exemplo: minio</li>      
         <li>Pode utilizar "gcp" para outro fornecedor de serviços em nuvem que suporte a API S3 com assinatura v2</li>      
-        <li>Pode utilizar "aliyun" para que outro fornecedor de serviços de computação em nuvem utilize um balde de estilo de anfitrião virtual</li>      
-        <li>Quando o useIAM está ativado, apenas "aws", "gcp", "aliyun" são suportados por enquanto</li>      </td>
+        <li>Pode utilizar "aliyun" para outro fornecedor de serviços de computação em nuvem que utilize um balde de estilo de anfitrião virtual</li>      
+        <li>Pode utilizar "gcpnative" para o fornecedor Google Cloud Platform. Usa credenciais de conta de serviço</li>      
+        <li>para autenticação.</li>      
+        <li>Quando o useIAM está ativado, apenas "aws", "gcp" e "aliyun" são suportados por enquanto</li>      </td>
       <td>aws</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="miniogcpCredentialJSON" class="common-anchor-header"><code translate="no">minio.gcpCredentialJSON</code><button data-href="#miniogcpCredentialJSON" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="minio.gcpCredentialJSON">
+  <thead>
+    <tr>
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor predefinido</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>O conteúdo JSON contém as credenciais da conta do serviço gcs.</li>      
+        <li>Utilizado apenas para o fornecedor de serviços na nuvem "gcpnative".</li>      </td>
+      <td></td>
     </tr>
   </tbody>
 </table>

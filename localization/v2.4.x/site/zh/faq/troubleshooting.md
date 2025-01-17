@@ -1,6 +1,6 @@
 ---
 id: troubleshooting.md
-summary: 了解使用 Milvus 时可能遇到的常见问题，以及如何解决这些问题。
+summary: 了解使用 Milvus 时可能遇到的常见问题，以及如何克服这些问题。
 title: 故障排除
 ---
 <h1 id="Troubleshooting" class="common-anchor-header">故障排除<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
@@ -18,7 +18,7 @@ title: 故障排除
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本页列出运行 Milvus 时可能出现的常见问题，以及可能的故障排除提示。本页中的问题分为以下几类：</p>
+    </button></h1><p>本页列出运行 Milvus 时可能出现的常见问题，以及可能的故障排除提示。本页面的问题分为以下几类：</p>
 <ul>
 <li><a href="#boot_issues">启动问题</a></li>
 <li><a href="#runtime_issues">运行时问题</a></li>
@@ -105,8 +105,8 @@ kubectl kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">
 <span class="hljs-comment"># restore the backup data</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><br/></p>
-<p>如果您在解决问题时需要帮助，请随时联系我们：</p>
+<p>如果您在解决问题时需要帮助，请随时</p>
 <ul>
-<li>加入我们的<a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 频道</a>，寻求 Milvus 团队的支持。</li>
+<li>加入我们的<a href="https://discord.com/invite/8uyFbECzPX">Discord 服务器</a>，寻求 Milvus 团队的支持。</li>
 <li>在 GitHub 上<a href="https://github.com/milvus-io/milvus/issues/new/choose">提交问题</a>，并详细说明您的问题。</li>
 </ul>

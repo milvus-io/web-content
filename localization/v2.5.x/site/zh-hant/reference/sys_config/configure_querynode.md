@@ -255,6 +255,35 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodesegcoremultipleChunkedEnable" class="common-anchor-header"><code translate="no">queryNode.segcore.multipleChunkedEnable</code><button data-href="#queryNodesegcoremultipleChunkedEnable" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.segcore.multipleChunkedEnable">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        啟用多重分塊搜尋      </td>
+      <td>真</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodesegcoreknowhereScoreConsistency" class="common-anchor-header"><code translate="no">queryNode.segcore.knowhereScoreConsistency</code><button data-href="#queryNodesegcoreknowhereScoreConsistency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -435,7 +464,7 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
     </tr>
   </tbody>
 </table>
-<h2 id="queryNodemmapmmapEnabled" class="common-anchor-header"><code translate="no">queryNode.mmap.mmapEnabled</code><button data-href="#queryNodemmapmmapEnabled" class="anchor-icon" translate="no">
+<h2 id="queryNodemmapvectorField" class="common-anchor-header"><code translate="no">queryNode.mmap.vectorField</code><button data-href="#queryNodemmapvectorField" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -450,7 +479,7 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><table id="queryNode.mmap.mmapEnabled">
+    </button></h2><table id="queryNode.mmap.vectorField">
   <thead>
     <tr>
       <th class="width80">說明</th>
@@ -459,8 +488,124 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        啟用 mmap 載入資料      </td>
+      <td>        啟用 mmap 載入向量資料      </td>
       <td>假</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodemmapvectorIndex" class="common-anchor-header"><code translate="no">queryNode.mmap.vectorIndex</code><button data-href="#queryNodemmapvectorIndex" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.mmap.vectorIndex">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        啟用 mmap 載入向量索引      </td>
+      <td>假</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodemmapscalarField" class="common-anchor-header"><code translate="no">queryNode.mmap.scalarField</code><button data-href="#queryNodemmapscalarField" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.mmap.scalarField">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        啟用 mmap 載入標量資料      </td>
+      <td>假</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodemmapscalarIndex" class="common-anchor-header"><code translate="no">queryNode.mmap.scalarIndex</code><button data-href="#queryNodemmapscalarIndex" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.mmap.scalarIndex">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        啟用 mmap 以載入標量索引      </td>
+      <td>假</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodemmapchunkCache" class="common-anchor-header"><code translate="no">queryNode.mmap.chunkCache</code><button data-href="#queryNodemmapchunkCache" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.mmap.chunkCache">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        啟用 mmap 作為 chunk cache (原始向量擷取)。      </td>
+      <td>真</td>
     </tr>
   </tbody>
 </table>
@@ -488,8 +633,11 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        啟用 mmap 用於成長原始資料      </td>
-      <td>假</td>
+      <td>
+        <li>啟用記憶體映射 (mmap) 以最佳化處理成長中的原始資料。 </li>      
+        <li>啟用此功能後，與新增或修改資料相關的記憶體開銷將大幅降低。 </li>      
+        <li>不過，此最佳化的代價可能是略微降低受影響資料段的查詢延遲。</li>      </td>
+      <td>錯誤</td>
     </tr>
   </tbody>
 </table>
@@ -604,7 +752,7 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        開始執行 lazyload 搜尋與擷取之前的最大等待逾時長度 (毫秒)      </td>
+      <td>        開始執行 lazyload 搜尋與擷取之前的最大等待逾時長度 (以毫秒為單位)      </td>
       <td>30000</td>
     </tr>
   </tbody>
@@ -725,6 +873,35 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodeindexOffsetCacheEnabled" class="common-anchor-header"><code translate="no">queryNode.indexOffsetCacheEnabled</code><button data-href="#queryNodeindexOffsetCacheEnabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.indexOffsetCacheEnabled">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        啟用某些標量索引的索引偏移快取，現在只針對位圖索引，啟用此參數可以改善從索引擷取原始資料的效能      </td>
+      <td>假</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodeschedulermaxReadConcurrentRatio" class="common-anchor-header"><code translate="no">queryNode.scheduler.maxReadConcurrentRatio</code><button data-href="#queryNodeschedulermaxReadConcurrentRatio" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -750,9 +927,9 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
   <tbody>
     <tr>
       <td>
-        <li>maxReadConcurrentRatio 是讀取任務 (搜尋任務和查詢任務) 的併發比率。</li>      
-        <li>最大讀取並發率是 hardware.GetCPUNum * maxReadConcurrentRatio 的值。</li>      
-        <li>預設值為 2.0，這表示最大讀取並發度是 hardware.GetCPUNum * 2 的值。</li>      
+        <li>maxReadConcurrentRatio 是讀取任務（搜尋任務和查詢任務）的並發比率。</li>      
+        <li>最大讀取並發率為 hardware.GetCPUNum * maxReadConcurrentRatio 的值。</li>      
+        <li>預設值為 2.0，這表示最大讀取並發率是 hardware.GetCPUNum * 2 的值。</li>      
         <li>最大讀取並發度必須大於或等於 1，且小於或等於 hardware.GetCPUNum * 100。</li>      
         <li>(0, 100]</li>      </td>
       <td>1</td>
@@ -877,7 +1054,7 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        使用 user-task-polling 策略時，啟用交叉使用者群組。(如果使用者的任務不能彼此合併，請停用)      </td>
+      <td>        使用 user-task-polling 策略時，啟用交叉使用者群組。(如果使用者的任務不能相互合併，請停用)      </td>
       <td>假</td>
     </tr>
   </tbody>
@@ -911,6 +1088,64 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodelevelZeroForwardPolicy" class="common-anchor-header"><code translate="no">queryNode.levelZeroForwardPolicy</code><button data-href="#queryNodelevelZeroForwardPolicy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.levelZeroForwardPolicy">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        委託者層級的零刪除前進政策，可能的選項["FilterByBF", "RemoteLoad"]] 。   </td>
+      <td>篩選依據 BF</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodestreamingDeltaForwardPolicy" class="common-anchor-header"><code translate="no">queryNode.streamingDeltaForwardPolicy</code><button data-href="#queryNodestreamingDeltaForwardPolicy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.streamingDeltaForwardPolicy">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        委託者串流刪除前向原則，可能的選項["FilterByBF", "Direct"] (直接刪除)      </td>
+      <td>篩選條件</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodedataSyncflowGraphmaxQueueLength" class="common-anchor-header"><code translate="no">queryNode.dataSync.flowGraph.maxQueueLength</code><button data-href="#queryNodedataSyncflowGraphmaxQueueLength" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -935,7 +1170,7 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        查詢節點的流程圖中，任務佇列快取記憶體的最大大小。      </td>
+      <td>        查詢節點流量圖中任務佇列快取的最大大小。      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -998,6 +1233,64 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
     </tr>
   </tbody>
 </table>
+<h2 id="queryNodequeryStreamBatchSize" class="common-anchor-header"><code translate="no">queryNode.queryStreamBatchSize</code><button data-href="#queryNodequeryStreamBatchSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.queryStreamBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        返回流查詢的最小批次大小      </td>
+      <td>4194304</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryNodequeryStreamMaxBatchSize" class="common-anchor-header"><code translate="no">queryNode.queryStreamMaxBatchSize</code><button data-href="#queryNodequeryStreamMaxBatchSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryNode.queryStreamMaxBatchSize">
+  <thead>
+    <tr>
+      <th class="width80">說明</th>
+      <th class="width20">預設值</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        回傳串流查詢的最大批次大小      </td>
+      <td>134217728</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryNodebloomFilterApplyParallelFactor" class="common-anchor-header"><code translate="no">queryNode.bloomFilterApplyParallelFactor</code><button data-href="#queryNodebloomFilterApplyParallelFactor" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1027,35 +1320,6 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
     </tr>
   </tbody>
 </table>
-<h2 id="queryNodequeryStreamBatchSize" class="common-anchor-header"><code translate="no">queryNode.queryStreamBatchSize</code><button data-href="#queryNodequeryStreamBatchSize" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="queryNode.queryStreamBatchSize">
-  <thead>
-    <tr>
-      <th class="width80">說明</th>
-      <th class="width20">預設值</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>        回傳串流查詢的批次大小      </td>
-      <td>4194304</td>
-    </tr>
-  </tbody>
-</table>
 <h2 id="queryNodeworkerPoolingsize" class="common-anchor-header"><code translate="no">queryNode.workerPooling.size</code><button data-href="#queryNodeworkerPoolingsize" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1080,7 +1344,7 @@ summary: 瞭解如何為 Milvus 設定 queryNode。
   </thead>
   <tbody>
     <tr>
-      <td>        Worker querynode 客戶池的大小      </td>
+      <td>        Workerynode 用戶端池的大小      </td>
       <td>10</td>
     </tr>
   </tbody>

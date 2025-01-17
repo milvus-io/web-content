@@ -39,7 +39,7 @@ summary: Aprenda a crear una alerta para los servicios Milvus en Grafana.
       </svg>
     </button></h2><p>A continuación se muestran algunos escenarios comunes para los que necesita crear una alerta.</p>
 <ul>
-<li>El uso de CPU o memoria por los componentes de Milvus es demasiado alto.</li>
+<li>El uso de CPU o memoria por parte de los componentes de Milvus es demasiado elevado.</li>
 <li>Los pods de componentes de Milvus tienen poco espacio en disco.</li>
 <li>Los pods de componentes Milvus se reinician con demasiada frecuencia.</li>
 </ul>
@@ -71,8 +71,8 @@ summary: Aprenda a crear una alerta para los servicios Milvus en Grafana.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta guía toma como ejemplo la creación de una alerta para el uso de memoria de los componentes de Milvus. Para crear otros tipos de alertas, por favor ajuste sus comandos en consecuencia. Si encuentra algún problema durante el proceso, no dude en preguntar en el <a href="https://discuss.milvus.io/">foro de Milvus</a> o iniciar una discusión en <a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">Slack</a>.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Requisitos previos</h3><p>Este tutorial asume que usted tiene Grafana instalado y configurado. Si no es así, le recomendamos que lea la <a href="/docs/es/monitor.md">guía de monitorización</a>.</p>
+    </button></h2><p>Esta guía toma como ejemplo la creación de una alerta para el uso de memoria de los componentes de Milvus. Para crear otros tipos de alertas, por favor ajuste sus comandos en consecuencia. Si encuentra algún problema durante el proceso, no dude en preguntar en <a href="https://github.com/milvus-io/milvus/discussions">las discusiones de Github</a> o iniciar un hilo en <a href="https://discord.com/invite/8uyFbECzPX">Discord</a>.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Requisitos previos</h3><p>Este tutorial asume que tienes Grafana instalado y configurado. Si no es así, recomendamos leer la <a href="/docs/es/monitor.md">guía de monitorización</a>.</p>
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. Añadir una nueva consulta</h3><p>Para añadir una alerta para el uso de memoria de los componentes de Milvus, edite el panel Memoria. A continuación, añada una nueva consulta con la métrica <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
@@ -127,6 +127,6 @@ summary: Aprenda a crear una alerta para los servicios Milvus en Grafana.
 <li>Aprenda a <a href="/docs/es/allocate.md#standalone">asignar recursos</a></li>
 </ul></li>
 <li>Si está buscando información sobre cómo escalar un cluster Milvus:<ul>
-<li>Aprenda <a href="/docs/es/scaleout.md">a escalar un cluster Milvus</a></li>
+<li>Aprenda a <a href="/docs/es/scaleout.md">escalar un cluster Milvus</a></li>
 </ul></li>
 </ul>

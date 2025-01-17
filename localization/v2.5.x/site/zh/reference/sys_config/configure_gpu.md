@@ -50,7 +50,7 @@ summary: 了解如何为 Milvus 配置 gpu。
   <tbody>
     <tr>
       <td>        GPU 内存池初始大小      </td>
-      <td></td>
+      <td>2048</td>
     </tr>
   </tbody>
 </table>
@@ -79,7 +79,7 @@ summary: 了解如何为 Milvus 配置 gpu。
   <tbody>
     <tr>
       <td>        Gpu 内存池最大大小      </td>
-      <td></td>
+      <td>4096</td>
     </tr>
   </tbody>
 </table>

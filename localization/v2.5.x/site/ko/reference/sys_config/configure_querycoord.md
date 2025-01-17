@@ -365,7 +365,7 @@ summary: Milvus용 쿼리코드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        쿼리 노드 간 세그먼트 밸런싱 시 사용되는 세그먼트 수 가중치      </td>
+      <td>        쿼리 노드 간 세그먼트 밸런싱 시 사용되는 세그먼트 수 가중치입니다.      </td>
       <td>0.4</td>
     </tr>
   </tbody>
@@ -396,6 +396,37 @@ summary: Milvus용 쿼리코드 구성 방법을 알아보세요.
     <tr>
       <td>        쿼리 노드 간 세그먼트 밸런싱 시 사용되는 세그먼트 수 가중치입니다.      </td>
       <td>0.1</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryCoordcollectionChannelCountFactor" class="common-anchor-header"><code translate="no">queryCoord.collectionChannelCountFactor</code><button data-href="#queryCoordcollectionChannelCountFactor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryCoord.collectionChannelCountFactor">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>쿼리 노드 간 채널 밸런싱을 수행할 때 사용되는 채널 수 가중치입니다, </li>      
+        <li>        값이 클수록 동일한 컬렉션의 채널을 동일한 쿼리 노드에 할당할 가능성이 줄어듭니다. 이 기능을 사용하지 않으려면 1로 설정합니다.</li>      </td>
+      <td>10</td>
     </tr>
   </tbody>
 </table>
@@ -1090,7 +1121,7 @@ summary: Milvus용 쿼리코드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        5분, 컬렉션 로드 상태 업데이트의 최대 간격      </td>
+      <td>        5분, 상태 확인을 위해 컬렉션 로드 상태를 업데이트하는 최대 간격입니다.      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -1293,7 +1324,7 @@ summary: Milvus용 쿼리코드 구성 방법을 알아보세요.
   </thead>
   <tbody>
     <tr>
-      <td>        쿼리코드에 있는 클라이언트가 수신할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
+      <td>        queryCoord의 클라이언트가 수신할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
       <td>536870912</td>
     </tr>
   </tbody>

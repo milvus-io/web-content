@@ -138,9 +138,9 @@ summary: Apprenez à configurer les pulsars pour Milvus.
     <tr>
       <td>
         <li>La taille maximale de chaque message dans Pulsar. Unité : Octet.</li>      
-        <li>Par défaut, Pulsar peut transmettre au maximum 5 Mo de données dans un seul message. Lorsque la taille des données insérées est supérieure à cette valeur, le proxy fragmente les données en plusieurs messages afin de garantir leur transmission correcte.</li>      
-        <li>Si le paramètre correspondant dans Pulsar reste inchangé, l'augmentation de cette configuration entraînera l'échec de Milvus, et sa réduction ne présente aucun avantage.</li>      </td>
-      <td>5242880</td>
+        <li>Par défaut, Pulsar peut transmettre au maximum 2 Mo de données dans un seul message. Lorsque la taille des données insérées est supérieure à cette valeur, le proxy fragmente les données en plusieurs messages afin de garantir leur transmission correcte.</li>      
+        <li>Si le paramètre correspondant dans Pulsar reste inchangé, l'augmentation de cette configuration entraînera l'échec de Milvus, et sa réduction ne produira aucun avantage.</li>      </td>
+      <td>2097152</td>
     </tr>
   </tbody>
 </table>

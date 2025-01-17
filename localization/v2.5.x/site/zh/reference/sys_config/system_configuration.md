@@ -52,7 +52,7 @@ summary: 了解 Milvus 的系统配置。
 <p>本节下每个参数的详细说明请参见<a href="/docs/zh/configure_minio.md">minio 相关配置</a>。</p>
 <h3 id="mq" class="common-anchor-header"><code translate="no">mq</code></h3><p>Milvus 支持四种 MQ：rocksmq（基于 RockDB）、natsmq（嵌入式 nats-server）、Pulsar 和 Kafka。</p>
 <p>你可以通过设置 mq.type 字段来更改你的 MQ。</p>
-<p>如果不将 mq.type 字段设为默认值，那么如果我们在该文件中配置了多个 mq，就需要注意启用优先级。</p>
+<p>如果不将 mq.type 字段设为默认值，那么如果我们在此文件中配置了多个 mq，就需要注意启用优先级。</p>
 <ol>
 <li><p>独立（本地）模式：Rocksmq（默认） &gt; Natsmq &gt; Pulsar &gt; Kafka</p></li>
 <li><p>集群模式：  Pulsar（默认） &gt; Kafka（集群模式下不支持 rocksmq 和 natsmq）</p></li>
@@ -62,7 +62,7 @@ summary: 了解 Milvus 的系统配置。
 <p>本节下各参数的详细说明，请参见<a href="/docs/zh/configure_pulsar.md">pulsar 相关配置</a>。</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>如果要启用 kafka，需要对 pulsar 配置进行注释</p>
 <p>kafka：</p>
-<p>brokerList：</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername：</p>
 <p>saslPassword：</p>
 <p>saslMechanisms：</p>
@@ -90,7 +90,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <h3 id="queryCoord" class="common-anchor-header"><code translate="no">queryCoord</code></h3><p>queryCoord 的相关配置用于管理查询节点的拓扑和负载平衡，以及从增长网段到封存网段的切换。</p>
 <p>有关本节中每个参数的详细说明，请参阅<a href="/docs/zh/configure_querycoord.md">queryCoord 相关配置</a>。</p>
 <h3 id="queryNode" class="common-anchor-header"><code translate="no">queryNode</code></h3><p>queryNode 的相关配置，用于在向量和标量数据之间运行混合搜索。</p>
-<p>有关本节中各参数的详细说明，请参见<a href="/docs/zh/configure_querynode.md">查询</a>节点<a href="/docs/zh/configure_querynode.md">相关配置</a>。</p>
+<p>有关本节中每个参数的详细说明，请参见<a href="/docs/zh/configure_querynode.md">查询</a>节点<a href="/docs/zh/configure_querynode.md">相关配置</a>。</p>
 <h3 id="indexCoord" class="common-anchor-header"><code translate="no">indexCoord</code></h3><p>有关本节中每个参数的详细说明，请参见<a href="/docs/zh/configure_indexcoord.md">indexCoord 相关配置</a>。</p>
 <h3 id="indexNode" class="common-anchor-header"><code translate="no">indexNode</code></h3><p>有关本节中每个参数的详细说明，请参见<a href="/docs/zh/configure_indexnode.md">indexNode 相关配置</a>。</p>
 <h3 id="dataCoord" class="common-anchor-header"><code translate="no">dataCoord</code></h3><p>请参阅<a href="/docs/zh/configure_datacoord.md">dataCoord-related Configurations（数据</a>节点<a href="/docs/zh/configure_datacoord.md">相关配置</a>），了解本节中各参数的详细说明。</p>
@@ -100,8 +100,10 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>配置系统日志输出。</p>
 <p>本节下各参数的详细说明，请参见<a href="/docs/zh/configure_log.md">日志相关配置</a>。</p>
 <h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>本节下各参数的详细说明，请参见<a href="/docs/zh/configure_grpc.md">grpc 相关配置</a>。</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>配置代理 tls 启用。</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>配置外部 tls。</p>
 <p>本节下各参数的详细说明，请参见<a href="/docs/zh/configure_tls.md">tls 相关配置</a>。</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code></h3><p>配置内部 tls。</p>
+<p>有关本节下各参数的详细说明，请参见<a href="/docs/zh/configure_internaltls.md">internaltls 相关配置</a>。</p>
 <h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>本节下各参数的详细说明，请参见<a href="/docs/zh/configure_common.md">常用相关配置</a>。</p>
 <h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>配额配置（QuotaConfig），Milvus 配额和限制的配置。</p>
 <p>默认情况下，我们启用</p>
@@ -113,7 +115,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>可以启用</p>
 <ol>
 <li><p>DML 吞吐量限制；</p></li>
-<li><p>DDL 和 DQL qps/rps 限制；</p></li>
+<li><p>DDL、DQL qps/rps 限制；</p></li>
 <li><p>DQL 队列长度/延迟保护；</p></li>
 <li><p>DQL 结果速率保护；</p></li>
 </ol>
@@ -127,3 +129,9 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#milvus 将自动初始化 GPU 可用内存的一半、</p>
 <p>#maxMemSize则为整个可用 GPU 内存。</p>
 <p>本节下每个参数的详细说明，请参见<a href="/docs/zh/configure_gpu.md">与 GPU 相关的配置</a>。</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>与流节点服务器相关的任何配置。</p>
+<p>本节下每个参数的详细说明，请参见<a href="/docs/zh/configure_streamingnode.md">streamingNode-related Configurations</a>（<a href="/docs/zh/configure_streamingnode.md">流节点相关配置</a>）。</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>与流媒体服务相关的任何配置。</p>
+<p>有关本节下各参数的详细说明，请参见<a href="/docs/zh/configure_streaming.md">流媒体相关配置</a>。</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>与 knowhere 向量搜索引擎相关的任何配置</p>
+<p>请参阅 "<a href="/docs/zh/configure_knowhere.md">knowhere 相关配置"</a>，了解本节下各参数的详细说明。</p>

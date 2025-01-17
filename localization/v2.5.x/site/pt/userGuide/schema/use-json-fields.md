@@ -48,7 +48,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para utilizar campos JSON no Milvus, defina o tipo de campo relevante no esquema de coleção, definindo <code translate="no">datatype</code> para o tipo JSON suportado, ou seja, <code translate="no">JSON</code>.</p>
+    </button></h2><p>Para utilizar campos JSON no Milvus, defina o tipo de campo relevante no esquema da coleção, definindo <code translate="no">datatype</code> para o tipo JSON suportado, ou seja, <code translate="no">JSON</code>.</p>
 <p>Eis como definir um esquema de coleção que inclui um campo JSON.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -521,5 +521,6 @@ System.out.println(resp.getSearchResults());​
 <li><p><strong>Correspondência de tipo de dados</strong>: se o valor de chave de um campo JSON for um número inteiro ou ponto flutuante, ele só poderá ser comparado com outra chave inteira ou flutuante ou com os campos <code translate="no">INT32/64</code> ou <code translate="no">FLOAT32/64</code>. Se o valor da chave for uma cadeia de caracteres (<code translate="no">VARCHAR</code>), só pode ser comparado com outra chave de cadeia de caracteres.</p></li>
 <li><p><strong>Restrições de nomenclatura</strong>: Ao nomear chaves JSON, é recomendável usar apenas letras, caracteres numéricos e sublinhados, pois outros caracteres podem causar problemas durante a filtragem ou pesquisa.</p></li>
 <li><p><strong>Manipulação de valores de cadeia de caracteres</strong>: Para valores de cadeia de caracteres (<code translate="no">VARCHAR</code>), o Milvus armazena cadeias de caracteres de campos JSON tal como estão, sem conversão semântica. Por exemplo: <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, e <code translate="no">&quot;a\\&quot;b&quot;</code> são armazenados como introduzidos; no entanto, <code translate="no">'a'b'</code> e <code translate="no">&quot;a&quot;b&quot;</code> são considerados inválidos.</p></li>
-<li><p><strong>Tratamento de dicionários aninhados</strong>: Todos os dicionários aninhados nos valores de campo JSON são tratados como cadeias de caracteres.</p></li>
+<li><p><strong>Tratamento de dicionários aninhados</strong>: Quaisquer dicionários aninhados nos valores de campo JSON são tratados como cadeias de caracteres.</p></li>
+<li><p><strong>Limite de tamanho do campo</strong> JSON: os campos JSON estão limitados a 65.536 bytes.</p></li>
 </ul>

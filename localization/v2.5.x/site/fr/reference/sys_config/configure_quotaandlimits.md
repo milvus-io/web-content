@@ -264,8 +264,37 @@ summary: Découvrez comment configurer quotaAndLimits pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        nombre maximal de groupes de ressources des nœuds d'interrogation      </td>
+      <td>        nombre maximal de groupes de ressources de nœuds d'interrogation      </td>
       <td>1024</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitsmaxGroupSize" class="common-anchor-header"><code translate="no">quotaAndLimits.limits.maxGroupSize</code><button data-href="#quotaAndLimitslimitsmaxGroupSize" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limits.maxGroupSize">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        taille maximale d'un seul groupe lors d'une recherche groupée par   </td>
+      <td>10</td>
     </tr>
   </tbody>
 </table>
@@ -287,13 +316,13 @@ summary: Découvrez comment configurer quotaAndLimits pour Milvus.
     </button></h2><table id="quotaAndLimits.ddl.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
+      <th class="width80">Description de la valeur par défaut</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Si la limitation des requêtes DDL est activée.      </td>
+      <td>        Indique si la limitation des requêtes DDL est activée.      </td>
       <td>faux</td>
     </tr>
   </tbody>
@@ -1554,7 +1583,7 @@ summary: Découvrez comment configurer quotaAndLimits pour Milvus.
     <tr>
       <td>
         <li>maxTimeTickDelay indique la contre-pression pour les opérations DML.</li>      
-        <li>Les taux de DML sont réduits en fonction du rapport entre le délai d'attente et maxTimeTickDelay,</li>      
+        <li>Les taux de DML sont réduits en fonction du rapport entre le délai d'attente et le délai maxTimeTickDelay,</li>      
         <li>si le délai est supérieur à maxTimeTickDelay, toutes les demandes DML sont rejetées.</li>      
         <li>secondes</li>      </td>
       <td>300</td>
@@ -1939,8 +1968,8 @@ summary: Découvrez comment configurer quotaAndLimits pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        l0 segment row count quota, low water level (niveau d'eau bas)    </td>
-      <td>32768</td>
+      <td>        quota de comptage de lignes du segment l0, bas niveau d'eau     </td>
+      <td>30000000</td>
     </tr>
   </tbody>
 </table>
@@ -1968,8 +1997,182 @@ summary: Découvrez comment configurer quotaAndLimits pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        l0 segment row count quota, low water level     </td>
+      <td>        l0 segment row count quota, high water level     </td>
+      <td>50000000</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferRowCountProtectionenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferRowCountProtection.enabled</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferRowCountProtectionenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        interrupteur pour activer le quota de nombre de lignes de la mémoire tampon d'effacement      </td>
+      <td>faux</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferRowCountProtectionlowWaterLevel" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferRowCountProtection.lowWaterLevel</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferRowCountProtectionlowWaterLevel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.lowWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        supprimer le quota de comptage des lignes de la mémoire tampon, faible niveau d'eau     </td>
+      <td>32768</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferRowCountProtectionhighWaterLevel" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferRowCountProtection.highWaterLevel</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferRowCountProtectionhighWaterLevel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferRowCountProtection.highWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        supprimer le quota de comptage des lignes de tampon, niveau d'eau élevé      </td>
       <td>65536</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferSizeProtectionenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferSizeProtection.enabled</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferSizeProtectionenabled" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.enabled">
+  <thead>
+    <tr>
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        interrupteur pour activer le quota de taille du tampon de suppression      </td>
+      <td>faux</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferSizeProtectionlowWaterLevel" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferSizeProtection.lowWaterLevel</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferSizeProtectionlowWaterLevel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.lowWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        supprimer le quota de taille de la mémoire tampon, faible niveau d'eau     </td>
+      <td>134217728</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="quotaAndLimitslimitWritingdeleteBufferSizeProtectionhighWaterLevel" class="common-anchor-header"><code translate="no">quotaAndLimits.limitWriting.deleteBufferSizeProtection.highWaterLevel</code><button data-href="#quotaAndLimitslimitWritingdeleteBufferSizeProtectionhighWaterLevel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="quotaAndLimits.limitWriting.deleteBufferSizeProtection.highWaterLevel">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Valeur par défaut</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        supprimer le quota de taille de tampon, niveau d'eau élevé      </td>
+      <td>268435456</td>
     </tr>
   </tbody>
 </table>
@@ -2001,137 +2204,6 @@ summary: Découvrez comment configurer quotaAndLimits pour Milvus.
         <li>forceDeny false signifie que les requêtes dql sont autorisées (sauf pour certaines</li>      
         <li>conditions spécifiques, telles que la collecte a été abandonnée), true signifie que toutes les requêtes dql sont toujours rejetées.</li>      </td>
       <td>false</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold" class="common-anchor-header"><code translate="no">quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code><button data-href="#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Valeur par défaut</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>nqInQueueThreshold indique que le système subit une contre-pression pour le chemin de recherche/requête.</li>      
-        <li>Si le NQ dans la file d'attente d'un QueryNode est supérieur à nqInQueueThreshold, les taux de recherche et d'interrogation diminuent progressivement</li>      
-        <li>jusqu'à ce que le NQ dans la file d'attente ne dépasse plus le seuil nqInQueueThreshold. Nous considérons que le NQ de la demande de requête est égal à 1.</li>      
-        <li>int, par défaut no limit</li>      </td>
-      <td>-1</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold" class="common-anchor-header"><code translate="no">quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</code><button data-href="#quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold">
-  <thead>
-    <tr>
-      <th class="width80">Description de la valeur par défaut</th>
-      <th class="width20">Valeur par défaut</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>queueLatencyThreshold indique que le système subit une contre-pression pour le chemin de recherche/requête.</li>      
-        <li>Si la latence de la file d'attente est supérieure au seuil de latence de la file d'attente, les taux de recherche et de requête diminuent progressivement jusqu'à ce que la latence de la file d'attente ne dépasse plus le seuil de latence de la file d'attente.</li>      
-        <li>jusqu'à ce que la latence de la file d'attente ne dépasse plus le seuil de latence de la file d'attente.</li>      
-        <li>La latence se réfère ici à la latence moyenne sur une période de temps.</li>      
-        <li>millisecondes, par défaut pas de limite</li>      </td>
-      <td>-1</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="quotaAndLimitslimitReadingresultProtectionmaxReadResultRate" class="common-anchor-header"><code translate="no">quotaAndLimits.limitReading.resultProtection.maxReadResultRate</code><button data-href="#quotaAndLimitslimitReadingresultProtectionmaxReadResultRate" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="quotaAndLimits.limitReading.resultProtection.maxReadResultRate">
-  <thead>
-    <tr>
-      <th class="width80">Description de la valeur par défaut</th>
-      <th class="width20">Valeur par défaut</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>maxReadResultRate indique que le système subit une contre-pression pour le chemin de recherche/interrogation.</li>      
-        <li>Si le taux de résultats dql est supérieur à maxReadResultRate, les taux de recherche et d'interrogation diminuent progressivement jusqu'à ce que le taux de résultats de lecture ne dépasse plus maxReadResultRate.</li>      
-        <li>jusqu'à ce que le taux de résultat de lecture ne dépasse plus maxReadResultRate.</li>      
-        <li>MB/s, pas de limite par défaut</li>      </td>
-      <td>-1</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="quotaAndLimitslimitReadingcoolOffSpeed" class="common-anchor-header"><code translate="no">quotaAndLimits.limitReading.coolOffSpeed</code><button data-href="#quotaAndLimitslimitReadingcoolOffSpeed" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table id="quotaAndLimits.limitReading.coolOffSpeed">
-  <thead>
-    <tr>
-      <th class="width80">Description de l'option</th>
-      <th class="width20">Valeur par défaut</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>colOffSpeed est la vitesse de refroidissement des taux de recherche et de requête.</li>      
-        <li>(0, 1]</li>      </td>
-      <td>0.9</td>
     </tr>
   </tbody>
 </table>

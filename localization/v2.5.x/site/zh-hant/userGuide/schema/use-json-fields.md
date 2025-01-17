@@ -518,4 +518,5 @@ System.out.println(resp.getSearchResults());​
 <li><p><strong>命名限制</strong>：命名 JSON 鍵時，建議只使用字母、數字字元和底線，因為其他字元可能會在過濾或搜尋時造成問題。</p></li>
 <li><p><strong>處理字串值</strong>：對於字串值 (<code translate="no">VARCHAR</code>)，Milvus 會以原樣儲存 JSON 字段字串，而不進行語意轉換。例如<code translate="no">'a&quot;b'</code>,<code translate="no">&quot;a'b&quot;</code>,<code translate="no">'a\\'b'</code>, 和<code translate="no">&quot;a\\&quot;b&quot;</code> 會以輸入的方式儲存；但是，<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 會被視為無效。</p></li>
 <li><p><strong>處理巢狀字典</strong>：JSON 欄位值內的任何巢狀字典都會視為字串。</p></li>
+<li><p><strong>JSON 欄位大小限制</strong>：JSON 欄位限制為 65,536 位元組。</p></li>
 </ul>

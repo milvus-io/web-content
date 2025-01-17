@@ -62,7 +62,7 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo essere stati c
 <p>Vedere <a href="/docs/it/configure_pulsar.md">Configurazioni relative a pulsar</a> per una descrizione dettagliata di ogni parametro di questa sezione.</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>Se si desidera abilitare kafka, è necessario commentare le configurazioni di pulsar</p>
 <p>kafka:</p>
-<p>brokerList:</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername:</p>
 <p>saslPassword:</p>
 <p>saslMeccanismi:</p>
@@ -82,7 +82,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>Vedere <a href="/docs/it/configure_rocksmq.md">Configurazioni relative a rocksmq per</a> una descrizione dettagliata di ogni parametro in questa sezione.</p>
 <h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code></h3><p>configurazione natsmq.</p>
 <p>maggiori dettagli: https://docs.nats.io/running-a-nats-service/configuration</p>
-<p>Vedere le <a href="/docs/it/configure_natsmq.md">configurazioni relative a natsmq</a> per una descrizione dettagliata di ogni parametro in questa sezione.</p>
+<p>Vedere le <a href="/docs/it/configure_natsmq.md">configurazioni relative a natsmq</a> per una descrizione dettagliata di ogni parametro di questa sezione.</p>
 <h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code></h3><p>Configurazione correlata di rootCoord, usata per gestire le richieste del linguaggio di definizione dei dati (DDL) e del linguaggio di controllo dei dati (DCL).</p>
 <p>Vedere <a href="/docs/it/configure_rootcoord.md">Configurazioni relative a rootCoord</a> per una descrizione dettagliata di ogni parametro in questa sezione.</p>
 <h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code></h3><p>Configurazione correlata del proxy, usato per convalidare le richieste del client e ridurre i risultati restituiti.</p>
@@ -99,11 +99,13 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>Per una descrizione dettagliata di ogni parametro di questa sezione, vedere <a href="/docs/it/configure_msgchannel.md">Configurazioni relative al canale dei messaggi</a>.</p>
 <h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>Configura l'output del registro di sistema.</p>
 <p>Vedere <a href="/docs/it/configure_log.md">Configurazioni relative ai log per</a> una descrizione dettagliata di ogni parametro di questa sezione.</p>
-<h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>Vedere <a href="/docs/it/configure_grpc.md">Configurazioni relative a grpc</a> per una descrizione dettagliata di ogni parametro in questa sezione.</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Configura l'abilitazione del proxy tls.</p>
-<p>Vedere <a href="/docs/it/configure_tls.md">Configurazioni relative a tls</a> per una descrizione dettagliata di ogni parametro di questa sezione.</p>
+<h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>Vedere <a href="/docs/it/configure_grpc.md">Configurazioni relative a grpc</a> per una descrizione dettagliata di ogni parametro di questa sezione.</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Configura il tls esterno.</p>
+<p>Vedere <a href="/docs/it/configure_tls.md">Configurazioni relative a tls</a> per una descrizione dettagliata di ogni parametro in questa sezione.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code></h3><p>Configurazione del tls interno.</p>
+<p>Vedere le <a href="/docs/it/configure_internaltls.md">configurazioni relative a internaltls</a> per una descrizione dettagliata di ogni parametro di questa sezione.</p>
 <h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>Per una descrizione dettagliata di ogni parametro di questa sezione, vedere <a href="/docs/it/configure_common.md">Configurazioni comuni</a>.</p>
-<h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig, configurazione della quota e dei limiti di Milvus.</p>
+<h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig, configurazioni della quota e dei limiti di Milvus.</p>
 <p>Per impostazione predefinita, sono abilitati:</p>
 <ol>
 <li><p>Protezione TT;</p></li>
@@ -118,7 +120,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <li><p>Protezione della velocità dei risultati DQL;</p></li>
 </ol>
 <p>Se necessario, si può anche forzare manualmente il rifiuto delle richieste RW.</p>
-<p>Per una descrizione dettagliata di ciascun parametro di questa sezione, vedere <a href="/docs/it/configure_quotaandlimits.md">Configurazioni relative a quote e limiti</a>.</p>
+<p>Vedere <a href="/docs/it/configure_quotaandlimits.md">Configurazioni relative a quote e limiti</a> per una descrizione dettagliata di ciascun parametro di questa sezione.</p>
 <h3 id="trace" class="common-anchor-header"><code translate="no">trace</code></h3><p>Vedere le <a href="/docs/it/configure_trace.md">configurazioni relative alla traccia</a> per una descrizione dettagliata di ogni parametro di questa sezione.</p>
 <h3 id="gpu" class="common-anchor-header"><code translate="no">gpu</code></h3><p>#Quando si utilizza l'indicizzazione su GPU, Milvus utilizza un pool di memoria per evitare l'allocazione e la deallocazione frequente della memoria.</p>
 <p>#Qui è possibile impostare la dimensione della memoria occupata dal pool di memoria, con l'unità di misura MB.</p>
@@ -126,4 +128,10 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#se initMemSize e MaxMemSize sono entrambi impostati a zero,</p>
 <p>#milvus inizializzerà automaticamente metà della memoria disponibile della GPU,</p>
 <p>#maxMemSize sarà l'intera memoria disponibile della GPU.</p>
-<p>Vedere <a href="/docs/it/configure_gpu.md">Configurazioni relative alla GPU per</a> una descrizione dettagliata di ogni parametro di questa sezione.</p>
+<p>Vedere <a href="/docs/it/configure_gpu.md">Configurazioni relative alla GPU per</a> una descrizione dettagliata di ogni parametro in questa sezione.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>Qualsiasi configurazione relativa al server del nodo di streaming.</p>
+<p>Vedere <a href="/docs/it/configure_streamingnode.md">Configurazioni relative a streamingNode</a> per una descrizione dettagliata di ogni parametro di questa sezione.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>Qualsiasi configurazione relativa al servizio di streaming.</p>
+<p>Vedere <a href="/docs/it/configure_streaming.md">Configurazioni relative allo streaming</a> per una descrizione dettagliata di ogni parametro di questa sezione.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>Qualsiasi configurazione relativa al motore di ricerca vettoriale knowhere.</p>
+<p>Vedere <a href="/docs/it/configure_knowhere.md">Configurazioni relative a knowhere</a> per una descrizione dettagliata di ogni parametro di questa sezione.</p>

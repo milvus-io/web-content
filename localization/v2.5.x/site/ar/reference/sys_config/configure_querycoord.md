@@ -399,6 +399,37 @@ summary: تعرف على كيفية تهيئة الاستعلام عن الاس�
     </tr>
   </tbody>
 </table>
+<h2 id="queryCoordcollectionChannelCountFactor" class="common-anchor-header"><code translate="no">queryCoord.collectionChannelCountFactor</code><button data-href="#queryCoordcollectionChannelCountFactor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryCoord.collectionChannelCountFactor">
+  <thead>
+    <tr>
+      <th class="width80">الوصف</th>
+      <th class="width20">القيمة الافتراضية</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>وزن عدد القنوات المستخدم عند موازنة القنوات بين عقد الاستعلام, </li>      
+        <li>        تقلل القيمة الأعلى من احتمالية تعيين قنوات من نفس المجموعة إلى نفس عقدة الاستعلام. اضبط على 1 لتعطيل هذه الميزة.</li>      </td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="queryCoordsegmentCountMaxSteps" class="common-anchor-header"><code translate="no">queryCoord.segmentCountMaxSteps</code><button data-href="#queryCoordsegmentCountMaxSteps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -423,7 +454,7 @@ summary: تعرف على كيفية تهيئة الاستعلام عن الاس�
   </thead>
   <tbody>
     <tr>
-      <td>        الخطوات القصوى لمولد الخطة المستندة إلى عدد المقاطع      </td>
+      <td>        عدد المقاطع المستندة إلى خطة المولدات المستندة إلى عدد المقاطع كحد أقصى للخطوات      </td>
       <td>50</td>
     </tr>
   </tbody>
@@ -1090,7 +1121,7 @@ summary: تعرف على كيفية تهيئة الاستعلام عن الاس�
   </thead>
   <tbody>
     <tr>
-      <td>        5 م، الحد الأقصى للفاصل الزمني لتحديث حالة المجموعة المحملة      </td>
+      <td>        5 م، الحد الأقصى للفاصل الزمني لتحديث حالة المجموعة المحملة للتحقق من الصحة      </td>
       <td>5</td>
     </tr>
   </tbody>

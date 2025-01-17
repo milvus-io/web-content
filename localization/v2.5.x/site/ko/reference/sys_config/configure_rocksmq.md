@@ -21,7 +21,7 @@ summary: Milvus용 rocksmq를 구성하는 방법을 알아보세요.
       </svg>
     </button></h1><p>kafka를 활성화하려면 pulsar 구성에 다음과 같이 주석 처리해야 합니다.</p>
 <p>kafka:</p>
-<p>브로커리스트:</p>
+<p>브로커 목록: 로컬 호스트:9092</p>
 <p>sasl사용자 이름:</p>
 <p>saslPassword:</p>
 <p>saslMechanisms:</p>

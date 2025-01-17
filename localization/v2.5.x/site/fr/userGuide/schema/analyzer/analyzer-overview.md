@@ -50,8 +50,11 @@ summary: >-
     </button></h2><p>Un analyseur dans Milvus se compose d'un <strong>tokenizer</strong> et de <strong>zéro ou plusieurs</strong> filtres.</p>
 <ul>
 <li><p>Le<strong>tokenizer</strong>: Le tokenizer décompose le texte d'entrée en unités discrètes appelées tokens. Ces jetons peuvent être des mots ou des phrases, selon le type de tokenizer.</p></li>
-<li><p><strong>Filtres</strong>: Des filtres peuvent être appliqués aux tokens pour les affiner, par exemple en les mettant en minuscules ou en supprimant les mots communs.</p></li>
+<li><p><strong>Filtres</strong>: Des filtres peuvent être appliqués aux tokens pour les affiner, par exemple en les mettant en minuscules ou en supprimant les mots courants.</p></li>
 </ul>
+<div class="alert note">
+<p>Les tokenizers ne prennent en charge que le format UTF-8. La prise en charge d'autres formats sera ajoutée dans les prochaines versions.</p>
+</div>
 <p>Le flux de travail ci-dessous montre comment un analyseur traite un texte.</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/analyzer-overview.png" alt="analyzer-overview" width="400"/></p>
 <h2 id="Analyzer-types​" class="common-anchor-header">Types d'analyseurs<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">

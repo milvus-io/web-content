@@ -55,7 +55,7 @@ title: Gestire le partizioni
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando si crea una raccolta, Milvus crea anche una partizione denominata <strong>_default</strong> nella raccolta. È possibile elencare le partizioni di una collezione come segue.</p>
+    </button></h2><p>Quando si crea una collezione, Milvus crea anche una partizione denominata <strong>_default</strong> nella collezione. È possibile elencare le partizioni di una collezione come segue.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
@@ -308,7 +308,7 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>I seguenti frammenti di codice mostrano come verificare l'esistenza di una partizione in una collezione specifica.</p>
+    </button></h2><p>I seguenti frammenti di codice dimostrano come verificare l'esistenza di una partizione in una collezione specifica.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.has_partition(​
@@ -617,14 +617,14 @@ curl --request POST \​
       </svg>
     </button></h2><h3 id="Insert-and-Delete-Entities​" class="common-anchor-header">Inserire e cancellare entità</h3><p>È possibile eseguire operazioni di inserimento, upsert e cancellazione in operazioni specifiche. Per i dettagli, fare riferimento a</p>
 <ul>
-<li><p>Inserire entità nella partizione</p></li>
-<li><p>Inserimento di entità nella partizione</p></li>
-<li><p>Eliminazione di entità dalla partizione</p></li>
+<li><p><a href="/docs/it/insert-update-delete.md#Insert-Entities-into-a-Partition">Inserire entità nella partizione</a></p></li>
+<li><p><a href="/docs/it/upsert-entities.md#Upsert-Entities-in-a-Partition">Inserimento di entità nella partizione</a></p></li>
+<li><p><a href="/docs/it/delete-entities.md#Delete-Entities-from-Partitions">Eliminazione di entità dalla partizione</a></p></li>
 </ul>
 <h3 id="Search-and-Query​" class="common-anchor-header">Ricerca e interrogazione</h3><p>È possibile effettuare ricerche e query all'interno di partizioni specifiche. Per ulteriori informazioni, consultare</p>
 <ul>
-<li><p>Eseguire ricerche di RNA all'interno di partizioni</p></li>
-<li><p>Eseguire il filtraggio dei metadati all'interno delle partizioni</p></li>
+<li><p><a href="/docs/it/single-vector-search.md#ANN-Search-in-Partition">Eseguire ricerche di RNA all'interno di partizioni</a></p></li>
+<li><p><a href="/docs/it/filtered-search.md">Eseguire il filtraggio dei metadati all'interno delle partizioni</a></p></li>
 </ul>
 <h2 id="Drop-Partition​" class="common-anchor-header">Eliminazione di partizioni<button data-href="#Drop-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -198,8 +198,11 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 검색 및 쿼리와 관련된 필드만 로드할 수 있어 메모리 사용량을 줄이고 검색 성능을 개선할 수 있습니다.</p>
-<p>다음 코드 스니펫은 <strong>customized_setup_2라는</strong> 컬렉션을 생성하고 이 컬렉션에 <strong>my_id와</strong> <strong>my_vector라는</strong> 두 개의 필드가 있다고 가정합니다.</p>
+    </button></h2><p>Milvus는 검색 및 쿼리와 관련된 필드만 로드할 수 있어 메모리 사용량을 줄이고 검색 성능을 향상시킬 수 있습니다.</p>
+<div class="alert note">
+<p>부분 컬렉션 로딩은 현재 베타 버전이며 프로덕션 사용에는 권장되지 않습니다.</p>
+</div>
+<p>다음 코드 스니펫은 <strong>customized_setup_2라는</strong> 컬렉션을 생성하고 컬렉션에 <strong>my_id</strong> 및 <strong>my_vector라는</strong> 두 개의 필드가 있다고 가정합니다.</p>
 <div class="multipleCode">
  <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_collection(​

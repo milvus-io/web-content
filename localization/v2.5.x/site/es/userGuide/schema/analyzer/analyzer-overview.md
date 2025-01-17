@@ -52,6 +52,9 @@ summary: >-
 <li><p><strong>Tokenizador</strong>: El tokenizador divide el texto de entrada en unidades discretas llamadas tokens. Estos tokens pueden ser palabras o frases, dependiendo del tipo de tokenizador.</p></li>
 <li><p><strong>Filtros</strong>: Se pueden aplicar filtros a los tokens para refinarlos aún más, por ejemplo, poniéndolos en minúsculas o eliminando palabras comunes.</p></li>
 </ul>
+<div class="alert note">
+<p>Los tokenizadores sólo admiten el formato UTF-8. En futuras versiones se añadirá compatibilidad con otros formatos.</p>
+</div>
 <p>El siguiente flujo de trabajo muestra cómo procesa el texto un analizador.</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/analyzer-overview.png" alt="analyzer-overview" width="400"/></p>
 <h2 id="Analyzer-types​" class="common-anchor-header">Tipos de analizadores<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">

@@ -21,7 +21,7 @@ title: Tanya Jawab Produk
         ></path>
       </svg>
     </button></h1><h4 id="How-much-does-Milvus-cost" class="common-anchor-header">Berapa harga Milvus?</h4><p>Milvus adalah proyek sumber terbuka yang 100% gratis.</p>
-<p>Mohon patuhi <a href="http://www.apache.org/licenses/LICENSE-2.0">Lisensi Apache 2.0</a> ketika menggunakan Milvus untuk tujuan produksi atau distribusi.</p>
+<p>Harap patuhi <a href="http://www.apache.org/licenses/LICENSE-2.0">Lisensi Apache 2.0</a> ketika menggunakan Milvus untuk tujuan produksi atau distribusi.</p>
 <p>Zilliz, perusahaan di balik Milvus, juga menawarkan versi cloud yang dikelola sepenuhnya dari platform ini bagi mereka yang tidak ingin membangun dan memelihara instance terdistribusi mereka sendiri. <a href="https://zilliz.com/cloud">Zilliz Cloud</a> secara otomatis menjaga keandalan data dan memungkinkan pengguna membayar hanya untuk apa yang mereka gunakan.</p>
 <h4 id="Does-Milvus-support-non-x86-architectures" class="common-anchor-header">Apakah Milvus mendukung arsitektur non-x86?</h4><p>Milvus tidak dapat diinstal atau dijalankan pada platform non-x86.</p>
 <p>CPU Anda harus mendukung salah satu set instruksi berikut untuk menjalankan Milvus: SSE4.2, AVX, AVX2, AVX512. Ini semua adalah set instruksi SIMD khusus x86.</p>
@@ -40,7 +40,7 @@ title: Tanya Jawab Produk
 <ul>
 <li>Sebagai contoh, jika Anda hanya ingin mencari partisi tertentu, Anda tidak perlu memuat semua partisi. Panggil <code translate="no">load_partition()</code> untuk memuat partisi yang dituju <em>, lalu</em> tentukan partisi dalam pemanggilan metode <code translate="no">search()</code>.</li>
 <li>Jika Anda ingin mencari semua partisi, panggil <code translate="no">load_collection()</code> untuk memuat seluruh koleksi termasuk semua partisi.</li>
-<li>Jika Anda gagal memuat koleksi atau partisi tertentu sebelum melakukan pencarian, Milvus akan mengembalikan sebuah kesalahan.</li>
+<li>Jika Anda gagal memuat koleksi atau partisi tertentu sebelum melakukan pencarian, Milvus akan mengembalikan kesalahan.</li>
 </ul>
 <h4 id="Can-indexes-be-created-after-inserting-vectors" class="common-anchor-header">Dapatkah indeks dibuat setelah memasukkan vektor?</h4><p>Ya. Jika indeks telah dibuat untuk koleksi oleh <code translate="no">create_index()</code> sebelumnya, Milvus akan secara otomatis membuat indeks untuk vektor yang disisipkan setelahnya. Namun, Milvus tidak membuat indeks sampai vektor yang baru disisipkan memenuhi seluruh ruas dan berkas indeks yang baru dibuat terpisah dari berkas indeks sebelumnya.</p>
 <h4 id="How-are-the-FLAT-and-IVFFLAT-indexes-different" class="common-anchor-header">Apa perbedaan antara indeks FLAT dan IVF_FLAT?</h4><p>Indeks IVF_FLAT membagi ruang vektor ke dalam kelompok daftar. Pada nilai daftar default 16.384, Milvus membandingkan jarak antara vektor target dan centroid dari semua 16.384 klaster untuk kembali menyelidiki klaster terdekat. Milvus kemudian membandingkan jarak antara vektor target dan vektor dalam cluster yang dipilih untuk mendapatkan vektor terdekat. Tidak seperti IVF_FLAT, FLAT secara langsung membandingkan jarak antara vektor target dan setiap vektor lainnya.</p>
@@ -95,8 +95,30 @@ title: Tanya Jawab Produk
     serverMaxRecvSize: <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Secara default, ukuran maksimum setiap permintaan RPC adalah 64MB. Oleh karena itu, ukuran total vektor input, termasuk data dimensi dan metadata, harus kurang dari batas ini untuk memastikan eksekusi yang sukses.</p>
-<h4 id="Still-have-questions" class="common-anchor-header">Masih memiliki pertanyaan?</h4><p>Kamu bisa:</p>
+<h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">Bagaimana cara mendapatkan semua nilai unik dari bidang skalar yang diberikan dari sebuah koleksi？</h4><p>Saat ini, tidak ada metode langsung untuk mencapai hal ini. Sebagai solusinya, kami sarankan untuk menggunakan query_iterator untuk mengambil semua nilai dari suatu field tertentu, lalu melakukan deduplikasi secara manual. Kami berencana untuk menambahkan dukungan langsung untuk fitur ini di Milvus 2.6. Contoh penggunaan query_iterator:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># set up iterator</span>
+iterator = client.query_iterator(
+    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;target&quot;</span>]
+)
+<span class="hljs-comment"># do iteration and store target values into value_set </span>
+value_set = <span class="hljs-built_in">set</span>()
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    res = iterator.<span class="hljs-built_in">next</span>()
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res) == <span class="hljs-number">0</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;query iteration finished, close&quot;</span>)
+        iterator.close()
+        <span class="hljs-keyword">break</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(res)):
+        value_set.add(res[i][<span class="hljs-string">&quot;target&quot;</span>])
+
+<span class="hljs-comment"># value_set will contain unique values for target column    </span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-are-the-limitations-of-using-dynamic-fields-For-example-are-there-size-limits-modification-methods-or-indexing-restrictions" class="common-anchor-header">Apa saja batasan-batasan dalam menggunakan field dinamis? Sebagai contoh, apakah ada batasan ukuran, metode modifikasi, atau batasan pengindeksan?</h4><p>Field dinamis direpresentasikan secara internal menggunakan field JSON, dengan batas ukuran 65.536 byte. Mereka mendukung modifikasi yang dapat dilakukan, sehingga Anda dapat menambah atau memperbarui field. Namun, sejak Milvus 2.5.1, field dinamis tidak mendukung pengindeksan. Dukungan untuk menambahkan indeks untuk JSON akan diperkenalkan pada rilis mendatang.</p>
+<h4 id="Does-Milvus-support-schema-changes" class="common-anchor-header">Apakah Milvus mendukung perubahan skema?</h4><p>Pada Milvus versi 2.5.0, perubahan skema terbatas pada modifikasi tertentu, seperti menyesuaikan properti seperti parameter <code translate="no">mmap</code>. Pengguna juga dapat memodifikasi <code translate="no">max_length</code> untuk field varchar dan <code translate="no">max_capacity</code> untuk field array. Namun, kemampuan untuk menambah atau menghapus field dalam skema direncanakan untuk rilis mendatang, untuk meningkatkan fleksibilitas manajemen skema dalam Milvus.</p>
+<h4 id="Does-modifying-maxlength-for-VarChar-require-data-reorganization" class="common-anchor-header">Apakah memodifikasi max_length untuk VarChar memerlukan reorganisasi data?</h4><p>Tidak, memodifikasi <code translate="no">max_length</code> untuk field VarChar tidak memerlukan reorganisasi data, seperti pemadatan atau reorganisasi. Penyesuaian ini terutama memperbarui kriteria validasi untuk setiap data baru yang dimasukkan ke dalam bidang, sehingga data yang sudah ada tidak terpengaruh. Akibatnya, perubahan ini dianggap ringan dan tidak membebankan biaya tambahan yang signifikan pada sistem.</p>
+<h4 id="Still-have-questions" class="common-anchor-header">Masih memiliki pertanyaan?</h4><p>Tentu saja bisa:</p>
 <ul>
-<li>Lihat <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> di GitHub. Anda dapat mengajukan pertanyaan, berbagi ide, dan membantu orang lain.</li>
+<li>Lihat <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> di GitHub. Anda dipersilakan untuk mengajukan pertanyaan, berbagi ide, dan membantu orang lain.</li>
 <li>Bergabunglah dengan <a href="https://slack.milvus.io/">komunitas Slack</a> kami untuk mendapatkan dukungan dan terlibat dengan komunitas sumber terbuka kami.</li>
 </ul>

@@ -198,8 +198,11 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 可以只載入搜尋和查詢所涉及的欄位，以減少記憶體使用量並改善搜尋效能。</p>
-<p>下面的程式碼片段假設您建立了一個名為<strong>customized_setup_2</strong> 的集合，集合中有兩個名為<strong>my_id</strong>和<strong>my_vector</strong>的欄位。</p>
+    </button></h2><p>Milvus 可以只載入搜尋和查詢所涉及的欄位，減少記憶體使用量並改善搜尋效能。</p>
+<div class="alert note">
+<p>部分集合載入目前還處於測試階段，不建議在生產中使用。</p>
+</div>
+<p>以下程式碼片段假設您建立了一個名為<strong>customized_setup_2</strong> 的集合，且集合中有兩個名為<strong>my_id</strong>和<strong>my_vector</strong>的欄位。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_collection(​

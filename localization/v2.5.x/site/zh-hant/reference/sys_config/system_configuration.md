@@ -62,7 +62,7 @@ summary: 了解 Milvus 的系統設定。
 <p>請參閱<a href="/docs/zh-hant/configure_pulsar.md">pulsar 相關設定</a>，以瞭解本節下每個參數的詳細說明。</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>如果你想啟用 kafka，需要註解 pulsar configs</p>
 <p>kafka：</p>
-<p>brokerList：</p>
+<p>brokerList: localhost:9092</p>
 <p>saslUsername：</p>
 <p>saslPassword：</p>
 <p>saslMechanisms：</p>
@@ -100,9 +100,11 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>設定系統日誌輸出。</p>
 <p>請參閱<a href="/docs/zh-hant/configure_log.md">log-related Configurations</a>以取得本節下各參數的詳細說明。</p>
 <h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>本節下各參數的詳細說明，請參閱<a href="/docs/zh-hant/configure_grpc.md">grpc 相關組態</a>。</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>設定代理 tls 啟用。</p>
-<p>請參閱<a href="/docs/zh-hant/configure_tls.md">tls 相關組態</a>，以取得本節下各參數的詳細說明。</p>
-<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>本節下各參數的詳細說明，請參閱<a href="/docs/zh-hant/configure_common.md">共用相關</a>組態。</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>設定外部 tls。</p>
+<p>請參閱<a href="/docs/zh-hant/configure_tls.md">tls 相關設定</a>，以取得本節下各參數的詳細說明。</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code></h3><p>設定內部 tls。</p>
+<p>請參閱<a href="/docs/zh-hant/configure_internaltls.md">internaltls 相關組態</a>，以取得本節下各參數的詳細說明。</p>
+<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>本節下各參數的詳細說明，請參閱<a href="/docs/zh-hant/configure_common.md">共用相關組態</a>。</p>
 <h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig, Milvus 配額和限制的設定。</p>
 <p>預設啟用：</p>
 <ol>
@@ -127,3 +129,9 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#milvus 將自動初始化一半可用的 GPU 記憶體、</p>
 <p>#maxMemSize 將會是整個可用的 GPU 記憶體。</p>
 <p>請參閱<a href="/docs/zh-hant/configure_gpu.md">gpu 相關組態</a>，以取得本節下各參數的詳細說明。</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>任何與串流節點伺服器相關的設定。</p>
+<p>請參閱<a href="/docs/zh-hant/configure_streamingnode.md">streamingNode-related Configurations</a>，以瞭解本節下每個參數的詳細說明。</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>任何與串流服務相關的設定。</p>
+<p>請參閱<a href="/docs/zh-hant/configure_streaming.md">串流相關設定</a>，以取得本節下各參數的詳細說明。</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>任何與 knowhere 向量搜尋引擎相關的設定</p>
+<p>請參閱<a href="/docs/zh-hant/configure_knowhere.md">knowhere 相關設定</a>，以取得本節下各參數的詳細說明。</p>

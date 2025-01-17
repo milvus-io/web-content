@@ -109,7 +109,7 @@ summary: Milvus용 미니오를 구성하는 방법을 알아보세요.
   <tbody>
     <tr>
       <td>
-        <li>MinIO 또는 S3가 권한이 부여된 액세스를 위해 사용자에게 발급하는 액세스 키 ID입니다.</li>      
+        <li>MinIO 또는 S3가 권한 있는 액세스를 위해 사용자에게 발급하는 액세스 키 ID입니다.</li>      
         <li>환경 변수입니다: MINIO_ACCESS_KEY_ID 또는 minio.accessKeyID</li>      
         <li>미니오.액세스키ID와 미니오.비밀 액세스키를 함께 사용하면 MinIO 또는 S3 서비스에 액세스하기 위한 신원 인증에 사용됩니다.</li>      
         <li>이 구성은 MinIO 또는 S3를 시작하는 데 필요한 환경 변수 MINIO_ACCESS_KEY_ID와 동일하게 설정해야 합니다.</li>      
@@ -272,7 +272,7 @@ summary: Milvus용 미니오를 구성하는 방법을 알아보세요.
       <td>
         <li>Milvus가 MinIO 또는 S3에 데이터를 저장하는 키의 루트 접두사입니다.</li>      
         <li>Milvus를 처음 시작하기 전에 이 매개변수를 변경하는 것이 좋습니다.</li>      
-        <li>여러 Milvus 인스턴스 간에 MinIO 인스턴스를 공유하려면 각 Milvus 인스턴스를 시작하기 전에 이 값을 다른 값으로 변경하는 것을 고려하세요. 자세한 내용은 운영 FAQ를 참조하세요.</li>      
+        <li>여러 Milvus 인스턴스 간에 MinIO 인스턴스를 공유하려면 각 Milvus 인스턴스를 시작하기 전에 이 값을 다른 값으로 변경하는 것이 좋습니다. 자세한 내용은 운영 FAQ를 참조하세요.</li>      
         <li>etcd 서비스가 이미 존재하는 경우 Milvus에 대해 식별하기 쉬운 루트 키 접두사를 설정합니다.</li>      
         <li>이미 실행 중인 Milvus 인스턴스에 대해 이 값을 변경하면 레거시 데이터를 읽지 못할 수 있습니다.</li>      </td>
       <td>파일</td>
@@ -339,12 +339,46 @@ summary: Milvus용 미니오를 구성하는 방법을 알아보세요.
   <tbody>
     <tr>
       <td>
-        <li>S3의 클라우드 공급업체입니다. 지원 "aws", "gcp", "aliyun".</li>      
+        <li>S3의 클라우드 공급업체입니다. 지원 "AWS", "GCP", "ALIYUN".</li>      
+        <li>Google 클라우드 스토리지의 클라우드 제공업체. 지원: "gcpnative".</li>      
         <li>다른 클라우드 제공업체가 서명 v4로 S3 API를 지원하는 경우 "aws"를 사용할 수 있습니다(예: minio).</li>      
         <li>다른 클라우드 제공업체가 서명 v2의 S3 API를 지원하는 경우 "gcp"를 사용할 수 있습니다.</li>      
         <li>가상 호스트 스타일 버킷을 사용하는 다른 클라우드 공급자의 경우 "aliyun"을 사용할 수 있습니다.</li>      
-        <li>사용IAM 활성화 시, 현재는 "aws", "gcp", "aliyun"만 지원됩니다.</li>      </td>
+        <li>구글 클라우드 플랫폼 제공업체의 경우 "gcpnative"를 사용할 수 있습니다. 서비스 계정 자격 증명 사용</li>      
+        <li>을 사용합니다.</li>      
+        <li>사용IAM 사용 시 현재 "aws", "gcp", "aliyun"만 지원됩니다.</li>      </td>
       <td>aws</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="miniogcpCredentialJSON" class="common-anchor-header"><code translate="no">minio.gcpCredentialJSON</code><button data-href="#miniogcpCredentialJSON" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="minio.gcpCredentialJSON">
+  <thead>
+    <tr>
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>JSON 콘텐츠에 gcs 서비스 계정 자격 증명이 포함됩니다.</li>      
+        <li>"gcpnative" 클라우드 공급자에만 사용됩니다.</li>      </td>
+      <td></td>
     </tr>
   </tbody>
 </table>
@@ -373,7 +407,7 @@ summary: Milvus용 미니오를 구성하는 방법을 알아보세요.
   <tbody>
     <tr>
       <td>
-        <li>IAM 역할 자격 증명을 가져오기 위한 사용자 지정 엔드포인트입니다. useIAM이 true이고 cloudProvider가 "aws"인 경우.</li>      
+        <li>IAM 역할 자격 증명을 가져오기 위한 사용자 지정 엔드포인트입니다. 사용IAM이 참이고 cloudProvider가 "aws"인 경우.</li>      
         <li>AWS 기본 엔드포인트를 사용하려면 비워둡니다.</li>      </td>
       <td></td>
     </tr>

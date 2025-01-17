@@ -191,7 +191,7 @@ summary: 'Erfahren Sie, wie Sie queryCoord für Milvus konfigurieren können.'
   </thead>
   <tbody>
     <tr>
-      <td>        der kleinste Wert für unausgeglichene Ausdehnung zwischen from- und to-Knoten beim Ausgleichen      </td>
+      <td>        der kleinste Wert für die unausgeglichene Ausdehnung zwischen from- und to-Knoten beim Ausgleichen      </td>
       <td>0.05</td>
     </tr>
   </tbody>
@@ -336,7 +336,7 @@ summary: 'Erfahren Sie, wie Sie queryCoord für Milvus konfigurieren können.'
   </thead>
   <tbody>
     <tr>
-      <td>        die Zeilenzahlgewichtung, die beim Ausgleich von Segmenten zwischen QueryNodes verwendet wird    </td>
+      <td>        die Zeilenzahlgewichtung, die beim Segmentausgleich zwischen QueryNodes verwendet wird    </td>
       <td>0.4</td>
     </tr>
   </tbody>
@@ -396,6 +396,37 @@ summary: 'Erfahren Sie, wie Sie queryCoord für Milvus konfigurieren können.'
     <tr>
       <td>        die Segmentanzahlgewichtung, die beim Ausgleich von Segmenten zwischen QueryNodes verwendet wird    </td>
       <td>0.1</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="queryCoordcollectionChannelCountFactor" class="common-anchor-header"><code translate="no">queryCoord.collectionChannelCountFactor</code><button data-href="#queryCoordcollectionChannelCountFactor" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="queryCoord.collectionChannelCountFactor">
+  <thead>
+    <tr>
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>die Kanalanzahlgewichtung, die beim Ausgleich von Kanälen zwischen QueryNodes verwendet wird, </li>      
+        <li>        Ein höherer Wert verringert die Wahrscheinlichkeit, dass Kanäle aus derselben Sammlung demselben Abfrageknoten zugewiesen werden. Setzen Sie auf 1, um diese Funktion zu deaktivieren.</li>      </td>
+      <td>10</td>
     </tr>
   </tbody>
 </table>
@@ -1061,7 +1092,7 @@ summary: 'Erfahren Sie, wie Sie queryCoord für Milvus konfigurieren können.'
   </thead>
   <tbody>
     <tr>
-      <td>        das Intervall, in dem das Flag "Check executed" zum Ziehen von Distanzen erzwungen wird    </td>
+      <td>        das Intervall für das Flag "Check executed", um das Ziehen von Distanzen zu erzwingen      </td>
       <td>100</td>
     </tr>
   </tbody>
@@ -1090,7 +1121,7 @@ summary: 'Erfahren Sie, wie Sie queryCoord für Milvus konfigurieren können.'
   </thead>
   <tbody>
     <tr>
-      <td>        5m, maximales Intervall für die Aktualisierung des Status der geladenen Sammlung      </td>
+      <td>        5m, maximales Intervall für die Aktualisierung des Status "Sammlung geladen" für die Gesundheitsprüfung      </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -1119,7 +1150,7 @@ summary: 'Erfahren Sie, wie Sie queryCoord für Milvus konfigurieren können.'
   </thead>
   <tbody>
     <tr>
-      <td>        die Zeitdauer des Ausschlusssegments der sauberen Pipeline, das zum Filtern ungültiger Daten verwendet wird, in Sekunden      </td>
+      <td>        die Dauer des Ausschlusssegments der sauberen Pipeline, das zum Filtern ungültiger Daten verwendet wird, in Sekunden      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -1148,7 +1179,7 @@ summary: 'Erfahren Sie, wie Sie queryCoord für Milvus konfigurieren können.'
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP-Adresse von queryCoord. Wenn nicht angegeben, wird die erste unicastbare Adresse verwendet.      </td>
+      <td>        TCP/IP-Adresse von queryCoord. Wenn nicht angegeben, wird die erste unicastbare Adresse verwendet      </td>
       <td></td>
     </tr>
   </tbody>

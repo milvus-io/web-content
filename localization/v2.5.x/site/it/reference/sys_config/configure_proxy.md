@@ -19,7 +19,7 @@ summary: Imparare a configurare il proxy per Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Configurazione correlata del proxy, utilizzata per convalidare le richieste del client e ridurre i risultati restituiti.</p>
+    </button></h1><p>Configurazione correlata del proxy, usata per convalidare le richieste del client e ridurre i risultati restituiti.</p>
 <h2 id="proxytimeTickInterval" class="common-anchor-header"><code translate="no">proxy.timeTickInterval</code><button data-href="#proxytimeTickInterval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +44,7 @@ summary: Imparare a configurare il proxy per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        L'intervallo con cui il proxy sincronizza il time tick, unità di misura: ms.      </td>
+      <td>        L'intervallo di tempo in cui il proxy sincronizza il time tick, unità: ms.      </td>
       <td>200</td>
     </tr>
   </tbody>
@@ -160,7 +160,7 @@ summary: Imparare a configurare il proxy per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Il numero massimo di campi che possono essere creati quando si crea una collezione. È fortemente sconsigliato impostare maxFieldNum &gt;= 64.      </td>
+      <td>        Il numero massimo di campi che possono essere creati quando si crea una collezione. Si sconsiglia vivamente di impostare maxFieldNum &gt;= 64.      </td>
       <td>64</td>
     </tr>
   </tbody>
@@ -341,6 +341,64 @@ summary: Imparare a configurare il proxy per Milvus.
     </tr>
   </tbody>
 </table>
+<h2 id="proxyddlConcurrency" class="common-anchor-header"><code translate="no">proxy.ddlConcurrency</code><button data-href="#proxyddlConcurrency" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="proxy.ddlConcurrency">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Il numero di esecuzioni simultanee di DDL nel proxy.      </td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="proxydclConcurrency" class="common-anchor-header"><code translate="no">proxy.dclConcurrency</code><button data-href="#proxydclConcurrency" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="proxy.dclConcurrency">
+  <thead>
+    <tr>
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        Il numero di esecuzioni simultanee di DCL al proxy.      </td>
+      <td>16</td>
+    </tr>
+  </tbody>
+</table>
 <h2 id="proxymustUsePartitionKey" class="common-anchor-header"><code translate="no">proxy.mustUsePartitionKey</code><button data-href="#proxymustUsePartitionKey" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -365,7 +423,7 @@ summary: Imparare a configurare il proxy per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        interruttore per stabilire se il proxy deve usare la chiave di partizione per la raccolta      </td>
+      <td>        interruttore per stabilire se il proxy deve usare la chiave di partizione per la collezione      </td>
       <td>falso</td>
     </tr>
   </tbody>
@@ -713,7 +771,7 @@ summary: Imparare a configurare il proxy per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        durata TTL delle informazioni sul client inattivo, in secondi      </td>
+      <td>        durata del TTL delle informazioni sul client inattivo, in secondi      </td>
       <td>86400</td>
     </tr>
   </tbody>
@@ -771,7 +829,7 @@ summary: Imparare a configurare il proxy per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        secondi. forzare l'arresto del nodo senza l'arresto graduale      </td>
+      <td>        secondi. forzare l'arresto del nodo senza l'arresto di grazia      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -974,7 +1032,7 @@ summary: Imparare a configurare il proxy per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Se abilitare il middleware pprof sulla porta delle metriche      </td>
+      <td>        Se abilitare il middleware pprof sulla porta metrica      </td>
       <td>vero</td>
     </tr>
   </tbody>
@@ -1003,7 +1061,7 @@ summary: Imparare a configurare il proxy per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Indirizzo TCP/IP del proxy. Se non viene specificato, viene utilizzato il primo indirizzo unicastable.      </td>
+      <td>        Indirizzo TCP/IP del proxy. Se non viene specificato, viene utilizzato il primo indirizzo non ciclabile.      </td>
       <td></td>
     </tr>
   </tbody>

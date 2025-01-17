@@ -199,6 +199,9 @@ curl --request POST \​
         ></path>
       </svg>
     </button></h2><p>يمكن ل Milvus تحميل الحقول المتضمنة في عمليات البحث والاستعلامات فقط، مما يقلل من استخدام الذاكرة ويحسن أداء البحث.</p>
+<div class="alert note">
+<p>التحميل الجزئي للمجموعة هو حاليًا في مرحلة تجريبية ولا يوصى باستخدامه في الإنتاج.</p>
+</div>
 <p>يفترض مقتطف الشيفرة التالي أنك أنشأت مجموعة باسم <strong>customized_setup_2 مخصصة،</strong> وهناك حقلين باسم <strong>my_id</strong> و <strong>my_vector</strong> في المجموعة.</p>
 <div class="multipleCode">
  <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>

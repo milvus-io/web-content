@@ -1472,26 +1472,26 @@
             "isMenu": true,
             "children": [
               {
+                "label": "Sauvegarde et restauration en une seule instance",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "Migrer d'une instance à l'autre dans un même panier",
                 "id": "shared-bucket-backup-and-restore.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Migrer entre les instances et entre les différents bacs",
                 "id": "cross-bucket-backup-and-restore.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Migrer d'une instance à l'autre dans un environnement S3",
                 "id": "multi-storage-backup-and-restore.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Sauvegarde et restauration en une seule instance",
-                "id": "single-instance-backup-and-restore.md",
                 "order": 3,
                 "children": []
               }

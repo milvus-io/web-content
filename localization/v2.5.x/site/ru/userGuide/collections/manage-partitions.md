@@ -401,7 +401,7 @@ curl --request POST \​
         ></path>
       </svg>
     </button></h2><p>Вы можете отдельно загрузить или освободить один или несколько разделов.</p>
-<h3 id="Load-Partitions​" class="common-anchor-header">Загрузка разделов</h3><p>Вы можете отдельно загрузить определенные разделы в коллекцию. Стоит отметить, что статус загрузки коллекции остается незагруженным, если в коллекции есть незагруженный раздел.</p>
+<h3 id="Load-Partitions​" class="common-anchor-header">Загрузка разделов</h3><p>Вы можете отдельно загрузить определенные разделы в коллекции. Стоит отметить, что статус загрузки коллекции остается незагруженным, если в коллекции есть незагруженный раздел.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_partitions(​
@@ -617,14 +617,14 @@ curl --request POST \​
       </svg>
     </button></h2><h3 id="Insert-and-Delete-Entities​" class="common-anchor-header">Вставка и удаление объектов</h3><p>Вы можете выполнять операции вставки, апсерт и удаления в определенных операциях. Для получения подробной информации см.</p>
 <ul>
-<li><p>Вставка сущностей в раздел</p></li>
-<li><p>Вставить сущности в раздел</p></li>
-<li><p>Удалить сущности из раздела</p></li>
+<li><p><a href="/docs/ru/insert-update-delete.md#Insert-Entities-into-a-Partition">Вставка сущностей в раздел</a></p></li>
+<li><p><a href="/docs/ru/upsert-entities.md#Upsert-Entities-in-a-Partition">Вставить сущности в раздел</a></p></li>
+<li><p><a href="/docs/ru/delete-entities.md#Delete-Entities-from-Partitions">Удалить сущности из раздела</a></p></li>
 </ul>
 <h3 id="Search-and-Query​" class="common-anchor-header">Поиск и запросы</h3><p>Вы можете выполнять поиск и запросы в определенных разделах. Для получения подробной информации см.</p>
 <ul>
-<li><p>Проведение поиска ANN в разделах</p></li>
-<li><p>Проведение фильтрации метаданных в разделах</p></li>
+<li><p><a href="/docs/ru/single-vector-search.md#ANN-Search-in-Partition">Проведение поиска ANN в разделах</a></p></li>
+<li><p><a href="/docs/ru/filtered-search.md">Проведение фильтрации метаданных в разделах</a></p></li>
 </ul>
 <h2 id="Drop-Partition​" class="common-anchor-header">Сбросить раздел<button data-href="#Drop-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"

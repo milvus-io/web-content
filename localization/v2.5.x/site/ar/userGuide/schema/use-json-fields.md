@@ -519,5 +519,6 @@ System.out.println(resp.getSearchResults());​
 <li><p><strong>مطابقة نوع البيانات</strong>: إذا كانت قيمة المفتاح لحقل JSON عبارة عن عدد صحيح أو نقطة عائمة، فلا يمكن مقارنتها إلا مع مفتاح آخر صحيح أو عائم أو <code translate="no">INT32/64</code> أو <code translate="no">FLOAT32/64</code>. إذا كانت قيمة المفتاح سلسلة (<code translate="no">VARCHAR</code>)، فلا يمكن مقارنتها إلا مع مفتاح سلسلة آخر.</p></li>
 <li><p><strong>قيود التسمية</strong>: عند تسمية مفاتيح JSON، يوصى باستخدام الأحرف والأحرف الرقمية والأحرف السفلية فقط، لأن الأحرف الأخرى قد تسبب مشاكل أثناء التصفية أو البحث.</p></li>
 <li><p><strong>التعامل مع قيم السلسلة</strong>: بالنسبة لقيم السلسلة (<code translate="no">VARCHAR</code>)، يخزن Milvus سلاسل حقول JSON كما هي دون تحويل دلالي. على سبيل المثال <code translate="no">'a&quot;b'</code> <code translate="no">&quot;a'b&quot;</code> و <code translate="no">'a\\'b'</code> و و <code translate="no">&quot;a\\&quot;b&quot;</code> يتم تخزينها كما تم إدخالها ؛ ومع ذلك، <code translate="no">'a'b'</code> و <code translate="no">&quot;a&quot;b&quot;</code> تعتبر غير صالحة.</p></li>
-<li><p><strong>التعامل مع القواميس المتداخلة</strong>: يتم التعامل مع أي قواميس متداخلة داخل قيم حقول JSON كسلاسل.</p></li>
+<li><p><strong>التعامل مع القواميس المتداخلة</strong>: يتم التعامل مع أي قواميس متداخلة داخل قيم حقول JSON على أنها سلاسل.</p></li>
+<li><p><strong>حد حجم حقل JSON</strong>: تقتصر حقول JSON على 65,536 بايت.</p></li>
 </ul>

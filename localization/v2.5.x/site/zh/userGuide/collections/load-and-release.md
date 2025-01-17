@@ -199,7 +199,10 @@ curl --request POST \​
         ></path>
       </svg>
     </button></h2><p>Milvus 可以只加载搜索和查询所涉及的字段，从而减少内存使用并提高搜索性能。</p>
-<p>下面的代码片段假定您创建了名为<strong>customized_setup_2 的</strong> Collections，且该 Collection 中有名为<strong>my_id</strong>和<strong>my_vector 的</strong>两个字段。</p>
+<div class="alert note">
+<p>部分 Collections 加载目前还处于测试阶段，不建议在生产中使用。</p>
+</div>
+<p>以下代码片段假定您创建了名为<strong>customized_setup_2 的</strong> Collection，且 Collection 中有名为<strong>my_id</strong>和<strong>my_vector 的</strong>两个字段。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_collection(​

@@ -57,13 +57,13 @@ title: パーティションの管理
       </svg>
     </button></h2><p>以下のコードスニペットは、既存のコードを再利用し、Milvusへの接続を確立し、クイックセットアップモードでコレクションを作成します。</p>
 <div class="language-python">
-<p>準備には <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>でMilvusに接続し <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>を使用して、クイックセットアップモードでコレクションを作成します。</p>
+<p>準備のために <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>でMilvusに接続し <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>を使用して、クイックセットアップモードでコレクションを作成します。</p>
 </div>
 <div class="language-java">
 <p>準備の場合 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>を使ってMilvusに接続し <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>クイックセットアップモードでコレクションを作成します。</p>
 </div>
 <div class="language-javascript">
-<p>準備のために <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>でMilvusに接続し <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>コレクションをクイックセットアップで作成します。</p>
+<p>準備の場合は <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>でMilvusに接続し <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>コレクションをクイックセットアップで作成します。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -199,7 +199,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションにパーティションを追加できます。コレクションは最大1,024パーティションを持つことができます。</p>
+    </button></h2><p>コレクションにパーティションを追加できます。コレクションは、最大4,096パーティションを持つことができます。</p>
 <div class="language-python">
 <p>パーティションを作成するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/create_partition.md"><code translate="no">create_partition()</code></a>.</p>
 </div>
@@ -389,7 +389,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// false</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコード・スニペットは、コレクションに<code translate="no">partitionA</code> と<code translate="no">partitionC</code> という名前のパーティションがあるかどうかをチェックします。</p>
+<p>上記のコード・スニペットは、コレクションに<code translate="no">partitionA</code> と<code translate="no">partitionC</code> というパーティションがあるかどうかをチェックします。</p>
 <h2 id="Load--Release-Partitions" class="common-anchor-header">パーティションのロードと解放<button data-href="#Load--Release-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -584,7 +584,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>パーティションの少なくとも1つがロード中であれば、コレクションはLoadingとマークされます。</p></li>
 </ul>
 <h3 id="Load-Partitions" class="common-anchor-header">パーティションのロード</h3><div class="language-python">
-<p>コレクションのすべてのパーティションをロードするには、単に <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a>.コレクション内の特定のパーティションをロードするには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/load_partitions.md"><code translate="no">load_partitions()</code></a>.</p>
+<p>コレクションのすべてのパーティションをロードするには、単に <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a>.コレクションの特定のパーティションをロードするには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/load_partitions.md"><code translate="no">load_partitions()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>コレクションのすべてのパーティションをロードするには、単に <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/loadCollection.md"><code translate="no">loadCollection()</code></a>.コレクションの特定のパーティションをロードするには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/loadPartitions.md"><code translate="no">loadPartitions()</code></a>.</p>

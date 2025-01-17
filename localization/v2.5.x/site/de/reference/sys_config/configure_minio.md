@@ -238,7 +238,7 @@ summary: 'Erfahren Sie, wie Sie minio für Milvus konfigurieren.'
         <li>Name des Buckets, in dem Milvus Daten in MinIO oder S3 speichert.</li>      
         <li>Milvus 2.0.0 unterstützt nicht die Speicherung von Daten in mehreren Buckets.</li>      
         <li>Der Bucket mit diesem Namen wird erstellt, wenn er nicht existiert. Wenn der Bucket bereits existiert und zugänglich ist, wird er direkt verwendet. Andernfalls wird ein Fehler ausgegeben.</li>      
-        <li>Wenn Sie eine MinIO-Instanz für mehrere Milvus-Instanzen freigeben möchten, sollten Sie diesen Wert für jede Milvus-Instanz ändern, bevor Sie sie starten. Einzelheiten finden Sie in den FAQs zum Betrieb.</li>      
+        <li>Um eine MinIO-Instanz auf mehrere Milvus-Instanzen aufzuteilen, sollten Sie diesen Wert für jede Milvus-Instanz auf einen anderen Wert ändern, bevor Sie sie starten. Einzelheiten finden Sie in den FAQs zum Betrieb.</li>      
         <li>Die Daten werden im lokalen Docker gespeichert, wenn Docker verwendet wird, um den MinIO-Dienst lokal zu starten. Stellen Sie sicher, dass ausreichend Speicherplatz vorhanden ist.</li>      
         <li>Ein Bucket-Name ist in einer MinIO- oder S3-Instanz global eindeutig.</li>      </td>
       <td>a-bucket</td>
@@ -270,10 +270,10 @@ summary: 'Erfahren Sie, wie Sie minio für Milvus konfigurieren.'
   <tbody>
     <tr>
       <td>
-        <li>Root-Präfix des Schlüssels, in dem Milvus Daten in MinIO oder S3 speichert.</li>      
+        <li>Wurzelpräfix des Schlüssels, in dem Milvus Daten in MinIO oder S3 speichert.</li>      
         <li>Es wird empfohlen, diesen Parameter zu ändern, bevor Sie Milvus zum ersten Mal starten.</li>      
         <li>Wenn Sie eine MinIO-Instanz für mehrere Milvus-Instanzen freigeben möchten, sollten Sie diesen Wert für jede Milvus-Instanz ändern, bevor Sie sie starten. Einzelheiten finden Sie in den FAQs zum Betrieb.</li>      
-        <li>Legen Sie ein einfach zu identifizierendes Root-Key-Präfix für Milvus fest, wenn der etcd-Dienst bereits existiert.</li>      
+        <li>Legen Sie ein einfach zu identifizierendes Root-Schlüsselpräfix für Milvus fest, wenn der etcd-Dienst bereits existiert.</li>      
         <li>Das Ändern dieses Wertes für eine bereits laufende Milvus-Instanz kann zu Fehlern beim Lesen von Legacy-Daten führen.</li>      </td>
       <td>Dateien</td>
     </tr>
@@ -340,11 +340,45 @@ summary: 'Erfahren Sie, wie Sie minio für Milvus konfigurieren.'
     <tr>
       <td>
         <li>Cloud-Anbieter von S3. Unterstützt: "aws", "gcp", "aliyun".</li>      
+        <li>Cloud-Anbieter von Google Cloud Storage. Unterstützt: "gcpnative".</li>      
         <li>Sie können "aws" für andere Cloud-Anbieter verwenden, die S3 API mit Signatur v4 unterstützen, z.B.: minio</li>      
         <li>Sie können "gcp" für andere Cloud-Anbieter verwenden, die S3-API mit Signatur v2 unterstützen.</li>      
         <li>Sie können "aliyun" verwenden, wenn ein anderer Cloud-Anbieter einen Bucket im Stil eines virtuellen Hosts verwendet.</li>      
+        <li>Sie können "gcpnative" für den Google Cloud Platform-Anbieter verwenden. Verwendet die Anmeldedaten des Dienstkontos</li>      
+        <li>für die Authentifizierung.</li>      
         <li>Wenn useIAM aktiviert ist, werden derzeit nur "aws", "gcp" und "aliyun" unterstützt</li>      </td>
       <td>aws</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="miniogcpCredentialJSON" class="common-anchor-header"><code translate="no">minio.gcpCredentialJSON</code><button data-href="#miniogcpCredentialJSON" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="minio.gcpCredentialJSON">
+  <thead>
+    <tr>
+      <th class="width80">Beschreibung</th>
+      <th class="width20">Standardwert</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Der JSON-Inhalt enthält die Anmeldedaten für das gcs-Dienstkonto.</li>      
+        <li>Wird nur für den Cloud-Anbieter "gcpnative" verwendet.</li>      </td>
+      <td></td>
     </tr>
   </tbody>
 </table>
@@ -373,7 +407,7 @@ summary: 'Erfahren Sie, wie Sie minio für Milvus konfigurieren.'
   <tbody>
     <tr>
       <td>
-        <li>Benutzerdefinierter Endpunkt für das Abrufen von IAM-Rollenanmeldeinformationen, wenn useIAM wahr ist und cloudProvider "aws" ist.</li>      
+        <li>Benutzerdefinierter Endpunkt zum Abrufen von IAM-Rollenanmeldeinformationen, wenn useIAM wahr und cloudProvider "aws" ist.</li>      
         <li>Lassen Sie es leer, wenn Sie den AWS-Standardendpunkt verwenden möchten.</li>      </td>
       <td></td>
     </tr>

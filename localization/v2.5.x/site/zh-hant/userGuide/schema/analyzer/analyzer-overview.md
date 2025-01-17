@@ -46,9 +46,12 @@ summary: >-
     </button></h2><p>Milvus 的分析器包含一個<strong>標記器</strong>和<strong>零個或多個</strong>過濾器。</p>
 <ul>
 <li><p><strong>標記器</strong>：標記器將輸入文字分割成稱為標記的獨立單位。這些標記可以是單字或短語，取決於標記器類型。</p></li>
-<li><p><strong>篩選器</strong>：篩選器可套用至標記，以進一步精細標記，例如將標記改成小寫或移除常用字。</p></li>
+<li><p><strong>篩選器</strong>：篩選器可應用於標記，以進一步精細它們，例如，使它們小寫或移除常用字。</p></li>
 </ul>
-<p>以下的工作流程顯示分析器如何處理文字。</p>
+<div class="alert note">
+<p>標記器只支援 UTF-8 格式。其他格式的支援將在未來的版本中加入。</p>
+</div>
+<p>下面的工作流程顯示分析器如何處理文字。</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/analyzer-overview.png" alt="analyzer-overview" width="400"/></p>
 <h2 id="Analyzer-types​" class="common-anchor-header">分析器類型<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -211,7 +214,7 @@ analyzerParams.<span class="hljs-title function_">put</span>(<span class="hljs-s
 <ul>
 <li><p><code translate="no">stop</code>:透過設定停止詞清單 (例如<code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>)，移除指定的常用字。詳情請參閱<a href="/docs/zh-hant/stop-filter.md">停止</a>。</p></li>
 <li><p><code translate="no">length</code>:根據長度標準排除標記，例如設定最大標記長度。詳情請參閱<a href="/docs/zh-hant/length-filter.md">Length</a>。</p></li>
-<li><p><code translate="no">stemmer</code>:將字詞縮減為字根形式，以便進行更靈活的匹配。詳情請參閱<a href="/docs/zh-hant/stemmer-filter.md">Stemmer</a>。</p></li>
+<li><p><code translate="no">stemmer</code>:將字詞縮減為字根形式，以便進行更靈活的匹配。如需詳細資訊，請參閱<a href="/docs/zh-hant/stemmer-filter.md">Stemmer</a>。</p></li>
 </ul>
 <p><strong>設定自訂篩選器的範例</strong>：</p>
 <p><div class="multipleCode">

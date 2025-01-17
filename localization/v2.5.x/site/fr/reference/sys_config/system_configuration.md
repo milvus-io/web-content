@@ -62,7 +62,7 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu'après avoir
 <p>Voir <a href="/docs/fr/configure_pulsar.md">Configurations liées à pulsar</a> pour une description détaillée de chaque paramètre de cette section.</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>Si vous souhaitez activer kafka, vous devez commenter les configurations de pulsar</p>
 <p>kafka :</p>
-<p>brokerList :</p>
+<p>brokerList : localhost:9092</p>
 <p>saslUsername :</p>
 <p>saslPassword :</p>
 <p>saslMechanisms :</p>
@@ -82,7 +82,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>Voir les <a href="/docs/fr/configure_rocksmq.md">configurations liées à rocksmq</a> pour une description détaillée de chaque paramètre de cette section.</p>
 <h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code></h3><p>Configuration natsmq.</p>
 <p>plus de détails : https://docs.nats.io/running-a-nats-service/configuration</p>
-<p>Voir les <a href="/docs/fr/configure_natsmq.md">configurations liées à natsmq</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<p>Voir les <a href="/docs/fr/configure_natsmq.md">configurations relatives à natsmq</a> pour une description détaillée de chaque paramètre de cette section.</p>
 <h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code></h3><p>Configuration connexe de rootCoord, utilisée pour traiter les requêtes en langage de définition des données (DDL) et en langage de contrôle des données (DCL).</p>
 <p>Voir les <a href="/docs/fr/configure_rootcoord.md">configurations relatives à rootCoord</a> pour une description détaillée de chaque paramètre de cette section.</p>
 <h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code></h3><p>Configuration connexe du proxy, utilisée pour valider les demandes des clients et réduire les résultats renvoyés.</p>
@@ -99,12 +99,14 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>Voir <a href="/docs/fr/configure_msgchannel.md">Configurations liées au canal de messages</a> pour une description détaillée de chaque paramètre de cette section.</p>
 <h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>Configure la sortie du journal du système.</p>
 <p>Voir les <a href="/docs/fr/configure_log.md">Configurations relatives au journal</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>Voir les <a href="/docs/fr/configure_grpc.md">configurations relatives à grpc</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Configure l'activation du proxy tls.</p>
+<h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>Voir les <a href="/docs/fr/configure_grpc.md">configurations liées à grpc</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Configure external tls.</p>
 <p>Voir les <a href="/docs/fr/configure_tls.md">configurations relatives à tls</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code></h3><p>Configure internal tls.</p>
+<p>Voir les <a href="/docs/fr/configure_internaltls.md">configurations liées à internaltls</a> pour une description détaillée de chaque paramètre de cette section.</p>
 <h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>Voir les <a href="/docs/fr/configure_common.md">configurations liées à common</a> pour une description détaillée de chaque paramètre de cette section.</p>
 <h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig, configuration des quotas et des limites de Milvus.</p>
-<p>Par défaut, nous activons</p>
+<p>Par défaut, nous activons :</p>
 <ol>
 <li><p>Protection TT ;</p></li>
 <li><p>Protection de la mémoire.</p></li>
@@ -126,4 +128,10 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#Si initMemSize et MaxMemSize sont tous deux à zéro,</p>
 <p>#Milvus initialisera automatiquement la moitié de la mémoire GPU disponible,</p>
 <p>#maxMemSize initialisera la totalité de la mémoire disponible sur le GPU.</p>
-<p>Voir les <a href="/docs/fr/configure_gpu.md">Configurations liées au GPU</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<p>Voir <a href="/docs/fr/configure_gpu.md">Configurations liées au GPU</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>Toute configuration liée au serveur de nœuds de streaming.</p>
+<p>Voir les <a href="/docs/fr/configure_streamingnode.md">Configurations liées au nœud de streaming</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>Toute configuration liée au service de diffusion en continu.</p>
+<p>Voir les <a href="/docs/fr/configure_streaming.md">Configurations liées au streaming</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>Toute configuration relative au moteur de recherche vectorielle knowhere</p>
+<p>Voir les <a href="/docs/fr/configure_knowhere.md">configurations liées à knowhere</a> pour une description détaillée de chaque paramètre de cette section.</p>

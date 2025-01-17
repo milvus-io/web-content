@@ -77,7 +77,7 @@ title: الأسئلة الشائعة حول المنتج
 <h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">هل يدعم Milvus تحديد القيم الافتراضية للحقول القياسية أو المتجهة؟</h4><p>لا يدعم Milvus 2.4.x حاليًا تحديد القيم الافتراضية للحقول القياسية أو المتجهة. هذه الميزة مخططة للإصدارات المستقبلية.</p>
 <h4 id="Is-storage-space-released-right-after-data-deletion-in-Milvus" class="common-anchor-header">هل يتم تحرير مساحة التخزين مباشرة بعد حذف البيانات في ملفوس؟</h4><p>لا، لن يتم تحرير مساحة التخزين على الفور عند حذف البيانات في Milvus. على الرغم من أن حذف البيانات يضع علامة على الكيانات على أنها "محذوفة منطقيًا"، إلا أنه قد لا يتم تحرير المساحة الفعلية على الفور. إليك السبب:</p>
 <ul>
-<li><strong>الضغط</strong>: يقوم ميلفوس تلقائيًا بضغط البيانات في الخلفية. تدمج هذه العملية أجزاء البيانات الأصغر في أجزاء أكبر وتزيل البيانات المحذوفة منطقيًا (الكيانات التي تم وضع علامة الحذف عليها) أو البيانات التي تجاوزت وقت تشغيلها (TTL). ومع ذلك، ينشئ الضغط مقاطع جديدة بينما يضع علامة "محذوفة" على المقاطع القديمة.</li>
+<li><strong>الضغط</strong>: يقوم ميلفوس تلقائيًا بضغط البيانات في الخلفية. تدمج هذه العملية أجزاء البيانات الأصغر في أجزاء أكبر وتزيل البيانات المحذوفة منطقيًا (الكيانات التي تم وضع علامة الحذف عليها) أو البيانات التي تجاوزت وقت تشغيلها (TTL). ومع ذلك، ينشئ الضغط مقاطع جديدة مع وضع علامة "محذوفة" على المقاطع القديمة.</li>
 <li><strong>تجميع القمامة</strong>: تقوم عملية منفصلة تسمى تجميع القمامة (GC) بشكل دوري بإزالة هذه المقاطع "المسقطة"، مما يؤدي إلى تحرير مساحة التخزين التي كانت تشغلها. وهذا يضمن الاستخدام الفعال للتخزين ولكن يمكن أن يؤدي إلى تأخير طفيف بين الحذف واستصلاح المساحة.</li>
 </ul>
 <h4 id="Can-I-see-inserted-deleted-or-upserted-data-immediately-after-the-operation-without-waiting-for-a-flush" class="common-anchor-header">هل يمكنني رؤية البيانات التي تم إدراجها أو حذفها أو إعادة إدراجها مباشرةً بعد العملية دون انتظار التدفق؟</h4><p>نعم، في Milvus، لا ترتبط رؤية البيانات في Milvus مباشرةً بعمليات التدفق بسبب بنية الفصل بين التخزين والحساب. يمكنك إدارة إمكانية قراءة البيانات باستخدام مستويات الاتساق.</p>
@@ -94,9 +94,31 @@ title: الأسئلة الشائعة حول المنتج
   grpc:
     serverMaxRecvSize: <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بشكل افتراضي، يبلغ الحد الأقصى لحجم كل طلب RPC 64 ميغابايت. لذلك، يجب أن يكون الحجم الإجمالي لمتجهات الإدخال، بما في ذلك بيانات الأبعاد والبيانات الوصفية الخاصة بها، أقل من هذا الحد لضمان التنفيذ الناجح.</p>
+<p>بشكل افتراضي، يبلغ الحد الأقصى لحجم كل طلب RPC 64 ميغابايت. ولذلك، يجب أن يكون الحجم الإجمالي لمتجهات الإدخال، بما في ذلك بيانات الأبعاد والبيانات الوصفية الخاصة بها، أقل من هذا الحد لضمان التنفيذ الناجح.</p>
+<h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">كيف يمكنني الحصول على جميع القيم الفريدة لحقل قياسي معين من مجموعة？</h4><p>حاليًا، لا توجد طريقة مباشرة لتحقيق ذلك. كحل بديل، نوصي باستخدام query_iterator لاسترداد جميع القيم لحقل معين، ثم إجراء عملية إلغاء التكرار يدويًا. نخطط لإضافة دعم مباشر لهذه الميزة في الإصدار Milvus 2.6. مثال على استخدام query_iterator:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># set up iterator</span>
+iterator = client.query_iterator(
+    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;target&quot;</span>]
+)
+<span class="hljs-comment"># do iteration and store target values into value_set </span>
+value_set = <span class="hljs-built_in">set</span>()
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    res = iterator.<span class="hljs-built_in">next</span>()
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res) == <span class="hljs-number">0</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;query iteration finished, close&quot;</span>)
+        iterator.close()
+        <span class="hljs-keyword">break</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(res)):
+        value_set.add(res[i][<span class="hljs-string">&quot;target&quot;</span>])
+
+<span class="hljs-comment"># value_set will contain unique values for target column    </span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-are-the-limitations-of-using-dynamic-fields-For-example-are-there-size-limits-modification-methods-or-indexing-restrictions" class="common-anchor-header">ما هي قيود استخدام الحقول الديناميكية؟ على سبيل المثال، هل هناك حدود للحجم أو طرق التعديل أو قيود الفهرسة؟</h4><p>يتم تمثيل الحقول الديناميكية داخليًا باستخدام حقول JSON، بحد حجم 65,536 بايت. وهي تدعم تعديلات الإدراج، مما يسمح لك بإضافة الحقول أو تحديثها. ومع ذلك، اعتبارًا من ميلفوس 2.5.1، لا تدعم الحقول الديناميكية الفهرسة. سيتم تقديم دعم إضافة فهارس ل JSON في الإصدارات المستقبلية.</p>
+<h4 id="Does-Milvus-support-schema-changes" class="common-anchor-header">هل يدعم Milvus تغييرات المخطط؟</h4><p>اعتبارًا من الإصدار 2.5.0 من Milvus، تقتصر تغييرات المخطط على تعديلات محددة، مثل تعديل خصائص مثل المعلمة <code translate="no">mmap</code>. يمكن للمستخدمين أيضًا تعديل <code translate="no">max_length</code> لحقول varchar و <code translate="no">max_capacity</code> لحقول الصفيف. ومع ذلك، يتم التخطيط لإضافة أو إزالة الحقول في المخططات في الإصدارات المستقبلية، مما يعزز مرونة إدارة المخطط داخل Milvus.</p>
+<h4 id="Does-modifying-maxlength-for-VarChar-require-data-reorganization" class="common-anchor-header">هل يتطلب تعديل max_length لـ VarChar إعادة تنظيم البيانات؟</h4><p>لا، تعديل <code translate="no">max_length</code> لحقل VarChar لا يستلزم إعادة تنظيم البيانات، مثل الضغط أو إعادة التنظيم. يقوم هذا التعديل في المقام الأول بتحديث معايير التحقق من صحة أي بيانات جديدة يتم إدراجها في الحقل، دون أن تتأثر البيانات الموجودة. ونتيجة لذلك، يعتبر هذا التغيير خفيف الوزن ولا يفرض نفقات كبيرة على النظام.</p>
 <h4 id="Still-have-questions" class="common-anchor-header">هل لا تزال لديك أسئلة؟</h4><p>يمكنك ذلك:</p>
 <ul>
-<li>تحقق من <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> على GitHub. نرحب بك لطرح الأسئلة ومشاركة الأفكار ومساعدة الآخرين.</li>
+<li>تحقق من <a href="https://github.com/milvus-io/milvus/issues">ميلفوس</a> على GitHub. نرحب بك لطرح الأسئلة ومشاركة الأفكار ومساعدة الآخرين.</li>
 <li>انضم إلى <a href="https://slack.milvus.io/">مجتمع Slack</a> الخاص بنا للحصول على الدعم والتفاعل مع مجتمعنا مفتوح المصدر.</li>
 </ul>

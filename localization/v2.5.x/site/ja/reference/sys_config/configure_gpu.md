@@ -20,7 +20,7 @@ summary: Milvus用GPUの設定方法について説明します。
         ></path>
       </svg>
     </button></h1><p>#GPUインデキシングを使用する場合、Milvusはメモリプールを利用し、頻繁なメモリの割り当てと解放を回避します。</p>
-<p>#ここで、メモリプールが占有するメモリのサイズをMB単位で設定できます。</p>
+<p>#ここで、メモリプールが占有するメモリサイズをMB単位で設定できます。</p>
 <p>#実際のメモリ需要がmaxMemSizeで設定した値を超えると、Milvusがクラッシュする可能性があることに注意してください。</p>
 <p>#initMemSizeとMaxMemSizeの両方が0に設定されている場合、</p>
 <p>#milvusは利用可能なGPUメモリの半分を自動的に初期化します、</p>
@@ -49,8 +49,8 @@ summary: Milvus用GPUの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        GPUメモリプールの初期化サイズ      </td>
-      <td></td>
+      <td>        GPUメモリプールの初期サイズ      </td>
+      <td>2048</td>
     </tr>
   </tbody>
 </table>
@@ -79,7 +79,7 @@ summary: Milvus用GPUの設定方法について説明します。
   <tbody>
     <tr>
       <td>        Gpuメモリ・プールの最大サイズ      </td>
-      <td></td>
+      <td>4096</td>
     </tr>
   </tbody>
 </table>

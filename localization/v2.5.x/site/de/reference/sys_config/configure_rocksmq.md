@@ -21,7 +21,7 @@ summary: 'Erfahren Sie, wie Sie rocksmq für Milvus konfigurieren.'
       </svg>
     </button></h1><p>Wenn Sie kafka aktivieren wollen, müssen Sie die pulsar-Konfigurationen kommentieren</p>
 <p>kafka:</p>
-<p>brokerList:</p>
+<p>brokerList: localhost:9092</p>
 <p>saslBenutzername:</p>
 <p>saslPasswort:</p>
 <p>saslMechanisms:</p>
@@ -66,7 +66,7 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
         <li>Präfix des Schlüssels, unter dem Milvus Daten in RocksMQ speichert.</li>      
         <li>Achtung! Wenn Sie diesen Parameter ändern, nachdem Sie Milvus eine Zeit lang verwendet haben, hat dies Auswirkungen auf Ihren Zugriff auf alte Daten.</li>      
         <li>Es wird empfohlen, diesen Parameter zu ändern, bevor Sie Milvus zum ersten Mal starten.</li>      
-        <li>Legen Sie einen leicht zu identifizierenden Root-Key-Präfix für Milvus fest, wenn der etcd-Dienst bereits existiert.</li>      </td>
+        <li>Legen Sie einen einfach zu identifizierenden Root-Key-Präfix für Milvus fest, wenn der etcd-Dienst bereits existiert.</li>      </td>
       <td>/var/lib/milvus/rdb_data</td>
     </tr>
   </tbody>

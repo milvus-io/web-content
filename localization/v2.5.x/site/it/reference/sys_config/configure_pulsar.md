@@ -47,7 +47,7 @@ summary: Imparare a configurare pulsar per Milvus.
       <td>
         <li>Indirizzo IP del servizio Pulsar.</li>      
         <li>Variabile d'ambiente: PULSAR_ADDRESS</li>      
-        <li>pulsar.address e pulsar.port generano insieme l'accesso valido a Pulsar.</li>      
+        <li>pulsar.address e pulsar.port insieme generano l'accesso valido a Pulsar.</li>      
         <li>Pulsar acquisisce preferibilmente l'indirizzo IP valido dalla variabile d'ambiente PULSAR_ADDRESS all'avvio di Milvus.</li>      
         <li>Il valore predefinito si applica quando Pulsar è in esecuzione sulla stessa rete di Milvus.</li>      </td>
       <td>localhost</td>
@@ -107,7 +107,7 @@ summary: Imparare a configurare pulsar per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Porta web del servizio Pulsar. Se ci si collega direttamente senza proxy, si deve usare la 8080.      </td>
+      <td>        Porta web del servizio Pulsar. Se ci si connette direttamente senza proxy, si deve usare la 8080.      </td>
       <td>80</td>
     </tr>
   </tbody>
@@ -138,9 +138,9 @@ summary: Imparare a configurare pulsar per Milvus.
     <tr>
       <td>
         <li>Dimensione massima di ciascun messaggio in Pulsar. Unità: Byte.</li>      
-        <li>Per impostazione predefinita, Pulsar può trasmettere al massimo 5 MB di dati in un singolo messaggio. Quando la dimensione dei dati inseriti è superiore a questo valore, il proxy frammenta i dati in più messaggi per garantirne la corretta trasmissione.</li>      
+        <li>Per impostazione predefinita, Pulsar può trasmettere al massimo 2 MB di dati in un singolo messaggio. Quando la dimensione dei dati inseriti è superiore a questo valore, il proxy frammenta i dati in più messaggi per garantirne la corretta trasmissione.</li>      
         <li>Se il parametro corrispondente in Pulsar rimane invariato, l'aumento di questa configurazione causa il fallimento di Milvus, mentre la riduzione non produce alcun vantaggio.</li>      </td>
-      <td>5242880</td>
+      <td>2097152</td>
     </tr>
   </tbody>
 </table>

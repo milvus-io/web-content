@@ -517,5 +517,6 @@ System.out.println(resp.getSearchResults());​
 <li><p><strong>データ型のマッチング</strong>：JSONフィールドのキー値が整数または浮動小数点の場合、他の整数または浮動小数点のキー、または<code translate="no">INT32/64</code> 、<code translate="no">FLOAT32/64</code> フィールドとしか比較できません。キー値が文字列 (<code translate="no">VARCHAR</code>) の場合、別の文字列キーとしか比較できない。</p></li>
 <li><p><strong>名前付けの制限</strong>：JSONキーに名前を付ける場合、アルファベット、数字、アンダースコアのみを使用することを推奨します。</p></li>
 <li><p><strong>文字列値の取り扱い</strong>：文字列値(<code translate="no">VARCHAR</code>)の場合、MilvusはJSONフィールドの文字列をセマンティック変換せずにそのまま保存します。例えば<code translate="no">'a&quot;b'</code> <code translate="no">&quot;a'b&quot;</code>,<code translate="no">'a\\'b'</code>,<code translate="no">&quot;a\\&quot;b&quot;</code> は入力されたまま保存されますが、<code translate="no">'a'b'</code> と<code translate="no">&quot;a&quot;b&quot;</code> は無効とみなされます。</p></li>
-<li><p><strong>入れ子辞書の処理</strong>：JSONフィールド値内のネストされた辞書は、文字列として扱われます。</p></li>
+<li><p><strong>入れ子辞書の処理</strong>：JSONフィールド値内のネストされた辞書は、文字列として扱われる。</p></li>
+<li><p><strong>JSONフィールド・サイズの制限</strong>：JSONフィールドは65,536バイトに制限されている。</p></li>
 </ul>

@@ -1472,26 +1472,26 @@
             "isMenu": true,
             "children": [
               {
+                "label": "Cópia de segurança e restauro numa única instância",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "Migrar entre instâncias em um único compartimento",
                 "id": "shared-bucket-backup-and-restore.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Migrar entre instâncias em vários compartimentos",
                 "id": "cross-bucket-backup-and-restore.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Migrar entre instâncias em ambientes S3",
                 "id": "multi-storage-backup-and-restore.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Cópia de segurança e restauro numa única instância",
-                "id": "single-instance-backup-and-restore.md",
                 "order": 3,
                 "children": []
               }
@@ -1642,7 +1642,7 @@
             "children": []
           },
           {
-            "label": "Cara de Abraço",
+            "label": "AbraçoFace",
             "id": "integrate_with_hugging-face.md",
             "order": 2,
             "children": []

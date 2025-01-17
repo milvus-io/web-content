@@ -138,9 +138,9 @@ summary: Saiba como configurar o pulsar para o Milvus.
     <tr>
       <td>
         <li>O tamanho máximo de cada mensagem na Pulsar. Unidade: Byte.</li>      
-        <li>Por padrão, a Pulsar pode transmitir no máximo 5 MB de dados em uma única mensagem. Quando o tamanho dos dados inseridos é maior que este valor, o proxy fragmenta os dados em várias mensagens para garantir que eles possam ser transmitidos corretamente.</li>      
-        <li>Se o parâmetro correspondente na Pulsar se mantiver inalterado, o aumento desta configuração provocará a falha do Milvus, e a sua redução não produz qualquer vantagem.</li>      </td>
-      <td>5242880</td>
+        <li>Por padrão, a Pulsar pode transmitir no máximo 2MB de dados em uma única mensagem. Quando o tamanho dos dados inseridos é maior que este valor, o proxy fragmenta os dados em várias mensagens para garantir que eles possam ser transmitidos corretamente.</li>      
+        <li>Se o parâmetro correspondente na Pulsar permanecer inalterado, aumentar essa configuração fará com que o Milvus falhe, e reduzi-la não produz nenhuma vantagem.</li>      </td>
+      <td>2097152</td>
     </tr>
   </tbody>
 </table>

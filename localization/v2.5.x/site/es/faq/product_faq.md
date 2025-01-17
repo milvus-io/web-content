@@ -94,9 +94,31 @@ title: Preguntas frecuentes sobre el producto
   grpc:
     serverMaxRecvSize: <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Por defecto, el tamaño máximo de cada petición RPC es de 64MB. Por lo tanto, el tamaño total de los vectores de entrada, incluidos sus datos dimensionales y metadatos, debe ser inferior a este límite para garantizar el éxito de la ejecución.</p>
+<p>Por defecto, el tamaño máximo de cada petición RPC es de 64MB. Por lo tanto, el tamaño total de los vectores de entrada, incluidos sus datos dimensionales y metadatos, debe ser inferior a este límite para garantizar una ejecución correcta.</p>
+<h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">Cómo puedo obtener todo el valor único de un campo escalar dado de una colección？</h4><p>Actualmente, no existe un método directo para conseguirlo. Como solución, recomendamos utilizar un query_iterator para recuperar todos los valores de un campo específico, y luego realizar la deduplicación manualmente. Tenemos previsto añadir soporte directo para esta función en Milvus 2.6. Ejemplo de uso de query_iterator:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># set up iterator</span>
+iterator = client.query_iterator(
+    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;target&quot;</span>]
+)
+<span class="hljs-comment"># do iteration and store target values into value_set </span>
+value_set = <span class="hljs-built_in">set</span>()
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    res = iterator.<span class="hljs-built_in">next</span>()
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res) == <span class="hljs-number">0</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;query iteration finished, close&quot;</span>)
+        iterator.close()
+        <span class="hljs-keyword">break</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(res)):
+        value_set.add(res[i][<span class="hljs-string">&quot;target&quot;</span>])
+
+<span class="hljs-comment"># value_set will contain unique values for target column    </span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="What-are-the-limitations-of-using-dynamic-fields-For-example-are-there-size-limits-modification-methods-or-indexing-restrictions" class="common-anchor-header">¿Cuáles son las limitaciones del uso de campos dinámicos? Por ejemplo, ¿hay límites de tamaño, métodos de modificación o restricciones de indexación?</h4><p>Los campos dinámicos se representan internamente utilizando campos JSON, con un límite de tamaño de 65.536 bytes. Admiten modificaciones upsert, lo que le permite añadir o actualizar campos. Sin embargo, a partir de Milvus 2.5.1, los campos dinámicos no admiten indexación. El soporte para añadir índices para JSON se introducirá en futuras versiones.</p>
+<h4 id="Does-Milvus-support-schema-changes" class="common-anchor-header">¿Milvus admite cambios de esquema?</h4><p>A partir de la versión 2.5.0 de Milvus, los cambios de esquema se limitan a modificaciones específicas, como el ajuste de propiedades como el parámetro <code translate="no">mmap</code>. Los usuarios también pueden modificar <code translate="no">max_length</code> para los campos varchar y <code translate="no">max_capacity</code> para los campos array. Sin embargo, la capacidad de añadir o eliminar campos en los esquemas está prevista para futuras versiones, mejorando la flexibilidad de la gestión de esquemas dentro de Milvus.</p>
+<h4 id="Does-modifying-maxlength-for-VarChar-require-data-reorganization" class="common-anchor-header">¿La modificación de max_length para VarChar requiere una reorganización de los datos?</h4><p>No, la modificación de <code translate="no">max_length</code> para un campo VarChar no requiere la reorganización de los datos, como la compactación o la reorganización. Este ajuste actualiza principalmente los criterios de validación para cualquier dato nuevo que se inserte en el campo, sin afectar a los datos existentes. Como resultado, este cambio se considera ligero y no impone una sobrecarga significativa al sistema.</p>
 <h4 id="Still-have-questions" class="common-anchor-header">¿Aún tiene preguntas?</h4><p>Puede hacerlo:</p>
 <ul>
 <li>Eche un vistazo a <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> en GitHub. Puede plantear preguntas, compartir ideas y ayudar a los demás.</li>
-<li>Únase a nuestra <a href="https://slack.milvus.io/">comunidad de Slack</a> para encontrar ayuda y participar en nuestra comunidad de código abierto.</li>
+<li>Únase a nuestra <a href="https://slack.milvus.io/">comunidad Slack</a> para encontrar apoyo y participar en nuestra comunidad de código abierto.</li>
 </ul>

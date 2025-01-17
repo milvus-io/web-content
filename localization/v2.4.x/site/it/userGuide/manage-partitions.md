@@ -182,7 +182,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <div class="admonition note">
 <p><b>note</b></p>
 <p>Se si imposta un campo come chiave di partizione in una collezione, Milvus crea almeno <strong>64</strong> partizioni insieme alla collezione. Quando si elencano le partizioni, i risultati possono essere diversi da quelli ottenuti con i frammenti di codice precedenti.</p>
-<p>Per maggiori dettagli, consultare la sezione <a href="https://milvus.io/docs/use-partition-key.md">Uso della chiave di partizione</a>.</p>
+<p>Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/use-partition-key.md">Uso della chiave di partizione</a>.</p>
 </div>
 <h2 id="Create-Partitions" class="common-anchor-header">Creare partizioni<button data-href="#Create-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -199,7 +199,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È possibile aggiungere altre partizioni all'insieme. Una raccolta può avere fino a 1.024 partizioni.</p>
+    </button></h2><p>È possibile aggiungere altre partizioni alla raccolta. Una raccolta può avere fino a 4.096 partizioni.</p>
 <div class="language-python">
 <p>Per creare partizioni, usare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/create_partition.md"><code translate="no">create_partition()</code></a>.</p>
 </div>
@@ -286,7 +286,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Il frammento di codice qui sopra crea una partizione in un insieme ed elenca le partizioni dell'insieme.</p>
 <div class="admonition note">
 <p><b>note</b></p>
-<p>Se si imposta un campo come chiave di partizione in un insieme, Milvus si occupa di gestire le partizioni dell'insieme. Pertanto, è possibile che si verifichino errori di richiesta quando si tenta di creare partizioni.</p>
+<p>Se si imposta un campo come chiave di partizione in un insieme, Milvus si occupa di gestire le partizioni dell'insieme. Pertanto, è possibile che si verifichino degli errori quando si tenta di creare delle partizioni.</p>
 <p>Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/use-partition-key.md">Utilizzo della chiave di partizione</a>.</p>
 </div>
 <h2 id="Check-for-a-Specific-Partition" class="common-anchor-header">Verifica di una partizione specifica<button data-href="#Check-for-a-Specific-Partition" class="anchor-icon" translate="no">
@@ -306,7 +306,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
       </svg>
     </button></h2><p>È anche possibile verificare l'esistenza di una partizione specifica.</p>
 <div class="language-python">
-<p>Per verificare la presenza di una partizione specifica, usare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/has_partition.md"><code translate="no">has_partition()</code></a>.</p>
+<p>Per verificare la presenza di una partizione specifica, utilizzare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/has_partition.md"><code translate="no">has_partition()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>Per verificare la presenza di una partizione specifica, usare <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/hasPartition.md"><code translate="no">hasPartition()</code></a>.</p>
@@ -751,7 +751,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Per rilasciare tutte le partizioni di un insieme, è sufficiente richiamare il comando <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a>. Per rilasciare partizioni specifiche di un insieme, usare <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/releasePartitions.md"><code translate="no">releasePartitions()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>Per rilasciare tutte le partizioni di un insieme, è sufficiente richiamare il comando <a href="https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a>. Per rilasciare partizioni specifiche di un insieme, usare <a href="https://milvus.io/api-reference/node/v2.4.x/Partitions/releasePartitions.md"><code translate="no">releasePartitions()</code></a>.</p>
+<p>Per rilasciare tutte le partizioni di un insieme, si può chiamare semplicemente <a href="https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a>. Per rilasciare partizioni specifiche di un insieme, usare <a href="https://milvus.io/api-reference/node/v2.4.x/Partitions/releasePartitions.md"><code translate="no">releasePartitions()</code></a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -936,7 +936,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Quanti dati si possono memorizzare in una partizione?</strong></p>
+<li><p><strong>Quanti dati possono essere memorizzati in una partizione?</strong></p>
 <p>Si raccomanda di memorizzare meno di 1B di dati in una partizione.</p></li>
 <li><p><strong>Qual è il numero massimo di partizioni che possono essere create?</strong></p>
 <p>Per impostazione predefinita, Milvus consente di creare un massimo di 1.024 partizioni. È possibile regolare il numero massimo di partizioni configurando <code translate="no">rootCoord.maxPartitionNum</code>. Per maggiori dettagli, consultare la sezione <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">Configurazioni di sistema</a>.</p></li>

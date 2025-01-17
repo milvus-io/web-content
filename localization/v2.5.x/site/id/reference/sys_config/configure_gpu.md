@@ -50,7 +50,7 @@ summary: Pelajari cara mengonfigurasi gpu untuk Milvus.
   <tbody>
     <tr>
       <td>        Ukuran inisialisasi Pool Memori Gpu   </td>
-      <td></td>
+      <td>2048</td>
     </tr>
   </tbody>
 </table>
@@ -79,7 +79,7 @@ summary: Pelajari cara mengonfigurasi gpu untuk Milvus.
   <tbody>
     <tr>
       <td>        Ukuran maksimum Kumpulan Memori Gpu   </td>
-      <td></td>
+      <td>4096</td>
     </tr>
   </tbody>
 </table>

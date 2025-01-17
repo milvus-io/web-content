@@ -20,7 +20,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>テキスト処理において、<strong>アナライザーは</strong>生テキストを構造化された検索可能な形式に変換する重要なコンポーネントである。アナライザーは通常、<strong>トークナイザーと</strong> <strong>フィルターという</strong>2つのコア要素で構成される。これらは共に、入力テキストをトークンに変換し、これらのトークンを洗練させ、効率的なインデックス作成と検索に備えます。</p>
-<p><a href="https://github.com/quickwit-oss/tantivy">Tantivyを</a>搭載したMilvusのアナライザは、コレクション作成時にコレクションスキーマに<code translate="no">VARCHAR</code> フィールドを追加する際に設定されます。アナライザによって生成されたトークンは、テキストマッチングのためのインデックスを構築するために使用したり、全文検索のためにスパース埋め込みに変換したりすることができます。詳細については、<a href="/docs/ja/keyword-match.md">テキスト・マッチ</a>または<a href="/docs/ja/full-text-search.md">全文検索を</a>参照してください。</p>
+<p><a href="https://github.com/quickwit-oss/tantivy">Tantivyを</a>搭載したMilvusのアナライザは、コレクション作成時に<code translate="no">VARCHAR</code> フィールドをコレクションスキーマに追加する際に設定されます。アナライザによって生成されたトークンは、テキストマッチングのためのインデックスを構築するために使用したり、全文検索のためにスパース埋め込みに変換したりすることができます。詳細については、<a href="/docs/ja/keyword-match.md">テキスト・マッチ</a>または<a href="/docs/ja/full-text-search.md">全文検索を</a>参照してください。</p>
 <div class="alert note">
 <p>アナライザーの使用はパフォーマンスに影響する場合があります。</p>
 <ul>
@@ -48,9 +48,12 @@ summary: >-
 <li><p><strong>トークナイザー</strong>：トークナイザーは入力テキストをトークンと呼ばれる個別の単位に分割します。トークンはトークン化の種類によって、単語であったりフレーズであったりします。</p></li>
 <li><p><strong>フィルター</strong>：たとえば、小文字にしたり、一般的な単語を削除したりします。</p></li>
 </ul>
-<p>以下のワークフローは、アナライザーがテキストをどのように処理するかを示しています。</p>
+<div class="alert note">
+<p>トークナイザーは UTF-8 形式のみをサポートしています。その他の形式については、今後のリリースでサポートが追加される予定です。</p>
+</div>
+<p>以下のワークフローは、アナライザがテキストを処理する方法を示しています。</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/analyzer-overview.png" alt="analyzer-overview" width="400"/></p>
-<h2 id="Analyzer-types​" class="common-anchor-header">分析器のタイプ<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">
+<h2 id="Analyzer-types​" class="common-anchor-header">解析器の種類<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,9 +68,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、様々なテキスト処理のニーズに対応するため、2種類のアナライザを提供しています。</p>
+    </button></h2><p>Milvusでは、様々なテキスト処理ニーズに対応するため、2種類のアナライザを提供しています。</p>
 <ul>
-<li><p><strong>内蔵アナライザ</strong>：ビルトイン アナライザ: 最小限のセットアップで一般的なテキスト処理タスクをカバーする、定義済みのコンフィギュレーションです。複雑な設定が不要なため、汎用的な検索に最適です。</p></li>
+<li><p><strong>内蔵アナライザ</strong>：ビルトイン アナライザ: 最小限のセットアップで一般的なテキスト処理タスクをカバーする定義済みコンフィギュレーションです。複雑な設定が不要なため、汎用的な検索に最適です。</p></li>
 <li><p><strong>カスタムアナライザー</strong>：より高度な要件に対応するカスタム・アナライザでは、トークナイザとゼロ個以上のフィルタの両方を指定することで、独自の設定を定義できます。このレベルのカスタマイズは、テキスト処理を正確に制御する必要がある特殊なユースケースで特に役立ちます。</p></li>
 </ul>
 <div class="alert note">

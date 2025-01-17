@@ -55,5 +55,5 @@ title: Preguntas más frecuentes
 <h4 id="Still-have-questions" class="common-anchor-header">¿Todavía tiene preguntas?</h4><p>Usted puede:</p>
 <ul>
 <li>Eche un vistazo a <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> en GitHub. Siéntase libre de hacer preguntas, compartir ideas y ayudar a otros.</li>
-<li>Únase a nuestro <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">canal Slack</a> para encontrar apoyo y participar con nuestra comunidad de código abierto.</li>
+<li>Únase a nuestro <a href="https://discord.com/invite/8uyFbECzPX">servidor Discord</a> para encontrar apoyo y participar con nuestra comunidad de código abierto.</li>
 </ul>

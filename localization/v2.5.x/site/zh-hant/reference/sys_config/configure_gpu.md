@@ -50,7 +50,7 @@ summary: 學習如何為 Milvus 設定 gpu。
   <tbody>
     <tr>
       <td>        Gpu 記憶體池啟用大小      </td>
-      <td></td>
+      <td>2048</td>
     </tr>
   </tbody>
 </table>
@@ -79,7 +79,7 @@ summary: 學習如何為 Milvus 設定 gpu。
   <tbody>
     <tr>
       <td>        Gpu 記憶池最大值      </td>
-      <td></td>
+      <td>4096</td>
     </tr>
   </tbody>
 </table>

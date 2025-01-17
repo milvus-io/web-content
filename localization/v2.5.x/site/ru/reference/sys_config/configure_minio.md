@@ -340,11 +340,45 @@ summary: 'Узнайте, как настроить minio для Milvus.'
     <tr>
       <td>
         <li>Облачный провайдер S3. Поддерживает: "aws", "gcp", "aliyun".</li>      
+        <li>Облачный провайдер Google Cloud Storage. Поддерживает: "gcpnative".</li>      
         <li>Вы можете использовать "aws" для другого облачного провайдера, поддерживающего S3 API с подписью v4, например: minio</li>      
         <li>Вы можете использовать "gcp" для другого облачного провайдера, поддерживающего S3 API с подписью v2.</li>      
-        <li>Вы можете использовать "aliyun", если другой облачный провайдер использует bucket в стиле виртуального хоста.</li>      
+        <li>Вы можете использовать "aliyun" для другого облачного провайдера, использующего bucket в стиле виртуального хоста</li>      
+        <li>Вы можете использовать "gcpnative" для провайдера Google Cloud Platform. Используются учетные данные учетной записи сервиса</li>      
+        <li>для аутентификации.</li>      
         <li>При включенном useIAM пока поддерживаются только "aws", "gcp" и "aliyun".</li>      </td>
       <td>aws</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="miniogcpCredentialJSON" class="common-anchor-header"><code translate="no">minio.gcpCredentialJSON</code><button data-href="#miniogcpCredentialJSON" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table id="minio.gcpCredentialJSON">
+  <thead>
+    <tr>
+      <th class="width80">Описание</th>
+      <th class="width20">Значение по умолчанию</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <li>Содержимое JSON содержит учетные данные учетной записи службы gcs.</li>      
+        <li>Используется только для облачного провайдера "gcpnative".</li>      </td>
+      <td></td>
     </tr>
   </tbody>
 </table>
@@ -373,7 +407,7 @@ summary: 'Узнайте, как настроить minio для Milvus.'
   <tbody>
     <tr>
       <td>
-        <li>Пользовательская конечная точка для получения учетных данных роли IAM. когда useIAM равен true и cloudProvider равен "aws".</li>      
+        <li>Пользовательская конечная точка для получения учетных данных роли IAM. когда useIAM равно true и cloudProvider равно "aws".</li>      
         <li>Оставьте это значение пустым, если вы хотите использовать конечную точку AWS по умолчанию.</li>      </td>
       <td></td>
     </tr>

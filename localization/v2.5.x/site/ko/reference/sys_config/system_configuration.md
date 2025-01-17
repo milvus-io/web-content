@@ -49,7 +49,7 @@ summary: Milvus의 시스템 구성에 대해 알아보세요.
 <h3 id="localStorage" class="common-anchor-header"><code translate="no">localStorage</code></h3><p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/configure_localstorage.md">로컬 스토리지 관련 구성을</a> 참조하세요.</p>
 <h3 id="minio" class="common-anchor-header"><code translate="no">minio</code></h3><p>MinIO/S3/GCS 또는 기타 서비스의 관련 설정은 Milvus의 데이터 지속성을 담당하는 S3 API를 지원합니다.</p>
 <p>다음 설명에서는 간결성을 위해 스토리지 서비스를 MinIO/S3로 지칭합니다.</p>
-<p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_minio.md">미니오 관련 구성을</a> 참조하세요.</p>
+<p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_minio.md">미니오 관련 설정을</a> 참조하세요.</p>
 <h3 id="mq" class="common-anchor-header"><code translate="no">mq</code></h3><p>Milvus는 락스엠큐(RockDB 기반), 낫스엠큐(임베디드 낫스 서버), 펄사, 카프카의 네 가지 MQ를 지원합니다.</p>
 <p>mq.type 필드를 설정하여 mq를 변경할 수 있습니다.</p>
 <p>mq.type 필드를 기본값으로 설정하지 않은 경우, 이 파일에 여러 개의 mq를 구성하는 경우 우선순위를 활성화하는 것에 대한 참고 사항이 있습니다.</p>
@@ -62,7 +62,7 @@ summary: Milvus의 시스템 구성에 대해 알아보세요.
 <p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_pulsar.md">펄서 관련 구성을</a> 참조하세요.</p>
 <h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>kafka를 활성화하려면 다음과 같이 pulsar 구성에 주석 처리해야 합니다.</p>
 <p>kafka:</p>
-<p>브로커리스트:</p>
+<p>브로커 목록: 로컬 호스트:9092</p>
 <p>sasl사용자 이름:</p>
 <p>saslPassword:</p>
 <p>saslMechanisms:</p>
@@ -89,19 +89,21 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_proxy.md">프록시 관련 구성을</a> 참조하세요.</p>
 <h3 id="queryCoord" class="common-anchor-header"><code translate="no">queryCoord</code></h3><p>쿼리 노드의 토폴로지 및 로드 밸런싱을 관리하고 성장하는 세그먼트에서 봉인된 세그먼트로 핸드오프하는 데 사용되는 queryCoord의 관련 구성입니다.</p>
 <p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/configure_querycoord.md">queryCoord 관련 구성을</a> 참조하세요.</p>
-<h3 id="queryNode" class="common-anchor-header"><code translate="no">queryNode</code></h3><p>벡터 데이터와 스칼라 데이터 간의 하이브리드 검색을 실행하는 데 사용되는 쿼리 노드 관련 구성입니다.</p>
+<h3 id="queryNode" class="common-anchor-header"><code translate="no">queryNode</code></h3><p>벡터 데이터와 스칼라 데이터 간의 하이브리드 검색을 실행하는 데 사용되는 쿼리 노드 관련 구성.</p>
 <p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_querynode.md">쿼리 노드 관련 구성을</a> 참조하세요.</p>
 <h3 id="indexCoord" class="common-anchor-header"><code translate="no">indexCoord</code></h3><p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_indexcoord.md">indexCoord 관련 구성을</a> 참조하세요.</p>
 <h3 id="indexNode" class="common-anchor-header"><code translate="no">indexNode</code></h3><p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/configure_indexnode.md">indexNode 관련 구성을</a> 참조하세요.</p>
 <h3 id="dataCoord" class="common-anchor-header"><code translate="no">dataCoord</code></h3><p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_datacoord.md">데이터코드 관련 구성을</a> 참조하세요.</p>
 <h3 id="dataNode" class="common-anchor-header"><code translate="no">dataNode</code></h3><p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_datanode.md">데이터 노드 관련 구성을</a> 참조하세요.</p>
 <h3 id="msgChannel" class="common-anchor-header"><code translate="no">msgChannel</code></h3><p>이 항목에서는 Milvus의 메시지 채널 관련 설정을 소개합니다.</p>
-<p>이 섹션의 각 파라미터에 대한 자세한 설명은 메시지 <a href="/docs/ko/configure_msgchannel.md">채널 관련</a> 설정을 참조하세요.</p>
+<p>각 파라미터에 대한 자세한 설명은 이 섹션의 메시지 <a href="/docs/ko/configure_msgchannel.md">채널 관련</a> 설정을 참조하세요.</p>
 <h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>시스템 로그 출력을 구성합니다.</p>
 <p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_log.md">로그 관련 설정을</a> 참조하세요.</p>
 <h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/configure_grpc.md">grpc 관련 구성을</a> 참조하세요.</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>프록시 tls 사용을 구성합니다.</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>외부 tls를 구성합니다.</p>
 <p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/configure_tls.md">tls 관련 구성을</a> 참조하세요.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code></h3><p>내부 tls를 구성합니다.</p>
+<p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/configure_internaltls.md">internaltls 관련 구성을</a> 참조하세요.</p>
 <h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/configure_common.md">공통 관련 구성을</a> 참조하세요.</p>
 <h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig, Milvus 할당량 및 제한을 구성합니다.</p>
 <p>기본적으로 활성화됩니다:</p>
@@ -127,3 +129,9 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 <p>#밀버스는 사용 가능한 GPU 메모리의 절반을 자동으로 초기화합니다,</p>
 <p>#maxMemSize는 사용 가능한 GPU 메모리 전체를 초기화합니다.</p>
 <p>이 섹션의 각 매개변수에 대한 자세한 설명은 <a href="/docs/ko/configure_gpu.md">GPU 관련 구성을</a> 참조하세요.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>스트리밍 노드 서버와 관련된 모든 구성.</p>
+<p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_streamingnode.md">스트리밍 노드 관련 구성을</a> 참조하세요.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>스트리밍 서비스와 관련된 모든 구성입니다.</p>
+<p>이 섹션의 각 파라미터에 대한 자세한 설명은 <a href="/docs/ko/configure_streaming.md">스트리밍 관련 설정을</a> 참조하세요.</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>knowhere 벡터 검색 엔진과 관련된 모든 구성</p>
+<p>이 섹션의 각 매개변수에 대한 자세한 설명은 위치정보 <a href="/docs/ko/configure_knowhere.md">관련 구성을</a> 참조하세요.</p>

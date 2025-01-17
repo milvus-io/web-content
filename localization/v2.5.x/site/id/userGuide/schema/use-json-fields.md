@@ -522,4 +522,5 @@ System.out.println(resp.getSearchResults());​
 <li><p><strong>Batasan Penamaan</strong>: Ketika menamai kunci JSON, disarankan untuk hanya menggunakan huruf, karakter numerik, dan garis bawah, karena karakter lain dapat menyebabkan masalah saat pemfilteran atau pencarian.</p></li>
 <li><p><strong>Menangani Nilai String</strong>: Untuk nilai string (<code translate="no">VARCHAR</code>), Milvus menyimpan string bidang JSON apa adanya tanpa konversi semantik. Sebagai contoh <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, dan <code translate="no">&quot;a\\&quot;b&quot;</code> disimpan seperti yang dimasukkan; namun, <code translate="no">'a'b'</code> dan <code translate="no">&quot;a&quot;b&quot;</code> dianggap tidak valid.</p></li>
 <li><p><strong>Menangani Kamus Bersarang</strong>: Setiap kamus bertingkat dalam nilai bidang JSON diperlakukan sebagai string.</p></li>
+<li><p><strong>Batas Ukuran Bidang JSON</strong>: Bidang JSON dibatasi hingga 65.536 byte.</p></li>
 </ul>

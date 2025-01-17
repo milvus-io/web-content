@@ -37,7 +37,7 @@ title: Gestionar particiones
 <p>Al crear una colección, se crea automáticamente al menos una partición por defecto denominada <strong>_default</strong>. Puede crear un máximo de 1.024 particiones dentro de una colección.</p>
 <div class="admonition note">
 <p><b>notas</b></p>
-<p>Milvus introduce una característica llamada <strong>Partition Key</strong>, que aprovecha las particiones subyacentes para almacenar entidades basadas en los valores hash de un campo específico. Esta característica facilita la implementación de multi-tenancy, mejorando el rendimiento de la búsqueda. Para más información, consulte <a href="https://milvus.io/docs/use-partition-key.md">Utilizar la clave</a> de <a href="https://milvus.io/docs/use-partition-key.md">partición</a>.</p>
+<p>Milvus introduce una característica llamada <strong>Partition Key</strong>, que aprovecha las particiones subyacentes para almacenar entidades basadas en los valores hash de un campo específico. Esta característica facilita la implementación de multi-tenancy, mejorando el rendimiento de la búsqueda. Para más detalles, lea <a href="https://milvus.io/docs/use-partition-key.md">Utilizar clave de partición</a>.</p>
 <p>Si la función <strong>Partition</strong> Key está activada en una colección, Milvus se encarga de gestionar todas las particiones, liberándole a usted de esta responsabilidad.</p>
 </div>
 <h2 id="Preparations" class="common-anchor-header">Preparativos<button data-href="#Preparations" class="anchor-icon" translate="no">
@@ -199,7 +199,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Puede añadir más particiones a la colección. Una colección puede tener hasta 1.024 particiones.</p>
+    </button></h2><p>Puede añadir más particiones a la colección. Una colección puede tener hasta 4.096 particiones.</p>
 <div class="language-python">
 <p>Para crear particiones, utilice <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/create_partition.md"><code translate="no">create_partition()</code></a>.</p>
 </div>
@@ -644,7 +644,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateLoaded</span>
 <span class="hljs-comment">//</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para cargar múltiples particiones a la vez, haz lo siguiente:</p>
+<p>Para cargar varias particiones a la vez, haz lo siguiente:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">client.load_partitions(
@@ -944,5 +944,5 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Las particiones son unidades físicas de almacenamiento, mientras que las claves de partición son conceptos lógicos que asignan automáticamente datos a particiones específicas basándose en una columna designada.</p>
 <p>Por ejemplo, en Milvus, si tiene una colección con una clave de partición definida como el campo <code translate="no">color</code>, el sistema asigna automáticamente los datos a las particiones basándose en los valores hash del campo <code translate="no">color</code> para cada entidad. Este proceso automatizado libera al usuario de la responsabilidad de especificar manualmente la partición al insertar o buscar datos.</p>
 <p>Por otro lado, cuando se crean particiones manualmente, es necesario asignar datos a cada partición basándose en los criterios de la clave de partición. Si tiene una colección con un campo <code translate="no">color</code>, asignaría manualmente las entidades con un valor <code translate="no">color</code> de <code translate="no">red</code> a <code translate="no">partition A</code>, y las entidades con un valor <code translate="no">color</code> de <code translate="no">blue</code> a <code translate="no">partition B</code>. Esta gestión manual requiere más esfuerzo.</p>
-<p>En resumen, tanto las particiones como las claves de partición se utilizan para optimizar el cálculo de datos y mejorar la eficiencia de las consultas. Es esencial reconocer que habilitar una clave de partición significa renunciar al control sobre la gestión manual de la inserción y carga de datos de partición, ya que estos procesos están totalmente automatizados y son gestionados por Milvus.</p></li>
+<p>En resumen, tanto las particiones como las claves de partición se utilizan para optimizar el cálculo de datos y mejorar la eficacia de las consultas. Es esencial reconocer que habilitar una clave de partición significa renunciar al control sobre la gestión manual de la inserción y carga de datos de partición, ya que estos procesos están totalmente automatizados y son gestionados por Milvus.</p></li>
 </ul>
