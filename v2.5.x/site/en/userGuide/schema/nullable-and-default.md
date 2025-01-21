@@ -431,7 +431,7 @@ curl --request POST \​
 
 ```
 
-To query entities with `null` values, use an empty expression `""`:​
+To return entities with null values, query without any scalar filtering condition as follows:
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -443,7 +443,7 @@ To query entities with `null` values, use an empty expression `""`:​
 ```python
 null_results = client.query(​
     collection_name="user_profiles_null",​
-    filter="",​
+    filter="",​ # Query without any filtering condition
     output_fields=["id", "age"]​
 )​
 ​
