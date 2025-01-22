@@ -1,0 +1,28 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 96
+slug: /restful/Alter Properties
+title: "Alter Collection Properties | RESTful"
+description: "This operation alters the properties of a collection. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Alter Collection Properties"
+sidebar_custom_props: { badges: ['post']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "Alter Collection Properties"
+  - "post"
+  - RESTful
+  - API
+---
+
+# Alter Collection Properties
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"Alter Collection Properties","deprecated":false,"description":"This operation alters the properties of a collection.","x-i18n":{"zh-CN":{"summary":"修改 Collection 属性","description":"本操作可以修改 Collection 的属性。"}},"tags":["Collection Operations (V2)"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the database which the collection belongs to. Setting this to a non-existing database results in an error.","x-i18n":{"zh-CN":{"description":"Database 名称。"}}},"collectionName":{"type":"string","description":"The name of the target collection.\nSetting this to a non-existing collection results in an error.","x-i18n":{"zh-CN":{"description":"Collection 名称。"}}},"properties":{"type":"object","description":"The properties of the collection to alter.","x-i18n":{"zh-CN":{"description":"待修改 Collection 属性。"}},"properties":{"mmmap.enabled":{"type":"boolean","description":"Whether to enable the memory-mapped feature for the collection. Setting this to `true` allows the collection to be accessed directly from disk without loading it into memory, which can extend collection capacity.","x-i18n":{"zh-CN":{"description":"是否启用内存映射特性。将该属性设置为 `true` 允许直接从磁盘访问 Collection，而无需将其加载到内存，从而扩大 Collection 容量。"}}},"collection.ttl.seconds":{"type":"integer","description":"The time-to-live (TTL) of the collection in seconds. Setting this to a non-zero values enables automatic deletion of expired documents from the collection after the specified number of seconds.","x-i18n":{"zh-CN":{"description":"Collection 的 TTL（秒）。将该属性设置为非零值将在指定秒数后自动删除过期文档。"}}},"partitionkey.isolation":{"type":"boolean","description":"Whether to enable partition key isolation for the collection. Setting this to `true` ensures that documents with the same partition key are always stored in the same partition, which can improve query performance.","x-i18n":{"zh-CN":{"description":"是否启用分区键隔离特性。将该属性设置为 `true` 确保具有相同分区键的文档始终存储在相同的分区中，从而提高查询性能。"}}}}}},"required":["collectionName","properties"]},"example":{"collectionName":"test_collection","properties":{"mmmap.enabled":true}}}}},"responses":{"200":{"description":"Returns an empty object.","x-i18n":{"zh-CN":{"description":"返回空对象。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"object","properties":{}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":1800,"message":"User hasn't authenticated"}}}}}}}}
+export const endpoint = "/v2/vectordb/collections/alter_properties"
+export const method = "post"

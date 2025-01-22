@@ -1,0 +1,28 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 122
+slug: /restful/Transfer Replica
+title: "Transfer Collection Replica | RESTful"
+description: "This operation transfers the replicas of the specified collection from the source resource group to the target resource group. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Transfer Collection Replica"
+sidebar_custom_props: { badges: ['post']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "Transfer Collection Replica"
+  - "post"
+  - RESTful
+  - API
+---
+
+# Transfer Collection Replica
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"Transfer Collection Replica","deprecated":false,"description":"This operation transfers the replicas of the specified collection from the source resource group to the target resource group.","x-i18n":{"zh-CN":{"summary":"转移 Collection 副本","description":"本操作将指定 Collection 的副本从源资源组转移到目标资源组。"}},"x-include-target":["milvus"],"tags":["Resource Group (V2)"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"sourceRgName":{"type":"string","description":"The name of the source resource group.","x-i18n":{"zh-CN":{"description":"源资源组名称。"}}},"targetRgName":{"type":"string","description":"The name of the target resource group.","x-i18n":{"zh-CN":{"description":"目标资源组名称。"}}},"collectionName":{"type":"string","description":"The name of the target collection.","x-i18n":{"zh-CN":{"description":"目标 Collection 名称。"}}},"replicaNum":{"type":"integer","description":"The number of replicas to transfer.","x-i18n":{"zh-CN":{"description":"需要转移的副本数量。"}}}}},"example":{"sourceRgName":"__default_resource_group","targetRgName":"group1","collectionName":"test_collection","replicaNum":1}}}},"responses":{"200":{"description":"Returns an empty object.","x-i18n":{"zh-CN":{"description":"返回空对象。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","description":"A success response","x-i18n":{"zh-CN":{"description":"成功响应。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}},"type":"integer","example":0},"data":{"type":"object","properties":{},"description":"Response payload which is an empty object.","x-i18n":{"zh-CN":{"description":"响应载荷。为空对象。"}}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"cost":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":1800,"message":"User hasn't authenticated"}}}}}}}}
+export const endpoint = "/v2/vectordb/resource_groups/transfer_replica"
+export const method = "post"

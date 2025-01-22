@@ -1,0 +1,28 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 98
+slug: /restful/alter-field-properties
+title: "Alter Field Properties | RESTful"
+description: "This operation alters the properties of a field in a collection. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Alter Field Properties"
+sidebar_custom_props: { badges: ['post']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "Alter Field Properties"
+  - "post"
+  - RESTful
+  - API
+---
+
+# Alter Field Properties
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"Alter Field Properties","deprecated":false,"description":"This operation alters the properties of a field in a collection.","x-i18n":{"zh-CN":{"summary":"修改字段属性","description":"本操作可以修改 Collection 中字段的属性。"}},"tags":["Collection Operations (V2)"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the database which the collection belongs to. Setting this to a non-existing database results in an error.","x-i18n":{"zh-CN":{"description":"Database 名称。"}}},"collectionName":{"type":"string","description":"The name of the target collection.\nSetting this to a non-existing collection results in an error.","x-i18n":{"zh-CN":{"description":"Collection 名称。"}}},"fieldName":{"type":"string","description":"The name of the field whose properties are to be altered.","x-i18n":{"zh-CN":{"description":"待修改属性的字段名称。"}}},"fieldParams":{"type":"object","description":"The properties of the field to alter.","x-18n":{"zh-CN":{"description":"待修改的字段属性。"}},"properties":{"max_length":{"type":"integer","description":"The maximum length of the field. Setting this to a non-zero value restricts the maximum length of the field to the specified value.<br/>This parameter applies only when the field is of type `VarChar`.","x-i18n":{"zh-CN":{"description":"字段的最大长度。将该属性设置为非零值将限制字段的最大长度为指定值。<br/>该参数仅适用于 `VarChar` 类型的字段。"}}},"max_capacity":{"type":"integer","description":"The maximum capacity of the field. Setting this to a non-zero value restricts the maximum capacity of the field to the specified value.<br/>This parameter applies only when the field is of type `Array`.","x-i18n":{"zh-CN":{"description":"字段的最大容量。将该属性设置为非零值将限制字段的最大容量为指定值。<br/>该参数仅适用于 `Array` 类型的字段。"}}}}}},"required":["collectionName","fieldName","fieldParams"]},"example":{"collectionName":"test_collection","fieldName":"my_varchar","fieldParams":{"max_length":100}}}}},"responses":{"200":{"description":"Returns an empty object.","x-i18n":{"zh-CN":{"description":"返回空对象。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"object","properties":{}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":1800,"message":"User hasn't authenticated"}}}}}}}}
+export const endpoint = "/v2/vectordb/collections/fields/alter_properties"
+export const method = "post"
