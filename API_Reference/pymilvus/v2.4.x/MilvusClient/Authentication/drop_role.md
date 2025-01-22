@@ -60,20 +60,3 @@ client.create_role(role_name="read_only")
 # 3. Drop a role
 client.drop_role(role_name="read_only")
 ```
-
-## Related methods
-
-- [create_role()](create_role.md)
-
-- [describe_role()](describe_role.md)
-
-- [grant_privilege()](grant_privilege.md)
-
-- [grant_role()](grant_role.md)
-
-- [list_roles()](list_roles.md)
-
-- [revoke_privileges()](revoke_privileges.md)
-
-- [revoke_role()](revoke_role.md)
-

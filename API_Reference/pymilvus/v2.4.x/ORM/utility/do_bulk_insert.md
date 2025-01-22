@@ -2,12 +2,6 @@
 
 This operation bulk-inserts data from specified files.
 
-<div class="alert warning">
-
-This function is deprecated in v2.4.x and will be removed in a future release. Please use `bulk_import()` instead.
-
-</div>
-
 ## Request Syntax
 
 ```python

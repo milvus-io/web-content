@@ -65,13 +65,3 @@ client = MilvusClient(
 client.create_user(user_name="user_1", password="P@ssw0rd")
 ```
 
-## Related methods
-
-- [describe_user()](describe_user.md)
-
-- [drop_user()](drop_user.md)
-
-- [list_users()](list_users.md)
-
-- [update_password()](update_password.md)
-

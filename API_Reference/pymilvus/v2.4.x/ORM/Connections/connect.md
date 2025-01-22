@@ -9,9 +9,7 @@ connect(
     alias: str,
     user: str | "",
     password: str | "",
-    
     db_name: str | "default",
-    
     token: str | "",
     **kwargs
 )
