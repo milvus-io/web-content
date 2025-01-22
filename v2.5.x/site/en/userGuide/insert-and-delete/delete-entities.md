@@ -9,7 +9,7 @@ You can delete the entities that are no longer needed by filtering conditions or
 
 ## Delete Entities by Filtering Conditions​
 
-When deleting multiple entities that share some attributes in a batch, you can use filter expressions. The example code below uses the **in** operator to bulk delete all Entities with thier **color** field set to the values of **red** and **green**. You can also use other operators to construct filter expressions that meet your requirements. For more information about filter expressions, please refer to [​Metadata Filtering](boolean.md).​
+When deleting multiple entities that share some attributes in a batch, you can use filter expressions. The example code below uses the **in** operator to bulk delete all Entities with their **color** field set to the values of **red** and **green**. You can also use other operators to construct filter expressions that meet your requirements. For more information about filter expressions, please refer to [​Metadata Filtering](boolean.md).​
 
 <div class="multipleCode">
   <a href="#python">Python </a>
