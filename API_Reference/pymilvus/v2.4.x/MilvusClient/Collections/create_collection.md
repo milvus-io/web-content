@@ -171,6 +171,10 @@ create_collection(
 
             The time-to-live (TTL) of a collection in seconds.
 
+        - **mmap.enabled** (*bool*) -
+
+            Whether to enable mmap for the raw data and indexes of all fields in the collection.
+
 **RETURN TYPE:**
 
 *NoneType*

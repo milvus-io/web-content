@@ -80,11 +80,7 @@ search(
 
         - **range_filter**  (float) -  
 
-            Refines the search to vectors within a specific similarity range. When setting `metric_type` to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**. 
-
-        - **group_by_field** (*str*)
-
-            Groups search results by a specified field to ensure diversity and avoid returning multiple results from the same group.
+            Refines the search to vectors within a specific similarity range. When setting `metric_type` to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**.
 
         - **max_empty_result_buckets** (*int*)
 
@@ -97,6 +93,10 @@ search(
         This option, when set, instructs the search to exclude data from growing segments. Utilizing this setting can potentially enhance search performance by focusing only on indexed and fully processed data.
 
     For details on other applicable search parameters, refer to [In-memory Index](https://milvus.io/docs/index.md) and [On-disk Index](https://milvus.io/docs/disk_index.md).
+
+- **group_by_field** (*str*)
+
+    Groups search results by a specified field to ensure diversity and avoid returning multiple results from the same group.
 
 - **timeout** (*float* | *None*) -
 
