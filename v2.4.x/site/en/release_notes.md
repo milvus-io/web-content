@@ -7,6 +7,51 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.21
+
+Release Date: January 22, 2025
+
+| Milvus version | Python SDK version | Java SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|---------------------|
+| 2.4.21         | 2.4.14             | 2.4.10           | 2.4.11              |
+
+We’re excited to announce a new release of Milvus 2.4.21, featuring customizable root privileges, refined concurrency and locking mechanisms, and a host of bug fixes to enhance overall stability and reliability. We encourage you to upgrade or give it a try, and share your feedback to help us continually improve Milvus!
+
+### Features
+
+- Root privileges can be customized ([#39325](https://github.com/milvus-io/milvus/pull/39325))
+
+### Critical bug fixes
+
+- Fixed potential data loss issue caused by restarting MixCoord and flushing concurrently ([#39423](https://github.com/milvus-io/milvus/pull/39423))
+
+### Bug fixes
+
+- Fixed an alias issue that could cause an iterator to traverse the wrong database ([#39301](https://github.com/milvus-io/milvus/pull/39301))
+- Resolved slow query problems caused by coarse lock granularity during multi-column loading ([#39290](https://github.com/milvus-io/milvus/pull/39290))
+- Fixed a resource group update failure when altering the database ([#39357](https://github.com/milvus-io/milvus/pull/39357))
+- Allowed skipping disk quota checks during bulk import ([#39320](https://github.com/milvus-io/milvus/pull/39320))
+- Supports Tantivy indexes built from multiple segments ([#39127](https://github.com/milvus-io/milvus/pull/39127))
+- Fixed incorrect memory estimation for small segments ([#38910](https://github.com/milvus-io/milvus/pull/38910))
+- Fixed ineffective RBAC custom group privilege checks ([#39194](https://github.com/milvus-io/milvus/pull/39194))
+- Resolved a server crash caused by passing an empty parameter to RestoreRBAC API ([#39142](https://github.com/milvus-io/milvus/pull/39142))
+- Fixed an error reporting issue when automatic refresh config operations failed ([#39073](https://github.com/milvus-io/milvus/pull/39073))
+- Fixed unrecognized expressions that used uppercase AND or OR ([#38929](https://github.com/milvus-io/milvus/pull/38929))
+- Resolved a partition drop failure that occurred after a load failure ([#38871](https://github.com/milvus-io/milvus/pull/38871))
+
+### Improvements
+
+- Unified style by using CStatus to handle NewCollection CGO calls ([#39306](https://github.com/milvus-io/milvus/pull/39306))
+- Unified style by using CStatus to handle NewCollection CGO calls ([#39306](https://github.com/milvus-io/milvus/pull/39306))
+- Refactored the delete MVCC function ([#39258](https://github.com/milvus-io/milvus/pull/39258))
+- Refined lock granularity in QueryNode ([#38908](https://github.com/milvus-io/milvus/pull/38908))
+- Added primary field names in SearchResult and QueryResults ([#39223](https://github.com/milvus-io/milvus/pull/39223))
+- Introduced a new Go package to manage proto ([#39129](https://github.com/milvus-io/milvus/pull/39129))
+- Cleaned up compaction tasks in compactionhandler ([#38848](https://github.com/milvus-io/milvus/pull/38848))
+- Accelerated bitset operations with SIMD ([#39042](https://github.com/milvus-io/milvus/pull/39042))
+- Optimized error handling for unloaded collection on QueryNode ([#38920](https://github.com/milvus-io/milvus/pull/38920))
+- Updated the default Etcd version to v3.5.16 ([#38973](https://github.com/milvus-io/milvus/pull/38973))
+
 ## v2.4.20
 
 Release Date: Janurary 2, 2025
