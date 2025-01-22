@@ -82,15 +82,37 @@ summary: Learn how to configure message storage with Milvus Operator.
 <p>Currently, you can only configure RocksMQ as the message storage for Milvus standalone with Milvus Operator.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures a RocksMQ service.</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
+<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
   name: milvus
 spec:
-  dependencies: {}
+  mode: standalone
+  dependencies:
+    msgStreamType: rocksmq
+    rocksmq:
+      persistence:
+        enabled: <span class="hljs-literal">true</span>
+        pvcDeletion: <span class="hljs-literal">true</span>
+        persistentVolumeClaim:
+          spec:
+            accessModes: [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
+            storageClassName: <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
+            resources:
+              requests:
+                storage: 10Gi  <span class="hljs-comment"># Specify your desired storage size</span>
   components: {}
   config: {}
 <button class="copy-code-btn"></button></code></pre>
+<h5 id="Key-configuration-options" class="common-anchor-header">Key configuration options:</h5><ul>
+<li><code translate="no">msgStreamType</code>: rocksmq: Explicitly sets RocksMQ as the message queue</li>
+<li><code translate="no">persistence.enabled</code>: Enables persistent storage for RocksMQ data</li>
+<li><code translate="no">persistence.pvcDeletion</code>: When true, the PVC will be deleted when the Milvus instance is deleted</li>
+<li><code translate="no">persistentVolumeClaim.spec</code>: Standard Kubernetes PVC specification</li>
+<li><code translate="no">accessModes</code>: Typically <code translate="no">ReadWriteOnce</code> for block storage</li>
+<li><code translate="no">storageClassName</code>: Your cluster’s storage class</li>
+<li><code translate="no">storage</code>: Size of the persistent volume</li>
+</ul>
 <h2 id="Configure-NATS" class="common-anchor-header">Configure NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
