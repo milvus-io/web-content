@@ -58,19 +58,3 @@ client = MilvusClient(
 client.create_role(role_name="read_only")
 ```
 
-## Related methods
-
-- [describe_role()](describe_role.md)
-
-- [drop_role()](drop_role.md)
-
-- [grant_privilege()](grant_privilege.md)
-
-- [grant_role()](grant_role.md)
-
-- [list_roles()](list_roles.md)
-
-- [revoke_privileges()](revoke_privileges.md)
-
-- [revoke_role()](revoke_role.md)
-
