@@ -1,13 +1,18 @@
 ---
 id: integrate_with_spark.md
-summary: This page discusses the Spark-Milvus connector.
-title: Spark-Milvus Connector User Guide
+summary: Apache Spark and Databricks integrates with Milvus and Zilliz Cloud to combine big data processing with vector search. Learn how to build AI-powered search and analytics with Spark-Milvus connector.
+title: Use Apache Spark™ with Milvus/Zilliz Cloud for AI Pipelines
 ---
 
-# Spark-Milvus Connector User Guide
+# Use Apache Spark™ with Milvus/Zilliz Cloud for AI Pipelines
 
-The Spark-Milvus Connector (https://github.com/zilliztech/spark-milvus) provides seamless integration between Apache Spark and Milvus, combining the data processing and ML features of Apache Spark with the vector data storage and search capabilities of Milvus. This integration enables various interesting applications, including: 
+The [Spark-Milvus Connector](https://github.com/zilliztech/spark-milvus) provides integration of Apache Spark and Databricks with Milvus and Zilliz Cloud. It bridges Apache Spark’s powerful big data processing and machine learning (ML) features with Milvus’s state-of-the-art vector search capabilities. This integration enables streamlined workflow for AI-powered search, advanced analytics, ML training, and efficient management of large-scale vector data.
 
+Apache Spark is a distributed data processing platform designed for handling massive datasets with high-speed computation. When paired with Milvus or Zilliz Cloud, it unlocks new possibilities for use cases such as semantic search, recommendation systems, and AI-driven data analytics.
+
+For example, Spark can batch-process large datasets to generate embeddings via ML models, then use the Spark-Milvus connector to store these embeddings directly in Milvus or Zilliz Cloud. Once indexed, this data can be quickly searched or analyzed, creating a powerful pipeline for AI and big data workflows.
+
+The Spark-Milvus connector supports tasks like iterative and bulk data ingestion into Milvus, synchronization of data between systems, and advanced analytics on vector data stored in Milvus. This guide will walk you through the steps to configure and use the connector effectively for use cases such as:
 - Efficiently load vector data into Milvus in large batches,
 - Move data between Milvus and other storage systems or databases,
 - Analyzing the data in Milvus by leveraging Spark MLlib and other AI tools.
@@ -484,8 +489,8 @@ val targetMilvusOptions = new MilvusOptions(new CaseInsensitiveStringMap(targetP
 MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, "mjson")
 ```
 
-## Hands-on
+## Hands-on Notebook
 
-To help you quickly get started with the Spark-Milvus Connector, we have prepared a notebook that walks you through both the streaming and batch data transfer processes, with Milvus and Zilliz Cloud.
+To help you quickly get started with the Spark-Milvus Connector, you can checkout the notebook that walks you through both the streaming and batch data ingestion examples for Spark to Milvus and Zilliz Cloud.
 
 - [Spark-Milvus Connector Hands-on](https://zilliz.com/databricks_zilliz_demos)
