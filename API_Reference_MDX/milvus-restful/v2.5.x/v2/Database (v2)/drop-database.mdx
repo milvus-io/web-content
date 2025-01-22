@@ -1,0 +1,28 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 12
+slug: /restful/drop-database
+title: "Drop Database | RESTful"
+description: "This operation drops the specified database. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Drop Database"
+sidebar_custom_props: { badges: ['post']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "Drop Database"
+  - "post"
+  - RESTful
+  - API
+---
+
+# Drop Database
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"Drop Database","deprecated":false,"description":"This operation drops the specified database.","x-i18n":{"zh-CN":{"summary":"删除 Database","description":"本操作删除指定 Database。"}},"tags":["Database Operations (V2)"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the target database.","x-i18n":{"zh-CN":{"description":"目标 Database 名称。"}}}},"required":["dbName"]},"example":{"dbName":"my_database"}}}},"responses":{"200":{"description":"Returns an empty response.","x-i18n":{"zh-CN":{"description":"返回空响应。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"object","description":"An empty response.","x-i18n":{"zh-CN":{"description":"空响应。"}}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":1800,"message":"User hasn't authenticated"}}}}}}}}
+export const endpoint = "/v2/vectordb/databases/drop"
+export const method = "post"

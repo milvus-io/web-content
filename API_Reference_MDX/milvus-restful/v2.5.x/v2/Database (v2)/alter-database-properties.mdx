@@ -1,0 +1,28 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 10
+slug: /restful/alter-database-properties
+title: "Alter Database Properties | RESTful"
+description: "This operation alters the properties of the specified database. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Alter Database Properties"
+sidebar_custom_props: { badges: ['post']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "Alter Database Properties"
+  - "post"
+  - RESTful
+  - API
+---
+
+# Alter Database Properties
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"Alter Database Properties","deprecated":false,"description":"This operation alters the properties of the specified database.","x-i18n":{"zh-CN":{"summary":"修改 Database 属性","description":"本操作修改指定 Database 的属性。"}},"tags":["Database Operations (V2)"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the target database.","x-i18n":{"zh-CN":{"description":"目标 Database 名称。"}}},"properties":{"type":"object","description":"The properties to be modified in key-value pairs.","x-i18n":{"zh-CN":{"description":"以键值对的方式提供的要修改的属性。"}},"properties":{"database.replica.number":{"type":"integer","description":"The number of replicas for the specified database.","x-i18n":{"zh-CN":{"description":"指定 Database 的副本数量。"}}},"database.resource_groups":{"type":"string","description":"The names of the resource groups associated with the specified database in a common-separated list.","x-i18n":{"zh-CN":{"description":"与指定 Database 关联的资源组名称，以逗号分隔的列表形式提供。"}}},"database.diskQuota.mb":{"type":"integer","description":"The maximum size of the disk space for the specified database, in megabytes (MB).","x-i18n":{"zh-CN":{"description":"指定 Database 的磁盘空间最大容量，以兆字节 (MB) 为单位。"}}},"database.max.collections":{"type":"integer","description":"The maximum number of collections allowed in the specified database.","x-i18n":{"zh-CN":{"description":"指定 Database 中允许的最大 Collection 数量。"}}},"database.force.deny.writing":{"type":"boolean","description":"Whether to force the specified database to deny writing operations.","x-i18n":{"zh-CN":{"description":"是否强制指定 Database 拒绝写入操作。"}}},"database.force.deny.reading":{"type":"boolean","description":"Whether to force the specified database to deny reading operations.","x-i18n":{"zh-CN":{"description":"是否强制指定 Database 拒绝读取操作。"}}}}}},"required":["dbName","properties"]},"example":{"dbName":"my_database","properties":{"database.replica.number":2}}}}},"responses":{"200":{"description":"Returns an empty response.","x-i18n":{"zh-CN":{"description":"返回空响应。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"object","description":"An empty response.","x-i18n":{"zh-CN":{"description":"空响应。"}}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":1800,"message":"User hasn't authenticated"}}}}}}}}
+export const endpoint = "/v2/vectordb/databases/alter"
+export const method = "post"

@@ -1,0 +1,28 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 41
+slug: /restful/Alter Properties
+title: "Alter Index Properties | RESTful"
+description: "This operation alters the properties of an index. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Alter Index Properties"
+sidebar_custom_props: { badges: ['post']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "Alter Index Properties"
+  - "post"
+  - RESTful
+  - API
+---
+
+# Alter Index Properties
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"Alter Index Properties","deprecated":false,"description":"This operation alters the properties of an index.","x-i18n":{"zh-CN":{"summary":"修改索引属性","description":"本操作修改索引属性。"}},"tags":["Index Operations (V2)"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the database that to which the collection belongs .\nSetting this to a non-existing database results in an error.","x-i18n":{"zh-CN":{"description":"Collection 所属的数据库名称。设置为不存在的数据库将导致错误。"}}},"collectionName":{"type":"string","description":"The name of the target collection.\nSetting this to a non-existing collection results in an error.","x-i18n":{"zh-CN":{"description":"目标 Collection 的名称。设置为不存在的 Collection 将导致错误。"}}},"indexName":{"type":"string","description":"The name of the target index.","x-i18n":{"zh-CN":{"description":"目标索引的名称。"}}},"properties":{"type":"object","description":"The new index parameters to be set.","x-i18n":{"zh-CN":{"description":"要设置的新索引参数。"}},"properties":{"mmap.enabled":{"type":"boolean","description":"Whether to enable memory mapping for the current index.","x-i18n":{"zh-CN":{"description":"是否为当前索引启用内存映射。"}}}}}},"required":["indexName","collectionName","properties"]},"example":{"collectionName":"test_collection","indexName":"my_vector","properties":{"nlist":1024}}}}},"responses":{"200":{"description":"Returns an empty response.","x-i18n":{"zh-CN":{"description":"返回空响应。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"object","properties":{}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"cost":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":1800,"message":"User hasn't authenticated"}}}}}}}}
+export const endpoint = "/v2/vectordb/indexes/alter_properties"
+export const method = "post"
