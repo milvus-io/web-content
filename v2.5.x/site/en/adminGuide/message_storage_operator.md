@@ -51,15 +51,37 @@ Currently, you can only configure RocksMQ as the message storage for Milvus stan
 The following example configures a RocksMQ service. 
 
 ```YAML
-apiVersion: milvus.io/v1alpha1
+apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
   name: milvus
 spec:
-  dependencies: {}
+  mode: standalone
+  dependencies:
+    msgStreamType: rocksmq
+    rocksmq:
+      persistence:
+        enabled: true
+        pvcDeletion: true
+        persistentVolumeClaim:
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            storageClassName: "local-path"  # Specify your storage class
+            resources:
+              requests:
+                storage: 10Gi  # Specify your desired storage size
   components: {}
   config: {}
 ```
+
+##### Key configuration options:
+* `msgStreamType`: rocksmq: Explicitly sets RocksMQ as the message queue
+* `persistence.enabled`: Enables persistent storage for RocksMQ data
+* `persistence.pvcDeletion`: When true, the PVC will be deleted when the Milvus instance is deleted
+* `persistentVolumeClaim.spec`: Standard Kubernetes PVC specification
+* `accessModes`: Typically `ReadWriteOnce` for block storage
+* `storageClassName`: Your cluster's storage class
+* `storage`: Size of the persistent volume
 
 ## Configure NATS
 

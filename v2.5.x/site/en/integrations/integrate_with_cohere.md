@@ -1,6 +1,6 @@
 ---
 id: integrate_with_cohere.md
-summary: This page goes over how to search for the best answer to questions using Milvus as the Vector Database and Hugging Face as the embedding system.
+summary:This page illustrates how to create a question-answering system based on the SQuAD dataset using Milvus as the vector database and Cohere as the embedding system.
 title: Question Answering Using Milvus and Cohere
 ---
 
