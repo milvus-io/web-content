@@ -1,12 +1,23 @@
 ---
 id: kafka-connect-milvus.md
-summary: In this quick start guide we show how to setup open source kafka and Zilliz Cloud to ingest vector data. 
-title: Integrate Milvus with WhyHow
+summary: Apache Kafka is integrated with Milvus and Zilliz Cloud to stream vector data. Learn how to use Kafka-Milvus connector to build real-time pipelines for semantic search, recommendation systems, and AI-driven analytics.
+title: Connect Apache Kafka® with Milvus/Zilliz Cloud for Real-Time Vector Data Ingestion
 ---
 
-# Connect Kafka with Milvus
+# Connect Apache Kafka® with Milvus/Zilliz Cloud for Real-Time Vector Data Ingestion
 
 In this quick start guide we show how to setup open source kafka and Zilliz Cloud to ingest vector data.
+
+This tutorial explains how to use Apache Kafka® to stream and ingest vector data into Milvus vector database and Zilliz Cloud (fully-managed Milvus), enabling advanced real-time applications such as semantic search, recommendation systems, and AI-powered analytics.
+
+Apache Kafka is a distributed event streaming platform designed for high-throughput, low-latency pipelines. It is widely used to collect, store, and process real-time data streams from sources like databases, IoT devices, mobile apps, and cloud services. Kafka’s ability to handle large volumes of data makes it an important data source of vector databases like Milvus or Zilliz Cloud.
+
+For example, Kafka can capture real-time data streams—such as user interactions, sensor readings, together with their embeddings from machine learning models—and publish these streams directly to Milvus or Zilliz Cloud. Once in the vector database, this data can be indexed, searched, and analyzed efficiently.
+
+The Kafka integration with Milvus and Zilliz Cloud provides a seamless way to build powerful pipelines for unstructured data workflows. The connector works for both open-source Kafka deployment and hosted services such as [Confluent](https://www.confluent.io/hub/zilliz/kafka-connect-milvus) and [StreamNative](https://docs.streamnative.io/hub/connector-kafka-connect-milvus-sink-v0.1).
+
+In this tutorial we use Zilliz Cloud as a demostration:
+
 
 ## Step 1: Download the kafka-connect-milvus plugin
 
@@ -116,4 +127,4 @@ Ensure you have Kafka and Zilliz Cloud setup and properly configured.
 
 ### Support
 
-If you require any assistance or have questions regarding the Kafka Connect Milvus Connector, please feel free to reach out to our support team: **Email:** [support@zilliz.com](mailto:support@zilliz.com)
+If you require any assistance or have questions regarding the Kafka Connect Milvus Connector, please feel free to reach out to the maintainer of the connector: **Email:** [support@zilliz.com](mailto:support@zilliz.com)

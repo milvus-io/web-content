@@ -65,10 +65,10 @@ All code samples on this page are in PyMilvus 2.5.3. Upgrade your PyMilvus insta
     
     # create a resource group that exactly hold no query node.
     try:
-        utility.create_resource_group(name, config=utility.ResourceGroupConfig(
+        milvus_client.create_resource_group(name, config=ResourceGroupConfig(
             requests={"node_num": node_num},
             limits={"node_num": node_num},
-        ), using='default')
+        ))
         print(f"Succeeded in creating resource group {name}.")
     except Exception:
         print("Failed to create the resource group.")
@@ -81,7 +81,7 @@ All code samples on this page are in PyMilvus 2.5.3. Upgrade your PyMilvus insta
     To view the list of resource groups in a Milvus instance, do as follows:
 
     ```python
-    rgs = utility.list_resource_groups(using='default')
+    rgs = milvus_client.list_resource_groups()
     print(f"Resource group list: {rgs}")
 
     # Resource group list: ['__default_resource_group', 'rg']
@@ -92,16 +92,19 @@ All code samples on this page are in PyMilvus 2.5.3. Upgrade your PyMilvus insta
     You can have Milvus describe a resource group in concern as follows:
 
     ```python
-    info = utility.describe_resource_group(name, using="default")
+    info = milvus_client.describe_resource_group(name)
     print(f"Resource group description: {info}")
 
     # Resource group description: 
-    #        <name:"rg">,           // string, rg name
-    #        <capacity:1>,            // int, num_node which has been transfer to this rg
-    #        <num_available_node:0>,  // int, available node_num, some node may shutdown
-    #        <num_loaded_replica:{}>, // map[string]int, from collection_name to loaded replica of each collecion in this rg
-    #        <num_outgoing_node:{}>,  // map[string]int, from collection_name to outgoging accessed node num by replica loaded in this rg 
-    #        <num_incoming_node:{}>.  // map[string]int, from collection_name to incoming accessed node num by replica loaded in other rg
+    # ResourceGroupInfo:
+    #   <name:rg1>,     // resource group name
+    #   <capacity:0>,   // resource group capacity
+    #   <num_available_node:1>,  // resource group node num
+    #   <num_loaded_replica:{}>, // collection loaded replica num in resource group
+    #   <num_outgoing_node:{}>, // node num which still in use by replica in other resource group
+    #   <num_incoming_node:{}>, // node num which is in use by replica but belong to other resource group 
+    #   <config:{}>,            // resource group config
+    #   <nodes:[]>              // node detail info
     ```
 
 4. Transfer nodes between resource groups.
@@ -117,7 +120,7 @@ All code samples on this page are in PyMilvus 2.5.3. Upgrade your PyMilvus insta
     expected_num_nodes_in_rg = 1
 
     try:
-        utility.update_resource_groups({
+        milvus_client.update_resource_groups({
             source: ResourceGroupConfig(
                 requests={"node_num": expected_num_nodes_in_default},
                 limits={"node_num": expected_num_nodes_in_default},
@@ -126,7 +129,7 @@ All code samples on this page are in PyMilvus 2.5.3. Upgrade your PyMilvus insta
                 requests={"node_num": expected_num_nodes_in_rg},
                 limits={"node_num": expected_num_nodes_in_rg},
             )
-        }, using="default")
+        })
         print(f"Succeeded in move 1 node(s) from {source} to {target}.")
     except Exception:
         print("Something went wrong while moving nodes.")
@@ -141,28 +144,25 @@ All code samples on this page are in PyMilvus 2.5.3. Upgrade your PyMilvus insta
     ```python
     from pymilvus import Collection
 
-    collection = Collection('demo')
+    collection_name = "demo"
 
     # Milvus loads the collection to the default resource group.
-    collection.load(replica_number=2)
+    milvus_client.load_collection(collection_name, replica_number=2)
 
     # Or, you can ask Milvus load the collection to the desired resource group.
     # make sure that query nodes num should be greater or equal to replica_number
     resource_groups = ['rg']
-    collection.load(replica_number=2, _resource_groups=resource_groups) 
+    milvus_client.load_collection(replica_number=2, _resource_groups=resource_groups) 
     ```
 
     Also, you can just load a partition into a resource group and have its replicas distributed among several resource groups. The following assumes that a collection named `Books` already exists and it has a partition named `Novels`.
 
     ```python
-    collection = Collection("Books")
+    collection = "Books"
+    partition = "Novels"
 
     # Use the load method of a collection to load one of its partition
-    collection.load(["Novels"], replica_number=2, _resource_groups=resource_groups)
-
-    # Or, you can use the load method of a partition directly
-    partition = Partition(collection, "Novels")
-    partition.load(replica_number=2, _resource_groups=resource_groups)
+    milvus_client.load_partitions(collection, [partition], replica_number=2, _resource_groups=resource_groups)
     ```
 
     Note that `_resource_groups` is an optional parameter, and leaving it unspecified have Milvus load the replicas onto the query nodes in the default resource group.
@@ -180,8 +180,8 @@ All code samples on this page are in PyMilvus 2.5.3. Upgrade your PyMilvus insta
     num_replicas = 1
 
     try:
-        utility.transfer_replica(source, target, collection_name, num_replicas, using="default")
-        print(f"Succeeded in moving {num_node} replica(s) of {collection_name} from {source} to {target}.")
+        milvus_client.transfer_replica(source, target, collection_name, num_replicas)
+        print(f"Succeeded in moving {num_replicas} replica(s) of {collection_name} from {source} to {target}.")
     except Exception:
         print("Something went wrong while moving replicas.")
 
@@ -193,17 +193,18 @@ All code samples on this page are in PyMilvus 2.5.3. Upgrade your PyMilvus insta
     You can drop a resource group that hold no query node (`limits.node_num = 0`) at any time. In this guide, resource group `rg` now has one query node. You need to change the configuration `limits.node_num` of resource group into zero first.
 
     ```python
+    resource_group = "rg
     try:
-        utility.update_resource_groups({
-            "rg": utility.ResourceGroupConfig(
+        milvus_client.update_resource_groups({
+            resource_group: ResourceGroupConfig(
                 requests={"node_num": 0},
                 limits={"node_num": 0},
             ),
-        }, using="default")
-        utility.drop_resource_group("rg", using="default")
-        print(f"Succeeded in dropping {source}.")
+        })
+        milvus_client.drop_resource_group(resource_group)
+        print(f"Succeeded in dropping {resource_group}.")
     except Exception:
-        print(f"Something went wrong while dropping {source}.")
+        print(f"Something went wrong while dropping {resource_group}.")
     ```
 
 For more details, please refer to the [relevant examples in pymilvus](https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py)
@@ -219,7 +220,6 @@ Here is a good practice for managing QueryNodes in a cloud environment:
     Here is an example setup:
 
     ```python
-    from pymilvus import utility
     from pymilvus.client.types import ResourceGroupConfig
 
     _PENDING_NODES_RESOURCE_GROUP="__pending_nodes"
@@ -227,26 +227,26 @@ Here is a good practice for managing QueryNodes in a cloud environment:
     def init_cluster(node_num: int):
         print(f"Init cluster with {node_num} nodes, all nodes will be put in default resource group")
         # create a pending resource group, which can used to hold the pending nodes that do not hold any data.
-        utility.create_resource_group(name=_PENDING_NODES_RESOURCE_GROUP, config=ResourceGroupConfig(
+        milvus_client.create_resource_group(name=_PENDING_NODES_RESOURCE_GROUP, config=ResourceGroupConfig(
             requests={"node_num": 0}, # this resource group can hold 0 nodes, no data will be load on it.
             limits={"node_num": 10000}, # this resource group can hold at most 10000 nodes 
         ))
 
         # update default resource group, which can used to hold the nodes that all initial node in it.
-        utility.update_resource_groups({
+        milvus_client.update_resource_groups({
             "__default_resource_group": ResourceGroupConfig(
                 requests={"node_num": node_num},
                 limits={"node_num": node_num},
                 transfer_from=[{"resource_group": _PENDING_NODES_RESOURCE_GROUP}], # recover missing node from pending resource group at high priority.
                 transfer_to=[{"resource_group": _PENDING_NODES_RESOURCE_GROUP}], # recover redundant node to pending resource group at low priority.
             )})
-        utility.create_resource_group(name="rg1", config=ResourceGroupConfig(
+        milvus_client.create_resource_group(name="rg1", config=ResourceGroupConfig(
             requests={"node_num": 0},
             limits={"node_num": 0},
             transfer_from=[{"resource_group": _PENDING_NODES_RESOURCE_GROUP}], 
             transfer_to=[{"resource_group": _PENDING_NODES_RESOURCE_GROUP}],
         ))
-        utility.create_resource_group(name="rg2", config=ResourceGroupConfig(
+        milvus_client.create_resource_group(name="rg2", config=ResourceGroupConfig(
             requests={"node_num": 0},
             limits={"node_num": 0},
             transfer_from=[{"resource_group": _PENDING_NODES_RESOURCE_GROUP}], 
@@ -271,7 +271,7 @@ Here is a good practice for managing QueryNodes in a cloud environment:
     We can use the API to scale a specific resource group to a designated number of QueryNodes without affecting any other resource groups.
     ```python
     # scale rg1 into 3 nodes, rg2 into 1 nodes
-    utility.update_resource_groups({
+    milvus_client.update_resource_groups({
         "rg1": ResourceGroupConfig(
             requests={"node_num": 3},
             limits={"node_num": 3},
@@ -295,7 +295,7 @@ Here is a good practice for managing QueryNodes in a cloud environment:
 
     ```python
     # scale rg1 from 3 nodes into 2 nodes
-    utility.update_resource_groups({
+    milvus_client.update_resource_groups({
         "rg1": ResourceGroupConfig(
             requests={"node_num": 2},
             limits={"node_num": 2},
