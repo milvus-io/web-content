@@ -2,7 +2,7 @@
 id: vector_visualization.md
 summary: >-
   In this example, we will show how to visualize the embeddings(vectors) in
-  Milvus using t-SN.
+  Milvus using t-SNE.
 title: Vector Visualization
 ---
 <h1 id="Vector-Visualization" class="common-anchor-header">Vector Visualization<button data-href="#Vector-Visualization" class="anchor-icon" translate="no">

@@ -1,11 +1,14 @@
 ---
 id: kafka-connect-milvus.md
 summary: >-
-  In this quick start guide we show how to setup open source kafka and Zilliz
-  Cloud to ingest vector data.
-title: Integrate Milvus with WhyHow
+  Apache Kafka is integrated with Milvus and Zilliz Cloud to stream vector data.
+  Learn how to use Kafka-Milvus connector to build real-time pipelines for
+  semantic search, recommendation systems, and AI-driven analytics.
+title: >-
+  Connect Apache Kafka® with Milvus/Zilliz Cloud for Real-Time Vector Data
+  Ingestion
 ---
-<h1 id="Connect-Kafka-with-Milvus" class="common-anchor-header">Connect Kafka with Milvus<button data-href="#Connect-Kafka-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="common-anchor-header">Connect Apache Kafka® with Milvus/Zilliz Cloud for Real-Time Vector Data Ingestion<button data-href="#Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,6 +24,11 @@ title: Integrate Milvus with WhyHow
         ></path>
       </svg>
     </button></h1><p>In this quick start guide we show how to setup open source kafka and Zilliz Cloud to ingest vector data.</p>
+<p>This tutorial explains how to use Apache Kafka® to stream and ingest vector data into Milvus vector database and Zilliz Cloud (fully-managed Milvus), enabling advanced real-time applications such as semantic search, recommendation systems, and AI-powered analytics.</p>
+<p>Apache Kafka is a distributed event streaming platform designed for high-throughput, low-latency pipelines. It is widely used to collect, store, and process real-time data streams from sources like databases, IoT devices, mobile apps, and cloud services. Kafka’s ability to handle large volumes of data makes it an important data source of vector databases like Milvus or Zilliz Cloud.</p>
+<p>For example, Kafka can capture real-time data streams—such as user interactions, sensor readings, together with their embeddings from machine learning models—and publish these streams directly to Milvus or Zilliz Cloud. Once in the vector database, this data can be indexed, searched, and analyzed efficiently.</p>
+<p>The Kafka integration with Milvus and Zilliz Cloud provides a seamless way to build powerful pipelines for unstructured data workflows. The connector works for both open-source Kafka deployment and hosted services such as <a href="https://www.confluent.io/hub/zilliz/kafka-connect-milvus">Confluent</a> and <a href="https://docs.streamnative.io/hub/connector-kafka-connect-milvus-sink-v0.1">StreamNative</a>.</p>
+<p>In this tutorial we use Zilliz Cloud as a demostration:</p>
 <h2 id="Step-1-Download-the-kafka-connect-milvus-plugin" class="common-anchor-header">Step 1: Download the kafka-connect-milvus plugin<button data-href="#Step-1-Download-the-kafka-connect-milvus-plugin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,4 +186,4 @@ topics=topic_0
 <li><p>Check if the entity has been inserted into the collection in Zilliz Cloud. Here is what it looks like on Zilliz Cloud if the insertion succeeds:</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/insearted_entities.png" width="80%" /></p></li>
 </ol>
-<h3 id="Support" class="common-anchor-header">Support</h3><p>If you require any assistance or have questions regarding the Kafka Connect Milvus Connector, please feel free to reach out to our support team: <strong>Email:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>
+<h3 id="Support" class="common-anchor-header">Support</h3><p>If you require any assistance or have questions regarding the Kafka Connect Milvus Connector, please feel free to reach out to the maintainer of the connector: <strong>Email:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>
