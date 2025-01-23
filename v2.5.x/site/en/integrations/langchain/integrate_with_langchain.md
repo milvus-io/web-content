@@ -22,13 +22,13 @@ The RAG system combines a retrieval system with a generative model to generate n
 Before running this notebook, make sure you have the following dependencies installed:
 
 
-```python
-$ pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4
+```shell
+pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4
 ```
 
 <div class="alert note">
 
-If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime**. (Click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
 
 </div>
 
@@ -310,3 +310,4 @@ rag_chain2.with_config(
 
 ----
 This tutorial focus the basic usage of Milvus LangChain integration and simple RAG approach. For more advanced RAG techniques, please refer to the [advanced rag bootcamp](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/advanced_rag).
+

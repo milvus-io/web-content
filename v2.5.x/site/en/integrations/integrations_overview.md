@@ -19,6 +19,7 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Image Search using Milvus and Pytorch](integrate_with_pytorch.md) | Semantic Search | Milvus, Pytorch |
 | [Movie Search using Milvus and SentenceTransfromers](integrate_with_sentencetransformers.md) | Semantic Search | Milvus, SentenceTransformers |
 | [Use Milvus as a Vector Store in LangChain](basic_usage_langchain.md) | Semantic Search | Milvus, LangChain |
+| [Using Full-Text Search with LangChain and Milvus](full_text_search_with_langchain.md) | Full-Text Search | Milvus, LangChain |
 | [RAG with Milvus and Haystack](integrate_with_haystack.md) | RAG | Milvus, Haystack |
 | [Conduct Vision Searches with Milvus and FiftyOne](integrate_with_voxel51.md) | Semantic Search | Milvus, FiftyOne |
 | [Semantic Search with Milvus and VoyageAI](integrate_with_voyageai.md) | Semantic Search | Milvus, VoyageAI |
@@ -60,3 +61,7 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Build RAG with Milvus and Ollama](build_RAG_with_milvus_and_ollama.md) | LLMs | Milvus, Ollama |
 | [Getting Started with Dynamiq and Milvus](milvus_rag_with_dynamiq.md) | Orchestration | Milvus, Dynamiq |
 | [Build RAG with Milvus and DeepSeek](build_RAG_with_milvus_and_deepseek.md) | LLMs | Milvus, DeepSeek |
+| [Integrate Milvus with Phidata](integrate_with_phidata.md) | Agents | Milvus, Phidata |
+| [Building RAG with Milvus and Crawl4AI](build_RAG_with_milvus_and_crawl4ai.md) | Data Sources | Milvus, Crawl4AI |
+| [Building RAG with Milvus and Firecrawl](build_RAG_with_milvus_and_firecrawl.md) | Data Sources | Milvus, Firecrawl |
+
