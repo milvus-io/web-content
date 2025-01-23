@@ -15,7 +15,7 @@
   "milvus_csharp_sdk_real_version": "2.2.14", 
   "milvus_restful_sdk_version": "2.4.x",
   "milvus_restful_sdk_real_version": "2.4.1",
-  "milvus_operator_version": "1.0.1",
+  "milvus_operator_version": "1.1.9",
   "milvus_helm_chart_version": "4.1.24",
   "milvus_image": "2.4.1",
   "attu_release": "2.3.10",
