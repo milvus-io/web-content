@@ -16,7 +16,7 @@ This guide describes how to upgrade your Milvus cluster with Milvus operator.
 
 ## Upgrade your Milvus operator
 
-Run the following command to upgrade the version of your Milvus Operator to v1.0.1.
+Run the following command to upgrade the version of your Milvus Operator to v1.2.0.
 
 ```
 helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/
@@ -80,10 +80,10 @@ spec:
     image: milvusdb/milvus:<some-old-version>
 ```
 
-Then save your configuration as a YAML file (for example, `milvusupgrade.yml`) and patch this configuration file to your Milvus instance as follows:
+Then save your configuration as a YAML file (for example, `milvusupgrade.yaml`) and patch this configuration file to your Milvus instance as follows:
 
 ```shell
-kubectl patch -f milvusupgrade.yml
+kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge 
 ```
 
 
@@ -107,7 +107,7 @@ spec:
 Then run the following to perform the upgrade:
 
 ```shell
-kubectl patch -f milvusupgrade.yaml
+kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge 
 ```
 
 ## Migrate the metadata

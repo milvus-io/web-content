@@ -40,63 +40,12 @@ If you encounter any issues pulling the image, contact us at <a href="mailto:com
 
 Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When custom resources are defined, you can use K8s APIs in a declarative way and manage the Milvus deployment stack to ensure its scalability and high availability.
 
-### 1. Install cert-manager
-
-Milvus Operator uses [cert-manager](https://cert-manager.io/docs/installation/supported-releases/) to provide a certificate for the webhook server. 
-
-<div class="alert note">
-
-- You can safely skip this step if you choose to [deploy Milvus Operator using Helm](install_cluster-helm.md).
-- Milvus Operator requires cert-manager 1.1.3 or above.
-
-</div>
-
-Run the following command to install cert-manager.
-
-```shell
-$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.yaml
-```
-
-You will see the output similar to the following after the installation process ends.
-
-```shell
-customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/challenges.acme.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/clusterissuers.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/issuers.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io created
-namespace/cert-manager created
-serviceaccount/cert-manager-cainjector created
-...
-service/cert-manager created
-service/cert-manager-webhook created
-deployment.apps/cert-manager-cainjector created
-deployment.apps/cert-manager created
-deployment.apps/cert-manager-webhook created
-mutatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook created
-validatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook created
-```
-
-You can check if cert-manager pods are running as follows:
-
-```shell
-$ kubectl get pods -n cert-manager
-
-NAME                                      READY   STATUS    RESTARTS   AGE
-cert-manager-848f547974-gccz8             1/1     Running   0          70s
-cert-manager-cainjector-54f4cc6b5-dpj84   1/1     Running   0          70s
-cert-manager-webhook-7c9588c76-tqncn      1/1     Running   0          70s
-```
-
-### 2. Install Milvus Operator
-
 You can install Milvus Operator in either of the following ways:
 
 - [With Helm](#Install-with-Helm)
 - [With kubectl](#Install-with-kubectl)
 
-#### Install with Helm
+### Install with Helm
 
 Run the following command to install Milvus Operator with Helm.
 
@@ -104,7 +53,7 @@ Run the following command to install Milvus Operator with Helm.
 $ helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.0.1/milvus-operator-1.0.1.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.2.0/milvus-operator-1.2.0.tgz
 ```
 
 You will see the output similar to the following after the installation process ends.
@@ -125,7 +74,7 @@ More samples can be found in https://github.com/zilliztech/milvus-operator/tree/
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 ```
 
-#### Install with kubectl
+### Install with kubectl
 
 Run the following command to install Milvus Operator with `kubectl`.
 
@@ -150,10 +99,6 @@ configmap/milvus-operator-manager-config created
 service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
-certificate.cert-manager.io/milvus-operator-serving-cert created
-issuer.cert-manager.io/milvus-operator-selfsigned-issuer created
-mutatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-mutating-webhook-configuration created
-validatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-validating-webhook-configuration created
 ```
 
 You can check if the Milvus Operator pod is running as follows:
@@ -339,7 +284,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 #### Uninstall with kubectl
 
 ```shell
-$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.0.1/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.2.0/deploy/manifests/deployment.yaml
 ```
 
 ## What's next
