@@ -1,11 +1,14 @@
 ---
 id: kafka-connect-milvus.md
 summary: >-
-  نعرض في دليل البدء السريع هذا كيفية إعداد كافكا مفتوحة المصدر وزيليز كلاود
-  لاستيعاب البيانات المتجهة.
-title: دمج Milvus مع WhyHow
+  تم دمج Apache Kafka مع Milvus وZilliz Cloud لدفق البيانات المتجهة. تعرّف على
+  كيفية استخدام موصل Kafka-Milvus لإنشاء خطوط أنابيب في الوقت الفعلي للبحث
+  الدلالي وأنظمة التوصيات والتحليلات القائمة على الذكاء الاصطناعي.
+title: >-
+  ربط أباتشي كافكا Apache Kafka® مع سحابة ميلفوس/زيليز لاستيعاب البيانات المتجهة
+  في الوقت الحقيقي
 ---
-<h1 id="Connect-Kafka-with-Milvus" class="common-anchor-header">ربط كافكا مع ميلفوس<button data-href="#Connect-Kafka-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="common-anchor-header">ربط أباتشي كافكا Apache Kafka® مع سحابة ميلفوس/زيليز لاستيعاب البيانات المتجهة في الوقت الحقيقي<button data-href="#Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,6 +24,11 @@ title: دمج Milvus مع WhyHow
         ></path>
       </svg>
     </button></h1><p>نوضح في دليل البدء السريع هذا كيفية إعداد كافكا مفتوحة المصدر وزيليز كلاود لاستيعاب البيانات المتجهة.</p>
+<p>يشرح هذا البرنامج التعليمي كيفية استخدام Apache Kafka® لدفق البيانات المتجهة واستيعابها في قاعدة بيانات Milvus vector و Zilliz Cloud (Milvus Cloud المدارة بالكامل)، مما يتيح تطبيقات متقدمة في الوقت الفعلي مثل البحث الدلالي وأنظمة التوصيات والتحليلات المدعومة بالذكاء الاصطناعي.</p>
+<p>Apache Kafka عبارة عن منصة تدفق أحداث موزعة مصممة لخطوط أنابيب عالية الإنتاجية ومنخفضة الكمون. وهي تُستخدم على نطاق واسع لجمع وتخزين ومعالجة تدفقات البيانات في الوقت الحقيقي من مصادر مثل قواعد البيانات وأجهزة إنترنت الأشياء وتطبيقات الجوال والخدمات السحابية. إن قدرة Kafka على التعامل مع كميات كبيرة من البيانات تجعلها مصدرًا مهمًا للبيانات لقواعد البيانات المتجهة مثل Milvus أو Zilliz Cloud.</p>
+<p>على سبيل المثال، يمكن لكافكا التقاط تدفقات البيانات في الوقت الفعلي - مثل تفاعلات المستخدم، وقراءات أجهزة الاستشعار، مع تضمينها من نماذج التعلم الآلي - ونشر هذه التدفقات مباشرةً إلى Milvus أو Zilliz Cloud. وبمجرد وصولها إلى قاعدة البيانات المتجهة، يمكن فهرسة هذه البيانات والبحث فيها وتحليلها بكفاءة.</p>
+<p>يوفّر تكامل Kafka مع Milvus وZilliz Cloud طريقة سلسة لبناء خطوط أنابيب قوية لسير عمل البيانات غير المهيكلة. يعمل الموصل مع كل من نشر كافكا مفتوح المصدر والخدمات المستضافة مثل <a href="https://www.confluent.io/hub/zilliz/kafka-connect-milvus">Confluent</a> و <a href="https://docs.streamnative.io/hub/connector-kafka-connect-milvus-sink-v0.1">StreamNative</a>.</p>
+<p>في هذا البرنامج التعليمي نستخدم Zilliz Cloud كعرض توضيحي:</p>
 <h2 id="Step-1-Download-the-kafka-connect-milvus-plugin" class="common-anchor-header">الخطوة 1: تنزيل المكون الإضافي kafka-connect-milvus<button data-href="#Step-1-Download-the-kafka-connect-milvus-plugin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +46,7 @@ title: دمج Milvus مع WhyHow
       </svg>
     </button></h2><p>أكمل الخطوات التالية لتنزيل الإضافة kafka-connect-milvus.</p>
 <ol>
-<li>قم بتنزيل أحدث ملف مضغوط للمكوّن الإضافي <code translate="no">zilliz-kafka-connect-milvus-xxx.zip</code> من <a href="https://github.com/zilliztech/kafka-connect-milvus/releases">هنا</a>.</li>
+<li>قم بتنزيل أحدث ملف مضغوط للمكون الإضافي <code translate="no">zilliz-kafka-connect-milvus-xxx.zip</code> من <a href="https://github.com/zilliztech/kafka-connect-milvus/releases">هنا</a>.</li>
 </ol>
 <h2 id="Step-2-Download-Kafka" class="common-anchor-header">الخطوة 2: تنزيل كافكا<button data-href="#Step-2-Download-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -178,4 +186,4 @@ topics=topic_0
 <li><p>تحقق مما إذا تم إدراج الكيان في المجموعة في زيليز كلاود. هذا ما يبدو عليه الأمر في زيليز كلاود إذا نجح الإدراج:</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/insearted_entities.png" width="80%" /></p></li>
 </ol>
-<h3 id="Support" class="common-anchor-header">الدعم</h3><p>إذا كنت بحاجة إلى أي مساعدة أو كانت لديك أسئلة بخصوص موصل Kafka Connect Milvus Connector، فلا تتردد في التواصل مع فريق الدعم لدينا: <strong>البريد الإلكتروني:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>
+<h3 id="Support" class="common-anchor-header">الدعم</h3><p>إذا كنت بحاجة إلى أي مساعدة أو كانت لديك أسئلة بخصوص موصل Kafka Connect Milvus Connector، فلا تتردد في التواصل مع المشرف على الموصل: <strong>البريد الإلكتروني:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>

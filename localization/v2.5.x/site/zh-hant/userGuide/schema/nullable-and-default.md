@@ -402,17 +402,17 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>若要查詢<code translate="no">null</code> 值的實體，請使用空表達式<code translate="no">&quot;&quot;</code> 。</p>
+<p>若要返回具有 null 值的實體，請不使用任何標量過濾條件進行查詢，如下所示：</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">null_results = client.query(​
     collection_name=<span class="hljs-string">&quot;user_profiles_null&quot;</span>,​
-    filter=<span class="hljs-string">&quot;&quot;</span>,​
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,​ <span class="hljs-comment"># Query without any filtering condition</span>
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]​
 )​
 ​
-# Example output:​
-# [{<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;age&quot;</span>: None}, {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;age&quot;</span>: None}]​
+<span class="hljs-comment"># Example output:​</span>
+<span class="hljs-comment"># [{&quot;id&quot;: 2, &quot;age&quot;: None}, {&quot;id&quot;: 3, &quot;age&quot;: None}]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">QueryResp resp = client.query(QueryReq.builder()​
@@ -460,7 +460,7 @@ System.out.println(resp.getQueryResults());​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>預設值是指派給標量欄位的預設值。如果您在插入時沒有為有預設值的欄位提供值，系統會自動使用預設值。</p>
+    </button></h2><p>預設值是指定給標量欄位的預設值。如果您在插入時沒有為有預設值的欄位提供值，系統會自動使用預設值。</p>
 <h3 id="Set-default-values" class="common-anchor-header">設定預設值</h3><p>建立集合時，使用<code translate="no">default_value</code> 參數定義欄位的預設值。以下範例顯示如何將<code translate="no">age</code> 的預設值設定為<code translate="no">18</code> ，將<code translate="no">status</code> 的預設值設定為<code translate="no">&quot;active&quot;</code> 。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>

@@ -39,7 +39,7 @@ title: 使用 Milvus Operator 升級 Milvus 單機版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>執行以下指令，將您的 Milvus 操作系統升級到 v1.0.1。</p>
+    </button></h2><p>執行以下指令，將您的 Milvus Operator 版本升級至 v1.2.0。</p>
 <pre><code translate="no">helm repo <span class="hljs-keyword">add</span> zilliztech-milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator/</span>
 helm repo update zilliztech-milvus-<span class="hljs-keyword">operator</span>
 helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> zilliztech-milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>
@@ -101,8 +101,8 @@ spec:
     imageUpdateMode: rollingDowngrade
     image: milvusdb/milvus:&lt;some-older-version&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>然後將您的設定儲存為 YAML 檔案 (例如<code translate="no">milvusupgrade.yml</code>)，並將此設定檔修補到您的 Milvus 實例，如下所示：</p>
-<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yml
+<p>然後將您的設定儲存為 YAML 檔案 (例如<code translate="no">milvusupgrade.yaml</code>)，並將此設定檔修補到您的 Milvus 實例，如下所示：</p>
+<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge 
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">透過變更 Milvus 的映像來升級它<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -133,7 +133,7 @@ spec:
    image: milvusdb/milvus:v2.5.3
 <button class="copy-code-btn"></button></code></pre>
 <p>然後執行以下步驟來執行升級：</p>
-<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml
+<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Migrate-the-metadata" class="common-anchor-header">遷移元資料<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
       <svg translate="no"

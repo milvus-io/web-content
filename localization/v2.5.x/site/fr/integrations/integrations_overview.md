@@ -35,8 +35,9 @@ title: Vue d'ensemble des intégrations
 <tr><td><a href="/docs/fr/integrate_with_pytorch.md">Recherche d'images avec Milvus et Pytorch</a></td><td>Recherche sémantique</td><td>Milvus, Pytorch</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_sentencetransformers.md">Recherche de films avec Milvus et SentenceTransfromers</a></td><td>Recherche sémantique</td><td>Milvus, SentenceTransformers</td></tr>
 <tr><td><a href="/docs/fr/basic_usage_langchain.md">Utiliser Milvus comme magasin de vecteurs dans LangChain</a></td><td>Recherche sémantique</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/fr/full_text_search_with_langchain.md">Utiliser la recherche plein texte avec LangChain et Milvus</a></td><td>Recherche plein texte</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_haystack.md">RAG avec Milvus et Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
-<tr><td><a href="/docs/fr/integrate_with_voxel51.md">Recherche de vision avec Milvus et FiftyOne</a></td><td>Recherche sémantique</td><td>Milvus, FiftyOne</td></tr>
+<tr><td><a href="/docs/fr/integrate_with_voxel51.md">Recherche par vision avec Milvus et FiftyOne</a></td><td>Recherche sémantique</td><td>Milvus, FiftyOne</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_voyageai.md">Recherche sémantique avec Milvus et VoyageAI</a></td><td>Recherche sémantique</td><td>Milvus, VoyageAI</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_bentoml.md">RAG avec Milvus et BentoML</a></td><td>RAG</td><td>Milvus, BentoML</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_dspy.md">RAG avec Milvus et DSPy</a></td><td>RAG</td><td>Milvus, DSPy</td></tr>
@@ -52,7 +53,7 @@ title: Vue d'ensemble des intégrations
 <tr><td><a href="/docs/fr/integrate_with_airbyte.md">Airbyte &amp; Milvus : Infrastructure de mouvement de données open-source</a></td><td>Connexion des données</td><td>Milvus, Airbyte</td></tr>
 <tr><td><a href="/docs/fr/video_search_with_twelvelabs_and_milvus.md">Recherche vidéo avancée : Tirer parti de Twelve Labs et de Milvus pour la recherche sémantique</a></td><td>Recherche sémantique</td><td>Milvus, Twelve Labs</td></tr>
 <tr><td><a href="/docs/fr/milvus_rag_with_vllm.md">Construire RAG avec Milvus, vLLM et Llama 3.1</a></td><td>RAG</td><td>Milvus, vLLM, LlamaIndex</td></tr>
-<tr><td><a href="/docs/fr/llama_agents_metadata.md">Systèmes multi-agents avec Mistral AI, Milvus et Llama-agents</a></td><td>Agent</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
+<tr><td><a href="/docs/fr/llama_agents_metadata.md">Systèmes multi-agents avec Mistral AI, Milvus et Llama-agents</a></td><td>Agents</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
 <tr><td><a href="/docs/fr/kafka-connect-milvus.md">Connecter Kafka avec Milvus</a></td><td>Sources de données</td><td>Milvus, Kafka</td></tr>
 <tr><td><a href="/docs/fr/kotaemon_with_milvus.md">Kotaemon RAG avec Milvus</a></td><td>RAG</td><td>Milvus, Kotaemon</td></tr>
 <tr><td><a href="/docs/fr/apify_milvus_rag.md">Génération améliorée pour la recherche : Exploration de sites web avec Apify et enregistrement des données dans Milvus pour la réponse aux questions</a></td><td>Sources de données</td><td>Milvus, Apify</td></tr>
@@ -76,5 +77,8 @@ title: Vue d'ensemble des intégrations
 <tr><td><a href="/docs/fr/build_RAG_with_milvus_and_ollama.md">Construire un RAG avec Milvus et Ollama</a></td><td>LLMs</td><td>Milvus, Ollama</td></tr>
 <tr><td><a href="/docs/fr/milvus_rag_with_dynamiq.md">Démarrer avec Dynamiq et Milvus</a></td><td>Orchestration</td><td>Milvus, Dynamiq</td></tr>
 <tr><td><a href="/docs/fr/build_RAG_with_milvus_and_deepseek.md">Construire RAG avec Milvus et DeepSeek</a></td><td>LLMs</td><td>Milvus, DeepSeek</td></tr>
+<tr><td><a href="/docs/fr/integrate_with_phidata.md">Intégrer Milvus avec Phidata</a></td><td>Agents</td><td>Milvus, Phidata</td></tr>
+<tr><td><a href="/docs/fr/build_RAG_with_milvus_and_crawl4ai.md">Construire un RAG avec Milvus et Crawl4AI</a></td><td>Sources de données</td><td>Milvus, Crawl4AI</td></tr>
+<tr><td><a href="/docs/fr/build_RAG_with_milvus_and_firecrawl.md">Construire un RAG avec Milvus et Firecrawl</a></td><td>Sources de données</td><td>Milvus, Firecrawl</td></tr>
 </tbody>
 </table>

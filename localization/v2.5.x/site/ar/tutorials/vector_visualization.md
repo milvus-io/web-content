@@ -2,7 +2,7 @@
 id: vector_visualization.md
 summary: >-
   في هذا المثال، سنوضح في هذا المثال كيفية تصور التضمينات (المتجهات) في ميلفوس
-  باستخدام t-SN.
+  باستخدام t-SNE.
 title: تصوّر المتجهات
 ---
 <h1 id="Vector-Visualization" class="common-anchor-header">تصوّر المتجهات<button data-href="#Vector-Visualization" class="anchor-icon" translate="no">

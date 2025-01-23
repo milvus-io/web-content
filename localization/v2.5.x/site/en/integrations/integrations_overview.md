@@ -35,6 +35,7 @@ title: Integrations Overview
 <tr><td><a href="/docs/integrate_with_pytorch.md">Image Search using Milvus and Pytorch</a></td><td>Semantic Search</td><td>Milvus, Pytorch</td></tr>
 <tr><td><a href="/docs/integrate_with_sentencetransformers.md">Movie Search using Milvus and SentenceTransfromers</a></td><td>Semantic Search</td><td>Milvus, SentenceTransformers</td></tr>
 <tr><td><a href="/docs/basic_usage_langchain.md">Use Milvus as a Vector Store in LangChain</a></td><td>Semantic Search</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/full_text_search_with_langchain.md">Using Full-Text Search with LangChain and Milvus</a></td><td>Full-Text Search</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/integrate_with_haystack.md">RAG with Milvus and Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
 <tr><td><a href="/docs/integrate_with_voxel51.md">Conduct Vision Searches with Milvus and FiftyOne</a></td><td>Semantic Search</td><td>Milvus, FiftyOne</td></tr>
 <tr><td><a href="/docs/integrate_with_voyageai.md">Semantic Search with Milvus and VoyageAI</a></td><td>Semantic Search</td><td>Milvus, VoyageAI</td></tr>
@@ -76,5 +77,8 @@ title: Integrations Overview
 <tr><td><a href="/docs/build_RAG_with_milvus_and_ollama.md">Build RAG with Milvus and Ollama</a></td><td>LLMs</td><td>Milvus, Ollama</td></tr>
 <tr><td><a href="/docs/milvus_rag_with_dynamiq.md">Getting Started with Dynamiq and Milvus</a></td><td>Orchestration</td><td>Milvus, Dynamiq</td></tr>
 <tr><td><a href="/docs/build_RAG_with_milvus_and_deepseek.md">Build RAG with Milvus and DeepSeek</a></td><td>LLMs</td><td>Milvus, DeepSeek</td></tr>
+<tr><td><a href="/docs/integrate_with_phidata.md">Integrate Milvus with Phidata</a></td><td>Agents</td><td>Milvus, Phidata</td></tr>
+<tr><td><a href="/docs/build_RAG_with_milvus_and_crawl4ai.md">Building RAG with Milvus and Crawl4AI</a></td><td>Data Sources</td><td>Milvus, Crawl4AI</td></tr>
+<tr><td><a href="/docs/build_RAG_with_milvus_and_firecrawl.md">Building RAG with Milvus and Firecrawl</a></td><td>Data Sources</td><td>Milvus, Firecrawl</td></tr>
 </tbody>
 </table>

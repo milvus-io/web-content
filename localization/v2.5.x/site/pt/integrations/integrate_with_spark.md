@@ -1,9 +1,13 @@
 ---
 id: integrate_with_spark.md
-summary: Esta página aborda o conetor Spark-Milvus.
-title: Guia do utilizador do conetor Spark-Milvus
+summary: >-
+  O Apache Spark e o Databricks integram-se com o Milvus e o Zilliz Cloud para
+  combinar o processamento de grandes volumes de dados com a pesquisa vetorial.
+  Saiba como criar pesquisa e análise alimentadas por IA com o conetor
+  Spark-Milvus.
+title: Utilize o Apache Spark™ com o Milvus/Zilliz Cloud para pipelines de IA
 ---
-<h1 id="Spark-Milvus-Connector-User-Guide" class="common-anchor-header">Guia do utilizador do conetor Spark-Milvus<button data-href="#Spark-Milvus-Connector-User-Guide" class="anchor-icon" translate="no">
+<h1 id="Use-Apache-Spark™-with-MilvusZilliz-Cloud-for-AI-Pipelines" class="common-anchor-header">Utilize o Apache Spark™ com o Milvus/Zilliz Cloud para pipelines de IA<button data-href="#Use-Apache-Spark™-with-MilvusZilliz-Cloud-for-AI-Pipelines" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,7 +22,10 @@ title: Guia do utilizador do conetor Spark-Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O Conector Spark-Milvus (https://github.com/zilliztech/spark-milvus) fornece uma integração perfeita entre o Apache Spark e o Milvus, combinando o processamento de dados e os recursos de ML do Apache Spark com o armazenamento de dados vetoriais e os recursos de pesquisa do Milvus. Esta integração permite várias aplicações interessantes, incluindo:</p>
+    </button></h1><p>O <a href="https://github.com/zilliztech/spark-milvus">conetor Spark-Milvus</a> fornece integração do Apache Spark e Databricks com Milvus e Zilliz Cloud. Ele une os poderosos recursos de processamento de big data e aprendizado de máquina (ML) do Apache Spark com os recursos de pesquisa vetorial de última geração do Milvus. Esta integração permite um fluxo de trabalho simplificado para pesquisa alimentada por IA, análise avançada, formação de ML e gestão eficiente de dados vectoriais em grande escala.</p>
+<p>O Apache Spark é uma plataforma de processamento de dados distribuída concebida para lidar com conjuntos de dados maciços com computação de alta velocidade. Quando emparelhada com o Milvus ou o Zilliz Cloud, abre novas possibilidades para casos de utilização como a pesquisa semântica, os sistemas de recomendação e a análise de dados orientada para a IA.</p>
+<p>Por exemplo, o Spark pode processar em lote grandes conjuntos de dados para gerar embeddings através de modelos ML e, em seguida, utilizar o conetor Spark-Milvus para armazenar estes embeddings diretamente no Milvus ou no Zilliz Cloud. Uma vez indexados, esses dados podem ser rapidamente pesquisados ou analisados, criando um poderoso pipeline para fluxos de trabalho de IA e big data.</p>
+<p>O conetor Spark-Milvus suporta tarefas como a ingestão iterativa e em massa de dados no Milvus, a sincronização de dados entre sistemas e a análise avançada de dados vectoriais armazenados no Milvus. Este guia irá guiá-lo através dos passos para configurar e utilizar o conetor de forma eficaz para casos de utilização como:</p>
 <ul>
 <li>Carregar eficientemente dados vetoriais no Milvus em grandes lotes,</li>
 <li>Mover dados entre o Milvus e outros sistemas de armazenamento ou bases de dados,</li>
@@ -140,9 +147,9 @@ object Hello <span class="hljs-keyword">extends</span> <span class="hljs-title c
 <tr><td><code translate="no">milvus.username</code></td><td><code translate="no">root</code></td><td>Nome de utilizador do servidor Milvus. Para mais informações, consulte <a href="https://milvus.io/docs/manage_connection.md">Gerir ligações Milvus</a>.</td></tr>
 <tr><td><code translate="no">milvus.password</code></td><td><code translate="no">Milvus</code></td><td>Palavra-passe para o servidor Milvus. Para mais pormenores, consulte <a href="https://milvus.io/docs/manage_connection.md">Gerir ligações Milvus</a>.</td></tr>
 <tr><td><code translate="no">milvus.uri</code></td><td><code translate="no">--</code></td><td>URI do servidor Milvus. Para mais informações, consulte <a href="https://milvus.io/docs/manage_connection.md">Gerir ligações Milvus</a>.</td></tr>
-<tr><td><code translate="no">milvus.token</code></td><td><code translate="no">--</code></td><td>Token do servidor Milvus. Para mais informações, consulte <a href="https://milvus.io/docs/manage_connection.md">Gerir ligações Milvus</a>.</td></tr>
+<tr><td><code translate="no">milvus.token</code></td><td><code translate="no">--</code></td><td>Token do servidor Milvus. Para mais pormenores, consulte <a href="https://milvus.io/docs/manage_connection.md">Gerir ligações Milvus</a>.</td></tr>
 <tr><td><code translate="no">milvus.database.name</code></td><td><code translate="no">default</code></td><td>Nome da base de dados do Milvus a ler ou escrever.</td></tr>
-<tr><td><code translate="no">milvus.collection.name</code></td><td><code translate="no">hello_milvus</code></td><td>Nome da coleção Milvus para ler ou escrever.</td></tr>
+<tr><td><code translate="no">milvus.collection.name</code></td><td><code translate="no">hello_milvus</code></td><td>Nome da coleção Milvus a ler ou a escrever.</td></tr>
 <tr><td><code translate="no">milvus.collection.primaryKeyField</code></td><td><code translate="no">None</code></td><td>Nome do campo da chave primária na coleção. Obrigatório se a coleção não existir.</td></tr>
 <tr><td><code translate="no">milvus.collection.vectorField</code></td><td><code translate="no">None</code></td><td>Nome do campo vetorial da coleção. Obrigatório se a coleção não existir.</td></tr>
 <tr><td><code translate="no">milvus.collection.vectorDim</code></td><td><code translate="no">None</code></td><td>Dimensão do campo vetorial na coleção. Obrigatório se a coleção não existir.</td></tr>
@@ -484,7 +491,7 @@ df.write
 <span class="hljs-comment">// Bulk insert Spark output files into Milvus</span>
 MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span class="hljs-string">&quot;mjson&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Hands-on" class="common-anchor-header">Prática<button data-href="#Hands-on" class="anchor-icon" translate="no">
+<h2 id="Hands-on-Notebook" class="common-anchor-header">Bloco de notas prático<button data-href="#Hands-on-Notebook" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -499,7 +506,7 @@ MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span cl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para o ajudar a começar rapidamente a utilizar o Conector Spark-Milvus, preparámos um bloco de notas que o orienta através dos processos de transferência de dados em fluxo contínuo e em lote, com o Milvus e o Zilliz Cloud.</p>
+    </button></h2><p>Para ajudá-lo a começar a usar rapidamente o Conector Spark-Milvus, você pode conferir o notebook que o orienta pelos exemplos de ingestão de dados em lote e de streaming do Spark para o Milvus e o Zilliz Cloud.</p>
 <ul>
-<li><a href="https://zilliz.com/databricks_zilliz_demos">Hands-on do Conector Spark-Milvus</a></li>
+<li><a href="https://zilliz.com/databricks_zilliz_demos">Hands-on do conetor Spark-Milvus</a></li>
 </ul>

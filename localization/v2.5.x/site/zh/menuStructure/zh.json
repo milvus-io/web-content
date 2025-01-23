@@ -1443,7 +1443,7 @@
         "children": []
       },
       {
-        "label": "Milvus 备份",
+        "label": "Milvus 后备电源",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -1472,7 +1472,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "在一个实例中进行备份和恢复",
+                "label": "在一个实例中进行备份和还原",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
@@ -1773,6 +1773,12 @@
                 "id": "milvus_hybrid_search_retriever.md",
                 "order": 3,
                 "children": []
+              },
+              {
+                "label": "全文检索",
+                "id": "full_text_search_with_langchain.md",
+                "order": 4,
+                "children": []
               }
             ]
           },
@@ -1866,6 +1872,12 @@
             "label": "Mem0",
             "id": "quickstart_mem0_with_milvus.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "Phidata",
+            "id": "integrate_with_phidata.md",
+            "order": 3,
             "children": []
           }
         ]
@@ -1971,6 +1983,18 @@
             "label": "PII 屏蔽器",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
+            "children": []
+          },
+          {
+            "label": "消防车",
+            "id": "build_RAG_with_milvus_and_firecrawl.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Crawl4AI",
+            "id": "build_RAG_with_milvus_and_crawl4ai.md",
+            "order": 6,
             "children": []
           }
         ]

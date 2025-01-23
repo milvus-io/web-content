@@ -1,11 +1,15 @@
 ---
 id: kafka-connect-milvus.md
 summary: >-
-  Neste guia de início rápido, mostramos como configurar o kafka de código
-  aberto e o Zilliz Cloud para ingerir dados vetoriais.
-title: Integrar Milvus com WhyHow
+  O Apache Kafka está integrado ao Milvus e ao Zilliz Cloud para transmitir
+  dados vetoriais. Saiba como usar o conetor Kafka-Milvus para criar pipelines
+  em tempo real para pesquisa semântica, sistemas de recomendação e análise
+  orientada por IA.
+title: >-
+  Ligar o Apache Kafka® ao Milvus/Zilliz Cloud para ingestão de dados vectoriais
+  em tempo real
 ---
-<h1 id="Connect-Kafka-with-Milvus" class="common-anchor-header">Ligar o Kafka ao Milvus<button data-href="#Connect-Kafka-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="common-anchor-header">Ligar o Apache Kafka® ao Milvus/Zilliz Cloud para ingestão de dados vectoriais em tempo real<button data-href="#Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +24,13 @@ title: Integrar Milvus com WhyHow
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Neste guia de início rápido, mostramos como configurar o kafka de código aberto e o Zilliz Cloud para ingerir dados vetoriais.</p>
-<h2 id="Step-1-Download-the-kafka-connect-milvus-plugin" class="common-anchor-header">Passo 1: Descarregar o plug-in kafka-connect-milvus<button data-href="#Step-1-Download-the-kafka-connect-milvus-plugin" class="anchor-icon" translate="no">
+    </button></h1><p>Neste guia de início rápido, mostramos como configurar o kafka de código aberto e o Zilliz Cloud para ingerir dados vectoriais.</p>
+<p>Este tutorial explica como usar o Apache Kafka® para transmitir e ingerir dados vetoriais no banco de dados vetorial Milvus e no Zilliz Cloud (Milvus totalmente gerenciado), permitindo aplicativos avançados em tempo real, como pesquisa semântica, sistemas de recomendação e análise alimentada por IA.</p>
+<p>O Apache Kafka é uma plataforma de streaming de eventos distribuídos concebida para pipelines de alto rendimento e baixa latência. É amplamente utilizado para recolher, armazenar e processar fluxos de dados em tempo real de fontes como bases de dados, dispositivos IoT, aplicações móveis e serviços na nuvem. A capacidade do Kafka de lidar com grandes volumes de dados faz dele uma importante fonte de dados de bancos de dados vetoriais como Milvus ou Zilliz Cloud.</p>
+<p>Por exemplo, o Kafka pode capturar fluxos de dados em tempo real - como interações de utilizadores, leituras de sensores, juntamente com as suas incorporações de modelos de aprendizagem automática - e publicar estes fluxos diretamente no Milvus ou no Zilliz Cloud. Uma vez na base de dados vetorial, estes dados podem ser indexados, pesquisados e analisados de forma eficiente.</p>
+<p>A integração do Kafka com o Milvus e o Zilliz Cloud proporciona uma forma perfeita de criar pipelines poderosos para fluxos de trabalho de dados não estruturados. O conetor funciona tanto para a implantação do Kafka de código aberto quanto para serviços hospedados, como <a href="https://www.confluent.io/hub/zilliz/kafka-connect-milvus">Confluent</a> e <a href="https://docs.streamnative.io/hub/connector-kafka-connect-milvus-sink-v0.1">StreamNative</a>.</p>
+<p>Neste tutorial, usamos o Zilliz Cloud como uma demonstração:</p>
+<h2 id="Step-1-Download-the-kafka-connect-milvus-plugin" class="common-anchor-header">Etapa 1: baixar o plug-in kafka-connect-milvus<button data-href="#Step-1-Download-the-kafka-connect-milvus-plugin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,7 +47,7 @@ title: Integrar Milvus com WhyHow
       </svg>
     </button></h2><p>Conclua as etapas a seguir para baixar o plug-in kafka-connect-milvus.</p>
 <ol>
-<li>Baixe o arquivo zip mais recente do plug-in <code translate="no">zilliz-kafka-connect-milvus-xxx.zip</code> <a href="https://github.com/zilliztech/kafka-connect-milvus/releases">aqui</a>.</li>
+<li>Descarregue o ficheiro zip mais recente do plugin <code translate="no">zilliz-kafka-connect-milvus-xxx.zip</code> a partir <a href="https://github.com/zilliztech/kafka-connect-milvus/releases">daqui</a>.</li>
 </ol>
 <h2 id="Step-2-Download-Kafka" class="common-anchor-header">Etapa 2: Baixar o Kafka<button data-href="#Step-2-Download-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -143,7 +152,7 @@ $ <span class="hljs-built_in">cd</span> kafka_2.13-3.6.1
 value.converter.schemas.enable=<span class="hljs-literal">false</span>
 plugin.path=libs/zilliz-kafka-connect-milvus-xxx
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>crie e configure um arquivo <code translate="no">milvus-sink-connector.properties</code> no diretório <code translate="no">config</code> da sua instalação do Kafka.</p>
+<li><p>crie e configure um ficheiro <code translate="no">milvus-sink-connector.properties</code> no diretório <code translate="no">config</code> da sua instalação do Kafka.</p>
 <pre><code translate="no" class="language-properties">name=zilliz-kafka-connect-milvus
 connector.<span class="hljs-keyword">class</span>=com.milvus.io.kafka.MilvusSinkConnector
 <span class="hljs-keyword">public</span>.endpoint=https:<span class="hljs-comment">//&lt;public.endpoint&gt;:port</span>
@@ -178,4 +187,4 @@ topics=topic_0
 <li><p>Verifique se a entidade foi inserida na coleção no Zilliz Cloud. Aqui está o aspeto no Zilliz Cloud se a inserção for bem sucedida:</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/insearted_entities.png" width="80%" /></p></li>
 </ol>
-<h3 id="Support" class="common-anchor-header">Suporte</h3><p>Se precisar de assistência ou tiver dúvidas sobre o Kafka Connect Milvus Connector, não hesite em contactar a nossa equipa de suporte: <strong>Email:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>
+<h3 id="Support" class="common-anchor-header">Suporte</h3><p>Se precisar de assistência ou tiver dúvidas sobre o Kafka Connect Milvus Connector, não hesite em contactar o responsável pelo conetor: <strong>Correio eletrónico:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>

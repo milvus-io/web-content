@@ -1,8 +1,9 @@
 ---
 id: integrate_with_cohere.md
 summary: >-
-  Halaman ini membahas cara mencari jawaban terbaik untuk pertanyaan menggunakan
-  Milvus sebagai Basis Data Vektor dan Hugging Face sebagai sistem penyematan.
+  Halaman ini mengilustrasikan cara membuat sistem penjawab pertanyaan
+  berdasarkan dataset SQuAD menggunakan Milvus sebagai basis data vektor dan
+  Cohere sebagai sistem penyematan.
 title: Menjawab Pertanyaan Menggunakan Milvus dan Cohere
 ---
 <h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">Menjawab Pertanyaan Menggunakan Milvus dan Cohere<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">
@@ -172,7 +173,7 @@ collection.load()
 <li>menyematkan pertanyaan asli, dan</li>
 <li>memasukkan data ke dalam koleksi yang baru saja kita buat di Milvus.</li>
 </ul>
-<p>Dalam contoh ini, data termasuk pertanyaan asli, penyematan pertanyaan asli, dan jawaban untuk pertanyaan asli.</p>
+<p>Dalam contoh ini, data mencakup pertanyaan asli, penyematan pertanyaan asli, dan jawaban untuk pertanyaan asli.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up a co:here client.</span>
 cohere_client = cohere.Client(COHERE_API_KEY)
 

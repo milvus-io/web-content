@@ -2,7 +2,7 @@
 id: vector_visualization.md
 summary: >-
   En este ejemplo, mostraremos cómo visualizar las incrustaciones (vectores) en
-  Milvus utilizando t-SN.
+  Milvus utilizando t-SNE.
 title: Visualización de vectores
 ---
 <h1 id="Vector-Visualization" class="common-anchor-header">Visualización de vectores<button data-href="#Vector-Visualization" class="anchor-icon" translate="no">

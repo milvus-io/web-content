@@ -35,6 +35,7 @@ title: Übersicht über Integrationen
 <tr><td><a href="/docs/de/integrate_with_pytorch.md">Bildsuche mit Milvus und Pytorch</a></td><td>Semantische Suche</td><td>Milvus, Pytorch</td></tr>
 <tr><td><a href="/docs/de/integrate_with_sentencetransformers.md">Filmsuche mit Milvus und SentenceTransfromers</a></td><td>Semantische Suche</td><td>Milvus, Satz-Transformatoren</td></tr>
 <tr><td><a href="/docs/de/basic_usage_langchain.md">Verwendung von Milvus als Vektorspeicher in LangChain</a></td><td>Semantische Suche</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/de/full_text_search_with_langchain.md">Verwendung der Volltextsuche mit LangChain und Milvus</a></td><td>Volltext-Suche</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/de/integrate_with_haystack.md">RAG mit Milvus und Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
 <tr><td><a href="/docs/de/integrate_with_voxel51.md">Vision Searches mit Milvus und FiftyOne durchführen</a></td><td>Semantische Suche</td><td>Milvus, FiftyOne</td></tr>
 <tr><td><a href="/docs/de/integrate_with_voyageai.md">Semantische Suche mit Milvus und VoyageAI</a></td><td>Semantische Suche</td><td>Milvus, VoyageAI</td></tr>
@@ -66,7 +67,7 @@ title: Übersicht über Integrationen
 <tr><td><a href="/docs/de/build_RAG_with_milvus_and_siliconflow">Aufbau von RAG mit Milvus und SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
 <tr><td><a href="/docs/de/rag_with_milvus_and_unstructured.md">Erstellen einer RAG mit Milvus und unstrukturierten</a></td><td>Datenquellen</td><td>Milvus, Unstrukturiert</td></tr>
 <tr><td><a href="/docs/de/RAG_with_pii_and_milvus.md">Aufbau einer RAG mit Milvus + PII Masker</a></td><td>Datenquellen</td><td>Milvus, PII-Masker</td></tr>
-<tr><td><a href="/docs/de/use_milvus_in_private_gpt.md">Verwendung von Milvus in PrivateGPT</a></td><td>Einrichtung</td><td>Vektorsuche</td></tr>
+<tr><td><a href="/docs/de/use_milvus_in_private_gpt.md">Milvus in PrivateGPT verwenden</a></td><td>Einrichtung</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/quickstart_mem0_with_milvus.md">Erste Schritte mit Mem0 und Milvus</a></td><td>Agenten</td><td>Mem0, Milvus</td></tr>
 <tr><td><a href="/docs/de/knowledge_table_with_milvus.md">Wissenstabelle mit Milvus</a></td><td>Wissenstechnik</td><td>Wissenstabelle, Milvus</td></tr>
 <tr><td><a href="/docs/de/use_milvus_in_docsgpt.md">Milvus in DocsGPT verwenden</a></td><td>Organisation</td><td>DocsGPT, Milvus</td></tr>
@@ -76,5 +77,8 @@ title: Übersicht über Integrationen
 <tr><td><a href="/docs/de/build_RAG_with_milvus_and_ollama.md">Aufbau von RAG mit Milvus und Ollama</a></td><td>LLMs</td><td>Milvus, Ollama</td></tr>
 <tr><td><a href="/docs/de/milvus_rag_with_dynamiq.md">Erste Schritte mit Dynamiq und Milvus</a></td><td>Orchestrierung</td><td>Milvus, Dynamiq</td></tr>
 <tr><td><a href="/docs/de/build_RAG_with_milvus_and_deepseek.md">RAG mit Milvus und DeepSeek aufbauen</a></td><td>LLMs</td><td>Milvus, DeepSeek</td></tr>
+<tr><td><a href="/docs/de/integrate_with_phidata.md">Integration von Milvus mit Phidata</a></td><td>Agenten</td><td>Milvus, Phidata</td></tr>
+<tr><td><a href="/docs/de/build_RAG_with_milvus_and_crawl4ai.md">Aufbau von RAG mit Milvus und Crawl4AI</a></td><td>Daten-Quellen</td><td>Milvus, Crawl4AI</td></tr>
+<tr><td><a href="/docs/de/build_RAG_with_milvus_and_firecrawl.md">Aufbau von RAG mit Milvus und Firecrawl</a></td><td>Datenquellen</td><td>Milvus, Firecrawl</td></tr>
 </tbody>
 </table>

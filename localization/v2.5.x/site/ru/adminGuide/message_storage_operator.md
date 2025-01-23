@@ -81,15 +81,37 @@ summary: 'Узнайте, как настроить хранение сообщ�
 <p>В настоящее время настроить RocksMQ в качестве хранилища сообщений для Milvus standalone можно только с помощью Milvus Operator.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Пример</h4><p>В следующем примере настраивается служба RocksMQ.</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
+<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
   name: milvus
 spec:
-  dependencies: {}
+  mode: standalone
+  dependencies:
+    msgStreamType: rocksmq
+    rocksmq:
+      persistence:
+        enabled: <span class="hljs-literal">true</span>
+        pvcDeletion: <span class="hljs-literal">true</span>
+        persistentVolumeClaim:
+          spec:
+            accessModes: [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
+            storageClassName: <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
+            resources:
+              requests:
+                storage: 10Gi  <span class="hljs-comment"># Specify your desired storage size</span>
   components: {}
   config: {}
 <button class="copy-code-btn"></button></code></pre>
+<h5 id="Key-configuration-options" class="common-anchor-header">Основные параметры конфигурации:</h5><ul>
+<li><code translate="no">msgStreamType</code>: rocksmq: Явно устанавливает RocksMQ в качестве очереди сообщений.</li>
+<li><code translate="no">persistence.enabled</code>: Включает постоянное хранение данных RocksMQ.</li>
+<li><code translate="no">persistence.pvcDeletion</code>: При значении true, PVC будет удаляться при удалении экземпляра Milvus.</li>
+<li><code translate="no">persistentVolumeClaim.spec</code>: Стандартная спецификация Kubernetes PVC</li>
+<li><code translate="no">accessModes</code>: Обычно <code translate="no">ReadWriteOnce</code> для блочного хранилища.</li>
+<li><code translate="no">storageClassName</code>: Класс хранилища вашего кластера</li>
+<li><code translate="no">storage</code>: Размер постоянного тома</li>
+</ul>
 <h2 id="Configure-NATS" class="common-anchor-header">Настройка NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -106,7 +128,7 @@ spec:
         ></path>
       </svg>
     </button></h2><p>NATS - это альтернативное хранилище сообщений для NATS.</p>
-<h4 id="Example" class="common-anchor-header">Пример</h4><p>В следующем примере настроена служба NATS.</p>
+<h4 id="Example" class="common-anchor-header">Пример</h4><p>В следующем примере настраивается служба NATS.</p>
 <pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
 kind: Milvus
 metadata:

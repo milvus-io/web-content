@@ -103,10 +103,10 @@ node_num = <span class="hljs-number">0</span>
 
 <span class="hljs-comment"># create a resource group that exactly hold no query node.</span>
 <span class="hljs-keyword">try</span>:
-    utility.create_resource_group(name, config=utility.ResourceGroupConfig(
+    milvus_client.create_resource_group(name, config=ResourceGroupConfig(
         requests={<span class="hljs-string">&quot;node_num&quot;</span>: node_num},
         limits={<span class="hljs-string">&quot;node_num&quot;</span>: node_num},
-    ), using=<span class="hljs-string">&#x27;default&#x27;</span>)
+    ))
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Succeeded in creating resource group <span class="hljs-subst">{name}</span>.&quot;</span>)
 <span class="hljs-keyword">except</span> Exception:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Failed to create the resource group.&quot;</span>)
@@ -114,23 +114,26 @@ node_num = <span class="hljs-number">0</span>
 <li><p>리소스 그룹을 나열합니다.</p>
 <p>리소스 그룹을 만들면 리소스 그룹 목록에서 리소스 그룹을 볼 수 있습니다.</p>
 <p>Milvus 인스턴스에서 리소스 그룹 목록을 보려면 다음과 같이 하세요:</p>
-<pre><code translate="no" class="language-python">rgs = utility.list_resource_groups(using=<span class="hljs-string">&#x27;default&#x27;</span>)
+<pre><code translate="no" class="language-python">rgs = milvus_client.list_resource_groups()
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Resource group list: <span class="hljs-subst">{rgs}</span>&quot;</span>)
 
 <span class="hljs-comment"># Resource group list: [&#x27;__default_resource_group&#x27;, &#x27;rg&#x27;]</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>리소스 그룹을 설명합니다.</p>
 <p>Milvus가 다음과 같이 해당 리소스 그룹을 설명하도록 할 수 있습니다:</p>
-<pre><code translate="no" class="language-python">info = utility.describe_resource_group(name, using=<span class="hljs-string">&quot;default&quot;</span>)
+<pre><code translate="no" class="language-python">info = milvus_client.describe_resource_group(name)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Resource group description: <span class="hljs-subst">{info}</span>&quot;</span>)
 
 <span class="hljs-comment"># Resource group description: </span>
-<span class="hljs-comment">#        &lt;name:&quot;rg&quot;&gt;,           // string, rg name</span>
-<span class="hljs-comment">#        &lt;capacity:1&gt;,            // int, num_node which has been transfer to this rg</span>
-<span class="hljs-comment">#        &lt;num_available_node:0&gt;,  // int, available node_num, some node may shutdown</span>
-<span class="hljs-comment">#        &lt;num_loaded_replica:{}&gt;, // map[string]int, from collection_name to loaded replica of each collecion in this rg</span>
-<span class="hljs-comment">#        &lt;num_outgoing_node:{}&gt;,  // map[string]int, from collection_name to outgoging accessed node num by replica loaded in this rg </span>
-<span class="hljs-comment">#        &lt;num_incoming_node:{}&gt;.  // map[string]int, from collection_name to incoming accessed node num by replica loaded in other rg</span>
+<span class="hljs-comment"># ResourceGroupInfo:</span>
+<span class="hljs-comment">#   &lt;name:rg1&gt;,     // resource group name</span>
+<span class="hljs-comment">#   &lt;capacity:0&gt;,   // resource group capacity</span>
+<span class="hljs-comment">#   &lt;num_available_node:1&gt;,  // resource group node num</span>
+<span class="hljs-comment">#   &lt;num_loaded_replica:{}&gt;, // collection loaded replica num in resource group</span>
+<span class="hljs-comment">#   &lt;num_outgoing_node:{}&gt;, // node num which still in use by replica in other resource group</span>
+<span class="hljs-comment">#   &lt;num_incoming_node:{}&gt;, // node num which is in use by replica but belong to other resource group </span>
+<span class="hljs-comment">#   &lt;config:{}&gt;,            // resource group config</span>
+<span class="hljs-comment">#   &lt;nodes:[]&gt;              // node detail info</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>리소스 그룹 간에 노드 전송.</p>
 <p>설명된 리소스 그룹에 아직 쿼리 노드가 없는 것을 확인할 수 있습니다. 다음과 같이 기본 리소스 그룹에서 생성한 리소스 그룹으로 일부 노드를 이동합니다. 현재 클러스터의 <strong>__default_resource_group에</strong> 1개의 쿼리 노드가 있고 하나의 노드를 생성한 <strong>rg로</strong> 이전하고자 한다고 가정합니다.<code translate="no">update_resource_groups</code> 은 여러 구성 변경에 대해 원자성을 보장하므로 Milvus에 중간 상태가 표시되지 않습니다.</p>
@@ -140,7 +143,7 @@ expected_num_nodes_in_default = <span class="hljs-number">0</span>
 expected_num_nodes_in_rg = <span class="hljs-number">1</span>
 
 <span class="hljs-keyword">try</span>:
-    utility.update_resource_groups({
+    milvus_client.update_resource_groups({
         source: ResourceGroupConfig(
             requests={<span class="hljs-string">&quot;node_num&quot;</span>: expected_num_nodes_in_default},
             limits={<span class="hljs-string">&quot;node_num&quot;</span>: expected_num_nodes_in_default},
@@ -149,7 +152,7 @@ expected_num_nodes_in_rg = <span class="hljs-number">1</span>
             requests={<span class="hljs-string">&quot;node_num&quot;</span>: expected_num_nodes_in_rg},
             limits={<span class="hljs-string">&quot;node_num&quot;</span>: expected_num_nodes_in_rg},
         )
-    }, using=<span class="hljs-string">&quot;default&quot;</span>)
+    })
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Succeeded in move 1 node(s) from <span class="hljs-subst">{source}</span> to <span class="hljs-subst">{target}</span>.&quot;</span>)
 <span class="hljs-keyword">except</span> Exception:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Something went wrong while moving nodes.&quot;</span>)
@@ -160,25 +163,22 @@ expected_num_nodes_in_rg = <span class="hljs-number">1</span>
 <p>리소스 그룹에 쿼리 노드가 있으면 이 리소스 그룹에 컬렉션을 로드할 수 있습니다. 다음 코드 조각은 <code translate="no">demo</code> 이라는 이름의 컬렉션이 이미 존재한다고 가정합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
 
-collection = Collection(<span class="hljs-string">&#x27;demo&#x27;</span>)
+collection_name = <span class="hljs-string">&quot;demo&quot;</span>
 
 <span class="hljs-comment"># Milvus loads the collection to the default resource group.</span>
-collection.load(replica_number=<span class="hljs-number">2</span>)
+milvus_client.load_collection(collection_name, replica_number=<span class="hljs-number">2</span>)
 
 <span class="hljs-comment"># Or, you can ask Milvus load the collection to the desired resource group.</span>
 <span class="hljs-comment"># make sure that query nodes num should be greater or equal to replica_number</span>
 resource_groups = [<span class="hljs-string">&#x27;rg&#x27;</span>]
-collection.load(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups) 
+milvus_client.load_collection(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups) 
 <button class="copy-code-btn"></button></code></pre>
 <p>또한 리소스 그룹에 파티션을 로드하고 그 복제본을 여러 리소스 그룹에 분산시킬 수도 있습니다. 다음은 <code translate="no">Books</code> 이라는 이름의 컬렉션이 이미 존재하고 <code translate="no">Novels</code> 이라는 이름의 파티션이 있다고 가정합니다.</p>
-<pre><code translate="no" class="language-python">collection = Collection(<span class="hljs-string">&quot;Books&quot;</span>)
+<pre><code translate="no" class="language-python">collection = <span class="hljs-string">&quot;Books&quot;</span>
+partition = <span class="hljs-string">&quot;Novels&quot;</span>
 
 <span class="hljs-comment"># Use the load method of a collection to load one of its partition</span>
-collection.load([<span class="hljs-string">&quot;Novels&quot;</span>], replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
-
-<span class="hljs-comment"># Or, you can use the load method of a partition directly</span>
-partition = Partition(collection, <span class="hljs-string">&quot;Novels&quot;</span>)
-partition.load(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
+milvus_client.load_partitions(collection, [partition], replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">_resource_groups</code> 은 선택적 매개변수이며, 이 매개변수를 지정하지 않으면 Milvus가 기본 리소스 그룹의 쿼리 노드에 복제본을 로드하도록 합니다.</p>
 <p>Milus가 컬렉션의 각 복제본을 별도의 리소스 그룹에 로드하도록 하려면 리소스 그룹의 수가 복제본 수와 같은지 확인하세요.</p></li>
@@ -190,8 +190,8 @@ collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
 num_replicas = <span class="hljs-number">1</span>
 
 <span class="hljs-keyword">try</span>:
-    utility.transfer_replica(source, target, collection_name, num_replicas, using=<span class="hljs-string">&quot;default&quot;</span>)
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Succeeded in moving <span class="hljs-subst">{num_node}</span> replica(s) of <span class="hljs-subst">{collection_name}</span> from <span class="hljs-subst">{source}</span> to <span class="hljs-subst">{target}</span>.&quot;</span>)
+    milvus_client.transfer_replica(source, target, collection_name, num_replicas)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Succeeded in moving <span class="hljs-subst">{num_replicas}</span> replica(s) of <span class="hljs-subst">{collection_name}</span> from <span class="hljs-subst">{source}</span> to <span class="hljs-subst">{target}</span>.&quot;</span>)
 <span class="hljs-keyword">except</span> Exception:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Something went wrong while moving replicas.&quot;</span>)
 
@@ -199,18 +199,19 @@ num_replicas = <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>리소스 그룹 삭제.</p>
 <p>쿼리 노드가 없는 리소스 그룹(<code translate="no">limits.node_num = 0</code>)은 언제든지 삭제할 수 있습니다. 이 가이드에서 리소스 그룹 <code translate="no">rg</code> 에는 이제 하나의 쿼리 노드가 있습니다. 먼저 리소스 그룹의 <code translate="no">limits.node_num</code> 구성을 0으로 변경해야 합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">try</span>:
-    utility.update_resource_groups({
-        <span class="hljs-string">&quot;rg&quot;</span>: utility.ResourceGroupConfig(
-            requests={<span class="hljs-string">&quot;node_num&quot;</span>: <span class="hljs-number">0</span>},
-            limits={<span class="hljs-string">&quot;node_num&quot;</span>: <span class="hljs-number">0</span>},
+<pre><code translate="no" class="language-python">resource_group = <span class="hljs-string">&quot;rg
+try:
+    milvus_client.update_resource_groups({
+        resource_group: ResourceGroupConfig(
+            requests={&quot;</span>node_num<span class="hljs-string">&quot;: 0},
+            limits={&quot;</span>node_num<span class="hljs-string">&quot;: 0},
         ),
-    }, using=<span class="hljs-string">&quot;default&quot;</span>)
-    utility.drop_resource_group(<span class="hljs-string">&quot;rg&quot;</span>, using=<span class="hljs-string">&quot;default&quot;</span>)
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Succeeded in dropping <span class="hljs-subst">{source}</span>.&quot;</span>)
-<span class="hljs-keyword">except</span> Exception:
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Something went wrong while dropping <span class="hljs-subst">{source}</span>.&quot;</span>)
-<button class="copy-code-btn"></button></code></pre></li>
+    })
+    milvus_client.drop_resource_group(resource_group)
+    print(f&quot;</span>Succeeded <span class="hljs-keyword">in</span> dropping {resource_group}.<span class="hljs-string">&quot;)
+except Exception:
+    print(f&quot;</span>Something went wrong <span class="hljs-keyword">while</span> dropping {resource_group}.<span class="hljs-string">&quot;)
+</span><button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <p>자세한 내용은 <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">pymilvus의 관련 예제를</a> 참조하세요.</p>
 <h2 id="A-good-practice-to-manage-cluster-scaling" class="common-anchor-header">클러스터 확장을 관리하는 좋은 방법<button data-href="#A-good-practice-to-manage-cluster-scaling" class="anchor-icon" translate="no">
@@ -232,34 +233,33 @@ num_replicas = <span class="hljs-number">1</span>
 <ol>
 <li><p>기본적으로 Milvus는 <strong>__default_resource_group을</strong> 생성합니다. 이 리소스 그룹은 삭제할 수 없으며 모든 컬렉션의 기본 로딩 리소스 그룹으로도 사용되며 항상 중복 쿼리 노드가 할당됩니다. 따라서 보류 중인 리소스 그룹을 생성하여 사용하지 않는 쿼리 노드 리소스를 보관하여 <strong>__default_resource_group이</strong> 쿼리 노드 리소스를 점유하지 못하도록 할 수 있습니다.</p>
 <p>또한 <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> 이라는 제약 조건을 엄격하게 적용하면 클러스터에서 쿼리 노드 할당을 정밀하게 제어할 수 있습니다. 현재 클러스터에 쿼리 노드가 하나만 있다고 가정하고 클러스터를 초기화해 보겠습니다. 다음은 설정 예제입니다:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> utility
-<span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
 _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&quot;</span>
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">init_cluster</span>(<span class="hljs-params">node_num: <span class="hljs-built_in">int</span></span>):
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Init cluster with <span class="hljs-subst">{node_num}</span> nodes, all nodes will be put in default resource group&quot;</span>)
     <span class="hljs-comment"># create a pending resource group, which can used to hold the pending nodes that do not hold any data.</span>
-    utility.create_resource_group(name=_PENDING_NODES_RESOURCE_GROUP, config=ResourceGroupConfig(
+    milvus_client.create_resource_group(name=_PENDING_NODES_RESOURCE_GROUP, config=ResourceGroupConfig(
         requests={<span class="hljs-string">&quot;node_num&quot;</span>: <span class="hljs-number">0</span>}, <span class="hljs-comment"># this resource group can hold 0 nodes, no data will be load on it.</span>
         limits={<span class="hljs-string">&quot;node_num&quot;</span>: <span class="hljs-number">10000</span>}, <span class="hljs-comment"># this resource group can hold at most 10000 nodes </span>
     ))
 
     <span class="hljs-comment"># update default resource group, which can used to hold the nodes that all initial node in it.</span>
-    utility.update_resource_groups({
+    milvus_client.update_resource_groups({
         <span class="hljs-string">&quot;__default_resource_group&quot;</span>: ResourceGroupConfig(
             requests={<span class="hljs-string">&quot;node_num&quot;</span>: node_num},
             limits={<span class="hljs-string">&quot;node_num&quot;</span>: node_num},
             transfer_from=[{<span class="hljs-string">&quot;resource_group&quot;</span>: _PENDING_NODES_RESOURCE_GROUP}], <span class="hljs-comment"># recover missing node from pending resource group at high priority.</span>
             transfer_to=[{<span class="hljs-string">&quot;resource_group&quot;</span>: _PENDING_NODES_RESOURCE_GROUP}], <span class="hljs-comment"># recover redundant node to pending resource group at low priority.</span>
         )})
-    utility.create_resource_group(name=<span class="hljs-string">&quot;rg1&quot;</span>, config=ResourceGroupConfig(
+    milvus_client.create_resource_group(name=<span class="hljs-string">&quot;rg1&quot;</span>, config=ResourceGroupConfig(
         requests={<span class="hljs-string">&quot;node_num&quot;</span>: <span class="hljs-number">0</span>},
         limits={<span class="hljs-string">&quot;node_num&quot;</span>: <span class="hljs-number">0</span>},
         transfer_from=[{<span class="hljs-string">&quot;resource_group&quot;</span>: _PENDING_NODES_RESOURCE_GROUP}], 
         transfer_to=[{<span class="hljs-string">&quot;resource_group&quot;</span>: _PENDING_NODES_RESOURCE_GROUP}],
     ))
-    utility.create_resource_group(name=<span class="hljs-string">&quot;rg2&quot;</span>, config=ResourceGroupConfig(
+    milvus_client.create_resource_group(name=<span class="hljs-string">&quot;rg2&quot;</span>, config=ResourceGroupConfig(
         requests={<span class="hljs-string">&quot;node_num&quot;</span>: <span class="hljs-number">0</span>},
         limits={<span class="hljs-string">&quot;node_num&quot;</span>: <span class="hljs-number">0</span>},
         transfer_from=[{<span class="hljs-string">&quot;resource_group&quot;</span>: _PENDING_NODES_RESOURCE_GROUP}], 
@@ -278,7 +278,7 @@ init_cluster(<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>API를 사용하여 다른 리소스 그룹에 영향을 주지 않고 특정 리소스 그룹을 지정된 수의 쿼리 노드로 확장할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 into 3 nodes, rg2 into 1 nodes</span>
-utility.update_resource_groups({
+milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(
         requests={<span class="hljs-string">&quot;node_num&quot;</span>: <span class="hljs-number">3</span>},
         limits={<span class="hljs-string">&quot;node_num&quot;</span>: <span class="hljs-number">3</span>},
@@ -296,9 +296,9 @@ scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>클러스터 스케일 인</p>
-<p>마찬가지로 <strong>__pending_nodes</strong> 리소스 그룹에서 쿼리 노드를 우선적으로 선택하는 스케일 인 규칙을 설정할 수 있습니다. 이 정보는 <code translate="no">describe_resource_group</code> API를 통해 얻을 수 있습니다. 지정된 리소스 그룹 스케일인 목표 달성하기.</p>
+<p>마찬가지로, <strong>__pending_nodes</strong> 리소스 그룹에서 쿼리 노드를 우선적으로 선택하는 스케일 인 규칙을 설정할 수 있습니다. 이 정보는 <code translate="no">describe_resource_group</code> API를 통해 얻을 수 있습니다. 지정된 리소스 그룹 스케일인 목표 달성하기.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
-utility.update_resource_groups({
+milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(
         requests={<span class="hljs-string">&quot;node_num&quot;</span>: <span class="hljs-number">2</span>},
         limits={<span class="hljs-string">&quot;node_num&quot;</span>: <span class="hljs-number">2</span>},

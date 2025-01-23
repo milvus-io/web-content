@@ -39,14 +39,14 @@ title: ترقية مجموعة ميلفوس العنقودية باستخدام 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قم بتشغيل الأمر التالي لترقية إصدار مشغل Milvus الخاص بك إلى الإصدار v1.0.1.</p>
+    </button></h2><p>قم بتشغيل الأمر التالي لترقية إصدار مشغل Milvus الخاص بك إلى الإصدار v1.2.0.</p>
 <pre><code translate="no">helm repo <span class="hljs-keyword">add</span> zilliztech-milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator/</span>
 helm repo update zilliztech-milvus-<span class="hljs-keyword">operator</span>
 helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> zilliztech-milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>بمجرد أن تقوم بترقية مشغل ميلفوس الخاص بك إلى أحدث إصدار، يكون لديك الخيارات التالية:</p>
 <ul>
-<li>لترقية ميلفوس من الإصدار 2.2.3 أو الإصدارات الأحدث إلى الإصدار 2.5.3، يمكنك <a href="#Conduct-a-rolling-upgrade">إجراء ترقية متجددة</a>.</li>
+<li>لترقية Milvus من الإصدار 2.2.3 أو الإصدارات الأحدث إلى الإصدار 2.5.3، يمكنك <a href="#Conduct-a-rolling-upgrade">إجراء ترقية متجددة</a>.</li>
 <li>لترقية Milvus من إصدار ثانوي قبل الإصدار 2.2.3 إلى 2.5.3، يُنصح بترقية Milvus <a href="#Upgrade-Milvus-by-changing-its-image">عن طريق تغيير إصدار الصورة الخاص به</a>.</li>
 <li>لترقية Milvus من الإصدار 2.1.x إلى الإصدار 2.5.3، تحتاج إلى <a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل الترقية الفعلية.</li>
 </ul>
@@ -66,7 +66,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
         ></path>
       </svg>
     </button></h2><p>منذ الإصدار Milvus 2.2.3، يمكنك تكوين منسقي Milvus للعمل في وضع الاستعداد النشط وتمكين ميزة الترقية المتجددة لهم، بحيث يمكن لـ Milvus الاستجابة للطلبات الواردة أثناء ترقية المنسق. في الإصدارات السابقة، يجب إزالة المنسقين ثم إنشاؤهم أثناء الترقية، مما قد يؤدي إلى تعطل معين للخدمة.</p>
-<p>استنادًا إلى إمكانيات التحديث المتجدد التي توفرها Kubernetes، يفرض مشغل Milvus تحديثًا مرتبًا لعمليات النشر وفقًا لتبعياتها. بالإضافة إلى ذلك، تطبق Milvus آلية لضمان بقاء مكوناتها متوافقة مع تلك التي تعتمد عليها أثناء الترقية، مما يقلل بشكل كبير من وقت تعطل الخدمة المحتمل.</p>
+<p>استنادًا إلى إمكانات التحديث المتجدد التي توفرها Kubernetes، يفرض مشغل Milvus تحديثًا مرتبًا لعمليات النشر وفقًا لتبعياتها. بالإضافة إلى ذلك، تطبق Milvus آلية لضمان بقاء مكوناتها متوافقة مع تلك التي تعتمد عليها أثناء الترقية، مما يقلل بشكل كبير من وقت تعطل الخدمة المحتمل.</p>
 <p>يتم تعطيل ميزة الترقية المتجددة بشكل افتراضي. تحتاج إلى تمكينها بشكل صريح من خلال ملف تهيئة.</p>
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
 kind: Milvus
@@ -101,8 +101,8 @@ spec:
     imageUpdateMode: rollingDowngrade
     image: milvusdb/milvus:&lt;some-old-version&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>ثم احفظ التكوين الخاص بك كملف YAML (على سبيل المثال، <code translate="no">milvusupgrade.yml</code>) وقم بتصحيح ملف التكوين هذا إلى مثيل Milvus الخاص بك على النحو التالي:</p>
-<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yml
+<p>ثم احفظ التكوين الخاص بك كملف YAML (على سبيل المثال، <code translate="no">milvusupgrade.yaml</code>) وقم بتصحيح ملف التكوين هذا إلى مثيل Milvus الخاص بك على النحو التالي:</p>
+<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge 
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">قم بترقية Milvus عن طريق تغيير صورته<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -131,7 +131,7 @@ spec:
    image: milvusdb/milvus:v2.5.3
 <button class="copy-code-btn"></button></code></pre>
 <p>ثم قم بتشغيل ما يلي لتنفيذ الترقية:</p>
-<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml
+<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge 
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Migrate-the-metadata" class="common-anchor-header">ترحيل البيانات الوصفية<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
       <svg translate="no"

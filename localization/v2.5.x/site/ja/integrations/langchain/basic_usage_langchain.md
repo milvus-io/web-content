@@ -1,9 +1,9 @@
 ---
 id: basic_usage_langchain.md
 summary: このノートブックでは、Milvusベクトルデータベースに関連する機能の使用方法を説明します。
-title: Milvusをベクトルストアとして使う
+title: Milvusをベクターストアとして使う
 ---
-<h1 id="Use-Milvus-as-a-Vector-Store" class="common-anchor-header">Milvusをベクトルストアとして使う<button data-href="#Use-Milvus-as-a-Vector-Store" class="anchor-icon" translate="no">
+<h1 id="Use-Milvus-as-a-LangChain-Vector-Store" class="common-anchor-header">MilvusをLangChainベクターストアとして使う<button data-href="#Use-Milvus-as-a-LangChain-Vector-Store" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,10 +18,7 @@ title: Milvusをベクトルストアとして使う
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><blockquote>
-<p><a href="https://milvus.io/docs/overview.md">Milvusは</a>、ディープニューラルネットワークやその他の機械学習（ML）モデルによって生成された大量の埋め込みベクトルを保存、インデックス化、管理するデータベースです。</p>
-</blockquote>
-<p>このノートブックでは、Milvusベクトルデータベースに関連する機能の使用方法を説明します。</p>
+    </button></h1><p>このノートでは、<a href="https://python.langchain.com/docs/integrations/vectorstores/">LangChainベクターストアとして</a> <a href="https://milvus.io/docs/overview.md">Milvusに</a>関連する機能を使用する方法を説明します。</p>
 <h2 id="Setup" class="common-anchor-header">セットアップ<button data-href="#Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,11 +34,10 @@ title: Milvusをベクトルストアとして使う
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このインテグレーションを使用するには、<code translate="no">langchain-milvus</code> と<code translate="no">pip install -qU langchain-milvus</code> をインストールする必要があります。</p>
-<pre><code translate="no" class="language-python">%pip install -qU  langchain_milvus
+    </button></h2><p>このインテグレーションを使用するには<code translate="no">langchain-milvus</code> と<code translate="no">pip install -qU langchain-milvus</code> をインストールする必要があります。</p>
+<pre><code translate="no" class="language-shell">$ pip install -qU  langchain_milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>最新版のpymilvusにはローカルベクターデータベースMilvus Liteが付属しており、プロトタイピングに適しています。100万ドキュメントを超えるような大規模なデータをお持ちの場合は、<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">dockerやkubernetes</a>上でよりパフォーマンスの高いMilvusサーバーをセットアップすることをお勧めします。</p>
-<h3 id="Credentials" class="common-anchor-header">認証情報</h3><p><code translate="no">Milvus</code> ベクターストアを使用する際に認証情報は必要ありません。</p>
+<p>最新版のpymilvusにはローカルベクタデータベース Milvus Lite が付属しており、プロトタイピングに適しています。100万ドキュメント以上のような大規模なデータをお持ちの場合は、<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">dockerやkubernetes</a>上でよりパフォーマンスの高いMilvusサーバーをセットアップすることをお勧めします。</p>
 <h2 id="Initialization" class="common-anchor-header">初期化<button data-href="#Initialization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,15 +53,9 @@ title: Milvusをベクトルストアとして使う
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-{=mdx}"><span class="hljs-keyword">import</span> <span class="hljs-title class_">EmbeddingTabs</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@theme/EmbeddingTabs&quot;</span>;
+    </button></h2><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAIEmbeddings</span>
 
-&lt;EmbeddingTabs/&gt;
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># | output: false</span>
-<span class="hljs-comment"># | echo: false</span>
-<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
-
-embeddings = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
+embeddings = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 
@@ -78,8 +68,8 @@ vector_store = Milvus(
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">Milvus Collectionsを使ってデータを分割する。</h3><p>同じMilvusインスタンス内で、関連性のない異なるドキュメントを異なるコレクションに格納し、コンテキストを維持することができます。</p>
-<p>以下は新しいコレクションを作成する方法です。</p>
+<h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">Milvus Collectionsを使用してデータを分割します。</h3><p>同じMilvusインスタンス内で、関連性のない異なるドキュメントを異なるコレクションに格納し、コンテキストを維持することができます。</p>
+<p>以下は、ドキュメントから新しいベクトルストアのコレクションを作成する方法です：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
 
 vector_store_saved = <span class="hljs-title class_">Milvus</span>.<span class="hljs-title function_">from_documents</span>(
@@ -89,7 +79,7 @@ vector_store_saved = <span class="hljs-title class_">Milvus</span>.<span class="
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-variable constant_">URI</span>},
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>保存されたコレクションを取り出す方法は以下の通りです。</p>
+<p>そのコレクションを取り出す方法は以下のとおりです。</p>
 <pre><code translate="no" class="language-python">vector_store_loaded = <span class="hljs-title class_">Milvus</span>(
     embeddings,
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-variable constant_">URI</span>},
@@ -218,7 +208,7 @@ vector_store.add_documents(documents=documents, ids=uuids)
 <pre><code translate="no" class="language-python">results = vector_store.similarity_search(
     <span class="hljs-string">&quot;LangChain provides abstractions to make working with LLMs easy&quot;</span>,
     k=<span class="hljs-number">2</span>,
-    <span class="hljs-built_in">filter</span>={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tweet&quot;</span>},
+    expr=<span class="hljs-string">&#x27;source == &quot;tweet&quot;&#x27;</span>,
 )
 <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> results:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;* <span class="hljs-subst">{res.page_content}</span> [<span class="hljs-subst">{res.metadata}</span>]&quot;</span>)
@@ -228,21 +218,21 @@ vector_store.add_documents(documents=documents, ids=uuids)
 </code></pre>
 <h4 id="Similarity-search-with-score" class="common-anchor-header">スコアによる類似検索</h4><p>スコアによる検索も可能です：</p>
 <pre><code translate="no" class="language-python">results = vector_store.similarity_search_with_score(
-    <span class="hljs-string">&quot;Will it be hot tomorrow?&quot;</span>, k=<span class="hljs-number">1</span>, <span class="hljs-built_in">filter</span>={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;news&quot;</span>}
+    <span class="hljs-string">&quot;Will it be hot tomorrow?&quot;</span>, k=<span class="hljs-number">1</span>, expr=<span class="hljs-string">&#x27;source == &quot;news&quot;&#x27;</span>
 )
 <span class="hljs-keyword">for</span> res, score <span class="hljs-keyword">in</span> results:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;* [SIM=<span class="hljs-subst">{score:3f}</span>] <span class="hljs-subst">{res.page_content}</span> [<span class="hljs-subst">{res.metadata}</span>]&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">* [SIM=21192.628906] bar [{'pk': '2', 'source': 'https://example.com'}]
 </code></pre>
-<p><code translate="no">Milvus</code> ベクトルストアを使用する際に利用可能なすべての検索オプションの一覧については、<a href="https://api.python.langchain.com/en/latest/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html">APIリファレンスを</a>参照してください。</p>
-<h3 id="Query-by-turning-into-retriever" class="common-anchor-header">レトリバーに変換してクエリー</h3><p>ベクターストアをレトリバーに変換して、チェーンで使いやすくすることもできます。</p>
+<p><code translate="no">Milvus</code> ベクトルストアを使用する際に利用可能なすべての検索オプションの一覧については、<a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html">APIリファレンスを</a>参照してください。</p>
+<h3 id="Query-by-turning-into-retriever" class="common-anchor-header">レトリバーに変換してクエリー</h3><p>ベクターストアをレトリバーに変換することで、より簡単にチェーンで使用することができます。</p>
 <pre><code translate="no" class="language-python">retriever = vector_store.as_retriever(search_type=<span class="hljs-string">&quot;mmr&quot;</span>, search_kwargs={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">1</span>})
 retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a crime&quot;</span>, <span class="hljs-built_in">filter</span>={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;news&quot;</span>})
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'pk': 'eacc7256-d7fa-4036-b1f7-83d7a4bee0c5', 'source': 'news'}, page_content='Robbers broke into the city bank and stole $1 million in cash.')]
 </code></pre>
-<h2 id="Usage-for-retrieval-augmented-generation" class="common-anchor-header">リトリーバー拡張生成の使い方<button data-href="#Usage-for-retrieval-augmented-generation" class="anchor-icon" translate="no">
+<h2 id="Usage-for-Retrieval-Augmented-Generation" class="common-anchor-header">リトリーバー化した生成の使い方<button data-href="#Usage-for-Retrieval-Augmented-Generation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -257,13 +247,8 @@ retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a cri
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このベクターストアをRAG(retrieval-augmented generation)に使用する方法については、以下のセクションを参照してください：</p>
-<ul>
-<li><a href="https://python.langchain.com/v0.2/docs/tutorials/#working-with-external-knowledge">チュートリアル: 外部知識を使用する</a></li>
-<li><a href="https://python.langchain.com/v0.2/docs/how_to/#qa-with-rag">ハウツーRAGによる質疑応答</a></li>
-<li><a href="https://python.langchain.com/v0.2/docs/concepts/#retrieval">検索概念ドキュメント</a></li>
-</ul>
-<h3 id="Per-User-Retrieval" class="common-anchor-header">ユーザーごとの検索</h3><p>検索アプリを構築する場合、複数のユーザーを想定して構築しなければならないことがよくあります。つまり、1人のユーザーだけでなく、多くの異なるユーザーのデータを保存することになるかもしれません。</p>
+    </button></h2><p>このベクターストアをRAG(retrieval-augmented generation)に使用する方法については、この<a href="https://milvus.io/docs/integrate_with_langchain.md">RAGガイドを</a>参照してください。</p>
+<h3 id="Per-User-Retrieval" class="common-anchor-header">ユーザーごとの検索</h3><p>検索アプリを構築する場合、複数のユーザーを想定して構築しなければならないことがよくあります。つまり、1人のユーザーだけでなく、多くの異なるユーザーのデータを保存する可能性があります。</p>
 <p>milvusはマルチテナントを実装するために<a href="https://milvus.io/docs/multi_tenancy.md#Partition-key-based-multi-tenancy">partition_keyを</a>使うことを推奨しています。</p>
 <blockquote>
 <p>Partition keyの機能は現在Milvus Liteでは利用できないため、利用したい場合は<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">dockerやkubernetesから</a>Milvusサーバを起動する必要がある。</p>
@@ -285,7 +270,7 @@ vectorstore = Milvus.from_documents(
 <p>パーティションキーを利用した検索を行うには、検索リクエストのブーリアン式に以下のいずれかを含める必要があります：</p>
 <p><code translate="no">search_kwargs={&quot;expr&quot;: '&lt;partition_key&gt; == &quot;xxxx&quot;'}</code></p>
 <p><code translate="no">search_kwargs={&quot;expr&quot;: '&lt;partition_key&gt; == in [&quot;xxx&quot;, &quot;xxx&quot;]'}</code></p>
-<p><code translate="no">&lt;partition_key&gt;</code> をパーティション・キーとして指定されたフィールド名に置き換えてください。</p>
+<p><code translate="no">&lt;partition_key&gt;</code> をパーティション・キーとして指定されたフィールド名に置き換える。</p>
 <p>milvusは、指定されたパーティション・キーに基づいてパーティションを変更し、パーティション・キーに従ってエンティティをフィルタリングし、フィルタリングされたエンティティを検索します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># This will only get documents for Ankush</span>
 vectorstore.as_retriever(search_kwargs={<span class="hljs-string">&quot;expr&quot;</span>: <span class="hljs-string">&#x27;namespace == &quot;ankush&quot;&#x27;</span>}).invoke(
@@ -316,4 +301,4 @@ vectorstore.as_retriever(search_kwargs={<span class="hljs-string">&quot;expr&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ModuleName__VectorStoreのすべての機能と設定に関する詳細なドキュメントは、APIリファレンスhttps://api.python.langchain.com/en/latest/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html。</p>
+    </button></h2><p>ModuleName__VectorStoreのすべての機能と設定に関する詳細なドキュメントは、APIリファレンスhttps://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html。</p>

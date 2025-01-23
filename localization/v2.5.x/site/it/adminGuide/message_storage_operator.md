@@ -81,15 +81,37 @@ summary: Scoprite come configurare l'archiviazione dei messaggi con Milvus Opera
 <p>Attualmente è possibile configurare RocksMQ come archivio messaggi per Milvus standalone solo con Milvus Operator.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Esempio</h4><p>L'esempio seguente configura un servizio RocksMQ.</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
+<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
   name: milvus
 spec:
-  dependencies: {}
+  mode: standalone
+  dependencies:
+    msgStreamType: rocksmq
+    rocksmq:
+      persistence:
+        enabled: <span class="hljs-literal">true</span>
+        pvcDeletion: <span class="hljs-literal">true</span>
+        persistentVolumeClaim:
+          spec:
+            accessModes: [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
+            storageClassName: <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
+            resources:
+              requests:
+                storage: 10Gi  <span class="hljs-comment"># Specify your desired storage size</span>
   components: {}
   config: {}
 <button class="copy-code-btn"></button></code></pre>
+<h5 id="Key-configuration-options" class="common-anchor-header">Opzioni chiave di configurazione:</h5><ul>
+<li><code translate="no">msgStreamType</code>rocksmq: imposta esplicitamente RocksMQ come coda di messaggi.</li>
+<li><code translate="no">persistence.enabled</code>: Abilita l'archiviazione persistente per i dati RocksMQ</li>
+<li><code translate="no">persistence.pvcDeletion</code>: Quando è vero, il PVC viene cancellato quando l'istanza Milvus viene cancellata.</li>
+<li><code translate="no">persistentVolumeClaim.spec</code>: Specifiche standard del PVC Kubernetes</li>
+<li><code translate="no">accessModes</code>: Tipicamente <code translate="no">ReadWriteOnce</code> per lo storage a blocchi</li>
+<li><code translate="no">storageClassName</code>: Classe di archiviazione del cluster</li>
+<li><code translate="no">storage</code>: Dimensione del volume persistente</li>
+</ul>
 <h2 id="Configure-NATS" class="common-anchor-header">Configurare NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,7 +127,7 @@ spec:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS è un archivio di messaggi alternativo per NATS.</p>
+    </button></h2><p>NATS è un sistema di archiviazione dei messaggi alternativo a NATS.</p>
 <h4 id="Example" class="common-anchor-header">Esempio</h4><p>L'esempio seguente configura un servizio NATS.</p>
 <pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
 kind: Milvus

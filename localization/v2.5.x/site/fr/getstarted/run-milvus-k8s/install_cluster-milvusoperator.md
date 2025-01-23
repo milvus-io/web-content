@@ -84,52 +84,16 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
         ></path>
       </svg>
     </button></h2><p>Milvus Operator définit les ressources personnalisées d'un cluster Milvus au-dessus des <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">ressources personnalisées de Kubernetes</a>. Lorsque des ressources personnalisées sont définies, vous pouvez utiliser les API K8s de manière déclarative et gérer la pile de déploiement Milvus pour garantir son évolutivité et sa haute disponibilité.</p>
-<h3 id="1-Install-cert-manager" class="common-anchor-header">1. Installer cert-manager</h3><p>Milvus Operator utilise <a href="https://cert-manager.io/docs/installation/supported-releases/">cert-manager</a> pour fournir un certificat au serveur webhook.</p>
-<div class="alert note">
-<ul>
-<li>Vous pouvez ignorer cette étape si vous choisissez de <a href="/docs/fr/install_cluster-helm.md">déployer Milvus Operator à l'aide de Helm</a>.</li>
-<li>Milvus Operator nécessite cert-manager 1.1.3 ou supérieur.</li>
-</ul>
-</div>
-<p>Exécutez la commande suivante pour installer cert-manager.</p>
-<pre><code translate="no" class="language-shell">$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.yaml
-<button class="copy-code-btn"></button></code></pre>
-<p>Une fois le processus d'installation terminé, vous obtiendrez un résultat similaire au suivant.</p>
-<pre><code translate="no" class="language-shell">customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/challenges.acme.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/clusterissuers.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/issuers.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io created
-namespace/cert-manager created
-serviceaccount/cert-manager-cainjector created
-...
-service/cert-manager created
-service/cert-manager-webhook created
-deployment.apps/cert-manager-cainjector created
-deployment.apps/cert-manager created
-deployment.apps/cert-manager-webhook created
-mutatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook created
-validatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook created
-<button class="copy-code-btn"></button></code></pre>
-<p>Vous pouvez vérifier si les pods de cert-manager sont en cours d'exécution en procédant comme suit :</p>
-<pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> pods -n cert-manager
-
-NAME                                      READY   STATUS    RESTARTS   AGE
-cert-manager<span class="hljs-number">-848f</span>547974-gccz8             <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
-cert-manager-cainjector<span class="hljs-number">-54f</span>4cc6b5-dpj84   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
-cert-manager-webhook<span class="hljs-number">-7</span>c9588c76-tqncn      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Install-Milvus-Operator" class="common-anchor-header">2. Installer Milvus Operator</h3><p>Vous pouvez installer Milvus Operator de l'une des manières suivantes :</p>
+<p>Vous pouvez installer Milvus Operator de l'une des manières suivantes :</p>
 <ul>
 <li><a href="#Install-with-Helm">Avec Helm</a></li>
 <li><a href="#Install-with-kubectl">Avec kubectl</a></li>
 </ul>
-<h4 id="Install-with-Helm" class="common-anchor-header">Installation avec Helm</h4><p>Exécutez la commande suivante pour installer Milvus Operator avec Helm.</p>
+<h3 id="Install-with-Helm" class="common-anchor-header">Installation avec Helm</h3><p>Exécutez la commande suivante pour installer Milvus Operator avec Helm.</p>
 <pre><code translate="no" class="language-shell">$ helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.0.1/milvus-operator-1.0.1.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.2.0/milvus-operator-1.2.0.tgz
 <button class="copy-code-btn"></button></code></pre>
 <p>Une fois le processus d'installation terminé, vous obtiendrez un résultat similaire à celui qui suit.</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
@@ -146,7 +110,7 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 </span><button class="copy-code-btn"></button></code></pre>
-<h4 id="Install-with-kubectl" class="common-anchor-header">Installation avec kubectl</h4><p>Exécutez la commande suivante pour installer Milvus Operator avec <code translate="no">kubectl</code>.</p>
+<h3 id="Install-with-kubectl" class="common-anchor-header">Installation avec kubectl</h3><p>Exécutez la commande suivante pour installer Milvus Operator avec <code translate="no">kubectl</code>.</p>
 <pre><code translate="no" class="language-shell">$ kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous obtiendrez un résultat similaire à ce qui suit à la fin du processus d'installation.</p>
@@ -164,10 +128,6 @@ configmap/milvus-operator-manager-config created
 service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
-certificate.cert-manager.io/milvus-operator-serving-cert created
-issuer.cert-manager.io/milvus-operator-selfsigned-issuer created
-mutatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-mutating-webhook-configuration created
-validatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-validating-webhook-configuration created
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous pouvez vérifier si le pod Milvus Operator est en cours d'exécution comme suit :</p>
 <pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> pods -n milvus-<span class="hljs-keyword">operator</span>
@@ -297,7 +257,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus est livré avec un outil GUI intégré appelé Milvus WebUI auquel vous pouvez accéder via votre navigateur. Milvus WebUI améliore l'observabilité du système grâce à une interface simple et intuitive. Vous pouvez utiliser l'interface Web Milvus pour observer les statistiques et les métriques des composants et des dépendances de Milvus, vérifier les détails de la base de données et de la collection, et répertorier les configurations détaillées de Milvus. Pour plus de détails sur l'interface Web de Milvus, voir l'<a href="/docs/fr/milvus-webui.md">interface Web de Milvus</a>.</p>
+    </button></h2><p>Milvus est livré avec un outil GUI intégré appelé Milvus WebUI auquel vous pouvez accéder via votre navigateur. Milvus WebUI améliore l'observabilité du système grâce à une interface simple et intuitive. Vous pouvez utiliser l'interface Web Milvus pour observer les statistiques et les métriques des composants et des dépendances de Milvus, vérifier les détails de la base de données et de la collection et répertorier les configurations détaillées de Milvus. Pour plus de détails sur l'interface Web de Milvus, voir l'<a href="/docs/fr/milvus-webui.md">interface Web de Milvus</a>.</p>
 <p>Pour permettre l'accès à l'interface Web Milvus, vous devez rediriger le port du pod proxy vers un port local.</p>
 <pre><code translate="no" class="language-shell">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27018</span>:<span class="hljs-number">9091</span>
 <span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27018</span> -&gt; <span class="hljs-number">9091</span>
@@ -349,7 +309,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 </ul>
 <h4 id="Uninstall-with-Helm" class="common-anchor-header">Désinstallation avec Helm</h4><pre><code translate="no" class="language-shell">$ helm -n milvus-<span class="hljs-keyword">operator</span> uninstall milvus-<span class="hljs-keyword">operator</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Uninstall-with-kubectl" class="common-anchor-header">Désinstallation avec kubectl</h4><pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">delete</span> -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/v1.0.1/deploy/manifests/deployment.yaml</span>
+<h4 id="Uninstall-with-kubectl" class="common-anchor-header">Désinstallation avec kubectl</h4><pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">delete</span> -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/v1.2.0/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Ce qui suit<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

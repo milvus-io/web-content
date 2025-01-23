@@ -1,9 +1,9 @@
 ---
 id: basic_usage_langchain.md
 summary: 本筆記本說明如何使用與 Milvus 向量資料庫相關的功能。
-title: 使用 Milvus 作為向量儲存庫
+title: 使用 Milvus 作為向量儲存
 ---
-<h1 id="Use-Milvus-as-a-Vector-Store" class="common-anchor-header">使用 Milvus 作為向量儲存庫<button data-href="#Use-Milvus-as-a-Vector-Store" class="anchor-icon" translate="no">
+<h1 id="Use-Milvus-as-a-LangChain-Vector-Store" class="common-anchor-header">使用 Milvus 作為 LangChain 向量儲存庫<button data-href="#Use-Milvus-as-a-LangChain-Vector-Store" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,11 +18,8 @@ title: 使用 Milvus 作為向量儲存庫
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><blockquote>
-<p><a href="https://milvus.io/docs/overview.md">Milvus</a>是一個資料庫，可儲存、索引和管理由深度神經網路和其他機器學習 (ML) 模型所產生的大量嵌入向量。</p>
-</blockquote>
-<p>本筆記展示如何使用 Milvus 向量資料庫的相關功能。</p>
-<h2 id="Setup" class="common-anchor-header">安裝<button data-href="#Setup" class="anchor-icon" translate="no">
+    </button></h1><p>本筆記展示如何使用<a href="https://milvus.io/docs/overview.md">Milvus</a>作為<a href="https://python.langchain.com/docs/integrations/vectorstores/">LangChain 向量儲存庫</a>的相關功能。</p>
+<h2 id="Setup" class="common-anchor-header">設定<button data-href="#Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,11 +34,10 @@ title: 使用 Milvus 作為向量儲存庫
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您需要透過<code translate="no">pip install -qU langchain-milvus</code> 安裝<code translate="no">langchain-milvus</code> ，才能使用此整合。</p>
-<pre><code translate="no" class="language-python">%pip install -qU  langchain_milvus
+    </button></h2><p>您需要安裝<code translate="no">langchain-milvus</code> 與<code translate="no">pip install -qU langchain-milvus</code> 來使用這個整合。</p>
+<pre><code translate="no" class="language-shell">$ pip install -qU  langchain_milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>最新版本的 pymilvus 隨附一個本機向量資料庫 Milvus Lite，適合做為原型。如果您有大規模的資料，例如超過一百萬份的文件，我們建議您在<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker 或 kubernetes</a> 上架設效能更高的 Milvus 伺服器。</p>
-<h3 id="Credentials" class="common-anchor-header">憑證</h3><p>使用<code translate="no">Milvus</code> 向量存儲不需要憑證。</p>
+<p>最新版本的 pymilvus 隨附一個本地向量資料庫 Milvus Lite，很適合做為原型。如果您有大規模的資料，例如超過一百萬份的文件，我們建議您在<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker 或 kubernetes</a> 上架設效能更高的 Milvus 伺服器。</p>
 <h2 id="Initialization" class="common-anchor-header">初始化<button data-href="#Initialization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,15 +53,9 @@ title: 使用 Milvus 作為向量儲存庫
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-{=mdx}"><span class="hljs-keyword">import</span> <span class="hljs-title class_">EmbeddingTabs</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@theme/EmbeddingTabs&quot;</span>;
+    </button></h2><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAIEmbeddings</span>
 
-&lt;EmbeddingTabs/&gt;
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># | output: false</span>
-<span class="hljs-comment"># | echo: false</span>
-<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
-
-embeddings = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
+embeddings = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 
@@ -78,8 +68,8 @@ vector_store = Milvus(
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">使用 Milvus 集合區隔資料</h3><p>您可以在同一個 Milvus 實例中，將不同的不相關文件儲存在不同的集合中，以維護上下文。</p>
-<p>下面是如何創建一個新的集合</p>
+<h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">使用 Milvus Collections 區隔資料</h3><p>您可以在同一個 Milvus 實例中，將不同的不相關文件存放在不同的集合中，以維護上下文。</p>
+<p>以下是如何從文件建立一個新的向量儲存集合：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
 
 vector_store_saved = <span class="hljs-title class_">Milvus</span>.<span class="hljs-title function_">from_documents</span>(
@@ -112,7 +102,7 @@ vector_store_saved = <span class="hljs-title class_">Milvus</span>.<span class="
         ></path>
       </svg>
     </button></h2><p>一旦你創建了你的向量商店，我們可以通過添加和刪除不同的項目與它互動。</p>
-<h3 id="Add-items-to-vector-store" class="common-anchor-header">將項目加入向量商店</h3><p>我們可以使用<code translate="no">add_documents</code> 功能，將項目加入向量儲存庫。</p>
+<h3 id="Add-items-to-vector-store" class="common-anchor-header">新增項目至向量儲存</h3><p>我們可以使用<code translate="no">add_documents</code> 功能將項目新增至向量儲存空間。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> uuid <span class="hljs-keyword">import</span> uuid4
 
 <span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
@@ -218,7 +208,7 @@ vector_store.add_documents(documents=documents, ids=uuids)
 <pre><code translate="no" class="language-python">results = vector_store.similarity_search(
     <span class="hljs-string">&quot;LangChain provides abstractions to make working with LLMs easy&quot;</span>,
     k=<span class="hljs-number">2</span>,
-    <span class="hljs-built_in">filter</span>={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tweet&quot;</span>},
+    expr=<span class="hljs-string">&#x27;source == &quot;tweet&quot;&#x27;</span>,
 )
 <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> results:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;* <span class="hljs-subst">{res.page_content}</span> [<span class="hljs-subst">{res.metadata}</span>]&quot;</span>)
@@ -228,21 +218,21 @@ vector_store.add_documents(documents=documents, ids=uuids)
 </code></pre>
 <h4 id="Similarity-search-with-score" class="common-anchor-header">使用分數進行相似性搜尋</h4><p>您也可以使用分數進行搜尋：</p>
 <pre><code translate="no" class="language-python">results = vector_store.similarity_search_with_score(
-    <span class="hljs-string">&quot;Will it be hot tomorrow?&quot;</span>, k=<span class="hljs-number">1</span>, <span class="hljs-built_in">filter</span>={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;news&quot;</span>}
+    <span class="hljs-string">&quot;Will it be hot tomorrow?&quot;</span>, k=<span class="hljs-number">1</span>, expr=<span class="hljs-string">&#x27;source == &quot;news&quot;&#x27;</span>
 )
 <span class="hljs-keyword">for</span> res, score <span class="hljs-keyword">in</span> results:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;* [SIM=<span class="hljs-subst">{score:3f}</span>] <span class="hljs-subst">{res.page_content}</span> [<span class="hljs-subst">{res.metadata}</span>]&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">* [SIM=21192.628906] bar [{'pk': '2', 'source': 'https://example.com'}]
 </code></pre>
-<p>如需使用<code translate="no">Milvus</code> 向量商店時可用的所有搜尋選項的完整清單，您可以造訪<a href="https://api.python.langchain.com/en/latest/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html">API 參考資料</a>。</p>
+<p>如需使用<code translate="no">Milvus</code> 向量商店時可用的所有搜尋選項的完整清單，您可以造訪<a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html">API 參考資料</a>。</p>
 <h3 id="Query-by-turning-into-retriever" class="common-anchor-header">透過轉換成retriever進行查詢</h3><p>您也可以將向量儲存轉換成retriever，以便在您的鏈中更容易使用。</p>
 <pre><code translate="no" class="language-python">retriever = vector_store.as_retriever(search_type=<span class="hljs-string">&quot;mmr&quot;</span>, search_kwargs={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">1</span>})
 retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a crime&quot;</span>, <span class="hljs-built_in">filter</span>={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;news&quot;</span>})
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'pk': 'eacc7256-d7fa-4036-b1f7-83d7a4bee0c5', 'source': 'news'}, page_content='Robbers broke into the city bank and stole $1 million in cash.')]
 </code></pre>
-<h2 id="Usage-for-retrieval-augmented-generation" class="common-anchor-header">檢索增強生成的用法<button data-href="#Usage-for-retrieval-augmented-generation" class="anchor-icon" translate="no">
+<h2 id="Usage-for-Retrieval-Augmented-Generation" class="common-anchor-header">擷取增強世代的使用方式<button data-href="#Usage-for-Retrieval-Augmented-Generation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -257,13 +247,8 @@ retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a cri
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>有關如何將此向量庫用於檢索擴充生成 (RAG) 的指南，請參閱以下章節：</p>
-<ul>
-<li><a href="https://python.langchain.com/v0.2/docs/tutorials/#working-with-external-knowledge">教學：使用外部知識</a></li>
-<li><a href="https://python.langchain.com/v0.2/docs/how_to/#qa-with-rag">如何使用：使用 RAG 進行問答</a></li>
-<li><a href="https://python.langchain.com/v0.2/docs/concepts/#retrieval">檢索概念說明文件</a></li>
-</ul>
-<h3 id="Per-User-Retrieval" class="common-anchor-header">每使用者檢索</h3><p>在建立擷取應用程式時，您通常必須以多位使用者為考量。這表示您可能不只為一個使用者儲存資料，而是為許多不同的使用者儲存資料，而且他們應該無法看到彼此的資料。</p>
+    </button></h2><p>有關如何使用此向量儲存器進行retrieval-augmented generation (RAG)，請參閱此<a href="https://milvus.io/docs/integrate_with_langchain.md">RAG 指南</a>。</p>
+<h3 id="Per-User-Retrieval" class="common-anchor-header">按使用者擷取</h3><p>在建立擷取應用程式時，您通常必須以多位使用者為考量。這表示您可能不只為一個使用者儲存資料，而是為許多不同的使用者儲存資料，而且他們應該無法看到彼此的資料。</p>
 <p>Milvus 建議使用<a href="https://milvus.io/docs/multi_tenancy.md#Partition-key-based-multi-tenancy">partition_key</a>來實現多重租用，這裡是一個範例。</p>
 <blockquote>
 <p>現在 Milvus Lite 沒有分區鑰匙的功能，如果你想使用它，你需要從<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker 或 kubernetes</a> 啟動 Milvus 伺服器。</p>
@@ -316,4 +301,4 @@ vectorstore.as_retriever(search_kwargs={<span class="hljs-string">&quot;expr&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如需所有 __ModuleName__VectorStore 功能和配置的詳細說明文件，請前往 API 參考：https://api.python.langchain.com/en/latest/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html。</p>
+    </button></h2><p>如需所有 __ModuleName__VectorStore 功能和配置的詳細說明文件，請前往 API 參考：https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html。</p>

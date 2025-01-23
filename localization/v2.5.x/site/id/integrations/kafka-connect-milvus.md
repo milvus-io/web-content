@@ -1,11 +1,15 @@
 ---
 id: kafka-connect-milvus.md
 summary: >-
-  Dalam panduan singkat ini, kami menunjukkan cara menyiapkan open source kafka
-  dan Zilliz Cloud untuk menelan data vektor.
-title: Mengintegrasikan Milvus dengan WhyHow
+  Apache Kafka terintegrasi dengan Milvus dan Zilliz Cloud untuk melakukan
+  streaming data vektor. Pelajari cara menggunakan konektor Kafka-Milvus untuk
+  membangun pipeline waktu nyata untuk pencarian semantik, sistem rekomendasi,
+  dan analisis berbasis AI.
+title: >-
+  Menghubungkan Apache Kafka® dengan Milvus/Zilliz Cloud untuk Konsumsi Data
+  Vektor Secara Real-Time
 ---
-<h1 id="Connect-Kafka-with-Milvus" class="common-anchor-header">Menghubungkan Kafka dengan Milvus<button data-href="#Connect-Kafka-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="common-anchor-header">Menghubungkan Apache Kafka® dengan Milvus/Zilliz Cloud untuk Konsumsi Data Vektor Secara Real-Time<button data-href="#Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +24,12 @@ title: Mengintegrasikan Milvus dengan WhyHow
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dalam panduan singkat ini, kami akan menunjukkan cara menyiapkan kafka open source dan Zilliz Cloud untuk memasukkan data vektor.</p>
+    </button></h1><p>Dalam panduan awal yang cepat ini, kami menunjukkan cara menyiapkan kafka open source dan Zilliz Cloud untuk menelan data vektor.</p>
+<p>Tutorial ini menjelaskan cara menggunakan Apache Kafka® untuk mengalirkan dan memasukkan data vektor ke dalam basis data vektor Milvus dan Zilliz Cloud (Milvus yang dikelola secara penuh), sehingga memungkinkan aplikasi-aplikasi real-time tingkat lanjut seperti pencarian semantik, sistem rekomendasi, dan analisis yang didukung oleh AI.</p>
+<p>Apache Kafka adalah platform streaming acara terdistribusi yang dirancang untuk saluran pipa dengan throughput tinggi dan latensi rendah. Platform ini banyak digunakan untuk mengumpulkan, menyimpan, dan memproses aliran data waktu nyata dari sumber-sumber seperti basis data, perangkat IoT, aplikasi seluler, dan layanan cloud. Kemampuan Kafka untuk menangani data dalam jumlah besar menjadikannya sumber data penting bagi database vektor seperti Milvus atau Zilliz Cloud.</p>
+<p>Sebagai contoh, Kafka dapat menangkap aliran data waktu nyata-seperti interaksi pengguna, pembacaan sensor, bersama dengan penyematannya dari model pembelajaran mesin-dan mempublikasikan aliran data ini secara langsung ke Milvus atau Zilliz Cloud. Setelah berada di basis data vektor, data ini dapat diindeks, dicari, dan dianalisis secara efisien.</p>
+<p>Integrasi Kafka dengan Milvus dan Zilliz Cloud menyediakan cara yang mulus untuk membangun pipeline yang kuat untuk alur kerja data yang tidak terstruktur. Konektor ini berfungsi untuk penerapan Kafka sumber terbuka dan layanan yang di-host seperti <a href="https://www.confluent.io/hub/zilliz/kafka-connect-milvus">Confluent</a> dan <a href="https://docs.streamnative.io/hub/connector-kafka-connect-milvus-sink-v0.1">StreamNative</a>.</p>
+<p>Dalam tutorial ini kami menggunakan Zilliz Cloud sebagai demonstrasi:</p>
 <h2 id="Step-1-Download-the-kafka-connect-milvus-plugin" class="common-anchor-header">Langkah 1: Unduh plugin kafka-connect-milvus<button data-href="#Step-1-Download-the-kafka-connect-milvus-plugin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,4 +187,4 @@ topics=topic_0
 <li><p>Periksa apakah entitas telah dimasukkan ke dalam koleksi di Zilliz Cloud. Berikut adalah tampilannya di Zilliz Cloud jika penyisipan berhasil:</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/insearted_entities.png" width="80%" /></p></li>
 </ol>
-<h3 id="Support" class="common-anchor-header">Dukungan</h3><p>Jika Anda memerlukan bantuan atau memiliki pertanyaan tentang Kafka Connect Milvus Connector, jangan ragu untuk menghubungi tim dukungan kami: <strong>Email:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>
+<h3 id="Support" class="common-anchor-header">Dukungan</h3><p>Jika Anda memerlukan bantuan atau memiliki pertanyaan tentang Kafka Connect Milvus Connector, jangan ragu untuk menghubungi pengelola konektor: <strong>Email:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>

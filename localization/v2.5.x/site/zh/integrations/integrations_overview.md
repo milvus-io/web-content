@@ -33,7 +33,8 @@ title: 集成概述
 <tr><td><a href="/docs/zh/integrate_with_pytorch.md">使用 Milvus 和 Pytorch 进行图像搜索</a></td><td>语义搜索</td><td>Milvus、Pytorch</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_sentencetransformers.md">使用 Milvus 和 SentenceTransfromers 进行电影搜索</a></td><td>语义搜索</td><td>使用 Milvus 和 SentenceTransformers 进行电影搜索</td></tr>
 <tr><td><a href="/docs/zh/basic_usage_langchain.md">在LangChain中将Milvus用作向量存储库</a></td><td>语义搜索</td><td>Milvus、LangChain</td></tr>
-<tr><td><a href="/docs/zh/integrate_with_haystack.md">使用 Milvus 和 HayStack 的 RAG</a></td><td>RAG</td><td>Milvus、HayStack</td></tr>
+<tr><td><a href="/docs/zh/full_text_search_with_langchain.md">使用LangChain和Milvus进行全文检索</a></td><td>全文搜索</td><td>Milvus、LangChain</td></tr>
+<tr><td><a href="/docs/zh/integrate_with_haystack.md">使用 Milvus 和 HayStack 进行 RAG 搜索</a></td><td>RAG</td><td>Milvus、HayStack</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_voxel51.md">使用 Milvus 和 FiftyOne 进行视觉搜索</a></td><td>语义搜索</td><td>Milvus、FiftyOne</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_voyageai.md">利用 Milvus 和 VoyageAI 进行语义搜索</a></td><td>语义搜索</td><td>Milvus、VoyageAI</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_bentoml.md">使用 Milvus 和 BentoML 的 RAG</a></td><td>RAG</td><td>Milvus、BentoML</td></tr>
@@ -49,7 +50,7 @@ title: 集成概述
 <tr><td><a href="/docs/zh/integrate_with_camel.md">使用 Milvus 和 Camel 编写 RAG</a></td><td>RAG</td><td>Milvus、Camel</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_airbyte.md">Airbyte 和 Milvus：开源数据移动基础设施</a></td><td>数据连接</td><td>Milvus、Airbyte</td></tr>
 <tr><td><a href="/docs/zh/video_search_with_twelvelabs_and_milvus.md">高级视频搜索：利用 Twelve Labs 和 Milvus 进行语义检索</a></td><td>语义搜索</td><td>Milvus、Twelve Labs</td></tr>
-<tr><td><a href="/docs/zh/milvus_rag_with_vllm.md">利用 Milvus、vLLM 和 Llama 3.1 构建 RAG</a></td><td>RAG</td><td>Milvus、vLLM、LlamaIndex</td></tr>
+<tr><td><a href="/docs/zh/milvus_rag_with_vllm.md">使用 Milvus、vLLM 和 Llama 3.1 构建 RAG</a></td><td>RAG</td><td>Milvus、vLLM、LlamaIndex</td></tr>
 <tr><td><a href="/docs/zh/llama_agents_metadata.md">使用 Mistral AI、Milvus 和 Llama-agents 的多代理系统</a></td><td>Agents</td><td>Milvus、Mistral AI、LlamaIndex</td></tr>
 <tr><td><a href="/docs/zh/kafka-connect-milvus.md">用 Milvus 连接 Kafka</a></td><td>数据源</td><td>Milvus、Kafka</td></tr>
 <tr><td><a href="/docs/zh/kotaemon_with_milvus.md">Kotaemon RAG 与 Milvus</a></td><td>RAG</td><td>Milvus、Kotaemon</td></tr>
@@ -74,5 +75,8 @@ title: 集成概述
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_ollama.md">使用 Milvus 和 Ollama 构建 RAG</a></td><td>LLMs</td><td>Milvus、Ollama</td></tr>
 <tr><td><a href="/docs/zh/milvus_rag_with_dynamiq.md">开始使用 Dynamiq 和 Milvus</a></td><td>协调</td><td>Milvus、Dynamiq</td></tr>
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_deepseek.md">使用 Milvus 和 DeepSeek 构建 RAG</a></td><td>LLMs</td><td>Milvus、DeepSeek</td></tr>
+<tr><td><a href="/docs/zh/integrate_with_phidata.md">Milvus 与 Phidata 集成</a></td><td>Agents</td><td>Milvus、Phidata</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_crawl4ai.md">使用 Milvus 和 Crawl4AI 构建 RAG</a></td><td>数据源</td><td>Milvus、Crawl4AI</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_firecrawl.md">使用 Milvus 和 Firecrawl 构建 RAG</a></td><td>数据源</td><td>Milvus、Firecrawl</td></tr>
 </tbody>
 </table>

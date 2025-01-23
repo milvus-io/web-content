@@ -2,7 +2,7 @@
 id: vector_visualization.md
 summary: >-
   Pada contoh ini, kami akan menunjukkan bagaimana memvisualisasikan embedding
-  (vektor) di Milvus menggunakan t-SN.
+  (vektor) di Milvus menggunakan t-SNE.
 title: Visualisasi Vektor
 ---
 <h1 id="Vector-Visualization" class="common-anchor-header">Visualisasi Vektor<button data-href="#Vector-Visualization" class="anchor-icon" translate="no">
@@ -373,7 +373,7 @@ df_tsne
 </table>
 <p>74 baris × 2 kolom</p>
 </div>
-<h3 id="Visualizing-Milvus-search-results-on-a-2d-plane" class="common-anchor-header">Memvisualisasikan hasil pencarian Milvus pada bidang 2d</h3><p>Kita akan memplot vektor kueri dengan warna hijau, vektor yang diambil dengan warna merah, dan vektor yang tersisa dengan warna biru.</p>
+<h3 id="Visualizing-Milvus-search-results-on-a-2d-plane" class="common-anchor-header">Memvisualisasikan hasil pencarian Milvus pada bidang 2d</h3><p>Kami akan memplot vektor kueri dengan warna hijau, vektor yang diambil dengan warna merah, dan vektor yang tersisa dengan warna biru.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 <span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 

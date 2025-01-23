@@ -5,7 +5,7 @@ summary: >-
   nutzen können.
 title: Milvus als Vektorspeicher verwenden
 ---
-<h1 id="Use-Milvus-as-a-Vector-Store" class="common-anchor-header">Milvus als Vektorspeicher verwenden<button data-href="#Use-Milvus-as-a-Vector-Store" class="anchor-icon" translate="no">
+<h1 id="Use-Milvus-as-a-LangChain-Vector-Store" class="common-anchor-header">Milvus als LangChain-Vektorspeicher verwenden<button data-href="#Use-Milvus-as-a-LangChain-Vector-Store" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,11 +20,8 @@ title: Milvus als Vektorspeicher verwenden
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><blockquote>
-<p><a href="https://milvus.io/docs/overview.md">Milvus</a> ist eine Datenbank, die massive Einbettungsvektoren speichert, indiziert und verwaltet, die von tiefen neuronalen Netzen und anderen Modellen des maschinellen Lernens (ML) erzeugt werden.</p>
-</blockquote>
-<p>Dieses Notizbuch zeigt, wie Sie die Funktionen der Milvus-Vektordatenbank nutzen können.</p>
-<h2 id="Setup" class="common-anchor-header">Einrichten von<button data-href="#Setup" class="anchor-icon" translate="no">
+    </button></h1><p>Dieses Notizbuch zeigt, wie man die Funktionalität des <a href="https://milvus.io/docs/overview.md">Milvus</a> als <a href="https://python.langchain.com/docs/integrations/vectorstores/">LangChain-Vektorspeicher</a> nutzen kann.</p>
+<h2 id="Setup" class="common-anchor-header">einrichten<button data-href="#Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,10 +37,9 @@ title: Milvus als Vektorspeicher verwenden
         ></path>
       </svg>
     </button></h2><p>Um diese Integration zu nutzen, müssen Sie <code translate="no">langchain-milvus</code> mit <code translate="no">pip install -qU langchain-milvus</code> installieren.</p>
-<pre><code translate="no" class="language-python">%pip install -qU  langchain_milvus
+<pre><code translate="no" class="language-shell">$ pip install -qU  langchain_milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Die neueste Version von pymilvus wird mit einer lokalen Vektordatenbank Milvus Lite ausgeliefert, die sich gut für Prototypen eignet. Wenn Sie große Datenmengen haben, z.B. mehr als eine Million Dokumente, empfehlen wir, einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Docker oder Kubernetes</a> einzurichten.</p>
-<h3 id="Credentials" class="common-anchor-header">Berechtigungsnachweise</h3><p>Für die Verwendung des <code translate="no">Milvus</code> Vektorspeichers sind keine Anmeldeinformationen erforderlich.</p>
+<p>Die neueste Version von pymilvus wird mit einer lokalen Vektordatenbank Milvus Lite geliefert, die sich gut für Prototypen eignet. Wenn Sie große Datenmengen haben, z. B. mehr als eine Million Dokumente, empfehlen wir, einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Docker oder Kubernetes</a> einzurichten.</p>
 <h2 id="Initialization" class="common-anchor-header">Initialisierung<button data-href="#Initialization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,15 +55,9 @@ title: Milvus als Vektorspeicher verwenden
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-{=mdx}"><span class="hljs-keyword">import</span> <span class="hljs-title class_">EmbeddingTabs</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@theme/EmbeddingTabs&quot;</span>;
+    </button></h2><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAIEmbeddings</span>
 
-&lt;EmbeddingTabs/&gt;
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># | output: false</span>
-<span class="hljs-comment"># | echo: false</span>
-<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
-
-embeddings = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
+embeddings = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 
@@ -81,7 +71,7 @@ vector_store = Milvus(
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Compartmentalize-the-data-with-Milvus-Collections" class="common-anchor-header">Kompartimentierung der Daten mit Milvus Collections</h3><p>Sie können verschiedene, nicht zusammenhängende Dokumente in verschiedenen Sammlungen innerhalb derselben Milvus-Instanz speichern, um den Kontext zu erhalten</p>
-<p>So können Sie eine neue Sammlung erstellen</p>
+<p>Hier sehen Sie, wie Sie eine neue Vektorspeichersammlung aus Dokumenten erstellen können:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
 
 vector_store_saved = <span class="hljs-title class_">Milvus</span>.<span class="hljs-title function_">from_documents</span>(
@@ -91,14 +81,14 @@ vector_store_saved = <span class="hljs-title class_">Milvus</span>.<span class="
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-variable constant_">URI</span>},
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Und hier sehen Sie, wie Sie die gespeicherte Sammlung abrufen</p>
+<p>Und hier sehen Sie, wie Sie diese gespeicherte Sammlung abrufen</p>
 <pre><code translate="no" class="language-python">vector_store_loaded = <span class="hljs-title class_">Milvus</span>(
     embeddings,
     connection_args={<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-variable constant_">URI</span>},
     collection_name=<span class="hljs-string">&quot;langchain_example&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Manage-vector-store" class="common-anchor-header">Vektorspeicher verwalten<button data-href="#Manage-vector-store" class="anchor-icon" translate="no">
+<h2 id="Manage-vector-store" class="common-anchor-header">Verwalten des Vektorspeichers<button data-href="#Manage-vector-store" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -220,7 +210,7 @@ vector_store.add_documents(documents=documents, ids=uuids)
 <pre><code translate="no" class="language-python">results = vector_store.similarity_search(
     <span class="hljs-string">&quot;LangChain provides abstractions to make working with LLMs easy&quot;</span>,
     k=<span class="hljs-number">2</span>,
-    <span class="hljs-built_in">filter</span>={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tweet&quot;</span>},
+    expr=<span class="hljs-string">&#x27;source == &quot;tweet&quot;&#x27;</span>,
 )
 <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> results:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;* <span class="hljs-subst">{res.page_content}</span> [<span class="hljs-subst">{res.metadata}</span>]&quot;</span>)
@@ -230,21 +220,21 @@ vector_store.add_documents(documents=documents, ids=uuids)
 </code></pre>
 <h4 id="Similarity-search-with-score" class="common-anchor-header">Ähnlichkeitssuche mit Punktzahl</h4><p>Sie können auch mit der Punktzahl suchen:</p>
 <pre><code translate="no" class="language-python">results = vector_store.similarity_search_with_score(
-    <span class="hljs-string">&quot;Will it be hot tomorrow?&quot;</span>, k=<span class="hljs-number">1</span>, <span class="hljs-built_in">filter</span>={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;news&quot;</span>}
+    <span class="hljs-string">&quot;Will it be hot tomorrow?&quot;</span>, k=<span class="hljs-number">1</span>, expr=<span class="hljs-string">&#x27;source == &quot;news&quot;&#x27;</span>
 )
 <span class="hljs-keyword">for</span> res, score <span class="hljs-keyword">in</span> results:
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;* [SIM=<span class="hljs-subst">{score:3f}</span>] <span class="hljs-subst">{res.page_content}</span> [<span class="hljs-subst">{res.metadata}</span>]&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">* [SIM=21192.628906] bar [{'pk': '2', 'source': 'https://example.com'}]
 </code></pre>
-<p>Eine vollständige Liste aller Suchoptionen, die bei der Verwendung des <code translate="no">Milvus</code> Vektorspeichers zur Verfügung stehen, finden Sie in der <a href="https://api.python.langchain.com/en/latest/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html">API-Referenz</a>.</p>
+<p>Eine vollständige Liste aller Suchoptionen, die bei der Verwendung des <code translate="no">Milvus</code> Vektorspeichers zur Verfügung stehen, finden Sie in der <a href="https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html">API-Referenz</a>.</p>
 <h3 id="Query-by-turning-into-retriever" class="common-anchor-header">Abfrage durch Umwandlung in Retriever</h3><p>Sie können den Vektorspeicher auch in einen Retriever umwandeln, um ihn einfacher in Ihren Ketten zu verwenden.</p>
 <pre><code translate="no" class="language-python">retriever = vector_store.as_retriever(search_type=<span class="hljs-string">&quot;mmr&quot;</span>, search_kwargs={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">1</span>})
 retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a crime&quot;</span>, <span class="hljs-built_in">filter</span>={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;news&quot;</span>})
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'pk': 'eacc7256-d7fa-4036-b1f7-83d7a4bee0c5', 'source': 'news'}, page_content='Robbers broke into the city bank and stole $1 million in cash.')]
 </code></pre>
-<h2 id="Usage-for-retrieval-augmented-generation" class="common-anchor-header">Verwendung für abruferweiterte Erzeugung<button data-href="#Usage-for-retrieval-augmented-generation" class="anchor-icon" translate="no">
+<h2 id="Usage-for-Retrieval-Augmented-Generation" class="common-anchor-header">Verwendung für Retrieval-Augmented Generation<button data-href="#Usage-for-Retrieval-Augmented-Generation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -259,13 +249,8 @@ retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a cri
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anleitungen zur Verwendung dieses Vektorspeichers für die abfragegestützte Generierung (RAG) finden Sie in den folgenden Abschnitten:</p>
-<ul>
-<li><a href="https://python.langchain.com/v0.2/docs/tutorials/#working-with-external-knowledge">Tutorials: Arbeiten mit externem Wissen</a></li>
-<li><a href="https://python.langchain.com/v0.2/docs/how_to/#qa-with-rag">How-to: Fragen und Antworten mit RAG</a></li>
-<li><a href="https://python.langchain.com/v0.2/docs/concepts/#retrieval">Konzeptuelle Dokumente zum Abruf</a></li>
-</ul>
-<h3 id="Per-User-Retrieval" class="common-anchor-header">Pro-Benutzer-Retrieval</h3><p>Wenn Sie eine Retrieval-Applikation entwickeln, müssen Sie sie oft mit Blick auf mehrere Benutzer erstellen. Das bedeutet, dass Sie möglicherweise nicht nur Daten für einen Benutzer, sondern für viele verschiedene Benutzer speichern, und diese sollten nicht in der Lage sein, die Daten des jeweils anderen zu sehen.</p>
+    </button></h2><p>Eine Anleitung zur Verwendung dieses Vektorspeichers für die abruferweiterte Generierung (RAG) finden Sie in diesem <a href="https://milvus.io/docs/integrate_with_langchain.md">RAG-Leitfaden</a>.</p>
+<h3 id="Per-User-Retrieval" class="common-anchor-header">Pro-Benutzer-Abruf</h3><p>Wenn Sie eine Retrieval-Applikation entwickeln, müssen Sie sie oft mit Blick auf mehrere Benutzer erstellen. Das bedeutet, dass Sie möglicherweise nicht nur Daten für einen Benutzer, sondern für viele verschiedene Benutzer speichern, und diese sollten nicht in der Lage sein, die Daten des jeweils anderen zu sehen.</p>
 <p>Milvus empfiehlt die Verwendung von <a href="https://milvus.io/docs/multi_tenancy.md#Partition-key-based-multi-tenancy">partition_key</a>, um Multi-Tenancy zu implementieren, hier ist ein Beispiel.</p>
 <blockquote>
 <p>Die Funktion des Partitionsschlüssels ist jetzt nicht in Milvus Lite verfügbar, wenn Sie sie nutzen wollen, müssen Sie den Milvus-Server von <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Docker oder Kubernetes</a> aus starten.</p>
@@ -318,4 +303,4 @@ vectorstore.as_retriever(search_kwargs={<span class="hljs-string">&quot;expr&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Eine detaillierte Dokumentation aller __Modulname__VectorStore-Funktionen und -Konfigurationen finden Sie in der API-Referenz: https://api.python.langchain.com/en/latest/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html</p>
+    </button></h2><p>Eine detaillierte Dokumentation aller __Modulname__VectorStore-Funktionen und -Konfigurationen finden Sie in der API-Referenz: https://python.langchain.com/api_reference/milvus/vectorstores/langchain_milvus.vectorstores.milvus.Milvus.html</p>

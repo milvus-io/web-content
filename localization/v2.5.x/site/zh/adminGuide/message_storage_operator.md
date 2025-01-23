@@ -81,15 +81,37 @@ summary: 了解如何使用 Milvus Operator 配置信息存储。
 <p>目前，你只能通过 Milvus Operator 配置 RocksMQ 作为 Milvus Standalone 的消息存储。</p>
 </div>
 <h4 id="Example" class="common-anchor-header">示例</h4><p>下面的示例配置了一个 RocksMQ 服务。</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
+<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
   name: milvus
 spec:
-  dependencies: {}
+  mode: standalone
+  dependencies:
+    msgStreamType: rocksmq
+    rocksmq:
+      persistence:
+        enabled: <span class="hljs-literal">true</span>
+        pvcDeletion: <span class="hljs-literal">true</span>
+        persistentVolumeClaim:
+          spec:
+            accessModes: [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
+            storageClassName: <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
+            resources:
+              requests:
+                storage: 10Gi  <span class="hljs-comment"># Specify your desired storage size</span>
   components: {}
   config: {}
 <button class="copy-code-btn"></button></code></pre>
+<h5 id="Key-configuration-options" class="common-anchor-header">主要配置选项：</h5><ul>
+<li><code translate="no">msgStreamType</code>rocksmq: 明确设置 RocksMQ 为消息队列。</li>
+<li><code translate="no">persistence.enabled</code>:启用 RocksMQ 数据的持久存储</li>
+<li><code translate="no">persistence.pvcDeletion</code>:为 true 时，PVC 将在 Milvus 实例删除时被删除。</li>
+<li><code translate="no">persistentVolumeClaim.spec</code>:标准 Kubernetes PVC 规范</li>
+<li><code translate="no">accessModes</code>:通常<code translate="no">ReadWriteOnce</code> 用于块存储</li>
+<li><code translate="no">storageClassName</code>:您的集群的存储类</li>
+<li><code translate="no">storage</code>:持久卷的大小</li>
+</ul>
 <h2 id="Configure-NATS" class="common-anchor-header">配置 NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,7 +127,7 @@ spec:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS 是 NATS 的替代消息存储。</p>
+    </button></h2><p>NATS 是 NATS 的另一种信息存储方式。</p>
 <h4 id="Example" class="common-anchor-header">示例</h4><p>下面的示例配置了 NATS 服务。</p>
 <pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
 kind: Milvus
@@ -148,7 +170,7 @@ spec:
   components: {}
   config: {}
 <button class="copy-code-btn"></button></code></pre>
-<p>要将消息存储从 RocksMQ 迁移到 NATS，请执行以下操作：</p>
+<p>将消息存储从 RocksMQ 迁移到 NATS 的步骤如下：</p>
 <ol>
 <li><p>停止所有 DDL 操作符。</p></li>
 <li><p>调用 FlushAll API，然后在 API 调用执行完毕后停止 Milvus。</p></li>

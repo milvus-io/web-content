@@ -2,7 +2,7 @@
 id: array_data_type.md
 title: 配列フィールド
 summary: >-
-  Array型は、同じデータ型の複数の値を含むフィールドを保存するために使用されます。複数の要素を持つ属性を保存する柔軟な方法を提供し、関連するデータのセットを保存する必要があるシナリオで特に有用です。Milvusでは、Arrayフィールドをベクターデータと一緒に保存することができ、より複雑なクエリやフィルタリングが可能になります。
+  Array型は、同じデータ型の複数の値を含むフィールドを保存するために使用されます。複数の要素を持つ属性を保存する柔軟な方法を提供し、関連するデータのセットを保存する必要があるシナリオで特に有用です。Milvusでは、Arrayフィールドをベクターデータと一緒に保存することができ、より複雑なクエリやフィルタリングを行うことができます。
 ---
 <h1 id="Array-Field​" class="common-anchor-header">配列フィールド<button data-href="#Array-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -27,7 +27,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">tags</code> と<code translate="no">ratings</code> はどちらもArrayフィールドである。この例では、<code translate="no">ratings</code> と はどちらも Array フィールドです。<code translate="no">tags</code> フィールドはポップ、ロック、クラシックなどの曲のジャンルを表す文字列配列で、 フィールドは曲に対するユーザー評価を表す 1 から 5 までの整数配列です。これらのArrayフィールドは、複数値のデータを格納する柔軟な方法を提供し、クエリやフィルタリングの際に詳細な分析を行いやすくします。</p>
+<p>この例では、<code translate="no">tags</code> と<code translate="no">ratings</code> はどちらもArrayフィールドである。この例では、<code translate="no">tags</code> と はどちらも Array フィールドです。 フィールドはポップ、ロック、クラシックなどの曲のジャンルを表す文字列配列で、<code translate="no">ratings</code> フィールドは曲に対するユーザー評価を表す 1 から 5 までの整数配列です。これらのArrayフィールドは、複数値のデータを格納する柔軟な方法を提供し、クエリやフィルタリングの際に詳細な分析を行いやすくします。</p>
 <h2 id="Add-Array-field​" class="common-anchor-header">配列フィールドの追加<button data-href="#Add-Array-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,7 +62,7 @@ schema = client.create_schema(​
 )​
 ​
 <span class="hljs-comment"># Add an Array field with elements of type VARCHAR​</span>
-schema.add_field(field_name=<span class="hljs-string">&quot;tags&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.VARCHAR, max_capacity=<span class="hljs-number">10</span>)​
+schema.add_field(field_name=<span class="hljs-string">&quot;tags&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.VARCHAR, max_capacity=<span class="hljs-number">10</span>, max_length=<span class="hljs-number">65535</span>)​
 <span class="hljs-comment"># Add an Array field with elements of type INT64​</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;ratings&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.INT64, max_capacity=<span class="hljs-number">5</span>)​
 ​
@@ -98,6 +98,7 @@ schema.addField(AddFieldReq.builder()​
         .dataType(DataType.Array)​
         .elementType(DataType.Int64)​
         .maxCapacity(<span class="hljs-number">5</span>)​
+        .maxLength(<span class="hljs-number">65535</span>)
         .build());​
 ​
 schema.addField(AddFieldReq.builder()​
@@ -147,7 +148,7 @@ schema.addField(AddFieldReq.builder()​
     &quot;elementDataType&quot;: &quot;VarChar&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;max_capacity&quot;: 10,​
-        &quot;max_length&quot;: 100​
+        &quot;max_length&quot;: 65535​
     }​
 }&#x27;</span>​
 ​
@@ -622,5 +623,5 @@ System.out.println(resp.getSearchResults());​
     </button></h2><ul>
 <li><p><strong>データ型</strong>：データ型：配列フィールドのすべての要素は、<code translate="no">element_type</code> で指定されているように、同じデータ型でなければなりません。</p></li>
 <li><p><strong>配列の容量</strong>：配列の容量：配列フィールドの要素数は、<code translate="no">max_capacity</code> で指定されているように、配列の作成時に定義された最大容量以下でなければならない。</p></li>
-<li><p><strong>文字列の処理</strong>：配列フィールドの文字列値は、セマンティック・エスケープや変換を行わず、そのまま格納される。例えば、<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 、<code translate="no">&quot;a\&quot;b&quot;</code> は入力されたまま格納され、<code translate="no">'a'b'</code> 、<code translate="no">&quot;a&quot;b&quot;</code> は無効な値とみなされる。</p></li>
+<li><p><strong>文字列の処理</strong>：Arrayフィールド内の文字列値は、セマンティック・エスケープや変換を行わず、そのまま格納される。例えば、<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 、<code translate="no">&quot;a\&quot;b&quot;</code> は入力されたまま格納され、<code translate="no">'a'b'</code> 、<code translate="no">&quot;a&quot;b&quot;</code> は無効な値とみなされる。</p></li>
 </ul>

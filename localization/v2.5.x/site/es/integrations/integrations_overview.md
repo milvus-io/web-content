@@ -35,6 +35,7 @@ title: Visión general de las integraciones
 <tr><td><a href="/docs/es/integrate_with_pytorch.md">Búsqueda de imágenes con Milvus y Pytorch</a></td><td>Búsqueda semántica</td><td>Milvus, Pytorch</td></tr>
 <tr><td><a href="/docs/es/integrate_with_sentencetransformers.md">Búsqueda de películas con Milvus y SentenceTransfromers</a></td><td>Búsqueda semántica</td><td>Milvus y SentenceTransformers</td></tr>
 <tr><td><a href="/docs/es/basic_usage_langchain.md">Utilización de Milvus como almacén vectorial en LangChain</a></td><td>Búsqueda semántica</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/es/full_text_search_with_langchain.md">Uso de la búsqueda de texto completo con LangChain y Milvus</a></td><td>Búsqueda de texto completo</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/es/integrate_with_haystack.md">RAG con Milvus y Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
 <tr><td><a href="/docs/es/integrate_with_voxel51.md">Realización de búsquedas visuales con Milvus y FiftyOne</a></td><td>Búsqueda semántica</td><td>Milvus, FiftyOne</td></tr>
 <tr><td><a href="/docs/es/integrate_with_voyageai.md">Búsqueda semántica con Milvus y VoyageAI</a></td><td>Búsqueda semántica</td><td>Milvus, VoyageAI</td></tr>
@@ -76,5 +77,8 @@ title: Visión general de las integraciones
 <tr><td><a href="/docs/es/build_RAG_with_milvus_and_ollama.md">Construir RAG con Milvus y Ollama</a></td><td>LLMs</td><td>Milvus, Ollama</td></tr>
 <tr><td><a href="/docs/es/milvus_rag_with_dynamiq.md">Introducción a Dynamiq y Milvus</a></td><td>Orquestación</td><td>Milvus, Dynamiq</td></tr>
 <tr><td><a href="/docs/es/build_RAG_with_milvus_and_deepseek.md">Construir RAG con Milvus y DeepSeek</a></td><td>LLMs</td><td>Milvus, DeepSeek</td></tr>
+<tr><td><a href="/docs/es/integrate_with_phidata.md">Integración de Milvus con Phidata</a></td><td>Agentes</td><td>Milvus, Phidata</td></tr>
+<tr><td><a href="/docs/es/build_RAG_with_milvus_and_crawl4ai.md">Creación de RAG con Milvus y Crawl4AI</a></td><td>Fuentes de datos</td><td>Milvus, Crawl4AI</td></tr>
+<tr><td><a href="/docs/es/build_RAG_with_milvus_and_firecrawl.md">Creación de RAG con Milvus y Firecrawl</a></td><td>Fuentes de datos</td><td>Milvus, Firecrawl</td></tr>
 </tbody>
 </table>

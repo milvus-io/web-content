@@ -1,6 +1,6 @@
 ---
 id: vector_visualization.md
-summary: この例では、milvusの埋め込み（ベクトル）をt-SNを使って可視化する方法を示します。
+summary: この例では、milvusにおける埋め込み（ベクトル）をt-SNEを用いて可視化する方法を紹介する。
 title: ベクトルの可視化
 ---
 <h1 id="Vector-Visualization" class="common-anchor-header">ベクトルの可視化<button data-href="#Vector-Visualization" class="anchor-icon" translate="no">
@@ -43,7 +43,7 @@ title: ベクトルの可視化
       </svg>
     </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">依存関係と環境</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai requests tqdm matplotlib seaborn
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、OpenAIのエンベッディングモデルを使用します。OPENAI_API_KEYを環境変数として用意してください。</p>
+<p>この例では、OpenAIのエンベッディングモデルを使用します。環境変数としてOPENAI_API_KEYを用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
@@ -428,5 +428,5 @@ plt.show()
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
-<p>見ての通り、クエリーベクトルは検索されたベクトルに近い。検索されたベクトルは、クエリを中心とした一定の半径を持つ標準的な円の中にはありませんが、それでも2D平面上ではクエリベクトルに非常に近いことがわかります。</p>
-<p>次元削減技術を使うことで、ベクトルの理解やトラブルシューティングが容易になります。このチュートリアルを通して、ベクトルについての理解が深まることを願っています。</p>
+<p>見ての通り、クエリーベクトルは検索されたベクトルに近い。検索されたベクトルは、クエリを中心とした一定の半径を持つ標準的な円の中には入っていませんが、それでも2D平面上ではクエリベクトルに非常に近いことがわかります。</p>
+<p>次元削減技術を使うことで、ベクトルの理解やトラブルシューティングを容易にすることができます。このチュートリアルを通して、ベクトルについての理解が深まることを願っています。</p>

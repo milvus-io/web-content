@@ -1,9 +1,11 @@
 ---
 id: integrate_with_spark.md
-summary: 本頁討論 Spark-Milvus 連接器。
-title: Spark-Milvus Connector 使用手冊
+summary: >-
+  Apache Spark 與 Databricks 整合 Milvus 與 Zilliz Cloud，將大資料處理與向量搜尋結合。了解如何使用
+  Spark-Milvus 連結器建立 AI Powered 的搜尋與分析。
+title: 將 Apache Spark™ 與 Milvus/Zilliz Cloud 用於 AI 管線
 ---
-<h1 id="Spark-Milvus-Connector-User-Guide" class="common-anchor-header">Spark-Milvus Connector 使用手冊<button data-href="#Spark-Milvus-Connector-User-Guide" class="anchor-icon" translate="no">
+<h1 id="Use-Apache-Spark™-with-MilvusZilliz-Cloud-for-AI-Pipelines" class="common-anchor-header">將 Apache Spark™ 與 Milvus/Zilliz Cloud 用於 AI 管線<button data-href="#Use-Apache-Spark™-with-MilvusZilliz-Cloud-for-AI-Pipelines" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,11 +20,14 @@ title: Spark-Milvus Connector 使用手冊
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Spark-Milvus Connector (https://github.com/zilliztech/spark-milvus) 提供 Apache Spark 和 Milvus 的無縫整合，結合 Apache Spark 的資料處理和 ML 功能，以及 Milvus 的向量資料儲存和搜尋功能。此整合可實現各種有趣的應用，包括</p>
+    </button></h1><p><a href="https://github.com/zilliztech/spark-milvus">Spark-Milvus Connector</a>提供 Apache Spark 和 Databricks 與 Milvus 和 Zilliz Cloud 的整合。它將 Apache Spark 強大的大資料處理和機器學習 (ML) 功能與 Milvus 最先進的向量搜尋功能相結合。此整合可簡化工作流程，以進行人工智能驅動的搜尋、進階分析、ML 訓練，並有效管理大規模向量資料。</p>
+<p>Apache Spark 是一個分散式資料處理平台，專為以高速運算處理大量資料集而設計。與 Milvus 或 Zilliz Cloud 搭配使用時，可為語意搜尋、推薦系統和 AI 驅動的資料分析等使用個案開啟新的可能性。</p>
+<p>舉例來說，Spark 可以批量處理大型資料集，透過 ML 模型產生嵌入式資料，然後再使用 Spark-Milvus 連結器，將這些嵌入式資料直接儲存於 Milvus 或 Zilliz Cloud。一旦編入索引，就可以快速搜尋或分析這些資料，為 AI 和大資料工作流程建立強大的管道。</p>
+<p>Spark-Milvus 連接器支援迭代與大量資料擷取至 Milvus、系統間資料同步，以及對儲存於 Milvus 的向量資料進行進階分析等任務。本指南將教您如何有效配置和使用連接器的步驟，以應用於下列使用個案：</p>
 <ul>
 <li>有效率地將向量資料大量載入 Milvus、</li>
-<li>在 Milvus 與其他儲存系統或資料庫之間移動資料、</li>
-<li>利用 Spark MLlib 及其他 AI 工具分析 Milvus 中的資料。</li>
+<li>在 Milvus 和其他儲存系統或資料庫之間移動資料、</li>
+<li>利用 Spark MLlib 和其他 AI 工具分析 Milvus 中的資料。</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">快速啟動<button data-href="#Quick-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -334,7 +339,7 @@ object Mysql2MilvusDemo  <span class="hljs-keyword">extends</span> <span class="
 <li>透過 Bulkinsert API 將轉換後的資料寫入另一個 Milvus。</li>
 </ol>
 <div class="alert notes">
-<p>PCA 模型是一種轉換模型，可降低嵌入向量的維度，這是機器學習中常見的操作。 您可以在轉換步驟中加入任何其他處理操作，例如過濾、連結或歸一化。</p>
+<p>PCA 模型是一種轉換模型，可以降低嵌入向量的維度，這是機器學習中常見的操作。 您可以在轉換步驟中加入任何其他處理操作，例如過濾、連結或歸一化。</p>
 </div>
 <pre><code translate="no" class="language-scala"><span class="hljs-keyword">import</span> org.apache.spark.ml.feature.PCA
 <span class="hljs-keyword">import</span> org.apache.spark.ml.linalg.{Vector, Vectors}
@@ -455,7 +460,7 @@ object TransformDemo <span class="hljs-keyword">extends</span> <span class="hljs
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
    </span> <span class="img-wrapper"> <span>安裝 Databricks 函式庫</span> </span></p></li>
 <li><p>建立一個 S3 bucket，並將其設定為 Databricks 叢集的外部儲存位置。</p>
-<p>Bulkinsert 要求將資料儲存在臨時儲存桶中，以便 Zilliz Cloud 可以批次匯入資料。您可以创建一个 S3 bucket 并将其配置为 databricks 的外部位置。詳情請參閱<a href="https://docs.databricks.com/en/sql/language-manual/sql-ref-external-locations.html">外部位置</a>。</p></li>
+<p>Bulkinsert 要求將資料儲存在臨時儲存桶中，以便 Zilliz Cloud 能夠批次匯入資料。您可以创建一个 S3 bucket 并将其配置为 databricks 的外部位置。詳情請參閱<a href="https://docs.databricks.com/en/sql/language-manual/sql-ref-external-locations.html">外部位置</a>。</p></li>
 <li><p>保護您的 Databricks 認證。</p>
 <p>如需詳細資訊，請參閱部落<a href="https://www.databricks.com/blog/2018/06/04/securely-managing-credentials-in-databricks.html">格 Securely Managing Credentials in Databricks 的</a>說明。</p></li>
 </ol>
@@ -484,7 +489,7 @@ df.write
 <span class="hljs-comment">// Bulk insert Spark output files into Milvus</span>
 MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span class="hljs-string">&quot;mjson&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Hands-on" class="common-anchor-header">實際操作<button data-href="#Hands-on" class="anchor-icon" translate="no">
+<h2 id="Hands-on-Notebook" class="common-anchor-header">實作筆記<button data-href="#Hands-on-Notebook" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -499,7 +504,7 @@ MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span cl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>為了幫助您快速上手 Spark-Milvus Connector，我們準備了一本筆記本，教您如何使用 Milvus 和 Zilliz Cloud 進行串流和批次資料傳輸。</p>
+    </button></h2><p>為了幫助您快速上手 Spark-Milvus Connector，您可以查看筆記型電腦，它可協助您完成 Spark 至 Milvus 和 Zilliz Cloud 的串流和批次資料擷取範例。</p>
 <ul>
 <li><a href="https://zilliz.com/databricks_zilliz_demos">Spark-Milvus Connector 實機操作</a></li>
 </ul>

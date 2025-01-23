@@ -1,9 +1,9 @@
 ---
 id: integrate_with_cohere.md
 summary: >-
-  Questa pagina spiega come cercare la migliore risposta alle domande
-  utilizzando Milvus come database vettoriale e Hugging Face come sistema di
-  incorporamento.
+  Questa pagina illustra come creare un sistema di risposta alle domande basato
+  sul set di dati SQuAD, utilizzando Milvus come database vettoriale e Cohere
+  come sistema di incorporamento.
 title: Risposta alle domande con Milvus e Cohere
 ---
 <h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">Risposta alle domande con Milvus e Cohere<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">
@@ -167,7 +167,7 @@ collection.load()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta impostata la collezione, dobbiamo iniziare a inserire i dati. Questo avviene in tre fasi</p>
+    </button></h2><p>Una volta impostata la raccolta, dobbiamo iniziare a inserire i dati. Questo avviene in tre fasi</p>
 <ul>
 <li>lettura dei dati</li>
 <li>incorporare le domande originali e</li>

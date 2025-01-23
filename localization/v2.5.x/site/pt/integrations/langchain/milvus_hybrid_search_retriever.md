@@ -35,20 +35,21 @@ title: Milvus Hybrid Search Retriever
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><blockquote>
-<p><a href="https://milvus.io/docs">O Milvus</a> é uma base de dados vetorial de código aberto criada para potenciar a incorporação de aplicações de pesquisa por semelhança e de IA. O Milvus torna a pesquisa de dados não estruturados mais acessível e proporciona uma experiência de utilizador consistente, independentemente do ambiente de implementação.</p>
-</blockquote>
-<p>Isto irá ajudá-lo a começar a utilizar o <a href="/docs/concepts/#retrievers">recuperador</a> Milvus Hybrid Search, que combina os pontos fortes da pesquisa vetorial densa e esparsa. Para obter documentação detalhada de todos os recursos e configurações do <code translate="no">MilvusCollectionHybridSearchRetriever</code>, acesse a <a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">referência da API</a>.</p>
-<p>Consulte também a <a href="https://milvus.io/docs/multi-vector-search.md">documentação da</a> Pesquisa multi-vetorial Milvus.</p>
-<h3 id="Integration-details" class="common-anchor-header">Detalhes da integração</h3><table>
-<thead>
-<tr><th style="text-align:left">Recuperador</th><th style="text-align:left">Auto-hospedagem</th><th style="text-align:center">Oferta na nuvem</th><th style="text-align:center">Pacote</th></tr>
-</thead>
-<tbody>
-<tr><td style="text-align:left"><a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a></td><td style="text-align:left">✅</td><td style="text-align:center">❌</td><td style="text-align:center">langchain_milvus</td></tr>
-</tbody>
-</table>
-<h2 id="Setup" class="common-anchor-header">Configuração<button data-href="#Setup" class="anchor-icon" translate="no">
+    </button></h2><p>A pesquisa híbrida combina os pontos fortes de diferentes paradigmas de pesquisa para melhorar a precisão e a robustez da recuperação. Aproveita as capacidades da pesquisa de vectores densos e da pesquisa de vectores esparsos, bem como as combinações de várias estratégias de pesquisa de vectores densos, garantindo uma recuperação abrangente e precisa para diversas consultas.</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.5.x/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <span></span>
+  </span>
+</p>
+<p>Este diagrama ilustra o cenário de pesquisa híbrida mais comum, que é a pesquisa híbrida densa + esparsa. Neste caso, os candidatos são recuperados utilizando a semelhança de vectores semânticos e a correspondência precisa de palavras-chave. Os resultados destes métodos são fundidos, reavaliados e transmitidos a um LLM para gerar a resposta final. Esta abordagem equilibra precisão e compreensão semântica, tornando-a altamente eficaz para diversos cenários de consulta.</p>
+<p>Para além da pesquisa híbrida densa + esparsa, as estratégias híbridas também podem combinar vários modelos de vectores densos. Por exemplo, um modelo de vectores densos pode especializar-se na captura de nuances semânticas, enquanto outro se concentra em incorporações contextuais ou representações específicas do domínio. Ao fundir os resultados destes modelos e ao reordená-los, este tipo de pesquisa híbrida garante um processo de recuperação mais matizado e sensível ao contexto.</p>
+<p>A integração do LangChain Milvus fornece uma forma flexível de implementar a pesquisa híbrida, suporta qualquer número de campos vectoriais e quaisquer modelos de incorporação densos ou esparsos personalizados, o que permite ao LangChain Milvus adaptar-se de forma flexível a vários cenários de utilização da pesquisa híbrida e, ao mesmo tempo, ser compatível com outras capacidades do LangChain.</p>
+<p>Neste tutorial, começaremos com o caso mais comum denso + esparso e, em seguida, apresentaremos várias abordagens gerais de uso de pesquisa híbrida.</p>
+<div class="alert note">
+<p>O <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a>, que é outra implementação de busca híbrida com Milvus e LangChain, <strong>está prestes a ser descontinuado</strong>. Por favor, use a abordagem deste documento para implementar a pesquisa híbrida, pois ela é mais flexível e compatível com LangChain.</p>
+</div>
+<h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,201 +64,335 @@ title: Milvus Hybrid Search Retriever
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se quiser obter rastreio automatizado de consultas individuais, também pode definir a sua chave da API <a href="https://docs.smith.langchain.com/">LangSmith</a> descomentando abaixo:</p>
-<pre><code translate="no" class="language-python"># os.environ[<span class="hljs-string">&quot;LANGSMITH_API_KEY&quot;</span>] = getpass.getpass(<span class="hljs-string">&quot;Enter your LangSmith API key: &quot;</span>)
-# os.environ[<span class="hljs-string">&quot;LANGSMITH_TRACING&quot;</span>] = <span class="hljs-string">&quot;true&quot;</span>
+    </button></h2><p>Antes de executar este notebook, certifique-se de ter as seguintes dependências instaladas:</p>
+<pre><code translate="no" class="language-shell">$ pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 pymilvus[model] <span class="hljs-comment">#langchain-voyageai</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Installation" class="common-anchor-header">Instalação</h3><p>Este retriever reside no pacote <code translate="no">langchain-milvus</code>. Este guia requer as seguintes dependências:</p>
-<pre><code translate="no" class="language-python">%pip install --upgrade --quiet pymilvus[model] langchain-milvus langchain-openai
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">output_parsers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">StrOutputParser</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">prompts</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">PromptTemplate</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">runnables</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">RunnablePassthrough</span>
-<span class="hljs-keyword">from</span> langchain_milvus.<span class="hljs-property">retrievers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusCollectionHybridSearchRetriever</span>
-<span class="hljs-keyword">from</span> langchain_milvus.<span class="hljs-property">utils</span>.<span class="hljs-property">sparse</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">BM25SparseEmbedding</span>
-<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">ChatOpenAI</span>, <span class="hljs-title class_">OpenAIEmbeddings</span>
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
-    <span class="hljs-title class_">Collection</span>,
-    <span class="hljs-title class_">CollectionSchema</span>,
-    <span class="hljs-title class_">DataType</span>,
-    <span class="hljs-title class_">FieldSchema</span>,
-    <span class="hljs-title class_">WeightedRanker</span>,
-    connections,
-)
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Start-the-Milvus-service" class="common-anchor-header">Iniciar o serviço Milvus</h3><p>Consulte a <a href="https://milvus.io/docs/install_standalone-docker.md">documentação do Milvus</a> para iniciar o serviço Milvus.</p>
-<p>Depois de iniciar o milvus, é necessário especificar o URI de conexão do milvus.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-variable constant_">CONNECTION_URI</span> = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-OpenAI-API-Key" class="common-anchor-header">Preparar a chave da API do OpenAI</h3><p>Consulte a <a href="https://platform.openai.com/account/api-keys">documentação do OpenAI</a> para obter a chave da API do OpenAI e defina-a como uma variável de ambiente.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> <span class="hljs-variable constant_">OPENAI_API_KEY</span>=&lt;your_api_key&gt;
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-dense-and-sparse-embedding-functions" class="common-anchor-header">Preparar funções de incorporação densas e esparsas</h3><p>Vamos ficcionar 10 descrições falsas de romances. Na produção real, pode tratar-se de uma grande quantidade de dados de texto.</p>
-<pre><code translate="no" class="language-python">texts = [
-    <span class="hljs-string">&quot;In &#x27;The Whispering Walls&#x27; by Ava Moreno, a young journalist named Sophia uncovers a decades-old conspiracy hidden within the crumbling walls of an ancient mansion, where the whispers of the past threaten to destroy her own sanity.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Last Refuge&#x27; by Ethan Blackwood, a group of survivors must band together to escape a post-apocalyptic wasteland, where the last remnants of humanity cling to life in a desperate bid for survival.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Memory Thief&#x27; by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The City of Echoes&#x27; by Julian Saint Clair, a brilliant detective must navigate a labyrinthine metropolis where time is currency, and the rich can live forever, but at a terrible cost to the poor.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Starlight Serenade&#x27; by Ruby Flynn, a shy astronomer discovers a mysterious melody emanating from a distant star, which leads her on a journey to uncover the secrets of the universe and her own heart.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Shadow Weaver&#x27; by Piper Redding, a young orphan discovers she has the ability to weave powerful illusions, but soon finds herself at the center of a deadly game of cat and mouse between rival factions vying for control of the mystical arts.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Lost Expedition&#x27; by Caspian Grey, a team of explorers ventures into the heart of the Amazon rainforest in search of a lost city, but soon finds themselves hunted by a ruthless treasure hunter and the treacherous jungle itself.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Clockwork Kingdom&#x27; by Augusta Wynter, a brilliant inventor discovers a hidden world of clockwork machines and ancient magic, where a rebellion is brewing against the tyrannical ruler of the land.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Phantom Pilgrim&#x27; by Rowan Welles, a charismatic smuggler is hired by a mysterious organization to transport a valuable artifact across a war-torn continent, but soon finds themselves pursued by deadly assassins and rival factions.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Dreamwalker&#x27;s Journey&#x27; by Lyra Snow, a young dreamwalker discovers she has the ability to enter people&#x27;s dreams, but soon finds herself trapped in a surreal world of nightmares and illusions, where the boundaries between reality and fantasy blur.&quot;</span>,
-]
-<button class="copy-code-btn"></button></code></pre>
-<p>Utilizaremos o <a href="https://platform.openai.com/docs/guides/embeddings">OpenAI Embedding</a> para gerar vectores densos e o <a href="https://en.wikipedia.org/wiki/Okapi_BM25">algoritmo BM25</a> para gerar vectores esparsos.</p>
-<p>Inicializar a função de incorporação densa e obter a dimensão</p>
-<pre><code translate="no" class="language-python">dense_embedding_func = OpenAIEmbeddings()
-dense_dim = <span class="hljs-built_in">len</span>(dense_embedding_func.embed_query(texts[<span class="hljs-number">1</span>]))
-dense_dim
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">1536
-</code></pre>
-<p>Inicializar a função de incorporação esparsa.</p>
-<p>Note que o resultado da incorporação esparsa é um conjunto de vectores esparsos, que representam o índice e o peso das palavras-chave do texto de entrada.</p>
-<pre><code translate="no" class="language-python">sparse_embedding_func = BM25SparseEmbedding(corpus=texts)
-sparse_embedding_func.embed_query(texts[1])
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">{0: 0.4270424944042204,
- 21: 1.845826690498331,
- 22: 1.845826690498331,
- 23: 1.845826690498331,
- 24: 1.845826690498331,
- 25: 1.845826690498331,
- 26: 1.845826690498331,
- 27: 1.2237754316221157,
- 28: 1.845826690498331,
- 29: 1.845826690498331,
- 30: 1.845826690498331,
- 31: 1.845826690498331,
- 32: 1.845826690498331,
- 33: 1.845826690498331,
- 34: 1.845826690498331,
- 35: 1.845826690498331,
- 36: 1.845826690498331,
- 37: 1.845826690498331,
- 38: 1.845826690498331,
- 39: 1.845826690498331}
-</code></pre>
-<h3 id="Create-Milvus-Collection-and-load-data" class="common-anchor-header">Criar a coleção Milvus e carregar dados</h3><p>Inicializar o URI de ligação e estabelecer a ligação</p>
-<pre><code translate="no" class="language-python">connections.connect(uri=CONNECTION_URI)
-<button class="copy-code-btn"></button></code></pre>
-<p>Definir os nomes dos campos e os respectivos tipos de dados</p>
-<pre><code translate="no" class="language-python">pk_field = <span class="hljs-string">&quot;doc_id&quot;</span>
-dense_field = <span class="hljs-string">&quot;dense_vector&quot;</span>
-sparse_field = <span class="hljs-string">&quot;sparse_vector&quot;</span>
-text_field = <span class="hljs-string">&quot;text&quot;</span>
-fields = [
-    FieldSchema(
-        name=pk_field,
-        dtype=DataType.VARCHAR,
-        is_primary=<span class="hljs-literal">True</span>,
-        auto_id=<span class="hljs-literal">True</span>,
-        max_length=<span class="hljs-number">100</span>,
-    ),
-    FieldSchema(name=dense_field, dtype=DataType.FLOAT_VECTOR, dim=dense_dim),
-    FieldSchema(name=sparse_field, dtype=DataType.SPARSE_FLOAT_VECTOR),
-    FieldSchema(name=text_field, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">65_535</span>),
-]
-<button class="copy-code-btn"></button></code></pre>
-<p>Criar uma coleção com o esquema definido</p>
-<pre><code translate="no" class="language-python">schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-literal">False</span>)
-collection = Collection(
-    name=<span class="hljs-string">&quot;IntroductionToTheNovels&quot;</span>, schema=schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>Definir índices para vectores densos e esparsos</p>
-<pre><code translate="no" class="language-python">dense_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;FLAT&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
-collection.<span class="hljs-title function_">create_index</span>(<span class="hljs-string">&quot;dense_vector&quot;</span>, dense_index)
-sparse_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
-collection.<span class="hljs-title function_">create_index</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_index)
-collection.<span class="hljs-title function_">flush</span>()
-<button class="copy-code-btn"></button></code></pre>
-<p>Inserir entidades na coleção e carregar a coleção</p>
-<pre><code translate="no" class="language-python">entities = []
-<span class="hljs-keyword">for</span> text in texts:
-    entity = {
-        dense_field: dense_embedding_func.embed_documents([text])[<span class="hljs-number">0</span>],
-        sparse_field: sparse_embedding_func.embed_documents([text])[<span class="hljs-number">0</span>],
-        text_field: text,
-    }
-    entities.<span class="hljs-built_in">append</span>(entity)
-collection.insert(entities)
-collection.load()
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Instantiation" class="common-anchor-header">Instanciação<button data-href="#Instantiation" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Agora podemos instanciar o nosso recuperador, definindo parâmetros de pesquisa para campos esparsos e densos:</p>
-<pre><code translate="no" class="language-python">sparse_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
-dense_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
-retriever = <span class="hljs-title class_">MilvusCollectionHybridSearchRetriever</span>(
-    collection=collection,
-    rerank=<span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>),
-    anns_fields=[dense_field, sparse_field],
-    field_embeddings=[dense_embedding_func, sparse_embedding_func],
-    field_search_params=[dense_search_params, sparse_search_params],
-    top_k=<span class="hljs-number">3</span>,
-    text_field=text_field,
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>Nos parâmetros de entrada deste Recuperador, usamos uma incorporação densa e uma incorporação esparsa para efetuar uma pesquisa híbrida nos dois campos desta Coleção, e usamos o WeightedRanker para a classificação. Finalmente, serão devolvidos 3 documentos top-K.</p>
-<h2 id="Usage" class="common-anchor-header">Utilização<button data-href="#Usage" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><pre><code translate="no" class="language-python">retriever.<span class="hljs-title function_">invoke</span>(<span class="hljs-string">&quot;What are the story about ventures?&quot;</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">[Document(page_content=&quot;In 'The Lost Expedition' by Caspian Grey, a team of explorers ventures into the heart of the Amazon rainforest in search of a lost city, but soon finds themselves hunted by a ruthless treasure hunter and the treacherous jungle itself.&quot;, metadata={'doc_id': '449281835035545843'}),
- Document(page_content=&quot;In 'The Phantom Pilgrim' by Rowan Welles, a charismatic smuggler is hired by a mysterious organization to transport a valuable artifact across a war-torn continent, but soon finds themselves pursued by deadly assassins and rival factions.&quot;, metadata={'doc_id': '449281835035545845'}),
- Document(page_content=&quot;In 'The Dreamwalker's Journey' by Lyra Snow, a young dreamwalker discovers she has the ability to enter people's dreams, but soon finds herself trapped in a surreal world of nightmares and illusions, where the boundaries between reality and fantasy blur.&quot;, metadata={'doc_id': '449281835035545846'})]
-</code></pre>
-<h2 id="Use-within-a-chain" class="common-anchor-header">Utilização numa cadeia<button data-href="#Use-within-a-chain" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Inicializar ChatOpenAI e definir um modelo de prompt</p>
-<pre><code translate="no" class="language-python">llm = ChatOpenAI()
+<div class="alert note">
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
+</div>
+<p>Vamos utilizar os modelos do OpenAI. Deve preparar as variáveis de ambiente <code translate="no">OPENAI_API_KEY</code> do <a href="https://platform.openai.com/docs/quickstart">OpenAI</a>.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
+os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Especifique o seu servidor Milvus <code translate="no">URI</code> (e, opcionalmente, o <code translate="no">TOKEN</code>). Para saber como instalar e iniciar o servidor Milvus, siga este <a href="https://milvus.io/docs/install_standalone-docker-compose.md">guia</a>.</p>
+<pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-comment"># TOKEN = ...</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Prepare alguns documentos de exemplo, que são resumos de histórias de ficção categorizados por tema ou género.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
+
+docs = [
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Whispering Walls&#x27; by Ava Moreno, a young journalist named Sophia uncovers a decades-old conspiracy hidden within the crumbling walls of an ancient mansion, where the whispers of the past threaten to destroy her own sanity.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Mystery&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Last Refuge&#x27; by Ethan Blackwood, a group of survivors must band together to escape a post-apocalyptic wasteland, where the last remnants of humanity cling to life in a desperate bid for survival.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Post-Apocalyptic&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Memory Thief&#x27; by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Heist/Thriller&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The City of Echoes&#x27; by Julian Saint Clair, a brilliant detective must navigate a labyrinthine metropolis where time is currency, and the rich can live forever, but at a terrible cost to the poor.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Science Fiction&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Starlight Serenade&#x27; by Ruby Flynn, a shy astronomer discovers a mysterious melody emanating from a distant star, which leads her on a journey to uncover the secrets of the universe and her own heart.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Science Fiction/Romance&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Shadow Weaver&#x27; by Piper Redding, a young orphan discovers she has the ability to weave powerful illusions, but soon finds herself at the center of a deadly game of cat and mouse between rival factions vying for control of the mystical arts.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Fantasy&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Lost Expedition&#x27; by Caspian Grey, a team of explorers ventures into the heart of the Amazon rainforest in search of a lost city, but soon finds themselves hunted by a ruthless treasure hunter and the treacherous jungle itself.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Adventure&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Clockwork Kingdom&#x27; by Augusta Wynter, a brilliant inventor discovers a hidden world of clockwork machines and ancient magic, where a rebellion is brewing against the tyrannical ruler of the land.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Steampunk/Fantasy&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Phantom Pilgrim&#x27; by Rowan Welles, a charismatic smuggler is hired by a mysterious organization to transport a valuable artifact across a war-torn continent, but soon finds themselves pursued by deadly assassins and rival factions.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Adventure/Thriller&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Dreamwalker&#x27;s Journey&#x27; by Lyra Snow, a young dreamwalker discovers she has the ability to enter people&#x27;s dreams, but soon finds herself trapped in a surreal world of nightmares and illusions, where the boundaries between reality and fantasy blur.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Fantasy&quot;</span>},
+    ),
+]
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Dense-embedding-+-Sparse-embedding" class="common-anchor-header">Incorporação densa + incorporação esparsa<button data-href="#Dense-embedding-+-Sparse-embedding" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="common-anchor-header">Opção 1 (recomendada): incorporação densa + função incorporada Milvus BM25</h3><p>Utilizar a incorporação densa + a função incorporada Milvus BM25 para montar a instância de armazenamento do vetor de recuperação híbrido.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
+<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
+
+
+vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=OpenAIEmbeddings(),
+    builtin_function=BM25BuiltInFunction(),  <span class="hljs-comment"># output_field_names=&quot;sparse&quot;),</span>
+    vector_field=[<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    drop_old=<span class="hljs-literal">True</span>,
+)
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<ul>
+<li>Quando utilizar <code translate="no">BM25BuiltInFunction</code>, tenha em atenção que a pesquisa de texto integral está disponível no Milvus Standalone e no Milvus Distributed, mas não no Milvus Lite, embora esteja prevista a sua inclusão no futuro. Também estará disponível no Zilliz Cloud (Milvus totalmente gerido) em breve. Entre em contacto com <a href="mailto:support@zilliz.com">support@zilliz.com</a> para obter mais informações.</li>
+</ul>
+</div>
+<p>No código acima, definimos uma instância de <code translate="no">BM25BuiltInFunction</code> e passamos para o objeto <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> é uma classe de wrapper leve para <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> em Milvus. Podemos utilizá-la com <code translate="no">OpenAIEmbeddings</code> para inicializar uma instância do armazenamento de vectores Milvus de pesquisa híbrida densa + esparsa.</p>
+<p><code translate="no">BM25BuiltInFunction</code> O Milvus não requer que o cliente passe corpus ou treino, todos são processados automaticamente no servidor Milvus, pelo que os utilizadores não precisam de se preocupar com qualquer vocabulário e corpus. Além disso, os utilizadores também podem personalizar o <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">analisador</a> para implementar o processamento de texto personalizado no BM25.</p>
+<p>Para mais informações sobre <code translate="no">BM25BuiltInFunction</code>, consulte <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Full-Text-Search</a> e <a href="https://milvus.io/docs/full_text_search_with_langchain.md">Using Full-Text Search with LangChain and Milvus</a>.</p>
+<h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">Opção 2: Utilizar a incorporação esparsa densa e personalizada da LangChain</h3><p>É possível herdar a classe <code translate="no">BaseSparseEmbedding</code> de <code translate="no">langchain_milvus.utils.sparse</code> e implementar os métodos <code translate="no">embed_query</code> e <code translate="no">embed_documents</code> para personalizar o processo de incorporação esparsa. Isto permite-lhe personalizar qualquer método de incorporação esparsa com base em estatísticas de frequência de termos (por exemplo, <a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>) ou redes neurais (por exemplo, <a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>).</p>
+<p>Aqui está um exemplo:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Dict</span>, <span class="hljs-type">List</span>
+<span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BaseSparseEmbedding
+
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCustomEmbedding</span>(<span class="hljs-title class_ inherited__">BaseSparseEmbedding</span>):  <span class="hljs-comment"># inherit from BaseSparseEmbedding</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, model_path</span>): ...  <span class="hljs-comment"># code to init or load model</span>
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">embed_query</span>(<span class="hljs-params">self, query: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-type">Dict</span>[<span class="hljs-built_in">int</span>, <span class="hljs-built_in">float</span>]:
+        ...  <span class="hljs-comment"># code to embed query</span>
+        <span class="hljs-keyword">return</span> {  <span class="hljs-comment"># fake embedding result</span>
+            <span class="hljs-number">1</span>: <span class="hljs-number">0.1</span>,
+            <span class="hljs-number">2</span>: <span class="hljs-number">0.2</span>,
+            <span class="hljs-number">3</span>: <span class="hljs-number">0.3</span>,
+            <span class="hljs-comment"># ...</span>
+        }
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">embed_documents</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-type">Dict</span>[<span class="hljs-built_in">int</span>, <span class="hljs-built_in">float</span>]]:
+        ...  <span class="hljs-comment"># code to embed documents</span>
+        <span class="hljs-keyword">return</span> [  <span class="hljs-comment"># fake embedding results</span>
+            {
+                <span class="hljs-number">1</span>: <span class="hljs-number">0.1</span>,
+                <span class="hljs-number">2</span>: <span class="hljs-number">0.2</span>,
+                <span class="hljs-number">3</span>: <span class="hljs-number">0.3</span>,
+                <span class="hljs-comment"># ...</span>
+            }
+        ] * <span class="hljs-built_in">len</span>(texts)
+<button class="copy-code-btn"></button></code></pre>
+<p>Temos uma classe de demonstração <code translate="no">BM25SparseEmbedding</code> herdada de <code translate="no">BaseSparseEmbedding</code> em <code translate="no">langchain_milvus.utils.sparse</code>. Pode passá-la para a lista de incorporação de inicialização da instância de armazenamento de vectores Milvus, tal como outras classes de incorporação densa da langchain.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># BM25SparseEmbedding is inherited from BaseSparseEmbedding</span>
+<span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BM25SparseEmbedding
+
+embedding1 = OpenAIEmbeddings()
+
+corpus = [doc.page_content <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> docs]
+embedding2 = BM25SparseEmbedding(
+    corpus=corpus
+)  <span class="hljs-comment"># pass in corpus to initialize the statistics</span>
+
+vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=[embedding1, embedding2],
+    vector_field=[<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    drop_old=<span class="hljs-literal">True</span>,
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Embora esta seja uma forma de utilizar o BM25, requer que os utilizadores gerem o corpus para obter estatísticas de frequência de termos. Em vez disso, recomendamos a utilização da função incorporada BM25 (Opção 1), uma vez que trata de tudo no lado do servidor Milvus. Isto elimina a necessidade de os utilizadores se preocuparem com a gestão do corpus ou com a formação de um vocabulário. Para mais informações, consulte a secção <a href="https://milvus.io/docs/full_text_search_with_langchain.md">Utilizar a pesquisa de texto integral com LangChain e Milvus</a>.</p>
+<h2 id="Define-multiple-arbitrary-vector-fields" class="common-anchor-header">Definir vários campos vectoriais arbitrários<button data-href="#Define-multiple-arbitrary-vector-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Ao inicializar o repositório de vectores do Milvus, pode passar a lista de embeddings (e também a lista de funções incorporadas no futuro) para implementar a recuperação multi-vias e, em seguida, classificar estes candidatos. Eis um exemplo:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
+
+embedding1 = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>)
+embedding2 = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
+<span class="hljs-comment"># embedding3 = VoyageAIEmbeddings(model=&quot;voyage-3&quot;)  # You can also use embedding from other embedding model providers, e.g VoyageAIEmbeddings</span>
+
+
+vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=[embedding1, embedding2],  <span class="hljs-comment"># embedding3],</span>
+    builtin_function=BM25BuiltInFunction(output_field_names=<span class="hljs-string">&quot;sparse&quot;</span>),
+    <span class="hljs-comment"># `sparse` is the output field name of BM25BuiltInFunction, and `dense1` and `dense2` are the output field names of embedding1 and embedding2</span>
+    vector_field=[<span class="hljs-string">&quot;dense1&quot;</span>, <span class="hljs-string">&quot;dense2&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    drop_old=<span class="hljs-literal">True</span>,
+)
+
+vectorstore.vector_fields
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">['dense1', 'dense2', 'sparse']
+</code></pre>
+<p>Neste exemplo, temos três campos vectoriais. Entre eles, <code translate="no">sparse</code> é utilizado como campo de saída para <code translate="no">BM25BuiltInFunction</code>, enquanto os outros dois, <code translate="no">dense1</code> e <code translate="no">dense2</code>, são automaticamente atribuídos como campos de saída para os dois modelos <code translate="no">OpenAIEmbeddings</code> (com base na ordem).</p>
+<h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">Especificar os parâmetros de índice para campos multi-vectoriais</h3><p>Por predefinição, os tipos de índice de cada campo vetorial serão automaticamente determinados pelo tipo de incorporação ou função incorporada. No entanto, também pode especificar o tipo de índice para cada campo de vetor para otimizar o desempenho da pesquisa.</p>
+<pre><code translate="no" class="language-python">dense_index_param_1 = {
+    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
+    <span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;HNSW&quot;</span>,
+}
+dense_index_param_2 = {
+    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
+    <span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;HNSW&quot;</span>,
+}
+sparse_index_param = {
+    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
+    <span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+}
+
+vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=[embedding1, embedding2],
+    builtin_function=BM25BuiltInFunction(output_field_names=<span class="hljs-string">&quot;sparse&quot;</span>),
+    index_params=[dense_index_param_1, dense_index_param_2, sparse_index_param],
+    vector_field=[<span class="hljs-string">&quot;dense1&quot;</span>, <span class="hljs-string">&quot;dense2&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    drop_old=<span class="hljs-literal">True</span>,
+)
+
+vectorstore.vector_fields
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">['dense1', 'dense2', 'sparse']
+</code></pre>
+<div class="alert note">
+<p>Mantenha a ordem da lista de parâmetros de índice consistente com a ordem de <code translate="no">vectorstore.vector_fields</code> para evitar confusões.</p>
+</div>
+<h3 id="Rerank-the-candidates" class="common-anchor-header">Classificar novamente os candidatos</h3><p>Após a primeira fase de recuperação, é necessário classificar novamente os candidatos para obter um melhor resultado. Pode escolher <a href="https://milvus.io/docs/reranking.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a> ou <a href="https://milvus.io/docs/reranking.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a> consoante os seus requisitos. Pode consultar a secção <a href="https://milvus.io/docs/reranking.md#Reranking">Reranking</a> para obter mais informações.</p>
+<p>Eis um exemplo de classificação ponderada:</p>
+<pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=OpenAIEmbeddings(),
+    builtin_function=BM25BuiltInFunction(),
+    vector_field=[<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    drop_old=<span class="hljs-literal">True</span>,
+)
+
+query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
+
+vectorstore.similarity_search(
+    query, k=<span class="hljs-number">1</span>, ranker_type=<span class="hljs-string">&quot;weighted&quot;</span>, ranker_params={<span class="hljs-string">&quot;weights&quot;</span>: [<span class="hljs-number">0.6</span>, <span class="hljs-number">0.4</span>]}
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">[Document(metadata={'pk': 454646931479252186, 'category': 'Heist/Thriller'}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
+</code></pre>
+<p>Aqui está um exemplo de classificação RRF:</p>
+<pre><code translate="no" class="language-python">vectorstore.<span class="hljs-title function_">similarity_search</span>(query, k=<span class="hljs-number">1</span>, ranker_type=<span class="hljs-string">&quot;rrf&quot;</span>, ranker_params={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">[Document(metadata={'category': 'Heist/Thriller', 'pk': 454646931479252186}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
+</code></pre>
+<p>Se não passar quaisquer parâmetros sobre a classificação, a estratégia de classificação média ponderada é utilizada por predefinição.</p>
+<h2 id="Using-Hybrid-Search-and-Reranking-in-RAG" class="common-anchor-header">Utilizar a pesquisa híbrida e a reclassificação no RAG<button data-href="#Using-Hybrid-Search-and-Reranking-in-RAG" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>No cenário do RAG, a abordagem mais prevalecente para a pesquisa híbrida é a recuperação densa + esparsa, seguida da reclassificação. O exemplo seguinte demonstra um código simples de ponta a ponta.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">Preparar os dados</h3><p>Utilizamos o Langchain WebBaseLoader para carregar documentos a partir de fontes Web e dividi-los em partes utilizando o RecursiveCharacterTextSplitter.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bs4
+<span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> WebBaseLoader
+<span class="hljs-keyword">from</span> langchain_text_splitters <span class="hljs-keyword">import</span> RecursiveCharacterTextSplitter
+
+<span class="hljs-comment"># Create a WebBaseLoader instance to load documents from web sources</span>
+loader = WebBaseLoader(
+    web_paths=(
+        <span class="hljs-string">&quot;https://lilianweng.github.io/posts/2023-06-23-agent/&quot;</span>,
+        <span class="hljs-string">&quot;https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/&quot;</span>,
+    ),
+    bs_kwargs=<span class="hljs-built_in">dict</span>(
+        parse_only=bs4.SoupStrainer(
+            class_=(<span class="hljs-string">&quot;post-content&quot;</span>, <span class="hljs-string">&quot;post-title&quot;</span>, <span class="hljs-string">&quot;post-header&quot;</span>)
+        )
+    ),
+)
+<span class="hljs-comment"># Load documents from web sources using the loader</span>
+documents = loader.load()
+<span class="hljs-comment"># Initialize a RecursiveCharacterTextSplitter for splitting text into chunks</span>
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=<span class="hljs-number">2000</span>, chunk_overlap=<span class="hljs-number">200</span>)
+
+<span class="hljs-comment"># Split the documents into chunks using the text_splitter</span>
+docs = text_splitter.split_documents(documents)
+
+<span class="hljs-comment"># Let&#x27;s take a look at the first document</span>
+docs[<span class="hljs-number">1</span>]
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
+</code></pre>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Carregar o documento no armazenamento vetorial Milvus</h3><p>Tal como na introdução acima, inicializamos e carregamos os documentos preparados para o armazenamento vetorial Milvus, que contém dois campos vectoriais: <code translate="no">dense</code> é para a incorporação OpenAI e <code translate="no">sparse</code> é para a função BM25.</p>
+<pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=OpenAIEmbeddings(),
+    builtin_function=BM25BuiltInFunction(),
+    vector_field=[<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    drop_old=<span class="hljs-literal">True</span>,
+)
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Build-RAG-chain" class="common-anchor-header">Construir a cadeia RAG</h3><p>Preparamos a instância LLM e o prompt e, em seguida, combinamo-los num pipeline RAG utilizando a linguagem de expressão LangChain.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
+<span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
+<span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser
+<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI
+
+<span class="hljs-comment"># Initialize the OpenAI language model for response generation</span>
+llm = ChatOpenAI(model_name=<span class="hljs-string">&quot;gpt-4o&quot;</span>, temperature=<span class="hljs-number">0</span>)
+
+<span class="hljs-comment"># Define the prompt template for generating AI responses</span>
 PROMPT_TEMPLATE = <span class="hljs-string">&quot;&quot;&quot;
 Human: You are an AI assistant, and provides answers to questions by using fact based and statistical information when possible.
 Use the following pieces of information to provide a concise answer to the question enclosed in &lt;question&gt; tags.
-
+If you don&#x27;t know the answer, just say that you don&#x27;t know, don&#x27;t try to make up an answer.
 &lt;context&gt;
 {context}
 &lt;/context&gt;
@@ -266,45 +401,38 @@ Use the following pieces of information to provide a concise answer to the quest
 {question}
 &lt;/question&gt;
 
+The response should be specific and use statistics or numbers when possible.
+
 Assistant:&quot;&quot;&quot;</span>
 
+<span class="hljs-comment"># Create a PromptTemplate instance with the defined template and input variables</span>
 prompt = PromptTemplate(
     template=PROMPT_TEMPLATE, input_variables=[<span class="hljs-string">&quot;context&quot;</span>, <span class="hljs-string">&quot;question&quot;</span>]
 )
-<button class="copy-code-btn"></button></code></pre>
-<p>Definir uma função para formatar documentos</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_docs</span>(<span class="hljs-params">docs</span>):
+<span class="hljs-comment"># Convert the vector store to a retriever</span>
+retriever = vectorstore.as_retriever()
+
+
+<span class="hljs-comment"># Define a function to format the retrieved documents</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">format_docs</span>(<span class="hljs-params">docs</span>):
     <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;\n\n&quot;</span>.join(doc.page_content <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> docs)
 <button class="copy-code-btn"></button></code></pre>
-<p>Definir uma cadeia usando o recuperador e outros componentes</p>
-<pre><code translate="no" class="language-python">rag_chain = (
-    {<span class="hljs-string">&quot;context&quot;</span>: retriever | format_docs, <span class="hljs-string">&quot;question&quot;</span>: <span class="hljs-title class_">RunnablePassthrough</span>()}
+<p>Utilize a LCEL (Linguagem de Expressão LangChain) para construir uma cadeia RAG.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Define the RAG (Retrieval-Augmented Generation) chain for AI response generation</span>
+rag_chain = (
+    {<span class="hljs-string">&quot;context&quot;</span>: retriever | format_docs, <span class="hljs-string">&quot;question&quot;</span>: RunnablePassthrough()}
     | prompt
     | llm
-    | <span class="hljs-title class_">StrOutputParser</span>()
+    | StrOutputParser()
 )
+
+<span class="hljs-comment"># rag_chain.get_graph().print_ascii()</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Executar uma consulta usando a cadeia definida</p>
-<pre><code translate="no" class="language-python">rag_chain.<span class="hljs-title function_">invoke</span>(<span class="hljs-string">&quot;What novels has Lila written and what are their contents?&quot;</span>)
+<p>Invocar a cadeia RAG com uma pergunta específica e obter a resposta</p>
+<pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
+res = rag_chain.<span class="hljs-title function_">invoke</span>(query)
+res
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">&quot;Lila Rose has written 'The Memory Thief,' which follows a charismatic thief with the ability to steal and manipulate memories as they navigate a daring heist and a web of deceit and betrayal.&quot;
+<pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively perform these tasks.'
 </code></pre>
-<p>Soltar a coleção</p>
-<pre><code translate="no" class="language-python">collection.drop()
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="API-reference" class="common-anchor-header">Referência da API<button data-href="#API-reference" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Para obter documentação pormenorizada sobre todas as caraterísticas e configurações de <code translate="no">MilvusCollectionHybridSearchRetriever</code>, consulte a <a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">referência da API</a>.</p>
+<p>Parabéns! Construiu uma cadeia RAG de pesquisa híbrida (vetor denso + função bm25 esparsa) alimentada por Milvus e LangChain.</p>

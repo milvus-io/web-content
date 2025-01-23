@@ -81,15 +81,37 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan dengan Milvus Operator.
 <p>Saat ini, Anda hanya dapat mengonfigurasi RocksMQ sebagai penyimpanan pesan untuk Milvus standalone dengan Milvus Operator.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Contoh</h4><p>Contoh berikut ini mengonfigurasi layanan RocksMQ.</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
+<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
   name: milvus
 spec:
-  dependencies: {}
+  mode: standalone
+  dependencies:
+    msgStreamType: rocksmq
+    rocksmq:
+      persistence:
+        enabled: <span class="hljs-literal">true</span>
+        pvcDeletion: <span class="hljs-literal">true</span>
+        persistentVolumeClaim:
+          spec:
+            accessModes: [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
+            storageClassName: <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
+            resources:
+              requests:
+                storage: 10Gi  <span class="hljs-comment"># Specify your desired storage size</span>
   components: {}
   config: {}
 <button class="copy-code-btn"></button></code></pre>
+<h5 id="Key-configuration-options" class="common-anchor-header">Opsi konfigurasi utama:</h5><ul>
+<li><code translate="no">msgStreamType</code>: rocksmq: Secara eksplisit menetapkan RocksMQ sebagai antrean pesan</li>
+<li><code translate="no">persistence.enabled</code>: Mengaktifkan penyimpanan persisten untuk data RocksMQ</li>
+<li><code translate="no">persistence.pvcDeletion</code>: Jika benar, PVC akan dihapus ketika instans Milvus dihapus</li>
+<li><code translate="no">persistentVolumeClaim.spec</code>: Spesifikasi PVC Kubernetes standar</li>
+<li><code translate="no">accessModes</code>: Biasanya <code translate="no">ReadWriteOnce</code> untuk penyimpanan blok</li>
+<li><code translate="no">storageClassName</code>: Kelas penyimpanan cluster Anda</li>
+<li><code translate="no">storage</code>: Ukuran volume persisten</li>
+</ul>
 <h2 id="Configure-NATS" class="common-anchor-header">Mengkonfigurasi NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -344,5 +366,5 @@ spec:
     </button></h2><p>Pelajari cara mengonfigurasi dependensi Milvus lainnya dengan Milvus Operator:</p>
 <ul>
 <li><a href="/docs/id/object_storage_operator.md">Mengonfigurasi Penyimpanan Objek dengan Milvus Operator</a></li>
-<li><a href="/docs/id/meta_storage_operator.md">Mengonfigurasi Meta Storage dengan Milvus Operator</a></li>
+<li><a href="/docs/id/meta_storage_operator.md">Mengkonfigurasi Meta Storage dengan Milvus Operator</a></li>
 </ul>

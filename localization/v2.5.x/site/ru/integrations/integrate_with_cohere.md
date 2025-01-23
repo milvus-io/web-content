@@ -1,12 +1,12 @@
 ---
 id: integrate_with_cohere.md
 summary: >-
-  На этой странице рассказывается о том, как искать лучшие ответы на вопросы,
-  используя Milvus в качестве базы данных векторов и Hugging Face в качестве
-  системы встраивания.
-title: Ответы на вопросы с использованием Milvus и Cohere
+  На этой странице показано, как создать систему вопросов-ответов на основе
+  набора данных SQuAD, используя Milvus в качестве базы векторов и Cohere в
+  качестве системы встраивания.
+title: Ответы на вопросы с помощью Milvus и Cohere
 ---
-<h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">Ответы на вопросы с использованием Milvus и Cohere<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">
+<h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">Ответы на вопросы с помощью Milvus и Cohere<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -1,8 +1,8 @@
 ---
 id: vector_visualization.md
 summary: >-
-  Neste exemplo, vamos mostrar como visualizar os embeddings (vectores) no
-  Milvus utilizando o t-SN.
+  Neste exemplo, mostraremos como visualizar os embeddings (vectores) em Milvus
+  utilizando t-SNE.
 title: Visualização de vectores
 ---
 <h1 id="Vector-Visualization" class="common-anchor-header">Visualização de vectores<button data-href="#Vector-Visualization" class="anchor-icon" translate="no">
@@ -70,7 +70,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
 <pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
 $ unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
-<p>Carregamos todos os ficheiros markdown da pasta <code translate="no">milvus_docs/en/faq</code>. Para cada documento, basta utilizar &quot;#&quot; para separar o conteúdo do ficheiro, o que pode separar aproximadamente o conteúdo de cada parte principal do ficheiro markdown.</p>
+<p>Carregamos todos os ficheiros markdown da pasta <code translate="no">milvus_docs/en/faq</code>. Para cada documento, utilizamos simplesmente &quot;#&quot; para separar o conteúdo do ficheiro, o que pode separar aproximadamente o conteúdo de cada parte principal do ficheiro markdown.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []

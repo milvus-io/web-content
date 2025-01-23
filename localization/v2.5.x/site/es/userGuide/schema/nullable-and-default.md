@@ -405,17 +405,17 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Para consultar entidades con valores <code translate="no">null</code>, utilice una expresión vacía <code translate="no">&quot;&quot;</code>.</p>
+<p>Para devolver entidades con valores nulos, realice la consulta sin ninguna condición de filtrado escalar como se indica a continuación:</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">null_results = client.query(​
     collection_name=<span class="hljs-string">&quot;user_profiles_null&quot;</span>,​
-    filter=<span class="hljs-string">&quot;&quot;</span>,​
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,​ <span class="hljs-comment"># Query without any filtering condition</span>
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]​
 )​
 ​
-# Example output:​
-# [{<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;age&quot;</span>: None}, {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;age&quot;</span>: None}]​
+<span class="hljs-comment"># Example output:​</span>
+<span class="hljs-comment"># [{&quot;id&quot;: 2, &quot;age&quot;: None}, {&quot;id&quot;: 3, &quot;age&quot;: None}]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">QueryResp resp = client.query(QueryReq.builder()​

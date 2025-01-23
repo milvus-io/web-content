@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Der Typ Array wird verwendet, um Felder zu speichern, die mehrere Werte desselben Datentyps enthalten. Er bietet eine flexible Möglichkeit, Attribute mit mehreren Elementen zu speichern, was ihn besonders in Szenarien nützlich macht, in denen eine Reihe von zusammenhängenden Daten gespeichert werden muss. In Milvus können Sie Array-Felder neben Vektordaten speichern, was komplexere Abfrage- und Filteranforderungen ermöglicht.</p>
-<p>In einem Musikempfehlungssystem kann ein Array-Feld zum Beispiel eine Liste von Tags für einen Song speichern; in der Analyse des Benutzerverhaltens kann es Benutzerbewertungen für Songs speichern. Nachfolgend finden Sie ein Beispiel für ein typisches Array-Feld.</p>
+<p>In einem Musikempfehlungssystem kann ein Array-Feld zum Beispiel eine Liste von Tags für einen Song speichern; in der Analyse des Benutzerverhaltens kann es Benutzerbewertungen für Songs speichern. Unten sehen Sie ein Beispiel für ein typisches Array-Feld.</p>
 <pre><code translate="no" class="language-JSON">{​
   <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],​
   <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>]​
@@ -67,7 +67,7 @@ schema = client.create_schema(​
 )​
 ​
 <span class="hljs-comment"># Add an Array field with elements of type VARCHAR​</span>
-schema.add_field(field_name=<span class="hljs-string">&quot;tags&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.VARCHAR, max_capacity=<span class="hljs-number">10</span>)​
+schema.add_field(field_name=<span class="hljs-string">&quot;tags&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.VARCHAR, max_capacity=<span class="hljs-number">10</span>, max_length=<span class="hljs-number">65535</span>)​
 <span class="hljs-comment"># Add an Array field with elements of type INT64​</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;ratings&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.INT64, max_capacity=<span class="hljs-number">5</span>)​
 ​
@@ -103,6 +103,7 @@ schema.addField(AddFieldReq.builder()​
         .dataType(DataType.Array)​
         .elementType(DataType.Int64)​
         .maxCapacity(<span class="hljs-number">5</span>)​
+        .maxLength(<span class="hljs-number">65535</span>)
         .build());​
 ​
 schema.addField(AddFieldReq.builder()​
@@ -152,7 +153,7 @@ schema.addField(AddFieldReq.builder()​
     &quot;elementDataType&quot;: &quot;VarChar&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;max_capacity&quot;: 10,​
-        &quot;max_length&quot;: 100​
+        &quot;max_length&quot;: 65535​
     }​
 }&#x27;</span>​
 ​

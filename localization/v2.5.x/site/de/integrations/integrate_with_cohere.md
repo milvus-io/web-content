@@ -1,8 +1,9 @@
 ---
 id: integrate_with_cohere.md
 summary: >-
-  Auf dieser Seite wird beschrieben, wie man mit Milvus als Vektordatenbank und
-  Hugging Face als Einbettungssystem nach der besten Antwort auf Fragen sucht.
+  Diese Seite veranschaulicht, wie man ein Frage-Antwort-System auf der
+  Grundlage des SQuAD-Datensatzes mit Milvus als Vektordatenbank und Cohere als
+  Einbettungssystem erstellt.
 title: Fragenbeantwortung mit Milvus und Cohere
 ---
 <h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">Fragenbeantwortung mit Milvus und Cohere<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">
@@ -71,7 +72,7 @@ MILVUS_HOST = <span class="hljs-string">&#x27;localhost&#x27;</span>  <span clas
 MILVUS_PORT = <span class="hljs-string">&#x27;19530&#x27;</span>
 COHERE_API_KEY = <span class="hljs-string">&#x27;replace-this-with-the-cohere-api-key&#x27;</span>  <span class="hljs-comment"># API key obtained from Cohere</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Weitere Informationen über das Modell und den Datensatz, die auf dieser Seite verwendet werden, finden Sie unter <a href="https://cohere.ai/">co:here</a> und <a href="https://rajpurkar.github.io/SQuAD-explorer/">SQuAD</a>.</p>
+<p>Um mehr über das Modell und den Datensatz zu erfahren, die auf dieser Seite verwendet werden, lesen Sie <a href="https://cohere.ai/">co:here</a> und <a href="https://rajpurkar.github.io/SQuAD-explorer/">SQuAD</a>.</p>
 <h2 id="Prepare-the-dataset" class="common-anchor-header">Vorbereiten des Datensatzes<button data-href="#Prepare-the-dataset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,9 +1,12 @@
 ---
 id: integrate_with_spark.md
-summary: تناقش هذه الصفحة موصل Spark-Milvus.
-title: دليل مستخدم موصل Spark-Milvus Connector
+summary: >-
+  يتكامل Apache Spark وDatabricks مع Milvus وZilliz Cloud للجمع بين معالجة
+  البيانات الضخمة والبحث المتجه. تعرّف على كيفية إنشاء بحث وتحليلات مدعومة
+  بالذكاء الاصطناعي باستخدام موصل Spark-Milvus.
+title: استخدام Apache Spark™ مع Milvus/Zilliz Cloud لخطوط أنابيب الذكاء الاصطناعي
 ---
-<h1 id="Spark-Milvus-Connector-User-Guide" class="common-anchor-header">دليل مستخدم موصل Spark-Milvus Connector<button data-href="#Spark-Milvus-Connector-User-Guide" class="anchor-icon" translate="no">
+<h1 id="Use-Apache-Spark™-with-MilvusZilliz-Cloud-for-AI-Pipelines" class="common-anchor-header">استخدام Apache Spark™ مع Milvus/Zilliz Cloud لخطوط أنابيب الذكاء الاصطناعي<button data-href="#Use-Apache-Spark™-with-MilvusZilliz-Cloud-for-AI-Pipelines" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,10 +21,13 @@ title: دليل مستخدم موصل Spark-Milvus Connector
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يوفر موصل Spark-Milvus Connector (https://github.com/zilliztech/spark-milvus) تكاملاً سلسًا بين Apache Spark و Milvus، حيث يجمع بين ميزات معالجة البيانات وتعلم الآلة في Apache Spark مع قدرات تخزين البيانات المتجهة وإمكانيات البحث في Milvus. يتيح هذا التكامل العديد من التطبيقات المثيرة للاهتمام، بما في ذلك:</p>
+    </button></h1><p>يوفر <a href="https://github.com/zilliztech/spark-milvus">موصّل Spark-Milvus Connector</a> تكامل Apache Spark وDatabricks مع Milvus وZilliz Cloud. فهو يربط بين ميزات معالجة البيانات الضخمة القوية في Apache Spark وميزات التعلم الآلي (ML) في Apache Spark مع قدرات البحث المتجه المتطورة في Milvus. يتيح هذا التكامل سير عمل مبسّط للبحث المدعوم بالذكاء الاصطناعي والتحليلات المتقدمة وتدريب تعلّم الآلة والإدارة الفعالة للبيانات المتجهة واسعة النطاق.</p>
+<p>Apache Spark هي عبارة عن منصة معالجة بيانات موزعة مصممة للتعامل مع مجموعات البيانات الضخمة بحسابات عالية السرعة. عند إقرانها مع Milvus أو Zilliz Cloud، فإنها تفتح إمكانيات جديدة لحالات الاستخدام مثل البحث الدلالي وأنظمة التوصيات وتحليلات البيانات القائمة على الذكاء الاصطناعي.</p>
+<p>على سبيل المثال، يمكن ل Spark معالجة مجموعات البيانات الكبيرة على دفعات لإنشاء تضمينات عبر نماذج التعلم الآلي، ثم استخدام موصل Spark-Milvus لتخزين هذه التضمينات مباشرة في Milvus أو Zilliz Cloud. وبمجرد فهرستها، يمكن البحث في هذه البيانات أو تحليلها بسرعة، مما يؤدي إلى إنشاء خط أنابيب قوي للذكاء الاصطناعي وسير عمل البيانات الضخمة.</p>
+<p>يدعم موصل Spark-Milvus مهام مثل الإدخال التكراري والجماعي للبيانات في Milvus، ومزامنة البيانات بين الأنظمة، والتحليلات المتقدمة على البيانات المتجهة المخزنة في Milvus. سيرشدك هذا الدليل إلى الخطوات اللازمة لتهيئة الرابط واستخدامه بفعالية لحالات الاستخدام مثل:</p>
 <ul>
-<li>تحميل البيانات المتجهة بكفاءة في Milvus على دفعات كبيرة,</li>
-<li>نقل البيانات بين Milvus وأنظمة التخزين أو قواعد البيانات الأخرى,</li>
+<li>تحميل بيانات المتجهات بكفاءة في Milvus على دفعات كبيرة,</li>
+<li>نقل البيانات بين ميلفوس وأنظمة التخزين أو قواعد البيانات الأخرى,</li>
 <li>تحليل البيانات في Milvus من خلال الاستفادة من Spark MLlib وأدوات الذكاء الاصطناعي الأخرى.</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">البدء السريع<button data-href="#Quick-start" class="anchor-icon" translate="no">
@@ -113,7 +119,7 @@ object Hello <span class="hljs-keyword">extends</span> <span class="hljs-title c
     .save()
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>بعد تنفيذ الكود أعلاه، يمكنك عرض البيانات المدرجة في Milvus باستخدام SDK أو Attu (لوحة معلومات Milvus). يمكنك العثور على مجموعة باسم <code translate="no">hello_spark_milvus</code> تم إنشاؤها مع 4 كيانات تم إدراجها بالفعل فيها.</p>
+<p>بعد تنفيذ الكود أعلاه، يمكنك عرض البيانات المدرجة في ميلفوس باستخدام SDK أو Attu (لوحة معلومات ميلفوس). يمكنك العثور على مجموعة باسم <code translate="no">hello_spark_milvus</code> تم إنشاؤها مع 4 كيانات تم إدراجها بالفعل فيها.</p>
 <h2 id="Features--concepts" class="common-anchor-header">الميزات والمفاهيم<button data-href="#Features--concepts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -484,7 +490,7 @@ df.write
 <span class="hljs-comment">// Bulk insert Spark output files into Milvus</span>
 MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span class="hljs-string">&quot;mjson&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Hands-on" class="common-anchor-header">التدريب العملي<button data-href="#Hands-on" class="anchor-icon" translate="no">
+<h2 id="Hands-on-Notebook" class="common-anchor-header">المفكرة العملية<button data-href="#Hands-on-Notebook" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -499,7 +505,7 @@ MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span cl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لمساعدتك على البدء سريعًا في استخدام موصل Spark-Milvus Connector، أعددنا لك دفتر ملاحظات يرشدك خلال عمليتي نقل البيانات المتدفقة والدُفعات باستخدام Milvus و Zilliz Cloud.</p>
+    </button></h2><p>لمساعدتك على البدء سريعًا في استخدام موصل Spark-Milvus Connector، يمكنك الاطلاع على دفتر الملاحظات الذي يرشدك خلال أمثلة استيعاب البيانات المتدفقة والدفعية ل Spark إلى Milvus و Zilliz Cloud.</p>
 <ul>
-<li><a href="https://zilliz.com/databricks_zilliz_demos">التدريب العملي على موصّل Spark-Milvus Connector</a></li>
+<li><a href="https://zilliz.com/databricks_zilliz_demos">التدريب العملي على موصل Spark-Milvus Connector</a></li>
 </ul>

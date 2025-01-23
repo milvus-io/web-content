@@ -20,7 +20,7 @@ title: Anjing Pelacak Hibrida Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><h2 id="Overview" class="common-anchor-header">Ikhtisar<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,20 +35,21 @@ title: Anjing Pelacak Hibrida Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><blockquote>
-<p><a href="https://milvus.io/docs">Milvus</a> adalah basis data vektor sumber terbuka yang dibuat untuk mendukung pencarian kesamaan dan aplikasi AI. Milvus membuat pencarian data yang tidak terstruktur menjadi lebih mudah diakses, dan memberikan pengalaman pengguna yang konsisten terlepas dari lingkungan penerapannya.</p>
-</blockquote>
-<p>Ini akan membantu Anda memulai dengan Milvus Hybrid Search <a href="/docs/concepts/#retrievers">retriever</a>, yang menggabungkan kekuatan pencarian vektor padat dan jarang. Untuk dokumentasi terperinci tentang semua fitur dan konfigurasi <code translate="no">MilvusCollectionHybridSearchRetriever</code>, kunjungi <a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">referensi API</a>.</p>
-<p>Lihat juga <a href="https://milvus.io/docs/multi-vector-search.md">dokumen</a> Pencarian Multi-Vektor Milvus.</p>
-<h3 id="Integration-details" class="common-anchor-header">Detail integrasi</h3><table>
-<thead>
-<tr><th style="text-align:left">Retriever</th><th style="text-align:left">Tuan rumah mandiri</th><th style="text-align:center">Penawaran cloud</th><th style="text-align:center">Paket</th></tr>
-</thead>
-<tbody>
-<tr><td style="text-align:left"><a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a></td><td style="text-align:left">✅</td><td style="text-align:center">❌</td><td style="text-align:center">langchain_milvus</td></tr>
-</tbody>
-</table>
-<h2 id="Setup" class="common-anchor-header">Penyiapan<button data-href="#Setup" class="anchor-icon" translate="no">
+    </button></h2><p>Pencarian hibrida menggabungkan kekuatan paradigma pencarian yang berbeda untuk meningkatkan akurasi dan ketangguhan pencarian. Pencarian ini memanfaatkan kemampuan pencarian vektor padat dan pencarian vektor jarang, serta kombinasi beberapa strategi pencarian vektor padat, untuk memastikan pengambilan yang komprehensif dan tepat untuk beragam kueri.</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.5.x/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <span></span>
+  </span>
+</p>
+<p>Diagram ini mengilustrasikan skenario pencarian hibrida yang paling umum, yaitu pencarian hibrida padat + jarang. Dalam hal ini, kandidat diambil menggunakan kesamaan vektor semantik dan pencocokan kata kunci yang tepat. Hasil dari metode-metode ini digabungkan, diurutkan ulang, dan diteruskan ke LLM untuk menghasilkan jawaban akhir. Pendekatan ini menyeimbangkan ketepatan dan pemahaman semantik, sehingga sangat efektif untuk skenario kueri yang beragam.</p>
+<p>Selain pencarian hibrida padat + jarang, strategi hibrida juga dapat menggabungkan beberapa model vektor padat. Misalnya, satu model vektor padat mungkin mengkhususkan diri dalam menangkap nuansa semantik, sementara yang lain berfokus pada penyematan kontekstual atau representasi spesifik domain. Dengan menggabungkan hasil dari model-model ini dan memberi peringkat ulang, jenis pencarian hibrida ini memastikan proses pencarian yang lebih bernuansa dan sadar konteks.</p>
+<p>Integrasi LangChain Milvus menyediakan cara yang fleksibel untuk mengimplementasikan pencarian hibrida, mendukung sejumlah bidang vektor, dan model penyematan padat atau jarang, yang memungkinkan LangChain Milvus secara fleksibel beradaptasi dengan berbagai skenario penggunaan pencarian hibrida, dan pada saat yang sama kompatibel dengan kemampuan LangChain lainnya.</p>
+<p>Dalam tutorial ini, kita akan mulai dengan kasus padat + jarang yang paling umum, dan kemudian memperkenalkan sejumlah pendekatan penggunaan pencarian hibrida secara umum.</p>
+<div class="alert note">
+<p><a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a>, yang merupakan implementasi lain dari pencarian <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">hibrida</a> dengan Milvus dan LangChain, <strong>akan segera</strong> ditinggalkan. Silakan gunakan pendekatan dalam dokumen ini untuk mengimplementasikan pencarian hibrida karena lebih fleksibel dan kompatibel dengan LangChain.</p>
+</div>
+<h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,201 +64,335 @@ title: Anjing Pelacak Hibrida Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jika Anda ingin mendapatkan penelusuran otomatis dari kueri individual, Anda juga dapat mengatur kunci API <a href="https://docs.smith.langchain.com/">LangSmith</a> Anda dengan mengosongkan komentar di bawah ini:</p>
-<pre><code translate="no" class="language-python"># os.environ[<span class="hljs-string">&quot;LANGSMITH_API_KEY&quot;</span>] = getpass.getpass(<span class="hljs-string">&quot;Enter your LangSmith API key: &quot;</span>)
-# os.environ[<span class="hljs-string">&quot;LANGSMITH_TRACING&quot;</span>] = <span class="hljs-string">&quot;true&quot;</span>
+    </button></h2><p>Sebelum menjalankan notebook ini, pastikan Anda telah menginstal dependensi berikut ini:</p>
+<pre><code translate="no" class="language-shell">$ pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 pymilvus[model] <span class="hljs-comment">#langchain-voyageai</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Installation" class="common-anchor-header">Instalasi</h3><p>Retriever ini berada di dalam paket <code translate="no">langchain-milvus</code>. Panduan ini membutuhkan dependensi berikut:</p>
-<pre><code translate="no" class="language-python">%pip install --upgrade --quiet pymilvus[model] langchain-milvus langchain-openai
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">output_parsers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">StrOutputParser</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">prompts</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">PromptTemplate</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">runnables</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">RunnablePassthrough</span>
-<span class="hljs-keyword">from</span> langchain_milvus.<span class="hljs-property">retrievers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusCollectionHybridSearchRetriever</span>
-<span class="hljs-keyword">from</span> langchain_milvus.<span class="hljs-property">utils</span>.<span class="hljs-property">sparse</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">BM25SparseEmbedding</span>
-<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">ChatOpenAI</span>, <span class="hljs-title class_">OpenAIEmbeddings</span>
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
-    <span class="hljs-title class_">Collection</span>,
-    <span class="hljs-title class_">CollectionSchema</span>,
-    <span class="hljs-title class_">DataType</span>,
-    <span class="hljs-title class_">FieldSchema</span>,
-    <span class="hljs-title class_">WeightedRanker</span>,
-    connections,
-)
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Start-the-Milvus-service" class="common-anchor-header">Memulai layanan Milvus</h3><p>Silakan lihat <a href="https://milvus.io/docs/install_standalone-docker.md">dokumentasi Milvus</a> untuk memulai layanan Milvus.</p>
-<p>Setelah memulai milvus, Anda perlu menentukan URI koneksi milvus Anda.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-variable constant_">CONNECTION_URI</span> = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-OpenAI-API-Key" class="common-anchor-header">Menyiapkan Kunci API OpenAI</h3><p>Silakan lihat <a href="https://platform.openai.com/account/api-keys">dokumentasi OpenAI</a> untuk mendapatkan kunci API OpenAI Anda, dan tetapkan sebagai variabel lingkungan.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> <span class="hljs-variable constant_">OPENAI_API_KEY</span>=&lt;your_api_key&gt;
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-dense-and-sparse-embedding-functions" class="common-anchor-header">Menyiapkan fungsi penyematan padat dan jarang</h3><p>Mari kita membuat fiksi 10 deskripsi novel palsu. Dalam produksi yang sebenarnya, ini mungkin merupakan data teks dalam jumlah besar.</p>
-<pre><code translate="no" class="language-python">texts = [
-    <span class="hljs-string">&quot;In &#x27;The Whispering Walls&#x27; by Ava Moreno, a young journalist named Sophia uncovers a decades-old conspiracy hidden within the crumbling walls of an ancient mansion, where the whispers of the past threaten to destroy her own sanity.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Last Refuge&#x27; by Ethan Blackwood, a group of survivors must band together to escape a post-apocalyptic wasteland, where the last remnants of humanity cling to life in a desperate bid for survival.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Memory Thief&#x27; by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The City of Echoes&#x27; by Julian Saint Clair, a brilliant detective must navigate a labyrinthine metropolis where time is currency, and the rich can live forever, but at a terrible cost to the poor.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Starlight Serenade&#x27; by Ruby Flynn, a shy astronomer discovers a mysterious melody emanating from a distant star, which leads her on a journey to uncover the secrets of the universe and her own heart.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Shadow Weaver&#x27; by Piper Redding, a young orphan discovers she has the ability to weave powerful illusions, but soon finds herself at the center of a deadly game of cat and mouse between rival factions vying for control of the mystical arts.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Lost Expedition&#x27; by Caspian Grey, a team of explorers ventures into the heart of the Amazon rainforest in search of a lost city, but soon finds themselves hunted by a ruthless treasure hunter and the treacherous jungle itself.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Clockwork Kingdom&#x27; by Augusta Wynter, a brilliant inventor discovers a hidden world of clockwork machines and ancient magic, where a rebellion is brewing against the tyrannical ruler of the land.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Phantom Pilgrim&#x27; by Rowan Welles, a charismatic smuggler is hired by a mysterious organization to transport a valuable artifact across a war-torn continent, but soon finds themselves pursued by deadly assassins and rival factions.&quot;</span>,
-    <span class="hljs-string">&quot;In &#x27;The Dreamwalker&#x27;s Journey&#x27; by Lyra Snow, a young dreamwalker discovers she has the ability to enter people&#x27;s dreams, but soon finds herself trapped in a surreal world of nightmares and illusions, where the boundaries between reality and fantasy blur.&quot;</span>,
-]
-<button class="copy-code-btn"></button></code></pre>
-<p>Kita akan menggunakan <a href="https://platform.openai.com/docs/guides/embeddings">OpenAI Embedding</a> untuk menghasilkan vektor padat, dan <a href="https://en.wikipedia.org/wiki/Okapi_BM25">algoritma BM25</a> untuk menghasilkan vektor jarang.</p>
-<p>Inisialisasi fungsi penyematan padat dan dapatkan dimensi</p>
-<pre><code translate="no" class="language-python">dense_embedding_func = OpenAIEmbeddings()
-dense_dim = <span class="hljs-built_in">len</span>(dense_embedding_func.embed_query(texts[<span class="hljs-number">1</span>]))
-dense_dim
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">1536
-</code></pre>
-<p>Inisialisasi fungsi embedding jarang.</p>
-<p>Perhatikan bahwa output dari sparse embedding adalah sekumpulan vektor jarang, yang merepresentasikan indeks dan bobot kata kunci dari teks input.</p>
-<pre><code translate="no" class="language-python">sparse_embedding_func = BM25SparseEmbedding(corpus=texts)
-sparse_embedding_func.embed_query(texts[1])
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">{0: 0.4270424944042204,
- 21: 1.845826690498331,
- 22: 1.845826690498331,
- 23: 1.845826690498331,
- 24: 1.845826690498331,
- 25: 1.845826690498331,
- 26: 1.845826690498331,
- 27: 1.2237754316221157,
- 28: 1.845826690498331,
- 29: 1.845826690498331,
- 30: 1.845826690498331,
- 31: 1.845826690498331,
- 32: 1.845826690498331,
- 33: 1.845826690498331,
- 34: 1.845826690498331,
- 35: 1.845826690498331,
- 36: 1.845826690498331,
- 37: 1.845826690498331,
- 38: 1.845826690498331,
- 39: 1.845826690498331}
-</code></pre>
-<h3 id="Create-Milvus-Collection-and-load-data" class="common-anchor-header">Membuat Koleksi Milvus dan memuat data</h3><p>Inisialisasi URI koneksi dan buat koneksi</p>
-<pre><code translate="no" class="language-python">connections.connect(uri=CONNECTION_URI)
-<button class="copy-code-btn"></button></code></pre>
-<p>Tentukan nama field dan tipe datanya</p>
-<pre><code translate="no" class="language-python">pk_field = <span class="hljs-string">&quot;doc_id&quot;</span>
-dense_field = <span class="hljs-string">&quot;dense_vector&quot;</span>
-sparse_field = <span class="hljs-string">&quot;sparse_vector&quot;</span>
-text_field = <span class="hljs-string">&quot;text&quot;</span>
-fields = [
-    FieldSchema(
-        name=pk_field,
-        dtype=DataType.VARCHAR,
-        is_primary=<span class="hljs-literal">True</span>,
-        auto_id=<span class="hljs-literal">True</span>,
-        max_length=<span class="hljs-number">100</span>,
-    ),
-    FieldSchema(name=dense_field, dtype=DataType.FLOAT_VECTOR, dim=dense_dim),
-    FieldSchema(name=sparse_field, dtype=DataType.SPARSE_FLOAT_VECTOR),
-    FieldSchema(name=text_field, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">65_535</span>),
-]
-<button class="copy-code-btn"></button></code></pre>
-<p>Buat koleksi dengan skema yang ditentukan</p>
-<pre><code translate="no" class="language-python">schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-literal">False</span>)
-collection = Collection(
-    name=<span class="hljs-string">&quot;IntroductionToTheNovels&quot;</span>, schema=schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>Tentukan indeks untuk vektor padat dan jarang</p>
-<pre><code translate="no" class="language-python">dense_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;FLAT&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
-collection.<span class="hljs-title function_">create_index</span>(<span class="hljs-string">&quot;dense_vector&quot;</span>, dense_index)
-sparse_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
-collection.<span class="hljs-title function_">create_index</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_index)
-collection.<span class="hljs-title function_">flush</span>()
-<button class="copy-code-btn"></button></code></pre>
-<p>Masukkan entitas ke dalam koleksi dan muat koleksi</p>
-<pre><code translate="no" class="language-python">entities = []
-<span class="hljs-keyword">for</span> text in texts:
-    entity = {
-        dense_field: dense_embedding_func.embed_documents([text])[<span class="hljs-number">0</span>],
-        sparse_field: sparse_embedding_func.embed_documents([text])[<span class="hljs-number">0</span>],
-        text_field: text,
-    }
-    entities.<span class="hljs-built_in">append</span>(entity)
-collection.insert(entities)
-collection.load()
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Instantiation" class="common-anchor-header">Instansiasi<button data-href="#Instantiation" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Sekarang kita dapat menginstansiasi retriever kita, mendefinisikan parameter pencarian untuk field yang jarang dan padat:</p>
-<pre><code translate="no" class="language-python">sparse_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
-dense_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
-retriever = <span class="hljs-title class_">MilvusCollectionHybridSearchRetriever</span>(
-    collection=collection,
-    rerank=<span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>),
-    anns_fields=[dense_field, sparse_field],
-    field_embeddings=[dense_embedding_func, sparse_embedding_func],
-    field_search_params=[dense_search_params, sparse_search_params],
-    top_k=<span class="hljs-number">3</span>,
-    text_field=text_field,
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>Dalam parameter masukan Retriever ini, kita menggunakan penyematan padat dan penyematan jarang untuk melakukan pencarian hibrida pada dua bidang dari Koleksi ini, dan menggunakan WeightedRanker untuk pemeringkatan. Akhirnya, 3 Dokumen K teratas akan dikembalikan.</p>
-<h2 id="Usage" class="common-anchor-header">Penggunaan<button data-href="#Usage" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><pre><code translate="no" class="language-python">retriever.<span class="hljs-title function_">invoke</span>(<span class="hljs-string">&quot;What are the story about ventures?&quot;</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">[Document(page_content=&quot;In 'The Lost Expedition' by Caspian Grey, a team of explorers ventures into the heart of the Amazon rainforest in search of a lost city, but soon finds themselves hunted by a ruthless treasure hunter and the treacherous jungle itself.&quot;, metadata={'doc_id': '449281835035545843'}),
- Document(page_content=&quot;In 'The Phantom Pilgrim' by Rowan Welles, a charismatic smuggler is hired by a mysterious organization to transport a valuable artifact across a war-torn continent, but soon finds themselves pursued by deadly assassins and rival factions.&quot;, metadata={'doc_id': '449281835035545845'}),
- Document(page_content=&quot;In 'The Dreamwalker's Journey' by Lyra Snow, a young dreamwalker discovers she has the ability to enter people's dreams, but soon finds herself trapped in a surreal world of nightmares and illusions, where the boundaries between reality and fantasy blur.&quot;, metadata={'doc_id': '449281835035545846'})]
-</code></pre>
-<h2 id="Use-within-a-chain" class="common-anchor-header">Gunakan dalam sebuah rantai<button data-href="#Use-within-a-chain" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Inisialisasi ChatOpenAI dan tentukan templat prompt</p>
-<pre><code translate="no" class="language-python">llm = ChatOpenAI()
+<div class="alert note">
+<p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja terinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
+</div>
+<p>Kita akan menggunakan model dari OpenAI. Anda harus menyiapkan variabel lingkungan <code translate="no">OPENAI_API_KEY</code> dari <a href="https://platform.openai.com/docs/quickstart">OpenAI</a>.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
+os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Tentukan server Milvus Anda <code translate="no">URI</code> (dan secara opsional <code translate="no">TOKEN</code>). Untuk cara menginstal dan menjalankan server Milvus, ikuti <a href="https://milvus.io/docs/install_standalone-docker-compose.md">panduan</a> berikut.</p>
+<pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-comment"># TOKEN = ...</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Siapkan beberapa dokumen contoh, yang merupakan ringkasan cerita fiksi yang dikategorikan berdasarkan tema atau genre.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
+
+docs = [
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Whispering Walls&#x27; by Ava Moreno, a young journalist named Sophia uncovers a decades-old conspiracy hidden within the crumbling walls of an ancient mansion, where the whispers of the past threaten to destroy her own sanity.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Mystery&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Last Refuge&#x27; by Ethan Blackwood, a group of survivors must band together to escape a post-apocalyptic wasteland, where the last remnants of humanity cling to life in a desperate bid for survival.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Post-Apocalyptic&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Memory Thief&#x27; by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Heist/Thriller&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The City of Echoes&#x27; by Julian Saint Clair, a brilliant detective must navigate a labyrinthine metropolis where time is currency, and the rich can live forever, but at a terrible cost to the poor.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Science Fiction&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Starlight Serenade&#x27; by Ruby Flynn, a shy astronomer discovers a mysterious melody emanating from a distant star, which leads her on a journey to uncover the secrets of the universe and her own heart.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Science Fiction/Romance&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Shadow Weaver&#x27; by Piper Redding, a young orphan discovers she has the ability to weave powerful illusions, but soon finds herself at the center of a deadly game of cat and mouse between rival factions vying for control of the mystical arts.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Fantasy&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Lost Expedition&#x27; by Caspian Grey, a team of explorers ventures into the heart of the Amazon rainforest in search of a lost city, but soon finds themselves hunted by a ruthless treasure hunter and the treacherous jungle itself.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Adventure&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Clockwork Kingdom&#x27; by Augusta Wynter, a brilliant inventor discovers a hidden world of clockwork machines and ancient magic, where a rebellion is brewing against the tyrannical ruler of the land.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Steampunk/Fantasy&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Phantom Pilgrim&#x27; by Rowan Welles, a charismatic smuggler is hired by a mysterious organization to transport a valuable artifact across a war-torn continent, but soon finds themselves pursued by deadly assassins and rival factions.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Adventure/Thriller&quot;</span>},
+    ),
+    <span class="hljs-title class_">Document</span>(
+        page_content=<span class="hljs-string">&quot;In &#x27;The Dreamwalker&#x27;s Journey&#x27; by Lyra Snow, a young dreamwalker discovers she has the ability to enter people&#x27;s dreams, but soon finds herself trapped in a surreal world of nightmares and illusions, where the boundaries between reality and fantasy blur.&quot;</span>,
+        metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Fantasy&quot;</span>},
+    ),
+]
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Dense-embedding-+-Sparse-embedding" class="common-anchor-header">Penyematan padat + Penyematan jarang<button data-href="#Dense-embedding-+-Sparse-embedding" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="common-anchor-header">Opsi 1 (Direkomendasikan): penyematan padat + fungsi bawaan Milvus BM25</h3><p>Gunakan penyematan padat + fungsi bawaan Milvus BM25 untuk menyusun instance penyimpanan vektor pengambilan hibrida.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
+<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
+
+
+vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=OpenAIEmbeddings(),
+    builtin_function=BM25BuiltInFunction(),  <span class="hljs-comment"># output_field_names=&quot;sparse&quot;),</span>
+    vector_field=[<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    drop_old=<span class="hljs-literal">True</span>,
+)
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<ul>
+<li>Ketika Anda menggunakan <code translate="no">BM25BuiltInFunction</code>, harap dicatat bahwa pencarian teks lengkap tersedia di Milvus Standalone dan Milvus Distributed, tetapi tidak di Milvus Lite, meskipun ada di peta jalan untuk penyertaan di masa mendatang. Fitur ini juga akan segera tersedia di Zilliz Cloud (Milvus yang dikelola sepenuhnya). Silakan hubungi <a href="mailto:support@zilliz.com">support@zilliz.com</a> untuk informasi lebih lanjut.</li>
+</ul>
+</div>
+<p>Pada kode di atas, kita mendefinisikan sebuah instance dari <code translate="no">BM25BuiltInFunction</code> dan mengopernya ke objek <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> adalah kelas pembungkus yang ringan untuk <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> ringan di Milvus. Kita dapat menggunakannya dengan <code translate="no">OpenAIEmbeddings</code> untuk menginisialisasi instance penyimpanan vektor Milvus pencarian hibrida padat + jarang.</p>
+<p><code translate="no">BM25BuiltInFunction</code> tidak mengharuskan klien untuk memberikan korpus atau pelatihan, semua secara otomatis diproses di server Milvus, sehingga pengguna tidak perlu peduli dengan kosakata dan korpus apa pun. Selain itu, pengguna juga dapat menyesuaikan <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">penganalisis</a> untuk mengimplementasikan pemrosesan teks khusus di BM25.</p>
+<p>Untuk informasi lebih lanjut tentang <code translate="no">BM25BuiltInFunction</code>, silakan lihat <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Pencarian Teks Lengkap</a> dan <a href="https://milvus.io/docs/full_text_search_with_langchain.md">Menggunakan Pencarian Teks Lengkap dengan LangChain dan Milvus</a>.</p>
+<h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">Opsi 2: Gunakan penyematan jarang LangChain yang padat dan disesuaikan</h3><p>Anda dapat mewarisi kelas <code translate="no">BaseSparseEmbedding</code> dari <code translate="no">langchain_milvus.utils.sparse</code>, dan mengimplementasikan metode <code translate="no">embed_query</code> dan <code translate="no">embed_documents</code> untuk menyesuaikan proses sematan jarang. Hal ini memungkinkan Anda untuk menyesuaikan metode penyematan jarang apa pun baik berdasarkan statistik frekuensi term (misalnya <a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>) atau jaringan saraf (misalnya <a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>).</p>
+<p>Berikut ini adalah sebuah contoh:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Dict</span>, <span class="hljs-type">List</span>
+<span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BaseSparseEmbedding
+
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCustomEmbedding</span>(<span class="hljs-title class_ inherited__">BaseSparseEmbedding</span>):  <span class="hljs-comment"># inherit from BaseSparseEmbedding</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, model_path</span>): ...  <span class="hljs-comment"># code to init or load model</span>
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">embed_query</span>(<span class="hljs-params">self, query: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-type">Dict</span>[<span class="hljs-built_in">int</span>, <span class="hljs-built_in">float</span>]:
+        ...  <span class="hljs-comment"># code to embed query</span>
+        <span class="hljs-keyword">return</span> {  <span class="hljs-comment"># fake embedding result</span>
+            <span class="hljs-number">1</span>: <span class="hljs-number">0.1</span>,
+            <span class="hljs-number">2</span>: <span class="hljs-number">0.2</span>,
+            <span class="hljs-number">3</span>: <span class="hljs-number">0.3</span>,
+            <span class="hljs-comment"># ...</span>
+        }
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">embed_documents</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-type">Dict</span>[<span class="hljs-built_in">int</span>, <span class="hljs-built_in">float</span>]]:
+        ...  <span class="hljs-comment"># code to embed documents</span>
+        <span class="hljs-keyword">return</span> [  <span class="hljs-comment"># fake embedding results</span>
+            {
+                <span class="hljs-number">1</span>: <span class="hljs-number">0.1</span>,
+                <span class="hljs-number">2</span>: <span class="hljs-number">0.2</span>,
+                <span class="hljs-number">3</span>: <span class="hljs-number">0.3</span>,
+                <span class="hljs-comment"># ...</span>
+            }
+        ] * <span class="hljs-built_in">len</span>(texts)
+<button class="copy-code-btn"></button></code></pre>
+<p>Kami memiliki kelas demo <code translate="no">BM25SparseEmbedding</code> yang diwarisi dari <code translate="no">BaseSparseEmbedding</code> di <code translate="no">langchain_milvus.utils.sparse</code>. Anda dapat meneruskannya ke dalam daftar penyematan inisialisasi dari instance penyimpanan vektor Milvus seperti kelas penyematan padat langchain lainnya.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># BM25SparseEmbedding is inherited from BaseSparseEmbedding</span>
+<span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BM25SparseEmbedding
+
+embedding1 = OpenAIEmbeddings()
+
+corpus = [doc.page_content <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> docs]
+embedding2 = BM25SparseEmbedding(
+    corpus=corpus
+)  <span class="hljs-comment"># pass in corpus to initialize the statistics</span>
+
+vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=[embedding1, embedding2],
+    vector_field=[<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    drop_old=<span class="hljs-literal">True</span>,
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Meskipun ini adalah cara untuk menggunakan BM25, ini mengharuskan pengguna untuk mengelola korpus untuk statistik frekuensi term. Kami merekomendasikan untuk menggunakan fungsi bawaan BM25 (Opsi 1) sebagai gantinya, karena fungsi ini menangani segala sesuatu di sisi server Milvus. Hal ini menghilangkan kebutuhan pengguna untuk khawatir tentang mengelola korpus atau melatih kosakata. Untuk informasi lebih lanjut, silakan lihat <a href="https://milvus.io/docs/full_text_search_with_langchain.md">Menggunakan Pencarian Teks Lengkap dengan LangChain dan Milvus</a>.</p>
+<h2 id="Define-multiple-arbitrary-vector-fields" class="common-anchor-header">Menentukan beberapa bidang vektor sembarang<button data-href="#Define-multiple-arbitrary-vector-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Ketika menginisialisasi penyimpanan vektor Milvus, Anda dapat memasukkan daftar penyematan (dan juga daftar fungsi bawaan di masa mendatang) untuk mengimplementasikan pencarian ulang multi-arah, dan kemudian memberi peringkat ulang pada kandidat-kandidat ini:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
+
+embedding1 = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>)
+embedding2 = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
+<span class="hljs-comment"># embedding3 = VoyageAIEmbeddings(model=&quot;voyage-3&quot;)  # You can also use embedding from other embedding model providers, e.g VoyageAIEmbeddings</span>
+
+
+vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=[embedding1, embedding2],  <span class="hljs-comment"># embedding3],</span>
+    builtin_function=BM25BuiltInFunction(output_field_names=<span class="hljs-string">&quot;sparse&quot;</span>),
+    <span class="hljs-comment"># `sparse` is the output field name of BM25BuiltInFunction, and `dense1` and `dense2` are the output field names of embedding1 and embedding2</span>
+    vector_field=[<span class="hljs-string">&quot;dense1&quot;</span>, <span class="hljs-string">&quot;dense2&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    drop_old=<span class="hljs-literal">True</span>,
+)
+
+vectorstore.vector_fields
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">['dense1', 'dense2', 'sparse']
+</code></pre>
+<p>Dalam contoh ini, kita memiliki tiga bidang vektor. Diantaranya, <code translate="no">sparse</code> digunakan sebagai bidang keluaran untuk <code translate="no">BM25BuiltInFunction</code>, sedangkan dua lainnya, <code translate="no">dense1</code> dan <code translate="no">dense2</code>, secara otomatis ditetapkan sebagai bidang keluaran untuk dua model <code translate="no">OpenAIEmbeddings</code> (berdasarkan urutan).</p>
+<h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">Menentukan parameter indeks untuk bidang multi-vektor</h3><p>Secara default, jenis indeks setiap bidang vektor akan secara otomatis ditentukan oleh jenis penyematan atau fungsi bawaan. Namun, Anda juga dapat menentukan jenis indeks untuk setiap bidang vektor untuk mengoptimalkan kinerja pencarian.</p>
+<pre><code translate="no" class="language-python">dense_index_param_1 = {
+    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
+    <span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;HNSW&quot;</span>,
+}
+dense_index_param_2 = {
+    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
+    <span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;HNSW&quot;</span>,
+}
+sparse_index_param = {
+    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
+    <span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+}
+
+vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=[embedding1, embedding2],
+    builtin_function=BM25BuiltInFunction(output_field_names=<span class="hljs-string">&quot;sparse&quot;</span>),
+    index_params=[dense_index_param_1, dense_index_param_2, sparse_index_param],
+    vector_field=[<span class="hljs-string">&quot;dense1&quot;</span>, <span class="hljs-string">&quot;dense2&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    drop_old=<span class="hljs-literal">True</span>,
+)
+
+vectorstore.vector_fields
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">['dense1', 'dense2', 'sparse']
+</code></pre>
+<div class="alert note">
+<p>Harap jaga agar urutan daftar parameter indeks tetap konsisten dengan urutan <code translate="no">vectorstore.vector_fields</code> untuk menghindari kebingungan.</p>
+</div>
+<h3 id="Rerank-the-candidates" class="common-anchor-header">Beri peringkat ulang kandidat</h3><p>Setelah tahap pertama pencarian, kita perlu memberi peringkat ulang pada kandidat untuk mendapatkan hasil yang lebih baik. Anda dapat memilih <a href="https://milvus.io/docs/reranking.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a> atau <a href="https://milvus.io/docs/reranking.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a> tergantung pada kebutuhan Anda. Anda dapat merujuk ke <a href="https://milvus.io/docs/reranking.md#Reranking">Perangkingan Ulang</a> untuk informasi lebih lanjut.</p>
+<p>Berikut adalah contoh untuk perangkingan ulang tertimbang:</p>
+<pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=OpenAIEmbeddings(),
+    builtin_function=BM25BuiltInFunction(),
+    vector_field=[<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    drop_old=<span class="hljs-literal">True</span>,
+)
+
+query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
+
+vectorstore.similarity_search(
+    query, k=<span class="hljs-number">1</span>, ranker_type=<span class="hljs-string">&quot;weighted&quot;</span>, ranker_params={<span class="hljs-string">&quot;weights&quot;</span>: [<span class="hljs-number">0.6</span>, <span class="hljs-number">0.4</span>]}
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">[Document(metadata={'pk': 454646931479252186, 'category': 'Heist/Thriller'}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
+</code></pre>
+<p>Berikut adalah contoh perankingan ulang RRF:</p>
+<pre><code translate="no" class="language-python">vectorstore.<span class="hljs-title function_">similarity_search</span>(query, k=<span class="hljs-number">1</span>, ranker_type=<span class="hljs-string">&quot;rrf&quot;</span>, ranker_params={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">[Document(metadata={'category': 'Heist/Thriller', 'pk': 454646931479252186}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
+</code></pre>
+<p>Jika Anda tidak memberikan parameter apa pun tentang perankingan ulang, strategi perankingan ulang tertimbang rata-rata akan digunakan secara default.</p>
+<h2 id="Using-Hybrid-Search-and-Reranking-in-RAG" class="common-anchor-header">Menggunakan Pencarian Hibrida dan Perangkingan Ulang di RAG<button data-href="#Using-Hybrid-Search-and-Reranking-in-RAG" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Dalam skenario RAG, pendekatan yang paling umum untuk pencarian hibrida adalah pencarian padat + jarang, diikuti dengan perankingan ulang. Contoh berikut ini menunjukkan kode ujung-ke-ujung yang mudah.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">Siapkan data</h3><p>Kami menggunakan Langchain WebBaseLoader untuk memuat dokumen dari sumber web dan membaginya menjadi beberapa bagian menggunakan RecursiveCharacterTextSplitter.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bs4
+<span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> WebBaseLoader
+<span class="hljs-keyword">from</span> langchain_text_splitters <span class="hljs-keyword">import</span> RecursiveCharacterTextSplitter
+
+<span class="hljs-comment"># Create a WebBaseLoader instance to load documents from web sources</span>
+loader = WebBaseLoader(
+    web_paths=(
+        <span class="hljs-string">&quot;https://lilianweng.github.io/posts/2023-06-23-agent/&quot;</span>,
+        <span class="hljs-string">&quot;https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/&quot;</span>,
+    ),
+    bs_kwargs=<span class="hljs-built_in">dict</span>(
+        parse_only=bs4.SoupStrainer(
+            class_=(<span class="hljs-string">&quot;post-content&quot;</span>, <span class="hljs-string">&quot;post-title&quot;</span>, <span class="hljs-string">&quot;post-header&quot;</span>)
+        )
+    ),
+)
+<span class="hljs-comment"># Load documents from web sources using the loader</span>
+documents = loader.load()
+<span class="hljs-comment"># Initialize a RecursiveCharacterTextSplitter for splitting text into chunks</span>
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=<span class="hljs-number">2000</span>, chunk_overlap=<span class="hljs-number">200</span>)
+
+<span class="hljs-comment"># Split the documents into chunks using the text_splitter</span>
+docs = text_splitter.split_documents(documents)
+
+<span class="hljs-comment"># Let&#x27;s take a look at the first document</span>
+docs[<span class="hljs-number">1</span>]
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
+</code></pre>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Memuat dokumen ke dalam penyimpanan vektor Milvus</h3><p>Seperti pengantar di atas, kita menginisialisasi dan memuat dokumen yang telah disiapkan ke dalam penyimpanan vektor Milvus, yang berisi dua bidang vektor: <code translate="no">dense</code> untuk penyematan OpenAI dan <code translate="no">sparse</code> untuk fungsi BM25.</p>
+<pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=OpenAIEmbeddings(),
+    builtin_function=BM25BuiltInFunction(),
+    vector_field=[<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    drop_old=<span class="hljs-literal">True</span>,
+)
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Build-RAG-chain" class="common-anchor-header">Membangun rantai RAG</h3><p>Kami menyiapkan instance dan prompt LLM, lalu menggabungkannya ke dalam pipeline RAG menggunakan Bahasa Ekspresi LangChain.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
+<span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
+<span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser
+<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI
+
+<span class="hljs-comment"># Initialize the OpenAI language model for response generation</span>
+llm = ChatOpenAI(model_name=<span class="hljs-string">&quot;gpt-4o&quot;</span>, temperature=<span class="hljs-number">0</span>)
+
+<span class="hljs-comment"># Define the prompt template for generating AI responses</span>
 PROMPT_TEMPLATE = <span class="hljs-string">&quot;&quot;&quot;
 Human: You are an AI assistant, and provides answers to questions by using fact based and statistical information when possible.
 Use the following pieces of information to provide a concise answer to the question enclosed in &lt;question&gt; tags.
-
+If you don&#x27;t know the answer, just say that you don&#x27;t know, don&#x27;t try to make up an answer.
 &lt;context&gt;
 {context}
 &lt;/context&gt;
@@ -266,45 +401,38 @@ Use the following pieces of information to provide a concise answer to the quest
 {question}
 &lt;/question&gt;
 
+The response should be specific and use statistics or numbers when possible.
+
 Assistant:&quot;&quot;&quot;</span>
 
+<span class="hljs-comment"># Create a PromptTemplate instance with the defined template and input variables</span>
 prompt = PromptTemplate(
     template=PROMPT_TEMPLATE, input_variables=[<span class="hljs-string">&quot;context&quot;</span>, <span class="hljs-string">&quot;question&quot;</span>]
 )
-<button class="copy-code-btn"></button></code></pre>
-<p>Tentukan fungsi untuk memformat dokumen</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_docs</span>(<span class="hljs-params">docs</span>):
+<span class="hljs-comment"># Convert the vector store to a retriever</span>
+retriever = vectorstore.as_retriever()
+
+
+<span class="hljs-comment"># Define a function to format the retrieved documents</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">format_docs</span>(<span class="hljs-params">docs</span>):
     <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;\n\n&quot;</span>.join(doc.page_content <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> docs)
 <button class="copy-code-btn"></button></code></pre>
-<p>Tentukan sebuah rantai menggunakan retriever dan komponen lainnya</p>
-<pre><code translate="no" class="language-python">rag_chain = (
-    {<span class="hljs-string">&quot;context&quot;</span>: retriever | format_docs, <span class="hljs-string">&quot;question&quot;</span>: <span class="hljs-title class_">RunnablePassthrough</span>()}
+<p>Gunakan LCEL (LangChain Expression Language) untuk membangun rantai RAG.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Define the RAG (Retrieval-Augmented Generation) chain for AI response generation</span>
+rag_chain = (
+    {<span class="hljs-string">&quot;context&quot;</span>: retriever | format_docs, <span class="hljs-string">&quot;question&quot;</span>: RunnablePassthrough()}
     | prompt
     | llm
-    | <span class="hljs-title class_">StrOutputParser</span>()
+    | StrOutputParser()
 )
+
+<span class="hljs-comment"># rag_chain.get_graph().print_ascii()</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Melakukan kueri menggunakan rantai yang ditentukan</p>
-<pre><code translate="no" class="language-python">rag_chain.<span class="hljs-title function_">invoke</span>(<span class="hljs-string">&quot;What novels has Lila written and what are their contents?&quot;</span>)
+<p>Panggil rantai RAG dengan pertanyaan spesifik dan ambil jawabannya</p>
+<pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
+res = rag_chain.<span class="hljs-title function_">invoke</span>(query)
+res
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">&quot;Lila Rose has written 'The Memory Thief,' which follows a charismatic thief with the ability to steal and manipulate memories as they navigate a daring heist and a web of deceit and betrayal.&quot;
+<pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively perform these tasks.'
 </code></pre>
-<p>Membuang koleksi</p>
-<pre><code translate="no" class="language-python">collection.drop()
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="API-reference" class="common-anchor-header">Referensi API<button data-href="#API-reference" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Untuk dokumentasi terperinci tentang semua fitur dan konfigurasi <code translate="no">MilvusCollectionHybridSearchRetriever</code>, buka <a href="https://api.python.langchain.com/en/latest/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">referensi API</a>.</p>
+<p>Selamat! Anda telah membangun rantai RAG pencarian hibrida (vektor padat + fungsi bm25 yang jarang) yang diberdayakan oleh Milvus dan LangChain.</p>

@@ -1,9 +1,13 @@
 ---
 id: integrate_with_spark.md
-summary: Diese Seite befasst sich mit dem Spark-Milvus-Anschluss.
-title: Spark-Milvus Connector Benutzerhandbuch
+summary: >-
+  Apache Spark und Databricks lassen sich mit Milvus und Zilliz Cloud
+  integrieren, um Big Data-Verarbeitung mit Vektorsuche zu kombinieren. Erfahren
+  Sie, wie Sie mit dem Spark-Milvus-Connector eine KI-gestützte Suche und
+  Analyse aufbauen.
+title: Verwenden Sie Apache Spark™ mit Milvus/Zilliz Cloud für KI-Pipelines
 ---
-<h1 id="Spark-Milvus-Connector-User-Guide" class="common-anchor-header">Spark-Milvus Connector Benutzerhandbuch<button data-href="#Spark-Milvus-Connector-User-Guide" class="anchor-icon" translate="no">
+<h1 id="Use-Apache-Spark™-with-MilvusZilliz-Cloud-for-AI-Pipelines" class="common-anchor-header">Verwenden Sie Apache Spark™ mit Milvus/Zilliz Cloud für KI-Pipelines<button data-href="#Use-Apache-Spark™-with-MilvusZilliz-Cloud-for-AI-Pipelines" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,11 +22,14 @@ title: Spark-Milvus Connector Benutzerhandbuch
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der Spark-Milvus Connector (https://github.com/zilliztech/spark-milvus) bietet eine nahtlose Integration zwischen Apache Spark und Milvus, indem er die Datenverarbeitungs- und ML-Funktionen von Apache Spark mit den Vektordaten-Speicher- und Suchfunktionen von Milvus kombiniert. Diese Integration ermöglicht verschiedene interessante Anwendungen, darunter:</p>
+    </button></h1><p>Der <a href="https://github.com/zilliztech/spark-milvus">Spark-Milvus Connector</a> ermöglicht die Integration von Apache Spark und Databricks mit Milvus und Zilliz Cloud. Er verbindet die leistungsstarken Funktionen von Apache Spark für Big Data-Verarbeitung und maschinelles Lernen (ML) mit den modernen Vektorsuchfunktionen von Milvus. Diese Integration ermöglicht optimierte Arbeitsabläufe für die KI-gestützte Suche, erweiterte Analysen, ML-Training und die effiziente Verwaltung großer Vektordaten.</p>
+<p>Apache Spark ist eine verteilte Datenverarbeitungsplattform, die für die Verarbeitung großer Datensätze mit Hochgeschwindigkeitsberechnungen entwickelt wurde. In Verbindung mit Milvus oder Zilliz Cloud eröffnet sie neue Möglichkeiten für Anwendungsfälle wie semantische Suche, Empfehlungssysteme und KI-gesteuerte Datenanalyse.</p>
+<p>Zum Beispiel kann Spark große Datensätze im Stapel verarbeiten, um Einbettungen über ML-Modelle zu generieren, und dann den Spark-Milvus-Konnektor verwenden, um diese Einbettungen direkt in Milvus oder Zilliz Cloud zu speichern. Nach der Indizierung können diese Daten schnell durchsucht oder analysiert werden, wodurch eine leistungsstarke Pipeline für KI- und Big-Data-Workflows entsteht.</p>
+<p>Der Spark-Milvus-Konnektor unterstützt Aufgaben wie die iterative und massenhafte Dateneingabe in Milvus, die Synchronisierung von Daten zwischen Systemen und erweiterte Analysen von in Milvus gespeicherten Vektordaten. Dieser Leitfaden führt Sie durch die Schritte zur Konfiguration und effektiven Nutzung des Konnektors für Anwendungsfälle wie:</p>
 <ul>
 <li>Effizientes Laden von Vektordaten in Milvus in großen Stapeln,</li>
 <li>Verschieben von Daten zwischen Milvus und anderen Speichersystemen oder Datenbanken,</li>
-<li>Analyse der Daten in Milvus durch Nutzung der Spark MLlib und anderer KI-Tools.</li>
+<li>Analysieren der Daten in Milvus durch Nutzung von Spark MLlib und anderen KI-Tools.</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">Schnellstart<button data-href="#Quick-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -484,7 +491,7 @@ df.write
 <span class="hljs-comment">// Bulk insert Spark output files into Milvus</span>
 MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span class="hljs-string">&quot;mjson&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Hands-on" class="common-anchor-header">Praktische Anwendung<button data-href="#Hands-on" class="anchor-icon" translate="no">
+<h2 id="Hands-on-Notebook" class="common-anchor-header">Praktisches Notizbuch<button data-href="#Hands-on-Notebook" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -499,7 +506,7 @@ MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span cl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um Ihnen den Einstieg in den Spark-Milvus-Connector zu erleichtern, haben wir ein Notebook vorbereitet, das Sie sowohl durch den Streaming- als auch den Batch-Datenübertragungsprozess mit Milvus und Zilliz Cloud führt.</p>
+    </button></h2><p>Um Ihnen einen schnellen Einstieg in den Spark-Milvus-Connector zu ermöglichen, können Sie das Notebook ausleihen, das Sie durch die Streaming- und Batch-Dateningestion-Beispiele für Spark zu Milvus und Zilliz Cloud führt.</p>
 <ul>
-<li><a href="https://zilliz.com/databricks_zilliz_demos">Spark-Milvus-Konnektor Hands-on</a></li>
+<li><a href="https://zilliz.com/databricks_zilliz_demos">Spark-Milvus-Konnektor: Praktische Anwendung</a></li>
 </ul>

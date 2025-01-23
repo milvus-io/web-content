@@ -31,8 +31,9 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/integrate_with_cohere.md">Milvus와 Cohere를 사용한 질문 답변</a></td><td>시맨틱 검색</td><td>밀버스, 코히어</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_hugging-face.md">밀버스와 허깅페이스를 이용한 질문 답변</a></td><td>질문 답변</td><td>밀버스, 허깅페이스</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_pytorch.md">밀버스와 파이토치를 이용한 이미지 검색</a></td><td>시맨틱 검색</td><td>밀버스, 파이토치</td></tr>
-<tr><td><a href="/docs/ko/integrate_with_sentencetransformers.md">Milvus와 SentenceTransfomers를 사용한 동영상 검색</a></td><td>시맨틱 검색</td><td>밀버스, 센텐스 트랜스포머</td></tr>
+<tr><td><a href="/docs/ko/integrate_with_sentencetransformers.md">밀버스와 센텐스 트랜스포머를 사용한 동영상 검색</a></td><td>시맨틱 검색</td><td>밀버스, 센텐스 트랜스포머</td></tr>
 <tr><td><a href="/docs/ko/basic_usage_langchain.md">LangChain에서 Milvus를 벡터 저장소로 사용하기</a></td><td>시맨틱 검색</td><td>밀버스, LangChain</td></tr>
+<tr><td><a href="/docs/ko/full_text_search_with_langchain.md">LangChain과 Milvus로 전체 텍스트 검색 사용하기</a></td><td>전체 텍스트 검색</td><td>밀버스, LangChain</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_haystack.md">밀버스와 헤이스택을 사용한 RAG</a></td><td>RAG</td><td>밀버스, 헤이스택</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_voxel51.md">밀버스 및 피프티원과 함께 비전 검색 수행하기</a></td><td>시맨틱 검색</td><td>밀버스, 피프티원</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_voyageai.md">Milvus와 VoyageAI를 이용한 시맨틱 검색</a></td><td>시맨틱 검색</td><td>Milvus, VoyageAI</td></tr>
@@ -72,7 +73,10 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_cognee.md">Milvus 및 Cognee로 RAG 구축하기</a></td><td>지식 엔지니어링</td><td>Milvus, Cognee</td></tr>
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_gemini.md">Milvus 및 Gemini를 사용한 RAG 빌드</a></td><td>LLM</td><td>밀버스, 제미니</td></tr>
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_ollama.md">밀버스 및 올라마로 RAG 빌드하기</a></td><td>LLM</td><td>밀버스, 올라마</td></tr>
-<tr><td><a href="/docs/ko/milvus_rag_with_dynamiq.md">다이나믹 및 밀버스 시작하기</a></td><td>오케스트레이션</td><td>Milvus, Dynamiq</td></tr>
+<tr><td><a href="/docs/ko/milvus_rag_with_dynamiq.md">다이나믹과 밀버스 시작하기</a></td><td>오케스트레이션</td><td>Milvus, Dynamiq</td></tr>
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_deepseek.md">Milvus 및 DeepSeek로 RAG 빌드하기</a></td><td>LLM</td><td>Milvus, DeepSeek</td></tr>
+<tr><td><a href="/docs/ko/integrate_with_phidata.md">Milvus와 Phidata 통합</a></td><td>에이전트</td><td>Milvus, Phidata</td></tr>
+<tr><td><a href="/docs/ko/build_RAG_with_milvus_and_crawl4ai.md">Milvus 및 Crawl4AI로 RAG 구축하기</a></td><td>데이터 소스</td><td>Milvus, Crawl4AI</td></tr>
+<tr><td><a href="/docs/ko/build_RAG_with_milvus_and_firecrawl.md">밀버스 및 파이어크롤로 RAG 구축하기</a></td><td>데이터 소스</td><td>밀버스, 파이어크롤</td></tr>
 </tbody>
 </table>

@@ -1,9 +1,11 @@
 ---
 id: kafka-connect-milvus.md
-summary: このクイックスタートガイドでは、オープンソースのkafkaとZilliz Cloudをセットアップしてベクトルデータを取り込む方法を紹介します。
-title: MilvusとWhyHowの統合
+summary: >-
+  Apache KafkaはMilvusおよびZilliz
+  Cloudと統合され、ベクトルデータをストリーミングします。Kafka-Milvusコネクタを使用して、セマンティック検索、レコメンデーションシステム、AI駆動型分析のためのリアルタイムパイプラインを構築する方法をご紹介します。
+title: Apache Kafka®とMilvus/Zilliz Cloudを接続してリアルタイムでベクターデータを取り込む
 ---
-<h1 id="Connect-Kafka-with-Milvus" class="common-anchor-header">Kafkaとmilvusの接続<button data-href="#Connect-Kafka-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="common-anchor-header">Apache Kafka®とMilvus/Zilliz Cloudを接続してリアルタイムでベクターデータを取り込む<button data-href="#Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +20,13 @@ title: MilvusとWhyHowの統合
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このクイックスタートガイドでは、オープンソースのkafkaとZilliz Cloudをセットアップしてベクトルデータを取り込む方法を紹介します。</p>
-<h2 id="Step-1-Download-the-kafka-connect-milvus-plugin" class="common-anchor-header">ステップ1: kafka-connect-milvusプラグインのダウンロード<button data-href="#Step-1-Download-the-kafka-connect-milvus-plugin" class="anchor-icon" translate="no">
+    </button></h1><p>このクイックスタートガイドでは、オープンソースカフカとZilliz Cloudをセットアップしてベクトルデータを取り込む方法を紹介します。</p>
+<p>このチュートリアルでは、Apache Kafka®を使用してベクトルデータをMilvusベクトルデータベースとZilliz Cloud（フルマネージドMilvus）にストリーミングして取り込み、セマンティック検索、レコメンデーションシステム、AIを活用した分析などの高度なリアルタイムアプリケーションを実現する方法を説明します。</p>
+<p>Apache Kafkaは、高スループット、低レイテンシーのパイプライン用に設計された分散イベントストリーミングプラットフォームです。データベース、IoTデバイス、モバイルアプリ、クラウドサービスなどのソースからリアルタイムのデータストリームを収集、保存、処理するために広く使用されている。Kafkaは大量のデータを扱うことができるため、MilvusやZilliz Cloudのようなベクトルデータベースの重要なデータソースとなっている。</p>
+<p>例えば、Kafkaは、ユーザーとのインタラクションやセンサーの測定値などのリアルタイムのデータストリームを、機械学習モデルからのエンベッディングとともにキャプチャし、これらのストリームをMilvusやZilliz Cloudに直接パブリッシュすることができます。いったんベクトル・データベースに格納されると、このデータはインデックス化され、検索され、効率的に分析される。</p>
+<p>KafkaとMilvusおよびZilliz Cloudとの統合は、非構造化データワークフローのための強力なパイプラインを構築するシームレスな方法を提供します。このコネクターは、オープンソースのKafkaデプロイメントと、<a href="https://www.confluent.io/hub/zilliz/kafka-connect-milvus">Confluentや</a> <a href="https://docs.streamnative.io/hub/connector-kafka-connect-milvus-sink-v0.1">StreamNativeの</a>ようなホスト型サービスの両方で動作します。</p>
+<p>このチュートリアルでは、Zilliz Cloudをデモとして使用する：</p>
+<h2 id="Step-1-Download-the-kafka-connect-milvus-plugin" class="common-anchor-header">ステップ1：kafka-connect-milvusプラグインのダウンロード<button data-href="#Step-1-Download-the-kafka-connect-milvus-plugin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,7 +41,7 @@ title: MilvusとWhyHowの統合
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下の手順でkafka-connect-milvusプラグインをダウンロードします。</p>
+    </button></h2><p>以下の手順でkafka-connect-milvusプラグインをダウンロードする。</p>
 <ol>
 <li><a href="https://github.com/zilliztech/kafka-connect-milvus/releases">ここから</a>最新のプラグインZIPファイル<code translate="no">zilliz-kafka-connect-milvus-xxx.zip</code> をダウンロードしてください。</li>
 </ol>
@@ -176,4 +183,4 @@ topics=topic_0
 <li><p>エンティティがZilliz Cloudのコレクションに挿入されているか確認します。挿入に成功した場合のZilliz Cloud上の表示は以下のようになります：</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/insearted_entities.png" width="80%" /></p></li>
 </ol>
-<h3 id="Support" class="common-anchor-header">サポート</h3><p>Kafka Connect Milvus Connectorに関するご質問やサポートが必要な場合は、弊社サポートチームまでお気軽にお問い合わせください：<strong>メール</strong> <a href="mailto:support@zilliz.com">：support@zilliz.com</a></p>
+<h3 id="Support" class="common-anchor-header">サポート</h3><p>Kafka Connect Milvus Connectorに関するご質問やサポートが必要な場合は、コネクタのメンテナまでお気軽にお問い合わせください：<strong>メール</strong> <a href="mailto:support@zilliz.com">：support@zilliz.com</a></p>

@@ -81,15 +81,37 @@ summary: Aprenda a configurar el almacenamiento de mensajes con Milvus Operator.
 <p>Actualmente, sólo puede configurar RocksMQ como almacenamiento de mensajes para Milvus standalone con Milvus Operator.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Ejemplo</h4><p>El siguiente ejemplo configura un servicio RocksMQ.</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
+<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
   name: milvus
 spec:
-  dependencies: {}
+  mode: standalone
+  dependencies:
+    msgStreamType: rocksmq
+    rocksmq:
+      persistence:
+        enabled: <span class="hljs-literal">true</span>
+        pvcDeletion: <span class="hljs-literal">true</span>
+        persistentVolumeClaim:
+          spec:
+            accessModes: [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
+            storageClassName: <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
+            resources:
+              requests:
+                storage: 10Gi  <span class="hljs-comment"># Specify your desired storage size</span>
   components: {}
   config: {}
 <button class="copy-code-btn"></button></code></pre>
+<h5 id="Key-configuration-options" class="common-anchor-header">Opciones clave de configuración:</h5><ul>
+<li><code translate="no">msgStreamType</code>: rocksmq: Establece explícitamente RocksMQ como la cola de mensajes.</li>
+<li><code translate="no">persistence.enabled</code>: Habilita el almacenamiento persistente para los datos de RocksMQ</li>
+<li><code translate="no">persistence.pvcDeletion</code>: Cuando es true, el PVC se borrará cuando se borre la instancia de Milvus</li>
+<li><code translate="no">persistentVolumeClaim.spec</code>: Especificación estándar de PVC de Kubernetes</li>
+<li><code translate="no">accessModes</code>: Típicamente <code translate="no">ReadWriteOnce</code> para almacenamiento en bloque</li>
+<li><code translate="no">storageClassName</code>: Clase de almacenamiento de su clúster</li>
+<li><code translate="no">storage</code>: Tamaño del volumen persistente</li>
+</ul>
 <h2 id="Configure-NATS" class="common-anchor-header">Configurar NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -207,7 +229,7 @@ spec:
   components: {}
   config: {}           
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Internal-Pulsar" class="common-anchor-header">Pulsar interno</h3><p><code translate="no">inCluster</code> indica que cuando se inicia un cluster Milvus, se inicia automáticamente un servicio Pulsar en el cluster.</p>
+<h3 id="Internal-Pulsar" class="common-anchor-header">Pulsar interno</h3><p><code translate="no">inCluster</code> indica que cuando se inicia un clúster Milvus, se inicia automáticamente un servicio Pulsar en el clúster.</p>
 <h4 id="Example" class="common-anchor-header">Ejemplo</h4><p>El siguiente ejemplo configura un servicio Pulsar interno.</p>
 <pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
 kind: Milvus

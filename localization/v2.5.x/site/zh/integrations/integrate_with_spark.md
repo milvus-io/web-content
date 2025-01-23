@@ -1,9 +1,11 @@
 ---
 id: integrate_with_spark.md
-summary: 本页讨论 Spark-Milvus 连接器。
-title: Spark-Milvus 连接器用户指南
+summary: >-
+  Apache Spark 和 Databricks 与 Milvus 和 Zilliz Cloud 集成，将大数据处理与向量搜索相结合。了解如何利用
+  Spark-Milvus 连接器构建人工智能驱动的搜索和分析。
+title: 将 Apache Spark™ 与 Milvus/Zilliz Cloud 用于人工智能流水线
 ---
-<h1 id="Spark-Milvus-Connector-User-Guide" class="common-anchor-header">Spark-Milvus 连接器用户指南<button data-href="#Spark-Milvus-Connector-User-Guide" class="anchor-icon" translate="no">
+<h1 id="Use-Apache-Spark™-with-MilvusZilliz-Cloud-for-AI-Pipelines" class="common-anchor-header">将 Apache Spark™ 与 Milvus/Zilliz Cloud 用于人工智能流水线<button data-href="#Use-Apache-Spark™-with-MilvusZilliz-Cloud-for-AI-Pipelines" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,7 +20,10 @@ title: Spark-Milvus 连接器用户指南
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Spark-Milvus Connector (https://github.com/zilliztech/spark-milvus) 提供 Apache Spark 和 Milvus 之间的无缝集成，将 Apache Spark 的数据处理和 ML 功能与 Milvus 的向量数据存储和搜索功能相结合。这种集成实现了各种有趣的应用，包括</p>
+    </button></h1><p><a href="https://github.com/zilliztech/spark-milvus">Spark-Milvus 连接器</a>提供了 Apache Spark 和 Databricks 与 Milvus 和 Zilliz Cloud 的集成。它将 Apache Spark 强大的大数据处理和机器学习（ML）功能与 Milvus 最先进的向量搜索功能连接起来。这种集成能够简化工作流程，实现人工智能驱动的搜索、高级分析、ML 训练以及大规模向量数据的高效管理。</p>
+<p>Apache Spark 是一个分布式数据处理平台，专为以高速计算处理海量数据集而设计。与 Milvus 或 Zilliz Cloud 搭配使用时，它能为语义搜索、推荐系统和人工智能驱动的数据分析等用例带来新的可能性。</p>
+<p>例如，Spark 可以批量处理大型数据集，通过 ML 模型生成嵌入式数据，然后使用 Spark-Milvus 连接器将这些嵌入式数据直接存储在 Milvus 或 Zilliz Cloud 中。编入索引后，就可以快速搜索或分析这些数据，为人工智能和大数据工作流创建一个强大的管道。</p>
+<p>Spark-Milvus 连接器支持迭代和批量数据摄入 Milvus、系统间数据同步以及对存储在 Milvus 中的向量数据进行高级分析等任务。本指南将指导您完成以下步骤，以便在以下用例中有效配置和使用连接器：</p>
 <ul>
 <li>高效地将向量数据大批量加载到 Milvus 中、</li>
 <li>在 Milvus 和其他存储系统或数据库之间移动数据、</li>
@@ -178,7 +183,7 @@ object Hello <span class="hljs-keyword">extends</span> <span class="hljs-title c
 <li><code translate="no">mjson</code>:用于向 Milvus 批量插入数据的 Milvus JSON 格式。</li>
 </ul>
 <h3 id="milvus" class="common-anchor-header">milvus</h3><p>在<a href="#Quick-start">快速入门</a>中，我们使用<strong>milvus</strong>格式将样本数据写入 Milvus 集群。<strong>milvus</strong>格式是一种新的数据格式，支持将 Spark DataFrame 数据无缝写入 Milvus Collections。这是通过批量调用 Milvus SDK 的插入 API 实现的。如果某个 Collection 在 Milvus 中不存在，就会根据 Dataframe 的 Schema 创建一个新的 Collection。不过，自动创建的 Collection 可能不支持 Collection Schema 的所有功能。因此，建议先通过 SDK 创建一个 Collection，然后再使用 Spark-milvus 进行编写。有关详细信息，请参阅<a href="https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/InsertDemo.scala">演示</a>。</p>
-<h3 id="milvusbinlog" class="common-anchor-header">milvusbinlog</h3><p>新数据格式<strong>milvusbinlog</strong>用于读取 Milvus 内置的 binlog 数据。Binlog 是 Milvus 基于 parquet 的内部数据存储格式。除非你熟悉 Milvus 内部存储的细节，否则不建议直接使用<strong>milvusbinlog</strong>。我们建议使用下一节将介绍的<a href="#MilvusUtils">MilvusUtils</a>函数。</p>
+<h3 id="milvusbinlog" class="common-anchor-header">milvusbinlog</h3><p>新数据格式<strong>milvusbinlog</strong>用于读取 Milvus 内置的 binlog 数据。Binlog 是 Milvus 基于 parquet 的内部数据存储格式。不幸的是，普通的 parquet 库无法读取它，所以我们实现了这种新的数据格式，以帮助 Spark 作业读取它。 除非你熟悉 Milvus 内部存储的细节，否则不建议直接使用<strong>milvusbinlog</strong>。我们建议使用下一节将介绍的<a href="#MilvusUtils">MilvusUtils</a>函数。</p>
 <pre><code translate="no" class="language-scalar">val df = spark.read
   .<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;milvusbinlog&quot;</span>)
   .load(path)
@@ -225,7 +230,7 @@ object Hello <span class="hljs-keyword">extends</span> <span class="hljs-title c
 <h3 id="MilvusUtilsreadMilvusCollection" class="common-anchor-header">MilvusUtils.readMilvusCollection</h3><p><strong>MilvusUtils.readMilvusCollection</strong>是一个简单的接口，用于将整个 Milvus Collections 加载到 Spark 数据帧中。它封装了各种操作符，包括调用 Milvus SDK、读取<strong>milvusbinlog</strong>和常见的联合/连接操作。</p>
 <pre><code translate="no" class="language-scala"><span class="hljs-type">val</span> <span class="hljs-variable">collectionDF</span> <span class="hljs-operator">=</span> MilvusUtils.readMilvusCollection(spark, milvusOptions)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="MilvusUtilsbulkInsertFromSpark" class="common-anchor-header">MilvusUtils.bulkInsertFromSpark</h3><p><strong>MilvusUtils.bulkInsertFromSpark</strong>提供了将 Spark 输出文件大批量导入 Milvus 的便捷方法。它封装了 Milvus SDK 的<strong>Bullkinsert</strong>API。</p>
+<h3 id="MilvusUtilsbulkInsertFromSpark" class="common-anchor-header">MilvusUtils.bulkInsertFromSpark</h3><p><strong>MilvusUtils.bulkInsertFromSpark</strong>提供了一种将 Spark 输出文件大批量导入 Milvus 的便捷方法。它封装了 Milvus SDK 的<strong>Bullkinsert</strong>API。</p>
 <pre><code translate="no" class="language-scala">df.write.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;parquet&quot;</span>).save(outputPath)
 MilvusUtils.bulkInsertFromSpark(spark, milvusOptions, outputPath, <span class="hljs-string">&quot;parquet&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -244,7 +249,7 @@ MilvusUtils.bulkInsertFromSpark(spark, milvusOptions, outputPath, <span class="h
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本节中，您将看到 Spark-Milvus 连接器用于数据分析和迁移的高级使用示例。更多演示，请参阅<a href="https://github.com/zilliztech/spark-milvus/tree/main/examples/src/main/scala">示例</a>。</p>
+    </button></h2><p>在本节中，您将找到 Spark-Milvus 连接器用于数据分析和迁移的高级使用示例。更多演示，请参阅<a href="https://github.com/zilliztech/spark-milvus/tree/main/examples/src/main/scala">示例</a>。</p>
 <h3 id="MySQL---embedding---Milvus" class="common-anchor-header">MySQL -&gt; Embeddings -&gt; Milvus</h3><p>在本演示中，我们将</p>
 <ol>
 <li>通过 Spark-MySQL 连接器从 MySQL 读取数据、</li>
@@ -445,7 +450,7 @@ object TransformDemo <span class="hljs-keyword">extends</span> <span class="hljs
   MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span class="hljs-string">&quot;parquet&quot;</span>)
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Databricks---Zilliz-Cloud" class="common-anchor-header">Databricks -&gt; Zilliz Cloud</h3><p>如果您使用的是 Zilliz Cloud（Milvus 托管服务），您可以利用其便捷的数据导入 API。Zilliz Cloud 提供全面的工具和文档，帮助您高效地从 Spark 和 Databricks 等各种数据源移动数据。只需设置一个 S3 桶作为中介，并开放其对 Zilliz Cloud 账户的访问。Zilliz Cloud 的数据导入 API 会自动将 S3 存储桶中的整批数据加载到您的 Zilliz Cloud 集群。</p>
+<h3 id="Databricks---Zilliz-Cloud" class="common-anchor-header">Databricks -&gt; Zilliz Cloud</h3><p>如果您使用的是 Zilliz Cloud（Milvus 托管服务），您可以利用其便捷的数据导入 API。Zilliz Cloud 提供全面的工具和文档，帮助您高效地从 Spark 和 Databricks 等各种数据源移动数据。只需设置一个 S3 桶作为中介，并开放其对 Zilliz Cloud 账户的访问。Zilliz Cloud 的数据导入 API 会自动将 S3 桶中的整批数据加载到您的 Zilliz Cloud 集群。</p>
 <p><strong>准备工作</strong></p>
 <ol>
 <li><p>通过向 Databricks 集群添加 jar 文件来加载 Spark 运行时。</p>
@@ -484,7 +489,7 @@ df.write
 <span class="hljs-comment">// Bulk insert Spark output files into Milvus</span>
 MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span class="hljs-string">&quot;mjson&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Hands-on" class="common-anchor-header">实际操作<button data-href="#Hands-on" class="anchor-icon" translate="no">
+<h2 id="Hands-on-Notebook" class="common-anchor-header">实践笔记本<button data-href="#Hands-on-Notebook" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -499,7 +504,7 @@ MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span cl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>为了帮助您快速上手 Spark-Milvus Connector，我们准备了一本笔记本，指导您使用 Milvus 和 Zilliz Cloud 完成流式和批量数据传输过程。</p>
+    </button></h2><p>为了帮助您快速上手 Spark-Milvus Connector，您可以查看笔记本，其中有指导您完成 Spark 到 Milvus 和 Zilliz Cloud 的流式和批量数据摄取示例。</p>
 <ul>
-<li><a href="https://zilliz.com/databricks_zilliz_demos">Spark-Milvus 连接器实际操作</a></li>
+<li><a href="https://zilliz.com/databricks_zilliz_demos">Spark-Milvus 连接器实践</a></li>
 </ul>

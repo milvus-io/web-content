@@ -22,7 +22,7 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
     </button></h1><p>O Milvus usa RocksMQ, Pulsar ou Kafka para gerenciar logs de alterações recentes, gerar logs de fluxo e fornecer assinaturas de log. Este tópico apresenta como configurar as dependências de armazenamento de mensagens quando você instala o Milvus com o Milvus Operator. Para obter mais detalhes, consulte <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">Configurar o armazenamento de mensagens com o Milvus Operator</a> no repositório do Milvus Operator.</p>
 <p>Este tópico pressupõe que você tenha implantado o Milvus Operator.</p>
 <div class="alert note">Consulte <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Implantar o Milvus Operator</a> para obter mais informações. </div>
-<p>É necessário especificar um ficheiro de configuração para utilizar o Milvus Operator para iniciar um cluster Milvus.</p>
+<p>É necessário especificar um arquivo de configuração para usar o Milvus Operator para iniciar um cluster do Milvus.</p>
 <pre><code translate="no" class="language-YAML">kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Só é necessário editar o modelo de código em <code translate="no">milvus_cluster_default.yaml</code> para configurar dependências de terceiros. As secções seguintes apresentam como configurar o armazenamento de objectos, etcd, e Pulsar respetivamente.</p>
@@ -81,16 +81,38 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 <p>Atualmente, só é possível configurar o RocksMQ como o armazenamento de mensagens para o Milvus standalone com o Milvus Operator.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Exemplo de configuração</h4><p>O exemplo a seguir configura um serviço RocksMQ.</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
+<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
   name: milvus
 spec:
-  dependencies: {}
+  mode: standalone
+  dependencies:
+    msgStreamType: rocksmq
+    rocksmq:
+      persistence:
+        enabled: <span class="hljs-literal">true</span>
+        pvcDeletion: <span class="hljs-literal">true</span>
+        persistentVolumeClaim:
+          spec:
+            accessModes: [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
+            storageClassName: <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
+            resources:
+              requests:
+                storage: 10Gi  <span class="hljs-comment"># Specify your desired storage size</span>
   components: {}
   config: {}
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configure-NATS" class="common-anchor-header">Configurar NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
+<h5 id="Key-configuration-options" class="common-anchor-header">Principais opções de configuração:</h5><ul>
+<li><code translate="no">msgStreamType</code>: rocksmq: Define explicitamente o RocksMQ como a fila de mensagens</li>
+<li><code translate="no">persistence.enabled</code>: Habilita o armazenamento persistente para os dados do RocksMQ</li>
+<li><code translate="no">persistence.pvcDeletion</code>: Quando verdadeiro, o PVC será apagado quando a instância do Milvus for apagada</li>
+<li><code translate="no">persistentVolumeClaim.spec</code>: Especificação padrão do PVC do Kubernetes</li>
+<li><code translate="no">accessModes</code>: Normalmente <code translate="no">ReadWriteOnce</code> para armazenamento em bloco</li>
+<li><code translate="no">storageClassName</code>: A classe de armazenamento do seu cluster</li>
+<li><code translate="no">storage</code>: Tamanho do volume persistente</li>
+</ul>
+<h2 id="Configure-NATS" class="common-anchor-header">Configurar o NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,7 +128,7 @@ spec:
         ></path>
       </svg>
     </button></h2><p>O NATS é um armazenamento de mensagens alternativo para o NATS.</p>
-<h4 id="Example" class="common-anchor-header">Exemplo</h4><p>O exemplo a seguir configura um serviço NATS.</p>
+<h4 id="Example" class="common-anchor-header">Exemplo de configuração</h4><p>O exemplo a seguir configura um serviço NATS.</p>
 <pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
 kind: Milvus
 metadata:

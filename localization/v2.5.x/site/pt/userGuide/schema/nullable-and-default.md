@@ -5,7 +5,7 @@ related_key: 'nullable, default'
 summary: >-
   O Milvus permite-lhe definir o atributo `nullable` e os valores por defeito
   para os campos escalares, exceto o campo primário. Para os campos marcados
-  como nullable=True, pode ignorar o campo quando insere dados, ou defini-lo
+  como nullable=True, pode ignorar o campo ao inserir dados, ou defini-lo
   diretamente como um valor nulo, e o sistema tratá-lo-á como nulo sem causar um
   erro.
 ---
@@ -24,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O Milvus permite-lhe definir o atributo <code translate="no">nullable</code> e os valores por defeito para os campos escalares, exceto o campo primário. Para os campos marcados como <code translate="no">nullable=True</code>, pode ignorar o campo ao inserir dados ou defini-lo diretamente como um valor nulo, e o sistema tratá-lo-á como nulo sem causar um erro. Quando um campo tem um valor por defeito, o sistema aplica automaticamente esse valor se não forem especificados dados para o campo durante a inserção.</p>
-<p>Os atributos default value e nullable simplificam a migração de dados de outros sistemas de base de dados para o Milvus, permitindo o tratamento de conjuntos de dados com valores nulos e preservando as definições de valores default. Ao criar uma coleção, pode também ativar a opção nullable ou definir valores por defeito para campos onde os valores podem ser incertos.</p>
+    </button></h1><p>O Milvus permite-lhe definir o atributo <code translate="no">nullable</code> e os valores por defeito para os campos escalares, exceto para o campo primário. Para os campos marcados como <code translate="no">nullable=True</code>, pode ignorar o campo ao inserir dados ou defini-lo diretamente como um valor nulo, e o sistema tratá-lo-á como nulo sem causar um erro. Quando um campo tem um valor por defeito, o sistema aplica automaticamente esse valor se não forem especificados dados para o campo durante a inserção.</p>
+<p>Os atributos de valor por defeito e nullable simplificam a migração de dados de outros sistemas de base de dados para o Milvus, permitindo o tratamento de conjuntos de dados com valores nulos e preservando as definições de valor por defeito. Ao criar uma coleção, pode também ativar a opção nullable ou definir valores por defeito para campos onde os valores podem ser incertos.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -405,17 +405,17 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Para consultar entidades com valores <code translate="no">null</code>, utilize uma expressão vazia <code translate="no">&quot;&quot;</code>.</p>
+<p>Para retornar entidades com valores nulos, consulte sem qualquer condição de filtragem escalar da seguinte forma:</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">null_results = client.query(​
     collection_name=<span class="hljs-string">&quot;user_profiles_null&quot;</span>,​
-    filter=<span class="hljs-string">&quot;&quot;</span>,​
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,​ <span class="hljs-comment"># Query without any filtering condition</span>
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]​
 )​
 ​
-# Example output:​
-# [{<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;age&quot;</span>: None}, {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;age&quot;</span>: None}]​
+<span class="hljs-comment"># Example output:​</span>
+<span class="hljs-comment"># [{&quot;id&quot;: 2, &quot;age&quot;: None}, {&quot;id&quot;: 3, &quot;age&quot;: None}]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">QueryResp resp = client.query(QueryReq.builder()​
@@ -463,7 +463,7 @@ System.out.println(resp.getQueryResults());​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os valores por defeito são valores predefinidos atribuídos a campos escalares. Se não fornecer um valor para um campo com uma predefinição durante a inserção, o sistema utiliza automaticamente o valor predefinido.</p>
+    </button></h2><p>Os valores por defeito são valores predefinidos atribuídos a campos escalares. Se não for fornecido um valor para um campo com uma predefinição durante a inserção, o sistema utiliza automaticamente o valor predefinido.</p>
 <h3 id="Set-default-values" class="common-anchor-header">Definir valores por defeito</h3><p>Ao criar uma coleção, utilize o parâmetro <code translate="no">default_value</code> para definir o valor predefinido para um campo. O exemplo seguinte mostra como definir o valor predefinido de <code translate="no">age</code> para <code translate="no">18</code> e de <code translate="no">status</code> para <code translate="no">&quot;active&quot;</code>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -866,7 +866,7 @@ curl --request POST \​
     </button></h2><p>A tabela seguinte resume o comportamento das colunas anuláveis e dos valores por defeito em diferentes combinações de configuração. Essas regras determinam como o Milvus trata os dados ao tentar inserir valores nulos ou se os valores de campo não são fornecidos.</p>
 <table>
 <thead>
-<tr><th>Nulável</th><th>Valor por defeito</th><th>Tipo de valor por defeito</th><th>Entrada do utilizador</th><th>Resultado</th><th>Exemplo</th></tr>
+<tr><th>Nulável</th><th>Valor por defeito</th><th>Tipo de valor predefinido</th><th>Entrada do utilizador</th><th>Resultado</th><th>Exemplo</th></tr>
 </thead>
 <tbody>
 <tr><td>✅</td><td>✅</td><td>Não-nulo</td><td>Nenhum/nulo</td><td>Utiliza o valor por defeito</td><td><ul><li>Campo: <code translate="no">age</code></li><li>Valor por defeito: <code translate="no">18</code></li><li>Entrada do utilizador: nulo</li><li>Resultado: armazenado como <code translate="no">18</code></li></ul></td></tr>

@@ -1,6 +1,6 @@
 ---
 id: integrate_with_cohere.md
-summary: 本页将介绍如何使用 Milvus 作为向量数据库、Hugging Face 作为嵌入系统来搜索问题的最佳答案。
+summary: 本页说明了如何使用 Milvus 作为向量数据库和 Cohere 作为嵌入系统，创建基于 SQuAD 数据集的问题解答系统。
 title: 使用 Milvus 和 Cohere 进行问题解答
 ---
 <h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">使用 Milvus 和 Cohere 进行问题解答<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">
@@ -170,7 +170,7 @@ collection.load()
 <li>嵌入原始问题，以及</li>
 <li>将数据插入我们刚刚在 Milvus 上创建的 Collections。</li>
 </ul>
-<p>在这个例子中，数据包括原始问题、原始问题的 Embeddings 和原始问题的答案。</p>
+<p>在本例中，数据包括原始问题、原始问题的 Embeddings 和原始问题的答案。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up a co:here client.</span>
 cohere_client = cohere.Client(COHERE_API_KEY)
 
@@ -214,7 +214,7 @@ time.sleep(<span class="hljs-number">10</span>)
       </svg>
     </button></h2><p>将所有数据插入 Milvus Collections 后，我们就可以向系统提问了，方法是将我们的问题短语用 Cohere 嵌入，然后用 Collections 进行搜索。</p>
 <div class="alert note">
-<p>刚插入数据时的搜索速度可能会稍慢一些，因为搜索未编入索引的数据是以暴力方式进行的。一旦新数据被自动索引，搜索速度就会加快。</p>
+<p>刚插入数据时的搜索速度可能会稍慢一些，因为搜索未编入索引的数据是以暴力方式进行的。一旦新数据被自动编入索引，搜索速度就会加快。</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search the cluster for an answer to a question text</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">search</span>(<span class="hljs-params">text, top_k = <span class="hljs-number">5</span></span>):

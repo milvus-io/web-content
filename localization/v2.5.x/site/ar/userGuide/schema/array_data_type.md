@@ -66,7 +66,7 @@ schema = client.create_schema(​
 )​
 ​
 <span class="hljs-comment"># Add an Array field with elements of type VARCHAR​</span>
-schema.add_field(field_name=<span class="hljs-string">&quot;tags&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.VARCHAR, max_capacity=<span class="hljs-number">10</span>)​
+schema.add_field(field_name=<span class="hljs-string">&quot;tags&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.VARCHAR, max_capacity=<span class="hljs-number">10</span>, max_length=<span class="hljs-number">65535</span>)​
 <span class="hljs-comment"># Add an Array field with elements of type INT64​</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;ratings&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.INT64, max_capacity=<span class="hljs-number">5</span>)​
 ​
@@ -102,6 +102,7 @@ schema.addField(AddFieldReq.builder()​
         .dataType(DataType.Array)​
         .elementType(DataType.Int64)​
         .maxCapacity(<span class="hljs-number">5</span>)​
+        .maxLength(<span class="hljs-number">65535</span>)
         .build());​
 ​
 schema.addField(AddFieldReq.builder()​
@@ -151,7 +152,7 @@ schema.addField(AddFieldReq.builder()​
     &quot;elementDataType&quot;: &quot;VarChar&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;max_capacity&quot;: 10,​
-        &quot;max_length&quot;: 100​
+        &quot;max_length&quot;: 65535​
     }​
 }&#x27;</span>​
 ​
@@ -257,7 +258,7 @@ indexes.add(IndexParam.builder()​
 <p>بالإضافة إلى <code translate="no">AUTOINDEX</code> ، يمكنك تحديد أنواع الفهارس العددية الأخرى مثل <code translate="no">INVERTED</code> أو <code translate="no">BITMAP</code>. لمعرفة أنواع الفهارس المدعومة، راجع <a href="/docs/ar/index-scalar-fields.md">الفهارس العددية</a>.</p>
 <p>علاوة على ذلك، يجب عليك إنشاء فهرس للحقل المتجه قبل إنشاء المجموعة. في هذا المثال، نستخدم في هذا المثال <code translate="no">AUTOINDEX</code> لتبسيط إعداد الفهرس المتجه.</p>
 <div class="multipleCode">
- <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
+ <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#go">الذهاب</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add vector index​</span>
 index_params.add_index(​
     field_name=<span class="hljs-string">&quot;embedding&quot;</span>,​
@@ -484,7 +485,7 @@ client.<span class="hljs-title function_">insert</span>({​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تعمل حقول المصفوفات على تمكين التصفية العددية أثناء عمليات البحث، مما يعزز قدرات البحث المتجهية في ميلفوس. يمكنك الاستعلام بناءً على خصائص حقول المصفوفات إلى جانب عمليات البحث عن التشابه المتجه.</p>
+    </button></h2><p>تعمل حقول المصفوفات على تمكين التصفية القياسية أثناء عمليات البحث، مما يعزز قدرات البحث المتجهية في ميلفوس. يمكنك الاستعلام بناءً على خصائص حقول المصفوفات إلى جانب عمليات البحث عن التشابه المتجه.</p>
 <h3 id="Filter-queries​" class="common-anchor-header">تصفية الاستعلامات</h3><p>يمكنك تصفية البيانات استنادًا إلى خصائص حقول المصفوفة، مثل الوصول إلى عنصر معين أو التحقق مما إذا كان عنصر المصفوفة يفي بشرط معين.</p>
 <div class="multipleCode">
  <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -539,7 +540,7 @@ System.out.println(resp.getQueryResults());​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>في هذا الاستعلام، يقوم Milvus بتصفية الكيانات التي يكون فيها العنصر الأول من المصفوفة <code translate="no">ratings</code> أقل من 4، مع إرجاع الكيانات التي تطابق الشرط.</p>
-<h3 id="Vector-search-with-Array-filtering​" class="common-anchor-header">البحث المتجه مع تصفية المصفوفة</h3><p>من خلال الجمع بين تشابه المتجهات مع تصفية المصفوفات، يمكنك التأكد من أن البيانات المسترجعة ليست متشابهة في الدلالات فحسب، بل تفي أيضًا بشروط محددة، مما يجعل نتائج البحث أكثر دقة وتوافقًا مع احتياجات العمل.</p>
+<h3 id="Vector-search-with-Array-filtering​" class="common-anchor-header">البحث المتجه مع تصفية المصفوفة</h3><p>من خلال الجمع بين تشابه المتجهات مع تصفية المصفوفة، يمكنك التأكد من أن البيانات المسترجعة ليست متشابهة في الدلالات فحسب، بل تفي أيضًا بشروط محددة، مما يجعل نتائج البحث أكثر دقة وتتماشى مع احتياجات العمل.</p>
 <div class="multipleCode">
  <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>​

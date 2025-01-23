@@ -2,10 +2,10 @@
 id: install_cluster-milvusoperator.md
 label: Milvus Operator
 related_key: Kubernetes
-summary: Milvus Operatorを使用してKubernetesにMilvusクラスタをインストールする方法について説明します。
-title: Milvus OperatorでMilvusクラスタをインストールする
+summary: Milvus Operatorを使用してKubernetes上にMilvusクラスタをインストールする方法について説明します。
+title: Milvus Operatorを使用してMilvusクラスタをインストールします。
 ---
-<h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Milvus Operatorを使用してKubernetesでMilvusを実行する<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Milvus Operatorを使ってKubernetesでMilvusを起動する<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,7 +61,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <span class="hljs-title function_">standard</span> <span class="hljs-params">(<span class="hljs-keyword">default</span>)</span>    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>インストール前に<a href="/docs/ja/prerequisite-helm.md">ハードウェアとソフトウェアの要件を</a>確認します。</p></li>
-<li><p>Milvusをインストールする前に、<a href="https://milvus.io/tools/sizing">Milvus Sizing Toolを</a>使用して、データサイズに基づいてハードウェア要件を見積もることを推奨します。これにより、Milvusのインストールに最適なパフォーマンスとリソースの割り当てを確保することができます。</p></li>
+<li><p>Milvusをインストールする前に、<a href="https://milvus.io/tools/sizing">Milvus Sizing Toolを</a>使用して、データサイズに基づいてハードウェア要件を見積もることをお勧めします。これにより、Milvusのインストールに最適なパフォーマンスとリソースを確保することができます。</p></li>
 </ul>
 <div class="alert note">
 <p>イメージのプル時に問題が発生した場合は、<a href="mailto:community@zilliz.com">community@zilliz.com</a>まで問題の詳細をご連絡ください。</p>
@@ -81,53 +81,17 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operatorは<a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Kubernetes Custom Resourcesの</a>上にMilvusクラスタのカスタムリソースを定義します。カスタムリソースが定義されると、宣言的な方法でK8s APIを使用し、Milvusデプロイメントスタックを管理して、スケーラビリティと高可用性を確保することができます。</p>
-<h3 id="1-Install-cert-manager" class="common-anchor-header">1.cert-manager のインストール</h3><p>Milvus Operatorは、<a href="https://cert-manager.io/docs/installation/supported-releases/">cert-managerを</a>使用してWebhookサーバー用の証明書を提供します。</p>
-<div class="alert note">
-<ul>
-<li><a href="/docs/ja/install_cluster-helm.md">Helm を使用して Milvus Operator をデプロイ</a>する場合は、この手順を省略できます。</li>
-<li>Milvus Operator には cert-manager 1.1.3 以上が必要です。</li>
-</ul>
-</div>
-<p>次のコマンドを実行して cert-manager をインストールします。</p>
-<pre><code translate="no" class="language-shell">$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.yaml
-<button class="copy-code-btn"></button></code></pre>
-<p>インストールプロセスが終了すると、次のような出力が表示されます。</p>
-<pre><code translate="no" class="language-shell">customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/challenges.acme.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/clusterissuers.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/issuers.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io created
-namespace/cert-manager created
-serviceaccount/cert-manager-cainjector created
-...
-service/cert-manager created
-service/cert-manager-webhook created
-deployment.apps/cert-manager-cainjector created
-deployment.apps/cert-manager created
-deployment.apps/cert-manager-webhook created
-mutatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook created
-validatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook created
-<button class="copy-code-btn"></button></code></pre>
-<p>cert-managerポッドが実行されているかどうかは、以下のようにして確認できます：</p>
-<pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> pods -n cert-manager
-
-NAME                                      READY   STATUS    RESTARTS   AGE
-cert-manager<span class="hljs-number">-848f</span>547974-gccz8             <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
-cert-manager-cainjector<span class="hljs-number">-54f</span>4cc6b5-dpj84   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
-cert-manager-webhook<span class="hljs-number">-7</span>c9588c76-tqncn      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Install-Milvus-Operator" class="common-anchor-header">2.Milvus Operator のインストール</h3><p>以下のいずれかの方法でMilvus Operatorをインストールすることができます：</p>
+    </button></h2><p>Milvus Operatorは<a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Kubernetes Custom Resourcesの</a>上にMilvusクラスタのカスタムリソースを定義します。カスタムリソースが定義されると、宣言的な方法でK8s APIを使用し、Milvusデプロイメントスタックを管理してスケーラビリティと高可用性を確保することができます。</p>
+<p>Milvus Operatorは以下のいずれかの方法でインストールできます：</p>
 <ul>
 <li><a href="#Install-with-Helm">Helmを使用する</a></li>
 <li><a href="#Install-with-kubectl">kubectlを使用する</a></li>
 </ul>
-<h4 id="Install-with-Helm" class="common-anchor-header">Helmによるインストール</h4><p>以下のコマンドを実行して、HelmでMilvus Operatorをインストールします。</p>
+<h3 id="Install-with-Helm" class="common-anchor-header">Helmを使用したインストール</h3><p>以下のコマンドを実行して、HelmでMilvus Operatorをインストールします。</p>
 <pre><code translate="no" class="language-shell">$ helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.0.1/milvus-operator-1.0.1.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.1.9/milvus-operator-1.1.9.tgz
 <button class="copy-code-btn"></button></code></pre>
 <p>インストールプロセスが終了すると、以下のような出力が表示されます。</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
@@ -144,7 +108,7 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 </span><button class="copy-code-btn"></button></code></pre>
-<h4 id="Install-with-kubectl" class="common-anchor-header">kubectlによるインストール</h4><p>以下のコマンドを実行して、Milvus Operator を<code translate="no">kubectl</code> でインストールします。</p>
+<h3 id="Install-with-kubectl" class="common-anchor-header">kubectlによるインストール</h3><p>以下のコマンドを実行して、Milvus Operatorを<code translate="no">kubectl</code> でインストールします。</p>
 <pre><code translate="no" class="language-shell">$ kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>インストールプロセスが終了すると、以下のような出力が表示されます。</p>
@@ -162,18 +126,14 @@ configmap/milvus-operator-manager-config created
 service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
-certificate.cert-manager.io/milvus-operator-serving-cert created
-issuer.cert-manager.io/milvus-operator-selfsigned-issuer created
-mutatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-mutating-webhook-configuration created
-validatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-validating-webhook-configuration created
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus OperatorのPodが起動しているかどうかは、以下のようにして確認できます：</p>
+<p>Milvus OperatorのPodが起動しているかどうかは以下のように確認できます：</p>
 <pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> pods -n milvus-<span class="hljs-keyword">operator</span>
 
 NAME                               READY   STATUS    RESTARTS   AGE
 milvus-<span class="hljs-keyword">operator</span><span class="hljs-number">-5f</span>d77b87dc-msrk4   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">46</span>s
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Deploy-Milvus" class="common-anchor-header">Milvusのデプロイ<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
+<h2 id="Deploy-Milvus" class="common-anchor-header">Milvusをデプロイする。<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -188,10 +148,10 @@ milvus-<span class="hljs-keyword">operator</span><span class="hljs-number">-5f</
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1.Milvusクラスタのデプロイ</h3><p>Milvus Operatorポッドが実行されたら、次のようにMilvusクラスタをデプロイできます。</p>
+    </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1.Milvusクラスタのデプロイ</h3><p>Milvus Operatorポッドが起動したら、次のようにMilvusクラスタをデプロイできます。</p>
 <pre><code translate="no" class="language-shell">$ kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコマンドは、デフォルトの設定を使用して、コンポーネントと依存関係を別々のポッドに持つMilvusクラスタをデプロイします。これらの設定をカスタマイズするには、<a href="https://milvus.io/tools/sizing">Milvus Sizing Toolを</a>使用して実際のデータサイズに基づいて設定を調整し、対応するYAMLファイルをダウンロードすることをお勧めします。設定パラメータの詳細については、<a href="https://milvus.io/docs/system_configuration.md">Milvus System Configurations Checklistを</a>参照してください。</p>
+<p>上記のコマンドは、デフォルトの設定を使用して、コンポーネントと依存関係を別々のポッドに入れたMilvusクラスタをデプロイします。これらの設定をカスタマイズするには、<a href="https://milvus.io/tools/sizing">Milvus Sizing Toolを</a>使用して実際のデータサイズに基づいて設定を調整し、対応するYAMLファイルをダウンロードすることをお勧めします。設定パラメータの詳細については、<a href="https://milvus.io/docs/system_configuration.md">Milvusシステム設定チェック</a>リストを参照してください。</p>
 <div class="alert note">
 <ul>
 <li>リリース名にはアルファベット、数字、ダッシュのみを使用してください。リリース名にはドットは使用できません。</li>
@@ -268,7 +228,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <button class="copy-code-btn"></button></code></pre>
 <p>出力は、Milvusインスタンスがデフォルトのポート<strong>19530で</strong>サービスを提供していることを示しています。</p>
 <div class="alert note">
-<p>スタンドアロンモードでMilvusをデプロイしている場合、ポッド名を<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> から<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> に変更します。</p>
+<p>Milvusをスタンドアロンモードでデプロイしている場合、ポッド名を<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> から<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> に変更します。</p>
 </div>
 <p>次に、以下のコマンドを実行して、ローカルポートをMilvusがサービスを提供するポートに転送します。</p>
 <pre><code translate="no" class="language-shell">$ kubectl port-forward service/my-release-milvus <span class="hljs-number">27017</span>:<span class="hljs-number">19530</span>
@@ -294,12 +254,12 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のコマンドを実行してMilvusクラスタをアンインストールします。</p>
+    </button></h2><p>以下のコマンドを実行して、Milvusクラスタをアンインストールします。</p>
 <pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">delete</span> milvus my-release
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>デフォルトの設定を使用してMilvusクラスタを削除すると、etcd、Pulsar、MinIOなどの依存関係は削除されません。そのため、次回同じMilvusクラスタインスタンスをインストールすると、これらの依存関係が再び使用されます。</li>
+<li>デフォルトの設定を使用してMilvusクラスタを削除した場合、etcd、Pulsar、MinIOなどの依存関係は削除されません。そのため、次回同じMilvusクラスタインスタンスをインストールすると、これらの依存関係が再び使用されます。</li>
 <li>Milvusクラスタとともに依存関係およびプライベート仮想クラウド(PVC)を削除するには、<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">設定ファイルを</a>参照してください。</li>
 </ul>
 </div>
@@ -325,7 +285,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 </ul>
 <h4 id="Uninstall-with-Helm" class="common-anchor-header">Helmによるアンインストール</h4><pre><code translate="no" class="language-shell">$ helm -n milvus-<span class="hljs-keyword">operator</span> uninstall milvus-<span class="hljs-keyword">operator</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Uninstall-with-kubectl" class="common-anchor-header">kubectlでアンインストール</h4><pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">delete</span> -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/v1.0.1/deploy/manifests/deployment.yaml</span>
+<h4 id="Uninstall-with-kubectl" class="common-anchor-header">kubectlでアンインストール</h4><pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">delete</span> -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/v1.1.9/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -355,15 +315,15 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
 <li><p><a href="/docs/ja/upgrade_milvus_cluster-helm.md">Helm Chartを使用したMilvusのアップグレード</a>。</p></li>
-<li><p><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></p></li>
+<li><p><a href="/docs/ja/scaleout.md">Milvusクラスタをスケールする</a>。</p></li>
 <li><p>Milvuクラスタをクラウドにデプロイする：</p>
 <ul>
 <li><a href="/docs/ja/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ja/gcp.md">Googleクラウド</a></li>
 <li><a href="/docs/ja/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p><a href="/docs/ja/milvus_backup_overview.md">Milvusの</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>紹介します。</p></li>
-<li><p>オープンソースのMilvusデバッグツールである<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherの</a>ご紹介。</p></li>
+<li><p><a href="/docs/ja/milvus_backup_overview.md">Milvusの</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
+<li><p>Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherの</a>ご紹介。</p></li>
 <li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://milvus.io/docs/attu.md">Attuを</a>ご覧ください。</p></li>
-<li><p><a href="/docs/ja/monitor.md">PrometheusによるMilvusの監視</a></p></li>
+<li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

@@ -33,7 +33,8 @@ title: 整合概述
 <tr><td><a href="/docs/zh-hant/integrate_with_pytorch.md">使用 Milvus 和 Pytorch 進行圖像搜尋</a></td><td>語意搜尋</td><td>詞彙搜尋</td></tr>
 <tr><td><a href="/docs/zh-hant/integrate_with_sentencetransformers.md">使用 Milvus 和 SentenceTransfromers 進行電影搜尋</a></td><td>語意搜尋</td><td>Milvus、SentenceTransformers</td></tr>
 <tr><td><a href="/docs/zh-hant/basic_usage_langchain.md">在LangChain中使用Milvus作為向量庫</a></td><td>語意搜尋</td><td>Milvus、LangChain</td></tr>
-<tr><td><a href="/docs/zh-hant/integrate_with_haystack.md">使用 Milvus 和 Haystack 的 RAG</a></td><td>RAG</td><td>Milvus、Haystack</td></tr>
+<tr><td><a href="/docs/zh-hant/full_text_search_with_langchain.md">在LangChain和Milvus中使用全文檢索</a></td><td>全文檢索</td><td>Milvus、LangChain</td></tr>
+<tr><td><a href="/docs/zh-hant/integrate_with_haystack.md">使用 Milvus 和 Haystack 的 RAG</a></td><td>全文檢索</td><td>Milvus、Haystack</td></tr>
 <tr><td><a href="/docs/zh-hant/integrate_with_voxel51.md">使用 Milvus 和 FiftyOne 進行視覺搜尋</a></td><td>語意搜尋</td><td>Milvus、FiftyOne</td></tr>
 <tr><td><a href="/docs/zh-hant/integrate_with_voyageai.md">使用 Milvus 和 VoyageAI 進行語意搜尋</a></td><td>語意搜尋</td><td>Milvus、VoyageAI</td></tr>
 <tr><td><a href="/docs/zh-hant/integrate_with_bentoml.md">使用 Milvus 和 BentoML 的 RAG</a></td><td>RAG</td><td>Milvus、BentoML</td></tr>
@@ -74,5 +75,8 @@ title: 整合概述
 <tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_ollama.md">使用 Milvus 和 Ollama 建立 RAG</a></td><td>LLMs</td><td>Milvus、Ollama</td></tr>
 <tr><td><a href="/docs/zh-hant/milvus_rag_with_dynamiq.md">開始使用 Dynamiq 和 Milvus</a></td><td>協調</td><td>Milvus、Dynamiq</td></tr>
 <tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_deepseek.md">使用 Milvus 和 DeepSeek 建立 RAG</a></td><td>LLMs</td><td>Milvus、DeepSeek</td></tr>
+<tr><td><a href="/docs/zh-hant/integrate_with_phidata.md">整合 Milvus 與 Phidata</a></td><td>代理</td><td>Milvus、Phidata</td></tr>
+<tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_crawl4ai.md">使用 Milvus 和 Crawl4AI 建立 RAG</a></td><td>資料來源</td><td>Milvus、Crawl4AI</td></tr>
+<tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_firecrawl.md">使用 Milvus 和 Firecrawl 建立 RAG</a></td><td>資料來源</td><td>Milvus、Firecrawl</td></tr>
 </tbody>
 </table>

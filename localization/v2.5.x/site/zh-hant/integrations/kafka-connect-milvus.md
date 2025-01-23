@@ -1,9 +1,11 @@
 ---
 id: kafka-connect-milvus.md
-summary: 在這份快速入門指南中，我們將介紹如何設定開放原始碼 kafka 和 Zilliz Cloud 來擷取向量資料。
-title: 整合 Milvus 與 WhyHow
+summary: >-
+  Apache Kafka 與 Milvus 和 Zilliz Cloud 整合以串流向量資料。瞭解如何使用 Kafka-Milvus
+  連結器來建立語意搜尋、推薦系統和 AI 驅動分析的即時管道。
+title: 連接 Apache Kafka® 與 Milvus/Zilliz Cloud 以進行即時向量資料擷取
 ---
-<h1 id="Connect-Kafka-with-Milvus" class="common-anchor-header">用 Milvus 連接 Kafka<button data-href="#Connect-Kafka-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="common-anchor-header">連接 Apache Kafka® 與 Milvus/Zilliz Cloud 以進行即時向量資料擷取<button data-href="#Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,6 +21,11 @@ title: 整合 Milvus 與 WhyHow
         ></path>
       </svg>
     </button></h1><p>在這份快速入門指南中，我們將介紹如何設定開放原始碼 kafka 和 Zilliz Cloud 來擷取向量資料。</p>
+<p>本教學說明如何使用 Apache Kafka® 將向量資料串流並擷取至 Milvus 向量資料庫和 Zilliz Cloud (完全由 Milvus 管理)，以實現先進的即時應用程式，例如語意搜尋、推薦系統和 AI 驅動的分析。</p>
+<p>Apache Kafka 是專為高吞吐量、低延遲管道設計的分散式事件串流平台。它被廣泛用於收集、儲存和處理來自資料庫、物聯網裝置、行動應用程式和雲端服務等來源的即時資料流。Kafka 處理大量資料的能力使其成為 Milvus 或 Zilliz Cloud 等向量資料庫的重要資料來源。</p>
+<p>舉例來說，Kafka 可以擷取即時資料流，例如使用者互動、感測器讀數，以及來自機器學習模型的嵌入資料，並直接將這些資料流發佈到 Milvus 或 Zilliz Cloud。一旦進入向量資料庫，這些資料就能被有效率地索引、搜尋和分析。</p>
+<p>Kafka 與 Milvus 和 Zilliz Cloud 的整合提供了一種無縫的方式，為非結構化資料工作流程建立強大的管道。該連接器既適用於開源 Kafka 部署，也適用於<a href="https://www.confluent.io/hub/zilliz/kafka-connect-milvus">Confluent</a>和<a href="https://docs.streamnative.io/hub/connector-kafka-connect-milvus-sink-v0.1">StreamNative</a> 等託管服務。</p>
+<p>在本教程中，我們使用 Zilliz Cloud 作為示範：</p>
 <h2 id="Step-1-Download-the-kafka-connect-milvus-plugin" class="common-anchor-header">步驟 1：下載 kafka-connect-milvus 外掛程式<button data-href="#Step-1-Download-the-kafka-connect-milvus-plugin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,7 +41,7 @@ title: 整合 Milvus 與 WhyHow
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>完成以下步驟下載 kafka-connect-milvus 外掛程式。</p>
+    </button></h2><p>完成以下步驟下載 kafka-connect-milvus 外掛。</p>
 <ol>
 <li>從<a href="https://github.com/zilliztech/kafka-connect-milvus/releases">這裡</a>下載最新的外掛壓縮檔<code translate="no">zilliz-kafka-connect-milvus-xxx.zip</code> 。</li>
 </ol>
@@ -176,4 +183,4 @@ topics=topic_0
 <li><p>檢查該實體是否已插入到 Zilliz Cloud 的集合中。下面是插入成功後在 Zilliz Cloud 上的樣子：</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/insearted_entities.png" width="80%" /></p></li>
 </ol>
-<h3 id="Support" class="common-anchor-header">支援</h3><p>如果您需要任何協助或對 Kafka Connect Milvus Connector 有任何疑問，請隨時聯絡我們的支援團隊：<strong>電子郵件:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>
+<h3 id="Support" class="common-anchor-header">支援</h3><p>如果您需要任何協助或有任何關於 Kafka Connect Milvus Connector 的問題，請隨時聯繫 Connector 的維護者：<strong>電子郵件:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>

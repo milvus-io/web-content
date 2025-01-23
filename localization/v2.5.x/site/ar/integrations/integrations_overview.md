@@ -35,8 +35,9 @@ title: نظرة عامة على عمليات التكامل
 <tr><td><a href="/docs/ar/integrate_with_pytorch.md">البحث عن الصور باستخدام ميلفوس وبيتورش</a></td><td>البحث الدلالي</td><td>ميلفوس، بيتورش</td></tr>
 <tr><td><a href="/docs/ar/integrate_with_sentencetransformers.md">البحث في الأفلام باستخدام Milvus و SentenceTransfromers</a></td><td>البحث الدلالي</td><td>ميلفوس، محولات الجمل</td></tr>
 <tr><td><a href="/docs/ar/basic_usage_langchain.md">استخدام ميلفوس كمخزن متجه في لانج تشين</a></td><td>البحث الدلالي</td><td>ميلفوس، لانجتشين</td></tr>
-<tr><td><a href="/docs/ar/integrate_with_haystack.md">RAG مع ميلفوس وهايستاك</a></td><td>RAG</td><td>ميلفوس، هايستاك</td></tr>
-<tr><td><a href="/docs/ar/integrate_with_voxel51.md">إجراء عمليات بحث دلالي باستخدام ميلفوس و FiftyOne</a></td><td>البحث الدلالي</td><td>ميلفوس، فيفتي وان</td></tr>
+<tr><td><a href="/docs/ar/full_text_search_with_langchain.md">استخدام البحث عن النص الكامل مع لانغتشين وميلفوس</a></td><td>البحث عن النص الكامل</td><td>ميلفوس، لانجتشين</td></tr>
+<tr><td><a href="/docs/ar/integrate_with_haystack.md">RAG مع ميلفوس وميلفوس وهايستاك</a></td><td>RAG</td><td>ميلفوس، هايستاك</td></tr>
+<tr><td><a href="/docs/ar/integrate_with_voxel51.md">إجراء عمليات البحث الرؤيوي باستخدام ميلفوس وفيفتي ون</a></td><td>البحث الدلالي</td><td>ميلفوس، فيفتي وان</td></tr>
 <tr><td><a href="/docs/ar/integrate_with_voyageai.md">البحث الدلالي باستخدام Milvus وVoyageAI</a></td><td>البحث الدلالي</td><td>ميلفوس، فوياج إيه آي</td></tr>
 <tr><td><a href="/docs/ar/integrate_with_bentoml.md">البحث الدلالي باستخدام Milvus و BentoML</a></td><td>RAG</td><td>ميلفوس و BentoML</td></tr>
 <tr><td><a href="/docs/ar/integrate_with_dspy.md">RAG مع Milvus و DSPy</a></td><td>RAG</td><td>ميلفوس، DSPy</td></tr>
@@ -51,7 +52,7 @@ title: نظرة عامة على عمليات التكامل
 <tr><td><a href="/docs/ar/integrate_with_camel.md">RAG مع ميلفوس وجمل</a></td><td>RAG</td><td>ميلفوس، كاميل</td></tr>
 <tr><td><a href="/docs/ar/integrate_with_airbyte.md">Airbyte &amp; Milvus: بنية تحتية مفتوحة المصدر لنقل البيانات</a></td><td>اتصال البيانات</td><td>ميلفوس، إيربايت</td></tr>
 <tr><td><a href="/docs/ar/video_search_with_twelvelabs_and_milvus.md">بحث الفيديو المتقدم: الاستفادة من مختبرات Twelve Labs و Milvus للاسترجاع الدلالي</a></td><td>البحث الدلالي</td><td>ميلفوس، مختبرات تويلفوس</td></tr>
-<tr><td><a href="/docs/ar/milvus_rag_with_vllm.md">بناء RAG باستخدام Milvus وvLLLM وLama 3.1</a></td><td>RAG</td><td>ميلفوس، vLLLM، لاما إندكس</td></tr>
+<tr><td><a href="/docs/ar/milvus_rag_with_vllm.md">بناء RAG باستخدام Milvus وVLLLM وLama 3.1</a></td><td>RAG</td><td>ميلفوس، vLLLM، لاما إندكس</td></tr>
 <tr><td><a href="/docs/ar/llama_agents_metadata.md">أنظمة متعددة الوكلاء مع ميسترال للذكاء الاصطناعي وميلفوس و Llama-agents</a></td><td>الوكيل</td><td>ميلفوس, ميسترال للذكاء الاصطناعي, لاما إندكس</td></tr>
 <tr><td><a href="/docs/ar/kafka-connect-milvus.md">ربط كافكا مع ميلفوس</a></td><td>مصادر البيانات</td><td>ميلفوس، كافكا</td></tr>
 <tr><td><a href="/docs/ar/kotaemon_with_milvus.md">كوتايمون RAG مع ميلفوس</a></td><td>RAG</td><td>ميلفوس، كوتيمون</td></tr>
@@ -76,5 +77,8 @@ title: نظرة عامة على عمليات التكامل
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_ollama.md">بناء RAG مع ميلفوس وأولاما</a></td><td>ل.ل.م</td><td>ميلفوس، أولاما</td></tr>
 <tr><td><a href="/docs/ar/milvus_rag_with_dynamiq.md">بدء الاستخدام مع Dynamiq وMilvus</a></td><td>التنسيق</td><td>ميلفوس، ديناميك</td></tr>
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_deepseek.md">بناء RAG مع ميلفوس وDeepSeek</a></td><td>ل.ل.م</td><td>ميلفوس، ديبسيك</td></tr>
+<tr><td><a href="/docs/ar/integrate_with_phidata.md">دمج ميلفوس مع فيداتا</a></td><td>الوكلاء</td><td>ميلفوس، فيداتا</td></tr>
+<tr><td><a href="/docs/ar/build_RAG_with_milvus_and_crawl4ai.md">بناء RAG مع ميلفوس و Crawl4AI</a></td><td>مصادر البيانات</td><td>ميلفوس, Crawl4AI</td></tr>
+<tr><td><a href="/docs/ar/build_RAG_with_milvus_and_firecrawl.md">بناء RAG باستخدام Milvus و Firecrawl</a></td><td>مصادر البيانات</td><td>ميلفوس، فايركراول</td></tr>
 </tbody>
 </table>

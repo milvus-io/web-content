@@ -19,6 +19,62 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2421" class="common-anchor-header">v2.4.21<button data-href="#v2421" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release Date: January 22, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.4.21</td><td>2.4.14</td><td>2.4.10</td><td>2.4.11</td></tr>
+</tbody>
+</table>
+<p>We’re excited to announce a new release of Milvus 2.4.21, featuring customizable root privileges, refined concurrency and locking mechanisms, and a host of bug fixes to enhance overall stability and reliability. We encourage you to upgrade or give it a try, and share your feedback to help us continually improve Milvus!</p>
+<h3 id="Features" class="common-anchor-header">Features</h3><ul>
+<li>Root privileges can be customized (<a href="https://github.com/milvus-io/milvus/pull/39325">#39325</a>)</li>
+</ul>
+<h3 id="Critical-bug-fixes" class="common-anchor-header">Critical bug fixes</h3><ul>
+<li>Fixed potential data loss issue caused by restarting MixCoord and flushing concurrently (<a href="https://github.com/milvus-io/milvus/pull/39423">#39423</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed an alias issue that could cause an iterator to traverse the wrong database (<a href="https://github.com/milvus-io/milvus/pull/39301">#39301</a>)</li>
+<li>Resolved slow query problems caused by coarse lock granularity during multi-column loading (<a href="https://github.com/milvus-io/milvus/pull/39290">#39290</a>)</li>
+<li>Fixed a resource group update failure when altering the database (<a href="https://github.com/milvus-io/milvus/pull/39357">#39357</a>)</li>
+<li>Allowed skipping disk quota checks during bulk import (<a href="https://github.com/milvus-io/milvus/pull/39320">#39320</a>)</li>
+<li>Supports Tantivy indexes built from multiple segments (<a href="https://github.com/milvus-io/milvus/pull/39127">#39127</a>)</li>
+<li>Fixed incorrect memory estimation for small segments (<a href="https://github.com/milvus-io/milvus/pull/38910">#38910</a>)</li>
+<li>Fixed ineffective RBAC custom group privilege checks (<a href="https://github.com/milvus-io/milvus/pull/39194">#39194</a>)</li>
+<li>Resolved a server crash caused by passing an empty parameter to RestoreRBAC API (<a href="https://github.com/milvus-io/milvus/pull/39142">#39142</a>)</li>
+<li>Fixed an error reporting issue when automatic refresh config operations failed (<a href="https://github.com/milvus-io/milvus/pull/39073">#39073</a>)</li>
+<li>Fixed unrecognized expressions that used uppercase AND or OR (<a href="https://github.com/milvus-io/milvus/pull/38929">#38929</a>)</li>
+<li>Resolved a partition drop failure that occurred after a load failure (<a href="https://github.com/milvus-io/milvus/pull/38871">#38871</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Unified style by using CStatus to handle NewCollection CGO calls (<a href="https://github.com/milvus-io/milvus/pull/39306">#39306</a>)</li>
+<li>Unified style by using CStatus to handle NewCollection CGO calls (<a href="https://github.com/milvus-io/milvus/pull/39306">#39306</a>)</li>
+<li>Refactored the delete MVCC function (<a href="https://github.com/milvus-io/milvus/pull/39258">#39258</a>)</li>
+<li>Refined lock granularity in QueryNode (<a href="https://github.com/milvus-io/milvus/pull/38908">#38908</a>)</li>
+<li>Added primary field names in SearchResult and QueryResults (<a href="https://github.com/milvus-io/milvus/pull/39223">#39223</a>)</li>
+<li>Introduced a new Go package to manage proto (<a href="https://github.com/milvus-io/milvus/pull/39129">#39129</a>)</li>
+<li>Cleaned up compaction tasks in compactionhandler (<a href="https://github.com/milvus-io/milvus/pull/38848">#38848</a>)</li>
+<li>Accelerated bitset operations with SIMD (<a href="https://github.com/milvus-io/milvus/pull/39042">#39042</a>)</li>
+<li>Optimized error handling for unloaded collection on QueryNode (<a href="https://github.com/milvus-io/milvus/pull/38920">#38920</a>)</li>
+<li>Updated the default Etcd version to v3.5.16 (<a href="https://github.com/milvus-io/milvus/pull/38973">#38973</a>)</li>
+</ul>
 <h2 id="v2420" class="common-anchor-header">v2.4.20<button data-href="#v2420" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

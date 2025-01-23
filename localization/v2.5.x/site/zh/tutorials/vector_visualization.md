@@ -1,6 +1,6 @@
 ---
 id: vector_visualization.md
-summary: 在本例中，我们将展示如何使用 t-SN 可视化 Milvus 中的嵌入（向量）。
+summary: 在本例中，我们将展示如何使用 t-SNE 可视化 Milvus 中的嵌入（向量）。
 title: 向量可视化
 ---
 <h1 id="Vector-Visualization" class="common-anchor-header">向量可视化<button data-href="#Vector-Visualization" class="anchor-icon" translate="no">

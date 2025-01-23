@@ -1,8 +1,8 @@
 ---
 id: vector_visualization.md
 summary: >-
-  Dans cet exemple, nous allons montrer comment visualiser les embeddings
-  (vecteurs) dans Milvus à l'aide de t-SN.
+  Dans cet exemple, nous allons montrer comment visualiser les encastrements
+  (vecteurs) dans Milvus à l'aide de t-SNE.
 title: Visualisation des vecteurs
 ---
 <h1 id="Vector-Visualization" class="common-anchor-header">Visualisation des vecteurs<button data-href="#Vector-Visualization" class="anchor-icon" translate="no">

@@ -1,8 +1,8 @@
 ---
 id: integrate_with_cohere.md
 summary: >-
-  이 페이지에서는 밀버스를 벡터 데이터베이스로, 허깅 페이스를 임베딩 시스템으로 사용하여 질문에 대한 최적의 답변을 검색하는 방법에 대해
-  설명합니다.
+  이 페이지에서는 Milvus를 벡터 데이터베이스로, Cohere를 임베딩 시스템으로 사용하여 SQuAD 데이터셋을 기반으로 질문 답변
+  시스템을 만드는 방법을 설명합니다.
 title: Milvus와 Cohere를 사용한 질문 답변하기
 ---
 <h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">Milvus와 Cohere를 사용한 질문 답변하기<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">
@@ -46,7 +46,7 @@ title: Milvus와 Cohere를 사용한 질문 답변하기
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>, <span class="hljs-title class_">Collection</span>, utility
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Parameters" class="common-anchor-header">매개변수<button data-href="#Parameters" class="anchor-icon" translate="no">
+<h2 id="Parameters" class="common-anchor-header">파라미터<button data-href="#Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

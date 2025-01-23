@@ -1,8 +1,7 @@
 ---
 id: integrate_with_cohere.md
 summary: >-
-  このページでは、Milvusをベクターデータベースとして、Hugging
-  Faceをエンベッディングシステムとして使用して、質問に対する最適な答えを検索する方法について説明します。
+  このページでは、Milvusをベクトルデータベースとして使用し、Cohereを埋め込みシステムとして使用して、SQuADデータセットに基づいた質問応答システムを作成する方法を説明します。
 title: MilvusとCohereを用いた質問応答
 ---
 <h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">MilvusとCohereを用いた質問応答<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">

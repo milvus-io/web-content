@@ -1,9 +1,11 @@
 ---
 id: integrate_with_spark.md
-summary: 이 페이지에서는 스파크-밀버스 커넥터에 대해 설명합니다.
-title: Spark-Milvus 커넥터 사용 가이드
+summary: >-
+  Apache Spark와 데이터브릭은 Milvus 및 Zilliz Cloud와 통합되어 빅데이터 처리와 벡터 검색을 결합합니다.
+  Spark-Milvus 커넥터로 AI 기반 검색 및 분석을 구축하는 방법을 알아보세요.
+title: 밀버스/질리즈 클라우드와 함께 Apache Spark™를 AI 파이프라인에 사용하기
 ---
-<h1 id="Spark-Milvus-Connector-User-Guide" class="common-anchor-header">Spark-Milvus 커넥터 사용 가이드<button data-href="#Spark-Milvus-Connector-User-Guide" class="anchor-icon" translate="no">
+<h1 id="Use-Apache-Spark™-with-MilvusZilliz-Cloud-for-AI-Pipelines" class="common-anchor-header">밀버스/질리즈 클라우드와 함께 Apache Spark™를 AI 파이프라인에 사용하기<button data-href="#Use-Apache-Spark™-with-MilvusZilliz-Cloud-for-AI-Pipelines" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,11 +20,14 @@ title: Spark-Milvus 커넥터 사용 가이드
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Spark-Milvus 커넥터(https://github.com/zilliztech/spark-milvus)는 아파치 스파크의 데이터 처리 및 ML 기능과 밀버스의 벡터 데이터 저장 및 검색 기능을 결합하여 아파치 스파크와 밀버스 간의 원활한 통합을 제공합니다. 이러한 통합을 통해 다음과 같은 다양하고 흥미로운 애플리케이션을 구현할 수 있습니다:</p>
+    </button></h1><p><a href="https://github.com/zilliztech/spark-milvus">Spark-Milvus 커넥터는</a> 아파치 스파크와 데이터브릭을 밀버스 및 질리즈 클라우드와 통합할 수 있도록 해줍니다. 이 커넥터는 아파치 스파크의 강력한 빅데이터 처리 및 머신 러닝(ML) 기능과 밀버스의 최첨단 벡터 검색 기능을 연결합니다. 이러한 통합을 통해 AI 기반 검색, 고급 분석, ML 학습, 대규모 벡터 데이터의 효율적인 관리를 위한 간소화된 워크플로우가 가능해집니다.</p>
+<p>Apache Spark는 고속 연산으로 대규모 데이터 세트를 처리하도록 설계된 분산형 데이터 처리 플랫폼입니다. 밀버스나 질리즈 클라우드와 함께 사용하면 시맨틱 검색, 추천 시스템, AI 기반 데이터 분석과 같은 사용 사례에 대한 새로운 가능성을 열어줍니다.</p>
+<p>예를 들어, Spark는 대규모 데이터 세트를 일괄 처리하여 ML 모델을 통해 임베딩을 생성한 다음, Spark-Milvus 커넥터를 사용하여 이러한 임베딩을 Milvus 또는 Zilliz Cloud에 직접 저장할 수 있습니다. 색인된 데이터는 빠르게 검색하거나 분석할 수 있어 AI 및 빅 데이터 워크플로우를 위한 강력한 파이프라인을 구축할 수 있습니다.</p>
+<p>Spark-Milvus 커넥터는 Milvus로의 반복 및 대량 데이터 수집, 시스템 간 데이터 동기화, Milvus에 저장된 벡터 데이터에 대한 고급 분석과 같은 작업을 지원합니다. 이 가이드에서는 다음과 같은 사용 사례에 대해 커넥터를 효과적으로 구성하고 사용하는 단계를 안내합니다:</p>
 <ul>
-<li>Milvus에 벡터 데이터를 대량으로 효율적으로 로드합니다,</li>
+<li>Milvus에 벡터 데이터를 대량으로 효율적으로 로드하기,</li>
 <li>Milvus와 다른 스토리지 시스템 또는 데이터베이스 간에 데이터 이동,</li>
-<li>Spark MLlib 및 기타 AI 도구를 활용하여 Milvus의 데이터 분석.</li>
+<li>Spark MLlib 및 기타 AI 도구를 활용하여 Milvus에서 데이터 분석하기.</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">빠른 시작<button data-href="#Quick-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -113,7 +118,7 @@ object Hello <span class="hljs-keyword">extends</span> <span class="hljs-title c
     .save()
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>위 코드를 실행한 후, 밀버스에서 삽입된 데이터를 SDK 또는 Attu(밀버스 대시보드)를 통해 확인할 수 있습니다. 이미 4개의 엔티티가 삽입된 <code translate="no">hello_spark_milvus</code> 라는 이름의 컬렉션을 확인할 수 있습니다.</p>
+<p>위 코드를 실행한 후, 밀버스에서 삽입된 데이터를 SDK 또는 Attu(밀버스 대시보드)를 통해 확인할 수 있습니다. 4개의 엔티티가 이미 삽입된 <code translate="no">hello_spark_milvus</code> 라는 이름의 컬렉션을 확인할 수 있습니다.</p>
 <h2 id="Features--concepts" class="common-anchor-header">기능 및 개념<button data-href="#Features--concepts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -244,7 +249,7 @@ MilvusUtils.bulkInsertFromSpark(spark, milvusOptions, outputPath, <span class="h
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 섹션에서는 데이터 분석 및 마이그레이션을 위한 Spark-Milvus 커넥터의 고급 사용 예제를 찾을 수 있습니다. 더 많은 데모는 <a href="https://github.com/zilliztech/spark-milvus/tree/main/examples/src/main/scala">예제를</a> 참조하세요.</p>
+    </button></h2><p>이 섹션에서는 데이터 분석 및 마이그레이션을 위한 Spark-Milvus 커넥터의 고급 사용 예제를 살펴봅니다. 더 많은 데모는 <a href="https://github.com/zilliztech/spark-milvus/tree/main/examples/src/main/scala">예제를</a> 참조하세요.</p>
 <h3 id="MySQL---embedding---Milvus" class="common-anchor-header">MySQL -&gt; 임베딩 -&gt; Milvus</h3><p>이 데모에서는 다음을 수행합니다.</p>
 <ol>
 <li>Spark-MySQL 커넥터를 통해 MySQL에서 데이터를 읽습니다,</li>
@@ -484,7 +489,7 @@ df.write
 <span class="hljs-comment">// Bulk insert Spark output files into Milvus</span>
 MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span class="hljs-string">&quot;mjson&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Hands-on" class="common-anchor-header">실습<button data-href="#Hands-on" class="anchor-icon" translate="no">
+<h2 id="Hands-on-Notebook" class="common-anchor-header">실습 노트북<button data-href="#Hands-on-Notebook" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -499,7 +504,7 @@ MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span cl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Spark-Milvus 커넥터를 빠르게 시작할 수 있도록 Milvus와 Zilliz Cloud를 사용한 스트리밍 및 일괄 데이터 전송 프로세스를 모두 안내하는 노트북을 준비했습니다.</p>
+    </button></h2><p>Spark-Milvus 커넥터를 빠르게 시작할 수 있도록, Spark에서 Milvus 및 Zilliz Cloud로의 스트리밍 및 일괄 데이터 수집 예제를 모두 안내하는 노트북을 확인하실 수 있습니다.</p>
 <ul>
 <li><a href="https://zilliz.com/databricks_zilliz_demos">스파크-밀버스 커넥터 핸즈온</a></li>
 </ul>

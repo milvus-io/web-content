@@ -33,7 +33,7 @@ title: 刪除實體
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在批量刪除共享某些屬性的多個實體時，您可以使用篩選表達式。下面的示例代碼使用<strong>in</strong>運算符批量刪除所有<strong>顏色</strong>欄位設定為<strong>紅色</strong>和<strong>綠色值</strong>的實體。您也可以使用其他運算符來建構符合您需求的篩選表達式。關於過濾表達式的更多資訊，請參閱<a href="/docs/zh-hant/boolean.md">Metadata 過濾</a>。</p>
+    </button></h2><p>在批量刪除共享某些屬性的多個實體時，您可以使用篩選表達式。下面的示例代碼使用<strong>in</strong>運算符批量刪除所有<strong>顏色</strong>欄位設定為<strong>紅色</strong>和<strong>綠色值</strong>的實體。您也可以使用其他運算符來建構符合您需求的篩選表達式。有關過濾表達式的詳細資訊，請參閱<a href="/docs/zh-hant/boolean.md">Metadata 過濾</a>。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​

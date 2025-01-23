@@ -63,7 +63,7 @@ schema = client.create_schema(​
 )​
 ​
 <span class="hljs-comment"># Add an Array field with elements of type VARCHAR​</span>
-schema.add_field(field_name=<span class="hljs-string">&quot;tags&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.VARCHAR, max_capacity=<span class="hljs-number">10</span>)​
+schema.add_field(field_name=<span class="hljs-string">&quot;tags&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.VARCHAR, max_capacity=<span class="hljs-number">10</span>, max_length=<span class="hljs-number">65535</span>)​
 <span class="hljs-comment"># Add an Array field with elements of type INT64​</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;ratings&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.INT64, max_capacity=<span class="hljs-number">5</span>)​
 ​
@@ -99,6 +99,7 @@ schema.addField(AddFieldReq.builder()​
         .dataType(DataType.Array)​
         .elementType(DataType.Int64)​
         .maxCapacity(<span class="hljs-number">5</span>)​
+        .maxLength(<span class="hljs-number">65535</span>)
         .build());​
 ​
 schema.addField(AddFieldReq.builder()​
@@ -148,7 +149,7 @@ schema.addField(AddFieldReq.builder()​
     &quot;elementDataType&quot;: &quot;VarChar&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;max_capacity&quot;: 10,​
-        &quot;max_length&quot;: 100​
+        &quot;max_length&quot;: 65535​
     }​
 }&#x27;</span>​
 ​

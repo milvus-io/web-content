@@ -81,16 +81,38 @@ summary: Milvus Operatorでメッセージストレージを設定する方法�
 <p>現在、RocksMQをMilvusスタンドアロンのメッセージストレージとして設定できるのはMilvus Operatorのみです。</p>
 </div>
 <h4 id="Example" class="common-anchor-header">設定例</h4><p>以下の例ではRocksMQサービスを設定しています。</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
+<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
   name: milvus
 spec:
-  dependencies: {}
+  mode: standalone
+  dependencies:
+    msgStreamType: rocksmq
+    rocksmq:
+      persistence:
+        enabled: <span class="hljs-literal">true</span>
+        pvcDeletion: <span class="hljs-literal">true</span>
+        persistentVolumeClaim:
+          spec:
+            accessModes: [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
+            storageClassName: <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
+            resources:
+              requests:
+                storage: 10Gi  <span class="hljs-comment"># Specify your desired storage size</span>
   components: {}
   config: {}
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configure-NATS" class="common-anchor-header">NATSの設定<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
+<h5 id="Key-configuration-options" class="common-anchor-header">主な設定オプション</h5><ul>
+<li><code translate="no">msgStreamType</code>: rocksmq: メッセージキューとしてRocksMQを明示的に設定します。</li>
+<li><code translate="no">persistence.enabled</code>:RocksMQ のデータを永続的に保存できるようにする。</li>
+<li><code translate="no">persistence.pvcDeletion</code>:trueの場合、milvusインスタンスが削除されるとPVCも削除されます。</li>
+<li><code translate="no">persistentVolumeClaim.spec</code>:Kubernetes標準のPVC仕様</li>
+<li><code translate="no">accessModes</code>:通常<code translate="no">ReadWriteOnce</code> ブロックストレージ用</li>
+<li><code translate="no">storageClassName</code>:クラスタのストレージクラス</li>
+<li><code translate="no">storage</code>:永続ボリュームのサイズ</li>
+</ul>
+<h2 id="Configure-NATS" class="common-anchor-header">NATSの構成<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -105,8 +127,8 @@ spec:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATSの代替メッセージストレージです。</p>
-<h4 id="Example" class="common-anchor-header">例</h4><p>以下の例ではNATSサービスを設定します。</p>
+    </button></h2><p>NATSはNATSの代替メッセージ・ストレージです。</p>
+<h4 id="Example" class="common-anchor-header">設定例</h4><p>以下の例では、NATSサービスを設定します。</p>
 <pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
 kind: Milvus
 metadata:
@@ -148,7 +170,7 @@ spec:
   components: {}
   config: {}
 <button class="copy-code-btn"></button></code></pre>
-<p>メッセージストレージをRocksMQからNATSに移行するには、以下の手順を実行します：</p>
+<p>メッセージストレージをRocksMQからNATSに移行するには、以下のようにします：</p>
 <ol>
 <li><p>すべてのDDLオペレーションを停止する。</p></li>
 <li><p>FlushAll APIを呼び出し、APIコールの実行が終了したらMilvusを停止する。</p></li>

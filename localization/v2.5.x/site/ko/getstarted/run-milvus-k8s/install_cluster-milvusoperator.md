@@ -82,52 +82,16 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
         ></path>
       </svg>
     </button></h2><p>밀버스 오퍼레이터는 <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">쿠버네티스 커스텀 리</a>소스 위에 밀버스 클러스터 커스텀 리소스를 정의합니다. 사용자 정의 리소스가 정의되면, 선언적 방식으로 K8s API를 사용하고 Milvus 배포 스택을 관리하여 확장성과 고가용성을 보장할 수 있습니다.</p>
-<h3 id="1-Install-cert-manager" class="common-anchor-header">1. 인증서 관리자 설치</h3><p>Milvus Operator는 <a href="https://cert-manager.io/docs/installation/supported-releases/">cert-manager를</a> 사용하여 웹훅 서버에 대한 인증서를 제공합니다.</p>
-<div class="alert note">
+<p>다음 중 한 가지 방법으로 Milvus Operator를 설치할 수 있습니다:</p>
 <ul>
-<li><a href="/docs/ko/install_cluster-helm.md">헬름을 사용하여 Milvus Operator를 배포하기로</a> 선택한 경우 이 단계를 안전하게 건너뛸 수 있습니다.</li>
-<li>밀버스 오퍼레이터는 cert-manager 1.1.3 이상이 필요하다.</li>
-</ul>
-</div>
-<p>다음 명령을 실행하여 cert-manager를 설치합니다.</p>
-<pre><code translate="no" class="language-shell">$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.yaml
-<button class="copy-code-btn"></button></code></pre>
-<p>설치 프로세스가 끝나면 다음과 유사한 출력이 표시됩니다.</p>
-<pre><code translate="no" class="language-shell">customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/challenges.acme.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/clusterissuers.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/issuers.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io created
-namespace/cert-manager created
-serviceaccount/cert-manager-cainjector created
-...
-service/cert-manager created
-service/cert-manager-webhook created
-deployment.apps/cert-manager-cainjector created
-deployment.apps/cert-manager created
-deployment.apps/cert-manager-webhook created
-mutatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook created
-validatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook created
-<button class="copy-code-btn"></button></code></pre>
-<p>아래와 같이 cert-manager 파드가 실행 중인지 확인할 수 있습니다:</p>
-<pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> pods -n cert-manager
-
-NAME                                      READY   STATUS    RESTARTS   AGE
-cert-manager<span class="hljs-number">-848f</span>547974-gccz8             <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
-cert-manager-cainjector<span class="hljs-number">-54f</span>4cc6b5-dpj84   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
-cert-manager-webhook<span class="hljs-number">-7</span>c9588c76-tqncn      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Install-Milvus-Operator" class="common-anchor-header">2. Milvus 오퍼레이터 설치</h3><p>다음 중 한 가지 방법으로 Milvus Operator를 설치할 수 있습니다:</p>
-<ul>
-<li><a href="#Install-with-Helm">헬름으로</a></li>
+<li><a href="#Install-with-Helm">헬름 사용</a></li>
 <li><a href="#Install-with-kubectl">kubectl 사용</a></li>
 </ul>
-<h4 id="Install-with-Helm" class="common-anchor-header">헬름으로 설치</h4><p>다음 명령어를 실행하여 헬름으로 밀버스 오퍼레이터를 설치합니다.</p>
+<h3 id="Install-with-Helm" class="common-anchor-header">헬름으로 설치</h3><p>다음 명령어를 실행하여 헬름으로 Milvus Operator를 설치합니다.</p>
 <pre><code translate="no" class="language-shell">$ helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.0.1/milvus-operator-1.0.1.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.2.0/milvus-operator-1.2.0.tgz
 <button class="copy-code-btn"></button></code></pre>
 <p>설치 프로세스가 끝나면 다음과 유사한 출력을 볼 수 있습니다.</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
@@ -144,7 +108,7 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 </span><button class="copy-code-btn"></button></code></pre>
-<h4 id="Install-with-kubectl" class="common-anchor-header">kubectl로 설치</h4><p>다음 명령어를 실행하여 밀버스 오퍼레이터를 설치한다. <code translate="no">kubectl</code>.</p>
+<h3 id="Install-with-kubectl" class="common-anchor-header">kubectl로 설치</h3><p>다음 명령어를 실행하여 밀버스 오퍼레이터를 설치한다. <code translate="no">kubectl</code>.</p>
 <pre><code translate="no" class="language-shell">$ kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>설치 프로세스가 끝나면 다음과 유사한 출력이 표시됩니다.</p>
@@ -162,10 +126,6 @@ configmap/milvus-operator-manager-config created
 service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
-certificate.cert-manager.io/milvus-operator-serving-cert created
-issuer.cert-manager.io/milvus-operator-selfsigned-issuer created
-mutatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-mutating-webhook-configuration created
-validatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-validating-webhook-configuration created
 <button class="copy-code-btn"></button></code></pre>
 <p>다음과 같이 Milvus Operator 파드가 실행 중인지 확인할 수 있습니다:</p>
 <pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> pods -n milvus-<span class="hljs-keyword">operator</span>
@@ -347,7 +307,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 </ul>
 <h4 id="Uninstall-with-Helm" class="common-anchor-header">헬름으로 제거</h4><pre><code translate="no" class="language-shell">$ helm -n milvus-<span class="hljs-keyword">operator</span> uninstall milvus-<span class="hljs-keyword">operator</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Uninstall-with-kubectl" class="common-anchor-header">kubectl로 제거</h4><pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">delete</span> -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/v1.0.1/deploy/manifests/deployment.yaml</span>
+<h4 id="Uninstall-with-kubectl" class="common-anchor-header">kubectl로 제거</h4><pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">delete</span> -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/v1.2.0/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

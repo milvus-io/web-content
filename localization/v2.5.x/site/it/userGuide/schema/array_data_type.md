@@ -32,7 +32,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, <code translate="no">tags</code> e <code translate="no">ratings</code> sono entrambi campi Array. Il campo <code translate="no">tags</code> è un array di stringhe che rappresenta generi di canzoni come pop, rock e classico, mentre il campo <code translate="no">ratings</code> è un array di numeri interi che rappresenta le valutazioni degli utenti per la canzone, da 1 a 5. Questi campi Array forniscono un modo flessibile per memorizzare dati a più valori, facilitando l'esecuzione di analisi dettagliate durante le query e i filtri.</p>
+<p>In questo esempio, <code translate="no">tags</code> e <code translate="no">ratings</code> sono entrambi campi Array. Il campo <code translate="no">tags</code> è un array di stringhe che rappresenta generi di canzoni come pop, rock e classico, mentre il campo <code translate="no">ratings</code> è un array di interi che rappresenta le valutazioni degli utenti per la canzone, che vanno da 1 a 5. Questi campi Array forniscono un modo flessibile per memorizzare dati a più valori, facilitando l'esecuzione di analisi dettagliate durante le query e i filtri.</p>
 <h2 id="Add-Array-field​" class="common-anchor-header">Aggiungere un campo Array<button data-href="#Add-Array-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,7 +51,7 @@ summary: >-
     </button></h2><p>Per utilizzare i campi Array in Milvus, è necessario definire il tipo di campo corrispondente durante la creazione dello schema della collezione. Questo processo comprende.</p>
 <ol>
 <li><p>Impostare <code translate="no">datatype</code> sul tipo di dati Array supportato, <code translate="no">ARRAY</code>.</p></li>
-<li><p>Usare il parametro <code translate="no">element_type</code> per specificare il tipo di dati degli elementi dell'array. Questo può essere un qualsiasi tipo di dato scalare supportato da Milvus, come <code translate="no">VARCHAR</code> o <code translate="no">INT64</code>. Tutti gli elementi di una stessa matrice devono avere lo stesso tipo di dato.</p></li>
+<li><p>Usare il parametro <code translate="no">element_type</code> per specificare il tipo di dati degli elementi dell'array. Questo può essere qualsiasi tipo di dati scalari supportati da Milvus, come <code translate="no">VARCHAR</code> o <code translate="no">INT64</code>. Tutti gli elementi di una stessa matrice devono avere lo stesso tipo di dati.</p></li>
 <li><p>Usare il parametro <code translate="no">max_capacity</code> per definire la capacità massima dell'array, cioè il numero massimo di elementi che può contenere.</p></li>
 </ol>
 <p>Ecco come definire uno schema di collezione che includa campi Array.</p>
@@ -67,7 +67,7 @@ schema = client.create_schema(​
 )​
 ​
 <span class="hljs-comment"># Add an Array field with elements of type VARCHAR​</span>
-schema.add_field(field_name=<span class="hljs-string">&quot;tags&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.VARCHAR, max_capacity=<span class="hljs-number">10</span>)​
+schema.add_field(field_name=<span class="hljs-string">&quot;tags&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.VARCHAR, max_capacity=<span class="hljs-number">10</span>, max_length=<span class="hljs-number">65535</span>)​
 <span class="hljs-comment"># Add an Array field with elements of type INT64​</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;ratings&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.INT64, max_capacity=<span class="hljs-number">5</span>)​
 ​
@@ -103,6 +103,7 @@ schema.addField(AddFieldReq.builder()​
         .dataType(DataType.Array)​
         .elementType(DataType.Int64)​
         .maxCapacity(<span class="hljs-number">5</span>)​
+        .maxLength(<span class="hljs-number">65535</span>)
         .build());​
 ​
 schema.addField(AddFieldReq.builder()​
@@ -152,7 +153,7 @@ schema.addField(AddFieldReq.builder()​
     &quot;elementDataType&quot;: &quot;VarChar&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;max_capacity&quot;: 10,​
-        &quot;max_length&quot;: 100​
+        &quot;max_length&quot;: 65535​
     }​
 }&#x27;</span>​
 ​

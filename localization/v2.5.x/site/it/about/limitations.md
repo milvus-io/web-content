@@ -61,7 +61,7 @@ summary: Imparate a conoscere i limiti dell'uso di Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il nome di una risorsa può contenere numeri, lettere e trattini bassi (_). Il nome di una risorsa deve iniziare con una lettera o un trattino basso (_).</p>
+    </button></h2><p>Il nome di una risorsa, come il nome della raccolta, della partizione o dell'indice, può contenere numeri, lettere e trattini bassi (_). Il nome di una risorsa deve iniziare con una lettera o un trattino basso (_).</p>
 <h2 id="Number-of-resources" class="common-anchor-header">Numero di risorse<button data-href="#Number-of-resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -220,7 +220,7 @@ summary: Imparate a conoscere i limiti dell'uso di Milvus.
 <tr><th>Vettori</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">topk</code> (numero del risultato più simile da restituire)</td><td>16,384</td></tr>
+<tr><td><code translate="no">topk</code> (numero di risultati più simili da restituire)</td><td>16,384</td></tr>
 <tr><td><code translate="no">nq</code> (numero di richieste di ricerca)</td><td>16,384</td></tr>
 </tbody>
 </table>
@@ -252,9 +252,9 @@ summary: Imparate a conoscere i limiti dell'uso di Milvus.
 <tr><td>Ricerca filtrata</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Sì</td></tr>
 <tr><td>Ricerca nel raggio d'azione</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>Sì</td></tr>
 <tr><td>Ricerca per raggruppamento</td><td>Sì</td><td>No</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
-<tr><td>Ricerca con iteratore</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
-<tr><td>Ricerca ibrida</td><td>Sì</td><td>Sì</td><td>Si</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Sì(Solo RRFRanker)</td><td>Sì(Solo RRFRanker)</td><td>Sì</td><td>Sì</td></tr>
+<tr><td>Ricerca con iteratore</td><td>Sì</td><td>Sì</td><td>Si</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+<tr><td>Ricerca ibrida</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Sì(Solo RRFRanker)</td><td>Sì(Solo RRFRanker)</td><td>Sì</td><td>Sì</td></tr>
 <tr><td>Interrogazione/ricezione</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Sì</td></tr>
-<tr><td>Query con iteratore</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td></tr>
+<tr><td>Query con iteratore</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td></tr>
 </tbody>
 </table>

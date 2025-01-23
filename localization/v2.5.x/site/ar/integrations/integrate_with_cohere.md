@@ -1,8 +1,8 @@
 ---
 id: integrate_with_cohere.md
 summary: >-
-  تستعرض هذه الصفحة كيفية البحث عن أفضل إجابة للأسئلة باستخدام "ميلفوس" كقاعدة
-  بيانات المتجهات و"عناق الوجه" كنظام تضمين.
+  توضح هذه الصفحة كيفية إنشاء نظام للإجابة على الأسئلة استنادًا إلى مجموعة
+  بيانات SQuAD باستخدام Milvus كقاعدة بيانات المتجهات و Cohere كنظام تضمين.
 title: الإجابة عن الأسئلة باستخدام ميلفوس وكوهير
 ---
 <h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">الإجابة عن الأسئلة باستخدام ميلفوس وكوهير<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">

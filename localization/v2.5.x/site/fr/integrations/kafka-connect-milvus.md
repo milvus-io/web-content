@@ -1,11 +1,15 @@
 ---
 id: kafka-connect-milvus.md
 summary: >-
-  Dans ce guide de démarrage rapide, nous montrons comment configurer open
-  source kafka et Zilliz Cloud pour ingérer des données vectorielles.
-title: Intégrer Milvus à WhyHow
+  Apache Kafka est intégré à Milvus et Zilliz Cloud pour diffuser des données
+  vectorielles. Découvrez comment utiliser le connecteur Kafka-Milvus pour créer
+  des pipelines en temps réel pour la recherche sémantique, les systèmes de
+  recommandation et l'analyse pilotée par l'IA.
+title: >-
+  Connecter Apache Kafka® avec Milvus/Zilliz Cloud pour l'ingestion de données
+  vectorielles en temps réel
 ---
-<h1 id="Connect-Kafka-with-Milvus" class="common-anchor-header">Connecter Kafka avec Milvus<button data-href="#Connect-Kafka-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="common-anchor-header">Connecter Apache Kafka® avec Milvus/Zilliz Cloud pour l'ingestion de données vectorielles en temps réel<button data-href="#Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +24,12 @@ title: Intégrer Milvus à WhyHow
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dans ce guide de démarrage rapide, nous montrons comment configurer open source kafka et Zilliz Cloud pour ingérer des données vectorielles.</p>
+    </button></h1><p>Dans ce guide de démarrage rapide, nous montrons comment configurer Apache Kafka® et Zilliz Cloud pour ingérer des données vectorielles.</p>
+<p>Ce tutoriel explique comment utiliser Apache Kafka® pour diffuser et ingérer des données vectorielles dans la base de données vectorielle Milvus et Zilliz Cloud (Milvus entièrement géré), permettant ainsi des applications avancées en temps réel telles que la recherche sémantique, les systèmes de recommandation et l'analyse alimentée par l'IA.</p>
+<p>Apache Kafka est une plateforme de streaming d'événements distribués conçue pour les pipelines à haut débit et à faible latence. Elle est largement utilisée pour collecter, stocker et traiter des flux de données en temps réel provenant de sources telles que des bases de données, des appareils IoT, des applications mobiles et des services cloud. La capacité de Kafka à gérer de grands volumes de données en fait une source de données importante pour les bases de données vectorielles comme Milvus ou Zilliz Cloud.</p>
+<p>Par exemple, Kafka peut capturer des flux de données en temps réel, tels que des interactions d'utilisateurs, des relevés de capteurs, ainsi que leur intégration à partir de modèles d'apprentissage automatique, et publier ces flux directement dans Milvus ou Zilliz Cloud. Une fois dans la base de données vectorielle, ces données peuvent être indexées, recherchées et analysées efficacement.</p>
+<p>L'intégration de Kafka avec Milvus et Zilliz Cloud permet de créer de manière transparente des pipelines puissants pour les flux de données non structurées. Le connecteur fonctionne à la fois pour le déploiement de Kafka open-source et pour les services hébergés tels que <a href="https://www.confluent.io/hub/zilliz/kafka-connect-milvus">Confluent</a> et <a href="https://docs.streamnative.io/hub/connector-kafka-connect-milvus-sink-v0.1">StreamNative</a>.</p>
+<p>Dans ce tutoriel, nous utilisons Zilliz Cloud comme démonstration :</p>
 <h2 id="Step-1-Download-the-kafka-connect-milvus-plugin" class="common-anchor-header">Étape 1 : Télécharger le plugin kafka-connect-milvus<button data-href="#Step-1-Download-the-kafka-connect-milvus-plugin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,4 +187,4 @@ topics=topic_0
 <li><p>Vérifier si l'entité a été insérée dans la collection dans Zilliz Cloud. Voici ce que cela donne sur Zilliz Cloud si l'insertion a réussi :</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/insearted_entities.png" width="80%" /></p></li>
 </ol>
-<h3 id="Support" class="common-anchor-header">Support</h3><p>Si vous avez besoin d'aide ou si vous avez des questions concernant le connecteur Kafka Connect Milvus, n'hésitez pas à contacter notre équipe de support : <strong>Courriel :</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>
+<h3 id="Support" class="common-anchor-header">Support</h3><p>Si vous avez besoin d'aide ou si vous avez des questions concernant le connecteur Kafka Connect Milvus, n'hésitez pas à contacter le responsable du connecteur : <strong>Courriel :</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>

@@ -66,7 +66,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <li><p>Es wird empfohlen, vor der Installation von Milvus das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Hardware-Anforderungen auf der Grundlage Ihrer Datengröße abzuschätzen. Dies hilft, eine optimale Leistung und Ressourcenzuweisung für Ihre Milvus-Installation zu gewährleisten.</p></li>
 </ul>
 <div class="alert note">
-<p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, wenden Sie sich bitte an <a href="mailto:community@zilliz.com">community@zilliz.com</a> und schildern Sie das Problem, damit wir Ihnen den nötigen Support bieten können.</p>
+<p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, wenden Sie sich bitte an <a href="mailto:community@zilliz.com">community@zilliz.com</a> und schildern Sie das Problem, damit wir Ihnen die notwendige Unterstützung bieten können.</p>
 </div>
 <h2 id="Install-Milvus-Operator" class="common-anchor-header">Milvus Operator installieren<button data-href="#Install-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -84,52 +84,16 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
         ></path>
       </svg>
     </button></h2><p>Milvus Operator definiert die benutzerdefinierten Ressourcen eines Milvus-Clusters zusätzlich zu den <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">benutzerdefinierten Ressourcen von Kubernetes</a>. Wenn benutzerdefinierte Ressourcen definiert sind, können Sie K8s-APIs auf deklarative Weise verwenden und den Milvus-Bereitstellungsstapel verwalten, um seine Skalierbarkeit und Hochverfügbarkeit zu gewährleisten.</p>
-<h3 id="1-Install-cert-manager" class="common-anchor-header">1. Installieren Sie cert-manager</h3><p>Milvus Operator verwendet <a href="https://cert-manager.io/docs/installation/supported-releases/">cert-manager</a>, um ein Zertifikat für den Webhook-Server bereitzustellen.</p>
-<div class="alert note">
-<ul>
-<li>Sie können diesen Schritt überspringen, wenn Sie <a href="/docs/de/install_cluster-helm.md">Milvus Operator mit Helm bereitstellen</a> möchten.</li>
-<li>Milvus Operator benötigt cert-manager 1.1.3 oder höher.</li>
-</ul>
-</div>
-<p>Führen Sie den folgenden Befehl aus, um cert-manager zu installieren.</p>
-<pre><code translate="no" class="language-shell">$ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.3/cert-manager.yaml
-<button class="copy-code-btn"></button></code></pre>
-<p>Nach Abschluss des Installationsvorgangs sehen Sie eine Ausgabe ähnlich der folgenden.</p>
-<pre><code translate="no" class="language-shell">customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/challenges.acme.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/clusterissuers.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/issuers.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io created
-namespace/cert-manager created
-serviceaccount/cert-manager-cainjector created
-...
-service/cert-manager created
-service/cert-manager-webhook created
-deployment.apps/cert-manager-cainjector created
-deployment.apps/cert-manager created
-deployment.apps/cert-manager-webhook created
-mutatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook created
-validatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook created
-<button class="copy-code-btn"></button></code></pre>
-<p>Sie können wie folgt überprüfen, ob cert-manager-Pods ausgeführt werden:</p>
-<pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> pods -n cert-manager
-
-NAME                                      READY   STATUS    RESTARTS   AGE
-cert-manager<span class="hljs-number">-848f</span>547974-gccz8             <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
-cert-manager-cainjector<span class="hljs-number">-54f</span>4cc6b5-dpj84   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
-cert-manager-webhook<span class="hljs-number">-7</span>c9588c76-tqncn      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Install-Milvus-Operator" class="common-anchor-header">2. Installieren Sie Milvus Operator</h3><p>Sie können Milvus Operator auf eine der folgenden Arten installieren:</p>
+<p>Sie können Milvus Operator auf eine der folgenden Arten installieren:</p>
 <ul>
 <li><a href="#Install-with-Helm">Mit Helm</a></li>
 <li><a href="#Install-with-kubectl">Mit kubectl</a></li>
 </ul>
-<h4 id="Install-with-Helm" class="common-anchor-header">Installation mit Helm</h4><p>Führen Sie den folgenden Befehl aus, um Milvus Operator mit Helm zu installieren.</p>
+<h3 id="Install-with-Helm" class="common-anchor-header">Installation mit Helm</h3><p>Führen Sie den folgenden Befehl aus, um Milvus Operator mit Helm zu installieren.</p>
 <pre><code translate="no" class="language-shell">$ helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.0.1/milvus-operator-1.0.1.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.1.9/milvus-operator-1.1.9.tgz
 <button class="copy-code-btn"></button></code></pre>
 <p>Nach Beendigung des Installationsprozesses sehen Sie eine Ausgabe ähnlich der folgenden.</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
@@ -146,7 +110,7 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 </span><button class="copy-code-btn"></button></code></pre>
-<h4 id="Install-with-kubectl" class="common-anchor-header">Installation mit kubectl</h4><p>Führen Sie den folgenden Befehl aus, um Milvus Operator mit <code translate="no">kubectl</code> zu installieren.</p>
+<h3 id="Install-with-kubectl" class="common-anchor-header">Installation mit kubectl</h3><p>Führen Sie den folgenden Befehl aus, um Milvus Operator mit <code translate="no">kubectl</code> zu installieren.</p>
 <pre><code translate="no" class="language-shell">$ kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Nach Beendigung des Installationsvorgangs erhalten Sie eine Ausgabe ähnlich der folgenden.</p>
@@ -164,10 +128,6 @@ configmap/milvus-operator-manager-config created
 service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
-certificate.cert-manager.io/milvus-operator-serving-cert created
-issuer.cert-manager.io/milvus-operator-selfsigned-issuer created
-mutatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-mutating-webhook-configuration created
-validatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-validating-webhook-configuration created
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie können wie folgt überprüfen, ob der Milvus Operator-Pod läuft:</p>
 <pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> pods -n milvus-<span class="hljs-keyword">operator</span>
@@ -196,14 +156,14 @@ milvus-<span class="hljs-keyword">operator</span><span class="hljs-number">-5f</
 <p>Mit dem obigen Befehl wird ein Milvus-Cluster mit seinen Komponenten und Abhängigkeiten in separaten Pods mit Standardkonfigurationen bereitgestellt. Um diese Einstellungen anzupassen, empfehlen wir Ihnen, das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Konfigurationen basierend auf Ihrer tatsächlichen Datengröße anzupassen und dann die entsprechende YAML-Datei herunterzuladen. Weitere Informationen zu den Konfigurationsparametern finden Sie in der <a href="https://milvus.io/docs/system_configuration.md">Checkliste für Milvus-Systemkonfigurationen</a>.</p>
 <div class="alert note">
 <ul>
-<li>Der Versionsname sollte nur Buchstaben, Zahlen und Bindestriche enthalten. Punkte sind im Versionsnamen nicht erlaubt.</li>
+<li>Der Release-Name sollte nur Buchstaben, Zahlen und Bindestriche enthalten. Punkte sind im Versionsnamen nicht erlaubt.</li>
 <li>Sie können eine Milvus-Instanz auch im Standalone-Modus bereitstellen, bei dem alle Komponenten in einem einzigen Pod enthalten sind. Dazu ändern Sie die URL der Konfigurationsdatei im obigen Befehl in <code translate="no">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_default.yaml</code></li>
 </ul>
 </div>
 <h4 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Überprüfen des Milvus-Cluster-Status</h4><p>Führen Sie den folgenden Befehl aus, um den Status des Milvus-Clusters zu überprüfen</p>
 <pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> milvus my-release -o yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Sobald Ihr Milvus-Cluster bereit ist, sollte die Ausgabe des obigen Befehls ähnlich wie die folgende aussehen. Wenn das Feld <code translate="no">status.status</code> <code translate="no">Unhealthy</code> bleibt, befindet sich Ihr Milvus-Cluster noch in der Erstellung.</p>
+<p>Sobald Ihr Milvus-Cluster bereit ist, sollte die Ausgabe des obigen Befehls ähnlich wie die folgende aussehen. Wenn das Feld <code translate="no">status.status</code> <code translate="no">Unhealthy</code> bleibt, ist Ihr Milvus-Cluster noch in der Erstellung.</p>
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1alpha1
 kind: Milvus
 metadata:
@@ -268,7 +228,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 =<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
 <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Die Ausgabe zeigt, dass die Milvus-Instanz über den Standard-Port <strong>19530</strong> läuft.</p>
+<p>Die Ausgabe zeigt, dass die Milvus-Instanz über den Standard-Port <strong>19530</strong> arbeitet.</p>
 <div class="alert note">
 <p>Wenn Sie Milvus im Standalone-Modus eingesetzt haben, ändern Sie den Pod-Namen von <code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> in <code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code>.</p>
 </div>
@@ -327,7 +287,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 </ul>
 <h4 id="Uninstall-with-Helm" class="common-anchor-header">Deinstallation mit Helm</h4><pre><code translate="no" class="language-shell">$ helm -n milvus-<span class="hljs-keyword">operator</span> uninstall milvus-<span class="hljs-keyword">operator</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Uninstall-with-kubectl" class="common-anchor-header">Deinstallation mit kubectl</h4><pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">delete</span> -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/v1.0.1/deploy/manifests/deployment.yaml</span>
+<h4 id="Uninstall-with-kubectl" class="common-anchor-header">Deinstallation mit kubectl</h4><pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">delete</span> -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/v1.1.9/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Wie geht es weiter?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

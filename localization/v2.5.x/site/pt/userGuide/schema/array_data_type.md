@@ -67,7 +67,7 @@ schema = client.create_schema(​
 )​
 ​
 <span class="hljs-comment"># Add an Array field with elements of type VARCHAR​</span>
-schema.add_field(field_name=<span class="hljs-string">&quot;tags&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.VARCHAR, max_capacity=<span class="hljs-number">10</span>)​
+schema.add_field(field_name=<span class="hljs-string">&quot;tags&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.VARCHAR, max_capacity=<span class="hljs-number">10</span>, max_length=<span class="hljs-number">65535</span>)​
 <span class="hljs-comment"># Add an Array field with elements of type INT64​</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;ratings&quot;</span>, datatype=DataType.ARRAY, element_type=DataType.INT64, max_capacity=<span class="hljs-number">5</span>)​
 ​
@@ -103,6 +103,7 @@ schema.addField(AddFieldReq.builder()​
         .dataType(DataType.Array)​
         .elementType(DataType.Int64)​
         .maxCapacity(<span class="hljs-number">5</span>)​
+        .maxLength(<span class="hljs-number">65535</span>)
         .build());​
 ​
 schema.addField(AddFieldReq.builder()​
@@ -152,7 +153,7 @@ schema.addField(AddFieldReq.builder()​
     &quot;elementDataType&quot;: &quot;VarChar&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;max_capacity&quot;: 10,​
-        &quot;max_length&quot;: 100​
+        &quot;max_length&quot;: 65535​
     }​
 }&#x27;</span>​
 ​
@@ -192,7 +193,7 @@ schema.addField(AddFieldReq.builder()​
 <button class="copy-code-btn"></button></code></pre>
 <p>Neste exemplo.</p>
 <ul>
-<li><p><code translate="no">tags</code> é uma matriz de cadeia de caracteres com <code translate="no">element_type</code> definido como <code translate="no">VARCHAR</code>, indicando que os elementos da matriz devem ser cadeias de caracteres. <code translate="no">max_capacity</code> está definido como 10, o que significa que a matriz pode conter até 10 elementos.</p></li>
+<li><p><code translate="no">tags</code> é uma matriz de cadeia de caracteres com <code translate="no">element_type</code> definido como <code translate="no">VARCHAR</code>, indicando que os elementos na matriz devem ser cadeias de caracteres. <code translate="no">max_capacity</code> está definido como 10, o que significa que a matriz pode conter até 10 elementos.</p></li>
 <li><p><code translate="no">ratings</code> é uma matriz de inteiros com <code translate="no">element_type</code> definido para <code translate="no">INT64</code>, indicando que os elementos têm de ser inteiros. <code translate="no">max_capacity</code> está definido para 5, permitindo um máximo de 5 classificações.</p></li>
 <li><p>Também adicionamos um campo de chave primária <code translate="no">pk</code> e um campo vetorial <code translate="no">embedding</code>.</p></li>
 </ul>
@@ -255,7 +256,7 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Para além de <code translate="no">AUTOINDEX</code>, pode especificar outros tipos de índices escalares como <code translate="no">INVERTED</code> ou <code translate="no">BITMAP</code>. Para tipos de índice suportados, consulte <a href="/docs/pt/index-scalar-fields.md">Índices escalares</a>.</p>
+<p>Para além de <code translate="no">AUTOINDEX</code>, pode especificar outros tipos de índices escalares como <code translate="no">INVERTED</code> ou <code translate="no">BITMAP</code>. Para saber os tipos de índice suportados, consulte <a href="/docs/pt/index-scalar-fields.md">Índices escalares</a>.</p>
 <p>Além disso, você deve criar um índice para o campo de vetor antes de criar a coleção. Neste exemplo, usamos <code translate="no">AUTOINDEX</code> para simplificar a configuração do índice de vetor.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>

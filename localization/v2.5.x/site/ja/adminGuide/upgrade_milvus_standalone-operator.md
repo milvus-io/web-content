@@ -39,16 +39,16 @@ title: Milvus OperatorによるMilvusスタンドアロンのアップグレー�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のコマンドを実行し、Milvus operatorのバージョンをv1.0.1にアップグレードしてください。</p>
+    </button></h2><p>以下のコマンドを実行し、Milvus operatorのバージョンをv1.2.0にアップグレードしてください。</p>
 <pre><code translate="no">helm repo <span class="hljs-keyword">add</span> zilliztech-milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator/</span>
 helm repo update zilliztech-milvus-<span class="hljs-keyword">operator</span>
 helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> zilliztech-milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvusオペレータを最新バージョンにアップグレードすると、以下の選択肢があります：</p>
 <ul>
-<li>Milvusをv2.2.3またはそれ以降のリリースから2.5.2にアップグレードするには、<a href="#Conduct-a-rolling-upgrade">ローリングアップグレードを</a>行います。</li>
-<li>Milvusをv2.2.3以前のマイナーリリースから2.5.2にアップグレードするには、<a href="#Upgrade-Milvus-by-changing-its-image">Milvusのイメージバージョンを変更してアップグレードする</a>ことをお勧めします。</li>
-<li>Milvusをv2.1.xから2.5.2にアップグレードする場合、アップグレード前に<a href="#Migrate-the-metadata">メタデータを移行</a>する必要があります。</li>
+<li>Milvusをv2.2.3またはそれ以降のリリースから2.5.3にアップグレードするには、<a href="#Conduct-a-rolling-upgrade">ローリングアップグレードを</a>行います。</li>
+<li>Milvusをv2.2.3以前のマイナーリリースから2.5.3にアップグレードするには、<a href="#Upgrade-Milvus-by-changing-its-image">Milvusのイメージバージョンを変更してアップグレードする</a>ことをお勧めします。</li>
+<li>Milvusをv2.1.xから2.5.3にアップグレードする場合、アップグレード前に<a href="#Migrate-the-metadata">メタデータを移行</a>する必要があります。</li>
 </ul>
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">ローリングアップグレードの実施<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,9 +76,9 @@ spec:
   components:
     enableRollingUpdate: <span class="hljs-literal">true</span>
     imageUpdateMode: rollingUpgrade <span class="hljs-comment"># Default value, can be omitted</span>
-    image: milvusdb/milvus:v2.5.2
+    image: milvusdb/milvus:v2.5.3
 <button class="copy-code-btn"></button></code></pre>
-<p>上記の設定ファイルでは、<code translate="no">spec.components.enableRollingUpdate</code> を<code translate="no">true</code> に設定し、<code translate="no">spec.components.image</code> を希望の Milvus バージョンに設定します。</p>
+<p>上記の設定ファイルでは、<code translate="no">spec.components.enableRollingUpdate</code> を<code translate="no">true</code> に設定し、<code translate="no">spec.components.image</code> を任意の Milvus バージョンに設定します。</p>
 <p>デフォルトでは、Milvusはコーディネーターのローリングアップグレードを順番に実行し、コーディネーターのポッドイメージを次々に置き換えていきます。アップグレード時間を短縮するには、<code translate="no">spec.components.imageUpdateMode</code> を<code translate="no">all</code> に設定し、Milvus がすべてのポッドイメージを同時に置き換えるようにします。</p>
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
 kind: Milvus
@@ -88,7 +88,7 @@ spec:
   components:
     enableRollingUpdate: <span class="hljs-literal">true</span>
     imageUpdateMode: all
-    image: milvusdb/milvus:v2.5.2
+    image: milvusdb/milvus:v2.5.3
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvusがコーディネータポッドイメージを低いバージョンに置き換えるようにするには、<code translate="no">spec.components.imageUpdateMode</code> を<code translate="no">rollingDowngrade</code> に設定します。</p>
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
@@ -101,8 +101,8 @@ spec:
     imageUpdateMode: rollingDowngrade
     image: milvusdb/milvus:&lt;some-older-version&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>次に、設定をYAMLファイル(例えば、<code translate="no">milvusupgrade.yml</code>)として保存し、この設定ファイルを以下のようにMilvusインスタンスにパッチします：</p>
-<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yml
+<p>次に、設定をYAMLファイル(例えば、<code translate="no">milvusupgrade.yaml</code>)として保存し、この設定ファイルを以下のようにMilvusインスタンスにパッチします：</p>
+<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge 
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">イメージを変更してMilvusをアップグレードする<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -130,10 +130,10 @@ labels:
 spec:
   <span class="hljs-comment"># Omit other fields ...</span>
   components:
-   image: milvusdb/milvus:v2.5.2
+   image: milvusdb/milvus:v2.5.3
 <button class="copy-code-btn"></button></code></pre>
 <p>その後、以下を実行してアップグレードを実行します：</p>
-<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml
+<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Migrate-the-metadata" class="common-anchor-header">メタデータの移行<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -150,8 +150,8 @@ spec:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 2.2.0以降、メタデータは以前のリリースと互換性がありません。以下の例は、Milvus 2.1.4からMilvus v2.5.2へのアップグレードを想定しています。</p>
-<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1.メタデータ移行用ファイル<code translate="no">.yaml</code> の作成</h3><p>メタデータ移行用ファイルを作成します。以下はその例です。設定ファイルには<code translate="no">name</code>,<code translate="no">sourceVersion</code>,<code translate="no">targetVersion</code> を指定する必要があります。以下の例では、<code translate="no">name</code> を<code translate="no">my-release-upgrade</code> に、<code translate="no">sourceVersion</code> を<code translate="no">v2.1.4</code> に、<code translate="no">targetVersion</code> を<code translate="no">v2.5.2</code> に設定しています。 これは、Milvusインスタンスがv2.1.4からv2.5.2にアップグレードされることを意味します。</p>
+    </button></h2><p>Milvus 2.2.0以降、メタデータは以前のリリースと互換性がありません。以下の例は、Milvus 2.1.4からMilvus v2.5.3へのアップグレードを想定しています。</p>
+<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1.メタデータ移行用ファイル<code translate="no">.yaml</code> の作成</h3><p>メタデータ移行用ファイルを作成します。以下はその例です。設定ファイルには<code translate="no">name</code>,<code translate="no">sourceVersion</code>,<code translate="no">targetVersion</code> を指定する必要があります。以下の例では、<code translate="no">name</code> を<code translate="no">my-release-upgrade</code> に、<code translate="no">sourceVersion</code> を<code translate="no">v2.1.4</code> に、<code translate="no">targetVersion</code> を<code translate="no">v2.5.3</code> に設定しています。 これは、Milvusインスタンスがv2.1.4からv2.5.3にアップグレードされることを意味します。</p>
 <pre><code translate="no">apiVersion: milvus.io/v1beta1
 kind: MilvusUpgrade
 metadata:
@@ -161,9 +161,9 @@ spec:
     namespace: default
     name: my-release
   sourceVersion: <span class="hljs-string">&quot;v2.1.4&quot;</span>
-  targetVersion: <span class="hljs-string">&quot;v2.5.2&quot;</span>
+  targetVersion: <span class="hljs-string">&quot;v2.5.3&quot;</span>
   <span class="hljs-comment"># below are some omit default values:</span>
-  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.5.2&quot;</span>
+  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.5.3&quot;</span>
   <span class="hljs-comment"># toolImage: &quot;milvusdb/meta-migration:v2.2.0&quot;</span>
   <span class="hljs-comment"># operation: upgrade</span>
   <span class="hljs-comment"># rollbackIfFailed: true</span>

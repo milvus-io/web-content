@@ -2,7 +2,7 @@
 id: vector_visualization.md
 summary: >-
   In questo esempio, mostreremo come visualizzare le incorporazioni (vettori) in
-  Milvus utilizzando t-SN.
+  Milvus utilizzando t-SNE.
 title: Visualizzazione dei vettori
 ---
 <h1 id="Vector-Visualization" class="common-anchor-header">Visualizzazione dei vettori<button data-href="#Vector-Visualization" class="anchor-icon" translate="no">
@@ -27,7 +27,7 @@ title: Visualizzazione dei vettori
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>In questo esempio mostreremo come visualizzare le incorporazioni (vettori) in Milvus utilizzando <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a>.</p>
-<p>Le tecniche di riduzione della dimensionalità, come t-SNE, sono preziose per visualizzare dati complessi e altamente dimensionali in uno spazio 2D o 3D, preservando la struttura locale. Ciò consente il riconoscimento dei modelli, migliora la comprensione delle relazioni tra le caratteristiche e facilita l'interpretazione dei risultati dei modelli di apprendimento automatico. Inoltre, aiuta a valutare gli algoritmi confrontando visivamente i risultati del clustering, semplifica la presentazione dei dati a un pubblico non specializzato e può ridurre i costi computazionali lavorando con rappresentazioni a bassa dimensione. Grazie a queste applicazioni, t-SNE non solo aiuta a ottenere una visione più approfondita dei set di dati, ma supporta anche processi decisionali più informati.</p>
+<p>Le tecniche di riduzione della dimensionalità, come t-SNE, sono preziose per visualizzare dati complessi e altamente dimensionali in uno spazio 2D o 3D, preservando la struttura locale. Ciò consente il riconoscimento dei modelli, migliora la comprensione delle relazioni tra le caratteristiche e facilita l'interpretazione dei risultati dei modelli di apprendimento automatico. Inoltre, aiuta a valutare gli algoritmi confrontando visivamente i risultati del clustering, semplifica la presentazione dei dati a un pubblico non specializzato e può ridurre i costi computazionali lavorando con rappresentazioni meno dimensionali. Grazie a queste applicazioni, t-SNE non solo aiuta a ottenere una visione più approfondita dei set di dati, ma supporta anche processi decisionali più informati.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparazione<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

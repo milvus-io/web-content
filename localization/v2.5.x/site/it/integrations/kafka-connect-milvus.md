@@ -1,11 +1,15 @@
 ---
 id: kafka-connect-milvus.md
 summary: >-
-  In questa guida rapida mostriamo come configurare kafka open source e Zilliz
-  Cloud per ingerire dati vettoriali.
-title: Integrare Milvus con WhyHow
+  Apache Kafka è integrato con Milvus e Zilliz Cloud per lo streaming di dati
+  vettoriali. Scoprite come utilizzare il connettore Kafka-Milvus per creare
+  pipeline in tempo reale per la ricerca semantica, i sistemi di raccomandazione
+  e l'analisi guidata dall'intelligenza artificiale.
+title: >-
+  Connettere Apache Kafka® con Milvus/Zilliz Cloud per l'ingestione di dati
+  vettoriali in tempo reale
 ---
-<h1 id="Connect-Kafka-with-Milvus" class="common-anchor-header">Collegare Kafka con Milvus<button data-href="#Connect-Kafka-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="common-anchor-header">Connettere Apache Kafka® con Milvus/Zilliz Cloud per l'ingestione di dati vettoriali in tempo reale<button data-href="#Connect-Apache-Kafka®-with-MilvusZilliz-Cloud-for-Real-Time-Vector-Data-Ingestion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,6 +25,11 @@ title: Integrare Milvus con WhyHow
         ></path>
       </svg>
     </button></h1><p>In questa guida rapida mostriamo come configurare kafka open source e Zilliz Cloud per ingerire dati vettoriali.</p>
+<p>Questo tutorial spiega come utilizzare Apache Kafka® per lo streaming e l'ingestione di dati vettoriali nel database vettoriale Milvus e in Zilliz Cloud (Milvus completamente gestito), consentendo applicazioni avanzate in tempo reale come la ricerca semantica, i sistemi di raccomandazione e le analisi basate sull'intelligenza artificiale.</p>
+<p>Apache Kafka è una piattaforma distribuita di streaming di eventi progettata per pipeline ad alta velocità e bassa latenza. È ampiamente utilizzata per raccogliere, archiviare ed elaborare flussi di dati in tempo reale da fonti quali database, dispositivi IoT, app mobili e servizi cloud. La capacità di Kafka di gestire grandi volumi di dati lo rende un'importante fonte di dati per database vettoriali come Milvus o Zilliz Cloud.</p>
+<p>Ad esempio, Kafka può catturare flussi di dati in tempo reale, come le interazioni degli utenti, le letture dei sensori e le loro incorporazioni dai modelli di apprendimento automatico, e pubblicare questi flussi direttamente su Milvus o Zilliz Cloud. Una volta nel database vettoriale, questi dati possono essere indicizzati, ricercati e analizzati in modo efficiente.</p>
+<p>L'integrazione di Kafka con Milvus e Zilliz Cloud offre un modo perfetto per creare potenti pipeline per i flussi di lavoro di dati non strutturati. Il connettore funziona sia per l'implementazione di Kafka open-source sia per servizi ospitati come <a href="https://www.confluent.io/hub/zilliz/kafka-connect-milvus">Confluent</a> e <a href="https://docs.streamnative.io/hub/connector-kafka-connect-milvus-sink-v0.1">StreamNative</a>.</p>
+<p>In questo tutorial utilizziamo Zilliz Cloud come dimostrazione:</p>
 <h2 id="Step-1-Download-the-kafka-connect-milvus-plugin" class="common-anchor-header">Passo 1: Scaricare il plugin kafka-connect-milvus<button data-href="#Step-1-Download-the-kafka-connect-milvus-plugin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,4 +187,4 @@ topics=topic_0
 <li><p>Verificare se l'entità è stata inserita nella raccolta in Zilliz Cloud. Ecco come appare su Zilliz Cloud se l'inserimento è riuscito:</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/insearted_entities.png" width="80%" /></p></li>
 </ol>
-<h3 id="Support" class="common-anchor-header">Assistenza</h3><p>Se avete bisogno di assistenza o avete domande sul connettore Kafka Connect Milvus, non esitate a contattare il nostro team di supporto: <strong>Email:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>
+<h3 id="Support" class="common-anchor-header">Assistenza</h3><p>Se avete bisogno di assistenza o avete domande sul connettore Kafka Connect Milvus, non esitate a contattare il manutentore del connettore: <strong>Email:</strong> <a href="mailto:support@zilliz.com">support@zilliz.com</a></p>

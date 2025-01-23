@@ -31,10 +31,11 @@ title: Ikhtisar Integrasi
 <tr><td><a href="/docs/id/milvus_hybrid_search_retriever.md">Retriever Pencarian Hibrida Milvus di LangChain</a></td><td>Pencarian Hibrida</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/id/integrate_with_openai.md">Pencarian Semantik dengan Milvus dan OpenAI</a></td><td>Pencarian Semantik</td><td>Milvus, OpenAI</td></tr>
 <tr><td><a href="/docs/id/integrate_with_cohere.md">Menjawab Pertanyaan Menggunakan Milvus dan Cohere</a></td><td>Pencarian Semantik</td><td>Milvus, Cohere</td></tr>
-<tr><td><a href="/docs/id/integrate_with_hugging-face.md">Penjawaban Pertanyaan menggunakan Milvus dan HuggingFace</a></td><td>Penjawaban Pertanyaan</td><td>Milvus, HuggingFace</td></tr>
+<tr><td><a href="/docs/id/integrate_with_hugging-face.md">Penjawaban Pertanyaan Menggunakan Milvus dan HuggingFace</a></td><td>Penjawaban Pertanyaan</td><td>Milvus, HuggingFace</td></tr>
 <tr><td><a href="/docs/id/integrate_with_pytorch.md">Pencarian Gambar menggunakan Milvus dan Pytorch</a></td><td>Pencarian Semantik</td><td>Milvus, Pytorch</td></tr>
 <tr><td><a href="/docs/id/integrate_with_sentencetransformers.md">Pencarian Film menggunakan Milvus dan SentenceTransfromers</a></td><td>Pencarian Semantik</td><td>Milvus, Pengubah Kalimat</td></tr>
 <tr><td><a href="/docs/id/basic_usage_langchain.md">Menggunakan Milvus sebagai Penyimpan Vektor di LangChain</a></td><td>Pencarian Semantik</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/id/full_text_search_with_langchain.md">Menggunakan Pencarian Teks Lengkap dengan LangChain dan Milvus</a></td><td>Pencarian Teks Lengkap</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/id/integrate_with_haystack.md">RAG dengan Milvus dan Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
 <tr><td><a href="/docs/id/integrate_with_voxel51.md">Melakukan Pencarian Visi dengan Milvus dan FiftyOne</a></td><td>Pencarian Semantik</td><td>Milvus, FiftyOne</td></tr>
 <tr><td><a href="/docs/id/integrate_with_voyageai.md">Pencarian Semantik dengan Milvus dan VoyageAI</a></td><td>Pencarian Semantik</td><td>Milvus, VoyageAI</td></tr>
@@ -76,5 +77,8 @@ title: Ikhtisar Integrasi
 <tr><td><a href="/docs/id/build_RAG_with_milvus_and_ollama.md">Membangun RAG dengan Milvus dan Ollama</a></td><td>LLM</td><td>Milvus, Ollama</td></tr>
 <tr><td><a href="/docs/id/milvus_rag_with_dynamiq.md">Memulai dengan Dynamiq dan Milvus</a></td><td>Orkestrasi</td><td>Milvus, Dynamiq</td></tr>
 <tr><td><a href="/docs/id/build_RAG_with_milvus_and_deepseek.md">Membangun RAG dengan Milvus dan DeepSeek</a></td><td>LLM</td><td>Milvus, DeepSeek</td></tr>
+<tr><td><a href="/docs/id/integrate_with_phidata.md">Mengintegrasikan Milvus dengan Phidata</a></td><td>Agen</td><td>Milvus, Phidata</td></tr>
+<tr><td><a href="/docs/id/build_RAG_with_milvus_and_crawl4ai.md">Membangun RAG dengan Milvus dan Crawl4AI</a></td><td>Sumber Data</td><td>Milvus, Crawl4AI</td></tr>
+<tr><td><a href="/docs/id/build_RAG_with_milvus_and_firecrawl.md">Membangun RAG dengan Milvus dan Firecrawl</a></td><td>Sumber Data</td><td>Milvus, Firecrawl</td></tr>
 </tbody>
 </table>

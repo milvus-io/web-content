@@ -35,8 +35,9 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/integrate_with_pytorch.md">Ricerca per immagini con Milvus e Pytorch</a></td><td>Ricerca semantica</td><td>Milvus, Pytorch</td></tr>
 <tr><td><a href="/docs/it/integrate_with_sentencetransformers.md">Ricerca di film utilizzando Milvus e SentenceTransfromers</a></td><td>Ricerca semantica</td><td>Milvus, Trasformatori di frasi</td></tr>
 <tr><td><a href="/docs/it/basic_usage_langchain.md">Usare Milvus come archivio vettoriale in LangChain</a></td><td>Ricerca semantica</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/it/full_text_search_with_langchain.md">Usare la ricerca a tutto testo con LangChain e Milvus</a></td><td>Ricerca a tutto testo</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/it/integrate_with_haystack.md">RAG con Milvus e Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
-<tr><td><a href="/docs/it/integrate_with_voxel51.md">Condurre ricerche di visione con Milvus e FiftyOne</a></td><td>Ricerca semantica</td><td>Milvus, FiftyOne</td></tr>
+<tr><td><a href="/docs/it/integrate_with_voxel51.md">Conduzione di ricerche visive con Milvus e FiftyOne</a></td><td>Ricerca semantica</td><td>Milvus, FiftyOne</td></tr>
 <tr><td><a href="/docs/it/integrate_with_voyageai.md">Ricerca semantica con Milvus e VoyageAI</a></td><td>Ricerca semantica</td><td>Milvus, VoyageAI</td></tr>
 <tr><td><a href="/docs/it/integrate_with_bentoml.md">RAG con Milvus e BentoML</a></td><td>RAG</td><td>Milvus, BentoML</td></tr>
 <tr><td><a href="/docs/it/integrate_with_dspy.md">RAG con Milvus e DSPy</a></td><td>RAG</td><td>Milvus, DSPy</td></tr>
@@ -67,7 +68,7 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/rag_with_milvus_and_unstructured.md">Costruire una RAG con Milvus e fonti di dati non strutturati</a></td><td>Fonti di dati non strutturati</td><td>Milvus, non strutturato</td></tr>
 <tr><td><a href="/docs/it/RAG_with_pii_and_milvus.md">Costruire un RAG con Milvus + PII Masker</a></td><td>Fonti di dati</td><td>Milvus, PII Masker</td></tr>
 <tr><td><a href="/docs/it/use_milvus_in_private_gpt.md">Utilizzare Milvus in PrivateGPT</a></td><td>Ochestrazione</td><td>ricerca vettoriale</td></tr>
-<tr><td><a href="/docs/it/quickstart_mem0_with_milvus.md">Per iniziare con Mem0 e Milvus</a></td><td>Agenti</td><td>Mem0, Milvus</td></tr>
+<tr><td><a href="/docs/it/quickstart_mem0_with_milvus.md">Come iniziare con Mem0 e Milvus</a></td><td>Agenti</td><td>Mem0, Milvus</td></tr>
 <tr><td><a href="/docs/it/knowledge_table_with_milvus.md">Tabella della conoscenza con Milvus</a></td><td>Ingegneria della conoscenza</td><td>Tabella della conoscenza, Milvus</td></tr>
 <tr><td><a href="/docs/it/use_milvus_in_docsgpt.md">Utilizzare Milvus in DocsGPT</a></td><td>Ochestrazione</td><td>DocsGPT, Milvus</td></tr>
 <tr><td><a href="/docs/it/use_milvus_with_sambanova.md">Utilizzare Milvus con SambaNova</a></td><td>Orchestrazione</td><td>Milvus, SambaNova</td></tr>
@@ -76,5 +77,8 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_ollama.md">Costruire RAG con Milvus e Ollama</a></td><td>LLM</td><td>Milvus, Ollama</td></tr>
 <tr><td><a href="/docs/it/milvus_rag_with_dynamiq.md">Iniziare con Dynamiq e Milvus</a></td><td>Orchestrazione</td><td>Milvus, Dynamiq</td></tr>
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_deepseek.md">Costruire RAG con Milvus e DeepSeek</a></td><td>LLM</td><td>Milvus, DeepSeek</td></tr>
+<tr><td><a href="/docs/it/integrate_with_phidata.md">Integrare Milvus con Phidata</a></td><td>Agenti</td><td>Milvus, Phidata</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_crawl4ai.md">Costruire RAG con Milvus e Crawl4AI</a></td><td>Fonti di dati</td><td>Milvus, Crawl4AI</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_firecrawl.md">Creazione di RAG con Milvus e Firecrawl</a></td><td>Fonti di dati</td><td>Milvus, Firecrawl</td></tr>
 </tbody>
 </table>

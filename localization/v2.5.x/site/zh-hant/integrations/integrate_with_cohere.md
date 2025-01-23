@@ -1,6 +1,6 @@
 ---
 id: integrate_with_cohere.md
-summary: 本頁面將介紹如何使用 Milvus 作為向量資料庫，以及 Hugging Face 作為嵌入系統，來搜尋問題的最佳答案。
+summary: 本頁說明如何使用 Milvus 作為向量資料庫，並使用 Cohere 作為嵌入系統，建立一個以 SQuAD 資料集為基礎的問題解答系統。
 title: 使用 Milvus 和 Cohere 進行問題回答
 ---
 <h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">使用 Milvus 和 Cohere 進行問題回答<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">
@@ -212,7 +212,7 @@ time.sleep(<span class="hljs-number">10</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦所有資料都插入 Milvus 資料集中，我們就可以利用問題短語向系統發問，將其嵌入 Cohere，然後在資料集中進行搜尋。</p>
+    </button></h2><p>一旦所有資料都插入 Milvus 資料集中，我們就可以利用問題短語向系統發問，將其嵌入 Cohere 並使用資料集中進行搜尋。</p>
 <div class="alert note">
 <p>插入資料後立即執行的搜尋可能會慢一點，因為搜尋未編入索引的資料是以暴力方式進行的。一旦新資料被自動編入索引，搜尋速度就會加快。</p>
 </div>

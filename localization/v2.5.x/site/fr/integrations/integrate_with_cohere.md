@@ -1,9 +1,9 @@
 ---
 id: integrate_with_cohere.md
 summary: >-
-  Cette page explique comment rechercher la meilleure réponse aux questions en
-  utilisant Milvus comme base de données vectorielle et Hugging Face comme
-  système d'intégration.
+  Cette page montre comment créer un système de questions-réponses basé sur le
+  jeu de données SQuAD en utilisant Milvus comme base de données vectorielle et
+  Cohere comme système d'intégration.
 title: Réponse aux questions avec Milvus et Cohere
 ---
 <h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">Réponse aux questions avec Milvus et Cohere<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">
