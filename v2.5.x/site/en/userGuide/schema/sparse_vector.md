@@ -225,68 +225,88 @@ The process of creating an index for sparse vectors is similar to that for [dens
 </div>
 
 ```python
-index_params = client.prepare_index_params()​
-​
-index_params.add_index(​
-    field_name="sparse_vector",​
-    index_name="sparse_inverted_index",​
-    index_type="SPARSE_INVERTED_INDEX",​
-    metric_type="IP",​
-    params={"drop_ratio_build": 0.2},​
-)​
+index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name="sparse_vector",
+    index_name="sparse_inverted_index",
+    index_type="SPARSE_INVERTED_INDEX",
+    metric_type="IP",
+    params={"inverted_index_algo": "DAAT_MAXSCORE"},
+)
 
 ```
 
 ```java
-import io.milvus.v2.common.IndexParam;​
-import java.util.*;​
-​
-List<IndexParam> indexes = new ArrayList<>();​
-Map<String,Object> extraParams = new HashMap<>();​
-extraParams.put("drop_ratio_build", 0.2);​
-indexes.add(IndexParam.builder()​
-        .fieldName("sparse_vector")​
-        .indexName("sparse_inverted_index")​
-        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)​
-        .metricType(IndexParam.MetricType.IP)​
-        .extraParams(extraParams)​
-        .build());​
+import io.milvus.v2.common.IndexParam;
+import java.util.*;
+
+List<IndexParam> indexes = new ArrayList<>();
+Map<String,Object> extraParams = new HashMap<>();
+extraParams.put("inverted_index_algo": "DAAT_MAXSCORE");
+indexes.add(IndexParam.builder()
+        .fieldName("sparse_vector")
+        .indexName("sparse_inverted_index")
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
+        .metricType(IndexParam.MetricType.IP)
+        .extraParams(extraParams)
+        .build());
 
 ```
 
 ```javascript
-const indexParams = await client.createIndex({​
-    index_name: 'sparse_inverted_index',​
-    field_name: 'sparse_vector',​
-    metric_type: MetricType.IP,​
-    index_type: IndexType.SPARSE_WAND,​
-    params: {​
-      drop_ratio_build: 0.2,​
-    },​
-});​
+const indexParams = await client.createIndex({
+    index_name: 'sparse_inverted_index',
+    field_name: 'sparse_vector',
+    metric_type: MetricType.IP,
+    index_type: IndexType.SPARSE_WAND,
+    params: {
+      inverted_index_algo: 'DAAT_MAXSCORE',
+    },
+});
 
 ```
 
 ```curl
-export indexParams='[​
-        {​
-            "fieldName": "sparse_vector",​
-            "metricType": "IP",​
-            "indexName": "sparse_inverted_index",​
-            "indexType": "SPARSE_INVERTED_INDEX",​
-            "params":{"drop_ratio_build": 0.2}​
-        }​
-    ]'​
+export indexParams='[
+        {
+            "fieldName": "sparse_vector",
+            "metricType": "IP",
+            "indexName": "sparse_inverted_index",
+            "indexType": "SPARSE_INVERTED_INDEX",
+            "params":{"inverted_index_algo": "DAAT_MAXSCORE"}
+        }
+    ]'
 
 ```
 
-In the example above:​
+In the example above:
 
-- An index of type `SPARSE_INVERTED_INDEX` is created for the sparse vector. For sparse vectors, you can specify `SPARSE_INVERTED_INDEX` or `SPARSE_WAND`. For details, refer to [​Sparse Vector Indexes](https://milvus.io/docs/index.md?tab=sparse).​
+- `index_type`: The type of index to create for the sparse vector field. Valid Values:
 
-- For sparse vectors, `metric_type` only supports `IP` (Inner Product), used to measure the similarity between two sparse vectors. For more information on similarity, refer to [​Metric Types](metric.md).​
+  - `SPARSE_INVERTED_INDEX`: A general-purpose inverted index for sparse vectors.
+  - `SPARSE_WAND`: A specialized index type supported in Milvus v2.5.3 and earlier.
 
-- `drop_ratio_build` is an optional index parameter specifically for sparse vectors. It controls the proportion of small vector values excluded during index building. For example, with `{"drop_ratio_build": 0.2}`, the smallest 20% of vector values will be excluded during index creation, reducing computational effort during searches.​
+  <div class="alert note">
+
+    From Milvus 2.5.4 onward, `SPARSE_WAND` is being deprecated. Instead, it is recommended to use `"inverted_index_algo": "DAAT_WAND"` for equivalency while maintaining compatibility.
+
+  </div>
+
+- `metric_type`: The metric used to calculate similarity between sparse vectors. Valid Values:
+
+  - `IP` (Inner Product): Measures similarity using dot product.
+  - `BM25`: Typically used for full-text search, focusing on textual similarity.
+
+    For further details, refer to [Metric Types](metric.md) and [Full Text Search](full-text-search.md).
+
+- `params.inverted_index_algo`: The algorithm used for building and querying the index. Valid values:
+
+  - `"DAAT_MAXSCORE"` (default): Optimized Document-at-a-Time (DAAT) query processing using the MaxScore algorithm. MaxScore provides better performance for high k values or queries with many terms by skipping terms and documents likely to have minimal impact. It achieves this by partitioning terms into essential and non-essential groups based on their maximum impact scores, focusing on terms that can contribute to the top-k results.
+
+  - `"DAAT_WAND"`: Optimized DAAT query processing using the WAND algorithm. WAND evaluates fewer hit documents by leveraging maximum impact scores to skip non-competitive documents, but it has a higher per-hit overhead. This makes WAND more efficient for queries with small k values or short queries, where skipping is more feasible.
+
+  - `"TAAT_NAIVE"`: Basic Term-at-a-Time (TAAT) query processing. While it is slower compared to `DAAT_MAXSCORE` and `DAAT_WAND`, `TAAT_NAIVE` offers a unique advantage. Unlike DAAT algorithms, which use cached maximum impact scores that remain static regardless of changes to the global collection parameter (avgdl), `TAAT_NAIVE` dynamically adapts to such changes.
 
 ### Create collection​
 

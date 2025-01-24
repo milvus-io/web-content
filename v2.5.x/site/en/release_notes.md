@@ -8,6 +8,60 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.4
+
+Release date: January 23, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.4          | 2.5.4              | 2.5.4               | 2.5.4            |
+
+We’re excited to announce the release of Milvus 2.5.4, which introduces key performance optimizations and new features such as PartitionKey isolation, Sparse Index with DAAT MaxScore, and enhanced locking mechanisms. This version also addresses multiple bugs that improve overall stability and reliability. We encourage you to upgrade or try out this latest release, and we look forward to your feedback in helping us continually refine Milvus!
+
+### Features
+
+- Supports PartitionKey isolation to improve performance with multiple partition keys ([#39245](https://github.com/milvus-io/milvus/pull/39245)). For more information, refer to [Use Partition Key](use-partition-key.md).
+- Sparse Index now supports DAAT MaxScore [knowhere/#1015](https://github.com/milvus-io/knowhere/pull/1015). For more information, refer to [Sparse Vector](sparse_vector.md).
+- Adds support for `is_null` in expression ([#38931](https://github.com/milvus-io/milvus/pull/38931))
+- Root privileges can be customized ([#39324](https://github.com/milvus-io/milvus/pull/39324))
+
+### Improvements
+
+- Cached segments’ delta information to accelerate the Query Coordinator ([#39349](https://github.com/milvus-io/milvus/pull/39349))
+- Read metadata concurrently at the collection level to speed up failure recovery ([#38900](https://github.com/milvus-io/milvus/pull/38900))
+- Refined lock granularity in QueryNode ([#39282](https://github.com/milvus-io/milvus/pull/39282)), ([#38907](https://github.com/milvus-io/milvus/pull/38907))
+- Unified style by using CStatus to handle NewCollection CGO calls ([#39303](https://github.com/milvus-io/milvus/pull/39303))
+- Skipped generating the partition limiter if no partition is set ([#38911](https://github.com/milvus-io/milvus/pull/38911))
+- Added more RESTful API support ([#38875](https://github.com/milvus-io/milvus/pull/38875)) ([#39425](https://github.com/milvus-io/milvus/pull/39425))
+- Removed unnecessary Bloom Filters in QueryNode and DataNode to reduce memory usage ([#38913](https://github.com/milvus-io/milvus/pull/38913))
+- Speeded up data loading by accelerating task generation, scheduling, and execution in QueryCoord ([#38905](https://github.com/milvus-io/milvus/pull/38905))
+- Reduced locking in DataCoord to speed up load and insert operations ([#38904](https://github.com/milvus-io/milvus/pull/38904))
+- Added primary field names in `SearchResult` and `QueryResults` ([#39222](https://github.com/milvus-io/milvus/pull/39222))
+- Used both binlog size and index size as the disk quota throttling standard ([#38844](https://github.com/milvus-io/milvus/pull/38844))
+- Optimized memory usage for full-text search knowhere/#1011
+- Added version control for scalar indexes ([#39236](https://github.com/milvus-io/milvus/pull/39236))
+- Improved the speed of fetching collection information from RootCoord by avoiding unnecessary copies ([#38902](https://github.com/milvus-io/milvus/pull/38902))
+
+### Bug fixes
+
+- Fixed slow query issues caused by coarse lock granularity during multi-column loading ([#39255](https://github.com/milvus-io/milvus/pull/39255))
+- Fixed an issue where using aliases could cause an iterator to traverse the wrong database ([#39248](https://github.com/milvus-io/milvus/pull/39248))
+- Fixed search failures for primary keys with indexes ([#39390](https://github.com/milvus-io/milvus/pull/39390))
+- Fixed potential data loss issue caused by restarting MixCoord and flushing concurrently ([#39422](https://github.com/milvus-io/milvus/pull/39422))
+- Fixed a resource group update failure when altering the database ([#39356](https://github.com/milvus-io/milvus/pull/39356))
+- Fixed a sporadic issue where the tantivy index could not delete index files during release ([#39434](https://github.com/milvus-io/milvus/pull/39434))
+- Fixed a delete failure triggered by improper concurrency between stats tasks and L0 compaction after MixCoord restarts ([#39460](https://github.com/milvus-io/milvus/pull/39460))
+- Fixed slow indexing caused by having too many threads ([#39341](https://github.com/milvus-io/milvus/pull/39341))
+- Fixed an issue preventing disk quota checks from being skipped during bulk import ([#39319](https://github.com/milvus-io/milvus/pull/39319))
+- Resolved freeze issues caused by too many message queue consumers by limiting concurrency ([#38915](https://github.com/milvus-io/milvus/pull/38915))
+- Fixed query timeouts caused by MixCoord restarts during large-scale compactions ([#38926](https://github.com/milvus-io/milvus/pull/38926))
+- Fixed scalar inverted index incompatibility when upgrading from 2.4 to 2.5 ([#39272](https://github.com/milvus-io/milvus/pull/39272))
+- Fixed channel imbalance issues caused by node downtime ([#39200](https://github.com/milvus-io/milvus/pull/39200))
+- Fixed an issue that could cause channel balance to become stuck. ([#39160](https://github.com/milvus-io/milvus/pull/39160))
+- Fixed an issue where RBAC custom group privilege level checks became ineffective ([#39224](https://github.com/milvus-io/milvus/pull/39224))
+- Fixed a failure to retrieve the number of rows in empty indexes ([#39210](https://github.com/milvus-io/milvus/pull/39210))
+- Fixed incorrect memory estimation for small segments ([#38909](https://github.com/milvus-io/milvus/pull/38909))
+
 ## v2.5.3
 
 Release date: January 13, 2025
