@@ -59,10 +59,10 @@ title: 도커 컴포즈를 사용하여 GPU 지원으로 Milvus 실행하기
         ></path>
       </svg>
     </button></h2><p>Docker Compose를 사용하여 GPU를 지원하는 Milvus를 설치하려면 다음 단계를 따르세요.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. YAML 파일 다운로드 및 구성</h3><p>다운로드 <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.2/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> 를 클릭하고 수동으로 또는 다음 명령을 사용하여 docker-compose.yml로 저장합니다.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.2/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. YAML 파일 다운로드 및 구성</h3><p>다운로드 <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.4/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> 를 클릭하고 수동으로 또는 다음 명령을 사용하여 docker-compose.yml로 저장합니다.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.4/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
-<p>YAML 파일에서 독립 실행형 서비스의 환경 변수를 다음과 같이 몇 가지 변경해야 합니다:</p>
+<p>YAML 파일에서 독립형 서비스의 환경 변수를 다음과 같이 몇 가지 변경해야 합니다:</p>
 <ul>
 <li>특정 GPU 장치를 Milvus에 할당하려면 <code translate="no">standalone</code> 서비스 정의에서 <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> 필드를 찾아 해당 값을 원하는 GPU의 ID로 바꿉니다. NVIDIA GPU 디스플레이 드라이버에 포함된 <code translate="no">nvidia-smi</code> 도구를 사용하여 GPU 장치의 ID를 확인할 수 있습니다. Milvus는 여러 GPU 장치를 지원합니다.</li>
 </ul>

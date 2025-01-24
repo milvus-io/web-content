@@ -59,14 +59,14 @@ title: Executar o Milvus com suporte a GPU usando o Docker Compose
         ></path>
       </svg>
     </button></h2><p>Para instalar o Milvus com suporte a GPU usando o Docker Compose, siga estas etapas.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descarregar e configurar o ficheiro YAML</h3><p>Faça o download <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.2/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salve-o como docker-compose.yml manualmente ou com o seguinte comando.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.2/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descarregar e configurar o ficheiro YAML</h3><p>Faça o download <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.4/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salve-o como docker-compose.yml manualmente ou com o seguinte comando.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.4/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>É necessário fazer algumas alterações nas variáveis de ambiente do serviço autónomo no ficheiro YAML, como se segue:</p>
 <ul>
 <li>Para atribuir um dispositivo GPU específico ao Milvus, localize o campo <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> na definição do serviço <code translate="no">standalone</code> e substitua o seu valor pelo ID da GPU pretendida. Pode utilizar a ferramenta <code translate="no">nvidia-smi</code>, incluída nos controladores de visualização da GPU NVIDIA, para determinar a ID de um dispositivo GPU. O Milvus suporta múltiplos dispositivos GPU.</li>
 </ul>
-<p>Atribuir um único dispositivo GPU ao Milvus:</p>
+<p>Atribua um único dispositivo GPU ao Milvus:</p>
 <pre><code translate="no" class="language-yaml">...
 <span class="hljs-attr">standalone</span>:
   ...
@@ -219,6 +219,6 @@ docker start &lt;milvus_container_id&gt;
 <li><p>Explore <a href="/docs/pt/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a observabilidade e gestão do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para backups de dados do Milvus.</p></li>
 <li><p>Explore o <a href="/docs/pt/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e actualizações de configuração dinâmica.</p></li>
-<li><p>Explore <a href="https://milvus.io/docs/attu.md">o Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
+<li><p>Explore o <a href="https://milvus.io/docs/attu.md">Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
 <li><p><a href="/docs/pt/monitor.md">Monitore o Milvus com o Prometheus</a>.</p></li>
 </ul>

@@ -210,63 +210,81 @@ schema.addField(AddFieldReq.builder()​
 <h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">تعيين بارامترات الفهرس للحقل المتجه</h3><p>تشبه عملية إنشاء فهرس للمتجهات المتفرقة عملية إنشاء فهرس للمتجهات <a href="/docs/ar/dense-vector.md">الكثيفة،</a> ولكن مع وجود اختلافات في نوع الفهرس المحدد (<code translate="no">index_type</code>)، ومقياس المسافة (<code translate="no">metric_type</code>)، ومعلمات الفهرس (<code translate="no">params</code>).</p>
 <div class="multipleCode">
    <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#curl">جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()​
-​
-index_params.add_index(​
-    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,​
-    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,​
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,​
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,​
-    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},​
-)​
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},
+)
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;​
-<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;​
-​
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
-indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)​
-        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)​
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)​
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)​
-        .<span class="hljs-title function_">extraParams</span>(extraParams)​
-        .<span class="hljs-title function_">build</span>());​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;
+<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;
+
+<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)
+        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)
+        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)
+        .<span class="hljs-title function_">extraParams</span>(extraParams)
+        .<span class="hljs-title function_">build</span>());
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({​
-    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,​
-    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,​
-    metric_type: MetricType.IP,​
-    index_type: IndexType.SPARSE_WAND,​
-    <span class="hljs-keyword">params</span>: {​
-      drop_ratio_build: <span class="hljs-number">0.2</span>,​
-    },​
-});​
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({
+    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
+    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
+    metric_type: MetricType.IP,
+    index_type: IndexType.SPARSE_WAND,
+    <span class="hljs-keyword">params</span>: {
+      inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+    },
+});
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
-        {​
-            &quot;fieldName&quot;: &quot;sparse_vector&quot;,​
-            &quot;metricType&quot;: &quot;IP&quot;,​
-            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,​
-            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,​
-            &quot;params&quot;:{&quot;drop_ratio_build&quot;: 0.2}​
-        }​
-    ]&#x27;</span>​
+<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;sparse_vector&quot;,
+            &quot;metricType&quot;: &quot;IP&quot;,
+            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,
+            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
+            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
+        }
+    ]&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>في المثال أعلاه.</p>
+<p>في المثال أعلاه</p>
 <ul>
-<li><p>يتم إنشاء فهرس من النوع <code translate="no">SPARSE_INVERTED_INDEX</code> للمتجه المتناثر. بالنسبة للمتجهات المتناثرة، يمكنك تحديد <code translate="no">SPARSE_INVERTED_INDEX</code> أو <code translate="no">SPARSE_WAND</code>. لمزيد من التفاصيل، راجع <a href="https://milvus.io/docs/index.md?tab=sparse">فهارس المتجهات المتفرقة</a>.</p></li>
-<li><p>بالنسبة للمتجهات المتناثرة، يدعم <code translate="no">metric_type</code> فقط <code translate="no">IP</code> (الضرب الداخلي)، ويستخدم لقياس التشابه بين متجهين متناثرين. للمزيد من المعلومات حول التشابه، راجع <a href="/docs/ar/metric.md">أنواع المتجهات المترية</a>.</p></li>
-<li><p><code translate="no">drop_ratio_build</code> هي معلمة فهرس اختيارية مخصصة للمتجهات المتفرقة. تتحكم في نسبة قيم المتجهات الصغيرة المستبعدة أثناء بناء الفهرس. على سبيل المثال، باستخدام <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code> ، سيتم استبعاد أصغر 20٪ من قيم المتجهات أثناء إنشاء الفهرس، مما يقلل من الجهد الحسابي أثناء عمليات البحث.</p></li>
+<li><p><code translate="no">index_type</code>: نوع الفهرس المراد إنشاؤه لحقل المتجهات المتفرقة. قيم صالحة:</p>
+<ul>
+<li><code translate="no">SPARSE_INVERTED_INDEX</code>: فهرس مقلوب للأغراض العامة للمتجهات المتفرقة.</li>
+<li><code translate="no">SPARSE_WAND</code>: نوع فهرس متخصص مدعوم في الإصدار 2.5.3 والإصدارات الأقدم.</li>
 </ul>
-<h3 id="Create-collection​" class="common-anchor-header">إنشاء مجموعة</h3><p>بمجرد اكتمال إعدادات المتجهات المتناثرة والفهرس، يمكنك إنشاء مجموعة تحتوي على متجهات متفرقة. يستخدم المثال أدناه طريقة <ins><code translate="no">create_collection</code></ins> لإنشاء مجموعة باسم <code translate="no">my_sparse_collection</code>.</p>
+  <div class="alert note">
+<p>بدءًا من الإصدار 2.5.4 فصاعدًا، تم إهمال <code translate="no">SPARSE_WAND</code>. بدلاً من ذلك، يوصى باستخدام <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> للمعادلة مع الحفاظ على التوافق.</p>
+  </div>
+</li>
+<li><p><code translate="no">metric_type</code>: المقياس المستخدم لحساب التشابه بين المتجهات المتفرقة. قيم صالحة:</p>
+<ul>
+<li><p><code translate="no">IP</code> (الضرب الداخلي): يقيس التشابه باستخدام الضرب النقطي.</p></li>
+<li><p><code translate="no">BM25</code>: يستخدم عادةً للبحث في النص الكامل، مع التركيز على التشابه النصي.</p>
+<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/metric.md">أنواع القياس</a> <a href="/docs/ar/full-text-search.md">والبحث في النص الكامل</a>.</p></li>
+</ul></li>
+<li><p><code translate="no">params.inverted_index_algo</code>: الخوارزمية المستخدمة لبناء الفهرس والاستعلام عنه. قيم صالحة:</p>
+<ul>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (افتراضي): معالجة استعلام المستند في الوقت المحسن (DAAT) باستخدام خوارزمية MaxScore. توفر MaxScore أداءً أفضل لقيم k العالية أو الاستعلامات التي تحتوي على العديد من المصطلحات عن طريق تخطي المصطلحات والمستندات التي من المحتمل أن يكون لها تأثير ضئيل. وهي تحقق ذلك من خلال تقسيم المصطلحات إلى مجموعات أساسية وغير أساسية بناءً على درجات التأثير القصوى، مع التركيز على المصطلحات التي يمكن أن تساهم في أعلى k من النتائج.</p></li>
+<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: معالجة استعلام DAAT المحسّنة باستخدام خوارزمية WAND. تقوم WAND بتقييم عدد أقل من المستندات التي تم الوصول إليها من خلال الاستفادة من درجات التأثير القصوى لتخطي المستندات غير المنافسة، ولكن لديها نفقات أعلى لكل ضربة. هذا يجعل WAND أكثر كفاءة للاستعلامات ذات القيم k الصغيرة أو الاستعلامات القصيرة، حيث يكون التخطي أكثر جدوى.</p></li>
+<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: معالجة استعلام المصطلح الأساسي في الوقت (TAAT). على الرغم من أنها أبطأ مقارنةً بـ <code translate="no">DAAT_MAXSCORE</code> و <code translate="no">DAAT_WAND</code> ، إلا أن <code translate="no">TAAT_NAIVE</code> تقدم ميزة فريدة. على عكس خوارزميات DAAT، التي تستخدم درجات التأثير القصوى المخزنة مؤقتًا والتي تظل ثابتة بغض النظر عن التغييرات التي تطرأ على معلمة المجموعة العالمية (avgdl)، يتكيف <code translate="no">TAAT_NAIVE</code> ديناميكيًا مع هذه التغييرات.</p></li>
+</ul></li>
+</ul>
+<h3 id="Create-collection​" class="common-anchor-header">إنشاء مجموعة</h3><p>بمجرد اكتمال إعدادات المتجهات المتفرقة والفهرس، يمكنك إنشاء مجموعة تحتوي على متجهات متفرقة. يستخدم المثال أدناه طريقة <ins><code translate="no">create_collection</code></ins> لإنشاء مجموعة باسم <code translate="no">my_sparse_collection</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#curl">جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+   <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
     collection_name=<span class="hljs-string">&quot;my_sparse_collection&quot;</span>,​
     schema=schema,​

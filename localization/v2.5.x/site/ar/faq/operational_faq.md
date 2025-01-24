@@ -35,7 +35,7 @@ title: الأسئلة الشائعة التشغيلية
 <p>بالنسبة لـ Milvus المستقلة، يجب أن تكون قادرًا على مراقبة ثلاث حاويات Docker قيد التشغيل على الأقل، إحداها خدمة Milvus والاثنتان الأخريان هما خدمة إدارة وتخزين إلخd. لمزيد من المعلومات، راجع <a href="/docs/ar/install_standalone-docker.md">تثبيت ميلفوس Standalone</a>.</p>
 <h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">لماذا يختلف الوقت في ملفات السجل عن وقت النظام؟</h4><p>يرجع اختلاف الوقت عادةً إلى حقيقة أن الجهاز المضيف لا يستخدم التوقيت العالمي المنسق (UTC).</p>
 <p>تستخدم ملفات السجل داخل صورة Docker التوقيت العالمي المنسق (UTC) بشكل افتراضي. إذا كان جهازك المضيف لا يستخدم التوقيت العالمي المنسق، فقد تحدث هذه المشكلة.</p>
-<h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">كيف أعرف ما إذا كانت وحدة المعالجة المركزية الخاصة بي تدعم Milvus؟</h4><p>تعتمد عمليات الحوسبة الخاصة ب Milvus على دعم وحدة المعالجة المركزية لمجموعة تعليمات تمديد SIMD (تعليمات أحادية التعليمات ومتعددة البيانات). يعد دعم وحدة المعالجة المركزية الخاصة بك لمجموعة تعليمات تمديد SIMD أمرًا بالغ الأهمية لبناء الفهرس والبحث عن تشابه المتجهات داخل Milvus. تأكد من أن وحدة المعالجة المركزية لديك تدعم واحدة على الأقل من مجموعات تعليمات SIMD التالية:</p>
+<h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">كيف أعرف ما إذا كانت وحدة المعالجة المركزية الخاصة بي تدعم Milvus؟</h4><p>تعتمد عمليات الحوسبة الخاصة ب Milvus على دعم وحدة المعالجة المركزية لمجموعة تعليمات تمديد SIMD (تعليمات أحادية التعليمات ومتعددة البيانات). يعد دعم وحدة المعالجة المركزية الخاصة بك لمجموعة تعليمات تمديد SIMD أمرًا حاسمًا لبناء الفهرس والبحث عن تشابه المتجهات داخل Milvus. تأكد من أن وحدة المعالجة المركزية لديك تدعم واحدة على الأقل من مجموعات تعليمات SIMD التالية:</p>
 <ul>
 <li>SSE4.2</li>
 <li>AVX</li>
@@ -49,7 +49,9 @@ title: الأسئلة الشائعة التشغيلية
 <p>راجع <a href="/docs/ar/prerequisite-docker.md">دعم وحدة المعالجة المركزية لمجموعة تعليمات SIMD</a>.</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">هل يمكنني تثبيت Milvus على نظام ويندوز؟</h4><p>نعم، يمكنك تثبيت Milvus على نظام ويندوز إما عن طريق التحويل البرمجي من التعليمات البرمجية المصدرية أو من حزمة ثنائية.</p>
 <p>راجع <a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">تشغيل Milvus على ويندوز</a> لمعرفة كيفية تثبيت Milvus على ويندوز.</p>
-<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">حصلت على خطأ عند تثبيت pymilvus على ويندوز. ماذا أفعل؟</h4><p>لا يوصى بتثبيت PyMilvus على ويندوز. ولكن إذا كان عليك تثبيت PyMilvus على نظام ويندوز ولكن حدث خطأ، حاول تثبيته في بيئة <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">كوندا</a>. راجع <a href="/docs/ar/install-pymilvus.md">تثبيت Milvus SDK</a> للمزيد من المعلومات حول كيفية تثبيت PyMilvus في بيئة كوندا.</p>
+<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">حصلت على خطأ عند تثبيت pymilvus على ويندوز. ماذا أفعل؟</h4><p>يرجى محاولة استخدام الأمر التالي لتحديث pymilvus إلى أحدث إصدار.</p>
+<pre><code translate="no" class="language-shell">pip install --upgrade pymilvus
+<button class="copy-code-btn"></button></code></pre>
 <h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">هل يمكنني نشر ميلفوس عند قطع الاتصال بالإنترنت؟</h4><p>نعم، يمكنك تثبيت ميلفوس في بيئة غير متصلة بالإنترنت. انظر <a href="/docs/ar/install_offline-helm.md">تثبيت ميلفوس دون اتصال</a> لمزيد من المعلومات.</p>
 <h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">أين يمكنني العثور على السجلات التي تم إنشاؤها بواسطة ميلفوس؟</h4><p>تتم طباعة سجل ميلفوس إلى ستاوت (الإخراج القياسي) وستدرر (الخطأ القياسي) بشكل افتراضي، ولكننا نوصي بشدة بإعادة توجيه السجل إلى وحدة تخزين ثابتة في الإنتاج. للقيام بذلك، قم بتحديث <code translate="no">log.file.rootPath</code> في <strong>milvus.yaml.</strong> وإذا قمت بنشر Milvus مع مخطط <code translate="no">milvus-helm</code> ، فإنك تحتاج أيضًا إلى تمكين ثبات السجل أولاً عبر <code translate="no">--set log.persistence.enabled=true</code>.</p>
 <p>إذا لم تقم بتغيير التهيئة، يمكن أن يساعدك استخدام سجلات kubectl logs &lt;pod-name&gt; أو سجلات docker logs CONTAINER أيضًا في العثور على السجل.</p>
@@ -87,7 +89,7 @@ title: الأسئلة الشائعة التشغيلية
 <p>لفهم هذه الأخطاء ومعالجتها:</p>
 <ul>
 <li>افهم أن <code translate="no">len(str)</code> في بايثون يمثل عدد الأحرف، وليس الحجم بالبايت.</li>
-<li>بالنسبة لأنواع البيانات المستندة إلى سلسلة مثل VARCHAR و JSON، استخدم <code translate="no">len(bytes(str, encoding='utf-8'))</code> لتحديد الحجم الفعلي بالبايت، وهو ما يستخدمه Milvus لـ &quot;الطول الأقصى&quot;.</li>
+<li>بالنسبة لأنواع البيانات المستندة إلى السلسلة مثل VARCHAR و JSON، استخدم <code translate="no">len(bytes(str, encoding='utf-8'))</code> لتحديد الحجم الفعلي بالبايت، وهو ما يستخدمه Milvus لـ &quot;الطول الأقصى&quot;.</li>
 </ul>
 <p>مثال في بايثون</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Python Example: result of len() str cannot be used as &quot;max-length&quot; in Milvus </span>

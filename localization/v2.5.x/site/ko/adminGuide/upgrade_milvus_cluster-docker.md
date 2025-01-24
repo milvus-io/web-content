@@ -20,7 +20,7 @@ title: 도커 컴포즈로 밀버스 클러스터 업그레이드하기
         ></path>
       </svg>
     </button></h1><p>이 항목은 도커 컴포즈를 사용하여 Milvus를 업그레이드하는 방법을 설명합니다.</p>
-<p>일반적인 경우, <a href="#Upgrade-Milvus-by-changing-its-image">이미지를 변경하여 Milvus를 업그레이드할</a> 수 있습니다. 그러나 v2.1.x에서 v2.5.2로 업그레이드하기 전에 <a href="#Migrate-the-metadata">메타데이터를 마이그레이션해야</a> 합니다.</p>
+<p>일반적인 경우, <a href="#Upgrade-Milvus-by-changing-its-image">이미지를 변경하여 Milvus를 업그레이드할</a> 수 있습니다. 그러나 v2.1.x에서 v2.5.4로 업그레이드하기 전에 <a href="#Migrate-the-metadata">메타데이터를 마이그레이션해야</a> 합니다.</p>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">이미지를 변경하여 Milvus 업그레이드하기<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,35 +43,35 @@ title: 도커 컴포즈로 밀버스 클러스터 업그레이드하기
 <pre><code translate="no" class="language-yaml">...
 rootcoord:
   container_name: milvus-rootcoord
-  image: milvusdb/milvus:v2.5.2
+  image: milvusdb/milvus:v2.5.4
 ...
 proxy:
   container_name: milvus-proxy
-  image: milvusdb/milvus:v2.5.2
+  image: milvusdb/milvus:v2.5.4
 ...
 querycoord:
   container_name: milvus-querycoord
-  image: milvusdb/milvus:v2.5.2  
+  image: milvusdb/milvus:v2.5.4  
 ...
 querynode:
   container_name: milvus-querynode
-  image: milvusdb/milvus:v2.5.2
+  image: milvusdb/milvus:v2.5.4
 ...
 indexcoord:
   container_name: milvus-indexcoord
-  image: milvusdb/milvus:v2.5.2
+  image: milvusdb/milvus:v2.5.4
 ...
 indexnode:
   container_name: milvus-indexnode
-  image: milvusdb/milvus:v2.5.2 
+  image: milvusdb/milvus:v2.5.4 
 ...
 datacoord:
   container_name: milvus-datacoord
-  image: milvusdb/milvus:v2.5.2   
+  image: milvusdb/milvus:v2.5.4   
 ...
 datanode:
   container_name: milvus-datanode
-  image: milvusdb/milvus:v2.5.2
+  image: milvusdb/milvus:v2.5.4
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>다음 명령을 실행하여 업그레이드를 수행합니다.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -105,7 +105,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.5</span><span class="hljs-number">.2</span>
+  targetVersion: <span class="hljs-number">2.5</span><span class="hljs-number">.4</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

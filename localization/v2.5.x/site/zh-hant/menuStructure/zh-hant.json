@@ -627,9 +627,41 @@
         "children": [
           {
             "label": "向量索引",
-            "id": "index-vector-fields.md",
+            "id": "vector-index",
             "order": 0,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "索引向量欄位",
+                "id": "index-vector-fields.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "平面",
+                "id": "flat.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "IVF_FLAT",
+                "id": "ivf-flat.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "IVF_PQ",
+                "id": "ivf-pq.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "HNSW",
+                "id": "hnsw.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "標量索引",

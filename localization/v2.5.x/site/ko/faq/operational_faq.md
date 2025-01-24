@@ -27,15 +27,15 @@ title: 운영 FAQ
 <h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">Milvus를 설치 및 실행하는 유일한 방법은 Docker인가요?</h4><p>Docker는 Milvus를 배포하는 효율적인 방법이지만 유일한 방법은 아닙니다. 소스 코드에서 Milvus를 배포할 수도 있습니다. 이를 위해서는 Ubuntu(18.04 이상) 또는 CentOS(7 이상)가 필요합니다. 자세한 내용은 <a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">소스 코드에서 Milvus 빌드하기를</a> 참조하세요.</p>
 <h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">리콜에 영향을 미치는 주요 요인은 무엇인가요?</h4><p>리콜은 주로 인덱스 유형과 검색 매개변수에 의해 영향을 받습니다.</p>
 <p>FLAT 인덱스의 경우, Milvus는 컬렉션 내에서 전수 스캔을 수행하며 100% 리턴합니다.</p>
-<p>IVF 인덱스의 경우, nprobe 매개변수는 컬렉션 내에서 검색 범위를 결정합니다. nprobe를 늘리면 검색되는 벡터의 비율과 리콜이 증가하지만 쿼리 성능이 저하됩니다.</p>
+<p>IVF 인덱스의 경우, nprobe 매개변수는 컬렉션 내에서 검색 범위를 결정합니다. nprobe를 늘리면 검색되는 벡터와 리콜되는 벡터의 비율이 증가하지만 쿼리 성능이 저하됩니다.</p>
 <p>HNSW 인덱스의 경우, ef 매개변수는 그래프 검색의 폭을 결정합니다. ef를 높이면 그래프에서 검색되는 점의 수와 리콜이 증가하지만 쿼리 성능이 저하됩니다.</p>
 <p>자세한 내용은 <a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">벡터 인덱싱을</a> 참조하세요.</p>
 <h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">구성 파일에 대한 변경 사항이 적용되지 않는 이유는 무엇인가요?</h4><p>Milvus는 런타임 중에 구성 파일 수정을 지원하지 않습니다. 구성 파일 변경 사항을 적용하려면 Milvus Docker를 다시 시작해야 합니다.</p>
 <h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">Milvus가 성공적으로 시작되었는지 어떻게 알 수 있나요?</h4><p>Milvus가 Docker Compose를 사용하여 시작된 경우 <code translate="no">docker ps</code> 를 실행하여 실행 중인 Docker 컨테이너 수를 관찰하고 Milvus 서비스가 올바르게 시작되었는지 확인하세요.</p>
 <p>Milvus 독립형의 경우, 실행 중인 Docker 컨테이너가 최소 3개(하나는 Milvus 서비스, 나머지 2개는 etcd 관리 및 스토리지 서비스)가 관찰되어야 합니다. 자세한 내용은 <a href="/docs/ko/install_standalone-docker.md">Milvus 독립형 설치하기를</a> 참조하세요.</p>
-<h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">로그 파일의 시간이 시스템 시간과 다른 이유는 무엇인가요?</h4><p>시간 차이는 일반적으로 호스트 시스템이 협정 세계시(UTC)를 사용하지 않기 때문입니다.</p>
+<h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">로그 파일의 시간이 시스템 시간과 다른 이유는 무엇인가요?</h4><p>일반적으로 호스트 시스템이 협정 세계시(UTC)를 사용하지 않기 때문에 시간 차이가 발생합니다.</p>
 <p>Docker 이미지 내의 로그 파일은 기본적으로 UTC를 사용합니다. 호스트 머신이 UTC를 사용하지 않는 경우 이 문제가 발생할 수 있습니다.</p>
-<h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">내 CPU가 Milvus를 지원하는지 어떻게 알 수 있나요?</h4><p>Milvus의 컴퓨팅 작업은 CPU의 SIMD(단일 명령어, 다중 데이터) 확장 명령어 집합 지원 여부에 따라 달라집니다. Milvus 내에서 인덱스 구축과 벡터 유사도 검색을 위해서는 CPU의 SIMD 확장 명령어 세트 지원 여부가 매우 중요합니다. 사용 중인 CPU가 다음 SIMD 명령어 세트 중 하나 이상을 지원하는지 확인하세요:</p>
+<h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">내 CPU가 Milvus를 지원하는지 어떻게 알 수 있나요?</h4><p>Milvus의 컴퓨팅 작업은 CPU의 SIMD(단일 명령어, 다중 데이터) 확장 명령어 집합 지원 여부에 따라 달라집니다. Milvus 내에서 인덱스 구축과 벡터 유사성 검색을 위해서는 CPU의 SIMD 확장 명령어 세트 지원 여부가 중요합니다. 사용 중인 CPU가 다음 SIMD 명령어 세트 중 하나 이상을 지원하는지 확인하세요:</p>
 <ul>
 <li>SSE4.2</li>
 <li>AVX</li>
@@ -49,13 +49,15 @@ title: 운영 FAQ
 <p><a href="/docs/ko/prerequisite-docker.md">CPU의 SIMD 명령어 세트 지원을</a> 참조하세요.</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">Windows에 Milvus를 설치할 수 있나요?</h4><p>예. 소스 코드 또는 바이너리 패키지에서 컴파일하여 Windows에 Milvus를 설치할 수 있습니다.</p>
 <p>Windows에서 Milvus를 설치하는 방법을 알아보려면 Windows에서 Milvus <a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">실행하기를</a> 참조하세요.</p>
-<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">Windows에 pymilvus를 설치할 때 오류가 발생했습니다. 어떻게 해야 하나요?</h4><p>Windows에 PyMilvus를 설치하지 않는 것이 좋습니다. 그러나 Windows에 PyMilvus를 설치해야 하는데 오류가 발생하면 <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a> 환경에서 설치해 보세요. Conda 환경에서 PyMilvus를 설치하는 방법에 대한 자세한 내용은 <a href="/docs/ko/install-pymilvus.md">Milvus SDK 설치하기를</a> 참조하세요.</p>
+<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">Windows에 pymilvus를 설치할 때 오류가 발생했습니다. 어떻게 해야 하나요?</h4><p>다음 명령을 사용하여 pymilvus를 최신 버전으로 업데이트해 보세요.</p>
+<pre><code translate="no" class="language-shell">pip install --upgrade pymilvus
+<button class="copy-code-btn"></button></code></pre>
 <h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">인터넷 연결이 끊긴 상태에서도 Milvus를 배포할 수 있나요?</h4><p>예. 오프라인 환경에서도 Milvus를 설치할 수 있습니다. 자세한 내용은 <a href="/docs/ko/install_offline-helm.md">Milvus 오프라인 설치를</a> 참조하세요.</p>
-<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Milvus에서 생성된 로그는 어디에서 찾을 수 있나요?</h4><p>Milvus 로그는 기본적으로 stout(표준 출력) 및 stderr(표준 오류)로 인쇄되지만, 프로덕션 환경에서 로그를 영구 볼륨으로 리디렉션하는 것이 좋습니다. 이렇게 하려면 <strong>milvus.yaml에서</strong> <code translate="no">log.file.rootPath</code> 을 업데이트하세요. 또한 <code translate="no">milvus-helm</code> 차트와 함께 Milvus를 배포하는 경우, <code translate="no">--set log.persistence.enabled=true</code> 을 통해 로그 지속성을 먼저 활성화해야 합니다.</p>
+<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Milvus에서 생성된 로그는 어디에서 찾을 수 있나요?</h4><p>Milvus 로그는 기본적으로 stout(표준 출력) 및 stderr(표준 오류)로 인쇄되지만, 운영 환경에서는 로그를 영구 볼륨으로 리디렉션할 것을 적극 권장합니다. 이렇게 하려면 <strong>milvus.yaml에서</strong> <code translate="no">log.file.rootPath</code> 을 업데이트하세요. 또한 <code translate="no">milvus-helm</code> 차트와 함께 Milvus를 배포하는 경우, <code translate="no">--set log.persistence.enabled=true</code> 을 통해 로그 지속성을 먼저 활성화해야 합니다.</p>
 <p>구성을 변경하지 않은 경우, kubectl 로그 &lt;팟-네임&gt; 또는 docker 로그 CONTAINER를 사용하면 로그를 찾는 데 도움이 될 수 있습니다.</p>
 <h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">세그먼트에 데이터를 삽입하기 전에 세그먼트에 대한 인덱스를 생성할 수 있나요?</h4><p>예, 가능합니다. 하지만 각 세그먼트를 색인하기 전에 데이터를 일괄적으로 삽입하는 것이 좋으며, 각 데이터는 256MB를 넘지 않아야 합니다.</p>
 <h4 id="Can-I-share-an-etcd-instance-among-multiple-Milvus-instances" class="common-anchor-header">여러 Milvus 인스턴스 간에 etcd 인스턴스를 공유할 수 있나요?</h4><p>예, 여러 Milvus 인스턴스 간에 etcd 인스턴스를 공유할 수 있습니다. 이렇게 하려면 시작하기 전에 각 Milvus 인스턴스의 구성 파일에서 <code translate="no">etcd.rootPath</code> 을 각 인스턴스마다 별도의 값으로 변경해야 합니다.</p>
-<h4 id="Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances" class="common-anchor-header">여러 Milvus 인스턴스 간에 Pulsar 인스턴스를 공유할 수 있나요?</h4><p>예. 여러 Milvus 인스턴스 간에 Pulsar 인스턴스를 공유할 수 있습니다. 공유하려면 다음과 같이 하세요.</p>
+<h4 id="Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances" class="common-anchor-header">여러 Milvus 인스턴스 간에 Pulsar 인스턴스를 공유할 수 있나요?</h4><p>예, 여러 Milvus 인스턴스 간에 Pulsar 인스턴스를 공유할 수 있습니다. 공유하려면 다음과 같이 하세요.</p>
 <ul>
 <li>Pulsar 인스턴스에서 멀티 테넌시가 활성화된 경우, 각 Milvus 인스턴스에 대해 별도의 테넌트 또는 네임스페이스를 할당하는 것을 고려하세요. 이렇게 하려면 시작하기 전에 Milvus 인스턴스의 구성 파일에서 <code translate="no">pulsar.tenant</code> 또는 <code translate="no">pulsar.namespace</code> 을 각각 고유한 값으로 변경해야 합니다.</li>
 <li>Pulsar 인스턴스에서 멀티 테넌시를 활성화하지 않으려는 경우, 시작하기 전에 Milvus 인스턴스의 구성 파일에서 <code translate="no">msgChannel.chanNamePrefix.cluster</code> 을 각각 고유한 값으로 변경하는 것을 고려하세요.</li>

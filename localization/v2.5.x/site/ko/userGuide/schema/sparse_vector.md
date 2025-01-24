@@ -208,61 +208,79 @@ schema.addField(AddFieldReq.builder()​
 <h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">벡터 필드에 대한 인덱스 매개변수 설정</h3><p>스파스 벡터에 대한 인덱스를 생성하는 과정은 <a href="/docs/ko/dense-vector.md">밀도 벡터에</a> 대한 인덱스 생성 과정과 유사하지만 지정된 인덱스 유형(<code translate="no">index_type</code>), 거리 메트릭(<code translate="no">metric_type</code>), 인덱스 파라미터(<code translate="no">params</code>)에 차이가 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()​
-​
-index_params.add_index(​
-    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,​
-    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,​
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,​
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,​
-    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},​
-)​
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},
+)
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;​
-<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;​
-​
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
-indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)​
-        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)​
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)​
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)​
-        .<span class="hljs-title function_">extraParams</span>(extraParams)​
-        .<span class="hljs-title function_">build</span>());​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;
+<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;
+
+<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)
+        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)
+        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)
+        .<span class="hljs-title function_">extraParams</span>(extraParams)
+        .<span class="hljs-title function_">build</span>());
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({​
-    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,​
-    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,​
-    metric_type: MetricType.IP,​
-    index_type: IndexType.SPARSE_WAND,​
-    <span class="hljs-keyword">params</span>: {​
-      drop_ratio_build: <span class="hljs-number">0.2</span>,​
-    },​
-});​
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({
+    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
+    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
+    metric_type: MetricType.IP,
+    index_type: IndexType.SPARSE_WAND,
+    <span class="hljs-keyword">params</span>: {
+      inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+    },
+});
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
-        {​
-            &quot;fieldName&quot;: &quot;sparse_vector&quot;,​
-            &quot;metricType&quot;: &quot;IP&quot;,​
-            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,​
-            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,​
-            &quot;params&quot;:{&quot;drop_ratio_build&quot;: 0.2}​
-        }​
-    ]&#x27;</span>​
+<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;sparse_vector&quot;,
+            &quot;metricType&quot;: &quot;IP&quot;,
+            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,
+            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
+            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
+        }
+    ]&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 예제에서.</p>
+<p>위의 예제에서</p>
 <ul>
-<li><p>스파스 벡터에 대해 <code translate="no">SPARSE_INVERTED_INDEX</code> 유형의 인덱스가 생성됩니다. 스파스 벡터의 경우 <code translate="no">SPARSE_INVERTED_INDEX</code> 또는 <code translate="no">SPARSE_WAND</code> 을 지정할 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/index.md?tab=sparse">스파스 벡터 인덱스를</a> 참조하세요.</p></li>
-<li><p>스파스 벡터의 경우 <code translate="no">metric_type</code> 은 두 스파스 벡터 간의 유사도를 측정하는 데 사용되는 <code translate="no">IP</code> (내적 곱)만 지원합니다. 유사도에 대한 자세한 내용은 <a href="/docs/ko/metric.md">메트릭 유형을</a> 참조하세요.</p></li>
-<li><p><code translate="no">drop_ratio_build</code> 는 스파스 벡터를 위한 선택적 인덱스 매개변수입니다. 인덱스 구축 중에 제외되는 작은 벡터 값의 비율을 제어합니다. 예를 들어 <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code> 을 사용하면 인덱스 생성 중에 가장 작은 20%의 벡터 값이 제외되어 검색 시 계산 노력이 줄어듭니다.</p></li>
+<li><p><code translate="no">index_type</code>: 스파스 벡터 필드에 대해 생성할 인덱스 유형입니다. 유효한 값:</p>
+<ul>
+<li><code translate="no">SPARSE_INVERTED_INDEX</code>: 희소 벡터에 대한 범용 반전 인덱스입니다.</li>
+<li><code translate="no">SPARSE_WAND</code>: Milvus v2.5.3 이하에서 지원되는 특수 인덱스 유형입니다.</li>
 </ul>
-<h3 id="Create-collection​" class="common-anchor-header">컬렉션 만들기</h3><p>스파스 벡터 및 인덱스 설정이 완료되면 스파스 벡터를 포함하는 컬렉션을 만들 수 있습니다. 아래 예제에서는 <ins><code translate="no">create_collection</code></ins> 메서드를 사용하여 <code translate="no">my_sparse_collection</code> 라는 이름의 컬렉션을 생성하는 예제입니다.</p>
+  <div class="alert note">
+<p>Milvus 2.5.4 이후부터 <code translate="no">SPARSE_WAND</code> 은 더 이상 사용되지 않습니다. 대신, 호환성을 유지하면서 동등성을 위해 <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 을 사용하는 것이 좋습니다.</p>
+  </div>
+</li>
+<li><p><code translate="no">metric_type</code>: 스파스 벡터 간의 유사성을 계산하는 데 사용되는 메트릭입니다. 유효한 값:</p>
+<ul>
+<li><p><code translate="no">IP</code> (내적 곱): 도트 곱을 사용하여 유사도를 측정합니다.</p></li>
+<li><p><code translate="no">BM25</code>: 일반적으로 텍스트 유사성에 초점을 맞춘 전체 텍스트 검색에 사용됩니다.</p>
+<p>자세한 내용은 <a href="/docs/ko/metric.md">메트릭 유형</a> 및 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p></li>
+</ul></li>
+<li><p><code translate="no">params.inverted_index_algo</code>: 인덱스 구축 및 쿼리에 사용되는 알고리즘입니다. 유효한 값입니다:</p>
+<ul>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (기본값): MaxScore 알고리즘을 사용하여 DAAT(Document-at-a-Time) 쿼리 처리를 최적화합니다. MaxScore는 영향이 미미할 것 같은 용어와 문서를 건너뛰는 방식으로 높은 k 값이나 많은 용어가 포함된 쿼리에 대해 더 나은 성능을 제공합니다. 최대 영향력 점수를 기준으로 용어를 필수 및 비필수 그룹으로 분류하여 상위 k 결과에 기여할 수 있는 용어에 집중함으로써 이를 달성합니다.</p></li>
+<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: WAND 알고리즘을 사용하여 최적화된 DAAT 쿼리 처리. WAND는 최대 영향력 점수를 활용하여 비경쟁 문서를 건너뛰기 때문에 히트 문서를 더 적게 평가하지만, 히트당 오버헤드가 더 높습니다. 따라서 건너뛰기가 더 용이한 작은 k 값의 쿼리나 짧은 쿼리에는 WAND가 더 효율적입니다.</p></li>
+<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: 기본 TAAT(Term-at-a-Time) 쿼리 처리. <code translate="no">DAAT_MAXSCORE</code> 및 <code translate="no">DAAT_WAND</code> 에 비해 느리지만 <code translate="no">TAAT_NAIVE</code> 은 고유한 이점을 제공합니다. 전역 컬렉션 매개변수(avgdl)의 변경에 관계없이 정적으로 유지되는 캐시된 최대 영향 점수를 사용하는 DAAT 알고리즘과 달리 <code translate="no">TAAT_NAIVE</code> 은 이러한 변경에 동적으로 적응합니다.</p></li>
+</ul></li>
+</ul>
+<h3 id="Create-collection​" class="common-anchor-header">컬렉션 생성</h3><p>스파스 벡터 및 인덱스 설정이 완료되면 스파스 벡터를 포함하는 컬렉션을 만들 수 있습니다. 아래 예제에서는 <ins><code translate="no">create_collection</code></ins> 메서드를 사용하여 <code translate="no">my_sparse_collection</code> 라는 이름의 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​

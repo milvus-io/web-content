@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda dapat memilih jalur upgrade untuk Milvus Anda sebagai berikut:</p>
-<div style="display: none;">- [Lakukan peningkatan bergilir] (#melakukan-peningkatan bergilir) dari Milvus v2.2.3 dan rilis yang lebih baru ke v2.5.3.</div>
+<div style="display: none;">- [Lakukan peningkatan bergilir] (#melakukan-peningkatan bergilir) dari Milvus v2.2.3 dan rilis yang lebih baru ke v2.5.4.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Tingkatkan Milvus menggunakan Helm</a> untuk peningkatan dari rilis minor sebelum v2.2.3 ke v2.5.3.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrasi metadata</a> sebelum peningkatan dari Milvus v2.1.x ke v2.5.3.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Tingkatkan Milvus menggunakan Helm</a> untuk peningkatan dari rilis minor sebelum v2.2.3 ke v2.5.4.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrasi metadata</a> sebelum peningkatan dari Milvus v2.1.x ke v2.5.4.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Melakukan pemutakhiran bergilir<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Operasi</td><td><code translate="no">update</code></td><td>Salah</td></tr>
 </tbody>
 </table>
-<p>Setelah Anda memastikan bahwa semua deployment dalam instans Milvus Anda berada dalam status normal. Anda dapat menjalankan perintah berikut untuk meng-upgrade instans Milvus ke 2.5.3.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.5</span><span class="hljs-number">.3</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.5.3&#x27;</span>
+<p>Setelah Anda memastikan bahwa semua deployment dalam instans Milvus Anda berada dalam status normal. Anda dapat menjalankan perintah berikut untuk meng-upgrade instans Milvus ke 2.5.4.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.5</span><span class="hljs-number">.4</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.5.4&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>

@@ -66,7 +66,7 @@ title: 헬름 차트로 Milvus 클러스터 업그레이드하기
 $ helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Milvus 헬름 차트 리포지토리( <code translate="no">https://milvus-io.github.io/milvus-helm/</code> )는 아카이브되었으며, 다음과 같이 <code translate="no">https://zilliztech.github.io/milvus-helm/</code> 에서 추가 업데이트를 받을 수 있습니다:</p>
+<p>Milvus 헬름 차트 리포지토리( <code translate="no">https://milvus-io.github.io/milvus-helm/</code> )가 아카이브되었으며, 다음과 같이 <code translate="no">https://zilliztech.github.io/milvus-helm/</code> 에서 추가 업데이트를 받을 수 있습니다:</p>
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update
 <span class="hljs-comment"># upgrade existing helm release</span>
@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus의 업그레이드 경로는 다음과 같이 선택할 수 있습니다:</p>
-<div style="display: none;">- 밀버스 v2.2.3 이상 릴리스에서 v2.5.2로 [롤링 업그레이드 수행](#conduct-a-rolling-upgrade)을 수행한다.</div>
+<div style="display: none;">- 밀버스 v2.2.3 이상 릴리스에서 v2.5.4로 [롤링 업그레이드 수행](#conduct-a-rolling-upgrade)을 수행한다.</div>
 <ul>
-<li><p>v2.2.3 이전 마이너 릴리스에서 v2.5.2로 업그레이드하려면<a href="#Upgrade-Milvus-using-Helm">헬름을 사용하여 Milvus를 업그레이드</a> 한다.</p></li>
-<li><p>업그레이드 전에<a href="#Migrate-the-metadata">메타데이터를</a> Milvus v2.1.x에서 v2.5.2로<a href="#Migrate-the-metadata">마이그레이션한다</a>.</p></li>
+<li><p>v2.2.3 이전 마이너 릴리스에서 v2.5.4로 업그레이드하려면<a href="#Upgrade-Milvus-using-Helm">헬름을 사용하여 Milvus를 업그레이드</a> 한다.</p></li>
+<li><p>업그레이드 전에<a href="#Migrate-the-metadata">메타데이터를</a> Milvus v2.1.x에서 v2.5.4로<a href="#Migrate-the-metadata">마이그레이션한다</a>.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">롤링 업그레이드 수행<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>작동</td><td><code translate="no">update</code></td><td>False</td></tr>
 </tbody>
 </table>
-<p>Milvus 인스턴스의 모든 배포가 정상 상태에 있는지 확인했습니다. 다음 명령을 실행하여 Milvus 인스턴스를 2.5.2로 업그레이드할 수 있습니다.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.5</span><span class="hljs-number">.2</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.5.2&#x27;</span>
+<p>Milvus 인스턴스의 모든 배포가 정상 상태에 있는지 확인했습니다. 다음 명령을 실행하여 Milvus 인스턴스를 2.5.4로 업그레이드할 수 있습니다.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.5</span><span class="hljs-number">.4</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.5.4&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -259,7 +259,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 </ol>
 <h4 id="2-Upgrade-Milvus-from-v21x-to-220" class="common-anchor-header">2. Milvus를 v2.1.x에서 2.2.0으로 업그레이드합니다.</h4><p>다음 명령은 Milvus를 v2.1.4에서 2.2.0으로 업그레이드한다고 가정합니다. 필요에 맞는 버전으로 변경하세요.</p>
 <ol>
-<li><p>밀버스 인스턴스 이름, 소스 밀버스 버전, 대상 밀버스 버전을 지정합니다.</p>
+<li><p>Milvus 인스턴스 이름, 소스 Milvus 버전, 대상 Milvus 버전을 지정합니다.</p>
 <pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvus가 기본 K8s 네임스페이스에 설치되지 않은 경우 <code translate="no">-n</code> 로 네임스페이스를 지정합니다.</p>

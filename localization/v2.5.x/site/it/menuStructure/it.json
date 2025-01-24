@@ -348,7 +348,7 @@
             "children": []
           },
           {
-            "label": "Creare istantaneamente una collezione",
+            "label": "Creare una collezione istantanea",
             "id": "create-collection-instantly.md",
             "order": 2,
             "children": []
@@ -565,7 +565,7 @@
                     "children": []
                   },
                   {
-                    "label": "Fermarsi",
+                    "label": "Stop",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -627,9 +627,41 @@
         "children": [
           {
             "label": "Indici vettoriali",
-            "id": "index-vector-fields.md",
+            "id": "vector-index",
             "order": 0,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Campi vettoriali indice",
+                "id": "index-vector-fields.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "PIATTO",
+                "id": "flat.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "FIV_FLAT",
+                "id": "ivf-flat.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "FIV_PQ",
+                "id": "ivf-pq.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "HNSW",
+                "id": "hnsw.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Indici scalari",
@@ -1511,7 +1543,7 @@
             "children": []
           },
           {
-            "label": "Guide all'installazione",
+            "label": "Install Guides",
             "id": "birdwatcher_install_guides.md",
             "order": 1,
             "children": []

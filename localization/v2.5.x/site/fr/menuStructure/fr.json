@@ -627,9 +627,41 @@
         "children": [
           {
             "label": "Indices vectoriels",
-            "id": "index-vector-fields.md",
+            "id": "vector-index",
             "order": 0,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Champs vectoriels d'index",
+                "id": "index-vector-fields.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "PLAT",
+                "id": "flat.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "IVF_FLAT",
+                "id": "ivf-flat.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "IVF_PQ",
+                "id": "ivf-pq.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "HNSW",
+                "id": "hnsw.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Index scalaires",
@@ -1490,7 +1522,7 @@
                 "children": []
               },
               {
-                "label": "Migrer d'une instance à l'autre dans un environnement S3",
+                "label": "Migrer d'une instance à l'autre d'un environnement S3 à l'autre",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []

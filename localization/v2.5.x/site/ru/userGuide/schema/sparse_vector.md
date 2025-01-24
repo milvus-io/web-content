@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Разреженные векторы - важный метод представления данных в информационном поиске и обработке естественного языка. Хотя плотные векторы популярны благодаря своим отличным возможностям семантического понимания, разреженные векторы часто дают более точные результаты, когда речь идет о приложениях, требующих точного соответствия ключевых слов или фраз.</p>
+    </button></h1><p>Разреженные векторы - важный метод представления данных в информационном поиске и обработке естественного языка. Хотя плотные векторы популярны благодаря своим превосходным возможностям семантического понимания, разреженные векторы часто дают более точные результаты, когда речь идет о приложениях, требующих точного соответствия ключевых слов или фраз.</p>
 <h2 id="Overview​" class="common-anchor-header">Обзор<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,7 +50,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector.png" alt="Spare vector representation" class="doc-image" id="spare-vector-representation" />
    </span> <span class="img-wrapper"> <span>Представление разреженных векторов</span> </span></p>
-<p>Разреженные векторы могут быть сгенерированы с помощью различных методов, таких как <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) и <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> в обработке текстов. Кроме того, Milvus предлагает удобные методы, помогающие генерировать и обрабатывать разреженные векторы. Подробнее см. в разделе <a href="/docs/ru/embeddings.md">"Вкрапления"</a>.</p>
+<p>Разреженные векторы могут быть сгенерированы с помощью различных методов, таких как <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) и <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> в обработке текстов. Кроме того, Milvus предлагает удобные методы, помогающие генерировать и обрабатывать разреженные векторы. Более подробную информацию см. в разделе <a href="/docs/ru/embeddings.md">"Вкрапления"</a>.</p>
 <p>Для текстовых данных Milvus также предоставляет возможности полнотекстового поиска, позволяя выполнять векторный поиск непосредственно в необработанных текстовых данных без использования внешних моделей встраивания для генерации разреженных векторов. Дополнительную информацию см. в разделе <a href="/docs/ru/full-text-search.md">Полнотекстовый поиск</a>.</p>
 <p>После векторизации данные можно хранить в Milvus для управления и поиска векторов. На схеме ниже показан основной процесс.</p>
 <p>
@@ -211,61 +211,79 @@ schema.addField(AddFieldReq.builder()​
 <h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">Установка параметров индекса для векторного поля</h3><p>Процесс создания индекса для разреженных векторов аналогичен процессу создания индекса для <a href="/docs/ru/dense-vector.md">плотных векторов</a>, но с отличиями в заданном типе индекса (<code translate="no">index_type</code>), метрике расстояния (<code translate="no">metric_type</code>) и параметрах индекса (<code translate="no">params</code>).</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()​
-​
-index_params.add_index(​
-    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,​
-    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,​
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,​
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,​
-    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},​
-)​
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},
+)
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;​
-<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;​
-​
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
-indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)​
-        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)​
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)​
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)​
-        .<span class="hljs-title function_">extraParams</span>(extraParams)​
-        .<span class="hljs-title function_">build</span>());​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;
+<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;
+
+<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)
+        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)
+        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)
+        .<span class="hljs-title function_">extraParams</span>(extraParams)
+        .<span class="hljs-title function_">build</span>());
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({​
-    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,​
-    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,​
-    metric_type: MetricType.IP,​
-    index_type: IndexType.SPARSE_WAND,​
-    <span class="hljs-keyword">params</span>: {​
-      drop_ratio_build: <span class="hljs-number">0.2</span>,​
-    },​
-});​
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({
+    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
+    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
+    metric_type: MetricType.IP,
+    index_type: IndexType.SPARSE_WAND,
+    <span class="hljs-keyword">params</span>: {
+      inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+    },
+});
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
-        {​
-            &quot;fieldName&quot;: &quot;sparse_vector&quot;,​
-            &quot;metricType&quot;: &quot;IP&quot;,​
-            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,​
-            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,​
-            &quot;params&quot;:{&quot;drop_ratio_build&quot;: 0.2}​
-        }​
-    ]&#x27;</span>​
+<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;sparse_vector&quot;,
+            &quot;metricType&quot;: &quot;IP&quot;,
+            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,
+            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
+            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
+        }
+    ]&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>В примере выше.</p>
+<p>В примере выше:</p>
 <ul>
-<li><p>Для разреженного вектора создается индекс типа <code translate="no">SPARSE_INVERTED_INDEX</code>. Для разреженных векторов можно указать <code translate="no">SPARSE_INVERTED_INDEX</code> или <code translate="no">SPARSE_WAND</code>. Подробнее см. в разделе <a href="https://milvus.io/docs/index.md?tab=sparse">Индексы разреженных векторов</a>.</p></li>
-<li><p>Для разреженных векторов <code translate="no">metric_type</code> поддерживает только <code translate="no">IP</code> (внутреннее произведение), используемое для измерения сходства между двумя разреженными векторами. Дополнительные сведения о сходстве см. в разделе <a href="/docs/ru/metric.md">Метрические типы</a>.</p></li>
-<li><p><code translate="no">drop_ratio_build</code> это необязательный параметр индекса, специально предназначенный для разреженных векторов. Он управляет долей малых значений вектора, исключаемых при построении индекса. Например, при значении <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code> наименьшие 20 % значений вектора будут исключены при создании индекса, что сократит вычислительные усилия при поиске.</p></li>
+<li><p><code translate="no">index_type</code>: Тип индекса для создания разреженного векторного поля. Допустимые значения:</p>
+<ul>
+<li><code translate="no">SPARSE_INVERTED_INDEX</code>: Инвертированный индекс общего назначения для разреженных векторов.</li>
+<li><code translate="no">SPARSE_WAND</code>: : Специализированный тип индекса, поддерживаемый в Milvus v2.5.3 и более ранних версиях.</li>
 </ul>
-<h3 id="Create-collection​" class="common-anchor-header">Создание коллекции</h3><p>После завершения настройки разреженных векторов и индексов можно создать коллекцию, содержащую разреженные векторы. В примере ниже используется <ins><code translate="no">create_collection</code></ins> для создания коллекции с именем <code translate="no">my_sparse_collection</code>.</p>
+  <div class="alert note">
+<p>Начиная с Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> будет устаревшим. Вместо него рекомендуется использовать <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> для эквивалентности при сохранении совместимости.</p>
+  </div>
+</li>
+<li><p><code translate="no">metric_type</code>: Метрика, используемая для вычисления сходства между разреженными векторами. Допустимые значения:</p>
+<ul>
+<li><p><code translate="no">IP</code> (Внутреннее произведение): Измеряет сходство с помощью точечного произведения.</p></li>
+<li><p><code translate="no">BM25</code>: Обычно используется для полнотекстового поиска, фокусируясь на текстовом сходстве.</p>
+<p>Более подробную информацию см. в разделе <a href="/docs/ru/metric.md">Типы метрик</a> и <a href="/docs/ru/full-text-search.md">полнотекстовый поиск</a>.</p></li>
+</ul></li>
+<li><p><code translate="no">params.inverted_index_algo</code>: Алгоритм, используемый для построения и запроса индекса. Допустимые значения:</p>
+<ul>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (по умолчанию): Оптимизированная обработка запросов Document-at-a-Time (DAAT) с использованием алгоритма MaxScore. MaxScore обеспечивает лучшую производительность при больших значениях k или запросах с большим количеством терминов, пропуская термины и документы, которые, вероятно, будут иметь минимальное влияние. Это достигается путем разделения терминов на существенные и несущественные группы на основе их максимальных баллов влияния, фокусируясь на терминах, которые могут внести вклад в результаты top-k.</p></li>
+<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: Оптимизированная обработка запросов DAAT с помощью алгоритма WAND. WAND оценивает меньше документов, попавших в запрос, за счет использования максимальных баллов влияния для пропуска неконкурентных документов, но при этом имеет более высокие накладные расходы на каждый запрос. Это делает WAND более эффективным для запросов с небольшими значениями k или коротких запросов, где пропуск документов более целесообразен.</p></li>
+<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: Обработка запросов с использованием базового термина (TAAT). Хотя он медленнее, чем <code translate="no">DAAT_MAXSCORE</code> и <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> обладает уникальным преимуществом. В отличие от алгоритмов DAAT, использующих кэшированные оценки максимального воздействия, которые остаются статичными независимо от изменений глобального параметра коллекции (avgdl), <code translate="no">TAAT_NAIVE</code> динамически адаптируется к таким изменениям.</p></li>
+</ul></li>
+</ul>
+<h3 id="Create-collection​" class="common-anchor-header">Создание коллекции</h3><p>После того как настройки разреженного вектора и индекса завершены, можно создать коллекцию, содержащую разреженные векторы. В примере ниже используется метод <ins><code translate="no">create_collection</code></ins> для создания коллекции с именем <code translate="no">my_sparse_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
@@ -525,7 +543,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
       </svg>
     </button></h2><ul>
 <li><p><strong>Можете ли вы объяснить разницу между SPARSE_INVERTED_INDEX и SPARSE_WAND, и как мне выбрать между ними?</strong></p>
-<p><strong>SPARSE_INVERTED_INDEX</strong> - это традиционный инвертированный индекс, в то время как <strong>SPARSE_WAND</strong> использует алгоритм <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> для уменьшения количества полных оценок IP-расстояния во время поиска. <strong>SPARSE_WAND</strong> обычно быстрее, но его производительность может снижаться с увеличением плотности векторов. Чтобы выбрать один из них, проведите эксперименты и бенчмарки, основанные на конкретном наборе данных и сценарии использования.</p></li>
+<p><strong>SPARSE_INVERTED_INDEX</strong> - это традиционный инвертированный индекс, в то время как <strong>SPARSE_WAND</strong> использует алгоритм <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> для уменьшения количества полных оценок IP-расстояния во время поиска. <strong>SPARSE_WAND</strong> обычно быстрее, но его производительность может снижаться с увеличением плотности векторов. Чтобы выбрать один из них, проведите эксперименты и бенчмарки, основанные на вашем конкретном наборе данных и сценарии использования.</p></li>
 <li><p><strong>Как выбрать параметры drop_ratio_build и drop_ratio_search?</strong></p>
 <p>Выбор параметров <strong>drop_ratio_build</strong> и <strong>drop_ratio_search</strong> зависит от характеристик ваших данных и ваших требований к задержке/пропускной способности и точности поиска.</p></li>
 <li><p><strong>Может ли размерность разреженного вложения быть любой дискретной величиной в пространстве uint32?</strong></p>

@@ -71,7 +71,7 @@ title: Gestion des groupes de ressources
 <p>Sauf dans les cas suivants :</p>
 <ul>
 <li>Lorsque le nombre de QueryNodes dans le cluster Milvus est insuffisant, c'est-à-dire <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>, il y aura toujours des groupes de ressources sans suffisamment de QueryNodes.</li>
-<li>Lorsque le nombre de QueryNodes dans le cluster Milvus est excessif ( <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>), les QueryNodes redondants seront toujours placés en premier dans le <strong>__default_resource_group</strong>.</li>
+<li>Lorsque le nombre de QueryNodes dans le cluster Milvus est excessif, c'est-à-dire <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>, les QueryNodes redondants seront toujours placés en premier dans le <strong>__default_resource_group</strong>.</li>
 </ul>
 <p>Bien entendu, si le nombre de QueryNodes dans le cluster change, Milvus tentera continuellement de s'adapter pour répondre aux conditions finales. Par conséquent, vous pouvez d'abord appliquer les modifications de configuration du groupe de ressources, puis procéder à la mise à l'échelle des QueryNodes.</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">Utiliser l'API déclarative pour gérer le groupe de ressources<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
@@ -90,7 +90,7 @@ title: Gestion des groupes de ressources
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Tous les exemples de code sur cette page sont dans PyMilvus 2.5.3. Mettez à jour votre installation PyMilvus avant de les exécuter.</p>
+<p>Tous les exemples de code sur cette page sont dans PyMilvus 2.5.4. Mettez à jour votre installation PyMilvus avant de les exécuter.</p>
 </div>
 <ol>
 <li><p>Créer un groupe de ressources.</p>

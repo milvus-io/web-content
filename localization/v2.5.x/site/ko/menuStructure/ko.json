@@ -627,9 +627,41 @@
         "children": [
           {
             "label": "벡터 인덱스",
-            "id": "index-vector-fields.md",
+            "id": "vector-index",
             "order": 0,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "인덱스 벡터 필드",
+                "id": "index-vector-fields.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "플랫",
+                "id": "flat.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "IVF_FLAT",
+                "id": "ivf-flat.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "IVF_PQ",
+                "id": "ivf-pq.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "HNSW",
+                "id": "hnsw.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "스칼라 인덱스",
@@ -1715,7 +1747,7 @@
             "children": []
           },
           {
-            "label": "실리콘 플로우",
+            "label": "SiliconFlow",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []

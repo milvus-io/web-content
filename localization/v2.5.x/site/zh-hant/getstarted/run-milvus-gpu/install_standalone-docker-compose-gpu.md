@@ -59,8 +59,8 @@ title: 使用 Docker Compose 運行支援 GPU 的 Milvus
         ></path>
       </svg>
     </button></h2><p>若要使用 Docker Compose 安裝支援 GPU 的 Milvus，請遵循下列步驟。</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.下載並設定 YAML 檔案</h3><p>下載 <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.3/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>並手動儲存為 docker-compose.yml，或使用下列指令。</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.3/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.下載並設定 YAML 檔案</h3><p>下載 <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.4/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>並手動儲存為 docker-compose.yml，或使用下列指令。</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.4/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>您需要對 YAML 檔案中獨立服務的環境變數做一些變更，如下所示：</p>
 <ul>

@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以為您的 Milvus 選擇升級路徑，如下所示：</p>
-<div style="display: none;">- 進行滾動升級](#conduct-a-rolling-upgrade) 從 Milvus v2.2.3 及以後的版本升級到 v2.5.3。</div>
+<div style="display: none;">- 進行滾動升級](#conduct-a-rolling-upgrade) 從 Milvus v2.2.3 及以後的版本升級到 v2.5.4。</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升級 Milvus</a>，從 v2.2.3 之前的次要版本升級到 v2.5.3。</p></li>
-<li><p>在從 Milvus v2.1.x 升級到 v2.5.3 之前<a href="#Migrate-the-metadata">遷移元資料</a>。</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升級 Milvus</a>，從 v2.2.3 之前的次要版本升級到 v2.5.4。</p></li>
+<li><p>在從 Milvus v2.1.x 升級到 v2.5.4 之前<a href="#Migrate-the-metadata">遷移元資料</a>。</p></li>
 </ul>
 <div style="display:none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">進行滾動升級<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作</td><td><code translate="no">update</code></td><td>假</td></tr>
 </tbody>
 </table>
-<p>一旦您確保 Milvus 實例中的所有部署都處於正常狀態。你可以執行以下指令將 Milvus 實例升級到 2.5.3。</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.5</span><span class="hljs-number">.3</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.5.3&#x27;</span>
+<p>一旦您確保 Milvus 實例中的所有部署都處於正常狀態。你可以執行以下指令將 Milvus 實例升級到 2.5.4。</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.5</span><span class="hljs-number">.4</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.5.4&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -235,25 +235,25 @@ my-release-minio-744dd9586f-qngzv               1/1     Running   0          84s
 <li>遷移 Milvus 元資料。</li>
 <li>使用新的映像啟動 Milvus 元件。</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-253" class="common-anchor-header">2.將 Milvus 從 v2.1.x 升級到 2.5.3</h4><p>以下命令假設你將 Milvus 從 v2.1.4 升級到 2.5.3。將它們改成適合你需要的版本。</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-254" class="common-anchor-header">2.將 Milvus 從 v2.1.x 升級到 2.5.4</h4><p>以下命令假設你將 Milvus 從 v2.1.4 升級到 2.5.4。將它們改成適合你需要的版本。</p>
 <ol>
 <li><p>指定 Milvus 實例名稱、源 Milvus 版本和目標 Milvus 版本。</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.3
+<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.4
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果你的 Milvus 沒有安裝在預設的 K8s 命名空間，用<code translate="no">-n</code> 指定命名空間。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.3
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.4
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果您的 Milvus 安裝在自訂的<code translate="no">rootpath</code> ，請用<code translate="no">-r</code> 指定根目錄。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.3 -r by-dev
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.4 -r by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果你的 Milvus 安裝了自訂的<code translate="no">image</code> ，用<code translate="no">-w</code> 指定圖片標籤。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.3 -r by-dev -w milvusdb/milvus:v2.5.3
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.4 -r by-dev -w milvusdb/milvus:v2.5.4
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果您想在遷移完成後自動移除遷移 Pod，請設定<code translate="no">-d true</code> 。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.3 -w milvusdb/milvus:v2.5.3 -d <span class="hljs-literal">true</span>
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.4 -w milvusdb/milvus:v2.5.4 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果遷移失敗，請回滾並重新遷移。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.3 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.3 -r by-dev -o migrate -w milvusdb/milvus:v2.5.3
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.4 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.4 -r by-dev -o migrate -w milvusdb/milvus:v2.5.4
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

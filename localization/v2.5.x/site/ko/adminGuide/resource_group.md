@@ -90,7 +90,7 @@ title: 리소스 그룹 관리
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>이 페이지의 모든 코드 샘플은 PyMilvus 2.5.3 버전입니다. 실행하기 전에 PyMilvus 설치를 업그레이드하세요.</p>
+<p>이 페이지의 모든 코드 샘플은 PyMilvus 2.5.4 버전입니다. 실행하기 전에 PyMilvus 설치를 업그레이드하세요.</p>
 </div>
 <ol>
 <li><p>리소스 그룹을 생성합니다.</p>
@@ -296,7 +296,7 @@ scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>클러스터 스케일 인</p>
-<p>마찬가지로, <strong>__pending_nodes</strong> 리소스 그룹에서 쿼리 노드를 우선적으로 선택하는 스케일 인 규칙을 설정할 수 있습니다. 이 정보는 <code translate="no">describe_resource_group</code> API를 통해 얻을 수 있습니다. 지정된 리소스 그룹 스케일인 목표 달성하기.</p>
+<p>마찬가지로 <strong>__pending_nodes</strong> 리소스 그룹에서 쿼리 노드를 우선적으로 선택하는 스케일 인 규칙을 설정할 수 있습니다. 이 정보는 <code translate="no">describe_resource_group</code> API를 통해 얻을 수 있습니다. 지정된 리소스 그룹 스케일인 목표 달성하기.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(

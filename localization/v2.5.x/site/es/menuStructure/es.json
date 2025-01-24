@@ -627,9 +627,41 @@
         "children": [
           {
             "label": "Índices vectoriales",
-            "id": "index-vector-fields.md",
+            "id": "vector-index",
             "order": 0,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Campos vectoriales de índice",
+                "id": "index-vector-fields.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "PLANA",
+                "id": "flat.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "IVF_FLAT",
+                "id": "ivf-flat.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "IVF_PQ",
+                "id": "ivf-pq.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "HNSW",
+                "id": "hnsw.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Índices escalares",
@@ -1974,7 +2006,7 @@
             "children": []
           },
           {
-            "label": "Sin estructurar",
+            "label": "No estructurado",
             "id": "rag_with_milvus_and_unstructured.md",
             "order": 3,
             "children": []

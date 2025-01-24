@@ -49,8 +49,10 @@ title: Häufig gestellte Fragen zum Betrieb
 <p>Siehe <a href="/docs/de/prerequisite-docker.md">CPU-Unterstützung für SIMD-Befehlssatz</a>.</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">Kann ich Milvus unter Windows installieren?</h4><p>Ja. Sie können Milvus unter Windows entweder durch Kompilieren aus dem Quellcode oder aus einem Binärpaket installieren.</p>
 <p>Siehe <a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">Milvus unter Windows ausführen</a>, um zu erfahren, wie man Milvus unter Windows installiert.</p>
-<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">Ich habe einen Fehler bei der Installation von pymilvus unter Windows erhalten. Was soll ich tun?</h4><p>Es wird nicht empfohlen, PyMilvus unter Windows zu installieren. Wenn Sie PyMilvus jedoch unter Windows installieren müssen, aber einen Fehler erhalten, versuchen Sie es in einer <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda-Umgebung</a> zu installieren. Weitere Informationen zur Installation von PyMilvus in einer Conda-Umgebung finden Sie unter <a href="/docs/de/install-pymilvus.md">Installieren des Milvus SDK</a>.</p>
-<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">Kann ich Milvus einsetzen, wenn ich nicht mit dem Internet verbunden bin?</h4><p>Ja, Sie können Milvus in einer Offline-Umgebung installieren. Siehe <a href="/docs/de/install_offline-helm.md">Milvus offline installieren</a> für weitere Informationen.</p>
+<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">Ich habe einen Fehler bei der Installation von pymilvus unter Windows erhalten. Was soll ich tun?</h4><p>Bitte versuchen Sie, pymilvus mit dem folgenden Befehl auf die neueste Version zu aktualisieren.</p>
+<pre><code translate="no" class="language-shell">pip install --upgrade pymilvus
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">Kann ich Milvus installieren, wenn ich nicht mit dem Internet verbunden bin?</h4><p>Ja, Sie können Milvus in einer Offline-Umgebung installieren. Weitere Informationen finden Sie unter <a href="/docs/de/install_offline-helm.md">Milvus offline installieren</a>.</p>
 <h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Wo kann ich die von Milvus erzeugten Protokolle finden?</h4><p>Das Milvus-Protokoll wird standardmäßig auf stout (Standardausgabe) und stderr (Standardfehler) ausgegeben. Wir empfehlen jedoch dringend, Ihr Protokoll in der Produktion auf ein persistentes Volume umzuleiten. Um dies zu tun, aktualisieren Sie <code translate="no">log.file.rootPath</code> in <strong>milvus.yaml</strong>. Und wenn Sie Milvus mit <code translate="no">milvus-helm</code> chart einsetzen, müssen Sie auch zuerst die Log-Persistenz über <code translate="no">--set log.persistence.enabled=true</code> aktivieren.</p>
 <p>Wenn Sie die Konfiguration nicht geändert haben, kann Ihnen auch die Verwendung von kubectl logs &lt;pod-name&gt; oder docker logs CONTAINER helfen, das Protokoll zu finden.</p>
 <h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">Kann ich einen Index für ein Segment erstellen, bevor ich Daten in das Segment einfüge?</h4><p>Ja, das können Sie. Wir empfehlen jedoch, Daten in Stapeln einzufügen, von denen jeder 256 MB nicht überschreiten sollte, bevor jedes Segment indiziert wird.</p>
@@ -86,7 +88,7 @@ title: Häufig gestellte Fragen zum Betrieb
 </ul>
 <p>Um diese Fehler zu verstehen und zu beheben:</p>
 <ul>
-<li>Verstehen Sie, dass <code translate="no">len(str)</code> in Python die Anzahl der Zeichen angibt, nicht die Größe in Bytes.</li>
+<li>Verstehen Sie, dass <code translate="no">len(str)</code> in Python die Anzahl der Zeichen und nicht die Größe in Bytes angibt.</li>
 <li>Für String-basierte Datentypen wie VARCHAR und JSON verwenden Sie <code translate="no">len(bytes(str, encoding='utf-8'))</code>, um die tatsächliche Größe in Bytes zu bestimmen, die Milvus für &quot;max-length&quot; verwendet.</li>
 </ul>
 <p>Beispiel in Python:</p>
@@ -102,6 +104,6 @@ title: Häufig gestellte Fragen zum Betrieb
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">Haben Sie noch Fragen?</h4><p>Sie können:</p>
 <ul>
-<li>Schauen Sie sich <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> auf GitHub an. Hier können Sie Fragen stellen, Ideen austauschen und anderen helfen.</li>
+<li>Schauen Sie sich <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> auf GitHub an. Stellen Sie Fragen, tauschen Sie Ideen aus und helfen Sie anderen.</li>
 <li>Treten Sie unserem <a href="https://discuss.milvus.io/">Milvus Forum</a> oder <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack Channel</a> bei, um Unterstützung zu erhalten und sich mit unserer Open-Source-Community auszutauschen.</li>
 </ul>

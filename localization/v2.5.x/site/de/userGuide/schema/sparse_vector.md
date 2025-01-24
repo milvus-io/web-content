@@ -212,61 +212,79 @@ schema.addField(AddFieldReq.builder()​
 <h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">Index-Parameter für das Vektorfeld festlegen</h3><p>Der Prozess der Erstellung eines Index für spärliche Vektoren ähnelt dem für <a href="/docs/de/dense-vector.md">dichte Vektoren</a>, jedoch mit Unterschieden im angegebenen Indextyp (<code translate="no">index_type</code>), der Distanzmetrik (<code translate="no">metric_type</code>) und den Indexparametern (<code translate="no">params</code>).</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()​
-​
-index_params.add_index(​
-    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,​
-    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,​
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,​
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,​
-    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},​
-)​
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},
+)
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;​
-<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;​
-​
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
-indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)​
-        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)​
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)​
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)​
-        .<span class="hljs-title function_">extraParams</span>(extraParams)​
-        .<span class="hljs-title function_">build</span>());​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;
+<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;
+
+<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)
+        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)
+        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)
+        .<span class="hljs-title function_">extraParams</span>(extraParams)
+        .<span class="hljs-title function_">build</span>());
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({​
-    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,​
-    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,​
-    metric_type: MetricType.IP,​
-    index_type: IndexType.SPARSE_WAND,​
-    <span class="hljs-keyword">params</span>: {​
-      drop_ratio_build: <span class="hljs-number">0.2</span>,​
-    },​
-});​
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({
+    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
+    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
+    metric_type: MetricType.IP,
+    index_type: IndexType.SPARSE_WAND,
+    <span class="hljs-keyword">params</span>: {
+      inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+    },
+});
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
-        {​
-            &quot;fieldName&quot;: &quot;sparse_vector&quot;,​
-            &quot;metricType&quot;: &quot;IP&quot;,​
-            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,​
-            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,​
-            &quot;params&quot;:{&quot;drop_ratio_build&quot;: 0.2}​
-        }​
-    ]&#x27;</span>​
+<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;sparse_vector&quot;,
+            &quot;metricType&quot;: &quot;IP&quot;,
+            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,
+            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
+            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
+        }
+    ]&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Im obigen Beispiel.</p>
+<p>Im obigen Beispiel:</p>
 <ul>
-<li><p>Für den Sparse-Vektor wird ein Index vom Typ <code translate="no">SPARSE_INVERTED_INDEX</code> erstellt. Für spärliche Vektoren können Sie <code translate="no">SPARSE_INVERTED_INDEX</code> oder <code translate="no">SPARSE_WAND</code> angeben. Details finden Sie unter <a href="https://milvus.io/docs/index.md?tab=sparse">Sparse Vector Indexes</a>.</p></li>
-<li><p>Für spärliche Vektoren unterstützt <code translate="no">metric_type</code> nur <code translate="no">IP</code> (Inneres Produkt), das zur Messung der Ähnlichkeit zwischen zwei spärlichen Vektoren verwendet wird. Weitere Informationen zur Ähnlichkeit finden Sie unter <a href="/docs/de/metric.md">Metrische Typen</a>.</p></li>
-<li><p><code translate="no">drop_ratio_build</code> ist ein optionaler Indexparameter speziell für spärliche Vektoren. Er steuert den Anteil der kleinen Vektorwerte, die bei der Indexerstellung ausgeschlossen werden. Bei <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code> werden beispielsweise die kleinsten 20% der Vektorwerte bei der Indexerstellung ausgeschlossen, was den Rechenaufwand bei der Suche reduziert.</p></li>
+<li><p><code translate="no">index_type</code>: Der Index-Typ, der für das spärliche Vektorfeld erstellt werden soll. Gültige Werte:</p>
+<ul>
+<li><code translate="no">SPARSE_INVERTED_INDEX</code>: Ein allgemeiner invertierter Index für spärliche Vektoren.</li>
+<li><code translate="no">SPARSE_WAND</code>: Ein spezieller Indextyp, der in Milvus v2.5.3 und früher unterstützt wird.</li>
 </ul>
-<h3 id="Create-collection​" class="common-anchor-header">Sammlung erstellen</h3><p>Sobald die Einstellungen für spärliche Vektoren und Indizes abgeschlossen sind, können Sie eine Sammlung erstellen, die spärliche Vektoren enthält. Das folgende Beispiel verwendet die <ins><code translate="no">create_collection</code></ins> Methode, um eine Sammlung namens <code translate="no">my_sparse_collection</code> zu erstellen.</p>
+  <div class="alert note">
+<p>Ab Milvus 2.5.4 wird <code translate="no">SPARSE_WAND</code> veraltet sein. Es wird empfohlen, stattdessen <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> zu verwenden, um die Kompatibilität zu wahren und die Gleichwertigkeit zu gewährleisten.</p>
+  </div>
+</li>
+<li><p><code translate="no">metric_type</code>: Die Metrik, die zur Berechnung der Ähnlichkeit zwischen spärlichen Vektoren verwendet wird. Gültige Werte:</p>
+<ul>
+<li><p><code translate="no">IP</code> (Inneres Produkt): Misst die Ähnlichkeit anhand des Punktprodukts.</p></li>
+<li><p><code translate="no">BM25</code>: Wird in der Regel für die Volltextsuche verwendet, wobei der Schwerpunkt auf der textuellen Ähnlichkeit liegt.</p>
+<p>Weitere Einzelheiten finden Sie unter <a href="/docs/de/metric.md">Metrische Typen</a> und <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p></li>
+</ul></li>
+<li><p><code translate="no">params.inverted_index_algo</code>: Der Algorithmus, der für den Aufbau und die Abfrage des Indexes verwendet wird. Gültige Werte:</p>
+<ul>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (Standard): Optimierte Document-at-a-Time (DAAT)-Abfrageverarbeitung unter Verwendung des MaxScore-Algorithmus. MaxScore bietet eine bessere Leistung für hohe k-Werte oder Abfragen mit vielen Begriffen, indem Begriffe und Dokumente übersprungen werden, die wahrscheinlich nur geringe Auswirkungen haben. Dies wird erreicht, indem Begriffe auf der Grundlage ihrer maximalen Trefferquote in wesentliche und nicht wesentliche Gruppen unterteilt werden, wobei der Schwerpunkt auf Begriffen liegt, die zu den Top-k-Ergebnissen beitragen können.</p></li>
+<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: Optimierte Verarbeitung von DAAT-Anfragen mit dem WAND-Algorithmus. WAND wertet weniger Trefferdokumente aus, indem es die maximalen Impact-Scores nutzt, um nicht konkurrierende Dokumente zu überspringen, aber es hat einen höheren Overhead pro Treffer. Dadurch ist WAND effizienter für Abfragen mit kleinen k-Werten oder kurzen Abfragen, bei denen das Überspringen von Dokumenten praktikabler ist.</p></li>
+<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: Basic Term-at-a-Time (TAAT) Abfrageverarbeitung. Obwohl er im Vergleich zu <code translate="no">DAAT_MAXSCORE</code> und <code translate="no">DAAT_WAND</code> langsamer ist, bietet <code translate="no">TAAT_NAIVE</code> einen einzigartigen Vorteil. Im Gegensatz zu DAAT-Algorithmen, die zwischengespeicherte Maximalwerte verwenden, die unabhängig von Änderungen des globalen Sammlungsparameters (avgdl) statisch bleiben, passt sich <code translate="no">TAAT_NAIVE</code> dynamisch an solche Änderungen an.</p></li>
+</ul></li>
+</ul>
+<h3 id="Create-collection​" class="common-anchor-header">Sammlung erstellen</h3><p>Sobald die Einstellungen für Sparse-Vektoren und Indizes abgeschlossen sind, können Sie eine Sammlung erstellen, die Sparse-Vektoren enthält. Das folgende Beispiel verwendet die <ins><code translate="no">create_collection</code></ins> Methode, um eine Sammlung namens <code translate="no">my_sparse_collection</code> zu erstellen.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
@@ -496,7 +514,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
       </svg>
     </button></h2><p>Bei der Verwendung von spärlichen Vektoren in Milvus sind die folgenden Einschränkungen zu beachten:</p>
 <ul>
-<li><p>Derzeit werden nur die Abstandsmetriken <strong>IP</strong> und <strong>BM25</strong> (für die Volltextsuche) für spärliche Vektoren unterstützt. Die hohe Dimensionalität von spärlichen Vektoren macht L2 und Kosinusabstand unpraktisch.</p></li>
+<li><p>Derzeit werden nur die Abstandsmetriken <strong>IP</strong> und <strong>BM25</strong> (für die Volltextsuche) für Sparse-Vektoren unterstützt. Die hohe Dimensionalität von spärlichen Vektoren macht L2 und Kosinusabstand unpraktisch.</p></li>
 <li><p>Für spärliche Vektorfelder werden nur die Indextypen <strong>SPARSE_INVERTED_INDEX</strong> und <strong>SPARSE_WAND</strong> unterstützt.</p></li>
 <li><p>Die für spärliche Vektoren unterstützten Datentypen:</p>
 <ul>

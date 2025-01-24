@@ -39,7 +39,7 @@ summary: >-
 <ul>
 <li><p><strong>テキスト分析：</strong>各次元が単語に対応し、文書に登場する単語だけがゼロ以外の値を持つ。</p></li>
 <li><p><strong>推薦システム：</strong>ユーザーとアイテムの相互作用行列。各次元は、特定のアイテムに対するユーザーの評価を表し、ほとんどのユーザーは少数のアイテムとしか相互作用しない。</p></li>
-<li><p><strong>画像処理：</strong>局所特徴表現：画像の重要なポイントのみに焦点を当て、高次元の疎なベクトルを生成する。</p></li>
+<li><p><strong>画像処理：</strong>局所特徴表現：画像の重要な点のみに焦点を当て、高次元の疎なベクトルを生成する。</p></li>
 </ul>
 <p>下図に示すように、密なベクトルは通常、各位置が値を持つ連続的な配列として表現される（例：<code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code> ）。対照的に、スパース・ベクトルは非ゼロ要素とそのインデックスのみを格納し、しばしばキーと値のペアとして表現されます（例：<code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code> ）。この表現は、特に非常に高次元のデータ（例えば10,000次元）を扱う場合に、記憶領域を大幅に削減し、計算効率を向上させます。</p>
 <p>
@@ -207,61 +207,79 @@ schema.addField(AddFieldReq.builder()​
 <h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">ベクトル・フィールドにインデックス・パラメータを設定する</h3><p>スパース・ベクトルのインデックスを作成するプロセスは、<a href="/docs/ja/dense-vector.md">密な</a>ベクトルの場合と似ていますが、指定するインデックス・タイプ (<code translate="no">index_type</code>)、距離メトリック (<code translate="no">metric_type</code>)、インデックス・パラメータ (<code translate="no">params</code>)が異なります。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()​
-​
-index_params.add_index(​
-    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,​
-    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,​
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,​
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,​
-    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},​
-)​
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},
+)
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;​
-<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;​
-​
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
-indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)​
-        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)​
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)​
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)​
-        .<span class="hljs-title function_">extraParams</span>(extraParams)​
-        .<span class="hljs-title function_">build</span>());​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;
+<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;
+
+<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)
+        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)
+        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)
+        .<span class="hljs-title function_">extraParams</span>(extraParams)
+        .<span class="hljs-title function_">build</span>());
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({​
-    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,​
-    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,​
-    metric_type: MetricType.IP,​
-    index_type: IndexType.SPARSE_WAND,​
-    <span class="hljs-keyword">params</span>: {​
-      drop_ratio_build: <span class="hljs-number">0.2</span>,​
-    },​
-});​
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({
+    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
+    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
+    metric_type: MetricType.IP,
+    index_type: IndexType.SPARSE_WAND,
+    <span class="hljs-keyword">params</span>: {
+      inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+    },
+});
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
-        {​
-            &quot;fieldName&quot;: &quot;sparse_vector&quot;,​
-            &quot;metricType&quot;: &quot;IP&quot;,​
-            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,​
-            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,​
-            &quot;params&quot;:{&quot;drop_ratio_build&quot;: 0.2}​
-        }​
-    ]&#x27;</span>​
+<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;sparse_vector&quot;,
+            &quot;metricType&quot;: &quot;IP&quot;,
+            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,
+            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
+            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
+        }
+    ]&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <p>上の例では</p>
 <ul>
-<li><p><code translate="no">SPARSE_INVERTED_INDEX</code> 型のインデックスがスパース・ベクトルに作成されます。スパース・ベクトルの場合、<code translate="no">SPARSE_INVERTED_INDEX</code> または<code translate="no">SPARSE_WAND</code> を指定できます。詳細については、<a href="https://milvus.io/docs/index.md?tab=sparse">スパース・ベクター・インデックスを</a>参照してください。</p></li>
-<li><p>スパース・ベクトルの場合、<code translate="no">metric_type</code> は<code translate="no">IP</code> （内積）のみをサポートしています。これは、2 つのスパース・ベクトルの類似度を測定するために使用されます。類似度の詳細については、<a href="/docs/ja/metric.md">メトリック型を</a>参照してください。</p></li>
-<li><p><code translate="no">drop_ratio_build</code> は、スパースベクトル専用のオプションのインデックスパラメータです。これは、インデックス構築時に除外される小さなベクトル値の割合を制御します。例えば、 を指定すると、インデックス作成時にベクトル値の最小20%が除外され、検索時の計算量が削減されます。<code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code></p></li>
+<li><p><code translate="no">index_type</code>:疎なベクトル・フィールドに作成するインデックスの型。有効な値：</p>
+<ul>
+<li><code translate="no">SPARSE_INVERTED_INDEX</code>:スパース・ベクトル用の汎用転置インデックス。</li>
+<li><code translate="no">SPARSE_WAND</code>:Milvus v2.5.3以前でサポートされていた特殊なインデックスタイプ。</li>
 </ul>
-<h3 id="Create-collection​" class="common-anchor-header">コレクションの作成</h3><p>スパース・ベクタとインデックスの設定が完了すると、スパース・ベクタを含むコレクションを 作成できます。以下の例では <ins><code translate="no">create_collection</code></ins>メソッドを使用して、<code translate="no">my_sparse_collection</code> という名前のコレクションを作成します。</p>
+  <div class="alert note">
+<p>Milvus 2.5.4以降、<code translate="no">SPARSE_WAND</code> は非推奨となります。代わりに、互換性を維持しつつ等価性を保つために<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> を使用することが推奨される。</p>
+  </div>
+</li>
+<li><p><code translate="no">metric_type</code>:スパースベクトル間の類似度を計算するために使用されるメトリック。有効な値：</p>
+<ul>
+<li><p><code translate="no">IP</code> (内積)：ドット積を使用して類似度を測定する。</p></li>
+<li><p><code translate="no">BM25</code>:通常、テキストの類似性に重点を置いた全文検索に使用される。</p>
+<p>詳細は「<a href="/docs/ja/metric.md">メトリックタイプと</a> <a href="/docs/ja/full-text-search.md">全文検索</a>」を参照。</p></li>
+</ul></li>
+<li><p><code translate="no">params.inverted_index_algo</code>:インデックスの構築とクエリに使用されるアルゴリズム。有効な値：</p>
+<ul>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (デフォルト)：MaxScoreアルゴリズムを使用した最適化されたDocument-at-a-Time（DAAT）クエリ処理。MaxScoreは、高いk値や多くの用語を持つクエリに対して、影響が最小になりそうな用語やドキュメントをスキップすることで、より優れたパフォーマンスを提供します。MaxScoreは、最大インパクトスコアに基づいて用語を必須グループと非必須グループに分割し、トップkの結果に貢献できる用語に焦点を当てることでこれを実現する。</p></li>
+<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>:WANDアルゴリズムを使用したDAATクエリ処理の最適化。WANDは非競合文書をスキップするために最大インパクトスコアを活用することで、より少ないヒット文書を評価する。このため、WANDはk値が小さいクエリや短いクエリではスキップがより効率的である。</p></li>
+<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>:Basic Term-at-a-Time (TAAT)クエリー処理。<code translate="no">DAAT_MAXSCORE</code> 、<code translate="no">DAAT_WAND</code> と比較すると遅いが、<code translate="no">TAAT_NAIVE</code> にはユニークな利点がある。グローバルコレクションパラメータ(avgdl)の変更に関係なく静的なままキャッシュされた最大インパクトスコアを使用するDAATアルゴリズムとは異なり、<code translate="no">TAAT_NAIVE</code> 、そのような変更に動的に適応する。</p></li>
+</ul></li>
+</ul>
+<h3 id="Create-collection​" class="common-anchor-header">コレクションの作成</h3><p>スパースベクタとインデックスの設定が完了すると、スパースベクタを含むコレクションを 作成できます。以下の例では <ins><code translate="no">create_collection</code></ins>メソッドを使用して、<code translate="no">my_sparse_collection</code> という名前のコレクションを作成します。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
@@ -394,7 +412,7 @@ search_params = {​
 query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">drop_ratio_search</code> はスパース・ベクトル専用のオプション・パラメータで、検索中にクエリ・ベクトル内の小さな値を微調整できるようにします。例えば、<code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> を指定すると、クエリベクトル内の最小20%の値は検索中に無視されます。</p>
+<p>この例では、<code translate="no">drop_ratio_search</code> はスパース・ベクトル専用のオプション・パラメータで、検索中にクエリ・ベクトル内の小さな値を微調整できるようにします。例えば、<code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> を指定すると、クエリベクトル内の最小20%の値は検索時に無視されます。</p>
 <p>次に、<code translate="no">search</code> メソッドを使って類似検索を実行する。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>

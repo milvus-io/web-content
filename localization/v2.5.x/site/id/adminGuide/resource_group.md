@@ -36,7 +36,7 @@ title: Mengelola Grup Sumber Daya
         ></path>
       </svg>
     </button></h2><p>Grup sumber daya dapat menampung beberapa atau semua node kueri dalam cluster Milvus. Anda dapat menentukan bagaimana Anda ingin mengalokasikan node kueri di antara kelompok sumber daya berdasarkan apa yang paling masuk akal bagi Anda. Sebagai contoh, dalam skenario multi-koleksi, Anda dapat mengalokasikan jumlah node kueri yang sesuai untuk setiap kelompok sumber daya dan memuat koleksi ke dalam kelompok sumber daya yang berbeda, sehingga operasi di dalam setiap koleksi secara fisik tidak bergantung pada koleksi lain.</p>
-<p>Perhatikan bahwa sebuah instance Milvus memiliki sebuah grup sumber daya default untuk menampung semua node kueri pada saat start-up dan menamainya dengan <strong>__default_resource_group</strong>.</p>
+<p>Perhatikan bahwa sebuah instance Milvus mempertahankan sebuah grup sumber daya default untuk menampung semua node kueri pada saat start-up dan menamainya dengan <strong>__default_resource_group</strong>.</p>
 <p>Mulai dari versi 2.4.1, Milvus menyediakan API grup sumber daya deklaratif, sementara API grup sumber daya yang lama sudah tidak digunakan lagi. API deklaratif yang baru memungkinkan pengguna untuk mencapai idempoten, untuk melakukan pengembangan sekunder di lingkungan cloud-native dengan lebih mudah.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">Konsep kelompok sumber daya<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,7 +90,7 @@ title: Mengelola Grup Sumber Daya
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Semua contoh kode pada halaman ini terdapat pada PyMilvus 2.5.3. Upgrade instalasi PyMilvus Anda sebelum menjalankannya.</p>
+<p>Semua contoh kode pada halaman ini terdapat pada PyMilvus 2.5.4. Upgrade instalasi PyMilvus Anda sebelum menjalankannya.</p>
 </div>
 <ol>
 <li><p>Membuat grup sumber daya.</p>
@@ -181,7 +181,7 @@ partition = <span class="hljs-string">&quot;Novels&quot;</span>
 milvus_client.load_partitions(collection, [partition], replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
 <button class="copy-code-btn"></button></code></pre>
 <p>Perhatikan bahwa <code translate="no">_resource_groups</code> adalah parameter opsional, dan jika tidak ditentukan, Milvus akan memuat replika ke node kueri dalam grup sumber daya default.</p>
-<p>Agar Milus memuat setiap replika koleksi dalam kelompok sumber daya yang terpisah, pastikan jumlah kelompok sumber daya sama dengan jumlah replika.</p></li>
+<p>Agar Milus memuat setiap replika koleksi dalam grup sumber daya yang terpisah, pastikan jumlah grup sumber daya sama dengan jumlah replika.</p></li>
 <li><p>Mentransfer replika di antara grup sumber daya.</p>
 <p>Milvus menggunakan <a href="/docs/id/replica.md">replika</a> untuk mencapai penyeimbangan beban di antara <a href="/docs/id/glossary.md#Segment">segmen-segmen</a> yang didistribusikan di beberapa node kueri. Anda dapat memindahkan replika tertentu dari sebuah koleksi dari satu grup sumber daya ke grup sumber daya lainnya sebagai berikut:</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>

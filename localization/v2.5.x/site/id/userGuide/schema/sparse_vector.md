@@ -211,59 +211,77 @@ schema.addField(AddFieldReq.builder()​
 <h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">Mengatur parameter indeks untuk bidang vektor</h3><p>Proses pembuatan indeks untuk vektor jarang mirip dengan proses pembuatan indeks untuk vektor <a href="/docs/id/dense-vector.md">padat</a>, tetapi dengan perbedaan pada tipe indeks yang ditentukan (<code translate="no">index_type</code>), metrik jarak (<code translate="no">metric_type</code>), dan parameter indeks (<code translate="no">params</code>).</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()​
-​
-index_params.add_index(​
-    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,​
-    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,​
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,​
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,​
-    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},​
-)​
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},
+)
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;​
-<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;​
-​
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
-indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)​
-        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)​
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)​
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)​
-        .<span class="hljs-title function_">extraParams</span>(extraParams)​
-        .<span class="hljs-title function_">build</span>());​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;
+<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;
+
+<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)
+        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)
+        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)
+        .<span class="hljs-title function_">extraParams</span>(extraParams)
+        .<span class="hljs-title function_">build</span>());
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({​
-    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,​
-    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,​
-    metric_type: MetricType.IP,​
-    index_type: IndexType.SPARSE_WAND,​
-    <span class="hljs-keyword">params</span>: {​
-      drop_ratio_build: <span class="hljs-number">0.2</span>,​
-    },​
-});​
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({
+    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
+    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
+    metric_type: MetricType.IP,
+    index_type: IndexType.SPARSE_WAND,
+    <span class="hljs-keyword">params</span>: {
+      inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+    },
+});
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
-        {​
-            &quot;fieldName&quot;: &quot;sparse_vector&quot;,​
-            &quot;metricType&quot;: &quot;IP&quot;,​
-            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,​
-            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,​
-            &quot;params&quot;:{&quot;drop_ratio_build&quot;: 0.2}​
-        }​
-    ]&#x27;</span>​
+<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;sparse_vector&quot;,
+            &quot;metricType&quot;: &quot;IP&quot;,
+            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,
+            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
+            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
+        }
+    ]&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Pada contoh di atas.</p>
+<p>Dalam contoh di atas:</p>
 <ul>
-<li><p>Sebuah indeks bertipe <code translate="no">SPARSE_INVERTED_INDEX</code> dibuat untuk vektor jarang. Untuk vektor yang jarang, Anda dapat menentukan <code translate="no">SPARSE_INVERTED_INDEX</code> atau <code translate="no">SPARSE_WAND</code>. Untuk detailnya, lihat <a href="https://milvus.io/docs/index.md?tab=sparse">Indeks Vektor Jarang</a>.</p></li>
-<li><p>Untuk vektor jarang, <code translate="no">metric_type</code> hanya mendukung <code translate="no">IP</code> (Inner Product), yang digunakan untuk mengukur kemiripan antara dua vektor jarang. Untuk informasi lebih lanjut tentang kemiripan, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p></li>
-<li><p><code translate="no">drop_ratio_build</code> adalah parameter indeks opsional khusus untuk vektor jarang. Parameter ini mengontrol proporsi nilai vektor kecil yang dikecualikan selama pembuatan indeks. Misalnya, dengan <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code>, 20% nilai vektor terkecil akan dikecualikan selama pembuatan indeks, sehingga mengurangi upaya komputasi selama pencarian.</p></li>
+<li><p><code translate="no">index_type</code>: Jenis indeks yang akan dibuat untuk bidang vektor jarang. Nilai yang valid:</p>
+<ul>
+<li><code translate="no">SPARSE_INVERTED_INDEX</code>: Indeks terbalik tujuan umum untuk vektor jarang.</li>
+<li><code translate="no">SPARSE_WAND</code>: Jenis indeks khusus yang didukung dalam Milvus v2.5.3 dan sebelumnya.</li>
+</ul>
+  <div class="alert note">
+<p>Mulai Milvus 2.5.4 dan seterusnya, <code translate="no">SPARSE_WAND</code> sudah tidak digunakan lagi. Sebagai gantinya, disarankan untuk menggunakan <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> untuk kesetaraan dengan tetap menjaga kompatibilitas.</p>
+  </div>
+</li>
+<li><p><code translate="no">metric_type</code>: Metrik yang digunakan untuk menghitung kemiripan antara vektor yang jarang. Nilai yang valid:</p>
+<ul>
+<li><p><code translate="no">IP</code> (Inner Product): Mengukur kemiripan dengan menggunakan dot product.</p></li>
+<li><p><code translate="no">BM25</code>: Biasanya digunakan untuk pencarian teks lengkap, dengan fokus pada kemiripan tekstual.</p>
+<p>Untuk detail lebih lanjut, lihat <a href="/docs/id/metric.md">Jenis Metrik</a> dan <a href="/docs/id/full-text-search.md">Pencarian Teks Lengkap</a>.</p></li>
+</ul></li>
+<li><p><code translate="no">params.inverted_index_algo</code>: Algoritme yang digunakan untuk membangun dan menanyakan indeks. Nilai yang valid:</p>
+<ul>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (default): Pemrosesan kueri Dokumen per Dokumen (DAAT) yang dioptimalkan menggunakan algoritme MaxScore. MaxScore memberikan kinerja yang lebih baik untuk nilai k yang tinggi atau kueri dengan banyak istilah dengan melewatkan istilah dan dokumen yang kemungkinan besar memiliki dampak minimal. Hal ini dicapai dengan mempartisi istilah ke dalam kelompok penting dan tidak penting berdasarkan nilai dampak maksimumnya, dengan fokus pada istilah yang dapat berkontribusi pada hasil k teratas.</p></li>
+<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: Pemrosesan kueri DAAT yang dioptimalkan menggunakan algoritme WAND. WAND mengevaluasi lebih sedikit dokumen yang terkena dampak dengan memanfaatkan nilai dampak maksimum untuk melewatkan dokumen yang tidak kompetitif, tetapi memiliki overhead per hit yang lebih tinggi. Hal ini membuat WAND lebih efisien untuk kueri dengan nilai k kecil atau kueri pendek, di mana melewatkan lebih memungkinkan.</p></li>
+<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: Pemrosesan kueri dasar Term-at-a-Time (TAAT). Meskipun lebih lambat dibandingkan dengan <code translate="no">DAAT_MAXSCORE</code> dan <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> menawarkan keuntungan yang unik. Tidak seperti algoritme DAAT, yang menggunakan skor dampak maksimum yang di-cache yang tetap statis terlepas dari perubahan pada parameter koleksi global (avgdl), <code translate="no">TAAT_NAIVE</code> secara dinamis beradaptasi dengan perubahan tersebut.</p></li>
+</ul></li>
 </ul>
 <h3 id="Create-collection​" class="common-anchor-header">Membuat koleksi</h3><p>Setelah pengaturan vektor jarang dan indeks selesai, Anda dapat membuat koleksi yang berisi vektor jarang. Contoh di bawah ini menggunakan metode <ins><code translate="no">create_collection</code></ins> untuk membuat koleksi bernama <code translate="no">my_sparse_collection</code>.</p>
 <div class="multipleCode">
@@ -478,7 +496,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk informasi lebih lanjut tentang parameter pencarian kemiripan, lihat <a href="/docs/id/single-vector-search.md">Pencarian ANN Dasar</a>.</p>
-<h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">Batas<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -529,9 +547,9 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 <li><p><strong>Bagaimana cara memilih parameter drop_ratio_build dan drop_ratio_search?</strong></p>
 <p>Pilihan <strong>drop_ratio_build</strong> dan <strong>drop_ratio_search</strong> bergantung pada karakteristik data Anda dan kebutuhan Anda untuk latensi/throughput dan akurasi pencarian.</p></li>
 <li><p><strong>Dapatkah dimensi embedding yang jarang berupa nilai diskrit dalam ruang uint32?</strong></p>
-<p>Ya, dengan satu pengecualian. Dimensi sematan jarang dapat berupa nilai apa pun dalam kisaran <code translate="no">[0, maximum of uint32)</code>. Ini berarti Anda tidak dapat menggunakan nilai maksimum uint32.</p></li>
+<p>Ya, dengan satu pengecualian. Dimensi embedding jarang dapat berupa nilai apa pun dalam kisaran <code translate="no">[0, maximum of uint32)</code>. Ini berarti Anda tidak dapat menggunakan nilai maksimum uint32.</p></li>
 <li><p><strong>Apakah pencarian pada ruas yang sedang tumbuh dilakukan melalui indeks atau dengan brute force?</strong></p>
 <p>Pencarian pada segmen yang sedang tumbuh dilakukan melalui indeks dengan tipe yang sama dengan indeks segmen yang disegel. Untuk segmen baru yang sedang tumbuh sebelum indeks dibangun, pencarian brute force digunakan.</p></li>
 <li><p><strong>Apakah mungkin untuk memiliki vektor yang jarang dan padat dalam satu koleksi?</strong></p>
-<p>Ya, dengan dukungan beberapa jenis vektor, Anda dapat membuat koleksi dengan kolom vektor yang jarang dan padat dan melakukan pencarian hibrida di dalamnya.</p></li>
+<p>Ya, dengan dukungan beberapa jenis vektor, Anda dapat membuat koleksi dengan kolom vektor jarang dan padat dan melakukan pencarian hibrida di dalamnya.</p></li>
 </ul>

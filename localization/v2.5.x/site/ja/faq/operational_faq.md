@@ -18,7 +18,7 @@ title: 運用に関するFAQ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Docker HubからのMilvus Dockerイメージのpullに失敗した場合は？</h4><p>Docker HubからのMilvus Dockerイメージの引き抜きに失敗した場合は、他のレジストリミラーを追加してみてください。</p>
+    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Docker HubからのMilvus Dockerイメージのpullに失敗した場合は？</h4><p>Docker HubからのMilvus Dockerイメージの取得に失敗した場合は、他のレジストリミラーを追加してみてください。</p>
 <p>中国本土のユーザは、<strong>/etc.docker/daemon.jsonの</strong>registry-mirrors配列に "https://registry.docker-cn.com "というURLを追加することができます。</p>
 <pre><code translate="no">{
   <span class="hljs-string">&quot;registry-mirrors&quot;</span>: [<span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span>]
@@ -49,8 +49,10 @@ title: 運用に関するFAQ
 <p><a href="/docs/ja/prerequisite-docker.md">CPUのSIMD命令セット対応</a>状況をご覧ください。</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">MilvusをWindowsにインストールできますか？</h4><p>MilvusをWindowsにインストールするには、ソースコードからコンパイルする方法とバイナリパッケージからコンパイルする方法があります。</p>
 <p>WindowsにMilvusをインストールする方法については「<a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">WindowsでMilvusを動かす</a>」を参照してください。</p>
-<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">Windowsにpymilvusをインストールする際にエラーが発生しました。どうすればよいですか？</h4><p>WindowsにPyMilvusをインストールすることは推奨されません。しかし、WindowsにPyMilvusをインストールしなければならないのにエラーが出る場合は、<a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a>環境にインストールしてみてください。Conda環境にPyMilvusをインストールする方法については、<a href="/docs/ja/install-pymilvus.md">Milvus SDKのインストールを</a>参照してください。</p>
-<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">Milvusはインターネットに接続していない状態でもデプロイできますか？</h4><p>Milvusはオフライン環境にインストールすることができます。詳細は<a href="/docs/ja/install_offline-helm.md">Milvusのオフラインインストールを</a>参照してください。</p>
+<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">Windowsにpymilvusをインストールする際にエラーが発生しました。どうすればよいでしょうか。</h4><p>以下のコマンドでpymilvusを最新版にアップデートしてください。</p>
+<pre><code translate="no" class="language-shell">pip install --upgrade pymilvus
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">Milvusはインターネットに接続していない状態でもインストールできますか？</h4><p>オフライン環境でMilvusをインストールすることができます。詳しくは<a href="/docs/ja/install_offline-helm.md">Milvusのオフラインインストールを</a>ご参照ください。</p>
 <h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Milvusが生成したログはどこにありますか?</h4><p>Milvusのログはデフォルトでstout(標準出力)とstderr(標準エラー)に出力されますが、本番環境ではログを永続ボリュームにリダイレクトすることを強く推奨します。そのためには、<strong>milvus.yamlの</strong> <code translate="no">log.file.rootPath</code> 。また、milvusを<code translate="no">milvus-helm</code> チャートでデプロイする場合、<code translate="no">--set log.persistence.enabled=true</code> を使ってログの永続化を有効にする必要があります。</p>
 <p>設定を変更していない場合は、kubectl logs &lt;pod-name&gt;やdocker logs CONTAINERを使ってもログを見つけることができます。</p>
 <h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">セグメントにデータを挿入する前にインデックスを作成できますか？</h4><p>はい、できます。しかし、各セグメントにインデックスを作成する前に、256MBを超えない範囲でまとめてデータを挿入することをお勧めします。</p>

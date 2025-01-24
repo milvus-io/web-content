@@ -48,7 +48,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>稀疏向量表示法</span> </span></p>
 <p>稀疏向量可以使用多种方法生成，例如文本处理中的<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>（词频-反向文档频率）和<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>。此外，Milvus 还提供了帮助生成和处理稀疏向量的便捷方法。详情请参阅<a href="/docs/zh/embeddings.md">Embeddings</a>。</p>
 <p>对于文本数据，Milvus 还提供全文搜索功能，让您可以直接在原始文本数据上执行向量搜索，而无需使用外部嵌入模型来生成稀疏向量。更多信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
-<p>矢量化后，数据可存储在 Milvus 中进行管理和矢量检索。下图说明了基本流程。</p>
+<p>矢量化后，数据可存储在 Milvus 中，以便进行管理和矢量检索。下图说明了基本流程。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-sparse-vector.png" alt="Use sparse vector in Milvus" class="doc-image" id="use-sparse-vector-in-milvus" />
@@ -207,59 +207,77 @@ schema.addField(AddFieldReq.builder()​
 <h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">为向量字段设置索引参数</h3><p>为稀疏向量创建索引的过程与为<a href="/docs/zh/dense-vector.md">密集向量</a>创建索引的过程类似，但在指定的索引类型 (<code translate="no">index_type</code>)、距离度量 (<code translate="no">metric_type</code>) 和索引参数 (<code translate="no">params</code>) 上有所不同。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()​
-​
-index_params.add_index(​
-    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,​
-    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,​
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,​
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,​
-    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},​
-)​
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},
+)
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;​
-<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;​
-​
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
-indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)​
-        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)​
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)​
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)​
-        .<span class="hljs-title function_">extraParams</span>(extraParams)​
-        .<span class="hljs-title function_">build</span>());​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;
+<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;
+
+<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)
+        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)
+        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)
+        .<span class="hljs-title function_">extraParams</span>(extraParams)
+        .<span class="hljs-title function_">build</span>());
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({​
-    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,​
-    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,​
-    metric_type: MetricType.IP,​
-    index_type: IndexType.SPARSE_WAND,​
-    <span class="hljs-keyword">params</span>: {​
-      drop_ratio_build: <span class="hljs-number">0.2</span>,​
-    },​
-});​
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({
+    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
+    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
+    metric_type: MetricType.IP,
+    index_type: IndexType.SPARSE_WAND,
+    <span class="hljs-keyword">params</span>: {
+      inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+    },
+});
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
-        {​
-            &quot;fieldName&quot;: &quot;sparse_vector&quot;,​
-            &quot;metricType&quot;: &quot;IP&quot;,​
-            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,​
-            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,​
-            &quot;params&quot;:{&quot;drop_ratio_build&quot;: 0.2}​
-        }​
-    ]&#x27;</span>​
+<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;sparse_vector&quot;,
+            &quot;metricType&quot;: &quot;IP&quot;,
+            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,
+            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
+            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
+        }
+    ]&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>在上面的示例中。</p>
+<p>在上面的示例中</p>
 <ul>
-<li><p>为稀疏向量创建了一个<code translate="no">SPARSE_INVERTED_INDEX</code> 类型的索引。对于稀疏向量，可以指定<code translate="no">SPARSE_INVERTED_INDEX</code> 或<code translate="no">SPARSE_WAND</code> 。有关详情，请参阅<a href="https://milvus.io/docs/index.md?tab=sparse">稀疏向量索引</a>。</p></li>
-<li><p>对于稀疏向量，<code translate="no">metric_type</code> 只支持<code translate="no">IP</code> （内积），用于衡量两个稀疏向量之间的相似性。有关相似性的更多信息，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p></li>
-<li><p><code translate="no">drop_ratio_build</code> 是一个可选的索引参数，专门用于稀疏向量。它可以控制在建立索引时排除小向量值的比例。例如，使用 时，最小的 20% 向量值将在索引创建过程中被排除，从而减少搜索过程中的计算量。<code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code></p></li>
+<li><p><code translate="no">index_type</code>:要为稀疏向量场创建的索引类型。有效值：</p>
+<ul>
+<li><code translate="no">SPARSE_INVERTED_INDEX</code>:稀疏向量的通用反转索引。</li>
+<li><code translate="no">SPARSE_WAND</code>:Milvus v2.5.3 及更早版本支持的专用索引类型。</li>
+</ul>
+  <div class="alert note">
+<p>从 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已被弃用。建议在保持兼容性的同时，使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 作为等价索引。</p>
+  </div>
+</li>
+<li><p><code translate="no">metric_type</code>:用于计算稀疏向量之间相似性的度量。有效值：</p>
+<ul>
+<li><p><code translate="no">IP</code> (内积）：使用点积衡量相似性。</p></li>
+<li><p><code translate="no">BM25</code>:通常用于全文搜索，侧重于文本相似性。</p>
+<p>有关详细信息，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>和<a href="/docs/zh/full-text-search.md">全文搜索</a>"。</p></li>
+</ul></li>
+<li><p><code translate="no">params.inverted_index_algo</code>:用于建立和查询索引的算法。有效值：</p>
+<ul>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (默认）：使用 MaxScore 算法进行优化的 Document-at-a-Time (DAAT) 查询处理。MaxScore 通过跳过可能影响最小的术语和文档，为高 k 值或包含大量术语的查询提供更好的性能。为此，它根据最大影响分值将术语划分为基本组和非基本组，并将重点放在对前 k 结果有贡献的术语上。</p></li>
+<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>:使用 WAND 算法优化 DAAT 查询处理。WAND 算法利用最大影响得分跳过非竞争性文档，从而评估较少的命中文档，但每次命中的开销较高。这使得 WAND 对于 k 值较小的查询或较短的查询更有效，因为在这些情况下跳过更可行。</p></li>
+<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>:基本术语一次查询处理（TAAT）。虽然与<code translate="no">DAAT_MAXSCORE</code> 和<code translate="no">DAAT_WAND</code> 相比速度较慢，但<code translate="no">TAAT_NAIVE</code> 具有独特的优势。DAAT 算法使用的是缓存的最大影响分数，无论全局 Collections 参数（avgdl）如何变化，这些分数都保持静态，而<code translate="no">TAAT_NAIVE</code> 不同，它能动态地适应这种变化。</p></li>
+</ul></li>
 </ul>
 <h3 id="Create-collection​" class="common-anchor-header">创建 Collections</h3><p>完成稀疏向量和索引设置后，就可以创建包含稀疏向量的 Collections。下面的示例使用 <ins><code translate="no">create_collection</code></ins>方法创建一个名为<code translate="no">my_sparse_collection</code> 的 Collection。</p>
 <div class="multipleCode">
@@ -492,7 +510,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
     </button></h2><p>在 Milvus 中使用稀疏向量时，请考虑以下限制：</p>
 <ul>
 <li><p>目前，稀疏向量仅支持<strong>IP</strong>和<strong>BM25</strong>（用于全文搜索）距离度量。稀疏向量的高维度使得 L2 和余弦距离不切实际。</p></li>
-<li><p>对于稀疏向量字段，只支持<strong>SPARSE_INVERTED_INDEX</strong>和<strong>SPARSE_WAND</strong>索引类型。</p></li>
+<li><p>对于稀疏向量场，只支持<strong>SPARSE_INVERTED_INDEX</strong>和<strong>SPARSE_WAND</strong>索引类型。</p></li>
 <li><p>稀疏向量支持的数据类型：</p>
 <ul>
 <li>维数部分必须是无符号 32 位整数；</li>
@@ -526,7 +544,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 <p><strong>drop_ratio_build</strong>和<strong>drop_ratio_search</strong>的选择取决于数据的特性以及对搜索延迟/吞吐量和准确性的要求。</p></li>
 <li><p><strong>稀疏嵌入的维度可以是 uint32 空间内的任何离散值吗？</strong></p>
 <p>可以，但有一个例外。稀疏嵌入的维度可以是<code translate="no">[0, maximum of uint32)</code> 范围内的任何值。这意味着不能使用 uint32 的最大值。</p></li>
-<li><p><strong>是通过索引还是蛮力来搜索不断增长的数据段？</strong></p>
+<li><p><strong>是通过索引还是蛮力对增长的线段进行搜索？</strong></p>
 <p>对增长的数据段的搜索是通过与密封数据段索引相同类型的索引进行的。对于索引建立前的新增长区段，则使用蛮力搜索。</p></li>
 <li><p><strong>是否可以在一个 Collections 中同时包含稀疏向量和密集向量？</strong></p>
 <p>可以，通过多向量类型支持，您可以创建既有稀疏向量列又有密集向量列的 Collections，并对它们执行混合搜索。</p></li>

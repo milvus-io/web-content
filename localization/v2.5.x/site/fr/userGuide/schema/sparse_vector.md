@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un vecteur peu dense est une représentation spéciale de vecteurs à haute dimension dans laquelle la plupart des éléments sont nuls et seules quelques dimensions ont des valeurs non nulles. Cette caractéristique rend les vecteurs épars particulièrement efficaces pour traiter des données à grande échelle, à haute dimension, mais éparses. Les applications les plus courantes sont les suivantes</p>
+    </button></h2><p>Un vecteur peu dense est une représentation spéciale de vecteurs à haute dimension dans laquelle la plupart des éléments sont nuls et seules quelques dimensions ont des valeurs non nulles. Cette caractéristique rend les vecteurs épars particulièrement efficaces dans le traitement de données à grande échelle, à haute dimension, mais éparses. Les applications les plus courantes sont les suivantes</p>
 <ul>
 <li><p><strong>Analyse de texte :</strong> Représentation de documents sous forme de vecteurs de sacs de mots, où chaque dimension correspond à un mot et où seuls les mots apparaissant dans le document ont des valeurs non nulles.</p></li>
 <li><p><strong>Systèmes de recommandation :</strong> Matrices d'interaction utilisateur-élément, où chaque dimension représente l'évaluation d'un utilisateur pour un élément particulier, la plupart des utilisateurs n'interagissant qu'avec quelques éléments.</p></li>
@@ -212,61 +212,79 @@ schema.addField(AddFieldReq.builder()​
 <h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">Définition des paramètres d'index pour le champ vectoriel</h3><p>Le processus de création d'un index pour les vecteurs peu denses est similaire à celui des <a href="/docs/fr/dense-vector.md">vecteurs denses</a>, mais avec des différences au niveau du type d'index spécifié (<code translate="no">index_type</code>), de la métrique de distance (<code translate="no">metric_type</code>) et des paramètres d'index (<code translate="no">params</code>).</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()​
-​
-index_params.add_index(​
-    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,​
-    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,​
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,​
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,​
-    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},​
-)​
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},
+)
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;​
-<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;​
-​
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
-indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)​
-        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)​
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)​
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)​
-        .<span class="hljs-title function_">extraParams</span>(extraParams)​
-        .<span class="hljs-title function_">build</span>());​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;
+<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;
+
+<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
+        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)
+        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)
+        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)
+        .<span class="hljs-title function_">extraParams</span>(extraParams)
+        .<span class="hljs-title function_">build</span>());
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({​
-    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,​
-    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,​
-    metric_type: MetricType.IP,​
-    index_type: IndexType.SPARSE_WAND,​
-    <span class="hljs-keyword">params</span>: {​
-      drop_ratio_build: <span class="hljs-number">0.2</span>,​
-    },​
-});​
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = <span class="hljs-keyword">await</span> client.createIndex({
+    index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
+    field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
+    metric_type: MetricType.IP,
+    index_type: IndexType.SPARSE_WAND,
+    <span class="hljs-keyword">params</span>: {
+      inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+    },
+});
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
-        {​
-            &quot;fieldName&quot;: &quot;sparse_vector&quot;,​
-            &quot;metricType&quot;: &quot;IP&quot;,​
-            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,​
-            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,​
-            &quot;params&quot;:{&quot;drop_ratio_build&quot;: 0.2}​
-        }​
-    ]&#x27;</span>​
+<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;sparse_vector&quot;,
+            &quot;metricType&quot;: &quot;IP&quot;,
+            &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,
+            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
+            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
+        }
+    ]&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans l'exemple ci-dessus.</p>
+<p>Dans l'exemple ci-dessus :</p>
 <ul>
-<li><p>Un index de type <code translate="no">SPARSE_INVERTED_INDEX</code> est créé pour le vecteur clairsemé. Pour les vecteurs épars, vous pouvez spécifier <code translate="no">SPARSE_INVERTED_INDEX</code> ou <code translate="no">SPARSE_WAND</code>. Pour plus d'informations, reportez-vous à la section <a href="https://milvus.io/docs/index.md?tab=sparse">Index de vecteurs épars</a>.</p></li>
-<li><p>Pour les vecteurs peu denses, <code translate="no">metric_type</code> ne prend en charge que <code translate="no">IP</code> (produit intérieur), utilisé pour mesurer la similarité entre deux vecteurs peu denses. Pour plus d'informations sur la similarité, reportez-vous à la section <a href="/docs/fr/metric.md">Types de métriques</a>.</p></li>
-<li><p><code translate="no">drop_ratio_build</code> est un paramètre d'index facultatif spécifique aux vecteurs peu denses. Il contrôle la proportion de petites valeurs vectorielles exclues lors de la construction de l'index. Par exemple, avec <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code>, les 20 % de valeurs vectorielles les plus petites seront exclues lors de la création de l'index, ce qui réduit l'effort de calcul lors des recherches.</p></li>
+<li><p><code translate="no">index_type</code>: Le type d'index à créer pour le champ de vecteurs épars. Valeurs valides :</p>
+<ul>
+<li><code translate="no">SPARSE_INVERTED_INDEX</code>: Un index inversé à usage général pour les vecteurs épars.</li>
+<li><code translate="no">SPARSE_WAND</code>: Un type d'index spécialisé pris en charge dans Milvus v2.5.3 et les versions antérieures.</li>
 </ul>
-<h3 id="Create-collection​" class="common-anchor-header">Créer une collection</h3><p>Une fois que les paramètres des vecteurs épars et de l'index sont terminés, vous pouvez créer une collection contenant des vecteurs épars. L'exemple ci-dessous utilise la méthode <ins><code translate="no">create_collection</code></ins> pour créer une collection nommée <code translate="no">my_sparse_collection</code>.</p>
+  <div class="alert note">
+<p>À partir de Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> est obsolète. Il est recommandé d'utiliser <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> par souci d'équivalence tout en maintenant la compatibilité.</p>
+  </div>
+</li>
+<li><p><code translate="no">metric_type</code>: La métrique utilisée pour calculer la similarité entre des vecteurs épars. Valeurs valides :</p>
+<ul>
+<li><p><code translate="no">IP</code> (Produit intérieur) : Mesure la similarité à l'aide du produit de points.</p></li>
+<li><p><code translate="no">BM25</code>: Généralement utilisé pour la recherche en texte intégral, en se concentrant sur la similarité textuelle.</p>
+<p>Pour plus de détails, voir <a href="/docs/fr/metric.md">Types de métriques</a> et <a href="/docs/fr/full-text-search.md">recherche plein texte</a>.</p></li>
+</ul></li>
+<li><p><code translate="no">params.inverted_index_algo</code>: L'algorithme utilisé pour construire et interroger l'index. Valeurs valides :</p>
+<ul>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (par défaut) : Traitement optimisé des requêtes Document-at-a-Time (DAAT) à l'aide de l'algorithme MaxScore. MaxScore offre de meilleures performances pour les valeurs k élevées ou les requêtes comportant de nombreux termes en ignorant les termes et les documents susceptibles d'avoir un impact minimal. Il y parvient en répartissant les termes en groupes essentiels et non essentiels sur la base de leur score d'impact maximal, en se concentrant sur les termes qui peuvent contribuer aux résultats les plus importants.</p></li>
+<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: Traitement optimisé des requêtes DAAT à l'aide de l'algorithme WAND. WAND évalue moins de documents en exploitant les scores d'impact maximum pour ignorer les documents non compétitifs, mais ses frais généraux par hit sont plus élevés. L'algorithme WAND est donc plus efficace pour les requêtes avec des valeurs k faibles ou pour les requêtes courtes, pour lesquelles il est plus facile de sauter des documents.</p></li>
+<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: Traitement des requêtes par terme de base à la fois (TAAT). Bien qu'il soit plus lent que <code translate="no">DAAT_MAXSCORE</code> et <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> offre un avantage unique. Contrairement aux algorithmes DAAT, qui utilisent des scores d'impact maximum mis en cache et qui restent statiques quelles que soient les modifications apportées au paramètre global de la collection (avgdl), <code translate="no">TAAT_NAIVE</code> s'adapte dynamiquement à ces modifications.</p></li>
+</ul></li>
+</ul>
+<h3 id="Create-collection​" class="common-anchor-header">Création de la collection</h3><p>Une fois que les paramètres relatifs aux vecteurs épars et à l'index sont terminés, vous pouvez créer une collection contenant des vecteurs épars. L'exemple ci-dessous utilise la méthode <ins><code translate="no">create_collection</code></ins> pour créer une collection nommée <code translate="no">my_sparse_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
@@ -399,7 +417,7 @@ search_params = {​
 query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans cet exemple, <code translate="no">drop_ratio_search</code> est un paramètre facultatif spécifique aux vecteurs épars, qui permet d'affiner les petites valeurs du vecteur de requête au cours de la recherche. Par exemple, avec <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, les 20 % de valeurs les plus petites du vecteur de requête seront ignorées lors de la recherche.</p>
+<p>Dans cet exemple, <code translate="no">drop_ratio_search</code> est un paramètre facultatif spécifique aux vecteurs épars, qui permet d'affiner les petites valeurs du vecteur de requête au cours de la recherche. Par exemple, avec <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, les 20 % de valeurs les plus petites du vecteur d'interrogation seront ignorées pendant la recherche.</p>
 <p>Exécutez ensuite la recherche de similarité à l'aide de la méthode <code translate="no">search</code>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -526,7 +544,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
       </svg>
     </button></h2><ul>
 <li><p><strong>Pouvez-vous expliquer la différence entre SPARSE_INVERTED_INDEX et SPARSE_WAND, et comment choisir entre les deux ?</strong></p>
-<p><strong>SPARSE_INVERTED_INDEX</strong> est un index inversé traditionnel, tandis que <strong>SPARSE_WAND</strong> utilise l'algorithme <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> pour réduire le nombre d'évaluations de la distance IP complète pendant la recherche. <strong>SPARSE_WAND</strong> est généralement plus rapide, mais ses performances peuvent diminuer avec l'augmentation de la densité des vecteurs. Pour choisir entre les deux, il convient d'effectuer des expériences et des analyses comparatives en fonction de votre jeu de données et de votre cas d'utilisation.</p></li>
+<p><strong>SPARSE_INVERTED_INDEX</strong> est un index inversé traditionnel, tandis que <strong>SPARSE_WAND</strong> utilise l'algorithme <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> pour réduire le nombre d'évaluations de la distance IP complète pendant la recherche. <strong>SPARSE_WAND</strong> est généralement plus rapide, mais ses performances peuvent diminuer avec l'augmentation de la densité des vecteurs. Pour choisir entre les deux, effectuez des expériences et des analyses comparatives en fonction de votre jeu de données et de votre cas d'utilisation spécifiques.</p></li>
 <li><p><strong>Comment dois-je choisir les paramètres drop_ratio_build et drop_ratio_search ?</strong></p>
 <p>Le choix des paramètres <strong>drop_ratio_build</strong> et <strong>drop_ratio_search</strong> dépend des caractéristiques de vos données et de vos exigences en matière de latence, de débit et de précision de la recherche.</p></li>
 <li><p><strong>La dimension d'un encastrement clairsemé peut-elle être n'importe quelle valeur discrète dans l'espace uint32 ?</strong></p>

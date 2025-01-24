@@ -45,12 +45,14 @@ title: 操作常見問題
 <p>執行 lscpu 指令檢查您的 CPU 是否支援上述 SIMD 指令集：</p>
 <pre><code translate="no">$ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">為什麼 Milvus 在啟動時返回<code translate="no">illegal instruction</code> ？</h4><p>Milvus 要求您的 CPU 支援 SIMD 指令集：SSE4.2、AVX、AVX2 或 AVX512。CPU 必須至少支援其中之一，以確保 Milvus 正常運作。在啟動時返回<code translate="no">illegal instruction</code> 錯誤，表示您的 CPU 不支援上述四個指令集中的任何一個。</p>
+<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">為什麼 Milvus 在啟動時返回<code translate="no">illegal instruction</code> ？</h4><p>Milvus 要求您的 CPU 支援 SIMD 指令集：SSE4.2、AVX、AVX2 或 AVX512。CPU 必須至少支援其中之一，以確保 Milvus 正常運作。在啟動時返回<code translate="no">illegal instruction</code> 錯誤，表示您的 CPU 不支援上述四種指令集中的任何一種。</p>
 <p>請參閱<a href="/docs/zh-hant/prerequisite-docker.md">CPU 對 SIMD 指令集的支援</a>。</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">我可以在 Windows 上安裝 Milvus 嗎？</h4><p>可以，您可以從原始碼或二進位套件編譯在 Windows 上安裝 Milvus。</p>
 <p>請參閱<a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">在 Windows 上執行 Milvus</a>了解如何在 Windows 上安裝 Milvus。</p>
-<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">我在 Windows 上安裝 pymilvus 時出錯。我該怎麼做？</h4><p>不建議在 Windows 上安裝 PyMilvus。但如果您必須在 Windows 上安裝 PyMilvus 但卻發生錯誤，請嘗試在<a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a>環境中安裝。更多關於如何在 Conda 環境中安裝 PyMilvus 的資訊，請參閱安裝 Milvus<a href="/docs/zh-hant/install-pymilvus.md">SDK</a>。</p>
-<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">我可以在斷線時部署 Milvus 嗎？</h4><p>可以。您可以在離線環境中安裝 Milvus。更多資訊請參閱<a href="/docs/zh-hant/install_offline-helm.md">離線安裝 Milvus</a>。</p>
+<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">我在 Windows 上安裝 pymilvus 時出錯。我該怎麼做？</h4><p>請嘗試使用下列指令更新 pymilvus 到最新版本。</p>
+<pre><code translate="no" class="language-shell">pip install --upgrade pymilvus
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">我可以在斷線時部署Milvus嗎？</h4><p>是的，您可以在離線環境下安裝 Milvus。更多資訊請參閱<a href="/docs/zh-hant/install_offline-helm.md">離線安裝 Milvus</a>。</p>
 <h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">我在哪裡可以找到 Milvus 產生的日誌？</h4><p>Milvus 日誌預設列印到 stout (標準輸出) 和 stderr (標準錯誤)，然而我們強烈建議在生產中重定向您的日誌到一個持久卷。要這樣做，請更新<strong>milvus.yaml</strong> 中的<code translate="no">log.file.rootPath</code> 。如果您使用<code translate="no">milvus-helm</code> 圖表部署 Milvus，您也需要先透過<code translate="no">--set log.persistence.enabled=true</code> 啟用日誌持久化。</p>
 <p>如果您沒有變更設定，使用 kubectl logs &lt;pod-name&gt; 或 docker logs CONTAINER 也可以幫助您找到日誌。</p>
 <h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">在插入資料之前，我可以為一個區段建立索引嗎？</h4><p>可以。但我們建議您在為每個區段建立索引之前，先分批插入資料，每批不應超過 256 MB。</p>
@@ -70,7 +72,7 @@ title: 操作常見問題
 <li><p><strong>資料有限</strong>：資料集中可能沒有足夠的實體來滿足您所要求的限制。如果集合中的實體總數少於限制，您自然會收到較少的結果。</p></li>
 <li><p><strong>重複的主鍵</strong>：Milvus 在搜尋過程中遇到重複的主索引鍵時，會優先處理特定的實體。此行為依據搜尋類型而有所不同：</p></li>
 <li><p><strong>查詢 (完全匹配)：</strong>Milvus 選擇具有匹配 PK 的最新實體。 ANN 搜尋：Milvus 選擇相似度得分最高的實體，即使實體共享相同的 PK。 如果您的集合有許多重複的主索引鍵，此優先順序可能會導致比限制更少的唯一結果。</p></li>
-<li><p><strong>匹配不足</strong>：您的搜尋篩選表達式可能過於嚴格，導致符合相似性臨界值的實體較少。如果為搜尋設定的條件限制性過高，將沒有足夠的實體符合，導致結果少於預期。</p></li>
+<li><p><strong>匹配不足</strong>：您的搜尋篩選表達式可能過於嚴格，導致符合相似性臨界值的實體較少。如果為搜尋設定的條件限制性過高，就不會有足夠的實體符合，導致結果比預期的少。</p></li>
 </ul>
 <h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>.這是什麼原因造成的，該如何解決？</h4><p>當您嘗試在 Windows 平台上使用 Milvus Lite 時，會發生此錯誤。Milvus Lite主要是為Linux環境設計，對Windows可能沒有本機支援。</p>
 <p>解決方法是使用 Linux 環境：</p>

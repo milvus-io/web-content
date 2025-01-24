@@ -24,15 +24,15 @@ title: 操作常见问题
   <span class="hljs-string">&quot;registry-mirrors&quot;</span>: [<span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span>]
 }
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">Docker 是安装和运行 Milvus 的唯一方式吗？</h4><p>Docker 是部署 Milvus 的有效方法，但不是唯一的方法。你也可以从源代码部署 Milvus。这需要 Ubuntu（18.04 或更高版本）或 CentOS（7 或更高版本）。更多信息，请参阅<a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">从源代码构建 Milvus</a>。</p>
+<h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">Docker 是安装和运行 Milvus 的唯一方式吗？</h4><p>Docker 是部署 Milvus 的有效方式，但不是唯一的方式。你也可以从源代码部署 Milvus。这需要 Ubuntu（18.04 或更高版本）或 CentOS（7 或更高版本）。更多信息，请参阅<a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">从源代码构建 Milvus</a>。</p>
 <h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">影响召回率的主要因素是什么？</h4><p>召回率主要受索引类型和搜索参数的影响。</p>
 <p>对于 FLAT 索引，Milvus 在一个 Collection 内进行穷举扫描，100% 返回。</p>
 <p>对于 IVF 索引，nprobe 参数决定了 Collections 内的搜索范围。增加 nprobe 会增加搜索到的向量比例和召回率，但会降低查询性能。</p>
-<p>对于 HNSW 索引，ef 参数决定图搜索的广度。增加 ef 会增加在图上搜索的点数和召回率，但会降低查询性能。</p>
+<p>对于 HNSW 索引，ef 参数决定图搜索的广度。增加 ef 会增加在图中搜索的点数和召回率，但会降低查询性能。</p>
 <p>有关详细信息，请参阅<a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">向量索引</a>。</p>
 <h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">为什么我对配置文件的修改没有生效？</h4><p>Milvus 不支持在运行期间修改配置文件。您必须重新启动 Milvus Docker，配置文件的更改才能生效。</p>
 <h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">如何知道 Milvus 是否已成功启动？</h4><p>如果使用 Docker Compose 启动 Milvus，请运行<code translate="no">docker ps</code> 观察有多少 Docker 容器正在运行，并检查 Milvus 服务是否正确启动。</p>
-<p>对于 Milvus Standalone，应该至少能观察到三个运行中的 Docker 容器，其中一个是 Milvus 服务，其他两个是 etcd 管理和存储服务。有关详细信息，请参阅<a href="/docs/zh/install_standalone-docker.md">安装 Milvus Standalone</a>。</p>
+<p>对于 Milvus Standalone，应该至少能观察到三个运行中的 Docker 容器，其中一个是 Milvus 服务，其他两个是 etcd 管理和存储服务。更多信息，请参阅<a href="/docs/zh/install_standalone-docker.md">安装 Milvus Standalone</a>。</p>
 <h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">为什么日志文件中的时间与系统时间不同？</h4><p>时间不同通常是由于主机不使用协调世界时（UTC）。</p>
 <p>Docker 映像中的日志文件默认使用 UTC。如果您的主机不使用 UTC，可能会出现这个问题。</p>
 <h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">我如何知道我的 CPU 是否支持 Milvus？</h4><p>Milvus 的操作符取决于 CPU 对 SIMD（单指令、多数据）扩展指令集的支持。您的中央处理器是否支持 SIMD 扩展指令集对 Milvus 中的索引建立和向量相似性搜索至关重要。请确保您的 CPU 至少支持以下一种 SIMD 指令集：</p>
@@ -49,8 +49,10 @@ title: 操作常见问题
 <p>请参阅<a href="/docs/zh/prerequisite-docker.md">CPU 对 SIMD 指令集的支持</a>。</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">我可以在 Windows 上安装 Milvus 吗？</h4><p>可以。您可以通过源代码编译或二进制包在 Windows 上安装 Milvus。</p>
 <p>请参阅<a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">在 Windows 上运行 Milvus</a>了解如何在 Windows 上安装 Milvus。</p>
-<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">我在 Windows 上安装 pymilvus 时出错了。我该怎么办？</h4><p>不建议在 Windows 上安装 PyMilvus。但如果您必须在 Windows 上安装 PyMilvus，却发现了错误，请尝试在<a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a>环境中安装。有关如何在 Conda 环境中安装 PyMilvus 的详细信息，请参阅<a href="/docs/zh/install-pymilvus.md">安装 Milvus SDK</a>。</p>
-<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">断开网络连接后还能部署 Milvus 吗？</h4><p>可以。您可以在离线环境中安装 Milvus。请参阅<a href="/docs/zh/install_offline-helm.md">离线安装 Milvus</a>获取更多信息。</p>
+<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">我在 Windows 上安装 pymilvus 时出错了。我该怎么办？</h4><p>请尝试使用以下命令将 pymilvus 更新到最新版本。</p>
+<pre><code translate="no" class="language-shell">pip install --upgrade pymilvus
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">我可以在断开互联网的情况下部署 Milvus 吗？</h4><p>可以。您可以在离线环境下安装 Milvus。请参阅<a href="/docs/zh/install_offline-helm.md">离线安装 Milvus</a>获取更多信息。</p>
 <h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">在哪里可以找到 Milvus 生成的日志？</h4><p>Milvus 日志默认打印到 stout（标准输出）和 stderr（标准错误），但是我们强烈建议在生产中将日志重定向到持久卷。为此，请更新<strong>Milvus.yaml</strong> 中的<code translate="no">log.file.rootPath</code> 。而如果你用<code translate="no">milvus-helm</code> chart 部署 Milvus，也需要先通过<code translate="no">--set log.persistence.enabled=true</code> 启用日志持久性。</p>
 <p>如果你没有更改配置，使用 kubectl logs &lt;pod-name&gt; 或 docker logs CONTAINER 也能帮你找到日志。</p>
 <h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">在插入数据之前，我可以为段创建索引吗？</h4><p>可以。但我们建议在为每个数据段创建索引之前，分批插入数据，每批不应超过 256 MB。</p>
@@ -69,10 +71,10 @@ title: 操作常见问题
 <ul>
 <li><p><strong>数据有限</strong>：Collections 可能没有足够的实体来满足您要求的限制。如果 Collections 中的实体总数少于限制，您收到的结果自然也会减少。</p></li>
 <li><p><strong>主键重复</strong>：在搜索过程中遇到主键重复时，Milvus 会优先处理特定实体。这种行为根据搜索类型而有所不同：</p></li>
-<li><p><strong>查询（完全匹配）</strong>：Milvus 选择具有匹配 PK 的最新实体。 ANN 搜索：Milvus 会选择相似度得分最高的实体，即使实体共享相同的 PK。 如果您的 Collections 有很多重复的主键，这种优先级可能会导致唯一结果少于限制。</p></li>
+<li><p><strong>查询（精确匹配）</strong>：Milvus 选择具有匹配 PK 的最新实体。 ANN 搜索：Milvus 会选择相似度得分最高的实体，即使实体共享相同的 PK。 如果您的 Collections 有很多重复的主键，这种优先级可能会导致唯一结果少于限制。</p></li>
 <li><p><strong>匹配不足</strong>：您的搜索过滤表达式可能过于严格，导致符合相似性阈值的实体较少。如果为搜索设置的条件限制性太强，匹配的实体就不够多，导致结果比预期的少。</p></li>
 </ul>
-<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>.什么原因导致这种情况，如何解决？</h4><p>当你尝试在 Windows 平台上使用 Milvus Lite 时，就会出现这个错误。Milvus Lite 主要为 Linux 环境设计，可能不支持 Windows。</p>
+<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>.什么原因导致这种情况，如何解决？</h4><p>当你试图在 Windows 平台上使用 Milvus Lite 时，就会出现这个错误。Milvus Lite 主要为 Linux 环境设计，可能不支持 Windows。</p>
 <p>解决办法是使用 Linux 环境：</p>
 <ul>
 <li>使用基于 Linux 的操作系统或虚拟机来运行 Milvus Lite。</li>

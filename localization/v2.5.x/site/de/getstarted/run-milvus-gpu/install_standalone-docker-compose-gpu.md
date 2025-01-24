@@ -59,8 +59,8 @@ title: Milvus mit GPU-Unterstützung mit Docker Compose starten
         ></path>
       </svg>
     </button></h2><p>Um Milvus mit GPU-Unterstützung mit Docker Compose zu installieren, führen Sie die folgenden Schritte aus.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Herunterladen und Konfigurieren der YAML-Datei</h3><p>Laden Sie  herunter <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.2/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> und speichern Sie sie als docker-compose.yml manuell oder mit dem folgenden Befehl.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.2/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Herunterladen und Konfigurieren der YAML-Datei</h3><p>Laden Sie  herunter <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.4/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> und speichern Sie sie als docker-compose.yml manuell oder mit dem folgenden Befehl.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.4/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie müssen einige Änderungen an den Umgebungsvariablen des eigenständigen Dienstes in der YAML-Datei wie folgt vornehmen:</p>
 <ul>
@@ -110,7 +110,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <li>Der <strong>milvus-standalone-Container</strong> bedient lokal die Ports <strong>19530</strong> mit den Standardeinstellungen und ordnet seine Daten den <strong>Volumes/milvus</strong> im aktuellen Ordner zu.</li>
 </ul></li>
 </ul>
-<p>Mit folgendem Befehl können Sie überprüfen, ob die Container laufen und in Betrieb sind:</p>
+<p>Mit folgendem Befehl können Sie überprüfen, ob die Container funktionieren und laufen:</p>
 <pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose ps
 
       Name                     Command                  State                            Ports
@@ -199,7 +199,7 @@ docker start &lt;milvus_container_id&gt;
 <ul>
 <li><p>Prüfen Sie <a href="/docs/de/quickstart.md">Quickstart</a>, um zu sehen, was Milvus alles kann.</p></li>
 <li><p>Prüfen Sie <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>, um mehr über die Milvus-Instanz zu erfahren.</p></li>
-<li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
+<li><p>Lernen Sie die Grundfunktionen von Milvus kennen:</p>
 <ul>
 <li><a href="/docs/de/manage_databases.md">Datenbanken verwalten</a></li>
 <li><a href="/docs/de/manage-collections.md">Sammlungen verwalten</a></li>
