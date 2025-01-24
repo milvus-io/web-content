@@ -81,7 +81,11 @@ See [Run Milvus on Windows](https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-
 
 #### I got an error when installing pymilvus on Windows. What shall I do?
 
-It is not recommended to install PyMilvus on Windows. But if you have to install PyMilvus on Windows but got an error, try installing it in a [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) environment. See [Install Milvus SDK](install-pymilvus.md) for more information about how to install PyMilvus in the Conda environment.
+Please try to use the following command to update pymilvus to the newest version.
+
+```shell
+pip install --upgrade pymilvus
+```
 
 #### Can I deploy Milvus when disconnected from the Internet?
 
