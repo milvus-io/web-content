@@ -43,7 +43,7 @@ title: Release Notes
 <tr><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>We’re excited to announce the release of Milvus 2.5.4, which introduces key performance optimizations and new features such as PartitionKey isolation, Sparse Index with DAAT MaxScore, and enhanced locking mechanisms. This version also addresses multiple bugs that improve overall stability and reliability. We encourage you to upgrade or try out this latest release, and we look forward to your feedback in helping us continually refine Milvus!</p>
+<p>We’re excited to announce the release of Milvus 2.5.4, which introduces key performance optimizations and new features such as PartitionKey isolation, Sparse Index with DAAT MaxScore, and enhanced locking mechanisms. A standout highlight of this release is its support for 10,000 collections and 1 million partitions, marking a major milestone for multi-tenant use cases. This version also addresses multiple bugs that improve overall stability and reliability, two of the critical bugs may cause data loss. We encourage you to upgrade or try out this latest release, and we look forward to your feedback in helping us continually refine Milvus!</p>
 <h3 id="Features" class="common-anchor-header">Features</h3><ul>
 <li>Supports PartitionKey isolation to improve performance with multiple partition keys (<a href="https://github.com/milvus-io/milvus/pull/39245">#39245</a>). For more information, refer to <a href="/docs/use-partition-key.md">Use Partition Key</a>.</li>
 <li>Sparse Index now supports DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>. For more information, refer to <a href="/docs/sparse_vector.md">Sparse Vector</a>.</li>
@@ -51,6 +51,7 @@ title: Release Notes
 <li>Root privileges can be customized (<a href="https://github.com/milvus-io/milvus/pull/39324">#39324</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Support 10K collections and 1million partitions in one cluster (<a href="https://github.com/milvus-io/milvus/pull/37630">#37630</a>)</li>
 <li>Cached segments’ delta information to accelerate the Query Coordinator (<a href="https://github.com/milvus-io/milvus/pull/39349">#39349</a>)</li>
 <li>Read metadata concurrently at the collection level to speed up failure recovery (<a href="https://github.com/milvus-io/milvus/pull/38900">#38900</a>)</li>
 <li>Refined lock granularity in QueryNode (<a href="https://github.com/milvus-io/milvus/pull/39282">#39282</a>), (<a href="https://github.com/milvus-io/milvus/pull/38907">#38907</a>)</li>
@@ -66,19 +67,21 @@ title: Release Notes
 <li>Added version control for scalar indexes (<a href="https://github.com/milvus-io/milvus/pull/39236">#39236</a>)</li>
 <li>Improved the speed of fetching collection information from RootCoord by avoiding unnecessary copies (<a href="https://github.com/milvus-io/milvus/pull/38902">#38902</a>)</li>
 </ul>
+<h3 id="Critial-Bug-fixs" class="common-anchor-header">Critial Bug fixs</h3><ul>
+<li>Fixed search failures for primary keys with indexes (<a href="https://github.com/milvus-io/milvus/pull/39390">#39390</a>)</li>
+<li>Fixed potential data loss issue caused by restarting MixCoord and flushing concurrently (<a href="https://github.com/milvus-io/milvus/pull/39422">#39422</a>)</li>
+<li>Fixed a delete failure triggered by improper concurrency between stats tasks and L0 compaction after MixCoord restarts (<a href="https://github.com/milvus-io/milvus/pull/39460">#39460</a>)</li>
+<li>Fixed scalar inverted index incompatibility when upgrading from 2.4 to 2.5 (<a href="https://github.com/milvus-io/milvus/pull/39272">#39272</a>)</li>
+</ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
 <li>Fixed slow query issues caused by coarse lock granularity during multi-column loading (<a href="https://github.com/milvus-io/milvus/pull/39255">#39255</a>)</li>
 <li>Fixed an issue where using aliases could cause an iterator to traverse the wrong database (<a href="https://github.com/milvus-io/milvus/pull/39248">#39248</a>)</li>
-<li>Fixed search failures for primary keys with indexes (<a href="https://github.com/milvus-io/milvus/pull/39390">#39390</a>)</li>
-<li>Fixed potential data loss issue caused by restarting MixCoord and flushing concurrently (<a href="https://github.com/milvus-io/milvus/pull/39422">#39422</a>)</li>
 <li>Fixed a resource group update failure when altering the database (<a href="https://github.com/milvus-io/milvus/pull/39356">#39356</a>)</li>
 <li>Fixed a sporadic issue where the tantivy index could not delete index files during release (<a href="https://github.com/milvus-io/milvus/pull/39434">#39434</a>)</li>
-<li>Fixed a delete failure triggered by improper concurrency between stats tasks and L0 compaction after MixCoord restarts (<a href="https://github.com/milvus-io/milvus/pull/39460">#39460</a>)</li>
 <li>Fixed slow indexing caused by having too many threads (<a href="https://github.com/milvus-io/milvus/pull/39341">#39341</a>)</li>
 <li>Fixed an issue preventing disk quota checks from being skipped during bulk import (<a href="https://github.com/milvus-io/milvus/pull/39319">#39319</a>)</li>
 <li>Resolved freeze issues caused by too many message queue consumers by limiting concurrency (<a href="https://github.com/milvus-io/milvus/pull/38915">#38915</a>)</li>
 <li>Fixed query timeouts caused by MixCoord restarts during large-scale compactions (<a href="https://github.com/milvus-io/milvus/pull/38926">#38926</a>)</li>
-<li>Fixed scalar inverted index incompatibility when upgrading from 2.4 to 2.5 (<a href="https://github.com/milvus-io/milvus/pull/39272">#39272</a>)</li>
 <li>Fixed channel imbalance issues caused by node downtime (<a href="https://github.com/milvus-io/milvus/pull/39200">#39200</a>)</li>
 <li>Fixed an issue that could cause channel balance to become stuck. (<a href="https://github.com/milvus-io/milvus/pull/39160">#39160</a>)</li>
 <li>Fixed an issue where RBAC custom group privilege level checks became ineffective (<a href="https://github.com/milvus-io/milvus/pull/39224">#39224</a>)</li>
