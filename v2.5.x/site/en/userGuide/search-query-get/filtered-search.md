@@ -11,6 +11,10 @@ An ANN search finds vector embeddings most similar to specified vector embedding
 
 ## Overview
 
+In Milvus, filtered searches are categorized into two types — **standard filtering** and **iterative filtering** — depending on the stage at which the filtering is applied.
+
+## Standard Filtering
+
 If a collection contains both vector embeddings and their metadata, you can filter metadata before ANN search to improve the relevancy of the search result. Once Milvus receives a search request carrying a filtering condition, it restricts the search scope within the entities matching the specified filtering condition.​
 
 ![Filtered search](../../../../assets/filtered-search.png)
@@ -22,6 +26,18 @@ As shown in the above diagram, the search request carries `chunk like % red %` a
 - Conduct the ANN search within the filtered entities.​
 
 - Returns top-K entities.​
+
+## Iterative Filtering
+
+The standard filtering process effectively narrows the search scope to a small range. However, overly complex filtering expressions may result in very high search latency. In such cases, iterative filtering can serve as an alternative, helping to reduce the workload of scalar filtering.
+
+![Iterative filtering](../../../../assets/iterative-filtering.png)
+
+As illustrated in the diagram above, a search with iterative filtering performs the vector search in iterations. Each entity returned by the iterator undergoes scalar filtering, and this process continues until the specified topK results are achieved.
+
+This method significantly reduces the number of entities subjected to scalar filtering, making it especially beneficial for handling highly complex filtering expressions.
+
+However, it’s important to note that the iterator processes entities one at a time. This sequential approach can lead to longer processing times or potential performance issues, especially when a large number of entities are subjected to scalar filtering.
 
 ## Examples
 
@@ -43,7 +59,9 @@ This section demonstrates how to conduct a filtered search. Code snippets in thi
 
 ```
 
-The search request in the following code snippet carries a filtering condition and several output fields.​
+### Search with Standard Filtering
+
+The following code snippets demonstrate a search with standard filtering, and the request in the following code snippet carries a filtering condition and several output fields.
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -236,3 +254,176 @@ The filtering condition carried in the search request reads `color like "red%" a
 ```
 
 For more information on the operators that you can use in metadata filtering, refer to [​Metadata Filtering](boolean.md).​
+### Search with iteraive filtering
+
+To conduct a filtered search with iterative filtering, you can do as follows:
+
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+    <a href="#curl">cURL</a>
+</div>
+
+```python
+from pymilvus import MilvusClient​
+​
+client = MilvusClient(​
+    uri="http://localhost:19530",​
+    token="root:Milvus"​
+)​
+​
+query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
+​
+res = client.search(​
+    collection_name="my_collection",​
+    data=[query_vector],​
+    limit=5,​
+    # highlight-start​
+    filter='color like "red%" and likes > 50',​
+    output_fields=["color", "likes"]​,
+    search_params={
+        "hints": "iterative_filter"
+    }    
+    # highlight-end​
+)​
+​
+for hits in res:​
+    print("TopK results:")​
+    for hit in hits:​
+        print(hit)​
+
+```
+
+```java
+import io.milvus.v2.client.ConnectConfig;​
+import io.milvus.v2.client.MilvusClientV2;​
+import io.milvus.v2.service.vector.request.SearchReq​;
+import io.milvus.v2.service.vector.request.data.FloatVec;​
+import io.milvus.v2.service.vector.response.SearchResp​;
+​
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()​
+        .uri("http://localhost:19530")​
+        .token("root:Milvus")​
+        .build());​
+​
+FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});​
+SearchReq searchReq = SearchReq.builder()​
+        .collectionName("filtered_search_collection")​
+        .data(Collections.singletonList(queryVector))​
+        .topK(5)​
+        .filter("color like \"red%\" and likes > 50")​
+        .outputFields(Arrays.asList("color", "likes"))​
+        .searchParams(new HashMap<>("hints", "iterative_filter"))
+        .build();​
+​
+SearchResp searchResp = client.search(searchReq);​
+​
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();​
+for (List<SearchResp.SearchResult> results : searchResults) {​
+    System.out.println("TopK results:");​
+    for (SearchResp.SearchResult result : results) {​
+        System.out.println(result);​
+    }​
+}​
+​
+// Output​
+// TopK results:​
+// SearchResp.SearchResult(entity={color=red_4794, likes=122}, score=0.5975797, id=4)​
+// SearchResp.SearchResult(entity={color=red_9392, likes=58}, score=-0.24996188, id=6)​
+
+```
+
+```go
+import (​
+    "context"​
+    "log"​
+​
+    "github.com/milvus-io/milvus/client/v2"​
+    "github.com/milvus-io/milvus/client/v2/entity"​
+)​
+​
+func ExampleClient_Search_filter() {​
+        ctx, cancel := context.WithCancel(context.Background())​
+        defer cancel()​
+​
+        milvusAddr := "127.0.0.1:19530"​
+        token := "root:Milvus"​
+​
+        cli, err := client.New(ctx, &client.ClientConfig{​
+                Address: milvusAddr,​
+                APIKey:  token,​
+        })​
+        if err != nil {​
+                log.Fatal("failed to connect to milvus server: ", err.Error())​
+        }​
+​
+        defer cli.Close(ctx)​
+​
+        queryVector := []float32{0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592}​
+​
+        resultSets, err := cli.Search(ctx, client.NewSearchOption(​
+                "filtered_search_collection", // collectionName​
+                3,             // limit​
+                []entity.Vector{entity.FloatVector(queryVector)},​
+        ).WithFilter(`color like "red%" and likes > 50`).WithHints("iterative_filter").WithOutputFields("color", "likes"))​
+        if err != nil {​
+                log.Fatal("failed to perform basic ANN search collection: ", err.Error())​
+        }​
+​
+        for _, resultSet := range resultSets {​
+                log.Println("IDs: ", resultSet.IDs)​
+                log.Println("Scores: ", resultSet.Scores)​
+        }​
+        // Output:​
+        // IDs:​
+        // Scores:​
+}​
+​
+
+```
+
+```javascript
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";​
+​
+const address = "http://localhost:19530";​
+const token = "root:Milvus";​
+const client = new MilvusClient({address, token});​
+​
+const query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
+​
+const res = await client.search({​
+    collection_name: "filtered_search_collection",​
+    data: [query_vector],​
+    limit: 5,​
+    // highlight-start​
+    filters: 'color like "red%" and likes > 50',​
+    hints: "iterative_filter",
+    output_fields: ["color", "likes"]​
+    // highlight-end​
+})​
+
+```
+
+```curl
+export CLUSTER_ENDPOINT="http://localhost:19530"​
+export TOKEN="root:Milvus"​
+​
+curl --request POST \​
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \​
+--header "Authorization: Bearer ${TOKEN}" \​
+--header "Content-Type: application/json" \​
+-d '{​
+    "collectionName": "quick_setup",​
+    "data": [​
+        [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
+    ],​
+    "annsField": "vector",​
+    "filter": "color like \"red%\" and likes > 50",​
+    "searchParams": {"hints": "iterative_filter"},
+    "limit": 3,​
+    "outputFields": ["color", "likes"]​
+}'​
+# {"code":0,"cost":0,"data":[]}​
+
+```

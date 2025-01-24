@@ -50,7 +50,7 @@ To recap, you can use either or some of the multi-tenancy strategies above to fo
 | Database oriented         | Strong         | Strong       | 64                   |For those that require collections to vary with projects, especially suitable for data isolation between departments in your organization. |
 | One collection for all    | Weak           | Medium       | N/A                  |For those that have limited resources and are insensitive to data isolation.               |
 | One collection per tenant | Strong         | Strong       | Less than 10,000     |For those that have less than 10,000 tenants per cluster.                                  |
-| One partition per tenant  | Medium         | Strong       | 4,096                |For those that have less than 4,096 tenants per collection.                                |
+| One partition per tenant  | Medium         | Strong       | 1,024                |For those that have less than 1,024 tenants per collection.                                |
 | Partition-key-based       | Medium         | Strong       | 10,000,000+          |For those that predict a rapid tenant increase into millions.                              |
 
 ## What's next

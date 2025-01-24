@@ -259,3 +259,94 @@ export filter='partition_key == "x" && <other conditions>'​
 export filter='partition_key in ["x", "y", "z"] && <other conditions>'​
 
 ```
+
+<div class="alert note">
+
+You have to replace `partition_key` with the name of the field that is designated as the partition key.
+
+</div>
+
+## Use Partition Key Isolation
+
+In the multi-tenancy scenario, you can designate the scalar field related to tenant identities as the partition key and create a filter based on a specific value in this scalar field. To further improve search performance in similar scenarios, Milvus introduces the Partition Key Isolation feature.
+
+![Partition Key Isolation](../../../../assets/partition-key-isolation.png)
+
+As shown in the above figure, Milvus groups entities based on the Partition Key value and creates a separate index for each of these groups. Upon receiving a search request, Milvus locates the index based on the Partition Key value specified in the filtering condition and restricts the search scope within the entities included in the index, thus avoiding scanning irrelevant entities during the search and greatly enhancing the search performance.
+Once you have enabled Partition Key Isolation, you can include only a specific value in the Partition-key-based filter so that Milvus can restrict the search scope within the entities included in the index that match.
+
+<div class="alert note">
+
+Currently, the Partition-Key Isolation feature applies only to searches with the index type set to HNSW.
+
+</div>
+
+### Enable Partition Key Isolation
+
+The following code examples demonstrate how to enable Partition Key Isolation.
+
+<div class="multipleCode">
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#go">Go</a>
+  <a href="#curl">cURL</a>
+</div>
+
+```python
+client.create_collection(
+    collection_name="my_collection",
+    schema=schema,
+    # highlight-next-line
+    properties={"partitionkey.isolation": True}
+)
+
+```
+
+```java
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+Map<String, String> properties = new HashMap<>();
+properties.put("partitionkey.isolation", "true");
+
+CreateCollectionReq createCollectionReq = CreateCollectionReq.builder()
+        .collectionName("my_collection")
+        .collectionSchema(schema)
+        .numPartitions(1024)
+        .properties(properties)
+        .build();
+client.createCollection(createCollectionReq);
+
+```
+
+```javascript
+res = await client.alterCollection({
+    collection_name: "my_collection",
+    properties: {
+        "partitionkey.isolation": true
+    }
+})
+
+```
+
+```curl
+export params='{
+    "partitionKeyIsolation": true
+}'
+
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d "{
+    \"collectionName\": \"myCollection\",
+    \"schema\": $schema,
+    \"params\": $params
+}"
+
+```
+
+Once you have enabled Partition Key Isolation, you can still set the Partition Key and number of partitions as described in [Set Partition Numbers](#Set-Partition-Numbers). Note that the Partition-Key-based filter should include only a specific Partition Key value.
