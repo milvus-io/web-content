@@ -87,10 +87,13 @@ title: Index Vector Fields
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>SPARSE_INVERTED_INDEX</li><li>SPARSE_WAND</li></ul></td>
+    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
   </tr>
 </tbody>
 </table>
+<div class="alert note">
+<p>From Milvus 2.5.4 onward, <code translate="no">SPARSE_WAND</code> is being deprecated. Instead, it is recommended to use <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> for equivalency while maintaining compatibility. For more information, refer to <a href="/docs/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
+</div>
 </div>
 <p>It is recommended to create indexes for both the vector field and scalar fields that are frequently accessed.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparations<button data-href="#Preparations" class="anchor-icon" translate="no">

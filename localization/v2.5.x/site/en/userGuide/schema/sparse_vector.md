@@ -265,7 +265,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
     field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
     metric_type: MetricType.IP,
-    index_type: IndexType.SPARSE_WAND,
+    index_type: IndexType.SPARSE_INVERTED_INDEX,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
     },
@@ -288,7 +288,6 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <li><p><code translate="no">index_type</code>: The type of index to create for the sparse vector field. Valid Values:</p>
 <ul>
 <li><code translate="no">SPARSE_INVERTED_INDEX</code>: A general-purpose inverted index for sparse vectors.</li>
-<li><code translate="no">SPARSE_WAND</code>: A specialized index type supported in Milvus v2.5.3 and earlier.</li>
 </ul>
   <div class="alert note">
 <p>From Milvus 2.5.4 onward, <code translate="no">SPARSE_WAND</code> is being deprecated. Instead, it is recommended to use <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> for equivalency while maintaining compatibility.</p>
@@ -554,7 +553,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
     </button></h2><p>When using sparse vectors in Milvus, consider the following limits:</p>
 <ul>
 <li><p>Currently, only the <strong>IP</strong> and <strong>BM25</strong> (for full-text search) distance metrics are supported for sparse vectors. The high dimensionality of sparse vectors makes L2 and cosine distance impractical.</p></li>
-<li><p>For sparse vector fields, only the <strong>SPARSE_INVERTED_INDEX</strong> and <strong>SPARSE_WAND</strong> index types are supported.</p></li>
+<li><p>For sparse vector fields, only the <strong>SPARSE_INVERTED_INDEX</strong> index type is supported.</p></li>
 <li><p>The data types supported for sparse vectors:</p>
 <ul>
 <li>The dimension part must be an unsigned 32-bit integer;</li>
@@ -582,10 +581,6 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Can you explain the difference between SPARSE_INVERTED_INDEX and SPARSE_WAND, and how do I choose between them?</strong></p>
-<p><strong>SPARSE_INVERTED_INDEX</strong> is a traditional inverted index, while <strong>SPARSE_WAND</strong> uses the <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> algorithm to reduce the number of full IP distance evaluations during search. <strong>SPARSE_WAND</strong> is typically faster, but its performance can decline with increasing vector density. To choose between them, conduct experiments and benchmarks based on your specific dataset and use case.</p></li>
-<li><p><strong>How should I choose the drop_ratio_build and drop_ratio_search parameters?</strong></p>
-<p>The choice of <strong>drop_ratio_build</strong> and <strong>drop_ratio_search</strong> depends on the characteristics of your data and your requirements for search latency/throughput and accuracy.</p></li>
 <li><p><strong>Can the dimension of a sparse embedding be any discrete value within the uint32 space?</strong></p>
 <p>Yes, with one exception. The dimension of a sparse embedding can be any value in the range of <code translate="no">[0, maximum of uint32)</code>. This means you cannot use the maximum value of uint32.</p></li>
 <li><p><strong>Are searches on growing segments conducted through an index or by brute force?</strong></p>

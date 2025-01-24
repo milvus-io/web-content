@@ -73,7 +73,10 @@ Currently, a vector field only supports one index type. Milvus automatically del
 </div>
 <div class="filter-sparse">
 <h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indexes for sparse embeddings</h3><p>Indexes for sparse embeddings support the <code translate="no">IP</code> and <code translate="no">BM25</code> (for full-text search) metrics only.</p>
-<p>The types of indexes include <code translate="no">SPARSE_INVERTED_INDEX</code> and <code translate="no">SPARSE_WAND</code>.</p>
+<p>Index type supported for sparse embeddings: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
+<div class="alert note">
+<p>From Milvus 2.5.4 onward, <code translate="no">SPARSE_WAND</code> is being deprecated. Instead, it is recommended to use <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> for equivalency while maintaining compatibility. For more information, refer to <a href="/docs/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
+</div>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
@@ -233,14 +236,6 @@ Currently, a vector field only supports one index type. Milvus automatically del
     <td><ul>
       <li>Depends on relatively small datasets.</li>
       <li>Requires a 100% recall rate.</li>
-    </ul></td>
-  </tr>
-  <tr>
-    <td>SPARSE_WAND</td>
-    <td>Inverted index</td>
-    <td><ul>
-      <li><a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> algorithm accelerated</li>
-      <li>Can get a significant speed improvement while only sacrificing a small amount of recall.</li>
     </ul></td>
   </tr>
 </tbody>
@@ -600,33 +595,12 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>The proportion of small vector values that are excluded during the indexing process. This option allows fine-tuning of the indexing process, making a trade-off between efficiency and accuracy by disregarding small values when building the index.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>The algorithm used for building and querying the index. For details, refer to <a href="/docs/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (default), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
 </tbody>
 </table>
-</li>
-<li><p>Search parameters</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>The proportion of small vector values that are excluded during the search process. This option allows fine-tuning of the search process by specifying the ratio of the smallest values in the query vector to ignore. It helps balance search precision and performance. The smaller the value set for <code translate="no">drop_ratio_search</code>, the less these small values contribute to the final score. By ignoring some small values, search performance can be improved with minimal impact on accuracy.</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-</ul>
-<h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND</h3><p>This index shares similarities with <code translate="no">SPARSE_INVERTED_INDEX</code>, while it utilizes the <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> algorithm to further reduce the number of full IP distance evaluations during the search process.</p>
-<p>Based on our testing, <code translate="no">SPARSE_WAND</code> generally outperforms other methods in terms of speed. However, its performance can deteriorate rapidly as the density of the vectors increases. To address this issue, introducing a non-zero <code translate="no">drop_ratio_search</code> can significantly enhance performance while only incurring minimal accuracy loss. For more information, refer to <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p>
-<ul>
-<li><p>Index building parameters</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>The proportion of small vector values that are excluded during the indexing process. This option allows fine-tuning of the indexing process, making a trade-off between efficiency and accuracy by disregarding small values when building the index.</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
+  <div class="alert note">
+<p>The <code translate="no">drop_ratio_build</code> parameter is deprecated since Milvus v2.5.4, which can still be accepted during index building, but will no longer have actual effect on the index.</p>
+  </div>
 </li>
 <li><p>Search parameters</p>
 <table>
