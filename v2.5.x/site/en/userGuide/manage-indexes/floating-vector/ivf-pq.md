@@ -24,7 +24,7 @@ Here's how it works:
 3. **Inverted Index:** An index is created, mapping each cluster centroid to the list of vectors assigned to that cluster.
 4. **Search:** When you search for nearest neighbors, the search algorithm compares your query vector with the cluster centroids and selects the most promising cluster(s). The search is then narrowed down to the vectors within those selected clusters.
 
-To learn more about its technical details , refer to [IVF_FLAT](https://zilliverse.feishu.cn/wiki/MXiGwmnq6i5MswkryYVcMklVnld).
+To learn more about its technical details , refer to [IVF_FLAT](ivf-flat.md).
 
 ### PQ
 
