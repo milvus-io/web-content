@@ -627,9 +627,41 @@
         "children": [
           {
             "label": "Vector Indexes",
-            "id": "index-vector-fields.md",
+            "id": "vector-index",
             "order": 0,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Index Vector Fields",
+                "id": "index-vector-fields.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "FLAT",
+                "id": "flat.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "IVF_FLAT",
+                "id": "ivf-flat.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "IVF_PQ",
+                "id": "ivf-pq.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "HNSW",
+                "id": "hnsw.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Scalar Indexes",
