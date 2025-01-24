@@ -44,7 +44,7 @@ title: IVF_PQ
 <li><strong>Inverted Index:</strong> An index is created, mapping each cluster centroid to the list of vectors assigned to that cluster.</li>
 <li><strong>Search:</strong> When you search for nearest neighbors, the search algorithm compares your query vector with the cluster centroids and selects the most promising cluster(s). The search is then narrowed down to the vectors within those selected clusters.</li>
 </ol>
-<p>To learn more about its technical details , refer to <a href="https://zilliverse.feishu.cn/wiki/MXiGwmnq6i5MswkryYVcMklVnld">IVF_FLAT</a>.</p>
+<p>To learn more about its technical details , refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>.</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>Product Quantization (PQ)</strong> is a compression method for high-dimensional vectors that significantly reduces storage requirements while enabling fast similarity search operations.</p>
 <p>The PQ process involves these key stages:</p>
 <p>
