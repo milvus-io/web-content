@@ -246,7 +246,7 @@ index_params.add_index(​
     index_name="sparse_index",​
     index_type="SPARSE_INVERTED_INDEX",  # Index type for sparse vectors​
     metric_type="IP",  # Currently, only IP (Inner Product) is supported for sparse vectors​
-    params={"drop_ratio_build": 0.2},  # The ratio of small vector values to be dropped during indexing​
+    params={"inverted_index_algo": "DAAT_MAXSCORE"},  # The ratio of small vector values to be dropped during indexing​
 )​
 
 ```
@@ -266,7 +266,7 @@ IndexParam indexParamForDenseField = IndexParam.builder()​
         .build();​
 ​
 Map<String, Object> sparseParams = new HashMap<>();​
-sparseParams.put("drop_ratio_build", 0.2);​
+sparseParams.put("inverted_index_algo": "DAAT_MAXSCORE");​
 IndexParam indexParamForSparseField = IndexParam.builder()​
         .fieldName("sparse")​
         .indexName("sparse_index")​
@@ -504,7 +504,7 @@ search_param_2 = {​
     "anns_field": "sparse",​
     "param": {​
         "metric_type": "IP",​
-        "params": {"drop_ratio_build": 0.2}​
+        "params": {}​
     },​
     "limit": 2​
 }​
@@ -544,7 +544,7 @@ searchRequests.add(AnnSearchReq.builder()​
         .vectorFieldName("sparse")​
         .vectors(querySparseVectors)​
         .metricType(IndexParam.MetricType.IP)​
-        .params("{\"drop_ratio_build\": 0.2}")​
+        .params()​
         .topK(2)​
         .build());​
 
@@ -555,20 +555,20 @@ const search_param_1 = {​
     "data": query_vector, ​
     "anns_field": "dense", ​
     "param": {​
-        "metric_type": "IP", // 参数值需要与 Collection Schema 中定义的保持一致​
+        "metric_type": "IP", 
         "params": {"nprobe": 10}​
     },​
-    "limit": 2 // AnnSearchRequest 返还的搜索结果数量​
+    "limit": 2 
 }​
 ​
 const search_param_2 = {​
     "data": query_sparse_vector, ​
     "anns_field": "sparse", ​
     "param": {​
-        "metric_type": "IP", // 参数值需要与 Collection Schema 中定义的保持一致​
-        "params": {"drop_ratio_build": 0.2}​
+        "metric_type": "IP", 
+        "params": {}​
     },​
-    "limit": 2 // AnnSearchRequest 返还的搜索结果数量​
+    "limit": 2 
 }​
 
 ```
@@ -589,9 +589,7 @@ export req='[​
         "data": [{"3573": 0.34701499565746674}, {"5263": 0.2639375518635271}],​
         "annsField": "sparse",​
         "params": {​
-            "params": {​
-                "drop_ratio_build": 0.2​
-             }​
+            "params": {}​
         },​
         "limit": 2​
     }​

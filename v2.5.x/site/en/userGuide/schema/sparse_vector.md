@@ -259,7 +259,7 @@ const indexParams = await client.createIndex({
     index_name: 'sparse_inverted_index',
     field_name: 'sparse_vector',
     metric_type: MetricType.IP,
-    index_type: IndexType.SPARSE_WAND,
+    index_type: IndexType.SPARSE_INVERTED_INDEX,
     params: {
       inverted_index_algo: 'DAAT_MAXSCORE',
     },
@@ -285,7 +285,6 @@ In the example above:
 - `index_type`: The type of index to create for the sparse vector field. Valid Values:
 
   - `SPARSE_INVERTED_INDEX`: A general-purpose inverted index for sparse vectors.
-  - `SPARSE_WAND`: A specialized index type supported in Milvus v2.5.3 and earlier.
 
   <div class="alert note">
 
@@ -585,7 +584,7 @@ When using sparse vectors in Milvus, consider the following limits:
 
 - Currently, only the __IP__ and __BM25__ (for full-text search) distance metrics are supported for sparse vectors. The high dimensionality of sparse vectors makes L2 and cosine distance impractical.
 
-- For sparse vector fields, only the __SPARSE_INVERTED_INDEX__ and __SPARSE_WAND__ index types are supported.
+- For sparse vector fields, only the __SPARSE_INVERTED_INDEX__ index type is supported.
 
 - The data types supported for sparse vectors:
 
@@ -598,14 +597,6 @@ When using sparse vectors in Milvus, consider the following limits:
     - Vector indices are non-negative.
 
 ## FAQ
-
-- __Can you explain the difference between SPARSE_INVERTED_INDEX and SPARSE_WAND, and how do I choose between them?__
-
-    __SPARSE_INVERTED_INDEX__ is a traditional inverted index, while __SPARSE_WAND__ uses the [Weak-AND](https://dl.acm.org/doi/10.1145/956863.956944) algorithm to reduce the number of full IP distance evaluations during search. __SPARSE_WAND__ is typically faster, but its performance can decline with increasing vector density. To choose between them, conduct experiments and benchmarks based on your specific dataset and use case.
-
-- __How should I choose the drop_ratio_build and drop_ratio_search parameters?__
-
-    The choice of __drop_ratio_build__ and __drop_ratio_search__ depends on the characteristics of your data and your requirements for search latency/throughput and accuracy.
 
 - __Can the dimension of a sparse embedding be any discrete value within the uint32 space?__
 
