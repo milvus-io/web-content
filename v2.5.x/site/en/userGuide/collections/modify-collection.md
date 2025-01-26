@@ -122,7 +122,7 @@ curl --request POST \​
 
 ## Set Collection TTL​
 
-If a collection needs to be dropped for a specific period, consider setting its Time-To-Live (TTL) in seconds. Once the TTL times out, Milvus deletes entities in the collection. The deletion is asynchronous, indicating that searches and queries are still possible before the deletion is complete.​
+If the data of a collection needs to be cleaned after a specific period, consider setting its Time-To-Live (TTL) in seconds. Once the TTL times out, Milvus deletes all entities from the collection. The deletion is asynchronous, indicating that searches and queries are still possible before the deletion is complete.​
 
 The following code snippet demonstrates how to change the TTL of a collection.​
 
