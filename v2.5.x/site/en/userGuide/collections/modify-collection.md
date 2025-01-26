@@ -122,7 +122,7 @@ curl --request POST \​
 
 ## Set Collection TTL​
 
-If the data of a collection needs to be cleaned after a specific period, consider setting its Time-To-Live (TTL) in seconds. Once the TTL times out, Milvus deletes all entities from the collection. The deletion is asynchronous, indicating that searches and queries are still possible before the deletion is complete.​
+To automatically remove expired data from a Milvus collection, you can set the collection’s Time-To-Live (TTL) in seconds. Once the TTL expires, Milvus marks the data as expired and schedules it for asynchronous deletion. As a result, the data may still appear in search results until the deletion process is fully completed.
 
 The following code snippet demonstrates how to change the TTL of a collection.​
 
