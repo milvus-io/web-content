@@ -36,7 +36,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションにベクトル埋め込みとそのメタデータの両方が含まれる場合、ANN検索の前にメタデータをフィルタリングすることで、検索結果の関連性を向上させることができます。Milvusはフィルタリング条件を含む検索要求を受け取ると、指定されたフィルタリング条件にマッチするエンティティ内に検索範囲を制限します。</p>
+    </button></h2><p>Milvusでは、フィルタリングが適用される段階によって、<strong>標準</strong>フィルタリングと<strong>反復フィルタリングの</strong>2種類に分類されます。</p>
+<h2 id="Standard-Filtering" class="common-anchor-header">標準フィルタリング<button data-href="#Standard-Filtering" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>コレクションにベクトル埋め込みとそのメタデータの両方が含まれている場合、ANN検索の前にメタデータをフィルタリングすることで、検索結果の関連性を向上させることができます。Milvusはフィルタリング条件を含む検索要求を受け取ると、指定されたフィルタリング条件に一致するエンティティ内に検索範囲を制限します。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/filtered-search.png" alt="Filtered search" class="doc-image" id="filtered-search" />
@@ -47,6 +63,29 @@ summary: >-
 <li><p>フィルタリングされたエンティティ内でANN検索を行う。</p></li>
 <li><p>上位K個のエンティティを返す。</p></li>
 </ul>
+<h2 id="Iterative-Filtering" class="common-anchor-header">反復フィルタリング<button data-href="#Iterative-Filtering" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>標準的なフィルタリング処理では、検索範囲を効果的に絞り込むことができる。しかし、フィルタリング式が複雑すぎると、検索待ち時間が非常に長くなることがある。そのような場合は、反復フィルタリングが代替手段として機能し、スカラーフィルタリングの作業負荷を軽減するのに役立ちます。</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/iterative-filtering.png" alt="Iterative filtering" class="doc-image" id="iterative-filtering" />
+   </span> <span class="img-wrapper"> <span>反復フィルタリング</span> </span></p>
+<p>上図に示すように、反復フィルタリングを使った検索では、ベクトル検索を繰り返し実行します。反復子によって返された各エンティティはスカラー・フィルタリングを受け、この処理は指定された topK 個の結果が得られるまで続けられる。</p>
+<p>この方法では、スカラー・フィルタリングの対象となるエンティティの数が大幅に減少するため、非常に複雑なフィルタリング式を扱う場合に特に有益です。</p>
+<p>ただし、イテレータはエンティティを1つずつ処理することに注意することが重要です。この逐次的なアプローチは、特に多数のエンティティがスカラーフィルタリングの対象となる場合、処理時間が長くなったり、パフォーマンスに問題が生じたりする可能性があります。</p>
 <h2 id="Examples" class="common-anchor-header">例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,7 +101,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションではフィルタリング検索の方法を示す。このセクションのコード・スニペットは、コレクションに以下のエンティティがすでにあると仮定しています。各エンティティには、<strong>id</strong>、<strong>vector</strong>、<strong>color</strong>、<strong>likes</strong> の 4 つのフィールドがあります。</p>
+    </button></h2><p>このセクションでは、フィルタリング検索の方法を示します。このセクションのコード・スニペットは、コレクションに以下のエンティティが既にあることを想定しています。各エンティティには、<strong>id</strong>、<strong>vector</strong>、<strong>color</strong>、<strong>likes</strong> の 4 つのフィールドがあります。</p>
 <pre><code translate="no" class="language-JSON">[​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>: <span class="hljs-number">165</span>},​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>: <span class="hljs-number">25</span>},​
@@ -77,7 +116,7 @@ summary: >-
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>以下のコード・スニペットの検索リクエストは、フィルタリング条件と複数の出力フィールドを持つ。</p>
+<h3 id="Search-with-Standard-Filtering" class="common-anchor-header">標準フィルタリングによる検索</h3><p>以下のコード・スニペットは、標準的なフィルタリングを使った検索を示しています。以下のコード・スニペットのリクエストは、フィルタリング条件と複数の出力フィールドを持ちます。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
@@ -227,7 +266,7 @@ curl --request POST \​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>検索リクエストに含まれるフィルタリング条件は<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> を読み取る。最初の条件は<code translate="no">color</code> フィールドに<code translate="no">red</code> で始まる値を持つエンティティを求めるもので、もう1つは<code translate="no">likes</code> フィールドに<code translate="no">50</code> より大きい値を持つエンティティを求めるものである。これらの条件を満たすエンティティは2つしかない。top-K を<code translate="no">3</code> に設定すると、milvusはこれら2つのエンティティのクエリベクトルとの距離を計算し、検索結果として返します。</p>
+<p>検索リクエストに含まれるフィルタリング条件は、<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> 。最初の条件は、<code translate="no">color</code> フィールドに<code translate="no">red</code> で始まる値を持つエンティティを求めるもので、もう1つは、<code translate="no">likes</code> フィールドに<code translate="no">50</code> より大きい値を持つエンティティを求めるものである。これらの条件を満たすエンティティは2つしかない。top-K を<code translate="no">3</code> に設定すると、milvusはこれら2つのエンティティのクエリベクトルとの距離を計算し、検索結果として返します。</p>
 <pre><code translate="no" class="language-JSON">[​
     {​
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">4</span>, ​
@@ -251,3 +290,159 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>メタデータフィルタリングで使用できる演算子の詳細については、「<a href="/docs/ja/boolean.md">メタデータフィルタリング</a>」を参照してください。</p>
+<h3 id="Search-with-iteraive-filtering" class="common-anchor-header">反復フィルタリングによる検索</h3><p>反復フィルタリングを使ってフィルタリング検索を行うには、以下のようにすればよい：</p>
+<div class="multipleCode">
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
+​
+client = MilvusClient(​
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,​
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+)​
+​
+query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]​
+​
+res = client.search(​
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
+    data=[query_vector],​
+    limit=<span class="hljs-number">5</span>,​
+    <span class="hljs-comment"># highlight-start​</span>
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>,​
+    output_fields=[<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>]​,
+    search_params={
+        <span class="hljs-string">&quot;hints&quot;</span>: <span class="hljs-string">&quot;iterative_filter&quot;</span>
+    }    
+    <span class="hljs-comment"># highlight-end​</span>
+)​
+​
+<span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res:​
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>)​
+    <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:​
+        <span class="hljs-built_in">print</span>(hit)​
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;​
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;​
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq​;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;​
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp​;
+​
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()​
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)​
+        .build());​
+​
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3580376395471989f</span>, -<span class="hljs-number">0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, -<span class="hljs-number">0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>});​
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()​
+        .collectionName(<span class="hljs-string">&quot;filtered_search_collection&quot;</span>)​
+        .data(Collections.singletonList(queryVector))​
+        .topK(<span class="hljs-number">5</span>)​
+        .filter(<span class="hljs-string">&quot;color like \&quot;red%\&quot; and likes &gt; 50&quot;</span>)​
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>))​
+        .searchParams(<span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;(<span class="hljs-string">&quot;hints&quot;</span>, <span class="hljs-string">&quot;iterative_filter&quot;</span>))
+        .build();​
+​
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);​
+​
+List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSearchResults();​
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; results : searchResults) {​
+    System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);​
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {​
+        System.out.println(result);​
+    }​
+}​
+​
+<span class="hljs-comment">// Output​</span>
+<span class="hljs-comment">// TopK results:​</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity={color=red_4794, likes=122}, score=0.5975797, id=4)​</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity={color=red_9392, likes=58}, score=-0.24996188, id=6)​</span>
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (​
+    <span class="hljs-string">&quot;context&quot;</span>​
+    <span class="hljs-string">&quot;log&quot;</span>​
+​
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2&quot;</span>​
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>​
+)​
+​
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ExampleClient_Search_filter</span><span class="hljs-params">()</span></span> {​
+        ctx, cancel := context.WithCancel(context.Background())​
+        <span class="hljs-keyword">defer</span> cancel()​
+​
+        milvusAddr := <span class="hljs-string">&quot;127.0.0.1:19530&quot;</span>​
+        token := <span class="hljs-string">&quot;root:Milvus&quot;</span>​
+​
+        cli, err := client.New(ctx, &amp;client.ClientConfig{​
+                Address: milvusAddr,​
+                APIKey:  token,​
+        })​
+        <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {​
+                log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())​
+        }​
+​
+        <span class="hljs-keyword">defer</span> cli.Close(ctx)​
+​
+        queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.3580376395471989</span>, <span class="hljs-number">-0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, <span class="hljs-number">-0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>}​
+​
+        resultSets, err := cli.Search(ctx, client.NewSearchOption(​
+                <span class="hljs-string">&quot;filtered_search_collection&quot;</span>, <span class="hljs-comment">// collectionName​</span>
+                <span class="hljs-number">3</span>,             <span class="hljs-comment">// limit​</span>
+                []entity.Vector{entity.FloatVector(queryVector)},​
+        ).WithFilter(<span class="hljs-string">`color like &quot;red%&quot; and likes &gt; 50`</span>).WithHints(<span class="hljs-string">&quot;iterative_filter&quot;</span>).WithOutputFields(<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>))​
+        <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {​
+                log.Fatal(<span class="hljs-string">&quot;failed to perform basic ANN search collection: &quot;</span>, err.Error())​
+        }​
+​
+        <span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {​
+                log.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs)​
+                log.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)​
+        }​
+        <span class="hljs-comment">// Output:​</span>
+        <span class="hljs-comment">// IDs:​</span>
+        <span class="hljs-comment">// Scores:​</span>
+}​
+​
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;​
+​
+<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;​
+<span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;​
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});​
+​
+<span class="hljs-keyword">const</span> query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]​
+​
+<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({​
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;filtered_search_collection&quot;</span>,​
+    <span class="hljs-attr">data</span>: [query_vector],​
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,​
+    <span class="hljs-comment">// highlight-start​</span>
+    <span class="hljs-attr">filters</span>: <span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>,​
+    <span class="hljs-attr">hints</span>: <span class="hljs-string">&quot;iterative_filter&quot;</span>,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>]​
+    <span class="hljs-comment">// highlight-end​</span>
+})​
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+​
+curl --request POST \​
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \​
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
+-d <span class="hljs-string">&#x27;{​
+    &quot;collectionName&quot;: &quot;quick_setup&quot;,​
+    &quot;data&quot;: [​
+        [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
+    ],​
+    &quot;annsField&quot;: &quot;vector&quot;,​
+    &quot;filter&quot;: &quot;color like \&quot;red%\&quot; and likes &gt; 50&quot;,​
+    &quot;searchParams&quot;: {&quot;hints&quot;: &quot;iterative_filter&quot;},
+    &quot;limit&quot;: 3,​
+    &quot;outputFields&quot;: [&quot;color&quot;, &quot;likes&quot;]​
+}&#x27;</span>​
+<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}​</span>
+
+<button class="copy-code-btn"></button></code></pre>

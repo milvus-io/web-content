@@ -43,14 +43,15 @@ title: Notas de lançamento
 <tr><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>Temos o prazer de anunciar o lançamento do Milvus 2.5.4, que introduz optimizações de desempenho chave e novas funcionalidades, tais como o isolamento PartitionKey, Sparse Index com DAAT MaxScore e mecanismos de bloqueio melhorados. Esta versão também resolve vários erros que melhoram a estabilidade e a fiabilidade gerais. Encorajamo-lo a atualizar ou a experimentar esta última versão, e aguardamos o seu feedback para nos ajudar a aperfeiçoar continuamente o Milvus!</p>
+<p>Temos o prazer de anunciar o lançamento do Milvus 2.5.4, que introduz optimizações chave de desempenho e novas funcionalidades como o isolamento PartitionKey, Sparse Index com DAAT MaxScore, e mecanismos de bloqueio melhorados. Um destaque desta versão é o seu suporte para 10.000 colecções e 1 milhão de partições, o que constitui um marco importante para casos de utilização multi-tenant. Esta versão também corrige vários erros que melhoram a estabilidade e a fiabilidade gerais, dois dos erros críticos podem causar perda de dados. Encorajamo-lo a atualizar ou a experimentar esta última versão e aguardamos os seus comentários para nos ajudar a aperfeiçoar continuamente o Milvus!</p>
 <h3 id="Features" class="common-anchor-header">Caraterísticas</h3><ul>
-<li>Suporta o isolamento de PartitionKey para melhorar o desempenho com várias chaves de partição<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). Para obter mais informações, consulte <a href="/docs/pt/use-partition-key.md">Usar chave de partição</a>.</li>
+<li>Suporta o isolamento PartitionKey para melhorar o desempenho com várias chaves de partição<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). Para obter mais informações, consulte <a href="/docs/pt/use-partition-key.md">Usar chave de partição</a>.</li>
 <li>O Sparse Index agora suporta DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>. Para obter mais informações, consulte <a href="/docs/pt/sparse_vector.md">Vetor esparso</a>.</li>
 <li>Adiciona suporte para <code translate="no">is_null</code> na expressão<a href="https://github.com/milvus-io/milvus/pull/38931">(#38931</a>)</li>
 <li>Os privilégios de raiz podem ser personalizados<a href="https://github.com/milvus-io/milvus/pull/39324">(#39324</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Melhorias</h3><ul>
+<li>Suporte para 10K colecções e 1milhão de partições num cluster<a href="https://github.com/milvus-io/milvus/pull/37630">(#37630</a>)</li>
 <li>Informação delta dos segmentos em cache para acelerar o Query Coordinator<a href="https://github.com/milvus-io/milvus/pull/39349">(#39349</a>)</li>
 <li>Leitura de metadados em simultâneo ao nível da coleção para acelerar a recuperação de falhas<a href="https://github.com/milvus-io/milvus/pull/38900">(#38900</a>)</li>
 <li>Granularidade de bloqueio refinada no QueryNode<a href="https://github.com/milvus-io/milvus/pull/39282">(#39282</a>),<a href="https://github.com/milvus-io/milvus/pull/38907">(#38907</a>)</li>
@@ -66,22 +67,24 @@ title: Notas de lançamento
 <li>Adicionado controlo de versão para índices escalares<a href="https://github.com/milvus-io/milvus/pull/39236">(#39236</a>)</li>
 <li>Melhorada a velocidade de obtenção de informação de coleção do RootCoord, evitando cópias desnecessárias<a href="https://github.com/milvus-io/milvus/pull/38902">(#38902</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Correcções de erros</h3><ul>
-<li>Corrigidos os problemas de consulta lenta causados pela granularidade de bloqueio grosseiro durante o carregamento de várias colunas<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>)</li>
-<li>Foi corrigido um problema em que a utilização de aliases podia fazer com que um iterador atravessasse a base de dados errada<a href="https://github.com/milvus-io/milvus/pull/39248">(#39248</a>)</li>
+<h3 id="Critial-Bug-fixs" class="common-anchor-header">Correcções de erros críticos</h3><ul>
 <li>Corrigidas as falhas de pesquisa para chaves primárias com índices<a href="https://github.com/milvus-io/milvus/pull/39390">(#39390</a>)</li>
 <li>Corrigido um potencial problema de perda de dados causado pelo reinício do MixCoord e pela descarga em simultâneo<a href="https://github.com/milvus-io/milvus/pull/39422">(#39422</a>)</li>
-<li>Corrigida uma falha de atualização do grupo de recursos ao alterar a base de dados<a href="https://github.com/milvus-io/milvus/pull/39356">(#39356</a>)</li>
-<li>Foi corrigido um problema esporádico em que o índice tantivy não conseguia eliminar ficheiros de índice durante o lançamento<a href="https://github.com/milvus-io/milvus/pull/39434">(#39434</a>)</li>
-<li>Corrigida uma falha de eliminação despoletada por uma concorrência imprópria entre as tarefas de estatísticas e a compactação L0 após o MixCoord reiniciar<a href="https://github.com/milvus-io/milvus/pull/39460">(#39460</a>)</li>
+<li>Corrigida uma falha de eliminação despoletada por concorrência imprópria entre tarefas de estatísticas e compactação L0 após o reinício do MixCoord<a href="https://github.com/milvus-io/milvus/pull/39460">(#39460</a>)</li>
+<li>Corrigida a incompatibilidade de índice invertido escalar ao atualizar de 2.4 para 2.5<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Correcções de erros</h3><ul>
+<li>Corrigidos problemas de consulta lenta causados pela granularidade de bloqueio grosseiro durante o carregamento de várias colunas<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>)</li>
+<li>Foi corrigido um problema em que a utilização de aliases podia fazer com que um iterador atravessasse a base de dados errada<a href="https://github.com/milvus-io/milvus/pull/39248">(#39248</a>)</li>
+<li>Corrigida uma falha na atualização do grupo de recursos ao alterar a base de dados<a href="https://github.com/milvus-io/milvus/pull/39356">(#39356</a>)</li>
+<li>Foi corrigido um problema esporádico em que o índice tantivy não podia eliminar ficheiros de índice durante o lançamento<a href="https://github.com/milvus-io/milvus/pull/39434">(#39434</a>)</li>
 <li>Corrigida a indexação lenta causada por ter demasiadas threads<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>)</li>
 <li>Corrigido um problema que impedia que as verificações de quota de disco fossem ignoradas durante a importação em massa<a href="https://github.com/milvus-io/milvus/pull/39319">(#39319</a>)</li>
 <li>Resolvidos os problemas de congelamento causados por demasiados consumidores da fila de mensagens, limitando a concorrência<a href="https://github.com/milvus-io/milvus/pull/38915">(#38915</a>)</li>
-<li>Corrigidos os timeouts de consulta causados por reinícios do MixCoord durante compactações em grande escala<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>)</li>
-<li>Corrigida a incompatibilidade do índice invertido escalar ao atualizar de 2.4 para 2.5<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
+<li>Corrigidos os timeouts de consulta causados pelos reinícios do MixCoord durante as compactações em grande escala<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>)</li>
 <li>Corrigidos os problemas de desequilíbrio de canal causados pelo tempo de inatividade do nó<a href="https://github.com/milvus-io/milvus/pull/39200">(#39200</a>)</li>
-<li>Corrigido um problema que poderia fazer com que o balanço do canal ficasse preso.<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>
-<li>Corrigido um problema em que as verificações de nível de privilégio do grupo personalizado RBAC se tornavam ineficazes<a href="https://github.com/milvus-io/milvus/pull/39224">(#39224</a>)</li>
+<li>Corrigido um problema que poderia fazer com que o equilíbrio do canal ficasse preso.<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>
+<li>Corrigido um problema em que as verificações de nível de privilégio do grupo personalizado RBAC tornavam-se ineficazes<a href="https://github.com/milvus-io/milvus/pull/39224">(#39224</a>)</li>
 <li>Corrigida uma falha ao recuperar o número de linhas em índices vazios<a href="https://github.com/milvus-io/milvus/pull/39210">(#39210</a>)</li>
 <li>Corrigida uma estimativa de memória incorrecta para pequenos segmentos<a href="https://github.com/milvus-io/milvus/pull/38909">(#38909</a>)</li>
 </ul>
@@ -162,7 +165,7 @@ title: Notas de lançamento
 <h3 id="Bug-fixes" class="common-anchor-header">Correcções de erros</h3><ul>
 <li>Corrigido potenciais bloqueios em cenários de concorrência.<a href="https://github.com/milvus-io/milvus/pull/38863">(#38863</a>)</li>
 <li>Gerado o ficheiro index_null_offset apenas para campos que suportam valores nulos.<a href="https://github.com/milvus-io/milvus/pull/38834">(#38834</a>)</li>
-<li>Corrigida a utilização do plano de recuperação após o free na fase de redução.<a href="https://github.com/milvus-io/milvus/pull/38841">(#38841</a>)</li>
+<li>Corrigida a utilização do plano de recuperação após a libertação na fase de redução.<a href="https://github.com/milvus-io/milvus/pull/38841">(#38841</a>)</li>
 <li>Reconhecidas expressões com AND e OR em maiúsculas.<a href="https://github.com/milvus-io/milvus/pull/38928">(#38928</a>)</li>
 <li>Permitida a queda de partições com sucesso mesmo que o carregamento tenha falhado.<a href="https://github.com/milvus-io/milvus/pull/38874">(#38874</a>)</li>
 <li>Corrigidos os problemas de registo do ficheiro BM25 stats durante a importação.<a href="https://github.com/milvus-io/milvus/pull/38881">(#38881</a>)</li>
@@ -191,12 +194,12 @@ title: Notas de lançamento
 <tr><td>2.5.1</td><td>2.5.2</td><td>2.5.2</td><td>2.5.2</td></tr>
 </tbody>
 </table>
-<p>O Milvus 2.5.1 concentra-se numa série de correcções de erros que abordam o carregamento de memória, listagens RBAC, equilíbrio de nós de consulta e indexação de segmentos selados, melhorando também a IU Web e os interceptores. Recomendamos vivamente a atualização para a versão 2.5.1 para maior estabilidade e fiabilidade.</p>
+<p>O Milvus 2.5.1 concentra-se numa série de correcções de erros que abordam o carregamento de memória, listagens RBAC, equilíbrio de nós de consulta e indexação de segmentos selados, ao mesmo tempo que melhora a IU Web e os interceptores. Recomendamos vivamente a atualização para a versão 2.5.1 para maior estabilidade e fiabilidade.</p>
 <h3 id="Improvement" class="common-anchor-header">Melhorias</h3><ul>
 <li>Atualização das páginas de recolha e consulta da IU da Web.<a href="https://github.com/milvus-io/milvus/pull/38701">(#38701</a>)</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Correcções de erros</h3><ul>
-<li>Corrigidos problemas de OOM adicionando um fator de memória às estimativas de carregamento.<a href="https://github.com/milvus-io/milvus/pull/38722">(#38722</a>)</li>
+<li>Corrigidos os problemas de OOM adicionando um fator de memória às estimativas de carregamento.<a href="https://github.com/milvus-io/milvus/pull/38722">(#38722</a>)</li>
 <li>Corrigida a expansão do grupo de privilégios ao listar políticas no RootCoord.<a href="https://github.com/milvus-io/milvus/pull/38760">(#38760</a>)</li>
 <li>Corrigidos os problemas com a listagem de grupos de privilégios e colecções.<a href="https://github.com/milvus-io/milvus/pull/38738">(#38738</a>)</li>
 <li>Corrigido o balanceador para evitar sobrecarregar repetidamente o mesmo nó de consulta.<a href="https://github.com/milvus-io/milvus/pull/38724">(#38724</a>)</li>
@@ -248,7 +251,7 @@ title: Notas de lançamento
 <p>Para mais informações, consulte <a href="/docs/pt/nullable-and-default.md">Nullable &amp; Default Value</a>.</p>
 <h4 id="Faiss-based-HNSW-SQPQPRQ" class="common-anchor-header">HNSW SQ/PQ/PRQ baseado em Faiss</h4><p>Através de uma estreita colaboração com a comunidade Faiss, o algoritmo HNSW em Faiss registou melhorias significativas tanto na funcionalidade como no desempenho. Por questões de estabilidade e manutenção, o Milvus 2.5 migrou oficialmente seu suporte ao HNSW da hnswlib para o Faiss.</p>
 <p>Baseado em Faiss, Milvus 2.5 suporta múltiplos métodos de quantização em HNSW para atender às necessidades de diferentes cenários: SQ (Scalar Quantizers), PQ (Product Quantizer), e PRQ (Product Residual Quantizer). SQ e PQ são mais comuns; SQ oferece um bom desempenho de consulta e velocidade de construção, enquanto PQ oferece uma melhor recuperação com o mesmo rácio de compressão. Muitas bases de dados vectoriais utilizam normalmente a quantização binária, que é uma forma simples de quantização SQ.</p>
-<p>PRQ é uma fusão de PQ e AQ (Quantizador Aditivo). Em comparação com a PQ, requer tempos de construção mais longos para proporcionar uma melhor recuperação, especialmente a taxas de compressão elevadas, dizendo compressão binária.</p>
+<p>PRQ é uma fusão de PQ e AQ (Quantizador Aditivo). Em comparação com o PQ, requer tempos de construção mais longos para proporcionar uma melhor recuperação, especialmente a taxas de compressão elevadas, dizendo compressão binária.</p>
 <h4 id="Clustering-Compaction-Beta" class="common-anchor-header">Compactação por agrupamento (Beta)</h4><p>O Milvus 2.5 introduz o Clustering Compaction para acelerar as pesquisas e reduzir os custos em grandes colecções. Ao especificar um campo escalar como uma chave de agrupamento, os dados são redistribuídos por intervalo para otimizar o armazenamento e a recuperação. Agindo como um índice global, este recurso permite que o Milvus retire eficientemente os dados durante as consultas baseadas em metadados de agrupamento, melhorando o desempenho da pesquisa quando filtros escalares são aplicados.</p>
 <p>Para obter detalhes, consulte <a href="/docs/pt/clustering-compaction.md">Compactação de clustering</a>.</p>
 <h3 id="Other-Features" class="common-anchor-header">Outros recursos</h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">Nó de fluxo contínuo (Beta)</h4><p>O Milvus 2.5 introduz um novo componente chamado nó de streaming, que fornece serviços de Write-Ahead Logging (WAL). Isto permite ao Milvus obter consenso antes e depois de ler e escrever canais, desbloqueando novas caraterísticas, funcionalidades e optimizações. Esta funcionalidade está desactivada por defeito no Milvus 2.5 e estará oficialmente disponível na versão 3.0.</p>
@@ -262,7 +265,7 @@ title: Notas de lançamento
 </ul>
 <h4 id="Iterator-Enhancements" class="common-anchor-header">Aprimoramentos do iterador</h4><ul>
 <li><strong>Suporte a MVCC</strong>: Os utilizadores podem agora utilizar iteradores sem serem afectados por alterações de dados subsequentes, como inserções e eliminações, graças ao Controlo de Concorrência Multi-Versão (MVCC).</li>
-<li><strong>Cursor Persistente</strong>: O Milvus agora suporta um cursor persistente para o QueryIterator, permitindo que os utilizadores retomem a iteração a partir da última posição após um reinício do Milvus sem necessidade de reiniciar todo o processo de iteração.</li>
+<li><strong>Cursor Persistente</strong>: O Milvus suporta agora um cursor persistente para o QueryIterator, permitindo aos utilizadores retomar a iteração a partir da última posição após um reinício do Milvus sem necessidade de reiniciar todo o processo de iteração.</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Melhorias</h3><h4 id="Deletion-Optimization" class="common-anchor-header">Otimização da eliminação</h4><p>Melhoria da velocidade e redução da utilização de memória para eliminações em grande escala, optimizando a utilização de bloqueios e a gestão de memória.</p>
 <h4 id="Dependencies-Upgrade" class="common-anchor-header">Atualização de dependências</h4><p>Atualizada para ETCD 3.5.16 e Pulsar 3.0.7 LTS, corrigindo CVEs existentes e melhorando a segurança. Nota: A atualização para o Pulsar 3.x não é compatível com as versões anteriores 2.x.</p>
@@ -273,4 +276,4 @@ title: Notas de lançamento
 <h4 id="RESTful-API-Feature-Alignment" class="common-anchor-header">Alinhamento de recursos da API RESTful</h4><p>Alinhamento das funcionalidades da API RESTful com outros SDKs para fins de consistência.</p>
 <h4 id="Security--Configuration-Updates" class="common-anchor-header">Atualizações de segurança e configuração</h4><p>Suporte a TLS para proteger a comunicação entre nós em ambientes mais complexos ou corporativos. Para obter detalhes, consulte <a href="/docs/pt/tls.md">Configuração de segurança</a>.</p>
 <h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">Aprimoramentos de desempenho de compactação</h4><p>Removidas as limitações de segmento máximo na compactação mista e agora prioriza primeiro os segmentos menores, melhorando a eficiência e acelerando as consultas em conjuntos de dados grandes ou fragmentados.</p>
-<h4 id="Score-Based-Channel-Balancing" class="common-anchor-header">Balanceamento de canais com base em pontuação</h4><p>Introduzida uma política que equilibra dinamicamente as cargas entre canais, melhorando a utilização de recursos e a estabilidade geral em implementações de grande escala.</p>
+<h4 id="Score-Based-Channel-Balancing" class="common-anchor-header">Balanceamento de canais com base em pontuação</h4><p>Introduzida uma política que equilibra dinamicamente as cargas entre os canais, melhorando a utilização de recursos e a estabilidade geral em implantações de grande escala.</p>

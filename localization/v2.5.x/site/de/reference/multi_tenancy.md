@@ -84,8 +84,8 @@ title: Strategien mit mehreren Mandanten
 <tr><td>Datenbankorientiert</td><td>Stark</td><td>Stark</td><td>64</td><td>Für diejenigen, bei denen die Sammlungen je nach Projekt variieren müssen, besonders geeignet für die Datenisolierung zwischen Abteilungen in Ihrem Unternehmen.</td></tr>
 <tr><td>Eine Sammlung für alle</td><td>Schwach</td><td>Mittel</td><td>K.A.</td><td>Für Unternehmen, die nur über begrenzte Ressourcen verfügen und denen eine Datenisolierung nicht wichtig ist.</td></tr>
 <tr><td>Eine Sammlung pro Mieter</td><td>Stark</td><td>Stark</td><td>Weniger als 10.000</td><td>Für diejenigen, die weniger als 10.000 Mandanten pro Cluster haben.</td></tr>
-<tr><td>Eine Partition pro Mandant</td><td>Mittel</td><td>Stark</td><td>4,096</td><td>Für diejenigen, die weniger als 4.096 Mandanten pro Sammlung haben.</td></tr>
-<tr><td>Partitionsschlüssel-basiert</td><td>Mittel</td><td>Stark</td><td>10,000,000+</td><td>Für Unternehmen, die einen raschen Anstieg der Zahl der Mieter in Millionenhöhe erwarten.</td></tr>
+<tr><td>Eine Partition pro Mandant</td><td>Mittel</td><td>Stark</td><td>1,024</td><td>Für diejenigen, die weniger als 1.024 Mieter pro Sammlung haben.</td></tr>
+<tr><td>Partitionsschlüssel-basiert</td><td>Mittel</td><td>Stark</td><td>10,000,000+</td><td>Für Unternehmen, die einen raschen Anstieg der Mieterzahlen in die Millionen erwarten.</td></tr>
 </tbody>
 </table>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als nächstes?<button data-href="#Whats-next" class="anchor-icon" translate="no">

@@ -142,10 +142,10 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>إذا كانت هناك حاجة إلى إسقاط مجموعة ما لفترة محددة، ففكر في تعيين وقت تشغيلها (TTL) بالثواني. بمجرد انتهاء مدة TTL، يحذف ميلفوس الكيانات في المجموعة. يكون الحذف غير متزامن، مما يشير إلى أن عمليات البحث والاستعلامات لا تزال ممكنة قبل اكتمال الحذف.</p>
-<p>يوضِّح مقتطف الشيفرة التالي كيفية تغيير TTL لمجموعة.</p>
+    </button></h2><p>لإزالة البيانات منتهية الصلاحية تلقائيًا من مجموعة Milvus، يمكنك تعيين وقت صلاحية المجموعة (TTL) بالثواني. بمجرد انتهاء مدة صلاحية TTL، يضع Milvus علامة على البيانات على أنها منتهية الصلاحية ويقوم بجدولتها للحذف غير المتزامن. ونتيجة لذلك، قد تظل البيانات تظهر في نتائج البحث حتى تكتمل عملية الحذف بالكامل.</p>
+<p>يوضّح مقتطف الشيفرة التالي كيفية تغيير TTL لمجموعة ما.</p>
 <div class="multipleCode">
- <a href="#python">بيثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#go">الذهاب</a> <a href="#curl">cURL</a></div>
+ <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
 
 client.<span class="hljs-title function_">alter_collection_properties</span>(

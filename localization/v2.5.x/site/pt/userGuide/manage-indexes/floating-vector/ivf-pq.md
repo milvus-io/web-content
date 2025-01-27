@@ -44,8 +44,8 @@ title: IVF_PQ
 <li><strong>Índice invertido:</strong> É criado um índice que mapeia cada centróide de cluster para a lista de vectores atribuídos a esse cluster.</li>
 <li><strong>Pesquisa:</strong> Quando procura os vizinhos mais próximos, o algoritmo de pesquisa compara o vetor de consulta com os centróides de cluster e seleciona o(s) cluster(s) mais promissor(es). A pesquisa é então reduzida aos vectores dentro desses clusters selecionados.</li>
 </ol>
-<p>Para saber mais sobre os seus pormenores técnicos, consulte <a href="https://zilliverse.feishu.cn/wiki/MXiGwmnq6i5MswkryYVcMklVnld">IVF_FLAT</a>.</p>
-<h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>A Quantização de produtos (PQ)</strong> é um método de compressão para vectores de elevada dimensão que reduz significativamente os requisitos de armazenamento, permitindo operações de pesquisa de semelhanças rápidas.</p>
+<p>Para saber mais sobre os seus pormenores técnicos, consulte <a href="/docs/pt/ivf-flat.md">IVF_FLAT</a>.</p>
+<h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>A Quantização de Produtos (PQ)</strong> é um método de compressão para vectores de elevada dimensão que reduz significativamente os requisitos de armazenamento, permitindo operações de pesquisa de semelhanças rápidas.</p>
 <p>O processo PQ envolve as seguintes etapas principais:</p>
 <p>
   
@@ -55,7 +55,7 @@ title: IVF_PQ
 <li><strong>Decomposição da dimensão</strong>: O algoritmo começa por decompor cada vetor de alta dimensão em <code translate="no">m</code> sub-vectores de igual dimensão. Esta decomposição transforma o espaço D-dimensional original em <code translate="no">m</code> subespaços disjuntos, em que cada subespaço contém <em>D/m</em> dimensões. O parâmetro <code translate="no">m</code> controla a granularidade da decomposição e influencia diretamente a taxa de compressão.</li>
 <li><strong>Geração do livro de códigos do subespaço</strong>: Dentro de cada subespaço, o algoritmo aplica <a href="https://en.wikipedia.org/wiki/K-means_clustering">o agrupamento k-means</a> para aprender um conjunto de vectores representativos (centróides). Estes centróides formam coletivamente um livro de códigos para esse subespaço. O número de centróides em cada livro de códigos é determinado pelo parâmetro <code translate="no">nbits</code>, em que cada livro de códigos contém centróides de 2^nbits. Por exemplo, se <code translate="no">nbits = 8</code>, cada livro de códigos conterá 256 centróides. A cada centróide é atribuído um índice único com <code translate="no">nbits</code> bits.</li>
 <li><strong>Quantização</strong><strong>do vetor</strong>: Para cada sub-vetor do vetor original, a PQ identifica o seu centróide mais próximo no subespaço correspondente utilizando um tipo de métrica específico. Este processo mapeia efetivamente cada sub-vetor para o seu vetor representativo mais próximo no livro de códigos. Em vez de armazenar as coordenadas completas do sub-vetor, apenas o índice do centróide correspondente é retido.</li>
-<li><strong>Representação comprimida</strong>: A representação comprimida final consiste em <code translate="no">m</code> índices, um de cada subespaço, coletivamente designados por <strong>códigos PQ</strong>. Esta codificação reduz o requisito de armazenamento de <em>D × 32</em> bits (assumindo números de vírgula flutuante de 32 bits) para <em>m</em> × <em>nbits</em> bits, conseguindo uma compressão substancial ao mesmo tempo que preserva a capacidade de aproximar as distâncias vectoriais.</li>
+<li><strong>Representação comprimida</strong>: A representação comprimida final consiste em <code translate="no">m</code> índices, um de cada subespaço, coletivamente referidos como <strong>códigos PQ</strong>. Esta codificação reduz o requisito de armazenamento de <em>D × 32</em> bits (assumindo números de vírgula flutuante de 32 bits) para <em>m</em> × <em>nbits</em> bits, conseguindo uma compressão substancial ao mesmo tempo que preserva a capacidade de aproximar as distâncias vectoriais.</li>
 </ol>
 <p>Para obter mais detalhes sobre o ajuste e a otimização dos parâmetros, consulte <a href="#index-params">Index params</a>.</p>
 <div class="alert note">
@@ -79,7 +79,7 @@ title: IVF_PQ
 <li><p><strong>Aproximação das distâncias</strong></p>
 <p>Para qualquer vetor da base de dados representado por códigos PQ, a sua distância aproximada ao vetor de consulta é calculada da seguinte forma:</p>
 <ol>
-<li>Para cada um dos sub-vectores <code translate="no">m</code>, obter a distância pré-computada da tabela de pesquisa correspondente utilizando o índice do centróide armazenado.</li>
+<li>Para cada um dos sub-vectores de <code translate="no">m</code>, obter a distância pré-computada da tabela de pesquisa correspondente utilizando o índice do centróide armazenado.</li>
 <li>Somar estas <code translate="no">m</code> distâncias para obter a distância aproximada com base num tipo específico de métrica (por exemplo, distância euclidiana).</li>
 </ol></li>
 </ol>

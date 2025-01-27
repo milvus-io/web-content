@@ -20,7 +20,7 @@ title: インメモリインデックス
         ></path>
       </svg>
     </button></h1><p>このトピックでは、Milvusがサポートする様々なタイプのインメモリインデックス、それぞれのインデックスが最適なシナリオ、および、より良い検索パフォーマンスを達成するためにユーザが設定できるパラメータについて説明します。オンディスクインデックスについては、<strong><a href="/docs/ja/disk_index.md">オンディスクインデックスを</a></strong>参照してください。</p>
-<p>インデックス作成はデータを効率的に整理するプロセスであり、大規模なデータセットに対する時間のかかるクエリを劇的に高速化することで、類似検索の有用性を高める上で大きな役割を果たします。</p>
+<p>インデックスはデータを効率的に整理するプロセスであり、大規模なデータセットに対する時間のかかるクエリを劇的に高速化することで、類似検索を有用なものにする上で大きな役割を果たします。</p>
 <p>クエリー性能を向上させるために、各ベクトルフィールドに<a href="/docs/ja/index-vector-fields.md">インデックスタイプを指定する</a>ことができます。</p>
 <div class="alert note">
 現在、ベクトルフィールドは1つのインデックスタイプしかサポートしていません。Milvusはインデックスタイプを切り替えると古いインデックスを自動的に削除します。</div>
@@ -69,7 +69,10 @@ title: インメモリインデックス
 </div>
 <div class="filter-sparse">
 <h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">スパース埋め込みインデックス</h3><p>スパース埋め込み用のインデックスは、<code translate="no">IP</code> と<code translate="no">BM25</code> （全文検索用） メトリクスのみをサポートします。</p>
-<p>こ の種類の イ ンデ ッ ク ス には<code translate="no">SPARSE_INVERTED_INDEX</code> と<code translate="no">SPARSE_WAND</code> があ り ます。</p>
+<p>スパース埋め込みに対応するインデックスタイプ:<code translate="no">SPARSE_INVERTED_INDEX</code> 。</p>
+<div class="alert note">
+<p>Milvus 2.5.4以降、<code translate="no">SPARSE_WAND</code> は廃止予定です。代わりに、互換性を維持しながら同等性を保つために<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> を使用することが推奨されます。詳細は<a href="/docs/ja/sparse_vector.md#Set-index-params-for-vector-field">スパースベクタを</a>参照してください。</p>
+</div>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
@@ -231,19 +234,11 @@ title: インメモリインデックス
       <li>100%の再現率が必要。</li>
     </ul></td>
   </tr>
-  <tr>
-    <td>スパースワンド</td>
-    <td>転置インデックス</td>
-    <td><ul>
-      <li><a href="https://dl.acm.org/doi/10.1145/956863.956944">弱いAND</a>アルゴリズムの高速化。</li>
-      <li>わずかな想起率を犠牲にするのみで、大幅な速度向上を得ることができる。</li>
-    </ul></td>
-  </tr>
 </tbody>
 </table>
 </div>
 <div class="filter-floating">
-<h3 id="FLAT" class="common-anchor-header">フラット</h3><p>完璧な精度が要求され、比較的小さな（百万規模の）データセットに依存する ベクトル類似検索アプリケーションには、FLATインデックスが良い選択である。FLATはベクトルを圧縮せず、正確な検索結果を保証できる唯一のインデックスである。FLATの結果は、再現率が100%に満たない他のインデックスが生成した結果の比較対象としても使用できる。</p>
+<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>完全な精度が要求され、比較的小さな（百万規模の）データセットに依存する ベクトル類似検索アプリケーションには、FLATインデックスが良い選択である。FLATはベクトルを圧縮せず、正確な検索結果を保証できる唯一のインデックスである。FLATの結果は、再現率が100%に満たない他のインデックスが生成した結果の比較対象としても使用できる。</p>
 <p>FLATが正確なのは、検索に網羅的なアプローチをとるからである。つまり、クエリごとに、ターゲット入力がデータセット内のすべてのベクトル集合と比較される。このため、FLATは我々のリストの中で最も遅いインデックスであり、膨大なベクトルデータのクエリには適していない。MilvusではFLATインデックスに必要なパラメータはなく、これを使用することでデータ学習も不要である。</p>
 <ul>
 <li><p>検索パラメータ</p>
@@ -289,14 +284,14 @@ title: インメモリインデックス
 <tr><th>パラメータ</th><th>パラメータ</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td><br/>これは範囲検索のパラメータであり、連続した空のバケツの数が指定された値に達する間、検索プロセスを終了する。<br/>この値を大きくすると、検索時間が長くなる代償として、リコール率を向上させることができる。</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td><br/>これは範囲検索パラメータであり、連続した空のバケツの数が指定された値に達する間、検索プロセスを終了する。<br/>この値を大きくすると、検索時間が長くなる代償として、リコール率を向上させることができる。</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLATは圧縮を行わないため、生成されるインデックスファイルのサイズは、インデックス付けされていない元の生のベクトルデータとほぼ同じです。例えば、元の 1B SIFT データセットが 476 GB の場合、IVF_FLAT のインデックスファイルは若干小さくなります（~470 GB）。すべてのインデックスファイルをメモリにロードすると、470GBのストレージを消費します。</p>
-<p>ディスク、CPU、GPU のメモリリソースが限られている場合は、IVF_FLAT よりも IVF_SQ8 の方が適しています。このインデックスタイプは、スカラー量子化（SQ）を実行することで、各 FLOAT（4バイト）を UINT8（1バイト）に変換することができます。これにより、ディスク、CPU、GPUのメモリ消費量が70～75%削減される。1B SIFTデータセットの場合、IVF_SQ8インデックスファイルに必要なストレージはわずか140GBです。</p>
+<h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLATは圧縮を行わないため、生成されるインデックスファイルのサイズは、インデックス付けされていない元の生のベクトルデータとほぼ同じです。例えば、元の 1B SIFT データセットが 476 GB である場合、IVF_FLAT のインデックスファイルは若干小さくなります (~470 GB)。すべてのインデックスファイルをメモリにロードすると、470GBのストレージを消費します。</p>
+<p>ディスク、CPU、GPU のメモリリソースが限られている場合は、IVF_FLAT よりも IVF_SQ8 の方が適しています。このインデックスタイプは、スカラー量子化（SQ）を実行することで、各 FLOAT（4バイト）を UINT8（1バイト）に変換することができます。これにより、ディスク、CPU、GPUのメモリ消費量が70～75%削減される。1B SIFTデータセットの場合、IVF_SQ8インデックスファイルは140GBのストレージで済みます。</p>
 <ul>
 <li><p>インデックス作成パラメータ</p>
 <table>
@@ -387,7 +382,7 @@ title: インメモリインデックス
 </tbody>
 </table>
   <div class="alert note">
-<p>IVF_PQ とは異なり、デフォルト値はパフォーマンスを最適化するために<code translate="no">m</code> と<code translate="no">nbits</code> に適用されます。</p>
+<p>IVF_PQ とは異なり、パフォーマンスを最適化するために、デフォルト値は<code translate="no">m</code> と<code translate="no">nbits</code> に適用されます。</p>
   </div>
 </li>
 <li><p>検索パラメータ</p>
@@ -409,7 +404,7 @@ title: インメモリインデックス
 <tr><th>パラメータ</th><th>パラメータ</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td><br/>これは範囲検索のパラメータであり、連続した空のバケツの数が指定された値に達する間、検索プロセスを終了する。<br/>この値を大きくすると、検索時間が長くなる代償として、リコール率を向上させることができる。</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td><br/>これは範囲検索パラメータであり、連続した空のバケツの数が指定された値に達する間、検索プロセスを終了する。<br/>この値を大きくすると、検索時間が長くなる代償として、リコール率を向上させることができる。</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -596,9 +591,12 @@ title: インメモリインデックス
 <tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>インデックス作成時に除外される小さなベクトル値の割合。このオプションを使用すると、インデックスを作成する際に小さな値を無視することで、効率と精度のトレードオフを行い、インデックス作成プロセスを微調整することができます。</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>インデックスの構築とクエリに使用されるアルゴリズム。詳細は<a href="/docs/ja/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a> を参照。</td><td><code translate="no">DAAT_MAXSCORE</code> (デフォルト), 、<code translate="no">DAAT_WAND</code> <code translate="no">TAAT_NAIVE</code></td></tr>
 </tbody>
 </table>
+  <div class="alert note">
+<p>Milvus v2.5.4以降、<code translate="no">drop_ratio_build</code> パラメータは非推奨となりました。このパラメータはインデックスの構築中に受け付けることはできますが、インデックスに対する実際の効果はなくなります。</p>
+  </div>
 </li>
 <li><p>検索パラメータ</p>
 <table>
@@ -606,31 +604,7 @@ title: インメモリインデックス
 <tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>検索処理中に除外する小さなベクトル値の割合。このオプションは、クエリベクトル内の最小値を無視する割合を指定することで、検索処理を微調整することができます。検索精度とパフォーマンスのバランスをとるのに役立ちます。<code translate="no">drop_ratio_search</code> に設定する値が小さければ小さいほど、これらの小さな値が最終的なスコアに与える影響は小さくなります。いくつかの小さな値を無視することで、精度への影響を最小限に抑えながら検索性能を向上させることができる。</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-</ul>
-<h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND</h3><p>このインデックスは、<code translate="no">SPARSE_INVERTED_INDEX</code> と類似しているが、<a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a>アルゴリズムを利用することで、検索プロセスにおけるフル IP 距離評価の回数をさらに減らしている。</p>
-<p>我々のテストに基づくと、<code translate="no">SPARSE_WAND</code> は一般的にスピードの点で他の方法を上回る。しかし、その性能はベクトルの密度が高くなるにつれて急激に悪化する可能性がある。この問題に対処するため、ゼロでない<code translate="no">drop_ratio_search</code> を導入することで、精度の低下を最小限に抑えつつ、性能を大幅に向上させることができます。詳細は<a href="/docs/ja/sparse_vector.md">スパースベクトルを</a>参照。</p>
-<ul>
-<li><p>インデックス構築パラメータ</p>
-<table>
-<thead>
-<tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>インデックス作成時に除外する小さなベクトル値の割合。このオプションを使用すると、インデックスを作成する際に小さな値を除外することで、効率と精度のトレードオフを行い、インデックス作成処理を微調整することができます。</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-<li><p>検索パラメータ</p>
-<table>
-<thead>
-<tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>検索処理中に除外する小さなベクトル値の割合。このオプションは、クエリベクトル内の最小値を無視する割合を指定することで、検索処理を微調整することができます。検索精度とパフォーマンスのバランスをとるのに役立ちます。<code translate="no">drop_ratio_search</code> に設定する値が小さければ小さいほど、これらの小さな値が最終的なスコアに与える影響は小さくなります。いくつかの小さな値を無視することで、精度への影響を最小限に抑えながら検索性能を向上させることができる。</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>検索処理中に除外される小さなベクトル値の割合。このオプションは、クエリベクトル内の最小値を無視する割合を指定することで、検索処理を微調整することができます。検索精度とパフォーマンスのバランスをとるのに役立ちます。<code translate="no">drop_ratio_search</code> に設定する値が小さければ小さいほど、これらの小さな値が最終的なスコアに与える影響は小さくなります。いくつかの小さな値を無視することで、精度への影響を最小限に抑えながら検索性能を向上させることができる。</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>
@@ -655,7 +629,7 @@ title: インメモリインデックス
 <summary><font color="#4fc4f9">FLATインデックスとIVF_FLATインデックスの違いは何ですか？</font></summary></p>
 <p>IVF_FLAT インデックスはベクトル空間を<code translate="no">nlist</code> クラスタに分割します。<code translate="no">nlist</code> のデフォルト値を16384のままにしておくと、Milvusはターゲットベクトルと16384クラスタすべての中心との距離を比較し、<code translate="no">nprobe</code> 最も近いクラスタを取得します。次に、Milvusはターゲットベクトルと選択されたクラスタのベクトル間の距離を比較し、最も近いベクトルを得ます。IVF_FLATと異なり、FLATはターゲットベクトルと各ベクトル間の距離を直接比較します。</p>
 <p>
-そのため、ベクトルの総数が<code translate="no">nlist</code> 程度であれば、IVF_FLAT と FLAT は必要な計算方法や探索性能にほとんど差がありません。しかし、ベクトル数が<code translate="no">nlist</code> の2倍、3倍、n倍と増えるにつれて、IVF_FLATインデックスがますます大きな利点を示し始めます。</p>
+そのため、ベクトルの総数が<code translate="no">nlist</code> 程度であれば、IVF_FLAT と FLAT は、必要な計算方法や探索性能にほとんど差がありません。しかし、ベクトル数が<code translate="no">nlist</code> の2倍、3倍、n倍と増えるにつれて、IVF_FLATインデックスがますます大きな利点を示し始めます。</p>
 <p>
 詳しくは<a href="https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212">Milvusにおけるインデックスの選び方を</a>参照してください。</p>
 </details>

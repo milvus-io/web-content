@@ -416,7 +416,7 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
 Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
@@ -609,7 +609,7 @@ Timeout []:
 <tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名稱</td><td style="text-align:left">要刪除的分割區所屬集合的名稱。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名稱</td><td style="text-align:left">要刪除的分割區所屬的集合名稱。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分區</td><td style="text-align:left">要刪除的分割區的名稱。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用命令的說明。</td></tr>
 </tbody>

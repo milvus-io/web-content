@@ -240,7 +240,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
     field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
     metric_type: MetricType.IP,
-    index_type: IndexType.SPARSE_WAND,
+    index_type: IndexType.SPARSE_INVERTED_INDEX,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
     },
@@ -263,10 +263,9 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <li><p><code translate="no">index_type</code>: نوع الفهرس المراد إنشاؤه لحقل المتجهات المتفرقة. قيم صالحة:</p>
 <ul>
 <li><code translate="no">SPARSE_INVERTED_INDEX</code>: فهرس مقلوب للأغراض العامة للمتجهات المتفرقة.</li>
-<li><code translate="no">SPARSE_WAND</code>: نوع فهرس متخصص مدعوم في الإصدار 2.5.3 والإصدارات الأقدم.</li>
 </ul>
   <div class="alert note">
-<p>بدءًا من الإصدار 2.5.4 فصاعدًا، تم إهمال <code translate="no">SPARSE_WAND</code>. بدلاً من ذلك، يوصى باستخدام <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> للمعادلة مع الحفاظ على التوافق.</p>
+<p>بدءًا من الإصدار 2.5.4 فصاعدًا، يتم إهمال <code translate="no">SPARSE_WAND</code>. بدلاً من ذلك، يوصى باستخدام <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> للمعادلة مع الحفاظ على التوافق.</p>
   </div>
 </li>
 <li><p><code translate="no">metric_type</code>: المقياس المستخدم لحساب التشابه بين المتجهات المتفرقة. قيم صالحة:</p>
@@ -277,8 +276,8 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 </ul></li>
 <li><p><code translate="no">params.inverted_index_algo</code>: الخوارزمية المستخدمة لبناء الفهرس والاستعلام عنه. قيم صالحة:</p>
 <ul>
-<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (افتراضي): معالجة استعلام المستند في الوقت المحسن (DAAT) باستخدام خوارزمية MaxScore. توفر MaxScore أداءً أفضل لقيم k العالية أو الاستعلامات التي تحتوي على العديد من المصطلحات عن طريق تخطي المصطلحات والمستندات التي من المحتمل أن يكون لها تأثير ضئيل. وهي تحقق ذلك من خلال تقسيم المصطلحات إلى مجموعات أساسية وغير أساسية بناءً على درجات التأثير القصوى، مع التركيز على المصطلحات التي يمكن أن تساهم في أعلى k من النتائج.</p></li>
-<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: معالجة استعلام DAAT المحسّنة باستخدام خوارزمية WAND. تقوم WAND بتقييم عدد أقل من المستندات التي تم الوصول إليها من خلال الاستفادة من درجات التأثير القصوى لتخطي المستندات غير المنافسة، ولكن لديها نفقات أعلى لكل ضربة. هذا يجعل WAND أكثر كفاءة للاستعلامات ذات القيم k الصغيرة أو الاستعلامات القصيرة، حيث يكون التخطي أكثر جدوى.</p></li>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (افتراضي): معالجة استعلام المستند في الوقت المحسن (DAAT) باستخدام خوارزمية MaxScore. يوفر MaxScore أداءً أفضل لقيم k العالية أو الاستعلامات التي تحتوي على العديد من المصطلحات عن طريق تخطي المصطلحات والمستندات التي من المحتمل أن يكون لها تأثير ضئيل. وهي تحقق ذلك من خلال تقسيم المصطلحات إلى مجموعات أساسية وغير أساسية بناءً على درجات التأثير القصوى، مع التركيز على المصطلحات التي يمكن أن تساهم في أعلى k من النتائج.</p></li>
+<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: معالجة استعلام DAAT المحسّنة باستخدام خوارزمية WAND. تقوم WAND بتقييم عدد أقل من المستندات التي تم الوصول إليها من خلال الاستفادة من درجات التأثير القصوى لتخطي المستندات غير المنافسة، ولكن لديها نفقات أعلى لكل ضربة. وهذا يجعل WAND أكثر كفاءة للاستعلامات ذات القيم k الصغيرة أو الاستعلامات القصيرة، حيث يكون التخطي أكثر جدوى.</p></li>
 <li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: معالجة استعلام المصطلح الأساسي في الوقت (TAAT). على الرغم من أنها أبطأ مقارنةً بـ <code translate="no">DAAT_MAXSCORE</code> و <code translate="no">DAAT_WAND</code> ، إلا أن <code translate="no">TAAT_NAIVE</code> تقدم ميزة فريدة. على عكس خوارزميات DAAT، التي تستخدم درجات التأثير القصوى المخزنة مؤقتًا والتي تظل ثابتة بغض النظر عن التغييرات التي تطرأ على معلمة المجموعة العالمية (avgdl)، يتكيف <code translate="no">TAAT_NAIVE</code> ديناميكيًا مع هذه التغييرات.</p></li>
 </ul></li>
 </ul>
@@ -333,7 +332,7 @@ client.createCollection(requestCreate);​
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data​" class="common-anchor-header">إدراج البيانات</h3><p>بعد إنشاء المجموعة، أدخل البيانات التي تحتوي على متجهات متفرقة.</p>
 <div class="multipleCode">
-   <a href="#python">بيثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+   <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">sparse_vectors = [​
     {<span class="hljs-string">&quot;sparse_vector&quot;</span>: {<span class="hljs-number">1</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">500</span>: <span class="hljs-number">0.8</span>}},​
     {<span class="hljs-string">&quot;sparse_vector&quot;</span>: {<span class="hljs-number">10</span>: <span class="hljs-number">0.1</span>, <span class="hljs-number">200</span>: <span class="hljs-number">0.7</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.9</span>}},​
@@ -513,7 +512,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
     </button></h2><p>عند استخدام المتجهات المتفرقة في ميلفوس، ضع في اعتبارك الحدود التالية:</p>
 <ul>
 <li><p>حاليًا، يتم دعم مقاييس المسافة <strong>IP</strong> و <strong>BM25</strong> (للبحث في النص الكامل) فقط للمتجهات المتفرقة. إن الأبعاد العالية للمتجهات المتفرقة تجعل المسافة L2 ومسافة جيب التمام غير عملية.</p></li>
-<li><p>بالنسبة لحقول المتجهات المتناثرة، يتم دعم أنواع الفهرس <strong>SPARSE_INVERTED_INDEX</strong> و <strong>SPARSE_WAND</strong> فقط.</p></li>
+<li><p>بالنسبة لحقول المتجهات المتناثرة، يتم دعم نوع الفهرس <strong>SPARSE_INVERTED_INDEX</strong> فقط.</p></li>
 <li><p>أنواع البيانات المدعومة للمتجهات المتفرقة:</p>
 <ul>
 <li>يجب أن يكون جزء البُعد عددًا صحيحًا غير موقع 32 بت;</li>
@@ -541,12 +540,8 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>هل يمكنكم شرح الفرق بين SPARSE_INVERTED_INDEX و SPARSE_WAND، وكيف يمكنني الاختيار بينهما؟</strong></p>
-<p><strong>SPARSE_INVERTED_INDEX</strong> هو فهرس مقلوب تقليدي، بينما يستخدم <strong>SPARSE_WAND</strong> خوارزمية <strong>SPARSE_WAND</strong> خوارزمية <a href="https://dl.acm.org/doi/10.1145/956863.956944">ضعيفة-AND</a> لتقليل عدد تقييمات مسافة IP الكاملة أثناء البحث. عادةً ما تكون <strong>SPARSE_WAND</strong> أسرع، لكن أداءها يمكن أن ينخفض مع زيادة كثافة المتجهات. للاختيار بينها، قم بإجراء التجارب والمعايير بناءً على مجموعة البيانات وحالة الاستخدام الخاصة بك.</p></li>
-<li><p><strong>كيف يمكنني اختيار معلمات drop_ratio_build و drop_ratio_search؟</strong></p>
-<p>يعتمد اختيار <strong>دروب_راتيو_بناء</strong> <strong>ودروب_راتيو_بحث</strong> على خصائص بياناتك ومتطلباتك من حيث زمن انتقال/إنتاجية البحث والدقة.</p></li>
 <li><p><strong>هل يمكن أن يكون بُعد التضمين المتناثر أي قيمة منفصلة ضمن فضاء uint32؟</strong></p>
-<p>نعم، مع استثناء واحد. يمكن أن يكون بُعد التضمين المتناثر أي قيمة في نطاق <code translate="no">[0, maximum of uint32)</code>. هذا يعني أنه لا يمكنك استخدام القيمة القصوى ل uint32.</p></li>
+<p>نعم، مع استثناء واحد. يمكن أن يكون بُعد التضمين المتناثر أي قيمة في نطاق <code translate="no">[0, maximum of uint32)</code>. هذا يعني أنه لا يمكنك استخدام القيمة القصوى لـ uint32.</p></li>
 <li><p><strong>هل تجرى عمليات البحث على المقاطع المتزايدة من خلال فهرس أم بالقوة الغاشمة؟</strong></p>
 <p>تجرى عمليات البحث على المقاطع المتنامية من خلال فهرس من نفس نوع فهرس المقطع المختوم. بالنسبة للمقاطع المتنامية الجديدة قبل إنشاء الفهرس، يتم استخدام البحث بالقوة الغاشمة.</p></li>
 <li><p><strong>هل من الممكن وجود متجهات متناثرة وكثيفة في مجموعة واحدة؟</strong></p>

@@ -39,7 +39,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A maior parte dos tipos de índices vectoriais suportados pelo Milvus utilizam algoritmos de pesquisa ANNS (approximate nearest neighbors search). Em comparação com a recuperação exacta, que normalmente consome muito tempo, a ideia central do ANNS já não se limita a devolver o resultado mais exato, mas apenas a procurar os vizinhos do alvo. A ANNS melhora a eficiência da recuperação, sacrificando a exatidão dentro de um intervalo aceitável.</p>
+    </button></h2><p>A maioria dos tipos de índices vectoriais suportados pelo Milvus utiliza algoritmos de pesquisa de vizinhos mais próximos aproximados (ANNS). Em comparação com a recuperação exacta, que normalmente consome muito tempo, a ideia central do ANNS já não se limita a devolver o resultado mais exato, mas apenas a procurar os vizinhos do alvo. A ANNS melhora a eficiência da recuperação, sacrificando a exatidão dentro de um intervalo aceitável.</p>
 <p>De acordo com os métodos de implementação, o índice vetorial ANNS pode ser classificado em quatro tipos: Baseado em árvore, baseado em gráfico, baseado em hash e baseado em quantização.</p>
 <h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">Índices suportados no Milvus<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,7 +69,10 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </div>
 <div class="filter-sparse">
 <h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Índices para embeddings esparsos</h3><p>Os índices para embeddings esparsos suportam apenas as métricas <code translate="no">IP</code> e <code translate="no">BM25</code> (para pesquisa de texto integral).</p>
-<p>Os tipos de índices incluem <code translate="no">SPARSE_INVERTED_INDEX</code> e <code translate="no">SPARSE_WAND</code>.</p>
+<p>Tipo de índice suportado para embeddings esparsos: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
+<div class="alert note">
+<p>A partir do Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> está a ser preterido. Em vez disso, recomenda-se a utilização de <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> para equivalência, mantendo a compatibilidade. Para mais informações, consulte <a href="/docs/pt/sparse_vector.md#Set-index-params-for-vector-field">Vetor esparso</a>.</p>
+</div>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
@@ -231,19 +234,11 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
       <li>Requer uma taxa de recuperação de 100%.</li>
     </ul></td>
   </tr>
-  <tr>
-    <td>SPARSE_WAND</td>
-    <td>Índice invertido</td>
-    <td><ul>
-      <li>Algoritmo<a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> acelerado</li>
-      <li>Pode obter uma melhoria significativa da velocidade, sacrificando apenas uma pequena quantidade de recuperação.</li>
-    </ul></td>
-  </tr>
 </tbody>
 </table>
 </div>
 <div class="filter-floating">
-<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>Para aplicações de pesquisa de semelhança de vectores que requerem uma precisão perfeita e dependem de conjuntos de dados relativamente pequenos (à escala de um milhão), o índice FLAT é uma boa escolha. O FLAT não comprime os vectores e é o único índice que pode garantir resultados de pesquisa exactos. Os resultados do FLAT também podem ser usados como um ponto de comparação para resultados produzidos por outros índices que têm menos de 100% de recuperação.</p>
+<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>Para aplicações de pesquisa de semelhança de vectores que requerem uma precisão perfeita e dependem de conjuntos de dados relativamente pequenos (à escala de um milhão), o índice FLAT é uma boa escolha. O FLAT não comprime vectores e é o único índice que pode garantir resultados de pesquisa exactos. Os resultados do FLAT também podem ser usados como um ponto de comparação para resultados produzidos por outros índices que têm menos de 100% de recuperação.</p>
 <p>O FLAT é exato porque adopta uma abordagem exaustiva à pesquisa, o que significa que, para cada consulta, a entrada de destino é comparada com todos os conjuntos de vectores de um conjunto de dados. Isso torna o FLAT o índice mais lento da nossa lista e pouco adequado para consultar dados vetoriais maciços. Não são necessários parâmetros para o índice FLAT no Milvus, e a sua utilização não necessita de formação de dados.</p>
 <ul>
 <li><p>Parâmetros de pesquisa</p>
@@ -333,7 +328,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </ul></li>
 </ul>
 <h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) decompõe uniformemente o espaço vetorial de alta dimensão original em produtos cartesianos de <code translate="no">m</code> espaços vectoriais de baixa dimensão e quantifica depois os espaços vectoriais de baixa dimensão decompostos. Em vez de calcular as distâncias entre o vetor-alvo e o centro de todas as unidades, a quantização do produto permite o cálculo das distâncias entre o vetor-alvo e o centro de agrupamento de cada espaço de baixa dimensão e reduz consideravelmente a complexidade temporal e espacial do algoritmo.</p>
-<p>O IVF_PQ efectua o agrupamento de índices IVF antes de quantizar o produto de vectores. O seu ficheiro de índice é ainda mais pequeno do que o IVF_SQ8, mas também causa uma perda de precisão durante a pesquisa de vectores.</p>
+<p>O IVF_PQ efectua o agrupamento de índices IVF antes de quantificar o produto de vectores. O seu ficheiro de índice é ainda mais pequeno do que o IVF_SQ8, mas também causa uma perda de precisão durante a pesquisa de vectores.</p>
 <div class="alert note">
 <p>Os parâmetros de construção do índice e os parâmetros de pesquisa variam consoante a distribuição Milvus. Selecione primeiro a sua distribuição Milvus.</p>
 </div>
@@ -403,7 +398,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </tbody>
 </table>
 </li>
-<li><p>Pesquisa de intervalo</p>
+<li><p>Pesquisa de intervalos</p>
 <table>
 <thead>
 <tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th><th>Valor predefinido</th></tr>
@@ -596,41 +591,20 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>A proporção de valores de vectores pequenos que são excluídos durante o processo de indexação. Esta opção permite um ajuste fino do processo de indexação, fazendo um compromisso entre eficiência e exatidão ao ignorar valores pequenos ao construir o índice.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>O algoritmo utilizado para construir e consultar o índice. Para obter detalhes, consulte <a href="/docs/pt/sparse_vector.md#Set-index-params-for-vector-field">Vetor esparso</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (predefinição), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
 </tbody>
 </table>
+  <div class="alert note">
+<p>O parâmetro <code translate="no">drop_ratio_build</code> está obsoleto desde Milvus v2.5.4, que ainda pode ser aceite durante a construção do índice, mas já não terá efeito real no índice.</p>
+  </div>
 </li>
 <li><p>Parâmetros de pesquisa</p>
 <table>
 <thead>
-<tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th></tr>
+<tr><th>Parâmetro</th><th>Descrição do parâmetro</th><th>Faixa</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>A proporção de valores vectoriais pequenos que são excluídos durante o processo de pesquisa. Esta opção permite o ajuste fino do processo de pesquisa, especificando a proporção dos valores mais pequenos no vetor de consulta a ignorar. Ela ajuda a equilibrar a precisão e o desempenho da pesquisa. Quanto mais pequeno for o valor definido para <code translate="no">drop_ratio_search</code>, menos estes valores pequenos contribuem para a pontuação final. Ao ignorar alguns valores pequenos, o desempenho da pesquisa pode ser melhorado com um impacto mínimo na precisão.</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-</ul>
-<h3 id="SPARSEWAND" class="common-anchor-header">VARINHA_ESPECÍFICA</h3><p>Este índice partilha semelhanças com <code translate="no">SPARSE_INVERTED_INDEX</code>, embora utilize o algoritmo <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> para reduzir ainda mais o número de avaliações da distância IP completa durante o processo de pesquisa.</p>
-<p>Com base nos nossos testes, <code translate="no">SPARSE_WAND</code> supera geralmente os outros métodos em termos de velocidade. No entanto, o seu desempenho pode deteriorar-se rapidamente à medida que a densidade dos vectores aumenta. Para resolver este problema, a introdução de um <code translate="no">drop_ratio_search</code> diferente de zero pode melhorar significativamente o desempenho, incorrendo apenas numa perda mínima de precisão. Para mais informações, consulte <a href="/docs/pt/sparse_vector.md">Vetor esparso</a>.</p>
-<ul>
-<li><p>Parâmetros de construção de índices</p>
-<table>
-<thead>
-<tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>A proporção de valores de vetor pequenos que são excluídos durante o processo de indexação. Esta opção permite um ajuste fino do processo de indexação, fazendo um compromisso entre eficiência e exatidão ao ignorar valores pequenos ao construir o índice.</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-<li><p>Parâmetros de pesquisa</p>
-<table>
-<thead>
-<tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>A proporção de valores vectoriais pequenos que são excluídos durante o processo de pesquisa. Esta opção permite o ajuste fino do processo de pesquisa, especificando a proporção dos valores mais pequenos no vetor de consulta a ignorar. Ela ajuda a equilibrar a precisão e o desempenho da pesquisa. Quanto mais pequeno for o valor definido para <code translate="no">drop_ratio_search</code>, menos estes valores pequenos contribuem para a pontuação final. Ao ignorar alguns valores pequenos, o desempenho da pesquisa pode ser melhorado com um impacto mínimo na precisão.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>A proporção de pequenos valores vectoriais que são excluídos durante o processo de pesquisa. Esta opção permite o ajuste fino do processo de pesquisa, especificando a proporção dos valores mais pequenos no vetor de consulta a ignorar. Ela ajuda a equilibrar a precisão e o desempenho da pesquisa. Quanto mais pequeno for o valor definido para <code translate="no">drop_ratio_search</code>, menos estes valores pequenos contribuem para a pontuação final. Ao ignorar alguns valores pequenos, o desempenho da pesquisa pode ser melhorado com um impacto mínimo na precisão.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

@@ -43,7 +43,7 @@ title: Notes de mise à jour
 <tr><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>Nous sommes heureux d'annoncer la sortie de Milvus 2.5.4, qui introduit des optimisations de performances clés et de nouvelles fonctionnalités telles que l'isolation PartitionKey, Sparse Index avec DAAT MaxScore, et des mécanismes de verrouillage améliorés. Cette version corrige également de nombreux bogues qui améliorent la stabilité et la fiabilité générales. Nous vous encourageons à mettre à niveau ou à essayer cette dernière version, et nous attendons avec impatience vos commentaires qui nous aideront à améliorer Milvus en permanence !</p>
+<p>Nous sommes ravis d'annoncer la sortie de Milvus 2.5.4, qui introduit des optimisations de performances clés et de nouvelles fonctionnalités telles que l'isolation PartitionKey, Sparse Index avec DAAT MaxScore, et des mécanismes de verrouillage améliorés. L'un des points forts de cette version est la prise en charge de 10 000 collections et d'un million de partitions, ce qui constitue une étape importante pour les cas d'utilisation multi-locataires. Cette version corrige également de nombreux bogues qui améliorent la stabilité et la fiabilité générales, deux des bogues critiques pouvant entraîner une perte de données. Nous vous encourageons à mettre à niveau ou à essayer cette dernière version, et nous attendons avec impatience vos commentaires qui nous aideront à améliorer Milvus en permanence !</p>
 <h3 id="Features" class="common-anchor-header">Fonctionnalités</h3><ul>
 <li>Prise en charge de l'isolation des clés de partition pour améliorer les performances avec plusieurs clés de partition<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/use-partition-key.md">Utiliser une clé de partition</a>.</li>
 <li>Sparse Index prend désormais en charge DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/sparse_vector.md">Vecteur épars</a>.</li>
@@ -51,6 +51,7 @@ title: Notes de mise à jour
 <li>Les privilèges de la racine peuvent être personnalisés<a href="https://github.com/milvus-io/milvus/pull/39324">(#39324</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Améliorations</h3><ul>
+<li>Prise en charge de 10K collections et 1 million de partitions dans un cluster<a href="https://github.com/milvus-io/milvus/pull/37630">(#37630</a>)</li>
 <li>Mise en cache des informations delta des segments pour accélérer le coordinateur de requêtes<a href="https://github.com/milvus-io/milvus/pull/39349">(#39349</a>)</li>
 <li>Lecture simultanée des métadonnées au niveau de la collection pour accélérer la reprise sur panne<a href="https://github.com/milvus-io/milvus/pull/38900">(#38900</a>)</li>
 <li>Affinement de la granularité des verrous dans QueryNode<a href="https://github.com/milvus-io/milvus/pull/39282">(#39282</a>),<a href="https://github.com/milvus-io/milvus/pull/38907">(#38907</a>)</li>
@@ -64,21 +65,23 @@ title: Notes de mise à jour
 <li>Utilisation de la taille du binlog et de la taille de l'index comme norme de limitation du quota disque<a href="https://github.com/milvus-io/milvus/pull/38844">(#38844</a>)</li>
 <li>Optimisation de l'utilisation de la mémoire pour la recherche plein texte knowhere/#1011</li>
 <li>Ajout du contrôle de version pour les index scalaires<a href="https://github.com/milvus-io/milvus/pull/39236">(#39236</a>)</li>
-<li>Amélioration de la vitesse de récupération des informations de collecte de RootCoord en évitant les copies inutiles<a href="https://github.com/milvus-io/milvus/pull/38902">(#38902</a>)</li>
+<li>Amélioration de la vitesse de récupération des informations de collection de RootCoord en évitant les copies inutiles<a href="https://github.com/milvus-io/milvus/pull/38902">(#38902</a>)</li>
+</ul>
+<h3 id="Critial-Bug-fixs" class="common-anchor-header">Corrections de bogues critiques</h3><ul>
+<li>Correction des échecs de recherche pour les clés primaires avec index<a href="https://github.com/milvus-io/milvus/pull/39390">(#39390</a>)</li>
+<li>Correction d'un problème potentiel de perte de données causé par le redémarrage de MixCoord et la vidange simultanée<a href="https://github.com/milvus-io/milvus/pull/39422">(#39422</a>)</li>
+<li>Correction d'un échec de suppression déclenché par une concurrence inappropriée entre les tâches de statistiques et le compactage L0 après le redémarrage de MixCoord<a href="https://github.com/milvus-io/milvus/pull/39460">(#39460</a>)</li>
+<li>Correction de l'incompatibilité de l'index scalaire inversé lors de la mise à niveau de 2.4 à 2.5<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Correction de bogues</h3><ul>
 <li>Correction des problèmes de lenteur des requêtes causés par la granularité grossière des verrous lors du chargement de plusieurs colonnes<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>)</li>
 <li>Correction d'un problème où l'utilisation d'alias pouvait amener un itérateur à parcourir la mauvaise base de données<a href="https://github.com/milvus-io/milvus/pull/39248">(#39248</a>)</li>
-<li>Correction des échecs de recherche pour les clés primaires avec index<a href="https://github.com/milvus-io/milvus/pull/39390">(#39390</a>)</li>
-<li>Correction d'un problème potentiel de perte de données causé par le redémarrage de MixCoord et la vidange simultanée<a href="https://github.com/milvus-io/milvus/pull/39422">(#39422</a>)</li>
 <li>Correction d'un échec de la mise à jour d'un groupe de ressources lors de la modification de la base de données<a href="https://github.com/milvus-io/milvus/pull/39356">(#39356</a>)</li>
-<li>Correction d'un problème sporadique où l'index tantivy ne pouvait pas supprimer les fichiers d'index pendant la libération<a href="https://github.com/milvus-io/milvus/pull/39434">(#39434</a>)</li>
-<li>Correction d'un échec de suppression déclenché par une concurrence incorrecte entre les tâches de statistiques et le compactage L0 après le redémarrage de MixCoord<a href="https://github.com/milvus-io/milvus/pull/39460">(#39460</a>)</li>
+<li>Correction d'un problème sporadique où l'index tantivy ne pouvait pas supprimer les fichiers d'index pendant la publication<a href="https://github.com/milvus-io/milvus/pull/39434">(#39434</a>)</li>
 <li>Correction d'une indexation lente causée par un trop grand nombre de threads<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>)</li>
-<li>Correction d'un problème empêchant les vérifications de quota de disque d'être ignorées pendant l'importation en masse<a href="https://github.com/milvus-io/milvus/pull/39319">(#39319</a>)</li>
+<li>Correction d'un problème empêchant les vérifications de quota de disque d'être ignorées lors de l'importation en masse<a href="https://github.com/milvus-io/milvus/pull/39319">(#39319</a>)</li>
 <li>Résolution des problèmes de gel causés par un trop grand nombre de consommateurs de file d'attente de messages en limitant la concurrence<a href="https://github.com/milvus-io/milvus/pull/38915">(#38915</a>)</li>
 <li>Correction des dépassements de temps de requête causés par les redémarrages de MixCoord pendant les compactions à grande échelle<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>)</li>
-<li>Correction de l'incompatibilité de l'index inversé scalaire lors de la mise à niveau de 2.4 à 2.5<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
 <li>Correction des problèmes de déséquilibre des canaux causés par les temps d'arrêt des noeuds<a href="https://github.com/milvus-io/milvus/pull/39200">(#39200</a>)</li>
 <li>Correction d'un problème qui pouvait bloquer l'équilibre des canaux.<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>
 <li>Correction d'un problème où les vérifications des niveaux de privilèges des groupes personnalisés RBAC devenaient inefficaces<a href="https://github.com/milvus-io/milvus/pull/39224">(#39224</a>)</li>
@@ -195,7 +198,7 @@ title: Notes de mise à jour
 <h3 id="Improvement" class="common-anchor-header">Amélioration</h3><ul>
 <li>Mise à jour des pages de collecte et de requête de l'interface web.<a href="https://github.com/milvus-io/milvus/pull/38701">(#38701</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Corrections de bugs</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Correction de bugs</h3><ul>
 <li>Correction des problèmes OOM en ajoutant un facteur de mémoire aux estimations de chargement.<a href="https://github.com/milvus-io/milvus/pull/38722">(#38722</a>)</li>
 <li>Correction de l'expansion des groupes de privilèges lors de l'énumération des politiques dans RootCoord.<a href="https://github.com/milvus-io/milvus/pull/38760">(#38760</a>)</li>
 <li>Correction des problèmes liés à l'énumération des groupes de privilèges et des collections.<a href="https://github.com/milvus-io/milvus/pull/38738">(#38738</a>)</li>
@@ -241,7 +244,7 @@ title: Notes de mise à jour
 <h4 id="Text-Match" class="common-anchor-header">Correspondance de texte</h4><p>Milvus 2.5 exploite les analyseurs et l'indexation de <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> pour le prétraitement du texte et la création d'index, prenant en charge la correspondance précise en langage naturel des données textuelles basées sur des termes spécifiques. Cette fonction est principalement utilisée pour la recherche filtrée afin de satisfaire des conditions spécifiques et peut incorporer le filtrage scalaire pour affiner les résultats de la requête, permettant des recherches de similarité dans les vecteurs qui répondent aux critères scalaires.</p>
 <p>Pour plus de détails, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md">Vue d'ensemble de l'analyseur</a> et à la section <a href="/docs/fr/keyword-match.md">Correspondance de texte</a>.</p>
 <h4 id="Bitmap-Index" class="common-anchor-header">Index Bitmap</h4><p>Un nouvel index de données scalaires a été ajouté à la famille Milvus. L'index BitMap utilise un tableau de bits, d'une longueur égale au nombre de lignes, pour représenter l'existence de valeurs et accélérer les recherches.</p>
-<p>Les index Bitmap sont traditionnellement efficaces pour les champs à faible cardinalité, qui ont un nombre modeste de valeurs distinctes - par exemple, une colonne contenant des informations sur le sexe avec seulement deux valeurs possibles : homme et femme.</p>
+<p>Les index Bitmap sont traditionnellement efficaces pour les champs à faible cardinalité, qui présentent un nombre modeste de valeurs distinctes - par exemple, une colonne contenant des informations sur le sexe avec seulement deux valeurs possibles : homme et femme.</p>
 <p>Pour plus de détails, voir <a href="/docs/fr/bitmap.md">Index bitmap</a>.</p>
 <h4 id="Nullable--Default-Value" class="common-anchor-header">Valeur nulle et valeur par défaut</h4><p>Milvus prend désormais en charge la définition de propriétés nullables et de valeurs par défaut pour les champs scalaires autres que le champ de clé primaire. Pour les champs scalaires marqués comme <code translate="no">nullable=True</code>, les utilisateurs peuvent omettre le champ lors de l'insertion de données ; le système le traitera comme une valeur nulle ou une valeur par défaut (si elle est définie) sans générer d'erreur.</p>
 <p>Les valeurs par défaut et les propriétés nullables offrent une plus grande flexibilité à Milvus. Les utilisateurs peuvent utiliser cette fonctionnalité pour les champs dont les valeurs sont incertaines lors de la création de collections. Elles simplifient également la migration des données d'autres systèmes de base de données vers Milvus, en permettant de traiter des ensembles de données contenant des valeurs nulles tout en préservant les paramètres de valeur par défaut d'origine.</p>

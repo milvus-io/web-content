@@ -59,7 +59,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-sparse-vector.png" alt="Use sparse vector in Milvus" class="doc-image" id="use-sparse-vector-in-milvus" />
    </span> <span class="img-wrapper"> <span>Verwendung von Sparse-Vektoren in Milvus</span> </span></p>
 <div class="alert note">
-<p>Neben spärlichen Vektoren unterstützt Milvus auch dichte Vektoren und binäre Vektoren. Dichte Vektoren sind ideal für die Erfassung tiefer semantischer Beziehungen, während binäre Vektoren sich in Szenarien wie schnellen Ähnlichkeitsvergleichen und der Deduplizierung von Inhalten auszeichnen. Weitere Informationen finden Sie unter <a href="/docs/de/dense-vector.md">Dense-Vektoren</a> und <a href="/docs/de/binary-vector.md">binäre Vektoren</a>.</p>
+<p>Zusätzlich zu spärlichen Vektoren unterstützt Milvus auch dichte Vektoren und binäre Vektoren. Dichte Vektoren sind ideal für die Erfassung tiefer semantischer Beziehungen, während binäre Vektoren sich in Szenarien wie schnellen Ähnlichkeitsvergleichen und der Deduplizierung von Inhalten auszeichnen. Weitere Informationen finden Sie unter <a href="/docs/de/dense-vector.md">Dense-Vektoren</a> und <a href="/docs/de/binary-vector.md">binäre Vektoren</a>.</p>
 </div>
 <h2 id="Use-sparse-vectors-in-Milvus​" class="common-anchor-header">Spärliche Vektoren in Milvus verwenden<button data-href="#Use-sparse-vectors-in-Milvus​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -242,7 +242,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
     field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
     metric_type: MetricType.IP,
-    index_type: IndexType.SPARSE_WAND,
+    index_type: IndexType.SPARSE_INVERTED_INDEX,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
     },
@@ -265,10 +265,9 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <li><p><code translate="no">index_type</code>: Der Index-Typ, der für das spärliche Vektorfeld erstellt werden soll. Gültige Werte:</p>
 <ul>
 <li><code translate="no">SPARSE_INVERTED_INDEX</code>: Ein allgemeiner invertierter Index für spärliche Vektoren.</li>
-<li><code translate="no">SPARSE_WAND</code>: Ein spezieller Indextyp, der in Milvus v2.5.3 und früher unterstützt wird.</li>
 </ul>
   <div class="alert note">
-<p>Ab Milvus 2.5.4 wird <code translate="no">SPARSE_WAND</code> veraltet sein. Es wird empfohlen, stattdessen <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> zu verwenden, um die Kompatibilität zu wahren und die Gleichwertigkeit zu gewährleisten.</p>
+<p>Ab Milvus 2.5.4 wird <code translate="no">SPARSE_WAND</code> veraltet sein. Stattdessen wird empfohlen, <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> zu verwenden, um die Äquivalenz zu gewährleisten und gleichzeitig die Kompatibilität zu erhalten.</p>
   </div>
 </li>
 <li><p><code translate="no">metric_type</code>: Die Metrik, die zur Berechnung der Ähnlichkeit zwischen spärlichen Vektoren verwendet wird. Gültige Werte:</p>
@@ -515,7 +514,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
     </button></h2><p>Bei der Verwendung von spärlichen Vektoren in Milvus sind die folgenden Einschränkungen zu beachten:</p>
 <ul>
 <li><p>Derzeit werden nur die Abstandsmetriken <strong>IP</strong> und <strong>BM25</strong> (für die Volltextsuche) für Sparse-Vektoren unterstützt. Die hohe Dimensionalität von spärlichen Vektoren macht L2 und Kosinusabstand unpraktisch.</p></li>
-<li><p>Für spärliche Vektorfelder werden nur die Indextypen <strong>SPARSE_INVERTED_INDEX</strong> und <strong>SPARSE_WAND</strong> unterstützt.</p></li>
+<li><p>Für spärliche Vektorfelder wird nur der Indextyp <strong>SPARSE_INVERTED_INDEX</strong> unterstützt.</p></li>
 <li><p>Die für spärliche Vektoren unterstützten Datentypen:</p>
 <ul>
 <li>Der Dimensionsteil muss eine 32-Bit-Ganzzahl ohne Vorzeichen sein;</li>
@@ -543,11 +542,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Können Sie den Unterschied zwischen SPARSE_INVERTED_INDEX und SPARSE_WAND erklären, und wie wähle ich zwischen ihnen?</strong></p>
-<p><strong>SPARSE_INVERTED_INDEX</strong> ist ein traditioneller invertierter Index, während <strong>SPARSE_WAND</strong> den <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND-Algorithmus</a> verwendet, um die Anzahl der vollständigen IP-Abstandsauswertungen während der Suche zu reduzieren. <strong>SPARSE_WAND</strong> ist in der Regel schneller, aber seine Leistung kann mit zunehmender Vektordichte abnehmen. Um zwischen den beiden Algorithmen zu wählen, führen Sie Experimente und Benchmarks durch, die auf Ihrem spezifischen Datensatz und Anwendungsfall basieren.</p></li>
-<li><p><strong>Wie sollte ich die Parameter drop_ratio_build und drop_ratio_search wählen?</strong></p>
-<p>Die Wahl von <strong>drop_ratio_build</strong> und <strong>drop_ratio_search</strong> hängt von den Eigenschaften Ihrer Daten und Ihren Anforderungen an Suchlatenz/Durchsatz und Genauigkeit ab.</p></li>
-<li><p><strong>Kann die Dimension einer Sparse-Einbettung ein beliebiger diskreter Wert innerhalb des uint32-Raums sein?</strong></p>
+<li><p><strong>Kann die Dimension einer spärlichen Einbettung ein beliebiger diskreter Wert innerhalb des uint32-Raums sein?</strong></p>
 <p>Ja, mit einer Ausnahme. Die Dimension einer spärlichen Einbettung kann ein beliebiger Wert im Bereich von <code translate="no">[0, maximum of uint32)</code> sein. Das bedeutet, dass Sie nicht den Maximalwert von uint32 verwenden können.</p></li>
 <li><p><strong>Wird die Suche nach wachsenden Segmenten über einen Index oder mit roher Gewalt durchgeführt?</strong></p>
 <p>Die Suche nach wachsenden Segmenten wird über einen Index desselben Typs wie der Index des versiegelten Segments durchgeführt. Für neue wachsende Segmente, bevor der Index aufgebaut ist, wird eine Brute-Force-Suche verwendet.</p></li>

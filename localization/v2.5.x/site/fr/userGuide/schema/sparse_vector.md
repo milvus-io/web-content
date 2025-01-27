@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un vecteur peu dense est une représentation spéciale de vecteurs à haute dimension dans laquelle la plupart des éléments sont nuls et seules quelques dimensions ont des valeurs non nulles. Cette caractéristique rend les vecteurs épars particulièrement efficaces dans le traitement de données à grande échelle, à haute dimension, mais éparses. Les applications les plus courantes sont les suivantes</p>
+    </button></h2><p>Un vecteur peu dense est une représentation spéciale de vecteurs à haute dimension dans laquelle la plupart des éléments sont nuls et seules quelques dimensions ont des valeurs non nulles. Cette caractéristique rend les vecteurs épars particulièrement efficaces pour traiter des données à grande échelle, à haute dimension, mais éparses. Les applications les plus courantes sont les suivantes</p>
 <ul>
 <li><p><strong>Analyse de texte :</strong> Représentation de documents sous forme de vecteurs de sacs de mots, où chaque dimension correspond à un mot et où seuls les mots apparaissant dans le document ont des valeurs non nulles.</p></li>
 <li><p><strong>Systèmes de recommandation :</strong> Matrices d'interaction utilisateur-élément, où chaque dimension représente l'évaluation d'un utilisateur pour un élément particulier, la plupart des utilisateurs n'interagissant qu'avec quelques éléments.</p></li>
@@ -242,7 +242,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
     field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
     metric_type: MetricType.IP,
-    index_type: IndexType.SPARSE_WAND,
+    index_type: IndexType.SPARSE_INVERTED_INDEX,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
     },
@@ -264,14 +264,13 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <ul>
 <li><p><code translate="no">index_type</code>: Le type d'index à créer pour le champ de vecteurs épars. Valeurs valides :</p>
 <ul>
-<li><code translate="no">SPARSE_INVERTED_INDEX</code>: Un index inversé à usage général pour les vecteurs épars.</li>
-<li><code translate="no">SPARSE_WAND</code>: Un type d'index spécialisé pris en charge dans Milvus v2.5.3 et les versions antérieures.</li>
+<li><code translate="no">SPARSE_INVERTED_INDEX</code>: Un index inversé d'usage général pour les vecteurs épars.</li>
 </ul>
   <div class="alert note">
-<p>À partir de Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> est obsolète. Il est recommandé d'utiliser <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> par souci d'équivalence tout en maintenant la compatibilité.</p>
+<p>À partir de la version 2.5.4 de Milvus, <code translate="no">SPARSE_WAND</code> est obsolète. Il est recommandé d'utiliser <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> par souci d'équivalence tout en maintenant la compatibilité.</p>
   </div>
 </li>
-<li><p><code translate="no">metric_type</code>: La métrique utilisée pour calculer la similarité entre des vecteurs épars. Valeurs valides :</p>
+<li><p><code translate="no">metric_type</code>: La métrique utilisée pour calculer la similarité entre les vecteurs épars. Valeurs valides :</p>
 <ul>
 <li><p><code translate="no">IP</code> (Produit intérieur) : Mesure la similarité à l'aide du produit de points.</p></li>
 <li><p><code translate="no">BM25</code>: Généralement utilisé pour la recherche en texte intégral, en se concentrant sur la similarité textuelle.</p>
@@ -417,7 +416,7 @@ search_params = {​
 query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans cet exemple, <code translate="no">drop_ratio_search</code> est un paramètre facultatif spécifique aux vecteurs épars, qui permet d'affiner les petites valeurs du vecteur de requête au cours de la recherche. Par exemple, avec <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, les 20 % de valeurs les plus petites du vecteur d'interrogation seront ignorées pendant la recherche.</p>
+<p>Dans cet exemple, <code translate="no">drop_ratio_search</code> est un paramètre facultatif spécifique aux vecteurs épars, qui permet d'affiner les petites valeurs du vecteur de requête au cours de la recherche. Par exemple, avec <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, les 20 % de valeurs les plus petites du vecteur de requête seront ignorées lors de la recherche.</p>
 <p>Exécutez ensuite la recherche de similarité à l'aide de la méthode <code translate="no">search</code>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -515,13 +514,13 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
     </button></h2><p>Lorsque vous utilisez des vecteurs épars dans Milvus, tenez compte des limites suivantes :</p>
 <ul>
 <li><p>Actuellement, seules les mesures de distance <strong>IP</strong> et <strong>BM25</strong> (pour la recherche en texte intégral) sont prises en charge pour les vecteurs épars. La dimensionnalité élevée des vecteurs épars rend les distances L2 et cosinus impraticables.</p></li>
-<li><p>Seuls les types d'index <strong>SPARSE_INVERTED_INDEX</strong> et <strong>SPARSE_WAND</strong> sont pris en charge pour les champs de vecteurs peu denses.</p></li>
+<li><p>Pour les champs de vecteurs peu denses, seul le type d'index <strong>SPARSE_INVERTED_INDEX</strong> est pris en charge.</p></li>
 <li><p>Types de données pris en charge pour les vecteurs peu denses :</p>
 <ul>
 <li>La partie dimension doit être un entier non signé de 32 bits ;</li>
 <li>La partie valeur peut être un nombre à virgule flottante 32 bits non négatif.</li>
 </ul></li>
-<li><p>Les vecteurs épars doivent répondre aux exigences suivantes en matière d'insertion et de recherche :</p>
+<li><p>Les vecteurs peu denses doivent répondre aux exigences suivantes en matière d'insertion et de recherche :</p>
 <ul>
 <li>Au moins une valeur du vecteur est non nulle ;</li>
 <li>Les indices du vecteur sont non négatifs.</li>
@@ -543,10 +542,6 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Pouvez-vous expliquer la différence entre SPARSE_INVERTED_INDEX et SPARSE_WAND, et comment choisir entre les deux ?</strong></p>
-<p><strong>SPARSE_INVERTED_INDEX</strong> est un index inversé traditionnel, tandis que <strong>SPARSE_WAND</strong> utilise l'algorithme <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> pour réduire le nombre d'évaluations de la distance IP complète pendant la recherche. <strong>SPARSE_WAND</strong> est généralement plus rapide, mais ses performances peuvent diminuer avec l'augmentation de la densité des vecteurs. Pour choisir entre les deux, effectuez des expériences et des analyses comparatives en fonction de votre jeu de données et de votre cas d'utilisation spécifiques.</p></li>
-<li><p><strong>Comment dois-je choisir les paramètres drop_ratio_build et drop_ratio_search ?</strong></p>
-<p>Le choix des paramètres <strong>drop_ratio_build</strong> et <strong>drop_ratio_search</strong> dépend des caractéristiques de vos données et de vos exigences en matière de latence, de débit et de précision de la recherche.</p></li>
 <li><p><strong>La dimension d'un encastrement clairsemé peut-elle être n'importe quelle valeur discrète dans l'espace uint32 ?</strong></p>
 <p>Oui, à une exception près. La dimension d'un encastrement clairsemé peut être n'importe quelle valeur dans l'intervalle <code translate="no">[0, maximum of uint32)</code>. Cela signifie que vous ne pouvez pas utiliser la valeur maximale de uint32.</p></li>
 <li><p><strong>Les recherches sur les segments croissants sont-elles effectuées à l'aide d'un index ou par force brute ?</strong></p>

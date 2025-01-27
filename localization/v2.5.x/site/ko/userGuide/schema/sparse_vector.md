@@ -47,7 +47,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector.png" alt="Spare vector representation" class="doc-image" id="spare-vector-representation" />
    </span> <span class="img-wrapper"> <span>스페어 벡터 표현</span> </span></p>
-<p>희소 벡터는 텍스트 처리에서 <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (용어 빈도-역 문서 빈도) 및 <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25와</a> 같은 다양한 방법을 사용하여 생성할 수 있습니다. 또한 Milvus는 희소 벡터를 생성하고 처리하는 데 도움이 되는 편리한 방법을 제공합니다. 자세한 내용은 <a href="/docs/ko/embeddings.md">임베딩을</a> 참조하세요.</p>
+<p>희소 벡터는 텍스트 처리에서 <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (용어 빈도 역 문서 빈도) 및 <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25와</a> 같은 다양한 방법을 사용하여 생성할 수 있습니다. 또한 Milvus는 희소 벡터를 생성하고 처리하는 데 도움이 되는 편리한 방법을 제공합니다. 자세한 내용은 <a href="/docs/ko/embeddings.md">임베딩을</a> 참조하세요.</p>
 <p>텍스트 데이터의 경우, Milvus는 전체 텍스트 검색 기능도 제공하므로 외부 임베딩 모델을 사용해 스파스 벡터를 생성하지 않고도 원시 텍스트 데이터에서 직접 벡터 검색을 수행할 수 있습니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
 <p>벡터화 후에는 데이터를 Milvus에 저장하여 관리 및 벡터 검색을 할 수 있습니다. 아래 다이어그램은 기본 프로세스를 보여줍니다.</p>
 <p>
@@ -238,7 +238,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
     field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
     metric_type: MetricType.IP,
-    index_type: IndexType.SPARSE_WAND,
+    index_type: IndexType.SPARSE_INVERTED_INDEX,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
     },
@@ -261,10 +261,9 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <li><p><code translate="no">index_type</code>: 스파스 벡터 필드에 대해 생성할 인덱스 유형입니다. 유효한 값:</p>
 <ul>
 <li><code translate="no">SPARSE_INVERTED_INDEX</code>: 희소 벡터에 대한 범용 반전 인덱스입니다.</li>
-<li><code translate="no">SPARSE_WAND</code>: Milvus v2.5.3 이하에서 지원되는 특수 인덱스 유형입니다.</li>
 </ul>
   <div class="alert note">
-<p>Milvus 2.5.4 이후부터 <code translate="no">SPARSE_WAND</code> 은 더 이상 사용되지 않습니다. 대신, 호환성을 유지하면서 동등성을 위해 <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 을 사용하는 것이 좋습니다.</p>
+<p>Milvus 2.5.4부터 <code translate="no">SPARSE_WAND</code> 은 더 이상 사용되지 않습니다. 대신 호환성을 유지하면서 동등성을 위해 <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 을 사용하는 것이 좋습니다.</p>
   </div>
 </li>
 <li><p><code translate="no">metric_type</code>: 스파스 벡터 간의 유사성을 계산하는 데 사용되는 메트릭입니다. 유효한 값:</p>
@@ -511,7 +510,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
     </button></h2><p>Milvus에서 스파스 벡터를 사용할 때는 다음과 같은 제한 사항을 고려하세요:</p>
 <ul>
 <li><p>현재 스파스 벡터에는 <strong>IP</strong> 및 <strong>BM25</strong> (전체 텍스트 검색용) 거리 메트릭만 지원됩니다. 희소 벡터의 차원이 높기 때문에 L2 및 코사인 거리는 비실용적입니다.</p></li>
-<li><p>스파스 벡터 필드의 경우, <strong>SPARSE_INVERTED_INDEX</strong> 및 <strong>SPARSE_WAND</strong> 인덱스 유형만 지원됩니다.</p></li>
+<li><p>스파스 벡터 필드의 경우 <strong>SPARSE_INVERTED_INDEX</strong> 인덱스 유형만 지원됩니다.</p></li>
 <li><p>스파스 벡터에 지원되는 데이터 유형:</p>
 <ul>
 <li>차원 부분은 부호가 없는 32비트 정수여야 합니다;</li>
@@ -539,12 +538,8 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>SPARSE_INVERTED_INDEX와 SPARSE_WAND의 차이점을 설명해 주시고, 둘 중 하나를 선택하려면 어떻게 해야 하나요?</strong></p>
-<p><strong>SPARSE_INVERTED_INDEX는</strong> 기존의 반전 인덱스인 반면, <strong>SPARSE_WAND는</strong> 검색 시 전체 IP 거리 평가 횟수를 줄이기 위해 <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> 알고리즘을 사용합니다. <strong>SPARSE_WAND는</strong> 일반적으로 더 빠르지만 벡터 밀도가 증가하면 성능이 저하될 수 있습니다. 이 중 하나를 선택하려면 특정 데이터 세트와 사용 사례에 따라 실험과 벤치마크를 수행하세요.</p></li>
-<li><p><strong>drop_ratio_build 및 drop_ratio_search 매개변수는 어떻게 선택해야 하나요?</strong></p>
-<p><strong>drop_ratio_build</strong> 및 <strong>drop_ratio_search의</strong> 선택은 데이터의 특성과 검색 지연 시간/처리량 및 정확도에 대한 요구 사항에 따라 달라집니다.</p></li>
-<li><p><strong>스파스 임베딩의 차원은 uint32 공간 내에서 임의의 불연속형 값이 될 수 있나요?</strong></p>
-<p>예, 한 가지 예외가 있습니다. 희소 임베딩의 차원은 <code translate="no">[0, maximum of uint32)</code> 범위의 모든 값을 사용할 수 있습니다. 즉, 최대값인 uint32를 사용할 수 없습니다.</p></li>
+<li><p><strong>희소 임베딩의 차원은 uint32 공간 내에서 임의의 불연속형 값이 될 수 있나요?</strong></p>
+<p>예, 한 가지 예외가 있습니다. 희소 임베딩의 차원은 <code translate="no">[0, maximum of uint32)</code> 범위의 모든 값이 될 수 있습니다. 즉, 최대 값인 uint32를 사용할 수 없습니다.</p></li>
 <li><p><strong>증가하는 세그먼트에 대한 검색은 인덱스를 통해 수행되나요 아니면 무차별 대입으로 수행되나요?</strong></p>
 <p>증가하는 세그먼트에 대한 검색은 봉인된 세그먼트 인덱스와 동일한 유형의 인덱스를 통해 수행됩니다. 인덱스가 구축되기 전에 새로 증가하는 세그먼트의 경우 무차별 대입 검색이 사용됩니다.</p></li>
 <li><p><strong>하나의 컬렉션에 희소 벡터와 고밀도 벡터를 모두 포함할 수 있나요?</strong></p>

@@ -19,7 +19,7 @@ title: IVF_PQ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>IVF_PQ</strong>索引是一種<strong>基於量化的</strong>索引演算法，用於高維空間的近似近鄰搜尋。雖然速度比不上某些基於圖的方法，但<strong>IVF_PQ</strong>通常需要較少的記憶體，因此是大型資料集的實用選擇。</p>
+    </button></h1><p><strong>IVF_PQ</strong>索引是一種<strong>基於量化的</strong>索引演算法，用於高維空間中的近似近鄰搜尋。雖然速度不如某些基於圖的方法，但<strong>IVF_PQ</strong>通常需要較少的記憶體，因此是大型資料集的實用選擇。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +44,7 @@ title: IVF_PQ
 <li><strong>反向索引：</strong>建立一個索引，將每個群集的中心點對應到分配給該群集的向量清單。</li>
 <li><strong>搜尋：</strong>搜尋最近鄰居時，搜尋演算法會比較您的查詢向量與群集中心點，並選擇最有希望的群集。然後將搜尋範圍縮小到這些選定叢集中的向量。</li>
 </ol>
-<p>要瞭解更多技術細節，請參閱<a href="https://zilliverse.feishu.cn/wiki/MXiGwmnq6i5MswkryYVcMklVnld">IVF_FLAT</a>。</p>
+<p>要瞭解更多技術細節，請參閱<a href="/docs/zh-hant/ivf-flat.md">IVF_FLAT</a>。</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>Product Quantization (PQ)</strong>是一種高維向量的壓縮方法，可大幅降低儲存需求，同時實現快速的相似性搜尋作業。</p>
 <p>PQ 過程包含以下關鍵階段：</p>
 <p>
@@ -55,7 +55,7 @@ title: IVF_PQ
 <li><strong>尺寸分解</strong>：該演算法首先將每個高維向量分解為<code translate="no">m</code> 大小相等的子向量。此分解將原始的 D 維空間轉換為<code translate="no">m</code> 不相交的子空間，其中每個子空間包含<em>D/m</em>維。參數<code translate="no">m</code> 控制分解的粒度，並直接影響壓縮比。</li>
 <li><strong>子空間編碼本製作</strong>：在每個子空間中，演算法應用<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means 聚類</a>來學習一組代表性向量 (中心點)。這些中心點共同形成該子空間的編碼簿。每個編碼本的中心點數量由參數<code translate="no">nbits</code> 決定，其中每個編碼本包含 2^nbits 的中心點。例如，如果<code translate="no">nbits = 8</code> ，每個編碼本將包含 256 個中心點。每個中心點都會被指派一個唯一的<code translate="no">nbits</code> 位元索引。</li>
 <li><strong>向量</strong> <strong>量化</strong>：對於原始向量中的每個子向量，PQ 會使用特定的度量類型在對應的子空間中找出其最近的中心點。此過程能有效地將每個子向量映射到編碼簿中最接近的代表向量。與其儲存完整的子向量座標，不如只保留匹配中心點的索引。</li>
-<li><strong>壓縮表示</strong>：最終的壓縮表示由<code translate="no">m</code> 索引組成，每個子空間一個，統稱為<strong>PQ 編碼</strong>。此編碼可將儲存需求從<em>D × 32</em>位元 (假設為 32 位元浮點數) 減少到<em>m</em>×<em>nbits</em>位元，在保留近似向量距離能力的同時，達到大幅壓縮的效果。</li>
+<li><strong>壓縮表示</strong>：最後的壓縮表示由<code translate="no">m</code> 索引組成，每個子空間一個，統稱為<strong>PQ 編碼</strong>。此編碼可將儲存需求從<em>D × 32</em>位元 (假設為 32 位元浮點數) 減少到<em>m</em>×<em>nbits</em>位元，在保留近似向量距離能力的同時，達到大幅壓縮的效果。</li>
 </ol>
 <p>有關參數調整與最佳化的詳細資訊，請參閱<a href="#index-params">索引參數</a>。</p>
 <div class="alert note">
@@ -195,7 +195,7 @@ res = MilvusClient.search(
 <tr><th></th><th><strong>參數</strong></th><th><strong>說明</strong></th><th><strong>值範圍</strong></th><th><strong>調整建議</strong></th></tr>
 </thead>
 <tbody>
-<tr><td>IVF</td><td><code translate="no">nlist</code></td><td>在建立索引時使用 k-means 演算法建立的叢集數目。</td><td><strong>類型</strong>：整數<br><strong>範圍：</strong>[1, 65536]<br><strong>預設值</strong>：<code translate="no">128</code></td><td>較大的<code translate="no">nlist</code> 值會透過建立更精細的叢集來改善召回率，但會增加索引建立時間。根據資料集大小和可用資源進行最佳化。<br>在大多數情況下，我們建議您設定此範圍內的值：[32, 4096].</td></tr>
+<tr><td>IVF</td><td><code translate="no">nlist</code></td><td>在建立索引時使用 k-means 演算法建立的叢集數。</td><td><strong>類型</strong>：整數<br><strong>範圍：</strong>[1, 65536]<br><strong>預設值</strong>：<code translate="no">128</code></td><td>較大的<code translate="no">nlist</code> 值會透過建立更精細的叢集來改善召回率，但會增加索引建立時間。根據資料集大小和可用資源進行最佳化。<br>在大多數情況下，我們建議您設定此範圍內的值：[32, 4096].</td></tr>
 <tr><td>PQ</td><td><code translate="no">m</code></td><td>在量化過程中，將每個高維向量分割成的子向量（用於量化）數量。</td><td><strong>類型</strong>：整數<br><strong>範圍：</strong>[1, 65536]<br><strong>預設值</strong>：無</td><td>較高的<code translate="no">m</code> 值可以提高精確度，但也會增加計算複雜度和記憶體使用量。<br><code translate="no">m</code> 必須是向量維度<em>(D</em>) 的除數，以確保正確的分解。一般建議的值是<em>m = D/2</em>。<br>在大多數情況下，我們建議您設定此範圍內的值：[D/8, D]。</td></tr>
 <tr><td></td><td><code translate="no">nbits</code></td><td>用來以壓縮形式表示每個子向量中心點索引的位元數。它直接決定每個編碼本的大小。每個編碼本將包含 2^nbits 的中心點。例如，如果<code translate="no">nbits</code> 設定為 8，每個子向量將以 8 位元的中心點索引來表示。這樣，該子向量的編碼簿中就有 2^8 (256) 個可能的中心點。</td><td><strong>類型</strong>：整數<br><strong>範圍：</strong>[1, 64]<br><strong>預設值</strong>：<code translate="no">8</code></td><td><code translate="no">nbits</code> 較高的值允許較大的編碼本，可能導致原始向量的表示更精確。不過，這也意味著要使用更多位元來儲存每個索引，導致較少的壓縮。<br>在大多數情況下，我們建議您設定此範圍內的值：[1, 16].</td></tr>
 </tbody>

@@ -237,7 +237,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
     field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
     metric_type: MetricType.IP,
-    index_type: IndexType.SPARSE_WAND,
+    index_type: IndexType.SPARSE_INVERTED_INDEX,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
     },
@@ -260,10 +260,9 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <li><p><code translate="no">index_type</code>:要為稀疏向量場建立的索引類型。有效值：</p>
 <ul>
 <li><code translate="no">SPARSE_INVERTED_INDEX</code>:稀疏向量的通用反演索引。</li>
-<li><code translate="no">SPARSE_WAND</code>:Milvus v2.5.3 及更早版本支援的專門索引類型。</li>
 </ul>
   <div class="alert note">
-<p>從 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 將被廢棄。建議使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> ，以維持相容性。</p>
+<p>從 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已經被廢棄。取而代之，建議使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 以達到等效，同時保持相容性。</p>
   </div>
 </li>
 <li><p><code translate="no">metric_type</code>:用來計算稀疏向量之間相似性的度量。有效值：</p>
@@ -276,7 +275,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <ul>
 <li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (預設）：使用 MaxScore 演算法的最佳化 Document-at-a-Time (DAAT) 查詢處理。MaxScore 可跳過可能影響最小的詞彙和文件，為高 k 值或包含許多詞彙的查詢提供更好的效能。為了達到這個目的，MaxScore 會根據最大影響分數，將詞彙分為必要和非必要兩組，並將重點放在對 top-k 結果有貢獻的詞彙上。</p></li>
 <li><p><code translate="no">&quot;DAAT_WAND&quot;</code>:使用 WAND 演算法優化 DAAT 查詢處理。WAND 利用最大影響分數跳過非競爭性文件，評估較少的命中文件，但每次命中的開銷較高。這使得 WAND 對於 k 值較小的查詢或較短的查詢更有效率，在這些情況下跳過是較可行的。</p></li>
-<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>:Basic Term-at-a-Time (TAAT) 查詢處理。雖然與<code translate="no">DAAT_MAXSCORE</code> 和<code translate="no">DAAT_WAND</code> 相比較慢，但<code translate="no">TAAT_NAIVE</code> 提供了獨特的優勢。DAAT 演算法使用快取的最大影響分數，不論全域集合參數 (avgdl) 如何改變，這些分數都會保持靜態，而<code translate="no">TAAT_NAIVE</code> 則不同，它會動態適應這些變化。</p></li>
+<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>:Basic Term-at-a-Time (TAAT) 查詢處理。雖然與<code translate="no">DAAT_MAXSCORE</code> 和<code translate="no">DAAT_WAND</code> 相比較慢，但<code translate="no">TAAT_NAIVE</code> 提供了獨特的優勢。DAAT 演算法使用快取的最大影響分數，不論全域集合參數 (avgdl) 有何改變，這些分數都會保持靜態，而<code translate="no">TAAT_NAIVE</code> 則不同，它會動態地適應這些改變。</p></li>
 </ul></li>
 </ul>
 <h3 id="Create-collection​" class="common-anchor-header">建立集合</h3><p>稀疏向量和索引設定完成後，就可以建立包含稀疏向量的集合。以下範例使用 <ins><code translate="no">create_collection</code></ins>方法來建立一個名為<code translate="no">my_sparse_collection</code> 的集合。</p>
@@ -510,10 +509,10 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
     </button></h2><p>在 Milvus 中使用稀疏向量時，請考慮下列限制：</p>
 <ul>
 <li><p>目前，稀疏向量只支援<strong>IP</strong>和<strong>BM25</strong>（用於全文檢索）距離度量。稀疏向量的高維度使得 L2 和余弦距離不切實際。</p></li>
-<li><p>對於稀疏向量欄位，只支援<strong>SPARSE_INVERTED_INDEX</strong>和<strong>SPARSE_WAND</strong>索引類型。</p></li>
+<li><p>對於稀疏向量欄位，只支援<strong>SPARSE_INVERTED_INDEX</strong>索引類型。</p></li>
 <li><p>稀疏向量支援的資料類型：</p>
 <ul>
-<li>維數部分必須是無符號的 32 位元整數；</li>
+<li>維度部分必須是無符號的 32 位元整數；</li>
 <li>值部分可以是非負 32 位元浮點數。</li>
 </ul></li>
 <li><p>稀疏向量必須符合下列插入和搜尋的要求：</p>
@@ -538,10 +537,6 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>可否解釋 SPARSE_INVERTED_INDEX 與 SPARSE_WAND 的差異，以及如何選擇？</strong></p>
-<p><strong>SPARSE_INVERTED_INDEX</strong>是一種傳統的倒轉索引，而<strong>SPARSE_WAND</strong>則是使用<a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a>演算法來減少搜尋過程中完整 IP 距離評估的次數。<strong>SPARSE_WAND</strong>通常較快，但其效能會隨著向量密度的增加而下降。要在兩者之間做出選擇，請根據您的特定資料集和使用個案進行實驗和基準測試。</p></li>
-<li><p><strong>我應該如何選擇 drop_ratio_build 和 drop_ratio_search 參數？</strong></p>
-<p><strong>drop_ratio_build</strong>和<strong>drop_ratio_search</strong>的選擇取決於您資料的特性，以及您對搜尋延遲/吞吐量和精確度的要求。</p></li>
 <li><p><strong>稀疏嵌入的維度可以是 uint32 空間內的任何離散值嗎？</strong></p>
 <p>可以，但有一個例外。稀疏嵌入的維度可以是<code translate="no">[0, maximum of uint32)</code> 範圍內的任何值。這表示您不能使用 uint32 的最大值。</p></li>
 <li><p><strong>對成長中的區段進行搜尋時，是透過索引還是暴力搜尋？</strong></p>

@@ -44,7 +44,7 @@ title: IVF_PQ
 <li><strong>反向索引：</strong>创建一个索引，将每个聚类的中心点映射到分配给该聚类的向量列表中。</li>
 <li><strong>搜索：</strong>搜索近邻时，搜索算法会将查询向量与群集中心点进行比较，并选择最有希望的群集。然后将搜索范围缩小到这些选定簇内的向量。</li>
 </ol>
-<p>要了解更多技术细节，请参阅<a href="https://zilliverse.feishu.cn/wiki/MXiGwmnq6i5MswkryYVcMklVnld">IVF_FLAT</a>。</p>
+<p>要了解更多技术细节，请参阅<a href="/docs/zh/ivf-flat.md">IVF_FLAT</a>。</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>乘积量化（PQ）</strong>是一种针对高维向量的压缩方法，可显著降低存储需求，同时实现快速的相似性搜索操作符。</p>
 <p>PQ 过程包括以下几个关键阶段：</p>
 <p>
@@ -200,7 +200,7 @@ res = MilvusClient.search(
 <tr><td></td><td><code translate="no">nbits</code></td><td>用于以压缩形式表示每个子向量中心点索引的比特数。它直接决定了每个编码本的大小。每个编码本将包含 2^nbits 的中心点。例如，如果<code translate="no">nbits</code> 设置为 8，则每个子向量将由一个 8 位的中心点索引表示。这样，该子向量的编码本中就有 2^8 个（256）可能的中心点。</td><td><strong>类型</strong>： 整数整数<br><strong>范围</strong>： [1, 64[1, 64]<br><strong>默认值</strong>：<code translate="no">8</code></td><td><code translate="no">nbits</code> 值越大，编码本越大，可能会更精确地表示原始向量。不过，这也意味着要使用更多比特来存储每个索引，从而导致压缩率降低。<br>在大多数情况下，我们建议在此范围内设置一个值：[1, 16].</td></tr>
 </tbody>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数</h3><p>下表列出了在<code translate="no">search_params.params</code> 中<a href="#Search-on-index">对索引进行搜索</a>时可以配置的参数。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">特定于索引的搜索参数</h3><p>下表列出了在<code translate="no">search_params.params</code> 中<a href="#Search-on-index">搜索索引</a>时可以配置的参数。</p>
 <table>
 <thead>
 <tr><th></th><th><strong>参数</strong></th><th><strong>说明</strong></th><th><strong>值范围</strong></th><th><strong>调整建议</strong></th></tr>

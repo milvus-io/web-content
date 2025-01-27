@@ -43,16 +43,17 @@ title: Notas de la versión
 <tr><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>Nos complace anunciar el lanzamiento de Milvus 2.5.4, que introduce optimizaciones clave de rendimiento y nuevas características como el aislamiento PartitionKey, Sparse Index con DAAT MaxScore y mecanismos de bloqueo mejorados. Esta versión también soluciona múltiples errores que mejoran la estabilidad y fiabilidad generales. Le animamos a que actualice o pruebe esta última versión, ¡y esperamos sus comentarios para ayudarnos a perfeccionar Milvus continuamente!</p>
+<p>Nos complace anunciar el lanzamiento de Milvus 2.5.4, que introduce optimizaciones clave del rendimiento y nuevas características como el aislamiento PartitionKey, Sparse Index con DAAT MaxScore y mecanismos de bloqueo mejorados. Un aspecto destacado de esta versión es su compatibilidad con 10.000 colecciones y 1 millón de particiones, lo que marca un hito importante para los casos de uso multiusuario. Esta versión también soluciona varios errores que mejoran la estabilidad y fiabilidad generales; dos de los errores críticos pueden causar la pérdida de datos. Le animamos a que actualice o pruebe esta última versión, ¡y esperamos sus comentarios para ayudarnos a perfeccionar Milvus continuamente!</p>
 <h3 id="Features" class="common-anchor-header">Características</h3><ul>
-<li>Admite el aislamiento PartitionKey para mejorar el rendimiento con múltiples claves de partición<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). Para obtener más información, consulte <a href="/docs/es/use-partition-key.md">Utilizar Partition Key</a>.</li>
+<li>Soporta el aislamiento PartitionKey para mejorar el rendimiento con múltiples claves de partición<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). Para obtener más información, consulte <a href="/docs/es/use-partition-key.md">Utilizar Partition Key</a>.</li>
 <li>Sparse Index ahora soporta DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>. Para obtener más información, consulte <a href="/docs/es/sparse_vector.md">Vector disperso</a>.</li>
 <li>Añade soporte para <code translate="no">is_null</code> en expresión<a href="https://github.com/milvus-io/milvus/pull/38931">(#38931</a>)</li>
 <li>Se pueden personalizar los privilegios de root<a href="https://github.com/milvus-io/milvus/pull/39324">(#39324</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Mejoras</h3><ul>
-<li>Almacenamiento en caché de la información delta de los segmentos para acelerar el Coordinador de consultas<a href="https://github.com/milvus-io/milvus/pull/39349">(#39349</a>)</li>
-<li>Lectura concurrente de metadatos a nivel de colección para acelerar la recuperación de fallos<a href="https://github.com/milvus-io/milvus/pull/38900">(#38900</a>)</li>
+<li>Soporta 10K colecciones y 1million particiones en un cluster<a href="https://github.com/milvus-io/milvus/pull/37630">(#37630</a>)</li>
+<li>Información delta de segmentos en caché para acelerar el Coordinador de consultas<a href="https://github.com/milvus-io/milvus/pull/39349">(#39349</a>)</li>
+<li>Lectura concurrente de metadatos a nivel de colección para acelerar la recuperación en caso de fallo<a href="https://github.com/milvus-io/milvus/pull/38900">(#38900</a>)</li>
 <li>Granularidad de bloqueo refinada en QueryNode<a href="https://github.com/milvus-io/milvus/pull/39282">(#39282</a>),<a href="https://github.com/milvus-io/milvus/pull/38907">(#38907</a>)</li>
 <li>Estilo unificado mediante el uso de CStatus para gestionar las llamadas a NewCollection CGO<a href="https://github.com/milvus-io/milvus/pull/39303">(#39303</a>)</li>
 <li>Se ha omitido la generación del limitador de partición si no se establece ninguna partición<a href="https://github.com/milvus-io/milvus/pull/38911">(#38911</a>)</li>
@@ -64,24 +65,26 @@ title: Notas de la versión
 <li>Utilización del tamaño del binlog y del tamaño del índice como estándar de limitación de la cuota de disco<a href="https://github.com/milvus-io/milvus/pull/38844">(#38844</a>)</li>
 <li>Optimizado el uso de memoria para la búsqueda de texto completo knowhere/#1011</li>
 <li>Añadido control de versiones para índices escalares<a href="https://github.com/milvus-io/milvus/pull/39236">(#39236</a>)</li>
-<li>Mejora de la velocidad de obtención de información de recopilación de RootCoord evitando copias innecesarias<a href="https://github.com/milvus-io/milvus/pull/38902">(#38902</a>)</li>
+<li>Mejora de la velocidad de obtención de información de colección de RootCoord evitando copias innecesarias<a href="https://github.com/milvus-io/milvus/pull/38902">(#38902</a>)</li>
+</ul>
+<h3 id="Critial-Bug-fixs" class="common-anchor-header">Corrección de errores críticos</h3><ul>
+<li>Corregidos fallos de búsqueda para claves primarias con índices<a href="https://github.com/milvus-io/milvus/pull/39390">(#39390</a>)</li>
+<li>Se ha corregido un posible problema de pérdida de datos causado por el reinicio de MixCoord y la descarga simultánea<a href="https://github.com/milvus-io/milvus/pull/39422">(#39422</a>)</li>
+<li>Se ha corregido un error de eliminación provocado por una concurrencia incorrecta entre las tareas de estadísticas y la compactación L0 tras reiniciar MixCoord<a href="https://github.com/milvus-io/milvus/pull/39460">(nº 39460</a>).</li>
+<li>Se ha corregido la incompatibilidad del índice invertido escalar al actualizar de 2.4 a 2.5<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Corrección de errores</h3><ul>
-<li>Se han corregido los problemas de consulta lenta causados por la granularidad de bloqueo gruesa durante la carga de varias columnas<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>)</li>
-<li>Se ha corregido un problema por el que el uso de alias podía provocar que un iterador recorriera la base de datos equivocada<a href="https://github.com/milvus-io/milvus/pull/39248">(#39248</a>)</li>
-<li>Solucionados los fallos de búsqueda para claves primarias con índices<a href="https://github.com/milvus-io/milvus/pull/39390">(#39390</a>)</li>
-<li>Se ha corregido un posible problema de pérdida de datos causado por el reinicio de MixCoord y la descarga simultánea<a href="https://github.com/milvus-io/milvus/pull/39422">(#39422</a>)</li>
-<li>Corregido un fallo de actualización de grupos de recursos al alterar la base de datos<a href="https://github.com/milvus-io/milvus/pull/39356">(#39356</a>)</li>
+<li>Solucionados los problemas de consultas lentas causadas por la granularidad de bloqueo grueso durante la carga de múltiples columnas<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>)</li>
+<li>Se ha corregido un problema por el que el uso de alias podía hacer que un iterador recorriera la base de datos incorrecta<a href="https://github.com/milvus-io/milvus/pull/39248">(nº 39248</a>).</li>
+<li>Se ha corregido un fallo en la actualización de grupos de recursos al modificar la base de datos<a href="https://github.com/milvus-io/milvus/pull/39356">(nº 39356</a>).</li>
 <li>Se ha corregido un problema esporádico por el que el índice tantivy no podía eliminar los archivos de índice durante la liberación<a href="https://github.com/milvus-io/milvus/pull/39434">(#39434</a>)</li>
-<li>Arreglado un fallo de borrado provocado por una concurrencia inadecuada entre las tareas de estadísticas y la compactación L0 después de reiniciar MixCoord<a href="https://github.com/milvus-io/milvus/pull/39460">(#39460</a>)</li>
 <li>Corregida la lentitud de indexación causada por tener demasiados hilos<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>)</li>
-<li>Solucionado un problema que impedía que se omitieran las comprobaciones de cuota de disco durante la importación masiva<a href="https://github.com/milvus-io/milvus/pull/39319">(#39319</a>)</li>
-<li>Resueltos los problemas de congelación causados por demasiados consumidores de cola de mensajes mediante la limitación de la concurrencia<a href="https://github.com/milvus-io/milvus/pull/38915">(#38915</a>)</li>
-<li>Corregidos los tiempos de espera de consulta causados por los reinicios de MixCoord durante las compactaciones a gran escala<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>)</li>
-<li>Corregida la incompatibilidad del índice escalar invertido al actualizar de 2.4 a 2.5<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
-<li>Se han corregido los problemas de desequilibrio de canales provocados por la inactividad de nodos<a href="https://github.com/milvus-io/milvus/pull/39200">(#39200</a>).</li>
-<li>Se ha solucionado un problema que podía provocar el bloqueo del equilibrio de canales.<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>
-<li>Se ha solucionado un problema por el que las comprobaciones de nivel de privilegio de grupos personalizados RBAC resultaban ineficaces<a href="https://github.com/milvus-io/milvus/pull/39224">(#39224</a>)</li>
+<li>Se ha solucionado un problema que impedía que se omitieran las comprobaciones de cuota de disco durante la importación masiva<a href="https://github.com/milvus-io/milvus/pull/39319">(nº 39319</a>).</li>
+<li>Resueltos los problemas de congelación causados por demasiados consumidores de cola de mensajes limitando la concurrencia<a href="https://github.com/milvus-io/milvus/pull/38915">(#38915</a>)</li>
+<li>Corregidos los tiempos de espera de las consultas causados por los reinicios de MixCoord durante las compactaciones a gran escala<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>)</li>
+<li>Solucionados los problemas de desequilibrio de canales causados por el tiempo de inactividad de los nodos<a href="https://github.com/milvus-io/milvus/pull/39200">(#39200</a>)</li>
+<li>Arreglado un problema que podía provocar que el balance de canales se atascara.<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>
+<li>Se ha solucionado un problema por el que las comprobaciones de nivel de privilegios de grupos personalizados RBAC resultaban ineficaces<a href="https://github.com/milvus-io/milvus/pull/39224">(#39224</a>)</li>
 <li>Corregido un fallo al recuperar el número de filas en índices vacíos<a href="https://github.com/milvus-io/milvus/pull/39210">(#39210</a>)</li>
 <li>Corrección de la estimación incorrecta de memoria para segmentos pequeños<a href="https://github.com/milvus-io/milvus/pull/38909">(#38909</a>)</li>
 </ul>

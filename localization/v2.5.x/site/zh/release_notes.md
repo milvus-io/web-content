@@ -43,17 +43,18 @@ title: 版本说明
 <tr><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>我们很高兴地宣布发布 Milvus 2.5.4，该版本引入了关键性能优化和新功能，如 PartitionKey 隔离、带 DAAT MaxScore 的稀疏索引以及增强的锁定机制。该版本还解决了多个错误，提高了整体稳定性和可靠性。我们鼓励您升级或试用这一最新版本，并期待您的反馈意见帮助我们不断完善 Milvus！</p>
-<h3 id="Features" class="common-anchor-header">功能特性</h3><ul>
-<li>支持 PartitionKey 隔离，以提高使用多个分区密钥时的性能<a href="https://github.com/milvus-io/milvus/pull/39245">（#39245</a>）。有关详细信息，请参阅<a href="/docs/zh/use-partition-key.md">使用分区密钥</a>。</li>
+<p>我们很高兴地宣布 Milvus 2.5.4 版本发布，该版本引入了关键性能优化和新功能，如 PartitionKey 隔离、带 DAAT MaxScore 的稀疏索引和增强的锁定机制。该版本的一个突出亮点是支持 10,000 个 Collections 和 100 万个分区，是多租户使用案例的一个重要里程碑。该版本还解决了多个错误，提高了整体稳定性和可靠性，其中两个关键错误可能会导致数据丢失。我们鼓励您升级或试用这一最新版本，并期待您的反馈意见帮助我们不断完善 Milvus！</p>
+<h3 id="Features" class="common-anchor-header">功能特点</h3><ul>
+<li>支持 PartitionKey 隔离，以提高使用多个分区 Key 时的性能<a href="https://github.com/milvus-io/milvus/pull/39245">（#39245</a>）。有关详细信息，请参阅<a href="/docs/zh/use-partition-key.md">使用分区密钥</a>。</li>
 <li>稀疏索引现在支持 DAAT MaxScore<a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>。有关详细信息，请参阅<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</li>
 <li>在表达式中添加对<code translate="no">is_null</code> 的支持<a href="https://github.com/milvus-io/milvus/pull/38931">(#38931</a>)</li>
 <li>可自定义根权限<a href="https://github.com/milvus-io/milvus/pull/39324">(#39324</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">改进</h3><ul>
-<li>缓存数据段的 delta 信息以加快查询协调器的运行<a href="https://github.com/milvus-io/milvus/pull/39349">(#39349</a>)</li>
-<li>在 Collections 层并发读取元数据，加快故障恢复<a href="https://github.com/milvus-io/milvus/pull/38900">（#38900）</a></li>
-<li>完善了查询节点<a href="https://github.com/milvus-io/milvus/pull/39282">（</a>QueryNode）中的锁粒度<a href="https://github.com/milvus-io/milvus/pull/39282">（＃39282</a>）、<a href="https://github.com/milvus-io/milvus/pull/38907">（＃38907</a></li>
+<li>在一个集群中支持 1 万个 Collections 和 100 万个分区<a href="https://github.com/milvus-io/milvus/pull/37630">(#37630</a>)</li>
+<li>缓存段的 delta 信息，以加快查询协调器的运行<a href="https://github.com/milvus-io/milvus/pull/39349">(#39349</a>)</li>
+<li>在 Collections 级别并发读取元数据，加快故障恢复<a href="https://github.com/milvus-io/milvus/pull/38900">（#38900）</a></li>
+<li>完善查询节点中的锁粒度<a href="https://github.com/milvus-io/milvus/pull/39282">（＃39282</a>）、<a href="https://github.com/milvus-io/milvus/pull/38907">（＃38907）</a></li>
 <li>通过使用 CStatus 来处理 NewCollection CGO 调用来统一风格<a href="https://github.com/milvus-io/milvus/pull/39303">（＃39303）</a></li>
 <li>如果未设置分区，则跳过生成分区限制器<a href="https://github.com/milvus-io/milvus/pull/38911">(#38911</a>)</li>
 <li>添加了更多 RESTful API 支持<a href="https://github.com/milvus-io/milvus/pull/38875">（#38875</a>）<a href="https://github.com/milvus-io/milvus/pull/39425">（#39425）</a></li>
@@ -62,25 +63,27 @@ title: 版本说明
 <li>减少 DataCoord 中的锁定，以加快加载和插入操作<a href="https://github.com/milvus-io/milvus/pull/38904">（#38904）</a></li>
 <li>在<code translate="no">SearchResult</code> 和<code translate="no">QueryResults</code> 中添加主字段名称<a href="https://github.com/milvus-io/milvus/pull/39222">（＃39222）</a></li>
 <li>将 binlog 大小和索引大小作为磁盘配额节流标准<a href="https://github.com/milvus-io/milvus/pull/38844">（＃38844）</a></li>
-<li>优化了全文搜索 knowhere/#1011 的内存使用情况</li>
+<li>优化了全文搜索 knowhere/#1011 的内存使用率</li>
 <li>为标量索引添加了版本控制功能<a href="https://github.com/milvus-io/milvus/pull/39236">(#39236</a>)</li>
 <li>通过避免不必要的复制，提高了从 RootCoord 获取 Collections 信息的速度<a href="https://github.com/milvus-io/milvus/pull/38902">(#38902</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">错误修复</h3><ul>
-<li>修正了在多列加载过程中由于粗锁定粒度而导致的查询缓慢问题<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>)</li>
-<li>修正了使用别名可能导致迭代器遍历错误数据库的问题<a href="https://github.com/milvus-io/milvus/pull/39248">（＃39248）</a></li>
-<li>修正了带索引的主键搜索失败的问题<a href="https://github.com/milvus-io/milvus/pull/39390">（#39390）</a></li>
+<h3 id="Critial-Bug-fixs" class="common-anchor-header">重要错误修复</h3><ul>
+<li>修复了带索引的主键搜索失败的问题<a href="https://github.com/milvus-io/milvus/pull/39390">(#39390</a>)</li>
 <li>修正了因同时重启 MixCoord 和刷新而导致的潜在数据丢失问题<a href="https://github.com/milvus-io/milvus/pull/39422">(#39422</a>)</li>
-<li>修正了更改数据库时资源组更新失败的问题<a href="https://github.com/milvus-io/milvus/pull/39356">（＃39356）</a></li>
-<li>修正了在发布过程中 tantivy 索引无法删除索引文件的偶发问题<a href="https://github.com/milvus-io/milvus/pull/39434">(#39434</a>)</li>
 <li>修正了在 MixCoord 重启后，统计任务和 L0 压缩之间不适当的并发所引发的删除失败<a href="https://github.com/milvus-io/milvus/pull/39460">(#39460</a>)</li>
-<li>修正了因线程过多而导致的索引运行缓慢的问题<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>)</li>
-<li>修复了在批量导入时防止跳过磁盘配额检查的问题<a href="https://github.com/milvus-io/milvus/pull/39319">(#39319</a>)</li>
+<li>修正了从 2.4 升级到 2.5 时标量倒置索引的不兼容性<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">错误修复</h3><ul>
+<li>修正了在多列加载过程中由于粗锁粒度而导致的缓慢查询问题<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>)</li>
+<li>修正了使用别名可能导致迭代器遍历错误数据库的问题<a href="https://github.com/milvus-io/milvus/pull/39248">（#39248）</a></li>
+<li>修正了更改数据库时资源组更新失败的问题<a href="https://github.com/milvus-io/milvus/pull/39356">（＃39356）</a></li>
+<li>修正了一个偶发问题，即 tantivy 索引在发布期间无法删除索引文件<a href="https://github.com/milvus-io/milvus/pull/39434">(#39434</a>)</li>
+<li>修正了因线程过多而导致索引运行缓慢的问题<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>)</li>
+<li>修复了在批量导入时无法跳过磁盘配额检查的问题<a href="https://github.com/milvus-io/milvus/pull/39319">(#39319</a>)</li>
 <li>通过限制并发量，解决了因消息队列消费者过多而导致的冻结问题<a href="https://github.com/milvus-io/milvus/pull/38915">（＃38915）</a></li>
 <li>修复了大规模压缩过程中因 MixCoord 重启而导致的查询超时问题<a href="https://github.com/milvus-io/milvus/pull/38926">（#38926）</a></li>
-<li>修正了从 2.4 升级到 2.5 时标量倒置索引的不兼容性<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
-<li>修正了节点宕机导致的通道不平衡问题<a href="https://github.com/milvus-io/milvus/pull/39200">(#39200</a>)</li>
-<li>修正了一个可能导致频道平衡卡住的问题。<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>
+<li>修复了节点宕机导致的通道不平衡问题<a href="https://github.com/milvus-io/milvus/pull/39200">（#39200）</a></li>
+<li>修正了一个可能导致通道平衡卡住的问题。<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>
 <li>修正了 RBAC 自定义组权限级别检查失效的问题<a href="https://github.com/milvus-io/milvus/pull/39224">(#39224</a>)</li>
 <li>修正了在空索引中检索行数失败的问题<a href="https://github.com/milvus-io/milvus/pull/39210">（＃39210）</a></li>
 <li>修正了对小片段内存估算不正确的问题<a href="https://github.com/milvus-io/milvus/pull/38909">（＃38909）</a></li>
@@ -239,9 +242,9 @@ title: 版本说明
 <p>Milvus 2.5 引入了内置的集群管理 WebUI，通过可视化 Milvus 复杂的运行环境信息，降低了系统维护难度。其中包括数据库和 Collections、网段、通道、依赖关系、节点健康状态、任务信息、缓慢查询等详细信息。</p>
 <p>详情请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
 <h4 id="Text-Match" class="common-anchor-header">文本匹配</h4><p>Milvus 2.5 利用<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>的分析器和索引进行文本预处理和索引构建，支持根据特定术语对文本数据进行精确的自然语言匹配。该功能主要用于满足特定条件的过滤搜索，并可结合标量过滤功能细化查询结果，允许在满足标量标准的向量内进行相似性搜索。</p>
-<p>有关详情，请参阅<a href="/docs/zh/analyzer-overview.md">分析器概述</a>和<a href="/docs/zh/keyword-match.md">文本匹配</a>。</p>
+<p>有关详细信息，请参阅<a href="/docs/zh/analyzer-overview.md">分析器概述</a>和<a href="/docs/zh/keyword-match.md">文本匹配</a>。</p>
 <h4 id="Bitmap-Index" class="common-anchor-header">位图索引</h4><p>Milvus 系列新增了一种标量数据索引。位图索引使用长度与行数相等的位数组来表示值的存在并加速搜索。</p>
-<p>Bitmap 索引传统上对低 Cardinal 字段非常有效，因为这些字段只有少量不同的值--例如，包含性别信息的列只有两个可能的值：男性和女性。</p>
+<p>位图索引传统上对低Cardinality字段很有效，这些字段的不同值数量不多--例如，包含性别信息的列只有两个可能的值：男性和女性。</p>
 <p>有关详细信息，请参阅<a href="/docs/zh/bitmap.md">位图索引</a>。</p>
 <h4 id="Nullable--Default-Value" class="common-anchor-header">可归零和默认值</h4><p>Milvus 现在支持为主键字段以外的标量字段设置可归零属性和默认值。对于标记为<code translate="no">nullable=True</code> 的标量字段，用户可以在插入数据时省略该字段；系统会将其视为空值或默认值（如果已设置），而不会出错。</p>
 <p>默认值和可归零属性为 Milvus 提供了更大的灵活性。用户在创建 Collections 时，可以利用这一功能来处理具有不确定值的字段。它还简化了从其他数据库系统到 Milvus 的数据迁移，允许处理包含空值的数据集，同时保留原始默认值设置。</p>

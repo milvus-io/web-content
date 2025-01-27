@@ -35,7 +35,7 @@ title: ベクトルフィールドのインデックス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusはインデックスファイルに保存されたメタデータを活用し、データを特殊な構造で整理することで、検索やクエリ時に要求された情報の迅速な取得を容易にします。</p>
+    </button></h2><p>Milvusは、インデックスファイルに格納されたメタデータを活用し、データを特殊な構造で整理することで、検索やクエリ時に要求された情報を迅速に取り出すことができます。</p>
 <p>Milvusは効率的な類似検索のために、いくつかのインデックスタイプとフィールド値をソートするメトリックを提供します。以下の表は、さまざまなベクトルフィールドタイプでサポートされているインデックスタイプとメトリクスの一覧です。現在、Milvusは浮動小数点埋め込み（しばしば浮動小数点ベクトルまたは密ベクトルとして知られています）、バイナリ埋め込み（バイナリベクトルとしても知られています）、スパース埋め込み（スパースベクトルとしても知られています）を含む様々なタイプのベクトルデータをサポートしています。詳しくは、「<a href="/docs/ja/index.md">メモリ内インデックスと</a> <a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照。</p>
 <div class="filter">
  <a href="#floating">浮動小数点埋め込み</a> <a href="#binary">バイナリ埋め込み</a> <a href="#sparse">スパース埋め込み</a></div>
@@ -60,7 +60,7 @@ title: ベクトルフィールドのインデックス
 <thead>
   <tr>
     <th class="tg-0pky" style="width: 204px;">メトリックタイプ</th>
-    <th class="tg-0pky">インデックスの種類</th>
+    <th class="tg-0pky">インデックス・タイプ</th>
   </tr>
 </thead>
 <tbody>
@@ -82,12 +82,15 @@ title: ベクトルフィールドのインデックス
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>スパース・インバーテッド・インデックス</li><li>スパースワンド</li></ul></td>
+    <td class="tg-0pky">sparse_inverted_index</td>
   </tr>
 </tbody>
 </table>
+<div class="alert note">
+<p>Milvus 2.5.4以降、<code translate="no">SPARSE_WAND</code> は非推奨となります。代わりに、互換性を維持しながら同等性を保つために<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> を使用することが推奨されます。詳細は<a href="/docs/ja/sparse_vector.md#Set-index-params-for-vector-field">スパースベクタを</a>参照してください。</p>
 </div>
-<p>頻繁にアクセスされるベクトル・フィールドとスカラー・フィールドの両方にインデックスを作成することを推奨する。</p>
+</div>
+<p>頻繁にアクセスされるベクトルフィールドとスカラーフィールドの両方にインデックスを作成することをお勧めします。</p>
 <h2 id="Preparations" class="common-anchor-header">準備<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,7 +106,7 @@ title: ベクトルフィールドのインデックス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/ja/manage-collections.md">Manage Collectionsで</a>説明したように、Milvusはコレクション作成リクエストで以下の条件のいずれかが指定された場合、コレクション作成時に自動的にインデックスを生成し、メモリにロードします：</p>
+    </button></h2><p><a href="/docs/ja/manage-collections.md">Manageコレクションで</a>説明したように、Milvusはコレクション作成リクエストで以下の条件が指定された場合、コレクション作成時に自動的にインデックスを生成し、メモリにロードします：</p>
 <ul>
 <li><p>ベクトルフィールドの次元とメトリックタイプ、または</p></li>
 <li><p>スキーマとインデックス・パラメータ。</p></li>
@@ -113,7 +116,7 @@ title: ベクトルフィールドのインデックス
 <p>インデックス作成の準備のために <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>を使用してMilvusサーバに接続し、コレクションをセットアップします。 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>および <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>インデックス作成の準備には <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>を使ってMilvusサーバーに接続し、コレクションを設定する。 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>および <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>インデックス作成の準備には <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>を使ってMilvusサーバーに接続し、コレクションをセットアップする。 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>および <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="language-javascript">
 <p>インデックス作成の準備には <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>を使ってMilvusサーバーに接続し、コレクションをセットアップする。 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>

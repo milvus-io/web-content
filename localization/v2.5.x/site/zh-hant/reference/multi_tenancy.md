@@ -19,7 +19,7 @@ title: 多租户策略
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在許多用例中，開發人員希望運行一個 Milvus 集群並為多個租戶提供服務，例如幾個產品團隊或數百萬最終用戶。本指南說明在 Milvus 上實現多租戶的幾種不同策略。</p>
+    </button></h1><p>在許多用例中，開發人員希望運行一個 Milvus 集群並為多個租戶提供服務，例如幾個產品團隊或數百萬的最終用戶。本指南說明在 Milvus 上實現多租戶的幾種不同策略。</p>
 <p>Milvus 的設計支援資料庫、集合或分割層級的多重租用。多租用的目的是將資料和資源彼此分開。在不同的層級實施多租用可以達到不同程度的隔離，但也涉及不同的開銷。在此，我們將解釋它們之間的權衡。</p>
 <h2 id="Database-oriented-multi-tenancy" class="common-anchor-header">面向資料庫的多租戶<button data-href="#Database-oriented-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,11 +81,11 @@ title: 多租户策略
 <tr><th></th><th>資料隔離</th><th>搜尋效能</th><th>最大租戶數</th><th>推薦方案</th></tr>
 </thead>
 <tbody>
-<tr><td>資料庫導向</td><td>強大</td><td>強</td><td>64</td><td>適用於需要集合隨專案而異的情況，特別適合組織內各部門間的資料隔離。</td></tr>
+<tr><td>資料庫導向</td><td>強大</td><td>強</td><td>64</td><td>適用於需要集合隨專案而異者，特別適合組織內各部門間的資料隔離。</td></tr>
 <tr><td>一個集合適用於所有</td><td>弱</td><td>中等</td><td>不適用</td><td>適用於資源有限且對資料隔離並不敏感的企業。</td></tr>
-<tr><td>每個租戶一個集合</td><td>強</td><td>強</td><td>少於 10,000</td><td>適用於每個群集只有少於 10,000 個租戶的情況。</td></tr>
-<tr><td>每個租戶一個分割區</td><td>中</td><td>強</td><td>4,096</td><td>適用於每個群集只有少於 4,096 位租用者的情況。</td></tr>
-<tr><td>基於分割區金鑰</td><td>中</td><td>強</td><td>10,000,000+</td><td>適用於預測租戶會快速增加到數百萬的情況。</td></tr>
+<tr><td>每個租戶一個集合</td><td>強</td><td>強</td><td>少於 10,000</td><td>適用於每個群集只有少於 10,000 位租用者的情況。</td></tr>
+<tr><td>每個租戶一個分割區</td><td>中</td><td>強</td><td>1,024</td><td>適用於每個群集只有少於 1,024 位租用者的情況。</td></tr>
+<tr><td>基於分割區金鑰</td><td>中</td><td>強</td><td>10,000,000+</td><td>適用於預測租戶數快速增加到數百萬的企業。</td></tr>
 </tbody>
 </table>
 <h2 id="Whats-next" class="common-anchor-header">下一步是什麼<button data-href="#Whats-next" class="anchor-icon" translate="no">

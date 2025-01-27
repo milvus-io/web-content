@@ -20,7 +20,7 @@ title: In-Memory-Index
         ></path>
       </svg>
     </button></h1><p>Dieses Thema listet verschiedene Arten von In-Memory-Indizes auf, die von Milvus unterstützt werden, die Szenarien, für die jeder von ihnen am besten geeignet ist, und die Parameter, die Benutzer konfigurieren können, um eine bessere Suchleistung zu erzielen. Für On-Disk-Indizes, siehe <strong><a href="/docs/de/disk_index.md">On-Disk-Index</a></strong>.</p>
-<p>Indizierung ist der Prozess der effizienten Organisation von Daten und spielt eine wichtige Rolle bei der Nützlichkeit der Ähnlichkeitssuche, indem sie zeitaufwändige Abfragen auf großen Datenbeständen drastisch beschleunigt.</p>
+<p>Indizierung ist der Prozess der effizienten Organisation von Daten und spielt eine wichtige Rolle, wenn es darum geht, die Ähnlichkeitssuche nützlich zu machen, indem zeitaufwändige Abfragen auf großen Datenbeständen drastisch beschleunigt werden.</p>
 <p>Um die Abfrageleistung zu verbessern, können Sie für jedes Vektorfeld <a href="/docs/de/index-vector-fields.md">einen Indextyp angeben</a>.</p>
 <div class="alert note">
 Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automatisch den alten Index, wenn der Indextyp gewechselt wird.</div>
@@ -39,7 +39,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die meisten der von Milvus unterstützten Vektorindex-Typen verwenden ANNS-Algorithmen (approximate nearest neighbors search). Verglichen mit der genauen Suche, die in der Regel sehr zeitaufwändig ist, beschränkt sich die Kernidee von ANNS nicht mehr darauf, das genaueste Ergebnis zu liefern, sondern sucht nur noch nach Nachbarn des Ziels. ANNS verbessert die Effizienz des Abrufs, indem es die Genauigkeit innerhalb eines akzeptablen Bereichs opfert.</p>
+    </button></h2><p>Die meisten der von Milvus unterstützten Vektorindex-Typen verwenden Algorithmen zur approximativen Suche nach den nächsten Nachbarn (ANNS). Verglichen mit der genauen Suche, die in der Regel sehr zeitaufwändig ist, beschränkt sich die Kernidee von ANNS nicht mehr darauf, das genaueste Ergebnis zu liefern, sondern sucht nur noch nach Nachbarn des Ziels. ANNS verbessert die Effizienz des Abrufs, indem es die Genauigkeit innerhalb eines akzeptablen Bereichs opfert.</p>
 <p>Je nach Implementierungsmethode kann der ANNS-Vektorindex in vier Typen eingeteilt werden: Baum-basiert, Graph-basiert, Hash-basiert und Quantisierungs-basiert.</p>
 <h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">In Milvus unterstützte Indizes<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,16 +60,19 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <div class="filter">
  <a href="#floating">Fließkomma-Einbettungen</a> <a href="#binary">Binäre Einbettungen</a> <a href="#sparse">Sparse Embeddings</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indizes für Fließkomma-Einbettungen</h3><p>Für 128-dimensionale Fließkomma-Einbettungen (Vektoren) beträgt der benötigte Speicherplatz 128 * die Größe von float = 512 Byte. Die für Fließkomma-Einbettungen verwendeten <a href="/docs/de/metric.md">Abstandsmetriken</a> sind der euklidische Abstand (<code translate="no">L2</code>) und das innere Produkt (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indizes für Fließkomma-Einbettungen</h3><p>Für 128-dimensionale Fließkomma-Einbettungen (Vektoren) beträgt der Speicherplatzbedarf 128 * die Größe von float = 512 Byte. Die für Fließkomma-Einbettungen verwendeten <a href="/docs/de/metric.md">Abstandsmetriken</a> sind der euklidische Abstand (<code translate="no">L2</code>) und das innere Produkt (<code translate="no">IP</code>).</p>
 <p>Diese Arten von Indizes umfassen <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code> und <code translate="no">SCANN</code> für CPU-basierte ANN-Suchen.</p>
 </div>
 <div class="filter-binary">
-<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indizes für binäre Einbettungen</h3><p>Für 128-dimensionale binäre Einbettungen beträgt der Speicherplatzbedarf 128 / 8 = 16 Byte. Und die für binäre Einbettungen verwendeten Abstandsmetriken sind <code translate="no">JACCARD</code> und <code translate="no">HAMMING</code>.</p>
+<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indizes für binäre Einbettungen</h3><p>Für 128-dimensionale binäre Einbettungen beträgt der Speicherplatzbedarf 128 / 8 = 16 Bytes. Und die für binäre Einbettungen verwendeten Abstandsmetriken sind <code translate="no">JACCARD</code> und <code translate="no">HAMMING</code>.</p>
 <p>Zu dieser Art von Indizes gehören <code translate="no">BIN_FLAT</code> und <code translate="no">BIN_IVF_FLAT</code>.</p>
 </div>
 <div class="filter-sparse">
 <h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indizes für spärliche Einbettungen</h3><p>Indizes für spärliche Einbettungen unterstützen nur die Metriken <code translate="no">IP</code> und <code translate="no">BM25</code> (für Volltextsuche).</p>
-<p>Zu den Indexarten gehören <code translate="no">SPARSE_INVERTED_INDEX</code> und <code translate="no">SPARSE_WAND</code>.</p>
+<p>Unterstützter Index-Typ für spärliche Einbettungen: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
+<div class="alert note">
+<p>Ab Milvus 2.5.4 wird <code translate="no">SPARSE_WAND</code> veraltet sein. Stattdessen wird empfohlen, <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> zu verwenden, um Äquivalenz und Kompatibilität zu gewährleisten. Weitere Informationen finden Sie unter <a href="/docs/de/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
+</div>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
@@ -228,22 +231,14 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
     <td>Invertierter Index</td>
     <td><ul>
       <li>Hängt von relativ kleinen Datensätzen ab.</li>
-      <li>Erfordert eine 100%ige Wiedererkennungsrate.</li>
-    </ul></td>
-  </tr>
-  <tr>
-    <td>SPARSE_WAND</td>
-    <td>Invertierter Index</td>
-    <td><ul>
-      <li><a href="https://dl.acm.org/doi/10.1145/956863.956944">Schwach-AND-Algorithmus</a> beschleunigt</li>
-      <li>Kann eine erhebliche Geschwindigkeitsverbesserung bei nur geringen Einbußen bei der Wiederauffindbarkeit erzielen.</li>
+      <li>Erfordert eine Wiedererkennungsrate von 100%.</li>
     </ul></td>
   </tr>
 </tbody>
 </table>
 </div>
 <div class="filter-floating">
-<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>Für Anwendungen der Vektorähnlichkeitssuche, die eine perfekte Genauigkeit erfordern und von relativ kleinen Datensätzen (im Millionenbereich) abhängen, ist der FLAT-Index eine gute Wahl. FLAT komprimiert die Vektoren nicht und ist der einzige Index, der exakte Suchergebnisse garantieren kann. Die Ergebnisse von FLAT können auch als Vergleichspunkt für Ergebnisse anderer Indizes verwendet werden, die weniger als 100 % Recall haben.</p>
+<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>Für Anwendungen der Vektorähnlichkeitssuche, die perfekte Genauigkeit erfordern und von relativ kleinen Datensätzen (im Millionenbereich) abhängen, ist der FLAT-Index eine gute Wahl. FLAT komprimiert die Vektoren nicht und ist der einzige Index, der exakte Suchergebnisse garantieren kann. Die Ergebnisse von FLAT können auch als Vergleichspunkt für Ergebnisse anderer Indizes verwendet werden, die weniger als 100 % Recall haben.</p>
 <p>FLAT ist genau, weil er einen erschöpfenden Suchansatz verfolgt, d. h. für jede Abfrage wird die Zieleingabe mit jedem Satz von Vektoren in einem Datensatz verglichen. Dadurch ist FLAT der langsamste Index auf unserer Liste und eignet sich schlecht für die Abfrage umfangreicher Vektordaten. Für den FLAT-Index in Milvus sind keine Parameter erforderlich, und seine Verwendung erfordert kein Datentraining.</p>
 <ul>
 <li><p>Suchparameter</p>
@@ -289,7 +284,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl der Buckets, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche, der den Suchvorgang beendet, wenn die Anzahl der aufeinander folgenden leeren Buckets den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl von Bereichen, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche und beendet den Suchvorgang, wenn die Anzahl der aufeinanderfolgenden leeren Bereiche den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -333,7 +328,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 </ul></li>
 </ul>
 <h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Produktquantisierung) zerlegt den ursprünglichen hochdimensionalen Vektorraum gleichmäßig in kartesische Produkte von <code translate="no">m</code> niedrigdimensionalen Vektorräumen und quantisiert dann die zerlegten niedrigdimensionalen Vektorräume. Anstatt die Abstände zwischen dem Zielvektor und dem Zentrum aller Einheiten zu berechnen, ermöglicht die Produktquantisierung die Berechnung der Abstände zwischen dem Zielvektor und dem Clustering-Zentrum jedes niedrigdimensionalen Raums und reduziert die Zeit- und Raumkomplexität des Algorithmus erheblich.</p>
-<p>IVF_PQ führt das IVF-Index-Clustering durch, bevor das Produkt der Vektoren quantisiert wird. Seine Indexdatei ist noch kleiner als die von IVF_SQ8, aber auch hier kommt es zu einem Verlust an Genauigkeit bei der Suche nach Vektoren.</p>
+<p>IVF_PQ führt das IVF-Index-Clustering durch, bevor das Produkt der Vektoren quantisiert wird. Seine Indexdatei ist sogar noch kleiner als IVF_SQ8, aber auch hier kommt es zu einem Verlust an Genauigkeit bei der Suche nach Vektoren.</p>
 <div class="alert note">
 <p>Die Parameter für die Indexerstellung und die Suchparameter variieren je nach Milvus-Verteilung. Wählen Sie zunächst Ihre Milvus-Distribution aus.</p>
 </div>
@@ -441,7 +436,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 </li>
 </ul>
 <h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>Skalarquantisierung (SQ) ist eine Technik zur Diskretisierung von Fließkommadaten in eine endliche Menge von Werten auf der Grundlage ihres Betrags. <strong>SQ6</strong> steht beispielsweise für die Quantisierung in (2^6 = 64) diskrete Werte, wobei jede Fließkommazahl mit 6 Bits kodiert wird. In ähnlicher Weise quantisiert <strong>SQ8</strong> die Daten in (2^8 = 256) diskrete Werte, wobei jede Fließkommazahl durch 8 Bits dargestellt wird. Durch diese Quantisierung wird der Speicherplatzbedarf reduziert, während die wesentliche Struktur der Daten für eine effiziente Verarbeitung erhalten bleibt.</p>
-<p>In Kombination mit SQ bietet HNSW_SQ einen kontrollierbaren Kompromiss zwischen Indexgröße und Genauigkeit, wobei eine hohe Abfrageleistung pro Sekunde (QPS) beibehalten wird. Im Vergleich zu Standard-HNSW führt es zu einer geringfügigen Erhöhung der Indexaufbauzeit.</p>
+<p>In Kombination mit SQ bietet HNSW_SQ einen kontrollierbaren Kompromiss zwischen Indexgröße und Genauigkeit, wobei eine hohe Abfrageleistung pro Sekunde (QPS) beibehalten wird. Im Vergleich zu Standard-HNSW führt dies zu einer bescheidenen Erhöhung der Indexaufbauzeit.</p>
 <ul>
 <li><p>Parameter für den Indexaufbau</p>
 <table>
@@ -596,33 +591,12 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>Der Anteil der kleinen Vektorwerte, die während des Indizierungsprozesses ausgeschlossen werden. Diese Option ermöglicht eine Feinabstimmung des Indizierungsprozesses, indem sie einen Kompromiss zwischen Effizienz und Genauigkeit herstellt, indem sie kleine Werte beim Aufbau des Index unberücksichtigt lässt.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>Der für den Aufbau und die Abfrage des Index verwendete Algorithmus. Details finden Sie unter <a href="/docs/de/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (Standard), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
 </tbody>
 </table>
-</li>
-<li><p>Suchparameter</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>Der Anteil der kleinen Vektorwerte, die während des Suchvorgangs ausgeschlossen werden. Diese Option ermöglicht eine Feinabstimmung des Suchprozesses, indem sie das Verhältnis der kleinsten Werte im Abfragevektor angibt, die ignoriert werden sollen. Sie hilft, ein Gleichgewicht zwischen Suchgenauigkeit und Leistung herzustellen. Je kleiner der Wert für <code translate="no">drop_ratio_search</code> eingestellt wird, desto weniger tragen diese kleinen Werte zur endgültigen Bewertung bei. Durch das Ignorieren einiger kleiner Werte kann die Suchleistung bei minimalen Auswirkungen auf die Genauigkeit verbessert werden.</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-</ul>
-<h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND</h3><p>Dieser Index weist Ähnlichkeiten mit <code translate="no">SPARSE_INVERTED_INDEX</code> auf, verwendet jedoch den <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND-Algorithmus</a>, um die Anzahl der vollständigen IP-Abstandsbewertungen während des Suchprozesses weiter zu reduzieren.</p>
-<p>Unsere Tests haben ergeben, dass <code translate="no">SPARSE_WAND</code> im Allgemeinen schneller ist als die anderen Methoden. Allerdings kann sich die Leistung mit zunehmender Dichte der Vektoren schnell verschlechtern. Um dieses Problem zu beheben, kann die Einführung eines <code translate="no">drop_ratio_search</code>, das nicht Null ist, die Leistung erheblich verbessern, während nur ein minimaler Genauigkeitsverlust entsteht. Weitere Informationen finden Sie unter <a href="/docs/de/sparse_vector.md">Sparse Vector</a>.</p>
-<ul>
-<li><p>Parameter für den Indexaufbau</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>Der Anteil der kleinen Vektorwerte, die während des Indizierungsprozesses ausgeschlossen werden. Diese Option ermöglicht eine Feinabstimmung des Indizierungsprozesses, indem sie einen Kompromiss zwischen Effizienz und Genauigkeit herstellt, indem sie kleine Werte beim Aufbau des Index unberücksichtigt lässt.</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
+  <div class="alert note">
+<p>Der Parameter <code translate="no">drop_ratio_build</code> ist seit Milvus v2.5.4 veraltet. Er kann immer noch während des Indexaufbaus akzeptiert werden, hat aber keine Auswirkungen mehr auf den Index.</p>
+  </div>
 </li>
 <li><p>Suchparameter</p>
 <table>

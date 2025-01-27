@@ -244,7 +244,7 @@ title: Référence de la commande Milvus_CLI
         ></path>
       </svg>
     </button></h2><p>Créer un rôle dans Milvus</p>
-<p><h3 id="create-role">Syntaxe</h3></p>
+<p><h3 id="create-role">Syntaxe de la création d'un rôle</h3></p>
 <pre><code translate="no" class="language-shell">create role -r (text)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">Options</h3><table>
@@ -287,7 +287,7 @@ title: Référence de la commande Milvus_CLI
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-Nom de la collection</td><td style="text-align:left">Le nom de la collection.</td></tr>
 <tr><td style="text-align:left">-a</td><td style="text-align:left">-Nom de l'alias</td><td style="text-align:left">L'alias.</td></tr>
-<tr><td style="text-align:left">-A</td><td style="text-align:left">-alter</td><td style="text-align:left">(Facultatif) Indicateur permettant de transférer l'alias vers une collection spécifique.</td></tr>
+<tr><td style="text-align:left">-A</td><td style="text-align:left">-alter</td><td style="text-align:left">(Facultatif) Indicateur permettant de transférer l'alias dans une collection spécifique.</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide à l'utilisation de la commande.</td></tr>
 </tbody>
 </table>
@@ -416,7 +416,7 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
 Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
@@ -443,7 +443,7 @@ Timeout []:
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">Options</h3><table>
 <thead>
-<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description</th></tr>
+<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description de l'option</th></tr>
 </thead>
 <tbody>
 <tr><td style="text-align:left">-u</td><td style="text-align:left">-Nom d'utilisateur</td><td style="text-align:left">Le nom d'utilisateur.</td></tr>

@@ -44,7 +44,7 @@ title: IVF_PQ
 <li><strong>Índice invertido:</strong> Se crea un índice que asigna el centroide de cada cluster a la lista de vectores asignados a ese cluster.</li>
 <li><strong>Búsqueda:</strong> Cuando se buscan los vecinos más cercanos, el algoritmo de búsqueda compara el vector de consulta con los centroides de los clústeres y selecciona el clúster o clústeres más prometedores. A continuación, la búsqueda se reduce a los vectores que se encuentran dentro de esos clusters seleccionados.</li>
 </ol>
-<p>Para obtener más información sobre los detalles técnicos, consulte <a href="https://zilliverse.feishu.cn/wiki/MXiGwmnq6i5MswkryYVcMklVnld">IVF_FLAT</a>.</p>
+<p>Para obtener más información sobre los detalles técnicos, consulte <a href="/docs/es/ivf-flat.md">IVF_FLAT</a>.</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>La cuantificación de productos (PQ)</strong> es un método de compresión de vectores de alta dimensión que reduce significativamente los requisitos de almacenamiento y permite realizar rápidas operaciones de búsqueda de similitudes.</p>
 <p>El proceso PQ consta de las siguientes etapas</p>
 <p>
@@ -134,7 +134,7 @@ index_params.add_index(
 </ul>
 <p>Para conocer más parámetros de construcción disponibles para el índice <code translate="no">IVF_PQ</code>, consulte <a href="#Index-building-params">Parámetros de construcción del índice</a>.</p></li>
 </ul>
-<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice al método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
+<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando el método <code translate="no">create_index()</code> directamente o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Búsqueda en el índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

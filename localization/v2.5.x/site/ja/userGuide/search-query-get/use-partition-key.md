@@ -17,7 +17,7 @@ title: パーティション・キーの使用
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>パーティション・キーはパーティションに基づく検索最適化ソリューションです。特定のスカラー・フィールドをパーティション・キーとして指定し、検索時にパーティション・キーに基づくフィルタリング条件を指定することで、検索範囲を複数のパーティションに絞り込み、検索効率を向上させることができる。本稿では、パーティション・キーの使い方と注意点について紹介する。</p>
+    </button></h1><p>パーティション・キーはパーティションに基づく検索最適化ソリューションです。特定のスカラー・フィールドをパーティション・キーとして指定し、検索時にパーティション・キーに基づくフィルタリング条件を指定することで、検索範囲を複数のパーティションに絞り込み、検索効率を向上させることができる。本稿では、パーティション・キーの使い方と注意点を紹介する。</p>
 <h2 id="Overview​" class="common-anchor-header">概要<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -164,7 +164,7 @@ schema.addField(AddFieldReq.builder()​
     }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers​" class="common-anchor-header">パーティション番号の設定</h3><p>コレクション内のスカラーフィールドをパーティションキーに指定すると、Milvusは自動的にコレクション内に16のパーティションを作成します。Milvusはエンティティを受け取ると、そのエンティティのPartition Key値に基づいてパーティションを選択し、そのパーティションにエンティティを格納します。</p>
+<h3 id="Set-Partition-Numbers​" class="common-anchor-header">パーティション番号の設定</h3><p>コレクション内のスカラーフィールドをパーティションキーに指定すると、Milvusは自動的にコレクション内に16のパーティションを作成します。Milvusはエンティティを受信すると、このエンティティのパーティションキー値に基づいてパーティションを選択し、そのパーティションにエンティティを格納します。</p>
 <p>また、コレクションと一緒に作成するパーティションの数を決定することもできます。これは、パーティション・キーとして指定されたスカラー・フィールドがある場合にのみ有効です。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -243,3 +243,82 @@ export <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27
 export <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p><code translate="no">partition_key</code> 、パーティション・キーとして指定されているフィールド名に置き換える必要があります。</p>
+</div>
+<h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">パーティション・キーの分離を使用する<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>マルチテナントのシナリオでは、テナントIDに関連するスカラー・フィールドをパーティション・キーとして指定し、このスカラー・フィールドの特定の値に基づいてフィルターを作成することができる。同様のシナリオにおける検索パフォーマンスをさらに向上させるために、Milvusはパーティションキーアイソレーション機能を導入しています。</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
+   </span> <span class="img-wrapper"> <span>パーティションキーの分離</span> </span></p>
+<p>上図のように、Milvusはパーティションキーの値に基づいてエンティティをグループ化し、これらのグループごとに個別のインデックスを作成します。検索要求を受け取ると、Milvusはフィルタリング条件に指定されたパーティションキー値に基づいてインデックスを検索し、インデックスに含まれるエンティティ内で検索範囲を制限するため、検索中に無関係なエンティティをスキャンすることがなくなり、検索パフォーマンスが大幅に向上します。 Partition Key Isolationを有効にすると、Milvusが一致するインデックスに含まれるエンティティ内で検索範囲を制限できるように、パーティションキーベースのフィルタに特定の値のみを含めることができます。</p>
+<div class="alert note">
+<p>現在、パーティションキー分離機能は、インデックスタイプが HNSW に設定された検索にのみ適用されます。</p>
+</div>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">パーティション・キー分離の有効化</h3><p>以下のコード例は、パーティション・キー分離を有効にする方法を示しています。</p>
+<div class="multipleCode">
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
+<pre><code translate="no" class="language-python">client.create_collection(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    schema=schema,
+    <span class="hljs-comment"># highlight-next-line</span>
+    properties={<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">True</span>}
+)
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">collection</span>.<span class="hljs-property">request</span>.<span class="hljs-property">CreateCollectionReq</span>;
+
+<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">String</span>&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>);
+
+<span class="hljs-title class_">CreateCollectionReq</span> createCollectionReq = <span class="hljs-title class_">CreateCollectionReq</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_">collectionSchema</span>(schema)
+        .<span class="hljs-title function_">numPartitions</span>(<span class="hljs-number">1024</span>)
+        .<span class="hljs-title function_">properties</span>(properties)
+        .<span class="hljs-title function_">build</span>();
+client.<span class="hljs-title function_">createCollection</span>(createCollectionReq);
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">true</span>
+    }
+})
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
+    &quot;partitionKeyIsolation&quot;: true
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;myCollection\&quot;,
+    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
+    \&quot;params\&quot;: <span class="hljs-variable">$params</span>
+}&quot;</span>
+
+<button class="copy-code-btn"></button></code></pre>
+<p>パーティション・キー・アイソレーションを有効にした後も、パーティション・キーの<a href="#Set-Partition-Numbers">設定と</a>パーティション数の設定で説明するように、パーティション・キーとパーティション数を設定できます。パーティション・キー・ベース・フィルターには、特定のパーティション・キーの値だけを含める必要があることに注意してください。</p>

@@ -242,19 +242,19 @@ summary: 了解使用 Milvus 時的限制。
     </button></h2><p>下表概述了不同索引類型對各種搜尋行為的支援。</p>
 <table>
 <thead>
-<tr><th></th><th>HNSW</th><th>DISKANN</th><th>平面</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>Gpu_brute_force</th><th>sparse_inverted_index</th><th>SPARSE_WAND</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
+<tr><th></th><th>HNSW</th><th>DISKANN</th><th>平面</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>Gpu_brute_force</th><th>稀疏反轉索引</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
 </thead>
 <tbody>
-<tr><td>基本搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
-<tr><td>分區搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
-<tr><td>檢索原始資料的基本搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
-<tr><td>基本搜尋與分頁</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
-<tr><td>篩選搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
-<tr><td>範圍搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>無</td><td>無</td><td>無</td><td>是</td><td>是</td></tr>
-<tr><td>群組搜尋</td><td>有</td><td>是</td><td>有</td><td>是</td><td>是</td><td>無</td><td>無</td><td>無</td><td>無</td><td>無</td><td>無</td><td>無</td><td>無</td><td>無</td><td>無</td></tr>
-<tr><td>使用迭代器搜尋</td><td>有</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>無</td><td>無</td><td>無</td><td>無</td><td>無</td></tr>
-<tr><td>混合搜尋</td><td>有</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是(僅 RRFRanker)</td><td>是(僅 RRFRanker)</td><td>是</td><td>是</td></tr>
-<tr><td>查詢/獲取</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
-<tr><td>使用迭代器查詢</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
+<tr><td>基本搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
+<tr><td>分區搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
+<tr><td>基本搜尋與原始資料擷取</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
+<tr><td>基本搜尋與分頁</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
+<tr><td>篩選搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
+<tr><td>範圍搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
+<tr><td>群組搜尋</td><td>有</td><td>是</td><td>有</td><td>是</td><td>是</td><td>無</td><td>無</td><td>無</td><td>無</td><td>無</td><td>無</td><td>是</td><td>無</td><td>無</td></tr>
+<tr><td>使用迭代器搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>無</td><td>無</td></tr>
+<tr><td>混合搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是(僅 RRFRanker)</td><td>是</td><td>是</td></tr>
+<tr><td>查詢/獲取</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
+<tr><td>使用迭代器查詢</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
 </tbody>
 </table>

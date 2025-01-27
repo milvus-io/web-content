@@ -242,19 +242,19 @@ summary: Pelajari tentang batasan-batasan saat menggunakan Milvus.
     </button></h2><p>Tabel berikut ini memberikan gambaran umum tentang dukungan untuk berbagai perilaku pencarian di berbagai jenis indeks.</p>
 <table>
 <thead>
-<tr><th></th><th>HNSW</th><th>DISKANN</th><th>DATAR</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>PEMINDAIAN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>INDEKS_TERBALIK_JARANG</th><th>SPARSE_WAND</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
+<tr><th></th><th>HNSW</th><th>DISKANN</th><th>DATAR</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>PEMINDAIAN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>SPARSE_INVERTED_INDEX</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
 </thead>
 <tbody>
-<tr><td>Pencarian dasar</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
-<tr><td>Pencarian partisi</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
-<tr><td>Pencarian dasar dengan data mentah yang diambil</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
-<tr><td>Pencarian dasar dengan penomoran halaman</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
-<tr><td>Pencarian yang difilter</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
-<tr><td>Pencarian rentang</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Ya</td></tr>
-<tr><td>Mengelompokkan pencarian</td><td>Ya</td><td>Tidak</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td></tr>
-<tr><td>Cari dengan iterator</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td></tr>
-<tr><td>Pencarian hibrida</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya (Hanya RRFRanker)</td><td>Ya (Hanya RRFRanker)</td><td>Ya</td><td>Ya</td></tr>
-<tr><td>Query/Get</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
-<tr><td>Kueri dengan iterator</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
+<tr><td>Pencarian dasar</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
+<tr><td>Pencarian partisi</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
+<tr><td>Pencarian dasar dengan data mentah yang diambil</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
+<tr><td>Pencarian dasar dengan penomoran halaman</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
+<tr><td>Pencarian yang difilter</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
+<tr><td>Pencarian rentang</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
+<tr><td>Mengelompokkan pencarian</td><td>Ya</td><td>Tidak</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Tidak</td><td>Tidak</td></tr>
+<tr><td>Mencari dengan iterator</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Tidak</td><td>Tidak</td></tr>
+<tr><td>Pencarian hibrida</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya (Hanya RRFRanker)</td><td>Ya</td><td>Ya</td></tr>
+<tr><td>Query/Get</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
+<tr><td>Kueri dengan iterator</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
 </tbody>
 </table>

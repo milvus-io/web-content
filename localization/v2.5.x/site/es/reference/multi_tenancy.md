@@ -84,8 +84,8 @@ title: Estrategias multiarrendamiento
 <tr><td>Orientado a la base de datos</td><td>Fuerte</td><td>Fuerte</td><td>64</td><td>Para aquellos que requieren que las colecciones varíen con los proyectos, especialmente adecuado para el aislamiento de datos entre los departamentos de su organización.</td></tr>
 <tr><td>Una colección para todos</td><td>Débil</td><td>Media</td><td>N/A</td><td>Para aquellos que tienen recursos limitados y son insensibles al aislamiento de datos.</td></tr>
 <tr><td>Una recopilación por inquilino</td><td>Fuerte</td><td>Fuerte</td><td>Menos de 10.000</td><td>Para aquellos que tienen menos de 10.000 inquilinos por clúster.</td></tr>
-<tr><td>Una partición por inquilino</td><td>Media</td><td>Fuerte</td><td>4,096</td><td>Para aquellos que tienen menos de 4.096 inquilinos por colección.</td></tr>
-<tr><td>Basado en clave de partición</td><td>Media</td><td>Fuerte</td><td>10,000,000+</td><td>Para aquellos que prevén un rápido aumento de inquilinos hasta millones.</td></tr>
+<tr><td>Una partición por inquilino</td><td>Media</td><td>Fuerte</td><td>1,024</td><td>Para aquellos que tienen menos de 1.024 inquilinos por colección.</td></tr>
+<tr><td>Basado en clave de partición</td><td>Media</td><td>Fuerte</td><td>10,000,000+</td><td>Para aquellos que prevén un rápido aumento de inquilinos a millones.</td></tr>
 </tbody>
 </table>
 <h2 id="Whats-next" class="common-anchor-header">Lo que viene después<button data-href="#Whats-next" class="anchor-icon" translate="no">

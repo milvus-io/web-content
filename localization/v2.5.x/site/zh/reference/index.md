@@ -68,8 +68,11 @@ title: 内存索引
 <p>这类索引包括<code translate="no">BIN_FLAT</code> 和<code translate="no">BIN_IVF_FLAT</code> 。</p>
 </div>
 <div class="filter-sparse">
-<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">稀疏嵌入式索引</h3><p>稀疏嵌入的索引仅支持<code translate="no">IP</code> 和<code translate="no">BM25</code> （用于全文检索）度量。</p>
-<p>这类索引包括<code translate="no">SPARSE_INVERTED_INDEX</code> 和<code translate="no">SPARSE_WAND</code> 。</p>
+<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">稀疏嵌入式索引</h3><p>稀疏嵌入式索引仅支持<code translate="no">IP</code> 和<code translate="no">BM25</code> （用于全文检索）度量。</p>
+<p>稀疏嵌入式支持的索引类型：<code translate="no">SPARSE_INVERTED_INDEX</code> 。</p>
+<div class="alert note">
+<p>从 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已被弃用。建议在保持兼容性的同时，使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 作为等价索引。更多信息，请参阅<a href="/docs/zh/sparse_vector.md#Set-index-params-for-vector-field">稀疏向量</a>。</p>
+</div>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
@@ -119,7 +122,7 @@ title: 内存索引
       <ul>
         <li>高速查询</li>
         <li>内存资源有限</li>
-        <li>召回率略有降低</li>
+        <li>可略微降低召回率</li>
       </ul>
     </td>
   </tr>
@@ -231,19 +234,11 @@ title: 内存索引
       <li>要求 100%的召回率。</li>
     </ul></td>
   </tr>
-  <tr>
-    <td>稀疏反向索引</td>
-    <td>反向索引</td>
-    <td><ul>
-      <li><a href="https://dl.acm.org/doi/10.1145/956863.956944">弱 AND</a>算法加速</li>
-      <li>在牺牲少量召回率的同时，速度也有明显提高。</li>
-    </ul></td>
-  </tr>
 </tbody>
 </table>
 </div>
 <div class="filter-floating">
-<h3 id="FLAT" class="common-anchor-header">平面</h3><p>对于要求完美准确性并依赖相对较小（百万量级）数据集的向量相似性搜索应用，FLAT 索引是一个不错的选择。FLAT 不压缩向量，是唯一能保证精确搜索结果的索引。FLAT 的结果还可以作为其他召回率低于 100% 的索引所产生结果的比较点。</p>
+<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>对于需要完美精确度且依赖相对较小（百万级别）数据集的向量相似性搜索应用，FLAT 索引是一个不错的选择。FLAT 不压缩向量，是唯一能保证精确搜索结果的索引。FLAT 的结果还可以作为其他召回率低于 100% 的索引所产生结果的比较点。</p>
 <p>FLAT 的精确度很高，因为它采用的是穷举搜索方法，这意味着每次查询都要将目标输入与数据集中的每一组向量进行比较。这使得 FLAT 成为我们列表中速度最慢的索引，而且不适合查询海量向量数据。在 Milvus 中，FLAT 索引不需要任何参数，使用它也不需要数据训练。</p>
 <ul>
 <li><p>搜索参数</p>
@@ -415,7 +410,7 @@ title: 内存索引
 </li>
 </ul></li>
 </ul>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW（分层导航小世界图）是一种基于图的索引算法。它根据一定的规则为图像建立多层导航结构。在这个结构中，上层较为稀疏，节点之间的距离较远；下层较为密集，节点之间的距离较近。搜索从最上层开始，在这一层找到离目标最近的节点，然后进入下一层开始新的搜索。经过多次迭代后，就能快速接近目标位置。</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW（分层导航小世界图）是一种基于图的索引算法。它根据一定的规则为图像建立多层导航结构。在这种结构中，上层较为稀疏，节点之间的距离较远；下层较为密集，节点之间的距离较近。搜索从最上层开始，在这一层找到离目标最近的节点，然后进入下一层开始新的搜索。经过多次迭代后，就能快速接近目标位置。</p>
 <p>为了提高性能，HNSW 将图中每层节点的最大度数限制为<code translate="no">M</code> 。此外，您还可以使用<code translate="no">efConstruction</code> （建立索引时）或<code translate="no">ef</code> （搜索目标时）来指定搜索范围。</p>
 <ul>
 <li><p>索引建立参数</p>
@@ -440,7 +435,7 @@ title: 内存索引
 </table>
 </li>
 </ul>
-<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>标量量化（SQ）是一种技术，用于根据浮点数据的大小将其离散化为一组有限的值。例如，<strong>SQ6</strong>表示量化为 (2^6 = 64) 个离散值，其中每个浮点数使用 6 位编码。同样，<strong>SQ8</strong>将数据量化为 (2^8 = 256) 个离散值，每个浮点数用 8 位表示。这种量化方法既减少了内存占用，又保留了数据的基本结构，从而提高了处理效率。</p>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>标量量化（SQ）是一种根据浮点数据的大小将其离散化为一组有限数值的技术。例如，<strong>SQ6</strong>表示量化为 (2^6 = 64) 个离散值，其中每个浮点数使用 6 位编码。同样，<strong>SQ8</strong>将数据量化为 (2^8 = 256) 个离散值，每个浮点数用 8 位表示。这种量化方法既减少了内存占用，又保留了数据的基本结构，从而提高了处理效率。</p>
 <p>结合 SQ，HNSW_SQ 可以在索引大小和精确度之间进行可控的权衡，同时保持较高的每秒查询次数（QPS）性能。与标准 HNSW 相比，它只会适度增加索引构建时间。</p>
 <ul>
 <li><p>索引构建参数</p>
@@ -596,9 +591,12 @@ title: 内存索引
 <tr><th>参数</th><th>说明</th><th>范围</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>在索引建立过程中排除的小向量值的比例。该选项允许对索引建立过程进行微调，通过在建立索引时忽略小值来权衡效率和准确性。</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>用于建立和查询索引的算法。详情请参阅<a href="/docs/zh/sparse_vector.md#Set-index-params-for-vector-field">稀疏向量</a>。</td><td><code translate="no">DAAT_MAXSCORE</code> (默认）， 、<code translate="no">DAAT_WAND</code> <code translate="no">TAAT_NAIVE</code></td></tr>
 </tbody>
 </table>
+  <div class="alert note">
+<p><code translate="no">drop_ratio_build</code> 参数自 Milvus v2.5.4 起已被弃用，在索引构建过程中仍可接受，但将不再对索引产生实际影响。</p>
+  </div>
 </li>
 <li><p>搜索参数</p>
 <table>
@@ -606,31 +604,7 @@ title: 内存索引
 <tr><th>参数</th><th>说明</th><th>范围</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>搜索过程中排除的小向量值比例。该选项可通过指定查询向量中最小值的忽略比例，对搜索过程进行微调。它有助于平衡搜索精度和性能。<code translate="no">drop_ratio_search</code> 的值越小，这些小值对最终得分的贡献就越小。通过忽略一些小值，可以提高搜索性能，同时将对精确度的影响降到最低。</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-</ul>
-<h3 id="SPARSEWAND" class="common-anchor-header">弧度</h3><p>该索引与<code translate="no">SPARSE_INVERTED_INDEX</code> 有相似之处，但它利用<a href="https://dl.acm.org/doi/10.1145/956863.956944">弱-AND</a>算法进一步减少了搜索过程中完整 IP 距离评估的次数。</p>
-<p>根据我们的测试，<code translate="no">SPARSE_WAND</code> 在速度上通常优于其他方法。不过，随着向量密度的增加，其性能会迅速下降。为了解决这个问题，引入非零<code translate="no">drop_ratio_search</code> 可以显著提高性能，同时只造成极小的精度损失。更多信息，请参阅<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</p>
-<ul>
-<li><p>索引建立参数</p>
-<table>
-<thead>
-<tr><th>参数</th><th>说明</th><th>范围</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>在索引建立过程中排除小向量值的比例。该选项允许对索引建立过程进行微调，通过在建立索引时忽略小值来权衡效率和准确性。</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-<li><p>搜索参数</p>
-<table>
-<thead>
-<tr><th>参数</th><th>说明</th><th>范围</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>搜索过程中排除的小向量值比例。该选项可通过指定查询向量中最小值的忽略比例，对搜索过程进行微调。它有助于平衡搜索精度和性能。<code translate="no">drop_ratio_search</code> 的值越小，这些小值对最终得分的贡献就越小。通过忽略一些小值，可以提高搜索性能，同时将对精确度的影响降到最低。</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>在搜索过程中排除的小向量值的比例。该选项可通过指定查询向量中最小值的忽略比例，对搜索过程进行微调。它有助于平衡搜索精度和性能。<code translate="no">drop_ratio_search</code> 的值越小，这些小值对最终得分的贡献就越小。通过忽略一些小值，可以提高搜索性能，同时将对精确度的影响降到最低。</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

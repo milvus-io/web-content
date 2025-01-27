@@ -43,7 +43,7 @@ title: 릴리스 노트
 <tr><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>PartitionKey 격리, DAAT MaxScore를 사용한 스파스 인덱스, 향상된 잠금 메커니즘 등 주요 성능 최적화 및 새로운 기능을 도입한 Milvus 2.5.4의 출시를 발표하게 되어 기쁘게 생각합니다. 이 버전은 또한 전반적인 안정성과 신뢰성을 개선하는 여러 버그도 해결했습니다. 이번 최신 버전을 업그레이드하거나 사용해 보시길 권장하며, Milvus를 지속적으로 개선하는 데 도움이 되는 여러분의 피드백을 기다리겠습니다!</p>
+<p>PartitionKey 격리, DAAT MaxScore를 사용한 스파스 인덱스, 향상된 잠금 메커니즘 등 주요 성능 최적화 및 새로운 기능을 도입한 Milvus 2.5.4의 출시를 발표하게 되어 기쁘게 생각합니다. 이번 릴리스의 가장 큰 특징은 10,000개의 컬렉션과 1백만 개의 파티션을 지원하여 멀티테넌트 사용 사례에 있어 중요한 이정표를 세웠다는 점입니다. 이 버전은 또한 전반적인 안정성과 신뢰성을 향상시키는 여러 버그들을 해결했으며, 그 중 두 가지 중요한 버그는 데이터 손실을 유발할 수 있습니다. 이 최신 버전을 업그레이드하거나 사용해 보시기를 권장하며, Milvus를 지속적으로 개선하는 데 도움이 되는 여러분의 피드백을 기다리겠습니다!</p>
 <h3 id="Features" class="common-anchor-header">특징</h3><ul>
 <li>여러 개의 파티션 키로 성능을 개선하기 위해 PartitionKey 격리를 지원합니다<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). 자세한 내용은 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</li>
 <li>스파스 인덱스가 이제 DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015를</a> 지원합니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</li>
@@ -51,8 +51,9 @@ title: 릴리스 노트
 <li>루트 권한을 사용자 지정할 수 있습니다<a href="https://github.com/milvus-io/milvus/pull/39324">(#39324</a>).</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">개선 사항</h3><ul>
+<li>하나의 클러스터에서 10K 컬렉션 및 1백만 개의 파티션 지원<a href="https://github.com/milvus-io/milvus/pull/37630">(#37630</a>)</li>
 <li>쿼리 코디네이터를 가속화하기 위해 세그먼트의 델타 정보 캐시<a href="https://github.com/milvus-io/milvus/pull/39349">(#39349</a>)</li>
-<li>수집 수준에서 메타데이터를 동시에 읽음으로써 장애 복구 속도 향상<a href="https://github.com/milvus-io/milvus/pull/38900">(#38900</a>)</li>
+<li>컬렉션 수준에서 메타데이터를 동시에 읽어 장애 복구 속도 향상<a href="https://github.com/milvus-io/milvus/pull/38900">(#38900</a>)</li>
 <li>쿼리 노드의 잠금 세분성 개선<a href="https://github.com/milvus-io/milvus/pull/39282">(#39282</a>),<a href="https://github.com/milvus-io/milvus/pull/38907">(#38907</a>)</li>
 <li>CStatus를 사용하여 뉴컬렉션 CGO 호출을 처리하는 통합 스타일<a href="https://github.com/milvus-io/milvus/pull/39303">(#39303</a>)</li>
 <li>파티션이 설정되지 않은 경우 파티션 리미터 생성을 건너뛰었습니다<a href="https://github.com/milvus-io/milvus/pull/38911">(#38911</a>).</li>
@@ -64,22 +65,24 @@ title: 릴리스 노트
 <li>디스크 할당량 조절 표준으로 빈로그 크기와 인덱스 크기를 모두 사용<a href="https://github.com/milvus-io/milvus/pull/38844">(#38844</a>).</li>
 <li>전체 텍스트 검색을 위한 메모리 사용량 최적화(#1011)</li>
 <li>스칼라 인덱스에 대한 버전 제어 추가<a href="https://github.com/milvus-io/milvus/pull/39236">(#39236)</a></li>
-<li>불필요한 복사본을 방지하여 루트코드에서 수집 정보를 가져오는 속도를 개선<a href="https://github.com/milvus-io/milvus/pull/38902">(#38902</a>).</li>
+<li>불필요한 복사본을 방지하여 루트코드에서 수집 정보를 가져오는 속도를 개선했습니다<a href="https://github.com/milvus-io/milvus/pull/38902">(#38902</a>).</li>
+</ul>
+<h3 id="Critial-Bug-fixs" class="common-anchor-header">중요 버그 수정</h3><ul>
+<li>인덱스가 있는 기본 키에 대한 검색 실패 수정<a href="https://github.com/milvus-io/milvus/pull/39390">(#39390</a>)</li>
+<li>MixCoord를 재시작하고 동시에 플러시할 때 발생할 수 있는 데이터 손실 문제 수정<a href="https://github.com/milvus-io/milvus/pull/39422">(#39422</a>).</li>
+<li>MixCoord 재시작 후 통계 작업과 L0 압축 간의 부적절한 동시성으로 인해 트리거되는 삭제 실패 수정<a href="https://github.com/milvus-io/milvus/pull/39460">(#39460</a>).</li>
+<li>2.4에서 2.5로 업그레이드할 때 스칼라 반전 인덱스 비호환성 수정<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">버그 수정</h3><ul>
-<li>다중 열 로드 중 거친 잠금 세분화로 인한 쿼리 속도 저하 문제 수정<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>)</li>
+<li>다중 열 로드 중 거친 잠금 단위로 인한 쿼리 속도 저하 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>).</li>
 <li>별칭을 사용하면 반복기가 잘못된 데이터베이스를 트래버스할 수 있는 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/39248">(#39248</a>).</li>
-<li>인덱스가 있는 기본 키에 대한 검색 실패 수정<a href="https://github.com/milvus-io/milvus/pull/39390">(#39390</a>)</li>
-<li>MixCoord를 재시작하고 동시에 플러시할 때 발생할 수 있는 잠재적인 데이터 손실 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/39422">(#39422</a>).</li>
-<li>데이터베이스 변경 시 리소스 그룹 업데이트 실패 수정<a href="https://github.com/milvus-io/milvus/pull/39356">(#39356</a>)</li>
+<li>데이터베이스 변경 시 리소스 그룹 업데이트 실패를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/39356">(#39356</a>).</li>
 <li>릴리스 중에 탠티비 인덱스가 인덱스 파일을 삭제할 수 없는 산발적인 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/39434">(#39434</a>).</li>
-<li>MixCoord 재시작 후 통계 작업과 L0 압축 간의 부적절한 동시성으로 인해 트리거되는 삭제 실패를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/39460">(#39460</a>).</li>
-<li>너무 많은 스레드로 인한 느린 인덱싱을 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>).</li>
+<li>너무 많은 스레드로 인한 느린 인덱싱 문제 수정<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>)</li>
 <li>대량 가져오기 중 디스크 할당량 검사를 건너뛰는 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/39319">(#39319</a>).</li>
 <li>동시성을 제한하여 너무 많은 메시지 큐 소비자로 인해 발생하는 정지 문제를 해결했습니다<a href="https://github.com/milvus-io/milvus/pull/38915">(#38915</a>).</li>
-<li>대규모 압축 중 MixCoord 재시작으로 인한 쿼리 시간 초과 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>).</li>
-<li>2.4에서 2.5로 업그레이드 시 스칼라 반전 인덱스 비호환성 수정<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>).</li>
-<li>노드 다운타임으로 인한 채널 불균형 문제 수정<a href="https://github.com/milvus-io/milvus/pull/39200">(#39200</a>)</li>
+<li>대규모 압축 중 MixCoord 재시작으로 인한 쿼리 시간 초과 문제 수정<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926</a>).</li>
+<li>노드 다운타임으로 인한 채널 불균형 문제 수정<a href="https://github.com/milvus-io/milvus/pull/39200">(#39200</a>).</li>
 <li>채널 밸런스가 고착될 수 있는 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>
 <li>RBAC 사용자 지정 그룹 권한 수준 확인이 비효율적이던 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/39224">(#39224</a>).</li>
 <li>빈 인덱스에서 행 수를 검색하지 못하는 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/39210">(#39210</a>).</li>
@@ -164,7 +167,7 @@ title: 릴리스 노트
 <li>null 값을 지원하는 필드에 대해서만 index_null_offset 파일을 생성했습니다.<a href="https://github.com/milvus-io/milvus/pull/38834">(#38834</a>)</li>
 <li>축소 단계에서 무료 이후 검색 계획 사용을 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/38841">(#38841</a>)</li>
 <li>대문자로 AND 및 OR이 포함된 표현식을 인식했습니다.<a href="https://github.com/milvus-io/milvus/pull/38928">(#38928</a>)</li>
-<li>로딩에 실패하더라도 파티션 삭제에 성공할 수 있도록 수정.<a href="https://github.com/milvus-io/milvus/pull/38874">(#38874</a>)</li>
+<li>로딩에 실패하더라도 파티션을 성공적으로 삭제할 수 있도록 했습니다.<a href="https://github.com/milvus-io/milvus/pull/38874">(#38874</a>)</li>
 <li>가져오기 중 BM25 통계 파일 등록 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/38881">(#38881</a>)</li>
 </ul>
 <h2 id="v251" class="common-anchor-header">v2.5.1<button data-href="#v251" class="anchor-icon" translate="no">
@@ -249,9 +252,9 @@ title: 릴리스 노트
 <h4 id="Faiss-based-HNSW-SQPQPRQ" class="common-anchor-header">Faiss 기반 HNSW SQ/PQ/PRQ</h4><p>Faiss 커뮤니티와의 긴밀한 협력을 통해 Faiss의 HNSW 알고리즘은 기능과 성능 모두에서 상당한 개선을 이루었습니다. 안정성과 유지보수성을 고려하여 Milvus 2.5는 HNSW에 대한 지원을 hnswlib에서 Faiss로 공식적으로 마이그레이션했습니다.</p>
 <p>Milvus 2.5는 Faiss를 기반으로 다양한 시나리오의 요구 사항을 충족하기 위해 HNSW에서 여러 양자화 방법을 지원합니다: SQ(스칼라 퀀타이저), PQ(제품 퀀타이저), PRQ(제품 잔여 퀀타이저)가 그것입니다. SQ와 PQ가 더 일반적으로 사용되는데, SQ는 쿼리 성능과 빌드 속도가 우수하고, PQ는 동일한 압축률에서 더 나은 리콜을 제공합니다. 많은 벡터 데이터베이스는 일반적으로 SQ 양자화의 간단한 형태인 이진 양자화를 사용합니다.</p>
 <p>PRQ는 PQ와 AQ(애디티브 퀀타이저)의 융합입니다. PQ와 비교했을 때, 특히 높은 압축률에서 더 나은 리콜을 제공하기 위해 더 긴 빌드 시간이 필요하며, 이진 압축이라고 합니다.</p>
-<h4 id="Clustering-Compaction-Beta" class="common-anchor-header">클러스터링 압축(베타)</h4><p>Milvus 2.5에는 대규모 컬렉션에서 검색을 가속화하고 비용을 절감하기 위해 클러스터링 압축이 도입되었습니다. 스칼라 필드를 클러스터링 키로 지정하면 데이터를 범위별로 재분배하여 저장과 검색을 최적화할 수 있습니다. 글로벌 인덱스처럼 작동하는 이 기능은 클러스터링 메타데이터를 기반으로 쿼리 중에 데이터를 효율적으로 정리하여 스칼라 필터를 적용할 때 검색 성능을 향상시킬 수 있습니다.</p>
+<h4 id="Clustering-Compaction-Beta" class="common-anchor-header">클러스터링 압축(베타)</h4><p>Milvus 2.5에는 대규모 컬렉션에서 검색을 가속화하고 비용을 절감하기 위해 클러스터링 압축이 도입되었습니다. 스칼라 필드를 클러스터링 키로 지정하면 데이터를 범위별로 재분배하여 저장 및 검색을 최적화할 수 있습니다. 글로벌 인덱스처럼 작동하는 이 기능은 클러스터링 메타데이터를 기반으로 쿼리 중에 데이터를 효율적으로 정리하여 스칼라 필터를 적용할 때 검색 성능을 향상시킬 수 있습니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/clustering-compaction.md">클러스터링 압축을</a> 참조하세요.</p>
-<h3 id="Other-Features" class="common-anchor-header">기타 기능</h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">스트리밍 노드(베타)</h4><p>Milvus 2.5에는 미리 쓰기 로깅(WAL) 서비스를 제공하는 스트리밍 노드라는 새로운 구성 요소가 도입되었습니다. 이를 통해 Milvus는 채널 읽기 및 쓰기 전후에 합의를 달성하여 새로운 특징, 기능 및 최적화를 실현할 수 있습니다. 이 기능은 Milvus 2.5에서는 기본적으로 비활성화되어 있으며 3.0 버전에서 공식적으로 제공될 예정입니다.</p>
+<h3 id="Other-Features" class="common-anchor-header">기타 기능</h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">스트리밍 노드(베타)</h4><p>Milvus 2.5에는 미리 쓰기 로깅(WAL) 서비스를 제공하는 스트리밍 노드라는 새로운 구성 요소가 도입되었습니다. 이를 통해 Milvus는 채널 읽기 및 쓰기 전후에 합의를 달성하여 새로운 특징, 기능 및 최적화를 실현할 수 있습니다. 이 기능은 Milvus 2.5에서 기본적으로 비활성화되어 있으며 3.0 버전에서 공식적으로 제공될 예정입니다.</p>
 <h4 id="IPv6-Support" class="common-anchor-header">IPv6 지원</h4><p>Milvus는 이제 IPv6를 지원하여 네트워크 연결성과 호환성을 확장합니다.</p>
 <h4 id="CSV-Bulk-Import" class="common-anchor-header">CSV 일괄 가져오기</h4><p>이제 Milvus는 JSON 및 Parquet 형식 외에도 CSV 형식의 데이터를 직접 대량으로 가져올 수 있습니다.</p>
 <h4 id="Expression-Templates-for-Query-Acceleration" class="common-anchor-header">쿼리 가속화를 위한 표현식 템플릿</h4><p>Milvus는 이제 표현식 템플릿을 지원하여 특히 복잡한 표현식이 있는 시나리오에서 표현식 구문 분석의 효율성을 향상시킵니다.</p>

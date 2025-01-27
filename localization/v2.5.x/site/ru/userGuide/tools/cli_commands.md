@@ -221,7 +221,7 @@ title: Справочник команд Milvus_CLI
 </thead>
 <tbody>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-пароль</td><td style="text-align:left">Пароль пользователя в формате milvus. По умолчанию используется значение &quot;None&quot;.</td></tr>
-<tr><td style="text-align:left">-u</td><td style="text-align:left">-username</td><td style="text-align:left">Имя пользователя в milvus. По умолчанию - &quot;Нет&quot;.</td></tr>
+<tr><td style="text-align:left">-u</td><td style="text-align:left">-имя пользователя</td><td style="text-align:left">Имя пользователя в milvus. По умолчанию - &quot;Нет&quot;.</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Отображает справку по использованию команды.</td></tr>
 </tbody>
 </table>
@@ -416,7 +416,7 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
 Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:

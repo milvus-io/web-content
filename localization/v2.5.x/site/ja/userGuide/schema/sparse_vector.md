@@ -39,7 +39,7 @@ summary: >-
 <ul>
 <li><p><strong>テキスト分析：</strong>各次元が単語に対応し、文書に登場する単語だけがゼロ以外の値を持つ。</p></li>
 <li><p><strong>推薦システム：</strong>ユーザーとアイテムの相互作用行列。各次元は、特定のアイテムに対するユーザーの評価を表し、ほとんどのユーザーは少数のアイテムとしか相互作用しない。</p></li>
-<li><p><strong>画像処理：</strong>局所特徴表現：画像の重要な点のみに焦点を当て、高次元の疎なベクトルを生成する。</p></li>
+<li><p><strong>画像処理：</strong>局所特徴表現：画像の重要なポイントのみに焦点を当て、高次元の疎なベクトルを生成する。</p></li>
 </ul>
 <p>下図に示すように、密なベクトルは通常、各位置が値を持つ連続的な配列として表現される（例：<code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code> ）。対照的に、スパース・ベクトルは非ゼロ要素とそのインデックスのみを格納し、しばしばキーと値のペアとして表現されます（例：<code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code> ）。この表現は、特に非常に高次元のデータ（例えば10,000次元）を扱う場合に、記憶領域を大幅に削減し、計算効率を向上させます。</p>
 <p>
@@ -54,7 +54,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-sparse-vector.png" alt="Use sparse vector in Milvus" class="doc-image" id="use-sparse-vector-in-milvus" />
    </span> <span class="img-wrapper"> <span>Milvusでスパースベクトルを使用する。</span> </span></p>
 <div class="alert note">
-<p>Milvusはスパースベクトル以外にも、デンスベクトルやバイナリベクトルにも対応しています。密なベクトルは深い意味的関係を把握するのに適しており、バイナリベクトルは迅速な類似性比較やコンテンツの重複排除などのシナリオに優れています。詳細については、<a href="/docs/ja/dense-vector.md">密なベクトルと</a> <a href="/docs/ja/binary-vector.md">バイナリベクトルを</a>参照してください。</p>
+<p>Milvusはスパースベクトル以外にも、デンスベクトルやバイナリベクトルにも対応しています。密なベクトルは深い意味的関係を把握するのに理想的であり、バイナリベクトルは迅速な類似性比較やコンテンツの重複排除などのシナリオに優れています。詳細については、<a href="/docs/ja/dense-vector.md">密なベクトルと</a> <a href="/docs/ja/binary-vector.md">バイナリベクトルを</a>参照してください。</p>
 </div>
 <h2 id="Use-sparse-vectors-in-Milvus​" class="common-anchor-header">Milvusでスパースベクトルを使う<button data-href="#Use-sparse-vectors-in-Milvus​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -237,7 +237,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
     field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
     metric_type: MetricType.IP,
-    index_type: IndexType.SPARSE_WAND,
+    index_type: IndexType.SPARSE_INVERTED_INDEX,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
     },
@@ -259,11 +259,10 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <ul>
 <li><p><code translate="no">index_type</code>:疎なベクトル・フィールドに作成するインデックスの型。有効な値：</p>
 <ul>
-<li><code translate="no">SPARSE_INVERTED_INDEX</code>:スパース・ベクトル用の汎用転置インデックス。</li>
-<li><code translate="no">SPARSE_WAND</code>:Milvus v2.5.3以前でサポートされていた特殊なインデックスタイプ。</li>
+<li><code translate="no">SPARSE_INVERTED_INDEX</code>:スパースベクトル用の汎用転置インデックス。</li>
 </ul>
   <div class="alert note">
-<p>Milvus 2.5.4以降、<code translate="no">SPARSE_WAND</code> は非推奨となります。代わりに、互換性を維持しつつ等価性を保つために<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> を使用することが推奨される。</p>
+<p>Milvus 2.5.4以降、<code translate="no">SPARSE_WAND</code> は非推奨となります。代わりに、互換性を維持しながら同等性を保つために<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> を使用することが推奨されます。</p>
   </div>
 </li>
 <li><p><code translate="no">metric_type</code>:スパースベクトル間の類似度を計算するために使用されるメトリック。有効な値：</p>
@@ -274,7 +273,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 </ul></li>
 <li><p><code translate="no">params.inverted_index_algo</code>:インデックスの構築とクエリに使用されるアルゴリズム。有効な値：</p>
 <ul>
-<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (デフォルト)：MaxScoreアルゴリズムを使用した最適化されたDocument-at-a-Time（DAAT）クエリ処理。MaxScoreは、高いk値や多くの用語を持つクエリに対して、影響が最小になりそうな用語やドキュメントをスキップすることで、より優れたパフォーマンスを提供します。MaxScoreは、最大インパクトスコアに基づいて用語を必須グループと非必須グループに分割し、トップkの結果に貢献できる用語に焦点を当てることでこれを実現する。</p></li>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (デフォルト)：MaxScoreアルゴリズムを使用した最適化されたDocument-at-a-Time（DAAT）クエリ処理。MaxScoreは、高いk値や多くの用語を含むクエリに対して、最小限の影響しか与えないと思われる用語や文書をスキップすることで、より優れたパフォーマンスを提供します。MaxScoreは、最大インパクトスコアに基づいて用語を必須グループと非必須グループに分割し、トップkの結果に貢献できる用語に焦点を当てることでこれを実現する。</p></li>
 <li><p><code translate="no">&quot;DAAT_WAND&quot;</code>:WANDアルゴリズムを使用したDAATクエリ処理の最適化。WANDは非競合文書をスキップするために最大インパクトスコアを活用することで、より少ないヒット文書を評価する。このため、WANDはk値が小さいクエリや短いクエリではスキップがより効率的である。</p></li>
 <li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>:Basic Term-at-a-Time (TAAT)クエリー処理。<code translate="no">DAAT_MAXSCORE</code> 、<code translate="no">DAAT_WAND</code> と比較すると遅いが、<code translate="no">TAAT_NAIVE</code> にはユニークな利点がある。グローバルコレクションパラメータ(avgdl)の変更に関係なく静的なままキャッシュされた最大インパクトスコアを使用するDAATアルゴリズムとは異なり、<code translate="no">TAAT_NAIVE</code> 、そのような変更に動的に適応する。</p></li>
 </ul></li>
@@ -510,11 +509,11 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
     </button></h2><p>Milvusでスパースベクトルを使用する場合、以下の制限を考慮してください：</p>
 <ul>
 <li><p>現在、スパースベクトルは<strong>IPと</strong> <strong>BM25</strong>（全文検索用）距離メトリクスのみがサポートされています。スパースベクトルは次元が高いため、L2距離と余弦距離は実用的ではありません。</p></li>
-<li><p>疎なベクトル・フィールドでは、<strong>SPARSE_INVERTED_INDEX</strong>と<strong>SPARSE_WAND</strong>インデックス型のみがサポートされます。</p></li>
+<li><p>疎なベクトル・フィールドでは、<strong>SPARSE_INVERTED_INDEX</strong>インデックス型のみがサポートされます。</p></li>
 <li><p>スパース・ベクトルでサポートされるデータ型：</p>
 <ul>
 <li>次元部は符号なし32ビット整数でなければならない；</li>
-<li>値部は非負32ビット浮動小数点数。</li>
+<li>値部は非負の32ビット浮動小数点数。</li>
 </ul></li>
 <li><p>スパース・ベクトルは、挿入と検索に関して以下の要件を満たす必要があります：</p>
 <ul>
@@ -538,12 +537,8 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>SPARSE_INVERTED_INDEX と SPARSE_WAND の違いと、その選択方法を教えてください。</strong></p>
-<p><strong>SPARSE_INVERTED_INDEXは</strong>伝統的な転置インデックスで、<strong>SPARSE_WANDは</strong> <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a>アルゴリズムを使用して検索中のフルIP距離評価数を減らします。<strong>SPARSE_WANDは</strong>一般的に高速ですが、ベクトル密度が高くなるにつれて性能が低下する可能性があります。どちらかを選択するには、特定のデータセットとユースケースに基づいた実験とベンチマークを実施してください。</p></li>
-<li><p><strong>drop_ratio_buildとdrop_ratio_searchパラメータはどのように選択すればよいですか？</strong></p>
-<p><strong>drop_ratio_buildと</strong> <strong>drop_ratio_searchの</strong>選択は、データの特性や、検索レイテンシー/スループット、精度に対する要件に依存します。</p></li>
-<li><p><strong>スパース埋込みの次元は、uint32空間内の任意の離散値にすることができますか？</strong></p>
-<p>はい，ただし1つの例外があります．スパース埋込みの次元は，<code translate="no">[0, maximum of uint32)</code> の範囲内の任意の値にすることができます． つまり，uint32の最大値を使うことはできません．</p></li>
+<li><p><strong>スパース埋め込みの次元は、uint32空間内の任意の離散値にすることができますか？</strong></p>
+<p>はい，1つ例外があります．スパース埋込みの次元は，<code translate="no">[0, maximum of uint32)</code> の範囲内の任意の値にすることができます． つまり，uint32の最大値を使うことはできません．</p></li>
 <li><p><strong>成長しているセグメントの検索は、インデックスを使って行うのですか?</strong></p>
 <p>成長中のセグメントを検索する際には、セグメントインデックスと同じ型のインデックスを使用します。インデックスが作成される前の新しい成長中のセグメントについては、 総当たり検索を使用します。</p></li>
 <li><p><strong>1つのコレクションに、疎なベクトルと密なベクトルの両方を持つことは可能ですか?</strong></p>

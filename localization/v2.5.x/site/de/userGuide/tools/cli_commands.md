@@ -298,7 +298,7 @@ title: Milvus_CLI Befehlsreferenz
 <button class="copy-code-btn"></button></code></pre>
 <p><h4>Beispiel 2</h4></p>
 <div class="alert note">Beispiel 2 basiert auf Beispiel 1.</div>
-<p>Im folgenden Beispiel wird der Alias <code translate="no">carAlias1</code> von der Sammlung <code translate="no">car</code> in die Sammlung <code translate="no">car2</code> übertragen.</p>
+<p>Im folgenden Beispiel wird der Alias <code translate="no">carAlias1</code> aus der Sammlung <code translate="no">car</code> in die Sammlung <code translate="no">car2</code> übertragen.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create <span class="hljs-built_in">alias</span> -c car2 -A -a carAlias1
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-collection" class="common-anchor-header">create collection<button data-href="#create-collection" class="anchor-icon" translate="no">
@@ -416,7 +416,7 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
 Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
@@ -969,7 +969,7 @@ Timeout []:
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-sammlung-name</td><td style="text-align:left">Der Name der Sammlung, in die die Daten eingefügt werden.</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-partition</td><td style="text-align:left">(Optional) Der Name der Partition, in die die Daten eingefügt werden. Wenn Sie diese Partitionsoption nicht angeben, wird die Partition "_default" gewählt.</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Zeigt die Hilfe zur Verwendung des Befehls an.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">k.A.</td><td style="text-align:left">Zeigt die Hilfe zur Verwendung des Befehls an.</td></tr>
 </tbody>
 </table>
 <p><h3 id="import">Beispiel 1</h3>

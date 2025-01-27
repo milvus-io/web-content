@@ -19,7 +19,7 @@ title: 多租户策略
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在许多使用案例中，开发人员希望运行一个 Milvus 集群，并为多个租户提供服务，例如几个产品团队或数百万终端用户。本指南介绍了在 Milvus 上实现多租户的几种不同策略。</p>
+    </button></h1><p>在许多使用案例中，开发人员希望运行一个 Milvus 集群并为多个租户服务，例如几个产品团队或数百万终端用户。本指南介绍了在 Milvus 上实现多租户的几种不同策略。</p>
 <p>Milvus 的设计支持数据库、 Collections 或分区级别的多租户。多租户的目的是将数据和资源相互分离。在不同级别实施多租户可以实现不同程度的隔离，但也涉及不同的开销。下面我们将解释它们之间的权衡。</p>
 <h2 id="Database-oriented-multi-tenancy" class="common-anchor-header">面向数据库的多租户<button data-href="#Database-oriented-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -84,7 +84,7 @@ title: 多租户策略
 <tr><td>面向数据库</td><td>强</td><td>强</td><td>64</td><td>适用于那些需要集合随项目变化而变化的情况，尤其适用于组织内各部门之间的数据隔离。</td></tr>
 <tr><td>一个 Collection 适用于所有项目</td><td>弱</td><td>中等</td><td>不适用</td><td>适用于资源有限且对数据隔离不敏感的企业。</td></tr>
 <tr><td>每个租户一个 Collections</td><td>强</td><td>强</td><td>少于 10,000</td><td>适用于每个群集拥有少于 10,000 个租户的情况。</td></tr>
-<tr><td>每个租户一个分区</td><td>中</td><td>强</td><td>4,096</td><td>适用于每个 Collections 的租户少于 4,096 个的情况。</td></tr>
+<tr><td>每个租户一个分区</td><td>中</td><td>强</td><td>1,024</td><td>适用于每个 Collections 的租户少于 1,024 个的情况。</td></tr>
 <tr><td>基于分区 Key</td><td>中</td><td>强</td><td>10,000,000+</td><td>适用于预测租户数量会迅速增加到数百万的用户。</td></tr>
 </tbody>
 </table>

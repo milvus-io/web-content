@@ -84,12 +84,15 @@ title: Indexar campos vectoriais
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>ÍNDICE_ESPARSO_INVERTIDO</li><li>SPARSE_WAND</li></ul></td>
+    <td class="tg-0pky">ÍNDICE_INVERTIDO_ESPARSO</td>
   </tr>
 </tbody>
 </table>
+<div class="alert note">
+<p>A partir da versão 2.5.4 do Milvus, <code translate="no">SPARSE_WAND</code> está a ser preterido. Em vez disso, recomenda-se a utilização de <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> para equivalência, mantendo a compatibilidade. Para mais informações, consulte <a href="/docs/pt/sparse_vector.md#Set-index-params-for-vector-field">Vetor esparso</a>.</p>
 </div>
-<p>Recomenda-se a criação de índices para o campo vetorial e para os campos escalares que são acessados com freqüência.</p>
+</div>
+<p>Recomenda-se a criação de índices tanto para o campo vetorial como para os campos escalares que são frequentemente acedidos.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparações<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -334,7 +337,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">sync</code></td>
-      <td>Controla a forma como o índice é criado em relação ao pedido do cliente. Valores válidos:<br><ul><li><code translate="no">True</code> (predefinição): O cliente espera até que o índice esteja totalmente construído antes de retornar. Isso significa que você não receberá uma resposta até que o processo seja concluído.</li><li><code translate="no">False</code>: O cliente regressa imediatamente após a receção do pedido e o índice está a ser criado em segundo plano. Para saber se a criação do índice foi concluída, utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
+      <td>Controla a forma como o índice é criado em relação ao pedido do cliente. Valores válidos:<br><ul><li><code translate="no">True</code> (predefinição): O cliente espera até que o índice esteja totalmente construído antes de retornar. Isso significa que você não receberá uma resposta até que o processo esteja concluído.</li><li><code translate="no">False</code>: O cliente regressa imediatamente após a receção do pedido e o índice está a ser criado em segundo plano. Para saber se a criação do índice foi concluída, utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>
@@ -348,7 +351,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>O nome do campo de destino a que se aplica este objeto IndexParam.</td>
+      <td>O nome do campo de destino ao qual se aplica este objeto IndexParam.</td>
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>

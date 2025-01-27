@@ -61,7 +61,7 @@ summary: Conheça os limites da utilização do Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O nome de um recurso, como o nome da coleção, o nome da partição ou o nome do índice, pode conter números, letras e sublinhados (_). O nome de um recurso deve começar por uma letra ou um sublinhado (_).</p>
+    </button></h2><p>O nome de um recurso, como o nome da coleção, o nome da partição ou o nome do índice, pode conter números, letras e sublinhados (_). O nome de um recurso deve começar com uma letra ou um sublinhado (_).</p>
 <h2 id="Number-of-resources" class="common-anchor-header">Número de recursos<button data-href="#Number-of-resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -242,19 +242,19 @@ summary: Conheça os limites da utilização do Milvus.
     </button></h2><p>A tabela a seguir fornece uma visão geral do suporte para vários comportamentos de pesquisa em diferentes tipos de índice.</p>
 <table>
 <thead>
-<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>ÍNDICE_INVERTIDO_ESPARSO</th><th>SPARSE_WAND</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
+<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>ÍNDICE_INVERTIDO_ESPARSO</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
 </thead>
 <tbody>
-<tr><td>Pesquisa básica</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
-<tr><td>Pesquisa de partições</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
-<tr><td>Pesquisa básica com recuperação de dados em bruto</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
-<tr><td>Pesquisa básica com paginação</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
-<tr><td>Pesquisa filtrada</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
-<tr><td>Pesquisa de alcance</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Sim</td><td>Sim</td></tr>
-<tr><td>Pesquisa de agrupamento</td><td>Sim</td><td>Não</td><td>Sim</td><td>Sim</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td></tr>
-<tr><td>Pesquisa com iterador</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td></tr>
-<tr><td>Pesquisa híbrida</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim(Só RRFRanker)</td><td>Sim(Só RRFRanker)</td><td>Sim</td><td>Sim</td></tr>
-<tr><td>Consultar/obter</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
-<tr><td>Consulta com iterador</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+<tr><td>Pesquisa básica</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+<tr><td>Pesquisa de partições</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+<tr><td>Pesquisa básica com recuperação de dados em bruto</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+<tr><td>Pesquisa básica com paginação</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+<tr><td>Pesquisa filtrada</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+<tr><td>Pesquisa de alcance</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+<tr><td>Pesquisa de agrupamento</td><td>Sim</td><td>Não</td><td>Sim</td><td>Sim</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Sim</td><td>Não</td><td>Não</td></tr>
+<tr><td>Pesquisa com iterador</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Sim</td><td>Não</td><td>Não</td></tr>
+<tr><td>Pesquisa híbrida</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim(Apenas RRFRanker)</td><td>Sim</td><td>Sim</td></tr>
+<tr><td>Consultar/obter</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+<tr><td>Consulta com iterador</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
 </tbody>
 </table>

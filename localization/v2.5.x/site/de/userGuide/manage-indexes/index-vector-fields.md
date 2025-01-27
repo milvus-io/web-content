@@ -2,8 +2,8 @@
 id: index-vector-fields.md
 order: 1
 summary: >-
-  Dieses Handbuch führt Sie durch die grundlegenden Vorgänge zum Erstellen und
-  Verwalten von Indizes für Vektorfelder in einer Sammlung.
+  Dieses Handbuch führt Sie durch die grundlegenden Operationen zum Erstellen
+  und Verwalten von Indizes für Vektorfelder in einer Sammlung.
 title: Vektorfelder indizieren
 ---
 <h1 id="Index-Vector-Fields" class="common-anchor-header">Vektorfelder indizieren<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
@@ -38,7 +38,7 @@ title: Vektorfelder indizieren
         ></path>
       </svg>
     </button></h2><p>Durch die Nutzung der in einer Indexdatei gespeicherten Metadaten organisiert Milvus Ihre Daten in einer spezialisierten Struktur, die ein schnelles Auffinden der gewünschten Informationen bei Suchen oder Abfragen erleichtert.</p>
-<p>Milvus bietet verschiedene Indextypen und Metriken zum Sortieren von Feldwerten für effiziente Ähnlichkeitssuchen. In der folgenden Tabelle sind die unterstützten Indextypen und Metriken für verschiedene Vektorfeldtypen aufgeführt. Derzeit unterstützt Milvus verschiedene Arten von Vektordaten, einschließlich Fließkomma-Einbettungen (oft auch als Fließkomma-Vektoren oder dichte Vektoren bezeichnet), binäre Einbettungen (auch als binäre Vektoren bezeichnet) und spärliche Einbettungen (auch als spärliche Vektoren bezeichnet). Weitere Informationen finden Sie unter <a href="/docs/de/index.md">Index-</a> und <a href="/docs/de/metric.md">Ähnlichkeitsmetriken</a> <a href="/docs/de/index.md">im Arbeitsspeicher</a>.</p>
+<p>Milvus bietet verschiedene Indextypen und Metriken zum Sortieren von Feldwerten für effiziente Ähnlichkeitssuchen. In der folgenden Tabelle sind die unterstützten Indextypen und Metriken für verschiedene Vektorfeldtypen aufgeführt. Derzeit unterstützt Milvus verschiedene Arten von Vektordaten, einschließlich Fließkomma-Einbettungen (oft als Fließkomma-Vektoren oder dichte Vektoren bezeichnet), binäre Einbettungen (auch als binäre Vektoren bezeichnet) und Sparse-Einbettungen (auch als Sparse-Vektoren bezeichnet). Weitere Informationen finden Sie unter <a href="/docs/de/index.md">Index-</a> und <a href="/docs/de/metric.md">Ähnlichkeitsmetriken</a> <a href="/docs/de/index.md">im Arbeitsspeicher</a>.</p>
 <div class="filter">
  <a href="#floating">Fließkommaeinbettungen</a> <a href="#binary">Binäre Einbettungen</a> <a href="#sparse">Sparse Einbettungen</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -84,12 +84,15 @@ title: Vektorfelder indizieren
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>SPÄRLICHER_INVERTIERTER_INDEX</li><li>SPARSE_WAND</li></ul></td>
+    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
   </tr>
 </tbody>
 </table>
+<div class="alert note">
+<p>Ab Milvus 2.5.4 ist <code translate="no">SPARSE_WAND</code> veraltet. Stattdessen wird empfohlen, <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> zu verwenden, um Äquivalenz und Kompatibilität zu gewährleisten. Weitere Informationen finden Sie unter <a href="/docs/de/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
 </div>
-<p>Es wird empfohlen, Indizes sowohl für das Vektorfeld als auch für skalare Felder, auf die häufig zugegriffen wird, anzulegen.</p>
+</div>
+<p>Es wird empfohlen, Indizes sowohl für das Vektorfeld als auch für skalare Felder, auf die häufig zugegriffen wird, zu erstellen.</p>
 <h2 id="Preparations" class="common-anchor-header">Vorbereitungen<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -105,7 +108,7 @@ title: Vektorfelder indizieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wie in <a href="/docs/de/manage-collections.md">Sammlungen verwalten</a> erläutert, generiert Milvus beim Erstellen einer Sammlung automatisch einen Index und lädt ihn in den Speicher, wenn eine der folgenden Bedingungen in der Anforderung zur Erstellung der Sammlung angegeben ist:</p>
+    </button></h2><p>Wie in <a href="/docs/de/manage-collections.md">Sammlungen verwalten</a> erklärt, generiert Milvus automatisch einen Index und lädt ihn in den Speicher, wenn eine der folgenden Bedingungen in der Anfrage zur Erstellung einer Sammlung angegeben ist:</p>
 <ul>
 <li><p>Die Dimensionalität des Vektorfeldes und der metrische Typ, oder</p></li>
 <li><p>das Schema und die Indexparameter.</p></li>
@@ -421,7 +424,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nachdem Sie einen Index erstellt haben, können Sie seine Details überprüfen.</p>
+    </button></h2><p>Sobald Sie einen Index erstellt haben, können Sie seine Details überprüfen.</p>
 <div class="language-python">
 <p>Um die Indexdetails zu prüfen, verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> um die Indexnamen aufzulisten und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md"><code translate="no">describe_index()</code></a> um die Indexdetails zu erhalten.</p>
 </div>
@@ -532,7 +535,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können die Indexdatei überprüfen, die für ein bestimmtes Feld erstellt wurde, und die Statistik über die Anzahl der mit dieser Indexdatei indizierten Zeilen sammeln.</p>
+<p>Sie können die Indexdatei überprüfen, die für ein bestimmtes Feld erstellt wurde, und die Statistik über die Anzahl der Zeilen, die mit dieser Indexdatei indiziert wurden, sammeln.</p>
 <h2 id="Drop-an-Index" class="common-anchor-header">Einen Index löschen<button data-href="#Drop-an-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

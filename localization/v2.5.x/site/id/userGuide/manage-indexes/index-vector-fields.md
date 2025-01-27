@@ -84,10 +84,13 @@ title: Mengindeks Bidang Vektor
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>SPARSE_INVERTED_INDEX</li><li>SPARSE_WAND</li></ul></td>
+    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
   </tr>
 </tbody>
 </table>
+<div class="alert note">
+<p>Sejak Milvus 2.5.4 dan seterusnya, <code translate="no">SPARSE_WAND</code> tidak digunakan lagi. Sebagai gantinya, disarankan untuk menggunakan <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> untuk kesetaraan dengan tetap menjaga kompatibilitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md#Set-index-params-for-vector-field">Vektor</a> Jarang.</p>
+</div>
 </div>
 <p>Direkomendasikan untuk membuat indeks untuk bidang vektor dan bidang skalar yang sering diakses.</p>
 <h2 id="Preparations" class="common-anchor-header">Persiapan<button data-href="#Preparations" class="anchor-icon" translate="no">

@@ -40,7 +40,7 @@ title: 인메모리 인덱스
         ></path>
       </svg>
     </button></h2><p>Milvus에서 지원하는 대부분의 벡터 인덱스 유형은 근사 근접 이웃 검색(ANNS) 알고리즘을 사용합니다. 일반적으로 시간이 많이 소요되는 정확한 검색과 비교했을 때, ANNS의 핵심 아이디어는 더 이상 가장 정확한 결과를 반환하는 데 국한되지 않고 대상의 이웃만 검색하는 것입니다. ANNS는 허용 가능한 범위 내에서 정확도를 희생하여 검색 효율성을 향상시킵니다.</p>
-<p>구현 방법에 따라 ANNS 벡터 인덱스는 네 가지 유형으로 분류할 수 있습니다: 트리 기반, 그래프 기반, 해시 기반, 정량화 기반입니다.</p>
+<p>구현 방식에 따라 ANNS 벡터 인덱스는 네 가지 유형으로 분류할 수 있습니다: 트리 기반, 그래프 기반, 해시 기반, 정량화 기반입니다.</p>
 <h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">Milvus에서 지원하는 인덱스<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,7 +69,10 @@ title: 인메모리 인덱스
 </div>
 <div class="filter-sparse">
 <h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">스파스 임베딩용 인덱스</h3><p>스파스 임베딩용 인덱스는 <code translate="no">IP</code> 및 <code translate="no">BM25</code> (전체 텍스트 검색용) 메트릭만 지원합니다.</p>
-<p>이 인덱스 유형에는 <code translate="no">SPARSE_INVERTED_INDEX</code> 및 <code translate="no">SPARSE_WAND</code> 이 포함됩니다.</p>
+<p>스파스 임베딩에 지원되는 인덱스 유형: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
+<div class="alert note">
+<p>Milvus 2.5.4부터 <code translate="no">SPARSE_WAND</code> 은 더 이상 사용되지 않습니다. 대신, 호환성을 유지하면서 동등성을 위해 <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 을 사용하는 것이 좋습니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md#Set-index-params-for-vector-field">스파스 벡터를</a> 참조하세요.</p>
+</div>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
@@ -231,19 +234,11 @@ title: 인메모리 인덱스
       <li>100%의 리콜률이 필요합니다.</li>
     </ul></td>
   </tr>
-  <tr>
-    <td>SPARSE_WAND</td>
-    <td>반전 인덱스</td>
-    <td><ul>
-      <li><a href="https://dl.acm.org/doi/10.1145/956863.956944">약-앤드</a> 알고리즘 가속</li>
-      <li>소량의 리콜만 희생하면서 상당한 속도 향상을 얻을 수 있습니다.</li>
-    </ul></td>
-  </tr>
 </tbody>
 </table>
 </div>
 <div class="filter-floating">
-<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>완벽한 정확도가 필요하고 비교적 작은(백만 개 규모) 데이터 세트에 의존하는 벡터 유사도 검색 애플리케이션의 경우, FLAT 인덱스가 좋은 선택입니다. FLAT은 벡터를 압축하지 않으며, 정확한 검색 결과를 보장할 수 있는 유일한 인덱스입니다. 또한 FLAT의 결과는 다른 인덱스에서 생성된 결과의 비교 기준으로도 사용할 수 있습니다.</p>
+<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>완벽한 정확도가 필요하고 비교적 작은(백만 개 규모) 데이터 세트에 의존하는 벡터 유사도 검색 애플리케이션의 경우, FLAT 인덱스가 좋습니다. FLAT은 벡터를 압축하지 않으며, 정확한 검색 결과를 보장할 수 있는 유일한 인덱스입니다. 또한 FLAT의 결과는 다른 인덱스에서 생성된 결과의 비교 기준으로도 사용할 수 있습니다.</p>
 <p>FLAT은 각 쿼리마다 데이터 세트의 모든 벡터 세트와 대상 입력을 비교하는 철저한 검색 방식을 취하기 때문에 정확도가 높습니다. 따라서 FLAT은 목록에서 가장 느린 인덱스이며, 대규모 벡터 데이터를 쿼리하는 데는 적합하지 않습니다. Milvus의 FLAT 인덱스에는 파라미터가 필요하지 않으며, 이를 사용하는 데 데이터 학습이 필요하지 않습니다.</p>
 <ul>
 <li><p>검색 매개변수</p>
@@ -296,7 +291,7 @@ title: 인메모리 인덱스
 </ul></li>
 </ul>
 <h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLAT은 압축을 수행하지 않으므로 생성되는 인덱스 파일은 인덱싱되지 않은 원본 원시 벡터 데이터와 거의 같은 크기입니다. 예를 들어, 원본 1B SIFT 데이터 세트가 476GB인 경우, IVF_FLAT 인덱스 파일은 이보다 약간 더 작아집니다(~470GB). 모든 인덱스 파일을 메모리에 로드하면 470GB의 스토리지가 소모됩니다.</p>
-<p>디스크, CPU 또는 GPU 메모리 리소스가 제한되어 있는 경우 IVF_SQ8이 IVF_FLAT보다 더 나은 옵션입니다. 이 인덱스 유형은 스칼라 양자화(SQ)를 수행하여 각 FLOAT(4바이트)를 UINT8(1바이트)로 변환할 수 있습니다. 이렇게 하면 디스크, CPU, GPU 메모리 소비가 70~75%까지 줄어듭니다. 1B SIFT 데이터 세트의 경우, IVF_SQ8 인덱스 파일은 140GB의 스토리지만 필요합니다.</p>
+<p>디스크, CPU 또는 GPU 메모리 리소스가 제한되어 있는 경우 IVF_SQ8이 IVF_FLAT보다 더 나은 옵션입니다. 이 인덱스 유형은 스칼라 양자화(SQ)를 수행하여 각 FLOAT(4바이트)를 UINT8(1바이트)로 변환할 수 있습니다. 이렇게 하면 디스크, CPU, GPU 메모리 소비가 70~75% 감소합니다. 1B SIFT 데이터 세트의 경우, IVF_SQ8 인덱스 파일은 140GB의 스토리지만 필요합니다.</p>
 <ul>
 <li><p>인덱스 구축 매개변수</p>
 <table>
@@ -368,7 +363,7 @@ title: 인메모리 인덱스
 <tr><th>파라미터</th><th>설명</th><th>범위</th><th>기본값</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>검색 결과를 반환하지 않는 최대 버킷 수.<br/>이 값은 범위 검색 매개변수이며 연속된 빈 버킷 수가 지정된 값에 도달하는 동안 검색 프로세스를 종료합니다.<br/>이 값을 늘리면 검색 시간이 증가하는 대신 리콜률을 향상시킬 수 있습니다.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>검색 결과를 반환하지 않는 최대 버킷 수.<br/>이 값은 범위 검색 매개변수이며 연속된 빈 버킷 수가 지정된 값에 도달하는 동안 검색 프로세스를 종료합니다.<br/>이 값을 늘리면 검색 시간이 증가하는 대신 회수율이 향상될 수 있습니다.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -500,7 +495,7 @@ title: 인메모리 인덱스
 </li>
 </ul>
 <h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ는 PQ와 유사하며 벡터를 <code translate="no">m</code> 그룹으로 나눕니다. 각 하위 벡터는 <code translate="no">nbits</code> 로 인코딩됩니다. pq 양자화를 완료한 후, 벡터와 pq 양자화된 벡터 사이의 잔차를 계산하고 잔차 벡터에 pq 양자화를 적용합니다. 총 <code translate="no">nrq</code> 개의 완전한 pq 양자화가 수행되므로 길이 <code translate="no">dim</code> 의 부동 벡터는 <em>m ⋅ n비트 ⋅ nrq</em> 비트로 인코딩됩니다.</p>
-<p>제품 잔여 양자화기(PRQ)와 결합된 HNSW_PRQ는 인덱스 크기와 정확도 사이에서 훨씬 더 높은 제어 가능한 트레이드오프를 제공합니다. 동일한 압축률에 대해 HNSW_PQ와 거의 동등한 QPS 값과 더 높은 리콜률을 제공합니다. HNSW_PQ에 비해 인덱스 구축 시간이 몇 배 증가할 수 있습니다.</p>
+<p>제품 잔여 양자화기(PRQ)와 결합된 HNSW_PRQ는 인덱스 크기와 정확도 사이에서 훨씬 더 높은 제어 가능한 트레이드오프를 제공합니다. 동일한 압축률에서 HNSW_PQ보다 거의 동등한 QPS 값과 더 높은 리콜률을 제공합니다. HNSW_PQ에 비해 인덱스 구축 시간이 몇 배 증가할 수 있습니다.</p>
 <ul>
 <li><p>인덱스 구축 파라미터</p>
 <table>
@@ -548,7 +543,7 @@ title: 인메모리 인덱스
 </li>
 </ul>
 <h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>이 인덱스는 이진 임베딩에만 사용할 수 있다는 점을 제외하면 IVF_FLAT과 완전히 동일합니다.</p>
-<p>BIN_IVF_FLAT은 벡터 데이터를 <code translate="no">nlist</code> 클러스터 단위로 나눈 다음, 대상 입력 벡터와 각 클러스터의 중심 사이의 거리를 비교합니다. 시스템이 쿼리하도록 설정된 클러스터 수에 따라(<code translate="no">nprobe</code>), 유사도 검색 결과는 대상 입력과 가장 유사한 클러스터에 있는 벡터 간의 비교만을 기반으로 반환되므로 쿼리 시간이 대폭 단축됩니다.</p>
+<p>BIN_IVF_FLAT은 벡터 데이터를 <code translate="no">nlist</code> 클러스터 단위로 나눈 다음, 대상 입력 벡터와 각 클러스터의 중심 사이의 거리를 비교합니다. 시스템이 쿼리하도록 설정된 클러스터 수에 따라(<code translate="no">nprobe</code>), 유사도 검색 결과는 대상 입력과 가장 유사한 클러스터의 벡터 간의 비교만을 기반으로 반환되므로 쿼리 시간이 대폭 단축됩니다.</p>
 <p><code translate="no">nprobe</code> 을 조정하면 주어진 시나리오에서 정확도와 속도 사이의 이상적인 균형을 찾을 수 있습니다. 쿼리 시간은 대상 입력 벡터의 수(<code translate="no">nq</code>)와 검색할 클러스터의 수(<code translate="no">nprobe</code>)가 모두 증가함에 따라 급격히 증가합니다.</p>
 <p>BIN_IVF_FLAT은 가장 기본적인 BIN_IVF 인덱스이며, 각 유닛에 저장된 인코딩된 데이터는 원본 데이터와 일치합니다.</p>
 <ul>
@@ -596,9 +591,12 @@ title: 인메모리 인덱스
 <tr><th>매개변수</th><th>설명</th><th>범위</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>인덱싱 프로세스 중에 제외되는 작은 벡터 값의 비율입니다. 이 옵션을 사용하면 인덱싱 프로세스를 미세 조정하여 인덱스를 구축할 때 작은 값을 무시함으로써 효율성과 정확성 간의 균형을 맞출 수 있습니다.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>인덱스 구축 및 쿼리에 사용되는 알고리즘입니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md#Set-index-params-for-vector-field">스파스 벡터를</a> 참조하세요.</td><td><code translate="no">DAAT_MAXSCORE</code> (기본값), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
 </tbody>
 </table>
+  <div class="alert note">
+<p><code translate="no">drop_ratio_build</code> 매개변수는 Milvus v2.5.4부터 더 이상 사용되지 않으며, 인덱스 구축 중에 계속 허용될 수 있지만 더 이상 인덱스에 실제 영향을 미치지 않습니다.</p>
+  </div>
 </li>
 <li><p>검색 매개변수</p>
 <table>
@@ -607,30 +605,6 @@ title: 인메모리 인덱스
 </thead>
 <tbody>
 <tr><td><code translate="no">drop_ratio_search</code></td><td>검색 과정에서 제외되는 작은 벡터 값의 비율입니다. 이 옵션을 사용하면 쿼리 벡터에서 무시할 가장 작은 값의 비율을 지정하여 검색 프로세스를 미세 조정할 수 있습니다. 검색 정확도와 성능의 균형을 맞추는 데 도움이 됩니다. <code translate="no">drop_ratio_search</code> 에 설정된 값이 작을수록 최종 점수에 기여하는 작은 값이 줄어듭니다. 일부 작은 값을 무시하면 정확도에 미치는 영향을 최소화하면서 검색 성능을 향상시킬 수 있습니다.</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-</ul>
-<h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND</h3><p>이 인덱스는 <code translate="no">SPARSE_INVERTED_INDEX</code> 과 유사하지만, 검색 과정에서 전체 IP 거리 평가 횟수를 더 줄이기 위해 <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> 알고리즘을 활용합니다.</p>
-<p>테스트 결과, <code translate="no">SPARSE_WAND</code> 은 일반적으로 속도 면에서 다른 방법보다 우수한 성능을 보였습니다. 그러나 벡터의 밀도가 증가함에 따라 성능이 급격히 저하될 수 있습니다. 이 문제를 해결하기 위해 0이 아닌 <code translate="no">drop_ratio_search</code> 을 도입하면 정확도 손실은 최소화하면서 성능을 크게 향상시킬 수 있습니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>
-<ul>
-<li><p>인덱스 구축 매개변수</p>
-<table>
-<thead>
-<tr><th>파라미터</th><th>설명</th><th>범위</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>인덱싱 프로세스 중에 제외되는 작은 벡터 값의 비율입니다. 이 옵션을 사용하면 인덱싱 프로세스를 미세 조정하여 인덱스를 구축할 때 작은 값을 무시함으로써 효율성과 정확성 간의 균형을 맞출 수 있습니다.</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-<li><p>검색 매개변수</p>
-<table>
-<thead>
-<tr><th>파라미터</th><th>설명</th><th>범위</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>검색 과정에서 제외되는 작은 벡터 값의 비율입니다. 이 옵션을 사용하면 쿼리 벡터에서 무시할 가장 작은 값의 비율을 지정하여 검색 프로세스를 미세 조정할 수 있습니다. 검색 정확도와 성능의 균형을 맞추는 데 도움이 됩니다. <code translate="no">drop_ratio_search</code> 에 설정된 값이 작을수록 최종 점수에 기여하는 작은 값이 줄어듭니다. 일부 작은 값을 무시하면 정확도에 미치는 영향을 최소화하면서 검색 성능을 개선할 수 있습니다.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

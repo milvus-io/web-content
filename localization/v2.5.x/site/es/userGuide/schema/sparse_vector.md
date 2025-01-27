@@ -242,7 +242,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
     field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
     metric_type: MetricType.IP,
-    index_type: IndexType.SPARSE_WAND,
+    index_type: IndexType.SPARSE_INVERTED_INDEX,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
     },
@@ -265,7 +265,6 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <li><p><code translate="no">index_type</code>: El tipo de índice a crear para el campo vectorial disperso. Valores válidos:</p>
 <ul>
 <li><code translate="no">SPARSE_INVERTED_INDEX</code>: Un índice invertido de propósito general para vectores dispersos.</li>
-<li><code translate="no">SPARSE_WAND</code>: Un tipo de índice especializado soportado en Milvus v2.5.3 y anteriores.</li>
 </ul>
   <div class="alert note">
 <p>A partir de Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> queda obsoleto. En su lugar, se recomienda utilizar <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> por equivalencia manteniendo la compatibilidad.</p>
@@ -515,7 +514,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
     </button></h2><p>Cuando utilice vectores dispersos en Milvus, tenga en cuenta los siguientes límites:</p>
 <ul>
 <li><p>Actualmente, sólo las métricas de distancia <strong>IP</strong> y <strong>BM25</strong> (para búsqueda de texto completo) son compatibles con vectores dispersos. La alta dimensionalidad de los vectores dispersos hace que las distancias L2 y coseno sean poco prácticas.</p></li>
-<li><p>Para los campos de vectores dispersos, sólo se admiten los tipos de índice <strong>SPARSE_INVERTED_INDEX</strong> y <strong>SPARSE_WAND</strong>.</p></li>
+<li><p>Para los campos de vectores dispersos, sólo se admite el tipo de índice <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
 <li><p>Tipos de datos admitidos para vectores dispersos:</p>
 <ul>
 <li>La parte de dimensión debe ser un entero de 32 bits sin signo;</li>
@@ -527,7 +526,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 <li>Los índices del vector no son negativos.</li>
 </ul></li>
 </ul>
-<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+<h2 id="FAQ" class="common-anchor-header">PREGUNTAS FRECUENTES<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -543,10 +542,6 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>¿Puede explicar la diferencia entre SPARSE_INVERTED_INDEX y SPARSE_WAND, y cómo puedo elegir entre ellos?</strong></p>
-<p><strong>SPARSE_INVERTED_INDEX</strong> es un índice invertido tradicional, mientras que <strong>SPARSE_WAND</strong> utiliza el algoritmo <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> para reducir el número de evaluaciones de distancia IP completa durante la búsqueda. <strong>SPARSE_WAND</strong> suele ser más rápido, pero su rendimiento puede disminuir al aumentar la densidad del vector. Para elegir entre ellos, realice experimentos y pruebas comparativas basadas en su conjunto de datos y caso de uso específicos.</p></li>
-<li><p><strong>¿Cómo debo elegir los parámetros drop_ratio_build y drop_ratio_search?</strong></p>
-<p>La elección de <strong>drop_ratio_build</strong> y <strong>drop_ratio_search</strong> depende de las características de los datos y de los requisitos de latencia/rendimiento y precisión de la búsqueda.</p></li>
 <li><p><strong>¿Puede la dimensión de una incrustación dispersa ser cualquier valor discreto dentro del espacio uint32?</strong></p>
 <p>Sí, con una excepción. La dimensión de una incrustación dispersa puede ser cualquier valor en el rango de <code translate="no">[0, maximum of uint32)</code>. Esto significa que no se puede utilizar el valor máximo de uint32.</p></li>
 <li><p><strong>¿Las búsquedas en segmentos crecientes se realizan a través de un índice o por fuerza bruta?</strong></p>

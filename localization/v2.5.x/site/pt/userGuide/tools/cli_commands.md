@@ -416,7 +416,7 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
 Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
@@ -735,7 +735,7 @@ Timeout []:
 </thead>
 <tbody>
 <tr><td style="text-align:left">-r</td><td style="text-align:left">-roleName</td><td style="text-align:left">O nome da função da função milvus.</td></tr>
-<tr><td style="text-align:left">-u</td><td style="text-align:left">-username</td><td style="text-align:left">O nome de utilizador do milvus.</td></tr>
+<tr><td style="text-align:left">-u</td><td style="text-align:left">-nome de utilizador</td><td style="text-align:left">O nome de utilizador do milvus.</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para utilizar o comando.</td></tr>
 </tbody>
 </table>

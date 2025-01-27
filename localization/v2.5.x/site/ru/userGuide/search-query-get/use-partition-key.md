@@ -243,3 +243,82 @@ export <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27
 export <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Замените <code translate="no">partition_key</code> на имя поля, назначенного в качестве ключа раздела.</p>
+</div>
+<h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">Использование изоляции ключей разделов<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>В сценарии с несколькими арендаторами можно назначить скалярное поле, связанное с идентификаторами арендаторов, в качестве ключа раздела и создать фильтр на основе определенного значения в этом скалярном поле. Чтобы еще больше повысить производительность поиска в подобных сценариях, Milvus представляет функцию Partition Key Isolation.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
+   </span> <span class="img-wrapper"> <span>Изоляция ключей разделов</span> </span></p>
+<p>Как показано на рисунке выше, Milvus группирует сущности на основе значения Partition Key и создает отдельный индекс для каждой из этих групп. Получив запрос на поиск, Milvus находит индекс на основе значения Partition Key, указанного в условии фильтрации, и ограничивает область поиска сущностями, включенными в индекс, что позволяет избежать сканирования нерелевантных сущностей во время поиска и значительно повысить производительность поиска. После включения функции Partition Key Isolation вы можете включить только определенное значение в фильтр на основе Partition-key, чтобы Milvus мог ограничить область поиска сущностями, включенными в индекс, которые соответствуют.</p>
+<div class="alert note">
+<p>В настоящее время функция Partition-Key Isolation применяется только к поиску с типом индекса, установленным на HNSW.</p>
+</div>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">Включение функции изоляции ключей разделов</h3><p>В следующих примерах кода показано, как включить функцию Partition Key Isolation.</p>
+<div class="multipleCode">
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
+<pre><code translate="no" class="language-python">client.create_collection(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    schema=schema,
+    <span class="hljs-comment"># highlight-next-line</span>
+    properties={<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">True</span>}
+)
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">collection</span>.<span class="hljs-property">request</span>.<span class="hljs-property">CreateCollectionReq</span>;
+
+<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">String</span>&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>);
+
+<span class="hljs-title class_">CreateCollectionReq</span> createCollectionReq = <span class="hljs-title class_">CreateCollectionReq</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_">collectionSchema</span>(schema)
+        .<span class="hljs-title function_">numPartitions</span>(<span class="hljs-number">1024</span>)
+        .<span class="hljs-title function_">properties</span>(properties)
+        .<span class="hljs-title function_">build</span>();
+client.<span class="hljs-title function_">createCollection</span>(createCollectionReq);
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">true</span>
+    }
+})
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
+    &quot;partitionKeyIsolation&quot;: true
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;myCollection\&quot;,
+    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
+    \&quot;params\&quot;: <span class="hljs-variable">$params</span>
+}&quot;</span>
+
+<button class="copy-code-btn"></button></code></pre>
+<p>После включения изоляции ключа раздела вы можете задать ключ раздела и количество разделов, как описано в разделе <a href="#Set-Partition-Numbers">Установка номеров разделов</a>. Обратите внимание, что фильтр на основе ключа раздела должен включать только определенное значение ключа раздела.</p>

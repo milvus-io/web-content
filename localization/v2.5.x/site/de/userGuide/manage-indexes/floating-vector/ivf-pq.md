@@ -36,7 +36,7 @@ title: IVF_PQ
         ></path>
       </svg>
     </button></h2><p><strong>IVF_PQ</strong> steht für <strong>Inverted File with Product Quantization (Invertierte Datei mit Produktquantisierung</strong>), ein hybrider Ansatz, der Indizierung und Komprimierung für effiziente Vektorsuche und -abfrage kombiniert. Dabei werden zwei Kernkomponenten genutzt: <strong>Invertierte Datei (IVF)</strong> und <strong>Produktquantisierung (PQ)</strong>.</p>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF ist wie die Erstellung eines Index in einem Buch. Anstatt jede Seite (oder in unserem Fall jeden Vektor) zu durchsuchen, suchen Sie nach bestimmten Schlüsselwörtern (Clustern) im Index, um die relevanten Seiten (Vektoren) schnell zu finden. In unserem Szenario werden die Vektoren in Clustern gruppiert, und der Algorithmus sucht in einigen Clustern, die dem Abfragevektor nahe kommen.</p>
+<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF ist wie die Erstellung eines Index in einem Buch. Anstatt jede Seite (oder in unserem Fall jeden Vektor) zu durchsuchen, suchen Sie nach bestimmten Schlüsselwörtern (Clustern) im Index, um die relevanten Seiten (Vektoren) schnell zu finden. In unserem Szenario werden die Vektoren in Clustern gruppiert, und der Algorithmus sucht in einigen wenigen Clustern, die nahe am Abfragevektor liegen.</p>
 <p>Und so funktioniert's:</p>
 <ol>
 <li><strong>Clustering:</strong> Ihr Vektordatensatz wird mithilfe eines Clustering-Algorithmus wie k-means in eine bestimmte Anzahl von Clustern unterteilt. Jeder Cluster hat einen Zentroid (einen repräsentativen Vektor für den Cluster).</li>
@@ -44,7 +44,7 @@ title: IVF_PQ
 <li><strong>Invertierter Index:</strong> Es wird ein Index erstellt, der jeden Clusterschwerpunkt auf die Liste der diesem Cluster zugeordneten Vektoren abbildet.</li>
 <li><strong>Suche:</strong> Bei der Suche nach den nächsten Nachbarn vergleicht der Suchalgorithmus Ihren Abfragevektor mit den Clusterschwerpunkten und wählt den/die vielversprechendsten Cluster aus. Die Suche wird dann auf die Vektoren innerhalb dieser ausgewählten Cluster eingegrenzt.</li>
 </ol>
-<p>Weitere Informationen zu den technischen Details finden Sie unter <a href="https://zilliverse.feishu.cn/wiki/MXiGwmnq6i5MswkryYVcMklVnld">IVF_FLAT</a>.</p>
+<p>Weitere Informationen zu den technischen Details finden Sie unter <a href="/docs/de/ivf-flat.md">IVF_FLAT</a>.</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p>Die<strong>Produktquantisierung (PQ)</strong> ist eine Komprimierungsmethode für hochdimensionale Vektoren, die den Speicherbedarf erheblich reduziert und gleichzeitig schnelle Ähnlichkeitssuchoperationen ermöglicht.</p>
 <p>Der PQ-Prozess umfasst die folgenden Hauptschritte:</p>
 <p>
@@ -188,7 +188,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dieser Abschnitt bietet einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchen im Index verwendet werden.</p>
+    </button></h2><p>Dieser Abschnitt gibt einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchen im Index verwendet werden.</p>
 <h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
 <table>
 <thead>

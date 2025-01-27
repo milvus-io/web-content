@@ -40,11 +40,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um vetor esparso é uma representação especial de vectores de dimensão elevada em que a maioria dos elementos é zero e apenas algumas dimensões têm valores diferentes de zero. Esta caraterística torna os vectores esparsos particularmente eficazes no tratamento de dados de grande escala, de elevada dimensão, mas esparsos. As aplicações mais comuns incluem.</p>
+    </button></h2><p>Um vetor esparso é uma representação especial de vectores de elevada dimensão em que a maioria dos elementos é zero e apenas algumas dimensões têm valores diferentes de zero. Esta caraterística torna os vectores esparsos particularmente eficazes no tratamento de dados de grande escala, de elevada dimensão, mas esparsos. As aplicações mais comuns incluem.</p>
 <ul>
 <li><p><strong>Análise de texto:</strong> Representação de documentos como vectores de saco de palavras, em que cada dimensão corresponde a uma palavra e apenas as palavras que aparecem no documento têm valores diferentes de zero.</p></li>
 <li><p><strong>Sistemas de recomendação:</strong> Matrizes de interação utilizador-item, em que cada dimensão representa a classificação de um utilizador para um determinado item, com a maioria dos utilizadores a interagir apenas com alguns itens.</p></li>
-<li><p><strong>Processamento de imagens:</strong> Representação de caraterísticas locais, concentrando-se apenas em pontos-chave da imagem, o que resulta em vectores esparsos de elevada dimensão.</p></li>
+<li><p><strong>Processamento de imagens:</strong> Representação de caraterísticas locais, centrada apenas em pontos-chave da imagem, resultando em vectores esparsos de elevada dimensão.</p></li>
 </ul>
 <p>Como mostra o diagrama abaixo, os vectores densos são normalmente representados como matrizes contínuas em que cada posição tem um valor (por exemplo, <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). Em contrapartida, os vectores esparsos armazenam apenas elementos não nulos e os seus índices, frequentemente representados como pares chave-valor (por exemplo, <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>). Esta representação reduz significativamente o espaço de armazenamento e aumenta a eficiência computacional, especialmente quando se lida com dados de dimensões extremamente elevadas (por exemplo, 10 000 dimensões).</p>
 <p>
@@ -116,7 +116,7 @@ sparse_vector = [[(<span class="hljs-number">1</span>, <span class="hljs-number"
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Add-vector-field​" class="common-anchor-header">Adicionar campo vetorial</h3><p>Para utilizar vectores esparsos em Milvus, defina um campo para armazenar vectores esparsos ao criar uma coleção. Este processo inclui.</p>
+<h3 id="Add-vector-field​" class="common-anchor-header">Adicionar campo vetorial</h3><p>Para utilizar vectores esparsos no Milvus, defina um campo para armazenar vectores esparsos ao criar uma coleção. Este processo inclui.</p>
 <ol>
 <li><p>Definir <code translate="no">datatype</code> como o tipo de dados de vetor esparso suportado, <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p>Não é necessário especificar a dimensão.</p></li>
@@ -242,7 +242,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
     field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
     metric_type: MetricType.IP,
-    index_type: IndexType.SPARSE_WAND,
+    index_type: IndexType.SPARSE_INVERTED_INDEX,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
     },
@@ -264,11 +264,10 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <ul>
 <li><p><code translate="no">index_type</code>: O tipo de índice a criar para o campo de vetor esparso. Valores válidos:</p>
 <ul>
-<li><code translate="no">SPARSE_INVERTED_INDEX</code>: Um índice invertido de uso geral para vetores esparsos.</li>
-<li><code translate="no">SPARSE_WAND</code>: Um tipo de índice especializado suportado no Milvus v2.5.3 e anteriores.</li>
+<li><code translate="no">SPARSE_INVERTED_INDEX</code>: Um índice invertido de uso geral para vectores esparsos.</li>
 </ul>
   <div class="alert note">
-<p>A partir do Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> está a ser descontinuado. Em vez disso, recomenda-se a utilização de <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> para equivalência, mantendo a compatibilidade.</p>
+<p>A partir do Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> está a ser preterido. Em vez disso, recomenda-se a utilização de <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> para equivalência, mantendo a compatibilidade.</p>
   </div>
 </li>
 <li><p><code translate="no">metric_type</code>: A métrica usada para calcular a similaridade entre vetores esparsos. Valores válidos:</p>
@@ -279,7 +278,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 </ul></li>
 <li><p><code translate="no">params.inverted_index_algo</code>: O algoritmo utilizado para criar e consultar o índice. Valores válidos:</p>
 <ul>
-<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (padrão): Processamento optimizado de consultas Document-at-a-Time (DAAT) utilizando o algoritmo MaxScore. O MaxScore proporciona um melhor desempenho para valores k elevados ou consultas com muitos termos, ignorando termos e documentos que provavelmente terão um impacto mínimo. Consegue-o dividindo os termos em grupos essenciais e não essenciais com base nas suas pontuações máximas de impacto, concentrando-se nos termos que podem contribuir para os resultados do top-k.</p></li>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (predefinição): Processamento optimizado de consultas Document-at-a-Time (DAAT) utilizando o algoritmo MaxScore. O MaxScore proporciona um melhor desempenho para valores k elevados ou consultas com muitos termos, ignorando termos e documentos que provavelmente terão um impacto mínimo. Consegue-o dividindo os termos em grupos essenciais e não essenciais com base nas suas pontuações máximas de impacto, concentrando-se nos termos que podem contribuir para os resultados do top-k.</p></li>
 <li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: Processamento optimizado de consultas DAAT utilizando o algoritmo WAND. O WAND avalia menos documentos atingidos, aproveitando as pontuações de impacto máximo para ignorar documentos não competitivos, mas tem uma sobrecarga mais elevada por hit. Isso torna o WAND mais eficiente para consultas com valores k pequenos ou consultas curtas, em que pular é mais viável.</p></li>
 <li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: Processamento de consultas Basic Term-at-a-Time (TAAT). Embora seja mais lento em comparação com <code translate="no">DAAT_MAXSCORE</code> e <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> oferece uma vantagem única. Ao contrário dos algoritmos DAAT, que utilizam pontuações de impacto máximo armazenadas em cache que permanecem estáticas independentemente de alterações no parâmetro de coleção global (avgdl), o <code translate="no">TAAT_NAIVE</code> adapta-se dinamicamente a essas alterações.</p></li>
 </ul></li>
@@ -515,7 +514,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
     </button></h2><p>Ao usar vetores esparsos no Milvus, considere os seguintes limites:</p>
 <ul>
 <li><p>Atualmente, apenas as métricas de distância <strong>IP</strong> e <strong>BM25</strong> (para pesquisa de texto completo) são suportadas para vetores esparsos. A elevada dimensionalidade dos vectores esparsos torna a distância L2 e cosseno impraticável.</p></li>
-<li><p>Para campos de vectores esparsos, apenas são suportados os tipos de índice <strong>SPARSE_INVERTED_INDEX</strong> e <strong>SPARSE_WAND</strong>.</p></li>
+<li><p>Para campos de vectores esparsos, apenas é suportado o tipo de índice <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
 <li><p>Os tipos de dados suportados para vectores esparsos:</p>
 <ul>
 <li>A parte da dimensão deve ser um inteiro de 32 bits sem sinal;</li>
@@ -543,10 +542,6 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Pode explicar a diferença entre SPARSE_INVERTED_INDEX e SPARSE_WAND, e como posso escolher entre eles?</strong></p>
-<p><strong>O SPARSE_INVERTED_INDEX</strong> é um índice invertido tradicional, enquanto <strong>o SPARSE_WAND</strong> utiliza o algoritmo <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> para reduzir o número de avaliações de distância IP completas durante a pesquisa. <strong>O SPARSE_WAND</strong> é normalmente mais rápido, mas o seu desempenho pode diminuir com o aumento da densidade do vetor. Para escolher entre eles, realize experiências e benchmarks com base no seu conjunto de dados e caso de utilização específicos.</p></li>
-<li><p><strong>Como devo escolher os parâmetros drop_ratio_build e drop_ratio_search?</strong></p>
-<p>A escolha de <strong>drop_ratio_build</strong> e <strong>drop_ratio_search</strong> depende das caraterísticas dos seus dados e dos seus requisitos de latência/rendimento e precisão da pesquisa.</p></li>
 <li><p><strong>A dimensão de um embedding esparso pode ser qualquer valor discreto dentro do espaço uint32?</strong></p>
 <p>Sim, com uma exceção. A dimensão de uma incorporação esparsa pode ser qualquer valor no intervalo de <code translate="no">[0, maximum of uint32)</code>. Isso significa que você não pode usar o valor máximo de uint32.</p></li>
 <li><p><strong>As pesquisas em segmentos crescentes são conduzidas através de um índice ou por força bruta?</strong></p>

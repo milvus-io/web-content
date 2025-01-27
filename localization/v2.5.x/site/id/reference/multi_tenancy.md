@@ -84,7 +84,7 @@ title: Strategi multi-penyewaan
 <tr><td>Berorientasi pada basis data</td><td>Kuat</td><td>Kuat</td><td>64</td><td>Untuk mereka yang membutuhkan koleksi yang bervariasi dengan proyek, terutama cocok untuk isolasi data antar departemen dalam organisasi Anda.</td></tr>
 <tr><td>Satu koleksi untuk semua</td><td>Lemah</td><td>Sedang</td><td>N/A</td><td>Untuk mereka yang memiliki sumber daya terbatas dan tidak peka terhadap isolasi data.</td></tr>
 <tr><td>Satu koleksi per penyewa</td><td>Kuat</td><td>Kuat</td><td>Kurang dari 10.000</td><td>Untuk yang memiliki kurang dari 10.000 penyewa per klaster.</td></tr>
-<tr><td>Satu partisi per penyewa</td><td>Sedang</td><td>Kuat</td><td>4,096</td><td>Untuk yang memiliki kurang dari 4.096 penyewa per koleksi.</td></tr>
+<tr><td>Satu partisi per penyewa</td><td>Sedang</td><td>Kuat</td><td>1,024</td><td>Untuk yang memiliki kurang dari 1.024 penyewa per koleksi.</td></tr>
 <tr><td>Berbasis kunci partisi</td><td>Sedang</td><td>Kuat</td><td>10,000,000+</td><td>Untuk mereka yang memprediksi peningkatan penyewa yang cepat menjadi jutaan.</td></tr>
 </tbody>
 </table>

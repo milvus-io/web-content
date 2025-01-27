@@ -242,19 +242,19 @@ summary: Apprenez à connaître les limites de l'utilisation de Milvus.
     </button></h2><p>Le tableau suivant donne un aperçu de la prise en charge des différents comportements de recherche selon les différents types d'index.</p>
 <table>
 <thead>
-<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>SPARSE_INVERTED_INDEX</th><th>SPARSE_WAND</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
+<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>INDEX_INVERTI_SPARSE</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
 </thead>
 <tbody>
-<tr><td>Recherche de base</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
-<tr><td>Recherche de partition</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
-<tr><td>Recherche de base avec récupération des données brutes</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
-<tr><td>Recherche de base avec pagination</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
-<tr><td>Recherche filtrée</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
-<tr><td>Recherche de portée</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td></tr>
-<tr><td>Recherche de groupes</td><td>Oui</td><td>Non</td><td>Oui</td><td>Oui</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td></tr>
-<tr><td>Recherche avec itérateur</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td></tr>
-<tr><td>Recherche hybride</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui (uniquement RRFRanker)</td><td>Oui (uniquement RRFRanker)</td><td>Oui</td><td>Oui</td></tr>
-<tr><td>Interroger/obtenir</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
-<tr><td>Requête avec itérateur</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Recherche de base</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Recherche de partition</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Recherche de base avec récupération des données brutes</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Recherche de base avec pagination</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Recherche filtrée</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Recherche de portée</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Recherche de groupes</td><td>Oui</td><td>Non</td><td>Oui</td><td>Oui</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td><td>Non</td><td>Non</td></tr>
+<tr><td>Recherche avec itérateur</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td><td>Non</td><td>Non</td></tr>
+<tr><td>Recherche hybride</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui (uniquement RRFRanker)</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Interroger/obtenir</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Requête avec itérateur</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
 </tbody>
 </table>

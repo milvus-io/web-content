@@ -242,19 +242,19 @@ summary: Milvus 사용 중 제한 사항에 대해 알아보세요.
     </button></h2><p>다음 표는 다양한 인덱스 유형에 대한 다양한 검색 동작 지원에 대한 개요를 제공합니다.</p>
 <table>
 <thead>
-<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>SPARSE_INVERTED_INDEX</th><th>SPARSE_WAND</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
+<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>SPARSE_INVERTED_INDEX</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
 </thead>
 <tbody>
-<tr><td>기본 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
-<tr><td>파티션 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
-<tr><td>원시 데이터가 검색된 기본 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
-<tr><td>페이지 매김을 사용한 기본 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
-<tr><td>필터링된 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
-<tr><td>범위 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>예</td><td>예</td></tr>
-<tr><td>그룹 검색</td><td>예</td><td>아니요</td><td>예</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td></tr>
-<tr><td>반복기를 사용한 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td></tr>
-<tr><td>하이브리드 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예(RRFRanker만 해당)</td><td>예(RRFRanker만 해당)</td><td>예</td><td>예</td></tr>
-<tr><td>쿼리/조회</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
-<tr><td>반복기를 사용한 쿼리</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
+<tr><td>기본 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
+<tr><td>파티션 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
+<tr><td>원시 데이터가 검색된 기본 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
+<tr><td>페이지 매김을 사용한 기본 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
+<tr><td>필터링된 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
+<tr><td>범위 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>예</td><td>예</td><td>예</td></tr>
+<tr><td>그룹 검색</td><td>예</td><td>아니요</td><td>예</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>예</td><td>아니요</td><td>아니요</td></tr>
+<tr><td>반복기를 사용한 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>예</td><td>아니요</td><td>아니요</td></tr>
+<tr><td>하이브리드 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예(RRFRanker만 해당)</td><td>예</td><td>예</td></tr>
+<tr><td>쿼리/조회</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
+<tr><td>반복기를 사용한 쿼리</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>예</td><td>예</td><td>예</td></tr>
 </tbody>
 </table>

@@ -199,7 +199,7 @@ summary: Milvus使用中の制限について学ぶ。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>現在のリリースでは、実行エンジンのメモリリソースを確保するため、ロードするデータはすべてのクエリノードの総メモリリソースの90%未満でなければなりません。</p>
+    </button></h2><p>現在のリリースでは、実行エンジンのメモリリソースを確保するため、ロードするデータはすべてのクエリノードの総メモリリソースの90%以下でなければなりません。</p>
 <h2 id="Search-limits" class="common-anchor-header">検索制限<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -242,19 +242,19 @@ summary: Milvus使用中の制限について学ぶ。
     </button></h2><p>以下の表は、異なるインデックス・タイプにおける様々な検索動作のサポートの概要を示している。</p>
 <table>
 <thead>
-<tr><th></th><th>HNSW</th><th>DISKANN</th><th>フラット</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_ブルートフォース</th><th>スパースインバーテッドインデックス</th><th>スパースワンド</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
+<tr><th></th><th>HNSW</th><th>DISKANN</th><th>フラット</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_ブルートフォース</th><th>スパースインバーテッドインデックス</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
 </thead>
 <tbody>
-<tr><td>基本検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
-<tr><td>パーティション検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
-<tr><td>生データ検索による基本検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
-<tr><td>ページネーション付き基本検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
-<tr><td>フィルタ検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
-<tr><td>範囲検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td></tr>
-<tr><td>グループ化検索</td><td>はい</td><td>いいえ</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td></tr>
-<tr><td>イテレータによる検索</td><td>いいえ</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td></tr>
-<tr><td>ハイブリッド検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい(RRFRankerのみ)</td><td>はい(RRFRankerのみ)</td><td>はい</td><td>はい</td></tr>
-<tr><td>照会/取得</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
-<tr><td>イテレータによるクエリ</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>はい</td><td>はい</td></tr>
+<tr><td>基本検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
+<tr><td>パーティション検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
+<tr><td>生データ検索による基本検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
+<tr><td>ページネーション付き基本検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
+<tr><td>フィルタ検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
+<tr><td>範囲検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>はい</td></tr>
+<tr><td>グループ化検索</td><td>はい</td><td>いいえ</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td></tr>
+<tr><td>イテレータによる検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td></tr>
+<tr><td>ハイブリッド検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい（RRFRanker だけ）</td><td>はい</td><td>はい</td></tr>
+<tr><td>照会/取得</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
+<tr><td>イテレータによるクエリ</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>はい</td></tr>
 </tbody>
 </table>

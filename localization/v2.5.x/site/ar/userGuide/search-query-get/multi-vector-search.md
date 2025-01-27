@@ -248,7 +248,7 @@ index_params.add_index(​
     index_name=<span class="hljs-string">&quot;sparse_index&quot;</span>,​
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,  <span class="hljs-comment"># Index type for sparse vectors​</span>
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Currently, only IP (Inner Product) is supported for sparse vectors​</span>
-    params={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
+    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -266,7 +266,7 @@ denseParams.<span class="hljs-title function_">put</span>(<span class="hljs-stri
         .<span class="hljs-title function_">build</span>();​
 ​
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt; sparseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
+sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);​
 <span class="hljs-title class_">IndexParam</span> indexParamForSparseField = <span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
         .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_index&quot;</span>)​
@@ -351,7 +351,7 @@ curl --request POST \​
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data​" class="common-anchor-header">إدراج البيانات</h3><p>أدخل المتجهات المتناثرة الكثيفة في المجموعة <code translate="no">demo</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بيثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+   <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
 ​
 data=[​
@@ -454,7 +454,7 @@ search_param_2 = {​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,​
     <span class="hljs-string">&quot;param&quot;</span>: {​
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,​
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}​
+        <span class="hljs-string">&quot;params&quot;</span>: {}​
     },​
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>​
 }​
@@ -492,7 +492,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
         .vectorFieldName(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .vectors(querySparseVectors)​
         .metricType(IndexParam.MetricType.IP)​
-        .<span class="hljs-keyword">params</span>(<span class="hljs-string">&quot;{\&quot;drop_ratio_build\&quot;: 0.2}&quot;</span>)​
+        .<span class="hljs-keyword">params</span>()​
         .topK(<span class="hljs-number">2</span>)​
         .build());​
 
@@ -501,20 +501,20 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
     <span class="hljs-string">&quot;data&quot;</span>: query_vector, ​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;dense&quot;</span>, ​
     <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-comment">// 参数值需要与 Collection Schema 中定义的保持一致​</span>
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
         <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}​
     },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// AnnSearchRequest 返还的搜索结果数量​</span>
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
 }​
 ​
 <span class="hljs-keyword">const</span> search_param_2 = {​
     <span class="hljs-string">&quot;data&quot;</span>: query_sparse_vector, ​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>, ​
     <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-comment">// 参数值需要与 Collection Schema 中定义的保持一致​</span>
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}​
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
+        <span class="hljs-string">&quot;params&quot;</span>: {}​
     },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// AnnSearchRequest 返还的搜索结果数量​</span>
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
 }​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -533,9 +533,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
         &quot;data&quot;: [{&quot;3573&quot;: 0.34701499565746674}, {&quot;5263&quot;: 0.2639375518635271}],​
         &quot;annsField&quot;: &quot;sparse&quot;,​
         &quot;params&quot;: {​
-            &quot;params&quot;: {​
-                &quot;drop_ratio_build&quot;: 0.2​
-             }​
+            &quot;params&quot;: {}​
         },​
         &quot;limit&quot;: 2​
     }​
@@ -578,7 +576,7 @@ rerank= <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>مثال 2: استخدام RRFRFRanker</strong></p>
-<p>عند استخدام استراتيجية RRFRFRanker، تحتاج إلى إدخال قيمة المعلمة <code translate="no">k</code> في RRFRanker. القيمة الافتراضية لـ <code translate="no">k</code> هي 60. تساعد هذه المعلمة في تحديد كيفية دمج الرتب من مختلف عمليات بحث الشبكة العنكبوتية الوطنية، بهدف موازنة ومزج الأهمية في جميع عمليات البحث.</p>
+<p>عند استخدام استراتيجية RRRFRanker، تحتاج إلى إدخال قيمة المعلمة <code translate="no">k</code> في RRFRanker. القيمة الافتراضية لـ <code translate="no">k</code> هي 60. تساعد هذه المعلمة على تحديد كيفية دمج الرتب من مختلف عمليات بحث الشبكة العنكبوتية الوطنية، بهدف موازنة ومزج الأهمية في جميع عمليات البحث.</p>
 <p><div class="multipleCode">
 <a href="#python">بايثون </a><a href="#java">جافا</a><a href="#curl">جافا</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">RRFRanker</span>​
@@ -678,4 +676,4 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <pre><code translate="no" class="language-json">[<span class="hljs-string">&quot;[&#x27;id: 844, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 876, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>نظرًا لأنه تم تحديد <code translate="no">limit=2</code> في البحث الهجين، سيعيد Zilliz ترتيب نتائج البحث الأربعة من الخطوة 3 ويعيد في النهاية نتائج البحث الأكثر تشابهًا فقط. </p>
+<p>بما أنه تم تحديد <code translate="no">limit=2</code> في البحث الهجين، سيعيد Zilliz ترتيب نتائج البحث الأربعة من الخطوة 3 ويعيد في النهاية فقط أعلى نتيجتي بحث متشابهتين. </p>

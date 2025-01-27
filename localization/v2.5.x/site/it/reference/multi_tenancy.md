@@ -84,8 +84,8 @@ title: Strategie multi-tenancy
 <tr><td>Orientato al database</td><td>Forte</td><td>Forte</td><td>64</td><td>Per chi ha bisogno di collezioni che variano a seconda dei progetti, particolarmente adatte per l'isolamento dei dati tra i reparti dell'organizzazione.</td></tr>
 <tr><td>Una raccolta per tutti</td><td>Debole</td><td>Medio</td><td>N/D</td><td>Per chi ha risorse limitate ed è insensibile all'isolamento dei dati.</td></tr>
 <tr><td>Una raccolta per inquilino</td><td>Forte</td><td>Forte</td><td>Meno di 10.000</td><td>Per chi ha meno di 10.000 tenant per cluster.</td></tr>
-<tr><td>Una partizione per tenant</td><td>Medio</td><td>Forte</td><td>4,096</td><td>Per chi ha meno di 4.096 tenant per collezione.</td></tr>
-<tr><td>Basato su chiavi di partizione</td><td>Medio</td><td>Forte</td><td>10,000,000+</td><td>Per chi prevede un rapido aumento degli inquilini fino a milioni.</td></tr>
+<tr><td>Una partizione per tenant</td><td>Medio</td><td>Forte</td><td>1,024</td><td>Per chi ha meno di 1.024 tenant per collezione.</td></tr>
+<tr><td>Basato su chiavi di partizione</td><td>Medio</td><td>Forte</td><td>10,000,000+</td><td>Per chi prevede un rapido aumento degli affittuari fino a milioni.</td></tr>
 </tbody>
 </table>
 <h2 id="Whats-next" class="common-anchor-header">Cosa c'è dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">

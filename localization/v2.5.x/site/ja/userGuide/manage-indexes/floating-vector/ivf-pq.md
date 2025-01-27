@@ -44,7 +44,7 @@ title: IVF_PQ
 <li><strong>転置インデックス：</strong>各クラスタのセントロイドを、そのクラスタに割り当てられたベクトルのリストにマッピングするインデックスが作成されます。</li>
 <li><strong>検索：</strong>最近傍を検索する場合、検索アルゴリズムはクエリベクトルとクラスタ重心を比較し、最も有望なクラスタを選択します。そして、その選択されたクラスタ内のベクトルに検索が絞り込まれます。</li>
 </ol>
-<p>技術的な詳細については、<a href="https://zilliverse.feishu.cn/wiki/MXiGwmnq6i5MswkryYVcMklVnld">IVF_FLAT</a> を参照してください。</p>
+<p>技術的な詳細については、<a href="/docs/ja/ivf-flat.md">IVF_FLAT</a> を参照してください。</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>Product Quantization (PQ)</strong>は、高次元ベクトルの圧縮手法であり、高速な類似性検索を可能にすると同時に、ストレージ要件を大幅に削減します。</p>
 <p>PQプロセスには以下の主要な段階があります：</p>
 <p>
@@ -65,7 +65,7 @@ title: IVF_PQ
 <li>オリジナル・ベクトル：128次元×32ビット＝4,096ビット</li>
 <li>PQ圧縮ベクトル：64個の部分ベクトル×8ビット＝512ビット</li>
 </ul>
-<p>これは必要な記憶容量が8倍削減されたことを意味する。</p>
+<p>これは8倍の記憶容量の削減を意味する。</p>
 </div>
 <p><strong>PQによる距離計算</strong></p>
 <p>クエリーベクターで類似検索を行う場合、PQは以下のステップで効率的な距離計算を可能にする：</p>
@@ -73,7 +73,7 @@ title: IVF_PQ
 <li><p><strong>クエリの前処理</strong></p>
 <ol>
 <li>クエリ・ベクトルは、元のPQ分解構造と一致するように、<code translate="no">m</code> サブ・ベクトルに分解される。</li>
-<li>それぞれのクエリーサブベクターと対応するコードブック（2^nbitsのセントロイドを含む）に対して、すべてのセントロイドへの距離を計算し、格納する。</li>
+<li>各クエリーサブベクターとそれに対応するコードブック（2^nbitsのセントロイドを含む）に対して、すべてのセントロイドへの距離を計算し、格納する。</li>
 <li>これにより、<code translate="no">m</code> ルックアップテーブルが生成され、各テーブルには2^nbitsの距離が格納される。</li>
 </ol></li>
 <li><p><strong>距離近似</strong></p>
@@ -89,7 +89,7 @@ title: IVF_PQ
    </span> <span class="img-wrapper"> <span>pq-process-1</span> </span></p>
 <h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ</h3><p><strong>IVF_PQ</strong>インデックスは、<strong>IVFと</strong> <strong>PQの</strong>長所を組み合わせて検索を高速化する。このプロセスは2つのステップで動作する：</p>
 <ol>
-<li><strong>IVFによる粗いフィルタリング</strong>： IVFはベクトル空間をクラスタに分割し、検索範囲を狭める。データセット全体を評価する代わりに、このアルゴリズムはクエリベクトルに最も近いクラスタのみに注目する。</li>
+<li><strong>IVFによる粗いフィルタリング</strong>： IVFはベクトル空間をクラスタに分割し、検索範囲を狭める。データセット全体を評価する代わりに、このアルゴリズムはクエリーベクトルに最も近いクラスターのみに焦点を当てる。</li>
 <li><strong>PQによるきめ細かな比較</strong>：選択されたクラスタ内で、PQは圧縮・量子化されたベクトル表現を用いて近似距離を高速に計算する。</li>
 </ol>
 <p><strong>IVF_PQ</strong>インデックスの性能は、IVFとPQの両アルゴリズムを制御するパラメータに大きく影響される。与えられたデータセットとアプリケーションに最適な結果を得るためには、これらのパラメータを調整することが極めて重要です。これらのパラメータの詳細と調整方法については、<a href="#index-params">Index paramsを</a>参照してください。</p>
@@ -197,7 +197,7 @@ res = MilvusClient.search(
 <tbody>
 <tr><td>IVF</td><td><code translate="no">nlist</code></td><td>インデックス構築時にk-meansアルゴリズムを使用して作成するクラスタの数。</td><td><strong>型</strong>：整数<br><strong>範囲</strong>[1, 65536]<br><strong>デフォルト値</strong>：<code translate="no">128</code></td><td>より大きな<code translate="no">nlist</code> 値は、より洗練されたクラスタを作成することでリコールを向上させるが、インデックス構築時間を増加させる。データセットサイズと利用可能なリソースに基づいて最適化する。<br>ほとんどの場合、この範囲内の値を設定することを推奨する：[32, 4096].</td></tr>
 <tr><td>PQ</td><td><code translate="no">m</code></td><td>量子化処理時に各高次元ベクトルを分割するサブベクトルの数（量子化に使用）。</td><td><strong>型</strong>：整数<br><strong>範囲</strong>： [1, 65536[1, 65536]<br><strong>デフォルト値</strong>：なし</td><td><code translate="no">m</code> の値を大きくすると精度が向上するが、計算の複雑さとメモリ使用量も増加する。<br><code translate="no">m</code> は、適切な分解を保証するために、ベクトル次元<em>(D</em>) の約数でなければなりません。一般的に推奨される値は<em>m = D/2</em> です。<br>ほとんどの場合、この範囲内の値を設定することをお勧めします：[D/8, D]。</td></tr>
-<tr><td></td><td><code translate="no">nbits</code></td><td>各サブベクトルの重心インデックスを圧縮形式で表現するためのビット数。各コードブックは2^nビットのセントロイドを含む。例えば、<code translate="no">nbits</code> が 8 に設定されている場合、各サブベクトルは 8 ビットのセントロイドのインデックスで表現される。これにより、そのサブベクトルのコードブックには2^8 (256) 個のセントロイドが存在することになる。</td><td><strong>タイプ</strong>整数<br><strong>範囲</strong>： [1, 64[1, 64]<br><strong>デフォルト値</strong>：<code translate="no">8</code></td><td><code translate="no">nbits</code> の値を大きくすると、コードブックを大きくすることができ、元のベクトルをより正確に表現できる可能性がある。しかし、これは各インデックスを格納するためにより多くのビットを使用することを意味し、結果として圧縮率が低下します。<br>ほとんどの場合、この範囲内の値を設定することをお勧めします：[1, 16].</td></tr>
+<tr><td></td><td><code translate="no">nbits</code></td><td>各サブベクトルの重心インデックスを圧縮形式で表現するためのビット数。各コードブックは2^nビットのセントロイドを含む。例えば、<code translate="no">nbits</code> が 8 に設定されている場合、各サブベクトルは 8 ビットのセントロイドのインデックスで表現される。これにより、そのサブベクトルのコードブックには、2^8 (256) 個のセントロイドが含まれることになる。</td><td><strong>タイプ</strong>整数<br><strong>範囲</strong>： [1, 64[1, 64]<br><strong>デフォルト値</strong>：<code translate="no">8</code></td><td><code translate="no">nbits</code> の値を大きくすると、コードブックを大きくすることができ、元のベクトルをより正確に表現できる可能性がある。しかし、これは各インデックスを格納するためにより多くのビットを使用することを意味し、結果として圧縮率が低下します。<br>ほとんどの場合、この範囲内の値を設定することをお勧めします：[1, 16].</td></tr>
 </tbody>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<a href="#Search-on-index">インデックスを検索する</a>際に<code translate="no">search_params.params</code> で設定できるパラメータの一覧です。</p>

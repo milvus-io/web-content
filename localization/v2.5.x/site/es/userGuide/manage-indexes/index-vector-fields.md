@@ -38,7 +38,7 @@ title: Indexar campos vectoriales
         ></path>
       </svg>
     </button></h2><p>Aprovechando los metadatos almacenados en un archivo de índice, Milvus organiza sus datos en una estructura especializada, facilitando la rápida recuperación de la información solicitada durante las búsquedas o consultas.</p>
-<p>Milvus proporciona varios tipos de índices y métricas para ordenar los valores de campo para realizar búsquedas de similitud eficientes. La siguiente tabla enumera los tipos de índices y métricas soportados para diferentes tipos de campos vectoriales. Actualmente, Milvus soporta varios tipos de datos vectoriales, incluyendo incrustaciones en coma flotante (a menudo conocidas como vectores en coma flotante o vectores densos), incrustaciones binarias (también conocidas como vectores binarios) e incrustaciones dispersas (también conocidas como vectores dispersos). Para obtener más información, consulte <a href="/docs/es/index.md">Índice en memoria</a> y <a href="/docs/es/metric.md">métricas de similitud</a>.</p>
+<p>Milvus proporciona varios tipos de índices y métricas para ordenar los valores de los campos con el fin de realizar búsquedas de similitud eficientes. La siguiente tabla enumera los tipos de índices y métricas soportados para diferentes tipos de campos vectoriales. Actualmente, Milvus soporta varios tipos de datos vectoriales, incluyendo incrustaciones en coma flotante (a menudo conocidas como vectores en coma flotante o vectores densos), incrustaciones binarias (también conocidas como vectores binarios) e incrustaciones dispersas (también conocidas como vectores dispersos). Para obtener más información, consulte <a href="/docs/es/index.md">Índice en memoria</a> y <a href="/docs/es/metric.md">métricas de similitud</a>.</p>
 <div class="filter">
  <a href="#floating">Incrustaciones</a> <a href="#sparse">en</a> <a href="#floating">coma flotante</a> <a href="#binary">Incrustaciones binarias</a> <a href="#sparse">Incrustaciones dispersas</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -78,16 +78,19 @@ title: Indexar campos vectoriales
 <thead>
   <tr>
     <th class="tg-0pky" style="width: 204px;">Tipos métricos</th>
-    <th class="tg-0pky">Tipos de índice</th>
+    <th class="tg-0pky">Tipos de índices</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>SPARSE_INVERTED_INDEX</li><li>VARA_ESPARAZ</li></ul></td>
+    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
   </tr>
 </tbody>
 </table>
+<div class="alert note">
+<p>A partir de Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> queda obsoleto. En su lugar, se recomienda utilizar <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> por equivalencia manteniendo la compatibilidad. Para más información, consulte <a href="/docs/es/sparse_vector.md#Set-index-params-for-vector-field">Vector disperso</a>.</p>
+</div>
 </div>
 <p>Se recomienda crear índices tanto para el campo vectorial como para los campos escalares a los que se accede con frecuencia.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparativos<button data-href="#Preparations" class="anchor-icon" translate="no">
@@ -334,7 +337,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">sync</code></td>
-      <td>Controla cómo se construye el índice en relación con la petición del cliente. Valores válidos:<br><ul><li><code translate="no">True</code> (por defecto): El cliente espera a que el índice esté completamente construido antes de devolverlo. Esto significa que no obtendrá una respuesta hasta que el proceso se haya completado.</li><li><code translate="no">False</code>: El cliente regresa inmediatamente después de recibir la petición y el índice se está construyendo en segundo plano. Para saber si se ha completado la creación del índice, utilice el método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
+      <td>Controla cómo se construye el índice en relación con la petición del cliente. Valores válidos:<br><ul><li><code translate="no">True</code> (por defecto): El cliente espera hasta que el índice esté completamente construido antes de volver. Esto significa que no obtendrá una respuesta hasta que el proceso se haya completado.</li><li><code translate="no">False</code>: El cliente regresa inmediatamente después de recibir la petición y el índice se está construyendo en segundo plano. Para saber si se ha completado la creación del índice, utilice el método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>

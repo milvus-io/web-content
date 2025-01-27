@@ -416,7 +416,7 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
 Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
@@ -861,7 +861,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-Collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-在</td><td style="text-align:left">-索引名称</td><td style="text-align:left">索引名称。</td></tr>
 </tbody>
 </table>

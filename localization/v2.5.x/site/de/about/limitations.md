@@ -242,19 +242,19 @@ summary: Informieren Sie sich über die Grenzen bei der Verwendung von Milvus.
     </button></h2><p>Die folgende Tabelle gibt einen Überblick über die Unterstützung für verschiedene Suchverhaltensweisen bei unterschiedlichen Indextypen.</p>
 <table>
 <thead>
-<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>SPÄRLICHER_INVERTIERTER_INDEX</th><th>SPARSE_WAND</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
+<tr><th></th><th>HNSW</th><th>DISKANN</th><th>FLAT</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>SPÄRLICHER_INVERTIERTER_INDEX</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
 </thead>
 <tbody>
-<tr><td>Einfache Suche</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
-<tr><td>Suche nach Partitionen</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
-<tr><td>Einfache Suche mit abgerufenen Rohdaten</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
-<tr><td>Einfache Suche mit Paginierung</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
-<tr><td>Gefilterte Suche</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
-<tr><td>Bereichssuche</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Ja</td></tr>
-<tr><td>Gruppierungssuche</td><td>Ja</td><td>Nein</td><td>Ja</td><td>Ja</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td></tr>
-<tr><td>Suche mit Iterator</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td></tr>
-<tr><td>Hybride Suche</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja(Nur RRFRanker)</td><td>Ja(Nur RRFRanker)</td><td>Ja</td><td>Ja</td></tr>
-<tr><td>Abfragen/Get</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
-<tr><td>Abfrage mit Iterator</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+<tr><td>Einfache Suche</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+<tr><td>Suche nach Partitionen</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+<tr><td>Einfache Suche mit abgerufenen Rohdaten</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+<tr><td>Einfache Suche mit Paginierung</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+<tr><td>Gefilterte Suche</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+<tr><td>Bereichssuche</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+<tr><td>Gruppierungssuche</td><td>Ja</td><td>Nein</td><td>Ja</td><td>Ja</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Nein</td><td>Nein</td></tr>
+<tr><td>Suche mit Iterator</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Nein</td><td>Nein</td></tr>
+<tr><td>Hybride Suche</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja(Nur RRFRanker)</td><td>Ja</td><td>Ja</td></tr>
+<tr><td>Abfragen/Get</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+<tr><td>Abfrage mit Iterator</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Ja</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Nein</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
 </tbody>
 </table>

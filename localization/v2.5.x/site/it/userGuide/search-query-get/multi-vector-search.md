@@ -42,7 +42,7 @@ title: Ricerca ibrida
 <h3 id="Sparse-Dense-Vector-Search​" class="common-anchor-header">Ricerca vettoriale sparsa e densa</h3><p>Diversi tipi di vettori possono rappresentare informazioni diverse e l'uso di vari modelli di incorporazione può rappresentare in modo più completo diverse caratteristiche e aspetti dei dati. Ad esempio, l'uso di diversi modelli di incorporamento per la stessa frase può generare un vettore denso per rappresentare il significato semantico e un vettore rado per rappresentare la frequenza delle parole nella frase.</p>
 <ul>
 <li><p><strong>Vettori sparsi:</strong> I vettori sparsi sono caratterizzati da un'elevata dimensionalità del vettore e dalla presenza di pochi valori non nulli. Questa struttura li rende particolarmente adatti alle applicazioni tradizionali di information retrieval. Nella maggior parte dei casi, il numero di dimensioni utilizzate nei vettori sparsi corrisponde a diversi token in una o più lingue. A ogni dimensione viene assegnato un valore che indica l'importanza relativa di quel token all'interno del documento. Questa disposizione si rivela vantaggiosa per i compiti che prevedono la corrispondenza del testo.</p></li>
-<li><p><strong>Vettori densi:</strong> I vettori densi sono incorporazioni derivate dalle reti neurali. Disposti in un array ordinato, questi vettori catturano l'essenza semantica del testo in ingresso. Si noti che i vettori densi non sono limitati all'elaborazione del testo; sono anche ampiamente utilizzati nella computer vision per rappresentare la semantica dei dati visivi. Questi vettori densi, di solito generati da modelli di incorporazione del testo, sono caratterizzati dalla maggior parte o da tutti gli elementi non nulli. Pertanto, i vettori densi sono particolarmente efficaci per le applicazioni di ricerca semantica, in quanto possono restituire i risultati più simili in base alla distanza vettoriale anche in assenza di corrispondenze testuali esatte. Questa capacità consente di ottenere risultati di ricerca più sfumati e consapevoli del contesto, spesso cogliendo relazioni tra concetti che potrebbero sfuggire agli approcci basati sulle parole chiave.</p></li>
+<li><p><strong>Vettori densi:</strong> I vettori densi sono incorporazioni derivate dalle reti neurali. Disposti in un array ordinato, questi vettori catturano l'essenza semantica del testo in ingresso. Si noti che i vettori densi non sono limitati all'elaborazione del testo; sono anche ampiamente utilizzati nella computer vision per rappresentare la semantica dei dati visivi. Questi vettori densi, solitamente generati da modelli di incorporazione del testo, sono caratterizzati dalla maggior parte o da tutti gli elementi non nulli. Pertanto, i vettori densi sono particolarmente efficaci per le applicazioni di ricerca semantica, in quanto possono restituire i risultati più simili in base alla distanza vettoriale anche in assenza di corrispondenze testuali esatte. Questa capacità consente di ottenere risultati di ricerca più sfumati e consapevoli del contesto, spesso cogliendo relazioni tra concetti che potrebbero sfuggire agli approcci basati sulle parole chiave.</p></li>
 </ul>
 <p>Per maggiori dettagli, consultare <a href="/docs/it/sparse_vector.md">Sparse Vector</a> e <a href="/docs/it/dense-vector.md">Dense Vector</a>.</p>
 <h3 id="Multimodal-Search​" class="common-anchor-header">Ricerca multimodale</h3><p>La ricerca multimodale si riferisce alla ricerca di similarità di dati non strutturati attraverso più modalità (come immagini, video, audio, testo, ecc.). Ad esempio, una persona può essere rappresentata utilizzando diverse modalità di dati, come le impronte digitali, le impronte vocali e i tratti del viso. La ricerca ibrida supporta più ricerche simultanee. Ad esempio, la ricerca di una persona con impronte digitali e impronte vocali simili.</p>
@@ -69,7 +69,7 @@ title: Ricerca ibrida
 <li><p>Inserire i vettori sparsi-densi nella collezione appena creata nel passaggio precedente.</p></li>
 <li><p>Eseguire una ricerca ibrida: La ricerca ANN sui vettori densi restituirà un insieme di risultati top-K più simili, mentre la corrispondenza testuale sui vettori radi restituirà anch'essa un insieme di risultati top-K.</p></li>
 <li><p>Normalizzazione: Normalizzare i punteggi delle due serie di risultati top-K, convertendo i punteggi in un intervallo compreso tra [0,1].</p></li>
-<li><p>Scegliere una strategia di reranking appropriata per unire e rerankare i due insiemi di risultati top-K e restituire infine un insieme finale di risultati top-K.</p></li>
+<li><p>Scegliere una strategia di reranking appropriata per unire e rerankizzare i due insiemi di risultati top-K e restituire infine un insieme finale di risultati top-K.</p></li>
 </ol>
 <p>
   
@@ -250,7 +250,7 @@ index_params.add_index(​
     index_name=<span class="hljs-string">&quot;sparse_index&quot;</span>,​
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,  <span class="hljs-comment"># Index type for sparse vectors​</span>
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Currently, only IP (Inner Product) is supported for sparse vectors​</span>
-    params={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
+    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -268,7 +268,7 @@ denseParams.<span class="hljs-title function_">put</span>(<span class="hljs-stri
         .<span class="hljs-title function_">build</span>();​
 ​
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt; sparseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
+sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);​
 <span class="hljs-title class_">IndexParam</span> indexParamForSparseField = <span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
         .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_index&quot;</span>)​
@@ -456,7 +456,7 @@ search_param_2 = {​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,​
     <span class="hljs-string">&quot;param&quot;</span>: {​
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,​
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}​
+        <span class="hljs-string">&quot;params&quot;</span>: {}​
     },​
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>​
 }​
@@ -494,7 +494,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
         .vectorFieldName(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .vectors(querySparseVectors)​
         .metricType(IndexParam.MetricType.IP)​
-        .<span class="hljs-keyword">params</span>(<span class="hljs-string">&quot;{\&quot;drop_ratio_build\&quot;: 0.2}&quot;</span>)​
+        .<span class="hljs-keyword">params</span>()​
         .topK(<span class="hljs-number">2</span>)​
         .build());​
 
@@ -503,20 +503,20 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
     <span class="hljs-string">&quot;data&quot;</span>: query_vector, ​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;dense&quot;</span>, ​
     <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-comment">// 参数值需要与 Collection Schema 中定义的保持一致​</span>
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
         <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}​
     },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// AnnSearchRequest 返还的搜索结果数量​</span>
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
 }​
 ​
 <span class="hljs-keyword">const</span> search_param_2 = {​
     <span class="hljs-string">&quot;data&quot;</span>: query_sparse_vector, ​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>, ​
     <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-comment">// 参数值需要与 Collection Schema 中定义的保持一致​</span>
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}​
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
+        <span class="hljs-string">&quot;params&quot;</span>: {}​
     },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// AnnSearchRequest 返还的搜索结果数量​</span>
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
 }​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -535,9 +535,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
         &quot;data&quot;: [{&quot;3573&quot;: 0.34701499565746674}, {&quot;5263&quot;: 0.2639375518635271}],​
         &quot;annsField&quot;: &quot;sparse&quot;,​
         &quot;params&quot;: {​
-            &quot;params&quot;: {​
-                &quot;drop_ratio_build&quot;: 0.2​
-             }​
+            &quot;params&quot;: {}​
         },​
         &quot;limit&quot;: 2​
     }​
@@ -554,7 +552,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
 <p>I due esempi seguenti mostrano come utilizzare le strategie di reranking WeightedRanker e RRFRanker.</p>
 <ol>
 <li><p><strong>Esempio 1: Uso del WeightedRanker</strong></p>
-<p>Quando si utilizza la strategia WeightedRanker, è necessario inserire i valori dei pesi nella funzione <code translate="no">WeightedRanker</code>. Il numero di ricerche della RNA di base in una ricerca ibrida corrisponde al numero di valori che devono essere immessi. I valori inseriti devono essere compresi nell'intervallo [0,1], con valori più vicini a 1 che indicano una maggiore importanza.</p>
+<p>Quando si utilizza la strategia WeightedRanker, è necessario inserire i valori di peso nella funzione <code translate="no">WeightedRanker</code>. Il numero di ricerche della RNA di base in una ricerca ibrida corrisponde al numero di valori che devono essere immessi. I valori inseriti devono essere compresi nell'intervallo [0,1], con valori più vicini a 1 che indicano una maggiore importanza.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">WeightedRanker</span>​

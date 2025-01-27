@@ -5,7 +5,7 @@ summary: >-
   Vektor jarang adalah metode representasi data yang penting dalam pencarian
   informasi dan pemrosesan bahasa alami. Meskipun vektor padat populer karena
   kemampuan pemahaman semantiknya yang sangat baik, vektor jarang sering kali
-  memberikan hasil yang lebih akurat dalam hal aplikasi yang memerlukan
+  memberikan hasil yang lebih akurat dalam hal aplikasi yang membutuhkan
   pencocokan kata kunci atau frasa yang tepat.
 ---
 <h1 id="Sparse-Vector​" class="common-anchor-header">Vektor Jarang<button data-href="#Sparse-Vector​" class="anchor-icon" translate="no">
@@ -241,7 +241,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
     field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
     metric_type: MetricType.IP,
-    index_type: IndexType.SPARSE_WAND,
+    index_type: IndexType.SPARSE_INVERTED_INDEX,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
     },
@@ -264,13 +264,12 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <li><p><code translate="no">index_type</code>: Jenis indeks yang akan dibuat untuk bidang vektor jarang. Nilai yang valid:</p>
 <ul>
 <li><code translate="no">SPARSE_INVERTED_INDEX</code>: Indeks terbalik tujuan umum untuk vektor jarang.</li>
-<li><code translate="no">SPARSE_WAND</code>: Jenis indeks khusus yang didukung dalam Milvus v2.5.3 dan sebelumnya.</li>
 </ul>
   <div class="alert note">
 <p>Mulai Milvus 2.5.4 dan seterusnya, <code translate="no">SPARSE_WAND</code> sudah tidak digunakan lagi. Sebagai gantinya, disarankan untuk menggunakan <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> untuk kesetaraan dengan tetap menjaga kompatibilitas.</p>
   </div>
 </li>
-<li><p><code translate="no">metric_type</code>: Metrik yang digunakan untuk menghitung kemiripan antara vektor yang jarang. Nilai yang valid:</p>
+<li><p><code translate="no">metric_type</code>: Metrik yang digunakan untuk menghitung kemiripan antara vektor jarang. Nilai yang valid:</p>
 <ul>
 <li><p><code translate="no">IP</code> (Inner Product): Mengukur kemiripan dengan menggunakan dot product.</p></li>
 <li><p><code translate="no">BM25</code>: Biasanya digunakan untuk pencarian teks lengkap, dengan fokus pada kemiripan tekstual.</p>
@@ -496,7 +495,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk informasi lebih lanjut tentang parameter pencarian kemiripan, lihat <a href="/docs/id/single-vector-search.md">Pencarian ANN Dasar</a>.</p>
-<h2 id="Limits" class="common-anchor-header">Batas<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -514,7 +513,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
     </button></h2><p>Ketika menggunakan vektor jarang di Milvus, pertimbangkan batasan-batasan berikut:</p>
 <ul>
 <li><p>Saat ini, hanya metrik jarak <strong>IP</strong> dan <strong>BM25</strong> (untuk pencarian teks lengkap) yang didukung untuk vektor jarang. Dimensi vektor jarang yang tinggi membuat L2 dan jarak kosinus tidak praktis.</p></li>
-<li><p>Untuk bidang vektor jarang, hanya jenis indeks <strong>SPARSE_INVERTED_INDEX</strong> dan <strong>SPARSE_WAND</strong> yang didukung.</p></li>
+<li><p>Untuk bidang vektor jarang, hanya tipe indeks <strong>SPARSE_INVERTED_INDEX</strong> yang didukung.</p></li>
 <li><p>Tipe data yang didukung untuk vektor jarang:</p>
 <ul>
 <li>Bagian dimensi harus berupa bilangan bulat 32-bit yang tidak ditandatangani;</li>
@@ -542,12 +541,8 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Dapatkah Anda menjelaskan perbedaan antara SPARSE_INVERTED_INDEX dan SPARSE_WAND, dan bagaimana cara memilih di antara keduanya?</strong></p>
-<p><strong>SPARSE_INVERTED_INDEX</strong> adalah indeks terbalik tradisional, sedangkan <strong>SPARSE_WAND</strong> menggunakan algoritme <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> untuk mengurangi jumlah evaluasi jarak IP penuh selama pencarian. <strong>SPARSE_WAND</strong> biasanya lebih cepat, tetapi kinerjanya dapat menurun dengan meningkatnya kepadatan vektor. Untuk memilih di antara keduanya, lakukan eksperimen dan tolok ukur berdasarkan dataset dan kasus penggunaan spesifik Anda.</p></li>
-<li><p><strong>Bagaimana cara memilih parameter drop_ratio_build dan drop_ratio_search?</strong></p>
-<p>Pilihan <strong>drop_ratio_build</strong> dan <strong>drop_ratio_search</strong> bergantung pada karakteristik data Anda dan kebutuhan Anda untuk latensi/throughput dan akurasi pencarian.</p></li>
-<li><p><strong>Dapatkah dimensi embedding yang jarang berupa nilai diskrit dalam ruang uint32?</strong></p>
-<p>Ya, dengan satu pengecualian. Dimensi embedding jarang dapat berupa nilai apa pun dalam kisaran <code translate="no">[0, maximum of uint32)</code>. Ini berarti Anda tidak dapat menggunakan nilai maksimum uint32.</p></li>
+<li><p><strong>Dapatkah dimensi penyisipan jarang berupa nilai diskrit dalam ruang uint32?</strong></p>
+<p>Ya, dengan satu pengecualian. Dimensi sematan jarang dapat berupa nilai apa pun dalam kisaran <code translate="no">[0, maximum of uint32)</code>. Ini berarti Anda tidak dapat menggunakan nilai maksimum uint32.</p></li>
 <li><p><strong>Apakah pencarian pada ruas yang sedang tumbuh dilakukan melalui indeks atau dengan brute force?</strong></p>
 <p>Pencarian pada segmen yang sedang tumbuh dilakukan melalui indeks dengan tipe yang sama dengan indeks segmen yang disegel. Untuk segmen baru yang sedang tumbuh sebelum indeks dibangun, pencarian brute force digunakan.</p></li>
 <li><p><strong>Apakah mungkin untuk memiliki vektor yang jarang dan padat dalam satu koleksi?</strong></p>

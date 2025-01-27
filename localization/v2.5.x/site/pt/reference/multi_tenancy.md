@@ -36,7 +36,7 @@ title: Estratégias multi-tenancy
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Desde a versão 2.2.9 do Milvus, é possível criar múltiplas bases de dados num único cluster Milvus. Esta funcionalidade permite obter um multi-tenancy orientado para a base de dados, atribuindo uma base de dados a cada inquilino, para que estes possam criar as suas próprias colecções. Esta abordagem proporciona o melhor isolamento de dados e recursos para os inquilinos, mas está limitada a 64 bases de dados num cluster, no máximo.</p>
+    </button></h2><p>Desde a versão 2.2.9 do Milvus, é possível criar múltiplas bases de dados num único cluster Milvus. Esta funcionalidade permite obter um multi-tenancy orientado para a base de dados, atribuindo uma base de dados a cada inquilino, de modo a que estes possam criar as suas próprias colecções. Esta abordagem proporciona o melhor isolamento de dados e recursos para os inquilinos, mas está limitada a 64 bases de dados num cluster, no máximo.</p>
 <h2 id="Collection-oriented-multi-tenancy" class="common-anchor-header">Multitenancy orientado para colecções<button data-href="#Collection-oriented-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,7 +84,7 @@ title: Estratégias multi-tenancy
 <tr><td>Orientada para a base de dados</td><td>Forte</td><td>Forte</td><td>64</td><td>Para aqueles que necessitam que as colecções variem com os projectos, especialmente adequado para o isolamento de dados entre departamentos na sua organização.</td></tr>
 <tr><td>Uma coleção para todos</td><td>Fraca</td><td>Média</td><td>N/A</td><td>Para aqueles que têm recursos limitados e não são sensíveis ao isolamento de dados.</td></tr>
 <tr><td>Uma coleção por inquilino</td><td>Forte</td><td>Forte</td><td>Menos de 10.000</td><td>Para aqueles que têm menos de 10.000 inquilinos por cluster.</td></tr>
-<tr><td>Uma partição por locatário</td><td>Média</td><td>Forte</td><td>4,096</td><td>Para aqueles que têm menos de 4.096 locatários por coleção.</td></tr>
+<tr><td>Uma partição por locatário</td><td>Média</td><td>Forte</td><td>1,024</td><td>Para aqueles que têm menos de 1.024 locatários por coleção.</td></tr>
 <tr><td>Baseado em chave de partição</td><td>Média</td><td>Forte</td><td>10,000,000+</td><td>Para aqueles que prevêem um rápido aumento de inquilinos para milhões.</td></tr>
 </tbody>
 </table>

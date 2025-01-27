@@ -42,10 +42,10 @@ title: Pesquisa híbrida
 <h3 id="Sparse-Dense-Vector-Search​" class="common-anchor-header">Pesquisa de vectores esparso-densos</h3><p>Diferentes tipos de vectores podem representar diferentes informações, e a utilização de vários modelos de incorporação pode representar de forma mais abrangente diferentes caraterísticas e aspectos dos dados. Por exemplo, a utilização de diferentes modelos de incorporação para a mesma frase pode gerar um vetor denso para representar o significado semântico e um vetor esparso para representar a frequência de palavras na frase.</p>
 <ul>
 <li><p><strong>Vectores esparsos:</strong> Os vectores esparsos são caracterizados pela sua elevada dimensionalidade vetorial e pela presença de poucos valores não nulos. Esta estrutura torna-os particularmente adequados para aplicações tradicionais de recuperação de informação. Na maioria dos casos, o número de dimensões utilizadas nos vectores esparsos corresponde a diferentes tokens numa ou mais línguas. A cada dimensão é atribuído um valor que indica a importância relativa desse token no documento. Esta disposição revela-se vantajosa para tarefas que envolvem correspondência de texto.</p></li>
-<li><p><strong>Vectores densos:</strong> Os vectores densos são incorporados a partir de redes neuronais. Quando dispostos numa matriz ordenada, estes vectores captam a essência semântica do texto de entrada. Note-se que os vectores densos não se limitam ao processamento de texto; são também amplamente utilizados na visão computacional para representar a semântica dos dados visuais. Estes vectores densos, normalmente gerados por modelos de incorporação de texto, caracterizam-se pelo facto de a maioria ou todos os elementos serem diferentes de zero. Assim, os vectores densos são particularmente eficazes para aplicações de pesquisa semântica, uma vez que podem devolver os resultados mais semelhantes com base na distância vetorial, mesmo na ausência de correspondências exactas de texto. Esta capacidade permite resultados de pesquisa mais matizados e conscientes do contexto, capturando frequentemente relações entre conceitos que podem ser perdidas por abordagens baseadas em palavras-chave.</p></li>
+<li><p><strong>Vectores densos:</strong> Os vectores densos são incorporados a partir de redes neuronais. Quando dispostos numa matriz ordenada, estes vectores captam a essência semântica do texto de entrada. Note-se que os vectores densos não se limitam ao processamento de texto; são também amplamente utilizados na visão por computador para representar a semântica dos dados visuais. Estes vectores densos, normalmente gerados por modelos de incorporação de texto, caracterizam-se pelo facto de a maioria ou todos os elementos serem diferentes de zero. Assim, os vectores densos são particularmente eficazes para aplicações de pesquisa semântica, uma vez que podem devolver os resultados mais semelhantes com base na distância vetorial, mesmo na ausência de correspondências exactas de texto. Esta capacidade permite resultados de pesquisa mais matizados e conscientes do contexto, capturando frequentemente relações entre conceitos que podem ser perdidas por abordagens baseadas em palavras-chave.</p></li>
 </ul>
 <p>Para obter mais detalhes, consulte <a href="/docs/pt/sparse_vector.md">Vetor esparso</a> e <a href="/docs/pt/dense-vector.md">Vetor denso</a>.</p>
-<h3 id="Multimodal-Search​" class="common-anchor-header">Pesquisa multimodal</h3><p>A pesquisa multimodal refere-se à pesquisa por semelhança de dados não estruturados em várias modalidades (como imagens, vídeos, áudio, texto, etc.). Por exemplo, uma pessoa pode ser representada utilizando várias modalidades de dados, como impressões digitais, impressões de voz e caraterísticas faciais. A pesquisa híbrida suporta várias pesquisas em simultâneo. Por exemplo, procurar uma pessoa com impressões digitais e impressões de voz semelhantes.</p>
+<h3 id="Multimodal-Search​" class="common-anchor-header">Pesquisa multimodal</h3><p>A pesquisa multimodal refere-se à pesquisa de semelhanças de dados não estruturados em várias modalidades (como imagens, vídeos, áudio, texto, etc.). Por exemplo, uma pessoa pode ser representada utilizando várias modalidades de dados, como impressões digitais, impressões de voz e caraterísticas faciais. A pesquisa híbrida suporta várias pesquisas em simultâneo. Por exemplo, procurar uma pessoa com impressões digitais e impressões de voz semelhantes.</p>
 <h2 id="Workflow​" class="common-anchor-header">Fluxo de trabalho<button data-href="#Workflow​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,7 +65,7 @@ title: Pesquisa híbrida
 <ol>
 <li><p>Gerar vectores densos através de modelos de incorporação como <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search#A-Quick-Recap-of-BERT">BERT</a> e <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI">Transformers</a>.</p></li>
 <li><p>Gerar vectores esparsos através de modelos de incorporação como <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>, <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#BGE-M3">BGE-M3</a>, <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#SPLADE">SPLADE</a>, etc.</p></li>
-<li><p>Criar uma coleção no Zilliz e definir o esquema da coleção que inclui campos vectoriais densos e esparsos.</p></li>
+<li><p>Criar uma coleção no Zilliz e definir o esquema de coleção que inclui campos vectoriais densos e esparsos.</p></li>
 <li><p>Insira os vectores esparsos-densos na coleção criada no passo anterior.</p></li>
 <li><p>Efectue uma pesquisa híbrida: A pesquisa ANN em vectores densos devolverá um conjunto de resultados top-K mais semelhantes e a correspondência de texto em vectores esparsos também devolverá um conjunto de resultados top-K.</p></li>
 <li><p>Normalização: Normalize as pontuações dos dois conjuntos de resultados top-K, convertendo as pontuações para um intervalo entre [0,1].</p></li>
@@ -250,7 +250,7 @@ index_params.add_index(​
     index_name=<span class="hljs-string">&quot;sparse_index&quot;</span>,​
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,  <span class="hljs-comment"># Index type for sparse vectors​</span>
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Currently, only IP (Inner Product) is supported for sparse vectors​</span>
-    params={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
+    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -268,7 +268,7 @@ denseParams.<span class="hljs-title function_">put</span>(<span class="hljs-stri
         .<span class="hljs-title function_">build</span>();​
 ​
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt; sparseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
+sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);​
 <span class="hljs-title class_">IndexParam</span> indexParamForSparseField = <span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
         .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_index&quot;</span>)​
@@ -430,7 +430,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);​
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Create-multiple-AnnSearchRequest-instances​" class="common-anchor-header">Criar várias instâncias de AnnSearchRequest</h3><p>O Hybrid Search é implementado através da criação de vários <code translate="no">AnnSearchRequest</code> na função <code translate="no">hybrid_search()</code>, em que cada <code translate="no">AnnSearchRequest</code> representa um pedido de pesquisa ANN básico para um campo vetorial específico. Por conseguinte, antes de efetuar uma Pesquisa Híbrida, é necessário criar um <code translate="no">AnnSearchRequest</code> para cada campo vetorial.</p>
 <div class="alert note">
-<p>Na Pesquisa Híbrida, cada <code translate="no">AnnSearchRequest</code> suporta apenas um vetor de consulta.</p>
+<p>No Hybrid Search, cada <code translate="no">AnnSearchRequest</code> suporta apenas um vetor de consulta.</p>
 </div>
 <p>Suponhamos que o texto da consulta "Who started AI research?" já foi convertido em vectores esparsos e densos. Com base nisto, são criados dois pedidos de pesquisa <code translate="no">AnnSearchRequest</code> para os campos vectoriais <code translate="no">sparse</code> e <code translate="no">dense</code>, respetivamente, como se mostra no exemplo seguinte.</p>
 <div class="multipleCode">
@@ -456,7 +456,7 @@ search_param_2 = {​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,​
     <span class="hljs-string">&quot;param&quot;</span>: {​
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,​
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}​
+        <span class="hljs-string">&quot;params&quot;</span>: {}​
     },​
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>​
 }​
@@ -494,7 +494,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
         .vectorFieldName(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .vectors(querySparseVectors)​
         .metricType(IndexParam.MetricType.IP)​
-        .<span class="hljs-keyword">params</span>(<span class="hljs-string">&quot;{\&quot;drop_ratio_build\&quot;: 0.2}&quot;</span>)​
+        .<span class="hljs-keyword">params</span>()​
         .topK(<span class="hljs-number">2</span>)​
         .build());​
 
@@ -503,20 +503,20 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
     <span class="hljs-string">&quot;data&quot;</span>: query_vector, ​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;dense&quot;</span>, ​
     <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-comment">// 参数值需要与 Collection Schema 中定义的保持一致​</span>
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
         <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}​
     },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// AnnSearchRequest 返还的搜索结果数量​</span>
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
 }​
 ​
 <span class="hljs-keyword">const</span> search_param_2 = {​
     <span class="hljs-string">&quot;data&quot;</span>: query_sparse_vector, ​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>, ​
     <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-comment">// 参数值需要与 Collection Schema 中定义的保持一致​</span>
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}​
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
+        <span class="hljs-string">&quot;params&quot;</span>: {}​
     },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// AnnSearchRequest 返还的搜索结果数量​</span>
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
 }​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -535,9 +535,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
         &quot;data&quot;: [{&quot;3573&quot;: 0.34701499565746674}, {&quot;5263&quot;: 0.2639375518635271}],​
         &quot;annsField&quot;: &quot;sparse&quot;,​
         &quot;params&quot;: {​
-            &quot;params&quot;: {​
-                &quot;drop_ratio_build&quot;: 0.2​
-             }​
+            &quot;params&quot;: {}​
         },​
         &quot;limit&quot;: 2​
     }​
@@ -580,7 +578,7 @@ rerank= <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Exemplo 2: Usar o RRFRanker</strong></p>
-<p>Ao utilizar a estratégia RRFRanker, é necessário introduzir o valor do parâmetro <code translate="no">k</code> no RRFRanker. O valor padrão de <code translate="no">k</code> é 60. Este parâmetro ajuda a determinar como as classificações são combinadas a partir de diferentes pesquisas ANN, com o objetivo de equilibrar e misturar a importância em todas as pesquisas.</p>
+<p>Ao utilizar a estratégia RRFRanker, é necessário introduzir o valor do parâmetro <code translate="no">k</code> no RRFRanker. O valor padrão de <code translate="no">k</code> é 60. Esse parâmetro ajuda a determinar como as classificações são combinadas de diferentes pesquisas ANN, com o objetivo de equilibrar e misturar a importância em todas as pesquisas.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">RRFRanker</span>​

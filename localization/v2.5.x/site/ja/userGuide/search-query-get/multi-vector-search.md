@@ -39,7 +39,7 @@ title: ハイブリッド検索
     </button></h2><p>ハイブリッド検索は以下の2つのシナリオに適しています。</p>
 <h3 id="Sparse-Dense-Vector-Search​" class="common-anchor-header">疎密ベクトル検索</h3><p>異なるタイプのベクトルは異なる情報を表現することができ、様々な埋め込みモデルを使用することで、データの異なる特徴や側面をより包括的に表現することができます。例えば、同じ文に対して異なる埋め込みモデルを使用することで、意味的な意味を表す密なベクトルと、文中の単語頻度を表す疎なベクトルを生成することができる。</p>
 <ul>
-<li><p><strong>スパース・ベクトル：</strong>スパースベクトルは、ベクトル次元が高く、非ゼロ値が少ないという特徴がある。この構造により、従来の情報検索アプリケーションに特に適している。ほとんどの場合、スパースベクトルで使用される次元数は、1つ以上の言語にわたる異なるトークンに対応します。各次元には、文書内のそのトークンの相対的な重要度を示す値が割り当てられます。このレイアウトは、テキストのマッチングを伴うタスクに有利です。</p></li>
+<li><p><strong>スパース・ベクトル：</strong>スパースベクトルは、ベクトル次元が高く、非ゼロ値が少ないという特徴がある。この構造により、従来の情報検索アプリケーションに特に適している。ほとんどの場合、スパース・ベクトルで使用される次元数は、1つまたは複数の言語にわたる異なるトークンに対応します。各次元には、文書内のそのトークンの相対的な重要度を示す値が割り当てられます。このレイアウトは、テキストのマッチングを伴うタスクに有利です。</p></li>
 <li><p><strong>密なベクトル：</strong>密なベクトルは、ニューラルネットワークに由来する埋め込みである。順序付けられた配列に配置されたとき、これらのベクトルは入力テキストの意味的本質を捉える。密なベクトルはテキスト処理に限定されるものではなく、視覚データの意味を表現するためにコンピュータビジョンでも広く使用されている。これらの密なベクトルは、通常テキスト埋め込みモデルによって生成され、ほとんどの要素またはすべての要素が非ゼロであることを特徴とする。したがって、密なベクトルは意味検索アプリケーションに特に効果的であり、テキストが完全に一致しない場合でも、ベクトル距離に基づいて最も類似した結果を返すことができる。この機能により、キーワードベースのアプローチでは見逃されがちな概念間の関係性を捉えることができ、よりニュアンスや文脈を考慮した検索結果を得ることができます。</p></li>
 </ul>
 <p>詳しくは、<a href="/docs/ja/sparse_vector.md">Sparse Vectorと</a> <a href="/docs/ja/dense-vector.md">Dense Vectorを</a>ご参照ください。</p>
@@ -91,7 +91,7 @@ title: ハイブリッド検索
     </button></h2><p>このセクションでは、テキスト検索の精度を高めるために、疎な密度を持つベクトルでハイブリッド検索を行う方法を、具体的な例を使って説明する。</p>
 <h3 id="Create-a-collection-with-multiple-vector-fields​" class="common-anchor-header">複数のベクトル・フィールドでコレクションを作成する</h3><p>コレクションを作成するプロセスには、コレクション・スキーマの定義、インデックス・パラメータの構 成、コレクションの作成の3つの部分があります。</p>
 <h4 id="Define-schema​" class="common-anchor-header">スキーマの定義</h4><p>この例では、コレクションスキーマ内で複数のベクトルフィールドを定義する必要があります。現在、各コレクションはデフォルトで最大4つのベクトルフィールドを含むことができます。しかし  <a href="https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>  の値を変更することもできます。</p>
-<p>以下の例では、<code translate="no">dense</code> と<code translate="no">sparse</code> の2つのベクトル・フィールドをコレクション・スキーマに定義しています。</p>
+<p>以下の例では、<code translate="no">dense</code> と<code translate="no">sparse</code> の2つのベクトル・フィールドをコレクション・スキーマとして定義しています。</p>
 <ul>
 <li><p><code translate="no">id</code>:このフィールドは、テキストIDを格納するプライマリキーの役割を果たす。このフィールドのデータ型はINT64である。</p></li>
 <li><p><code translate="no">text</code>:このフィールドはテキストコンテンツを格納するために使用される。このフィールドのデータ型は VARCHAR で、最大長は 1000 文字である。</p></li>
@@ -248,7 +248,7 @@ index_params.add_index(​
     index_name=<span class="hljs-string">&quot;sparse_index&quot;</span>,​
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,  <span class="hljs-comment"># Index type for sparse vectors​</span>
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Currently, only IP (Inner Product) is supported for sparse vectors​</span>
-    params={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
+    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -266,7 +266,7 @@ denseParams.<span class="hljs-title function_">put</span>(<span class="hljs-stri
         .<span class="hljs-title function_">build</span>();​
 ​
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt; sparseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
+sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);​
 <span class="hljs-title class_">IndexParam</span> indexParamForSparseField = <span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
         .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_index&quot;</span>)​
@@ -454,7 +454,7 @@ search_param_2 = {​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,​
     <span class="hljs-string">&quot;param&quot;</span>: {​
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,​
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}​
+        <span class="hljs-string">&quot;params&quot;</span>: {}​
     },​
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>​
 }​
@@ -492,7 +492,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
         .vectorFieldName(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .vectors(querySparseVectors)​
         .metricType(IndexParam.MetricType.IP)​
-        .<span class="hljs-keyword">params</span>(<span class="hljs-string">&quot;{\&quot;drop_ratio_build\&quot;: 0.2}&quot;</span>)​
+        .<span class="hljs-keyword">params</span>()​
         .topK(<span class="hljs-number">2</span>)​
         .build());​
 
@@ -501,20 +501,20 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
     <span class="hljs-string">&quot;data&quot;</span>: query_vector, ​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;dense&quot;</span>, ​
     <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-comment">// 参数值需要与 Collection Schema 中定义的保持一致​</span>
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
         <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}​
     },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// AnnSearchRequest 返还的搜索结果数量​</span>
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
 }​
 ​
 <span class="hljs-keyword">const</span> search_param_2 = {​
     <span class="hljs-string">&quot;data&quot;</span>: query_sparse_vector, ​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>, ​
     <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-comment">// 参数值需要与 Collection Schema 中定义的保持一致​</span>
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}​
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
+        <span class="hljs-string">&quot;params&quot;</span>: {}​
     },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// AnnSearchRequest 返还的搜索结果数量​</span>
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
 }​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -533,9 +533,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
         &quot;data&quot;: [{&quot;3573&quot;: 0.34701499565746674}, {&quot;5263&quot;: 0.2639375518635271}],​
         &quot;annsField&quot;: &quot;sparse&quot;,​
         &quot;params&quot;: {​
-            &quot;params&quot;: {​
-                &quot;drop_ratio_build&quot;: 0.2​
-             }​
+            &quot;params&quot;: {}​
         },​
         &quot;limit&quot;: 2​
     }​
@@ -604,7 +602,7 @@ ranker = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-numb
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Perform-a-Hybrid-Search​" class="common-anchor-header">ハイブリッド検索の実行</h3><p>ハイブリッド検索を実行する前に、コレクションをメモリにロードする必要がある。コレクション内のベクトル・フィールドにインデックスがないか、ロードされていない場合、Hybrid Searchメソッドを呼び出すときにエラーが発生する。</p>
+<h3 id="Perform-a-Hybrid-Search​" class="common-anchor-header">ハイブリッド検索の実行</h3><p>ハイブリッド検索を実行する前に、コレクションをメモリにロードする必要がある。コレクション内のベクトル・フィールドにインデックスがないか、ロードされていない場合、Hybrid Searchメソッドを呼び出すとエラーが発生する。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​

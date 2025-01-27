@@ -82,10 +82,13 @@ title: 索引向量欄位
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>Sparse_inverted_index</li><li>SPARSE_WAND</li></ul></td>
+    <td class="tg-0pky">sparse_inverted_index</td>
   </tr>
 </tbody>
 </table>
+<div class="alert note">
+<p>從 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已經被廢棄。取而代之，建議使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 以達到等效，同時保持相容性。如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>。</p>
+</div>
 </div>
 <p>建議為向量欄位和經常被存取的標量欄位建立索引。</p>
 <h2 id="Preparations" class="common-anchor-header">準備工作<button data-href="#Preparations" class="anchor-icon" translate="no">

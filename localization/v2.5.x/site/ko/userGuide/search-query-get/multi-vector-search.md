@@ -65,7 +65,7 @@ title: 하이브리드 검색
 <li><p><a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>, <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#BGE-M3">BGE-M3</a>, <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#SPLADE">SPLADE</a> 등과 같은 임베딩 모델을 통해 스파스 벡터를 생성합니다.</p></li>
 <li><p>Zilliz에서 컬렉션을 생성하고 고밀도 및 스파스 벡터 필드를 모두 포함하는 컬렉션 스키마를 정의합니다.</p></li>
 <li><p>이전 단계에서 생성한 컬렉션에 스파스-밀도 벡터를 삽입합니다.</p></li>
-<li><p>하이브리드 검색을 수행합니다: 고밀도 벡터에 대한 ANN 검색은 가장 유사한 상위 K개의 결과 집합을 반환하고, 스파스 벡터에 대한 텍스트 일치도 상위 K개의 결과 집합을 반환합니다.</p></li>
+<li><p>하이브리드 검색을 수행합니다: 고밀도 벡터에 대한 ANN 검색은 가장 유사한 상위 K개의 결과 집합을 반환하며, 스파스 벡터에 대한 텍스트 일치도 상위 K개의 결과 집합을 반환합니다.</p></li>
 <li><p>정규화: 정규화: 상위 K 결과의 두 세트의 점수를 정규화하여 점수를 [0,1] 사이의 범위로 변환합니다.</p></li>
 <li><p>적절한 재순위 전략을 선택하여 두 개의 상위 K 결과 세트를 병합하고 재순위화하여 최종적으로 상위 K 결과 세트를 반환합니다.</p></li>
 </ol>
@@ -91,7 +91,7 @@ title: 하이브리드 검색
     </button></h2><p>이 섹션에서는 구체적인 예시를 통해 희소밀도 벡터에 대해 하이브리드 검색을 수행하여 텍스트 검색의 정확도를 높이는 방법을 설명합니다.</p>
 <h3 id="Create-a-collection-with-multiple-vector-fields​" class="common-anchor-header">여러 개의 벡터 필드가 있는 컬렉션 만들기</h3><p>컬렉션을 만드는 과정은 컬렉션 스키마 정의, 인덱스 매개변수 구성, 컬렉션 생성의 세 부분으로 구성됩니다.</p>
 <h4 id="Define-schema​" class="common-anchor-header">스키마 정의</h4><p>이 예에서는 컬렉션 스키마 내에 여러 개의 벡터 필드를 정의해야 합니다. 현재 각 컬렉션은 기본적으로 최대 4개의 벡터 필드를 포함할 수 있습니다. 그러나 값을 수정하여  <a href="https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>  값을 수정하여 필요에 따라 컬렉션에 최대 10개의 벡터 필드를 포함할 수도 있습니다.</p>
-<p>다음 예는 컬렉션 스키마를 정의하는 예로, <code translate="no">dense</code> 및 <code translate="no">sparse</code> 은 두 개의 벡터 필드입니다.</p>
+<p>다음 예에서는 컬렉션 스키마를 정의하며, <code translate="no">dense</code> 및 <code translate="no">sparse</code> 은 두 개의 벡터 필드입니다.</p>
 <ul>
 <li><p><code translate="no">id</code>: 이 필드는 텍스트 ID를 저장하는 기본 키 역할을 합니다. 이 필드의 데이터 유형은 INT64입니다.</p></li>
 <li><p><code translate="no">text</code>: 이 필드는 텍스트 콘텐츠를 저장하는 데 사용됩니다. 이 필드의 데이터 유형은 최대 길이가 1000자인 VARCHAR입니다.</p></li>
@@ -248,7 +248,7 @@ index_params.add_index(​
     index_name=<span class="hljs-string">&quot;sparse_index&quot;</span>,​
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,  <span class="hljs-comment"># Index type for sparse vectors​</span>
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Currently, only IP (Inner Product) is supported for sparse vectors​</span>
-    params={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
+    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -266,7 +266,7 @@ denseParams.<span class="hljs-title function_">put</span>(<span class="hljs-stri
         .<span class="hljs-title function_">build</span>();​
 ​
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt; sparseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
+sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);​
 <span class="hljs-title class_">IndexParam</span> indexParamForSparseField = <span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
         .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_index&quot;</span>)​
@@ -454,7 +454,7 @@ search_param_2 = {​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,​
     <span class="hljs-string">&quot;param&quot;</span>: {​
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,​
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}​
+        <span class="hljs-string">&quot;params&quot;</span>: {}​
     },​
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>​
 }​
@@ -492,7 +492,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
         .vectorFieldName(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .vectors(querySparseVectors)​
         .metricType(IndexParam.MetricType.IP)​
-        .<span class="hljs-keyword">params</span>(<span class="hljs-string">&quot;{\&quot;drop_ratio_build\&quot;: 0.2}&quot;</span>)​
+        .<span class="hljs-keyword">params</span>()​
         .topK(<span class="hljs-number">2</span>)​
         .build());​
 
@@ -501,20 +501,20 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
     <span class="hljs-string">&quot;data&quot;</span>: query_vector, ​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;dense&quot;</span>, ​
     <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-comment">// 参数值需要与 Collection Schema 中定义的保持一致​</span>
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
         <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}​
     },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// AnnSearchRequest 返还的搜索结果数量​</span>
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
 }​
 ​
 <span class="hljs-keyword">const</span> search_param_2 = {​
     <span class="hljs-string">&quot;data&quot;</span>: query_sparse_vector, ​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>, ​
     <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-comment">// 参数值需要与 Collection Schema 中定义的保持一致​</span>
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}​
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
+        <span class="hljs-string">&quot;params&quot;</span>: {}​
     },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// AnnSearchRequest 返还的搜索结果数量​</span>
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
 }​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -533,9 +533,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
         &quot;data&quot;: [{&quot;3573&quot;: 0.34701499565746674}, {&quot;5263&quot;: 0.2639375518635271}],​
         &quot;annsField&quot;: &quot;sparse&quot;,​
         &quot;params&quot;: {​
-            &quot;params&quot;: {​
-                &quot;drop_ratio_build&quot;: 0.2​
-             }​
+            &quot;params&quot;: {}​
         },​
         &quot;limit&quot;: 2​
     }​

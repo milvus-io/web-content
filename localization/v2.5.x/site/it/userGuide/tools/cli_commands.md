@@ -416,7 +416,7 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
 Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
@@ -968,7 +968,7 @@ Timeout []:
 </thead>
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-Nome della raccolta</td><td style="text-align:left">Il nome della raccolta in cui vengono inseriti i dati.</td></tr>
-<tr><td style="text-align:left">-p</td><td style="text-align:left">-partizione</td><td style="text-align:left">(Facoltativo) Il nome della partizione in cui vengono inseriti i dati. Se non si passa questa opzione di partizione, si sceglie la partizione "_default".</td></tr>
+<tr><td style="text-align:left">-p</td><td style="text-align:left">-partizione</td><td style="text-align:left">(Opzionale) Il nome della partizione in cui vengono inseriti i dati. Se non si passa questa opzione di partizione, si sceglie la partizione "_default".</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Visualizza la guida all'uso del comando.</td></tr>
 </tbody>
 </table>

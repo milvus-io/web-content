@@ -19,7 +19,7 @@ title: Milvus_CLI 명령 참조
         ></path>
       </svg>
     </button></h1><p>Milvus CLI(명령줄 인터페이스)는 데이터베이스 연결, 데이터 작업, 데이터 가져오기 및 내보내기를 지원하는 명령줄 도구입니다.</p>
-<p>이 항목에서는 지원되는 모든 명령어와 해당 옵션을 소개합니다. 참조를 위해 몇 가지 예제도 포함되어 있습니다.</p>
+<p>이 항목에서는 지원되는 모든 명령어와 해당 옵션을 소개합니다. 참고를 위해 몇 가지 예제도 포함되어 있습니다.</p>
 <h2 id="clear" class="common-anchor-header">clear<button data-href="#clear" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -416,7 +416,7 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
 Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
@@ -865,7 +865,7 @@ Timeout []:
 <tr><td style="text-align:left">-in</td><td style="text-align:left">-인덱스 이름</td><td style="text-align:left">인덱스의 이름입니다.</td></tr>
 </tbody>
 </table>
-<p>| --help | n/a | 명령 사용에 대한 도움말을 표시합니다. |</p>
+<p>| --help | N/A | 명령 사용에 대한 도움말을 표시합니다. |</p>
 <p><h3 >예제</h3></p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; show index -c test_collection -in index_name
 <button class="copy-code-btn"></button></code></pre>

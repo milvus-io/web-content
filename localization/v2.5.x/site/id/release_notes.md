@@ -43,7 +43,7 @@ title: Catatan Rilis
 <tr><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>Kami dengan senang hati mengumumkan rilis Milvus 2.5.4, yang memperkenalkan optimasi kinerja utama dan fitur-fitur baru seperti isolasi PartitionKey, Sparse Index dengan DAAT MaxScore, dan mekanisme penguncian yang disempurnakan. Versi ini juga mengatasi beberapa bug yang meningkatkan stabilitas dan keandalan secara keseluruhan. Kami mendorong Anda untuk meng-upgrade atau mencoba rilis terbaru ini, dan kami menantikan umpan balik Anda untuk membantu kami terus menyempurnakan Milvus!</p>
+<p>Kami sangat senang mengumumkan rilis Milvus 2.5.4, yang memperkenalkan pengoptimalan kinerja utama dan fitur-fitur baru seperti isolasi PartitionKey, Sparse Index dengan DAAT MaxScore, dan mekanisme penguncian yang disempurnakan. Sorotan yang menonjol dari rilis ini adalah dukungannya untuk 10.000 koleksi dan 1 juta partisi, yang menandai tonggak penting untuk kasus penggunaan multi-penyewa. Versi ini juga mengatasi beberapa bug yang meningkatkan stabilitas dan keandalan secara keseluruhan, dua bug kritis dapat menyebabkan kehilangan data. Kami mendorong Anda untuk meng-upgrade atau mencoba rilis terbaru ini, dan kami menantikan umpan balik Anda untuk membantu kami terus menyempurnakan Milvus!</p>
 <h3 id="Features" class="common-anchor-header">Fitur</h3><ul>
 <li>Mendukung isolasi PartitionKey untuk meningkatkan kinerja dengan beberapa kunci partisi<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). Untuk informasi lebih lanjut, lihat <a href="/docs/id/use-partition-key.md">Gunakan Kunci Partisi</a>.</li>
 <li>Sparse Index kini mendukung DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md">Vektor Jarang</a>.</li>
@@ -51,6 +51,7 @@ title: Catatan Rilis
 <li>Hak akses root dapat disesuaikan<a href="https://github.com/milvus-io/milvus/pull/39324">(#39324</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Perbaikan</h3><ul>
+<li>Mendukung 10 ribu koleksi dan 1 juta partisi dalam satu cluster<a href="https://github.com/milvus-io/milvus/pull/37630">(#37630</a>)</li>
 <li>Informasi delta segmen yang di-cache untuk mempercepat Koordinator Kueri<a href="https://github.com/milvus-io/milvus/pull/39349">(#39349</a>)</li>
 <li>Membaca metadata secara bersamaan di tingkat koleksi untuk mempercepat pemulihan kegagalan<a href="https://github.com/milvus-io/milvus/pull/38900">(#38900</a>)</li>
 <li>Perincian kunci yang disempurnakan di QueryNode<a href="https://github.com/milvus-io/milvus/pull/39282">(#39282</a>),<a href="https://github.com/milvus-io/milvus/pull/38907">(#38907</a>)</li>
@@ -66,19 +67,21 @@ title: Catatan Rilis
 <li>Menambahkan kontrol versi untuk indeks skalar<a href="https://github.com/milvus-io/milvus/pull/39236">(#39236</a>)</li>
 <li>Meningkatkan kecepatan pengambilan informasi koleksi dari RootCoord dengan menghindari salinan yang tidak perlu<a href="https://github.com/milvus-io/milvus/pull/38902">(#38902</a>)</li>
 </ul>
+<h3 id="Critial-Bug-fixs" class="common-anchor-header">Perbaikan Bug Penting</h3><ul>
+<li>Memperbaiki kegagalan pencarian untuk kunci utama dengan indeks<a href="https://github.com/milvus-io/milvus/pull/39390">(#39390</a>)</li>
+<li>Memperbaiki potensi masalah kehilangan data yang disebabkan oleh memulai ulang MixCoord dan melakukan pembilasan secara bersamaan<a href="https://github.com/milvus-io/milvus/pull/39422">(#39422</a>)</li>
+<li>Memperbaiki kegagalan penghapusan yang dipicu oleh konkurensi yang tidak tepat antara tugas statistik dan pemadatan L0 setelah MixCoord dimulai ulang<a href="https://github.com/milvus-io/milvus/pull/39460">(#39460</a>)</li>
+<li>Memperbaiki ketidakcocokan indeks terbalik skalar saat meningkatkan dari 2.4 ke 2.5<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
+</ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
 <li>Memperbaiki masalah kueri lambat yang disebabkan oleh perincian kunci kasar selama pemuatan multi-kolom<a href="https://github.com/milvus-io/milvus/pull/39255">(#39255</a>)</li>
-<li>Memperbaiki masalah di mana menggunakan alias dapat menyebabkan iterator melintasi database yang salah<a href="https://github.com/milvus-io/milvus/pull/39248">(#39248</a>)</li>
-<li>Memperbaiki kegagalan pencarian untuk kunci primer dengan indeks<a href="https://github.com/milvus-io/milvus/pull/39390">(#39390</a>)</li>
-<li>Memperbaiki masalah kehilangan data potensial yang disebabkan oleh memulai ulang MixCoord dan flushing secara bersamaan<a href="https://github.com/milvus-io/milvus/pull/39422">(#39422</a>)</li>
+<li>Memperbaiki masalah di mana penggunaan alias dapat menyebabkan iterator melintasi database yang salah<a href="https://github.com/milvus-io/milvus/pull/39248">(#39248</a>)</li>
 <li>Memperbaiki kegagalan pembaruan grup sumber daya saat mengubah basis data<a href="https://github.com/milvus-io/milvus/pull/39356">(#39356</a>)</li>
 <li>Memperbaiki masalah sporadis di mana indeks tantivy tidak dapat menghapus file indeks selama rilis<a href="https://github.com/milvus-io/milvus/pull/39434">(#39434</a>)</li>
-<li>Memperbaiki kegagalan penghapusan yang dipicu oleh konkurensi yang tidak tepat antara tugas statistik dan pemadatan L0 setelah MixCoord dimulai ulang<a href="https://github.com/milvus-io/milvus/pull/39460">(#39460</a>)</li>
 <li>Memperbaiki pengindeksan lambat yang disebabkan oleh terlalu banyak utas<a href="https://github.com/milvus-io/milvus/pull/39341">(#39341</a>)</li>
 <li>Memperbaiki masalah yang mencegah pemeriksaan kuota disk dilewati selama impor massal<a href="https://github.com/milvus-io/milvus/pull/39319">(#39319)</a></li>
 <li>Menyelesaikan masalah pembekuan yang disebabkan oleh terlalu banyak konsumen antrean pesan dengan membatasi konkurensi<a href="https://github.com/milvus-io/milvus/pull/38915">(#38915</a>)</li>
 <li>Memperbaiki batas waktu kueri yang disebabkan oleh MixCoord yang dimulai ulang selama pemadatan skala besar<a href="https://github.com/milvus-io/milvus/pull/38926">(#38926)</a></li>
-<li>Memperbaiki ketidakcocokan indeks terbalik skalar saat meningkatkan dari 2.4 ke 2.5<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
 <li>Memperbaiki masalah ketidakseimbangan saluran yang disebabkan oleh waktu henti node<a href="https://github.com/milvus-io/milvus/pull/39200">(#39200)</a></li>
 <li>Memperbaiki masalah yang dapat menyebabkan keseimbangan saluran menjadi macet.<a href="https://github.com/milvus-io/milvus/pull/39160">(#39160</a>)</li>
 <li>Memperbaiki masalah di mana pemeriksaan tingkat hak istimewa grup kustom RBAC menjadi tidak efektif<a href="https://github.com/milvus-io/milvus/pull/39224">(#39224</a>)</li>
@@ -111,7 +114,7 @@ title: Catatan Rilis
 </table>
 <p>Milvus 2.5.3 memberikan perbaikan bug kritis dan peningkatan kinerja untuk meningkatkan stabilitas, keandalan, dan kegunaan secara keseluruhan. Versi ini menyempurnakan penanganan konkurensi, meningkatkan pengindeksan dan pengambilan data, dan memperbarui beberapa komponen utama untuk pengalaman pengguna yang lebih kuat.</p>
 <h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
-<li>Memperbaiki masalah di mana menggunakan filter <code translate="no">IN</code> pada primary key <code translate="no">VARCHAR</code> dapat mengembalikan hasil kosong.<a href="https://github.com/milvus-io/milvus/pull/39108">(#39108</a>)</li>
+<li>Memperbaiki masalah di mana menggunakan filter <code translate="no">IN</code> pada kunci utama <code translate="no">VARCHAR</code> dapat mengembalikan hasil yang kosong.<a href="https://github.com/milvus-io/milvus/pull/39108">(#39108</a>)</li>
 <li>Memperbaiki masalah konkurensi antara operasi query dan delete yang dapat menyebabkan hasil yang salah.<a href="https://github.com/milvus-io/milvus/pull/39054">(#39054</a>)</li>
 <li>Memperbaiki kegagalan yang disebabkan oleh pemfilteran berulang ketika <code translate="no">expr</code> kosong dalam permintaan kueri.<a href="https://github.com/milvus-io/milvus/pull/39034">(#39034</a>)</li>
 <li>Memperbaiki masalah di mana kesalahan disk selama pembaruan konfigurasi menyebabkan penggunaan pengaturan konfigurasi default.<a href="https://github.com/milvus-io/milvus/pull/39072">(#39072</a>)</li>

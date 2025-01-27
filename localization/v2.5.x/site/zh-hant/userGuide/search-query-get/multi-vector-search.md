@@ -36,7 +36,7 @@ title: 混合搜尋
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>混合搜尋適用於下列兩種情況。</p>
+    </button></h2><p>混合搜尋適用於以下兩種情況。</p>
 <h3 id="Sparse-Dense-Vector-Search​" class="common-anchor-header">稀疏-密集向量搜尋</h3><p>不同類型的向量可以代表不同的資訊，使用不同的嵌入模型可以更全面地代表資料的不同特徵和面向。例如，對同一句子使用不同的嵌入模型，可以產生表示語義的密集向量和表示句子中詞彙頻率的稀疏向量。</p>
 <ul>
 <li><p><strong>稀疏向量：</strong>稀疏向量的特點是向量維度高，而且只有很少的非零值存在。這種結構使它們特別適合傳統的資訊檢索應用。在大多數情況下，稀疏向量所使用的維數對應於一種或多種語言的不同詞彙。每個維度都會被指定一個值，表示該標記在文件中的相對重要性。對於涉及文字比對的任務而言，這種佈局很有優勢。</p></li>
@@ -95,7 +95,7 @@ title: 混合搜尋
 <ul>
 <li><p><code translate="no">id</code>:這個欄位是儲存文字 ID 的主索引鍵。這個欄位的資料類型是 INT64。</p></li>
 <li><p><code translate="no">text</code>:這個欄位用來儲存文字內容。這個欄位的資料類型是 VARCHAR，最大長度為 1000 個字元。</p></li>
-<li><p><code translate="no">dense</code>:這個欄位用來儲存文字的密集向量。這個欄位的資料類型是 FLOAT_VECTOR，向量尺寸為 768。</p></li>
+<li><p><code translate="no">dense</code>:這個欄位用來儲存文字的密集向量。這個欄位的資料類型是 FLOAT_VECTOR，向量尺寸是 768。</p></li>
 <li><p><code translate="no">sparse</code>:這個欄位用來儲存文字的稀疏向量。這個欄位的資料類型是 SPARSE_FLOAT_VECTOR。</p></li>
 </ul>
 <div class="multipleCode">
@@ -248,7 +248,7 @@ index_params.add_index(​
     index_name=<span class="hljs-string">&quot;sparse_index&quot;</span>,​
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,  <span class="hljs-comment"># Index type for sparse vectors​</span>
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Currently, only IP (Inner Product) is supported for sparse vectors​</span>
-    params={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
+    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -266,7 +266,7 @@ denseParams.<span class="hljs-title function_">put</span>(<span class="hljs-stri
         .<span class="hljs-title function_">build</span>();​
 ​
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt; sparseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
+sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);​
 <span class="hljs-title class_">IndexParam</span> indexParamForSparseField = <span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
         .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_index&quot;</span>)​
@@ -454,7 +454,7 @@ search_param_2 = {​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,​
     <span class="hljs-string">&quot;param&quot;</span>: {​
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,​
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}​
+        <span class="hljs-string">&quot;params&quot;</span>: {}​
     },​
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>​
 }​
@@ -492,7 +492,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
         .vectorFieldName(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .vectors(querySparseVectors)​
         .metricType(IndexParam.MetricType.IP)​
-        .<span class="hljs-keyword">params</span>(<span class="hljs-string">&quot;{\&quot;drop_ratio_build\&quot;: 0.2}&quot;</span>)​
+        .<span class="hljs-keyword">params</span>()​
         .topK(<span class="hljs-number">2</span>)​
         .build());​
 
@@ -501,20 +501,20 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
     <span class="hljs-string">&quot;data&quot;</span>: query_vector, ​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;dense&quot;</span>, ​
     <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-comment">// 参数值需要与 Collection Schema 中定义的保持一致​</span>
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
         <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}​
     },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// AnnSearchRequest 返还的搜索结果数量​</span>
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
 }​
 ​
 <span class="hljs-keyword">const</span> search_param_2 = {​
     <span class="hljs-string">&quot;data&quot;</span>: query_sparse_vector, ​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>, ​
     <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-comment">// 参数值需要与 Collection Schema 中定义的保持一致​</span>
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}​
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
+        <span class="hljs-string">&quot;params&quot;</span>: {}​
     },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// AnnSearchRequest 返还的搜索结果数量​</span>
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
 }​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -533,9 +533,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
         &quot;data&quot;: [{&quot;3573&quot;: 0.34701499565746674}, {&quot;5263&quot;: 0.2639375518635271}],​
         &quot;annsField&quot;: &quot;sparse&quot;,​
         &quot;params&quot;: {​
-            &quot;params&quot;: {​
-                &quot;drop_ratio_build&quot;: 0.2​
-             }​
+            &quot;params&quot;: {}​
         },​
         &quot;limit&quot;: 2​
     }​
@@ -546,7 +544,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
 <h3 id="Configure-a-reranking-strategy​" class="common-anchor-header">設定重新排序策略</h3><p>要合併兩組 ANN 搜尋結果並將其重新排序，必須選擇適當的重新排序策略。Zilliz 支援兩種 reranking 策略：<strong>WeightedRanker</strong>和<strong>RRFRanker</strong>。在選擇重排策略時，需要考慮的一件事是，是否需要強調向量場上的一個或多個基本 ANN 搜尋。</p>
 <ul>
 <li><p><strong>WeightedRanker</strong>：如果您要求結果強調特定向量領域，建議使用此策略。WeightedRanker 允許您為某些向量領域指定較高的權重，使其更受重視。例如，在多模式搜尋中，圖片的文字描述可能會被認為比這張圖片的顏色更重要。</p></li>
-<li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)：</strong>當沒有特定的重點時，建議使用此策略。RRF 可以有效地平衡每個向量場的重要性。</p></li>
+<li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)：</strong>當沒有特定的重點時，建議使用此策略。RRF 可以有效平衡每個向量場的重要性。</p></li>
 </ul>
 <p>有關這兩種重排策略機制的詳細資訊，請參閱<a href="/docs/zh-hant/reranking.md">Reranking</a>。</p>
 <p>以下兩個範例示範如何使用 WeightedRanker 和 RRFRanker 重排策略。</p>

@@ -50,7 +50,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector.png" alt="Spare vector representation" class="doc-image" id="spare-vector-representation" />
    </span> <span class="img-wrapper"> <span>Представление разреженных векторов</span> </span></p>
-<p>Разреженные векторы могут быть сгенерированы с помощью различных методов, таких как <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) и <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> в обработке текстов. Кроме того, Milvus предлагает удобные методы, помогающие генерировать и обрабатывать разреженные векторы. Более подробную информацию см. в разделе <a href="/docs/ru/embeddings.md">"Вкрапления"</a>.</p>
+<p>Разреженные векторы могут быть сгенерированы с помощью различных методов, таких как <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) и <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> в обработке текстов. Кроме того, Milvus предлагает удобные методы, помогающие генерировать и обрабатывать разреженные векторы. Подробнее см. в разделе <a href="/docs/ru/embeddings.md">"Вкрапления"</a>.</p>
 <p>Для текстовых данных Milvus также предоставляет возможности полнотекстового поиска, позволяя выполнять векторный поиск непосредственно в необработанных текстовых данных без использования внешних моделей встраивания для генерации разреженных векторов. Дополнительную информацию см. в разделе <a href="/docs/ru/full-text-search.md">Полнотекстовый поиск</a>.</p>
 <p>После векторизации данные можно хранить в Milvus для управления и поиска векторов. На схеме ниже показан основной процесс.</p>
 <p>
@@ -241,7 +241,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_name: <span class="hljs-string">&#x27;sparse_inverted_index&#x27;</span>,
     field_name: <span class="hljs-string">&#x27;sparse_vector&#x27;</span>,
     metric_type: MetricType.IP,
-    index_type: IndexType.SPARSE_WAND,
+    index_type: IndexType.SPARSE_INVERTED_INDEX,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
     },
@@ -264,10 +264,9 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <li><p><code translate="no">index_type</code>: Тип индекса для создания разреженного векторного поля. Допустимые значения:</p>
 <ul>
 <li><code translate="no">SPARSE_INVERTED_INDEX</code>: Инвертированный индекс общего назначения для разреженных векторов.</li>
-<li><code translate="no">SPARSE_WAND</code>: : Специализированный тип индекса, поддерживаемый в Milvus v2.5.3 и более ранних версиях.</li>
 </ul>
   <div class="alert note">
-<p>Начиная с Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> будет устаревшим. Вместо него рекомендуется использовать <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> для эквивалентности при сохранении совместимости.</p>
+<p>Начиная с Milvus 2.5.4 и далее, <code translate="no">SPARSE_WAND</code> устаревает. Вместо него рекомендуется использовать <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> для эквивалентности и сохранения совместимости.</p>
   </div>
 </li>
 <li><p><code translate="no">metric_type</code>: Метрика, используемая для вычисления сходства между разреженными векторами. Допустимые значения:</p>
@@ -279,8 +278,8 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <li><p><code translate="no">params.inverted_index_algo</code>: Алгоритм, используемый для построения и запроса индекса. Допустимые значения:</p>
 <ul>
 <li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (по умолчанию): Оптимизированная обработка запросов Document-at-a-Time (DAAT) с использованием алгоритма MaxScore. MaxScore обеспечивает лучшую производительность при больших значениях k или запросах с большим количеством терминов, пропуская термины и документы, которые, вероятно, будут иметь минимальное влияние. Это достигается путем разделения терминов на существенные и несущественные группы на основе их максимальных баллов влияния, фокусируясь на терминах, которые могут внести вклад в результаты top-k.</p></li>
-<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: Оптимизированная обработка запросов DAAT с помощью алгоритма WAND. WAND оценивает меньше документов, попавших в запрос, за счет использования максимальных баллов влияния для пропуска неконкурентных документов, но при этом имеет более высокие накладные расходы на каждый запрос. Это делает WAND более эффективным для запросов с небольшими значениями k или коротких запросов, где пропуск документов более целесообразен.</p></li>
-<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: Обработка запросов с использованием базового термина (TAAT). Хотя он медленнее, чем <code translate="no">DAAT_MAXSCORE</code> и <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> обладает уникальным преимуществом. В отличие от алгоритмов DAAT, использующих кэшированные оценки максимального воздействия, которые остаются статичными независимо от изменений глобального параметра коллекции (avgdl), <code translate="no">TAAT_NAIVE</code> динамически адаптируется к таким изменениям.</p></li>
+<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: Оптимизированная обработка запросов DAAT с помощью алгоритма WAND. WAND оценивает меньшее количество документов, попавших в запрос, используя максимальные оценки влияния для пропуска неконкурентных документов, но при этом имеет более высокие накладные расходы в расчете на одно попадание. Это делает WAND более эффективным для запросов с небольшими значениями k или коротких запросов, где пропуск документов более целесообразен.</p></li>
+<li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: Обработка запросов с использованием базового термина (TAAT). Хотя он медленнее, чем <code translate="no">DAAT_MAXSCORE</code> и <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> обладает уникальным преимуществом. В отличие от алгоритмов DAAT, использующих кэшированные оценки максимального влияния, которые остаются статичными независимо от изменений глобального параметра коллекции (avgdl), <code translate="no">TAAT_NAIVE</code> динамически адаптируется к таким изменениям.</p></li>
 </ul></li>
 </ul>
 <h3 id="Create-collection​" class="common-anchor-header">Создание коллекции</h3><p>После того как настройки разреженного вектора и индекса завершены, можно создать коллекцию, содержащую разреженные векторы. В примере ниже используется метод <ins><code translate="no">create_collection</code></ins> для создания коллекции с именем <code translate="no">my_sparse_collection</code>.</p>
@@ -514,7 +513,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
     </button></h2><p>При использовании разреженных векторов в Milvus учитывайте следующие ограничения:</p>
 <ul>
 <li><p>В настоящее время для разреженных векторов поддерживаются только метрики расстояния <strong>IP</strong> и <strong>BM25</strong> (для полнотекстового поиска). Высокая размерность разреженных векторов делает L2 и косинусное расстояние нецелесообразными.</p></li>
-<li><p>Для полей разреженных векторов поддерживаются только типы индексов <strong>SPARSE_INVERTED_INDEX</strong> и <strong>SPARSE_WAND</strong>.</p></li>
+<li><p>Для полей разреженных векторов поддерживается только тип индекса <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
 <li><p>Типы данных, поддерживаемые для разреженных векторов:</p>
 <ul>
 <li>Размерная часть должна быть беззнаковым 32-битным целым числом;</li>
@@ -542,12 +541,8 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Можете ли вы объяснить разницу между SPARSE_INVERTED_INDEX и SPARSE_WAND, и как мне выбрать между ними?</strong></p>
-<p><strong>SPARSE_INVERTED_INDEX</strong> - это традиционный инвертированный индекс, в то время как <strong>SPARSE_WAND</strong> использует алгоритм <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> для уменьшения количества полных оценок IP-расстояния во время поиска. <strong>SPARSE_WAND</strong> обычно быстрее, но его производительность может снижаться с увеличением плотности векторов. Чтобы выбрать один из них, проведите эксперименты и бенчмарки, основанные на вашем конкретном наборе данных и сценарии использования.</p></li>
-<li><p><strong>Как выбрать параметры drop_ratio_build и drop_ratio_search?</strong></p>
-<p>Выбор параметров <strong>drop_ratio_build</strong> и <strong>drop_ratio_search</strong> зависит от характеристик ваших данных и ваших требований к задержке/пропускной способности и точности поиска.</p></li>
 <li><p><strong>Может ли размерность разреженного вложения быть любой дискретной величиной в пространстве uint32?</strong></p>
-<p>Да, за одним исключением. Размерность разреженного вкрапления может быть любой величиной в диапазоне <code translate="no">[0, maximum of uint32)</code>. Это означает, что вы не можете использовать максимальное значение uint32.</p></li>
+<p>Да, за одним исключением. Размерность разреженного вложения может быть любой величиной в диапазоне <code translate="no">[0, maximum of uint32)</code>. Это означает, что вы не можете использовать максимальное значение uint32.</p></li>
 <li><p><strong>Поиск в растущих сегментах осуществляется через индекс или методом грубой силы?</strong></p>
 <p>Поиск по растущим сегментам осуществляется через индекс того же типа, что и индекс запечатанного сегмента. Для новых растущих сегментов до построения индекса используется поиск методом грубой силы.</p></li>
 <li><p><strong>Можно ли в одной коллекции иметь как разреженные, так и плотные векторы?</strong></p>

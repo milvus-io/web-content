@@ -68,8 +68,11 @@ title: 記憶體索引
 <p>這類索引包括<code translate="no">BIN_FLAT</code> 和<code translate="no">BIN_IVF_FLAT</code> 。</p>
 </div>
 <div class="filter-sparse">
-<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">稀疏內嵌索引</h3><p>稀疏內嵌的索引僅支援<code translate="no">IP</code> 和<code translate="no">BM25</code> （用於全文檢索）度量。</p>
-<p>這種類型的索引包括<code translate="no">SPARSE_INVERTED_INDEX</code> 和<code translate="no">SPARSE_WAND</code> 。</p>
+<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">稀疏內嵌索引</h3><p>稀疏嵌入式索引僅支援<code translate="no">IP</code> 和<code translate="no">BM25</code> （用於全文檢索）度量。</p>
+<p>稀疏嵌入支持的索引類型：<code translate="no">SPARSE_INVERTED_INDEX</code> 。</p>
+<div class="alert note">
+<p>從 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已經被廢棄。取而代之，建議使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 以達到等效，同時保持相容性。如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>。</p>
+</div>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
@@ -231,19 +234,11 @@ title: 記憶體索引
       <li>需要 100% 的召回率。</li>
     </ul></td>
   </tr>
-  <tr>
-    <td>反向索引</td>
-    <td>反向索引</td>
-    <td><ul>
-      <li><a href="https://dl.acm.org/doi/10.1145/956863.956944">弱 AND</a>演算法加速</li>
-      <li>可以獲得顯著的速度改善，而只犧牲少量的召回率。</li>
-    </ul></td>
-  </tr>
 </tbody>
 </table>
 </div>
 <div class="filter-floating">
-<h3 id="FLAT" class="common-anchor-header">平面</h3><p>對於需要完美精確度，並依賴相對較小（百萬量級）資料集的向量相似性搜尋應用，FLAT 索引是很好的選擇。FLAT 不會壓縮向量，而且是唯一能保證精確搜尋結果的索引。FLAT 的結果也可以用來比較其他召回率低於 100% 的索引所產生的結果。</p>
+<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>對於需要完美精確度，且依賴相對較小（百萬量級）資料集的向量相似性搜尋應用，FLAT 索引是很好的選擇。FLAT 不會壓縮向量，而且是唯一能保證精確搜尋結果的索引。FLAT 的結果也可以用來比較其他召回率低於 100% 的索引所產生的結果。</p>
 <p>FLAT 之所以精確，是因為它採用了窮盡方式進行搜尋，也就是說，對於每次查詢，目標輸入都會與資料集中的每一組向量進行比較。這使得 FLAT 成為我們清單上最慢的索引，而且不適合查詢大量向量資料。在 Milvus 中，FLAT 索引不需要任何參數，使用它也不需要資料訓練。</p>
 <ul>
 <li><p>搜尋參數</p>
@@ -258,7 +253,7 @@ title: 記憶體索引
 </li>
 </ul>
 <h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT 將向量資料分割成<code translate="no">nlist</code> 叢集單位，然後比較目標輸入向量與每個叢集中心點之間的距離。根據系統設定查詢的叢集數量 (<code translate="no">nprobe</code>) ，相似性搜尋結果只會根據目標輸入與最相似叢集中向量的比較結果傳回 - 大幅縮短查詢時間。</p>
-<p>透過調整<code translate="no">nprobe</code> ，可以在特定情況下找到精確度與速度之間的理想平衡。<a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT 效能測試</a>的結果顯示，當目標輸入向量的數量 (<code translate="no">nq</code>) 和要搜尋的叢集數量 (<code translate="no">nprobe</code>) 增加時，查詢時間也會急遽增加。</p>
+<p>透過調整<code translate="no">nprobe</code> ，可以在特定情況下找到精確度與速度之間的理想平衡。<a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT 效能測試</a>的結果顯示，當目標輸入向量的數量 (<code translate="no">nq</code>) 和要搜尋的叢集數量 (<code translate="no">nprobe</code>) 增加時，查詢時間也會大幅增加。</p>
 <p>IVF_FLAT 是最基本的 IVF 索引，每個單元儲存的編碼資料與原始資料一致。</p>
 <ul>
 <li><p>索引建立參數</p>
@@ -424,7 +419,7 @@ title: 記憶體索引
 <tr><th>參數</th><th>說明</th><th>範圍</th><th>預設值</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M 定義圖表中最大的出線連線數。在固定的 ef/efConstruction 下，M 越大，精確度/run_time 越高。</td><td>[2, 2048]</td><td>無</td></tr>
+<tr><td><code translate="no">M</code></td><td>M 定義圖表中出線連線的最大數目。在固定 ef/efConstruction 時，M 越大，精確度/run_time 越高。</td><td>[2, 2048]</td><td>無</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction 控制索引搜尋速度/建立速度的取捨。增加 efConstruction 參數可能會提高索引品質，但也會延長索引建立時間。</td><td>[1, int_max］</td><td>無</td></tr>
 </tbody>
 </table>
@@ -449,10 +444,10 @@ title: 記憶體索引
 <tr><th>參數</th><th>說明</th><th>範圍</th><th>預設值</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M 定義圖表中最大的出線連線數。在固定 ef/efConstruction 時，M 越大，精確度/run_time 越高。</td><td>[2, 2048]</td><td>無</td></tr>
+<tr><td><code translate="no">M</code></td><td>M 定義圖表中出線連線的最大數目。在固定 ef/efConstruction 時，M 越大，精確度/run_time 越高。</td><td>[2, 2048]</td><td>無</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction 控制索引搜尋速度/建立速度的取捨。增加 efConstruction 參數可能會提高索引品質，但也會延長索引建立時間。</td><td>[1, int_max］</td><td>無</td></tr>
 <tr><td><code translate="no">sq_type</code></td><td>標量量化器類型。</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code> 、<code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
-<tr><td><code translate="no">refine</code></td><td>索引建立期間是否保留精煉資料。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine</code></td><td>索引建立時是否保留精煉資料。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">refine_type</code></td><td>精煉索引的資料類型。</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code> 、<code translate="no">FP32</code></td><td>無</td></tr>
 </tbody>
 </table>
@@ -508,8 +503,8 @@ title: 記憶體索引
 <tr><th>參數</th><th>說明</th><th>範圍</th><th>預設值</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M 定義圖表中最大的出線連線數。在固定的 ef/efConstruction 下，M 越大，精確度/run_time 越高。</td><td>[2, 2048]</td><td>無</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction 控制索引搜尋速度/建立速度的取捨。增加 efConstruction 參數可能會提升索引品質，但也會延長索引建立時間。</td><td>[1, int_max］</td><td>無</td></tr>
+<tr><td><code translate="no">M</code></td><td>M 定義圖表中出線連線的最大數目。在固定 ef/efConstruction 時，M 越大，精確度/run_time 越高。</td><td>[2, 2048]</td><td>無</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction 控制索引搜尋速度/建立速度的取捨。增加 efConstruction 參數可能會提高索引品質，但也會延長索引建立時間。</td><td>[1, int_max］</td><td>無</td></tr>
 <tr><td><code translate="no">m</code></td><td>將向量分割成的子向量群組數。</td><td>[1, 65536]</td><td>32</td></tr>
 <tr><td><code translate="no">nbits</code></td><td>每個子向量群量化成的位元數。</td><td>[1, 24]</td><td>8</td></tr>
 <tr><td><code translate="no">nrq</code></td><td>殘餘子量化器的數量。</td><td>[1, 16]</td><td>2</td></tr>
@@ -596,9 +591,12 @@ title: 記憶體索引
 <tr><th>參數</th><th>說明</th><th>範圍</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>在索引建立過程中排除小向量值的比例。此選項允許微調索引建立過程，透過在建立索引時忽略小值，在效率和精確度之間做出權衡。</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>用於建立和查詢索引的演算法。如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (預設值)， 、<code translate="no">DAAT_WAND</code> <code translate="no">TAAT_NAIVE</code></td></tr>
 </tbody>
 </table>
+  <div class="alert note">
+<p><code translate="no">drop_ratio_build</code> 參數自 Milvus v2.5.4 起已被廢棄，在建立索引時仍可接受，但將不再對索引有實際影響。</p>
+  </div>
 </li>
 <li><p>搜尋參數</p>
 <table>
@@ -606,31 +604,7 @@ title: 記憶體索引
 <tr><th>參數</th><th>說明</th><th>範圍</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>搜尋過程中排除的小向量值比例。此選項允許微調搜尋過程，方法是指定忽略查詢向量中最小值的比例。它有助於平衡搜尋精確度與效能。<code translate="no">drop_ratio_search</code> 設定的值越小，這些小值對最終得分的貢獻就越小。藉由忽略一些小值，可以在對精確度影響最小的情況下提高搜尋效能。</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-</ul>
-<h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND</h3><p>此索引與<code translate="no">SPARSE_INVERTED_INDEX</code> 有相似之處，但它利用<a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a>演算法來進一步減少搜尋過程中完整 IP 距離評估的次數。</p>
-<p>根據我們的測試，<code translate="no">SPARSE_WAND</code> 在速度上普遍優於其他方法。然而，隨著向量密度的增加，其效能可能會快速衰退。為了解決這個問題，引入非零的<code translate="no">drop_ratio_search</code> 可以大幅提升效能，同時只會造成最小的精確度損失。如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>。</p>
-<ul>
-<li><p>索引建立參數</p>
-<table>
-<thead>
-<tr><th>參數</th><th>說明</th><th>範圍</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>在索引建立過程中排除小向量值的比例。此選項允許微調索引建立過程，透過在建立索引時忽略小值，在效率和精確度之間做出權衡。</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-<li><p>搜尋參數</p>
-<table>
-<thead>
-<tr><th>參數</th><th>說明</th><th>範圍</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>搜尋過程中排除的小向量值比例。此選項允許微調搜尋過程，方法是指定忽略查詢向量中最小值的比例。它有助於平衡搜尋精確度與效能。<code translate="no">drop_ratio_search</code> 設定的值越小，這些小值對最終得分的貢獻就越小。藉由忽略一些小值，可以在對精確度影響最小的情況下提高搜尋效能。</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>在搜尋過程中排除小向量值的比例。此選項允許微調搜尋過程，方法是指定忽略查詢向量中最小值的比例。它有助於平衡搜尋精確度與效能。<code translate="no">drop_ratio_search</code> 設定的值越小，這些小值對最終得分的貢獻就越小。藉由忽略一些小值，可以在對精確度影響最小的情況下提高搜尋效能。</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

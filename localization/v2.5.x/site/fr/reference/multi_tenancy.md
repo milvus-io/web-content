@@ -72,10 +72,10 @@ title: Stratégies multi-locataires
       </svg>
     </button></h2><p>Il existe deux façons d'obtenir une multi-location orientée partition :</p>
 <h3 id="One-partition-per-tenant" class="common-anchor-header">Une partition par locataire</h3><p>La gestion d'une seule collection est beaucoup plus facile que la gestion de plusieurs collections. Au lieu de créer plusieurs collections, envisagez d'attribuer une partition à chaque locataire afin d'obtenir une isolation des données et une gestion de la mémoire flexibles. Les performances de recherche de la multi-location orientée partition sont bien meilleures que celles de la multi-location orientée collection. Il convient toutefois de noter que le nombre de locataires de la collection ne doit pas dépasser le nombre maximal de partitions qu'une collection peut contenir.</p>
-<h3 id="Partition-key-based-multi-tenancy" class="common-anchor-header">Multi-location basée sur les clés de partition</h3><p>Milvus 2.2.9 introduit une nouvelle fonctionnalité appelée clé de partition. Lors de la création d'une collection, nommez un champ de locataire et faites-en le champ de clé de partition. Milvus stocke les entités dans une partition en fonction de la valeur de hachage du champ de clé de partition. Lorsqu'il effectue des recherches ANN, Milvus ne recherche que la partition qui contient la clé de partition. Cela réduit considérablement la portée de la recherche et permet d'obtenir de meilleures performances qu'en l'absence de clé de partition.</p>
+<h3 id="Partition-key-based-multi-tenancy" class="common-anchor-header">Multi-tenance basée sur les clés de partition</h3><p>Milvus 2.2.9 introduit une nouvelle fonctionnalité appelée clé de partition. Lors de la création d'une collection, nommez un champ de locataire et faites-en le champ de clé de partition. Milvus stocke les entités dans une partition en fonction de la valeur de hachage du champ de clé de partition. Lors des recherches ANN, Milvus ne recherche que la partition qui contient la clé de partition. Cela réduit considérablement la portée de la recherche et permet d'obtenir de meilleures performances qu'en l'absence de clé de partition.</p>
 </div>
 <p>Cette stratégie lève la limite du nombre maximum de locataires qu'une collection Milvus peut prendre en charge et simplifie considérablement la gestion des ressources car Milvus gère automatiquement les partitions pour vous.</p>
-<p>Pour récapituler, vous pouvez utiliser l'une ou l'autre des stratégies multi-locataires ci-dessus, ou certaines d'entre elles, pour former votre propre solution. Le tableau suivant établit des comparaisons entre ces stratégies en termes d'isolation des données, de performances de recherche et de nombre maximum de locataires.</p>
+<p>Pour récapituler, vous pouvez utiliser l'une ou l'autre des stratégies multi-locataires ci-dessus, ou certaines d'entre elles, pour créer votre propre solution. Le tableau suivant établit des comparaisons entre ces stratégies en termes d'isolation des données, de performances de recherche et de nombre maximum de locataires.</p>
 <table>
 <thead>
 <tr><th></th><th>Isolation des données</th><th>Performances de recherche</th><th>Nombre maximal de locataires</th><th>Scénarios recommandés</th></tr>
@@ -83,9 +83,9 @@ title: Stratégies multi-locataires
 <tbody>
 <tr><td>Orienté base de données</td><td>Forte</td><td>Forte</td><td>64</td><td>Pour ceux qui ont besoin que les collections varient en fonction des projets, particulièrement adapté à l'isolation des données entre les départements de votre organisation.</td></tr>
 <tr><td>Une seule collection pour tous</td><td>Faible</td><td>Moyenne</td><td>SANS OBJET</td><td>Pour ceux qui ont des ressources limitées et qui ne sont pas sensibles à l'isolation des données.</td></tr>
-<tr><td>Une collection par locataire</td><td>Forte</td><td>Fort</td><td>Moins de 10 000</td><td>Pour ceux qui ont moins de 10 000 locataires par cluster.</td></tr>
-<tr><td>Une partition par locataire</td><td>Moyenne</td><td>Fort</td><td>4,096</td><td>Pour ceux qui ont moins de 4 096 locataires par collection.</td></tr>
-<tr><td>Basé sur une clé de partition</td><td>Moyenne</td><td>Fort</td><td>10,000,000+</td><td>Pour ceux qui prévoient une augmentation rapide du nombre de locataires à plusieurs millions.</td></tr>
+<tr><td>Une collection par locataire</td><td>Fort</td><td>Fort</td><td>Moins de 10 000</td><td>Pour ceux qui ont moins de 10 000 locataires par cluster.</td></tr>
+<tr><td>Une partition par locataire</td><td>Moyenne</td><td>Fort</td><td>1,024</td><td>Pour ceux qui ont moins de 1 024 locataires par collection.</td></tr>
+<tr><td>Basé sur une clé de partition</td><td>Moyen</td><td>Fort</td><td>10,000,000+</td><td>Pour ceux qui prévoient une augmentation rapide du nombre de locataires à plusieurs millions.</td></tr>
 </tbody>
 </table>
 <h2 id="Whats-next" class="common-anchor-header">Prochaine étape<button data-href="#Whats-next" class="anchor-icon" translate="no">

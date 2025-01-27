@@ -44,7 +44,7 @@ title: IVF_PQ
 <li><strong>Indeks Terbalik:</strong> Sebuah indeks dibuat, memetakan setiap centroid klaster ke daftar vektor yang ditugaskan ke klaster tersebut.</li>
 <li><strong>Pencarian:</strong> Saat Anda mencari tetangga terdekat, algoritme pencarian membandingkan vektor kueri Anda dengan centroid klaster dan memilih klaster yang paling menjanjikan. Pencarian kemudian dipersempit menjadi vektor dalam klaster yang dipilih.</li>
 </ol>
-<p>Untuk mempelajari lebih lanjut tentang detail teknisnya, lihat <a href="https://zilliverse.feishu.cn/wiki/MXiGwmnq6i5MswkryYVcMklVnld">IVF_FLAT</a>.</p>
+<p>Untuk mempelajari lebih lanjut tentang detail teknisnya, lihat <a href="/docs/id/ivf-flat.md">IVF_FLAT</a>.</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>Product Quantization (PQ</strong> ) adalah metode kompresi untuk vektor berdimensi tinggi yang secara signifikan mengurangi kebutuhan penyimpanan sekaligus memungkinkan operasi pencarian kemiripan yang cepat.</p>
 <p>Proses PQ melibatkan tahapan-tahapan utama berikut ini:</p>
 <p>

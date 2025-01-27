@@ -84,10 +84,13 @@ title: Индексирование векторных полей
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>РАЗРЕЖЕННЫЙ_ИНВЕРТИРОВАННЫЙ_ИНДЕКС</li><li>SPARSE_WAND</li></ul></td>
+    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
   </tr>
 </tbody>
 </table>
+<div class="alert note">
+<p>Начиная с Milvus 2.5.4 и далее, <code translate="no">SPARSE_WAND</code> устаревает. Вместо него рекомендуется использовать <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> для эквивалентности и сохранения совместимости. Для получения дополнительной информации обратитесь к разделу <a href="/docs/ru/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
+</div>
 </div>
 <p>Рекомендуется создавать индексы как для векторного поля, так и для скалярных полей, к которым часто обращаются.</p>
 <h2 id="Preparations" class="common-anchor-header">Подготовка<button data-href="#Preparations" class="anchor-icon" translate="no">

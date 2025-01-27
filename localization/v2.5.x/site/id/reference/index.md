@@ -69,7 +69,10 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </div>
 <div class="filter-sparse">
 <h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indeks untuk penyematan yang jarang</h3><p>Indeks untuk sematan jarang hanya mendukung metrik <code translate="no">IP</code> dan <code translate="no">BM25</code> (untuk pencarian teks lengkap).</p>
-<p>Jenis indeks ini meliputi <code translate="no">SPARSE_INVERTED_INDEX</code> dan <code translate="no">SPARSE_WAND</code>.</p>
+<p>Jenis indeks yang didukung untuk sematan jarang: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
+<div class="alert note">
+<p>Mulai Milvus 2.5.4 dan seterusnya, <code translate="no">SPARSE_WAND</code> sudah tidak digunakan lagi. Sebagai gantinya, disarankan untuk menggunakan <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> untuk kesetaraan sambil mempertahankan kompatibilitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md#Set-index-params-for-vector-field">Vektor</a> Jarang.</p>
+</div>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
@@ -231,19 +234,11 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
       <li>Membutuhkan tingkat penarikan 100%.</li>
     </ul></td>
   </tr>
-  <tr>
-    <td>SPARSE_WAND</td>
-    <td>Indeks terbalik</td>
-    <td><ul>
-      <li>Algoritma<a href="https://dl.acm.org/doi/10.1145/956863.956944">lemah dan</a> dipercepat</li>
-      <li>Dapat memperoleh peningkatan kecepatan yang signifikan dengan hanya mengorbankan sedikit recall.</li>
-    </ul></td>
-  </tr>
 </tbody>
 </table>
 </div>
 <div class="filter-floating">
-<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>Untuk aplikasi pencarian kemiripan vektor yang membutuhkan akurasi sempurna dan bergantung pada kumpulan data yang relatif kecil (skala jutaan), indeks FLAT adalah pilihan yang baik. FLAT tidak memampatkan vektor, dan merupakan satu-satunya indeks yang dapat menjamin hasil pencarian yang tepat. Hasil dari FLAT juga dapat digunakan sebagai titik perbandingan untuk hasil yang dihasilkan oleh indeks lain yang memiliki recall kurang dari 100%.</p>
+<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>Untuk aplikasi pencarian kemiripan vektor yang membutuhkan akurasi sempurna dan bergantung pada set data yang relatif kecil (skala jutaan), indeks FLAT adalah pilihan yang baik. FLAT tidak memampatkan vektor, dan merupakan satu-satunya indeks yang dapat menjamin hasil pencarian yang tepat. Hasil dari FLAT juga dapat digunakan sebagai titik perbandingan untuk hasil yang dihasilkan oleh indeks lain yang memiliki recall kurang dari 100%.</p>
 <p>FLAT akurat karena menggunakan pendekatan yang menyeluruh dalam melakukan pencarian, yang berarti untuk setiap kueri, input target dibandingkan dengan setiap kumpulan vektor dalam kumpulan data. Hal ini membuat FLAT menjadi indeks paling lambat dalam daftar kami, dan tidak cocok untuk melakukan kueri data vektor yang sangat besar. Tidak ada parameter yang diperlukan untuk indeks FLAT di Milvus, dan untuk menggunakannya tidak memerlukan pelatihan data.</p>
 <ul>
 <li><p>Parameter pencarian</p>
@@ -593,41 +588,20 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 <li><p>Parameter pembuatan indeks</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th></tr>
+<tr><th>Parameter</th><th>Deskripsi</th><th>Range</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>Proporsi nilai vektor kecil yang dikecualikan selama proses pengindeksan. Opsi ini memungkinkan penyempurnaan proses pengindeksan, membuat keseimbangan antara efisiensi dan akurasi dengan mengabaikan nilai-nilai kecil saat membangun indeks.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>Algoritme yang digunakan untuk membangun dan menanyakan indeks. Untuk detailnya, lihat <a href="/docs/id/sparse_vector.md#Set-index-params-for-vector-field">Vektor Jarang</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (default), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
 </tbody>
 </table>
+  <div class="alert note">
+<p>Parameter <code translate="no">drop_ratio_build</code> sudah tidak digunakan lagi sejak Milvus v2.5.4, yang masih dapat diterima selama pembuatan indeks, tetapi tidak lagi berpengaruh pada indeks.</p>
+  </div>
 </li>
 <li><p>Parameter pencarian</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>Proporsi nilai vektor kecil yang dikecualikan selama proses pencarian. Opsi ini memungkinkan penyempurnaan proses pencarian dengan menentukan rasio nilai terkecil dalam vektor kueri yang akan diabaikan. Opsi ini membantu menyeimbangkan ketepatan dan kinerja pencarian. Semakin kecil nilai yang ditetapkan untuk <code translate="no">drop_ratio_search</code>, semakin sedikit nilai kecil ini berkontribusi pada skor akhir. Dengan mengabaikan beberapa nilai kecil, kinerja pencarian dapat ditingkatkan dengan dampak minimal pada akurasi.</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-</ul>
-<h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND</h3><p>Indeks ini memiliki kemiripan dengan <code translate="no">SPARSE_INVERTED_INDEX</code>, namun menggunakan algoritma <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> untuk mengurangi jumlah evaluasi jarak IP secara penuh selama proses pencarian.</p>
-<p>Berdasarkan pengujian kami, <code translate="no">SPARSE_WAND</code> secara umum mengungguli metode-metode lain dalam hal kecepatan. Namun, kinerjanya bisa memburuk dengan cepat seiring dengan meningkatnya kepadatan vektor. Untuk mengatasi masalah ini, memperkenalkan <code translate="no">drop_ratio_search</code> yang bukan nol dapat meningkatkan kinerja secara signifikan dengan hanya mengalami sedikit penurunan akurasi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md">Vektor</a> Jarang.</p>
-<ul>
-<li><p>Parameter pembuatan indeks</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>Proporsi nilai vektor kecil yang dikecualikan selama proses pengindeksan. Opsi ini memungkinkan penyempurnaan proses pengindeksan, membuat keseimbangan antara efisiensi dan akurasi dengan mengabaikan nilai-nilai kecil saat membangun indeks.</td><td>[0, 1]</td></tr>
-</tbody>
-</table>
-</li>
-<li><p>Parameter pencarian</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Deskripsi</th><th>Rentang</th></tr>
+<tr><th>Parameter</th><th>Deskripsi</th><th>Range</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">drop_ratio_search</code></td><td>Proporsi nilai vektor kecil yang dikecualikan selama proses pencarian. Opsi ini memungkinkan penyempurnaan proses pencarian dengan menentukan rasio nilai terkecil dalam vektor kueri yang akan diabaikan. Opsi ini membantu menyeimbangkan ketepatan dan kinerja pencarian. Semakin kecil nilai yang ditetapkan untuk <code translate="no">drop_ratio_search</code>, semakin sedikit nilai kecil ini berkontribusi pada skor akhir. Dengan mengabaikan beberapa nilai kecil, kinerja pencarian dapat ditingkatkan dengan dampak minimal pada akurasi.</td><td>[0, 1]</td></tr>

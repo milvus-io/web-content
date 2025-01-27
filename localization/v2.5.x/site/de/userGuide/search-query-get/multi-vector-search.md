@@ -41,11 +41,11 @@ title: Hybride Suche
     </button></h2><p>Die hybride Suche eignet sich für die folgenden beiden Szenarien.</p>
 <h3 id="Sparse-Dense-Vector-Search​" class="common-anchor-header">Sparse-Dense-Vektorsuche</h3><p>Verschiedene Arten von Vektoren können unterschiedliche Informationen repräsentieren, und die Verwendung verschiedener Einbettungsmodelle kann verschiedene Merkmale und Aspekte der Daten umfassender darstellen. Zum Beispiel kann die Verwendung verschiedener Einbettungsmodelle für denselben Satz einen dichten Vektor zur Darstellung der semantischen Bedeutung und einen spärlichen Vektor zur Darstellung der Worthäufigkeit im Satz erzeugen.</p>
 <ul>
-<li><p><strong>Spärliche Vektoren:</strong> Spärliche Vektoren zeichnen sich durch ihre hohe Vektordimensionalität und das Vorhandensein von wenigen Nicht-Null-Werten aus. Aufgrund dieser Struktur eignen sie sich besonders gut für traditionelle Information Retrieval-Anwendungen. In den meisten Fällen entspricht die Anzahl der Dimensionen, die in spärlichen Vektoren verwendet werden, den verschiedenen Token in einer oder mehreren Sprachen. Jeder Dimension wird ein Wert zugewiesen, der die relative Bedeutung dieses Tokens innerhalb des Dokuments angibt. Dieses Layout erweist sich als vorteilhaft für Aufgaben, die einen Textabgleich beinhalten.</p></li>
+<li><p><strong>Spärliche Vektoren:</strong> Spärliche Vektoren zeichnen sich durch ihre hohe Vektordimensionalität und das Vorhandensein von wenigen Werten ungleich Null aus. Aufgrund dieser Struktur eignen sie sich besonders gut für traditionelle Information Retrieval-Anwendungen. In den meisten Fällen entspricht die Anzahl der Dimensionen, die in spärlichen Vektoren verwendet werden, den verschiedenen Token in einer oder mehreren Sprachen. Jeder Dimension wird ein Wert zugewiesen, der die relative Bedeutung dieses Tokens innerhalb des Dokuments angibt. Dieses Layout erweist sich als vorteilhaft für Aufgaben, die einen Textabgleich beinhalten.</p></li>
 <li><p><strong>Dichte Vektoren:</strong> Dichte Vektoren sind von neuronalen Netzen abgeleitete Einbettungen. Wenn sie in einem geordneten Array angeordnet sind, erfassen diese Vektoren das semantische Wesen des Eingabetextes. Dichte Vektoren sind nicht auf die Textverarbeitung beschränkt; sie werden auch häufig in der Computer Vision verwendet, um die Semantik von visuellen Daten darzustellen. Diese dichten Vektoren, die in der Regel durch Modelle zur Texteinbettung erzeugt werden, zeichnen sich dadurch aus, dass die meisten oder alle Elemente ungleich Null sind. Daher eignen sich dichte Vektoren besonders gut für semantische Suchanwendungen, da sie auf der Grundlage der Vektordistanz die ähnlichsten Ergebnisse liefern können, selbst wenn es keine exakten Textübereinstimmungen gibt. Diese Fähigkeit ermöglicht nuanciertere und kontextbezogene Suchergebnisse, die oft Beziehungen zwischen Konzepten erfassen, die bei schlagwortbasierten Ansätzen übersehen werden könnten.</p></li>
 </ul>
 <p>Weitere Einzelheiten finden Sie unter <a href="/docs/de/sparse_vector.md">Sparse Vector</a> und <a href="/docs/de/dense-vector.md">Dense Vector</a>.</p>
-<h3 id="Multimodal-Search​" class="common-anchor-header">Multimodale Suche</h3><p>Multimodale Suche bezieht sich auf die Ähnlichkeitssuche von unstrukturierten Daten über mehrere Modalitäten hinweg (wie Bilder, Videos, Audio, Text usw.). Eine Person kann beispielsweise durch verschiedene Modalitäten von Daten wie Fingerabdrücke, Stimmabdrücke und Gesichtsmerkmale dargestellt werden. Die hybride Suche unterstützt mehrere Suchvorgänge gleichzeitig. Zum Beispiel die Suche nach einer Person mit ähnlichen Fingerabdrücken und Stimmabdrücken.</p>
+<h3 id="Multimodal-Search​" class="common-anchor-header">Multimodale Suche</h3><p>Multimodale Suche bezieht sich auf die Ähnlichkeitssuche von unstrukturierten Daten über mehrere Modalitäten hinweg (wie Bilder, Videos, Audio, Text usw.). Eine Person kann beispielsweise durch verschiedene Modalitäten von Daten wie Fingerabdrücke, Stimmabdrücke und Gesichtsmerkmale dargestellt werden. Die hybride Suche unterstützt mehrere Suchvorgänge gleichzeitig. Zum Beispiel die Suche nach einer Person mit ähnlichen Fingerabdrücken und Stimmbildern.</p>
 <h2 id="Workflow​" class="common-anchor-header">Arbeitsablauf<button data-href="#Workflow​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -250,7 +250,7 @@ index_params.add_index(​
     index_name=<span class="hljs-string">&quot;sparse_index&quot;</span>,​
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,  <span class="hljs-comment"># Index type for sparse vectors​</span>
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Currently, only IP (Inner Product) is supported for sparse vectors​</span>
-    params={<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
+    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -268,7 +268,7 @@ denseParams.<span class="hljs-title function_">put</span>(<span class="hljs-stri
         .<span class="hljs-title function_">build</span>();​
 ​
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt; sparseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_build&quot;</span>, <span class="hljs-number">0.2</span>);​
+sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);​
 <span class="hljs-title class_">IndexParam</span> indexParamForSparseField = <span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
         .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_index&quot;</span>)​
@@ -456,7 +456,7 @@ search_param_2 = {​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,​
     <span class="hljs-string">&quot;param&quot;</span>: {​
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,​
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}​
+        <span class="hljs-string">&quot;params&quot;</span>: {}​
     },​
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>​
 }​
@@ -494,7 +494,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
         .vectorFieldName(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .vectors(querySparseVectors)​
         .metricType(IndexParam.MetricType.IP)​
-        .<span class="hljs-keyword">params</span>(<span class="hljs-string">&quot;{\&quot;drop_ratio_build\&quot;: 0.2}&quot;</span>)​
+        .<span class="hljs-keyword">params</span>()​
         .topK(<span class="hljs-number">2</span>)​
         .build());​
 
@@ -503,20 +503,20 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
     <span class="hljs-string">&quot;data&quot;</span>: query_vector, ​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;dense&quot;</span>, ​
     <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-comment">// 参数值需要与 Collection Schema 中定义的保持一致​</span>
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
         <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}​
     },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// AnnSearchRequest 返还的搜索结果数量​</span>
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
 }​
 ​
 <span class="hljs-keyword">const</span> search_param_2 = {​
     <span class="hljs-string">&quot;data&quot;</span>: query_sparse_vector, ​
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>, ​
     <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-comment">// 参数值需要与 Collection Schema 中定义的保持一致​</span>
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_build&quot;</span>: <span class="hljs-number">0.2</span>}​
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
+        <span class="hljs-string">&quot;params&quot;</span>: {}​
     },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment">// AnnSearchRequest 返还的搜索结果数量​</span>
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
 }​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -535,9 +535,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
         &quot;data&quot;: [{&quot;3573&quot;: 0.34701499565746674}, {&quot;5263&quot;: 0.2639375518635271}],​
         &quot;annsField&quot;: &quot;sparse&quot;,​
         &quot;params&quot;: {​
-            &quot;params&quot;: {​
-                &quot;drop_ratio_build&quot;: 0.2​
-             }​
+            &quot;params&quot;: {}​
         },​
         &quot;limit&quot;: 2​
     }​
@@ -606,7 +604,7 @@ ranker = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-numb
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Perform-a-Hybrid-Search​" class="common-anchor-header">Durchführen einer hybriden Suche</h3><p>Bevor eine hybride Suche durchgeführt wird, muss die Sammlung in den Speicher geladen werden. Wenn die Vektorfelder in der Sammlung keinen Index haben oder nicht geladen sind, tritt beim Aufruf der Methode Hybrid Search ein Fehler auf. </p>
+<h3 id="Perform-a-Hybrid-Search​" class="common-anchor-header">Durchführen einer hybriden Suche</h3><p>Bevor eine hybride Suche durchgeführt werden kann, muss die Sammlung in den Speicher geladen werden. Wenn die Vektorfelder in der Sammlung keinen Index haben oder nicht geladen sind, tritt beim Aufruf der Methode Hybrid Search ein Fehler auf. </p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​

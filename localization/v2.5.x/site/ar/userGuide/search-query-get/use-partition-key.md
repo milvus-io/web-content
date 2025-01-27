@@ -71,7 +71,7 @@ title: استخدام مفتاح التقسيم
 </ul>
 <h3 id="Set-Partition-Key​" class="common-anchor-header">تعيين مفتاح التقسيم</h3><p>لتعيين حقل قياسي كمفتاح التقسيم، تحتاج إلى تعيين السمة <code translate="no">is_partition_key</code> الخاصة به إلى <code translate="no">true</code> عند إضافة الحقل القياسي.</p>
 <div class="multipleCode">
- <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
+ <a href="#python">بيثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (​
     MilvusClient, DataType​
 )​
@@ -243,3 +243,82 @@ export <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27
 export <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>عليك أن تستبدل <code translate="no">partition_key</code> باسم الحقل الذي تم تعيينه كمفتاح التقسيم.</p>
+</div>
+<h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">استخدام عزل مفتاح التقسيم<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>في سيناريو الإيجارات المتعددة، يمكنك تعيين الحقل القياسي المتعلق بهويات المستأجرين كمفتاح التقسيم وإنشاء عامل تصفية يستند إلى قيمة محددة في هذا الحقل القياسي. لتحسين أداء البحث بشكل أكبر في سيناريوهات مماثلة، يقدم Milvus ميزة عزل مفتاح التقسيم.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
+   </span> <span class="img-wrapper"> <span>عزل مفتاح التقسيم</span> </span></p>
+<p>كما هو موضح في الشكل أعلاه، يقوم Milvus بتجميع الكيانات بناءً على قيمة مفتاح التقسيم وإنشاء فهرس منفصل لكل مجموعة من هذه المجموعات. عند تلقي طلب بحث، يقوم ملفوس بتحديد موقع الفهرس استناداً إلى قيمة مفتاح التقسيم المحددة في شرط التصفية ويقيد نطاق البحث ضمن الكيانات المضمنة في الفهرس، وبالتالي تجنب مسح الكيانات غير ذات الصلة أثناء البحث وتحسين أداء البحث بشكل كبير. بمجرد تمكين عزل مفتاح التقسيم، يمكنك تضمين قيمة محددة فقط في عامل التصفية المستند إلى مفتاح التقسيم بحيث يمكن لـ Milvus تقييد نطاق البحث ضمن الكيانات المضمنة في الفهرس التي تتطابق.</p>
+<div class="alert note">
+<p>في الوقت الحالي، تنطبق ميزة عزل مفتاح التقسيم فقط على عمليات البحث مع تعيين نوع الفهرس إلى HNSW.</p>
+</div>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">تمكين عزل مفتاح التقسيم</h3><p>توضح الأمثلة البرمجية التالية كيفية تمكين عزل مفتاح التقسيم.</p>
+<div class="multipleCode">
+ <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
+<pre><code translate="no" class="language-python">client.create_collection(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    schema=schema,
+    <span class="hljs-comment"># highlight-next-line</span>
+    properties={<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">True</span>}
+)
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">collection</span>.<span class="hljs-property">request</span>.<span class="hljs-property">CreateCollectionReq</span>;
+
+<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">String</span>&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>);
+
+<span class="hljs-title class_">CreateCollectionReq</span> createCollectionReq = <span class="hljs-title class_">CreateCollectionReq</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_">collectionSchema</span>(schema)
+        .<span class="hljs-title function_">numPartitions</span>(<span class="hljs-number">1024</span>)
+        .<span class="hljs-title function_">properties</span>(properties)
+        .<span class="hljs-title function_">build</span>();
+client.<span class="hljs-title function_">createCollection</span>(createCollectionReq);
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">true</span>
+    }
+})
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
+    &quot;partitionKeyIsolation&quot;: true
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;myCollection\&quot;,
+    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
+    \&quot;params\&quot;: <span class="hljs-variable">$params</span>
+}&quot;</span>
+
+<button class="copy-code-btn"></button></code></pre>
+<p>بمجرد تمكين عزل مفتاح القسم، لا يزال بإمكانك تعيين مفتاح القسم وعدد الأقسام كما هو موضح في <a href="#Set-Partition-Numbers">تعيين أرقام الأقسام</a>. لاحظ أن عامل التصفية المستند إلى مفتاح التقسيم يجب أن يتضمن قيمة مفتاح قسم محدد فقط.</p>
