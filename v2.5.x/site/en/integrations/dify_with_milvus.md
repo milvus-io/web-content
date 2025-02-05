@@ -39,15 +39,14 @@ Change the value `VECTOR_STORE` in the `.env` file
 ```
 VECTOR_STORE=milvus
 ```
-Change the Milvus configuration in the `.env` file
+Make sure the Milvus configuration in the `.env` file has the following line:
 ```
-MILVUS_URI=xxx
-MILVUS_TOKEN=xxx
+MILVUS_URI=http://host.docker.internal:19530
 ```
 
-In this setup, please use the external URI of the server, e.g.`http://172.16.16.16:19530`, as your `MILVUS_URI`.
+Note that by specifying `VECTOR_STORE=milvus`, Dify will bring up a Milvus Standalone server in docker. Even though you can access the server from outside of the Docker through `http://localhost:19530`, for other Dify containers to talk to it inside Docker environment, they need to connect to the special DNS name `host.docker.internal`. Thus we set `http://host.docker.internal:19530` as `MILVUS_URI`.
 
-For the `MILVUS_TOKEN`, if you have not set a token for your Milvus server, you can set it to an empty string like `MILVUS_TOKEN=`, otherwise, you need to set it to your Milvus token. For more information about how to set token in Milvus, you can refer the [authenticate page](https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password).
+For production deployment you may want to customize the authentication. For more information about how to set token or username and password in Milvus, you can refer the [authenticate page](https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password).
 
 ## Start the Docker Containers
 
