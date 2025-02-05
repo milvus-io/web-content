@@ -26,43 +26,7 @@ Comparison operators are used to filter data based on equality, inequality, or s
 
 - `<=` (Less than or equal to)​
 
-### Example 1: Filtering with Equal To (`==`)​
-
-Assume you have a field named `status` and you want to find all entities where `status` is "active". You can use the equality operator `==`:​
-
-```python
-filter = 'status == "active"'​
-
-```
-
-### Example 2: Filtering with Not Equal To (`!=`)​
-
-To find entities where `status` is not "inactive":​
-
-```python
-filter = 'status != "inactive"'​
-
-```
-
-### Example 3: Filtering with Greater Than (`>`)​
-
-If you want to find all entities with an `age` greater than 30:​
-
-```python
-filter = 'age > 30'​
-
-```
-
-### Example 4: Filtering with Less Than (`<`)​
-
-To find entities where `price` is less than 100:​
-
-```python
-filter = 'price < 100'​
-
-```
-
-### Example 5: Filtering with Greater Than or Equal To (`>=`)​
+### Example 1: Filtering with Greater Than or Equal To (`>=`)​
 
 If you want to find all entities with `rating` greater than or equal to 4:​
 
@@ -71,7 +35,7 @@ filter = 'rating >= 4'​
 
 ```
 
-### Example 6: Filtering with Less Than or Equal To (`<=`)​
+### Example 2: Filtering with Less Than or Equal To (`<=`)​
 
 To find entities with `discount` less than or equal to 10%:​
 
