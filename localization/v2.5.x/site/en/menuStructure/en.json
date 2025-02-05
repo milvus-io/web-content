@@ -1427,17 +1427,36 @@
             "children": []
           },
           {
-            "label": "Users, Privileges, and Roles",
-            "id": "users_and_roles.md",
-            "order": 10,
-            "children": []
-          },
-          {
             "label": "Enable RBAC",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,
-            "children": []
+            "children": [
+              {
+                "label": "Users, Privileges, and Roles",
+                "id": "users_and_roles.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Privilege Group",
+                "id": "privilege_group.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Grant Privileges",
+                "id": "grant_privileges.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Grant Roles",
+                "id": "grant_roles.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Encryption in Transit",

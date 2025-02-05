@@ -48,11 +48,11 @@ title: RBAC Explained
 </p>
 <p>There are four major components in the RBAC model.​</p>
 <ul>
-<li><p>**Resource: **The resource entity that can be accessed. There are three levels of resources in Milvus - instance, database, and collection.​</p></li>
-<li><p>**Privilege: **The permission to perform certain operations on Milvus resources (eg. create collections, insert data, etc). ​</p></li>
-<li><p>**Privilege group: **A group of multiple privileges.​</p></li>
-<li><p>**Role: **A role consists of two parts-privileges and resources. Privileges define the type of operations that a role can perform while resources define the target resources that the operations can be performed on. For example, the database administrator role can perform read, write, and manage operations on certain databases.​</p></li>
-<li><p>**User: **A user is someone who uses Milvus. Each user has a unique ID and is granted a role or multiple roles. ​</p></li>
+<li><p><strong>Resource</strong>: The resource entity that can be accessed. There are three levels of resources in Milvus - instance, database, and collection.​</p></li>
+<li><p><strong>Privilege</strong>: The permission to perform certain operations on Milvus resources (eg. create collections, insert data, etc). ​</p></li>
+<li><p><strong>Privilege group</strong>: A group of multiple privileges.​</p></li>
+<li><p><strong>Role</strong>: A role consists of two parts-privileges and resources. Privileges define the type of operations that a role can perform while resources define the target resources that the operations can be performed on. For example, the database administrator role can perform read, write, and manage operations on certain databases.​</p></li>
+<li><p><strong>User</strong>: A user is someone who uses Milvus. Each user has a unique ID and is granted a role or multiple roles. ​</p></li>
 </ul>
 <h2 id="Procedures​" class="common-anchor-header">Procedures​<button data-href="#Procedures​" class="anchor-icon" translate="no">
       <svg translate="no"
