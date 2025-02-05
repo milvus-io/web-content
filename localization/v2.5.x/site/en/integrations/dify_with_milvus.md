@@ -64,12 +64,11 @@ title: Deploying Dify with Milvus
 <p>Change the value <code translate="no">VECTOR_STORE</code> in the <code translate="no">.env</code> file</p>
 <pre><code translate="no">VECTOR_STORE=milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Change the Milvus configuration in the <code translate="no">.env</code> file</p>
-<pre><code translate="no">MILVUS_URI=xxx
-MILVUS_TOKEN=xxx
+<p>Make sure the Milvus configuration in the <code translate="no">.env</code> file has the following line:</p>
+<pre><code translate="no"><span class="hljs-variable constant_">MILVUS_URI</span>=<span class="hljs-attr">http</span>:<span class="hljs-comment">//host.docker.internal:19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In this setup, please use the external URI of the server, e.g.<code translate="no">http://172.16.16.16:19530</code>, as your <code translate="no">MILVUS_URI</code>.</p>
-<p>For the <code translate="no">MILVUS_TOKEN</code>, if you have not set a token for your Milvus server, you can set it to an empty string like <code translate="no">MILVUS_TOKEN=</code>, otherwise, you need to set it to your Milvus token. For more information about how to set token in Milvus, you can refer the <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">authenticate page</a>.</p>
+<p>Note that by specifying <code translate="no">VECTOR_STORE=milvus</code>, Dify will bring up a Milvus Standalone server in docker. Even though you can access the server from outside of the Docker through <code translate="no">http://localhost:19530</code>, for other Dify containers to talk to it inside Docker environment, they need to connect to the special DNS name <code translate="no">host.docker.internal</code>. Thus we set <code translate="no">http://host.docker.internal:19530</code> as <code translate="no">MILVUS_URI</code>.</p>
+<p>For production deployment you may want to customize the authentication. For more information about how to set token or username and password in Milvus, you can refer the <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">authenticate page</a>.</p>
 <h2 id="Start-the-Docker-Containers" class="common-anchor-header">Start the Docker Containers<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
