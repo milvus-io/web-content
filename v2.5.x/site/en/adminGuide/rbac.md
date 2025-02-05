@@ -19,15 +19,15 @@ The RBAC model can improve the efficiency of access control management. For exam
 
 There are four major components in the RBAC model.​
 
-- **Resource: **The resource entity that can be accessed. There are three levels of resources in Milvus - instance, database, and collection.​
+- **Resource**: The resource entity that can be accessed. There are three levels of resources in Milvus - instance, database, and collection.​
 
-- **Privilege: **The permission to perform certain operations on Milvus resources (eg. create collections, insert data, etc). ​
+- **Privilege**: The permission to perform certain operations on Milvus resources (eg. create collections, insert data, etc). ​
 
-- **Privilege group: **A group of multiple privileges.​
+- **Privilege group**: A group of multiple privileges.​
 
-- **Role: **A role consists of two parts-privileges and resources. Privileges define the type of operations that a role can perform while resources define the target resources that the operations can be performed on. For example, the database administrator role can perform read, write, and manage operations on certain databases.​
+- **Role**: A role consists of two parts-privileges and resources. Privileges define the type of operations that a role can perform while resources define the target resources that the operations can be performed on. For example, the database administrator role can perform read, write, and manage operations on certain databases.​
 
-- **User: **A user is someone who uses Milvus. Each user has a unique ID and is granted a role or multiple roles. ​
+- **User**: A user is someone who uses Milvus. Each user has a unique ID and is granted a role or multiple roles. ​
 
 ## Procedures​
 
