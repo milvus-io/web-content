@@ -1428,32 +1428,38 @@
           },
           {
             "label": "Enable RBAC",
-            "id": "rbac.md",
+            "id": "rbac",
             "order": 1,
             "isMenu": true,
             "children": [
               {
+                "label": "RBAC Overview",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },              
+              {
                 "label": "Users, Privileges, and Roles",
                 "id": "users_and_roles.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Privilege Group",
                 "id": "privilege_group.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Grant Privileges",
                 "id": "grant_privileges.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "Grant Roles",
                 "id": "grant_roles.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               }
             ]
