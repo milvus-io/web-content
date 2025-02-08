@@ -433,6 +433,12 @@ curl --request POST \​
 
 To return entities with null values, query without any scalar filtering condition as follows:
 
+<div class="alert note">
+
+The `query` method, when used without any filtering conditions, retrieves all entities in the collection, including those with null values. To restrict the number of returned entities, the `limit` parameter must be specified.
+
+</div>
+
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
@@ -441,14 +447,15 @@ To return entities with null values, query without any scalar filtering conditio
 </div>
 
 ```python
-null_results = client.query(​
-    collection_name="user_profiles_null",​
-    filter="",​ # Query without any filtering condition
-    output_fields=["id", "age"]​
-)​
+null_results = client.query(
+    collection_name="user_profiles_null",
+    filter="", # Query without any filtering condition
+    output_fields=["id", "age"],
+    limit=10 # `limit` parameter is required when using `query` method without filtering condition
+)
 ​
 # Example output:​
-# [{"id": 2, "age": None}, {"id": 3, "age": None}]​
+# ["{'id': 1, 'age': 30}", "{'id': 2, 'age': None}", "{'id': 3, 'age': None}"]
 
 ```
 
@@ -468,7 +475,8 @@ System.out.println(resp.getQueryResults());​
 const results = await client.query(​
     collection_name: "user_profiles_null",​
     filter: "",​
-    output_fields: ["id", "age"]​
+    output_fields: ["id", "age"]​,
+    limit: 10​
 );​
 
 ```
@@ -481,7 +489,8 @@ curl --request POST \​
 -d '{​
     "collectionName": "user_profiles_null",​
     "expr": "",​
-    "outputFields": ["id", "age"]​
+    "outputFields": ["id", "age"]​,
+    "limit": 10
 }'​
 ​
 # {"code":0,"cost":0,"data":[{"age":30,"id":1},{"age":null,"id":2},{"age":null,"id":3}]}​
