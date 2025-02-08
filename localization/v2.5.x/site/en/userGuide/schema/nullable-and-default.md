@@ -421,20 +421,24 @@ System.out.println(resp.getQueryResults());​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>To return entities with null values, query without any scalar filtering condition as follows:</p>
+<div class="alert note">
+<p>The <code translate="no">query</code> method, when used without any filtering conditions, retrieves all entities in the collection, including those with null values. To restrict the number of returned entities, the <code translate="no">limit</code> parameter must be specified.</p>
+</div>
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
   <a href="#javascript">Node.js</a>
   <a href="#curl">cURL</a>
 </div>
-<pre><code translate="no" class="language-python">null_results = client.query(​
-    collection_name=<span class="hljs-string">&quot;user_profiles_null&quot;</span>,​
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,​ <span class="hljs-comment"># Query without any filtering condition</span>
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]​
-)​
+<pre><code translate="no" class="language-python">null_results = client.query(
+    collection_name=<span class="hljs-string">&quot;user_profiles_null&quot;</span>,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Query without any filtering condition</span>
+    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>],
+    limit=<span class="hljs-number">10</span> <span class="hljs-comment"># `limit` parameter is required when using `query` method without filtering condition</span>
+)
 ​
 <span class="hljs-comment"># Example output:​</span>
-<span class="hljs-comment"># [{&quot;id&quot;: 2, &quot;age&quot;: None}, {&quot;id&quot;: 3, &quot;age&quot;: None}]​</span>
+<span class="hljs-comment"># [&quot;{&#x27;id&#x27;: 1, &#x27;age&#x27;: 30}&quot;, &quot;{&#x27;id&#x27;: 2, &#x27;age&#x27;: None}&quot;, &quot;{&#x27;id&#x27;: 3, &#x27;age&#x27;: None}&quot;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">QueryResp resp = client.query(QueryReq.builder()​
@@ -450,7 +454,8 @@ System.out.println(resp.getQueryResults());​
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>(​
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;user_profiles_null&quot;</span>,​
     <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;&quot;</span>,​
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]​
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]​,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>​
 );​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -461,7 +466,8 @@ System.out.println(resp.getQueryResults());​
 -d <span class="hljs-string">&#x27;{​
     &quot;collectionName&quot;: &quot;user_profiles_null&quot;,​
     &quot;expr&quot;: &quot;&quot;,​
-    &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;]​
+    &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;]​,
+    &quot;limit&quot;: 10
 }&#x27;</span>​
 ​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;id&quot;:2},{&quot;age&quot;:null,&quot;id&quot;:3}]}​</span>
