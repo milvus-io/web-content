@@ -7,7 +7,7 @@ deprecate: true
 ---
 # Migrate Data from Milvus to HDF5
 
-You can save data in Milvus as HDF5 files using [MilvusDM](migrate_overview.md).
+You can save data in Milvus as HDF5 files using [VTS](https://github.com/zilliztech/vts).
 
 1. Download **M2H.yaml**:
 
