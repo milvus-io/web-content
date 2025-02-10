@@ -311,7 +311,7 @@
         "children": []
       },
       {
-        "label": "インメモリ・レプリカ",
+        "label": "インメモリーレプリカ",
         "id": "replica.md",
         "order": 11,
         "children": []
@@ -637,50 +637,6 @@
             "children": []
           }
         ]
-      }
-    ]
-  },
-  {
-    "label": "Milvus移住",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 5,
-    "children": [
-      {
-        "label": "概要",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "移行ツールのインストール",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "Elasticsearchから",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "ファイスより",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "Milvus 1.x より",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Milvus 2.3.x より",
-        "id": "from-m2x.md",
-        "order": 5,
-        "children": []
       }
     ]
   },

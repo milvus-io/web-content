@@ -68,8 +68,8 @@ summary: >-
     </button></h2><p>Milvus 从设计之初就是一个高效的向量数据库系统。在大多数情况下，Milvus 的性能是其他向量数据库的 2-5 倍（参见 VectorDBBench 结果）。这种高性能是几个关键设计决策的结果：</p>
 <p><strong>硬件感知优化</strong>：为了让 Milvus 适应各种硬件环境，我们专门针对多种硬件架构和平台优化了其性能，包括 AVX512、SIMD、GPU 和 NVMe SSD。</p>
 <p><strong>高级搜索算法</strong>：Milvus 支持多种内存和磁盘索引/搜索算法，包括 IVF、HNSW、DiskANN 等，所有这些算法都经过了深度优化。与 FAISS 和 HNSWLib 等流行实现相比，Milvus 的性能提高了 30%-70%。</p>
-<p><strong>C++ 搜索引擎</strong>向量数据库性能的 80% 以上取决于其搜索引擎。由于 C++ 语言的高性能、底层优化和高效资源管理，Milvus 使用 C++ 来处理这一关键组件。最重要的是，Milvus 集成了大量硬件感知代码优化，从汇编级向量到多线程并行化和调度，以充分利用硬件能力。</p>
-<p><strong>面向列</strong>：Milvus 是面向列的向量数据库系统。其主要优势来自数据访问模式。在执行查询时，面向列的数据库只读取查询所涉及的特定字段，而不是整行，这大大减少了访问的数据量。此外，对基于列的数据的操作可以很容易地进行向量化，从而可以一次性在整个列中应用操作，进一步提高性能。</p>
+<p><strong>C++ 搜索引擎</strong>向量数据库性能的 80% 以上取决于其搜索引擎。由于 C++ 语言的高性能、底层优化和高效资源管理，Milvus 将 C++ 用于这一关键组件。最重要的是，Milvus 集成了大量硬件感知代码优化，从汇编级向量到多线程并行化和调度，以充分利用硬件能力。</p>
+<p><strong>面向列</strong>：Milvus 是面向列的向量数据库系统。其主要优势来自数据访问模式。在执行查询时，面向列的数据库只读取查询中涉及的特定字段，而不是整行，这大大减少了访问的数据量。此外，对基于列的数据的操作可以很容易地进行向量化，从而可以一次性在整个列中应用操作，进一步提高性能。</p>
 <h2 id="What-Makes-Milvus-so-Scalable" class="common-anchor-header">是什么让 Milvus 具有如此高的可扩展性？<button data-href="#What-Makes-Milvus-so-Scalable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,5 +173,5 @@ summary: >-
 <li><p>Milvus 备份 Milvus 备份是一个允许用户备份和恢复 Milvus 数据的工具。它同时提供 CLI 和 API，以适应不同的应用场景。详情请参阅<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>。</p></li>
 <li><p>Milvus Capture Data Change (CDC) Milvus-CDC 可以捕获和同步 Milvus 实例中的增量数据，并通过在源实例和目标实例之间的无缝传输，确保业务数据的可靠性，从而轻松实现增量备份和灾难恢复。详情请参阅<a href="/docs/zh/milvus-cdc-overview.md">Milvus CDC</a>。</p></li>
 <li><p>Milvus 连接器 Milvus 为您规划了一套连接器，以便将 Milvus 与 Apache Spark 等第三方工具无缝集成。目前，您可以使用我们的 Spark 连接器将 Milvus 数据馈送到 Apache Spark 进行机器学习处理。有关详情，请参阅<a href="/docs/zh/integrate_with_spark.md">Spark-Milvus Connector</a>。</p></li>
-<li><p>向量传输服务（VTS Milvus 提供了一套工具，供你在 Milvus 实例和一系列数据源（包括 Zilliz 集群、Elasticsearch、Postgres (PgVector) 和另一个 Milvus 实例）之间传输数据。有关详情，请参阅<a href="/docs/zh/migrate_overview.md">迁移</a>。</p></li>
+<li><p>向量传输服务（VTS） Milvus 为您提供了一套工具，用于在 Milvus 实例和一系列数据源（包括 Zilliz 集群、Elasticsearch、Postgres (PgVector) 和另一个 Milvus 实例）之间传输数据。有关详情，请参阅<a href="https://github.com/zilliztech/vts">VTS</a>。</p></li>
 </ul>

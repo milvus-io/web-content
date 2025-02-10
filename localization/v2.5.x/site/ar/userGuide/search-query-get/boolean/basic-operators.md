@@ -48,27 +48,11 @@ title: المشغلون الأساسيون
 <li><p><code translate="no">&gt;=</code> (أكبر من أو يساوي)</p></li>
 <li><p><code translate="no">&lt;=</code> (أقل من أو يساوي)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-​" class="common-anchor-header">مثال 1: التصفية باستخدام Equal To (<code translate="no">==</code>)</h3><p>افترض أن لديك حقلًا باسم <code translate="no">status</code> وتريد العثور على جميع الكيانات التي يكون فيها <code translate="no">status</code> &quot;نشط&quot;. يمكنك استخدام عامل المساواة <code translate="no">==</code>.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-​" class="common-anchor-header">مثال 2: التصفية باستخدام لا يساوي (<code translate="no">!=</code>)</h3><p>للعثور على الكيانات حيث <code translate="no">status</code> ليس &quot;غير نشط&quot;.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-​" class="common-anchor-header">مثال 3: التصفية باستخدام أكبر من (<code translate="no">&gt;</code>)</h3><p>إذا كنت تريد العثور على جميع الكيانات التي تحتوي على <code translate="no">age</code> أكبر من 30</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than-​" class="common-anchor-header">مثال 4: التصفية باستخدام أقل من (<code translate="no">&lt;</code>)</h3><p>للعثور على الكيانات التي يكون فيها <code translate="no">price</code> أقل من 100.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">مثال 5: التصفية باستخدام أكبر من أو يساوي (<code translate="no">&gt;=</code>)</h3><p>إذا كنت ترغب في العثور على جميع الكيانات ذات <code translate="no">rating</code> أكبر من أو يساوي 4.</p>
+<h3 id="Example-1-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">مثال 1: التصفية باستخدام (أكبر من أو يساوي إلى) (<code translate="no">&gt;=</code>)</h3><p>إذا كنت تريد العثور على جميع الكيانات التي تحتوي على <code translate="no">rating</code> أكبر من أو يساوي 4.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">مثال 6: التصفية باستخدام أقل من أو يساوي (<code translate="no">&lt;=</code>)</h3><p>للعثور على الكيانات التي تحتوي على <code translate="no">discount</code> أقل من أو تساوي 10٪.</p>
+<h3 id="Example-2-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">مثال 2: التصفية باستخدام أقل من أو يساوي (<code translate="no">&lt;=</code>)</h3><p>للعثور على الكيانات التي تحتوي على <code translate="no">discount</code> أقل من أو يساوي 10٪.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>

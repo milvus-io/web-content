@@ -62,12 +62,11 @@ title: Milvus로 Dify 배포하기
 <p><code translate="no">.env</code> 파일에서 <code translate="no">VECTOR_STORE</code> 값을 변경합니다.</p>
 <pre><code translate="no">VECTOR_STORE=milvus
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">.env</code> 파일에서 Milvus 구성을 변경합니다.</p>
-<pre><code translate="no">MILVUS_URI=xxx
-MILVUS_TOKEN=xxx
+<p><code translate="no">.env</code> 파일의 Milvus 구성에 다음 줄이 있는지 확인합니다:</p>
+<pre><code translate="no"><span class="hljs-variable constant_">MILVUS_URI</span>=<span class="hljs-attr">http</span>:<span class="hljs-comment">//host.docker.internal:19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>이 설정에서는 서버의 외부 URI(예:<code translate="no">http://172.16.16.16:19530</code>)를 <code translate="no">MILVUS_URI</code> 으로 사용하세요.</p>
-<p><code translate="no">MILVUS_TOKEN</code> 의 경우 Milvus 서버에 대한 토큰을 설정하지 않은 경우 <code translate="no">MILVUS_TOKEN=</code> 과 같은 빈 문자열로 설정할 수 있으며, 그렇지 않은 경우 Milvus 토큰으로 설정해야 합니다. Milvus에서 토큰을 설정하는 방법에 대한 자세한 내용은 <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">인증 페이지를</a> 참조하세요.</p>
+<p><code translate="no">VECTOR_STORE=milvus</code> 을 지정하면 Dify가 Docker에서 Milvus 독립형 서버를 불러옵니다. <code translate="no">http://localhost:19530</code> 을 통해 도커 외부에서 서버에 접속할 수 있지만, 다른 Dify 컨테이너가 도커 환경 내에서 서버와 통신하려면 특수 DNS 이름 <code translate="no">host.docker.internal</code> 에 연결해야 합니다. 따라서 <code translate="no">http://host.docker.internal:19530</code> 을 <code translate="no">MILVUS_URI</code> 으로 설정했습니다.</p>
+<p>프로덕션 배포의 경우 인증을 사용자 지정할 수 있습니다. Milvus에서 토큰 또는 사용자 이름과 비밀번호를 설정하는 방법에 대한 자세한 내용은 <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">인증 페이지를</a> 참조하세요.</p>
 <h2 id="Start-the-Docker-Containers" class="common-anchor-header">Docker 컨테이너 시작<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

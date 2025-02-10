@@ -406,16 +406,20 @@ System.out.println(resp.getQueryResults());​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Pour renvoyer des entités avec des valeurs nulles, effectuez une requête sans condition de filtrage scalaire comme suit :</p>
+<div class="alert note">
+<p>La méthode <code translate="no">query</code>, lorsqu'elle est utilisée sans condition de filtrage, récupère toutes les entités de la collection, y compris celles qui ont des valeurs nulles. Pour limiter le nombre d'entités renvoyées, le paramètre <code translate="no">limit</code> doit être spécifié.</p>
+</div>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">null_results = client.query(​
-    collection_name=<span class="hljs-string">&quot;user_profiles_null&quot;</span>,​
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,​ <span class="hljs-comment"># Query without any filtering condition</span>
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]​
-)​
+<pre><code translate="no" class="language-python">null_results = client.query(
+    collection_name=<span class="hljs-string">&quot;user_profiles_null&quot;</span>,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Query without any filtering condition</span>
+    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>],
+    limit=<span class="hljs-number">10</span> <span class="hljs-comment"># `limit` parameter is required when using `query` method without filtering condition</span>
+)
 ​
 <span class="hljs-comment"># Example output:​</span>
-<span class="hljs-comment"># [{&quot;id&quot;: 2, &quot;age&quot;: None}, {&quot;id&quot;: 3, &quot;age&quot;: None}]​</span>
+<span class="hljs-comment"># [&quot;{&#x27;id&#x27;: 1, &#x27;age&#x27;: 30}&quot;, &quot;{&#x27;id&#x27;: 2, &#x27;age&#x27;: None}&quot;, &quot;{&#x27;id&#x27;: 3, &#x27;age&#x27;: None}&quot;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">QueryResp resp = client.query(QueryReq.builder()​
@@ -431,7 +435,8 @@ System.out.println(resp.getQueryResults());​
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>(​
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;user_profiles_null&quot;</span>,​
     <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;&quot;</span>,​
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]​
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]​,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>​
 );​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -442,7 +447,8 @@ System.out.println(resp.getQueryResults());​
 -d <span class="hljs-string">&#x27;{​
     &quot;collectionName&quot;: &quot;user_profiles_null&quot;,​
     &quot;expr&quot;: &quot;&quot;,​
-    &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;]​
+    &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;]​,
+    &quot;limit&quot;: 10
 }&#x27;</span>​
 ​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;id&quot;:2},{&quot;age&quot;:null,&quot;id&quot;:3}]}​</span>
@@ -863,7 +869,7 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le tableau suivant résume le comportement des colonnes nullables et des valeurs par défaut dans différentes combinaisons de configuration. Ces règles déterminent la manière dont Milvus traite les données en cas de tentative d'insertion de valeurs nulles ou si les valeurs de champ ne sont pas fournies.</p>
+    </button></h2><p>Le tableau suivant résume le comportement des colonnes nullables et des valeurs par défaut selon différentes combinaisons de configuration. Ces règles déterminent la manière dont Milvus traite les données en cas de tentative d'insertion de valeurs nulles ou si les valeurs de champ ne sont pas fournies.</p>
 <table>
 <thead>
 <tr><th>Nulle</th><th>Valeur par défaut</th><th>Valeur par défaut Type</th><th>Entrée utilisateur</th><th>Résultat</th><th>Exemple</th></tr>

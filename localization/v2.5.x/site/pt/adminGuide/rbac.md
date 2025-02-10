@@ -47,11 +47,11 @@ title: Explicação do RBAC
    </span> <span class="img-wrapper"> <span>Utilizadores, funções e privilégios</span> </span></p>
 <p>Existem quatro componentes principais no modelo RBAC.</p>
 <ul>
-<li><p>**Recurso: **A entidade de recurso que pode ser acedida. Existem três níveis de recursos no Milvus - instância, base de dados e coleção.</p></li>
-<li><p>**Privilégio: **A permissão para efetuar determinadas operações nos recursos Milvus (por exemplo, criar colecções, inserir dados, etc.). </p></li>
-<li><p>**Grupo de privilégios: **Um grupo de múltiplos privilégios.</p></li>
-<li><p>**Função: **Uma função é composta por duas partes: privilégios e recursos. Os privilégios definem o tipo de operações que uma função pode executar, enquanto os recursos definem os recursos de destino nos quais as operações podem ser executadas. Por exemplo, a função de administrador da base de dados pode efetuar operações de leitura, escrita e gestão em determinadas bases de dados.</p></li>
-<li><p>**Utilizador: Um utilizador é alguém que utiliza o Milvus. Cada utilizador tem um ID único e é-lhe atribuída uma função ou várias funções. </p></li>
+<li><p><strong>Recurso</strong>: A entidade de recurso que pode ser acedida. Existem três níveis de recursos no Milvus - instância, base de dados e coleção.</p></li>
+<li><p><strong>Privilégio</strong>: A permissão para efetuar determinadas operações nos recursos Milvus (por exemplo, criar colecções, inserir dados, etc.). </p></li>
+<li><p><strong>Grupo de privilégios</strong>: Um grupo de múltiplos privilégios.</p></li>
+<li><p><strong>Função</strong>: Uma função é composta por duas partes: privilégios e recursos. Os privilégios definem o tipo de operações que uma função pode executar, enquanto os recursos definem os recursos de destino nos quais as operações podem ser executadas. Por exemplo, a função de administrador da base de dados pode efetuar operações de leitura, escrita e gestão em determinadas bases de dados.</p></li>
+<li><p><strong>Utilizador</strong>: um utilizador é alguém que utiliza o Milvus. Cada utilizador tem um ID único e é-lhe atribuída uma função ou várias funções. </p></li>
 </ul>
 <h2 id="Procedures​" class="common-anchor-header">Procedimentos<button data-href="#Procedures​" class="anchor-icon" translate="no">
       <svg translate="no"

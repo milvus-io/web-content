@@ -74,10 +74,10 @@ title: Privilegiengruppe erstellen
 <li><p><strong>COLL_ADMIN</strong>: beinhaltet die Berechtigung zum Lesen und Schreiben von Sammlungsdaten und zur Verwaltung von Sammlungen.</p></li>
 </ul>
 <p>In der folgenden Tabelle sind die spezifischen Berechtigungen aufgeführt, die in den drei integrierten Berechtigungsgruppen auf der Sammlungsebene enthalten sind.</p>
-<table data-block-token="Pi3tdceUjopYWqxsiYTcnnNInoZ"><thead><tr><th data-block-token="DtTYdHoX5oh0qLxHd4ycswM5njh" colspan="1" rowspan="1"><p data-block-token="NV3RdP5IGoyTe7xFRT3cn0obnTh"><strong>**Privileg**</strong></p>
-</th><th data-block-token="CHdFdtz1FoiZoyxUyz7csms0nGc" colspan="1" rowspan="1"><p data-block-token="C0vfdaj0uohILAxptsacgSj9nxe"><strong>**KollektionNurLesen**</strong></p>
-</th><th data-block-token="SMKYdz1j6o1lUJxrrnKcGF16nKf" colspan="1" rowspan="1"><p data-block-token="X0tCdyXB7ovvsRxEAMtcgsZ7nNc"><strong>**SammlungLesenSchreiben**</strong></p>
-</th><th data-block-token="WuOcdy7ruoOSG7xwypbcGppLnCf" colspan="1" rowspan="1"><p data-block-token="CsvGdWuOaoRecvxBsRfckZKKntd"><strong>**SammlungsAdmin**</strong></p>
+<table data-block-token="Pi3tdceUjopYWqxsiYTcnnNInoZ"><thead><tr><th data-block-token="DtTYdHoX5oh0qLxHd4ycswM5njh" colspan="1" rowspan="1"><p data-block-token="NV3RdP5IGoyTe7xFRT3cn0obnTh"><strong>Privileg</strong></p>
+</th><th data-block-token="CHdFdtz1FoiZoyxUyz7csms0nGc" colspan="1" rowspan="1"><p data-block-token="C0vfdaj0uohILAxptsacgSj9nxe"><strong>SammlungNurLesen</strong></p>
+</th><th data-block-token="SMKYdz1j6o1lUJxrrnKcGF16nKf" colspan="1" rowspan="1"><p data-block-token="X0tCdyXB7ovvsRxEAMtcgsZ7nNc"><strong>SammlungLesenSchreiben</strong></p>
+</th><th data-block-token="WuOcdy7ruoOSG7xwypbcGppLnCf" colspan="1" rowspan="1"><p data-block-token="CsvGdWuOaoRecvxBsRfckZKKntd"><strong>SammlungAdmin</strong></p>
 </th></tr></thead><tbody><tr><td data-block-token="EqYidYZCSonxmexk3bAcLh1gndg" colspan="1" rowspan="1"><p data-block-token="H85ddLutEo698KxgytncmD0Hnnc">Abfrage</p>
 </td><td data-block-token="VMjndLAaVo9V7bxe4KPcE6f8nNc" colspan="1" rowspan="1"><p data-block-token="MvCidzzimoZTs0xioR4cmtZ5nof">✔️</p>
 </td><td data-block-token="EoD8dGhNEoAJOnxB7Zjc5E9Jnyd" colspan="1" rowspan="1"><p data-block-token="J2OMdV9XXo8dEsxBlLqcmXmZnhe">✔️</p>
@@ -193,10 +193,10 @@ title: Privilegiengruppe erstellen
 <li><p><strong>DB_Admin</strong>: umfasst die Berechtigung zum Lesen und Schreiben von Datenbankdaten und zur Verwaltung von Datenbanken.</p></li>
 </ul>
 <p>In der folgenden Tabelle sind die spezifischen Berechtigungen aufgeführt, die in den drei integrierten Berechtigungsgruppen auf Datenbankebene enthalten sind.</p>
-<table data-block-token="ULeKdJqFioDSsjxdw26cDExDn2b"><thead><tr><th data-block-token="FZpEd81iZoCJYrxi50yc1chLncd" colspan="1" rowspan="1"><p data-block-token="SHAldLGZToExKYxwjVycaNQ1nHd"><strong>**Privileg**</strong></p>
-</th><th data-block-token="UVjkdAnzgo4ROkxL7bCcgx9xnGf" colspan="1" rowspan="1"><p data-block-token="FfCIdbxfjodDYWx1uXMc6KzPnsZ"><strong>**DatenbankNurLesen**</strong></p>
-</th><th data-block-token="WSIgdzPmhoQLaFxJ9FGcj5mRnzh" colspan="1" rowspan="1"><p data-block-token="Oc2idsHzqoHzwyxhoe2c7dtxncd"><strong>**DatenbankLesenSchreiben**</strong></p>
-</th><th data-block-token="JTred0WFUoRO5Dx9DgfcTAV3nrf" colspan="1" rowspan="1"><p data-block-token="WWHOdfbfVo0i8txO7tucAMAknAo"><strong>**DatenbankAdmin**</strong></p>
+<table data-block-token="ULeKdJqFioDSsjxdw26cDExDn2b"><thead><tr><th data-block-token="FZpEd81iZoCJYrxi50yc1chLncd" colspan="1" rowspan="1"><p data-block-token="SHAldLGZToExKYxwjVycaNQ1nHd"><strong>Privileg</strong></p>
+</th><th data-block-token="UVjkdAnzgo4ROkxL7bCcgx9xnGf" colspan="1" rowspan="1"><p data-block-token="FfCIdbxfjodDYWx1uXMc6KzPnsZ"><strong>DatenbankNurLesen</strong></p>
+</th><th data-block-token="WSIgdzPmhoQLaFxJ9FGcj5mRnzh" colspan="1" rowspan="1"><p data-block-token="Oc2idsHzqoHzwyxhoe2c7dtxncd"><strong>DatenbankLesenSchreiben</strong></p>
+</th><th data-block-token="JTred0WFUoRO5Dx9DgfcTAV3nrf" colspan="1" rowspan="1"><p data-block-token="WWHOdfbfVo0i8txO7tucAMAknAo"><strong>DatenbankAdmin</strong></p>
 </th></tr></thead><tbody><tr><td data-block-token="JX6adkIcEoCil9xzvxBc7j1XnOd" colspan="1" rowspan="1"><p data-block-token="YvMmdQvUNoViSPxA2ekcsgrhnqf">Sammlungen anzeigen</p>
 </td><td data-block-token="FXt6dOWyZo5b14xd3zmcrvAKn8d" colspan="1" rowspan="1"><p data-block-token="PAGYdPiZCox710xmtZrcgqnXnef">✔️</p>
 </td><td data-block-token="EFcCdtsOSoOkKfxxJAMcFdnknsd" colspan="1" rowspan="1"><p data-block-token="Pz21dPCLmoI4GIxhIdpc80yvnKb">✔️</p>
@@ -224,10 +224,10 @@ title: Privilegiengruppe erstellen
 <li><p><strong>Cluster_Admin</strong>: umfasst die Berechtigung zum Lesen und Schreiben von Instanzdaten und zur Verwaltung von Instanzen.</p></li>
 </ul>
 <p>In der folgenden Tabelle sind die spezifischen Berechtigungen aufgeführt, die in den drei integrierten Berechtigungsgruppen auf Instanzebene enthalten sind.</p>
-<table data-block-token="SDHtdzccpoaNdOxspzFcdkwEnu9"><thead><tr><th data-block-token="Pb9FdCS05ozBO9xBo65chofen5d" colspan="1" rowspan="1"><p data-block-token="OgnXdgTdyoKCBnxlyfac4Q5once"><strong>**Privileg**</strong></p>
-</th><th data-block-token="Y6xPdMNjxomIPwxJB7Xczpm6nkc" colspan="1" rowspan="1"><p data-block-token="CO9bdrfCPoohejxhezZcDS6gnJr"><strong>**ClusterReadOnly**</strong></p>
-</th><th data-block-token="ALGjdHwDgo7XOsxfGWwcA6RNn4f" colspan="1" rowspan="1"><p data-block-token="D4xfdML8VoDPqWxni5zc4Rjknte"><strong>**ClusterReadWrite**</strong></p>
-</th><th data-block-token="QaTZdG7Pgo3rZ4xCk8lcqwhFnoh" colspan="1" rowspan="1"><p data-block-token="VmTSdQcJboLLNHxV7b8cgfDinVf"><strong>**ClusterAdmin**</strong></p>
+<table data-block-token="SDHtdzccpoaNdOxspzFcdkwEnu9"><thead><tr><th data-block-token="Pb9FdCS05ozBO9xBo65chofen5d" colspan="1" rowspan="1"><p data-block-token="OgnXdgTdyoKCBnxlyfac4Q5once"><strong>Privileg</strong></p>
+</th><th data-block-token="Y6xPdMNjxomIPwxJB7Xczpm6nkc" colspan="1" rowspan="1"><p data-block-token="CO9bdrfCPoohejxhezZcDS6gnJr"><strong>ClusterReadOnly</strong></p>
+</th><th data-block-token="ALGjdHwDgo7XOsxfGWwcA6RNn4f" colspan="1" rowspan="1"><p data-block-token="D4xfdML8VoDPqWxni5zc4Rjknte"><strong>ClusterReadWrite</strong></p>
+</th><th data-block-token="QaTZdG7Pgo3rZ4xCk8lcqwhFnoh" colspan="1" rowspan="1"><p data-block-token="VmTSdQcJboLLNHxV7b8cgfDinVf"><strong>ClusterAdmin</strong></p>
 </th></tr></thead><tbody><tr><td data-block-token="Byzbdv4XboCS74xhuzlcuVxZnKz" colspan="1" rowspan="1"><p data-block-token="SraLd2bxXo2rDZxCMzjcEHuXnGd">ListDatabases</p>
 </td><td data-block-token="Uc9Odk7c6owHn9xu7jUc9hJGnbg" colspan="1" rowspan="1"><p data-block-token="Ol51d8BzwovVTSxlvpEcLi7znhg">✔️</p>
 </td><td data-block-token="Idtudbo1hoJGtRxB00wcAyZ1nic" colspan="1" rowspan="1"><p data-block-token="PkFFdIkLJoJ3Asx3eZ1cvWHVn7f">✔️</p>
@@ -369,7 +369,7 @@ client.<span class="hljs-title class_">CreatePrivilegeGroup</span>(context.<span
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-privileges-to-a-privilege-group​" class="common-anchor-header">Hinzufügen von Berechtigungen zu einer Berechtigungsgruppe</h3><p>Das folgende Beispiel zeigt, wie die Privilegien <code translate="no">PrivilegeBackupRBAC</code> und <code translate="no">PrivilegeRestoreRBAC</code> zu der gerade erstellten Privilegiengruppe <code translate="no">privilege_group_1</code> hinzugefügt werden.</p>
+<h3 id="Add-privileges-to-a-privilege-group​" class="common-anchor-header">Hinzufügen von Berechtigungen zu einer Berechtigungsgruppe</h3><p>Das folgende Beispiel zeigt, wie man die Privilegien <code translate="no">PrivilegeBackupRBAC</code> und <code translate="no">PrivilegeRestoreRBAC</code> zu der gerade erstellten Privilegiengruppe <code translate="no">privilege_group_1</code> hinzufügt.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​

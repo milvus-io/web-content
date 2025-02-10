@@ -211,8 +211,9 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition​" class="common-anchor-header">필터링 조건 생성</h3><p>파티션 키 기능이 활성화된 컬렉션에서 ANN 검색을 수행할 때는 검색 요청에 파티션 키와 관련된 필터링 표현식을 포함시켜야 합니다. 필터링 표현식에서는 특정 범위 내에서 파티션 키 값을 제한하여 Milvus가 해당 파티션 내에서 검색 범위를 제한하도록 할 수 있습니다.</p>
-<p>다음은 특정 파티션 키 값과 파티션 키 값 집합을 기반으로 한 파티션 키 기반 필터링 예시입니다.</p>
+<h3 id="Create-Filtering-Condition​" class="common-anchor-header">필터링 조건 생성</h3><p>파티션 키 기능이 활성화된 컬렉션에서 ANN 검색을 수행할 때는 검색 요청에 파티션 키와 관련된 필터링 표현식을 포함시켜야 합니다. 필터링 표현식에서 파티션 키 값을 특정 범위 내로 제한하면 밀버스에서 해당 파티션 내로 검색 범위를 제한합니다.</p>
+<p>삭제 작업을 처리할 때는 보다 효율적인 삭제를 위해 단일 파티션 키를 지정하는 필터 표현식을 포함하는 것이 좋습니다. 이 접근 방식은 삭제 작업을 특정 파티션으로 제한하여 압축 중 쓰기 증폭을 줄이고 압축 및 인덱싱을 위한 리소스를 절약합니다.</p>
+<p>다음 예는 특정 파티션 키 값과 파티션 키 값 집합을 기반으로 한 파티션 키 기반 필터링을 보여줍니다.</p>
 <div class="multipleCode">
  <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter based on a single partition key value, or​</span>

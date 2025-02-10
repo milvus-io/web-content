@@ -957,50 +957,6 @@
     ]
   },
   {
-    "label": "Migração de Milvus",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 6,
-    "children": [
-      {
-        "label": "Visão geral",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Instalar a ferramenta de migração",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "Do Elasticsearch",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "De Faiss",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "De Milvus 1.x",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "De Milvus 2.3.x",
-        "id": "from-m2x.md",
-        "order": 5,
-        "children": []
-      }
-    ]
-  },
-  {
     "label": "Guia de Administração",
     "id": "admin_guide",
     "isMenu": true,
@@ -1358,7 +1314,7 @@
                 "children": []
               },
               {
-                "label": "Configurar registos de acesso",
+                "label": "Configurar os registos de acesso",
                 "id": "configure_access_logs.md",
                 "order": 1,
                 "children": []
@@ -1427,17 +1383,42 @@
             "children": []
           },
           {
-            "label": "Utilizadores, privilégios e funções",
-            "id": "users_and_roles.md",
-            "order": 10,
-            "children": []
-          },
-          {
             "label": "Ativar RBAC",
-            "id": "rbac.md",
+            "id": "rbac",
             "order": 1,
             "isMenu": true,
-            "children": []
+            "children": [
+              {
+                "label": "Visão geral do RBAC",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Utilizadores, privilégios e funções",
+                "id": "users_and_roles.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Grupo de privilégios",
+                "id": "privilege_group.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Conceder privilégios",
+                "id": "grant_privileges.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Funções de subvenção",
+                "id": "grant_roles.md",
+                "order": 4,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Encriptação em trânsito",
@@ -1543,7 +1524,7 @@
             "children": []
           },
           {
-            "label": "Guias de instalação",
+            "label": "Install Guides",
             "id": "birdwatcher_install_guides.md",
             "order": 1,
             "children": []
@@ -1629,9 +1610,16 @@
         ]
       },
       {
+        "label": "Milvus VTS",
+        "id": "milvus_vts",
+        "order": 6,
+        "externalLink": "https://github.com/zilliztech/vts",
+        "children": []
+      },
+      {
         "label": "Ferramenta de dimensionamento Milvus",
         "id": "sizing",
-        "order": 6,
+        "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
       },

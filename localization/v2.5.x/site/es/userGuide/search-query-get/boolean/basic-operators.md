@@ -49,27 +49,11 @@ title: Operadores básicos
 <li><p><code translate="no">&gt;=</code> (Mayor o igual que)</p></li>
 <li><p><code translate="no">&lt;=</code> (Menor o igual que)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-​" class="common-anchor-header">Ejemplo 1: Filtrado con Igual a (<code translate="no">==</code>)</h3><p>Suponga que tiene un campo llamado <code translate="no">status</code> y quiere encontrar todas las entidades en las que <code translate="no">status</code> es &quot;activo&quot;. Puede utilizar el operador de igualdad <code translate="no">==</code>.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-​" class="common-anchor-header">Ejemplo 2: Filtrado con no igual a (<code translate="no">!=</code>)</h3><p>Para encontrar entidades donde <code translate="no">status</code> no sea &quot;inactivo&quot;.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-​" class="common-anchor-header">Ejemplo 3: Filtrado con Mayor que (<code translate="no">&gt;</code>)</h3><p>Si desea encontrar todas las entidades con un <code translate="no">age</code> mayor que 30.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than-​" class="common-anchor-header">Ejemplo 4: Filtrado con menor que (<code translate="no">&lt;</code>)</h3><p>Para encontrar las entidades en las que <code translate="no">price</code> es inferior a 100.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">Ejemplo 5: Filtrado con mayor o igual que (<code translate="no">&gt;=</code>)</h3><p>Si desea encontrar todas las entidades con <code translate="no">rating</code> mayor o igual a 4.</p>
+<h3 id="Example-1-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">Ejemplo 1: Filtrado con mayor o igual que (<code translate="no">&gt;=</code>)</h3><p>Si desea encontrar todas las entidades con <code translate="no">rating</code> mayor o igual a 4.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">Ejemplo 6: Filtrado con menor o igual que (<code translate="no">&lt;=</code>)</h3><p>Para encontrar entidades con <code translate="no">discount</code> menor o igual que 10%.</p>
+<h3 id="Example-2-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">Ejemplo 2: Filtrado con menor o igual que (<code translate="no">&lt;=</code>)</h3><p>Para encontrar entidades con <code translate="no">discount</code> menor o igual a 10%.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -93,7 +77,7 @@ title: Operadores básicos
 <li><p><code translate="no">IN</code>: Se utilizan para buscar valores dentro de un conjunto o rango específico.</p></li>
 <li><p><code translate="no">LIKE</code>: Se utiliza para coincidir con un patrón (principalmente para campos de texto).</p></li>
 </ul>
-<h3 id="Example-1-Using-IN-to-Match-Multiple-Values​" class="common-anchor-header">Ejemplo 1: Uso de <code translate="no">IN</code> para buscar varios valores</h3><p>Si desea encontrar todas las entidades en las que <code translate="no">color</code> sea &quot;rojo&quot;, &quot;verde&quot; o &quot;azul&quot;.</p>
+<h3 id="Example-1-Using-IN-to-Match-Multiple-Values​" class="common-anchor-header">Ejemplo 1: Uso de <code translate="no">IN</code> para buscar varios valores</h3><p>Si desea encontrar todas las entidades en las que <code translate="no">color</code> es &quot;rojo&quot;, &quot;verde&quot; o &quot;azul&quot;.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -234,4 +218,4 @@ title: Operadores básicos
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus ofrece una serie de operadores básicos que le proporcionan flexibilidad a la hora de filtrar y consultar sus datos. Combinando operadores de comparación, de rango, aritméticos y lógicos, puede crear potentes expresiones de filtrado para acotar los resultados de búsqueda y recuperar los datos que necesita de forma eficaz.</p>
+    </button></h2><p>Milvus ofrece una serie de operadores básicos que le proporcionan flexibilidad a la hora de filtrar y consultar sus datos. Combinando operadores de comparación, de rango, aritméticos y lógicos, puede crear potentes expresiones de filtrado para acotar los resultados de búsqueda y recuperar los datos que necesita de forma eficiente.</p>

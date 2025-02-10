@@ -957,50 +957,6 @@
     ]
   },
   {
-    "label": "Milvus 迁移",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 6,
-    "children": [
-      {
-        "label": "概述",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "安装迁移工具",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "来自 Elasticsearch",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "来自 Faiss",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "来自 Milvus 1.x",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "From Milvus 2.3.x",
-        "id": "from-m2x.md",
-        "order": 5,
-        "children": []
-      }
-    ]
-  },
-  {
     "label": "管理指南",
     "id": "admin_guide",
     "isMenu": true,
@@ -1427,17 +1383,42 @@
             "children": []
           },
           {
-            "label": "用户、权限和角色",
-            "id": "users_and_roles.md",
-            "order": 10,
-            "children": []
-          },
-          {
             "label": "启用 RBAC",
-            "id": "rbac.md",
+            "id": "rbac",
             "order": 1,
             "isMenu": true,
-            "children": []
+            "children": [
+              {
+                "label": "RBAC 概述",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "用户、权限和角色",
+                "id": "users_and_roles.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "特权小组",
+                "id": "privilege_group.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "授予特权",
+                "id": "grant_privileges.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "资助角色",
+                "id": "grant_roles.md",
+                "order": 4,
+                "children": []
+              }
+            ]
           },
           {
             "label": "传输中加密",
@@ -1475,7 +1456,7 @@
         "children": []
       },
       {
-        "label": "Milvus 备份",
+        "label": "Milvus 后备电源",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -1629,9 +1610,16 @@
         ]
       },
       {
+        "label": "Milvus VTS",
+        "id": "milvus_vts",
+        "order": 6,
+        "externalLink": "https://github.com/zilliztech/vts",
+        "children": []
+      },
+      {
         "label": "Milvus 尺寸工具",
         "id": "sizing",
-        "order": 6,
+        "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
       },

@@ -957,50 +957,6 @@
     ]
   },
   {
-    "label": "Migración Milvus",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 6,
-    "children": [
-      {
-        "label": "Visión general",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Instalar la herramienta de migración",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "Desde Elasticsearch",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "De Faiss",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "Desde Milvus 1.x",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Desde Milvus 2.3.x",
-        "id": "from-m2x.md",
-        "order": 5,
-        "children": []
-      }
-    ]
-  },
-  {
     "label": "Guía de administración",
     "id": "admin_guide",
     "isMenu": true,
@@ -1427,17 +1383,42 @@
             "children": []
           },
           {
-            "label": "Usuarios, privilegios y funciones",
-            "id": "users_and_roles.md",
-            "order": 10,
-            "children": []
-          },
-          {
             "label": "Activar RBAC",
-            "id": "rbac.md",
+            "id": "rbac",
             "order": 1,
             "isMenu": true,
-            "children": []
+            "children": [
+              {
+                "label": "Visión general de RBAC",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Usuarios, privilegios y funciones",
+                "id": "users_and_roles.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Grupo Privilegio",
+                "id": "privilege_group.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Conceder privilegios",
+                "id": "grant_privileges.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Funciones de las subvenciones",
+                "id": "grant_roles.md",
+                "order": 4,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Cifrado en tránsito",
@@ -1629,9 +1610,16 @@
         ]
       },
       {
+        "label": "Milvus VTS",
+        "id": "milvus_vts",
+        "order": 6,
+        "externalLink": "https://github.com/zilliztech/vts",
+        "children": []
+      },
+      {
         "label": "Herramienta de dimensionamiento Milvus",
         "id": "sizing",
-        "order": 6,
+        "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
       },
@@ -2006,7 +1994,7 @@
             "children": []
           },
           {
-            "label": "No estructurado",
+            "label": "Sin estructurar",
             "id": "rag_with_milvus_and_unstructured.md",
             "order": 3,
             "children": []

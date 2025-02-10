@@ -493,7 +493,7 @@
             "children": []
           },
           {
-            "label": "Compattazione del clustering",
+            "label": "Compattazione dei cluster",
             "id": "clustering-compaction.md",
             "order": 8,
             "children": []
@@ -637,50 +637,6 @@
             "children": []
           }
         ]
-      }
-    ]
-  },
-  {
-    "label": "Migrazione di Milvus",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 5,
-    "children": [
-      {
-        "label": "Panoramica",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Installare lo strumento di migrazione",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "Da Elasticsearch",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "Da Faiss",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "Da Milvus 1.x",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Da Milvus 2.3.x",
-        "id": "from-m2x.md",
-        "order": 5,
-        "children": []
       }
     ]
   },
@@ -976,7 +932,7 @@
                 "children": []
               },
               {
-                "label": "Deploy Monitoring Services",
+                "label": "Distribuzione dei servizi di monitoraggio",
                 "id": "monitor.md",
                 "order": 1,
                 "children": []
@@ -1729,7 +1685,7 @@
             "children": []
           },
           {
-            "label": "Ricerca di somiglianza audio",
+            "label": "Ricerca della somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

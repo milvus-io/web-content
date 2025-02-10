@@ -212,7 +212,8 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Create-Filtering-Condition​" class="common-anchor-header">Créer une condition de filtrage</h3><p>Lorsque vous effectuez des recherches ANN dans une collection avec la fonctionnalité Clé de partition activée, vous devez inclure une expression de filtrage impliquant la clé de partition dans la demande de recherche. Dans l'expression de filtrage, vous pouvez restreindre la valeur de la clé de partition dans une plage spécifique afin que Milvus limite l'étendue de la recherche aux partitions correspondantes.</p>
-<p>Les exemples suivants illustrent le filtrage basé sur la clé de partition en fonction d'une valeur de clé de partition spécifique et d'un ensemble de valeurs de clé de partition.</p>
+<p>Lors des opérations de suppression, il est conseillé d'inclure une expression de filtrage qui spécifie une seule clé de partition afin d'obtenir une suppression plus efficace. Cette approche limite l'opération de suppression à une partition particulière, ce qui réduit l'amplification de l'écriture pendant le compactage et conserve les ressources pour le compactage et l'indexation.</p>
+<p>Les exemples suivants illustrent le filtrage basé sur la clé de partition en fonction d'une valeur de clé de partition spécifique et d'un ensemble de valeurs de clés de partition.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter based on a single partition key value, or​</span>

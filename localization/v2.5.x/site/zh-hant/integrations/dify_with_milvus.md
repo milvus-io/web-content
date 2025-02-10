@@ -59,15 +59,14 @@ title: 使用 Milvus 部署 Dify
 <p>複製環境配置檔案</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-built_in">cp</span> .env.example .<span class="hljs-built_in">env</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>更改<code translate="no">.env</code> 檔案中的<code translate="no">VECTOR_STORE</code> 值</p>
+<p>變更<code translate="no">.env</code> 檔案中的值<code translate="no">VECTOR_STORE</code> </p>
 <pre><code translate="no">VECTOR_STORE=milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>變更<code translate="no">.env</code> 檔案中的 Milvus 配置</p>
-<pre><code translate="no">MILVUS_URI=xxx
-MILVUS_TOKEN=xxx
+<p>確保<code translate="no">.env</code> 檔案中的 Milvus 配置有以下一行：</p>
+<pre><code translate="no"><span class="hljs-variable constant_">MILVUS_URI</span>=<span class="hljs-attr">http</span>:<span class="hljs-comment">//host.docker.internal:19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在此設定中，請使用伺服器的外部 URI，例如<code translate="no">http://172.16.16.16:19530</code> ，作為您的<code translate="no">MILVUS_URI</code> 。</p>
-<p>對於<code translate="no">MILVUS_TOKEN</code> ，如果您沒有為您的 Milvus 伺服器設定一個 token，您可以將它設定為一個空字串，例如<code translate="no">MILVUS_TOKEN=</code> ，否則，您需要將它設定為您的 Milvus token。更多關於如何在 Milvus 設定 token 的資訊，您可以參考<a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">authenticate 頁面</a>。</p>
+<p>注意指定<code translate="no">VECTOR_STORE=milvus</code>, Dify 會在 docker 中啟動 Milvus Standalone 伺服器。即使您可以從 Docker 外部透過<code translate="no">http://localhost:19530</code> 存取伺服器，其他 Dify 容器若要在 Docker 環境內與它對話，就需要連線到特殊的 DNS 名稱<code translate="no">host.docker.internal</code> 。因此，我們將<code translate="no">http://host.docker.internal:19530</code> 設定為<code translate="no">MILVUS_URI</code> 。</p>
+<p>對於生產部署，您可能想要自訂認證。關於如何在 Milvus 設定 token 或使用者名稱和密碼的詳細資訊，您可以參考<a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">authenticate 頁面</a>。</p>
 <h2 id="Start-the-Docker-Containers" class="common-anchor-header">啟動 Docker Containers<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

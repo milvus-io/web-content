@@ -64,12 +64,11 @@ title: Развертывание Dify с помощью Milvus
 <p>Измените значение <code translate="no">VECTOR_STORE</code> в файле <code translate="no">.env</code>.</p>
 <pre><code translate="no">VECTOR_STORE=milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Измените конфигурацию Milvus в файле <code translate="no">.env</code>.</p>
-<pre><code translate="no">MILVUS_URI=xxx
-MILVUS_TOKEN=xxx
+<p>Убедитесь, что в конфигурации Milvus в файле <code translate="no">.env</code> есть следующая строка:</p>
+<pre><code translate="no"><span class="hljs-variable constant_">MILVUS_URI</span>=<span class="hljs-attr">http</span>:<span class="hljs-comment">//host.docker.internal:19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В этой настройке используйте внешний URI сервера, например<code translate="no">http://172.16.16.16:19530</code>, в качестве <code translate="no">MILVUS_URI</code>.</p>
-<p>Для <code translate="no">MILVUS_TOKEN</code>, если вы не установили токен для вашего сервера Milvus, вы можете установить пустую строку, как <code translate="no">MILVUS_TOKEN=</code>, в противном случае вам нужно установить его на ваш токен Milvus. Для получения дополнительной информации о том, как установить токен в Milvus, вы можете обратиться к <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">странице аутентификации</a>.</p>
+<p>Обратите внимание, что, указав <code translate="no">VECTOR_STORE=milvus</code>, Dify вызовет сервер Milvus Standalone в docker. Даже если вы можете получить доступ к серверу извне Docker через <code translate="no">http://localhost:19530</code>, чтобы другие контейнеры Dify могли общаться с ним внутри среды Docker, им необходимо подключиться к специальному DNS-имени <code translate="no">host.docker.internal</code>. Таким образом, мы задаем <code translate="no">http://host.docker.internal:19530</code> как <code translate="no">MILVUS_URI</code>.</p>
+<p>Для производственного развертывания вы можете захотеть настроить аутентификацию. Для получения дополнительной информации о том, как установить токен или имя пользователя и пароль в Milvus, вы можете обратиться к <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">странице аутентификации</a>.</p>
 <h2 id="Start-the-Docker-Containers" class="common-anchor-header">Запуск контейнеров Docker<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

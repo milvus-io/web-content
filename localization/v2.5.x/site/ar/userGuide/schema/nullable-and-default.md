@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>يسمح لك Milvus بتعيين السمة <code translate="no">nullable</code> والقيم الافتراضية للحقول القياسية، باستثناء الحقل الأساسي. بالنسبة للحقول التي تم وضع علامة <code translate="no">nullable=True</code> ، يمكنك تخطي الحقل عند إدراج البيانات، أو تعيينه مباشرة إلى قيمة فارغة، وسيتعامل النظام معه على أنه فارغ دون التسبب في حدوث خطأ. عندما يكون للحقل قيمة افتراضية، سيقوم النظام تلقائيًا بتطبيق هذه القيمة إذا لم يتم تحديد بيانات للحقل أثناء الإدراج.</p>
-<p>تعمل القيمة الافتراضية والسمات القابلة للإلغاء على تبسيط عملية ترحيل البيانات من أنظمة قواعد البيانات الأخرى إلى ميلفوس من خلال السماح بمعالجة مجموعات البيانات ذات القيم الفارغة والحفاظ على إعدادات القيمة الافتراضية. عند إنشاء مجموعة، يمكنك أيضًا تمكين القيمة القابلة للإلغاء أو تعيين قيم افتراضية للحقول التي قد تكون القيم فيها غير مؤكدة.</p>
+<p>تعمل القيمة الافتراضية والسمات القابلة للإلغاء على تبسيط عملية ترحيل البيانات من أنظمة قواعد البيانات الأخرى إلى ميلفوس من خلال السماح بمعالجة مجموعات البيانات ذات القيم الفارغة والحفاظ على إعدادات القيمة الافتراضية. عند إنشاء مجموعة، يمكنك أيضًا تمكين القيم القابلة للإلغاء أو تعيين قيم افتراضية للحقول التي قد تكون القيم فيها غير مؤكدة.</p>
 <h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +46,7 @@ summary: >-
 <li><p>يمكن تكوين القيم الافتراضية أو السمة القابلة للإلغاء فقط أثناء إنشاء المجموعة ولا يمكن تعديلها بعد ذلك.</p></li>
 <li><p>لا يمكن استخدام الحقول العددية ذات السمة القابلة للإلغاء الممكّنة كـ <code translate="no">group_by_field</code> في بحث التجميع. لمزيد من المعلومات حول بحث التجميع، راجع <a href="/docs/ar/grouping-search.md">بحث التجميع</a>.</p></li>
 <li><p>لا يمكن استخدام الحقول التي تم وضع علامة لاغية عليها كمفاتيح تقسيم. لمزيد من المعلومات حول مفاتيح التقسيم، راجع <a href="/docs/ar/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p></li>
-<li><p>عند إنشاء فهرس على حقل قياسي مع تمكين السمة القابلة للإلغاء، سيتم استبعاد القيم الفارغة من الفهرس.</p></li>
+<li><p>عند إنشاء فهرس على حقل قياسي مع تمكين السمة القابلة للفراغ، سيتم استبعاد القيم الفارغة من الفهرس.</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">السمة القابلة للإلغاء<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -405,16 +405,20 @@ System.out.println(resp.getQueryResults());​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>لإرجاع الكيانات ذات القيم الفارغة، قم بالاستعلام دون أي شرط تصفية عددية على النحو التالي:</p>
+<div class="alert note">
+<p>يسترجع الأسلوب <code translate="no">query</code> ، عند استخدامه بدون أي شروط تصفية، جميع الكيانات في المجموعة، بما في ذلك الكيانات ذات القيم الفارغة. لتقييد عدد الكيانات التي تم إرجاعها، يجب تحديد المعلمة <code translate="no">limit</code>.</p>
+</div>
 <div class="multipleCode">
- <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">null_results = client.query(​
-    collection_name=<span class="hljs-string">&quot;user_profiles_null&quot;</span>,​
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>,​ <span class="hljs-comment"># Query without any filtering condition</span>
-    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]​
-)​
+ <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#curl">جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+<pre><code translate="no" class="language-python">null_results = client.query(
+    collection_name=<span class="hljs-string">&quot;user_profiles_null&quot;</span>,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Query without any filtering condition</span>
+    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>],
+    limit=<span class="hljs-number">10</span> <span class="hljs-comment"># `limit` parameter is required when using `query` method without filtering condition</span>
+)
 ​
 <span class="hljs-comment"># Example output:​</span>
-<span class="hljs-comment"># [{&quot;id&quot;: 2, &quot;age&quot;: None}, {&quot;id&quot;: 3, &quot;age&quot;: None}]​</span>
+<span class="hljs-comment"># [&quot;{&#x27;id&#x27;: 1, &#x27;age&#x27;: 30}&quot;, &quot;{&#x27;id&#x27;: 2, &#x27;age&#x27;: None}&quot;, &quot;{&#x27;id&#x27;: 3, &#x27;age&#x27;: None}&quot;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">QueryResp resp = client.query(QueryReq.builder()​
@@ -430,7 +434,8 @@ System.out.println(resp.getQueryResults());​
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>(​
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;user_profiles_null&quot;</span>,​
     <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;&quot;</span>,​
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]​
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]​,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>​
 );​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -441,7 +446,8 @@ System.out.println(resp.getQueryResults());​
 -d <span class="hljs-string">&#x27;{​
     &quot;collectionName&quot;: &quot;user_profiles_null&quot;,​
     &quot;expr&quot;: &quot;&quot;,​
-    &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;]​
+    &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;]​,
+    &quot;limit&quot;: 10
 }&#x27;</span>​
 ​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;id&quot;:2},{&quot;age&quot;:null,&quot;id&quot;:3}]}​</span>

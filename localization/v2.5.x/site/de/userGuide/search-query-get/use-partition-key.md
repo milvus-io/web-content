@@ -211,8 +211,9 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition​" class="common-anchor-header">Filterungsbedingung erstellen</h3><p>Wenn Sie ANN-Suchen in einer Sammlung mit aktivierter Partitionsschlüssel-Funktion durchführen, müssen Sie einen Filterausdruck mit dem Partitionsschlüssel in die Suchanfrage aufnehmen. Im Filterausdruck können Sie den Wert des Partitionsschlüssels innerhalb eines bestimmten Bereichs einschränken, so dass Milvus den Suchbereich auf die entsprechenden Partitionen einschränkt.</p>
-<p>Die folgenden Beispiele demonstrieren die Partition-Key-basierte Filterung basierend auf einem bestimmten Partition-Key-Wert und einem Satz von Partition-Key-Werten.</p>
+<h3 id="Create-Filtering-Condition​" class="common-anchor-header">Filterungsbedingung erstellen</h3><p>Wenn Sie ANN-Suchen in einer Sammlung mit aktivierter Partitionsschlüssel-Funktion durchführen, müssen Sie einen Filterausdruck mit dem Partitionsschlüssel in die Suchanfrage aufnehmen. In dem Filterausdruck können Sie den Wert des Partitionsschlüssels innerhalb eines bestimmten Bereichs einschränken, so dass Milvus den Suchbereich auf die entsprechenden Partitionen beschränkt.</p>
+<p>Bei Löschvorgängen ist es ratsam, einen Filterausdruck zu verwenden, der einen einzelnen Partitionsschlüssel angibt, um einen effizienteren Löschvorgang zu erreichen. Dieser Ansatz beschränkt den Löschvorgang auf eine bestimmte Partition, wodurch die Schreibverstärkung während der Verdichtung reduziert und Ressourcen für die Verdichtung und Indizierung gespart werden.</p>
+<p>Die folgenden Beispiele demonstrieren die Partition-Key-basierte Filterung auf der Grundlage eines bestimmten Partition-Key-Werts und eines Satzes von Partition-Key-Werten.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter based on a single partition key value, or​</span>

@@ -59,15 +59,14 @@ title: MilvusでDifyを導入する
 <p>環境設定ファイルをコピーする</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-built_in">cp</span> .env.example .<span class="hljs-built_in">env</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">.env</code> ファイルの値<code translate="no">VECTOR_STORE</code> を変更する</p>
+<p><code translate="no">.env</code> ファイルの値<code translate="no">VECTOR_STORE</code> を変更する。</p>
 <pre><code translate="no">VECTOR_STORE=milvus
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">.env</code> 、Milvusの設定を変更する。</p>
-<pre><code translate="no">MILVUS_URI=xxx
-MILVUS_TOKEN=xxx
+<p><code translate="no">.env</code> ファイル内のMilvus設定に以下の行があることを確認する：</p>
+<pre><code translate="no"><span class="hljs-variable constant_">MILVUS_URI</span>=<span class="hljs-attr">http</span>:<span class="hljs-comment">//host.docker.internal:19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>このセットアップでは、サーバーの外部URI、例えば<code translate="no">http://172.16.16.16:19530</code> を<code translate="no">MILVUS_URI</code> として使用してください。</p>
-<p><code translate="no">MILVUS_TOKEN</code> については、Milvusサーバのトークンを設定していない場合は、<code translate="no">MILVUS_TOKEN=</code> のように空文字列を設定してください。そうでない場合は、Milvusトークンを設定してください。Milvusのトークン設定方法については、<a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">authenticateのページを</a>参照してください。</p>
+<p><code translate="no">VECTOR_STORE=milvus</code> を指定することで、Docker上にMilvus Standaloneサーバーが立ち上がります。Docker の外から<code translate="no">http://localhost:19530</code> を通してサーバーにアクセスすることはできますが、他の Dify コンテナが Docker 環境内でサーバーと通信するためには、特別な DNS 名<code translate="no">host.docker.internal</code> に接続する必要があります。従って、<code translate="no">http://host.docker.internal:19530</code> を<code translate="no">MILVUS_URI</code> とします。</p>
+<p>本番環境では、認証をカスタマイズすることができます。Milvusでトークンやユーザ名、パスワードを設定する方法については、<a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">authenticateのページを</a>参照してください。</p>
 <h2 id="Start-the-Docker-Containers" class="common-anchor-header">Dockerコンテナの起動<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,7 +82,7 @@ MILVUS_TOKEN=xxx
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>システム上のDocker Composeのバージョンに応じて、適切なコマンドを選択してコンテナを起動します。バージョンの確認には、<code translate="no">$ docker compose version</code> コマンドを使用します。詳細については、Docker ドキュメントを参照してください：</p>
+    </button></h2><p>システム上のDocker Composeのバージョンに応じて、コンテナを起動する適切なコマンドを選択します。<code translate="no">$ docker compose version</code> コマンドでバージョンを確認することができます。詳細はDockerのドキュメントを参照してください：</p>
 <p>Docker Compose V2を使用している場合は、以下のコマンドを使用します：</p>
 <pre><code translate="no" class="language-shell">docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
@@ -105,5 +104,5 @@ MILVUS_TOKEN=xxx
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ブラウザを開き、Difyのインストールページに移動し、ここで管理者アカウントを設定します。<code translate="no">http://localhost/install</code> 、そしてDifyのメインページにログインして、さらに利用します。</p>
+    </button></h2><p>ブラウザを開き、Difyのインストールページに行き、ここで管理者アカウントを設定します。<code translate="no">http://localhost/install</code> 、そしてDifyのメインページにログインし、さらに利用します。</p>
 <p>さらに詳しい使い方やガイダンスについては、<a href="https://docs.dify.ai/">Dify のドキュメントを</a>参照してください。</p>

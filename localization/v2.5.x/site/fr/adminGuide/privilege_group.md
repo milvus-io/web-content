@@ -74,10 +74,10 @@ title: Créer un groupe de privilèges
 <li><p><strong>COLL_ADMIN</strong>: comprend les privilèges de lecture et d'écriture des données de collecte et de gestion des collections.</p></li>
 </ul>
 <p>Le tableau ci-dessous répertorie les privilèges spécifiques inclus dans les trois groupes de privilèges intégrés au niveau de la collecte.</p>
-<table data-block-token="Pi3tdceUjopYWqxsiYTcnnNInoZ"><thead><tr><th data-block-token="DtTYdHoX5oh0qLxHd4ycswM5njh" colspan="1" rowspan="1"><p data-block-token="NV3RdP5IGoyTe7xFRT3cn0obnTh"><strong>**Privilège**</strong></p>
-</th><th data-block-token="CHdFdtz1FoiZoyxUyz7csms0nGc" colspan="1" rowspan="1"><p data-block-token="C0vfdaj0uohILAxptsacgSj9nxe"><strong>CollecteLectureSeulement** **CollectionReadOnly**</strong></p>
-</th><th data-block-token="SMKYdz1j6o1lUJxrrnKcGF16nKf" colspan="1" rowspan="1"><p data-block-token="X0tCdyXB7ovvsRxEAMtcgsZ7nNc">**<strong>CollecteLectureEcriture**</strong></p>
-</th><th data-block-token="WuOcdy7ruoOSG7xwypbcGppLnCf" colspan="1" rowspan="1"><p data-block-token="CsvGdWuOaoRecvxBsRfckZKKntd">**<strong>Administrateur de collection</strong></p>
+<table data-block-token="Pi3tdceUjopYWqxsiYTcnnNInoZ"><thead><tr><th data-block-token="DtTYdHoX5oh0qLxHd4ycswM5njh" colspan="1" rowspan="1"><p data-block-token="NV3RdP5IGoyTe7xFRT3cn0obnTh"><strong>Privilège</strong></p>
+</th><th data-block-token="CHdFdtz1FoiZoyxUyz7csms0nGc" colspan="1" rowspan="1"><p data-block-token="C0vfdaj0uohILAxptsacgSj9nxe"><strong>CollectionReadOnly</strong></p>
+</th><th data-block-token="SMKYdz1j6o1lUJxrrnKcGF16nKf" colspan="1" rowspan="1"><p data-block-token="X0tCdyXB7ovvsRxEAMtcgsZ7nNc"><strong>CollectionReadWrite</strong></p>
+</th><th data-block-token="WuOcdy7ruoOSG7xwypbcGppLnCf" colspan="1" rowspan="1"><p data-block-token="CsvGdWuOaoRecvxBsRfckZKKntd"><strong>CollectionAdmin</strong></p>
 </th></tr></thead><tbody><tr><td data-block-token="EqYidYZCSonxmexk3bAcLh1gndg" colspan="1" rowspan="1"><p data-block-token="H85ddLutEo698KxgytncmD0Hnnc">Requête</p>
 </td><td data-block-token="VMjndLAaVo9V7bxe4KPcE6f8nNc" colspan="1" rowspan="1"><p data-block-token="MvCidzzimoZTs0xioR4cmtZ5nof">✔️</p>
 </td><td data-block-token="EoD8dGhNEoAJOnxB7Zjc5E9Jnyd" colspan="1" rowspan="1"><p data-block-token="J2OMdV9XXo8dEsxBlLqcmXmZnhe">✔️</p>
@@ -86,7 +86,7 @@ title: Créer un groupe de privilèges
 </td><td data-block-token="YMHhdkBwvoDMkMxteC2ckEaEnTf" colspan="1" rowspan="1"><p data-block-token="OXknd86FUojtOQxRabUcEl0yn0d">✔️</p>
 </td><td data-block-token="J62DdYWjGod8Tcx3xdlc97azn7f" colspan="1" rowspan="1"><p data-block-token="UVg7dMXObog7fjxsFugc7ZgynSg">✔️</p>
 </td><td data-block-token="KIZ0dH02yoNPaDxsDG8cq2VYnC6" colspan="1" rowspan="1"><p data-block-token="GxrkdRlUDoQlLfxtJPScUqo7nYk">✔️</p>
-</td></tr><tr><td data-block-token="CawAd4pH9oIVPIx4DqPc6XxYnce" colspan="1" rowspan="1"><p data-block-token="SnQwdA4XFovEhMxexUHcVhRunJb">Détails de l'index</p>
+</td></tr><tr><td data-block-token="CawAd4pH9oIVPIx4DqPc6XxYnce" colspan="1" rowspan="1"><p data-block-token="SnQwdA4XFovEhMxexUHcVhRunJb">Détail de l'index</p>
 </td><td data-block-token="C8WGd8NSZomxeXxbxWScR8p7nxH" colspan="1" rowspan="1"><p data-block-token="QDBGdT4k9oUzpcxDDUjcOpK6nzh">✔️</p>
 </td><td data-block-token="CFPcdegSMojxryxgdN5c6TSOnoe" colspan="1" rowspan="1"><p data-block-token="KG2YdL5cUof8NUxDoBjc1LrWnMp">✔️</p>
 </td><td data-block-token="SisMdRC3AoNQTix0dN9chgJhnye" colspan="1" rowspan="1"><p data-block-token="ArghdTA9CoUmRYxoGD9cW1JQnxg">✔️</p>
@@ -150,7 +150,7 @@ title: Créer un groupe de privilèges
 </td><td data-block-token="Aivld2KMno6Ktaxgtv7cSYZWnAe" colspan="1" rowspan="1"><p data-block-token="UWwwdIhXaoniFUxyYTpckmEunh7">❌</p>
 </td><td data-block-token="R07KdCJClo7BfOxGdyocyiz4nkc" colspan="1" rowspan="1"><p data-block-token="NmMkdbn2bofAtXxp0jecarfqn9e">✔️</p>
 </td><td data-block-token="Em1jdPReboLD6TxBkGCcrtx2nrf" colspan="1" rowspan="1"><p data-block-token="SDpBdsW4vovFTYxFevdcUcVZnEg">✔️</p>
-</td></tr><tr><td data-block-token="DAvIdNUi9og0goxtG0WcBPelnTd" colspan="1" rowspan="1"><p data-block-token="XUTTdT7qHouALyxiF4AcIFNQnKf">Insert</p>
+</td></tr><tr><td data-block-token="DAvIdNUi9og0goxtG0WcBPelnTd" colspan="1" rowspan="1"><p data-block-token="XUTTdT7qHouALyxiF4AcIFNQnKf">Insérer</p>
 </td><td data-block-token="HAWvd4MOqoIutExoHFCcZLQPnke" colspan="1" rowspan="1"><p data-block-token="CNgkddB17o22FgxgZ7TcyQ3xnxd">❌</p>
 </td><td data-block-token="JCtRdzi37oKTC3xTZYNcO7i1nIb" colspan="1" rowspan="1"><p data-block-token="ETyOdStzaorGaUxTFRdchB6EnDJ">✔️</p>
 </td><td data-block-token="SE1xdF5UMoOTNexoWBGcSKj0nKg" colspan="1" rowspan="1"><p data-block-token="XrQ5dVNF0ooAvVxxGtUcqYxfnud">✔️</p>
@@ -193,10 +193,10 @@ title: Créer un groupe de privilèges
 <li><p><strong>DB_Admin</strong>: comprend les privilèges de lecture et d'écriture des données de la base et de gestion des bases de données.</p></li>
 </ul>
 <p>Le tableau ci-dessous répertorie les privilèges spécifiques inclus dans les trois groupes de privilèges intégrés au niveau de la base de données.</p>
-<table data-block-token="ULeKdJqFioDSsjxdw26cDExDn2b"><thead><tr><th data-block-token="FZpEd81iZoCJYrxi50yc1chLncd" colspan="1" rowspan="1"><p data-block-token="SHAldLGZToExKYxwjVycaNQ1nHd"><strong>**Privilège**</strong></p>
-</th><th data-block-token="UVjkdAnzgo4ROkxL7bCcgx9xnGf" colspan="1" rowspan="1"><p data-block-token="FfCIdbxfjodDYWx1uXMc6KzPnsZ"><strong>**Lecture de la base de données uniquement **Lecture de la base de données en écriture</strong></p>
-</th><th data-block-token="WSIgdzPmhoQLaFxJ9FGcj5mRnzh" colspan="1" rowspan="1"><p data-block-token="Oc2idsHzqoHzwyxhoe2c7dtxncd"><strong>Base de données en lecture seule** **Base de données en lecture-écriture**</strong></p>
-</th><th data-block-token="JTred0WFUoRO5Dx9DgfcTAV3nrf" colspan="1" rowspan="1"><p data-block-token="WWHOdfbfVo0i8txO7tucAMAknAo">**<strong>Base de donnéesAdmin**</strong></p>
+<table data-block-token="ULeKdJqFioDSsjxdw26cDExDn2b"><thead><tr><th data-block-token="FZpEd81iZoCJYrxi50yc1chLncd" colspan="1" rowspan="1"><p data-block-token="SHAldLGZToExKYxwjVycaNQ1nHd"><strong>Privilège</strong></p>
+</th><th data-block-token="UVjkdAnzgo4ROkxL7bCcgx9xnGf" colspan="1" rowspan="1"><p data-block-token="FfCIdbxfjodDYWx1uXMc6KzPnsZ"><strong>Base de donnéesLecture seule</strong></p>
+</th><th data-block-token="WSIgdzPmhoQLaFxJ9FGcj5mRnzh" colspan="1" rowspan="1"><p data-block-token="Oc2idsHzqoHzwyxhoe2c7dtxncd"><strong>Base de donnéesLectureÉcriture</strong></p>
+</th><th data-block-token="JTred0WFUoRO5Dx9DgfcTAV3nrf" colspan="1" rowspan="1"><p data-block-token="WWHOdfbfVo0i8txO7tucAMAknAo"><strong>Administrateur de base de données</strong></p>
 </th></tr></thead><tbody><tr><td data-block-token="JX6adkIcEoCil9xzvxBc7j1XnOd" colspan="1" rowspan="1"><p data-block-token="YvMmdQvUNoViSPxA2ekcsgrhnqf">Afficher les collections</p>
 </td><td data-block-token="FXt6dOWyZo5b14xd3zmcrvAKn8d" colspan="1" rowspan="1"><p data-block-token="PAGYdPiZCox710xmtZrcgqnXnef">✔️</p>
 </td><td data-block-token="EFcCdtsOSoOkKfxxJAMcFdnknsd" colspan="1" rowspan="1"><p data-block-token="Pz21dPCLmoI4GIxhIdpc80yvnKb">✔️</p>
@@ -224,11 +224,11 @@ title: Créer un groupe de privilèges
 <li><p><strong>Cluster_Admin</strong>: comprend les privilèges de lecture et d'écriture des données d'instance et de gestion des instances.</p></li>
 </ul>
 <p>Le tableau ci-dessous répertorie les privilèges spécifiques inclus dans les trois groupes de privilèges intégrés au niveau de l'instance.</p>
-<table data-block-token="SDHtdzccpoaNdOxspzFcdkwEnu9"><thead><tr><th data-block-token="Pb9FdCS05ozBO9xBo65chofen5d" colspan="1" rowspan="1"><p data-block-token="OgnXdgTdyoKCBnxlyfac4Q5once"><strong>**Privilège**</strong></p>
-</th><th data-block-token="Y6xPdMNjxomIPwxJB7Xczpm6nkc" colspan="1" rowspan="1"><p data-block-token="CO9bdrfCPoohejxhezZcDS6gnJr"><strong>ClusterReadOnly **ClusterReadWrite**</strong></p>
-</th><th data-block-token="ALGjdHwDgo7XOsxfGWwcA6RNn4f" colspan="1" rowspan="1"><p data-block-token="D4xfdML8VoDPqWxni5zc4Rjknte"><strong>ClusterReadWrite **ClusterReadOnly **ClusterReadWrite **ClusterAdmin **ClusterAdmin</strong></p>
-</th><th data-block-token="QaTZdG7Pgo3rZ4xCk8lcqwhFnoh" colspan="1" rowspan="1"><p data-block-token="VmTSdQcJboLLNHxV7b8cgfDinVf">**<strong>ClusterAdmin**</strong></p>
-</th></tr></thead><tbody><tr><td data-block-token="Byzbdv4XboCS74xhuzlcuVxZnKz" colspan="1" rowspan="1"><p data-block-token="SraLd2bxXo2rDZxCMzjcEHuXnGd">ListDatabases</p>
+<table data-block-token="SDHtdzccpoaNdOxspzFcdkwEnu9"><thead><tr><th data-block-token="Pb9FdCS05ozBO9xBo65chofen5d" colspan="1" rowspan="1"><p data-block-token="OgnXdgTdyoKCBnxlyfac4Q5once"><strong>Privilège</strong></p>
+</th><th data-block-token="Y6xPdMNjxomIPwxJB7Xczpm6nkc" colspan="1" rowspan="1"><p data-block-token="CO9bdrfCPoohejxhezZcDS6gnJr"><strong>ClusterReadOnly</strong></p>
+</th><th data-block-token="ALGjdHwDgo7XOsxfGWwcA6RNn4f" colspan="1" rowspan="1"><p data-block-token="D4xfdML8VoDPqWxni5zc4Rjknte"><strong>ClusterReadWrite</strong></p>
+</th><th data-block-token="QaTZdG7Pgo3rZ4xCk8lcqwhFnoh" colspan="1" rowspan="1"><p data-block-token="VmTSdQcJboLLNHxV7b8cgfDinVf"><strong>ClusterAdmin</strong></p>
+</th></tr></thead><tbody><tr><td data-block-token="Byzbdv4XboCS74xhuzlcuVxZnKz" colspan="1" rowspan="1"><p data-block-token="SraLd2bxXo2rDZxCMzjcEHuXnGd">Liste des bases de données</p>
 </td><td data-block-token="Uc9Odk7c6owHn9xu7jUc9hJGnbg" colspan="1" rowspan="1"><p data-block-token="Ol51d8BzwovVTSxlvpEcLi7znhg">✔️</p>
 </td><td data-block-token="Idtudbo1hoJGtRxB00wcAyZ1nic" colspan="1" rowspan="1"><p data-block-token="PkFFdIkLJoJ3Asx3eZ1cvWHVn7f">✔️</p>
 </td><td data-block-token="AQ6hdba6lofGnlx4AX7cxwuAnOe" colspan="1" rowspan="1"><p data-block-token="RHpjdhjlHoWWZMxBUw7cKhqynYg">✔️</p>

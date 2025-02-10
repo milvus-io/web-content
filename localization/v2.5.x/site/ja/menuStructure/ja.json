@@ -957,50 +957,6 @@
     ]
   },
   {
-    "label": "Milvus移住",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 6,
-    "children": [
-      {
-        "label": "概要",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "移行ツールのインストール",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "Elasticsearchから",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "ファイスより",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "Milvus 1.x より",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Milvus 2.3.x より",
-        "id": "from-m2x.md",
-        "order": 5,
-        "children": []
-      }
-    ]
-  },
-  {
     "label": "管理ガイド",
     "id": "admin_guide",
     "isMenu": true,
@@ -1427,17 +1383,42 @@
             "children": []
           },
           {
-            "label": "ユーザー、権限、役割",
-            "id": "users_and_roles.md",
-            "order": 10,
-            "children": []
-          },
-          {
             "label": "RBACを有効にする",
-            "id": "rbac.md",
+            "id": "rbac",
             "order": 1,
             "isMenu": true,
-            "children": []
+            "children": [
+              {
+                "label": "RBACの概要",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "ユーザー、権限、役割",
+                "id": "users_and_roles.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "特権グループ",
+                "id": "privilege_group.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "特権の付与",
+                "id": "grant_privileges.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "補助金の役割",
+                "id": "grant_roles.md",
+                "order": 4,
+                "children": []
+              }
+            ]
           },
           {
             "label": "輸送中の暗号化",
@@ -1629,9 +1610,16 @@
         ]
       },
       {
+        "label": "Milvus VTS",
+        "id": "milvus_vts",
+        "order": 6,
+        "externalLink": "https://github.com/zilliztech/vts",
+        "children": []
+      },
+      {
         "label": "Milvusサイジングツール",
         "id": "sizing",
-        "order": 6,
+        "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
       },

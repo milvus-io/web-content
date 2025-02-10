@@ -957,50 +957,6 @@
     ]
   },
   {
-    "label": "Миграция Мильвуса",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 6,
-    "children": [
-      {
-        "label": "Обзор",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Установите инструмент миграции",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "Из Elasticsearch",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "От Фейса",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "Из Milvus 1.x",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Из Milvus 2.3.x",
-        "id": "from-m2x.md",
-        "order": 5,
-        "children": []
-      }
-    ]
-  },
-  {
     "label": "Руководство по администрированию",
     "id": "admin_guide",
     "isMenu": true,
@@ -1427,17 +1383,42 @@
             "children": []
           },
           {
-            "label": "Пользователи, привилегии и роли",
-            "id": "users_and_roles.md",
-            "order": 10,
-            "children": []
-          },
-          {
             "label": "Включить RBAC",
-            "id": "rbac.md",
+            "id": "rbac",
             "order": 1,
             "isMenu": true,
-            "children": []
+            "children": [
+              {
+                "label": "Обзор RBAC",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Пользователи, привилегии и роли",
+                "id": "users_and_roles.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Группа привилегий",
+                "id": "privilege_group.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Предоставление привилегий",
+                "id": "grant_privileges.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Роли грантов",
+                "id": "grant_roles.md",
+                "order": 4,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Шифрование в пути",
@@ -1629,9 +1610,16 @@
         ]
       },
       {
+        "label": "Milvus VTS",
+        "id": "milvus_vts",
+        "order": 6,
+        "externalLink": "https://github.com/zilliztech/vts",
+        "children": []
+      },
+      {
         "label": "Инструмент для определения размеров Milvus",
         "id": "sizing",
-        "order": 6,
+        "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
       },

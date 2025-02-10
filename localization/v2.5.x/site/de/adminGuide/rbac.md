@@ -24,7 +24,7 @@ title: RBAC Erklärt
         ></path>
       </svg>
     </button></h1><p>RBAC (Role-Based Access Control) ist eine rollenbasierte Zugriffskontrollmethode. Mit RBAC können Sie die Operationen, die Benutzer auf Sammel-, Datenbank- und Instanzebene durchführen können, genau steuern und so die Datensicherheit erhöhen. </p>
-<p>Im Gegensatz zu herkömmlichen Modellen der Benutzerzugriffskontrolle führt RBAC das Konzept der <strong>Rollen</strong> ein. Im RBAC-Modell gewähren Sie den Rollen Privilegien und diese Rollen dann den Benutzern. Dann können Benutzer Privilegien erhalten. </p>
+<p>Im Gegensatz zu herkömmlichen Modellen der Benutzerzugriffskontrolle führt RBAC das Konzept der <strong>Rollen</strong> ein. Im RBAC-Modell erteilen Sie Rollen Privilegien und weisen diese Rollen dann den Benutzern zu. Dann können Benutzer Privilegien erhalten. </p>
 <p>Das RBAC-Modell kann die Effizienz der Zugriffskontrollverwaltung verbessern. Wenn beispielsweise mehrere Benutzer die gleichen Berechtigungen benötigen, müssen Sie die Berechtigungen nicht für jeden Benutzer manuell festlegen. Stattdessen können Sie eine Rolle erstellen und diese Rolle den Benutzern zuweisen. Wenn Sie die Berechtigungen dieser Benutzer anpassen möchten, können Sie einfach die Rollenberechtigungen anpassen und die Änderung wird auf alle Benutzer mit dieser Rolle angewendet.</p>
 <h2 id="RBAC-key-concepts​" class="common-anchor-header">RBAC-Schlüsselkonzepte<button data-href="#RBAC-key-concepts​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,13 +47,13 @@ title: RBAC Erklärt
    </span> <span class="img-wrapper"> <span>Benutzer, Rollen und Berechtigungen</span> </span></p>
 <p>Es gibt vier Hauptkomponenten im RBAC-Modell.</p>
 <ul>
-<li><p>**Ressource: **Die Ressourceneinheit, auf die zugegriffen werden kann. Es gibt drei Ebenen von Ressourcen in Milvus - Instanz, Datenbank und Sammlung.</p></li>
-<li><p>**Berechtigung: **Die Erlaubnis, bestimmte Operationen mit Milvus-Ressourcen durchzuführen (z. B. Sammlungen erstellen, Daten einfügen usw.). </p></li>
-<li><p>**Privilegiengruppe: **Eine Gruppe mit mehreren Privilegien.</p></li>
-<li><p>**Rolle: **Eine Rolle besteht aus zwei Teilen - Rechte und Ressourcen. Berechtigungen definieren die Art der Operationen, die eine Rolle ausführen kann, während Ressourcen die Zielressourcen definieren, auf denen die Operationen ausgeführt werden können. Die Rolle des Datenbankadministrators kann zum Beispiel Lese-, Schreib- und Verwaltungsvorgänge für bestimmte Datenbanken durchführen.</p></li>
-<li><p>**Benutzer: **Ein Benutzer ist jemand, der Milvus benutzt. Jeder Benutzer hat eine eindeutige ID und erhält eine Rolle oder mehrere Rollen. </p></li>
+<li><p><strong>Ressource</strong>: Die Ressourceneinheit, auf die zugegriffen werden kann. Es gibt drei Ebenen von Ressourcen in Milvus - Instanz, Datenbank und Sammlung.</p></li>
+<li><p><strong>Privileg</strong>: Die Erlaubnis, bestimmte Operationen an Milvus-Ressourcen durchzuführen (z.B. Sammlungen erstellen, Daten einfügen, etc.). </p></li>
+<li><p><strong>Privilegiengruppe</strong>: Eine Gruppe von mehreren Privilegien.</p></li>
+<li><p><strong>Rolle</strong>: Eine Rolle besteht aus zwei Teilen - Berechtigungen und Ressourcen. Berechtigungen definieren die Art der Operationen, die eine Rolle ausführen kann, während Ressourcen die Zielressourcen definieren, auf denen die Operationen ausgeführt werden können. Die Rolle des Datenbankadministrators kann zum Beispiel Lese-, Schreib- und Verwaltungsoperationen für bestimmte Datenbanken durchführen.</p></li>
+<li><p><strong>Benutzer</strong>: Ein Benutzer ist jemand, der Milvus benutzt. Jeder Benutzer hat eine eindeutige ID und erhält eine Rolle oder mehrere Rollen. </p></li>
 </ul>
-<h2 id="Procedures​" class="common-anchor-header">Prozeduren<button data-href="#Procedures​" class="anchor-icon" translate="no">
+<h2 id="Procedures​" class="common-anchor-header">Verfahren<button data-href="#Procedures​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,7 +68,7 @@ title: RBAC Erklärt
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um die Zugriffskontrolle über RBAC zu erreichen, müssen Sie die folgenden Schritte befolgen.</p>
+    </button></h2><p>Um die Zugriffskontrolle über RBAC zu erreichen, müssen Sie die folgenden Schritte ausführen.</p>
 <ol>
 <li><p><a href="/docs/de/users_and_roles.md#Create-a-user">Erstellen Sie einen Benutzer</a>: Zusätzlich zu den Standardbenutzern <code translate="no">root</code> in Milvus können Sie neue Benutzer erstellen und Passwörter festlegen, um die Datensicherheit zu gewährleisten.</p></li>
 <li><p><a href="/docs/de/users_and_roles.md#Create-a-role">Erstellen Sie eine Rolle</a>: Sie können benutzerdefinierte Rollen erstellen, die auf Ihren Bedürfnissen basieren. Die spezifischen Fähigkeiten einer Rolle werden durch ihre Berechtigungen bestimmt.</p></li>

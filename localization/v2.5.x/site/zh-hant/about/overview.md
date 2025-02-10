@@ -44,11 +44,11 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
    </span> <span class="img-wrapper"> <span>非結構化資料、嵌入與 Milvus</span> </span></p>
-<p>Milvus 提供三種部署模式，涵蓋各種資料規模 - 從 Jupyter Notebooks 中的本機原型，到管理數百億向量的大型 Kubernetes 集群：</p>
+<p>Milvus 提供三種部署模式，涵蓋廣泛的資料規模 - 從 Jupyter Notebooks 中的本機原型，到管理數百億向量的大型 Kubernetes 集群：</p>
 <ul>
 <li>Milvus Lite 是一個 Python 函式庫，可輕鬆整合至您的應用程式。Milvus Lite 是 Milvus 的輕量版，非常適合在 Jupyter Notebooks 中快速建立原型，或在資源有限的邊緣裝置上執行。<a href="/docs/zh-hant/milvus_lite.md">瞭解更多資訊</a>。</li>
 <li>Milvus Standalone 是單機伺服器部署，所有元件都綁定在單一 Docker 映像檔中，方便部署。<a href="/docs/zh-hant/install_standalone-docker.md">進一步瞭解</a>。</li>
-<li>Milvus Distributed 可部署在 Kubernetes 集群上，其雲端原生架構專為十億級或更大規模的場景而設計。此架構可確保關鍵元件的備援。<a href="/docs/zh-hant/install_cluster-milvusoperator.md">進一步瞭解</a>。</li>
+<li>Milvus Distributed 可部署在 Kubernetes 集群上，其雲端原生架構專為十億級或更大規模的情境所設計。此架構可確保關鍵元件的備援。<a href="/docs/zh-hant/install_cluster-milvusoperator.md">進一步瞭解</a>。</li>
 </ul>
 <h2 id="What-Makes-Milvus-so-Fast" class="common-anchor-header">是什麼讓 Milvus 如此快速？<button data-href="#What-Makes-Milvus-so-Fast" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -154,7 +154,7 @@ summary: >-
 <li><p>搜尋演算法 Milvus 支援一組可調整的索引和搜尋演算法。如需詳細資訊，請參閱「<a href="/docs/zh-hant/index.md">記憶體內索引</a>」、<a href="/docs/zh-hant/disk_index.md">「磁碟上索引</a>」和「<a href="/docs/zh-hant/gpu_index.md">GPU 索引</a>」。</p></li>
 <li><p>分區和分區鍵值 分區是 Milvus 資料集中的子分區。您可以選擇標量欄位作為分割鍵，以獲得更好的搜尋效能。如需詳細資訊，請參閱<a href="/docs/zh-hant/manage-partitions.md">管理分割區和</a> <a href="/docs/zh-hant/use-partition-key.md">使用分割區金鑰</a>。</p></li>
 <li><p>可調整的一致性模型 一致性可確保每個 Milvus 節點或副本在特定時間寫入或讀取資料時，擁有相同的資料視圖。在 Milvus 中執行 ANN 搜尋時，您可以輕鬆調整一致性層級。如需詳細資訊，請參閱<a href="/docs/zh-hant/consistency.md">一致性</a>。</p></li>
-<li><p>高通量資料匯入 要匯入大量資料到 Milvus，而不是一個接一個地插入，請考慮使用我們的高通量資料匯入工具。詳情請參閱<a href="/docs/zh-hant/prepare-source-data.md">準備來源資料</a>和<a href="/docs/zh-hant/import-data.md">匯入資料</a>。</p></li>
+<li><p>高通量資料匯入 若要匯入大量資料到 Milvus，而不是一個接一個地插入，請考慮使用我們的高通量資料匯入工具。詳情請參閱<a href="/docs/zh-hant/prepare-source-data.md">準備來源資料</a>和<a href="/docs/zh-hant/import-data.md">匯入資料</a>。</p></li>
 <li><p>多租用支援 Milvus 實現了許多面向多租用場景的功能，包括分區鑰匙、集群鑰匙等。詳情請參閱<a href="/docs/zh-hant/multi_tenancy.md">多租戶策略</a>。</p></li>
 </ul>
 <h3 id="Security-and-Authorization" class="common-anchor-header">安全性與授權</h3><ul>
@@ -173,5 +173,5 @@ summary: >-
 <li><p>Milvus 備份 Milvus 備份是一個允許使用者備份和還原 Milvus 資料的工具。它同時提供 CLI 和 API，以適合不同的應用情境。詳情請參閱<a href="/docs/zh-hant/milvus_backup_overview.md">Milvus 備份</a>。</p></li>
 <li><p>Milvus Capture Data Change (CDC) Milvus-CDC 可以捕捉和同步 Milvus 實例中的增量數據，並通過源實例和目標實例之間的無縫傳輸來確保業務數據的可靠性，從而實現簡便的增量備份和災難恢復。詳情請參閱<a href="/docs/zh-hant/milvus-cdc-overview.md">Milvus CDC</a>。</p></li>
 <li><p>Milvus Connectors Milvus 已經規劃了一套連接器，讓您可以無縫整合 Milvus 與第三方工具，例如 Apache Spark。目前，您可以使用我們的 Spark Connector 將 Milvus 資料饋送至 Apache Spark 進行機器學習處理。如需詳細資訊，請參閱<a href="/docs/zh-hant/integrate_with_spark.md">Spark-Milvus Connector</a>。</p></li>
-<li><p>矢量傳輸服務 (VTS) Milvus 提供了一套工具，讓您可以在 Milvus 實例和一堆資料來源之間傳輸資料，包括 Zilliz 集群、Elasticsearch、Postgres (PgVector) 和另一個 Milvus 實例。詳情請參閱<a href="/docs/zh-hant/migrate_overview.md">遷移</a>。</p></li>
+<li><p>Vector Transmission Services (VTS) Milvus 提供了一套工具，讓您可以在 Milvus 實例和一堆資料來源之間傳輸資料，包括 Zilliz 集群、Elasticsearch、Postgres (PgVector) 和另一個 Milvus 實例。如需詳細資訊，請參閱<a href="https://github.com/zilliztech/vts">VTS</a>。</p></li>
 </ul>

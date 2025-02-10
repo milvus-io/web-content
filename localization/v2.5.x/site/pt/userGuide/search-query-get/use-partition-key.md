@@ -17,7 +17,7 @@ title: Utilizar chave de partição
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A Chave de partição é uma solução de otimização da pesquisa baseada em partições. Ao designar um campo escalar específico como Chave de Partição e ao especificar condições de filtragem baseadas na Chave de Partição durante a pesquisa, o âmbito da pesquisa pode ser reduzido a várias partições, melhorando assim a eficiência da pesquisa. Este artigo apresentará como utilizar a Chave de partição e considerações relacionadas.</p>
+    </button></h1><p>A Chave de partição é uma solução de otimização da pesquisa baseada em partições. Ao designar um campo escalar específico como Chave de Partição e ao especificar condições de filtragem com base na Chave de Partição durante a pesquisa, o âmbito da pesquisa pode ser reduzido a várias partições, melhorando assim a eficiência da pesquisa. Este artigo apresentará como utilizar a Chave de partição e considerações relacionadas.</p>
 <h2 id="Overview​" class="common-anchor-header">Visão geral<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -33,7 +33,7 @@ title: Utilizar chave de partição
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>No Milvus, é possível utilizar partições para implementar a segregação de dados e melhorar o desempenho da pesquisa, restringindo o âmbito da pesquisa a partições específicas. Se optar por gerir as partições manualmente, pode criar um máximo de 1024 partições numa coleção e inserir entidades nestas partições com base numa regra específica para que possa limitar o âmbito da pesquisa restringindo as pesquisas dentro de um número específico de partições.</p>
+    </button></h2><p>No Milvus, é possível usar partições para implementar a segregação de dados e melhorar o desempenho da pesquisa, restringindo o escopo da pesquisa a partições específicas. Se optar por gerir as partições manualmente, pode criar um máximo de 1024 partições numa coleção e inserir entidades nestas partições com base numa regra específica para que possa limitar o âmbito da pesquisa restringindo as pesquisas dentro de um número específico de partições.</p>
 <p>O Milvus introduz a Chave de Partição para que possa reutilizar partições na segregação de dados para ultrapassar o limite do número de partições que pode criar numa coleção. Ao criar uma coleção, pode utilizar um campo escalar como chave de partição. Quando a coleção estiver pronta, o Milvus cria o número especificado de partições dentro da coleção, correspondendo cada partição a um intervalo de valores na Chave de Partição. Ao receber as entidades inseridas, Milvus armazena-as em diferentes partições com base nos seus valores de Partition Key.</p>
 <p>
   
@@ -41,7 +41,7 @@ title: Utilizar chave de partição
    </span> <span class="img-wrapper"> <span>Partição v.s. Chave de partição</span> </span></p>
 <p>A figura seguinte ilustra a forma como o Milvus processa os pedidos de pesquisa numa coleção com ou sem a função Partition Key activada. </p>
 <ul>
-<li><p>Se a Chave de Partição estiver desactivada, o Milvus procura as entidades que são mais semelhantes ao vetor de consulta dentro da coleção. Pode limitar o âmbito da pesquisa se souber qual a partição que contém os resultados mais relevantes. </p></li>
+<li><p>Se a Chave de Partição estiver desactivada, o Milvus procura as entidades que são mais semelhantes ao vetor de consulta dentro da coleção. É possível limitar o âmbito da pesquisa se souber qual a partição que contém os resultados mais relevantes. </p></li>
 <li><p>Se a Chave de partição estiver activada, o Milvus determina o âmbito da pesquisa com base no valor da Chave de partição especificado num filtro de pesquisa e analisa apenas as entidades dentro das partições que correspondem. </p></li>
 </ul>
 <p>
@@ -164,8 +164,8 @@ schema.addField(AddFieldReq.builder()​
     }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers​" class="common-anchor-header">Definir números de partição</h3><p>Quando designa um campo escalar numa coleção como chave de partição, o Milvus cria automaticamente 16 partições na coleção. Ao receber uma entidade, o Milvus escolhe uma partição com base no valor da Chave de Partição desta entidade e armazena a entidade na partição, resultando em algumas ou todas as partições contendo entidades com diferentes valores de Chave de Partição. </p>
-<p>Também é possível determinar o número de partições a criar juntamente com a coleção. Isso é válido apenas se você tiver um campo escalar designado como a chave de partição.</p>
+<h3 id="Set-Partition-Numbers​" class="common-anchor-header">Definir números de partição</h3><p>Quando designa um campo escalar numa coleção como chave de partição, o Milvus cria automaticamente 16 partições na coleção. Ao receber uma entidade, Milvus escolhe uma partição com base no valor da Chave de Partição desta entidade e armazena a entidade na partição, resultando em algumas ou todas as partições contendo entidades com diferentes valores de Chave de Partição. </p>
+<p>Também é possível determinar o número de partições a criar juntamente com a coleção. Isso é válido apenas se você tiver um campo escalar designado como a Chave de partição.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
@@ -211,8 +211,9 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition​" class="common-anchor-header">Criar condição de filtragem</h3><p>Ao realizar pesquisas ANN em uma coleção com o recurso Chave de partição ativado, é necessário incluir uma expressão de filtragem envolvendo a Chave de partição na solicitação de pesquisa. Na expressão de filtragem, é possível restringir o valor da Chave de partição dentro de um intervalo específico para que o Milvus restrinja o escopo da pesquisa dentro das partições correspondentes.</p>
-<p>Os exemplos a seguir demonstram a filtragem baseada em chave de partição com base em um valor específico de chave de partição e um conjunto de valores de chave de partição.</p>
+<h3 id="Create-Filtering-Condition​" class="common-anchor-header">Criar condição de filtragem</h3><p>Ao realizar pesquisas ANN em uma coleção com o recurso Chave de partição ativado, é necessário incluir uma expressão de filtragem envolvendo a Chave de partição na solicitação de pesquisa. Na expressão de filtragem, pode restringir o valor da Chave de partição dentro de um intervalo específico para que o Milvus restrinja o âmbito da pesquisa dentro das partições correspondentes.</p>
+<p>Ao lidar com operações de exclusão, é aconselhável incluir uma expressão de filtro que especifique uma única chave de partição para obter uma exclusão mais eficiente. Esta abordagem limita a operação de eliminação a uma partição específica, reduzindo a amplificação da escrita durante a compactação e conservando os recursos para compactação e indexação.</p>
+<p>Os exemplos a seguir demonstram a filtragem baseada em chave de partição com base em um valor de chave de partição específico e um conjunto de valores de chave de partição.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter based on a single partition key value, or​</span>
@@ -244,7 +245,7 @@ export <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>É necessário substituir <code translate="no">partition_key</code> pelo nome do campo que é designado como a chave de partição.</p>
+<p>É necessário substituir <code translate="no">partition_key</code> pelo nome do campo que é designado como chave de partição.</p>
 </div>
 <h2 id="Use-Partition-Key-Isolation" class="common-anchor-header">Usar o isolamento da chave de partição<button data-href="#Use-Partition-Key-Isolation" class="anchor-icon" translate="no">
       <svg translate="no"

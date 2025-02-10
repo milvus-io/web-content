@@ -641,50 +641,6 @@
     ]
   },
   {
-    "label": "Milvus 迁移",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 5,
-    "children": [
-      {
-        "label": "概述",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "安装迁移工具",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "来自 Elasticsearch",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "来自 Faiss",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "来自 Milvus 1.x",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "来自 Milvus 2.3.x",
-        "id": "from-m2x.md",
-        "order": 5,
-        "children": []
-      }
-    ]
-  },
-  {
     "label": "管理指南",
     "id": "admin_guide",
     "isMenu": true,

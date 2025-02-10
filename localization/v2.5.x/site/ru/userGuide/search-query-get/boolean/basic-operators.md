@@ -48,27 +48,11 @@ title: Основные операторы
 <li><p><code translate="no">&gt;=</code> (Больше или равно)</p></li>
 <li><p><code translate="no">&lt;=</code> (Меньше или равно)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-​" class="common-anchor-header">Пример 1: Фильтрация с помощью Equal To (<code translate="no">==</code>)</h3><p>Предположим, у вас есть поле с именем <code translate="no">status</code>, и вы хотите найти все сущности, в которых <code translate="no">status</code> является &quot;активным&quot;. Для этого можно использовать оператор равенства <code translate="no">==</code>.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-​" class="common-anchor-header">Пример 2: Фильтрация с помощью Not Equal To (<code translate="no">!=</code>)</h3><p>Чтобы найти сущности, в которых <code translate="no">status</code> не является &quot;неактивным&quot;.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-​" class="common-anchor-header">Пример 3: Фильтрация с помощью Greater Than (<code translate="no">&gt;</code>)</h3><p>Если вы хотите найти все сущности с <code translate="no">age</code> больше 30.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than-​" class="common-anchor-header">Пример 4: Фильтрация с помощью Less Than (<code translate="no">&lt;</code>)</h3><p>Чтобы найти сущности, у которых <code translate="no">price</code> меньше 100.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">Пример 5: Фильтрация с помощью Greater Than or Equal To (<code translate="no">&gt;=</code>)</h3><p>Если вы хотите найти все сущности с <code translate="no">rating</code> больше или равным 4.</p>
+<h3 id="Example-1-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">Пример 1: Фильтрация с помощью Greater Than or Equal To (<code translate="no">&gt;=</code>)</h3><p>Если вы хотите найти все сущности с <code translate="no">rating</code> больше или равно 4.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">Пример 6: Фильтрация с помощью Less Than or Equal To (<code translate="no">&lt;=</code>)</h3><p>Чтобы найти сущности с <code translate="no">discount</code> меньше или равным 10%.</p>
+<h3 id="Example-2-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">Пример 2: Фильтрация с помощью Less Than or Equal To (<code translate="no">&lt;=</code>)</h3><p>Чтобы найти сущности с <code translate="no">discount</code> меньше или равным 10%.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -149,7 +133,7 @@ title: Основные операторы
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price * quantity &gt; 1000&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Using-Division-​" class="common-anchor-header">Пример 4: Использование деления (<code translate="no">/</code>)</h3><p>Для поиска произведений, где <code translate="no">total_price</code>, деленное на <code translate="no">quantity</code>, меньше 50.</p>
+<h3 id="Example-4-Using-Division-​" class="common-anchor-header">Пример 4: Использование деления (<code translate="no">/</code>)</h3><p>Для поиска произведений, в которых <code translate="no">total_price</code>, деленное на <code translate="no">quantity</code>, меньше 50.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;total_price / quantity &lt; 50&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>

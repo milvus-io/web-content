@@ -165,7 +165,7 @@ schema.addField(AddFieldReq.builder()​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Partition-Numbers​" class="common-anchor-header">设置分区编号</h3><p>当你指定一个 Collections 中的标量字段作为 Partition Key 时，Milvus 会自动在 Collections 中创建 16 个分区。当接收到一个实体时，Milvus 会根据这个实体的 Partition Key 值选择一个分区，并将实体存储在分区中，从而导致部分或所有分区持有不同 Partition Key 值的实体。</p>
-<p>您还可以确定与 Collections 一起创建的分区数量。只有将标量字段指定为 Partition Key 时，这种方法才有效。</p>
+<p>您还可以确定与 Collections 一起创建的分区数量。这只有在将标量字段指定为 Partition Key 时才有效。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
@@ -211,7 +211,8 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition​" class="common-anchor-header">创建过滤条件</h3><p>在启用分区关键字功能的 Collections 中进行 ANN 搜索时，需要在搜索请求中包含涉及分区关键字的过滤表达式。在过滤表达式中，你可以将 Partition Key 值限制在特定范围内，这样 Milvus 就会将搜索范围限制在相应的分区内。</p>
+<h3 id="Create-Filtering-Condition​" class="common-anchor-header">创建过滤条件</h3><p>在启用分区关键字功能的 Collections 中进行 ANN 搜索时，需要在搜索请求中包含涉及分区关键字的过滤表达式。在过滤表达式中，你可以将 Partition Key 的值限制在特定范围内，这样 Milvus 就会将搜索范围限制在相应的分区内。</p>
+<p>在处理删除操作时，建议加入一个指定单一分区键的过滤表达式，以实现更高效的删除。这种方法将删除操作限制在特定分区内，减少了压缩过程中的写放大，节省了用于压缩和索引的资源。</p>
 <p>下面的示例演示了基于 Partition Key 的过滤，它基于一个特定的 Partition Key 值和一组 Partition Key 值。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -266,7 +267,7 @@ export <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
    </span> <span class="img-wrapper"> <span>分区密钥隔离</span> </span></p>
-<p>如上图所示，Milvus 根据分区键值对实体进行分组，并为每个分组创建单独的索引。收到搜索请求后，Milvus 会根据过滤条件中指定的 Partition Key 值定位索引，并将搜索范围限制在索引所包含的实体内，从而避免在搜索过程中扫描不相关的实体，大大提高了搜索性能。 启用 Partition Key Isolation 后，可以在基于 Partition Key 的过滤条件中只包含特定值，这样 Milvus 就能将搜索范围限制在索引所包含的匹配实体内。</p>
+<p>如上图所示，Milvus 根据分区键值对实体进行分组，并为每个分组创建单独的索引。收到搜索请求后，Milvus 会根据过滤条件中指定的 Partition Key 值定位索引，并将搜索范围限制在索引所包含的实体内，从而避免在搜索过程中扫描不相关的实体，大大提高搜索性能。 启用 Partition Key Isolation 后，可以在基于 Partition Key 的过滤条件中只包含特定值，这样 Milvus 就能将搜索范围限制在索引所包含的匹配实体内。</p>
 <div class="alert note">
 <p>目前，分区密钥隔离功能只适用于索引类型设置为 HNSW 的搜索。</p>
 </div>

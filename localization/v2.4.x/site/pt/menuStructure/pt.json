@@ -1,6 +1,6 @@
 [
   {
-    "label": "About Milvus",
+    "label": "Sobre Milvus",
     "id": "about",
     "isMenu": true,
     "order": 0,
@@ -637,50 +637,6 @@
             "children": []
           }
         ]
-      }
-    ]
-  },
-  {
-    "label": "Migração de Milvus",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 5,
-    "children": [
-      {
-        "label": "Visão geral",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Instalar a ferramenta de migração",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "Do Elasticsearch",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "De Faiss",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "De Milvus 1.x",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "De Milvus 2.3.x",
-        "id": "from-m2x.md",
-        "order": 5,
-        "children": []
       }
     ]
   },
@@ -1763,7 +1719,7 @@
     ]
   },
   {
-    "label": "FAQs",
+    "label": "Perguntas frequentes",
     "id": "faq",
     "isMenu": true,
     "order": 9,

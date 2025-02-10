@@ -23,7 +23,7 @@ title: RBAC 解释
       </svg>
     </button></h1><p>RBAC（基于角色的访问控制）是一种基于角色的访问控制方法。通过 RBAC，可以精细控制用户在 Collections、数据库和实例级别上可以执行的操作，增强数据的安全性。</p>
 <p>与传统的用户访问控制模型不同，RBAC 引入了<strong>角色</strong>的概念。在 RBAC 模型中，先授予角色权限，然后再将这些角色授予用户。然后，用户才能获得权限。</p>
-<p>RBAC 模型可以提高访问控制管理的效率。例如，如果多个用户需要同一套权限，就不需要为每个用户手动设置权限。相反，你可以创建一个角色并将该角色分配给用户。如果要调整这些用户的权限，只需调整角色的权限，修改后的权限将应用到所有拥有该角色的用户。</p>
+<p>RBAC 模型可以提高访问控制管理的效率。例如，如果多个用户需要同一套权限，就不需要为每个用户手动设置权限。相反，你可以创建一个角色并将该角色分配给用户。如果要调整这些用户的权限，只需调整角色的权限，修改后的权限就会应用到所有拥有该角色的用户。</p>
 <h2 id="RBAC-key-concepts​" class="common-anchor-header">RBAC 主要概念<button data-href="#RBAC-key-concepts​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,11 +45,11 @@ title: RBAC 解释
    </span> <span class="img-wrapper"> <span>用户、角色和权限</span> </span></p>
 <p>RBAC 模型中有四个主要组成部分。</p>
 <ul>
-<li><p>**资源：**可访问的资源实体。Milvus 中的资源分为三个级别--实例、数据库和 Collections。</p></li>
-<li><p>**权限：**对 Milvus 资源执行特定操作的权限（如创建 Collection、插入数据等）。</p></li>
-<li><p>**权限组：**由多个权限组成的组。</p></li>
-<li><p>**角色：**角色由权限和资源两部分组成。权限定义了角色可以执行的操作类型，而资源则定义了可以执行操作的目标资源。例如，数据库管理员角色可以对某些数据库执行读、写和管理操作。</p></li>
-<li><p>**用户：**用户是指使用 Milvus 的人。每个用户都有一个唯一的 ID，并被授予一个或多个角色。</p></li>
+<li><p><strong>资源</strong>：可访问的资源实体。Milvus 中的资源分为三个级别--实例、数据库和 Collections。</p></li>
+<li><p><strong>权限</strong>：对 Milvus 资源执行特定操作的权限（如创建 Collection、插入数据等）。</p></li>
+<li><p><strong>权限组</strong>：由多个权限组成的组。</p></li>
+<li><p><strong>角色</strong>：角色由权限和资源两部分组成。权限定义了角色可以执行的操作类型，而资源则定义了可以执行操作的目标资源。例如，数据库管理员角色可以对某些数据库执行读、写和管理操作。</p></li>
+<li><p><strong>用户</strong>：用户是指使用 Milvus 的人。每个用户都有一个唯一的 ID，并被授予一个或多个角色。</p></li>
 </ul>
 <h2 id="Procedures​" class="common-anchor-header">程序<button data-href="#Procedures​" class="anchor-icon" translate="no">
       <svg translate="no"

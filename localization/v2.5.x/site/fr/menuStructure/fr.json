@@ -957,50 +957,6 @@
     ]
   },
   {
-    "label": "Milvus Migration",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 6,
-    "children": [
-      {
-        "label": "Vue d'ensemble",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Installer l'outil de migration",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "À partir d'Elasticsearch",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "De Faiss",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "Depuis Milvus 1.x",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Depuis Milvus 2.3.x",
-        "id": "from-m2x.md",
-        "order": 5,
-        "children": []
-      }
-    ]
-  },
-  {
     "label": "Guide d'administration",
     "id": "admin_guide",
     "isMenu": true,
@@ -1427,17 +1383,42 @@
             "children": []
           },
           {
-            "label": "Utilisateurs, privilèges et rôles",
-            "id": "users_and_roles.md",
-            "order": 10,
-            "children": []
-          },
-          {
             "label": "Activer RBAC",
-            "id": "rbac.md",
+            "id": "rbac",
             "order": 1,
             "isMenu": true,
-            "children": []
+            "children": [
+              {
+                "label": "Vue d'ensemble de RBAC",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Utilisateurs, privilèges et rôles",
+                "id": "users_and_roles.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Groupe de privilèges",
+                "id": "privilege_group.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Accorder des privilèges",
+                "id": "grant_privileges.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Rôles des subventions",
+                "id": "grant_roles.md",
+                "order": 4,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Chiffrement en transit",
@@ -1522,7 +1503,7 @@
                 "children": []
               },
               {
-                "label": "Migrer d'une instance à l'autre d'un environnement S3 à l'autre",
+                "label": "Migrer d'une instance à l'autre dans un environnement S3",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -1629,9 +1610,16 @@
         ]
       },
       {
+        "label": "Milvus VTS",
+        "id": "milvus_vts",
+        "order": 6,
+        "externalLink": "https://github.com/zilliztech/vts",
+        "children": []
+      },
+      {
         "label": "Outil de dimensionnement Milvus",
         "id": "sizing",
-        "order": 6,
+        "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
       },
@@ -2119,7 +2107,7 @@
         "children": []
       },
       {
-        "label": "Utiliser ColPali pour la récupération multimodale",
+        "label": "Utiliser ColPali pour la recherche multimodale",
         "id": "use_ColPali_with_milvus.md",
         "order": 10,
         "children": []

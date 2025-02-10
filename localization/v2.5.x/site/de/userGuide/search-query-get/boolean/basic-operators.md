@@ -49,27 +49,11 @@ title: Grundlegende Operatoren
 <li><p><code translate="no">&gt;=</code> (Größer als oder gleich)</p></li>
 <li><p><code translate="no">&lt;=</code> (Kleiner als oder gleich)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-​" class="common-anchor-header">Beispiel 1: Filtern mit Gleich bis (<code translate="no">==</code>)</h3><p>Angenommen, Sie haben ein Feld namens <code translate="no">status</code> und möchten alle Entitäten finden, bei denen <code translate="no">status</code> &quot;aktiv&quot; ist. Sie können den Gleichheitsoperator <code translate="no">==</code> verwenden.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-​" class="common-anchor-header">Beispiel 2: Filtern mit Not Equal To (<code translate="no">!=</code>)</h3><p>Um Entitäten zu finden, bei denen <code translate="no">status</code> nicht &quot;inaktiv&quot; ist.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-​" class="common-anchor-header">Beispiel 3: Filtern mit Größer als (<code translate="no">&gt;</code>)</h3><p>Wenn Sie alle Entitäten finden wollen, deren <code translate="no">age</code> größer als 30 ist.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than-​" class="common-anchor-header">Beispiel 4: Filtern mit "kleiner als" (<code translate="no">&lt;</code>)</h3><p>Um Entitäten zu finden, bei denen <code translate="no">price</code> kleiner als 100 ist.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">Beispiel 5: Filtern mit Größer als oder gleich (<code translate="no">&gt;=</code>)</h3><p>Wenn Sie alle Entitäten finden wollen, bei denen <code translate="no">rating</code> größer oder gleich 4 ist.</p>
+<h3 id="Example-1-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">Beispiel 1: Filtern mit Größer als oder gleich (<code translate="no">&gt;=</code>)</h3><p>Wenn Sie alle Entitäten finden möchten, deren <code translate="no">rating</code> größer oder gleich 4 ist.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">Beispiel 6: Filtern mit Kleiner als oder gleich (<code translate="no">&lt;=</code>)</h3><p>Um Entitäten zu finden, deren <code translate="no">discount</code> kleiner oder gleich 10% ist.</p>
+<h3 id="Example-2-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">Beispiel 2: Filtern mit Kleiner als oder gleich (<code translate="no">&lt;=</code>)</h3><p>Um Entitäten zu finden, deren <code translate="no">discount</code> kleiner oder gleich 10% ist.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -99,7 +83,7 @@ title: Grundlegende Operatoren
 <button class="copy-code-btn"></button></code></pre>
 <p>Dies ist nützlich, wenn Sie die Zugehörigkeit zu einer Liste von Werten prüfen wollen.</p>
 <h3 id="Example-2-Using-LIKE-for-Pattern-Matching​" class="common-anchor-header">Beispiel 2: Verwendung von <code translate="no">LIKE</code> für Mustervergleiche</h3><p>Der Operator <code translate="no">LIKE</code> wird für den Mustervergleich in Zeichenkettenfeldern verwendet. Er kann Teilzeichenfolgen an verschiedenen Positionen im Text entsprechen: als <strong>Präfix</strong>, <strong>Infix</strong> oder <strong>Suffix</strong>. Der Operator <code translate="no">LIKE</code> verwendet das Symbol <code translate="no">%</code> als Platzhalter, der mit einer beliebigen Anzahl von Zeichen (einschließlich Null) übereinstimmen kann.</p>
-<h4 id="Prefix-Match-Starts-With​" class="common-anchor-header">Präfix-Übereinstimmung (Beginnt mit)</h4><p>Um eine <strong>Präfix-Übereinstimmung</strong> durchzuführen, bei der die Zeichenfolge mit einem bestimmten Muster beginnt, können Sie das Muster an den Anfang stellen und <code translate="no">%</code> verwenden, um alle darauf folgenden Zeichen abzugleichen. Beispiel: Sie möchten alle Produkte finden, deren <code translate="no">name</code> mit &quot;Prod&quot; beginnt.</p>
+<h4 id="Prefix-Match-Starts-With​" class="common-anchor-header">Präfix-Übereinstimmung (Beginnt mit)</h4><p>Um eine <strong>Präfixübereinstimmung</strong> durchzuführen, bei der die Zeichenfolge mit einem bestimmten Muster beginnt, können Sie das Muster an den Anfang stellen und <code translate="no">%</code> verwenden, um alle darauf folgenden Zeichen abzugleichen. Beispiel: Sie möchten alle Produkte finden, deren <code translate="no">name</code> mit &quot;Prod&quot; beginnt.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -108,7 +92,7 @@ title: Grundlegende Operatoren
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%XYZ&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Damit werden alle Produkte gefunden, deren Name auf &quot;XYZ&quot; endet, z. B. &quot;ProduktXYZ&quot;, &quot;MusterXYZ&quot; usw.</p>
+<p>Damit werden alle Produkte gefunden, deren Name mit &quot;XYZ&quot; endet, wie z. B. &quot;ProduktXYZ&quot;, &quot;MusterXYZ&quot; usw.</p>
 <h4 id="Infix-Match-Contains​" class="common-anchor-header">Infix-Abgleich (Enthält)</h4><p>Um eine <strong>Infix-Übereinstimmung</strong> durchzuführen, bei der das Muster an beliebiger Stelle in der Zeichenfolge erscheinen kann, können Sie das Symbol <code translate="no">%</code> sowohl am Anfang als auch am Ende des Musters platzieren. Beispiel: Sie möchten alle Produkte finden, deren <code translate="no">name</code> das Wort &quot;Pro&quot; enthält.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%Pro%&quot;&#x27;</span>​
 

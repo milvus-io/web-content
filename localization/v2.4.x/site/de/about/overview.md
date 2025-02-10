@@ -3,10 +3,10 @@ id: overview.md
 title: Was ist Milvus
 related_key: Milvus Overview
 summary: >-
-  Milvus ist eine leistungsstarke, hoch skalierbare Vektordatenbank, die in
-  einer Vielzahl von Umgebungen, vom Laptop bis zu großen verteilten Systemen,
-  effizient läuft. Sie ist sowohl als Open-Source-Software als auch als
-  Cloud-Service verfügbar.
+  Milvus ist eine leistungsstarke, hoch skalierbare Vektordatenbank, die
+  effizient in einer Vielzahl von Umgebungen läuft, von einem Laptop bis hin zu
+  großen verteilten Systemen. Sie ist sowohl als Open-Source-Software als auch
+  als Cloud-Service verfügbar.
 ---
 <h1 id="What-is-Milvus" class="common-anchor-header">Was ist Milvus?<button data-href="#What-is-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Milvus ist eine leistungsstarke, hoch skalierbare Vektordatenbank, die effizient in einer Vielzahl von Umgebungen läuft, von einem Laptop bis hin zu großen verteilten Systemen. Sie ist sowohl als Open-Source-Software als auch als Cloud-Service verfügbar.</p>
-<p>Milvus ist ein Open-Source-Projekt der LF AI &amp; Data Foundation und steht unter der Apache 2.0-Lizenz. Die meisten Mitwirkenden sind Experten aus der High-Performance-Computing (HPC)-Gemeinschaft, die sich auf die Entwicklung von Großsystemen und die Optimierung von hardwaregerechtem Code spezialisiert haben. Zu den wichtigsten Mitwirkenden gehören Experten von Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba und Microsoft.</p>
+<p>Milvus ist ein Open-Source-Projekt der LF AI &amp; Data Foundation und steht unter der Apache 2.0-Lizenz. Die meisten Mitwirkenden sind Experten aus der High-Performance-Computing (HPC)-Gemeinschaft, die sich auf den Aufbau von Großsystemen und die Optimierung von hardwaregerechtem Code spezialisiert haben. Zu den wichtigsten Mitwirkenden gehören Experten von Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba und Microsoft.</p>
 <h2 id="Unstructured-Data-Embeddings-and-Milvus" class="common-anchor-header">Unstrukturierte Daten, Einbettungen und Milvus<button data-href="#Unstructured-Data-Embeddings-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,15 +165,15 @@ summary: >-
 </ul>
 <h3 id="AI-Integrations" class="common-anchor-header">AI-Integrationen</h3><ul>
 <li><p>Einbettungsmodell-Integrationen Einbettungsmodelle konvertieren unstrukturierte Daten in ihre numerische Darstellung im hochdimensionalen Datenraum, so dass Sie sie in Milvus speichern können. Derzeit sind in PyMilvus, dem Python-SDK, mehrere Einbettungsmodelle integriert, so dass Sie Ihre Daten schnell in Vektoreinbettungen aufbereiten können. Details finden Sie unter <a href="/docs/de/embeddings.md">Einbettungsübersicht</a>.</p></li>
-<li><p>Integration von Reranking-Modellen Im Bereich des Information Retrieval und der generativen KI ist ein Reranker ein unverzichtbares Werkzeug, das die Reihenfolge der Ergebnisse der ersten Suche optimiert. PyMilvus integriert auch mehrere Reranking-Modelle, um die Reihenfolge der Ergebnisse aus den ersten Suchen zu optimieren. Einzelheiten finden Sie unter <a href="/docs/de/rerankers-overview.md">Reranker-Übersicht</a>.</p></li>
+<li><p>Integration von Reranking-Modellen Im Bereich des Information Retrieval und der generativen KI ist ein Reranker ein unverzichtbares Werkzeug, das die Reihenfolge der Ergebnisse der ersten Suche optimiert. PyMilvus integriert auch mehrere Reranking-Modelle, um die Reihenfolge der Ergebnisse aus den ersten Suchen zu optimieren. Weitere Informationen finden Sie unter <a href="/docs/de/rerankers-overview.md">Rerankers Übersicht</a>.</p></li>
 <li><p>LangChain und andere KI-Tool-Integrationen In der GenAI-Ära gewinnen Tools wie LangChain viel Aufmerksamkeit von Anwendungsentwicklern. Als Kernkomponente dient Milvus normalerweise als Vektorspeicher in solchen Tools. Um zu erfahren, wie Sie Milvus in Ihre bevorzugten KI-Tools integrieren können, lesen Sie bitte unsere <a href="/docs/de/integrate_with_openai.md">Integrationen</a> und <a href="/docs/de/build-rag-with-milvus.md">Tutorials</a>.</p></li>
 </ul>
 <h3 id="Tools-and-Ecosystem" class="common-anchor-header">Werkzeuge und Ökosystem</h3><ul>
-<li><p>Attu Attu ist eine intuitive Benutzeroberfläche, die Ihnen hilft, Milvus und die darin gespeicherten Daten zu verwalten. Details finden Sie im <a href="https://github.com/zilliztech/attu">Attu-Repository</a>.</p></li>
+<li><p>Attu Attu ist eine intuitiv bedienbare Benutzeroberfläche, mit der Sie Milvus und die darin gespeicherten Daten verwalten können. Details finden Sie im <a href="https://github.com/zilliztech/attu">Attu-Repository</a>.</p></li>
 <li><p>Birdwatcher Birdwatcher ist ein Debugging-Tool für Milvus. Mit ihm können Sie sich mit etcd verbinden, um den Zustand Ihres Milvus-Systems zu überprüfen oder es im laufenden Betrieb zu konfigurieren. Details finden Sie unter <a href="/docs/de/birdwatcher_overview.md">BirdWatcher</a>.</p></li>
-<li><p>Promethus- und Grafana-Integrationen Prometheus ist ein Open-Source-Toolkit zur Systemüberwachung und Alarmierung für Kubernetes. Grafana ist ein Open-Source-Visualisierungs-Stack, der mit allen Datenquellen verbunden werden kann. Sie können Promethus &amp; Grafana als Überwachungsdienstanbieter verwenden, um die Leistung von Milvus distributed visuell zu überwachen. Details finden Sie unter <a href="/docs/de/monitor.md">Bereitstellung von Überwachungsdiensten</a>.</p></li>
+<li><p>Promethus- und Grafana-Integrationen Prometheus ist ein Open-Source-Toolkit zur Systemüberwachung und Alarmierung für Kubernetes. Grafana ist ein Open-Source-Visualisierungs-Stack, der mit allen Datenquellen verbunden werden kann. Sie können Promethus &amp; Grafana als Überwachungsdienstanbieter verwenden, um die Leistung von Milvus distributed visuell zu überwachen. Details finden Sie unter <a href="/docs/de/monitor.md">Bereitstellen von Überwachungsdiensten</a>.</p></li>
 <li><p>Milvus Backup Milvus Backup ist ein Tool, mit dem Benutzer Milvus-Daten sichern und wiederherstellen können. Es bietet sowohl CLI als auch API, um sich in verschiedene Anwendungsszenarien einzupassen. Einzelheiten finden Sie unter <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>.</p></li>
 <li><p>Milvus Capture Data Change (CDC) Milvus-CDC kann inkrementelle Daten in Milvus-Instanzen erfassen und synchronisieren und stellt die Zuverlässigkeit von Geschäftsdaten sicher, indem es sie nahtlos zwischen Quell- und Zielinstanzen überträgt, was eine einfache inkrementelle Sicherung und Notfallwiederherstellung ermöglicht. Einzelheiten finden Sie unter <a href="/docs/de/milvus-cdc-overview.md">Milvus CDC</a>.</p></li>
 <li><p>Milvus-Konnektoren Milvus hat eine Reihe von Konnektoren für die nahtlose Integration von Milvus mit Tools von Drittanbietern, wie z. B. Apache Spark, geplant. Derzeit können Sie unseren Spark-Konnektor verwenden, um Ihre Milvus-Daten für die Verarbeitung durch maschinelles Lernen in Apache Spark einzuspeisen. Einzelheiten finden Sie unter <a href="/docs/de/integrate_with_spark.md">Spark-Milvus Connector</a>.</p></li>
-<li><p>Vector Transmission Services (VTS) Milvus bietet eine Reihe von Tools, mit denen Sie Ihre Daten zwischen einer Milvus-Instanz und einer Reihe von Datenquellen übertragen können, darunter Zilliz-Cluster, Elasticsearch, Postgres (PgVector) und eine andere Milvus-Instanz. Einzelheiten finden Sie unter <a href="/docs/de/migrate_overview.md">Migrationen</a>.</p></li>
+<li><p>Vector Transmission Services (VTS) Milvus bietet eine Reihe von Tools, mit denen Sie Ihre Daten zwischen einer Milvus-Instanz und einer Reihe von Datenquellen übertragen können, darunter Zilliz-Cluster, Elasticsearch, Postgres (PgVector) und eine andere Milvus-Instanz. Einzelheiten finden Sie unter <a href="https://github.com/zilliztech/vts">VTS</a>.</p></li>
 </ul>

@@ -33,8 +33,8 @@ title: 使用磁碟分割金鑰
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，您可以使用磁碟分割來實現資料分隔，並透過限制搜尋範圍到特定磁碟分割來改善搜尋效能。如果您選擇手動管理分區，您可以在一個集合中建立最多 1,024 個分區，並根據特定規則插入實體到這些分區中，這樣您就可以通過限制在特定數量的分區中進行搜索來縮窄搜索範圍。</p>
-<p>Milvus 引入了分區鑰匙，讓您在資料分隔中重複使用分區，以克服在集合中建立分區數量的限制。當建立一個資料集時，您可以使用一個標量欄位作為分割鍵。一旦集合準備就緒，Milvus 就會在集合內建立指定數量的分區，每個分區對應於分區鍵值的範圍。當接收到插入的實體時，Milvus 會根據它們的 Partition Key 值，將它們儲存在不同的分區中。</p>
+    </button></h2><p>在 Milvus 中，您可以使用分區來執行資料分隔，並透過限制搜尋範圍到特定的分區來改善搜尋效能。如果您選擇手動管理分區，您可以在一個集合中建立最多 1,024 個分區，並根據特定規則插入實體到這些分區中，這樣您就可以通過限制在特定數量的分區中進行搜索來縮窄搜索範圍。</p>
+<p>Milvus 引入了分區鑰匙，讓您在資料分隔中重複使用分區，以克服在集合中建立分區數量的限制。當建立一個資料集時，您可以使用一個標量欄位作為分割鍵。一旦集合準備就緒，Milvus 會在集合內建立指定數量的分區，每個分區對應於分區鍵值的範圍。當接收到插入的實體時，Milvus 會根據它們的 Partition Key 值將它們儲存到不同的分區中。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-vs-partition-key.png" alt="Partition v.s. Partition Key" class="doc-image" id="partition-v.s.-partition-key" />
@@ -211,8 +211,9 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition​" class="common-anchor-header">建立篩選條件</h3><p>在啟用了分割區金鑰功能的資料集中執行 ANN 搜尋時，您需要在搜尋請求中包含一個涉及分割區金鑰的篩選表達式。在篩選表達式中，您可以限制 Partition Key 的值在特定範圍內，這樣 Milvus 就會把搜尋範圍限制在相對應的分區內。</p>
-<p>以下範例展示基於 Partition-Key 的篩選方式，以特定的 Partition Key 值和一組 Partition Key 值為基礎。</p>
+<h3 id="Create-Filtering-Condition​" class="common-anchor-header">建立篩選條件</h3><p>在啟用了分割區金鑰功能的資料集中執行 ANN 搜尋時，您需要在搜尋請求中包含涉及分割區金鑰的篩選表達式。在篩選表達式中，您可以限制 Partition Key 的值在特定範圍內，這樣 Milvus 就可以將搜尋範圍限制在相對應的分區內。</p>
+<p>在處理刪除作業時，建議包含指定單一分割區金鑰的篩選表達式，以達到更有效率的刪除。這種方法可將刪除作業限制在特定的分割區內，減少壓縮期間的寫入放大，並節省壓縮和索引的資源。</p>
+<p>以下範例展示基於 Partition-Key 的篩選方式，其基礎為特定的 Partition Key 值和一組 Partition Key 值。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter based on a single partition key value, or​</span>

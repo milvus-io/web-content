@@ -64,12 +64,11 @@ title: Menerapkan Dify dengan Milvus
 <p>Ubah nilai <code translate="no">VECTOR_STORE</code> dalam berkas <code translate="no">.env</code> </p>
 <pre><code translate="no">VECTOR_STORE=milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Ubah konfigurasi Milvus dalam berkas <code translate="no">.env</code> </p>
-<pre><code translate="no">MILVUS_URI=xxx
-MILVUS_TOKEN=xxx
+<p>Pastikan konfigurasi Milvus dalam berkas <code translate="no">.env</code> memiliki baris berikut:</p>
+<pre><code translate="no"><span class="hljs-variable constant_">MILVUS_URI</span>=<span class="hljs-attr">http</span>:<span class="hljs-comment">//host.docker.internal:19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam penyiapan ini, gunakan URI eksternal server, misalnya<code translate="no">http://172.16.16.16:19530</code>, sebagai <code translate="no">MILVUS_URI</code>.</p>
-<p>Untuk <code translate="no">MILVUS_TOKEN</code>, jika Anda belum mengatur token untuk server Milvus Anda, Anda dapat mengaturnya menjadi string kosong seperti <code translate="no">MILVUS_TOKEN=</code>, jika tidak, Anda harus mengaturnya ke token Milvus Anda. Untuk informasi lebih lanjut tentang cara mengatur token di Milvus, Anda dapat merujuk ke <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">halaman otentikasi</a>.</p>
+<p>Perhatikan bahwa dengan menentukan <code translate="no">VECTOR_STORE=milvus</code>, Dify akan memunculkan server Milvus Standalone di docker. Meskipun Anda dapat mengakses server dari luar Docker melalui <code translate="no">http://localhost:19530</code>, agar kontainer Dify lain dapat berbicara dengannya di dalam lingkungan Docker, kontainer tersebut harus terhubung ke nama DNS khusus <code translate="no">host.docker.internal</code>. Dengan demikian, kita menetapkan <code translate="no">http://host.docker.internal:19530</code> sebagai <code translate="no">MILVUS_URI</code>.</p>
+<p>Untuk penerapan produksi, Anda mungkin ingin menyesuaikan autentikasi. Untuk informasi lebih lanjut tentang cara mengatur token atau nama pengguna dan kata sandi di Milvus, Anda dapat merujuk ke <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">halaman autentikasi</a>.</p>
 <h2 id="Start-the-Docker-Containers" class="common-anchor-header">Memulai Kontainer Docker<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -48,27 +48,11 @@ title: Operatori di base
 <li><p><code translate="no">&gt;=</code> (Maggiore o uguale a)</p></li>
 <li><p><code translate="no">&lt;=</code> (Minore o uguale a)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-​" class="common-anchor-header">Esempio 1: Filtraggio con Equal To (<code translate="no">==</code>)</h3><p>Si supponga di avere un campo chiamato <code translate="no">status</code> e di voler trovare tutte le entità in cui <code translate="no">status</code> è &quot;attivo&quot;. Si può usare l'operatore di uguaglianza <code translate="no">==</code>.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-​" class="common-anchor-header">Esempio 2: Filtro con Not Equal To (<code translate="no">!=</code>)</h3><p>Per trovare le entità in cui <code translate="no">status</code> non è &quot;inattivo&quot;.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-​" class="common-anchor-header">Esempio 3: Filtro con Maggiore di (<code translate="no">&gt;</code>)</h3><p>Se si vogliono trovare tutte le entità con un <code translate="no">age</code> superiore a 30.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than-​" class="common-anchor-header">Esempio 4: Filtraggio con Meno di (<code translate="no">&lt;</code>)</h3><p>Per trovare le entità in cui <code translate="no">price</code> è inferiore a 100.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">Esempio 5: Filtro con Maggiore o uguale a (<code translate="no">&gt;=</code>)</h3><p>Se si desidera trovare tutte le entità con <code translate="no">rating</code> maggiore o uguale a 4.</p>
+<h3 id="Example-1-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">Esempio 1: Filtro con Maggiore o uguale a (<code translate="no">&gt;=</code>)</h3><p>Se si desidera trovare tutte le entità con <code translate="no">rating</code> maggiore o uguale a 4.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">Esempio 6: Filtro con meno o uguale a (<code translate="no">&lt;=</code>)</h3><p>Per trovare le entità con <code translate="no">discount</code> minore o uguale a 10%.</p>
+<h3 id="Example-2-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">Esempio 2: Filtro con meno o uguale a (<code translate="no">&lt;=</code>)</h3><p>Per trovare le entità con <code translate="no">discount</code> minore o uguale a 10%.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -149,7 +133,7 @@ title: Operatori di base
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price * quantity &gt; 1000&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Using-Division-​" class="common-anchor-header">Esempio 4: Utilizzo della divisione (<code translate="no">/</code>)</h3><p>Per trovare prodotti in cui <code translate="no">total_price</code> diviso per <code translate="no">quantity</code> è inferiore a 50.</p>
+<h3 id="Example-4-Using-Division-​" class="common-anchor-header">Esempio 4: Utilizzo della divisione (<code translate="no">/</code>)</h3><p>Per trovare i prodotti in cui <code translate="no">total_price</code> diviso per <code translate="no">quantity</code> è inferiore a 50.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;total_price / quantity &lt; 50&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -182,7 +166,7 @@ title: Operatori di base
 <li><p><code translate="no">OR</code>: Combina condizioni in cui almeno una deve essere vera.</p></li>
 <li><p><code translate="no">NOT</code>: Annulla una condizione.</p></li>
 </ul>
-<h3 id="Example-1-Using-AND-to-Combine-Conditions​" class="common-anchor-header">Esempio 1: Uso di <code translate="no">AND</code> per combinare le condizioni</h3><p>Per trovare tutti i prodotti in cui <code translate="no">price</code> è superiore a 100 e <code translate="no">stock</code> è superiore a 50.</p>
+<h3 id="Example-1-Using-AND-to-Combine-Conditions​" class="common-anchor-header">Esempio 1: Utilizzo di <code translate="no">AND</code> per combinare le condizioni</h3><p>Per trovare tutti i prodotti in cui <code translate="no">price</code> è superiore a 100 e <code translate="no">stock</code> è superiore a 50.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &gt; 100 AND stock &gt; 50&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>

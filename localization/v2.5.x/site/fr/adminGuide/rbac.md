@@ -47,11 +47,11 @@ title: RBAC expliqué
    </span> <span class="img-wrapper"> <span>Utilisateurs, rôles et privilèges</span> </span></p>
 <p>Le modèle RBAC se compose de quatre éléments principaux.</p>
 <ul>
-<li><p>**La ressource : **L'entité ressource à laquelle on peut accéder. Il existe trois niveaux de ressources dans Milvus - instance, base de données et collection.</p></li>
-<li><p>**Privilège : **L'autorisation d'effectuer certaines opérations sur les ressources Milvus (par exemple, créer des collections, insérer des données, etc.) </p></li>
-<li><p>**Groupe de privilèges : **Un groupe de privilèges multiples.</p></li>
-<li><p>**Rôle : **Un rôle se compose de deux parties : les privilèges et les ressources. Les privilèges définissent le type d'opérations qu'un rôle peut effectuer, tandis que les ressources définissent les ressources cibles sur lesquelles les opérations peuvent être effectuées. Par exemple, le rôle d'administrateur de base de données peut effectuer des opérations de lecture, d'écriture et de gestion sur certaines bases de données.</p></li>
-<li><p>**Utilisateur : **Un utilisateur est une personne qui utilise Milvus. Chaque utilisateur a un identifiant unique et se voit attribuer un ou plusieurs rôles. </p></li>
+<li><p><strong>La ressource</strong>: L'entité ressource à laquelle il est possible d'accéder. Il existe trois niveaux de ressources dans Milvus : instance, base de données et collection.</p></li>
+<li><p><strong>Privilège</strong>: L'autorisation d'effectuer certaines opérations sur les ressources Milvus (par exemple, créer des collections, insérer des données, etc.) </p></li>
+<li><p><strong>Groupe de privilèges</strong>: Un groupe de privilèges multiples.</p></li>
+<li><p><strong>Rôle</strong>: Un rôle se compose de deux parties : les privilèges et les ressources. Les privilèges définissent le type d'opérations qu'un rôle peut effectuer, tandis que les ressources définissent les ressources cibles sur lesquelles les opérations peuvent être effectuées. Par exemple, le rôle d'administrateur de base de données permet d'effectuer des opérations de lecture, d'écriture et de gestion sur certaines bases de données.</p></li>
+<li><p><strong>Utilisateur</strong>: Un utilisateur est une personne qui utilise Milvus. Chaque utilisateur a un identifiant unique et se voit attribuer un ou plusieurs rôles. </p></li>
 </ul>
 <h2 id="Procedures​" class="common-anchor-header">Procédures<button data-href="#Procedures​" class="anchor-icon" translate="no">
       <svg translate="no"

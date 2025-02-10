@@ -91,7 +91,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>밀버스의 고도로 분리된 시스템 아키텍처</span> </span></p>
-<p>Milvus 자체는 완전히 상태 비저장형이므로 Kubernetes 또는 퍼블릭 클라우드를 통해 쉽게 확장할 수 있습니다. 또한 Milvus 구성 요소는 검색, 데이터 삽입, 인덱싱/압축이라는 가장 중요한 세 가지 작업을 쉽게 병렬화할 수 있는 프로세스로 설계하고 복잡한 로직을 분리하는 등 잘 분리되어 있습니다. 따라서 해당 쿼리 노드, 데이터 노드, 인덱스 노드가 독립적으로 확장 및 축소할 수 있어 성능과 비용 효율성을 최적화할 수 있습니다.</p>
+<p>Milvus 자체는 완전히 상태 비저장형이므로 Kubernetes 또는 퍼블릭 클라우드를 통해 쉽게 확장할 수 있습니다. 또한 Milvus 구성 요소는 검색, 데이터 삽입, 인덱싱/압축이라는 가장 중요한 세 가지 작업을 쉽게 병렬화된 프로세스로 설계하고 복잡한 로직을 분리하는 등 잘 분리되어 있습니다. 따라서 해당 쿼리 노드, 데이터 노드, 인덱스 노드가 독립적으로 확장 및 축소할 수 있어 성능과 비용 효율성을 최적화할 수 있습니다.</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Milvus가 지원하는 검색 유형<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -133,7 +133,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>위에서 언급한 주요 검색 기능 외에도 Milvus는 ANN 검색을 중심으로 구현된 일련의 기능을 제공하므로 그 기능을 충분히 활용할 수 있습니다.</p>
+    </button></h2><p>위에서 언급한 주요 검색 기능 외에도 Milvus는 ANN 검색을 중심으로 구현된 일련의 기능을 제공하여 사용자가 그 기능을 최대한 활용할 수 있도록 합니다.</p>
 <h3 id="API-and-SDK" class="common-anchor-header">API 및 SDK</h3><ul>
 <li><a href="https://milvus.io/api-reference/restful/v2.4.x/About.md">RESTful API</a> (공식)</li>
 <li><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">PyMilvus</a> (Python SDK)(공식)</li>
@@ -173,5 +173,5 @@ summary: >-
 <li><p>Milvus 백업 Milvus 백업은 사용자가 Milvus 데이터를 백업 및 복원할 수 있는 도구입니다. 다양한 애플리케이션 시나리오에 맞게 CLI와 API를 모두 제공합니다. 자세한 내용은 <a href="/docs/ko/milvus_backup_overview.md">Milvus 백업을</a> 참조하세요.</p></li>
 <li><p>Milvus 데이터 변경 캡처(CDC) Milvus-CDC는 Milvus 인스턴스의 증분 데이터를 캡처하고 동기화할 수 있으며, 소스 인스턴스와 대상 인스턴스 간에 원활하게 전송하여 비즈니스 데이터의 안정성을 보장하고 증분 백업 및 재해 복구를 쉽게 수행할 수 있도록 지원합니다. 자세한 내용은 <a href="/docs/ko/milvus-cdc-overview.md">Milvus CDC를</a> 참조하세요.</p></li>
 <li><p>Milvus 커넥터 Milvus는 Apache Spark와 같은 타사 도구와 Milvus를 원활하게 통합할 수 있도록 커넥터 세트를 계획했습니다. 현재, Spark 커넥터를 사용하여 머신 러닝 처리를 위해 Milvus 데이터를 Apache Spark에 공급할 수 있습니다. 자세한 내용은 <a href="/docs/ko/integrate_with_spark.md">Spark-Milvus 커넥터를</a> 참조하세요.</p></li>
-<li><p>벡터 전송 서비스(VTS) Milvus는 Milvus 인스턴스와 Zilliz 클러스터, Elasticsearch, Postgres(PgVector) 및 다른 Milvus 인스턴스를 비롯한 여러 데이터 소스 간에 데이터를 전송할 수 있는 도구 세트를 제공합니다. 자세한 내용은 <a href="/docs/ko/migrate_overview.md">마이그레이션을</a> 참조하세요.</p></li>
+<li><p>벡터 전송 서비스(VTS) Milvus는 Milvus 인스턴스와 Zilliz 클러스터, Elasticsearch, Postgres(PgVector) 및 다른 Milvus 인스턴스를 비롯한 여러 데이터 소스 간에 데이터를 전송할 수 있는 도구 세트를 제공합니다. 자세한 내용은 <a href="https://github.com/zilliztech/vts">VTS를</a> 참조하세요.</p></li>
 </ul>

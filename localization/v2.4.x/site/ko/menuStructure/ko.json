@@ -641,50 +641,6 @@
     ]
   },
   {
-    "label": "Milvus 마이그레이션",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 5,
-    "children": [
-      {
-        "label": "개요",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "마이그레이션 도구 설치",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "Elasticsearch에서",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "Faiss에서",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "Milvus 1.x부터",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Milvus 2.3.x부터",
-        "id": "from-m2x.md",
-        "order": 5,
-        "children": []
-      }
-    ]
-  },
-  {
     "label": "관리 가이드",
     "id": "admin_guide",
     "isMenu": true,
@@ -964,7 +920,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Monitoring",
+            "label": "모니터링",
             "id": "monitoring",
             "order": 0,
             "isMenu": true,

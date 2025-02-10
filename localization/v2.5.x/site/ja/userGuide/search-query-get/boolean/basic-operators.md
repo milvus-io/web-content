@@ -44,27 +44,11 @@ title: ベーシック・オペレーター
 <li><p><code translate="no">&gt;=</code> (大以上)</p></li>
 <li><p><code translate="no">&lt;=</code> 以下</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-​" class="common-anchor-header">例 1：Equal To (<code translate="no">==</code>) によるフィルタリング</h3><p><code translate="no">status</code> というフィールドがあり、<code translate="no">status</code> が &quot;active&quot; であるすべてのエンティティを検索したいとします。等号演算子<code translate="no">==</code> を使用できます。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-​" class="common-anchor-header">例 2：Not Equal To (<code translate="no">!=</code>) を使ったフィルタリング</h3><p><code translate="no">status</code> が「非アクティブ」でないエンティティを見つける。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-​" class="common-anchor-header">例 3：Greater Than (<code translate="no">&gt;</code>) によるフィルタリング</h3><p><code translate="no">age</code> が 30 より大きいエンティティをすべて検索する場合。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than-​" class="common-anchor-header">例4: Less Than (<code translate="no">&lt;</code>) によるフィルタリング</h3><p><code translate="no">price</code> が 100 未満のエンティティを検索する場合。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">例 5：Greater Than または Equal To (<code translate="no">&gt;=</code>) によるフィルタリング</h3><p><code translate="no">rating</code> が 4 以上のエンティティをすべて検索する場合。</p>
+<h3 id="Example-1-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">例 1：Greater Than or Equal To (<code translate="no">&gt;=</code>) によるフィルタリング</h3><p><code translate="no">rating</code> が 4 以上のすべてのエンティティを検索する場合。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">例 6：Less Than or Equal To (<code translate="no">&lt;=</code>) によるフィルタリング</h3><p><code translate="no">discount</code> が 10% 以下のエンティティを検索する場合。</p>
+<h3 id="Example-2-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">例 2：Less Than or Equal To (<code translate="no">&lt;=</code>) によるフィルタリング</h3><p><code translate="no">discount</code> が 10% 以下のエンティティを検索する場合。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -137,7 +121,7 @@ title: ベーシック・オペレーター
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;total == base_price + tax&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-Subtraction--​" class="common-anchor-header">例2: 減算 (<code translate="no">-</code>) の使用</h3><p><code translate="no">quantity</code> が 50 より大きく、<code translate="no">quantity_sold</code> が 30 より小さいエンティティを見つける。</p>
+<h3 id="Example-2-Using-Subtraction--​" class="common-anchor-header">例2：引き算の使用 (<code translate="no">-</code>)</h3><p><code translate="no">quantity</code> が 50 より大きく、<code translate="no">quantity_sold</code> が 30 より小さいエンティティを見つける。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;quantity - quantity_sold &gt; 50&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>

@@ -71,12 +71,12 @@ title: 권한 그룹 만들기
 <li><p><strong>COLL_RW</strong>: 컬렉션 데이터를 읽고 쓸 수 있는 권한 포함</p></li>
 <li><p><strong>COLL_ADMIN</strong>: 컬렉션 데이터를 읽고 쓸 수 있는 권한과 컬렉션을 관리할 수 있는 권한이 포함됩니다.</p></li>
 </ul>
-<p>아래 표에는 컬렉션 수준에서 세 가지 기본 제공 권한 그룹에 포함된 특정 권한이 나열되어 있습니다.</p>
-<table data-block-token="Pi3tdceUjopYWqxsiYTcnnNInoZ"><thead><tr><th data-block-token="DtTYdHoX5oh0qLxHd4ycswM5njh" colspan="1" rowspan="1"><p data-block-token="NV3RdP5IGoyTe7xFRT3cn0obnTh"><strong>**권한**</strong></p>
-</th><th data-block-token="CHdFdtz1FoiZoyxUyz7csms0nGc" colspan="1" rowspan="1"><p data-block-token="C0vfdaj0uohILAxptsacgSj9nxe">**<strong>컬렉션 읽기 전용**</strong></p>
-</th><th data-block-token="SMKYdz1j6o1lUJxrrnKcGF16nKf" colspan="1" rowspan="1"><p data-block-token="X0tCdyXB7ovvsRxEAMtcgsZ7nNc"><strong>컬렉션읽기** **컬렉션쓰기**</strong></p>
-</th><th data-block-token="WuOcdy7ruoOSG7xwypbcGppLnCf" colspan="1" rowspan="1"><p data-block-token="CsvGdWuOaoRecvxBsRfckZKKntd"><strong>**CollectionAdmin**</strong></p>
-</th></tr></thead><tbody><tr><td data-block-token="EqYidYZCSonxmexk3bAcLh1gndg" colspan="1" rowspan="1"><p data-block-token="H85ddLutEo698KxgytncmD0Hnnc">쿼리</p>
+<p>아래 표에는 컬렉션 수준에서 세 가지 기본 제공 권한 그룹에 포함된 특정 권한이 나와 있습니다.</p>
+<table data-block-token="Pi3tdceUjopYWqxsiYTcnnNInoZ"><thead><tr><th data-block-token="DtTYdHoX5oh0qLxHd4ycswM5njh" colspan="1" rowspan="1"><p data-block-token="NV3RdP5IGoyTe7xFRT3cn0obnTh"><strong>권한</strong></p>
+</th><th data-block-token="CHdFdtz1FoiZoyxUyz7csms0nGc" colspan="1" rowspan="1"><p data-block-token="C0vfdaj0uohILAxptsacgSj9nxe"><strong>컬렉션 읽기 전용</strong></p>
+</th><th data-block-token="SMKYdz1j6o1lUJxrrnKcGF16nKf" colspan="1" rowspan="1"><p data-block-token="X0tCdyXB7ovvsRxEAMtcgsZ7nNc"><strong>컬렉션 읽기/쓰기</strong></p>
+</th><th data-block-token="WuOcdy7ruoOSG7xwypbcGppLnCf" colspan="1" rowspan="1"><p data-block-token="CsvGdWuOaoRecvxBsRfckZKKntd"><strong>CollectionAdmin</strong></p>
+</th></tr></thead><tbody><tr><td data-block-token="EqYidYZCSonxmexk3bAcLh1gndg" colspan="1" rowspan="1"><p data-block-token="H85ddLutEo698KxgytncmD0Hnnc">Query</p>
 </td><td data-block-token="VMjndLAaVo9V7bxe4KPcE6f8nNc" colspan="1" rowspan="1"><p data-block-token="MvCidzzimoZTs0xioR4cmtZ5nof">✔️</p>
 </td><td data-block-token="EoD8dGhNEoAJOnxB7Zjc5E9Jnyd" colspan="1" rowspan="1"><p data-block-token="J2OMdV9XXo8dEsxBlLqcmXmZnhe">✔️</p>
 </td><td data-block-token="FmVwdpcMKoAaIpxpBZlcrTF8nje" colspan="1" rowspan="1"><p data-block-token="F6bCd3IzUoPDaDxXwIucE2W1nrx">✔️</p>
@@ -191,15 +191,15 @@ title: 권한 그룹 만들기
 <li><p><strong>DB_Admin</strong>: 데이터베이스 데이터를 읽고 쓸 수 있는 권한과 데이터베이스를 관리할 수 있는 권한을 포함합니다.</p></li>
 </ul>
 <p>아래 표에는 데이터베이스 수준에서 세 가지 기본 제공 권한 그룹에 포함된 특정 권한이 나열되어 있습니다.</p>
-<table data-block-token="ULeKdJqFioDSsjxdw26cDExDn2b"><thead><tr><th data-block-token="FZpEd81iZoCJYrxi50yc1chLncd" colspan="1" rowspan="1"><p data-block-token="SHAldLGZToExKYxwjVycaNQ1nHd"><strong>**권한**</strong></p>
-</th><th data-block-token="UVjkdAnzgo4ROkxL7bCcgx9xnGf" colspan="1" rowspan="1"><p data-block-token="FfCIdbxfjodDYWx1uXMc6KzPnsZ">**<strong>데이터베이스 읽기 전용**</strong></p>
-</th><th data-block-token="WSIgdzPmhoQLaFxJ9FGcj5mRnzh" colspan="1" rowspan="1"><p data-block-token="Oc2idsHzqoHzwyxhoe2c7dtxncd">**<strong>데이터베이스 읽기/쓰기**</strong></p>
-</th><th data-block-token="JTred0WFUoRO5Dx9DgfcTAV3nrf" colspan="1" rowspan="1"><p data-block-token="WWHOdfbfVo0i8txO7tucAMAknAo"><strong>**DatabaseAdmin**</strong></p>
+<table data-block-token="ULeKdJqFioDSsjxdw26cDExDn2b"><thead><tr><th data-block-token="FZpEd81iZoCJYrxi50yc1chLncd" colspan="1" rowspan="1"><p data-block-token="SHAldLGZToExKYxwjVycaNQ1nHd"><strong>권한</strong></p>
+</th><th data-block-token="UVjkdAnzgo4ROkxL7bCcgx9xnGf" colspan="1" rowspan="1"><p data-block-token="FfCIdbxfjodDYWx1uXMc6KzPnsZ"><strong>데이터베이스 읽기 전용</strong></p>
+</th><th data-block-token="WSIgdzPmhoQLaFxJ9FGcj5mRnzh" colspan="1" rowspan="1"><p data-block-token="Oc2idsHzqoHzwyxhoe2c7dtxncd"><strong>데이터베이스 읽기/쓰기</strong></p>
+</th><th data-block-token="JTred0WFUoRO5Dx9DgfcTAV3nrf" colspan="1" rowspan="1"><p data-block-token="WWHOdfbfVo0i8txO7tucAMAknAo"><strong>DatabaseAdmin</strong></p>
 </th></tr></thead><tbody><tr><td data-block-token="JX6adkIcEoCil9xzvxBc7j1XnOd" colspan="1" rowspan="1"><p data-block-token="YvMmdQvUNoViSPxA2ekcsgrhnqf">ShowCollections</p>
 </td><td data-block-token="FXt6dOWyZo5b14xd3zmcrvAKn8d" colspan="1" rowspan="1"><p data-block-token="PAGYdPiZCox710xmtZrcgqnXnef">✔️</p>
 </td><td data-block-token="EFcCdtsOSoOkKfxxJAMcFdnknsd" colspan="1" rowspan="1"><p data-block-token="Pz21dPCLmoI4GIxhIdpc80yvnKb">✔️</p>
 </td><td data-block-token="GcMzdOm71oYNJaxgMj4cyoednf1" colspan="1" rowspan="1"><p data-block-token="MWKId16APof76XxhQrfcHhq7nqb">✔️</p>
-</td></tr><tr><td data-block-token="QAhFdxuMuovVKYxI7uuctRjonVe" colspan="1" rowspan="1"><p data-block-token="OUhRdhyq0oE7xxx4zVZcHy7CnRh">DescribeDatabase</p>
+</td></tr><tr><td data-block-token="QAhFdxuMuovVKYxI7uuctRjonVe" colspan="1" rowspan="1"><p data-block-token="OUhRdhyq0oE7xxx4zVZcHy7CnRh">데이터베이스 설명</p>
 </td><td data-block-token="SJtQdYO1NopTVJxSKGJcL7donng" colspan="1" rowspan="1"><p data-block-token="QxpOdqQxjomyUWxnblncTCvKntg">✔️</p>
 </td><td data-block-token="Yq60dTmGzoFZHKxuS2tciSzInPg" colspan="1" rowspan="1"><p data-block-token="BsBVdIa7doEaaCxzqqZc2pZRnrg">✔️</p>
 </td><td data-block-token="Nn57dkcuYoHxxqxOCKkcKH5Jn9A" colspan="1" rowspan="1"><p data-block-token="AdV1dovwsoV48QxdCT8cIq7zndY">✔️</p>
@@ -221,11 +221,11 @@ title: 권한 그룹 만들기
 <li><p><strong>Cluster_RW</strong>: 인스턴스 데이터를 읽고 쓸 수 있는 권한을 포함합니다.</p></li>
 <li><p><strong>Cluster_Admin</strong>: 인스턴스 데이터 읽기 및 쓰기 권한과 인스턴스 관리 권한이 포함됩니다.</p></li>
 </ul>
-<p>아래 표에는 인스턴스 수준에서 세 가지 기본 제공 권한 그룹에 포함된 특정 권한이 나열되어 있습니다.</p>
-<table data-block-token="SDHtdzccpoaNdOxspzFcdkwEnu9"><thead><tr><th data-block-token="Pb9FdCS05ozBO9xBo65chofen5d" colspan="1" rowspan="1"><p data-block-token="OgnXdgTdyoKCBnxlyfac4Q5once"><strong>**권한**</strong></p>
-</th><th data-block-token="Y6xPdMNjxomIPwxJB7Xczpm6nkc" colspan="1" rowspan="1"><p data-block-token="CO9bdrfCPoohejxhezZcDS6gnJr">**<strong>클러스터 읽기 전용**</strong></p>
-</th><th data-block-token="ALGjdHwDgo7XOsxfGWwcA6RNn4f" colspan="1" rowspan="1"><p data-block-token="D4xfdML8VoDPqWxni5zc4Rjknte">**<strong>클러스터 읽기/쓰기**</strong></p>
-</th><th data-block-token="QaTZdG7Pgo3rZ4xCk8lcqwhFnoh" colspan="1" rowspan="1"><p data-block-token="VmTSdQcJboLLNHxV7b8cgfDinVf"><strong>**ClusterAdmin**</strong></p>
+<p>아래 표에는 인스턴스 수준에서 세 가지 기본 제공 권한 그룹에 포함된 특정 권한이 나와 있습니다.</p>
+<table data-block-token="SDHtdzccpoaNdOxspzFcdkwEnu9"><thead><tr><th data-block-token="Pb9FdCS05ozBO9xBo65chofen5d" colspan="1" rowspan="1"><p data-block-token="OgnXdgTdyoKCBnxlyfac4Q5once"><strong>권한</strong></p>
+</th><th data-block-token="Y6xPdMNjxomIPwxJB7Xczpm6nkc" colspan="1" rowspan="1"><p data-block-token="CO9bdrfCPoohejxhezZcDS6gnJr"><strong>클러스터 읽기 전용</strong></p>
+</th><th data-block-token="ALGjdHwDgo7XOsxfGWwcA6RNn4f" colspan="1" rowspan="1"><p data-block-token="D4xfdML8VoDPqWxni5zc4Rjknte"><strong>ClusterReadWrite</strong></p>
+</th><th data-block-token="QaTZdG7Pgo3rZ4xCk8lcqwhFnoh" colspan="1" rowspan="1"><p data-block-token="VmTSdQcJboLLNHxV7b8cgfDinVf"><strong>ClusterAdmin</strong></p>
 </th></tr></thead><tbody><tr><td data-block-token="Byzbdv4XboCS74xhuzlcuVxZnKz" colspan="1" rowspan="1"><p data-block-token="SraLd2bxXo2rDZxCMzjcEHuXnGd">ListDatabases</p>
 </td><td data-block-token="Uc9Odk7c6owHn9xu7jUc9hJGnbg" colspan="1" rowspan="1"><p data-block-token="Ol51d8BzwovVTSxlvpEcLi7znhg">✔️</p>
 </td><td data-block-token="Idtudbo1hoJGtRxB00wcAyZ1nic" colspan="1" rowspan="1"><p data-block-token="PkFFdIkLJoJ3Asx3eZ1cvWHVn7f">✔️</p>

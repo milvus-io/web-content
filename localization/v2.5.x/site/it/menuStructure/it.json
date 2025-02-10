@@ -348,7 +348,7 @@
             "children": []
           },
           {
-            "label": "Creare una collezione istantanea",
+            "label": "Creare istantaneamente una collezione",
             "id": "create-collection-instantly.md",
             "order": 2,
             "children": []
@@ -565,7 +565,7 @@
                     "children": []
                   },
                   {
-                    "label": "Stop",
+                    "label": "Fermarsi",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -952,50 +952,6 @@
         "label": "Importazione dei dati",
         "id": "import-data.md",
         "order": 1,
-        "children": []
-      }
-    ]
-  },
-  {
-    "label": "Migrazione di Milvus",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 6,
-    "children": [
-      {
-        "label": "Panoramica",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Installare lo strumento di migrazione",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "Da Elasticsearch",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "Da Faiss",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "Da Milvus 1.x",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Da Milvus 2.3.x",
-        "id": "from-m2x.md",
-        "order": 5,
         "children": []
       }
     ]
@@ -1407,7 +1363,7 @@
             "children": []
           },
           {
-            "label": "Compattazione dei cluster",
+            "label": "Compattazione del clustering",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1427,17 +1383,42 @@
             "children": []
           },
           {
-            "label": "Utenti, privilegi e ruoli",
-            "id": "users_and_roles.md",
-            "order": 10,
-            "children": []
-          },
-          {
             "label": "Abilitare RBAC",
-            "id": "rbac.md",
+            "id": "rbac",
             "order": 1,
             "isMenu": true,
-            "children": []
+            "children": [
+              {
+                "label": "Panoramica di RBAC",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Utenti, privilegi e ruoli",
+                "id": "users_and_roles.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Gruppo Privilegio",
+                "id": "privilege_group.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Concessione di privilegi",
+                "id": "grant_privileges.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Ruoli delle sovvenzioni",
+                "id": "grant_roles.md",
+                "order": 4,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Crittografia in transito",
@@ -1516,7 +1497,7 @@
                 "children": []
               },
               {
-                "label": "Migrazione tra istanze e bucket",
+                "label": "Migrare tra istanze e bucket",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -1543,7 +1524,7 @@
             "children": []
           },
           {
-            "label": "Install Guides",
+            "label": "Guide all'installazione",
             "id": "birdwatcher_install_guides.md",
             "order": 1,
             "children": []
@@ -1629,9 +1610,16 @@
         ]
       },
       {
+        "label": "Milvus VTS",
+        "id": "milvus_vts",
+        "order": 6,
+        "externalLink": "https://github.com/zilliztech/vts",
+        "children": []
+      },
+      {
         "label": "Strumento di dimensionamento Milvus",
         "id": "sizing",
-        "order": 6,
+        "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
       },
@@ -1852,7 +1840,7 @@
             "children": []
           },
           {
-            "label": "Dificare",
+            "label": "Dify",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []
@@ -2178,7 +2166,7 @@
             "children": []
           },
           {
-            "label": "Ricerca della somiglianza audio",
+            "label": "Ricerca di somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

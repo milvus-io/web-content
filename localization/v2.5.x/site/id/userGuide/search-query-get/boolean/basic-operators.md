@@ -49,27 +49,11 @@ title: Operator Dasar
 <li><p><code translate="no">&gt;=</code> (Lebih besar dari atau sama dengan)</p></li>
 <li><p><code translate="no">&lt;=</code> (Kurang dari atau sama dengan)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-​" class="common-anchor-header">Contoh 1: Memfilter dengan Sama Dengan (<code translate="no">==</code>)</h3><p>Asumsikan Anda memiliki sebuah bidang bernama <code translate="no">status</code> dan Anda ingin menemukan semua entitas di mana <code translate="no">status</code> &quot;aktif&quot;. Anda dapat menggunakan operator penyetaraan <code translate="no">==</code>.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-​" class="common-anchor-header">Contoh 2: Memfilter dengan Tidak Sama Dengan (<code translate="no">!=</code>)</h3><p>Untuk menemukan entitas di mana <code translate="no">status</code> tidak &quot;tidak aktif&quot;.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-​" class="common-anchor-header">Contoh 3: Memfilter dengan Lebih Besar Dari (<code translate="no">&gt;</code>)</h3><p>Jika Anda ingin menemukan semua entitas dengan <code translate="no">age</code> lebih besar dari 30.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than-​" class="common-anchor-header">Contoh 4: Memfilter dengan Kurang Dari (<code translate="no">&lt;</code>)</h3><p>Untuk menemukan entitas dengan <code translate="no">price</code> kurang dari 100.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">Contoh 5: Memfilter dengan Lebih Besar Dari atau Sama Dengan (<code translate="no">&gt;=</code>)</h3><p>Jika Anda ingin menemukan semua entitas dengan <code translate="no">rating</code> lebih besar dari atau sama dengan 4.</p>
+<h3 id="Example-1-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">Contoh 1: Memfilter dengan Lebih besar dari atau sama dengan (<code translate="no">&gt;=</code>)</h3><p>Jika Anda ingin menemukan semua entitas dengan <code translate="no">rating</code> lebih besar dari atau sama dengan 4.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">Contoh 6: Memfilter dengan Kurang Dari atau Sama Dengan (<code translate="no">&lt;=</code>)</h3><p>Untuk menemukan entitas dengan <code translate="no">discount</code> kurang dari atau sama dengan 10%.</p>
+<h3 id="Example-2-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">Contoh 2: Memfilter dengan Kurang Dari atau Sama Dengan (<code translate="no">&lt;=</code>)</h3><p>Untuk menemukan entitas dengan <code translate="no">discount</code> kurang dari atau sama dengan 10%.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>

@@ -64,12 +64,11 @@ title: نشر Dify مع ميلفوس
 <p>قم بتغيير القيمة <code translate="no">VECTOR_STORE</code> في الملف <code translate="no">.env</code> </p>
 <pre><code translate="no">VECTOR_STORE=milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>قم بتغيير تكوين ميلفوس في الملف <code translate="no">.env</code> </p>
-<pre><code translate="no">MILVUS_URI=xxx
-MILVUS_TOKEN=xxx
+<p>تأكد من أن تكوين ميلفوس في الملف <code translate="no">.env</code> يحتوي على السطر التالي:</p>
+<pre><code translate="no"><span class="hljs-variable constant_">MILVUS_URI</span>=<span class="hljs-attr">http</span>:<span class="hljs-comment">//host.docker.internal:19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا الإعداد، يرجى استخدام URI الخارجي للخادم، على سبيل المثال<code translate="no">http://172.16.16.16:19530</code> ، كـ <code translate="no">MILVUS_URI</code>.</p>
-<p>بالنسبة إلى <code translate="no">MILVUS_TOKEN</code> ، إذا لم تقم بتعيين رمز مميز لخادم ميلفوس الخاص بك، يمكنك تعيينه إلى سلسلة فارغة مثل <code translate="no">MILVUS_TOKEN=</code> ، وإلا فإنك تحتاج إلى تعيينه إلى رمز ميلفوس الخاص بك. لمزيد من المعلومات حول كيفية تعيين الرمز المميز في Milvus، يمكنك الرجوع إلى <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">صفحة المصادقة</a>.</p>
+<p>لاحظ أنه من خلال تحديد <code translate="no">VECTOR_STORE=milvus</code> ، سيقوم Dify بإحضار خادم Milvus Standalone في Docker. على الرغم من أنه يمكنك الوصول إلى الخادم من خارج Docker من خلال <code translate="no">http://localhost:19530</code> ، إلا أنه لكي تتمكن حاويات Dify الأخرى من التحدث إليه داخل بيئة Docker، فإنها تحتاج إلى الاتصال باسم DNS الخاص <code translate="no">host.docker.internal</code>. وهكذا قمنا بتعيين <code translate="no">http://host.docker.internal:19530</code> ك <code translate="no">MILVUS_URI</code>.</p>
+<p>لنشر الإنتاج، قد ترغب في تخصيص المصادقة. للمزيد من المعلومات حول كيفية تعيين الرمز المميز أو اسم المستخدم وكلمة المرور في Milvus، يمكنك الرجوع إلى <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">صفحة المصادقة</a>.</p>
 <h2 id="Start-the-Docker-Containers" class="common-anchor-header">ابدأ تشغيل حاويات Docker<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

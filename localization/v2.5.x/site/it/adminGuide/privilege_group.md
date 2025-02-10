@@ -45,7 +45,7 @@ title: Creare un gruppo di privilegi
 <p>Come mostrato nella figura precedente, si supponga di dover concedere tre diversi privilegi a un ruolo.</p>
 <ul>
 <li><p>Se non si utilizza un gruppo di privilegi, è necessario concedere i privilegi tre volte.</p></li>
-<li><p>Se si utilizza un gruppo di privilegi, è sufficiente creare un gruppo di privilegi e aggiungere i tre privilegi a questo gruppo di privilegi e concedere il gruppo di privilegi al ruolo A.</p></li>
+<li><p>Se si usa un gruppo di privilegi, è sufficiente creare un gruppo di privilegi, aggiungere i tre privilegi a questo gruppo di privilegi e concedere il gruppo di privilegi al ruolo A.</p></li>
 </ul>
 <p>Utilizzando un gruppo di privilegi, è possibile concedere più privilegi in blocco a un ruolo.</p>
 <h2 id="Built-in-privilege-groups​" class="common-anchor-header">Gruppi di privilegi integrati<button data-href="#Built-in-privilege-groups​" class="anchor-icon" translate="no">
@@ -74,10 +74,10 @@ title: Creare un gruppo di privilegi
 <li><p><strong>COLL_ADMIN</strong>: include i privilegi di lettura e scrittura dei dati della raccolta e di gestione delle raccolte.</p></li>
 </ul>
 <p>La tabella seguente elenca i privilegi specifici inclusi nei tre gruppi di privilegi integrati a livello di raccolta.</p>
-<table data-block-token="Pi3tdceUjopYWqxsiYTcnnNInoZ"><thead><tr><th data-block-token="DtTYdHoX5oh0qLxHd4ycswM5njh" colspan="1" rowspan="1"><p data-block-token="NV3RdP5IGoyTe7xFRT3cn0obnTh"><strong>**Privilegio**</strong></p>
-</th><th data-block-token="CHdFdtz1FoiZoyxUyz7csms0nGc" colspan="1" rowspan="1"><p data-block-token="C0vfdaj0uohILAxptsacgSj9nxe"><strong>**CollectionReadOnly**</strong></p>
-</th><th data-block-token="SMKYdz1j6o1lUJxrrnKcGF16nKf" colspan="1" rowspan="1"><p data-block-token="X0tCdyXB7ovvsRxEAMtcgsZ7nNc"><strong>**CollectionReadWrite**</strong></p>
-</th><th data-block-token="WuOcdy7ruoOSG7xwypbcGppLnCf" colspan="1" rowspan="1"><p data-block-token="CsvGdWuOaoRecvxBsRfckZKKntd"><strong>**CollectionAdmin**</strong></p>
+<table data-block-token="Pi3tdceUjopYWqxsiYTcnnNInoZ"><thead><tr><th data-block-token="DtTYdHoX5oh0qLxHd4ycswM5njh" colspan="1" rowspan="1"><p data-block-token="NV3RdP5IGoyTe7xFRT3cn0obnTh"><strong>Privilegio</strong></p>
+</th><th data-block-token="CHdFdtz1FoiZoyxUyz7csms0nGc" colspan="1" rowspan="1"><p data-block-token="C0vfdaj0uohILAxptsacgSj9nxe"><strong>RaccoltaSolo lettura</strong></p>
+</th><th data-block-token="SMKYdz1j6o1lUJxrrnKcGF16nKf" colspan="1" rowspan="1"><p data-block-token="X0tCdyXB7ovvsRxEAMtcgsZ7nNc"><strong>RaccoltaLeggiScrivi</strong></p>
+</th><th data-block-token="WuOcdy7ruoOSG7xwypbcGppLnCf" colspan="1" rowspan="1"><p data-block-token="CsvGdWuOaoRecvxBsRfckZKKntd"><strong>Amministratore della raccolta</strong></p>
 </th></tr></thead><tbody><tr><td data-block-token="EqYidYZCSonxmexk3bAcLh1gndg" colspan="1" rowspan="1"><p data-block-token="H85ddLutEo698KxgytncmD0Hnnc">Interrogazione</p>
 </td><td data-block-token="VMjndLAaVo9V7bxe4KPcE6f8nNc" colspan="1" rowspan="1"><p data-block-token="MvCidzzimoZTs0xioR4cmtZ5nof">✔️</p>
 </td><td data-block-token="EoD8dGhNEoAJOnxB7Zjc5E9Jnyd" colspan="1" rowspan="1"><p data-block-token="J2OMdV9XXo8dEsxBlLqcmXmZnhe">✔️</p>
@@ -193,10 +193,10 @@ title: Creare un gruppo di privilegi
 <li><p><strong>DB_Admin</strong>: include i privilegi di lettura e scrittura dei dati del database e di gestione dei database.</p></li>
 </ul>
 <p>La tabella seguente elenca i privilegi specifici inclusi nei tre gruppi di privilegi integrati a livello di database.</p>
-<table data-block-token="ULeKdJqFioDSsjxdw26cDExDn2b"><thead><tr><th data-block-token="FZpEd81iZoCJYrxi50yc1chLncd" colspan="1" rowspan="1"><p data-block-token="SHAldLGZToExKYxwjVycaNQ1nHd"><strong>**Privilegio**</strong></p>
-</th><th data-block-token="UVjkdAnzgo4ROkxL7bCcgx9xnGf" colspan="1" rowspan="1"><p data-block-token="FfCIdbxfjodDYWx1uXMc6KzPnsZ"><strong>**Lettura del database**</strong></p>
-</th><th data-block-token="WSIgdzPmhoQLaFxJ9FGcj5mRnzh" colspan="1" rowspan="1"><p data-block-token="Oc2idsHzqoHzwyxhoe2c7dtxncd"><strong>**LetturaDatabaseScrittura**</strong></p>
-</th><th data-block-token="JTred0WFUoRO5Dx9DgfcTAV3nrf" colspan="1" rowspan="1"><p data-block-token="WWHOdfbfVo0i8txO7tucAMAknAo">**<strong>Admin del database**</strong></p>
+<table data-block-token="ULeKdJqFioDSsjxdw26cDExDn2b"><thead><tr><th data-block-token="FZpEd81iZoCJYrxi50yc1chLncd" colspan="1" rowspan="1"><p data-block-token="SHAldLGZToExKYxwjVycaNQ1nHd"><strong>Privilegio</strong></p>
+</th><th data-block-token="UVjkdAnzgo4ROkxL7bCcgx9xnGf" colspan="1" rowspan="1"><p data-block-token="FfCIdbxfjodDYWx1uXMc6KzPnsZ"><strong>DatabaseSolo lettura</strong></p>
+</th><th data-block-token="WSIgdzPmhoQLaFxJ9FGcj5mRnzh" colspan="1" rowspan="1"><p data-block-token="Oc2idsHzqoHzwyxhoe2c7dtxncd"><strong>DatabaseLeggiScrivi</strong></p>
+</th><th data-block-token="JTred0WFUoRO5Dx9DgfcTAV3nrf" colspan="1" rowspan="1"><p data-block-token="WWHOdfbfVo0i8txO7tucAMAknAo"><strong>DatabaseAdmin</strong></p>
 </th></tr></thead><tbody><tr><td data-block-token="JX6adkIcEoCil9xzvxBc7j1XnOd" colspan="1" rowspan="1"><p data-block-token="YvMmdQvUNoViSPxA2ekcsgrhnqf">Mostra collezioni</p>
 </td><td data-block-token="FXt6dOWyZo5b14xd3zmcrvAKn8d" colspan="1" rowspan="1"><p data-block-token="PAGYdPiZCox710xmtZrcgqnXnef">✔️</p>
 </td><td data-block-token="EFcCdtsOSoOkKfxxJAMcFdnknsd" colspan="1" rowspan="1"><p data-block-token="Pz21dPCLmoI4GIxhIdpc80yvnKb">✔️</p>
@@ -224,10 +224,10 @@ title: Creare un gruppo di privilegi
 <li><p><strong>Cluster_Admin</strong>: include i privilegi di lettura e scrittura dei dati di istanza e di gestione delle istanze.</p></li>
 </ul>
 <p>La tabella seguente elenca i privilegi specifici inclusi nei tre gruppi di privilegi incorporati a livello di istanza.</p>
-<table data-block-token="SDHtdzccpoaNdOxspzFcdkwEnu9"><thead><tr><th data-block-token="Pb9FdCS05ozBO9xBo65chofen5d" colspan="1" rowspan="1"><p data-block-token="OgnXdgTdyoKCBnxlyfac4Q5once"><strong>**Privilegio**</strong></p>
-</th><th data-block-token="Y6xPdMNjxomIPwxJB7Xczpm6nkc" colspan="1" rowspan="1"><p data-block-token="CO9bdrfCPoohejxhezZcDS6gnJr"><strong>**ClusterReadOnly**</strong></p>
-</th><th data-block-token="ALGjdHwDgo7XOsxfGWwcA6RNn4f" colspan="1" rowspan="1"><p data-block-token="D4xfdML8VoDPqWxni5zc4Rjknte"><strong>**ClusterReadWrite**</strong></p>
-</th><th data-block-token="QaTZdG7Pgo3rZ4xCk8lcqwhFnoh" colspan="1" rowspan="1"><p data-block-token="VmTSdQcJboLLNHxV7b8cgfDinVf"><strong>**ClusterAdmin**</strong></p>
+<table data-block-token="SDHtdzccpoaNdOxspzFcdkwEnu9"><thead><tr><th data-block-token="Pb9FdCS05ozBO9xBo65chofen5d" colspan="1" rowspan="1"><p data-block-token="OgnXdgTdyoKCBnxlyfac4Q5once"><strong>Privilegio</strong></p>
+</th><th data-block-token="Y6xPdMNjxomIPwxJB7Xczpm6nkc" colspan="1" rowspan="1"><p data-block-token="CO9bdrfCPoohejxhezZcDS6gnJr"><strong>ClusterSoloLettura</strong></p>
+</th><th data-block-token="ALGjdHwDgo7XOsxfGWwcA6RNn4f" colspan="1" rowspan="1"><p data-block-token="D4xfdML8VoDPqWxni5zc4Rjknte"><strong>ClusterLeggiScrivi</strong></p>
+</th><th data-block-token="QaTZdG7Pgo3rZ4xCk8lcqwhFnoh" colspan="1" rowspan="1"><p data-block-token="VmTSdQcJboLLNHxV7b8cgfDinVf"><strong>ClusterAdmin</strong></p>
 </th></tr></thead><tbody><tr><td data-block-token="Byzbdv4XboCS74xhuzlcuVxZnKz" colspan="1" rowspan="1"><p data-block-token="SraLd2bxXo2rDZxCMzjcEHuXnGd">ElencoDatabase</p>
 </td><td data-block-token="Uc9Odk7c6owHn9xu7jUc9hJGnbg" colspan="1" rowspan="1"><p data-block-token="Ol51d8BzwovVTSxlvpEcLi7znhg">✔️</p>
 </td><td data-block-token="Idtudbo1hoJGtRxB00wcAyZ1nic" colspan="1" rowspan="1"><p data-block-token="PkFFdIkLJoJ3Asx3eZ1cvWHVn7f">✔️</p>

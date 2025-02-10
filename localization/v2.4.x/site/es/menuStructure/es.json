@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Milvus Adoptantes",
+        "label": "Adoptantes de Milvus",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -243,7 +243,7 @@
         "children": []
       },
       {
-        "label": "Consistency",
+        "label": "Coherencia",
         "id": "consistency.md",
         "order": 2,
         "children": []
@@ -637,50 +637,6 @@
             "children": []
           }
         ]
-      }
-    ]
-  },
-  {
-    "label": "Migración Milvus",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 5,
-    "children": [
-      {
-        "label": "Visión general",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Instalar la herramienta de migración",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "Desde Elasticsearch",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "De Faiss",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "Desde Milvus 1.x",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Desde Milvus 2.3.x",
-        "id": "from-m2x.md",
-        "order": 5,
-        "children": []
       }
     ]
   },

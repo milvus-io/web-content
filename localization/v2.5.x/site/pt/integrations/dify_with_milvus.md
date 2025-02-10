@@ -64,13 +64,12 @@ title: Implantação do Dify com o Milvus
 <p>Alterar o valor <code translate="no">VECTOR_STORE</code> no ficheiro <code translate="no">.env</code> </p>
 <pre><code translate="no">VECTOR_STORE=milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Alterar a configuração do Milvus no ficheiro <code translate="no">.env</code> </p>
-<pre><code translate="no">MILVUS_URI=xxx
-MILVUS_TOKEN=xxx
+<p>Certifique-se de que a configuração do Milvus no ficheiro <code translate="no">.env</code> tem a seguinte linha:</p>
+<pre><code translate="no"><span class="hljs-variable constant_">MILVUS_URI</span>=<span class="hljs-attr">http</span>:<span class="hljs-comment">//host.docker.internal:19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nesta configuração, utilize o URI externo do servidor, por exemplo,<code translate="no">http://172.16.16.16:19530</code>, como o seu <code translate="no">MILVUS_URI</code>.</p>
-<p>Para o <code translate="no">MILVUS_TOKEN</code>, se não tiver definido um token para o seu servidor Milvus, pode defini-lo como uma cadeia vazia como <code translate="no">MILVUS_TOKEN=</code>, caso contrário, tem de o definir como o seu token Milvus. Para mais informações sobre como definir o token no Milvus, pode consultar a <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">página de autenticação</a>.</p>
-<h2 id="Start-the-Docker-Containers" class="common-anchor-header">Iniciar os contêineres do Docker<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
+<p>Observe que, ao especificar <code translate="no">VECTOR_STORE=milvus</code>, o Dify exibirá um servidor Milvus Standalone no Docker. Mesmo que possa aceder ao servidor a partir do exterior do Docker através de <code translate="no">http://localhost:19530</code>, para que outros contentores Dify falem com ele dentro do ambiente Docker, necessitam de se ligar ao nome DNS especial <code translate="no">host.docker.internal</code>. Assim, definimos <code translate="no">http://host.docker.internal:19530</code> como <code translate="no">MILVUS_URI</code>.</p>
+<p>Para a implementação de produção, poderá querer personalizar a autenticação. Para obter mais informações sobre como definir o token ou o nome de utilizador e a palavra-passe no Milvus, pode consultar a <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">página de autenticação</a>.</p>
+<h2 id="Start-the-Docker-Containers" class="common-anchor-header">Iniciar os contentores Docker<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,7 +84,7 @@ MILVUS_TOKEN=xxx
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Escolha o comando apropriado para iniciar os contentores com base na versão do Docker Compose no seu sistema. Você pode usar o comando <code translate="no">$ docker compose version</code> para verificar a versão e consultar a documentação do Docker para obter mais informações:</p>
+    </button></h2><p>Escolha o comando apropriado para iniciar os contentores com base na versão do Docker Compose no seu sistema. Pode utilizar o comando <code translate="no">$ docker compose version</code> para verificar a versão e consultar a documentação do Docker para obter mais informações:</p>
 <p>Se você tiver o Docker Compose V2, use o seguinte comando:</p>
 <pre><code translate="no" class="language-shell">docker compose up -d
 <button class="copy-code-btn"></button></code></pre>

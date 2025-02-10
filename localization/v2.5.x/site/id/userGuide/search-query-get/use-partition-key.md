@@ -211,8 +211,9 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition​" class="common-anchor-header">Membuat Kondisi Pemfilteran</h3><p>Ketika melakukan pencarian ANN dalam koleksi dengan fitur Partition Key diaktifkan, Anda perlu menyertakan ekspresi pemfilteran yang melibatkan Partition Key dalam permintaan pencarian. Dalam ekspresi pemfilteran, Anda dapat membatasi nilai Partition Key dalam rentang tertentu sehingga Milvus membatasi cakupan pencarian dalam partisi yang sesuai.</p>
-<p>Contoh berikut ini menunjukkan pemfilteran berbasis Kunci Partisi berdasarkan nilai Kunci Partisi tertentu dan sekumpulan nilai Kunci Partisi.</p>
+<h3 id="Create-Filtering-Condition​" class="common-anchor-header">Membuat Kondisi Pemfilteran</h3><p>Ketika melakukan pencarian ANN dalam koleksi dengan fitur Partition Key diaktifkan, Anda perlu menyertakan ekspresi pemfilteran yang melibatkan Partition Key dalam permintaan pencarian. Dalam ekspresi pemfilteran, Anda dapat membatasi nilai Kunci Partisi dalam rentang tertentu sehingga Milvus membatasi cakupan pencarian dalam partisi yang sesuai.</p>
+<p>Ketika berurusan dengan operasi penghapusan, disarankan untuk menyertakan ekspresi penyaringan yang menentukan kunci partisi tunggal untuk mencapai penghapusan yang lebih efisien. Pendekatan ini membatasi operasi penghapusan pada partisi tertentu, mengurangi amplifikasi penulisan selama pemadatan dan menghemat sumber daya untuk pemadatan dan pengindeksan.</p>
+<p>Contoh berikut ini mendemonstrasikan pemfilteran berbasis Kunci Partisi berdasarkan nilai Kunci Partisi tertentu dan sekumpulan nilai Kunci Partisi.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter based on a single partition key value, or​</span>

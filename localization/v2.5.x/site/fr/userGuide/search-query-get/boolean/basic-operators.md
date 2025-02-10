@@ -49,27 +49,11 @@ title: Opérateurs de base
 <li><p><code translate="no">&gt;=</code> (supérieur ou égal)</p></li>
 <li><p><code translate="no">&lt;=</code> (Inférieur ou égal)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-​" class="common-anchor-header">Exemple 1 : Filtrage avec Equal To (<code translate="no">==</code>)</h3><p>Supposons que vous disposiez d'un champ nommé <code translate="no">status</code> et que vous souhaitiez trouver toutes les entités pour lesquelles <code translate="no">status</code> est &quot;actif&quot;. Vous pouvez utiliser l'opérateur d'égalité <code translate="no">==</code>.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-​" class="common-anchor-header">Exemple 2 : Filtrage avec Not Equal To (<code translate="no">!=</code>)</h3><p>Pour trouver les entités où <code translate="no">status</code> n'est pas &quot;inactif&quot;.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-​" class="common-anchor-header">Exemple 3 : Filtrage avec Greater Than (<code translate="no">&gt;</code>)</h3><p>Pour trouver toutes les entités dont l'adresse <code translate="no">age</code> est supérieure à 30.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than-​" class="common-anchor-header">Exemple 4 : Filtrage avec Less Than (<code translate="no">&lt;</code>)</h3><p>Pour trouver les entités dont l'adresse <code translate="no">price</code> est inférieure à 100.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">Exemple 5 : Filtrage avec une valeur supérieure ou égale à (<code translate="no">&gt;=</code>)</h3><p>Pour trouver toutes les entités dont le site <code translate="no">rating</code> est supérieur ou égal à 4.</p>
+<h3 id="Example-1-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">Exemple 1 : Filtrage avec Plus grand que ou égal à (<code translate="no">&gt;=</code>)</h3><p>Si vous voulez trouver toutes les entités dont le site <code translate="no">rating</code> est supérieur ou égal à 4.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">Exemple 6 : Filtrage avec une valeur inférieure ou égale à (<code translate="no">&lt;=</code>)</h3><p>Pour trouver les entités dont l'adresse <code translate="no">discount</code> est inférieure ou égale à 10 %.</p>
+<h3 id="Example-2-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">Exemple 2 : Filtrage avec une valeur inférieure ou égale à (<code translate="no">&lt;=</code>)</h3><p>Pour trouver les entités dont l'adresse <code translate="no">discount</code> est inférieure ou égale à 10 %.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>

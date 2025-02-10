@@ -45,27 +45,11 @@ title: 基本操作符
 <li><p><code translate="no">&gt;=</code> (大于或等于</p></li>
 <li><p><code translate="no">&lt;=</code> (小于或等于</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-​" class="common-anchor-header">例 1：使用 "等于 "进行筛选 (<code translate="no">==</code>)</h3><p>假设有一个名为<code translate="no">status</code> 的字段，您想查找<code translate="no">status</code> 为 &quot;活动 &quot;的所有实体。您可以使用相等操作符<code translate="no">==</code> 。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-​" class="common-anchor-header">例 2：使用不等于 (<code translate="no">!=</code>) 过滤</h3><p>查找<code translate="no">status</code> 不是 &quot;非活动 &quot;的实体。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-​" class="common-anchor-header">例 3：使用大于 (<code translate="no">&gt;</code>) 进行筛选</h3><p>如果要查找<code translate="no">age</code> 大于 30 的所有实体。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than-​" class="common-anchor-header">例 4：使用小于 (<code translate="no">&lt;</code>) 过滤</h3><p>要查找<code translate="no">price</code> 小于 100 的实体。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">例 5：使用大于或等于 (<code translate="no">&gt;=</code>) 过滤</h3><p>如果要查找<code translate="no">rating</code> 大于或等于 4 的所有实体。</p>
+<h3 id="Example-1-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">例 1：使用大于等于 (<code translate="no">&gt;=</code>) 过滤</h3><p>如果要查找<code translate="no">rating</code> 大于或等于 4 的所有实体。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">例 6：使用小于或等于 (<code translate="no">&lt;=</code>) 过滤</h3><p>要查找<code translate="no">discount</code> 小于或等于 10% 的实体。</p>
+<h3 id="Example-2-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">例 2：使用小于或等于 (<code translate="no">&lt;=</code>) 过滤</h3><p>要查找<code translate="no">discount</code> 小于或等于 10% 的实体。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>

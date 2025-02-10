@@ -49,27 +49,11 @@ title: Operadores básicos
 <li><p><code translate="no">&gt;=</code> (Maior que ou igual a)</p></li>
 <li><p><code translate="no">&lt;=</code> (Menor ou igual a)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-​" class="common-anchor-header">Exemplo 1: Filtragem com Equal To (<code translate="no">==</code>)</h3><p>Suponha que tem um campo chamado <code translate="no">status</code> e quer encontrar todas as entidades em que <code translate="no">status</code> está &quot;ativo&quot;. Você pode usar o operador de igualdade <code translate="no">==</code>.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-​" class="common-anchor-header">Exemplo 2: Filtragem com Not Equal To (<code translate="no">!=</code>)</h3><p>Para encontrar entidades onde <code translate="no">status</code> não é &quot;inativo&quot;.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-​" class="common-anchor-header">Exemplo 3: Filtragem com Greater Than (<code translate="no">&gt;</code>)</h3><p>Se você quiser encontrar todas as entidades com um <code translate="no">age</code> maior que 30.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than-​" class="common-anchor-header">Exemplo 4: Filtrando com Menor que (<code translate="no">&lt;</code>)</h3><p>Para encontrar entidades onde <code translate="no">price</code> é menor que 100.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">Exemplo 5: Filtrando com Maior ou Igual a (<code translate="no">&gt;=</code>)</h3><p>Se você quiser encontrar todas as entidades com <code translate="no">rating</code> maior ou igual a 4.</p>
+<h3 id="Example-1-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">Exemplo 1: Filtragem com Maior que ou Igual a (<code translate="no">&gt;=</code>)</h3><p>Se você quiser encontrar todas as entidades com <code translate="no">rating</code> maior ou igual a 4.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">Exemplo 6: Filtrando com Menor que ou Igual a (<code translate="no">&lt;=</code>)</h3><p>Para encontrar entidades com <code translate="no">discount</code> menor ou igual a 10%.</p>
+<h3 id="Example-2-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">Exemplo 2: Filtragem com Menor que ou Igual a (<code translate="no">&lt;=</code>)</h3><p>Para encontrar entidades com <code translate="no">discount</code> menor ou igual a 10%.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -103,7 +87,7 @@ title: Operadores básicos
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Isto irá corresponder a qualquer produto cujo nome comece por &quot;Prod&quot;, como &quot;Produto A&quot;, &quot;Produto B&quot;, etc.</p>
+<p>Isto fará corresponder qualquer produto cujo nome comece por &quot;Prod&quot;, como &quot;Produto A&quot;, &quot;Produto B&quot;, etc.</p>
 <h4 id="Suffix-Match-Ends-With​" class="common-anchor-header">Correspondência de sufixo (termina com)</h4><p>Para uma correspondência <strong>de sufixo</strong>, em que a cadeia de caracteres termina com um determinado padrão, coloque o símbolo <code translate="no">%</code> no início do padrão. Por exemplo, para encontrar todos os produtos cujo <code translate="no">name</code> termina com &quot;XYZ&quot;.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%XYZ&quot;&#x27;</span>​
 

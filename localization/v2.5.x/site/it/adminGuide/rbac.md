@@ -47,11 +47,11 @@ title: RBAC spiegato
    </span> <span class="img-wrapper"> <span>Utenti, ruoli e privilegi</span> </span></p>
 <p>Il modello RBAC comprende quattro componenti principali.</p>
 <ul>
-<li><p>**Risorsa: **L'entità risorsa a cui si può accedere. In Milvus esistono tre livelli di risorse: istanza, database e collezione.</p></li>
-<li><p>**Privilegio: **Il permesso di eseguire determinate operazioni sulle risorse Milvus (ad esempio, creare collezioni, inserire dati, ecc.). </p></li>
-<li><p>**Gruppo di privilegi: **Un gruppo di privilegi multipli.</p></li>
-<li><p>**Ruolo: **Un ruolo è composto da due parti: privilegi e risorse. I privilegi definiscono il tipo di operazioni che un ruolo può eseguire, mentre le risorse definiscono le risorse di destinazione su cui le operazioni possono essere eseguite. Ad esempio, il ruolo di amministratore di database può eseguire operazioni di lettura, scrittura e gestione su determinati database.</p></li>
-<li><p>**Utente: **Un utente è una persona che utilizza Milvus. Ogni utente ha un ID unico e gli viene assegnato un ruolo o più ruoli. </p></li>
+<li><p><strong>Risorsa</strong>: L'entità della risorsa a cui si può accedere. In Milvus esistono tre livelli di risorse: istanza, database e collezione.</p></li>
+<li><p><strong>Privilegio</strong>: Il permesso di eseguire determinate operazioni sulle risorse Milvus (ad esempio, creare collezioni, inserire dati, ecc.). </p></li>
+<li><p><strong>Gruppo di privilegi</strong>: Un gruppo di privilegi multipli.</p></li>
+<li><p><strong>Ruolo</strong>: Un ruolo è composto da due parti: privilegi e risorse. I privilegi definiscono il tipo di operazioni che un ruolo può eseguire, mentre le risorse definiscono le risorse di destinazione su cui le operazioni possono essere eseguite. Ad esempio, il ruolo di amministratore di database può eseguire operazioni di lettura, scrittura e gestione su determinati database.</p></li>
+<li><p><strong>Utente</strong>: un utente è una persona che utilizza Milvus. Ogni utente ha un ID unico e gli viene assegnato un ruolo o più ruoli. </p></li>
 </ul>
 <h2 id="Procedures​" class="common-anchor-header">Le procedure<button data-href="#Procedures​" class="anchor-icon" translate="no">
       <svg translate="no"

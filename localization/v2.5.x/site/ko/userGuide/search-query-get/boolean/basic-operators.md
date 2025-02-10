@@ -21,7 +21,7 @@ title: 기본 연산자
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus는 데이터를 효율적으로 필터링하고 쿼리하는 데 도움이 되는 다양한 기본 연산자 세트를 제공합니다. 이러한 연산자를 사용하면 스칼라 필드, 숫자 계산, 논리적 조건 등을 기반으로 검색 조건을 세분화할 수 있습니다. 이러한 연산자를 사용하는 방법을 이해하는 것은 정확한 쿼리를 작성하고 검색의 효율성을 극대화하는 데 매우 중요합니다.</p>
+    </button></h1><p>Milvus는 데이터를 효율적으로 필터링하고 쿼리하는 데 도움이 되는 다양한 기본 연산자 세트를 제공합니다. 이러한 연산자를 사용하면 스칼라 필드, 숫자 계산, 논리적 조건 등을 기반으로 검색 조건을 구체화할 수 있습니다. 이러한 연산자를 사용하는 방법을 이해하는 것은 정확한 쿼리를 작성하고 검색의 효율성을 극대화하는 데 매우 중요합니다.</p>
 <h2 id="Comparison-operators​" class="common-anchor-header">비교 연산자<button data-href="#Comparison-operators​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,27 +46,11 @@ title: 기본 연산자
 <li><p><code translate="no">&gt;=</code> (보다 크거나 같음)</p></li>
 <li><p><code translate="no">&lt;=</code> (다음보다 작거나 같음)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-​" class="common-anchor-header">예 1: 같음(<code translate="no">==</code>)으로 필터링</h3><p><code translate="no">status</code> 이라는 필드가 있고 <code translate="no">status</code> 이 &quot;활성&quot;인 모든 엔터티를 찾고자 한다고 가정합니다. 같음 연산자 <code translate="no">==</code> 를 사용할 수 있습니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-​" class="common-anchor-header">예 2: 같지 않음 (<code translate="no">!=</code>)으로 필터링하기</h3><p><code translate="no">status</code> 이 &quot;비활성&quot;이 아닌 엔터티를 찾으려는 경우.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-​" class="common-anchor-header">예 3: Greater Than (<code translate="no">&gt;</code>)으로 필터링하기</h3><p><code translate="no">age</code> 이 30보다 큰 모든 엔터티를 찾으려는 경우.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than-​" class="common-anchor-header">예 4: 미만 (<code translate="no">&lt;</code>)으로 필터링하기</h3><p><code translate="no">price</code> 이 100 미만인 엔터티를 찾으려면 다음과 같이 하세요.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">예 5: 보다 크거나 같음(<code translate="no">&gt;=</code>)으로 필터링하기</h3><p><code translate="no">rating</code> 이 4보다 크거나 같은 모든 엔터티를 찾으려는 경우.</p>
+<h3 id="Example-1-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">예 1: 보다 크거나 같음(<code translate="no">&gt;=</code>)으로 필터링하기</h3><p><code translate="no">rating</code> 이 4보다 크거나 같은 모든 엔티티를 찾으려는 경우.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">예 6: 보다 작거나 같음(<code translate="no">&lt;=</code>)으로 필터링하기</h3><p><code translate="no">discount</code> 이 10% 이하인 엔터티를 찾으려면.</p>
+<h3 id="Example-2-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">예 2: 보다 작거나 같음(<code translate="no">&lt;=</code>)으로 필터링하기</h3><p><code translate="no">discount</code> 이 10% 이하인 엔터티를 찾으려면.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>

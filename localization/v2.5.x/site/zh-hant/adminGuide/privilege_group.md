@@ -61,21 +61,21 @@ title: 建立權限群組
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>為了易於使用，Milvus 在集合、資料庫和實例層面上提供了共 9 個內建的權限：COLL_RO、COLL_RW、COLL_ADMIN、DB_RO、DB_RW、DB_Admin、Cluster_RO、Cluster_RW 和 Cluster_Admin。</p>
+    </button></h2><p>為了易於使用，Milvus 在集合、資料庫和實例層面上提供了共 9 個內建的權限：COLL_RO、COLL_RW、COLL_ADMIN、DB_RO、DB_RW、DB_Admin、Cluster_RO、Cluster_RW 及 Cluster_Admin。</p>
 <div class="alert note">
-<p>這三層內建的權限群組沒有階級關係。在實體層級設定權限群組，並不會自動設定該實體下所有資料庫和資料集的權限。資料庫和資料集層級的權限需要手動設定。</p>
+<p>這三層內建的權限群組沒有階級關係。在實體層級設定權限群組，並不會自動為該實體下的所有資料庫和集合設定權限。資料庫和資料集層級的權限需要手動設定。</p>
 </div>
 <p>下表說明每個內建權限群組所包含的權限。</p>
 <h3 id="Collection-level​" class="common-anchor-header">資料集層級</h3><ul>
 <li><p><strong>COLL_RO</strong>: 包含讀取集合資料的權限。</p></li>
-<li><p><strong>COLL_RW</strong>：包含讀取和寫入收集資料的權限。</p></li>
+<li><p><strong>COLL_RW</strong>：包含讀取及寫入收集資料的權限。</p></li>
 <li><p><strong>COLL_ADMIN</strong>：包含讀取和寫入集合資料以及管理集合的權限。</p></li>
 </ul>
-<p>下表列出了集合層級的三個內建權限群組所包含的特定權限。</p>
-<table data-block-token="Pi3tdceUjopYWqxsiYTcnnNInoZ"><thead><tr><th data-block-token="DtTYdHoX5oh0qLxHd4ycswM5njh" colspan="1" rowspan="1"><p data-block-token="NV3RdP5IGoyTe7xFRT3cn0obnTh"><strong>**權限**</strong></p>
-</th><th data-block-token="CHdFdtz1FoiZoyxUyz7csms0nGc" colspan="1" rowspan="1"><p data-block-token="C0vfdaj0uohILAxptsacgSj9nxe"><strong>**僅限集合讀取**</strong></p>
-</th><th data-block-token="SMKYdz1j6o1lUJxrrnKcGF16nKf" colspan="1" rowspan="1"><p data-block-token="X0tCdyXB7ovvsRxEAMtcgsZ7nNc"><strong>僅讀取集合</strong>資料<strong>** **寫入集合資料** **讀取</strong>集合資料<strong>**</strong></p>
-</th><th data-block-token="WuOcdy7ruoOSG7xwypbcGppLnCf" colspan="1" rowspan="1"><p data-block-token="CsvGdWuOaoRecvxBsRfckZKKntd"><strong>**集合管理員**</strong></p>
+<p>下表列出了集合層級中三個內建權限群組所包含的特定權限。</p>
+<table data-block-token="Pi3tdceUjopYWqxsiYTcnnNInoZ"><thead><tr><th data-block-token="DtTYdHoX5oh0qLxHd4ycswM5njh" colspan="1" rowspan="1"><p data-block-token="NV3RdP5IGoyTe7xFRT3cn0obnTh"><strong>權限</strong></p>
+</th><th data-block-token="CHdFdtz1FoiZoyxUyz7csms0nGc" colspan="1" rowspan="1"><p data-block-token="C0vfdaj0uohILAxptsacgSj9nxe"><strong>僅讀取集合</strong></p>
+</th><th data-block-token="SMKYdz1j6o1lUJxrrnKcGF16nKf" colspan="1" rowspan="1"><p data-block-token="X0tCdyXB7ovvsRxEAMtcgsZ7nNc"><strong>收集讀寫</strong></p>
+</th><th data-block-token="WuOcdy7ruoOSG7xwypbcGppLnCf" colspan="1" rowspan="1"><p data-block-token="CsvGdWuOaoRecvxBsRfckZKKntd"><strong>收集管理</strong></p>
 </th></tr></thead><tbody><tr><td data-block-token="EqYidYZCSonxmexk3bAcLh1gndg" colspan="1" rowspan="1"><p data-block-token="H85ddLutEo698KxgytncmD0Hnnc">查詢</p>
 </td><td data-block-token="VMjndLAaVo9V7bxe4KPcE6f8nNc" colspan="1" rowspan="1"><p data-block-token="MvCidzzimoZTs0xioR4cmtZ5nof">✔️</p>
 </td><td data-block-token="EoD8dGhNEoAJOnxB7Zjc5E9Jnyd" colspan="1" rowspan="1"><p data-block-token="J2OMdV9XXo8dEsxBlLqcmXmZnhe">✔️</p>
@@ -187,14 +187,14 @@ title: 建立權限群組
 </td></tr></tbody></table>
 <h3 id="Database-level​" class="common-anchor-header">資料庫層級</h3><ul>
 <li><p><strong>DB_RO</strong>：包含讀取資料庫資料的權限</p></li>
-<li><p><strong>DB_RW</strong>：包含讀取及寫入資料庫資料的權限</p></li>
+<li><p><strong>DB_RW</strong>：包括讀取和寫入資料庫資料的權限</p></li>
 <li><p><strong>DB_Admin</strong>：包括讀取和寫入資料庫資料以及管理資料庫的權限。</p></li>
 </ul>
 <p>下表列出了資料庫層級的三個內建權限群組所包含的特定權限。</p>
-<table data-block-token="ULeKdJqFioDSsjxdw26cDExDn2b"><thead><tr><th data-block-token="FZpEd81iZoCJYrxi50yc1chLncd" colspan="1" rowspan="1"><p data-block-token="SHAldLGZToExKYxwjVycaNQ1nHd"><strong>**權限**</strong></p>
-</th><th data-block-token="UVjkdAnzgo4ROkxL7bCcgx9xnGf" colspan="1" rowspan="1"><p data-block-token="FfCIdbxfjodDYWx1uXMc6KzPnsZ"><strong>**僅讀取資料庫**</strong></p>
-</th><th data-block-token="WSIgdzPmhoQLaFxJ9FGcj5mRnzh" colspan="1" rowspan="1"><p data-block-token="Oc2idsHzqoHzwyxhoe2c7dtxncd"><strong>**資料庫讀寫**</strong></p>
-</th><th data-block-token="JTred0WFUoRO5Dx9DgfcTAV3nrf" colspan="1" rowspan="1"><p data-block-token="WWHOdfbfVo0i8txO7tucAMAknAo"><strong>**資料庫管理員**</strong></p>
+<table data-block-token="ULeKdJqFioDSsjxdw26cDExDn2b"><thead><tr><th data-block-token="FZpEd81iZoCJYrxi50yc1chLncd" colspan="1" rowspan="1"><p data-block-token="SHAldLGZToExKYxwjVycaNQ1nHd"><strong>權限</strong></p>
+</th><th data-block-token="UVjkdAnzgo4ROkxL7bCcgx9xnGf" colspan="1" rowspan="1"><p data-block-token="FfCIdbxfjodDYWx1uXMc6KzPnsZ"><strong>資料庫只讀取</strong></p>
+</th><th data-block-token="WSIgdzPmhoQLaFxJ9FGcj5mRnzh" colspan="1" rowspan="1"><p data-block-token="Oc2idsHzqoHzwyxhoe2c7dtxncd"><strong>資料庫讀寫</strong></p>
+</th><th data-block-token="JTred0WFUoRO5Dx9DgfcTAV3nrf" colspan="1" rowspan="1"><p data-block-token="WWHOdfbfVo0i8txO7tucAMAknAo"><strong>資料庫管理員</strong></p>
 </th></tr></thead><tbody><tr><td data-block-token="JX6adkIcEoCil9xzvxBc7j1XnOd" colspan="1" rowspan="1"><p data-block-token="YvMmdQvUNoViSPxA2ekcsgrhnqf">顯示資料庫</p>
 </td><td data-block-token="FXt6dOWyZo5b14xd3zmcrvAKn8d" colspan="1" rowspan="1"><p data-block-token="PAGYdPiZCox710xmtZrcgqnXnef">✔️</p>
 </td><td data-block-token="EFcCdtsOSoOkKfxxJAMcFdnknsd" colspan="1" rowspan="1"><p data-block-token="Pz21dPCLmoI4GIxhIdpc80yvnKb">✔️</p>
@@ -219,13 +219,13 @@ title: 建立權限群組
 <h3 id="Cluster-level​" class="common-anchor-header">群集層級</h3><ul>
 <li><p><strong>Cluster_RO</strong>: 包含讀取實體資料的權限</p></li>
 <li><p><strong>Cluster_RW</strong>: 包含讀取和寫入實體資料的權限</p></li>
-<li><p><strong>Cluster_Admin</strong>: 包含讀寫實體資料和管理實體的權限。</p></li>
+<li><p><strong>Cluster_Admin</strong>: 包含讀取和寫入實體資料以及管理實體的權限。</p></li>
 </ul>
 <p>下表列出了实例级别的三个内置权限组所包含的特定权限。</p>
-<table data-block-token="SDHtdzccpoaNdOxspzFcdkwEnu9"><thead><tr><th data-block-token="Pb9FdCS05ozBO9xBo65chofen5d" colspan="1" rowspan="1"><p data-block-token="OgnXdgTdyoKCBnxlyfac4Q5once"><strong>**權限**</strong></p>
-</th><th data-block-token="Y6xPdMNjxomIPwxJB7Xczpm6nkc" colspan="1" rowspan="1"><p data-block-token="CO9bdrfCPoohejxhezZcDS6gnJr"><strong>**僅限群集讀取**</strong></p>
-</th><th data-block-token="ALGjdHwDgo7XOsxfGWwcA6RNn4f" colspan="1" rowspan="1"><p data-block-token="D4xfdML8VoDPqWxni5zc4Rjknte"><strong>**叢集讀取寫入**</strong></p>
-</th><th data-block-token="QaTZdG7Pgo3rZ4xCk8lcqwhFnoh" colspan="1" rowspan="1"><p data-block-token="VmTSdQcJboLLNHxV7b8cgfDinVf"><strong>**簇管理**</strong></p>
+<table data-block-token="SDHtdzccpoaNdOxspzFcdkwEnu9"><thead><tr><th data-block-token="Pb9FdCS05ozBO9xBo65chofen5d" colspan="1" rowspan="1"><p data-block-token="OgnXdgTdyoKCBnxlyfac4Q5once"><strong>權限</strong></p>
+</th><th data-block-token="Y6xPdMNjxomIPwxJB7Xczpm6nkc" colspan="1" rowspan="1"><p data-block-token="CO9bdrfCPoohejxhezZcDS6gnJr"><strong>僅限群集讀取</strong></p>
+</th><th data-block-token="ALGjdHwDgo7XOsxfGWwcA6RNn4f" colspan="1" rowspan="1"><p data-block-token="D4xfdML8VoDPqWxni5zc4Rjknte"><strong>群集讀寫</strong></p>
+</th><th data-block-token="QaTZdG7Pgo3rZ4xCk8lcqwhFnoh" colspan="1" rowspan="1"><p data-block-token="VmTSdQcJboLLNHxV7b8cgfDinVf"><strong>群集管理</strong></p>
 </th></tr></thead><tbody><tr><td data-block-token="Byzbdv4XboCS74xhuzlcuVxZnKz" colspan="1" rowspan="1"><p data-block-token="SraLd2bxXo2rDZxCMzjcEHuXnGd">列出資料庫</p>
 </td><td data-block-token="Uc9Odk7c6owHn9xu7jUc9hJGnbg" colspan="1" rowspan="1"><p data-block-token="Ol51d8BzwovVTSxlvpEcLi7znhg">✔️</p>
 </td><td data-block-token="Idtudbo1hoJGtRxB00wcAyZ1nic" colspan="1" rowspan="1"><p data-block-token="PkFFdIkLJoJ3Asx3eZ1cvWHVn7f">✔️</p>

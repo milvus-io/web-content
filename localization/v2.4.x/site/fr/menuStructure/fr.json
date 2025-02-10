@@ -74,7 +74,7 @@
             "children": []
           },
           {
-            "label": "Run Milvus Standalone",
+            "label": "Exécuter Milvus en mode autonome",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -637,50 +637,6 @@
             "children": []
           }
         ]
-      }
-    ]
-  },
-  {
-    "label": "Milvus Migration",
-    "id": "milvus_migration",
-    "isMenu": true,
-    "order": 5,
-    "children": [
-      {
-        "label": "Vue d'ensemble",
-        "id": "migrate_overview.md",
-        "order": 0,
-        "children": []
-      },
-      {
-        "label": "Installer l'outil de migration",
-        "id": "milvusdm_install.md",
-        "order": 1,
-        "children": []
-      },
-      {
-        "label": "À partir d'Elasticsearch",
-        "id": "es2m.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "De Faiss",
-        "id": "f2m.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "Depuis Milvus 1.x",
-        "id": "m2m.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Depuis Milvus 2.3.x",
-        "id": "from-m2x.md",
-        "order": 5,
-        "children": []
       }
     ]
   },

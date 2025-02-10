@@ -45,27 +45,11 @@ title: 基本操作員
 <li><p><code translate="no">&gt;=</code> (大於或等於)</p></li>
 <li><p><code translate="no">&lt;=</code> (小於或等於)</p></li>
 </ul>
-<h3 id="Example-1-Filtering-with-Equal-To-​" class="common-anchor-header">範例 1：使用 Equal To 過濾 (<code translate="no">==</code>)</h3><p>假設您有一個名為<code translate="no">status</code> 的欄位，而您想要找出<code translate="no">status</code> 為「活躍」的所有實體。您可以使用相等運算符<code translate="no">==</code> 。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-Not-Equal-To-​" class="common-anchor-header">範例 2：使用 Not Equal To 過濾 (<code translate="no">!=</code>)</h3><p>尋找<code translate="no">status</code> 不是「非活躍」的實體。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-Greater-Than-​" class="common-anchor-header">範例 3：使用「大於」篩選 (<code translate="no">&gt;</code>)</h3><p>如果要尋找<code translate="no">age</code> 大於 30 的所有實體。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Filtering-with-Less-Than-​" class="common-anchor-header">範例 4: 使用小於 (<code translate="no">&lt;</code>) 過濾</h3><p>若要尋找<code translate="no">price</code> 小於 100 的實體。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>​
-
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">範例 5: 過濾大於或等於 (<code translate="no">&gt;=</code>)</h3><p>若要尋找<code translate="no">rating</code> 大於或等於 4 的所有實體。</p>
+<h3 id="Example-1-Filtering-with-Greater-Than-or-Equal-To-​" class="common-anchor-header">範例 1：使用大於或等於 (<code translate="no">&gt;=</code>) 過濾</h3><p>如果您要尋找<code translate="no">rating</code> 大於或等於 4 的所有實體。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">範例 6：使用小於或等於 (<code translate="no">&lt;=</code>) 過濾</h3><p>若要尋找<code translate="no">discount</code> 小於或等於 10% 的實體。</p>
+<h3 id="Example-2-Filtering-with-Less-Than-or-Equal-To-​" class="common-anchor-header">範例 2：使用小於或等於 (<code translate="no">&lt;=</code>) 過濾</h3><p>若要尋找<code translate="no">discount</code> 小於或等於 10% 的實體。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -84,8 +68,8 @@ title: 基本操作員
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>範圍運算符有助於根據特定的值集或範圍篩選資料。</p>
-<h3 id="Supported-Range-Operators​" class="common-anchor-header">支援的範圍運算符。</h3><ul>
+    </button></h2><p>範圍運算符有助於根據特定值集或範圍篩選資料。</p>
+<h3 id="Supported-Range-Operators​" class="common-anchor-header">支援的範圍運算符號。</h3><ul>
 <li><p><code translate="no">IN</code>:用於匹配特定集合或範圍內的值。</p></li>
 <li><p><code translate="no">LIKE</code>:用於匹配模式 (主要用於文字欄位)。</p></li>
 </ul>
@@ -94,7 +78,7 @@ title: 基本操作員
 
 <button class="copy-code-btn"></button></code></pre>
 <p>當您要檢查一個值清單中的成員身分時，這就很有用。</p>
-<h3 id="Example-2-Using-LIKE-for-Pattern-Matching​" class="common-anchor-header">範例 2：使用<code translate="no">LIKE</code> 進行模式匹配</h3><p><code translate="no">LIKE</code> 運算符號用於字串欄位中的模式匹配。它可以匹配文本中不同位置的子串：<strong>前綴</strong>、<strong>後綴</strong>或<strong>後綴</strong>。<code translate="no">LIKE</code> 運算符號使用<code translate="no">%</code> 符號作為通配符，可以匹配任何數量的字元（包括 0）。</p>
+<h3 id="Example-2-Using-LIKE-for-Pattern-Matching​" class="common-anchor-header">範例 2：使用<code translate="no">LIKE</code> 進行模式匹配</h3><p><code translate="no">LIKE</code> 運算符號用於字串欄位中的模式匹配。它可以匹配文本中不同位置的子串：<strong>前綴</strong>、<strong>後綴</strong>或<strong>後綴</strong>。<code translate="no">LIKE</code> 運算符號使用<code translate="no">%</code> 符號作為通配符，可以匹配任何數量的字元（包括零）。</p>
 <h4 id="Prefix-Match-Starts-With​" class="common-anchor-header">前綴匹配（從開始</h4><p>若要執行<strong>前綴</strong>匹配，即字串以指定的模式開始，您可以將模式放在開頭，並使用<code translate="no">%</code> 來匹配其後的任何字元。例如，搜尋<code translate="no">name</code> 以「Prod」開頭的所有產品。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>​
 
