@@ -1852,7 +1852,7 @@ In Milvus, grouping search is designed to improve comprehensiveness and accuracy
 
 Consider a scenario in RAG, where loads of documents are split into various passages, and each passage is represented by one vector embedding. Users want to find the most relevant passages to prompt the LLMs accurately. The ordinary Milvus search function can meet this requirement, but it may result in highly skewed and biased results: most of the passages come from only a few documents, and the comprehensiveness of the search results is very poor. This can seriously impair the accuracy or even correctness of the results given by the LLM and influence the LLM users' experience negatively.
 
-Grouping search can effectively solve this problem. By passing a group_by_field and group_size, Milvus users can bucket the search results into several groups and ensure that the number of entities from each group does not exceed a specific group_size. This feature can significantly enhance the comprehensiveness and fairness of search results, noticeably improving the quality of LLM output.
+Grouping search can effectively solve this problem. By passing a `group_by_field`, Milvus users can bucket the search results into several groups. This feature can significantly enhance the comprehensiveness and fairness of search results, noticeably improving the quality of LLM output.
 
 Here is the example code to group search results by field:
 
@@ -1873,8 +1873,6 @@ res = client.search(
     }, # Search parameters
     limit=5, # Max. number of groups to return
     group_by_field="doc_id", # Group results by document ID
-    group_size=2, # returned at most 2 passages per document, the default value is 1
-    group_strict_size=True, # ensure every group contains exactly 3 passages
     output_fields=["doc_id", "passage_id"]
 )
 
@@ -1914,8 +1912,6 @@ res = client.search(
     }, # Search parameters
     limit=5, # Max. number of search results to return
     # group_by_field="doc_id", # Group results by document ID
-    # group_size=2, 
-    # group_strict_size=True,
     output_fields=["doc_id", "passage_id"]
 )
 
@@ -1936,11 +1932,9 @@ The output is similar to the following:
 
 In the given output, it can be observed that "doc_11" completely dominated the search results, overshadowing the high-quality paragraphs from other documents, which can be a poor prompt to LLM.
 
-One more point to note: by default, grouping_search will return results instantly when it has enough groups, which may lead to the number of results in each group not being sufficient to meet the group_size. If you care about the number of results for each group, set group_strict_size=True as shown in the code above. This will make Milvus strive to obtain enough results for each group, at a slight cost to performance.
-
 __Limitations__
 
-- __Indexing__: This grouping feature works only for collections that are indexed with the __HNSW__, __IVF_FLAT__, or __FLAT__ type. For more information, refer to [In-memory Index](https://milvus.io/docs/index.md#HNSW).
+- __Indexing__: This grouping feature works only for collections that are indexed with these index types: **FLAT**, **IVF_FLAT**, **IVF_SQ8**, **HNSW**, **DISKANN**, **SPARSE_INVERTED_INDEX**.
 
 - __Vector__: Currently, grouping search does not support a vector field of the __BINARY_VECTOR__ type. For more information on data types, refer to [Supported data types](https://milvus.io/docs/schema.md#Supported-data-types).
 
