@@ -1769,7 +1769,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
       </svg>
     </button></h2><p>In Milvus, grouping search is designed to improve comprehensiveness and accuracy for search results.</p>
 <p>Consider a scenario in RAG, where loads of documents are split into various passages, and each passage is represented by one vector embedding. Users want to find the most relevant passages to prompt the LLMs accurately. The ordinary Milvus search function can meet this requirement, but it may result in highly skewed and biased results: most of the passages come from only a few documents, and the comprehensiveness of the search results is very poor. This can seriously impair the accuracy or even correctness of the results given by the LLM and influence the LLM users’ experience negatively.</p>
-<p>Grouping search can effectively solve this problem. By passing a group_by_field and group_size, Milvus users can bucket the search results into several groups and ensure that the number of entities from each group does not exceed a specific group_size. This feature can significantly enhance the comprehensiveness and fairness of search results, noticeably improving the quality of LLM output.</p>
+<p>Grouping search can effectively solve this problem. By passing a <code translate="no">group_by_field</code>, Milvus users can bucket the search results into several groups. This feature can significantly enhance the comprehensiveness and fairness of search results, noticeably improving the quality of LLM output.</p>
 <p>Here is the example code to group search results by field:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
@@ -1787,8 +1787,6 @@ res = client.search(
     }, <span class="hljs-comment"># Search parameters</span>
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of groups to return</span>
     group_by_field=<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-comment"># Group results by document ID</span>
-    group_size=<span class="hljs-number">2</span>, <span class="hljs-comment"># returned at most 2 passages per document, the default value is 1</span>
-    group_strict_size=<span class="hljs-literal">True</span>, <span class="hljs-comment"># ensure every group contains exactly 3 passages</span>
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;passage_id&quot;</span>]
 )
 
@@ -1821,8 +1819,6 @@ res = client.search(
     }, <span class="hljs-comment"># Search parameters</span>
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     <span class="hljs-comment"># group_by_field=&quot;doc_id&quot;, # Group results by document ID</span>
-    <span class="hljs-comment"># group_size=2, </span>
-    <span class="hljs-comment"># group_strict_size=True,</span>
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;passage_id&quot;</span>]
 )
 
@@ -1838,10 +1834,9 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 [<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
 <p>In the given output, it can be observed that “doc_11” completely dominated the search results, overshadowing the high-quality paragraphs from other documents, which can be a poor prompt to LLM.</p>
-<p>One more point to note: by default, grouping_search will return results instantly when it has enough groups, which may lead to the number of results in each group not being sufficient to meet the group_size. If you care about the number of results for each group, set group_strict_size=True as shown in the code above. This will make Milvus strive to obtain enough results for each group, at a slight cost to performance.</p>
 <p><strong>Limitations</strong></p>
 <ul>
-<li><p><strong>Indexing</strong>: This grouping feature works only for collections that are indexed with the <strong>HNSW</strong>, <strong>IVF_FLAT</strong>, or <strong>FLAT</strong> type. For more information, refer to <a href="https://milvus.io/docs/index.md#HNSW">In-memory Index</a>.</p></li>
+<li><p><strong>Indexing</strong>: This grouping feature works only for collections that are indexed with these index types: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
 <li><p><strong>Vector</strong>: Currently, grouping search does not support a vector field of the <strong>BINARY_VECTOR</strong> type. For more information on data types, refer to <a href="https://milvus.io/docs/schema.md#Supported-data-types">Supported data types</a>.</p></li>
 <li><p><strong>Field</strong>: Currently, grouping search allows only for a single column. You cannot specify multiple field names in the <code translate="no">group_by_field</code> config.  Additionally, grouping search is incompatible with data types of JSON, FLOAT, DOUBLE, ARRAY, or vector fields.</p></li>
 <li><p><strong>Performance Impact</strong>: Be mindful that performance degrades with increasing query vector counts. Using a cluster with 2 CPU cores and 8 GB of memory as an example, the execution time for grouping search increases proportionally with the number of input query vectors.</p></li>
