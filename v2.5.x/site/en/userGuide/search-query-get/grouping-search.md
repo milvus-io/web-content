@@ -329,6 +329,8 @@ For additional parameter details, refer to  [​search()](https://milvus.io/api-
 
 ## Considerations​
 
+- __Indexing__: This grouping feature works only for collections that are indexed with these index types: **FLAT**, **IVF_FLAT**, **IVF_SQ8**, **HNSW**, **HNSW_PQ**, **HNSW_PRQ**, **HNSW_SQ**, **DISKANN**, **SPARSE_INVERTED_INDEX**.
+
 - **Number of groups**: The `limit` parameter controls the number of groups from which search results are returned, rather than the specific number of entities within each group. Setting an appropriate `limit` helps control search diversity and query performance. Reducing `limit` can reduce computation costs if data is densely distributed or performance is a concern.​
 
 - **Entities per group**: The `group_size` parameter controls the number of entities returned per group. Adjusting `group_size` based on your use case can increase the richness of search results. However, if data is unevenly distributed, some groups may return fewer entities than specified by `group_size`, particularly in limited data scenarios.​
