@@ -43,7 +43,7 @@ title: 그룹 검색
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/ann-search.png" alt="ANN Search" class="doc-image" id="ann-search" />
    </span> <span class="img-wrapper"> <span>ANN 검색</span> </span></p>
-<p>이러한 컬렉션에서 근사 이웃(ANN) 검색을 수행할 때, 검색 결과에 동일한 문서의 여러 단락이 포함될 수 있으며, 이로 인해 의도한 사용 사례와 맞지 않는 다른 문서가 간과될 수 있습니다.</p>
+<p>이러한 컬렉션에서 근사 이웃(ANN) 검색을 수행할 때, 검색 결과에 동일한 문서의 여러 단락이 포함될 수 있어 의도한 사용 사례와 맞지 않는 다른 문서가 간과될 수 있습니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
@@ -356,7 +356,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>그룹 수</strong>: <code translate="no">limit</code> 매개변수는 각 그룹 내의 특정 엔티티 수가 아니라 검색 결과가 반환되는 그룹의 수를 제어합니다. 적절한 <code translate="no">limit</code> 을 설정하면 검색 다양성 및 쿼리 성능을 제어하는 데 도움이 됩니다. 데이터가 고밀도로 분산되어 있거나 성능이 우려되는 경우 <code translate="no">limit</code> 을 줄이면 계산 비용을 줄일 수 있습니다.</p></li>
+<li><p><strong>인덱싱</strong>: 이 그룹화 기능은 다음 인덱스 유형으로 인덱싱된 컬렉션에서만 작동합니다: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HSW</strong>, <strong>HSW_PQ</strong>, <strong>HSW_PRQ</strong>, <strong>HSW_SQ</strong>, <strong>DISCANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
+<li><p><strong>그룹 수입니다</strong>: <code translate="no">limit</code> 매개변수는 각 그룹 내의 특정 엔티티 수가 아니라 검색 결과가 반환되는 그룹의 수를 제어합니다. 적절한 <code translate="no">limit</code> 을 설정하면 검색 다양성 및 쿼리 성능을 제어하는 데 도움이 됩니다. 데이터가 고밀도로 분산되어 있거나 성능이 우려되는 경우 <code translate="no">limit</code> 을 줄이면 계산 비용을 줄일 수 있습니다.</p></li>
 <li><p><strong>그룹별 엔티티</strong>: <code translate="no">group_size</code> 매개변수는 그룹당 반환되는 엔티티 수를 제어합니다. 사용 사례에 따라 <code translate="no">group_size</code> 을 조정하면 검색 결과의 풍부함을 높일 수 있습니다. 그러나 데이터가 고르지 않게 분산된 경우 일부 그룹은 특히 제한된 데이터 시나리오에서 <code translate="no">group_size</code> 에서 지정한 것보다 적은 수의 엔티티를 반환할 수 있습니다.</p></li>
 <li><p><strong>엄격한 그룹 크기</strong>: <code translate="no">strict_group_size=True</code> 을 선택하면 해당 그룹에 데이터가 충분하지 않는 한 시스템에서 각 그룹에 대해 지정된 수의 엔티티(<code translate="no">group_size</code>)를 반환하려고 시도합니다. 이 설정은 그룹당 일관된 엔티티 수를 보장하지만 데이터 분포가 고르지 않거나 리소스가 제한되어 있는 경우 성능이 저하될 수 있습니다. 엄격한 엔티티 수가 필요하지 않은 경우 <code translate="no">strict_group_size=False</code> 을 설정하면 쿼리 속도가 향상될 수 있습니다.</p></li>
 </ul>

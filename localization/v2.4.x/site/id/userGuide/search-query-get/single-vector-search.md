@@ -1,10 +1,12 @@
 ---
 id: single-vector-search.md
 order: 1
-summary: この記事では、Milvusコレクション内のベクターを単一のクエリーベクターを使って検索する方法について説明します。
-title: 単一ベクトル検索
+summary: >-
+  Artikel ini menjelaskan cara mencari vektor dalam koleksi Milvus menggunakan
+  vektor kueri tunggal.
+title: Pencarian Vektor Tunggal
 ---
-<h1 id="Single-Vector-Search" class="common-anchor-header">単一ベクトル検索<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
+<h1 id="Single-Vector-Search" class="common-anchor-header">Pencarian Vektor Tunggal<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,14 +21,14 @@ title: 単一ベクトル検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>データを挿入したら、次のステップはMilvusでコレクションの類似性検索を行うことです。</p>
-<p>Milvusでは、コレクション内のベクトルフィールドの数に応じて2種類の検索を行うことができます：</p>
+    </button></h1><p>Setelah Anda memasukkan data Anda, langkah selanjutnya adalah melakukan pencarian kemiripan pada koleksi Anda di Milvus.</p>
+<p>Milvus memungkinkan Anda untuk melakukan dua jenis pencarian, tergantung pada jumlah bidang vektor dalam koleksi Anda:</p>
 <ul>
-<li><strong>単一ベクトル検索</strong>：コレクションにベクトルフィールドが1つしかない場合は <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a>メソッドを使用します。このメソッドは、クエリ・ベクタをコレクション内の既存のベクタと比較し、最も近い一致の ID をそれらの間の距離とともに返します。オプションで、結果のベクトル値とメタデータを返すこともできます。</li>
-<li><strong>ハイブリッド検索</strong>：2つ以上のベクトルフィールドを持つコレクションには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a>メソッドを使用します。このメソッドは、複数の近似最近傍（ANN）検索要求を実行し、結果を組み合わせて、再ランク付け後に最も関連性の高いマッチを返します。</li>
+<li><strong>Pencarian vektor tunggal</strong>: Jika koleksi Anda hanya memiliki satu bidang vektor, gunakan metode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> untuk menemukan entitas yang paling mirip. Metode ini membandingkan vektor kueri Anda dengan vektor yang ada dalam koleksi Anda dan mengembalikan ID dari kecocokan terdekat beserta jarak di antara keduanya. Secara opsional, metode ini juga dapat mengembalikan nilai vektor dan metadata dari hasil pencarian.</li>
+<li><strong>Pencarian hibrida</strong>: Untuk koleksi dengan dua atau lebih bidang vektor, gunakan metode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a> metode. Metode ini melakukan beberapa permintaan pencarian Approximate Nearest Neighbor (ANN) dan menggabungkan hasilnya untuk mengembalikan kecocokan yang paling relevan setelah pemeringkatan ulang.</li>
 </ul>
-<p>このガイドでは、Milvusで単一ベクトル検索を実行する方法を中心に説明します。ハイブリッド検索の詳細については、<a href="https://milvus.io/docs/multi-vector-search.md">ハイブリッド検索を</a>参照してください。</p>
-<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
+<p>Panduan ini berfokus pada cara melakukan pencarian vektor tunggal di Milvus. Untuk detail tentang pencarian hibrida, lihat <a href="https://milvus.io/docs/multi-vector-search.md">Pencarian hibrida</a>.</p>
+<h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,14 +43,14 @@ title: 単一ベクトル検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>様々な要件に対応するため、様々な検索タイプがあります：</p>
+    </button></h2><p>Ada berbagai jenis pencarian untuk memenuhi kebutuhan yang berbeda:</p>
 <ul>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">基本検索</a>：基本検索：単一ベクトル検索、一括ベクトル検索、パーティション検索、出力フィールドを指定した検索。</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">フィルタリング検索</a>：スカラー・フィールドに基づくフィルタリング基準を適用し、検索結果を絞り込む。</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Range-search">範囲検索</a>：クエリ・ベクトルから特定の距離範囲内にあるベクトルを検索します。</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">グルーピング検索</a>：特定のフィールドに基づいて検索結果をグループ化し、結果の多様性を確保します。</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">Pencarian dasar</a>: Termasuk pencarian vektor tunggal, pencarian vektor massal, pencarian partisi, dan pencarian dengan bidang keluaran tertentu.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">Pencarian yang difilter</a>: Menerapkan kriteria pemfilteran berdasarkan bidang skalar untuk mempersempit hasil pencarian.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Range-search">Pencarian rentang</a>: Menemukan vektor dalam rentang jarak tertentu dari vektor kueri.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">Pencarian pengelompokan</a>: Mengelompokkan hasil pencarian berdasarkan bidang tertentu untuk memastikan keragaman hasil.</p></li>
 </ul>
-<h2 id="Preparations" class="common-anchor-header">準備<button data-href="#Preparations" class="anchor-icon" translate="no">
+<h2 id="Preparations" class="common-anchor-header">Persiapan<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,7 +65,7 @@ title: 単一ベクトル検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のコードスニペットは、Milvusへの接続を確立し、コレクションを素早くセットアップするために既存のコードを再利用しています。</p>
+    </button></h2><p>Cuplikan kode di bawah ini menggunakan kembali kode yang sudah ada untuk membuat koneksi ke Milvus dan dengan cepat menyiapkan koleksi.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -422,7 +424,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 500</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Basic-search" class="common-anchor-header">基本的な検索<button data-href="#Basic-search" class="anchor-icon" translate="no">
+<h2 id="Basic-search" class="common-anchor-header">Pencarian dasar<button data-href="#Basic-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -437,11 +439,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">search</code> リクエストを送信する際、クエリの埋め込みを表す1つ以上のベクトル値と、返す結果の数を示す<code translate="no">limit</code> 値を指定することができます。</p>
-<p>データとクエリーベクトルによっては、<code translate="no">limit</code> より少ない結果しか得られないかもしれません。これは、<code translate="no">limit</code> がクエリにマッチする可能性のあるベクトルの数よりも大きい場合に起こります。</p>
-<h3 id="Single-vector-search" class="common-anchor-header">単一ベクトル検索</h3><p>単一ベクトル検索はMilvusの<code translate="no">search</code> 操作の中で最も単純なもので、与えられたクエリーベクトルに最も類似したベクトルを検索するように設計されています。</p>
-<p>単一ベクトル検索を実行するには、ターゲットコレクション名、クエリベクトル、希望する結果数 (<code translate="no">limit</code>) を指定します。この操作は、最も類似したベクトル、そのID、クエリ・ベクトルからの距離からなる結果セットを返します。</p>
-<p>以下は、クエリ・ベクトルに最も似ている上位 5 つのエンティティを検索する例です：</p>
+    </button></h2><p>Saat mengirimkan permintaan <code translate="no">search</code>, Anda dapat memberikan satu atau beberapa nilai vektor yang mewakili sematan kueri Anda dan nilai <code translate="no">limit</code> yang menunjukkan jumlah hasil yang akan dikembalikan.</p>
+<p>Bergantung pada data dan vektor kueri Anda, Anda mungkin mendapatkan hasil yang lebih sedikit dari <code translate="no">limit</code>. Hal ini terjadi jika <code translate="no">limit</code> lebih besar daripada jumlah vektor yang mungkin cocok untuk kueri Anda.</p>
+<h3 id="Single-vector-search" class="common-anchor-header">Pencarian vektor tunggal</h3><p>Pencarian vektor tunggal adalah bentuk paling sederhana dari operasi <code translate="no">search</code> di Milvus, yang dirancang untuk menemukan vektor yang paling mirip dengan vektor kueri yang diberikan.</p>
+<p>Untuk melakukan pencarian vektor tunggal, tentukan nama koleksi target, vektor kueri, dan jumlah hasil yang diinginkan (<code translate="no">limit</code>). Operasi ini mengembalikan kumpulan hasil yang terdiri dari vektor-vektor yang paling mirip, ID, dan jaraknya dari vektor kueri.</p>
+<p>Berikut ini adalah contoh pencarian 5 entitas teratas yang paling mirip dengan vektor kueri:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Single vector search</span>
@@ -484,74 +486,74 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <table class="language-python">
   <thead>
     <tr>
-      <th>パラメータ</th>
-      <th>説明</th>
+      <th>Parameter</th>
+      <th>Deskripsi</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>既存のコレクションの名前。</td>
+      <td>Nama koleksi yang sudah ada.</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvusは指定されたベクトル埋め込みに最も類似したベクトル埋め込みを検索する。</td>
+      <td>Daftar sematan vektor.<br/>Milvus mencari sematan vektor yang paling mirip dengan yang ditentukan.</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td><br/>このパラメータと<strong>paramの</strong> <strong>offsetを組み合わせて</strong>使用すると、ページ分割が可能になる。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>和は、16,384未満でなければならない。</td>
+      <td>Jumlah total entitas yang akan dikembalikan.<br/>Anda dapat menggunakan parameter ini bersama dengan <strong>offset</strong> in <strong>param</strong> untuk mengaktifkan pagination.<br/>Jumlah nilai ini dan <strong>offset</strong> in <strong>param</strong> harus kurang dari 16.384.</td>
     </tr>
     <tr>
       <td><code translate="no">search_params</code></td>
-      <td>この操作に固有のパラメータ設定。<br/><ul><li><code translate="no">metric_type</code>:この操作に適用されるメトリックタイプ。これは、上記で指定したベクトル・フィールドのインデックスを作成するときに使用するものと同じでなければなりません。指定可能な値は、<strong>L2</strong>、<strong>IP</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong> です。</li><li><code translate="no">params</code>:追加パラメータ。詳細は<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a> を参照。</li></ul></td>
+      <td>Pengaturan parameter khusus untuk operasi ini.<br/><ul><li><code translate="no">metric_type</code>: Jenis metrik yang diterapkan pada operasi ini. Ini harus sama dengan yang digunakan saat Anda mengindeks bidang vektor yang ditentukan di atas. Nilai yang mungkin adalah <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code translate="no">params</code>: Parameter tambahan. Untuk detailnya, lihat <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>パラメータ</th>
-      <th>説明</th>
+      <th>Parameter</th>
+      <th>Deskripsi</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>既存のコレクションの名前。</td>
+      <td>Nama koleksi yang sudah ada.</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvusは指定されたものに最も類似したベクトル埋め込みを検索する。</td>
+      <td>Daftar sematan vektor.<br/>Milvus mencari sematan vektor yang paling mirip dengan yang ditentukan.</td>
     </tr>
     <tr>
       <td><code translate="no">topK</code></td>
-      <td>検索結果で返すレコード数。このパラメータは<strong>limit</strong>パラメータと同じ構文を使用するので、どちらか一方だけを設定する必要があります。<br/>このパラメータは<strong>paramの</strong> <strong>offsetと組み合わせて</strong>使用することで、ページ分割を有効にすることができます。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>合計は16,384未満でなければなりません。</td>
+      <td>Jumlah rekaman yang akan dikembalikan dalam hasil pencarian. Parameter ini menggunakan sintaks yang sama dengan parameter <strong>limit</strong>, jadi Anda hanya perlu menetapkan salah satunya.<br/>Anda dapat menggunakan parameter ini bersama dengan <strong>offset</strong> in <strong>param</strong> untuk mengaktifkan pagination.<br/>Jumlah dari nilai ini dan <strong>offset</strong> in <strong>param</strong> harus kurang dari 16.384.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>パラメータ</th>
-      <th>説明</th>
+      <th>Parameter</th>
+      <th>Deskripsi</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>既存のコレクションの名前。</td>
+      <td>Nama koleksi yang sudah ada.</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvusは指定されたベクトル埋め込みに最も類似したベクトル埋め込みを検索する。</td>
+      <td>Daftar sematan vektor.<br/>Milvus mencari sematan vektor yang paling mirip dengan yang ditentukan.</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td><br/>このパラメータと<strong>paramの</strong> <strong>offsetを組み合わせて</strong>使用すると、ページ分割が可能になります。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>和は、16,384未満でなければなりません。</td>
+      <td>Jumlah total entitas yang akan dikembalikan.<br/>Anda dapat menggunakan parameter ini dalam kombinasi dengan <strong>offset</strong> dalam <strong>param</strong> untuk mengaktifkan pagination.<br/>Jumlah nilai ini dan <strong>offset</strong> dalam <strong>param</strong> harus kurang dari 16.384.</td>
     </tr>
   </tbody>
 </table>
-<p>出力は以下のようになる：</p>
+<p>Keluarannya mirip dengan yang berikut ini:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -632,10 +634,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">1.7258622646331787</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;718&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>出力には、クエリベクトルに最も近い上位5つの近傍ベクトルが表示され、一意のIDと計算された距離も表示されます。</p>
-<h3 id="Bulk-vector-search" class="common-anchor-header">一括ベクトル検索</h3><p>一括ベクトル検索は、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">1回の</a>リクエストで複数のクエリベクトルを検索できるようにすることで、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">単一ベクトル検索の</a>概念を拡張します。このタイプの検索は、クエリベクターのセットに対して類似したベクトルを検索する必要があるシナリオに最適で、必要な時間と計算リソースを大幅に削減します。</p>
-<p>一括ベクトル検索では、<code translate="no">data</code> フィールドに複数のクエリベクトルを含めることができます。システムはこれらのベクトルを並列に処理し、各クエリ・ベ クターごとに個別の結果セットを返し、各セットにはコレクション内で見つかった最も近い一致が 含まれます。</p>
-<p>以下は、2 つのクエリ・ベクターから、最も類似したエンティティの 2 つの異なるセットを検索する例です：</p>
+<p>Keluaran menampilkan 5 tetangga teratas yang terdekat dengan vektor kueri Anda, termasuk ID unik dan jarak yang dihitung.</p>
+<h3 id="Bulk-vector-search" class="common-anchor-header">Pencarian vektor massal</h3><p>Pencarian vektor massal memperluas konsep <a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">pencarian vektor tunggal</a> dengan mengizinkan beberapa vektor kueri untuk dicari dalam satu permintaan. Jenis pencarian ini ideal untuk skenario di mana Anda perlu menemukan vektor yang serupa untuk sekumpulan vektor kueri, yang secara signifikan mengurangi waktu dan sumber daya komputasi yang diperlukan.</p>
+<p>Dalam pencarian vektor massal, Anda dapat menyertakan beberapa vektor kueri di bidang <code translate="no">data</code>. Sistem memproses vektor-vektor ini secara paralel, mengembalikan kumpulan hasil yang terpisah untuk setiap vektor kueri, setiap kumpulan berisi kecocokan terdekat yang ditemukan dalam koleksi.</p>
+<p>Berikut ini adalah contoh pencarian dua set yang berbeda dari entitas yang paling mirip dari dua vektor kueri:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Bulk-vector search</span>
@@ -682,7 +684,7 @@ res = <span class="hljs-keyword">await</span> client.search({
 
 console.log(res.results)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Keluarannya mirip dengan yang berikut ini:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -783,10 +785,10 @@ console.log(res.results)
   ]
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>その結果、各クエリベクトルに対して1つずつ、2つの最近傍セットが含まれており、複数のクエリベクトルを一度に処理するバルクベクトル検索の効率性を示している。</p>
-<h3 id="Partition-search" class="common-anchor-header">パーティション検索</h3><p>パーティション検索は、検索範囲をコレクションの特定のサブセットまたはパーティションに絞り込みます。これは、データが論理的またはカテゴリー的に分割されている組織化されたデータセットに特に有効で、スキャンするデータ量を減らすことにより、より高速な検索操作を可能にします。</p>
-<p>パーティション検索を行うには、検索要求の<code translate="no">partition_names</code> にターゲット・パーティション名を含めるだけです。これは、<code translate="no">search</code> 操作が、指定されたパーティション内のベクトルだけを考慮することを指定します。</p>
-<p>以下は、<code translate="no">red</code> 内のエンティティを検索する例です：</p>
+<p>Hasilnya mencakup dua set tetangga terdekat, satu untuk setiap vektor kueri, yang menunjukkan efisiensi pencarian vektor massal dalam menangani beberapa vektor kueri sekaligus.</p>
+<h3 id="Partition-search" class="common-anchor-header">Pencarian partisi</h3><p>Pencarian partisi mempersempit cakupan pencarian Anda ke subset atau partisi tertentu dari koleksi Anda. Hal ini sangat berguna untuk kumpulan data yang terorganisir di mana data tersegmentasi ke dalam divisi logis atau kategoris, sehingga memungkinkan operasi pencarian yang lebih cepat dengan mengurangi volume data yang harus dipindai.</p>
+<p>Untuk melakukan pencarian partisi, cukup sertakan nama partisi target di <code translate="no">partition_names</code> pada permintaan pencarian Anda. Hal ini menetapkan bahwa operasi <code translate="no">search</code> hanya mempertimbangkan vektor dalam partisi yang ditentukan.</p>
+<p>Berikut ini adalah contoh pencarian entitas di <code translate="no">red</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6.2 Search within a partition</span>
@@ -828,7 +830,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Keluarannya mirip dengan yang berikut ini:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1006,7 +1008,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.797295093536377</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1406&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>次に、<code translate="no">blue</code> でエンティティを検索する：</p>
+<p>Kemudian, cari entitas di <code translate="no">blue</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -1039,7 +1041,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Keluarannya mirip dengan yang berikut ini:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1217,10 +1219,10 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
   { score: <span class="hljs-number">2.7014894485473633</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1597&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">red</code> のデータは<code translate="no">blue</code> のデータとは異なる。したがって、検索結果は、指定されたパーティションに制約され、そのサブセットの固有の特性とデータ分布が反映されます。</p>
-<h3 id="Search-with-output-fields" class="common-anchor-header">出力フィールド付き検索</h3><p>出力フィールド付き検索では、一致したベクトルのどの属性またはフィールドを検索結果に含めるかを指定でき ます。</p>
-<p>リクエストで<code translate="no">output_fields</code> を指定すると、特定のフィールドを含む結果を返すことができます。</p>
-<p>以下は、<code translate="no">color</code> 属性値を含む結果を返す例です：</p>
+<p>Data di <code translate="no">red</code> berbeda dengan data di <code translate="no">blue</code>. Oleh karena itu, hasil pencarian akan dibatasi pada partisi yang ditentukan, yang mencerminkan karakteristik unik dan distribusi data dari subset tersebut.</p>
+<h3 id="Search-with-output-fields" class="common-anchor-header">Pencarian dengan bidang keluaran</h3><p>Pencarian dengan bidang keluaran memungkinkan Anda menentukan atribut atau bidang mana dari vektor yang cocok yang harus disertakan dalam hasil pencarian.</p>
+<p>Anda dapat menentukan <code translate="no">output_fields</code> dalam permintaan untuk mengembalikan hasil dengan bidang tertentu.</p>
+<p>Berikut adalah contoh pengembalian hasil dengan nilai atribut <code translate="no">color</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with output fields</span>
@@ -1261,7 +1263,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Keluarannya mirip dengan yang berikut ini:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1338,8 +1340,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.916019916534424</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;425&#x27;</span>, color: <span class="hljs-string">&#x27;purple&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>検索結果には、最近傍情報とともに、指定されたフィールド<code translate="no">color</code> が含まれ、各マッチングベクトルに対してより豊富な情報が提供されます。</p>
-<h2 id="Filtered-search" class="common-anchor-header">フィルター検索<button data-href="#Filtered-search" class="anchor-icon" translate="no">
+<p>Di samping tetangga terdekat, hasil pencarian akan menyertakan bidang yang ditentukan <code translate="no">color</code>, memberikan informasi yang lebih kaya untuk setiap vektor yang cocok.</p>
+<h2 id="Filtered-search" class="common-anchor-header">Pencarian yang difilter<button data-href="#Filtered-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1354,21 +1356,21 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>フィルタリング検索はスカラー・フィルタをベクトル検索に適用し、特定の条件に基づいて検索結果を絞り込むことができます。フィルタ式の詳細については、「<a href="https://milvus.io/docs/boolean.md">Boolean Expression Rules（ブーリアン式のルール</a>）」と「<a href="https://milvus.io/docs/get-and-scalar-query.md">Get &amp; Scalar Query（取得とスカラー・クエリ</a>）」の例を参照してください。</p>
-<h3 id="Use-the-like-operator" class="common-anchor-header"><code translate="no">like</code> 演算子の使用</h3><p><code translate="no">like</code> 演算子は、接頭辞、接尾辞、接尾辞を含むパターンを評価することで、文字列検索を強化します：</p>
+    </button></h2><p>Pencarian yang difilter menerapkan filter skalar pada pencarian vektor, sehingga Anda dapat mempersempit hasil pencarian berdasarkan kriteria tertentu. Anda dapat menemukan lebih banyak tentang ekspresi filter di <a href="https://milvus.io/docs/boolean.md">Aturan Ekspresi Boolean</a> dan contohnya di <a href="https://milvus.io/docs/get-and-scalar-query.md">Dapatkan &amp; Kueri Skalar</a>.</p>
+<h3 id="Use-the-like-operator" class="common-anchor-header">Gunakan operator <code translate="no">like</code> </h3><p>Operator <code translate="no">like</code> meningkatkan pencarian string dengan mengevaluasi pola yang mencakup awalan, imbuhan, dan akhiran:</p>
 <ul>
-<li><strong>接頭辞マッチング</strong>: 特定の接頭辞で始まる値を検索するには、構文<code translate="no">'like &quot;prefix%&quot;'</code> を使用します。</li>
-<li><strong>接尾辞マッチング</strong>: 文字列内の任意の場所で特定の文字列を含む値を検索するには、構文<code translate="no">'like &quot;%infix%&quot;'</code> を使用します。</li>
-<li><strong>接尾辞マッチング</strong>：特定の接尾辞で終わる値を検索するには、構文<code translate="no">'like &quot;%suffix&quot;'</code> を使用します。</li>
+<li><strong>Pencocokan</strong> awalan: Untuk menemukan nilai yang dimulai dengan awalan tertentu, gunakan sintaks <code translate="no">'like &quot;prefix%&quot;'</code>.</li>
+<li><strong>Pencocokan infiks</strong>: Untuk menemukan nilai yang berisi urutan karakter tertentu di mana saja dalam string, gunakan sintaks <code translate="no">'like &quot;%infix%&quot;'</code>.</li>
+<li><strong>Pencocokan</strong> akhiran: Untuk menemukan nilai yang diakhiri dengan akhiran tertentu, gunakan sintaks <code translate="no">'like &quot;%suffix&quot;'</code>.</li>
 </ul>
-<p>1文字マッチングでは、アンダースコア(<code translate="no">_</code>)が1文字に対するワイルドカードとして機能します（例：<code translate="no">'like &quot;y_llow&quot;'</code> ）。</p>
-<h3 id="Special-characters-in-search-strings" class="common-anchor-header">検索文字列の特殊文字</h3><p>アンダースコア(<code translate="no">_</code>)やパーセント記号(<code translate="no">%</code>)のような特殊文字を含む文字列を検索したい場合、通常、検索パターンではワイルドカードとして使用されます（<code translate="no">_</code> は任意の1文字、<code translate="no">%</code> は任意の連続した文字）。これらの文字をエスケープして、リテラル文字として扱う必要があります。特殊文字をエスケープするにはバックスラッシュ (<code translate="no">\</code>) を使用し、バックスラッシュ自体をエスケープすることを忘れない。例えば</p>
+<p>Untuk pencocokan karakter tunggal, garis bawah (<code translate="no">_</code>) bertindak sebagai karakter pengganti untuk satu karakter, misalnya, <code translate="no">'like &quot;y_llow&quot;'</code>.</p>
+<h3 id="Special-characters-in-search-strings" class="common-anchor-header">Karakter khusus dalam string pencarian</h3><p>Jika Anda ingin mencari string yang berisi karakter khusus seperti garis bawah (<code translate="no">_</code>) atau tanda persen (<code translate="no">%</code>), yang biasanya digunakan sebagai karakter pengganti dalam pola pencarian (<code translate="no">_</code> untuk satu karakter dan <code translate="no">%</code> untuk urutan karakter apa pun), Anda harus melewatkan karakter ini untuk memperlakukannya sebagai karakter literal. Gunakan tanda garis miring (<code translate="no">\</code>) untuk melewatkan karakter khusus, dan ingatlah untuk melewatkan tanda garis miring itu sendiri. Sebagai contoh:</p>
 <ul>
-<li>リテラル・アンダースコアを検索するには、<code translate="no">\\_</code> を使用します。</li>
-<li>パーセント記号を検索するには、<code translate="no">\\%</code> を使用します。</li>
+<li>Untuk mencari garis bawah literal, gunakan <code translate="no">\\_</code>.</li>
+<li>Untuk mencari tanda persen literal, gunakan <code translate="no">\\%</code>.</li>
 </ul>
-<p>したがって、<code translate="no">&quot;_version_&quot;</code> というテキストを検索する必要がある場合は、<code translate="no">'like &quot;\\_version\\_&quot;'</code> と書式を整え、アンダースコアがワイルドカードとしてではなく、検索語の一部として扱われるようにします。</p>
-<p><strong>赤で</strong>始まる<strong>色を</strong>持つ結果をフィルタリングします：</p>
+<p>Jadi, jika Anda perlu mencari teks <code translate="no">&quot;_version_&quot;</code>, kueri Anda harus diformat sebagai <code translate="no">'like &quot;\\_version\\_&quot;'</code> untuk memastikan garis bawah diperlakukan sebagai bagian dari istilah pencarian dan bukan sebagai karakter pengganti.</p>
+<p>Hasil penyaringan yang <strong>warnanya</strong> diawali dengan <strong>warna</strong> <strong>merah</strong>:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with filter</span>
@@ -1413,7 +1415,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Keluarannya mirip dengan yang berikut ini:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1475,7 +1477,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.4004223346710205</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;854&#x27;</span>, color_tag: <span class="hljs-string">&#x27;black_5990&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>文字列のどこかに<strong>ll の</strong> <strong>文字が</strong>含まれる結果をフィルタリングする：</p>
+<p>Hasil penyaringan yang <strong>warnanya</strong> mengandung huruf <strong>ll</strong> di mana saja dalam string:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Infix match on color field</span>
@@ -1520,7 +1522,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Keluarannya mirip dengan yang berikut ini:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1548,7 +1550,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.5080761909484863</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1201&#x27;</span>, color_tag: <span class="hljs-string">&#x27;yellow_4222&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Range-search" class="common-anchor-header">範囲検索<button data-href="#Range-search" class="anchor-icon" translate="no">
+<h2 id="Range-search" class="common-anchor-header">Pencarian rentang<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1563,11 +1565,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>範囲検索では、クエリ・ベクトルから指定した距離範囲内にあるベクトルを見つけることができます。</p>
-<p><code translate="no">radius</code> と、オプションで<code translate="no">range_filter</code> を設定することで、クエリ・ベクトルにある程度似ているベクトルも含めて検索の幅を調整することができ、マッチする可能性のあるベクトルをより包括的に表示することができます。</p>
+    </button></h2><p>Pencarian rentang memungkinkan Anda menemukan vektor yang berada dalam rentang jarak tertentu dari vektor kueri Anda.</p>
+<p>Dengan mengatur <code translate="no">radius</code> dan secara opsional <code translate="no">range_filter</code>, Anda dapat menyesuaikan luasnya pencarian Anda untuk menyertakan vektor yang agak mirip dengan vektor kueri, sehingga memberikan pandangan yang lebih komprehensif tentang kecocokan potensial.</p>
 <ul>
-<li><p><code translate="no">radius</code>:検索空間の外側の境界を定義します。クエリ・ベクトルからこの距離内にあるベクトルだけが、マッチする可能性があるとみなされます。</p></li>
-<li><p><code translate="no">range_filter</code>:<code translate="no">radius</code> は検索の外枠を設定しますが、<code translate="no">range_filter</code> はオプションで内側の境界を定義するために使用することができます。</p></li>
+<li><p><code translate="no">radius</code>: Menentukan batas luar ruang pencarian Anda. Hanya vektor yang berada dalam jarak ini dari vektor kueri yang dianggap sebagai kecocokan potensial.</p></li>
+<li><p><code translate="no">range_filter</code>: Sementara <code translate="no">radius</code> menetapkan batas luar pencarian, <code translate="no">range_filter</code> dapat digunakan secara opsional untuk menentukan batas dalam, menciptakan rentang jarak di mana vektor harus berada untuk dipertimbangkan sebagai kecocokan.</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -1622,7 +1624,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Keluarannya mirip dengan yang berikut ini:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1684,22 +1686,22 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.2593345642089844</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1309&#x27;</span>, color_tag: <span class="hljs-string">&#x27;red_8458&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>返されるすべてのエンティティの距離が、クエリベクトルから0.8～1.0の範囲内にあることがわかります。</p>
-<p><code translate="no">radius</code> と<code translate="no">range_filter</code> のパラメータ設定は、使用するメトリック・タイプによって異なります。</p>
+<p>Anda akan melihat bahwa semua entitas yang dikembalikan memiliki jarak yang berada dalam kisaran 0,8 hingga 1,0 dari vektor kueri.</p>
+<p>Pengaturan parameter untuk <code translate="no">radius</code> dan <code translate="no">range_filter</code> bervariasi dengan jenis metrik yang digunakan.</p>
 <table>
 <thead>
-<tr><th><strong>メトリックタイプ</strong></th><th><strong>特性</strong></th><th><strong>範囲検索の設定</strong></th></tr>
+<tr><th><strong>Jenis Metrik</strong></th><th><strong>Karakteristik</strong></th><th><strong>Pengaturan Pencarian Jarak</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">L2</code></td><td>L2 距離が小さいほど、類似度が高いことを示します。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
-<tr><td><code translate="no">IP</code></td><td>IP距離が大きいほど類似度が高い．</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">radius</code> &lt; distance &lt;= 。<code translate="no">range_filter</code></td></tr>
-<tr><td><code translate="no">COSINE</code></td><td>コサイン値が大きいほど類似度が高いことを示します。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">radius</code> &lt; distance &lt;=。<code translate="no">range_filter</code></td></tr>
-<tr><td><code translate="no">JACCARD</code></td><td>Jaccard距離が小さいほど、類似度が高いことを示す。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
-<tr><td><code translate="no">HAMMING</code></td><td>ハミング距離が小さいほど、類似度が高いことを示します。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">L2</code></td><td>Jarak L2 yang lebih kecil menunjukkan kemiripan yang lebih tinggi.</td><td>Untuk mengecualikan vektor terdekat dari hasil, pastikan bahwa:<br/> <code translate="no">range_filter</code> &lt;= jarak &lt; <code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">IP</code></td><td>Jarak IP yang lebih besar menunjukkan kemiripan yang lebih tinggi.</td><td>Untuk mengecualikan vektor terdekat dari hasil, pastikan bahwa:<br/> <code translate="no">radius</code> &lt; jarak &lt;= <code translate="no">range_filter</code></td></tr>
+<tr><td><code translate="no">COSINE</code></td><td>Nilai kosinus yang lebih besar menunjukkan kemiripan yang lebih tinggi.</td><td>Untuk mengecualikan vektor terdekat dari hasil, pastikan bahwa:<br/> <code translate="no">radius</code> &lt; jarak &lt;= <code translate="no">range_filter</code></td></tr>
+<tr><td><code translate="no">JACCARD</code></td><td>Jarak Jaccard yang lebih kecil menunjukkan kemiripan yang lebih tinggi.</td><td>Untuk mengecualikan vektor terdekat dari hasil, pastikan bahwa:<br/> <code translate="no">range_filter</code> &lt;= jarak &lt; <code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">HAMMING</code></td><td>Jarak Hamming yang lebih kecil menunjukkan kemiripan yang lebih tinggi.</td><td>Untuk mengecualikan vektor terdekat dari hasil, pastikan bahwa:<br/> <code translate="no">range_filter</code> &lt;= jarak &lt; <code translate="no">radius</code></td></tr>
 </tbody>
 </table>
-<p>距離メトリックの種類については、<a href="/docs/ja/metric.md">類似度メトリックを</a>参照してください。</p>
-<h2 id="Grouping-search" class="common-anchor-header">グループ化検索<button data-href="#Grouping-search" class="anchor-icon" translate="no">
+<p>Untuk mempelajari lebih lanjut tentang jenis metrik jarak, lihat <a href="/docs/id/metric.md">Metrik Kemiripan</a>.</p>
+<h2 id="Grouping-search" class="common-anchor-header">Mengelompokkan pencarian<button data-href="#Grouping-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1714,10 +1716,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、検索結果の網羅性と精度を向上させるためにグループ化検索が設計されています。</p>
-<p>RAGのシナリオを考えてみましょう。ここでは、ロードされた文書が様々なパッセージに分割され、各パッセージが1つのベクトル埋め込みで表現されています。ユーザはLLMを正確に促すために最も関連性の高い文章を見つけたい。Milvusの通常の検索機能はこの要求を満たすことができるが、検索結果が非常に偏ったものになる可能性がある：ほとんどのパッセージは数個の文書からしか得られず、検索結果の包括性は非常に低い。これは、LLMが提供する検索結果の正確さ、あるいは正しさを著しく損ない、LLM利用者の経験に悪影響を与える可能性がある。</p>
-<p>グループ化検索は、この問題を効果的に解決することができる。Milvus ユーザーは、<code translate="no">group_by_field</code> を指定することで、検索結果をいくつかのグループに分類することができます。この機能により、検索結果の包括性と公平性が大幅に向上し、LLMの出力品質が顕著に改善されます。</p>
-<p>以下に、検索結果をフィールドごとにグループ化するコード例を示します：</p>
+    </button></h2><p>Di Milvus, pencarian pengelompokan dirancang untuk meningkatkan kelengkapan dan akurasi hasil pencarian.</p>
+<p>Pertimbangkan sebuah skenario di RAG, di mana banyak dokumen dibagi menjadi beberapa bagian, dan setiap bagian diwakili oleh satu penyematan vektor. Pengguna ingin menemukan bagian yang paling relevan untuk meminta LLM secara akurat. Fungsi pencarian Milvus biasa dapat memenuhi persyaratan ini, tetapi dapat menghasilkan hasil yang sangat miring dan bias: sebagian besar bagian hanya berasal dari beberapa dokumen, dan kelengkapan hasil pencarian sangat buruk. Hal ini dapat mengganggu keakuratan atau bahkan ketepatan hasil yang diberikan oleh LLM dan mempengaruhi pengalaman pengguna LLM secara negatif.</p>
+<p>Pencarian pengelompokan dapat secara efektif menyelesaikan masalah ini. Dengan melewati <code translate="no">group_by_field</code>, pengguna Milvus dapat mengelompokkan hasil pencarian ke dalam beberapa kelompok. Fitur ini secara signifikan dapat meningkatkan kelengkapan dan keadilan hasil pencarian, yang secara nyata meningkatkan kualitas output LLM.</p>
+<p>Berikut adalah contoh kode untuk mengelompokkan hasil pencarian berdasarkan bidang:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1744,12 +1746,12 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 <span class="hljs-built_in">print</span>(doc_ids)
 <span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Keluarannya serupa dengan yang berikut ini:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>]
 [<span class="hljs-meta">5, 10, 11, 10, 9, 6, 5, 4, 9, 2</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>与えられた出力では、各文書に対してちょうど2つの文章が検索され、合計で5つの文書が結果を構成していることがわかる。</p>
-<p>比較のために、グループ関連のパラメーターをコメントアウトして、通常の検索を行ってみよう：</p>
+<p>Pada keluaran yang diberikan, dapat diamati bahwa untuk setiap dokumen, tepat dua bagian diambil dan total 5 dokumen secara kolektif membentuk hasilnya.</p>
+<p>Sebagai perbandingan, mari kita beri komentar pada parameter yang berhubungan dengan grup dan melakukan pencarian biasa:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1776,20 +1778,20 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 <span class="hljs-built_in">print</span>(doc_ids)
 <span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Keluarannya serupa dengan yang berikut ini:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>]
 [<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>与えられた出力では、"doc_11 "が検索結果を完全に支配し、他の文書からの質の高いパラグラフを覆い隠していることが観察される。</p>
-<p><strong>制限事項</strong></p>
+<p>Dalam output yang diberikan, dapat diamati bahwa "doc_11" benar-benar mendominasi hasil pencarian, membayangi paragraf berkualitas tinggi dari dokumen lain, yang dapat menjadi petunjuk yang buruk bagi LLM.</p>
+<p><strong>Keterbatasan</strong></p>
 <ul>
-<li><p><strong>インデックス作成</strong>：このグルーピング機能は、以下のインデックスタイプでインデックスされたコレクションに対してのみ機能する：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
-<li><p><strong>ベクトル</strong>：現在のところ、グループ化検索は<strong>BINARY_VECTOR</strong>型のベクトル・フィールドをサポートしていません。データ型の詳細については、<a href="https://milvus.io/docs/schema.md#Supported-data-types">サポートされるデータ</a>型を参照のこと。</p></li>
-<li><p><strong>フィールド</strong>：現在のところ、グループ化検索では1つの列しか使用できません。<code translate="no">group_by_field</code> コンフィグで複数のフィールド名を指定することはできません。  また、グループ化検索は、JSON、FLOAT、DOUBLE、ARRAY、またはvectorフィールドのデータ型とは互換性がありません。</p></li>
-<li><p><strong>パフォーマンスへの影響</strong>：クエリ・ベクタ数が増えるとパフォーマンスが低下することに注意してください。CPUコア2個、メモリ8GBのクラスタを例にとると、グルーピング検索の実行時間は入力クエリベクタ数に比例して増加します。</p></li>
-<li><p><strong>機能</strong>現在のところ、グルーピング検索は<a href="https://milvus.io/docs/single-vector-search.md#Range-search">範囲検索</a>、<a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">検索イテレータでは</a>サポートされていません。</p></li>
+<li><p><strong>Pengindeksan</strong>: Fitur pengelompokan ini hanya berfungsi untuk koleksi yang diindeks dengan jenis indeks berikut ini: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
+<li><p><strong>Vektor</strong>: Saat ini, pencarian pengelompokan tidak mendukung bidang vektor dengan tipe <strong>BINARY_VECTOR</strong>. Untuk informasi lebih lanjut tentang tipe data, lihat <a href="https://milvus.io/docs/schema.md#Supported-data-types">Tipe data yang didukung</a>.</p></li>
+<li><p><strong>Bidang</strong>: Saat ini, pencarian pengelompokan hanya memungkinkan untuk satu kolom. Anda tidak dapat menentukan beberapa nama bidang dalam konfigurasi <code translate="no">group_by_field</code>.  Selain itu, pencarian pengelompokan tidak kompatibel dengan tipe data JSON, FLOAT, DOUBLE, ARRAY, atau bidang vektor.</p></li>
+<li><p><strong>Dampak Kinerja</strong>: Perlu diingat bahwa kinerja menurun dengan meningkatnya jumlah vektor kueri. Menggunakan cluster dengan 2 inti CPU dan memori 8 GB sebagai contoh, waktu eksekusi untuk pencarian pengelompokan meningkat secara proporsional dengan jumlah vektor kueri masukan.</p></li>
+<li><p><strong>Fungsionalitas</strong>: Saat ini, pencarian pengelompokan tidak didukung oleh <a href="https://milvus.io/docs/single-vector-search.md#Range-search">pencarian rentang</a>, <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">iterator pencarian</a></p></li>
 </ul>
-<h2 id="Search-parameters" class="common-anchor-header">検索パラメータ<button data-href="#Search-parameters" class="anchor-icon" translate="no">
+<h2 id="Search-parameters" class="common-anchor-header">Parameter pencarian<button data-href="#Search-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1804,7 +1806,7 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>範囲検索を除く上記の検索では、デフォルトの検索パラメータが適用されます。通常の場合、検索パラメータを手動で設定する必要はありません。</p>
+    </button></h2><p>Pada pencarian di atas kecuali pencarian rentang, parameter pencarian default berlaku. Dalam kasus normal, Anda tidak perlu mengatur parameter pencarian secara manual.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># In normal cases, you do not need to set search parameters manually</span>
 <span class="hljs-comment"># Except for range searches.</span>
 search_parameters = {
@@ -1817,21 +1819,21 @@ search_parameters = {
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>次の表は、検索パラメータで設定可能なすべての一覧です。</p>
+<p>Tabel berikut ini mencantumkan semua pengaturan yang memungkinkan dalam parameter pencarian.</p>
 <table>
 <thead>
-<tr><th><strong>パラメータ名</strong></th><th><strong>パラメータ説明</strong></th></tr>
+<tr><th><strong>Nama Parameter</strong></th><th><strong>Deskripsi Parameter</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>ベクトル埋め込み間の類似度を測定する方法。<br/> 指定可能な値は<code translate="no">IP</code>,<code translate="no">L2</code>,<code translate="no">COSINE</code>,<code translate="no">JACCARD</code>,<code translate="no">HAMMING</code> で、デフォルトは読み込まれたインデックス・ファイルの値。</td></tr>
-<tr><td><code translate="no">params.nprobe</code></td><td>検索中にクエリーするユニット数。<br/> 値は[1, nlist<sub>[1</sub>]]の範囲です。</td></tr>
-<tr><td><code translate="no">params.level</code></td><td>検索精度レベル。<br/> 指定可能な値は<code translate="no">1</code> 、<code translate="no">2</code> 、および<code translate="no">3</code> で、デフォルトは<code translate="no">1</code> です。値を高くすると、より正確な結果が得られますが、パフォーマンスは低下します。</td></tr>
-<tr><td><code translate="no">params.radius</code></td><td>検索空間の外側の境界を定義します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決まります。たとえば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値域は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値域は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照のこと。</td></tr>
-<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> は検索の外側の限界を設定しますが、<code translate="no">range_filter</code> はオプションで内側の境界を定義するために使用することができ、ベクターが一致とみなされるために必要な距離範囲を作成します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決定されます。例えば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値の範囲は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値の範囲は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照してください。</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>Cara mengukur kemiripan antara penyematan vektor.<br/> Nilai yang memungkinkan adalah <code translate="no">IP</code>, <code translate="no">L2</code>, <code translate="no">COSINE</code>, <code translate="no">JACCARD</code>, dan <code translate="no">HAMMING</code>, dan nilai default dari file indeks yang dimuat.</td></tr>
+<tr><td><code translate="no">params.nprobe</code></td><td>Jumlah unit yang akan ditanyakan selama pencarian.<br/> Nilainya berada dalam kisaran [1, nlist<sub>[1]</sub>].</td></tr>
+<tr><td><code translate="no">params.level</code></td><td>Tingkat presisi pencarian.<br/> Nilai yang memungkinkan adalah <code translate="no">1</code>, <code translate="no">2</code>, dan <code translate="no">3</code>, dan default ke <code translate="no">1</code>. Nilai yang lebih tinggi menghasilkan hasil yang lebih akurat tetapi kinerja lebih lambat.</td></tr>
+<tr><td><code translate="no">params.radius</code></td><td>Menentukan batas luar ruang pencarian Anda. Hanya vektor yang berada dalam jarak ini dari vektor kueri yang dianggap sebagai kecocokan potensial.<br/>Kisaran nilai ditentukan oleh parameter <code translate="no">metric_type</code>. Misalnya, jika <code translate="no">metric_type</code> diatur ke <code translate="no">L2</code>, rentang nilai yang valid adalah <code translate="no">[0, ∞]</code>. Jika <code translate="no">metric_type</code> diatur ke <code translate="no">COSINE</code>, rentang nilai yang valid adalah <code translate="no">[-1, 1]</code>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/metric.md">Metrik Kemiripan</a>.</td></tr>
+<tr><td><code translate="no">params.range_filter</code></td><td>Sementara <code translate="no">radius</code> menetapkan batas luar pencarian, <code translate="no">range_filter</code> dapat digunakan secara opsional untuk menentukan batas dalam, membuat rentang jarak di mana vektor harus berada untuk dianggap cocok.<br/>Rentang nilai ditentukan oleh parameter <code translate="no">metric_type</code>. Sebagai contoh, jika <code translate="no">metric_type</code> diatur ke <code translate="no">L2</code>, rentang nilai yang valid adalah <code translate="no">[0, ∞]</code>. Jika <code translate="no">metric_type</code> diatur ke <code translate="no">COSINE</code>, rentang nilai yang valid adalah <code translate="no">[-1, 1]</code>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/metric.md">Metrik Kemiripan</a>.</td></tr>
 </tbody>
 </table>
 <div class="admonition note">
-<p><strong>注釈</strong></p>
-<p>[1] インデックス作成後のクラスタ単位数。Milvusはコレクションのインデックスを作成する際、ベクトルデータを複数のクラスタ単位に分割します。</p>
-<p>[2] 検索で返すエンティティの数。</p>
+<p><strong>Catatan</strong></p>
+<p>[1] Jumlah unit kluster setelah pengindeksan. Ketika mengindeks koleksi, Milvus membagi data vektor menjadi beberapa unit klaster, yang jumlahnya bervariasi sesuai dengan pengaturan indeks yang sebenarnya.</p>
+<p>[2] Jumlah entitas yang dikembalikan dalam pencarian.</p>
 </div>

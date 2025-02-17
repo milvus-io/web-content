@@ -251,8 +251,8 @@ summary: Milvus 사용 중 제한 사항에 대해 알아보세요.
 <tr><td>페이지 매김을 사용한 기본 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
 <tr><td>필터링된 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
 <tr><td>범위 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>예</td><td>예</td><td>예</td></tr>
-<tr><td>그룹 검색</td><td>예</td><td>아니요</td><td>예</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>예</td><td>아니요</td><td>아니요</td></tr>
-<tr><td>반복기를 사용한 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>예</td><td>아니요</td><td>아니요</td></tr>
+<tr><td>그룹 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>예</td><td>아니요</td><td>아니요</td></tr>
+<tr><td>반복기를 사용한 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>예</td><td>예</td><td>예</td></tr>
 <tr><td>하이브리드 검색</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예(RRFRanker만 해당)</td><td>예</td><td>예</td></tr>
 <tr><td>쿼리/조회</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td></tr>
 <tr><td>반복기를 사용한 쿼리</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>예</td><td>아니요</td><td>아니요</td><td>아니요</td><td>아니요</td><td>예</td><td>예</td><td>예</td></tr>

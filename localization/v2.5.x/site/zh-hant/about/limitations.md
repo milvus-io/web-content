@@ -251,8 +251,8 @@ summary: 了解使用 Milvus 時的限制。
 <tr><td>基本搜尋與分頁</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
 <tr><td>篩選搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
 <tr><td>範圍搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
-<tr><td>群組搜尋</td><td>有</td><td>是</td><td>有</td><td>是</td><td>是</td><td>無</td><td>無</td><td>無</td><td>無</td><td>無</td><td>無</td><td>是</td><td>無</td><td>無</td></tr>
-<tr><td>使用迭代器搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>無</td><td>無</td></tr>
+<tr><td>群組搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>無</td><td>無</td><td>是</td><td>是</td><td>無</td><td>無</td></tr>
+<tr><td>使用迭代器搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
 <tr><td>混合搜尋</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是(僅 RRFRanker)</td><td>是</td><td>是</td></tr>
 <tr><td>查詢/獲取</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>
 <tr><td>使用迭代器查詢</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td></tr>

@@ -1,10 +1,12 @@
 ---
 id: single-vector-search.md
 order: 1
-summary: この記事では、Milvusコレクション内のベクターを単一のクエリーベクターを使って検索する方法について説明します。
-title: 単一ベクトル検索
+summary: >-
+  В этой статье описывается, как искать векторы в коллекции Milvus с помощью
+  одного вектора запроса.
+title: Одновекторный поиск
 ---
-<h1 id="Single-Vector-Search" class="common-anchor-header">単一ベクトル検索<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
+<h1 id="Single-Vector-Search" class="common-anchor-header">Одновекторный поиск<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,14 +21,14 @@ title: 単一ベクトル検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>データを挿入したら、次のステップはMilvusでコレクションの類似性検索を行うことです。</p>
-<p>Milvusでは、コレクション内のベクトルフィールドの数に応じて2種類の検索を行うことができます：</p>
+    </button></h1><p>После того как вы вставили свои данные, следующим шагом будет выполнение поиска сходства в вашей коллекции в Milvus.</p>
+<p>Milvus позволяет проводить два типа поиска, в зависимости от количества векторных полей в вашей коллекции:</p>
 <ul>
-<li><strong>単一ベクトル検索</strong>：コレクションにベクトルフィールドが1つしかない場合は <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a>メソッドを使用します。このメソッドは、クエリ・ベクタをコレクション内の既存のベクタと比較し、最も近い一致の ID をそれらの間の距離とともに返します。オプションで、結果のベクトル値とメタデータを返すこともできます。</li>
-<li><strong>ハイブリッド検索</strong>：2つ以上のベクトルフィールドを持つコレクションには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a>メソッドを使用します。このメソッドは、複数の近似最近傍（ANN）検索要求を実行し、結果を組み合わせて、再ランク付け後に最も関連性の高いマッチを返します。</li>
+<li><strong>Одновекторный поиск</strong>: Если в вашей коллекции только одно векторное поле, используйте метод <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> для поиска наиболее похожих сущностей. Этот метод сравнивает вектор запроса с существующими векторами в вашей коллекции и возвращает идентификаторы ближайших совпадений вместе с расстояниями между ними. В качестве опции он также может возвращать значения векторов и метаданные результатов.</li>
+<li><strong>Гибридный поиск</strong>: Для коллекций с двумя или более векторными полями используйте метод <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a> метод. Этот метод выполняет несколько поисковых запросов по методу приближенных ближайших соседей (ANN) и объединяет результаты, чтобы вернуть наиболее релевантные совпадения после повторного ранжирования.</li>
 </ul>
-<p>このガイドでは、Milvusで単一ベクトル検索を実行する方法を中心に説明します。ハイブリッド検索の詳細については、<a href="https://milvus.io/docs/multi-vector-search.md">ハイブリッド検索を</a>参照してください。</p>
-<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
+<p>Это руководство посвящено тому, как выполнять одновекторный поиск в Milvus. Подробные сведения о гибридном поиске см. в разделе <a href="https://milvus.io/docs/multi-vector-search.md">Гибридный поиск</a>.</p>
+<h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,14 +43,14 @@ title: 単一ベクトル検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>様々な要件に対応するため、様々な検索タイプがあります：</p>
+    </button></h2><p>Существует множество типов поиска, отвечающих различным требованиям:</p>
 <ul>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">基本検索</a>：基本検索：単一ベクトル検索、一括ベクトル検索、パーティション検索、出力フィールドを指定した検索。</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">フィルタリング検索</a>：スカラー・フィールドに基づくフィルタリング基準を適用し、検索結果を絞り込む。</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Range-search">範囲検索</a>：クエリ・ベクトルから特定の距離範囲内にあるベクトルを検索します。</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">グルーピング検索</a>：特定のフィールドに基づいて検索結果をグループ化し、結果の多様性を確保します。</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">Базовый поиск</a>: Включает поиск по одному вектору, поиск по большому вектору, поиск по разделам и поиск с заданными полями вывода.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">Фильтрованный поиск</a>: Применяет критерии фильтрации на основе скалярных полей для уточнения результатов поиска.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Range-search">Поиск в диапазоне</a>: Находит векторы в определенном диапазоне расстояний от вектора запроса.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">Группировка поиска</a>: Группирует результаты поиска на основе определенного поля, чтобы обеспечить разнообразие результатов.</p></li>
 </ul>
-<h2 id="Preparations" class="common-anchor-header">準備<button data-href="#Preparations" class="anchor-icon" translate="no">
+<h2 id="Preparations" class="common-anchor-header">Подготовка<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,7 +65,7 @@ title: 単一ベクトル検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のコードスニペットは、Milvusへの接続を確立し、コレクションを素早くセットアップするために既存のコードを再利用しています。</p>
+    </button></h2><p>В приведенном ниже фрагменте кода используется существующий код для установки соединения с Milvus и быстрой настройки коллекции.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -422,7 +424,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 500</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Basic-search" class="common-anchor-header">基本的な検索<button data-href="#Basic-search" class="anchor-icon" translate="no">
+<h2 id="Basic-search" class="common-anchor-header">Базовый поиск<button data-href="#Basic-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -437,11 +439,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">search</code> リクエストを送信する際、クエリの埋め込みを表す1つ以上のベクトル値と、返す結果の数を示す<code translate="no">limit</code> 値を指定することができます。</p>
-<p>データとクエリーベクトルによっては、<code translate="no">limit</code> より少ない結果しか得られないかもしれません。これは、<code translate="no">limit</code> がクエリにマッチする可能性のあるベクトルの数よりも大きい場合に起こります。</p>
-<h3 id="Single-vector-search" class="common-anchor-header">単一ベクトル検索</h3><p>単一ベクトル検索はMilvusの<code translate="no">search</code> 操作の中で最も単純なもので、与えられたクエリーベクトルに最も類似したベクトルを検索するように設計されています。</p>
-<p>単一ベクトル検索を実行するには、ターゲットコレクション名、クエリベクトル、希望する結果数 (<code translate="no">limit</code>) を指定します。この操作は、最も類似したベクトル、そのID、クエリ・ベクトルからの距離からなる結果セットを返します。</p>
-<p>以下は、クエリ・ベクトルに最も似ている上位 5 つのエンティティを検索する例です：</p>
+    </button></h2><p>При отправке запроса <code translate="no">search</code> вы можете предоставить одно или несколько векторных значений, представляющих вкрапления запроса, и значение <code translate="no">limit</code>, указывающее количество возвращаемых результатов.</p>
+<p>В зависимости от ваших данных и вектора запроса, вы можете получить меньше, чем <code translate="no">limit</code> результатов. Это происходит, когда <code translate="no">limit</code> больше, чем количество возможных векторов, соответствующих вашему запросу.</p>
+<h3 id="Single-vector-search" class="common-anchor-header">Одновекторный поиск</h3><p>Одновекторный поиск - это простейшая форма операций <code translate="no">search</code> в Milvus, предназначенная для поиска наиболее похожих векторов на заданный вектор запроса.</p>
+<p>Чтобы выполнить одновекторный поиск, укажите имя целевой коллекции, вектор запроса и желаемое количество результатов (<code translate="no">limit</code>). Эта операция возвращает набор результатов, состоящий из наиболее похожих векторов, их идентификаторов и расстояний до вектора запроса.</p>
+<p>Приведем пример поиска 5 сущностей, наиболее похожих на вектор запроса:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Single vector search</span>
@@ -484,74 +486,74 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <table class="language-python">
   <thead>
     <tr>
-      <th>パラメータ</th>
-      <th>説明</th>
+      <th>Параметр</th>
+      <th>Описание</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>既存のコレクションの名前。</td>
+      <td>Имя существующей коллекции.</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvusは指定されたベクトル埋め込みに最も類似したベクトル埋め込みを検索する。</td>
+      <td>Список векторных вкраплений.<br/>Milvus ищет наиболее похожие на указанные векторные вкрапления.</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td><br/>このパラメータと<strong>paramの</strong> <strong>offsetを組み合わせて</strong>使用すると、ページ分割が可能になる。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>和は、16,384未満でなければならない。</td>
+      <td>Общее количество возвращаемых сущностей.<br/>Вы можете использовать этот параметр в сочетании со <strong>смещением</strong> в <strong>param</strong>, чтобы включить пагинацию.<br/>Сумма этого значения и <strong>смещения</strong> в <strong>param</strong> должна быть меньше 16 384.</td>
     </tr>
     <tr>
       <td><code translate="no">search_params</code></td>
-      <td>この操作に固有のパラメータ設定。<br/><ul><li><code translate="no">metric_type</code>:この操作に適用されるメトリックタイプ。これは、上記で指定したベクトル・フィールドのインデックスを作成するときに使用するものと同じでなければなりません。指定可能な値は、<strong>L2</strong>、<strong>IP</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong> です。</li><li><code translate="no">params</code>:追加パラメータ。詳細は<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a> を参照。</li></ul></td>
+      <td>Настройки параметров, специфичные для данной операции.<br/><ul><li><code translate="no">metric_type</code>: Тип метрики, применяемый к данной операции. Он должен совпадать с тем, который используется при индексации векторного поля, указанного выше. Возможные значения: <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code translate="no">params</code>: Дополнительные параметры. Подробнее см. в разделе <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">Поиск()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>パラメータ</th>
-      <th>説明</th>
+      <th>Параметр</th>
+      <th>Описание</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>既存のコレクションの名前。</td>
+      <td>Имя существующей коллекции.</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvusは指定されたものに最も類似したベクトル埋め込みを検索する。</td>
+      <td>Список векторных вкраплений.<br/>Milvus ищет векторные вкрапления, наиболее похожие на указанные.</td>
     </tr>
     <tr>
       <td><code translate="no">topK</code></td>
-      <td>検索結果で返すレコード数。このパラメータは<strong>limit</strong>パラメータと同じ構文を使用するので、どちらか一方だけを設定する必要があります。<br/>このパラメータは<strong>paramの</strong> <strong>offsetと組み合わせて</strong>使用することで、ページ分割を有効にすることができます。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>合計は16,384未満でなければなりません。</td>
+      <td>Количество записей, возвращаемых в результате поиска. Этот параметр использует тот же синтаксис, что и параметр <strong>limit</strong>, поэтому следует задавать только один из них.<br/>Вы можете использовать этот параметр в сочетании с параметром <strong>offset</strong> в <strong>param</strong>, чтобы включить пагинацию.<br/>Сумма этого значения и параметра <strong>offset</strong> в <strong>param</strong> должна быть меньше 16 384.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>パラメータ</th>
-      <th>説明</th>
+      <th>Параметр</th>
+      <th>Описание</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>既存のコレクションの名前。</td>
+      <td>Имя существующей коллекции.</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvusは指定されたベクトル埋め込みに最も類似したベクトル埋め込みを検索する。</td>
+      <td>Список векторных вкраплений.<br/>Milvus ищет наиболее похожие на указанные векторные вкрапления.</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td><br/>このパラメータと<strong>paramの</strong> <strong>offsetを組み合わせて</strong>使用すると、ページ分割が可能になります。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>和は、16,384未満でなければなりません。</td>
+      <td>Общее количество возвращаемых сущностей.<br/>Вы можете использовать этот параметр в сочетании со <strong>смещением</strong> в <strong>param</strong>, чтобы включить пагинацию.<br/>Сумма этого значения и <strong>смещения</strong> в <strong>param</strong> должна быть меньше 16 384.</td>
     </tr>
   </tbody>
 </table>
-<p>出力は以下のようになる：</p>
+<p>Выходные данные похожи на следующие:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -632,10 +634,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">1.7258622646331787</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;718&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>出力には、クエリベクトルに最も近い上位5つの近傍ベクトルが表示され、一意のIDと計算された距離も表示されます。</p>
-<h3 id="Bulk-vector-search" class="common-anchor-header">一括ベクトル検索</h3><p>一括ベクトル検索は、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">1回の</a>リクエストで複数のクエリベクトルを検索できるようにすることで、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">単一ベクトル検索の</a>概念を拡張します。このタイプの検索は、クエリベクターのセットに対して類似したベクトルを検索する必要があるシナリオに最適で、必要な時間と計算リソースを大幅に削減します。</p>
-<p>一括ベクトル検索では、<code translate="no">data</code> フィールドに複数のクエリベクトルを含めることができます。システムはこれらのベクトルを並列に処理し、各クエリ・ベ クターごとに個別の結果セットを返し、各セットにはコレクション内で見つかった最も近い一致が 含まれます。</p>
-<p>以下は、2 つのクエリ・ベクターから、最も類似したエンティティの 2 つの異なるセットを検索する例です：</p>
+<p>На выходе вы увидите 5 ближайших соседей к вектору вашего запроса, включая их уникальные идентификаторы и рассчитанные расстояния.</p>
+<h3 id="Bulk-vector-search" class="common-anchor-header">Поиск по объемному вектору</h3><p>Поиск по большому вектору расширяет концепцию <a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">поиска по одному вектору</a>, позволяя искать несколько векторов запроса в одном запросе. Этот тип поиска идеально подходит для сценариев, в которых необходимо найти похожие векторы для набора векторов запроса, что значительно сокращает время и необходимые вычислительные ресурсы.</p>
+<p>При массовом векторном поиске в поле <code translate="no">data</code> можно указать несколько векторов запроса. Система обрабатывает эти векторы параллельно, возвращая для каждого вектора запроса отдельный набор результатов, каждый из которых содержит наиболее близкие совпадения, найденные в коллекции.</p>
+<p>Вот пример поиска двух разных наборов наиболее похожих сущностей из двух векторов запросов:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Bulk-vector search</span>
@@ -682,7 +684,7 @@ res = <span class="hljs-keyword">await</span> client.search({
 
 console.log(res.results)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Результат похож на следующий:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -783,10 +785,10 @@ console.log(res.results)
   ]
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>その結果、各クエリベクトルに対して1つずつ、2つの最近傍セットが含まれており、複数のクエリベクトルを一度に処理するバルクベクトル検索の効率性を示している。</p>
-<h3 id="Partition-search" class="common-anchor-header">パーティション検索</h3><p>パーティション検索は、検索範囲をコレクションの特定のサブセットまたはパーティションに絞り込みます。これは、データが論理的またはカテゴリー的に分割されている組織化されたデータセットに特に有効で、スキャンするデータ量を減らすことにより、より高速な検索操作を可能にします。</p>
-<p>パーティション検索を行うには、検索要求の<code translate="no">partition_names</code> にターゲット・パーティション名を含めるだけです。これは、<code translate="no">search</code> 操作が、指定されたパーティション内のベクトルだけを考慮することを指定します。</p>
-<p>以下は、<code translate="no">red</code> 内のエンティティを検索する例です：</p>
+<p>Результаты включают в себя два набора ближайших соседей, по одному для каждого вектора запроса, что демонстрирует эффективность поиска по массовым векторам при работе с несколькими векторами запроса одновременно.</p>
+<h3 id="Partition-search" class="common-anchor-header">Поиск по разделам</h3><p>Поиск по разделам сужает область поиска до определенного подмножества или раздела коллекции. Это особенно полезно для организованных наборов данных, где данные разделены на логические или категориальные разделы, что позволяет ускорить поисковые операции за счет уменьшения объема данных для сканирования.</p>
+<p>Чтобы выполнить поиск по разделам, просто укажите имя целевого раздела в запросе <code translate="no">partition_names</code>. Это указывает на то, что операция <code translate="no">search</code> рассматривает только векторы в пределах указанного раздела.</p>
+<p>Вот пример поиска сущностей в <code translate="no">red</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6.2 Search within a partition</span>
@@ -828,7 +830,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Результат похож на следующий:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1006,7 +1008,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.797295093536377</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1406&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>次に、<code translate="no">blue</code> でエンティティを検索する：</p>
+<p>Затем выполните поиск сущностей на сайте <code translate="no">blue</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -1039,7 +1041,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Результат похож на следующий:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1217,10 +1219,10 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
   { score: <span class="hljs-number">2.7014894485473633</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1597&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">red</code> のデータは<code translate="no">blue</code> のデータとは異なる。したがって、検索結果は、指定されたパーティションに制約され、そのサブセットの固有の特性とデータ分布が反映されます。</p>
-<h3 id="Search-with-output-fields" class="common-anchor-header">出力フィールド付き検索</h3><p>出力フィールド付き検索では、一致したベクトルのどの属性またはフィールドを検索結果に含めるかを指定でき ます。</p>
-<p>リクエストで<code translate="no">output_fields</code> を指定すると、特定のフィールドを含む結果を返すことができます。</p>
-<p>以下は、<code translate="no">color</code> 属性値を含む結果を返す例です：</p>
+<p>Данные в <code translate="no">red</code> отличаются от данных в <code translate="no">blue</code>. Поэтому результаты поиска будут ограничены указанным разделом, отражающим уникальные характеристики и распределение данных в этом подмножестве.</p>
+<h3 id="Search-with-output-fields" class="common-anchor-header">Поиск с полями вывода</h3><p>Поиск с полями вывода позволяет указать, какие атрибуты или поля сопоставленных векторов должны быть включены в результаты поиска.</p>
+<p>Вы можете указать <code translate="no">output_fields</code> в запросе, чтобы вернуть результаты с определенными полями.</p>
+<p>Вот пример возврата результатов со значениями атрибутов <code translate="no">color</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with output fields</span>
@@ -1261,7 +1263,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Результат похож на следующий:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1338,8 +1340,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.916019916534424</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;425&#x27;</span>, color: <span class="hljs-string">&#x27;purple&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>検索結果には、最近傍情報とともに、指定されたフィールド<code translate="no">color</code> が含まれ、各マッチングベクトルに対してより豊富な情報が提供されます。</p>
-<h2 id="Filtered-search" class="common-anchor-header">フィルター検索<button data-href="#Filtered-search" class="anchor-icon" translate="no">
+<p>Наряду с ближайшими соседями результаты поиска будут включать указанное поле <code translate="no">color</code>, обеспечивая более богатый набор информации для каждого совпадающего вектора.</p>
+<h2 id="Filtered-search" class="common-anchor-header">Фильтрованный поиск<button data-href="#Filtered-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1354,21 +1356,21 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>フィルタリング検索はスカラー・フィルタをベクトル検索に適用し、特定の条件に基づいて検索結果を絞り込むことができます。フィルタ式の詳細については、「<a href="https://milvus.io/docs/boolean.md">Boolean Expression Rules（ブーリアン式のルール</a>）」と「<a href="https://milvus.io/docs/get-and-scalar-query.md">Get &amp; Scalar Query（取得とスカラー・クエリ</a>）」の例を参照してください。</p>
-<h3 id="Use-the-like-operator" class="common-anchor-header"><code translate="no">like</code> 演算子の使用</h3><p><code translate="no">like</code> 演算子は、接頭辞、接尾辞、接尾辞を含むパターンを評価することで、文字列検索を強化します：</p>
+    </button></h2><p>Фильтрованный поиск применяет скалярные фильтры к векторному поиску, позволяя уточнять результаты поиска по определенным критериям. Дополнительные сведения о выражениях фильтрации можно найти в разделе <a href="https://milvus.io/docs/boolean.md">Правила булевых выражений</a>, а примеры - в разделе <a href="https://milvus.io/docs/get-and-scalar-query.md">Получить и скалярный запрос</a>.</p>
+<h3 id="Use-the-like-operator" class="common-anchor-header">Использование оператора <code translate="no">like</code> </h3><p>Оператор <code translate="no">like</code> улучшает поиск строк, оценивая шаблоны, включающие префиксы, инфиксы и суффиксы:</p>
 <ul>
-<li><strong>接頭辞マッチング</strong>: 特定の接頭辞で始まる値を検索するには、構文<code translate="no">'like &quot;prefix%&quot;'</code> を使用します。</li>
-<li><strong>接尾辞マッチング</strong>: 文字列内の任意の場所で特定の文字列を含む値を検索するには、構文<code translate="no">'like &quot;%infix%&quot;'</code> を使用します。</li>
-<li><strong>接尾辞マッチング</strong>：特定の接尾辞で終わる値を検索するには、構文<code translate="no">'like &quot;%suffix&quot;'</code> を使用します。</li>
+<li><strong>Поиск по префиксу</strong>: чтобы найти значения, начинающиеся с определенного префикса, используйте синтаксис <code translate="no">'like &quot;prefix%&quot;'</code>.</li>
+<li><strong>Инфиксное сопоставление</strong>: чтобы найти значения, содержащие определенную последовательность символов в любом месте строки, используйте синтаксис <code translate="no">'like &quot;%infix%&quot;'</code>.</li>
+<li><strong>Поиск по суффиксу</strong>: чтобы найти значения, заканчивающиеся определенным суффиксом, используйте синтаксис <code translate="no">'like &quot;%suffix&quot;'</code>.</li>
 </ul>
-<p>1文字マッチングでは、アンダースコア(<code translate="no">_</code>)が1文字に対するワイルドカードとして機能します（例：<code translate="no">'like &quot;y_llow&quot;'</code> ）。</p>
-<h3 id="Special-characters-in-search-strings" class="common-anchor-header">検索文字列の特殊文字</h3><p>アンダースコア(<code translate="no">_</code>)やパーセント記号(<code translate="no">%</code>)のような特殊文字を含む文字列を検索したい場合、通常、検索パターンではワイルドカードとして使用されます（<code translate="no">_</code> は任意の1文字、<code translate="no">%</code> は任意の連続した文字）。これらの文字をエスケープして、リテラル文字として扱う必要があります。特殊文字をエスケープするにはバックスラッシュ (<code translate="no">\</code>) を使用し、バックスラッシュ自体をエスケープすることを忘れない。例えば</p>
+<p>Для поиска по одному символу подчеркивание (<code translate="no">_</code>) действует как подстановочный знак для одного символа, например, <code translate="no">'like &quot;y_llow&quot;'</code>.</p>
+<h3 id="Special-characters-in-search-strings" class="common-anchor-header">Специальные символы в строках поиска</h3><p>Если вы хотите найти строку, содержащую специальные символы, такие как подчеркивание (<code translate="no">_</code>) или знаки процента (<code translate="no">%</code>), которые обычно используются в качестве подстановочных знаков в шаблонах поиска (<code translate="no">_</code> для любого одиночного символа и <code translate="no">%</code> для любой последовательности символов), вы должны экранировать эти символы, чтобы рассматривать их как литеральные символы. Для экранирования специальных символов используйте обратную косую черту (<code translate="no">\</code>) и не забывайте экранировать саму обратную косую черту. Например:</p>
 <ul>
-<li>リテラル・アンダースコアを検索するには、<code translate="no">\\_</code> を使用します。</li>
-<li>パーセント記号を検索するには、<code translate="no">\\%</code> を使用します。</li>
+<li>Чтобы найти буквальное подчеркивание, используйте <code translate="no">\\_</code>.</li>
+<li>Для поиска буквального знака процента используйте <code translate="no">\\%</code>.</li>
 </ul>
-<p>したがって、<code translate="no">&quot;_version_&quot;</code> というテキストを検索する必要がある場合は、<code translate="no">'like &quot;\\_version\\_&quot;'</code> と書式を整え、アンダースコアがワイルドカードとしてではなく、検索語の一部として扱われるようにします。</p>
-<p><strong>赤で</strong>始まる<strong>色を</strong>持つ結果をフィルタリングします：</p>
+<p>Таким образом, если вам нужно найти текст <code translate="no">&quot;_version_&quot;</code>, ваш запрос должен быть оформлен как <code translate="no">'like &quot;\\_version\\_&quot;'</code>, чтобы подчеркивания рассматривались как часть поискового запроса, а не как подстановочные знаки.</p>
+<p>Фильтруйте результаты, чей <strong>цвет</strong> имеет <strong>красный</strong> префикс:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with filter</span>
@@ -1413,7 +1415,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Результат похож на следующий:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1475,7 +1477,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.4004223346710205</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;854&#x27;</span>, color_tag: <span class="hljs-string">&#x27;black_5990&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>文字列のどこかに<strong>ll の</strong> <strong>文字が</strong>含まれる結果をフィルタリングする：</p>
+<p>Фильтруйте результаты, <strong>цвет</strong> которых содержит буквы <strong>ll</strong> в любом месте строки:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Infix match on color field</span>
@@ -1520,7 +1522,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Результат похож на следующий:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1548,7 +1550,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.5080761909484863</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1201&#x27;</span>, color_tag: <span class="hljs-string">&#x27;yellow_4222&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Range-search" class="common-anchor-header">範囲検索<button data-href="#Range-search" class="anchor-icon" translate="no">
+<h2 id="Range-search" class="common-anchor-header">Поиск по диапазону<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1563,11 +1565,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>範囲検索では、クエリ・ベクトルから指定した距離範囲内にあるベクトルを見つけることができます。</p>
-<p><code translate="no">radius</code> と、オプションで<code translate="no">range_filter</code> を設定することで、クエリ・ベクトルにある程度似ているベクトルも含めて検索の幅を調整することができ、マッチする可能性のあるベクトルをより包括的に表示することができます。</p>
+    </button></h2><p>Поиск по диапазону позволяет найти векторы, находящиеся в определенном диапазоне расстояний от вектора запроса.</p>
+<p>Задав <code translate="no">radius</code> и дополнительно <code translate="no">range_filter</code>, вы можете настроить широту поиска, чтобы включить в него векторы, которые в некоторой степени похожи на вектор запроса, обеспечивая более полное представление о потенциальных совпадениях.</p>
 <ul>
-<li><p><code translate="no">radius</code>:検索空間の外側の境界を定義します。クエリ・ベクトルからこの距離内にあるベクトルだけが、マッチする可能性があるとみなされます。</p></li>
-<li><p><code translate="no">range_filter</code>:<code translate="no">radius</code> は検索の外枠を設定しますが、<code translate="no">range_filter</code> はオプションで内側の境界を定義するために使用することができます。</p></li>
+<li><p><code translate="no">radius</code>: Определяет внешнюю границу пространства поиска. Только векторы, находящиеся на этом расстоянии от вектора запроса, считаются потенциальными совпадениями.</p></li>
+<li><p><code translate="no">range_filter</code>: В то время как <code translate="no">radius</code> задает внешнюю границу поиска, <code translate="no">range_filter</code> может быть дополнительно использован для определения внутренней границы, создавая диапазон расстояний, в который должны попасть векторы, чтобы считаться совпадениями.</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -1622,7 +1624,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Результат похож на следующий:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1684,22 +1686,22 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.2593345642089844</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1309&#x27;</span>, color_tag: <span class="hljs-string">&#x27;red_8458&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>返されるすべてのエンティティの距離が、クエリベクトルから0.8～1.0の範囲内にあることがわかります。</p>
-<p><code translate="no">radius</code> と<code translate="no">range_filter</code> のパラメータ設定は、使用するメトリック・タイプによって異なります。</p>
+<p>Вы увидите, что все возвращенные сущности имеют расстояние от вектора запроса в диапазоне от 0,8 до 1,0.</p>
+<p>Параметры <code translate="no">radius</code> и <code translate="no">range_filter</code> зависят от типа используемой метрики.</p>
 <table>
 <thead>
-<tr><th><strong>メトリックタイプ</strong></th><th><strong>特性</strong></th><th><strong>範囲検索の設定</strong></th></tr>
+<tr><th><strong>Тип метрики</strong></th><th><strong>Характеристики</strong></th><th><strong>Диапазон Параметры поиска</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">L2</code></td><td>L2 距離が小さいほど、類似度が高いことを示します。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
-<tr><td><code translate="no">IP</code></td><td>IP距離が大きいほど類似度が高い．</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">radius</code> &lt; distance &lt;= 。<code translate="no">range_filter</code></td></tr>
-<tr><td><code translate="no">COSINE</code></td><td>コサイン値が大きいほど類似度が高いことを示します。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">radius</code> &lt; distance &lt;=。<code translate="no">range_filter</code></td></tr>
-<tr><td><code translate="no">JACCARD</code></td><td>Jaccard距離が小さいほど、類似度が高いことを示す。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
-<tr><td><code translate="no">HAMMING</code></td><td>ハミング距離が小さいほど、類似度が高いことを示します。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">L2</code></td><td>Меньшие расстояния L2 указывают на большую схожесть.</td><td>Чтобы исключить из результатов наиболее близкие векторы, убедитесь, что:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">IP</code></td><td>Большие расстояния IP указывают на большее сходство.</td><td>Чтобы исключить из результатов наиболее близкие векторы, убедитесь, что:<br/> <code translate="no">radius</code> &lt; расстояние &lt;= <code translate="no">range_filter</code></td></tr>
+<tr><td><code translate="no">COSINE</code></td><td>Большее значение косинуса указывает на большее сходство.</td><td>Чтобы исключить наиболее близкие векторы из результатов, убедитесь, что:<br/> <code translate="no">radius</code> &lt; расстояние &lt;= <code translate="no">range_filter</code></td></tr>
+<tr><td><code translate="no">JACCARD</code></td><td>Меньшее значение расстояния Жаккара указывает на большее сходство.</td><td>Чтобы исключить из результатов наиболее близкие векторы, убедитесь, что:<br/> <code translate="no">range_filter</code> &lt;= расстояние &lt; <code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">HAMMING</code></td><td>Меньшие расстояния Хэмминга указывают на большее сходство.</td><td>Чтобы исключить из результатов наиболее близкие векторы, убедитесь, что:<br/> <code translate="no">range_filter</code> &lt;= расстояние &lt; <code translate="no">radius</code></td></tr>
 </tbody>
 </table>
-<p>距離メトリックの種類については、<a href="/docs/ja/metric.md">類似度メトリックを</a>参照してください。</p>
-<h2 id="Grouping-search" class="common-anchor-header">グループ化検索<button data-href="#Grouping-search" class="anchor-icon" translate="no">
+<p>Чтобы узнать больше о типах метрик расстояния, обратитесь к разделу <a href="/docs/ru/metric.md">Метрики сходства</a>.</p>
+<h2 id="Grouping-search" class="common-anchor-header">Группировочный поиск<button data-href="#Grouping-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1714,10 +1716,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、検索結果の網羅性と精度を向上させるためにグループ化検索が設計されています。</p>
-<p>RAGのシナリオを考えてみましょう。ここでは、ロードされた文書が様々なパッセージに分割され、各パッセージが1つのベクトル埋め込みで表現されています。ユーザはLLMを正確に促すために最も関連性の高い文章を見つけたい。Milvusの通常の検索機能はこの要求を満たすことができるが、検索結果が非常に偏ったものになる可能性がある：ほとんどのパッセージは数個の文書からしか得られず、検索結果の包括性は非常に低い。これは、LLMが提供する検索結果の正確さ、あるいは正しさを著しく損ない、LLM利用者の経験に悪影響を与える可能性がある。</p>
-<p>グループ化検索は、この問題を効果的に解決することができる。Milvus ユーザーは、<code translate="no">group_by_field</code> を指定することで、検索結果をいくつかのグループに分類することができます。この機能により、検索結果の包括性と公平性が大幅に向上し、LLMの出力品質が顕著に改善されます。</p>
-<p>以下に、検索結果をフィールドごとにグループ化するコード例を示します：</p>
+    </button></h2><p>В Milvus поиск по группам предназначен для повышения полноты и точности результатов поиска.</p>
+<p>Рассмотрим сценарий в RAG, где множество документов разделено на различные отрывки, и каждый отрывок представлен одним векторным вложением. Пользователи хотят найти наиболее релевантные отрывки для точной подсказки LLM. Обычная функция поиска Milvus может удовлетворить это требование, но это может привести к сильно перекошенным и необъективным результатам: большинство отрывков происходит только из нескольких документов, и полнота результатов поиска очень низкая. Это может серьезно ухудшить точность или даже корректность результатов, выдаваемых LLM, и негативно повлиять на опыт пользователей LLM.</p>
+<p>Группировочный поиск может эффективно решить эту проблему. Передав запрос <code translate="no">group_by_field</code>, пользователи Milvus могут разбить результаты поиска на несколько групп. Эта функция может значительно повысить полноту и справедливость результатов поиска, заметно улучшив качество выдачи LLM.</p>
+<p>Ниже приведен пример кода для группировки результатов поиска по полю:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1744,12 +1746,12 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 <span class="hljs-built_in">print</span>(doc_ids)
 <span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Результат будет выглядеть следующим образом:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>]
 [<span class="hljs-meta">5, 10, 11, 10, 9, 6, 5, 4, 9, 2</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>与えられた出力では、各文書に対してちょうど2つの文章が検索され、合計で5つの文書が結果を構成していることがわかる。</p>
-<p>比較のために、グループ関連のパラメーターをコメントアウトして、通常の検索を行ってみよう：</p>
+<p>В приведенной выдаче видно, что для каждого документа найдено ровно по два отрывка, а всего в результате получено 5 документов.</p>
+<p>Для сравнения давайте закомментируем параметры, связанные с группой, и проведем обычный поиск:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1776,20 +1778,20 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 <span class="hljs-built_in">print</span>(doc_ids)
 <span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>Результат будет выглядеть следующим образом:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>]
 [<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>与えられた出力では、"doc_11 "が検索結果を完全に支配し、他の文書からの質の高いパラグラフを覆い隠していることが観察される。</p>
-<p><strong>制限事項</strong></p>
+<p>В приведенной выдаче можно заметить, что "doc_11" полностью доминирует в результатах поиска, заслоняя собой качественные абзацы из других документов, что может быть плохой подсказкой для LLM.</p>
+<p><strong>Ограничения</strong></p>
 <ul>
-<li><p><strong>インデックス作成</strong>：このグルーピング機能は、以下のインデックスタイプでインデックスされたコレクションに対してのみ機能する：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
-<li><p><strong>ベクトル</strong>：現在のところ、グループ化検索は<strong>BINARY_VECTOR</strong>型のベクトル・フィールドをサポートしていません。データ型の詳細については、<a href="https://milvus.io/docs/schema.md#Supported-data-types">サポートされるデータ</a>型を参照のこと。</p></li>
-<li><p><strong>フィールド</strong>：現在のところ、グループ化検索では1つの列しか使用できません。<code translate="no">group_by_field</code> コンフィグで複数のフィールド名を指定することはできません。  また、グループ化検索は、JSON、FLOAT、DOUBLE、ARRAY、またはvectorフィールドのデータ型とは互換性がありません。</p></li>
-<li><p><strong>パフォーマンスへの影響</strong>：クエリ・ベクタ数が増えるとパフォーマンスが低下することに注意してください。CPUコア2個、メモリ8GBのクラスタを例にとると、グルーピング検索の実行時間は入力クエリベクタ数に比例して増加します。</p></li>
-<li><p><strong>機能</strong>現在のところ、グルーピング検索は<a href="https://milvus.io/docs/single-vector-search.md#Range-search">範囲検索</a>、<a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">検索イテレータでは</a>サポートされていません。</p></li>
+<li><p><strong>Индексирование</strong>: Эта функция группировки работает только для коллекций, проиндексированных этими типами индексов: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
+<li><p><strong>Вектор</strong>: В настоящее время группировочный поиск не поддерживает векторное поле типа <strong>BINARY_VECTOR</strong>. Дополнительные сведения о типах данных см. в разделе <a href="https://milvus.io/docs/schema.md#Supported-data-types">Поддерживаемые типы данных</a>.</p></li>
+<li><p><strong>Поле</strong>: В настоящее время группировочный поиск позволяет использовать только один столбец. Вы не можете указать несколько имен полей в конфигурации <code translate="no">group_by_field</code>.  Кроме того, группировочный поиск несовместим с типами данных JSON, FLOAT, DOUBLE, ARRAY или векторными полями.</p></li>
+<li><p><strong>Влияние на производительность</strong>: Помните, что производительность снижается с увеличением количества векторов запросов. На примере кластера с 2 ядрами ЦП и 8 ГБ памяти время выполнения группировочного поиска увеличивается пропорционально количеству входных векторов запросов.</p></li>
+<li><p><strong>Функциональность</strong>: В настоящее время группирующий поиск не поддерживается <a href="https://milvus.io/docs/single-vector-search.md#Range-search">поиском по диапазону</a>, <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">итераторами поиска</a></p></li>
 </ul>
-<h2 id="Search-parameters" class="common-anchor-header">検索パラメータ<button data-href="#Search-parameters" class="anchor-icon" translate="no">
+<h2 id="Search-parameters" class="common-anchor-header">Параметры поиска<button data-href="#Search-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1804,7 +1806,7 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>範囲検索を除く上記の検索では、デフォルトの検索パラメータが適用されます。通常の場合、検索パラメータを手動で設定する必要はありません。</p>
+    </button></h2><p>В вышеперечисленных видах поиска, за исключением поиска по диапазону, применяются параметры поиска по умолчанию. В обычных случаях задавать параметры поиска вручную не требуется.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># In normal cases, you do not need to set search parameters manually</span>
 <span class="hljs-comment"># Except for range searches.</span>
 search_parameters = {
@@ -1817,21 +1819,21 @@ search_parameters = {
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>次の表は、検索パラメータで設定可能なすべての一覧です。</p>
+<p>В следующей таблице перечислены все возможные настройки параметров поиска.</p>
 <table>
 <thead>
-<tr><th><strong>パラメータ名</strong></th><th><strong>パラメータ説明</strong></th></tr>
+<tr><th><strong>Имя параметра</strong></th><th><strong>Описание параметра</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>ベクトル埋め込み間の類似度を測定する方法。<br/> 指定可能な値は<code translate="no">IP</code>,<code translate="no">L2</code>,<code translate="no">COSINE</code>,<code translate="no">JACCARD</code>,<code translate="no">HAMMING</code> で、デフォルトは読み込まれたインデックス・ファイルの値。</td></tr>
-<tr><td><code translate="no">params.nprobe</code></td><td>検索中にクエリーするユニット数。<br/> 値は[1, nlist<sub>[1</sub>]]の範囲です。</td></tr>
-<tr><td><code translate="no">params.level</code></td><td>検索精度レベル。<br/> 指定可能な値は<code translate="no">1</code> 、<code translate="no">2</code> 、および<code translate="no">3</code> で、デフォルトは<code translate="no">1</code> です。値を高くすると、より正確な結果が得られますが、パフォーマンスは低下します。</td></tr>
-<tr><td><code translate="no">params.radius</code></td><td>検索空間の外側の境界を定義します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決まります。たとえば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値域は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値域は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照のこと。</td></tr>
-<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> は検索の外側の限界を設定しますが、<code translate="no">range_filter</code> はオプションで内側の境界を定義するために使用することができ、ベクターが一致とみなされるために必要な距離範囲を作成します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決定されます。例えば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値の範囲は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値の範囲は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照してください。</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>Способ измерения сходства между векторными вкраплениями.<br/> Возможные значения: <code translate="no">IP</code>, <code translate="no">L2</code>, <code translate="no">COSINE</code>, <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, по умолчанию - значение загруженного индексного файла.</td></tr>
+<tr><td><code translate="no">params.nprobe</code></td><td>Количество единиц для запроса во время поиска.<br/> Значение находится в диапазоне [1, nlist<sub>[1]</sub>].</td></tr>
+<tr><td><code translate="no">params.level</code></td><td>Уровень точности поиска.<br/> Возможные значения: <code translate="no">1</code>, <code translate="no">2</code> и <code translate="no">3</code>, по умолчанию - <code translate="no">1</code>. Более высокие значения дают более точные результаты, но снижают производительность.</td></tr>
+<tr><td><code translate="no">params.radius</code></td><td>Определяет внешнюю границу пространства поиска. Только векторы, находящиеся на этом расстоянии от вектора запроса, считаются потенциальными совпадениями.<br/>Диапазон значений определяется параметром <code translate="no">metric_type</code>. Например, если для параметра <code translate="no">metric_type</code> задано значение <code translate="no">L2</code>, допустимым диапазоном значений будет <code translate="no">[0, ∞]</code>. Если для параметра <code translate="no">metric_type</code> задано значение <code translate="no">COSINE</code>, допустимым диапазоном значений будет <code translate="no">[-1, 1]</code>. Дополнительные сведения см. в разделе <a href="/docs/ru/metric.md">Метрики сходства</a>.</td></tr>
+<tr><td><code translate="no">params.range_filter</code></td><td>В то время как параметр <code translate="no">radius</code> задает внешнюю границу поиска, параметр <code translate="no">range_filter</code> можно использовать для определения внутренней границы, создавая диапазон расстояний, в который должны попадать векторы, чтобы считаться совпадающими.<br/>Диапазон значений определяется параметром <code translate="no">metric_type</code>. Например, если для параметра <code translate="no">metric_type</code> задано значение <code translate="no">L2</code>, то допустимым диапазоном значений является <code translate="no">[0, ∞]</code>. Если для параметра <code translate="no">metric_type</code> задано значение <code translate="no">COSINE</code>, то допустимым диапазоном значений является <code translate="no">[-1, 1]</code>. Дополнительные сведения см. в разделе <a href="/docs/ru/metric.md">Метрики сходства</a>.</td></tr>
 </tbody>
 </table>
 <div class="admonition note">
-<p><strong>注釈</strong></p>
-<p>[1] インデックス作成後のクラスタ単位数。Milvusはコレクションのインデックスを作成する際、ベクトルデータを複数のクラスタ単位に分割します。</p>
-<p>[2] 検索で返すエンティティの数。</p>
+<p><strong>примечания</strong></p>
+<p>[1] Количество единиц кластера после индексирования. При индексировании коллекции Milvus разбивает векторные данные на несколько кластеров, количество которых зависит от фактических настроек индекса.</p>
+<p>[2] Количество сущностей, возвращаемых при поиске.</p>
 </div>

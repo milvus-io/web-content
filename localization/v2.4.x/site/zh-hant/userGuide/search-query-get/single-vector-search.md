@@ -1,10 +1,10 @@
 ---
 id: single-vector-search.md
 order: 1
-summary: この記事では、Milvusコレクション内のベクターを単一のクエリーベクターを使って検索する方法について説明します。
-title: 単一ベクトル検索
+summary: 本文描述如何使用單一查詢向量在 Milvus 套件中搜尋向量。
+title: 單向量搜尋
 ---
-<h1 id="Single-Vector-Search" class="common-anchor-header">単一ベクトル検索<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
+<h1 id="Single-Vector-Search" class="common-anchor-header">單向量搜尋<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,14 +19,14 @@ title: 単一ベクトル検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>データを挿入したら、次のステップはMilvusでコレクションの類似性検索を行うことです。</p>
-<p>Milvusでは、コレクション内のベクトルフィールドの数に応じて2種類の検索を行うことができます：</p>
+    </button></h1><p>插入資料後，下一步就是在 Milvus 中對您的資料集執行相似性搜尋。</p>
+<p>Milvus 允許您進行兩種類型的搜尋，取決於您的資料集中向量欄位的數量：</p>
 <ul>
-<li><strong>単一ベクトル検索</strong>：コレクションにベクトルフィールドが1つしかない場合は <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a>メソッドを使用します。このメソッドは、クエリ・ベクタをコレクション内の既存のベクタと比較し、最も近い一致の ID をそれらの間の距離とともに返します。オプションで、結果のベクトル値とメタデータを返すこともできます。</li>
-<li><strong>ハイブリッド検索</strong>：2つ以上のベクトルフィールドを持つコレクションには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a>メソッドを使用します。このメソッドは、複数の近似最近傍（ANN）検索要求を実行し、結果を組み合わせて、再ランク付け後に最も関連性の高いマッチを返します。</li>
+<li><strong>單向量搜尋</strong>：如果您的資料集中只有一個向量欄位，請使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a>方法找出最相似的實體。此方法會比較您的查詢向量與集合中現有的向量，並傳回最接近匹配的 ID 以及它們之間的距離。也可以選擇返回向量值和結果的元資料。</li>
+<li><strong>混合搜尋</strong>：對於有兩個或更多向量欄位的資料集，使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a>方法。此方法會執行多個近似最近鄰 (Approximate Nearest Neighbor, ANN) 搜尋請求，並在重新排序後結合結果，以傳回最相關的匹配結果。</li>
 </ul>
-<p>このガイドでは、Milvusで単一ベクトル検索を実行する方法を中心に説明します。ハイブリッド検索の詳細については、<a href="https://milvus.io/docs/multi-vector-search.md">ハイブリッド検索を</a>参照してください。</p>
-<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
+<p>本指南著重於如何在 Milvus 執行單向量搜尋。有關混合搜尋的詳細資訊，請參閱<a href="https://milvus.io/docs/multi-vector-search.md">混合搜尋</a>。</p>
+<h2 id="Overview" class="common-anchor-header">總覽<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,14 +41,14 @@ title: 単一ベクトル検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>様々な要件に対応するため、様々な検索タイプがあります：</p>
+    </button></h2><p>有多種搜尋類型可滿足不同的需求：</p>
 <ul>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">基本検索</a>：基本検索：単一ベクトル検索、一括ベクトル検索、パーティション検索、出力フィールドを指定した検索。</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">フィルタリング検索</a>：スカラー・フィールドに基づくフィルタリング基準を適用し、検索結果を絞り込む。</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Range-search">範囲検索</a>：クエリ・ベクトルから特定の距離範囲内にあるベクトルを検索します。</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">グルーピング検索</a>：特定のフィールドに基づいて検索結果をグループ化し、結果の多様性を確保します。</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">基本搜尋</a>：包括單向量搜尋、大量向量搜尋、分割搜尋和指定輸出欄位的搜尋。</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">篩選搜尋</a>：基於標量欄位套用篩選條件以精細搜尋結果。</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Range-search">範圍搜尋</a>：尋找與查詢向量在特定距離範圍內的向量。</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">群組搜尋</a>：根據特定欄位將搜尋結果分組，以確保結果的多樣性。</p></li>
 </ul>
-<h2 id="Preparations" class="common-anchor-header">準備<button data-href="#Preparations" class="anchor-icon" translate="no">
+<h2 id="Preparations" class="common-anchor-header">準備工作<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,7 +63,7 @@ title: 単一ベクトル検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のコードスニペットは、Milvusへの接続を確立し、コレクションを素早くセットアップするために既存のコードを再利用しています。</p>
+    </button></h2><p>以下的程式碼片段將現有的程式碼重新利用，以建立與 Milvus 的連線，並快速建立一個集合。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -422,7 +422,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 500</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Basic-search" class="common-anchor-header">基本的な検索<button data-href="#Basic-search" class="anchor-icon" translate="no">
+<h2 id="Basic-search" class="common-anchor-header">基本搜尋<button data-href="#Basic-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -437,11 +437,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">search</code> リクエストを送信する際、クエリの埋め込みを表す1つ以上のベクトル値と、返す結果の数を示す<code translate="no">limit</code> 値を指定することができます。</p>
-<p>データとクエリーベクトルによっては、<code translate="no">limit</code> より少ない結果しか得られないかもしれません。これは、<code translate="no">limit</code> がクエリにマッチする可能性のあるベクトルの数よりも大きい場合に起こります。</p>
-<h3 id="Single-vector-search" class="common-anchor-header">単一ベクトル検索</h3><p>単一ベクトル検索はMilvusの<code translate="no">search</code> 操作の中で最も単純なもので、与えられたクエリーベクトルに最も類似したベクトルを検索するように設計されています。</p>
-<p>単一ベクトル検索を実行するには、ターゲットコレクション名、クエリベクトル、希望する結果数 (<code translate="no">limit</code>) を指定します。この操作は、最も類似したベクトル、そのID、クエリ・ベクトルからの距離からなる結果セットを返します。</p>
-<p>以下は、クエリ・ベクトルに最も似ている上位 5 つのエンティティを検索する例です：</p>
+    </button></h2><p>在傳送<code translate="no">search</code> 請求時，您可以提供一個或多個向量值，代表您的查詢嵌入，以及表示要返回結果數量的<code translate="no">limit</code> 值。</p>
+<p>根據您的資料和您的查詢向量，您可能會得到少於<code translate="no">limit</code> 的結果。當<code translate="no">limit</code> 大於您的查詢可能匹配向量的數量時，就會發生這種情況。</p>
+<h3 id="Single-vector-search" class="common-anchor-header">單向量搜尋</h3><p>在 Milvus 中，單向量搜尋是<code translate="no">search</code> 運算的最簡單形式，目的是找出與指定查詢向量最相似的向量。</p>
+<p>要執行單一向量搜尋，請指定目標集合名稱、查詢向量，以及所需的結果數量 (<code translate="no">limit</code>)。此操作會返回一個結果集，其中包含最相似的向量、其 ID 以及與查詢向量的距離。</p>
+<p>以下是搜尋與查詢向量最相似的前 5 個實體的範例：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Single vector search</span>
@@ -484,74 +484,74 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <table class="language-python">
   <thead>
     <tr>
-      <th>パラメータ</th>
-      <th>説明</th>
+      <th>參數</th>
+      <th>說明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>既存のコレクションの名前。</td>
+      <td>現有集合的名稱。</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvusは指定されたベクトル埋め込みに最も類似したベクトル埋め込みを検索する。</td>
+      <td>向量嵌入的清單。<br/>Milvus 會搜尋與指定向量嵌入最相似的向量嵌入。</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td><br/>このパラメータと<strong>paramの</strong> <strong>offsetを組み合わせて</strong>使用すると、ページ分割が可能になる。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>和は、16,384未満でなければならない。</td>
+      <td>要返回的實體總數。<br/>您可以將此參數與<strong>param</strong>中的<strong>偏移量</strong>結合使用，以啟用分頁。<br/>此值與<strong>param</strong>中的<strong>偏移量</strong>之和應小於 16,384。</td>
     </tr>
     <tr>
       <td><code translate="no">search_params</code></td>
-      <td>この操作に固有のパラメータ設定。<br/><ul><li><code translate="no">metric_type</code>:この操作に適用されるメトリックタイプ。これは、上記で指定したベクトル・フィールドのインデックスを作成するときに使用するものと同じでなければなりません。指定可能な値は、<strong>L2</strong>、<strong>IP</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong> です。</li><li><code translate="no">params</code>:追加パラメータ。詳細は<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a> を参照。</li></ul></td>
+      <td>此操作特有的參數設定。<br/><ul><li><code translate="no">metric_type</code>:應用於此操作的度量類型。這應該與您索引上述指定的向量欄位時所使用的類型相同。可能的值有<strong>L2</strong>、<strong>IP</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。</li><li><code translate="no">params</code>:附加參數。詳情請參閱<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a>。</li></ul></td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>パラメータ</th>
-      <th>説明</th>
+      <th>參數</th>
+      <th>說明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>既存のコレクションの名前。</td>
+      <td>現有集合的名稱。</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvusは指定されたものに最も類似したベクトル埋め込みを検索する。</td>
+      <td>向量內嵌的清單。<br/>Milvus 會搜尋與指定向量內嵌最相似的向量內嵌。</td>
     </tr>
     <tr>
       <td><code translate="no">topK</code></td>
-      <td>検索結果で返すレコード数。このパラメータは<strong>limit</strong>パラメータと同じ構文を使用するので、どちらか一方だけを設定する必要があります。<br/>このパラメータは<strong>paramの</strong> <strong>offsetと組み合わせて</strong>使用することで、ページ分割を有効にすることができます。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>合計は16,384未満でなければなりません。</td>
+      <td>搜尋結果中要返回的記錄數量。此參數使用與<strong>limit</strong>參數相同的語法，因此您只需設定其中一個。<br/>您可以將此參數與<strong>參數</strong>中的<strong>偏移量</strong>結合使用，以啟用分頁。<br/>此值與<strong>參數</strong>中的<strong>偏移量</strong>之和應小於 16,384。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>パラメータ</th>
-      <th>説明</th>
+      <th>參數</th>
+      <th>說明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>既存のコレクションの名前。</td>
+      <td>現有集合的名稱。</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvusは指定されたベクトル埋め込みに最も類似したベクトル埋め込みを検索する。</td>
+      <td>向量嵌入的清單。<br/>Milvus 會搜尋與指定向量嵌入最相似的向量嵌入。</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td><br/>このパラメータと<strong>paramの</strong> <strong>offsetを組み合わせて</strong>使用すると、ページ分割が可能になります。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>和は、16,384未満でなければなりません。</td>
+      <td>要返回的實體總數。<br/>您可以將此參數與<strong>param</strong>中的<strong>偏移量</strong>結合使用，以啟用分頁。<br/>此值與<strong>param</strong>中的<strong>偏移量</strong>之和應小於 16,384。</td>
     </tr>
   </tbody>
 </table>
-<p>出力は以下のようになる：</p>
+<p>輸出與以下相似：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -632,10 +632,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">1.7258622646331787</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;718&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>出力には、クエリベクトルに最も近い上位5つの近傍ベクトルが表示され、一意のIDと計算された距離も表示されます。</p>
-<h3 id="Bulk-vector-search" class="common-anchor-header">一括ベクトル検索</h3><p>一括ベクトル検索は、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">1回の</a>リクエストで複数のクエリベクトルを検索できるようにすることで、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">単一ベクトル検索の</a>概念を拡張します。このタイプの検索は、クエリベクターのセットに対して類似したベクトルを検索する必要があるシナリオに最適で、必要な時間と計算リソースを大幅に削減します。</p>
-<p>一括ベクトル検索では、<code translate="no">data</code> フィールドに複数のクエリベクトルを含めることができます。システムはこれらのベクトルを並列に処理し、各クエリ・ベ クターごとに個別の結果セットを返し、各セットにはコレクション内で見つかった最も近い一致が 含まれます。</p>
-<p>以下は、2 つのクエリ・ベクターから、最も類似したエンティティの 2 つの異なるセットを検索する例です：</p>
+<p>輸出會顯示與您的查詢向量最接近的前 5 個鄰居，包括它們的唯一 ID 和計算出的距離。</p>
+<h3 id="Bulk-vector-search" class="common-anchor-header">大量向量搜尋</h3><p>大量向量搜尋延伸了<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">單一</a>向量搜尋的概念，允許在單一要求中搜尋多個查詢向量。這種類型的搜尋非常適合需要為一組查詢向量找出相似向量的情況，可大幅減少所需的時間和計算資源。</p>
+<p>在大量向量搜尋中，您可以在<code translate="no">data</code> 欄位中包含數個查詢向量。系統會並行處理這些向量，為每個查詢向量傳回單獨的結果集，每個結果集包含在集合中找到的最接近的匹配結果。</p>
+<p>以下是從兩個查詢向量中搜尋兩個最相似實體的不同集合的範例：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Bulk-vector search</span>
@@ -682,7 +682,7 @@ res = <span class="hljs-keyword">await</span> client.search({
 
 console.log(res.results)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>輸出與下列內容類似：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -783,10 +783,10 @@ console.log(res.results)
   ]
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>その結果、各クエリベクトルに対して1つずつ、2つの最近傍セットが含まれており、複数のクエリベクトルを一度に処理するバルクベクトル検索の効率性を示している。</p>
-<h3 id="Partition-search" class="common-anchor-header">パーティション検索</h3><p>パーティション検索は、検索範囲をコレクションの特定のサブセットまたはパーティションに絞り込みます。これは、データが論理的またはカテゴリー的に分割されている組織化されたデータセットに特に有効で、スキャンするデータ量を減らすことにより、より高速な検索操作を可能にします。</p>
-<p>パーティション検索を行うには、検索要求の<code translate="no">partition_names</code> にターゲット・パーティション名を含めるだけです。これは、<code translate="no">search</code> 操作が、指定されたパーティション内のベクトルだけを考慮することを指定します。</p>
-<p>以下は、<code translate="no">red</code> 内のエンティティを検索する例です：</p>
+<p>結果包括兩組最近鄰，每個查詢向量都有一組最近鄰，展示了大量向量搜尋同時處理多個查詢向量的效率。</p>
+<h3 id="Partition-search" class="common-anchor-header">分區搜尋</h3><p>分區搜尋將您的搜尋範圍縮小為特定的子集或集合分區。這對於將資料分割成邏輯或分類的有組織資料集特別有用，可減少需要掃描的資料量，從而加快搜尋作業。</p>
+<p>若要進行分割搜尋，只需在<code translate="no">partition_names</code> 的搜尋請求中包含目標分割區的名稱。這會指定<code translate="no">search</code> 作業只考慮指定分割區內的向量。</p>
+<p>以下是在<code translate="no">red</code> 中搜尋實體的範例：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6.2 Search within a partition</span>
@@ -828,7 +828,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>輸出與下列內容類似：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1006,7 +1006,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.797295093536377</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1406&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>次に、<code translate="no">blue</code> でエンティティを検索する：</p>
+<p>然後，在<code translate="no">blue</code> 中搜尋實體：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -1039,7 +1039,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>輸出與下列內容類似：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1217,10 +1217,10 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
   { score: <span class="hljs-number">2.7014894485473633</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1597&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">red</code> のデータは<code translate="no">blue</code> のデータとは異なる。したがって、検索結果は、指定されたパーティションに制約され、そのサブセットの固有の特性とデータ分布が反映されます。</p>
-<h3 id="Search-with-output-fields" class="common-anchor-header">出力フィールド付き検索</h3><p>出力フィールド付き検索では、一致したベクトルのどの属性またはフィールドを検索結果に含めるかを指定でき ます。</p>
-<p>リクエストで<code translate="no">output_fields</code> を指定すると、特定のフィールドを含む結果を返すことができます。</p>
-<p>以下は、<code translate="no">color</code> 属性値を含む結果を返す例です：</p>
+<p><code translate="no">red</code> 中的資料與<code translate="no">blue</code> 中的資料不同。因此，搜尋結果將限制於指定的分割區，以反映該子集的獨特特性和資料分佈。</p>
+<h3 id="Search-with-output-fields" class="common-anchor-header">使用輸出欄位搜尋</h3><p>使用輸出欄位搜尋可讓您指定搜尋結果應包含匹配向量的哪些屬性或欄位。</p>
+<p>您可以在請求中指定<code translate="no">output_fields</code> ，以傳回包含特定欄位的結果。</p>
+<p>以下是一個使用<code translate="no">color</code> 屬性值傳回結果的範例：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with output fields</span>
@@ -1261,7 +1261,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>輸出與下列內容類似：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1338,8 +1338,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.916019916534424</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;425&#x27;</span>, color: <span class="hljs-string">&#x27;purple&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>検索結果には、最近傍情報とともに、指定されたフィールド<code translate="no">color</code> が含まれ、各マッチングベクトルに対してより豊富な情報が提供されます。</p>
-<h2 id="Filtered-search" class="common-anchor-header">フィルター検索<button data-href="#Filtered-search" class="anchor-icon" translate="no">
+<p>除了最近鄰之外，搜尋結果還會包含指定的欄位<code translate="no">color</code> ，為每個匹配向量提供更豐富的資訊。</p>
+<h2 id="Filtered-search" class="common-anchor-header">篩選搜尋<button data-href="#Filtered-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1354,21 +1354,21 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>フィルタリング検索はスカラー・フィルタをベクトル検索に適用し、特定の条件に基づいて検索結果を絞り込むことができます。フィルタ式の詳細については、「<a href="https://milvus.io/docs/boolean.md">Boolean Expression Rules（ブーリアン式のルール</a>）」と「<a href="https://milvus.io/docs/get-and-scalar-query.md">Get &amp; Scalar Query（取得とスカラー・クエリ</a>）」の例を参照してください。</p>
-<h3 id="Use-the-like-operator" class="common-anchor-header"><code translate="no">like</code> 演算子の使用</h3><p><code translate="no">like</code> 演算子は、接頭辞、接尾辞、接尾辞を含むパターンを評価することで、文字列検索を強化します：</p>
+    </button></h2><p>篩選搜尋將標量篩選器套用至向量搜尋，讓您可以根據特定條件精細搜尋結果。您可以在<a href="https://milvus.io/docs/boolean.md">Boolean Expression Rules</a>中找到更多關於篩選表達式的資訊，並在<a href="https://milvus.io/docs/get-and-scalar-query.md">Get &amp; Scalar Query</a> 中找到範例。</p>
+<h3 id="Use-the-like-operator" class="common-anchor-header">使用<code translate="no">like</code> 運算符號</h3><p><code translate="no">like</code> 運算符號透過評估包括前綴、後綴和後綴的模式來增強字串搜尋：</p>
 <ul>
-<li><strong>接頭辞マッチング</strong>: 特定の接頭辞で始まる値を検索するには、構文<code translate="no">'like &quot;prefix%&quot;'</code> を使用します。</li>
-<li><strong>接尾辞マッチング</strong>: 文字列内の任意の場所で特定の文字列を含む値を検索するには、構文<code translate="no">'like &quot;%infix%&quot;'</code> を使用します。</li>
-<li><strong>接尾辞マッチング</strong>：特定の接尾辞で終わる値を検索するには、構文<code translate="no">'like &quot;%suffix&quot;'</code> を使用します。</li>
+<li><strong>前綴匹配</strong>：若要尋找以特定前綴開頭的值，請使用語法<code translate="no">'like &quot;prefix%&quot;'</code> 。</li>
+<li><strong>後綴</strong>（<strong>Infix</strong>）<strong>匹配</strong>：若要尋找在字串中任何位置包含特定字元序列的值，請使用語法<code translate="no">'like &quot;%infix%&quot;'</code> 。</li>
+<li><strong>後綴匹配</strong>：若要尋找以特定後綴結尾的值，請使用語法<code translate="no">'like &quot;%suffix&quot;'</code> 。</li>
 </ul>
-<p>1文字マッチングでは、アンダースコア(<code translate="no">_</code>)が1文字に対するワイルドカードとして機能します（例：<code translate="no">'like &quot;y_llow&quot;'</code> ）。</p>
-<h3 id="Special-characters-in-search-strings" class="common-anchor-header">検索文字列の特殊文字</h3><p>アンダースコア(<code translate="no">_</code>)やパーセント記号(<code translate="no">%</code>)のような特殊文字を含む文字列を検索したい場合、通常、検索パターンではワイルドカードとして使用されます（<code translate="no">_</code> は任意の1文字、<code translate="no">%</code> は任意の連続した文字）。これらの文字をエスケープして、リテラル文字として扱う必要があります。特殊文字をエスケープするにはバックスラッシュ (<code translate="no">\</code>) を使用し、バックスラッシュ自体をエスケープすることを忘れない。例えば</p>
+<p>對於單字元匹配，下劃線 (<code translate="no">_</code>) 可作為單字元的通配符，例如<code translate="no">'like &quot;y_llow&quot;'</code> 。</p>
+<h3 id="Special-characters-in-search-strings" class="common-anchor-header">搜尋字串中的特殊字符</h3><p>如果要搜尋包含下劃線 (<code translate="no">_</code>) 或百分號 (<code translate="no">%</code>) 等特殊字符的字串，這些特殊字符通常在搜尋模式中作為通配符使用 (<code translate="no">_</code> 適用於任何單一字元，而<code translate="no">%</code> 適用於任何字元序列)，則必須轉換這些字元，將其視為字面意義上的字元。使用反斜線 (<code translate="no">\</code>) 來轉義特殊字符，並記得轉義反斜線本身。舉例來說：</p>
 <ul>
-<li>リテラル・アンダースコアを検索するには、<code translate="no">\\_</code> を使用します。</li>
-<li>パーセント記号を検索するには、<code translate="no">\\%</code> を使用します。</li>
+<li>若要搜尋字面上的下劃線，請使用<code translate="no">\\_</code> 。</li>
+<li>若要搜尋字面上的百分號，請使用<code translate="no">\\%</code> 。</li>
 </ul>
-<p>したがって、<code translate="no">&quot;_version_&quot;</code> というテキストを検索する必要がある場合は、<code translate="no">'like &quot;\\_version\\_&quot;'</code> と書式を整え、アンダースコアがワイルドカードとしてではなく、検索語の一部として扱われるようにします。</p>
-<p><strong>赤で</strong>始まる<strong>色を</strong>持つ結果をフィルタリングします：</p>
+<p>因此，如果您需要搜尋<code translate="no">&quot;_version_&quot;</code> 這段文字，您的查詢應該格式化為<code translate="no">'like &quot;\\_version\\_&quot;'</code> ，以確保下劃線會被視為搜尋詞彙的一部分，而不是通配符。</p>
+<p>篩選<strong>顏色</strong> <strong>以紅色</strong>為前綴的結果：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with filter</span>
@@ -1413,7 +1413,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>輸出與下列內容類似：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1475,7 +1475,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.4004223346710205</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;854&#x27;</span>, color_tag: <span class="hljs-string">&#x27;black_5990&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>文字列のどこかに<strong>ll の</strong> <strong>文字が</strong>含まれる結果をフィルタリングする：</p>
+<p>篩選<strong>顏色</strong>包含字串中任何位置的字母<strong>ll</strong>的結果：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Infix match on color field</span>
@@ -1520,7 +1520,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>輸出與下列內容類似：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1548,7 +1548,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.5080761909484863</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1201&#x27;</span>, color_tag: <span class="hljs-string">&#x27;yellow_4222&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Range-search" class="common-anchor-header">範囲検索<button data-href="#Range-search" class="anchor-icon" translate="no">
+<h2 id="Range-search" class="common-anchor-header">範圍搜尋<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1563,11 +1563,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>範囲検索では、クエリ・ベクトルから指定した距離範囲内にあるベクトルを見つけることができます。</p>
-<p><code translate="no">radius</code> と、オプションで<code translate="no">range_filter</code> を設定することで、クエリ・ベクトルにある程度似ているベクトルも含めて検索の幅を調整することができ、マッチする可能性のあるベクトルをより包括的に表示することができます。</p>
+    </button></h2><p>範圍搜尋可以讓您找到與查詢向量在指定距離範圍內的向量。</p>
+<p>透過設定<code translate="no">radius</code> 和可選的<code translate="no">range_filter</code> ，您可以調整搜尋的廣度，以包含與查詢向量有點相似的向量，提供更全面的潛在匹配檢視。</p>
 <ul>
-<li><p><code translate="no">radius</code>:検索空間の外側の境界を定義します。クエリ・ベクトルからこの距離内にあるベクトルだけが、マッチする可能性があるとみなされます。</p></li>
-<li><p><code translate="no">range_filter</code>:<code translate="no">radius</code> は検索の外枠を設定しますが、<code translate="no">range_filter</code> はオプションで内側の境界を定義するために使用することができます。</p></li>
+<li><p><code translate="no">radius</code>:定義搜尋空間的外部邊界。只有與查詢向量的距離在這個範圍內的向量，才會被視為潛在的匹配向量。</p></li>
+<li><p><code translate="no">range_filter</code>:<code translate="no">radius</code> 設定搜尋的外部界限，而<code translate="no">range_filter</code> 則可選擇用來定義內部界限，建立一個向量必須在其範圍內才會被視為匹配的距離範圍。</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -1622,7 +1622,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>輸出與下列內容類似：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
@@ -1684,22 +1684,22 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.2593345642089844</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1309&#x27;</span>, color_tag: <span class="hljs-string">&#x27;red_8458&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>返されるすべてのエンティティの距離が、クエリベクトルから0.8～1.0の範囲内にあることがわかります。</p>
-<p><code translate="no">radius</code> と<code translate="no">range_filter</code> のパラメータ設定は、使用するメトリック・タイプによって異なります。</p>
+<p>您會發現所有傳回的實體與查詢向量的距離都在 0.8 到 1.0 的範圍內。</p>
+<p><code translate="no">radius</code> 和<code translate="no">range_filter</code> 的參數設定會因使用的度量類型而異。</p>
 <table>
 <thead>
-<tr><th><strong>メトリックタイプ</strong></th><th><strong>特性</strong></th><th><strong>範囲検索の設定</strong></th></tr>
+<tr><th><strong>度量類型</strong></th><th><strong>特性</strong></th><th><strong>範圍搜尋設定</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">L2</code></td><td>L2 距離が小さいほど、類似度が高いことを示します。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
-<tr><td><code translate="no">IP</code></td><td>IP距離が大きいほど類似度が高い．</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">radius</code> &lt; distance &lt;= 。<code translate="no">range_filter</code></td></tr>
-<tr><td><code translate="no">COSINE</code></td><td>コサイン値が大きいほど類似度が高いことを示します。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">radius</code> &lt; distance &lt;=。<code translate="no">range_filter</code></td></tr>
-<tr><td><code translate="no">JACCARD</code></td><td>Jaccard距離が小さいほど、類似度が高いことを示す。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
-<tr><td><code translate="no">HAMMING</code></td><td>ハミング距離が小さいほど、類似度が高いことを示します。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">L2</code></td><td>L2 距離越小，表示相似度越高。</td><td>若要從結果中排除最接近的向量，請確保：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">IP</code></td><td>較大的 IP 距離表示相似度較高。</td><td>若要從結果中排除最接近的向量，請確保：<br/> <code translate="no">radius</code> &lt; distance &lt;=<code translate="no">range_filter</code></td></tr>
+<tr><td><code translate="no">COSINE</code></td><td>較大的余弦值表示相似度較高。</td><td>若要從結果中排除最接近的向量，請確保：<br/> <code translate="no">radius</code> &lt; distance &lt;=<code translate="no">range_filter</code></td></tr>
+<tr><td><code translate="no">JACCARD</code></td><td>較小的 Jaccard 距離表示相似度較高。</td><td>若要從結果中排除最接近的向量，請確保：<br/> <code translate="no">range_filter</code> &lt;= 距離 &lt;=<code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">HAMMING</code></td><td>較小的 Hamming 距離表示較高的相似性。</td><td>若要從結果中排除最接近的向量，請確保：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
 </tbody>
 </table>
-<p>距離メトリックの種類については、<a href="/docs/ja/metric.md">類似度メトリックを</a>参照してください。</p>
-<h2 id="Grouping-search" class="common-anchor-header">グループ化検索<button data-href="#Grouping-search" class="anchor-icon" translate="no">
+<p>若要瞭解關於距離公制類型的更多資訊，請參閱<a href="/docs/zh-hant/metric.md">相似性公制</a>。</p>
+<h2 id="Grouping-search" class="common-anchor-header">分組搜尋<button data-href="#Grouping-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1714,10 +1714,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、検索結果の網羅性と精度を向上させるためにグループ化検索が設計されています。</p>
-<p>RAGのシナリオを考えてみましょう。ここでは、ロードされた文書が様々なパッセージに分割され、各パッセージが1つのベクトル埋め込みで表現されています。ユーザはLLMを正確に促すために最も関連性の高い文章を見つけたい。Milvusの通常の検索機能はこの要求を満たすことができるが、検索結果が非常に偏ったものになる可能性がある：ほとんどのパッセージは数個の文書からしか得られず、検索結果の包括性は非常に低い。これは、LLMが提供する検索結果の正確さ、あるいは正しさを著しく損ない、LLM利用者の経験に悪影響を与える可能性がある。</p>
-<p>グループ化検索は、この問題を効果的に解決することができる。Milvus ユーザーは、<code translate="no">group_by_field</code> を指定することで、検索結果をいくつかのグループに分類することができます。この機能により、検索結果の包括性と公平性が大幅に向上し、LLMの出力品質が顕著に改善されます。</p>
-<p>以下に、検索結果をフィールドごとにグループ化するコード例を示します：</p>
+    </button></h2><p>在 Milvus 中，分組搜尋的設計是為了改善搜尋結果的全面性和準確性。</p>
+<p>考慮 RAG 中的一種情況，大量的文件被分割成不同的段落，每個段落由一個向量嵌入來表示。使用者希望找到最相關的段落，以準確地提示 LLM。普通的 Milvus 搜尋功能可以滿足這個需求，但它可能會導致搜尋結果高度傾斜和有偏見：大部分的段落只來自幾個文件，搜尋結果的全面性非常差。這會嚴重損害 LLM 所提供結果的準確性甚至正確性，並對 LLM 使用者的使用經驗造成負面影響。</p>
+<p>群組搜尋可以有效解決這個問題。透過<code translate="no">group_by_field</code> ，Milvus 使用者可以將搜尋結果分為幾個群組。此功能可大幅提升搜尋結果的全面性與公平性，顯著改善 LLM 的輸出品質。</p>
+<p>以下是依欄位對搜尋結果進行分組的範例程式碼：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1744,12 +1744,12 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 <span class="hljs-built_in">print</span>(doc_ids)
 <span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>輸出與下列內容相似：</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>]
 [<span class="hljs-meta">5, 10, 11, 10, 9, 6, 5, 4, 9, 2</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>与えられた出力では、各文書に対してちょうど2つの文章が検索され、合計で5つの文書が結果を構成していることがわかる。</p>
-<p>比較のために、グループ関連のパラメーターをコメントアウトして、通常の検索を行ってみよう：</p>
+<p>在給定的輸出中，可以觀察到每個文件都擷取了兩個段落，總共 5 個文件組成了結果。</p>
+<p>為了比較，讓我們注釋掉群組相關的參數，並進行一般的搜尋：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1776,20 +1776,20 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 <span class="hljs-built_in">print</span>(doc_ids)
 <span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>輸出與下列內容相似：</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>]
 [<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>与えられた出力では、"doc_11 "が検索結果を完全に支配し、他の文書からの質の高いパラグラフを覆い隠していることが観察される。</p>
-<p><strong>制限事項</strong></p>
+<p>在給定的輸出中，可以觀察到「doc_11」完全支配了搜尋結果，掩蓋了其他文件中高品質的段落，這對 LLM 來說可能是一個很差的提示。</p>
+<p><strong>限制</strong></p>
 <ul>
-<li><p><strong>インデックス作成</strong>：このグルーピング機能は、以下のインデックスタイプでインデックスされたコレクションに対してのみ機能する：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
-<li><p><strong>ベクトル</strong>：現在のところ、グループ化検索は<strong>BINARY_VECTOR</strong>型のベクトル・フィールドをサポートしていません。データ型の詳細については、<a href="https://milvus.io/docs/schema.md#Supported-data-types">サポートされるデータ</a>型を参照のこと。</p></li>
-<li><p><strong>フィールド</strong>：現在のところ、グループ化検索では1つの列しか使用できません。<code translate="no">group_by_field</code> コンフィグで複数のフィールド名を指定することはできません。  また、グループ化検索は、JSON、FLOAT、DOUBLE、ARRAY、またはvectorフィールドのデータ型とは互換性がありません。</p></li>
-<li><p><strong>パフォーマンスへの影響</strong>：クエリ・ベクタ数が増えるとパフォーマンスが低下することに注意してください。CPUコア2個、メモリ8GBのクラスタを例にとると、グルーピング検索の実行時間は入力クエリベクタ数に比例して増加します。</p></li>
-<li><p><strong>機能</strong>現在のところ、グルーピング検索は<a href="https://milvus.io/docs/single-vector-search.md#Range-search">範囲検索</a>、<a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">検索イテレータでは</a>サポートされていません。</p></li>
+<li><p><strong>索引</strong>：此分組功能僅適用於使用這些索引類型建立索引的資料庫：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
+<li><p><strong>向量</strong>：目前，分組搜尋不支援<strong>BINARY_VECTOR</strong>類型的向量欄位。有關資料類型的詳細資訊，請參閱<a href="https://milvus.io/docs/schema.md#Supported-data-types">支援的資料類型</a>。</p></li>
+<li><p><strong>欄位</strong>：目前，群組搜尋只允許單列。您無法在<code translate="no">group_by_field</code> config 中指定多個欄位名稱。  此外，分組搜尋與 JSON、FLOAT、DOUBLE、ARRAY 或向量欄位的資料類型不相容。</p></li>
+<li><p><strong>效能影響</strong>：請注意，效能會隨著查詢向量數目的增加而降低。以具有 2 個 CPU 核心和 8 GB 記憶體的群集為例，群組搜尋的執行時間會隨著輸入查詢向量的數量成比例增加。</p></li>
+<li><p><strong>功能性</strong>：目前，<a href="https://milvus.io/docs/single-vector-search.md#Range-search">範圍搜尋</a>、<a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">搜尋迭代器</a>不支援群組搜尋</p></li>
 </ul>
-<h2 id="Search-parameters" class="common-anchor-header">検索パラメータ<button data-href="#Search-parameters" class="anchor-icon" translate="no">
+<h2 id="Search-parameters" class="common-anchor-header">搜尋參數<button data-href="#Search-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1804,7 +1804,7 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>範囲検索を除く上記の検索では、デフォルトの検索パラメータが適用されます。通常の場合、検索パラメータを手動で設定する必要はありません。</p>
+    </button></h2><p>在上述搜尋中，除了範圍搜尋外，預設的搜尋參數都適用。在一般情況下，您不需要手動設定搜尋參數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># In normal cases, you do not need to set search parameters manually</span>
 <span class="hljs-comment"># Except for range searches.</span>
 search_parameters = {
@@ -1817,21 +1817,21 @@ search_parameters = {
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>次の表は、検索パラメータで設定可能なすべての一覧です。</p>
+<p>下表列出搜尋參數中所有可能的設定。</p>
 <table>
 <thead>
-<tr><th><strong>パラメータ名</strong></th><th><strong>パラメータ説明</strong></th></tr>
+<tr><th><strong>參數名稱</strong></th><th><strong>參數說明</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>ベクトル埋め込み間の類似度を測定する方法。<br/> 指定可能な値は<code translate="no">IP</code>,<code translate="no">L2</code>,<code translate="no">COSINE</code>,<code translate="no">JACCARD</code>,<code translate="no">HAMMING</code> で、デフォルトは読み込まれたインデックス・ファイルの値。</td></tr>
-<tr><td><code translate="no">params.nprobe</code></td><td>検索中にクエリーするユニット数。<br/> 値は[1, nlist<sub>[1</sub>]]の範囲です。</td></tr>
-<tr><td><code translate="no">params.level</code></td><td>検索精度レベル。<br/> 指定可能な値は<code translate="no">1</code> 、<code translate="no">2</code> 、および<code translate="no">3</code> で、デフォルトは<code translate="no">1</code> です。値を高くすると、より正確な結果が得られますが、パフォーマンスは低下します。</td></tr>
-<tr><td><code translate="no">params.radius</code></td><td>検索空間の外側の境界を定義します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決まります。たとえば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値域は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値域は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照のこと。</td></tr>
-<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> は検索の外側の限界を設定しますが、<code translate="no">range_filter</code> はオプションで内側の境界を定義するために使用することができ、ベクターが一致とみなされるために必要な距離範囲を作成します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決定されます。例えば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値の範囲は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値の範囲は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照してください。</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>如何測量向量嵌入之間的相似性。<br/> 可能的值是<code translate="no">IP</code>,<code translate="no">L2</code>,<code translate="no">COSINE</code>,<code translate="no">JACCARD</code>, 和<code translate="no">HAMMING</code>, 並預設為載入索引檔案的值。</td></tr>
+<tr><td><code translate="no">params.nprobe</code></td><td>搜尋時要查詢的單位數量。<br/> 數值範圍為 [1，nlist<sub>[1]</sub>]。</td></tr>
+<tr><td><code translate="no">params.level</code></td><td>搜尋精確度等級。<br/> 可能的值為<code translate="no">1</code> 、<code translate="no">2</code> 及<code translate="no">3</code> ，預設為<code translate="no">1</code> 。較高的值會產生更精確的結果，但效能較慢。</td></tr>
+<tr><td><code translate="no">params.radius</code></td><td>定義搜尋空間的外部邊界。只有與查詢向量的距離在此範圍內的向量，才會被視為潛在的匹配。<br/>值範圍由<code translate="no">metric_type</code> 參數決定。例如，如果<code translate="no">metric_type</code> 設定為<code translate="no">L2</code> ，則有效值範圍為<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 設定為<code translate="no">COSINE</code> ，則有效值範圍為<code translate="no">[-1, 1]</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">相似度指標</a>。</td></tr>
+<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> 設定搜尋的外部極限，而<code translate="no">range_filter</code> 則可選擇用來定義內部邊界，建立一個距離範圍，向量必須在這個範圍內才會被視為匹配。<br/>值範圍由<code translate="no">metric_type</code> 參數決定。例如，如果<code translate="no">metric_type</code> 設定為<code translate="no">L2</code> ，則有效值範圍為<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 設定為<code translate="no">COSINE</code> ，則有效值範圍為<code translate="no">[-1, 1]</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">相似度量測</a>。</td></tr>
 </tbody>
 </table>
 <div class="admonition note">
-<p><strong>注釈</strong></p>
-<p>[1] インデックス作成後のクラスタ単位数。Milvusはコレクションのインデックスを作成する際、ベクトルデータを複数のクラスタ単位に分割します。</p>
-<p>[2] 検索で返すエンティティの数。</p>
+<p><strong>備註</strong></p>
+<p>[1] 索引後的叢集單位數量。索引一個集合時，Milvus 會將向量資料再分為多個叢集單位，叢集單位的數量會隨著實際的索引設定而改變。</p>
+<p>[2] 搜尋時要返回的實體數量。</p>
 </div>

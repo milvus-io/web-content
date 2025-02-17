@@ -251,8 +251,8 @@ summary: Pelajari tentang batasan-batasan saat menggunakan Milvus.
 <tr><td>Pencarian dasar dengan penomoran halaman</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
 <tr><td>Pencarian yang difilter</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
 <tr><td>Pencarian rentang</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
-<tr><td>Mengelompokkan pencarian</td><td>Ya</td><td>Tidak</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Tidak</td><td>Tidak</td></tr>
-<tr><td>Mencari dengan iterator</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Tidak</td><td>Tidak</td></tr>
+<tr><td>Mengelompokkan pencarian</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Tidak</td><td>Tidak</td></tr>
+<tr><td>Mencari dengan iterator</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
 <tr><td>Pencarian hibrida</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya (Hanya RRFRanker)</td><td>Ya</td><td>Ya</td></tr>
 <tr><td>Query/Get</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
 <tr><td>Kueri dengan iterator</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Tidak</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>

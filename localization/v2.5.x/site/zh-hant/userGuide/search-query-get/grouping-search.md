@@ -47,7 +47,7 @@ title: 群組搜尋
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
    </span> <span class="img-wrapper"> <span>群組搜尋</span> </span></p>
-<p>為了改善搜尋結果的多樣性，您可以在搜尋請求中加入<code translate="no">group_by_field</code> 參數，以啟用群組搜尋。如圖所示，您可以將<code translate="no">group_by_field</code> 設為<code translate="no">docId</code> 。收到此請求後，Milvus 會</p>
+<p>為了改善搜尋結果的多樣性，您可以在搜尋請求中加入<code translate="no">group_by_field</code> 參數，以啟用群組搜尋。如圖所示，您可以將<code translate="no">group_by_field</code> 設定為<code translate="no">docId</code> 。收到此請求後，Milvus 將。</p>
 <ul>
 <li><p>根據提供的查詢向量執行 ANN 搜尋，找出與查詢最相似的所有實體。</p></li>
 <li><p>根據指定的<code translate="no">group_by_field</code> 對搜尋結果進行分組，例如<code translate="no">docId</code> 。</p></li>
@@ -355,7 +355,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>群組數量</strong>：<code translate="no">limit</code> 參數控制返回搜尋結果的群組數目，而非每個群組內實體的特定數目。設定適當的<code translate="no">limit</code> 有助於控制搜尋多樣性和查詢效能。如果資料分佈密集或效能是個問題，減少<code translate="no">limit</code> 可以降低計算成本。</p></li>
+<li><p><strong>索引</strong>：此分組功能僅適用於使用這些索引類型建立索引的集合：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>hnsw_pq</strong>、<strong>hnsw_prq</strong>、<strong>hnsw_sq</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
+<li><p><strong>群組數</strong>：<code translate="no">limit</code> 參數控制返回搜尋結果的群組數目，而非每個群組內實體的特定數目。設定適當的<code translate="no">limit</code> 有助於控制搜尋多樣性和查詢效能。如果資料分佈密集或效能是考量因素，減少<code translate="no">limit</code> 可以降低計算成本。</p></li>
 <li><p><strong>每個群組的實體</strong>：<code translate="no">group_size</code> 參數控制每個群組傳回的實體數量。根據您的使用情況調整<code translate="no">group_size</code> 可以增加搜尋結果的豐富性。但是，如果資料分佈不均勻，某些群組返回的實體可能少於<code translate="no">group_size</code> 指定的數目，尤其是在資料有限的情況下。</p></li>
 <li><p><strong>嚴格的群組大小</strong>：當<code translate="no">strict_group_size=True</code> 時，系統會嘗試為每個群組傳回指定數量的實體 (<code translate="no">group_size</code>)，除非該群組沒有足夠的資料。此設定可確保每個群組的實體數量一致，但在資料分佈不均或資源有限的情況下，可能會導致效能下降。如果不需要嚴格的實體數量，設定<code translate="no">strict_group_size=False</code> 可以提高查詢速度。</p></li>
 </ul>

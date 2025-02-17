@@ -86,7 +86,7 @@ title: グループ化検索
 ​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>検索要求で、<code translate="no">group_by_field</code> と<code translate="no">output_fields</code> の両方を<code translate="no">docId</code> に設定します。milvusは、指定されたフィールドによって結果をグループ化し、各グループから最も類似したエンティティを返します。返された各エンティティの<code translate="no">docId</code> の値も含まれます。</p>
+<p>検索要求で、<code translate="no">group_by_field</code> と<code translate="no">output_fields</code> の両方を<code translate="no">docId</code> に設定します。milvusは、指定されたフィールドによって結果をグループ化し、各グループから最も類似したエンティティを返します。返された各エンティティの<code translate="no">docId</code> の値も含みます。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
@@ -354,7 +354,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>グループの数</strong>：<code translate="no">limit</code> パラメータは、各グループ内のエンティティの具体的な数ではなく、検索結果が返されるグループの数を制御する。適切な<code translate="no">limit</code> を設定することで、検索の多様性とクエリのパフォーマンスを制御できます。データが高密度に分散している場合やパフォーマンスが懸念される場合は、<code translate="no">limit</code> を減らすことで計算コストを削減できます。</p></li>
+<li><p><strong>インデックス作成</strong>：このグループ化機能は、以下のインデックス・タイプでインデックス付けされたコレクションに対してのみ機能します：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>hnsw_pq</strong>、<strong>hnsw_prq</strong>、<strong>hnsw_sq</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
+<li><p><strong>グループ数</strong>：<code translate="no">limit</code> パラメータは、各グループ内の特定のエンティティの数ではなく、検索結果が返されるグループの数を制御する。適切な<code translate="no">limit</code> を設定することで、検索の多様性とクエリ・パフォーマンスを制御することができます。データが高密度に分散している場合やパフォーマンスが懸念される場合は、<code translate="no">limit</code> を減らすことで計算コストを削減できます。</p></li>
 <li><p><strong>グループあたりのエンティティ</strong>数：<code translate="no">group_size</code> パラメータは、グループごとに返されるエンティティの数を制御します。ユースケースに基づいて<code translate="no">group_size</code> を調整すると、検索結果の豊かさが向上します。ただし、データが不均一に分散している場合、特にデータが限られたシナリオでは、<code translate="no">group_size</code> で指定した数よりも少ないエンティティしか返されないグループもあります。</p></li>
 <li><p><strong>厳格なグループサイズ</strong>：<code translate="no">strict_group_size=True</code> を指定すると、そのグループに十分なデータがない場合を除き、各グループで指定されたエンティティ数 (<code translate="no">group_size</code>) を返そうとします。この設定により、グループごとに一貫したエンティティ数が保証されますが、データ分散が不均一な場合やリソースが限られている場合、パフォーマンスが低下する可能性があります。厳密なエンティティ数が必要でない場合は、<code translate="no">strict_group_size=False</code> を設定するとクエリの速度が向上します。</p></li>
 </ul>

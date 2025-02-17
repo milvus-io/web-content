@@ -251,7 +251,7 @@ summary: Milvus使用中の制限について学ぶ。
 <tr><td>ページネーション付き基本検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
 <tr><td>フィルタ検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>
 <tr><td>範囲検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>はい</td></tr>
-<tr><td>グループ化検索</td><td>はい</td><td>いいえ</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td></tr>
+<tr><td>グループ化検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td></tr>
 <tr><td>イテレータによる検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td></tr>
 <tr><td>ハイブリッド検索</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい（RRFRanker だけ）</td><td>はい</td><td>はい</td></tr>
 <tr><td>照会/取得</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td><td>はい</td></tr>

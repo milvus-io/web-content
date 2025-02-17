@@ -355,7 +355,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>组的数量</strong>：<code translate="no">limit</code> 参数控制返回搜索结果的组的数量，而不是每个组中实体的具体数量。设置适当的<code translate="no">limit</code> 有助于控制搜索多样性和查询性能。如果数据分布密集或需要考虑性能问题，减少<code translate="no">limit</code> 可以降低计算成本。</p></li>
+<li><p><strong>索引</strong>：此分组功能仅适用于使用这些索引类型编制索引的 Collections：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>hnsw_pq</strong>、<strong>hnsw_prq</strong>、<strong>hnsw_sq</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
+<li><p><strong>组数</strong>：<code translate="no">limit</code> 参数控制返回搜索结果的组的数量，而不是每个组内实体的具体数量。设置适当的<code translate="no">limit</code> 有助于控制搜索多样性和查询性能。如果数据分布密集或考虑性能问题，减少<code translate="no">limit</code> 可以降低计算成本。</p></li>
 <li><p><strong>每组实体</strong>：<code translate="no">group_size</code> 参数控制每个组返回的实体数量。根据使用情况调整<code translate="no">group_size</code> 可以增加搜索结果的丰富性。但是，如果数据分布不均，某些组返回的实体数量可能少于<code translate="no">group_size</code> 的指定数量，尤其是在数据有限的情况下。</p></li>
-<li><p><strong>严格的组大小</strong>：当<code translate="no">strict_group_size=True</code> 时，系统将尝试为每个组返回指定数量的实体 (<code translate="no">group_size</code>)，除非该组中没有足够的数据。此设置可确保每个组的实体数一致，但在数据分布不均或资源有限的情况下，可能会导致性能下降。如果不需要严格的实体数，设置<code translate="no">strict_group_size=False</code> 可以提高查询速度。</p></li>
+<li><p><strong>严格的组大小</strong>：当<code translate="no">strict_group_size=True</code> 时，系统将尝试为每个组返回指定数量的实体 (<code translate="no">group_size</code>)，除非该组中没有足够的数据。此设置可确保每个组的实体数一致，但在数据分布不均或资源有限的情况下可能会导致性能下降。如果不需要严格的实体数，设置<code translate="no">strict_group_size=False</code> 可以提高查询速度。</p></li>
 </ul>
