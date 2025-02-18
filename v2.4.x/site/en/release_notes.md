@@ -7,6 +7,50 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.22
+
+Release Date: February 14, 2025
+
+| Milvus version | Python SDK version | Java SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|---------------------|
+| 2.4.22         | 2.4.14             | 2.4.10           | 2.4.11              |
+
+We’re thrilled to announce the release of Milvus 2.4.22, focusing on enhanced performance, faster data loading and recovery, and improved stability. This update includes several feature improvements and bug fixes that streamline operations and optimize resource usage. We encourage you to upgrade or give it a try, and as always, we look forward to your feedback to help us continually improve Milvus!
+
+### Improvements
+
+- Return topks when searching in RESTful v2 ([#39858](https://github.com/milvus-io/milvus/pull/39858))
+- Dump pprof information if the component stop process times out ([#39764](https://github.com/milvus-io/milvus/pull/39764))
+- Make compaction intervals configurable ([#39512](https://github.com/milvus-io/milvus/pull/39512))
+- Add a secondary index for QueryNode segment manager to accelerate queries ([#38348](https://github.com/milvus-io/milvus/pull/38348))
+- Read metadata concurrently at the collection level to speed up failure recovery ([#39756](https://github.com/milvus-io/milvus/pull/39756))
+- Reduce locking in DataCoord to speed up load and insert operations ([#38230](https://github.com/milvus-io/milvus/pull/38230))
+- Increase the metadata list batch size to speed up recovery ([#39741](https://github.com/milvus-io/milvus/pull/39741))
+- Skip generating the partition limiter if no partition is set ([#38912](https://github.com/milvus-io/milvus/pull/38912))
+- Improve the speed of fetching collection information from RootCoord by avoiding unnecessary copies ([#38903](https://github.com/milvus-io/milvus/pull/38903))
+- Decrease the update frequency for rapidly refreshed metrics to accelerate recovery ([#38776](https://github.com/milvus-io/milvus/pull/38776))
+- Use WalkWithPrefix instead of LoadWithPrefix to accelerate etcd list operations ([#38216](https://github.com/milvus-io/milvus/pull/38216))
+- Speed up data loading by accelerating task generation, scheduling, and execution in QueryCoord ([#38906](https://github.com/milvus-io/milvus/pull/38906))
+- Remove unnecessary Bloom Filters in QueryNode and DataNode to reduce memory usage ([#38215](https://github.com/milvus-io/milvus/pull/38215))
+- Handle Rust errors in C++ ([#39501](https://github.com/milvus-io/milvus/pull/39501))
+
+### Bug fixes
+
+- Fixed an issue where imports failed due to 0 row num ([#39903](https://github.com/milvus-io/milvus/pull/39903)).
+- Fixed an issue where Checkpoint target lag metrics might leak after a collection is released ([#39842](https://github.com/milvus-io/milvus/pull/39842))
+- Fixed a potential partial partition load timeout issue ([#39834](https://github.com/milvus-io/milvus/pull/39834))
+- Fixed an issue where index mmap could be incorrectly enabled ([#39805](https://github.com/milvus-io/milvus/pull/39805))
+- Fixed an issue causing the modulo operation to fail for int64 in filtered searches ([#39804](https://github.com/milvus-io/milvus/pull/39804))
+- Fixed a potential freeze when loading a collection during compaction or GC ([#39766](https://github.com/milvus-io/milvus/pull/39766))
+- Fixed an issue where root could still list all collections after rootShouldBindRole was set ([#39715](https://github.com/milvus-io/milvus/pull/39715))
+- Fixed channel imbalance issues caused by node downtime ([#39738](https://github.com/milvus-io/milvus/pull/39738))
+- Resolved freeze issues triggered by excessive message queue consumers by limiting concurrency ([#38916](https://github.com/milvus-io/milvus/pull/38916))
+- Fixed a flowgraph leak ([#39687](https://github.com/milvus-io/milvus/pull/39687))
+- Fixed a sporadic issue where the Tantivy index could not delete index files during release ([#39471](https://github.com/milvus-io/milvus/pull/39471))
+- Fixed an issue where incorrect configurations could invalidate permission settings ([#39493](https://github.com/milvus-io/milvus/pull/39493))
+- Fixed an issue where RESTful API V1 could not be throttled ([#39554](https://github.com/milvus-io/milvus/pull/39554))
+- Fixed an issue that prevented L0 Compaction from triggering when another collection was busy ([#39384](https://github.com/milvus-io/milvus/pull/39384))
+
 ## v2.4.21
 
 Release Date: January 22, 2025
