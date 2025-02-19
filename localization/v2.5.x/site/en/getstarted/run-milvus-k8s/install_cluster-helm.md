@@ -211,7 +211,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 <p>The above command renders chart templates for a Milvus cluster and saves the output to a manifest file named <code translate="no">milvus_manifest.yaml</code>. Using this manifest, you can install a Milvus cluster with its components and dependencies in separate pods.</p>
 <div class="alert note">
 <ul>
-<li>To install a Milvus instance in the standalone mode where all Milvus components are contained within a single pod, you should run <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code> instead to render chart templates for a Milvus instance in a standalone mode.</li>
+<li>To install a Milvus instance in the standalone mode where all Milvus components are contained within a single pod, you should run <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code> instead to render chart templates for a Milvus instance in a standalone mode.</li>
 <li>To change Milvus configurations, download the <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> template, place your desired settings in it, and use <code translate="no">helm template -f values.yaml my-release milvus/milvus &gt; milvus_manifest.yaml</code> to render the manifest accordingly.</li>
 </ul>
 </div>
