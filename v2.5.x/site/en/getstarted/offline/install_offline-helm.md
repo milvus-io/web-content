@@ -27,7 +27,7 @@ helm repo update
 - For Milvus standalone:
 
 ```
-helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false milvus/milvus > milvus_manifest.yaml
+helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false milvus/milvus > milvus_manifest.yaml
 ```
 
 - For Milvus cluster:

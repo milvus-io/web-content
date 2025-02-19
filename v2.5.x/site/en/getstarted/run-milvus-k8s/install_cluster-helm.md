@@ -184,7 +184,7 @@ The above command renders chart templates for a Milvus cluster and saves the out
 
 <div class="alert note">
 
-- To install a Milvus instance in the standalone mode where all Milvus components are contained within a single pod, you should run `helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false milvus/milvus > milvus_manifest.yaml` instead to render chart templates for a Milvus instance in a standalone mode.
+- To install a Milvus instance in the standalone mode where all Milvus components are contained within a single pod, you should run `helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false milvus/milvus > milvus_manifest.yaml` instead to render chart templates for a Milvus instance in a standalone mode.
 - To change Milvus configurations, download the [`value.yaml`](https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml) template, place your desired settings in it, and use `helm template -f values.yaml my-release milvus/milvus > milvus_manifest.yaml` to render the manifest accordingly.
 
 </div>

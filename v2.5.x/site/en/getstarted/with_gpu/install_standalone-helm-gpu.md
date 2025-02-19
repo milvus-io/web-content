@@ -170,7 +170,7 @@ Milvus allows you to assign one or more GPU devices to Milvus.
   ```
 
   ```bash
-  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false -f custom-values.yaml
+  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false -f custom-values.yaml
   ```
 
 - Assign multiple GPU devices
@@ -222,7 +222,7 @@ Milvus allows you to assign one or more GPU devices to Milvus.
   ```
 
   ```bash
-  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false -f custom-values.yaml
+  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false -f custom-values.yaml
   ```
 
   <div class="alert note">

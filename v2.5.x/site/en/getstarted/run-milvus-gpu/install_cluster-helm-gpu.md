@@ -115,7 +115,7 @@ Milvus with GPU support allows you to assign one or more GPU devices.
   ```
 
   ```bash
-  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false -f custom-values.yaml
+  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false -f custom-values.yaml
   ```
 
 ### 2. Assign multiple GPU devices
@@ -225,7 +225,7 @@ In addition to a single GPU device, you can also assign multiple GPU devices to 
   ```  
 
   ```bash
-  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false -f custom-values.yaml
+  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false -f custom-values.yaml
   ```
 
 ### 2. Check Milvus status
