@@ -387,7 +387,7 @@ from pymilvus import MilvusClient​
 data=[​
     {"id": 0, "text": "Artificial intelligence was founded as an academic discipline in 1956.", "sparse":{9637: 0.30856525997853057, 4399: 0.19771651149001523, ...}, "dense": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...]},​
     {"id": 1, "text": "Alan Turing was the first person to conduct substantial research in AI.", "sparse":{6959: 0.31025067641541815, 1729: 0.8265339135915016, ...}, "dense": [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, ...]},​
-    {"id": 2, "text": "Born in Maida Vale, London, Turing was raised in southern England.", "sparse":{1220: 0.15303302147479103, 7335: 0.9436728846033107, ...}, "dense": [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, ...]}​
+    {"id": 2, "text": "Born in Maida Vale, London, Turing was raised in southern England.", "sparse":{1220: 0.15303302147479103, 7335: 0.9436728846033107, ...}, "dense": [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, ...]}​]
 ​
 res = client.insert(​
     collection_name="hybrid_search_collection",​
