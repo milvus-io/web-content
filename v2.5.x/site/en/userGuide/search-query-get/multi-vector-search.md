@@ -625,7 +625,7 @@ The following  two examples demonstrate how to use the WeightedRanker and RRFRan
     ```python
     from pymilvus import WeightedRanker​
     ​
-    rerank= WeightedRanker(0.8, 0.3) ​
+    ranker = WeightedRanker(0.8, 0.3) ​
 
     ```
     
