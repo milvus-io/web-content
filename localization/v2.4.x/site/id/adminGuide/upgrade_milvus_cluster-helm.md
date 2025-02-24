@@ -23,7 +23,7 @@ title: Tingkatkan Cluster Milvus dengan Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Panduan ini menjelaskan cara mengupgrade cluster Milvus Anda dengan grafik Helm Milvus.</p>
+    </button></h1><p>Panduan ini menjelaskan cara meng-upgrade cluster Milvus Anda dengan grafik Helm Milvus.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda dapat memilih jalur upgrade untuk Milvus Anda sebagai berikut:</p>
-<div style="display: none;">- [Lakukan peningkatan bergilir] (#melakukan-peningkatan bergilir) dari Milvus v2.2.3 dan rilis yang lebih baru ke v2.4.21.</div>
+<div style="display: none;">- [Lakukan peningkatan bergilir] (#melakukan-peningkatan bergilir) dari Milvus v2.2.3 dan rilis yang lebih baru ke v2.4.22.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Tingkatkan Milvus menggunakan Helm</a> untuk peningkatan dari rilis minor sebelum v2.2.3 ke v2.4.21.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrasi metadata</a> sebelum peningkatan dari Milvus v2.1.x ke v2.4.21.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Tingkatkan Milvus menggunakan Helm</a> untuk peningkatan dari rilis minor sebelum v2.2.3 ke v2.4.22.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrasi metadata</a> sebelum peningkatan dari Milvus v2.1.x ke v2.4.22.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Melakukan pemutakhiran bergilir<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Operasi</td><td><code translate="no">update</code></td><td>Salah</td></tr>
 </tbody>
 </table>
-<p>Setelah Anda memastikan bahwa semua deployment dalam instans Milvus Anda berada dalam status normal. Anda dapat menjalankan perintah berikut untuk mengupgrade instans Milvus ke 2.4.21.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.21</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.21&#x27;</span>
+<p>Setelah Anda memastikan bahwa semua deployment dalam instans Milvus Anda berada dalam status normal. Anda dapat menjalankan perintah berikut untuk memutakhirkan instans Milvus ke 2.4.22.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.22</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.22&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>

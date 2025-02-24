@@ -64,7 +64,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <li><p>Vérifiez la <a href="/docs/fr/prerequisite-gpu.md">configuration matérielle et logicielle requise</a> avant l'installation.</p></li>
 </ul>
 <div class="alert note">
-<p>Si vous rencontrez des problèmes lors de l'extraction de l'image, contactez-nous à l'adresse <a href="mailto:community@zilliz.com">community@zilliz.com</a> en précisant le problème, et nous vous fournirons l'assistance nécessaire.</p>
+<p>Si vous rencontrez des problèmes lors de l'extraction de l'image, contactez-nous à l'adresse <a href="mailto:community@zilliz.com">community@zilliz.com</a> en décrivant le problème et nous vous fournirons l'assistance nécessaire.</p>
 </div>
 <h2 id="Install-Helm-Chart-for-Milvus" class="common-anchor-header">Installer la carte Helm pour Milvus<button data-href="#Install-Helm-Chart-for-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -149,7 +149,7 @@ standalone:
       nvidia.com/gpu: &quot;1&quot;
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
+<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="2-Assign-multiple-GPU-devices" class="common-anchor-header">2. Affectation de plusieurs dispositifs GPU</h3><p>En plus d'un seul dispositif GPU, il est possible d'affecter plusieurs dispositifs GPU à Milvus.</p>
@@ -241,7 +241,7 @@ EOF</span>
       <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;1&quot;</span>
 <span class="hljs-variable constant_">EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
+<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="2-Check-Milvus-status" class="common-anchor-header">2. Vérifier l'état de Milvus</h3><p>Exécutez la commande suivante pour vérifier l'état de Milvus :</p>

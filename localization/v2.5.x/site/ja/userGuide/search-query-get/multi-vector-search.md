@@ -40,7 +40,7 @@ title: ハイブリッド検索
 <h3 id="Sparse-Dense-Vector-Search​" class="common-anchor-header">疎密ベクトル検索</h3><p>異なるタイプのベクトルは異なる情報を表現することができ、様々な埋め込みモデルを使用することで、データの異なる特徴や側面をより包括的に表現することができます。例えば、同じ文に対して異なる埋め込みモデルを使用することで、意味的な意味を表す密なベクトルと、文中の単語頻度を表す疎なベクトルを生成することができる。</p>
 <ul>
 <li><p><strong>スパース・ベクトル：</strong>スパースベクトルは、ベクトル次元が高く、非ゼロ値が少ないという特徴がある。この構造により、従来の情報検索アプリケーションに特に適している。ほとんどの場合、スパース・ベクトルで使用される次元数は、1つまたは複数の言語にわたる異なるトークンに対応します。各次元には、文書内のそのトークンの相対的な重要度を示す値が割り当てられます。このレイアウトは、テキストのマッチングを伴うタスクに有利です。</p></li>
-<li><p><strong>密なベクトル：</strong>密なベクトルは、ニューラルネットワークに由来する埋め込みである。順序付けられた配列に配置されたとき、これらのベクトルは入力テキストの意味的本質を捉える。密なベクトルはテキスト処理に限定されるものではなく、視覚データの意味を表現するためにコンピュータビジョンでも広く使用されている。これらの密なベクトルは、通常テキスト埋め込みモデルによって生成され、ほとんどの要素またはすべての要素が非ゼロであることを特徴とする。したがって、密なベクトルは意味検索アプリケーションに特に効果的であり、テキストが完全に一致しない場合でも、ベクトル距離に基づいて最も類似した結果を返すことができる。この機能により、キーワードベースのアプローチでは見逃されがちな概念間の関係性を捉えることができ、よりニュアンスや文脈を考慮した検索結果を得ることができます。</p></li>
+<li><p><strong>密なベクトル：</strong>密なベクトルは、ニューラルネットワークに由来する埋め込みである。順序付けられた配列に配置されたとき、これらのベクトルは入力テキストの意味的本質を捉える。密なベクトルはテキスト処理に限定されるものではなく、視覚データの意味を表現するためにコンピュータビジョンでも広く使用されている。これらの密なベクトルは、通常テキスト埋め込みモデルによって生成され、ほとんどの要素またはすべての要素が非ゼロであることを特徴とする。したがって、密なベクトルは意味検索アプリケーションに特に効果的であり、テキストが完全に一致しない場合でも、ベクトル距離に基づいて最も類似した結果を返すことができる。この機能により、キーワードベースのアプローチでは見逃されがちな概念間の関係を捉えることができ、よりニュアンスや文脈を考慮した検索結果を得ることができます。</p></li>
 </ul>
 <p>詳しくは、<a href="/docs/ja/sparse_vector.md">Sparse Vectorと</a> <a href="/docs/ja/dense-vector.md">Dense Vectorを</a>ご参照ください。</p>
 <h3 id="Multimodal-Search​" class="common-anchor-header">マルチモーダル検索</h3><p>マルチモーダル検索とは、複数のモダリティ（画像、動画、音声、テキストなど）にまたがる非構造化データの類似検索を指す。例えば、人物は指紋、声紋、顔の特徴など様々なモダリティのデータを使って表現することができる。ハイブリッド検索は、複数の検索を同時にサポートする。例えば、指紋と声紋の両方が似ている人物を検索することができます。</p>
@@ -67,7 +67,7 @@ title: ハイブリッド検索
 <li><p>前のステップで作成したコレクションに、スパース密なベクトルを挿入する。</p></li>
 <li><p>ハイブリッド検索を実行する：密なベクトルでのANN検索は、上位K個の最も類似した結果のセットを返し、疎なベクトルでのテキストマッチも上位K個の結果のセットを返します。</p></li>
 <li><p>正規化：上位K個の結果の2つのセットのスコアを正規化し、スコアを[0,1]の間の範囲に変換する。</p></li>
-<li><p>適切な再ランク付け戦略を選択し、2つのトップK結果セットをマージして再ランク付けし、最終的にトップK結果セットを返す。</p></li>
+<li><p>適切な再ランク付け戦略を選択し、2つのTop-K結果セットをマージして再ランク付けし、最終的にTop-K結果セットを返す。</p></li>
 </ol>
 <p>
   
@@ -226,7 +226,7 @@ schema.addField(AddFieldReq.builder()​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>スパース・ベクトル検索では、全文検索機能を活用することで、スパース埋め込みベクトルの生成プロセスを簡素化できます。詳細については、<a href="/docs/ja/full-text-search.md">全文検索を</a>参照してください。</p>
-<h4 id="Create-index​" class="common-anchor-header">インデックスの作成</h4><p>コレクションスキーマを定義した後、ベクトルインデックスと類似度メトリクスを設定する必要があります。この例では、IVF_FLAT インデックスが密ベクトル・フィールド<code translate="no">dense</code> に対して作成され、SPARSE_INVERTED_INDEX が疎ベクトル・フィールド<code translate="no">sparse</code> に対して作成されます。サポートされているインデックスの種類については、<a href="https://milvus.io/docs/index.md?tab=floating">インデックスの説明を</a>参照してください。</p>
+<h4 id="Create-index​" class="common-anchor-header">インデックスの作成</h4><p>コレクションスキーマを定義した後、ベクトルインデックスと類似度メトリクスを設定する必要がある。この例では、IVF_FLAT インデックスが密ベクトル・フィールド<code translate="no">dense</code> に対して作成され、SPARSE_INVERTED_INDEX が疎ベクトル・フィールド<code translate="no">sparse</code> に対して作成されます。サポートされているインデックスの種類については、<a href="https://milvus.io/docs/index.md?tab=floating">インデックスの説明を</a>参照してください。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
@@ -357,7 +357,7 @@ curl --request POST \​
 data=[​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">9637</span>: <span class="hljs-number">0.30856525997853057</span>, <span class="hljs-number">4399</span>: <span class="hljs-number">0.19771651149001523</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...]},​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">6959</span>: <span class="hljs-number">0.31025067641541815</span>, <span class="hljs-number">1729</span>: <span class="hljs-number">0.8265339135915016</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, ...]},​
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">1220</span>: <span class="hljs-number">0.15303302147479103</span>, <span class="hljs-number">7335</span>: <span class="hljs-number">0.9436728846033107</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...]}​
+    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">1220</span>: <span class="hljs-number">0.15303302147479103</span>, <span class="hljs-number">7335</span>: <span class="hljs-number">0.9436728846033107</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...]}​]
 ​
 res = client.<span class="hljs-title function_">insert</span>(​
     collection_name=<span class="hljs-string">&quot;hybrid_search_collection&quot;</span>,​
@@ -555,7 +555,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">WeightedRanker</span>​
 ​
-rerank= <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) ​
+ranker = <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) ​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;​
@@ -602,7 +602,7 @@ ranker = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-numb
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Perform-a-Hybrid-Search​" class="common-anchor-header">ハイブリッド検索の実行</h3><p>ハイブリッド検索を実行する前に、コレクションをメモリにロードする必要がある。コレクション内のベクトル・フィールドにインデックスがないか、ロードされていない場合、Hybrid Searchメソッドを呼び出すとエラーが発生する。</p>
+<h3 id="Perform-a-Hybrid-Search​" class="common-anchor-header">ハイブリッド検索の実行</h3><p>ハイブリッド検索を実行する前に、コレクションをメモリにロードする必要がある。コレクション内のベクトル・フィールドにインデックスがなかったり、ロードされていなかったりすると、Hybrid Searchメソッドを呼び出すときにエラーが発生する。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​

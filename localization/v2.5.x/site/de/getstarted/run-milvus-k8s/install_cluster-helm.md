@@ -210,7 +210,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 <p>Der obige Befehl rendert Diagrammvorlagen für einen Milvus-Cluster und speichert die Ausgabe in einer Manifestdatei namens <code translate="no">milvus_manifest.yaml</code>. Mit diesem Manifest können Sie einen Milvus-Cluster mit seinen Komponenten und Abhängigkeiten in separaten Pods installieren.</p>
 <div class="alert note">
 <ul>
-<li>Um eine Milvus-Instanz im Standalone-Modus zu installieren, bei dem alle Milvus-Komponenten in einem einzigen Pod enthalten sind, sollten Sie stattdessen <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code> ausführen, um Diagrammvorlagen für eine Milvus-Instanz im Standalone-Modus zu rendern.</li>
+<li>Um eine Milvus-Instanz im Standalone-Modus zu installieren, bei dem alle Milvus-Komponenten in einem einzigen Pod enthalten sind, sollten Sie stattdessen <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code> ausführen, um Diagrammvorlagen für eine Milvus-Instanz im Standalone-Modus zu rendern.</li>
 <li>Um Milvus-Konfigurationen zu ändern, laden Sie die <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> Vorlage herunter, fügen Sie die gewünschten Einstellungen hinzu, und verwenden Sie <code translate="no">helm template -f values.yaml my-release milvus/milvus &gt; milvus_manifest.yaml</code>, um das Manifest entsprechend zu rendern.</li>
 </ul>
 </div>

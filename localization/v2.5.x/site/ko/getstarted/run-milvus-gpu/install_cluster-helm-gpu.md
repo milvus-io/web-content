@@ -116,7 +116,7 @@ helm upgrade my-release zilliztech/milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>헬름 차트를 설치했으면, 쿠버네티스에서 밀버스를 시작할 수 있다. 이 섹션에서는 GPU 지원으로 Milvus를 시작하는 단계를 안내한다.</p>
+    </button></h2><p>헬름 차트를 설치했으면 쿠버네티스에서 밀버스를 시작할 수 있다. 이 섹션에서는 GPU 지원으로 Milvus를 시작하는 단계를 안내한다.</p>
 <p>릴리스 이름, 차트 및 변경할 파라미터를 지정하여 헬름으로 Milvus를 시작해야 한다. 이 가이드에서는 릴리스 이름으로 <code translate="no">my-release</code> 을 사용한다. 다른 릴리스 이름을 사용하려면 다음 명령에서 <code translate="no">my-release</code> 를 사용 중인 릴리스 이름으로 바꾼다.</p>
 <p>Milvus를 사용하면 하나 이상의 GPU 장치를 Milvus에 할당할 수 있습니다.</p>
 <h3 id="1-Assign-a-single-GPU-device" class="common-anchor-header">1. 단일 GPU 장치 할당</h3><p>GPU를 지원하는 Milvus에서는 하나 이상의 GPU 장치를 할당할 수 있습니다.</p>
@@ -149,7 +149,7 @@ standalone:
       nvidia.com/gpu: &quot;1&quot;
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
+<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="2-Assign-multiple-GPU-devices" class="common-anchor-header">2. 여러 GPU 장치 할당</h3><p>단일 GPU 장치 외에도 여러 개의 GPU 장치를 Milvus에 할당할 수 있습니다.</p>
@@ -241,7 +241,7 @@ EOF</span>
       <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;1&quot;</span>
 <span class="hljs-variable constant_">EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
+<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="2-Check-Milvus-status" class="common-anchor-header">2. Milvus 상태 확인</h3><p>다음 명령어를 실행하여 Milvus 상태를 확인합니다:</p>

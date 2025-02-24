@@ -97,7 +97,7 @@ helm upgrade my-release zilliztech/milvus
 <p>Das archivierte Repository ist weiterhin für die Diagramme bis 4.0.31 verfügbar. Für spätere Versionen verwenden Sie stattdessen das neue Repo.</p>
 </div>
 <ol start="2">
-<li>Karten lokal aktualisieren.</li>
+<li>Charts lokal aktualisieren.</li>
 </ol>
 <pre><code translate="no">$ helm repo update
 <button class="copy-code-btn"></button></code></pre>
@@ -117,7 +117,7 @@ helm upgrade my-release zilliztech/milvus
         ></path>
       </svg>
     </button></h2><p>Sobald Sie das Helm-Diagramm installiert haben, können Sie Milvus auf Kubernetes starten. In diesem Abschnitt führen wir Sie durch die Schritte zum Starten von Milvus mit GPU-Unterstützung.</p>
-<p>Sie sollten Milvus mit Helm starten, indem Sie den Versionsnamen, das Diagramm und die Parameter angeben, die Sie ändern möchten. In dieser Anleitung wird <code translate="no">my-release</code> als Versionsname verwendet. Um einen anderen Versionsnamen zu verwenden, ersetzen Sie <code translate="no">my-release</code> in den folgenden Befehlen durch den von Ihnen verwendeten Namen.</p>
+<p>Sie sollten Milvus mit Helm starten, indem Sie den Versionsnamen, das Diagramm und die Parameter angeben, die Sie ändern möchten. In dieser Anleitung wird <code translate="no">my-release</code> als Versionsname verwendet. Wenn Sie einen anderen Versionsnamen verwenden möchten, ersetzen Sie <code translate="no">my-release</code> in den folgenden Befehlen durch den von Ihnen verwendeten Namen.</p>
 <p>Milvus ermöglicht es Ihnen, Milvus ein oder mehrere GPU-Geräte zuzuweisen.</p>
 <h3 id="1-Assign-a-single-GPU-device" class="common-anchor-header">1. Ein einzelnes GPU-Gerät zuweisen</h3><p>Milvus mit GPU-Unterstützung ermöglicht es Ihnen, ein oder mehrere GPU-Geräte zuzuweisen.</p>
 <ul>
@@ -149,7 +149,7 @@ standalone:
       nvidia.com/gpu: &quot;1&quot;
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
+<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="2-Assign-multiple-GPU-devices" class="common-anchor-header">2. Mehrere GPU-Geräte zuweisen</h3><p>Zusätzlich zu einem einzelnen GPU-Gerät können Sie Milvus auch mehrere GPU-Geräte zuweisen.</p>
@@ -219,7 +219,7 @@ EOF</span>
       nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
 <span class="hljs-variable constant_">EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In der obigen Konfiguration teilen sich indexNode und queryNode zwei GPUs. Um dem indexNode und dem queryNode unterschiedliche GPUs zuzuweisen, können Sie die Konfiguration entsprechend ändern, indem Sie extraEnv in der Konfigurationsdatei wie folgt einstellen:</p>
+<p>In der obigen Konfiguration teilen sich indexNode und queryNode zwei GPUs. Um der indexNode und der queryNode unterschiedliche GPUs zuzuweisen, können Sie die Konfiguration entsprechend ändern, indem Sie extraEnv in der Konfigurationsdatei wie folgt einstellen:</p>
 <pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
 <span class="hljs-attr">indexNode</span>:
   <span class="hljs-attr">resources</span>:
@@ -241,7 +241,7 @@ EOF</span>
       <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;1&quot;</span>
 <span class="hljs-variable constant_">EOF</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
+<pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="2-Check-Milvus-status" class="common-anchor-header">2. Prüfen Sie den Milvus-Status</h3><p>Führen Sie den folgenden Befehl aus, um den Milvus-Status zu überprüfen:</p>

@@ -290,7 +290,7 @@ index_params.add_index(​
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection​</span>
 client.create_collection(​
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>,​
+    collection_name=<span class="hljs-string">&quot;my_varchar_collection&quot;</span>,​
     schema=schema,​
     index_params=index_params​
 )​

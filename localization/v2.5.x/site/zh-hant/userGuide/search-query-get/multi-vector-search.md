@@ -40,7 +40,7 @@ title: 混合搜尋
 <h3 id="Sparse-Dense-Vector-Search​" class="common-anchor-header">稀疏-密集向量搜尋</h3><p>不同類型的向量可以代表不同的資訊，使用不同的嵌入模型可以更全面地代表資料的不同特徵和面向。例如，對同一句子使用不同的嵌入模型，可以產生表示語義的密集向量和表示句子中詞彙頻率的稀疏向量。</p>
 <ul>
 <li><p><strong>稀疏向量：</strong>稀疏向量的特點是向量維度高，而且只有很少的非零值存在。這種結構使它們特別適合傳統的資訊檢索應用。在大多數情況下，稀疏向量所使用的維數對應於一種或多種語言的不同詞彙。每個維度都會被指定一個值，表示該標記在文件中的相對重要性。對於涉及文字比對的任務而言，這種佈局很有優勢。</p></li>
-<li><p><strong>密集向量：</strong>密集向量是來自於神經網路的嵌入。當排列成有序陣列時，這些向量可以捕捉輸入文字的語意精髓。請注意，密集向量並不限於文字處理；它們也被廣泛應用於電腦視覺，以表示視覺資料的語意。這些密集向量通常是由文字嵌入模型所產生，其特點是大部分或所有元素都非零。因此，密集向量對於語意搜尋應用特別有效，因為即使沒有精確的文字匹配，它們也能根據向量距離傳回最相似的結果。此功能可讓搜尋結果更細緻、更能感知上下文，通常可捕捉到基於關鍵字的方法可能遺漏的概念之間的關係。</p></li>
+<li><p><strong>密集向量：</strong>密集向量是來自於神經網路的嵌入。當排列成有序陣列時，這些向量可以捕捉輸入文字的語意精髓。請注意，密集向量並不限於文字處理；它們也被廣泛應用於電腦視覺，以表示視覺資料的語意。這些密集向量通常是由文字嵌入模型產生，其特點是大部分或所有元素都非零。因此，密集向量對於語意搜尋應用特別有效，因為即使沒有精確的文字匹配，它們也能根據向量距離傳回最相似的結果。此功能可讓搜尋結果更細緻、更能感知上下文，通常能捕捉到基於關鍵字的方法可能遺漏的概念之間的關係。</p></li>
 </ul>
 <p>如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>和<a href="/docs/zh-hant/dense-vector.md">Dense Vector</a>。</p>
 <h3 id="Multimodal-Search​" class="common-anchor-header">多模式搜尋</h3><p>多模態搜尋是指跨多種模態（如圖像、視訊、音訊、文字等）的非結構化資料相似性搜尋。例如，可以使用指紋、聲紋和臉部特徵等多種模式的資料來表示一個人。混合搜尋支援同時進行多重搜尋。例如，使用相似的指紋和聲紋搜尋一個人。</p>
@@ -357,7 +357,7 @@ curl --request POST \​
 data=[​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">9637</span>: <span class="hljs-number">0.30856525997853057</span>, <span class="hljs-number">4399</span>: <span class="hljs-number">0.19771651149001523</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...]},​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">6959</span>: <span class="hljs-number">0.31025067641541815</span>, <span class="hljs-number">1729</span>: <span class="hljs-number">0.8265339135915016</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, ...]},​
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">1220</span>: <span class="hljs-number">0.15303302147479103</span>, <span class="hljs-number">7335</span>: <span class="hljs-number">0.9436728846033107</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...]}​
+    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">1220</span>: <span class="hljs-number">0.15303302147479103</span>, <span class="hljs-number">7335</span>: <span class="hljs-number">0.9436728846033107</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...]}​]
 ​
 res = client.<span class="hljs-title function_">insert</span>(​
     collection_name=<span class="hljs-string">&quot;hybrid_search_collection&quot;</span>,​
@@ -544,7 +544,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
 <h3 id="Configure-a-reranking-strategy​" class="common-anchor-header">設定重新排序策略</h3><p>要合併兩組 ANN 搜尋結果並將其重新排序，必須選擇適當的重新排序策略。Zilliz 支援兩種 reranking 策略：<strong>WeightedRanker</strong>和<strong>RRFRanker</strong>。在選擇重排策略時，需要考慮的一件事是，是否需要強調向量場上的一個或多個基本 ANN 搜尋。</p>
 <ul>
 <li><p><strong>WeightedRanker</strong>：如果您要求結果強調特定向量領域，建議使用此策略。WeightedRanker 允許您為某些向量領域指定較高的權重，使其更受重視。例如，在多模式搜尋中，圖片的文字描述可能會被認為比這張圖片的顏色更重要。</p></li>
-<li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)：</strong>當沒有特定的重點時，建議使用此策略。RRF 可以有效平衡每個向量場的重要性。</p></li>
+<li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)：</strong>當沒有特定的重點時，建議使用此策略。RRF 可以有效地平衡每個向量場的重要性。</p></li>
 </ul>
 <p>有關這兩種重排策略機制的詳細資訊，請參閱<a href="/docs/zh-hant/reranking.md">Reranking</a>。</p>
 <p>以下兩個範例示範如何使用 WeightedRanker 和 RRFRanker 重排策略。</p>
@@ -555,7 +555,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">WeightedRanker</span>​
 ​
-rerank= <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) ​
+ranker = <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) ​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;​
@@ -676,4 +676,4 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <pre><code translate="no" class="language-json">[<span class="hljs-string">&quot;[&#x27;id: 844, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 876, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>由於在 Hybrid Search 中指定了<code translate="no">limit=2</code> ，Zilliz 會將步驟 3 中的四個搜尋結果重新排序，最終只會返回前兩個最相似的搜尋結果。</p>
+<p>由於在 Hybrid Search 中指定了<code translate="no">limit=2</code> ，Zilliz 會將步驟 3 中的四個搜尋結果重新排序，最終只會傳回最相似的前兩個搜尋結果。</p>

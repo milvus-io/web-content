@@ -4,7 +4,7 @@ title: 字串欄位
 summary: >-
   在 Milvus 中，VARCHAR 是用來儲存字串類型資料的資料類型，適合儲存長度可變的字串。它可以儲存單字節和多字節字元的字串，最大長度可達
   65,535 個字元。定義 VARCHAR 欄位時，必須同時指定最大長度參數 max_length。VARCHAR
-  字串類型提供了一種有效且靈活的方式來儲存和管理文字資料，非常適合處理不同長度字串的應用程式。
+  字串類型提供了有效且彈性的方式來儲存和管理文字資料，非常適合處理不同長度字串的應用程式。
 ---
 <h1 id="String-Field​" class="common-anchor-header">字串欄位<button data-href="#String-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -286,7 +286,7 @@ index_params.add_index(​
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection​</span>
 client.create_collection(​
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>,​
+    collection_name=<span class="hljs-string">&quot;my_varchar_collection&quot;</span>,​
     schema=schema,​
     index_params=index_params​
 )​

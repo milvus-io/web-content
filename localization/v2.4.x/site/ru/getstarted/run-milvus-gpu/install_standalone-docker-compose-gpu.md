@@ -59,8 +59,8 @@ title: Запуск Milvus с поддержкой GPU с помощью Docker 
         ></path>
       </svg>
     </button></h2><p>Чтобы установить Milvus с поддержкой GPU с помощью Docker Compose, выполните следующие действия.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Загрузите и настройте YAML-файл</h3><p>Скачайте <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.21/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> и сохраните его как docker-compose.yml вручную или с помощью следующей команды.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.21/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Загрузите и настройте YAML-файл</h3><p>Скачайте <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.22/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> и сохраните его как docker-compose.yml вручную или с помощью следующей команды.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.22/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>В YAML-файле необходимо внести некоторые изменения в переменные окружения автономной службы:</p>
 <ul>

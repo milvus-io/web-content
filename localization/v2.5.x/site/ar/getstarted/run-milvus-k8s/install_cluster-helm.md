@@ -210,7 +210,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 <p>يقوم الأمر أعلاه بعرض قوالب المخططات لمجموعة Milvus ويحفظ المخرجات في ملف بيان باسم <code translate="no">milvus_manifest.yaml</code>. باستخدام هذا البيان، يمكنك تثبيت مجموعة Milvus مع مكوناتها وتوابعها في كبسولات منفصلة.</p>
 <div class="alert note">
 <ul>
-<li>لتثبيت مثيل Milvus في الوضع المستقل حيث يتم تضمين جميع مكونات Milvus في كبسولة واحدة، يجب عليك تشغيل <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code> بدلاً من ذلك لعرض قوالب البيان لمثيل Milvus في الوضع المستقل.</li>
+<li>لتثبيت مثيل Milvus في الوضع المستقل حيث يتم تضمين جميع مكونات Milvus في كبسولة واحدة، يجب عليك تشغيل <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code> بدلاً من ذلك لعرض قوالب البيان لمثيل Milvus في الوضع المستقل.</li>
 <li>لتغيير تكوينات Milvus، قم بتحميل قالب <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> القالب، ضع الإعدادات التي تريدها فيه، واستخدم <code translate="no">helm template -f values.yaml my-release milvus/milvus &gt; milvus_manifest.yaml</code> لعرض البيان وفقًا لذلك.</li>
 </ul>
 </div>

@@ -65,7 +65,7 @@ title: 하이브리드 검색
 <li><p><a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>, <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#BGE-M3">BGE-M3</a>, <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#SPLADE">SPLADE</a> 등과 같은 임베딩 모델을 통해 스파스 벡터를 생성합니다.</p></li>
 <li><p>Zilliz에서 컬렉션을 생성하고 고밀도 및 스파스 벡터 필드를 모두 포함하는 컬렉션 스키마를 정의합니다.</p></li>
 <li><p>이전 단계에서 생성한 컬렉션에 스파스-밀도 벡터를 삽입합니다.</p></li>
-<li><p>하이브리드 검색을 수행합니다: 고밀도 벡터에 대한 ANN 검색은 가장 유사한 상위 K개의 결과 집합을 반환하며, 스파스 벡터에 대한 텍스트 일치도 상위 K개의 결과 집합을 반환합니다.</p></li>
+<li><p>하이브리드 검색을 수행합니다: 고밀도 벡터에 대한 ANN 검색은 가장 유사한 상위 K개의 결과 집합을 반환하고, 스파스 벡터에 대한 텍스트 일치도 상위 K개의 결과 집합을 반환합니다.</p></li>
 <li><p>정규화: 정규화: 상위 K 결과의 두 세트의 점수를 정규화하여 점수를 [0,1] 사이의 범위로 변환합니다.</p></li>
 <li><p>적절한 재순위 전략을 선택하여 두 개의 상위 K 결과 세트를 병합하고 재순위화하여 최종적으로 상위 K 결과 세트를 반환합니다.</p></li>
 </ol>
@@ -357,7 +357,7 @@ curl --request POST \​
 data=[​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">9637</span>: <span class="hljs-number">0.30856525997853057</span>, <span class="hljs-number">4399</span>: <span class="hljs-number">0.19771651149001523</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...]},​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">6959</span>: <span class="hljs-number">0.31025067641541815</span>, <span class="hljs-number">1729</span>: <span class="hljs-number">0.8265339135915016</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, ...]},​
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">1220</span>: <span class="hljs-number">0.15303302147479103</span>, <span class="hljs-number">7335</span>: <span class="hljs-number">0.9436728846033107</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...]}​
+    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">1220</span>: <span class="hljs-number">0.15303302147479103</span>, <span class="hljs-number">7335</span>: <span class="hljs-number">0.9436728846033107</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...]}​]
 ​
 res = client.<span class="hljs-title function_">insert</span>(​
     collection_name=<span class="hljs-string">&quot;hybrid_search_collection&quot;</span>,​
@@ -541,7 +541,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
 
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">limit</code> 매개 변수가 2로 설정되어 있으므로 <code translate="no">AnnSearchRequest</code> 각각 2개의 검색 결과를 반환합니다. 이 예에서는 <code translate="no">AnnSearchRequest</code> 2개가 생성되므로 총 4개의 검색 결과가 반환됩니다.</p>
-<h3 id="Configure-a-reranking-strategy​" class="common-anchor-header">순위 재조정 전략 구성</h3><p>두 세트의 ANN 검색 결과를 병합하고 재랭크하려면 적절한 재랭크 전략을 선택해야 합니다. 질리즈는 두 가지 유형의 리랭크 전략을 지원합니다: <strong>가중랭커와</strong> <strong>RRFRanker입니다</strong>. 재랭크 전략을 선택할 때 고려해야 할 한 가지는 벡터 필드에서 하나 이상의 기본 ANN 검색에 중점을 둘 것인지 여부입니다.</p>
+<h3 id="Configure-a-reranking-strategy​" class="common-anchor-header">순위 재조정 전략 구성</h3><p>두 세트의 ANN 검색 결과를 병합하고 재랭크하려면 적절한 재랭크 전략을 선택해야 합니다. 질리즈는 두 가지 유형의 재랭크 전략을 지원합니다: <strong>가중랭커와</strong> <strong>RRFRanker입니다</strong>. 재랭크 전략을 선택할 때 고려해야 할 한 가지는 벡터 필드에서 하나 이상의 기본 ANN 검색에 중점을 둘 것인지 여부입니다.</p>
 <ul>
 <li><p><strong>가중 랭커</strong>: 이 전략은 특정 벡터 필드를 강조하는 결과가 필요한 경우에 권장됩니다. 가중랭커를 사용하면 특정 벡터 필드에 더 높은 가중치를 할당하여 해당 필드를 더 강조할 수 있습니다. 예를 들어, 다중 모드 검색에서는 이미지의 텍스트 설명이 이미지의 색상보다 더 중요하게 고려될 수 있습니다.</p></li>
 <li><p><strong>상호 순위 퓨전 랭킹(RRFRanker</strong>): 이 전략은 특별히 강조할 부분이 없을 때 권장됩니다. RRF는 각 벡터 필드의 중요도를 효과적으로 균형 있게 조정할 수 있습니다.</p></li>
@@ -555,7 +555,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">WeightedRanker</span>​
 ​
-rerank= <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) ​
+ranker = <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) ​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;​

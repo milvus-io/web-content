@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Puede elegir la ruta de actualización para su Milvus de la siguiente manera:</p>
-<div style="display: none;">- Realice una actualización continua](#conduct-a-rolling-upgrade) de Milvus v2.2.3 y versiones posteriores a v2.4.21.</div>
+<div style="display: none;">- Realice una actualización continua](#conduct-a-rolling-upgrade) de Milvus v2.2.3 y versiones posteriores a v2.4.22.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Actualice Milvus utilizando Helm</a> para una actualización desde una versión menor anterior a v2.2.3 a v2.4.21.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migre los metadatos</a> antes de la actualización de Milvus v2.1.x a v2.4.21.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Actualice Milvus utilizando Helm</a> para una actualización desde una versión menor anterior a v2.2.3 a v2.4.22.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migre los metadatos</a> antes de la actualización de Milvus v2.1.x a v2.4.22.</p></li>
 </ul>
 <div style="display:none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Realizar una actualización continua<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Operación</td><td><code translate="no">update</code></td><td>Falso</td></tr>
 </tbody>
 </table>
-<p>Una vez que se haya asegurado de que todos los despliegues en su instancia de Milvus están en su estado normal. Puede ejecutar el siguiente comando para actualizar la instancia de Milvus a 2.4.21.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.21</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.21&#x27;</span>
+<p>Una vez que se haya asegurado de que todos los despliegues en su instancia de Milvus están en su estado normal. Puede ejecutar el siguiente comando para actualizar la instancia de Milvus a 2.4.22.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.22</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.22&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -235,25 +235,25 @@ my-release-minio-744dd9586f-qngzv               1/1     Running   0          84s
 <li>Migre los metadatos de Milvus.</li>
 <li>Inicie los componentes de Milvus con una nueva imagen.</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-2421" class="common-anchor-header">2. Actualizar Milvus de v2.1.x a 2.4.21</h4><p>Los siguientes comandos asumen que usted actualiza Milvus de v2.1.4 a 2.4.21. Cámbielos por las versiones que se ajusten a sus necesidades.</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-2422" class="common-anchor-header">2. Actualizar Milvus de v2.1.x a 2.4.22</h4><p>Los siguientes comandos asumen que usted actualiza Milvus de v2.1.4 a 2.4.22. Cámbielos por las versiones que se ajusten a sus necesidades.</p>
 <ol>
 <li><p>Especifique el nombre de la instancia de Milvus, la versión de Milvus de origen y la versión de Milvus de destino.</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.4.21
+<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.4.22
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Especifique el espacio de nombres con <code translate="no">-n</code> si su Milvus no está instalado en el espacio de nombres predeterminado de K8s.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.21
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.22
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Especifique la ruta raíz con <code translate="no">-r</code> si su Milvus está instalado con la costumbre <code translate="no">rootpath</code>.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.21 -r by-dev
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.22 -r by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Especifique la etiqueta de imagen con <code translate="no">-w</code> si su Milvus está instalado con la personalizada <code translate="no">image</code>.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.21 -r by-dev -w milvusdb/milvus:v2.4.21
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.22 -r by-dev -w milvusdb/milvus:v2.4.22
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Establezca <code translate="no">-d true</code> si desea eliminar automáticamente el pod de migración una vez finalizada la migración.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.21 -w milvusdb/milvus:v2.4.21 -d <span class="hljs-literal">true</span>
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.22 -w milvusdb/milvus:v2.4.22 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Retroceda y migre de nuevo si la migración falla.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.21 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.21 -r by-dev -o migrate -w milvusdb/milvus:v2.4.21
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.22 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.22 -r by-dev -o migrate -w milvusdb/milvus:v2.4.22
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

@@ -24,9 +24,9 @@ title: 使用 Docker Compose 升級 Milvus 單機版
         ></path>
       </svg>
     </button></h1><p>本主題描述如何使用 Docker Compose 升級您的 Milvus。</p>
-<p>在一般情況下，您可以<a href="#Upgrade-Milvus-by-changing-its-image">透過變更映像檔來升級 Milvus</a>。然而，在從 v2.1.x 升級到 v2.4.21 之前，您需要<a href="#Migrate-the-metadata">先遷移元資料</a>。</p>
+<p>在一般情況下，您可以<a href="#Upgrade-Milvus-by-changing-its-image">透過變更映像檔來升級 Milvus</a>。然而，在從 v2.1.x 升級到 v2.4.22 之前，您需要<a href="#Migrate-the-metadata">先遷移元資料</a>。</p>
 <div class="alter note">
-<p>基於安全考量，Milvus 隨著 v2.2.5 的發行，將 MinIO 升級為 RELEASE.2023-03-20T20-16-18Z。在從使用 Docker Compose 安裝的先前 Milvus Standalone 版本進行任何升級之前，您應該先建立一個 Single-Node Single-Drive MinIO 部署，並將現有的 MinIO 設定和內容遷移到新部署。如需詳細資訊，請參閱<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">本指南</a>。</p>
+<p>基於安全考量，Milvus 隨著 v2.2.5 的發行，將 MinIO 升級為 RELEASE.2023-03-20T20-16-18Z。在使用 Docker Compose 從之前的 Milvus Standalone 版本安裝進行任何升級之前，您應該先建立一個 Single-Node Single-Drive MinIO 部署，並將現有的 MinIO 設定和內容遷移到新的部署。如需詳細資訊，請參閱<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">本指南</a>。</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">透過變更映像來升級 Milvus<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +49,7 @@ title: 使用 Docker Compose 升級 Milvus 單機版
 <pre><code translate="no" class="language-yaml">...
 standalone:
   container_name: milvus-standalone
-  image: milvusdb/milvus:v2.4.21
+  image: milvusdb/milvus:v2.4.22
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>執行下列指令來執行升級。</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -83,7 +83,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.21</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.22</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

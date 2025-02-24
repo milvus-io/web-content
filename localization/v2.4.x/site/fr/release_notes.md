@@ -19,6 +19,63 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2422" class="common-anchor-header">v2.4.22<button data-href="#v2422" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release Date: February 14, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.4.22</td><td>2.4.14</td><td>2.4.10</td><td>2.4.11</td></tr>
+</tbody>
+</table>
+<p>We’re thrilled to announce the release of Milvus 2.4.22, focusing on enhanced performance, faster data loading and recovery, and improved stability. This update includes several feature improvements and bug fixes that streamline operations and optimize resource usage. We encourage you to upgrade or give it a try, and as always, we look forward to your feedback to help us continually improve Milvus!</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Return topks when searching in RESTful v2 (<a href="https://github.com/milvus-io/milvus/pull/39858">#39858</a>)</li>
+<li>Dump pprof information if the component stop process times out (<a href="https://github.com/milvus-io/milvus/pull/39764">#39764</a>)</li>
+<li>Make compaction intervals configurable (<a href="https://github.com/milvus-io/milvus/pull/39512">#39512</a>)</li>
+<li>Add a secondary index for QueryNode segment manager to accelerate queries (<a href="https://github.com/milvus-io/milvus/pull/38348">#38348</a>)</li>
+<li>Read metadata concurrently at the collection level to speed up failure recovery (<a href="https://github.com/milvus-io/milvus/pull/39756">#39756</a>)</li>
+<li>Reduce locking in DataCoord to speed up load and insert operations (<a href="https://github.com/milvus-io/milvus/pull/38230">#38230</a>)</li>
+<li>Increase the metadata list batch size to speed up recovery (<a href="https://github.com/milvus-io/milvus/pull/39741">#39741</a>)</li>
+<li>Skip generating the partition limiter if no partition is set (<a href="https://github.com/milvus-io/milvus/pull/38912">#38912</a>)</li>
+<li>Improve the speed of fetching collection information from RootCoord by avoiding unnecessary copies (<a href="https://github.com/milvus-io/milvus/pull/38903">#38903</a>)</li>
+<li>Decrease the update frequency for rapidly refreshed metrics to accelerate recovery (<a href="https://github.com/milvus-io/milvus/pull/38776">#38776</a>)</li>
+<li>Use WalkWithPrefix instead of LoadWithPrefix to accelerate etcd list operations (<a href="https://github.com/milvus-io/milvus/pull/38216">#38216</a>)</li>
+<li>Speed up data loading by accelerating task generation, scheduling, and execution in QueryCoord (<a href="https://github.com/milvus-io/milvus/pull/38906">#38906</a>)</li>
+<li>Remove unnecessary Bloom Filters in QueryNode and DataNode to reduce memory usage (<a href="https://github.com/milvus-io/milvus/pull/38215">#38215</a>)</li>
+<li>Handle Rust errors in C++ (<a href="https://github.com/milvus-io/milvus/pull/39501">#39501</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed an issue where imports failed due to 0 row num (<a href="https://github.com/milvus-io/milvus/pull/39903">#39903</a>).</li>
+<li>Fixed an issue where Checkpoint target lag metrics might leak after a collection is released (<a href="https://github.com/milvus-io/milvus/pull/39842">#39842</a>)</li>
+<li>Fixed a potential partial partition load timeout issue (<a href="https://github.com/milvus-io/milvus/pull/39834">#39834</a>)</li>
+<li>Fixed an issue where index mmap could be incorrectly enabled (<a href="https://github.com/milvus-io/milvus/pull/39805">#39805</a>)</li>
+<li>Fixed an issue causing the modulo operation to fail for int64 in filtered searches (<a href="https://github.com/milvus-io/milvus/pull/39804">#39804</a>)</li>
+<li>Fixed a potential freeze when loading a collection during compaction or GC (<a href="https://github.com/milvus-io/milvus/pull/39766">#39766</a>)</li>
+<li>Fixed an issue where root could still list all collections after rootShouldBindRole was set (<a href="https://github.com/milvus-io/milvus/pull/39715">#39715</a>)</li>
+<li>Fixed channel imbalance issues caused by node downtime (<a href="https://github.com/milvus-io/milvus/pull/39738">#39738</a>)</li>
+<li>Resolved freeze issues triggered by excessive message queue consumers by limiting concurrency (<a href="https://github.com/milvus-io/milvus/pull/38916">#38916</a>)</li>
+<li>Fixed a flowgraph leak (<a href="https://github.com/milvus-io/milvus/pull/39687">#39687</a>)</li>
+<li>Fixed a sporadic issue where the Tantivy index could not delete index files during release (<a href="https://github.com/milvus-io/milvus/pull/39471">#39471</a>)</li>
+<li>Fixed an issue where incorrect configurations could invalidate permission settings (<a href="https://github.com/milvus-io/milvus/pull/39493">#39493</a>)</li>
+<li>Fixed an issue where RESTful API V1 could not be throttled (<a href="https://github.com/milvus-io/milvus/pull/39554">#39554</a>)</li>
+<li>Fixed an issue that prevented L0 Compaction from triggering when another collection was busy (<a href="https://github.com/milvus-io/milvus/pull/39384">#39384</a>)</li>
+</ul>
 <h2 id="v2421" class="common-anchor-header">v2.4.21<button data-href="#v2421" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

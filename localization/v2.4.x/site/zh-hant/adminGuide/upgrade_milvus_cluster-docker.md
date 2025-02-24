@@ -20,7 +20,7 @@ title: 使用 Docker Compose 升級 Milvus 叢集
         ></path>
       </svg>
     </button></h1><p>本主題描述如何使用 Docker Compose 升級您的 Milvus。</p>
-<p>在一般情況下，您可以<a href="#Upgrade-Milvus-by-changing-its-image">透過變更映像檔來升級 Milvus</a>。但是，在從 v2.1.x 升級到 v2.4.21 之前，您需要<a href="#Migrate-the-metadata">先遷移元資料</a>。</p>
+<p>在一般情況下，您可以<a href="#Upgrade-Milvus-by-changing-its-image">透過變更映像檔來升級 Milvus</a>。但是，在從 v2.1.x 升級到 v2.4.22 之前，您需要<a href="#Migrate-the-metadata">先遷移元資料</a>。</p>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">通過改變映像來升級 Milvus<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,35 +43,35 @@ title: 使用 Docker Compose 升級 Milvus 叢集
 <pre><code translate="no" class="language-yaml">...
 rootcoord:
   container_name: milvus-rootcoord
-  image: milvusdb/milvus:v2.4.21
+  image: milvusdb/milvus:v2.4.22
 ...
 proxy:
   container_name: milvus-proxy
-  image: milvusdb/milvus:v2.4.21
+  image: milvusdb/milvus:v2.4.22
 ...
 querycoord:
   container_name: milvus-querycoord
-  image: milvusdb/milvus:v2.4.21  
+  image: milvusdb/milvus:v2.4.22  
 ...
 querynode:
   container_name: milvus-querynode
-  image: milvusdb/milvus:v2.4.21
+  image: milvusdb/milvus:v2.4.22
 ...
 indexcoord:
   container_name: milvus-indexcoord
-  image: milvusdb/milvus:v2.4.21
+  image: milvusdb/milvus:v2.4.22
 ...
 indexnode:
   container_name: milvus-indexnode
-  image: milvusdb/milvus:v2.4.21 
+  image: milvusdb/milvus:v2.4.22 
 ...
 datacoord:
   container_name: milvus-datacoord
-  image: milvusdb/milvus:v2.4.21   
+  image: milvusdb/milvus:v2.4.22   
 ...
 datanode:
   container_name: milvus-datanode
-  image: milvusdb/milvus:v2.4.21
+  image: milvusdb/milvus:v2.4.22
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>執行下列指令以執行升級。</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -105,7 +105,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.21</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.22</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

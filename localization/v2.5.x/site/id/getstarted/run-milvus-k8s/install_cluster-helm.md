@@ -210,7 +210,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 <p>Perintah di atas membuat templat bagan untuk klaster Milvus dan menyimpan hasilnya ke berkas manifes bernama <code translate="no">milvus_manifest.yaml</code>. Dengan menggunakan manifes ini, Anda dapat menginstal klaster Milvus dengan komponen dan dependensinya dalam pod yang terpisah.</p>
 <div class="alert note">
 <ul>
-<li>Untuk menginstal instans Milvus dalam mode mandiri di mana semua komponen Milvus berada dalam satu pod, Anda harus menjalankan <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code> sebagai gantinya untuk merender templat bagan untuk instans Milvus dalam mode mandiri.</li>
+<li>Untuk menginstal instans Milvus dalam mode mandiri di mana semua komponen Milvus berada dalam satu pod, Anda harus menjalankan <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code> sebagai gantinya untuk merender templat bagan untuk instans Milvus dalam mode mandiri.</li>
 <li>Untuk mengubah konfigurasi Milvus, unduh template <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> template, letakkan pengaturan yang Anda inginkan di dalamnya, dan gunakan <code translate="no">helm template -f values.yaml my-release milvus/milvus &gt; milvus_manifest.yaml</code> untuk merender manifes yang sesuai.</li>
 </ul>
 </div>

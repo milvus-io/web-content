@@ -65,7 +65,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <li><p>Перед установкой Milvus рекомендуется использовать <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> для оценки требований к оборудованию в зависимости от объема данных. Это поможет обеспечить оптимальную производительность и распределение ресурсов при установке Milvus.</p></li>
 </ul>
 <div class="alert note">
-<p>Если у вас возникнут проблемы с установкой образа, свяжитесь с нами по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a> и подробно расскажите о проблеме, и мы окажем вам необходимую поддержку.</p>
+<p>Если у вас возникнут проблемы с установкой образа, свяжитесь с нами по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a> и подробно расскажите о проблеме, и мы предоставим вам необходимую поддержку.</p>
 </div>
 <h2 id="Install-Milvus-Helm-Chart" class="common-anchor-header">Установка Milvus Helm Chart<button data-href="#Install-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -116,7 +116,7 @@ helm upgrade my-release zilliztech/milvus
     </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1. Разверните кластер Milvus</h3><p>После установки диаграммы Helm вы можете запустить Milvus на Kubernetes. В этом разделе мы рассмотрим шаги по запуску Milvus.</p>
 <pre><code translate="no" class="language-shell">$ helm install my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>В приведенной выше команде <code translate="no">my-release</code> - это имя релиза, а <code translate="no">milvus/milvus</code> - локально установленный репозиторий графика. Чтобы использовать другое имя, замените <code translate="no">my-release</code> на то, которое вы считаете нужным.</p>
+<p>В приведенной выше команде <code translate="no">my-release</code> - это название релиза, а <code translate="no">milvus/milvus</code> - локально установленный репозиторий графика. Чтобы использовать другое имя, замените <code translate="no">my-release</code> на то, которое вы считаете нужным.</p>
 <p>Приведенная выше команда развертывает кластер Milvus с его компонентами и зависимостями, используя конфигурации по умолчанию. Чтобы настроить эти параметры, мы рекомендуем использовать <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> для настройки конфигураций на основе фактического объема данных, а затем загрузить соответствующий YAML-файл. Чтобы узнать больше о параметрах конфигурации, обратитесь к разделу <a href="https://milvus.io/docs/system_configuration.md">Контрольный список конфигураций системы Milvus</a>.</p>
 <div class="alert note">
   <ul>
@@ -210,7 +210,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 <p>Приведенная выше команда создает шаблоны графиков для кластера Milvus и сохраняет результаты в файле манифеста с именем <code translate="no">milvus_manifest.yaml</code>. Используя этот манифест, вы можете установить кластер Milvus с его компонентами и зависимостями в отдельных капсулах.</p>
 <div class="alert note">
 <ul>
-<li>Для установки экземпляра Milvus в автономном режиме, когда все компоненты Milvus содержатся в одном подкате, следует запустить <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code>, чтобы вывести шаблоны графиков для экземпляра Milvus в автономном режиме.</li>
+<li>Для установки экземпляра Milvus в автономном режиме, когда все компоненты Milvus содержатся в одном подкате, следует запустить <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code>, чтобы вывести шаблоны графиков для экземпляра Milvus в автономном режиме.</li>
 <li>Чтобы изменить конфигурацию Milvus, загрузите <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> шаблон, поместите в него нужные настройки и используйте <code translate="no">helm template -f values.yaml my-release milvus/milvus &gt; milvus_manifest.yaml</code> для рендеринга манифеста в соответствии с ними.</li>
 </ul>
 </div>

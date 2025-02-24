@@ -95,7 +95,7 @@ title: Búsqueda híbrida
 <h4 id="Define-schema​" class="common-anchor-header">Definir el esquema</h4><p>En este ejemplo, es necesario definir varios campos vectoriales en el esquema de la colección. Actualmente, cada colección puede incluir hasta 4 campos vectoriales por defecto. Pero también se puede modificar el valor de  <a href="https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>  para incluir hasta 10 campos vectoriales en una colección según sea necesario.</p>
 <p>El siguiente ejemplo define un esquema de colección, donde <code translate="no">dense</code> y <code translate="no">sparse</code> son los dos campos vectoriales.</p>
 <ul>
-<li><p><code translate="no">id</code>: Este campo sirve como clave primaria para almacenar IDs de texto. El tipo de datos de este campo es INT64.</p></li>
+<li><p><code translate="no">id</code>: Este campo sirve como clave primaria para almacenar los ID de texto. El tipo de datos de este campo es INT64.</p></li>
 <li><p><code translate="no">text</code>: Este campo se utiliza para almacenar contenido textual. El tipo de datos de este campo es VARCHAR, con una longitud máxima de 1000 caracteres.</p></li>
 <li><p><code translate="no">dense</code>: Este campo se utiliza para almacenar los vectores densos de los textos. El tipo de datos de este campo es FLOAT_VECTOR, con una dimensión vectorial de 768.</p></li>
 <li><p><code translate="no">sparse</code>: Este campo se utiliza para almacenar los vectores dispersos de los textos. El tipo de datos de este campo es SPARSE_FLOAT_VECTOR.</p></li>
@@ -359,7 +359,7 @@ curl --request POST \​
 data=[​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">9637</span>: <span class="hljs-number">0.30856525997853057</span>, <span class="hljs-number">4399</span>: <span class="hljs-number">0.19771651149001523</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...]},​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">6959</span>: <span class="hljs-number">0.31025067641541815</span>, <span class="hljs-number">1729</span>: <span class="hljs-number">0.8265339135915016</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, ...]},​
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">1220</span>: <span class="hljs-number">0.15303302147479103</span>, <span class="hljs-number">7335</span>: <span class="hljs-number">0.9436728846033107</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...]}​
+    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">1220</span>: <span class="hljs-number">0.15303302147479103</span>, <span class="hljs-number">7335</span>: <span class="hljs-number">0.9436728846033107</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...]}​]
 ​
 res = client.<span class="hljs-title function_">insert</span>(​
     collection_name=<span class="hljs-string">&quot;hybrid_search_collection&quot;</span>,​
@@ -557,7 +557,7 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">WeightedRanker</span>​
 ​
-rerank= <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) ​
+ranker = <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) ​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;​
@@ -674,7 +674,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación se muestra el resultado.</p>
+<p>A continuación se muestra la salida.</p>
 <pre><code translate="no" class="language-json">[<span class="hljs-string">&quot;[&#x27;id: 844, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 876, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]​
 
 <button class="copy-code-btn"></button></code></pre>

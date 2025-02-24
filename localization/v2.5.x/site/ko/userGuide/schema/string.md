@@ -186,7 +186,7 @@ schema.addField(AddFieldReq.builder()​
         ></path>
       </svg>
     </button></h2><p><code translate="no">VARCHAR</code> 필드에 대한 인덱스 매개변수를 설정하는 것은 선택 사항이지만 검색 효율성을 크게 향상시킬 수 있습니다.</p>
-<p>다음 예제에서는 <code translate="no">varchar_field1</code> 에 대해 <code translate="no">AUTOINDEX</code> 를 생성하여 Milvus가 데이터 유형에 따라 적절한 인덱스를 자동으로 생성합니다. 자세한 내용은 <a href="https://milvus.io/docs/glossary.md#Auto-Index">자동 인덱스를</a> 참조하세요.</p>
+<p>다음 예제에서는 <code translate="no">varchar_field1</code> 에 대해 <code translate="no">AUTOINDEX</code> 을 생성하여 Milvus가 데이터 유형에 따라 적절한 인덱스를 자동으로 생성합니다. 자세한 내용은 <a href="https://milvus.io/docs/glossary.md#Auto-Index">자동 인덱스를</a> 참조하세요.</p>
 <div class="multipleCode">
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
@@ -287,7 +287,7 @@ index_params.add_index(​
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection​</span>
 client.create_collection(​
-    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>,​
+    collection_name=<span class="hljs-string">&quot;my_varchar_collection&quot;</span>,​
     schema=schema,​
     index_params=index_params​
 )​
@@ -411,7 +411,7 @@ client.<span class="hljs-title function_">insert</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>이 예제에서는 <code translate="no">VARCHAR</code> 필드(<code translate="no">varchar_field1</code> 및 <code translate="no">varchar_field2</code>), 기본 필드(<code translate="no">pk</code>) 및 벡터 표현(<code translate="no">embedding</code>)을 포함하는 데이터를 삽입합니다. 삽입된 데이터가 스키마에 정의된 필드와 일치하는지 확인하려면 데이터 유형을 미리 확인하여 삽입 오류를 방지하는 것이 좋습니다.</p>
-<p>스키마를 정의할 때 <code translate="no">enable_dynamic_fields=True</code> 을 설정하면 Milvus에서는 사전에 정의되지 않은 문자열 필드를 삽입할 수 있습니다. 그러나 이렇게 하면 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
+<p>스키마를 정의할 때 <code translate="no">enable_dynamic_fields=True</code> 을 설정하면 Milvus에서는 사전에 정의되지 않은 문자열 필드를 삽입할 수 있습니다. 하지만 이렇게 하면 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
 <h2 id="Search-and-query​" class="common-anchor-header">검색 및 쿼리<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -57,7 +57,7 @@ title: 使用 Docker Compose 執行 Milvus (Linux)
       </svg>
     </button></h2><p>Milvus 在 Milvus 套件庫中提供 Docker Compose 配置檔案。要使用 Docker Compose 安裝 Milvus，只要執行</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the configuration file</span>
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.21/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.22/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 <span class="hljs-comment"># Start Milvus</span>
 $ <span class="hljs-built_in">sudo</span> docker compose up -d
@@ -80,7 +80,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <li><strong>milvus-standalone</strong>容器使用預設設定本機服務連接埠<strong>19530</strong>，並將其資料對應到目前資料夾中的<strong>volumes/milvus</strong>。</li>
 </ul></li>
 </ul>
-<p>您可以使用下列指令檢查容器是否已啟動並運作：</p>
+<p>您可以使用以下指令檢查容器是否已啟動並運作：</p>
 <pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker-compose ps
 
       Name                     Command                  State                            Ports

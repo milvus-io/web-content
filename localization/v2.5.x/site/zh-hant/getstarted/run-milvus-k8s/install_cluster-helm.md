@@ -65,7 +65,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <li><p>在安裝 Milvus 之前，建議使用<a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a>根據您的資料大小來估計硬體需求。這有助於確保 Milvus 安裝的最佳性能和資源分配。</p></li>
 </ul>
 <div class="alert note">
-<p>如果您在拉動映像時遇到任何問題，請聯繫我們<a href="mailto:community@zilliz.com">community@zilliz.com</a>，並提供有關問題的詳細資訊，我們將為您提供必要的支援。</p>
+<p>如果您在拉動映像時遇到任何問題，請聯繫我們<a href="mailto:community@zilliz.com">community@zilliz.com</a>，並提供問題的詳細資訊，我們將為您提供必要的支援。</p>
 </div>
 <h2 id="Install-Milvus-Helm-Chart" class="common-anchor-header">安裝 Milvus Helm Chart<button data-href="#Install-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -210,7 +210,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 <p>上述命令會渲染 Milvus 叢集的圖表模板，並將輸出保存到一個名為<code translate="no">milvus_manifest.yaml</code> 的艙單檔案中。使用此清單，您可以在獨立的 Pod 中安裝 Milvus 叢集及其元件和相依性。</p>
 <div class="alert note">
 <ul>
-<li>若要在單機模式下安裝 Milvus 實例，即所有 Milvus 元件都包含在單一 pod 中，您應該執行<code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code> 來渲染單機模式下 Milvus 實例的圖表模板。</li>
+<li>若要在單機模式下安裝 Milvus 實例，即所有 Milvus 元件都包含在單一 pod 中，您應該執行<code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code> 來渲染單機模式下 Milvus 實例的圖表模板。</li>
 <li>要變更 Milvus 配置，下載 <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a>範本，將您所需的設定放入其中，並使用<code translate="no">helm template -f values.yaml my-release milvus/milvus &gt; milvus_manifest.yaml</code> 來渲染相應的艙單。</li>
 </ul>
 </div>
