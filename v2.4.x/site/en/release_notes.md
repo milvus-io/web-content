@@ -13,7 +13,7 @@ Release Date: February 14, 2025
 
 | Milvus version | Python SDK version | Java SDK version | Node.js SDK version |
 |----------------|--------------------|------------------|---------------------|
-| 2.4.22         | 2.4.14             | 2.4.10           | 2.4.11              |
+| 2.4.22         | 2.4.15             | 2.4.10           | 2.4.11              |
 
 We’re thrilled to announce the release of Milvus 2.4.22, focusing on enhanced performance, faster data loading and recovery, and improved stability. This update includes several feature improvements and bug fixes that streamline operations and optimize resource usage. We encourage you to upgrade or give it a try, and as always, we look forward to your feedback to help us continually improve Milvus!
 
