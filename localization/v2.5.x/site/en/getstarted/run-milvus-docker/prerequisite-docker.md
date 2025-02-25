@@ -88,7 +88,7 @@ title: Requirements for Installing Milvus with Docker Compose
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>Ideally, your disk should reach over 500  IOPS and below 10ms for the 99th percentile fsync latency. Read the etcd <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">Docs</a> for more detailed requirements.</p>
+<p>Ideally, your disk dedicated to etcd should reach over 500  IOPS and below 10ms for the 99th percentile fsync latency. Read the etcd <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">Docs</a> for more detailed requirements.</p>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
