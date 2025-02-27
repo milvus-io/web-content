@@ -8,6 +8,110 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.5
+
+Release date: February 26, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.5          | 2.5.4              | 2.5.5               | 2.5.4            |
+
+Milvus 2.5.5 brings significant improvements in the number of collections and partitions a single cluster can support. It is now fully feasible to run Milvus with 10K collections and 100K partitions. This release also addresses several critical bugs, including missing match stats and a deadlock issue in multi-stage queries. Additionally, it includes numerous observability and security enhancements. We strongly recommend that all users running Milvus 2.5.x upgrade as soon as possible.
+
+### Dependency Upgrade
+
+Upgraded to ETCD 3.5.18 to fix several CVEs.
+
+- [2.5] Updated raft to cuvs ([#39221](https://github.com/milvus-io/milvus/pull/39221))
+- [2.5] Updated Knowhere version ([#39673](https://github.com/milvus-io/milvus/pull/39673), [#39574](https://github.com/milvus-io/milvus/pull/39574))
+
+### Critical Bugs
+
+- [2.5] Used `text_log` prefix for textmatchindex null offset file ([#39936](https://github.com/milvus-io/milvus/pull/39936))
+- [2.5] Added sub-task pool for multi-stage tasks to avoid deadlock ([#40081](https://github.com/milvus-io/milvus/pull/40081))
+
+### Bug Fixes
+
+- [2.5] Fixed task scheduler deadlock ([#40121](https://github.com/milvus-io/milvus/pull/40121))
+- [2.5] Fixed race condition that caused multiple identical indexes to be created ([#40180](https://github.com/milvus-io/milvus/pull/40180))
+- [2.5] Fixed issue where collections with duplicate names could be created ([#40147](https://github.com/milvus-io/milvus/pull/40147))
+- Fixed search failure of null expression ([#40128](https://github.com/milvus-io/milvus/pull/40128))
+- [2.5] Fixed bug where prefix matching failed when wildcards were in the prefix ([#40021](https://github.com/milvus-io/milvus/pull/40021))
+- Cancelled subcontexts cascade when HTTP request timed out ([#40060](https://github.com/milvus-io/milvus/pull/40060))
+- [2.5] Fixed task delta cache leak on reduce task ([#40056](https://github.com/milvus-io/milvus/pull/40056))
+- [2.5] Fixed querycoord panic in corner case ([#40058](https://github.com/milvus-io/milvus/pull/40058))
+- [2.5] Enhanced isbalanced function to correctly count quote pairs ([#40002](https://github.com/milvus-io/milvus/pull/40002))
+- [2.5] Fixed negative -1 executing compaction tasks ([#39955](https://github.com/milvus-io/milvus/pull/39955))
+- [2.5] Fixed bug where a segment may never transfer from sealed to flushing ([#39996](https://github.com/milvus-io/milvus/pull/39996))
+- Skipped creating primary key index when loading pk index ([#39922](https://github.com/milvus-io/milvus/pull/39922))
+- [2.5] Skipped text index creation when segment was zero after sorting ([#39969](https://github.com/milvus-io/milvus/pull/39969))
+- [2.5] Fixed failure to seek to earliest position ([#39966](https://github.com/milvus-io/milvus/pull/39966))
+- Ignored growing option lost at hybridsearch ([#39900](https://github.com/milvus-io/milvus/pull/39900))
+- [2.5] Fixed altercollection unable to modify consistency level ([#39902](https://github.com/milvus-io/milvus/pull/39902))
+- Fixed import failure due to 0 row count ([#39904](https://github.com/milvus-io/milvus/pull/39904))
+- [2.5] Fixed wrong module result for long type ([#39802](https://github.com/milvus-io/milvus/pull/39802))
+- [2.5] Added and used lifetime context for compaction trigger ([#39880](https://github.com/milvus-io/milvus/pull/39880))
+- [2.5] Checked collection release before target checks ([#39843](https://github.com/milvus-io/milvus/pull/39843))
+- Fixed Rootcoord graceful stop failure and limited resource of CI ([#39793](https://github.com/milvus-io/milvus/pull/39793))
+- [2.5] Removed load field & schema column size check ([#39834](https://github.com/milvus-io/milvus/pull/39834), [#39835](https://github.com/milvus-io/milvus/pull/39835))
+- [2.5] Removed the mmap.enable param in the type param when creating index ([#39806](https://github.com/milvus-io/milvus/pull/39806))
+- [2.5] Did not pass the index name when dropping properties ([#39679](https://github.com/milvus-io/milvus/pull/39679))
+- [2.5] Segments returned both growing and sealed results ([#39789](https://github.com/milvus-io/milvus/pull/39789))
+- [2.5] Fixed concurrent map issue ([#39776](https://github.com/milvus-io/milvus/pull/39776))
+- [2.5] Resolved conflict on QC task test ([#39797](https://github.com/milvus-io/milvus/pull/39797))
+- [2.5] Fixed collection load stuck if compaction or GC occurred ([#39761](https://github.com/milvus-io/milvus/pull/39761))
+- [2.5] Fixed uneven distribution caused by executing task delta cache leak ([#39759](https://github.com/milvus-io/milvus/pull/39759))
+- [2.5] Returned early when skipping load pk index ([#39763](https://github.com/milvus-io/milvus/pull/39763))
+- [2.5] Fixed root user being able to list all collections even when `common.security.rootShouldBindRole` was set ([#39714](https://github.com/milvus-io/milvus/pull/39714))
+- [2.5] Fixed flowgraph leak ([#39686](https://github.com/milvus-io/milvus/pull/39686))
+- [2.5] Used param item formatter to avoid setconfig overlay ([#39636](https://github.com/milvus-io/milvus/pull/39636))
+- [2.5] Metastore privilege name checked with privilege name "all" ([#39492](https://github.com/milvus-io/milvus/pull/39492))
+- [2.5] Added rate limiter for RESTful v1 ([#39555](https://github.com/milvus-io/milvus/pull/39555))
+- [2.5] Removed hardcoded partition number in RESTful handler ([#40113](https://github.com/milvus-io/milvus/pull/40113))
+
+### Improvements
+
+#### Observability
+
+- Added monitor metric to retrieve raw data ([#40155](https://github.com/milvus-io/milvus/pull/40155))
+- [2.5] Added get vector latency metric and refined request limit error message ([#40085](https://github.com/milvus-io/milvus/pull/40085))
+- [2.5] Added metrics for proxy queue ([#40071](https://github.com/milvus-io/milvus/pull/40071))
+- Exposed more metrics data ([#39466](https://github.com/milvus-io/milvus/pull/39466))
+- [2.5] Added metrics for parse expression ([#39716](https://github.com/milvus-io/milvus/pull/39716))
+- [2.5] Added DSL log field for hybridsearch ([#39598](https://github.com/milvus-io/milvus/pull/39598))
+- [2.5] Skipped updating index metrics if index was dropped ([#39572](https://github.com/milvus-io/milvus/pull/39572))
+- [2.5] Dumped pprof info if component stop progress timed out ([#39760](https://github.com/milvus-io/milvus/pull/39760))
+- [2.5] Added management API to check querycoord balance status ([#39909](https://github.com/milvus-io/milvus/pull/39909))
+
+#### Stats/Compaction/Index Task Scheduler Optimization
+
+- Refined index task scheduler policy ([#40104](https://github.com/milvus-io/milvus/pull/40104))
+- [2.5] Limited the speed of generating stats task ([#39645](https://github.com/milvus-io/milvus/pull/39645))
+- Added configs for compaction schedule ([#39511](https://github.com/milvus-io/milvus/pull/39511))
+- [2.5] Checked L0 compaction only with the same channel when stating ([#39543](https://github.com/milvus-io/milvus/pull/39543))
+- [2.5] Adjusted segment loader's memory estimate for interim indexes ([#39509](https://github.com/milvus-io/milvus/pull/39509))
+- [2.5] Used start pos ts for seal segment by lifetime policy ([#39994](https://github.com/milvus-io/milvus/pull/39994))
+- Removed task meta when task was no longer needed ([#40146](https://github.com/milvus-io/milvus/pull/40146))
+- [2.5] Accelerated listing objects during binlog import ([#40048](https://github.com/milvus-io/milvus/pull/40048))
+- Supported creating collection with description ([#40028](https://github.com/milvus-io/milvus/pull/40028))
+- [2.5] Exported index request timeout interval in config ([#40118](https://github.com/milvus-io/milvus/pull/40118))
+- [2.5] Synced proxy.maxTaskNum default value to 1024 ([#40073](https://github.com/milvus-io/milvus/pull/40073))
+- Decreased dump snapshot limit from 10w to 1w ([#40102](https://github.com/milvus-io/milvus/pull/40102))
+- [2.5] Avoided string to slice bytes copy for batch pk exists ([#40097](https://github.com/milvus-io/milvus/pull/40097))
+- Supported returning configurable properties when describing index ([#40043](https://github.com/milvus-io/milvus/pull/40043))
+- Optimized expression performance for certain points ([#39938](https://github.com/milvus-io/milvus/pull/39938))
+- [2.5] Optimized result format of getQueryNodeDistribution ([#39926](https://github.com/milvus-io/milvus/pull/39926))
+- [cp25] Enabled observation of write amplification ([#39743](https://github.com/milvus-io/milvus/pull/39743))
+- [2.5] Returned top-k results when searching in RESTful v2 ([#39839](https://github.com/milvus-io/milvus/pull/39839))
+- [2.5][GoSDK] Added withEnableMatch syntactic sugar ([#39853](https://github.com/milvus-io/milvus/pull/39853))
+- [2.5] Interim index supported different index types and more data types (FP16/BF16) ([#39180](https://github.com/milvus-io/milvus/pull/39180))
+- [GoSDK][2.5] Synced GoSDK commits from master branch ([#39823](https://github.com/milvus-io/milvus/pull/39823))
+- Kept consistency of memory and meta of broadcaster ([#39721](https://github.com/milvus-io/milvus/pull/39721))
+- Broadcasted with event-based notification ([#39550](https://github.com/milvus-io/milvus/pull/39550))
+- [2.5] Refined error message for schema & index checking ([#39565](https://github.com/milvus-io/milvus/pull/39565))
+- [2.5] Reset default auto index type for scalar ([#39820](https://github.com/milvus-io/milvus/pull/39820))
+- [2.5] Re-enqueued L0 compaction task when precheck failed ([#39871](https://github.com/milvus-io/milvus/pull/39871))
+
 ## v2.5.4
 
 Release date: January 23, 2025
