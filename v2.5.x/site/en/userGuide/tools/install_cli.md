@@ -8,7 +8,6 @@ title: Install Milvus_CLI
 
 This topic describes how to install Milvus_CLI.
 
-
 ## Install from PyPI
 
 You can install Milvus_CLI from [PyPI](https://pypi.org/project/milvus-cli/).
@@ -40,7 +39,6 @@ Docker 19.03 or later is required.
 $ docker run -it zilliz/milvus_cli:latest
 ```
 
-
 ## Install from source code
 
 1. Run the following command to download a `milvus_cli` repository.
@@ -62,12 +60,3 @@ python -m pip install --editable .
 ```
 
 Alternatively, you can install Milvus_CLI from a compressed tarball (`.tar.gz` file). Download a [tarball](https://github.com/zilliztech/milvus_cli/releases) and run `python -m pip install milvus_cli-<version>.tar.gz`.
-
-### Install from an .exe file
-
-<div class="alert note"> This installation method only applies to Windows. </div>
-
-Download an .exe file from [GitHub](https://github.com/zilliztech/milvus_cli/releases) and run it to install Milvus_CLI.
-If successful, `milvus_cli-<version>.exe` pops up as shown in the following figure.
-
-![Milvus_CLI](../../../../assets/milvus_cli_exe.png "Successful installation of Milvus_CLI.")
