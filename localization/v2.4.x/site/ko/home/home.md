@@ -13,7 +13,7 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
     <p class="promotion-desc">질리즈 클라우드를 무료로 체험해보세요! 밀버스를 가장 쉽게 경험하는 방법!</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-global" href="https://cloud.zilliz.com/signup">질리즈 클라우드</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">질리즈 클라우드 중국</a></div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">질리즈 클라우드</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">질리즈 클라우드 중국</a></div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">시작하기<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -13,7 +13,7 @@ id: home.md
     <p class="promotion-desc">زيليز كلاود Zilliz Cloud خالية من المتاعب، مدعومة من ميلفوس وأسرع 10 مرات.</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-global" href="https://cloud.zilliz.com/signup">زيليز كلاود</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">زيليز كلاود الصين</a></div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">زيليز كلاود</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">زيليز كلاود الصين</a></div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">ابدأ الآن<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -13,7 +13,7 @@ Vous découvrirez ici ce qu'est Milvus et comment installer, utiliser et déploy
     <p class="promotion-desc">Zilliz Cloud est sans tracas, alimenté par Milvus et 10 fois plus rapide.</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-global" href="https://cloud.zilliz.com/signup">Zilliz</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">Cloud Zilliz Cloud Chine</a></div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Cloud Zilliz Cloud Chine</a></div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">Commencer<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"
