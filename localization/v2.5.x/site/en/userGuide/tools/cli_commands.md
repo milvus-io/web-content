@@ -75,6 +75,8 @@ title: Milvus_CLI Command Reference
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">–uri</td><td style="text-align:left">(Optional) The uri name. The default is &quot;http://127.0.0.1:19530&quot;.</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">–token</td><td style="text-align:left">(Optional) The zilliz cloud apikey or <code translate="no">username:password</code>. The default is None.</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">–tlsmode</td><td style="text-align:left">(Optional) - Set TLS mode: 0 (No encryption), 1 (One-way encryption), 2 (Two-way encryption not support yet). Default is 0</td></tr>
+<tr><td style="text-align:left">-cert</td><td style="text-align:left">–cert</td><td style="text-align:left">(Optional) Path to the client certificate file. Work with One-way encryption</td></tr>
 <tr><td style="text-align:left">–help</td><td style="text-align:left">n/a</td><td style="text-align:left">Displays help for using the command.</td></tr>
 </tbody>
 </table>
