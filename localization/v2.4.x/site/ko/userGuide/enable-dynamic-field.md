@@ -57,7 +57,7 @@ title: 동적 필드 사용
 <p>매개 변수에 대한 자세한 내용은 SDK 참조에서 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> 를 참조하세요.</p>
 </div>
 <div class="language-java">
-<p>파라미터에 대한 자세한 내용은 SDK 참조에서 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> 를 참조하세요.</p>
+<p>매개 변수에 대한 자세한 내용은 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> 를 참조하세요.</p>
 </div>
 <div class="language-javascript">
 <p>파라미터에 대한 자세한 내용은 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> 를 참조하세요.</p>
@@ -337,7 +337,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">데이터 삽입</h3><p>그런 다음 데이터를 컬렉션에 안전하게 삽입할 수 있습니다.</p>
 <div class="language-python">
-<p>매개 변수에 대한 자세한 내용은 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a> 를 참조하세요.</p>
+<p>매개변수에 대한 자세한 내용은 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a> 를 참조하세요.</p>
 </div>
 <div class="language-java">
 <p>매개변수에 대한 자세한 내용은 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a> 를 참조하세요.</p>

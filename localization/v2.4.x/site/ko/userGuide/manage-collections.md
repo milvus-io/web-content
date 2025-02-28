@@ -728,7 +728,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>
-      <td>만들 인덱스의 이름입니다. 기본값은 대상 필드 이름입니다.</td>
+      <td>생성할 인덱스의 이름입니다. 기본값은 대상 필드 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
@@ -748,7 +748,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
   </tbody>
 </table>
-<p>위의 코드 조각은 각각 벡터 필드와 스칼라 필드에 대한 인덱스 매개 변수를 설정하는 방법을 보여줍니다. 벡터 필드의 경우 메트릭 유형과 인덱스 유형을 모두 설정합니다. 스칼라 필드의 경우 인덱스 유형만 설정합니다. 필터링에 자주 사용되는 벡터 필드와 스칼라 필드에 대한 인덱스를 만드는 것이 좋습니다.</p>
+<p>위의 코드 조각은 각각 벡터 필드와 스칼라 필드에 대한 인덱스 파라미터를 설정하는 방법을 보여줍니다. 벡터 필드의 경우 메트릭 유형과 인덱스 유형을 모두 설정합니다. 스칼라 필드의 경우 인덱스 유형만 설정합니다. 필터링에 자주 사용되는 벡터 필드와 스칼라 필드에 대한 인덱스를 만드는 것이 좋습니다.</p>
 <h4 id="Step-3-Create-the-collection" class="common-anchor-header">3단계: 컬렉션 만들기</h4><p>컬렉션과 인덱스 파일을 따로 만들거나, 만들 때 인덱스가 동시에 로드된 컬렉션을 만들 수 있습니다.</p>
 <div class="language-python">
 <p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()을</a> 사용하여 지정된 스키마 및 인덱스 매개변수로 컬렉션을 생성하고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()를</a> 사용하여 컬렉션의 로드 상태를 확인합니다.</p>
@@ -2637,7 +2637,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
       </svg>
     </button></h2><p><code translate="no">ttl.seconds</code> 및 <code translate="no">mmap.enabled</code> 과 같은 컬렉션의 속성을 설정할 수 있습니다. 자세한 내용은 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/set_properties.md">set_properties()를</a> 참조하세요.</p>
 <div class="alert note">
-<p>이 섹션의 코드 스니펫은 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM 모듈을</a> 사용하여 Milvus와 상호 작용합니다. 새로운 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK가</a> 포함된 코드 스니펫은 곧 제공될 예정입니다.</p>
+<p>이 섹션의 코드 스니펫은 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM 모듈을</a> 사용하여 Milvus와 상호 작용합니다. 새로운 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK를</a> 사용한 코드 스니펫은 곧 제공될 예정입니다.</p>
 </div>
 <h3 id="Set-TTL" class="common-anchor-header">TTL 설정</h3><p>컬렉션에 있는 데이터의 TTL(Time-To-Live)을 설정하여 데이터가 자동으로 삭제되기 전에 유지되어야 하는 기간을 지정합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection, connections

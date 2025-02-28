@@ -300,7 +300,7 @@ querynode.cache.enabled: <span class="hljs-literal">true</span>
 querynode.cache.memorylimit: <span class="hljs-number">2147483648</span>
 querynode.scheduler.maxreadconcurrentratio: <span class="hljs-number">2</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In alternativa, si può visitare ogni componente di Milvus per trovare la sua configurazione. Di seguito viene mostrato come elencare la configurazione della QueryCoord con ID 7.</p>
+<p>In alternativa, si può visitare ogni componente di Milvus per trovare la sua configurazione. Di seguito viene mostrato come elencare la configurazione del QueryCoord con ID 7.</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show session
 Session:datacoord, ServerID: <span class="hljs-number">3</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">13333</span>
 Session:datanode, ServerID: <span class="hljs-number">6</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">21124</span>
@@ -381,7 +381,7 @@ backup <span class="hljs-keyword">for</span> prefix <span class="hljs-keyword">d
         ></path>
       </svg>
     </button></h2><p>È possibile fare in modo che Birdwatcher verifichi lo stato delle collezioni caricate con chiavi primarie o query simulate specificate.</p>
-<h3 id="Probe-collection-with-known-primary-key" class="common-anchor-header">Sondare una raccolta con una chiave primaria nota</h3><p>Nel comando <code translate="no">probe</code>, si deve specificare la chiave primaria usando il flag <code translate="no">pk</code> e l'ID della collezione usando il flag <code translate="no">collection</code>.</p>
+<h3 id="Probe-collection-with-known-primary-key" class="common-anchor-header">Sondare le raccolte con una chiave primaria nota</h3><p>Nel comando <code translate="no">probe</code>, si deve specificare la chiave primaria usando il flag <code translate="no">pk</code> e l'ID della collezione usando il flag <code translate="no">collection</code>.</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; probe pk --pk <span class="hljs-number">110</span> --collection <span class="hljs-number">442844725212299747</span>
 PK <span class="hljs-number">110</span> found <span class="hljs-keyword">on</span> segment <span class="hljs-number">442844725212299830</span>
 Field id, <span class="hljs-keyword">value</span>: &amp;{long_data:&lt;data:<span class="hljs-number">110</span> &gt; }

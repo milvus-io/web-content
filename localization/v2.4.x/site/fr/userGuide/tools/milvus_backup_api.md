@@ -1,7 +1,7 @@
 ---
 id: milvus_backup_api.md
 summary: Apprendre à utiliser Milvus Backup via l'API
-title: Sauvegarder et restaurer des données à l'aide d'API
+title: Sauvegarde et restauration de données à l'aide d'API
 ---
 <h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">Sauvegarde et restauration de données à l'aide d'API<button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
       <svg translate="no"

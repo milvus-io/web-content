@@ -117,7 +117,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Puedes ver la estructura de los datos generados comprobando su primera entrada.</p>
+<p>Puede ver la estructura de los datos generados comprobando su primera entrada.</p>
 <pre><code translate="no">{
     <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;vector&quot;</span>: [
@@ -158,7 +158,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 <div class="admonition note">
 <p><b>notas</b></p>
 <ul>
-<li><p>Asegúrate de que todos los valores de una lista o matriz son del mismo tipo de datos.</p></li>
+<li><p>Asegúrese de que todos los valores de una lista o matriz son del mismo tipo de datos.</p></li>
 <li><p>Cualquier diccionario anidado en un valor de campo JSON se considerará cadena.</p></li>
 <li><p>Utilice sólo caracteres alfanuméricos y guiones bajos para nombrar las claves JSON, ya que otros caracteres pueden causar problemas con el filtrado o la búsqueda.</p></li>
 <li>Actualmente, la indexación de campos JSON no está disponible, lo que puede hacer que el filtrado lleve mucho tiempo. Sin embargo, esta limitación se solucionará en próximas versiones.</li>
@@ -387,7 +387,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>Para obtener más información sobre los parámetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>y <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md"><code translate="no">get_load_state()</code></a> en la referencia del SDK.</p>
+<p>Para más información sobre los parámetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>y <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md"><code translate="no">get_load_state()</code></a> en la referencia del SDK.</p>
 </div>
 <div class="language-java">
 <p>Para obtener más información sobre los parámetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>y <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md"><code translate="no">getLoadState()</code></a> en la referencia del SDK.</p>
@@ -527,7 +527,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una vez añadidos todos los datos, puedes realizar búsquedas y consultas utilizando las claves del campo JSON del mismo modo que lo harías con un campo escalar estándar.</p>
+    </button></h2><p>Una vez añadidos todos los datos, puede realizar búsquedas y consultas utilizando las claves del campo JSON del mismo modo que lo haría con un campo escalar estándar.</p>
 <div class="language-python">
 <p>Para obtener más información sobre los parámetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> en la referencia del SDK.</p>
 </div>
@@ -949,7 +949,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Filtra las entidades que tienen como coordinador <code translate="no">[4, 5]</code>.</p>
+<li><p>Filtra las entidades que tienen el coordinador de <code translate="no">[4, 5]</code>.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.query(
@@ -1378,7 +1378,7 @@ searchResults = searchResp.getSearchResults();
 <div class="admonition note">
 <p><b>notas</b></p>
 <ul>
-<li>Milvus almacena valores de cadena en el campo JSON tal cual, sin realizar escapes semánticos ni conversiones. </li>
+<li>Milvus almacena los valores de cadena en el campo JSON tal cual, sin realizar escapes semánticos ni conversiones. </li>
 </ul>
 <p>Por ejemplo, <code translate="no">'a"b'</code>, <code translate="no">"a'b"</code>, <code translate="no">'a\\\\'b'</code>, y <code translate="no">"a\\\\"b"</code> se guardarán tal cual, mientras que <code translate="no">'a'b'</code> y <code translate="no">"a"b"</code> se tratarán como valores no válidos.</p>
 <ul>
@@ -1427,7 +1427,7 @@ json_contains(x, [<span class="hljs-number">3</span>,<span class="hljs-number">2
 json_contains_all(x, [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]) <span class="hljs-comment"># =&gt; False (x does not has a member 6.)</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><code translate="no">json_contains_any(identifier, jsonExpr)</code></p>
-<p>Este operador filtra las entidades cuyo identificador contiene cualquier miembro de la expresión JSON.</p>
+<p>Este operador filtra las entidades cuyo identificador contiene alguno de los miembros de la expresión JSON.</p>
 <p>Ejemplo: <code translate="no">{&quot;x&quot;: [1,2,3,4,5,7,8]}</code></p>
 <pre><code translate="no" class="language-python">json_contains_any(x, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>]) <span class="hljs-comment"># =&gt; True (x contains 1, 2, and 8.)</span>
 json_contains_any(x, [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]) <span class="hljs-comment"># =&gt; True (x contains 4 and 5.)</span>

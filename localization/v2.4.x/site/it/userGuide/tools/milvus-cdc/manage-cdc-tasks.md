@@ -4,9 +4,9 @@ order: 3
 summary: >-
   Un'attività Capture Data Change (CDC) consente di sincronizzare i dati da
   un'istanza Milvus di origine a un'istanza Milvus di destinazione.
-title: Gestire le attività del CDC
+title: Gestione delle attività CDC
 ---
-<h1 id="Manage-CDC-Tasks" class="common-anchor-header">Gestire le attività CDC<button data-href="#Manage-CDC-Tasks" class="anchor-icon" translate="no">
+<h1 id="Manage-CDC-Tasks" class="common-anchor-header">Gestione delle attività CDC<button data-href="#Manage-CDC-Tasks" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

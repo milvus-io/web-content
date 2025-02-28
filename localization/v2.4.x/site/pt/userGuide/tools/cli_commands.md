@@ -572,7 +572,7 @@ Timeout []:
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-nome da coleção</td><td style="text-align:left">O nome da coleção a que pertencem as entidades a eliminar.</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-partição</td><td style="text-align:left">(Opcional) O nome da partição a ser eliminada.</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para a utilização do comando.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para utilizar o comando.</td></tr>
 </tbody>
 </table>
 <p><h3 id="delete-entities">Exemplo</h3></p>
@@ -1432,7 +1432,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
 <tr><th style="text-align:left">Opção</th><th style="text-align:left">Nome completo</th><th style="text-align:left">Descrição</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta a ajuda para utilizar o comando.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para utilizar o comando.</td></tr>
 </tbody>
 </table>
 <h2 id="show-indexprogress" class="common-anchor-header">show index_progress<button data-href="#show-indexprogress" class="anchor-icon" translate="no">
@@ -1520,7 +1520,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
 <tr><th style="text-align:left">Opção</th><th style="text-align:left">Nome completo</th><th style="text-align:left">Descrição</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para a utilização do comando.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta a ajuda para a utilização do comando.</td></tr>
 </tbody>
 </table>
 <div class="alert note"> Também é possível verificar a versão do Milvus_CLI num shell, como mostrado no exemplo a seguir. Neste caso, <code translate="no">milvus_cli --version</code> actua como um comando.</div>

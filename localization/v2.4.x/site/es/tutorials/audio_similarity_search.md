@@ -1,7 +1,7 @@
 ---
 id: audio_similarity_search.md
 summary: Construya un sistema de búsqueda de similitudes de audio con Milvus.
-title: Búsqueda de similitudes de audio
+title: Búsqueda por similitud de audio
 ---
 <h1 id="Audio-Similarity-Search" class="common-anchor-header">Búsqueda por similitud de audio<button data-href="#Audio-Similarity-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -26,7 +26,7 @@ title: Búsqueda de similitudes de audio
 <li><a href="https://towhee.io/">Towhee</a></li>
 </ul>
 <p></br></p>
-<p>La búsqueda de voz, música, efectos de sonido y otros tipos de audio permite consultar rápidamente volúmenes masivos de datos de audio y sacar a la superficie sonidos similares. Las aplicaciones de los sistemas de búsqueda de similitudes de audio incluyen la identificación de efectos de sonido similares, la minimización de las infracciones de propiedad intelectual, etc. La recuperación de audio puede utilizarse para buscar y supervisar medios en línea en tiempo real con el fin de reprimir las infracciones de los derechos de propiedad intelectual. También desempeña un papel importante en la clasificación y el análisis estadístico de datos de audio.</p>
+<p>La búsqueda de voz, música, efectos de sonido y otros tipos de audio permite consultar rápidamente volúmenes masivos de datos de audio y sacar a la superficie sonidos similares. Las aplicaciones de los sistemas de búsqueda de similitudes de audio incluyen la identificación de efectos de sonido similares, la minimización de las infracciones de la propiedad intelectual, etc. La recuperación de audio puede utilizarse para buscar y supervisar medios en línea en tiempo real con el fin de reprimir las infracciones de los derechos de propiedad intelectual. También desempeña un papel importante en la clasificación y el análisis estadístico de datos de audio.</p>
 <p></br></p>
 <p>En este tutorial, aprenderás a construir un sistema de búsqueda de similitudes de audio que pueda devolver clips de sonido similares. Los clips de audio cargados se convierten en vectores utilizando PANNs. Estos vectores se almacenan en Milvus, que genera automáticamente un ID único para cada vector. A continuación, los usuarios pueden realizar una búsqueda de similitud vectorial en Milvus y consultar la ruta de datos del clip de audio correspondiente al ID de vector único devuelto por Milvus.</p>
 <p><br/></p>

@@ -1,10 +1,9 @@
 ---
 id: birdwatcher_usage_guides.md
-summary: 了解如何使用 Birdwatch 调试 Milvus。
-title: 使用观鸟器
+summary: 了解如何使用 Birdwatcher 调试 Milvus。
+title: 使用 Birdwatcher
 ---
-
-<h1 id="Use-Birdwatcher" class="common-anchor-header">使用Birdwatcher<button data-href="#Use-Birdwatcher" class="anchor-icon" translate="no">
+<h1 id="Use-Birdwatcher" class="common-anchor-header">使用 Birdwatcher<button data-href="#Use-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +18,8 @@ title: 使用观鸟器
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南将指导您如何使用 Birdwatcher 查看 Milvus 的状态，并对其进行即时配置。</p>
-<h2 id="Start-Birdwatcher" class="common-anchor-header">启动看鸟人<button data-href="#Start-Birdwatcher" class="anchor-icon" translate="no">
+    </button></h1><p>本指南将指导您如何使用 Birdwatcher 查看 Milvus 的状态并进行动态配置。</p>
+<h2 id="Start-Birdwatcher" class="common-anchor-header">启动 Birdwatcher<button data-href="#Start-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,13 +55,13 @@ title: 使用观鸟器
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在进行其他操作之前，您需要使用 Birdwatcher 连接到 etcd。</p>
+    </button></h2><p>在进行其他操作符之前，您需要使用 Birdwatcher 连接到 etcd。</p>
 <ul>
 <li><p>使用默认设置连接</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect
 <span class="hljs-title function_">Milvus</span><span class="hljs-params">(by-dev)</span> &gt;
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>从 Pod 中的 Birdwatcher 进行连接</p>
+<li><p>从 pod 中的 Birdwatcher 进行连接</p>
 <p>如果选择在 Kubernetes pod 中运行 Birdwatcher，首先需要获取 etcd 的 IP 地址，如下所示：</p>
 <pre><code translate="no" class="language-shell">kubectl <span class="hljs-keyword">get</span> pod my-release-etcd<span class="hljs-number">-0</span> -o <span class="hljs-string">&#x27;jsonpath={.status.podIP}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -74,11 +73,11 @@ title: 使用观鸟器
 Milvus(by-dev)
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>使用不同的根路径连接</p>
-<p>如果 Milvus 的根路径与<code translate="no">by-dev</code> 不同，并且提示错误报告根路径不正确，则可按如下方法连接 etcd：</p>
+<p>如果你的 Milvus 根路径与<code translate="no">by-dev</code> 不同，并且提示你报告根路径不正确的错误，你可以按如下方法连接 etcd：</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --rootPath my-release
 <span class="hljs-title function_">Milvus</span><span class="hljs-params">(my-release)</span> &gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>如果不知道 Milvus 的根路径，请按如下方式连接 etcd：</p>
+<p>如果不知道 Milvus 的根路径，请按以下方式连接 etcd：</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --dry
 using dry mode, ignore rootPath and metaPath
 <span class="hljs-title function_">Etcd</span><span class="hljs-params">(<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">2379</span>)</span> &gt; find-milvus
@@ -109,34 +108,33 @@ Usage:
    show [command]
 
 Available Commands:
-alias <span class="hljs-built_in">list</span> alias meta info
-channel-watch display channel watching info <span class="hljs-keyword">from</span> data coord meta store
-checkpoint <span class="hljs-built_in">list</span> checkpoint collection vchannels
-collection-history display collection change history
-collection-loaded display information of loaded collection <span class="hljs-keyword">from</span> querycoord
-collections <span class="hljs-built_in">list</span> current available collection <span class="hljs-keyword">from</span> RootCoord
-config-etcd <span class="hljs-built_in">list</span> configuations <span class="hljs-built_in">set</span> by etcd source
-configurations iterate <span class="hljs-built_in">all</span> online components <span class="hljs-keyword">and</span> inspect configuration
-current-version  
- database display Database info <span class="hljs-keyword">from</span> rootcoord meta
-index  
- partition <span class="hljs-built_in">list</span> partitions of provided collection
-querycoord-channel display querynode information <span class="hljs-keyword">from</span> querycoord cluster
-querycoord-cluster display querynode information <span class="hljs-keyword">from</span> querycoord cluster
-querycoord-task display task information <span class="hljs-keyword">from</span> querycoord
-replica <span class="hljs-built_in">list</span> current replica information <span class="hljs-keyword">from</span> QueryCoord
-segment display segment information <span class="hljs-keyword">from</span> data coord meta store
-segment-index display segment index information
-segment-loaded display segment information <span class="hljs-keyword">from</span> querycoordv1 meta
-segment-loaded-grpc <span class="hljs-built_in">list</span> segments loaded information
-session <span class="hljs-built_in">list</span> online milvus components
+  alias               <span class="hljs-built_in">list</span> alias meta info
+  channel-watch       display channel watching info <span class="hljs-keyword">from</span> data coord meta store
+  checkpoint          <span class="hljs-built_in">list</span> checkpoint collection vchannels
+  collection-history  display collection change history
+  collection-loaded   display information of loaded collection <span class="hljs-keyword">from</span> querycoord
+  collections         <span class="hljs-built_in">list</span> current available collection <span class="hljs-keyword">from</span> RootCoord
+  config-etcd         <span class="hljs-built_in">list</span> configuations <span class="hljs-built_in">set</span> by etcd source
+  configurations      iterate <span class="hljs-built_in">all</span> online components <span class="hljs-keyword">and</span> inspect configuration
+  current-version     
+  database            display Database info <span class="hljs-keyword">from</span> rootcoord meta
+  index               
+  partition           <span class="hljs-built_in">list</span> partitions of provided collection
+  querycoord-channel  display querynode information <span class="hljs-keyword">from</span> querycoord cluster
+  querycoord-cluster  display querynode information <span class="hljs-keyword">from</span> querycoord cluster
+  querycoord-task     display task information <span class="hljs-keyword">from</span> querycoord
+  replica             <span class="hljs-built_in">list</span> current replica information <span class="hljs-keyword">from</span> QueryCoord
+  segment             display segment information <span class="hljs-keyword">from</span> data coord meta store
+  segment-index       display segment index information
+  segment-loaded      display segment information <span class="hljs-keyword">from</span> querycoordv1 meta
+  segment-loaded-grpc <span class="hljs-built_in">list</span> segments loaded information
+  session             <span class="hljs-built_in">list</span> online milvus components
 
 Flags:
--h, --<span class="hljs-built_in">help</span> <span class="hljs-built_in">help</span> <span class="hljs-keyword">for</span> show
+  -h, --<span class="hljs-built_in">help</span>   <span class="hljs-built_in">help</span> <span class="hljs-keyword">for</span> show
 
 Use <span class="hljs-string">&quot; show [command] --help&quot;</span> <span class="hljs-keyword">for</span> more information about a command.
 <button class="copy-code-btn"></button></code></pre>
-
 <h3 id="List-sessions" class="common-anchor-header">列出会话</h3><p>列出与 Milvus 不同组件相关的会话：</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show session
 Session:datacoord, ServerID: <span class="hljs-number">3</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">13333</span>
@@ -149,7 +147,7 @@ Session:querynode, ServerID: <span class="hljs-number">2</span>, Version: <span 
 Session:rootcoord, ServerID: <span class="hljs-number">1</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">53100</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在命令输出中，<code translate="no">show session</code> 列出的每个会话条目都对应当前处于活动状态并在<strong>etcd</strong> 中注册的节点或服务。</p>
-<h3 id="Check-databases-and-collections" class="common-anchor-header">检查数据库和集合</h3><p>可以列出所有数据库和程序集。</p>
+<h3 id="Check-databases-and-collections" class="common-anchor-header">检查数据库和 Collections</h3><p>可以列出所有数据库和 Collection。</p>
 <ul>
 <li><p>列出数据库</p>
 <p>在命令输出中，您可以找到每个数据库的信息。</p>
@@ -159,8 +157,8 @@ ID: <span class="hljs-number">1</span>   Name: <span class="hljs-keyword">defaul
 TenantID:        State: DatabaseCreated
 --- Total <span class="hljs-title function_">Database</span><span class="hljs-params">(s)</span>: <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>列出集合</p>
-<p>在命令输出中，你可以找到每个收藏的详细信息。</p>
+<li><p>列出 Collections</p>
+<p>在命令输出中，可以找到每个 Collection 的详细信息。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show collections
 ================================================================================
 DBID: <span class="hljs-number">1</span>
@@ -189,8 +187,8 @@ Start position <span class="hljs-keyword">for</span> channel by-dev-rootcoord-dm
 --- Total channel: <span class="hljs-number">1</span>     Healthy collections: <span class="hljs-number">1</span>
 ================================================================================
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>查看特定收藏集</p>
-<p>通过指定某个集合的 ID，可以查看该集合。</p>
+<li><p>查看特定 Collections</p>
+<p>您可以通过指定某个 Collection 的 ID 来查看该 Collection。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show collection-history --<span class="hljs-built_in">id</span> <span class="hljs-number">443407225551410746</span>
 ================================================================================
 DBID: <span class="hljs-number">1</span>
@@ -216,15 +214,15 @@ Enable Dynamic Schema: false
 Consistency Level: Bounded
 Start position <span class="hljs-keyword">for</span> channel by-dev-rootcoord-dml_0(by-dev-rootcoord-dml_0_443407225551410746v0): [<span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">28</span> <span class="hljs-number">175</span> <span class="hljs-number">133</span> <span class="hljs-number">76</span> <span class="hljs-number">39</span> <span class="hljs-number">6</span>]
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>查看所有加载的收藏集</p>
-<p>您可以让 Birdwatcher 过滤所有已加载的收藏集。</p>
+<li><p>查看所有加载的 Collections</p>
+<p>您可以让 Birdwatcher 过滤所有已加载的 Collection。</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show collection-loaded
 Version: [&gt;= <span class="hljs-number">2.2</span><span class="hljs-number">.0</span>]     CollectionID: <span class="hljs-number">443407225551410746</span>
 ReplicaNumber: <span class="hljs-number">1</span>        LoadStatus: Loaded
 --- Collections Loaded: <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>列出集合的所有通道检查点</p>
-<p>您可以让 Birdwatcher 列出特定集合的所有检查点。</p>
+<li><p>列出某个 Collection 的所有通道检查点</p>
+<p>您可以让 Birdwatcher 列出特定 Collections 的所有检查点。</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show checkpoint --collection <span class="hljs-number">443407225551410746</span>
 vchannel <span class="hljs-keyword">by</span>-dev-rootcoord-dml_0_443407225551410746v0 seek to <span class="hljs-number">2023</span><span class="hljs-number">-08</span><span class="hljs-number">-08</span> <span class="hljs-number">09</span>:<span class="hljs-number">36</span>:<span class="hljs-number">09.54</span> +<span class="hljs-number">0000</span> UTC, cp channel: <span class="hljs-keyword">by</span>-dev-rootcoord-dml_0_443407225551410746v0, Source: Channel Checkpoint
 <button class="copy-code-btn"></button></code></pre></li>
@@ -240,7 +238,7 @@ Index <span class="hljs-type">Type</span>: HNSW        Metric <span class="hljs-
 Index Params: 
 ==================================================================
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-partitions" class="common-anchor-header">列出分区</h3><p>运行以下命令可列出特定数据集中的所有分区。</p>
+<h3 id="List-partitions" class="common-anchor-header">列出分区</h3><p>运行以下命令可列出特定 Collections 中的所有分区。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show partition --collection <span class="hljs-number">443407225551410746</span>
 Parition ID: <span class="hljs-number">443407225551410747</span> Name: _default  State: PartitionCreated
 --- Total <span class="hljs-title function_">Database</span><span class="hljs-params">(s)</span>: <span class="hljs-number">1</span>
@@ -259,7 +257,7 @@ Dropped segments: []
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="List-all-replicas-and-segments" class="common-anchor-header">列出所有副本和分区</h3><ul>
 <li><p>列出所有副本</p>
-<p>运行以下命令列出所有副本及其相应的集合。</p>
+<p>运行以下命令列出所有副本及其对应的 Collections。</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show replica
 ================================================================================
 ReplicaID: <span class="hljs-number">443407225685278721</span> CollectionID: <span class="hljs-number">443407225551410746</span> version:&gt;=<span class="hljs-number">2.2</span><span class="hljs-number">.0</span>
@@ -271,7 +269,7 @@ All Nodes:[<span class="hljs-number">2</span>]
 --- Growing: 0, Sealed: 0, Flushed: 1
 --- Total Segments: 1, row count: 5979
 <button class="copy-code-btn"></button></code></pre>
-<p>运行以下命令详细列出所有加载的段。对于 Milvus 2.1.x，请使用<code translate="no">show segment-loaded</code> 。</p>
+<p>运行以下命令详细列出所有加载的段。对于 Milvus 2.1.x，请使用<code translate="no">show segment-loaded</code> 代替。</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show segment-loaded-grpc
 ===========
 ServerID <span class="hljs-number">2</span>
@@ -282,7 +280,7 @@ SegmentID: <span class="hljs-number">443407225551610865</span> CollectionID: <sp
 Sealed segments number: <span class="hljs-number">1</span>    
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="List-configurations" class="common-anchor-header">列出配置</h3><p>您可以让 Birdwatcher 列出每个 Milvus 组件的当前配置。</p>
+<h3 id="List-configurations" class="common-anchor-header">列出配置</h3><p>您可以让 Birdwatcher 列出 Milvus 各组件的当前配置。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show configurations
 client <span class="hljs-literal">nil</span> Session:proxy, ServerID: <span class="hljs-number">8</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">19529</span>
 Component rootcoord<span class="hljs-number">-1</span>
@@ -337,7 +335,6 @@ Key: querycoord.balancer, Value: ScoreBasedBalancer
 Key: querycoord.autobalance, Value: <span class="hljs-literal">true</span>
 Key: querycoord.segmenttasktimeout, Value: <span class="hljs-number">120000</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Backup-metrics" class="common-anchor-header">备份指标<button data-href="#Backup-metrics" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -368,7 +365,7 @@ http://10.244.0.10:9091/metrics
 backup <span class="hljs-keyword">for</span> prefix <span class="hljs-keyword">done</span>, stored <span class="hljs-keyword">in</span> file: bw_etcd_ALL.230810-075211.bak.gz
 <button class="copy-code-btn"></button></code></pre>
 <p>然后您可以在启动 Birdwatcher 的目录中查看该文件。</p>
-<h2 id="Probe-collections" class="common-anchor-header">探测集合<button data-href="#Probe-collections" class="anchor-icon" translate="no">
+<h2 id="Probe-collections" class="common-anchor-header">探测 Collections<button data-href="#Probe-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -383,8 +380,8 @@ backup <span class="hljs-keyword">for</span> prefix <span class="hljs-keyword">d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以让 Birdwatcher 用指定的主键或模拟查询探测已加载集合的状态。</p>
-<h3 id="Probe-collection-with-known-primary-key" class="common-anchor-header">使用已知主键探测集合</h3><p>在<code translate="no">probe</code> 命令中，应使用<code translate="no">pk</code> 标志指定主键，并使用<code translate="no">collection</code> 标志指定集合 ID。</p>
+    </button></h2><p>您可以让 Birdwatcher 用指定的主键或模拟查询探测已加载的 Collections 的状态。</p>
+<h3 id="Probe-collection-with-known-primary-key" class="common-anchor-header">探查带有已知主键的 Collections</h3><p>在<code translate="no">probe</code> 命令中，应使用<code translate="no">pk</code> 标志指定主键，使用<code translate="no">collection</code> 标志指定集合 ID。</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; probe pk --pk <span class="hljs-number">110</span> --collection <span class="hljs-number">442844725212299747</span>
 PK <span class="hljs-number">110</span> found <span class="hljs-keyword">on</span> segment <span class="hljs-number">442844725212299830</span>
 Field id, <span class="hljs-keyword">value</span>: &amp;{long_data:&lt;data:<span class="hljs-number">110</span> &gt; }

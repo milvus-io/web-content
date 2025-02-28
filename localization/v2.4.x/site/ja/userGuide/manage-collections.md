@@ -462,7 +462,7 @@ schema.WithField(
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>ベクトル埋め込みを保持するコレクションフィールドの次元数。<br/>この値は1以上の整数である必要があり、通常はベクトル埋め込みを生成するために使用するモデルによって決定される。</td>
+      <td>ベクトル埋め込みを保持するコレクションフィールドの次元数。<br/>値は1以上の整数である必要があり、通常はベクトル埋め込みを生成するために使用するモデルによって決定される。</td>
     </tr>
   </tbody>
 </table>
@@ -488,11 +488,11 @@ schema.WithField(
     </tr>
     <tr>
       <td><code translate="no">WithIsAutoID()</code></td>
-      <td><br/>デフォルト値は<strong>false</strong> です。これを<strong>trueに</strong>設定すると、プライマリ・フィールドが自動的にインクリメントされます。カスタマイズしたスキーマでコレクションをセットアップする必要がある場合は、このパラメータをスキップします。</td>
+      <td><br/>デフォルト値は<strong>false</strong> です。これを<strong>true</strong>に設定すると、プライマリ・フィールドが自動的にインクリメントされます。カスタマイズしたスキーマでコレクションをセットアップする必要がある場合は、このパラメータをスキップします。</td>
     </tr>
     <tr>
       <td><code translate="no">WithDim()</code></td>
-      <td>ベクトル埋め込みを保持するコレクションフィールドの次元数。<br/>値は1以上の整数である必要があり、通常はベクトル埋め込みを生成するために使用するモデルによって決定される。</td>
+      <td>ベクトル埋め込みを保持するコレクションフィールドの次元数。<br/>この値は1以上の整数である必要があり、通常はベクトル埋め込みを生成するために使用するモデルによって決定される。</td>
     </tr>
   </tbody>
 </table>
@@ -736,7 +736,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>インデックス・タイプと関連する設定。詳細は「<a href="https://milvus.io/docs/index.md">メモリ内インデックス</a>」を参照。</td>
+      <td>インデックス・タイプと関連する設定。詳細は<a href="https://milvus.io/docs/index.md">インメモリインデックスを</a>参照。</td>
     </tr>
     <tr>
       <td><code translate="no">params.index_type</code></td>
@@ -1030,7 +1030,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>このコレクションのスキーマ。<br/>これを<strong>None</strong>に設定すると、このコレクションはデフォルト設定で作成されます。<br/>カスタマイズしたスキーマでコレクションを設定するには、<strong>CollectionSchema</strong>オブジェクトを作成し、それをここで参照する必要があります。この場合、Milvusはリクエストに含まれる他のスキーマ関連の設定をすべて無視します。</td>
+<td>このコレクションのスキーマ。<br/>これを<strong>None</strong>に設定すると、このコレクションはデフォルト設定で作成されます。<br/>カスタマイズしたスキーマでコレクションを設定するには、<strong>CollectionSchema</strong>オブジェクトを作成し、それをここで参照する必要があります。この場合、milvusはリクエストに含まれる他のスキーマ関連の設定をすべて無視します。</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>

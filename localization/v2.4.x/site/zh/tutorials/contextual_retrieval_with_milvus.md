@@ -28,10 +28,10 @@ title: 使用 Milvus 进行上下文检索
   
    <span class="img-wrapper"> <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/images/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>图像</span> </span><a href="https://www.anthropic.com/news/contextual-retrieval">上下文检索</a>（<span class="img-wrapper"> <span>image</span> </span><a href="https://www.anthropic.com/news/contextual-retrieval">Contextual Retrieval</a>）是 Anthropic 提出的一种先进检索方法，旨在解决当前检索增强生成（RAG）解决方案中出现的块的语义隔离问题。在当前实用的 RAG 范式中，文档被分成若干个块，使用向量数据库进行查询搜索，检索出最相关的块。然后，LLM 使用这些检索到的分块对查询做出响应。然而，这种分块过程会导致上下文信息的丢失，使检索者难以确定相关性。</p>
-<p>上下文检索改进了传统的检索系统，在嵌入或索引之前为每个文档分块添加相关上下文，提高了准确性并减少了检索错误。与混合检索和 Rerankers 等技术相结合，它能增强检索增强生成（RAG）系统，尤其适用于大型知识库。此外，当与及时缓存搭配时，它还能提供一种具有成本效益的解决方案，显著降低延迟和操作符成本，上下文化块的成本约为每百万文档令牌 1.02 美元。这使其成为处理大型知识库的一种可扩展的高效方法。Anthropic 的解决方案在以下两个方面颇具洞察力：</p>
+<p>上下文检索改进了传统的检索系统，在嵌入或索引之前为每个文档分块添加相关上下文，提高了准确性并减少了检索错误。与混合检索和 Rerankers 等技术相结合，它能增强检索增强生成（RAG）系统，尤其适用于大型知识库。此外，当与及时缓存搭配使用时，它还能提供一种具有成本效益的解决方案，显著降低延迟和操作符成本，上下文化块的成本约为每百万文档令牌 1.02 美元。这使其成为处理大型知识库的一种可扩展的高效方法。Anthropic 的解决方案在以下两个方面颇具洞察力：</p>
 <ul>
 <li><code translate="no">Document Enhancement</code>:查询重写是现代信息检索中的一项重要技术，通常使用辅助信息使查询更具信息性。同样，为了在 RAG 中获得更好的性能，在索引之前使用 LLM 对文档进行预处理（例如，清理数据源、补充丢失的信息、总结等）可以显著提高检索到相关文档的几率。换句话说，这一预处理步骤有助于使文档在相关性方面更接近查询。</li>
-<li><code translate="no">Low-Cost Processing by Caching Long Context</code>:使用 LLMs 处理文档时，人们普遍关心的一个问题是成本。KVCache 是一种流行的解决方案，它允许重复使用同一上下文的中间结果。大多数托管 LLM 供应商都将这一功能对用户透明化，而 Anthropic 则让用户控制缓存过程。当缓存命中时，大多数计算都可以被保存（当长上下文保持不变，但每个查询的指令发生变化时，这种情况很常见）。更多详情，请点击<a href="https://www.anthropic.com/news/prompt-caching">此处</a>。</li>
+<li><code translate="no">Low-Cost Processing by Caching Long Context</code>:使用 LLMs 处理文档时，人们普遍关心的一个问题是成本。KVCache 是一种流行的解决方案，它允许重复使用同一上下文的中间结果。大多数托管 LLM 厂商都将这一功能对用户透明化，而 Anthropic 则让用户控制缓存过程。当缓存命中时，大多数计算都可以被保存（当长上下文保持不变，但每个查询的指令发生变化时，这种情况很常见）。更多详情，请点击<a href="https://www.anthropic.com/news/prompt-caching">此处</a>。</li>
 </ul>
 <p>在本笔记本中，我们将演示如何使用 Milvus 与 LLM 执行上下文检索，将密集-稀疏混合检索与 Reranker 结合起来，创建一个逐渐强大的检索系统。数据和实验设置均基于<a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">上下文检索</a>。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
@@ -503,7 +503,7 @@ Total queries: 248
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>现在我们已经利用 Voyage 嵌入获得了可喜的结果，接下来我们将利用生成强大稀疏嵌入的 BGE-M3 模型来执行混合检索。密集检索和稀疏检索的结果将通过互易等级融合（RRF）方法结合起来，产生混合结果。</p>
+    </button></h2><p>现在我们已经利用 Voyage 嵌入获得了可喜的结果，接下来我们将利用生成强大稀疏嵌入的 BGE-M3 模型来执行混合检索。密集检索和稀疏检索的结果将使用 "互斥等级融合"（RRF）方法结合起来，产生混合检索结果。</p>
 <pre><code translate="no" class="language-python">hybrid_retriever = MilvusContextualRetriever(
     uri=<span class="hljs-string">&quot;hybrid.db&quot;</span>,
     collection_name=<span class="hljs-string">&quot;hybrid&quot;</span>,
@@ -613,4 +613,4 @@ Pass@5: 90.91%
 Total Score: 0.9090821812596005
 Total queries: 248
 </code></pre>
-<p>我们已经展示了几种提高检索性能的方法。如果能根据具体情况进行更多的临时设计，上下文检索将显示出以低成本预处理文档的巨大潜力，从而带来更好的 RAG 系统。</p>
+<p>我们已经展示了几种提高检索性能的方法。通过根据具体情况进行更多的临时设计，上下文检索在以低成本预处理文档方面展现出了巨大的潜力，从而打造出更好的 RAG 系统。</p>

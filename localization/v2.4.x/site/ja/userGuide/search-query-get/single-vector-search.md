@@ -525,7 +525,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">topK</code></td>
-      <td>検索結果で返すレコード数。このパラメータは<strong>limit</strong>パラメータと同じ構文を使用するので、どちらか一方だけを設定する必要があります。<br/>このパラメータは<strong>paramの</strong> <strong>offsetと組み合わせて</strong>使用することで、ページ分割を有効にすることができます。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>合計は16,384未満でなければなりません。</td>
+      <td>検索結果で返すレコード数。このパラメータは<strong>limit</strong>パラメータと同じ構文を使うので、どちらか片方だけを設定してください。<br/>このパラメータは<strong>paramの</strong> <strong>offsetと組み合わせて</strong>使うことで、ページ分割を有効にすることができます。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>和は16,384未満でなければなりません。</td>
     </tr>
   </tbody>
 </table>
@@ -634,8 +634,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <p>出力には、クエリベクトルに最も近い上位5つの近傍ベクトルが表示され、一意のIDと計算された距離も表示されます。</p>
 <h3 id="Bulk-vector-search" class="common-anchor-header">一括ベクトル検索</h3><p>一括ベクトル検索は、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">1回の</a>リクエストで複数のクエリベクトルを検索できるようにすることで、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">単一ベクトル検索の</a>概念を拡張します。このタイプの検索は、クエリベクターのセットに対して類似したベクトルを検索する必要があるシナリオに最適で、必要な時間と計算リソースを大幅に削減します。</p>
-<p>一括ベクトル検索では、<code translate="no">data</code> フィールドに複数のクエリベクトルを含めることができます。システムはこれらのベクトルを並列に処理し、各クエリ・ベ クターごとに個別の結果セットを返し、各セットにはコレクション内で見つかった最も近い一致が 含まれます。</p>
-<p>以下は、2 つのクエリ・ベクターから、最も類似したエンティティの 2 つの異なるセットを検索する例です：</p>
+<p>一括ベクトル検索では、<code translate="no">data</code> フィールドに複数のクエリ・ベクトルを含めることができます。システムはこれらのベクトルを並列に処理し、各クエリ・ベクタに個別の結果セットを返します。各セットには、コレクション内で見つかった最も近い一致が含まれます。</p>
+<p>以下は、2 つのクエリ・ベクタから、最も類似したエンティティの 2 つの異なるセットを検索する例です：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Bulk-vector search</span>
@@ -783,7 +783,7 @@ console.log(res.results)
   ]
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>その結果、各クエリベクトルに対して1つずつ、2つの最近傍セットが含まれており、複数のクエリベクトルを一度に処理するバルクベクトル検索の効率性を示している。</p>
+<p>この結果には、各クエリベクトルに対して1つずつ、2つの最近傍セットが含まれており、複数のクエリベクトルを一度に処理するバルクベクトル検索の効率性を示している。</p>
 <h3 id="Partition-search" class="common-anchor-header">パーティション検索</h3><p>パーティション検索は、検索範囲をコレクションの特定のサブセットまたはパーティションに絞り込みます。これは、データが論理的またはカテゴリー的に分割されている組織化されたデータセットに特に有効で、スキャンするデータ量を減らすことにより、より高速な検索操作を可能にします。</p>
 <p>パーティション検索を行うには、検索要求の<code translate="no">partition_names</code> にターゲット・パーティション名を含めるだけです。これは、<code translate="no">search</code> 操作が、指定されたパーティション内のベクトルだけを考慮することを指定します。</p>
 <p>以下は、<code translate="no">red</code> 内のエンティティを検索する例です：</p>
@@ -1367,8 +1367,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li>リテラル・アンダースコアを検索するには、<code translate="no">\\_</code> を使用します。</li>
 <li>パーセント記号を検索するには、<code translate="no">\\%</code> を使用します。</li>
 </ul>
-<p>したがって、<code translate="no">&quot;_version_&quot;</code> というテキストを検索する必要がある場合は、<code translate="no">'like &quot;\\_version\\_&quot;'</code> と書式を整え、アンダースコアがワイルドカードとしてではなく、検索語の一部として扱われるようにします。</p>
-<p><strong>赤で</strong>始まる<strong>色を</strong>持つ結果をフィルタリングします：</p>
+<p>つまり、<code translate="no">&quot;_version_&quot;</code> というテキストを検索する必要がある場合は、<code translate="no">'like &quot;\\_version\\_&quot;'</code> と書式を整え、アンダースコアがワイルドカードとしてではなく、検索語の一部として扱われるようにします。</p>
+<p>結果が<strong>赤で</strong>始まる<strong>色で</strong>フィルタリングされます：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with filter</span>
@@ -1826,7 +1826,7 @@ search_parameters = {
 <tr><td><code translate="no">metric_type</code></td><td>ベクトル埋め込み間の類似度を測定する方法。<br/> 指定可能な値は<code translate="no">IP</code>,<code translate="no">L2</code>,<code translate="no">COSINE</code>,<code translate="no">JACCARD</code>,<code translate="no">HAMMING</code> で、デフォルトは読み込まれたインデックス・ファイルの値。</td></tr>
 <tr><td><code translate="no">params.nprobe</code></td><td>検索中にクエリーするユニット数。<br/> 値は[1, nlist<sub>[1</sub>]]の範囲です。</td></tr>
 <tr><td><code translate="no">params.level</code></td><td>検索精度レベル。<br/> 指定可能な値は<code translate="no">1</code> 、<code translate="no">2</code> 、および<code translate="no">3</code> で、デフォルトは<code translate="no">1</code> です。値を高くすると、より正確な結果が得られますが、パフォーマンスは低下します。</td></tr>
-<tr><td><code translate="no">params.radius</code></td><td>検索空間の外側の境界を定義します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決まります。たとえば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値域は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値域は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照のこと。</td></tr>
+<tr><td><code translate="no">params.radius</code></td><td>検索空間の外側の境界を定義します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決まります。たとえば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値の範囲は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値の範囲は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照のこと。</td></tr>
 <tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> は検索の外側の限界を設定しますが、<code translate="no">range_filter</code> はオプションで内側の境界を定義するために使用することができ、ベクターが一致とみなされるために必要な距離範囲を作成します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決定されます。例えば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値の範囲は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値の範囲は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照してください。</td></tr>
 </tbody>
 </table>

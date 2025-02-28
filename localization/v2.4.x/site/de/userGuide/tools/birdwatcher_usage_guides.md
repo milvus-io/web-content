@@ -1,6 +1,6 @@
 ---
 id: birdwatcher_usage_guides.md
-summary: 'Erfahren Sie, wie Sie Birdwatch zur Fehlersuche in Milvus verwenden können.'
+summary: 'Erfahren Sie, wie Sie Birdwatch zur Fehlersuche in Milvus verwenden.'
 title: Birdwatcher verwenden
 ---
 <h1 id="Use-Birdwatcher" class="common-anchor-header">Birdwatcher verwenden<button data-href="#Use-Birdwatcher" class="anchor-icon" translate="no">
@@ -147,7 +147,7 @@ Session:querynode, ServerID: <span class="hljs-number">2</span>, Version: <span 
 Session:rootcoord, ServerID: <span class="hljs-number">1</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">53100</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>In der Befehlsausgabe entspricht jeder Sitzungseintrag, der von <code translate="no">show session</code> aufgelistet wird, einem Knoten oder Dienst, der derzeit aktiv und in <strong>etcd</strong> registriert ist.</p>
-<h3 id="Check-databases-and-collections" class="common-anchor-header">Datenbanken und Sammlungen prüfen</h3><p>Sie können alle Datenbanken und Sammlungen auflisten.</p>
+<h3 id="Check-databases-and-collections" class="common-anchor-header">Datenbanken und Sammlungen überprüfen</h3><p>Sie können alle Datenbanken und Sammlungen auflisten.</p>
 <ul>
 <li><p>Datenbanken auflisten</p>
 <p>In der Befehlsausgabe finden Sie Informationen zu jeder Datenbank.</p>

@@ -5,7 +5,7 @@ id: home.md
 <p><h1 class="title">
 Milvus 문서에 오신 것을 환영합니다!</h1></p>
 <p><h2 class="sub-title">
-여기에서는 Milvus가 무엇인지, 비즈니스 요구 사항에 따라 애플리케이션을 구축하기 위해 Milvus를 설치, 사용 및 배포하는 방법에 대해 알아보세요.</h2></p>
+여기에서는 Milvus가 무엇인지, 비즈니스 요구에 따라 애플리케이션을 구축하기 위해 Milvus를 설치, 사용 및 배포하는 방법에 대해 알아보세요.</h2></p>
 </div>
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
@@ -39,7 +39,7 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
 <div class="start_card_container">
   
    <a href="/docs/ko/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/ko/quickstart.md"> <p class="link-btn">빠른 시작</p> </a><p>샘플 코드를 통해 Milvus를 빠르게 실행하는 방법을 알아보세요.</p>
+   </a> <a href="/docs/ko/quickstart.md"> <p class="link-btn">빠른 시작</p> </a><p>샘플 코드를 사용하여 Milvus를 빠르게 실행하는 방법을 알아보세요.</p>
 </div>
 <div class="start_card_container">
   

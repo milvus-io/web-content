@@ -75,7 +75,9 @@ title: مرجع أوامر Milvus_CLI
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(اختياري) اسم uri. الافتراضي هو &quot;http://127.0.0.1:19530&quot;.</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-الرمز المميز</td><td style="text-align:left">(اختياري) الرمز المميز ل zilliz cloud apikey أو <code translate="no">username:password</code>. الافتراضي هو لا شيء.</td></tr>
-<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(اختياري) - تعيين وضع TLS: 0 (لا يوجد تشفير)، 1 (تشفير أحادي الاتجاه)، 2 (التشفير ثنائي الاتجاه غير مدعوم بعد). الافتراضي هو 0</td></tr>
+<tr><td style="text-align:left">-شهادة</td><td style="text-align:left">-Cert</td><td style="text-align:left">(اختياري) المسار إلى ملف شهادة العميل. العمل مع التشفير أحادي الاتجاه</td></tr>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">عرض التعليمات الخاصة باستخدام الأمر.</td></tr>
 </tbody>
 </table>
 <p><h3 id="connect">مثال</h3></p>
@@ -699,7 +701,7 @@ Timeout []:
       </svg>
     </button></h2><p>تعيين امتياز لدور ما.</p>
 <p><h3 id="assign-privilege">بناء الجملة</h3></p>
-<p><h3 >الخيارات</h3></p>
+<p><h3 >خيارات</h3></p>
 <table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
@@ -1014,7 +1016,7 @@ Total collection entities:              150000
 Milvus timestamp:           428849214449254403
 --------------------------  ------------------
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="list-users" class="common-anchor-header">سرد المستخدمين<button data-href="#list-users" class="anchor-icon" translate="no">
+<h2 id="list-users" class="common-anchor-header">قائمة المستخدمين<button data-href="#list-users" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1462,7 +1464,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-اسم المجموعة</td><td style="text-align:left">اسم المجموعة التي تنتمي إليها الكيانات.</td></tr>
 <tr><td style="text-align:left">-i</td><td style="text-align:left">-الفهرس</td><td style="text-align:left">(اختياري) اسم الفهرس.</td></tr>
-<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
 </tbody>
 </table>
 <h2 id="show-loadingprogress" class="common-anchor-header">إظهار تقدم التحميل<button data-href="#show-loadingprogress" class="anchor-icon" translate="no">

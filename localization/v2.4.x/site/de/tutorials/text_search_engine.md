@@ -29,7 +29,7 @@ title: Text-Suchmaschine
 <li><a href="https://towhee.io/">Towhee</a></li>
 </ul>
 <p><br/></p>
-<p>Eine wichtige Anwendung von Milvus im Bereich der Verarbeitung natürlicher Sprache (NLP) ist die Textsuchmaschine. Es ist ein großartiges Werkzeug, das Benutzern helfen kann, die gesuchten Informationen zu finden. Es kann sogar Informationen aufdecken, die schwer zu finden sind. Textsuchmaschinen vergleichen die von den Benutzern eingegebenen Schlüsselwörter oder semantischen Begriffe mit einer Textdatenbank und geben dann die Ergebnisse zurück, die bestimmte Kriterien erfüllen.</p>
+<p>Eine wichtige Anwendung von Milvus im Bereich der Verarbeitung natürlicher Sprache (NLP) ist die Textsuchmaschine. Es ist ein großartiges Werkzeug, das Benutzern helfen kann, die gesuchten Informationen zu finden. Es kann sogar Informationen aufdecken, die schwer zu finden sind. Textsuchmaschinen vergleichen die vom Benutzer eingegebenen Schlüsselwörter oder semantischen Begriffe mit einer Textdatenbank und geben dann die Ergebnisse zurück, die bestimmte Kriterien erfüllen.</p>
 <p><br/></p>
 <p>In diesem Lernprogramm lernen Sie, wie man eine Textsuchmaschine erstellt. In diesem Tutorium wird BERT verwendet, um Texte in Vektoren fester Länge zu konvertieren. Milvus wird als Vektordatenbank für die Speicherung und die Vektorähnlichkeitssuche verwendet. Anschließend wird MySQL verwendet, um die von Milvus generierten Vektor-IDs auf die Textdaten abzubilden.</p>
 <p><br/></p>

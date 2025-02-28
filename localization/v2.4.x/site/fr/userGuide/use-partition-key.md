@@ -34,7 +34,7 @@ title: Utiliser la clé de partition
         ></path>
       </svg>
     </button></h2><p>Vous pouvez définir un champ particulier d'une collection comme clé de partition afin que Milvus distribue les entités entrantes dans différentes partitions en fonction de leurs valeurs de partition respectives dans ce champ. Cela permet de regrouper les entités ayant la même valeur clé dans une partition, ce qui accélère les performances de recherche en évitant de devoir parcourir des partitions non pertinentes lors du filtrage par le champ clé. Par rapport aux méthodes de filtrage traditionnelles, la clé de partition peut améliorer considérablement les performances des requêtes.</p>
-<p>Vous pouvez utiliser la clé de partition pour mettre en œuvre la multi-location. Pour plus d'informations sur le multi-tenant, lisez <a href="https://milvus.io/docs/multi_tenancy.md">Multi-tenant</a> pour en savoir plus.</p>
+<p>Vous pouvez utiliser la clé de partition pour mettre en œuvre la multi-location. Pour plus d'informations sur le multi-tenant, lisez <a href="https://milvus.io/docs/multi_tenancy.md">Multi-tenant</a> pour plus d'informations.</p>
 <h2 id="Enable-partition-key" class="common-anchor-header">Activer la clé de partition<button data-href="#Enable-partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -423,7 +423,7 @@ System.out.println(insertResp.getInsertCnt());
       </svg>
     </button></h2><p>Une fois que vous avez indexé et chargé la collection et inséré des données, vous pouvez effectuer une recherche de similarité à l'aide de la clé de partition.</p>
 <div class="language-python">
-<p>Pour plus d'informations sur les paramètres, reportez-vous à <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> dans la référence SDK.</p>
+<p>Pour plus d'informations sur les paramètres, reportez-vous à <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> dans la référence du SDK.</p>
 </div>
 <div class="language-java">
 <p>Pour plus d'informations sur les paramètres, voir <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md"><code translate="no">search()</code></a> dans la référence du SDK.</p>

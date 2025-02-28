@@ -510,7 +510,7 @@ System.out.println(results.subList(<span class="hljs-number">0</span>, <span cla
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td><br/>値の既定値は<strong>-1</strong> で、一致するすべてのエンティティが返されることを示します。</td>
+      <td><br/>値の既定値は<strong>-1</strong> で、一致するすべてのエンティティが返されます。</td>
     </tr>
   </tbody>
 </table>

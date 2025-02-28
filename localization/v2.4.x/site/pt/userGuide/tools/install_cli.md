@@ -1,7 +1,7 @@
 ---
 id: install_cli.md
 summary: Saiba como instalar o Milvus_CLI.
-title: Instalar Milvus_CLI
+title: Instalar o Milvus_CLI
 ---
 <h1 id="Install-MilvusCLI" class="common-anchor-header">Instalar o Milvus_CLI<button data-href="#Install-MilvusCLI" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -5,7 +5,7 @@ id: home.md
 <p><h1 class="title">
 Milvus 문서에 오신 것을 환영합니다!</h1></p>
 <p><h2 class="sub-title">
-여기에서는 Milvus가 무엇인지, 비즈니스 요구 사항에 따라 애플리케이션을 구축하기 위해 Milvus를 설치, 사용 및 배포하는 방법에 대해 알아보세요.</h2></p>
+여기에서는 Milvus가 무엇인지, 비즈니스 요구에 따라 애플리케이션을 구축하기 위해 Milvus를 설치, 사용 및 배포하는 방법에 대해 알아보세요.</h2></p>
 </div>
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">

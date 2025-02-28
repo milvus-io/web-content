@@ -3,7 +3,7 @@ id: birdwatcher_overview.md
 summary: >-
   Birdwatcher est un outil de débogage pour Milvus 2.x. Il se connecte à etcd et
   inspecte l'état du système Milvus.
-title: Observateur d'oiseaux
+title: L'ornithologue
 ---
 <h1 id="Birdwatcher" class="common-anchor-header">L'ornithologue<button data-href="#Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -499,7 +499,7 @@ console.log(res.upsert_cnt)
 // <span class="hljs-number">10</span>
 // 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Upsert-data-in-partitions" class="common-anchor-header">Upload von Daten in Partitionen</h3><p>Um Daten in eine bestimmte Partition einzufügen, können Sie den Namen der Partition in der Einfügeanforderung wie folgt angeben:</p>
+<h3 id="Upsert-data-in-partitions" class="common-anchor-header">Upload von Daten in Partitionen</h3><p>Um Daten in eine bestimmte Partition einzufügen, können Sie den Namen der Partition in der Insert-Anfrage wie folgt angeben:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6. Upsert data in partitions</span>

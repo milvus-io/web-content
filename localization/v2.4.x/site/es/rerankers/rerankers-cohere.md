@@ -3,7 +3,7 @@ id: rerankers-cohere.md
 order: 3
 summary: >-
   Milvus soporta los modelos reranker Cohere a través de la clase
-  `CohereRerankFunction`. Esta funcionalidad le permite puntuar la relevancia de
+  `CohereRerankFunction`. Esta funcionalidad permite puntuar la relevancia de
   los pares consulta-documento de forma eficaz.
 title: Rerankers Cohere
 ---

@@ -33,7 +33,7 @@ title: 使用分区密钥
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>你可以将 Collections 中的一个特定字段设置为分区键，这样 Milvus 就会根据这个字段中各自的分区值，将进入的实体分配到不同的分区中。这样，具有相同键值的实体就会被归类到一个分区中，通过键字段进行过滤时，就无需扫描不相关的分区，从而加快了搜索性能。与传统的过滤方法相比，分区键可以大大提高查询性能。</p>
+    </button></h2><p>你可以将 Collections 中的一个特定字段设置为分区键，这样 Milvus 就会根据这个字段中各自的分区值，将进入的实体分配到不同的分区中。这样，具有相同键值的实体就会被归类到一个分区中，从而在通过键字段进行过滤时，无需扫描无关的分区，从而加快了搜索性能。与传统的过滤方法相比，分区键可以大大提高查询性能。</p>
 <p>可以使用 Partition Key 实现多租户。有关多租户的详细信息，请阅读<a href="https://milvus.io/docs/multi_tenancy.md">多租户</a>。</p>
 <h2 id="Enable-partition-key" class="common-anchor-header">启用分区密钥<button data-href="#Enable-partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,7 +59,7 @@ title: 使用分区密钥
 <p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>和 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>有关参数的更多信息，请参阅 SDK 参考资料中的</p>
 </div>
 <div class="language-javascript">
-<p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>SDK 参考资料中的参数。</p>
+<p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>的 SDK 参考资料。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -550,4 +550,4 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以利用 Partition Key 功能实现更好的搜索性能并启用多租户。具体做法是为每个实体指定一个特定于租户的值作为分区键字段。在搜索或查询 Collections 时，可以通过在布尔表达式中包含 Partition Key 字段，根据租户特定值过滤实体。这种方法可确保按租户进行数据隔离，并避免扫描不必要的分区。</p>
+    </button></h2><p>您可以利用 Partition Key 功能实现更好的搜索性能并启用多租户功能。具体做法是为每个实体指定一个特定于租户的值作为分区键字段。在搜索或查询 Collections 时，可以通过在布尔表达式中包含 Partition Key 字段，根据租户特定值过滤实体。这种方法可确保按租户进行数据隔离，并避免扫描不必要的分区。</p>

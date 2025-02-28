@@ -20,7 +20,7 @@ title: スカラーフィールドのインデックス
         ></path>
       </svg>
     </button></h1><p>Milvusでは、スカラーインデックスは、従来のデータベースインデックスと同様に、特定の非ベクトルフィールド値によるメタフィルタリングを高速化するために使用されます。このガイドでは、整数や文字列などのフィールドに対するスカラーインデックスの作成と設定について説明します。</p>
-<h2 id="Types-of-scalar-indexing" class="common-anchor-header">スカラインデックスの種類<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
+<h2 id="Types-of-scalar-indexing" class="common-anchor-header">スカラーインデックスの種類<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

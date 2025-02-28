@@ -74,7 +74,7 @@ title: Gerir colecções
     </button></h2><p>Pode criar uma coleção de uma das seguintes formas:</p>
 <ul>
 <li><p><strong>Configuração rápida</strong></p>
-<p>Desta forma, pode criar uma coleção dando-lhe simplesmente um nome e especificando o número de dimensões das incorporações vectoriais a armazenar nesta coleção. Para obter detalhes, consulte <a href="/docs/pt/manage-collections.md">Configuração rápida</a>.</p></li>
+<p>Desta forma, pode criar uma coleção dando-lhe simplesmente um nome e especificando o número de dimensões dos embeddings de vetor a armazenar nesta coleção. Para obter detalhes, consulte <a href="/docs/pt/manage-collections.md">Configuração rápida</a>.</p></li>
 <li><p><strong>Configuração personalizada</strong></p>
 <p>Em vez de deixar o In Milvus decidir quase tudo para a sua coleção, pode determinar o <strong>esquema</strong> e <strong>os parâmetros de índice</strong> da coleção por si próprio. Para mais detalhes, consulte <a href="/docs/pt/manage-collections.md">Configuração personalizada</a>.</p></li>
 </ul>
@@ -268,7 +268,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <li><p><code translate="no">auto_id</code></p>
 <p>A ativação desta definição garante que a chave primária é incrementada automaticamente. Não há necessidade de fornecimento manual de chaves primárias durante a inserção de dados.</p></li>
 <li><p><code translate="no">enable_dynamic_field</code></p>
-<p>Quando activada, todos os campos, excluindo <code translate="no">id</code> e <code translate="no">vector</code> nos dados a inserir, são tratados como campos dinâmicos. Estes campos adicionais são guardados como pares chave-valor num campo especial chamado <code translate="no">$meta</code>. Esta funcionalidade permite a inclusão de campos extra durante a inserção de dados.</p></li>
+<p>Quando activada, todos os campos, excluindo <code translate="no">id</code> e <code translate="no">vector</code> nos dados a inserir, são tratados como campos dinâmicos. Estes campos adicionais são guardados como pares chave-valor num campo especial denominado <code translate="no">$meta</code>. Esta funcionalidade permite a inclusão de campos extra durante a inserção de dados.</p></li>
 </ul>
 <p>A coleção automaticamente indexada e carregada a partir do código fornecido está pronta para a inserção imediata de dados.</p>
 <h3 id="Customized-setup" class="common-anchor-header">Configuração personalizada</h3><p>Em vez de deixar o Milvus decidir quase tudo para a sua coleção, pode determinar o <strong>esquema</strong> e <strong>os parâmetros de indexação</strong> da coleção por si próprio.</p>
@@ -526,7 +526,7 @@ schema.WithField(
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Passo 2: Configurar parâmetros de índice</h4><p>Os parâmetros de indexação ditam a forma como o Milvus organiza os seus dados dentro de uma coleção. Pode personalizar o processo de indexação para campos específicos, ajustando os seus <code translate="no">metric_type</code> e <code translate="no">index_type</code>. Para o campo vetorial, tem a flexibilidade de selecionar <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code>, ou <code translate="no">JACCARD</code> como o <code translate="no">metric_type</code>, dependendo do tipo de vectores com que está a trabalhar. Para obter mais informações, consulte <a href="/docs/pt/metric.md">Métricas de similaridade</a>.</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Passo 2: Configurar parâmetros de índice</h4><p>Os parâmetros de indexação ditam a forma como o Milvus organiza os seus dados dentro de uma coleção. Pode personalizar o processo de indexação para campos específicos, ajustando os seus <code translate="no">metric_type</code> e <code translate="no">index_type</code>. Para o campo vetorial, tem a flexibilidade de selecionar <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code>, ou <code translate="no">JACCARD</code> como <code translate="no">metric_type</code>, dependendo do tipo de vectores com que está a trabalhar. Para obter mais informações, consulte <a href="/docs/pt/metric.md">Métricas de similaridade</a>.</p>
 <div class="language-python">
 <p>Para configurar os parâmetros de índice, utilize <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> para preparar os parâmetros do índice e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> para adicionar o índice.</p>
 </div>
@@ -684,7 +684,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>O algoritmo que é utilizado para medir a semelhança entre vectores. Os valores possíveis são <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. Esta opção só está disponível quando o campo especificado é um campo vetorial. Para mais informações, consulte <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Índices suportados no Milvus</a>.</td>
+      <td>O algoritmo que é utilizado para medir a semelhança entre vectores. Os valores possíveis são <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. Esta opção só está disponível quando o campo especificado é um campo vetorial. Para mais informações, consulte <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Índices suportados em Milvus</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
@@ -748,7 +748,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
   </tbody>
 </table>
-<p>O trecho de código acima demonstra como configurar os parâmetros de índice para o campo vetorial e um campo escalar, respetivamente. Para o campo vetorial, defina o tipo de métrica e o tipo de índice. Para um campo escalar, defina apenas o tipo de índice. Recomenda-se a criação de um índice para o campo vetorial e quaisquer campos escalares que sejam frequentemente utilizados para filtragem.</p>
+<p>O fragmento de código acima demonstra como configurar os parâmetros de índice para o campo vetorial e um campo escalar, respetivamente. Para o campo vetorial, defina o tipo de métrica e o tipo de índice. Para um campo escalar, defina apenas o tipo de índice. Recomenda-se a criação de um índice para o campo vetorial e quaisquer campos escalares que sejam frequentemente utilizados para filtragem.</p>
 <h4 id="Step-3-Create-the-collection" class="common-anchor-header">Passo 3: Criar a coleção</h4><p>Tem a opção de criar uma coleção e um ficheiro de índice separadamente ou de criar uma coleção com o índice carregado simultaneamente na criação.</p>
 <div class="language-python">
 <p>Utilize <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a> para criar uma coleção com o esquema e os parâmetros de índice especificados e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a> para verificar o estado de carregamento da coleção.</p>
@@ -1122,7 +1122,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">schema.autoID</code></td>
-<td>Se permite que o campo primário seja incrementado automaticamente. Definir isto como True faz com que o campo primário seja incrementado automaticamente. Neste caso, o campo primário não deve ser incluído nos dados a inserir para evitar erros. Defina este parâmetro no campo com is_primary definido como True.</td>
+<td>Se permite que o campo primário seja incrementado automaticamente. Definir este valor como True faz com que o campo primário seja incrementado automaticamente. Neste caso, o campo primário não deve ser incluído nos dados a inserir para evitar erros. Defina este parâmetro no campo com is_primary definido como True.</td>
 </tr>
 <tr>
 <td><code translate="no">schema.enableDynamicField</code></td>
@@ -1364,7 +1364,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
     </tr>
     <tr>
       <td><code translate="no">opts</code></td>
-      <td>Os parâmetros de ajuste fino para o tipo de índice especificado. Você pode incluir múltiplos `entity.IndexOption` nesta solicitação. Para obter detalhes sobre possíveis chaves e intervalos de valores, consulte <a href="https://milvus.io/docs/index.md">Índice na memória</a>.</td>
+      <td>Os parâmetros de ajuste fino para o tipo de índice especificado. Você pode incluir vários `entity.IndexOption` nesta solicitação. Para obter detalhes sobre possíveis chaves e intervalos de valores, consulte <a href="https://milvus.io/docs/index.md">Índice na memória</a>.</td>
     </tr>
   </tbody>
 </table>
@@ -1382,7 +1382,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
         </tr>
         <tr>
         <td><code translate="no">indexParams</code></td>
-        <td>Os parâmetros de índice para a coleção a criar.</td>
+        <td>Os parâmetros de índice para a coleção a ser criada.</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.metricType</code></td>
@@ -1726,7 +1726,7 @@ collections, err := client.ListCollections(ctx)
 <span class="hljs-comment">#   ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load--Release-Collection" class="common-anchor-header">Carregar e libertar a coleção<button data-href="#Load--Release-Collection" class="anchor-icon" translate="no">
+<h2 id="Load--Release-Collection" class="common-anchor-header">Carregar e libertar uma coleção<button data-href="#Load--Release-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1743,7 +1743,7 @@ collections, err := client.ListCollections(ctx)
       </svg>
     </button></h2><p>Durante o processo de carregamento de uma coleção, o Milvus carrega o ficheiro de índice da coleção para a memória. Por outro lado, ao liberar uma coleção, Milvus descarrega o arquivo de índice da memória. Antes de efetuar pesquisas numa coleção, certifique-se de que a coleção está carregada.</p>
 <h3 id="Load-a-collection" class="common-anchor-header">Carregar uma coleção</h3><div class="language-python">
-<p>Para carregar uma coleção, utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a> especificando o nome da coleção. Também pode definir <code translate="no">replica_number</code> para determinar quantas réplicas na memória de segmentos de dados devem ser criadas nos nós de consulta quando a coleção é carregada.</p>
+<p>Para carregar uma coleção, utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a> especificando o nome da coleção. Também pode definir <code translate="no">replica_number</code> para determinar quantas réplicas de segmentos de dados na memória devem ser criadas nos nós de consulta quando a coleção é carregada.</p>
 <ul>
 <li>Milvus Standalone: O valor máximo permitido para <code translate="no">replica_number</code> é 1.</li>
 <li>Milvus Cluster: O valor máximo não deve exceder o <code translate="no">queryNode.replicas</code> definido nas configurações do Milvus. Para obter mais detalhes, consulte <a href="https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations">Configurações relacionadas ao nó de consulta</a>.</li>
@@ -2539,7 +2539,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <p>Para eliminar aliases, utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_alias.md"><code translate="no">drop_alias()</code></a> especificando o alias.</p>
 </div>
 <div class="language-java">
-<p>Para eliminar pseudónimos, utilize o método <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> especificando o alias.</p>
+<p>Para eliminar aliases, utilize o método <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> especificando o alias.</p>
 </div>
 <div class="language-javascript">
 <p>Para eliminar os pseudónimos, utilize o método <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> especificando o alias.</p>

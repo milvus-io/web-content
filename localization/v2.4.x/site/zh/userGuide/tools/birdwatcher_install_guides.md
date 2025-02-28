@@ -1,10 +1,9 @@
 ---
 id: birdwatcher_install_guides.md
-summary: 了解如何安装 Birdwatch 来调试 Milvus。
-title: 安装观鸟器
+summary: 了解如何安装 Birdwatcher 以调试 Milvus。
+title: 安装 Birdwatcher
 ---
-
-<h1 id="Install-Birdwatcher" class="common-anchor-header">安装Birdwatcher<button data-href="#Install-Birdwatcher" class="anchor-icon" translate="no">
+<h1 id="Install-Birdwatcher" class="common-anchor-header">安装 Birdwatcher<button data-href="#Install-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,7 +41,7 @@ title: 安装观鸟器
 <span class="hljs-built_in">cd</span> birdwatcher
 go install github.com/milvus-io/birdwatcher
 <button class="copy-code-btn"></button></code></pre>
-<p>然后你就可以按如下方法运行看鸟者了：</p>
+<p>然后你就可以按如下方法运行 Birdwatcher：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>从源代码构建。</p>
@@ -58,7 +57,7 @@ go build -o birdwatcher main.go
 <pre><code translate="no" class="language-shell">wget -O birdwatcher.tar.gz \
 https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&lt;os&gt;_&lt;<span class="hljs-built_in">arch</span>&gt;.tar.gz
 <button class="copy-code-btn"></button></code></pre>
-<p>然后解压压缩包，按以下步骤使用 Birdwatcher：</p>
+<p>然后解压压缩包，按如下方法使用 Birdwatcher：</p>
 <pre><code translate="no" class="language-shell">tar -xvzf birdwatcher.tar.gz
 ./birdwatcher
 <button class="copy-code-btn"></button></code></pre></li>
@@ -78,7 +77,7 @@ https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&l
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如果您<a href="/docs/zh/install_standalone-helm.md">使用 Helm 图表</a>或<a href="/docs/zh/install_standalone-operator.md">Milvus Operator</a>安装了<a href="/docs/zh/install_standalone-operator.md">Milvus</a>Standalone，或<a href="/docs/zh/install_cluster-helm.md">使用 Helm 图表</a>或<a href="/docs/zh/install_cluster-milvusoperator.md">Milvus Operator</a> 安装了 Milvus Cluster，建议您将 Birdwatcher 安装为 Kubernetes pod。</p>
+    </button></h2><p>如果您<a href="/docs/zh/install_standalone-helm.md">使用 Helm 图表</a>或<a href="/docs/zh/install_standalone-operator.md">Milvus Operator</a>安装了 Milvus Standalone 或<a href="/docs/zh/install_cluster-helm.md">使用 Helm 图表</a>或 Milvus<a href="/docs/zh/install_cluster-milvusoperator.md">Operator</a> 安装了 Milvus Cluster，建议您将 Birdwatcher 安装为 Kubernetes pod。</p>
 <h3 id="Prepare-deploymentyml" class="common-anchor-header">准备部署文件</h3><pre><code translate="no" class="language-yml">apiVersion: apps/v1
 kind: Deployment
 metadata:

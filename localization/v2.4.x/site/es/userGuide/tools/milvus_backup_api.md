@@ -34,7 +34,7 @@ title: Copia de seguridad y restauración de datos mediante API
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Puede descargar el binario compilado o compilarlo desde el código fuente.</p>
+    </button></h2><p>Puede descargar el binario compilado o compilarlo a partir del código fuente.</p>
 <p>Para descargar el binario compilado, vaya a la página de <a href="https://github.com/zilliztech/milvus-backup/releases">versiones</a>, donde encontrará todas las versiones oficiales. Recuerde, utilice siempre los binarios de la versión marcada como <strong>Última</strong>.</p>
 <p>Para compilar desde el código fuente, haz lo siguiente:</p>
 <pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> git@github.com:zilliztech/milvus-backup.git
@@ -66,7 +66,7 @@ workspace ├── milvus-backup └── configs └── backup.yaml</pre>
 <p>El nombre del cubo Minio predeterminado varía según la forma en que instale Milvus. Cuando realice cambios en la configuración de Minio, consulte la siguiente tabla.</p>
 <table>
 <thead>
-<tr><th>campo</th><th>Docker Compose</th><th>Helm / Operador Milvus</th></tr>
+<tr><th>campo</th><th>Docker Compose</th><th>Operador Helm / Milvus</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">bucketName</code></td><td>a-bucket</td><td>milvus-bucket</td></tr>
@@ -95,7 +95,7 @@ workspace ├── milvus-backup └── configs └── backup.yaml</pre>
 <p>El servidor API escucha en el puerto 8080 por defecto. Puede cambiarlo ejecutándolo con la bandera <code translate="no">-p</code>. Para iniciar el servidor API escuchando en el puerto 443, haz lo siguiente:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server -p 443
 <button class="copy-code-btn"></button></code></pre>
-<p>Puede acceder a la interfaz de usuario Swagger utilizando http://localhost:<port>/api/v1/docs/index.html.</p>
+<p>Puedes acceder a la interfaz de usuario Swagger utilizando http://localhost:<port>/api/v1/docs/index.html.</p>
 <h2 id="Prepare-data" class="common-anchor-header">Preparar los datos<button data-href="#Prepare-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,7 +115,7 @@ workspace ├── milvus-backup └── configs └── backup.yaml</pre>
 <p>Obtenga los <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py">scripts</a>. A continuación, ejecute los scripts para generar los datos. Asegúrese de que <a href="https://pypi.org/project/pymilvus/">PyMilvus</a>, el SDK Python oficial de Milvus, ha sido instalado.</p>
 <pre><code translate="no" class="language-shell">python example/prepare_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>Este paso es opcional. Si omite este paso, asegúrese de que ya tiene algunos datos en su instancia de Milvus.</p>
+<p>Este paso es opcional. Si lo omite, asegúrese de que ya tiene algunos datos en su instancia de Milvus.</p>
 <h2 id="Back-up-data" class="common-anchor-header">Copia de seguridad de los datos<button data-href="#Back-up-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -132,7 +132,7 @@ workspace ├── milvus-backup └── configs └── backup.yaml</pre>
         ></path>
       </svg>
     </button></h2><div class="tab-wrapper"></div>
-<p>Tenga en cuenta que ejecutar Milvus Backup contra una instancia Milvus normalmente no afectará al funcionamiento de la instancia. Su instancia de Milvus es completamente funcional durante la copia de seguridad o la restauración.</p>
+<p>Tenga en cuenta que ejecutar Milvus Backup contra una instancia Milvus normalmente no afectará al funcionamiento de la instancia. Su instancia de Milvus es totalmente funcional durante la copia de seguridad o la restauración.</p>
 <p>Ejecute el siguiente comando para crear una copia de seguridad. Cambie <code translate="no">collection_names</code> y <code translate="no">backup_name</code> si es necesario.</p>
 <pre><code translate="no" class="language-shell">curl --location --request POST <span class="hljs-string">&#x27;http://localhost:8080/api/v1/create&#x27;</span> \
 --header <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \

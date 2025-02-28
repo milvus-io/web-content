@@ -34,7 +34,7 @@ title: JSON-Felder verwenden
         ></path>
       </svg>
     </button></h2><p>JSON steht für Javascript Object Notation, ein leichtes und einfaches textbasiertes Datenformat. Daten in JSON sind in Schlüssel-Wert-Paaren strukturiert, wobei jeder Schlüssel eine Zeichenkette ist, die einem Wert einer Zahl, Zeichenkette, einem booleschen Wert, einer Liste oder einem Array zugeordnet ist. Mit Milvus-Clustern ist es möglich, Wörterbücher als Feldwert in Sammlungen zu speichern.</p>
-<p>Der folgende Code generiert zum Beispiel zufällig Schlüssel-Wert-Paare, die jeweils ein JSON-Feld mit dem Schlüssel <strong>Farbe</strong> enthalten.</p>
+<p>Der folgende Code erzeugt zum Beispiel zufällig Schlüssel-Wert-Paare, die jeweils ein JSON-Feld mit dem Schlüssel <strong>Farbe</strong> enthalten.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Insert randomly generated vectors </span>
@@ -117,7 +117,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können die Struktur der generierten Daten sehen, indem Sie den ersten Eintrag überprüfen.</p>
+<p>Sie können die Struktur der generierten Daten einsehen, indem Sie den ersten Eintrag überprüfen.</p>
 <pre><code translate="no">{
     <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;vector&quot;</span>: [
@@ -158,9 +158,9 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 <div class="admonition note">
 <p><b>Hinweise</b></p>
 <ul>
-<li><p>Stellen Sie sicher, dass alle Werte in einer Liste oder einem Array vom gleichen Datentyp sind.</p></li>
+<li><p>Stellen Sie sicher, dass alle Werte in einer Liste oder einem Array denselben Datentyp haben.</p></li>
 <li><p>Alle verschachtelten Dictionaries in einem JSON-Feldwert werden als Zeichenketten betrachtet.</p></li>
-<li><p>Verwenden Sie nur alphanumerische Zeichen und Unterstriche, um JSON-Schlüssel zu benennen, da andere Zeichen Probleme beim Filtern oder Suchen verursachen können.</p></li>
+<li><p>Verwenden Sie nur alphanumerische Zeichen und Unterstriche, um JSON-Schlüssel zu benennen, da andere Zeichen zu Problemen bei der Filterung oder Suche führen können.</p></li>
 <li>Derzeit ist die Indizierung von JSON-Feldern nicht verfügbar, was die Filterung zeitaufwändig machen kann. Diese Einschränkung wird jedoch in kommenden Versionen behoben.</li>
 </ul>
 </div>
@@ -181,13 +181,13 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
       </svg>
     </button></h2><p>Um ein JSON-Feld zu definieren, folgen Sie einfach demselben Verfahren wie bei der Definition von Feldern anderer Typen.</p>
 <div class="language-python">
-<p>Weitere Informationen zu den Parametern finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>, und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md"><code translate="no">get_load_state()</code></a> in der SDK-Referenz.</p>
+<p>Weitere Informationen zu Parametern finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>, und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md"><code translate="no">get_load_state()</code></a> in der SDK-Referenz.</p>
 </div>
 <div class="language-java">
 <p>Weitere Informationen zu Parametern finden Sie unter <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>, und <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md"><code translate="no">getLoadState()</code></a> in der SDK-Referenz.</p>
 </div>
 <div class="language-javascript">
-<p>Weitere Informationen über Parameter finden Sie unter <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> und <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> und <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> in der SDK-Referenz.</p>
+<p>Weitere Informationen zu Parametern finden Sie unter <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> und <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> und <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> in der SDK-Referenz.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -387,13 +387,13 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>Weitere Informationen zu Parametern finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>, und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md"><code translate="no">get_load_state()</code></a> in der SDK-Referenz.</p>
+<p>Weitere Informationen zu den Parametern finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>, und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md"><code translate="no">get_load_state()</code></a> in der SDK-Referenz.</p>
 </div>
 <div class="language-java">
 <p>Weitere Informationen zu Parametern finden Sie unter <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>, und <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md"><code translate="no">getLoadState()</code></a> in der SDK-Referenz.</p>
 </div>
 <div class="language-javascript">
-<p>Weitere Informationen zu Parametern finden Sie unter <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>, und <a href="https://milvus.io/api-reference/node/v2.4.x/Management/getLoadState.md"><code translate="no">getLoadState()</code></a> in der SDK-Referenz.</p>
+<p>Weitere Informationen über Parameter finden Sie unter <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>, und <a href="https://milvus.io/api-reference/node/v2.4.x/Management/getLoadState.md"><code translate="no">getLoadState()</code></a> in der SDK-Referenz.</p>
 </div>
 <h2 id="Insert-field-values" class="common-anchor-header">Einfügen von Feldwerten<button data-href="#Insert-field-values" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -527,7 +527,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sobald alle Daten hinzugefügt wurden, können Sie Suchen und Abfragen mit den Schlüsseln im JSON-Feld auf dieselbe Weise durchführen wie mit einem Standard-Skalarfeld.</p>
+    </button></h2><p>Sobald Sie alle Daten hinzugefügt haben, können Sie Suchen und Abfragen mit den Schlüsseln im JSON-Feld auf dieselbe Weise durchführen wie mit einem Standard-Skalarfeld.</p>
 <div class="language-python">
 <p>Für weitere Informationen über Parameter, siehe <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> in der SDK-Referenz.</p>
 </div>
@@ -1154,7 +1154,7 @@ searchResults = searchResp.getSearchResults();
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Filtert Entitäten, deren Koordinator entweder <code translate="no">4</code> oder <code translate="no">5</code> enthält.</p>
+<li><p>Filtert Entitäten, bei denen der Koordinator entweder <code translate="no">4</code> oder <code translate="no">5</code> enthält.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.query(
@@ -1374,15 +1374,15 @@ searchResults = searchResp.getSearchResults();
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wenn Sie mit JSON-Feldern arbeiten, können Sie entweder die JSON-Felder als Filter verwenden oder einige ihrer spezifischen Schlüssel.</p>
+    </button></h2><p>Wenn Sie mit JSON-Feldern arbeiten, können Sie entweder die JSON-Felder als Filter oder einige ihrer spezifischen Schlüssel verwenden.</p>
 <div class="admonition note">
 <p><b>Hinweise</b></p>
 <ul>
-<li>Milvus speichert Zeichenkettenwerte im JSON-Feld ohne semantisches Escape oder Konvertierung. </li>
+<li>Milvus speichert Zeichenkettenwerte im JSON-Feld so, wie sie sind, ohne semantisches Escape oder Konvertierung durchzuführen. </li>
 </ul>
 <p>Zum Beispiel werden <code translate="no">'a"b'</code>, <code translate="no">"a'b"</code>, <code translate="no">'a\\\\'b'</code> und <code translate="no">"a\\\\"b"</code> so gespeichert, wie sie sind, während <code translate="no">'a'b'</code> und <code translate="no">"a"b"</code> als ungültige Werte behandelt werden.</p>
 <ul>
-<li><p>Um Filterausdrücke mit einem JSON-Feld zu erstellen, können Sie die Schlüssel innerhalb des Feldes verwenden. </p></li>
+<li><p>Um Filterausdrücke unter Verwendung eines JSON-Feldes zu erstellen, können Sie die Schlüssel innerhalb des Feldes verwenden. </p></li>
 <li><p>Ist der Wert eines Schlüssels eine Ganzzahl oder ein Fließkommawert, können Sie ihn mit einem anderen Ganzzahl- oder Fließkommaschlüssel oder einem INT32/64- oder FLOAT32/64-Feld vergleichen.</p></li>
 <li><p>Wenn der Wert eines Schlüssels eine Zeichenkette ist, können Sie ihn nur mit einem anderen Zeichenkettenschlüssel oder einem VARCHAR-Feld vergleichen.</p></li>
 </ul>

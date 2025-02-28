@@ -1,7 +1,6 @@
 ---
 id: manage_databases.md
 title: 데이터베이스 관리
-summary: ''
 ---
 <h1 id="Manage-Databases" class="common-anchor-header">데이터베이스 관리<button data-href="#Manage-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -509,7 +508,7 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
   <span class="hljs-attr">privilege</span>: <span class="hljs-variable constant_">PRIVILEGE_INSERT</span>,
 });
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Milvus 연결에서 <code translate="no">db_name</code> 을 지정하거나 지정하지 않고 권한 API 호출이 수행되는 경우 <strong>데이터베이스는</strong> 권한 API 호출에 이름이 지정된 데이터베이스를 참조합니다.</p>
+<li><p>Milvus 연결에 <code translate="no">db_name</code> 이 지정되어 있거나 지정되지 않은 상태에서 권한 API 호출이 수행되는 경우 <strong>데이터베이스는</strong> 권한 API 호출에 이름이 지정된 데이터베이스를 참조합니다.</p>
 <p><div class="multipleCode">
 <a href="#python">파이썬 </a><a href="#java">자바</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> please make sure the &#x27;foo&#x27; db has been created</span>

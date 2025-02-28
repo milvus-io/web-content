@@ -1,7 +1,7 @@
 ---
 id: rerankers-overview.md
 order: 1
-summary: 파이밀버스 모델 라이브러리는 재순위 함수를 통합하여 초기 검색에서 반환되는 결과의 순서를 최적화합니다.
+summary: 파이밀버스 모델 라이브러리는 재랭크 함수를 통합하여 초기 검색에서 반환되는 결과의 순서를 최적화합니다.
 title: 리랭커 개요
 ---
 <h1 id="Rerankers-Overview" class="common-anchor-header">리랭커 개요<button data-href="#Rerankers-Overview" class="anchor-icon" translate="no">

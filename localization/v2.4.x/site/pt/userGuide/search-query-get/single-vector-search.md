@@ -1356,7 +1356,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A pesquisa filtrada aplica filtros escalares a pesquisas vectoriais, permitindo-lhe refinar os resultados da pesquisa com base em critérios específicos. Pode obter mais informações sobre expressões de filtro em <a href="https://milvus.io/docs/boolean.md">Regras de Expressão Booleana</a> e exemplos em <a href="https://milvus.io/docs/get-and-scalar-query.md">Obter e Consulta Escalar</a>.</p>
+    </button></h2><p>A pesquisa filtrada aplica filtros escalares a pesquisas vectoriais, permitindo-lhe refinar os resultados da pesquisa com base em critérios específicos. Pode encontrar mais informações sobre expressões de filtro em <a href="https://milvus.io/docs/boolean.md">Regras de Expressão Booleana</a> e exemplos em <a href="https://milvus.io/docs/get-and-scalar-query.md">Obter e Consulta Escalar</a>.</p>
 <h3 id="Use-the-like-operator" class="common-anchor-header">Usar o operador <code translate="no">like</code> </h3><p>O operador <code translate="no">like</code> melhora as pesquisas de cadeia de caracteres avaliando padrões, incluindo prefixos, infixos e sufixos:</p>
 <ul>
 <li><strong>Correspondência de prefixo</strong>: para localizar valores que começam com um prefixo específico, use a sintaxe <code translate="no">'like &quot;prefix%&quot;'</code>.</li>
@@ -1568,8 +1568,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </button></h2><p>A pesquisa de intervalo permite-lhe encontrar vectores que se encontram dentro de um intervalo de distância especificado do vetor de consulta.</p>
 <p>Definindo <code translate="no">radius</code> e, opcionalmente, <code translate="no">range_filter</code>, pode ajustar a amplitude da pesquisa para incluir vectores que são algo semelhantes ao vetor de consulta, proporcionando uma visão mais abrangente de potenciais correspondências.</p>
 <ul>
-<li><p><code translate="no">radius</code>: Define o limite exterior do espaço de pesquisa. Apenas os vectores que estão dentro desta distância do vetor de consulta são considerados potenciais correspondências.</p></li>
-<li><p><code translate="no">range_filter</code>: Enquanto <code translate="no">radius</code> define o limite exterior da pesquisa, <code translate="no">range_filter</code> pode ser utilizado opcionalmente para definir um limite interior, criando um intervalo de distância dentro do qual os vectores têm de cair para serem considerados correspondências.</p></li>
+<li><p><code translate="no">radius</code>: Define o limite exterior do espaço de pesquisa. Apenas os vectores que se encontram a esta distância do vetor de consulta são considerados potenciais correspondências.</p></li>
+<li><p><code translate="no">range_filter</code>: Enquanto <code translate="no">radius</code> define o limite externo da pesquisa, <code translate="no">range_filter</code> pode ser usado opcionalmente para definir um limite interno, criando um intervalo de distância dentro do qual os vectores devem cair para serem considerados correspondências.</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -1696,7 +1696,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <tr><td><code translate="no">L2</code></td><td>As distâncias L2 mais pequenas indicam uma maior semelhança.</td><td>Para excluir os vectores mais próximos dos resultados, certifique-se de que:<br/> <code translate="no">range_filter</code> &lt;= distância &lt; <code translate="no">radius</code></td></tr>
 <tr><td><code translate="no">IP</code></td><td>As distâncias IP maiores indicam uma maior semelhança.</td><td>Para excluir os vectores mais próximos dos resultados, certifique-se de que:<br/> <code translate="no">radius</code> &lt; distância &lt;= <code translate="no">range_filter</code></td></tr>
 <tr><td><code translate="no">COSINE</code></td><td>Um valor de cosseno maior indica maior similaridade.</td><td>Para excluir os vectores mais próximos dos resultados, certifique-se de que:<br/> <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></td></tr>
-<tr><td><code translate="no">JACCARD</code></td><td>Distâncias Jaccard menores indicam maior similaridade.</td><td>Para excluir os vectores mais próximos dos resultados, certifique-se de que:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">JACCARD</code></td><td>Distâncias de Jaccard menores indicam maior similaridade.</td><td>Para excluir os vectores mais próximos dos resultados, certifique-se de que:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
 <tr><td><code translate="no">HAMMING</code></td><td>Distâncias de Hamming menores indicam maior similaridade.</td><td>Para excluir os vectores mais próximos dos resultados, certifique-se de que:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
 </tbody>
 </table>

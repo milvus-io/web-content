@@ -3,8 +3,8 @@ id: clustering-compaction.md
 title: 클러스터링 압축
 related_key: 'clustering, compaction'
 summary: >-
-  클러스터링 압축은 대규모 컬렉션에서 검색 성능을 개선하고 비용을 절감하기 위해 고안되었습니다. 이 가이드는 클러스터링 압축과 이 기능이 검색
-  성능을 개선하는 방법을 이해하는 데 도움이 됩니다.
+  클러스터링 압축은 대규모 컬렉션에서 검색 성능을 개선하고 비용을 절감하기 위해 고안되었습니다. 이 가이드는 클러스터링 압축을 이해하고 이
+  기능을 통해 검색 성능을 개선하는 방법을 이해하는 데 도움이 됩니다.
 ---
 <h1 id="Clustering-Compaction" class="common-anchor-header">클러스터링 압축<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +42,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>클러스터링 없이 압축</span> </span></p>
-<p>Milvus가 특정 필드의 값을 기반으로 세그먼트 간에 엔티티를 분산시킬 수 있다면 검색 범위를 한 세그먼트 내에서 제한할 수 있으므로 검색 성능이 향상됩니다.</p>
+<p>Milvus가 특정 필드의 값을 기반으로 세그먼트 간에 엔티티를 분산할 수 있다면 검색 범위를 한 세그먼트 내에서 제한할 수 있으므로 검색 성능이 향상됩니다.</p>
 <p><strong>클러스터링</strong> 압축은 스칼라 필드의 값을 기반으로 컬렉션의 세그먼트 간에 엔티티를 재분배하는 Milvus의 기능입니다. 이 기능을 사용하려면 먼저 <strong>클러스터링 키로</strong> 스칼라 필드를 선택해야 합니다. 이렇게 하면 클러스터링 키 값이 특정 범위에 속할 때 Milvus가 엔티티를 세그먼트에 재분배할 수 있습니다. 클러스터링 압축을 트리거하면 Milvus는 세그먼트와 클러스터링 키 값 간의 매핑 관계를 기록하는 <strong>PartitionStats라는</strong> 글로벌 인덱스를 생성/업데이트합니다.</p>
 <p>
   
@@ -246,7 +246,7 @@ coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">Tru
     </tr>
   </tbody>
 </table>
-<p>검색 필터에서 검색 범위가 좁아질수록 프룬 비율이 증가합니다. 이는 검색 과정에서 더 많은 엔티티가 생략된다는 것을 의미합니다. 첫 번째 행과 마지막 행의 통계를 비교하면 클러스터링 압축이 없는 검색은 전체 컬렉션을 스캔해야 한다는 것을 알 수 있습니다. 반면에 특정 키를 사용해 클러스터링 압축을 적용한 검색은 최대 25배까지 개선될 수 있습니다.</p>
+<p>검색 필터에서 검색 범위가 좁아질수록 프룬 비율이 증가합니다. 이는 검색 과정에서 더 많은 엔티티가 생략된다는 의미입니다. 첫 번째 행과 마지막 행의 통계를 비교하면 클러스터링 압축이 없는 검색은 전체 컬렉션을 스캔해야 한다는 것을 알 수 있습니다. 반면, 특정 키를 사용해 클러스터링 압축을 적용한 검색은 최대 25배까지 개선될 수 있습니다.</p>
 <h2 id="Best-practices" class="common-anchor-header">모범 사례<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -262,7 +262,7 @@ coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">Tru
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음은 클러스터링 압축을 효율적으로 사용할 수 있는 몇 가지 팁입니다:</p>
+    </button></h2><p>다음은 클러스터링 압축을 효율적으로 사용하기 위한 몇 가지 팁입니다:</p>
 <ul>
 <li><p>데이터 볼륨이 큰 컬렉션에 이 기능을 사용 설정합니다. 컬렉션의 데이터 볼륨이 클수록 검색 성능이 향상됩니다. 엔터티가 100만 개가 넘는 컬렉션에 이 기능을 사용하도록 설정하는 것이 좋습니다.</p></li>
 <li><p>적절한 클러스터링 키 선택. 필터링 조건으로 일반적으로 사용되는 스칼라 필드를 클러스터링 키로 사용할 수 있습니다. 여러 테넌트의 데이터를 보유하는 컬렉션의 경우, 한 테넌트와 다른 테넌트를 구분하는 필드를 클러스터링 키로 활용할 수 있습니다.</p></li>

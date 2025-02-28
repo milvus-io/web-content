@@ -161,7 +161,7 @@ reqs = [request_1, request_2]
 <p>Un dizionario di parametri di ricerca per un singolo <code translate="no">AnnSearchRequest</code>. Questi parametri di ricerca sono identici a quelli di una ricerca a vettore singolo. Per ulteriori informazioni, consultare <a href="https://milvus.io/docs/single-vector-search.md#Search-parameters">Parametri di ricerca</a>.</p></li>
 <li><p><code translate="no">limit</code> <em>(int</em>)</p>
 <p>Il numero massimo di risultati della ricerca da includere in un singolo <code translate="no">ANNSearchRequest</code>.</p>
-<p>Questo parametro influisce solo sul numero di risultati di ricerca da restituire all'interno di un singolo <code translate="no">ANNSearchRequest</code>, e non decide i risultati finali da restituire per una chiamata a <code translate="no">hybrid_search</code>. In una ricerca ibrida, i risultati finali sono determinati dalla combinazione e dal reranking dei risultati di più istanze di <code translate="no">ANNSearchRequest</code>.</p></li>
+<p>Questo parametro influisce solo sul numero di risultati di ricerca da restituire all'interno di un singolo <code translate="no">ANNSearchRequest</code>, e non decide i risultati finali da restituire per una chiamata a <code translate="no">hybrid_search</code>. In una ricerca ibrida, i risultati finali sono determinati dalla combinazione e dalla riclassificazione dei risultati di più istanze di <code translate="no">ANNSearchRequest</code>.</p></li>
 </ul>
 <h2 id="Step-2-Configure-a-Reranking-Strategy" class="common-anchor-header">Passo 2: Configurare una strategia di reranking<button data-href="#Step-2-Configure-a-Reranking-Strategy" class="anchor-icon" translate="no">
       <svg translate="no"

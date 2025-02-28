@@ -1,7 +1,6 @@
 ---
 id: manage_databases.md
 title: データベースの管理
-summary: ''
 ---
 <h1 id="Manage-Databases" class="common-anchor-header">データベースの管理<button data-href="#Manage-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,7 +37,7 @@ summary: ''
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Milvusサーバに<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">接続</a>するには<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">connect()を</a>使用し、新しいデータベースを<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/create_database.md">作成</a>するには<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/create_database.md">create_database()を使用</a>します：</p>
+<p>Milvusサーバに接続するには<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">connect()を</a>使用し、新しいデータベースを<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/create_database.md">作成</a>するには<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/create_database.md">create_database()を使用</a>します：</p>
 </div>
 <div class="language-java">
 <p><a href="https://milvus.io/api-reference/java/v2.4.x/v1/Connections/MilvusClient.md">MilvusClientを</a>使用してMilvusサーバに接続し、<a href="https://milvus.io/api-reference/java/v2.4.x/v1/Database/createDatabase.md">createDatabase()を</a>使用して新しいデータベースを作成します：</p>
@@ -261,7 +260,7 @@ response = client.dropDatabase(dropDatabaseParam);
       </svg>
     </button></h2><p>RBACはデータベース操作もカバーし、前方互換性を保証する。Permission API (Grant / Revoke / List Grant)における<strong>databaseという</strong>単語は以下の意味を持ちます：</p>
 <ul>
-<li>Milvus接続もPermission API呼び出しも<code translate="no">db_name</code> を指定しない場合、<strong>databaseは</strong>デフォルトのデータベースを指す。</li>
+<li>Milvus接続もPermission API呼び出しも<code translate="no">db_name</code> を指定しない場合、<strong>databaseは</strong>デフォルトのデータベースを指します。</li>
 <li>Milvus接続で<code translate="no">db_name</code> が指定されたが、その後のPermission API呼び出しで指定されなかった場合、<strong>databaseは</strong>Milvus接続で指定された名前のデータベースを参照する。</li>
 <li>Milvus接続時にPermission API呼び出しが行われた場合、<code translate="no">db_name</code> の指定の有無にかかわらず、<strong>databaseは</strong>Permission API呼び出しで指定された名前のデータベースを参照する。</li>
 </ul>
@@ -427,7 +426,7 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
   <span class="hljs-attr">privilege</span>: <span class="hljs-variable constant_">PRIVILEGE_INSERT</span>,
 });
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Milvus 接続で<code translate="no">db_name</code> が指定されたが、その後の Permission API 呼び出しで指定されなかった場合、<strong>database</strong>は Milvus 接続で指定された名前のデータベースを参照する。</p>
+<li><p>Milvus接続で<code translate="no">db_name</code> が指定されたが、その後のPermission API呼び出しで指定されなかった場合、<strong>databaseは</strong>Milvus接続で指定された名前のデータベースを参照する。</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> please make sure the &#x27;foo&#x27; db has been created</span>

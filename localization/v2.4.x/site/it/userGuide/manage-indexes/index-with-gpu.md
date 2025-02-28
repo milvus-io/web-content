@@ -205,8 +205,8 @@ collection.search(
 <ul>
 <li><p>Per <strong>GPU_IVF_FLAT</strong>, il valore massimo per il <strong>limite</strong> è 1024.</p></li>
 <li><p>Per <strong>GPU_IVF_PQ</strong> e <strong>GPU_CAGRA</strong>, il valore massimo di <strong>limit</strong> è 1024.</p></li>
-<li><p>Sebbene non sia stato fissato un limite per <strong>GPU_BRUTE_FORCE</strong>, si consiglia di non superare i 4096 per evitare potenziali problemi di prestazioni.</p></li>
-<li><p>Attualmente, gli indici GPU non supportano la distanza COSINE. Se è necessaria la distanza COSINE, i dati devono essere prima normalizzati e poi si può usare la distanza del prodotto interno (IP) come sostituto.</p></li>
+<li><p>Anche se non esiste un limite stabilito per <strong>GPU_BRUTE_FORCE</strong>, si consiglia di non superare i 4096 per evitare potenziali problemi di prestazioni.</p></li>
+<li><p>Attualmente, gli indici GPU non supportano la distanza COSINE. Se è richiesta la distanza COSINE, i dati devono essere prima normalizzati e poi si può usare la distanza del prodotto interno (IP) come sostituto.</p></li>
 <li><p>Il caricamento della protezione OOM per gli indici GPU non è pienamente supportato, una quantità eccessiva di dati potrebbe causare l'arresto anomalo del QueryNode.</p></li>
 <li><p>Gli indici GPU non supportano funzioni di ricerca come la <a href="https://milvus.io/docs/single-vector-search.md#Range-search">ricerca per intervallo</a> e la <a href="https://milvus.io/docs/single-vector-search.md#Grouping-searchh">ricerca per raggruppamento</a>.</p></li>
 </ul>

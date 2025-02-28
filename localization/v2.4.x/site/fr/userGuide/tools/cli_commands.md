@@ -73,7 +73,7 @@ title: Référence de la commande Milvus_CLI
 <tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description de l'option</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(Facultatif) Nom de l'uri. La valeur par défaut est &quot;http://127.0.0.1:19530&quot;.</td></tr>
+<tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(Facultatif) Le nom de l'uri. La valeur par défaut est &quot;http://127.0.0.1:19530&quot;.</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(Facultatif) L'apikey du nuage zilliz ou <code translate="no">username:password</code>. La valeur par défaut est None.</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide pour l'utilisation de la commande.</td></tr>
 </tbody>
@@ -443,7 +443,7 @@ Timeout []:
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">Options</h3><table>
 <thead>
-<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description</th></tr>
+<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description de l'option</th></tr>
 </thead>
 <tbody>
 <tr><td style="text-align:left">-u</td><td style="text-align:left">-Nom d'utilisateur</td><td style="text-align:left">Le nom d'utilisateur.</td></tr>
@@ -509,7 +509,7 @@ Timeout []:
 </thead>
 <tbody>
 <tr><td style="text-align:left">-a</td><td style="text-align:left">-Nom de l'alias</td><td style="text-align:left">L'alias.</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide pour l'utilisation de la commande.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide à l'utilisation de la commande.</td></tr>
 <tr><td style="text-align:left"></td></tr>
 </tbody>
 </table>

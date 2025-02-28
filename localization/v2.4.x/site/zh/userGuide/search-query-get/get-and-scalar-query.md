@@ -1,7 +1,7 @@
 ---
 id: get-and-scalar-query.md
 order: 3
-summary: 本指南演示如何通过 ID 获取实体并进行标量过滤。
+summary: 本指南演示如何通过 ID 获取实体并进行标量筛选。
 title: 获取和标量查询
 ---
 <h1 id="Get--Scalar-Query" class="common-anchor-header">获取和标量查询<button data-href="#Get--Scalar-Query" class="anchor-icon" translate="no">
@@ -505,7 +505,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 500</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Get-Entities-by-ID" class="common-anchor-header">按 ID 获取实体<button data-href="#Get-Entities-by-ID" class="anchor-icon" translate="no">
+<h2 id="Get-Entities-by-ID" class="common-anchor-header">通过 ID 获取实体<button data-href="#Get-Entities-by-ID" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

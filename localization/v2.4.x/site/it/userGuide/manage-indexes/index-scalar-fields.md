@@ -4,9 +4,9 @@ order: 2
 summary: >-
   Questa guida illustra la creazione e la configurazione di indici scalari per
   campi come numeri interi, stringhe, ecc.
-title: Indici di campi scalari
+title: Indice dei campi scalari
 ---
-<h1 id="Index-Scalar-Fields" class="common-anchor-header">Indici di campi scalari<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
+<h1 id="Index-Scalar-Fields" class="common-anchor-header">Indice dei campi scalari<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -193,7 +193,7 @@ client.createIndex(createIndexReq);
 <p>Per l'indicizzazione personalizzata, i valori validi sono:</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (consigliato) Un indice invertito consiste in un dizionario di termini contenente tutte le parole tokenizzate ordinate alfabeticamente. Per maggiori dettagli, consultare <a href="/docs/it/scalar_index.md">Indice scalare</a>.</p></li>
-<li><p><strong>STL_SORT</strong>: Ordina i campi scalari usando l'algoritmo di ordinamento standard della libreria template. Supporta solo campi numerici (ad esempio, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
+<li><p><strong>STL_SORT</strong>: Ordina i campi scalari usando l'algoritmo di ordinamento della libreria template standard. Supporta solo campi numerici (ad esempio, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Una struttura di dati ad albero per ricerche e recuperi rapidi di prefissi. Supporta campi VARCHAR.</p></li>
 </ul></li>
 <li><p><strong>nome_indice</strong><em>(stringa</em>)</p>

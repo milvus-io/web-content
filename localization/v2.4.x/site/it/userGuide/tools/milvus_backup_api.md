@@ -153,7 +153,7 @@ workspace ├── milvus-backup └── configs └── backup.yaml</pre>
 --header <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Durante l'esecuzione del comando precedente, cambiare <code translate="no">backup_id</code> e <code translate="no">backup_name</code> con quelli restituiti dall'elenco API.</p>
-<p>Ora è possibile salvare i file di backup in un luogo sicuro per ripristinarli in futuro, oppure caricarli su <a href="https://cloud.zilliz.com">Zilliz Cloud</a> per creare un database vettoriale gestito con i propri dati. Per ulteriori informazioni, consultare <a href="https://zilliz.com/doc/migrate_from_milvus-2x">Migrazione da Milvus a Zilliz Cloud</a>.</p>
+<p>A questo punto, è possibile salvare i file di backup in un luogo sicuro per ripristinarli in futuro, oppure caricarli su <a href="https://cloud.zilliz.com">Zilliz Cloud</a> per creare un database vettoriale gestito con i propri dati. Per maggiori dettagli, consultare <a href="https://zilliz.com/doc/migrate_from_milvus-2x">Migrazione da Milvus a Zilliz Cloud</a>.</p>
 <h2 id="Restore-data" class="common-anchor-header">Ripristino dei dati<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

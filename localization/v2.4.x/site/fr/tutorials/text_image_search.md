@@ -1,6 +1,6 @@
 ---
 id: text_image_search.md
-summary: Créez un moteur de recherche texte-image avec Milvus.
+summary: Construire un moteur de recherche texte-image avec Milvus.
 title: Moteur de recherche texte-image
 ---
 <h1 id="Text-to-Image-Search-Engine" class="common-anchor-header">Moteur de recherche texte-image<button data-href="#Text-to-Image-Search-Engine" class="anchor-icon" translate="no">
@@ -19,7 +19,7 @@ title: Moteur de recherche texte-image
         ></path>
       </svg>
     </button></h1><p>Ce tutoriel montre comment utiliser Milvus, la base de données vectorielles open-source, pour construire un moteur de recherche texte-image.</p>
-<p>Vous pouvez rapidement construire un moteur de recherche texte-image viable en suivant le tutoriel de base. Vous pouvez également lire le tutoriel d'approfondissement qui couvre tous les aspects, de la sélection du modèle au déploiement du service. Vous pouvez construire un moteur de recherche texte-image plus avancé répondant aux besoins de votre entreprise en suivant les instructions du tutoriel approfondi.</p>
+<p>Vous pouvez rapidement créer un moteur de recherche texte-image viable en suivant le tutoriel de base. Vous pouvez également lire le tutoriel d'approfondissement qui couvre tous les aspects, de la sélection du modèle au déploiement du service. Vous pouvez construire un moteur de recherche texte-image plus avancé répondant aux besoins de votre entreprise en suivant les instructions du tutoriel approfondi.</p>
 <ul>
 <li><p><a href="https://github.com/towhee-io/examples/blob/main/image/text_image_search/1_build_text_image_search_engine.ipynb">Tutoriel de base dans le carnet</a></p></li>
 <li><p><a href="https://github.com/towhee-io/examples/blob/main/image/text_image_search/2_deep_dive_text_image_search.ipynb">Tutoriel d'approfondissement dans le carnet de notes</a></p></li>

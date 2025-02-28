@@ -797,7 +797,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Para más información, consulte <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/query.md"><code translate="no">query()</code></a> en la referencia del SDK.</p>
 </div>
 <ul>
-<li><p>Filtrar entidades con valores de etiqueta comprendidos entre 1.000 y 1.500.</p>
+<li><p>Filtra entidades con valores de etiqueta comprendidos entre 1.000 y 1.500.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6. Use basic operators</span>

@@ -64,7 +64,7 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-Embedding-Model" class="common-anchor-header">Préparer le modèle d'intégration</h3><p>Nous initialisons le client OpenAI pour préparer le modèle d'intégration.</p>
+<h3 id="Prepare-the-Embedding-Model" class="common-anchor-header">Préparation du modèle d'intégration</h3><p>Nous initialisons le client OpenAI pour préparer le modèle d'intégration.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
 
 openai_client = <span class="hljs-title class_">OpenAI</span>()

@@ -74,7 +74,9 @@ title: Referencia de comandos Milvus_CLI
 </thead>
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(Opcional) El nombre uri. Por defecto es &quot;http://127.0.0.1:19530&quot;.</td></tr>
-<tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(Opcional) El apikey de la nube de zilliz o <code translate="no">username:password</code>. Por defecto es None.</td></tr>
+<tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(Opcional) El apikey de la nube zilliz o <code translate="no">username:password</code>. El valor predeterminado es Ninguno.</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(Opcional) - Establece el modo TLS: 0 (Sin encriptación), 1 (Encriptación unidireccional), 2 (Encriptación bidireccional no soportada aún). Por defecto es 0</td></tr>
+<tr><td style="text-align:left">-cert</td><td style="text-align:left">-cert</td><td style="text-align:left">(Opcional) Ruta al archivo del certificado del cliente. Trabaja con cifrado unidireccional</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Muestra la ayuda para utilizar el comando.</td></tr>
 </tbody>
 </table>

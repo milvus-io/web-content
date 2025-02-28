@@ -1,7 +1,7 @@
 ---
 id: milvus_backup_api.md
 summary: 'Erfahren Sie, wie Sie Milvus Backup über API verwenden können'
-title: Sichern und Wiederherstellen von Daten mithilfe von APIs
+title: Sichern und Wiederherstellen von Daten über APIs
 ---
 <h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">Sichern und Wiederherstellen von Daten über APIs<button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
       <svg translate="no"

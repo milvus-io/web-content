@@ -440,7 +440,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>Quando si invia una richiesta <code translate="no">search</code>, è possibile fornire uno o più valori vettoriali che rappresentano gli embedding della query e un valore <code translate="no">limit</code> che indica il numero di risultati da restituire.</p>
-<p>A seconda dei dati e del vettore della query, si possono ottenere meno di <code translate="no">limit</code> risultati. Questo accade quando <code translate="no">limit</code> è più grande del numero di vettori possibili per la query.</p>
+<p>A seconda dei dati e del vettore della query, è possibile che si ottengano meno di <code translate="no">limit</code> risultati. Questo accade quando <code translate="no">limit</code> è più grande del numero di vettori possibili per la query.</p>
 <h3 id="Single-vector-search" class="common-anchor-header">Ricerca a vettore singolo</h3><p>La ricerca a vettore singolo è la forma più semplice delle operazioni di <code translate="no">search</code> in Milvus, che ha lo scopo di trovare i vettori più simili a un determinato vettore di interrogazione.</p>
 <p>Per eseguire una ricerca a vettore singolo, specificare il nome della collezione di destinazione, il vettore di interrogazione e il numero di risultati desiderato (<code translate="no">limit</code>). Questa operazione restituisce un insieme di risultati che comprende i vettori più simili, i loro ID e le distanze dal vettore di interrogazione.</p>
 <p>Ecco un esempio di ricerca delle 5 entità più simili al vettore di interrogazione:</p>
@@ -501,7 +501,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td>Il numero totale di entità da restituire.<br/>È possibile usare questo parametro in combinazione con l'<strong>offset</strong> in <strong>param</strong> per abilitare la paginazione.<br/>La somma di questo valore e dell'<strong>offset</strong> in <strong>param</strong> deve essere inferiore a 16.384.</td>
+      <td>Il numero totale di entità da restituire.<br/>È possibile usare questo parametro in combinazione con l'<strong>offset</strong> in <strong>param</strong> per abilitare la paginazione.<br/>La somma di questo valore e dell'<strong>offset</strong> in <strong>param</strong> deve essere minore di 16.384.</td>
     </tr>
     <tr>
       <td><code translate="no">search_params</code></td>
@@ -549,7 +549,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td>Il numero totale di entità da restituire.<br/>È possibile usare questo parametro in combinazione con l'<strong>offset</strong> in <strong>param</strong> per abilitare la paginazione.<br/>La somma di questo valore e dell'<strong>offset</strong> in <strong>param</strong> deve essere inferiore a 16.384.</td>
+      <td>Il numero totale di entità da restituire.<br/>È possibile usare questo parametro in combinazione con l'<strong>offset</strong> in <strong>param</strong> per abilitare la paginazione.<br/>La somma di questo valore e dell'<strong>offset</strong> in <strong>param</strong> deve essere minore di 16.384.</td>
     </tr>
   </tbody>
 </table>
@@ -634,7 +634,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">1.7258622646331787</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;718&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>L'output mostra i 5 vicini più vicini al vettore richiesto, compresi i loro ID unici e le distanze calcolate.</p>
+<p>L'output mostra i 5 vicini più vicini al vettore richiesto, compresi i loro ID univoci e le distanze calcolate.</p>
 <h3 id="Bulk-vector-search" class="common-anchor-header">Ricerca per vettori multipli</h3><p>La ricerca per vettore multiplo estende il concetto di <a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">ricerca per vettore singolo</a>, consentendo la ricerca di più vettori di query in un'unica richiesta. Questo tipo di ricerca è ideale per gli scenari in cui è necessario trovare vettori simili per un insieme di vettori di query, riducendo significativamente il tempo e le risorse computazionali necessarie.</p>
 <p>In una ricerca di tipo bulk-vector, è possibile includere diversi vettori di query nel campo <code translate="no">data</code>. Il sistema elabora questi vettori in parallelo, restituendo un set di risultati separato per ogni vettore di query, ognuno dei quali contiene le corrispondenze più vicine trovate all'interno della raccolta.</p>
 <p>Ecco un esempio di ricerca di due serie distinte di entità più simili da due vettori di query:</p>
@@ -1694,7 +1694,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 </thead>
 <tbody>
 <tr><td><code translate="no">L2</code></td><td>Le distanze L2 più piccole indicano una maggiore somiglianza.</td><td>Per escludere i vettori più vicini dai risultati, assicurarsi che:<br/> <code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></td></tr>
-<tr><td><code translate="no">IP</code></td><td>Distanze IP più grandi indicano una maggiore somiglianza.</td><td>Per escludere dai risultati i vettori più vicini, assicurarsi che:<br/> <code translate="no">radius</code> &lt; distanza &lt;= <code translate="no">range_filter</code></td></tr>
+<tr><td><code translate="no">IP</code></td><td>Distanze IP più grandi indicano una maggiore somiglianza.</td><td>Per escludere i vettori più vicini dai risultati, assicurarsi che:<br/> <code translate="no">radius</code> &lt; distanza &lt;= <code translate="no">range_filter</code></td></tr>
 <tr><td><code translate="no">COSINE</code></td><td>Un valore di coseno maggiore indica una maggiore somiglianza.</td><td>Per escludere i vettori più vicini dai risultati, assicurarsi che:<br/> <code translate="no">radius</code> &lt; distanza &lt;= <code translate="no">range_filter</code></td></tr>
 <tr><td><code translate="no">JACCARD</code></td><td>Le distanze di Jaccard più piccole indicano una maggiore somiglianza.</td><td>Per escludere i vettori più vicini dai risultati, assicurarsi che:<br/> <code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></td></tr>
 <tr><td><code translate="no">HAMMING</code></td><td>Distanze di Hamming più piccole indicano una maggiore somiglianza.</td><td>Per escludere i vettori più vicini dai risultati, assicurarsi che:<br/> <code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></td></tr>
@@ -1834,6 +1834,6 @@ search_parameters = {
 </table>
 <div class="admonition note">
 <p><strong>note</strong></p>
-<p>[1] Numero di unità di cluster dopo l'indicizzazione. Quando si indicizza una collezione, Milvus suddivide i dati vettoriali in più unità cluster, il cui numero varia in base alle impostazioni dell'indice.</p>
+<p>[1] Numero di unità di cluster dopo l'indicizzazione. Quando si indicizza una collezione, Milvus suddivide i dati vettoriali in più unità di cluster, il cui numero varia in base alle impostazioni dell'indice.</p>
 <p>[2] Numero di entità da restituire in una ricerca.</p>
 </div>

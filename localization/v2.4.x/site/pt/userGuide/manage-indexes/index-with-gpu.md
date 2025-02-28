@@ -69,7 +69,7 @@ title: Índice com GPU
 <h3 id="Prepare-index-parameters" class="common-anchor-header">Preparar parâmetros de índice</h3><p>Ao configurar os parâmetros de índice da GPU, defina <strong>index_type</strong>, <strong>metric_type</strong> e <strong>params</strong>:</p>
 <ul>
 <li><p><strong>index_type</strong><em>(string</em>): O tipo de índice usado para acelerar a pesquisa de vetor. As opções válidas incluem <strong>GPU_CAGRA</strong>, <strong>GPU_IVF_FLAT</strong>, <strong>GPU_IVF_PQ</strong> e <strong>GPU_BRUTE_FORCE</strong>.</p></li>
-<li><p><strong>metric_type</strong><em>(string</em>): O tipo de métrica usado para medir a similaridade de vetores. As opções válidas são <strong>IP</strong> e <strong>L2</strong>.</p></li>
+<li><p><strong>metric_type</strong><em>(string</em>): O tipo de métrica usada para medir a similaridade de vetores. As opções válidas são <strong>IP</strong> e <strong>L2</strong>.</p></li>
 <li><p><strong>params</strong><em>(dict</em>): Os parâmetros de construção específicos do índice. As opções válidas para este parâmetro dependem do tipo de índice.</p></li>
 </ul>
 <p>Aqui estão exemplos de configurações para diferentes tipos de índice:</p>
@@ -87,7 +87,7 @@ title: Índice com GPU
 <p>As opções possíveis para <strong>params</strong> incluem:</p>
 <ul>
 <li><p><strong>intermediate_graph_degree</strong><em>(int</em>): Afeta a recuperação e o tempo de construção ao determinar o grau do gráfico antes da poda. Os valores recomendados são <strong>32</strong> ou <strong>64</strong>.</p></li>
-<li><p><strong>graph_degree</strong><em>(int</em>): Afeta o desempenho da pesquisa e a recuperação ao definir o grau do gráfico após a poda. Normalmente, é metade do <strong>grau_do_gráfico_intermediário</strong>. Uma diferença maior entre esses dois graus resulta em um tempo de construção mais longo. O seu valor tem de ser inferior ao valor de <strong>grau_do_grafo_intermédio</strong>.</p></li>
+<li><p><strong>graph_degree</strong><em>(int</em>): Afeta o desempenho da pesquisa e a recuperação ao definir o grau do gráfico após a poda. Normalmente, é metade do <strong>grau_do_gráfico_intermediário</strong>. Uma diferença maior entre esses dois graus resulta em um tempo de construção mais longo. O seu valor deve ser menor do que o valor de <strong>grau_do_grafo_intermédio</strong>.</p></li>
 <li><p><strong>algoritmo_de_construção</strong><em>(string</em>): Seleciona o algoritmo de geração do grafo antes da poda. Opções possíveis:</p>
 <ul>
 <li><p><strong>IVF_PQ</strong>: Oferece maior qualidade mas tempo de construção mais lento.</p></li>

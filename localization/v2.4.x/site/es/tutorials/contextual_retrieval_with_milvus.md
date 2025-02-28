@@ -62,7 +62,7 @@ $ pip install anthropic
 <p>Si utiliza Google Colab, para habilitar las dependencias que acaba de instalar, es posible que tenga que <strong>reiniciar el tiempo de ejecución</strong> (haga clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla y seleccione "Reiniciar sesión" en el menú desplegable).</p>
 </div>
 <p>Necesitará las claves API de Cohere, Voyage y Anthropic para ejecutar el código.</p>
-<h2 id="Download-Data" class="common-anchor-header">Descargar datos<button data-href="#Download-Data" class="anchor-icon" translate="no">
+<h2 id="Download-Data" class="common-anchor-header">Descarga de datos<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

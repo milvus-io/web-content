@@ -19,11 +19,11 @@ title: Classificação da sequência de ADN
         ></path>
       </svg>
     </button></h1><p>Este tutorial demonstra como usar o Milvus, o banco de dados de vetores de código aberto, para criar um modelo de classificação de sequência de DNA.</p>
-<p>O modelo ML e o software de terceiros utilizados incluem:</p>
+<p>O modelo ML e o software de terceiros utilizado incluem:</p>
 <ul>
 <li>CountVectorizer</li>
 <li>MySQL</li>
-<li><a href="https://towhee.io/">Towhee</a></li>
+<li><a href="https://towhee.io/">Torrão</a></li>
 </ul>
 <p><br/></p>
 <p>A sequência de ADN é um conceito popular na rastreabilidade de genes, identificação de espécies, diagnóstico de doenças e muitas outras áreas. Enquanto todas as indústrias anseiam por um método de investigação mais inteligente e eficiente, a inteligência artificial tem atraído muita atenção, especialmente nos domínios biológico e médico. Cada vez mais cientistas e investigadores estão a contribuir para a aprendizagem automática e a aprendizagem profunda no domínio da bioinformática. Para tornar os resultados experimentais mais convincentes, uma opção comum é aumentar o tamanho da amostra. A colaboração com grandes volumes de dados em genómica traz mais possibilidades de aplicação na realidade. No entanto, o alinhamento tradicional de sequências tem limitações, o que o torna inadequado para grandes conjuntos de dados. A fim de reduzir as desvantagens na realidade, a vectorização é uma boa escolha para um grande conjunto de dados de sequências de ADN.</p>

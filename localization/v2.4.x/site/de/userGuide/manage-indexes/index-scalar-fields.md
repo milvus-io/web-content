@@ -2,7 +2,7 @@
 id: index-scalar-fields.md
 order: 2
 summary: >-
-  Dieser Leitfaden führt Sie durch das Erstellen und Konfigurieren von skalaren
+  Dieser Leitfaden führt Sie durch die Erstellung und Konfiguration von skalaren
   Indizes für Felder wie Ganzzahlen, Strings usw.
 title: Skalare Felder indizieren
 ---
@@ -39,7 +39,7 @@ title: Skalare Felder indizieren
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Automatische Indizierung</a></strong>: Milvus entscheidet automatisch über den Indextyp, basierend auf dem Datentyp des skalaren Feldes. Dies ist geeignet, wenn Sie den spezifischen Indextyp nicht kontrollieren müssen.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Benutzerdefinierte Indizierung</a></strong>: Sie geben den genauen Indextyp an, z. B. einen invertierten Index. Dadurch haben Sie mehr Kontrolle über die Auswahl des Indextyps.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Benutzerdefinierte Indizierung</a></strong>: Sie geben den genauen Indextyp an, z. B. einen invertierten Index. Damit haben Sie mehr Kontrolle über die Auswahl des Indextyps.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Automatische Indizierung<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"

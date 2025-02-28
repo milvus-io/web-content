@@ -1,7 +1,7 @@
 ---
 id: text_image_search.md
 summary: Construya un motor de búsqueda de texto a imagen con Milvus.
-title: Buscador de texto a imagen
+title: Motor de búsqueda de texto a imagen
 ---
 <h1 id="Text-to-Image-Search-Engine" class="common-anchor-header">Motor de búsqueda de texto a imagen<button data-href="#Text-to-Image-Search-Engine" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,7 +21,7 @@ title: Buscador de texto a imagen
     </button></h1><p>Este tutorial muestra cómo utilizar Milvus, la base de datos vectorial de código abierto, para construir un motor de búsqueda de texto a imagen.</p>
 <p>Puede construir rápidamente un motor de búsqueda de texto a imagen mínimamente viable siguiendo el tutorial básico. Alternativamente, también puede leer el tutorial de inmersión profunda que cubre todo, desde la selección del modelo hasta el despliegue del servicio. Puedes crear un motor de búsqueda texto-imagen más avanzado que se adapte a las necesidades de tu empresa siguiendo las instrucciones del tutorial en profundidad.</p>
 <ul>
-<li><p><a href="https://github.com/towhee-io/examples/blob/main/image/text_image_search/1_build_text_image_search_engine.ipynb">Tutorial básico en cuaderno</a></p></li>
+<li><p><a href="https://github.com/towhee-io/examples/blob/main/image/text_image_search/1_build_text_image_search_engine.ipynb">Tutorial básico en el cuaderno</a></p></li>
 <li><p><a href="https://github.com/towhee-io/examples/blob/main/image/text_image_search/2_deep_dive_text_image_search.ipynb">Tutorial en profundidad en el cuaderno</a></p></li>
 </ul>
 <p>El modelo ML y el software de terceros utilizados incluyen:</p>

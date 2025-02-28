@@ -4,9 +4,9 @@ order: 3
 summary: >-
   Ce guide montre comment obtenir des entités par identifiant et effectuer un
   filtrage scalaire.
-title: Obtenir et requête scalaire
+title: Requête d'obtention et requête scalaire
 ---
-<h1 id="Get--Scalar-Query" class="common-anchor-header">Obtenir et requête scalaire<button data-href="#Get--Scalar-Query" class="anchor-icon" translate="no">
+<h1 id="Get--Scalar-Query" class="common-anchor-header">Requête d'obtention et requête scalaire<button data-href="#Get--Scalar-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -19,7 +19,7 @@ title: 모니터링
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus-CDC는 Grafana 대시보드를 통해 포괄적인 모니터링 기능을 제공하여 주요 지표를 시각화하고 변경 데이터 캡처(CDC) 작업과 서버 상태를 원활하게 운영할 수 있도록 합니다.</p>
+    </button></h1><p>Milvus-CDC는 Grafana 대시보드를 통해 포괄적인 모니터링 기능을 제공하여 주요 지표를 시각화하고 변경 데이터 캡처(CDC) 작업 및 서버 상태의 원활한 운영을 보장할 수 있습니다.</p>
 <h3 id="Metrics-for-CDC-tasks" class="common-anchor-header">CDC 작업에 대한 메트릭</h3><p>시작하려면 <a href="https://github.com/zilliztech/milvus-cdc/blob/main/server/configs/cdc-grafana.json">cdc-grafana.json</a> 파일을 Grafana로 가져오세요. 그러면 CDC 작업의 상태를 모니터링하기 위해 특별히 설계된 대시보드가 추가됩니다.</p>
 <p><strong>CDC Grafana 대시보드 개요</strong>:</p>
 <p>

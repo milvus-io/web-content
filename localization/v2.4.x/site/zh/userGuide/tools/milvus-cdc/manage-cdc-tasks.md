@@ -1,8 +1,8 @@
 ---
 id: manage-cdc-tasks.md
 order: 3
-summary: 捕获数据更改 (CDC) 任务可将数据从源 Milvus 实例同步到目标 Milvus 实例。
-title: 管理疾病预防控制中心任务
+summary: 捕获数据更改 (CDC) 任务可实现从源 Milvus 实例到目标 Milvus 实例的数据同步。
+title: 管理 CDC 任务
 ---
 <h1 id="Manage-CDC-Tasks" class="common-anchor-header">管理 CDC 任务<button data-href="#Manage-CDC-Tasks" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,7 @@ title: 管理疾病预防控制中心任务
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>捕获数据更改（CDC）任务可实现从源 Milvus 实例到目标 Milvus 实例的数据同步。它监控源操作日志，并将插入、删除和索引操作等数据变更实时复制到目标。这有助于在 Milvus 部署之间实现实时灾难恢复或主动-主动负载平衡。</p>
+    </button></h1><p>捕获数据更改（CDC）任务可实现从源 Milvus 实例到目标 Milvus 实例的数据同步。它监控源操作日志，并将插入、删除和索引操作等数据变更实时复制到目标。这有助于 Milvus 部署之间的实时灾难恢复或主动-主动负载平衡。</p>
 <p>本指南介绍如何管理 CDC 任务，包括通过 HTTP 请求创建、暂停、恢复、检索详细信息、列表和删除。</p>
 <h2 id="Create-a-task" class="common-anchor-header">创建任务<button data-href="#Create-a-task" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +37,7 @@ title: 管理疾病预防控制中心任务
         ></path>
       </svg>
     </button></h2><p>创建 CDC 任务可将源 Milvus 中的数据更改操作同步到目标 Milvus。</p>
-<p>创建 CDC 任务</p>
+<p>创建 CDC 任务：</p>
 <pre><code translate="no" class="language-bash">curl -X POST http:_//localhost:8444/cdc \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
@@ -59,7 +59,7 @@ title: 管理疾病预防控制中心任务
 <p>用目标 Milvus 服务器的 IP 地址替换<strong>localhost</strong>。</p>
 <p><strong>参数</strong>：</p>
 <ul>
-<li><p><strong>milvus_connect_param</strong>: 目标 Milvus 的连接参数。</p>
+<li><p><strong>milvus_connect_param</strong>：目标 Milvus 的连接参数。</p>
 <ul>
 <li><p><strong>host</strong>：Milvus 服务器的主机名或 IP 地址。</p></li>
 <li><p><strong>port：端口号</strong>：Milvus 服务器监听的端口号。</p></li>
@@ -68,7 +68,7 @@ title: 管理疾病预防控制中心任务
 <li><p><strong>enable_tls</strong>：是否为连接使用 TLS/SSL 加密。</p></li>
 <li><p><strong>connect_timeout（连接超时）</strong>：建立连接的超时时间（秒）。</p></li>
 </ul></li>
-<li><p><strong>collection_infos</strong>：要同步的集合。目前只支持星号<strong>(*</strong>)，因为 Milvus-CDC 同步的是集群级别，而不是单个集合。</p></li>
+<li><p><strong>collection_infos</strong>：要同步的 Collection。目前只支持星号<strong>(*</strong>)，因为 Milvus-CDC 同步的是集群级别，而不是单个 Collections。</p></li>
 </ul>
 <p>预期响应：</p>
 <pre><code translate="no" class="language-json">{

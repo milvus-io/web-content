@@ -100,7 +100,7 @@ spec:
             cpu: <span class="hljs-string">&quot;500m&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se l'immagine disponibile su DockerHub non è la più recente, è possibile creare un'immagine di Birdwatcher utilizzando il file Docker fornito con il codice sorgente, come segue:</p>
+<p>Se l'immagine disponibile su DockerHub non è la più recente, è possibile creare un'immagine di Birdwatcher usando il file Docker fornito con il codice sorgente, come segue:</p>
 <pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/milvus-io/birdwatcher.git
 <span class="hljs-built_in">cd</span> birdwatcher
 docker build -t milvusdb/birdwatcher .
@@ -113,6 +113,6 @@ docker build -t milvusdb/birdwatcher .
 ...
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<h3 id="Apply-deploymentyml" class="common-anchor-header">Applicare deployment.yml</h3><p>Salvare il file YAML di cui sopra in un file con il nome <code translate="no">deployment.yml</code> ed eseguire il comando seguente</p>
+<h3 id="Apply-deploymentyml" class="common-anchor-header">Applicare deployment.yml</h3><p>Salvare il file YAML di cui sopra in un file con il nome <code translate="no">deployment.yml</code> ed eseguire il seguente comando</p>
 <pre><code translate="no" class="language-shell">kubectl apply -f deployment.yml
 <button class="copy-code-btn"></button></code></pre>

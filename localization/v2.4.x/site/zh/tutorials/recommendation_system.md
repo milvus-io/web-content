@@ -1,6 +1,6 @@
 ---
 id: recommendation_system.md
-summary: 使用 Milvus 建立个性化推荐系统。
+summary: 利用 Milvus 建立个性化推荐系统。
 title: 推荐系统
 ---
 <h1 id="Recommender-System" class="common-anchor-header">推荐系统<button data-href="#Recommender-System" class="anchor-icon" translate="no">

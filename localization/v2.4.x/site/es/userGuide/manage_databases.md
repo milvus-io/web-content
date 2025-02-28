@@ -1,7 +1,6 @@
 ---
 id: manage_databases.md
 title: Gestionar bases de datos
-summary: ''
 ---
 <h1 id="Manage-Databases" class="common-anchor-header">Gestionar bases de datos<button data-href="#Manage-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -259,11 +258,11 @@ response = client.dropDatabase(dropDatabaseParam);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RBAC también cubre las operaciones con bases de datos y garantiza la compatibilidad futura. La palabra <strong>base de datos</strong> en las APIs de Permisos (Conceder / Revocar / Conceder Lista) tiene los siguientes significados:</p>
+    </button></h2><p>RBAC también cubre las operaciones con bases de datos y garantiza la compatibilidad futura. La palabra <strong>base de</strong> datos en las APIs de Permisos (Conceder / Revocar / Conceder Lista) tiene los siguientes significados:</p>
 <ul>
 <li>Si ni una conexión Milvus ni una llamada a la API de permisos especifica una <code translate="no">db_name</code>, <strong>base de datos</strong> se refiere a la base de datos predeterminada.</li>
-<li>Si una conexión Milvus especifica un <code translate="no">db_name</code>, pero una llamada a la API de permisos posterior no lo hace, <strong>la base</strong> de <strong>datos</strong> se refiere a la base de datos cuyo nombre se especificó en la conexión Milvus.</li>
-<li>Si se realiza una llamada a la API de permisos sobre una conexión Milvus, con o sin <code translate="no">db_name</code> especificado, <strong>la base</strong> de <strong>datos</strong> se refiere a la base de datos cuyo nombre se especificó en la llamada a la API de permisos.</li>
+<li>Si una conexión Milvus especifica un <code translate="no">db_name</code>, pero una llamada a la API de permisos posterior no lo hace, la base de <strong>datos</strong> se refiere a la base de datos cuyo nombre se especificó en la conexión Milvus.</li>
+<li>Si se realiza una llamada a la API de permisos sobre una conexión Milvus, con o sin <code translate="no">db_name</code> especificado, la base de <strong>datos</strong> se refiere a la base de datos cuyo nombre se especificó en la llamada a la API de permisos.</li>
 </ul>
 <p>El siguiente fragmento de código se comparte entre los bloques enumerados a continuación.</p>
 <div class="multipleCode">
@@ -321,7 +320,7 @@ _DB_NAME = <span class="hljs-string">&quot;default&quot;</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p>Si ni una conexión Milvus ni una llamada a la API de Permisos especifica un <code translate="no">db_name</code>, <strong>la base</strong> de <strong>datos</strong> se refiere a la base de datos por defecto.</p>
+<li><p>Si ni una conexión Milvus ni una llamada a la API de Permisos especifica un <code translate="no">db_name</code>, la base de <strong>datos</strong> se refiere a la base de datos por defecto.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">_ROLE_NAME = <span class="hljs-string">&quot;test_role&quot;</span>
@@ -427,7 +426,7 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
   <span class="hljs-attr">privilege</span>: <span class="hljs-variable constant_">PRIVILEGE_INSERT</span>,
 });
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Si una conexión Milvus especifica un <code translate="no">db_name</code>, pero una llamada posterior a la API de Permisos no lo hace, <strong>la base</strong> de <strong>datos</strong> se refiere a la base de datos cuyo nombre fue especificado en la conexión Milvus.</p>
+<li><p>Si una conexión Milvus especifica un <code translate="no">db_name</code>, pero una llamada posterior a la API de Permisos no lo hace, la base de <strong>datos</strong> se refiere a la base de datos cuyo nombre fue especificado en la conexión Milvus.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> please make sure the &#x27;foo&#x27; db has been created</span>
@@ -509,7 +508,7 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
   <span class="hljs-attr">privilege</span>: <span class="hljs-variable constant_">PRIVILEGE_INSERT</span>,
 });
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Si se realiza una llamada a la API de permisos sobre una conexión Milvus, con o sin <code translate="no">db_name</code> especificado, <strong>la base</strong> de <strong>datos</strong> se refiere a la base de datos cuyo nombre se especificó en la llamada a la API de permisos.</p>
+<li><p>Si se realiza una llamada a la API de permisos sobre una conexión Milvus, con o sin <code translate="no">db_name</code> especificado, la <strong>base</strong> de datos se refiere a la base de datos cuyo nombre se especificó en la llamada a la API de permisos.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> please make sure the &#x27;foo&#x27; db has been created</span>

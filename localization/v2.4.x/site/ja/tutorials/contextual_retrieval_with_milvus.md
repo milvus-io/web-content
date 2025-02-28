@@ -31,7 +31,7 @@ title: Milvusによる文脈検索
 <li><code translate="no">Document Enhancement</code>:クエリの書き換えは現代の情報検索において重要な技術であり、クエリをより有益なものにするために補助的な情報を使用することが多い。同様に、RAGでより良いパフォーマンスを達成するために、インデックスを作成する前にLLMで文書を前処理（例えば、データソースのクリーニング、失われた情報の補完、要約など）することで、関連する文書を検索する可能性を大幅に向上させることができる。言い換えれば、この前処理ステップは、関連性の観点から文書をクエリに近づけるのに役立つ。</li>
 <li><code translate="no">Low-Cost Processing by Caching Long Context</code>:LLMを使って文書を処理する際の共通の懸念は、コストである。KVCacheは、同じ先行コンテキストに対する中間結果の再利用を可能にする一般的なソリューションである。ほとんどのホスト型LLMベンダーはこの機能をユーザーに透過的に提供していますが、Anthropicはユーザーにキャッシュ処理をコントロールさせます。キャッシュヒットが発生した場合、ほとんどの計算を保存することができます（これは、長いコンテキストが同じまま、各クエリの命令が変更される場合に一般的です）。詳細は<a href="https://www.anthropic.com/news/prompt-caching">こちらを</a>ご覧ください。</li>
 </ul>
-<p>このノートブックでは、LLMを使ったMilvusを使った文脈検索の実行方法を示す。密と疎のハイブリッド検索とリランカーを組み合わせることで、徐々に強力な検索システムを作ることができる。データと実験設定は<a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">文脈検索に基づいて</a>います。</p>
+<p>このノートブックでは、LLMを使ったMilvusを使った文脈検索の方法を紹介し、密-疎ハイブリッド検索とリランカーを組み合わせて、徐々に強力な検索システムを構築する。データと実験設定は<a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">文脈検索に基づいて</a>います。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,7 +89,7 @@ $ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.git
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このクラスはフレキシブルに設計されており、ニーズに応じて様々な検索モードを選択することができます。初期化メソッドにオプションを指定することで、文脈検索、ハイブリッド検索（密な検索メソッドと疎な検索メソッドを組み合わせたもの）、リランカーのどれを使うかを決めることができます。</p>
+    </button></h2><p>このクラスはフレキシブルに設計されており、ニーズに応じて様々な検索モードを選択することができます。初期化メソッドにオプションを指定することで、文脈検索、ハイブリッド検索（密な検索手法と疎な検索手法を組み合わせたもの）、リランカーのどれを使うかを決定し、結果を強化することができます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> VoyageEmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> CohereRerankFunction
@@ -600,7 +600,7 @@ Total queries: 248
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cohereのリランカーを追加することで、結果をさらに改善することができる。リランカーを持つ新しいRetrieverを別に初期化することなく、既存のRetrieverをリランカーを使うように設定するだけで、性能を向上させることができる。</p>
+    </button></h2><p>Cohereのリランカーを追加することで、結果をさらに改善することができる。リランカーを持つ新しいRetrieverを別途初期化することなく、既存のRetrieverにリランカーを使用するように設定するだけで、パフォーマンスを向上させることができる。</p>
 <pre><code translate="no" class="language-python">contextual_retriever.use_reranker = <span class="hljs-literal">True</span>
 contextual_retriever.rerank_function = cohere_rf
 <button class="copy-code-btn"></button></code></pre>

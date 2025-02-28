@@ -160,7 +160,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 <ul>
 <li><p>Assurez-vous que toutes les valeurs d'une liste ou d'un tableau sont du même type de données.</p></li>
 <li><p>Tout dictionnaire imbriqué dans une valeur de champ JSON sera considéré comme une chaîne de caractères.</p></li>
-<li><p>N'utilisez que des caractères alphanumériques et des traits de soulignement pour nommer les clés JSON, car d'autres caractères peuvent poser des problèmes de filtrage ou de recherche.</p></li>
+<li><p>N'utilisez que des caractères alphanumériques et des traits de soulignement pour nommer les clés JSON, car d'autres caractères peuvent poser des problèmes lors du filtrage ou de la recherche.</p></li>
 <li>Actuellement, l'indexation des champs JSON n'est pas disponible, ce qui peut rendre le filtrage fastidieux. Cette limitation sera toutefois prise en compte dans les prochaines versions.</li>
 </ul>
 </div>
@@ -949,7 +949,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Filtre les entités dont le coordinateur est <code translate="no">[4, 5]</code>.</p>
+<li><p>Filtre les entités qui ont le coordinateur de <code translate="no">[4, 5]</code>.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.query(
@@ -1378,7 +1378,7 @@ searchResults = searchResp.getSearchResults();
 <div class="admonition note">
 <p><b>notes</b></p>
 <ul>
-<li>Milvus stocke les valeurs de chaîne dans le champ JSON telles quelles sans effectuer d'échappement sémantique ou de conversion. </li>
+<li>Milvus enregistre les valeurs de chaîne dans le champ JSON telles quelles sans effectuer d'échappement sémantique ou de conversion. </li>
 </ul>
 <p>Par exemple, <code translate="no">'a"b'</code>, <code translate="no">"a'b"</code>, <code translate="no">'a\\\\'b'</code>, et <code translate="no">"a\\\\"b"</code> seront enregistrés tels quels, tandis que <code translate="no">'a'b'</code> et <code translate="no">"a"b"</code> seront traités comme des valeurs non valides.</p>
 <ul>
@@ -1427,8 +1427,8 @@ json_contains(x, [<span class="hljs-number">3</span>,<span class="hljs-number">2
 json_contains_all(x, [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]) <span class="hljs-comment"># =&gt; False (x does not has a member 6.)</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><code translate="no">json_contains_any(identifier, jsonExpr)</code></p>
-<p>Cet opérateur filtre les entités dont l'identifiant contient tous les membres de l'expression JSON.</p>
-<p>Exemple : Cet opérateur filtre les entités dont l'identifiant contient tous les membres de l'expression JSON : <code translate="no">{&quot;x&quot;: [1,2,3,4,5,7,8]}</code></p>
+<p>Cet opérateur filtre les entités dont l'identifiant contient l'un des membres de l'expression JSON.</p>
+<p>Exemple : <code translate="no">{&quot;x&quot;: [1,2,3,4,5,7,8]}</code></p>
 <pre><code translate="no" class="language-python">json_contains_any(x, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>]) <span class="hljs-comment"># =&gt; True (x contains 1, 2, and 8.)</span>
 json_contains_any(x, [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]) <span class="hljs-comment"># =&gt; True (x contains 4 and 5.)</span>
 json_contains_any(x, [<span class="hljs-number">6</span>,<span class="hljs-number">9</span>]) <span class="hljs-comment"># =&gt; False (x contains none of 6 and 9.)</span>

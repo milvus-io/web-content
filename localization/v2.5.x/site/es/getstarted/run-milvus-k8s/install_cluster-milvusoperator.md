@@ -282,7 +282,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <div class="alert note">
 <ul>
 <li>Cuando elimina el cluster Milvus utilizando la configuración por defecto, las dependencias como etcd, Pulsar y MinIO no se eliminan. Por lo tanto, la próxima vez que instale la misma instancia de cluster Milvus, estas dependencias se utilizarán de nuevo.</li>
-<li>Para eliminar las dependencias y nubes virtuales privadas (PVCs) junto con el cluster Milvus, vea <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">archivo de configuración</a>.</li>
+<li>Para borrar las dependencias y las reclamaciones de volumen persistente (PVCs) junto con el cluster Milvus, vea <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">archivo de configuración</a>.</li>
 </ul>
 </div>
 <h2 id="Uninstall-Milvus-Operator" class="common-anchor-header">Desinstalar Milvus Operator<button data-href="#Uninstall-Milvus-Operator" class="anchor-icon" translate="no">

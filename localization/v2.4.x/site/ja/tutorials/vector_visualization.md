@@ -25,7 +25,7 @@ title: ベクトルの可視化
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>この例では、milvusの埋め込み（ベクトル）を<a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNEを用いて</a>可視化する方法を示します。</p>
-<p>t-SNEのような次元削減技術は、複雑な高次元データを局所構造を保持したまま2Dまたは3D空間で可視化するのに非常に有効です。これにより、パターン認識が可能になり、特徴の関係の理解が深まり、機械学習モデルの結果の解釈が容易になります。さらに、クラスタリング結果を視覚的に比較することでアルゴリズム評価を支援し、専門家以外の聴衆へのデータ提示を簡素化し、低次元の表現で作業することで計算コストを削減することができる。これらのアプリケーションを通じて、t-SNEはデータセットに対するより深い洞察を得るのに役立つだけでなく、より多くの情報に基づいた意思決定プロセスをサポートします。</p>
+<p>t-SNEのような次元削減技術は、複雑な高次元データを局所構造を保持したまま2次元または3次元空間で可視化するのに非常に有効です。これにより、パターン認識が可能になり、特徴の関係の理解が深まり、機械学習モデルの結果の解釈が容易になります。さらに、クラスタリング結果を視覚的に比較することでアルゴリズム評価を支援し、専門家以外の聴衆へのデータ提示を簡素化し、低次元の表現で作業することで計算コストを削減することができる。これらのアプリケーションを通じて、t-SNEはデータセットに対するより深い洞察を得るのに役立つだけでなく、より多くの情報に基づいた意思決定プロセスをサポートします。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,8 +141,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <p><code translate="no">MilvusClient</code> の引数として：</p>
 <ul>
 <li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> とするのが最も便利です。</li>
-<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
-<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>使用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
 <p>コレクションが既に存在するか確認し、存在する場合は削除します。</p>
@@ -192,7 +192,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
 
 {'insert_count': 72, 'ids': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71], 'cost': 0}
 </code></pre>
-<h2 id="Visualizing-Embeddings-in-Vector-Search" class="common-anchor-header">ベクトル検索における埋め込みを視覚化する<button data-href="#Visualizing-Embeddings-in-Vector-Search" class="anchor-icon" translate="no">
+<h2 id="Visualizing-Embeddings-in-Vector-Search" class="common-anchor-header">ベクトル検索で埋め込みを可視化する<button data-href="#Visualizing-Embeddings-in-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

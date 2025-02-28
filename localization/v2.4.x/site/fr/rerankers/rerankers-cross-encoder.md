@@ -5,7 +5,7 @@ summary: >-
   Milvus prend en charge les modèles de reranker Cross Encoder par le biais de
   la classe `CrossEncoderRerankFunction`. Cette fonctionnalité vous permet
   d'évaluer efficacement la pertinence des paires requête-document.
-title: Encodeur transversal
+title: Encodeur croisé
 ---
 <h1 id="Cross-Encoder" class="common-anchor-header">Encodeur croisé<button data-href="#Cross-Encoder" class="anchor-icon" translate="no">
       <svg translate="no"

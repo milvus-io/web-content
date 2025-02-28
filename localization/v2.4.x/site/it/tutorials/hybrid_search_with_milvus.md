@@ -28,7 +28,7 @@ title: Ricerca ibrida con Milvus
 <li>Recupero sparso: Enfatizza la corrispondenza delle parole chiave per trovare risultati basati su termini specifici, equivalente alla ricerca full-text.</li>
 <li>Recupero ibrido: Combina gli approcci Dense e Sparse, catturando il contesto completo e le parole chiave specifiche per ottenere risultati di ricerca completi.</li>
 </ul>
-<p>Integrando questi metodi, la ricerca ibrida di Milvus bilancia le somiglianze semantiche e lessicali, migliorando la rilevanza complessiva dei risultati della ricerca. Questo quaderno illustra il processo di impostazione e utilizzo di queste strategie di reperimento, evidenziandone l'efficacia in vari scenari di ricerca.</p>
+<p>Integrando questi metodi, la ricerca ibrida di Milvus bilancia le somiglianze semantiche e lessicali, migliorando la rilevanza complessiva dei risultati della ricerca. Questo quaderno illustra il processo di impostazione e utilizzo di queste strategie di recupero, evidenziandone l'efficacia in vari scenari di ricerca.</p>
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">Dipendenze e ambiente</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Download-Dataset" class="common-anchor-header">Scaricare il set di dati</h3><p>Per dimostrare la ricerca, abbiamo bisogno di un corpus di documenti. Utilizziamo il dataset Quora Duplicate Questions e collochiamolo nella directory locale.</p>

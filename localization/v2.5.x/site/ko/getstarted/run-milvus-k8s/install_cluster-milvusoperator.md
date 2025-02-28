@@ -87,13 +87,13 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <li><a href="#Install-with-Helm">헬름 사용</a></li>
 <li><a href="#Install-with-kubectl">kubectl 사용</a></li>
 </ul>
-<h3 id="Install-with-Helm" class="common-anchor-header">헬름으로 설치</h3><p>다음 명령어를 실행하여 헬름으로 Milvus Operator를 설치합니다.</p>
+<h3 id="Install-with-Helm" class="common-anchor-header">헬름으로 설치</h3><p>다음 명령어를 실행하여 헬름으로 밀버스 오퍼레이터를 설치합니다.</p>
 <pre><code translate="no" class="language-shell">$ helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
   https://github.com/zilliztech/milvus-operator/releases/download/v1.2.0/milvus-operator-1.2.0.tgz
 <button class="copy-code-btn"></button></code></pre>
-<p>설치 프로세스가 끝나면 다음과 유사한 출력을 볼 수 있습니다.</p>
+<p>설치 프로세스가 끝나면 다음과 유사한 출력을 확인할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
 LAST DEPLOYED: Thu Jul  <span class="hljs-number">7</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">40</span> <span class="hljs-number">2022</span>
 NAMESPACE: milvus-operator
@@ -282,7 +282,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <div class="alert note">
 <ul>
 <li>기본 구성을 사용하여 Milvus 클러스터를 삭제하면 etcd, Pulsar, MinIO와 같은 종속 요소는 삭제되지 않습니다. 따라서 다음에 동일한 Milvus 클러스터 인스턴스를 설치할 때 이러한 종속성이 다시 사용됩니다.</li>
-<li>Milvus 클러스터와 함께 종속성 및 프라이빗 가상 클라우드(PVC)를 삭제하려면 <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">구성 파일을</a> 참조하세요.</li>
+<li>Milvus 클러스터와 함께 종속성 및 영구 볼륨 클레임(PVC)을 삭제하려면 <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">구성 파일을</a> 참조하세요.</li>
 </ul>
 </div>
 <h2 id="Uninstall-Milvus-Operator" class="common-anchor-header">Milvus 운영자 제거<button data-href="#Uninstall-Milvus-Operator" class="anchor-icon" translate="no">

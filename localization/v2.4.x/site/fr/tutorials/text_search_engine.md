@@ -1,7 +1,7 @@
 ---
 id: text_search_engine.md
 summary: Créez un moteur de recherche textuel avec Milvus.
-title: Moteur de recherche textuelle
+title: Moteur de recherche de texte
 ---
 <h1 id="Text-Search-Engine" class="common-anchor-header">Moteur de recherche de texte<button data-href="#Text-Search-Engine" class="anchor-icon" translate="no">
       <svg translate="no"

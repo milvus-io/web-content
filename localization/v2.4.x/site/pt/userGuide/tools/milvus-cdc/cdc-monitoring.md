@@ -4,7 +4,7 @@ order: 4
 summary: >-
   O Milvus-CDC fornece capacidades de monitorização abrangentes através de
   painéis de controlo Grafana.
-title: Controlo
+title: Monitorização
 ---
 <h1 id="Monitoring" class="common-anchor-header">Monitorização<button data-href="#Monitoring" class="anchor-icon" translate="no">
       <svg translate="no"

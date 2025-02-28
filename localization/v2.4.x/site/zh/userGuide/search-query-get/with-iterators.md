@@ -355,7 +355,7 @@ System.out.println(results.size());
     </tr>
     <tr>
       <td><code translate="no">param</code></td>
-      <td>该操作符特有的参数设置。<br/><ul><li><code translate="no">metric_type</code>:应用于此操作的度量类型。应与上面指定的向量场索引时使用的类型相同。可能的值有<strong>L2</strong>、<strong>IP</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。</li><li><code translate="no">params</code>:附加参数。详情请参阅<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search_iterator.md">search_iterator()</a>。</li></ul></td>
+      <td>该操作符特有的参数设置。<br/><ul><li><code translate="no">metric_type</code>:应用于此操作的度量类型。该类型应与上面指定的向量场索引时使用的类型相同。可能的值有<strong>L2</strong>、<strong>IP</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。</li><li><code translate="no">params</code>:附加参数。详情请参阅<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search_iterator.md">search_iterator()</a>。</li></ul></td>
     </tr>
     <tr>
       <td><code translate="no">output_fields</code></td>
@@ -502,7 +502,7 @@ System.out.println(results.subList(<span class="hljs-number">0</span>, <span cla
     </tr>
     <tr>
       <td><code translate="no">expr</code></td>
-      <td>用于过滤匹配实体的标量过滤条件。<br/>该值默认为 "<strong>无"</strong>，表示忽略标量过滤。要创建标量过滤条件，请参阅<a href="https://milvus.io/docs/boolean.md">布尔表达式规则</a>。</td>
+      <td>用于过滤匹配实体的标量过滤条件。<br/>默认值为 "<strong>无"</strong>，表示忽略标量过滤。要创建标量过滤条件，请参阅<a href="https://milvus.io/docs/boolean.md">布尔表达式规则</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">output_fields</code></td>

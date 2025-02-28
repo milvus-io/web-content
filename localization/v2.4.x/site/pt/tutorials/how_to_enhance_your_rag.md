@@ -273,9 +273,9 @@ title: Como melhorar o desempenho do seu pipeline RAG
     <span></span>
   </span>
 </p>
-<p>O agente pode assumir várias formas, incluindo um LLM, um pequeno modelo de classificação ou mesmo um conjunto de regras.</p>
+<p>O agente pode assumir várias formas, incluindo uma LLM, um pequeno modelo de classificação ou mesmo um conjunto de regras.</p>
 <p>Ao encaminhar as consultas com base na intenção do utilizador, é possível redirecionar uma parte das consultas, o que leva a um aumento significativo do tempo de resposta e a uma redução notável do ruído desnecessário.</p>
-<p>Podemos alargar a técnica de encaminhamento de consultas a outros processos do sistema RAG, como determinar quando utilizar ferramentas como pesquisas na Web, efetuar subconsultas ou pesquisar imagens. Esta abordagem garante que cada etapa do sistema RAG é optimizada com base nos requisitos específicos da consulta, conduzindo a uma recuperação de informações mais eficiente e precisa.</p>
+<p>Podemos alargar a técnica de encaminhamento de consultas a outros processos do sistema RAG, como determinar quando utilizar ferramentas como pesquisas na Web, efetuar subconsultas ou procurar imagens. Esta abordagem garante que cada passo do sistema RAG é optimizado com base nos requisitos específicos da consulta, conduzindo a uma recuperação de informação mais eficiente e precisa.</p>
 <h2 id="Summary" class="common-anchor-header">Resumo<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

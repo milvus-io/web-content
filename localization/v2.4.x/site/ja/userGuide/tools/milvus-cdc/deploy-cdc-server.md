@@ -74,7 +74,7 @@ title: CDCサーバのデプロイ
 <li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>:Milvus-CDCサーバのMySQLデータベースの接続アドレス。<code translate="no">storeType</code> が<code translate="no">mysql</code> に設定されている場合は必須。</p></li>
 <li><p><code translate="no">metaStoreConfig.rootPath</code>:Milvus-CDCメタストアのルートパス。この設定により、複数のCDCサービスが同じetcdまたはMySQLインスタンスを利用しながら、異なるルートパスによる分離を実現するマルチテナントが可能になります。</p></li>
 </ul>
-<p>コンフィギュレーション例</p>
+<p>設定例</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># cdc meta data config</span>
 metaStoreConfig:
   <span class="hljs-comment"># the metastore type, available value: etcd, mysql</span>
@@ -134,7 +134,7 @@ sourceConfig:
 <li><p>Dockerイメージの場合：</p>
 <pre><code translate="no" class="language-bash">bash build_image.sh
 <button class="copy-code-btn"></button></code></pre>
-<p>Docker イメージの場合：コンパイルしたファイルをコンテナ内の<code translate="no">/app/server/configs/cdc.yaml</code> にマウントする。</p></li>
+<p>Docker イメージの場合： コンパイルしたファイルをコンテナ内の<code translate="no">/app/server/configs/cdc.yaml</code> にマウントする。</p></li>
 </ul>
 <h3 id="Start-the-server" class="common-anchor-header">サーバーの起動</h3><ul>
 <li><p>バイナリを使用する</p>

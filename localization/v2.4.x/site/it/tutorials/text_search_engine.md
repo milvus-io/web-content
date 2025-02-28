@@ -1,7 +1,7 @@
 ---
 id: text_search_engine.md
 summary: Costruite un motore di ricerca testuale con Milvus.
-title: Motore di ricerca testuale
+title: Motore di ricerca per testo
 ---
 <h1 id="Text-Search-Engine" class="common-anchor-header">Motore di ricerca per testo<button data-href="#Text-Search-Engine" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -31,7 +31,7 @@ title: Motore di ricerca testuale
 <p><br/></p>
 <p>Una delle principali applicazioni di Milvus nel campo dell'elaborazione del linguaggio naturale (NLP) è il motore di ricerca testuale. È un ottimo strumento che può aiutare gli utenti a trovare le informazioni che stanno cercando. Può anche far emergere informazioni difficili da trovare. I motori di ricerca testuale confrontano le parole chiave o la semantica inserite dagli utenti con un database di testi e restituiscono i risultati che soddisfano determinati criteri.</p>
 <p><br/></p>
-<p>In questa esercitazione imparerete a costruire un motore di ricerca testuale. Questa esercitazione utilizza BERT per convertire i testi in vettori di lunghezza fissa. Milvus viene utilizzato come database vettoriale per la memorizzazione e la ricerca di similarità vettoriale. Si utilizza quindi MySQL per mappare gli ID dei vettori generati da Milvus ai dati del testo.</p>
+<p>In questa esercitazione imparerete a costruire un motore di ricerca testuale. Questa esercitazione utilizza BERT per convertire i testi in vettori di lunghezza fissa. Milvus viene utilizzato come database vettoriale per la memorizzazione e la ricerca di similarità vettoriale. Quindi si utilizza MySQL per mappare gli ID dei vettori generati da Milvus ai dati del testo.</p>
 <p><br/></p>
 <p>
   

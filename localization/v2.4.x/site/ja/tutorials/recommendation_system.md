@@ -1,7 +1,7 @@
 ---
 id: recommendation_system.md
-summary: Milvusでパーソナライズされたレコメンダーシステムを構築する。
-title: レコメンダー・システム
+summary: Milvusでパーソナライズされたレコメンダーシステムを構築。
+title: 推薦システム
 ---
 <h1 id="Recommender-System" class="common-anchor-header">推薦システム<button data-href="#Recommender-System" class="anchor-icon" translate="no">
       <svg translate="no"

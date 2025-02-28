@@ -234,7 +234,7 @@ res = collection.hybrid_search(
 <p>La stratégie de reclassement à utiliser pour la recherche hybride. Valeurs possibles : <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> et <code translate="no">RRFRanker()</code>.</p>
 <p>Pour plus d'informations sur les stratégies de reclassement, voir <a href="/docs/fr/reranking.md">Reranking</a>.</p></li>
 <li><p><code translate="no">limit</code> <em>(int</em>)</p>
-<p>Le nombre maximum de résultats finaux à renvoyer dans la recherche hybride.</p></li>
+<p>Nombre maximal de résultats finaux à renvoyer dans la recherche hybride.</p></li>
 </ul>
 <p>La sortie est similaire à ce qui suit :</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 844, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 876, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]

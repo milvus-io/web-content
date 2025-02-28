@@ -74,7 +74,9 @@ title: Referência do Comando Milvus_CLI
 </thead>
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(Opcional) O nome do uri. A predefinição é &quot;http://127.0.0.1:19530&quot;.</td></tr>
-<tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(Opcional) O apikey do zilliz cloud ou <code translate="no">username:password</code>. A predefinição é None (Nenhum).</td></tr>
+<tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(Opcional) O apikey do zilliz cloud ou <code translate="no">username:password</code>. A predefinição é Nenhum.</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(Opcional) - Define o modo TLS: 0 (Sem encriptação), 1 (Encriptação unidirecional), 2 (Encriptação bidirecional ainda não suportada). A predefinição é 0</td></tr>
+<tr><td style="text-align:left">-cert</td><td style="text-align:left">-cert</td><td style="text-align:left">(Opcional) Caminho para o ficheiro de certificado do cliente. Trabalhar com encriptação unidirecional</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para utilizar o comando.</td></tr>
 </tbody>
 </table>
@@ -502,7 +504,7 @@ Timeout []:
 <p><h3 id="delete-alias">Sintaxe</h3></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> alias -<span class="hljs-title function_">a</span> (text)
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="delete-alias">Opção</h3></p>
+<p><h3 id="delete-alias">Opções</h3></p>
 <table>
 <thead>
 <tr><th style="text-align:left">Opção</th><th style="text-align:left">Nome completo</th><th style="text-align:left">Descrição</th></tr>
@@ -572,7 +574,7 @@ Timeout []:
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-nome da coleção</td><td style="text-align:left">O nome da coleção a que pertencem as entidades a eliminar.</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-partição</td><td style="text-align:left">(Opcional) O nome da partição a ser eliminada.</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para utilizar o comando.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para a utilização do comando.</td></tr>
 </tbody>
 </table>
 <p><h3 id="delete-entities">Exemplo</h3></p>
@@ -735,7 +737,7 @@ Timeout []:
 </thead>
 <tbody>
 <tr><td style="text-align:left">-r</td><td style="text-align:left">-roleName</td><td style="text-align:left">O nome da função da função milvus.</td></tr>
-<tr><td style="text-align:left">-u</td><td style="text-align:left">-nome de utilizador</td><td style="text-align:left">O nome de utilizador do milvus.</td></tr>
+<tr><td style="text-align:left">-u</td><td style="text-align:left">-username</td><td style="text-align:left">O nome de utilizador do milvus.</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para utilizar o comando.</td></tr>
 </tbody>
 </table>
@@ -1432,7 +1434,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
 <tr><th style="text-align:left">Opção</th><th style="text-align:left">Nome completo</th><th style="text-align:left">Descrição</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para utilizar o comando.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta a ajuda para utilizar o comando.</td></tr>
 </tbody>
 </table>
 <h2 id="show-indexprogress" class="common-anchor-header">show index_progress<button data-href="#show-indexprogress" class="anchor-icon" translate="no">

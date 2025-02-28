@@ -90,7 +90,7 @@ title: Требования к установке Milvus с помощью Docke
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>В идеале ваш диск должен достигать более 500 IOPS и менее 10 мс для 99-го процентиля задержки fsync. Более подробные требования можно найти в <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">документации по</a> etcd.</p>
+<p>В идеале ваш диск, предназначенный для etcd, должен достигать более 500 IOPS и менее 10 мс для 99-го процентиля задержки fsync. Более подробные требования можно найти в <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">документации по</a> etcd.</p>
 <h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

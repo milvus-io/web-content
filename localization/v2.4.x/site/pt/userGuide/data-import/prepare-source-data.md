@@ -355,7 +355,7 @@ writer = RemoteBulkWriter(
 <p>Os parâmetros para criar um <strong>RemoteBulkWriter</strong> são praticamente os mesmos que os de um <strong>LocalBulkWriter</strong>, exceto <code translate="no">connect_param</code>. Para mais pormenores sobre as definições dos parâmetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a> e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a> na referência do SDK.</p>
 </div>
 <div class="language-java">
-<p>Os parâmetros para criar um <strong>RemoteBulkWriter</strong> são praticamente os mesmos que os de um <strong>LocalBulkWriter</strong>, exceto <code translate="no">StorageConnectParam</code>. Para obter detalhes sobre as definições dos parâmetros, consulte RemoteBulkWriter e StorageConnectParam na referência do SDK.</p>
+<p>Os parâmetros para criar um <strong>RemoteBulkWriter</strong> são praticamente os mesmos que os de um <strong>LocalBulkWriter</strong>, exceto <code translate="no">StorageConnectParam</code>. Para mais informações sobre as definições dos parâmetros, consulte RemoteBulkWriter e StorageConnectParam na referência do SDK.</p>
 </div>
 <h2 id="Start-writing" class="common-anchor-header">Iniciar a escrita<button data-href="#Start-writing" class="anchor-icon" translate="no">
       <svg translate="no"

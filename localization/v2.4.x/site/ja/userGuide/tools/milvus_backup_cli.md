@@ -1,7 +1,7 @@
 ---
 id: milvus_backup_cli.md
-summary: CLIを使ったMilvus Backupの使い方
-title: コマンドを使ったデータのバックアップとリストア
+summary: MilvusバックアップをCLIで使用する方法を学ぶ
+title: コマンドによるデータのバックアップとリストア
 ---
 <h1 id="Back-up-and-Restore-Data-Using-Commands" class="common-anchor-header">コマンドによるデータのバックアップとリストア<button data-href="#Back-up-and-Restore-Data-Using-Commands" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,7 @@ title: コマンドを使ったデータのバックアップとリストア
         ></path>
       </svg>
     </button></h1><p>Milvus Backupは、Milvusのデータの安全性を確保するために、データのバックアップとリストア機能を提供します。</p>
-<h2 id="Obtain-Milvus-Backup" class="common-anchor-header">Milvus Backupの入手<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
+<h2 id="Obtain-Milvus-Backup" class="common-anchor-header">Milvus Backupの入手方法<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,7 +69,7 @@ go build
 <tr><th>フィールド</th><th>Docker Compose</th><th>Helm / Milvus オペレータ</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">bucketName</code></td><td>バケット</td><td>milvusバケット</td></tr>
+<tr><td><code translate="no">bucketName</code></td><td>バケット</td><td>milvus-bucket</td></tr>
 <tr><td><code translate="no">rootPath</code></td><td>ファイル</td><td>ファイル</td></tr>
 </tbody>
 </table>
@@ -89,11 +89,11 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>空のローカルMilvusインスタンスをデフォルトポートで実行する場合、サンプルのPythonスクリプトを使用してインスタンスにいくつかのデータを生成します。スクリプトは必要に応じて自由に変更してください。</p>
-<p><a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py">スクリプトを</a>入手する。次にスクリプトを実行してデータを生成します。公式のMilvus Python SDKである<a href="https://pypi.org/project/pymilvus/">PyMilvusが</a>インストールされていることを確認してください。</p>
+    </button></h2><p>空のローカルMilvusインスタンスをデフォルトポートで実行する場合、サンプルのPythonスクリプトを使用してインスタンスのデータを生成してください。スクリプトは必要に応じて自由に変更してください。</p>
+<p><a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py">スクリプトを</a>入手してください。次にスクリプトを実行してデータを生成します。Milvusの公式Python SDKである<a href="https://pypi.org/project/pymilvus/">PyMilvusが</a>インストールされていることを確認してください。</p>
 <pre><code translate="no" class="language-shell">python example/prepare_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>このステップはオプションです。これをスキップする場合は、Milvusインスタンスに既にデータがあることを確認してください。</p>
+<p>このステップはオプションです。省略する場合は、Milvusインスタンスに既にデータがあることを確認してください。</p>
 <h2 id="Back-up-data" class="common-anchor-header">データのバックアップ<button data-href="#Back-up-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,7 +109,7 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>通常、Milvusインスタンスに対してMilvus Backupを実行しても、インスタンスの動作に影響はありません。バックアップまたはリストア中もMilvusインスタンスは完全に機能します。</p>
+    </button></h2><p>通常、Milvusインスタンスに対してMilvus Backupを実行しても、インスタンスの動作に影響はありません。バックアップまたはリストア中、Milvusインスタンスは完全に機能します。</p>
 <div class="tab-wrapper"></div>
 <p>以下のコマンドを実行してバックアップを作成します。</p>
 <pre><code translate="no" class="language-shell">./milvus-backup create -n &lt;backup_name&gt;
@@ -126,7 +126,7 @@ mc ls my_minio
 <span class="hljs-comment"># Download a bucket recursively</span>
 mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>バックアップファイルを安全な場所に保存し、将来復元できるようにするか、<a href="https://cloud.zilliz.com">Zillizクラウドに</a>アップロードして、データを含むマネージドベクターデータベースを作成します。詳細は<a href="https://zilliz.com/doc/migrate_from_milvus-2x">MilvusからZilliz Cloudへの移行を</a>ご参照ください。</p>
+<p>バックアップファイルを安全な場所に保存し、将来復元できるようにするか、<a href="https://cloud.zilliz.com">Zillizクラウドに</a>アップロードして、データの管理されたベクターデータベースを作成します。詳しくは、<a href="https://zilliz.com/doc/migrate_from_milvus-2x">MilvusからZilliz Cloudへの移行を</a>ご参照ください。</p>
 <h2 id="Restore-data" class="common-anchor-header">データのリストア<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -168,7 +168,7 @@ mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>リストアが完了したら、以下のようにリストアされたコレクションにインデックスを付けることで、リストアされたデータを検証できます：</p>
+    </button></h2><p>リストアが完了したら、以下のようにリストアされたコレクションにインデックスを付けること で、リストアされたデータを検証できます：</p>
 <pre><code translate="no" class="language-shell">python example/verify_data.py
 <button class="copy-code-btn"></button></code></pre>
 <p>上記のスクリプトは、<code translate="no">-s</code> フラグを付けて<code translate="no">restore</code> コマンドを実行し、サフィックスが<code translate="no">-recover</code> に設定されていることを前提としています。必要に応じて、スクリプトに必要な変更を加えてください。</p>

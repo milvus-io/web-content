@@ -199,6 +199,7 @@ client.createIndex(createIndexReq);
 <p>For custom indexing, valid values are:</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</p></li>
+<li><p><strong>BITMAP</strong>: An index type that stores a bitmap of all unique values in a field. For details, refer to <a href="/docs/bitmap.md">BITMAP</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Only supports numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</p></li>
 </ul></li>

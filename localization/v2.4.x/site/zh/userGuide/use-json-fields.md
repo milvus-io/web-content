@@ -33,7 +33,7 @@ title: 使用 JSON 字段
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSON 是 Javascript Object Notation 的缩写，是一种基于文本的轻量级简单数据格式。JSON 中的数据采用键值对结构，其中每个键都是一个字符串，可映射到数字、字符串、布尔、列表或数组的值。使用 Milvus 群集，可以将字典作为字段值存储在 Collections 中。</p>
+    </button></h2><p>JSON 是 Javascript Object Notation 的缩写，是一种基于文本的轻量级简单数据格式。JSON 中的数据采用键值对结构，其中每个键都是一个字符串，可映射到数字、字符串、布尔、列表或数组的值。利用 Milvus 群集，可以将字典作为字段值存储在 Collections 中。</p>
 <p>例如，以下代码会随机生成键值对，每个键值对都包含一个键值为<strong>颜色</strong>的 JSON 字段。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -156,7 +156,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 }
 <button class="copy-code-btn"></button></code></pre>
 <div class="admonition note">
-<p><b>注释</b></p>
+<p><b>注意事项</b></p>
 <ul>
 <li><p>确保列表或数组中的所有值都是相同的数据类型。</p></li>
 <li><p>JSON 字段值中的任何嵌套字典都将被视为字符串。</p></li>
@@ -187,7 +187,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 <p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>和 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md"><code translate="no">getLoadState()</code></a>在 SDK 参考资料中。</p>
 </div>
 <div class="language-javascript">
-<p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>SDK 参考资料中的参数。</p>
+<p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>和</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -527,7 +527,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦添加了所有数据，您就可以使用 JSON 字段中的键进行搜索和查询，方式与使用标准标量字段相同。</p>
+    </button></h2><p>一旦添加了所有数据，就可以使用 JSON 字段中的键进行搜索和查询，方式与标准标量字段相同。</p>
 <div class="language-python">
 <p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a>有关参数的更多信息，请参阅 SDK 参考资料中的</p>
 </div>
@@ -711,7 +711,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 为 JSON 字段中的标量过滤提供了一组高级过滤器。这些过滤器是<code translate="no">JSON_CONTAINS</code> 、<code translate="no">JSON_CONTAINS_ALL</code> 和<code translate="no">JSON_CONTAINS_ANY</code> 。</p>
+    </button></h2><p>Milvus 提供一组高级过滤器，用于在 JSON 字段中进行标量过滤。这些过滤器是<code translate="no">JSON_CONTAINS</code>,<code translate="no">JSON_CONTAINS_ALL</code>, 和<code translate="no">JSON_CONTAINS_ANY</code> 。</p>
 <ul>
 <li><p>过滤以<code translate="no">[&quot;blue&quot;, &quot;brown&quot;, &quot;grey&quot;]</code> 作为参考颜色集的所有实体。</p>
 <p><div class="multipleCode">
@@ -949,7 +949,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>过滤协调器为<code translate="no">[4, 5]</code> 的实体。</p>
+<li><p>过滤具有<code translate="no">[4, 5]</code> 协调器的实体。</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.query(
@@ -1374,11 +1374,11 @@ searchResults = searchResp.getSearchResults();
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在处理 JSON 字段时，您可以使用 JSON 字段作为过滤器，也可以使用它的某些特定键。</p>
+    </button></h2><p>在处理 JSON 字段时，可以将 JSON 字段用作过滤器，也可以使用其中的某些特定键。</p>
 <div class="admonition note">
-<p><b>注释</b></p>
+<p><b>注意</b></p>
 <ul>
-<li>Milvus 将字符串值原封不动地存储在 JSON 字段中，而不执行语义转义或转换。 </li>
+<li>Milvus 将字符串值原样保存在 JSON 字段中，而不执行语义转义或转换。 </li>
 </ul>
 <p>例如，<code translate="no">'a"b'</code> 、<code translate="no">"a'b"</code> 、<code translate="no">'a\\\\'b'</code> 和<code translate="no">"a\\\\"b"</code> 将按原样保存，而<code translate="no">'a'b'</code> 和<code translate="no">"a"b"</code> 将被视为无效值。</p>
 <ul>
@@ -1421,14 +1421,14 @@ json_contains(x, [<span class="hljs-number">3</span>,<span class="hljs-number">2
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 <li><p><code translate="no">json_contains_all(identifier, jsonExpr)</code></p>
-<p>此操作符可筛选标识符包含 JSON 表达式所有成员的实体。</p>
-<p>示例 3<code translate="no">{&quot;x&quot;: [1,2,3,4,5,7,8]}</code></p>
+<p>该操作符可过滤标识符包含 JSON 表达式所有成员的实体。</p>
+<p>示例<code translate="no">{&quot;x&quot;: [1,2,3,4,5,7,8]}</code></p>
 <pre><code translate="no" class="language-python">json_contains_all(x, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>]) <span class="hljs-comment"># =&gt; True (x contains 1, 2, and 8.)</span>
 json_contains_all(x, [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]) <span class="hljs-comment"># =&gt; False (x does not has a member 6.)</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><code translate="no">json_contains_any(identifier, jsonExpr)</code></p>
-<p>此操作符可筛选标识符包含 JSON 表达式任意成员的实体。</p>
-<p>示例 1： 示例 2： 此操作符可筛选标识符包含所有 JSON 表达式成员的实体：<code translate="no">{&quot;x&quot;: [1,2,3,4,5,7,8]}</code></p>
+<p>此操作符可过滤标识符包含 JSON 表达式中任何成员的实体。</p>
+<p>示例<code translate="no">{&quot;x&quot;: [1,2,3,4,5,7,8]}</code></p>
 <pre><code translate="no" class="language-python">json_contains_any(x, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>]) <span class="hljs-comment"># =&gt; True (x contains 1, 2, and 8.)</span>
 json_contains_any(x, [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]) <span class="hljs-comment"># =&gt; True (x contains 4 and 5.)</span>
 json_contains_any(x, [<span class="hljs-number">6</span>,<span class="hljs-number">9</span>]) <span class="hljs-comment"># =&gt; False (x contains none of 6 and 9.)</span>

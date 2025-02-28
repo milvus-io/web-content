@@ -151,7 +151,7 @@ milvus-<span class="hljs-keyword">operator</span><span class="hljs-number">-5f</
     </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1.部署 Milvus 集群</h3><p>一旦 Milvus Operator pod 運行，您就可以按以下方式部署 Milvus 叢集。</p>
 <pre><code translate="no" class="language-shell">$ kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面的指令使用預設的設定，將 Milvus 叢集的元件和相依性分別部署在不同的 Pod 中。若要自訂這些設定，建議您使用<a href="https://milvus.io/tools/sizing">Milvus 大小</a>調整<a href="https://milvus.io/tools/sizing">工具</a>，根據實際資料大小調整配置，然後下載相對應的 YAML 檔案。要瞭解有關配置參數的更多資訊，請參閱<a href="https://milvus.io/docs/system_configuration.md">Milvus 系統配置清單</a>。</p>
+<p>上面的指令使用預設的設定，將 Milvus 叢集的元件和相依性分別部署在不同的 Pod 中。若要自訂這些設定，建議您使用<a href="https://milvus.io/tools/sizing">Milvus 大小</a>調整<a href="https://milvus.io/tools/sizing">工具</a>，根據實際資料大小調整設定，然後下載相對應的 YAML 檔案。要瞭解有關配置參數的更多資訊，請參閱<a href="https://milvus.io/docs/system_configuration.md">Milvus 系統配置清單</a>。</p>
 <div class="alert note">
 <ul>
 <li>版本名稱只能包含字母、數字和破折號。發行版名稱中不允許點。</li>
@@ -282,10 +282,10 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <div class="alert note">
 <ul>
 <li>當您使用預設設定刪除 Milvus 叢集時，etcd、Pulsar 和 MinIO 等相依性不會被刪除。因此，下次安裝相同的 Milvus 叢集實例時，這些依賴將再次被使用。</li>
-<li>若要連同 Milvus 叢集一起刪除依賴項目和私有虛擬雲 (PVC)，請參閱<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">組態檔案</a>。</li>
+<li>若要連同 Milvus 叢集一起刪除依賴項目和持久性磁碟區聲明 (PVC)，請參閱<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">設定檔</a>。</li>
 </ul>
 </div>
-<h2 id="Uninstall-Milvus-Operator" class="common-anchor-header">解除安裝 Milvus 操作系統<button data-href="#Uninstall-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Uninstall-Milvus-Operator" class="common-anchor-header">解除安裝 Milvus 操作員<button data-href="#Uninstall-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -300,7 +300,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>解除安裝 Milvus Operator 也有兩種方式。</p>
+    </button></h2><p>卸載 Milvus Operator 也有兩種方式。</p>
 <ul>
 <li><a href="#Uninstall-with-Helm">使用 Helm 卸載</a></li>
 <li><a href="#Uninstall-with-kubectl">使用 kubectl 卸載</a></li>

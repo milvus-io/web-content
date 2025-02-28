@@ -23,7 +23,7 @@ title: 单向量搜索
 <p>根据 Collections 中向量场的数量，Milvus 允许您进行两种类型的搜索：</p>
 <ul>
 <li><strong>单向量搜索</strong>：如果您的 Collections 只有一个向量场，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a>方法来查找最相似的实体。该方法会将您的查询向量与 Collections 中的现有向量进行比较，并返回最匹配的 ID 以及它们之间的距离。作为选项，它还可以返回结果的向量值和元数据。</li>
-<li><strong>混合搜索</strong>：对于有两个或更多向量字段的 Collections，可使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a>方法。该方法会执行多个近似近邻（ANN）搜索请求，并在重新排序后将结果合并以返回最相关的匹配结果。</li>
+<li><strong>混合搜索</strong>：对于有两个或更多向量字段的 Collections，可使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a>方法。该方法会执行多个近似近邻（ANN）搜索请求，并在重新排序后将结果组合起来，返回最相关的匹配结果。</li>
 </ul>
 <p>本指南主要介绍如何在 Milvus 中执行单向量搜索。有关混合搜索的详细信息，请参阅<a href="https://milvus.io/docs/multi-vector-search.md">混合搜索</a>。</p>
 <h2 id="Overview" class="common-anchor-header">搜索概述<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -634,7 +634,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <p>输出结果会显示与您的查询向量最接近的前 5 个邻居，包括它们的唯一 ID 和计算出的距离。</p>
 <h3 id="Bulk-vector-search" class="common-anchor-header">批量向量搜索</h3><p>批量向量搜索扩展了<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">单向量搜索</a>的概念，允许在单个请求中搜索多个查询向量。这种类型的搜索非常适合需要为一组查询向量查找相似向量的场景，大大减少了所需的时间和计算资源。</p>
-<p>在批量向量搜索中，您可以在<code translate="no">data</code> 字段中包含多个查询向量。系统会并行处理这些向量，为每个查询向量返回一个单独的结果集，每个结果集包含在 Collections 中找到的最接近的匹配结果。</p>
+<p>在批量向量搜索中，您可以在<code translate="no">data</code> 字段中包含多个查询向量。系统会并行处理这些向量，为每个查询向量返回一个单独的结果集，每个结果集都包含在 Collections 中找到的最接近的匹配结果。</p>
 <p>下面是一个从两个查询向量中搜索最相似实体的两个不同集合的示例：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -1354,7 +1354,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>过滤搜索将标量过滤器应用到向量搜索中，让你可以根据特定条件完善搜索结果。有关过滤表达式的更多信息，请参阅<a href="https://milvus.io/docs/boolean.md">布尔表达式规则</a>和<a href="https://milvus.io/docs/get-and-scalar-query.md">获取与标量查询</a>中的示例。</p>
+    </button></h2><p>过滤搜索将标量过滤器应用到向量搜索中，允许你根据特定条件对搜索结果进行细化。有关过滤表达式的更多信息，请参阅<a href="https://milvus.io/docs/boolean.md">布尔表达式规则</a>和<a href="https://milvus.io/docs/get-and-scalar-query.md">获取与标量查询</a>中的示例。</p>
 <h3 id="Use-the-like-operator" class="common-anchor-header">使用<code translate="no">like</code> 操作符</h3><p><code translate="no">like</code> 操作符通过评估包括前缀、后缀和后缀在内的模式来增强字符串搜索：</p>
 <ul>
 <li><strong>前缀匹配</strong>：要查找以特定前缀开头的值，请使用语法<code translate="no">'like &quot;prefix%&quot;'</code> 。</li>

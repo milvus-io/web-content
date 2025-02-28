@@ -91,7 +91,7 @@ title: 使用 GPU 建立索引
 <li><p><strong>IVF_PQ</strong>：提供更高的质量，但构建时间较慢。</p></li>
 <li><p><strong>NN_DESCENT</strong>：提供更快的生成速度，但可能会降低召回率。</p></li>
 </ul></li>
-<li><p><strong>cache_dataset_on_device</strong><em>（字符串</em>，<strong>"true"</strong>|<strong>"false"）</strong>：决定是否在 GPU 内存中缓存原始数据集。将其设置为<strong>"true "</strong>可通过细化搜索结果提高召回率，而将其设置为<strong>"false "</strong>则可节省 GPU 内存。</p></li>
+<li><p><strong>cache_dataset_on_device</strong><em>（字符串</em>，<strong>"true"</strong>|<strong>"false"）</strong>：决定是否在 GPU 内存中缓存原始数据集。将其设置为<strong>"true "</strong>可通过完善搜索结果提高召回率，而将其设置为<strong>"false "</strong>则可节省 GPU 内存。</p></li>
 </ul></li>
 <li><p><strong>GPU_IVF_FLAT</strong>或<strong>GPU_IVF_PQ</strong>索引</p>
 <pre><code translate="no" class="language-python">index_params = {
@@ -205,7 +205,7 @@ collection.search(
 <li><p>对于<strong>GPU_IVF_PQ</strong>和<strong>GPU_CAGRA</strong>，<strong>limit</strong>的最大值为 1024。</p></li>
 <li><p>虽然<strong>GPU_BRUTE_FORCE</strong> 没有设定<strong>限制</strong>，但建议不要超过 4096，以避免潜在的性能问题。</p></li>
 <li><p>目前，GPU 索引不支持 COSINE 距离。如果需要使用 COSINE 距离，应首先对数据进行归一化处理，然后使用内积（IP）距离作为替代。</p></li>
-<li><p>不完全支持为 GPU 索引加载 OOM 保护，过多的数据可能会导致 QueryNode 崩溃。</p></li>
+<li><p>GPU 索引不完全支持加载 OOM 保护，过多的数据可能会导致 QueryNode 崩溃。</p></li>
 <li><p>GPU 索引不支持<a href="https://milvus.io/docs/single-vector-search.md#Range-search">范围</a>搜索和<a href="https://milvus.io/docs/single-vector-search.md#Grouping-searchh">分组搜索</a>等搜索功能。</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">常见问题<button data-href="#FAQ" class="anchor-icon" translate="no">

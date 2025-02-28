@@ -25,7 +25,7 @@ title: 벡터 시각화
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>이 예에서는 <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE를</a> 사용해 Milvus의 임베딩(벡터)을 시각화하는 방법을 보여드리겠습니다.</p>
-<p>t-SNE와 같은 차원 축소 기술은 로컬 구조를 유지하면서 2D 또는 3D 공간에서 복잡한 고차원 데이터를 시각화하는 데 매우 유용합니다. 이를 통해 패턴 인식을 가능하게 하고, 특징 관계에 대한 이해를 높이며, 머신 러닝 모델 결과의 해석을 용이하게 합니다. 또한 클러스터링 결과를 시각적으로 비교하여 알고리즘 평가를 돕고, 비전문가를 대상으로 데이터 표현을 간소화하며, 저차원 표현으로 작업하여 계산 비용을 절감할 수 있습니다. 이러한 애플리케이션을 통해 t-SNE는 데이터 세트에 대한 심층적인 인사이트를 얻을 수 있을 뿐만 아니라 보다 정보에 입각한 의사 결정 프로세스를 지원합니다.</p>
+<p>t-SNE와 같은 차원 축소 기술은 로컬 구조를 유지하면서 2D 또는 3D 공간에서 복잡한 고차원 데이터를 시각화하는 데 매우 유용합니다. 이를 통해 패턴 인식을 가능하게 하고, 특징 관계에 대한 이해를 높이며, 머신 러닝 모델 결과의 해석을 용이하게 합니다. 또한 클러스터링 결과를 시각적으로 비교하여 알고리즘 평가를 돕고, 비전문가를 위한 데이터 프레젠테이션을 간소화하며, 저차원 표현으로 작업하여 계산 비용을 절감할 수 있습니다. 이러한 애플리케이션을 통해 t-SNE는 데이터 세트에 대한 심층적인 인사이트를 얻을 수 있을 뿐만 아니라 보다 정보에 입각한 의사 결정 프로세스를 지원합니다.</p>
 <h2 id="Preparation" class="common-anchor-header">준비<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,11 +64,11 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
         ></path>
       </svg>
     </button></h2><p>Milvus <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">문서 2.4.x의</a> FAQ 페이지를 RAG의 비공개 지식으로 사용하며, 이는 간단한 RAG 파이프라인을 위한 좋은 데이터 소스입니다.</p>
-<p>zip 파일을 다운로드하고 <code translate="no">milvus_docs</code> 폴더에 문서를 압축 해제합니다.</p>
+<p>zip 파일을 다운로드하고 문서를 <code translate="no">milvus_docs</code> 폴더에 압축을 풉니다.</p>
 <pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
 $ unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">milvus_docs/en/faq</code> 폴더에서 모든 마크다운 파일을 로드합니다. 각 문서에 대해 &quot;#&quot;를 사용하여 파일의 내용을 구분하기만 하면 마크다운 파일의 각 주요 부분의 내용을 대략적으로 구분할 수 있습니다.</p>
+<p><code translate="no">milvus_docs/en/faq</code> 폴더에서 모든 마크다운 파일을 로드합니다. 각 문서에 대해 &quot;#&quot;를 사용하여 파일의 내용을 구분하면 마크다운 파일의 각 주요 부분의 내용을 대략적으로 구분할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -150,7 +150,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>지정된 파라미터로 새 컬렉션을 생성합니다.</p>
-<p>필드 정보를 지정하지 않으면 기본 키인 <code translate="no">id</code> 필드와 벡터 데이터를 저장할 <code translate="no">vector</code> 필드가 자동으로 생성됩니다. 예약된 JSON 필드는 스키마에 정의되지 않은 필드와 그 값을 저장하는 데 사용됩니다.</p>
+<p>필드 정보를 지정하지 않으면 기본 키로 <code translate="no">id</code> 필드와 벡터 데이터를 저장할 <code translate="no">vector</code> 필드가 자동으로 생성됩니다. 예약된 JSON 필드는 스키마에 정의되지 않은 필드와 그 값을 저장하는 데 사용됩니다.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
@@ -224,7 +224,7 @@ question = <span class="hljs-string">&quot;How is data stored in Milvus?&quot;</
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>],  <span class="hljs-comment"># Return the text field</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>쿼리의 검색 결과를 살펴보겠습니다.</p>
+<p>쿼리의 검색 결과를 살펴봅시다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 retrieved_lines_with_distances = [

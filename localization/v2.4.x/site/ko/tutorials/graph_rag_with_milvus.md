@@ -20,8 +20,8 @@ title: Milvus를 사용한 그래프 RAG
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>대규모 언어 모델이 광범위하게 적용되면서 응답의 정확성과 관련성을 개선하는 것이 중요해졌습니다. 검색 증강 생성(RAG)은 외부 지식 기반을 통해 모델을 강화하여 더 많은 맥락 정보를 제공하고 환각이나 지식 부족과 같은 문제를 완화합니다. 그러나 단순한 RAG 패러다임에만 의존하는 것은 한계가 있으며, 특히 모델이 정확한 답변을 제공하기 어려운 복잡한 개체 관계와 멀티홉 질문을 다룰 때는 더욱 그렇습니다.</p>
-<p>지식 그래프(KG)를 RAG 시스템에 도입하면 새로운 해결책을 찾을 수 있습니다. KG는 엔티티와 그 관계를 구조화된 방식으로 제시하여 보다 정확한 검색 정보를 제공하고 RAG가 복잡한 질문 답변 작업을 더 잘 처리할 수 있도록 도와줍니다. KG-RAG는 아직 초기 단계에 있으며, KG에서 엔티티와 관계를 효과적으로 검색하는 방법이나 벡터 유사성 검색을 그래프 구조와 통합하는 방법에 대한 합의가 아직 이루어지지 않았습니다.</p>
+<p>대규모 언어 모델이 광범위하게 적용되면서 응답의 정확성과 관련성을 개선하는 것이 중요해졌습니다. 검색 증강 생성(RAG)은 외부 지식 베이스로 모델을 강화하여 더 많은 맥락 정보를 제공하고 환각이나 지식 부족과 같은 문제를 완화합니다. 그러나 단순한 RAG 패러다임에만 의존하는 것은 한계가 있으며, 특히 모델이 정확한 답변을 제공하기 어려운 복잡한 개체 관계와 멀티홉 질문을 다룰 때는 더욱 그렇습니다.</p>
+<p>지식 그래프(KG)를 RAG 시스템에 도입하면 새로운 해결책을 찾을 수 있습니다. KG는 엔티티와 그 관계를 구조화된 방식으로 제시하여 보다 정확한 검색 정보를 제공하고 RAG가 복잡한 질문 답변 작업을 더 잘 처리할 수 있도록 도와줍니다. KG-RAG는 아직 초기 단계에 있으며, KG에서 엔티티와 관계를 효과적으로 검색하는 방법이나 벡터 유사도 검색을 그래프 구조와 통합하는 방법에 대한 합의가 아직 이루어지지 않은 상태입니다.</p>
 <p>이 노트북에서는 이 시나리오의 성능을 크게 향상시킬 수 있는 간단하면서도 강력한 접근 방식을 소개합니다. 이 방법은 다방향 검색 후 재순위를 매기는 단순한 RAG 패러다임이지만 그래프 RAG를 논리적으로 구현하고 멀티홉 질문을 처리하는 데 있어 최첨단 성능을 달성합니다. 어떻게 구현되는지 살펴보겠습니다.</p>
 <p>
   <span class="img-wrapper">
@@ -99,7 +99,7 @@ embedding_model = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">데이터 준비</h3><p>베르누이 군과 오일러의 관계를 소개하는 나노 데이터셋을 예시로 들어 설명하겠습니다. 나노 데이터 세트에는 4개의 구절과 그에 해당하는 삼중 항 세트가 포함되어 있으며, 각 삼중 항에는 주어, 술어, 목적어가 포함됩니다. 실제로는 사용자 지정 말뭉치에서 삼중 항을 추출하는 데 어떤 접근 방식을 사용하든 상관없습니다.</p>
+    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">데이터 준비</h3><p>베르누이 군과 오일러의 관계를 소개하는 나노 데이터셋을 예시로 들어 설명하겠습니다. 나노 데이터 세트에는 4개의 구절과 그에 해당하는 삼중 항 세트가 포함되어 있으며, 각 삼중 항에는 주어, 서술어, 목적어가 포함됩니다. 실제로는 사용자 지정 말뭉치에서 삼중 항을 추출하는 데 어떤 접근 방식을 사용하든 상관없습니다.</p>
 <pre><code translate="no" class="language-python">nano_dataset = [
     {
         <span class="hljs-string">&quot;passage&quot;</span>: <span class="hljs-string">&quot;Jakob Bernoulli (1654–1705): Jakob was one of the earliest members of the Bernoulli family to gain prominence in mathematics. He made significant contributions to calculus, particularly in the development of the theory of probability. He is known for the Bernoulli numbers and the Bernoulli theorem, a precursor to the law of large numbers. He was the older brother of Johann Bernoulli, another influential mathematician, and the two had a complex relationship that involved both collaboration and rivalry.&quot;</span>,
@@ -272,7 +272,7 @@ Inserting: 100%|█████████████████████�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">유사성 검색</h3><p>Milvus의 입력 쿼리를 기반으로 유사한 엔티티 및 관계 상위 K개를 검색합니다.</p>
+    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">유사성 검색</h3><p>Milvus의 입력 쿼리를 기반으로 상위 K개의 유사한 개체 및 관계를 검색합니다.</p>
 <p>엔티티 검색을 수행할 때는 먼저 NER(Named-entity recognition)과 같은 특정 방법을 사용하여 쿼리 텍스트에서 쿼리 엔티티를 추출해야 합니다. 간단하게 하기 위해 여기에서 NER 결과를 준비합니다. 쿼리를 사용자 지정 질문으로 변경하려면 해당 쿼리 NER 목록을 변경해야 합니다. 실제로는 다른 모델이나 접근 방식을 사용하여 쿼리에서 엔티티를 추출할 수 있습니다.</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What contribution did the son of Euler&#x27;s teacher make?&quot;</span>
 
@@ -372,7 +372,7 @@ relation_candidate_texts = [
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p>하위 그래프를 확장하여 후보 관계를 얻었으며, 다음 단계에서는 LLM으로 순위를 다시 매깁니다.</p>
-<h3 id="LLM-reranking" class="common-anchor-header">LLM 재랭크</h3><p>이 단계에서는 LLM의 강력한 자기 주의 메커니즘을 배포하여 후보 관계 집합을 더욱 필터링하고 구체화합니다. 쿼리와 후보 관계 집합을 프롬프트에 통합하는 원샷 프롬프트를 사용하여 쿼리에 대한 답변에 도움이 될 수 있는 잠재적 관계를 선택하도록 LLM에 지시합니다. 일부 쿼리가 복잡할 수 있다는 점을 감안하여 연쇄적 사고 접근 방식을 채택하여 LLM이 응답에 대한 사고 과정을 명확하게 표현할 수 있도록 합니다. 편리한 구문 분석을 위해 LLM의 응답을 json 형식으로 규정하고 있습니다.</p>
+<h3 id="LLM-reranking" class="common-anchor-header">LLM 재랭크</h3><p>이 단계에서는 LLM의 강력한 셀프 어텐션 메커니즘을 배포하여 후보 관계 집합을 더욱 필터링하고 구체화합니다. 쿼리와 후보 관계 집합을 프롬프트에 통합하는 원샷 프롬프트를 사용하여 쿼리에 대한 답변에 도움이 될 수 있는 잠재적 관계를 선택하도록 LLM에 지시합니다. 일부 쿼리가 복잡할 수 있다는 점을 감안하여 연쇄적 사고 접근 방식을 채택하여 LLM이 응답에서 사고 과정을 명확하게 표현할 수 있도록 합니다. 편리한 구문 분석을 위해 LLM의 응답을 json 형식으로 규정하고 있습니다.</p>
 <pre><code translate="no" class="language-python">query_prompt_one_shot_input = <span class="hljs-string">&quot;&quot;&quot;I will provide you with a list of relationship descriptions. Your task is to select 3 relationships that may be useful to answer the given question. Please return a JSON object containing your thought process and a list of the selected relationships in order of their relevance.
 
 Question:
@@ -506,4 +506,4 @@ Answer from naive RAG: I don't know. The retrieved context does not provide info
 
 Answer from our method: The son of Euler's teacher, Daniel Bernoulli, made major contributions to fluid dynamics, probability, and statistics. He is most famous for Bernoulli’s principle, which describes the behavior of fluid flow and is fundamental to the understanding of aerodynamics.
 </code></pre>
-<p>보시다시피, 나이브 RAG에서 검색된 구절은 사실에 근거한 구절을 놓쳐서 오답으로 이어졌습니다. 우리 방식에서 검색된 구절은 정확하며 질문에 대한 정확한 답을 얻는 데 도움이 됩니다.</p>
+<p>보시다시피, 나이브 RAG에서 검색된 구절은 사실에 근거한 구절을 놓쳐서 오답으로 이어졌지만, 우리 방식에서 검색된 구절은 정확하며 질문에 대한 정확한 답을 얻는 데 도움이 됩니다.</p>

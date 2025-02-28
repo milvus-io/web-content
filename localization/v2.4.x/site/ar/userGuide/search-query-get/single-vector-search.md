@@ -1572,7 +1572,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><code translate="no">range_filter</code>: بينما يعيّن <code translate="no">radius</code> الحد الخارجي للبحث، يمكن استخدام <code translate="no">range_filter</code> اختياريًا لتحديد حد داخلي، مما ينشئ نطاق مسافة يجب أن تقع ضمنه المتجهات لتُعتبر مطابقة.</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Conduct a range search</span>
 search_params = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
@@ -1686,7 +1686,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.2593345642089844</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1309&#x27;</span>, color_tag: <span class="hljs-string">&#x27;red_8458&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>ستلاحظ أن جميع الكيانات التي تم إرجاعها لها مسافة تقع في نطاق 0.8 إلى 1.0 من متجه الاستعلام.</p>
+<p>ستلاحظ أن جميع الكيانات التي تم إرجاعها لها مسافة تقع ضمن نطاق 0.8 إلى 1.0 من متجه الاستعلام.</p>
 <p>تختلف إعدادات المعلمات الخاصة بـ <code translate="no">radius</code> و <code translate="no">range_filter</code> باختلاف نوع المقياس المستخدم.</p>
 <table>
 <thead>

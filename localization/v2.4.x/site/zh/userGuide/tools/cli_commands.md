@@ -570,7 +570,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-Collection-名称</td><td style="text-align:left">要删除的实体所属的 Collections 名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">要删除的实体所属的 Collections 名称。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分区</td><td style="text-align:left">(可选）要删除的分区名称。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
@@ -967,7 +967,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">插入数据的 Collections 名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">插入数据的 Collection 名称。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分区</td><td style="text-align:left">(可选）插入数据的分区名称。不通过此分区选项表示选择"_默认 "分区。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>

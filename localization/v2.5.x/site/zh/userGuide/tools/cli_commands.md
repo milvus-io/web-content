@@ -75,7 +75,9 @@ title: Milvus_CLI 命令参考
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(可选）uri 名称。默认为 &quot;http://127.0.0.1:19530&quot;。</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-令牌</td><td style="text-align:left">(可选）Zilliz Cloud Apikey 或<code translate="no">username:password</code> 。默认为 "无"。</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">无</td><td style="text-align:left">显示命令使用帮助。</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode（可选</td><td style="text-align:left">(可选）- 设置 TLS 模式：0（无加密）、1（单向加密）、2（暂不支持双向加密）。默认为 0</td></tr>
+<tr><td style="text-align:left">-证书</td><td style="text-align:left">-证书</td><td style="text-align:left">(可选）客户端证书文件的路径。使用单向加密</td></tr>
+<tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
 </table>
 <p><h3 id="connect">示例</h3></p>
@@ -967,7 +969,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">插入数据的 Collections 名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">插入数据的 Collection 的名称。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分区</td><td style="text-align:left">(可选）插入数据的分区名称。不通过此分区选项表示选择"_默认 "分区。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>

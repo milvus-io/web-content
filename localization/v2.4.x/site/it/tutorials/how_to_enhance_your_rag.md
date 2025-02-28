@@ -274,8 +274,8 @@ title: Come migliorare le prestazioni della pipeline RAG
   </span>
 </p>
 <p>L'agente può assumere varie forme, tra cui un LLM, un piccolo modello di classificazione o anche un insieme di regole.</p>
-<p>L'instradamento delle query in base all'intento dell'utente consente di reindirizzare una parte delle query, con un significativo aumento dei tempi di risposta e una notevole riduzione del rumore inutile.</p>
-<p>Possiamo estendere la tecnica di instradamento delle query ad altri processi all'interno del sistema RAG, come ad esempio determinare quando utilizzare strumenti come le ricerche sul web, effettuare sotto-query o cercare immagini. Questo approccio garantisce che ogni fase del sistema RAG sia ottimizzata in base ai requisiti specifici della query, portando a un recupero delle informazioni più efficiente e accurato.</p>
+<p>L'instradamento delle query in base all'intento dell'utente consente di reindirizzare una parte delle query, ottenendo un significativo aumento dei tempi di risposta e una notevole riduzione del rumore inutile.</p>
+<p>Possiamo estendere la tecnica di instradamento delle query ad altri processi all'interno del sistema RAG, come ad esempio determinare quando utilizzare strumenti come le ricerche sul web, condurre sotto-query o cercare immagini. Questo approccio garantisce che ogni fase del sistema RAG sia ottimizzata in base ai requisiti specifici della query, portando a un recupero delle informazioni più efficiente e accurato.</p>
 <h2 id="Summary" class="common-anchor-header">Sintesi<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -2,7 +2,7 @@
 id: rerankers-bge.md
 order: 2
 summary: >-
-  Milvus prend en charge les modèles de reranker BGE par le biais de la classe
+  Milvus prend en charge les modèles de reranker BGE grâce à la classe
   `BGERerankFunction`. Cette fonctionnalité vous permet d'évaluer efficacement
   la pertinence des paires requête-document.
 title: BGE

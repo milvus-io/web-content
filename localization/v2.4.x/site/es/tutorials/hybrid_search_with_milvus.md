@@ -56,7 +56,7 @@ docs = <span class="hljs-built_in">list</span>(questions)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">What is the strongest Kevlar cord?
 </code></pre>
-<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">Uso del modelo BGE-M3 para la incrustación</h3><p>El modelo BGE-M3 puede incrustar textos como vectores densos y dispersos.</p>
+<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">Utilizar el modelo BGE-M3 para la incrustación</h3><p>El modelo BGE-M3 puede incrustar textos como vectores densos y dispersos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> milvus_model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 ef = BGEM3EmbeddingFunction(use_fp16=<span class="hljs-literal">False</span>, device=<span class="hljs-string">&quot;cpu&quot;</span>)

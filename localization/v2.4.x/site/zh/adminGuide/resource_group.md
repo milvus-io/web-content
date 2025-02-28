@@ -90,7 +90,7 @@ title: 管理资源组
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>本页面上的所有代码示例都在 PyMilvus 2.4.14 中。运行这些示例之前，请升级您的 PyMilvus 安装。</p>
+<p>本页面上的所有代码示例都在 PyMilvus 2.4.15 中。运行这些示例之前，请升级您的 PyMilvus 安装。</p>
 </div>
 <ol>
 <li><p>创建资源组。</p>
@@ -133,7 +133,7 @@ node_num = <span class="hljs-number">0</span>
 <span class="hljs-comment">#        &lt;num_incoming_node:{}&gt;.  // map[string]int, from collection_name to incoming accessed node num by replica loaded in other rg</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>在资源组之间转移节点。</p>
-<p>您可能会注意到，所描述的资源组还没有任何查询节点。将一些节点从默认资源组转移到你创建的资源组，如下所示： 假设集群的<strong>__default_resource_group</strong>中目前有 1 个查询节点，我们想将一个节点转移到创建的<strong>rg</strong> 中。<code translate="no">update_resource_groups</code> 确保多次配置更改的原子性，因此 Milvus 不会看到任何中间状态。</p>
+<p>您可能会注意到，所描述的资源组还没有任何查询节点。将一些节点从默认资源组转移到你创建的资源组，如下所示： 假设集群的__default_<strong>resource</strong>_group 中目前有 1 个查询节点，我们想将一个节点转移到创建的<strong>rg</strong> 中。<code translate="no">update_resource_groups</code> ，确保多次配置更改的原子性，因此 Milvus 不会看到中间状态。</p>
 <pre><code translate="no" class="language-Python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 expected_num_nodes_in_default = <span class="hljs-number">0</span>
@@ -170,7 +170,7 @@ collection.load(replica_number=<span class="hljs-number">2</span>)
 resource_groups = [<span class="hljs-string">&#x27;rg&#x27;</span>]
 collection.load(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups) 
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，您还可以将一个分区加载到一个资源组中，并将其副本分布到多个资源组中。下面假定已经存在名为<code translate="no">Books</code> 的 Collections，并且它有一个名为<code translate="no">Novels</code> 的分区。</p>
+<p>此外，您还可以将一个分区加载到一个资源组中，并将其副本分布到多个资源组中。下面假设已经存在名为<code translate="no">Books</code> 的 Collections，并且它有一个名为<code translate="no">Novels</code> 的分区。</p>
 <pre><code translate="no" class="language-Python">collection = Collection(<span class="hljs-string">&quot;Books&quot;</span>)
 
 <span class="hljs-comment"># Use the load method of a collection to load one of its partition</span>
@@ -183,7 +183,7 @@ partition.load(replica_number=<span class="hljs-number">2</span>, _resource_grou
 <p>请注意，<code translate="no">_resource_groups</code> 是一个可选参数，如果不指定，Milvus 将把副本加载到默认资源组中的查询节点上。</p>
 <p>要让 Milus 在单独的资源组中加载 Collections 的每个副本，请确保资源组的数量等于副本的数量。</p></li>
 <li><p>在资源组之间传输副本。</p>
-<p>Milvus 使用<a href="/docs/zh/replica.md">副本</a>来实现分布在多个查询节点上的<a href="/docs/zh/glossary.md#Segment">网段</a>之间的负载平衡。您可以按以下方式将某个 Collection 的某些副本从一个资源组转移到另一个资源组：</p>
+<p>Milvus 使用<a href="/docs/zh/replica.md">副本</a>来实现分布在多个查询节点上的<a href="/docs/zh/glossary.md#Segment">网段</a>之间的负载平衡。您可以按以下方法将某个 Collection 的某些副本从一个资源组转移到另一个资源组：</p>
 <pre><code translate="no" class="language-Python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>

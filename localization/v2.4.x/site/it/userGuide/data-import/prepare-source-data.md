@@ -4,7 +4,7 @@ order: 0
 title: Preparare i dati di origine
 summary: >-
   In questa pagina si parla di un aspetto da tenere in considerazione prima di
-  iniziare a inserire dati in blocco nella propria raccolta.
+  iniziare a inserire i dati in blocco nella propria raccolta.
 ---
 <h1 id="Prepare-Source-Data" class="common-anchor-header">Preparare i dati di origine<button data-href="#Prepare-Source-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -265,7 +265,7 @@ writer = LocalBulkWriter(
 <p>Per informazioni dettagliate sulle impostazioni dei parametri, consultare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">LocalBulkWriter</a> nel riferimento dell'SDK.</p>
 </div>
 <div class="language-java">
-<p>Quando si crea un <strong>LocalBulkWriter</strong>, occorre:</p>
+<p>Quando si crea un <strong>LocalBulkWriter</strong>, si deve:</p>
 <ul>
 <li>Fare riferimento allo schema creato in <code translate="no">CollectionSchema()</code>.</li>
 <li>Impostare la directory di output in <code translate="no">withLocalPath()</code>.</li>

@@ -158,7 +158,7 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
     }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>Depois de ter definido os campos, configure os parâmetros do índice.</p>
+<p>Depois de ter definido os campos, configure os parâmetros de índice.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#javascript">Java Node.js</a></div>
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params()
@@ -209,7 +209,7 @@ indexParams.<span class="hljs-keyword">add</span>(indexParamForVectorField);
 <button class="copy-code-btn"></button></code></pre>
 <p>Por fim, pode criar uma coleção.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#javascript">Java Node.js</a></div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
     schema=schema,

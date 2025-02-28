@@ -91,10 +91,4 @@ title: تثبيت Milvus_CLI
 </ol>
 <pre><code translate="no" class="language-shell">python -m pip install --editable .
 <button class="copy-code-btn"></button></code></pre>
-<p>وبدلاً من ذلك، يمكنك تثبيت Milvus_CLI من ملف tarball مضغوط (<code translate="no">.tar.gz</code> ). قم بتنزيل ملف <a href="https://github.com/zilliztech/milvus_cli/releases">tarball</a> وتشغيل <code translate="no">python -m pip install milvus_cli-&lt;version&gt;.tar.gz</code>.</p>
-<h3 id="Install-from-an-exe-file" class="common-anchor-header">التثبيت من ملف .exe</h3><div class="alert note"> تنطبق طريقة التثبيت هذه على نظام ويندوز فقط. </div>
-<p>قم بتنزيل ملف .exe من <a href="https://github.com/zilliztech/milvus_cli/releases">GitHub</a> وقم بتشغيله لتثبيت Milvus_CLI. في حالة نجاحه، يظهر <code translate="no">milvus_cli-&lt;version&gt;.exe</code> كما هو موضح في الشكل التالي.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus_cli_exe.png" alt="Milvus_CLI" class="doc-image" id="milvus_cli" />
-   </span> <span class="img-wrapper"> <span>Milvus_CLI</span> </span></p>
+<p>وبدلاً من ذلك، يمكنك تثبيت Milvus_CLI من ملف tarball مضغوط (<code translate="no">.tar.gz</code> ). قم بتنزيل <a href="https://github.com/zilliztech/milvus_cli/releases">كرة</a> القطران وتشغيل <code translate="no">python -m pip install milvus_cli-&lt;version&gt;.tar.gz</code>.</p>

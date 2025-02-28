@@ -1,20 +1,19 @@
 ---
 id: home.md
 ---
-
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
-欢迎访问 Milvus 文档！</h1></p>
+欢迎来到 Milvus 文档！</h1></p>
 <p><h2 class="sub-title">
-在这里，你将了解 Milvus 是什么，以及如何安装、使用和部署 Milvus 以根据你的业务需求构建应用程序。</h2></p>
+在这里，您将了解到什么是 Milvus，以及如何安装、使用和部署 Milvus 以根据您的业务需求构建应用程序。</h2></p>
 </div>
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">免费试用托管的 Milvus！</h2>
-    <p class="promotion-desc">免费试用 Zilliz Cloud！体验Milvus的最简单方式！</p>
+    <p class="promotion-desc">免费试用Zilliz Cloud！体验Milvus的最简单方式！</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud 中国</a></div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud</a>Zilliz Cloud 中国  </div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">开始使用<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -35,7 +34,7 @@ id: home.md
 <div class="start_card_container">
   
    <a href="/docs/zh/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/zh/install_standalone-docker.md"> <p class="link-btn">安装Milvus</p> </a><p>了解如何使用Docker Compose或Kubernetes安装Milvus。</p>
+   </a> <a href="/docs/zh/install_standalone-docker.md"> <p class="link-btn">安装 Milvus</p> </a><p>了解如何使用Docker Compose或Kubernetes安装Milvus。</p>
 </div>
 <div class="start_card_container">
   
@@ -68,7 +67,7 @@ id: home.md
 <div class="recomment-item">
   <p>使用</p>
 <ul>
-<li><a href="/docs/zh/manage-collections.md">管理集合</a></li>
+<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
 <li><a href="/docs/zh/insert-update-delete.md">插入、增加和删除</a></li>
 <li><a href="/docs/zh/index-vector-fields.md">索引向量字段</a></li>
 <li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
@@ -115,7 +114,7 @@ id: home.md
     </button></h2><p><em>2024 年 3 月 - Milvus 2.4.0 发布</em></p>
 <ul>
 <li>添加了如何<a href="/docs/zh/multi-vector-search.md">进行混合搜索的</a>指导。</li>
-<li>添加了<a href="/docs/zh/gpu_index.md">GPU 索引</a>的说明。</li>
+<li>已添加<a href="/docs/zh/gpu_index.md">GPU 索引</a>说明。</li>
 <li>添加了如何<a href="/docs/zh/embeddings.md">使用 PyMilvus 嵌入数据的</a>指导。</li>
 <li>添加了<a href="/docs/zh/milvus-cdc-overview.md">Milvus CDC</a> 的说明。</li>
 </ul>

@@ -90,7 +90,7 @@ title: Управление группами ресурсов
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Все примеры кода на этой странице приведены в версии PyMilvus 2.4.14. Перед их выполнением обновите свою установку PyMilvus.</p>
+<p>Все примеры кода на этой странице приведены в версии PyMilvus 2.4.15. Перед их выполнением обновите свою установку PyMilvus.</p>
 </div>
 <ol>
 <li><p>Создайте группу ресурсов.</p>
@@ -133,7 +133,7 @@ node_num = <span class="hljs-number">0</span>
 <span class="hljs-comment">#        &lt;num_incoming_node:{}&gt;.  // map[string]int, from collection_name to incoming accessed node num by replica loaded in other rg</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Передача узлов между группами ресурсов.</p>
-<p>Вы можете заметить, что в описанной группе ресурсов еще нет ни одного узла запроса. Переместите несколько узлов из стандартной группы ресурсов в созданную следующим образом: предположим, что в настоящее время в <strong>__default_resource_group</strong> кластера есть 1 узел запросов, и мы хотим перенести один узел в созданную <strong>rg</strong>.<code translate="no">update_resource_groups</code> обеспечивает атомарность при многократном изменении конфигурации, поэтому никакие промежуточные состояния не будут видны Milvus.</p>
+<p>Вы можете заметить, что в описанной группе ресурсов еще нет ни одного узла запроса. Переместите несколько узлов из стандартной группы ресурсов в создаваемую следующим образом: предположим, что в настоящее время в <strong>__default_resource_group</strong> кластера находится 1 узел запросов, и мы хотим перенести один узел в созданную <strong>rg</strong>.<code translate="no">update_resource_groups</code> обеспечивает атомарность при многократном изменении конфигурации, поэтому никакие промежуточные состояния не будут видны Milvus.</p>
 <pre><code translate="no" class="language-Python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 expected_num_nodes_in_default = <span class="hljs-number">0</span>
@@ -157,7 +157,7 @@ expected_num_nodes_in_rg = <span class="hljs-number">1</span>
 <span class="hljs-comment"># After a while, succeeded in moving 1 node(s) from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Загрузка коллекций и разделов в группу ресурсов.</p>
-<p>Когда в группе ресурсов есть узлы запросов, можно загрузить коллекции в эту группу ресурсов. В следующем фрагменте предполагается, что коллекция с именем <code translate="no">demo</code> уже существует.</p>
+<p>Как только в группе ресурсов появятся узлы запросов, можно загружать коллекции в эту группу ресурсов. В следующем фрагменте предполагается, что коллекция с именем <code translate="no">demo</code> уже существует.</p>
 <pre><code translate="no" class="language-Python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
 
 collection = Collection(<span class="hljs-string">&#x27;demo&#x27;</span>)

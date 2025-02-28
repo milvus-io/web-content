@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは入力されたエンティティをコレクション内のセグメントに保存し、セグメントが一杯になるとそのセグメントを封印します。この場合、追加のエンティティを格納するために新しいセグメントが作成されます。その結果、エンティティはセグメント間で任意に分散される。この分散により、Milvus は複数のセグメントを検索して、与えられたクエリベクトルに最も近いものを見つける必要がある。</p>
+    </button></h2><p>Milvusは入力されたエンティティをコレクション内のセグメントに格納し、セグメントが一杯になるとそのセグメントを封印します。この場合、追加のエンティティを収容するために新しいセグメントが作成されます。その結果、エンティティはセグメント間で任意に分散される。この分散によって、Milvus は複数のセグメントを検索して、与えられたクエリベクトルに最も近いものを見つける必要がある。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
@@ -169,7 +169,7 @@ coll1 = Collection(name=<span class="hljs-string">&quot;clustering_test&quot;</s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>自動クラスタリングコンパクションを有効にしている場合、Milvusは指定された間隔で自動的にコンパクションをトリガします。または、以下のように手動でコンパクションをトリガすることもできます：</p>
+    </button></h2><p>自動クラスタリングコンパクションを有効にしている場合、Milvusは指定された間隔で自動的にコンパクションをトリガします。または、次のように手動でコンパクションをトリガすることもできます：</p>
 <pre><code translate="no" class="language-python">coll1.compact(is_clustering=<span class="hljs-literal">True</span>)
 coll1.get_compaction_state(is_clustering=<span class="hljs-literal">True</span>)
 coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">True</span>)

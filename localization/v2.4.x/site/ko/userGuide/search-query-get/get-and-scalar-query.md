@@ -789,7 +789,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>자세한 내용은 SDK 참조에서 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md"><code translate="no">query()</code></a> 를 참조하세요.</p>
 </div>
 <div class="language-java">
-<p>자세한 내용은 SDK 레퍼런스에서 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/query.md"><code translate="no">query()</code></a> 를 참조하세요.</p>
+<p>자세한 내용은 SDK 참조에서 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/query.md"><code translate="no">query()</code></a> 를 참조하세요.</p>
 </div>
 <div class="language-javascript">
 <p>자세한 내용은 <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/query.md"><code translate="no">query()</code></a> 를 참조하세요.</p>
@@ -1411,7 +1411,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <tr><td><strong>==, !=</strong></td><td>같음, 같지 않음</td></tr>
 <tr><td><strong>&lt;=, &gt;=</strong></td><td>보다 작거나 같음, 보다 크거나 같음</td></tr>
 <tr><td><strong>not</strong></td><td>주어진 조건의 결과를 반전시킵니다.</td></tr>
-<tr><td><strong>like</strong></td><td>와일드카드 연산자를 사용하여 값을 유사한 값과 비교합니다.<br/> 예를 들어, '접두사%'는 '접두사'로 시작하는 문자열과 일치합니다.</td></tr>
+<tr><td><strong>like</strong></td><td>와일드카드 연산자를 사용하여 값을 유사한 값과 비교합니다.<br/> 예를 들어, '접두사 %'는 '접두사'로 시작하는 문자열과 일치합니다.</td></tr>
 <tr><td><strong>in</strong></td><td>표현식이 값 목록의 어떤 값과 일치하는지 테스트합니다.</td></tr>
 </tbody>
 </table>

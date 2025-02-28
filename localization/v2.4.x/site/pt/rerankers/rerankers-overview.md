@@ -4,7 +4,7 @@ order: 1
 summary: >-
   A biblioteca de modelos PyMilvus integra funções de rerank para otimizar a
   ordem dos resultados devolvidos pelas pesquisas iniciais.
-title: Visão geral dos Rerankers
+title: Visão geral dos rerankers
 ---
 <h1 id="Rerankers-Overview" class="common-anchor-header">Visão geral dos rerankers<button data-href="#Rerankers-Overview" class="anchor-icon" translate="no">
       <svg translate="no"

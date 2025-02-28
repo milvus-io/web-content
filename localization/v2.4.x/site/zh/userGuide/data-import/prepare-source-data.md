@@ -47,7 +47,7 @@ summary: 本页讨论了在开始批量将数据插入 Collections 之前应该�
 <li><p><strong>是否启用自动识别</strong></p>
 <p><strong>id</strong>字段作为 Collections 的主字段。要使主字段自动递增，可以在 Schema 中启用<strong>AutoID</strong>。在这种情况下，应从源数据的每一行中排除<strong>id</strong>字段。</p></li>
 <li><p><strong>是否启用动态字段</strong></p>
-<p>如果模式启用了动态字段，目标 Collections 还可以存储其预定义模式中未包含的字段。<strong>$meta</strong>字段是一个预留 JSON 字段，用于以键值对形式保存动态字段及其值。在上图中，字段<strong>dynamic_field_1</strong>和<strong>dynamic_field_2</strong>及其值将作为键值对保存在<strong>$meta</strong>字段中。</p></li>
+<p>如果模式启用了动态字段，目标 Collections 还可以存储其预定义模式中未包含的字段。<strong>$meta</strong>字段是一个保留的 JSON 字段，用于以键值对的形式保存动态字段及其值。在上图中，字段<strong>dynamic_field_1</strong>和<strong>dynamic_field_2</strong>及其值将作为键值对保存在<strong>$meta</strong>字段中。</p></li>
 </ul>
 <p>下面的代码展示了如何为上图所示的 Collections 设置 Schema。</p>
 <div class="language-python">

@@ -41,7 +41,7 @@ title: Executar o Milvus com suporte a GPU usando o Docker Compose
 <li><a href="/docs/pt/prerequisite-gpu.md">Verifique os requisitos de hardware e software</a> antes da instalação.</li>
 </ul>
 <div class="alert note">
-<p>Se encontrar algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema, e iremos fornecer-lhe o suporte necessário.</p>
+<p>Se encontrar algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema e fornecer-lhe-emos o apoio necessário.</p>
 </div>
 <h2 id="Install-Milvus" class="common-anchor-header">Instalar o Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,8 +59,8 @@ title: Executar o Milvus com suporte a GPU usando o Docker Compose
         ></path>
       </svg>
     </button></h2><p>Para instalar o Milvus com suporte a GPU usando o Docker Compose, siga estas etapas.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descarregar e configurar o ficheiro YAML</h3><p>Faça o download <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.4/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salve-o como docker-compose.yml manualmente ou com o seguinte comando.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.4/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descarregar e configurar o ficheiro YAML</h3><p>Faça o download <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.5/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salve-o como docker-compose.yml manualmente ou com o seguinte comando.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.5/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>É necessário fazer algumas alterações nas variáveis de ambiente do serviço autónomo no ficheiro YAML, como se segue:</p>
 <ul>
@@ -155,7 +155,7 @@ $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> 
 </div>
 <p>Para configurar o pool de memória, modifique as definições <code translate="no">initMemSize</code> e <code translate="no">maxMemSize</code> no ficheiro <code translate="no">milvus.yaml</code> da seguinte forma.</p>
 <ol>
-<li><p>Utilize o seguinte comando para copiar <code translate="no">milvus.yaml</code> do contentor Milvus para a sua máquina local. Substitua <code translate="no">&lt;milvus_container_id&gt;</code> pelo seu ID de contentor Milvus atual.</p>
+<li><p>Utilize o seguinte comando para copiar <code translate="no">milvus.yaml</code> do contentor Milvus para a sua máquina local. Substitua <code translate="no">&lt;milvus_container_id&gt;</code> pelo seu ID real do contentor Milvus.</p>
 <pre><code translate="no" class="language-shell">docker <span class="hljs-built_in">cp</span> &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Abra o ficheiro <code translate="no">milvus.yaml</code> copiado com o seu editor de texto preferido. Por exemplo, usando o vim:</p>
@@ -170,7 +170,7 @@ gpu:
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><code translate="no">initMemSize</code>: Initial size of the memory pool. A predefinição é 1024.</li>
-<li><code translate="no">maxMemSize</code>: Tamanho máximo do conjunto de memória. A predefinição é 2048.</li>
+<li><code translate="no">maxMemSize</code>: Tamanho máximo do conjunto de memória. O padrão é 2048.</li>
 </ul></li>
 <li><p>Utilize o seguinte comando para copiar o ficheiro <code translate="no">milvus.yaml</code> modificado de volta para o contentor Milvus. Substitua <code translate="no">&lt;milvus_container_id&gt;</code> pelo seu ID real do contentor Milvus.</p>
 <pre><code translate="no" class="language-shell">docker <span class="hljs-built_in">cp</span> milvus.yaml &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml

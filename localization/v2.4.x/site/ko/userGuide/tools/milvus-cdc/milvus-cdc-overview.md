@@ -108,7 +108,7 @@ title: CDC 개요
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>증분 데이터 동기화</strong>: 현재 Milvus-CDC는 증분 데이터만 동기화하도록 설계되어 있습니다. 비즈니스에 전체 데이터 백업이 필요한 경우 <a href="https://milvus.io/community">당사에 문의하여</a> 도움을 받으시기 바랍니다.</p></li>
+<li><p><strong>증분 데이터 동기화</strong>: 현재 Milvus-CDC는 증분 데이터만 동기화하도록 설계되어 있습니다. 비즈니스에 전체 데이터 백업이 필요한 경우 <a href="https://milvus.io/community">당사에</a> 문의하여 도움을 받으시기 바랍니다.</p></li>
 <li><p><strong>동기화 범위</strong>: 현재 Milvus-CDC는 클러스터 수준에서 데이터를 동기화할 수 있습니다. 향후 릴리스에서 컬렉션 수준의 데이터 동기화 지원을 추가하기 위해 노력하고 있습니다.</p></li>
 <li><p><strong>지원되는 API 요청</strong>: Milvus-CDC는 현재 다음과 같은 API 요청을 지원합니다. 향후 릴리스에서 추가 요청에 대한 지원을 확대할 계획입니다:</p>
 <ul>

@@ -75,6 +75,8 @@ title: Справочник команд Milvus_CLI
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(Необязательно) Имя uri. По умолчанию - &quot;http://127.0.0.1:19530&quot;.</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(Необязательно) apikey облака zilliz или <code translate="no">username:password</code>. По умолчанию - None.</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(Необязательно) - Установка режима TLS: 0 (Без шифрования), 1 (Одностороннее шифрование), 2 (Двустороннее шифрование пока не поддерживается). По умолчанию 0</td></tr>
+<tr><td style="text-align:left">-cert</td><td style="text-align:left">-cert</td><td style="text-align:left">(Необязательно) Путь к файлу сертификата клиента. Работа с односторонним шифрованием</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Отображает справку по использованию команды.</td></tr>
 </tbody>
 </table>

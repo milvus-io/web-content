@@ -185,7 +185,7 @@ dataset = <span class="hljs-title function_">load_dataset</span>(<span class="hl
     res = openai_client.embeddings.create(<span class="hljs-built_in">input</span>=texts, model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
     <span class="hljs-keyword">return</span> [res_data.embedding <span class="hljs-keyword">for</span> res_data <span class="hljs-keyword">in</span> res.data]
 <button class="copy-code-btn"></button></code></pre>
-<p>Il prossimo passo è l'inserimento vero e proprio. Si iterano tutte le voci e si creano dei lotti che vengono inseriti una volta raggiunta la dimensione del lotto impostata. Al termine del ciclo, inseriamo l'ultimo lotto rimasto, se esiste.</p>
+<p>Il prossimo passo è l'inserimento vero e proprio. Si iterano tutte le voci e si creano dei lotti che vengono inseriti una volta raggiunta la dimensione impostata. Al termine del ciclo, inseriamo l'ultimo lotto rimasto, se esiste.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 <span class="hljs-comment"># batch (data to be inserted) is a list of dictionaries</span>

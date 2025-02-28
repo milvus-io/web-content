@@ -440,7 +440,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>Lors de l'envoi d'une requête <code translate="no">search</code>, vous pouvez fournir une ou plusieurs valeurs vectorielles représentant vos enchâssements de requête et une valeur <code translate="no">limit</code> indiquant le nombre de résultats à renvoyer.</p>
-<p>En fonction de vos données et de votre vecteur d'interrogation, il se peut que vous obteniez moins de <code translate="no">limit</code> résultats. Cela se produit lorsque <code translate="no">limit</code> est plus grand que le nombre de vecteurs correspondant à votre requête.</p>
+<p>En fonction de vos données et de votre vecteur d'interrogation, il se peut que vous obteniez moins de <code translate="no">limit</code> résultats. Cela se produit lorsque <code translate="no">limit</code> est plus grand que le nombre de vecteurs correspondants possibles pour votre requête.</p>
 <h3 id="Single-vector-search" class="common-anchor-header">Recherche à vecteur unique</h3><p>La recherche à vecteur unique est la forme la plus simple des opérations <code translate="no">search</code> dans Milvus, conçue pour trouver les vecteurs les plus similaires à un vecteur d'interrogation donné.</p>
 <p>Pour effectuer une recherche à vecteur unique, indiquez le nom de la collection cible, le vecteur d'interrogation et le nombre de résultats souhaité (<code translate="no">limit</code>). Cette opération renvoie un ensemble de résultats comprenant les vecteurs les plus similaires, leurs identifiants et les distances par rapport au vecteur d'interrogation.</p>
 <p>Voici un exemple de recherche des 5 entités les plus similaires au vecteur d'interrogation :</p>

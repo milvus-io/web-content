@@ -70,7 +70,7 @@ title: إدارة مجموعات الموارد
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>باستثناء الحالات التالية:</p>
 <ul>
-<li>عندما يكون عدد عُقَد الاستعلام في مجموعة Milvus غير كافٍ، أي <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ، ستكون هناك دائمًا مجموعات موارد بدون عدد كافٍ من عُقَد الاستعلام.</li>
+<li>عندما يكون عدد عُقد الاستعلام في مجموعة Milvus غير كافٍ، أي <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ، ستكون هناك دائمًا مجموعات موارد بدون عدد كافٍ من عُقد الاستعلام.</li>
 <li>عندما يكون عدد عُقد الاستعلام في مجموعة Milvus زائدًا، أي <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> ، سيتم دائمًا وضع عُقد الاستعلام الزائدة في <strong> مجموعة الموارد __المجموعة_الافتراضية_الموارد</strong> أولاً.</li>
 </ul>
 <p>وبالطبع، إذا تغير عدد عُقد الاستعلام في المجموعة، سيحاول الميلفوس باستمرار تعديلها لتلبية الشروط النهائية. لذلك، يمكنك أولًا تطبيق تغييرات تكوين مجموعة الموارد ثم إجراء تحجيم QueryNode.</p>
@@ -90,7 +90,7 @@ title: إدارة مجموعات الموارد
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>جميع نماذج التعليمات البرمجية في هذه الصفحة موجودة في PyMilvus 2.4.14. قم بترقية تثبيت PyMilvus قبل تشغيلها.</p>
+<p>جميع نماذج التعليمات البرمجية في هذه الصفحة موجودة في PyMilvus 2.4.15. قم بترقية تثبيت PyMilvus قبل تشغيلها.</p>
 </div>
 <ol>
 <li><p>إنشاء مجموعة موارد.</p>
@@ -212,7 +212,7 @@ num_replicas = <span class="hljs-number">1</span>
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Something went wrong while dropping <span class="hljs-subst">{source}</span>.&quot;</span>)
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>لمزيد من التفاصيل، يُرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
+<p>لمزيد من التفاصيل، يرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
 <h2 id="A-good-practice-to-manage-cluster-scaling" class="common-anchor-header">ممارسة جيدة لإدارة توسيع نطاق المجموعة<button data-href="#A-good-practice-to-manage-cluster-scaling" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -83,12 +83,12 @@ title: متطلبات تثبيت Milvus باستخدام Docker Compose
 <tr><td>بولسار</td><td>2.8.2</td><td></td></tr>
 </tbody>
 </table>
-<h3 id="Additional-disk-requirements" class="common-anchor-header">متطلبات القرص الإضافية</h3><p>أداء القرص أمر بالغ الأهمية لـ etcd. يوصى بشدة باستخدام أقراص NVMe SSD المحلية. قد تتسبب الاستجابة الأبطأ للقرص في إجراء انتخابات متكررة للمجموعة والتي ستؤدي في النهاية إلى تدهور خدمة إلخd.</p>
+<h3 id="Additional-disk-requirements" class="common-anchor-header">متطلبات القرص الإضافية</h3><p>أداء القرص أمر بالغ الأهمية لـ etcd. يوصى بشدة استخدام أقراص NVMe SSD المحلية. قد تتسبب الاستجابة الأبطأ للقرص في إجراء انتخابات متكررة للمجموعة مما سيؤدي في النهاية إلى تدهور خدمة إلخd.</p>
 <p>لاختبار ما إذا كان قرصك مؤهلاً، استخدم <a href="https://github.com/axboe/fio">fio</a>.</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>من الناحية المثالية، يجب أن يصل القرص الخاص بك إلى أكثر من 500 IOPS وأقل من 10 مللي ثانية لنسبة 99% من زمن انتقال المزامنة. اقرأ <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">مستندات</a> etcd لمزيد من المتطلبات التفصيلية.</p>
+<p>من الناحية المثالية، يجب أن يصل قرصك المخصص لـ etcd إلى أكثر من 500 IOPS وأقل من 10 مللي ثانية لنسبة 99% من زمن استجابة المزامنة. اقرأ <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">مستندات</a> etcd لمزيد من المتطلبات التفصيلية.</p>
 <h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -92,9 +92,3 @@ title: 安装 Milvus_CLI
 <pre><code translate="no" class="language-shell">python -m pip install --editable .
 <button class="copy-code-btn"></button></code></pre>
 <p>或者，你也可以从压缩包（<code translate="no">.tar.gz</code> 文件）中安装 Milvus_CLI。下载<a href="https://github.com/zilliztech/milvus_cli/releases">压缩包</a>并运行<code translate="no">python -m pip install milvus_cli-&lt;version&gt;.tar.gz</code> 。</p>
-<h3 id="Install-from-an-exe-file" class="common-anchor-header">从 .exe 文件安装</h3><div class="alert note">此安装方法仅适用于 Windows。 </div>
-<p>从<a href="https://github.com/zilliztech/milvus_cli/releases">GitHub</a>下载 .exe 文件并运行，安装 Milvus_CLI。如果安装成功，<code translate="no">milvus_cli-&lt;version&gt;.exe</code> ，如下图所示。</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus_cli_exe.png" alt="Milvus_CLI" class="doc-image" id="milvus_cli" />
-   </span> <span class="img-wrapper"> <span>Milvus_CLI</span> </span></p>

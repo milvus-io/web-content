@@ -38,7 +38,7 @@ title: GPUによるインデックス
     </button></h2><p>MilvusはGPUメモリを割り当てるためにグローバルグラフィックメモリプールを使用します。</p>
 <p><a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus設定</a>ファイルで<code translate="no">initMemSize</code> と<code translate="no">maxMemSize</code> の2つのパラメータをサポートしています。プールサイズは最初は<code translate="no">initMemSize</code> に設定され、この制限を超えると自動的に<code translate="no">maxMemSize</code> に拡張されます。</p>
 <p>デフォルトの<code translate="no">initMemSize</code> は Milvus 起動時に利用可能な GPU メモリの 1/2 で、デフォルトの<code translate="no">maxMemSize</code> は利用可能なすべての GPU メモリと等しくなります。</p>
-<p>Milvus 2.4.1（バージョン2.4.1を含む）までは、Milvusは統一されたGPUメモリプールを使用していました。2.4.1以前のバージョン（バージョン2.4.1を含む）では、両方の値を0に設定することが推奨されていました。</p>
+<p>Milvus 2.4.1（バージョン2.4.1を含む）までは、Milvusは統合GPUメモリプールを使用していました。2.4.1以前のバージョン（バージョン2.4.1を含む）では、両方の値を0に設定することが推奨されていました。</p>
 <pre><code translate="no" class="language-yaml">gpu:
   initMemSize: <span class="hljs-number">0</span> <span class="hljs-comment">#set the initial memory pool size.</span>
   maxMemSize: <span class="hljs-number">0</span> <span class="hljs-comment">#maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. </span>
@@ -67,8 +67,8 @@ title: GPUによるインデックス
 <h3 id="Prepare-index-parameters" class="common-anchor-header">インデックスパラメータの準備</h3><p>GPU インデックスパラメータを設定する際に、<strong>index_type</strong>、<strong>metric_type</strong>、<strong>params</strong> を定義します：</p>
 <ul>
 <li><p><strong>index_type</strong><em>(文字列</em>)：index_type (string): ベクトル探索を加速するために使用するインデックスのタイプ。有効なオプションは<strong>GPU_CAGRA</strong>、<strong>GPU_IVF_FLAT</strong>、<strong>GPU_IVF_PQ</strong>、<strong>GPU_BRUTE_FORCE</strong>です。</p></li>
-<li><p><strong>metric_type</strong><em>（文字列</em>）：ベクトルの類似度を測定するために使用するメトリクスのタイプ。有効なオプションは<strong>IP</strong>と<strong>L2</strong> です。</p></li>
-<li><p><strong>params</strong><em>(dict</em>)：インデックス固有の構築パラメータ。このパラメータに有効なオプションは、インデックスの種類に依存します。</p></li>
+<li><p><strong>metric_type</strong><em>（文字列</em>）：ベクトルの類似度を測定するために使用されるメトリクスのタイプ。有効なオプションは<strong>IP</strong>と<strong>L2</strong> です。</p></li>
+<li><p><strong>params</strong><em>(dict</em>)：インデックス固有の構築パラメータ。このパラメータに有効なオプションはインデックスの種類に依存します。</p></li>
 </ul>
 <p>以下は、異なるインデックス・タイプの構成例です：</p>
 <ul>
@@ -85,7 +85,7 @@ title: GPUによるインデックス
 <p><strong>paramsに</strong>指定できるオプションは以下の通りです：</p>
 <ul>
 <li><p><strong>intermediate_graph_degree</strong><em>(int</em>)：プルーニングの前にグラフの次数を決定することで、リコールと構築時間に影響します。推奨値は<strong>32</strong>または<strong>64</strong>。</p></li>
-<li><p><strong>graph_degree</strong><em>(int</em>)：プルーニング後のグラフ次数を設定することで、検索パフォーマンスとリコールに影響する。通常、<strong>intermediate_graph_degreeの</strong>半分である。この2つの次数の差が大きいと、構築時間が長くなる。この値は、<strong>intermediate_graph_degreeの</strong>値より小さくなければならない。</p></li>
+<li><p><strong>graph_degree</strong><em>(int</em>)：プルーニング後のグラフ次数を設定することで、検索パフォーマンスとリコールに影響する。通常、<strong>intermediate_graph_degreeの</strong>半分である。この2つの次数の差が大きいと、構築時間が長くなる。この値は<strong>intermediate_graph_degree</strong> の値より小さくなければならない。</p></li>
 <li><p><strong>build_algo</strong><em>(文字列</em>)：プルーニング前のグラフ生成アルゴリズムを選択する。可能なオプション：</p>
 <ul>
 <li><p><strong>IVF_PQ</strong>: 高品質を提供するが、構築時間がかかる。</p></li>
@@ -102,7 +102,7 @@ title: GPUによるインデックス
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>params</strong>オプションは<strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a></strong>および<strong><a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong> で使用されるものと同じです。</p></li>
+<p><strong>params</strong>オプションは、<strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a></strong>と<strong><a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong> で使われているものと同じです。</p></li>
 <li><p><strong>GPU_BRUTE_FORCE</strong>インデックス</p>
 <pre><code translate="no" class="language-python">index_params = {
     <span class="hljs-string">&#x27;index_type&#x27;</span>: <span class="hljs-string">&#x27;GPU_BRUTE_FORCE&#x27;</span>,

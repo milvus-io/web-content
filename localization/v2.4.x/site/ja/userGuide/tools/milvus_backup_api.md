@@ -1,7 +1,7 @@
 ---
 id: milvus_backup_api.md
-summary: APIを利用したMilvus Backupの利用方法をご紹介します。
-title: APIを使ったデータのバックアップとリストア
+summary: APIを使ったMilvus Backupの使い方
+title: APIを利用したデータのバックアップとリストア
 ---
 <h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">APIを利用したデータのバックアップとリストア<button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,8 +18,8 @@ title: APIを使ったデータのバックアップとリストア
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus Backupは、お客様のMilvusデータのセキュリティを確保するために、データのバックアップとリストア機能を提供します。</p>
-<h2 id="Obtain-Milvus-Backup" class="common-anchor-header">Milvus Backupの入手<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
+    </button></h1><p>Milvusバックアップは、Milvusデータのセキュリティを確保するために、データのバックアップとリストア機能を提供します。</p>
+<h2 id="Obtain-Milvus-Backup" class="common-anchor-header">Milvus Backupの入手方法<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,7 +69,7 @@ go build
 <tr><th>フィールド</th><th>Docker Compose</th><th>Helm / Milvus オペレータ</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">bucketName</code></td><td>バケット</td><td>milvusバケット</td></tr>
+<tr><td><code translate="no">bucketName</code></td><td>バケット</td><td>milvus-bucket</td></tr>
 <tr><td><code translate="no">rootPath</code></td><td>ファイル</td><td>ファイル</td></tr>
 </tbody>
 </table>
@@ -111,11 +111,11 @@ go build
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>デフォルトのポート19530でリッスンしている空のローカルMilvusインスタンスを実行する場合、インスタンスでいくつかのデータを生成するためにサンプルのPythonスクリプトを使用してください。スクリプトは必要に応じて自由に変更してください。</p>
-<p><a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py">スクリプトを</a>入手する。スクリプトを実行してデータを生成します。公式のMilvus Python SDKである<a href="https://pypi.org/project/pymilvus/">PyMilvusが</a>インストールされていることを確認してください。</p>
+    </button></h2><p>空のローカルMilvusインスタンスをデフォルトのポート19530でリッスンしている場合、サンプルのPythonスクリプトを使用して、インスタンスにいくつかのデータを生成してください。スクリプトは必要に応じて自由に変更してください。</p>
+<p><a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/main/example/prepare_data.py">スクリプトを</a>入手する。スクリプトを実行してデータを生成します。Milvusの公式Python SDKである<a href="https://pypi.org/project/pymilvus/">PyMilvusが</a>インストールされていることを確認してください。</p>
 <pre><code translate="no" class="language-shell">python example/prepare_data.py
 <button class="copy-code-btn"></button></code></pre>
-<p>このステップはオプションです。これをスキップする場合は、Milvusインスタンスに既にデータがあることを確認してください。</p>
+<p>このステップはオプションです。省略する場合は、Milvusインスタンスに既にデータがあることを確認してください。</p>
 <h2 id="Back-up-data" class="common-anchor-header">データのバックアップ<button data-href="#Back-up-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -152,7 +152,7 @@ go build
 <pre><code translate="no" class="language-shell">curl --location --request <span class="hljs-variable constant_">GET</span> <span class="hljs-string">&#x27;http://localhost:8080/api/v1/get_backup?backup_id=&lt;test_backup_id&gt;&amp;backup_name=my_backup&#x27;</span> \
 --header <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコマンドを実行しながら、<code translate="no">backup_id</code> と<code translate="no">backup_name</code> を list API が返すものに変更する。</p>
+<p>上記のコマンドを実行しながら、<code translate="no">backup_id</code> と<code translate="no">backup_name</code> を list API が返すものに変更します。</p>
 <p>これで、バックアップファイルを安全な場所に保存して、将来復元することもできますし、<a href="https://cloud.zilliz.com">Zilliz Cloudに</a>アップロードして、データ入りのマネージドベクターデータベースを作成することもできます。詳しくは<a href="https://zilliz.com/doc/migrate_from_milvus-2x">MilvusからZilliz Cloudへの移行を</a>ご参照ください。</p>
 <h2 id="Restore-data" class="common-anchor-header">データのリストア<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,7 +182,7 @@ go build
     &quot;backup_name&quot;:&quot;my_backup&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">collection_suffix</code> オプションで、作成する新しいコレクションのサフィックスを設定できます。上記のコマンドはMilvusインスタンスに<strong>hello_milvus_recoverという</strong>新しいコレクションを作成します。</p>
+<p><code translate="no">collection_suffix</code> オプションで、作成する新しいコレクションのサフィックスを設定できます。上記のコマンドを実行すると、Milvusインスタンスに<strong>hello_milvus_recoverという</strong>新しいコレクションが作成されます。</p>
 <p>バックアップしたコレクションを名前を変更せずにリストアする場合は、バックアップからリストアする前にコレクションを削除してください。以下のコマンドを実行することで、<a href="#Prepare-data">Prepare dataで</a>生成されたデータをクリーンアップできます。</p>
 <pre><code translate="no" class="language-shell">python example/clean_data.py
 <button class="copy-code-btn"></button></code></pre>

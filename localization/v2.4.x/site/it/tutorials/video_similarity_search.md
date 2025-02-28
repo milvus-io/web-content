@@ -1,7 +1,7 @@
 ---
 id: video_similarity_search.md
 summary: Costruite un sistema di ricerca per similarità video con Milvus.
-title: Ricerca della somiglianza dei video
+title: Ricerca per similarità video
 ---
 <h1 id="Video-Similarity-Search" class="common-anchor-header">Ricerca per similarità video<button data-href="#Video-Similarity-Search" class="anchor-icon" translate="no">
       <svg translate="no"

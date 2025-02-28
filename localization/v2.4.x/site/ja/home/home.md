@@ -5,7 +5,7 @@ id: home.md
 <p><h1 class="title">
 Milvusドキュメントへようこそ！</h1></p>
 <p><h2 class="sub-title">
-ここでは、Milvusとは何か、Milvusをどのようにインストールし、使用し、デプロイし、お客様のビジネスニーズに応じたアプリケーションを構築するかについて学びます。</h2></p>
+ここでは、Milvusとは何か、Milvusをどのようにインストールし、どのように使用し、どのようにデプロイし、どのようにビジネスニーズに合ったアプリケーションを構築するかについて学びます。</h2></p>
 </div>
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
@@ -39,7 +39,7 @@ Milvusドキュメントへようこそ！</h1></p>
 <div class="start_card_container">
   
    <a href="/docs/ja/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/ja/quickstart.md"> <p class="link-btn">クイックスタート</p> </a><p>サンプルコードを用いてMilvusを素早く実行する方法をご紹介します。</p>
+   </a> <a href="/docs/ja/quickstart.md"> <p class="link-btn">クイックスタート</p> </a><p>サンプルコードを使ってMilvusを素早く実行する方法をご紹介します。</p>
 </div>
 <div class="start_card_container">
   
@@ -48,7 +48,7 @@ Milvusドキュメントへようこそ！</h1></p>
   Milvusでベクトル類似検索アプリケーションを構築する方法を学びます。  </p>
 </div>
 </div>
-<h2 id="Recommended-articles" class="common-anchor-header">おすすめ記事<button data-href="#Recommended-articles" class="anchor-icon" translate="no">
+<h2 id="Recommended-articles" class="common-anchor-header">推奨記事<button data-href="#Recommended-articles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +71,7 @@ Milvusドキュメントへようこそ！</h1></p>
 <li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
 <li><a href="/docs/ja/index-vector-fields.md">インデックス・ベクトル・フィールド</a></li>
 <li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
-<li><a href="/docs/ja/get-and-scalar-query.md">取得とスカラークエリー</a></li>
+<li><a href="/docs/ja/get-and-scalar-query.md">取得とスカラークエリ</a></li>
 </ul>
 </div>
 <div class="recomment-item">
@@ -80,7 +80,7 @@ Milvusドキュメントへようこそ！</h1></p>
 <li><a href="/docs/ja/configure-docker.md">Milvusの設定</a></li>
 <li><a href="/docs/ja/deploy_s3.md">依存関係の管理</a></li>
 <li><a href="/docs/ja/eks.md">クラウドへのデプロイ</a></li>
-<li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></li>
+<li><a href="/docs/ja/scaleout.md">Milvusクラスターのスケール</a></li>
 <li><a href="/docs/ja/monitor_overview.md">監視とアラート</a></li>
 </ul>
 </div>

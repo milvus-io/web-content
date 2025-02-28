@@ -114,7 +114,7 @@ collection.insert(entities)
         ></path>
       </svg>
     </button></h2><p>하이브리드 검색은 <code translate="no">hybrid_search()</code> API를 사용하여 한 번의 호출로 여러 개의 ANN 검색 요청을 수행합니다. 각 <code translate="no">AnnSearchRequest</code> 은 특정 벡터 필드에 대한 단일 검색 요청을 나타냅니다.</p>
-<p>다음 예에서는 두 개의 벡터 필드에 대해 개별 유사도 검색을 수행하는 <code translate="no">AnnSearchRequest</code> 인스턴스 두 개를 만듭니다.</p>
+<p>다음 예에서는 두 개의 벡터 필드에 대해 개별 유사도 검색을 수행하는 <code translate="no">AnnSearchRequest</code> 인스턴스 두 개를 생성합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 <span class="hljs-comment"># Create ANN search request 1 for filmVector</span>
@@ -274,7 +274,7 @@ res = collection.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p><strong>하이브리드 검색은 어떤 시나리오에서 권장되나요?</strong></p>
-<p>하이브리드 검색은 높은 정확도가 요구되는 복잡한 상황, 특히 엔티티가 여러 개의 다양한 벡터로 표현될 수 있는 경우에 이상적입니다. 이는 문장과 같은 동일한 데이터가 서로 다른 임베딩 모델을 통해 처리되거나 개인의 이미지, 지문, 음성 지문과 같은 다중 모드 정보가 다양한 벡터 형식으로 변환되는 경우에 적용됩니다. 이러한 벡터에 가중치를 부여하면 그 영향력이 결합되어 기억력을 크게 향상시키고 검색 결과의 효율성을 높일 수 있습니다.</p></li>
+<p>하이브리드 검색은 높은 정확도가 요구되는 복잡한 상황, 특히 엔티티가 여러 개의 다양한 벡터로 표현될 수 있는 경우에 이상적입니다. 이는 문장과 같은 동일한 데이터가 서로 다른 임베딩 모델을 통해 처리되거나 개인의 이미지, 지문, 음성 등 복합적인 정보가 다양한 벡터 형식으로 변환되는 경우에 적용됩니다. 이러한 벡터에 가중치를 부여하면 그 영향력이 결합되어 기억력을 크게 향상시키고 검색 결과의 효율성을 높일 수 있습니다.</p></li>
 <li><p><strong>가중치 랭킹러는 서로 다른 벡터 필드 간의 거리를 어떻게 정규화하나요?</strong></p>
 <p>가중치 랭커는 각 필드에 할당된 가중치를 사용하여 벡터 필드 간의 거리를 정규화합니다. 가중치에 따라 각 벡터 필드의 중요도를 계산하여 가중치가 높은 필드의 우선순위를 지정합니다. 일관성을 보장하기 위해 ANN 검색 요청 전체에 동일한 메트릭 유형을 사용하는 것이 좋습니다. 이 방법을 사용하면 더 중요하다고 판단되는 벡터가 전체 순위에 더 큰 영향을 미치게 됩니다.</p></li>
 <li><p><strong>코히어 랭커나 BGE 랭커와 같은 대체 랭커를 사용할 수 있나요?</strong></p>

@@ -1,7 +1,6 @@
 ---
 id: manage_databases.md
-title: Gérer les bases de données
-summary: ''
+title: Gestion des bases de données
 ---
 <h1 id="Manage-Databases" class="common-anchor-header">Gestion des bases de données<button data-href="#Manage-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -109,7 +108,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un cluster Milvus est livré avec une base de données par défaut, nommée "default". Les collections sont créées dans la base de données par défaut, sauf indication contraire.</p>
+    </button></h2><p>Un cluster Milvus est livré avec une base de données par défaut, appelée "default". Les collections sont créées dans la base de données par défaut, sauf indication contraire.</p>
 <p>Pour modifier la base de données par défaut, procédez comme suit :</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -218,7 +217,7 @@ System.out.<span class="hljs-built_in">println</span>(listDatabasesResponse.getD
 <p>Pour supprimer une base de données, utilisez la méthode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/drop_database.md">drop_database()</a>:</p>
 </div>
 <div class="language-java">
-<p>Pour supprimer une base de données, utilisez la méthode <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Database/dropDatabase.md">drop_database()</a>:</p>
+<p>Pour supprimer une base de données, utilisez la méthode drop_database <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Database/dropDatabase.md">()</a>:</p>
 </div>
 <div class="language-javascript">
 <p>Pour déposer une base de données, utilisez la méthode <a href="https://milvus.io/api-reference/node/v2.4.x/Database/dropDatabase.md">dropDatabase()</a>:</p>
@@ -262,8 +261,8 @@ response = client.dropDatabase(dropDatabaseParam);
     </button></h2><p>RBAC couvre également les opérations de base de données et assure la compatibilité avec l'avenir. Le mot <strong>base de données</strong> dans les API de permission (Grant / Revoke / List Grant) a les significations suivantes :</p>
 <ul>
 <li>Si ni une connexion Milvus ni un appel à l'API de permission ne spécifie une <code translate="no">db_name</code>, la <strong>base</strong> de données fait référence à la base de données par défaut.</li>
-<li>Si une connexion Milvus spécifie un <code translate="no">db_name</code>, mais qu'un appel Permission API ultérieur ne le fait pas, la <strong>base</strong> de <strong>données</strong> renvoie à la base de données dont le nom a été spécifié dans la connexion Milvus.</li>
-<li>Si un appel Permission API est effectué sur une connexion Milvus, avec ou sans <code translate="no">db_name</code>, la <strong>base</strong> de <strong>données</strong> fait référence à la base de données dont le nom a été spécifié dans l'appel Permission API.</li>
+<li>Si une connexion Milvus spécifie un <code translate="no">db_name</code>, mais qu'un appel Permission API ultérieur ne le fait pas, la <strong>base</strong> de données renvoie à la base de données dont le nom a été spécifié dans la connexion Milvus.</li>
+<li>Si un appel Permission API est effectué sur une connexion Milvus, avec ou sans <code translate="no">db_name</code>, la <strong>base</strong> de données fait référence à la base de données dont le nom a été spécifié dans l'appel Permission API.</li>
 </ul>
 <p>L'extrait de code suivant est partagé entre les blocs énumérés ci-dessous.</p>
 <div class="multipleCode">
@@ -321,7 +320,7 @@ _DB_NAME = <span class="hljs-string">&quot;default&quot;</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p>Si aucune connexion Milvus ni aucun appel à l'API Permission ne spécifie une adresse <code translate="no">db_name</code>, <strong>la base</strong> de <strong>données</strong> renvoie à la base de données par défaut.</p>
+<li><p>Si aucune connexion Milvus ni aucun appel à l'API Permission ne spécifie une adresse <code translate="no">db_name</code>, <strong>la base</strong> de données renvoie à la base de données par défaut.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">_ROLE_NAME = <span class="hljs-string">&quot;test_role&quot;</span>
@@ -427,7 +426,7 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
   <span class="hljs-attr">privilege</span>: <span class="hljs-variable constant_">PRIVILEGE_INSERT</span>,
 });
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Si une connexion Milvus spécifie un <code translate="no">db_name</code>, mais qu'un appel Permission API ultérieur ne le fait pas, la <strong>base</strong> de <strong>données</strong> renvoie à la base de données dont le nom a été spécifié dans la connexion Milvus.</p>
+<li><p>Si une connexion Milvus spécifie un <code translate="no">db_name</code>, mais qu'un appel Permission API ultérieur ne le fait pas, la <strong>base</strong> de données renvoie à la base de données dont le nom a été spécifié dans la connexion Milvus.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> please make sure the &#x27;foo&#x27; db has been created</span>
@@ -509,9 +508,9 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
   <span class="hljs-attr">privilege</span>: <span class="hljs-variable constant_">PRIVILEGE_INSERT</span>,
 });
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Si un appel à l'API Permission est effectué sur une connexion Milvus, avec ou sans <code translate="no">db_name</code>, la <strong>base</strong> de <strong>données</strong> fait référence à la base de données dont le nom a été spécifié dans l'appel à l'API Permission.</p>
+<li><p>Si un appel à l'API Permission est effectué sur une connexion Milvus, avec ou sans <code translate="no">db_name</code>, la <strong>base</strong> de données fait référence à la base de données dont le nom a été spécifié dans l'appel à l'API Permission.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
+<a href="#python">Python </a><a href="#java">Java Node</a><a href="#javascript">.js</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> please make sure the &#x27;foo&#x27; db has been created</span>
 
 db_name = <span class="hljs-string">&quot;foo&quot;</span>

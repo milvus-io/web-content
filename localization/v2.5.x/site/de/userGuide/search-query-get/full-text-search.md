@@ -3,9 +3,9 @@ id: full-text-search.md
 title: Volltextsuche
 related_key: 'full, text, search'
 summary: >-
-  Die Volltextsuche ist eine Funktion, die Dokumente mit bestimmten Begriffen
-  oder Phrasen in Textdatensätzen abruft und die Ergebnisse dann nach Relevanz
-  einstuft.
+  Die Volltextsuche ist eine Funktion, die Dokumente abruft, die bestimmte
+  Begriffe oder Phrasen in Textdatensätzen enthalten, und dann die Ergebnisse
+  nach Relevanz einstuft.
 ---
 <h1 id="Full-Text-Search​" class="common-anchor-header">Volltextsuche<button data-href="#Full-Text-Search​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -490,7 +490,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
 </th></tr></thead><tbody><tr><td data-block-token="QpGIdQ2m0oogCvxColKcNWnYnUc" colspan="1" rowspan="1"><p data-block-token="TkffdBxkKo2hVvx9gGucca46nic"><code translate="no">search_params</code></p>
 </td><td data-block-token="HYemdqt6Dow9tvxOcYScmYdPn8e" colspan="1" rowspan="1"><p data-block-token="JiIOdJrBcoGIQ4xrqYycMdjnn7g">Ein Wörterbuch mit Suchparametern.</p>
 </td></tr><tr><td data-block-token="DJDgdH5WUoZQxkxmLzQcXqcXnQh" colspan="1" rowspan="1"><p data-block-token="LKWbdw498o9mtRxm9gDcg28FnQd"><code translate="no">params.drop_ratio_search</code></p>
-</td><td data-block-token="SEJ7d5y18otFTOxy7gLcvLYRnfb" colspan="1" rowspan="1"><p data-block-token="MnladDjOGoUphGxrZzXchD0anzf">Anteil der niederfrequenten Begriffe, die bei der Suche ignoriert werden sollen. Einzelheiten finden Sie unter <a href="/docs/de/sparse_vector.md">Sparse Vector</a>.</p>
+</td><td data-block-token="SEJ7d5y18otFTOxy7gLcvLYRnfb" colspan="1" rowspan="1"><p data-block-token="MnladDjOGoUphGxrZzXchD0anzf">Anteil der Begriffe mit geringer Bedeutung, die bei der Suche ignoriert werden sollen. Einzelheiten finden Sie unter <a href="/docs/de/sparse_vector.md">Sparse Vector</a>.</p>
 </td></tr><tr><td data-block-token="XPPYdAYUPoASg5xuIYmcyxqHnPe" colspan="1" rowspan="1"><p data-block-token="T90ndG7H0okLa4xa1wzcHQmEnEg"><code translate="no">data</code></p>
 </td><td data-block-token="NMhsduxr1oUESPx2J8YcA8csnA1" colspan="1" rowspan="1"><p data-block-token="ZmEQdkdGtofQsAx9YXNcsnlHnYe">Der rohe Abfragetext.</p>
 </td></tr><tr><td data-block-token="O4OVdL9BIollH1xORz3czhInnSh" colspan="1" rowspan="1"><p data-block-token="CYdGd82dRopaWrxfJ9ycWQQnnPc"><code translate="no">anns_field</code></p>

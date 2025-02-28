@@ -110,7 +110,7 @@ title: Panorama de los CDC
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Sincronización incremental de datos</strong>: A partir de ahora, Milvus-CDC está diseñado para sincronizar sólo datos incrementales. Si su empresa necesita una copia de seguridad completa de los datos, póngase <a href="https://milvus.io/community">en contacto con nosotros</a> para obtener ayuda.</p></li>
+<li><p><strong>Sincronización incremental de datos</strong>: A partir de ahora, Milvus-CDC está diseñado para sincronizar sólo datos incrementales. Si su empresa necesita una copia de seguridad completa de los datos, póngase en <a href="https://milvus.io/community">contacto con nosotros</a> para obtener ayuda.</p></li>
 <li><p><strong>Alcance de la sincronización</strong>: Actualmente, Milvus-CDC puede sincronizar datos a nivel de clúster. Estamos trabajando para añadir soporte para la sincronización de datos a nivel de colección en próximas versiones.</p></li>
 <li><p><strong>Solicitudes de API compatibles</strong>: Milvus-CDC admite actualmente las siguientes solicitudes de API. Planeamos extender el soporte a solicitudes adicionales en futuras versiones:</p>
 <ul>

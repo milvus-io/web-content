@@ -5,7 +5,7 @@ summary: >-
   Milvus unterstützt Cross-Encoder-Rerank-Modelle durch die Klasse
   `CrossEncoderRerankFunction`. Diese Funktionalität ermöglicht es Ihnen, die
   Relevanz von Abfrage-Dokumenten-Paaren effektiv zu bewerten.
-title: Cross-Codierer
+title: Cross-Encoder
 ---
 <h1 id="Cross-Encoder" class="common-anchor-header">Cross-Encoder<button data-href="#Cross-Encoder" class="anchor-icon" translate="no">
       <svg translate="no"

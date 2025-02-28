@@ -69,7 +69,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 <li><strong>Mejora de la indexación</strong>: Optimización de la creación de índices de fragmentación mediante técnicas como la fragmentación múltiple, la indexación por pasos o la indexación multidireccional.</li>
 <li><strong>Mejora del recuperador</strong>: Aplicación de técnicas y estrategias de optimización durante el proceso de recuperación.</li>
 <li><strong>Mejora del generador</strong>: Ajuste y optimización de las instrucciones al ensamblarlas para que el LLM proporcione mejores respuestas.</li>
-<li><strong>Mejora del conducto RAG</strong>: Cambiar dinámicamente los procesos dentro de todo el canal de la GAR, incluyendo el uso de agentes o herramientas para optimizar los pasos clave del canal de la GAR.</li>
+<li><strong>Mejora del conducto RAG</strong>: Cambiar dinámicamente los procesos dentro de toda la canalización de la GAR, incluido el uso de agentes o herramientas para optimizar los pasos clave de la canalización de la GAR.</li>
 </ul>
 <p>A continuación, presentaremos métodos específicos para cada una de estas categorías.</p>
 <h2 id="Query-Enhancement" class="common-anchor-header">Mejora de las consultas<button data-href="#Query-Enhancement" class="anchor-icon" translate="no">
@@ -147,7 +147,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
         ></path>
       </svg>
     </button></h2><p>Mejorar la indexación es otra estrategia para mejorar el rendimiento de sus aplicaciones RAG. Exploremos tres técnicas de mejora de la indexación.</p>
-<h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">Fusión automática de fragmentos de documentos</h3><p>Al crear un índice, podemos emplear dos niveles de granularidad: los fragmentos hijos y sus correspondientes fragmentos padres. Inicialmente, buscamos los fragmentos hijos a un nivel de detalle más fino. A continuación, aplicamos una estrategia de fusión: si un número determinado, <strong><em>n</em></strong>, de trozos hijos de los primeros <strong><em>k</em></strong> trozos hijos pertenecen al mismo trozo padre, proporcionamos este trozo padre al LLM como información contextual.</p>
+<h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">Fusión automática de fragmentos de documentos</h3><p>Al construir un índice, podemos emplear dos niveles de granularidad: los fragmentos hijos y sus correspondientes fragmentos padres. Inicialmente, buscamos los fragmentos hijos a un nivel de detalle más fino. A continuación, aplicamos una estrategia de fusión: si un número determinado, <strong><em>n</em></strong>, de trozos hijos de los primeros <strong><em>k</em></strong> trozos hijos pertenecen al mismo trozo padre, proporcionamos este trozo padre al LLM como información contextual.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
@@ -164,7 +164,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 </p>
 <p>Este enfoque resulta beneficioso en situaciones que implican grandes volúmenes de datos o casos en los que los datos son jerárquicos, como la recuperación de contenidos dentro de una colección de biblioteca.</p>
 <h3 id="Hybrid-Retrieval-and-Reranking" class="common-anchor-header">Recuperación y reordenación híbridas</h3><p>La técnica Hybrid Retrieval and Reranking integra uno o varios métodos de recuperación complementarios con la <a href="https://zilliz.com/learn/vector-similarity-search">recuperación por similitud vectorial</a>. A continuación, un <a href="https://zilliz.com/learn/optimize-rag-with-rerankers-the-role-and-tradeoffs#What-is-a-Reranker">reordenador</a> clasifica los resultados obtenidos en función de su relevancia para la consulta del usuario.</p>
-<p>Entre los algoritmos de recuperación complementaria más comunes se encuentran los basados en frecuencias léxicas, como <a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a>, o los grandes modelos que utilizan incrustaciones dispersas, como <a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Splade</a>. Los algoritmos de reordenación incluyen RRF o modelos más sofisticados como <a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoder</a>, que se asemeja a arquitecturas tipo BERT.</p>
+<p>Entre los algoritmos de recuperación complementaria más habituales se encuentran los basados en frecuencias léxicas, como <a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a>, o los grandes modelos que utilizan incrustaciones dispersas, como <a href="https://zilliz.com/learn/discover-splade-revolutionize-sparse-data-processing">Splade</a>. Los algoritmos de reordenación incluyen RRF o modelos más sofisticados como <a href="https://www.sbert.net/examples/applications/cross-encoder/README.html">Cross-Encoder</a>, que se asemeja a arquitecturas tipo BERT.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
@@ -276,7 +276,7 @@ title: Cómo mejorar el rendimiento de su canalización RAG
 </p>
 <p>El agente puede adoptar diversas formas, como un LLM, un pequeño modelo de clasificación o incluso un conjunto de reglas.</p>
 <p>Al enrutar las consultas en función de la intención del usuario, se puede redirigir una parte de las consultas, lo que supone un aumento significativo del tiempo de respuesta y una notable reducción del ruido innecesario.</p>
-<p>Podemos extender la técnica de enrutamiento de consultas a otros procesos dentro del sistema GAR, como determinar cuándo utilizar herramientas como las búsquedas web, realizar subconsultas o buscar imágenes. Este planteamiento garantiza la optimización de cada paso del sistema GAR en función de los requisitos específicos de la consulta, lo que conduce a una recuperación de la información más eficaz y precisa.</p>
+<p>Podemos extender la técnica de enrutamiento de consultas a otros procesos dentro del sistema GAR, como determinar cuándo utilizar herramientas como las búsquedas web, realizar subconsultas o buscar imágenes. Este planteamiento garantiza que cada paso del sistema GAR se optimice en función de los requisitos específicos de la consulta, lo que conduce a una recuperación de la información más eficaz y precisa.</p>
 <h2 id="Summary" class="common-anchor-header">Resumen<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

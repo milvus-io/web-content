@@ -21,7 +21,7 @@ title: リランカーの概要
       </svg>
     </button></h1><p>情報検索や生成AIの領域において、リランカーは最初の検索結果の順序を最適化するために不可欠なツールである。リランカーは、従来の<a href="/docs/ja/embeddings.md">埋め込みモデルとは</a>異なり、クエリと文書を入力とし、埋め込み値の代わりに類似度スコアを直接返す。このスコアは、入力されたクエリと文書の関連性を示す。</p>
 <p>再ランカーは、通常ベクトル近似最近傍（ANN）技術によって行われる第一段階の検索の後に採用されることが多い。ANN検索は、関連する可能性のある結果を幅広く取得するのに効率的であるが、クエリとの実際の意味的な近さという点で、必ずしも結果に優先順位をつけるとは限らない。ここでrerankersは、BERTや他のTransformerベースのモデルのような高度な機械学習モデルを活用し、より深い文脈分析を用いて結果の順序を最適化するために使用される。こうすることで、リランカーはユーザーに提示される最終結果の精度と関連性を劇的に高めることができる。</p>
-<p>PyMilvusモデルライブラリは、最初の検索から返される結果の順序を最適化するためのリランク関数を統合しています。Milvusからニアレストエンベッディングを取得した後、検索結果の精度を高めるためにこれらの再ランクツールを活用して検索結果を絞り込むことができます。</p>
+<p>PyMilvusモデルライブラリは、最初の検索から返される結果の順序を最適化するためのリランク関数を統合しています。Milvusから最近傍の埋め込みを取得した後、検索結果の精度を高めるためにこれらの再ランクツールを活用して検索結果を絞り込むことができます。</p>
 <table>
 <thead>
 <tr><th>再ランク機能</th><th>APIまたはオープンソース</th></tr>
@@ -37,10 +37,10 @@ title: リランカーの概要
 <div class="alert note">
 <ul>
 <li><p>オープンソースのリランカーを使用する前に、必要な依存関係とモデルをすべてダウンロードし、インストールしてください。</p></li>
-<li><p>APIベースのリランカーの場合は、プロバイダーからAPIキーを取得し、適切な環境変数または引数に設定する。</p></li>
+<li><p>APIベースのリランカーの場合は、プロバイダーからAPIキーを取得し、適切な環境変数または引数に設定します。</p></li>
 </ul>
 </div>
-<h2 id="Example-1-Use-BGE-rerank-function-to-rerank-documents-according-to-a-query" class="common-anchor-header">例1: BGE rerank関数を使ってクエリに従ってドキュメントを再ランクする<button data-href="#Example-1-Use-BGE-rerank-function-to-rerank-documents-according-to-a-query" class="anchor-icon" translate="no">
+<h2 id="Example-1-Use-BGE-rerank-function-to-rerank-documents-according-to-a-query" class="common-anchor-header">例1: BGE rerank関数を使ってクエリに従ってドキュメントをランク付けする<button data-href="#Example-1-Use-BGE-rerank-function-to-rerank-documents-according-to-a-query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,7 +55,7 @@ title: リランカーの概要
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>この例では、特定のクエリに基づいて<a href="/docs/ja/rerankers-bge.md">BGEリランカーを</a>使用して検索結果をランク付けする方法を示します。</p>
+    </button></h2><p>この例では、特定のクエリに基づいて<a href="/docs/ja/rerankers-bge.md">BGEリランカーを使って</a>検索結果をランク付けする方法を示します。</p>
 <p><a href="https://github.com/milvus-io/milvus-model">PyMilvusモデル</a>ライブラリでリランカーを使うには、まずPyMilvusモデルライブラリと、必要なリランキングユーティリティをすべて含むモデルサブパッケージをインストールします：</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus[model]
 <span class="hljs-comment"># or pip install &quot;pymilvus[model]&quot; for zsh.</span>
@@ -69,7 +69,7 @@ title: リランカーの概要
     device=<span class="hljs-string">&quot;cpu&quot;</span> <span class="hljs-comment"># Specify the device to use, e.g., &#x27;cpu&#x27; or &#x27;cuda:0&#x27;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>クエリに基づいて文書を再ランクするには、以下のコードを使用します：</p>
+<p>クエリに基づいて文書をランキングし直すには、次のコードを使います：</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 
 documents = [
@@ -110,7 +110,7 @@ documents = [
     {<span class="hljs-string">&#x27;doc_id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;doc_vector&#x27;</span>: [-<span class="hljs-number">0.0391119</span>,-<span class="hljs-number">0.00880096</span>,...,-<span class="hljs-number">0.0109257</span>], <span class="hljs-string">&#x27;doc_text&#x27;</span>: <span class="hljs-string">&#x27;The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.&#x27;</span>}
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>データセットの構成要素</strong></p>
+<p><strong>データセットのコンポーネント</strong></p>
 <ul>
 <li><code translate="no">doc_id</code>:各文書の一意な識別子。</li>
 <li><code translate="no">doc_vector</code>:文書を表す埋め込みベクトル。埋め込みベクトル生成の手引きは<a href="/docs/ja/embeddings.md">Embeddings</a> を参照。</li>

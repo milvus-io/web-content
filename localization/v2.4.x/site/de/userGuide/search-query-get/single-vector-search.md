@@ -527,7 +527,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">topK</code></td>
-      <td>Die Anzahl der Datensätze, die im Suchergebnis zurückgegeben werden sollen. Dieser Parameter verwendet dieselbe Syntax wie der Parameter <strong>limit</strong>, so dass Sie nur einen von beiden setzen sollten.<br/>Sie können diesen Parameter in Kombination mit <strong>offset</strong> in <strong>param</strong> verwenden, um die Paginierung zu aktivieren.<br/>Die Summe aus diesem Wert und <strong>offset</strong> in <strong>param</strong> sollte kleiner als 16.384 sein.</td>
+      <td>Die Anzahl der Datensätze, die im Suchergebnis zurückgegeben werden sollen. Dieser Parameter verwendet dieselbe Syntax wie der Parameter <strong>limit</strong>, so dass Sie nur einen von beiden setzen sollten.<br/>Sie können diesen Parameter in Kombination mit <strong>offset</strong> in <strong>param</strong> verwenden, um eine Paginierung zu aktivieren.<br/>Die Summe aus diesem Wert und <strong>offset</strong> in <strong>param</strong> sollte kleiner als 16.384 sein.</td>
     </tr>
   </tbody>
 </table>
@@ -787,7 +787,7 @@ console.log(res.results)
 <button class="copy-code-btn"></button></code></pre>
 <p>Die Ergebnisse umfassen zwei Sätze nächster Nachbarn, einen für jeden Abfragevektor, was die Effizienz der Massenvektorsuche bei der gleichzeitigen Bearbeitung mehrerer Abfragevektoren verdeutlicht.</p>
 <h3 id="Partition-search" class="common-anchor-header">Partitionssuche</h3><p>Die Partitionssuche grenzt den Umfang Ihrer Suche auf eine bestimmte Teilmenge oder Partition Ihrer Sammlung ein. Dies ist besonders nützlich für organisierte Datensätze, bei denen die Daten in logische oder kategorische Unterteilungen segmentiert sind, was schnellere Suchvorgänge ermöglicht, da die zu durchsuchende Datenmenge reduziert wird.</p>
-<p>Um eine Partitionssuche durchzuführen, geben Sie einfach den Namen der Zielpartition unter <code translate="no">partition_names</code> in Ihre Suchanfrage ein. Dadurch wird festgelegt, dass die Operation <code translate="no">search</code> nur Vektoren innerhalb der angegebenen Partition berücksichtigt.</p>
+<p>Um eine Partitionssuche durchzuführen, geben Sie einfach den Namen der Zielpartition unter <code translate="no">partition_names</code> in Ihrer Suchanfrage an. Dadurch wird festgelegt, dass die Operation <code translate="no">search</code> nur Vektoren innerhalb der angegebenen Partition berücksichtigt.</p>
 <p>Hier ist ein Beispiel für die Suche nach Entitäten in <code translate="no">red</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -1695,7 +1695,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <tbody>
 <tr><td><code translate="no">L2</code></td><td>Kleinere L2-Distanzen zeigen eine höhere Ähnlichkeit an.</td><td>Um die nächstgelegenen Vektoren von den Ergebnissen auszuschließen, stellen Sie sicher, dass:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
 <tr><td><code translate="no">IP</code></td><td>Größere IP-Distanzen weisen auf eine höhere Ähnlichkeit hin.</td><td>Um die nächstgelegenen Vektoren von den Ergebnissen auszuschließen, stellen Sie sicher, dass:<br/> <code translate="no">radius</code> &lt;= distance &lt;= <code translate="no">range_filter</code></td></tr>
-<tr><td><code translate="no">COSINE</code></td><td>Ein größerer Kosinuswert deutet auf eine größere Ähnlichkeit hin.</td><td>Um die engsten Vektoren von den Ergebnissen auszuschließen, stellen Sie sicher, dass:<br/> <code translate="no">radius</code> &lt; Abstand &lt;= <code translate="no">range_filter</code></td></tr>
+<tr><td><code translate="no">COSINE</code></td><td>Ein größerer Kosinuswert deutet auf eine größere Ähnlichkeit hin.</td><td>Um die nächstgelegenen Vektoren aus den Ergebnissen auszuschließen, stellen Sie sicher, dass:<br/> <code translate="no">radius</code> &lt; Abstand &lt;= <code translate="no">range_filter</code></td></tr>
 <tr><td><code translate="no">JACCARD</code></td><td>Kleinere Jaccard-Distanzen weisen auf eine höhere Ähnlichkeit hin.</td><td>Um die nächstgelegenen Vektoren aus den Ergebnissen auszuschließen, stellen Sie sicher, dass:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
 <tr><td><code translate="no">HAMMING</code></td><td>Kleinere Hamming-Distanzen weisen auf eine höhere Ähnlichkeit hin.</td><td>Um die nächstgelegenen Vektoren aus den Ergebnissen auszuschließen, stellen Sie sicher, dass:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
 </tbody>
@@ -1717,7 +1717,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>In Milvus wurde die Gruppierungssuche entwickelt, um die Vollständigkeit und Genauigkeit der Suchergebnisse zu verbessern.</p>
-<p>Stellen Sie sich ein Szenario in RAG vor, in dem eine Menge von Dokumenten in verschiedene Passagen aufgeteilt ist und jede Passage durch eine Vektoreinbettung dargestellt wird. Die Benutzer möchten die relevantesten Passagen finden, um die LLMs genau abzufragen. Die gewöhnliche Milvus-Suchfunktion kann diese Anforderung erfüllen, aber sie kann zu stark verzerrten und voreingenommenen Ergebnissen führen: Die meisten Passagen stammen aus nur wenigen Dokumenten, und die Vollständigkeit der Suchergebnisse ist sehr gering. Dies kann die Genauigkeit oder sogar die Korrektheit der vom LLM gelieferten Ergebnisse ernsthaft beeinträchtigen und die Erfahrung der LLM-Nutzer negativ beeinflussen.</p>
+<p>Stellen Sie sich ein Szenario in RAG vor, in dem eine Menge von Dokumenten in verschiedene Passagen aufgeteilt ist und jede Passage durch eine Vektoreinbettung dargestellt wird. Die Benutzer wollen die relevantesten Passagen finden, um die LLMs genau abzufragen. Die gewöhnliche Milvus-Suchfunktion kann diese Anforderung erfüllen, aber sie kann zu stark verzerrten und voreingenommenen Ergebnissen führen: Die meisten Passagen stammen aus nur wenigen Dokumenten, und die Vollständigkeit der Suchergebnisse ist sehr gering. Dies kann die Genauigkeit oder sogar die Korrektheit der vom LLM gelieferten Ergebnisse ernsthaft beeinträchtigen und die Erfahrung der LLM-Nutzer negativ beeinflussen.</p>
 <p>Die Gruppensuche kann dieses Problem wirksam lösen. Durch die Angabe von <code translate="no">group_by_field</code> können Milvus-Benutzer die Suchergebnisse in mehrere Gruppen einteilen. Diese Funktion kann den Umfang und die Fairness der Suchergebnisse deutlich erhöhen und die Qualität der LLM-Ausgabe spürbar verbessern.</p>
 <p>Hier ist der Beispielcode zum Gruppieren von Suchergebnissen nach Feld:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
@@ -1782,7 +1782,7 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>]
 [<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>In der gegebenen Ausgabe ist zu beobachten, dass "doc_11" die Suchergebnisse vollständig dominiert und die hochwertigen Absätze aus anderen Dokumenten überschattet, was eine schlechte Aufforderung zum LLM sein kann.</p>
+<p>In der gegebenen Ausgabe ist zu beobachten, dass "doc_11" die Suchergebnisse vollständig dominiert und die qualitativ hochwertigen Absätze aus anderen Dokumenten überschattet, was eine schlechte Aufforderung zum LLM sein kann.</p>
 <p><strong>Beschränkungen</strong></p>
 <ul>
 <li><p><strong>Indizierung</strong>: Diese Gruppierungsfunktion funktioniert nur für Sammlungen, die mit diesen Indextypen indiziert sind: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>DISKANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>

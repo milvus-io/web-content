@@ -77,7 +77,7 @@ summary: 全文檢索是一種在文字資料集中擷取包含特定詞彙或�
       </svg>
     </button></h2><p>若要啟用全文本搜尋，請建立具有特定模式的資料夾。此模式必須包含三個必要欄位。</p>
 <ul>
-<li><p>唯一識別資料集中每一個實體的主要欄位。</p></li>
+<li><p>唯一識別資料集中每個實體的主要欄位。</p></li>
 <li><p>儲存原始文字文件的<code translate="no">VARCHAR</code> 欄位，其<code translate="no">enable_analyzer</code> 屬性設定為<code translate="no">True</code> 。這可讓 Milvus 將文字標記化為特定詞彙，以便進行功能處理。</p></li>
 <li><p>預留一個<code translate="no">SPARSE_FLOAT_VECTOR</code> 欄位，用來儲存 Milvus 會自動為<code translate="no">VARCHAR</code> 欄位產生的稀疏嵌入。</p></li>
 </ul>
@@ -257,7 +257,7 @@ schema.addFunction(Function.builder()
 </td><td data-block-token="VdcmdmiiWoy0nex8a29clnslnQg" colspan="1" rowspan="1"><p data-block-token="Q2eSdvOqeoNa6dxcGjcc2LKinDg">要使用的函數類型。設定值為<code translate="no">FunctionType.BM25</code> 。</p>
 </td></tr></tbody></table>
 <div class="alert note">
-<p>對於具有多個<code translate="no">VARCHAR</code> 欄位、需要將文字轉換為稀疏向量的資料集，請在資料集模式中加入不同的函式，確保每個函式都有唯一的名稱和<code translate="no">output_field_names</code> 值。</p>
+<p>對於具有多個<code translate="no">VARCHAR</code> 欄位、需要將文字轉換為稀疏向量的集合，請在集合模式中加入不同的函式，確保每個函式都有唯一的名稱和<code translate="no">output_field_names</code> 值。</p>
 </div>
 <h3 id="Configure-the-index" class="common-anchor-header">設定索引</h3><p>在定義包含必要欄位和內建函式的模式後，為您的集合設定索引。為了簡化這個過程，請使用<code translate="no">AUTOINDEX</code> 作為<code translate="no">index_type</code> ，這個選項允許 Milvus 根據您的資料結構選擇和設定最適合的索引類型。</p>
 <div class="multipleCode">
@@ -487,7 +487,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
 </th></tr></thead><tbody><tr><td data-block-token="QpGIdQ2m0oogCvxColKcNWnYnUc" colspan="1" rowspan="1"><p data-block-token="TkffdBxkKo2hVvx9gGucca46nic"><code translate="no">search_params</code></p>
 </td><td data-block-token="HYemdqt6Dow9tvxOcYScmYdPn8e" colspan="1" rowspan="1"><p data-block-token="JiIOdJrBcoGIQ4xrqYycMdjnn7g">包含搜尋參數的字典。</p>
 </td></tr><tr><td data-block-token="DJDgdH5WUoZQxkxmLzQcXqcXnQh" colspan="1" rowspan="1"><p data-block-token="LKWbdw498o9mtRxm9gDcg28FnQd"><code translate="no">params.drop_ratio_search</code></p>
-</td><td data-block-token="SEJ7d5y18otFTOxy7gLcvLYRnfb" colspan="1" rowspan="1"><p data-block-token="MnladDjOGoUphGxrZzXchD0anzf">搜尋時要忽略的低頻詞比例。如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>。</p>
+</td><td data-block-token="SEJ7d5y18otFTOxy7gLcvLYRnfb" colspan="1" rowspan="1"><p data-block-token="MnladDjOGoUphGxrZzXchD0anzf">搜尋時要忽略的低重要性字詞比例。詳情請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>。</p>
 </td></tr><tr><td data-block-token="XPPYdAYUPoASg5xuIYmcyxqHnPe" colspan="1" rowspan="1"><p data-block-token="T90ndG7H0okLa4xa1wzcHQmEnEg"><code translate="no">data</code></p>
 </td><td data-block-token="NMhsduxr1oUESPx2J8YcA8csnA1" colspan="1" rowspan="1"><p data-block-token="ZmEQdkdGtofQsAx9YXNcsnlHnYe">原始查詢文字。</p>
 </td></tr><tr><td data-block-token="O4OVdL9BIollH1xORz3czhInnSh" colspan="1" rowspan="1"><p data-block-token="CYdGd82dRopaWrxfJ9ycWQQnnPc"><code translate="no">anns_field</code></p>

@@ -7,7 +7,7 @@ summary: >-
   Operator
 title: Instal Milvus Cluster dengan Operator Milvus
 ---
-<h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Menjalankan Milvus di Kubernetes dengan Milvus Operator<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Menjalankan Milvus di Kubernetes dengan Operator Milvus<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,7 +23,7 @@ title: Instal Milvus Cluster dengan Operator Milvus
         ></path>
       </svg>
     </button></h1><p>Halaman ini mengilustrasikan cara memulai instans Milvus di Kubernetes menggunakan <a href="https://github.com/zilliztech/milvus-operator">Milvus Operator</a>.</p>
-<h2 id="Overview" class="common-anchor-header">Gambaran umum<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Ikhtisar<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -258,7 +258,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
         ></path>
       </svg>
     </button></h2><p>Milvus dilengkapi dengan alat GUI bawaan yang disebut Milvus WebUI yang dapat Anda akses melalui peramban. Milvus Web UI meningkatkan kemampuan pengamatan sistem dengan antarmuka yang sederhana dan intuitif. Anda dapat menggunakan Milvus Web UI untuk mengamati statistik dan metrik komponen dan ketergantungan Milvus, memeriksa detail basis data dan koleksi, dan membuat daftar konfigurasi Milvus yang terperinci. Untuk detail tentang Milvus Web UI, lihat <a href="/docs/id/milvus-webui.md">Milvus WebUI</a></p>
-<p>Untuk mengaktifkan akses ke Milvus Web UI, anda perlu meneruskan porta proxy pod ke porta lokal.</p>
+<p>Untuk mengaktifkan akses ke Milvus Web UI, anda perlu melakukan port-forward proxy pod ke port lokal.</p>
 <pre><code translate="no" class="language-shell">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27018</span>:<span class="hljs-number">9091</span>
 <span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27018</span> -&gt; <span class="hljs-number">9091</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -284,7 +284,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <div class="alert note">
 <ul>
 <li>Ketika Anda menghapus cluster Milvus menggunakan konfigurasi default, dependensi seperti etcd, Pulsar, dan MinIO tidak terhapus. Oleh karena itu, pada saat Anda menginstal instans cluster Milvus yang sama, dependensi ini akan digunakan lagi.</li>
-<li>Untuk menghapus dependensi dan private virtual cloud (PVC) bersama dengan cluster Milvus, lihat <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">file konfigurasi</a>.</li>
+<li>Untuk menghapus dependensi dan klaim volume persisten (PVC) bersama dengan cluster Milvus, lihat <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">file konfigurasi</a>.</li>
 </ul>
 </div>
 <h2 id="Uninstall-Milvus-Operator" class="common-anchor-header">Menghapus Instalasi Operator Milvus<button data-href="#Uninstall-Milvus-Operator" class="anchor-icon" translate="no">

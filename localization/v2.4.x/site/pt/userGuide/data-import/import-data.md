@@ -37,7 +37,7 @@ summary: Esta página demonstra o procedimento para importar os dados preparados
       </svg>
     </button></h2><ul>
 <li><p>Já preparou os seus dados e colocou-os no balde do Milvus.</p>
-<p>Caso contrário, deve utilizar <strong>RemoteBulkWriter</strong> para preparar os seus dados primeiro e garantir que os dados preparados já foram transferidos para o bucket Milvus na instância MinIO iniciada juntamente com a sua instância Milvus. Para obter detalhes, consulte <a href="/docs/pt/prepare-source-data.md">Preparar dados de origem</a>.</p></li>
+<p>Caso contrário, deve usar o <strong>RemoteBulkWriter</strong> para preparar os dados primeiro e garantir que os dados preparados já tenham sido transferidos para o bucket do Milvus na instância do MinIO iniciada junto com a instância do Milvus. Para obter detalhes, consulte <a href="/docs/pt/prepare-source-data.md">Preparar dados de origem</a>.</p></li>
 <li><p>Já criou uma coleção com o esquema que utiliza para preparar os seus dados. Caso contrário, consulte <a href="/docs/pt/manage-collections.md">Gerenciar coleções</a>.</p></li>
 </ul>
 <div class="language-python">

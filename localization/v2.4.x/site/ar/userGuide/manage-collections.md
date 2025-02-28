@@ -35,7 +35,7 @@ title: إدارة المجموعات
       </svg>
     </button></h2><ul>
 <li><p>قمت بتثبيت <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">مجموعة</a> <a href="https://milvus.io/docs/install_standalone-docker.md">ميلفوس المستقلة</a> أو <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">مجموعة ميلفوس العنقودية</a>.</p></li>
-<li><p>لقد قمت بتثبيت حزم SDK المفضلة. يمكنك الاختيار من بين لغات مختلفة، بما في ذلك <a href="https://milvus.io/docs/install-pymilvus.md">Python</a> <a href="https://milvus.io/docs/install-java.md">وJava</a> <a href="https://milvus.io/docs/install-go.md">وGo وGo</a> <a href="https://milvus.io/docs/install-node.md">وNode.js</a>.</p></li>
+<li><p>قمت بتثبيت حزم SDK المفضلة. يمكنك الاختيار من بين لغات مختلفة، بما في ذلك <a href="https://milvus.io/docs/install-pymilvus.md">Python</a> <a href="https://milvus.io/docs/install-java.md">وJava</a> <a href="https://milvus.io/docs/install-go.md">وGo وGo</a> <a href="https://milvus.io/docs/install-node.md">وNode.js</a>.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -55,7 +55,7 @@ title: إدارة المجموعات
     </button></h2><p>في Milvus، يمكنك تخزين التضمينات المتجهة في مجموعات. تشترك جميع تضمينات المتجهات داخل المجموعة في نفس الأبعاد ومقياس المسافة لقياس التشابه.</p>
 <p>تدعم مجموعات Milvus الحقول الديناميكية (أي الحقول غير المحددة مسبقًا في المخطط) والزيادة التلقائية للمفاتيح الأساسية.</p>
 <p>لاستيعاب التفضيلات المختلفة، تقدم ميلفوس طريقتين لإنشاء مجموعة. توفر إحداهما إعدادًا سريعًا، بينما تسمح الأخرى بالتخصيص التفصيلي لمخطط المجموعة ومعلمات الفهرس.</p>
-<p>بالإضافة إلى ذلك، يمكنك عرض مجموعة وتحميلها وتحريرها وإسقاطها عند الضرورة.</p>
+<p>بالإضافة إلى ذلك، يمكنك عرض مجموعة وتحميلها وإصدارها وإسقاطها عند الضرورة.</p>
 <h2 id="Create-Collection" class="common-anchor-header">إنشاء مجموعة<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -100,7 +100,7 @@ title: إدارة المجموعات
 <p>للإعداد السريع، استخدم نقطة نهاية <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API لإنشاء مجموعة بالاسم والبُعد المحددين.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">بيثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
+ <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#go">الذهاب</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
@@ -382,11 +382,11 @@ schema.WithField(
   <tbody>
     <tr>
       <td><code translate="no">auto_id</code></td>
-      <td>تحديد ما إذا كان الحقل الأساسي يتم زيادته تلقائياً.<br/>تعيين هذا إلى <strong>صواب</strong> يجعل الحقل الأساسي يزداد تلقائياً. في هذه الحالة، يجب عدم تضمين الحقل الأساسي في البيانات المراد إدراجها لتجنب الأخطاء. المعرفات التي يتم إنشاؤها تلقائياً لها طول ثابت ولا يمكن تغييرها.</td>
+      <td>يحدد ما إذا كان الحقل الأساسي يتم زيادته تلقائياً.<br/>تعيين هذا إلى <strong>صواب</strong> يجعل الحقل الأساسي يزداد تلقائياً. في هذه الحالة، يجب عدم تضمين الحقل الأساسي في البيانات المراد إدراجها لتجنب الأخطاء. المعرفات التي يتم إنشاؤها تلقائياً لها طول ثابت ولا يمكن تغييرها.</td>
     </tr>
     <tr>
       <td><code translate="no">enable_dynamic_field</code></td>
-      <td>يحدد ما إذا كان Milvus يحفظ قيم الحقول غير المعرّفة في حقل ديناميكي إذا كانت البيانات التي يتم إدراجها في المجموعة المستهدفة تتضمن حقولاً غير محددة في مخطط المجموعة.<br/>عند تعيين هذا إلى <strong>صواب،</strong> سيقوم Milvus بإنشاء حقل يسمى <strong>$meta</strong> لتخزين أي حقول غير معرفة وقيمها من البيانات التي يتم إدراجها.</td>
+      <td>يحدد ما إذا كان Milvus يحفظ قيم الحقول غير المعرّفة في حقل ديناميكي إذا كانت البيانات التي يتم إدراجها في المجموعة المستهدفة تتضمن حقولاً غير محددة في مخطط المجموعة.<br/>عند تعيين هذا إلى <strong>صواب،</strong> سيقوم Milvus بإنشاء حقل يسمى <strong>$meta</strong> لتخزين أي حقول غير محددة وقيمها من البيانات التي يتم إدراجها.</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
@@ -398,7 +398,7 @@ schema.WithField(
     </tr>
     <tr>
       <td><code translate="no">is_primary</code></td>
-      <td>ما إذا كان الحقل الحالي هو الحقل الأساسي في المجموعة.<br/>كل مجموعة لها حقل أساسي واحد فقط. يجب أن يكون الحقل الأساسي من النوع <strong>DataType.INT64</strong> أو النوع <strong>DataType.VARCHAR</strong>.</td>
+      <td>ما إذا كان الحقل الحالي هو الحقل الأساسي في المجموعة.<br/>كل مجموعة لها حقل أساسي واحد فقط. يجب أن يكون الحقل الأساسي إما من النوع <strong>DataType.INT64</strong> أو النوع <strong>DataType.VARCHAR</strong>.</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
@@ -432,7 +432,7 @@ schema.WithField(
     </tr>
     <tr>
       <td><code translate="no">dimension</code></td>
-      <td>البعد الخاص بتضمين المتجهات.<br/>هذا إلزامي لحقل من نوع <strong>DataType.FloatVector</strong> أو <strong>DataType.BinaryVector</strong> أو <strong>DataType.Float16Vector</strong> أو <strong>DataType.BFloat16Vector</strong>.</td>
+      <td>بُعد التضمين المتجه.<br/>هذا إلزامي لحقل من نوع <strong>DataType.FloatVector</strong> أو <strong>DataType.BinaryVector</strong> أو <strong>DataType.Float16Vector</strong> أو <strong>DataType.BFloat16Vector</strong>.</td>
     </tr>
   </tbody>
 </table>
@@ -458,7 +458,7 @@ schema.WithField(
     </tr>
     <tr>
       <td><code translate="no">auto_id</code></td>
-      <td>ما إذا كان الحقل الأساسي يزيد تلقائيًا عند إدراج البيانات في هذه المجموعة.<br/>القيمة الافتراضية إلى <strong>خطأ</strong>. يؤدي تعيين هذا إلى <strong>صواب</strong> إلى زيادة الحقل الأساسي تلقائيًا. تخطي هذه المعلمة إذا كنت بحاجة إلى إعداد مجموعة بمخطط مخصص.</td>
+      <td>ما إذا كان الحقل الأساسي يتم زيادته تلقائيًا عند إدراج البيانات في هذه المجموعة.<br/>القيمة الافتراضية إلى <strong>خطأ</strong>. يؤدي تعيين هذا إلى <strong>صواب</strong> إلى زيادة الحقل الأساسي تلقائيًا. تخطي هذه المعلمة إذا كنت بحاجة إلى إعداد مجموعة بمخطط مخصص.</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
@@ -488,7 +488,7 @@ schema.WithField(
     </tr>
     <tr>
       <td><code translate="no">WithIsAutoID()</code></td>
-      <td>ما إذا كان الحقل الأساسي يزيد تلقائيًا عند إدراج البيانات في هذه المجموعة.<br/>القيمة الافتراضية إلى <strong>خطأ</strong>. يؤدي تعيين هذا إلى <strong>صواب</strong> إلى زيادة الحقل الأساسي تلقائيًا. تخطي هذه المعلمة إذا كنت بحاجة إلى إعداد مجموعة بمخطط مخصص.</td>
+      <td>ما إذا كان الحقل الأساسي يزداد تلقائيًا عند إدراج البيانات في هذه المجموعة.<br/>القيمة الافتراضية إلى <strong>خطأ</strong>. يؤدي تعيين هذا إلى <strong>صواب</strong> إلى زيادة الحقل الأساسي تلقائيًا. تخطي هذه المعلمة إذا كنت بحاجة إلى إعداد مجموعة بمخطط مخصص.</td>
     </tr>
     <tr>
       <td><code translate="no">WithDim()</code></td>
@@ -1030,7 +1030,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>مخطط هذه المجموعة.<br/>يشير تعيين هذا إلى <strong>بلا</strong> إلى أن هذه المجموعة سيتم إنشاؤها بالإعدادات الافتراضية.<br/>لإعداد مجموعة بمخطط مخصص، تحتاج إلى إنشاء كائن <strong>CollectionSchema</strong> والرجوع إليه هنا. في هذه الحالة، يتجاهل Milvus جميع الإعدادات الأخرى المتعلقة بالمخطط التي يحملها الطلب.</td>
+<td>مخطط هذه المجموعة.<br/>يشير تعيين هذا إلى <strong>لا شيء</strong> إلى أنه سيتم إنشاء هذه المجموعة بالإعدادات الافتراضية.<br/>لإعداد مجموعة بمخطط مخصص، تحتاج إلى إنشاء كائن <strong>CollectionSchema</strong> والرجوع إليه هنا. في هذه الحالة، يتجاهل Milvus جميع الإعدادات الأخرى المتعلقة بالمخطط التي يحملها الطلب.</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
@@ -1741,7 +1741,7 @@ collections, err := client.ListCollections(ctx)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>أثناء عملية تحميل مجموعة، يقوم Milvus بتحميل ملف فهرس المجموعة في الذاكرة. وعلى العكس من ذلك، عند تحرير مجموعة، يقوم Milvus بتفريغ ملف الفهرس من الذاكرة. قبل إجراء عمليات البحث في مجموعة، تأكد من تحميل المجموعة.</p>
+    </button></h2><p>أثناء عملية تحميل مجموعة، يقوم Milvus بتحميل ملف فهرس المجموعة في الذاكرة. وعلى العكس من ذلك، عند تحرير مجموعة، يقوم برنامج Milvus بتفريغ ملف الفهرس من الذاكرة. قبل إجراء عمليات البحث في مجموعة، تأكد من تحميل المجموعة.</p>
 <h3 id="Load-a-collection" class="common-anchor-header">تحميل مجموعة</h3><div class="language-python">
 <p>لتحميل مجموعة، استخدم الأسلوب <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a> مع تحديد اسم المجموعة. ويمكنك أيضًا تعيين <code translate="no">replica_number</code> لتحديد عدد النسخ المتماثلة في الذاكرة لمقاطع البيانات المراد إنشاؤها في عقد الاستعلام عند تحميل المجموعة.</p>
 <ul>
@@ -2545,7 +2545,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <p>لإسقاط الأسماء المستعارة، استخدم الأسلوب <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> الأسلوب، مع تحديد الاسم المستعار.</p>
 </div>
 <div class="language-shell">
-<p>لإسقاط الأسماء المستعارة لمجموعة ما، يمكنك استخدام نقطة نهاية <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/aliases/drop</code></a> نقطة نهاية واجهة برمجة التطبيقات.</p>
+<p>لإسقاط أسماء مستعارة لمجموعة ما، يمكنك استخدام نقطة نهاية <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/aliases/drop</code></a> نقطة نهاية واجهة برمجة التطبيقات.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a></div>

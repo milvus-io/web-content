@@ -88,7 +88,7 @@ title: 使用 Docker Compose 安裝 Milvus 的需求
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>理想情況下，您的磁碟應達到 500 IOPS 以上，第 99 百分位數的 fsync 延遲應低於 10 毫秒。閱讀 etcd<a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">文件</a>以瞭解更詳細的要求。</p>
+<p>理想情況下，您專用於 etcd 的磁碟應達到 500 IOPS 以上，第 99 百分位數 fsync 延遲應低於 10 毫秒。閱讀 etcd<a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">文件</a>，瞭解更多詳細要求。</p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -104,7 +104,7 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如果您的硬體和軟體符合上述要求，您可以</p>
+    </button></h2><p>如果您的硬件和軟件符合上述要求，您可以</p>
 <ul>
 <li><a href="/docs/zh-hant/install_standalone-docker.md">在 Docker 中執行 Milvus</a></li>
 <li><a href="/docs/zh-hant/install_standalone-docker-compose.md">使用 Docker Compose 執行 Milvus</a></li>

@@ -40,7 +40,7 @@ title: Visão geral do CDC
     </button></h2><ul>
 <li><p><strong>Sincronização de dados seqüenciais</strong>: Garante a integridade e a consistência dos dados, sincronizando as alterações de dados sequencialmente entre as instâncias do Milvus.</p></li>
 <li><p><strong>Replicação de dados incrementais</strong>: Replica dados incrementais, incluindo inserções e exclusões, do Milvus de origem para o Milvus de destino, oferecendo armazenamento persistente.</p></li>
-<li><p><strong>Gerenciamento de Tarefas CDC</strong>: Permite a gestão de tarefas CDC através de pedidos OpenAPI, incluindo a criação, consulta de estado e eliminação de tarefas CDC.</p></li>
+<li><p><strong>Gerenciamento de tarefas do CDC</strong>: Permite a gestão de tarefas CDC através de pedidos OpenAPI, incluindo a criação, consulta de estado e eliminação de tarefas CDC.</p></li>
 </ul>
 <p>Além disso, estamos a planear expandir as nossas capacidades para incluir suporte para integração com sistemas de processamento de fluxo no futuro.</p>
 <h2 id="Architecture" class="common-anchor-header">Arquitetura<button data-href="#Architecture" class="anchor-icon" translate="no">
@@ -66,7 +66,7 @@ title: Visão geral do CDC
 <p>No diagrama anterior,</p>
 <ul>
 <li><p><strong>Servidor HTTP</strong>: Trata os pedidos dos utilizadores, executa as tarefas e mantém os metadados. Serve de plano de controlo para a orquestração de tarefas no sistema Milvus-CDC.</p></li>
-<li><p><strong>Corelib</strong>: Responsável pela sincronização efectiva das tarefas. Inclui um componente de leitura que recupera informações do etcd e da fila de mensagens (MQ) do Milvus de origem, e um componente de escrita que traduz as mensagens do MQ em parâmetros API para o sistema Milvus e envia esses pedidos para o Milvus de destino para completar o processo de sincronização.</p></li>
+<li><p><strong>Corelib</strong>: Responsável pela sincronização efectiva das tarefas. Inclui um componente de leitura que recupera informações do etcd e da fila de mensagens (MQ) do Milvus de origem, e um componente de escrita que traduz mensagens do MQ em parâmetros API para o sistema Milvus e envia esses pedidos para o Milvus de destino para completar o processo de sincronização.</p></li>
 </ul>
 <h2 id="Workflow" class="common-anchor-header">Fluxo de trabalho<button data-href="#Workflow" class="anchor-icon" translate="no">
       <svg translate="no"

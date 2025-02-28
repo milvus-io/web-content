@@ -1,7 +1,7 @@
 ---
 id: image_deduplication_system.md
-summary: 使用 Milvus 构建重复数据删除系统。
-title: 图像重复数据删除
+summary: 使用 Milvus 构建重复数据删除图像系统。
+title: 重复数据删除
 ---
 <h1 id="Image-Deduplication" class="common-anchor-header">重复数据删除<button data-href="#Image-Deduplication" class="anchor-icon" translate="no">
       <svg translate="no"

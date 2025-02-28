@@ -40,7 +40,7 @@ cohere_rf = CohereRerankFunction(
 <li><p><code translate="no">model_name</code> <em>(문자열</em>)</p>
 <p>사용할 모델의 이름입니다. 예를 들어 <code translate="no">rerank-english-v3.0</code>, <code translate="no">rerank-multilingual-v3.0</code> 등과 같이 사용 가능한 Cohere 리랭커 모델 이름을 지정할 수 있습니다. 이 매개변수를 지정하지 않으면 <code translate="no">rerank-english-v2.0</code> 이 사용됩니다. 사용 가능한 모델 목록은 <a href="https://docs.cohere.com/docs/rerank-2">Rerank를</a> 참조하세요.</p></li>
 <li><p><code translate="no">api_key</code> <em>(문자열</em>)</p>
-<p>Cohere API에 액세스하기 위한 API 키입니다. API 키를 생성하는 방법에 대한 자세한 내용은 <a href="https://dashboard.cohere.com/api-keys">Cohere 대시보드를</a> 참조하세요.</p></li>
+<p>Cohere API에 액세스하기 위한 API 키입니다. API 키 생성 방법에 대한 자세한 내용은 <a href="https://dashboard.cohere.com/api-keys">Cohere 대시보드를</a> 참조하세요.</p></li>
 </ul>
 <p>그런 다음 다음 코드를 사용하여 쿼리를 기반으로 문서의 순위를 다시 지정합니다:</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>

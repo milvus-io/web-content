@@ -55,7 +55,7 @@ title: 스칼라 필드 인덱스
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>자동 인덱싱을 사용하려면 <strong>인덱스 유형</strong> 매개변수를 생략하세요. <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>에서 인덱스 유형 매개변수를 생략하면 Milvus가 스칼라 필드 유형을 기반으로 인덱스 유형을 유추할 수 있습니다.</p>
+<p>자동 인덱싱을 사용하려면 <strong>인덱스 유형</strong> 매개변수를 생략하세요. <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>에서 인덱스 유형 매개변수를 생략하면 Milvus가 스칼라 필드 유형에 따라 인덱스 유형을 유추할 수 있습니다.</p>
 </div>
 <div class="language-java">
 <p>자동 인덱싱을 사용하려면, 에서 <strong>indexType</strong> 매개변수를 생략하세요. <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>에서 인덱스 유형 매개변수를 생략하여 Milvus가 스칼라 필드 유형을 기반으로 인덱스 유형을 유추할 수 있도록 합니다.</p>
@@ -242,7 +242,7 @@ client.createIndex(createIndexReq);
 </ul></li>
 </ul>
 </div>
-<h2 id="Verifying-the-result" class="common-anchor-header">결과 확인<button data-href="#Verifying-the-result" class="anchor-icon" translate="no">
+<h2 id="Verifying-the-result" class="common-anchor-header">결과 확인하기<button data-href="#Verifying-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

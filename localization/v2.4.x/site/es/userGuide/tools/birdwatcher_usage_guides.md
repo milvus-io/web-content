@@ -157,7 +157,7 @@ ID: <span class="hljs-number">1</span>   Name: <span class="hljs-keyword">defaul
 TenantID:        State: DatabaseCreated
 --- Total <span class="hljs-title function_">Database</span><span class="hljs-params">(s)</span>: <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Lista de colecciones</p>
+<li><p>Listar colecciones</p>
 <p>En la salida del comando, puede encontrar información detallada sobre cada colección.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show collections
 ================================================================================

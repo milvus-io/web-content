@@ -348,7 +348,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 <p>データを挿入するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>メソッドを使用して、データをコレクションに挿入します。</p>
 </div>
 <div class="language-java">
-<p>コレクションにデータを挿入するには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>メソッドを使用して、データをコレクションに挿入します。</p>
+<p>データをコレクションに挿入するには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>メソッドを使用して、データをコレクションに挿入します。</p>
 </div>
 <div class="language-javascript">
 <p>データをコレクションに挿入するには <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md"><code translate="no">insert()</code></a>メソッドを使用して、データをコレクションに挿入します。</p>

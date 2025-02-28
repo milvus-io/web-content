@@ -36,7 +36,7 @@ title: 索引向量字段
         ></path>
       </svg>
     </button></h2><p>利用存储在索引文件中的元数据，Milvus 以专门的结构组织数据，便于在搜索或查询过程中快速检索所需的信息。</p>
-<p>Milvus 提供了多种索引类型和指标，可对字段值进行排序，以实现高效的相似性搜索。下表列出了不同向量字段类型所支持的索引类型和度量。目前，Milvus 支持各种类型的向量数据，包括浮点嵌入（通常称为浮点向量或密集向量）、二进制嵌入（也称为二进制向量）和稀疏嵌入（也称为稀疏向量）。详情请参阅 "<a href="/docs/zh/index.md">内存索引</a>和<a href="/docs/zh/metric.md">相似度指标</a>"。</p>
+<p>Milvus 提供多种索引类型和指标，可对字段值进行排序，以实现高效的相似性搜索。下表列出了不同向量字段类型所支持的索引类型和度量。目前，Milvus 支持各种类型的向量数据，包括浮点嵌入（通常称为浮点向量或密集向量）、二进制嵌入（也称为二进制向量）和稀疏嵌入（也称为稀疏向量）。详情请参阅 "<a href="/docs/zh/index.md">内存索引</a>和<a href="/docs/zh/metric.md">相似度指标</a>"。</p>
 <div class="filter">
  <a href="#floating">浮点嵌入</a> <a href="#binary">二进制嵌入</a> <a href="#sparse">稀疏嵌入</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -222,7 +222,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>要为一个 Collection 创建索引或为一个 Collection 建立索引，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a>准备索引参数，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md"><code translate="no">create_index()</code></a>来创建索引。</p>
+<p>要为一个 Collection 创建索引或为一个 Collection 建立索引，可使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a>准备索引参数，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md"><code translate="no">create_index()</code></a>来创建索引。</p>
 </div>
 <div class="language-java">
 <p>要为集合创建索引或为集合建立索引，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>准备索引参数和 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md"><code translate="no">createIndex()</code></a>来创建索引。</p>

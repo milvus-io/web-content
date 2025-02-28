@@ -27,7 +27,7 @@ title: Trichtersuche mit Matryoshka-Embeddings
     </button></h1><p>Beim Aufbau effizienter Vektorsuchsysteme besteht eine der größten Herausforderungen darin, die Speicherkosten zu bewältigen und gleichzeitig eine akzeptable Latenzzeit und Wiederauffindbarkeit zu gewährleisten. Moderne Einbettungsmodelle geben Vektoren mit Hunderten oder Tausenden von Dimensionen aus, was zu einem erheblichen Speicher- und Rechenaufwand für den Rohvektor und den Index führt.</p>
 <p>Traditionell wird der Speicherbedarf durch die Anwendung einer Quantisierungs- oder Dimensionalitätsreduzierungsmethode unmittelbar vor dem Aufbau des Index reduziert. Wir können beispielsweise Speicherplatz einsparen, indem wir die Genauigkeit mithilfe der Produktquantisierung (PQ) oder die Anzahl der Dimensionen mithilfe der Hauptkomponentenanalyse (PCA) verringern. Diese Methoden analysieren die gesamte Vektormenge, um eine kompaktere Menge zu finden, die die semantischen Beziehungen zwischen den Vektoren beibehält.</p>
 <p>Diese Standardansätze sind zwar effektiv, aber sie reduzieren die Präzision oder Dimensionalität nur einmal und auf einer einzigen Ebene. Aber was wäre, wenn wir mehrere Detailschichten gleichzeitig beibehalten könnten, wie eine Pyramide von immer präziseren Darstellungen?</p>
-<p>Das ist die Matrjoschka-Einbettung. Diese cleveren Konstrukte, die nach den russischen Schachtelpuppen benannt sind (siehe Abbildung), betten mehrere Darstellungsebenen in einen einzigen Vektor ein. Im Gegensatz zu herkömmlichen Nachbearbeitungsmethoden lernen Matryoshka-Einbettungen diese Multiskalenstruktur während des anfänglichen Trainingsprozesses. Das Ergebnis ist bemerkenswert: Die vollständige Einbettung erfasst nicht nur die Semantik der Eingabe, sondern jedes verschachtelte Untergruppenpräfix (erste Hälfte, erstes Viertel usw.) liefert eine kohärente, wenn auch weniger detaillierte Darstellung.</p>
+<p>Das ist die Matrjoschka-Einbettung. Diese cleveren Konstrukte, die nach den russischen Schachtelpuppen benannt sind (siehe Abbildung), betten mehrere Darstellungsebenen in einen einzigen Vektor ein. Im Gegensatz zu herkömmlichen Nachbearbeitungsmethoden erlernen Matryoshka-Einbettungen diese Multiskalenstruktur während des anfänglichen Trainingsprozesses. Das Ergebnis ist bemerkenswert: Die vollständige Einbettung erfasst nicht nur die Semantik der Eingabe, sondern jedes verschachtelte Untergruppenpräfix (erste Hälfte, erstes Viertel usw.) liefert eine kohärente, wenn auch weniger detaillierte Darstellung.</p>
 <div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.4.x/assets/funnel-search.png' width='100%'></div>
 <p>In diesem Notizbuch untersuchen wir, wie man Matryoshka-Einbettungen mit Milvus für die semantische Suche verwenden kann. Wir veranschaulichen einen Algorithmus namens "Trichtersuche", der es uns ermöglicht, eine Ähnlichkeitssuche über eine kleine Teilmenge unserer Einbettungsdimensionen durchzuführen, ohne dass es zu einem drastischen Abfall der Wiedererkennbarkeit kommt.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
@@ -113,7 +113,7 @@ client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus unterstützt derzeit nicht die Suche über Teilmengen von Einbettungen, daher unterteilen wir die Einbettungen in zwei Teile: Der Kopf stellt die anfängliche Teilmenge des Vektors dar, die indiziert und durchsucht werden soll, und der Schwanz ist der Rest. Das Modell wurde für die Ähnlichkeitssuche über die Kosinusdistanz trainiert, daher normalisieren wir die Kopfeinbettungen. Um jedoch später Ähnlichkeiten für größere Teilmengen berechnen zu können, müssen wir die Norm der Kopfeinbettung speichern, damit wir sie vor dem Zusammenfügen mit dem Schwanz unnormalisieren können.</p>
 <p>Um die Suche über das erste 1/6 der Einbettung durchzuführen, müssen wir einen Vektorsuchindex über das Feld <code translate="no">head_embedding</code> erstellen. Später werden wir die Ergebnisse der "Trichtersuche" mit einer normalen Vektorsuche vergleichen und daher auch einen Suchindex über die gesamte Einbettung erstellen.</p>
-<p><em>Wichtig ist, dass wir die Abstandsmetrik <code translate="no">COSINE</code> und nicht <code translate="no">IP</code> verwenden, da wir sonst die Einbettungsnormen im Auge behalten müssten, was die Implementierung verkomplizieren würde (dies wird sinnvoller, wenn der Trichtersuchalgorithmus beschrieben wurde).</em></p>
+<p><em>Wichtig ist, dass wir die Distanzmetrik <code translate="no">COSINE</code> und nicht <code translate="no">IP</code> verwenden, da wir sonst die Einbettungsnormen im Auge behalten müssten, was die Implementierung verkomplizieren würde (dies wird sinnvoller, wenn der Trichtersuchalgorithmus beschrieben wurde).</em></p>
 <pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
 index_params.<span class="hljs-title function_">add_index</span>(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
@@ -142,7 +142,7 @@ client.<span class="hljs-title function_">create_index</span>(collection_name, i
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">100%|██████████| 69/69 [05:57&lt;00:00,  5.18s/it]
 </code></pre>
-<h2 id="Performing-Funnel-Search" class="common-anchor-header">Durchführen einer Trichtersuche<button data-href="#Performing-Funnel-Search" class="anchor-icon" translate="no">
+<h2 id="Performing-Funnel-Search" class="common-anchor-header">Durchführen der Trichtersuche<button data-href="#Performing-Funnel-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -187,7 +187,7 @@ res = client.search(
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;head_embedding&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>An diesem Punkt haben wir eine Suche über einen viel kleineren Vektorraum durchgeführt und haben daher wahrscheinlich eine geringere Latenzzeit und geringere Speicheranforderungen für den Index im Vergleich zur Suche über den gesamten Raum. Untersuchen wir nun die ersten 5 Treffer für jede Abfrage:</p>
+<p>An diesem Punkt haben wir eine Suche über einen viel kleineren Vektorraum durchgeführt und haben daher wahrscheinlich eine geringere Latenz und geringere Speicheranforderungen für den Index im Vergleich zu einer Suche über den gesamten Raum. Untersuchen wir nun die ersten 5 Treffer für jede Abfrage:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> query, hits <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(queries, res):
     rows = [x[<span class="hljs-string">&quot;entity&quot;</span>] <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> hits][:<span class="hljs-number">5</span>]
 
@@ -549,7 +549,7 @@ Leopard in the Snow
          Unfaithful
      Always a Bride 
 </code></pre>
-<p>Der Rückruf ist erwartungsgemäß viel schlechter als bei der Trichtersuche oder der normalen Suche (das Einbettungsmodell wurde durch kontrastives Lernen auf Präfixen der Einbettungsdimensionen und nicht auf Suffixen trainiert).</p>
+<p>Der Rückruf ist erwartungsgemäß viel schlechter als bei der Trichtersuche oder der regulären Suche (das Einbettungsmodell wurde durch kontrastives Lernen auf Präfixen der Einbettungsdimensionen trainiert, nicht auf Suffixen).</p>
 <h2 id="Summary" class="common-anchor-header">Zusammenfassung<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

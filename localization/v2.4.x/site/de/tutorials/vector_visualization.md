@@ -27,7 +27,7 @@ title: Vektor-Visualisierung
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>In diesem Beispiel wird gezeigt, wie die Einbettungen (Vektoren) in Milvus mit <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a> visualisiert werden können.</p>
-<p>Dimensionalitätsreduktionstechniken wie t-SNE sind von unschätzbarem Wert für die Visualisierung komplexer, hochdimensionaler Daten in einem 2D- oder 3D-Raum unter Beibehaltung der lokalen Struktur. Dies ermöglicht die Mustererkennung, verbessert das Verständnis von Merkmalsbeziehungen und erleichtert die Interpretation der Ergebnisse von Modellen des maschinellen Lernens. Darüber hinaus hilft es bei der Bewertung von Algorithmen durch den visuellen Vergleich von Clustering-Ergebnissen, vereinfacht die Datenpräsentation für ein nicht spezialisiertes Publikum und kann durch die Arbeit mit niedrigdimensionalen Darstellungen die Rechenkosten senken. Durch diese Anwendungen hilft t-SNE nicht nur dabei, tiefere Einblicke in Datensätze zu gewinnen, sondern unterstützt auch fundiertere Entscheidungsprozesse.</p>
+<p>Techniken zur Dimensionalitätsreduktion, wie t-SNE, sind von unschätzbarem Wert für die Visualisierung komplexer, hochdimensionaler Daten in einem 2D- oder 3D-Raum, wobei die lokale Struktur erhalten bleibt. Dies ermöglicht die Mustererkennung, verbessert das Verständnis von Merkmalsbeziehungen und erleichtert die Interpretation der Ergebnisse von Modellen des maschinellen Lernens. Darüber hinaus hilft es bei der Bewertung von Algorithmen durch den visuellen Vergleich von Clustering-Ergebnissen, vereinfacht die Datenpräsentation für ein nicht spezialisiertes Publikum und kann durch die Arbeit mit niedrigdimensionalen Darstellungen die Rechenkosten senken. Durch diese Anwendungen hilft t-SNE nicht nur dabei, tiefere Einblicke in Datensätze zu gewinnen, sondern unterstützt auch fundiertere Entscheidungsprozesse.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,7 +109,7 @@ openai_client = <span class="hljs-title class_">OpenAI</span>()
         .embedding
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>Erzeugen Sie eine Testeinbettung und geben Sie ihre Dimension und die ersten Elemente aus.</p>
+<p>Erzeugen Sie eine Testeinbettung und geben Sie deren Dimension und die ersten Elemente aus.</p>
 <pre><code translate="no" class="language-python">test_embedding = emb_text(<span class="hljs-string">&quot;This is a test&quot;</span>)
 embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <span class="hljs-built_in">print</span>(embedding_dim)

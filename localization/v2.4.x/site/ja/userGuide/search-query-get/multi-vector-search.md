@@ -19,7 +19,7 @@ title: ハイブリッド検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus2.4からマルチベクターサポートとハイブリッド検索フレームワークが導入された。異なる列のこれらのベクトルは、異なる埋め込みモデルに由来する、あるいは異なる処理方法を経た、データの多様な側面を表しています。ハイブリッド検索の結果は、RRF（Reciprocal Rank Fusion）やWeighted Scoringなどのリランキング戦略を使って統合されます。再ランク付け戦略の詳細については、<a href="/docs/ja/reranking.md">再ランク付けを</a>参照してください。</p>
+    </button></h1><p>Milvus2.4からマルチベクターサポートとハイブリッド検索フレームワークが導入された。異なる列のこれらのベクトルは、異なる埋め込みモデルに由来する、または異なる処理方法を経た、データの多様な側面を表しています。ハイブリッド検索の結果は、RRF（Reciprocal Rank Fusion）やWeighted Scoringなどのリランキング戦略を使って統合されます。再ランク付け戦略の詳細については、<a href="/docs/ja/reranking.md">再ランク付けを</a>参照してください。</p>
 <p>この機能は、写真、音声、指紋などの様々な属性に基づいて、ベクトル・ライブラリ内で最も類似した人物を特定するような、包括的な検索シナリオで特に役立ちます。</p>
 <p>このチュートリアルでは、以下の方法を学びます：</p>
 <ul>
@@ -152,7 +152,7 @@ reqs = [request_1, request_2]
 <li><p><code translate="no">AnnSearchRequest</code> <em>(オブジェクト</em>)</p>
 <p>ANN 検索要求を表すクラス。各ハイブリッド検索は、一度に 1 から 1,024<code translate="no">ANNSearchRequest</code> オブジェクトを含むことができます。</p></li>
 <li><p><code translate="no">data</code> <em>(list</em>)</p>
-<p>単一の<code translate="no">AnnSearchRequest</code> で検索するクエリーベクター。現在のところ、このパラメータは単一のクエリ・ベクタのみを含むリスト、例えば<code translate="no">[[0.5791814851218929, 0.5792985702614121, 0.8480776460143558, 0.16098005945243, 0.2842979317256803]]</code> を受け付ける。 将来的には、このパラメータは複数のクエリ・ベクタを受け付けるように拡張される予定である。</p></li>
+<p>単一の<code translate="no">AnnSearchRequest</code> で検索するクエリーベクター。現在、このパラメータは単一のクエリベクタのみを含むリスト、例えば<code translate="no">[[0.5791814851218929, 0.5792985702614121, 0.8480776460143558, 0.16098005945243, 0.2842979317256803]]</code> を受け付ける。 将来、このパラメータは複数のクエリベクタを受け付けるように拡張される予定である。</p></li>
 <li><p><code translate="no">anns_field</code> <em>(文字列</em>)</p>
 <p>単一の<code translate="no">AnnSearchRequest</code> で使用するベクトルフィールドの名前。</p></li>
 <li><p><code translate="no">param</code> <em>(dict</em>)</p>
@@ -255,7 +255,7 @@ res = collection.hybrid_search(
     </button></h2><ul>
 <li><p>通常、各コレクションには最大4つのベクトル・フィールドがデフォルトで許容されます。しかし、<code translate="no">proxy.maxVectorFieldNum</code> の設定を調整して、コレクション内のベクターフィールドの最大数を拡張するオプションがあり、コレクションごとに最大10個のベクターフィールドが制限されます。詳細は<a href="https://milvus.io/docs/configure_proxy.md#Proxy-related-Configurations">プロキシ関連の設定を</a>参照。</p></li>
 <li><p>コレクション内のベクトルフィールドに部分的にインデックスが付けられたり、ロードされたりすると、エラーになります。</p></li>
-<li><p>現在のところ、ハイブリッド検索では、<code translate="no">AnnSearchRequest</code> 、1つのクエリ・ベクタのみを運ぶことができます。</p></li>
+<li><p>現在のところ、ハイブリッド検索では、<code translate="no">AnnSearchRequest</code> 、1つのクエリ・ベクターのみを運ぶことができます。</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">よくある質問<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"

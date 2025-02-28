@@ -40,7 +40,7 @@ title: Release Notes
 <tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
-<tr><td>2.4.22</td><td>2.4.14</td><td>2.4.10</td><td>2.4.11</td></tr>
+<tr><td>2.4.22</td><td>2.4.15</td><td>2.4.10</td><td>2.4.11</td></tr>
 </tbody>
 </table>
 <p>We’re thrilled to announce the release of Milvus 2.4.22, focusing on enhanced performance, faster data loading and recovery, and improved stability. This update includes several feature improvements and bug fixes that streamline operations and optimize resource usage. We encourage you to upgrade or give it a try, and as always, we look forward to your feedback to help us continually improve Milvus!</p>

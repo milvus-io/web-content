@@ -75,13 +75,15 @@ title: Milvus_CLI 명령 참조
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(선택 사항) URL 이름입니다. 기본값은 &quot;http://127.0.0.1:19530&quot;입니다.</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-토큰</td><td style="text-align:left">(선택 사항) zilliz 클라우드 아피키 또는 <code translate="no">username:password</code>. 기본값은 없음입니다.</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(옵션) - TLS 모드를 설정합니다: 0(암호화 없음), 1(단방향 암호화), 2(아직 양방향 암호화 미지원). 기본값은 0입니다.</td></tr>
+<tr><td style="text-align:left">-cert</td><td style="text-align:left">-cert</td><td style="text-align:left">(선택 사항) 클라이언트 인증서 파일의 경로입니다. 단방향 암호화로 작업하기</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">명령 사용에 대한 도움말을 표시합니다.</td></tr>
 </tbody>
 </table>
 <p><h3 id="connect">예제</h3></p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; connect -uri <span class="hljs-attr">http</span>:<span class="hljs-comment">//127.0.0.1:19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="create-Database" class="common-anchor-header">데이터베이스 생성<button data-href="#create-Database" class="anchor-icon" translate="no">
+<h2 id="create-Database" class="common-anchor-header">데이터베이스 만들기<button data-href="#create-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,7 +98,7 @@ title: Milvus_CLI 명령 참조
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에서 데이터베이스 만들기</p>
+    </button></h2><p>밀버스에서 데이터베이스 만들기</p>
 <p><h3 id="create-database">구문</h3></p>
 <pre><code translate="no" class="language-shell">create database -db (text)
 <button class="copy-code-btn"></button></code></pre>
@@ -109,7 +111,7 @@ title: Milvus_CLI 명령 참조
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">명령 사용에 대한 도움말을 표시합니다.</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">예제</h3><h4 id="Example-1" class="common-anchor-header">예제 1</h4><p>다음 예제에서는 밀버스에서 <code translate="no">testdb</code> 데이터베이스를 만듭니다.</p>
+<h3 id="Examples" class="common-anchor-header">예제</h3><h4 id="Example-1" class="common-anchor-header">예제 1</h4><p>다음 예제는 밀버스에서 <code translate="no">testdb</code> 데이터베이스를 만듭니다.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create database -db testdb
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="use-Database" class="common-anchor-header">데이터베이스 사용<button data-href="#use-Database" class="anchor-icon" translate="no">
@@ -865,7 +867,7 @@ Timeout []:
 <tr><td style="text-align:left">-in</td><td style="text-align:left">-인덱스 이름</td><td style="text-align:left">인덱스의 이름입니다.</td></tr>
 </tbody>
 </table>
-<p>| --help | N/A | 명령 사용에 대한 도움말을 표시합니다. |</p>
+<p>| --help | n/a | 명령 사용에 대한 도움말을 표시합니다. |</p>
 <p><h3 >예제</h3></p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; show index -c test_collection -in index_name
 <button class="copy-code-btn"></button></code></pre>

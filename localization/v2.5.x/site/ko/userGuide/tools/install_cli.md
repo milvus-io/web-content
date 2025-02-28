@@ -92,9 +92,3 @@ title: Milvus_CLI 설치
 <pre><code translate="no" class="language-shell">python -m pip install --editable .
 <button class="copy-code-btn"></button></code></pre>
 <p>또는 압축된 타르볼(<code translate="no">.tar.gz</code> 파일)에서 Milvus_CLI를 설치할 수도 있습니다. <a href="https://github.com/zilliztech/milvus_cli/releases">타르볼을</a> 다운로드하고 <code translate="no">python -m pip install milvus_cli-&lt;version&gt;.tar.gz</code> 을 실행합니다.</p>
-<h3 id="Install-from-an-exe-file" class="common-anchor-header">.exe 파일에서 설치하기</h3><div class="alert note"> 이 설치 방법은 Windows에만 적용됩니다. </div>
-<p><a href="https://github.com/zilliztech/milvus_cli/releases">GitHub에서</a>.exe 파일을 다운로드하고 실행하여 Milvus_CLI를 설치합니다. 성공하면 다음 그림과 같이 <code translate="no">milvus_cli-&lt;version&gt;.exe</code> 가 나타납니다.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus_cli_exe.png" alt="Milvus_CLI" class="doc-image" id="milvus_cli" />
-   </span> <span class="img-wrapper"> <span>Milvus_CLI</span> </span></p>

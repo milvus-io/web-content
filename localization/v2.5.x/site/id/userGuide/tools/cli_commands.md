@@ -75,6 +75,8 @@ title: Referensi Perintah Milvus_CLI
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(Opsional) Nama uri. Standarnya adalah &quot;http://127.0.0.1:19530&quot;.</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(Opsional) Apikey awan zilliz atau <code translate="no">username:password</code>. Standarnya adalah Tidak ada.</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(Opsional) - Mengatur mode TLS: 0 (Tidak ada enkripsi), 1 (Enkripsi satu arah), 2 (Enkripsi dua arah belum mendukung). Nilai defaultnya adalah 0</td></tr>
+<tr><td style="text-align:left">-cert</td><td style="text-align:left">-cert</td><td style="text-align:left">(Opsional) Jalur ke file sertifikat klien. Bekerja dengan enkripsi satu arah</td></tr>
 <tr><td style="text-align:left">-bantuan</td><td style="text-align:left">n/a</td><td style="text-align:left">Menampilkan bantuan untuk menggunakan perintah.</td></tr>
 </tbody>
 </table>

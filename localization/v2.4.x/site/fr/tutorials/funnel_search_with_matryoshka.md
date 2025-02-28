@@ -42,7 +42,7 @@ title: Recherche en entonnoir avec Matryoshka Embeddings
 <span class="hljs-keyword">import</span> torch.<span class="hljs-property">nn</span>.<span class="hljs-property">functional</span> <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Modèle d'intégration Matryoshka<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
+<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Modèle d'intégration de la charge Matryoshka<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -110,7 +110,7 @@ fields = [
 schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-literal">False</span>)
 client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus ne prend pas actuellement en charge la recherche sur des sous-ensembles d'enchâssements, c'est pourquoi nous divisons les enchâssements en deux parties : la tête représente le sous-ensemble initial du vecteur à indexer et à rechercher, et la queue est le reste. Le modèle est formé pour la recherche de similarité par distance cosinusoïdale, nous normalisons donc les intégrations de la tête. Cependant, afin de calculer ultérieurement les similarités pour des sous-ensembles plus importants, nous devons stocker la norme de l'intégration de la tête, afin de pouvoir la dé-normaliser avant de la joindre à la queue.</p>
+<p>Milvus ne prend pas actuellement en charge la recherche sur des sous-ensembles d'enchâssements, c'est pourquoi nous divisons les enchâssements en deux parties : la tête représente le sous-ensemble initial du vecteur à indexer et à rechercher, et la queue est le reste. Le modèle est formé pour la recherche de similarité par distance cosinusoïdale, nous normalisons donc les intégrations de tête. Cependant, afin de calculer ultérieurement les similarités pour des sous-ensembles plus importants, nous devons stocker la norme de l'intégration de la tête, afin de pouvoir la dé-normaliser avant de la joindre à la queue.</p>
 <p>Pour effectuer une recherche via le premier 1/6e de l'intégration, nous devrons créer un index de recherche vectorielle sur le champ <code translate="no">head_embedding</code>. Plus tard, nous comparerons les résultats de la "recherche en entonnoir" à ceux d'une recherche vectorielle classique, et construirons donc également un index de recherche sur l'ensemble de l'intégration.</p>
 <p><em>Il est important de noter que nous utilisons la métrique de distance <code translate="no">COSINE</code> plutôt que <code translate="no">IP</code>, car sinon nous devrions tenir compte des normes d'intégration, ce qui compliquerait la mise en œuvre (cela aura plus de sens une fois que l'algorithme de recherche en entonnoir aura été décrit).</em></p>
 <pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
@@ -375,7 +375,7 @@ Home Alone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pourquoi la recherche en entonnoir n'a-t-elle pas permis de retrouver Ferris Bueller's Day Off ? Examinons s'il figurait dans la liste originale des candidats ou s'il a été filtré par erreur.</p>
+    </button></h2><p>Pourquoi la recherche en entonnoir n'a-t-elle pas permis de retrouver Ferris Bueller's Day Off ? Examinons s'il figurait ou non dans la liste originale des candidats ou s'il a été filtré par erreur.</p>
 <pre><code translate="no" class="language-python">queries2 = [
     <span class="hljs-string">&quot;A teenager fakes illness to get off school and have adventures with two friends.&quot;</span>
 ]

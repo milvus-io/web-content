@@ -2,11 +2,11 @@
 id: rerankers-voyage.md
 order: 5
 summary: >-
-  Milvus 通过 "VoyageRerankFunction "类支持 Voyage reranker
+  Milvus 通过 "VoyageRerankFunction "类支持 Voyage Reranker
   模型。该功能可让您有效地对查询-文档对的相关性进行评分。
 title: Rerankers Voyage
 ---
-<h1 id="Voyage" class="common-anchor-header">航行<button data-href="#Voyage" class="anchor-icon" translate="no">
+<h1 id="Voyage" class="common-anchor-header">Voyage 模型<button data-href="#Voyage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +21,7 @@ title: Rerankers Voyage
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 通过<code translate="no">VoyageRerankFunction</code> 类支持<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/reranker">Voyage reranker 模型</a>。该功能可让您有效地对查询-文档对的相关性进行评分。</p>
+    </button></h1><p>Milvus 通过<code translate="no">VoyageRerankFunction</code> 类支持<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/reranker">Voyage Reranker 模型</a>。该功能可让您有效地对查询-文档对的相关性进行评分。</p>
 <p>要使用该功能，请安装必要的依赖项：</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
@@ -40,9 +40,9 @@ voyage_rf = VoyageRerankFunction(
 <li><p><code translate="no">model_name</code> <em>(字符串）</em></p>
 <p>用于编码的 Voyage 模型名称。如果不指定此参数，则将使用<code translate="no">rerank-lite-1</code> 。有关可用模型的列表，请参阅<a href="https://docs.voyageai.com/docs/reranker">Rerankers</a>。</p></li>
 <li><p><code translate="no">api_key</code> <em>（字符串）</em></p>
-<p>访问 Voyage API 的 API 密钥。有关如何创建 API 密钥<a href="https://docs.voyageai.com/docs/api-key-and-installation">的</a>信息，请参阅<a href="https://docs.voyageai.com/docs/api-key-and-installation">API 密钥和 Python 客户端</a>。</p></li>
+<p>访问 Voyage API 的 API 密钥。有关如何创建 API 密钥的信息，请参阅<a href="https://docs.voyageai.com/docs/api-key-and-installation">API 密钥和 Python 客户端</a>。</p></li>
 </ul>
-<p>然后，使用下面的代码根据查询对文档进行重新排名：</p>
+<p>然后，使用以下代码根据查询结果对文档进行 Reranker：</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 
 documents = [

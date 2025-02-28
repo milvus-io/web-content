@@ -29,7 +29,7 @@ title: Motor de pesquisa de texto
 <li><a href="https://towhee.io/">Towhee</a></li>
 </ul>
 <p><br/></p>
-<p>Uma das principais aplicações do Milvus no domínio do processamento da linguagem natural (PNL) é o motor de pesquisa de texto. Trata-se de uma excelente ferramenta que pode ajudar os utilizadores a encontrar a informação que procuram. Pode mesmo fazer emergir informações difíceis de encontrar. Os motores de pesquisa de texto comparam as palavras-chave ou a semântica introduzidas pelos utilizadores com uma base de dados de textos e, em seguida, devolvem os resultados que satisfazem determinados critérios.</p>
+<p>Uma das principais aplicações do Milvus no domínio do processamento de linguagem natural (PNL) é o motor de pesquisa de texto. Trata-se de uma excelente ferramenta que pode ajudar os utilizadores a encontrar a informação que procuram. Pode mesmo fazer emergir informações difíceis de encontrar. Os motores de pesquisa de texto comparam as palavras-chave ou a semântica introduzidas pelos utilizadores com uma base de dados de textos e, em seguida, devolvem os resultados que satisfazem determinados critérios.</p>
 <p><br/></p>
 <p>Neste tutorial, aprenderá a construir um motor de pesquisa de texto. Este tutorial utiliza o BERT para converter textos em vectores de comprimento fixo. O Milvus é utilizado como base de dados vetorial para armazenamento e pesquisa de semelhanças vectoriais. Em seguida, utilize o MySQL para mapear os IDs vectoriais gerados pelo Milvus para os dados de texto.</p>
 <p><br/></p>

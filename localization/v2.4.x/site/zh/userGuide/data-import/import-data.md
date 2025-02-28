@@ -373,7 +373,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
 <li><p>在导入任务状态为 "<strong>已完成 "</strong>之前，保证新导入的数据对查询和搜索是不可见的。</p></li>
 <li><p>一旦任务状态为<strong>完成</strong>、</p>
 <ul>
-<li><p>如果 Collections 尚未加载，可以使用<code translate="no">load</code> 函数加载新导入的数据。</p></li>
+<li><p>如果 Collections 未加载，可使用<code translate="no">load</code> 函数加载新导入的数据。</p></li>
 <li><p>如果 Collections 已加载，则可调用<code translate="no">load(is_refresh=True)</code> 加载导入的数据。</p></li>
 </ul></li>
 </ul></li>

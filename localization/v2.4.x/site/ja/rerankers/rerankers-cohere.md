@@ -3,7 +3,7 @@ id: rerankers-cohere.md
 order: 3
 summary: >-
   Milvusは `CohereRerankFunction`
-  クラスを通してCohereリランカーモデルをサポートしています。この機能により、クエリとドキュメントのペアの関連性を効率的にスコアリングすることができる。
+  クラスを通してCohereリランカーモデルをサポートしています。この機能により、クエリとドキュメントのペアの関連性を効果的にスコアリングすることができる。
 title: リランカーズ・コヒーレ
 ---
 <h1 id="Cohere" class="common-anchor-header">Cohere<button data-href="#Cohere" class="anchor-icon" translate="no">

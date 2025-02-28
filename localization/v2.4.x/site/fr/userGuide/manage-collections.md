@@ -386,7 +386,7 @@ schema.WithField(
     </tr>
     <tr>
       <td><code translate="no">enable_dynamic_field</code></td>
-      <td>Détermine si Milvus enregistre les valeurs des champs non définis dans un champ dynamique si les données insérées dans la collection cible comprennent des champs qui ne sont pas définis dans le schéma de la collection.<br/>Si ce paramètre a la valeur <strong>True</strong>, Milvus crée un champ appelé <strong>$meta</strong> pour stocker tous les champs non définis et leurs valeurs à partir des données insérées.</td>
+      <td>Détermine si Milvus enregistre les valeurs des champs non définis dans un champ dynamique si les données insérées dans la collection cible comprennent des champs qui ne sont pas définis dans le schéma de la collection.<br/>Lorsque cette valeur est définie sur <strong>True</strong>, Milvus crée un champ appelé <strong>$meta</strong> pour stocker tous les champs non définis et leurs valeurs à partir des données insérées.</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
@@ -424,11 +424,11 @@ schema.WithField(
     </tr>
     <tr>
       <td><code translate="no">isPrimaryKey</code></td>
-      <td>Indique si le champ actuel est le champ primaire d'une collection.<br/>Chaque collection n'a qu'un seul champ primaire. Un champ primaire doit être de type <strong>DataType.Int64</strong> ou <strong>DataType.VarChar</strong>.</td>
+      <td>Indique si le champ actuel est le champ primaire d'une collection.<br/>Chaque collection ne possède qu'un seul champ primaire. Un champ primaire doit être de type <strong>DataType.Int64</strong> ou <strong>DataType.VarChar</strong>.</td>
     </tr>
     <tr>
       <td><code translate="no">autoID</code></td>
-      <td>Permet au champ primaire de s'incrémenter automatiquement.<br/>La valeur <strong>true</strong> permet au champ primaire de s'incrémenter automatiquement. Dans ce cas, le champ primaire ne doit pas être inclus dans les données à insérer pour éviter les erreurs.</td>
+      <td>Indique si le champ primaire peut s'incrémenter automatiquement.<br/>La valeur <strong>true</strong> permet au champ primaire de s'incrémenter automatiquement. Dans ce cas, le champ primaire ne doit pas être inclus dans les données à insérer pour éviter les erreurs.</td>
     </tr>
     <tr>
       <td><code translate="no">dimension</code></td>
@@ -540,7 +540,7 @@ schema.WithField(
 <p>Pour définir les paramètres de l'index, utilisez <a href="https://milvus.io/api-reference/go/v2.4.x/Index/CreateIndex.md"><code translate="no">CreateIndex()</code></a>.</p>
 </div>
 <div class="language-shell">
-<p>Pour définir les paramètres d'index, vous devez définir un objet JSON qui respecte le format des paramètres d'index tel qu'il est indiqué sur la page de référence du point de terminaison de l'API. <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> page de référence des points de terminaison de l'API.</p>
+<p>Pour définir les paramètres d'index, vous devez définir un objet JSON qui respecte le format des paramètres d'index tel qu'il est indiqué sur la page de référence du point de terminaison de l'API <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> page de référence des points de terminaison de l'API.</p>
 </div>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
@@ -1086,7 +1086,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <thead>
 <tr>
 <th>Paramètre</th>
-<th>Description de la collection</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>

@@ -38,7 +38,7 @@ bge_rf = BGERerankFunction(
 <p><strong>매개변수</strong></p>
 <ul>
 <li><p><code translate="no">model_name</code> <em>(문자열</em>)</p>
-<p>사용할 모델의 이름입니다. 예를 들어 <code translate="no">BAAI/bge-reranker-base</code>, <code translate="no">BAAI/bge-reranker-large</code> 등과 같이 사용 가능한 BGE 리랭커 모델 이름을 지정할 수 있습니다. 이 매개변수를 지정하지 않으면 <code translate="no">BAAI/bge-reranker-v2-m3</code> 이 사용됩니다. 사용 가능한 모델 목록은 <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/llm_reranker#model-list">모델 목록을</a> 참조하세요.</p></li>
+<p>사용할 모델의 이름입니다. 예를 들어 <code translate="no">BAAI/bge-reranker-base</code>, <code translate="no">BAAI/bge-reranker-large</code> 등과 같이 사용 가능한 BGE 리랭커 모델 이름을 지정할 수 있습니다. 이 파라미터를 지정하지 않으면 <code translate="no">BAAI/bge-reranker-v2-m3</code> 이 사용됩니다. 사용 가능한 모델 목록은 <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/llm_reranker#model-list">모델 목록을</a> 참조하세요.</p></li>
 <li><p><code translate="no">device</code> <em>(문자열</em>)</p>
 <p>선택 사항입니다. 모델을 실행하는 데 사용할 장치입니다. 지정하지 않으면 모델이 CPU에서 실행됩니다. CPU에는 <code translate="no">cpu</code>, n번째 GPU 장치에는 <code translate="no">cuda:n</code> 을 지정할 수 있습니다.</p></li>
 </ul>

@@ -92,9 +92,3 @@ title: Instalar o Milvus_CLI
 <pre><code translate="no" class="language-shell">python -m pip install --editable .
 <button class="copy-code-btn"></button></code></pre>
 <p>Em alternativa, pode instalar o Milvus_CLI a partir de um tarball comprimido (ficheiro<code translate="no">.tar.gz</code> ). Descarregue um <a href="https://github.com/zilliztech/milvus_cli/releases">tarball</a> e execute <code translate="no">python -m pip install milvus_cli-&lt;version&gt;.tar.gz</code>.</p>
-<h3 id="Install-from-an-exe-file" class="common-anchor-header">Instalar a partir de um ficheiro .exe</h3><div class="alert note"> Este método de instalação só se aplica ao Windows. </div>
-<p>Descarregue um ficheiro .exe a partir do <a href="https://github.com/zilliztech/milvus_cli/releases">GitHub</a> e execute-o para instalar o Milvus_CLI. Se for bem sucedido, <code translate="no">milvus_cli-&lt;version&gt;.exe</code> aparece como mostra a figura seguinte.</p>
-<p>
-  
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus_cli_exe.png" alt="Milvus_CLI" class="doc-image" id="milvus_cli" />
-   </span> <span class="img-wrapper"> <span>Milvus_CLI</span> </span></p>

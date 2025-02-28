@@ -255,7 +255,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>Una volta che un campo di una collezione viene usato come chiave di partizione, Milvus crea il numero di partizioni specificato e le gestisce per conto dell'utente. Pertanto, non è più possibile manipolare le partizioni di questa collezione.</p>
-<p>Lo snippet seguente dimostra che 64 partizioni in una raccolta una volta che uno dei suoi campi viene usato come chiave di partizione.</p>
+<p>Lo snippet seguente dimostra che 64 partizioni in una collezione una volta che uno dei suoi campi viene usato come chiave di partizione.</p>
 <h2 id="Insert-data" class="common-anchor-header">Inserire i dati<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -433,7 +433,7 @@ System.out.println(insertResp.getInsertCnt());
 </div>
 <div class="admonition note">
 <p><b>note</b></p>
-<p>Per eseguire una ricerca di somiglianza utilizzando la chiave di partizione, è necessario includere uno dei seguenti elementi nell'espressione booleana della richiesta di ricerca:</p>
+<p>Per eseguire una ricerca di similarità utilizzando la chiave di partizione, è necessario includere una delle seguenti opzioni nell'espressione booleana della richiesta di ricerca:</p>
 <ul>
 <li><p><code translate="no">expr='&lt;partition_key&gt;=="xxxx"'</code></p></li>
 <li><p><code translate="no">expr='&lt;partition_key&gt; in ["xxx", "xxx"]'</code></p></li>
@@ -550,4 +550,4 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È possibile utilizzare la funzione di chiave di partizione per ottenere migliori prestazioni di ricerca e abilitare la multi-tenancy. Questo può essere fatto assegnando un valore specifico per ogni tenancy come campo della chiave di partizione per ogni entità. Durante la ricerca o l'interrogazione della raccolta, è possibile filtrare le entità in base al valore specifico del tenant includendo il campo della chiave di partizione nell'espressione booleana. Questo approccio garantisce l'isolamento dei dati per tenant ed evita la scansione di partizioni non necessarie.</p>
+    </button></h2><p>È possibile utilizzare la funzione di chiave di partizione per ottenere migliori prestazioni di ricerca e abilitare la multi-tenancy. Questo può essere fatto assegnando un valore specifico per ogni tenancy come campo della chiave di partizione per ogni entità. Durante la ricerca o l'interrogazione della raccolta, è possibile filtrare le entità in base al valore specifico del tenant, includendo il campo della chiave di partizione nell'espressione booleana. Questo approccio garantisce l'isolamento dei dati per tenant ed evita la scansione di partizioni non necessarie.</p>

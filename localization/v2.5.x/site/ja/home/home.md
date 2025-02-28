@@ -48,7 +48,7 @@ Milvusドキュメントへようこそ！</h1></p>
   Milvusでベクトル類似検索アプリケーションを構築する方法を学びます。  </p>
 </div>
 </div>
-<h2 id="Recommended-articles" class="common-anchor-header">おすすめ記事<button data-href="#Recommended-articles" class="anchor-icon" translate="no">
+<h2 id="Recommended-articles" class="common-anchor-header">推奨記事<button data-href="#Recommended-articles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +71,7 @@ Milvusドキュメントへようこそ！</h1></p>
 <li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
 <li><a href="/docs/ja/index-vector-fields.md">インデックス・ベクトル・フィールド</a></li>
 <li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
-<li><a href="/docs/ja/get-and-scalar-query.md">取得とスカラークエリー</a></li>
+<li><a href="/docs/ja/get-and-scalar-query.md">取得とスカラークエリ</a></li>
 </ul>
 </div>
 <div class="recomment-item">
@@ -116,7 +116,7 @@ Milvusドキュメントへようこそ！</h1></p>
 <li><a href="/docs/ja/full-text-search.md">全文検索の</a>ガイダンスを追加しました。</li>
 <li><a href="/docs/ja/keyword-match.md">テキストマッチの</a>方法に関するガイダンスを追加しました。</li>
 <li><a href="/docs/ja/nullable-and-default.md">NULL値およびデフォルト値の有効</a>化方法に関するガイダンスを追加しました。</li>
-<li><a href="/docs/ja/analyzer-overview.md">アナライザーの</a>説明を追加。</li>
+<li><a href="/docs/ja/analyzer-overview.md">アナライザの</a>説明を追加。</li>
 <li><a href="/docs/ja/bitmap.md">ビットマップインデックスの</a>説明を追加。</li>
 </ul>
 </div>

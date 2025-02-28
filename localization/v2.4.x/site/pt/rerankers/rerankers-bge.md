@@ -2,9 +2,9 @@
 id: rerankers-bge.md
 order: 2
 summary: >-
-  Milvus suporta modelos de reranker BGE através da classe `BGERerankFunction`.
-  Esta funcionalidade permite-lhe classificar a relevância dos pares
-  consulta-documento de forma eficaz.
+  O Milvus suporta modelos de reranker do BGE através da classe
+  `BGERerankFunction`. Esta funcionalidade permite-lhe classificar a relevância
+  dos pares consulta-documento de forma eficaz.
 title: BGE
 ---
 <h1 id="BGE" class="common-anchor-header">BGE<button data-href="#BGE" class="anchor-icon" translate="no">

@@ -335,7 +335,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
     color_tag: <span class="hljs-string">&#x27;blue_2064&#x27;</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Inserire i dati</h3><p>A questo punto è possibile inserire in modo sicuro i dati nell'insieme.</p>
+<h3 id="Insert-data" class="common-anchor-header">Inserire i dati</h3><p>Si può quindi inserire in modo sicuro i dati nell'insieme.</p>
 <div class="language-python">
 <p>Per ulteriori informazioni sui parametri, consultare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a> nel riferimento dell'SDK.</p>
 </div>

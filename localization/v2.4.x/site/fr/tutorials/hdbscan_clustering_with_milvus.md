@@ -49,7 +49,7 @@ title: HDBSCAN Clustering avec Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Télécharger l'ensemble de données de nouvelles à partir de https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/</p>
+    </button></h2><p>Télécharger le jeu de données des actualités sur https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/</p>
 <pre><code translate="no" class="language-shell">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 $ pip install hdbscan
 $ pip install plotly
@@ -217,7 +217,7 @@ dist_metric = np.full((<span class="hljs-built_in">len</span>(ids), <span class=
 h = hdbscan.HDBSCAN(min_samples=<span class="hljs-number">3</span>, min_cluster_size=<span class="hljs-number">3</span>, metric=<span class="hljs-string">&quot;precomputed&quot;</span>)
 hdb = h.fit(dist_metric)
 <button class="copy-code-btn"></button></code></pre>
-<p>Après cela, le regroupement HDBSCAN est terminé. Nous pouvons récupérer des données et afficher leur cluster. Notez que certaines données ne seront assignées à aucun cluster, ce qui signifie qu'il s'agit de bruit, car elles sont situées dans une région peu dense.</p>
+<p>Après cela, le regroupement HDBSCAN est terminé. Nous pouvons obtenir des données et afficher leur cluster. Notez que certaines données ne seront assignées à aucun cluster, ce qui signifie qu'il s'agit de bruit, parce qu'elles sont situées dans une région peu dense.</p>
 <h2 id="Clusters-Visualization-using-UMAP" class="common-anchor-header">Visualisation des grappes à l'aide de l'UMAP<button data-href="#Clusters-Visualization-using-UMAP" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -233,7 +233,7 @@ hdb = h.fit(dist_metric)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nous avons déjà regroupé les données à l'aide de HDBSCAN et nous pouvons obtenir les étiquettes pour chaque point de données. Cependant, en utilisant certaines techniques de visualisation, nous pouvons obtenir une image complète des grappes pour une analyse intuitive. Nous allons maintenant utiliser UMAP pour visualiser les grappes. UMAP est une méthode efficace utilisée pour la réduction de la dimensionnalité, qui préserve la structure des données de haute dimension tout en les projetant dans un espace de dimension inférieure pour la visualisation ou une analyse ultérieure. Ici encore, nous itérons les points de données et obtenons l'identifiant et le texte des données originales, puis nous utilisons ploty pour représenter les points de données avec ces méta-informations dans une figure, et nous utilisons différentes couleurs pour représenter les différents groupes.</p>
+    </button></h2><p>Nous avons déjà regroupé les données à l'aide de HDBSCAN et nous pouvons obtenir les étiquettes pour chaque point de données. Cependant, en utilisant certaines techniques de visualisation, nous pouvons obtenir une image complète des grappes pour une analyse intuitive. Nous allons maintenant utiliser UMAP pour visualiser les grappes. UMAP est une méthode efficace utilisée pour la réduction de la dimensionnalité, préservant la structure des données à haute dimension tout en les projetant dans un espace à plus faible dimension pour la visualisation ou une analyse plus approfondie. Ici encore, nous itérons les points de données et obtenons l'identifiant et le texte des données originales, puis nous utilisons ploty pour représenter les points de données avec ces méta-informations dans une figure, et nous utilisons différentes couleurs pour représenter les différents groupes.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> plotly.io <span class="hljs-keyword">as</span> pio
 
 pio.renderers.default = <span class="hljs-string">&quot;notebook&quot;</span>

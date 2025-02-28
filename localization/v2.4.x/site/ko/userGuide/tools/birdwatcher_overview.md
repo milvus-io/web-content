@@ -1,7 +1,7 @@
 ---
 id: birdwatcher_overview.md
 summary: 'Birdwatcher는 Milvus 2.x용 디버그 도구로, etcd에 연결하여 Milvus 시스템의 상태를 검사합니다.'
-title: 조류 관찰자
+title: Birdwatcher
 ---
 <h1 id="Birdwatcher" class="common-anchor-header">Birdwatcher<button data-href="#Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"

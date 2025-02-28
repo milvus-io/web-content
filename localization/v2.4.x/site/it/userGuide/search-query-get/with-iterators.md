@@ -353,7 +353,7 @@ System.out.println(results.size());
     </tr>
     <tr>
       <td><code translate="no">batch_size</code></td>
-      <td>Il numero di entità da restituire ogni volta che si chiama <code translate="no">next()</code> sull'iteratore corrente.<br/>Il valore predefinito è <strong>1000</strong>. Impostare un valore corretto per controllare il numero di entità da restituire per ogni iterazione.</td>
+      <td>Il numero di entità da restituire ogni volta che si chiama <code translate="no">next()</code> sull'iteratore corrente.<br/>Il valore è predefinito a <strong>1000</strong>. Impostare un valore corretto per controllare il numero di entità da restituire per ogni iterazione.</td>
     </tr>
     <tr>
       <td><code translate="no">param</code></td>
@@ -500,7 +500,7 @@ System.out.println(results.subList(<span class="hljs-number">0</span>, <span cla
   <tbody>
     <tr>
       <td><code translate="no">batch_size</code></td>
-      <td>Il numero di entità da restituire ogni volta che si chiama <code translate="no">next()</code> sull'iteratore corrente.<br/>Il valore predefinito è <strong>1000</strong>. Impostare un valore corretto per controllare il numero di entità da restituire per iterazione.</td>
+      <td>Il numero di entità da restituire ogni volta che si chiama <code translate="no">next()</code> sull'iteratore corrente.<br/>Il valore predefinito è <strong>1000</strong>. Impostare un valore corretto per controllare il numero di entità da restituire per ogni iterazione.</td>
     </tr>
     <tr>
       <td><code translate="no">expr</code></td>

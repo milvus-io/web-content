@@ -398,7 +398,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O upserting de dados é uma combinação de operações de atualização e inserção. No Milvus, uma operação de upsert executa uma ação ao nível dos dados para inserir ou atualizar uma entidade com base no facto de a sua chave primária já existir numa coleção. Especificamente:</p>
+    </button></h2><p>O upserting de dados é uma combinação de operações de atualização e inserção. Em Milvus, uma operação de upsert executa uma ação ao nível dos dados para inserir ou atualizar uma entidade com base no facto de a sua chave primária já existir numa coleção. Especificamente:</p>
 <ul>
 <li><p>Se a chave primária da entidade já existir na coleção, a entidade existente será substituída.</p></li>
 <li><p>Se a chave primária não existir na coleção, será inserida uma nova entidade.</p></li>
@@ -607,7 +607,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Se uma entidade não for mais necessária, você pode excluí-la da coleção usando <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/delete.md"><code translate="no">delete()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>Se uma entidade não for mais necessária, é possível excluí-la da coleção usando <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/delete.md"><code translate="no">delete()</code></a>.</p>
+<p>Se uma entidade não for mais necessária, você pode excluí-la da coleção usando <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/delete.md"><code translate="no">delete()</code></a>.</p>
 </div>
 <div class="language-javascript">
 <p>Se uma entidade já não for necessária, pode eliminá-la da coleção utilizando <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/delete.md"><code translate="no">delete()</code></a>.</p>
@@ -616,7 +616,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <ul>
 <li><p><strong>Eliminar entidades por filtro.</strong></p>
    <div class='alert note'>
-<p>Ao utilizar expressões de filtro para eliminar entidades, certifique-se de que a coleção foi carregada. Caso contrário, o Milvus devolverá um erro.</p>
+<p>Quando utilizar expressões de filtro para eliminar entidades, certifique-se de que a coleção foi carregada. Caso contrário, o Milvus devolverá um erro.</p>
    </div>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
@@ -665,7 +665,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Eliminar entidades por IDs.</strong></p>
-<p>Os snippets a seguir demonstram como excluir entidades por IDs de uma partição específica. Também funciona se você deixar o nome da partição não especificado.</p>
+<p>Os trechos a seguir demonstram como excluir entidades por IDs de uma partição específica. Também funciona se você deixar o nome da partição não especificado.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.delete(

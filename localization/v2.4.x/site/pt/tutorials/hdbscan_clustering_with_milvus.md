@@ -49,7 +49,7 @@ title: Agrupamento HDBSCAN com Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>descarregar conjunto de dados de notícias de https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/</p>
+    </button></h2><p>descarregar o conjunto de dados de notícias de https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/</p>
 <pre><code translate="no" class="language-shell">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 $ pip install hdbscan
 $ pip install plotly
@@ -179,7 +179,7 @@ dist = {}
 
 embeddings = []
 <button class="copy-code-btn"></button></code></pre>
-<p>Vamos iterar todos os embeddings da coleção Milvus. Para cada embedding, vamos procurar os seus top-k vizinhos na mesma coleção, obter os seus ids e distâncias. Depois, também precisamos de construir um dicionário para mapear o ID original para um índice contínuo na matriz de distâncias. Quando terminarmos, precisamos de criar uma matriz de distâncias inicializada com todos os elementos como infinito e preencher os elementos que procurámos. Desta forma, a distância entre pontos distantes será ignorada. Finalmente, utilizamos a biblioteca HDBSCAN para agrupar os pontos utilizando a matriz de distâncias que criámos. Temos de definir a métrica como 'precomputed' para indicar que os dados são a matriz de distâncias e não os embeddings originais.</p>
+<p>Vamos iterar todos os embeddings da coleção Milvus. Para cada embedding, vamos procurar os seus top-k vizinhos na mesma coleção, obter os seus ids e distâncias. Depois, também precisamos de construir um dicionário para mapear o ID original para um índice contínuo na matriz de distâncias. Quando terminarmos, precisamos de criar uma matriz de distâncias inicializada com todos os elementos como infinito e preencher os elementos que procurámos. Desta forma, a distância entre pontos distantes será ignorada. Finalmente, utilizamos a biblioteca HDBSCAN para agrupar os pontos utilizando a matriz de distâncias que criámos. É necessário definir a métrica como 'precomputed' para indicar que os dados são a matriz de distâncias e não os embeddings originais.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
     batch = iterator.<span class="hljs-built_in">next</span>()
     batch_ids = [data[<span class="hljs-string">&quot;id&quot;</span>] <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> batch]
@@ -233,7 +233,7 @@ hdb = h.fit(dist_metric)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Já agrupámos os dados utilizando o HDBSCAN e podemos obter as etiquetas para cada ponto de dados. No entanto, usando algumas técnicas de visualização, podemos obter a imagem completa dos clusters para uma análise intuitiva. Agora vamos utilizar o UMAP para visualizar os clusters. O UMAP é um método eficiente utilizado para a redução da dimensionalidade, preservando a estrutura de dados de elevada dimensão enquanto os projecta num espaço de dimensão inferior para visualização ou análise posterior. Aqui, mais uma vez, iteramos os pontos de dados e obtemos o id e o texto dos dados originais, depois utilizamos o ploty para representar os pontos de dados com estas metainformações numa figura e utilizamos cores diferentes para representar os diferentes clusters.</p>
+    </button></h2><p>Já agrupámos os dados utilizando o HDBSCAN e podemos obter as etiquetas para cada ponto de dados. No entanto, usando algumas técnicas de visualização, podemos obter a imagem completa dos clusters para uma análise intuitiva. Agora vamos utilizar o UMAP para visualizar os clusters. O UMAP é um método eficiente utilizado para a redução da dimensionalidade, preservando a estrutura dos dados de alta dimensão enquanto os projecta num espaço de menor dimensão para visualização ou análise posterior. Aqui, mais uma vez, iteramos os pontos de dados e obtemos o id e o texto dos dados originais, depois utilizamos o ploty para representar os pontos de dados com estas metainformações numa figura e utilizamos cores diferentes para representar os diferentes clusters.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> plotly.io <span class="hljs-keyword">as</span> pio
 
 pio.renderers.default = <span class="hljs-string">&quot;notebook&quot;</span>
@@ -274,4 +274,4 @@ fig.show()
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>imagem</span> </span></p>
-<p>Aqui, demonstramos que os dados estão bem agrupados e pode passar o rato sobre os pontos para verificar o texto que representam. Com este caderno de notas, esperamos que aprenda a utilizar o HDBSCAN para agrupar embeddings com o Milvus de forma eficiente, o que também pode ser aplicado a outros tipos de dados. Combinada com modelos de linguagem de grande dimensão, esta abordagem permite uma análise mais profunda dos seus dados em grande escala.</p>
+<p>Aqui, demonstramos que os dados estão bem agrupados e pode passar o rato sobre os pontos para verificar o texto que representam. Com este caderno de notas, esperamos que aprenda a utilizar o HDBSCAN para agrupar embeddings com o Milvus de forma eficiente, o que também pode ser aplicado a outros tipos de dados. Combinada com grandes modelos de linguagem, esta abordagem permite uma análise mais profunda dos seus dados em grande escala.</p>

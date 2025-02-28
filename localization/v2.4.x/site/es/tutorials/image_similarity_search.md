@@ -70,7 +70,7 @@ title: Búsqueda de imágenes con Milvus
 $ pip install timm
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Si utilizas Google Colab, para activar las dependencias recién instaladas, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong>. (Haga clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla y seleccione "Reiniciar sesión" en el menú desplegable).</p>
+<p>Si utilizas Google Colab, para activar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong>. (Haga clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla y seleccione "Reiniciar sesión" en el menú desplegable).</p>
 </div>
 <h2 id="Define-the-Feature-Extractor" class="common-anchor-header">Definir el extractor de características<button data-href="#Define-the-Feature-Extractor" class="anchor-icon" translate="no">
       <svg translate="no"

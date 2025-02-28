@@ -55,7 +55,7 @@ title: 标量字段索引
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>要使用自动<strong>索引</strong>，请省略 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>中省略 index_type 参数，以便 Milvus 根据标量字段类型推断索引类型。</p>
+<p>要使用自动<strong>索引</strong>，请在 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>中省略 index_type 参数，以便 Milvus 根据标量字段类型推断索引类型。</p>
 </div>
 <div class="language-java">
 <p>要使用自动<strong>索引</strong>，请省略 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>中的 indexType 参数，以便 Milvus 根据标量字段类型推断索引类型。</p>
@@ -126,7 +126,7 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>要使用自定义<strong>索引</strong>，请在 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
+<p>要使用自定义<strong>索引</strong>，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>要使用自定义索引，请在.NET 文件中使用<strong>indexType</strong>参数指定特定的索引类型。 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
@@ -213,7 +213,7 @@ client.createIndex(createIndexReq);
 <li><strong>IndexParam</strong>准备一个 IndexParam 对象。<ul>
 <li><strong>fieldName</strong><em>（字符串</em>） 要索引的标量字段的名称。</li>
 <li><strong>indexName</strong><em>（字符串</em>） 要创建的标量索引的名称。每个标量字段支持一个索引。</li>
-<li><strong>indexType</strong><em>（字符串</em>） 要创建的标量索引的类型。对于隐式索引，留空或省略此参数。 对于自定义索引，有效值为<ul>
+<li><strong>indexType</strong><em>（字符串</em>） 要创建的标量索引的类型。对于隐式索引，请将其留空或省略此参数。 对于自定义索引，有效值为<ul>
 <li><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记词。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</li>
 <li><strong>STL_SORT</strong>：使用标准模板库排序算法对标量字段进行排序。支持布尔和数值字段（如 INT8、INT16、INT32、INT64、FLOAT、DOUBLE）。</li>
 <li><strong>Trie</strong>用于快速前缀搜索和检索的树形数据结构。支持 VARCHAR 字段。</li>

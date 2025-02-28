@@ -88,7 +88,7 @@ title: CDC-Übersicht
 <li><p><strong>Aufgabenerstellung</strong>: Benutzer initiieren eine CDC-Aufgabe über HTTP-Anfragen.</p></li>
 <li><p><strong>Abruf von Metadaten</strong>: Das System holt sammlungsspezifische Metadaten aus dem etcd der Milvus-Quelle, einschließlich Kanal- und Checkpoint-Informationen für die Sammlung.</p></li>
 <li><p><strong>MQ-Verbindung</strong>: Mit den vorliegenden Metadaten stellt das System eine Verbindung zum MQ her, um mit dem Abonnieren des Datenstroms zu beginnen.</p></li>
-<li><p><strong>Verarbeitung der Daten</strong>: Die Daten aus dem MQ werden gelesen, geparst und entweder mit dem Go SDK weitergegeben oder verarbeitet, um die in der Milvus-Quelle durchgeführten Operationen zu replizieren.</p></li>
+<li><p><strong>Verarbeitung der Daten</strong>: Die Daten aus dem MQ werden gelesen, geparst und entweder mit dem Go-SDK weitergegeben oder verarbeitet, um die in der Milvus-Quelle durchgeführten Operationen zu replizieren.</p></li>
 </ol>
 <p>
   
@@ -110,7 +110,7 @@ title: CDC-Übersicht
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Inkrementelle Datensynchronisation</strong>: Derzeit ist Milvus-CDC so konzipiert, dass nur inkrementelle Daten synchronisiert werden können. Wenn Ihr Unternehmen eine vollständige Datensicherung benötigt, <a href="https://milvus.io/community">wenden Sie sich</a> bitte <a href="https://milvus.io/community">an uns</a>, um Unterstützung zu erhalten.</p></li>
+<li><p><strong>Inkrementelle Datensynchronisation</strong>: Derzeit ist Milvus-CDC so konzipiert, dass nur inkrementelle Daten synchronisiert werden können. Wenn Ihr Unternehmen eine vollständige Datensicherung benötigt, <a href="https://milvus.io/community">wenden</a> Sie <a href="https://milvus.io/community">sich</a> bitte <a href="https://milvus.io/community">an uns</a>, um Unterstützung zu erhalten.</p></li>
 <li><p><strong>Umfang der Synchronisierung</strong>: Derzeit kann Milvus-CDC Daten auf Clusterebene synchronisieren. Wir arbeiten daran, in kommenden Versionen Unterstützung für die Synchronisierung von Daten auf Sammlungsebene hinzuzufügen.</p></li>
 <li><p><strong>Unterstützte API-Anfragen</strong>: Milvus-CDC unterstützt derzeit die folgenden API-Anfragen. Wir planen, die Unterstützung für weitere Anfragen in zukünftigen Versionen zu erweitern:</p>
 <ul>

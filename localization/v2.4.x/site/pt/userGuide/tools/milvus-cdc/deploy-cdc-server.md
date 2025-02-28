@@ -37,7 +37,7 @@ title: Implantar o servidor CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Assegure-se de que as seguintes condições sejam atendidas antes de implantar um servidor Milvus-CDC:</p>
+    </button></h2><p>Certifique-se de que as seguintes condições sejam atendidas antes de implantar um servidor Milvus-CDC:</p>
 <ul>
 <li><p><strong>Instâncias do Milvus</strong>: Tanto o Milvus de origem quanto pelo menos um Milvus de destino devem estar implantados e operacionais.</p>
 <ul>
@@ -72,7 +72,7 @@ title: Implantar o servidor CDC
 <li><p><strong>Configuração do metastore</strong>:</p>
 <ul>
 <li><p><code translate="no">metaStoreConfig.storeType</code>: Tipo de metastore para o Milvus-CDC. Os valores possíveis são <code translate="no">etcd</code> ou <code translate="no">mysql</code>.</p></li>
-<li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>: Endereço de ligação ao etcd do Milvus-CDC. Obrigatório se <code translate="no">storeType</code> estiver definido como <code translate="no">etcd</code>.</p></li>
+<li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>: Endereço de ligação ao etcd do Milvus-CDC. Necessário se <code translate="no">storeType</code> estiver definido como <code translate="no">etcd</code>.</p></li>
 <li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>: Endereço de ligação da base de dados MySQL para o servidor Milvus-CDC. Obrigatório se <code translate="no">storeType</code> estiver definido como <code translate="no">mysql</code>.</p></li>
 <li><p><code translate="no">metaStoreConfig.rootPath</code>: Caminho da raiz do metastore do Milvus-CDC. Esta configuração permite o multilocatário, permitindo que vários serviços CDC utilizem a mesma instância etcd ou MySQL, ao mesmo tempo que obtêm o isolamento através de diferentes caminhos de raiz.</p></li>
 </ul>
@@ -96,10 +96,10 @@ metaStoreConfig:
 <li><p><code translate="no">sourceConfig.etcdRootPath</code>: Prefixo da raiz da chave onde o Milvus de origem armazena os dados no etcd. O valor pode variar com base no método de implantação da instância do Milvus:</p>
 <ul>
 <li><p><strong>Helm</strong> ou <strong>Docker Compose</strong>: A predefinição é <code translate="no">by-dev</code>.</p></li>
-<li><p><strong>Operator (Operador</strong>): O valor predefinido é <code translate="no">&lt;release_name&gt;</code>.</p></li>
+<li><p><strong>Operator (Operador</strong>): A predefinição é <code translate="no">&lt;release_name&gt;</code>.</p></li>
 </ul></li>
 <li><p><code translate="no">replicateChan</code>Nome do canal de replicação do milvus, que é <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> no ficheiro milvus.yaml</p></li>
-<li><p><code translate="no">sourceConfig.pulsar</code>: Configurações do Pulsar para o Milvus de origem. Se o Milvus de origem usa Kafka para armazenamento de mensagens, remova todas as configurações relacionadas ao Pulsar. Para obter mais informações, consulte <a href="https://milvus.io/docs/configure_pulsar.md">Configurações relacionadas ao Pulsar</a>.</p></li>
+<li><p><code translate="no">sourceConfig.pulsar</code>: Configurações do Pulsar para o Milvus de origem. Se o Milvus de origem usa o Kafka para armazenamento de mensagens, remova todas as configurações relacionadas ao Pulsar. Para obter mais informações, consulte <a href="https://milvus.io/docs/configure_pulsar.md">Configurações relacionadas ao Pulsar</a>.</p></li>
 <li><p><code translate="no">sourceConfig.kafka.address</code>: Endereço do Kafka para o Milvus de origem. Descomente esta configuração se o Milvus de origem usa Kafka para armazenamento de mensagens.</p></li>
 </ul></li>
 </ul>

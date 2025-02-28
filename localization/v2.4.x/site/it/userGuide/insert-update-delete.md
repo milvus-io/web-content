@@ -57,8 +57,8 @@ title: 'Inserimento, upsert e cancellazione'
         ></path>
       </svg>
     </button></h2><p>Un'entità, nel contesto delle raccolte Milvus, è un'istanza singola e identificabile all'interno di una raccolta. Rappresenta un membro distinto di una particolare classe, sia essa un libro in una biblioteca, un gene in un genoma o qualsiasi altra entità identificabile.</p>
-<p>Le entità all'interno di una collezione condividono un insieme comune di attributi, chiamato schema, che delinea la struttura che ogni entità deve rispettare, compresi i nomi dei campi, i tipi di dati e qualsiasi altro vincolo.</p>
-<p>L'inserimento di entità in una collezione richiede che i dati forniti contengano tutti i campi definiti dallo schema della collezione di destinazione. Inoltre, è possibile includere campi non definiti dallo schema solo se si è abilitato il campo dinamico. Per ulteriori informazioni, consultare <a href="/docs/it/enable-dynamic-field.md">Abilita campo dinamico</a>.</p>
+<p>Le entità all'interno di una collezione condividono un insieme comune di attributi, chiamato schema, che delinea la struttura a cui ogni entità deve aderire, compresi i nomi dei campi, i tipi di dati e qualsiasi altro vincolo.</p>
+<p>L'inserimento di entità in una collezione richiede che i dati forniti contengano tutti i campi definiti dallo schema della collezione di destinazione. Inoltre, è possibile includere campi non definiti dallo schema solo se si è abilitato il campo dinamico. Per i dettagli, consultare <a href="/docs/it/enable-dynamic-field.md">Abilita campo dinamico</a>.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparazione<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +82,7 @@ title: 'Inserimento, upsert e cancellazione'
 <p>Per i preparativi, usare <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> per connettersi al server Milvus e <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> per creare una raccolta in modalità di configurazione rapida.</p>
 </div>
 <div class="language-javascript">
-<p>Per le preparazioni, usare <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> per connettersi al server Milvus e <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> per creare una raccolta in modalità di configurazione rapida.</p>
+<p>Per le preparazioni, usare <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> per connettersi al server Milvus e <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> per creare una raccolta in modalità quick-setup.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -410,7 +410,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 </ul>
 </div>
 <div class="language-python">
-<p>Per l'upsert delle entità, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md"><code translate="no">upsert()</code></a> per l'upsert delle entità.</p>
+<p>Per l'upsert delle entità, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md"><code translate="no">upsert()</code></a> metodo.</p>
 </div>
 <div class="language-java">
 <p>Per l'upsert di entità, utilizzare il metodo <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">upsert()</code></a> metodo.</p>

@@ -387,7 +387,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>Per ulteriori informazioni sui parametri, fare riferimento a <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>, e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md"><code translate="no">get_load_state()</code></a> nel riferimento dell'SDK.</p>
+<p>Per ulteriori informazioni sui parametri, consultare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>, e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md"><code translate="no">get_load_state()</code></a> nel riferimento dell'SDK.</p>
 </div>
 <div class="language-java">
 <p>Per ulteriori informazioni sui parametri, fare riferimento a <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>, e <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md"><code translate="no">getLoadState()</code></a> nel riferimento dell'SDK.</p>
@@ -711,7 +711,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus fornisce una serie di filtri avanzati per il filtraggio scalare nei campi JSON. Questi filtri sono <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code> e <code translate="no">JSON_CONTAINS_ANY</code>.</p>
+    </button></h2><p>Milvus offre una serie di filtri avanzati per il filtraggio scalare dei campi JSON. Questi filtri sono <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, e <code translate="no">JSON_CONTAINS_ANY</code>.</p>
 <ul>
 <li><p>Filtra tutte le entità che hanno <code translate="no">[&quot;blue&quot;, &quot;brown&quot;, &quot;grey&quot;]</code> come set di colori di riferimento.</p>
 <p><div class="multipleCode">
@@ -1374,16 +1374,16 @@ searchResults = searchResp.getSearchResults();
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando si lavora con i campi JSON, si possono usare i campi JSON come filtri o alcune chiavi specifiche.</p>
+    </button></h2><p>Quando si lavora con i campi JSON, è possibile utilizzare i campi JSON come filtri o alcune chiavi specifiche.</p>
 <div class="admonition note">
 <p><b>note</b></p>
 <ul>
-<li>Milvus memorizza i valori delle stringhe nei campi JSON così come sono, senza eseguire l'escape semantico o la conversione. </li>
+<li>Milvus memorizza i valori stringa nel campo JSON così come sono, senza eseguire l'escape semantico o la conversione. </li>
 </ul>
 <p>Ad esempio, <code translate="no">'a"b'</code>, <code translate="no">"a'b"</code>, <code translate="no">'a\\\\'b'</code> e <code translate="no">"a\\\\"b"</code> saranno salvati così come sono, mentre <code translate="no">'a'b'</code> e <code translate="no">"a"b"</code> saranno trattati come valori non validi.</p>
 <ul>
 <li><p>Per costruire espressioni di filtro usando un campo JSON, si possono usare le chiavi all'interno del campo. </p></li>
-<li><p>Se il valore di una chiave è un intero o un float, è possibile confrontarlo con un'altra chiave intera o float o con un campo INT32/64 o FLOAT32/64.</p></li>
+<li><p>Se il valore di una chiave è un intero o un float, si può confrontare con un'altra chiave intera o float o con un campo INT32/64 o FLOAT32/64.</p></li>
 <li><p>Se il valore di una chiave è una stringa, si può confrontare solo con un'altra chiave stringa o con un campo VARCHAR.</p></li>
 </ul>
 </div>
@@ -1403,7 +1403,7 @@ searchResults = searchResp.getSearchResults();
 <tr><td><strong>in</strong></td><td><code translate="no">'json_field[&quot;A&quot;] in [1, 2, 3]'</code></td><td>Questa espressione ha valore vero se il valore di <code translate="no">json_field[&quot;A&quot;]</code> è <code translate="no">1</code>, <code translate="no">2</code>, o <code translate="no">3</code>.</td></tr>
 <tr><td><strong>e (&amp;&amp;)</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &gt; 1 &amp;&amp; json_field[&quot;A&quot;] &lt; 3'</code></td><td>Questa espressione è vera se il valore di <code translate="no">json_field[&quot;A&quot;]</code> è maggiore di 1 e minore di <code translate="no">3</code>.</td></tr>
 <tr><td><strong>o (||)</strong></td><td><code translate="no">‘json_field[“A”] &gt; 1 || json_field[“A”] &lt; 3’</code></td><td>Questa espressione è vera se il valore di <code translate="no">json_field[&quot;A&quot;]</code> è maggiore di <code translate="no">1</code> o minore di <code translate="no">3</code>.</td></tr>
-<tr><td><strong>esiste</strong></td><td><code translate="no">'exists json_field[&quot;A&quot;]'</code></td><td>Questa espressione dà come risultato vero se <code translate="no">json_field</code> ha una chiave di nome <code translate="no">A</code>.</td></tr>
+<tr><td><strong>esiste</strong></td><td><code translate="no">'exists json_field[&quot;A&quot;]'</code></td><td>Questa espressione dà esito positivo se <code translate="no">json_field</code> ha una chiave di nome <code translate="no">A</code>.</td></tr>
 </tbody>
 </table>
 <h3 id="Advanced-Operators" class="common-anchor-header">Operatori avanzati</h3><p>I seguenti operatori sono specifici per i campi JSON:</p>
@@ -1428,7 +1428,7 @@ json_contains_all(x, [<span class="hljs-number">4</span>,<span class="hljs-numbe
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><code translate="no">json_contains_any(identifier, jsonExpr)</code></p>
 <p>Questo operatore filtra le entità il cui identificatore contiene qualsiasi membro dell'espressione JSON.</p>
-<p>Esempio: questo operatore filtra le entità il cui identificatore contiene tutti i membri dell'espressione JSON: <code translate="no">{&quot;x&quot;: [1,2,3,4,5,7,8]}</code></p>
+<p>Esempio: <code translate="no">{&quot;x&quot;: [1,2,3,4,5,7,8]}</code></p>
 <pre><code translate="no" class="language-python">json_contains_any(x, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>]) <span class="hljs-comment"># =&gt; True (x contains 1, 2, and 8.)</span>
 json_contains_any(x, [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]) <span class="hljs-comment"># =&gt; True (x contains 4 and 5.)</span>
 json_contains_any(x, [<span class="hljs-number">6</span>,<span class="hljs-number">9</span>]) <span class="hljs-comment"># =&gt; False (x contains none of 6 and 9.)</span>

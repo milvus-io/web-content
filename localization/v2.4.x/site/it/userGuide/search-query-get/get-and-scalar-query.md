@@ -885,7 +885,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Filtra le entità con i valori di <strong>colore</strong> impostati su <strong>marrone</strong>.</p>
+<li><p>Filtra le entità i cui valori di <strong>colore</strong> sono impostati su <strong>marrone</strong>.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.query(

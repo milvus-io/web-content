@@ -43,7 +43,7 @@ voyage_rf = VoyageRerankFunction(
 <li><p><code translate="no">api_key</code> <em>(string</em>)</p>
 <p>A chave da API para acessar a API do Voyage. Para obter informações sobre como criar uma chave de API, consulte <a href="https://docs.voyageai.com/docs/api-key-and-installation">Chave de API e cliente Python</a>.</p></li>
 </ul>
-<p>Em seguida, use o código a seguir para classificar documentos com base na consulta:</p>
+<p>Em seguida, use o código a seguir para ranquear documentos com base na consulta:</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 
 documents = [

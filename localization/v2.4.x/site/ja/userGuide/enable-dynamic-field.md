@@ -51,7 +51,7 @@ title: ダイナミック・フィールドの有効化
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションにスキーマを定義するとき、<code translate="no">enable_dynamic_field</code> を<code translate="no">True</code> に設定して、予約済みダイナミック・フィールドを有効にすることができます。これは、スキーマで定義されていないフィールドと後から挿入されたその値が、予約済みダイナミック・フィールドにキーと値のペアとして保存されることを示します。</p>
+    </button></h2><p>コレクションにスキーマを定義するとき、<code translate="no">enable_dynamic_field</code> を<code translate="no">True</code> に設定して、予約済みダイナミック・フィールドを有効にすることができます。これは、スキーマで定義されていないフィールドと後から挿入されたその値が、予約済みダイナミック・フィールドにキー・バリュー・ペアとして保存されることを示します。</p>
 <p>以下のスニペットは、idとvectorという2つのスキーマ定義フィールドを持つコレクションを作成し、ダイナミックフィールドを有効にします。</p>
 <div class="language-python">
 <p>パラメータの詳細については、SDKリファレンスの <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>を参照してください。</p>

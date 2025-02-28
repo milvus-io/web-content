@@ -63,7 +63,7 @@ results = voyage_rf(
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Score: <span class="hljs-subst">{result.score:<span class="hljs-number">.6</span>f}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Text: <span class="hljs-subst">{result.text}</span>\n&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>예상 출력은 다음과 비슷합니다:</p>
+<p>예상 출력은 다음과 유사합니다:</p>
 <pre><code translate="no" class="language-python">Index: <span class="hljs-number">1</span>
 Score: <span class="hljs-number">0.898438</span>
 Text: The Dartmouth Conference <span class="hljs-keyword">in</span> <span class="hljs-number">1956</span> <span class="hljs-keyword">is</span> considered the birthplace of artificial intelligence <span class="hljs-keyword">as</span> a field; here, John McCarthy <span class="hljs-keyword">and</span> others coined the term <span class="hljs-string">&#x27;artificial intelligence&#x27;</span> <span class="hljs-keyword">and</span> laid <span class="hljs-keyword">out</span> its basic goals.

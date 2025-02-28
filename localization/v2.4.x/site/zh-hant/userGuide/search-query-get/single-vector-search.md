@@ -525,7 +525,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">topK</code></td>
-      <td>搜尋結果中要返回的記錄數量。此參數使用與<strong>limit</strong>參數相同的語法，因此您只需設定其中一個。<br/>您可以將此參數與<strong>參數</strong>中的<strong>偏移量</strong>結合使用，以啟用分頁。<br/>此值與<strong>參數</strong>中的<strong>偏移量</strong>之和應小於 16,384。</td>
+      <td>搜尋結果中要返回的記錄數量。此參數與<strong>limit</strong>參數使用相同的語法，因此您只需設定其中一個。<br/>您可以將此參數與<strong>參數</strong>中的<strong>偏移量</strong>結合使用，以啟用分頁。<br/>此值與<strong>參數</strong>中的<strong>偏移量</strong>之和應小於 16,384。</td>
     </tr>
   </tbody>
 </table>
@@ -1217,7 +1217,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
   { score: <span class="hljs-number">2.7014894485473633</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1597&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">red</code> 中的資料與<code translate="no">blue</code> 中的資料不同。因此，搜尋結果將限制於指定的分割區，以反映該子集的獨特特性和資料分佈。</p>
+<p><code translate="no">red</code> 中的資料與<code translate="no">blue</code> 中的資料不同。因此，搜尋結果會限制在指定的分割區內，反映出該子集的獨特特性和資料分佈。</p>
 <h3 id="Search-with-output-fields" class="common-anchor-header">使用輸出欄位搜尋</h3><p>使用輸出欄位搜尋可讓您指定搜尋結果應包含匹配向量的哪些屬性或欄位。</p>
 <p>您可以在請求中指定<code translate="no">output_fields</code> ，以傳回包含特定欄位的結果。</p>
 <p>以下是一個使用<code translate="no">color</code> 屬性值傳回結果的範例：</p>
@@ -1564,7 +1564,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>範圍搜尋可以讓您找到與查詢向量在指定距離範圍內的向量。</p>
-<p>透過設定<code translate="no">radius</code> 和可選的<code translate="no">range_filter</code> ，您可以調整搜尋的廣度，以包含與查詢向量有點相似的向量，提供更全面的潛在匹配檢視。</p>
+<p>透過設定<code translate="no">radius</code> 和可選的<code translate="no">range_filter</code> ，您可以調整搜尋的寬度，以包含與查詢向量有點相似的向量，提供更全面的潛在匹配檢視。</p>
 <ul>
 <li><p><code translate="no">radius</code>:定義搜尋空間的外部邊界。只有與查詢向量的距離在這個範圍內的向量，才會被視為潛在的匹配向量。</p></li>
 <li><p><code translate="no">range_filter</code>:<code translate="no">radius</code> 設定搜尋的外部界限，而<code translate="no">range_filter</code> 則可選擇用來定義內部界限，建立一個向量必須在其範圍內才會被視為匹配的距離範圍。</p></li>
@@ -1780,12 +1780,12 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>]
 [<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>在給定的輸出中，可以觀察到「doc_11」完全支配了搜尋結果，掩蓋了其他文件中高品質的段落，這對 LLM 來說可能是一個很差的提示。</p>
+<p>在給定的輸出中，可以觀察到「doc_11」完全支配了搜尋結果，蓋過了其他文件的高品質段落，這對 LLM 來說是一個很差的提示。</p>
 <p><strong>限制</strong></p>
 <ul>
 <li><p><strong>索引</strong>：此分組功能僅適用於使用這些索引類型建立索引的資料庫：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
 <li><p><strong>向量</strong>：目前，分組搜尋不支援<strong>BINARY_VECTOR</strong>類型的向量欄位。有關資料類型的詳細資訊，請參閱<a href="https://milvus.io/docs/schema.md#Supported-data-types">支援的資料類型</a>。</p></li>
-<li><p><strong>欄位</strong>：目前，群組搜尋只允許單列。您無法在<code translate="no">group_by_field</code> config 中指定多個欄位名稱。  此外，分組搜尋與 JSON、FLOAT、DOUBLE、ARRAY 或向量欄位的資料類型不相容。</p></li>
+<li><p><strong>欄位</strong>：目前，群組搜尋只允許單列。您無法在<code translate="no">group_by_field</code> config 中指定多個欄位名稱。  此外，群組搜尋與 JSON、FLOAT、DOUBLE、ARRAY 或向量欄位的資料類型不相容。</p></li>
 <li><p><strong>效能影響</strong>：請注意，效能會隨著查詢向量數目的增加而降低。以具有 2 個 CPU 核心和 8 GB 記憶體的群集為例，群組搜尋的執行時間會隨著輸入查詢向量的數量成比例增加。</p></li>
 <li><p><strong>功能性</strong>：目前，<a href="https://milvus.io/docs/single-vector-search.md#Range-search">範圍搜尋</a>、<a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">搜尋迭代器</a>不支援群組搜尋</p></li>
 </ul>
@@ -1827,7 +1827,7 @@ search_parameters = {
 <tr><td><code translate="no">params.nprobe</code></td><td>搜尋時要查詢的單位數量。<br/> 數值範圍為 [1，nlist<sub>[1]</sub>]。</td></tr>
 <tr><td><code translate="no">params.level</code></td><td>搜尋精確度等級。<br/> 可能的值為<code translate="no">1</code> 、<code translate="no">2</code> 及<code translate="no">3</code> ，預設為<code translate="no">1</code> 。較高的值會產生更精確的結果，但效能較慢。</td></tr>
 <tr><td><code translate="no">params.radius</code></td><td>定義搜尋空間的外部邊界。只有與查詢向量的距離在此範圍內的向量，才會被視為潛在的匹配。<br/>值範圍由<code translate="no">metric_type</code> 參數決定。例如，如果<code translate="no">metric_type</code> 設定為<code translate="no">L2</code> ，則有效值範圍為<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 設定為<code translate="no">COSINE</code> ，則有效值範圍為<code translate="no">[-1, 1]</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">相似度指標</a>。</td></tr>
-<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> 設定搜尋的外部極限，而<code translate="no">range_filter</code> 則可選擇用來定義內部邊界，建立一個距離範圍，向量必須在這個範圍內才會被視為匹配。<br/>值範圍由<code translate="no">metric_type</code> 參數決定。例如，如果<code translate="no">metric_type</code> 設定為<code translate="no">L2</code> ，則有效值範圍為<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 設定為<code translate="no">COSINE</code> ，則有效值範圍為<code translate="no">[-1, 1]</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">相似度量測</a>。</td></tr>
+<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> 設定搜尋的外部極限，而<code translate="no">range_filter</code> 則可選擇用來定義內部邊界，建立一個距離範圍，向量必須在此範圍內才會被視為匹配。<br/>值範圍由<code translate="no">metric_type</code> 參數決定。例如，如果<code translate="no">metric_type</code> 設定為<code translate="no">L2</code> ，則有效值範圍為<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 設定為<code translate="no">COSINE</code> ，則有效值範圍為<code translate="no">[-1, 1]</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/metric.md">相似度量測</a>。</td></tr>
 </tbody>
 </table>
 <div class="admonition note">

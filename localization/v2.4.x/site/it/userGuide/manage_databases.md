@@ -1,7 +1,6 @@
 ---
 id: manage_databases.md
 title: Gestire i database
-summary: ''
 ---
 <h1 id="Manage-Databases" class="common-anchor-header">Gestire i database<button data-href="#Manage-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,7 +43,7 @@ summary: ''
 <p>Usate <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Connections/MilvusClient.md">MilvusClient</a> per connettervi al server Milvus e <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Database/createDatabase.md">createDatabase()</a> per creare un nuovo database:</p>
 </div>
 <div class="language-javascript">
-<p>Utilizzare <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md">MilvusClient</a> per connettersi al server Milvus e <a href="https://milvus.io/api-reference/node/v2.4.x/Database/createDatabase.md">createDatabase()</a> per creare un nuovo database:</p>
+<p>Usate <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md">MilvusClient</a> per connettervi al server Milvus e <a href="https://milvus.io/api-reference/node/v2.4.x/Database/createDatabase.md">createDatabase()</a> per creare un nuovo database:</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -509,7 +508,7 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
   <span class="hljs-attr">privilege</span>: <span class="hljs-variable constant_">PRIVILEGE_INSERT</span>,
 });
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Se viene effettuata una chiamata API di autorizzazione su una connessione Milvus, con o senza <code translate="no">db_name</code> specificato, il <strong>database</strong> si riferisce al database il cui nome è stato specificato nella chiamata API di autorizzazione.</p>
+<li><p>Se una chiamata all'API Permission viene effettuata su una connessione Milvus, con o senza <code translate="no">db_name</code> specificato, il <strong>database</strong> fa riferimento al database il cui nome è stato specificato nella chiamata all'API Permission.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> please make sure the &#x27;foo&#x27; db has been created</span>

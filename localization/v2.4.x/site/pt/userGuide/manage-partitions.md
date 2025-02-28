@@ -18,7 +18,7 @@ title: Gerir partições
         ></path>
       </svg>
     </button></h1><p>Este guia explica-lhe como criar e gerir partições numa coleção.</p>
-<h2 id="Overview" class="common-anchor-header">Descrição geral<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -181,7 +181,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>A saída do trecho de código acima inclui os nomes das partições dentro da coleção especificada.</p>
 <div class="admonition note">
 <p><b>notas</b></p>
-<p>Se tiver definido um campo como chave de partição numa coleção, o Milvus cria pelo menos <strong>64</strong> partições juntamente com a coleção. Ao listar as partições, os resultados podem diferir da saída dos trechos de código acima.</p>
+<p>Se tiver definido um campo como chave de partição numa coleção, o Milvus cria pelo menos <strong>64</strong> partições juntamente com a coleção. Ao listar as partições, os resultados podem ser diferentes da saída dos trechos de código acima.</p>
 <p>Para obter detalhes, consulte <a href="https://milvus.io/docs/use-partition-key.md">Usar chave de partição</a>.</p>
 </div>
 <h2 id="Create-Partitions" class="common-anchor-header">Criar partições<button data-href="#Create-Partitions" class="anchor-icon" translate="no">

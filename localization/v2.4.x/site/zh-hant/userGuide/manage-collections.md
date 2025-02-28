@@ -284,7 +284,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </div>
 </div>
 <div class="language-go">
-<p>要建立模式，請使用<code translate="no">entity.NewSchema()</code> 來建立模式物件，並使用<code translate="no">schema.WithField()</code> 來為模式新增欄位。</p>
+<p>要設置模式，使用<code translate="no">entity.NewSchema()</code> 創建模式對象，使用<code translate="no">schema.WithField()</code> 添加欄位到模式。</p>
 </div>
 <div class="language-shell">
 <p>要設定模式，您需要定義一個 JSON 物件，該物件必須遵循模式格式，如 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a>API 端點參考頁面所顯示的模式格式。</p>
@@ -1118,7 +1118,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>模式負責組織目標資料集中的資料。有效的模式應該有多個欄位，其中必須包括一個主索引鍵、一個向量欄位和幾個標量欄位。</td>
+<td>模式負責組織目標資料集中的資料。有效的模式應該有多個欄位，其中必須包括一個主鍵、一個向量欄位和數個標量欄位。</td>
 </tr>
 <tr>
 <td><code translate="no">schema.autoID</code></td>
@@ -1126,7 +1126,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">schema.enableDynamicField</code></td>
-<td>是否允許使用保留的 $meta 欄位，以鍵值對的方式保存非結構描述定義的欄位。</td>
+<td>是否允許使用保留的 $meta 欄位，以鍵值對的方式來保存非結構描述定義的欄位。</td>
 </tr>
 <tr>
 <td><code translate="no">fields</code></td>
@@ -1903,7 +1903,7 @@ res = client.get_load_state(
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>請注意，只有在<code translate="no">load_fields</code> 中列出的欄位可以在搜尋和查詢中作為篩選條件和輸出欄位。您應該始終在清單中包含主索引鍵。排除在載入範圍之外的欄位名稱將無法用於篩選或輸出。</p>
-<p>您可以使用<code translate="no">skip_load_dynamic_field=True</code> 跳過載入動態欄位。Milvus 將動態欄位視為單一欄位，因此動態欄位中的所有鍵都會一起包含或排除。</p>
+<p>您可以使用<code translate="no">skip_load_dynamic_field=True</code> 跳過載入動態欄位。Milvus 將動態欄位視為單一欄位，因此動態欄位中的所有鍵將一起被包含或排除。</p>
 </div>
 <h3 id="Release-a-collection" class="common-anchor-header">釋放集合</h3><div class="language-python">
 <p>要釋放集合，請使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>方法，指定集合名稱。</p>

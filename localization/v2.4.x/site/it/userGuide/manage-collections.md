@@ -74,7 +74,7 @@ title: Gestire le raccolte
     </button></h2><p>È possibile creare una raccolta in uno dei seguenti modi:</p>
 <ul>
 <li><p><strong>Impostazione rapida</strong></p>
-<p>In questo modo, è possibile creare una collezione semplicemente dandole un nome e specificando il numero di dimensioni delle incorporazioni vettoriali da memorizzare in questa collezione. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/manage-collections.md">Impostazione rapida</a>.</p></li>
+<p>In questo modo, è possibile creare una collezione semplicemente dandole un nome e specificando il numero di dimensioni delle incorporazioni vettoriali da memorizzare in questa collezione. Per maggiori dettagli, consultare la sezione <a href="/docs/it/manage-collections.md">Impostazione rapida</a>.</p></li>
 <li><p><strong>Configurazione personalizzata</strong></p>
 <p>Invece di lasciare che In Milvus decida quasi tutto per la vostra collezione, potete determinare da soli i <strong>parametri</strong> <strong>dello schema</strong> e dell'<strong>indice</strong> della collezione. Per i dettagli, consultare la sezione <a href="/docs/it/manage-collections.md">Configurazione personalizzata</a>.</p></li>
 </ul>
@@ -263,10 +263,10 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>L'insieme generato nel codice precedente contiene solo due campi: <code translate="no">id</code> (come chiave primaria) e <code translate="no">vector</code> (come campo vettore), con le impostazioni <code translate="no">auto_id</code> e <code translate="no">enable_dynamic_field</code> abilitate per impostazione predefinita.</p>
+<p>L'insieme generato nel codice precedente contiene solo due campi: <code translate="no">id</code> (come chiave primaria) e <code translate="no">vector</code> (come campo vettore), con le impostazioni <code translate="no">auto_id</code> e <code translate="no">enable_dynamic_field</code> abilitate per default.</p>
 <ul>
 <li><p><code translate="no">auto_id</code></p>
-<p>L'abilitazione di questa impostazione fa sì che la chiave primaria si incrementi automaticamente. Non è necessario fornire manualmente le chiavi primarie durante l'inserimento dei dati.</p></li>
+<p>L'attivazione di questa impostazione fa sì che la chiave primaria si incrementi automaticamente. Non è necessario fornire manualmente le chiavi primarie durante l'inserimento dei dati.</p></li>
 <li><p><code translate="no">enable_dynamic_field</code></p>
 <p>Quando è abilitata, tutti i campi, esclusi <code translate="no">id</code> e <code translate="no">vector</code> nei dati da inserire, sono trattati come campi dinamici. Questi campi aggiuntivi vengono salvati come coppie chiave-valore all'interno di un campo speciale denominato <code translate="no">$meta</code>. Questa funzione consente di includere campi aggiuntivi durante l'inserimento dei dati.</p></li>
 </ul>
@@ -898,7 +898,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>L'insieme creato in precedenza viene caricato automaticamente. Per ulteriori informazioni sul caricamento e il rilascio di una raccolta, consultare <a href="/docs/it/manage-collections.md#Load--Release-Collection">Carica e rilascia una raccolta</a>.</p></li>
+<p>La raccolta creata in precedenza viene caricata automaticamente. Per ulteriori informazioni sul caricamento e il rilascio di una raccolta, consultare <a href="/docs/it/manage-collections.md#Load--Release-Collection">Carica e rilascia una raccolta</a>.</p></li>
 <li><p><strong>Creare una raccolta e un file di indice separatamente.</strong></p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
@@ -1122,7 +1122,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">schema.autoID</code></td>
-<td>Se permette al campo primario di incrementarsi automaticamente. Impostando True, il campo primario si incrementa automaticamente. In questo caso, il campo primario non dovrebbe essere incluso nei dati da inserire per evitare errori. Impostare questo parametro nel campo con is_primary impostato a True.</td>
+<td>Se permette al campo primario di incrementarsi automaticamente. Impostando True, il campo primario si incrementa automaticamente. In questo caso, il campo primario non dovrebbe essere incluso nei dati da inserire per evitare errori. Impostare questo parametro nel campo con is_primary impostato su True.</td>
 </tr>
 <tr>
 <td><code translate="no">schema.enableDynamicField</code></td>
@@ -1154,7 +1154,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
-<p>L'insieme creato in precedenza non viene caricato automaticamente. È possibile creare un indice per l'insieme come segue. La creazione di un indice per l'insieme in modo separato non carica automaticamente l'insieme. Per maggiori informazioni, consultare la sezione <a href="/docs/it/manage-collections.md">Caricare e rilasciare l'insieme</a>.</p>
+<p>L'insieme creato in precedenza non viene caricato automaticamente. È possibile creare un indice per l'insieme come segue. La creazione di un indice per l'insieme in modo separato non carica automaticamente l'insieme. Per maggiori dettagli, consultare <a href="/docs/it/manage-collections.md">Carica e rilascia la collezione</a>.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>
@@ -2381,7 +2381,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Per riassegnare gli alias ad altre raccolte, utilizzare il metodo <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> specificando il nome della collezione e l'alias.</p>
 </div>
 <div class="language-javascript">
-<p>Per riassegnare gli alias ad altre raccolte, usare il metodo <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> specificando il nome della collezione e l'alias.</p>
+<p>Per riassegnare gli alias ad altre raccolte, utilizzare il metodo <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> specificando il nome della collezione e l'alias.</p>
 </div>
 <div class="language-shell">
 <p>Per riassegnare gli alias ad altre raccolte, è possibile utilizzare l'endpoint <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md"><code translate="no">POST /v2/vectordb/aliases/alter</code></a> endpoint dell'API.</p>

@@ -98,7 +98,7 @@ metaStoreConfig:
 </ul></li>
 <li><p><code translate="no">replicateChan</code>：Milvus 复制通道名称，在 milvus.yaml 文件中为<code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> 。</p></li>
 <li><p><code translate="no">sourceConfig.pulsar</code>:源 Milvus 的 Pulsar 配置。如果源 Milvus 使用 Kafka 进行消息存储，请移除所有与 Pulsar 相关的配置。更多信息，请参阅<a href="https://milvus.io/docs/configure_pulsar.md">Pulsar 相关配置</a>。</p></li>
-<li><p><code translate="no">sourceConfig.kafka.address</code>:源 Milvus 的 Kafka 地址。如果源 Milvus 使用 Kafka 进行消息存储，则取消注释此配置。</p></li>
+<li><p><code translate="no">sourceConfig.kafka.address</code>:Milvus 源的 Kafka 地址。如果源 Milvus 使用 Kafka 进行消息存储，则取消注释此配置。</p></li>
 </ul></li>
 </ul>
 <p>配置示例：</p>

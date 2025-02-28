@@ -33,7 +33,7 @@ title: 管理分區
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，一個分區代表一個集合的子分區。此功能允許將集合的實體儲存分割成多個部分，藉由將焦點縮小到較小的資料子集，而非整個集合，以改善查詢效能。</p>
+    </button></h2><p>在 Milvus 中，一個分區代表一個集合的子分區。此功能允許將集合的實體儲存區分為多個部分，藉由將焦點縮小到較小的資料子集，而非整個集合，以改善查詢效能。</p>
 <p>建立資料集時，至少會自動建立一個名為<strong>_default</strong>的預設分割區。您最多可以在一個資料集中建立 1,024 個分割區。</p>
 <div class="admonition note">
 <p><b>注意事項</b></p>
@@ -743,7 +743,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>請注意，只有<code translate="no">load_fields</code> 中列出的欄位，才能在搜尋和查詢中作為篩選條件和輸出欄位。您應該始終在清單中包含主索引鍵。從載入中排除的欄位名稱將無法用於篩選或輸出。</p>
-<p>您可以使用<code translate="no">skip_load_dynamic_field=True</code> 跳過載入動態欄位。Milvus 將動態欄位視為單一欄位，因此動態欄位中的所有鍵將一起被包含或排除。</p>
+<p>您可以使用<code translate="no">skip_load_dynamic_field=True</code> 跳過載入動態欄位。Milvus 將動態欄位視為單一欄位，因此動態欄位中的所有鍵都會一起包含或排除。</p>
 <h3 id="Release-Partitions" class="common-anchor-header">釋放分區</h3><div class="language-python">
 <p>要釋放集合的所有分區，您可以直接呼叫 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>.要釋放集合的特定分區，請使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/release_partitions.md"><code translate="no">release_partitions()</code></a>.</p>
 </div>

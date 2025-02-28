@@ -608,13 +608,13 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>如果不再需要某个实体，可以通过使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/delete.md"><code translate="no">delete()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>如果不再需要某个实体，可以使用 .NET 命令将其从 Collections 中删除。 <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/delete.md"><code translate="no">delete()</code></a>.</p>
+<p>如果不再需要某个实体，可以使用 . <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/delete.md"><code translate="no">delete()</code></a>.</p>
 </div>
 <p>Milvus 提供两种方法让你确定要删除的实体。</p>
 <ul>
 <li><p><strong>通过过滤器删除实体。</strong></p>
    <div class='alert note'>
-<p>使用过滤表达式删除实体时，请确保已加载集合。否则，Milvus 将返回错误信息。</p>
+<p>使用过滤表达式删除实体时，请确保已加载集合。否则，Milvus 将返回错误。</p>
    </div>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>

@@ -57,7 +57,7 @@ go build
         ></path>
       </svg>
     </button></h2><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">예제 구성 파일을</a> 다운로드하여 필요에 맞게 조정합니다.</p>
-<p>그런 다음 다운로드하거나 빌드한 Milvus Backup 바이너리 옆에 폴더를 만들고 폴더 이름을 <code translate="no">configs</code> 으로 지정한 다음 <code translate="no">configs</code> 폴더 안에 구성 파일을 넣습니다.</p>
+<p>그런 다음 다운로드하거나 빌드한 Milvus 백업 바이너리 옆에 폴더를 만들고 폴더 이름을 <code translate="no">configs</code> 으로 지정한 다음 <code translate="no">configs</code> 폴더 안에 구성 파일을 넣습니다.</p>
 <p>폴더 구조는 다음과 비슷해야 합니다:</p>
 <pre>
 작업 공간 ├── milvus-backup └── configs └── backup.yaml</pre>

@@ -4,7 +4,7 @@ order: 1
 summary: >-
   La bibliothèque de modèles PyMilvus intègre des fonctions de classement pour
   optimiser l'ordre des résultats renvoyés par les recherches initiales.
-title: Vue d'ensemble des Rerankers
+title: Vue d'ensemble des rerankers
 ---
 <h1 id="Rerankers-Overview" class="common-anchor-header">Vue d'ensemble des rerankers<button data-href="#Rerankers-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,7 +23,7 @@ title: Vue d'ensemble des Rerankers
       </svg>
     </button></h1><p>Dans le domaine de la recherche d'informations et de l'IA générative, un re-rangeur est un outil essentiel qui optimise l'ordre des résultats des recherches initiales. Les rerankers diffèrent des <a href="/docs/fr/embeddings.md">modèles d'intégration</a> traditionnels en prenant une requête et un document en entrée et en renvoyant directement un score de similarité au lieu des intégrations. Ce score indique la pertinence de la requête et du document.</p>
 <p>Les re-rangeurs sont souvent utilisés après la première étape de recherche, généralement effectuée au moyen de techniques vectorielles d'approximation du plus proche voisin (ANN). Bien que les recherches ANN soient efficaces pour obtenir un large ensemble de résultats potentiellement pertinents, elles ne donnent pas toujours la priorité aux résultats en termes de proximité sémantique réelle avec la requête. Ici, rerankers est utilisé pour optimiser l'ordre des résultats en utilisant des analyses contextuelles plus approfondies, souvent en tirant parti de modèles d'apprentissage automatique avancés tels que BERT ou d'autres modèles basés sur Transformer. Ce faisant, les rerankers peuvent améliorer considérablement la précision et la pertinence des résultats finaux présentés à l'utilisateur.</p>
-<p>La bibliothèque de modèles PyMilvus intègre des fonctions de rerank pour optimiser l'ordre des résultats renvoyés par les recherches initiales. Après avoir récupéré les intégrations les plus proches dans Milvus, vous pouvez exploiter ces outils de reclassement pour affiner les résultats de la recherche afin d'en améliorer la précision.</p>
+<p>La bibliothèque de modèles PyMilvus intègre des fonctions de rerank pour optimiser l'ordre des résultats renvoyés par les recherches initiales. Après avoir récupéré les intégrations les plus proches dans Milvus, vous pouvez exploiter ces outils de reclassement pour affiner les résultats de la recherche afin d'améliorer la précision des résultats de la recherche.</p>
 <table>
 <thead>
 <tr><th>Fonction de reclassement</th><th>API ou Open-sourced</th></tr>

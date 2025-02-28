@@ -41,7 +41,7 @@ title: Avec les itérateurs
 <h3 id="Benefits-of-using-iterators" class="common-anchor-header">Avantages de l'utilisation d'itérateurs</h3><ul>
 <li><p><strong>Simplicité</strong>: Élimine les paramètres complexes de <strong>décalage</strong> et de <strong>limite</strong>.</p></li>
 <li><p><strong>Efficacité</strong>: Permet une extraction évolutive des données en ne récupérant que les données nécessaires.</p></li>
-<li><p><strong>Cohérence</strong>: Garantit une taille cohérente des ensembles de données grâce aux filtres booléens.</p></li>
+<li><p><strong>Cohérence</strong>: Assure la cohérence de la taille de l'ensemble de données grâce à des filtres booléens.</p></li>
 </ul>
 <div class="admonition note">
 <p><b>notes</b></p>
@@ -66,7 +66,7 @@ title: Avec les itérateurs
       </svg>
     </button></h2><p>L'étape de préparation suivante se connecte à Milvus et insère des entités générées de manière aléatoire dans une collection.</p>
 <h3 id="Step-1-Create-a-collection" class="common-anchor-header">Étape 1 : Création d'une collection</h3><div class="language-python">
-<p>Utilisez <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> pour se connecter au serveur Milvus et <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> pour créer une collection.</p>
+<p>Utiliser <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> pour se connecter au serveur Milvus et <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> pour créer une collection.</p>
 </div>
 <div class="language-java">
 <p>Pour se connecter au serveur Milvus et créer une collection, il faut utiliser <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> pour se connecter au serveur Milvus et <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> pour créer une collection.</p>

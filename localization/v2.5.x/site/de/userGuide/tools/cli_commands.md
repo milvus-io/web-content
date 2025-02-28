@@ -75,13 +75,15 @@ title: Milvus_CLI Befehlsreferenz
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(Optional) Der uri-Name. Der Standardwert ist &quot;http://127.0.0.1:19530&quot;.</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(Optional) Der zilliz cloud apikey oder <code translate="no">username:password</code>. Der Standardwert ist None.</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(Optional) - Legt den TLS-Modus fest: 0 (Keine Verschlüsselung), 1 (Einweg-Verschlüsselung), 2 (Zweiweg-Verschlüsselung wird noch nicht unterstützt). Voreinstellung ist 0.</td></tr>
+<tr><td style="text-align:left">-cert</td><td style="text-align:left">-cert</td><td style="text-align:left">(Optional) Pfad zur Client-Zertifikatsdatei. Arbeitet mit einseitiger Verschlüsselung</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">k.A.</td><td style="text-align:left">Zeigt die Hilfe zur Verwendung des Befehls an.</td></tr>
 </tbody>
 </table>
 <p><h3 id="connect">Beispiel</h3></p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; connect -uri <span class="hljs-attr">http</span>:<span class="hljs-comment">//127.0.0.1:19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="create-Database" class="common-anchor-header">create Datenbank<button data-href="#create-Database" class="anchor-icon" translate="no">
+<h2 id="create-Database" class="common-anchor-header">Datenbank erstellen<button data-href="#create-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -298,7 +300,7 @@ title: Milvus_CLI Befehlsreferenz
 <button class="copy-code-btn"></button></code></pre>
 <p><h4>Beispiel 2</h4></p>
 <div class="alert note">Beispiel 2 basiert auf Beispiel 1.</div>
-<p>Im folgenden Beispiel wird der Alias <code translate="no">carAlias1</code> aus der Sammlung <code translate="no">car</code> in die Sammlung <code translate="no">car2</code> übertragen.</p>
+<p>Im folgenden Beispiel wird der Alias <code translate="no">carAlias1</code> von der Sammlung <code translate="no">car</code> in die Sammlung <code translate="no">car2</code> übertragen.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create <span class="hljs-built_in">alias</span> -c car2 -A -a carAlias1
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-collection" class="common-anchor-header">create collection<button data-href="#create-collection" class="anchor-icon" translate="no">

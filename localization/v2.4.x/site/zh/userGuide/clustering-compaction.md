@@ -96,7 +96,7 @@ common:
 <tr><td><code translate="no">autoEnable</code></td><td>指定是否启用自动触发压缩。<br>将此项设置为<code translate="no">true</code> 表示 Milvus 在指定的时间间隔内压缩具有聚类密钥的 Collections。</td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">triggerInterval</code></td><td>以毫秒为单位指定 Milvus 开始聚类压缩的时间间隔。<br>只有当<code translate="no">autoEnable</code> 设置为<code translate="no">true</code> 时，此参数才有效。</td><td>-</td></tr>
 <tr><td><code translate="no">minInterval</code></td><td>以秒为单位指定最小间隔。<br>此参数仅在<code translate="no">autoEnable</code> 设置为<code translate="no">true</code> 时有效。<br>将其设置为大于 triggerInterval 的整数有助于避免在短时间内重复压缩。</td><td>-</td></tr>
-<tr><td><code translate="no">maxInterval</code></td><td>指定最大间隔（以秒为单位）。<br>该参数仅在<code translate="no">autoEnable</code> 设置为<code translate="no">true</code> 时有效。<br>一旦 Milvus 检测到某个 Collections 的聚类压实时间超过此值，它就会强制进行聚类压实。</td><td>-</td></tr>
+<tr><td><code translate="no">maxInterval</code></td><td>指定最大间隔（以秒为单位）。<br>该参数仅在<code translate="no">autoEnable</code> 设置为<code translate="no">true</code> 时有效。<br>一旦 Milvus 检测到某个 Collections 未进行聚类压缩的时间超过此值，它就会强制进行聚类压缩。</td><td>-</td></tr>
 <tr><td><code translate="no">newDataSizeThreshold</code></td><td>指定触发聚类压缩的上阈值。<br>该参数仅在<code translate="no">autoEnable</code> 设置为<code translate="no">true</code> 时有效。<br>一旦 Milvus 检测到 Collections 中的数据量超过此值，就会启动聚类压缩进程。</td><td>-</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>指定聚类压缩的超时持续时间。<br>如果执行时间超过此值，则聚类压缩失败。</td><td>-</td></tr>
 </tbody>
@@ -174,7 +174,7 @@ coll1.get_compaction_state(is_clustering=<span class="hljs-literal">True</span>)
 coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Benchmark-Test" class="common-anchor-header">基准测试</h3><p>数据量和查询模式共同决定了聚类压缩所能带来的性能提升。一项内部基准测试表明，聚类压缩最多可将每秒查询次数（QPS）提高 25 倍。</p>
-<p>该基准测试是在一个包含来自 2000 万个 768 维 LAION 数据集的实体的 Collections 上进行的，关键字段被指定为聚类关键字。在 Collections 中触发聚类压缩后，会发送并发搜索，直到 CPU 使用率达到高水位。</p>
+<p>该基准测试是在一个包含来自 2000 万个 768 维 LAION 数据集的实体的 Collections 上进行的，关键字段被指定为聚类密钥。在 Collections 中触发聚类压缩后，会发送并发搜索，直到 CPU 使用率达到高水位。</p>
 <table>
   <thead>
     <tr>

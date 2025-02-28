@@ -282,10 +282,10 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <div class="alert note">
 <ul>
 <li>عندما تقوم بحذف مجموعة Milvus باستخدام التكوين الافتراضي، لا يتم حذف التبعيات مثل etcd وPulsar وMinIO. لذلك، في المرة القادمة عندما تقوم بتثبيت نفس مثيل مجموعة Milvus، سيتم استخدام هذه التبعيات مرة أخرى.</li>
-<li>لحذف التبعيات والسحب الافتراضية الخاصة (PVCs) مع مجموعة Milvus العنقودية، راجع <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">ملف التكوين</a>.</li>
+<li>لحذف التبعيات ومطالبات وحدة التخزين الثابتة (PVCs) مع مجموعة Milvus العنقودية، راجع <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">ملف التكوين</a>.</li>
 </ul>
 </div>
-<h2 id="Uninstall-Milvus-Operator" class="common-anchor-header">إلغاء تثبيت مشغل ميلفوس<button data-href="#Uninstall-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Uninstall-Milvus-Operator" class="common-anchor-header">إلغاء تثبيت مشغل Milvus<button data-href="#Uninstall-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

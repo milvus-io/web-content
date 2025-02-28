@@ -4,9 +4,9 @@ summary: >-
   Esta guía le guiará a través de las operaciones de manipulación de datos
   dentro de una colección, incluidas la inserción, la inserción ascendente y la
   eliminación.
-title: 'Insertar, reinsertar y eliminar'
+title: 'Inserción, inserción ascendente y supresión'
 ---
-<h1 id="Insert-Upsert--Delete" class="common-anchor-header">Insertar, reinsertar y eliminar<button data-href="#Insert-Upsert--Delete" class="anchor-icon" translate="no">
+<h1 id="Insert-Upsert--Delete" class="common-anchor-header">Inserción, inserción ascendente y supresión<button data-href="#Insert-Upsert--Delete" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

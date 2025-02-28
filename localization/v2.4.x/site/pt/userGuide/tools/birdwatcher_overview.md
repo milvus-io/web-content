@@ -3,7 +3,7 @@ id: birdwatcher_overview.md
 summary: >-
   Birdwatcher é uma ferramenta de depuração para Milvus 2.x. Ele se conecta ao
   etcd e inspeciona o status do sistema Milvus.
-title: Observador de aves
+title: Observador de pássaros
 ---
 <h1 id="Birdwatcher" class="common-anchor-header">Observador de pássaros<button data-href="#Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"

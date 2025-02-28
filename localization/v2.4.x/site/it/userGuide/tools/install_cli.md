@@ -82,7 +82,7 @@ title: Installare Milvus_CLI
 <pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus_cli.git
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Eseguire il comando seguente per entrare nella cartella <code translate="no">milvus_cli</code>.</li>
+<li>Eseguire il seguente comando per entrare nella cartella <code translate="no">milvus_cli</code>.</li>
 </ol>
 <pre><code translate="no" class="language-shell"><span class="hljs-built_in">cd</span> milvus_cli
 <button class="copy-code-btn"></button></code></pre>

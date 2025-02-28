@@ -969,7 +969,7 @@ Timeout []:
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-sammlung-name</td><td style="text-align:left">Der Name der Sammlung, in die die Daten eingefügt werden.</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-partition</td><td style="text-align:left">(Optional) Der Name der Partition, in die die Daten eingefügt werden. Wenn Sie diese Partitionsoption nicht angeben, wird die Partition "_default" gewählt.</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Zeigt die Hilfe zur Verwendung des Befehls an.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">k.A.</td><td style="text-align:left">Zeigt die Hilfe zur Verwendung des Befehls an.</td></tr>
 </tbody>
 </table>
 <p><h3 id="import">Beispiel 1</h3>
@@ -1086,7 +1086,7 @@ Milvus timestamp:           428849214449254403
 <tr><td style="text-align:left">-r</td><td style="text-align:left">-Rollenname</td><td style="text-align:left">Der Rollenname der milvus-Rolle.</td></tr>
 <tr><td style="text-align:left">-o</td><td style="text-align:left">-ObjektName</td><td style="text-align:left">Der Objektname des milvus-Objekts.</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-objectType</td><td style="text-align:left">Global, Sammlung oder Benutzer.</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">k.A.</td><td style="text-align:left">Zeigt die Hilfe zur Verwendung des Befehls an.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Zeigt die Hilfe zur Verwendung des Befehls an.</td></tr>
 </tbody>
 </table>
 <h3 id="Examples" class="common-anchor-header">Beispiele</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list grants -r role1 -o object1 -t Collection

@@ -94,7 +94,7 @@ title: Gestionar colecciones
 <p>Para una configuración rápida, utilice el método <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> de la clase <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> para crear una colección con el nombre y la dimensión especificados.</p>
 </div>
 <div class="language-go">
-<p>Para una configuración rápida, utilice el método <a href="https://milvus.io/api-reference/go/v2.4.x/Collection/CreateCollection.md"><code translate="no">CreateCollection()</code></a> en una instancia de la interfaz <code translate="no">Client</code> mediante el método <a href="https://milvus.io/api-reference/go/v2.4.x/Connections/NewClient.md"><code translate="no">NewClient()</code></a> para crear una colección con el nombre y la dimensión especificados.</p>
+<p>Para una configuración rápida, utilice el método <a href="https://milvus.io/api-reference/go/v2.4.x/Collection/CreateCollection.md"><code translate="no">CreateCollection()</code></a> en una instancia de la interfaz <code translate="no">Client</code> utilizando el método <a href="https://milvus.io/api-reference/go/v2.4.x/Connections/NewClient.md"><code translate="no">NewClient()</code></a> para crear una colección con el nombre y la dimensión especificados.</p>
 </div>
 <div class="language-shell">
 <p>Para una configuración rápida, utilice el <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> para crear una colección con el nombre y la dimensión especificados.</p>

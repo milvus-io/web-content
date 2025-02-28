@@ -2,9 +2,7 @@
 id: install_cluster-milvusoperator.md
 label: Milvus Operator
 related_key: Kubernetes
-summary: >-
-  Узнайте, как установить кластер Milvus на Kubernetes с помощью Milvus
-  Operator.
+summary: 'Узнайте, как установить кластер Milvus на Kubernetes с помощью Milvus Operator'
 title: Установите Milvus Cluster с помощью Milvus Operator
 ---
 <h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">Запуск Milvus в Kubernetes с помощью Milvus Operator<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
@@ -284,7 +282,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <div class="alert note">
 <ul>
 <li>При удалении кластера Milvus с использованием конфигурации по умолчанию такие зависимости, как etcd, Pulsar и MinIO, не удаляются. Поэтому в следующий раз при установке того же экземпляра кластера Milvus эти зависимости будут использоваться снова.</li>
-<li>Чтобы удалить зависимости и частные виртуальные облака (PVC) вместе с кластером Milvus, см. <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">файл конфигурации</a>.</li>
+<li>Чтобы удалить зависимости и постоянные требования к томам (PVC) вместе с кластером Milvus, см. <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">файл конфигурации</a>.</li>
 </ul>
 </div>
 <h2 id="Uninstall-Milvus-Operator" class="common-anchor-header">Деинсталляция Milvus Operator<button data-href="#Uninstall-Milvus-Operator" class="anchor-icon" translate="no">

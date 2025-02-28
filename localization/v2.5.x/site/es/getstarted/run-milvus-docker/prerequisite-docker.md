@@ -71,7 +71,7 @@ title: Requisitos para instalar Milvus con Docker Compose
 <tbody>
 <tr><td>macOS 10.14 o posterior</td><td>Escritorio Docker</td><td>Configure la máquina virtual (VM) de Docker para que utilice un mínimo de 2 CPU virtuales (vCPU) y 8 GB de memoria inicial. De lo contrario, la instalación podría fallar. <br/>Consulte <a href="https://docs.docker.com/desktop/mac/install/">Instalar Docker Desktop en Mac</a> para obtener más información.</td></tr>
 <tr><td>Plataformas Linux</td><td><ul><li>Docker 19.03 o posterior</li><li>Docker Compose 1.25.1 o posterior</li></ul></td><td>Consulte <a href="https://docs.docker.com/engine/install/">Instalar Docker Engine</a> e <a href="https://docs.docker.com/compose/install/">Instalar Docker Comp</a> ose para obtener más información.</td></tr>
-<tr><td>Windows con WSL 2 habilitado</td><td>Escritorio Docker</td><td>Le recomendamos que almacene el código fuente y otros datos montados en contenedores Linux en el sistema de archivos Linux en lugar del sistema de archivos Windows.<br/>Consulte <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Instalar Docker Desktop en Windows con WSL 2 backend</a> para obtener más información.</td></tr>
+<tr><td>Windows con WSL 2 habilitado</td><td>Escritorio Docker</td><td>Recomendamos que almacene el código fuente y otros datos montados en contenedores Linux en el sistema de archivos Linux en lugar del sistema de archivos Windows.<br/>Consulte <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Instalar Docker Desktop en Windows con WSL 2 backend</a> para obtener más información.</td></tr>
 </tbody>
 </table>
 <p>Las siguientes dependencias se obtendrán y configurarán automáticamente cuando Milvus Standalone se instale utilizando el script Docker, o la configuración Docker Compose:</p>
@@ -90,7 +90,7 @@ title: Requisitos para instalar Milvus con Docker Compose
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>Idealmente, su disco debería alcanzar más de 500 IOPS y por debajo de 10ms para el percentil 99 de latencia fsync. Lee <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">la documentación de</a> etcd para conocer los requisitos con más detalle.</p>
+<p>Idealmente, su disco dedicado a etcd debería alcanzar más de 500 IOPS y por debajo de 10ms para el percentil 99 de latencia fsync. Lee <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">la documentación de</a> etcd para conocer los requisitos con más detalle.</p>
 <h2 id="Whats-next" class="common-anchor-header">Lo que sigue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

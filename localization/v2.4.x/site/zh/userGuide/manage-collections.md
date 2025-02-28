@@ -284,7 +284,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </div>
 </div>
 <div class="language-go">
-<p>要设置模式，可使用<code translate="no">entity.NewSchema()</code> 创建模式对象，使用<code translate="no">schema.WithField()</code> 为模式添加字段。</p>
+<p>要设置模式，可使用<code translate="no">entity.NewSchema()</code> 创建模式对象，并使用<code translate="no">schema.WithField()</code> 为模式添加字段。</p>
 </div>
 <div class="language-shell">
 <p>要设置模式，您需要定义一个 JSON 对象，该对象应遵循模式格式，如 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a>API 端点参考页面上显示的模式格式定义一个 JSON 对象。</p>
@@ -706,7 +706,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有当指定字段是向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
+      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有指定字段为向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">nlist</code></td>
@@ -732,7 +732,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有指定字段为向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
+      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有当指定字段是向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
@@ -1096,7 +1096,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>此 Collections 的 Schema。</td>
+<td>Collections 的 Schema。</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
@@ -1142,7 +1142,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">fields.isPrimary</code></td>
-<td>当前字段是否为主字段。设置为 True 时，当前字段将成为主字段。</td>
+<td>当前字段是否为主字段。将此设置为 True 时，当前字段就是主字段。</td>
 </tr>
 <tr>
 <td><code translate="no">fields.elementTypeParams</code></td>
@@ -1394,7 +1394,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexName</code></td>
-        <td>要创建的索引的名称，值默认为目标字段名称。</td>
+        <td>要创建的索引的名称，默认值为目标字段名称。</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexConfig.index_type</code></td>
@@ -1759,7 +1759,7 @@ collections, err := client.ListCollections(ctx)
 <p>要加载 Collections，请使用 <a href="https://milvus.io/api-reference/go/v2.4.x/Collection/LoadCollection.md"><code translate="no">LoadCollection()</code></a>方法，指定 Collections 名称。</p>
 </div>
 <div class="language-shell">
-<p>要载入一个 Collection，可以使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Load.md"><code translate="no">POST /v2/vectordb/collections/load</code></a>和 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a>API 端点。</p>
+<p>要加载 Collections，可以使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Load.md"><code translate="no">POST /v2/vectordb/collections/load</code></a>和 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a>API 端点。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
@@ -2378,7 +2378,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>要将别名重新分配给其他 Collections，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/alter_alias.md"><code translate="no">alter_alias()</code></a>方法，指定 Collections 名称和别名。</p>
 </div>
 <div class="language-java">
-<p>要将别名重新指定给其他 Collections，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a>方法，指定 Collections 名称和别名。</p>
+<p>要将别名重新指定给其他 Collections，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a>方法，指定集合名称和别名。</p>
 </div>
 <div class="language-javascript">
 <p>要将别名重新分配给其他 Collections，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a>方法，指定 Collections 名称和别名。</p>

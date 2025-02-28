@@ -146,7 +146,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
         ></path>
       </svg>
     </button></h2><p>Die Verbesserung der Indizierung ist eine weitere Strategie, um die Leistung Ihrer RAG-Anwendungen zu steigern. Sehen wir uns drei Techniken zur Verbesserung der Indizierung an.</p>
-<h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">Automatisches Zusammenführen von Dokumentenstücken (Chunks)</h3><p>Beim Aufbau eines Indexes können wir zwei Granularitätsebenen verwenden: Child Chunks und ihre entsprechenden Parent Chunks. Zunächst suchen wir nach Child Chunks auf einer feineren Detailebene. Dann wenden wir eine Merging-Strategie an: Wenn eine bestimmte Anzahl <strong><em>n</em></strong> von Child Chunks aus den ersten <strong><em>k</em></strong> Child Chunks zu demselben Parent Chunk gehört, stellen wir dem LLM diesen Parent Chunk als Kontextinformation zur Verfügung.</p>
+<h3 id="Merging-Document-Chunks-Automatically" class="common-anchor-header">Automatisches Zusammenführen von Dokumentenstücken (Chunks)</h3><p>Beim Aufbau eines Indexes können wir zwei Granularitätsebenen verwenden: Child Chunks und ihre entsprechenden Parent Chunks. Zunächst suchen wir nach Child Chunks auf einer feineren Detailebene. Dann wenden wir eine Merging-Strategie an: Wenn eine bestimmte Anzahl <strong><em>n</em></strong> von Child Chunks aus den ersten <strong><em>k</em></strong> Child Chunks zu demselben Parent Chunk gehört, stellen wir diesen Parent Chunk dem LLM als Kontextinformation zur Verfügung.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/merge_chunks.png" alt="" class="doc-image" id="" />
@@ -187,7 +187,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
         ></path>
       </svg>
     </button></h2><p>Die Verfeinerung der Retriever-Komponente innerhalb des RAG-Systems kann die RAG-Anwendungen ebenfalls verbessern. Lassen Sie uns einige effektive Methoden zur Verbesserung des Retrievers untersuchen.</p>
-<h3 id="Sentence-Window-Retrieval" class="common-anchor-header">Satzfenster-Retrieval</h3><p>In einem grundlegenden RAG-System ist das an den LLM übergebene Dokumentstück ein größeres Fenster, das das abgerufene Einbettungsstück umfasst. Dadurch wird sichergestellt, dass die dem LLM zur Verfügung gestellten Informationen ein breiteres Spektrum an kontextuellen Details umfassen und der Informationsverlust minimiert wird. Die Technik des Sentence Window Retrieval entkoppelt den für das Embedding Retrieval verwendeten Dokumentenchunk von dem dem LLM zur Verfügung gestellten Chunk.</p>
+<h3 id="Sentence-Window-Retrieval" class="common-anchor-header">Satzfenster-Retrieval</h3><p>In einem grundlegenden RAG-System ist das dem LLM übergebene Dokumentstück ein größeres Fenster, das das abgerufene Einbettungsstück umfasst. Dadurch wird sichergestellt, dass die dem LLM zur Verfügung gestellten Informationen ein breiteres Spektrum an kontextuellen Details umfassen und der Informationsverlust minimiert wird. Die Technik des Sentence Window Retrieval entkoppelt den für das Embedding Retrieval verwendeten Dokumentenchunk von dem dem LLM zur Verfügung gestellten Chunk.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.4.x/assets/advanced_rag/sentence_window.png" alt="" class="doc-image" id="" />
@@ -275,7 +275,7 @@ title: Wie Sie die Leistung Ihrer RAG-Pipeline verbessern können
 </p>
 <p>Der Agent kann verschiedene Formen annehmen, z. B. ein LLM, ein kleines Klassifizierungsmodell oder sogar einen Satz von Regeln.</p>
 <p>Durch das Routing von Abfragen auf der Grundlage der Benutzerabsicht können Sie einen Teil der Abfragen umleiten, was zu einer erheblichen Verbesserung der Antwortzeit und einer spürbaren Verringerung des unnötigen Rauschens führt.</p>
-<p>Wir können die Technik des Query Routing auf andere Prozesse innerhalb des RAG-Systems ausdehnen, z. B. auf die Bestimmung, wann Tools wie die Websuche eingesetzt werden sollen, auf die Durchführung von Unterabfragen oder die Suche nach Bildern. Dieser Ansatz stellt sicher, dass jeder Schritt im RAG-System auf der Grundlage der spezifischen Anforderungen der Anfrage optimiert wird, was zu einer effizienteren und genaueren Informationsbeschaffung führt.</p>
+<p>Wir können die Technik des Query Routing auf andere Prozesse innerhalb des RAG-Systems ausdehnen, z. B. auf die Bestimmung, wann Tools wie die Websuche eingesetzt werden sollen, auf die Durchführung von Unterabfragen oder die Suche nach Bildern. Dieser Ansatz stellt sicher, dass jeder Schritt im RAG-System auf der Grundlage der spezifischen Anforderungen der Abfrage optimiert wird, was zu einer effizienteren und genaueren Informationsbeschaffung führt.</p>
 <h2 id="Summary" class="common-anchor-header">Zusammenfassung<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

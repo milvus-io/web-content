@@ -282,7 +282,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <div class="alert note">
 <ul>
 <li>デフォルトの設定でMilvusクラスタを削除した場合、etcd、Pulsar、MinIOなどの依存関係は削除されません。そのため、次回同じMilvusクラスタインスタンスをインストールすると、これらの依存関係が再び使用されます。</li>
-<li>Milvusクラスタとともに依存関係およびプライベート仮想クラウド(PVC)を削除するには、<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">設定ファイルを</a>参照してください。</li>
+<li>Milvusクラスタとともに依存関係および永続ボリュームクレーム(PVC)を削除するには、<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">設定ファイルを</a>参照してください。</li>
 </ul>
 </div>
 <h2 id="Uninstall-Milvus-Operator" class="common-anchor-header">Milvus Operatorのアンインストール<button data-href="#Uninstall-Milvus-Operator" class="anchor-icon" translate="no">
@@ -303,7 +303,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
     </button></h2><p>Milvus Operatorをアンインストールするには2つの方法があります。</p>
 <ul>
 <li><a href="#Uninstall-with-Helm">Helmを使用してアンインストールする</a></li>
-<li><a href="#Uninstall-with-kubectl">kubectlによるアンインストール</a></li>
+<li><a href="#Uninstall-with-kubectl">kubectlを使用したアンインストール</a></li>
 </ul>
 <h4 id="Uninstall-with-Helm" class="common-anchor-header">Helmによるアンインストール</h4><pre><code translate="no" class="language-shell">$ helm -n milvus-<span class="hljs-keyword">operator</span> uninstall milvus-<span class="hljs-keyword">operator</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -346,7 +346,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 </ul></li>
 <li><p><a href="/docs/ja/milvus-webui.md">Milvusの</a>観測と管理のための直感的なWebインターフェースである<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご覧ください。</p></li>
 <li><p><a href="/docs/ja/milvus_backup_overview.md">Milvus</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
-<li><p>Milvusのデバッグとダイナミックなコンフィギュレーション更新のためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
+<li><p><a href="/docs/ja/birdwatcher_overview.md">Birdwatcher</a>：Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール。</p></li>
 <li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://milvus.io/docs/attu.md">Attuを</a>ご紹介します。</p></li>
 <li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

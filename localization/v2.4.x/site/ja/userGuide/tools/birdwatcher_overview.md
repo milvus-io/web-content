@@ -1,6 +1,6 @@
 ---
 id: birdwatcher_overview.md
-summary: BirdwatcherはMilvus 2.x用のデバッグツールで、etcdに接続してMilvusシステムの状態を検査する。
+summary: BirdwatcherはMilvus 2.x用のデバッグツールであり、etcdに接続してMilvusシステムの状態を検査する。
 title: バードウォッチャー
 ---
 <h1 id="Birdwatcher" class="common-anchor-header">バードウォッチャー<button data-href="#Birdwatcher" class="anchor-icon" translate="no">
@@ -19,7 +19,7 @@ title: バードウォッチャー
         ></path>
       </svg>
     </button></h1><p>Milvusはステートレス・ベクター・データベースで、読み込みと書き込みを分離し、etcdが単一の状態ソースの役割を果たす。すべてのコーディネータは、状態を変更する前にetcdから状態を問い合わせなければならない。ユーザが状態をチェックしたりクリーニングしたりする必要が生じたら、etcdと通信するツールが必要になる。ここでBirdwatcherが登場する。</p>
-<p>BirdwatcherはMilvus用のデバッグツールだ。これを使用してetcdに接続することで、Milvusシステムの状態をチェックしたり、その場で設定を行ったりすることができる。</p>
+<p>Birdwatcherはmilvus用のデバッグツールだ。これを使用してetcdに接続することで、Milvusシステムの状態をチェックしたり、その場で設定を行うことができる。</p>
 <h2 id="Prerequisite" class="common-anchor-header">前提条件<button data-href="#Prerequisite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

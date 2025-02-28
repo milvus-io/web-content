@@ -36,9 +36,9 @@ title: GPU를 사용한 색인
         ></path>
       </svg>
     </button></h2><p>Milvus는 글로벌 그래픽 메모리 풀을 사용하여 GPU 메모리를 할당합니다.</p>
-<p><a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus 설정 파일에서</a> <code translate="no">initMemSize</code> 및 <code translate="no">maxMemSize</code> 두 개의 파라미터를 지원합니다. 풀 크기는 처음에 <code translate="no">initMemSize</code> 로 설정되며, 이 한도를 초과하면 <code translate="no">maxMemSize</code> 으로 자동 확장됩니다.</p>
+<p><a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus 설정 파일에서</a> <code translate="no">initMemSize</code> 및 <code translate="no">maxMemSize</code> 두 개의 파라미터를 지원합니다. 풀 크기는 처음에 <code translate="no">initMemSize</code> 로 설정되며, 이 한도를 초과하면 <code translate="no">maxMemSize</code> 로 자동 확장됩니다.</p>
 <p>기본값 <code translate="no">initMemSize</code> 은 Milvus 시작 시 사용 가능한 GPU 메모리의 1/2이며, 기본값 <code translate="no">maxMemSize</code> 은 사용 가능한 모든 GPU 메모리와 동일합니다.</p>
-<p>Milvus 2.4.1(2.4.1 버전 포함)까지 Milvus는 통합 GPU 메모리 풀을 사용했습니다. 2.4.1(버전 2.4.1 포함) 이전 버전에서는 두 값을 모두 0으로 설정하는 것이 권장되었습니다.</p>
+<p>Milvus 2.4.1(2.4.1 버전 포함)까지 Milvus는 통합 GPU 메모리 풀을 사용했습니다. 2.4.1(버전 2.4.1 포함) 이전 버전에서는 두 값을 모두 0으로 설정하는 것이 좋습니다.</p>
 <pre><code translate="no" class="language-yaml">gpu:
   initMemSize: <span class="hljs-number">0</span> <span class="hljs-comment">#set the initial memory pool size.</span>
   maxMemSize: <span class="hljs-number">0</span> <span class="hljs-comment">#maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. </span>
@@ -160,7 +160,7 @@ collection.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>주요 검색 매개변수는 다음과 같습니다:</p>
 <ul>
-<li><p><strong>itopk_size</strong>: 검색 중에 보관되는 중간 결과의 크기를 결정합니다. 값이 클수록 검색 성능이 저하되는 대신 회상률이 향상될 수 있습니다. 이 값은 최소한 최종 상위 k<strong>(한계</strong>) 값과 같아야 하며 일반적으로 2의 거듭제곱(예: 16, 32, 64, 128)입니다.</p></li>
+<li><p><strong>itopk_size</strong>: 검색 중에 보관되는 중간 결과의 크기를 결정합니다. 값이 클수록 검색 성능이 저하되는 대신 회상률이 향상될 수 있습니다. 이 값은 최소한 최종 상위 k<strong>(한계</strong>) 값과 같아야 하며 일반적으로 2의 거듭제곱입니다(예: 16, 32, 64, 128).</p></li>
 <li><p><strong>search_width</strong>: 검색 중 CAGRA 그래프에 들어가는 진입점 수를 지정합니다. 이 값을 높이면 검색 회수율은 향상될 수 있지만 검색 성능에 영향을 줄 수 있습니다.</p></li>
 <li><p><strong>MIN_ITERATIONS</strong> / <strong>MAX_ITERATIONS</strong>: 이 매개변수는 검색 반복 프로세스를 제어합니다. 기본적으로 이 값은 <strong>0으로</strong> 설정되어 있으며, CAGRA는 <strong>itopk_size</strong> 및 <strong>search_width에</strong> 따라 반복 횟수를 자동으로 결정합니다. 이 값을 수동으로 조정하면 성능과 정확도의 균형을 맞추는 데 도움이 될 수 있습니다.</p></li>
 <li><p><strong>team_size</strong>: GPU에서 메트릭 거리를 계산하는 데 사용되는 CUDA 스레드 수를 지정합니다. 일반적인 값은 2의 거듭제곱에서 최대 32입니다(예: 2, 4, 8, 16, 32). 검색 성능에 약간의 영향을 미칩니다. 기본값은 <strong>0이며</strong>, Milvus는 벡터 차원에 따라 자동으로 <strong>team_size를</strong> 선택합니다.</p></li>
@@ -171,7 +171,7 @@ collection.create_index(
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>이 두 인덱스 유형에 대한 검색 매개변수는 <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> 및 <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ에서</a></strong> 사용되는 것과 유사합니다. 자세한 내용은 <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">벡터 유사도 검색 수행을</a> 참조하세요.</p></li>
+<p>이 두 인덱스 유형에 대한 검색 매개변수는 <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> 및 <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ에</a></strong> 사용되는 것과 유사합니다. 자세한 내용은 <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">벡터 유사도 검색 수행을</a> 참조하세요.</p></li>
 </ul>
 <h3 id="Conduct-a-search" class="common-anchor-header">검색 수행</h3><p>벡터 유사도 검색을 수행하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a> 메서드를 사용하여 GPU 인덱스에서 벡터 유사도 검색을 수행합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Load data into memory</span>
@@ -227,5 +227,5 @@ collection.search(
 <li><p><strong>GPU 인덱스는 언제 사용하는 것이 적절하나요?</strong></p>
 <p>GPU 인덱스는 특히 높은 처리량이나 높은 리콜이 필요한 상황에서 유용합니다. 예를 들어, 대규모 배치를 처리할 때 GPU 인덱싱의 처리량은 CPU 인덱싱의 처리량을 100배까지 능가할 수 있습니다. 배치 규모가 작은 시나리오에서는 여전히 성능 면에서 GPU 인덱싱이 CPU 인덱싱을 크게 앞섭니다. 또한, 빠른 데이터 삽입이 요구되는 경우, GPU를 통합하면 인덱스 구축 프로세스의 속도를 크게 높일 수 있습니다.</p></li>
 <li><p><strong>CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT, GPU_BRUTE_FORCE와 같은 GPU 인덱스는 어떤 시나리오에 가장 적합할까요?</strong></p>
-<p>CAGRA 인덱스는 더 많은 메모리를 사용하지만 향상된 성능을 요구하는 시나리오에 이상적입니다. 메모리 보존이 우선시되는 환경에서는 <strong>GPU_IVF_PQ</strong> 인덱스가 스토리지 요구 사항을 최소화하는 데 도움이 될 수 있지만, 정밀도 손실이 더 높습니다. <strong>GPU_IVF_FLAT</strong> 인덱스는 성능과 메모리 사용량 사이의 절충점을 제공하는 균형 잡힌 옵션으로 사용됩니다. 마지막으로 <strong>GPU_BRUTE_FORCE</strong> 인덱스는 철저한 검색 작업을 위해 설계되었으며, 순회 검색을 수행하여 1의 리콜률을 보장합니다.</p></li>
+<p>CAGRA 인덱스는 더 많은 메모리를 사용하지만 향상된 성능을 요구하는 시나리오에 이상적입니다. 메모리 보존이 우선시되는 환경에서는 <strong>GPU_IVF_PQ</strong> 인덱스가 스토리지 요구 사항을 최소화하는 데 도움이 될 수 있지만, 정밀도 손실이 더 높습니다. <strong>GPU_IVF_FLAT</strong> 인덱스는 성능과 메모리 사용량 사이의 절충점을 제공하는 균형 잡힌 옵션입니다. 마지막으로 <strong>GPU_BRUTE_FORCE</strong> 인덱스는 철저한 검색 작업을 위해 설계되었으며, 순회 검색을 수행하여 1의 리콜률을 보장합니다.</p></li>
 </ul>

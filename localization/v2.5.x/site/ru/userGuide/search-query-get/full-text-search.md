@@ -26,7 +26,7 @@ summary: >-
 <p>Эта функция, использующая алгоритм BM25 для оценки релевантности, особенно ценна в сценариях поиска с расширенной генерацией (RAG), где приоритет отдается документам, которые точно соответствуют определенным поисковым терминам.</p>
 <div class="alert note">
 <ul>
-<li>Интегрируя полнотекстовый поиск с плотным векторным поиском на основе семантики, вы можете повысить точность и релевантность результатов поиска. Дополнительную информацию см. в разделе <a href="/docs/ru/multi-vector-search.md">"Гибридный поиск"</a>.</li>
+<li>Интегрируя полнотекстовый поиск с плотным векторным поиском на основе семантики, вы можете повысить точность и релевантность результатов поиска. Дополнительные сведения см. в разделе <a href="/docs/ru/multi-vector-search.md">"Гибридный поиск"</a>.</li>
 <li>Полнотекстовый поиск доступен в Milvus Standalone и Milvus Distributed, но не в Milvus Lite, хотя его добавление в Milvus Lite находится в дорожной карте.</li>
 </ul>
 </div>
@@ -51,7 +51,7 @@ summary: >-
 <li><p><strong>Анализ текста</strong>: Milvus использует анализатор для токенизации входного текста в отдельные термины, пригодные для поиска. Дополнительные сведения об анализаторах см. в разделе <a href="/docs/ru/analyzer-overview.md">Обзор анализаторов</a>.</p></li>
 <li><p><strong>Обработка функции</strong>: Встроенная функция получает токенизированные термины и преобразует их в разреженные векторные представления.</p></li>
 <li><p><strong>Хранение коллекций</strong>: Milvus хранит эти разреженные вкрапления в коллекции для эффективного поиска.</p></li>
-<li><p><strong>BM25 scoring</strong>: Во время поиска Milvus применяет алгоритм BM25 для подсчета баллов для сохраненных документов и ранжирует совпавшие результаты на основе их релевантности тексту запроса.</p></li>
+<li><p><strong>BM25 scoring</strong>: Во время поиска Milvus применяет алгоритм BM25 для подсчета баллов для сохраненных документов и ранжирует совпадающие результаты на основе их релевантности тексту запроса.</p></li>
 </ol>
 <p>
   
@@ -425,7 +425,7 @@ client.insert(InsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После того как вы вставили данные в свою коллекцию, вы можете выполнять полнотекстовый поиск с помощью запросов с сырым текстом. Milvus автоматически преобразует ваш запрос в разреженный вектор и ранжирует совпадающие результаты поиска с помощью алгоритма BM25, а затем возвращает результаты topK (<code translate="no">limit</code>).</p>
+    </button></h2><p>После того как вы вставили данные в свою коллекцию, вы можете выполнять полнотекстовый поиск с помощью запросов на основе необработанного текста. Milvus автоматически преобразует ваш запрос в разреженный вектор и ранжирует совпадающие результаты поиска с помощью алгоритма BM25, а затем возвращает результаты topK (<code translate="no">limit</code>).</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {​
@@ -490,7 +490,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
 </th></tr></thead><tbody><tr><td data-block-token="QpGIdQ2m0oogCvxColKcNWnYnUc" colspan="1" rowspan="1"><p data-block-token="TkffdBxkKo2hVvx9gGucca46nic"><code translate="no">search_params</code></p>
 </td><td data-block-token="HYemdqt6Dow9tvxOcYScmYdPn8e" colspan="1" rowspan="1"><p data-block-token="JiIOdJrBcoGIQ4xrqYycMdjnn7g">Словарь, содержащий параметры поиска.</p>
 </td></tr><tr><td data-block-token="DJDgdH5WUoZQxkxmLzQcXqcXnQh" colspan="1" rowspan="1"><p data-block-token="LKWbdw498o9mtRxm9gDcg28FnQd"><code translate="no">params.drop_ratio_search</code></p>
-</td><td data-block-token="SEJ7d5y18otFTOxy7gLcvLYRnfb" colspan="1" rowspan="1"><p data-block-token="MnladDjOGoUphGxrZzXchD0anzf">Доля низкочастотных терминов, которые следует игнорировать при поиске. Подробнее см. в разделе <a href="/docs/ru/sparse_vector.md">"Разреженный вектор</a>".</p>
+</td><td data-block-token="SEJ7d5y18otFTOxy7gLcvLYRnfb" colspan="1" rowspan="1"><p data-block-token="MnladDjOGoUphGxrZzXchD0anzf">Доля малозначимых терминов, которые следует игнорировать при поиске. Подробнее см. в разделе <a href="/docs/ru/sparse_vector.md">"Разреженный вектор</a>".</p>
 </td></tr><tr><td data-block-token="XPPYdAYUPoASg5xuIYmcyxqHnPe" colspan="1" rowspan="1"><p data-block-token="T90ndG7H0okLa4xa1wzcHQmEnEg"><code translate="no">data</code></p>
 </td><td data-block-token="NMhsduxr1oUESPx2J8YcA8csnA1" colspan="1" rowspan="1"><p data-block-token="ZmEQdkdGtofQsAx9YXNcsnlHnYe">Необработанный текст запроса.</p>
 </td></tr><tr><td data-block-token="O4OVdL9BIollH1xORz3czhInnSh" colspan="1" rowspan="1"><p data-block-token="CYdGd82dRopaWrxfJ9ycWQQnnPc"><code translate="no">anns_field</code></p>

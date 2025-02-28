@@ -1154,7 +1154,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
-<p>Die oben erstellte Sammlung wird nicht automatisch geladen. Sie können einen Index für die Sammlung wie folgt erstellen. Wenn Sie einen Index für die Sammlung auf separate Weise erstellen, wird die Sammlung nicht automatisch geladen. Details finden Sie unter <a href="/docs/de/manage-collections.md">Laden und Freigeben der Sammlung</a>.</p>
+<p>Die oben erstellte Sammlung wird nicht automatisch geladen. Sie können einen Index für die Sammlung wie folgt erstellen. Wenn Sie einen Index für die Sammlung auf separate Weise erstellen, wird die Sammlung nicht automatisch geladen. Einzelheiten finden Sie unter <a href="/docs/de/manage-collections.md">Laden und Freigeben von Sammlungen</a>.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>
@@ -2153,7 +2153,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
     </tr>
     <tr>
       <td><code translate="no">alias</code></td>
-      <td>Der Alias der Sammlung. Vergewissern Sie sich vor diesem Vorgang, dass der Alias nicht bereits existiert. Ist dies der Fall, treten Ausnahmen auf.</td>
+      <td>Der Alias der Sammlung. Vergewissern Sie sich vor diesem Vorgang, dass der Alias nicht bereits existiert. Wenn dies der Fall ist, treten Ausnahmen auf.</td>
     </tr>
   </tbody>
 </table>
@@ -2706,7 +2706,7 @@ collection.set_properties(
 <p>Um eine Sammlung zu löschen, verwenden Sie die <a href="https://milvus.io/api-reference/go/v2.4.x/Collection/DropCollection.md"><code translate="no">DropCollection()</code></a> Methode unter Angabe des Sammlungsnamens.</p>
 </div>
 <div class="language-shell">
-<p>Um eine Sammlung zu löschen, können Sie den <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/collections/drop</code></a> API-Endpunkt.</p>
+<p>Um eine Sammlung zu löschen, können Sie den <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/collections/drop</code></a> API-Endpunkt verwenden.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>

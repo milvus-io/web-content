@@ -117,7 +117,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>生成されたデータの構造は、その最初のエントリーを確認することで見ることができる。</p>
+<p>生成されたデータの構造は、その最初のエントリーをチェックすることで見ることができる。</p>
 <pre><code translate="no">{
     <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;vector&quot;</span>: [
@@ -160,7 +160,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 <ul>
 <li><p>リストまたは配列内のすべての値が同じデータ型であることを確認してください。</p></li>
 <li><p>JSONフィールド値内のネストされた辞書はすべて文字列とみなされます。</p></li>
-<li><p>JSON キーの名前には、英数字とアンダースコアのみを使用してください。他の文字を使用すると、フィルタリングや検索で問題が発生する可能性があります。</p></li>
+<li><p>JSONキーの名前には、英数字とアンダースコアのみを使用してください。他の文字を使用すると、フィルタリングや検索で問題が発生する可能性があります。</p></li>
 <li>現在、JSONフィールドにインデックスを付けることはできないため、フィルタリングに時間がかかる可能性があります。しかし、この制限は今後のリリースで対処される予定です。</li>
 </ul>
 </div>
@@ -410,7 +410,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">CollectionSchema</code> オブジェクトからコレクションを作成した後、その中に上記のような辞書を挿入することができます。</p>
+    </button></h2><p><code translate="no">CollectionSchema</code> オブジェクトからコレクションを作成した後、上記のような辞書をその中に挿入することができます。</p>
 <div class="language-python">
 <p>コレクションにデータを挿入するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>メソッドを使用して、データをコレクションに挿入します。</p>
 </div>
@@ -527,7 +527,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>すべてのデータが追加されたら、標準的なスカラー・フィールドと同じように、JSON フィールドのキーを使用して検索やクエリを実行できます。</p>
+    </button></h2><p>すべてのデータが追加されたら、標準的なスカラー・フィールドと同じように、JSONフィールドのキーを使用して検索やクエリを実行できます。</p>
 <div class="language-python">
 <p>パラメータの詳細については、SDKリファレンスの <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a>を参照してください。</p>
 </div>
@@ -711,9 +711,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusはJSONフィールドのスカラーフィルタリングのための一連の高度なフィルタを提供します。これらのフィルタは<code translate="no">JSON_CONTAINS</code> 、<code translate="no">JSON_CONTAINS_ALL</code> 、<code translate="no">JSON_CONTAINS_ANY</code> です。</p>
+    </button></h2><p>MilvusはJSONフィールドのスカラーフィルタリングのための一連の高度なフィルタを提供します。これらのフィルタは<code translate="no">JSON_CONTAINS</code>,<code translate="no">JSON_CONTAINS_ALL</code>,<code translate="no">JSON_CONTAINS_ANY</code> です。</p>
 <ul>
-<li><p><code translate="no">[&quot;blue&quot;, &quot;brown&quot;, &quot;grey&quot;]</code> を参照カラーセットとして持つすべてのエンティティをフィルタリングします。</p>
+<li><p><code translate="no">[&quot;blue&quot;, &quot;brown&quot;, &quot;grey&quot;]</code> を参照カラーセットとして持つすべてのエンティティをフィルタリングする。</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. Advanced search within a JSON field</span>
@@ -949,9 +949,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><code translate="no">[4, 5]</code> のコーディネーターを持つエンティティをフィルターします。</p>
+<li><p><code translate="no">[4, 5]</code> のコーディネーターを持つエンティティをフィルタリングする。</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a><a href="#javascript">Java Node.js</a></div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
     data=query_vectors,
@@ -1154,7 +1154,7 @@ searchResults = searchResp.getSearchResults();
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>コーディネータが<code translate="no">4</code> または<code translate="no">5</code> のいずれかを含むエンティティをフィルタリングします。</p>
+<li><p>コーディネータが<code translate="no">4</code> または<code translate="no">5</code> を含むエンティティをフィルタリングする。</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.query(
@@ -1359,7 +1359,7 @@ searchResults = searchResp.getSearchResults();
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Reference-on-JSON-filters" class="common-anchor-header">JSON フィルタのリファレンス<button data-href="#Reference-on-JSON-filters" class="anchor-icon" translate="no">
+<h2 id="Reference-on-JSON-filters" class="common-anchor-header">JSONフィルターに関するリファレンス<button data-href="#Reference-on-JSON-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1374,11 +1374,11 @@ searchResults = searchResp.getSearchResults();
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSON フィールドを扱う場合、JSON フィールドをフィルターとして使用するか、その特定のキーの一部を使用することができます。</p>
+    </button></h2><p>JSONフィールドを使用する場合、JSONフィールドをフィルタとして使用するか、特定のキーを使用することができます。</p>
 <div class="admonition note">
 <p><b>注釈</b></p>
 <ul>
-<li>Milvusは、セマンティックエスケープや変換を行わずに、文字列値をそのままJSONフィールドに格納します。 </li>
+<li>Milvusはセマンティックエスケープや変換を行わず、文字列値をそのままJSONフィールドに格納します。 </li>
 </ul>
 <p>例えば、<code translate="no">'a"b'</code> 、<code translate="no">"a'b"</code> 、<code translate="no">'a\\\\'b'</code> 、<code translate="no">"a\\\\"b"</code> はそのまま保存され、<code translate="no">'a'b'</code> 、<code translate="no">"a"b"</code> は無効な値として扱われます。</p>
 <ul>
@@ -1415,19 +1415,19 @@ searchResults = searchResp.getSearchResults();
 <pre><code translate="no" class="language-python">json_contains(x, <span class="hljs-number">1</span>) <span class="hljs-comment"># =&gt; True (x contains 1.)</span>
 json_contains(x, <span class="hljs-string">&quot;a&quot;</span>) <span class="hljs-comment"># =&gt; False (x does not contain a member &quot;a&quot;.)</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>例 2：<code translate="no">{&quot;x&quot;, [[1,2,3], [4,5,6], [7,8,9]]}</code></p>
+<li><p>例2：<code translate="no">{&quot;x&quot;, [[1,2,3], [4,5,6], [7,8,9]]}</code></p>
 <pre><code translate="no" class="language-python">json_contains(x, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]) <span class="hljs-comment"># =&gt; True (x contains [1,2,3].)</span>
 json_contains(x, [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>]) <span class="hljs-comment"># =&gt; False (x does contain a member [3,2,1].)</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 <li><p><code translate="no">json_contains_all(identifier, jsonExpr)</code></p>
-<p>この演算子は、識別子に JSON 式のすべてのメンバが含まれるエンティティをフィルタリングします。</p>
+<p>この演算子は、識別子が JSON 式のすべてのメンバを含むエンティティをフィルタリングします。</p>
 <p>例<code translate="no">{&quot;x&quot;: [1,2,3,4,5,7,8]}</code></p>
 <pre><code translate="no" class="language-python">json_contains_all(x, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>]) <span class="hljs-comment"># =&gt; True (x contains 1, 2, and 8.)</span>
 json_contains_all(x, [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]) <span class="hljs-comment"># =&gt; False (x does not has a member 6.)</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><code translate="no">json_contains_any(identifier, jsonExpr)</code></p>
-<p>この演算子は、識別子が JSON 式の任意のメンバを含むエンティティをフィルタリングします。</p>
+<p>この演算子は、識別子が JSON 式のいずれかのメンバを含むエンティティをフィルタリングします。</p>
 <p>例<code translate="no">{&quot;x&quot;: [1,2,3,4,5,7,8]}</code></p>
 <pre><code translate="no" class="language-python">json_contains_any(x, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>]) <span class="hljs-comment"># =&gt; True (x contains 1, 2, and 8.)</span>
 json_contains_any(x, [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]) <span class="hljs-comment"># =&gt; True (x contains 4 and 5.)</span>

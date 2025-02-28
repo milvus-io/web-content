@@ -156,12 +156,12 @@ reqs = [request_1, request_2]
 <li><p><code translate="no">data</code> <em>(lista</em>)</p>
 <p>El vector de consulta a buscar en un único <code translate="no">AnnSearchRequest</code>. Actualmente, este parámetro acepta una lista que contiene un único vector de consulta, por ejemplo, <code translate="no">[[0.5791814851218929, 0.5792985702614121, 0.8480776460143558, 0.16098005945243, 0.2842979317256803]]</code>. En el futuro, este parámetro se ampliará para aceptar múltiples vectores de consulta.</p></li>
 <li><p><code translate="no">anns_field</code> <em>(cadena</em>)</p>
-<p>El nombre del campo vectorial que se utilizará en un único <code translate="no">AnnSearchRequest</code>.</p></li>
+<p>Nombre del campo vectorial que se utilizará en un único <code translate="no">AnnSearchRequest</code>.</p></li>
 <li><p><code translate="no">param</code> <em>(dict</em>)</p>
 <p>Un diccionario de parámetros de búsqueda para un único <code translate="no">AnnSearchRequest</code>. Estos parámetros de búsqueda son idénticos a los de una búsqueda de un solo vector. Para más información, consulte <a href="https://milvus.io/docs/single-vector-search.md#Search-parameters">Parámetros de búsqueda</a>.</p></li>
 <li><p><code translate="no">limit</code> <em>(int</em>)</p>
 <p>Número máximo de resultados de búsqueda que se incluirán en un único <code translate="no">ANNSearchRequest</code>.</p>
-<p>Este parámetro sólo afecta al número de resultados de búsqueda a devolver dentro de un <code translate="no">ANNSearchRequest</code> individual, y no decide los resultados finales a devolver para una llamada a <code translate="no">hybrid_search</code>. En una búsqueda híbrida, los resultados finales se determinan combinando y reordenando los resultados de múltiples instancias de <code translate="no">ANNSearchRequest</code>.</p></li>
+<p>Este parámetro sólo afecta al número de resultados de búsqueda a devolver dentro de un <code translate="no">ANNSearchRequest</code> individual, y no decide los resultados finales a devolver para una llamada a <code translate="no">hybrid_search</code>. En una búsqueda híbrida, los resultados finales se determinan combinando y reordenando los resultados de varias instancias de <code translate="no">ANNSearchRequest</code>.</p></li>
 </ul>
 <h2 id="Step-2-Configure-a-Reranking-Strategy" class="common-anchor-header">Paso 2: Configurar una estrategia de reordenación<button data-href="#Step-2-Configure-a-Reranking-Strategy" class="anchor-icon" translate="no">
       <svg translate="no"

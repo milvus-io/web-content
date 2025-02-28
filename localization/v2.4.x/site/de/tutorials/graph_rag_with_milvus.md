@@ -48,7 +48,7 @@ title: Graph RAG mit Milvus
 <pre><code translate="no" class="language-python">$ pip install --upgrade --quiet pymilvus numpy scipy langchain langchain-core langchain-openai tqdm
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Bildschirmrand und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Laufzeitumgebung neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Laufzeit" am oberen Rand des Bildschirms und wählen Sie "Sitzung neu starten" aus dem Dropdown-Menü).</p>
 </blockquote>
 <p>Wir werden die Modelle von OpenAI verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -372,7 +372,7 @@ relation_candidate_texts = [
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p>Durch die Expansion des Teilgraphen haben wir die Kandidatenbeziehungen erhalten, die im nächsten Schritt durch LLM neu bewertet werden.</p>
-<h3 id="LLM-reranking" class="common-anchor-header">LLM-Ranking</h3><p>In dieser Phase setzen wir den leistungsstarken Selbstbeobachtungsmechanismus des LLM ein, um die Kandidaten für die Beziehungen weiter zu filtern und zu verfeinern. Wir verwenden einen One-Shot-Prompt, der die Anfrage und den Kandidatensatz von Beziehungen in den Prompt einbezieht, und weisen LLM an, potenzielle Beziehungen auszuwählen, die bei der Beantwortung der Anfrage helfen könnten. In Anbetracht der Tatsache, dass einige Abfragen komplex sein können, verwenden wir den Chain-of-Thought-Ansatz, der es dem LLM ermöglicht, seinen Gedankenprozess in seiner Antwort zu artikulieren. Wir legen fest, dass die Antwort des LLM im json-Format vorliegt, um eine bequeme Analyse zu ermöglichen.</p>
+<h3 id="LLM-reranking" class="common-anchor-header">LLM-Ranking</h3><p>In dieser Phase setzen wir den leistungsstarken Selbstbeobachtungsmechanismus des LLM ein, um die Menge der in Frage kommenden Beziehungen weiter zu filtern und zu verfeinern. Wir verwenden einen One-Shot-Prompt, der die Anfrage und den Kandidatensatz von Beziehungen in den Prompt einbezieht, und weisen LLM an, potenzielle Beziehungen auszuwählen, die bei der Beantwortung der Anfrage helfen könnten. In Anbetracht der Tatsache, dass einige Abfragen komplex sein können, verwenden wir den Chain-of-Thought-Ansatz, der es dem LLM ermöglicht, seinen Gedankenprozess in seiner Antwort zu artikulieren. Wir legen fest, dass die Antwort des LLM im json-Format vorliegt, um eine bequeme Analyse zu ermöglichen.</p>
 <pre><code translate="no" class="language-python">query_prompt_one_shot_input = <span class="hljs-string">&quot;&quot;&quot;I will provide you with a list of relationship descriptions. Your task is to select 3 relationships that may be useful to answer the given question. Please return a JSON object containing your thought process and a list of the selected relationships in order of their relevance.
 
 Question:

@@ -69,7 +69,7 @@ title: Mit Iteratoren
 <p>Verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> um sich mit dem Milvus-Server zu verbinden und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> um eine Sammlung zu erstellen.</p>
 </div>
 <div class="language-java">
-<p>Verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> um eine Verbindung zum Milvus-Server herzustellen und <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> um eine Sammlung zu erstellen.</p>
+<p>Verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> um sich mit dem Milvus-Server zu verbinden und <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> um eine Sammlung zu erstellen.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a></div>
@@ -353,11 +353,11 @@ System.out.println(results.size());
     </tr>
     <tr>
       <td><code translate="no">batch_size</code></td>
-      <td>Die Anzahl der Entitäten, die jedes Mal zurückgegeben werden sollen, wenn Sie <code translate="no">next()</code> für den aktuellen Iterator aufrufen.<br/>Der Wert ist standardmäßig <strong>1000</strong>. Setzen Sie ihn auf einen geeigneten Wert, um die Anzahl der pro Iteration zurückzugebenden Objekte zu steuern.</td>
+      <td>Die Anzahl der Entitäten, die jedes Mal zurückgegeben werden sollen, wenn Sie <code translate="no">next()</code> für den aktuellen Iterator aufrufen.<br/>Der Standardwert ist <strong>1000</strong>. Setzen Sie ihn auf einen geeigneten Wert, um die Anzahl der pro Iteration zurückzugebenden Objekte zu steuern.</td>
     </tr>
     <tr>
       <td><code translate="no">param</code></td>
-      <td>Die spezifischen Parametereinstellungen für diese Operation.<br/><ul><li><code translate="no">metric_type</code>: Der Metrik-Typ, der auf diese Operation angewendet wird. Dies sollte derselbe sein, der verwendet wird, wenn Sie das oben angegebene Vektorfeld indizieren. Mögliche Werte sind <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code translate="no">params</code>: Zusätzliche Parameter. Einzelheiten finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search_iterator.md">search_iterator()</a>.</li></ul></td>
+      <td>Die spezifischen Parametereinstellungen für diesen Vorgang.<br/><ul><li><code translate="no">metric_type</code>: Der Metrik-Typ, der auf diese Operation angewendet wird. Dies sollte derselbe sein, der verwendet wird, wenn Sie das oben angegebene Vektorfeld indizieren. Mögliche Werte sind <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code translate="no">params</code>: Zusätzliche Parameter. Einzelheiten finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search_iterator.md">search_iterator()</a>.</li></ul></td>
     </tr>
     <tr>
       <td><code translate="no">output_fields</code></td>
@@ -387,7 +387,7 @@ System.out.println(results.size());
     </tr>
     <tr>
       <td><code translate="no">withVectors</code></td>
-      <td>Legen Sie die Zielvektoren fest. Bis zu 16384 Vektoren sind zulässig.</td>
+      <td>Legen Sie die Zielvektoren fest. Bis zu 16384 Vektoren sind erlaubt.</td>
     </tr>
     <tr>
       <td><code translate="no">withBatchSize</code></td>

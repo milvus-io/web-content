@@ -4,7 +4,7 @@ order: 1
 summary: >-
   La biblioteca de modelos PyMilvus integra funciones rerank para optimizar el
   orden de los resultados devueltos por las búsquedas iniciales.
-title: Rerankers Visión general
+title: Visión general de los rerankers
 ---
 <h1 id="Rerankers-Overview" class="common-anchor-header">Visión general de los rerankers<button data-href="#Rerankers-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,7 +58,7 @@ title: Rerankers Visión general
         ></path>
       </svg>
     </button></h2><p>En este ejemplo, demostramos cómo clasificar los resultados de búsqueda utilizando el <a href="/docs/es/rerankers-bge.md">reranker de</a> BGE en función de una consulta específica.</p>
-<p>Para utilizar un reordenador con <a href="https://github.com/milvus-io/milvus-model">la</a> biblioteca de modelos PyMilvus, instale la biblioteca de modelos PyMilvus junto con el subpaquete de modelos que contiene todas las utilidades de reordenación necesarias:</p>
+<p>Para utilizar un reordenador con la biblioteca de modelos <a href="https://github.com/milvus-io/milvus-model">PyMilvus</a>, instale la biblioteca de modelos PyMilvus junto con el subpaquete de modelos que contiene todas las utilidades de reordenación necesarias:</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus[model]
 <span class="hljs-comment"># or pip install &quot;pymilvus[model]&quot; for zsh.</span>
 <button class="copy-code-btn"></button></code></pre>

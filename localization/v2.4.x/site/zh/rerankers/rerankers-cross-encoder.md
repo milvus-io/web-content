@@ -1,7 +1,9 @@
 ---
 id: rerankers-cross-encoder.md
 order: 4
-summary: Milvus 通过 "CrossEncoderRerankFunction "类支持交叉编码器重排模型。该功能可让您有效地对查询-文档对的相关性进行评分。
+summary: >-
+  Milvus 通过 "CrossEncoderRerankFunction "类支持交叉编码器 Reranker
+  模型。该功能可让您有效地对查询-文档对的相关性进行评分。
 title: 交叉编码器
 ---
 <h1 id="Cross-Encoder" class="common-anchor-header">交叉编码器<button data-href="#Cross-Encoder" class="anchor-icon" translate="no">
@@ -36,11 +38,11 @@ ce_rf = CrossEncoderRerankFunction(
 <p><strong>参数</strong>：</p>
 <ul>
 <li><p><code translate="no">model_name</code> <em>(字符串）</em></p>
-<p>要使用的模型名称。可以指定任何可用的交叉编码器模型名称，例如<code translate="no">cross-encoder/ms-marco-TinyBERT-L-2-v2</code>,<code translate="no">cross-encoder/ms-marco-MiniLM-L-2-v2</code> 等。如果不指定该参数，将使用空字符串。有关可用模型的列表，请参阅<a href="https://www.sbert.net/docs/pretrained_cross-encoders.html#">预训练交叉编码器</a>。</p></li>
+<p>要使用的模型名称。可以指定任何可用的跨编码器模型名称，例如<code translate="no">cross-encoder/ms-marco-TinyBERT-L-2-v2</code>,<code translate="no">cross-encoder/ms-marco-MiniLM-L-2-v2</code> 等。如果不指定该参数，将使用空字符串。有关可用模型的列表，请参阅<a href="https://www.sbert.net/docs/pretrained_cross-encoders.html#">预训练交叉编码器</a>。</p></li>
 <li><p><code translate="no">device</code> <em>（字符串）</em></p>
 <p>用于运行模型的设备。可以为 CPU 指定<code translate="no">cpu</code> ，为第 n 个 GPU 设备指定<code translate="no">cuda:n</code> 。</p></li>
 </ul>
-<p>然后，使用以下代码根据查询结果对文档进行排序：</p>
+<p>然后，使用以下代码根据查询结果对文档进行 Rerankers 排序：</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 
 documents = [

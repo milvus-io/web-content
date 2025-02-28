@@ -1,6 +1,6 @@
 ---
 id: birdwatcher_usage_guides.md
-summary: Birdwatchを使ってMilvusをデバッグする方法を学ぶ。
+summary: MilvusのデバッグにBirdwatchを使用する方法をご紹介します。
 title: バードウォッチャーを使う
 ---
 <h1 id="Use-Birdwatcher" class="common-anchor-header">バードウォッチャーを使う<button data-href="#Use-Birdwatcher" class="anchor-icon" translate="no">
@@ -73,7 +73,7 @@ title: バードウォッチャーを使う
 Milvus(by-dev)
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>別のルートパスで接続する</p>
-<p>Milvusのルートパスが<code translate="no">by-dev</code> 、ルートパスが正しくないというエラーメッセージが表示された場合は、以下の手順でetcdに接続できます：</p>
+<p>Milvusのルートパスが<code translate="no">by-dev</code> 、ルートパスが正しくないというエラーメッセージが表示された場合、以下のようにしてetcdに接続することができます：</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --rootPath my-release
 <span class="hljs-title function_">Milvus</span><span class="hljs-params">(my-release)</span> &gt;
 <button class="copy-code-btn"></button></code></pre>
@@ -87,7 +87,7 @@ my-release
 <span class="hljs-title function_">Milvus</span><span class="hljs-params">(my-release)</span> &gt;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Check-Milvus-status" class="common-anchor-header">Milvusの状態を確認する<button data-href="#Check-Milvus-status" class="anchor-icon" translate="no">
+<h2 id="Check-Milvus-status" class="common-anchor-header">Milvusの状態確認<button data-href="#Check-Milvus-status" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -102,7 +102,7 @@ my-release
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusのステータスを確認するには、<code translate="no">show</code> コマンドを使用します。</p>
+    </button></h2><p>Milvusの状態を確認するには、<code translate="no">show</code> 。</p>
 <pre><code translate="no" class="language-shell">Milvus(my-release) &gt; show -h
 Usage:
    show [command]
@@ -222,7 +222,7 @@ ReplicaNumber: <span class="hljs-number">1</span>        LoadStatus: Loaded
 --- Collections Loaded: <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>コレクションの全チャンネルチェックポイントをリストする</p>
-<p>Birdwatcher に、特定のコレクションのすべてのチェックポイントを一覧表示させることができます。</p>
+<p>Birdwatcher に特定のコレクションのすべてのチェックポイントを一覧表示させることができます。</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show checkpoint --collection <span class="hljs-number">443407225551410746</span>
 vchannel <span class="hljs-keyword">by</span>-dev-rootcoord-dml_0_443407225551410746v0 seek to <span class="hljs-number">2023</span><span class="hljs-number">-08</span><span class="hljs-number">-08</span> <span class="hljs-number">09</span>:<span class="hljs-number">36</span>:<span class="hljs-number">09.54</span> +<span class="hljs-number">0000</span> UTC, cp channel: <span class="hljs-keyword">by</span>-dev-rootcoord-dml_0_443407225551410746v0, Source: Channel Checkpoint
 <button class="copy-code-btn"></button></code></pre></li>
@@ -280,7 +280,7 @@ SegmentID: <span class="hljs-number">443407225551610865</span> CollectionID: <sp
 Sealed segments number: <span class="hljs-number">1</span>    
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="List-configurations" class="common-anchor-header">設定の一覧表示</h3><p>Birdwatcherに各Milvusコンポーネントの現在の設定を一覧表示させることができます。</p>
+<h3 id="List-configurations" class="common-anchor-header">設定の一覧表示</h3><p>BirdwatcherにMilvusの各コンポーネントの現在の設定を一覧表示させることができます。</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show configurations
 client <span class="hljs-literal">nil</span> Session:proxy, ServerID: <span class="hljs-number">8</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">19529</span>
 Component rootcoord<span class="hljs-number">-1</span>

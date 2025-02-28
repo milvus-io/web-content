@@ -1,7 +1,7 @@
 ---
 id: birdwatcher_install_guides.md
 summary: Milvus 디버깅을 위해 Birdwatch를 설치하는 방법을 알아보세요.
-title: 버드워처 설치
+title: 버드워처 설치하기
 ---
 <h1 id="Install-Birdwatcher" class="common-anchor-header">버드워처 설치하기<button data-href="#Install-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,7 +77,7 @@ https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&l
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/ko/install_standalone-helm.md">헬름 차트</a> 또는 <a href="/docs/ko/install_standalone-operator.md">밀버스 오퍼레이터를</a> <a href="/docs/ko/install_cluster-helm.md">사용하여</a> <a href="/docs/ko/install_standalone-operator.md">밀버스</a> 스탠드얼론을 설치했거나 <a href="/docs/ko/install_cluster-helm.md">헬름 차트</a> 또는 <a href="/docs/ko/install_cluster-milvusoperator.md">밀버스 오퍼레이터를</a> <a href="/docs/ko/install_cluster-helm.md">사용하여</a> 밀버스 클러스터를 설치한 경우, Birdwatcher를 Kubernetes 파드로 설치하는 것이 좋습니다.</p>
+    </button></h2><p>헬름 <a href="/docs/ko/install_standalone-helm.md">차트</a> 또는 밀버스 <a href="/docs/ko/install_standalone-operator.md">오퍼레이터를</a> 사용하여 밀버스 스탠드얼론을 설치했거나 <a href="/docs/ko/install_cluster-helm.md">헬름 차트</a> 또는 밀버스 <a href="/docs/ko/install_cluster-milvusoperator.md">오퍼레이터를</a> <a href="/docs/ko/install_cluster-helm.md">사용하여</a> 밀버스 클러스터를 설치한 경우, Birdwatcher를 Kubernetes 파드로 설치하는 것이 좋습니다.</p>
 <h3 id="Prepare-deploymentyml" class="common-anchor-header">배포.yml 준비</h3><pre><code translate="no" class="language-yml">apiVersion: apps/v1
 kind: Deployment
 metadata:

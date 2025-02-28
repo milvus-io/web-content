@@ -188,7 +188,7 @@ Start position <span class="hljs-keyword">for</span> channel by-dev-rootcoord-dm
 ================================================================================
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Ver uma coleção específica</p>
-<p>Pode visualizar uma coleção específica especificando o seu ID.</p>
+<p>Pode ver uma coleção específica especificando o seu ID.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show collection-history --<span class="hljs-built_in">id</span> <span class="hljs-number">443407225551410746</span>
 ================================================================================
 DBID: <span class="hljs-number">1</span>
@@ -257,7 +257,7 @@ Dropped segments: []
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="List-all-replicas-and-segments" class="common-anchor-header">Listar todas as réplicas e segmentos</h3><ul>
 <li><p>Listar todas as réplicas</p>
-<p>Execute o comando a seguir para listar todas as réplicas e suas coleções correspondentes.</p>
+<p>Execute o seguinte comando para listar todas as réplicas e suas coleções correspondentes.</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show replica
 ================================================================================
 ReplicaID: <span class="hljs-number">443407225685278721</span> CollectionID: <span class="hljs-number">443407225551410746</span> version:&gt;=<span class="hljs-number">2.2</span><span class="hljs-number">.0</span>
@@ -364,7 +364,7 @@ http://10.244.0.10:9091/metrics
 http://10.244.0.10:9091/metrics
 backup <span class="hljs-keyword">for</span> prefix <span class="hljs-keyword">done</span>, stored <span class="hljs-keyword">in</span> file: bw_etcd_ALL.230810-075211.bak.gz
 <button class="copy-code-btn"></button></code></pre>
-<p>Depois pode verificar o ficheiro no diretório onde inicia o Birdwatcher.</p>
+<p>Depois pode verificar o ficheiro no diretório onde iniciou o Birdwatcher.</p>
 <h2 id="Probe-collections" class="common-anchor-header">Sondar colecções<button data-href="#Probe-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

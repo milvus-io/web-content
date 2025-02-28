@@ -45,7 +45,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La ricerca full text semplifica il processo di ricerca basato sul testo eliminando la necessità di incorporazione manuale. Questa funzione funziona attraverso il seguente flusso di lavoro.</p>
+    </button></h2><p>La ricerca full text semplifica il processo di ricerca basato sul testo, eliminando la necessità di incorporazione manuale. Questa funzione funziona attraverso il seguente flusso di lavoro.</p>
 <ol>
 <li><p><strong>Inserimento del testo</strong>: L'utente inserisce documenti di testo grezzi o fornisce testo di query senza doverli incorporare manualmente.</p></li>
 <li><p><strong>Analisi del testo</strong>: Milvus utilizza un analizzatore per tokenizzare il testo in ingresso in singoli termini ricercabili. Per ulteriori informazioni sugli analizzatori, consultare la sezione <a href="/docs/it/analyzer-overview.md">Panoramica degli analizzatori</a>.</p></li>
@@ -176,7 +176,7 @@ schema.addField(AddFieldReq.builder()
 <ul>
 <li><p><code translate="no">id</code>: serve come chiave primaria ed è generato automaticamente con <code translate="no">auto_id=True</code>.</p></li>
 <li><p><code translate="no">text</code>: memorizza i dati di testo grezzo per le operazioni di ricerca full text. Il tipo di dati deve essere <code translate="no">VARCHAR</code>, poiché <code translate="no">VARCHAR</code> è il tipo di dati stringa di Milvus per la memorizzazione del testo. Impostare <code translate="no">enable_analyzer=True</code> per consentire a Milvus di tokenizzare il testo. Per impostazione predefinita, Milvus utilizza l'<a href="/docs/it/standard-analyzer.md">analizzatore standard</a> per l'analisi del testo. Per configurare un analizzatore diverso, fare riferimento a <a href="/docs/it/analyzer-overview.md">Panoramica</a>.</p></li>
-<li><p><code translate="no">sparse</code>: un campo vettoriale riservato per memorizzare le incorporazioni sparse generate internamente per le operazioni di ricerca full text. Il tipo di dati deve essere <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">sparse</code>: un campo vettoriale riservato alla memorizzazione delle incorporazioni sparse generate internamente per le operazioni di ricerca full text. Il tipo di dati deve essere <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <p>Ora, definire una funzione che converta il testo in rappresentazioni vettoriali rade e aggiungerla allo schema.</p>
 <div class="multipleCode">
@@ -490,7 +490,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
 </th></tr></thead><tbody><tr><td data-block-token="QpGIdQ2m0oogCvxColKcNWnYnUc" colspan="1" rowspan="1"><p data-block-token="TkffdBxkKo2hVvx9gGucca46nic"><code translate="no">search_params</code></p>
 </td><td data-block-token="HYemdqt6Dow9tvxOcYScmYdPn8e" colspan="1" rowspan="1"><p data-block-token="JiIOdJrBcoGIQ4xrqYycMdjnn7g">Un dizionario contenente i parametri di ricerca.</p>
 </td></tr><tr><td data-block-token="DJDgdH5WUoZQxkxmLzQcXqcXnQh" colspan="1" rowspan="1"><p data-block-token="LKWbdw498o9mtRxm9gDcg28FnQd"><code translate="no">params.drop_ratio_search</code></p>
-</td><td data-block-token="SEJ7d5y18otFTOxy7gLcvLYRnfb" colspan="1" rowspan="1"><p data-block-token="MnladDjOGoUphGxrZzXchD0anzf">Percentuale di termini a bassa frequenza da ignorare durante la ricerca. Per maggiori dettagli, fare riferimento a <a href="/docs/it/sparse_vector.md">Vettore sparso</a>.</p>
+</td><td data-block-token="SEJ7d5y18otFTOxy7gLcvLYRnfb" colspan="1" rowspan="1"><p data-block-token="MnladDjOGoUphGxrZzXchD0anzf">Percentuale di termini di scarsa importanza da ignorare durante la ricerca. Per i dettagli, fare riferimento a <a href="/docs/it/sparse_vector.md">Vettore sparso</a>.</p>
 </td></tr><tr><td data-block-token="XPPYdAYUPoASg5xuIYmcyxqHnPe" colspan="1" rowspan="1"><p data-block-token="T90ndG7H0okLa4xa1wzcHQmEnEg"><code translate="no">data</code></p>
 </td><td data-block-token="NMhsduxr1oUESPx2J8YcA8csnA1" colspan="1" rowspan="1"><p data-block-token="ZmEQdkdGtofQsAx9YXNcsnlHnYe">Il testo grezzo della query.</p>
 </td></tr><tr><td data-block-token="O4OVdL9BIollH1xORz3czhInnSh" colspan="1" rowspan="1"><p data-block-token="CYdGd82dRopaWrxfJ9ycWQQnnPc"><code translate="no">anns_field</code></p>

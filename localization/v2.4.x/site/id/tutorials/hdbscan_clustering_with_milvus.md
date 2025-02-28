@@ -1,0 +1,277 @@
+---
+id: hdbscan_clustering_with_milvus.md
+summary: >-
+  Dalam buku catatan ini, kita akan menggunakan model penyematan BGE-M3 untuk
+  mengekstrak penyematan dari dataset judul berita, memanfaatkan Milvus untuk
+  menghitung jarak antar penyematan secara efisien untuk membantu HDBSCAN dalam
+  pengelompokan, dan kemudian memvisualisasikan hasilnya untuk analisis
+  menggunakan metode UMAP. Buku catatan ini merupakan adaptasi Milvus dari
+  artikel Dylan Castillo.
+title: Pengelompokan HDBSCAN dengan Milvus
+---
+<h1 id="HDBSCAN-Clustering-with-Milvus" class="common-anchor-header">Pengelompokan HDBSCAN dengan Milvus<button data-href="#HDBSCAN-Clustering-with-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p>Data dapat diubah menjadi embeddings menggunakan model pembelajaran mendalam, yang menangkap representasi yang bermakna dari data asli. Dengan menerapkan algoritme pengelompokan tanpa pengawasan, kita dapat mengelompokkan titik-titik data yang serupa berdasarkan pola yang melekat. HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) adalah algoritme pengelompokan yang banyak digunakan untuk mengelompokkan titik-titik data secara efisien dengan menganalisis kepadatan dan jaraknya. Algoritma ini sangat berguna untuk menemukan cluster dengan berbagai bentuk dan ukuran. Dalam buku catatan ini, kita akan menggunakan HDBSCAN dengan Milvus, database vektor berkinerja tinggi, untuk mengelompokkan titik data ke dalam kelompok-kelompok yang berbeda berdasarkan penyematannya.</p>
+<p>HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) adalah algoritme pengelompokan yang mengandalkan penghitungan jarak antara titik data dalam ruang embedding. Ruang embedding ini, yang dibuat oleh model pembelajaran mendalam, merepresentasikan data dalam bentuk dimensi tinggi. Untuk mengelompokkan titik data yang serupa, HDBSCAN menentukan kedekatan dan kepadatannya, tetapi menghitung jarak ini secara efisien, terutama untuk kumpulan data yang besar, dapat menjadi tantangan.</p>
+<p>Milvus, basis data vektor berkinerja tinggi, mengoptimalkan proses ini dengan menyimpan dan mengindeks penyematan, sehingga memungkinkan pengambilan vektor yang serupa dengan cepat. Ketika digunakan bersama, HDBSCAN dan Milvus memungkinkan pengelompokan yang efisien untuk set data berskala besar dalam ruang embedding.</p>
+<p>Dalam buku catatan ini, kami akan menggunakan model embedding BGE-M3 untuk mengekstrak embedding dari dataset berita utama, memanfaatkan Milvus untuk menghitung jarak antar embedding secara efisien untuk membantu HDBSCAN dalam pengelompokan, dan kemudian memvisualisasikan hasilnya untuk analisis menggunakan metode UMAP. Buku catatan ini merupakan adaptasi Milvus dari <a href="https://dylancastillo.co/posts/clustering-documents-with-openai-langchain-hdbscan.html">artikel Dylan Castillo.</a></p>
+<h2 id="Preparation" class="common-anchor-header">Persiapan<button data-href="#Preparation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>unduh dataset berita dari https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/</p>
+<pre><code translate="no" class="language-shell">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
+$ pip install hdbscan
+$ pip install plotly
+$ pip install umap-learn
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Download-Data" class="common-anchor-header">Unduh Data<button data-href="#Download-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Unduh dataset berita dari https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/, ekstrak <code translate="no">news_data_dedup.csv</code> dan letakkan di direktori saat ini.</p>
+<h2 id="Extract-Embeddings-to-Milvus" class="common-anchor-header">Mengekstrak sematan ke Milvus<button data-href="#Extract-Embeddings-to-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Kita akan membuat koleksi menggunakan Milvus, dan mengekstrak embedding padat menggunakan model BGE-M3.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">from</span> dotenv <span class="hljs-keyword">import</span> load_dotenv
+<span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, Collection, connections, CollectionSchema, DataType
+
+load_dotenv()
+
+df = pd.read_csv(<span class="hljs-string">&quot;news_data_dedup.csv&quot;</span>)
+
+
+docs = [
+    <span class="hljs-string">f&quot;<span class="hljs-subst">{title}</span>\n<span class="hljs-subst">{description}</span>&quot;</span> <span class="hljs-keyword">for</span> title, description <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(df.title, df.description)
+]
+ef = BGEM3EmbeddingFunction()
+
+embeddings = ef(docs)[<span class="hljs-string">&quot;dense&quot;</span>]
+
+connections.connect(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<ul>
+<li>Jika Anda hanya membutuhkan basis data vektor lokal untuk data skala kecil atau pembuatan prototipe, mengatur uri sebagai file lokal, misalnya<code translate="no">./milvus.db</code>, adalah metode yang paling mudah, karena secara otomatis menggunakan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam file ini.</li>
+<li>Jika Anda memiliki data berskala besar, misalnya lebih dari satu juta vektor, Anda dapat menyiapkan server Milvus yang lebih berkinerja tinggi di <a href="https://milvus.io/docs/quickstart.md">Docker atau Kubernetes</a>. Dalam pengaturan ini, gunakan alamat dan port server sebagai uri Anda, misalnya<code translate="no">http://localhost:19530</code>. Jika Anda mengaktifkan fitur autentikasi di Milvus, gunakan "&lt;nama_user Anda&gt;:&lt;kata sandi Anda&gt;" sebagai token, jika tidak, jangan setel token.</li>
+<li>Jika Anda menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint dan API key</a> di Zilliz Cloud.</li>
+</ul>
+</div>
+<pre><code translate="no" class="language-python">fields = [
+    FieldSchema(
+        name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>
+    ),  <span class="hljs-comment"># Primary ID field</span>
+    FieldSchema(
+        name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1024</span>
+    ),  <span class="hljs-comment"># Float vector field (embedding)</span>
+    FieldSchema(
+        name=<span class="hljs-string">&quot;text&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>
+    ),  <span class="hljs-comment"># Float vector field (embedding)</span>
+]
+
+schema = CollectionSchema(fields=fields, description=<span class="hljs-string">&quot;Embedding collection&quot;</span>)
+
+collection = Collection(name=<span class="hljs-string">&quot;news_data&quot;</span>, schema=schema)
+
+<span class="hljs-keyword">for</span> doc, embedding <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(docs, embeddings):
+    collection.insert({<span class="hljs-string">&quot;text&quot;</span>: doc, <span class="hljs-string">&quot;embedding&quot;</span>: embedding})
+    <span class="hljs-built_in">print</span>(doc)
+
+index_params = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;FLAT&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
+
+collection.create_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_params=index_params)
+
+collection.flush()
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Construct-the-Distance-Matrix-for-HDBSCAN" class="common-anchor-header">Membangun Matriks Jarak untuk HDBSCAN<button data-href="#Construct-the-Distance-Matrix-for-HDBSCAN" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>HDBSCAN memerlukan penghitungan jarak antar titik untuk pengelompokan, yang bisa jadi sangat intensif secara komputasi. Karena titik-titik yang jauh memiliki pengaruh yang lebih kecil pada penugasan pengelompokan, kita dapat meningkatkan efisiensi dengan menghitung k tetangga terdekat. Dalam contoh ini, kita menggunakan indeks FLAT, tetapi untuk kumpulan data berskala besar, Milvus mendukung metode pengindeksan yang lebih canggih untuk mempercepat proses pencarian. Pertama, kita perlu mendapatkan iterator untuk mengulang koleksi Milvus yang telah kita buat sebelumnya.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> hdbscan
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> plotly.express <span class="hljs-keyword">as</span> px
+<span class="hljs-keyword">from</span> umap <span class="hljs-keyword">import</span> UMAP
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
+
+collection = Collection(name=<span class="hljs-string">&quot;news_data&quot;</span>)
+collection.load()
+
+iterator = collection.query_iterator(
+    batch_size=<span class="hljs-number">10</span>, expr=<span class="hljs-string">&quot;id &gt; 0&quot;</span>, output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>]
+)
+
+search_params = {
+    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
+    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
+}  <span class="hljs-comment"># L2 is Euclidean distance</span>
+
+ids = []
+dist = {}
+
+embeddings = []
+<button class="copy-code-btn"></button></code></pre>
+<p>Kita akan mengulang semua sematan di dalam koleksi Milvus. Untuk setiap embedding, kita akan mencari top-k tetangganya dalam koleksi yang sama, mendapatkan id dan jaraknya. Kemudian kita juga perlu membuat sebuah kamus untuk memetakan ID asli ke sebuah indeks kontinu di dalam matriks jarak. Setelah selesai, kita perlu membuat matriks jarak yang diinisialisasi dengan semua elemen sebagai tak terhingga dan mengisi elemen-elemen yang kita cari. Dengan cara ini, jarak antara titik-titik yang jauh akan diabaikan. Terakhir, kita menggunakan library HDBSCAN untuk mengelompokkan titik-titik menggunakan matriks jarak yang telah kita buat. Kita perlu mengatur metrik ke 'precomputed' untuk menunjukkan bahwa data tersebut merupakan matriks jarak dan bukannya embedding asli.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    batch = iterator.<span class="hljs-built_in">next</span>()
+    batch_ids = [data[<span class="hljs-string">&quot;id&quot;</span>] <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> batch]
+    ids.extend(batch_ids)
+
+    query_vectors = [data[<span class="hljs-string">&quot;embedding&quot;</span>] <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> batch]
+    embeddings.extend(query_vectors)
+
+    results = collection.search(
+        data=query_vectors,
+        limit=<span class="hljs-number">50</span>,
+        anns_field=<span class="hljs-string">&quot;embedding&quot;</span>,
+        param=search_params,
+        output_fields=[<span class="hljs-string">&quot;id&quot;</span>],
+    )
+    <span class="hljs-keyword">for</span> i, batch_id <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(batch_ids):
+        dist[batch_id] = []
+        <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> results[i]:
+            dist[batch_id].append((result.<span class="hljs-built_in">id</span>, result.distance))
+
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(batch) == <span class="hljs-number">0</span>:
+        <span class="hljs-keyword">break</span>
+
+ids2index = {}
+
+<span class="hljs-keyword">for</span> <span class="hljs-built_in">id</span> <span class="hljs-keyword">in</span> dist:
+    ids2index[<span class="hljs-built_in">id</span>] = <span class="hljs-built_in">len</span>(ids2index)
+
+dist_metric = np.full((<span class="hljs-built_in">len</span>(ids), <span class="hljs-built_in">len</span>(ids)), np.inf, dtype=np.float64)
+
+<span class="hljs-keyword">for</span> <span class="hljs-built_in">id</span> <span class="hljs-keyword">in</span> dist:
+    <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> dist[<span class="hljs-built_in">id</span>]:
+        dist_metric[ids2index[<span class="hljs-built_in">id</span>]][ids2index[result[<span class="hljs-number">0</span>]]] = result[<span class="hljs-number">1</span>]
+
+h = hdbscan.HDBSCAN(min_samples=<span class="hljs-number">3</span>, min_cluster_size=<span class="hljs-number">3</span>, metric=<span class="hljs-string">&quot;precomputed&quot;</span>)
+hdb = h.fit(dist_metric)
+<button class="copy-code-btn"></button></code></pre>
+<p>Setelah itu, pengelompokan HDBSCAN selesai. Kita bisa mendapatkan beberapa data dan menunjukkan klasternya. Perhatikan bahwa beberapa data tidak akan dimasukkan ke dalam klaster mana pun, yang berarti data tersebut adalah noise, karena terletak di wilayah yang jarang.</p>
+<h2 id="Clusters-Visualization-using-UMAP" class="common-anchor-header">Visualisasi Cluster menggunakan UMAP<button data-href="#Clusters-Visualization-using-UMAP" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Kita telah mengelompokkan data menggunakan HDBSCAN dan mendapatkan label untuk setiap titik data. Namun dengan menggunakan beberapa teknik visualisasi, kita bisa mendapatkan gambaran keseluruhan dari cluster untuk analisis intuitif. Sekarang kita akan menggunakan UMAP untuk memvisualisasikan cluster. UMAP adalah metode yang efisien yang digunakan untuk pengurangan dimensi, mempertahankan struktur data dimensi tinggi sambil memproyeksikannya ke dalam ruang dimensi yang lebih rendah untuk visualisasi atau analisis lebih lanjut. Dengannya, kita dapat memvisualisasikan data dimensi tinggi asli dalam ruang 2D atau 3D, dan melihat cluster dengan jelas. Di sini sekali lagi, kita mengulang titik data dan mendapatkan id dan teks untuk data asli, kemudian kita menggunakan ploty untuk memplot titik-titik data dengan metainfo ini dalam sebuah gambar, dan menggunakan warna yang berbeda untuk merepresentasikan cluster yang berbeda.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> plotly.io <span class="hljs-keyword">as</span> pio
+
+pio.renderers.default = <span class="hljs-string">&quot;notebook&quot;</span>
+
+umap = UMAP(n_components=<span class="hljs-number">2</span>, random_state=<span class="hljs-number">42</span>, n_neighbors=<span class="hljs-number">80</span>, min_dist=<span class="hljs-number">0.1</span>)
+
+df_umap = (
+    pd.DataFrame(umap.fit_transform(np.array(embeddings)), columns=[<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>])
+    .assign(cluster=<span class="hljs-keyword">lambda</span> df: hdb.labels_.astype(<span class="hljs-built_in">str</span>))
+    .query(<span class="hljs-string">&#x27;cluster != &quot;-1&quot;&#x27;</span>)
+    .sort_values(by=<span class="hljs-string">&quot;cluster&quot;</span>)
+)
+iterator = collection.query_iterator(
+    batch_size=<span class="hljs-number">10</span>, expr=<span class="hljs-string">&quot;id &gt; 0&quot;</span>, output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
+)
+
+ids = []
+texts = []
+
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    batch = iterator.<span class="hljs-built_in">next</span>()
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(batch) == <span class="hljs-number">0</span>:
+        <span class="hljs-keyword">break</span>
+    batch_ids = [data[<span class="hljs-string">&quot;id&quot;</span>] <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> batch]
+    batch_texts = [data[<span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> batch]
+    ids.extend(batch_ids)
+    texts.extend(batch_texts)
+
+show_texts = [texts[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> df_umap.index]
+
+df_umap[<span class="hljs-string">&quot;hover_text&quot;</span>] = show_texts
+fig = px.scatter(
+    df_umap, x=<span class="hljs-string">&quot;x&quot;</span>, y=<span class="hljs-string">&quot;y&quot;</span>, color=<span class="hljs-string">&quot;cluster&quot;</span>, hover_data={<span class="hljs-string">&quot;hover_text&quot;</span>: <span class="hljs-literal">True</span>}
+)
+fig.show()
+<button class="copy-code-btn"></button></code></pre>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/hdbscan_clustering_with_milvus.png" alt="image" class="doc-image" id="image" />
+   </span> <span class="img-wrapper"> <span>gambar</span> </span></p>
+<p>Di sini, kami mendemonstrasikan bahwa data dikelompokkan dengan baik, dan Anda dapat mengarahkan kursor ke titik-titik tersebut untuk memeriksa teks yang diwakilinya. Dengan buku catatan ini, kami harap Anda dapat mempelajari cara menggunakan HDBSCAN untuk mengelompokkan embedding dengan Milvus secara efisien, yang juga dapat diterapkan pada jenis data lainnya. Dikombinasikan dengan model bahasa yang besar, pendekatan ini memungkinkan analisis yang lebih dalam pada data Anda dalam skala besar.</p>

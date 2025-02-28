@@ -182,7 +182,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <div class="admonition note">
 <p><b>note</b></p>
 <p>Se si imposta un campo come chiave di partizione in una collezione, Milvus crea almeno <strong>64</strong> partizioni insieme alla collezione. Quando si elencano le partizioni, i risultati possono essere diversi da quelli ottenuti con i frammenti di codice precedenti.</p>
-<p>Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/use-partition-key.md">Uso della chiave di partizione</a>.</p>
+<p>Per maggiori dettagli, consultare la sezione <a href="https://milvus.io/docs/use-partition-key.md">Uso della chiave di partizione</a>.</p>
 </div>
 <h2 id="Create-Partitions" class="common-anchor-header">Creare partizioni<button data-href="#Create-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -286,7 +286,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Il frammento di codice qui sopra crea una partizione in un insieme ed elenca le partizioni dell'insieme.</p>
 <div class="admonition note">
 <p><b>note</b></p>
-<p>Se si imposta un campo come chiave di partizione in un insieme, Milvus si occupa di gestire le partizioni dell'insieme. Pertanto, è possibile che si verifichino degli errori quando si tenta di creare delle partizioni.</p>
+<p>Se si imposta un campo come chiave di partizione in un insieme, Milvus si occupa di gestire le partizioni dell'insieme. Pertanto, è possibile che si verifichino errori di richiesta quando si tenta di creare partizioni.</p>
 <p>Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/use-partition-key.md">Utilizzo della chiave di partizione</a>.</p>
 </div>
 <h2 id="Check-for-a-Specific-Partition" class="common-anchor-header">Verifica di una partizione specifica<button data-href="#Check-for-a-Specific-Partition" class="anchor-icon" translate="no">

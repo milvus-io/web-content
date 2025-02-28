@@ -1,7 +1,6 @@
 ---
 id: manage_databases.md
 title: Gerir bases de dados
-summary: ''
 ---
 <h1 id="Manage-Databases" class="common-anchor-header">Gerir bases de dados<button data-href="#Manage-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -263,7 +262,7 @@ response = client.dropDatabase(dropDatabaseParam);
 <ul>
 <li>Se nem uma ligação Milvus nem uma chamada à API Permission especificarem uma <code translate="no">db_name</code>, <strong>a base de dados</strong> refere-se à base de dados predefinida.</li>
 <li>Se uma ligação Milvus especificar um <code translate="no">db_name</code>, mas uma chamada à API Permission não o fizer posteriormente, <strong>a base de dados</strong> refere-se à base de dados cujo nome foi especificado na ligação Milvus.</li>
-<li>Se for efectuada uma chamada à API de autorização sobre uma ligação Milvus, com ou sem <code translate="no">db_name</code> especificado, <strong>a base de</strong> dados refere-se à base de dados cujo nome foi especificado na chamada à API de autorização.</li>
+<li>Se for efectuada uma chamada à API de autorização sobre uma ligação Milvus, com ou sem <code translate="no">db_name</code> especificado, <strong>a base de dados</strong> refere-se à base de dados cujo nome foi especificado na chamada à API de autorização.</li>
 </ul>
 <p>O seguinte excerto de código é partilhado entre os blocos listados abaixo.</p>
 <div class="multipleCode">
@@ -323,7 +322,7 @@ _DB_NAME = <span class="hljs-string">&quot;default&quot;</span>
 <ul>
 <li><p>Se nem uma ligação Milvus nem uma chamada à API Permission especificarem um <code translate="no">db_name</code>, <strong>a base de dados</strong> refere-se à base de dados predefinida.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
+<a href="#python">Python </a><a href="#javascript">Java Node.js</a></div></p>
 <pre><code translate="no" class="language-python">_ROLE_NAME = <span class="hljs-string">&quot;test_role&quot;</span>
 _PRIVILEGE_INSERT = <span class="hljs-string">&quot;Insert&quot;</span>
 

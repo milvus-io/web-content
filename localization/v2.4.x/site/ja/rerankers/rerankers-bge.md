@@ -3,7 +3,7 @@ id: rerankers-bge.md
 order: 2
 summary: >-
   Milvusは `BGERerankFunction`
-  クラスを通してBGEリランカーモデルをサポートしている。この機能により、クエリとドキュメントのペアの関連性を効率的にスコアリングすることができる。
+  クラスを通してBGEリランカーモデルをサポートしている。この機能により、クエリとドキュメントのペアの関連性を効果的にスコアリングすることができる。
 title: BGE
 ---
 <h1 id="BGE" class="common-anchor-header">BGE<button data-href="#BGE" class="anchor-icon" translate="no">
@@ -38,7 +38,7 @@ bge_rf = BGERerankFunction(
 <p><strong>パラメータ</strong></p>
 <ul>
 <li><p><code translate="no">model_name</code> <em>(文字列</em>)</p>
-<p>使用するモデルの名前。利用可能なBGEリランカーのモデル名のいずれかを指定できます。例えば、<code translate="no">BAAI/bge-reranker-base</code> 、<code translate="no">BAAI/bge-reranker-large</code> などです。このパラメータを未指定のままにすると、<code translate="no">BAAI/bge-reranker-v2-m3</code> が使用されます。利用可能なモデルのリストについては、<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/llm_reranker#model-list">モデルリストを</a>参照してください。</p></li>
+<p>使用するモデルの名前。利用可能なBGEリランカーのモデル名、例えば<code translate="no">BAAI/bge-reranker-base</code> 、<code translate="no">BAAI/bge-reranker-large</code> 、などを指定できます。このパラメータを未指定のままにすると、<code translate="no">BAAI/bge-reranker-v2-m3</code> が使用されます。利用可能なモデルのリストについては、<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/llm_reranker#model-list">モデルリストを</a>参照してください。</p></li>
 <li><p><code translate="no">device</code> <em>(文字列</em>)</p>
 <p>オプション。モデルの実行に使用するデバイス。指定しない場合、モデルはCPU上で実行されます。CPUには<code translate="no">cpu</code> 、n番目のGPUデバイスには<code translate="no">cuda:n</code> を指定できます。</p></li>
 </ul>

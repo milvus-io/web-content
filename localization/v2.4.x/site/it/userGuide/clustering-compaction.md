@@ -39,13 +39,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus memorizza le entità in arrivo in segmenti all'interno di una raccolta e chiude un segmento quando è pieno. In tal caso, viene creato un nuovo segmento per accogliere altre entità. Di conseguenza, le entità sono distribuite arbitrariamente tra i segmenti. Questa distribuzione richiede che Milvus cerchi in più segmenti per trovare i vicini più vicini a un dato vettore di query.</p>
+    </button></h2><p>Milvus memorizza le entità in arrivo in segmenti all'interno di una raccolta e chiude un segmento quando è pieno. In tal caso, viene creato un nuovo segmento per accogliere altre entità. Di conseguenza, le entità sono distribuite arbitrariamente tra i segmenti. Questa distribuzione richiede che Milvus cerchi in più segmenti per trovare i vicini più vicini a un determinato vettore di query.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Senza clustering Compattazione</span> </span></p>
 <p>Se Milvus può distribuire le entità tra i segmenti in base ai valori di un campo specifico, l'ambito di ricerca può essere limitato all'interno di un segmento, migliorando così le prestazioni di ricerca.</p>
-<p>La<strong>compattazione dei cluster</strong> è una funzione di Milvus che ridistribuisce le entità tra i segmenti di una raccolta in base ai valori di un campo scalare. Per attivare questa funzione, è necessario selezionare un campo scalare come <strong>chiave di raggruppamento</strong>. Ciò consente a Milvus di ridistribuire le entità in un segmento quando i valori della chiave di clustering rientrano in un intervallo specifico. Quando si attiva una compattazione del clustering, Milvus genera/aggiorna un indice globale chiamato <strong>PartitionStats</strong>, che registra la relazione di mappatura tra i segmenti e i valori delle chiavi di clustering.</p>
+<p>La<strong>compattazione dei cluster</strong> è una funzione di Milvus che ridistribuisce le entità tra i segmenti di una raccolta in base ai valori di un campo scalare. Per attivare questa funzione, è necessario selezionare un campo scalare come <strong>chiave di raggruppamento</strong>. Questo permette a Milvus di ridistribuire le entità in un segmento quando i valori della chiave di clustering rientrano in un intervallo specifico. Quando si attiva una compattazione del clustering, Milvus genera/aggiorna un indice globale chiamato <strong>PartitionStats</strong>, che registra la relazione di mappatura tra i segmenti e i valori delle chiavi di clustering.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
@@ -172,13 +172,13 @@ coll1 = Collection(name=<span class="hljs-string">&quot;clustering_test&quot;</s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se si è abilitata la compattazione automatica del clustering, Milvus attiva automaticamente la compattazione all'intervallo specificato. In alternativa, è possibile attivare manualmente la compattazione come segue:</p>
+    </button></h2><p>Se è stata attivata la compattazione automatica del clustering, Milvus attiva automaticamente la compattazione all'intervallo specificato. In alternativa, è possibile attivare manualmente la compattazione come segue:</p>
 <pre><code translate="no" class="language-python">coll1.compact(is_clustering=<span class="hljs-literal">True</span>)
 coll1.get_compaction_state(is_clustering=<span class="hljs-literal">True</span>)
 coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Benchmark-Test" class="common-anchor-header">Test di benchmark</h3><p>Il volume dei dati e i modelli di query determinano il miglioramento delle prestazioni della compattazione del clustering. Un test di benchmark interno dimostra che la compattazione del clustering produce un miglioramento fino a 25 volte delle query al secondo (QPS).</p>
-<p>Il test di benchmark è stato eseguito su una raccolta contenente entità di un dataset LAION da 20 milioni e 768 dimensioni, con il campo chiave designato come chiave di clustering. Dopo l'attivazione della compattazione del clustering nella raccolta, vengono inviate ricerche simultanee fino a quando l'utilizzo della CPU raggiunge un livello elevato.</p>
+<p>Il test di benchmark è stato eseguito su una raccolta contenente entità di un dataset LAION da 20 milioni e 768 dimensioni, con il campo chiave designato come chiave di clustering. Dopo l'attivazione della compattazione del clustering nella raccolta, vengono inviate ricerche simultanee finché l'utilizzo della CPU non raggiunge un livello elevato.</p>
 <table>
   <thead>
     <tr>

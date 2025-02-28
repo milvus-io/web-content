@@ -31,7 +31,7 @@ title: Recomendação de filmes com o Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/movie_recommendation_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>Neste caderno, vamos explorar como gerar embeddings de descrições de filmes utilizando o OpenAI e aproveitar esses embeddings no Milvus para recomendar filmes que correspondam às suas preferências. Para melhorar os nossos resultados de pesquisa, vamos utilizar a filtragem para efetuar pesquisas de metadados. O conjunto de dados utilizado neste exemplo é proveniente dos conjuntos de dados HuggingFace e contém mais de 8.000 entradas de filmes, fornecendo um conjunto rico de opções para recomendações de filmes.</p>
+<p>Neste caderno, vamos explorar como gerar embeddings de descrições de filmes utilizando o OpenAI e aproveitar esses embeddings no Milvus para recomendar filmes que correspondam às suas preferências. Para melhorar os nossos resultados de pesquisa, vamos utilizar a filtragem para efetuar pesquisas de metadados. O conjunto de dados utilizado neste exemplo é proveniente dos conjuntos de dados HuggingFace e contém mais de 8000 entradas de filmes, proporcionando um vasto leque de opções para recomendações de filmes.</p>
 <h2 id="Dependencies-and-Environment" class="common-anchor-header">Dependências e ambiente<button data-href="#Dependencies-and-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

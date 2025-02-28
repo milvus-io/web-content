@@ -38,9 +38,9 @@ title: Indicizzare i campi vettoriali
         ></path>
       </svg>
     </button></h2><p>Sfruttando i metadati memorizzati in un file indice, Milvus organizza i dati in una struttura specializzata, facilitando il rapido recupero delle informazioni richieste durante le ricerche o le interrogazioni.</p>
-<p>Milvus offre diversi tipi di indice e metriche per ordinare i valori dei campi per una ricerca efficiente delle somiglianze. La tabella seguente elenca i tipi di indice e le metriche supportate per i diversi tipi di campi vettoriali. Attualmente Milvus supporta diversi tipi di dati vettoriali, tra cui embedding in virgola mobile (spesso noti come vettori in virgola mobile o vettori densi), embedding binari (noti anche come vettori binari) e embedding sparsi (noti anche come vettori sparsi). Per ulteriori informazioni, consultare <a href="/docs/it/index.md">Indice in-memory</a> e <a href="/docs/it/metric.md">metriche di somiglianza</a>.</p>
+<p>Milvus offre diversi tipi di indice e metriche per ordinare i valori dei campi per una ricerca efficiente delle somiglianze. La tabella seguente elenca i tipi di indice e le metriche supportate per i diversi tipi di campi vettoriali. Attualmente Milvus supporta vari tipi di dati vettoriali, tra cui embedding in virgola mobile (spesso noti come vettori in virgola mobile o vettori densi), embedding binari (noti anche come vettori binari) e embedding sparsi (noti anche come vettori sparsi). Per ulteriori informazioni, consultare <a href="/docs/it/index.md">Indice in-memory</a> e <a href="/docs/it/metric.md">metriche di somiglianza</a>.</p>
 <div class="filter">
- <a href="#floating">Matrici in virgola mobile</a> <a href="#binary">Matrici binarie</a> <a href="#sparse">Matrici rade Matrici rade</a></div>
+ <a href="#floating">Incorporamenti in virgola mobile</a> <a href="#binary">Incorporamenti binari</a> <a href="#sparse">Incorporamenti sparsi</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
@@ -110,7 +110,7 @@ title: Indicizzare i campi vettoriali
 <li><p>La dimensionalità del campo vettoriale e il tipo di metrica, o</p></li>
 <li><p>Lo schema e i parametri dell'indice.</p></li>
 </ul>
-<p>Il frammento di codice seguente ripropone il codice esistente per stabilire una connessione a un'istanza di Milvus e creare una raccolta senza specificare i parametri dell'indice. In questo caso, la collezione non ha un indice e rimane scarica.</p>
+<p>Il frammento di codice seguente ripropone il codice esistente per stabilire una connessione a un'istanza di Milvus e creare una collezione senza specificare i parametri dell'indice. In questo caso, la collezione non ha un indice e rimane scarica.</p>
 <div class="language-python">
 <p>Per preparare l'indicizzazione, usare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> per connettersi al server Milvus e impostare una raccolta usando <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>.</p>
 </div>
@@ -230,7 +230,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Per creare un indice per un insieme o indicizzare un insieme, usare <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a> per preparare i parametri dell'indice e <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md"><code translate="no">createIndex()</code></a> per creare l'indice.</p>
 </div>
 <div class="language-javascript">
-<p>Per creare un indice per un insieme o un indice di un insieme, usare <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>Per creare un indice per un insieme o indicizzare un insieme, usare <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -322,7 +322,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>I parametri di regolazione fine per il tipo di indice specificato. Per i dettagli sulle chiavi e gli intervalli di valori possibili, consultare <a href="https://milvus.io/docs/index.md">Indice in memoria</a>.</td>
+      <td>I parametri di regolazione fine per il tipo di indice specificato. Per i dettagli sulle chiavi e gli intervalli di valori possibili, fare riferimento a <a href="https://milvus.io/docs/index.md">Indice in memoria</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">collection_name</code></td>

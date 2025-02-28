@@ -19,7 +19,7 @@ title: 단일 벡터 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>데이터를 삽입하고 나면 다음 단계는 Milvus에서 컬렉션에 대한 유사도 검색을 수행하는 것입니다.</p>
+    </button></h1><p>데이터를 삽입한 다음 단계는 Milvus에서 컬렉션에 대한 유사도 검색을 수행하는 것입니다.</p>
 <p>Milvus에서는 컬렉션의 벡터 필드 수에 따라 두 가지 유형의 검색을 수행할 수 있습니다:</p>
 <ul>
 <li><strong>단일 벡터 검색</strong>: 컬렉션에 벡터 필드가 하나만 있는 경우, 가장 유사한 엔티티를 찾기 위해 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> 메서드를 사용하여 가장 유사한 엔티티를 찾습니다. 이 방법은 쿼리 벡터를 컬렉션의 기존 벡터와 비교하여 가장 가까운 일치 항목의 ID와 그 사이의 거리를 반환합니다. 선택적으로 결과의 벡터 값과 메타데이터도 반환할 수 있습니다.</li>
@@ -46,7 +46,7 @@ title: 단일 벡터 검색
 <li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">기본 검색</a>: 단일 벡터 검색, 일괄 벡터 검색, 파티션 검색, 지정된 출력 필드를 사용한 검색이 포함됩니다.</p></li>
 <li><p><a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">필터링된 검색</a>: 스칼라 필드를 기반으로 필터링 기준을 적용하여 검색 결과를 구체화합니다.</p></li>
 <li><p><a href="https://milvus.io/docs/single-vector-search.md#Range-search">범위 검색</a>: 쿼리 벡터로부터 특정 거리 범위 내의 벡터를 찾습니다.</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">그룹 검색</a>: 특정 필드를 기준으로 검색 결과를 그룹화하여 결과의 다양성을 보장합니다.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">그룹화 검색</a>: 검색 결과의 다양성을 보장하기 위해 특정 필드를 기준으로 검색 결과를 그룹화합니다.</p></li>
 </ul>
 <h2 id="Preparations" class="common-anchor-header">준비 사항<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1218,8 +1218,8 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">red</code> 의 데이터는 <code translate="no">blue</code> 의 데이터와 다릅니다. 따라서 검색 결과는 해당 하위 집합의 고유한 특성과 데이터 분포를 반영하여 지정된 파티션으로 제한됩니다.</p>
-<h3 id="Search-with-output-fields" class="common-anchor-header">출력 필드로 검색</h3><p>출력 필드로 검색을 사용하면 일치하는 벡터의 어떤 속성이나 필드를 검색 결과에 포함시킬지 지정할 수 있습니다.</p>
-<p>요청에 <code translate="no">output_fields</code> 을 지정하여 특정 필드가 있는 결과를 반환할 수 있습니다.</p>
+<h3 id="Search-with-output-fields" class="common-anchor-header">출력 필드로 검색</h3><p>출력 필드로 검색을 사용하면 일치하는 벡터의 어떤 속성 또는 필드를 검색 결과에 포함시킬지 지정할 수 있습니다.</p>
+<p>요청에 <code translate="no">output_fields</code> 을 지정하여 특정 필드가 포함된 결과를 반환할 수 있습니다.</p>
 <p>다음은 <code translate="no">color</code> 속성 값으로 결과를 반환하는 예제입니다:</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -1566,7 +1566,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </button></h2><p>범위 검색을 사용하면 쿼리 벡터로부터 지정된 거리 범위 내에 있는 벡터를 찾을 수 있습니다.</p>
 <p><code translate="no">radius</code> 및 선택적으로 <code translate="no">range_filter</code> 을 설정하면 쿼리 벡터와 다소 유사한 벡터를 포함하도록 검색 범위를 조정하여 잠재적인 일치 항목을 보다 포괄적으로 볼 수 있습니다.</p>
 <ul>
-<li><p><code translate="no">radius</code>: 검색 공간의 외부 경계를 정의합니다. 쿼리 벡터로부터 이 거리 내에 있는 벡터만 잠재적 일치 항목으로 간주됩니다.</p></li>
+<li><p><code translate="no">radius</code>: 검색 공간의 외곽 경계를 정의합니다. 쿼리 벡터로부터 이 거리 내에 있는 벡터만 잠재적 일치 항목으로 간주됩니다.</p></li>
 <li><p><code translate="no">range_filter</code>: <code translate="no">radius</code> 은 검색의 외부 한계를 설정하지만, <code translate="no">range_filter</code> 은 선택적으로 내부 경계를 정의하는 데 사용하여 벡터가 일치하는 것으로 간주되는 거리 범위를 만들 수 있습니다.</p></li>
 </ul>
 <div class="multipleCode">
@@ -1783,7 +1783,7 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 <p>주어진 출력에서 'doc_11'이 검색 결과를 완전히 지배하여 다른 문서의 고품질 단락을 가리는 것을 볼 수 있으며, 이는 LLM에 좋지 않은 프롬프트가 될 수 있습니다.</p>
 <p><strong>제한 사항</strong></p>
 <ul>
-<li><p><strong>인덱싱</strong>: 이 그룹화 기능은 다음 색인 유형으로 색인된 컬렉션에서만 작동합니다: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>DISCANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
+<li><p><strong>색인화</strong>: 이 그룹화 기능은 다음 색인 유형으로 색인된 컬렉션에서만 작동합니다: <strong>FLAT</strong>, <strong>IVF_FLAT</strong>, <strong>IVF_SQ8</strong>, <strong>HNSW</strong>, <strong>DISCANN</strong>, <strong>SPARSE_INVERTED_INDEX</strong>.</p></li>
 <li><p><strong>벡터</strong>: 현재 그룹화 검색은 <strong>BINARY_VECTOR</strong> 타입의 벡터 필드를 지원하지 않습니다. 데이터 유형에 대한 자세한 내용은 <a href="https://milvus.io/docs/schema.md#Supported-data-types">지원되는 데이터 유형을</a> 참조하세요.</p></li>
 <li><p><strong>필드</strong>: 현재 그룹 검색에서는 단일 열만 허용됩니다. <code translate="no">group_by_field</code> 구성에서는 여러 필드 이름을 지정할 수 없습니다.  또한 그룹화 검색은 JSON, FLOAT, DOUBLE, ARRAY 또는 벡터 필드의 데이터 유형과 호환되지 않습니다.</p></li>
 <li><p><strong>성능 영향</strong>: 쿼리 벡터 수가 증가하면 성능이 저하된다는 점에 유의하세요. CPU 코어 2개와 8GB 메모리가 있는 클러스터를 예로 들면, 그룹화 검색의 실행 시간은 입력 쿼리 벡터의 수에 비례하여 증가합니다.</p></li>
@@ -1823,7 +1823,7 @@ search_parameters = {
 <tr><th><strong>매개변수 이름</strong></th><th><strong>매개변수 설명</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>벡터 임베딩 간의 유사성을 측정하는 방법입니다.<br/> 사용 가능한 값은 <code translate="no">IP</code>, <code translate="no">L2</code>, <code translate="no">COSINE</code>, <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code> 이며 기본값은 로드된 인덱스 파일의 값입니다.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>벡터 임베딩 간의 유사성을 측정하는 방법입니다.<br/> 사용 가능한 값은 <code translate="no">IP</code>, <code translate="no">L2</code>, <code translate="no">COSINE</code>, <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code> 이며, 기본값은 로드된 인덱스 파일의 값입니다.</td></tr>
 <tr><td><code translate="no">params.nprobe</code></td><td>검색 중에 쿼리할 단위 수입니다.<br/> 값은 [1, nlist<sub>[1]</sub>] 범위에 속합니다.</td></tr>
 <tr><td><code translate="no">params.level</code></td><td>검색 정밀도 수준.<br/> 가능한 값은 <code translate="no">1</code>, <code translate="no">2</code>, <code translate="no">3</code> 이며 기본값은 <code translate="no">1</code> 입니다. 값이 높을수록 더 정확한 결과를 얻을 수 있지만 성능이 느려집니다.</td></tr>
 <tr><td><code translate="no">params.radius</code></td><td>검색 공간의 외부 경계를 정의합니다. 쿼리 벡터로부터 이 거리 내에 있는 벡터만 잠재적 일치로 간주됩니다.<br/>값 범위는 <code translate="no">metric_type</code> 매개변수에 의해 결정됩니다. 예를 들어 <code translate="no">metric_type</code> 가 <code translate="no">L2</code> 으로 설정된 경우 유효한 값 범위는 <code translate="no">[0, ∞]</code> 입니다. <code translate="no">metric_type</code> 가 <code translate="no">COSINE</code> 로 설정된 경우 유효한 값 범위는 <code translate="no">[-1, 1]</code> 입니다. 자세한 내용은 <a href="/docs/ko/metric.md">유사성 지표를</a> 참조하세요.</td></tr>

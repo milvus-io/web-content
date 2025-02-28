@@ -23,7 +23,7 @@ title: 使用 Matryoshka 嵌入进行漏斗搜索
     </button></h1><p>在构建高效的向量搜索系统时，一个关键的挑战是管理存储成本，同时保持可接受的延迟和召回率。现代 Embeddings 模型输出的向量有成百上千个维度，这给原始向量和索引带来了巨大的存储和计算开销。</p>
 <p>传统方法是在建立索引前应用量化或降维方法来降低存储需求。例如，我们可以使用乘积量化（PQ）降低精度，或使用主成分分析（PCA）降低维数，从而节省存储空间。这些方法会对整个向量集进行分析，以找到一个能保持向量间语义关系的更紧凑的向量集。</p>
 <p>这些标准方法虽然有效，但只能在单一尺度上降低一次精度或维度。但是，如果我们能同时保持多层细节，就像一个精确度越来越高的表征金字塔呢？</p>
-<p>这就是 Matryoshka Embeddings。这些巧妙的构造以俄罗斯嵌套娃娃命名（见插图），将多级表示嵌入到单个向量中。与传统的后处理方法不同，Matryoshka 嵌入在初始训练过程中就能学习这种多尺度结构。结果非常显著：不仅完整的 Embeddings 能够捕捉输入语义，而且每个嵌套的子集前缀（前半部分、前四分之一等）都提供了一个连贯的、即使不那么详细的表示。</p>
+<p>这就是 Matryoshka Embeddings。这些巧妙的结构以俄罗斯嵌套娃娃命名（见插图），将多级表示嵌入到单个向量中。与传统的后处理方法不同，Matryoshka 嵌入在初始训练过程中就能学习这种多尺度结构。结果非常显著：不仅完整的 Embeddings 能够捕捉输入语义，而且每个嵌套的子集前缀（前半部分、前四分之一等）都提供了一个连贯的、即使不那么详细的表示。</p>
 <div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.4.x/assets/funnel-search.png' width='100%'></div>
 <p>在本笔记本中，我们将研究如何将 Matryoshka 嵌入与 Milvus 一起用于语义搜索。我们展示了一种名为 "漏斗搜索 "的算法，它允许我们在嵌入维度的一小部分子集上执行相似性搜索，而不会导致召回率急剧下降。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
@@ -109,7 +109,7 @@ client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus 目前不支持对嵌入式子集进行搜索，因此我们将嵌入式分成两部分：头部代表要索引和搜索的向量的初始子集，尾部是剩余部分。该模型是为余弦距离相似性搜索而训练的，因此我们对头部嵌入进行了归一化处理。不过，为了以后计算更大子集的相似性，我们需要存储头部嵌入的规范，因此可以在连接到尾部之前对其进行非规范化处理。</p>
 <p>为了通过前 1/6 的嵌入执行搜索，我们需要在<code translate="no">head_embedding</code> 字段上创建一个向量搜索索引。稍后，我们将比较 "漏斗搜索 "和常规向量搜索的结果，因此也要在全嵌入上建立一个搜索索引。</p>
-<p><em>重要的是，我们使用的是<code translate="no">COSINE</code> 而不是<code translate="no">IP</code> 距离度量，因为否则我们就需要跟踪嵌入规范，这将使实现过程变得复杂（一旦介绍了漏斗搜索算法，这一点将更有意义）。</em></p>
+<p><em>重要的是，我们使用的是<code translate="no">COSINE</code> 而不是<code translate="no">IP</code> 距离度量，因为否则我们就需要跟踪嵌入规范，这会使实现过程变得复杂（在介绍漏斗搜索算法后，这一点会更有意义）。</em></p>
 <pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
 index_params.<span class="hljs-title function_">add_index</span>(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
@@ -218,7 +218,7 @@ Impact
 The House in Marsh Road
 </code></pre>
 <p>我们可以看到，由于在搜索过程中截断了 Embeddings，因此召回率受到了影响。漏斗搜索通过一个巧妙的技巧解决了这一问题：我们可以利用剩余的嵌入维度对候选列表进行重新排序和修剪，从而恢复检索性能，而无需运行任何额外的昂贵向量搜索。</p>
-<p>为了便于阐述漏斗搜索算法，我们将每个查询的 Milvus 搜索命中率转换为 Pandas 数据帧。</p>
+<p>为了便于说明漏斗搜索算法，我们将每个查询的 Milvus 搜索命中率转换为 Pandas 数据帧。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">hits_to_dataframe</span>(<span class="hljs-params">hits: pymilvus.client.abstract.Hits</span>) -&gt; pd.DataFrame:
     <span class="hljs-string">&quot;&quot;&quot;
     Convert a Milvus search result to a Pandas dataframe. This function is specific to our data schema.
@@ -234,7 +234,7 @@ The House in Marsh Road
 dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
 <p>现在，为了执行漏斗搜索，我们对嵌入的越来越大的子集进行迭代。在每次迭代中，我们都会根据新的相似度对候选项进行重新排序，并删除部分排序最低的候选项。</p>
-<p>具体来说，在上一步中，我们使用 1/6 的嵌入维度和查询维度检索到 128 个候选项。执行漏斗搜索的第一步是使用<em>前 1/3 维度</em>重新计算查询和候选项之间的相似度。我们会剪切掉最下面的 64 个候选项。然后，我们使用<em>前 2/3 个维度</em>重复这一过程，然后使用<em>所有维度</em>，依次剪切到 32 个和 16 个候选<em>维度</em>。</p>
+<p>具体来说，在上一步中，我们使用 1/6 的嵌入维度和查询维度检索到 128 个候选项。执行漏斗搜索的第一步是使用<em>前 1/3 维度</em>重新计算查询和候选项之间的相似度。我们会剪切掉最下面的 64 个候选项。然后，我们使用<em>前 2/3 维度</em>重复这一过程，然后使用<em>所有维度</em>，依次剪切到 32 和 16 个候选<em>维度</em>。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># An optimized implementation would vectorize the calculation of similarity scores across rows (using a matrix)</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_score</span>(<span class="hljs-params">row, query_emb=<span class="hljs-literal">None</span>, dims=<span class="hljs-number">768</span></span>):
     emb = F.normalize(row[<span class="hljs-string">&quot;embedding&quot;</span>][:dims], dim=-<span class="hljs-number">1</span>)
@@ -561,7 +561,7 @@ Leopard in the Snow
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下是各种方法的搜索结果对比：</p>
+    </button></h2><p>下面是各种方法的搜索结果对比：</p>
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.4.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
 <div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.4.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.4.x/assets/results-the-shining.png' width='100%'></div>

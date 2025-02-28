@@ -38,7 +38,7 @@ title: Indexar campos vectoriales
         ></path>
       </svg>
     </button></h2><p>Aprovechando los metadatos almacenados en un archivo de índice, Milvus organiza sus datos en una estructura especializada, facilitando la rápida recuperación de la información solicitada durante las búsquedas o consultas.</p>
-<p>Milvus proporciona varios tipos de índices y métricas para ordenar los valores de los campos con el fin de realizar búsquedas de similitud eficientes. La siguiente tabla enumera los tipos de índices y métricas soportados para diferentes tipos de campos vectoriales. Actualmente, Milvus soporta varios tipos de datos vectoriales, incluyendo incrustaciones en coma flotante (a menudo conocidas como vectores en coma flotante o vectores densos), incrustaciones binarias (también conocidas como vectores binarios) e incrustaciones dispersas (también conocidas como vectores dispersos). Para obtener más información, consulte <a href="/docs/es/index.md">Índice en memoria</a> y <a href="/docs/es/metric.md">métricas de similitud</a>.</p>
+<p>Milvus proporciona varios tipos de índices y métricas para ordenar los valores de campo para realizar búsquedas de similitud eficientes. La siguiente tabla enumera los tipos de índices y métricas soportados para diferentes tipos de campos vectoriales. Actualmente, Milvus soporta varios tipos de datos vectoriales, incluyendo incrustaciones en coma flotante (a menudo conocidas como vectores en coma flotante o vectores densos), incrustaciones binarias (también conocidas como vectores binarios) e incrustaciones dispersas (también conocidas como vectores dispersos). Para obtener más información, consulte <a href="/docs/es/index.md">Índice en memoria</a> y <a href="/docs/es/metric.md">métricas de similitud</a>.</p>
 <div class="filter">
  <a href="#floating">Incrustaciones</a> <a href="#sparse">en</a> <a href="#floating">coma flotante</a> <a href="#binary">Incrustaciones binarias</a> <a href="#sparse">Incrustaciones dispersas</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -78,7 +78,7 @@ title: Indexar campos vectoriales
 <thead>
   <tr>
     <th class="tg-0pky" style="width: 204px;">Tipos métricos</th>
-    <th class="tg-0pky">Tipos de índices</th>
+    <th class="tg-0pky">Tipos de índice</th>
   </tr>
 </thead>
 <tbody>
@@ -118,7 +118,7 @@ title: Indexar campos vectoriales
 <p>Para preparar la indexación, utilice <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> para conectarse al servidor Milvus y configurar una colección utilizando <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>y <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>Para preparar la indexación, utilice <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> para conectarse al servidor Milvus y crear una colección utilizando <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>Para preparar la indexación, utilice <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> para conectarse al servidor Milvus y configurar una colección utilizando <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>

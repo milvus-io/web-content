@@ -3,7 +3,7 @@ id: install_cluster-milvusoperator.md
 label: Milvus Operator
 related_key: Kubernetes
 summary: 了解如何使用 Milvus 操作符在 Kubernetes 上安装 Milvus 集群
-title: 使用 Milvus Operator 安装 Milvus 群集
+title: 使用 Milvus 操作符安装 Milvus 群集
 ---
 <h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 在 Kubernetes 中运行 Milvus<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +151,7 @@ milvus-<span class="hljs-keyword">operator</span><span class="hljs-number">-5f</
     </button></h2><h3 id="1-Deploy-a-Milvus-cluster" class="common-anchor-header">1.部署 Milvus 群集</h3><p>一旦运行了 Milvus Operator pod，就可以按如下方式部署 Milvus 群集。</p>
 <pre><code translate="no" class="language-shell">$ kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上述命令使用默认配置部署一个 Milvus 集群，并将其组件和依赖项分别放在不同的 pod 中。要自定义这些设置，建议你使用<a href="https://milvus.io/tools/sizing">Milvus 大小</a>调整<a href="https://milvus.io/tools/sizing">工具</a>，根据实际数据大小调整配置，然后下载相应的 YAML 文件。要了解有关配置参数的更多信息，请参阅<a href="https://milvus.io/docs/system_configuration.md">Milvus 系统配置检查表</a>。</p>
+<p>上述命令使用默认配置部署一个 Milvus 集群，其组件和依赖项分别位于不同的 pod 中。要自定义这些设置，建议你使用<a href="https://milvus.io/tools/sizing">Milvus 大小</a>调整<a href="https://milvus.io/tools/sizing">工具</a>，根据实际数据大小调整配置，然后下载相应的 YAML 文件。要了解有关配置参数的更多信息，请参阅<a href="https://milvus.io/docs/system_configuration.md">Milvus 系统配置检查表</a>。</p>
 <div class="alert note">
 <ul>
 <li>版本名称只能包含字母、数字和破折号。版本名称中不允许有圆点。</li>
@@ -255,12 +255,12 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 配备了一个名为 Milvus WebUI 的内置图形用户界面工具，可通过浏览器访问。Milvus Web UI 采用简单直观的界面，增强了系统的可观察性。你可以使用 Milvus Web UI 观察 Milvus 组件和依赖关系的统计和指标，检查数据库和 Collections 的详细信息，并列出详细的 Milvus 配置。有关 Milvus Web UI 的详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+    </button></h2><p>Milvus 配备了一个名为 Milvus WebUI 的内置图形用户界面工具，你可以通过浏览器访问它。Milvus Web UI 采用简单直观的界面，增强了系统的可观察性。你可以使用 Milvus Web UI 观察 Milvus 组件和依赖关系的统计和指标，检查数据库和 Collections 的详细信息，并列出详细的 Milvus 配置。有关 Milvus Web UI 的详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
 <p>要启用对 Milvus Web UI 的访问，需要将代理 pod 的端口转发到本地端口。</p>
 <pre><code translate="no" class="language-shell">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27018</span>:<span class="hljs-number">9091</span>
 <span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27018</span> -&gt; <span class="hljs-number">9091</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>现在，你可以通过<code translate="no">http://localhost:27018</code> 访问 Milvus Web UI。</p>
+<p>现在，您可以通过<code translate="no">http://localhost:27018</code> 访问 Milvus Web UI。</p>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">卸载 Milvus<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -282,7 +282,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <div class="alert note">
 <ul>
 <li>使用默认配置删除 Milvus 群集时，不会删除 etcd、Pulsar 和 MinIO 等依赖项。因此，下次安装同一个 Milvus 群集实例时，将再次使用这些依赖项。</li>
-<li>要连同 Milvus 群集一起删除依赖项和私有虚拟云 (PVC)，请参阅<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">配置文件</a>。</li>
+<li>要连同 Milvus 群集一起删除依赖项和持久卷主张（PVC），请参阅<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">配置文件</a>。</li>
 </ul>
 </div>
 <h2 id="Uninstall-Milvus-Operator" class="common-anchor-header">卸载 Milvus 操作符<button data-href="#Uninstall-Milvus-Operator" class="anchor-icon" translate="no">

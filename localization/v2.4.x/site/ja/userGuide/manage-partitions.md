@@ -389,7 +389,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// false</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコード・スニペットは、コレクションに<code translate="no">partitionA</code> と<code translate="no">partitionC</code> というパーティションがあるかどうかをチェックします。</p>
+<p>上記のコード・スニペットは、コレクションに<code translate="no">partitionA</code> と<code translate="no">partitionC</code> という名前のパーティションがあるかどうかをチェックします。</p>
 <h2 id="Load--Release-Partitions" class="common-anchor-header">パーティションのロードと解放<button data-href="#Load--Release-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -814,7 +814,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateNotLoad</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>一度に複数のパーティションを解放するには、次のようにします：</p>
+<p>一度に複数のパーティションを解放するには、以下のようにします：</p>
 <pre><code translate="no" class="language-python">client.release_partitions(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_names=[<span class="hljs-string">&quot;_default&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]

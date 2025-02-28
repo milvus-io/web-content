@@ -104,7 +104,7 @@ connections.connect(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>小規模なデータやプロトタイピングのためにローカルのベクトルデータベースが必要なだけであれば、uriをローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利です。</li>
+<li>小規模なデータやプロトタイピングのためにローカルのベクトルデータベースが必要な場合、uriをローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利です。</li>
 <li>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合、トークンには"&lt;your_username&gt;:&lt;your_password&gt;"を使用します。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Milvus Cloud</a>を利用する場合は、Milvus Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
@@ -135,7 +135,7 @@ collection.create_index(field_name=<span class="hljs-string">&quot;embedding&quo
 
 collection.flush()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Construct-the-Distance-Matrix-for-HDBSCAN" class="common-anchor-header">HDBSCAN用距離マトリックスの構築<button data-href="#Construct-the-Distance-Matrix-for-HDBSCAN" class="anchor-icon" translate="no">
+<h2 id="Construct-the-Distance-Matrix-for-HDBSCAN" class="common-anchor-header">HDBSCAN用の距離行列の構築<button data-href="#Construct-the-Distance-Matrix-for-HDBSCAN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,7 +150,7 @@ collection.flush()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>HDBSCANでは、クラスタリングのために点間の距離を計算する必要があり、計算量が多くなります。離れた点はクラスタリングの割り当てにあまり影響しないため、上位k個の最近傍点を計算することで効率を向上させることができます。この例では、FLATインデックスを使用していますが、大規模なデータセットの場合、Milvusは検索プロセスを高速化するために、より高度なインデックス手法をサポートしています。 まず、以前に作成したMilvusコレクションを反復するためのイテレータを取得する必要があります。</p>
+    </button></h2><p>HDBSCANでは、クラスタリングのために点間の距離を計算する必要があり、計算量が多くなります。遠方の点はクラスタリング割り当てへの影響が少ないため、上位k個の最近傍点を計算することで効率を向上させることができます。この例では、FLATインデックスを使用していますが、大規模なデータセットの場合、Milvusは検索プロセスを高速化するために、より高度なインデックス手法をサポートしています。 まず、以前に作成したMilvusコレクションを反復するためのイテレータを取得する必要があります。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> hdbscan
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
@@ -229,7 +229,7 @@ hdb = h.fit(dist_metric)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>我々はすでにHDBSCANを使ってデータをクラスタ化し、各データポイントのラベルを得ることができた。しかし、いくつかの可視化技術を使えば、直感的な分析のためにクラスタの全体像を得ることができる。これからUMAPを使ってクラスタを可視化する。UMAPは、次元削減のために使用される効率的な手法であり、高次元データの構造を保持しながら、可視化やさらなる分析のために低次元空間に投影する。UMAPを用いることで、元の高次元データを2次元または3次元空間に可視化し、クラスターを明確に見ることができる。 ここでも、データ点を反復処理し、元データのidとテキストを取得する。次に、plotyを用いて、これらのメタ情報を持つデータ点を図にプロットし、異なるクラスターを表すために異なる色を用いる。</p>
+    </button></h2><p>我々はすでにHDBSCANを使ってデータをクラスタ化し、各データポイントのラベルを得ることができた。しかし、いくつかの可視化技術を使えば、直感的な分析のためにクラスタの全体像を得ることができる。これからUMAPを使ってクラスタを可視化する。UMAPは、次元削減のために使用される効率的な手法であり、高次元データの構造を保持しながら、可視化やさらなる分析のために低次元空間に投影する。UMAPを用いることで、元の高次元データを2次元または3次元空間に可視化し、クラスターを明確に見ることができる。 ここでも、データ点を反復処理し、元データのidとテキストを取得する。次にplotyを用いて、これらのメタ情報を持つデータ点を図にプロットし、異なるクラスターを表すために異なる色を用いる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> plotly.io <span class="hljs-keyword">as</span> pio
 
 pio.renderers.default = <span class="hljs-string">&quot;notebook&quot;</span>

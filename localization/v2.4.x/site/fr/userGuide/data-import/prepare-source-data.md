@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cette page traite d'un aspect que vous devez prendre en compte avant de commencer à insérer des données en vrac dans votre collection.</p>
+    </button></h1><p>Cette page traite des éléments à prendre en compte avant de commencer à insérer des données en vrac dans votre collection.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -376,7 +376,7 @@ writer = RemoteBulkWriter(
 <p>Un <strong>BulkWriter</strong> possède deux méthodes : <code translate="no">append_row()</code> ajoute une ligne à partir d'un jeu de données source et <code translate="no">commit()</code> valide les lignes ajoutées dans un fichier local ou un bucket distant.</p>
 </div>
 <div class="language-java">
-<p>Un <strong>BulkWriter</strong> possède deux méthodes : <code translate="no">appendRow()</code> ajoute une ligne à partir d'un jeu de données source et <code translate="no">commit()</code> enregistre les lignes ajoutées dans un fichier local ou dans une base de données distante.</p>
+<p>Un <strong>BulkWriter</strong> possède deux méthodes : <code translate="no">appendRow()</code> ajoute une ligne à partir d'un jeu de données source et <code translate="no">commit()</code> enregistre les lignes ajoutées dans un fichier local ou un panier distant.</p>
 </div>
 <p>À des fins de démonstration, le code suivant ajoute des données générées de manière aléatoire.</p>
 <div class="multipleCode">

@@ -1,7 +1,6 @@
 ---
 id: manage_databases.md
 title: Verwalten von Datenbanken
-summary: ''
 ---
 <h1 id="Manage-Databases" class="common-anchor-header">Verwalten von Datenbanken<button data-href="#Manage-Databases" class="anchor-icon" translate="no">
       <svg translate="no"

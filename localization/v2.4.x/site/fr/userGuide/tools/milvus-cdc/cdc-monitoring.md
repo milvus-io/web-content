@@ -4,7 +4,7 @@ order: 4
 summary: >-
   Milvus-CDC offre des capacités de surveillance complètes par le biais de
   tableaux de bord Grafana.
-title: Contrôle
+title: Surveillance
 ---
 <h1 id="Monitoring" class="common-anchor-header">Surveillance<button data-href="#Monitoring" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -33,7 +33,7 @@ title: Contrôle
 <li><p><strong>Tâche</strong>: Nombre de tâches CDC dans différents états, notamment <strong>Initial</strong>, <strong>En cours d'exécution</strong> et <strong>En pause</strong>.</p></li>
 <li><p><strong>Total des demandes</strong>: nombre total de demandes reçues par Milvus-CDC.</p></li>
 <li><p><strong>Réussite de la demande</strong>: Nombre de demandes réussies reçues par Milvus-CDC.</p></li>
-<li><p><strong>Nombre de tâches</strong>: Nombre de tâches dans les états <strong>Initial</strong>, <strong>Pause</strong> et <strong>En cours d'exécution</strong> au fil du temps.</p></li>
+<li><p><strong>Nombre de tâches</strong>: Nombre de tâches dans les états <strong>Initial</strong>, <strong>Pause</strong> et En <strong>cours d'exécution</strong> au fil du temps.</p></li>
 <li><p><strong>état de la tâche</strong>: État des tâches individuelles.</p></li>
 <li><p><strong>request count</strong>: Nombre de requêtes réussies et totales</p></li>
 <li><p><strong>latence de la demande</strong>: Temps de latence des demandes via p99, moyenne et autres statistiques.</p></li>

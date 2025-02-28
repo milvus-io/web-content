@@ -3,7 +3,7 @@ id: rerankers-voyage.md
 order: 5
 summary: >-
   Milvusは `VoyageRerankFunction`
-  クラスを通してVoyageリランカーモデルをサポートしている。この機能により、クエリとドキュメントのペアの関連性を効果的にスコアリングすることができる。
+  クラスを通してVoyageリランカーモデルをサポートしています。この機能により、クエリとドキュメントのペアの関連性を効果的にスコアリングすることができる。
 title: リランカーズ・ヴォヤッジ
 ---
 <h1 id="Voyage" class="common-anchor-header">ボヤージュ<button data-href="#Voyage" class="anchor-icon" translate="no">

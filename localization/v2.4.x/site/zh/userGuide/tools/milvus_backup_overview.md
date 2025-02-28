@@ -58,9 +58,9 @@ title: Milvus 备份
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
    </span> <span class="img-wrapper"> <span>Milvus 备份架构</span> </span></p>
-<p>Milvus 备份便于跨 Milvus 实例备份和恢复元数据、段和数据。它提供北向接口，如 CLI、API 和基于 gRPC 的 Go 模块，用于灵活操作备份和还原过程。</p>
+<p>Milvus 备份便于跨 Milvus 实例备份和恢复元数据、段和数据。它提供北向接口，如 CLI、API 和基于 gRPC 的 Go 模块，以便灵活操作备份和还原过程。</p>
 <p>Milvus 备份从源 Milvus 实例读取 Collections 元数据和片段，以创建备份。然后，它会从源 Milvus 实例的根路径复制 Collections 数据，并将复制的数据保存到备份根路径。</p>
-<p>要从备份中还原，Milvus Backup 会根据备份中的 Collections 元数据和段信息，在目标 Milvus 实例中创建一个新的 Collections。然后，它会将备份数据从备份根路径复制到目标实例的根路径。</p>
+<p>要从备份还原，Milvus Backup 会根据备份中的 Collections 元数据和段信息，在目标 Milvus 实例中创建一个新的 Collections。然后，它会将备份数据从备份根路径复制到目标实例的根路径。</p>
 <h2 id="Latest-release" class="common-anchor-header">最新版本<button data-href="#Latest-release" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

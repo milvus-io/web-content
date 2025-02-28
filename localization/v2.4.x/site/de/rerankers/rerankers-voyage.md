@@ -3,7 +3,7 @@ id: rerankers-voyage.md
 order: 5
 summary: >-
   Milvus unterstützt das Voyage-Rerank-Modell durch die Klasse
-  "VoyageRerankFunction". Diese Funktionalität ermöglicht es Ihnen, die Relevanz
+  `VoyageRerankFunction`. Diese Funktionalität ermöglicht es Ihnen, die Relevanz
   von Abfrage-Dokumenten-Paaren effektiv zu bewerten.
 title: Rerankers Voyage
 ---

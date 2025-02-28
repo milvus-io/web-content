@@ -88,7 +88,7 @@ title: Docker Compose로 Milvus를 설치하기 위한 요구 사항
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> test-data
 fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 <button class="copy-code-btn"></button></code></pre>
-<p>이상적으로는 디스크가 500 IOPS 이상이고 99번째 백분위수 fsync 지연 시간이 10ms 미만이어야 합니다. 자세한 요구 사항은 etcd <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">문서를</a> 참조하세요.</p>
+<p>이상적으로는 etcd 전용 디스크가 500 IOPS 이상이고 99번째 백분위수 fsync 지연 시간이 10ms 미만이어야 합니다. 자세한 요구 사항은 etcd <a href="https://etcd.io/docs/v3.5/op-guide/hardware/#disks">문서를</a> 참조하세요.</p>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

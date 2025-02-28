@@ -32,7 +32,7 @@ title: 文本到图像搜索引擎
 <li><p><a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwjawLa4hNj7AhWrSGwGHSWKD1sQFnoECA0QAQ&amp;url=https%3A%2F%2Fdocs.opencv.org%2F4.x%2Fd6%2Fd00%2Ftutorial_py_root.html&amp;usg=AOvVaw3YMr9iiY-FTDoGSWWqppvP">OpenCV-Python</a></p></li>
 </ul>
 <p>如今，传统的文本搜索引擎正在失去魅力，越来越多的人将 TikTok 作为自己最喜爱的搜索引擎。在传统的文本搜索中，人们只需输入关键词，就会显示出所有包含该关键词的文本。然而，人们抱怨在这样的搜索中总是找不到自己想要的东西。此外，搜索结果也不够直观。人们说，他们觉得图片和视频要比一行行文字更直观、更令人愉悦。因此，跨模态文本到图像搜索引擎应运而生。有了这种新型搜索引擎，人们只需输入一段包含某些关键词的文字，就能找到相关的图片。</p>
-<p>在本教程中，您将学习如何构建文本到图像搜索引擎。本教程使用 CLIP 模型提取图像的特征并将其转换为向量。然后将这些图像向量存储到 Milvus 向量数据库中。当用户输入查询文本时，这些文本也会使用相同的 ML 模型 CLIP 转换成嵌入向量。随后，在 Milvus 中执行向量相似性搜索，以检索与输入文本向量最相似的图像向量。</p>
+<p>在本教程中，您将学习如何构建文本到图像搜索引擎。本教程使用 CLIP 模型提取图像的特征并将其转换为向量。然后将这些图像向量存储到 Milvus 向量数据库中。当用户输入查询文本时，这些文本也会使用相同的 ML 模型 CLIP 转换成嵌入向量。随后，在 Milvus 中执行向量相似性搜索，检索与输入文本向量最相似的图像向量。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/text_to_image_workflow.png" alt="Text_image_search" class="doc-image" id="text_image_search" />

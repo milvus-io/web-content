@@ -17,7 +17,7 @@ title: Utilizar campos JSON
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este guia explica como utilizar os campos JSON, tais como inserir valores JSON, bem como pesquisar e consultar campos JSON com operadores básicos e avançados.</p>
+    </button></h1><p>Este guia explica como utilizar os campos JSON, como inserir valores JSON, bem como pesquisar e consultar campos JSON com operadores básicos e avançados.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,7 +117,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>Você pode visualizar a estrutura dos dados gerados verificando sua primeira entrada.</p>
+<p>Pode ver a estrutura dos dados gerados verificando a sua primeira entrada.</p>
 <pre><code translate="no">{
     <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;vector&quot;</span>: [
@@ -158,7 +158,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 <div class="admonition note">
 <p><b>notas</b></p>
 <ul>
-<li><p>Certifique-se de que todos os valores numa lista ou matriz são do mesmo tipo de dados.</p></li>
+<li><p>Certifique-se de que todos os valores de uma lista ou matriz são do mesmo tipo de dados.</p></li>
 <li><p>Quaisquer dicionários aninhados num valor de campo JSON serão considerados cadeias de caracteres.</p></li>
 <li><p>Utilize apenas caracteres alfanuméricos e sublinhados para nomear chaves JSON, uma vez que outros caracteres podem causar problemas de filtragem ou pesquisa.</p></li>
 <li>Atualmente, a indexação de campos JSON não está disponível, o que pode tornar a filtragem morosa. No entanto, esta limitação será resolvida nas próximas versões.</li>
@@ -387,7 +387,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>Para mais informações sobre os parâmetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>, e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md"><code translate="no">get_load_state()</code></a> na referência do SDK.</p>
+<p>Para mais informações sobre os parâmetros, consultar <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>, e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md"><code translate="no">get_load_state()</code></a> na referência do SDK.</p>
 </div>
 <div class="language-java">
 <p>Para mais informações sobre os parâmetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>, e <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md"><code translate="no">getLoadState()</code></a> na referência do SDK.</p>
@@ -713,7 +713,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
       </svg>
     </button></h2><p>O Milvus fornece um conjunto de filtros avançados para filtragem escalar em campos JSON. Estes filtros são <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, e <code translate="no">JSON_CONTAINS_ANY</code>.</p>
 <ul>
-<li><p>Filtra todas as entidades que têm <code translate="no">[&quot;blue&quot;, &quot;brown&quot;, &quot;grey&quot;]</code> como o conjunto de cores de referência.</p>
+<li><p>Filtra todas as entidades que têm <code translate="no">[&quot;blue&quot;, &quot;brown&quot;, &quot;grey&quot;]</code> como conjunto de cores de referência.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. Advanced search within a JSON field</span>
@@ -951,7 +951,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Filtra entidades que têm o coordenador de <code translate="no">[4, 5]</code>.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a><a href="#javascript">Java Node.js</a></div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
     data=query_vectors,
@@ -1154,9 +1154,9 @@ searchResults = searchResp.getSearchResults();
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Filtra entidades que têm o coordenador que contém <code translate="no">4</code> ou <code translate="no">5</code>.</p>
+<li><p>Filtra entidades que têm o coordenador contendo <code translate="no">4</code> ou <code translate="no">5</code>.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a><a href="#javascript">Java Node.js</a></div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
     data=query_vectors,
@@ -1378,9 +1378,9 @@ searchResults = searchResp.getSearchResults();
 <div class="admonition note">
 <p><b>notas</b></p>
 <ul>
-<li>O Milvus armazena os valores das cadeias de caracteres no campo JSON tal como estão, sem efetuar a conversão ou a fuga semântica. </li>
+<li>O Milvus guarda os valores das cadeias de caracteres no campo JSON tal como estão, sem efetuar a conversão ou o escape semântico. </li>
 </ul>
-<p>Por exemplo, <code translate="no">'a"b'</code>, <code translate="no">"a'b"</code>, <code translate="no">'a\\\\'b'</code>, e <code translate="no">"a\\\\"b"</code> serão guardados tal como estão, enquanto <code translate="no">'a'b'</code> e <code translate="no">"a"b"</code> serão tratados como valores inválidos.</p>
+<p>Por exemplo, <code translate="no">'a"b'</code>, <code translate="no">"a'b"</code>, <code translate="no">'a\\\\'b'</code> e <code translate="no">"a\\\\"b"</code> serão guardados tal como estão, enquanto <code translate="no">'a'b'</code> e <code translate="no">"a"b"</code> serão tratados como valores inválidos.</p>
 <ul>
 <li><p>Para criar expressões de filtro utilizando um campo JSON, pode utilizar as chaves dentro do campo. </p></li>
 <li><p>Se o valor de uma chave for um inteiro ou um float, pode compará-lo com outra chave de inteiro ou float ou com um campo INT32/64 ou FLOAT32/64.</p></li>
@@ -1393,7 +1393,7 @@ searchResults = searchResp.getSearchResults();
 <tr><th><strong>Operador</strong></th><th><strong>Exemplos</strong></th><th><strong>Observações</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><strong>&lt;</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &lt; 3'</code></td><td>Esta expressão é avaliada como verdadeira se o valor de <code translate="no">json_field[&quot;A&quot;]</code> for menor que <code translate="no">3</code>.</td></tr>
+<tr><td><strong>&lt;</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &lt; 3'</code></td><td>Esta expressão é avaliada como verdadeira se o valor de <code translate="no">json_field[&quot;A&quot;]</code> for inferior a <code translate="no">3</code>.</td></tr>
 <tr><td><strong>&gt;</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &gt; 1'</code></td><td>Esta expressão é avaliada como verdadeira se o valor de <code translate="no">json_field[&quot;A&quot;]</code> for maior que <code translate="no">1</code>.</td></tr>
 <tr><td><strong>==</strong></td><td><code translate="no">'json_field[&quot;A&quot;] == 1'</code></td><td>Esta expressão é avaliada como verdadeira se o valor de <code translate="no">json_field[&quot;A&quot;]</code> for igual a <code translate="no">1</code>.</td></tr>
 <tr><td><strong>!=</strong></td><td><code translate="no">'json_field[&quot;A&quot;][0]' != &quot;abc&quot;'</code></td><td>Esta expressão é avaliada como verdadeira se<br/> - <code translate="no">json_field</code> não tiver uma chave chamada <code translate="no">A</code>.<br/> - <code translate="no">json_field</code> tem uma chave chamada <code translate="no">A</code> mas <code translate="no">json_field[&quot;A&quot;]</code> não é uma matriz.<br/> - <code translate="no">json_field[&quot;A&quot;]</code> é uma matriz vazia.<br/> - <code translate="no">json_field[&quot;A&quot;]</code> é uma matriz, mas o primeiro elemento não é <code translate="no">abc</code>.<br/></td></tr>
@@ -1427,7 +1427,7 @@ json_contains(x, [<span class="hljs-number">3</span>,<span class="hljs-number">2
 json_contains_all(x, [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]) <span class="hljs-comment"># =&gt; False (x does not has a member 6.)</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><code translate="no">json_contains_any(identifier, jsonExpr)</code></p>
-<p>Este operador filtra entidades cujo identificador contém qualquer membro da expressão JSON.</p>
+<p>Este operador filtra entidades cujo identificador contém quaisquer membros da expressão JSON.</p>
 <p>Exemplo: <code translate="no">{&quot;x&quot;: [1,2,3,4,5,7,8]}</code></p>
 <pre><code translate="no" class="language-python">json_contains_any(x, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>]) <span class="hljs-comment"># =&gt; True (x contains 1, 2, and 8.)</span>
 json_contains_any(x, [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]) <span class="hljs-comment"># =&gt; True (x contains 4 and 5.)</span>

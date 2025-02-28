@@ -1,7 +1,7 @@
 ---
 id: movie_recommendation_with_milvus.md
 summary: >-
-  このノートブックでは、OpenAIを使って映画の説明の埋め込みを生成し、Milvusの中でその埋め込みを活用して、あなたの好みに合った映画を推薦する方法を探ります。検索結果を向上させるために、フィルタリングを利用してメタデータ検索を行います。この例で使用されるデータセットはHuggingFaceデータセットから提供され、8,000以上の映画エントリーが含まれており、映画を推薦するための豊富な選択肢を提供します。
+  このノートブックでは、OpenAIを使って映画の説明の埋め込みを生成し、Milvusの中でその埋め込みを活用して、あなたの好みに合った映画を推薦する方法を探ります。検索結果を向上させるために、フィルタリングを利用してメタデータ検索を行います。この例で使用されるデータセットはHuggingFaceデータセットから提供され、8,000以上の映画エントリを含んでおり、映画を推薦するための豊富な選択肢を提供します。
 title: Milvusを使った映画の推薦
 ---
 <h1 id="Movie-Recommendation-with-Milvus" class="common-anchor-header">Milvusを使った映画の推薦<button data-href="#Movie-Recommendation-with-Milvus" class="anchor-icon" translate="no">
@@ -45,7 +45,7 @@ title: Milvusを使った映画の推薦
 <pre><code translate="no" class="language-python">$ pip install openai pymilvus datasets tqdm
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするには、<strong>ランタイムを再起動する</strong>必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
+<p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 <p>この例では、LLMとしてOpenAIを使います。<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を環境変数として用意してください。</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -221,7 +221,7 @@ batch = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusにデータが無事挿入されたので、クエリーを実行することができます。クエリには検索する映画の説明と使用するフィルタのタプルを取り込みます。フィルタについての詳細は<a href="https://milvus.io/docs/boolean.md">こちらを</a>ご覧ください。検索はまず、説明とフィルター式を出力します。その後、各結果について、スコア、タイトル、タイプ、リリース年、評価、結果ムービーの説明を表示します。</p>
+    </button></h2><p>Milvusにデータが無事挿入されたので、クエリーを実行することができます。クエリは検索する映画の説明と使用するフィルタのタプルを受け取ります。フィルタについての詳細は<a href="https://milvus.io/docs/boolean.md">こちらを</a>ご覧ください。検索はまず説明とフィルター式を出力します。その後、各結果について、スコア、タイトル、タイプ、リリース年、評価、結果ムービーの説明を表示します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> textwrap
 
 
