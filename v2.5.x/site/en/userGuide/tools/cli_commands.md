@@ -34,6 +34,7 @@ Connects to Milvus.
 
 ```shell
 connect [-uri (text)] [-t (text)]
+connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 ```
 
 <h3 id="connect">Options</h3>
@@ -42,7 +43,7 @@ connect [-uri (text)] [-t (text)]
 | :----- | :-------- | :------------------------------------------------------------------------------------------------------------------------- |
 | -uri   | --uri     | (Optional) The uri name. The default is "http://127.0.0.1:19530".                                                          |
 | -t     | --token   | (Optional) The zilliz cloud apikey or `username:password`. The default is None.                                            |
-| -tls   | --tlsmode | (Optional) - Set TLS mode: 0 (No encryption), 1 (One-way encryption), 2 (Two-way encryption not support yet). Default is 0 |
+| -tls   | --tlsmode | (Optional) Set TLS mode: 0 (No encryption), 1 (One-way encryption), 2 (Two-way encryption not support yet). Default is 0   |
 | -cert  | --cert    | (Optional) Path to the client certificate file. Work with One-way encryption                                               |
 | --help | n/a       | Displays help for using the command.                                                                                       |
 
