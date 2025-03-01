@@ -7,6 +7,40 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.23
+
+Release Date: February 28, 2025
+
+| Milvus version | Python SDK version | Java SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|---------------------|
+| 2.4.23         | 2.4.15             | 2.4.10           | 2.4.11              |
+
+We’re excited to announce the release of Milvus 2.4.23, which introduces enhancements for multi-stage tasks and balancing operations, along with critical bug fixes to prevent deadlocks and duplicate index creation. We encourage you to upgrade or give it a try, and as always, your feedback is greatly appreciated to help us continuously improve Milvus!
+
+### Critical bug fixes
+
+- Added a sub-task pool for multi-stage tasks to avoid deadlocks ([#40093](https://github.com/milvus-io/milvus/pull/40093))
+- Fixed an issue where multiple identical indexes could be created by accident ([#40202](https://github.com/milvus-io/milvus/pull/40202))
+
+### Improvements
+
+- Added a trigger interval configuration for auto-balancing ([#39925](https://github.com/milvus-io/milvus/pull/39925))
+- Added a management API to check QueryCoord balance status ([#39924](https://github.com/milvus-io/milvus/pull/39924))
+- Optimized the result format of `GetQueryNodeDistribution` ([#39927](https://github.com/milvus-io/milvus/pull/39927))
+- Accelerated object listing during binlog import ([#40049](https://github.com/milvus-io/milvus/pull/40049))
+- Added `GetVector` latency metrics and refined request limit error messages ([#40086](https://github.com/milvus-io/milvus/pull/40086))
+- Supported creating a collection with a description ([#40029](https://github.com/milvus-io/milvus/pull/40029))
+
+### Bug fixes
+
+- Removed the hardcoded partition number in the RESTful handler ([#40213](https://github.com/milvus-io/milvus/pull/40213))
+- Fixed an issue where `AlterCollection` was unable to modify `ConsistencyLevel` ([#39906](https://github.com/milvus-io/milvus/pull/39906))
+- Fixed incorrect metrics where the number of executing compaction tasks was negative ([#39956](https://github.com/milvus-io/milvus/pull/39956))
+- Ensured sub-contexts are canceled when an HTTP request times out ([#40170](https://github.com/milvus-io/milvus/pull/40170))
+- Fixed an issue allowing the creation of collections with duplicate names ([#40148](https://github.com/milvus-io/milvus/pull/40148))
+- Resolved a problem where a segment could remain in the sealed state and not transition to flushing ([#39998](https://github.com/milvus-io/milvus/pull/39998))
+- Enhanced the `isBalanced` function to correctly count quote pairs ([#40005](https://github.com/milvus-io/milvus/pull/40005))
+
 ## v2.4.22
 
 Release Date: February 14, 2025
