@@ -66,6 +66,7 @@ title: Milvus_CLI 命令参考
     </button></h2><p>连接 Milvus。</p>
 <p><h3 id="connect">语法</h3></p>
 <pre><code translate="no" class="language-shell">connect [-uri (text)] [-t (text)]
+connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="connect">选项</h3></p>
 <table>
@@ -74,8 +75,8 @@ title: Milvus_CLI 命令参考
 </thead>
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(可选）uri 名称。默认为 &quot;http://127.0.0.1:19530&quot;。</td></tr>
-<tr><td style="text-align:left">-t</td><td style="text-align:left">-令牌</td><td style="text-align:left">(可选）Zilliz Cloud Apikey 或<code translate="no">username:password</code> 。默认为 "无"。</td></tr>
-<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode（可选</td><td style="text-align:left">(可选）- 设置 TLS 模式：0（无加密）、1（单向加密）、2（暂不支持双向加密）。默认为 0</td></tr>
+<tr><td style="text-align:left">-t</td><td style="text-align:left">-令牌</td><td style="text-align:left">(可选）Zilliz Cloud apikey 或<code translate="no">username:password</code> 。默认为 "无"。</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(可选）设置 TLS 模式：0（无加密）、1（单向加密）、2（暂不支持双向加密）。默认为 0</td></tr>
 <tr><td style="text-align:left">-证书</td><td style="text-align:left">-证书</td><td style="text-align:left">(可选）客户端证书文件的路径。使用单向加密</td></tr>
 <tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>

@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك اختيار مسار الترقية لميلفوس الخاص بك على النحو التالي:</p>
-<div style="display: none;">- [إجراء ترقية متجددة] (#إجراء ترقية متجددة) من الإصدار 2.2.3 والإصدارات الأحدث إلى الإصدار 2.4.22.</div>
+<div style="display: none;">- [إجراء ترقية متجددة] (#إجراء ترقية متجددة) من الإصدار 2.2.3 والإصدارات الأحدث إلى الإصدار 2.4.23.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">ترقية Milvus باستخدام Helm</a> للترقية من إصدار ثانوي قبل الإصدار 2.2.3 إلى الإصدار 2.4.22.</p></li>
-<li><p><a href="#Migrate-the-metadata">قم بترحيل البيانات الوصفية</a> قبل الترقية من الإصدار 2.1.x من Milvus إلى الإصدار 2.4.22.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">ترقية Milvus باستخدام Helm</a> للترقية من إصدار ثانوي قبل الإصدار 2.2.3 إلى الإصدار 2.4.23.</p></li>
+<li><p><a href="#Migrate-the-metadata">قم بترحيل البيانات الوصفية</a> قبل الترقية من الإصدار 2.1.x من Milvus إلى الإصدار 2.4.23.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">إجراء ترقية متجددة<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -130,8 +130,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
         ></path>
       </svg>
     </button></h2><p>منذ الإصدار Milvus 2.2.3، يمكنك تكوين منسقي Milvus للعمل في وضع الاستعداد النشط وتمكين ميزة الترقية المتجددة لهم، بحيث يمكن لـ Milvus الاستجابة للطلبات الواردة أثناء ترقيات المنسق. في الإصدارات السابقة، يجب إزالة المنسقين ثم إنشاؤهم أثناء الترقية، مما قد يؤدي إلى تعطل معين للخدمة.</p>
-<p>تتطلب الترقيات المتجددة أن يعمل المنسقون في وضع الاستعداد النشط. يمكنك استخدام <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">البرنامج النصي</a> الذي نوفره لتهيئة المنسقين للعمل في وضع الاستعداد النشط وبدء الترقية المتجددة.</p>
-<p>استنادًا إلى إمكانيات التحديث المتداول التي يوفرها Kubernetes، يفرض البرنامج النصي أعلاه تحديثًا مرتبًا لعمليات النشر وفقًا لتبعياتها. بالإضافة إلى ذلك، تطبق Milvus آلية لضمان بقاء مكوناتها متوافقة مع تلك التي تعتمد عليها أثناء الترقية، مما يقلل بشكل كبير من وقت تعطل الخدمة المحتمل.</p>
+<p>تتطلب الترقيات المتجددة أن يعمل المنسقون في وضع الاستعداد النشط. يمكنك استخدام <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">البرنامج النصي</a> الذي نقدمه لتهيئة المنسقين للعمل في وضع الاستعداد النشط وبدء الترقية المتجددة.</p>
+<p>استنادًا إلى إمكانيات التحديث المتجدد التي توفرها Kubernetes، يفرض البرنامج النصي أعلاه تحديثًا مرتبًا لعمليات النشر وفقًا لتبعياتها. بالإضافة إلى ذلك، تطبق Milvus آلية لضمان بقاء مكوناتها متوافقة مع تلك التي تعتمد عليها أثناء الترقية، مما يقلل بشكل كبير من وقت تعطل الخدمة المحتمل.</p>
 <p>ينطبق البرنامج النصي فقط على ترقية Milvus المثبتة مع Helm. يسرد الجدول التالي علامات الأوامر المتوفرة في البرامج النصية.</p>
 <table>
 <thead>
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>التشغيل</td><td><code translate="no">update</code></td><td>خطأ</td></tr>
 </tbody>
 </table>
-<p>بمجرد التأكد من أن جميع عمليات النشر في مثيل Milvus الخاص بك في حالتها الطبيعية. يمكنك تشغيل الأمر التالي لترقية مثيل Milvus إلى 2.4.22.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.22</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.22&#x27;</span>
+<p>بمجرد التأكد من أن جميع عمليات النشر في مثيل Milvus الخاص بك في حالتها الطبيعية. يمكنك تشغيل الأمر التالي لترقية مثيل Milvus إلى 2.4.23.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.23</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>

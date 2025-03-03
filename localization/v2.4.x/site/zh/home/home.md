@@ -13,7 +13,7 @@ id: home.md
     <p class="promotion-desc">免费试用Zilliz Cloud！体验Milvus的最简单方式！</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud</a>Zilliz Cloud 中国  </div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup">Zilliz Cloud</a>Zilliz Cloud 中国  </div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">开始使用<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -114,7 +114,7 @@ id: home.md
     </button></h2><p><em>2024 年 3 月 - Milvus 2.4.0 发布</em></p>
 <ul>
 <li>添加了如何<a href="/docs/zh/multi-vector-search.md">进行混合搜索的</a>指导。</li>
-<li>已添加<a href="/docs/zh/gpu_index.md">GPU 索引</a>说明。</li>
+<li>添加了<a href="/docs/zh/gpu_index.md">GPU 索引</a>的说明。</li>
 <li>添加了如何<a href="/docs/zh/embeddings.md">使用 PyMilvus 嵌入数据的</a>指导。</li>
 <li>添加了<a href="/docs/zh/milvus-cdc-overview.md">Milvus CDC</a> 的说明。</li>
 </ul>

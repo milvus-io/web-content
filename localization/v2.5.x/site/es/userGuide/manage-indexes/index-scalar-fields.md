@@ -128,7 +128,7 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Para utilizar la indexación personalizada, especifique un tipo de índice concreto mediante el parámetro <strong>index_type</strong> en el archivo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
+<p>Para utilizar la indexación personalizada, especifique un tipo de índice concreto utilizando el parámetro <strong>index_type</strong> en el archivo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>Para utilizar la indexación personalizada, especifique un tipo de índice concreto utilizando el parámetro <strong>indexType</strong> en <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
@@ -193,6 +193,7 @@ client.createIndex(createIndexReq);
 <p>Para la indexación personalizada, los valores válidos son:</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (Recomendado) Un índice invertido consiste en un diccionario de términos que contiene todas las palabras tokenizadas ordenadas alfabéticamente. Para más detalles, consulte <a href="/docs/es/scalar_index.md">Índice escalar</a>.</p></li>
+<li><p><strong>BITMAP</strong>: Tipo de índice que almacena un mapa de bits de todos los valores únicos de un campo. Para más información, consulte <a href="/docs/es/bitmap.md">BITMAP</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Ordena los campos escalares utilizando el algoritmo de ordenación estándar de la biblioteca de plantillas. Sólo admite campos numéricos (por ejemplo, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Una estructura de datos en árbol para búsquedas y recuperaciones rápidas de prefijos. Admite campos VARCHAR.</p></li>
 </ul></li>

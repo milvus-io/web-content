@@ -2,7 +2,7 @@
 id: index-scalar-fields.md
 order: 2
 summary: >-
-  Dieser Leitfaden führt Sie durch das Erstellen und Konfigurieren von skalaren
+  Dieser Leitfaden führt Sie durch die Erstellung und Konfiguration von skalaren
   Indizes für Felder wie Ganzzahlen, Strings usw.
 title: Skalare Felder indizieren
 ---
@@ -193,7 +193,8 @@ client.createIndex(createIndexReq);
 <p>Für die benutzerdefinierte Indizierung sind folgende Werte gültig:</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (empfohlen) Ein invertierter Index besteht aus einem Begriffswörterbuch, das alle tokenisierten Wörter in alphabetischer Reihenfolge enthält. Einzelheiten finden Sie unter <a href="/docs/de/scalar_index.md">Skalarer Index</a>.</p></li>
-<li><p><strong>STL_SORT</strong>: Sortiert skalare Felder mit dem Standard-Sortieralgorithmus der Vorlagenbibliothek. Unterstützt nur numerische Felder (z. B. INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
+<li><p><strong>BITMAP</strong>: Ein Indextyp, der eine Bitmap aller eindeutigen Werte in einem Feld speichert. Einzelheiten finden Sie unter <a href="/docs/de/bitmap.md">BITMAP</a>.</p></li>
+<li><p><strong>STL_SORT</strong>: Sortiert skalare Felder mit dem Standard Template Library Sortieralgorithmus. Unterstützt nur numerische Felder (z. B. INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Eine Baumdatenstruktur für schnelle Präfix-Suchen und -Abrufe. Unterstützt VARCHAR-Felder.</p></li>
 </ul></li>
 <li><p><strong>index_name</strong><em>(Zeichenkette</em>)</p>

@@ -66,6 +66,7 @@ title: Справочник команд Milvus_CLI
     </button></h2><p>Подключение к Milvus.</p>
 <p><h3 id="connect">Синтаксис</h3></p>
 <pre><code translate="no" class="language-shell">connect [-uri (text)] [-t (text)]
+connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="connect">Опции</h3></p>
 <table>
@@ -75,7 +76,7 @@ title: Справочник команд Milvus_CLI
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(Необязательно) Имя uri. По умолчанию - &quot;http://127.0.0.1:19530&quot;.</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(Необязательно) apikey облака zilliz или <code translate="no">username:password</code>. По умолчанию - None.</td></tr>
-<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(Необязательно) - Установка режима TLS: 0 (Без шифрования), 1 (Одностороннее шифрование), 2 (Двустороннее шифрование пока не поддерживается). По умолчанию 0</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(Необязательно) Установка режима TLS: 0 (Без шифрования), 1 (Одностороннее шифрование), 2 (Двустороннее шифрование пока не поддерживается). По умолчанию 0</td></tr>
 <tr><td style="text-align:left">-cert</td><td style="text-align:left">-cert</td><td style="text-align:left">(Необязательно) Путь к файлу сертификата клиента. Работа с односторонним шифрованием</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Отображает справку по использованию команды.</td></tr>
 </tbody>
@@ -223,7 +224,7 @@ title: Справочник команд Milvus_CLI
 </thead>
 <tbody>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-пароль</td><td style="text-align:left">Пароль пользователя в формате milvus. По умолчанию используется значение &quot;None&quot;.</td></tr>
-<tr><td style="text-align:left">-u</td><td style="text-align:left">-имя пользователя</td><td style="text-align:left">Имя пользователя в milvus. По умолчанию - &quot;Нет&quot;.</td></tr>
+<tr><td style="text-align:left">-u</td><td style="text-align:left">-username</td><td style="text-align:left">Имя пользователя в milvus. По умолчанию - &quot;Нет&quot;.</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Отображает справку по использованию команды.</td></tr>
 </tbody>
 </table>
@@ -1493,7 +1494,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
 </thead>
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-name</td><td style="text-align:left">Имя коллекции, к которой принадлежат сущности.</td></tr>
-<tr><td style="text-align:left">-p</td><td style="text-align:left">-partition</td><td style="text-align:left">(Необязательно/многократно) Имя раздела загрузки.</td></tr>
+<tr><td style="text-align:left">-p</td><td style="text-align:left">-partition</td><td style="text-align:left">(Необязательно/множественное) Имя раздела загрузки.</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Отображает справку по использованию команды.</td></tr>
 </tbody>
 </table>

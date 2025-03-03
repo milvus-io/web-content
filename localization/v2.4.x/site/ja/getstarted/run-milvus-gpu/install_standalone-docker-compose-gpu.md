@@ -59,10 +59,10 @@ title: Docker Composeを使用したGPUサポート付きMilvusの実行
         ></path>
       </svg>
     </button></h2><p>Docker Composeを使用してGPUをサポートしたMilvusをインストールするには、以下の手順に従ってください。</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.YAMLファイルのダウンロードと設定</h3><p>ダウンロード <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.22/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>をダウンロードし、docker-compose.ymlとして手動または以下のコマンドで保存します。</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.22/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.YAMLファイルのダウンロードと設定</h3><p>ダウンロード <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.23/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>をダウンロードし、docker-compose.ymlとして手動または以下のコマンドで保存します。</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.23/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
-<p>YAMLファイル内のスタンドアロンサービスの環境変数に以下のように変更を加える必要があります：</p>
+<p>YAMLファイル内のスタンドアロンサービスの環境変数に、以下のように変更を加える必要があります：</p>
 <ul>
 <li>特定の GPU デバイスを Milvus に割り当てるには、<code translate="no">standalone</code> サービスの定義で<code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> フィールドを探し、その値を目的の GPU の ID に置き換えます。NVIDIA GPUディスプレイドライバに含まれる<code translate="no">nvidia-smi</code> ツールを使用して、GPUデバイスのIDを決定することができます。Milvusは複数のGPUデバイスをサポートしています。</li>
 </ul>
@@ -106,7 +106,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <ul>
 <li><strong>milvus-standalone</strong>、<strong>milvus-minio</strong>、<strong>milvus-etcdという</strong>名前のコンテナが立ち上がっています。<ul>
 <li><strong>milvus-etcd</strong>コンテナはホストにポートを公開せず、カレントフォルダ内の<strong>volumes/etcdに</strong>データをマッピングする。</li>
-<li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してポート<strong>9090</strong>および<strong>9091</strong>をローカルに提供し、そのデータを現在のフォルダ内の<strong>volumes/minio</strong>にマップする。</li>
+<li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してポート<strong>9090</strong>および<strong>9091</strong>をローカルに提供し、そのデータをカレントフォルダ内の<strong>volumes/minio</strong>にマップする。</li>
 <li><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルにポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマップする。</li>
 </ul></li>
 </ul>
@@ -119,7 +119,7 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>docker-compose.ymlでMilvusに複数のGPUデバイスを割り当てている場合は、どのGPUデバイスを可視化するか、または使用可能にするかを指定できます。</p>
+<p>docker-compose.ymlでMilvusに複数のGPUデバイスを割り当てている場合は、どのGPUデバイスを可視または使用可能にするかを指定できます。</p>
 <p>GPU デバイス<code translate="no">0</code> を Milvus から見えるようにします：</p>
 <pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0 ./milvus run standalone
 <button class="copy-code-btn"></button></code></pre>

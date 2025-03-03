@@ -66,6 +66,7 @@ title: Referência do Comando Milvus_CLI
     </button></h2><p>Liga-se ao Milvus.</p>
 <p><h3 id="connect">Sintaxe</h3></p>
 <pre><code translate="no" class="language-shell">connect [-uri (text)] [-t (text)]
+connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="connect">Opções</h3></p>
 <table>
@@ -75,7 +76,7 @@ title: Referência do Comando Milvus_CLI
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(Opcional) O nome do uri. A predefinição é &quot;http://127.0.0.1:19530&quot;.</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(Opcional) O apikey do zilliz cloud ou <code translate="no">username:password</code>. A predefinição é Nenhum.</td></tr>
-<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(Opcional) - Define o modo TLS: 0 (Sem encriptação), 1 (Encriptação unidirecional), 2 (Encriptação bidirecional ainda não suportada). A predefinição é 0</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(Opcional) Define o modo TLS: 0 (Sem encriptação), 1 (Encriptação unidirecional), 2 (Encriptação bidirecional ainda não suportada). A predefinição é 0</td></tr>
 <tr><td style="text-align:left">-cert</td><td style="text-align:left">-cert</td><td style="text-align:left">(Opcional) Caminho para o ficheiro de certificado do cliente. Trabalhar com encriptação unidirecional</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para utilizar o comando.</td></tr>
 </tbody>
@@ -142,7 +143,7 @@ title: Referência do Comando Milvus_CLI
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para utilizar o comando.</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">Exemplos</h3><h4 id="Example-1" class="common-anchor-header">Exemplo 1</h4><p>O exemplo seguinte utiliza a base de dados <code translate="no">testdb</code> em milvus.</p>
+<h3 id="Examples" class="common-anchor-header">Exemplos</h3><h4 id="Example-1" class="common-anchor-header">Exemplo 1</h4><p>O exemplo a seguir usa o banco de dados <code translate="no">testdb</code> em milvus.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; use database -db testdb
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="list-Databases" class="common-anchor-header">listar bases de dados<button data-href="#list-Databases" class="anchor-icon" translate="no">
@@ -1177,7 +1178,7 @@ Milvus timestamp:           428849214449254403
 </thead>
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-nome da coleção</td><td style="text-align:left">O nome da coleção.</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para a utilização do comando.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para utilizar o comando.</td></tr>
 </tbody>
 </table>
 <h2 id="load" class="common-anchor-header">load<button data-href="#load" class="anchor-icon" translate="no">
@@ -1434,7 +1435,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
 <tr><th style="text-align:left">Opção</th><th style="text-align:left">Nome completo</th><th style="text-align:left">Descrição</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta a ajuda para utilizar o comando.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Apresenta ajuda para utilizar o comando.</td></tr>
 </tbody>
 </table>
 <h2 id="show-indexprogress" class="common-anchor-header">show index_progress<button data-href="#show-indexprogress" class="anchor-icon" translate="no">

@@ -66,6 +66,7 @@ title: مرجع أوامر Milvus_CLI
     </button></h2><p>يتصل بميلفوس.</p>
 <p><h3 id="connect">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">connect [-uri (text)] [-t (text)]
+connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="connect">خيارات</h3></p>
 <table>
@@ -75,7 +76,7 @@ title: مرجع أوامر Milvus_CLI
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(اختياري) اسم uri. الافتراضي هو &quot;http://127.0.0.1:19530&quot;.</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-الرمز المميز</td><td style="text-align:left">(اختياري) الرمز المميز ل zilliz cloud apikey أو <code translate="no">username:password</code>. الافتراضي هو لا شيء.</td></tr>
-<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(اختياري) - تعيين وضع TLS: 0 (لا يوجد تشفير)، 1 (تشفير أحادي الاتجاه)، 2 (التشفير ثنائي الاتجاه غير مدعوم بعد). الافتراضي هو 0</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(اختياري) تعيين وضع TLS: 0 (لا يوجد تشفير)، 1 (تشفير أحادي الاتجاه)، 2 (التشفير ثنائي الاتجاه غير مدعوم بعد). الافتراضي هو 0</td></tr>
 <tr><td style="text-align:left">-شهادة</td><td style="text-align:left">-Cert</td><td style="text-align:left">(اختياري) المسار إلى ملف شهادة العميل. العمل مع التشفير أحادي الاتجاه</td></tr>
 <tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">عرض التعليمات الخاصة باستخدام الأمر.</td></tr>
 </tbody>
@@ -469,7 +470,7 @@ Timeout []:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>حذف الدور في ميلفوس</p>
+    </button></h2><p>حذف دور في ميلفوس</p>
 <p><h3 id="delete-role">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> role -<span class="hljs-title function_">r</span> (text)
 <button class="copy-code-btn"></button></code></pre>
@@ -510,7 +511,7 @@ Timeout []:
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم المستعار</th><th style="text-align:left">الوصف</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-a</td><td style="text-align:left">-الاسم المستعار-الاسم المستعار</td><td style="text-align:left">الاسم المستعار.</td></tr>
+<tr><td style="text-align:left">-a</td><td style="text-align:left">-الاسم المستعار</td><td style="text-align:left">الاسم المستعار.</td></tr>
 <tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
 <tr><td style="text-align:left"></td></tr>
 </tbody>
@@ -701,7 +702,7 @@ Timeout []:
       </svg>
     </button></h2><p>تعيين امتياز لدور ما.</p>
 <p><h3 id="assign-privilege">بناء الجملة</h3></p>
-<p><h3 >خيارات</h3></p>
+<p><h3 >الخيارات</h3></p>
 <table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
@@ -1304,7 +1305,7 @@ Graceful time. Only used <span class="hljs-keyword">in</span> bounded consistenc
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-اسم المجموعة</td><td style="text-align:left">اسم المجموعة التي ينتمي إليها القسم.</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-قسم</td><td style="text-align:left">(اختياري/متعدد) اسم القسم.</td></tr>
-<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
 </tbody>
 </table>
 <h2 id="search" class="common-anchor-header">بحث<button data-href="#search" class="anchor-icon" translate="no">
@@ -1464,7 +1465,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-اسم المجموعة</td><td style="text-align:left">اسم المجموعة التي تنتمي إليها الكيانات.</td></tr>
 <tr><td style="text-align:left">-i</td><td style="text-align:left">-الفهرس</td><td style="text-align:left">(اختياري) اسم الفهرس.</td></tr>
-<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
 </tbody>
 </table>
 <h2 id="show-loadingprogress" class="common-anchor-header">إظهار تقدم التحميل<button data-href="#show-loadingprogress" class="anchor-icon" translate="no">

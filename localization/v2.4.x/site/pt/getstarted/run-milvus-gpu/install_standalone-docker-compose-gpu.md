@@ -59,8 +59,8 @@ title: Executar o Milvus com suporte a GPU usando o Docker Compose
         ></path>
       </svg>
     </button></h2><p>Para instalar o Milvus com suporte a GPU usando o Docker Compose, siga estas etapas.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descarregar e configurar o ficheiro YAML</h3><p>Faça o download <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.22/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salve-o como docker-compose.yml manualmente ou com o seguinte comando.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.22/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descarregar e configurar o ficheiro YAML</h3><p>Faça o download <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.23/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salve-o como docker-compose.yml manualmente ou com o seguinte comando.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.23/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>É necessário fazer algumas alterações nas variáveis de ambiente do serviço autónomo no ficheiro YAML, como se segue:</p>
 <ul>
@@ -120,7 +120,7 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
 <p>Se tiver atribuído vários dispositivos GPU ao Milvus em docker-compose.yml, pode especificar qual o dispositivo GPU que está visível ou disponível para utilização.</p>
-<p>Torne o dispositivo de GPU <code translate="no">0</code> visível para o Milvus:</p>
+<p>Tornar o dispositivo de GPU <code translate="no">0</code> visível para o Milvus:</p>
 <pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0 ./milvus run standalone
 <button class="copy-code-btn"></button></code></pre>
 <p>Tornar os dispositivos de GPU <code translate="no">0</code> e <code translate="no">1</code> visíveis para o Milvus:</p>

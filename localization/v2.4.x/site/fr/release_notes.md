@@ -19,6 +19,52 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2423" class="common-anchor-header">v2.4.23<button data-href="#v2423" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release Date: February 28, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.4.23</td><td>2.4.15</td><td>2.4.10</td><td>2.4.11</td></tr>
+</tbody>
+</table>
+<p>We’re excited to announce the release of Milvus 2.4.23, which introduces enhancements for multi-stage tasks and balancing operations, along with critical bug fixes to prevent deadlocks and duplicate index creation. We encourage you to upgrade or give it a try, and as always, your feedback is greatly appreciated to help us continuously improve Milvus!</p>
+<h3 id="Critical-bug-fixes" class="common-anchor-header">Critical bug fixes</h3><ul>
+<li>Added a sub-task pool for multi-stage tasks to avoid deadlocks (<a href="https://github.com/milvus-io/milvus/pull/40093">#40093</a>)</li>
+<li>Fixed an issue where multiple identical indexes could be created by accident (<a href="https://github.com/milvus-io/milvus/pull/40202">#40202</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Added a trigger interval configuration for auto-balancing (<a href="https://github.com/milvus-io/milvus/pull/39925">#39925</a>)</li>
+<li>Added a management API to check QueryCoord balance status (<a href="https://github.com/milvus-io/milvus/pull/39924">#39924</a>)</li>
+<li>Optimized the result format of <code translate="no">GetQueryNodeDistribution</code> (<a href="https://github.com/milvus-io/milvus/pull/39927">#39927</a>)</li>
+<li>Accelerated object listing during binlog import (<a href="https://github.com/milvus-io/milvus/pull/40049">#40049</a>)</li>
+<li>Added <code translate="no">GetVector</code> latency metrics and refined request limit error messages (<a href="https://github.com/milvus-io/milvus/pull/40086">#40086</a>)</li>
+<li>Supported creating a collection with a description (<a href="https://github.com/milvus-io/milvus/pull/40029">#40029</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Removed the hardcoded partition number in the RESTful handler (<a href="https://github.com/milvus-io/milvus/pull/40213">#40213</a>)</li>
+<li>Fixed an issue where <code translate="no">AlterCollection</code> was unable to modify <code translate="no">ConsistencyLevel</code> (<a href="https://github.com/milvus-io/milvus/pull/39906">#39906</a>)</li>
+<li>Fixed incorrect metrics where the number of executing compaction tasks was negative (<a href="https://github.com/milvus-io/milvus/pull/39956">#39956</a>)</li>
+<li>Ensured sub-contexts are canceled when an HTTP request times out (<a href="https://github.com/milvus-io/milvus/pull/40170">#40170</a>)</li>
+<li>Fixed an issue allowing the creation of collections with duplicate names (<a href="https://github.com/milvus-io/milvus/pull/40148">#40148</a>)</li>
+<li>Resolved a problem where a segment could remain in the sealed state and not transition to flushing (<a href="https://github.com/milvus-io/milvus/pull/39998">#39998</a>)</li>
+<li>Enhanced the <code translate="no">isBalanced</code> function to correctly count quote pairs (<a href="https://github.com/milvus-io/milvus/pull/40005">#40005</a>)</li>
+</ul>
 <h2 id="v2422" class="common-anchor-header">v2.4.22<button data-href="#v2422" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

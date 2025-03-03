@@ -24,7 +24,7 @@ title: Обновление автономного Milvus с помощью Dock
         ></path>
       </svg>
     </button></h1><p>В этой теме описывается, как обновить Milvus с помощью Docker Compose.</p>
-<p>В обычных случаях вы можете <a href="#Upgrade-Milvus-by-changing-its-image">обновить Milvus, изменив его образ</a>. Однако перед обновлением с версии 2.1.x до версии 2.4.22 необходимо <a href="#Migrate-the-metadata">перенести метаданные</a>.</p>
+<p>В обычных случаях вы можете <a href="#Upgrade-Milvus-by-changing-its-image">обновить Milvus, изменив его образ</a>. Однако перед обновлением с версии 2.1.x до версии 2.4.23 необходимо <a href="#Migrate-the-metadata">перенести метаданные</a>.</p>
 <div class="alter note">
 <p>По соображениям безопасности Milvus обновляет свой MinIO до RELEASE.2023-03-20T20-16-18Z с выходом v2.2.5. Перед любым обновлением с предыдущих выпусков Milvus Standalone, установленных с помощью Docker Compose, необходимо создать развертывание MinIO с одним узлом и одним диском и перенести существующие настройки и содержимое MinIO в новое развертывание. Подробности см. в <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">этом руководстве</a>.</p>
 </div>
@@ -49,7 +49,7 @@ title: Обновление автономного Milvus с помощью Dock
 <pre><code translate="no" class="language-yaml">...
 standalone:
   container_name: milvus-standalone
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Для выполнения обновления выполните следующие команды.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -83,7 +83,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.22</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.23</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

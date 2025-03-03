@@ -66,6 +66,7 @@ title: Milvus_CLI 指令參考
     </button></h2><p>連接至 Milvus。</p>
 <p><h3 id="connect">語法</h3></p>
 <pre><code translate="no" class="language-shell">connect [-uri (text)] [-t (text)]
+connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="connect">選項</h3></p>
 <table>
@@ -74,8 +75,8 @@ title: Milvus_CLI 指令參考
 </thead>
 <tbody>
 <tr><td style="text-align:left">-資料來源</td><td style="text-align:left">-uri</td><td style="text-align:left">(可選）uri 名稱。預設為 &quot;http://127.0.0.1:19530&quot;。</td></tr>
-<tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(可選）zilliz 雲端 apikey 或<code translate="no">username:password</code> 。預設為無。</td></tr>
-<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(選用) - 設定 TLS 模式：0 (無加密)、1 (單向加密)、2 (尚未支援雙向加密)。預設為 0</td></tr>
+<tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(可選） zilliz 雲端 apikey 或<code translate="no">username:password</code> 。預設為無。</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(可選）設定 TLS 模式：0 (無加密)、1 (單向加密)、2 (尚未支援雙向加密)。預設為 0</td></tr>
 <tr><td style="text-align:left">-cert</td><td style="text-align:left">-cert</td><td style="text-align:left">(可選）用戶端證書檔的路徑。使用單向加密</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用指令的說明。</td></tr>
 </tbody>
@@ -540,7 +541,7 @@ Timeout []:
 <tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名稱</td><td style="text-align:left">要刪除的集合名稱。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-收藏集名稱</td><td style="text-align:left">要刪除的集合名稱。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用指令的說明。</td></tr>
 </tbody>
 </table>
@@ -634,7 +635,7 @@ Timeout []:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>刪除索引和相對應的索引檔案。</p>
+    </button></h2><p>刪除索引及相對應的索引檔案。</p>
 <div class="alert note">目前，一個資料集最多支援一個索引。</div>
 <p><h3 id="delete-index">語法</h3></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> index -<span class="hljs-title function_">c</span> (text) -<span class="hljs-title function_">in</span> (text)
@@ -970,7 +971,7 @@ Timeout []:
 </thead>
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名稱</td><td style="text-align:left">插入資料的集合名稱。</td></tr>
-<tr><td style="text-align:left">-p</td><td style="text-align:left">-分區</td><td style="text-align:left">(可選）資料要插入的分割區名稱。未傳入此分割區選項表示選擇「_default」分割區。</td></tr>
+<tr><td style="text-align:left">-p</td><td style="text-align:left">-分區</td><td style="text-align:left">(可選）資料要插入的分割區名稱。不傳送此分割區選項表示選擇「_default」分割區。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示命令使用說明。</td></tr>
 </tbody>
 </table>

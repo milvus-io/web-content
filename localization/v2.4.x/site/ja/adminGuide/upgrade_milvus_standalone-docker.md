@@ -24,9 +24,9 @@ title: Docker Composeを使用したMilvusスタンドアロンのアップグ�
         ></path>
       </svg>
     </button></h1><p>このトピックでは、Docker Composeを使用してMilvusをアップグレードする方法について説明します。</p>
-<p>通常の場合、<a href="#Upgrade-Milvus-by-changing-its-image">Milvusのイメージを変更することでアップグレードが</a>可能です。ただし、v2.1.xからv2.4.22へアップグレードする場合は、事前に<a href="#Migrate-the-metadata">メタデータを移行する</a>必要があります。</p>
+<p>通常の場合、<a href="#Upgrade-Milvus-by-changing-its-image">イメージを変更することでMilvusをアップグレードする</a>ことができます。ただし、v2.1.xからv2.4.23へアップグレードする場合は、事前に<a href="#Migrate-the-metadata">メタデータを移行する</a>必要があります。</p>
 <div class="alter note">
-<p>セキュリティ上の問題から、Milvusはv2.2.5のリリースと同時にMinIOをRELEASE.2023-03-20T20-16-18Zにアップグレードしています。Docker Composeを使用してインストールされた以前のMilvus Standaloneリリースからアップグレードする前に、Single-Node Single-Drive MinIOデプロイメントを作成し、既存のMinIO設定とコンテンツを新しいデプロイメントに移行する必要があります。詳細については、<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">このガイドを</a>参照してください。</p>
+<p>セキュリティ上の問題から、Milvusはv2.2.5のリリースと同時にMinIOをRELEASE.2023-03-20T20-16-18Zにアップグレードしています。Docker Composeを使用してインストールされた以前のMilvus Standaloneリリースからのアップグレードの前に、Single-Node Single-Drive MinIOデプロイメントを作成し、既存のMinIO設定とコンテンツを新しいデプロイメントに移行する必要があります。詳細については、<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">このガイドを</a>参照してください。</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">イメージを変更してMilvusをアップグレードする<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +49,7 @@ title: Docker Composeを使用したMilvusスタンドアロンのアップグ�
 <pre><code translate="no" class="language-yaml">...
 standalone:
   container_name: milvus-standalone
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>以下のコマンドを実行してアップグレードを実行します。</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -83,7 +83,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.22</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.23</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

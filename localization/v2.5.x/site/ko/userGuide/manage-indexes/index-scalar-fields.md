@@ -191,7 +191,8 @@ client.createIndex(createIndexReq);
 <p>사용자 지정 인덱싱의 경우 유효한 값은 다음과 같습니다:</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</p></li>
-<li><p><strong>STL_SORT</strong>: 표준 템플릿 라이브러리 정렬 알고리즘을 사용하여 스칼라 필드를 정렬합니다. 숫자 필드(예: INT8, INT16, INT32, INT64, FLOAT, DOUBLE)만 지원합니다.</p></li>
+<li><p><strong>비트맵</strong>: 필드에 있는 모든 고유 값의 비트맵을 저장하는 인덱스 유형입니다. 자세한 내용은 <a href="/docs/ko/bitmap.md">비트맵을</a> 참조하세요.</p></li>
+<li><p><strong>STL_SORT</strong>: 표준 템플릿 라이브러리 정렬 알고리즘을 사용하여 스칼라 필드를 정렬합니다. 숫자 필드만 지원합니다(예: INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>트라이</strong>: 빠른 접두사 검색 및 검색을 위한 트리 데이터 구조입니다. VARCHAR 필드를 지원합니다.</p></li>
 </ul></li>
 <li><p><strong>index_name</strong><em>(문자열</em>)</p>
@@ -242,7 +243,7 @@ client.createIndex(createIndexReq);
 </ul></li>
 </ul>
 </div>
-<h2 id="Verifying-the-result" class="common-anchor-header">결과 확인<button data-href="#Verifying-the-result" class="anchor-icon" translate="no">
+<h2 id="Verifying-the-result" class="common-anchor-header">결과 확인하기<button data-href="#Verifying-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

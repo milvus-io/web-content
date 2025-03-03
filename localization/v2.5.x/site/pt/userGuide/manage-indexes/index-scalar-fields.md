@@ -21,7 +21,7 @@ title: Índice de campos escalares
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>No Milvus, um índice escalar é usado para acelerar a metafiltragem por um valor de campo específico não vetorial, semelhante a um índice de base de dados tradicional. Este guia irá guiá-lo na criação e configuração de índices escalares para campos como inteiros, strings, etc.</p>
+    </button></h1><p>No Milvus, um índice escalar é usado para acelerar a metafiltragem por um valor de campo específico não-vetorial, semelhante a um índice de base de dados tradicional. Este guia irá guiá-lo na criação e configuração de índices escalares para campos como inteiros, strings, etc.</p>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">Tipos de indexação escalar<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -193,6 +193,7 @@ client.createIndex(createIndexReq);
 <p>Para indexação personalizada, os valores válidos são:</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (Recomendado) Um índice invertido consiste num dicionário de termos que contém todas as palavras tokenizadas ordenadas alfabeticamente. Para obter detalhes, consulte <a href="/docs/pt/scalar_index.md">Índice escalar</a>.</p></li>
+<li><p><strong>BITMAP</strong>: Um tipo de índice que armazena um mapa de bits de todos os valores exclusivos em um campo. Para obter detalhes, consulte <a href="/docs/pt/bitmap.md">BITMAP</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Classifica campos escalares usando o algoritmo de classificação da biblioteca de modelos padrão. Suporta apenas campos numéricos (por exemplo, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Uma estrutura de dados em árvore para pesquisas e recuperações rápidas de prefixos. Suporta campos VARCHAR.</p></li>
 </ul></li>
@@ -263,7 +264,7 @@ client.createIndex(createIndexReq);
 <p>Utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> para verificar a criação de índices escalares:</p>
 </div>
 <div class="language-java">
-<p>Utilize o método <code translate="no">listIndexes()</code> para verificar a criação de índices escalares:</p>
+<p>Utilizar o método <code translate="no">listIndexes()</code> para verificar a criação de índices escalares:</p>
 </div>
 <div class="language-javascript">
 <p>Utilize o método <code translate="no">listIndexes()</code> para verificar a criação de índices escalares:</p>

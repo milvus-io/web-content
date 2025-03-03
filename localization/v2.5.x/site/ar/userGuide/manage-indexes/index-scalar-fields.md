@@ -128,7 +128,7 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>لاستخدام الفهرسة المخصصة، حدد نوع فهرسة معين باستخدام معلمة <strong>index_type</strong> في <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
+<p>لاستخدام الفهرسة المخصصة، حدد نوع فهرسة معين باستخدام معلمة <strong>Index_type</strong> في <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>لاستخدام الفهرسة المخصصة، حدد نوع فهرسة معين باستخدام معلمة <strong>indexType</strong> في . <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
@@ -193,7 +193,8 @@ client.createIndex(createIndexReq);
 <p>للفهرسة المخصصة، القيم الصالحة هي:</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المقلوب من قاموس مصطلحات يحتوي على جميع الكلمات الرمزية مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/scalar_index.md">الفهرس المقلوب</a>.</p></li>
-<li><p><strong>STL_SORT</strong>: يفرز الحقول العددية باستخدام خوارزمية فرز مكتبة القالب القياسية. يدعم فقط الحقول الرقمية (مثل INT8 و INT16 و INT32 و INT64 و FLOAT و DOUBLE).</p></li>
+<li><p><strong>BITMAP</strong>: نوع فهرس يخزن صورة نقطية لجميع القيم الفريدة في الحقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/bitmap.md">BITMAP</a>.</p></li>
+<li><p><strong>STL_SORT</strong>: فرز الحقول العددية باستخدام خوارزمية فرز مكتبة القالب القياسية. يدعم فقط الحقول الرقمية (مثل INT8 و INT16 و INT32 و INT64 و FLOAT و DOUBLE).</p></li>
 <li><p><strong>تري</strong>: بنية بيانات شجرية لعمليات البحث والاسترجاع السريع للبادئة. يدعم حقول VARCHAR.</p></li>
 </ul></li>
 <li><p><strong>اسم_الفهرس</strong><em>(سلسلة</em>)</p>

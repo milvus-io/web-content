@@ -190,7 +190,8 @@ client.createIndex(createIndexReq);
 <p>要创建的标量索引的类型。对于隐式索引，请将其留空或省略此参数。</p>
 <p>对于自定义索引，有效值为</p>
 <ul>
-<li><p><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记词。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</p></li>
+<li><p><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记化单词。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</p></li>
+<li><p><strong>BITMAP</strong>：<strong>位图</strong>索引：一种存储字段中所有唯一值的位图的索引类型。有关详情，请参阅<a href="/docs/zh/bitmap.md">BITMAP</a>。</p></li>
 <li><p><strong>STL_SORT</strong>：使用标准模板库排序算法对标量字段进行排序。仅支持数值字段（如 INT8、INT16、INT32、INT64、FLOAT、DOUBLE）。</p></li>
 <li><p><strong>Trie</strong>用于快速前缀搜索和检索的树形数据结构。支持 VARCHAR 字段。</p></li>
 </ul></li>

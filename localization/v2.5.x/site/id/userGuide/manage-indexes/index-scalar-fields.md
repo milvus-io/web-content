@@ -193,6 +193,7 @@ client.createIndex(createIndexReq);
 <p>Untuk pengindeksan khusus, nilai yang valid adalah:</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (Disarankan) Indeks terbalik terdiri dari kamus istilah yang berisi semua kata bertanda yang diurutkan menurut abjad. Untuk detailnya, lihat <a href="/docs/id/scalar_index.md">Indeks Skalar</a>.</p></li>
+<li><p><strong>BITMAP</strong>: Jenis indeks yang menyimpan bitmap dari semua nilai unik dalam suatu bidang. Untuk detailnya, lihat <a href="/docs/id/bitmap.md">BITMAP</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Mengurutkan bidang skalar menggunakan algoritme pengurutan pustaka templat standar. Hanya mendukung bidang numerik (misalnya, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Struktur data pohon untuk pencarian dan pengambilan awalan yang cepat. Mendukung bidang VARCHAR.</p></li>
 </ul></li>

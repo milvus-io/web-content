@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Вы можете выбрать путь обновления для своего Milvus следующим образом:</p>
-<div style="display: none;">- [Провести скользящее обновление](#conduct-a-rolling-upgrade) с Milvus v2.2.3 и более поздних выпусков до v2.4.22.</div>
+<div style="display: none;">- [Провести скользящее обновление](#conduct-a-rolling-upgrade) с Milvus v2.2.3 и более поздних выпусков до v2.4.23.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Обновите Milvus с помощью Helm</a> для обновления с минорного выпуска до v2.2.3 до v2.4.22.</p></li>
-<li><p><a href="#Migrate-the-metadata">Перенесите метаданные</a> перед обновлением с Milvus v2.1.x до v2.4.22.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Обновите Milvus с помощью Helm</a> для обновления с минорного выпуска до v2.2.3 до v2.4.23.</p></li>
+<li><p><a href="#Migrate-the-metadata">Перенесите метаданные</a> перед обновлением с Milvus v2.1.x до v2.4.23.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Проведение скользящего обновления<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Операция</td><td><code translate="no">update</code></td><td>Ложь</td></tr>
 </tbody>
 </table>
-<p>После того как вы убедились, что все развертывания в экземпляре Milvus находятся в нормальном состоянии. Вы можете выполнить следующую команду для обновления экземпляра Milvus до версии 2.4.22.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.22</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.22&#x27;</span>
+<p>После того как вы убедились, что все развертывания в экземпляре Milvus находятся в нормальном состоянии. Вы можете выполнить следующую команду для обновления экземпляра Milvus до версии 2.4.23.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.23</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.23&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -274,7 +274,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <li><p>Установите <code translate="no">-d true</code>, если вы хотите автоматически удалить миграционную капсулу после завершения миграции.</p>
 <pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -w milvusdb/milvus:v2.2.0 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Откатитесь и выполните миграцию снова, если миграция не удалась.</p>
+<li><p>Откатитесь и выполните миграцию заново, если миграция не удалась.</p>
 <pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -o rollback -w milvusdb/milvus:v2.1.4
 ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -o migrate -w milvusdb/milvus:v2.2.0
 <button class="copy-code-btn"></button></code></pre></li>

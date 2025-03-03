@@ -66,6 +66,7 @@ title: Referencia de comandos Milvus_CLI
     </button></h2><p>Conecta con Milvus.</p>
 <p><h3 id="connect">Sintaxis</h3></p>
 <pre><code translate="no" class="language-shell">connect [-uri (text)] [-t (text)]
+connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="connect">Opciones</h3></p>
 <table>
@@ -75,7 +76,7 @@ title: Referencia de comandos Milvus_CLI
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(Opcional) El nombre uri. Por defecto es &quot;http://127.0.0.1:19530&quot;.</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(Opcional) El apikey de la nube zilliz o <code translate="no">username:password</code>. El valor predeterminado es Ninguno.</td></tr>
-<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(Opcional) - Establece el modo TLS: 0 (Sin encriptación), 1 (Encriptación unidireccional), 2 (Encriptación bidireccional no soportada aún). Por defecto es 0</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(Opcional) Establece el modo TLS: 0 (Sin encriptación), 1 (Encriptación unidireccional), 2 (Encriptación bidireccional no soportada aún). Por defecto es 0</td></tr>
 <tr><td style="text-align:left">-cert</td><td style="text-align:left">-cert</td><td style="text-align:left">(Opcional) Ruta al archivo del certificado del cliente. Trabaja con cifrado unidireccional</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Muestra la ayuda para utilizar el comando.</td></tr>
 </tbody>

@@ -191,7 +191,8 @@ client.createIndex(createIndexReq);
 <p>カスタム・インデックスの場合、有効な値は以下のとおりです：</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (推奨) 転置インデックスは、すべてのトークン化された単語をアルファベット順に並べた用語辞書で構成されます。詳細については、「<a href="/docs/ja/scalar_index.md">スカラー・インデックス</a>」を参照してください。</p></li>
-<li><p><strong>STL_SORT</strong>：標準テンプレート・ライブラリのソート・アルゴリズムを使用して、スカラー・フィールドをソートします。数値フィールド（INT8、INT16、INT32、INT64、FLOAT、DOUBLEなど）のみをサポート。</p></li>
+<li><p><strong>BITMAP</strong>：フィールド内のすべての一意な値のビットマップを格納するインデックス・タイプ。詳細は<a href="/docs/ja/bitmap.md">BITMAPを</a>参照。</p></li>
+<li><p><strong>STL_SORT</strong>：標準テンプレート・ライブラリのソート・アルゴリズムを用いてスカラー・フィールドをソートする。数値フィールド（INT8、INT16、INT32、INT64、FLOAT、DOUBLEなど）のみをサポートします。</p></li>
 <li><p><strong>トライ</strong>：高速なプレフィックス検索と取得のためのツリーデータ構造。VARCHAR フィールドをサポート。</p></li>
 </ul></li>
 <li><p><strong>index_name</strong><em>(string</em>)</p>

@@ -59,8 +59,8 @@ title: Menjalankan Milvus dengan Dukungan GPU Menggunakan Docker Compose
         ></path>
       </svg>
     </button></h2><p>Untuk menginstall Milvus dengan dukungan GPU menggunakan Docker Compose, ikuti langkah-langkah berikut.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Unduh dan konfigurasikan berkas YAML</h3><p>Unduh <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.22/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> dan simpan sebagai docker-compose.yml secara manual, atau dengan perintah berikut.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.22/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Unduh dan konfigurasikan berkas YAML</h3><p>Unduh <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.23/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> dan simpan sebagai docker-compose.yml secara manual, atau dengan perintah berikut.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.23/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda perlu membuat beberapa perubahan pada variabel lingkungan dari layanan mandiri dalam berkas YAML sebagai berikut:</p>
 <ul>

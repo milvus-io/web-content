@@ -20,7 +20,7 @@ title: ترقية مجموعة Milvus العنقودية باستخدام Docker
         ></path>
       </svg>
     </button></h1><p>يصف هذا الموضوع كيفية ترقية Milvus الخاص بك باستخدام Docker Compose.</p>
-<p>في الحالات العادية، يمكنك ترقية <a href="#Upgrade-Milvus-by-changing-its-image">Milvus عن طريق تغيير صورته</a>. ومع ذلك، تحتاج إلى <a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل أي ترقية من الإصدار 2.1.x إلى الإصدار 2.4.22.</p>
+<p>في الحالات العادية، يمكنك ترقية <a href="#Upgrade-Milvus-by-changing-its-image">Milvus عن طريق تغيير صورته</a>. ومع ذلك، تحتاج إلى <a href="#Migrate-the-metadata">ترحيل البيانات الوصفية</a> قبل أي ترقية من الإصدار 2.1.x إلى الإصدار 2.4.23.</p>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">ترقية Milvus عن طريق تغيير صورته<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,35 +43,35 @@ title: ترقية مجموعة Milvus العنقودية باستخدام Docker
 <pre><code translate="no" class="language-yaml">...
 rootcoord:
   container_name: milvus-rootcoord
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 ...
 proxy:
   container_name: milvus-proxy
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 ...
 querycoord:
   container_name: milvus-querycoord
-  image: milvusdb/milvus:v2.4.22  
+  image: milvusdb/milvus:v2.4.23  
 ...
 querynode:
   container_name: milvus-querynode
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 ...
 indexcoord:
   container_name: milvus-indexcoord
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 ...
 indexnode:
   container_name: milvus-indexnode
-  image: milvusdb/milvus:v2.4.22 
+  image: milvusdb/milvus:v2.4.23 
 ...
 datacoord:
   container_name: milvus-datacoord
-  image: milvusdb/milvus:v2.4.22   
+  image: milvusdb/milvus:v2.4.23   
 ...
 datanode:
   container_name: milvus-datanode
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>قم بتشغيل الأوامر التالية لتنفيذ الترقية.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -105,7 +105,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.22</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.23</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

@@ -18,7 +18,7 @@ title: Milvus_CLI コマンドリファレンス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusコマンドラインインタフェース(CLI)はデータベース接続、データ操作、データのインポート/エクスポートをサポートするコマンドラインツールです。</p>
+    </button></h1><p>Milvusコマンドラインインタフェース(CLI)は、データベース接続、データ操作、データのインポート/エクスポートをサポートするコマンドラインツールです。</p>
 <p>このトピックでは、サポートされているすべてのコマンドと対応するオプションを紹介します。また、参考のためにいくつかの例も含まれています。</p>
 <h2 id="clear" class="common-anchor-header">クリア<button data-href="#clear" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,6 +66,7 @@ title: Milvus_CLI コマンドリファレンス
     </button></h2><p>Milvusに接続する。</p>
 <p><h3 id="connect">構文</h3></p>
 <pre><code translate="no" class="language-shell">connect [-uri (text)] [-t (text)]
+connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="connect">オプション</h3></p>
 <table>
@@ -75,7 +76,7 @@ title: Milvus_CLI コマンドリファレンス
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(オプション) uri名。デフォルトは &quot;http://127.0.0.1:19530&quot;。</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-トークン</td><td style="text-align:left">(オプション) zillizクラウドのapikeyまたは<code translate="no">username:password</code> 。 デフォルトは「None」です。</td></tr>
-<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(オプション) - TLS モードを設定します：0 (暗号化なし)、1 (一方向暗号化)、2 (双方向暗号化は未サポート)。デフォルトは 0。</td></tr>
+<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(オプション) TLSモードを設定します：0 (暗号化なし)、1 (一方向暗号化)、2 (双方向暗号化は未サポート)。デフォルトは0。</td></tr>
 <tr><td style="text-align:left">-cert</td><td style="text-align:left">-cert</td><td style="text-align:left">(オプション) クライアント証明書ファイルへのパス。一方向暗号化で動作</td></tr>
 <tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
 </tbody>
@@ -83,7 +84,7 @@ title: Milvus_CLI コマンドリファレンス
 <p><h3 id="connect">例</h3></p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; connect -uri <span class="hljs-attr">http</span>:<span class="hljs-comment">//127.0.0.1:19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="create-Database" class="common-anchor-header">データベースの作成<button data-href="#create-Database" class="anchor-icon" translate="no">
+<h2 id="create-Database" class="common-anchor-header">データベース作成<button data-href="#create-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -258,7 +259,7 @@ title: Milvus_CLI コマンドリファレンス
 <tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例1</h4><p>次の例では、milvusに<code translate="no">role1</code> というロールを作成します。</p>
+<h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例1</h4><p>次の例では、milvusに<code translate="no">role1</code> 。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create role -r role1
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-alias" class="common-anchor-header">エイリアスの作成<button data-href="#create-alias" class="anchor-icon" translate="no">
@@ -970,7 +971,7 @@ Timeout []:
 </thead>
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-コレクション名</td><td style="text-align:left">データを挿入するコレクションの名前。</td></tr>
-<tr><td style="text-align:left">-p</td><td style="text-align:left">-パーティション</td><td style="text-align:left">(オプション）データが挿入されるパーティション名。このパーティション・オプションを渡さないと、"_default" パーティションを選択することになります。</td></tr>
+<tr><td style="text-align:left">-p</td><td style="text-align:left">-パーティション</td><td style="text-align:left">(オプション）データを挿入するパーティション名。このパーティション・オプションを渡さないと、"_default" パーティションを選択することになります。</td></tr>
 <tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示する。</td></tr>
 </tbody>
 </table>
@@ -994,7 +995,7 @@ Milvus timestamp:           <span class="hljs-number">428849214449254403</span>
 --------------------------  ------------------
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="import">例 2</h3>
-以下の例では、リモートの CSV ファイルをインポートします。</p>
+次の例は、リモートの CSV ファイルをインポートします。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; import -c car <span class="hljs-string">&#x27;https://raw.githubusercontent.com/milvus-
 io/milvus_cli/main/examples/import_csv/vectors.csv&#x27;</span>
 

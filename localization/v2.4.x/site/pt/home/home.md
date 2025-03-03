@@ -13,7 +13,7 @@ Aqui aprenderá o que é o Milvus e como instalar, utilizar e implementar o Milv
     <p class="promotion-desc">Experimente o Zilliz Cloud gratuitamente! A forma mais fácil de experimentar Milvus!</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Cloud Zilliz Cloud China</a></div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup">Zilliz</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">Cloud Zilliz Cloud China</a></div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">Começar a utilizar<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +45,7 @@ Aqui aprenderá o que é o Milvus e como instalar, utilizar e implementar o Milv
   
    <a href="/bootcamp"> <img translate="no" src="/docs/v2.4.x/assets/home_bootcamp.svg" alt="icon" />
    </a> <a href="/bootcamp"> <p class="link-btn">Bootcamp</p> </a><p>
-  Aprenda a criar aplicações de pesquisa de similaridade vetorial com o Milvus.  </p>
+  Aprenda a criar aplicações de pesquisa de semelhanças vectoriais com o Milvus.  </p>
 </div>
 </div>
 <h2 id="Recommended-articles" class="common-anchor-header">Artigos recomendados<button data-href="#Recommended-articles" class="anchor-icon" translate="no">

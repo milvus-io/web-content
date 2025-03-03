@@ -20,7 +20,7 @@ title: Aggiornamento del cluster Milvus con Docker Compose
         ></path>
       </svg>
     </button></h1><p>Questo argomento descrive come aggiornare Milvus utilizzando Docker Compose.</p>
-<p>In casi normali, è possibile <a href="#Upgrade-Milvus-by-changing-its-image">aggiornare Milvus cambiando la sua immagine</a>. Tuttavia, è necessario <a href="#Migrate-the-metadata">migrare i metadati</a> prima di qualsiasi aggiornamento dalla v2.1.x alla v2.4.22.</p>
+<p>In casi normali, è possibile <a href="#Upgrade-Milvus-by-changing-its-image">aggiornare Milvus cambiando la sua immagine</a>. Tuttavia, è necessario <a href="#Migrate-the-metadata">migrare i metadati</a> prima di qualsiasi aggiornamento dalla v2.1.x alla v2.4.23.</p>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Aggiornare Milvus cambiando l'immagine<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,35 +43,35 @@ title: Aggiornamento del cluster Milvus con Docker Compose
 <pre><code translate="no" class="language-yaml">...
 rootcoord:
   container_name: milvus-rootcoord
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 ...
 proxy:
   container_name: milvus-proxy
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 ...
 querycoord:
   container_name: milvus-querycoord
-  image: milvusdb/milvus:v2.4.22  
+  image: milvusdb/milvus:v2.4.23  
 ...
 querynode:
   container_name: milvus-querynode
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 ...
 indexcoord:
   container_name: milvus-indexcoord
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 ...
 indexnode:
   container_name: milvus-indexnode
-  image: milvusdb/milvus:v2.4.22 
+  image: milvusdb/milvus:v2.4.23 
 ...
 datacoord:
   container_name: milvus-datacoord
-  image: milvusdb/milvus:v2.4.22   
+  image: milvusdb/milvus:v2.4.23   
 ...
 datanode:
   container_name: milvus-datanode
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Eseguire i seguenti comandi per eseguire l'aggiornamento.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -105,7 +105,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.22</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.23</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd
@@ -148,7 +148,7 @@ docker compose up -d
 </ul></li>
 <li>Se siete pronti a distribuire il vostro cluster su cloud:<ul>
 <li>Imparare a <a href="/docs/it/eks.md">distribuire Milvus su Amazon EKS con Terraform</a></li>
-<li>Imparare a distribuire <a href="/docs/it/gcp.md">un cluster Milvus su GCP con Kubernetes</a></li>
+<li>Imparare a distribuire <a href="/docs/it/gcp.md">il cluster Milvus su GCP con Kubernetes</a></li>
 <li>Imparare a <a href="/docs/it/azure.md">distribuire Milvus su Microsoft Azure con Kubernetes</a></li>
 </ul></li>
 </ul>

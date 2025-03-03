@@ -20,7 +20,7 @@ title: Memutakhirkan Milvus Cluster dengan Docker Compose
         ></path>
       </svg>
     </button></h1><p>Topik ini menjelaskan cara memutakhirkan Milvus menggunakan Docker Compose.</p>
-<p>Dalam kasus normal, Anda dapat memutakhirkan <a href="#Upgrade-Milvus-by-changing-its-image">Milvus dengan mengubah citranya.</a> Namun, Anda perlu <a href="#Migrate-the-metadata">memigrasikan metadata</a> sebelum melakukan pemutakhiran apa pun dari v2.1.x ke v2.4.22.</p>
+<p>Dalam kasus normal, Anda dapat memutakhirkan <a href="#Upgrade-Milvus-by-changing-its-image">Milvus dengan mengubah citranya.</a> Namun, Anda perlu <a href="#Migrate-the-metadata">memigrasikan metadata</a> sebelum melakukan pemutakhiran apa pun dari v2.1.x ke v2.4.23.</p>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Memutakhirkan Milvus dengan mengubah citranya<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,35 +43,35 @@ title: Memutakhirkan Milvus Cluster dengan Docker Compose
 <pre><code translate="no" class="language-yaml">...
 rootcoord:
   container_name: milvus-rootcoord
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 ...
 proxy:
   container_name: milvus-proxy
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 ...
 querycoord:
   container_name: milvus-querycoord
-  image: milvusdb/milvus:v2.4.22  
+  image: milvusdb/milvus:v2.4.23  
 ...
 querynode:
   container_name: milvus-querynode
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 ...
 indexcoord:
   container_name: milvus-indexcoord
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 ...
 indexnode:
   container_name: milvus-indexnode
-  image: milvusdb/milvus:v2.4.22 
+  image: milvusdb/milvus:v2.4.23 
 ...
 datacoord:
   container_name: milvus-datacoord
-  image: milvusdb/milvus:v2.4.22   
+  image: milvusdb/milvus:v2.4.23   
 ...
 datanode:
   container_name: milvus-datanode
-  image: milvusdb/milvus:v2.4.22
+  image: milvusdb/milvus:v2.4.23
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Jalankan perintah berikut untuk melakukan peningkatan.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -105,7 +105,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.22</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.23</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

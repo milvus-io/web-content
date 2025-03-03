@@ -193,6 +193,7 @@ client.createIndex(createIndexReq);
 <p>Pour l'indexation personnalisée, les valeurs valides sont</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (Recommandé) Un index inversé consiste en un dictionnaire de termes contenant tous les mots tokenisés triés par ordre alphabétique. Pour plus de détails, voir <a href="/docs/fr/scalar_index.md">Index scalaire</a>.</p></li>
+<li><p><strong>BITMAP</strong>: Un type d'index qui stocke un tableau binaire de toutes les valeurs uniques d'un champ. Pour plus de détails, voir <a href="/docs/fr/bitmap.md">BITMAP</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Trie les champs scalaires à l'aide de l'algorithme de tri de la bibliothèque standard. Ne prend en charge que les champs numériques (par exemple, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Une structure de données arborescente pour des recherches et des extractions rapides de préfixes. Prend en charge les champs VARCHAR.</p></li>
 </ul></li>

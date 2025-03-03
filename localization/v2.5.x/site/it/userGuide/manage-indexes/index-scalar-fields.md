@@ -4,9 +4,9 @@ order: 2
 summary: >-
   Questa guida illustra la creazione e la configurazione di indici scalari per
   campi come numeri interi, stringhe, ecc.
-title: Indici di campi scalari
+title: Indice dei campi scalari
 ---
-<h1 id="Index-Scalar-Fields" class="common-anchor-header">Indici di campi scalari<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
+<h1 id="Index-Scalar-Fields" class="common-anchor-header">Indice dei campi scalari<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +21,7 @@ title: Indici di campi scalari
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, un indice scalare viene utilizzato per accelerare il metafiltraggio in base a un valore specifico di un campo non vettoriale, in modo simile a un indice tradizionale di un database. Questa guida illustra la creazione e la configurazione di indici scalari per campi come numeri interi, stringhe, ecc.</p>
+    </button></h1><p>In Milvus, un indice scalare viene utilizzato per velocizzare il metafiltraggio in base a un valore specifico di un campo non vettoriale, in modo simile a un indice tradizionale di un database. Questa guida illustra la creazione e la configurazione di indici scalari per campi come numeri interi, stringhe, ecc.</p>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">Tipi di indicizzazione scalare<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,8 +192,9 @@ client.createIndex(createIndexReq);
 <p>Il tipo di indice scalare da creare. Per l'indicizzazione implicita, lasciare vuoto o omettere questo parametro.</p>
 <p>Per l'indicizzazione personalizzata, i valori validi sono:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (consigliato) Un indice invertito consiste in un dizionario di termini contenente tutte le parole tokenizzate ordinate alfabeticamente. Per maggiori dettagli, consultare <a href="/docs/it/scalar_index.md">Indice scalare</a>.</p></li>
-<li><p><strong>STL_SORT</strong>: Ordina i campi scalari usando l'algoritmo di ordinamento della libreria template standard. Supporta solo campi numerici (ad esempio, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
+<li><p><strong>INVERTED</strong>: (consigliato) Un indice invertito consiste in un dizionario di termini contenente tutte le parole tokenizzate ordinate alfabeticamente. Per maggiori dettagli, vedere <a href="/docs/it/scalar_index.md">Indice scalare</a>.</p></li>
+<li><p><strong>BITMAP</strong>: Un tipo di indice che memorizza una bitmap di tutti i valori univoci di un campo. Per maggiori dettagli, vedere <a href="/docs/it/bitmap.md">BITMAP</a>.</p></li>
+<li><p><strong>STL_SORT</strong>: Ordina i campi scalari utilizzando l'algoritmo di ordinamento standard della libreria template. Supporta solo campi numerici (ad esempio, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Una struttura di dati ad albero per ricerche e recuperi rapidi di prefissi. Supporta campi VARCHAR.</p></li>
 </ul></li>
 <li><p><strong>nome_indice</strong><em>(stringa</em>)</p>
@@ -221,7 +222,7 @@ client.createIndex(createIndexReq);
 <li><strong>Trie</strong>: Una struttura di dati ad albero per ricerche e recuperi rapidi di prefissi. Supporta campi VARCHAR.</li>
 </ul></li>
 </ul></li>
-<li><strong>CreateIndexReq</strong>Crea l'indice nell'insieme specificato.<ul>
+<li><strong>CreateIndexReq</strong>Crea l'indice nella collezione specificata.<ul>
 <li><strong>collectionName</strong><em>(String</em>) Il nome dell'insieme per il quale viene creato l'indice.</li>
 <li><strong>indexParams</strong><em>(Elenco<IndexParam></em>) Un elenco di oggetti IndexParam che contengono le configurazioni dell'indice.</li>
 </ul></li>
