@@ -21,8 +21,11 @@ title: Concessione di privilegi o gruppi di privilegi ai ruoli
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Una volta creato un ruolo, è possibile concedere privilegi al ruolo. Questa guida illustra come concedere privilegi o gruppi di privilegi a un ruolo.</p>
-<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">Assegnare un privilegio o un gruppo di privilegi a un ruolo<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
+    </button></h1><p>Una volta creato un ruolo, è possibile concedere privilegi al ruolo. Questa guida spiega come concedere privilegi o gruppi di privilegi a un ruolo.</p>
+<div class="alert note">
+<p>Gli esempi in questa pagina utilizzano le API GrantV2 e RevokeV2, introdotte in Milvus 2.5. Si consiglia di utilizzare le nuove API. Si consiglia di utilizzare le nuove API per migliorare le prestazioni e l'usabilità.</p>
+</div>
+<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">Concessione di un privilegio o di un gruppo di privilegi a un ruolo<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,7 +40,7 @@ title: Concessione di privilegi o gruppi di privilegi ai ruoli
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 2.5 introduce una nuova versione dell'API che semplifica l'operazione di assegnazione. Non è più necessario cercare il tipo di oggetto quando si concede un privilegio a un ruolo. Di seguito sono riportati i parametri e le relative spiegazioni.</p>
+    </button></h2><p>Milvus 2.5 introduce una nuova versione di API che semplifica l'operazione di concessione. Non è più necessario cercare il tipo di oggetto quando si concede un privilegio a un ruolo. Di seguito sono riportati i parametri e le relative spiegazioni.</p>
 <ul>
 <li><p><strong>nome_ruolo:</strong> il nome del ruolo di destinazione a cui devono essere concessi i privilegi o i gruppi di privilegi.</p></li>
 <li><p><strong>Risorsa</strong>: La risorsa di destinazione di un privilegio, che può essere un'istanza specifica, un database o una raccolta. La tabella seguente spiega come specificare la risorsa nel metodo <code translate="no">client.grantV2()</code>.</p></li>
@@ -257,7 +260,7 @@ title: Concessione di privilegi o gruppi di privilegi ai ruoli
 </td><td data-block-token="XjSidYzDxoM5QlxMpkYc7Rdrnyf" colspan="1" rowspan="1"><p data-block-token="BPASdokERoAcfwxHsnZcrc7gn5f">Visualizza tutti i gruppi di privilegi nell'istanza corrente</p>
 </td><td data-block-token="AC1ndxpo5otLECxXwU4cm9XWnxc" colspan="1" rowspan="1"><p data-block-token="I5PQdLW8CoUtbAxfRhYchSPrnXd"><a href="/docs/it/privilege_group.md">Elenco dei gruppi di privilegi</a></p>
 </td></tr><tr><td data-block-token="MTHXdRxasoxGbUxWQrGctwpfnHh" colspan="1" rowspan="1"><p data-block-token="XuMndXqGUoN6NFxqxWJcK9PwnSf">OperareGruppoPrivilegio</p>
-</td><td data-block-token="QnMhdQmvwoRJRmx3NjNcWz2Fncf" colspan="1" rowspan="1"><p data-block-token="RGvndPvnDoj86Pxm8xFceP4sn8g">Aggiungere o rimuovere privilegi da un gruppo di privilegi</p>
+</td><td data-block-token="QnMhdQmvwoRJRmx3NjNcWz2Fncf" colspan="1" rowspan="1"><p data-block-token="RGvndPvnDoj86Pxm8xFceP4sn8g">Aggiungere o rimuovere privilegi a un gruppo di privilegi</p>
 </td><td data-block-token="Lz0MdWmfXo7bF9xWzPxcv7mYn6b" colspan="1" rowspan="1"><p data-block-token="PNPQdG1GvoBjUXxa8iacCIxenYe"><a href="/docs/it/privilege_group.md">Operare il gruppo di privilegi</a></p>
 </td></tr></tbody></table>
 <p>L'esempio seguente mostra come concedere il privilegio <code translate="no">PrivilegeSearch</code> su <code translate="no">collection_01</code> sotto il database predefinito e un gruppo di privilegi chiamato <code translate="no">privilege_group_1</code> al ruolo <code translate="no">role_a</code>.</p>

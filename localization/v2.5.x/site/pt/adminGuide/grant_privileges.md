@@ -23,6 +23,9 @@ title: Conceder privilégios ou grupos de privilégios a funções
         ></path>
       </svg>
     </button></h1><p>Uma vez criada uma função, pode conceder privilégios à mesma. Este guia apresenta a forma de conceder privilégios ou grupos de privilégios a uma função.</p>
+<div class="alert note">
+<p>Os exemplos nesta página utilizam as APIs GrantV2 e RevokeV2, que foram introduzidas no Milvus 2.5. Recomenda-se a utilização das novas APIs para um melhor desempenho e usabilidade.</p>
+</div>
 <h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">Conceder um privilégio ou um grupo de privilégios a uma função<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +43,7 @@ title: Conceder privilégios ou grupos de privilégios a funções
       </svg>
     </button></h2><p>O Milvus 2.5 introduz uma nova versão da API que simplifica a operação de concessão. Já não é necessário procurar o tipo de objeto quando se concede um privilégio a uma função. Seguem-se os parâmetros e as respectivas explicações.</p>
 <ul>
-<li><p><strong>nome_da_função:</strong> o nome da função de destino à qual devem ser concedidos privilégios ou grupos de privilégios.</p></li>
+<li><p><strong>Nome_da_função:</strong> O nome da função de destino à qual devem ser concedidos privilégios ou grupos de privilégios.</p></li>
 <li><p><strong>Recurso</strong>: O recurso de destino de um privilégio, que pode ser uma instância específica, um banco de dados ou uma coleção. A tabela a seguir explica como especificar o recurso no método <code translate="no">client.grantV2()</code>.</p></li>
 </ul>
 <table data-block-token="JEEodjgvGobTYaxIpelculQCnAd"><thead><tr><th data-block-token="A8x3dXMhzoCf5ZxZyUscfy4GnWd" colspan="1" rowspan="1"><p data-block-token="SDgKdAzXFoodDQxru5WcGjBTnof"><strong>Nível</strong></p>
@@ -211,7 +214,7 @@ title: Conceder privilégios ou grupos de privilégios a funções
 </td><td data-block-token="ThOTdwZjcoahs1xfcbpcDzFonab" colspan="1" rowspan="1"><p data-block-token="AFwMdHdmKoXbE4xzGqMctlKLnRA">RestaurarRBAC</p>
 </td></tr><tr><td data-block-token="VFw2dElePoZ45zxsRW5cDqOdnCK" colspan="1" rowspan="6"><p data-block-token="Rk6UdFUAHo69IexovsXcAs6inXc">Privilégios da entidade</p>
 <p data-block-token="TmsNd5Mk2oJmNNxlK8IckdFDnSg"></p>
-</td><td data-block-token="BCegdmvf4omIVWxZqsJcWRs4ndf" colspan="1" rowspan="1"><p data-block-token="GCCldIZBeoEs19xLIawcKvW0n2e">Consultar</p>
+</td><td data-block-token="BCegdmvf4omIVWxZqsJcWRs4ndf" colspan="1" rowspan="1"><p data-block-token="GCCldIZBeoEs19xLIawcKvW0n2e">Consulta</p>
 </td><td data-block-token="RzEGd16EQo6hgexM2uLcwN4rnQX" colspan="1" rowspan="1"><p data-block-token="PM8WdTyEXoHSkfxosmrcznAAnT6">Efetuar uma consulta</p>
 </td><td data-block-token="JdWcdaXSWoNg00xp3iGcLTtGn9f" colspan="1" rowspan="1"><p data-block-token="UstWdVI78oNRYVxdac0cBv93nnc"><a href="https://milvus.io/docs/get-and-scalar-query.md">Consultar</a></p>
 </td></tr><tr><td data-block-token="EskNdfHL2okPMyxkTooclFBFnRf" colspan="1" rowspan="1"><p data-block-token="WYjDdzwvhoTsPuxfoxwcNFB1nsh">Pesquisa</p>
@@ -237,7 +240,7 @@ title: Conceder privilégios ou grupos de privilégios a funções
 </td><td data-block-token="URzfdphsvo5S2JxSYp0cH2R4nzc" colspan="1" rowspan="1"><p data-block-token="JehtddjtMoYsMZxqOAKcLVKXneh">Atualizar a palavra-passe de um utilizador</p>
 </td><td data-block-token="KAtiduPSzo8bUGxylXUczG3gnMd" colspan="1" rowspan="1"><p data-block-token="CFJHdSo1eoEnM9x8KUocFsponXf"><a href="/docs/pt/users_and_roles.md">ActualizarCredencial</a></p>
 </td></tr><tr><td data-block-token="CgO8dnNyEotOTExeihCcoJoInIe" colspan="1" rowspan="1"><p data-block-token="CGcldT4pIo4rNJx0qkqc8Fm2ndc">DropOwnership</p>
-</td><td data-block-token="C2zLdO8auonWUZxNf1Gc9e5tndb" colspan="1" rowspan="1"><p data-block-token="R6yqdtt2yo8V8Rx6wmIcp1genMu">Eliminar a palavra-passe de um utilizador ou uma função</p>
+</td><td data-block-token="C2zLdO8auonWUZxNf1Gc9e5tndb" colspan="1" rowspan="1"><p data-block-token="R6yqdtt2yo8V8Rx6wmIcp1genMu">Eliminar uma palavra-passe de um utilizador ou uma função</p>
 </td><td data-block-token="PvTYdRi74orjltxXEeQcwaLfnCd" colspan="1" rowspan="1"><p data-block-token="JYwtdB54WoU6Q6xGhiwcLY3XnZv"><a href="/docs/pt/users_and_roles.md">ApagarCredencial/ApagarFunção</a></p>
 </td></tr><tr><td data-block-token="BgH2dkOQLonqb1xt0epc3yTknAh" colspan="1" rowspan="1"><p data-block-token="WvuPdKJs2oOItDxKhuccjR56nyf">SeleccionarPropriedade</p>
 </td><td data-block-token="R093ddlBTo5opoxyRmactAI4nWb" colspan="1" rowspan="1"><p data-block-token="Mf5vd65cKoQo8fxokifcdbcGnxg">Ver todos os utilizadores a quem foi atribuída uma função específica</p>
@@ -259,7 +262,7 @@ title: Conceder privilégios ou grupos de privilégios a funções
 </td><td data-block-token="AC1ndxpo5otLECxXwU4cm9XWnxc" colspan="1" rowspan="1"><p data-block-token="I5PQdLW8CoUtbAxfRhYchSPrnXd"><a href="/docs/pt/privilege_group.md">ListPrivilegeGroups</a></p>
 </td></tr><tr><td data-block-token="MTHXdRxasoxGbUxWQrGctwpfnHh" colspan="1" rowspan="1"><p data-block-token="XuMndXqGUoN6NFxqxWJcK9PwnSf">OperatePrivilegeGroup (Operar Grupo de Privilégios)</p>
 </td><td data-block-token="QnMhdQmvwoRJRmx3NjNcWz2Fncf" colspan="1" rowspan="1"><p data-block-token="RGvndPvnDoj86Pxm8xFceP4sn8g">Adicionar privilégios a um grupo de privilégios ou remover privilégios de um grupo de privilégios</p>
-</td><td data-block-token="Lz0MdWmfXo7bF9xWzPxcv7mYn6b" colspan="1" rowspan="1"><p data-block-token="PNPQdG1GvoBjUXxa8iacCIxenYe"><a href="/docs/pt/privilege_group.md">OperatePrivilegeGroup (Operar Grupo de Privilégios)</a></p>
+</td><td data-block-token="Lz0MdWmfXo7bF9xWzPxcv7mYn6b" colspan="1" rowspan="1"><p data-block-token="PNPQdG1GvoBjUXxa8iacCIxenYe"><a href="/docs/pt/privilege_group.md">Operar Grupo de Privilégios</a></p>
 </td></tr></tbody></table>
 <p>O exemplo a seguir demonstra como conceder o privilégio <code translate="no">PrivilegeSearch</code> em <code translate="no">collection_01</code> no banco de dados padrão, bem como um grupo de privilégios chamado <code translate="no">privilege_group_1</code> para a função <code translate="no">role_a</code>.</p>
 <div class="multipleCode">

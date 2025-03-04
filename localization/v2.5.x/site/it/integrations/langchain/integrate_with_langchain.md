@@ -23,7 +23,7 @@ title: Generazione Aumentata dal Recupero (RAG) con Milvus e LangChain
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Questa guida mostra come costruire un sistema di Retrieval-Augmented Generation (RAG) utilizzando LangChain e Milvus.</p>
-<p>Il sistema RAG combina un sistema di recupero con un modello generativo per generare nuovo testo sulla base di un prompt dato. Il sistema recupera prima i documenti rilevanti da un corpus utilizzando Milvus e poi utilizza un modello generativo per generare nuovo testo sulla base dei documenti recuperati.</p>
+<p>Il sistema RAG combina un sistema di reperimento con un modello generativo per generare nuovo testo sulla base di un prompt dato. Il sistema recupera prima i documenti rilevanti da un corpus utilizzando Milvus e poi utilizza un modello generativo per generare nuovo testo sulla base dei documenti recuperati.</p>
 <p><a href="https://www.langchain.com/">LangChain</a> è un framework per lo sviluppo di applicazioni basate su modelli linguistici di grandi dimensioni (LLM). <a href="https://milvus.io/">Milvus</a> è il database vettoriale open-source più avanzato al mondo, costruito per alimentare le applicazioni di ricerca di similarità e di intelligenza artificiale.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,7 +97,7 @@ docs[<span class="hljs-number">1</span>]
 <pre><code translate="no">Document(page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#', metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'})
 </code></pre>
 <p>Come si può vedere, il documento è già suddiviso in pezzi. Il contenuto dei dati riguarda l'agente AI.</p>
-<h2 id="Build-RAG-chain-with-Milvus-Vector-Store" class="common-anchor-header">Costruire la catena RAG con Milvus Vector Store<button data-href="#Build-RAG-chain-with-Milvus-Vector-Store" class="anchor-icon" translate="no">
+<h2 id="Build-RAG-chain-with-Milvus-Vector-Store" class="common-anchor-header">Costruire la catena RAG con il Milvus Vector Store<button data-href="#Build-RAG-chain-with-Milvus-Vector-Store" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -113,12 +113,12 @@ docs[<span class="hljs-number">1</span>]
         ></path>
       </svg>
     </button></h2><p>Inizializzeremo un archivio vettoriale Milvus con i documenti, per poi caricare i documenti nell'archivio vettoriale Milvus e costruire un indice sotto il cofano.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, Zilliz
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings()
 
-vectorstore = Milvus.from_documents(  <span class="hljs-comment"># or Zilliz.from_documents</span>
+vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=embeddings,
     connection_args={
@@ -131,7 +131,7 @@ vectorstore = Milvus.from_documents(  <span class="hljs-comment"># or Zilliz.fro
 <p>Per <code translate="no">connection_args</code>:</p>
 <ul>
 <li>L'impostazione di <code translate="no">uri</code> come file locale, ad esempio<code translate="no">./milvus.db</code>, è il metodo più conveniente, poiché utilizza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> per memorizzare tutti i dati in questo file.</li>
-<li>Se si dispone di una grande quantità di dati, è possibile configurare un server Milvus più performante su <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. In questa configurazione, utilizzare l'uri del server, ad esempio<code translate="no">http://localhost:19530</code>, come <code translate="no">uri</code>.</li>
+<li>Se si dispone di una grande quantità di dati, è possibile impostare un server Milvus più performante su <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. In questa configurazione, utilizzare l'uri del server, ad esempio<code translate="no">http://localhost:19530</code>, come <code translate="no">uri</code>.</li>
 <li>Se si desidera utilizzare <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, il servizio cloud completamente gestito per Milvus, sostituire <code translate="no">Milvus.from_documents</code> con <code translate="no">Zilliz.from_documents</code>, e regolare <code translate="no">uri</code> e <code translate="no">token</code>, che corrispondono all'<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">endpoint pubblico e alla chiave Api</a> di Zilliz Cloud.</li>
 </ul>
 </div>

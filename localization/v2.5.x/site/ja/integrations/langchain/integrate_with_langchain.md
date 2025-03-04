@@ -113,12 +113,12 @@ docs[<span class="hljs-number">1</span>]
         ></path>
       </svg>
     </button></h2><p>Milvusベクターストアをドキュメントで初期化し、Milvusベクターストアにドキュメントをロードし、その下にインデックスを構築する。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, Zilliz
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings()
 
-vectorstore = Milvus.from_documents(  <span class="hljs-comment"># or Zilliz.from_documents</span>
+vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=embeddings,
     connection_args={
@@ -131,7 +131,7 @@ vectorstore = Milvus.from_documents(  <span class="hljs-comment"># or Zilliz.fro
 <p><code translate="no">connection_args</code> ：</p>
 <ul>
 <li><code translate="no">./milvus.db</code> のように<code translate="no">uri</code> をローカルファイルとして設定する方法は、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite を</a>自動的に利用してすべてのデータをこのファイルに格納するため、最も便利な方法です。</li>
-<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、<code translate="no">Milvus.from_documents</code> を<code translate="no">Zilliz.from_documents</code> に置き換え、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>

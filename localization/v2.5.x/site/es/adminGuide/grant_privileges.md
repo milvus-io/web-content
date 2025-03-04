@@ -21,7 +21,10 @@ title: Conceder privilegios o grupos de privilegios a roles
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Una vez creado un rol, puede concederle privilegios. Esta guía explica cómo conceder privilegios o grupos de privilegios a un rol.</p>
+    </button></h1><p>Una vez creado un rol, puede concederle privilegios. Esta guía presenta cómo conceder privilegios o grupos de privilegios a un rol.</p>
+<div class="alert note">
+<p>Los ejemplos de esta página utilizan las API GrantV2 y RevokeV2, que se introdujeron en Milvus 2.5. Se recomienda utilizar las nuevas API. Se recomienda utilizar las nuevas API para mejorar el rendimiento y la facilidad de uso.</p>
+</div>
 <h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">Conceder un privilegio o un grupo de privilegios a un rol<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +40,7 @@ title: Conceder privilegios o grupos de privilegios a roles
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 2.5 introduce una nueva versión de la API que agiliza la operación de concesión. Ya no es necesario buscar el tipo de objeto cuando se concede un privilegio a un rol. A continuación se indican los parámetros y las explicaciones correspondientes.</p>
+    </button></h2><p>Milvus 2.5 introduce una nueva versión de API que agiliza la operación de concesión. Ya no es necesario buscar el tipo de objeto cuando se concede un privilegio a un rol. A continuación se indican los parámetros y las explicaciones correspondientes.</p>
 <ul>
 <li><p><strong>role_name:</strong> El nombre del rol de destino al que deben concederse privilegios o grupos de privilegios.</p></li>
 <li><p><strong>Recurso</strong>: El recurso de destino de un privilegio, que puede ser una instancia, base de datos o colección específica. La siguiente tabla explica cómo especificar el recurso en el método <code translate="no">client.grantV2()</code>.</p></li>
@@ -135,7 +138,7 @@ title: Conceder privilegios o grupos de privilegios a roles
 </td><td data-block-token="YI4Idz2YKoxEUFxoGjrcIdqenJe" colspan="1" rowspan="1"><p data-block-token="I6aqdaWkToQlxVxOOv7cmqSznUk"><a href="https://milvus.io/docs/load-and-release.md">LiberarColección</a></p>
 </td></tr><tr><td data-block-token="SdXodgeexoQNgLxhhtrcTXLQn2e" colspan="1" rowspan="1"><p data-block-token="PPGJd9xYyoGc6axLxnXcehHknPd">Descargar</p>
 <p data-block-token="CwHodxxbFondGMxZI7tcrpyin1e"></p>
-</td><td data-block-token="I3sCdXEANooGcQxmSKgc6CzMn6c" colspan="1" rowspan="1"><p data-block-token="Pb8ed7suDodviyxqmZ6cFymUnUc">Persiste todas las entidades de una colección en un segmento sellado. Cualquier entidad insertada después de la operación flush se almacenará en un nuevo segmento.</p>
+</td><td data-block-token="I3sCdXEANooGcQxmSKgc6CzMn6c" colspan="1" rowspan="1"><p data-block-token="Pb8ed7suDodviyxqmZ6cFymUnUc">Persiste todas las entidades de una colección en un segmento sellado. Cualquier entidad insertada después de la operación de vaciado se almacenará en un nuevo segmento.</p>
 </td><td data-block-token="TjNxdCYIHo2nQlxgfEEcq6vRnMd" colspan="1" rowspan="1"><ul data-block-token="VfI4dU4ekoULHtx8UPCcuQ7jnYd"><li><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">FlushGetFlushState</a></li></ul>
 </td></tr><tr><td data-block-token="McZ6dPwNZo2PaExCJr2c1f1vnKb" colspan="1" rowspan="1"><p data-block-token="BN0TdBHNoo2K8lxMld3cF29Wn2e">Compactación</p>
 </td><td data-block-token="VtiFdkyipoclZ0xvm00cWwjBnsb" colspan="1" rowspan="1"><p data-block-token="PI15dBFUFowgCzxgiqYcorC4nUc">Compactación manual</p>
@@ -260,7 +263,7 @@ title: Conceder privilegios o grupos de privilegios a roles
 </td><td data-block-token="QnMhdQmvwoRJRmx3NjNcWz2Fncf" colspan="1" rowspan="1"><p data-block-token="RGvndPvnDoj86Pxm8xFceP4sn8g">Añadir o eliminar privilegios de un grupo de privilegios</p>
 </td><td data-block-token="Lz0MdWmfXo7bF9xWzPxcv7mYn6b" colspan="1" rowspan="1"><p data-block-token="PNPQdG1GvoBjUXxa8iacCIxenYe"><a href="/docs/es/privilege_group.md">OperatePrivilegeGroup</a></p>
 </td></tr></tbody></table>
-<p>El siguiente ejemplo muestra cómo conceder el privilegio <code translate="no">PrivilegeSearch</code> en <code translate="no">collection_01</code> bajo la base de datos predeterminada, así como un grupo de privilegios denominado <code translate="no">privilege_group_1</code> al rol <code translate="no">role_a</code>.</p>
+<p>El siguiente ejemplo demuestra cómo conceder el privilegio <code translate="no">PrivilegeSearch</code> en <code translate="no">collection_01</code> bajo la base de datos predeterminada, así como un grupo de privilegios denominado <code translate="no">privilege_group_1</code> al rol <code translate="no">role_a</code>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>

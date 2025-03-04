@@ -3,8 +3,8 @@ id: grant_privileges.md
 related_key: enable RBAC
 summary: >-
   Setelah peran dibuat, Anda dapat memberikan hak istimewa pada peran tersebut.
-  Panduan ini memperkenalkan cara memberikan hak istimewa atau grup hak istimewa
-  ke peran.
+  Panduan ini memperkenalkan cara memberikan hak istimewa atau kelompok hak
+  istimewa ke peran.
 title: Memberikan Hak Istimewa atau Grup Hak Istimewa ke Peran
 ---
 <h1 id="Grant-Privilege-or-Privilege-Group-to-Roles​" class="common-anchor-header">Memberikan Hak Istimewa atau Grup Hak Istimewa ke Peran<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles​" class="anchor-icon" translate="no">
@@ -23,7 +23,10 @@ title: Memberikan Hak Istimewa atau Grup Hak Istimewa ke Peran
         ></path>
       </svg>
     </button></h1><p>Setelah peran dibuat, Anda dapat memberikan hak istimewa pada peran tersebut. Panduan ini memperkenalkan cara memberikan hak istimewa atau grup hak istimewa ke peran.</p>
-<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">Memberikan hak istimewa atau grup hak istimewa ke peran<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>Contoh di halaman ini menggunakan API GrantV2 dan RevokeV2, yang diperkenalkan di Milvus 2.5. Anda disarankan untuk menggunakan API baru untuk kinerja dan kegunaan yang lebih baik.</p>
+</div>
+<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">Memberikan hak istimewa atau grup hak istimewa ke sebuah peran<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,7 +41,7 @@ title: Memberikan Hak Istimewa atau Grup Hak Istimewa ke Peran
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 2.5 memperkenalkan versi baru API yang menyederhanakan operasi pemberian hak istimewa. Anda tidak perlu lagi mencari tipe objek ketika memberikan hak istimewa kepada sebuah role. Berikut ini adalah parameter dan penjelasan terkait.</p>
+    </button></h2><p>Milvus 2.5 memperkenalkan versi baru API yang menyederhanakan operasi pemberian hak. Anda tidak perlu lagi mencari tipe objek ketika memberikan hak istimewa pada sebuah role. Berikut ini adalah parameter dan penjelasan terkait.</p>
 <ul>
 <li><p><strong>role_name:</strong> Nama peran target yang perlu diberikan hak istimewa atau grup hak istimewa.</p></li>
 <li><p><strong>Resource</strong>: Sumber daya target hak istimewa, yang dapat berupa instance, database, atau koleksi tertentu. Tabel berikut ini menjelaskan cara menentukan sumber daya dalam metode <code translate="no">client.grantV2()</code>.</p></li>
@@ -63,7 +66,7 @@ title: Memberikan Hak Istimewa atau Grup Hak Istimewa ke Peran
 </td><td data-block-token="AWvzduv5Lov5qJx7WYhciIESnfh" colspan="1" rowspan="1"><p data-block-token="AREJdOugloKZKxxZBHmcRQDWnJc">Masukkan nama basis data target Anda dan karakter pengganti <code translate="no">`*`</code> sebagai nama koleksi.</p>
 </td></tr><tr><td data-block-token="JDIKdIWLToT51Exfa6KcDAX5nSc" colspan="1" rowspan="1"><p data-block-token="LwujdLjA4oELFNxQ0vocRqGZn8c"></p>
 </td><td data-block-token="VCeyd4LnaocEA3xFzFfcmBFQnVe" colspan="1" rowspan="1"><p data-block-token="Zpypdw1yNoJ7VPxnML8cCobCnUe">Semua basis data di bawah instans saat ini</p>
-</td><td data-block-token="XDNudVmito8zIaxYhiUc65UfntO" colspan="1" rowspan="1"><p data-block-token="QiPudWimto5bO3xya5ScRjrgnQb">client.grant_privilege_v2(nama_peran = "peranA", hak = "DatabaseAdmin", nama_koleksi = "*", nama_basis = "*")</p>
+</td><td data-block-token="XDNudVmito8zIaxYhiUc65UfntO" colspan="1" rowspan="1"><p data-block-token="QiPudWimto5bO3xya5ScRjrgnQb">client.grant_privilege_v2(nama_peran = "peranA", hak = "DatabaseAdmin", nama_koleksi = "*", nama_db = "*")</p>
 </td><td data-block-token="HK9Jd6egJoGjAzxEUXTcd52Wn01" colspan="1" rowspan="1"><p data-block-token="OqqOd4CG3oVcR8xHgdxcqbCznJb">Masukkan <code translate="no">`*`</code> sebagai nama basis data dan <code translate="no">`*`</code> sebagai nama koleksi.</p>
 </td></tr><tr><td data-block-token="Owz9dC4pkocTkixLAMdcyBiqnYe" colspan="1" rowspan="1"><p data-block-token="Wwyxdfj9Vo8aHbxcVgycyT10nof"><strong>Instance ** Instance**</strong></p>
 </td><td data-block-token="FPe1dyBVMoVnMexfHgycH0NSnrh" colspan="1" rowspan="1"><p data-block-token="Zfqtdh8Xqoyt8DxWpa3cD26InLh">Instance saat ini</p>

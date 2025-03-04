@@ -34,14 +34,14 @@ title: 使用 Partition Key
         ></path>
       </svg>
     </button></h2><p>在 Milvus 中，你可以使用分区来实现数据隔离，并通过将搜索范围限制在特定分区来提高搜索性能。如果选择手动管理分区，可以在 Collections 中创建最多 1,024 个分区，并根据特定规则将实体插入这些分区，这样就可以通过限制在特定数量的分区内进行搜索来缩小搜索范围。</p>
-<p>Milvus 引入了分区密钥，供你在数据隔离中重复使用分区，以克服在集合中创建分区数量的限制。创建 Collections 时，可以使用标量字段作为 Partition Key。一旦集合准备就绪，Milvus 就会在集合内创建指定数量的分区，每个分区都与分区密钥中的值范围相对应。收到插入的实体后，Milvus 会根据它们的 Partition Key 值把它们存储到不同的分区中。</p>
+<p>Milvus 引入了分区密钥，供你在数据隔离中重复使用分区，以克服在集合中创建分区数量的限制。创建 Collections 时，可以使用标量字段作为 Partition Key。一旦集合准备就绪，Milvus 就会在集合内创建指定数量的分区，每个分区都与分区密钥中的值范围相对应。接收到插入的实体后，Milvus 会使用实体的 Partition Key 值计算哈希值，根据哈希值和 Collections 的 partitions_num 属性执行求模操作，以获得目标分区 ID，并将实体存储到目标分区中。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-vs-partition-key.png" alt="Partition v.s. Partition Key" class="doc-image" id="partition-v.s.-partition-key" />
    </span> <span class="img-wrapper"> <span>分区对分区密钥</span> </span></p>
-<p>下图说明了 Milvus 如何在启用或未启用分区键功能的情况下处理 Collections 中的搜索请求。</p>
+<p>下图说明了在启用或未启用分区密钥功能的情况下，Milvus 如何处理 Collections 中的搜索请求。</p>
 <ul>
-<li><p>如果禁用了 Partition Key，Milvus 会在 Collections 中搜索与查询向量最相似的实体。如果知道哪个分区包含最相关的结果，就可以缩小搜索范围。</p></li>
+<li><p>如果禁用 Partition Key，Milvus 会在 Collections 中搜索与查询向量最相似的实体。如果知道哪个分区包含最相关的结果，就可以缩小搜索范围。</p></li>
 <li><p>如果启用了分区关键字，Milvus 会根据搜索过滤器中指定的分区关键字值确定搜索范围，并只扫描分区内匹配的实体。</p></li>
 </ul>
 <p>
@@ -165,7 +165,7 @@ schema.addField(AddFieldReq.builder()​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Partition-Numbers​" class="common-anchor-header">设置分区编号</h3><p>当你指定一个 Collections 中的标量字段作为 Partition Key 时，Milvus 会自动在 Collections 中创建 16 个分区。当接收到一个实体时，Milvus 会根据这个实体的 Partition Key 值选择一个分区，并将实体存储在分区中，从而导致部分或所有分区持有不同 Partition Key 值的实体。</p>
-<p>您还可以确定与 Collections 一起创建的分区数量。这只有在将标量字段指定为 Partition Key 时才有效。</p>
+<p>您还可以确定与 Collections 一起创建的分区数量。只有将标量字段指定为 Partition Key 时，这种方法才有效。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
@@ -267,7 +267,7 @@ export <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" />
    </span> <span class="img-wrapper"> <span>分区密钥隔离</span> </span></p>
-<p>如上图所示，Milvus 根据分区键值对实体进行分组，并为每个分组创建单独的索引。收到搜索请求后，Milvus 会根据过滤条件中指定的 Partition Key 值定位索引，并将搜索范围限制在索引所包含的实体内，从而避免在搜索过程中扫描不相关的实体，大大提高搜索性能。 启用 Partition Key Isolation 后，可以在基于 Partition Key 的过滤条件中只包含特定值，这样 Milvus 就能将搜索范围限制在索引所包含的匹配实体内。</p>
+<p>如上图所示，Milvus 根据分区键值对实体进行分组，并为每个分组创建单独的索引。收到搜索请求后，Milvus 会根据过滤条件中指定的 Partition Key 值定位索引，并将搜索范围限制在索引所包含的实体内，从而避免在搜索过程中扫描不相关的实体，大大提高了搜索性能。 启用 Partition Key Isolation 后，就可以在基于 Partition Key 的过滤条件中只包含特定值，这样 Milvus 就可以将搜索范围限制在索引所包含的匹配实体内。</p>
 <div class="alert note">
 <p>目前，分区密钥隔离功能只适用于索引类型设置为 HNSW 的搜索。</p>
 </div>

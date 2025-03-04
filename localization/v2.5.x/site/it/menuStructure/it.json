@@ -1363,7 +1363,7 @@
             "children": []
           },
           {
-            "label": "Compattazione del clustering",
+            "label": "Compattazione dei cluster",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1497,7 +1497,7 @@
                 "children": []
               },
               {
-                "label": "Migrare tra istanze e bucket",
+                "label": "Migrazione tra istanze e bucket",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -1840,7 +1840,7 @@
             "children": []
           },
           {
-            "label": "Dify",
+            "label": "Dificare",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []
@@ -2016,6 +2016,18 @@
             "id": "build_RAG_with_milvus_and_crawl4ai.md",
             "order": 6,
             "children": []
+          },
+          {
+            "label": "AWS S3",
+            "id": "build_RAG_from_s3_with_milvus.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "VectorETL",
+            "id": "ETL_using_vectorETL.md",
+            "order": 8,
+            "children": []
           }
         ]
       },
@@ -2166,7 +2178,7 @@
             "children": []
           },
           {
-            "label": "Ricerca di somiglianza audio",
+            "label": "Ricerca della somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

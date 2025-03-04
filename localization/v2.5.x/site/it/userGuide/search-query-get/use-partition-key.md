@@ -34,7 +34,7 @@ title: Utilizzare la chiave di partizione
         ></path>
       </svg>
     </button></h2><p>In Milvus è possibile utilizzare le partizioni per implementare la segregazione dei dati e migliorare le prestazioni di ricerca limitando l'ambito di ricerca a partizioni specifiche. Se si sceglie di gestire le partizioni manualmente, è possibile creare un massimo di 1.024 partizioni in una raccolta e inserire entità in queste partizioni in base a una regola specifica, in modo da poter restringere l'ambito di ricerca limitando le ricerche a un numero specifico di partizioni.</p>
-<p>Milvus introduce la chiave di partizione per riutilizzare le partizioni nella segregazione dei dati e superare il limite del numero di partizioni che si possono creare in una raccolta. Quando si crea una raccolta, si può usare un campo scalare come chiave di partizione. Una volta che la collezione è pronta, Milvus crea il numero specificato di partizioni all'interno della collezione, con ogni partizione corrispondente a un intervallo di valori della chiave di partizione. Quando riceve le entità inserite, Milvus le memorizza in diverse partizioni in base ai valori della chiave di partizione.</p>
+<p>Milvus introduce la chiave di partizione per riutilizzare le partizioni nella segregazione dei dati e superare il limite del numero di partizioni che si possono creare in una raccolta. Quando si crea una raccolta, si può usare un campo scalare come chiave di partizione. Una volta che la collezione è pronta, Milvus crea il numero specificato di partizioni all'interno della collezione, con ogni partizione corrispondente a un intervallo di valori della chiave di partizione. Quando riceve un'entità inserita, Milvus calcola un valore di hash usando il valore della chiave di partizione dell'entità, esegue un'operazione modulo basata sul valore di hash e sulla proprietà partitions_num della collezione per ottenere l'ID della partizione di destinazione e memorizza l'entità nella partizione di destinazione.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-vs-partition-key.png" alt="Partition v.s. Partition Key" class="doc-image" id="partition-v.s.-partition-key" />
@@ -63,7 +63,7 @@ title: Utilizzare la chiave di partizione
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per utilizzare la chiave di partizione, è necessario</p>
+    </button></h2><p>Per usare la chiave di partizione, è necessario</p>
 <ul>
 <li><p>Impostare la chiave di partizione.</p></li>
 <li><p>impostare il numero di partizioni da creare (opzionale) e</p></li>

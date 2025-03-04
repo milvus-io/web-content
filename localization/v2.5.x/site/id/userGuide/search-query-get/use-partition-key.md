@@ -34,14 +34,14 @@ title: Gunakan Kunci Partisi
         ></path>
       </svg>
     </button></h2><p>Di Milvus, Anda dapat menggunakan partisi untuk mengimplementasikan pemisahan data dan meningkatkan performa pencarian dengan membatasi cakupan pencarian ke partisi tertentu. Jika Anda memilih untuk mengelola partisi secara manual, Anda dapat membuat maksimal 1.024 partisi dalam koleksi, dan menyisipkan entitas ke dalam partisi-partisi ini berdasarkan aturan tertentu sehingga Anda dapat mempersempit cakupan pencarian dengan membatasi pencarian dalam sejumlah partisi tertentu.</p>
-<p>Milvus memperkenalkan Kunci Partisi agar Anda dapat menggunakan kembali partisi dalam pemisahan data untuk mengatasi batas jumlah partisi yang dapat Anda buat dalam koleksi. Ketika membuat koleksi, Anda dapat menggunakan bidang skalar sebagai Kunci Partisi. Setelah koleksi siap, Milvus akan membuat sejumlah partisi di dalam koleksi dengan masing-masing partisi yang sesuai dengan rentang nilai dalam Kunci Partisi. Setelah menerima entitas yang dimasukkan, Milvus menyimpannya ke dalam partisi yang berbeda berdasarkan nilai Kunci Partisi.</p>
+<p>Milvus memperkenalkan Kunci Partisi agar Anda dapat menggunakan kembali partisi dalam pemisahan data untuk mengatasi batas jumlah partisi yang dapat Anda buat dalam koleksi. Ketika membuat koleksi, Anda dapat menggunakan bidang skalar sebagai Kunci Partisi. Setelah koleksi siap, Milvus akan membuat sejumlah partisi di dalam koleksi dengan masing-masing partisi yang sesuai dengan rentang nilai dalam Kunci Partisi. Setelah menerima entitas yang dimasukkan, Milvus menghitung nilai hash menggunakan nilai Kunci Partisi dari entitas tersebut, mengeksekusi operasi modulo berdasarkan nilai hash dan properti partitions_num dari koleksi untuk mendapatkan ID partisi target, dan menyimpan entitas di partisi target.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-vs-partition-key.png" alt="Partition v.s. Partition Key" class="doc-image" id="partition-v.s.-partition-key" />
    </span> <span class="img-wrapper"> <span>Partisi vs Kunci Partisi</span> </span></p>
-<p>Gambar berikut mengilustrasikan bagaimana Milvus memproses permintaan pencarian dalam koleksi dengan atau tanpa fitur Kunci Partisi diaktifkan. </p>
+<p>Gambar berikut ini mengilustrasikan bagaimana Milvus memproses permintaan pencarian di dalam koleksi dengan atau tanpa fitur Kunci Partisi diaktifkan. </p>
 <ul>
-<li><p>Jika Kunci Partisi dinonaktifkan, Milvus akan mencari entitas yang paling mirip dengan vektor kueri di dalam koleksi. Anda dapat mempersempit cakupan pencarian jika Anda tahu partisi mana yang berisi hasil yang paling relevan. </p></li>
+<li><p>Jika Kunci Partisi dinonaktifkan, Milvus mencari entitas yang paling mirip dengan vektor kueri di dalam koleksi. Anda dapat mempersempit cakupan pencarian jika Anda tahu partisi mana yang berisi hasil yang paling relevan. </p></li>
 <li><p>Jika Kunci Partisi diaktifkan, Milvus menentukan cakupan pencarian berdasarkan nilai Kunci Partisi yang ditentukan dalam filter pencarian dan hanya memindai entitas di dalam partisi yang cocok. </p></li>
 </ul>
 <p>

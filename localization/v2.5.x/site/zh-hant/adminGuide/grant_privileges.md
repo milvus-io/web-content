@@ -19,8 +19,11 @@ title: 授予角色特權或特權群組
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>建立角色後，就可以授予角色權限。本指南介紹如何授予角色特權或特權群組。</p>
-<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">授予角色一個特權或特權群組<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
+    </button></h1><p>建立角色後，就可以授予角色權限。本指南介紹如何授予角色權限或權限組。</p>
+<div class="alert note">
+<p>本頁面的例子使用了Milvus 2.5引入的GrantV2和RevokeV2 API。建議您使用新的 API 以獲得更好的性能和可用性。</p>
+</div>
+<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">授予角色權限或權限組<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,7 +38,7 @@ title: 授予角色特權或特權群組
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 2.5 引入了新版本的 API，簡化了授予操作。向角色授予權限時，不再需要查找對象類型。以下是參數和相對應的解釋。</p>
+    </button></h2><p>Milvus 2.5 引入了新版本的 API，簡化了授予操作。當授權給角色時，您不再需要查詢物件類型。以下是參數和相對應的解釋。</p>
 <ul>
 <li><p><strong>role_name：</strong>需要授予特權或特權群組的目標角色名稱。</p></li>
 <li><p><strong>Resource: 資源</strong>：特權的目標資源，可以是特定的實體、資料庫或集合。下表解釋如何在<code translate="no">client.grantV2()</code> 方法中指定資源。</p></li>

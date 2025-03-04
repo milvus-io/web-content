@@ -113,12 +113,12 @@ docs[<span class="hljs-number">1</span>]
         ></path>
       </svg>
     </button></h2><p>Vamos a inicializar un Milvus vector store con los documentos, que cargar los documentos en el Milvus vector store y construir un índice bajo el capó.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, Zilliz
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings()
 
-vectorstore = Milvus.from_documents(  <span class="hljs-comment"># or Zilliz.from_documents</span>
+vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=embeddings,
     connection_args={

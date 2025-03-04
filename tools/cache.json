@@ -958,7 +958,7 @@
     "v2.5.x/site/en/about/milvus_adopters.md": "2025-01-14T08:40:20.649Z",
     "v2.5.x/site/en/about/overview.md": "2025-02-10T09:12:54.097Z",
     "v2.5.x/site/en/about/roadmap.md": "2025-01-14T08:40:23.851Z",
-    "v2.5.x/site/en/menuStructure/en.json": "2025-02-10T09:34:38.034Z",
+    "v2.5.x/site/en/menuStructure/en.json": "2025-03-04T08:23:20.675Z",
     "v2.5.x/site/en/adminGuide/allocate.md": "2025-01-14T08:43:02.166Z",
     "v2.5.x/site/en/adminGuide/authenticate.md": "2025-01-14T08:43:03.251Z",
     "v2.5.x/site/en/adminGuide/chunk_cache.md": "2025-01-14T08:43:04.262Z",
@@ -1020,7 +1020,7 @@
     "v2.5.x/site/en/embeddings/embed-with-voyage.md": "2025-01-14T08:44:19.220Z",
     "v2.5.x/site/en/embeddings/embeddings.md": "2025-01-14T08:44:20.606Z",
     "v2.5.x/site/en/adminGuide/drop_users_roles.md": "2025-01-14T08:44:39.657Z",
-    "v2.5.x/site/en/adminGuide/grant_privileges.md": "2025-02-10T09:13:19.618Z",
+    "v2.5.x/site/en/adminGuide/grant_privileges.md": "2025-03-04T08:10:46.984Z",
     "v2.5.x/site/en/adminGuide/grant_roles.md": "2025-01-14T08:44:42.762Z",
     "v2.5.x/site/en/adminGuide/privilege_group.md": "2025-02-10T09:13:45.225Z",
     "v2.5.x/site/en/adminGuide/use-pulsar-v2.md": "2025-01-14T08:44:45.713Z",
@@ -1087,7 +1087,7 @@
     "v2.5.x/site/en/integrations/knowledge_table_with_milvus.md": "2025-01-14T08:49:44.257Z",
     "v2.5.x/site/en/integrations/kotaemon_with_milvus.md": "2025-01-14T08:49:45.699Z",
     "v2.5.x/site/en/integrations/langchain/basic_usage_langchain.md": "2025-01-23T16:37:23.685Z",
-    "v2.5.x/site/en/integrations/langchain/integrate_with_langchain.md": "2025-01-23T16:37:56.218Z",
+    "v2.5.x/site/en/integrations/langchain/integrate_with_langchain.md": "2025-03-04T08:11:36.763Z",
     "v2.5.x/site/en/integrations/langchain/milvus_hybrid_search_retriever.md": "2025-01-23T16:38:14.920Z",
     "v2.5.x/site/en/integrations/llama_agents_metadata.md": "2025-01-14T08:49:53.729Z",
     "v2.5.x/site/en/integrations/milvus_rag_with_dynamiq.md": "2025-01-14T08:50:16.731Z",
@@ -1245,7 +1245,7 @@
     "v2.5.x/site/en/userGuide/search-query-get/range-search.md": "2025-01-14T08:54:23.432Z",
     "v2.5.x/site/en/userGuide/search-query-get/reranking.md": "2025-01-14T08:54:24.788Z",
     "v2.5.x/site/en/userGuide/search-query-get/single-vector-search.md": "2025-01-14T08:54:27.118Z",
-    "v2.5.x/site/en/userGuide/search-query-get/use-partition-key.md": "2025-02-10T09:15:23.475Z",
+    "v2.5.x/site/en/userGuide/search-query-get/use-partition-key.md": "2025-03-04T08:11:56.132Z",
     "v2.5.x/site/en/userGuide/search-query-get/with-iterators.md": "2025-01-14T08:54:29.579Z",
     "v2.5.x/site/en/userGuide/tools/birdwatcher_install_guides.md": "2025-01-14T08:54:30.585Z",
     "v2.5.x/site/en/userGuide/tools/birdwatcher_overview.md": "2025-01-14T08:54:31.580Z",
@@ -1277,6 +1277,8 @@
     "v2.5.x/site/en/userGuide/manage-indexes/floating-vector/hnsw.md": "2025-01-24T03:54:55.027Z",
     "v2.5.x/site/en/userGuide/manage-indexes/floating-vector/ivf-flat.md": "2025-01-24T03:55:08.829Z",
     "v2.5.x/site/en/userGuide/manage-indexes/floating-vector/ivf-pq.md": "2025-01-27T08:32:44.086Z",
-    "v2.5.x/site/en/embeddings/embed-with-model2vec.md": "2025-02-28T01:49:30.954Z"
+    "v2.5.x/site/en/embeddings/embed-with-model2vec.md": "2025-02-28T01:49:30.954Z",
+    "v2.5.x/site/en/integrations/ETL_using_vectorETL.md": "2025-03-04T08:11:03.125Z",
+    "v2.5.x/site/en/integrations/build_RAG_from_s3_with_milvus.md": "2025-03-04T08:11:18.839Z"
   }
 }

@@ -1,7 +1,7 @@
 ---
 id: integrate_with_langchain.md
 summary: >-
-  Это руководство демонстрирует, как построить систему Retrieval-Augmented
+  В этом руководстве показано, как построить систему Retrieval-Augmented
   Generation (RAG) с помощью LangChain и Milvus.
 title: Система Retrieval-Augmented Generation (RAG) с Milvus и LangChain
 ---
@@ -113,12 +113,12 @@ docs[<span class="hljs-number">1</span>]
         ></path>
       </svg>
     </button></h2><p>Мы инициализируем векторное хранилище Milvus с документами, затем загрузим документы в векторное хранилище Milvus и построим индекс под капотом.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, Zilliz
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings()
 
-vectorstore = Milvus.from_documents(  <span class="hljs-comment"># or Zilliz.from_documents</span>
+vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=embeddings,
     connection_args={

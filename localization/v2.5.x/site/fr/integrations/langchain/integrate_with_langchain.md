@@ -113,12 +113,12 @@ docs[<span class="hljs-number">1</span>]
         ></path>
       </svg>
     </button></h2><p>Nous allons initialiser un magasin de vecteurs Milvus avec les documents, puis charger les documents dans le magasin de vecteurs Milvus et construire un index sous le capot.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, Zilliz
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings()
 
-vectorstore = Milvus.from_documents(  <span class="hljs-comment"># or Zilliz.from_documents</span>
+vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=embeddings,
     connection_args={
@@ -268,7 +268,7 @@ rag_chain2.with_config(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">&quot;Self-reflection of an AI agent involves the process of synthesizing memories into higher-level inferences over time to guide the agent's future behavior. It serves as a mechanism to create higher-level summaries of past events. One approach to self-reflection involves prompting the language model with the 100 most recent observations and asking it to generate the 3 most salient high-level questions based on those observations. This process helps the AI agent optimize believability in the current moment and over time.&quot;
 </code></pre>
-<p>Lorsque nous modifions la condition de recherche pour filtrer les documents par la deuxième source, comme le contenu de ce blog n'a rien à voir avec la question posée, nous obtenons une réponse sans aucune information pertinente.</p>
+<p>Lorsque nous changeons la condition de recherche pour filtrer les documents par la deuxième source, comme le contenu de ce blog n'a rien à voir avec la question posée, nous obtenons une réponse sans aucune information pertinente.</p>
 <pre><code translate="no" class="language-python">rag_chain2.with_config(
     configurable={
         <span class="hljs-string">&quot;retriever_search_kwargs&quot;</span>: <span class="hljs-built_in">dict</span>(

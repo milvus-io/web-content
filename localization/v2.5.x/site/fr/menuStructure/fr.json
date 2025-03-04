@@ -2016,6 +2016,18 @@
             "id": "build_RAG_with_milvus_and_crawl4ai.md",
             "order": 6,
             "children": []
+          },
+          {
+            "label": "AWS S3",
+            "id": "build_RAG_from_s3_with_milvus.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "VectorETL",
+            "id": "ETL_using_vectorETL.md",
+            "order": 8,
+            "children": []
           }
         ]
       },
@@ -2107,7 +2119,7 @@
         "children": []
       },
       {
-        "label": "Utiliser ColPali pour la recherche multimodale",
+        "label": "Utiliser ColPali pour la récupération multimodale",
         "id": "use_ColPali_with_milvus.md",
         "order": 10,
         "children": []

@@ -23,6 +23,9 @@ title: Octroi de privilèges ou de groupes de privilèges à des rôles
         ></path>
       </svg>
     </button></h1><p>Une fois qu'un rôle est créé, vous pouvez lui accorder des privilèges. Ce guide explique comment accorder des privilèges ou des groupes de privilèges à un rôle.</p>
+<div class="alert note">
+<p>Les exemples de cette page utilisent les API GrantV2 et RevokeV2, introduites dans Milvus 2.5. Il est recommandé d'utiliser les nouvelles API pour améliorer les performances et la convivialité.</p>
+</div>
 <h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">Octroi d'un privilège ou d'un groupe de privilèges à un rôle<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

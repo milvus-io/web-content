@@ -22,8 +22,11 @@ title: Rechte oder Rechtegruppen für Rollen erteilen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Sobald eine Rolle erstellt ist, können Sie dieser Rolle Rechte gewähren. In diesem Handbuch wird erläutert, wie Sie einer Rolle Rechte oder Rechtegruppen gewähren.</p>
-<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">Gewähren Sie einer Rolle ein Recht oder eine Gruppe von Rechten<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
+    </button></h1><p>Sobald eine Rolle erstellt ist, können Sie dieser Rolle Rechte gewähren. In diesem Handbuch wird beschrieben, wie Sie einer Rolle Berechtigungen oder Berechtigungsgruppen gewähren.</p>
+<div class="alert note">
+<p>Die Beispiele auf dieser Seite verwenden die APIs GrantV2 und RevokeV2, die in Milvus 2.5 eingeführt wurden. Es wird empfohlen, die neuen APIs für eine bessere Leistung und Benutzerfreundlichkeit zu verwenden.</p>
+</div>
+<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">Erteilen eines Privilegs oder einer Privileggruppe an eine Rolle<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,14 +41,14 @@ title: Rechte oder Rechtegruppen für Rollen erteilen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 2.5 führt eine neue Version der API ein, die die Erteilungsoperation rationalisiert. Sie müssen nicht mehr den Objekttyp nachschlagen, wenn Sie einer Rolle ein Recht gewähren. Im Folgenden sind die Parameter und die entsprechenden Erklärungen aufgeführt.</p>
+    </button></h2><p>Milvus 2.5 führt eine neue Version der API ein, die den Erteilungsvorgang rationalisiert. Sie müssen nicht mehr den Objekttyp nachschlagen, wenn Sie einer Rolle ein Recht gewähren. Im Folgenden sind die Parameter und die entsprechenden Erklärungen aufgeführt.</p>
 <ul>
 <li><p><strong>role_name:</strong> Der Name der Zielrolle, für die ein oder mehrere Privileg(e) oder eine oder mehrere Privileggruppen gewährt werden sollen.</p></li>
 <li><p><strong>Ressource</strong>: Die Zielressource eines Zugriffsrechts, die eine bestimmte Instanz, Datenbank oder Sammlung sein kann. In der folgenden Tabelle wird erläutert, wie die Ressource in der Methode <code translate="no">client.grantV2()</code> anzugeben ist.</p></li>
 </ul>
 <table data-block-token="JEEodjgvGobTYaxIpelculQCnAd"><thead><tr><th data-block-token="A8x3dXMhzoCf5ZxZyUscfy4GnWd" colspan="1" rowspan="1"><p data-block-token="SDgKdAzXFoodDQxru5WcGjBTnof"><strong>Ebene</strong></p>
 </th><th data-block-token="DOINdNjYroiDUMxdNn3cPC2cn7e" colspan="1" rowspan="1"><p data-block-token="MDSZdFSCdoi3w8x1Dglc2YUdnse"><strong>Ressource</strong></p>
-</th><th data-block-token="O6ZZdSVrOoBMZ1xMnWccUglpncf" colspan="1" rowspan="1"><p data-block-token="LOJMd38TkoEUenxnXvUcyuqsnof"><strong>Erteilung Methode</strong></p>
+</th><th data-block-token="O6ZZdSVrOoBMZ1xMnWccUglpncf" colspan="1" rowspan="1"><p data-block-token="LOJMd38TkoEUenxnXvUcyuqsnof"><strong>Gewährung Methode</strong></p>
 </th><th data-block-token="ACnjduxuRoz4oKxBGy9cnwyrnW7" colspan="1" rowspan="1"><p data-block-token="JJWcdxsQ4obIDQxiZhCc4r8Knhd"><strong>Hinweise</strong></p>
 </th></tr></thead><tbody><tr><td data-block-token="WrgHdNmJworvbjxDC0Ac8Luynkd" colspan="1" rowspan="2"><p data-block-token="IqewdrEkZoZCuqxe9j1coReKnVf"><strong>Sammlung</strong></p>
 <p data-block-token="Xt2LdgXN7od47Ox9jGtctHwrn0d"></p>
@@ -114,7 +117,7 @@ title: Rechte oder Rechtegruppen für Rollen erteilen
 </td><td data-block-token="RE6CdzT5VoisWnxyhbLcTRx4nbh" colspan="1" rowspan="1"><p data-block-token="Faqud1JARoXTpzxsl9Xcvht4nZb">Alle Aliasnamen einer Sammlung anzeigen</p>
 </td><td data-block-token="ZuxOdlYxroqO2MxgvQBcC7JFnch" colspan="1" rowspan="1"><p data-block-token="PVePdAscpogIkZxc1NYcmsManmd"><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/list_aliases.md">ListAliases</a></p>
 </td></tr><tr><td data-block-token="U69edBjaZoI5vQx5Hkbca6qvnVf" colspan="1" rowspan="1"><p data-block-token="AcaRdgCvSoqlJmxMqTTc3iAzndb">DescribeCollection</p>
-</td><td data-block-token="JK99dTHjiobQPtx16BIcwaXwnLg" colspan="1" rowspan="1"><p data-block-token="ZQ8vdJF8to9xakx5DL7c2phLnyf">Anzeige der Details einer Sammlung</p>
+</td><td data-block-token="JK99dTHjiobQPtx16BIcwaXwnLg" colspan="1" rowspan="1"><p data-block-token="ZQ8vdJF8to9xakx5DL7c2phLnyf">Anzeigen der Details einer Sammlung</p>
 </td><td data-block-token="L2zNd6oksoXRpaxUXdccyU2ynse" colspan="1" rowspan="1"><p data-block-token="MSHwdiB7ooUykWx4rpmcQUB7ncb"><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_collection.md">DescribeCollection</a></p>
 </td></tr><tr><td data-block-token="Eexmd4YEroPmMex9l9AcmsbsnRc" colspan="1" rowspan="1"><p data-block-token="SJ8xdAeAcoZ4UQx9s5ccCWvtn6b">DescribeAlias</p>
 </td><td data-block-token="Dheldg28Io7zwmx5gCXcdzZfnxb" colspan="1" rowspan="1"><p data-block-token="Tt0CdxNMooqShuxPnmMcL3rCnGh">Zeigt die Details eines Alias an</p>

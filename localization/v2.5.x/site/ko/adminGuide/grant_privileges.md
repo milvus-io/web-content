@@ -20,6 +20,9 @@ title: 역할에 권한 또는 권한 그룹 부여하기
         ></path>
       </svg>
     </button></h1><p>역할이 만들어지면 해당 역할에 권한을 부여할 수 있습니다. 이 가이드에서는 역할에 권한 또는 권한 그룹을 부여하는 방법을 소개합니다.</p>
+<div class="alert note">
+<p>이 페이지의 예제에서는 Milvus 2.5에 도입된 GrantV2 및 RevokeV2 API를 사용합니다. 더 나은 성능과 사용성을 위해 새로운 API를 사용하는 것이 좋습니다.</p>
+</div>
 <h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">역할에 권한 또는 권한 그룹 부여하기<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

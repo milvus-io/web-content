@@ -20,7 +20,10 @@ title: ロールへの特権または特権グループの付与
         ></path>
       </svg>
     </button></h1><p>ロールを作成すると、そのロールに特権を付与することができます。このガイドでは、ロールに特権または特権グループを付与する方法を紹介します。</p>
-<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">ロールへの特権または特権グループの付与<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>このページの例では、Milvus 2.5で導入されたGrantV2 APIとRevokeV2 APIを使用しています。パフォーマンスと使い勝手を向上させるために、新しいAPIを使用することをお勧めします。</p>
+</div>
+<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">ロールへの権限または権限グループの付与<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,7 +38,7 @@ title: ロールへの特権または特権グループの付与
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus2.5では、付与操作を効率化する新しいバージョンのAPIが導入されました。ロールに権限を付与する際に、オブジェクトタイプを調べる必要がなくなりました。以下にパラメータとその説明を示します。</p>
+    </button></h2><p>Milvus 2.5では、権限付与操作を効率化する新しいバージョンのAPIが導入されました。ロールに権限を付与する際に、オブジェクトタイプを調べる必要がなくなりました。以下にパラメータとその説明を示します。</p>
 <ul>
 <li><p><strong>role_name:</strong>特権または特権グループを付与する対象となるロールの名前です。</p></li>
 <li><p><strong>リソース</strong>：特定のインスタンス、データベース、コレクションを指定することができます。以下の表では、<code translate="no">client.grantV2()</code> メソッドでリソースを指定する方法を説明します。</p></li>
@@ -258,7 +261,7 @@ title: ロールへの特権または特権グループの付与
 </td><td data-block-token="QnMhdQmvwoRJRmx3NjNcWz2Fncf" colspan="1" rowspan="1"><p data-block-token="RGvndPvnDoj86Pxm8xFceP4sn8g">特権グループへの特権の追加または特権グループからの特権の削除</p>
 </td><td data-block-token="Lz0MdWmfXo7bF9xWzPxcv7mYn6b" colspan="1" rowspan="1"><p data-block-token="PNPQdG1GvoBjUXxa8iacCIxenYe"><a href="/docs/ja/privilege_group.md">特権グループの操作</a></p>
 </td></tr></tbody></table>
-<p>以下の例では、デフォルト・データベース配下の<code translate="no">collection_01</code> で特権<code translate="no">PrivilegeSearch</code> を付与する方法と、<code translate="no">privilege_group_1</code> という特権グループを<code translate="no">role_a</code> というロールに付与する方法を示します。</p>
+<p>以下の例では、デフォルト・データベース下の<code translate="no">collection_01</code> で特権<code translate="no">PrivilegeSearch</code> を付与する方法と、<code translate="no">privilege_group_1</code> という特権グループを<code translate="no">role_a</code> というロールに付与する方法を示します。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>

@@ -1314,7 +1314,7 @@
                 "children": []
               },
               {
-                "label": "Configurar os registos de acesso",
+                "label": "Configurar registos de acesso",
                 "id": "configure_access_logs.md",
                 "order": 1,
                 "children": []
@@ -1524,7 +1524,7 @@
             "children": []
           },
           {
-            "label": "Install Guides",
+            "label": "Guias de instalação",
             "id": "birdwatcher_install_guides.md",
             "order": 1,
             "children": []
@@ -2015,6 +2015,18 @@
             "label": "Crawl4AI",
             "id": "build_RAG_with_milvus_and_crawl4ai.md",
             "order": 6,
+            "children": []
+          },
+          {
+            "label": "AWS S3",
+            "id": "build_RAG_from_s3_with_milvus.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "VectorETL",
+            "id": "ETL_using_vectorETL.md",
+            "order": 8,
             "children": []
           }
         ]

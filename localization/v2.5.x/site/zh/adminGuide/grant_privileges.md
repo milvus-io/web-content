@@ -19,7 +19,10 @@ title: 为角色授予权限或权限组
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>创建角色后，就可以向角色授予权限。本指南将介绍如何向角色授予权限或权限组。</p>
+    </button></h1><p>创建角色后，就可以向角色授予权限。本指南介绍如何向角色授予权限或权限组。</p>
+<div class="alert note">
+<p>本页示例使用了 Milvus 2.5 中引入的 GrantV2 和 RevokeV2 API。建议使用新的 API 以获得更好的性能和可用性。</p>
+</div>
 <h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role​" class="common-anchor-header">向角色授予权限或权限组<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +38,7 @@ title: 为角色授予权限或权限组
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 2.5 引入了新版本的 API，简化了授予操作。向角色授予权限时，不再需要查找对象类型。以下是参数和相应的解释。</p>
+    </button></h2><p>Milvus 2.5 引入了新版 API，简化了授予操作。向角色授予权限时，不再需要查找对象类型。以下是参数和相应的解释。</p>
 <ul>
 <li><p><strong>role_name：</strong>需要授予权限或权限组的目标角色名称。</p></li>
 <li><p><strong>资源</strong>：权限的目标资源，可以是特定实例、数据库或 Collections。下表解释了如何在<code translate="no">client.grantV2()</code> 方法中指定资源。</p></li>
