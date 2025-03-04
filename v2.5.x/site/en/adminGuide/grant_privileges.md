@@ -9,6 +9,12 @@ title: Grant Privilege or Privilege Group to Roles​
 
 Once a role is created, you can grant privileges to the role. This guide introduces how to grant privileges or privilege groups to a role.​
 
+<div class="alert note">
+
+Examples on this page use GrantV2 and RevokeV2 APIs, which are introduced in Milvus 2.5. You are recommended to use the new APIs for better performance and usability.
+
+</div>
+
 ## Grant a privilege or a privilege group to a role​
 
 Milvus 2.5 introduces a new version of API which streamlines the grant operation. You no longer need to look up the object type when granting a privilege to a role. The following are the parameters and corresponding explanations.​

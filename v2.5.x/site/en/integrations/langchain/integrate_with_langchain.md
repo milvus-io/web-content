@@ -92,12 +92,12 @@ We will initialize a Milvus vector store with the documents, which load the docu
 
 
 ```python
-from langchain_milvus import Milvus, Zilliz
+from langchain_milvus import Milvus
 from langchain_openai import OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings()
 
-vectorstore = Milvus.from_documents(  # or Zilliz.from_documents
+vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=embeddings,
     connection_args={
@@ -310,4 +310,3 @@ rag_chain2.with_config(
 
 ----
 This tutorial focus the basic usage of Milvus LangChain integration and simple RAG approach. For more advanced RAG techniques, please refer to the [advanced rag bootcamp](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/RAG/advanced_rag).
-
