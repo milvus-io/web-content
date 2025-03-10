@@ -47,6 +47,7 @@ summary: >-
 <li><p>Scalar fields with the nullable attribute enabled cannot be used as <code translate="no">group_by_field</code> in Grouping Search. For more information about grouping search, refer to <a href="/docs/grouping-search.md">​Grouping Search</a>.​</p></li>
 <li><p>Fields marked as nullable cannot be used as partition keys. For more information about partition keys, refer to <a href="/docs/use-partition-key.md">​Use Partition Key</a>.​</p></li>
 <li><p>When creating an index on a scalar field with the nullable attribute enabled, null values will be excluded from the index.​</p></li>
+<li><p><strong>JSON and ARRAY fields</strong>: When using <code translate="no">IS NULL</code> or <code translate="no">IS NOT NULL</code> operators to filter on JSON or ARRAY fields, these operators work at the column level, which indicates they only evaluate whether the entire JSON object or array is null. For instance, if a key inside a JSON object is null, it will not be recognized by the <code translate="no">IS NULL</code> filter. For more information, refer to <a href="/docs/basic-operators.md">Basic Operators</a>.</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">Nullable attribute<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
