@@ -213,6 +213,179 @@ filter = 'NOT color == "green"'​
 
 ```
 
+## IS NULL and IS NOT NULL Operators
+
+The `IS NULL` and `IS NOT NULL` operators are used to filter fields based on whether they contain a null value (absence of data).
+
+- `IS NULL`: Identifies entities where a specific field contains a null value, i.e., the value is absent or undefined.
+- `IS NOT NULL`: Identifies entities where a specific field contains any value other than null, meaning the field has a valid, defined value.
+
+<div class="alert note">
+
+The operators are case-insensitive, so you can use `IS NULL` or `is null`, and `IS NOT NULL` or `is not null`.
+
+</div>
+
+### Regular Scalar Fields with Null Values
+
+Milvus allows filtering on regular scalar fields, such as strings or numbers, with null values.
+
+<div class="alert note">
+
+An empty string `""` is not treated as a null value for a VARCHAR field.
+
+</div>
+
+To retrieve entities where the `description` field is null:
+
+```python
+filter = 'description IS NULL'
+```
+
+To retrieve entities where the `description` field is not null:
+
+```python
+filter = 'description IS NOT NULL'
+```
+
+To retrieve entities where the `description` field is not null and the `price` field is higher than 10:
+
+```python
+filter = 'description IS NOT NULL AND price > 10'
+```
+
+### JSON Fields with Null Values
+
+Milvus allows filtering on JSON fields that contain null values. A JSON field is treated as null in the following ways:
+
+- The entire JSON object is explicitly set to None (null), for example, `{"metadata": None}`.
+- The JSON field itself is completely missing from the entity.
+
+<div class="alert note">
+
+If some elements within a JSON object are null (e.g. individual keys), the field is still considered non-null. For example, `{"metadata": {"category": None, "price": 99.99}}` is not treated as null, even though the `category` key is null.
+
+</div>
+
+To further illustrate how Milvus handles JSON fields with null values, consider the following sample data with a JSON field `metadata`:
+
+```python
+data = [
+  {
+      "metadata": {"category": "electronics", "price": 99.99, "brand": "BrandA"},
+      "pk": 1,
+      "embedding": [0.12, 0.34, 0.56]
+  },
+  {
+      "metadata": None, # Entire JSON object is null
+      "pk": 2,
+      "embedding": [0.56, 0.78, 0.90]
+  },
+  {  # JSON field `metadata` is completely missing
+      "pk": 3,
+      "embedding": [0.91, 0.18, 0.23]
+  },
+  {
+      "metadata": {"category": None, "price": 99.99, "brand": "BrandA"}, # Individual key value is null
+      "pk": 4,
+      "embedding": [0.56, 0.38, 0.21]
+  }
+]
+```
+
+**Example 1: Retrieve entities where `metadata` is null**
+
+To find entities where the `metadata` field is either missing or explicitly set to None:
+
+```python
+filter = 'metadata IS NULL'
+
+# Example output:
+# data: [
+#     "{'metadata': None, 'pk': 2}",
+#     "{'metadata': None, 'pk': 3}"
+# ]
+```
+
+**Example 2: Retrieve entities where `metadata` is not null**
+
+To find entities where the `metadata` field is not null:
+
+```python
+filter = 'metadata IS NOT NULL'
+
+# Example output:
+# data: [
+#     "{'metadata': {'category': 'electronics', 'price': 99.99, 'brand': 'BrandA'}, 'pk': 1}",
+#     "{'metadata': {'category': None, 'price': 99.99, 'brand': 'BrandA'}, 'pk': 4}"
+# ]
+```
+
+### ARRAY Fields with Null Values
+
+Milvus allows filtering on ARRAY fields that contain null values. An ARRAY field is treated as null in the following ways:
+
+- The entire ARRAY field is explicitly set to None (null), for example, `"tags": None`.
+- The ARRAY field is completely missing from the entity.
+
+<div class="alert note">
+
+An ARRAY field cannot contain partial null values as all elements in an ARRAY field must have the same data type. For details, refer to [Array Field](array_data_type.md).
+
+</div>
+
+To further illustrate how Milvus handles ARRAY fields with null values, consider the following sample data with an ARRAY field `tags`:
+
+```python
+data = [
+  {
+      "tags": ["pop", "rock", "classic"],
+      "ratings": [5, 4, 3],
+      "pk": 1,
+      "embedding": [0.12, 0.34, 0.56]
+  },
+  {
+      "tags": None,  # Entire ARRAY is null
+      "ratings": [4, 5],
+      "pk": 2,
+      "embedding": [0.78, 0.91, 0.23]
+  },
+  {  # The tags field is completely missing
+      "ratings": [9, 5],
+      "pk": 3,
+      "embedding": [0.18, 0.11, 0.23]
+  }
+]
+```
+
+**Example 1: Retrieve entities where `tags` is null**
+
+To retrieve entities where the `tags` field is either missing or explicitly set to None:
+
+```python
+filter = 'tags IS NULL'
+
+# Example output:
+# data: [
+#     "{'tags': None, 'ratings': [4, 5], 'embedding': [0.78, 0.91, 0.23], 'pk': 2}",
+#     "{'tags': None, 'ratings': [9, 5], 'embedding': [0.18, 0.11, 0.23], 'pk': 3}"
+# ]
+```
+
+**Example 2: Retrieve entities where `tags` is not null**
+
+To retrieve entities where the `tags` field is not null:
+
+```python
+filter = 'tags IS NOT NULL'
+
+# Example output:
+# data: [
+#     "{'metadata': {'category': 'electronics', 'price': 99.99, 'brand': 'BrandA'}, 'pk': 1}",
+#     "{'metadata': {'category': None, 'price': 99.99, 'brand': 'BrandA'}, 'pk': 4}"
+# ]
+```
+
 ## Tips on Using Basic Operators with JSON and ARRAY Fields​
 
 While the basic operators in Milvus are versatile and can be applied to scalar fields, they can also be effectively used with the keys and indexes in the JSON and ARRAY fields.​

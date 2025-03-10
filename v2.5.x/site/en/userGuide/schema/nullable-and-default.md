@@ -25,6 +25,8 @@ The default value and nullable attributes streamline data migration from other d
 
 - When creating an index on a scalar field with the nullable attribute enabled, null values will be excluded from the index.​
 
+- **JSON and ARRAY fields**: When using `IS NULL` or `IS NOT NULL` operators to filter on JSON or ARRAY fields, these operators work at the column level, which indicates they only evaluate whether the entire JSON object or array is null. For instance, if a key inside a JSON object is null, it will not be recognized by the `IS NULL` filter. For more information, refer to [Basic Operators](basic-operators.md).
+
 ## Nullable attribute
 
 The `nullable` attribute allows you to store null values in a collection, providing flexibility when handling unknown data.​
