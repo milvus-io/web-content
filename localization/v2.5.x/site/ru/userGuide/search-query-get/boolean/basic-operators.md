@@ -174,11 +174,147 @@ title: Основные операторы
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition​" class="common-anchor-header">Пример 3: Использование <code translate="no">NOT</code> для исключения условия</h3><p>Найти все товары, для которых <code translate="no">color</code> не является &quot;зеленым&quot;.</p>
+<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition​" class="common-anchor-header">Пример 3: Использование <code translate="no">NOT</code> для исключения условия</h3><p>Чтобы найти все продукты, для которых <code translate="no">color</code> не является &quot;зеленым&quot;.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;NOT color == &quot;green&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields​" class="common-anchor-header">Советы по использованию основных операторов с полями JSON и ARRAY<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields​" class="anchor-icon" translate="no">
+<h2 id="IS-NULL-and-IS-NOT-NULL-Operators" class="common-anchor-header">Операторы IS NULL и IS NOT NULL<button data-href="#IS-NULL-and-IS-NOT-NULL-Operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Операторы <code translate="no">IS NULL</code> и <code translate="no">IS NOT NULL</code> используются для фильтрации полей на основе того, содержат ли они нулевое значение (отсутствие данных).</p>
+<ul>
+<li><code translate="no">IS NULL</code>: Определяет сущности, в которых определенное поле содержит нулевое значение, т. е. значение отсутствует или не определено.</li>
+<li><code translate="no">IS NOT NULL</code>: Определяет сущности, в которых определенное поле содержит любое значение, отличное от null, что означает, что поле имеет действительное, определенное значение.</li>
+</ul>
+<div class="alert note">
+<p>Операторы не зависят от регистра, поэтому вы можете использовать <code translate="no">IS NULL</code> или <code translate="no">is null</code>, а также <code translate="no">IS NOT NULL</code> или <code translate="no">is not null</code>.</p>
+</div>
+<h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">Регулярные скалярные поля с нулевыми значениями</h3><p>Milvus позволяет фильтровать обычные скалярные поля, такие как строки или числа, с нулевыми значениями.</p>
+<div class="alert note">
+<p>Пустая строка <code translate="no">&quot;&quot;</code> не рассматривается как нулевое значение для поля VARCHAR.</p>
+</div>
+<p>Чтобы получить сущности, в которых поле <code translate="no">description</code> имеет нулевое значение:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NULL&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Чтобы получить сущности, в которых поле <code translate="no">description</code> не является нулевым:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Чтобы получить сущности, в которых поле <code translate="no">description</code> не является нулевым, а поле <code translate="no">price</code> больше 10:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL AND price &gt; 10&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="JSON-Fields-with-Null-Values" class="common-anchor-header">Поля JSON с нулевыми значениями</h3><p>Milvus позволяет фильтровать поля JSON, содержащие нулевые значения. Поле JSON считается нулевым в следующих случаях:</p>
+<ul>
+<li>Весь объект JSON явно имеет значение None (null), например, <code translate="no">{&quot;metadata&quot;: None}</code>.</li>
+<li>Само JSON-поле полностью отсутствует в сущности.</li>
+</ul>
+<div class="alert note">
+<p>Если некоторые элементы в JSON-объекте являются нулевыми (например, отдельные ключи), поле все равно считается ненулевым. Например, <code translate="no">{&quot;metadata&quot;: {&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> не рассматривается как null, даже если ключ <code translate="no">category</code> является null.</p>
+</div>
+<p>Чтобы проиллюстрировать, как Milvus обрабатывает поля JSON с нулевыми значениями, рассмотрим следующий пример данных с полем JSON <code translate="no">metadata</code>:</p>
+<pre><code translate="no" class="language-python">data = [
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>]
+  },
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-comment"># Entire JSON object is null</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.56</span>, <span class="hljs-number">0.78</span>, <span class="hljs-number">0.90</span>]
+  },
+  {  <span class="hljs-comment"># JSON field `metadata` is completely missing</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.91</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>]
+  },
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>}, <span class="hljs-comment"># Individual key value is null</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.56</span>, <span class="hljs-number">0.38</span>, <span class="hljs-number">0.21</span>]
+  }
+]
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Пример 1: Получение сущностей, для которых поле <code translate="no">metadata</code> равно null.</strong></p>
+<p>Чтобы найти сущности, в которых поле <code translate="no">metadata</code> либо отсутствует, либо явно установлено значение None:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Пример 2: Получить сущности, в которых поле <code translate="no">metadata</code> не равно null</strong></p>
+<p>Чтобы найти сущности, в которых поле <code translate="no">metadata</code> не является нулевым:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">Поля ARRAY с нулевыми значениями</h3><p>Milvus позволяет фильтровать поля ARRAY, содержащие нулевые значения. Поле ARRAY считается нулевым в следующих случаях:</p>
+<ul>
+<li>Для всего поля ARRAY явно установлено значение None (null), например, <code translate="no">&quot;tags&quot;: None</code>.</li>
+<li>Поле ARRAY полностью отсутствует в сущности.</li>
+</ul>
+<div class="alert note">
+<p>Поле ARRAY не может содержать частичные нулевые значения, так как все элементы в поле ARRAY должны иметь одинаковый тип данных. Подробнее см. в разделе <a href="/docs/ru/array_data_type.md">Поле массива</a>.</p>
+</div>
+<p>Чтобы проиллюстрировать, как Milvus обрабатывает поля ARRAY с нулевыми значениями, рассмотрим следующий пример данных с полем ARRAY <code translate="no">tags</code>:</p>
+<pre><code translate="no" class="language-python">data = [
+  {
+      <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>]
+  },
+  {
+      <span class="hljs-string">&quot;tags&quot;</span>: <span class="hljs-literal">None</span>,  <span class="hljs-comment"># Entire ARRAY is null</span>
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.78</span>, <span class="hljs-number">0.91</span>, <span class="hljs-number">0.23</span>]
+  },
+  {  <span class="hljs-comment"># The tags field is completely missing</span>
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">9</span>, <span class="hljs-number">5</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.18</span>, <span class="hljs-number">0.11</span>, <span class="hljs-number">0.23</span>]
+  }
+]
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Пример 1: Получение сущностей, для которых <code translate="no">tags</code> равно null.</strong></p>
+<p>Чтобы получить сущности, в которых поле <code translate="no">tags</code> либо отсутствует, либо явно установлено значение None:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [4, 5], &#x27;embedding&#x27;: [0.78, 0.91, 0.23], &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Пример 2: Получить сущности, в которых поле <code translate="no">tags</code> не равно null</strong></p>
+<p>Получение сущностей, в которых поле <code translate="no">tags</code> не является нулевым:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields​" class="common-anchor-header">Советы по использованию базовых операторов с полями JSON и ARRAY<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

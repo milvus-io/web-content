@@ -42,35 +42,35 @@ summary: >-
     <thead>
         <tr>
             <th>Categoria</th>
-            <th>Milvus 2.5.0 (raggiunto nelle ultime versioni)</th>
-            <th>Prossima release (metà CY25)</th>
-            <th>Roadmap futura (entro 1 anno)</th>
+            <th>Milvus 2.5.x (raggiunto nelle ultime versioni)</th>
+            <th>Prossima release - Milvus 2.6 (metà CY25)</th>
+            <th>Roadmap futura - Milvus 3.0 (entro 1 anno)</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><strong>Elaborazione di dati non strutturati guidata dall'AI</strong><br/><i>Rafforzamento della capacità di elaborare e analizzare dati non strutturati utilizzando modelli AI e tecnologie avanzate.</i></td>
-            <td><strong>Ricerca full text</strong><br/><i>Supportare la ricerca full text con Sparse-BM25. La nuova API accetta il testo come input e genera automaticamente vettori sparsi all'interno di Milvus</i><br/><br/><strong>Sparse Vector(GA)</strong><br/><i>Supportare un metodo di archiviazione e indicizzazione efficiente per i vettori sparsi</i>.<br/></td>
-            <td><strong>Data-In e Data-Out</strong><br/><i>Supporto dei principali servizi di modello per l'inserimento dei dati originali</i><br/><br/><strong>Advanced Reranker</strong><br/><i>Supporto di reranker basati su modello e funzione di punteggio definita dall'utente</i><br/><br/> JSON<strong>Enhancement</strong><br/><i>Indicizzazione e parsing</i> JSON<i>per accelerare l'elaborazione</i></td>
-            <td><strong>Dati originali in entrata e in uscita</strong><br/><i>Supporto di Blob e riferimenti url per l'elaborazione dei dati originali</i><br/><br/><strong>Supporto di più tipi di dati</strong><br/><i>ad esempio Datetime, Map, GIS</i><br/><br/><strong>Supporto dei tensori</strong><br/><i>Supporto di un elenco di vettori, uso tipico come Colbert, Copali ecc.</i></td>
+            <td><strong>Elaborazione dei dati non strutturati guidata dall'intelligenza artificiale</strong><br/><i>Rafforzare la capacità di elaborare e analizzare i dati non strutturati utilizzando modelli di intelligenza artificiale e tecnologie avanzate</i>.</td>
+            <td><strong>Ricerca full text</strong><br/><i>Supporto della ricerca full text con Sparse-BM25. La nuova API accetta il testo come input e genera automaticamente vettori sparsi all'interno di Milvus</i><br/><br/><strong>Sparse Vector (GA)</strong><br/><i>Supportare un metodo di archiviazione e indicizzazione efficiente per i vettori sparsi</i><br/></td>
+            <td><strong>Data-In e Data-Out</strong><br/><i>Supporta i principali servizi di modello per l'inserimento del testo originale</i><br/><br/><strong>Advanced Reranker</strong><br/><i>Supporta reranker basati su modello e funzione di punteggio definita dall'utente</i><br/><br/><strong>Ricerca</strong> iterativa<br/><i>Rivede il vettore di query in base all'etichettatura dell'utente</i></td>
+            <td><strong>Supporto dei tensori</strong><br/><i>Supporto di elenchi di vettori, usi tipici come Colbert, Copali e rappresentazione video</i><br/><br/><strong>Supporto di più tipi di dati</strong><br/><i>ad esempio Datetime, Map, GIS</i></td>
         </tr>
         <tr>
             <td><strong>Qualità e prestazioni della ricerca</strong><br/><i>Fornisce risultati accurati, pertinenti e veloci ottimizzando l'architettura, gli algoritmi e le API</i>.</td>
             <td><strong>Funzione Text Match</strong><br/><i>Filtrare rapidamente parole chiave/token in testo/varchar</i><br/><br/><strong>Miglioramento della ricerca per gruppi</strong><br/><i>Introdurre group_size e aggiungere il supporto per gruppi nella ricerca ibrida</i><br/><br/><strong>Bitmap Index e Inverted Index</strong><br/><i>Accelerare il filtraggio sui tag</i></td>
-            <td><strong>Advanced Match</strong><br/><i>ad esempio Match Phrase, Fuzzy Match e altri tokenizer</i><br/><br/><strong>Aggregazioni</strong><br/><i>Aggregazioni di campi scalari, ad esempio min, max, count, distinct.</i><br/></td>
-            <td><strong>Aggiornamento parziale</strong><br/><i>Supporto degli aggiornamenti del valore di un campo specifico</i><br/><br/><strong>Capacità di ordinamento</strong><br/><i>Ordinamento per campi scalari durante l'esecuzione</i><br/><br/><strong>Supporto del raggruppamento dei dati</strong><br/><i>Co-località dei dati</i></td>
+            <td><strong>Advanced Match</strong><br/> es<i>. phrase_match, multi_match </i><br/><br/><strong>Miglioramento dell'analizzatore</strong><br/><i>Miglioramento dell'analizzatore con supporto esteso al tokenizer e migliore osservabilità</i><br/><br/><strong>Filtraggio</strong> JSON<br/><i>Ottimizzazione dell'indicizzazione e del parsing JSON per un'elaborazione più veloce</i></td>
+            <td><strong>Capacità di ordinamento</strong><br/><i>Ordinamento per campi scalari durante l'esecuzione</i><br/><br/><strong>Supporto del clustering dei dati</strong><br/><i>Co-località dei dati</i></td>
         </tr>
         <tr>
-            <td><strong>Funzionalità e gestione ricche</strong><br/><i>Funzionalità di gestione dei dati robuste e di facile utilizzo per gli sviluppatori</i></td>
-            <td><strong>Supporto di file CSV nell'importazione dei dati</strong><br/><i>Bulkinsert supporta il formato CSV</i><br/><br/><strong>Supporto di valori nulli e predefiniti</strong><br/><i>I tipi</i> nulli<i>e predefiniti facilitano l'importazione di dati da altri DBMS</i><br/><br/><strong>Milvus WebUI (Beta)</strong><br/><i>Strumenti di gestione visiva per i DBA</i></td>
-            <td><strong>Deduplicazione delle chiavi primarie</strong><br/><i>Utilizzando l'indice globale pk</i><br/><br/><strong>Modifica online dello schema</strong><br/><i>ad esempio aggiunta/eliminazione di campi, modifica della lunghezza di varchar</i><br/><br/><strong>Versionamento e ripristino dei dati</strong><br/><i>Supporto del versionamento dei dati tramite snapshot</i></td>
-            <td><strong>Rust e C++ SDK</strong><br/><i>Supporto di più client</i><br/><br/><strong>Supporto UDF </strong><br/><i>Funzione definita dall'utente</i></td>
+            <td><strong>Funzionalità e gestione ricche</strong><br/><i>Funzionalità di gestione dei dati robuste e facili da sviluppare</i></td>
+            <td><strong>Supporto di file csv nell'importazione dei dati</strong><br/><i>Bulkinsert supporta il formato csv</i><br/><br/><strong>Supporto di valori nulli e predefiniti</strong><br/><i>I tipi</i> nulli<i>e predefiniti facilitano l'importazione di dati da altri DBMS</i><br/><br/><strong>Milvus WebUI (Beta)</strong><br/><i>Strumenti di gestione visiva per i DBA</i></td>
+            <td><strong>Modifica dello schema</strong><br/><i>ad esempio aggiunta/eliminazione di campi, modifica della lunghezza di varchar</i><br/><br/><strong>Aggregazioni</strong><br/><i>Aggregazioni di campi scalari, ad esempio conteggio, valore distinto, min, max</i><br/><br/><strong>Supporto UDF</strong><br/><i>Funzione definita dall'utente</i></td>
+            <td><strong>Aggiornamento in blocco</strong><br/><i>Supporta aggiornamenti in blocco del valore di un campo specifico</i><br/><br/><strong>Deduplicazione delle chiavi primarie</strong><br/><i>Utilizzando l'indice globale pk</i><br/><br/><strong>Versionamento e ripristino dei dati</strong><br/><i>Supporta il versionamento dei dati tramite snapshot</i></td>
         </tr>
         <tr>
-            <td><strong>Efficienza dei costi e architettura</strong><br/><i>Sistemi all'avanguardia, con priorità a stabilità, efficienza dei costi e scalabilità </i></td>
-            <td><strong>Load by Field</strong><br/><i>Scegliere una parte della collezione da caricare</i><br/><br/><strong>Memory Optimization</strong><br/><i>Ridurre l'OOM e migliorare il carico</i><br/><br/><strong>Streaming Node (Beta)</strong><br/><i>Fornire coerenza globale e risolvere il collo di bottiglia delle prestazioni sul coordinatore principale</i><br/><br/><strong>Storage Format V2 (Beta)</strong><br/><i>Progettazione di formati universali e base per l'accesso ai dati su disco</i><br/><br/> Clustering<strong>Compaction</strong><br/><i>Ridistribuzione dei dati in base alla configurazione per accelerare le prestazioni di lettura</i></td>
-            <td><strong>Lazy Load</strong><br/><i>Il caricamento può essere avviato dalla prima operazione di lettura senza richiamare esplicitamente load()</i><br/><br/><strong>Tiered Storage</strong><br/><i>Supporto di hot e cold storage per l'ottimizzazione dei costi</i><br/><br/><strong>Release by Field</strong><br/><i>Rilascio di parte della raccolta per ridurre l'utilizzo della memoria</i><br/><br/><strong>Streaming Node (GA)</strong><br/><i>Elaborazione di dati in streaming e semplificazione dell'architettura</i></td>
-            <td><strong>Rimuovere le dipendenze</strong><br/><i>Ridurre o eliminare le dipendenze da componenti esterni come pulsar, etcd</i><br/><br/><strong>Fondere la logica di coordinamento in MixCoord</strong><br/><i>Semplificare l'architettura</i></td>
+            <td><strong>Efficienza dei costi e architettura</strong><br/><i>Sistemi all'avanguardia con stabilità, efficienza dei costi e distribuzione semplificata.</i></td>
+            <td><strong>Ottimizzazione della memoria</strong><br/><i>Riduzione dell'OOM e potenziamento del carico</i><br/><br/><strong>Compattazione</strong> del clustering<br/><i>Ridistribuzione dei dati in base alla configurazione per accelerare le prestazioni di lettura</i><br/><br/><strong>Storage Format V2 (Beta)</strong><br/><i>Design dei formati universali e base per l'accesso ai dati su disco</i></td>
+            <td><strong>Archiviazione a livelli</strong><br/><i>Supporto per l'archiviazione a caldo e a freddo per l'ottimizzazione dei costi</i><br/><br/><strong>Stream Node</strong><br/><i>Elaborazione di dati in streaming e semplificazione del flusso di scrittura incrementale</i><br/><br/><strong>MixCoord</strong><br/><i>Unione delle logiche Coord in un'unica soluzione</i></td>
+            <td><strong>Vector Lake</strong><br/><i>Soluzione offline conveniente, connettore spark e integrazione con iceberg</i><br/><br/><strong>Logstore Component</strong><br/><i>Ridurre le dipendenze da componenti esterni come pulsar</i><br/><br/><strong>Data Evict Policy</strong><br/><i>Gli utenti possono definire la propria evict policy</i></td>
         </tr>
     </tbody>
 </table>
@@ -98,7 +98,7 @@ summary: >-
     </button></h2><p>In quanto progetto open-source, Milvus si basa sul contributo della comunità. Ecco come potete partecipare al nostro viaggio.</p>
 <h3 id="Share-feedback" class="common-anchor-header">Condividere il feedback</h3><ul>
 <li><p>Segnalazione di problemi: Riscontrate un bug o avete un suggerimento? Aprite un problema sulla nostra <a href="https://github.com/milvus-io/milvus/issues">pagina GitHub</a>.</p></li>
-<li><p>Suggerimenti di funzionalità: Avete idee per nuove funzionalità o miglioramenti? <a href="https://github.com/milvus-io/milvus/discussions">Saremo lieti di ascoltarle!</a></p></li>
+<li><p>Suggerimenti di funzionalità: Avete idee per nuove funzionalità o miglioramenti? Unitevi alla conversazione nel <a href="https://github.com/milvus-io/milvus/discussions/40263">nostro thread di discussione attivo</a>.</p></li>
 </ul>
 <h3 id="Code-contributions" class="common-anchor-header">Contributi al codice</h3><ul>
 <li><p>Richieste di prelievo: Contribuite direttamente alla nostra <a href="https://github.com/milvus-io/milvus/pulls">base di codice</a>. Che si tratti di correggere bug, aggiungere funzionalità o migliorare la documentazione, i vostri contributi sono benvenuti.</p></li>

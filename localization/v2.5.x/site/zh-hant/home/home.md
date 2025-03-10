@@ -10,10 +10,10 @@ id: home.md
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">免費試用管理Milvus！</h2>
-    <p class="promotion-desc">Zilliz Cloud 由 Milvus 驅動，無後顧之憂，速度快 10 倍。</p>
+    <p class="promotion-desc">Zilliz 雲端運算無後顧之憂，由 Milvus 驅動，速度快 10 倍。</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud Zilliz Cloud 中國</a></div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz雲</a></div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">開始使用<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"

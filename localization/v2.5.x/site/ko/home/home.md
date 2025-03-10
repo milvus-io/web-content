@@ -5,15 +5,15 @@ id: home.md
 <p><h1 class="title">
 Milvus 문서에 오신 것을 환영합니다!</h1></p>
 <p><h2 class="sub-title">
-여기에서는 Milvus가 무엇인지, 비즈니스 요구에 따라 애플리케이션을 구축하기 위해 Milvus를 설치, 사용 및 배포하는 방법에 대해 알아보세요.</h2></p>
+여기에서는 Milvus가 무엇인지, 비즈니스 요구 사항에 따라 애플리케이션을 구축하기 위해 Milvus를 설치, 사용 및 배포하는 방법에 대해 알아볼 수 있습니다.</h2></p>
 </div>
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">관리형 Milvus를 무료로 체험해 보세요!</h2>
-    <p class="promotion-desc">번거로움이 없고, Milvus로 구동되며, 10배 더 빠른 Zilliz Cloud.</p>
+    <p class="promotion-desc">번거로움이 없고, Milvus로 구동되며, 10배 더 빠른 Zilliz Cloud를 만나보세요.</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">질리즈 클라우드</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">질리즈 클라우드 중국</a></div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">질리즈 클라우드</a></div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">시작하기<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -34,7 +34,7 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
 <div class="start_card_container">
   
    <a href="/docs/ko/install_standalone-docker.md"> <img translate="no" src="/docs/v2.5.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/ko/install_standalone-docker.md"> <p class="link-btn">Milvus 설치하기</p> </a><p>Docker Compose 또는 Kubernetes를 사용하여 Milvus를 설치하는 방법을 알아보세요.</p>
+   </a> <a href="/docs/ko/install_standalone-docker.md"> <p class="link-btn">Milvus 설치하기</p> </a><p>도커 컴포즈 또는 쿠버네티스를 사용하여 Milvus를 설치하는 방법을 알아보세요.</p>
 </div>
 <div class="start_card_container">
   

@@ -10,10 +10,10 @@ Aqui aprenderá o que é o Milvus e como instalar, utilizar e implementar o Milv
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">Experimente o Managed Milvus gratuitamente!</h2>
-    <p class="promotion-desc">Zilliz Cloud é livre de complicações, alimentado por Milvus e 10x mais rápido.</p>
+    <p class="promotion-desc">O Zilliz Cloud é livre de complicações, é alimentado por Milvus e é 10x mais rápido.</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Cloud Zilliz Cloud China</a></div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud</a></div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">Começar a utilizar<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -48,8 +48,9 @@ summary: >-
 <li><p>Bidang skalar dengan atribut nullable yang diaktifkan tidak dapat digunakan sebagai <code translate="no">group_by_field</code> di Pencarian Pengelompokan. Untuk informasi lebih lanjut tentang pengelompokan pencarian, lihat Mengelompokkan <a href="/docs/id/grouping-search.md">Pencarian</a>.</p></li>
 <li><p>Bidang yang ditandai sebagai nullable tidak dapat digunakan sebagai kunci partisi. Untuk informasi lebih lanjut tentang kunci partisi, lihat <a href="/docs/id/use-partition-key.md">Menggunakan Kunci Partisi</a>.</p></li>
 <li><p>Saat membuat indeks pada bidang skalar dengan atribut nullable diaktifkan, nilai nol akan dikecualikan dari indeks.</p></li>
+<li><p><strong>Bidang JSON dan ARRAY</strong>: Saat menggunakan operator <code translate="no">IS NULL</code> atau <code translate="no">IS NOT NULL</code> untuk memfilter bidang JSON atau ARRAY, operator ini bekerja pada tingkat kolom, yang mengindikasikan bahwa operator ini hanya mengevaluasi apakah seluruh objek JSON atau array bernilai nol. Misalnya, jika sebuah kunci di dalam objek JSON bernilai null, maka kunci tersebut tidak akan dikenali oleh filter <code translate="no">IS NULL</code>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/basic-operators.md">Operator Dasar</a>.</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">Atribut yang dapat dinolkan<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="Nullable-attribute" class="common-anchor-header">Atribut yang dapat dinihilkan<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,7 +66,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Atribut <code translate="no">nullable</code> memungkinkan Anda menyimpan nilai null dalam koleksi, sehingga memberikan fleksibilitas saat menangani data yang tidak diketahui.</p>
-<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Mengatur atribut yang dapat dinolkan</h3><p>Saat membuat koleksi, gunakan <code translate="no">nullable=True</code> untuk menetapkan bidang yang dapat dinullkan (defaultnya adalah <code translate="no">False</code>). Contoh berikut ini membuat koleksi bernama <code translate="no">user_profiles_null</code> dan menetapkan bidang <code translate="no">age</code> sebagai nullable.</p>
+<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Mengatur atribut yang dapat dinolkan</h3><p>Saat membuat koleksi, gunakan <code translate="no">nullable=True</code> untuk menentukan bidang yang dapat dinullkan (defaultnya adalah <code translate="no">False</code>). Contoh berikut ini membuat koleksi bernama <code translate="no">user_profiles_null</code> dan menetapkan bidang <code translate="no">age</code> sebagai nullable.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -223,7 +224,7 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">Menyisipkan entitas</h3><p>Ketika Anda memasukkan data ke dalam bidang yang dapat dinullkan, masukkan null atau hilangkan bidang ini secara langsung.</p>
+<h3 id="Insert-entities" class="common-anchor-header">Menyisipkan entitas</h3><p>Ketika Anda menyisipkan data ke dalam bidang yang dapat dinullkan, sisipkan null atau hilangkan bidang ini secara langsung.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [​
@@ -872,7 +873,7 @@ curl --request POST \​
     </button></h2><p>Tabel berikut ini merangkum perilaku kolom yang dapat dinolkan dan nilai default di bawah kombinasi konfigurasi yang berbeda. Aturan-aturan ini menentukan bagaimana Milvus menangani data ketika mencoba memasukkan nilai null atau jika nilai kolom tidak disediakan.</p>
 <table>
 <thead>
-<tr><th>Nullable</th><th>Nilai Default</th><th>Tipe Nilai Default</th><th>Masukan Pengguna</th><th>Hasil</th><th>Contoh</th></tr>
+<tr><th>Nullable</th><th>Nilai Default</th><th>Jenis Nilai Default</th><th>Masukan Pengguna</th><th>Hasil</th><th>Contoh</th></tr>
 </thead>
 <tbody>
 <tr><td>✅</td><td>✅</td><td>Tidak ada/null</td><td>Tidak ada/null</td><td>Menggunakan nilai default</td><td><ul><li>Bidang: <code translate="no">age</code></li><li>Nilai default: <code translate="no">18</code></li><li>Masukan pengguna: null</li><li>Hasil: disimpan sebagai <code translate="no">18</code></li></ul></td></tr>

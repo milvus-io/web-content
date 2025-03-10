@@ -48,8 +48,9 @@ summary: >-
 <li><p>Os campos escalares com o atributo anulável ativado não podem ser usados como <code translate="no">group_by_field</code> na Pesquisa de agrupamento. Para obter mais informações sobre a pesquisa de agrupamento, consulte <a href="/docs/pt/grouping-search.md">Pesquisa de agrupamento</a>.</p></li>
 <li><p>Os campos marcados como anuláveis não podem ser usados como chaves de partição. Para obter mais informações sobre chaves de partição, consulte <a href="/docs/pt/use-partition-key.md">Usar chave de partição</a>.</p></li>
 <li><p>Ao criar um índice num campo escalar com o atributo anulável ativado, os valores nulos serão excluídos do índice.</p></li>
+<li><p><strong>Campos JSON e ARRAY</strong>: Ao utilizar os operadores <code translate="no">IS NULL</code> ou <code translate="no">IS NOT NULL</code> para filtrar campos JSON ou ARRAY, estes operadores funcionam ao nível da coluna, o que indica que apenas avaliam se todo o objeto ou matriz JSON é nulo. Por exemplo, se uma chave dentro de um objeto JSON for nula, não será reconhecida pelo filtro <code translate="no">IS NULL</code>. Para obter mais informações, consulte <a href="/docs/pt/basic-operators.md">Operadores básicos</a>.</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">Atributo anulável<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="Nullable-attribute" class="common-anchor-header">Atributo Nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

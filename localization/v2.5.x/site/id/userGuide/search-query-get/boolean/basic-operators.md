@@ -179,6 +179,142 @@ title: Operator Dasar
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;NOT color == &quot;green&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="IS-NULL-and-IS-NOT-NULL-Operators" class="common-anchor-header">Operator IS NULL dan IS NOT NULL<button data-href="#IS-NULL-and-IS-NOT-NULL-Operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Operator <code translate="no">IS NULL</code> dan <code translate="no">IS NOT NULL</code> digunakan untuk memfilter bidang berdasarkan apakah bidang tersebut mengandung nilai null (tidak ada data).</p>
+<ul>
+<li><code translate="no">IS NULL</code>: Mengidentifikasi entitas di mana bidang tertentu berisi nilai null, yaitu nilai tidak ada atau tidak terdefinisi.</li>
+<li><code translate="no">IS NOT NULL</code>: Mengidentifikasi entitas di mana bidang tertentu berisi nilai apa pun selain null, yang berarti bidang tersebut memiliki nilai yang valid dan terdefinisi.</li>
+</ul>
+<div class="alert note">
+<p>Operator ini tidak peka huruf besar-kecil, sehingga Anda bisa menggunakan <code translate="no">IS NULL</code> atau <code translate="no">is null</code>, dan <code translate="no">IS NOT NULL</code> atau <code translate="no">is not null</code>.</p>
+</div>
+<h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">Bidang Skalar Biasa dengan Nilai Nol</h3><p>Milvus memungkinkan pemfilteran pada bidang skalar biasa, seperti string atau angka, dengan nilai nol.</p>
+<div class="alert note">
+<p>String kosong <code translate="no">&quot;&quot;</code> tidak diperlakukan sebagai nilai nol untuk bidang VARCHAR.</p>
+</div>
+<p>Untuk mengambil entitas di mana bidang <code translate="no">description</code> bernilai null:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NULL&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Untuk mengambil entitas yang bidang <code translate="no">description</code> tidak bernilai null:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Untuk mengambil entitas yang bidang <code translate="no">description</code> tidak bernilai null dan bidang <code translate="no">price</code> lebih tinggi dari 10:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL AND price &gt; 10&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="JSON-Fields-with-Null-Values" class="common-anchor-header">Bidang JSON dengan Nilai Nol</h3><p>Milvus memungkinkan pemfilteran pada bidang JSON yang mengandung nilai null. Bidang JSON diperlakukan sebagai null dengan cara berikut ini:</p>
+<ul>
+<li>Seluruh objek JSON secara eksplisit disetel ke None (null), misalnya, <code translate="no">{&quot;metadata&quot;: None}</code>.</li>
+<li>Bidang JSON itu sendiri benar-benar hilang dari entitas.</li>
+</ul>
+<div class="alert note">
+<p>Jika beberapa elemen dalam objek JSON bernilai null (misalnya kunci individual), bidang tersebut masih dianggap non-null. Sebagai contoh, <code translate="no">{&quot;metadata&quot;: {&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> tidak dianggap sebagai null, meskipun key <code translate="no">category</code> adalah null.</p>
+</div>
+<p>Untuk mengilustrasikan lebih lanjut bagaimana Milvus menangani field JSON dengan nilai null, perhatikan contoh data berikut ini dengan field JSON <code translate="no">metadata</code>:</p>
+<pre><code translate="no" class="language-python">data = [
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>]
+  },
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-comment"># Entire JSON object is null</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.56</span>, <span class="hljs-number">0.78</span>, <span class="hljs-number">0.90</span>]
+  },
+  {  <span class="hljs-comment"># JSON field `metadata` is completely missing</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.91</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>]
+  },
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>}, <span class="hljs-comment"># Individual key value is null</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.56</span>, <span class="hljs-number">0.38</span>, <span class="hljs-number">0.21</span>]
+  }
+]
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Contoh 1: Mengambil entitas di mana <code translate="no">metadata</code> bernilai null</strong></p>
+<p>Untuk menemukan entitas di mana bidang <code translate="no">metadata</code> tidak ada atau secara eksplisit disetel ke None:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Contoh 2: Mengambil entitas di mana <code translate="no">metadata</code> bukan null</strong></p>
+<p>Untuk menemukan entitas di mana bidang <code translate="no">metadata</code> tidak bernilai null:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">Bidang ARRAY dengan Nilai Nol</h3><p>Milvus memungkinkan pemfilteran pada bidang ARRAY yang berisi nilai null. Bidang ARRAY diperlakukan sebagai nilai null dengan cara berikut:</p>
+<ul>
+<li>Seluruh bidang ARRAY secara eksplisit disetel ke None (null), misalnya, <code translate="no">&quot;tags&quot;: None</code>.</li>
+<li>Bidang ARRAY benar-benar hilang dari entitas.</li>
+</ul>
+<div class="alert note">
+<p>Bidang ARRAY tidak dapat berisi nilai null parsial karena semua elemen dalam bidang ARRAY harus memiliki tipe data yang sama. Untuk detailnya, lihat <a href="/docs/id/array_data_type.md">Bidang Array</a>.</p>
+</div>
+<p>Untuk mengilustrasikan lebih lanjut bagaimana Milvus menangani field ARRAY dengan nilai null, pertimbangkan contoh data berikut ini dengan field ARRAY <code translate="no">tags</code>:</p>
+<pre><code translate="no" class="language-python">data = [
+  {
+      <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>]
+  },
+  {
+      <span class="hljs-string">&quot;tags&quot;</span>: <span class="hljs-literal">None</span>,  <span class="hljs-comment"># Entire ARRAY is null</span>
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.78</span>, <span class="hljs-number">0.91</span>, <span class="hljs-number">0.23</span>]
+  },
+  {  <span class="hljs-comment"># The tags field is completely missing</span>
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">9</span>, <span class="hljs-number">5</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.18</span>, <span class="hljs-number">0.11</span>, <span class="hljs-number">0.23</span>]
+  }
+]
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Contoh 1: Mengambil entitas di mana <code translate="no">tags</code> bernilai null</strong></p>
+<p>Untuk mengambil entitas di mana bidang <code translate="no">tags</code> tidak ada atau secara eksplisit disetel ke None:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [4, 5], &#x27;embedding&#x27;: [0.78, 0.91, 0.23], &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Contoh 2: Mengambil entitas di mana <code translate="no">tags</code> tidak bernilai null</strong></p>
+<p>Untuk mengambil entitas yang bidang <code translate="no">tags</code> tidak bernilai null:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields​" class="common-anchor-header">Tips Menggunakan Operator Dasar dengan Bidang JSON dan ARRAY<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

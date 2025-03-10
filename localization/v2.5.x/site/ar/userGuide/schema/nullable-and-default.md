@@ -46,9 +46,10 @@ summary: >-
 <li><p>يمكن تكوين القيم الافتراضية أو السمة القابلة للإلغاء فقط أثناء إنشاء المجموعة ولا يمكن تعديلها بعد ذلك.</p></li>
 <li><p>لا يمكن استخدام الحقول العددية ذات السمة القابلة للإلغاء الممكّنة كـ <code translate="no">group_by_field</code> في بحث التجميع. لمزيد من المعلومات حول بحث التجميع، راجع <a href="/docs/ar/grouping-search.md">بحث التجميع</a>.</p></li>
 <li><p>لا يمكن استخدام الحقول التي تم وضع علامة لاغية عليها كمفاتيح تقسيم. لمزيد من المعلومات حول مفاتيح التقسيم، راجع <a href="/docs/ar/use-partition-key.md">استخدام مفتاح التقسيم</a>.</p></li>
-<li><p>عند إنشاء فهرس على حقل قياسي مع تمكين السمة القابلة للفراغ، سيتم استبعاد القيم الفارغة من الفهرس.</p></li>
+<li><p>عند إنشاء فهرس على حقل قياسي مع تمكين السمة القابلة للإلغاء، سيتم استبعاد القيم الفارغة من الفهرس.</p></li>
+<li><p><strong>حقول JSON و ARRAY</strong>: عند استخدام المشغلين <code translate="no">IS NULL</code> أو <code translate="no">IS NOT NULL</code> للتصفية على حقول JSON أو ARRAY، يعمل هذان المشغلان على مستوى العمود، مما يشير إلى أنهما يقيمان فقط ما إذا كان كائن JSON أو المصفوفة بأكملها فارغة. على سبيل المثال، إذا كان أحد المفاتيح داخل كائن JSON فارغًا، فلن يتعرف عليه عامل التصفية <code translate="no">IS NULL</code>. لمزيد من المعلومات، راجع <a href="/docs/ar/basic-operators.md">المعاملات الأساسية</a>.</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">السمة القابلة للإلغاء<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="Nullable-attribute" class="common-anchor-header">سمة لاغية<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,8 +64,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تتيح لك السمة <code translate="no">nullable</code> تخزين القيم الفارغة في مجموعة، مما يوفر مرونة عند التعامل مع البيانات غير المعروفة.</p>
-<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">تعيين السمة القابلة للفراغ</h3><p>عند إنشاء مجموعة، استخدم <code translate="no">nullable=True</code> لتعريف الحقول القابلة للفراغ (الإعدادات الافتراضية إلى <code translate="no">False</code>). يقوم المثال التالي بإنشاء مجموعة باسم <code translate="no">user_profiles_null</code> وتعيين الحقل <code translate="no">age</code> كحقل قابل للإلغاء.</p>
+    </button></h2><p>تسمح لك السمة <code translate="no">nullable</code> بتخزين قيم فارغة في مجموعة، مما يوفر مرونة عند التعامل مع بيانات غير معروفة.</p>
+<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">تعيين السمة لاغية</h3><p>عند إنشاء مجموعة، استخدم <code translate="no">nullable=True</code> لتعريف الحقول القابلة للفراغ (الإعدادات الافتراضية إلى <code translate="no">False</code>). يقوم المثال التالي بإنشاء مجموعة باسم <code translate="no">user_profiles_null</code> وتعيين الحقل <code translate="no">age</code> كحقل قابل للإلغاء.</p>
 <div class="multipleCode">
  <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#curl">جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -347,7 +348,7 @@ params.<span class="hljs-title function_">put</span>(<span class="hljs-string">&
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;distance&quot;:0.16000001,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;distance&quot;:0.28999996,&quot;id&quot;:2},{&quot;age&quot;:null,&quot;distance&quot;:0.52000004,&quot;id&quot;:3}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>عند استخدام الأسلوب <code translate="no">query</code> للتصفية العددية، تكون نتائج التصفية للقيم الفارغة كلها خاطئة، مما يشير إلى أنه لن يتم تحديدها.</p>
+<p>عند استخدام الطريقة <code translate="no">query</code> للتصفية العددية، تكون نتائج التصفية للقيم الفارغة كلها خاطئة، مما يشير إلى أنه لن يتم تحديدها.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL:</a> <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Reviewing previously inserted data:​</span>
@@ -409,7 +410,7 @@ System.out.println(resp.getQueryResults());​
 <p>يسترجع الأسلوب <code translate="no">query</code> ، عند استخدامه بدون أي شروط تصفية، جميع الكيانات في المجموعة، بما في ذلك الكيانات ذات القيم الفارغة. لتقييد عدد الكيانات التي تم إرجاعها، يجب تحديد المعلمة <code translate="no">limit</code>.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#curl">جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+ <a href="#python">بيثون </a> <a href="#java">جافا</a> <a href="#curl">جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">null_results = client.query(
     collection_name=<span class="hljs-string">&quot;user_profiles_null&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Query without any filtering condition</span>

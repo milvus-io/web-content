@@ -10,12 +10,10 @@ id: home.md
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">免费试用Milvus托管服务！</h2>
-    <p class="promotion-desc">Zilliz Cloud由Milvus提供支持，无后顾之忧，速度快10倍。</p>
+    <p class="promotion-desc">Zilliz Cloud由Milvus驱动，无忧无虑，速度快10倍。</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud</a>
-   <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud 中国</a>
-  </div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud</a></div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">开始使用<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -36,7 +34,7 @@ id: home.md
 <div class="start_card_container">
   
    <a href="/docs/zh/install_standalone-docker.md"> <img translate="no" src="/docs/v2.5.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/zh/install_standalone-docker.md"> <p class="link-btn">安装 Milvus</p> </a><p>了解如何使用Docker Compose或Kubernetes安装Milvus。</p>
+   </a> <a href="/docs/zh/install_standalone-docker.md"> <p class="link-btn">安装 Milvus</p> </a><p>了解如何使用 Docker Compose 或 Kubernetes 安装 Milvus。</p>
 </div>
 <div class="start_card_container">
   

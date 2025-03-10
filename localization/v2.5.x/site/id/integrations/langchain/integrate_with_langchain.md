@@ -20,9 +20,10 @@ title: Retrieval-Augmented Generation (RAG) dengan Milvus dan LangChain
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Panduan ini mendemonstrasikan cara membangun sistem Retrieval-Augmented Generation (RAG) dengan menggunakan LangChain dan Milvus.</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/rag_with_milvus_and_langchain.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>   <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/rag_with_milvus_and_langchain.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p>Panduan ini mendemonstrasikan cara membangun sistem Retrieval-Augmented Generation (RAG) menggunakan LangChain dan Milvus.</p>
 <p>Sistem RAG menggabungkan sistem pengambilan dengan model generatif untuk menghasilkan teks baru berdasarkan perintah yang diberikan. Sistem ini pertama-tama mengambil dokumen yang relevan dari korpus menggunakan Milvus, dan kemudian menggunakan model generatif untuk menghasilkan teks baru berdasarkan dokumen yang diambil.</p>
 <p><a href="https://www.langchain.com/">LangChain</a> adalah kerangka kerja untuk mengembangkan aplikasi yang didukung oleh model bahasa besar (LLM). <a href="https://milvus.io/">Milvus</a> adalah basis data vektor sumber terbuka yang paling canggih di dunia, yang dibuat untuk mendukung pencarian kemiripan dan aplikasi AI.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -132,7 +133,7 @@ vectorstore = Milvus.from_documents(
 <ul>
 <li>Menetapkan <code translate="no">uri</code> sebagai berkas lokal, misalnya<code translate="no">./milvus.db</code>, adalah metode yang paling mudah, karena secara otomatis menggunakan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam berkas ini.</li>
 <li>Jika Anda memiliki data dalam skala besar, Anda dapat mengatur server Milvus yang lebih berkinerja pada <a href="https://milvus.io/docs/quickstart.md">docker atau kubernetes</a>. Dalam pengaturan ini, silakan gunakan uri server, misalnya<code translate="no">http://localhost:19530</code>, sebagai <code translate="no">uri</code>.</li>
-<li>Jika Anda ingin menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, ganti <code translate="no">Milvus.from_documents</code> dengan <code translate="no">Zilliz.from_documents</code>, dan sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">kunci Public Endpoint dan Api</a> di Zilliz Cloud.</li>
+<li>Jika Anda ingin menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, silakan sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">kunci Public Endpoint dan Api</a> di Zilliz Cloud.</li>
 </ul>
 </div>
 <p>Cari dokumen di penyimpanan vektor Milvus menggunakan pertanyaan kueri uji. Mari kita lihat 1 dokumen teratas.</p>

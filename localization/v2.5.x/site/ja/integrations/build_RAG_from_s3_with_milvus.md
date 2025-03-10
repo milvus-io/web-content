@@ -2,7 +2,7 @@
 id: build_RAG_from_s3_with_milvus.md
 summary: >-
   このチュートリアルでは、MilvusとAmazon S3を使用したRAG(Retrieval-Augmented
-  Generation)パイプラインの構築プロセスを説明します。S3バケットから効率的にドキュメントをロードし、管理可能なチャンクに分割し、高速でスケーラブルな検索のためにMilvusにベクトル埋め込みを保存する方法を学びます。このプロセスを効率化するために、S3からデータをロードし、Milvusへの保存を容易にするツールとしてLangChainを使用します。
+  Generation)パイプラインの構築プロセスを説明します。S3バケットからドキュメントを効率的にロードし、管理可能なチャンクに分割し、高速でスケーラブルな検索のためにMilvusにベクトル埋め込みを保存する方法を学びます。このプロセスを効率化するために、S3からデータをロードし、Milvusに保存するためのツールとしてLangChainを使用します。
 title: RAGパイプラインの構築S3からMilvusへのデータロード
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_from_s3_with_milvus.ipynb" target="_parent">
@@ -47,7 +47,7 @@ title: RAGパイプラインの構築S3からMilvusへのデータロード
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択）。</p>
 </div>
-<p>この例では、LLMとしてOpenAIを使います。<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を環境変数として用意してください。</p>
+<p>この例では、LLMとしてOpenAIを使います。環境変数として、<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;your-openai-api-key&quot;</span>
@@ -87,7 +87,7 @@ loader = S3FileLoader(
 )
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
-<li><strong>ドキュメントをロード</strong>する：設定したら、S3からパイプラインにドキュメントをロードします：</li>
+<li><strong>ドキュメントをロード</strong>する：設定が完了したら、S3からパイプラインにドキュメントをロードします：</li>
 </ol>
 <pre><code translate="no" class="language-python">documents = loader.load()
 <button class="copy-code-btn"></button></code></pre>
@@ -121,7 +121,7 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(metadata={'source': 's3://milvus-s3-example/WhatIsMilvus.docx'}, page_content='Milvus offers three deployment modes, covering a wide range of data scales—from local prototyping in Jupyter Notebooks to massive Kubernetes clusters managing tens of billions of vectors: \n\nMilvus Lite is a Python library that can be easily integrated into your applications. As a lightweight version of Milvus, it’s ideal for quick prototyping in Jupyter Notebooks or running on edge devices with limited resources. Learn more.\nMilvus Standalone is a single-machine server deployment, with all components bundled into a single Docker image for convenient deployment. Learn more.\nMilvus Distributed can be deployed on Kubernetes clusters, featuring a cloud-native architecture designed for billion-scale or even larger scenarios. This architecture ensures redundancy in critical components. Learn more. \n\nWhat Makes Milvus so Fast\U0010fc00 \n\nMilvus was designed from day one to be a highly efficient vector database system. In most cases, Milvus outperforms other vector databases by 2-5x (see the VectorDBBench results). This high performance is the result of several key design decisions: \n\nHardware-aware Optimization: To accommodate Milvus in various hardware environments, we have optimized its performance specifically for many hardware architectures and platforms, including AVX512, SIMD, GPUs, and NVMe SSD. \n\nAdvanced Search Algorithms: Milvus supports a wide range of in-memory and on-disk indexing/search algorithms, including IVF, HNSW, DiskANN, and more, all of which have been deeply optimized. Compared to popular implementations like FAISS and HNSWLib, Milvus delivers 30%-70% better performance.')
 </code></pre>
-<p>この段階で、ドキュメントはS3からロードされ、小さなチャンクに分割され、RAG（Retrieval-Augmented Generation）パイプラインでさらに処理する準備が整う。</p>
+<p>この段階で、ドキュメントはS3からロードされ、より小さなチャンクに分割され、RAG（Retrieval-Augmented Generation）パイプラインでの更なる処理の準備が整う。</p>
 <h2 id="Build-RAG-chain-with-Milvus-Vector-Store" class="common-anchor-header">Milvusベクターストアを使ったRAGチェーンの構築<button data-href="#Build-RAG-chain-with-Milvus-Vector-Store" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -138,12 +138,12 @@ docs[<span class="hljs-number">1</span>]
         ></path>
       </svg>
     </button></h2><p>Milvusベクターストアをドキュメントで初期化し、Milvusベクターストアにドキュメントをロードし、フードの下でインデックスを構築します。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, Zilliz
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings()
 
-vectorstore = Milvus.from_documents(  <span class="hljs-comment"># or Zilliz.from_documents</span>
+vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=embeddings,
     connection_args={
@@ -157,10 +157,10 @@ vectorstore = Milvus.from_documents(  <span class="hljs-comment"># or Zilliz.fro
 <ul>
 <li><p><code translate="no">./milvus.db</code> のように<code translate="no">uri</code> をローカルファイルとして設定する方法は、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite を</a>自動的に利用してすべてのデータをこのファイルに格納するため、最も便利な方法です。</p></li>
 <li><p>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</p></li>
-<li><p>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、<code translate="no">Milvus.from_documents</code> を<code translate="no">Zilliz.from_documents</code> に置き換え、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</p></li>
+<li><p>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</p></li>
 </ul>
 </div>
-<p>Milvusベクトルストアのドキュメントをテストクエリ質問を使って検索する。トップ1のドキュメントを見てみましょう。</p>
+<p>Milvusベクトルストアのドキュメントをテストクエリの質問を使って検索します。トップ1のドキュメントを見てみましょう。</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;How can Milvus be deployed&quot;</span>
 vectorstore.<span class="hljs-title function_">similarity_search</span>(query, k=<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>

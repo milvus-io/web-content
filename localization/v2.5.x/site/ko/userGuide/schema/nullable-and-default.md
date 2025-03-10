@@ -46,6 +46,7 @@ summary: >-
 <li><p>nullable 속성이 활성화된 스칼라 필드는 그룹화 검색에서 <code translate="no">group_by_field</code> 으로 사용할 수 없습니다. 검색 그룹화에 대한 자세한 내용은 <a href="/docs/ko/grouping-search.md">검색 그룹화를</a> 참조하세요.</p></li>
 <li><p>nullable로 표시된 필드는 파티션 키로 사용할 수 없습니다. 파티션 키에 대한 자세한 내용은 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p></li>
 <li><p>nullable 속성이 활성화된 스칼라 필드에 인덱스를 생성할 때 null 값은 인덱스에서 제외됩니다.</p></li>
+<li><p><strong>JSON 및 배열 필드</strong>: <code translate="no">IS NULL</code> 또는 <code translate="no">IS NOT NULL</code> 연산자를 사용하여 JSON 또는 ARRAY 필드를 필터링하는 경우, 이러한 연산자는 열 수준에서 작동하므로 전체 JSON 객체 또는 배열이 null인지 여부만 평가합니다. 예를 들어 JSON 객체 내부의 키가 null인 경우 <code translate="no">IS NULL</code> 필터에서는 해당 키가 인식되지 않습니다. 자세한 내용은 <a href="/docs/ko/basic-operators.md">기본 연산자를</a> 참조하세요.</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">Null 가능 속성<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -403,7 +404,7 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>null 값이 있는 엔티티를 반환하려면 다음과 같이 스칼라 필터링 조건 없이 쿼리합니다:</p>
+<p>null 값을 가진 엔티티를 반환하려면 다음과 같이 스칼라 필터링 조건 없이 쿼리합니다:</p>
 <div class="alert note">
 <p><code translate="no">query</code> 메서드는 필터링 조건 없이 사용하면 null 값을 포함한 컬렉션의 모든 엔티티를 검색합니다. 반환되는 엔티티의 수를 제한하려면 <code translate="no">limit</code> 매개변수를 지정해야 합니다.</p>
 </div>

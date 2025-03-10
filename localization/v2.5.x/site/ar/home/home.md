@@ -10,10 +10,10 @@ id: home.md
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">جرّب ميلفوس المُدار مجاناً!</h2>
-    <p class="promotion-desc">زيليز كلاود Zilliz Cloud خالية من المتاعب، مدعومة من ميلفوس وأسرع 10 مرات.</p>
+    <p class="promotion-desc">Zilliz Cloud خالي من المتاعب، مدعوم من Milvus وأسرع 10 مرات.</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">زيليز كلاود</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">زيليز كلاود الصين</a></div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">زيليز كلاود</a></div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">ابدأ الآن<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"

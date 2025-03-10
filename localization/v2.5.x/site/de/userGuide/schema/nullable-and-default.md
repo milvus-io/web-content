@@ -4,7 +4,7 @@ title: Nullbar & Standard
 related_key: 'nullable, default'
 summary: >-
   Milvus ermöglicht es Ihnen, das Attribut "nullable" und Standardwerte für
-  skalare Felder mit Ausnahme des Primärfelds festzulegen. Bei Feldern, die als
+  skalare Felder mit Ausnahme des Primärfeldes festzulegen. Bei Feldern, die als
   nullable=True markiert sind, können Sie das Feld beim Einfügen von Daten
   überspringen oder es direkt auf einen Nullwert setzen, und das System wird es
   als Null behandeln, ohne einen Fehler zu verursachen.
@@ -47,9 +47,10 @@ summary: >-
 <li><p>Standardwerte oder das Attribut "löschbar" können nur während der Erstellung der Sammlung konfiguriert werden und können danach nicht mehr geändert werden.</p></li>
 <li><p>Skalarfelder, bei denen das Attribut "löschbar" aktiviert ist, können nicht als <code translate="no">group_by_field</code> in der Gruppierungssuche verwendet werden. Weitere Informationen zur Gruppierungssuche finden Sie unter <a href="/docs/de/grouping-search.md">Gruppierungssuche</a>.</p></li>
 <li><p>Als löschbar markierte Felder können nicht als Partitionsschlüssel verwendet werden. Weitere Informationen zu Partitionsschlüsseln finden Sie unter <a href="/docs/de/use-partition-key.md">Partitionsschlüssel verwenden</a>.</p></li>
-<li><p>Wenn Sie einen Index für ein skalares Feld erstellen, bei dem das Attribut "löschbar" aktiviert ist, werden Nullwerte vom Index ausgeschlossen.</p></li>
+<li><p>Wenn Sie einen Index für ein skalares Feld erstellen, bei dem das Attribut "löschbar" aktiviert ist, werden Nullwerte aus dem Index ausgeschlossen.</p></li>
+<li><p><strong>JSON- und ARRAY-Felder</strong>: Wenn Sie <code translate="no">IS NULL</code> oder <code translate="no">IS NOT NULL</code> Operatoren zum Filtern von JSON- oder ARRAY-Feldern verwenden, arbeiten diese Operatoren auf Spaltenebene, was bedeutet, dass sie nur auswerten, ob das gesamte JSON-Objekt oder Array null ist. Wenn zum Beispiel ein Schlüssel innerhalb eines JSON-Objekts null ist, wird er vom <code translate="no">IS NULL</code> Filter nicht erkannt. Weitere Informationen finden Sie unter <a href="/docs/de/basic-operators.md">Grundlegende Operatoren</a>.</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">Nullable-Attribut<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="Nullable-attribute" class="common-anchor-header">Attribut Nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -64,8 +65,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das <code translate="no">nullable</code> -Attribut ermöglicht es Ihnen, Nullwerte in einer Sammlung zu speichern, was Flexibilität bei der Handhabung unbekannter Daten bietet.</p>
-<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Setzen Sie das nullable-Attribut</h3><p>Wenn Sie eine Sammlung erstellen, verwenden Sie <code translate="no">nullable=True</code>, um löschbare Felder zu definieren (die Standardeinstellung ist <code translate="no">False</code>). Das folgende Beispiel erstellt eine Sammlung mit dem Namen <code translate="no">user_profiles_null</code> und setzt das Feld <code translate="no">age</code> als löschbar.</p>
+    </button></h2><p>Mit dem Attribut <code translate="no">nullable</code> können Sie Nullwerte in einer Auflistung speichern, was Flexibilität bei der Handhabung unbekannter Daten bietet.</p>
+<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Setzen Sie das Attribut nullable</h3><p>Wenn Sie eine Sammlung erstellen, verwenden Sie <code translate="no">nullable=True</code>, um löschbare Felder zu definieren (die Standardeinstellung ist <code translate="no">False</code>). Das folgende Beispiel erstellt eine Sammlung mit dem Namen <code translate="no">user_profiles_null</code> und setzt das Feld <code translate="no">age</code> als löschbar.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​

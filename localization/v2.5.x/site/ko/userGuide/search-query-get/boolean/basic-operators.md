@@ -176,7 +176,7 @@ title: 기본 연산자
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;NOT color == &quot;green&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields​" class="common-anchor-header">JSON 및 배열 필드에서 기본 연산자 사용에 대한 팁<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields​" class="anchor-icon" translate="no">
+<h2 id="IS-NULL-and-IS-NOT-NULL-Operators" class="common-anchor-header">IS NULL 및 IS NOT NULL 연산자<button data-href="#IS-NULL-and-IS-NOT-NULL-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -191,7 +191,143 @@ title: 기본 연산자
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus의 기본 연산자는 다목적이며 스칼라 필드에 적용할 수 있지만, JSON 및 ARRAY 필드의 키와 인덱스에도 효과적으로 사용할 수 있습니다.</p>
+    </button></h2><p><code translate="no">IS NULL</code> 및 <code translate="no">IS NOT NULL</code> 연산자는 null 값(데이터 부재) 포함 여부에 따라 필드를 필터링하는 데 사용됩니다.</p>
+<ul>
+<li><code translate="no">IS NULL</code>: 특정 필드에 null 값이 포함된 엔터티, 즉 값이 없거나 정의되지 않은 엔터티를 식별합니다.</li>
+<li><code translate="no">IS NOT NULL</code>: 특정 필드에 null 이외의 값이 포함된 엔터티, 즉 필드에 유효한 정의된 값이 있는 엔터티를 식별합니다.</li>
+</ul>
+<div class="alert note">
+<p>연산자는 대소문자를 구분하지 않으므로 <code translate="no">IS NULL</code> 또는 <code translate="no">is null</code>, <code translate="no">IS NOT NULL</code> 또는 <code translate="no">is not null</code> 을 사용할 수 있습니다.</p>
+</div>
+<h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">Null 값이 있는 일반 스칼라 필드</h3><p>Milvus에서는 문자열이나 숫자와 같은 일반 스칼라 필드에 null 값이 있는 경우 필터링할 수 있습니다.</p>
+<div class="alert note">
+<p>빈 문자열 <code translate="no">&quot;&quot;</code> 은 VARCHAR 필드에서 null 값으로 취급되지 않습니다.</p>
+</div>
+<p><code translate="no">description</code> 필드가 null인 엔티티를 검색하려면:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NULL&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">description</code> 필드가 null이 아닌 엔티티를 검색하려면 다음과 같이 하세요:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">description</code> 필드가 null이 아니고 <code translate="no">price</code> 필드가 10보다 큰 엔티티를 검색하려면 다음과 같이 하세요:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL AND price &gt; 10&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="JSON-Fields-with-Null-Values" class="common-anchor-header">Null 값이 있는 JSON 필드</h3><p>Milvus에서는 null 값이 포함된 JSON 필드에 대한 필터링이 가능합니다. JSON 필드는 다음과 같은 방식으로 null로 처리됩니다:</p>
+<ul>
+<li>전체 JSON 객체가 명시적으로 없음(null)으로 설정된 경우(예: <code translate="no">{&quot;metadata&quot;: None}</code>).</li>
+<li>JSON 필드 자체가 엔티티에서 완전히 누락된 경우.</li>
+</ul>
+<div class="alert note">
+<p>JSON 객체 내의 일부 요소(예: 개별 키)가 널인 경우에도 해당 필드는 여전히 널이 아닌 것으로 간주됩니다. 예를 들어 <code translate="no">category</code> 키가 널이더라도 <code translate="no">{&quot;metadata&quot;: {&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> 은 널로 취급되지 않습니다.</p>
+</div>
+<p>Milvus가 null 값이 있는 JSON 필드를 처리하는 방법을 더 자세히 설명하기 위해 다음 샘플 데이터 <code translate="no">metadata</code> 를 예로 들어 보겠습니다:</p>
+<pre><code translate="no" class="language-python">data = [
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>]
+  },
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-comment"># Entire JSON object is null</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.56</span>, <span class="hljs-number">0.78</span>, <span class="hljs-number">0.90</span>]
+  },
+  {  <span class="hljs-comment"># JSON field `metadata` is completely missing</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.91</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>]
+  },
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>}, <span class="hljs-comment"># Individual key value is null</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.56</span>, <span class="hljs-number">0.38</span>, <span class="hljs-number">0.21</span>]
+  }
+]
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>예제 1: <code translate="no">metadata</code> 가 null인 엔티티 검색하기</strong></p>
+<p><code translate="no">metadata</code> 필드가 누락되었거나 명시적으로 없음으로 설정된 엔티티를 찾습니다:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>예 2: <code translate="no">metadata</code> 이 null이 아닌 엔터티 검색하기</strong></p>
+<p><code translate="no">metadata</code> 필드가 null이 아닌 엔티티를 찾으려면 다음과 같이 하세요:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">Null 값이 있는 필드 배열하기</h3><p>Milvus에서는 null 값이 포함된 ARRAY 필드에 대한 필터링이 가능합니다. ARRAY 필드는 다음과 같은 방식으로 null로 처리됩니다:</p>
+<ul>
+<li>전체 ARRAY 필드가 명시적으로 없음(null)으로 설정된 경우(예: <code translate="no">&quot;tags&quot;: None</code>).</li>
+<li>ARRAY 필드가 엔티티에서 완전히 누락된 경우.</li>
+</ul>
+<div class="alert note">
+<p>배열 필드의 모든 요소는 동일한 데이터 유형을 가져야 하므로 배열 필드에는 부분적으로 null 값을 포함할 수 없습니다. 자세한 내용은 <a href="/docs/ko/array_data_type.md">배열 필드를</a> 참조하십시오.</p>
+</div>
+<p>Milvus에서 null 값이 있는 ARRAY 필드를 처리하는 방법을 더 자세히 설명하려면 다음 샘플 데이터( <code translate="no">tags</code>)에 ARRAY 필드가 있는 것을 고려하십시오:</p>
+<pre><code translate="no" class="language-python">data = [
+  {
+      <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>]
+  },
+  {
+      <span class="hljs-string">&quot;tags&quot;</span>: <span class="hljs-literal">None</span>,  <span class="hljs-comment"># Entire ARRAY is null</span>
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.78</span>, <span class="hljs-number">0.91</span>, <span class="hljs-number">0.23</span>]
+  },
+  {  <span class="hljs-comment"># The tags field is completely missing</span>
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">9</span>, <span class="hljs-number">5</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.18</span>, <span class="hljs-number">0.11</span>, <span class="hljs-number">0.23</span>]
+  }
+]
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>예제 1: <code translate="no">tags</code> 가 null인 엔티티 검색하기</strong></p>
+<p><code translate="no">tags</code> 필드가 누락되었거나 명시적으로 없음으로 설정된 엔티티를 검색합니다:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [4, 5], &#x27;embedding&#x27;: [0.78, 0.91, 0.23], &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>예 2: <code translate="no">tags</code> 이 null이 아닌 엔티티 검색하기</strong></p>
+<p><code translate="no">tags</code> 필드가 null이 아닌 엔티티를 검색하려면 다음과 같이 하세요:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields​" class="common-anchor-header">JSON 및 배열 필드에 기본 연산자 사용에 대한 팁<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields​" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus의 기본 연산자는 다목적이며 스칼라 필드에도 적용될 수 있지만, JSON 및 ARRAY 필드의 키와 인덱스에도 효과적으로 사용할 수 있습니다.</p>
 <p>예를 들어 <code translate="no">price</code>, <code translate="no">model</code>, <code translate="no">tags</code> 과 같은 여러 개의 키가 포함된 <code translate="no">product</code> 필드가 있는 경우 항상 키를 직접 참조하세요.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>​
 

@@ -74,7 +74,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
       </svg>
     </button></h2><p>Para carregar documentos do S3, é necessário o seguinte:</p>
 <ol>
-<li><strong>AWS Access Key e Secret Key</strong>: Armazene-as como variáveis de ambiente para acessar com segurança seu bucket do S3:</li>
+<li><strong>AWS Access Key e Secret Key</strong>: Armazene-as como variáveis de ambiente para acessar com segurança seu bucket S3:</li>
 </ol>
 <pre><code translate="no" class="language-python">os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;AWS_ACCESS_KEY_ID&quot;</span>] = <span class="hljs-string">&quot;your-aws-access-key-id&quot;</span>
 os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>] = <span class="hljs-string">&quot;your-aws-secret-access-key&quot;</span>
@@ -97,7 +97,7 @@ loader = S3FileLoader(
 <pre><code translate="no" class="language-python">documents = loader.load()
 <button class="copy-code-btn"></button></code></pre>
 <p>Esta etapa garante que seus documentos sejam carregados com sucesso do S3 e estejam prontos para processamento no pipeline do RAG.</p>
-<h2 id="Split-Documents-into-Chunks" class="common-anchor-header">Dividir documentos em pedaços<button data-href="#Split-Documents-into-Chunks" class="anchor-icon" translate="no">
+<h2 id="Split-Documents-into-Chunks" class="common-anchor-header">Dividir documentos em partes<button data-href="#Split-Documents-into-Chunks" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -143,12 +143,12 @@ docs[<span class="hljs-number">1</span>]
         ></path>
       </svg>
     </button></h2><p>Iremos inicializar um armazenamento de vectores Milvus com os documentos, que carregam os documentos no armazenamento de vectores Milvus e constroem um índice sob o capô.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, Zilliz
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings()
 
-vectorstore = Milvus.from_documents(  <span class="hljs-comment"># or Zilliz.from_documents</span>
+vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=embeddings,
     connection_args={
@@ -162,7 +162,7 @@ vectorstore = Milvus.from_documents(  <span class="hljs-comment"># or Zilliz.fro
 <ul>
 <li><p>Definir o <code translate="no">uri</code> como um ficheiro local, por exemplo,<code translate="no">./milvus.db</code>, é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</p></li>
 <li><p>Se tiver uma grande escala de dados, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">docker ou kubernetes</a>. Nesta configuração, utilize o uri do servidor, por exemplo,<code translate="no">http://localhost:19530</code>, como o seu <code translate="no">uri</code>.</p></li>
-<li><p>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, substitua <code translate="no">Milvus.from_documents</code> por <code translate="no">Zilliz.from_documents</code> e ajuste <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</p></li>
+<li><p>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste os endereços <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</p></li>
 </ul>
 </div>
 <p>Pesquise os documentos no armazenamento de vectores do Milvus utilizando uma pergunta de teste. Vejamos o documento 1 de topo.</p>

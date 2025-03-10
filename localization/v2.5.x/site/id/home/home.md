@@ -9,11 +9,11 @@ Di sini Anda akan mempelajari tentang apa itu Milvus, dan bagaimana cara mengins
 </div>
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
-    <h2 class="promotion-title">Coba Managed Milvus Gratis!</h2>
+    <h2 class="promotion-title">Coba Managed Milvus Secara Gratis!</h2>
     <p class="promotion-desc">Zilliz Cloud tidak merepotkan, didukung oleh Milvus dan 10x lebih cepat.</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud Cina</a></div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud</a></div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">Mulai<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"

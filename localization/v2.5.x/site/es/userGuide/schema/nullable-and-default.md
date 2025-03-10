@@ -5,9 +5,9 @@ related_key: 'nullable, default'
 summary: >-
   Milvus le permite establecer el atributo `nullable` y los valores por defecto
   para los campos escalares, excepto el campo primario. Para los campos marcados
-  como nullable=True, puede omitir el campo al insertar los datos, o
-  establecerlo directamente con un valor nulo, y el sistema lo tratará como nulo
-  sin provocar un error.
+  como nullable=True, puede omitir el campo al insertar los datos, o establecer
+  directamente un valor nulo, y el sistema lo tratará como nulo sin provocar un
+  error.
 ---
 <h1 id="Nullable--Default​" class="common-anchor-header">Anulable y por defecto<button data-href="#Nullable--Default​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,6 +48,7 @@ summary: >-
 <li><p>Los campos escalares con el atributo nullable activado no se pueden utilizar como <code translate="no">group_by_field</code> en la búsqueda de agrupación. Para obtener más información sobre la búsqueda de agrupación, consulte <a href="/docs/es/grouping-search.md">Búsqueda de agrupación</a>.</p></li>
 <li><p>Los campos marcados como anulables no pueden utilizarse como claves de partición. Para más información sobre claves de partición, consulte <a href="/docs/es/use-partition-key.md">Utilizar clave de partición</a>.</p></li>
 <li><p>Al crear un índice en un campo escalar con el atributo anulable activado, los valores nulos se excluirán del índice.</p></li>
+<li><p><strong>Campos JSON y ARRAY</strong>: Cuando se utilizan los operadores <code translate="no">IS NULL</code> o <code translate="no">IS NOT NULL</code> para filtrar campos JSON o ARRAY, estos operadores funcionan a nivel de columna, lo que indica que sólo evalúan si todo el objeto JSON o array es nulo. Por ejemplo, si una clave dentro de un objeto JSON es nula, no será reconocida por el filtro <code translate="no">IS NULL</code>. Para obtener más información, consulte <a href="/docs/es/basic-operators.md">Operadores básicos</a>.</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">Atributo nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +66,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>El atributo <code translate="no">nullable</code> permite almacenar valores nulos en una colección, lo que proporciona flexibilidad a la hora de manejar datos desconocidos.</p>
-<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Establecer el atributo nullable</h3><p>Al crear una colección, utilice <code translate="no">nullable=True</code> para definir los campos anulables (por defecto, <code translate="no">False</code>). El siguiente ejemplo crea una colección llamada <code translate="no">user_profiles_null</code> y define el campo <code translate="no">age</code> como anulable.</p>
+<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Establezca el atributo nullable</h3><p>Al crear una colección, utilice <code translate="no">nullable=True</code> para definir los campos anulables (el valor predeterminado es <code translate="no">False</code>). El siguiente ejemplo crea una colección llamada <code translate="no">user_profiles_null</code> y define el campo <code translate="no">age</code> como anulable.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​

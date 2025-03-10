@@ -48,8 +48,9 @@ summary: >-
 <li><p>Les champs scalaires dont l'attribut nullable est activé ne peuvent pas être utilisés en tant que <code translate="no">group_by_field</code> dans la recherche groupée. Pour plus d'informations sur la recherche par regroupement, voir <a href="/docs/fr/grouping-search.md">Recherche par regroupement</a>.</p></li>
 <li><p>Les champs marqués comme nullables ne peuvent pas être utilisés comme clés de partition. Pour plus d'informations sur les clés de partition, reportez-vous à la section <a href="/docs/fr/use-partition-key.md">Utiliser une clé de partition</a>.</p></li>
 <li><p>Lors de la création d'un index sur un champ scalaire dont l'attribut nullable est activé, les valeurs nulles seront exclues de l'index.</p></li>
+<li><p><strong>Champs JSON et ARRAY</strong>: Lorsque vous utilisez les opérateurs <code translate="no">IS NULL</code> ou <code translate="no">IS NOT NULL</code> pour filtrer les champs JSON ou ARRAY, ces opérateurs fonctionnent au niveau de la colonne, ce qui signifie qu'ils évaluent uniquement si l'ensemble de l'objet JSON ou du tableau est nul. Par exemple, si une clé à l'intérieur d'un objet JSON est nulle, elle ne sera pas reconnue par le filtre <code translate="no">IS NULL</code>. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/basic-operators.md">Opérateurs de base</a>.</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">Attribut nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="Nullable-attribute" class="common-anchor-header">Attribut Nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,7 +66,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>L'attribut <code translate="no">nullable</code> vous permet de stocker des valeurs nulles dans une collection, ce qui offre une certaine souplesse lors de la manipulation de données inconnues.</p>
-<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Définir l'attribut nullable</h3><p>Lors de la création d'une collection, utilisez <code translate="no">nullable=True</code> pour définir les champs nullables ( <code translate="no">False</code> par défaut). L'exemple suivant crée une collection nommée <code translate="no">user_profiles_null</code> et définit le champ <code translate="no">age</code> comme nullable.</p>
+<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Définir l'attribut nullable</h3><p>Lors de la création d'une collection, utilisez <code translate="no">nullable=True</code> pour définir les champs nullables (la valeur par défaut est <code translate="no">False</code>). L'exemple suivant crée une collection nommée <code translate="no">user_profiles_null</code> et définit le champ <code translate="no">age</code> comme nullable.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -879,6 +880,6 @@ curl --request POST \​
 <tr><td>✅</td><td>❌</td><td>-</td><td>Aucun/nul</td><td>Enregistré comme nul</td><td><ul><li>Champ :</li><li> <code translate="no">middle_name</code></li><li>Valeur par défaut :</li><li>-Saisie</li><li>par l'utilisateur</li><li>: null</li><li>Résultat : stocké en tant que null</td></tr>
 <tr><td>❌</td><td>✅</td><td>Non nul</td><td>Non/null</td><td>Utilise la valeur par défaut</td><td><ul><li>Champ :</li><li> <code translate="no">status</code></li><li>Valeur par défaut :</li><li> <code translate="no">&quot;active&quot;</code></li><li>Saisie par l'utilisateur : null</li><li>Résultat : stocké en tant que <code translate="no">&quot;active&quot;</code></td></tr>
 <tr><td>❌</td><td>❌</td><td>-</td><td>Aucun/nul</td><td>Lance une erreur</td><td><ul><li>Champ :</li><li> <code translate="no">email</code></li><li>Valeur par défaut :</li><li>-Entrée</li><li>utilisateur</li><li>: null</li><li>Résultat : L'opération est rejetée, le système lance une erreur</td></tr>
-<tr><td>❌</td><td>✅</td><td>Nul</td><td>Aucun/nul</td><td>Lance une erreur</td><td><ul><li>Champ :</li><li> <code translate="no">username</code></li><li>Valeur par défaut :</li><li>nullEntrée de</li><li>l'utilisateur</li><li>: null</li><li>Résultat : L'opération est rejetée, le système lance une erreur</td></tr>
+<tr><td>❌</td><td>✅</td><td>Nul</td><td>None/null</td><td>Lance une erreur</td><td><ul><li>Champ :</li><li> <code translate="no">username</code></li><li>Valeur par défaut :</li><li>nullEntrée de</li><li>l'utilisateur</li><li>: null</li><li>Résultat : L'opération est rejetée, le système lance une erreur</td></tr>
 </tbody>
 </table>

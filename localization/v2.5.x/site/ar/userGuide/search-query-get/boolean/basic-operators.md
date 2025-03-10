@@ -178,6 +178,142 @@ title: المشغلون الأساسيون
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;NOT color == &quot;green&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="IS-NULL-and-IS-NOT-NULL-Operators" class="common-anchor-header">المشغلان IS NULL و IS NOT NULL<button data-href="#IS-NULL-and-IS-NOT-NULL-Operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>يتم استخدام المشغّلين <code translate="no">IS NULL</code> و <code translate="no">IS NOT NULL</code> لتصفية الحقول بناءً على ما إذا كانت تحتوي على قيمة فارغة (عدم وجود بيانات).</p>
+<ul>
+<li><code translate="no">IS NULL</code>: يحدد الكيانات التي يحتوي فيها حقل معين على قيمة فارغة، أي أن القيمة غير موجودة أو غير محددة.</li>
+<li><code translate="no">IS NOT NULL</code>: يحدد الكيانات التي يحتوي فيها حقل معين على أي قيمة أخرى غير فارغة، أي أن الحقل يحتوي على قيمة صحيحة ومحددة.</li>
+</ul>
+<div class="alert note">
+<p>العوامل غير حساسة لحالة الأحرف، لذا يمكنك استخدام <code translate="no">IS NULL</code> أو <code translate="no">is null</code> ، و <code translate="no">IS NOT NULL</code> أو <code translate="no">is not null</code>.</p>
+</div>
+<h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">الحقول العددية العادية ذات القيم الفارغة</h3><p>يسمح ميلفوس بالتصفية على الحقول العددية العادية، مثل السلاسل أو الأرقام، ذات القيم الفارغة.</p>
+<div class="alert note">
+<p>لا يتم التعامل مع السلسلة الفارغة <code translate="no">&quot;&quot;</code> كقيمة فارغة لحقل VARCHAR.</p>
+</div>
+<p>لاسترداد الكيانات التي يكون فيها الحقل <code translate="no">description</code> فارغاً:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NULL&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>لاسترداد الكيانات التي يكون فيها الحقل <code translate="no">description</code> غير فارغ:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>لاسترداد الكيانات حيث يكون الحقل <code translate="no">description</code> غير فارغ والحقل <code translate="no">price</code> أعلى من 10:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL AND price &gt; 10&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="JSON-Fields-with-Null-Values" class="common-anchor-header">حقول JSON ذات القيم الفارغة</h3><p>يسمح Milvus بالتصفية على حقول JSON التي تحتوي على قيم فارغة. يتم التعامل مع حقل JSON على أنه فارغ بالطرق التالية:</p>
+<ul>
+<li>يتم تعيين كائن JSON بأكمله بشكل صريح إلى لا شيء (فارغ)، على سبيل المثال، <code translate="no">{&quot;metadata&quot;: None}</code>.</li>
+<li>يكون حقل JSON نفسه مفقودًا تمامًا من الكيان.</li>
+</ul>
+<div class="alert note">
+<p>إذا كانت بعض العناصر داخل كائن JSON فارغة (مثل المفاتيح الفردية)، يظل الحقل يعتبر غير فارغ. على سبيل المثال، لا يتم التعامل مع <code translate="no">{&quot;metadata&quot;: {&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> على أنه فارغ، على الرغم من أن المفتاح <code translate="no">category</code> فارغ.</p>
+</div>
+<p>لمزيد من التوضيح لكيفية تعامل Milvus مع حقول JSON ذات القيم الفارغة، انظر إلى نموذج البيانات التالي مع حقل JSON <code translate="no">metadata</code>:</p>
+<pre><code translate="no" class="language-python">data = [
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>]
+  },
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-comment"># Entire JSON object is null</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.56</span>, <span class="hljs-number">0.78</span>, <span class="hljs-number">0.90</span>]
+  },
+  {  <span class="hljs-comment"># JSON field `metadata` is completely missing</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.91</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>]
+  },
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>}, <span class="hljs-comment"># Individual key value is null</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.56</span>, <span class="hljs-number">0.38</span>, <span class="hljs-number">0.21</span>]
+  }
+]
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>مثال 1: استرداد الكيانات التي يكون فيها <code translate="no">metadata</code> فارغًا</strong></p>
+<p>للعثور على الكيانات التي يكون فيها الحقل <code translate="no">metadata</code> إما مفقودًا أو تم تعيينه صراحةً إلى لا شيء:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>مثال 2: استرداد الكيانات حيث <code translate="no">metadata</code> ليس فارغًا</strong></p>
+<p>للعثور على الكيانات التي يكون فيها الحقل <code translate="no">metadata</code> غير فارغ:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">حقول ARRAY ذات القيم الفارغة</h3><p>يسمح Milvus بالتصفية على حقول ARRAY التي تحتوي على قيم فارغة. يتم التعامل مع حقل ARRAY على أنه فارغ بالطرق التالية:</p>
+<ul>
+<li>يتم تعيين حقل ARRAY بالكامل إلى لا شيء (فارغ)، على سبيل المثال، <code translate="no">&quot;tags&quot;: None</code>.</li>
+<li>يكون حقل ARRAY مفقودًا تمامًا من الكيان.</li>
+</ul>
+<div class="alert note">
+<p>لا يمكن أن يحتوي حقل ARRAY على قيم فارغة جزئية لأن جميع العناصر في حقل ARRAY يجب أن يكون لها نفس نوع البيانات. لمزيد من التفاصيل، راجع <a href="/docs/ar/array_data_type.md">حقل المصفوفة</a>.</p>
+</div>
+<p>لمزيد من التوضيح لكيفية تعامل Milvus مع حقول ARRAY ذات القيم الفارغة، انظر نموذج البيانات التالي مع حقل ARRAY <code translate="no">tags</code>:</p>
+<pre><code translate="no" class="language-python">data = [
+  {
+      <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>]
+  },
+  {
+      <span class="hljs-string">&quot;tags&quot;</span>: <span class="hljs-literal">None</span>,  <span class="hljs-comment"># Entire ARRAY is null</span>
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.78</span>, <span class="hljs-number">0.91</span>, <span class="hljs-number">0.23</span>]
+  },
+  {  <span class="hljs-comment"># The tags field is completely missing</span>
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">9</span>, <span class="hljs-number">5</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.18</span>, <span class="hljs-number">0.11</span>, <span class="hljs-number">0.23</span>]
+  }
+]
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>مثال 1: استرداد الكيانات حيث <code translate="no">tags</code> فارغة</strong></p>
+<p>لاسترداد الكيانات التي يكون فيها الحقل <code translate="no">tags</code> إما مفقودًا أو تم تعيينه صراحةً إلى لا شيء:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [4, 5], &#x27;embedding&#x27;: [0.78, 0.91, 0.23], &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>مثال 2: استرجاع الكيانات حيث <code translate="no">tags</code> ليس فارغًا</strong></p>
+<p>لاسترداد الكيانات التي يكون فيها الحقل <code translate="no">tags</code> غير فارغ:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields​" class="common-anchor-header">نصائح حول استخدام عوامل التشغيل الأساسية مع حقول JSON و ARRAY<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -217,4 +353,4 @@ title: المشغلون الأساسيون
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يقدم Milvus مجموعة من العوامل الأساسية التي تمنحك المرونة في تصفية بياناتك والاستعلام عنها. من خلال الجمع بين المقارنة والنطاق والعوامل الحسابية والمنطقية، يمكنك إنشاء تعبيرات تصفية قوية لتضييق نطاق نتائج البحث واسترداد البيانات التي تحتاجها بكفاءة.</p>
+    </button></h2><p>يقدم Milvus مجموعة من العوامل الأساسية التي تمنحك المرونة في تصفية بياناتك والاستعلام عنها. من خلال الجمع بين المقارنة والنطاق والعوامل الحسابية والمنطقية، يمكنك إنشاء تعبيرات تصفية قوية لتضييق نطاق نتائج البحث واسترجاع البيانات التي تحتاجها بكفاءة.</p>

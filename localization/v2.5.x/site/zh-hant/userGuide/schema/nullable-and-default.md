@@ -45,6 +45,7 @@ summary: >-
 <li><p>啟用 nullable 屬性的標量欄位無法在群組搜尋中用作<code translate="no">group_by_field</code> 。有關群組搜尋的詳細資訊，請參閱<a href="/docs/zh-hant/grouping-search.md">群組搜尋</a>。</p></li>
 <li><p>標記為 nullable 的欄位不能用作分割區金鑰。有關分割區金鑰的詳細資訊，請參閱<a href="/docs/zh-hant/use-partition-key.md">使用分割區金</a>鑰。</p></li>
 <li><p>在啟用 nullable 屬性的標量欄位上建立索引時，索引將排除 null 值。</p></li>
+<li><p><strong>JSON 和 ARRAY 欄位</strong>：使用<code translate="no">IS NULL</code> 或<code translate="no">IS NOT NULL</code> 運算符號篩選 JSON 或 ARRAY 欄位時，這些運算符號會在欄位層級運作，這表示它們只會評估整個 JSON 物件或陣列是否為空。例如，如果 JSON 物件中的一個 key 為空，則<code translate="no">IS NULL</code> 過濾器將不會識別該 key。如需詳細資訊，請參閱<a href="/docs/zh-hant/basic-operators.md">基本運算符</a>。</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">Nullable 屬性<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,7 +62,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">nullable</code> 屬性可讓您在集合中儲存 null 值，在處理未知資料時提供彈性。</p>
+    </button></h2><p><code translate="no">nullable</code> 屬性允許您在集合中儲存 null 值，在處理未知資料時提供彈性。</p>
 <h3 id="Set-the-nullable-attribute​" class="common-anchor-header">設定 nullable 屬性</h3><p>建立集合時，使用<code translate="no">nullable=True</code> 定義 nullable 欄位 (預設為<code translate="no">False</code>)。以下範例建立一個名為<code translate="no">user_profiles_null</code> 的集合，並將<code translate="no">age</code> 欄位設定為 nullable。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -402,7 +403,7 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>若要返回具有 null 值的實體，請不使用任何標量篩選條件進行查詢，如下所示：</p>
+<p>若要返回具有空值的實體，請在不使用任何標量過濾條件的情況下進行查詢，如下所示：</p>
 <div class="alert note">
 <p><code translate="no">query</code> 方法，在沒有任何篩選條件的情況下使用時，會擷取集合中的所有實體，包括具有空值的實體。若要限制返回實體的數量，必須指定<code translate="no">limit</code> 參數。</p>
 </div>

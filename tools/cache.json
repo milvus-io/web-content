@@ -957,7 +957,7 @@
     "v2.5.x/site/en/about/limitations.md": "2025-02-17T08:31:03.077Z",
     "v2.5.x/site/en/about/milvus_adopters.md": "2025-01-14T08:40:20.649Z",
     "v2.5.x/site/en/about/overview.md": "2025-02-10T09:12:54.097Z",
-    "v2.5.x/site/en/about/roadmap.md": "2025-01-14T08:40:23.851Z",
+    "v2.5.x/site/en/about/roadmap.md": "2025-03-10T08:26:35.775Z",
     "v2.5.x/site/en/menuStructure/en.json": "2025-03-04T08:23:20.675Z",
     "v2.5.x/site/en/adminGuide/allocate.md": "2025-01-14T08:43:02.166Z",
     "v2.5.x/site/en/adminGuide/authenticate.md": "2025-01-14T08:43:03.251Z",
@@ -1046,7 +1046,7 @@
     "v2.5.x/site/en/getstarted/run-milvus-k8s/install_cluster-helm.md": "2025-02-24T09:49:02.077Z",
     "v2.5.x/site/en/getstarted/run-milvus-k8s/install_cluster-milvusoperator.md": "2025-02-28T01:50:49.138Z",
     "v2.5.x/site/en/getstarted/run-milvus-k8s/prerequisite-helm.md": "2025-01-14T08:45:13.763Z",
-    "v2.5.x/site/en/home/home.md": "2025-02-28T01:50:54.321Z",
+    "v2.5.x/site/en/home/home.md": "2025-03-10T08:26:41.402Z",
     "v2.5.x/site/en/integrations/RAG_with_pii_and_milvus.md": "2025-01-14T08:48:42.883Z",
     "v2.5.x/site/en/integrations/apify_milvus_rag.md": "2025-01-14T08:48:44.593Z",
     "v2.5.x/site/en/integrations/build_RAG_with_milvus_and_cognee.md": "2025-01-14T08:48:46.028Z",
@@ -1087,7 +1087,7 @@
     "v2.5.x/site/en/integrations/knowledge_table_with_milvus.md": "2025-01-14T08:49:44.257Z",
     "v2.5.x/site/en/integrations/kotaemon_with_milvus.md": "2025-01-14T08:49:45.699Z",
     "v2.5.x/site/en/integrations/langchain/basic_usage_langchain.md": "2025-01-23T16:37:23.685Z",
-    "v2.5.x/site/en/integrations/langchain/integrate_with_langchain.md": "2025-03-04T08:11:36.763Z",
+    "v2.5.x/site/en/integrations/langchain/integrate_with_langchain.md": "2025-03-10T08:27:12.456Z",
     "v2.5.x/site/en/integrations/langchain/milvus_hybrid_search_retriever.md": "2025-01-23T16:38:14.920Z",
     "v2.5.x/site/en/integrations/llama_agents_metadata.md": "2025-01-14T08:49:53.729Z",
     "v2.5.x/site/en/integrations/milvus_rag_with_dynamiq.md": "2025-01-14T08:50:16.731Z",
@@ -1219,7 +1219,7 @@
     "v2.5.x/site/en/userGuide/schema/binary-vector.md": "2025-01-14T08:53:35.608Z",
     "v2.5.x/site/en/userGuide/schema/dense-vector.md": "2025-01-14T08:53:37.580Z",
     "v2.5.x/site/en/userGuide/schema/enable-dynamic-field.md": "2025-01-14T08:53:38.988Z",
-    "v2.5.x/site/en/userGuide/schema/nullable-and-default.md": "2025-02-10T09:14:40.057Z",
+    "v2.5.x/site/en/userGuide/schema/nullable-and-default.md": "2025-03-10T08:27:36.256Z",
     "v2.5.x/site/en/userGuide/schema/number.md": "2025-01-14T08:53:42.964Z",
     "v2.5.x/site/en/userGuide/schema/primary-field.md": "2025-01-14T08:53:44.337Z",
     "v2.5.x/site/en/userGuide/schema/schema-hands-on.md": "2025-01-14T08:53:46.868Z",
@@ -1228,7 +1228,7 @@
     "v2.5.x/site/en/userGuide/schema/string.md": "2025-02-24T09:49:20.634Z",
     "v2.5.x/site/en/userGuide/schema/use-json-fields.md": "2025-01-17T02:06:00.007Z",
     "v2.5.x/site/en/userGuide/search-query-get/boolean/array-operators.md": "2025-01-14T08:53:55.876Z",
-    "v2.5.x/site/en/userGuide/search-query-get/boolean/basic-operators.md": "2025-02-10T09:15:00.075Z",
+    "v2.5.x/site/en/userGuide/search-query-get/boolean/basic-operators.md": "2025-03-10T08:27:58.269Z",
     "v2.5.x/site/en/userGuide/search-query-get/boolean/boolean.md": "2025-01-14T08:53:59.571Z",
     "v2.5.x/site/en/userGuide/search-query-get/boolean/filtering-templating.md": "2025-01-14T08:54:01.139Z",
     "v2.5.x/site/en/userGuide/search-query-get/boolean/json-operators.md": "2025-01-14T08:54:02.844Z",
@@ -1279,6 +1279,6 @@
     "v2.5.x/site/en/userGuide/manage-indexes/floating-vector/ivf-pq.md": "2025-01-27T08:32:44.086Z",
     "v2.5.x/site/en/embeddings/embed-with-model2vec.md": "2025-02-28T01:49:30.954Z",
     "v2.5.x/site/en/integrations/ETL_using_vectorETL.md": "2025-03-04T08:11:03.125Z",
-    "v2.5.x/site/en/integrations/build_RAG_from_s3_with_milvus.md": "2025-03-04T08:11:18.839Z"
+    "v2.5.x/site/en/integrations/build_RAG_from_s3_with_milvus.md": "2025-03-10T08:26:56.471Z"
   }
 }

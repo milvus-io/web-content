@@ -48,8 +48,9 @@ summary: >-
 <li><p>I campi scalari con l'attributo nullable abilitato non possono essere utilizzati come <code translate="no">group_by_field</code> nella ricerca per raggruppamento. Per ulteriori informazioni sulla ricerca per raggruppamento, consultare la sezione <a href="/docs/it/grouping-search.md">Ricerca per raggruppamento</a>.</p></li>
 <li><p>I campi contrassegnati come nullable non possono essere usati come chiavi di partizione. Per ulteriori informazioni sulle chiavi di partizione, vedere <a href="/docs/it/use-partition-key.md">Uso della chiave di partizione</a>.</p></li>
 <li><p>Quando si crea un indice su un campo scalare con l'attributo nullable abilitato, i valori nulli saranno esclusi dall'indice.</p></li>
+<li><p><strong>Campi JSON e ARRAY</strong>: Quando si usano gli operatori <code translate="no">IS NULL</code> o <code translate="no">IS NOT NULL</code> per filtrare i campi JSON o ARRAY, questi operatori lavorano a livello di colonna, il che significa che valutano solo se l'intero oggetto JSON o array è nullo. Ad esempio, se una chiave all'interno di un oggetto JSON è nulla, non verrà riconosciuta dal filtro <code translate="no">IS NULL</code>. Per ulteriori informazioni, consultare gli <a href="/docs/it/basic-operators.md">Operatori di base</a>.</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">Attributo nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="Nullable-attribute" class="common-anchor-header">Attributo Nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,7 +66,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>L'attributo <code translate="no">nullable</code> consente di memorizzare valori nulli in una collezione, fornendo flessibilità nella gestione di dati sconosciuti.</p>
-<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Impostare l'attributo nullable</h3><p>Quando si crea una collezione, utilizzare <code translate="no">nullable=True</code> per definire i campi nullable (per impostazione predefinita <code translate="no">False</code>). L'esempio seguente crea un insieme chiamato <code translate="no">user_profiles_null</code> e imposta il campo <code translate="no">age</code> come nullable.</p>
+<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Impostare l'attributo nullable</h3><p>Quando si crea una collezione, usare <code translate="no">nullable=True</code> per definire i campi nullable (l'impostazione predefinita è <code translate="no">False</code>). L'esempio seguente crea un insieme chiamato <code translate="no">user_profiles_null</code> e imposta il campo <code translate="no">age</code> come nullable.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -876,7 +877,7 @@ curl --request POST \​
 </thead>
 <tbody>
 <tr><td>✅</td><td>✅</td><td>Non-nullo</td><td>Nessuno/nullo</td><td>Utilizza il valore predefinito</td><td><ul><li>Campo: <code translate="no">age</code></li><li>Valore predefinito: <code translate="no">18</code></li><li>Input dell'utente: nullo</li><li>Risultato: memorizzato come <code translate="no">18</code></li></ul></td></tr>
-<tr><td>✅</td><td>❌</td><td>-</td><td>Nessuno/nullo</td><td>Memorizzato come nullo</td><td><ul><li>Campo:</li><li> <code translate="no">middle_name</code></li><li>Valore predefinito:</li><li>-Ingresso</li><li>dell'utente</li><li>: null</li><li>Risultato: memorizzato come null</td></tr>
+<tr><td>✅</td><td>❌</td><td>-</td><td>Nessuno/nullo</td><td>Memorizzato come nullo</td><td><ul><li>Campo:</li><li> <code translate="no">middle_name</code></li><li>Valore predefinito:</li><li>-Ingresso</li><li>dell'utente</li><li>: nullo</li><li>Risultato: memorizzato come nullo</td></tr>
 <tr><td>❌</td><td>✅</td><td>Non-nullo</td><td>Nessuno/nullo</td><td>Utilizza il valore predefinito</td><td><ul><li>Campo:</li><li> <code translate="no">status</code></li><li>Valore predefinito:</li><li> <code translate="no">&quot;active&quot;</code></li><li>Input dell'utente: null</li><li>Risultato: memorizzato come <code translate="no">&quot;active&quot;</code></td></tr>
 <tr><td>❌</td><td>❌</td><td>-</td><td>Nessuno/null</td><td>Lancia un errore</td><td><ul><li>Campo:</li><li> <code translate="no">email</code></li><li>Valore predefinito:</li><li>-Ingresso</li><li>dell'utente</li><li>: null</li><li>Risultato: Operazione rifiutata, il sistema lancia un errore</td></tr>
 <tr><td>❌</td><td>✅</td><td>Nullo</td><td>Nessuno/null</td><td>Lancia un errore</td><td><ul><li>Campo:</li><li> <code translate="no">username</code></li><li>Valore predefinito:</li><li>nullIngresso</li><li>utente</li><li>: null</li><li>Risultato: Operazione rifiutata, il sistema lancia un errore</td></tr>

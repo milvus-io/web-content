@@ -48,6 +48,7 @@ summary: >-
 <li><p>Скалярные поля с включенным атрибутом nullable нельзя использовать в качестве <code translate="no">group_by_field</code> в группировочном поиске. Дополнительные сведения о группировочном поиске см. в разделе <a href="/docs/ru/grouping-search.md">Группировочный поиск</a>.</p></li>
 <li><p>Поля, помеченные как nullable, нельзя использовать в качестве ключей разделов. Дополнительные сведения о ключах разделов см. в разделе <a href="/docs/ru/use-partition-key.md">Использование ключей разделов</a>.</p></li>
 <li><p>При создании индекса по скалярному полю с включенным атрибутом nullable нулевые значения будут исключены из индекса.</p></li>
+<li><p><strong>Поля JSON и ARRAY</strong>: При использовании операторов <code translate="no">IS NULL</code> или <code translate="no">IS NOT NULL</code> для фильтрации полей JSON или ARRAY эти операторы работают на уровне столбцов, что означает, что они оценивают только то, является ли весь объект JSON или массив нулевым. Например, если ключ внутри объекта JSON равен null, он не будет распознан фильтром <code translate="no">IS NULL</code>. Дополнительную информацию см. в разделе <a href="/docs/ru/basic-operators.md">Основные операторы</a>.</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">Атрибут Nullable<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +66,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Атрибут <code translate="no">nullable</code> позволяет хранить в коллекции нулевые значения, обеспечивая гибкость при работе с неизвестными данными.</p>
-<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Установка атрибута nullable</h3><p>При создании коллекции используйте <code translate="no">nullable=True</code> для определения полей с нулевыми значениями (по умолчанию <code translate="no">False</code>). Следующий пример создает коллекцию с именем <code translate="no">user_profiles_null</code> и устанавливает поле <code translate="no">age</code> как nullable.</p>
+<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Установка атрибута nullable</h3><p>При создании коллекции используйте <code translate="no">nullable=True</code> для определения полей с нулевыми значениями (по умолчанию используется <code translate="no">False</code>). Следующий пример создает коллекцию с именем <code translate="no">user_profiles_null</code> и устанавливает поле <code translate="no">age</code> как nullable.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​

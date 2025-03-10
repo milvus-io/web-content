@@ -74,7 +74,7 @@ title: Operadores básicos
       </svg>
     </button></h2><p>Os operadores de intervalo ajudam a filtrar dados com base em conjuntos específicos ou intervalos de valores.</p>
 <h3 id="Supported-Range-Operators​" class="common-anchor-header">Operadores de intervalo suportados.</h3><ul>
-<li><p><code translate="no">IN</code>: Utilizados para fazer a correspondência de valores dentro de um conjunto ou intervalo específico.</p></li>
+<li><p><code translate="no">IN</code>: Utilizados para fazer corresponder valores dentro de um conjunto ou intervalo específico.</p></li>
 <li><p><code translate="no">LIKE</code>: Usado para corresponder a um padrão (principalmente para campos de texto).</p></li>
 </ul>
 <h3 id="Example-1-Using-IN-to-Match-Multiple-Values​" class="common-anchor-header">Exemplo 1: Usando <code translate="no">IN</code> para corresponder a vários valores</h3><p>Se você quiser encontrar todas as entidades onde o <code translate="no">color</code> é &quot;vermelho&quot;, &quot;verde&quot; ou &quot;azul&quot;.</p>
@@ -87,7 +87,7 @@ title: Operadores básicos
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Isto fará corresponder qualquer produto cujo nome comece por &quot;Prod&quot;, como &quot;Produto A&quot;, &quot;Produto B&quot;, etc.</p>
+<p>Isto irá corresponder a qualquer produto cujo nome comece por &quot;Prod&quot;, como &quot;Produto A&quot;, &quot;Produto B&quot;, etc.</p>
 <h4 id="Suffix-Match-Ends-With​" class="common-anchor-header">Correspondência de sufixo (termina com)</h4><p>Para uma correspondência <strong>de sufixo</strong>, em que a cadeia de caracteres termina com um determinado padrão, coloque o símbolo <code translate="no">%</code> no início do padrão. Por exemplo, para encontrar todos os produtos cujo <code translate="no">name</code> termina com &quot;XYZ&quot;.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%XYZ&quot;&#x27;</span>​
 
@@ -126,7 +126,7 @@ title: Operadores básicos
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;total == base_price + tax&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-Subtraction--​" class="common-anchor-header">Exemplo 2: Usando Subtração (<code translate="no">-</code>)</h3><p>Para encontrar entidades onde <code translate="no">quantity</code> é maior que 50 e <code translate="no">quantity_sold</code> é menor que 30.</p>
+<h3 id="Example-2-Using-Subtraction--​" class="common-anchor-header">Exemplo 2: Utilizar a Subtração (<code translate="no">-</code>)</h3><p>Para encontrar entidades onde <code translate="no">quantity</code> é maior que 50 e <code translate="no">quantity_sold</code> é menor que 30.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;quantity - quantity_sold &gt; 50&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -175,9 +175,145 @@ title: Operadores básicos
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition​" class="common-anchor-header">Exemplo 3: Usando <code translate="no">NOT</code> para excluir uma condição</h3><p>Para encontrar todos os produtos em que <code translate="no">color</code> não seja &quot;verde&quot;.</p>
+<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition​" class="common-anchor-header">Exemplo 3: Usando <code translate="no">NOT</code> para excluir uma condição</h3><p>Para encontrar todos os produtos em que <code translate="no">color</code> não é &quot;verde&quot;.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;NOT color == &quot;green&quot;&#x27;</span>​
 
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="IS-NULL-and-IS-NOT-NULL-Operators" class="common-anchor-header">Operadores IS NULL e IS NOT NULL<button data-href="#IS-NULL-and-IS-NOT-NULL-Operators" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Os operadores <code translate="no">IS NULL</code> e <code translate="no">IS NOT NULL</code> são utilizados para filtrar campos com base no facto de conterem ou não um valor nulo (ausência de dados).</p>
+<ul>
+<li><code translate="no">IS NULL</code>: Identifica entidades em que um campo específico contém um valor nulo, ou seja, o valor está ausente ou indefinido.</li>
+<li><code translate="no">IS NOT NULL</code>: Identifica entidades em que um campo específico contém qualquer valor diferente de nulo, o que significa que o campo tem um valor válido e definido.</li>
+</ul>
+<div class="alert note">
+<p>Os operadores não diferenciam maiúsculas de minúsculas, portanto, você pode usar <code translate="no">IS NULL</code> ou <code translate="no">is null</code>, e <code translate="no">IS NOT NULL</code> ou <code translate="no">is not null</code>.</p>
+</div>
+<h3 id="Regular-Scalar-Fields-with-Null-Values" class="common-anchor-header">Campos escalares regulares com valores nulos</h3><p>O Milvus permite a filtragem de campos escalares regulares, como cadeias de caracteres ou números, com valores nulos.</p>
+<div class="alert note">
+<p>Uma cadeia de caracteres vazia <code translate="no">&quot;&quot;</code> não é tratada como um valor nulo para um campo VARCHAR.</p>
+</div>
+<p>Para recuperar entidades em que o campo <code translate="no">description</code> é nulo:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NULL&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Para recuperar entidades em que o campo <code translate="no">description</code> não é nulo:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Para recuperar entidades em que o campo <code translate="no">description</code> não é nulo e o campo <code translate="no">price</code> é maior que 10:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL AND price &gt; 10&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="JSON-Fields-with-Null-Values" class="common-anchor-header">Campos JSON com valores nulos</h3><p>Milvus permite a filtragem de campos JSON que contenham valores nulos. Um campo JSON é tratado como nulo das seguintes formas:</p>
+<ul>
+<li>Todo o objeto JSON é explicitamente definido como None (nulo), por exemplo, <code translate="no">{&quot;metadata&quot;: None}</code>.</li>
+<li>O próprio campo JSON está completamente ausente da entidade.</li>
+</ul>
+<div class="alert note">
+<p>Se alguns elementos de um objeto JSON forem nulos (por exemplo, chaves individuais), o campo continua a ser considerado não nulo. Por exemplo, <code translate="no">{&quot;metadata&quot;: {&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> não é tratado como nulo, mesmo que a chave <code translate="no">category</code> seja nula.</p>
+</div>
+<p>Para ilustrar melhor a forma como o Milvus trata os campos JSON com valores nulos, considere os seguintes dados de amostra com um campo JSON <code translate="no">metadata</code>:</p>
+<pre><code translate="no" class="language-python">data = [
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>]
+  },
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-comment"># Entire JSON object is null</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.56</span>, <span class="hljs-number">0.78</span>, <span class="hljs-number">0.90</span>]
+  },
+  {  <span class="hljs-comment"># JSON field `metadata` is completely missing</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.91</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>]
+  },
+  {
+      <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>}, <span class="hljs-comment"># Individual key value is null</span>
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.56</span>, <span class="hljs-number">0.38</span>, <span class="hljs-number">0.21</span>]
+  }
+]
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Exemplo 1: Recuperar entidades onde <code translate="no">metadata</code> é nulo</strong></p>
+<p>Para encontrar entidades em que o campo <code translate="no">metadata</code> está em falta ou explicitamente definido como None:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Exemplo 2: Recuperar entidades onde <code translate="no">metadata</code> não é nulo</strong></p>
+<p>Para encontrar entidades onde o campo <code translate="no">metadata</code> não é nulo:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="ARRAY-Fields-with-Null-Values" class="common-anchor-header">Campos ARRAY com valores nulos</h3><p>Milvus permite filtrar os campos ARRAY que contêm valores nulos. Um campo ARRAY é tratado como nulo das seguintes formas:</p>
+<ul>
+<li>O campo ARRAY inteiro é explicitamente definido como Nenhum (nulo), por exemplo, <code translate="no">&quot;tags&quot;: None</code>.</li>
+<li>O campo ARRAY está completamente ausente da entidade.</li>
+</ul>
+<div class="alert note">
+<p>Um campo ARRAY não pode conter valores nulos parciais, pois todos os elementos em um campo ARRAY devem ter o mesmo tipo de dados. Para obter detalhes, consulte <a href="/docs/pt/array_data_type.md">Campo de matriz</a>.</p>
+</div>
+<p>Para ilustrar melhor como Milvus trata os campos ARRAY com valores nulos, considere os seguintes dados de amostra com um campo ARRAY <code translate="no">tags</code>:</p>
+<pre><code translate="no" class="language-python">data = [
+  {
+      <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>]
+  },
+  {
+      <span class="hljs-string">&quot;tags&quot;</span>: <span class="hljs-literal">None</span>,  <span class="hljs-comment"># Entire ARRAY is null</span>
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.78</span>, <span class="hljs-number">0.91</span>, <span class="hljs-number">0.23</span>]
+  },
+  {  <span class="hljs-comment"># The tags field is completely missing</span>
+      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">9</span>, <span class="hljs-number">5</span>],
+      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.18</span>, <span class="hljs-number">0.11</span>, <span class="hljs-number">0.23</span>]
+  }
+]
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Exemplo 1: Recuperar entidades onde <code translate="no">tags</code> é nulo</strong></p>
+<p>Para recuperar entidades em que o campo <code translate="no">tags</code> está em falta ou explicitamente definido como None:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [4, 5], &#x27;embedding&#x27;: [0.78, 0.91, 0.23], &#x27;pk&#x27;: 2}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
+<span class="hljs-comment"># ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>Exemplo 2: Recuperar entidades onde <code translate="no">tags</code> não é nulo</strong></p>
+<p>Para recuperar entidades onde o campo <code translate="no">tags</code> não é nulo:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
+
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># data: [</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
+<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
+<span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields​" class="common-anchor-header">Dicas sobre como usar operadores básicos com campos JSON e ARRAY<button data-href="#Tips-on-Using-Basic-Operators-with-JSON-and-ARRAY-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -194,7 +330,7 @@ title: Operadores básicos
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Embora os operadores básicos do Milvus sejam versáteis e possam ser aplicados a campos escalares, eles também podem ser usados de forma eficaz com as chaves e índices nos campos JSON e ARRAY.</p>
+    </button></h2><p>Embora os operadores básicos em Milvus sejam versáteis e possam ser aplicados a campos escalares, eles também podem ser efetivamente usados com as chaves e índices nos campos JSON e ARRAY.</p>
 <p>Por exemplo, se tiver um campo <code translate="no">product</code> que contenha várias chaves como <code translate="no">price</code>, <code translate="no">model</code>, e <code translate="no">tags</code>, faça sempre referência à chave diretamente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>​
 

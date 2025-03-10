@@ -44,7 +44,8 @@ summary: >-
 <li><p>デフォルト値または nullable 属性は、コレクション作成時にのみ設定でき、その後変更することはできません。</p></li>
 <li><p>nullable 属性が有効なスカラー・フィールドは、グループ化検索で<code translate="no">group_by_field</code> として使用できません。グループ化検索の詳細については、<a href="/docs/ja/grouping-search.md">グループ化検索を</a>参照してください。</p></li>
 <li><p>Nullableとマークされたフィールドはパーティション・キーとして使用できません。パーティション・キーの詳細については、「<a href="/docs/ja/use-partition-key.md">パーティション・キーの使用</a>」を参照してください。</p></li>
-<li><p>Nullable属性が有効なスカラー・フィールドにインデックスを作成する場合、NULL値はインデックスから除外されます。</p></li>
+<li><p>NULL可能属性を有効にしたスカラー・フィールドにインデックスを作成する場合、NULL値はインデックスから除外されます。</p></li>
+<li><p><strong>JSONフィールドとARRAYフィールド</strong>：JSONまたはARRAYフィールドのフィルタリングに<code translate="no">IS NULL</code> または<code translate="no">IS NOT NULL</code> 演算子を使用する場合、これらの演算子は列レベルで動作します。これは、JSONオブジェクトまたは配列全体がNULLであるかどうかだけを評価することを意味します。たとえば、JSONオブジェクト内のキーがNULLの場合、<code translate="no">IS NULL</code> のフィルタでは認識されません。詳細については、「<a href="/docs/ja/basic-operators.md">基本演算子</a>」を参照してください。</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">Nullable属性<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,8 +62,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">nullable</code> 属性を使用すると、NULL 値をコレクションに格納できるようになり、未知のデータを処理する際に柔軟性が得られます。</p>
-<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Nullable属性の設定</h3><p>コレクションを作成するとき、<code translate="no">nullable=True</code> を使用して nullable フィールドを定義します（デフォルトは<code translate="no">False</code> ）。以下の例では、<code translate="no">user_profiles_null</code> という名前のコレクションを作成し、<code translate="no">age</code> フィールドを nullable に設定しています。</p>
+    </button></h2><p><code translate="no">nullable</code> 属性を使用すると、NULL 値をコレクションに格納できるようになり、未知のデータを扱う際に柔軟性が生まれます。</p>
+<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Nullable属性の設定</h3><p>コレクションを作成するとき、<code translate="no">nullable=True</code> を使用して nullable フィールドを定義します（デフォルトは<code translate="no">False</code> ）。次の例では、<code translate="no">user_profiles_null</code> という名前のコレクションを作成し、<code translate="no">age</code> フィールドを nullable に設定しています。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -466,7 +467,7 @@ System.out.println(resp.getQueryResults());​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>デフォルト値は、スカラー・フィールドに割り当てられた事前設定値です。挿入時にデフォルト値を持つフィールドの値を指定しない場合、システムは自動的にデフォルト値を使用します。</p>
+    </button></h2><p>デフォルト値は、スカラー・フィールドに割り当てられた事前設定値です。挿入時にデフォルト値を持つフィールドの値を指定しないと、システムは自動的にデフォルト値を使用します。</p>
 <h3 id="Set-default-values" class="common-anchor-header">デフォルト値の設定</h3><p>コレクションを作成するとき、<code translate="no">default_value</code> パラメータを使用してフィールドのデフォルト値を定義します。次の例は、<code translate="no">age</code> のデフォルト値を<code translate="no">18</code> に、<code translate="no">status</code> のデフォルト値を<code translate="no">&quot;active&quot;</code> に設定する方法を示しています。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>

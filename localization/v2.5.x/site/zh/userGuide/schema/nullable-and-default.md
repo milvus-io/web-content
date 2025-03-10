@@ -45,8 +45,9 @@ summary: >-
 <li><p>启用了可归零属性的标量字段不能在分组搜索中用作<code translate="no">group_by_field</code> 。有关分组搜索的更多信息，请参阅<a href="/docs/zh/grouping-search.md">分组搜索</a>。</p></li>
 <li><p>标记为可归零的字段不能用作分区键。有关分区键的更多信息，请参阅<a href="/docs/zh/use-partition-key.md">使用分区键</a>。</p></li>
 <li><p>在启用了可归零属性的标量字段上创建索引时，索引将排除空值。</p></li>
+<li><p><strong>JSON 和 ARRAY 字段</strong>：当使用<code translate="no">IS NULL</code> 或<code translate="no">IS NOT NULL</code> 操作符对 JSON 或 ARRAY 字段进行过滤时，这些操作符在列级别工作，这表明它们只评估整个 JSON 对象或数组是否为空。例如，如果 JSON 对象中的某个键为空，<code translate="no">IS NULL</code> 过滤器将无法识别该键。有关详细信息，请参阅<a href="/docs/zh/basic-operators.md">基本操作符</a>。</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">可归零属性<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="Nullable-attribute" class="common-anchor-header">Nullable 属性<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -404,7 +405,7 @@ System.out.println(resp.getQueryResults());​
 <button class="copy-code-btn"></button></code></pre>
 <p>要返回具有空值的实体，请在不使用任何标量过滤条件的情况下进行如下查询：</p>
 <div class="alert note">
-<p><code translate="no">query</code> 方法在不带任何过滤条件的情况下使用时，会检索 Collections 中的所有实体，包括带有空值的实体。要限制返回实体的数量，必须指定<code translate="no">limit</code> 参数。</p>
+<p><code translate="no">query</code> 方法在不带任何过滤条件的情况下使用时，会检索 Collections 中的所有实体，包括具有空值的实体。要限制返回实体的数量，必须指定<code translate="no">limit</code> 参数。</p>
 </div>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>

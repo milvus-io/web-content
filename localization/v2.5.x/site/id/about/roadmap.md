@@ -42,40 +42,40 @@ summary: >-
     <thead>
         <tr>
             <th>Kategori</th>
-            <th>Milvus 2.5.0 (Dicapai dalam rilis terbaru)</th>
-            <th>Rilis Berikutnya (Pertengahan CY25)</th>
-            <th>Peta Jalan Masa Depan (Dalam 1 tahun)</th>
+            <th>Milvus 2.5.x (Dicapai dalam rilis terbaru)</th>
+            <th>Rilis Berikutnya - Milvus 2.6 (Pertengahan CY25)</th>
+            <th>Peta Jalan Masa Depan - Milvus 3.0 (Dalam 1 tahun)</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><strong>Pemrosesan Data Tidak Terstruktur Berbasis AI</strong><br/><i>Memperkuat kemampuan untuk memproses dan menganalisis data tidak terstruktur dengan menggunakan model AI dan teknologi canggih</i>.</td>
+            <td><strong>Pemrosesan Data Tidak Terstruktur Berbasis AI</strong><br/><i>Memperkuat kemampuan untuk memproses dan menganalisis data tidak terstruktur menggunakan model AI dan teknologi canggih</i></td>
             <td><strong>Pencarian Teks Lengkap</strong><br/><i>Mendukung pencarian teks lengkap dengan Sparse-BM25. API baru menerima teks sebagai input dan secara otomatis menghasilkan vektor jarang di dalam Milvus</i><br/><br/><strong>Sparse Vector (GA)</strong><br/><i>Mendukung metode penyimpanan dan pengindeksan yang efisien untuk vektor jarang</i><br/></td>
-            <td><strong>Data-In dan Data-Out</strong><br/><i>Mendukung layanan model utama untuk menelan data asli</i><br/><br/><strong>Advanced Reranker</strong><br/><i>Mendukung perangking ulang berbasis model dan fungsi penilaian yang ditentukan pengguna</i><br/><br/><strong>Peningkatan JSON</strong><br/><i>Pengindeksan dan penguraian JSON untuk mempercepat pemrosesan</i></td>
-            <td><strong>Data Asli Masuk dan Keluar</strong><br/><i>Mendukung Blob dan referensi url untuk memproses data asli</i><br/><br/><strong>Mendukung Lebih Banyak Jenis Data</strong><br/><i>mis. Datetime, Peta, GIS</i><br/><br/><strong>Mendukung Tensor</strong><br/><i>Mendukung daftar vektor, penggunaan umum seperti Colbert, Copali, dll.</i></td>
+            <td><strong>Data-In dan Data-Out</strong><br/><i>Mendukung layanan model utama untuk menelan teks asli</i><br/><br/><strong>Advanced Reranker</strong><br/><i>Mendukung perangking berbasis model dan fungsi penilaian yang ditentukan pengguna</i><br/><br/><strong>Pencarian</strong> Iteratif<br/><i>Merevisi vektor kueri berdasarkan pelabelan pengguna</i></td>
+            <td><strong>Mendukung Tensor</strong><br/><i>Mendukung daftar vektor, penggunaan umum seperti Colbert, Copali, dan representasi Video</i><br/><br/><strong>Mendukung Lebih Banyak Tipe Data</strong><br/><i>misalnya Datetime, Peta, GIS</i></td>
         </tr>
         <tr>
-            <td><strong>Kualitas &amp; Performa Pencarian</strong><br/><i>Memberikan hasil yang akurat, relevan, dan cepat dengan mengoptimalkan arsitektur, algoritme, dan API</i></td>
+            <td><strong>Kualitas &amp; Performa Pencarian</strong><br/><i>Memberikan hasil yang akurat, relevan, dan cepat dengan mengoptimalkan arsitektur, algoritma, dan API</i></td>
             <td><strong>Fungsi Pencocokan Teks</strong><br/><i>Memfilter kata kunci/token dengan cepat dalam teks/varchar</i><br/><br/><strong>Peningkatan Pencarian Pengelompokan</strong><br/><i>Memperkenalkan group_size dan menambahkan grup dengan dukungan dalam pencarian hybrid</i><br/><br/><strong>Indeks Bitmap &amp; Indeks Terbalik</strong><br/><i>Mempercepat pemfilteran pada tag</i></td>
-            <td><strong>Pencocokan Tingkat Lanjut</strong><br/><i>misal: Pencocokan Frasa, Pencocokan Fuzzy, dan lebih banyak tokenizer</i><br/><br/><strong>Agregasi</strong><br/><i>Agregasi bidang skalar, misal: min, max, count, distinct.</i><br/></td>
-            <td><strong>Pembaruan Parsial</strong><br/><i>Mendukung pembaruan untuk nilai bidang tertentu</i><br/><br/><strong>Kemampuan Penyortiran</strong><br/><i>Mengurutkan berdasarkan bidang skalar selama eksekusi</i><br/><br/><strong>Mendukung Pengelompokan Data</strong><br/><i>Lokalitas data</i></td>
+            <td><strong>Pencocokan Tingkat Lanjut</strong><br/><i>mis. phrase_match, multi_match </i><br/><br/><strong>Peningkatan Penganalisis</strong><br/><i>Meningkatkan Penganalisis dengan dukungan tokenizer yang diperluas dan kemampuan pengamatan yang lebih baik</i><br/><br/><strong>Pemfilteran JSON</strong><br/><i>Mengoptimalkan pengindeksan dan penguraian JSON untuk pemrosesan yang lebih cepat</i></td>
+            <td><strong>Kemampuan Penyortiran</strong><br/><i>Menyortir berdasarkan bidang skalar selama eksekusi</i><br/><br/><strong>Mendukung Pengelompokan Data</strong><br/><i>Lokalitas data</i></td>
         </tr>
         <tr>
             <td><strong>Fungsionalitas &amp; Manajemen yang Kaya</strong><br/><i>Fitur manajemen data yang ramah pengembang dan kuat</i></td>
-            <td><strong>Mendukung file CSV dalam impor data</strong><br/><i>Bulkinsert mendukung format CSV</i><br/><br/><strong>Mendukung Nilai Null dan Default</strong><br/><i>Tipe</i> Null<i>dan Default membuat impor data dari DBMS lain menjadi lebih mudah</i><br/><br/><strong>Milvus WebUI (Beta)</strong><br/><i>Alat bantu manajemen visual untuk DBA</i></td>
-            <td><strong>Deduplikasi Primary Key</strong><br/><i>Dengan menggunakan indeks pk global</i><br/><br/><strong>Perubahan Skema Online</strong><br/><i>misal: menambah/menghapus field, memodifikasi panjang varchar</i><br/><br/><strong>Data Versioning &amp; Restore</strong><br/><i>Mendukung data versioning dengan snapshot</i></td>
-            <td><strong>Rust dan C++ SDK</strong><br/><i>Mendukung lebih banyak klien</i><br/><br/><strong>Mendukung UDF </strong><br/><i>Fungsi yang ditentukan pengguna</i></td>
+            <td><strong>Mendukung file csv dalam impor data</strong><br/><i>Bulkinsert mendukung format csv</i><br/><br/><strong>Mendukung Nilai Null dan Default</strong><br/><i>Tipe</i> Null<i>dan Default membuat impor data dari DBMS lain menjadi lebih mudah</i><br/><br/><strong>Milvus WebUI (Beta)</strong><br/><i>Alat bantu manajemen visual untuk DBA</i></td>
+            <td><strong>Perubahan Skema</strong><br/><i>misal: menambah/menghapus field, memodifikasi panjang varchar</i><br/><br/><strong>Agregasi</strong><br/><i>Agregasi field skalar, misal: count, nilai yang berbeda, min, max</i><br/><br/><strong>Mendukung UDF</strong><br/><i>Fungsi yang ditentukan pengguna</i></td>
+            <td><strong>Pembaruan Massal</strong><br/><i>Mendukung pembaruan massal untuk nilai field tertentu</i><br/><br/><strong>Deduplikasi Kunci Utama</strong><br/><i>Dengan menggunakan indeks pk global</i><br/><br/><strong>Data Versioning &amp; Restore</strong><br/><i>Mendukung data versioning dengan snapshot</i></td>
         </tr>
         <tr>
-            <td><strong>Efisiensi Biaya &amp; Arsitektur</strong><br/><i>Sistem yang canggih, mengutamakan stabilitas, efisiensi biaya, dan skalabilitas </i></td>
-            <td><strong>Load by Field</strong><br/><i>Pilih bagian dari koleksi yang akan dimuat</i><br/><br/><strong>Pengoptimalan Memori</strong><br/><i>Mengurangi OOM dan peningkatan beban</i><br/><br/><strong>Streaming Node (Beta)</strong><br/><i>Memberikan konsistensi global dan mengatasi hambatan kinerja pada koordinator root</i><br/><br/><strong>Format Penyimpanan V2 (Beta)</strong><br/><i>Desain dan fondasi format universal untuk akses data berbasis disk</i><br/><br/><strong>Pemadatan Clustering</strong><br/><i>Distribusi ulang data berdasarkan konfigurasi untuk mempercepat kinerja pembacaan</i></td>
-            <td><strong>Lazy Load</strong><br/><i>Load dapat dimulai dengan operasi baca pertama tanpa secara eksplisit memanggil load()</i><br/><br/> Tiered<strong>Storage</strong><br/><i>Mendukung penyimpanan panas dan dingin untuk optimasi biaya</i><br/><br/><strong>Release by Field</strong><br/><i>Melepaskan bagian dari koleksi untuk mengurangi penggunaan memori</i><br/><br/><strong>Streaming Node (GA)</strong><br/><i>Memproses data streaming dan menyederhanakan arsitektur</i></td>
-            <td><i>Menghilangkan</i><strong>ketergantungan</strong><br/><i>Mengurangi atau menghilangkan ketergantungan pada komponen eksternal seperti pulsar, dll.</i><br/><br/><strong>Menggabungkan logika coord ke dalam MixCoord</strong><br/><i>Menyederhanakan arsitektur</i></td>
+            <td><strong>Efisiensi Biaya &amp; Arsitektur</strong><br/><i>Sistem yang canggih dengan stabilitas, efektivitas biaya, dan penyebaran yang efisien.</i></td>
+            <td><strong>Pengoptimalan Memori</strong><br/><i>Mengurangi OOM dan peningkatan beban</i><br/><br/><strong>Pemadatan Clustering</strong><br/><i>Distribusi ulang data berdasarkan konfigurasi untuk mempercepat kinerja pembacaan</i><br/><br/><strong>Format Penyimpanan V2 (Beta)</strong><br/><i>Desain dan fondasi format universal untuk akses data berbasis disk</i></td>
+            <td><strong>Penyimpanan Berjenjang</strong><br/><i>Mendukung penyimpanan panas dan dingin untuk optimalisasi biaya</i><br/><br/><strong>Stream Node</strong><br/><i>Memproses data streaming dan menyederhanakan alur penulisan tambahan</i><br/><br/><strong>MixCoord</strong><br/><i>Menggabungkan logika Coord menjadi satu</i></td>
+            <td><strong>Vector Lake</strong><br/><i>Solusi offline yang hemat biaya, spark connector dan terintegrasi dengan iceberg</i><br/><br/><strong>Logstore Component</strong><br/><i>Mengurangi ketergantungan pada komponen eksternal seperti pulsar</i><br/><br/><strong>Data Evict Policy</strong><br/><i>Pengguna dapat menentukan kebijakan penggusuran mereka sendiri</i></td>
         </tr>
     </tbody>
 </table>
 <ul>
-<li>Roadmap kami biasanya terstruktur menjadi tiga bagian: rilis terbaru, rilis berikutnya yang akan datang, dan visi jangka menengah hingga jangka panjang dalam satu tahun ke depan.</li>
+<li>Roadmap kami biasanya terstruktur dalam tiga bagian: rilis terbaru, rilis berikutnya yang akan datang, dan visi jangka menengah hingga jangka panjang dalam satu tahun ke depan.</li>
 <li>Seiring dengan perkembangannya, kami terus belajar dan sesekali menyesuaikan fokus kami, menambahkan atau menghapus item sesuai kebutuhan.</li>
 <li>Rencana ini bersifat indikatif dan dapat berubah, dan dapat bervariasi berdasarkan layanan berlangganan.</li>
 <li>Kami tetap berpegang teguh pada peta jalan kami, dengan <a href="/docs/id/release_notes.md">catatan rilis</a> kami yang berfungsi sebagai referensi.</li>
@@ -96,9 +96,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Sebagai proyek sumber terbuka, Milvus berkembang dengan kontribusi komunitas. Berikut adalah cara Anda dapat menjadi bagian dari perjalanan kami.</p>
-<h3 id="Share-feedback" class="common-anchor-header">Berbagi umpan balik</h3><ul>
+<h3 id="Share-feedback" class="common-anchor-header">Memberikan umpan balik</h3><ul>
 <li><p>Pelaporan masalah: Menemukan bug atau punya saran? Buka masalah di <a href="https://github.com/milvus-io/milvus/issues">halaman GitHub</a> kami.</p></li>
-<li><p>Saran fitur: Punya ide untuk fitur baru atau perbaikan? <a href="https://github.com/milvus-io/milvus/discussions">Kami akan senang mendengarnya!</a></p></li>
+<li><p>Saran fitur: Punya ide untuk fitur baru atau perbaikan? Bergabunglah dengan percakapan di <a href="https://github.com/milvus-io/milvus/discussions/40263">utas diskusi aktif kami</a>.</p></li>
 </ul>
 <h3 id="Code-contributions" class="common-anchor-header">Kontribusi kode</h3><ul>
 <li><p>Tarik permintaan: Berkontribusi langsung ke <a href="https://github.com/milvus-io/milvus/pulls">basis kode</a> kami. Baik itu memperbaiki bug, menambahkan fitur, atau meningkatkan dokumentasi, kontribusi Anda diterima.</p></li>
