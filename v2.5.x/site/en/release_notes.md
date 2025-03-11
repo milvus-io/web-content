@@ -8,6 +8,49 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.6
+
+Release date: March 10, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.6          | 2.5.5              | 2.5.5               | 2.5.5            |
+
+We’re excited to announce the release of Milvus 2.5.6, featuring valuable enhancements to toolchains, logging, metrics, and array handling, as well as multiple bug fixes for improved reliability and performance. This update includes refined concurrency handling, more robust compaction tasks, and other key improvements. We encourage you to upgrade or try it out, and as always, we welcome your feedback to help us continuously improve Milvus!
+
+### Improvements
+
+- Upgrade the Go toolchain to 1.22.7 ([#40399](https://github.com/milvus-io/milvus/pull/40399))
+- Upgrade Rust version to 1.83 ([#40317](https://github.com/milvus-io/milvus/pull/40317))
+- Bump Etcd version to 3.5.18 ([#40230](https://github.com/milvus-io/milvus/pull/40230))
+- Only check element type for non-null arrays ([#40447](https://github.com/milvus-io/milvus/pull/40447))
+- Remove debug logs in the resource group handler (v2) ([#40393](https://github.com/milvus-io/milvus/pull/40393))
+- Improve logging for the gRPC resolver ([#40338](https://github.com/milvus-io/milvus/pull/40338))
+- Add more metrics for asynchronous CGO components ([#40232](https://github.com/milvus-io/milvus/pull/40232))
+- Clean the shard location cache after a collection is released ([#40228](https://github.com/milvus-io/milvus/pull/40228))
+
+### Bug fixes
+
+- Fixed array corruption caused by ignoring validity ([#40433](https://github.com/milvus-io/milvus/pull/40433))
+- Fixed an issue where `null` expressions did not work for JSON fields ([#40457](https://github.com/milvus-io/milvus/pull/40457))
+- Fixed an issue that stored the wrong offset when building Tantivy with a nullable field ([#40453](https://github.com/milvus-io/milvus/pull/40453))
+- Skipped executing stats for zero segments ([#40449](https://github.com/milvus-io/milvus/pull/40449))
+- Corrected memory size estimation for arrays ([#40377](https://github.com/milvus-io/milvus/pull/40377))
+- Passed a knapsack pointer to avoid multiple compactions ([#40401](https://github.com/milvus-io/milvus/pull/40401))
+- Fixed a crash issue with bulk insert ([#40304](https://github.com/milvus-io/milvus/pull/40304))
+- Prevented message stream leaks by properly terminating the main dispatcher ([#40351](https://github.com/milvus-io/milvus/pull/40351))
+- Fixed concurrency issues for `null` offsets ([#40363](https://github.com/milvus-io/milvus/pull/40363)), ([#40365](https://github.com/milvus-io/milvus/pull/40365))
+- Fixed parsing of the `import end ts` ([#40333](https://github.com/milvus-io/milvus/pull/40333))
+- Improved error handling and unit tests for the `InitMetaCache` function ([#40324](https://github.com/milvus-io/milvus/pull/40324))
+- Added a duplicate parameter check for `CreateIndex` ([#40330](https://github.com/milvus-io/milvus/pull/40330))
+- Resolved an issue preventing compaction tasks when size exceeded the max limit ([#40350](https://github.com/milvus-io/milvus/pull/40350))
+- Fixed duplicate consumption from the stream for invisible segments ([#40318](https://github.com/milvus-io/milvus/pull/40318))
+- Changed the CMake variable to switch to `knowhere-cuvs` ([#40289](https://github.com/milvus-io/milvus/pull/40289))
+- Fixed an issue where dropping DB properties via RESTful failed ([#40260](https://github.com/milvus-io/milvus/pull/40260))
+- Used a different message type for the `OperatePrivilegeV2` API ([#40193](https://github.com/milvus-io/milvus/pull/40193))
+- Fixed a data race in the task delta cache ([#40262](https://github.com/milvus-io/milvus/pull/40262))
+- Resolved a task delta cache leak caused by duplicate task IDs ([#40184](https://github.com/milvus-io/milvus/pull/40184))
+
 ## v2.5.5
 
 Release date: February 26, 2025
