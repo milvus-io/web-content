@@ -1,27 +1,20 @@
-# dropDatabase()
+# listResourceGroups()
 
-This operation drops a database.
+This operation lists all available resource groups.
 
 ```javascript
-dropDatabase(data?): Promise<ResStatus>
+listResourceGroups(data): Promise<ListResourceGroupsResponse>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropDatabase({
-    db_name: string,
+milvusClient.describeResourceGroup({
     timeout?: number
 })
 ```
 
 **PARAMETERS:**
-
-- **db_name** (*string*) -
-
-    The name of the database to drop.
-
-    There should be a database with the specified name. Otherwise, exceptions will occur.
 
 - **timeout** (*number*) -
 
@@ -29,15 +22,16 @@ milvusClient.dropDatabase({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |\<ResStatus>*
+**RETURNS** *Promise |\<DescribeResourceGroupResponse>*
 
-This method returns a promise that resolves to a **ResStatus** object.
+This method returns a promise that resolves to a **DescribeResourceGroupResponse** object.
 
 ```javascript
 {
-    code: number,
+    code: number
     error_code: string | number,
-    reason: string
+    reason: string,
+    resource_groups: string[]
 }
 ```
 
@@ -55,10 +49,15 @@ This method returns a promise that resolves to a **ResStatus** object.
 
     The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
+- **resource_groups** (*string[]*) -
+
+    A list of resource group names.
+
 ## Example
 
 ```javascript
 const milvusClient = new milvusClient(MILUVS_ADDRESS);
-const resStatus = await milvusClient.dropDatabase({ db_name: 'db_to_drop' });
+
+const res = await milvusClient.listResourceGroups();
 ```
 

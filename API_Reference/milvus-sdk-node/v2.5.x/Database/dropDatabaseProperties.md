@@ -1,17 +1,17 @@
-# createDatabase()
+# dropDatabaseProperties()
 
-This operation creates a database.
+This operation drops the setting of the specified properties.
 
 ```javascript
-createDatabase(data): Promise<ResStatus>
+dropDatabaseProperties(data): Promise<ResStatus>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.createDatabase({
+milvusClient.dropDatabaseProperties({
     db_name: string,
-    properties?: Object
+    delete_properties: string[],
     timeout?: number
 })
 ```
@@ -20,13 +20,13 @@ milvusClient.createDatabase({
 
 - **db_name** (*string*) -
 
-    The name of the database to create.
+    The name of the database whose properties are to be dropped.
 
-    There should be no database that has the specified name. Otherwise, exceptions will occur.
+    There should be a database with the specified name. Otherwise, exceptions will occur.
 
-- **properties** (*Object*) -
+- **delete_properties** (*string[]*) -
 
-    Properties to set along with database creation. Possible database properties are as follows:
+    Names of the properties to drop in an array. Possible database properties are as follows:
 
     - **database.replica.number** (*int*) -
 
@@ -64,7 +64,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ```javascript
 {
-    code: number,
+    code: number
     error_code: string | number,
     reason: string
 }
@@ -88,5 +88,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ```javascript
 const milvusClient = new milvusClient(MILUVS_ADDRESS);
-const resStatus = await milvusClient.createDatabase({ db_name: 'new_db' });
+const resStatus = await milvusClient.dropDatabaseProperties({ 
+    db_name: 'new_db',
+    delete_properties: ["database.replica.number"] 
+});
 ```

@@ -1,17 +1,17 @@
-# createDatabase()
+# alterDatabaseProperties()
 
-This operation creates a database.
+This operation modifies the properties of the specified database.
 
 ```javascript
-createDatabase(data): Promise<ResStatus>
+alterDatabaseProperties(data): Promise<ResStatus>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.createDatabase({
+milvusClient.alterDatabaseProperties({
     db_name: string,
-    properties?: Object
+    delete_properties: Object,
     timeout?: number
 })
 ```
@@ -20,13 +20,13 @@ milvusClient.createDatabase({
 
 - **db_name** (*string*) -
 
-    The name of the database to create.
+    The name of the database whose properties are to be modified.
 
-    There should be no database that has the specified name. Otherwise, exceptions will occur.
+    There should be a database with the specified name. Otherwise, exceptions will occur.
 
-- **properties** (*Object*) -
+- **delete_properties** (*string[]*) -
 
-    Properties to set along with database creation. Possible database properties are as follows:
+    Names of the properties to drop in an array. Possible database properties are as follows:
 
     - **database.replica.number** (*int*) -
 
@@ -64,7 +64,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ```javascript
 {
-    code: number,
+    code: number
     error_code: string | number,
     reason: string
 }
@@ -88,5 +88,9 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ```javascript
 const milvusClient = new milvusClient(MILUVS_ADDRESS);
-const resStatus = await milvusClient.createDatabase({ db_name: 'new_db' });
+const resStatus = await milvusClient.alterDatabaseProperties({ 
+    db_name: 'new_db',
+    delete_properties: {'database.replica.number': 3} 
+});
 ```
+

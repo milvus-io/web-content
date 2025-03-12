@@ -1,43 +1,52 @@
-# updatePassword()
+# revokePrivilegeV2()
 
-This operation updates the password of a specific user.
+This operation revokes a privilege already assigned to a role.
 
 ```javascript
-updatePassword(data): Promise<ResStatus>
+revokePrivilegeV2(data): Promise<ResStatus>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.updateUser({
-   username: string,
-   newPassword: string,
-   oldPassword: string,
+milvusClient.revokePrivilege({
+   role: string,
+   privilege: string,
+   db_name: string,
+   collection_name: string,
    timeout?: number
  })
 ```
 
 **PARAMETERS:**
 
-- **username** (*str*) -
+- **role** (*string*) -
 
     **[REQUIRED]**
 
-    The name of an existing user.
+    The name of the role from which to revoke the specified privileges.
 
-- **oldPassword** (*str*) -
-
-    **[REQUIRED]**
-
-    The original password of the user.
-
-- **newPassword** (*str*) -
+- **privilege** (*string*) -
 
     **[REQUIRED]**
 
-    The new password of the user.
+    The name of the privilege or privilege group to assign. 
 
-- **timeout** (*number*) -  
+    For details, refer to [Users and Roles](https://milvus.io/docs/users_and_roles.md).
+
+- **db_name** (*string*) -
+
+    **[REQUIRED]**
+
+    The name of the target database of this operation. 
+
+- **collection_name** (*string*) -
+
+    **[REQUIRED]**
+
+    The name of the target collection of this operation. 
+
+- **timeout** (*float* | *None*)  
 
     The timeout duration for this operation. 
 
@@ -72,10 +81,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 ## Example
 
 ```java
-milvusClient.updateUser({
-   username: 'exampleUser',
-   newPassword: 'newPassword',
-   oldPassword: 'oldPassword',
- })
+await milvusClient.revokePrivilegeV2({
+    role: 'exampleRole',
+    privilege: 'CreateCollection',
+    db_name: 'exampleDB',
+    collection_name: 'exampleCollection',
+});
 ```
 

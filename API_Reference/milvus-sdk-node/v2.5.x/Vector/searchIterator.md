@@ -1,29 +1,25 @@
-# search()
+# searchIterator()
 
-This operation conducts a vector similarity search with an optional scalar filtering expression.
+This operation conducts a scalar filtering with a specified boolean expression.
 
 ```javascript
-search(data): Promise<ResStatus>
+queryIterator(data): Promise<any>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.search({
+ milvusClient.query({
+   db_name: string,
    collection_name: string,
-   partition_names?: string[], 
-   data: number[] | number[][], 
+   consistency_level?: ConsistencyLevelEnum,
    filter: string,
+   ids?: string[] | number[],
    limit?: number,
-   offset?: number
-   output_fields?: string | list[string],
-   partition_names?: string | list[string],
-   consistency_level?: string,
-   ignore_growing?: boolean,
-   group_by_field?: string,
-   group_size?: number,
-   strict_group_size?: boolean,
-   timeout?: number,
+   offset?: number,
+   output_fields?: string[],
+   partition_names?: string[],
+   timeout?: number
  })
 ```
 
@@ -44,6 +40,10 @@ milvusClient.search({
     A list of vector embeddings.
 
     Milvus searches for the most similar vector embeddings to the specified ones.
+
+- **batchSize** (*number*) -
+
+    The number of entities to return per iteration.
 
 - **filter** (*string*) -
 
@@ -179,10 +179,17 @@ This method returns a promise that resolves to a **SearchResults** object.
 ## Example
 
 ```plaintext
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
-const searchResults = await milvusClient.search({
-   collection_name: 'my_collection',
-   vector: [1, 2, 3, 4],
-});
+const queryData = {
+  collection_name: 'my_collection',
+  expr: 'age > 30',
+  limit: 100,
+  pageSize: 10
+};
+
+const iterator = await queryIterator(queryData);
+
+for await (const batch of iterator) {
+  console.log(batch); // Process each batch of query results
+}
 ```
 
