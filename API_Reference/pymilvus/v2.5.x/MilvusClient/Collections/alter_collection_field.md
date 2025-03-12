@@ -27,22 +27,7 @@ alter_collection_field(
 
 - **field_params** (*dict*) -
 
-    The field parameters to change. The properties not mentioned remains unchanged. Possible parameters vary with the field type. 
-
-    - **is_primary** (*bool*) -
-
-        Whether the current field is the primary field in a collection.
-
-        <div class="admonition note">
-
-        <p><b>notes</b></p>
-
-        <ul>
-        <li><p>Each collection has only one primary field.</p></li>
-        <li><p>A primary field should be of either the <strong>DataType.INT64</strong> type or the <strong>DataType.VARCHAR</strong> type.</p></li>
-        </ul>
-
-        </div>
+    The field parameters to change. The properties not mentioned remain unchanged. Possible parameters vary with the field type. 
 
     - **max_length** (*int*) -
 
@@ -50,47 +35,15 @@ alter_collection_field(
 
         This is mandatory for a **DataType.VARCHAR** field.
 
-    - **element_type** (*str*) -
-
-        The data type of the elements in the field value.
-
-        This is mandatory for a **DataType.ARRAY** field.
-
     - **max_capacity** (*int*) -
 
         The number of elements in an Array field value.
 
         This is mandatory for a **DataType.ARRAY** field.
 
-    - **dim** (*int*) -
-
-        The dimension of the vector embeddings. The value should be an integer greater than 1.
-
-        This is mandatory for a field of the **DataType.FLOAT_VECTOR**, **DataType.BINARY_VECTOR**, **DataType.FLOAT16_VECTOR**, or **DataType.BFLOAT16_VECTOR** type. If you use **DataType.SPARSE_FLOAT_VECTOR**, omit this parameter.
-
-    - **is_partition_key** (*bool*) -
-
-        Whether the current field serves as the partition key. Each collection can have one partition key.
-
-        This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
-
-        <div class="admonition note">
-
-        <p><b>what is the partition key?</b></p>
-
-        <p>To facilitate partition-oriented multi-tenancy, you can set a field as the partition key field so that Milvus hashes the field values and distributes entities among the specified number of partitions accordingly.</p>
-        <p>When retrieving entities, ensure that the partition key field is used in the boolean expression to filter out entities of a specific field value.</p>
-        <p>For details, refer to <a href="https://milvus.io/docs/use-partition-key">Use Partition Key</a> and <a href="https://milvus.io/docs/multi_tenancy.md">Multi-tenancy</a>.</p>
-
-        </div>
-
-    - **is_clustering_key** (*bool*) -
-
-        Whether the current field serves as the clustering key. Each collection can have one partition key. You can also use the partition key as the clustering key. For details, refer to Clustering Compaction.
-
     - **mmap_enabled** (*bool*) -
 
-        Whether Milvus maps the field data into memory instead of fully loading it. For details settings, refer to MMap-enabled Data Storage.
+        Whether Milvus maps the field data into memory instead of fully loading it. For details, refer to MMap-enabled Data Storage.
 
 - **timeout** (*Optional[float]*) - 
 

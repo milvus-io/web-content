@@ -1,29 +1,42 @@
-# dropDatabase()
+# transferReplica()
 
-This operation drops a database.
+This operation reassigns the specified number of replicas from the source resource group to the target resource group.
 
 ```javascript
-dropDatabase(data?): Promise<ResStatus>
+transferReplica(data): Promise<ResStatus>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropDatabase({
-    db_name: string,
+milvusClient.transferReplica({
+    source_resource_group: string,
+    target_resource_group: string,
+    collection_name: string,
+    num_replica: number
     timeout?: number
 })
 ```
 
 **PARAMETERS:**
 
-- **db_name** (*string*) -
+- **source_resource_group** (*string*) - 
 
-    The name of the database to drop.
+    Name of the source resource group of this operation.
 
-    There should be a database with the specified name. Otherwise, exceptions will occur.
+- **target_resource_group** (*string*) - 
 
-- **timeout** (*number*) -
+    Name of the target resource group of this operation.
+
+- **collection_name** (*str*) -
+
+    Name of the collection whose replicas will be transferred.
+
+- **num_replica** (*int*) -
+
+    Number of replicas to transfer.
+
+- **timeout** (*float* | *None*) - 
 
     The timeout duration for this operation. 
 
@@ -35,7 +48,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ```javascript
 {
-    code: number,
+    code: number
     error_code: string | number,
     reason: string
 }
@@ -59,6 +72,12 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ```javascript
 const milvusClient = new milvusClient(MILUVS_ADDRESS);
-const resStatus = await milvusClient.dropDatabase({ db_name: 'db_to_drop' });
+
+const resStatus = await milvusClient.transferReplica({ 
+    source_resource_group: DEFAULT_RESOURCE_GROUP,
+    target_resource_group: 'my_rg',
+    collection_name: 'my_collection',
+    num_replica: 1
+});
 ```
 

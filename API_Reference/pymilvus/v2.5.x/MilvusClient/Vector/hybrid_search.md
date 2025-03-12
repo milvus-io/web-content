@@ -6,17 +6,22 @@ This operation performs multi-vector search on a collection and returns search r
 
 ```python
 hybrid_search(
-    reqs: List,
-    rerank: BaseRanker,
-    limit: int,
-    partition_names: Optional[List[str]] = None,
+    collection_name: str,
+    reqs: List[AnnSearchRequest],
+    ranker: BaseRanker,
+    limit: int = 10,   
     output_fields: Optional[List[str]] = None,
     timeout: Optional[float] = None,
-    round_decimal: int = -1,
+    partition_names: Optional[List[str]] = None,
+    **kwargs
 )
 ```
 
 **PARAMETERS:**
+
+- **collection_name** (*str*) -
+
+    The name of the collection to create.
 
 - **reqs** (*List[AnnSearchRequest]*) -
 
@@ -43,7 +48,11 @@ hybrid_search(
 
         - **expr** (*str*): (Optional) The expression to filter the results.
 
-- **rerank** (*BaseRanker*) -
+        - **expr_params** (*dict*) -
+
+            If you choose to use placeholders in `expr` as stated in [Filtering Templating](https://milvus.io/docs/filtering-templating.md), then you can specify the actual values for these placeholders as key-value pairs as the value of this parameter.
+
+- **ranker** (*BaseRanker*) -
 
     The reranking strategy to use for hybrid search. Valid values: `WeightedRanker` and `RRFRanker`.
 
@@ -168,27 +177,55 @@ A **SearchResult** object that contains a list of **Hits** objects.
 ## Examples
 
 ```python
-collection = Collection(name='{your_collection_name}') # Replace with the actual name of your collection
+from pymilvus import AnnSearchRequest, MilvusClient, WeightedRanker
 
-res = collection.hybrid_search(
-    reqs=[
-        AnnSearchRequest(
-            data=[['{your_text_query_vector}']],  # Replace with your text vector data
-            anns_field='{text_vector_field_name}',  # Textual data vector field
-            param={"metric_type": "IP", "params": {"nprobe": 10}}, # Search parameters
-            limit=2
-        ),
-        AnnSearchRequest(
-            data=[['{your_image_query_vector}']],  # Replace with your image vector data
-            anns_field='{image_vector_field_name}',  # Image data vector field
-            param={"metric_type": "IP", "params": {"nprobe": 10}}, # Search parameters
-            limit=2
-        )
-    ],
-    # Use WeightedRanker to combine results with specified weights
-    rerank=WeightedRanker(0.8, 0.2), # Assign weights of 0.8 to text search and 0.2 to image search
-    # Alternatively, use RRFRanker for reciprocal rank fusion reranking
-    # rerank=RRFRanker(),
+# Connect to Milvus server
+
+client = MilvusClient(uri="http://localhost:19530")
+
+# Create AnnSearchRequests
+
+query_dense_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
+
+search_param_1 = {
+    "data": [query_dense_vector],
+    "anns_field": "dense",
+    "param": {
+        "metric_type": "IP",
+        "params": {"nprobe": 10}
+    },
+    "limit": 2
+}
+request_1 = AnnSearchRequest(**search_param_1)
+
+query_sparse_vector = {3573: 0.34701499565746674}, {5263: 0.2639375518635271}
+search_param_2 = {
+    "data": [query_sparse_vector],
+    "anns_field": "sparse",
+    "param": {
+        "metric_type": "IP",
+        "params": {}
+    },
+    "limit": 2
+}
+request_2 = AnnSearchRequest(**search_param_2)
+
+reqs = [request_1, request_2]
+
+# Configure reranking strategy
+
+ranker = WeightedRanker(0.8, 0.3) 
+
+# perform hybrid search
+
+res = client.hybrid_search(
+    collection_name="hybrid_search_collection",
+    reqs=reqs,
+    ranker=ranker,
     limit=2
 )
+for hits in res:
+    print("TopK results:")
+    for hit in hits:
+        print(hit)
 ```

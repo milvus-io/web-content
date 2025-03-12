@@ -1,30 +1,30 @@
-# useDatabase()
+# dropPrivilegeGroup()
 
-This operation sets the active database for the gRPC client.
+This operation adds a user to a specific role.
 
 ```javascript
-useDatabase(data?): Promise<ResStatus>
+dropPrivilegeGroup(data): Promise<ResStatus>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.useDatabase({
-    db_name: string
+milvusClient.dropPrivilegeGroup({
+   timeout?: number
 })
 ```
 
 **PARAMETERS:**
 
-- **db_name** (*string*) -
+- **timeout** (*number*) -  
 
-    The name of the database to use.
+    The timeout duration for this operation. 
 
-    There should be a database with the specified name. Otherwise, exceptions will occur.
+    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |\<ResStatus>*
+**RETURNS** *Promise\<ResStatus>*
 
-This method returns a promise that resolves to a **ResStatus** object.
+This method returns a list of promises, each of which resolves to a **ResStatus** object.
 
 ```javascript
 {
@@ -50,7 +50,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
-const resStatus = await milvusClient.useDatabase({ db_name: 'new_db' });
+```java
+milvusClient.dropPrivilegeGroup()
 ```
+

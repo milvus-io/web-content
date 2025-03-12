@@ -1,35 +1,49 @@
-# dropDatabase()
+# updateUser()
 
-This operation drops a database.
+This operation updates the password of a specific user.
 
 ```javascript
-dropDatabase(data?): Promise<ResStatus>
+updateUser(data): Promise<ResStatus>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropDatabase({
-    db_name: string,
-    timeout?: number
-})
+milvusClient.updateUser({
+   username: string,
+   newPassword: string,
+   oldPassword: string,
+   timeout?: number
+ })
 ```
 
 **PARAMETERS:**
 
-- **db_name** (*string*) -
+- **username** (*str*) -
 
-    The name of the database to drop.
+    **[REQUIRED]**
 
-    There should be a database with the specified name. Otherwise, exceptions will occur.
+    The name of an existing user.
 
-- **timeout** (*number*) -
+- **oldPassword** (*str*) -
+
+    **[REQUIRED]**
+
+    The original password of the user.
+
+- **newPassword** (*str*) -
+
+    **[REQUIRED]**
+
+    The new password of the user.
+
+- **timeout** (*number*) -  
 
     The timeout duration for this operation. 
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |\<ResStatus>*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -57,8 +71,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
-const resStatus = await milvusClient.dropDatabase({ db_name: 'db_to_drop' });
+```java
+milvusClient.updateUser({
+   username: 'exampleUser',
+   newPassword: 'newPassword',
+   oldPassword: 'oldPassword',
+ })
 ```
 

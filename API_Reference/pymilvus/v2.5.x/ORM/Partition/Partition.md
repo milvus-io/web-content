@@ -41,7 +41,7 @@ Partition(
     <p><b>what is a collection?</b></p>
 
     <p>A collection collects data in a two-dimensional table with a fixed number of columns and a variable number of rows. In the table, each column corresponds to a field, and each row represents an entity.</p>
-    <p>A collection can support up to 1,024 partitions.</p>
+    <p>A collection can support up to 64 partitions.</p>
 
     </div>
 

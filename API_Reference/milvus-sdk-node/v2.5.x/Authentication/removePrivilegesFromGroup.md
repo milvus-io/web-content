@@ -1,35 +1,42 @@
-# dropDatabase()
+# removePrivilegesFromGroup()
 
-This operation drops a database.
+This operation removes privileges from a specific privilege group in Milvus.
 
 ```javascript
-dropDatabase(data?): Promise<ResStatus>
+removePrivilegesFromGroup(data): Promise<ResStatus>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropDatabase({
-    db_name: string,
-    timeout?: number
-})
+milvusClient.removePrivilegesFromGroup({
+   group_name: string,
+   privileges: string[],
+   timeout?: number
+ })
 ```
 
 **PARAMETERS:**
 
-- **db_name** (*string*) -
+- **group_name** (*string*) -
 
-    The name of the database to drop.
+    **[REQUIRED]**
 
-    There should be a database with the specified name. Otherwise, exceptions will occur.
+    The name of a privilege group.
 
-- **timeout** (*number*) -
+- **privileges** (*string[]*) -
+
+    **[REQUIRED]**
+
+    The list of privileges to remove from the above group.
+
+- **timeout** (*number*) -  
 
     The timeout duration for this operation. 
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |\<ResStatus>*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -57,8 +64,10 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
-const resStatus = await milvusClient.dropDatabase({ db_name: 'db_to_drop' });
+```java
+await milvusClient.removePrivilegesFromGroup({
+    group_name: 'exampleGroup',
+    privileges: ['CreateCollection', 'DropCollection'],
+});
 ```
 

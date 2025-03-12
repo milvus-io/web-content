@@ -1,27 +1,27 @@
-# dropDatabase()
+# updateResourceGroups()
 
-This operation drops a database.
+This operation updates the configurations of the specified resource group.
 
 ```javascript
-dropDatabase(data?): Promise<ResStatus>
+createResourceGroup(data): Promise<ResStatus>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropDatabase({
-    db_name: string,
+milvusClient.updateResourceGroup({
+    resource_groups: {{ [key: string]: ResourceGroupConfig }},
     timeout?: number
 })
 ```
 
 **PARAMETERS:**
 
-- **db_name** (*string*) -
+- **resource_groups** (*{{ [key: string]: ResourceGroupConfig }}*) -
 
-    The name of the database to drop.
+    **[REQUIRED]**
 
-    There should be a database with the specified name. Otherwise, exceptions will occur.
+    An object that contains the resource groups to update, with the resource group names as the keys and their updated configurations as the values, each of which is an [ResourceGroupConfig](ResourceGroupConfig.md) object.
 
 - **timeout** (*number*) -
 
@@ -35,7 +35,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ```javascript
 {
-    code: number,
+    code: number
     error_code: string | number,
     reason: string
 }
@@ -59,6 +59,15 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ```javascript
 const milvusClient = new milvusClient(MILUVS_ADDRESS);
-const resStatus = await milvusClient.dropDatabase({ db_name: 'db_to_drop' });
+const configs: ResourceGroupConfig = {
+    requests: { node_num: 1 },
+    limits: { node_num: 10000 },
+    transfer_from: [{ resource_group: DEFAULT_RESOURCE_GROUP }],
+    transfer_to: [{ resource_group: DEFAULT_RESOURCE_GROUP }]
+}
+
+const resStatus = await milvusClient.updateResourceGroup({ 
+    my_rg: configs
+});
 ```
 

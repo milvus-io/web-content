@@ -1,28 +1,42 @@
-# useDatabase()
+# addUserToRole()
 
-This operation sets the active database for the gRPC client.
+This operation adds a user to a specific role.
 
 ```javascript
-useDatabase(data?): Promise<ResStatus>
+addUserToRole(data): Promise<ResStatus>
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.useDatabase({
-    db_name: string
-})
+milvusClient.addUserToRole({
+   username: string,
+   rolename: string,
+   timeout?: number
+ })
 ```
 
 **PARAMETERS:**
 
-- **db_name** (*string*) -
+- **username** (*string*) -
 
-    The name of the database to use.
+    **[REQUIRED]**
 
-    There should be a database with the specified name. Otherwise, exceptions will occur.
+    The name of a user.
 
-**RETURNS** *Promise |\<ResStatus>*
+- **rolename** (*string*) -
+
+    **[REQUIRED]**
+
+    The name of a role
+
+- **timeout** (*number*) -  
+
+    The timeout duration for this operation. 
+
+    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -50,7 +64,10 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
-const resStatus = await milvusClient.useDatabase({ db_name: 'new_db' });
+```java
+milvusClient.addUserToRole({
+    username: 'myUser',
+    roleName: 'myRole'
+});
 ```
+

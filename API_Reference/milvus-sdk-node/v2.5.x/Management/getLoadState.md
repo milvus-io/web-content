@@ -39,12 +39,12 @@ milvusClient.getLoadState({
 
 **RETURNS** *Promise\<GetLoadStateResponse>*
 
-This method returns a promise that resolves to a GetLoadStateResponse object.
+This method returns a promise that resolves to a **GetLoadStateResponse** object.
 
 ```javascript
 {
     state: LoadState,
-    status: object
+    status: ResStatus
 }
 ```
 
@@ -62,7 +62,7 @@ This method returns a promise that resolves to a GetLoadStateResponse object.
 
     - **LoadStateNotLoad** indicates the status is unloaded.
 
-- **status** (*object*) -
+- **status** (*ResStatus*) -
 
     - **code** (*number*) -
 
