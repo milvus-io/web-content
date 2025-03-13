@@ -9,7 +9,7 @@ hybridSearch(data): Promise<SearchResults>
 ## Request Syntax
 
 ```javascript
-milvusClient.search({
+milvusClient.hybridSearch({
    db_name: string,
    collection_name: string,
    partition_names?: string[], 
