@@ -5,7 +5,7 @@ related_key: full, text, search
 summary: Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranking the results based on relevance.
 ---
 
-# Full Text Search​
+# Full Text Search​(BM25)
 
 Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranks the results based on relevance. This feature overcomes the limitations of semantic search, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.​
 

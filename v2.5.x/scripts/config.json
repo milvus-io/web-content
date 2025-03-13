@@ -1,0 +1,27 @@
+{
+    "manuals": {
+        "guides": {
+            "base": "QrNlwhfIeiKqL7k04mlc9kPendg:tblDEFqgQwxiyVvB",
+            "sourceType": "wiki",
+            "targets": {
+                "menuStructure": "site/en/menuStructure/en.json",
+                "outputDir": "site/en",
+                "imageDir": "assets"
+            },
+            "images": {
+                "alt_texts": [
+                    {
+                        "token": "BitLbgzN4oYspwxM4vQcAmg2n9f",
+                        "type": "image",
+                        "alt_text": "collection-explained"
+                    },
+                    {
+                        "token": "Ke6jw8437hjR8hbZCvEcQtIIn1e",
+                        "type": "board",
+                        "alt_text": "analyzer-process-workflow"
+                    }
+                ]
+            }
+        }
+    }
+}

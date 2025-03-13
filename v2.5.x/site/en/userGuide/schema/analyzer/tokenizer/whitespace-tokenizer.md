@@ -1,46 +1,68 @@
 ---
 id: whitespace-tokenizer.md
-title: Whitespace​ Tokenizer
-summary: "The `whitespace` tokenizer divides text into terms whenever there is a space between words.​"
+title: "Whitespace"
+summary: "The whitespace tokenizer divides text into terms whenever there is a space between words."
 ---
 
-# Whitespace​
+# Whitespace
 
-The `whitespace` tokenizer divides text into terms whenever there is a space between words.​
+The `whitespace` tokenizer divides text into terms whenever there is a space between words.
 
-## Configuration​
+## Configuration
 
-To configure an analyzer using the `whitespace` tokenizer, set `tokenizer` to `whitespace` in `analyzer_params`.​
+To configure an analyzer using the `whitespace` tokenizer, set `tokenizer` to `whitespace` in `analyzer_params`.
 
-```python
-analyzer_params = {​
-    "tokenizer": "whitespace",​
-}​
-```
-
-The whitespace tokenizer can work in conjunction with one or more filters. For example, the following code defines an analyzer that uses the `whitespace` tokenizer and [`lowercase filter`](lowercase-filter.md):​
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+</div>
 
 ```python
-analyzer_params = {​
-    "tokenizer": "whitespace",​
-    "filter": ["lowercase"]​
-}​
+analyzer_params = {
+    "tokenizer": "whitespace",
+}
 ```
 
-After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#Example-use).​
+```java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("tokenizer", "whitespace");
+```
 
-## Example output​
+The whitespace tokenizer can work in conjunction with one or more filters. For example, the following code defines an analyzer that uses the `whitespace` tokenizer and `lowercase`[ filter](lowercase-filter.md):
 
-Here’s an example of how the `whitespace` tokenizer processes text:​
-
-**Original text**:​
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+</div>
 
 ```python
-"The Milvus vector database is built for scale!"​
+analyzer_params = {
+    "tokenizer": "whitespace",
+    "filter": ["lowercase"]
+}
 ```
 
-**Expected output**:​
+```java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("tokenizer", "whitespace");
+analyzerParams.put("filter", Collections.singletonList("lowercase"));
+```
+
+After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#null).
+
+## Example output
+
+Here’s an example of how the `whitespace` tokenizer processes text:
+
+**Original text**:
 
 ```python
-["The", "Milvus", "vector", "database", "is", "built", "for", "scale!"]​
+"The Milvus vector database is built for scale!"
 ```
+
+**Expected output**:
+
+```python
+["The", "Milvus", "vector", "database", "is", "built", "for", "scale!"]
+```
+

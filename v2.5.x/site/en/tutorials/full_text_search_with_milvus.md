@@ -1,7 +1,7 @@
 ---
 id: full_text_search_with_milvus.md
-summary: With the release of Milvus 2.5, Full Text Search enables users to efficiently search for text based on keywords or phrases, providing powerful text retrieval capabilities. This feature enhances search accuracy and can be seamlessly combined with embedding-based retrieval for hybrid search, allowing for both semantic and keyword-based results in a single query. In this notebook, we will show basic usage of full text search in Milvus.
-title: Full Text Search with Milvus
+summary: Since version 2.5, Milvus supports BM25 for full-text search, enabling keyword and phrase-based retrieval with greater control and flexibility. Users can also perform hybrid search, which combines dense embedding-based semantic search with full-text search, allowing both semantic and keyword-based results in a single query. This notebook demonstrates hybrid search with full-text and semantic search in Milvus.
+title: Hybrid Search with Full Text and Semantic Search in Milvus
 ---
 
 <a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
@@ -13,7 +13,7 @@ title: Full Text Search with Milvus
 
 # Full Text Search with Milvus
 
-With the release of Milvus 2.5, Full Text Search enables users to efficiently search for text based on keywords or phrases, providing powerful text retrieval capabilities. This feature enhances search accuracy and can be seamlessly combined with embedding-based retrieval for hybrid search, allowing for both semantic and keyword-based results in a single query. In this notebook, we will show basic usage of full text search in Milvus.
+Since version 2.5, Milvus supports BM25 for full-text search, enabling keyword and phrase-based retrieval with greater control and flexibility. Users can also perform hybrid search, which combines dense embedding-based semantic search with full-text search, allowing both semantic and keyword-based results in a single query. This notebook demonstrates hybrid search with full-text and semantic search in Milvus.
 
 ## Preparation
 

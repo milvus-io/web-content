@@ -1,0 +1,19 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "bottleneck": "^2.19.5",
+    "cheerio": "^1.0.0",
+    "commander": "^13.1.0",
+    "dotenv": "^16.4.7",
+    "inquirer": "^8.2.4",
+    "jimp": "^0.22.12",
+    "lodash": "^4.17.21",
+    "node-fetch": "^2.7.0",
+    "showdown": "^2.1.0",
+    "slugify": "^1.6.6",
+    "uuid": "^10.0.0"
+  }
+}
