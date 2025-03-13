@@ -20,8 +20,9 @@ title: 使用 Milvus 進行混合搜尋
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p>如果您想體驗本教學的最終效果，可以直接到<a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/ 試用</a>。</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
-<p>在本教程中，我們將示範如何使用<a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a>和<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 模型</a>進行混合搜尋。BGE-M3 模型可以將文字轉換為密集向量和稀疏向量。Milvus 支援在一個集合中同時儲存這兩種向量，允許混合搜尋以增強結果的相關性。</p>
+<p>在本教程中，我們將示範如何使用<a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a>和<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 模型</a>進行混合搜索。BGE-M3 模型可以將文字轉換成密集向量和稀疏向量。Milvus 支援在一個集合中同時儲存這兩種向量，因此可以進行混合搜尋，提高搜尋結果的相關性。</p>
 <p>Milvus 支援密集、稀疏和混合檢索方法：</p>
 <ul>
 <li>密集檢索：利用語意上下文來瞭解查詢背後的意義。</li>
@@ -200,7 +201,7 @@ def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, 
     )[<span class="hljs-number">0</span>]
     <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
-<p>讓我們用定義的函式執行三種不同的搜尋：</p>
+<p>讓我們使用定義的函式執行三種不同的搜尋：</p>
 <pre><code translate="no" class="language-python">dense_results = <span class="hljs-title function_">dense_search</span>(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
 sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>))
 hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
@@ -291,7 +292,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>在海得拉巴<span style='color:red'> 開設</span>哪家公司比較好<span style='color:red'>?</span></p>
 <p><span style='color:red'> 開辦</span>機器人的最佳方式是什麼<span style='color:red'>？</span>哪種開發板最適合我<span style='color:red'> 開始</span>工作<span style='color:red'>？</span></p>
 <p>一個完全的新手需要哪些<span style='color:red'> 數學來</span>理解電腦<span style='color:red'> 程式設計</span>的演算法<span style='color:red'> ？</span>哪些有關演算法的書籍適合完全的初學者<span style='color:red'>？</span></p>
-<p><span style='color:red'>如何</span>讓生活適合自己，讓生活不再<span style='color:red'>虐待</span>自己的精神和情緒<span style='color:red'>？</span></p>
+<p><span style='color:red'>如何</span>讓生活適合自己，讓生活不再在精神上和情緒上<span style='color:red'>虐待</span>自己<span style='color:red'>？</span></p>
 <p><strong>混合搜尋結果：</strong></p>
 <p><span style='color:red'> 開始學習</span>機器人的最佳方式是什麼<span style='color:red'>？</span>哪種開發板最好，我可以<span style='color:red'> 開始</span>工作<span style='color:red'>？</span></p>
 <p>什麼是 Java<span style='color:red'> 程式設計？如何</span>學習 Java 程式語言？</p>

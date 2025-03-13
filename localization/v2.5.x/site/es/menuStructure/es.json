@@ -372,21 +372,27 @@
             "children": []
           },
           {
+            "label": "Establecer TTL de recogida",
+            "id": "set-collection-ttl.md",
+            "order": 6,
+            "children": []
+          },
+          {
             "label": "Gestionar particiones",
             "id": "manage-partitions.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "Gestionar alias",
             "id": "manage-aliases.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Recogida de gotas",
             "id": "drop-collection.md",
-            "order": 8,
+            "order": 9,
             "children": []
           }
         ]
@@ -1810,7 +1816,13 @@
               {
                 "label": "RAG",
                 "id": "integrate_with_llamaindex.md",
-                "order": 4,
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "API Milvus Async",
+                "id": "llamaindex_milvus_async.md",
+                "order": 1,
                 "children": []
               }
             ]
@@ -1868,6 +1880,12 @@
             "id": "milvus_rag_with_dynamiq.md",
             "order": 11,
             "children": []
+          },
+          {
+            "label": "Pila de llamas",
+            "id": "llama_stack_with_milvus.md",
+            "order": 12,
+            "children": []
           }
         ]
       },
@@ -1895,7 +1913,7 @@
             "children": []
           },
           {
-            "label": "Fidata",
+            "label": "Phidata",
             "id": "integrate_with_phidata.md",
             "order": 3,
             "children": []

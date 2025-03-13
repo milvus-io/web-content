@@ -4,7 +4,7 @@ title: 전체 텍스트 검색
 related_key: 'full, text, search'
 summary: 전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용어나 구문이 포함된 문서를 검색한 다음 관련성에 따라 결과의 순위를 매기는 기능입니다.
 ---
-<h1 id="Full-Text-Search​" class="common-anchor-header">전체 텍스트 검색<button data-href="#Full-Text-Search​" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search​BM25" class="common-anchor-header">전체 텍스트 검색(BM25)<button data-href="#Full-Text-Search​BM25" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -172,7 +172,7 @@ schema.addField(AddFieldReq.builder()
 <p>이 구성에서는</p>
 <ul>
 <li><p><code translate="no">id</code>은 기본 키로 사용되며 <code translate="no">auto_id=True</code> 으로 자동 생성됩니다.</p></li>
-<li><p><code translate="no">text</code>는 전체 텍스트 검색 작업을 위한 원시 텍스트 데이터를 저장합니다. 데이터 유형은 <code translate="no">VARCHAR</code> 이 Milvus의 텍스트 저장용 문자열 데이터 유형이므로 <code translate="no">VARCHAR</code> 이어야 합니다. <code translate="no">enable_analyzer=True</code> 를 설정하면 Milvus가 텍스트를 토큰화할 수 있습니다. 기본적으로 Milvus는 텍스트 분석에 <a href="/docs/ko/standard-analyzer.md">표준 분석기를</a> 사용합니다. 다른 분석기를 구성하려면 <a href="/docs/ko/analyzer-overview.md">개요를</a> 참조하세요.</p></li>
+<li><p><code translate="no">text</code>는 전체 텍스트 검색 작업을 위한 원시 텍스트 데이터를 저장합니다. 데이터 유형은 <code translate="no">VARCHAR</code> 이 Milvus의 텍스트 저장용 문자열 데이터 유형이므로 <code translate="no">VARCHAR</code> 이어야 합니다. <code translate="no">enable_analyzer=True</code> 을 설정하면 Milvus가 텍스트를 토큰화할 수 있습니다. 기본적으로 Milvus는 텍스트 분석에 <a href="/docs/ko/standard-analyzer.md">표준 분석기를</a> 사용합니다. 다른 분석기를 구성하려면 <a href="/docs/ko/analyzer-overview.md">개요를</a> 참조하세요.</p></li>
 <li><p><code translate="no">sparse</code>전체 텍스트 검색 작업을 위해 내부적으로 생성된 스파스 임베딩을 저장하기 위해 예약된 벡터 필드입니다. 데이터 유형은 <code translate="no">SPARSE_FLOAT_VECTOR</code> 여야 합니다.</p></li>
 </ul>
 <p>이제 텍스트를 스파스 벡터 표현으로 변환하는 함수를 정의한 다음 스키마에 추가합니다.</p>
@@ -244,7 +244,7 @@ schema.addFunction(Function.builder()
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<table data-block-token="EfAfdS3iXoAULPxQ3mwckzTrnUb"><thead><tr><th data-block-token="O3sLd5KNXou4Egxq6XVcoNiJnMW" colspan="1" rowspan="1"><p data-block-token="QRttdgJBpo2hEuxb438c7eOgn2f">매개변수</p>
+<table data-block-token="EfAfdS3iXoAULPxQ3mwckzTrnUb"><thead><tr><th data-block-token="O3sLd5KNXou4Egxq6XVcoNiJnMW" colspan="1" rowspan="1"><p data-block-token="QRttdgJBpo2hEuxb438c7eOgn2f">파라미터</p>
 </th><th data-block-token="SMGGduN8zo3cgXxVnwZcW0UAnbA" colspan="1" rowspan="1"><p data-block-token="LY39dA2eOoyVUUxvKwlcyyjdn3e">설명</p>
 </th></tr></thead><tbody><tr><td data-block-token="Pbj3dPvuno3x6kxnCsWcTb3knag" colspan="1" rowspan="1"><p data-block-token="EeHOdxCjloFUAGxuY1CcScCTnDe"><code translate="no">name</code></p>
 <p data-block-token="FzAJdVbrzozmTdxwy4fcJQkQnlh"></p>

@@ -20,6 +20,7 @@ title: Pencarian Hibrida dengan Milvus
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p>Jika Anda ingin merasakan efek akhir dari tutorial ini, Anda dapat langsung mengunjungi <a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a> dan mencobanya.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>Dalam tutorial ini, kami akan mendemonstrasikan cara melakukan pencarian hybrid dengan <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> dan <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">model BGE-M3</a>. Model BGE-M3 dapat mengubah teks menjadi vektor padat dan jarang. Milvus mendukung penyimpanan kedua jenis vektor tersebut dalam satu koleksi, sehingga memungkinkan pencarian hibrida yang meningkatkan relevansi hasil.</p>
 <p>Milvus mendukung metode pencarian Dense, Sparse, dan Hybrid:</p>
@@ -139,7 +140,7 @@ query_embeddings = ef([query])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">How to start learning programming?
 </code></pre>
-<h3 id="Run-the-Search" class="common-anchor-header">Jalankan Pencarian</h3><p>Pertama-tama kita akan menyiapkan beberapa fungsi yang berguna untuk menjalankan pencarian:</p>
+<h3 id="Run-the-Search" class="common-anchor-header">Jalankan Pencarian</h3><p>Pertama-tama kami akan menyiapkan beberapa fungsi yang berguna untuk menjalankan pencarian:</p>
 <ul>
 <li><code translate="no">dense_search</code>: hanya mencari di bidang vektor yang padat</li>
 <li><code translate="no">sparse_search</code>: hanya mencari di bidang vektor yang jarang</li>
@@ -297,7 +298,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>Apa itu<span style='color:red'> pemrograman</span> Java<span style='color:red'>?</span><span style='color:red'> Bagaimana Cara</span> Belajar Bahasa Pemrograman Java?</p>
 <p>Apa cara terbaik<span style='color:red'> untuk mulai belajar</span> robotika<span style='color:red'>?</span></p>
 <p><span style='color:red'>Bagaimana</span> cara kita mempersiapkan diri untuk UPSC<span style='color:red'>?</span></p>
-<p><span style='color:red'>Bagaimana cara</span> membuat fisika<span style='color:red'> menjadi</span> mudah dipelajari<span style='color:red'>?</span></p>
+<p><span style='color:red'>Bagaimana cara</span> membuat fisika mudah dipelajari<span style='color:red'>?</span></p>
 <p>Apa cara terbaik<span style='color:red'> untuk</span> belajar bahasa Prancis<span style='color:red'>?</span></p>
 <p><span style='color:red'>Bagaimana</span> saya bisa belajar berbicara bahasa Inggris<span style='color:red'> dengan</span> lancar<span style='color:red'>?</span></p>
 <p><span style='color:red'>Bagaimana</span> saya bisa belajar keamanan komputer<span style='color:red'>?</span></p>

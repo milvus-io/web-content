@@ -20,6 +20,7 @@ title: Milvus를 사용한 멀티모달 RAG
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p>이 튜토리얼의 최종 효과를 직접 체험해보고 싶으시다면 <a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a> 으로 직접 이동하여 사용해 보세요.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
 <p>이 튜토리얼에서는 Milvus, <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">시각화된 BGE 모델</a> 및 <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o로</a> 구동되는 멀티모달 RAG를 소개합니다. 이 시스템을 사용하면 사용자가 이미지를 업로드하고 텍스트 지침을 편집하면 BGE의 구성된 검색 모델에서 처리하여 후보 이미지를 검색할 수 있습니다. 그런 다음 GPT-4o는 가장 적합한 이미지를 선택하고 그 선택의 근거를 제공하는 재랭커 역할을 합니다. 이 강력한 조합은 효율적인 검색을 위한 Milvus, 정밀한 이미지 처리 및 매칭을 위한 BGE 모델, 고급 재랭킹을 위한 GPT-4o를 활용하여 원활하고 직관적인 이미지 검색 환경을 구현합니다.</p>
@@ -44,11 +45,11 @@ title: Milvus를 사용한 멀티모달 RAG
 $ pip install -e FlagEmbedding
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colab을 사용하는 경우 방금 설치한 종속 요소를 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 '런타임' 메뉴를 클릭하고 드롭다운 메뉴에서 '세션 다시 시작'을 선택).</p>
+<p>Google Colab을 사용하는 경우 방금 설치한 종속성을 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 '런타임' 메뉴를 클릭하고 드롭다운 메뉴에서 '세션 다시 시작'을 선택).</p>
 </div>
 <h3 id="Download-Data" class="common-anchor-header">데이터 다운로드</h3><p>다음 명령은 예제 데이터를 다운로드하여 다음을 포함한 로컬 폴더 "./images_folder"에 추출합니다:</p>
 <ul>
-<li><p><strong>images</strong>: &quot;가전제품&quot;, &quot;휴대폰 및 액세서리&quot;, &quot;전자제품&quot; 카테고리의 약 900개 이미지가 포함된 <a href="https://github.com/hyp1231/AmazonReviews2023">Amazon 리뷰 2023의</a> 하위 집합입니다.</p></li>
+<li><p><strong>images</strong>: &quot;가전제품&quot;, &quot;휴대폰 및 액세서리&quot;, &quot;전자제품&quot; 카테고리의 약 900개의 이미지가 포함된 <a href="https://github.com/hyp1231/AmazonReviews2023">Amazon 리뷰 2023의</a> 하위 집합입니다.</p></li>
 <li><p><strong>leopard.jpg</strong>: 쿼리 이미지 예시.</p></li>
 </ul>
 <pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
@@ -421,4 +422,4 @@ best_img.show()
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
    </span> <span class="img-wrapper"> <span>최상의 결과</span> </span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">빠른 배포</h3><p>이 튜토리얼을 통해 온라인 데모를 시작하는 방법에 대해 알아보려면 <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">예제 애플리케이션을</a> 참조하세요.</p>
+<h3 id="Quick-Deploy" class="common-anchor-header">빠른 배포</h3><p>이 튜토리얼로 온라인 데모를 시작하는 방법에 대해 알아보려면 <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">예제 애플리케이션을</a> 참조하세요.</p>

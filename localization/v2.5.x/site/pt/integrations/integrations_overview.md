@@ -35,7 +35,7 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/integrate_with_pytorch.md">Pesquisa de imagens usando Milvus e Pytorch</a></td><td>Pesquisa semântica</td><td>Milvus, Pytorch</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_sentencetransformers.md">Pesquisa de filmes usando Milvus e SentenceTransfromers</a></td><td>Pesquisa semântica</td><td>Milvus, SentenceTransformers</td></tr>
 <tr><td><a href="/docs/pt/basic_usage_langchain.md">Usar Milvus como um armazenamento vetorial em LangChain</a></td><td>Pesquisa semântica</td><td>Milvus, LangChain</td></tr>
-<tr><td><a href="/docs/pt/full_text_search_with_langchain.md">Usar a pesquisa de texto integral com LangChain e Milvus</a></td><td>Pesquisa de texto completo</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/pt/full_text_search_with_langchain.md">Utilização da pesquisa de texto integral com LangChain e Milvus</a></td><td>Pesquisa de texto completo</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_haystack.md">RAG com Milvus e Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_voxel51.md">Realizar pesquisas de visão com Milvus e FiftyOne</a></td><td>Pesquisa semântica</td><td>Milvus, FiftyOne</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_voyageai.md">Pesquisa semântica com Milvus e VoyageAI</a></td><td>Pesquisa semântica</td><td>Milvus, VoyageAI</td></tr>
@@ -66,7 +66,7 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_lepton.md">Construir RAG com Milvus e Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_siliconflow">Construir RAG com Milvus e SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
 <tr><td><a href="/docs/pt/rag_with_milvus_and_unstructured.md">Construir um RAG com Milvus e fontes de dados não estruturados</a></td><td>Estruturadas</td><td>Milvus, Não estruturado</td></tr>
-<tr><td><a href="/docs/pt/RAG_with_pii_and_milvus.md">Criar um RAG com Milvus + Mascarador de PII</a></td><td>Fontes de dados</td><td>Milvus, mascarador de PII</td></tr>
+<tr><td><a href="/docs/pt/RAG_with_pii_and_milvus.md">Construir um RAG com Milvus + Mascarador de PII</a></td><td>Fontes de dados</td><td>Milvus, mascarador de PII</td></tr>
 <tr><td><a href="/docs/pt/use_milvus_in_private_gpt.md">Utilizar o Milvus no PrivateGPT</a></td><td>Ochestração</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/quickstart_mem0_with_milvus.md">Introdução ao Mem0 e ao Milvus</a></td><td>Agentes</td><td>Mem0, Milvus</td></tr>
 <tr><td><a href="/docs/pt/knowledge_table_with_milvus.md">Tabela de conhecimento com Milvus</a></td><td>Engenharia do conhecimento</td><td>Tabela de Conhecimentos, Milvus</td></tr>
@@ -77,8 +77,10 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_ollama.md">Construir RAG com Milvus e Ollama</a></td><td>LLMs</td><td>Milvus, Ollama</td></tr>
 <tr><td><a href="/docs/pt/milvus_rag_with_dynamiq.md">Introdução ao Dynamiq e ao Milvus</a></td><td>Orquestração</td><td>Milvus, Dynamiq</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_deepseek.md">Construir RAG com Milvus e DeepSeek</a></td><td>LLMs</td><td>Milvus, DeepSeek</td></tr>
-<tr><td><a href="/docs/pt/integrate_with_phidata.md">Integrar Milvus com Phidata</a></td><td>Agentes</td><td>Milvus, Phidata</td></tr>
+<tr><td><a href="/docs/pt/integrate_with_phidata.md">Integrar Milvus com Agno</a></td><td>Agentes</td><td>Milvus, Agno</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_crawl4ai.md">Construir RAG com Milvus e Crawl4AI</a></td><td>Fontes de dados</td><td>Milvus, Crawl4AI</td></tr>
-<tr><td><a href="/docs/pt/build_RAG_with_milvus_and_firecrawl.md">Criação de RAG com Milvus e Firecrawl</a></td><td>Fontes de dados</td><td>Milvus, Firecrawl</td></tr>
+<tr><td><a href="/docs/pt/build_RAG_with_milvus_and_firecrawl.md">Construir RAG com Milvus e Firecrawl</a></td><td>Fontes de dados</td><td>Milvus, Firecrawl</td></tr>
+<tr><td><a href="/docs/pt/llama_stack_with_milvus.md">Criar RAG com Llama Stack com Milvus</a></td><td>Orquestração</td><td>Milvus, Llama Stack</td></tr>
+<tr><td><a href="/docs/pt/llamaindex_milvus_async.md">RAG com Milvus e API assíncrona LlamaIndex</a></td><td>Orquestração</td><td>Milvus, LlamaIndex</td></tr>
 </tbody>
 </table>

@@ -1,13 +1,13 @@
 ---
 id: full_text_search_with_milvus.md
 summary: >-
-  With the release of Milvus 2.5, Full Text Search enables users to efficiently
-  search for text based on keywords or phrases, providing powerful text
-  retrieval capabilities. This feature enhances search accuracy and can be
-  seamlessly combined with embedding-based retrieval for hybrid search, allowing
-  for both semantic and keyword-based results in a single query. In this
-  notebook, we will show basic usage of full text search in Milvus.
-title: Full Text Search with Milvus
+  Since version 2.5, Milvus supports BM25 for full-text search, enabling keyword
+  and phrase-based retrieval with greater control and flexibility. Users can
+  also perform hybrid search, which combines dense embedding-based semantic
+  search with full-text search, allowing both semantic and keyword-based results
+  in a single query. This notebook demonstrates hybrid search with full-text and
+  semantic search in Milvus.
+title: Hybrid Search with Full Text and Semantic Search in Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -30,7 +30,7 @@ title: Full Text Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>With the release of Milvus 2.5, Full Text Search enables users to efficiently search for text based on keywords or phrases, providing powerful text retrieval capabilities. This feature enhances search accuracy and can be seamlessly combined with embedding-based retrieval for hybrid search, allowing for both semantic and keyword-based results in a single query. In this notebook, we will show basic usage of full text search in Milvus.</p>
+    </button></h1><p>Since version 2.5, Milvus supports BM25 for full-text search, enabling keyword and phrase-based retrieval with greater control and flexibility. Users can also perform hybrid search, which combines dense embedding-based semantic search with full-text search, allowing both semantic and keyword-based results in a single query. This notebook demonstrates hybrid search with full-text and semantic search in Milvus.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

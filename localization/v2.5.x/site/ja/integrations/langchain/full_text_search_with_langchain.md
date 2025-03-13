@@ -24,7 +24,7 @@ title: LangChainとmilvusで全文検索を使う
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文検索は</a>、テキスト内のキーワードを直接マッチさせることにより、特定の用語やフレーズを含む文書を検索する伝統的な方法です。検索結果は関連性に基づいてランク付けされ、一般的には用語の頻度や近接度などの要素によって決定されます。セマンティック検索が意図や文脈を理解することに優れているのに対し、フルテキスト検索は正確なキーワードマッチングを行うため、補完的なツールとして価値がある。BM25アルゴリズムは全文検索でよく使われるランキング方法で、特にRAG(Retrieval-Augmented Generation)で有用である。</p>
+<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文検索は</a>、テキスト内のキーワードを直接マッチさせることにより、特定の用語やフレーズを含む文書を検索する伝統的な方法です。検索結果は関連性に基づいてランク付けされ、一般的には用語の頻度や近接度などの要素によって決定されます。セマンティック検索が意図や文脈を理解することに秀でているのに対し、フルテキスト検索は正確なキーワードマッチングを提供するため、補完的なツールとして重宝されている。BM25アルゴリズムは全文検索でよく使われるランキング方法で、特にRAG(Retrieval-Augmented Generation)で有用である。</p>
 <p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a>以降、BM25アルゴリズムをスパースベクトルとして表現することで、Sparse-BM25アプローチによる全文検索がネイティブでサポートされています。Milvusは生テキストを入力として受け入れ、指定されたフィールドに格納されたスパースベクトルに自動的に変換するため、手動でスパース埋め込みを生成する必要がありません。</p>
 <p>LangChainとMilvusの統合もこの機能を導入し、RAGアプリケーションに全文検索を組み込むプロセスを簡素化しました。全文検索と密なベクトルによるセマンティック検索を組み合わせることで、密な埋め込みによるセマンティックコンテキストと単語マッチングによる正確なキーワード関連性の両方を活用するハイブリッドアプローチを実現することができます。この統合により、検索システムの精度、関連性、ユーザーエクスペリエンスが向上します。</p>
 <p>このチュートリアルでは、LangChainとMilvusを使ってアプリケーションに全文検索を実装する方法を紹介します。</p>
@@ -53,14 +53,14 @@ title: LangChainとmilvusで全文検索を使う
 <pre><code translate="no" class="language-shell">$ pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 <span class="hljs-comment">#langchain-voyageai</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするには、<strong>ランタイムを再起動する</strong>必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
+<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 </div>
 <p>OpenAIのモデルを使います。<a href="https://platform.openai.com/docs/quickstart">OpenAIの</a>環境変数<code translate="no">OPENAI_API_KEY</code> 。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus サーバ<code translate="no">URI</code> (オプションで<code translate="no">TOKEN</code>) を指定してください。Milvusサーバのインストールと起動方法については<a href="https://milvus.io/docs/install_standalone-docker-compose.md">こちらを</a>参照してください。</p>
+<p>Milvus サーバ<code translate="no">URI</code> (オプションで<code translate="no">TOKEN</code>) を指定してください。Milvusサーバのインストール方法と起動方法については<a href="https://milvus.io/docs/install_standalone-docker-compose.md">こちらを</a>参照してください。</p>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -89,7 +89,7 @@ docs = [
         ></path>
       </svg>
     </button></h2><h3 id="Hybrid-Search" class="common-anchor-header">ハイブリッド検索</h3><p>Milvus VectorStoreは全文検索のために<code translate="no">builtin_function</code> パラメータを受け付けます。このパラメータを通して、<code translate="no">BM25BuiltInFunction</code> のインスタンスを渡すことができます。これは通常、<code translate="no">VectorStore</code> に密な埋め込みを渡すセマンティック検索とは異なります、</p>
-<p>Milvusで、セマンティック検索にOpenAIのdense embedding、全文検索にBM25を使ったハイブリッド検索の簡単な例を示します：</p>
+<p>以下は、Milvusで、セマンティック検索にOpenAIの密な埋め込み、全文検索にBM25を使ったハイブリッド検索の簡単な例です：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
@@ -103,7 +103,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -113,8 +112,8 @@ vectorstore = Milvus.from_documents(
 <li><code translate="no">input_field_names</code> (str)で指定します：入力フィールドの名前、デフォルトは です。 この関数がどのフィールドを入力として読み込むかを示します。<code translate="no">text</code></li>
 <li><code translate="no">output_field_names</code> (str)：(str):出力フィールド名, デフォルトは . この関数が計算結果を出力するフィールドを示します.<code translate="no">sparse</code></li>
 </ul>
-<p>前述のMilvus初期化パラメータでは、<code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code> も指定していることに注意してください。<code translate="no">BM25BuiltInFunction</code>によって定義された出力フィールドとして<code translate="no">sparse</code> フィールドが取られるため、他の<code translate="no">dense</code> フィールドは自動的に OpenAIEmbeddings の出力フィールドに割り当てられます。</p>
-<p>実際には、特に複数の埋め込みや関数を組み合わせる場合には、曖昧さを避けるために、関数ごとに入力フィールドと出力フィールドを明示的に指定することをお勧めします。</p>
+<p>上記のMilvus初期化パラメータでは、<code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code> も指定していることに注意してください。<code translate="no">BM25BuiltInFunction</code>によって定義された出力フィールドとして<code translate="no">sparse</code> フィールドが取られるため、他の<code translate="no">dense</code> フィールドは自動的に OpenAIEmbeddings の出力フィールドに割り当てられます。</p>
+<p>実際には、特に複数の埋め込みや関数を組み合わせる場合、曖昧さを避けるために、関数ごとに入力フィールドと出力フィールドを明示的に指定することをお勧めします。</p>
 <p>以下の例では、<code translate="no">BM25BuiltInFunction</code> の入力フィールドと出力フィールドを明示的に指定し、組み込み関数がどのフィールドに対するものかを明確にしています。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
 
@@ -135,7 +134,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -164,7 +162,6 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -212,7 +209,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -286,7 +282,6 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>

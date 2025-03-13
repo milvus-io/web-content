@@ -20,9 +20,10 @@ title: Pesquisa híbrida com Milvus
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p>Se quiser experimentar o efeito final deste tutorial, pode ir diretamente para <a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a> e experimentá-lo.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
-<p>Neste tutorial, vamos demonstrar como efetuar uma pesquisa híbrida com o <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> e <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">o modelo BGE-M3</a>. O modelo BGE-M3 pode converter texto em vectores densos e esparsos. O Milvus suporta o armazenamento de ambos os tipos de vectores numa única coleção, permitindo uma pesquisa híbrida que aumenta a relevância dos resultados.</p>
-<p>O Milvus suporta métodos de recuperação densos, esparsos e híbridos:</p>
+<p>Neste tutorial, vamos demonstrar como efetuar uma pesquisa híbrida com <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> e <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">o modelo BGE-M3</a>. O modelo BGE-M3 pode converter texto em vectores densos e esparsos. O Milvus suporta o armazenamento de ambos os tipos de vectores numa coleção, permitindo uma pesquisa híbrida que aumenta a relevância dos resultados.</p>
+<p>Milvus suporta métodos de recuperação densos, esparsos e híbridos:</p>
 <ul>
 <li>Recuperação Densa: Utiliza o contexto semântico para entender o significado por trás das consultas.</li>
 <li>Recuperação esparsa: Dá ênfase à correspondência de texto para encontrar resultados com base em termos específicos, equivalente à pesquisa de texto completo.</li>
@@ -139,11 +140,11 @@ query_embeddings = ef([query])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">How to start learning programming?
 </code></pre>
-<h3 id="Run-the-Search" class="common-anchor-header">Executar a pesquisa</h3><p>Primeiro, vamos preparar algumas funções úteis para executar a pesquisa:</p>
+<h3 id="Run-the-Search" class="common-anchor-header">Executar a pesquisa</h3><p>Vamos primeiro preparar algumas funções úteis para executar a pesquisa:</p>
 <ul>
-<li><code translate="no">dense_search</code>: pesquisa apenas no campo vetorial denso</li>
-<li><code translate="no">sparse_search</code>: pesquisar apenas no campo vetorial esparso</li>
-<li><code translate="no">hybrid_search</code>: pesquisar em campos densos e vectoriais com um reranker ponderado</li>
+<li><code translate="no">dense_search</code>: apenas pesquisa no campo vetorial denso</li>
+<li><code translate="no">sparse_search</code>: pesquisa apenas no campo vetorial esparso</li>
+<li><code translate="no">hybrid_search</code>: pesquisa em campos densos e vectoriais com um reranker ponderado</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-function"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-title">import</span> (<span class="hljs-params">
     AnnSearchRequest,

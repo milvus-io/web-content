@@ -348,7 +348,7 @@
             "children": []
           },
           {
-            "label": "Creare istantaneamente una collezione",
+            "label": "Creare una collezione istantanea",
             "id": "create-collection-instantly.md",
             "order": 2,
             "children": []
@@ -372,21 +372,27 @@
             "children": []
           },
           {
+            "label": "Impostare il TTL di raccolta",
+            "id": "set-collection-ttl.md",
+            "order": 6,
+            "children": []
+          },
+          {
             "label": "Gestire le partizioni",
             "id": "manage-partitions.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "Gestire gli alias",
             "id": "manage-aliases.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Raccolta di gocce",
             "id": "drop-collection.md",
-            "order": 8,
+            "order": 9,
             "children": []
           }
         ]
@@ -565,7 +571,7 @@
                     "children": []
                   },
                   {
-                    "label": "Fermarsi",
+                    "label": "Stop",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -1810,7 +1816,13 @@
               {
                 "label": "RAG",
                 "id": "integrate_with_llamaindex.md",
-                "order": 4,
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "API asincrona di Milvus",
+                "id": "llamaindex_milvus_async.md",
+                "order": 1,
                 "children": []
               }
             ]
@@ -1867,6 +1879,12 @@
             "label": "Dynamiq",
             "id": "milvus_rag_with_dynamiq.md",
             "order": 11,
+            "children": []
+          },
+          {
+            "label": "Pila di lama",
+            "id": "llama_stack_with_milvus.md",
+            "order": 12,
             "children": []
           }
         ]
@@ -2137,7 +2155,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con le matrici Matryoshka",
+        "label": "Ricerca a imbuto con matrioske embeddings",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

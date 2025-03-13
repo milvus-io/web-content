@@ -1,13 +1,13 @@
 ---
 id: full_text_search_with_milvus.md
 summary: >-
-  مع إصدار الإصدار Milvus 2.5، يتيح البحث عن النص الكامل للمستخدمين البحث بكفاءة
-  عن النص استنادًا إلى الكلمات الرئيسية أو العبارات، مما يوفر إمكانات قوية
-  لاسترجاع النص. تعمل هذه الميزة على تحسين دقة البحث ويمكن دمجها بسلاسة مع
-  الاسترجاع القائم على التضمين للبحث المختلط، مما يسمح بالحصول على نتائج دلالية
-  وكلمات مفتاحية في استعلام واحد. في هذا الدفتر، سنعرض الاستخدام الأساسي للبحث
-  عن النص الكامل في ميلفوس.
-title: البحث عن النص الكامل مع ميلفوس
+  منذ الإصدار 2.5، يدعم برنامج Milvus BM25 للبحث في النص الكامل، مما يتيح
+  الاسترجاع القائم على الكلمات الرئيسية والعبارات مع قدر أكبر من التحكم
+  والمرونة. يمكن للمستخدمين أيضًا إجراء بحث هجين يجمع بين البحث الدلالي القائم
+  على التضمين الكثيف والبحث في النص الكامل، مما يسمح بالنتائج الدلالية والمستندة
+  إلى الكلمات المفتاحية في استعلام واحد. يوضح هذا الدفتر البحث الهجين مع البحث
+  في النص الكامل والبحث الدلالي في ميلفوس.
+title: البحث المختلط مع البحث بالنص الكامل والبحث الدلالي في ميلفوس
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -15,7 +15,7 @@ title: البحث عن النص الكامل مع ميلفوس
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">البحث عن النص الكامل مع ميلفوس<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">البحث في النص الكامل مع ميلفوس<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -30,7 +30,7 @@ title: البحث عن النص الكامل مع ميلفوس
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>مع إصدار الإصدار Milvus 2.5، يتيح البحث بالنص الكامل للمستخدمين البحث بكفاءة عن النص استنادًا إلى الكلمات الرئيسية أو العبارات، مما يوفر إمكانات قوية لاسترجاع النص. تعمل هذه الميزة على تحسين دقة البحث ويمكن دمجها بسلاسة مع الاسترجاع القائم على التضمين للبحث المختلط، مما يسمح بالحصول على نتائج دلالية وكلمات مفتاحية في استعلام واحد. سنعرض في هذا الدفتر الاستخدام الأساسي للبحث عن النص الكامل في ميلفوس.</p>
+    </button></h1><p>منذ الإصدار 2.5، يدعم Milvus الإصدار BM25 للبحث في النص الكامل، مما يتيح استرجاع الكلمات الرئيسية والعبارات مع قدر أكبر من التحكم والمرونة. يمكن للمستخدمين أيضًا إجراء بحث هجين يجمع بين البحث الدلالي القائم على التضمين الكثيف والبحث في النص الكامل، مما يسمح بالنتائج الدلالية والمستندة إلى الكلمات المفتاحية في استعلام واحد. يوضح هذا الدفتر البحث الهجين مع البحث عن النص الكامل والبحث الدلالي في ملفوس.</p>
 <h2 id="Preparation" class="common-anchor-header">التحضير<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +46,7 @@ title: البحث عن النص الكامل مع ميلفوس
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-the-dataset" class="common-anchor-header">تنزيل مجموعة البيانات</h3><p>سيقوم الأمر التالي بتحميل مثال البيانات المستخدمة في <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">العرض التوضيحي</a> الأصلي أنثروبيك.</p>
+    </button></h2><h3 id="Download-the-dataset" class="common-anchor-header">تنزيل مجموعة البيانات</h3><p>سوف يقوم الأمر التالي بتنزيل مثال البيانات المستخدمة في <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">العرض التوضيحي</a> الأصلي أنثروبيك.</p>
 <pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
 $ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -54,7 +54,7 @@ $ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.git
 <h3 id="Install-PyMilvus" class="common-anchor-header">تثبيت PyMilvus</h3><p>قم بتشغيل الأمر التالي لتثبيت PyMilvus:</p>
 <pre><code translate="no" class="language-python">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span> -U 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-the-Retriever" class="common-anchor-header">تحديد المسترد</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
+<h3 id="Define-the-Retriever" class="common-anchor-header">تعريف المسترد</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,

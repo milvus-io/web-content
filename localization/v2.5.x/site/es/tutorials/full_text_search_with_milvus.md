@@ -1,15 +1,14 @@
 ---
 id: full_text_search_with_milvus.md
 summary: >-
-  Con el lanzamiento de Milvus 2.5, la búsqueda de texto completo permite a los
-  usuarios buscar texto de forma eficaz basándose en palabras clave o frases, lo
-  que proporciona una potente capacidad de recuperación de texto. Esta función
-  mejora la precisión de la búsqueda y puede combinarse perfectamente con la
-  recuperación basada en la incrustación para una búsqueda híbrida, permitiendo
-  obtener resultados semánticos y basados en palabras clave en una única
-  consulta. En este cuaderno, mostraremos el uso básico de la búsqueda de texto
-  completo en Milvus.
-title: Búsqueda de texto completo con Milvus
+  Desde la versión 2.5, Milvus admite BM25 para la búsqueda de texto completo,
+  lo que permite la recuperación basada en palabras clave y frases con mayor
+  control y flexibilidad. Los usuarios también pueden realizar una búsqueda
+  híbrida, que combina la búsqueda semántica basada en la incrustación densa con
+  la búsqueda de texto completo, lo que permite obtener resultados semánticos y
+  basados en palabras clave en una sola consulta. Este cuaderno demuestra la
+  búsqueda híbrida con búsqueda semántica y de texto completo en Milvus.
+title: Búsqueda híbrida con texto completo y búsqueda semántica en Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -32,7 +31,7 @@ title: Búsqueda de texto completo con Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Con el lanzamiento de Milvus 2.5, la búsqueda de texto completo permite a los usuarios buscar texto de forma eficaz basándose en palabras clave o frases, lo que proporciona potentes capacidades de recuperación de texto. Esta función mejora la precisión de la búsqueda y puede combinarse perfectamente con la recuperación basada en incrustaciones para una búsqueda híbrida, permitiendo obtener resultados semánticos y basados en palabras clave en una única consulta. En este cuaderno, mostraremos el uso básico de la búsqueda de texto completo en Milvus.</p>
+    </button></h1><p>Desde la versión 2.5, Milvus admite BM25 para la búsqueda de texto completo, lo que permite la recuperación basada en palabras clave y frases con mayor control y flexibilidad. Los usuarios también pueden realizar una búsqueda híbrida, que combina la búsqueda semántica basada en la incrustación densa con la búsqueda de texto completo, lo que permite obtener resultados semánticos y basados en palabras clave en una sola consulta. Este cuaderno demuestra la búsqueda híbrida con búsqueda semántica y de texto completo en Milvus.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparación<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

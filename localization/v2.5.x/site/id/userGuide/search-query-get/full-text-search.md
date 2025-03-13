@@ -7,7 +7,7 @@ summary: >-
   istilah atau frasa tertentu dalam kumpulan data teks, kemudian memberi
   peringkat hasil berdasarkan relevansi.
 ---
-<h1 id="Full-Text-Search​" class="common-anchor-header">Pencarian Teks Lengkap<button data-href="#Full-Text-Search​" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search​BM25" class="common-anchor-header">Pencarian Teks Lengkap (BM25)<button data-href="#Full-Text-Search​BM25" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

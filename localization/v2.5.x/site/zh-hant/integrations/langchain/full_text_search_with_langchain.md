@@ -103,7 +103,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -135,7 +134,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -164,7 +162,6 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -212,7 +209,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -245,7 +241,7 @@ vectorstore = Milvus.from_documents(
   </span>
 </p>
 <p>此圖顯示混合檢索與重新排序的流程，結合了用於關鍵字比對的 BM25 和用於語意檢索的向量搜尋。來自這兩種方法的結果會合併、重新排序，並傳送到 LLM 以產生最終答案。</p>
-<p>混合搜尋平衡了精確度與語意理解，針對不同的查詢提高了精確度與穩健性。它利用 BM25 全文檢索和向量檢索來擷取候選項目，確保能同時進行語意、上下文感知和精確的檢索。</p>
+<p>混合搜尋平衡了精確度與語意理解，針對不同的查詢提高了精確度與穩健性。它利用 BM25 全文檢索和向量檢索擷取候選項目，同時確保語意、上下文感知和精確的檢索。</p>
 <p>讓我們從一個範例開始。</p>
 <h3 id="Prepare-the-data" class="common-anchor-header">準備資料</h3><p>我們使用 Langchain WebBaseLoader 從網路來源載入文件，並使用 RecursiveCharacterTextSplitter 將文件分割成小塊。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bs4
@@ -286,11 +282,10 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Build-RAG-chain" class="common-anchor-header">建立 RAG 鏈</h3><p>我們準備好 LLM 實例和提示，然後用 LangChain Expression Language 將它們結合為 RAG 管道。</p>
+<h3 id="Build-RAG-chain" class="common-anchor-header">建立 RAG 鏈</h3><p>我們準備好 LLM 實例和提示，然後用 LangChain Expression Language 將它們結合成 RAG 管道。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
 <span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
 <span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser
@@ -339,7 +334,7 @@ rag_chain = (
 
 <span class="hljs-comment"># rag_chain.get_graph().print_ascii()</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>以特定的問題來啟動 RAG 鏈，並擷取回應</p>
+<p>使用特定的問題來呼叫 RAG 鏈，並擷取回應</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
 res = rag_chain.<span class="hljs-title function_">invoke</span>(query)
 res

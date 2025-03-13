@@ -7,7 +7,7 @@ summary: >-
   contienen términos o frases específicos en conjuntos de datos de texto y, a
   continuación, clasifica los resultados en función de su relevancia.
 ---
-<h1 id="Full-Text-Search​" class="common-anchor-header">Búsqueda de texto completo<button data-href="#Full-Text-Search​" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search​BM25" class="common-anchor-header">Búsqueda de texto completo(BM25)<button data-href="#Full-Text-Search​BM25" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,7 +60,7 @@ summary: >-
 <p>Para utilizar la búsqueda de texto completo, siga estos pasos principales.</p>
 <ol>
 <li><p>Cree<a href="#Create-a-collection-for-full-text-search">una colección</a>: Configure una colección con los campos necesarios y defina una función para convertir el texto en bruto en incrustaciones dispersas.</p></li>
-<li><p><a href="#Insert-text-data">Introduzca los datos</a>: Introduzca los documentos de texto sin formato en la colección.</p></li>
+<li><p><a href="#Insert-text-data">Inserte los datos</a>: Introduzca los documentos de texto sin formato en la colección.</p></li>
 <li><p><a href="#Perform-full-text-search">Realizar búsquedas</a>: Utilice textos de consulta para buscar en su colección y obtener resultados relevantes.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-full-text-search​" class="common-anchor-header">Crear una colección para la búsqueda de texto completo<button data-href="#Create-a-collection-for-full-text-search​" class="anchor-icon" translate="no">

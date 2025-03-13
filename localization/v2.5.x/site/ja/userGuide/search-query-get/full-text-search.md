@@ -4,7 +4,7 @@ title: 全文検索
 related_key: 'full, text, search'
 summary: 全文検索とは、テキストデータセット中の特定の語句を含む文書を検索し、その結果を関連性に基づいてランク付けする機能である。
 ---
-<h1 id="Full-Text-Search​" class="common-anchor-header">全文検索<button data-href="#Full-Text-Search​" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search​BM25" class="common-anchor-header">全文検索(BM25)<button data-href="#Full-Text-Search​BM25" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: 全文検索とは、テキストデータセット中の特定の語�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>全文検索は、テキストデータセット内の特定の語句を含む文書を検索し、関連性に基づいて結果をランク付けする機能です。この機能は、正確な用語を見落とす可能性のあるセマンティック検索の制限を克服し、最も正確で文脈に関連した結果を確実に受け取ることができます。さらに、生のテキスト入力を受け付けることでベクトル検索を簡素化し、ベクトル埋め込みを手動で生成することなく、テキストデータをスパース埋め込みに自動的に変換します。</p>
+    </button></h1><p>全文検索は、テキストデータセット内の特定の語句を含む文書を検索し、関連性に基づいて結果をランク付けする機能です。この機能は、正確な用語を見落とす可能性のあるセマンティック検索の限界を克服し、最も正確で文脈に関連した結果を確実に受け取ることができます。さらに、生のテキスト入力を受け付けることでベクトル検索を簡素化し、ベクトル埋め込みを手動で生成することなく、テキストデータをスパース埋め込みに自動的に変換します。</p>
 <p>関連性のスコアリングにBM25アルゴリズムを使用するこの機能は、特定の検索用語に密接に一致する文書を優先的に検索する、検索拡張世代（RAG）シナリオで特に有用です。</p>
 <div class="alert note">
 <ul>
@@ -169,10 +169,10 @@ schema.addField(AddFieldReq.builder()
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>この構成では</p>
+<p>この設定では</p>
 <ul>
 <li><p><code translate="no">id</code>: は主キーとして機能し、<code translate="no">auto_id=True</code> で自動的に生成される。</p></li>
-<li><p><code translate="no">text</code>この構成では、 : が主キーとなり、 で自動的に生成されます。 : には、全文検索操作のための生のテキスト・データが格納されます。データ型は<code translate="no">VARCHAR</code> でなければなりません。<code translate="no">VARCHAR</code> はMilvusのテキスト保存用の文字列データ型です。Milvusがテキストをトークン化できるようにするには、<code translate="no">enable_analyzer=True</code> を設定します。デフォルトでは、Milvusはテキスト分析に<a href="/docs/ja/standard-analyzer.md">標準アナライザを</a>使用します。別の解析器を設定するには、<a href="/docs/ja/analyzer-overview.md">概要を</a>参照してください。</p></li>
+<li><p><code translate="no">text</code>この構成では、 : が主キーとなり、 で自動的に生成されます。 : には、全文検索操作のための生のテキスト・データが格納されます。データ型は<code translate="no">VARCHAR</code> でなければなりません。<code translate="no">VARCHAR</code> はMilvusのテキスト保存用の文字列データ型です。Milvus がテキストをトークン化できるようにするには<code translate="no">enable_analyzer=True</code> を設定します。デフォルトでは、Milvusはテキスト分析に<a href="/docs/ja/standard-analyzer.md">標準アナライザを</a>使用します。別の解析器を設定するには、<a href="/docs/ja/analyzer-overview.md">概要を</a>参照してください。</p></li>
 <li><p><code translate="no">sparse</code>全文検索操作のために内部で生成されたスパース埋め込みを格納するために予約されたベクトルフィールド。データ型は<code translate="no">SPARSE_FLOAT_VECTOR</code> でなければなりません。</p></li>
 </ul>
 <p>次に、テキストをスパース・ベクトル表現に変換する関数を定義し、スキーマに追加します。</p>

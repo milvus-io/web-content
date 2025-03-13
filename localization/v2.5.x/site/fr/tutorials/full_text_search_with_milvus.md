@@ -1,15 +1,15 @@
 ---
 id: full_text_search_with_milvus.md
 summary: >-
-  Avec la sortie de Milvus 2.5, la recherche en texte intégral permet aux
-  utilisateurs de rechercher efficacement du texte à partir de mots-clés ou
-  d'expressions, offrant ainsi de puissantes capacités d'extraction de texte.
-  Cette fonctionnalité améliore la précision de la recherche et peut être
-  combinée de manière transparente avec la recherche basée sur l'intégration
-  pour la recherche hybride, ce qui permet d'obtenir des résultats sémantiques
-  et basés sur des mots-clés dans une seule requête. Dans ce carnet, nous
-  montrerons l'utilisation de base de la recherche plein texte dans Milvus.
-title: Recherche plein texte avec Milvus
+  Depuis la version 2.5, Milvus prend en charge BM25 pour la recherche en texte
+  intégral, ce qui permet une recherche par mot-clé et par phrase avec un
+  contrôle et une flexibilité accrus. Les utilisateurs peuvent également
+  effectuer une recherche hybride, qui combine la recherche sémantique basée sur
+  l'intégration dense et la recherche en texte intégral, ce qui permet d'obtenir
+  des résultats à la fois sémantiques et basés sur des mots-clés dans une seule
+  requête. Ce bloc-notes présente la recherche hybride avec la recherche plein
+  texte et la recherche sémantique dans Milvus.
+title: Recherche hybride avec texte intégral et recherche sémantique dans Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -17,7 +17,7 @@ title: Recherche plein texte avec Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">Recherche plein texte avec Milvus<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">Recherche en texte intégral avec Milvus<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -32,7 +32,7 @@ title: Recherche plein texte avec Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Avec la sortie de Milvus 2.5, la recherche en texte intégral permet aux utilisateurs de rechercher efficacement du texte à partir de mots-clés ou d'expressions, offrant ainsi de puissantes capacités d'extraction de texte. Cette fonctionnalité améliore la précision de la recherche et peut être combinée de manière transparente avec la recherche basée sur l'intégration pour la recherche hybride, ce qui permet d'obtenir des résultats sémantiques et basés sur des mots-clés dans une seule requête. Dans ce carnet, nous montrerons l'utilisation de base de la recherche plein texte dans Milvus.</p>
+    </button></h1><p>Depuis la version 2.5, Milvus prend en charge BM25 pour la recherche en texte intégral, ce qui permet une recherche par mot-clé et par phrase avec un contrôle et une flexibilité accrus. Les utilisateurs peuvent également effectuer une recherche hybride, qui combine la recherche sémantique basée sur l'intégration dense et la recherche en texte intégral, ce qui permet d'obtenir des résultats sémantiques et des résultats basés sur des mots-clés dans une seule requête. Ce bloc-notes présente la recherche hybride avec la recherche sémantique et en texte intégral dans Milvus.</p>
 <h2 id="Preparation" class="common-anchor-header">Préparation<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

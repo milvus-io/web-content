@@ -20,15 +20,16 @@ title: Milvus를 사용한 하이브리드 검색
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p>이 튜토리얼의 최종 효과를 직접 체험해보고 싶으시다면 <a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a> 으로 직접 이동하여 사용해 보세요.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
-<p>이 튜토리얼에서는 <a href="https://milvus.io/docs/multi-vector-search.md">Milvus와</a> <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 모델을</a> 사용하여 하이브리드 검색을 수행하는 방법을 보여드리겠습니다. BGE-M3 모델은 텍스트를 조밀하고 희박한 벡터로 변환할 수 있습니다. Milvus는 두 가지 유형의 벡터를 하나의 컬렉션에 저장하여 결과 연관성을 향상시키는 하이브리드 검색을 지원합니다.</p>
+<p>이 튜토리얼에서는 <a href="https://milvus.io/docs/multi-vector-search.md">Milvus와</a> <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 모델을</a> 사용하여 하이브리드 검색을 수행하는 방법을 보여드리겠습니다. BGE-M3 모델은 텍스트를 고밀도 및 희소 벡터로 변환할 수 있습니다. Milvus는 두 가지 유형의 벡터를 하나의 컬렉션에 저장하여 결과 연관성을 향상시키는 하이브리드 검색을 지원합니다.</p>
 <p>Milvus는 밀도, 스파스, 하이브리드 검색 방식을 지원합니다:</p>
 <ul>
 <li>밀도 검색: 시맨틱 컨텍스트를 활용하여 쿼리 뒤에 숨겨진 의미를 이해합니다.</li>
 <li>스파스 검색: 텍스트 매칭을 강조하여 전체 텍스트 검색과 동일하게 특정 용어를 기반으로 결과를 찾습니다.</li>
 <li>하이브리드 검색: 밀도 검색과 스파스 검색 방식을 모두 결합하여 전체 문맥과 특정 키워드를 파악하여 포괄적인 검색 결과를 제공합니다.</li>
 </ul>
-<p>이러한 방법을 통합함으로써 Milvus 하이브리드 검색은 의미론적 유사성과 어휘적 유사성의 균형을 유지하여 검색 결과의 전반적인 관련성을 향상시킵니다. 이 노트북에서는 이러한 검색 전략을 설정하고 사용하는 과정을 안내하며, 다양한 검색 시나리오에서 그 효과를 강조합니다.</p>
+<p>이러한 방법을 통합함으로써 Milvus 하이브리드 검색은 의미론적 유사성과 어휘적 유사성의 균형을 유지하여 검색 결과의 전반적인 관련성을 개선합니다. 이 노트북에서는 이러한 검색 전략을 설정하고 사용하는 과정을 안내하며, 다양한 검색 시나리오에서 그 효과를 강조합니다.</p>
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">종속성 및 환경</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Download-Dataset" class="common-anchor-header">데이터 세트 다운로드</h3><p>검색을 시연하려면 문서 말뭉치가 필요합니다. Quora 중복 질문 데이터 집합을 사용하여 로컬 디렉터리에 배치해 보겠습니다.</p>
@@ -290,8 +291,8 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>하이데라바드에서 어떤 사업을<span style='color:red'> 시작하는</span> 것이 더 낫습니까<span style='color:red'>?</span></p>
 <p>하이데라바드에서 어떤 사업을<span style='color:red'> 시작하는</span> 것이 좋은가요<span style='color:red'>?</span></p>
 <p>로봇 공학을<span style='color:red'> 시작하는</span> 가장 좋은 방법은 무엇인가요<span style='color:red'>?</span> 작업을<span style='color:red'> 시작할</span> 수있는 최고의 개발 보드는 무엇입니까<span style='color:red'>?</span></p>
-<p>초보자가 컴퓨터<span style='color:red'> 프로그래밍</span> 알고리즘을<span style='color:red'> 이해하려면</span> 어떤 수학이 필요하나요<span style='color:red'>?</span> 완전 초보자에게 적합한 알고리즘 관련 서적은 무엇인가요<span style='color:red'>?</span></p>
-<p><span style='color:red'>어떻게</span> 하면 삶이 자신에게 적합하게 만들고 삶이 정신적, 정서적으로 <span style='color:red'>학대하는</span> 것을 막을 수 있습니까<span style='color:red'>?</span></p>
+<p>완전 초보자가 컴퓨터<span style='color:red'> 프로그래밍</span> 알고리즘을<span style='color:red'> 이해하려면</span> 어떤 수학이 필요하나요<span style='color:red'>?</span> 완전 초보자에게 적합한 알고리즘 관련 서적은 무엇인가요<span style='color:red'>?</span></p>
+<p><span style='color:red'>어떻게</span> 하면 삶이 자신에게 적합하게 만들고 삶이 정신적, 정서적으로 자신을 <span style='color:red'>학대하는</span> 것을 막을 수 있습니까<span style='color:red'>?</span></p>
 <p><strong>하이브리드 검색 결과:</strong></p>
 <p>로봇 공학을<span style='color:red'> 시작하는</span> 가장 좋은 방법은 무엇인가요<span style='color:red'>?</span> 작업을<span style='color:red'> 시작할</span> 수있는 최고의 개발 보드는 무엇입니까<span style='color:red'>?</span></p>
 <p>자바<span style='color:red'> 프로그래밍이란</span> 무엇인가요<span style='color:red'>?</span> 자바 프로그래밍 언어를 배우는<span style='color:red'> 방법</span>?</p>

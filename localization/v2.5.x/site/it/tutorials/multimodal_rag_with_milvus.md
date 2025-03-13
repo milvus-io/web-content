@@ -20,9 +20,10 @@ title: RAG multimodale con Milvus
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p>Se volete sperimentare l'effetto finale di questa esercitazione, potete andare direttamente su <a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a> e provarla.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
-<p>Questo tutorial illustra il RAG multimodale basato su Milvus, il <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">modello BGE visualizzato</a> e <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. Con questo sistema, gli utenti possono caricare un'immagine e modificare le istruzioni di testo, che vengono elaborate dal modello di recupero composto di BGE per cercare le immagini candidate. GPT-4o agisce quindi come un reranker, selezionando l'immagine più adatta e fornendo le motivazioni alla base della scelta. Questa potente combinazione consente di ottenere un'esperienza di ricerca delle immagini intuitiva e senza soluzione di continuità, sfruttando Milvus per un reperimento efficiente, il modello BGE per un'elaborazione e una corrispondenza precisa delle immagini e GPT-4o per un reranking avanzato.</p>
+<p>Questo tutorial illustra il RAG multimodale realizzato con Milvus, il <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">modello BGE visualizzato</a> e <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. Con questo sistema, gli utenti possono caricare un'immagine e modificare le istruzioni di testo, che vengono elaborate dal modello di recupero composto di BGE per cercare le immagini candidate. GPT-4o agisce quindi come un reranker, selezionando l'immagine più adatta e fornendo le motivazioni alla base della scelta. Questa potente combinazione consente di ottenere un'esperienza di ricerca delle immagini intuitiva e senza soluzione di continuità, sfruttando Milvus per un reperimento efficiente, il modello BGE per un'elaborazione e una corrispondenza precisa delle immagini e GPT-4o per un reranking avanzato.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparazione<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +126,7 @@ image_dict = {}
 
 Number of encoded images: 900
 </code></pre>
-<h3 id="Insert-into-Milvus" class="common-anchor-header">Inserire in Milvus</h3><p>Inserisce le immagini con i percorsi e gli embeddings corrispondenti nella raccolta Milvus.</p>
+<h3 id="Insert-into-Milvus" class="common-anchor-header">Inserire in Milvus</h3><p>Inserisce le immagini con i percorsi e gli embeddings corrispondenti nella collezione Milvus.</p>
 <div class="alert note">
 <p>Come per l'argomento di <code translate="no">MilvusClient</code>:</p>
 <ul>

@@ -1,10 +1,10 @@
 ---
 id: full_text_search_with_milvus.md
 summary: >-
-  Milvus 2.5 發表後，Full Text Search
-  可讓使用者有效率地根據關鍵字或短語搜尋文字，提供強大的文字檢索功能。此功能可提高搜尋準確性，並可與基於嵌入的檢索無縫結合，進行混合搜尋，在單一查詢中同時獲得語意和基於關鍵字的結果。在本筆記簿中，我們將展示
-  Milvus 全文檢索的基本用法。
-title: 使用 Milvus 進行全文檢索
+  自 2.5 版起，Milvus 支援 BM25
+  進行全文檢索，以更大的控制力與彈性來實現基於關鍵字與詞組的檢索。使用者也可以執行混合搜尋，將基於密集嵌入的語意搜尋與全文檢索結合，在單一查詢中同時獲得語意和基於關鍵字的結果。本筆記本展示了
+  Milvus 的混合搜尋與全文和語意搜尋。
+title: 在 Milvus 中使用全文和語義搜索進行混合搜索
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -27,7 +27,7 @@ title: 使用 Milvus 進行全文檢索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 2.5 發表後，Full Text Search 可讓使用者有效率地根據關鍵字或短語搜尋文字，提供強大的文字檢索功能。此功能可提高搜尋準確性，並可與基於嵌入的檢索無縫結合，以進行混合搜尋，從而在單一查詢中獲得語義和基於關鍵字的結果。在本筆記簿中，我們將介紹 Milvus 全文檢索的基本用法。</p>
+    </button></h1><p>自 2.5 版起，Milvus 支援 BM25 進行全文檢索，以更大的控制力和彈性進行關鍵字和短語檢索。使用者也可以執行混合搜尋，將基於密集嵌入的語意搜尋與全文檢索結合，在單一查詢中同時獲得語意和基於關鍵字的結果。本筆記本示範了 Milvus 的混合搜尋與全文和語意搜尋。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +47,7 @@ title: 使用 Milvus 進行全文檢索
 <pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
 $ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-Milvus-25" class="common-anchor-header">安裝 Milvus 2.5</h3><p>查看<a href="https://milvus.io/docs/install_standalone-docker-compose.md">官方安裝指南以</a>瞭解更多細節。</p>
+<h3 id="Install-Milvus-25" class="common-anchor-header">安裝 Milvus 2.5</h3><p>查看<a href="https://milvus.io/docs/install_standalone-docker-compose.md">官方安裝指南以</a>瞭解更多詳細資訊。</p>
 <h3 id="Install-PyMilvus" class="common-anchor-header">安裝 PyMilvus</h3><p>執行以下指令安裝 PyMilvus：</p>
 <pre><code translate="no" class="language-python">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span> -U 
 <button class="copy-code-btn"></button></code></pre>

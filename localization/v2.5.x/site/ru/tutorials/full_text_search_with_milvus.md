@@ -1,14 +1,14 @@
 ---
 id: full_text_search_with_milvus.md
 summary: >-
-  С выходом Milvus 2.5 функция полнотекстового поиска позволяет пользователям
-  эффективно искать текст по ключевым словам или фразам, обеспечивая мощные
-  возможности текстового поиска. Эта функция повышает точность поиска и может
-  быть легко объединена с поиском на основе вкраплений для гибридного поиска,
-  позволяя получать результаты как по семантическим, так и по ключевым словам в
-  одном запросе. В этом блокноте мы покажем основные возможности использования
-  полнотекстового поиска в Milvus.
-title: Полнотекстовый поиск в Milvus
+  Начиная с версии 2.5, Milvus поддерживает BM25 для полнотекстового поиска,
+  позволяя осуществлять поиск по ключевым словам и фразам с большим контролем и
+  гибкостью. Пользователи также могут выполнять гибридный поиск, который
+  сочетает в себе семантический поиск на основе плотных вкраплений и
+  полнотекстовый поиск, позволяя получать результаты как по семантическим, так и
+  по ключевым словам в одном запросе. В этом блокноте демонстрируется гибридный
+  поиск с полнотекстовым и семантическим поиском в Milvus.
+title: Гибридный поиск с полнотекстовым и семантическим поиском в Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -31,7 +31,7 @@ title: Полнотекстовый поиск в Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>С выходом Milvus 2.5 функция полнотекстового поиска позволяет пользователям эффективно искать текст по ключевым словам или фразам, обеспечивая мощные возможности текстового поиска. Эта функция повышает точность поиска и может быть легко объединена с поиском на основе вкраплений для гибридного поиска, позволяя получать результаты как по семантическим, так и по ключевым словам в одном запросе. В этом блокноте мы покажем основные возможности использования полнотекстового поиска в Milvus.</p>
+    </button></h1><p>Начиная с версии 2.5, Milvus поддерживает BM25 для полнотекстового поиска, позволяя осуществлять поиск по ключевым словам и фразам с большим контролем и гибкостью. Пользователи также могут выполнять гибридный поиск, который сочетает в себе семантический поиск на основе плотных вкраплений и полнотекстовый поиск, позволяя получать результаты как по семантическим, так и по ключевым словам в одном запросе. В этом блокноте демонстрируется гибридный поиск с полнотекстовым и семантическим поиском в Milvus.</p>
 <h2 id="Preparation" class="common-anchor-header">Подготовка<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -291,7 +291,7 @@ is_insert = <span class="hljs-literal">True</span>
             chunk_content = chunk[<span class="hljs-string">&quot;content&quot;</span>]
             standard_retriever.insert_data(chunk_content, metadata)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Test-Sparse-Search" class="common-anchor-header">Тестирование разреженного поиска</h3><pre><code translate="no" class="language-python">results = standard_retriever.search(<span class="hljs-string">&quot;create a logger?&quot;</span>, mode=<span class="hljs-string">&quot;sparse&quot;</span>, k=<span class="hljs-number">3</span>)
+<h3 id="Test-Sparse-Search" class="common-anchor-header">Протестировать разреженный поиск</h3><pre><code translate="no" class="language-python">results = standard_retriever.search(<span class="hljs-string">&quot;create a logger?&quot;</span>, mode=<span class="hljs-string">&quot;sparse&quot;</span>, k=<span class="hljs-number">3</span>)
 <span class="hljs-built_in">print</span>(results)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[{'doc_id': 'doc_10', 'chunk_id': 'doc_10_chunk_0', 'content': 'use {\n    crate::args::LogArgs,\n    anyhow::{anyhow, Result},\n    simplelog::{Config, LevelFilter, WriteLogger},\n    std::fs::File,\n};\n\npub struct Logger;\n\nimpl Logger {\n    pub fn init(args: &amp;impl LogArgs) -&gt; Result&lt;()&gt; {\n        let filter: LevelFilter = args.log_level().into();\n        if filter != LevelFilter::Off {\n            let logfile = File::create(args.log_file())\n                .map_err(|e| anyhow!(&quot;Failed to open log file: {e:}&quot;))?;\n            WriteLogger::init(filter, Config::default(), logfile)\n                .map_err(|e| anyhow!(&quot;Failed to initalize logger: {e:}&quot;))?;\n        }\n        Ok(())\n    }\n}\n', 'score': 9.12518310546875}, {'doc_id': 'doc_87', 'chunk_id': 'doc_87_chunk_3', 'content': '\t\tLoggerPtr INF = Logger::getLogger(LOG4CXX_TEST_STR(&quot;INF&quot;));\n\t\tINF-&gt;setLevel(Level::getInfo());\n\n\t\tLoggerPtr INF_ERR = Logger::getLogger(LOG4CXX_TEST_STR(&quot;INF.ERR&quot;));\n\t\tINF_ERR-&gt;setLevel(Level::getError());\n\n\t\tLoggerPtr DEB = Logger::getLogger(LOG4CXX_TEST_STR(&quot;DEB&quot;));\n\t\tDEB-&gt;setLevel(Level::getDebug());\n\n\t\t// Note: categories with undefined level\n\t\tLoggerPtr INF_UNDEF = Logger::getLogger(LOG4CXX_TEST_STR(&quot;INF.UNDEF&quot;));\n\t\tLoggerPtr INF_ERR_UNDEF = Logger::getLogger(LOG4CXX_TEST_STR(&quot;INF.ERR.UNDEF&quot;));\n\t\tLoggerPtr UNDEF = Logger::getLogger(LOG4CXX_TEST_STR(&quot;UNDEF&quot;));\n\n', 'score': 7.0077056884765625}, {'doc_id': 'doc_89', 'chunk_id': 'doc_89_chunk_3', 'content': 'using namespace log4cxx;\nusing namespace log4cxx::helpers;\n\nLOGUNIT_CLASS(FMTTestCase)\n{\n\tLOGUNIT_TEST_SUITE(FMTTestCase);\n\tLOGUNIT_TEST(test1);\n\tLOGUNIT_TEST(test1_expanded);\n\tLOGUNIT_TEST(test10);\n//\tLOGUNIT_TEST(test_date);\n\tLOGUNIT_TEST_SUITE_END();\n\n\tLoggerPtr root;\n\tLoggerPtr logger;\n\npublic:\n\tvoid setUp()\n\t{\n\t\troot = Logger::getRootLogger();\n\t\tMDC::clear();\n\t\tlogger = Logger::getLogger(LOG4CXX_TEST_STR(&quot;java.org.apache.log4j.PatternLayoutTest&quot;));\n\t}\n\n', 'score': 6.750633716583252}]

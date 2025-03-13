@@ -27,7 +27,7 @@ title: Verwendung der Volltextsuche mit LangChain und Milvus
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>Die<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Volltextsuche</a> ist eine traditionelle Methode zum Auffinden von Dokumenten, die bestimmte Begriffe oder Phrasen enthalten, indem Schlüsselwörter direkt im Text gesucht werden. Die Ergebnisse werden auf der Grundlage der Relevanz eingestuft, die in der Regel durch Faktoren wie Begriffshäufigkeit und -nähe bestimmt wird. Während sich die semantische Suche durch ihr Verständnis von Absicht und Kontext auszeichnet, bietet die Volltextsuche Präzision beim exakten Abgleich von Schlüsselwörtern, was sie zu einem wertvollen ergänzenden Instrument macht. Der BM25-Algorithmus ist eine beliebte Ranking-Methode für die Volltextsuche, die besonders bei der Retrieval-Augmented Generation (RAG) nützlich ist.</p>
-<p>Seit <a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a> wird die Volltextsuche nativ durch den Sparse-BM25-Ansatz unterstützt, indem der BM25-Algorithmus als Sparse-Vektoren dargestellt wird. Milvus akzeptiert Rohtext als Eingabe und konvertiert ihn automatisch in Sparse-Vektoren, die in einem bestimmten Feld gespeichert werden, wodurch die Notwendigkeit einer manuellen Erzeugung von Sparse Embedding entfällt.</p>
+<p>Seit <a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a> wird die Volltextsuche nativ durch den Sparse-BM25-Ansatz unterstützt, indem der BM25-Algorithmus als Sparse-Vektoren dargestellt wird. Milvus akzeptiert Rohtext als Eingabe und konvertiert ihn automatisch in Sparse-Vektoren, die in einem bestimmten Feld gespeichert werden, wodurch die Notwendigkeit einer manuellen Sparse-Einbettung entfällt.</p>
 <p>Die Integration von LangChain in Milvus hat diese Funktion ebenfalls eingeführt und vereinfacht den Prozess der Integration von Volltextsuche in RAG-Anwendungen. Durch die Kombination von Volltextsuche und semantischer Suche mit dichten Vektoren können Sie einen hybriden Ansatz erreichen, der sowohl den semantischen Kontext aus dichten Einbettungen als auch die präzise Schlüsselwortrelevanz aus dem Wortabgleich nutzt. Diese Integration verbessert die Genauigkeit, Relevanz und Benutzerfreundlichkeit von Suchsystemen.</p>
 <p>Dieses Tutorial zeigt, wie Sie LangChain und Milvus verwenden, um eine Volltextsuche in Ihrer Anwendung zu implementieren.</p>
 <div class="alert note">
@@ -105,7 +105,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -137,7 +136,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -166,7 +164,6 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -214,7 +211,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -288,7 +284,6 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>

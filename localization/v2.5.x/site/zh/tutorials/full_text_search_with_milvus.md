@@ -1,10 +1,10 @@
 ---
 id: full_text_search_with_milvus.md
 summary: >-
-  Milvus 2.5 发布后，全文搜索功能使用户能够根据关键字或短语高效搜索文本，提供强大的文本检索功能。该功能可提高搜索准确性，并可与基于
-  Embeddings 的检索无缝结合，实现混合搜索，从而在单个查询中同时获得基于语义和关键字的结果。在本笔记本中，我们将展示 Milvus
-  全文搜索的基本用法。
-title: 使用 Milvus 进行全文搜索
+  自 2.5 版起，Milvus 支持 BM25
+  全文搜索，实现了基于关键字和短语的检索，具有更强的控制性和灵活性。用户还可以执行混合搜索，它将基于密集嵌入的语义搜索与全文搜索相结合，允许在单个查询中同时获得基于语义和关键字的结果。本笔记本演示了
+  Milvus 中全文和语义搜索的混合搜索。
+title: Milvus 中的全文和语义混合搜索
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -12,7 +12,7 @@ title: 使用 Milvus 进行全文搜索
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">使用 Milvus 进行全文搜索<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">使用 Milvus 进行全文检索<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -27,7 +27,7 @@ title: 使用 Milvus 进行全文搜索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 2.5 发布后，全文搜索功能使用户能够根据关键字或短语有效搜索文本，提供强大的文本检索功能。该功能提高了搜索准确性，并可与基于 Embeddings 的检索无缝结合，实现混合搜索，从而在单个查询中同时获得基于语义和关键字的结果。在本笔记本中，我们将展示 Milvus 全文搜索的基本用法。</p>
+    </button></h1><p>自 2.5 版起，Milvus 支持 BM25 全文搜索，从而能够以更强的控制力和灵活性进行基于关键字和短语的检索。用户还可以执行混合搜索，将基于密集嵌入的语义搜索与全文搜索相结合，从而在一次查询中同时获得基于语义和关键字的结果。本笔记本演示了 Milvus 中全文和语义搜索的混合搜索。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +47,7 @@ title: 使用 Milvus 进行全文搜索
 <pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
 $ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Install-Milvus-25" class="common-anchor-header">安装 Milvus 2.5</h3><p>查看<a href="https://milvus.io/docs/install_standalone-docker-compose.md">官方安装指南</a>了解更多详情。</p>
+<h3 id="Install-Milvus-25" class="common-anchor-header">安装 Milvus 2.5</h3><p>查看<a href="https://milvus.io/docs/install_standalone-docker-compose.md">官方安装指南</a>，了解更多详情。</p>
 <h3 id="Install-PyMilvus" class="common-anchor-header">安装 PyMilvus</h3><p>运行以下命令安装 PyMilvus：</p>
 <pre><code translate="no" class="language-python">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span> -U 
 <button class="copy-code-btn"></button></code></pre>

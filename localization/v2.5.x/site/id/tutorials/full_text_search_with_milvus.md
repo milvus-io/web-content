@@ -1,14 +1,14 @@
 ---
 id: full_text_search_with_milvus.md
 summary: >-
-  Dengan dirilisnya Milvus 2.5, Pencarian Teks Penuh memungkinkan pengguna untuk
-  mencari teks secara efisien berdasarkan kata kunci atau frasa, memberikan
-  kemampuan pencarian teks yang kuat. Fitur ini meningkatkan akurasi pencarian
-  dan dapat dikombinasikan secara mulus dengan pengambilan berbasis penyematan
-  untuk pencarian hibrida, sehingga memungkinkan untuk mendapatkan hasil
-  berbasis semantik dan kata kunci dalam satu kueri. Dalam buku catatan ini,
-  kami akan menunjukkan penggunaan dasar pencarian teks lengkap di Milvus.
-title: Pencarian Teks Lengkap dengan Milvus
+  Sejak versi 2.5, Milvus mendukung BM25 untuk pencarian teks lengkap,
+  memungkinkan pencarian berbasis kata kunci dan frasa dengan kontrol dan
+  fleksibilitas yang lebih besar. Pengguna juga dapat melakukan pencarian
+  hibrida, yang menggabungkan pencarian semantik berbasis sematan padat dengan
+  pencarian teks lengkap, sehingga memungkinkan hasil semantik dan kata kunci
+  dalam satu kueri. Notebook ini mendemonstrasikan pencarian hibrida dengan
+  pencarian teks lengkap dan semantik di Milvus.
+title: Pencarian Hibrida dengan Teks Lengkap dan Pencarian Semantik di Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -31,7 +31,7 @@ title: Pencarian Teks Lengkap dengan Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dengan dirilisnya Milvus 2.5, Pencarian Teks Penuh memungkinkan pengguna untuk mencari teks secara efisien berdasarkan kata kunci atau frasa, sehingga memberikan kemampuan pencarian teks yang kuat. Fitur ini meningkatkan akurasi pencarian dan dapat dikombinasikan secara mulus dengan pengambilan berbasis penyematan untuk pencarian hibrida, sehingga memungkinkan untuk mendapatkan hasil berbasis semantik dan kata kunci dalam satu kueri. Dalam buku catatan ini, kami akan menunjukkan penggunaan dasar pencarian teks lengkap di Milvus.</p>
+    </button></h1><p>Sejak versi 2.5, Milvus mendukung BM25 untuk pencarian teks lengkap, memungkinkan pencarian berbasis kata kunci dan frasa dengan kontrol dan fleksibilitas yang lebih besar. Pengguna juga dapat melakukan pencarian hibrida, yang menggabungkan pencarian semantik berbasis sematan padat dengan pencarian teks lengkap, yang memungkinkan hasil semantik dan kata kunci dalam satu kueri. Notebook ini mendemonstrasikan pencarian hibrida dengan pencarian teks lengkap dan semantik di Milvus.</p>
 <h2 id="Preparation" class="common-anchor-header">Persiapan<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

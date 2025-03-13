@@ -31,7 +31,7 @@ title: LangChain 및 Milvus에서 전체 텍스트 검색 사용하기
 <div class="alert note">
 <ul>
 <li><p>전체 텍스트 검색은 Milvus 독립형 및 Milvus 분산형에서 사용할 수 있지만, 향후 로드맵에 포함될 예정이지만 Milvus Lite에서는 사용할 수 없습니다. 이 기능은 조만간 Zilliz Cloud(완전 관리형 Milvus)에서도 제공될 예정입니다. 자세한 내용은 <a href="mailto:support@zilliz.com">support@zilliz.com</a> 으로 문의하세요.</p></li>
-<li><p>이 튜토리얼을 진행하기 전에 <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">전체 텍스트 검색에</a> 대한 기본적인 이해와 LangChain Milvus 통합의 <a href="https://milvus.io/docs/basic_usage_langchain.md">기본 사용법을</a> 숙지하고 있어야 합니다.</p></li>
+<li><p>이 튜토리얼을 진행하기 전에 <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">전체 텍스트 검색에</a> 대한 기본적인 이해와 LangChain Milvus 연동의 <a href="https://milvus.io/docs/basic_usage_langchain.md">기본 사용법을</a> 숙지하고 있어야 합니다.</p></li>
 </ul>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -103,7 +103,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -135,7 +134,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -153,7 +151,7 @@ vectorstore.vector_fields
 <pre><code translate="no">[Document(metadata={'category': 'fruit', 'pk': 454646931479251897}, page_content='I like this apple')]
 </code></pre>
 <p>하이브리드 검색에 대한 자세한 내용은 <a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">하이브리드 검색 소개</a> 및 이 <a href="https://milvus.io/docs/milvus_hybrid_search_retriever.md">LangChain Milvus 하이브리드 검색 튜토리얼을</a> 참조하세요.</p>
-<h3 id="BM25-search-without-embedding" class="common-anchor-header">임베딩 없이 BM25 검색</h3><p>임베딩 기반의 시맨틱 검색을 사용하지 않고 BM25 함수로만 전체 텍스트 검색을 수행하려면 임베딩 파라미터를 <code translate="no">None</code> 로 설정하고, BM25 함수 인스턴스로 지정된 <code translate="no">builtin_function</code> 만 유지하면 됩니다. 벡터 필드에는 "스파스" 필드만 있습니다. 예를 들어</p>
+<h3 id="BM25-search-without-embedding" class="common-anchor-header">임베딩 없이 BM25 검색</h3><p>임베딩 기반 시맨틱 검색을 사용하지 않고 BM25 함수를 사용하여 전체 텍스트 검색만 수행하려면 임베딩 파라미터를 <code translate="no">None</code> 로 설정하고, BM25 함수 인스턴스로 지정된 <code translate="no">builtin_function</code> 만 유지하면 됩니다. 벡터 필드에는 "스파스" 필드만 있습니다. 예를 들어</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=<span class="hljs-literal">None</span>,
@@ -164,7 +162,6 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -212,7 +209,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -286,7 +282,6 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -346,4 +341,4 @@ res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively generate and execute these programming statements.'
 </code></pre>
-<p>축하합니다! Milvus와 LangChain으로 구동되는 하이브리드(밀도 벡터 + 스파스 bm25 함수) 검색 RAG 체인을 구축하셨습니다.</p>
+<p>축하합니다! Milvus와 LangChain으로 하이브리드(밀도 벡터 + 스파스 bm25 함수) 검색 RAG 체인을 구축하셨습니다.</p>

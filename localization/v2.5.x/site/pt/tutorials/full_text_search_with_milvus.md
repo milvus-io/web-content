@@ -1,14 +1,14 @@
 ---
 id: full_text_search_with_milvus.md
 summary: >-
-  Com o lançamento do Milvus 2.5, a Pesquisa de Texto Completo permite que os
-  utilizadores pesquisem eficazmente texto com base em palavras-chave ou frases,
-  fornecendo poderosas capacidades de recuperação de texto. Esta caraterística
-  aumenta a precisão da pesquisa e pode ser combinada com a recuperação baseada
-  em incorporação para pesquisa híbrida, permitindo resultados semânticos e
-  baseados em palavras-chave numa única consulta. Neste caderno, mostraremos a
-  utilização básica da pesquisa de texto completo no Milvus.
-title: Pesquisa de texto completo com Milvus
+  Desde a versão 2.5, o Milvus suporta BM25 para pesquisa de texto integral,
+  permitindo a recuperação baseada em palavras-chave e frases com maior controlo
+  e flexibilidade. Os utilizadores podem também efetuar uma pesquisa híbrida,
+  que combina a pesquisa semântica baseada em dense embedding com a pesquisa de
+  texto integral, permitindo obter resultados semânticos e baseados em
+  palavras-chave numa única consulta. Este bloco de notas demonstra a pesquisa
+  híbrida com pesquisa de texto integral e semântica no Milvus.
+title: Pesquisa híbrida com texto integral e pesquisa semântica no Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -31,7 +31,7 @@ title: Pesquisa de texto completo com Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Com o lançamento do Milvus 2.5, a Pesquisa de Texto Completo permite que os utilizadores pesquisem eficazmente texto com base em palavras-chave ou frases, fornecendo poderosas capacidades de recuperação de texto. Esta caraterística aumenta a precisão da pesquisa e pode ser combinada com a recuperação baseada em incorporação para pesquisa híbrida, permitindo resultados semânticos e baseados em palavras-chave numa única consulta. Neste bloco de notas, mostraremos a utilização básica da pesquisa de texto completo no Milvus.</p>
+    </button></h1><p>Desde a versão 2.5, o Milvus suporta BM25 para pesquisa de texto integral, permitindo a recuperação baseada em palavras-chave e frases com maior controlo e flexibilidade. Os utilizadores também podem efetuar uma pesquisa híbrida, que combina a pesquisa semântica baseada em dense embedding com a pesquisa de texto integral, permitindo resultados semânticos e baseados em palavras-chave numa única consulta. Este bloco de notas demonstra a pesquisa híbrida com texto integral e pesquisa semântica no Milvus.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +47,7 @@ title: Pesquisa de texto completo com Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-the-dataset" class="common-anchor-header">Descarregar o conjunto de dados</h3><p>O seguinte comando irá descarregar os dados de exemplo utilizados na <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">demonstração</a> original do Anthropic.</p>
+    </button></h2><h3 id="Download-the-dataset" class="common-anchor-header">Descarregar o conjunto de dados</h3><p>O comando seguinte descarrega os dados de exemplo utilizados na <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">demonstração</a> original do Anthropic.</p>
 <pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
 $ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>

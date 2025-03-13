@@ -1,11 +1,11 @@
 ---
 id: full_text_search_with_milvus.md
 summary: >-
-  Milvus 2.5의 출시로 사용자는 키워드 또는 구문을 기반으로 텍스트를 효율적으로 검색할 수 있는 전체 텍스트 검색을 통해 강력한 텍스트
-  검색 기능을 사용할 수 있습니다. 이 기능은 검색 정확도를 향상시키고 임베딩 기반 검색과 원활하게 결합하여 하나의 쿼리로 의미론적 검색과
-  키워드 기반 검색 결과를 모두 얻을 수 있는 하이브리드 검색을 가능하게 합니다. 이 노트북에서는 Milvus에서 전체 텍스트 검색의 기본적인
-  사용법을 보여드리겠습니다.
-title: Milvus로 전체 텍스트 검색
+  버전 2.5부터 Milvus는 전체 텍스트 검색을 위한 BM25를 지원하여 키워드 및 구문 기반 검색을 더욱 강력하고 유연하게 제어할 수
+  있게 되었습니다. 또한 사용자는 고밀도 임베딩 기반 시맨틱 검색과 전체 텍스트 검색을 결합한 하이브리드 검색을 수행하여 단일 쿼리에서 시맨틱
+  및 키워드 기반 결과를 모두 얻을 수 있습니다. 이 노트북은 Milvus에서 전체 텍스트 및 시맨틱 검색을 사용한 하이브리드 검색을
+  시연합니다.
+title: Milvus의 전체 텍스트 및 시맨틱 검색을 사용한 하이브리드 검색
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -28,7 +28,7 @@ title: Milvus로 전체 텍스트 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 2.5의 출시로 사용자는 키워드 또는 구문을 기반으로 텍스트를 효율적으로 검색할 수 있는 전체 텍스트 검색을 통해 강력한 텍스트 검색 기능을 사용할 수 있습니다. 이 기능은 검색 정확도를 향상시키고 임베딩 기반 검색과 원활하게 결합하여 하나의 쿼리로 의미론적 검색과 키워드 기반 검색 결과를 모두 얻을 수 있는 하이브리드 검색을 가능하게 합니다. 이 노트북에서는 Milvus에서 전체 텍스트 검색의 기본적인 사용법을 보여드리겠습니다.</p>
+    </button></h1><p>버전 2.5부터 Milvus는 전체 텍스트 검색을 위한 BM25를 지원하여 키워드 및 구문 기반 검색을 더욱 강력하고 유연하게 제어할 수 있게 되었습니다. 또한, 사용자는 고밀도 임베딩 기반 시맨틱 검색과 전체 텍스트 검색을 결합한 하이브리드 검색을 수행하여 단일 쿼리에서 시맨틱 및 키워드 기반 결과를 모두 얻을 수 있습니다. 이 노트북에서는 Milvus에서 전체 텍스트 및 시맨틱 검색을 사용한 하이브리드 검색을 시연합니다.</p>
 <h2 id="Preparation" class="common-anchor-header">준비하기<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,15 +1,14 @@
 ---
 id: full_text_search_with_milvus.md
 summary: >-
-  Mit der Veröffentlichung von Milvus 2.5 ermöglicht die Volltextsuche eine
-  effiziente Suche nach Text auf der Grundlage von Schlüsselwörtern oder Phrasen
-  und bietet damit leistungsstarke Funktionen für die Textsuche. Diese Funktion
-  verbessert die Suchgenauigkeit und kann nahtlos mit der einbettungsbasierten
-  Suche für eine hybride Suche kombiniert werden, die sowohl semantische als
-  auch schlagwortbasierte Ergebnisse in einer einzigen Anfrage ermöglicht. In
-  diesem Notizbuch zeigen wir die grundlegende Nutzung der Volltextsuche in
-  Milvus.
-title: Volltextsuche mit Milvus
+  Seit Version 2.5 unterstützt Milvus BM25 für die Volltextsuche und ermöglicht
+  so eine schlagwort- und phrasenbasierte Suche mit größerer Kontrolle und
+  Flexibilität. Benutzer können auch eine hybride Suche durchführen, bei der die
+  auf dichter Einbettung basierende semantische Suche mit der Volltextsuche
+  kombiniert wird, was sowohl semantische als auch stichwortbasierte Ergebnisse
+  in einer einzigen Anfrage ermöglicht. Dieses Notizbuch demonstriert die
+  hybride Suche mit Volltext- und semantischer Suche in Milvus.
+title: Hybride Suche mit Volltext und semantischer Suche in Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -32,7 +31,7 @@ title: Volltextsuche mit Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Mit der Veröffentlichung von Milvus 2.5 ermöglicht die Volltextsuche eine effiziente Suche nach Text auf der Grundlage von Schlüsselwörtern oder Phrasen und bietet damit leistungsstarke Textabfragefunktionen. Diese Funktion verbessert die Suchgenauigkeit und kann nahtlos mit der einbettungsbasierten Suche für eine hybride Suche kombiniert werden, die sowohl semantische als auch stichwortbasierte Ergebnisse in einer einzigen Anfrage ermöglicht. In diesem Notizbuch werden wir die grundlegende Verwendung der Volltextsuche in Milvus zeigen.</p>
+    </button></h1><p>Seit Version 2.5 unterstützt Milvus BM25 für die Volltextsuche und ermöglicht so eine schlagwort- und phrasenbasierte Suche mit größerer Kontrolle und Flexibilität. Benutzer können auch eine hybride Suche durchführen, die eine semantische Suche auf der Basis von Dense Embedding mit einer Volltextsuche kombiniert und so sowohl semantische als auch stichwortbasierte Ergebnisse in einer einzigen Anfrage ermöglicht. Dieses Notizbuch demonstriert die hybride Suche mit Volltext- und semantischer Suche in Milvus.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,7 +47,7 @@ title: Volltextsuche mit Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-the-dataset" class="common-anchor-header">Herunterladen des Datensatzes</h3><p>Der folgende Befehl lädt die Beispieldaten herunter, die in der ursprünglichen <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">Anthropic-Demo</a> verwendet wurden.</p>
+    </button></h2><h3 id="Download-the-dataset" class="common-anchor-header">Download des Datensatzes</h3><p>Der folgende Befehl lädt die Beispieldaten herunter, die in der ursprünglichen <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">Anthropic-Demo</a> verwendet wurden.</p>
 <pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
 $ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -312,7 +311,7 @@ is_insert = <span class="hljs-literal">True</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nun, da wir den Datensatz in Milvus eingefügt haben, können wir die dichte, spärliche oder hybride Suche verwenden, um die besten 5 Ergebnisse zu erhalten. Sie können die <code translate="no">mode</code> ändern und jedes Ergebnis bewerten. Wir stellen die Pass@5-Metrik vor, bei der die Top-5-Ergebnisse für jede Abfrage abgerufen und der Recall berechnet werden.</p>
+    </button></h2><p>Nachdem wir nun den Datensatz in Milvus eingefügt haben, können wir die dichte, spärliche oder hybride Suche verwenden, um die 5 besten Ergebnisse zu erhalten. Sie können die <code translate="no">mode</code> ändern und jedes Ergebnis bewerten. Wir stellen die Pass@5-Metrik vor, bei der die Top-5-Ergebnisse für jede Abfrage abgerufen und der Recall berechnet werden.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">load_jsonl</span>(<span class="hljs-params">file_path: <span class="hljs-built_in">str</span></span>):
     <span class="hljs-string">&quot;&quot;&quot;Load JSONL file and return a list of dictionaries.&quot;&quot;&quot;</span>
     <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_path, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> file:

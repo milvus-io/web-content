@@ -75,8 +75,10 @@ title: 整合概述
 <tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_ollama.md">使用 Milvus 和 Ollama 建立 RAG</a></td><td>LLMs</td><td>Milvus、Ollama</td></tr>
 <tr><td><a href="/docs/zh-hant/milvus_rag_with_dynamiq.md">開始使用 Dynamiq 和 Milvus</a></td><td>協調</td><td>Milvus、Dynamiq</td></tr>
 <tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_deepseek.md">使用 Milvus 和 DeepSeek 建立 RAG</a></td><td>LLMs</td><td>Milvus、DeepSeek</td></tr>
-<tr><td><a href="/docs/zh-hant/integrate_with_phidata.md">整合 Milvus 與 Phidata</a></td><td>代理</td><td>Milvus、Phidata</td></tr>
+<tr><td><a href="/docs/zh-hant/integrate_with_phidata.md">將 Milvus 與 Agno 整合</a></td><td>代理</td><td>Milvus、Agno</td></tr>
 <tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_crawl4ai.md">使用 Milvus 和 Crawl4AI 建立 RAG</a></td><td>資料來源</td><td>Milvus、Crawl4AI</td></tr>
 <tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_firecrawl.md">使用 Milvus 和 Firecrawl 建立 RAG</a></td><td>資料來源</td><td>Milvus、Firecrawl</td></tr>
+<tr><td><a href="/docs/zh-hant/llama_stack_with_milvus.md">使用 Milvus 與 Llama Stack 建立 RAG</a></td><td>協調</td><td>Milvus、Llama Stack</td></tr>
+<tr><td><a href="/docs/zh-hant/llamaindex_milvus_async.md">使用 Milvus 和 LlamaIndex Async API 建立 RAG</a></td><td>協調</td><td>Milvus、LlamaIndex</td></tr>
 </tbody>
 </table>

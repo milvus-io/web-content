@@ -105,7 +105,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -116,7 +115,7 @@ vectorstore = Milvus.from_documents(
 <li><code translate="no">output_field_names</code> (str): O nome do campo de saída, por defeito <code translate="no">sparse</code>. Indica o campo para o qual esta função envia o resultado calculado.</li>
 </ul>
 <p>Note-se que nos parâmetros de inicialização do Milvus acima mencionados, também especificamos <code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code>. Uma vez que o campo <code translate="no">sparse</code> é tomado como o campo de saída definido por <code translate="no">BM25BuiltInFunction</code>, o outro campo <code translate="no">dense</code> será automaticamente atribuído ao campo de saída de OpenAIEmbeddings.</p>
-<p>Na prática, especialmente quando se combinam vários embeddings ou funções, recomendamos que se especifiquem explicitamente os campos de entrada e de saída de cada função para evitar ambiguidades.</p>
+<p>Na prática, especialmente quando se combinam vários embeddings ou funções, recomendamos que se especifiquem explicitamente os campos de entrada e saída de cada função para evitar ambiguidades.</p>
 <p>No exemplo seguinte, especificamos explicitamente os campos de entrada e saída de <code translate="no">BM25BuiltInFunction</code>, tornando claro para que campo se destina a função incorporada.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
 
@@ -137,7 +136,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -147,7 +145,7 @@ vectorstore.vector_fields
 </code></pre>
 <p>Neste exemplo, temos três campos vectoriais. Entre eles, <code translate="no">sparse</code> é utilizado como campo de saída para <code translate="no">BM25BuiltInFunction</code>, enquanto os outros dois, <code translate="no">dense1</code> e <code translate="no">dense2</code>, são automaticamente atribuídos como campos de saída para os dois modelos <code translate="no">OpenAIEmbeddings</code> (com base na ordem).</p>
 <p>Desta forma, é possível definir vários campos vectoriais e atribuir-lhes diferentes combinações de embeddings ou funções, para implementar a pesquisa híbrida.</p>
-<p>Ao efetuar a pesquisa híbrida, basta passar o texto da consulta e, opcionalmente, definir os parâmetros topK e reranker. A instância <code translate="no">vectorstore</code> tratará automaticamente os embeddings vectoriais e as funções incorporadas e, finalmente, utilizará um reranker para refinar os resultados. Os detalhes de implementação subjacentes ao processo de pesquisa são ocultados ao utilizador.</p>
+<p>Ao efetuar a pesquisa híbrida, basta passar o texto da consulta e, opcionalmente, definir os parâmetros topK e reranker. A instância <code translate="no">vectorstore</code> tratará automaticamente os embeddings vectoriais e as funções incorporadas e, finalmente, utilizará um reranker para refinar os resultados. Os detalhes de implementação subjacentes ao processo de pesquisa estão ocultos ao utilizador.</p>
 <pre><code translate="no" class="language-python">vectorstore.similarity_search(
     <span class="hljs-string">&quot;Do I like apples?&quot;</span>, k=<span class="hljs-number">1</span>
 )  # , ranker_type=<span class="hljs-string">&quot;weighted&quot;</span>, ranker_params={<span class="hljs-string">&quot;weights&quot;</span>:[<span class="hljs-number">0.3</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]})
@@ -155,7 +153,7 @@ vectorstore.vector_fields
 <pre><code translate="no">[Document(metadata={'category': 'fruit', 'pk': 454646931479251897}, page_content='I like this apple')]
 </code></pre>
 <p>Para mais informações sobre a pesquisa híbrida, pode consultar a <a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">introdução à pesquisa híbrida</a> e este <a href="https://milvus.io/docs/milvus_hybrid_search_retriever.md">tutorial de pesquisa híbrida LangChain Milvus</a>.</p>
-<h3 id="BM25-search-without-embedding" class="common-anchor-header">Pesquisa BM25 sem incorporação</h3><p>Se pretender efetuar apenas a pesquisa de texto integral com a função BM25 sem utilizar qualquer pesquisa semântica baseada na incorporação, pode definir o parâmetro de incorporação para <code translate="no">None</code> e manter apenas o <code translate="no">builtin_function</code> especificado como a instância da função BM25. O campo vetorial só tem um campo "esparso". Por exemplo:</p>
+<h3 id="BM25-search-without-embedding" class="common-anchor-header">Pesquisa BM25 sem incorporação</h3><p>Se pretender efetuar apenas a pesquisa de texto integral com a função BM25 sem utilizar qualquer pesquisa semântica baseada na incorporação, pode definir o parâmetro de incorporação para <code translate="no">None</code> e manter apenas o <code translate="no">builtin_function</code> especificado como a instância da função BM25. O campo vetorial tem apenas um campo "esparso". Por exemplo:</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=<span class="hljs-literal">None</span>,
@@ -166,7 +164,6 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -174,7 +171,7 @@ vectorstore.vector_fields
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">['sparse']
 </code></pre>
-<h2 id="Customize-analyzer" class="common-anchor-header">Personalizar o analisador<button data-href="#Customize-analyzer" class="anchor-icon" translate="no">
+<h2 id="Customize-analyzer" class="common-anchor-header">Personalizar analisador<button data-href="#Customize-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -190,7 +187,7 @@ vectorstore.vector_fields
         ></path>
       </svg>
     </button></h2><p>Os analisadores são essenciais na pesquisa de texto completo, dividindo a frase em tokens e efectuando a análise lexical, como a remoção de stemming e stop word. Os analisadores são normalmente específicos do idioma. Pode consultar <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">este guia</a> para saber mais sobre os analisadores no Milvus.</p>
-<p>O Milvus suporta dois tipos de analisadores: <strong>Analisadores incorporados</strong> e <strong>Analisadores personalizados</strong>. Por predefinição, o <code translate="no">BM25BuiltInFunction</code> utilizará o <a href="https://milvus.io/docs/standard-analyzer.md">analisador incorporado padrão</a>, que é o analisador mais básico que simboliza o texto com pontuação.</p>
+<p>O Milvus suporta dois tipos de analisadores: Analisadores <strong>incorporados</strong> e <strong>Analisadores personalizados</strong>. Por predefinição, o <code translate="no">BM25BuiltInFunction</code> utilizará o <a href="https://milvus.io/docs/standard-analyzer.md">analisador incorporado padrão</a>, que é o analisador mais básico que simboliza o texto com pontuação.</p>
 <p>Se você quiser usar um analisador diferente ou personalizar o analisador, pode passar o parâmetro <code translate="no">analyzer_params</code> na inicialização <code translate="no">BM25BuiltInFunction</code>.</p>
 <pre><code translate="no" class="language-python">analyzer_params_custom = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
@@ -214,7 +211,6 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -288,7 +284,6 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>

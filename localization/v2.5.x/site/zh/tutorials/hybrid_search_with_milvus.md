@@ -20,15 +20,16 @@ title: 使用 Milvus 进行混合搜索
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p>如果您想体验本教程的最终效果，可以直接登录<a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/ 进行尝试。</a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
-<p>在本教程中，我们将演示如何使用<a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a>和<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 模型</a>进行混合搜索。BGE-M3 模型可将文本转换为密集向量和稀疏向量。Milvus 支持在一个 Collections 中存储这两种向量，从而实现混合搜索，提高搜索结果的相关性。</p>
+<p>在本教程中，我们将演示如何利用<a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a>和<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 模型</a>进行混合搜索。BGE-M3 模型可以将文本转换为密集向量和稀疏向量。Milvus 支持在一个 Collections 中存储这两种向量，从而可以进行混合搜索，增强搜索结果的相关性。</p>
 <p>Milvus 支持密集、稀疏和混合检索方法：</p>
 <ul>
 <li>密集检索：利用语义上下文来理解查询背后的含义。</li>
 <li>稀疏检索：强调文本匹配，根据特定术语查找结果，相当于全文检索。</li>
 <li>混合检索：结合了密集和稀疏两种方法，捕捉完整的上下文和特定的关键词，从而获得全面的搜索结果。</li>
 </ul>
-<p>通过整合这些方法，Milvus 混合搜索平衡了语义和词汇的相似性，提高了搜索结果的整体相关性。本笔记本将介绍设置和使用这些检索策略的过程，并重点介绍它们在各种搜索场景中的有效性。</p>
+<p>通过整合这些方法，Milvus 混合搜索平衡了语义和词汇的相似性，提高了搜索结果的整体相关性。本笔记本将介绍这些检索策略的设置和使用过程，并重点介绍它们在各种搜索场景中的有效性。</p>
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">依赖关系和环境</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Download-Dataset" class="common-anchor-header">下载数据集</h3><p>要演示搜索，我们需要一个文档语料库。让我们使用 Quora 重复问题数据集，并将其放在本地目录中。</p>

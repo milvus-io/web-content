@@ -4,7 +4,7 @@ title: 全文检索
 related_key: 'full, text, search'
 summary: 全文搜索是一种在文本数据集中检索包含特定术语或短语的文档，然后根据相关性对结果进行排序的功能。
 ---
-<h1 id="Full-Text-Search​" class="common-anchor-header">全文搜索<button data-href="#Full-Text-Search​" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search​BM25" class="common-anchor-header">全文搜索（BM25）<button data-href="#Full-Text-Search​BM25" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

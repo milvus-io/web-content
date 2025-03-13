@@ -20,15 +20,16 @@ title: Ricerca ibrida con Milvus
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p>Se volete sperimentare l'effetto finale di questa esercitazione, potete andare direttamente su <a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a> e provarla.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
-<p>In questa esercitazione dimostreremo come condurre una ricerca ibrida con <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> e il <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">modello BGE-M3</a>. Il modello BGE-M3 può convertire il testo in vettori densi e radi. Milvus supporta la memorizzazione di entrambi i tipi di vettori in un'unica raccolta, consentendo una ricerca ibrida che migliora la rilevanza dei risultati.</p>
+<p>In questa esercitazione verrà mostrato come condurre una ricerca ibrida con <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> e il <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">modello BGE-M3</a>. Il modello BGE-M3 può convertire il testo in vettori densi e radi. Milvus supporta la memorizzazione di entrambi i tipi di vettori in un'unica raccolta, consentendo una ricerca ibrida che migliora la rilevanza dei risultati.</p>
 <p>Milvus supporta metodi di recupero densi, radi e ibridi:</p>
 <ul>
 <li>Recupero denso: Utilizza il contesto semantico per comprendere il significato delle query.</li>
 <li>Recupero sparso: Enfatizza la corrispondenza del testo per trovare risultati basati su termini specifici, equivalente alla ricerca full-text.</li>
 <li>Recupero ibrido: Combina gli approcci Dense e Sparse, catturando il contesto completo e le parole chiave specifiche per ottenere risultati di ricerca completi.</li>
 </ul>
-<p>Integrando questi metodi, la ricerca ibrida di Milvus bilancia le somiglianze semantiche e lessicali, migliorando la rilevanza complessiva dei risultati della ricerca. Questo quaderno illustra il processo di impostazione e utilizzo di queste strategie di reperimento, evidenziandone l'efficacia in vari scenari di ricerca.</p>
+<p>Integrando questi metodi, la ricerca ibrida di Milvus bilancia le somiglianze semantiche e lessicali, migliorando la rilevanza complessiva dei risultati della ricerca. Questo quaderno illustra il processo di impostazione e utilizzo di queste strategie di recupero, evidenziandone l'efficacia in vari scenari di ricerca.</p>
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">Dipendenze e ambiente</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Download-Dataset" class="common-anchor-header">Scaricare il set di dati</h3><p>Per dimostrare la ricerca, abbiamo bisogno di un corpus di documenti. Utilizziamo il dataset Quora Duplicate Questions e collochiamolo nella directory locale.</p>
@@ -290,7 +291,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>Quale attività è meglio<span style='color:red'> avviare a</span> Hyderabad<span style='color:red'>?</span></p>
 <p>Quale attività è meglio<span style='color:red'> avviare</span> a Hyderabad<span style='color:red'>?</span></p>
 <p>Qual è il modo migliore<span style='color:red'> per iniziare la</span> robotica<span style='color:red'>?</span> Qual è la migliore scheda di sviluppo che posso<span style='color:red'> iniziare a</span> lavorare su di essa<span style='color:red'>?</span></p>
-<p>Di quale matematica ha bisogno un principiante<span style='color:red'> per</span> capire gli algoritmi della<span style='color:red'> programmazione</span> informatica<span style='color:red'>?</span> Quali libri sugli algoritmi sono adatti per un principiante completo<span style='color:red'>?</span></p>
+<p>Di quale matematica ha bisogno un principiante<span style='color:red'> per</span> capire gli algoritmi di<span style='color:red'> programmazione?</span> Quali libri sugli algoritmi sono adatti per un principiante completo<span style='color:red'>?</span></p>
 <p><span style='color:red'>Come</span> fare in modo che la vita si adatti a te e impedisca alla vita di <span style='color:red'>abusare</span> di te mentalmente ed emotivamente<span style='color:red'>?</span></p>
 <p><strong>Risultati della ricerca ibrida:</strong></p>
 <p>Qual è il modo migliore<span style='color:red'> per iniziare la</span> robotica<span style='color:red'>?</span> Qual è la migliore scheda di sviluppo su cui posso<span style='color:red'> iniziare a</span> lavorare<span style='color:red'>?</span></p>

@@ -1,14 +1,14 @@
 ---
 id: full_text_search_with_milvus.md
 summary: >-
-  Con il rilascio di Milvus 2.5, la ricerca full text consente agli utenti di
-  cercare in modo efficiente il testo in base a parole o frasi chiave, fornendo
-  potenti capacità di recupero del testo. Questa funzione migliora l'accuratezza
-  della ricerca e può essere perfettamente combinata con il reperimento basato
-  sull'embedding per una ricerca ibrida, consentendo di ottenere risultati sia
-  semantici che basati su parole chiave in un'unica interrogazione. In questo
-  quaderno mostreremo l'uso di base della ricerca full text in Milvus.
-title: Ricerca a tutto testo con Milvus
+  Dalla versione 2.5, Milvus supporta BM25 per la ricerca full-text, consentendo
+  il recupero di parole chiave e frasi con maggiore controllo e flessibilità.
+  Gli utenti possono anche eseguire una ricerca ibrida, che combina la ricerca
+  semantica basata sull'incorporazione densa con la ricerca full-text,
+  consentendo di ottenere risultati sia semantici che basati su parole chiave in
+  un'unica interrogazione. Questo notebook mostra la ricerca ibrida con ricerca
+  semantica e full-text in Milvus.
+title: Ricerca ibrida con testo completo e ricerca semantica in Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -16,7 +16,7 @@ title: Ricerca a tutto testo con Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">Ricerca a tutto testo con Milvus<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">Ricerca full-text con Milvus<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -31,7 +31,7 @@ title: Ricerca a tutto testo con Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Con il rilascio di Milvus 2.5, la ricerca full text consente agli utenti di cercare in modo efficiente il testo in base a parole o frasi chiave, fornendo potenti capacità di recupero del testo. Questa funzione migliora l'accuratezza della ricerca e può essere perfettamente combinata con il reperimento basato sull'embedding per una ricerca ibrida, consentendo di ottenere risultati sia semantici che basati su parole chiave in un'unica interrogazione. In questo quaderno mostreremo l'uso di base della ricerca full text in Milvus.</p>
+    </button></h1><p>Dalla versione 2.5, Milvus supporta BM25 per la ricerca full-text, consentendo il recupero di parole chiave e frasi con maggiore controllo e flessibilità. Gli utenti possono anche eseguire una ricerca ibrida, che combina la ricerca semantica basata sull'incorporazione densa con la ricerca full-text, consentendo di ottenere risultati sia semantici che basati su parole chiave in un'unica interrogazione. Questo quaderno mostra la ricerca ibrida con ricerca semantica e full-text in Milvus.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparazione<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +47,7 @@ title: Ricerca a tutto testo con Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-the-dataset" class="common-anchor-header">Scaricare il set di dati</h3><p>Il seguente comando scaricherà i dati di esempio utilizzati nella <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">demo</a> originale <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">di</a> Anthropic.</p>
+    </button></h2><h3 id="Download-the-dataset" class="common-anchor-header">Scaricare il set di dati</h3><p>Il comando seguente scarica i dati di esempio utilizzati nella <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">demo</a> originale <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">di</a> Anthropic.</p>
 <pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
 $ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -311,7 +311,7 @@ is_insert = <span class="hljs-literal">True</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ora che abbiamo inserito il dataset in Milvus, possiamo usare la ricerca densa, rada o ibrida per recuperare i primi 5 risultati. È possibile cambiare il sito <code translate="no">mode</code> e valutare ciascuno di essi. Presentiamo la metrica Pass@5, che prevede il recupero dei primi 5 risultati per ogni query e il calcolo del Recall.</p>
+    </button></h2><p>Ora che abbiamo inserito il dataset in Milvus, possiamo usare la ricerca densa, rada o ibrida per recuperare i primi 5 risultati. È possibile modificare il sito <code translate="no">mode</code> e valutare ciascuno di essi. Presentiamo la metrica Pass@5, che prevede il recupero dei primi 5 risultati per ogni query e il calcolo del Recall.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">load_jsonl</span>(<span class="hljs-params">file_path: <span class="hljs-built_in">str</span></span>):
     <span class="hljs-string">&quot;&quot;&quot;Load JSONL file and return a list of dictionaries.&quot;&quot;&quot;</span>
     <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_path, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> file:

@@ -4,7 +4,7 @@ title: 全文檢索
 related_key: 'full, text, search'
 summary: 全文檢索是一種在文字資料集中擷取包含特定詞彙或短語的文件，然後根據相關性對結果進行排序的功能。
 ---
-<h1 id="Full-Text-Search​" class="common-anchor-header">全文檢索<button data-href="#Full-Text-Search​" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search​BM25" class="common-anchor-header">全文檢索(BM25)<button data-href="#Full-Text-Search​BM25" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: 全文檢索是一種在文字資料集中擷取包含特定詞彙或�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>全文檢索是一種在文字資料集中擷取包含特定詞彙或短語的文件，然後根據相關性對結果進行排序的功能。此功能克服了語意搜尋可能會忽略精確詞彙的限制，確保您收到最精確且與上下文相關的結果。此外，它還可以接受原始文字輸入，自動將您的文字資料轉換為稀疏嵌入，而不需要手動產生向量嵌入，從而簡化向量搜尋。</p>
+    </button></h1><p>全文檢索是一種在文字資料集中擷取包含特定詞彙或短語的文件，然後根據相關性對結果進行排序的功能。此功能克服了語意搜尋可能會忽略精確詞彙的限制，確保您收到最準確且與上下文最相關的結果。此外，它還可以接受原始文字輸入，自動將您的文字資料轉換為稀疏嵌入，而不需要手動產生向量嵌入，從而簡化向量搜尋。</p>
 <p>使用 BM25 演算法進行相關性評分，此功能在檢索擴充生成 (RAG) 的情境中特別有價值，它會優先處理與特定搜尋詞彙密切相符的文件。</p>
 <div class="alert note">
 <ul>
@@ -257,7 +257,7 @@ schema.addFunction(Function.builder()
 </td><td data-block-token="VdcmdmiiWoy0nex8a29clnslnQg" colspan="1" rowspan="1"><p data-block-token="Q2eSdvOqeoNa6dxcGjcc2LKinDg">要使用的函數類型。設定值為<code translate="no">FunctionType.BM25</code> 。</p>
 </td></tr></tbody></table>
 <div class="alert note">
-<p>對於具有多個<code translate="no">VARCHAR</code> 欄位、需要將文字轉換為稀疏向量的集合，請在集合模式中加入不同的函式，確保每個函式都有唯一的名稱和<code translate="no">output_field_names</code> 值。</p>
+<p>對於具有多個<code translate="no">VARCHAR</code> 欄位、需要將文字轉換為稀疏向量的資料集，請在資料集模式中加入不同的函式，確保每個函式都有唯一的名稱和<code translate="no">output_field_names</code> 值。</p>
 </div>
 <h3 id="Configure-the-index" class="common-anchor-header">設定索引</h3><p>在定義包含必要欄位和內建函式的模式後，為您的集合設定索引。為了簡化這個過程，請使用<code translate="no">AUTOINDEX</code> 作為<code translate="no">index_type</code> ，這個選項允許 Milvus 根據您的資料結構選擇和設定最適合的索引類型。</p>
 <div class="multipleCode">
@@ -487,7 +487,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
 </th></tr></thead><tbody><tr><td data-block-token="QpGIdQ2m0oogCvxColKcNWnYnUc" colspan="1" rowspan="1"><p data-block-token="TkffdBxkKo2hVvx9gGucca46nic"><code translate="no">search_params</code></p>
 </td><td data-block-token="HYemdqt6Dow9tvxOcYScmYdPn8e" colspan="1" rowspan="1"><p data-block-token="JiIOdJrBcoGIQ4xrqYycMdjnn7g">包含搜尋參數的字典。</p>
 </td></tr><tr><td data-block-token="DJDgdH5WUoZQxkxmLzQcXqcXnQh" colspan="1" rowspan="1"><p data-block-token="LKWbdw498o9mtRxm9gDcg28FnQd"><code translate="no">params.drop_ratio_search</code></p>
-</td><td data-block-token="SEJ7d5y18otFTOxy7gLcvLYRnfb" colspan="1" rowspan="1"><p data-block-token="MnladDjOGoUphGxrZzXchD0anzf">搜尋時要忽略的低重要性字詞比例。詳情請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>。</p>
+</td><td data-block-token="SEJ7d5y18otFTOxy7gLcvLYRnfb" colspan="1" rowspan="1"><p data-block-token="MnladDjOGoUphGxrZzXchD0anzf">搜尋時要忽略的低重要性字詞比例。如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md">Sparse Vector</a>。</p>
 </td></tr><tr><td data-block-token="XPPYdAYUPoASg5xuIYmcyxqHnPe" colspan="1" rowspan="1"><p data-block-token="T90ndG7H0okLa4xa1wzcHQmEnEg"><code translate="no">data</code></p>
 </td><td data-block-token="NMhsduxr1oUESPx2J8YcA8csnA1" colspan="1" rowspan="1"><p data-block-token="ZmEQdkdGtofQsAx9YXNcsnlHnYe">原始查詢文字。</p>
 </td></tr><tr><td data-block-token="O4OVdL9BIollH1xORz3czhInnSh" colspan="1" rowspan="1"><p data-block-token="CYdGd82dRopaWrxfJ9ycWQQnnPc"><code translate="no">anns_field</code></p>
