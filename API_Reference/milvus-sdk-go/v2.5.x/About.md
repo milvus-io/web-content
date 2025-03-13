@@ -27,7 +27,7 @@ $ go get -u github.com/milvus-io/milvus/client/v2
 
 <div class="alert note">
 
-To install go sdk before v2.5.1, please use the following command:
+To install go sdk before v2.5.x, please use the following command:
 
 ```shell
 $ go get -u github.com/milvus-io/milvus-sdk-go/v2
@@ -58,7 +58,7 @@ import "github.com/milvus-io/milvus/client/v2/milvusclient"
 
 <div class="alert note">
 
-If you are using Milvus 2.5.0 or earlier versions, you can use the following code snippet to connect to Milvus:
+If you are using versions earlier than v2.5.x, you can use the following code snippet to connect to Milvus:
 
 ```go
 import "github.com/milvus-io/milvus-sdk-go/v2/client"
