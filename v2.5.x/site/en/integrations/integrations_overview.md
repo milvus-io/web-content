@@ -66,4 +66,6 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Building RAG with Milvus and Firecrawl](build_RAG_with_milvus_and_firecrawl.md) | Data Sources | Milvus, Firecrawl |
 | [Build RAG with Llama Stack with Milvus](llama_stack_with_milvus.md) | Orchestration | Milvus, Llama Stack |
 | [RAG with Milvus and LlamaIndex Async API](llamaindex_milvus_async.md) | Ochestration | Milvus, LlamaIndex |
-
+| [Integrate Milvus with MindsDB](integration_with_mindsdb.md) | Knowledge Engineering | Milvus, MindsDB |
+| [MCP + Milvus: Connecting AI with Vector Databases](milvus_and_mcp.md) | Agents | Milvus, MCP |
+| [Milvus Integration with OpenAI Agents: A Step-by-Step Guide](openai_agents_milvus.md) | Agents | Milvus, OpenAI |
