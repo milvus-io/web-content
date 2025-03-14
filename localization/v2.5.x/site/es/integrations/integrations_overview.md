@@ -82,5 +82,8 @@ title: Visión general de las integraciones
 <tr><td><a href="/docs/es/build_RAG_with_milvus_and_firecrawl.md">Creación de RAG con Milvus y Firecrawl</a></td><td>Fuentes de datos</td><td>Milvus, Firecrawl</td></tr>
 <tr><td><a href="/docs/es/llama_stack_with_milvus.md">Creación de RAG con Llama Stack con Milvus</a></td><td>Orquestación</td><td>Milvus, Llama Stack</td></tr>
 <tr><td><a href="/docs/es/llamaindex_milvus_async.md">RAG con Milvus y LlamaIndex API Async</a></td><td>Orquestación</td><td>Milvus, LlamaIndex</td></tr>
+<tr><td><a href="/docs/es/integration_with_mindsdb.md">Integración de Milvus con MindsDB</a></td><td>Ingeniería del conocimiento</td><td>Milvus, MindsDB</td></tr>
+<tr><td><a href="/docs/es/milvus_and_mcp.md">MCP + Milvus: Conectar la IA con las bases de datos vectoriales</a></td><td>Agentes</td><td>Milvus, MCP</td></tr>
+<tr><td><a href="/docs/es/openai_agents_milvus.md">Integración de Milvus con agentes OpenAI: Guía paso a paso</a></td><td>Agentes</td><td>Milvus, OpenAI</td></tr>
 </tbody>
 </table>

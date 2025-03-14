@@ -80,5 +80,8 @@ title: 集成概述
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_firecrawl.md">使用 Milvus 和 Firecrawl 构建 RAG</a></td><td>数据源</td><td>Milvus、Firecrawl</td></tr>
 <tr><td><a href="/docs/zh/llama_stack_with_milvus.md">利用 Milvus 和 Llama Stack 构建 RAG</a></td><td>协调</td><td>Milvus、Llama 堆栈</td></tr>
 <tr><td><a href="/docs/zh/llamaindex_milvus_async.md">使用 Milvus 和 LlamaIndex 异步应用程序接口构建 RAG</a></td><td>协调</td><td>Milvus、LlamaIndex</td></tr>
+<tr><td><a href="/docs/zh/integration_with_mindsdb.md">Milvus 与 MindsDB 集成</a></td><td>知识工程</td><td>Milvus、MindsDB</td></tr>
+<tr><td><a href="/docs/zh/milvus_and_mcp.md">MCP + Milvus：连接人工智能与向量数据库</a></td><td>Agents</td><td>Milvus、MCP</td></tr>
+<tr><td><a href="/docs/zh/openai_agents_milvus.md">Milvus 与 OpenAI Agents 的集成：分步指南</a></td><td>Agents</td><td>Milvus、OpenAI</td></tr>
 </tbody>
 </table>

@@ -82,5 +82,8 @@ title: Ikhtisar Integrasi
 <tr><td><a href="/docs/id/build_RAG_with_milvus_and_firecrawl.md">Membangun RAG dengan Milvus dan Firecrawl</a></td><td>Sumber Data</td><td>Milvus, Firecrawl</td></tr>
 <tr><td><a href="/docs/id/llama_stack_with_milvus.md">Membangun RAG dengan Llama Stack dengan Milvus</a></td><td>Orkestrasi</td><td>Milvus, Llama Stack</td></tr>
 <tr><td><a href="/docs/id/llamaindex_milvus_async.md">RAG dengan Milvus dan LlamaIndex Async API</a></td><td>Orkestrasi</td><td>Milvus, LlamaIndex</td></tr>
+<tr><td><a href="/docs/id/integration_with_mindsdb.md">Mengintegrasikan Milvus dengan MindsDB</a></td><td>Rekayasa Pengetahuan</td><td>Milvus, MindsDB</td></tr>
+<tr><td><a href="/docs/id/milvus_and_mcp.md">MCP + Milvus: Menghubungkan AI dengan Basis Data Vektor</a></td><td>Agen</td><td>Milvus, MCP</td></tr>
+<tr><td><a href="/docs/id/openai_agents_milvus.md">Integrasi Milvus dengan Agen OpenAI: Panduan Langkah-demi-Langkah</a></td><td>Agen</td><td>Milvus, OpenAI</td></tr>
 </tbody>
 </table>

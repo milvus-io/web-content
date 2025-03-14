@@ -82,5 +82,8 @@ title: نظرة عامة على عمليات التكامل
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_firecrawl.md">بناء RAG باستخدام Milvus وFirecrawl</a></td><td>مصادر البيانات</td><td>ميلفوس، فايركراول</td></tr>
 <tr><td><a href="/docs/ar/llama_stack_with_milvus.md">بناء RAG مع Llama Stack مع Milvus</a></td><td>التنسيق</td><td>ميلفوس، مكدس لاما</td></tr>
 <tr><td><a href="/docs/ar/llamaindex_milvus_async.md">بناء RAG مع Milvus وLlamaIndex Async API</a></td><td>التنسيق</td><td>ميلفوس، لاما إندكس</td></tr>
+<tr><td><a href="/docs/ar/integration_with_mindsdb.md">تكامل Milvus مع MindsDB</a></td><td>هندسة المعرفة</td><td>ميلفوس، مايندز دي بي</td></tr>
+<tr><td><a href="/docs/ar/milvus_and_mcp.md">MCP + ميلفوس: ربط الذكاء الاصطناعي بقواعد بيانات المتجهات</a></td><td>الوكلاء</td><td>ميلفوس، MCP</td></tr>
+<tr><td><a href="/docs/ar/openai_agents_milvus.md">تكامل ميلفوس مع وكلاء OpenAI: دليل خطوة بخطوة</a></td><td>الوكلاء</td><td>ميلفوس، OpenAI</td></tr>
 </tbody>
 </table>

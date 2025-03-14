@@ -1913,9 +1913,21 @@
             "children": []
           },
           {
-            "label": "フィダータ",
-            "id": "integrate_with_phidata.md",
+            "label": "アグノ",
+            "id": "integrate_with_agno.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "オープンAI",
+            "id": "openai_agents_milvus.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "エムシーピー",
+            "id": "milvus_and_mcp.md",
+            "order": 5,
             "children": []
           }
         ]
@@ -1947,6 +1959,12 @@
             "label": "コグニー",
             "id": "build_RAG_with_milvus_and_cognee.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "マインド・データベース",
+            "id": "integration_with_mindsdb.md",
+            "order": 4,
             "children": []
           }
         ]
@@ -2230,7 +2248,7 @@
     ]
   },
   {
-    "label": "よくある質問",
+    "label": "よくあるご質問",
     "id": "faq",
     "isMenu": true,
     "order": 9,

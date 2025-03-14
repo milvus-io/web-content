@@ -23,7 +23,7 @@ title: Übersicht über Integrationen
     </button></h1><p>Auf dieser Seite finden Sie eine Liste von Tutorials, die Ihnen die Interaktion mit Milvus und Tools von Drittanbietern erleichtern.</p>
 <table>
 <thead>
-<tr><th>Lehrgang</th><th>Anwendungsfall</th><th>Partner oder Stacks</th></tr>
+<tr><th>Lernprogramm</th><th>Anwendungsfall</th><th>Partner oder Stacks</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/de/integrate_with_llamaindex.md">RAG mit Milvus und LlamaIndex</a></td><td>RAG</td><td>Milvus, LLamaIndex</td></tr>
@@ -82,5 +82,8 @@ title: Übersicht über Integrationen
 <tr><td><a href="/docs/de/build_RAG_with_milvus_and_firecrawl.md">Aufbau von RAG mit Milvus und Firecrawl</a></td><td>Die Datenquellen</td><td>Milvus, Firecrawl</td></tr>
 <tr><td><a href="/docs/de/llama_stack_with_milvus.md">Aufbau von RAG mit Llama Stack mit Milvus</a></td><td>Orchestrierung</td><td>Milvus, Llama Stack</td></tr>
 <tr><td><a href="/docs/de/llamaindex_milvus_async.md">RAG mit Milvus und LlamaIndex Async API</a></td><td>Orchestrierung</td><td>Milvus, LlamaIndex</td></tr>
+<tr><td><a href="/docs/de/integration_with_mindsdb.md">Integration von Milvus mit MindsDB</a></td><td>Wissensmanagement</td><td>Milvus, MindsDB</td></tr>
+<tr><td><a href="/docs/de/milvus_and_mcp.md">MCP + Milvus: Verknüpfung von KI mit Vektordatenbanken</a></td><td>Agenten</td><td>Milvus, MCP</td></tr>
+<tr><td><a href="/docs/de/openai_agents_milvus.md">Milvus-Integration mit OpenAI-Agenten: Eine Schritt-für-Schritt-Anleitung</a></td><td>Agenten</td><td>Milvus, OpenAI</td></tr>
 </tbody>
 </table>

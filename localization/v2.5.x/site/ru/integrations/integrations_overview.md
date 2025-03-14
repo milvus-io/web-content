@@ -56,7 +56,7 @@ title: Обзор интеграций
 <tr><td><a href="/docs/ru/llama_agents_metadata.md">Мультиагентные системы с Mistral AI, Milvus и Llama-agents</a></td><td>Агент</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
 <tr><td><a href="/docs/ru/kafka-connect-milvus.md">Подключение Kafka к Milvus</a></td><td>Источники данных</td><td>Milvus, Kafka</td></tr>
 <tr><td><a href="/docs/ru/kotaemon_with_milvus.md">Kotaemon RAG с Milvus</a></td><td>RAG</td><td>Milvus, Kotaemon</td></tr>
-<tr><td><a href="/docs/ru/apify_milvus_rag.md">Генерация с расширением поиска: Ползание по веб-сайтам с помощью Apify и сохранение данных в Milvus для ответов на вопросы</a></td><td>Источники данных</td><td>Milvus, Apify</td></tr>
+<tr><td><a href="/docs/ru/apify_milvus_rag.md">Генерация с расширением поиска: Поиск сайтов с помощью Apify и сохранение данных в Milvus для ответов на вопросы</a></td><td>Источники данных</td><td>Milvus, Apify</td></tr>
 <tr><td><a href="/docs/ru/evaluation_with_deepeval.md">Оценка с помощью DeepEval</a></td><td>Оценка и наблюдаемость</td><td>Milvus, DeepEval</td></tr>
 <tr><td><a href="/docs/ru/evaluation_with_phoenix.md">Оценка с помощью Arize Pheonix</a></td><td>Оценка и наблюдаемость</td><td>Milvus, Arize Pheonix</td></tr>
 <tr><td><a href="/docs/ru/dify_with_milvus.md">Развертывание Dify с помощью Milvus</a></td><td>Ochestration</td><td>Milvus, Dify</td></tr>
@@ -76,11 +76,14 @@ title: Обзор интеграций
 <tr><td><a href="/docs/ru/build_RAG_with_milvus_and_gemini.md">Построение RAG с помощью Milvus и Gemini</a></td><td>LLMs</td><td>Milvus, Gemini</td></tr>
 <tr><td><a href="/docs/ru/build_RAG_with_milvus_and_ollama.md">Построение RAG с помощью Milvus и Ollama</a></td><td>LLMs</td><td>Milvus, Ollama</td></tr>
 <tr><td><a href="/docs/ru/milvus_rag_with_dynamiq.md">Начало работы с Dynamiq и Milvus</a></td><td>Оркестровка</td><td>Milvus, Dynamiq</td></tr>
-<tr><td><a href="/docs/ru/build_RAG_with_milvus_and_deepseek.md">Построение RAG с помощью Milvus и DeepSeek</a></td><td>LLMs</td><td>Milvus, DeepSeek</td></tr>
+<tr><td><a href="/docs/ru/build_RAG_with_milvus_and_deepseek.md">Создание RAG с помощью Milvus и DeepSeek</a></td><td>LLMs</td><td>Milvus, DeepSeek</td></tr>
 <tr><td><a href="/docs/ru/integrate_with_phidata.md">Интеграция Milvus с Agno</a></td><td>Агенты</td><td>Milvus, Agno</td></tr>
 <tr><td><a href="/docs/ru/build_RAG_with_milvus_and_crawl4ai.md">Создание RAG с помощью Milvus и Crawl4AI</a></td><td>Источники данных</td><td>Milvus, Crawl4AI</td></tr>
 <tr><td><a href="/docs/ru/build_RAG_with_milvus_and_firecrawl.md">Построение RAG с помощью Milvus и Firecrawl</a></td><td>Источники данных</td><td>Milvus, Firecrawl</td></tr>
 <tr><td><a href="/docs/ru/llama_stack_with_milvus.md">Построение RAG с помощью стека Llama с Milvus</a></td><td>Оркестрация</td><td>Milvus, Llama Stack</td></tr>
 <tr><td><a href="/docs/ru/llamaindex_milvus_async.md">RAG с Milvus и LlamaIndex Async API</a></td><td>Ochestration</td><td>Milvus, LlamaIndex</td></tr>
+<tr><td><a href="/docs/ru/integration_with_mindsdb.md">Интеграция Milvus с MindsDB</a></td><td>Инженерия знаний</td><td>Milvus, MindsDB</td></tr>
+<tr><td><a href="/docs/ru/milvus_and_mcp.md">MCP + Milvus: соединение ИИ с векторными базами данных</a></td><td>Агенты</td><td>Milvus, MCP</td></tr>
+<tr><td><a href="/docs/ru/openai_agents_milvus.md">Интеграция Milvus с агентами OpenAI: Пошаговое руководство</a></td><td>Агенты</td><td>Milvus, OpenAI</td></tr>
 </tbody>
 </table>

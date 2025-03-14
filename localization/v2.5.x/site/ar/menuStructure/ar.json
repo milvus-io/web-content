@@ -1913,9 +1913,21 @@
             "children": []
           },
           {
-            "label": "فيداتا",
-            "id": "integrate_with_phidata.md",
+            "label": "أجنو",
+            "id": "integrate_with_agno.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "OpenAI",
+            "id": "openai_agents_milvus.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "MCP",
+            "id": "milvus_and_mcp.md",
+            "order": 5,
             "children": []
           }
         ]
@@ -1947,6 +1959,12 @@
             "label": "كوجني",
             "id": "build_RAG_with_milvus_and_cognee.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "MindsDB",
+            "id": "integration_with_mindsdb.md",
+            "order": 4,
             "children": []
           }
         ]

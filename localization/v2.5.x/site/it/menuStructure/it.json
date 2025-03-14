@@ -348,7 +348,7 @@
             "children": []
           },
           {
-            "label": "Creare una collezione istantanea",
+            "label": "Creare istantaneamente una collezione",
             "id": "create-collection-instantly.md",
             "order": 2,
             "children": []
@@ -571,7 +571,7 @@
                     "children": []
                   },
                   {
-                    "label": "Stop",
+                    "label": "Fermarsi",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -1503,7 +1503,7 @@
                 "children": []
               },
               {
-                "label": "Migrazione tra istanze e bucket",
+                "label": "Migrare tra istanze e bucket",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -1913,9 +1913,21 @@
             "children": []
           },
           {
-            "label": "Fidata",
-            "id": "integrate_with_phidata.md",
+            "label": "Agno",
+            "id": "integrate_with_agno.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "OpenAI",
+            "id": "openai_agents_milvus.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "MCP",
+            "id": "milvus_and_mcp.md",
+            "order": 5,
             "children": []
           }
         ]
@@ -1947,6 +1959,12 @@
             "label": "Cognee",
             "id": "build_RAG_with_milvus_and_cognee.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "MindsDB",
+            "id": "integration_with_mindsdb.md",
+            "order": 4,
             "children": []
           }
         ]
@@ -2155,7 +2173,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con matrioske embeddings",
+        "label": "Ricerca a imbuto con le matrici Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

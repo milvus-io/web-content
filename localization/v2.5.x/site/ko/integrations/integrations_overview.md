@@ -73,12 +73,15 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_cognee.md">Milvus 및 Cognee로 RAG 구축하기</a></td><td>지식 엔지니어링</td><td>Milvus, Cognee</td></tr>
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_gemini.md">Milvus 및 Gemini를 사용한 RAG 빌드</a></td><td>LLM</td><td>밀버스, 제미니</td></tr>
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_ollama.md">밀버스 및 올라마로 RAG 빌드하기</a></td><td>LLM</td><td>밀버스, 올라마</td></tr>
-<tr><td><a href="/docs/ko/milvus_rag_with_dynamiq.md">다이나믹과 밀버스 시작하기</a></td><td>오케스트레이션</td><td>Milvus, Dynamiq</td></tr>
+<tr><td><a href="/docs/ko/milvus_rag_with_dynamiq.md">다이나믹 및 밀버스 시작하기</a></td><td>오케스트레이션</td><td>Milvus, Dynamiq</td></tr>
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_deepseek.md">Milvus 및 DeepSeek로 RAG 빌드하기</a></td><td>LLM</td><td>Milvus, DeepSeek</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_phidata.md">Milvus와 Agno 통합</a></td><td>에이전트</td><td>Milvus, Agno</td></tr>
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_crawl4ai.md">Milvus와 Crawl4AI로 RAG 구축하기</a></td><td>데이터 소스</td><td>밀버스, 크롤4AI</td></tr>
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_firecrawl.md">밀버스와 파이어크롤로 RAG 구축하기</a></td><td>데이터 소스</td><td>밀버스, 파이어크롤</td></tr>
 <tr><td><a href="/docs/ko/llama_stack_with_milvus.md">Milvus를 사용하여 라마 스택으로 RAG 구축하기</a></td><td>오케스트레이션</td><td>밀버스, 라마 스택</td></tr>
 <tr><td><a href="/docs/ko/llamaindex_milvus_async.md">Milvus 및 LlamaIndex 비동기 API를 사용한 RAG</a></td><td>오케스트레이션</td><td>Milvus, LlamaIndex</td></tr>
+<tr><td><a href="/docs/ko/integration_with_mindsdb.md">Milvus와 MindsDB 통합</a></td><td>지식 엔지니어링</td><td>Milvus, MindsDB</td></tr>
+<tr><td><a href="/docs/ko/milvus_and_mcp.md">MCP + Milvus: AI와 벡터 데이터베이스의 연결</a></td><td>에이전트</td><td>Milvus, MCP</td></tr>
+<tr><td><a href="/docs/ko/openai_agents_milvus.md">Milvus와 OpenAI 에이전트 통합: 단계별 가이드</a></td><td>에이전트</td><td>Milvus, OpenAI</td></tr>
 </tbody>
 </table>

@@ -78,7 +78,10 @@ title: 整合概述
 <tr><td><a href="/docs/zh-hant/integrate_with_phidata.md">將 Milvus 與 Agno 整合</a></td><td>代理</td><td>Milvus、Agno</td></tr>
 <tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_crawl4ai.md">使用 Milvus 和 Crawl4AI 建立 RAG</a></td><td>資料來源</td><td>Milvus、Crawl4AI</td></tr>
 <tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_firecrawl.md">使用 Milvus 和 Firecrawl 建立 RAG</a></td><td>資料來源</td><td>Milvus、Firecrawl</td></tr>
-<tr><td><a href="/docs/zh-hant/llama_stack_with_milvus.md">使用 Milvus 與 Llama Stack 建立 RAG</a></td><td>協調</td><td>Milvus、Llama Stack</td></tr>
+<tr><td><a href="/docs/zh-hant/llama_stack_with_milvus.md">使用 Milvus 與 Llama Stack 建立 RAG</a></td><td>協調</td><td>Milvus、Llama 堆疊</td></tr>
 <tr><td><a href="/docs/zh-hant/llamaindex_milvus_async.md">使用 Milvus 和 LlamaIndex Async API 建立 RAG</a></td><td>協調</td><td>Milvus、LlamaIndex</td></tr>
+<tr><td><a href="/docs/zh-hant/integration_with_mindsdb.md">整合 Milvus 與 MindsDB</a></td><td>知識工程</td><td>Milvus、MindsDB</td></tr>
+<tr><td><a href="/docs/zh-hant/milvus_and_mcp.md">MCP + Milvus：連結 AI 與向量資料庫</a></td><td>代理</td><td>Milvus、MCP</td></tr>
+<tr><td><a href="/docs/zh-hant/openai_agents_milvus.md">Milvus 與 OpenAI 代理的整合：分步指南</a></td><td>代理程式</td><td>Milvus、OpenAI</td></tr>
 </tbody>
 </table>
