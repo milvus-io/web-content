@@ -1,5 +1,5 @@
 ---
-id: integrate_with_phidata.md
+id: integrate_with_agno.md
 title: Integrate Milvus with Agno
 summary: Milvus vector database enable efficient storage and retrieval of information as embeddings. With Milvus and Agno, you can easily integrate your knowledge into your Agent workflows. This document is a basic guide on how to use Milvus integration with Agno.
 ---
