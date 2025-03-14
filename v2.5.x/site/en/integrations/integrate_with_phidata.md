@@ -6,6 +6,13 @@ summary: Milvus vector database enable efficient storage and retrieval of inform
 
 # Integrate Milvus with Agno
 
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/integrate_with_phidata.ipynb" target="_parent">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/integrate_with_phidata.ipynb" target="_blank">
+    <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a>
+
 [Agno](https://docs.agno.com/introduction)(formerly known as Phidata) is a lightweight library for building Multimodal Agents. It allows you to create multi-modal agents that can understand text, images, audio, and video, and leverage various tools and knowledge sources to accomplish complex tasks. Agno supports multi-agent orchestration, enabling teams of agents to collaborate and solve problems together. It also provides a beautiful Agent UI for interacting with your agents.
 
 Milvus vector database enable efficient storage and retrieval of information as embeddings. With Milvus and Agno, you can easily integrate your knowledge into your Agent workflows. This document is a basic guide on how to use Milvus integration with Agno.
