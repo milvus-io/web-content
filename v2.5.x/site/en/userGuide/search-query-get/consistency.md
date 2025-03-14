@@ -38,7 +38,7 @@ Milvus provides four types of consistency levels with different GuaranteeTs.​
 
     The GuaranteeTs is set to an extremely small value, such as 1, to avoid consistency checks so that QueryNodes can immediately execute Search requests upon all batch data.​
 
-- **Bounded Staleness**​
+- **Bounded**​ (default)
 
     The GuranteeTs is set to a time point earlier than the latest timestamp to make QueryNodes to perform searches with a tolerance of certain data loss.​
 
@@ -52,9 +52,9 @@ Milvus uses Bounded Staleness as the default consistency level. If the Guarantee
 
 You can set different consistency levels when you create a collection as well as perform searches and queries.​
 
-###  Set Consistency Level upon Creating Collection​
+### Set Consistency Level upon Creating Collection​
 
-When creating a collection, you can set the consistency level for the searches and queries within the collection. The following code example sets the consistency level to **Strong**.​
+When creating a collection, you can set the consistency level for the searches and queries within the collection. The following code example sets the consistency level to **Bounded**.​
 
 <div class="multipleCode">
     <a href="#python">python</a>
@@ -66,8 +66,7 @@ When creating a collection, you can set the consistency level for the searches a
 client.create_collection(​
     collection_name="my_collection",​
     schema=schema,​
-    # highlight-next​
-    consistency_level="Strong",​
+    consistency_level="Bounded",​ # Defaults to Bounded if not specified​
 )​
 
 ```
@@ -76,8 +75,7 @@ client.create_collection(​
 CreateCollectionReq createCollectionReq = CreateCollectionReq.builder()​
         .collectionName("my_collection")​
         .collectionSchema(schema)​
-        // highlight-next​
-        .consistencyLevel(ConsistencyLevel.STRONG)​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
         .build();​
 client.createCollection(createCollectionReq);​
 
@@ -112,7 +110,7 @@ export schema='{​
     }'​
 ​
 export params='{​
-    "consistencyLevel": "Strong"​
+    "consistencyLevel": "Bounded"​
 }'​
 ​
 curl --request POST \​

@@ -5,7 +5,7 @@ related_key: full, text, search
 summary: Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranking the results based on relevance.
 ---
 
-# Full Text Search​(BM25)
+# Full Text Search ​(BM25)
 
 Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranks the results based on relevance. This feature overcomes the limitations of semantic search, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.​
 
@@ -178,7 +178,7 @@ bm25_function = Function(​
     name="text_bm25_emb", # Function name​
     input_field_names=["text"], # Name of the VARCHAR field containing raw text data​
     output_field_names=["sparse"], # Name of the SPARSE_FLOAT_VECTOR field reserved to store generated embeddings​
-    function_type=FunctionType.BM25,​
+    function_type=FunctionType.BM25,​ # Set to `BM25`
 )​
 ​
 schema.add_function(bm25_function)​
@@ -279,7 +279,7 @@ For collections with multiple `VARCHAR` fields requiring text-to-sparse-vector c
 
 ### Configure the index
 
-After defining the schema with necessary fields and the built-in function, set up the index for your collection. To simplify this process, use `AUTOINDEX` as the `index_type`, an option that allows Milvus to choose and configure the most suitable index type based on the structure of your data.​
+After defining the schema with necessary fields and the built-in function, set up the index for your collection. The example below creates a `SPARSE_INVERTED_INDEX` with the `BM25` metric type.
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -291,11 +291,13 @@ After defining the schema with necessary fields and the built-in function, set u
 ```python
 index_params = client.prepare_index_params()​
 ​
-index_params.add_index(​
-    field_name="sparse",​
-    index_type="AUTOINDEX", ​
-    metric_type="BM25"​
-)​
+index_params.add_index(
+    field_name="sparse",
+    index_name="sparse_inverted_index",
+    index_type="SPARSE_INVERTED_INDEX", # Inverted index type for sparse vectors
+    metric_type="BM25",
+    params={"inverted_index_algo": "DAAT_MAXSCORE"}, # Algorithm for building and querying the index. Valid values: DAAT_MAXSCORE, DAAT_WAND, TAAT_NAIVE.
+)
 
 ```
 
@@ -315,7 +317,10 @@ const index_params = [
   {
     field_name: "sparse",
     metric_type: "BM25",
-    index_type: "AUTOINDEX",
+    index_type: "SPARSE_INVERTED_INDEX",
+    params: {
+      inverted_index_algo: 'DAAT_MAXSCORE',
+    },
   },
 ];
 ```
@@ -325,7 +330,8 @@ export indexParams='[
         {
             "fieldName": "sparse",
             "metricType": "BM25",
-            "indexType": "AUTOINDEX"
+            "indexType": "SPARSE_INVERTED_INDEX",
+            "params":{"inverted_index_algo": "DAAT_MAXSCORE"}
         }
     ]'
 ```
@@ -340,7 +346,7 @@ export indexParams='[
 
 </td></tr><tr><td data-block-token="Wn1rdzso5o8AmqxqxiqccBpCnD4" colspan="1" rowspan="1"><p data-block-token="WLDrdOzSXoiKEOxoDREctDounRf"><code>index_type</code>​</p>
 
-</td><td data-block-token="I9TpdLWlXozM3Hx2Z9mcWvDHnNc" colspan="1" rowspan="1"><p data-block-token="Q3cgdK7OTo3kzXxQ1Y2cSarZned">The type of the index to create. <code>AUTOINDEX</code> allows Milvus to automatically optimize index settings. If you need more control over your index settings, you can choose from various index types available for sparse vectors in Milvus. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.​</p>
+</td><td data-block-token="I9TpdLWlXozM3Hx2Z9mcWvDHnNc" colspan="1" rowspan="1"><p data-block-token="Q3cgdK7OTo3kzXxQ1Y2cSarZned">The type of the index to create. <code>SPARSE_INVERTED_INDEX</code> is the recommended index type for sparse vectors. For more information, refer to <a href="https://milvus.io/docs/sparse_vector.md">Sparse Vector</a>.​</p>
 
 </td></tr><tr><td data-block-token="KJfgdQmD1odMgdxkG6uczBYknQh" colspan="1" rowspan="1"><p data-block-token="XVCsdz9Ulo93A2xavPtcF9Bvnec"><code>metric_type</code>​</p>
 
@@ -480,7 +486,7 @@ Once you've inserted data into your collection, you can perform full text search
 
 ```python
 search_params = {​
-    'params': {'drop_ratio_search': 0.2},​
+    'params': {'drop_ratio_search': 0.2},​ # Proportion of small vector values to ignore during the search
 }​
 ​
 client.search(​
@@ -499,7 +505,7 @@ import io.milvus.v2.service.vector.request.data.EmbeddedText;
 import io.milvus.v2.service.vector.response.SearchResp;
 
 Map<String,Object> searchParams = new HashMap<>();
-searchParams.put("drop_ratio_search", 0.2);
+searchParams.put("drop_ratio_search", 0.2); // Proportion of small vector values to ignore during the search
 SearchResp searchResp = client.search(SearchReq.builder()
         .collectionName("demo")
         .data(Collections.singletonList(new EmbeddedText("whats the focus of information retrieval?")))
@@ -516,7 +522,7 @@ await client.search(
     data: ['whats the focus of information retrieval?'],
     anns_field: 'sparse',
     limit: 3,
-    params: {'drop_ratio_search': 0.2},
+    params: {'drop_ratio_search': 0.2}, // Proportion of small vector values to ignore during the search
 )
 ```
 
@@ -537,7 +543,7 @@ curl --request POST \
     ],
     "searchParams":{
         "params":{
-            "drop_ratio_search":0.2
+            "drop_ratio_search":0.2 # Proportion of small vector values to ignore during the search
         }
     }
 }'

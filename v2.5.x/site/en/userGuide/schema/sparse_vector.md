@@ -232,7 +232,7 @@ index_params.add_index(
     index_name="sparse_inverted_index",
     index_type="SPARSE_INVERTED_INDEX",
     metric_type="IP",
-    params={"inverted_index_algo": "DAAT_MAXSCORE"},
+    params={"inverted_index_algo": "DAAT_MAXSCORE"}, # Algorithm used for building and querying the index
 )
 
 ```
@@ -243,7 +243,7 @@ import java.util.*;
 
 List<IndexParam> indexes = new ArrayList<>();
 Map<String,Object> extraParams = new HashMap<>();
-extraParams.put("inverted_index_algo": "DAAT_MAXSCORE");
+extraParams.put("inverted_index_algo": "DAAT_MAXSCORE"); // Algorithm used for building and querying the index
 indexes.add(IndexParam.builder()
         .fieldName("sparse_vector")
         .indexName("sparse_inverted_index")
@@ -261,7 +261,7 @@ const indexParams = await client.createIndex({
     metric_type: MetricType.IP,
     index_type: IndexType.SPARSE_INVERTED_INDEX,
     params: {
-      inverted_index_algo: 'DAAT_MAXSCORE',
+      inverted_index_algo: 'DAAT_MAXSCORE', // Algorithm used for building and querying the index
     },
 });
 
@@ -274,7 +274,7 @@ export indexParams='[
             "metricType": "IP",
             "indexName": "sparse_inverted_index",
             "indexType": "SPARSE_INVERTED_INDEX",
-            "params":{"inverted_index_algo": "DAAT_MAXSCORE"}
+            "params":{"inverted_index_algo": "DAAT_MAXSCORE"} # Algorithm used for building and querying the index
         }
     ]'
 
@@ -474,7 +474,7 @@ To perform similarity search using sparse vectors, prepare the query vector and 
 ```python
 # Prepare search parameters​
 search_params = {​
-    "params": {"drop_ratio_search": 0.2},  # Additional optional search parameters​
+    "params": {"drop_ratio_search": 0.2},  # Proportion of small vector values to ignore during the search
 }​
 ​
 # Prepare the query vector​
@@ -515,7 +515,7 @@ import io.milvus.v2.service.vector.request.data.SparseFloatVec;​
 import io.milvus.v2.service.vector.response.SearchResp;​
 ​
 Map<String,Object> searchParams = new HashMap<>();​
-searchParams.put("drop_ratio_search", 0.2);​
+searchParams.put("drop_ratio_search", 0.2);​ // Proportion of small vector values to ignore during the search
 ​
 SortedMap<Long, Float> sparse = new TreeMap<>();​
 sparse.put(10L, 0.1f);​
@@ -567,7 +567,7 @@ curl --request POST \​
     "annsField": "sparse_vector",​
     "limit": 3,​
     "searchParams":{​
-        "params":{"drop_ratio_search": 0.2}​
+        "params":{"drop_ratio_search": 0.2}​ # Proportion of small vector values to ignore during the search
     },​
     "outputFields": ["pk"]​
 }'​

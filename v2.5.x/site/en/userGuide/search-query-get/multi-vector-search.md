@@ -35,9 +35,9 @@ The main workflow for conducting a Hybrid Search is as follows:​
 
 1. Generate dense vectors through embedding models like [BERT](https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search#A-Quick-Recap-of-BERT) and [Transformers](https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI).​
 
-2. Generate sparse vectors through embedding models like [BM25](https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus), [BGE-M3](https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#BGE-M3), [SPLADE](https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#SPLADE), etc.​
+2. Generate sparse vectors through embedding models like [BM25](https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus), [BGE-M3](https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#BGE-M3), [SPLADE](https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#SPLADE), etc.​ In Milvus, you can use the Function to generate sparse vectors.​ For more information, refer to [Full Text Search](full-text-search.md).
 
-3. Create a collection in Zilliz and define the collection schema which includes both dense and sparse vector fields.​
+3. Create a collection and define the collection schema which includes both dense and sparse vector fields.​
 
 4. Insert sparse-dense vectors into the collection just created in the previous step.​
 
@@ -69,7 +69,7 @@ The following example defines a collection schema, where `dense` and `sparse` ar
 
 - `dense`: This field is used to store the dense vectors of the texts. The data type of this field is FLOAT_VECTOR, with a vector dimension of 768.​
 
-- `sparse`: This field is used to store the sparse vectors of the texts. The data type of this field is SPARSE_FLOAT_VECTOR.​
+- `sparse`: This field is used to store the sparse vectors of the texts. The data type of this field is SPARSE_FLOAT_VECTOR.​ In this example, we use the Function to generate sparse vectors.​
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -97,6 +97,7 @@ schema = MilvusClient.create_schema(​
 # Add fields to schema​
 schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)​
 schema.add_field(field_name="text", datatype=DataType.VARCHAR, max_length=1000)​
+# Define a sparse vector field to generate spare vectors with BM25
 schema.add_field(field_name="sparse", datatype=DataType.SPARSE_FLOAT_VECTOR)​
 schema.add_field(field_name="dense", datatype=DataType.FLOAT_VECTOR, dim=5)​
 
@@ -215,6 +216,92 @@ export schema='{​
 
 During sparse vector searches, you can simplify the process of generating sparse embedding vectors by leveraging Full Text Search capabilities. For more details, see [​Full Text Search](full-text-search.md).​
 
+#### Define function to generate sparse vectors​
+
+To generate sparse vectors, you can use the Function feature in Milvus. The following example defines a Function to generate sparse vectors using the BM25 algorithm. For more information, refer to [Full Text Search](full-text-search.md).​
+
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+    <a href="#curl">cURL</a>
+</div>
+
+```python
+# Define function to generate sparse vectors
+
+bm25_function = Function(
+    name="text_bm25_emb", # Function name
+    input_field_names=["text"], # Name of the VARCHAR field containing raw text data
+    output_field_names=["sparse"], # Name of the SPARSE_FLOAT_VECTOR field reserved to store generated embeddings
+    function_type=FunctionType.BM25,
+)
+
+schema.add_function(bm25_function)
+```
+
+```java
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
+
+import java.util.*;
+
+schema.addFunction(Function.builder()
+        .functionType(FunctionType.BM25)
+        .name("text_bm25_emb")
+        .inputFieldNames(Collections.singletonList("text"))
+        .outputFieldNames(Collections.singletonList("sparse"))
+        .build());
+```
+
+```javascript
+const functions = [
+    {
+      name: 'text_bm25_emb',
+      description: 'bm25 function',
+      type: FunctionType.BM25,
+      input_field_names: ['text'],
+      output_field_names: ['sparse'],
+      params: {},
+    },
+]；
+```
+
+```curl
+export schema='{
+        "autoId": true,
+        "enabledDynamicField": false,
+        "fields": [
+            {
+                "fieldName": "id",
+                "dataType": "Int64",
+                "isPrimary": true
+            },
+            {
+                "fieldName": "text",
+                "dataType": "VarChar",
+                "elementTypeParams": {
+                    "max_length": 1000,
+                    "enable_analyzer": true
+                }
+            },
+            {
+                "fieldName": "sparse",
+                "dataType": "SparseFloatVector"
+            }
+        ],
+        "functions": [
+            {
+                "name": "text_bm25_emb",
+                "type": "BM25",
+                "inputFieldNames": ["text"],
+                "outputFieldNames": ["sparse"],
+                "params": {}
+            }
+        ]
+    }'
+```
+
 #### Create index​
 
 After defining the collection schema, it is necessary to set up the vector indexes and the similarity metrics. In this example, an IVF_FLAT index is created for the dense vector field `dense`, and a SPARSE_INVERTED_INDEX is created for the sparse vector field `sparse`. To learn about the types of indexes supported, see [​Index Explained](https://milvus.io/docs/index.md?tab=floating).​
@@ -241,14 +328,13 @@ index_params.add_index(​
     params={"nlist": 128},​
 )​
 ​
-index_params.add_index(​
-    field_name="sparse",​
-    index_name="sparse_index",​
-    index_type="SPARSE_INVERTED_INDEX",  # Index type for sparse vectors​
-    metric_type="IP",  # Currently, only IP (Inner Product) is supported for sparse vectors​
-    params={"inverted_index_algo": "DAAT_MAXSCORE"},  # The ratio of small vector values to be dropped during indexing​
-)​
-
+index_params.add_index(
+    field_name="sparse",
+    index_name="sparse_index",
+    index_type="SPARSE_INVERTED_INDEX",  # Index type for sparse vectors
+    metric_type="BM25",  # Set to `BM25` when using function to generate sparse vectors
+    params={"inverted_index_algo": "DAAT_MAXSCORE"},  # The ratio of small vector values to be dropped during indexing
+)
 ```
 
 ```java
@@ -266,12 +352,12 @@ IndexParam indexParamForDenseField = IndexParam.builder()​
         .build();​
 ​
 Map<String, Object> sparseParams = new HashMap<>();​
-sparseParams.put("inverted_index_algo": "DAAT_MAXSCORE");​
+sparseParams.put("inverted_index_algo": "DAAT_MAXSCORE");​ // Algorithm used for building and querying the index
 IndexParam indexParamForSparseField = IndexParam.builder()​
         .fieldName("sparse")​
         .indexName("sparse_index")​
         .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)​
-        .metricType(IndexParam.MetricType.IP)​
+        .metricType(IndexParam.MetricType.BM25)​
         .extraParams(sparseParams)​
         .build();​
 ​
@@ -289,7 +375,7 @@ const index_params = [{​
 },{​
     field_name: "sparse",​
     index_type: "SPARSE_INVERTED_INDEX",​
-    metric_type: "IP"​
+    metric_type: "BM25"​
 }]​
 
 ```
@@ -305,7 +391,7 @@ export indexParams='[​
         },​
         {​
             "fieldName": "sparse",​
-            "metricType": "IP",​
+            "metricType": "BM25",​
             "indexName": "sparse_index",​
             "indexType": "SPARSE_INVERTED_INDEX"​
         }​
@@ -384,10 +470,17 @@ Insert the sparse-dense vectors into the the collection `demo`.​
 ```python
 from pymilvus import MilvusClient​
 ​
-data=[​
-    {"id": 0, "text": "Artificial intelligence was founded as an academic discipline in 1956.", "sparse":{9637: 0.30856525997853057, 4399: 0.19771651149001523, ...}, "dense": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...]},​
-    {"id": 1, "text": "Alan Turing was the first person to conduct substantial research in AI.", "sparse":{6959: 0.31025067641541815, 1729: 0.8265339135915016, ...}, "dense": [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, ...]},​
-    {"id": 2, "text": "Born in Maida Vale, London, Turing was raised in southern England.", "sparse":{1220: 0.15303302147479103, 7335: 0.9436728846033107, ...}, "dense": [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, ...]}​]
+docs = [
+    "Artificial intelligence was founded as an academic discipline in 1956.",
+    "Alan Turing was the first person to conduct substantial research in AI.",
+    "Born in Maida Vale, London, Turing was raised in southern England.",
+]
+
+data = [
+    {"id": 1, "text": docs[0], "dense": [2.7242085933685303, 6.021071434020996, 0.4754035174846649, 9.358858108520508, 5.173221111297607]},
+    {"id": 2, "text": docs[1], "dense": [8.584294319152832, 2.7640628814697266, 9.558855056762695, 2.584272861480713, 4.705013275146484]},
+    {"id": 3, "text": docs[2], "dense": [2.5525057315826416, 3.8815805912017822, 9.343480110168457, 7.888997554779053, 4.500918388366699]},
+]
 ​
 res = client.insert(​
     collection_name="hybrid_search_collection",​
@@ -403,23 +496,28 @@ import com.google.gson.JsonObject;​
 import io.milvus.v2.service.vector.request.InsertReq;​
 ​
 Gson gson = new Gson();​
-JsonObject row1 = new JsonObject();​
-row1.addProperty("id", 1);​
-row1.addProperty("text", "Artificial intelligence was founded as an academic discipline in 1956.");​
-row1.add("dense", gson.toJsonTree(dense1));​
-row1.add("sparse", gson.toJsonTree(sparse1));​
+float[] dense1 = {2.7242086f, 6.0210714f, 0.47540352f, 9.3588581f, 5.1732211f};
+float[] dense2 = {8.5842943f, 2.7640628f, 9.5588550f, 2.5842728f, 4.7050133f};
+float[] dense3 = {2.5525057f, 3.8815806f, 9.3434801f, 7.8889976f, 4.5009184f};
+String[] docs = {
+            "Artificial intelligence was founded as an academic discipline in 1956.",
+            "Alan Turing was the first person to conduct substantial research in AI.",
+            "Born in Maida Vale, London, Turing was raised in southern England."
+};
+JsonObject row1 = new JsonObject();
+row1.addProperty("id", 1);
+row1.addProperty("text", docs[0]);
+row1.add("dense", gson.toJsonTree(dense1));
 ​
-JsonObject row2 = new JsonObject();​
-row2.addProperty("id", 2);​
-row2.addProperty("text", "Alan Turing was the first person to conduct substantial research in AI.");​
-row2.add("dense", gson.toJsonTree(dense2));​
-row2.add("sparse", gson.toJsonTree(sparse2));​
+JsonObject row2 = new JsonObject();
+row2.addProperty("id", 2);
+row2.addProperty("text", docs[1]);
+row2.add("dense", gson.toJsonTree(dense2));
 ​
-JsonObject row3 = new JsonObject();​
-row3.addProperty("id", 3);​
-row3.addProperty("text", "Born in Maida Vale, London, Turing was raised in southern England.");​
-row3.add("dense", gson.toJsonTree(dense3));​
-row3.add("sparse", gson.toJsonTree(sparse3));​
+JsonObject row3 = new JsonObject();
+row3.addProperty("id", 3);
+row3.addProperty("text", docs[2]);
+row3.add("dense", gson.toJsonTree(dense3));
 ​
 List<JsonObject> data = Arrays.asList(row1, row2, row3);​
 InsertReq insertReq = InsertReq.builder()​
@@ -434,11 +532,29 @@ InsertResp insertResp = client.insert(insertReq);​
 ```javascript
 const { MilvusClient, DataType } = require("@zilliz/milvus2-sdk-node")​
 ​
-var data = [​
-    {id: 0, text: "Artificial intelligence was founded as an academic discipline in 1956.", sparse:[9637: 0.30856525997853057, 4399: 0.19771651149001523, ...] , dense: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]},​
-    {id: 1, text: "Alan Turing was the first person to conduct substantial research in AI.", sparse:[6959: 0.31025067641541815, 1729: 0.8265339135915016, ...] , dense: [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104]},​
-    {id: 2, text: "Born in Maida Vale, London, Turing was raised in southern England." , sparse:[1220: 0.15303302147479103, 7335: 0.9436728846033107, ...] , dense: [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592]}       ​
-]​
+const docs = [
+    "Artificial intelligence was founded as an academic discipline in 1956.",
+    "Alan Turing was the first person to conduct substantial research in AI.",
+    "Born in Maida Vale, London, Turing was raised in southern England."
+];
+
+const data = [
+    {
+        id: 1,
+        text: docs[0],
+        dense: [2.7242085933685303, 6.021071434020996, 0.4754035174846649, 9.358858108520508, 5.173221111297607]
+    },
+    {
+        id: 2,
+        text: docs[1],
+        dense: [8.584294319152832, 2.7640628814697266, 9.558855056762695, 2.584272861480713, 4.705013275146484]
+    },
+    {
+        id: 3,
+        text: docs[2],
+        dense: [2.5525057315826416, 3.8815805912017822, 9.343480110168457, 7.888997554779053, 4.500918388366699]
+    }
+];
 ​
 var res = await client.insert({​
     collection_name: "hybrid_search_collection",​
@@ -453,11 +569,23 @@ curl --request POST \​
 --header "Authorization: Bearer ${TOKEN}" \​
 --header "Content-Type: application/json" \​
 -d '{​
-    "data": [​
-        {"id": 0, "text": "Artificial intelligence was founded as an academic discipline in 1956.", "sparse":{"9637": 0.30856525997853057, "4399": 0.19771651149001523}, "dense": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...]},​
-        {"id": 1, "text": "Alan Turing was the first person to conduct substantial research in AI.", "sparse":{"6959": 0.31025067641541815, "1729": 0.8265339135915016}, "dense": [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, ...]},​
-        {"id": 2, "text": "Born in Maida Vale, London, Turing was raised in southern England.", "sparse":{"1220": 0.15303302147479103, "7335": 0.9436728846033107}, "dense": [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, ...]}​
-    ],​
+    "data": [
+            {
+                "id": 1,
+                "text": "Artificial intelligence was founded as an academic discipline in 1956.",
+                "dense": [2.7242085933685303, 6.021071434020996, 0.4754035174846649, 9.358858108520508, 5.173221111297607]
+            },
+            {
+                "id": 2,
+                "text": "Alan Turing was the first person to conduct substantial research in AI.",
+                "dense": [8.584294319152832, 2.7640628814697266, 9.558855056762695, 2.584272861480713, 4.705013275146484]
+            },
+            {
+                "id": 3,
+                "text": "Born in Maida Vale, London, Turing was raised in southern England.",
+                "dense": [2.5525057315826416, 3.8815805912017822, 9.343480110168457, 7.888997554779053, 4.500918388366699]
+            }
+        ],​
     "collectionName": "hybrid_search_collection"​
 }'​
 
@@ -485,115 +613,133 @@ Suppose the query text "Who started AI research?" has already been converted int
 ```python
 from pymilvus import AnnSearchRequest​
 ​
-query_dense_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
-​
-search_param_1 = {​
-    "data": [query_dense_vector],​
-    "anns_field": "dense",​
-    "param": {​
-        "metric_type": "IP",​
-        "params": {"nprobe": 10}​
-    },​
-    "limit": 2​
-}​
-request_1 = AnnSearchRequest(**search_param_1)​
-​
-query_sparse_vector = {3573: 0.34701499565746674}, {5263: 0.2639375518635271}​
-search_param_2 = {​
-    "data": [query_sparse_vector],​
-    "anns_field": "sparse",​
-    "param": {​
-        "metric_type": "IP",​
-        "params": {}​
-    },​
-    "limit": 2​
-}​
-request_2 = AnnSearchRequest(**search_param_2)​
-​
-reqs = [request_1, request_2]​
+search_param_1 = {
+    "data": [[0.7425515055656433, 7.774101734161377, 0.7397570610046387, 2.429982900619507, 3.8253049850463867]],
+    "anns_field": "dense",
+    "param": {
+        "metric_type": "IP",
+        "params": {"nprobe": 10}
+    },
+    "limit": 2
+}
+request_1 = AnnSearchRequest(**search_param_1)
+
+search_param_2 = {
+    "data": ['Who started AI research'],
+    "anns_field": "sparse",
+    "param": {
+        "metric_type": "BM25",
+    },
+    "limit": 2
+}
+request_2 = AnnSearchRequest(**search_param_2)
+
+reqs = [request_1, request_2]
 ​
 
 ```
 
 ```java
-import io.milvus.v2.service.vector.request.AnnSearchReq;​
-import io.milvus.v2.service.vector.request.data.BaseVector;​
-import io.milvus.v2.service.vector.request.data.FloatVec;​
-import io.milvus.v2.service.vector.request.data.SparseFloatVec;​
-​
-float[] dense = new float[]{-0.0475336798f,  0.0521207601f,  0.0904406682f, ...};​
-SortedMap<Long, Float> sparse = new TreeMap<Long, Float>() {{​
-    put(3573L, 0.34701499f);​
-    put(5263L, 0.263937551f);​
-    ...​
-}};​
-​
-​
-List<BaseVector> queryDenseVectors = Collections.singletonList(new FloatVec(dense));​
-List<BaseVector> querySparseVectors = Collections.singletonList(new SparseFloatVec(sparse));​
-​
-List<AnnSearchReq> searchRequests = new ArrayList<>();​
-searchRequests.add(AnnSearchReq.builder()​
-        .vectorFieldName("dense")​
-        .vectors(queryDenseVectors)​
-        .metricType(IndexParam.MetricType.IP)​
-        .params("{\"nprobe\": 10}")​
-        .topK(2)​
-        .build());​
-searchRequests.add(AnnSearchReq.builder()​
-        .vectorFieldName("sparse")​
-        .vectors(querySparseVectors)​
-        .metricType(IndexParam.MetricType.IP)​
-        .params()​
-        .topK(2)​
-        .build());​
+import io.milvus.v2.service.vector.request.AnnSearchReq;
+import io.milvus.v2.service.vector.request.data.BaseVector;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.request.data.TextVec;
+import io.milvus.v2.service.index.IndexParam;
+
+import java.util.*;
+
+public class MilvusSearchRequest {
+    public static void main(String[] args) {
+        float[] denseQueryVector = {
+                0.7425515f, 7.7741017f, 0.73975706f, 2.4299829f, 3.825305f
+        };
+
+        String sparseQueryText = "Who started AI research";
+
+        List<BaseVector> queryDenseVectors = Collections.singletonList(new FloatVec(denseQueryVector));
+
+        List<BaseVector> querySparseVectors = Collections.singletonList(new TextVec(sparseQueryText));
+
+        List<AnnSearchReq> searchRequests = new ArrayList<>();
+
+        searchRequests.add(AnnSearchReq.builder()
+                .vectorFieldName("dense")  // Field Name
+                .vectors(queryDenseVectors) // Query Vector
+                .metricType(IndexParam.MetricType.IP) // Inner Product Metric
+                .params("{\"nprobe\": 10}") // Search Params
+                .topK(2) // Limit results to top 2
+                .build());
+
+        searchRequests.add(AnnSearchReq.builder()
+                .vectorFieldName("sparse") // Field Name
+                .vectors(querySparseVectors) // Query Text Vector
+                .metricType(IndexParam.MetricType.BM25) // BM25 Metric for sparse
+                .params("{}") // No additional parameters for BM25
+                .topK(2) // Limit results to top 2
+                .build());
+
+        System.out.println("Generated Search Requests:");
+        searchRequests.forEach(System.out::println);
+    }
+}
+
 
 ```
 
 ```javascript
-const search_param_1 = {​
-    "data": query_vector, ​
-    "anns_field": "dense", ​
-    "param": {​
-        "metric_type": "IP", 
-        "params": {"nprobe": 10}​
-    },​
-    "limit": 2 
-}​
-​
-const search_param_2 = {​
-    "data": query_sparse_vector, ​
-    "anns_field": "sparse", ​
-    "param": {​
-        "metric_type": "IP", 
-        "params": {}​
-    },​
-    "limit": 2 
-}​
+const search_param_1 = {
+    "data": [[0.7425515055656433, 7.774101734161377, 0.7397570610046387, 2.429982900619507, 3.8253049850463867]], 
+    "anns_field": "dense",
+    "param": {
+        "metric_type": "IP",
+        "params": { "nprobe": 10 } 
+    },
+    "limit": 2
+};
+
+const search_param_2 = {
+    "data": ["Who started AI research"], 
+    "anns_field": "sparse",
+    "param": {
+        "metric_type": "BM25",
+        "params": {} // BM25 does not require extra parameters
+    },
+    "limit": 2
+};
+
+// Combine both search parameters into a single request list
+const reqs = [search_param_1, search_param_2];
 
 ```
 
 ```curl
-export req='[​
-    {​
-        "data": [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592,....]],​
-        "annsField": "dense",​
-        "params": {​
-            "params": {​
-                "nprobe": 10​
-             }​
-        },​
-        "limit": 2​
-    },​
-    {​
-        "data": [{"3573": 0.34701499565746674}, {"5263": 0.2639375518635271}],​
-        "annsField": "sparse",​
-        "params": {​
-            "params": {}​
-        },​
-        "limit": 2​
-    }​
- ]'​
+export req='[
+    {
+        "data": [[0.7425515055656433, 7.774101734161377, 0.7397570610046387, 2.429982900619507, 3.8253049850463867]], 
+        "anns_field": "dense",
+        "param": {
+            "metric_type": "IP",
+            "params": {
+                "nprobe": 10
+            }
+        },
+        "limit": 2
+    },
+    {
+        "data": ["Who started AI research"],
+        "anns_field": "sparse",
+        "param": {
+            "metric_type": "BM25",
+            "params": {}
+        },
+        "limit": 2
+    }
+]'
+
+curl -X POST "http://your-milvus-server-address/v1/vector/search" \
+     -H "Content-Type: application/json" \
+     -d "$req"
+
 
 ```
 
