@@ -242,7 +242,7 @@ index_params.add_index(
     index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},
+    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>}, <span class="hljs-comment"># Algorithm used for building and querying the index</span>
 )
 
 <button class="copy-code-btn"></button></code></pre>
@@ -251,7 +251,7 @@ index_params.add_index(
 
 <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>); <span class="hljs-comment">// Algorithm used for building and querying the index</span>
 indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
         .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
         .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>)
@@ -267,7 +267,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     metric_type: MetricType.IP,
     index_type: IndexType.SPARSE_INVERTED_INDEX,
     <span class="hljs-keyword">params</span>: {
-      inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+      inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>, <span class="hljs-comment">// Algorithm used for building and querying the index</span>
     },
 });
 
@@ -278,7 +278,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
             &quot;metricType&quot;: &quot;IP&quot;,
             &quot;indexName&quot;: &quot;sparse_inverted_index&quot;,
             &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
-            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
+            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;} # Algorithm used for building and querying the index
         }
     ]&#x27;</span>
 
@@ -444,7 +444,7 @@ client.<span class="hljs-title function_">insert</span>({​
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters​</span>
 search_params = {​
-    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># Additional optional search parameters​</span>
+    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># Proportion of small vector values to ignore during the search</span>
 }​
 ​
 <span class="hljs-comment"># Prepare the query vector​</span>
@@ -478,7 +478,7 @@ query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0
 <span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">response</span>.<span class="hljs-property">SearchResp</span>;​
 ​
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>);​
+searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>);​ <span class="hljs-comment">// Proportion of small vector values to ignore during the search</span>
 ​
 <span class="hljs-title class_">SortedMap</span>&lt;<span class="hljs-title class_">Long</span>, <span class="hljs-title class_">Float</span>&gt; sparse = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();​
 sparse.<span class="hljs-title function_">put</span>(10L, <span class="hljs-number">0.</span>1f);​
@@ -526,7 +526,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
     &quot;annsField&quot;: &quot;sparse_vector&quot;,​
     &quot;limit&quot;: 3,​
     &quot;searchParams&quot;:{​
-        &quot;params&quot;:{&quot;drop_ratio_search&quot;: 0.2}​
+        &quot;params&quot;:{&quot;drop_ratio_search&quot;: 0.2}​ # Proportion of small vector values to ignore during the search
     },​
     &quot;outputFields&quot;: [&quot;pk&quot;]​
 }&#x27;</span>​

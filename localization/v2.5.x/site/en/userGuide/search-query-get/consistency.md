@@ -64,7 +64,7 @@ title: Consistency
 <p>The latest timestamp is used as the GuaranteeTs, and QueryNodes have to wait until the ServiceTime meets the GuaranteeTs before executing Search requests.​</p></li>
 <li><p><strong>Eventual</strong>​</p>
 <p>The GuaranteeTs is set to an extremely small value, such as 1, to avoid consistency checks so that QueryNodes can immediately execute Search requests upon all batch data.​</p></li>
-<li><p><strong>Bounded Staleness</strong>​</p>
+<li><p><strong>Bounded</strong>​ (default)</p>
 <p>The GuranteeTs is set to a time point earlier than the latest timestamp to make QueryNodes to perform searches with a tolerance of certain data loss.​</p></li>
 <li><p><strong>Session</strong>​</p>
 <p>The latest time point at which the client inserts data is used as the GuaranteeTs so that QueryNodes can perform searches upon all the data inserted by the client.​</p></li>
@@ -86,7 +86,7 @@ title: Consistency
         ></path>
       </svg>
     </button></h2><p>You can set different consistency levels when you create a collection as well as perform searches and queries.​</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Set Consistency Level upon Creating Collection​</h3><p>When creating a collection, you can set the consistency level for the searches and queries within the collection. The following code example sets the consistency level to <strong>Strong</strong>.​</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Set Consistency Level upon Creating Collection​</h3><p>When creating a collection, you can set the consistency level for the searches and queries within the collection. The following code example sets the consistency level to <strong>Bounded</strong>.​</p>
 <div class="multipleCode">
     <a href="#python">python</a>
     <a href="#java">java</a>
@@ -95,16 +95,14 @@ title: Consistency
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
-    <span class="hljs-comment"># highlight-next​</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,​
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​ <span class="hljs-comment"># Defaults to Bounded if not specified​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)​
         .collectionSchema(schema)​
-        <span class="hljs-comment">// highlight-next​</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
         .build();​
 client.createCollection(createCollectionReq);​
 
@@ -137,7 +135,7 @@ client.createCollection(createCollectionReq);​
     }&#x27;</span>​
 ​
 <span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{​
-    &quot;consistencyLevel&quot;: &quot;Strong&quot;​
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;​
 }&#x27;</span>​
 ​
 curl --request POST \​
