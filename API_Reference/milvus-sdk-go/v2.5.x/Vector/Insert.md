@@ -91,29 +91,29 @@ func NewColumnBasedInsertOption(collName string, columns ...column.Column) *colu
 
 You can chain the following method to get an implementation of the `columnBasedDataOption` struct.
 
-- [WithColumns](Insert.md#withcolumns)
+- [WithColumns](Insert.md#WithColumns)
 
-- [WithBoolColumn](Insert.md#withboolcolumn)
+- [WithBoolColumn](Insert.md#WithBoolColumn)
 
-- [WithInt8Column](Insert.md#withint8column)
+- [WithInt8Column](Insert.md#WithInt8Column)
 
-- [WithInt16Column](Insert.md#withint16column)
+- [WithInt16Column](Insert.md#WithInt16Column)
 
-- [WithInt32Column](Insert.md#withint32column)
+- [WithInt32Column](Insert.md#WithInt32Column)
 
-- [WithInt64Column](Insert.md#withint64column)
+- [WithInt64Column](Insert.md#WithInt64Column)
 
-- [WithVarcharColumn](Insert.md#withvarcharcolumn)
+- [WithVarcharColumn](Insert.md#WithVarcharColumn)
 
-- [WithFloatVectorColumn](Insert.md#withfloatvectorcolumn)
+- [WithFloatVectorColumn](Insert.md#WithFloatVectorColumn)
 
-- [WithFloat16VectorColumn](Insert.md#withfloat16vectorcolumn)
+- [WithFloat16VectorColumn](Insert.md#WithFloat16VectorColumn)
 
-- [WithBFloat16VectorColumn](Insert.md#withbfloat16vectorcolumn)
+- [WithBFloat16VectorColumn](Insert.md#WithBFloat16VectorColumn)
 
-- [WithBinaryVectorColumn](Insert.md#withbinaryvectorcolumn)
+- [WithBinaryVectorColumn](Insert.md#WithBinaryVectorColumn)
 
-- [WithPartition](Insert.md#withpartition)
+- [WithPartition](Insert.md#WithPartition)
 
 ### WithColumns
 
@@ -441,51 +441,51 @@ func (opt *columnBasedDataOption) WithPartition(partitionName string) *columnBas
 
 This is an interface type. The following struct types implement this interface type. 
 
-- [column.ColumnBFloat16Vector](Insert.md#columncolumnbfloat16vector)
+- [column.ColumnBFloat16Vector](Insert.md#column.ColumnBFloat16Vector)
 
-- [column.ColumnBinaryVector](Insert.md#columncolumnbinaryvector)
+- [column.ColumnBinaryVector](Insert.md#column.ColumnBinaryVector)
 
-- [column.ColumnBool](Insert.md#columncolumnbool)
+- [column.ColumnBool](Insert.md#column.ColumnBool)
 
-- [column.ColumnBoolArray](Insert.md#columncolumnboolarray)
+- [column.ColumnBoolArray](Insert.md#column.ColumnBoolArray)
 
-- [column.ColumnDouble](Insert.md#columncolumndouble)
+- [column.ColumnDouble](Insert.md#column.ColumnDouble)
 
-- [column.ColumnDoubleArray](Insert.md#columncolumndoublearray)
+- [column.ColumnDoubleArray](Insert.md#column.ColumnDoubleArray)
 
-- [column.ColumnDynamic](Insert.md#columncolumndynamic)
+- [column.ColumnDynamic](Insert.md#column.ColumnDynamic)
 
-- [column.ColumnFloat](Insert.md#columncolumnfloat)
+- [column.ColumnFloat](Insert.md#column.ColumnFloat)
 
-- [column.ColumnFloat16Vector](Insert.md#columncolumnfloat16vector)
+- [column.ColumnFloat16Vector](Insert.md#column.ColumnFloat16Vector)
 
-- [column.ColumnFloatArray](Insert.md#columncolumnfloatarray)
+- [column.ColumnFloatArray](Insert.md#column.ColumnFloatArray)
 
-- [column.ColumnFloatVector](Insert.md#columncolumnfloatvector)
+- [column.ColumnFloatVector](Insert.md#column.ColumnFloatVector)
 
-- [column.ColumnInt16](Insert.md#columncolumnint16)
+- [column.ColumnInt16](Insert.md#column.ColumnInt16)
 
-- [column.ColumnInt16Array](Insert.md#columncolumnint16array)
+- [column.ColumnInt16Array](Insert.md#column.ColumnInt16Array)
 
-- [column.ColumnInt32](Insert.md#columncolumnint32)
+- [column.ColumnInt32](Insert.md#column.ColumnInt32)
 
-- [column.ColumnInt32Array](Insert.md#columncolumnint32array)
+- [column.ColumnInt32Array](Insert.md#column.ColumnInt32Array)
 
-- [column.ColumnInt64](Insert.md#columncolumnint64)
+- [column.ColumnInt64](Insert.md#column.ColumnInt64)
 
-- [column.ColumnInt64Array](Insert.md#columncolumnint64array)
+- [column.ColumnInt64Array](Insert.md#column.ColumnInt64Array)
 
-- [column.ColumnInt8](Insert.md#columncolumnint8)
+- [column.ColumnInt8](Insert.md#column.ColumnInt8)
 
-- [column.ColumnInt8Array](Insert.md#columncolumnint8array)
+- [column.ColumnInt8Array](Insert.md#column.ColumnInt8Array)
 
-- [column.ColumnJSONBytes](Insert.md#columncolumnjsonbytes)
+- [column.ColumnJSONBytes](Insert.md#column.ColumnJSONBytes)
 
-- [column.ColumnSparseFloatVector](Insert.md#columncolumnsparsefloatvector)
+- [column.ColumnSparseFloatVector](Insert.md#column.ColumnSparseFloatVector)
 
-- [column.ColumnVarChar](Insert.md#columncolumnvarchar)
+- [column.ColumnVarChar](Insert.md#column.ColumnVarChar)
 
-- [column.ColumnVarCharArray](Insert.md#columncolumnvarchararray)
+- [column.ColumnVarCharArray](Insert.md#column.ColumnVarCharArray)
 
 ## column.ColumnBFloat16Vector
 
@@ -1294,7 +1294,7 @@ func NewNullableColumnCreator[col interface {
 
 You can chain the following methods to get a nullable column.
 
-- [New()](Insert.md#new)
+- [New()](Insert.md#New())
 
 ### New
 

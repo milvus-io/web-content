@@ -78,11 +78,11 @@ type Collection struct {
 
 ## entity.Schema
 
-For details about this struct type, refer to [entity.Schema](CreateCollection.md#entityschema).
+For details about this struct type, refer to [entity.Schema](CreateCollection.md#entity.Schema).
 
 ## entity.ConsistencyLevel
 
-For details about this enumeration, refer to [entity.ConsistencyLevel](CreateCollection.md#entityconsistencylevel).
+For details about this enumeration, refer to [entity.ConsistencyLevel](CreateCollection.md#entity.ConsistencyLevel).
 
 ## Return
 
