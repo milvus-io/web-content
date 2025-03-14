@@ -23,7 +23,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://docs.agno.com/introduction">Agno</a>(ранее известная как Phidata) - это легкая библиотека для создания мультимодальных агентов. Она позволяет создавать мультимодальные агенты, которые могут понимать текст, изображения, аудио и видео, а также использовать различные инструменты и источники знаний для выполнения сложных задач. Agno поддерживает оркестровку мультиагентов, позволяя командам агентов сотрудничать и совместно решать проблемы. Кроме того, Agno предоставляет красивый пользовательский интерфейс для взаимодействия с агентами.</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/integrate_with_phidata.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/integrate_with_phidata.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p><a href="https://docs.agno.com/introduction">Agno</a>(ранее известная как Phidata) - это легкая библиотека для создания мультимодальных агентов. Она позволяет создавать мультимодальные агенты, которые могут понимать текст, изображения, аудио и видео, а также использовать различные инструменты и источники знаний для выполнения сложных задач. Agno поддерживает оркестровку мультиагентов, позволяя командам агентов сотрудничать и совместно решать проблемы. Кроме того, Agno предоставляет красивый пользовательский интерфейс для взаимодействия с агентами.</p>
 <p>Векторная база данных Milvus позволяет эффективно хранить и извлекать информацию в виде вкраплений. С помощью Milvus и Agno вы можете легко интегрировать свои знания в рабочие процессы агентов. Этот документ представляет собой базовое руководство по использованию интеграции Milvus с Agno.</p>
 <h2 id="Preparation" class="common-anchor-header">Подготовка<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"

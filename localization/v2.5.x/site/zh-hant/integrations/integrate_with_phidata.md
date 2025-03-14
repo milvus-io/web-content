@@ -20,7 +20,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://docs.agno.com/introduction">Agno</a>(前身為 Phidata) 是用於建立多模態代理的輕量級函式庫。它允許您建立能理解文字、圖像、音訊和視訊的多模態代理，並利用各種工具和知識來源來完成複雜的任務。Agno 支援多代理協調，讓代理團隊能夠協同合作，共同解決問題。它也提供了美觀的 Agent UI 用來與您的代理進行互動。</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/integrate_with_phidata.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/integrate_with_phidata.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p><a href="https://docs.agno.com/introduction">Agno</a>(前身為 Phidata) 是用於建立多模態代理的輕量級函式庫。它允許您建立能理解文字、圖像、音訊和視訊的多模態代理，並利用各種工具和知識來源來完成複雜的任務。Agno 支援多代理協調，讓代理團隊能夠協同合作，共同解決問題。它也提供了美觀的 Agent UI 用來與您的代理進行互動。</p>
 <p>Milvus 向量資料庫可有效儲存及檢索嵌入的資訊。有了 Milvus 和 Agno，您可以輕鬆地將您的知識整合到您的 Agent 工作流程中。本文件是如何使用 Milvus 與 Agno 整合的基本指南。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"

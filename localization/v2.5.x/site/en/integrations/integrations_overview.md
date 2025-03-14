@@ -82,5 +82,8 @@ title: Integrations Overview
 <tr><td><a href="/docs/build_RAG_with_milvus_and_firecrawl.md">Building RAG with Milvus and Firecrawl</a></td><td>Data Sources</td><td>Milvus, Firecrawl</td></tr>
 <tr><td><a href="/docs/llama_stack_with_milvus.md">Build RAG with Llama Stack with Milvus</a></td><td>Orchestration</td><td>Milvus, Llama Stack</td></tr>
 <tr><td><a href="/docs/llamaindex_milvus_async.md">RAG with Milvus and LlamaIndex Async API</a></td><td>Ochestration</td><td>Milvus, LlamaIndex</td></tr>
+<tr><td><a href="/docs/integration_with_mindsdb.md">Integrate Milvus with MindsDB</a></td><td>Knowledge Engineering</td><td>Milvus, MindsDB</td></tr>
+<tr><td><a href="/docs/milvus_and_mcp.md">MCP + Milvus: Connecting AI with Vector Databases</a></td><td>Agents</td><td>Milvus, MCP</td></tr>
+<tr><td><a href="/docs/openai_agents_milvus.md">Milvus Integration with OpenAI Agents: A Step-by-Step Guide</a></td><td>Agents</td><td>Milvus, OpenAI</td></tr>
 </tbody>
 </table>

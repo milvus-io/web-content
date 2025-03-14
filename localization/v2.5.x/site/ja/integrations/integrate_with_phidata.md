@@ -19,7 +19,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://docs.agno.com/introduction">Agno</a>（旧Phidata）は、マルチモーダルエージェントを構築するための軽量ライブラリです。テキスト、画像、音声、ビデオを理解し、様々なツールや知識ソースを活用して複雑なタスクを実行するマルチモーダルエージェントを作成することができます。Agnoは、マルチエージェントのオーケストレーションをサポートし、エージェントのチームが協力して問題を解決することを可能にします。また、エージェントと対話するための美しいエージェントUIを提供します。</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/integrate_with_phidata.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/integrate_with_phidata.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p><a href="https://docs.agno.com/introduction">Agno</a>（旧Phidata）は、マルチモーダルエージェントを構築するための軽量ライブラリです。テキスト、画像、音声、ビデオを理解し、様々なツールや知識ソースを活用して複雑なタスクを実行するマルチモーダルエージェントを作成することができます。Agnoは、マルチエージェントのオーケストレーションをサポートし、エージェントのチームが協力して問題を解決することを可能にします。また、エージェントと対話するための美しいエージェントUIを提供します。</p>
 <p>Milvusベクトルデータベースは、エンベッディングとして情報の効率的な保存と検索を可能にします。MilvusとAgnoを利用することで、お客様の知識をAgentのワークフローに簡単に統合することができます。このドキュメントは、MilvusとAgnoの統合の基本的な使い方を説明したものです。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,7 +46,7 @@ summary: >-
 <pre><code translate="no" class="language-python">$ pip install --upgrade agno pymilvus openai
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
+<p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があります（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 </div>
 <p>この例では、LLMとしてOpenAIを使います。環境変数として<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -78,7 +84,7 @@ vector_db = Milvus(
 <p>uriとtokenの設定方法は以下の通りです：</p>
 <ul>
 <li>小規模なデータやプロトタイピングのためにローカルのベクターデータベースが必要な場合、uriをローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利です。</li>
-<li>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合、トークンには"&lt;your_username&gt;:&lt;your_password&gt;"を使用します。</li>
+<li>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusの認証機能を有効にしている場合は、トークンに"&lt;your_username&gt;:&lt;your_password&gt;"を使用します。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>ご利用の場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI keyに</a>対応する<code translate="no">uri</code> 、<code translate="no">token</code> 。</li>
 </ul>
 </div>

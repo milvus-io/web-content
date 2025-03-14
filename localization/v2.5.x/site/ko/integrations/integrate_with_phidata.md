@@ -20,7 +20,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://docs.agno.com/introduction">Agno</a>(구 Phidata)는 멀티모달 에이전트를 구축하기 위한 경량 라이브러리입니다. 이를 통해 텍스트, 이미지, 오디오 및 비디오를 이해하고 다양한 도구와 지식 소스를 활용하여 복잡한 작업을 수행할 수 있는 멀티모달 에이전트를 만들 수 있습니다. Agno는 다중 에이전트 오케스트레이션을 지원하여 여러 에이전트 팀이 함께 협업하고 문제를 해결할 수 있도록 합니다. 또한 에이전트와의 상호 작용을 위한 멋진 에이전트 UI를 제공합니다.</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/integrate_with_phidata.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/integrate_with_phidata.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
+<p><a href="https://docs.agno.com/introduction">Agno</a>(구 Phidata)는 멀티모달 에이전트를 구축하기 위한 경량 라이브러리입니다. 이를 통해 텍스트, 이미지, 오디오 및 비디오를 이해하고 다양한 도구와 지식 소스를 활용하여 복잡한 작업을 수행할 수 있는 멀티모달 에이전트를 만들 수 있습니다. Agno는 다중 에이전트 오케스트레이션을 지원하여 여러 에이전트 팀이 함께 협업하고 문제를 해결할 수 있도록 합니다. 또한 에이전트와의 상호 작용을 위한 멋진 에이전트 UI를 제공합니다.</p>
 <p>Milvus 벡터 데이터베이스를 통해 정보를 임베딩으로 효율적으로 저장하고 검색할 수 있습니다. Milvus와 Agno를 사용하면 지식을 상담원 워크플로우에 쉽게 통합할 수 있습니다. 이 문서는 Milvus와 Agno의 통합을 사용하는 방법에 대한 기본 가이드입니다.</p>
 <h2 id="Preparation" class="common-anchor-header">준비 단계<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
