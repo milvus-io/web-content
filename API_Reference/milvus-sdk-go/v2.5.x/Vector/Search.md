@@ -72,15 +72,15 @@ func NewSearchOption(collectionName string, limit int, vectors []entity.Vector) 
 
 This is an interface. The following types implement this interface.
 
-- [entity.FloatVector](Search.md#entityfloatvector)
+- [entity.FloatVector](Search.md#entity.FloatVector)
 
-- [entity.Float16Vector](Search.md#entityfloat16vector)
+- [entity.Float16Vector](Search.md#entity.Float16Vector)
 
-- [entity.BFloat16Vector](Search.md#entitybfloat16vector)
+- [entity.BFloat16Vector](Search.md#entity.BFloat16Vector)
 
-- [entity.BinaryVector](Search.md#entitybinaryvector)
+- [entity.BinaryVector](Search.md#entity.BinaryVector)
 
-- [entity.Text](Search.md#entitytext)
+- [entity.Text](Search.md#entity.Text)
 
 ## entity.FloatVector
 

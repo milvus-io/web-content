@@ -79,7 +79,7 @@ type IndexDescription struct {
 
 ## index.Index
 
-This is an interface type. For details, refer to [index.Index](CreateIndex.md#indexindex).
+This is an interface type. For details, refer to [index.Index](CreateIndex.md#index.Index).
 
 ## index.IndexState
 

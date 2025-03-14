@@ -65,15 +65,15 @@ func NewCreateCollectionOption(name string, collectionSchema *entity.Schema) *cr
 
 You can chain the following methods to append more parameters to the `createCollectionOption` struct.
 
-- [WithShardNum](CreateCollection.md#withshardnum)
+- [WithShardNum](CreateCollection.md#WithShardNum)
 
-- [WithIndexOptions](CreateCollection.md#withindexoptions)
+- [WithIndexOptions](CreateCollection.md#WithIndexOptions)
 
-- [WithProperty](CreateCollection.md#withproperty)
+- [WithProperty](CreateCollection.md#WithProperty)
 
-- [WithConsistencyLevel](CreateCollection.md#withconsistencylevel)
+- [WithConsistencyLevel](CreateCollection.md#WithConsistencyLevel)
 
-- [WithIndexOptions](CreateCollection.md#withindexoptions)
+- [WithIndexOptions](CreateCollection.md#WithIndexOptions)
 
 ### SimpleCreateCollectionOptions
 
@@ -103,13 +103,13 @@ func SimpleCreateCollectionOptions(name string, dim int64) *createCollectionOpti
 
 You can chain the following methods to append more parameters to the `createCollectionOption` struct.
 
-- [WithAutoID](CreateCollection.md#withautoid)
+- [WithAutoID](CreateCollection.md#WithAutoID)
 
-- [WithDynamicSchema](CreateCollection.md#withdynamicschema)
+- [WithDynamicSchema](CreateCollection.md#WithDynamicSchema)
 
-- [WithVarcharPK](CreateCollection.md#withvarcharpk)
+- [WithVarcharPK](CreateCollection.md#WithVarcharPK)
 
-- [WithIndexOptions](CreateCollection.md#withindexoptions)
+- [WithIndexOptions](CreateCollection.md#WithIndexOptions)
 
 ### WithAutoID
 
@@ -271,17 +271,17 @@ You can use the `entity.NewSchema` method to get the concrete implementation of 
 
 This method creates an empty schema. You can chain the following methods to append corresponding parameters to the created schema.
 
-- [WithAutoID](CreateCollection.md#entitywithautoid)
+- [WithAutoID](CreateCollection.md#WithAutoID)
 
-- [WithDescription](CreateCollection.md#entitywithdescription)
+- [WithDescription](CreateCollection.md#WithDescription)
 
-- [WithDynamicFieldEnabled](CreateCollection.md#entitywithdynamicfieldenabled)
+- [WithDynamicFieldEnabled](CreateCollection.md#WithDynamicFieldEnabled)
 
-- [WithField](CreateCollection.md#entitywithfield)
+- [WithField](CreateCollection.md#WithField)
 
-- [WithFunction](CreateCollection.md#entitywithfunction)
+- [WithFunction](CreateCollection.md#WithFunction)
 
-- [WithName](CreateCollection.md#entitywithname)
+- [WithName](CreateCollection.md#WithName)
 
 ### entity.WithAutoID
 
@@ -417,49 +417,49 @@ You can use the `entity.NewField` method to get the concrete implementation of t
 
 This method creates an empty field schema. You can chain the following methods to append corresponding parameters to the created field schema.
 
-- [WithAnalyzerParams](CreateCollection.md#entitywithanalyzerparams)
+- [WithAnalyzerParams](CreateCollection.md#WithAnalyzerParams)
 
-- [WithDataType](CreateCollection.md#entitywithdatatype)
+- [WithDataType](CreateCollection.md#WithDataType)
 
-- [WithDefaultValueBool](CreateCollection.md#entitywithdefaultvaluebool)
+- [WithDefaultValueBool](CreateCollection.md#WithDefaultValueBool)
 
-- [WithDefaultValueDouble](CreateCollection.md#entitywithdefaultvaluedouble)
+- [WithDefaultValueDouble](CreateCollection.md#WithDefaultValueDouble)
 
-- [WithDefaultValueFloat](CreateCollection.md#entitywithdefaultvaluefloat)
+- [WithDefaultValueFloat](CreateCollection.md#WithDefaultValueFloat)
 
-- [WithDefaultValueInt](CreateCollection.md#entitywithdefaultvalueint)
+- [WithDefaultValueInt](CreateCollection.md#WithDefaultValueInt)
 
-- [WithDefaultValueLong](CreateCollection.md#entitywithdefaultvaluelong)
+- [WithDefaultValueLong](CreateCollection.md#WithDefaultValueLong)
 
-- [WithDefaultValueString](CreateCollection.md#entitywithdefaultvaluestring)
+- [WithDefaultValueString](CreateCollection.md#WithDefaultValueString)
 
-- [WithDescription](CreateCollection.md#entitywithdescription)
+- [WithDescription](CreateCollection.md#WithDescription)
 
-- [WithDim](CreateCollection.md#entitydim)
+- [WithDim](CreateCollection.md#WithDim)
 
-- [WithElementType](CreateCollection.md#entitywithelementtype)
+- [WithElementType](CreateCollection.md#WithElementType)
 
-- [WithEnableAnalyzer](CreateCollection.md#entitywithenableanalyzer)
+- [WithEnableAnalyzer](CreateCollection.md#WithEnableAnalyzer)
 
-- [WithIsAutoID](CreateCollection.md#entitywithisautoid)
+- [WithIsAutoID](CreateCollection.md#WithIsAutoID)
 
-- [WithIsClusteringKey](CreateCollection.md#entitywithisclusteringkey)
+- [WithIsClusteringKey](CreateCollection.md#WithIsClusteringKey)
 
-- [WithIsDynamic](CreateCollection.md#entitywithisdynamic)
+- [WithIsDynamic](CreateCollection.md#WithIsDynamic)
 
-- [WithIsPartitionKey](CreateCollection.md#entitywithispartitionkey)
+- [WithIsPartitionKey](CreateCollection.md#WithIsPartitionKey)
 
-- [WithIsPrimaryKey](CreateCollection.md#entitywithisprimarykey)
+- [WithIsPrimaryKey](CreateCollection.md#WithIsPrimaryKey)
 
-- [WithMaxCapacity](CreateCollection.md#entitywithmaxcapacity)
+- [WithMaxCapacity](CreateCollection.md#WithMaxCapacity)
 
-- [WithMaxLength](CreateCollection.md#entitywithmaxlength)
+- [WithMaxLength](CreateCollection.md#WithMaxLength)
 
-- [WithName](CreateCollection.md#entitywithname)
+- [WithName](CreateCollection.md#WithName)
 
-- [WithNullable](CreateCollection.md#entitywithnullable)
+- [WithNullable](CreateCollection.md#WithNullable)
 
-- [WithTypeParams](CreateCollection.md#entitywithtypeparams)
+- [WithTypeParams](CreateCollection.md#WithTypeParams)
 
 ### entity.WithAnalyzerParams
 
@@ -944,13 +944,13 @@ You can use the `entity.NewFunction` method to get the concrete implementation o
 
 This method creates an empty function. You can chain the following methods to append corresponding parameters to the created field schema.
 
-- [WithInputFields](CreateCollection.md#entitywithinputfields)
+- [WithInputFields](CreateCollection.md#WithInputFields)
 
-- [WithName](CreateCollection.md#entityname)
+- [WithName](CreateCollection.md#WithName)
 
-- [WithOutputFields](CreateCollection.md#entitywithoutputfields)
+- [WithOutputFields](CreateCollection.md#WithOutputFields)
 
-- [WithParam](CreateCollection.md#entitywithparam)
+- [WithParam](CreateCollection.md#WithParam)
 
 - WithType
 
