@@ -6,6 +6,8 @@ title: Integrate Milvus with MindsDB
 
 # MCP + Milvus: Connecting AI with Vector Databases
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0wAsrUxv8gM?si=BVyRqLJ2PuZIBF5c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## Introduction
 
 The **Model Context Protocol (MCP)** is an open protocol that enables AI applications, such as Claude and Cursor, to interact with external data sources and tools seamlessly. Whether you're building custom AI applications, integrating AI workflows, or enhancing chat interfaces, MCP provides a standardized way to connect large language models (LLMs) with relevant contextual data.
