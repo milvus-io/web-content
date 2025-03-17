@@ -34,7 +34,7 @@ title: Cohérence
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus est un système qui sépare le stockage et le calcul. Dans ce système, les <strong>DataNodes</strong> sont responsables de la persistance des données et les stockent finalement dans un système de stockage d'objets distribué tel que MinIO/S3. Les <strong>QueryNodes</strong> s'occupent des tâches de calcul telles que la recherche. Ces tâches impliquent le traitement de <strong>données par lots</strong> et de <strong>données en continu</strong>. En termes simples, les données par lots peuvent être considérées comme des données qui ont déjà été stockées dans un système de stockage d'objets, tandis que les données en continu font référence à des données qui n'ont pas encore été stockées dans un système de stockage d'objets. En raison de la latence du réseau, il arrive souvent que les QueryNodes ne détiennent pas les données en continu les plus récentes. Sans garanties supplémentaires, l'exécution d'une recherche directement sur des données en continu peut entraîner la perte de nombreux points de données non validés, ce qui affecte la précision des résultats de la recherche.</p>
+    </button></h2><p>Milvus est un système qui sépare le stockage et le calcul. Dans ce système, les <strong>DataNodes</strong> sont responsables de la persistance des données et les stockent finalement dans un système de stockage d'objets distribué tel que MinIO/S3. Les <strong>QueryNodes</strong> gèrent les tâches de calcul telles que la recherche. Ces tâches impliquent le traitement de <strong>données par lots</strong> et de <strong>données en continu</strong>. En termes simples, les données par lots peuvent être considérées comme des données qui ont déjà été stockées dans un système de stockage d'objets, tandis que les données en continu font référence à des données qui n'ont pas encore été stockées dans un système de stockage d'objets. En raison de la latence du réseau, il arrive souvent que les QueryNodes ne détiennent pas les données en continu les plus récentes. Sans garanties supplémentaires, l'exécution d'une recherche directement sur des données en continu peut entraîner la perte de nombreux points de données non validés, ce qui affecte la précision des résultats de la recherche.</p>
 <p>Milvus est un système qui sépare le stockage et le calcul. Dans ce système, les DataNodes sont responsables de la persistance des données et les stockent finalement dans un système de stockage d'objets distribués tel que MinIO/S3. Les QueryNodes gèrent les tâches de calcul telles que la recherche. Ces tâches impliquent le traitement de données par lots et de données en continu. En termes simples, les données par lots peuvent être considérées comme des données qui ont déjà été stockées dans le stockage d'objets, tandis que les données en continu font référence à des données qui n'ont pas encore été stockées dans le stockage d'objets. En raison de la latence du réseau, il arrive souvent que les QueryNodes ne détiennent pas les données en continu les plus récentes. En l'absence de mesures de protection supplémentaires, l'exécution d'une recherche directement sur des données en continu peut entraîner la perte de nombreux points de données non validés, ce qui affecte la précision des résultats de la recherche.</p>
 <p>
   
@@ -57,9 +57,9 @@ title: Cohérence
 <li><p><strong>Fort</strong></p>
 <p>L'horodatage le plus récent est utilisé comme T de garantie, et les nœuds de requête doivent attendre que l'heure de service soit conforme aux T de garantie avant d'exécuter les requêtes de recherche.</p></li>
 <li><p><strong>Eventuel</strong></p>
-<p>La GarantieTs est fixée à une valeur extrêmement faible, telle que 1, afin d'éviter les contrôles de cohérence et de permettre aux nœuds de requête d'exécuter immédiatement des requêtes de recherche sur toutes les données du lot.</p></li>
-<li><p><strong>Stabilité limitée</strong></p>
-<p>La valeur de GuaranteeTs est fixée à un moment antérieur au dernier horodatage pour permettre aux QueryNodes d'effectuer des recherches en tolérant certaines pertes de données.</p></li>
+<p>La GarantieTs est fixée à une valeur extrêmement faible, telle que 1, afin d'éviter les contrôles de cohérence et de permettre aux QueryNodes d'exécuter immédiatement des requêtes de recherche sur toutes les données du lot.</p></li>
+<li><p><strong>Limitée</strong>(par défaut)</p>
+<p>La valeur de GuranteeTs est fixée à un point temporel antérieur au dernier horodatage afin que les QueryNodes effectuent des recherches en tolérant certaines pertes de données.</p></li>
 <li><p><strong>Session</strong></p>
 <p>Le dernier point temporel auquel le client insère des données est utilisé comme GuaranteeTs afin que les QueryNodes puissent effectuer des recherches sur toutes les données insérées par le client.</p></li>
 </ul>
@@ -80,22 +80,20 @@ title: Cohérence
         ></path>
       </svg>
     </button></h2><p>Vous pouvez définir différents niveaux de cohérence lorsque vous créez une collection ou lorsque vous effectuez des recherches et des requêtes.</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Définir le niveau de cohérence lors de la création d'une collection</h3><p>Lors de la création d'une collection, vous pouvez définir le niveau de cohérence pour les recherches et les requêtes au sein de la collection. L'exemple de code suivant définit le niveau de cohérence à <strong>Strong</strong>.</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Définir le niveau de cohérence lors de la création d'une collection</h3><p>Lors de la création d'une collection, vous pouvez définir le niveau de cohérence pour les recherches et les requêtes au sein de la collection. L'exemple de code suivant définit le niveau de cohérence sur <strong>Bounded</strong>.</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
-    <span class="hljs-comment"># highlight-next​</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,​
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​ <span class="hljs-comment"># Defaults to Bounded if not specified​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)​
         .collectionSchema(schema)​
-        <span class="hljs-comment">// highlight-next​</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
         .build();​
 client.createCollection(createCollectionReq);​
 
@@ -128,7 +126,7 @@ client.createCollection(createCollectionReq);​
     }&#x27;</span>​
 ​
 <span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{​
-    &quot;consistencyLevel&quot;: &quot;Strong&quot;​
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;​
 }&#x27;</span>​
 ​
 curl --request POST \​

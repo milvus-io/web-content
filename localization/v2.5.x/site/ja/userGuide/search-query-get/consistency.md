@@ -34,14 +34,14 @@ title: 一貫性
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusはストレージと計算を分離したシステムである。このシステムでは、<strong>DataNodesが</strong>データの永続化を担当し、最終的にMinIO/S3などの分散オブジェクトストレージに格納します。<strong>QueryNodeは</strong>検索などの計算タスクを処理する。これらのタスクは、<strong>バッチ</strong>データと<strong>ストリーミングデータの</strong>両方を処理する。簡単に言えば、バッチデータはオブジェクトストレージに既に格納されているデータとして理解でき、ストリーミングデータはオブジェクトストレージにまだ格納されていないデータを指す。ネットワーク遅延のため、QueryNodeは最新のストリーミング・データを保持していないことが多い。追加的な安全策がない場合、ストリーミングデータを直接検索すると、コミットされていない多くのデータポイントが失われ、検索結果の精度に影響を与える可能性があります。</p>
+    </button></h2><p>Milvusはストレージと計算を分離したシステムである。このシステムでは、<strong>DataNodesが</strong>データの永続化を担当し、最終的にMinIO/S3などの分散オブジェクトストレージに格納します。<strong>QueryNodeは</strong>検索などの計算タスクを処理する。これらのタスクは、<strong>バッチ</strong>データと<strong>ストリーミングデータの</strong>両方を処理する。簡単に言えば、バッチデータはオブジェクトストレージに既に格納されているデータとして理解でき、ストリーミングデータはオブジェクトストレージにまだ格納されていないデータを指す。ネットワーク遅延のため、QueryNodeは最新のストリーミング・データを保持していないことが多い。追加的な安全策がない場合、ストリーミングデータに対して直接検索を実行すると、コミットされていない多くのデータポイントが失われ、検索結果の精度に影響を与える可能性があります。</p>
 <p>Milvusは、ストレージと計算を分離したシステムである。このシステムでは、DataNodesがデータの永続化を担当し、最終的にMinIO/S3などの分散オブジェクトストレージに格納する。QueryNodeは検索などの計算タスクを処理する。これらのタスクは、バッチデータとストリーミングデータの両方を処理する。簡単に言えば、バッチデータとはオブジェクトストレージに既に格納されているデータのことであり、ストリーミングデータとはオブジェクトストレージにまだ格納されていないデータのことである。ネットワークの待ち時間のため、QueryNode は最新のストリーミング・データを保持していないことが多い。追加的なセーフガードなしにストリーミング・データを直接検索すると、コミットされていない多くのデータ・ポイントが失われ、検索結果の精度に影響する可能性があります。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
    </span> <span class="img-wrapper"> <span>バッチ・データとストリーミング・データ</span> </span></p>
 <p>上図に示すように、QueryNode は Search リクエストを受信した後、ストリーミング・データとバッチ・データの両方を同時に受信することができる。しかし、ネットワークの遅延により、QueryNodeが取得したストリーミングデータは不完全な場合がある。</p>
-<p>この問題に対処するため、Milvusはデータキュー内の各レコードにタイムスタンプを付与し、データキューに同期タイムスタンプを継続的に挿入します。同期タイムスタンプ(syncTs)を受信するたびに、QueryNodesはそれをServiceTimeとして設定し、QueryNodesはそのServiceTime以前のすべてのデータを見ることができるようになります。ServiceTimeに基づき、Milvusは保証タイムスタンプ（GuaranteeTs）を提供し、一貫性と可用性に関する様々なユーザー要件を満たすことができます。ユーザは検索リクエストにGuaranteeTsを指定することで、指定した時点より前のデータを検索スコープに含める必要性をQueryNodeに通知することができます。</p>
+<p>この問題に対処するため、Milvusはデータキュー内の各レコードにタイムスタンプを付与し、データキューに同期タイムスタンプを継続的に挿入します。同期タイムスタンプ(syncTs)を受信するたびに、QueryNodesはそれをServiceTimeとして設定し、QueryNodesはそのServiceTimeより前のすべてのデータを見ることができるようになります。ServiceTimeに基づき、Milvusは保証タイムスタンプ（GuaranteeTs）を提供し、一貫性と可用性に関する様々なユーザー要件を満たすことができます。ユーザは検索リクエストにGuaranteeTsを指定することで、指定した時点より前のデータを検索スコープに含める必要性をQueryNodeに通知することができます。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/service-time-and-guarantee-time.png" alt="ServiceTime and GuaranteeTs" class="doc-image" id="servicetime-and-guaranteets" />
@@ -58,8 +58,8 @@ title: 一貫性
 <p>最新のタイムスタンプがGuaranteeTsとして使用され、QueryNodeはServiceTimeがGuaranteeTsを満たすまで待ってからSearchリクエストを実行しなければなりません。</p></li>
 <li><p><strong>Eventual</strong></p>
 <p>QueryNodeがすべてのバッチデータに対して即座にSearchリクエストを実行できるように一貫性チェックを避けるため、GuaranteeTsは1など極端に小さい値に設定される。</p></li>
-<li><p><strong>制約付き冗長性（Bounded Staleness</strong></p>
-<p>GuranteeTs を最新のタイムスタンプよりも早い時点に設定することで、QueryNode が一定のデータ損失を許容しながら検索を実行できるようにする。</p></li>
+<li><p><strong>Bounded</strong>(デフォルト)</p>
+<p>GuranteeTs を最新のタイムスタンプよりも早い時点に設定することで、QueryNodes が一定のデータ損失を許容して検索を実行できるようにします。</p></li>
 <li><p><strong>セッション</strong></p>
 <p>QueryNodesがクライアントによって挿入された全てのデータに対して検索を実行できるように、クライアントがデータを挿入した最新のタイムポイントがGuaranteeTsとして使用される。</p></li>
 </ul>
@@ -80,22 +80,20 @@ title: 一貫性
         ></path>
       </svg>
     </button></h2><p>検索やクエリを実行するときだけでなく、コレクションを作成するときにも異なる一貫性レベルを設定できます。</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">コレクション作成時の一貫性レベルの設定</h3><p>コレクションの作成時に、コレクション内の検索とクエリの一貫性レベルを設定できます。以下のコード例では、一貫性レベルを<strong>Strong</strong> に設定しています。</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">コレクション作成時の一貫性レベルの設定</h3><p>コレクションの作成時に、コレクション内の検索とクエリの一貫性レベルを設定できます。以下のコード例では、一貫性レベルを<strong>Bounded</strong> に設定しています。</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
-    <span class="hljs-comment"># highlight-next​</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,​
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​ <span class="hljs-comment"># Defaults to Bounded if not specified​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)​
         .collectionSchema(schema)​
-        <span class="hljs-comment">// highlight-next​</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
         .build();​
 client.createCollection(createCollectionReq);​
 
@@ -128,7 +126,7 @@ client.createCollection(createCollectionReq);​
     }&#x27;</span>​
 ​
 <span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{​
-    &quot;consistencyLevel&quot;: &quot;Strong&quot;​
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;​
 }&#x27;</span>​
 ​
 curl --request POST \​
@@ -143,7 +141,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">consistency_level</code> パラメータに指定できる値は、<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 、および<code translate="no">Session</code> です。</p>
-<h3 id="Set-Consistency-Level-in-Search​" class="common-anchor-header">検索での一貫性レベルの設定</h3><p>特定の検索の一貫性レベルはいつでも変更できます。以下のコード例では、一貫性レベルを「Bounded」に戻しています。この変更は現在の検索リクエストにのみ適用される。</p>
+<h3 id="Set-Consistency-Level-in-Search​" class="common-anchor-header">検索での一貫性レベルの設定</h3><p>特定の検索に対して一貫性レベルを常に変更することができます。以下のコード例では、一貫性レベルを「Bounded」に戻しています。この変更は現在の検索リクエストにのみ適用される。</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​

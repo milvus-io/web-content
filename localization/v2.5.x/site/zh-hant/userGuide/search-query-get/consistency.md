@@ -58,10 +58,10 @@ title: 一致性
 <p>使用最新的時間戳作為 GuaranteeTs，查詢節點必須等到 ServiceTime 符合 GuaranteeTs 才執行 Search 請求。</p></li>
 <li><p><strong>最終</strong></p>
 <p>GuaranteeTs 設定為極小的值，例如 1，以避免一致性檢查，這樣 QueryNodes 就可以在所有批次資料上立即執行 Search 請求。</p></li>
-<li><p><strong>有限制的延遲</strong></p>
+<li><p><strong>有限制</strong>(預設)</p>
 <p>GuranteeTs 設定為早於最新時間戳記的時間點，使 QueryNodes 在執行搜尋時可容忍某些資料遺失。</p></li>
 <li><p><strong>會話</strong></p>
-<p>用戶端插入資料的最新時間點作為 GuaranteeTs，使 QueryNodes 可以在用戶端插入的所有資料上執行搜尋。</p></li>
+<p>用戶端插入資料的最新時間點作為 GuaranteeTs，以便 QueryNodes 能夠對用戶端插入的所有資料執行搜尋。</p></li>
 </ul>
 <p>Milvus 使用 Bounded Staleness 作為預設的一致性等級。如果未指定 GuaranteeTs，則使用最新的 ServiceTime 作為 GuaranteeTs。</p>
 <h2 id="Set-Consistency-Level​" class="common-anchor-header">設定一致性等級<button data-href="#Set-Consistency-Level​" class="anchor-icon" translate="no">
@@ -80,22 +80,20 @@ title: 一致性
         ></path>
       </svg>
     </button></h2><p>您可以在建立資料集、執行搜尋和查詢時設定不同的一致性層級。</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">建立集合時設定一致性層級</h3><p>當建立一個集合時，您可以為集合內的搜尋和查詢設定一致性層級。以下程式碼範例設定一致性等級為<strong>Strong</strong>。</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">建立集合時設定一致性層級</h3><p>當建立一個集合時，您可以為集合內的搜尋和查詢設定一致性層級。以下程式碼範例將統一性層級設定為<strong>Bounded</strong>。</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
-    <span class="hljs-comment"># highlight-next​</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,​
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​ <span class="hljs-comment"># Defaults to Bounded if not specified​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)​
         .collectionSchema(schema)​
-        <span class="hljs-comment">// highlight-next​</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
         .build();​
 client.createCollection(createCollectionReq);​
 
@@ -128,7 +126,7 @@ client.createCollection(createCollectionReq);​
     }&#x27;</span>​
 ​
 <span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{​
-    &quot;consistencyLevel&quot;: &quot;Strong&quot;​
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;​
 }&#x27;</span>​
 ​
 curl --request POST \​
@@ -143,7 +141,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">consistency_level</code> 參數的可能值是<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>, 和<code translate="no">Session</code> 。</p>
-<h3 id="Set-Consistency-Level-in-Search​" class="common-anchor-header">在搜尋中設定一致性等級</h3><p>您可以隨時變更特定搜尋的一致性等級。以下程式碼範例會將一致性層級設定回 Bounded。此變更只適用於目前的搜尋請求。</p>
+<h3 id="Set-Consistency-Level-in-Search​" class="common-anchor-header">在搜尋中設定一致性層級</h3><p>您可以隨時變更特定搜尋的一致性層級。以下程式碼範例會將一致性層級設定回 Bounded。此變更只適用於目前的搜尋請求。</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​

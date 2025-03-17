@@ -62,10 +62,10 @@ title: البحث الهجين
     </button></h2><p>سير العمل الرئيسي لإجراء البحث الهجين هو كما يلي.</p>
 <ol>
 <li><p>توليد متجهات كثيفة من خلال تضمين نماذج مثل <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search#A-Quick-Recap-of-BERT">BERT</a> و <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI">Transformers</a>.</p></li>
-<li><p>توليد متجهات متناثرة من خلال نماذج التضمين مثل <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a> و <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#BGE-M3">BGE-M3</a> و <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#SPLADE">SPLADE</a> وغيرها.</p></li>
-<li><p>إنشاء مجموعة في Zilliz وتحديد مخطط المجموعة الذي يتضمن حقول المتجهات الكثيفة والمتناثرة.</p></li>
+<li><p>توليد متجهات متناثرة من خلال نماذج التضمين مثل <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a> و <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#BGE-M3">BGE-M3</a> و <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#SPLADE">SPLADE</a> وغيرها. في ميلفوس، يمكنك استخدام الوظيفة لتوليد متجهات متناثرة. لمزيد من المعلومات، راجع <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a>.</p></li>
+<li><p>إنشاء مجموعة وتحديد مخطط المجموعة الذي يتضمن حقول المتجهات الكثيفة والمتناثرة.</p></li>
 <li><p>أدخل المتجهات الكثيفة المتفرقة في المجموعة التي تم إنشاؤها للتو في الخطوة السابقة.</p></li>
-<li><p>إجراء بحث هجين: سيعود البحث الهجين على المتجهات الكثيفة بمجموعة من أفضل K من النتائج الأكثر تشابهًا، كما سيعود البحث الهجين على المتجهات المتفرقة بمجموعة من أفضل K من النتائج.</p></li>
+<li><p>إجراء بحث هجين: سيعيد البحث الهجين على المتجهات الكثيفة مجموعة من أعلى K من النتائج الأكثر تشابهًا، كما ستعيد مطابقة النص على المتجهات المتفرقة مجموعة من أعلى K من النتائج.</p></li>
 <li><p>التطبيع: قم بتطبيع درجات مجموعتي أعلى K من النتائج، وتحويل الدرجات إلى نطاق بين [0،1].</p></li>
 <li><p>اختر إستراتيجية إعادة ترتيب مناسبة لدمج مجموعتي نتائج أعلى K وإعادة ترتيبها وإرجاع مجموعة نهائية من نتائج أعلى K في النهاية.</p></li>
 </ol>
@@ -96,10 +96,10 @@ title: البحث الهجين
 <li><p><code translate="no">id</code>: يعمل هذا الحقل كمفتاح أساسي لتخزين المعرفات النصية. نوع بيانات هذا الحقل هو INT64.</p></li>
 <li><p><code translate="no">text</code>: يستخدم هذا الحقل لتخزين المحتوى النصي. نوع بيانات هذا الحقل هو VARCHAR، بحد أقصى للطول 1000 حرف.</p></li>
 <li><p><code translate="no">dense</code>: يستخدم هذا الحقل لتخزين المتجهات الكثيفة للنصوص. نوع بيانات هذا الحقل هو FLOAT_VECTOR، ببعد متجه يبلغ 768.</p></li>
-<li><p><code translate="no">sparse</code>: يستخدم هذا الحقل لتخزين المتجهات المتفرقة للنصوص. نوع بيانات هذا الحقل هو SPARSE_FLOAT_VECTOR.</p></li>
+<li><p><code translate="no">sparse</code>: يستخدم هذا الحقل لتخزين المتجهات المتفرقة للنصوص. ونوع بيانات هذا الحقل هو SPARSE_FLOAT_VECTOR. في هذا المثال، نستخدم الدالة لتوليد متجهات متفرقة.</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">بيثون </a> <a href="#java">جافا</a> <a href="#curl">جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+   <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create a collection in customized setup mode​</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (​
     MilvusClient, DataType​
@@ -118,6 +118,7 @@ schema = MilvusClient.create_schema(​
 <span class="hljs-comment"># Add fields to schema​</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)​
 schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>)​
+<span class="hljs-comment"># Define a sparse vector field to generate spare vectors with BM25</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR)​
 schema.add_field(field_name=<span class="hljs-string">&quot;dense&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)​
 
@@ -225,7 +226,77 @@ schema.addField(AddFieldReq.builder()​
     }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>أثناء عمليات البحث في المتجهات المتناثرة، يمكنك تبسيط عملية توليد متجهات التضمين المتناثرة من خلال الاستفادة من إمكانيات البحث في النص الكامل. لمزيد من التفاصيل، راجع <a href="/docs/ar/full-text-search.md">البحث بالنص الكامل</a>.</p>
+<p>أثناء عمليات البحث عن المتجهات المتناثرة، يمكنك تبسيط عملية توليد متجهات التضمين المتناثرة من خلال الاستفادة من إمكانيات البحث عن النص الكامل. لمزيد من التفاصيل، راجع <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a>.</p>
+<h4 id="Define-function-to-generate-sparse-vectors​" class="common-anchor-header">تحديد دالة لتوليد متجهات متفرقة</h4><p>لتوليد متجهات متناثرة، يمكنك استخدام ميزة الدالة في ملفوس. يحدد المثال التالي دالة لتوليد متجهات متفرقة باستخدام خوارزمية BM25. لمزيد من المعلومات، راجع <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a>.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#curl">جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Define function to generate sparse vectors</span>
+
+bm25_function = Function(
+    name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, <span class="hljs-comment"># Function name</span>
+    input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR field containing raw text data</span>
+    output_field_names=[<span class="hljs-string">&quot;sparse&quot;</span>], <span class="hljs-comment"># Name of the SPARSE_FLOAT_VECTOR field reserved to store generated embeddings</span>
+    function_type=FunctionType.BM25,
+)
+
+schema.add_function(bm25_function)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
+
+<span class="hljs-keyword">import</span> java.util.*;
+
+schema.addFunction(Function.builder()
+        .functionType(FunctionType.BM25)
+        .name(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>)
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
+        .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;sparse&quot;</span>))
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">const <span class="hljs-built_in">functions</span> = [
+    {
+      name: <span class="hljs-string">&#x27;text_bm25_emb&#x27;</span>,
+      description: <span class="hljs-string">&#x27;bm25 function&#x27;</span>,
+      <span class="hljs-built_in">type</span>: FunctionType.BM25,
+      input_field_names: [<span class="hljs-string">&#x27;text&#x27;</span>],
+      output_field_names: [<span class="hljs-string">&#x27;sparse&#x27;</span>],
+      params: {},
+    },
+]；
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+        &quot;autoId&quot;: true,
+        &quot;enabledDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;text&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 1000,
+                    &quot;enable_analyzer&quot;: true
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;sparse&quot;,
+                &quot;dataType&quot;: &quot;SparseFloatVector&quot;
+            }
+        ],
+        &quot;functions&quot;: [
+            {
+                &quot;name&quot;: &quot;text_bm25_emb&quot;,
+                &quot;type&quot;: &quot;BM25&quot;,
+                &quot;inputFieldNames&quot;: [&quot;text&quot;],
+                &quot;outputFieldNames&quot;: [&quot;sparse&quot;],
+                &quot;params&quot;: {}
+            }
+        ]
+    }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h4 id="Create-index​" class="common-anchor-header">إنشاء فهرس</h4><p>بعد تحديد مخطط المجموعة، من الضروري إعداد فهارس المتجهات ومقاييس التشابه. في هذا المثال، يتم إنشاء فهرس IVF_FLAT لحقل المتجهات الكثيفة <code translate="no">dense</code> ، ويتم إنشاء فهرس SPARSE_INVERTED_INDEX لحقل المتجهات المتفرقة <code translate="no">sparse</code>. للتعرف على أنواع الفهارس المدعومة، راجع <a href="https://milvus.io/docs/index.md?tab=floating">شرح الفهرس</a>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#curl">جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -243,14 +314,13 @@ index_params.add_index(​
     params={<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span>},​
 )​
 ​
-index_params.add_index(​
-    field_name=<span class="hljs-string">&quot;sparse&quot;</span>,​
-    index_name=<span class="hljs-string">&quot;sparse_index&quot;</span>,​
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,  <span class="hljs-comment"># Index type for sparse vectors​</span>
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Currently, only IP (Inner Product) is supported for sparse vectors​</span>
-    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing​</span>
-)​
-
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
+    index_name=<span class="hljs-string">&quot;sparse_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,  <span class="hljs-comment"># Index type for sparse vectors</span>
+    metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,  <span class="hljs-comment"># Set to `BM25` when using function to generate sparse vectors</span>
+    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing</span>
+)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;​
 <span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;​
@@ -266,12 +336,12 @@ denseParams.<span class="hljs-title function_">put</span>(<span class="hljs-stri
         .<span class="hljs-title function_">build</span>();​
 ​
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt; sparseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);​
+sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);​ <span class="hljs-comment">// Algorithm used for building and querying the index</span>
 <span class="hljs-title class_">IndexParam</span> indexParamForSparseField = <span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
         .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>)​
         .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_index&quot;</span>)​
         .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)​
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)​
+        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">BM25</span>)​
         .<span class="hljs-title function_">extraParams</span>(sparseParams)​
         .<span class="hljs-title function_">build</span>();​
 ​
@@ -287,7 +357,7 @@ indexParams.<span class="hljs-title function_">add</span>(indexParamForSparseFie
 },{​
     <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;sparse&quot;</span>,​
     <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,​
-    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;IP&quot;</span>​
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>​
 }]​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -301,7 +371,7 @@ indexParams.<span class="hljs-title function_">add</span>(indexParamForSparseFie
         },​
         {​
             &quot;fieldName&quot;: &quot;sparse&quot;,​
-            &quot;metricType&quot;: &quot;IP&quot;,​
+            &quot;metricType&quot;: &quot;BM25&quot;,​
             &quot;indexName&quot;: &quot;sparse_index&quot;,​
             &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;​
         }​
@@ -354,10 +424,17 @@ curl --request POST \​
    <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
 ​
-data=[​
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">9637</span>: <span class="hljs-number">0.30856525997853057</span>, <span class="hljs-number">4399</span>: <span class="hljs-number">0.19771651149001523</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, ...]},​
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">6959</span>: <span class="hljs-number">0.31025067641541815</span>, <span class="hljs-number">1729</span>: <span class="hljs-number">0.8265339135915016</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, ...]},​
-    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>:{<span class="hljs-number">1220</span>: <span class="hljs-number">0.15303302147479103</span>, <span class="hljs-number">7335</span>: <span class="hljs-number">0.9436728846033107</span>, ...}, <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, ...]}​]
+docs = [
+    <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
+    <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
+    <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
+]
+
+data = [
+    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;text&quot;</span>: docs[<span class="hljs-number">0</span>], <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">2.7242085933685303</span>, <span class="hljs-number">6.021071434020996</span>, <span class="hljs-number">0.4754035174846649</span>, <span class="hljs-number">9.358858108520508</span>, <span class="hljs-number">5.173221111297607</span>]},
+    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;text&quot;</span>: docs[<span class="hljs-number">1</span>], <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">8.584294319152832</span>, <span class="hljs-number">2.7640628814697266</span>, <span class="hljs-number">9.558855056762695</span>, <span class="hljs-number">2.584272861480713</span>, <span class="hljs-number">4.705013275146484</span>]},
+    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;text&quot;</span>: docs[<span class="hljs-number">2</span>], <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">2.5525057315826416</span>, <span class="hljs-number">3.8815805912017822</span>, <span class="hljs-number">9.343480110168457</span>, <span class="hljs-number">7.888997554779053</span>, <span class="hljs-number">4.500918388366699</span>]},
+]
 ​
 res = client.<span class="hljs-title function_">insert</span>(​
     collection_name=<span class="hljs-string">&quot;hybrid_search_collection&quot;</span>,​
@@ -371,23 +448,28 @@ res = client.<span class="hljs-title function_">insert</span>(​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;​
 ​
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();​
-<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();​
-row1.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>);​
-row1.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>);​
-row1.add(<span class="hljs-string">&quot;dense&quot;</span>, gson.toJsonTree(dense1));​
-row1.add(<span class="hljs-string">&quot;sparse&quot;</span>, gson.toJsonTree(sparse1));​
+<span class="hljs-type">float</span>[] dense1 = {<span class="hljs-number">2.7242086f</span>, <span class="hljs-number">6.0210714f</span>, <span class="hljs-number">0.47540352f</span>, <span class="hljs-number">9.3588581f</span>, <span class="hljs-number">5.1732211f</span>};
+<span class="hljs-type">float</span>[] dense2 = {<span class="hljs-number">8.5842943f</span>, <span class="hljs-number">2.7640628f</span>, <span class="hljs-number">9.5588550f</span>, <span class="hljs-number">2.5842728f</span>, <span class="hljs-number">4.7050133f</span>};
+<span class="hljs-type">float</span>[] dense3 = {<span class="hljs-number">2.5525057f</span>, <span class="hljs-number">3.8815806f</span>, <span class="hljs-number">9.3434801f</span>, <span class="hljs-number">7.8889976f</span>, <span class="hljs-number">4.5009184f</span>};
+String[] docs = {
+            <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
+            <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
+            <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>
+};
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row1.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>);
+row1.addProperty(<span class="hljs-string">&quot;text&quot;</span>, docs[<span class="hljs-number">0</span>]);
+row1.add(<span class="hljs-string">&quot;dense&quot;</span>, gson.toJsonTree(dense1));
 ​
-<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();​
-row2.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>);​
-row2.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>);​
-row2.add(<span class="hljs-string">&quot;dense&quot;</span>, gson.toJsonTree(dense2));​
-row2.add(<span class="hljs-string">&quot;sparse&quot;</span>, gson.toJsonTree(sparse2));​
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row2.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>);
+row2.addProperty(<span class="hljs-string">&quot;text&quot;</span>, docs[<span class="hljs-number">1</span>]);
+row2.add(<span class="hljs-string">&quot;dense&quot;</span>, gson.toJsonTree(dense2));
 ​
-<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();​
-row3.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">3</span>);​
-row3.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>);​
-row3.add(<span class="hljs-string">&quot;dense&quot;</span>, gson.toJsonTree(dense3));​
-row3.add(<span class="hljs-string">&quot;sparse&quot;</span>, gson.toJsonTree(sparse3));​
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row3.addProperty(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">3</span>);
+row3.addProperty(<span class="hljs-string">&quot;text&quot;</span>, docs[<span class="hljs-number">2</span>]);
+row3.add(<span class="hljs-string">&quot;dense&quot;</span>, gson.toJsonTree(dense3));
 ​
 List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);​
 <span class="hljs-type">InsertReq</span> <span class="hljs-variable">insertReq</span> <span class="hljs-operator">=</span> InsertReq.builder()​
@@ -400,11 +482,29 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);​
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)​
 ​
-<span class="hljs-keyword">var</span> data = [​
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>, <span class="hljs-attr">sparse</span>:[<span class="hljs-number">9637</span>: <span class="hljs-number">0.30856525997853057</span>, <span class="hljs-number">4399</span>: <span class="hljs-number">0.19771651149001523</span>, ...] , <span class="hljs-attr">dense</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]},​
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>, <span class="hljs-attr">sparse</span>:[<span class="hljs-number">6959</span>: <span class="hljs-number">0.31025067641541815</span>, <span class="hljs-number">1729</span>: <span class="hljs-number">0.8265339135915016</span>, ...] , <span class="hljs-attr">dense</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>]},​
-    {<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span> , <span class="hljs-attr">sparse</span>:[<span class="hljs-number">1220</span>: <span class="hljs-number">0.15303302147479103</span>, <span class="hljs-number">7335</span>: <span class="hljs-number">0.9436728846033107</span>, ...] , <span class="hljs-attr">dense</span>: [<span class="hljs-number">0.43742130801983836</span>, -<span class="hljs-number">0.5597502546264526</span>, <span class="hljs-number">0.6457887650909682</span>, <span class="hljs-number">0.7894058910881185</span>, <span class="hljs-number">0.20785793220625592</span>]}       ​
-]​
+<span class="hljs-keyword">const</span> docs = [
+    <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
+    <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
+    <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>
+];
+
+<span class="hljs-keyword">const</span> data = [
+    {
+        <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">text</span>: docs[<span class="hljs-number">0</span>],
+        <span class="hljs-attr">dense</span>: [<span class="hljs-number">2.7242085933685303</span>, <span class="hljs-number">6.021071434020996</span>, <span class="hljs-number">0.4754035174846649</span>, <span class="hljs-number">9.358858108520508</span>, <span class="hljs-number">5.173221111297607</span>]
+    },
+    {
+        <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>,
+        <span class="hljs-attr">text</span>: docs[<span class="hljs-number">1</span>],
+        <span class="hljs-attr">dense</span>: [<span class="hljs-number">8.584294319152832</span>, <span class="hljs-number">2.7640628814697266</span>, <span class="hljs-number">9.558855056762695</span>, <span class="hljs-number">2.584272861480713</span>, <span class="hljs-number">4.705013275146484</span>]
+    },
+    {
+        <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-attr">text</span>: docs[<span class="hljs-number">2</span>],
+        <span class="hljs-attr">dense</span>: [<span class="hljs-number">2.5525057315826416</span>, <span class="hljs-number">3.8815805912017822</span>, <span class="hljs-number">9.343480110168457</span>, <span class="hljs-number">7.888997554779053</span>, <span class="hljs-number">4.500918388366699</span>]
+    }
+];
 ​
 <span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({​
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;hybrid_search_collection&quot;</span>,​
@@ -417,11 +517,23 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);​
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
 -d <span class="hljs-string">&#x27;{​
-    &quot;data&quot;: [​
-        {&quot;id&quot;: 0, &quot;text&quot;: &quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;, &quot;sparse&quot;:{&quot;9637&quot;: 0.30856525997853057, &quot;4399&quot;: 0.19771651149001523}, &quot;dense&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, ...]},​
-        {&quot;id&quot;: 1, &quot;text&quot;: &quot;Alan Turing was the first person to conduct substantial research in AI.&quot;, &quot;sparse&quot;:{&quot;6959&quot;: 0.31025067641541815, &quot;1729&quot;: 0.8265339135915016}, &quot;dense&quot;: [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, ...]},​
-        {&quot;id&quot;: 2, &quot;text&quot;: &quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;, &quot;sparse&quot;:{&quot;1220&quot;: 0.15303302147479103, &quot;7335&quot;: 0.9436728846033107}, &quot;dense&quot;: [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, ...]}​
-    ],​
+    &quot;data&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;text&quot;: &quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;,
+                &quot;dense&quot;: [2.7242085933685303, 6.021071434020996, 0.4754035174846649, 9.358858108520508, 5.173221111297607]
+            },
+            {
+                &quot;id&quot;: 2,
+                &quot;text&quot;: &quot;Alan Turing was the first person to conduct substantial research in AI.&quot;,
+                &quot;dense&quot;: [8.584294319152832, 2.7640628814697266, 9.558855056762695, 2.584272861480713, 4.705013275146484]
+            },
+            {
+                &quot;id&quot;: 3,
+                &quot;text&quot;: &quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;,
+                &quot;dense&quot;: [2.5525057315826416, 3.8815805912017822, 9.343480110168457, 7.888997554779053, 4.500918388366699]
+            }
+        ],​
     &quot;collectionName&quot;: &quot;hybrid_search_collection&quot;​
 }&#x27;</span>​
 
@@ -435,109 +547,127 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);​
    <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">AnnSearchRequest</span>​
 ​
-query_dense_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]​
-​
-search_param_1 = {​
-    <span class="hljs-string">&quot;data&quot;</span>: [query_dense_vector],​
-    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;dense&quot;</span>,​
-    <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,​
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}​
-    },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>​
-}​
-request_1 = <span class="hljs-title class_">AnnSearchRequest</span>(**search_param_1)​
-​
-query_sparse_vector = {<span class="hljs-number">3573</span>: <span class="hljs-number">0.34701499565746674</span>}, {<span class="hljs-number">5263</span>: <span class="hljs-number">0.2639375518635271</span>}​
-search_param_2 = {​
-    <span class="hljs-string">&quot;data&quot;</span>: [query_sparse_vector],​
-    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,​
-    <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,​
-        <span class="hljs-string">&quot;params&quot;</span>: {}​
-    },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>​
-}​
-request_2 = <span class="hljs-title class_">AnnSearchRequest</span>(**search_param_2)​
-​
-reqs = [request_1, request_2]​
+search_param_1 = {
+    <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">0.7425515055656433</span>, <span class="hljs-number">7.774101734161377</span>, <span class="hljs-number">0.7397570610046387</span>, <span class="hljs-number">2.429982900619507</span>, <span class="hljs-number">3.8253049850463867</span>]],
+    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;dense&quot;</span>,
+    <span class="hljs-string">&quot;param&quot;</span>: {
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
+        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
+    },
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
+}
+request_1 = <span class="hljs-title class_">AnnSearchRequest</span>(**search_param_1)
+
+search_param_2 = {
+    <span class="hljs-string">&quot;data&quot;</span>: [<span class="hljs-string">&#x27;Who started AI research&#x27;</span>],
+    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
+    <span class="hljs-string">&quot;param&quot;</span>: {
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
+    },
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
+}
+request_2 = <span class="hljs-title class_">AnnSearchRequest</span>(**search_param_2)
+
+reqs = [request_1, request_2]
 ​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">import io.milvus.v2.service.vector.request.AnnSearchReq;​
-import io.milvus.v2.service.vector.request.data.BaseVector;​
-import io.milvus.v2.service.vector.request.data.FloatVec;​
-import io.milvus.v2.service.vector.request.data.SparseFloatVec;​
-​
-<span class="hljs-built_in">float</span>[] dense = <span class="hljs-keyword">new</span> <span class="hljs-built_in">float</span>[]{<span class="hljs-number">-0.0475336798f</span>,  <span class="hljs-number">0.0521207601f</span>,  <span class="hljs-number">0.0904406682f</span>, ...};​
-SortedMap&lt;Long, Float&gt; sparse = <span class="hljs-keyword">new</span> TreeMap&lt;Long, Float&gt;() {{​
-    put(<span class="hljs-number">3573L</span>, <span class="hljs-number">0.34701499f</span>);​
-    put(<span class="hljs-number">5263L</span>, <span class="hljs-number">0.263937551f</span>);​
-    ...​
-}};​
-​
-​
-List&lt;BaseVector&gt; queryDenseVectors = Collections.singletonList(<span class="hljs-keyword">new</span> FloatVec(dense));​
-List&lt;BaseVector&gt; querySparseVectors = Collections.singletonList(<span class="hljs-keyword">new</span> SparseFloatVec(sparse));​
-​
-List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();​
-searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
-        .vectorFieldName(<span class="hljs-string">&quot;dense&quot;</span>)​
-        .vectors(queryDenseVectors)​
-        .metricType(IndexParam.MetricType.IP)​
-        .<span class="hljs-keyword">params</span>(<span class="hljs-string">&quot;{\&quot;nprobe\&quot;: 10}&quot;</span>)​
-        .topK(<span class="hljs-number">2</span>)​
-        .build());​
-searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
-        .vectorFieldName(<span class="hljs-string">&quot;sparse&quot;</span>)​
-        .vectors(querySparseVectors)​
-        .metricType(IndexParam.MetricType.IP)​
-        .<span class="hljs-keyword">params</span>()​
-        .topK(<span class="hljs-number">2</span>)​
-        .build());​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.BaseVector;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.TextVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.IndexParam;
+
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MilvusSearchRequest</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        <span class="hljs-type">float</span>[] denseQueryVector = {
+                <span class="hljs-number">0.7425515f</span>, <span class="hljs-number">7.7741017f</span>, <span class="hljs-number">0.73975706f</span>, <span class="hljs-number">2.4299829f</span>, <span class="hljs-number">3.825305f</span>
+        };
+
+        <span class="hljs-type">String</span> <span class="hljs-variable">sparseQueryText</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Who started AI research&quot;</span>;
+
+        List&lt;BaseVector&gt; queryDenseVectors = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(denseQueryVector));
+
+        List&lt;BaseVector&gt; querySparseVectors = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">TextVec</span>(sparseQueryText));
+
+        List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+
+        searchRequests.add(AnnSearchReq.builder()
+                .vectorFieldName(<span class="hljs-string">&quot;dense&quot;</span>)  <span class="hljs-comment">// Field Name</span>
+                .vectors(queryDenseVectors) <span class="hljs-comment">// Query Vector</span>
+                .metricType(IndexParam.MetricType.IP) <span class="hljs-comment">// Inner Product Metric</span>
+                .params(<span class="hljs-string">&quot;{\&quot;nprobe\&quot;: 10}&quot;</span>) <span class="hljs-comment">// Search Params</span>
+                .topK(<span class="hljs-number">2</span>) <span class="hljs-comment">// Limit results to top 2</span>
+                .build());
+
+        searchRequests.add(AnnSearchReq.builder()
+                .vectorFieldName(<span class="hljs-string">&quot;sparse&quot;</span>) <span class="hljs-comment">// Field Name</span>
+                .vectors(querySparseVectors) <span class="hljs-comment">// Query Text Vector</span>
+                .metricType(IndexParam.MetricType.BM25) <span class="hljs-comment">// BM25 Metric for sparse</span>
+                .params(<span class="hljs-string">&quot;{}&quot;</span>) <span class="hljs-comment">// No additional parameters for BM25</span>
+                .topK(<span class="hljs-number">2</span>) <span class="hljs-comment">// Limit results to top 2</span>
+                .build());
+
+        System.out.println(<span class="hljs-string">&quot;Generated Search Requests:&quot;</span>);
+        searchRequests.forEach(System.out::println);
+    }
+}
+
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> search_param_1 = {​
-    <span class="hljs-string">&quot;data&quot;</span>: query_vector, ​
-    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;dense&quot;</span>, ​
-    <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}​
-    },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
-}​
-​
-<span class="hljs-keyword">const</span> search_param_2 = {​
-    <span class="hljs-string">&quot;data&quot;</span>: query_sparse_vector, ​
-    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>, ​
-    <span class="hljs-string">&quot;param&quot;</span>: {​
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
-        <span class="hljs-string">&quot;params&quot;</span>: {}​
-    },​
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> 
-}​
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> search_param_1 = {
+    <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">0.7425515055656433</span>, <span class="hljs-number">7.774101734161377</span>, <span class="hljs-number">0.7397570610046387</span>, <span class="hljs-number">2.429982900619507</span>, <span class="hljs-number">3.8253049850463867</span>]], 
+    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;dense&quot;</span>,
+    <span class="hljs-string">&quot;param&quot;</span>: {
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
+        <span class="hljs-string">&quot;params&quot;</span>: { <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span> } 
+    },
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
+};
+
+<span class="hljs-keyword">const</span> search_param_2 = {
+    <span class="hljs-string">&quot;data&quot;</span>: [<span class="hljs-string">&quot;Who started AI research&quot;</span>], 
+    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
+    <span class="hljs-string">&quot;param&quot;</span>: {
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
+        <span class="hljs-string">&quot;params&quot;</span>: {} <span class="hljs-comment">// BM25 does not require extra parameters</span>
+    },
+    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
+};
+
+<span class="hljs-comment">// Combine both search parameters into a single request list</span>
+<span class="hljs-keyword">const</span> reqs = [search_param_1, search_param_2];
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> req=<span class="hljs-string">&#x27;[​
-    {​
-        &quot;data&quot;: [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592,....]],​
-        &quot;annsField&quot;: &quot;dense&quot;,​
-        &quot;params&quot;: {​
-            &quot;params&quot;: {​
-                &quot;nprobe&quot;: 10​
-             }​
-        },​
-        &quot;limit&quot;: 2​
-    },​
-    {​
-        &quot;data&quot;: [{&quot;3573&quot;: 0.34701499565746674}, {&quot;5263&quot;: 0.2639375518635271}],​
-        &quot;annsField&quot;: &quot;sparse&quot;,​
-        &quot;params&quot;: {​
-            &quot;params&quot;: {}​
-        },​
-        &quot;limit&quot;: 2​
-    }​
- ]&#x27;</span>​
+<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> req=<span class="hljs-string">&#x27;[
+    {
+        &quot;data&quot;: [[0.7425515055656433, 7.774101734161377, 0.7397570610046387, 2.429982900619507, 3.8253049850463867]], 
+        &quot;anns_field&quot;: &quot;dense&quot;,
+        &quot;param&quot;: {
+            &quot;metric_type&quot;: &quot;IP&quot;,
+            &quot;params&quot;: {
+                &quot;nprobe&quot;: 10
+            }
+        },
+        &quot;limit&quot;: 2
+    },
+    {
+        &quot;data&quot;: [&quot;Who started AI research&quot;],
+        &quot;anns_field&quot;: &quot;sparse&quot;,
+        &quot;param&quot;: {
+            &quot;metric_type&quot;: &quot;BM25&quot;,
+            &quot;params&quot;: {}
+        },
+        &quot;limit&quot;: 2
+    }
+]&#x27;</span>
+
+curl -X POST <span class="hljs-string">&quot;http://your-milvus-server-address/v1/vector/search&quot;</span> \
+     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+     -d <span class="hljs-string">&quot;<span class="hljs-variable">$req</span>&quot;</span>
+
 
 <button class="copy-code-btn"></button></code></pre>
 <p>نظرًا لأن المعلمة <code translate="no">limit</code> مضبوطة على 2، فإن كل <code translate="no">AnnSearchRequest</code> يُرجع نتيجتي بحث. في هذا المثال، يتم إنشاء 2 <code translate="no">AnnSearchRequest</code> ، وبالتالي سيتم إرجاع إجمالي 4 نتائج بحث.</p>
@@ -576,9 +706,9 @@ ranker = <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>مثال 2: استخدام RRFRFRanker</strong></p>
-<p>عند استخدام استراتيجية RRFRFRanker، تحتاج إلى إدخال قيمة المعلمة <code translate="no">k</code> في RRFRanker. القيمة الافتراضية لـ <code translate="no">k</code> هي 60. تساعد هذه المعلمة في تحديد كيفية دمج الرتب من مختلف عمليات بحث الشبكة العنكبوتية الوطنية، بهدف موازنة ومزج الأهمية في جميع عمليات البحث.</p>
+<p>عند استخدام استراتيجية RRRFRanker، تحتاج إلى إدخال قيمة المعلمة <code translate="no">k</code> في RRFRanker. القيمة الافتراضية لـ <code translate="no">k</code> هي 60. تساعد هذه المعلمة على تحديد كيفية دمج الرتب من مختلف عمليات بحث الشبكة العنكبوتية الوطنية، بهدف موازنة ومزج الأهمية في جميع عمليات البحث.</p>
 <p><div class="multipleCode">
-<a href="#python">بايثون </a><a href="#java">جافا</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
+<a href="#python">بايثون </a><a href="#java">جافا</a><a href="#curl">جافا</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">RRFRanker</span>​
 ​
 ranker = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>)​

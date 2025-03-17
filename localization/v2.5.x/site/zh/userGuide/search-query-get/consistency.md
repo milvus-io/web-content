@@ -34,8 +34,8 @@ title: 一致性
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 是一个存储和计算分离的系统。在这个系统中，<strong>数据节点</strong>负责数据的持久性，并最终将其存储在 MinIO/S3 等分布式对象存储中。<strong>查询节点</strong>负责处理搜索等计算任务。这些任务涉及<strong>批量数据</strong>和<strong>流数据的</strong>处理。简单地说，批量数据可以理解为已经存储在对象存储中的数据，而流式数据指的是尚未存储在对象存储中的数据。由于网络延迟，查询节点通常无法保存最新的流数据。如果没有额外的保护措施，直接在流数据上执行搜索可能会导致丢失许多未提交的数据点，从而影响搜索结果的准确性。</p>
-<p>Milvus 是一个将存储和计算分离的系统。在这个系统中，数据节点负责数据的持久性，并最终将数据存储在 MinIO/S3 等分布式对象存储中。查询节点负责处理搜索等计算任务。这些任务涉及批量数据和流数据的处理。简单地说，批处理数据可以理解为已经存储在对象存储中的数据，而流式数据指的是尚未存储在对象存储中的数据。由于网络延迟，查询节点通常无法保存最新的流数据。如果没有额外的保障措施，直接对流数据执行搜索可能会导致丢失许多未提交的数据点，从而影响搜索结果的准确性。</p>
+    </button></h2><p>Milvus 是一个存储和计算分离的系统。在这个系统中，<strong>数据节点</strong>负责数据的持久性，并最终将其存储在 MinIO/S3 等分布式对象存储中。<strong>查询节点</strong>负责处理搜索等计算任务。这些任务涉及<strong>批量数据</strong>和<strong>流数据的</strong>处理。简单地说，批量数据可以理解为已经存储在对象存储中的数据，而流式数据指的是尚未存储在对象存储中的数据。由于网络延迟，查询节点通常无法保存最新的流数据。如果没有额外的保障措施，直接在流数据上执行搜索可能会导致丢失许多未提交的数据点，从而影响搜索结果的准确性。</p>
+<p>Milvus 是一个将存储和计算分离的系统。在这个系统中，数据节点负责数据的持久性，并最终将数据存储在 MinIO/S3 等分布式对象存储中。查询节点负责处理搜索等计算任务。这些任务涉及批量数据和流数据的处理。简单地说，批量数据可以理解为已经存储在对象存储中的数据，而流式数据指的是尚未存储在对象存储中的数据。由于网络延迟，查询节点通常无法保存最新的流数据。如果没有额外的保障措施，直接对流数据执行搜索可能会导致丢失许多未提交的数据点，从而影响搜索结果的准确性。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
@@ -58,10 +58,10 @@ title: 一致性
 <p>使用最新的时间戳作为 GuaranteeTs，查询节点必须等到服务时间满足 GuaranteeTs 后才能执行搜索请求。</p></li>
 <li><p><strong>最终</strong></p>
 <p>GuaranteeTs 设置为极小值（如 1），以避免一致性检查，这样查询节点就可以立即对所有批次数据执行搜索请求。</p></li>
-<li><p><strong>有限制的停滞</strong></p>
-<p>GuranteeTs 设置为早于最新时间戳的时间点，以便查询节点在执行搜索时能容忍一定的数据丢失。</p></li>
+<li><p><strong>有限制</strong>（默认）</p>
+<p>GuranteeTs 设置为比最新时间戳更早的时间点，以使查询节点在执行搜索时能够容忍一定的数据丢失。</p></li>
 <li><p><strong>会话</strong></p>
-<p>客户端插入数据的最新时间点被用作 GuaranteeTs，这样查询节点就能对客户端插入的所有数据执行搜索。</p></li>
+<p>客户端插入数据的最新时间点被用作 GuaranteeTs，以便查询节点能对客户端插入的所有数据执行搜索。</p></li>
 </ul>
 <p>Milvus 使用 "有界滞后 "作为默认的一致性级别。如果未指定保证时间，则使用最新的服务时间作为保证时间。</p>
 <h2 id="Set-Consistency-Level​" class="common-anchor-header">设置一致性级别<button data-href="#Set-Consistency-Level​" class="anchor-icon" translate="no">
@@ -80,22 +80,20 @@ title: 一致性
         ></path>
       </svg>
     </button></h2><p>创建 Collections 以及执行搜索和查询时，可以设置不同的一致性级别。</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">创建 Collections 时设置一致性级别</h3><p>创建 Collections 时，可以为集合内的搜索和查询设置一致性级别。以下代码示例将一致性级别设置<strong>为强</strong>。</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">创建 Collections 时设置一致性级别</h3><p>创建 Collections 时，可以为集合内的搜索和查询设置一致性级别。以下代码示例将一致性级别设置为<strong>"有界</strong>"。</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
-    <span class="hljs-comment"># highlight-next​</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,​
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​ <span class="hljs-comment"># Defaults to Bounded if not specified​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)​
         .collectionSchema(schema)​
-        <span class="hljs-comment">// highlight-next​</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
         .build();​
 client.createCollection(createCollectionReq);​
 
@@ -128,7 +126,7 @@ client.createCollection(createCollectionReq);​
     }&#x27;</span>​
 ​
 <span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{​
-    &quot;consistencyLevel&quot;: &quot;Strong&quot;​
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;​
 }&#x27;</span>​
 ​
 curl --request POST \​
@@ -142,7 +140,7 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">consistency_level</code> 参数的可能值是<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 和<code translate="no">Session</code> 。</p>
+<p><code translate="no">consistency_level</code> 参数的可能值是<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>, 和<code translate="no">Session</code> 。</p>
 <h3 id="Set-Consistency-Level-in-Search​" class="common-anchor-header">在搜索中设置一致性级别</h3><p>您可以随时更改特定搜索的一致性级别。下面的代码示例将一致性级别设置为 "有界"。此更改仅适用于当前搜索请求。</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>

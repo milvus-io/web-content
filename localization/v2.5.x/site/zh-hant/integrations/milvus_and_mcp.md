@@ -18,7 +18,8 @@ title: 整合 Milvus 與 MindsDB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Introduction" class="common-anchor-header">簡介<button data-href="#Introduction" class="anchor-icon" translate="no">
+    </button></h1><iframe width="560" height="315" src="https://www.youtube.com/embed/0wAsrUxv8gM?si=BVyRqLJ2PuZIBF5c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<h2 id="Introduction" class="common-anchor-header">簡介<button data-href="#Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,7 +35,7 @@ title: 整合 Milvus 與 MindsDB
         ></path>
       </svg>
     </button></h2><p><strong>Model Context Protocol (MCP)</strong>是一種開放式<strong>通訊協定</strong>，可讓 Claude 和 Cursor 等 AI 應用程式與外部資料來源和工具進行無縫互動。無論您是要建立自訂的 AI 應用程式、整合 AI 工作流程或強化聊天介面，MCP 都提供了標準化的方式來連接大型語言模型 (LLM) 與相關的情境資料。</p>
-<p>本教學教導您如何<strong>為 Milvus 設定 MCP 伺服器</strong>，讓 AI 應用程式可以執行向量搜尋、管理集合，並使用<strong>自然語言指令擷取</strong>資料，<strong>而無需</strong>撰寫自訂資料庫查詢。</p>
+<p>本教學教導您如何<strong>為 Milvus 設定 MCP 伺服器</strong>，讓 AI 應用程式可以執行向量搜尋、管理集合，以及使用<strong>自然語言指令</strong>擷取資料<strong>- 而無需</strong>撰寫自訂資料庫查詢。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

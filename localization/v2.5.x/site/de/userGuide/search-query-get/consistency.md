@@ -58,10 +58,10 @@ title: Konsistenz
 <p>Der letzte Zeitstempel wird als GuaranteeTs verwendet, und QueryNodes müssen warten, bis die ServiceTime den GuaranteeTs entspricht, bevor sie Suchanfragen ausführen.</p></li>
 <li><p><strong>Eventuell</strong></p>
 <p>Die GuaranteeTs wird auf einen extrem kleinen Wert, z. B. 1, gesetzt, um Konsistenzprüfungen zu vermeiden, so dass QueryNodes sofort Suchanfragen für alle Batch-Daten ausführen können.</p></li>
-<li><p><strong>Bounded Staleness</strong></p>
-<p>GuranteeTs wird auf einen Zeitpunkt gesetzt, der vor dem letzten Zeitstempel liegt, damit die QueryNodes Suchanfragen mit einer gewissen Toleranz gegenüber Datenverlusten durchführen können.</p></li>
+<li><p><strong>Bounded</strong>(Voreinstellung)</p>
+<p>GuranteeTs wird auf einen Zeitpunkt vor dem letzten Zeitstempel gesetzt, damit QueryNodes Suchanfragen mit einer Toleranz für bestimmte Datenverluste durchführen können.</p></li>
 <li><p><strong>Sitzung</strong></p>
-<p>Der letzte Zeitpunkt, zu dem der Client Daten einfügt, wird als GuaranteeTs verwendet, damit QueryNodes alle vom Client eingefügten Daten durchsuchen kann.</p></li>
+<p>Der letzte Zeitpunkt, zu dem der Client Daten einfügt, wird als GuaranteeTs verwendet, so dass QueryNodes Suchen nach allen vom Client eingefügten Daten durchführen kann.</p></li>
 </ul>
 <p>Milvus verwendet Bounded Staleness als Standard-Konsistenzstufe. Wenn die GuaranteeTs nicht angegeben werden, wird die letzte ServiceTime als GuaranteeTs verwendet.</p>
 <h2 id="Set-Consistency-Level​" class="common-anchor-header">Konsistenzlevel festlegen<button data-href="#Set-Consistency-Level​" class="anchor-icon" translate="no">
@@ -80,22 +80,20 @@ title: Konsistenz
         ></path>
       </svg>
     </button></h2><p>Sie können verschiedene Konsistenzstufen festlegen, wenn Sie eine Sammlung erstellen sowie Suchen und Abfragen durchführen.</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Festlegen der Konsistenzstufe bei der Erstellung einer Sammlung</h3><p>Beim Erstellen einer Sammlung können Sie die Konsistenzstufe für die Suchen und Abfragen innerhalb der Sammlung festlegen. Das folgende Codebeispiel setzt die Konsistenzstufe auf <strong>Stark</strong>.</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Festlegen der Konsistenzstufe bei der Erstellung einer Sammlung</h3><p>Beim Erstellen einer Sammlung können Sie die Konsistenzstufe für die Suchen und Abfragen innerhalb der Sammlung festlegen. Im folgenden Codebeispiel wird die Konsistenzstufe auf <strong>Bounded</strong> gesetzt.</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
-    <span class="hljs-comment"># highlight-next​</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,​
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​ <span class="hljs-comment"># Defaults to Bounded if not specified​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)​
         .collectionSchema(schema)​
-        <span class="hljs-comment">// highlight-next​</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
         .build();​
 client.createCollection(createCollectionReq);​
 
@@ -128,7 +126,7 @@ client.createCollection(createCollectionReq);​
     }&#x27;</span>​
 ​
 <span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{​
-    &quot;consistencyLevel&quot;: &quot;Strong&quot;​
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;​
 }&#x27;</span>​
 ​
 curl --request POST \​
@@ -143,7 +141,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Mögliche Werte für den Parameter <code translate="no">consistency_level</code> sind <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, und <code translate="no">Session</code>.</p>
-<h3 id="Set-Consistency-Level-in-Search​" class="common-anchor-header">Konsistenzstufe in der Suche festlegen</h3><p>Sie können jederzeit die Konsistenzstufe für eine bestimmte Suche ändern. Das folgende Codebeispiel setzt die Konsistenzstufe zurück auf "Bounded". Die Änderung gilt nur für die aktuelle Suchanfrage.</p>
+<h3 id="Set-Consistency-Level-in-Search​" class="common-anchor-header">Konsistenzlevel in der Suche festlegen</h3><p>Sie können jederzeit die Konsistenzstufe für eine bestimmte Suche ändern. Das folgende Codebeispiel setzt die Konsistenzstufe zurück auf "Bounded". Die Änderung gilt nur für die aktuelle Suchanfrage.</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​

@@ -23,7 +23,8 @@ title: Integrar Milvus con MindsDB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Introduction" class="common-anchor-header">Introducción<button data-href="#Introduction" class="anchor-icon" translate="no">
+    </button></h1><iframe width="560" height="315" src="https://www.youtube.com/embed/0wAsrUxv8gM?si=BVyRqLJ2PuZIBF5c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<h2 id="Introduction" class="common-anchor-header">Introducción<button data-href="#Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,7 +40,7 @@ title: Integrar Milvus con MindsDB
         ></path>
       </svg>
     </button></h2><p>El <strong>Model Context Protocol (MCP)</strong> es un protocolo abierto que permite a las aplicaciones de IA, como Claude y Cursor, interactuar con fuentes de datos y herramientas externas sin problemas. Tanto si está creando aplicaciones de IA personalizadas, integrando flujos de trabajo de IA o mejorando interfaces de chat, MCP proporciona una forma estandarizada de conectar grandes modelos lingüísticos (LLM) con datos contextuales relevantes.</p>
-<p>Este tutorial le guiará a través de la <strong>configuración de un servidor MCP para Milvus</strong>, permitiendo que las aplicaciones de IA realicen búsquedas vectoriales, gestionen colecciones y recuperen datos utilizando <strong>comandos de lenguaje natural, sin</strong>escribir consultas personalizadas a bases de datos.</p>
+<p>Este tutorial le guía a través de la <strong>configuración de un servidor MCP para Milvus</strong>, permitiendo que las aplicaciones de IA realicen búsquedas vectoriales, gestionen colecciones y recuperen datos utilizando <strong>comandos de lenguaje natural, sin</strong>escribir consultas personalizadas a bases de datos.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -19,7 +19,8 @@ title: MilvusとMindsDBの統合
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Introduction" class="common-anchor-header">はじめに<button data-href="#Introduction" class="anchor-icon" translate="no">
+    </button></h1><iframe width="560" height="315" src="https://www.youtube.com/embed/0wAsrUxv8gM?si=BVyRqLJ2PuZIBF5c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<h2 id="Introduction" class="common-anchor-header">はじめに<button data-href="#Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,7 +35,7 @@ title: MilvusとMindsDBの統合
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Model Context Protocol (MCP)</strong>は、ClaudeやCursorなどのAIアプリケーションが外部のデータソースやツールとシームレスにやり取りできるようにするオープンプロトコルです。カスタムAIアプリケーションの構築、AIワークフローの統合、チャットインターフェースの強化のいずれにおいても、MCPは大規模言語モデル（LLM）を関連するコンテキストデータと接続するための標準化された方法を提供します。</p>
+    </button></h2><p><strong>モデルコンテキストプロトコル（MCP</strong>）は、ClaudeやCursorなどのAIアプリケーションと外部データソースやツールとのシームレスな連携を可能にするオープンプロトコルです。カスタムAIアプリケーションの構築、AIワークフローの統合、チャットインターフェースの強化のいずれにおいても、MCPは大規模言語モデル（LLM）を関連するコンテキストデータと接続するための標準化された方法を提供します。</p>
 <p>このチュートリアルでは、<strong>Milvus用のMCPサーバーのセットアップ</strong>方法を説明し、AIアプリケーションがベクトル検索を実行し、コレクションを管理し、カスタムデータベースクエリを記述する<strong>ことなく、自然言語コマンドを</strong>使用してデータを取得できるようにします。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,7 +73,7 @@ title: MilvusとMindsDBの統合
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このMCPサーバを使用するには、インストールせずにuvで直接実行することをお勧めします。以下の例では、Claude Desktop と Cursor の両方をこの方法で設定しています。</p>
+    </button></h2><p>このMCPサーバを使用する推奨方法は、インストールせずにuvで直接実行することです。以下の例では、Claude Desktop と Cursor の両方をこの方法で設定しています。</p>
 <p>リポジトリをクローンする場合</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/mcp-server-milvus.git
 <span class="hljs-built_in">cd</span> mcp-server-milvus

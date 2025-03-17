@@ -8,7 +8,7 @@ summary: >-
   de données textuelles, puis de classer les résultats en fonction de leur
   pertinence.
 ---
-<h1 id="Full-Text-Search​BM25" class="common-anchor-header">Recherche en texte intégral(BM25)<button data-href="#Full-Text-Search​BM25" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search-​BM25" class="common-anchor-header">Recherche en texte intégral (BM25)<button data-href="#Full-Text-Search-​BM25" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -28,7 +28,7 @@ summary: >-
 <div class="alert note">
 <ul>
 <li>En intégrant la recherche en texte intégral à la recherche vectorielle dense basée sur la sémantique, vous pouvez améliorer la précision et la pertinence des résultats de la recherche. Pour plus d'informations, voir <a href="/docs/fr/multi-vector-search.md">Recherche hybride</a>.</li>
-<li>La recherche en texte intégral est disponible dans Milvus Standalone et Milvus Distributed mais pas dans Milvus Lite, bien que l'ajout de cette fonction à Milvus Lite soit prévu dans la feuille de route.</li>
+<li>La recherche plein texte est disponible dans Milvus Standalone et Milvus Distributed mais pas dans Milvus Lite, bien que l'ajout de cette fonction à Milvus Lite figure sur la feuille de route.</li>
 </ul>
 </div>
 <h2 id="Overview​" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview​" class="anchor-icon" translate="no">
@@ -49,7 +49,7 @@ summary: >-
     </button></h2><p>La recherche en texte intégral simplifie le processus de recherche textuelle en éliminant la nécessité d'une intégration manuelle. Cette fonction fonctionne selon le flux de travail suivant.</p>
 <ol>
 <li><p><strong>Saisie de texte</strong>: Vous insérez des documents textuels bruts ou fournissez du texte d'interrogation sans avoir à les intégrer manuellement.</p></li>
-<li><p><strong>Analyse du texte</strong>: Milvus utilise un analyseur pour transformer le texte d'entrée en termes individuels pouvant faire l'objet d'une recherche. Pour plus d'informations sur les analyseurs, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md">Présentation des analyseurs</a>.</p></li>
+<li><p><strong>Analyse du texte</strong>: Milvus utilise un analyseur pour transformer le texte d'entrée en termes individuels pouvant faire l'objet d'une recherche. Pour plus d'informations sur les analyseurs, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md">Présentation de l'analyseur</a>.</p></li>
 <li><p><strong>Traitement de la fonction</strong>: La fonction intégrée reçoit les termes tokenisés et les convertit en représentations vectorielles éparses.</p></li>
 <li><p><strong>Stockage de la collection</strong>: Milvus stocke ces représentations vectorielles éparses dans une collection pour une récupération efficace.</p></li>
 <li><p><strong>Notation BM25</strong>: Lors d'une recherche, Milvus applique l'algorithme BM25 pour calculer les scores des documents stockés et classe les résultats correspondants en fonction de leur pertinence par rapport au texte de la requête.</p></li>
@@ -186,7 +186,7 @@ schema.addField(AddFieldReq.builder()
     name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, <span class="hljs-comment"># Function name​</span>
     input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR field containing raw text data​</span>
     output_field_names=[<span class="hljs-string">&quot;sparse&quot;</span>], <span class="hljs-comment"># Name of the SPARSE_FLOAT_VECTOR field reserved to store generated embeddings​</span>
-    function_type=FunctionType.BM25,​
+    function_type=FunctionType.BM25,​ <span class="hljs-comment"># Set to `BM25`</span>
 )​
 ​
 schema.add_function(bm25_function)​
@@ -263,16 +263,18 @@ schema.addFunction(Function.builder()
 <div class="alert note">
 <p>Pour les collections comportant plusieurs champs <code translate="no">VARCHAR</code> nécessitant une conversion de texte en vecteurs épars, ajoutez des fonctions distinctes au schéma de la collection, en veillant à ce que chaque fonction ait un nom et une valeur <code translate="no">output_field_names</code> uniques.</p>
 </div>
-<h3 id="Configure-the-index" class="common-anchor-header">Configuration de l'index</h3><p>Après avoir défini le schéma avec les champs nécessaires et la fonction intégrée, configurez l'index de votre collection. Pour simplifier ce processus, utilisez <code translate="no">AUTOINDEX</code> comme <code translate="no">index_type</code>, une option qui permet à Milvus de choisir et de configurer le type d'index le plus approprié en fonction de la structure de vos données.</p>
+<h3 id="Configure-the-index" class="common-anchor-header">Configuration de l'index</h3><p>Après avoir défini le schéma avec les champs nécessaires et la fonction intégrée, configurez l'index pour votre collection. L'exemple ci-dessous crée un <code translate="no">SPARSE_INVERTED_INDEX</code> avec le type de métrique <code translate="no">BM25</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()​
 ​
-index_params.<span class="hljs-title function_">add_index</span>(​
-    field_name=<span class="hljs-string">&quot;sparse&quot;</span>,​
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, ​
-    metric_type=<span class="hljs-string">&quot;BM25&quot;</span>​
-)​
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
+    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-comment"># Inverted index type for sparse vectors</span>
+    metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
+    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>}, <span class="hljs-comment"># Algorithm for building and querying the index. Valid values: DAAT_MAXSCORE, DAAT_WAND, TAAT_NAIVE.</span>
+)
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;
@@ -286,9 +288,12 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
-    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
-    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
-    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    field_name: <span class="hljs-string">&quot;sparse&quot;</span>,
+    metric_type: <span class="hljs-string">&quot;BM25&quot;</span>,
+    index_type: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    <span class="hljs-keyword">params</span>: {
+      inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+    },
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
@@ -296,7 +301,8 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
         {
             &quot;fieldName&quot;: &quot;sparse&quot;,
             &quot;metricType&quot;: &quot;BM25&quot;,
-            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
+            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -305,11 +311,11 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 </th></tr></thead><tbody><tr><td data-block-token="UxxWdkIBPoSbjOx7MO8csiFEn5d" colspan="1" rowspan="1"><p data-block-token="NYODddTbmoYoBrxPQ8ectvGxnPe"><code translate="no">field_name</code></p>
 </td><td data-block-token="L2ZGdkB2voKhmsx8ezecoPxmnVf" colspan="1" rowspan="1"><p data-block-token="Y16fdZ6hPoXVlgxSTQjctsTonac">Le nom du champ vectoriel à indexer. Pour la recherche en texte intégral, il doit s'agir du champ qui stocke les vecteurs épars générés. Dans cet exemple, la valeur est <code translate="no">sparse</code>.</p>
 </td></tr><tr><td data-block-token="Wn1rdzso5o8AmqxqxiqccBpCnD4" colspan="1" rowspan="1"><p data-block-token="WLDrdOzSXoiKEOxoDREctDounRf"><code translate="no">index_type</code></p>
-</td><td data-block-token="I9TpdLWlXozM3Hx2Z9mcWvDHnNc" colspan="1" rowspan="1"><p data-block-token="Q3cgdK7OTo3kzXxQ1Y2cSarZned">Le type d'index à créer. <code translate="no">AUTOINDEX</code> permet à Milvus d'optimiser automatiquement les paramètres de l'index. Si vous avez besoin de plus de contrôle sur vos paramètres d'index, vous pouvez choisir parmi les différents types d'index disponibles pour les vecteurs sparse dans Milvus. Pour plus d'informations, voir <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Index pris en charge dans Milvus</a>.</p>
+</td><td data-block-token="I9TpdLWlXozM3Hx2Z9mcWvDHnNc" colspan="1" rowspan="1"><p data-block-token="Q3cgdK7OTo3kzXxQ1Y2cSarZned">Le type d'index à créer. <code translate="no">SPARSE_INVERTED_INDEX</code> est le type d'index recommandé pour les vecteurs épars. Pour plus d'informations, reportez-vous à la section <a href="https://milvus.io/docs/sparse_vector.md">Vecteur clairsemé</a>.</p>
 </td></tr><tr><td data-block-token="KJfgdQmD1odMgdxkG6uczBYknQh" colspan="1" rowspan="1"><p data-block-token="XVCsdz9Ulo93A2xavPtcF9Bvnec"><code translate="no">metric_type</code></p>
-</td><td data-block-token="S3NHds6MTodtrsxRILIc8E1wngh" colspan="1" rowspan="1"><p data-block-token="G9i7dPczzoyJRHxyXbecrWBBn0d">La valeur de ce paramètre doit être définie sur <code translate="no">BM25</code> spécifiquement pour la fonctionnalité de recherche en texte intégral.</p>
+</td><td data-block-token="S3NHds6MTodtrsxRILIc8E1wngh" colspan="1" rowspan="1"><p data-block-token="G9i7dPczzoyJRHxyXbecrWBBn0d">La valeur de ce paramètre doit être fixée à <code translate="no">BM25</code> spécifiquement pour la fonctionnalité de recherche en texte intégral.</p>
 </td></tr></tbody></table>
-<h3 id="Create-the-collection​" class="common-anchor-header">Création de la collection</h3><p>Créez maintenant la collection à l'aide des paramètres de schéma et d'index définis.</p>
+<h3 id="Create-the-collection​" class="common-anchor-header">Créer la collection</h3><p>Créez maintenant la collection en utilisant les paramètres de schéma et d'index définis.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
@@ -430,14 +436,14 @@ client.insert(InsertReq.builder()
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {​
-    <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: 0.2},​
+    <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},​ <span class="hljs-comment"># Proportion of small vector values to ignore during the search</span>
 }​
 ​
 client.search(​
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, ​
     data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],​
     anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,​
-    <span class="hljs-built_in">limit</span>=3,​
+    limit=<span class="hljs-number">3</span>,​
     search_params=search_params​
 )​
 
@@ -447,7 +453,7 @@ client.search(​
 <span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">response</span>.<span class="hljs-property">SearchResp</span>;
 
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>);
+searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>); <span class="hljs-comment">// Proportion of small vector values to ignore during the search</span>
 <span class="hljs-title class_">SearchResp</span> searchResp = client.<span class="hljs-title function_">search</span>(<span class="hljs-title class_">SearchReq</span>.<span class="hljs-title function_">builder</span>()
         .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;demo&quot;</span>)
         .<span class="hljs-title function_">data</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)))
@@ -462,7 +468,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
     data: [<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
     anns_field: <span class="hljs-string">&#x27;sparse&#x27;</span>,
     limit: <span class="hljs-number">3</span>,
-    <span class="hljs-keyword">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},
+    <span class="hljs-keyword">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>}, <span class="hljs-comment">// Proportion of small vector values to ignore during the search</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \
@@ -481,7 +487,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
     ],
     &quot;searchParams&quot;:{
         &quot;params&quot;:{
-            &quot;drop_ratio_search&quot;:0.2
+            &quot;drop_ratio_search&quot;:0.2 # Proportion of small vector values to ignore during the search
         }
     }
 }&#x27;</span>

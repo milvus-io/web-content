@@ -35,7 +35,7 @@ title: Coerenza
         ></path>
       </svg>
     </button></h2><p>Milvus è un sistema che separa l'archiviazione dal calcolo. In questo sistema, i <strong>DataNode</strong> sono responsabili della persistenza dei dati e li memorizzano in uno storage distribuito di oggetti, come MinIO/S3. I <strong>QueryNode</strong> gestiscono attività di calcolo come la ricerca. Queste attività comportano l'elaborazione di <strong>dati batch</strong> e di <strong>dati in streaming</strong>. In parole povere, i dati batch possono essere intesi come dati che sono già stati memorizzati nello storage a oggetti, mentre i dati in streaming si riferiscono a dati che non sono ancora stati memorizzati nello storage a oggetti. A causa della latenza di rete, i QueryNode spesso non dispongono dei dati di streaming più recenti. Senza ulteriori salvaguardie, l'esecuzione della ricerca direttamente sui dati in streaming può comportare la perdita di molti punti di dati non impegnati, compromettendo l'accuratezza dei risultati della ricerca.</p>
-<p>Milvus è un sistema che separa l'archiviazione dal calcolo. In questo sistema, i DataNode sono responsabili della persistenza dei dati e, in ultima analisi, li memorizzano in uno storage a oggetti distribuito come MinIO/S3. I QueryNode gestiscono attività di calcolo come la ricerca. Queste attività comportano l'elaborazione di dati batch e di dati in streaming. In parole povere, i dati batch possono essere intesi come dati che sono già stati memorizzati nello storage a oggetti, mentre i dati in streaming si riferiscono a dati che non sono ancora stati memorizzati nello storage a oggetti. A causa della latenza di rete, i QueryNode spesso non dispongono dei dati di streaming più recenti. Senza ulteriori salvaguardie, l'esecuzione della ricerca direttamente sui dati in streaming può comportare la perdita di molti punti di dati non impegnati, compromettendo l'accuratezza dei risultati della ricerca.</p>
+<p>Milvus è un sistema che separa l'archiviazione dal calcolo. In questo sistema, i DataNode sono responsabili della persistenza dei dati e li memorizzano in uno storage a oggetti distribuito, come MinIO/S3. I QueryNode gestiscono attività di calcolo come la ricerca. Queste attività comportano l'elaborazione di dati batch e di dati in streaming. In parole povere, i dati batch possono essere intesi come dati che sono già stati memorizzati nello storage a oggetti, mentre i dati in streaming si riferiscono a dati che non sono ancora stati memorizzati nello storage a oggetti. A causa della latenza di rete, i QueryNode spesso non dispongono dei dati di streaming più recenti. Senza ulteriori salvaguardie, l'esecuzione della ricerca direttamente sui dati in streaming può comportare la perdita di molti punti di dati non impegnati, compromettendo l'accuratezza dei risultati della ricerca.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
@@ -55,13 +55,13 @@ title: Coerenza
 <p>Milvus offre quattro tipi di livelli di consistenza con diverse GaranzieT.</p>
 <ul>
 <li><p><strong>Forte</strong></p>
-<p>L'ultimo timestamp viene utilizzato come GuaranteeTs e i QueryNode devono attendere che il ServiceTime soddisfi il GuaranteeTs prima di eseguire le richieste di ricerca.</p></li>
+<p>L'ultimo timestamp è usato come GuaranteeTs e i QueryNodes devono aspettare che il ServiceTime soddisfi il GuaranteeTs prima di eseguire le richieste di ricerca.</p></li>
 <li><p><strong>Eventuale</strong></p>
 <p>Il GuaranteeTs è impostato su un valore estremamente basso, ad esempio 1, per evitare i controlli di coerenza, in modo che i QueryNode possano eseguire immediatamente le richieste di ricerca su tutti i dati del batch.</p></li>
-<li><p><strong>Stallo limitato</strong></p>
+<li><p><strong>Limitato</strong>(predefinito)</p>
 <p>GuranteeTs è impostato su un punto precedente all'ultimo timestamp per far sì che i QueryNodes eseguano ricerche con una certa tolleranza di perdita di dati.</p></li>
 <li><p><strong>Sessione</strong></p>
-<p>L'ultimo momento in cui il client inserisce i dati viene utilizzato come GuaranteeTs in modo che i QueryNodes possano eseguire ricerche su tutti i dati inseriti dal client.</p></li>
+<p>L'ultimo momento in cui il client inserisce i dati viene utilizzato come GaranziaTs, in modo che i QueryNodes possano eseguire ricerche su tutti i dati inseriti dal client.</p></li>
 </ul>
 <p>Milvus utilizza Bounded Staleness come livello di consistenza predefinito. Se il livello di garanzia non è specificato, viene utilizzato come livello di garanzia l'ultimo ServiceTime.</p>
 <h2 id="Set-Consistency-Level​" class="common-anchor-header">Impostazione del livello di consistenza<button data-href="#Set-Consistency-Level​" class="anchor-icon" translate="no">
@@ -80,22 +80,20 @@ title: Coerenza
         ></path>
       </svg>
     </button></h2><p>È possibile impostare diversi livelli di consistenza quando si crea una raccolta e quando si eseguono ricerche e query.</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Impostazione del livello di consistenza alla creazione di una raccolta</h3><p>Quando si crea una raccolta, è possibile impostare il livello di consistenza per le ricerche e le query all'interno della raccolta. L'esempio di codice seguente imposta il livello di coerenza su <strong>Strong</strong>.</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Impostazione del livello di consistenza alla creazione di una raccolta</h3><p>Quando si crea una raccolta, è possibile impostare il livello di consistenza per le ricerche e le query all'interno della raccolta. L'esempio di codice seguente imposta il livello di consistenza su <strong>Bounded</strong>.</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
-    <span class="hljs-comment"># highlight-next​</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,​
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​ <span class="hljs-comment"># Defaults to Bounded if not specified​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)​
         .collectionSchema(schema)​
-        <span class="hljs-comment">// highlight-next​</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
         .build();​
 client.createCollection(createCollectionReq);​
 
@@ -128,7 +126,7 @@ client.createCollection(createCollectionReq);​
     }&#x27;</span>​
 ​
 <span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{​
-    &quot;consistencyLevel&quot;: &quot;Strong&quot;​
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;​
 }&#x27;</span>​
 ​
 curl --request POST \​

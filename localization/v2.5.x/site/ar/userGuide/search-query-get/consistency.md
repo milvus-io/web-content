@@ -57,11 +57,11 @@ title: الاتساق
 <li><p><strong>قوي</strong></p>
 <p>يتم استخدام أحدث طابع زمني كـ GuaranteeTs، ويتعين على عقد الاستعلام الانتظار حتى يفي وقت الخدمة بـ GuaranteeTs قبل تنفيذ طلبات البحث.</p></li>
 <li><p><strong>نهائي</strong></p>
-<p>يتم تعيين GuaranteeTs على قيمة صغيرة للغاية، مثل 1، لتجنب عمليات التحقق من الاتساق بحيث يمكن لعُقد الاستعلام تنفيذ طلبات البحث على الفور على جميع البيانات الدفعية.</p></li>
-<li><p><strong>الثبات المحدود</strong></p>
+<p>يتم تعيين GuaranteeTs على قيمة صغيرة للغاية، مثل 1، لتجنب عمليات التحقق من الاتساق بحيث يمكن ل QueryNodes تنفيذ طلبات البحث على الفور على جميع البيانات الدفعية.</p></li>
+<li><p><strong>محدود</strong>(افتراضي)</p>
 <p>يتم تعيين GuranteeTs إلى نقطة زمنية أقدم من الطابع الزمني الأخير لجعل QueryNodes تنفذ عمليات البحث مع تحمل فقدان بيانات معينة.</p></li>
 <li><p><strong>الجلسة</strong></p>
-<p>يتم استخدام آخر نقطة زمنية يقوم فيها العميل بإدراج البيانات كـ GuaranteeTs بحيث يمكن لـ QueryNodes إجراء عمليات بحث على جميع البيانات التي أدخلها العميل.</p></li>
+<p>يتم استخدام آخر نقطة زمنية يقوم فيها العميل بإدراج البيانات كـ GuaranteeTs بحيث يمكن لـ QueryNodes إجراء عمليات بحث على جميع البيانات التي أدرجها العميل.</p></li>
 </ul>
 <p>يستخدم ميلفوس مستوى الثبات المحدود كمستوى الاتساق الافتراضي. إذا تُرك مستوى الضمانة غير محدد، يتم استخدام أحدث وقت خدمة كمستوى ضمانة.</p>
 <h2 id="Set-Consistency-Level​" class="common-anchor-header">تعيين مستوى الاتساق<button data-href="#Set-Consistency-Level​" class="anchor-icon" translate="no">
@@ -80,22 +80,20 @@ title: الاتساق
         ></path>
       </svg>
     </button></h2><p>يمكنك تعيين مستويات اتساق مختلفة عند إنشاء مجموعة وكذلك إجراء عمليات بحث واستعلامات.</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">تعيين مستوى الاتساق عند إنشاء مجموعة</h3><p>عند إنشاء مجموعة، يمكنك تعيين مستوى الاتساق لعمليات البحث والاستعلامات داخل المجموعة. يقوم المثال البرمجي التالي بتعيين مستوى الاتساق إلى <strong>قوي</strong>.</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">تعيين مستوى الاتساق عند إنشاء مجموعة</h3><p>عند إنشاء مجموعة، يمكنك تعيين مستوى الاتساق لعمليات البحث والاستعلامات داخل المجموعة. يقوم المثال البرمجي التالي بتعيين مستوى الاتساق إلى <strong>Bounded</strong>.</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
-    <span class="hljs-comment"># highlight-next​</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,​
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​ <span class="hljs-comment"># Defaults to Bounded if not specified​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)​
         .collectionSchema(schema)​
-        <span class="hljs-comment">// highlight-next​</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
         .build();​
 client.createCollection(createCollectionReq);​
 
@@ -128,7 +126,7 @@ client.createCollection(createCollectionReq);​
     }&#x27;</span>​
 ​
 <span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{​
-    &quot;consistencyLevel&quot;: &quot;Strong&quot;​
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;​
 }&#x27;</span>​
 ​
 curl --request POST \​

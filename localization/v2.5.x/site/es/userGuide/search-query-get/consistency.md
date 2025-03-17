@@ -58,10 +58,10 @@ title: Coherencia
 <p>La última marca de tiempo se utiliza como GuaranteeTs, y los QueryNodes tienen que esperar hasta que el ServiceTime cumpla con los GuaranteeTs antes de ejecutar las peticiones de Búsqueda.</p></li>
 <li><p><strong>Eventual</strong></p>
 <p>El GuaranteeTs se establece en un valor extremadamente pequeño, como 1, para evitar comprobaciones de consistencia y que los QueryNodes puedan ejecutar inmediatamente peticiones de búsqueda sobre todos los datos del lote.</p></li>
-<li><p><strong>Estancamiento limitado</strong></p>
+<li><p><strong>Limitada</strong>(por defecto)</p>
 <p>El GuranteeTs se establece en un punto de tiempo anterior a la última marca de tiempo para hacer que los QueryNodes realicen búsquedas con una tolerancia de cierta pérdida de datos.</p></li>
 <li><p><strong>Sesión</strong></p>
-<p>El último punto temporal en el que el cliente inserta datos se utiliza como el GuaranteeTs para que los QueryNodes puedan realizar búsquedas sobre todos los datos insertados por el cliente.</p></li>
+<p>El último punto temporal en el que el cliente inserta datos se utiliza como el GuaranteeTs para que QueryNodes pueda realizar búsquedas sobre todos los datos insertados por el cliente.</p></li>
 </ul>
 <p>Milvus utiliza Bounded Staleness como nivel de consistencia por defecto. Si no se especifica el GuaranteeTs, se utiliza el último ServiceTime como GuaranteeTs.</p>
 <h2 id="Set-Consistency-Level​" class="common-anchor-header">Establecer nivel de consistencia<button data-href="#Set-Consistency-Level​" class="anchor-icon" translate="no">
@@ -80,22 +80,20 @@ title: Coherencia
         ></path>
       </svg>
     </button></h2><p>Puede establecer diferentes niveles de consistencia al crear una colección, así como al realizar búsquedas y consultas.</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Establecer nivel de coherencia al crear una colección</h3><p>Al crear una colección, puede establecer el nivel de coherencia para las búsquedas y consultas dentro de la colección. El siguiente ejemplo de código establece el nivel de consistencia en <strong>Fuerte</strong>.</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Establecer nivel de coherencia al crear una colección</h3><p>Al crear una colección, puede establecer el nivel de coherencia para las búsquedas y consultas dentro de la colección. El siguiente ejemplo de código establece el nivel de consistencia en <strong>Limitado</strong>.</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
-    <span class="hljs-comment"># highlight-next​</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,​
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​ <span class="hljs-comment"># Defaults to Bounded if not specified​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)​
         .collectionSchema(schema)​
-        <span class="hljs-comment">// highlight-next​</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
         .build();​
 client.createCollection(createCollectionReq);​
 
@@ -128,7 +126,7 @@ client.createCollection(createCollectionReq);​
     }&#x27;</span>​
 ​
 <span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{​
-    &quot;consistencyLevel&quot;: &quot;Strong&quot;​
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;​
 }&#x27;</span>​
 ​
 curl --request POST \​

@@ -20,7 +20,8 @@ title: Milvus 与 MindsDB 集成
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Introduction" class="common-anchor-header">简介<button data-href="#Introduction" class="anchor-icon" translate="no">
+    </button></h1><iframe width="560" height="315" src="https://www.youtube.com/embed/0wAsrUxv8gM?si=BVyRqLJ2PuZIBF5c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<h2 id="Introduction" class="common-anchor-header">简介<button data-href="#Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,7 +36,7 @@ title: Milvus 与 MindsDB 集成
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>模型上下文协议（MCP）</strong>是一种开放式协议，可使人工智能应用程序（如 Claude 和 Cursor）与外部数据源和工具进行无缝交互。无论您是要构建自定义 AI 应用程序、集成 AI 工作流，还是要增强聊天界面，MCP 都能提供一种标准化的方式，将大型语言模型 (LLM) 与相关上下文数据连接起来。</p>
+    </button></h2><p><strong>模型上下文协议（MCP）</strong>是一种开放式协议，可使人工智能应用程序（如 Claude 和 Cursor）与外部数据源和工具进行无缝交互。无论您是要构建自定义 AI 应用程序、集成 AI 工作流，还是要增强聊天界面，MCP 都提供了一种将大型语言模型 (LLM) 与相关上下文数据连接起来的标准化方法。</p>
 <p>本教程将指导您<strong>为 Milvus 设置 MCP 服务器</strong>，让人工智能应用能够使用<strong>自然语言命令</strong>执行向量搜索、管理 Collections 和检索数据，<strong>而无需</strong>编写自定义数据库查询。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"

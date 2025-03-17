@@ -35,7 +35,7 @@ title: Последовательность
         ></path>
       </svg>
     </button></h2><p>Milvus - это система, которая разделяет хранение и вычисления. В этой системе <strong>DataNodes</strong> отвечают за сохранение данных и в конечном итоге хранят их в распределенном объектном хранилище, таком как MinIO/S3. <strong>QueryNodes</strong> решают вычислительные задачи, такие как поиск. Эти задачи включают в себя обработку как <strong>пакетных</strong>, так и <strong>потоковых данных</strong>. Проще говоря, под пакетными данными можно понимать данные, которые уже были сохранены в объектном хранилище, а под потоковыми данными - данные, которые еще не были сохранены в объектном хранилище. Из-за сетевых задержек узлы QueryNodes часто не могут хранить самые последние потоковые данные. Без дополнительных мер предосторожности выполнение поиска непосредственно на потоковых данных может привести к потере многих незафиксированных точек данных, что повлияет на точность результатов поиска.</p>
-<p>Milvus - это система, которая разделяет хранение и вычисления. В этой системе узлы DataNodes отвечают за сохранение данных и в конечном итоге хранят их в распределенном объектном хранилище, таком как MinIO/S3. QueryNodes решают вычислительные задачи, такие как поиск. Эти задачи включают в себя обработку как пакетных, так и потоковых данных. Проще говоря, под пакетными данными можно понимать данные, которые уже были сохранены в объектном хранилище, а под потоковыми данными - данные, которые еще не были сохранены в объектном хранилище. Из-за сетевых задержек узлы QueryNodes часто не могут хранить самые последние потоковые данные. Без дополнительных мер предосторожности выполнение поиска непосредственно на потоковых данных может привести к потере многих незафиксированных точек данных, что повлияет на точность результатов поиска.</p>
+<p>Milvus - это система, которая разделяет хранение и вычисления. В этой системе узлы DataNodes отвечают за сохранение данных и в конечном итоге хранят их в распределенных объектных хранилищах, таких как MinIO/S3. QueryNodes решают вычислительные задачи, такие как поиск. Эти задачи включают в себя обработку как пакетных, так и потоковых данных. Проще говоря, под пакетными данными можно понимать данные, которые уже были сохранены в объектном хранилище, а под потоковыми данными - данные, которые еще не были сохранены в объектном хранилище. Из-за сетевых задержек узлы QueryNodes часто не могут хранить самые последние потоковые данные. Без дополнительных мер предосторожности выполнение поиска непосредственно на потоковых данных может привести к потере многих незафиксированных точек данных, что повлияет на точность результатов поиска.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
@@ -57,9 +57,9 @@ title: Последовательность
 <li><p><strong>Сильная</strong></p>
 <p>В качестве GuaranteeTs используется последняя временная метка, и узлы запросов должны ждать, пока ServiceTime не достигнет GuaranteeTs, прежде чем выполнять запросы на поиск.</p></li>
 <li><p><strong>Eventual</strong></p>
-<p>GuaranteeTs устанавливается на очень маленькое значение, например 1, чтобы избежать проверок согласованности, и QueryNodes могут немедленно выполнять поисковые запросы по всем пакетным данным.</p></li>
-<li><p><strong>Ограниченная стабильность</strong></p>
-<p>GuranteeTs устанавливается в момент времени, более ранний, чем последняя временная метка, чтобы QueryNodes могли выполнять поиск с допуском на определенную потерю данных.</p></li>
+<p>GuaranteeTs устанавливается на очень маленькое значение, например 1, чтобы избежать проверок согласованности, и узлы QueryNodes могут немедленно выполнять запросы поиска по всем пакетным данным.</p></li>
+<li><p><strong>Ограниченный</strong>(по умолчанию)</p>
+<p>GuranteeTs устанавливается в момент времени, более ранний, чем последняя временная метка, чтобы заставить QueryNodes выполнять поиск с допуском к определенной потере данных.</p></li>
 <li><p><strong>Сессия</strong></p>
 <p>В качестве GuaranteeTs используется последняя временная точка, в которую клиент вставляет данные, чтобы узлы QueryNodes могли выполнять поиск по всем данным, вставленным клиентом.</p></li>
 </ul>
@@ -80,22 +80,20 @@ title: Последовательность
         ></path>
       </svg>
     </button></h2><p>Вы можете установить различные уровни согласованности при создании коллекции, а также при выполнении поиска и запросов.</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Установка уровня согласованности при создании коллекции</h3><p>При создании коллекции можно установить уровень согласованности для поиска и запросов внутри коллекции. В следующем примере кода уровень согласованности установлен на <strong>Strong</strong>.</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Установка уровня согласованности при создании коллекции</h3><p>При создании коллекции можно установить уровень согласованности для поиска и запросов внутри коллекции. Следующий пример кода устанавливает уровень согласованности на <strong>Bounded</strong>.</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
-    <span class="hljs-comment"># highlight-next​</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,​
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​ <span class="hljs-comment"># Defaults to Bounded if not specified​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)​
         .collectionSchema(schema)​
-        <span class="hljs-comment">// highlight-next​</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
         .build();​
 client.createCollection(createCollectionReq);​
 
@@ -128,7 +126,7 @@ client.createCollection(createCollectionReq);​
     }&#x27;</span>​
 ​
 <span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{​
-    &quot;consistencyLevel&quot;: &quot;Strong&quot;​
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;​
 }&#x27;</span>​
 ​
 curl --request POST \​

@@ -58,7 +58,7 @@ title: Konsistensi
 <p>Cap waktu terbaru digunakan sebagai GuaranteeTs, dan QueryNode harus menunggu hingga ServiceTime memenuhi GuaranteeTs sebelum mengeksekusi permintaan Pencarian.</p></li>
 <li><p><strong>Akhirnya</strong></p>
 <p>GuaranteeTs disetel ke nilai yang sangat kecil, seperti 1, untuk menghindari pemeriksaan konsistensi sehingga QueryNode dapat segera mengeksekusi permintaan Pencarian pada semua data batch.</p></li>
-<li><p><strong>Keusangan Terbatas</strong></p>
+<li><p><strong>Terikat</strong>(default)</p>
 <p>JaminanTs diatur ke titik waktu yang lebih awal dari stempel waktu terbaru untuk membuat QueryNode melakukan pencarian dengan toleransi kehilangan data tertentu.</p></li>
 <li><p><strong>Sesi</strong></p>
 <p>Titik waktu terakhir di mana klien memasukkan data digunakan sebagai JaminanTs sehingga QueryNodes dapat melakukan pencarian pada semua data yang dimasukkan oleh klien.</p></li>
@@ -80,22 +80,20 @@ title: Konsistensi
         ></path>
       </svg>
     </button></h2><p>Anda dapat mengatur tingkat konsistensi yang berbeda saat membuat koleksi serta melakukan pencarian dan kueri.</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Mengatur Tingkat Konsistensi saat Membuat Koleksi</h3><p>Saat membuat koleksi, Anda dapat mengatur tingkat konsistensi untuk pencarian dan kueri di dalam koleksi. Contoh kode berikut ini menetapkan tingkat konsistensi ke <strong>Strong</strong>.</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Mengatur Tingkat Konsistensi saat Membuat Koleksi</h3><p>Saat membuat koleksi, Anda dapat mengatur tingkat konsistensi untuk pencarian dan kueri di dalam koleksi. Contoh kode berikut ini mengatur tingkat konsistensi ke <strong>Bounded</strong>.</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
-    <span class="hljs-comment"># highlight-next​</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,​
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​ <span class="hljs-comment"># Defaults to Bounded if not specified​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)​
         .collectionSchema(schema)​
-        <span class="hljs-comment">// highlight-next​</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
         .build();​
 client.createCollection(createCollectionReq);​
 
@@ -128,7 +126,7 @@ client.createCollection(createCollectionReq);​
     }&#x27;</span>​
 ​
 <span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{​
-    &quot;consistencyLevel&quot;: &quot;Strong&quot;​
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;​
 }&#x27;</span>​
 ​
 curl --request POST \​
@@ -143,7 +141,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Nilai yang mungkin untuk parameter <code translate="no">consistency_level</code> adalah <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, dan <code translate="no">Session</code>.</p>
-<h3 id="Set-Consistency-Level-in-Search​" class="common-anchor-header">Mengatur Tingkat Konsistensi dalam Pencarian</h3><p>Anda selalu dapat mengubah tingkat konsistensi untuk pencarian tertentu. Contoh kode berikut ini menetapkan tingkat konsistensi kembali ke Bounded. Perubahan ini hanya berlaku untuk permintaan pencarian saat ini.</p>
+<h3 id="Set-Consistency-Level-in-Search​" class="common-anchor-header">Mengatur Tingkat Konsistensi di Penelusuran</h3><p>Anda selalu dapat mengubah tingkat konsistensi untuk pencarian tertentu. Contoh kode berikut ini menetapkan tingkat konsistensi kembali ke Bounded. Perubahan ini hanya berlaku untuk permintaan pencarian saat ini.</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​

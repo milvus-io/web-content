@@ -18,7 +18,7 @@ title: 일관성
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>분산형 벡터 데이터베이스로서 Milvus는 읽기 및 쓰기 작업 중에 각 노드 또는 복제본이 동일한 데이터에 액세스할 수 있도록 여러 수준의 일관성을 제공합니다. 현재 지원되는 일관성 수준에는 <strong>강함</strong>, <strong>경계</strong>, <strong>결국</strong>, <strong>세션이</strong> 있으며, 기본 일관성 수준은 <strong>경계가</strong> 사용됩니다.</p>
+    </button></h1><p>분산형 벡터 데이터베이스로서 Milvus는 읽기 및 쓰기 작업 중에 각 노드 또는 복제본이 동일한 데이터에 액세스할 수 있도록 여러 수준의 일관성을 제공합니다. 현재 지원되는 일관성 수준에는 <strong>강함</strong>, <strong>경계</strong>, <strong>최종</strong>, <strong>세션이</strong> 있으며, 기본 일관성 수준은 <strong>경계가</strong> 사용됩니다.</p>
 <h2 id="Overview​" class="common-anchor-header">개요<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ title: 일관성
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
    </span> <span class="img-wrapper"> <span>배치 데이터와 스트리밍 데이터</span> </span></p>
 <p>위 그림에서 보듯이, 쿼리 노드는 검색 요청을 받은 후 스트리밍 데이터와 배치 데이터를 동시에 수신할 수 있습니다. 하지만 네트워크 지연 시간으로 인해 쿼리 노드가 얻은 스트리밍 데이터는 불완전할 수 있습니다.</p>
-<p>이 문제를 해결하기 위해 Milvus는 데이터 대기열의 각 레코드에 타임스탬프를 찍고 데이터 대기열에 동기화 타임스탬프를 지속적으로 삽입합니다. 동기화 타임스탬프(syncT)가 수신될 때마다 쿼리 노드는 이를 서비스 시간으로 설정하여 쿼리 노드가 해당 서비스 시간 이전의 모든 데이터를 볼 수 있도록 합니다. 밀버스는 서비스 타임을 기반으로 일관성과 가용성에 대한 다양한 사용자 요구 사항을 충족하기 위해 보증 타임스탬프(GuaranteeT)를 제공할 수 있습니다. 사용자는 검색 요청에 GuaranteeT를 지정하여 검색 범위에 특정 시점 이전의 데이터를 포함해야 할 필요성을 쿼리 노드에 알릴 수 있습니다.</p>
+<p>이 문제를 해결하기 위해 Milvus는 데이터 대기열의 각 레코드에 타임스탬프를 찍고 데이터 대기열에 동기화 타임스탬프를 지속적으로 삽입합니다. 동기화 타임스탬프(syncT)가 수신될 때마다 쿼리 노드는 이를 서비스 시간으로 설정하며, 이는 쿼리 노드가 해당 서비스 시간 이전의 모든 데이터를 볼 수 있다는 것을 의미합니다. 밀버스는 서비스 타임을 기반으로 일관성과 가용성에 대한 다양한 사용자 요구 사항을 충족하기 위해 보증 타임스탬프(GuaranteeT)를 제공할 수 있습니다. 사용자는 검색 요청에 GuaranteeT를 지정하여 검색 범위에 특정 시점 이전의 데이터를 포함해야 할 필요성을 쿼리 노드에 알릴 수 있습니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/service-time-and-guarantee-time.png" alt="ServiceTime and GuaranteeTs" class="doc-image" id="servicetime-and-guaranteets" />
@@ -57,9 +57,9 @@ title: 일관성
 <li><p><strong>강함</strong></p>
 <p>가장 최근의 타임스탬프가 보장 시간으로 사용되며, 쿼리 노드는 검색 요청을 실행하기 전에 서비스 시간이 보장 시간을 충족할 때까지 기다려야 합니다.</p></li>
 <li><p><strong>최종</strong></p>
-<p>모든 배치 데이터에 대해 쿼리 노드가 즉시 검색 요청을 실행할 수 있도록 일관성 검사를 피하기 위해 GuaranteeTs를 1과 같이 매우 작은 값으로 설정합니다.</p></li>
-<li><p><strong>바운드 스탤렌니스</strong></p>
-<p>쿼리 노드가 특정 데이터 손실을 허용하면서 검색을 수행하도록 하기 위해 최신 타임스탬프보다 앞선 시점으로 GuranteeTs를 설정합니다.</p></li>
+<p>모든 배치 데이터에 대해 쿼리 노드가 즉시 검색 요청을 실행할 수 있도록 일관성 검사를 피하기 위해 1과 같이 매우 작은 값으로 GuaranteeTs를 설정합니다.</p></li>
+<li><p><strong>바운드</strong>(기본값)</p>
+<p>특정 데이터 손실이 허용되는 범위 내에서 쿼리 노드가 검색을 수행하도록 하기 위해 최신 타임스탬프보다 앞선 시점으로 GuranteeTs를 설정합니다.</p></li>
 <li><p><strong>세션</strong></p>
 <p>클라이언트가 데이터를 삽입하는 최신 시점을 보장 시점으로 사용하여 쿼리 노드가 클라이언트가 삽입한 모든 데이터에 대해 검색을 수행할 수 있도록 합니다.</p></li>
 </ul>
@@ -80,22 +80,20 @@ title: 일관성
         ></path>
       </svg>
     </button></h2><p>컬렉션을 만들 때와 검색 및 쿼리를 수행할 때 서로 다른 일관성 수준을 설정할 수 있습니다.</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">컬렉션 생성 시 일관성 수준 설정</h3><p>컬렉션을 만들 때 컬렉션 내의 검색 및 쿼리에 대한 일관성 수준을 설정할 수 있습니다. 다음 코드 예제는 일관성 수준을 <strong>강함으로</strong> 설정합니다.</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">컬렉션 생성 시 일관성 수준 설정</h3><p>컬렉션을 만들 때 컬렉션 내의 검색 및 쿼리에 대한 일관성 수준을 설정할 수 있습니다. 다음 코드 예제는 일관성 수준을 <strong>Bounded로</strong> 설정합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
-    <span class="hljs-comment"># highlight-next​</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,​
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​ <span class="hljs-comment"># Defaults to Bounded if not specified​</span>
 )​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)​
         .collectionSchema(schema)​
-        <span class="hljs-comment">// highlight-next​</span>
-        .consistencyLevel(ConsistencyLevel.STRONG)​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
         .build();​
 client.createCollection(createCollectionReq);​
 
@@ -128,7 +126,7 @@ client.createCollection(createCollectionReq);​
     }&#x27;</span>​
 ​
 <span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{​
-    &quot;consistencyLevel&quot;: &quot;Strong&quot;​
+    &quot;consistencyLevel&quot;: &quot;Bounded&quot;​
 }&#x27;</span>​
 ​
 curl --request POST \​
@@ -208,4 +206,4 @@ curl --request POST \​
  <span class="hljs-type">QueryResp</span> <span class="hljs-variable">getResp</span> <span class="hljs-operator">=</span> client.query(queryReq);​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>이 매개 변수는 쿼리 반복기에서도 사용할 수 있습니다. <code translate="no">consistency_level</code> 매개변수에 사용할 수 있는 값은 <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, <code translate="no">Session</code> 입니다.</p>
+<p>이 매개변수는 쿼리 반복기에서도 사용할 수 있습니다. <code translate="no">consistency_level</code> 매개변수에 사용할 수 있는 값은 <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, <code translate="no">Session</code> 입니다.</p>
