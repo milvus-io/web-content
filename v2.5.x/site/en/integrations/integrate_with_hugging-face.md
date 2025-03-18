@@ -135,7 +135,7 @@ milvus_client.create_collection(
     auto_id=True,  # Enable auto id
     enable_dynamic_field=True,  # Enable dynamic fields
     vector_field_name="question_embedding",  # Map vector field name and embedding column in dataset
-    consistency_level="Strong",  # To enable search with latest data
+    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
 )
 ```
 

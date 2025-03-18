@@ -126,7 +126,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",
+    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
     drop_old=True,
 )
 ```
@@ -202,7 +202,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",
+    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
     drop_old=True,
 )
 ```
@@ -231,7 +231,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",
+    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
     drop_old=True,
 )
 
@@ -274,7 +274,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",
+    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
     drop_old=True,
 )
 
@@ -307,7 +307,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",
+    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
     drop_old=True,
 )
 
@@ -401,7 +401,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    consistency_level="Strong",
+    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
     drop_old=True,
 )
 ```
