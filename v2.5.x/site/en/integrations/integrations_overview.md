@@ -61,7 +61,7 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Build RAG with Milvus and Ollama](build_RAG_with_milvus_and_ollama.md) | LLMs | Milvus, Ollama |
 | [Getting Started with Dynamiq and Milvus](milvus_rag_with_dynamiq.md) | Orchestration | Milvus, Dynamiq |
 | [Build RAG with Milvus and DeepSeek](build_RAG_with_milvus_and_deepseek.md) | LLMs | Milvus, DeepSeek |
-| [Integrate Milvus with Agno](integrate_with_phidata.md) | Agents | Milvus, Agno |
+| [Integrate Milvus with Agno](integrate_with_agno.md) | Agents | Milvus, Agno |
 | [Building RAG with Milvus and Crawl4AI](build_RAG_with_milvus_and_crawl4ai.md) | Data Sources | Milvus, Crawl4AI |
 | [Building RAG with Milvus and Firecrawl](build_RAG_with_milvus_and_firecrawl.md) | Data Sources | Milvus, Firecrawl |
 | [Build RAG with Llama Stack with Milvus](llama_stack_with_milvus.md) | Orchestration | Milvus, Llama Stack |
