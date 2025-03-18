@@ -153,7 +153,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -213,7 +213,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -251,7 +251,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -283,8 +283,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-    drop_old=<span class="hljs-literal">True</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=True,
 )
 
 vectorstore.vector_fields
@@ -304,8 +304,8 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-    drop_old=<span class="hljs-literal">True</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=True,
 )
 
 query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
@@ -377,8 +377,8 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-    drop_old=<span class="hljs-literal">True</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=True,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">Build RAG chain</h3><p>We prepare the LLM instance and prompt, then conbine them into a RAG pipeline using the LangChain Expression Language.</p>
