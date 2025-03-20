@@ -65,7 +65,7 @@ client = MilvusClient(
 )
 
 # update properties
-properties = {"mmap.enabled": true}
+properties = {"mmap.enabled": True}
 
 client.alter_index_properties(
     collection_name="collection_name",
