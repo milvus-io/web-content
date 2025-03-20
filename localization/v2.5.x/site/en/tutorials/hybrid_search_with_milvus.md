@@ -20,7 +20,7 @@ title: Hybrid Search with Milvus
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>If you want to experience the final effect of this tutorial, you can go directly to <a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a> and try it out.</p>
+<p>If you want to experience the final effect of this tutorial, you can go directly to https://demos.milvus.io/hybrid-search/</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>In this tutorial, we will demonstrate how to conduct hybrid search with <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> and <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 model</a>. BGE-M3 model can convert text into dense and sparse vectors. Milvus supports storing both types of vectors in one collection, allowing for hybrid search that enhances the result relevance.</p>
 <p>Milvus supports Dense, Sparse, and Hybrid retrieval methods:</p>
