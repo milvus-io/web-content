@@ -366,7 +366,7 @@ schema.add_field(
     field_name='title_en', 
     datatype=DataType.VARCHAR, 
     max_length=1000, 
-    enable_analyzer=True，
+    enable_analyzer=True,
     analyzer_params=analyzer_params_built_in,
     enable_match=True, 
 )
@@ -392,7 +392,7 @@ schema.add_field(
     field_name='title', 
     datatype=DataType.VARCHAR, 
     max_length=1000, 
-    enable_analyzer=True，
+    enable_analyzer=True,
     analyzer_params=analyzer_params_custom,
     enable_match=True, 
 )
