@@ -42,7 +42,7 @@ title: Гибридный поисковый ретривер Milvus
     <span></span>
   </span>
 </p>
-<p>Эта диаграмма иллюстрирует наиболее распространенный сценарий гибридного поиска - плотный + разреженный гибридный поиск. В этом случае поиск кандидатов осуществляется с использованием как семантического векторного сходства, так и точного сопоставления ключевых слов. Результаты, полученные этими методами, объединяются, ранжируются и передаются в LLM для создания окончательного ответа. Такой подход позволяет сбалансировать точность и семантическое понимание, что делает его весьма эффективным для различных сценариев запросов.</p>
+<p>Эта диаграмма иллюстрирует наиболее распространенный сценарий гибридного поиска, который представляет собой гибрид плотного + разреженного поиска. В этом случае поиск кандидатов осуществляется с использованием как семантического векторного сходства, так и точного сопоставления ключевых слов. Результаты, полученные этими методами, объединяются, ранжируются и передаются в LLM для создания окончательного ответа. Такой подход позволяет сбалансировать точность и семантическое понимание, что делает его весьма эффективным для различных сценариев запросов.</p>
 <p>Помимо гибридного поиска "плотный + разреженный", гибридные стратегии также могут сочетать несколько моделей плотных векторов. Например, одна модель плотного вектора может специализироваться на улавливании семантических нюансов, а другая - на контекстных вкраплениях или специфических представлениях домена. Объединяя результаты этих моделей и ранжируя их, такой тип гибридного поиска обеспечивает более тонкий и учитывающий контекст процесс извлечения информации.</p>
 <p>Интеграция LangChain Milvus обеспечивает гибкий способ реализации гибридного поиска, поддерживает любое количество векторных полей и любые пользовательские модели плотного или разреженного встраивания, что позволяет LangChain Milvus гибко адаптироваться к различным сценариям использования гибридного поиска, и в то же время совместимо с другими возможностями LangChain.</p>
 <p>В этом руководстве мы начнем с наиболее распространенного случая плотного + разреженного, а затем представим несколько общих подходов к использованию гибридного поиска.</p>
@@ -79,7 +79,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Подготовьте несколько примеров документов, представляющих собой краткие изложения вымышленных историй, разбитых по темам или жанрам.</p>
+<p>Подготовьте несколько примеров документов, представляющих собой краткие описания вымышленных историй, разбитых по темам или жанрам.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
 
 docs = [
@@ -153,7 +153,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -164,7 +164,7 @@ vectorstore = Milvus.from_documents(
 </div>
 <p>В приведенном выше коде мы определяем экземпляр <code translate="no">BM25BuiltInFunction</code> и передаем его объекту <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> - это облегченный класс-обертка для <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> в Milvus. Мы можем использовать его вместе с <code translate="no">OpenAIEmbeddings</code> для инициализации экземпляра векторного хранилища Milvus с плотным + разреженным гибридным поиском.</p>
 <p><code translate="no">BM25BuiltInFunction</code> не требует от клиента передачи корпуса или обучения, все обрабатывается автоматически на стороне сервера Milvus, поэтому пользователям не нужно заботиться о словаре и корпусе. Кроме того, пользователи могут настраивать <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">анализатор</a> для реализации пользовательской обработки текста в BM25.</p>
-<p>Более подробную информацию о <code translate="no">BM25BuiltInFunction</code> можно найти в разделах " <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Полнотекстовый поиск"</a> и <a href="https://milvus.io/docs/full_text_search_with_langchain.md">"Использование полнотекстового поиска с LangChain и Milvus</a>".</p>
+<p>Для получения дополнительной информации о <code translate="no">BM25BuiltInFunction</code>, пожалуйста, обратитесь к разделам " <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Полнотекстовый поиск"</a> и <a href="https://milvus.io/docs/full_text_search_with_langchain.md">"Использование полнотекстового поиска с LangChain и Milvus</a>".</p>
 <h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">Вариант 2: Использование плотного и настроенного разреженного вложения LangChain</h3><p>Вы можете унаследовать класс <code translate="no">BaseSparseEmbedding</code> от <code translate="no">langchain_milvus.utils.sparse</code> и реализовать методы <code translate="no">embed_query</code> и <code translate="no">embed_documents</code> для настройки процесса разреженного встраивания. Это позволит вам настроить любой метод разреженного встраивания, основанный как на статистике частот терминов (например, <a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>), так и на нейронных сетях (например, <a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>).</p>
 <p>Приведем пример:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Dict</span>, <span class="hljs-type">List</span>
@@ -194,7 +194,7 @@ vectorstore = Milvus.from_documents(
             }
         ] * <span class="hljs-built_in">len</span>(texts)
 <button class="copy-code-btn"></button></code></pre>
-<p>У нас есть демонстрационный класс <code translate="no">BM25SparseEmbedding</code>, унаследованный от <code translate="no">BaseSparseEmbedding</code> в <code translate="no">langchain_milvus.utils.sparse</code>. Вы можете передать его в список вкраплений инициализации экземпляра векторного хранилища Milvus так же, как и другие классы плотных вкраплений langchain.</p>
+<p>У нас есть демонстрационный класс <code translate="no">BM25SparseEmbedding</code>, унаследованный от <code translate="no">BaseSparseEmbedding</code> в <code translate="no">langchain_milvus.utils.sparse</code>. Вы можете передать его в список вкраплений инициализации экземпляра векторного хранилища Milvus, как и другие классы плотных вкраплений langchain.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># BM25SparseEmbedding is inherited from BaseSparseEmbedding</span>
 <span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BM25SparseEmbedding
 
@@ -212,7 +212,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -249,7 +249,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -281,8 +281,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-    drop_old=<span class="hljs-literal">True</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=True,
 )
 
 vectorstore.vector_fields
@@ -302,8 +302,8 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-    drop_old=<span class="hljs-literal">True</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=True,
 )
 
 query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
@@ -375,8 +375,8 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-    drop_old=<span class="hljs-literal">True</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=True,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">Построение цепочки RAG</h3><p>Мы подготавливаем экземпляр LLM и подсказку, а затем объединяем их в RAG-конвейер с помощью языка выражений LangChain.</p>

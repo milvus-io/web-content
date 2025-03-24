@@ -54,7 +54,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;DE
 <pre><code translate="no" class="language-python">! wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
 ! unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
-<p>Carichiamo tutti i file markdown dalla cartella <code translate="no">milvus_docs/en/faq</code>. Per ogni documento, usiamo semplicemente &quot;# &quot; per separare il contenuto del file, che può separare approssimativamente il contenuto di ogni parte principale del file markdown.</p>
+<p>Carichiamo tutti i file markdown dalla cartella <code translate="no">milvus_docs/en/faq</code>. Per ogni documento, utilizziamo semplicemente &quot;# &quot; per separare il contenuto del file, in modo da separare approssimativamente il contenuto di ogni parte principale del file markdown.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -122,12 +122,12 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>Creare una nuova raccolta con i parametri specificati.</p>
-<p>Se non si specifica alcun campo, Milvus creerà automaticamente un campo predefinito <code translate="no">id</code> per la chiave primaria e un campo <code translate="no">vector</code> per memorizzare i dati vettoriali. Un campo JSON riservato viene utilizzato per memorizzare campi non definiti da schemi e i loro valori.</p>
+<p>Se non si specifica alcun campo, Milvus creerà automaticamente un campo predefinito <code translate="no">id</code> per la chiave primaria e un campo <code translate="no">vector</code> per memorizzare i dati vettoriali. Un campo JSON riservato viene utilizzato per memorizzare campi non definiti dalla mappa e i loro valori.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Inserire i dati</h3><p>Si intersecano le righe di testo, si creano le incorporazioni e si inseriscono i dati in Milvus.</p>
@@ -173,7 +173,7 @@ Creating embeddings: 100%|██████████| 72/72 [00:00&lt;00:00,
     </button></h2><h3 id="Retrieve-data-for-a-query" class="common-anchor-header">Recuperare i dati per una query</h3><p>Specifichiamo una domanda frequente su Milvus.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Cerchiamo la domanda nella raccolta e recuperiamo le prime 3 corrispondenze semantiche.</p>
+<p>Cerchiamo la domanda nella raccolta e recuperiamo le prime tre corrispondenze semantiche.</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=embedding_model.encode_queries(
@@ -184,7 +184,7 @@ Creating embeddings: 100%|██████████| 72/72 [00:00&lt;00:00,
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>],  <span class="hljs-comment"># Return the text field</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Diamo un'occhiata ai risultati della ricerca della domanda</p>
+<p>Diamo un'occhiata ai risultati della ricerca della query</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 retrieved_lines_with_distances = [

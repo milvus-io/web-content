@@ -22,7 +22,7 @@ title: 使用 Milvus 的圖形 RAG
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>大型語言模型的廣泛應用突顯了改善其回應準確性與相關性的重要性。檢索增強世代 (Retrieval-Augmented Generation，RAG) 利用外部知識庫增強模型，提供更多的上下文資訊，並減少幻覺和知識不足等問題。然而，僅依賴簡單的 RAG 模式有其限制，尤其是在處理複雜的實體關係和多跳問題時，模型往往難以提供準確的答案。</p>
 <p>將知識圖形 (KG) 引進 RAG 系統提供了新的解決方案。KG 以結構化的方式呈現實體及其關係，提供更精確的檢索資訊，並協助 RAG 更好地處理複雜的問題解答任務。KG-RAG 仍處於早期階段，對於如何從 KG 中有效地檢索實體及其關係，以及如何整合向量相似性搜尋與圖形結構，目前尚未達成共識。</p>
-<p>在本筆記中，我們將介紹一種簡單但功能強大的方法，以大幅改善此情況的效能。它是一個簡單的 RAG 范例，先進行多向擷取，然後再重新排序，但它在邏輯上實現了 Graph RAG，並在處理多跳問題時達到最先進的效能。讓我們看看它是如何實作的。</p>
+<p>在本筆記中，我們將介紹一種簡單但功能強大的方法，以大幅改善此情況的效能。它是一個簡單的 RAG 范例，先進行多向擷取，然後再重新排序，但它在邏輯上實現了 Graph RAG，並在處理多跳問題時達到最先進的效能。讓我們來看看它是如何實作的。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
@@ -67,7 +67,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">ChatOpenAI</span>, <span class="hljs-title class_">OpenAIEmbeddings</span>
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<p>初始化 Milvus 客戶端實例、LLM 及嵌入模型。</p>
+<p>初始化 Milvus 用戶端實例、LLM 和嵌入模型。</p>
 <pre><code translate="no" class="language-python">milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>)
 
 llm = <span class="hljs-title class_">ChatOpenAI</span>(
@@ -202,7 +202,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     )
 
 

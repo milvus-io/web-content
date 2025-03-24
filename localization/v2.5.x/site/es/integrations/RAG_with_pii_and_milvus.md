@@ -124,7 +124,7 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span cl
 <p>En cuanto al argumento de <code translate="no">MilvusClient</code>:</p>
 <ul>
 <li>Establecer el <code translate="no">uri</code> como un archivo local, por ejemplo<code translate="no">./milvus.db</code>, es el método más conveniente, ya que utiliza automáticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> para almacenar todos los datos en este archivo.</li>
-<li>Si tiene una gran escala de datos, digamos más de un millón de vectores, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. En esta configuración, por favor utilice la dirección del servidor y el puerto como su uri, por ejemplo<code translate="no">http://localhost:19530</code>. Si habilita la función de autenticación en Milvus, utilice "&lt;su_nombre_de_usuario&gt;:&lt;su_contraseña&gt;" como token, de lo contrario no establezca el token.</li>
+<li>Si tiene una gran escala de datos, digamos más de un millón de vectores, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. En esta configuración, por favor utilice la dirección del servidor y el puerto como su uri, por ejemplo<code translate="no">http://localhost:19530</code>. Si habilita la función de autenticación en Milvus, utilice "&lt;su_nombre_de_usuario&gt;:&lt;su_contraseña&gt;" como token, de lo contrario no configure el token.</li>
 <li>Si desea utilizar <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, ajuste <code translate="no">uri</code> y <code translate="no">token</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">punto final público y a la clave Api</a> en Zilliz Cloud.</li>
 </ul>
 </div>
@@ -139,8 +139,8 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span cl
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Insertar datos</h3><p>Itere a través de las líneas de texto enmascaradas, cree incrustaciones y luego inserte los datos en Milvus.</p>

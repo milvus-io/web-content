@@ -26,7 +26,7 @@ title: بناء RAG مع Milvus و Fireworks AI
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_fireworks.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>Fireworks<a href="https://fireworks.ai/">AI</a> عبارة عن منصة استدلالية توليدية للذكاء الاصطناعي توفر سرعة رائدة في المجال وجاهزية إنتاجية لتشغيل النماذج وتخصيصها. توفر Fireworks AI مجموعة متنوعة من خدمات الذكاء الاصطناعي التوليدي، بما في ذلك النماذج بدون خادم، وعمليات النشر عند الطلب، وقدرات الضبط الدقيق. وهي توفر بيئة شاملة لنشر نماذج الذكاء الاصطناعي المختلفة، بما في ذلك النماذج اللغوية الكبيرة (LLMs) ونماذج التضمين. تقوم Fireworks AI بتجميع العديد من النماذج، مما يتيح للمستخدمين الوصول إلى هذه الموارد والاستفادة منها بسهولة دون الحاجة إلى إعداد بنية تحتية واسعة النطاق.</p>
+<p>Fireworks<a href="https://fireworks.ai/">AI</a> عبارة عن منصة استدلالية توليدية للذكاء الاصطناعي توفر سرعة وجاهزية رائدة في المجال لتشغيل النماذج وتخصيصها. توفر Fireworks AI مجموعة متنوعة من خدمات الذكاء الاصطناعي التوليدي، بما في ذلك النماذج بدون خادم، وعمليات النشر عند الطلب، وإمكانيات الضبط الدقيق. وهي توفر بيئة شاملة لنشر نماذج الذكاء الاصطناعي المختلفة، بما في ذلك النماذج اللغوية الكبيرة (LLMs) ونماذج التضمين. تقوم Fireworks AI بتجميع العديد من النماذج، مما يتيح للمستخدمين الوصول إلى هذه الموارد والاستفادة منها بسهولة دون الحاجة إلى إعداد بنية تحتية واسعة النطاق.</p>
 <p>في هذا البرنامج التعليمي، سنوضح لك في هذا البرنامج التعليمي كيفية إنشاء خط أنابيب RAG (التوليد المعزز للاسترجاع) باستخدام Milvus و Fireworks AI.</p>
 <h2 id="Preparation" class="common-anchor-header">الإعداد<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -134,8 +134,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">إدراج البيانات</h3><p>قم بتكرار الأسطر النصية وإنشاء التضمينات، ثم أدخل البيانات في ميلفوس.</p>

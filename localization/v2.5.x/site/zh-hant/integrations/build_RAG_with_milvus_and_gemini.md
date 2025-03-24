@@ -27,7 +27,7 @@ title: 使用 Milvus 和 Gemini 建立 RAG
         ></path>
       </svg>
     </button></h1><p><a href="https://ai.google.dev/gemini-api/docs">Gemini API</a>和<a href="https://ai.google.dev/aistudio">Google AI Studio</a>可協助您開始使用 Google 的最新模型，並將您的想法轉化為可擴充的應用程式。Gemini 可讓您存取功能強大的語言模型，例如<code translate="no">Gemini-1.5-Flash</code> 、<code translate="no">Gemini-1.5-Flash-8B</code> 和<code translate="no">Gemini-1.5-Pro</code> ，以執行文字產生、文件處理、視覺、音訊分析等任務。透過 API，您可以輸入包含數百萬筆字元的長上下文、針對特定任務微調模型、產生結構化輸出（如 JSON），以及利用語意檢索和程式碼執行等功能。</p>
-<p>在本教程中，我們將教您如何使用 Milvus 和 Gemini 建立 RAG（Retrieval-Augmented Generation）管道。我們將使用 Gemini 模型根據給定的查詢生成文字。我們也會使用 Milvus 來儲存和擷取產生的文字。</p>
+<p>在本教程中，我們將教您如何使用 Milvus 和 Gemini 建立 RAG（Retrieval-Augmented Generation）管道。我們將使用 Gemini 模型根據給定的查詢產生文字。我們也會使用 Milvus 來儲存和擷取產生的文字。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -132,8 +132,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入資料</h3><p>遍歷文字行，建立嵌入，然後將資料插入 Milvus。</p>

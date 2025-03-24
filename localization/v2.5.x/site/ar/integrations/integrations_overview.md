@@ -77,7 +77,7 @@ title: نظرة عامة على عمليات التكامل
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_ollama.md">بناء RAG مع ميلفوس وأولاما</a></td><td>ل.ل.م</td><td>ميلفوس، أولاما</td></tr>
 <tr><td><a href="/docs/ar/milvus_rag_with_dynamiq.md">بدء الاستخدام مع Dynamiq وMilvus</a></td><td>التنسيق</td><td>ميلفوس، ديناميك</td></tr>
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_deepseek.md">بناء RAG مع ميلفوس وDeepSeek</a></td><td>ل.ل.م</td><td>ميلفوس، ديبسيك</td></tr>
-<tr><td><a href="/docs/ar/integrate_with_phidata.md">دمج ميلفوس مع أغنو</a></td><td>الوكلاء</td><td>ميلفوس، أغنو</td></tr>
+<tr><td><a href="/docs/ar/integrate_with_agno.md">دمج ميلفوس مع أغنو</a></td><td>الوكلاء</td><td>ميلفوس، أغنو</td></tr>
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_crawl4ai.md">بناء RAG مع Milvus و Crawl4AI</a></td><td>مصادر البيانات</td><td>ميلفوس, Crawl4AI</td></tr>
 <tr><td><a href="/docs/ar/build_RAG_with_milvus_and_firecrawl.md">بناء RAG باستخدام Milvus وFirecrawl</a></td><td>مصادر البيانات</td><td>ميلفوس، فايركراول</td></tr>
 <tr><td><a href="/docs/ar/llama_stack_with_milvus.md">بناء RAG مع Llama Stack مع Milvus</a></td><td>التنسيق</td><td>ميلفوس، مكدس لاما</td></tr>

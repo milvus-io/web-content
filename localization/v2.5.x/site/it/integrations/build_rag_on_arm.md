@@ -1,7 +1,7 @@
 ---
 id: build_rag_on_arm.md
 summary: >-
-  In questa esercitazione si apprende come costruire un'applicazione di
+  In questa esercitazione imparerete a costruire un'applicazione di
   Retrieval-Augmented Generation (RAG) su infrastrutture basate su Arm. Per
   l'archiviazione vettoriale, utilizziamo Zilliz Cloud, il database vettoriale
   Milvus completamente gestito. Zilliz Cloud è disponibile sui principali cloud
@@ -94,11 +94,11 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Il tipo di metrica predefinito è la distanza del prodotto interno. Per ulteriori informazioni sui tipi di distanza, consultare la <a href="https://milvus.io/docs/metric.md?tab=floating">pagina Metriche di somiglianza</a>.</p>
+<p>Il tipo di metrica predefinito è la distanza del prodotto interno. Per ulteriori informazioni sui tipi di distanza, si può consultare la <a href="https://milvus.io/docs/metric.md?tab=floating">pagina Metriche di somiglianza</a>.</p>
 <h3 id="Prepare-the-data" class="common-anchor-header">Preparare i dati</h3><p>Per il nostro RAG utilizziamo le pagine FAQ della <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentazione Milvus 2.4.x</a> come conoscenza privata, che è una buona fonte di dati per una semplice pipeline RAG.</p>
 <p>Scaricare il file zip ed estrarre i documenti nella cartella <code translate="no">milvus_docs</code>.</p>
 <pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>

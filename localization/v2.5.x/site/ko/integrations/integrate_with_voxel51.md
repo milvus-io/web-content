@@ -150,7 +150,7 @@ milvus_index.delete()
         ></path>
       </svg>
     </button></h2><p>기본적으로 <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> 또는 <code translate="no">sort_by_similarity()</code> 을 호출하면 스클레인 백엔드가 사용됩니다.</p>
-<p>Milvus 백엔드를 사용하려면 선택적 백엔드 매개변수인 <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> 를 <code translate="no">&quot;milvus&quot;</code> 로 설정하면 됩니다:</p>
+<p>Milvus 백엔드를 사용하려면 선택적 백엔드 매개변수( <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> 를 <code translate="no">&quot;milvus&quot;</code> 로 설정하면 됩니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> fiftyone.<span class="hljs-property">brain</span> <span class="hljs-keyword">as</span> fob
 
 fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<span class="hljs-string">&quot;milvus&quot;</span>, ...)
@@ -260,7 +260,7 @@ milvus_index = fob.compute_similarity(
 <ul>
 <li><p><strong>collection_name</strong><em>(없음</em>): 사용하거나 생성할 Milvus 컬렉션의 이름입니다. 아무것도 제공되지 않으면 새 컬렉션이 생성됩니다.</p></li>
 <li><p><strong>metric</strong> (<em>"dotproduct")</em>: 새 인덱스를 생성할 때 사용할 임베딩 거리 메트릭입니다. 지원되는 값은 (<code translate="no">&quot;dotproduct&quot;</code>, <code translate="no">&quot;euclidean&quot;</code>)</p></li>
-<li><p><strong>일관성_레벨</strong> (<em>"세션")</em>: 사용할 일관성 수준입니다. 지원되는 값은 (<code translate="no">&quot;Strong&quot;</code>, <code translate="no">&quot;Session&quot;</code>, <code translate="no">&quot;Bounded&quot;</code>, <code translate="no">&quot;Eventually&quot;</code>)입니다.</p></li>
+<li><p><strong>일관성_레벨</strong> (<em>"세션")</em>: 사용할 일관성 수준입니다. 지원되는 값은 (<code translate="no">&quot;Strong&quot;</code>, <code translate="no">&quot;Session&quot;</code>, <code translate="no">&quot;Bounded&quot;</code>, <code translate="no">&quot;Eventually&quot;</code>) 입니다.</p></li>
 </ul>
 <p>이러한 매개변수에 대한 자세한 내용은 <a href="/docs/ko/authenticate.md">Milvus 인증 문서</a> 및 <a href="/docs/ko/consistency.md">Milvus 일관성 수준 문서를</a> 참조하세요.</p>
 <p>이전 섹션에서 설명한 전략 중 하나를 통해 이러한 매개변수를 지정할 수 있습니다. 다음은 사용 가능한 모든 파라미터를 포함하는 <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">브레인 구성의</a> 예입니다:</p>
@@ -275,13 +275,13 @@ milvus_index = fob.compute_similarity(
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>그러나 일반적으로 이러한 매개 변수는 <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> 에 직접 전달하여 특정 새 인덱스를 구성합니다:</p>
-<pre><code translate="no" class="language-python">milvus_index = fob.<span class="hljs-title function_">compute_similarity</span>(
+<pre><code translate="no" class="language-python">milvus_index = fob.compute_similarity(
     ...
     backend=<span class="hljs-string">&quot;milvus&quot;</span>,
     brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     metric=<span class="hljs-string">&quot;dotproduct&quot;</span>,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Manage-brain-runs" class="common-anchor-header">브레인 런 관리<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">

@@ -154,12 +154,12 @@ analyzerParams.<span class="hljs-title function_">put</span>(<span class="hljs-s
 <p>Milvus предлагает следующие встроенные анализаторы, каждый из которых предназначен для конкретных задач обработки текста:</p>
 <ul>
 <li><p><code translate="no">standard</code>: : Подходит для обработки текста общего назначения, применяя стандартную токенизацию и фильтрацию строчных букв.</p></li>
-<li><p><code translate="no">english</code>: Оптимизирован для англоязычных текстов, с поддержкой английских стоп-слов.</p></li>
+<li><p><code translate="no">english</code>: : Оптимизирован для англоязычных текстов, с поддержкой английских стоп-слов.</p></li>
 <li><p><code translate="no">chinese</code>: : Специализирован для обработки китайского текста, включая токенизацию, адаптированную к структурам китайского языка.</p></li>
 </ul>
 <p>Список встроенных анализаторов и их настраиваемых параметров см. в разделе <a href="/docs/ru/built-in-analyzers">Справочник встроенных анализаторов</a>.</p>
-<h3 id="Custom-analyzer" class="common-anchor-header">Пользовательский анализатор</h3><p>Для более сложной обработки текста пользовательские анализаторы в Milvus позволяют создать индивидуальный конвейер обработки текста, указав <strong>токенизатор</strong> и <strong>фильтры</strong>. Такая настройка идеально подходит для специализированных случаев использования, когда требуется точный контроль.</p>
-<h4 id="Tokenizer" class="common-anchor-header">Токенизатор</h4><p><strong>Токенизатор</strong> - это <strong>обязательный</strong> компонент пользовательского анализатора, который запускает конвейер анализатора, разбивая входной текст на дискретные единицы или <strong>токены</strong>. В зависимости от типа токенизатора токенизация выполняется по определенным правилам, таким как разбиение на пробельные символы или знаки препинания. Этот процесс позволяет более точно и независимо обрабатывать каждое слово или фразу.</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">Пользовательский анализатор</h3><p>Для более сложной обработки текста пользовательские анализаторы в Milvus позволяют создать индивидуальный конвейер обработки текста, указав <strong>токенизатор</strong> и <strong>фильтры</strong>. Такая настройка идеально подходит для специализированных случаев, когда требуется точный контроль.</p>
+<h4 id="Tokenizer" class="common-anchor-header">Токенизатор</h4><p><strong>Токенизатор</strong> - <strong>обязательный</strong> компонент пользовательского анализатора, который запускает конвейер анализатора, разбивая входной текст на дискретные единицы или <strong>лексемы</strong>. В зависимости от типа токенизатора токенизация выполняется по определенным правилам, таким как разбиение на пробельные символы или знаки препинания. Этот процесс позволяет более точно и независимо обрабатывать каждое слово или фразу.</p>
 <p>Например, токенизатор преобразует текст <code translate="no">&quot;Vector Database Built for Scale&quot;</code> в отдельные лексемы:</p>
 <pre><code translate="no" class="language-plaintext">[<span class="hljs-string">&quot;Vector&quot;</span>, <span class="hljs-string">&quot;Database&quot;</span>, <span class="hljs-string">&quot;Built&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>, <span class="hljs-string">&quot;Scale&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
@@ -306,7 +306,7 @@ schema.add_field(
     field_name=<span class="hljs-string">&#x27;title_en&#x27;</span>, 
     datatype=DataType.VARCHAR, 
     max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>，
+    enable_analyzer=<span class="hljs-literal">True</span>,
     analyzer_params=analyzer_params_built_in,
     enable_match=<span class="hljs-literal">True</span>, 
 )
@@ -332,7 +332,7 @@ schema.add_field(
     field_name=<span class="hljs-string">&#x27;title&#x27;</span>, 
     datatype=DataType.VARCHAR, 
     max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>，
+    enable_analyzer=<span class="hljs-literal">True</span>,
     analyzer_params=analyzer_params_custom,
     enable_match=<span class="hljs-literal">True</span>, 
 )

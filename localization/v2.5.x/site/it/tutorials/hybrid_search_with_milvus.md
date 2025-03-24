@@ -20,7 +20,7 @@ title: Ricerca ibrida con Milvus
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Se volete sperimentare l'effetto finale di questa esercitazione, potete andare direttamente su <a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a> e provarla.</p>
+<p>Se volete sperimentare l'effetto finale di questo tutorial, potete andare direttamente su https://demos.milvus.io/hybrid-search/.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>In questa esercitazione verrà mostrato come condurre una ricerca ibrida con <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> e il <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">modello BGE-M3</a>. Il modello BGE-M3 può convertire il testo in vettori densi e radi. Milvus supporta la memorizzazione di entrambi i tipi di vettori in un'unica raccolta, consentendo una ricerca ibrida che migliora la rilevanza dei risultati.</p>
 <p>Milvus supporta metodi di recupero densi, radi e ibridi:</p>

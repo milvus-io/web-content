@@ -44,7 +44,7 @@ title: Milvus Hybrid Search Retriever
 </p>
 <p>Este diagrama ilustra o cenário de pesquisa híbrida mais comum, que é a pesquisa híbrida densa + esparsa. Neste caso, os candidatos são recuperados utilizando a semelhança de vectores semânticos e a correspondência precisa de palavras-chave. Os resultados destes métodos são fundidos, reavaliados e transmitidos a um LLM para gerar a resposta final. Esta abordagem equilibra precisão e compreensão semântica, tornando-a altamente eficaz para diversos cenários de consulta.</p>
 <p>Para além da pesquisa híbrida densa + esparsa, as estratégias híbridas também podem combinar vários modelos de vectores densos. Por exemplo, um modelo de vectores densos pode especializar-se na captura de nuances semânticas, enquanto outro se concentra em incorporações contextuais ou representações específicas do domínio. Ao fundir os resultados destes modelos e ao reordená-los, este tipo de pesquisa híbrida garante um processo de recuperação mais matizado e sensível ao contexto.</p>
-<p>A integração do LangChain Milvus fornece uma forma flexível de implementar a pesquisa híbrida, suporta qualquer número de campos vectoriais e quaisquer modelos de incorporação densos ou esparsos personalizados, o que permite ao LangChain Milvus adaptar-se de forma flexível a vários cenários de utilização da pesquisa híbrida e, ao mesmo tempo, ser compatível com outras capacidades do LangChain.</p>
+<p>A integração do LangChain Milvus fornece uma forma flexível de implementar a pesquisa híbrida, suporta qualquer número de campos vectoriais e quaisquer modelos de incorporação densos ou esparsos personalizados, o que permite ao LangChain Milvus adaptar-se de forma flexível a vários cenários de utilização de pesquisa híbrida e, ao mesmo tempo, ser compatível com outras capacidades do LangChain.</p>
 <p>Neste tutorial, começaremos com o caso mais comum denso + esparso e, em seguida, apresentaremos várias abordagens gerais de uso de pesquisa híbrida.</p>
 <div class="alert note">
 <p>O <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a>, que é outra implementação de busca híbrida com Milvus e LangChain, <strong>está prestes a ser descontinuado</strong>. Por favor, use a abordagem deste documento para implementar a pesquisa híbrida, pois ela é mais flexível e compatível com LangChain.</p>
@@ -79,7 +79,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Prepare alguns documentos de exemplo, que são resumos de histórias de ficção categorizados por tema ou género.</p>
+<p>Prepare alguns documentos de exemplo, que são resumos de histórias fictícias categorizadas por tema ou género.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
 
 docs = [
@@ -153,7 +153,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -212,7 +212,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -249,7 +249,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -281,8 +281,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-    drop_old=<span class="hljs-literal">True</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=True,
 )
 
 vectorstore.vector_fields
@@ -302,8 +302,8 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-    drop_old=<span class="hljs-literal">True</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=True,
 )
 
 query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
@@ -375,8 +375,8 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-    drop_old=<span class="hljs-literal">True</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=True,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">Construir a cadeia RAG</h3><p>Preparamos a instância LLM e o prompt e, em seguida, combinamo-los num pipeline RAG utilizando a linguagem de expressão LangChain.</p>

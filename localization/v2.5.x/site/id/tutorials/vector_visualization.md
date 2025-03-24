@@ -26,7 +26,7 @@ title: Visualisasi Vektor
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/vector_visualization.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>Dalam contoh ini, kami akan menunjukkan bagaimana memvisualisasikan embedding (vektor) dalam Milvus menggunakan <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a>.</p>
+<p>Dalam contoh ini, kami akan menunjukkan cara memvisualisasikan embedding (vektor) di Milvus menggunakan <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a>.</p>
 <p>Teknik pengurangan dimensi, seperti t-SNE, sangat berharga untuk memvisualisasikan data yang kompleks dan berdimensi tinggi dalam ruang 2D atau 3D dengan tetap mempertahankan struktur lokal. Hal ini memungkinkan pengenalan pola, meningkatkan pemahaman tentang hubungan fitur, dan memfasilitasi interpretasi hasil model pembelajaran mesin. Selain itu, t-SNE membantu dalam evaluasi algoritme dengan membandingkan hasil pengelompokan secara visual, menyederhanakan presentasi data kepada audiens non-spesialis, dan dapat mengurangi biaya komputasi dengan bekerja dengan representasi dimensi yang lebih rendah. Melalui aplikasi ini, t-SNE tidak hanya membantu mendapatkan wawasan yang lebih dalam tentang kumpulan data tetapi juga mendukung proses pengambilan keputusan yang lebih tepat.</p>
 <h2 id="Preparation" class="common-anchor-header">Persiapan<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -156,8 +156,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-data" class="common-anchor-header">Menyisipkan data<button data-href="#Insert-data" class="anchor-icon" translate="no">
@@ -373,7 +373,7 @@ df_tsne
 </table>
 <p>74 baris × 2 kolom</p>
 </div>
-<h3 id="Visualizing-Milvus-search-results-on-a-2d-plane" class="common-anchor-header">Memvisualisasikan hasil pencarian Milvus pada bidang 2d</h3><p>Kami akan memplot vektor kueri dengan warna hijau, vektor yang diambil dengan warna merah, dan vektor yang tersisa dengan warna biru.</p>
+<h3 id="Visualizing-Milvus-search-results-on-a-2d-plane" class="common-anchor-header">Memvisualisasikan hasil pencarian Milvus pada bidang 2d</h3><p>Kita akan memplot vektor kueri dengan warna hijau, vektor yang diambil dengan warna merah, dan vektor yang tersisa dengan warna biru.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 <span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 

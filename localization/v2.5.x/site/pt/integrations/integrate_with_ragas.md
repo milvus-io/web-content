@@ -23,7 +23,7 @@ title: Avaliação com Ragas
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Este guia demonstra como utilizar o Ragas para avaliar um pipeline Retrieval-Augmented Generation (RAG) baseado no <a href="https://milvus.io/">Milvus</a>.</p>
-<p>O sistema RAG combina um sistema de recuperação com um modelo generativo para gerar um novo texto com base num determinado pedido. O sistema começa por recuperar documentos relevantes de um corpus utilizando o Milvus e, em seguida, utiliza um modelo generativo para gerar novo texto com base nos documentos recuperados.</p>
+<p>O sistema RAG combina um sistema de recuperação com um modelo generativo para gerar novo texto com base num determinado pedido. O sistema começa por recuperar documentos relevantes de um corpus utilizando o Milvus e, em seguida, utiliza um modelo generativo para gerar novo texto com base nos documentos recuperados.</p>
 <p><a href="https://docs.ragas.io/en/latest/index.html#">O Ragas</a> é um quadro que ajuda a avaliar as condutas RAG. Existem ferramentas e estruturas que ajudam a construir estas condutas, mas avaliá-las e quantificar o seu desempenho pode ser difícil. É aqui que entra o Ragas (Avaliação RAG).</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,7 +44,7 @@ title: Avaliação com Ragas
 <pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas ragas
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ser necessário <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
 </div>
 <p>Neste exemplo, vamos utilizar o OpenAI como LLM. Você deve preparar a <a href="https://platform.openai.com/docs/quickstart">chave api</a> <code translate="no">OPENAI_API_KEY</code> como uma variável de ambiente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -123,7 +123,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -328,7 +328,7 @@ df
         ></path>
       </svg>
     </button></h2><p>Usamos o Ragas para avaliar o desempenho dos resultados do nosso pipeline RAG.</p>
-<p>O Ragas fornece um conjunto de métricas que é fácil de usar. Usamos <code translate="no">Answer relevancy</code>, <code translate="no">Faithfulness</code>, <code translate="no">Context recall</code> e <code translate="no">Context precision</code> como métricas para avaliar nosso pipeline RAG. Para mais informações sobre as métricas, consulte as <a href="https://docs.ragas.io/en/latest/concepts/metrics/index.html">Métricas Ragas</a>.</p>
+<p>O Ragas fornece um conjunto de métricas que é fácil de usar. Usamos <code translate="no">Answer relevancy</code>, <code translate="no">Faithfulness</code>, <code translate="no">Context recall</code> e <code translate="no">Context precision</code> como métricas para avaliar nosso pipeline RAG. Para obter mais informações sobre as métricas, consulte as <a href="https://docs.ragas.io/en/latest/concepts/metrics/index.html">Métricas Ragas</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> ragas <span class="hljs-keyword">import</span> evaluate
 <span class="hljs-keyword">from</span> ragas.<span class="hljs-property">metrics</span> <span class="hljs-keyword">import</span> (
     answer_relevancy,

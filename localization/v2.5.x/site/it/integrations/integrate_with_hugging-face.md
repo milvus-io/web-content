@@ -24,7 +24,7 @@ title: Risposta alle domande con Milvus e Hugging Face
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/qa_with_milvus_and_hf.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/qa_with_milvus_and_hf.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Un sistema di risposta alle domande basato sulla ricerca semantica funziona trovando la domanda più simile da un insieme di coppie domanda-risposta per una determinata domanda. Una volta identificata la domanda più simile, la risposta corrispondente dal set di dati viene considerata come la risposta alla domanda. Questo approccio si basa su misure di similarità semantica per determinare la somiglianza tra le domande e recuperare le risposte pertinenti.</p>
+<p>Un sistema di risposta alle domande basato sulla ricerca semantica funziona trovando la domanda più simile da un insieme di coppie domanda-risposta per una determinata domanda. Una volta identificata la domanda più simile, la risposta corrispondente dal set di dati viene considerata come la risposta alla domanda. Questo approccio si basa su misure di somiglianza semantica per determinare la somiglianza tra le domande e recuperare le risposte pertinenti.</p>
 <p>Questo tutorial mostra come costruire un sistema di risposta alle domande utilizzando <a href="https://huggingface.co">Hugging Face</a> come caricatore di dati e generatore di incorporazioni per l'elaborazione dei dati e <a href="https://milvus.io">Milvus</a> come database vettoriale per la ricerca semantica.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Prima di iniziare<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -168,7 +168,7 @@ milvus_client.create_collection(
     auto_id=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable auto id</span>
     enable_dynamic_field=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable dynamic fields</span>
     vector_field_name=<span class="hljs-string">&quot;question_embedding&quot;</span>,  <span class="hljs-comment"># Map vector field name and embedding column in dataset</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># To enable search with latest data</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">

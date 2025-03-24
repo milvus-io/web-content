@@ -24,7 +24,7 @@ title: MilvusとUnstructuredでRAGを構築する
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_unstructured.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://docs.unstructured.io/welcome">Unstructuredは</a>、RAG（Retrieval Augmented Generation）やモデルの微調整のために非構造化ドキュメントを取り込んで処理するためのプラットフォームとツールを提供します。ノーコードUIプラットフォームとサーバーレスAPIサービスの両方を提供し、ユーザーはUnstructuredがホストするコンピュートリソース上でデータを処理することができる。</p>
+<p><a href="https://docs.unstructured.io/welcome">Unstructuredは</a>、RAG（Retrieval Augmented Generation）やモデルの微調整のために非構造化ドキュメントを取り込んで処理するためのプラットフォームとツールを提供します。ノーコードUIプラットフォームとサーバーレスAPIサービスの両方を提供し、ユーザーはUnstructuredがホストする計算リソース上でデータを処理できる。</p>
 <p>このチュートリアルでは、Unstructuredを使用してPDFドキュメントをインジェストし、Milvusを使用してRAGパイプラインを構築します。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,7 +67,7 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.d
 <ul>
 <li><code translate="no">./milvus.db</code> のように<code translate="no">uri</code> をローカルファイルとして設定するのが最も便利である。</li>
 <li>100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusの認証機能を有効にしている場合は、トークンに"&lt;your_username&gt;:&lt;your_password&gt;"を使用してください。</li>
-<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> 、<code translate="no">token</code> 。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
 <p>コレクションが既に存在するかどうかを確認し、存在する場合は削除します。</p>
@@ -138,7 +138,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     schema=schema,
     index_params=index_params,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 
 milvus_client.load_collection(collection_name=collection_name)

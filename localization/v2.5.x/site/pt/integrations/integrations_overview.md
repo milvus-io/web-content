@@ -77,7 +77,7 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_ollama.md">Construir RAG com Milvus e Ollama</a></td><td>LLMs</td><td>Milvus, Ollama</td></tr>
 <tr><td><a href="/docs/pt/milvus_rag_with_dynamiq.md">Introdução ao Dynamiq e ao Milvus</a></td><td>Orquestração</td><td>Milvus, Dynamiq</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_deepseek.md">Construir RAG com Milvus e DeepSeek</a></td><td>LLMs</td><td>Milvus, DeepSeek</td></tr>
-<tr><td><a href="/docs/pt/integrate_with_phidata.md">Integrar Milvus com Agno</a></td><td>Agentes</td><td>Milvus, Agno</td></tr>
+<tr><td><a href="/docs/pt/integrate_with_agno.md">Integrar Milvus com Agno</a></td><td>Agentes</td><td>Milvus, Agno</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_crawl4ai.md">Construir RAG com Milvus e Crawl4AI</a></td><td>Fontes de dados</td><td>Milvus, Crawl4AI</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_firecrawl.md">Construir RAG com Milvus e Firecrawl</a></td><td>Fontes de dados</td><td>Milvus, Firecrawl</td></tr>
 <tr><td><a href="/docs/pt/llama_stack_with_milvus.md">Criar RAG com Llama Stack com Milvus</a></td><td>Orquestração</td><td>Milvus, Llama Stack</td></tr>

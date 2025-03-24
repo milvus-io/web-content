@@ -45,7 +45,7 @@ title: 밀버스 하이브리드 서치 리트리버
 <p>LangChain Milvus 통합은 하이브리드 검색을 구현하는 유연한 방법을 제공하며, 임의의 수의 벡터 필드와 사용자 정의 밀도 또는 희소 임베딩 모델을 지원하여 다양한 하이브리드 검색 사용 시나리오에 유연하게 적응할 수 있으며 동시에 LangChain의 다른 기능과 호환됩니다.</p>
 <p>이 튜토리얼에서는 가장 일반적인 밀도 + 스파스 사례부터 시작하여 여러 가지 일반적인 하이브리드 검색 사용 방식을 소개합니다.</p>
 <div class="alert note">
-<p>Milvus와 LangChain을 사용한 하이브리드 검색의 또 다른 구현인 <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever는</a> <strong>곧</strong> 더 이상 <strong>사용되지 않을</strong> 예정입니다. 이 문서의 접근 방식이 더 유연하고 LangChain과 호환되므로 하이브리드 검색을 구현할 때 이 접근 방식을 사용하시기 바랍니다.</p>
+<p>Milvus와 LangChain을 사용한 하이브리드 검색의 또 다른 구현인 <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever는</a> <strong>곧 사용 중단될</strong> 예정입니다. 이 문서의 접근 방식이 더 유연하고 LangChain과 호환되므로 하이브리드 검색을 구현할 때는 이 접근 방식을 사용하시기 바랍니다.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +151,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -210,7 +210,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -247,7 +247,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">True</span>,
 )
 
@@ -279,8 +279,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-    drop_old=<span class="hljs-literal">True</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=True,
 )
 
 vectorstore.vector_fields
@@ -300,8 +300,8 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-    drop_old=<span class="hljs-literal">True</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=True,
 )
 
 query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
@@ -373,8 +373,8 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-    drop_old=<span class="hljs-literal">True</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=True,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">RAG 체인 구축</h3><p>LLM 인스턴스와 프롬프트를 준비한 다음 LangChain 표현 언어를 사용하여 RAG 파이프라인으로 결합합니다.</p>
@@ -433,4 +433,4 @@ res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively perform these tasks.'
 </code></pre>
-<p>축하합니다! Milvus와 LangChain으로 구동되는 하이브리드(밀도 벡터 + 스파스 bm25 함수) 검색 RAG 체인을 구축하셨습니다.</p>
+<p>축하합니다! Milvus와 LangChain으로 하이브리드(밀도 벡터 + 스파스 bm25 함수) 검색 RAG 체인을 구축하셨습니다.</p>

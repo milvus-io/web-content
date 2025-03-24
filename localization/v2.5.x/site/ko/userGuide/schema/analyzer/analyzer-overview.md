@@ -304,7 +304,7 @@ schema.add_field(
     field_name=<span class="hljs-string">&#x27;title_en&#x27;</span>, 
     datatype=DataType.VARCHAR, 
     max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>，
+    enable_analyzer=<span class="hljs-literal">True</span>,
     analyzer_params=analyzer_params_built_in,
     enable_match=<span class="hljs-literal">True</span>, 
 )
@@ -330,7 +330,7 @@ schema.add_field(
     field_name=<span class="hljs-string">&#x27;title&#x27;</span>, 
     datatype=DataType.VARCHAR, 
     max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>，
+    enable_analyzer=<span class="hljs-literal">True</span>,
     analyzer_params=analyzer_params_custom,
     enable_match=<span class="hljs-literal">True</span>, 
 )

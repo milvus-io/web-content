@@ -42,7 +42,7 @@ title: Costruire RAG con Milvus + PII Masker
 <pre><code translate="no" class="language-shell">$ git <span class="hljs-built_in">clone</span> https://github.com/HydroXai/pii-masker-v1.git
 $ <span class="hljs-built_in">cd</span> pii-masker-v1/pii-masker
 <button class="copy-code-btn"></button></code></pre>
-<p>Scaricare il modello da<code translate="no">https://huggingface.co/hydroxai/pii_model_weight</code> e sostituirlo con i file in: <code translate="no">pii-masker/output_model/deberta3base_1024/</code></p>
+<p>Scaricare il modello da<code translate="no">https://huggingface.co/hydroxai/pii_model_weight</code>, e sostituirlo con i file in: <code translate="no">pii-masker/output_model/deberta3base_1024/</code></p>
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">Dipendenze e ambiente</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai requests tqdm dataset
 <button class="copy-code-btn"></button></code></pre>
 <p>In questo esempio utilizzeremo OpenAI come LLM. È necessario preparare la <a href="https://platform.openai.com/docs/quickstart">chiave api</a> <code translate="no">OPENAI_API_KEY</code> come variabile d'ambiente.</p>
@@ -84,7 +84,7 @@ Another user joined the conversation on topic of international volunteering oppo
 
 openai_client = <span class="hljs-title class_">OpenAI</span>()
 <button class="copy-code-btn"></button></code></pre>
-<p>Definiamo una funzione per generare embedding di testo utilizzando il client OpenAI. Utilizziamo il modello <code translate="no">text-embedding-3-small</code> come esempio.</p>
+<p>Definiamo una funzione per generare embeddings di testo utilizzando il client OpenAI. Utilizziamo il modello <code translate="no">text-embedding-3-small</code> come esempio.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">emb_text</span>(<span class="hljs-params">text</span>):
     <span class="hljs-keyword">return</span> (
         openai_client.embeddings.create(<span class="hljs-built_in">input</span>=text, model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
@@ -123,7 +123,7 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span cl
 <div class="alert note">
 <p>Come per l'argomento di <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>L'impostazione di <code translate="no">uri</code> come file locale, ad esempio<code translate="no">./milvus.db</code>, è il metodo più conveniente, poiché utilizza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> per memorizzare tutti i dati in questo file.</li>
+<li>Impostare <code translate="no">uri</code> come file locale, ad esempio<code translate="no">./milvus.db</code>, è il metodo più conveniente, poiché utilizza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> per memorizzare tutti i dati in questo file.</li>
 <li>Se si dispone di una grande quantità di dati, ad esempio più di un milione di vettori, è possibile configurare un server Milvus più performante su <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. In questa configurazione, utilizzare l'indirizzo e la porta del server come uri, ad esempio<code translate="no">http://localhost:19530</code>. Se si abilita la funzione di autenticazione su Milvus, utilizzare "&lt;nome_utente&gt;:&lt;password&gt;" come token, altrimenti non impostare il token.</li>
 <li>Se si desidera utilizzare <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, il servizio cloud completamente gestito per Milvus, impostare <code translate="no">uri</code> e <code translate="no">token</code>, che corrispondono all'<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">endpoint pubblico e alla chiave Api</a> di Zilliz Cloud.</li>
 </ul>
@@ -135,12 +135,12 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span cl
     milvus_client.<span class="hljs-title function_">drop_collection</span>(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>Creare una nuova raccolta con i parametri specificati.</p>
-<p>Se non si specifica alcun campo, Milvus creerà automaticamente un campo predefinito <code translate="no">id</code> per la chiave primaria e un campo <code translate="no">vector</code> per memorizzare i dati vettoriali. Un campo JSON riservato viene utilizzato per memorizzare campi non definiti dalla mappa e i loro valori.</p>
+<p>Se non si specifica alcun campo, Milvus creerà automaticamente un campo predefinito <code translate="no">id</code> per la chiave primaria e un campo <code translate="no">vector</code> per memorizzare i dati vettoriali. Un campo JSON riservato viene utilizzato per memorizzare campi non definiti da schemi e i loro valori.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Inserire i dati</h3><p>Si interviene sulle righe di testo mascherate, si creano le incorporazioni e si inseriscono i dati in Milvus.</p>

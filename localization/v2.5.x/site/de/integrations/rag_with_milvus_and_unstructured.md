@@ -48,7 +48,7 @@ title: Erstellen Sie eine RAG mit Milvus und Unstructured
 <div class="alert note">
 <p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
 </div>
-<p>Sie können Ihre <code translate="no">UNSTRUCTURED_API_KEY</code> und <code translate="no">UNSTRUCTURED_URL</code> Umgebungsvariablen von <a href="https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide">hier</a> beziehen.</p>
+<p>Die Umgebungsvariablen <code translate="no">UNSTRUCTURED_API_KEY</code> und <code translate="no">UNSTRUCTURED_URL</code> können Sie <a href="https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide">hier</a> abrufen.</p>
 <p>Wir werden in diesem Beispiel OpenAI als LLM verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
@@ -140,7 +140,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     schema=schema,
     index_params=index_params,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 
 milvus_client.load_collection(collection_name=collection_name)

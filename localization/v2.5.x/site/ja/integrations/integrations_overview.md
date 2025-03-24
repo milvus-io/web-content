@@ -21,7 +21,7 @@ title: インテグレーション概要
     </button></h1><p>このページでは、Milvusとサードパーティツールを連携させるためのチュートリアルをご紹介します。</p>
 <table>
 <thead>
-<tr><th>チュートリアル</th><th>使用例</th><th>パートナーまたはスタック</th></tr>
+<tr><th>チュートリアル</th><th>ユースケース</th><th>パートナーまたはスタック</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/ja/integrate_with_llamaindex.md">MilvusとLlamaIndexを使用したRAG</a></td><td>RAG</td><td>MilvusとLLamaIndexの組み合わせ</td></tr>
@@ -75,7 +75,7 @@ title: インテグレーション概要
 <tr><td><a href="/docs/ja/build_RAG_with_milvus_and_ollama.md">MilvusとOllamaによるRAGの構築</a></td><td>LLM</td><td>Milvus、Ollama</td></tr>
 <tr><td><a href="/docs/ja/milvus_rag_with_dynamiq.md">DynamiqとMilvusを使い始める</a></td><td>オーケストレーション</td><td>Milvus、Dynamiq</td></tr>
 <tr><td><a href="/docs/ja/build_RAG_with_milvus_and_deepseek.md">MilvusとDeepSeekによるRAGの構築</a></td><td>LLM</td><td>Milvus、DeepSeek</td></tr>
-<tr><td><a href="/docs/ja/integrate_with_phidata.md">MilvusとAgnoの統合</a></td><td>エージェント</td><td>Milvus、Agno</td></tr>
+<tr><td><a href="/docs/ja/integrate_with_agno.md">MilvusとAgnoの統合</a></td><td>エージェント</td><td>Milvus、Agno</td></tr>
 <tr><td><a href="/docs/ja/build_RAG_with_milvus_and_crawl4ai.md">MilvusとCrawl4AIによるRAGの構築</a></td><td>データソース</td><td>Milvus、Crawl4AI</td></tr>
 <tr><td><a href="/docs/ja/build_RAG_with_milvus_and_firecrawl.md">MilvusとFirecrawlによるRAGの構築</a></td><td>データソース</td><td>Milvus、Firecrawl</td></tr>
 <tr><td><a href="/docs/ja/llama_stack_with_milvus.md">MilvusとLlama StackでRAGを構築する</a></td><td>オーケストレーション</td><td>Milvus、Llamaスタック</td></tr>

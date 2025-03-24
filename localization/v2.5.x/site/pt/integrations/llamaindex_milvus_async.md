@@ -6,7 +6,7 @@ summary: >-
   Este tutorial demonstra como utilizar o LlamaIndex com o Milvus para construir
   um pipeline assíncrono de processamento de documentos para o RAG. O LlamaIndex
   fornece uma forma de processar documentos e armazená-los numa base de dados
-  vetorial como o Milvus. Aproveitando a API assíncrona do LlamaIndex e a
+  vetorial como o Milvus. Ao aproveitar a API assíncrona do LlamaIndex e a
   biblioteca cliente Python do Milvus, podemos aumentar o rendimento do pipeline
   para processar e indexar eficientemente grandes volumes de dados.
 ---
@@ -31,7 +31,7 @@ summary: >-
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_async.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>Este tutorial demonstra como usar <a href="https://www.llamaindex.ai/">o LlamaIndex</a> com o <a href="https://milvus.io/">Milvus</a> para construir um pipeline assíncrono de processamento de documentos para o RAG. O LlamaIndex fornece uma maneira de processar documentos e armazená-los em bancos de dados vetoriais como o Milvus. Aproveitando a API assíncrona do LlamaIndex e a biblioteca cliente Python do Milvus, podemos aumentar a taxa de transferência do pipeline para processar e indexar eficientemente grandes volumes de dados.</p>
+<p>Este tutorial demonstra como usar <a href="https://www.llamaindex.ai/">o LlamaIndex</a> com o <a href="https://milvus.io/">Milvus</a> para construir um pipeline assíncrono de processamento de documentos para o RAG. O LlamaIndex fornece uma maneira de processar documentos e armazená-los em bancos de dados vetoriais como o Milvus. Ao aproveitar a API assíncrona do LlamaIndex e a biblioteca cliente Python do Milvus, podemos aumentar a taxa de transferência do pipeline para processar e indexar eficientemente grandes volumes de dados.</p>
 <p>Neste tutorial, vamos primeiro introduzir o uso de métodos assíncronos para construir um RAG com LlamaIndex e Milvus a partir de um alto nível e, em seguida, introduzir o uso de métodos de baixo nível e a comparação de desempenho entre síncrono e assíncrono.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Antes de começar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,7 +48,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os trechos de código nesta página requerem as dependências pymilvus e llamaindex. Você pode instalá-las usando os seguintes comandos:</p>
+    </button></h2><p>Os trechos de código nesta página requerem as dependências do pymilvus e do llamaindex. Você pode instalá-las usando os seguintes comandos:</p>
 <pre><code translate="no" class="language-bash">$ pip install -U pymilvus llama-index-vector-stores-milvus llama-index nest-asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -105,17 +105,17 @@ $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-lla
 </ul>
 </div>
 <p>Defina uma função de inicialização que possa ser usada novamente para reconstruir a coleção Milvus.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_vector_store</span>():
-    <span class="hljs-keyword">return</span> MilvusVectorStore(
+<pre><code translate="no" class="language-python"><span class="hljs-function">def <span class="hljs-title">init_vector_store</span>():
+    <span class="hljs-keyword">return</span> <span class="hljs-title">MilvusVectorStore</span>(<span class="hljs-params">
         uri=URI,
-        <span class="hljs-comment"># token=TOKEN,</span>
+        # token=TOKEN,
         dim=DIM,
         collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
         embedding_field=<span class="hljs-string">&quot;embedding&quot;</span>,
         id_field=<span class="hljs-string">&quot;id&quot;</span>,
         similarity_metric=<span class="hljs-string">&quot;COSINE&quot;</span>,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-        overwrite=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># To overwrite the collection if it already exists</span>
+        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (`<span class="hljs-string">&quot;Strong&quot;</span>`, `<span class="hljs-string">&quot;Session&quot;</span>`, `<span class="hljs-string">&quot;Bounded&quot;</span>`, `<span class="hljs-string">&quot;Eventually&quot;</span>`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        overwrite</span>=True,  <span class="hljs-meta"># To overwrite the collection <span class="hljs-keyword">if</span> it already exists</span>
     )
 
 
@@ -123,7 +123,7 @@ vector_store = init_vector_store()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:04:39,414 [DEBUG][_create_connection]: Created new connection using: faa8be8753f74288bffc7e6d38942f8a (async_milvus_client.py:600)
 </code></pre>
-<p>Utilize SimpleDirectoryReader para envolver um objeto de documento LlamaIndex do ficheiro <code translate="no">paul_graham_essay.txt</code>.</p>
+<p>Utilize SimpleDirectoryReader para envolver um objeto de documento LlamaIndex a partir do ficheiro <code translate="no">paul_graham_essay.txt</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> SimpleDirectoryReader
 
 <span class="hljs-comment"># load documents</span>

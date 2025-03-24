@@ -118,7 +118,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <pre><code translate="no">3072
 [-0.015370666049420834, 0.00234124343842268, -0.01011690590530634, 0.044725317507982254, -0.017235849052667618, -0.02880779094994068, -0.026678944006562233, 0.06816216558218002, -0.011376636102795601, 0.021659553050994873]
 </code></pre>
-<h2 id="Load-data-into-Milvus" class="common-anchor-header">Charger les données dans Milvus<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
+<h2 id="Load-data-into-Milvus" class="common-anchor-header">Chargement des données dans Milvus<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -156,8 +156,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-data" class="common-anchor-header">Insérer des données<button data-href="#Insert-data" class="anchor-icon" translate="no">

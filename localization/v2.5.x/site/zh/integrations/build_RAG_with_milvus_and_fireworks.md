@@ -24,7 +24,7 @@ title: 使用 Milvus 和 Fireworks AI 构建 RAG
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_fireworks.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://fireworks.ai/">Fireworks AI</a>是一个生成式人工智能推理平台，为运行和定制模型提供业界领先的速度和生产就绪状态。 Fireworks AI 提供各种生成式人工智能服务，包括无服务器模型、按需部署和微调功能。它为部署各种人工智能模型（包括大型语言模型（LLMs）和 Embeddings 模型）提供了全面的环境。Fireworks AI 聚合了众多模型，使用户能够轻松访问和利用这些资源，而无需进行大量基础架构设置。</p>
+<p><a href="https://fireworks.ai/">Fireworks AI</a>是一个生成式人工智能推理平台，为运行和定制模型提供业界领先的速度和生产就绪状态。 Fireworks AI 提供各种生成式人工智能服务，包括无服务器模型、按需部署和微调功能。它为部署各种人工智能模型（包括大型语言模型（LLMs）和 Embeddings 模型）提供了全面的环境。Fireworks AI 聚合了众多模型，使用户能够轻松访问和利用这些资源，而无需进行大量的基础架构设置。</p>
 <p>在本教程中，我们将向您展示如何使用 Milvus 和 Fireworks AI 构建 RAG（检索-增强生成）管道。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,7 +67,7 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">准备 LLM 和 Embeddings 模型</h3><p>我们初始化一个客户端来准备 LLM 和嵌入模型。Fireworks AI 启用了 OpenAI 风格的 API，你可以稍作调整后使用相同的 API 来调用嵌入模型和 LLM。</p>
+<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">准备 LLM 和嵌入模型</h3><p>我们初始化一个客户端来准备 LLM 和 Embeddings 模型。Fireworks AI 启用了 OpenAI 风格的 API，你可以稍作调整后使用相同的 API 来调用嵌入模型和 LLM。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
 
 fireworks_client = <span class="hljs-title class_">OpenAI</span>(
@@ -128,12 +128,12 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>使用指定参数创建新 Collections。</p>
-<p>如果我们没有指定任何字段信息，Milvus 会自动创建一个主键的默认<code translate="no">id</code> 字段，以及一个存储向量数据的<code translate="no">vector</code> 字段。保留的 JSON 字段用于存储非 Schema 定义的字段及其值。</p>
+<p>如果我们不指定任何字段信息，Milvus 会自动创建一个主键的默认<code translate="no">id</code> 字段，以及一个存储向量数据的<code translate="no">vector</code> 字段。保留的 JSON 字段用于存储非 Schema 定义的字段及其值。</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入数据</h3><p>遍历文本行，创建 Embeddings，然后将数据插入 Milvus。</p>
@@ -173,7 +173,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     </button></h2><h3 id="Retrieve-data-for-a-query" class="common-anchor-header">为查询检索数据</h3><p>让我们指定一个关于 Milvus 的常见问题。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在 Collections 中搜索该问题，并检索语义前 3 个匹配项。</p>
+<p>在 Collections 中搜索该问题并检索语义前 3 个匹配项。</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=[

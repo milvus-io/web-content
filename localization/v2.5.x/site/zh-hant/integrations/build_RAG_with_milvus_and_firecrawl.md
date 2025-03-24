@@ -2,7 +2,7 @@
 id: build_RAG_with_milvus_and_firecrawl.md
 summary: >-
   在本教程中，我們將教您如何使用 Milvus 和 Firecrawl 建立一個 Retrieval-Augmented Generation (RAG)
-  管道。這個管道整合了 Firecrawl (用於網路資料搜刮)、Milvus (用於向量儲存)，以及 OpenAI (用於產生有洞察力的情境感知回應)。
+  管道。此管道整合了 Firecrawl (用於網路資料搜刮)、Milvus (用於向量儲存)，以及 OpenAI (用於產生有洞察力的情境感知回應)。
 title: 使用 Milvus 和 Firecrawl 建立 RAG
 ---
 <h1 id="Building-RAG-with-Milvus-and-Firecrawl" class="common-anchor-header">使用 Milvus 和 Firecrawl 建立 RAG<button data-href="#Building-RAG-with-Milvus-and-Firecrawl" class="anchor-icon" translate="no">
@@ -27,7 +27,7 @@ title: 使用 Milvus 和 Firecrawl 建立 RAG
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://www.firecrawl.dev/">Firecrawl</a>可讓開發人員利用從任何網站刮取的乾淨資料建立 AI 應用程式。Firecrawl 具備先進的搜刮、爬取和資料萃取功能，可簡化將網站內容轉換為乾淨 markdown 或結構化資料的流程，以利下游的 AI 工作流程。</p>
-<p>在本教學中，我們將教您如何使用 Milvus 和 Firecrawl 建立檢索-增強世代 (Retrieval-Augmented Generation, RAG) 管道。此管道整合了 Firecrawl (用於網路資料搜刮)、Milvus (用於向量儲存)，以及 OpenAI (用於產生有洞察力的情境感知回應)。</p>
+<p>在本教學中，我們將教您如何使用 Milvus 和 Firecrawl 建立檢索-增強世代 (Retrieval-Augmented Generation, RAG) 管道。這個管道整合了 Firecrawl (用於網路資料搜刮)、Milvus (用於向量儲存)，以及 OpenAI (用於產生有洞察力的情境感知回應)。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -182,8 +182,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入資料</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

@@ -51,7 +51,7 @@ summary: >-
 <div class="alert note">
 <p>如果您使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重新启动运行时</strong>（点击屏幕上方的 "运行时 "菜单，从下拉菜单中选择 "重新启动会话"）。</p>
 </div>
-<p>我们将使用 OpenAI 的模型。您应将<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作为环境变量。</p>
+<p>我们将使用 OpenAI 的模型。您应该将<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作为环境变量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
@@ -98,21 +98,21 @@ $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-lla
 <ul>
 <li>如果你有大规模的数据，你可以在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubernetes</a> 上建立一个性能良好的 Milvus 服务器。在此设置中，请使用服务器 URI，例如<code translate="no">http://localhost:19530</code> ，作为您的<code translate="no">uri</code> 。</li>
 <li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
-<li>在复杂系统（如网络通信）中，异步处理比同步处理更能提高性能。所以我们认为 Milvus-Lite 不适合使用异步接口，因为使用的场景并不适合。</li>
+<li>在复杂系统（如网络通信）中，异步处理比同步处理更能提高性能。所以我们认为 Milvus-Lite 不适合使用异步接口，因为使用的场景并不合适。</li>
 </ul>
 </div>
 <p>定义一个初始化函数，我们可以再次使用它来重建 Milvus Collections。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_vector_store</span>():
-    <span class="hljs-keyword">return</span> MilvusVectorStore(
+<pre><code translate="no" class="language-python"><span class="hljs-function">def <span class="hljs-title">init_vector_store</span>():
+    <span class="hljs-keyword">return</span> <span class="hljs-title">MilvusVectorStore</span>(<span class="hljs-params">
         uri=URI,
-        <span class="hljs-comment"># token=TOKEN,</span>
+        # token=TOKEN,
         dim=DIM,
         collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
         embedding_field=<span class="hljs-string">&quot;embedding&quot;</span>,
         id_field=<span class="hljs-string">&quot;id&quot;</span>,
         similarity_metric=<span class="hljs-string">&quot;COSINE&quot;</span>,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-        overwrite=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># To overwrite the collection if it already exists</span>
+        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (`<span class="hljs-string">&quot;Strong&quot;</span>`, `<span class="hljs-string">&quot;Session&quot;</span>`, `<span class="hljs-string">&quot;Bounded&quot;</span>`, `<span class="hljs-string">&quot;Eventually&quot;</span>`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        overwrite</span>=True,  <span class="hljs-meta"># To overwrite the collection <span class="hljs-keyword">if</span> it already exists</span>
     )
 
 
@@ -224,7 +224,7 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
 <p>获取事件循环。</p>
 <pre><code translate="no" class="language-python">loop = asyncio.get_event_loop()
 <button class="copy-code-btn"></button></code></pre>
-<p>异步将文档添加到向量存储中。</p>
+<p>异步添加文档到向量存储。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> count <span class="hljs-keyword">in</span> add_counts:
 
     <span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">measure_async_add</span>():

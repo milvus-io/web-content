@@ -26,7 +26,7 @@ title: Costruire un RAG con Milvus e Unstructured
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_unstructured.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://docs.unstructured.io/welcome">Unstructured</a> fornisce una piattaforma e strumenti per l'ingestione e l'elaborazione di documenti non strutturati per la Retrieval Augmented Generation (RAG) e la messa a punto dei modelli. Offre sia una piattaforma UI senza codice che servizi API serverless, consentendo agli utenti di elaborare i dati su risorse di calcolo ospitate da Unstructured.</p>
+<p><a href="https://docs.unstructured.io/welcome">Unstructured</a> fornisce una piattaforma e strumenti per l'acquisizione e l'elaborazione di documenti non strutturati per la Retrieval Augmented Generation (RAG) e la messa a punto dei modelli. Offre sia una piattaforma UI senza codice che servizi API serverless, consentendo agli utenti di elaborare i dati su risorse di calcolo ospitate da Unstructured.</p>
 <p>In questo tutorial, utilizzeremo Unstructured per ingerire documenti PDF e poi useremo Milvus per costruire una pipeline RAG.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparazione<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -122,7 +122,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <li><code translate="no">text</code>: il contenuto testuale del documento.</li>
 <li><code translate="no">metadata</code>: i metadati del documento.</li>
 </ul>
-<p>Quindi si costruisce un indice <code translate="no">AUTOINDEX</code> sul campo <code translate="no">vector</code>. Quindi si crea la raccolta.</p>
+<p>Poi costruiamo un indice <code translate="no">AUTOINDEX</code> sul campo <code translate="no">vector</code>. Quindi si crea la raccolta.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create schema</span>
 schema = milvus_client.create_schema(auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">False</span>)
 <span class="hljs-comment"># Add fields to schema</span>
@@ -140,7 +140,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     schema=schema,
     index_params=index_params,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 
 milvus_client.load_collection(collection_name=collection_name)

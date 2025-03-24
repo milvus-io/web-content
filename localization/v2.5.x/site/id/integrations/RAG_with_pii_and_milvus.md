@@ -21,7 +21,7 @@ title: Bangun RAG dengan Milvus + Masker PII
         ></path>
       </svg>
     </button></h1><p>PII (Personally Identifiable Information) adalah jenis data sensitif yang dapat digunakan untuk mengidentifikasi individu.</p>
-<p><a href="https://github.com/HydroXai/pii-masker-v1/tree/main">PII Masker</a>, yang dikembangkan oleh <a href="https://www.hydrox.ai/">HydroX AI</a>, adalah alat sumber terbuka canggih yang dirancang untuk melindungi data sensitif Anda dengan memanfaatkan model AI yang canggih. Baik saat Anda menangani data pelanggan, melakukan analisis data, atau memastikan kepatuhan terhadap peraturan privasi, PII Masker menyediakan solusi yang kuat dan terukur untuk menjaga keamanan informasi Anda.</p>
+<p><a href="https://github.com/HydroXai/pii-masker-v1/tree/main">PII Masker</a>, yang dikembangkan oleh <a href="https://www.hydrox.ai/">HydroX AI</a>, adalah alat sumber terbuka canggih yang dirancang untuk melindungi data sensitif Anda dengan memanfaatkan model AI yang canggih. Baik saat Anda menangani data pelanggan, melakukan analisis data, atau memastikan kepatuhan terhadap peraturan privasi, PII Masker memberikan solusi yang kuat dan terukur untuk menjaga keamanan informasi Anda.</p>
 <p>Dalam tutorial ini, kami akan menunjukkan cara menggunakan PII Masker dengan Milvus untuk melindungi data pribadi dalam aplikasi RAG (Retrieval-Augmented Generation). Dengan menggabungkan kekuatan kemampuan penyembunyian data PII Masker dengan pengambilan data yang efisien dari Milvus, Anda dapat membuat jalur pipa yang aman dan sesuai dengan privasi untuk menangani informasi sensitif dengan penuh percaya diri. Pendekatan ini memastikan aplikasi Anda dilengkapi untuk memenuhi standar privasi dan melindungi data pengguna secara efektif.</p>
 <h2 id="Preparation" class="common-anchor-header">Persiapan<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -124,7 +124,7 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span cl
 <p>Adapun argumen dari <code translate="no">MilvusClient</code>:</p>
 <ul>
 <li>Menetapkan <code translate="no">uri</code> sebagai file lokal, misalnya<code translate="no">./milvus.db</code>, adalah metode yang paling mudah, karena secara otomatis menggunakan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam file ini.</li>
-<li>Jika Anda memiliki data dalam skala besar, misalnya lebih dari satu juta vektor, Anda dapat menyiapkan server Milvus yang lebih berkinerja tinggi di <a href="https://milvus.io/docs/quickstart.md">Docker atau Kubernetes</a>. Dalam pengaturan ini, gunakan alamat dan port server sebagai uri Anda, misalnya<code translate="no">http://localhost:19530</code>. Jika Anda mengaktifkan fitur autentikasi pada Milvus, gunakan "&lt;nama_user Anda&gt;:&lt;kata sandi Anda&gt;" sebagai token, jika tidak, jangan setel token.</li>
+<li>Jika Anda memiliki data dalam skala besar, misalnya lebih dari satu juta vektor, Anda dapat mengatur server Milvus yang lebih berkinerja tinggi di <a href="https://milvus.io/docs/quickstart.md">Docker atau Kubernetes</a>. Dalam pengaturan ini, gunakan alamat dan port server sebagai uri Anda, misalnya<code translate="no">http://localhost:19530</code>. Jika Anda mengaktifkan fitur autentikasi pada Milvus, gunakan "&lt;nama_user Anda&gt;:&lt;kata sandi Anda&gt;" sebagai token, jika tidak, jangan setel token.</li>
 <li>Jika Anda ingin menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint dan Api key</a> di Zilliz Cloud.</li>
 </ul>
 </div>
@@ -139,8 +139,8 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span cl
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Menyisipkan data</h3><p>Lakukan perulangan melalui baris teks bertopeng, buat penyematan, lalu masukkan data ke dalam Milvus.</p>

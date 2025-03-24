@@ -82,7 +82,7 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(
 collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>检查 Collections 是否已存在，如果已存在，请将其删除。</p>
+<p>检查 Collections 是否已存在，如果已存在则将其删除。</p>
 <pre><code translate="no" class="language-python">if milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
@@ -91,8 +91,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>我们使用内积距离作为默认度量类型。有关距离类型的更多信息，请参阅 "<a href="https://milvus.io/docs/metric.md?tab=floating">相似度量 "页面。</a></p>

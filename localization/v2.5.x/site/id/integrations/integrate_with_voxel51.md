@@ -263,7 +263,7 @@ milvus_index = fob.compute_similarity(
 <li><p><strong>consistency_level</strong> (<em>"Session")</em>: tingkat konsistensi yang akan digunakan. Nilai yang didukung adalah (<code translate="no">&quot;Strong&quot;</code>, <code translate="no">&quot;Session&quot;</code>, <code translate="no">&quot;Bounded&quot;</code>, <code translate="no">&quot;Eventually&quot;</code>)</p></li>
 </ul>
 <p>Untuk informasi terperinci tentang parameter ini, lihat <a href="/docs/id/authenticate.md">dokumentasi otentikasi Milvus</a> dan <a href="/docs/id/consistency.md">dokumentasi tingkat konsistensi Milvus</a>.</p>
-<p>Anda dapat menentukan parameter-parameter ini melalui salah satu strategi yang dijelaskan di bagian sebelumnya. Berikut ini contoh <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">konfigurasi otak</a> yang mencakup semua parameter yang tersedia:</p>
+<p>Anda dapat menentukan parameter-parameter ini melalui salah satu strategi yang dijelaskan di bagian sebelumnya. Berikut adalah contoh <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">konfigurasi otak</a> yang mencakup semua parameter yang tersedia:</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {
         <span class="hljs-string">&quot;milvus&quot;</span>: {
@@ -275,13 +275,13 @@ milvus_index = fob.compute_similarity(
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Namun, biasanya parameter-parameter ini secara langsung diteruskan ke <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> untuk mengonfigurasi indeks baru yang spesifik:</p>
-<pre><code translate="no" class="language-python">milvus_index = fob.<span class="hljs-title function_">compute_similarity</span>(
+<pre><code translate="no" class="language-python">milvus_index = fob.compute_similarity(
     ...
     backend=<span class="hljs-string">&quot;milvus&quot;</span>,
     brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     metric=<span class="hljs-string">&quot;dotproduct&quot;</span>,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Manage-brain-runs" class="common-anchor-header">Mengelola brain run<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">
@@ -328,7 +328,7 @@ dataset.list_brain_runs(
 <pre><code translate="no" class="language-python">dataset.delete_brain_run(brain_key)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Memanggil <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.delete_brain_run"><code translate="no">delete_brain_run()</code></a> hanya akan menghapus catatan brain run dari kumpulan data FiftyOne Anda; ini tidak akan menghapus koleksi Milvus yang terkait, yang dapat Anda lakukan sebagai berikut:</p>
+<p>Memanggil <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.delete_brain_run"><code translate="no">delete_brain_run()</code></a> hanya akan menghapus rekaman brain run dari kumpulan data FiftyOne Anda; ini tidak akan menghapus koleksi Milvus yang terkait, yang dapat Anda lakukan sebagai berikut:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Delete the Milvus collection</span>
 milvus_index = dataset.load_brain_results(brain_key)
 milvus_index.cleanup()

@@ -275,13 +275,13 @@ milvus_index = fob.compute_similarity(
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>ومع ذلك، عادةً ما يتم تمرير هذه المعلمات مباشرةً إلى <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> لتكوين فهرس جديد محدد:</p>
-<pre><code translate="no" class="language-python">milvus_index = fob.<span class="hljs-title function_">compute_similarity</span>(
+<pre><code translate="no" class="language-python">milvus_index = fob.compute_similarity(
     ...
     backend=<span class="hljs-string">&quot;milvus&quot;</span>,
     brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     metric=<span class="hljs-string">&quot;dotproduct&quot;</span>,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Manage-brain-runs" class="common-anchor-header">إدارة عمليات تشغيل الدماغ<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">

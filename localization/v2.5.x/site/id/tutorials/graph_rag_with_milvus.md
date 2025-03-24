@@ -48,7 +48,7 @@ title: Grafik RAG dengan Milvus
 <pre><code translate="no" class="language-python">$ pip install --upgrade --quiet pymilvus numpy scipy langchain langchain-core langchain-openai tqdm
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
+<p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja terinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
 </blockquote>
 <p>Kita akan menggunakan model dari OpenAI. Anda harus menyiapkan <a href="https://platform.openai.com/docs/quickstart">kunci api</a> <code translate="no">OPENAI_API_KEY</code> sebagai variabel lingkungan.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -166,7 +166,7 @@ embedding_model = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=
 <li>Entitas adalah subjek atau objek dalam kembar tiga, jadi kita langsung mengekstraknya dari kembar tiga.</li>
 <li>Di sini kita membangun konsep relasi dengan menggabungkan subjek, predikat, dan objek secara langsung dengan spasi di antaranya.</li>
 </ul>
-<p>Kita juga menyiapkan sebuah dict untuk memetakan id entitas ke id relasi, dan sebuah dict lain untuk memetakan id relasi ke id bagian untuk digunakan di kemudian hari.</p>
+<p>Kita juga menyiapkan sebuah dict untuk memetakan id entitas ke id relasi, dan sebuah dict lainnya untuk memetakan id relasi ke id bagian untuk digunakan di kemudian hari.</p>
 <pre><code translate="no" class="language-python">entityid_2_relationids = defaultdict(list)
 relationid_2_passageids = defaultdict(list)
 
@@ -202,7 +202,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     )
 
 
@@ -213,7 +213,7 @@ create_milvus_collection(entity_col_name)
 create_milvus_collection(relation_col_name)
 create_milvus_collection(passage_col_name)
 <button class="copy-code-btn"></button></code></pre>
-<p>Masukkan data dengan informasi metadatanya ke dalam koleksi Milvus, termasuk koleksi entitas, relasi, dan bagian. Informasi metadata termasuk id bagian dan entitas kedekatan atau id relasi.</p>
+<p>Masukkan data dengan informasi metadatanya ke dalam koleksi Milvus, termasuk koleksi entitas, relasi, dan bagian. Informasi metadata mencakup id bagian dan entitas kedekatan atau id relasi.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">milvus_insert</span>(<span class="hljs-params">
     collection_name: <span class="hljs-built_in">str</span>,
     text_list: <span class="hljs-built_in">list</span>[<span class="hljs-built_in">str</span>],

@@ -53,7 +53,7 @@ summary: >-
 <li><p><strong>Filtri</strong>: I filtri possono essere applicati ai token per affinarli ulteriormente, ad esempio rendendoli minuscoli o rimuovendo parole comuni.</p></li>
 </ul>
 <div class="alert note">
-<p>I tokenizer supportano solo il formato UTF-8. Il supporto per altri formati sarà aggiunto nelle prossime versioni.</p>
+<p>I tokenizzatori supportano solo il formato UTF-8. Il supporto per altri formati sarà aggiunto nelle versioni future.</p>
 </div>
 <p>Il flusso di lavoro sottostante mostra come un analizzatore elabora il testo.</p>
 <p>
@@ -83,7 +83,7 @@ summary: >-
 <div class="alert note">
 <p>Se si omettono le configurazioni dell'analizzatore durante la creazione della raccolta, Milvus utilizza l'analizzatore <code translate="no">standard</code> per l'elaborazione del testo. Per maggiori dettagli, consultare <a href="/docs/it/standard-analyzer.md">Standard</a>.</p>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">Analizzatore integrato</h3><p>Gli analizzatori integrati in Milvus sono preconfigurati con tokenizer e filtri specifici, il che consente di utilizzarli immediatamente senza doverli definire personalmente. Ogni analizzatore integrato è un modello che include un tokenizer e dei filtri preimpostati, con parametri opzionali per la personalizzazione.</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">Analizzatore integrato</h3><p>Gli analizzatori integrati in Milvus sono preconfigurati con tokenizer e filtri specifici, consentendo di utilizzarli immediatamente senza doverli definire personalmente. Ogni analizzatore integrato è un modello che include un tokenizer e dei filtri preimpostati, con parametri opzionali per la personalizzazione.</p>
 <p>Per esempio, per usare l'analizzatore incorporato <code translate="no">standard</code>, basta specificare il nome <code translate="no">standard</code> come <code translate="no">type</code> e includere facoltativamente configurazioni aggiuntive specifiche per questo tipo di analizzatore, come <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -159,7 +159,7 @@ analyzerParams.<span class="hljs-title function_">put</span>(<span class="hljs-s
 </ul>
 <p>Per un elenco degli analizzatori incorporati e delle relative impostazioni personalizzabili, consultare <a href="/docs/it/built-in-analyzers">Riferimento agli analizzatori incorporati</a>.</p>
 <h3 id="Custom-analyzer" class="common-anchor-header">Analizzatore personalizzato</h3><p>Per un'elaborazione del testo più avanzata, gli analizzatori personalizzati di Milvus consentono di costruire una pipeline di trattamento del testo su misura, specificando un <strong>tokenizzatore</strong> e dei <strong>filtri</strong>. Questa configurazione è ideale per casi d'uso particolari che richiedono un controllo preciso.</p>
-<h4 id="Tokenizer" class="common-anchor-header">Tokenizzatore</h4><p>Il <strong>tokenizer</strong> è un componente <strong>obbligatorio</strong> per un analizzatore personalizzato, che avvia la pipeline di analisi scomponendo il testo in ingresso in unità discrete o <strong>token</strong>. La tokenizzazione segue regole specifiche, come la divisione per spazi bianchi o punteggiatura, a seconda del tipo di tokenizzatore. Questo processo consente una gestione più precisa e indipendente di ogni parola o frase.</p>
+<h4 id="Tokenizer" class="common-anchor-header">Tokenizzatore</h4><p>Il <strong>tokenizer</strong> è un componente <strong>obbligatorio</strong> per un analizzatore personalizzato, che avvia la pipeline di analisi scomponendo il testo in ingresso in unità discrete o <strong>token</strong>. La tokenizzazione segue regole specifiche, come la suddivisione per spazi bianchi o punteggiatura, a seconda del tipo di tokenizzatore. Questo processo consente una gestione più precisa e indipendente di ogni parola o frase.</p>
 <p>Ad esempio, un tokenizer converte il testo <code translate="no">&quot;Vector Database Built for Scale&quot;</code> in token separati:</p>
 <pre><code translate="no" class="language-plaintext">[<span class="hljs-string">&quot;Vector&quot;</span>, <span class="hljs-string">&quot;Database&quot;</span>, <span class="hljs-string">&quot;Built&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>, <span class="hljs-string">&quot;Scale&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
@@ -281,7 +281,7 @@ analyzerParams.<span class="hljs-title function_">put</span>(<span class="hljs-s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In questo esempio, definiamo uno schema di raccolta con un campo vettoriale per le incorporazioni e due campi <code translate="no">VARCHAR</code> per le capacità di elaborazione del testo. Ogni campo <code translate="no">VARCHAR</code> è configurato con le proprie impostazioni dell'analizzatore per gestire le diverse esigenze di elaborazione.</p>
+    </button></h2><p>In questo esempio, definiamo uno schema di raccolta con un campo vettoriale per le incorporazioni e due campi <code translate="no">VARCHAR</code> per le capacità di elaborazione del testo. Ogni campo <code translate="no">VARCHAR</code> è configurato con le proprie impostazioni di analizzatore per gestire le diverse esigenze di elaborazione.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -306,7 +306,7 @@ schema.add_field(
     field_name=<span class="hljs-string">&#x27;title_en&#x27;</span>, 
     datatype=DataType.VARCHAR, 
     max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>，
+    enable_analyzer=<span class="hljs-literal">True</span>,
     analyzer_params=analyzer_params_built_in,
     enable_match=<span class="hljs-literal">True</span>, 
 )
@@ -332,7 +332,7 @@ schema.add_field(
     field_name=<span class="hljs-string">&#x27;title&#x27;</span>, 
     datatype=DataType.VARCHAR, 
     max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>，
+    enable_analyzer=<span class="hljs-literal">True</span>,
     analyzer_params=analyzer_params_custom,
     enable_match=<span class="hljs-literal">True</span>, 
 )

@@ -22,7 +22,7 @@ title: milvusとハグ顔を使った質問応答
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/qa_with_milvus_and_hf.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/qa_with_milvus_and_hf.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>意味検索に基づく質問応答システムは、与えられた質問に対する質問と答えのペアのデータセットから最も類似した質問を見つけることによって機能する。最も類似した質問が特定されると、データセットから対応する答えがクエリの答えとみなされる。このアプローチは、質問間の類似性を決定し、関連する答えを検索するために、意味的類似性尺度に依存します。</p>
+<p>意味検索に基づく質問応答システムは、与えられた質問に対する質問と答えのペアのデータセットから最も類似した質問を見つけることによって機能する。最も類似した質問が特定されると、データセットから対応する答えがその質問に対する答えとみなされる。このアプローチは、質問間の類似性を決定し、関連する答えを検索するために、意味的類似性尺度に依存します。</p>
 <p>このチュートリアルでは、データ処理のためのデータローダーと埋め込みジェネレーターとして<a href="https://huggingface.co">Hugging Faceを</a>、意味検索のためのベクトルデータベースとして<a href="https://milvus.io">Milvusを</a>使用して、質問応答システムを構築する方法を示します。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">始める前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,9 +39,9 @@ title: milvusとハグ顔を使った質問応答
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>すべての必要な依存関係がインストールされていることを確認する必要があります：</p>
+    </button></h2><p>必要な依存関係がすべてインストールされていることを確認してください：</p>
 <ul>
-<li><code translate="no">pymilvus</code>pythonパッケージは、MilvusまたはZilliz Cloudによって提供されるベクターデータベースサービスで動作します。</li>
+<li><code translate="no">pymilvus</code>Pythonパッケージは、MilvusまたはZilliz Cloudによって提供されるベクターデータベースサービスで動作します。</li>
 <li><code translate="no">datasets</code> <code translate="no">transformers</code>: Hugging Faceパッケージはデータを管理し、モデルを利用する。</li>
 <li><code translate="no">torch</code>強力なライブラリは、効率的なテンソル計算とディープラーニングツールを提供します。</li>
 </ul>
@@ -166,14 +166,14 @@ milvus_client.create_collection(
     auto_id=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable auto id</span>
     enable_dynamic_field=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable dynamic fields</span>
     vector_field_name=<span class="hljs-string">&quot;question_embedding&quot;</span>,  <span class="hljs-comment"># Map vector field name and embedding column in dataset</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># To enable search with latest data</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>引数として<code translate="no">MilvusClient</code> を指定します：</p>
 <ul>
 <li><code translate="no">uri</code> をローカルファイル、例えば、<code translate="no">./milvus.db</code> に設定するのが最も便利な方法であり、自動的に<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteを</a>利用して全てのデータをこのファイルに格納する。</li>
-<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>使用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>

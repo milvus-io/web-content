@@ -20,7 +20,7 @@ title: Búsqueda híbrida con Milvus
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Si quiere experimentar el efecto final de este tutorial, puede ir directamente a <a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a> y probarlo.</p>
+<p>Si desea experimentar el efecto final de este tutorial, puede ir directamente a https://demos.milvus.io/hybrid-search/.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>En este tutorial, demostraremos cómo realizar una búsqueda híbrida con <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> y el <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">modelo BGE-M3</a>. El modelo BGE-M3 puede convertir texto en vectores densos y dispersos. Milvus admite el almacenamiento de ambos tipos de vectores en una colección, lo que permite una búsqueda híbrida que mejora la relevancia de los resultados.</p>
 <p>Milvus admite métodos de recuperación densos, dispersos e híbridos:</p>
@@ -57,7 +57,7 @@ docs = <span class="hljs-built_in">list</span>(questions)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">What is the strongest Kevlar cord?
 </code></pre>
-<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">Utilizar el modelo BGE-M3 para la incrustación</h3><p>El modelo BGE-M3 puede incrustar textos como vectores densos y dispersos.</p>
+<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">Uso del modelo BGE-M3 para la incrustación</h3><p>El modelo BGE-M3 puede incrustar textos como vectores densos y dispersos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> milvus_model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 ef = BGEM3EmbeddingFunction(use_fp16=<span class="hljs-literal">False</span>, device=<span class="hljs-string">&quot;cpu&quot;</span>)

@@ -159,7 +159,7 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>
@@ -176,12 +176,12 @@ client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <hr>
 <h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 Daten und Schema visualisieren</h3><p>Nun können wir das Datenschema und die eingefügten Entitäten mit Hilfe der Attu-Schnittstelle visualisieren. Das Schema zeigt definierte Felder an, darunter ein <code translate="no">id</code> Feld vom Typ <code translate="no">Int64</code> und ein <code translate="no">vector</code> Feld vom Typ <code translate="no">FloatVector(768)</code> mit einer <code translate="no">Inner Product (IP)</code> Metrik. Die Sammlung ist mit <strong>72 Entitäten</strong> geladen.</p>
-<p>Außerdem können die eingefügten Daten angezeigt werden, einschließlich ID, Vektoreinbettungen und dynamische Felder, die Metadaten wie Textinhalte speichern. Die Schnittstelle unterstützt die Filterung und Abfrage auf der Grundlage bestimmter Bedingungen oder dynamischer Felder.</p>
+<p>Darüber hinaus können die eingefügten Daten angezeigt werden, einschließlich ID, Vektoreinbettungen und dynamische Felder, die Metadaten wie Textinhalte speichern. Die Schnittstelle unterstützt die Filterung und Abfrage auf der Grundlage bestimmter Bedingungen oder dynamischer Felder.</p>
 <p align="center">
   <img translate="no" src="/docs/v2.5.x/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
   <img translate="no" src="/docs/v2.5.x/assets/attu_after_data_insertion_2.png" alt="Data View" width="45%" />
 </p>
-<h2 id="5-Visualizing-Search-Results-and-Relationships" class="common-anchor-header">5. Visualisierung von Suchergebnissen und Relationen<button data-href="#5-Visualizing-Search-Results-and-Relationships" class="anchor-icon" translate="no">
+<h2 id="5-Visualizing-Search-Results-and-Relationships" class="common-anchor-header">5. Visualisierung von Suchergebnissen und Zusammenhängen<button data-href="#5-Visualizing-Search-Results-and-Relationships" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

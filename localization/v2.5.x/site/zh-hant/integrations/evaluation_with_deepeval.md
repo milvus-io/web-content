@@ -22,7 +22,7 @@ title: 使用 DeepEval 進行評估
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_deepeval.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>本指南演示了如何使用<a href="https://docs.confident-ai.com/">DeepEval</a>來評估建立在<a href="https://milvus.io/">Milvus</a> 上的檢索-增強生成 (RAG) 管道。</p>
 <p>RAG 系統結合了檢索系統與生成模型，可根據給定的提示生成新文字。該系統首先使用 Milvus 從語料庫中檢索相關文件，然後根據檢索到的文件使用生成模型生成新文本。</p>
-<p>DeepEval 是一個可協助您評估 RAG 管道的框架。現有的工具和框架可以幫助您建立這些管道，但是評估它和量化您的管道效能可能很困難。這就是 DeepEval 的用武之地。</p>
+<p>DeepEval 是一個可協助您評估 RAG 管道的框架。現有的工具和框架可以幫助您建立這些管道，但評估它和量化您的管道效能可能很困難。這就是 DeepEval 的用武之地。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +42,7 @@ title: 使用 DeepEval 進行評估
 <pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動運行時</strong>（點擊螢幕上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您使用的是 Google Colab，要啟用剛安裝的依賴項目，您可能需要<strong>重新啟動運行時</strong>（點擊螢幕上方的「Runtime」功能表，從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <p>在本範例中，我們將使用 OpenAI 作為 LLM。您應該準備<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作為環境變數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -121,7 +121,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -289,7 +289,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
     <tr>
       <th>0</th>
       <td>什麼是硬體需求規格？</td>
-      <td>[Hardware Requirements/硬體需求規格] 以下為硬體需求規格...</td>
+      <td>[Hardware Requirements/硬體需求規格]以下為硬體需求規格...</td>
       <td>硬體需求規格是什麼？</td>
       <td>如果您想建立 Milvus 並從來源執行...</td>
     </tr>
@@ -421,7 +421,7 @@ result = evaluate(
     print_results=<span class="hljs-literal">False</span>,  <span class="hljs-comment"># Change to True to see detailed metric results</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">✨ 您正在運行 DeepEval 最新的<span style="color: #6a00ff; text-decoration-color: #6a00ff">答案相關度指標</span>！<span style="color: #374151; text-decoration-color: #374151">(使用 gpt-4o， </span><span style="color: #374151; text-decoration-color: #374151">strict=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">False</span><span style="color: #374151; text-decoration-color: #374151">， </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">async</span><span style="color: #374151; text-decoration-color: #374151">_mode=True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">）</span><span style="color: #374151; text-decoration-color: #374151">..</span><span style="color: #374151; text-decoration-color: #374151">.</span></pre>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">✨ 您正在運行 DeepEval 最新的<span style="color: #6a00ff; text-decoration-color: #6a00ff">答案相關度指標</span>！<span style="color: #374151; text-decoration-color: #374151">(使用 gpt-4o， </span><span style="color: #374151; text-decoration-color: #374151">strict=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">False</span><span style="color: #374151; text-decoration-color: #374151">， </span><span style="color: #374151; text-decoration-color: #374151">async_mode=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">）</span><span style="color: #374151; text-decoration-color: #374151">..</span><span style="color: #374151; text-decoration-color: #374151">.</span></pre>
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">✨ 您正在執行 DeepEval 最新的<span style="color: #6a00ff; text-decoration-color: #6a00ff">忠誠度公制</span>！<span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">using gpt-4o, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">strict=False</span><span style="color: #374151; text-decoration-color: #374151">, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">async_mode=True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
 <pre><code translate="no">Event loop is already running. Applying nest_asyncio patch to allow async execution...
 

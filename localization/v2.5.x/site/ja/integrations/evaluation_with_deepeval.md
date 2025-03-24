@@ -123,7 +123,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -297,7 +297,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
     </tr>
     <tr>
       <th>1</th>
-      <td>Milvusをビルドしてソースコードから実行したいのですが、プログラミング言語は何ですか？</td>
+      <td>Milvusをビルドしてソースから実行したいのですが、プログラミング言語は何ですか？</td>
       <td>[Milvusのアルゴリズムライブラリは、CMakeとConan...</td>
       <td>Knowherを記述するために使用されるプログラミング言語...</td>
       <td>Knowherを記述するために使用されるプログラミング言語...</td>
@@ -367,7 +367,7 @@ result = evaluate(
 <pre><code translate="no">/Users/eureka/miniconda3/envs/zilliz/lib/python3.9/site-packages/deepeval/__init__.py:49: UserWarning: You are using deepeval version 1.1.6, however version 1.2.2 is available. You should consider upgrading via the &quot;pip install --upgrade deepeval&quot; command.
   warnings.warn(
 </code></pre>
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">DeepEvalの最新の<span style="color: #6a00ff; text-decoration-color: #6a00ff">Contextual Precision Metricを</span>実行しています！<span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">gpt-4o、 </span><span style="color: #374151; text-decoration-color: #374151">strict=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">False</span><span style="color: #374151; text-decoration-color: #374151">、 </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">async</span><span style="color: #374151; text-decoration-color: #374151">_mode=True を</span><span style="color: #374151; text-decoration-color: #374151">使用 </span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">DeepEvalの最新の<span style="color: #6a00ff; text-decoration-color: #6a00ff">Contextual Precision Metricを</span>実行しています！<span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">gpt-4o、 </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">strict</span><span style="color: #374151; text-decoration-color: #374151">=False</span><span style="color: #374151; text-decoration-color: #374151">、 </span><span style="color: #374151; text-decoration-color: #374151">async_</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">mode</span><span style="color: #374151; text-decoration-color: #374151">=True を</span><span style="color: #374151; text-decoration-color: #374151">使用 </span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">DeepEval の最新の<span style="color: #6a00ff; text-decoration-color: #6a00ff">コンテキスト・リコール測定を</span>実行しています！<span style="color: #374151; text-decoration-color: #374151">(gpt-4o、 </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">strict</span><span style="color: #374151; text-decoration-color: #374151">=False</span><span style="color: #374151; text-decoration-color: #374151">、 </span><span style="color: #374151; text-decoration-color: #374151">async_mode=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">True</span><span style="color: #374151; text-decoration-color: #374151">を</span><span style="color: #374151; text-decoration-color: #374151">使用 </span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">DeepEval の最新の<span style="color: #6a00ff; text-decoration-color: #6a00ff">Contextual Relevancy Metric を</span>実行しています！<span style="color: #374151; text-decoration-color: #374151">(gpt-4o を使用、 </span><span style="color: #374151; text-decoration-color: #374151">strict=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">False</span><span style="color: #374151; text-decoration-color: #374151">、 </span><span style="color: #374151; text-decoration-color: #374151">async_mode=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
 <pre><code translate="no">Event loop is already running. Applying nest_asyncio patch to allow async execution...
@@ -430,5 +430,5 @@ result = evaluate(
 
 Evaluating 3 test case(s) in parallel: |██████████|100% (3/3) [Time Taken: 00:11,  3.97s/test case]
 </code></pre>
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">テストが終了しました<span style="color: #05f58d; text-decoration-color: #05f58d">！</span>Confident AIで評価結果を見るには、<span style="color: #008000; text-decoration-color: #008000">'deepeval login'</span>を実行する。 
-‼️ 注意: 代わりに Confident AI 上で直接、deepeval のすべてのメトリクスに対する評価を実行することもできます。</pre>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">テストが終了しました<span style="color: #05f58d; text-decoration-color: #05f58d">！</span>Confident AIで評価結果を見るには<span style="color: #008000; text-decoration-color: #008000">'deepeval login'</span>を実行する。 
+‼️ 注意：代わりにConfident AI上で直接deepevalの全メトリクスの評価を実行することもできます。</pre>

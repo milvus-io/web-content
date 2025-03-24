@@ -31,7 +31,7 @@ summary: >-
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/llamaindex/llamaindex_milvus_async.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>Это руководство демонстрирует, как использовать <a href="https://www.llamaindex.ai/">LlamaIndex</a> с <a href="https://milvus.io/">Milvus</a> для построения асинхронного конвейера обработки документов для RAG. LlamaIndex предоставляет возможность обрабатывать документы и хранить их в векторной базе данных, как Milvus. Используя асинхронный API LlamaIndex и клиентскую библиотеку Milvus Python, мы можем увеличить пропускную способность конвейера для эффективной обработки и индексации больших объемов данных.</p>
+<p>В этом руководстве показано, как использовать <a href="https://www.llamaindex.ai/">LlamaIndex</a> вместе с <a href="https://milvus.io/">Milvus</a> для построения асинхронного конвейера обработки документов для RAG. LlamaIndex предоставляет возможность обрабатывать документы и хранить их в векторной базе данных, как Milvus. Используя асинхронный API LlamaIndex и клиентскую библиотеку Milvus Python, мы можем увеличить пропускную способность конвейера для эффективной обработки и индексации больших объемов данных.</p>
 <p>В этом руководстве мы сначала познакомимся с использованием асинхронных методов для построения RAG с LlamaIndex и Milvus на высоком уровне, а затем рассмотрим использование низкоуровневых методов и сравнение производительности синхронных и асинхронных.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Прежде чем начать<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -105,17 +105,17 @@ $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-lla
 </ul>
 </div>
 <p>Определите функцию инициализации, которую мы сможем использовать снова, чтобы перестроить коллекцию Milvus.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_vector_store</span>():
-    <span class="hljs-keyword">return</span> MilvusVectorStore(
+<pre><code translate="no" class="language-python"><span class="hljs-function">def <span class="hljs-title">init_vector_store</span>():
+    <span class="hljs-keyword">return</span> <span class="hljs-title">MilvusVectorStore</span>(<span class="hljs-params">
         uri=URI,
-        <span class="hljs-comment"># token=TOKEN,</span>
+        # token=TOKEN,
         dim=DIM,
         collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
         embedding_field=<span class="hljs-string">&quot;embedding&quot;</span>,
         id_field=<span class="hljs-string">&quot;id&quot;</span>,
         similarity_metric=<span class="hljs-string">&quot;COSINE&quot;</span>,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-        overwrite=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># To overwrite the collection if it already exists</span>
+        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (`<span class="hljs-string">&quot;Strong&quot;</span>`, `<span class="hljs-string">&quot;Session&quot;</span>`, `<span class="hljs-string">&quot;Bounded&quot;</span>`, `<span class="hljs-string">&quot;Eventually&quot;</span>`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        overwrite</span>=True,  <span class="hljs-meta"># To overwrite the collection <span class="hljs-keyword">if</span> it already exists</span>
     )
 
 

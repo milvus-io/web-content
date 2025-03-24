@@ -120,12 +120,12 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>使用指定参数创建新 Collections。</p>
-<p>如果我们没有指定任何字段信息，Milvus 会自动创建一个主键的默认<code translate="no">id</code> 字段，以及一个存储向量数据的<code translate="no">vector</code> 字段。保留的 JSON 字段用于存储非 Schema 定义的字段及其值。</p>
+<p>如果我们不指定任何字段信息，Milvus 会自动创建一个主键的默认<code translate="no">id</code> 字段，以及一个存储向量数据的<code translate="no">vector</code> 字段。保留的 JSON 字段用于存储非 Schema 定义的字段及其值。</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入数据</h3><p>遍历文本行，创建 Embeddings，然后将数据插入 Milvus。</p>
@@ -171,7 +171,7 @@ Creating embeddings: 100%|██████████| 72/72 [00:00&lt;00:00,
     </button></h2><h3 id="Retrieve-data-for-a-query" class="common-anchor-header">为查询检索数据</h3><p>让我们指定一个关于 Milvus 的常见问题。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在 Collections 中搜索该问题，并检索语义前 3 个匹配项。</p>
+<p>在 Collections 中搜索该问题并检索语义前 3 个匹配项。</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=embedding_model.encode_queries(

@@ -74,7 +74,7 @@ title: Проводите зрительный поиск с помощью Milv
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Основная схема работы по использованию Milvus для создания индекса сходства в наборах данных FiftyOne и использования его для запросов к данным выглядит следующим образом:</p>
+    </button></h2><p>Основной рабочий процесс по использованию Milvus для создания индекса сходства в наборах данных FiftyOne и использования его для запросов к данным выглядит следующим образом:</p>
 <ol>
 <li>Загрузите <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">набор данных</a> в FiftyOne.</li>
 <li>Вычислите векторные вложения для образцов или патчей в вашем наборе данных или выберите модель для использования генерируемых вложений.</li>
@@ -275,13 +275,13 @@ milvus_index = fob.compute_similarity(
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Однако обычно эти параметры напрямую передаются в <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> для настройки конкретного нового индекса:</p>
-<pre><code translate="no" class="language-python">milvus_index = fob.<span class="hljs-title function_">compute_similarity</span>(
+<pre><code translate="no" class="language-python">milvus_index = fob.compute_similarity(
     ...
     backend=<span class="hljs-string">&quot;milvus&quot;</span>,
     brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     metric=<span class="hljs-string">&quot;dotproduct&quot;</span>,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Manage-brain-runs" class="common-anchor-header">Управление прогонами мозга<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">
@@ -334,4 +334,4 @@ milvus_index = dataset.load_brain_results(brain_key)
 milvus_index.cleanup()
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<p>Для общего рабочего процесса векторного поиска в наборе данных FiftyOne с использованием бэкенда Milvus см. <a href="https://docs.voxel51.com/integrations/milvus.html#examples">примеры здесь</a>.</p>
+<p>Для общего рабочего процесса векторного поиска в наборе данных FiftyOne с использованием бэкэнда Milvus см. <a href="https://docs.voxel51.com/integrations/milvus.html#examples">примеры здесь</a>.</p>

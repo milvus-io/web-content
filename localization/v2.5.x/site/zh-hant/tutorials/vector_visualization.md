@@ -25,7 +25,7 @@ title: 向量可視化
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>在這個範例中，我們將展示如何使用<a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a> 將 Milvus 中的嵌入（向量）可視化。</p>
-<p>減維技術，例如 t-SNE，對於在二維或三維空間可視化複雜的高維資料，同時保留局部結構，是非常有價值的。這有助於模式識別、增強對特徵關係的理解，並方便解釋機器學習模型的結果。此外，t-SNE 還能透過直觀地比較聚類結果來協助演算法評估，簡化非專業觀眾的資料呈現，並透過低維表示來降低計算成本。透過這些應用，t-SNE 不僅有助於深入瞭解資料集，還能支援更明智的決策過程。</p>
+<p>減維技術，例如 t-SNE，對於在二維或三維空間可視化複雜的高維資料，同時保留局部結構，是非常有價值的。這有助於模式識別、增強對特徵關係的理解，並方便解釋機器學習模型的結果。此外，t-SNE 還能透過視覺上的聚類結果比較來協助演算法評估，簡化對非專業觀眾的資料呈現，並透過低維表示來降低計算成本。透過這些應用，t-SNE 不僅有助於深入瞭解資料集，還能支援更明智的決策過程。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,8 +154,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-data" class="common-anchor-header">插入資料<button data-href="#Insert-data" class="anchor-icon" translate="no">
@@ -207,7 +207,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本節中，我們會執行 milvus 搜尋，然後將查詢向量和擷取向量一起以縮小的維度可視化。</p>
+    </button></h2><p>在本節中，我們會執行 milvus 搜尋，然後將查詢向量和擷取的向量一起以縮小的維度可視化。</p>
 <h3 id="Retrieve-Data-for-a-Query" class="common-anchor-header">擷取查詢資料</h3><p>讓我們為搜尋準備一個問題。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Modify the question to test it with your own query!</span>
 

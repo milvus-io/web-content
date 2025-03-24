@@ -70,7 +70,7 @@ milvus_docs_2.4.x_e 100%[===================&gt;] 598.72K  1.20MB/s    in 0.5s
 
 2024-11-26 21:47:20 (1.20 MB/s) - ‘milvus_docs_2.4.x_en.zip’ saved [613094/613094]
 </code></pre>
-<p>Kami memuat semua file penurunan harga dari folder <code translate="no">milvus_docs/en/faq</code>. Untuk setiap dokumen, kita cukup menggunakan &quot;#&quot; untuk memisahkan konten dalam file, yang secara kasar dapat memisahkan konten dari setiap bagian utama dari file penurunan harga.</p>
+<p>Kami memuat semua file penurunan harga dari folder <code translate="no">milvus_docs/en/faq</code>. Untuk setiap dokumen, kita cukup menggunakan &quot;# &quot; untuk memisahkan konten dalam file, yang secara kasar dapat memisahkan konten dari setiap bagian utama dari file penurunan harga.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -81,7 +81,7 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">Menyiapkan LLM dan Model Penyematan</h3><p>Ollama mendukung beberapa model untuk tugas-tugas berbasis LLM dan pembuatan embedding, sehingga memudahkan untuk mengembangkan aplikasi pembuatan retrieval-augmented generation (RAG). Untuk pengaturan ini:</p>
+<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">Menyiapkan LLM dan Model Penyematan</h3><p>Ollama mendukung beberapa model untuk tugas-tugas berbasis LLM dan pembuatan embedding, sehingga memudahkan untuk mengembangkan aplikasi pembuatan retrieval-augmented (RAG). Untuk pengaturan ini:</p>
 <ul>
 <li>Kita akan menggunakan <strong>Llama 3.2 (3B</strong> ) sebagai LLM untuk tugas-tugas pembuatan teks.</li>
 <li>Untuk pembuatan penyematan, kita akan menggunakan <strong>mxbai-embed-large</strong>, model parameter 334M yang dioptimalkan untuk kemiripan semantik.</li>
@@ -166,8 +166,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Menyisipkan data</h3><p>Lakukan perulangan melalui baris teks, buat penyematan, lalu masukkan data ke dalam Milvus.</p>

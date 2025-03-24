@@ -23,7 +23,7 @@ title: Übersicht über Integrationen
     </button></h1><p>Auf dieser Seite finden Sie eine Liste von Tutorials, die Ihnen die Interaktion mit Milvus und Tools von Drittanbietern erleichtern.</p>
 <table>
 <thead>
-<tr><th>Lernprogramm</th><th>Anwendungsfall</th><th>Partner oder Stacks</th></tr>
+<tr><th>Lehrgang</th><th>Anwendungsfall</th><th>Partner oder Stacks</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/de/integrate_with_llamaindex.md">RAG mit Milvus und LlamaIndex</a></td><td>RAG</td><td>Milvus, LLamaIndex</td></tr>
@@ -77,7 +77,7 @@ title: Übersicht über Integrationen
 <tr><td><a href="/docs/de/build_RAG_with_milvus_and_ollama.md">Aufbau von RAG mit Milvus und Ollama</a></td><td>LLMs</td><td>Milvus, Ollama</td></tr>
 <tr><td><a href="/docs/de/milvus_rag_with_dynamiq.md">Erste Schritte mit Dynamiq und Milvus</a></td><td>Orchestrierung</td><td>Milvus, Dynamiq</td></tr>
 <tr><td><a href="/docs/de/build_RAG_with_milvus_and_deepseek.md">RAG mit Milvus und DeepSeek aufbauen</a></td><td>LLMs</td><td>Milvus, DeepSeek</td></tr>
-<tr><td><a href="/docs/de/integrate_with_phidata.md">Integration von Milvus mit Agno</a></td><td>Agenten</td><td>Milvus, Agno</td></tr>
+<tr><td><a href="/docs/de/integrate_with_agno.md">Integration von Milvus mit Agno</a></td><td>Agenten</td><td>Milvus, Agno</td></tr>
 <tr><td><a href="/docs/de/build_RAG_with_milvus_and_crawl4ai.md">Aufbau von RAG mit Milvus und Crawl4AI</a></td><td>Daten-Quellen</td><td>Milvus, Crawl4AI</td></tr>
 <tr><td><a href="/docs/de/build_RAG_with_milvus_and_firecrawl.md">Aufbau von RAG mit Milvus und Firecrawl</a></td><td>Die Datenquellen</td><td>Milvus, Firecrawl</td></tr>
 <tr><td><a href="/docs/de/llama_stack_with_milvus.md">Aufbau von RAG mit Llama Stack mit Milvus</a></td><td>Orchestrierung</td><td>Milvus, Llama Stack</td></tr>

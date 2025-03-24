@@ -26,7 +26,7 @@ title: 使用 Milvus 和 Gemini 构建 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://ai.google.dev/gemini-api/docs">Gemini API</a>和<a href="https://ai.google.dev/aistudio">Google AI Studio</a>可帮助您开始使用 Google 的最新模型，并将您的想法转化为可扩展的应用程序。Gemini 可为文本生成、文档处理、视觉、音频分析等任务提供强大的语言模型，如<code translate="no">Gemini-1.5-Flash</code> 、<code translate="no">Gemini-1.5-Flash-8B</code> 和<code translate="no">Gemini-1.5-Pro</code> 。通过 API，您可以输入包含数百万个标记的长语境，针对特定任务对模型进行微调，生成 JSON 等结构化输出，并利用语义检索和代码执行等功能。</p>
+    </button></h1><p><a href="https://ai.google.dev/gemini-api/docs">Gemini API</a>和<a href="https://ai.google.dev/aistudio">Google AI Studio</a>可帮助您开始使用 Google 的最新模型，并将您的想法转化为可扩展的应用程序。Gemini 可为文本生成、文档处理、视觉、音频分析等任务提供强大的语言模型，如<code translate="no">Gemini-1.5-Flash</code> 、<code translate="no">Gemini-1.5-Flash-8B</code> 和<code translate="no">Gemini-1.5-Pro</code> 。通过 API，您可以输入包含数百万个标记的长上下文，针对特定任务微调模型，生成 JSON 等结构化输出，并利用语义检索和代码执行等功能。</p>
 <p>在本教程中，我们将向您展示如何使用 Milvus 和 Gemini 构建 RAG（检索-增强生成）管道。我们将使用 Gemini 模型根据给定查询生成文本。我们还将使用 Milvus 来存储和检索生成的文本。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,7 +46,7 @@ title: 使用 Milvus 和 Gemini 构建 RAG
     </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">依赖和环境</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus google-generativeai requests tqdm
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重启运行时</strong>（点击屏幕上方的 "运行时 "菜单，从下拉菜单中选择 "重启会话"）。</p>
+<p>如果使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重新启动运行时</strong>（点击屏幕上方的 "运行时 "菜单，从下拉菜单中选择 "重新启动会话"）。</p>
 </div>
 <p>首先应登录 Google AI Studio 平台，并将<a href="https://aistudio.google.com/apikey">api key</a> <code translate="no">GEMINI_API_KEY</code> 作为环境变量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -132,8 +132,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入数据</h3><p>遍历文本行，创建 Embeddings，然后将数据插入 Milvus。</p>
@@ -177,7 +177,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     </button></h2><h3 id="Retrieve-data-for-a-query" class="common-anchor-header">为查询检索数据</h3><p>让我们指定一个关于 Milvus 的常见问题。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在 Collections 中搜索该问题并检索语义前 3 个匹配项。</p>
+<p>在 Collections 中搜索该问题，并检索语义前 3 个匹配项。</p>
 <pre><code translate="no" class="language-python">question_embedding = genai.embed_content(
     model=<span class="hljs-string">&quot;models/text-embedding-004&quot;</span>, content=question
 )[<span class="hljs-string">&quot;embedding&quot;</span>]

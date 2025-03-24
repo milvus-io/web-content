@@ -48,7 +48,7 @@ title: Graph RAG mit Milvus
 <pre><code translate="no" class="language-python">$ pip install --upgrade --quiet pymilvus numpy scipy langchain langchain-core langchain-openai tqdm
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Bildschirmrand und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Laufzeitumgebung neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Laufzeit" am oberen Rand des Bildschirms und wählen Sie "Sitzung neu starten" aus dem Dropdown-Menü).</p>
 </blockquote>
 <p>Wir werden die Modelle von OpenAI verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -202,7 +202,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     )
 
 

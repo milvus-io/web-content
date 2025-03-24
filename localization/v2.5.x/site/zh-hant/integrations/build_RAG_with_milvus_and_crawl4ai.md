@@ -26,7 +26,7 @@ title: 使用 Milvus 和 Crawl4AI 建立 RAG
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_crawl4ai.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://crawl4ai.com/mkdocs/">Crawl4AI</a>為 LLM 提供極快的 AI 就緒網路爬取。它是開放源碼，並針對 RAG 進行了最佳化，可利用先進的萃取功能和即時效能簡化搜刮工作。</p>
+<p><a href="https://crawl4ai.com/mkdocs/">Crawl4AI</a>為 LLM 提供極速、AI 就緒的網路爬取功能。它是開放源碼，並針對 RAG 進行了最佳化，可利用先進的萃取功能和即時效能簡化搜刮工作。</p>
 <p>在本教程中，我們將告訴您如何使用 Milvus 和 Crawl4AI 建立一個 Retrieval-Augmented Generation (RAG) 管道。此管道整合了 Crawl4AI (用於網路資料爬取)、Milvus (用於向量儲存)，以及 OpenAI (用於產生有洞察力的情境感知回應)。</p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,7 +47,7 @@ title: 使用 Milvus 和 Crawl4AI 建立 RAG
 <pre><code translate="no" class="language-shell">$ pip install -U crawl4ai pymilvus openai requests tqdm
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>如果您使用的是 Google Colab，要啟用剛安裝的相依性，您可能需要<strong>重新啟動運行時</strong>（點擊螢幕上方的「Runtime」功能表，從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動運行時</strong>（點擊螢幕上方的「Runtime」功能表，從下拉式功能表中選擇「Restart session」）。</p>
 </blockquote>
 <p>要完全設定好 crawl4ai，請執行下列指令：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Run post-installation setup</span>
@@ -207,8 +207,8 @@ INFO:numexpr.utils:NumExpr defaulting to 8 threads.
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入資料</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

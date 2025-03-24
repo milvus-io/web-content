@@ -26,7 +26,7 @@ title: Construire un RAG avec Milvus et Unstructured
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_unstructured.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://docs.unstructured.io/welcome">Unstructured</a> fournit une plateforme et des outils permettant d'ingérer et de traiter des documents non structurés pour la génération augmentée par récupération (RAG) et l'affinement du modèle. Il offre à la fois une plateforme d'interface utilisateur sans code et des services API sans serveur, permettant aux utilisateurs de traiter les données sur les ressources de calcul hébergées par Unstructured.</p>
+<p><a href="https://docs.unstructured.io/welcome">Unstructured</a> fournit une plateforme et des outils pour ingérer et traiter des documents non structurés pour la génération augmentée par récupération (RAG) et l'affinement du modèle. Il offre à la fois une plateforme d'interface utilisateur sans code et des services API sans serveur, permettant aux utilisateurs de traiter les données sur les ressources de calcul hébergées par Unstructured.</p>
 <p>Dans ce tutoriel, nous utiliserons Unstructured pour ingérer des documents PDF, puis Milvus pour construire un pipeline RAG.</p>
 <h2 id="Preparation" class="common-anchor-header">Préparation<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -140,7 +140,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     schema=schema,
     index_params=index_params,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 
 milvus_client.load_collection(collection_name=collection_name)

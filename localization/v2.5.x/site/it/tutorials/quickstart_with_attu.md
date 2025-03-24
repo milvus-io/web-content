@@ -158,7 +158,7 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>
@@ -174,7 +174,7 @@ doc_embeddings = embedding_model.encode_documents(text_lines)
 client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 Visualizzare i dati e lo schema</h3><p>Ora possiamo visualizzare lo schema dei dati e le entità inserite utilizzando l'interfaccia di Attu. Lo schema mostra i campi definiti, compreso un campo <code translate="no">id</code> di tipo <code translate="no">Int64</code> e un campo <code translate="no">vector</code> di tipo <code translate="no">FloatVector(768)</code> con una metrica <code translate="no">Inner Product (IP)</code>. La collezione è caricata con <strong>72 entità</strong>.</p>
+<h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 Visualizzare i dati e lo schema</h3><p>Ora possiamo visualizzare lo schema dei dati e le entità inserite utilizzando l'interfaccia di Attu. Lo schema visualizza i campi definiti, tra cui un campo <code translate="no">id</code> di tipo <code translate="no">Int64</code> e un campo <code translate="no">vector</code> di tipo <code translate="no">FloatVector(768)</code> con una metrica <code translate="no">Inner Product (IP)</code>. La collezione è caricata con <strong>72 entità</strong>.</p>
 <p>Inoltre, è possibile visualizzare i dati inseriti, tra cui ID, incorporazioni vettoriali e campi dinamici che memorizzano metadati come il contenuto del testo. L'interfaccia supporta il filtraggio e l'interrogazione in base a condizioni specifiche o a campi dinamici.</p>
 <p align="center">
   <img translate="no" src="/docs/v2.5.x/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
@@ -215,7 +215,7 @@ client.insert(collection_name=collection_name, data=data)
   <img translate="no" src="/docs/v2.5.x/assets/attu_searched_graph.png" alt="Knowledge Graph Visualization" width="80%">
 </p>
 <hr>
-<h3 id="53-Expand-the-Graph" class="common-anchor-header">5.3 <strong>Espansione del grafico</strong></h3><p>Fare doppio clic su qualsiasi nodo dei risultati per espanderne le connessioni. Questa azione rivela ulteriori relazioni tra il nodo selezionato e altri punti di dati della raccolta, creando un <strong>grafo della conoscenza più ampio e interconnesso</strong>.</p>
+<h3 id="53-Expand-the-Graph" class="common-anchor-header">5.3 <strong>Espansione del grafico</strong></h3><p>Fare doppio clic su qualsiasi nodo dei risultati per espanderne le connessioni. Questa azione rivela ulteriori relazioni tra il nodo selezionato e altri punti dati della raccolta, creando un <strong>grafo della conoscenza più ampio e interconnesso</strong>.</p>
 <p>Questa vista espansa consente un'esplorazione più approfondita del modo in cui i punti di dati sono correlati, in base alla somiglianza vettoriale.</p>
 <p align="center">
   <img translate="no" src="/docs/v2.5.x/assets/attu_expanded_searched_graph.png" alt="Expanded Knowledge Graph" width="80%">

@@ -1,8 +1,8 @@
 ---
 id: rag_with_milvus_and_unstructured.md
 summary: >-
-  En este tutorial, usaremos Unstructured para ingerir documentos PDF y luego
-  usaremos Milvus para construir una canalización RAG.
+  En este tutorial, utilizaremos Unstructured para ingerir documentos PDF y
+  luego utilizaremos Milvus para construir una canalización RAG.
 title: Construir una RAG con Milvus y Unstructured
 ---
 <h1 id="Build-a-RAG-with-Milvus-and-Unstructured" class="common-anchor-header">Construir una RAG con Milvus y Unstructured<button data-href="#Build-a-RAG-with-Milvus-and-Unstructured" class="anchor-icon" translate="no">
@@ -27,7 +27,7 @@ title: Construir una RAG con Milvus y Unstructured
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://docs.unstructured.io/welcome">Unstructured</a> proporciona una plataforma y herramientas para ingerir y procesar documentos no estructurados para la Retrieval Augmented Generation (RAG) y el ajuste de modelos. Ofrece tanto una plataforma de interfaz de usuario sin código como servicios de API sin servidor, lo que permite a los usuarios procesar datos en recursos informáticos alojados en Unstructured.</p>
-<p>En este tutorial, utilizaremos Unstructured para ingerir documentos PDF y, a continuación, utilizaremos Milvus para construir una canalización RAG.</p>
+<p>En este tutorial, utilizaremos Unstructured para ingerir documentos PDF y, a continuación, utilizaremos Milvus para crear una canalización RAG.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparación<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -68,7 +68,7 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.d
 <p>En cuanto al argumento de <code translate="no">MilvusClient</code>:</p>
 <ul>
 <li>Establecer el <code translate="no">uri</code> como un archivo local, por ejemplo<code translate="no">./milvus.db</code>, es el método más conveniente, ya que utiliza automáticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> para almacenar todos los datos en este archivo.</li>
-<li>Si tiene una gran escala de datos, digamos más de un millón de vectores, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. En esta configuración, por favor utilice la dirección del servidor y el puerto como su uri, por ejemplo<code translate="no">http://localhost:19530</code>. Si habilita la función de autenticación en Milvus, utilice "&lt;su_nombre_de_usuario&gt;:&lt;su_contraseña&gt;" como token, de lo contrario no configure el token.</li>
+<li>Si tiene una gran escala de datos, digamos más de un millón de vectores, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">Docker o Kubernetes</a>. En esta configuración, por favor utilice la dirección del servidor y el puerto como su uri, por ejemplo<code translate="no">http://localhost:19530</code>. Si habilita la función de autenticación en Milvus, utilice "&lt;su_nombre_de_usuario&gt;:&lt;su_contraseña&gt;" como token, de lo contrario no establezca el token.</li>
 <li>Si desea utilizar <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, ajuste <code translate="no">uri</code> y <code translate="no">token</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">punto final público y a la clave Api</a> en Zilliz Cloud.</li>
 </ul>
 </div>
@@ -140,7 +140,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     schema=schema,
     index_params=index_params,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 
 milvus_client.load_collection(collection_name=collection_name)

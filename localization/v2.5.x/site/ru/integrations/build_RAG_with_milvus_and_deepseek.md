@@ -73,7 +73,7 @@ deepseek_client = <span class="hljs-title class_">OpenAI</span>(
     base_url=<span class="hljs-string">&quot;https://api.deepseek.com&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Определите модель встраивания для генерации текстовых вкраплений с помощью <code translate="no">milvus_model</code>. В качестве примера мы используем модель <code translate="no">DefaultEmbeddingFunction</code>, которая представляет собой предварительно обученную и легкую модель встраивания.</p>
+<p>Определите модель встраивания для генерации текстовых вкраплений с помощью <code translate="no">milvus_model</code>. В качестве примера мы используем модель <code translate="no">DefaultEmbeddingFunction</code>, которая является предварительно обученной и легкой моделью встраивания.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model <span class="hljs-keyword">as</span> milvus_model
 
 embedding_model = milvus_model.<span class="hljs-title class_">DefaultEmbeddingFunction</span>()
@@ -126,8 +126,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Вставка данных</h3><p>Пройдитесь по текстовым строкам, создайте вкрапления, а затем вставьте данные в Milvus.</p>

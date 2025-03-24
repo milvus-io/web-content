@@ -46,7 +46,7 @@ title: بناء RAG مع Milvus و Unstructured
     </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">التبعيات والبيئة</h3><pre><code translate="no" class="language-python">$ pip install -qU <span class="hljs-string">&quot;unstructured-ingest[pdf]&quot;</span> unstructured pymilvus openai
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، فقد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
+<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
 </div>
 <p>يمكنك الحصول على متغيرات البيئة <code translate="no">UNSTRUCTURED_API_KEY</code> و <code translate="no">UNSTRUCTURED_URL</code> من <a href="https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide">هنا</a>.</p>
 <p>سنستخدم OpenAI كـ LLM في هذا المثال. يجب عليك إعداد <a href="https://platform.openai.com/docs/quickstart">مفتاح api</a> <code translate="no">OPENAI_API_KEY</code> كمتغير بيئة.</p>
@@ -140,7 +140,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     schema=schema,
     index_params=index_params,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 
 milvus_client.load_collection(collection_name=collection_name)

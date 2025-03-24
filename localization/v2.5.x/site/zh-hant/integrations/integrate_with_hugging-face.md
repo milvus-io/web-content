@@ -21,7 +21,7 @@ title: 使用 Milvus 和擁抱臉回答問題
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/qa_with_milvus_and_hf.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/qa_with_milvus_and_hf.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>基於語意搜尋的問題回答系統的工作方式，是針對給定的查詢問題，從問答對資料集中找出最相似的問題。一旦找出最相似的問題，資料集中相應的答案就會被視為查詢的答案。此方法依賴語意相似性量測來判斷問題之間的相似性，並擷取相關的答案。</p>
-<p>本教學說明如何使用<a href="https://huggingface.co">Hugging Face</a>作為資料載入與嵌入產生器來處理資料，並使用<a href="https://milvus.io">Milvus</a>作為向量資料庫來進行語意搜尋，以建立一個問題回答系統。</p>
+<p>本教學展示如何使用<a href="https://huggingface.co">Hugging Face</a>作為資料載入與嵌入產生器來處理資料，並使用<a href="https://milvus.io">Milvus</a>作為向量資料庫來進行語意搜尋，以建立一個問題回答系統。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">開始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -164,7 +164,7 @@ milvus_client.create_collection(
     auto_id=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable auto id</span>
     enable_dynamic_field=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable dynamic fields</span>
     vector_field_name=<span class="hljs-string">&quot;question_embedding&quot;</span>,  <span class="hljs-comment"># Map vector field name and embedding column in dataset</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># To enable search with latest data</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -172,7 +172,7 @@ milvus_client.create_collection(
 <ul>
 <li>將<code translate="no">uri</code> 設定為本機檔案，例如<code translate="no">./milvus.db</code> ，是最方便的方法，因為它會自動利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>將所有資料儲存在這個檔案中。</li>
 <li>如果您有大規模的資料，您可以在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubernetes</a> 上架設效能更高的 Milvus 伺服器。在此設定中，請使用伺服器的 uri，例如<code translate="no">http://localhost:19530</code> ，作為您的<code translate="no">uri</code> 。</li>
-<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">雲端</a>服務），請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，與 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint 和 Api key</a>對應。</li>
+<li>如果您要使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全管理<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">雲端</a>服務），請調整<code translate="no">uri</code> 和<code translate="no">token</code> ，與 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint 和 Api key</a>對應。</li>
 </ul>
 </div>
 <p>將所有資料插入收集：</p>

@@ -78,7 +78,7 @@ title: Condurre ricerche di visione con Milvus e FiftyOne
 <ol>
 <li>Caricare un <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">set di dati</a> in FiftyOne</li>
 <li>Calcolare le incorporazioni vettoriali per i campioni o le patch del dataset, oppure selezionare un modello da utilizzare per generare le incorporazioni.</li>
-<li>Utilizzare il metodo <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> per generare un indice di somiglianza Milvus per i campioni o le patch di oggetti in un set di dati, impostando il parametro <code translate="no">backend=&quot;milvus&quot;</code> e specificando un <code translate="no">brain_key</code> a scelta.</li>
+<li>Utilizzare il metodo <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> per generare un indice di somiglianza Milvus per i campioni o le patch di oggetti in un set di dati, impostando il parametro <code translate="no">backend=&quot;milvus&quot;</code> e specificando un modello <code translate="no">brain_key</code> a scelta.</li>
 <li>Utilizzare questo indice di somiglianza Milvus per interrogare i dati con <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.sort_by_similarity"><code translate="no">sort_by_similarity()</code></a>.</li>
 <li>Se si desidera, cancellare l'indice.</li>
 </ol>
@@ -113,7 +113,7 @@ milvus_index = fob.compute_similarity(
     backend=<span class="hljs-string">&quot;milvus&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Conduct-vision-similarity-searches" class="common-anchor-header">2. Eseguire ricerche di somiglianza della visione</h3><p>È ora possibile utilizzare l'indice di similarità Milvus per effettuare ricerche di similarità visiva sul set di dati.</p>
+<h3 id="2-Conduct-vision-similarity-searches" class="common-anchor-header">2. Eseguire ricerche di similarità della visione</h3><p>È ora possibile utilizzare l'indice di similarità Milvus per effettuare ricerche di similarità visiva sul set di dati.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Step 4: Query your data</span>
 query = dataset.first().<span class="hljs-built_in">id</span>  <span class="hljs-comment"># query by sample ID</span>
 view = dataset.sort_by_similarity(
@@ -134,7 +134,7 @@ dataset.delete_brain_run(<span class="hljs-string">&quot;milvus_index&quot;</spa
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Step 5: Delete the index</span>
 milvus_index.delete()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-the-Milvus-backend" class="common-anchor-header">Utilizzare il backend di Milvus<button data-href="#Use-the-Milvus-backend" class="anchor-icon" translate="no">
+<h2 id="Use-the-Milvus-backend" class="common-anchor-header">Utilizzare il backend Milvus<button data-href="#Use-the-Milvus-backend" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -275,13 +275,13 @@ milvus_index = fob.compute_similarity(
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Tuttavia, in genere questi parametri vengono passati direttamente a <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> per configurare un nuovo indice specifico:</p>
-<pre><code translate="no" class="language-python">milvus_index = fob.<span class="hljs-title function_">compute_similarity</span>(
+<pre><code translate="no" class="language-python">milvus_index = fob.compute_similarity(
     ...
     backend=<span class="hljs-string">&quot;milvus&quot;</span>,
     brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     metric=<span class="hljs-string">&quot;dotproduct&quot;</span>,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Manage-brain-runs" class="common-anchor-header">Gestire le esecuzioni del cervello<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">

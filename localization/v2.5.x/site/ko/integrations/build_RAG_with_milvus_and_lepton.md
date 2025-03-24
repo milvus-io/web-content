@@ -56,7 +56,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;LE
 <pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
 $ unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">milvus_docs/en/faq</code> 폴더에서 모든 마크다운 파일을 로드합니다. 각 문서에 대해 &quot;#&quot;를 사용하여 파일의 내용을 구분하면 마크다운 파일의 각 주요 부분의 내용을 대략적으로 구분할 수 있습니다.</p>
+<p><code translate="no">milvus_docs/en/faq</code> 폴더에서 모든 마크다운 파일을 로드합니다. 각 문서에 대해 &quot;#&quot;를 사용하여 파일의 내용을 구분하기만 하면 마크다운 파일의 각 주요 부분의 내용을 대략적으로 구분할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -128,8 +128,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">데이터 삽입</h3><p>텍스트 줄을 반복하여 임베딩을 만든 다음 데이터를 Milvus에 삽입합니다.</p>
@@ -226,7 +226,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 &lt;/question&gt;
 &quot;&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Lepton AI에서 제공하는 <code translate="no">mistral-7b</code> 모델을 사용하여 프롬프트에 따라 응답을 생성합니다.</p>
+<p>프롬프트에 따라 응답을 생성하려면 Lepton AI에서 제공하는 <code translate="no">mistral-7b</code> 모델을 사용합니다.</p>
 <pre><code translate="no" class="language-python">response = lepton_client.chat.completions.create(
     model=<span class="hljs-string">&quot;mistral-7b&quot;</span>,
     messages=[

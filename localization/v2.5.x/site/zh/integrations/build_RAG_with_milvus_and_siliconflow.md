@@ -24,8 +24,8 @@ title: 与 Milvus 和 SiliconFlow 一起构建 RAG
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_siliconflow.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://siliconflow.cn/">SiliconFlow</a>致力于构建一个可扩展、标准化和高性能的人工智能 Infra 平台。 SiliconCloud 是 SiliconFlow 的旗舰产品之一，被描述为模型即服务（MaaS）平台。它为部署各种人工智能模型（包括大型语言模型（LLMs）和嵌入模型）提供了一个全面的环境。SiliconCloud 聚合了众多开源模型，使用户能够轻松访问和利用这些资源，而无需大量的基础设施设置。</p>
-<p>在本教程中，我们将向您展示如何使用 Milvus 和 SiliconFlow 构建 RAG（检索-增强生成）管道。</p>
+<p><a href="https://siliconflow.cn/">SiliconFlow</a>致力于构建一个可扩展、标准化和高性能的人工智能 Infra 平台。 SiliconCloud 是 SiliconFlow 的旗舰产品之一，被描述为模型即服务（MaaS）平台。它为部署各种人工智能模型（包括大型语言模型（LLMs）和 Édding 模型）提供了一个综合环境。SiliconCloud 聚合了众多开源模型，使用户能够轻松访问和利用这些资源，而无需大量的基础设施设置。</p>
+<p>在本教程中，我们将向你展示如何使用 Milvus 和 SiliconFlow 构建 RAG（检索-增强生成）管道。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +44,7 @@ title: 与 Milvus 和 SiliconFlow 一起构建 RAG
     </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">依赖和环境</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai requests tqdm
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重启运行时</strong>（点击屏幕上方的 "Runtime "菜单，从下拉菜单中选择 "Restart session"）。</p>
+<p>如果您使用的是 Google Colab，要启用刚安装的依赖项，可能需要<strong>重启运行时</strong>（点击屏幕上方的 "Runtime "菜单，从下拉菜单中选择 "Restart session"）。</p>
 </div>
 <p>SiliconFlow 支持 OpenAI 风格的 API。您可以登录其官方网站，并将<a href="https://docs.siliconflow.cn/quickstart">api key</a> <code translate="no">SILICON_FLOW_API_KEY</code> 作为环境变量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -129,8 +129,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入数据</h3><p>遍历文本行，创建 Embeddings，然后将数据插入 Milvus。</p>
@@ -170,7 +170,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     </button></h2><h3 id="Retrieve-data-for-a-query" class="common-anchor-header">为查询检索数据</h3><p>让我们指定一个关于 Milvus 的常见问题。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在 Collections 中搜索该问题并检索语义前 3 个匹配项。</p>
+<p>在 Collections 中搜索该问题，并检索语义前 3 个匹配项。</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=[

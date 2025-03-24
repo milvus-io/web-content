@@ -3,7 +3,7 @@ id: build_rag_on_arm.md
 summary: >-
   In diesem Tutorial lernen Sie, wie Sie eine Retrieval-Augmented Generation
   (RAG)-Anwendung auf Arm-basierten Infrastrukturen erstellen. Für die
-  Vektorspeicherung nutzen wir Zilliz Cloud, die vollständig verwaltete
+  Vektorspeicherung verwenden wir Zilliz Cloud, die vollständig verwaltete
   Milvus-Vektordatenbank. Zilliz Cloud ist in den wichtigsten Clouds wie AWS,
   GCP und Azure verfügbar. In dieser Demo verwenden wir Zilliz Cloud, die auf
   AWS mit Arm-Maschinen bereitgestellt wird. Für LLM verwenden wir das
@@ -94,8 +94,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Wir verwenden den inneren Produktabstand als Standard-Metrik-Typ. Weitere Informationen über Abstandsarten finden Sie auf der <a href="https://milvus.io/docs/metric.md?tab=floating">Seite Ähnlichkeitsmetriken</a></p>
@@ -190,7 +190,7 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 <div class="alert note">
 <p>Diese Re-Quantisierung ist speziell für Graviton3 optimal. Für Graviton2 sollte die optimale Requantisierung im Format <code translate="no">Q4_0_4_4</code> durchgeführt werden, und für Graviton4 ist das Format <code translate="no">Q4_0_4_8</code> am besten für die Requantisierung geeignet.</p>
 </div>
-<h3 id="Start-the-LLM-Service" class="common-anchor-header">Starten Sie den LLM-Dienst</h3><p>Sie können das Serverprogramm llama.cpp verwenden und Anfragen über eine OpenAI-kompatible API senden. So können Sie Anwendungen entwickeln, die mehrfach mit dem LLM interagieren, ohne ihn wiederholt starten und stoppen zu müssen. Außerdem können Sie auf den Server von einem anderen Rechner aus zugreifen, auf dem der LLM über das Netzwerk gehostet wird.</p>
+<h3 id="Start-the-LLM-Service" class="common-anchor-header">Starten Sie den LLM-Dienst</h3><p>Sie können das Serverprogramm llama.cpp verwenden und Anfragen über eine OpenAI-kompatible API senden. So können Sie Anwendungen entwickeln, die mehrfach mit dem LLM interagieren, ohne ihn wiederholt starten und stoppen zu müssen. Außerdem können Sie von einem anderen Rechner, auf dem der LLM über das Netzwerk gehostet wird, auf den Server zugreifen.</p>
 <p>Starten Sie den Server von der Befehlszeile aus, und er lauscht am Port 8080:</p>
 <pre><code translate="no" class="language-shell">$ ./llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -n 2048 -t 64 -c 65536  --port 8080
 <button class="copy-code-btn"></button></code></pre>
@@ -198,7 +198,7 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 </code></pre>
 <p>Sie können auch die Parameter des gestarteten LLM anpassen, um ihn an Ihre Serverhardware anzupassen und eine optimale Leistung zu erzielen. Weitere Informationen zu den Parametern finden Sie unter dem Befehl <code translate="no">llama-server --help</code>.</p>
 <p>Wenn Sie Schwierigkeiten haben, diesen Schritt auszuführen, können Sie weitere Informationen in den <a href="https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot/">offiziellen Dokumenten</a> nachlesen.</p>
-<p>Sie haben den LLM-Dienst auf Ihrer Arm-basierten CPU gestartet. Als nächstes interagieren wir direkt mit dem Dienst unter Verwendung des OpenAI SDK.</p>
+<p>Sie haben den LLM-Dienst auf Ihrer Arm-basierten CPU gestartet. Als nächstes interagieren wir direkt mit dem Dienst, indem wir das OpenAI SDK verwenden.</p>
 <h2 id="Online-RAG" class="common-anchor-header">Online RAG<button data-href="#Online-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

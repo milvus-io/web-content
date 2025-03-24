@@ -20,7 +20,7 @@ title: 使用 Milvus 进行混合搜索
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>如果您想体验本教程的最终效果，可以直接登录<a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/ 进行尝试。</a></p>
+<p>如果您想体验本教程的最终效果，可以直接访问 https://demos.milvus.io/hybrid-search/</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>在本教程中，我们将演示如何利用<a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a>和<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 模型</a>进行混合搜索。BGE-M3 模型可以将文本转换为密集向量和稀疏向量。Milvus 支持在一个 Collections 中存储这两种向量，从而可以进行混合搜索，增强搜索结果的相关性。</p>
 <p>Milvus 支持密集、稀疏和混合检索方法：</p>
@@ -33,7 +33,7 @@ title: 使用 Milvus 进行混合搜索
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">依赖关系和环境</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Download-Dataset" class="common-anchor-header">下载数据集</h3><p>要演示搜索，我们需要一个文档语料库。让我们使用 Quora 重复问题数据集，并将其放在本地目录中。</p>
-<p>数据集来源：<a href="https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs">首次发布的 Quora 数据集：问题对</a></p>
+<p>数据集来源：<a href="https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs">第一个 Quora 数据集发布：问题对</a></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Run this cell to download the dataset</span>
 $ wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv
 <button class="copy-code-btn"></button></code></pre>
@@ -292,7 +292,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>在海得拉巴做哪一行比较好<span style='color:red'>？</span></p>
 <p><span style='color:red'> 启动</span>机器人技术的最佳方式是什么<span style='color:red'>？</span>哪种开发板最适合我<span style='color:red'> 开始</span>工作<span style='color:red'>？</span></p>
 <p>新手需要掌握哪些数学知识<span style='color:red'> 才能</span>理解计算机<span style='color:red'> 编程</span>的算法<span style='color:red'> ？</span>哪些算法书籍适合完全初学者<span style='color:red'>？</span></p>
-<p><span style='color:red'>如何</span>让生活适合自己，不让生活在精神上和情感上<span style='color:red'>虐待</span>自己<span style='color:red'>？</span></p>
+<p><span style='color:red'>如何</span>让生活适合自己，让生活不再从精神和情感上<span style='color:red'>虐待</span>自己<span style='color:red'>？</span></p>
 <p><strong>混合搜索结果：</strong></p>
 <p><span style='color:red'> 开始学习</span>机器人技术的最佳方法是什么<span style='color:red'>？</span>哪种开发板最好<span style='color:red'>？</span></p>
 <p>什么是 Java<span style='color:red'> 编程？如何</span>学习 Java 编程语言？</p>

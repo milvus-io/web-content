@@ -27,7 +27,7 @@ title: Construir RAG com Milvus e SiliconFlow
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p>A<a href="https://siliconflow.cn/">SiliconFlow</a> está empenhada em construir uma plataforma de IA Infra escalável, padronizada e de alto desempenho. A SiliconCloud é uma das principais ofertas da SiliconFlow, descrita como uma plataforma Model as a Service (MaaS). Fornece um ambiente abrangente para a implementação de vários modelos de IA, incluindo modelos de linguagem de grande dimensão (LLM) e modelos de incorporação. O SiliconCloud agrega vários modelos de código aberto, permitindo que os utilizadores acedam e utilizem facilmente estes recursos sem a necessidade de uma configuração de infraestrutura extensa.</p>
-<p>Neste tutorial, mostraremos como construir um pipeline RAG (Retrieval-Augmented Generation) com o Milvus e o SiliconFlow.</p>
+<p>Neste tutorial, mostraremos como construir um pipeline RAG (Retrieval-Augmented Generation) com Milvus e SiliconFlow.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,7 +84,7 @@ siliconflow_client = <span class="hljs-title class_">OpenAI</span>(
         .embedding
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>Gerar um embedding de teste e imprimir a sua dimensão e os primeiros elementos.</p>
+<p>Gere um embedding de teste e imprima a sua dimensão e os primeiros elementos.</p>
 <pre><code translate="no" class="language-python">test_embedding = emb_text(<span class="hljs-string">&quot;This is a test&quot;</span>)
 embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <span class="hljs-built_in">print</span>(embedding_dim)
@@ -131,8 +131,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Inserir dados</h3><p>Itere pelas linhas de texto, crie embeddings e, em seguida, insira os dados no Milvus.</p>

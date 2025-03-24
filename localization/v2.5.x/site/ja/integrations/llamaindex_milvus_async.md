@@ -100,17 +100,17 @@ $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-lla
 </ul>
 </div>
 <p>Milvusコレクションを再構築するための初期化関数を定義する。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_vector_store</span>():
-    <span class="hljs-keyword">return</span> MilvusVectorStore(
+<pre><code translate="no" class="language-python"><span class="hljs-function">def <span class="hljs-title">init_vector_store</span>():
+    <span class="hljs-keyword">return</span> <span class="hljs-title">MilvusVectorStore</span>(<span class="hljs-params">
         uri=URI,
-        <span class="hljs-comment"># token=TOKEN,</span>
+        # token=TOKEN,
         dim=DIM,
         collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
         embedding_field=<span class="hljs-string">&quot;embedding&quot;</span>,
         id_field=<span class="hljs-string">&quot;id&quot;</span>,
         similarity_metric=<span class="hljs-string">&quot;COSINE&quot;</span>,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-        overwrite=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># To overwrite the collection if it already exists</span>
+        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (`<span class="hljs-string">&quot;Strong&quot;</span>`, `<span class="hljs-string">&quot;Session&quot;</span>`, `<span class="hljs-string">&quot;Bounded&quot;</span>`, `<span class="hljs-string">&quot;Eventually&quot;</span>`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        overwrite</span>=True,  <span class="hljs-meta"># To overwrite the collection <span class="hljs-keyword">if</span> it already exists</span>
     )
 
 
@@ -130,7 +130,7 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 41a6f99c-489f-49ff-9821-14e2561140eb
 </code></pre>
-<p>Hugging Face埋め込みモデルをローカルにインスタンス化する。ローカルモデルを使用することで、非同期データ挿入中にAPIレート制限に達するリスクを回避できます。同時APIリクエストはすぐに加算され、パブリックAPIの予算を使い果たしてしまうからです。しかし、レート制限が高い場合は、代わりにリモートモデルサービスを使用することもできます。</p>
+<p>Hugging Face埋め込みモデルをローカルでインスタンス化する。ローカルモデルを使用することで、非同期データ挿入中にAPIレート制限に達するリスクを回避できます。同時APIリクエストはすぐに加算され、パブリックAPIの予算を使い果たしてしまうからです。しかし、レート制限が高い場合は、代わりにリモートモデルサービスを使用することもできます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">embeddings</span>.<span class="hljs-property">huggingface</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">HuggingFaceEmbedding</span>
 
 
@@ -177,7 +177,7 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、より低レベルのAPIの使い方を紹介し、同期実行と非同期実行のパフォーマンスを比較します。</p>
+    </button></h2><p>このセクションでは、低レベルのAPIの使い方を紹介し、同期実行と非同期実行のパフォーマンスを比較します。</p>
 <h3 id="Async-add" class="common-anchor-header">非同期追加</h3><p>ベクトルストアを再初期化する。</p>
 <pre><code translate="no" class="language-python">vector_store = init_vector_store()
 <button class="copy-code-btn"></button></code></pre>

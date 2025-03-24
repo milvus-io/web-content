@@ -20,9 +20,9 @@ title: البحث الهجين مع ميلفوس
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>إذا كنت ترغب في تجربة التأثير النهائي لهذا البرنامج التعليمي، يمكنك الانتقال مباشرةً إلى <a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a> وتجربته.</p>
+<p>إذا كنت ترغب في تجربة التأثير النهائي لهذا البرنامج التعليمي، يمكنك الانتقال مباشرةً إلى https://demos.milvus.io/hybrid-search/</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
-<p>في هذا البرنامج التعليمي، سنشرح في هذا البرنامج التعليمي كيفية إجراء بحث هجين باستخدام <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> ونموذج <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3</a>. يمكن لنموذج BGE-M3 تحويل النص إلى متجهات كثيفة ومتناثرة. يدعم Milvus تخزين كلا النوعين من المتجهات في مجموعة واحدة، مما يسمح بالبحث الهجين الذي يعزز ملاءمة النتائج.</p>
+<p>في هذا البرنامج التعليمي، سنشرح في هذا البرنامج التعليمي كيفية إجراء بحث هجين باستخدام <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> ونموذج <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3</a>. يمكن لنموذج BGE-M3 تحويل النص إلى متجهات كثيفة ومتناثرة. يدعم Milvus تخزين كلا النوعين من المتجهات في مجموعة واحدة، مما يسمح بالبحث الهجين الذي يعزز أهمية النتائج.</p>
 <p>يدعم Milvus طرق الاسترجاع الكثيفة والمتناثرة والهجينة:</p>
 <ul>
 <li>الاسترجاع الكثيف: يستخدم السياق الدلالي لفهم المعنى الكامن وراء الاستعلامات.</li>

@@ -182,7 +182,7 @@ analyzerParams.<span class="hljs-title function_">put</span>(<span class="hljs-s
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obter uma lista de tokenizadores disponíveis, consulte <a href="/docs/pt/tokenizers">Referência do Tokenizer</a>.</p>
-<h4 id="Filter" class="common-anchor-header">Filtro</h4><p><strong>Os filtros</strong> são componentes <strong>opcionais</strong> que trabalham nos tokens produzidos pelo tokenizador, transformando-os ou refinando-os conforme necessário. Por exemplo, após aplicar um filtro <code translate="no">lowercase</code> aos termos tokenizados <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, o resultado pode ser:</p>
+<h4 id="Filter" class="common-anchor-header">Filtro</h4><p><strong>Os filtros</strong> são componentes <strong>opcionais</strong> que trabalham nos tokens produzidos pelo tokenizador, transformando-os ou refinando-os conforme necessário. Por exemplo, depois de aplicar um filtro <code translate="no">lowercase</code> aos termos tokenizados <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, o resultado pode ser:</p>
 <pre><code translate="no" class="language-sql">[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;database&quot;</span>, <span class="hljs-string">&quot;built&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>, <span class="hljs-string">&quot;scale&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
 <p>Os filtros em um analisador personalizado podem ser <strong>incorporados</strong> ou <strong>personalizados</strong>, dependendo das necessidades de configuração.</p>
@@ -217,7 +217,7 @@ analyzerParams.<span class="hljs-title function_">put</span>(<span class="hljs-s
        &quot;filter&quot;:  [&quot;lowercase&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Filtros personalizados</strong>: Os filtros personalizados permitem configurações especializadas. Pode definir um filtro personalizado escolhendo um tipo de filtro válido (<code translate="no">filter.type</code>) e adicionando definições específicas para cada tipo de filtro. Exemplos de tipos de filtro que suportam personalização:</p>
+<li><p><strong>Filtros personalizados</strong>: Os filtros personalizados permitem configurações especializadas. Pode definir um filtro personalizado escolhendo um tipo de filtro válido (<code translate="no">filter.type</code>) e adicionando definições específicas para cada tipo de filtro. Exemplos de tipos de filtro que suportam a personalização:</p>
 <ul>
 <li><p><code translate="no">stop</code>: Remove palavras comuns especificadas, definindo uma lista de palavras de paragem (por exemplo, <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). Para mais informações, consulte <a href="/docs/pt/stop-filter.md">Parar</a>.</p></li>
 <li><p><code translate="no">length</code>: Exclui tokens com base em critérios de comprimento, como a definição de um comprimento máximo de token. Para obter detalhes, consulte <a href="/docs/pt/length-filter.md">Comprimento</a>.</p></li>
@@ -306,7 +306,7 @@ schema.add_field(
     field_name=<span class="hljs-string">&#x27;title_en&#x27;</span>, 
     datatype=DataType.VARCHAR, 
     max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>，
+    enable_analyzer=<span class="hljs-literal">True</span>,
     analyzer_params=analyzer_params_built_in,
     enable_match=<span class="hljs-literal">True</span>, 
 )
@@ -332,7 +332,7 @@ schema.add_field(
     field_name=<span class="hljs-string">&#x27;title&#x27;</span>, 
     datatype=DataType.VARCHAR, 
     max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>，
+    enable_analyzer=<span class="hljs-literal">True</span>,
     analyzer_params=analyzer_params_custom,
     enable_match=<span class="hljs-literal">True</span>, 
 )

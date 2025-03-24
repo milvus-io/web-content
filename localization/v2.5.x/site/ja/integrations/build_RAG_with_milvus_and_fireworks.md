@@ -26,7 +26,7 @@ title: MilvusとFireworks AIでRAGを構築する
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_fireworks.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://fireworks.ai/">Fireworks AIは</a>、生成AI推論プラットフォームであり、業界をリードするスピードと、モデルの実行とカスタマイズのためのプロダクションレディネスを提供します。 Fireworks AIは、サーバーレスモデル、オンデマンドデプロイメント、微調整機能を含む、様々な生成AIサービスを提供します。大規模言語モデル（LLM）やエンベッディングモデルなど、さまざまなAIモデルをデプロイするための包括的な環境を提供する。Fireworks AIは多数のモデルを集約しているため、ユーザーは大規模なインフラを構築することなく、これらのリソースに簡単にアクセスして利用することができます。</p>
+<p><a href="https://fireworks.ai/">Fireworks AIは</a>、生成AI推論プラットフォームであり、業界をリードするスピードと、モデルの実行およびカスタマイズのためのプロダクションレディネスを提供します。 Fireworks AIは、サーバーレスモデル、オンデマンドデプロイメント、微調整機能など、様々な生成AIサービスを提供します。大規模言語モデル（LLM）やエンベッディングモデルなど、さまざまなAIモデルをデプロイするための包括的な環境を提供する。Fireworks AIは多数のモデルを集約しているため、ユーザーは大規模なインフラストラクチャを構築することなく、これらのリソースに簡単にアクセスして利用することができます。</p>
 <p>このチュートリアルでは、MilvusとFireworks AIを使ってRAG（Retrieval-Augmented Generation）パイプラインを構築する方法をご紹介します。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,7 +69,7 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">LLMと埋め込みモデルの準備</h3><p>クライアントを初期化して、LLMと埋め込みモデルを準備します。Fireworks AIではOpenAIスタイルのAPIが使えますが、同じAPIを微調整して使うことで、埋め込みモデルとLLMを呼び出すことができます。</p>
+<h3 id="Prepare-the-LLM-and-Embedding-Model" class="common-anchor-header">LLMと埋め込みモデルの準備</h3><p>クライアントを初期化して、LLMと埋め込みモデルを準備します。Fireworks AIでは、OpenAIスタイルのAPIが使えますので、同じAPIを微調整して使うことで、埋め込みモデルとLLMを呼び出すことができます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
 
 fireworks_client = <span class="hljs-title class_">OpenAI</span>(
@@ -134,8 +134,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">データの挿入</h3><p>テキスト行を繰り返し、エンベッディングを作成し、milvusにデータを挿入します。</p>
@@ -209,7 +209,7 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">LLMを使ってRAGレスポンスを取得する</h3><p>検索されたドキュメントを文字列形式に変換する。</p>
+<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">LLMを使ってRAGレスポンスを取得する</h3><p>検索されたドキュメントを文字列フォーマットに変換する。</p>
 <pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.<span class="hljs-keyword">join</span>(
     [<span class="hljs-meta">line_with_distance[0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )

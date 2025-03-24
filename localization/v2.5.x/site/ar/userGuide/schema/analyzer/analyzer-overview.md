@@ -2,8 +2,8 @@
 id: analyzer-overview.md
 title: نظرة عامة على المحلل
 summary: >-
-  في معالجة النصوص، يعتبر المحلل مكونًا أساسيًا يحول النص الخام إلى تنسيق منظم
-  وقابل للبحث. يتكون كل محلل عادةً من عنصرين أساسيين: مُحلل الرموز والمرشح.
+  في معالجة النصوص، يعتبر المحلل عنصرًا أساسيًا في تحويل النص الخام إلى تنسيق
+  منظم وقابل للبحث. يتكون كل محلل عادةً من عنصرين أساسيين: مُحلل الرموز والمرشح.
   يقومان معًا بتحويل النص المدخل إلى رموز، وتنقيح هذه الرموز، وإعدادها للفهرسة
   والاسترجاع بكفاءة.
 ---
@@ -82,8 +82,8 @@ summary: >-
 <div class="alert note">
 <p>إذا قمت بحذف تكوينات المحلل أثناء إنشاء المجموعة، فإن Milvus يستخدم محلل <code translate="no">standard</code> لجميع عمليات معالجة النصوص بشكل افتراضي. لمزيد من التفاصيل، راجع <a href="/docs/ar/standard-analyzer.md">المعيار</a>.</p>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">محلل مدمج</h3><p>يتم تهيئة المحللات المدمجة في Milvus مسبقًا باستخدام محلل رموز ومرشحات محددة، مما يسمح لك باستخدامها على الفور دون الحاجة إلى تحديد هذه المكونات بنفسك. يعمل كل محلل مدمج كقالب يتضمن أداة ترميز ومرشحات محددة مسبقًا، مع معلمات اختيارية للتخصيص.</p>
-<p>على سبيل المثال، لاستخدام المحلّل المدمج <code translate="no">standard</code> ، ما عليك سوى تحديد اسمه <code translate="no">standard</code> على أنه <code translate="no">type</code> وتضمين اختياريًا تكوينات إضافية خاصة بهذا النوع من المحلّلات، مثل <code translate="no">stop_words</code>:</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">محلل مدمج</h3><p>يتم تهيئة المحللات المضمنة في Milvus مسبقًا باستخدام محلل رموز ومرشحات محددة، مما يسمح لك باستخدامها على الفور دون الحاجة إلى تحديد هذه المكونات بنفسك. يعمل كل محلل مدمج كقالب يتضمن أداة ترميز ومرشحات محددة مسبقًا، مع معلمات اختيارية للتخصيص.</p>
+<p>على سبيل المثال، لاستخدام المحلّل المدمج <code translate="no">standard</code> ، ما عليك سوى تحديد اسمه <code translate="no">standard</code> ك <code translate="no">type</code> وتضمين اختياريًا تكوينات إضافية خاصة بهذا النوع من المحلّلات، مثل <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -305,7 +305,7 @@ schema.add_field(
     field_name=<span class="hljs-string">&#x27;title_en&#x27;</span>, 
     datatype=DataType.VARCHAR, 
     max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>，
+    enable_analyzer=<span class="hljs-literal">True</span>,
     analyzer_params=analyzer_params_built_in,
     enable_match=<span class="hljs-literal">True</span>, 
 )
@@ -331,7 +331,7 @@ schema.add_field(
     field_name=<span class="hljs-string">&#x27;title&#x27;</span>, 
     datatype=DataType.VARCHAR, 
     max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>，
+    enable_analyzer=<span class="hljs-literal">True</span>,
     analyzer_params=analyzer_params_custom,
     enable_match=<span class="hljs-literal">True</span>, 
 )

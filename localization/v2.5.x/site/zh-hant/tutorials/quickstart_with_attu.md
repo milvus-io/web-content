@@ -52,7 +52,7 @@ title: 問題回答系統
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>訪問 Attu<a href="https://github.com/zilliztech/attu/releases">GitHub 發佈頁面下載</a>桌面版 Attu。選擇適合您作業系統的版本，並依照安裝步驟進行。</p>
+    </button></h2><p>訪問 Attu<a href="https://github.com/zilliztech/attu/releases">GitHub 發佈頁面下載</a>桌面版 Attu。針對您的作業系統選擇適當的版本，並依照安裝步驟進行。</p>
 <h3 id="Note-for-macOS-M-series-chip" class="common-anchor-header">適用於 macOS (M 系列晶片) 的注意事項：</h3><p>如果遇到錯誤：</p>
 <pre><code translate="no">attu.app <span class="hljs-keyword">is</span> damaged <span class="hljs-keyword">and</span> cannot be opened.
 <button class="copy-code-btn"></button></code></pre>
@@ -156,7 +156,7 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>

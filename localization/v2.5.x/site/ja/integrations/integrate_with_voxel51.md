@@ -98,7 +98,7 @@ title: MilvusとFiftyOneでビジョン検索を行う
         ></path>
       </svg>
     </button></h2><p>以下の例は上記のワークフローを示すものである。</p>
-<h3 id="1-Load-a-dataset-into-FiftyOne-and-compute-embeddings-for-the-samples" class="common-anchor-header">1.データセットを FiftyOne に読み込み、サンプルの埋め込みを計算する。</h3><p>以下のコードでは、FiftyOne が提供するサンプル画像セットを使用して統合のデモンストレーションを行います。<a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">こちらの記事を</a>参考に、独自の画像セットを用意することもできます。</p>
+<h3 id="1-Load-a-dataset-into-FiftyOne-and-compute-embeddings-for-the-samples" class="common-anchor-header">1.データセットをFiftyOneに読み込み、サンプルの埋め込みを計算します。</h3><p>以下のコードでは、FiftyOne が提供するサンプル画像セットを使用して統合のデモンストレーションを行います。<a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">こちらの記事を</a>参考に、独自の画像セットを用意することもできます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> fiftyone <span class="hljs-keyword">as</span> fo
 <span class="hljs-keyword">import</span> fiftyone.brain <span class="hljs-keyword">as</span> fob
 <span class="hljs-keyword">import</span> fiftyone.zoo <span class="hljs-keyword">as</span> foz
@@ -275,13 +275,13 @@ milvus_index = fob.compute_similarity(
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>しかし、通常はこれらのパラメータを直接 <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a>に直接渡されます：</p>
-<pre><code translate="no" class="language-python">milvus_index = fob.<span class="hljs-title function_">compute_similarity</span>(
+<pre><code translate="no" class="language-python">milvus_index = fob.compute_similarity(
     ...
     backend=<span class="hljs-string">&quot;milvus&quot;</span>,
     brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     metric=<span class="hljs-string">&quot;dotproduct&quot;</span>,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Manage-brain-runs" class="common-anchor-header">ブレイン・ランの管理<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">

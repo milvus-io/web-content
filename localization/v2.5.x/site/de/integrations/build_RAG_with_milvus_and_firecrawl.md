@@ -30,7 +30,7 @@ title: Aufbau von RAG mit Milvus und Firecrawl
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://www.firecrawl.dev/">Firecrawl</a> ermöglicht es Entwicklern, KI-Anwendungen mit sauberen Daten zu erstellen, die von einer beliebigen Website stammen. Mit fortschrittlichen Scraping-, Crawling- und Datenextraktionsfunktionen vereinfacht Firecrawl den Prozess der Umwandlung von Website-Inhalten in saubere Markdown- oder strukturierte Daten für nachgelagerte KI-Workflows.</p>
-<p>In diesem Tutorial zeigen wir Ihnen, wie Sie eine Retrieval-Augmented Generation (RAG)-Pipeline mit Milvus und Firecrawl erstellen. Die Pipeline integriert Firecrawl für das Scraping von Webdaten, Milvus für die Vektorspeicherung und OpenAI für die Generierung aufschlussreicher, kontextbezogener Antworten.</p>
+<p>In diesem Tutorial zeigen wir Ihnen, wie Sie eine Retrieval-Augmented Generation (RAG)-Pipeline mit Milvus und Firecrawl erstellen können. Die Pipeline integriert Firecrawl für das Scraping von Webdaten, Milvus für die Vektorspeicherung und OpenAI für die Generierung aufschlussreicher, kontextbezogener Antworten.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -185,8 +185,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Daten einfügen</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

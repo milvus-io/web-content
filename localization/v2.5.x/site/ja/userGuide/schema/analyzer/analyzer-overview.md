@@ -20,7 +20,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>テキスト処理において、<strong>アナライザーは</strong>生テキストを構造化された検索可能な形式に変換する重要なコンポーネントである。アナライザーは通常、<strong>トークナイザーと</strong> <strong>フィルターという</strong>2つのコア要素で構成される。これらは共に入力テキストをトークンに変換し、トークンを洗練させ、効率的なインデックス作成と検索に備えます。</p>
-<p>Milvusでは、アナライザはコレクション作成時に<code translate="no">VARCHAR</code> フィールドをコレクションスキーマに追加する際に設定されます。アナライザによって生成されたトークンは、キーワードマッチングのためのインデックスを構築するために使用したり、全文検索のためにスパース埋め込みに変換したりすることができます。詳細については、<a href="/docs/ja/keyword-match.md">Text Match</a>または<a href="/docs/ja/full-text-search.md">Full Text Search</a> を参照してください。</p>
+<p>Milvusでは、アナライザはコレクション作成時に<code translate="no">VARCHAR</code> フィールドをコレクションスキーマに追加する際に設定されます。アナライザによって生成されたトークンは、キーワードマッチングのインデックスを構築するために使用したり、全文検索のためにスパース埋め込みに変換したりすることができます。詳細については、<a href="/docs/ja/keyword-match.md">Text Match</a>または<a href="/docs/ja/full-text-search.md">Full Text Search</a> を参照してください。</p>
 <div class="alert note">
 <p>アナライザーの使用は、パフォーマンスに影響する場合があります：</p>
 <ul>
@@ -302,7 +302,7 @@ schema.add_field(
     field_name=<span class="hljs-string">&#x27;title_en&#x27;</span>, 
     datatype=DataType.VARCHAR, 
     max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>，
+    enable_analyzer=<span class="hljs-literal">True</span>,
     analyzer_params=analyzer_params_built_in,
     enable_match=<span class="hljs-literal">True</span>, 
 )
@@ -328,7 +328,7 @@ schema.add_field(
     field_name=<span class="hljs-string">&#x27;title&#x27;</span>, 
     datatype=DataType.VARCHAR, 
     max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>，
+    enable_analyzer=<span class="hljs-literal">True</span>,
     analyzer_params=analyzer_params_custom,
     enable_match=<span class="hljs-literal">True</span>, 
 )

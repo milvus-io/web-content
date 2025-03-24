@@ -43,7 +43,7 @@ title: ベクトルの可視化
       </svg>
     </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">依存関係と環境</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai requests tqdm matplotlib seaborn
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、OpenAIのエンベッディングモデルを使用します。環境変数としてOPENAI_API_KEYを用意してください。</p>
+<p>この例では、OpenAIのエンベッディングモデルを使用します。OPENAI_API_KEYを環境変数として用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
@@ -154,8 +154,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-data" class="common-anchor-header">データの挿入<button data-href="#Insert-data" class="anchor-icon" translate="no">
@@ -429,4 +429,4 @@ plt.show()
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <p>見ての通り、クエリーベクトルは検索されたベクトルに近い。検索されたベクトルは、クエリを中心とした一定の半径を持つ標準的な円の中には入っていませんが、それでも2D平面上ではクエリベクトルに非常に近いことがわかります。</p>
-<p>次元削減技術を使うことで、ベクトルの理解やトラブルシューティングを容易にすることができます。このチュートリアルを通して、ベクトルについての理解が深まることを願っています。</p>
+<p>次元削減技術を使うことで、ベクトルの理解やトラブルシューティングが容易になります。このチュートリアルを通して、ベクトルについての理解が深まることを願っています。</p>

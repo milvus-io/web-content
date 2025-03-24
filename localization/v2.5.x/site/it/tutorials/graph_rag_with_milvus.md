@@ -202,7 +202,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     )
 
 
@@ -273,7 +273,7 @@ Inserting: 100%|█████████████████████�
         ></path>
       </svg>
     </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">Recupero delle somiglianze</h3><p>Recuperiamo le topK entità e relazioni simili in base alla query di input da Milvus.</p>
-<p>Quando si esegue il recupero delle entità, occorre prima estrarre le entità dal testo della query utilizzando un metodo specifico come il NER (Named-entity recognition). Per semplicità, prepariamo qui i risultati del NER. Se si desidera modificare la query come domanda personalizzata, è necessario modificare l'elenco NER corrispondente alla query. In pratica, è possibile utilizzare qualsiasi altro modello o approccio per estrarre le entità dalla query.</p>
+<p>Quando si esegue il recupero delle entità, occorre innanzitutto estrarre le entità dal testo della query utilizzando un metodo specifico come il NER (Named-entity recognition). Per semplicità, prepariamo qui i risultati del NER. Se si desidera modificare la query come domanda personalizzata, è necessario modificare l'elenco NER corrispondente alla query. In pratica, è possibile utilizzare qualsiasi altro modello o approccio per estrarre le entità dalla query.</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What contribution did the son of Euler&#x27;s teacher make?&quot;</span>
 
 query_ner_list = [<span class="hljs-string">&quot;Euler&quot;</span>]
@@ -372,7 +372,7 @@ relation_candidate_texts = [
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p>Abbiamo ottenuto le relazioni candidate attraverso l'espansione del sottografo, che saranno ricanalizzate da LLM nella fase successiva.</p>
-<h3 id="LLM-reranking" class="common-anchor-header">Ricanalizzazione da parte di LLM</h3><p>In questa fase, utilizziamo il potente meccanismo di autoattenzione di LLM per filtrare e raffinare ulteriormente l'insieme delle relazioni candidate. Utilizziamo un prompt unico, incorporando la domanda e l'insieme di relazioni candidate nel prompt, e istruiamo LLM a selezionare le relazioni potenziali che potrebbero aiutare a rispondere alla domanda. Dato che alcune domande possono essere complesse, adottiamo l'approccio della catena del pensiero, consentendo a LLM di articolare il suo processo di pensiero nella risposta. La risposta di LLM deve essere in formato json, per una comoda analisi.</p>
+<h3 id="LLM-reranking" class="common-anchor-header">Ricanalizzazione da parte di LLM</h3><p>In questa fase, utilizziamo il potente meccanismo di autoattenzione di LLM per filtrare e raffinare ulteriormente l'insieme di relazioni candidate. Utilizziamo un prompt unico, incorporando la domanda e l'insieme di relazioni candidate nel prompt, e istruiamo LLM a selezionare le relazioni potenziali che potrebbero aiutare a rispondere alla domanda. Poiché alcune domande possono essere complesse, adottiamo l'approccio della catena del pensiero, consentendo a LLM di articolare il suo processo di pensiero nella risposta. La risposta di LLM deve essere in formato json, per una comoda analisi.</p>
 <pre><code translate="no" class="language-python">query_prompt_one_shot_input = <span class="hljs-string">&quot;&quot;&quot;I will provide you with a list of relationship descriptions. Your task is to select 3 relationships that may be useful to answer the given question. Please return a JSON object containing your thought process and a list of the selected relationships in order of their relevance.
 
 Question:

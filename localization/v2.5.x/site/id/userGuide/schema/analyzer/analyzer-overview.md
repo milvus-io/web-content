@@ -190,7 +190,7 @@ analyzerParams.<span class="hljs-title function_">put</span>(<span class="hljs-s
 <li><p><strong>Filter bawaan</strong>: Telah dikonfigurasi sebelumnya oleh Milvus, yang membutuhkan pengaturan minimal. Anda dapat menggunakan filter ini secara langsung dengan menentukan namanya. Filter di bawah ini adalah filter bawaan untuk penggunaan langsung:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: Mengonversi teks menjadi huruf kecil, memastikan pencocokan yang tidak peka huruf. Untuk detailnya, lihat <a href="/docs/id/lowercase-filter.md">Huruf Kecil</a>.</p></li>
-<li><p><code translate="no">asciifolding</code>: Mengonversi karakter non-ASCII menjadi ekuivalen ASCII, menyederhanakan penanganan teks multibahasa. Untuk rinciannya, lihat <a href="/docs/id/ascii-folding-filter.md">ASCII folding (Pelipatan ASCII</a>).</p></li>
+<li><p><code translate="no">asciifolding</code>: Mengonversi karakter non-ASCII menjadi ekuivalen ASCII, menyederhanakan penanganan teks multibahasa. Untuk detailnya, lihat <a href="/docs/id/ascii-folding-filter.md">ASCII folding (Pelipatan ASCII</a>).</p></li>
 <li><p><code translate="no">alphanumonly</code>: Mempertahankan hanya karakter alfanumerik dengan menghapus karakter lainnya. Untuk rinciannya, lihat <a href="/docs/id/alphanumonly-filter.md">Hanya alfanumerik</a>.</p></li>
 <li><p><code translate="no">cnalphanumonly</code>: Menghapus token yang berisi karakter apa pun selain karakter Cina, huruf Inggris, atau angka. Untuk detailnya, lihat <a href="/docs/id/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 <li><p><code translate="no">cncharonly</code>: Menghapus token yang berisi karakter non-Cina. Untuk detailnya, lihat <a href="/docs/id/cncharonly-filter.md">Cncharonly</a>.</p></li>
@@ -306,7 +306,7 @@ schema.add_field(
     field_name=<span class="hljs-string">&#x27;title_en&#x27;</span>, 
     datatype=DataType.VARCHAR, 
     max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>，
+    enable_analyzer=<span class="hljs-literal">True</span>,
     analyzer_params=analyzer_params_built_in,
     enable_match=<span class="hljs-literal">True</span>, 
 )
@@ -332,7 +332,7 @@ schema.add_field(
     field_name=<span class="hljs-string">&#x27;title&#x27;</span>, 
     datatype=DataType.VARCHAR, 
     max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>，
+    enable_analyzer=<span class="hljs-literal">True</span>,
     analyzer_params=analyzer_params_custom,
     enable_match=<span class="hljs-literal">True</span>, 
 )

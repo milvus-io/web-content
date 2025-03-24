@@ -22,7 +22,7 @@ title: Grafo RAG com Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>A aplicação generalizada de modelos linguísticos de grande dimensão realça a importância de melhorar a exatidão e a relevância das suas respostas. A Geração Aumentada por Recuperação (RAG) melhora os modelos com bases de conhecimento externas, fornecendo mais informações contextuais e atenuando problemas como alucinação e conhecimento insuficiente. No entanto, confiar apenas em paradigmas RAG simples tem as suas limitações, especialmente quando se lida com relações complexas entre entidades e perguntas com vários saltos, em que o modelo tem frequentemente dificuldade em fornecer respostas exactas.</p>
 <p>A introdução de gráficos de conhecimento (knowledge graphs - KGs) no sistema RAG oferece uma nova solução. Os KGs apresentam as entidades e as suas relações de forma estruturada, fornecendo informações de recuperação mais precisas e ajudando o RAG a lidar melhor com tarefas complexas de resposta a perguntas. O KG-RAG ainda está na sua fase inicial e não há consenso sobre como recuperar eficazmente entidades e relações a partir de KGs ou como integrar a pesquisa de semelhanças vectoriais com estruturas de grafos.</p>
-<p>Neste caderno, apresentamos uma abordagem simples mas poderosa para melhorar significativamente o desempenho deste cenário. Trata-se de um paradigma RAG simples, com recuperação em vários sentidos e, em seguida, reordenação, mas que implementa logicamente o Graph RAG e alcança um desempenho de ponta no tratamento de questões multi-hop. Vamos ver como ele é implementado.</p>
+<p>Neste caderno, apresentamos uma abordagem simples, mas poderosa, para melhorar significativamente o desempenho deste cenário. Trata-se de um paradigma RAG simples, com recuperação multi-vias e, em seguida, reordenação, mas que implementa logicamente o Graph RAG e atinge um desempenho de ponta no tratamento de questões multi-hop. Vamos ver como ele é implementado.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
@@ -55,7 +55,7 @@ title: Grafo RAG com Milvus
 
 os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Importar as bibliotecas e dependências necessárias.</p>
+<p>Importar as bibliotecas e as dependências necessárias.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
 <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> defaultdict
@@ -99,7 +99,7 @@ embedding_model = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">Preparação de dados</h3><p>Utilizaremos como exemplo um nano conjunto de dados que apresenta a relação entre a família Bernoulli e Euler. O nano conjunto de dados contém 4 passagens e um conjunto de triplas correspondentes, em que cada tripla contém um sujeito, um predicado e um objeto. Na prática, pode utilizar qualquer abordagem para extrair as triplas do seu próprio corpus personalizado.</p>
+    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">Preparação de dados</h3><p>Utilizaremos como exemplo um nano conjunto de dados que introduz a relação entre a família Bernoulli e Euler para demonstrar. O nano conjunto de dados contém 4 passagens e um conjunto de triplas correspondentes, em que cada tripla contém um sujeito, um predicado e um objeto. Na prática, pode utilizar qualquer abordagem para extrair as triplas do seu próprio corpus personalizado.</p>
 <pre><code translate="no" class="language-python">nano_dataset = [
     {
         <span class="hljs-string">&quot;passage&quot;</span>: <span class="hljs-string">&quot;Jakob Bernoulli (1654–1705): Jakob was one of the earliest members of the Bernoulli family to gain prominence in mathematics. He made significant contributions to calculus, particularly in the development of the theory of probability. He is known for the Bernoulli numbers and the Bernoulli theorem, a precursor to the law of large numbers. He was the older brother of Johann Bernoulli, another influential mathematician, and the two had a complex relationship that involved both collaboration and rivalry.&quot;</span>,
@@ -202,7 +202,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     )
 
 
@@ -272,7 +272,7 @@ Inserting: 100%|█████████████████████�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">Obtenção de semelhanças</h3><p>Recuperamos as entidades e relações topK semelhantes com base na consulta de entrada do Milvus.</p>
+    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">Recuperação de semelhanças</h3><p>Recuperamos as entidades e relações topK semelhantes com base na consulta de entrada do Milvus.</p>
 <p>Ao efetuar a recuperação de entidades, devemos começar por extrair as entidades do texto da consulta utilizando um método específico como o NER (reconhecimento de entidades nomeadas). Para simplificar, preparamos aqui os resultados do NER. Se quiser alterar a consulta de acordo com a sua pergunta personalizada, tem de alterar a lista NER da consulta correspondente. Na prática, pode utilizar qualquer outro modelo ou abordagem para extrair as entidades da consulta.</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What contribution did the son of Euler&#x27;s teacher make?&quot;</span>
 

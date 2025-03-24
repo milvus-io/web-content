@@ -22,7 +22,7 @@ title: MilvusとDeepSeekでRAGを構築する
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_deepseek.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_deepseek.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p><a href="https://www.deepseek.com/">DeepSeekは</a>、開発者が高性能言語モデルを使ってAIアプリケーションを構築し、拡張することを可能にします。DeepSeekは、ロバストな推論と検索タスクのための効率的な推論、柔軟なAPI、および高度なMoE (Mixture-of-Experts) アーキテクチャを提供します。</p>
+<p><a href="https://www.deepseek.com/">DeepSeekは</a>、開発者が高性能言語モデルでAIアプリケーションを構築し、拡張することを可能にします。DeepSeekは、ロバストな推論と検索タスクのための効率的な推論、柔軟なAPI、および高度なMoE (Mixture-of-Experts) アーキテクチャを提供します。</p>
 <p>このチュートリアルでは、MilvusとDeepSeekを使用したRAG（Retrieval-Augmented Generation）パイプラインの構築方法を紹介します。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -126,8 +126,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">データの挿入</h3><p>テキスト行を繰り返し、エンベッディングを作成し、milvusにデータを挿入します。</p>

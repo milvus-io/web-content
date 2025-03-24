@@ -123,7 +123,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -293,7 +293,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
       <td>quais são as especificações dos requisitos de hardware...</td>
       <td>[Requisitos de hardware\n\nAs seguintes especificaç...</td>
       <td>A especificação dos requisitos de hardware para a...</td>
-      <td>Se queres construir o Milvus e correr a partir da fonte...</td>
+      <td>Se quiseres construir o Milvus e correr a partir da fonte...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -395,7 +395,7 @@ Evaluating 3 test case(s) in parallel: |██████████|100% (3/3
     </button></h2><p>Para avaliar a qualidade dos resultados gerados em modelos de linguagem grandes (LLMs), é importante focar em dois aspectos principais:</p>
 <ol>
 <li><p><strong>Relevância</strong>: Avaliar se o prompt orienta efetivamente o LLM para gerar respostas úteis e contextualmente apropriadas.</p></li>
-<li><p><strong>Fidelidade</strong>: Medir a exatidão do resultado, assegurando que o modelo produz informação factualmente correta e livre de alucinações ou contradições. O conteúdo gerado deve estar de acordo com a informação factual fornecida no contexto da recuperação.</p></li>
+<li><p><strong>Fidelidade</strong>: Medir a precisão do resultado, assegurando que o modelo produz informação factualmente correta e livre de alucinações ou contradições. O conteúdo gerado deve estar de acordo com a informação factual fornecida no contexto da recuperação.</p></li>
 </ol>
 <p>Estes factores, em conjunto, garantem que os resultados são relevantes e fiáveis.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> deepeval.metrics <span class="hljs-keyword">import</span> AnswerRelevancyMetric, FaithfulnessMetric

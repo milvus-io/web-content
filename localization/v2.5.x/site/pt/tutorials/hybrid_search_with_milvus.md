@@ -20,14 +20,14 @@ title: Pesquisa híbrida com Milvus
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Se quiser experimentar o efeito final deste tutorial, pode ir diretamente para <a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a> e experimentá-lo.</p>
+<p>Se quiser experimentar o efeito final deste tutorial, pode ir diretamente para https://demos.milvus.io/hybrid-search/</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
-<p>Neste tutorial, vamos demonstrar como efetuar uma pesquisa híbrida com <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> e <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">o modelo BGE-M3</a>. O modelo BGE-M3 pode converter texto em vectores densos e esparsos. O Milvus suporta o armazenamento de ambos os tipos de vectores numa coleção, permitindo uma pesquisa híbrida que aumenta a relevância dos resultados.</p>
-<p>Milvus suporta métodos de recuperação densos, esparsos e híbridos:</p>
+<p>Neste tutorial, vamos demonstrar como efetuar uma pesquisa híbrida com <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> e <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">o modelo BGE-M3</a>. O modelo BGE-M3 pode converter texto em vectores densos e esparsos. O Milvus suporta o armazenamento de ambos os tipos de vectores numa única coleção, permitindo uma pesquisa híbrida que aumenta a relevância dos resultados.</p>
+<p>O Milvus suporta métodos de recuperação densos, esparsos e híbridos:</p>
 <ul>
 <li>Recuperação Densa: Utiliza o contexto semântico para entender o significado por trás das consultas.</li>
 <li>Recuperação esparsa: Dá ênfase à correspondência de texto para encontrar resultados com base em termos específicos, equivalente à pesquisa de texto completo.</li>
-<li>Recuperação híbrida: Combina as abordagens Densa e Esparsa, capturando todo o contexto e palavras-chave específicas para obter resultados de pesquisa abrangentes.</li>
+<li>Recuperação híbrida: Combina as abordagens Densa e Esparsa, capturando o contexto completo e palavras-chave específicas para resultados de pesquisa abrangentes.</li>
 </ul>
 <p>Ao integrar estes métodos, a Pesquisa Híbrida Milvus equilibra as semelhanças semânticas e lexicais, melhorando a relevância geral dos resultados da pesquisa. Este bloco de notas irá percorrer o processo de configuração e utilização destas estratégias de recuperação, realçando a sua eficácia em vários cenários de pesquisa.</p>
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependências e ambiente</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
@@ -57,7 +57,7 @@ docs = <span class="hljs-built_in">list</span>(questions)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">What is the strongest Kevlar cord?
 </code></pre>
-<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">Usar o modelo BGE-M3 para incorporação</h3><p>O modelo BGE-M3 pode incorporar textos como vectores densos e esparsos.</p>
+<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">Utilizar o modelo BGE-M3 para as incorporações</h3><p>O modelo BGE-M3 pode incorporar textos como vectores densos e esparsos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> milvus_model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 ef = BGEM3EmbeddingFunction(use_fp16=<span class="hljs-literal">False</span>, device=<span class="hljs-string">&quot;cpu&quot;</span>)
@@ -72,7 +72,7 @@ Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00
 <h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">Configurar a coleção e o índice Milvus</h3><p>Vamos configurar a coleção Milvus e criar índices para os campos vectoriais.</p>
 <div class="note alert">
 <ul>
-<li>Definir o uri como um ficheiro local, por exemplo &quot;./milvus.db&quot;, é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
+<li>Definir o uri como um ficheiro local, por exemplo, &quot;./milvus.db&quot;, é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
 <li>Se tiver uma grande escala de dados, digamos mais de um milhão de vectores, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Nesta configuração, utilize o uri do servidor, por exemplo, http://localhost:19530, como o seu uri.</li>
 <li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste o uri e o token, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">chave API</a> no Zilliz Cloud.</li>
 </ul>

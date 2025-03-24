@@ -106,17 +106,17 @@ $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-lla
 </ul>
 </div>
 <p>Definieren Sie eine Initialisierungsfunktion, die wir wieder verwenden können, um die Milvus-Sammlung neu aufzubauen.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_vector_store</span>():
-    <span class="hljs-keyword">return</span> MilvusVectorStore(
+<pre><code translate="no" class="language-python"><span class="hljs-function">def <span class="hljs-title">init_vector_store</span>():
+    <span class="hljs-keyword">return</span> <span class="hljs-title">MilvusVectorStore</span>(<span class="hljs-params">
         uri=URI,
-        <span class="hljs-comment"># token=TOKEN,</span>
+        # token=TOKEN,
         dim=DIM,
         collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
         embedding_field=<span class="hljs-string">&quot;embedding&quot;</span>,
         id_field=<span class="hljs-string">&quot;id&quot;</span>,
         similarity_metric=<span class="hljs-string">&quot;COSINE&quot;</span>,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
-        overwrite=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># To overwrite the collection if it already exists</span>
+        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (`<span class="hljs-string">&quot;Strong&quot;</span>`, `<span class="hljs-string">&quot;Session&quot;</span>`, `<span class="hljs-string">&quot;Bounded&quot;</span>`, `<span class="hljs-string">&quot;Eventually&quot;</span>`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        overwrite</span>=True,  <span class="hljs-meta"># To overwrite the collection <span class="hljs-keyword">if</span> it already exists</span>
     )
 
 
@@ -301,7 +301,7 @@ inserted_ids = vector_store.<span class="hljs-keyword">add</span>(node_list)
 Async search for 100 queries took 1.39 seconds
 Async search for 1000 queries took 8.81 seconds
 </code></pre>
-<h4 id="Compare-with-synchronous-search" class="common-anchor-header">Vergleich mit synchroner Suche</h4><p>Definieren Sie eine synchrone Suchfunktion. Messen Sie dann die Laufzeit unter der gleichen Bedingung.</p>
+<h4 id="Compare-with-synchronous-search" class="common-anchor-header">Vergleich mit synchroner Suche</h4><p>Definieren Sie eine synchrone Suchfunktion. Messen Sie dann die Laufzeit unter den gleichen Bedingungen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">sync_search</span>(<span class="hljs-params">num_queries</span>):
     start_time = time.time()
     <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_queries):

@@ -98,7 +98,7 @@ title: Sistema de resposta a perguntas
   <img translate="no" src="/docs/v2.5.x/assets/attu_login_page.png" alt="Attu Login Page" width="80%">
 </p>
 <hr>
-<h2 id="4-Prepare-Data-Create-Collection-and-Insert-Data" class="common-anchor-header">4. Preparar os dados, criar uma coleção e inserir dados<button data-href="#4-Prepare-Data-Create-Collection-and-Insert-Data" class="anchor-icon" translate="no">
+<h2 id="4-Prepare-Data-Create-Collection-and-Insert-Data" class="common-anchor-header">4. Preparar dados, criar coleção e inserir dados<button data-href="#4-Prepare-Data-Create-Collection-and-Insert-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -113,7 +113,7 @@ title: Sistema de resposta a perguntas
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 Preparar os dados</h3><p>Usamos as páginas de FAQ da <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentação do Milvus 2.4.x</a> como conjunto de dados para este exemplo.</p>
+    </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 Preparar os dados</h3><p>Utilizamos as páginas de FAQ da <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentação do Milvus 2.4.x</a> como conjunto de dados para este exemplo.</p>
 <h4 id="Download-and-Extract-Data" class="common-anchor-header">Download e extração de dados:</h4><pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
 unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
@@ -159,7 +159,7 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>
@@ -176,7 +176,7 @@ client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <hr>
 <h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 Visualizar dados e esquema</h3><p>Agora podemos visualizar o esquema de dados e as entidades inseridas usando a interface do Attu. O esquema apresenta campos definidos, incluindo um campo <code translate="no">id</code> do tipo <code translate="no">Int64</code> e um campo <code translate="no">vector</code> do tipo <code translate="no">FloatVector(768)</code> com uma métrica <code translate="no">Inner Product (IP)</code>. A coleção é carregada com <strong>72 entidades</strong>.</p>
-<p>Além disso, podemos ver os dados inseridos, incluindo ID, incorporação de vectores e campos dinâmicos que armazenam metadados, como conteúdo de texto. A interface suporta filtragem e consulta com base em condições especificadas ou campos dinâmicos.</p>
+<p>Além disso, podemos ver os dados inseridos, incluindo ID, incorporação de vectores e campos dinâmicos que armazenam metadados, como conteúdo de texto. A interface suporta a filtragem e a consulta com base em condições especificadas ou em campos dinâmicos.</p>
 <p align="center">
   <img translate="no" src="/docs/v2.5.x/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
   <img translate="no" src="/docs/v2.5.x/assets/attu_after_data_insertion_2.png" alt="Data View" width="45%" />
@@ -238,5 +238,5 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>O Attu simplifica a gestão e a visualização dos dados vectoriais armazenados no Milvus. Desde a inserção de dados à execução de consultas e à exploração interactiva, fornece uma interface intuitiva para lidar com tarefas complexas de pesquisa vetorial. Com funcionalidades como o suporte de esquemas dinâmicos, visualizações de pesquisa gráfica e filtros de consulta flexíveis, o Attu permite aos utilizadores analisar eficazmente conjuntos de dados de grande escala.</p>
-<p>Ao tirar partido das ferramentas de exploração visual do Attu, os utilizadores podem compreender melhor os seus dados, identificar relações ocultas e tomar decisões baseadas em dados. Comece hoje mesmo a explorar os seus próprios conjuntos de dados com a Attu e o Milvus!</p>
+<p>Ao tirar partido das ferramentas de exploração visual da Attu, os utilizadores podem compreender melhor os seus dados, identificar relações ocultas e tomar decisões baseadas em dados. Comece hoje mesmo a explorar os seus próprios conjuntos de dados com a Attu e o Milvus!</p>
 <hr>

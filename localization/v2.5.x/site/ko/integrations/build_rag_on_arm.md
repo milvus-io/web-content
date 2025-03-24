@@ -68,9 +68,9 @@ $ <span class="hljs-built_in">source</span> venv/bin/activate
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">컬렉션 생성</h3><p>우리는 벡터 데이터를 저장하고 검색하기 위해 AWS에 배포된 <a href="https://zilliz.com/cloud">Zilliz Cloud와</a> Arm 기반 머신을 사용합니다. 빠르게 시작하려면 Zilliz Cloud에 무료로 <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">계정을 등록하기만</a> 하면 됩니다.</p>
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">컬렉션 생성</h3><p>우리는 벡터 데이터를 저장하고 검색하기 위해 Arm 기반 머신과 함께 AWS에 배포된 <a href="https://zilliz.com/cloud">Zilliz Cloud를</a> 사용합니다. 빠르게 시작하려면 Zilliz Cloud에 무료로 <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">계정을 등록하기만</a> 하면 됩니다.</p>
 <div class="alert note">
-<p>Zilliz Cloud 외에도 자체 호스팅 Milvus도 (설정이 조금 더 복잡한) 옵션입니다. 또한 ARM 기반 머신에 <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Milvus Standalone</a> 및 <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes를</a> 배포할 수도 있습니다. Milvus 설치에 대한 자세한 내용은 <a href="https://milvus.io/docs/install-overview.md">설치 설명서를</a> 참조하세요.</p>
+<p>Zilliz Cloud 외에도 자체 호스팅 Milvus도 (설정이 좀 더 복잡한) 옵션입니다. 또한 ARM 기반 머신에 <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Milvus Standalone</a> 및 <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes를</a> 배포할 수도 있습니다. Milvus 설치에 대한 자세한 내용은 <a href="https://milvus.io/docs/install-overview.md">설치 설명서를</a> 참조하세요.</p>
 </div>
 <p>질리즈 클라우드에서 <code translate="no">uri</code> 및 <code translate="no">token</code> 을 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트 및 API 키로</a> 설정합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
@@ -87,17 +87,17 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>지정된 파라미터로 새 컬렉션을 생성합니다.</p>
-<p>필드 정보를 지정하지 않으면 기본 키인 <code translate="no">id</code> 필드와 벡터 데이터를 저장할 <code translate="no">vector</code> 필드가 자동으로 생성됩니다. 예약된 JSON 필드는 스키마에 정의되지 않은 필드와 그 값을 저장하는 데 사용됩니다.</p>
+<p>필드 정보를 지정하지 않으면 기본 키인 <code translate="no">id</code> 필드와 벡터 데이터를 저장할 <code translate="no">vector</code> 필드가 자동으로 생성됩니다. 예약 JSON 필드는 스키마에 정의되지 않은 필드와 그 값을 저장하는 데 사용됩니다.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>기본 메트릭 유형으로는 내적 곱 거리를 사용합니다. 거리 유형에 대한 자세한 내용은 <a href="https://milvus.io/docs/metric.md?tab=floating">유사성 메트릭 페이지를</a> 참조하세요.</p>
 <h3 id="Prepare-the-data" class="common-anchor-header">데이터 준비</h3><p>저희는 <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus 문서 2.4.x의</a> FAQ 페이지를 RAG의 비공개 지식으로 사용하며, 이는 간단한 RAG 파이프라인을 위한 좋은 데이터 소스입니다.</p>
-<p>zip 파일을 다운로드하고 <code translate="no">milvus_docs</code> 폴더에 문서를 압축 해제합니다.</p>
+<p>zip 파일을 다운로드하고 문서를 <code translate="no">milvus_docs</code> 폴더에 압축을 풉니다.</p>
 <pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
 $ unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
@@ -179,7 +179,7 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 <p>이제 huggingface cli를 사용하여 모델을 다운로드할 수 있습니다:</p>
 <pre><code translate="no" class="language-bash">$ huggingface-cli download cognitivecomputations/dolphin-<span class="hljs-number">2.9</span><span class="hljs-number">.4</span>-llama3<span class="hljs-number">.1</span>-8b-gguf dolphin-<span class="hljs-number">2.9</span><span class="hljs-number">.4</span>-llama3<span class="hljs-number">.1</span>-8b-Q4_0.gguf --local-<span class="hljs-built_in">dir</span> . --local-<span class="hljs-built_in">dir</span>-use-symlinks <span class="hljs-literal">False</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>llama.cpp 팀에서 도입한 GGUF 모델 형식은 압축 및 양자화를 사용하여 가중치 정밀도를 4비트 정수로 줄여 계산 및 메모리 요구량을 크게 줄이고 Arm CPU를 LLM 추론에 효과적으로 사용할 수 있도록 합니다.</p>
+<p>llama.cpp 팀에서 도입한 GGUF 모델 형식은 압축 및 양자화를 사용하여 가중치 정밀도를 4비트 정수로 줄여 계산 및 메모리 요구량을 크게 줄이고 Arm CPU가 LLM 추론에 효과적일 수 있도록 합니다.</p>
 <h3 id="Re-quantize-the-model-weights" class="common-anchor-header">모델 가중치 재정량화</h3><p>다시 정량화하려면 다음을 실행합니다.</p>
 <pre><code translate="no" class="language-bash">$ ./llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0_8_8
 <button class="copy-code-btn"></button></code></pre>

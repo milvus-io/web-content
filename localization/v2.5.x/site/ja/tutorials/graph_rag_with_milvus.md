@@ -48,7 +48,7 @@ title: MilvusによるグラフRAG
 <pre><code translate="no" class="language-python">$ pip install --upgrade --quiet pymilvus numpy scipy langchain langchain-core langchain-openai tqdm
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
+<p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
 </blockquote>
 <p>OpenAIのモデルを使います。<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を環境変数として用意しておく。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -80,7 +80,7 @@ embedding_model = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=
 <p>MilvusClientのargsについて：</p>
 <ul>
 <li>例えば、<code translate="no">./milvus.db</code> のように、<code translate="no">uri</code> をローカルファイルとして設定する方法は、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteを</a>自動的に利用してすべてのデータをこのファイルに格納するため、最も便利な方法です。</li>
-<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上でよりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
@@ -99,7 +99,7 @@ embedding_model = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">データの準備</h3><p>例として、ベルヌーイファミリーとオイラーの関係を紹介するナノデータセットを使用する。このナノデータセットには4つの文章とそれに対応するトリプレットのセットが含まれており、各トリプレットには主語、述語、目的語が含まれている。 実際には、独自のコーパスからトリプレットを抽出するためにどのようなアプローチを使用してもよい。</p>
+    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">データの準備</h3><p>例として、ベルヌーイファミリーとオイラーの関係を紹介するナノデータセットを使用する。このナノデータセットには4つの文章とそれに対応するトリプレットのセットが含まれており、各トリプレットには主語、述語、目的語が含まれている。 実際には、独自のコーパスからトリプレットを抽出するためにどのようなアプローチを使用することもできる。</p>
 <pre><code translate="no" class="language-python">nano_dataset = [
     {
         <span class="hljs-string">&quot;passage&quot;</span>: <span class="hljs-string">&quot;Jakob Bernoulli (1654–1705): Jakob was one of the earliest members of the Bernoulli family to gain prominence in mathematics. He made significant contributions to calculus, particularly in the development of the theory of probability. He is known for the Bernoulli numbers and the Bernoulli theorem, a precursor to the law of large numbers. He was the older brother of Johann Bernoulli, another influential mathematician, and the two had a complex relationship that involved both collaboration and rivalry.&quot;</span>,
@@ -202,7 +202,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
     )
 
 
@@ -372,7 +372,7 @@ relation_candidate_texts = [
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p>部分グラフの展開により関係候補が得られたので、次のステップでLLMによる再ランク付けを行う。</p>
-<h3 id="LLM-reranking" class="common-anchor-header">LLMによる再ランク付け</h3><p>この段階では、LLMの強力な自己注意メカニズムを利用して、関係候補をさらにフィルタリングし、洗練させる。一発勝負のプロンプトを採用し、クエリと関係の候補セットをプロンプトに組み込み、LLMにクエリへの回答を助ける可能性のある関係の候補を選択するよう指示する。クエリの中には複雑なものもあるため、LLMが思考プロセスを明確に表現できるように、思考の連鎖（Chain-of-Thought）アプローチを採用する。LLMの応答は、解析に便利なjson形式であることを規定する。</p>
+<h3 id="LLM-reranking" class="common-anchor-header">LLMによる再ランク付け</h3><p>この段階では、LLMの強力な自己注意メカニズムを利用して、関係候補をさらにフィルタリングし、洗練させる。一発勝負のプロンプトを採用し、クエリと関係の候補セットをプロンプトに組み込み、LLMにクエリへの回答を助ける可能性のある関係の候補を選択するよう指示する。クエリの中には複雑なものもあるため、LLMが思考プロセスを明確に表現できるように、思考の連鎖（Chain-of-Thought）アプローチを採用する。LLMの応答は、解析に便利なjson形式である。</p>
 <pre><code translate="no" class="language-python">query_prompt_one_shot_input = <span class="hljs-string">&quot;&quot;&quot;I will provide you with a list of relationship descriptions. Your task is to select 3 relationships that may be useful to answer the given question. Please return a JSON object containing your thought process and a list of the selected relationships in order of their relevance.
 
 Question:

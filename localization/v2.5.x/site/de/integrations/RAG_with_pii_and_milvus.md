@@ -139,12 +139,12 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span cl
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Daten einfügen</h3><p>Iterieren Sie durch die maskierten Textzeilen, erstellen Sie Einbettungen und fügen Sie dann die Daten in Milvus ein.</p>
-<p>Hier ist ein neues Feld <code translate="no">text</code>, das ein nicht definiertes Feld im Sammelschema ist. Es wird automatisch dem reservierten dynamischen JSON-Feld hinzugefügt, das auf hoher Ebene wie ein normales Feld behandelt werden kann.</p>
+<p>Hier ist ein neues Feld <code translate="no">text</code>, das ein nicht definiertes Feld im Sammlungsschema ist. Es wird automatisch dem reservierten dynamischen JSON-Feld hinzugefügt, das auf hoher Ebene wie ein normales Feld behandelt werden kann.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -239,4 +239,4 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">I don't know.
 </code></pre>
-<p>Hier können wir sehen, dass, da wir die PII durch Masken ersetzt haben, der LLM die PII-Informationen nicht im Kontext erhalten kann. So antwortet er: &quot;Ich weiß es nicht&quot;. Auf diese Weise können wir die Privatsphäre der Benutzer wirksam schützen.</p>
+<p>Hier können wir sehen, dass der LLM, da wir die PII durch Masken ersetzt haben, die PII-Informationen nicht im Kontext erhalten kann. So antwortet er: &quot;Ich weiß es nicht&quot;. Auf diese Weise können wir die Privatsphäre der Benutzer wirksam schützen.</p>

@@ -23,7 +23,7 @@ title: Evaluación con DeepEval
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_deepeval.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_deepeval.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Esta guía muestra cómo utilizar <a href="https://docs.confident-ai.com/">DeepEval</a> para evaluar un sistema de generación mejorada por recuperación (RAG) basado en <a href="https://milvus.io/">Milvus</a>.</p>
-<p>El sistema RAG combina un sistema de recuperación con un modelo generativo para generar texto nuevo basado en una petición dada. En primer lugar, el sistema recupera documentos relevantes de un corpus utilizando Milvus y, a continuación, utiliza un modelo generativo para generar un nuevo texto basado en los documentos recuperados.</p>
+<p>El sistema RAG combina un sistema de recuperación con un modelo generativo para generar nuevo texto basado en una petición dada. En primer lugar, el sistema recupera documentos relevantes de un corpus utilizando Milvus y, a continuación, utiliza un modelo generativo para generar un nuevo texto basado en los documentos recuperados.</p>
 <p>DeepEval es un marco de trabajo que le ayuda a evaluar sus procesos GAR. Existen herramientas y marcos de trabajo que ayudan a construir estos pipelines, pero evaluarlos y cuantificar su rendimiento puede ser difícil. Aquí es donde entra DeepEval.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -123,7 +123,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -329,7 +329,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
       </svg>
     </button></h2><p>Cuando se evalúa un recuperador en sistemas de grandes modelos lingüísticos (LLM), es crucial evaluar lo siguiente:</p>
 <ol>
-<li><p><strong>Relevancia de la clasificación</strong>: La eficacia con la que el recuperador prioriza la información relevante sobre los datos irrelevantes.</p></li>
+<li><p><strong>Relevancia de la clasificación</strong>: La eficacia con la que el recuperador da prioridad a la información relevante frente a los datos irrelevantes.</p></li>
 <li><p><strong>Recuperación contextual</strong>: La capacidad de capturar y recuperar información contextualmente relevante basada en la entrada.</p></li>
 <li><p><strong>Equilibrio</strong>: Cómo gestiona el recuperador el tamaño de los fragmentos de texto y el alcance de la recuperación para minimizar las irrelevancias.</p></li>
 </ol>

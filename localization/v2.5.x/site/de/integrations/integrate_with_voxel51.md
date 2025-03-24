@@ -98,7 +98,7 @@ title: Bildverarbeitungssuchen mit Milvus und FiftyOne durchführen
         ></path>
       </svg>
     </button></h2><p>Das folgende Beispiel veranschaulicht den oben beschriebenen Arbeitsablauf.</p>
-<h3 id="1-Load-a-dataset-into-FiftyOne-and-compute-embeddings-for-the-samples" class="common-anchor-header">1. Laden Sie einen Datensatz in FiftyOne und berechnen Sie die Einbettungen für die Muster</h3><p>Der folgende Code verwendet den von FiftyOne zur Verfügung gestellten Musterdatensatz, um die Integration zu demonstrieren. Sie können Ihren eigenen Datensatz vorbereiten, indem Sie sich auf <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">diesen Artikel</a> beziehen.</p>
+<h3 id="1-Load-a-dataset-into-FiftyOne-and-compute-embeddings-for-the-samples" class="common-anchor-header">1. Laden Sie einen Datensatz in FiftyOne und berechnen Sie die Einbettungen für die Muster</h3><p>Der folgende Code verwendet das von FiftyOne bereitgestellte Beispielbildset, um die Integration zu demonstrieren. Sie können Ihren eigenen Datensatz vorbereiten, indem Sie sich auf <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">diesen Artikel</a> beziehen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> fiftyone <span class="hljs-keyword">as</span> fo
 <span class="hljs-keyword">import</span> fiftyone.brain <span class="hljs-keyword">as</span> fob
 <span class="hljs-keyword">import</span> fiftyone.zoo <span class="hljs-keyword">as</span> foz
@@ -275,13 +275,13 @@ milvus_index = fob.compute_similarity(
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Normalerweise werden diese Parameter jedoch direkt an <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> übergeben, um einen bestimmten neuen Index zu konfigurieren:</p>
-<pre><code translate="no" class="language-python">milvus_index = fob.<span class="hljs-title function_">compute_similarity</span>(
+<pre><code translate="no" class="language-python">milvus_index = fob.compute_similarity(
     ...
     backend=<span class="hljs-string">&quot;milvus&quot;</span>,
     brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     metric=<span class="hljs-string">&quot;dotproduct&quot;</span>,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Manage-brain-runs" class="common-anchor-header">Verwalten von Brain-Läufen<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">
@@ -324,7 +324,7 @@ dataset.list_brain_runs(
 <p>Sie können mit <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.rename_brain_run"><code translate="no">rename_brain_run()</code></a> können Sie den Gehirnschlüssel umbenennen, der mit einem bestehenden Ähnlichkeits-Ergebnislauf verbunden ist:</p>
 <pre><code translate="no" class="language-python">dataset.rename_brain_run(brain_key, new_brain_key)
 <button class="copy-code-btn"></button></code></pre>
-<p>Schließlich können Sie mit <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.delete_brain_run"><code translate="no">delete_brain_run()</code></a> können Sie einen Brain-Lauf löschen:</p>
+<p>Schließlich können Sie mit <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.delete_brain_run"><code translate="no">delete_brain_run()</code></a> können Sie einen Gehirnlauf löschen:</p>
 <pre><code translate="no" class="language-python">dataset.delete_brain_run(brain_key)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">

@@ -24,7 +24,7 @@ title: الإجابة عن الأسئلة باستخدام ميلفوس ومعا
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/qa_with_milvus_and_hf.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/qa_with_milvus_and_hf.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>يعمل نظام الإجابة عن الأسئلة المستند إلى البحث الدلالي من خلال إيجاد السؤال الأكثر تشابهًا من مجموعة بيانات لأزواج الأسئلة والأجوبة لسؤال استعلام معين. وبمجرد تحديد السؤال الأكثر تشابهًا، يتم اعتبار الإجابة المقابلة من مجموعة البيانات كإجابة للاستعلام. يعتمد هذا النهج على مقاييس التشابه الدلالي لتحديد التشابه بين الأسئلة واسترجاع الإجابات ذات الصلة.</p>
-<p>يوضح هذا البرنامج التعليمي كيفية إنشاء نظام للإجابة على الأسئلة باستخدام <a href="https://huggingface.co">Hugging Face</a> كمحمّل بيانات ومولد تضمين لمعالجة البيانات <a href="https://milvus.io">وMilvus</a> كقاعدة بيانات متجهة للبحث الدلالي.</p>
+<p>يوضح هذا البرنامج التعليمي كيفية إنشاء نظام للإجابة عن الأسئلة باستخدام <a href="https://huggingface.co">Hugging Face</a> كمحمّل بيانات ومولد تضمين لمعالجة البيانات <a href="https://milvus.io">وMilvus</a> كقاعدة بيانات متجهة للبحث الدلالي.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">قبل أن تبدأ<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -167,7 +167,7 @@ milvus_client.create_collection(
     auto_id=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable auto id</span>
     enable_dynamic_field=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable dynamic fields</span>
     vector_field_name=<span class="hljs-string">&quot;question_embedding&quot;</span>,  <span class="hljs-comment"># Map vector field name and embedding column in dataset</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># To enable search with latest data</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">

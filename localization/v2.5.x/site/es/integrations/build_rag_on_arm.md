@@ -1,7 +1,7 @@
 ---
 id: build_rag_on_arm.md
 summary: >-
-  En este tutorial, aprenderá a crear una aplicación de generación mejorada de
+  En este tutorial, aprenderás a crear una aplicación de generación mejorada por
   recuperación (RAG) en infraestructuras basadas en Arm. Para el almacenamiento
   vectorial, utilizamos Zilliz Cloud, la base de datos vectorial Milvus
   totalmente gestionada. Zilliz Cloud está disponible en las principales nubes
@@ -42,7 +42,7 @@ title: Construir RAG en arquitectura Arm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para ejecutar este ejemplo, recomendamos utilizar <a href="https://aws.amazon.com/ec2/graviton/">AWS Graviton</a>, que proporciona una forma rentable de ejecutar cargas de trabajo ML en servidores basados en Arm. Este cuaderno se ha probado en una instancia de AWS Graviton3 <code translate="no">c7g.2xlarge</code> con el sistema Ubuntu 22.04 LTS.</p>
+    </button></h2><p>Para ejecutar este ejemplo, recomendamos utilizar <a href="https://aws.amazon.com/ec2/graviton/">AWS Graviton</a>, que proporciona una forma rentable de ejecutar cargas de trabajo ML en servidores basados en Arm. Este cuaderno se ha probado en una instancia de AWS Graviton3 <code translate="no">c7g.2xlarge</code> con un sistema Ubuntu 22.04 LTS.</p>
 <p>Necesita al menos cuatro núcleos y 8 GB de RAM para ejecutar este ejemplo. Configure un almacenamiento en disco de al menos 32 GB. Le recomendamos que utilice una instancia con las mismas o mejores especificaciones.</p>
 <p>Después de lanzar la instancia, conéctese a ella y ejecute los siguientes comandos para preparar el entorno.</p>
 <p>Instale python en el servidor:</p>
@@ -94,8 +94,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Utilizamos la distancia producto interior como tipo de métrica por defecto. Para más información sobre los tipos de distancia, puede consultar <a href="https://milvus.io/docs/metric.md?tab=floating">la página Métricas de similitud</a>.</p>
@@ -154,7 +154,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
       </svg>
     </button></h2><p>En esta sección, construiremos y lanzaremos el servicio <code translate="no">llama.cpp</code> en la CPU basada en Arm.</p>
 <h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Modelo Llama 3.1 y llama.cpp</h3><p>El <a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">modelo Llama-3.1-8B</a> de Meta pertenece a la familia de modelos Llama 3.1 y es de uso libre para investigación y fines comerciales. Antes de utilizar el modelo, visite el <a href="https://llama.meta.com/llama-downloads/">sitio web</a> de Llama y rellene el formulario para solicitar acceso.</p>
-<p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a> es un proyecto C/C++ de código abierto que permite una inferencia LLM eficiente en una variedad de hardware, tanto localmente como en la nube. Puede alojar cómodamente un modelo Llama 3.1 utilizando <code translate="no">llama.cpp</code>.</p>
+<p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a> es un proyecto C/C++ de código abierto que permite una inferencia LLM eficiente en una gran variedad de hardware, tanto localmente como en la nube. Puede alojar cómodamente un modelo Llama 3.1 utilizando <code translate="no">llama.cpp</code>.</p>
 <h3 id="Download-and-build-llamacpp" class="common-anchor-header">Descarga y compila llama.cpp</h3><p>Ejecuta los siguientes comandos para instalar make, cmake, gcc, g++ y otras herramientas esenciales necesarias para compilar llama.cpp desde el código fuente:</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">sudo</span> apt install make cmake -y
 $ <span class="hljs-built_in">sudo</span> apt install gcc g++ -y

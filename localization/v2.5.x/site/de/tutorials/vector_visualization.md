@@ -109,7 +109,7 @@ openai_client = <span class="hljs-title class_">OpenAI</span>()
         .embedding
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>Erzeugen Sie eine Testeinbettung und geben Sie ihre Dimension und die ersten Elemente aus.</p>
+<p>Erzeugen Sie eine Testeinbettung und geben Sie deren Dimension und die ersten Elemente aus.</p>
 <pre><code translate="no" class="language-python">test_embedding = emb_text(<span class="hljs-string">&quot;This is a test&quot;</span>)
 embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <span class="hljs-built_in">print</span>(embedding_dim)
@@ -156,8 +156,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-data" class="common-anchor-header">Daten einfügen<button data-href="#Insert-data" class="anchor-icon" translate="no">
@@ -431,4 +431,4 @@ plt.show()
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <p>Wie wir sehen können, liegt der Abfragevektor nahe bei den gefundenen Vektoren. Obwohl die abgerufenen Vektoren nicht innerhalb eines Standardkreises mit festem Radius liegen, der auf die Abfrage zentriert ist, können wir sehen, dass sie dem Abfragevektor auf der 2D-Ebene immer noch sehr nahe sind.</p>
-<p>Der Einsatz von Techniken zur Dimensionalitätsreduktion kann das Verständnis von Vektoren und die Fehlerbehebung erleichtern. Ich hoffe, dass Sie durch dieses Tutorial ein besseres Verständnis von Vektoren erlangen können.</p>
+<p>Der Einsatz von Techniken zur Dimensionalitätsreduktion kann das Verständnis von Vektoren und die Fehlerbehebung erleichtern. Ich hoffe, dass Sie durch dieses Lernprogramm ein besseres Verständnis von Vektoren bekommen.</p>

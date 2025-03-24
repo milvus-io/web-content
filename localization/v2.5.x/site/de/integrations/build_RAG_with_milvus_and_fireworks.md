@@ -46,7 +46,7 @@ title: RAG mit Milvus und Fireworks AI aufbauen
     </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Abhängigkeiten und Umgebung</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai requests tqdm
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Laufzeitumgebung neu starten</strong>, um die gerade installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Laufzeit" am oberen Bildschirmrand und wählen Sie "Sitzung neu starten" aus dem Dropdown-Menü).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die gerade installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Bildschirmrand und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
 </div>
 <p>Fireworks AI aktiviert die OpenAI-ähnliche API. Sie können sich auf der offiziellen Website anmelden und den <a href="https://docs.fireworks.ai/getting-started/introduction">API-Schlüssel</a> <code translate="no">FIREWORKS_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -134,8 +134,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Daten einfügen</h3><p>Iterieren Sie durch die Textzeilen, erstellen Sie Einbettungen und fügen Sie dann die Daten in Milvus ein.</p>

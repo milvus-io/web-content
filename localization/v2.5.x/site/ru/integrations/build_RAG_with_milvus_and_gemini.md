@@ -29,7 +29,7 @@ title: Создайте RAG с помощью Milvus и Gemini
         ></path>
       </svg>
     </button></h1><p><a href="https://ai.google.dev/gemini-api/docs">API Gemini</a> и <a href="https://ai.google.dev/aistudio">Google AI Studio</a> помогут вам начать работу с новейшими моделями Google и воплотить свои идеи в масштабируемых приложениях. Gemini предоставляет доступ к таким мощным языковым моделям, как <code translate="no">Gemini-1.5-Flash</code>, <code translate="no">Gemini-1.5-Flash-8B</code> и <code translate="no">Gemini-1.5-Pro</code>, для решения таких задач, как генерация текста, обработка документов, зрение, анализ аудио и многое другое. API позволяет вводить длинные контексты с миллионами лексем, точно настраивать модели для конкретных задач, генерировать структурированные результаты, такие как JSON, и использовать такие возможности, как семантический поиск и выполнение кода.</p>
-<p>В этом руководстве мы покажем вам, как построить конвейер RAG (Retrieval-Augmented Generation) с помощью Milvus и Gemini. Мы будем использовать модель Gemini для генерации текста на основе заданного запроса. Мы также будем использовать Milvus для хранения и извлечения сгенерированного текста.</p>
+<p>В этом уроке мы покажем вам, как построить конвейер RAG (Retrieval-Augmented Generation) с помощью Milvus и Gemini. Мы будем использовать модель Gemini для генерации текста на основе заданного запроса. Мы также будем использовать Milvus для хранения и извлечения сгенерированного текста.</p>
 <h2 id="Preparation" class="common-anchor-header">Подготовка<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -134,8 +134,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Вставка данных</h3><p>Пройдитесь по текстовым строкам, создайте вкрапления, а затем вставьте данные в Milvus.</p>

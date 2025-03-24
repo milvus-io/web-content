@@ -27,7 +27,7 @@ title: 利用 Milvus 和 Firecrawl 构建 RAG
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://www.firecrawl.dev/">Firecrawl</a>使开发人员能够利用从任何网站刮取的干净数据构建人工智能应用程序。Firecrawl 具有先进的刮取、抓取和数据提取功能，可简化将网站内容转换为下游人工智能工作流所需的干净标记符或结构化数据的过程。</p>
-<p>在本教程中，我们将向您展示如何使用 Milvus 和 Firecrawl 构建检索-增强生成（RAG）管道。该管道集成了用于网络数据搜刮的 Firecrawl、用于向量存储的 Milvus 和用于生成有洞察力的上下文感知响应的 OpenAI。</p>
+<p>在本教程中，我们将向您展示如何使用 Milvus 和 Firecrawl 构建一个检索-增强生成（RAG）管道。该管道集成了用于网络数据搜刮的 Firecrawl、用于向量存储的 Milvus 和用于生成有洞察力的上下文感知响应的 OpenAI。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,12 +178,12 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>使用指定参数创建新 Collections。</p>
-<p>如果我们没有指定任何字段信息，Milvus 会自动创建一个主键的默认<code translate="no">id</code> 字段，以及一个存储向量数据的<code translate="no">vector</code> 字段。保留的 JSON 字段用于存储非 Schema 定义的字段及其值。</p>
+<p>如果我们不指定任何字段信息，Milvus 会自动创建一个主键的默认<code translate="no">id</code> 字段，以及一个存储向量数据的<code translate="no">vector</code> 字段。保留的 JSON 字段用于存储非 Schema 定义的字段及其值。</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入数据</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm

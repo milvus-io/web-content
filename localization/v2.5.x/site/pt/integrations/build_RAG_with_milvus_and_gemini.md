@@ -28,7 +28,7 @@ title: Criar RAG com o Milvus e o Gemini
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A <a href="https://ai.google.dev/gemini-api/docs">API Gemini</a> e o <a href="https://ai.google.dev/aistudio">Google AI Studio</a> ajudam-no a começar a trabalhar com os modelos mais recentes da Google e a transformar as suas ideias em aplicações escaláveis. O Gemini fornece acesso a modelos de linguagem poderosos como <code translate="no">Gemini-1.5-Flash</code>, <code translate="no">Gemini-1.5-Flash-8B</code> e <code translate="no">Gemini-1.5-Pro</code> para tarefas como geração de texto, processamento de documentos, visão, análise de áudio e muito mais. A API permite inserir contextos longos com milhões de tokens, ajustar modelos para tarefas específicas, gerar resultados estruturados como JSON e aproveitar recursos como recuperação semântica e execução de código.</p>
+    </button></h1><p>A <a href="https://ai.google.dev/gemini-api/docs">API Gemini</a> e <a href="https://ai.google.dev/aistudio">o Google AI Studio</a> ajudam-no a começar a trabalhar com os modelos mais recentes da Google e a transformar as suas ideias em aplicações escaláveis. O Gemini fornece acesso a modelos de linguagem poderosos como <code translate="no">Gemini-1.5-Flash</code>, <code translate="no">Gemini-1.5-Flash-8B</code> e <code translate="no">Gemini-1.5-Pro</code> para tarefas como geração de texto, processamento de documentos, visão, análise de áudio e muito mais. A API permite-lhe introduzir contextos longos com milhões de tokens, afinar modelos para tarefas específicas, gerar resultados estruturados como JSON e tirar partido de capacidades como a recuperação semântica e a execução de código.</p>
 <p>Neste tutorial, mostraremos como construir um pipeline RAG (Retrieval-Augmented Generation) com o Milvus e o Gemini. Utilizaremos o modelo Gemini para gerar texto com base numa determinada consulta. Também usaremos o Milvus para armazenar e recuperar o texto gerado.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +60,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;GE
 <pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
 $ unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
-<p>Carregamos todos os ficheiros markdown da pasta <code translate="no">milvus_docs/en/faq</code>. Para cada documento, utilizamos simplesmente &quot;#&quot; para separar o conteúdo do ficheiro, o que permite separar aproximadamente o conteúdo de cada parte principal do ficheiro markdown.</p>
+<p>Carregamos todos os ficheiros markdown da pasta <code translate="no">milvus_docs/en/faq</code>. Para cada documento, basta utilizar &quot;#&quot; para separar o conteúdo do ficheiro, o que pode separar aproximadamente o conteúdo de cada parte principal do ficheiro markdown.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -134,8 +134,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Inserir dados</h3><p>Itere pelas linhas de texto, crie embeddings e, em seguida, insira os dados no Milvus.</p>

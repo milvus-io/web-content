@@ -20,7 +20,7 @@ title: Milvusを使ったハイブリッド検索
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>このチュートリアルの最終的な効果を体験したい場合は、<a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a>に直接<a href="https://multimodal-demo.milvus.io/">アクセスして試してみて</a>ください。</p>
+<p>このチュートリアルの最終的な効果を体験したい場合は、https://demos.milvus.io/hybrid-search/。</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>このチュートリアルでは、<a href="https://milvus.io/docs/multi-vector-search.md">Milvusと</a> <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3モデルを</a>使ったハイブリッド検索の方法を説明します。BGE-M3モデルはテキストを密なベクトルと疎なベクトルに変換することができます。Milvusは1つのコレクションに両方のタイプのベクトルを格納することをサポートし、結果の関連性を高めるハイブリッド検索を可能にします。</p>
 <p>Milvusは密検索、疎検索、ハイブリッド検索をサポートしています：</p>

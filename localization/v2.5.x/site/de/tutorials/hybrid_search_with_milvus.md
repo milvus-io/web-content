@@ -20,7 +20,7 @@ title: Hybride Suche mit Milvus
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Wenn Sie den endgültigen Effekt dieses Tutorials erleben wollen, können Sie direkt auf <a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a> gehen und es ausprobieren.</p>
+<p>Wenn Sie den endgültigen Effekt dieses Tutorials erleben wollen, können Sie direkt auf https://demos.milvus.io/hybrid-search/ gehen.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>In diesem Tutorium wird gezeigt, wie man eine hybride Suche mit <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> und dem <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3-Modell</a> durchführt. Das BGE-M3-Modell kann Text in dichte und spärliche Vektoren umwandeln. Milvus unterstützt die Speicherung beider Arten von Vektoren in einer Sammlung und ermöglicht so eine hybride Suche, die die Relevanz der Ergebnisse erhöht.</p>
 <p>Milvus unterstützt dichte, spärliche und hybride Retrievalmethoden:</p>

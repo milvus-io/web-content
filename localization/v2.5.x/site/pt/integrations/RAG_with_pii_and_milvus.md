@@ -3,9 +3,9 @@ id: RAG_with_pii_and_milvus.md
 summary: >-
   Neste tutorial, vamos mostrar-lhe como construir um pipeline RAG
   (Retrieval-Augmented Generation) com Milvus e PII Masker.
-title: Criar RAG com Milvus + PII Masker
+title: Criar RAG com Milvus + Mascarador de PII
 ---
-<h1 id="Build-RAG-with-Milvus-+-PII-Masker" class="common-anchor-header">Criar RAG com Milvus + PII Masker<button data-href="#Build-RAG-with-Milvus-+-PII-Masker" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-with-Milvus-+-PII-Masker" class="common-anchor-header">Criar RAG com Milvus + Mascarador de PII<button data-href="#Build-RAG-with-Milvus-+-PII-Masker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,7 +62,7 @@ $ <span class="hljs-built_in">cd</span> pii-masker-v1/pii-masker
 
 masker = <span class="hljs-title class_">PIIMasker</span>()
 <button class="copy-code-btn"></button></code></pre>
-<p>Em seguida, mascaramos as PII de uma lista de linhas de texto e imprimimos os resultados mascarados.</p>
+<p>De seguida, mascaramos as PII de uma lista de linhas de texto e imprimimos os resultados mascarados.</p>
 <pre><code translate="no" class="language-python">masked_results = []
 <span class="hljs-keyword">for</span> full_text in text_lines:
     masked_text, _ = masker.mask_pii(full_text)
@@ -123,9 +123,9 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span cl
 <div class="alert note">
 <p>Quanto ao argumento de <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Definir o <code translate="no">uri</code> como um ficheiro local, por exemplo<code translate="no">./milvus.db</code>, é o método mais conveniente, pois utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
+<li>Definir o <code translate="no">uri</code> como um ficheiro local, por exemplo,<code translate="no">./milvus.db</code>, é o método mais conveniente, pois utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
 <li>Se tiver uma grande escala de dados, digamos mais de um milhão de vectores, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Nesta configuração, use o endereço e a porta do servidor como seu uri, por exemplo,<code translate="no">http://localhost:19530</code>. Se você ativar o recurso de autenticação no Milvus, use "&lt;seu_nome_de_usuário&gt;:&lt;sua_senha&gt;" como o token, caso contrário, não defina o token.</li>
-<li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste os campos <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</li>
+<li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste os endereços <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</li>
 </ul>
 </div>
 <p>Verificar se a coleção já existe e eliminá-la se existir.</p>
@@ -139,8 +139,8 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span cl
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Inserir dados</h3><p>Itere pelas linhas de texto mascaradas, crie embeddings e, em seguida, insira os dados no Milvus.</p>

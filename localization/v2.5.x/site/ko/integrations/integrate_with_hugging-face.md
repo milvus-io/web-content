@@ -1,8 +1,8 @@
 ---
 id: integrate_with_hugging-face.md
 summary: >-
-  이 튜토리얼에서는 데이터 처리를 위한 데이터 로더 및 임베딩 생성기로 Hugging Face를, 시맨틱 검색을 위한 벡터 데이터베이스로
-  Milvus를 사용하여 질문 답변 시스템을 구축하는 방법을 보여드립니다.
+  이 튜토리얼에서는 데이터 처리를 위한 데이터 로더 및 임베딩 생성기로 Hugging Face를, 의미 검색을 위한 벡터 데이터베이스로
+  Milvus를 사용하여 질문 답변 시스템을 구축하는 방법을 설명합니다.
 title: 밀버스와 허깅 페이스를 사용한 질문 답변하기
 ---
 <h1 id="Question-Answering-Using-Milvus-and-Hugging-Face" class="common-anchor-header">밀버스와 허깅 페이스를 사용한 질문 답변하기<button data-href="#Question-Answering-Using-Milvus-and-Hugging-Face" class="anchor-icon" translate="no">
@@ -166,7 +166,7 @@ milvus_client.create_collection(
     auto_id=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable auto id</span>
     enable_dynamic_field=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable dynamic fields</span>
     vector_field_name=<span class="hljs-string">&quot;question_embedding&quot;</span>,  <span class="hljs-comment"># Map vector field name and embedding column in dataset</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># To enable search with latest data</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">

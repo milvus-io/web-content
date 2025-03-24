@@ -84,7 +84,7 @@ siliconflow_client = <span class="hljs-title class_">OpenAI</span>(
         .embedding
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>Buatlah sebuah embedding uji dan cetak dimensi dan beberapa elemen pertama.</p>
+<p>Buatlah sebuah penyematan uji dan cetak dimensi dan beberapa elemen pertamanya.</p>
 <pre><code translate="no" class="language-python">test_embedding = emb_text(<span class="hljs-string">&quot;This is a test&quot;</span>)
 embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <span class="hljs-built_in">print</span>(embedding_dim)
@@ -131,8 +131,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Menyisipkan data</h3><p>Lakukan perulangan melalui baris teks, buat penyematan, lalu masukkan data ke dalam Milvus.</p>

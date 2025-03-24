@@ -49,7 +49,7 @@ title: Construir RAG com Milvus e Crawl4AI
 <pre><code translate="no" class="language-shell">$ pip install -U crawl4ai pymilvus openai requests tqdm
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ser necessário <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
 </blockquote>
 <p>Para configurar completamente o crawl4ai, execute os seguintes comandos:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Run post-installation setup</span>
@@ -133,7 +133,7 @@ markdown_content = <span class="hljs-keyword">await</span> crawl()
 [FETCH]... ↓ https://lilianweng.github.io/posts/2023-06-23-agen... | Status: True | Time: 0.07s
 [COMPLETE] ● https://lilianweng.github.io/posts/2023-06-23-agen... | Status: True | Total: 0.08s
 </code></pre>
-<h3 id="Process-the-Crawled-Content" class="common-anchor-header">Processar o conteúdo rastreado</h3><p>Para tornar o conteúdo recolhido gerível para inserção no Milvus, basta usar &quot;#&quot; para separar o conteúdo, o que pode separar aproximadamente o conteúdo de cada parte principal do ficheiro markdown recolhido.</p>
+<h3 id="Process-the-Crawled-Content" class="common-anchor-header">Processar o conteúdo rastreado</h3><p>Para tornar o conteúdo rastreado gerível para inserção no Milvus, basta usar &quot;#&quot; para separar o conteúdo, o que pode separar aproximadamente o conteúdo de cada parte principal do ficheiro markdown rastreado.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">split_markdown_content</span>(<span class="hljs-params">content</span>):
     <span class="hljs-keyword">return</span> [section.strip() <span class="hljs-keyword">for</span> section <span class="hljs-keyword">in</span> content.split(<span class="hljs-string">&quot;# &quot;</span>) <span class="hljs-keyword">if</span> section.strip()]
 
@@ -209,8 +209,8 @@ INFO:numexpr.utils:NumExpr defaulting to 8 threads.
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Inserir dados</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
