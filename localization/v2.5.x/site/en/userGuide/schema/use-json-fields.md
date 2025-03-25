@@ -381,7 +381,7 @@ curl --request POST \
 </ul></li>
 <li><strong>Numeric precision</strong>:
 <ul>
-<li>Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds $$2^{53}$$, it loses precision, and queries on those out-of-range values may not match exactly.</li>
+<li>Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds 2^53, it loses precision, and queries on those out-of-range values may not match exactly.</li>
 </ul></li>
 <li><strong>Data integrity</strong>:
 <ul>
