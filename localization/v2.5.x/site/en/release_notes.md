@@ -19,6 +19,67 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v257" class="common-anchor-header">v2.5.7<button data-href="#v257" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: March 21, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.7</td><td>2.5.6</td><td>2.5.6</td><td>2.5.6</td></tr>
+</tbody>
+</table>
+<p>We’re excited to announce the release of Milvus 2.5.7, highlighted by the newly introduced JSON Path Index feature. This allows you to build inverted indexes on dynamic or JSON columns to significantly improve query performance. Alongside this new functionality, we’ve made numerous enhancements and bug fixes for better reliability, more refined error handling, and improved usability. We encourage you to upgrade or try it out, and as always, your feedback is greatly appreciated as we continue to improve Milvus!</p>
+<h3 id="Features" class="common-anchor-header">Features</h3><ul>
+<li><strong>JSON Path Index</strong>: To address user needs for dynamic schemas, Milvus 2.5.7 introduces the ability to build indexes on dynamic columns and JSON columns. With this feature, you can create inverted indexes for specific dynamic columns or JSON paths, effectively bypassing the slower JSON load process and greatly enhancing query performance. For more information, refer to <a href="/docs/use-json-fields.md">JSON Field</a>.</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Reorder sub-expressions for conjunct expressions (<a href="https://github.com/milvus-io/milvus/pull/40186">#40186</a>)</li>
+<li>Add more config options for <code translate="no">interimindex</code> to support refined modes (<a href="https://github.com/milvus-io/milvus/pull/40429">#40429</a>)</li>
+<li>Use correct counter metrics for overall WA calculations (<a href="https://github.com/milvus-io/milvus/pull/40679">#40679</a>)</li>
+<li>Make the segment prune config refreshable (<a href="https://github.com/milvus-io/milvus/pull/40632">#40632</a>)</li>
+<li>Add a channel seal policy based on blocking L0 (<a href="https://github.com/milvus-io/milvus/pull/40535">#40535</a>)</li>
+<li>Refine task metadata with key-level locking (<a href="https://github.com/milvus-io/milvus/pull/40353">#40353</a>)</li>
+<li>Remove unnecessary collection and partition labels from metrics (<a href="https://github.com/milvus-io/milvus/pull/40593">#40593</a>)</li>
+<li>Improve import error messages (<a href="https://github.com/milvus-io/milvus/pull/40597">#40597</a>)</li>
+<li>Avoid converting body byte slices to strings in <code translate="no">httpserver</code> (<a href="https://github.com/milvus-io/milvus/pull/40414">#40414</a>)</li>
+<li>Log the start position of delete messages (<a href="https://github.com/milvus-io/milvus/pull/40678">#40678</a>)</li>
+<li>Support retrieving segment binlogs with the new <code translate="no">GetSegmentsInfo</code> interface (<a href="https://github.com/milvus-io/milvus/pull/40466">#40466</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Use <code translate="no">newInsertDataWithFunctionOutputField</code> when importing binlog files (<a href="https://github.com/milvus-io/milvus/pull/40742">#40742</a>)</li>
+<li>Fixed an issue where mmap properties failed to apply when creating a collection (<a href="https://github.com/milvus-io/milvus/pull/40515">#40515</a>)</li>
+<li>Do not delete the centroids file when sampling fails; instead, wait for GC (<a href="https://github.com/milvus-io/milvus/pull/40702">#40702</a>)</li>
+<li>Fixed message loss issues during seek (<a href="https://github.com/milvus-io/milvus/pull/40736">#40736</a>)</li>
+<li>Removed lag targets after the main dispatcher (<a href="https://github.com/milvus-io/milvus/pull/40717">#40717</a>)</li>
+<li>Added clear bitmap input for every batch loop (<a href="https://github.com/milvus-io/milvus/pull/40722">#40722</a>)</li>
+<li>Protected <code translate="no">GetSegmentIndexes</code> with an RLock (<a href="https://github.com/milvus-io/milvus/pull/40720">#40720</a>)</li>
+<li>Avoided segmentation faults caused by retrieving empty vector datasets (<a href="https://github.com/milvus-io/milvus/pull/40546">#40546</a>)</li>
+<li>Fixed JSON index “not-equal” filter (<a href="https://github.com/milvus-io/milvus/pull/40648">#40648</a>)</li>
+<li>Fixed null offset loading in the inverted index (<a href="https://github.com/milvus-io/milvus/pull/40524">#40524</a>)</li>
+<li>Fixed the garbage cleanup logic of <code translate="no">jsonKey</code> stats and improved the JSON key stats filter (<a href="https://github.com/milvus-io/milvus/pull/40039">#40039</a>)</li>
+<li>Caught invalid JSON pointer errors (<a href="https://github.com/milvus-io/milvus/pull/40626">#40626</a>)</li>
+<li>RBAC star privilege now returns empty when listing policies (<a href="https://github.com/milvus-io/milvus/pull/40557">#40557</a>)</li>
+<li>Avoided panic when a field does not exist in the schema in QueryNode (<a href="https://github.com/milvus-io/milvus/pull/40542">#40542</a>)</li>
+<li>Fixed a reference collection issue for search/query (<a href="https://github.com/milvus-io/milvus/pull/40550">#40550</a>)</li>
+<li>Handled empty rows for sparse vectors (<a href="https://github.com/milvus-io/milvus/pull/40586">#40586</a>)</li>
+<li>Added a duplicated type/index parameter check when creating collections (<a href="https://github.com/milvus-io/milvus/pull/40465">#40465</a>)</li>
+<li>Moved <code translate="no">metaHeader</code> to the client to avoid data races (<a href="https://github.com/milvus-io/milvus/pull/40444">#40444</a>)</li>
+</ul>
 <h2 id="v256" class="common-anchor-header">v2.5.6<button data-href="#v256" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
