@@ -92,7 +92,7 @@ from pymilvus import Function, FunctionType
 bm25_function = Function(
     name="bm25_fn",
     input_field_names=["document_content"],
-    output_field_names="sparse_vector",
+    output_field_names=["sparse_vector"],
     function_type=FunctionType.BM25,
 )
 ```
