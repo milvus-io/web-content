@@ -345,7 +345,7 @@ curl --request POST \
 - **Term expressions**:
     - You can use `json["field"] in [value1, value2, …]`. However, the index works only for scalar values stored under that path. If `json["field"]` is an array, the query falls back to brute force (array-type indexing is not yet supported).
 - **Numeric precision**:
-    - Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds $$2^{53}$$, it loses precision, and queries on those out-of-range values may not match exactly.
+    - Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds 2^53, it loses precision, and queries on those out-of-range values may not match exactly.
 - **Data integrity**:
     - Milvus does not parse or transform JSON keys beyond your specified casting. If the source data is inconsistent (for example, some rows store a string for key `"k"` while others store a number), some rows will not be indexed.
 
