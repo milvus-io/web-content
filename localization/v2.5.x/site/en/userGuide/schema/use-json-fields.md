@@ -701,6 +701,7 @@ fmt.Println(resp)
 <div class="alert note">
 <p>For JSON fields that allow null values, the field will be treated as null if the entire JSON object is missing or set to None. For more information, refer to JSON Fields with Null Values.</p>
 </div>
+<p>To retrieve entities where metadata is not null:</p>
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -708,7 +709,6 @@ fmt.Println(resp)
     <a href="#go">Go</a>
     <a href="#curl">cURL</a>
 </div>
-<p>To retrieve entities where metadata is not null:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query to filter out records with null metadata</span>
 
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata is not null&#x27;</span>
