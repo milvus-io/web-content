@@ -680,6 +680,8 @@ For JSON fields that allow null values, the field will be treated as null if the
 
 </div>
 
+To retrieve entities where metadata is not null:
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -687,8 +689,6 @@ For JSON fields that allow null values, the field will be treated as null if the
     <a href="#go">Go</a>
     <a href="#curl">cURL</a>
 </div>
-
-To retrieve entities where metadata is not null:
 
 ```python
 # Query to filter out records with null metadata
