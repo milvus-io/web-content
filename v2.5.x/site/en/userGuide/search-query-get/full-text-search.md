@@ -296,7 +296,11 @@ index_params.add_index(
     index_name="sparse_inverted_index",
     index_type="SPARSE_INVERTED_INDEX", # Inverted index type for sparse vectors
     metric_type="BM25",
-    params={"inverted_index_algo": "DAAT_MAXSCORE"}, # Algorithm for building and querying the index. Valid values: DAAT_MAXSCORE, DAAT_WAND, TAAT_NAIVE.
+    params={
+        "inverted_index_algo": "DAAT_MAXSCORE", # Algorithm for building and querying the index. Valid values: DAAT_MAXSCORE, DAAT_WAND, TAAT_NAIVE.
+        "bm25_k1": 1.2,
+        "bm25_b": 0.75
+    }, 
 )
 
 ```
@@ -304,11 +308,17 @@ index_params.add_index(
 ```java
 import io.milvus.v2.common.IndexParam;
 
+Map<String, Object> params = new HashMap<>();
+params.put("inverted_index_algo", "DAAT_MAXSCORE"); // Algorithm for building and querying the index
+params.put("bm25_k1", 1.2);
+params.put("bm25_b", 0.75);
+
 List<IndexParam> indexes = new ArrayList<>();
 indexes.add(IndexParam.builder()
         .fieldName("sparse")
         .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
         .metricType(IndexParam.MetricType.BM25)
+        .params(params)
         .build());
 ```
 
@@ -320,6 +330,8 @@ const index_params = [
     index_type: "SPARSE_INVERTED_INDEX",
     params: {
       inverted_index_algo: 'DAAT_MAXSCORE',
+      bm25_k1: 1.2,
+      bm25_b: 0.75,
     },
   },
 ];
@@ -331,28 +343,25 @@ export indexParams='[
             "fieldName": "sparse",
             "metricType": "BM25",
             "indexType": "SPARSE_INVERTED_INDEX",
-            "params":{"inverted_index_algo": "DAAT_MAXSCORE"}
+            "params": {
+                "inverted_index_algo": "DAAT_MAXSCORE",
+                "bm25_k1": 1.2,
+                "bm25_b": 0.75
+            }
         }
     ]'
 ```
 
-<table data-block-token="XEoodLxOFoukWJx9aLXcH46snXc"><thead><tr><th data-block-token="PfGNdbuq9o9PEWxzAWecWWoInUf" colspan="1" rowspan="1"><p data-block-token="KX1VdsOJCoO0Exxhg8acsduwncd">Parameter​</p>
+| Parameter                   | Description |
+|-----------------------------|-------------|
+| **field_name**              | The name of the vector field to index. For full text search, this should be the field that stores the generated sparse vectors. In this example, set the value to `sparse`. |
+| **index_type**              | The type of the index to create. AUTOINDEX allows <include target="milvus">Milvus</include><include target="zilliz">Zilliz Cloud</include> to automatically optimize index settings. If you need more control over your index settings, you can choose from various index types available for sparse vectors in <include target="milvus">Milvus</include><include target="zilliz">Zilliz Cloud</include>. <include target="milvus">For more information, refer to Indexes supported in Milvus</include>. |
+| **metric_type**             | The value for this parameter must be set to `BM25` specifically for full text search functionality. |
+| **params**                  | A dictionary of additional parameters specific to the index. |
+| **params.inverted_index_algo** | The algorithm used for building and querying the index. Valid values:<br>- `DAAT_MAXSCORE` (default): Optimized Document-at-a-Time (DAAT) query processing using the MaxScore algorithm. MaxScore provides better performance for high k values or queries with many terms by skipping terms and documents likely to have minimal impact. It achieves this by partitioning terms into essential and non-essential groups based on their maximum impact scores, focusing on terms that can contribute to the top-k results.<br>- `DAAT_WAND`: Optimized DAAT query processing using the WAND algorithm. WAND evaluates fewer hit documents by leveraging maximum impact scores to skip non-competitive documents, but it has a higher per-hit overhead. This makes WAND more efficient for queries with small k values or short queries, where skipping is more feasible.<br>- `TAAT_NAIVE`: Basic Term-at-a-Time (TAAT) query processing. While it is slower compared to `DAAT_MAXSCORE` and `DAAT_WAND`, TAAT_NAIVE offers a unique advantage. Unlike DAAT algorithms, which use cached maximum impact scores that remain static regardless of changes to the global collection parameter (`avgdl`), TAAT_NAIVE dynamically adapts to such changes. |
+| **params.bm25_k1**          | Controls the term frequency saturation. Higher values increase the importance of term frequencies in document ranking. Value range: [1.2, 2.0]. |
+| **params.bm25_b**           | Controls the extent to which document length is normalized. Values between 0 and 1 are typically used, with a common default around 0.75. A value of 1 means no length normalization, while a value of 0 means full normalization. |
 
-</th><th data-block-token="VNwBdAyWKoPktSxYaBtcn5rKnNb" colspan="1" rowspan="1"><p data-block-token="Oo1PduIsxo4HcMx2NRmcxvAMnld">Description​</p>
-
-</th></tr></thead><tbody><tr><td data-block-token="UxxWdkIBPoSbjOx7MO8csiFEn5d" colspan="1" rowspan="1"><p data-block-token="NYODddTbmoYoBrxPQ8ectvGxnPe"><code>field_name</code>​</p>
-
-</td><td data-block-token="L2ZGdkB2voKhmsx8ezecoPxmnVf" colspan="1" rowspan="1"><p data-block-token="Y16fdZ6hPoXVlgxSTQjctsTonac">The name of the vector field to index. For full text search, this should be the field that stores the generated sparse vectors. In this example, set the value to <code>sparse</code>.​</p>
-
-</td></tr><tr><td data-block-token="Wn1rdzso5o8AmqxqxiqccBpCnD4" colspan="1" rowspan="1"><p data-block-token="WLDrdOzSXoiKEOxoDREctDounRf"><code>index_type</code>​</p>
-
-</td><td data-block-token="I9TpdLWlXozM3Hx2Z9mcWvDHnNc" colspan="1" rowspan="1"><p data-block-token="Q3cgdK7OTo3kzXxQ1Y2cSarZned">The type of the index to create. <code>SPARSE_INVERTED_INDEX</code> is the recommended index type for sparse vectors. For more information, refer to <a href="https://milvus.io/docs/sparse_vector.md">Sparse Vector</a>.​</p>
-
-</td></tr><tr><td data-block-token="KJfgdQmD1odMgdxkG6uczBYknQh" colspan="1" rowspan="1"><p data-block-token="XVCsdz9Ulo93A2xavPtcF9Bvnec"><code>metric_type</code>​</p>
-
-</td><td data-block-token="S3NHds6MTodtrsxRILIc8E1wngh" colspan="1" rowspan="1"><p data-block-token="G9i7dPczzoyJRHxyXbecrWBBn0d">The value for this parameter must be set to <code>BM25</code> specifically for full text search functionality.​</p>
-
-</td></tr></tbody></table>
 
 ### Create the collection​
 
