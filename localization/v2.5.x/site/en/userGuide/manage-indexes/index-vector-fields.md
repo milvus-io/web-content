@@ -90,6 +90,12 @@ title: Index Vector Fields
     <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
   </tr>
 </tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
+    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
+  </tr>
+</tbody>
 </table>
 <div class="alert note">
 <p>From Milvus 2.5.4 onward, <code translate="no">SPARSE_WAND</code> is being deprecated. Instead, it is recommended to use <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> for equivalency while maintaining compatibility. For more information, refer to <a href="/docs/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>

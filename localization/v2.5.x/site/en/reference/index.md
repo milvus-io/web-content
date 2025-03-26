@@ -596,6 +596,8 @@ Currently, a vector field only supports one index type. Milvus automatically del
 </thead>
 <tbody>
 <tr><td><code translate="no">inverted_index_algo</code></td><td>The algorithm used for building and querying the index. For details, refer to <a href="/docs/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (default), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">bm25_k1</code></td><td>Controls the term frequency saturation. Higher values increase the importance of term frequencies in document ranking.</td><td>[1.2, 2.0]</td></tr>
+<tr><td><code translate="no">bm25_b</code></td><td>Controls the extent to which document length is normalized. Defaults to 0.75.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
   <div class="alert note">
