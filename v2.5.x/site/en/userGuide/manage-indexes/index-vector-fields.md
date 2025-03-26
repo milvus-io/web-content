@@ -74,6 +74,12 @@ Milvus provides several index types and metrics to sort field values for efficie
     <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
   </tr>
 </tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
+    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
+  </tr>
+</tbody>
 </table>
 
 <div class="alert note">

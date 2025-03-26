@@ -528,6 +528,8 @@ Each dimension maintains a list of vectors that have a non-zero value at that di
   | Parameter        | Description                | Range        |
   | ---------------- | -------------------------- | ------------ |
   | `inverted_index_algo` | The algorithm used for building and querying the index. For details, refer to [Sparse Vector](sparse_vector.md#Set-index-params-for-vector-field). | `DAAT_MAXSCORE` (default), `DAAT_WAND`, `TAAT_NAIVE`  |
+  | `bm25_k1`          | Controls the term frequency saturation. Higher values increase the importance of term frequencies in document ranking. | [1.2, 2.0] |
+  | `bm25_b`           | Controls the extent to which document length is normalized. Defaults to 0.75. | [0, 1] |
 
   <div class="alert note">
 
