@@ -19,6 +19,11 @@
                         "token": "Ke6jw8437hjR8hbZCvEcQtIIn1e",
                         "type": "board",
                         "alt_text": "analyzer-process-workflow"
+                    },
+                    {
+                        "token": "KkS9wtS5IhcP9obYvc1cK10snfg",
+                        "type": "board",
+                        "alt_text": "resource-hierarchy"
                     }
                 ]
             }
