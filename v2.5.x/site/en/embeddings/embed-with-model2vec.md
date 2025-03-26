@@ -6,7 +6,7 @@ title: Model2Vec
 ---
 
 # Model2Vec
-Model2Vec is a lightweight and high-performance embedding technique that transforms Sentence Transformer models into compact, static models. It reduces model size by up to 50x and speeds up inference by up to 500x, with minimal performance loss. Model2Vec is ideal when you have resource-constrained devices.
+[Model2Vec](https://github.com/MinishLab/model2vec) is a lightweight and high-performance embedding technique that transforms Sentence Transformer models into compact, static models. It reduces model size by up to 50x and speeds up inference by up to 500x, with minimal performance loss. Model2Vec is ideal when you have resource-constrained devices.
 
 Milvus integrates with Model2Vec's models via the __Model2VecEmbeddingFunction__ class. This class provides methods for encoding documents and queries using the pretrained Model2Vec models and returning the embeddings as dense vectors compatible with Milvus indexing.
 
