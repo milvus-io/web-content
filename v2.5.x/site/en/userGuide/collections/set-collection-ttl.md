@@ -22,9 +22,9 @@ Because the deletion process is asynchronous, data might not be removed from sea
 
 You can set the TTL property when you
 
-- [Create a collection.](set-collection-ttl.md#null)
+- [Create a collection.](set-collection-ttl.md#Set-TTL-when-creating-a-collection)
 
-- [Alter the TTL property of an existing collection.](set-collection-ttl.md#null)
+- [Alter the TTL property of an existing collection.](set-collection-ttl.md#Set-TTL-for-an-existing-collection)
 
 ### Set TTL when creating a collection
 
