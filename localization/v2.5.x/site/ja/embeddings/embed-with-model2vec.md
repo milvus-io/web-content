@@ -19,8 +19,8 @@ title: モデル2Vec
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Model2Vecは、Sentence Transformerモデルをコンパクトな静的モデルに変換する、軽量で高性能な埋め込み技術です。モデルサイズを最大50倍縮小し、推論を最大500倍高速化します。Model2Vecは、リソースに制約のあるデバイスに最適です。</p>
-<p>MilvusはModel2<strong>VecEmbeddingFunction</strong>クラスを介してModel2Vecのモデルと統合します。このクラスは、事前に学習されたModel2Vecモデルを用いて文書やクエリをエンコードし、Milvusのインデックスと互換性のある密なベクトルとしてエンベッディングを返すためのメソッドを提供します。</p>
+    </button></h1><p><a href="https://github.com/MinishLab/model2vec">Model2Vecは</a>、Sentence Transformerモデルをコンパクトな静的モデルに変換する、軽量で高性能な埋め込み技術です。モデルサイズを最大50倍縮小し、推論を最大500倍高速化します。Model2Vecは、リソースに制約のあるデバイスに最適です。</p>
+<p>MilvusはModel2<strong>VecEmbeddingFunction</strong>クラスを介してModel2Vecのモデルと統合します。このクラスは、事前に学習されたModel2Vecモデルを使って文書やクエリをエンコードし、Milvusのインデックスと互換性のある密なベクトルとしてエンベッディングを返すためのメソッドを提供します。</p>
 <p>Hugging Face HubからのモデルのロードとローカルのModel2Vecモデルのアップロードの両方をサポートしており、様々な環境での展開に柔軟性を提供します。</p>
 <p>この機能を使うには、必要な依存関係をインストールする：</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus

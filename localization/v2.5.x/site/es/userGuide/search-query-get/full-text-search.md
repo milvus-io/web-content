@@ -60,7 +60,7 @@ summary: >-
 <p>Para utilizar la búsqueda de texto completo, siga estos pasos principales.</p>
 <ol>
 <li><p>Cree<a href="#Create-a-collection-for-full-text-search">una colección</a>: Configure una colección con los campos necesarios y defina una función para convertir el texto en bruto en incrustaciones dispersas.</p></li>
-<li><p><a href="#Insert-text-data">Introduzca los datos</a>: Introduzca los documentos de texto sin formato en la colección.</p></li>
+<li><p><a href="#Insert-text-data">Inserte los datos</a>: Introduzca los documentos de texto sin formato en la colección.</p></li>
 <li><p><a href="#Perform-full-text-search">Realizar búsquedas</a>: Utilice textos de consulta para buscar en su colección y obtener resultados relevantes.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-full-text-search​" class="common-anchor-header">Crear una colección para la búsqueda de texto completo<button data-href="#Create-a-collection-for-full-text-search​" class="anchor-icon" translate="no">
@@ -176,7 +176,7 @@ schema.addField(AddFieldReq.builder()
 <ul>
 <li><p><code translate="no">id</code>: sirve como clave primaria y se genera automáticamente con <code translate="no">auto_id=True</code>.</p></li>
 <li><p><code translate="no">text</code>: almacena los datos de texto sin procesar para las operaciones de búsqueda de texto completo. El tipo de datos debe ser <code translate="no">VARCHAR</code>, ya que <code translate="no">VARCHAR</code> es el tipo de datos de cadena de Milvus para el almacenamiento de texto. Establezca <code translate="no">enable_analyzer=True</code> para permitir que Milvus tokenice el texto. Por defecto, Milvus utiliza el <a href="/docs/es/standard-analyzer.md">analizador estándar</a> para el análisis de texto. Para configurar un analizador diferente, consulte <a href="/docs/es/analyzer-overview.md">Visión general</a>.</p></li>
-<li><p><code translate="no">sparse</code>Campo vectorial : un campo vectorial reservado para almacenar incrustaciones dispersas generadas internamente para operaciones de búsqueda de texto completo. El tipo de datos debe ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">sparse</code>Un campo vectorial reservado para almacenar incrustaciones dispersas generadas internamente para operaciones de búsqueda de texto completo. El tipo de datos debe ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <p>Ahora, defina una función que convierta su texto en representaciones vectoriales dispersas y añádala al esquema.</p>
 <div class="multipleCode">
@@ -200,7 +200,7 @@ schema.addFunction(Function.builder()
         .functionType(FunctionType.BM25)
         .name(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>)
         .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
-        .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;vector&quot;</span>))
+        .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;sparse&quot;</span>))
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">const <span class="hljs-built_in">functions</span> = [
@@ -209,7 +209,7 @@ schema.addFunction(Function.builder()
       description: <span class="hljs-string">&#x27;bm25 function&#x27;</span>,
       <span class="hljs-built_in">type</span>: FunctionType.BM25,
       input_field_names: [<span class="hljs-string">&#x27;text&#x27;</span>],
-      output_field_names: [<span class="hljs-string">&#x27;vector&#x27;</span>],
+      output_field_names: [<span class="hljs-string">&#x27;sparse&#x27;</span>],
       params: {},
     },
 ]；
@@ -272,18 +272,28 @@ index_params.add_index(
     index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-comment"># Inverted index type for sparse vectors</span>
     metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
-    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>}, <span class="hljs-comment"># Algorithm for building and querying the index. Valid values: DAAT_MAXSCORE, DAAT_WAND, TAAT_NAIVE.</span>
+    params={
+        <span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>, <span class="hljs-comment"># Algorithm for building and querying the index. Valid values: DAAT_MAXSCORE, DAAT_WAND, TAAT_NAIVE.</span>
+        <span class="hljs-string">&quot;bm25_k1&quot;</span>: <span class="hljs-number">1.2</span>,
+        <span class="hljs-string">&quot;bm25_b&quot;</span>: <span class="hljs-number">0.75</span>
+    }, 
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;
+<pre><code translate="no" class="language-java">import io.milvus.v2.common.IndexParam;
 
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">BM25</span>)
-        .<span class="hljs-title function_">build</span>());
+Map&lt;String, Object&gt; <span class="hljs-keyword">params</span> = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>); <span class="hljs-comment">// Algorithm for building and querying the index</span>
+<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
+<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
+
+List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+indexes.<span class="hljs-keyword">add</span>(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
+        .metricType(IndexParam.MetricType.BM25)
+        .<span class="hljs-keyword">params</span>(<span class="hljs-keyword">params</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
@@ -292,6 +302,8 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_type: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+      bm25_k1: <span class="hljs-number">1.2</span>,
+      bm25_b: <span class="hljs-number">0.75</span>,
     },
   },
 ];
@@ -301,20 +313,29 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
             &quot;fieldName&quot;: &quot;sparse&quot;,
             &quot;metricType&quot;: &quot;BM25&quot;,
             &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
-            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
+            &quot;params&quot;: {
+                &quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;,
+                &quot;bm25_k1&quot;: 1.2,
+                &quot;bm25_b&quot;: 0.75
+            }
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<table data-block-token="XEoodLxOFoukWJx9aLXcH46snXc"><thead><tr><th data-block-token="PfGNdbuq9o9PEWxzAWecWWoInUf" colspan="1" rowspan="1"><p data-block-token="KX1VdsOJCoO0Exxhg8acsduwncd">Parámetro</p>
-</th><th data-block-token="VNwBdAyWKoPktSxYaBtcn5rKnNb" colspan="1" rowspan="1"><p data-block-token="Oo1PduIsxo4HcMx2NRmcxvAMnld">Descripción</p>
-</th></tr></thead><tbody><tr><td data-block-token="UxxWdkIBPoSbjOx7MO8csiFEn5d" colspan="1" rowspan="1"><p data-block-token="NYODddTbmoYoBrxPQ8ectvGxnPe"><code translate="no">field_name</code></p>
-</td><td data-block-token="L2ZGdkB2voKhmsx8ezecoPxmnVf" colspan="1" rowspan="1"><p data-block-token="Y16fdZ6hPoXVlgxSTQjctsTonac">El nombre del campo vectorial a indexar. Para la búsqueda de texto completo, debe ser el campo que almacena los vectores dispersos generados. En este ejemplo, el valor es <code translate="no">sparse</code>.</p>
-</td></tr><tr><td data-block-token="Wn1rdzso5o8AmqxqxiqccBpCnD4" colspan="1" rowspan="1"><p data-block-token="WLDrdOzSXoiKEOxoDREctDounRf"><code translate="no">index_type</code></p>
-</td><td data-block-token="I9TpdLWlXozM3Hx2Z9mcWvDHnNc" colspan="1" rowspan="1"><p data-block-token="Q3cgdK7OTo3kzXxQ1Y2cSarZned">El tipo de índice a crear. <code translate="no">SPARSE_INVERTED_INDEX</code> es el tipo de índice recomendado para vectores dispersos. Para más información, consulte <a href="https://milvus.io/docs/sparse_vector.md">Vector disperso</a>.</p>
-</td></tr><tr><td data-block-token="KJfgdQmD1odMgdxkG6uczBYknQh" colspan="1" rowspan="1"><p data-block-token="XVCsdz9Ulo93A2xavPtcF9Bvnec"><code translate="no">metric_type</code></p>
-</td><td data-block-token="S3NHds6MTodtrsxRILIc8E1wngh" colspan="1" rowspan="1"><p data-block-token="G9i7dPczzoyJRHxyXbecrWBBn0d">El valor de este parámetro debe establecerse en <code translate="no">BM25</code> específicamente para la funcionalidad de búsqueda de texto completo.</p>
-</td></tr></tbody></table>
-<h3 id="Create-the-collection​" class="common-anchor-header">Crear la colección</h3><p>Ahora cree la colección utilizando los parámetros de esquema e índice definidos.</p>
+<table>
+<thead>
+<tr><th>Parámetro</th><th>Descripción</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">field_name</code></td><td>El nombre del campo vectorial a indexar. Para la búsqueda de texto completo, debe ser el campo que almacena los vectores dispersos generados. En este ejemplo, el valor es <code translate="no">sparse</code>.</td></tr>
+<tr><td><code translate="no">index_type</code></td><td>El tipo de índice a crear. AUTOINDEX permite a <include target="milvus">MilvusZilliz</include><include target="zilliz">Cloud</include> optimizar automáticamente la configuración del índice. Si necesita más control sobre sus ajustes de índice, puede elegir entre varios tipos de índice disponibles para vectores dispersos en <include target="milvus">MilvusZilliz</include><include target="zilliz">Cloud</include>. <include target="milvus">Para más información, consulte Índices soportados en Milvus</include>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>El valor de este parámetro debe establecerse en <code translate="no">BM25</code> específicamente para la funcionalidad de búsqueda de texto completo.</td></tr>
+<tr><td><code translate="no">params</code></td><td>Un diccionario de parámetros adicionales específicos del índice.</td></tr>
+<tr><td><code translate="no">params.inverted_index_algo</code></td><td>El algoritmo utilizado para construir y consultar el índice. Valores válidos:<br>- <code translate="no">DAAT_MAXSCORE</code> (por defecto): Procesamiento optimizado de consultas DAAT (Document-at-a-Time) mediante el algoritmo MaxScore. MaxScore proporciona un mejor rendimiento para valores altos de k o consultas con muchos términos al omitir términos y documentos que probablemente tengan un impacto mínimo. Para ello, divide los términos en grupos esenciales y no esenciales en función de sus puntuaciones máximas de impacto, centrándose en los términos que pueden contribuir a los resultados top-k.<br>- <code translate="no">DAAT_WAND</code>: Procesamiento optimizado de consultas DAAT mediante el algoritmo WAND. El algoritmo WAND evalúa menos documentos coincidentes aprovechando las puntuaciones de impacto máximo para omitir los documentos no competitivos, pero tiene una mayor sobrecarga por coincidencia. Esto hace que WAND sea más eficiente para consultas con valores k pequeños o consultas cortas, en las que es más factible omitir.<br>- <code translate="no">TAAT_NAIVE</code>: Procesamiento básico de consultas término a término (TAAT). Aunque es más lento que <code translate="no">DAAT_MAXSCORE</code> y <code translate="no">DAAT_WAND</code>, TAAT_NAIVE ofrece una ventaja única. A diferencia de los algoritmos DAAT, que utilizan puntuaciones de impacto máximo almacenadas en caché que permanecen estáticas independientemente de los cambios en el parámetro de recopilación global (<code translate="no">avgdl</code>), TAAT_NAIVE se adapta dinámicamente a dichos cambios.</td></tr>
+<tr><td><code translate="no">params.bm25_k1</code></td><td>Controla la saturación de frecuencia de términos. Los valores más altos aumentan la importancia de las frecuencias de términos en la clasificación de documentos. Rango de valores: [1.2, 2.0].</td></tr>
+<tr><td><code translate="no">params.bm25_b</code></td><td>Controla el grado de normalización de la longitud de los documentos. Normalmente se utilizan valores entre 0 y 1, con un valor por defecto de 0,75. Un valor de 1 significa que no se normaliza la longitud. Un valor de 1 significa que no se normaliza la longitud, mientras que un valor de 0 significa una normalización completa.</td></tr>
+</tbody>
+</table>
+<h3 id="Create-the-collection​" class="common-anchor-header">Crear la colección</h3><p>Ahora creamos la colección utilizando los parámetros de esquema e índice definidos.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
@@ -368,7 +389,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Después de configurar la colección y el índice, estás listo para insertar datos de texto. En este proceso, sólo necesitas proporcionar el texto en bruto. La función incorporada que definimos anteriormente genera automáticamente el vector disperso correspondiente para cada entrada de texto.</p>
+    </button></h2><p>Después de configurar tu colección e índice, estás listo para insertar datos de texto. En este proceso, sólo necesitas proporcionar el texto en bruto. La función incorporada que definimos anteriormente genera automáticamente el vector disperso correspondiente para cada entrada de texto.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">insert</span>(<span class="hljs-string">&#x27;demo&#x27;</span>, [
@@ -502,6 +523,6 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
 </td></tr><tr><td data-block-token="O4OVdL9BIollH1xORz3czhInnSh" colspan="1" rowspan="1"><p data-block-token="CYdGd82dRopaWrxfJ9ycWQQnnPc"><code translate="no">anns_field</code></p>
 </td><td data-block-token="MsKIdxGj6oWeBExoFurcxWCnnGh" colspan="1" rowspan="1"><p data-block-token="RsMDdgo0roTSBuxYwm6cGw3inZd">El nombre del campo que contiene los vectores dispersos generados internamente.</p>
 </td></tr><tr><td data-block-token="G0ewd9TQ1o1RQRxZA9ucMO9tnBK" colspan="1" rowspan="1"><p data-block-token="JOyTdUmLIo5aV0x4ChOcLiDQnLh"><code translate="no">limit</code></p>
-</td><td data-block-token="H21hdYGZQoQe5FxYnwCch58qn0g" colspan="1" rowspan="1"><p data-block-token="ATKidHgXoo7c7dxM7cgcE46engb">Número máximo de coincidencias que se devolverán.</p>
+</td><td data-block-token="H21hdYGZQoQe5FxYnwCch58qn0g" colspan="1" rowspan="1"><p data-block-token="ATKidHgXoo7c7dxM7cgcE46engb">Número máximo de primeras coincidencias a devolver.</p>
 </td></tr></tbody></table>
 <p></p>

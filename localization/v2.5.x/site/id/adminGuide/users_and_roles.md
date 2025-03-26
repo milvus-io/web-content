@@ -194,7 +194,7 @@ client.<span class="hljs-title function_">list_users</span>()​
       </svg>
     </button></h2><p>Milvus menyediakan sebuah role bawaan yang disebut <code translate="no">admin</code>, yang merupakan role administrator yang dapat mengakses sumber daya di bawah semua instans dan memiliki hak istimewa untuk semua operasi. Untuk manajemen akses yang lebih baik dan keamanan data yang lebih baik, Anda disarankan untuk membuat role khusus berdasarkan kebutuhan Anda.</p>
 <h3 id="Create-a-role​" class="common-anchor-header">Membuat peran</h3><p>Contoh berikut ini menunjukkan cara membuat peran bernama <code translate="no">role_a</code>. </p>
-<p>Nama peran harus mengikuti aturan berikut.</p>
+<p>Nama peran harus mengikuti aturan berikut ini.</p>
 <ul>
 <li>Harus dimulai dengan huruf dan hanya boleh menyertakan huruf besar atau huruf kecil, angka, dan garis bawah.&quot;</li>
 </ul>
@@ -203,10 +203,10 @@ client.<span class="hljs-title function_">list_users</span>()​
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
 ​
 client.<span class="hljs-title function_">create_role</span>(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)​
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">rbac</span>.<span class="hljs-property">request</span>.<span class="hljs-property">CreateRoleReq</span>;​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">CreateRoleReq</span> <span class="hljs-variable">createRoleReq</span> <span class="hljs-operator">=</span> CreateRoleReq.builder()​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.CreateRoleReq;​
+<span class="hljs-type">CreateRoleReq</span> <span class="hljs-variable">createRoleReq</span> <span class="hljs-operator">=</span> CreateRoleReq.builder()​
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)​
         .build();​
        ​

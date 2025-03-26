@@ -59,7 +59,7 @@ title: 擴充 Milvus 集群
 <li>需要處理大量的大型資料集。</li>
 <li>需要確保 Milvus 服務的高可用性。</li>
 </ul>
-<h3 id="Scaling-in" class="common-anchor-header">向內擴展</h3><p>向內擴充是指減少叢集中的節點數量。一般來說，如果您所建立的 Milvus 叢集使用率不足，您就需要擴充叢集。以下是一些需要擴充 Milvus 叢集的典型情況：</p>
+<h3 id="Scaling-in" class="common-anchor-header">向內擴展</h3><p>向內擴充是指減少叢集中的節點數量。一般來說，如果您所建立的 Milvus 叢集使用率不足，您就需要擴充它。以下是一些需要擴充 Milvus 叢集的典型情況：</p>
 <ul>
 <li>CPU 和記憶體使用率在一段時間內偏低。</li>
 <li>查詢吞吐量變低。</li>
@@ -114,7 +114,7 @@ Milvus 只支援新增工作節點，不支援新增協調器元件。</div>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以手動或自動擴充 Milvus 叢集。如果啟用自動擴充，當 CPU 和記憶體資源消耗達到您設定的值時，Milvus 叢集會自動縮小或擴大。</p>
+    </button></h2><p>您可以手動或自動擴充 Milvus 叢集。要使用水平 Pod Autoscaling (HPA) 進行自動調整，請參閱<a href="/docs/zh-hant/hpa.md">為 Milvus 配置 HPA</a>。如果啟用自動擴充，當 CPU 和記憶體資源消耗達到您設定的值時，Milvus 叢集會自動縮小或擴大。</p>
 <p>目前，Milvus 2.1.0 只支援手動縮放。</p>
 <h4 id="Scaling-out" class="common-anchor-header">縮放</h4><p>執行<code translate="no">helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values</code> 來手動縮放查詢節點。</p>
 <p>如果成功，查詢節點上會新增三個執行中的 Pod，如以下範例所示。</p>

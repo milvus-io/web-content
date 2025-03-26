@@ -45,7 +45,7 @@ title: Создание пользователей и ролей
 <p>Для повседневной работы мы рекомендуем создавать пользователей, а не использовать root-пользователя.</p>
 <h3 id="Create-a-user​" class="common-anchor-header">Создание пользователя</h3><p>В следующем примере показано, как создать пользователя с именем пользователя <code translate="no">user_1</code> и паролем <code translate="no">P@ssw0rd</code>. Имя пользователя и пароль для него должны соответствовать следующим правилам.</p>
 <ul>
-<li><p>Имя пользователя: должно начинаться с буквы и может содержать только заглавные или строчные буквы, цифры и знаки подчеркивания.</p></li>
+<li><p>Имя пользователя: должно начинаться с буквы и может включать только заглавные или строчные буквы, цифры и знаки подчеркивания.</p></li>
 <li><p>Пароль: должен состоять из 8-64 символов и включать три из следующих: заглавные буквы, строчные буквы, цифры и специальные символы.</p></li>
 </ul>
 <div class="multipleCode">
@@ -204,10 +204,10 @@ client.<span class="hljs-title function_">list_users</span>()​
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
 ​
 client.<span class="hljs-title function_">create_role</span>(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)​
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">rbac</span>.<span class="hljs-property">request</span>.<span class="hljs-property">CreateRoleReq</span>;​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">CreateRoleReq</span> <span class="hljs-variable">createRoleReq</span> <span class="hljs-operator">=</span> CreateRoleReq.builder()​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.CreateRoleReq;​
+<span class="hljs-type">CreateRoleReq</span> <span class="hljs-variable">createRoleReq</span> <span class="hljs-operator">=</span> CreateRoleReq.builder()​
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)​
         .build();​
        ​

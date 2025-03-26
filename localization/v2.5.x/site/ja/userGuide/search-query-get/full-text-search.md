@@ -197,7 +197,7 @@ schema.addFunction(Function.builder()
         .functionType(FunctionType.BM25)
         .name(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>)
         .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
-        .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;vector&quot;</span>))
+        .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;sparse&quot;</span>))
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">const <span class="hljs-built_in">functions</span> = [
@@ -206,7 +206,7 @@ schema.addFunction(Function.builder()
       description: <span class="hljs-string">&#x27;bm25 function&#x27;</span>,
       <span class="hljs-built_in">type</span>: FunctionType.BM25,
       input_field_names: [<span class="hljs-string">&#x27;text&#x27;</span>],
-      output_field_names: [<span class="hljs-string">&#x27;vector&#x27;</span>],
+      output_field_names: [<span class="hljs-string">&#x27;sparse&#x27;</span>],
       params: {},
     },
 ]；
@@ -248,7 +248,7 @@ schema.addFunction(Function.builder()
 </th><th data-block-token="SMGGduN8zo3cgXxVnwZcW0UAnbA" colspan="1" rowspan="1"><p data-block-token="LY39dA2eOoyVUUxvKwlcyyjdn3e">説明</p>
 </th></tr></thead><tbody><tr><td data-block-token="Pbj3dPvuno3x6kxnCsWcTb3knag" colspan="1" rowspan="1"><p data-block-token="EeHOdxCjloFUAGxuY1CcScCTnDe"><code translate="no">name</code></p>
 <p data-block-token="FzAJdVbrzozmTdxwy4fcJQkQnlh"></p>
-</td><td data-block-token="VJWydnWHJoV66jx6oEPcH9lGnvh" colspan="1" rowspan="1"><p data-block-token="Clg3dWrJpo39lfxSWjVcbE7GnYm">関数の名前。この関数は、<code translate="no">text</code> フィールドの生テキストを、<code translate="no">sparse</code> フィールドに格納される検索可能なベクトルに変換します。</p>
+</td><td data-block-token="VJWydnWHJoV66jx6oEPcH9lGnvh" colspan="1" rowspan="1"><p data-block-token="Clg3dWrJpo39lfxSWjVcbE7GnYm">関数の名前。この関数は、<code translate="no">text</code> フィールドの生のテキストを、<code translate="no">sparse</code> フィールドに格納される検索可能なベクトルに変換します。</p>
 </td></tr><tr><td data-block-token="ShPJdlvMQoXnSHxIQ1GcoyegnEb" colspan="1" rowspan="1"><p data-block-token="HFT1dYVCioUj4PxnNSVcYIBInNh"><code translate="no">input_field_names</code></p>
 </td><td data-block-token="YiZCdrUaaovWnrxef29cmpQFn9c" colspan="1" rowspan="1"><p data-block-token="YFVOd29cUovDpXx7L2zcJK37n1g">テキストからスパース・ベクトルへの変換を必要とする<code translate="no">VARCHAR</code> フィールドの名前。<code translate="no">FunctionType.BM25</code> の場合、このパラメータは1つのフィールド名のみを受け付けます。</p>
 </td></tr><tr><td data-block-token="QpcMdDoXfo62aNxQfoyc2E6lneg" colspan="1" rowspan="1"><p data-block-token="D1LkdH1KIojwKDx14HUcHdDJnPh"><code translate="no">output_field_names</code></p>
@@ -269,18 +269,28 @@ index_params.add_index(
     index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-comment"># Inverted index type for sparse vectors</span>
     metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
-    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>}, <span class="hljs-comment"># Algorithm for building and querying the index. Valid values: DAAT_MAXSCORE, DAAT_WAND, TAAT_NAIVE.</span>
+    params={
+        <span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>, <span class="hljs-comment"># Algorithm for building and querying the index. Valid values: DAAT_MAXSCORE, DAAT_WAND, TAAT_NAIVE.</span>
+        <span class="hljs-string">&quot;bm25_k1&quot;</span>: <span class="hljs-number">1.2</span>,
+        <span class="hljs-string">&quot;bm25_b&quot;</span>: <span class="hljs-number">0.75</span>
+    }, 
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;
+<pre><code translate="no" class="language-java">import io.milvus.v2.common.IndexParam;
 
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">BM25</span>)
-        .<span class="hljs-title function_">build</span>());
+Map&lt;String, Object&gt; <span class="hljs-keyword">params</span> = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>); <span class="hljs-comment">// Algorithm for building and querying the index</span>
+<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
+<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
+
+List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+indexes.<span class="hljs-keyword">add</span>(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
+        .metricType(IndexParam.MetricType.BM25)
+        .<span class="hljs-keyword">params</span>(<span class="hljs-keyword">params</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
@@ -289,6 +299,8 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_type: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+      bm25_k1: <span class="hljs-number">1.2</span>,
+      bm25_b: <span class="hljs-number">0.75</span>,
     },
   },
 ];
@@ -298,19 +310,28 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
             &quot;fieldName&quot;: &quot;sparse&quot;,
             &quot;metricType&quot;: &quot;BM25&quot;,
             &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
-            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
+            &quot;params&quot;: {
+                &quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;,
+                &quot;bm25_k1&quot;: 1.2,
+                &quot;bm25_b&quot;: 0.75
+            }
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<table data-block-token="XEoodLxOFoukWJx9aLXcH46snXc"><thead><tr><th data-block-token="PfGNdbuq9o9PEWxzAWecWWoInUf" colspan="1" rowspan="1"><p data-block-token="KX1VdsOJCoO0Exxhg8acsduwncd">パラメータ</p>
-</th><th data-block-token="VNwBdAyWKoPktSxYaBtcn5rKnNb" colspan="1" rowspan="1"><p data-block-token="Oo1PduIsxo4HcMx2NRmcxvAMnld">説明</p>
-</th></tr></thead><tbody><tr><td data-block-token="UxxWdkIBPoSbjOx7MO8csiFEn5d" colspan="1" rowspan="1"><p data-block-token="NYODddTbmoYoBrxPQ8ectvGxnPe"><code translate="no">field_name</code></p>
-</td><td data-block-token="L2ZGdkB2voKhmsx8ezecoPxmnVf" colspan="1" rowspan="1"><p data-block-token="Y16fdZ6hPoXVlgxSTQjctsTonac">インデックスを作成するベクトル・フィールドの名前。全文検索の場合は、生成されたスパース・ベクトルを格納するフィールドでなければなりません。この例では、値を<code translate="no">sparse</code> に設定します。</p>
-</td></tr><tr><td data-block-token="Wn1rdzso5o8AmqxqxiqccBpCnD4" colspan="1" rowspan="1"><p data-block-token="WLDrdOzSXoiKEOxoDREctDounRf"><code translate="no">index_type</code></p>
-</td><td data-block-token="I9TpdLWlXozM3Hx2Z9mcWvDHnNc" colspan="1" rowspan="1"><p data-block-token="Q3cgdK7OTo3kzXxQ1Y2cSarZned">作成するインデックスのタイプ。<code translate="no">SPARSE_INVERTED_INDEX</code> はスパース・ベクトルの推奨インデックス・タイプです。詳細は<a href="https://milvus.io/docs/sparse_vector.md">Sparse Vector</a> を参照してください。</p>
-</td></tr><tr><td data-block-token="KJfgdQmD1odMgdxkG6uczBYknQh" colspan="1" rowspan="1"><p data-block-token="XVCsdz9Ulo93A2xavPtcF9Bvnec"><code translate="no">metric_type</code></p>
-</td><td data-block-token="S3NHds6MTodtrsxRILIc8E1wngh" colspan="1" rowspan="1"><p data-block-token="G9i7dPczzoyJRHxyXbecrWBBn0d">全文検索機能を使用する場合は、このパラメータの値を<code translate="no">BM25</code> に設定する必要があります。</p>
-</td></tr></tbody></table>
+<table>
+<thead>
+<tr><th>パラメータ</th><th>説明</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">field_name</code></td><td>インデックスを作成するベクトル・フィールドの名前。全文検索の場合、これは生成されたスパース・ベクトルを格納するフィールドでなければならない。この例では、値を<code translate="no">sparse</code> に設定します。</td></tr>
+<tr><td><code translate="no">index_type</code></td><td>作成するインデックスのタイプ。AUTOINDEXは<include target="milvus">MilvusZilliz</include><include target="zilliz">Cloudが</include>自動的にインデックス設定を最適化することを可能にします。インデックスの設定をよりコントロールする必要がある場合、<include target="milvus">MilvusZilliz</include><include target="zilliz">Cloudの</include>スパースベクトルで利用可能な様々なインデックスタイプから選択することができます。<include target="milvus">詳細はMilvusでサポートされているインデックスを参照してください</include>。</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>全文検索機能を使用する場合は、このパラメータの値を<code translate="no">BM25</code> に設定する必要があります。</td></tr>
+<tr><td><code translate="no">params</code></td><td>インデックス固有の追加パラメータの辞書。</td></tr>
+<tr><td><code translate="no">params.inverted_index_algo</code></td><td>インデックスの構築とクエリに使用されるアルゴリズム。有効な値：<br>-<code translate="no">DAAT_MAXSCORE</code> （デフォルト）：MaxScore アルゴ リ ズ ム を使用 し た最適化 さ れた DAAT （Document-at-a-Time） ク エ リ 処理。MaxScoreは、高いk値や多くの用語を持つクエリに対して、影響が最小になりそうな用語やドキュメントをスキップすることで、より優れたパフォーマンスを提供します。MaxScoreは、最大インパクトスコアに基づいて用語を必須グループと非必須グループに分割し、トップkの結果に貢献できる用語に焦点を当てることでこれを実現する。<br>-<code translate="no">DAAT_WAND</code>: WANDアルゴリズムを用いたDAATクエリ処理の最適化。WANDは、競合しない文書をスキップするために最大インパクトスコアを活用することで、より少ないヒット文書を評価する。このため、WANDはk値が小さいクエリや、スキップがより実行可能な短いクエリに対してより効率的である。<br>-<code translate="no">TAAT_NAIVE</code>: Basic Term-at-a-Time (TAAT)クエリー処理。<code translate="no">DAAT_MAXSCORE</code> 、<code translate="no">DAAT_WAND</code> と比較すると低速であるが、TAAT_NAIVEには独自の利点がある。グローバルコレクションパラメータ（<code translate="no">avgdl</code> ）の変更に関係なく静的なままキャッシュされた最大インパクトスコアを使用するDAATアルゴリズムとは異なり、TAAT_NAIVEはそのような変更に動的に適応する。</td></tr>
+<tr><td><code translate="no">params.bm25_k1</code></td><td>用語頻度の飽和度を制御する。値が高いほど、文書ランキングにおける用語頻度の重要度が増す。値の範囲：[1.2, 2.0].</td></tr>
+<tr><td><code translate="no">params.bm25_b</code></td><td>文書の長さを正規化する程度を制御する。一般的に0から1の間の値が使用され、一般的なデフォルト値は0.75程度です。1の値は長さの正規化を行わないことを意味し、0の値は完全な正規化を意味する。</td></tr>
+</tbody>
+</table>
 <h3 id="Create-the-collection​" class="common-anchor-header">コレクションの作成</h3><p>定義したスキーマとインデックス・パラメータを使用して、コレクションを作成します。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>

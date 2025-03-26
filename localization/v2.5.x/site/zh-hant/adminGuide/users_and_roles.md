@@ -2,8 +2,8 @@
 id: users_and_roles.md
 related_key: 'users, roles'
 summary: >-
-  Milvus 透過 RBAC
-  實現了精細的存取控制。您可以從建立使用者和角色開始，然後將權限或權限群組分配給角色，最後透過賦予使用者角色來管理存取控制。這種方法可以確保存取管理的效率和安全性。本頁介紹如何在
+  Milvus 通過 RBAC
+  實現了細粒度的存取控制。您可以從建立使用者和角色開始，然後將權限或權限群組分配給角色，最後透過賦予使用者角色來管理存取控制。這種方法可以確保存取管理的效率和安全性。本頁介紹如何在
   Milvus 中建立使用者和角色。
 title: 建立使用者與角色
 ---
@@ -201,10 +201,10 @@ client.<span class="hljs-title function_">list_users</span>()​
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
 ​
 client.<span class="hljs-title function_">create_role</span>(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)​
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">rbac</span>.<span class="hljs-property">request</span>.<span class="hljs-property">CreateRoleReq</span>;​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">CreateRoleReq</span> <span class="hljs-variable">createRoleReq</span> <span class="hljs-operator">=</span> CreateRoleReq.builder()​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.CreateRoleReq;​
+<span class="hljs-type">CreateRoleReq</span> <span class="hljs-variable">createRoleReq</span> <span class="hljs-operator">=</span> CreateRoleReq.builder()​
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)​
         .build();​
        ​

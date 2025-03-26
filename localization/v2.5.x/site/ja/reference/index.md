@@ -238,7 +238,7 @@ title: インメモリインデックス
 </table>
 </div>
 <div class="filter-floating">
-<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>完全な精度が要求され、比較的小さな（百万規模の）データセットに依存する ベクトル類似検索アプリケーションには、FLATインデックスが良い選択である。FLATはベクトルを圧縮せず、正確な検索結果を保証できる唯一のインデックスである。FLATの結果は、再現率が100%に満たない他のインデックスが生成した結果の比較対象としても使用できる。</p>
+<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>完全な精度が要求され、比較的小規模な（100万個規模の）データセットに依存する ベクトル類似検索アプリケーションには、FLATインデックスが適している。FLATはベクトルを圧縮せず、正確な検索結果を保証できる唯一のインデックスである。FLATの結果は、再現率が100%に満たない他のインデックスが生成した結果の比較対象としても使用できる。</p>
 <p>FLATが正確なのは、検索に網羅的なアプローチをとるからである。つまり、クエリごとに、ターゲット入力がデータセット内のすべてのベクトル集合と比較される。このため、FLATは我々のリストの中で最も遅いインデックスであり、膨大なベクトルデータのクエリには適していない。MilvusではFLATインデックスに必要なパラメータはなく、これを使用することでデータ学習も不要である。</p>
 <ul>
 <li><p>検索パラメータ</p>
@@ -291,7 +291,7 @@ title: インメモリインデックス
 </ul></li>
 </ul>
 <h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLATは圧縮を行わないため、生成されるインデックスファイルのサイズは、インデックス付けされていない元の生のベクトルデータとほぼ同じです。例えば、元の 1B SIFT データセットが 476 GB である場合、IVF_FLAT のインデックスファイルは若干小さくなります (~470 GB)。すべてのインデックスファイルをメモリにロードすると、470GBのストレージを消費します。</p>
-<p>ディスク、CPU、GPU のメモリリソースが限られている場合は、IVF_FLAT よりも IVF_SQ8 の方が適しています。このインデックスタイプは、スカラー量子化（SQ）を実行することで、各 FLOAT（4バイト）を UINT8（1バイト）に変換することができます。これにより、ディスク、CPU、GPUのメモリ消費量が70～75%削減される。1B SIFTデータセットの場合、IVF_SQ8インデックスファイルは140GBのストレージで済みます。</p>
+<p>ディスク、CPU、GPU のメモリリソースが限られている場合は、IVF_FLAT よりも IVF_SQ8 の方が適しています。このインデックスタイプは、スカラー量子化（SQ）を実行することで、各 FLOAT（4バイト）を UINT8（1バイト）に変換することができます。これにより、ディスク、CPU、GPUのメモリ消費量が70～75%削減される。1B SIFT データセットでは、IVF_SQ8 インデックスファイルは 140 GB のストレージしか必要としません。</p>
 <ul>
 <li><p>インデックス作成パラメータ</p>
 <table>
@@ -330,7 +330,7 @@ title: インメモリインデックス
 <h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) は、元の高次元ベクトル空間を、 低次元ベクトル空間のデカルト積に一様に分解し、分解された低次元ベクトル空間を量子化する。積量子化により、対象ベクトルと全ユニットの中心との距離を計算する代わりに、対象ベクトルと各低次元空間のクラスタリング中心との距離を計算することが可能となり、アルゴリズムの時間的複雑性と空間的複雑性を大幅に削減することができる。<code translate="no">m</code> </p>
 <p>IVF_PQ は，ベクトルの積を量子化する前にIVFインデックスクラスタリングを行います．そのインデックスファイルはIVF_SQ8よりもさらに小さいが、ベクトル探索時の精度が低下する。</p>
 <div class="alert note">
-<p>インデックス作成パラメータと検索パラメータはMilvus分布によって異なります。まずはMilvusディストリビューションを選択してください。</p>
+<p>インデックス構築パラメータと検索パラメータはMilvus分布によって異なります。まずはMilvusディストリビューションを選択してください。</p>
 </div>
 <ul>
 <li><p>インデックス作成パラメータ</p>
@@ -382,7 +382,7 @@ title: インメモリインデックス
 </tbody>
 </table>
   <div class="alert note">
-<p>IVF_PQ とは異なり、パフォーマンスを最適化するために、デフォルト値は<code translate="no">m</code> と<code translate="no">nbits</code> に適用されます。</p>
+<p>IVF_PQ とは異なり、デフォルト値はパフォーマンスを最適化するために<code translate="no">m</code> と<code translate="no">nbits</code> に適用されます。</p>
   </div>
 </li>
 <li><p>検索パラメータ</p>
@@ -411,7 +411,7 @@ title: インメモリインデックス
 </ul></li>
 </ul>
 <h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW（Hierarchical Navigable Small World Graph）は、グラフベースのインデックス作成アルゴリズムである。HNSWは、ある規則に従って、画像に対して多層のナビゲーション構造を構築する。この構造では、上層ほど疎でノード間の距離が遠く、下層ほど密でノード間の距離が近い。探索は最上層から開始し、この層でターゲットに最も近いノードを見つけ、次の層に入って別の探索を開始する。何度も繰り返すうちに、目標位置に素早く近づくことができる。</p>
-<p>パフォーマンスを向上させるために、HNSWはグラフの各レイヤーのノードの最大次数を<code translate="no">M</code> に制限している。さらに、<code translate="no">efConstruction</code> （インデックス構築時）または<code translate="no">ef</code> （ターゲット検索時）を使って検索範囲を指定することができる。</p>
+<p>パフォーマンスを向上させるために、HNSWはグラフの各レイヤー上のノードの最大次数を<code translate="no">M</code> に制限している。さらに、<code translate="no">efConstruction</code> （インデックス構築時）または<code translate="no">ef</code> （ターゲット検索時）を使って検索範囲を指定することができる。</p>
 <ul>
 <li><p>インデックス構築パラメータ</p>
 <table>
@@ -543,7 +543,7 @@ title: インメモリインデックス
 </li>
 </ul>
 <h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>このインデックスは IVF_FLAT と全く同じですが、バイナリ埋め込みにのみ使用できます。</p>
-<p>BIN_IVF_FLAT はベクトルデータを<code translate="no">nlist</code> クラスタ単位に分割し、ターゲット入力ベクトルと各クラスタの中心との距離を比較します。システムがクエリに設定するクラスタ数（<code translate="no">nprobe</code> ）に応じて、ターゲット入力と最も類似したクラスタ（複数可）内のベクトル間の比較に基づく類似性検索結果が返され、クエリ時間が大幅に短縮されます。</p>
+<p>BIN_IVF_FLAT はベクトルデータを<code translate="no">nlist</code> クラスタ単位に分割し、ターゲット入力ベクトルと各クラスタの中心との距離を比較します。システムがクエリに設定したクラスタ数（<code translate="no">nprobe</code> ）に応じて、ターゲット入力と最も類似したクラスタ（複数可）内のベクトルとの比較に基づく類似性検索結果が返され、クエリ時間が大幅に短縮されます。</p>
 <p><code translate="no">nprobe</code> を調整することで、精度と速度の理想的なバランスを見つけることができます。クエリ時間は、ターゲット入力ベクトルの数 (<code translate="no">nq</code>) と検索するクラスタの数 (<code translate="no">nprobe</code>) の両方が増加するにつれて急激に増加します。</p>
 <p>BIN_IVF_FLATは最も基本的なBIN_IVFインデックスであり、各ユニットに格納されるエンコードされたデータは元のデータと一致する。</p>
 <ul>
@@ -592,10 +592,12 @@ title: インメモリインデックス
 </thead>
 <tbody>
 <tr><td><code translate="no">inverted_index_algo</code></td><td>インデックスの構築とクエリに使用されるアルゴリズム。詳細は<a href="/docs/ja/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a> を参照。</td><td><code translate="no">DAAT_MAXSCORE</code> (デフォルト), 、<code translate="no">DAAT_WAND</code> <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">bm25_k1</code></td><td>用語頻度の飽和度を制御する。値が高いほど、文書ランキングにおける用語頻度の重要度が増す。</td><td>[1.2, 2.0]</td></tr>
+<tr><td><code translate="no">bm25_b</code></td><td>文書の長さを正規化する範囲を制御する。デフォルトは0.75。</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
   <div class="alert note">
-<p>Milvus v2.5.4以降、<code translate="no">drop_ratio_build</code> パラメータは非推奨となりました。このパラメータはインデックスの構築中に受け付けることはできますが、インデックスに対する実際の効果はなくなります。</p>
+<p>Milvus v2.5.4以降、<code translate="no">drop_ratio_build</code> パラメータは非推奨となりました。インデックス作成時にこのパラメータを指定することはできますが、インデックスに実際の影響を与えることはありません。</p>
   </div>
 </li>
 <li><p>検索パラメータ</p>

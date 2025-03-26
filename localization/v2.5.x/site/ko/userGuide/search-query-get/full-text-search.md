@@ -57,7 +57,7 @@ summary: 전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용�
 <p>전체 텍스트 검색을 사용하려면 다음 주요 단계를 따르세요.</p>
 <ol>
 <li><p><a href="#Create-a-collection-for-full-text-search">컬렉션을 만듭니다</a>: 필요한 필드로 컬렉션을 설정하고 원시 텍스트를 스파스 임베딩으로 변환하는 함수를 정의합니다.</p></li>
-<li><p><a href="#Insert-text-data">데이터 삽입</a>: 원시 텍스트 문서를 컬렉션에 수집합니다.</p></li>
+<li><p><a href="#Insert-text-data">데이터 삽입하기</a>: 원시 텍스트 문서를 컬렉션에 수집합니다.</p></li>
 <li><p><a href="#Perform-full-text-search">검색 수행하기</a>: 쿼리 텍스트를 사용하여 컬렉션을 검색하고 관련 결과를 검색합니다.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-full-text-search​" class="common-anchor-header">전체 텍스트 검색을 위한 컬렉션 만들기<button data-href="#Create-a-collection-for-full-text-search​" class="anchor-icon" translate="no">
@@ -197,7 +197,7 @@ schema.addFunction(Function.builder()
         .functionType(FunctionType.BM25)
         .name(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>)
         .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
-        .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;vector&quot;</span>))
+        .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;sparse&quot;</span>))
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">const <span class="hljs-built_in">functions</span> = [
@@ -206,7 +206,7 @@ schema.addFunction(Function.builder()
       description: <span class="hljs-string">&#x27;bm25 function&#x27;</span>,
       <span class="hljs-built_in">type</span>: FunctionType.BM25,
       input_field_names: [<span class="hljs-string">&#x27;text&#x27;</span>],
-      output_field_names: [<span class="hljs-string">&#x27;vector&#x27;</span>],
+      output_field_names: [<span class="hljs-string">&#x27;sparse&#x27;</span>],
       params: {},
     },
 ]；
@@ -269,18 +269,28 @@ index_params.add_index(
     index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-comment"># Inverted index type for sparse vectors</span>
     metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
-    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>}, <span class="hljs-comment"># Algorithm for building and querying the index. Valid values: DAAT_MAXSCORE, DAAT_WAND, TAAT_NAIVE.</span>
+    params={
+        <span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>, <span class="hljs-comment"># Algorithm for building and querying the index. Valid values: DAAT_MAXSCORE, DAAT_WAND, TAAT_NAIVE.</span>
+        <span class="hljs-string">&quot;bm25_k1&quot;</span>: <span class="hljs-number">1.2</span>,
+        <span class="hljs-string">&quot;bm25_b&quot;</span>: <span class="hljs-number">0.75</span>
+    }, 
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;
+<pre><code translate="no" class="language-java">import io.milvus.v2.common.IndexParam;
 
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">BM25</span>)
-        .<span class="hljs-title function_">build</span>());
+Map&lt;String, Object&gt; <span class="hljs-keyword">params</span> = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>); <span class="hljs-comment">// Algorithm for building and querying the index</span>
+<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
+<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
+
+List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+indexes.<span class="hljs-keyword">add</span>(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
+        .metricType(IndexParam.MetricType.BM25)
+        .<span class="hljs-keyword">params</span>(<span class="hljs-keyword">params</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
@@ -289,6 +299,8 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_type: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+      bm25_k1: <span class="hljs-number">1.2</span>,
+      bm25_b: <span class="hljs-number">0.75</span>,
     },
   },
 ];
@@ -298,20 +310,29 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
             &quot;fieldName&quot;: &quot;sparse&quot;,
             &quot;metricType&quot;: &quot;BM25&quot;,
             &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
-            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
+            &quot;params&quot;: {
+                &quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;,
+                &quot;bm25_k1&quot;: 1.2,
+                &quot;bm25_b&quot;: 0.75
+            }
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<table data-block-token="XEoodLxOFoukWJx9aLXcH46snXc"><thead><tr><th data-block-token="PfGNdbuq9o9PEWxzAWecWWoInUf" colspan="1" rowspan="1"><p data-block-token="KX1VdsOJCoO0Exxhg8acsduwncd">파라미터</p>
-</th><th data-block-token="VNwBdAyWKoPktSxYaBtcn5rKnNb" colspan="1" rowspan="1"><p data-block-token="Oo1PduIsxo4HcMx2NRmcxvAMnld">설명</p>
-</th></tr></thead><tbody><tr><td data-block-token="UxxWdkIBPoSbjOx7MO8csiFEn5d" colspan="1" rowspan="1"><p data-block-token="NYODddTbmoYoBrxPQ8ectvGxnPe"><code translate="no">field_name</code></p>
-</td><td data-block-token="L2ZGdkB2voKhmsx8ezecoPxmnVf" colspan="1" rowspan="1"><p data-block-token="Y16fdZ6hPoXVlgxSTQjctsTonac">인덱싱할 벡터 필드의 이름입니다. 전체 텍스트 검색의 경우, 생성된 스파스 벡터를 저장하는 필드여야 합니다. 이 예에서는 값을 <code translate="no">sparse</code> 로 설정합니다.</p>
-</td></tr><tr><td data-block-token="Wn1rdzso5o8AmqxqxiqccBpCnD4" colspan="1" rowspan="1"><p data-block-token="WLDrdOzSXoiKEOxoDREctDounRf"><code translate="no">index_type</code></p>
-</td><td data-block-token="I9TpdLWlXozM3Hx2Z9mcWvDHnNc" colspan="1" rowspan="1"><p data-block-token="Q3cgdK7OTo3kzXxQ1Y2cSarZned">생성할 인덱스 유형. <code translate="no">SPARSE_INVERTED_INDEX</code> 은 스파스 벡터에 권장되는 인덱스 유형입니다. 자세한 내용은 <a href="https://milvus.io/docs/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>
-</td></tr><tr><td data-block-token="KJfgdQmD1odMgdxkG6uczBYknQh" colspan="1" rowspan="1"><p data-block-token="XVCsdz9Ulo93A2xavPtcF9Bvnec"><code translate="no">metric_type</code></p>
-</td><td data-block-token="S3NHds6MTodtrsxRILIc8E1wngh" colspan="1" rowspan="1"><p data-block-token="G9i7dPczzoyJRHxyXbecrWBBn0d">특히 전체 텍스트 검색 기능을 사용하려면 이 매개변수의 값을 <code translate="no">BM25</code> 로 설정해야 합니다.</p>
-</td></tr></tbody></table>
-<h3 id="Create-the-collection​" class="common-anchor-header">컬렉션 만들기</h3><p>이제 정의한 스키마 및 인덱스 매개변수를 사용하여 컬렉션을 만듭니다.</p>
+<table>
+<thead>
+<tr><th>파라미터</th><th>설명</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">field_name</code></td><td>인덱싱할 벡터 필드의 이름입니다. 전체 텍스트 검색의 경우, 생성된 스파스 벡터를 저장하는 필드여야 합니다. 이 예에서는 값을 <code translate="no">sparse</code> 로 설정합니다.</td></tr>
+<tr><td><code translate="no">index_type</code></td><td>생성할 인덱스의 유형입니다. 자동 인덱스를 선택하면 <include target="milvus">밀버스질리즈</include><include target="zilliz">클라우드가</include> 인덱스 설정을 자동으로 최적화합니다. 인덱스 설정을 보다 세밀하게 제어해야 하는 경우, <include target="milvus">MilvusZilliz</include><include target="zilliz">Cloud에서</include> 스파스 벡터에 사용할 수 있는 다양한 인덱스 유형 중에서 선택할 수 있습니다. <include target="milvus">자세한 내용은 밀버스에서 지원하는 인덱스를 참조하세요</include>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>특히 전체 텍스트 검색 기능을 사용하려면 이 매개변수의 값을 <code translate="no">BM25</code> 로 설정해야 합니다.</td></tr>
+<tr><td><code translate="no">params</code></td><td>인덱스와 관련된 추가 파라미터의 사전입니다.</td></tr>
+<tr><td><code translate="no">params.inverted_index_algo</code></td><td>인덱스 구축 및 쿼리에 사용되는 알고리즘입니다. 유효한 값입니다:<br>- <code translate="no">DAAT_MAXSCORE</code> (기본값): MaxScore 알고리즘을 사용하여 최적화된 DAAT(Document-at-a-Time) 쿼리 처리. MaxScore는 영향이 미미할 것 같은 용어와 문서를 건너뛰는 방식으로 높은 k 값이나 많은 용어가 포함된 쿼리에 대해 더 나은 성능을 제공합니다. 최대 영향력 점수를 기준으로 용어를 필수 및 비필수 그룹으로 분할하여 상위 k 결과에 기여할 수 있는 용어에 집중함으로써 이를 달성합니다.<br>- <code translate="no">DAAT_WAND</code>: WAND 알고리즘을 사용하여 최적화된 DAAT 쿼리 처리. WAND는 최대 영향력 점수를 활용하여 경쟁력이 없는 문서를 건너뛰기 때문에 히트 문서를 더 적게 평가하지만 히트당 오버헤드가 더 높습니다. 따라서 건너뛰기가 더 쉬운 작은 k 값의 쿼리나 짧은 쿼리에는 WAND가 더 효율적입니다.<br>- <code translate="no">TAAT_NAIVE</code>: 기본 TAAT(Term-at-a-Time) 쿼리 처리. <code translate="no">DAAT_MAXSCORE</code> 및 <code translate="no">DAAT_WAND</code> 에 비해 느리지만 TAAT_NAIVE는 고유한 이점을 제공합니다. 글로벌 수집 매개변수(<code translate="no">avgdl</code>)의 변경에 관계없이 정적으로 유지되는 캐시된 최대 영향 점수를 사용하는 DAAT 알고리즘과 달리, TAAT_NAIVE는 이러한 변경에 동적으로 적응합니다.</td></tr>
+<tr><td><code translate="no">params.bm25_k1</code></td><td>용어 빈도 포화도를 제어합니다. 값이 높을수록 문서 순위에서 용어 빈도의 중요도가 높아집니다. 값 범위: [1.2, 2.0].</td></tr>
+<tr><td><code translate="no">params.bm25_b</code></td><td>문서 길이가 정규화되는 정도를 제어합니다. 일반적으로 0에서 1 사이의 값이 사용되며, 일반적인 기본값은 0.75 정도입니다. 값이 1이면 길이 정규화를 하지 않고, 값이 0이면 전체 정규화를 의미합니다.</td></tr>
+</tbody>
+</table>
+<h3 id="Create-the-collection​" class="common-anchor-header">컬렉션 만들기</h3><p>이제 정의한 스키마 및 인덱스 매개변수를 사용하여 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​

@@ -210,7 +210,7 @@ schema.addFunction(Function.builder()
         .functionType(FunctionType.BM25)
         .name(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>)
         .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
-        .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;vector&quot;</span>))
+        .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;sparse&quot;</span>))
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">const <span class="hljs-built_in">functions</span> = [
@@ -219,7 +219,7 @@ schema.addFunction(Function.builder()
       description: <span class="hljs-string">&#x27;bm25 function&#x27;</span>,
       <span class="hljs-built_in">type</span>: FunctionType.BM25,
       input_field_names: [<span class="hljs-string">&#x27;text&#x27;</span>],
-      output_field_names: [<span class="hljs-string">&#x27;vector&#x27;</span>],
+      output_field_names: [<span class="hljs-string">&#x27;sparse&#x27;</span>],
       params: {},
     },
 ]；

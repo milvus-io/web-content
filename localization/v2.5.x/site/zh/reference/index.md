@@ -20,7 +20,7 @@ title: 内存索引
         ></path>
       </svg>
     </button></h1><p>本主题列出了 Milvus 支持的各种类型的内存索引，每种索引最适合的场景，以及用户可以配置的参数，以实现更好的搜索性能。有关磁盘索引，请参阅<strong><a href="/docs/zh/disk_index.md">磁盘索引</a></strong>。</p>
-<p>索引是有效组织数据的过程，它通过显著加快大型数据集上耗时查询的速度，在提高相似性搜索的实用性方面发挥着重要作用。</p>
+<p>索引是有效组织数据的过程，它通过显著加速大型数据集上耗时的查询，在提高相似性搜索的实用性方面发挥着重要作用。</p>
 <p>为了提高查询性能，可以为每个向量场<a href="/docs/zh/index-vector-fields.md">指定一种索引类型</a>。</p>
 <div class="alert note">
 目前，一个向量场只支持一种索引类型。切换索引类型时，Milvus 会自动删除旧索引。</div>
@@ -411,7 +411,7 @@ title: 内存索引
 </ul></li>
 </ul>
 <h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW（分层导航小世界图）是一种基于图的索引算法。它根据一定的规则为图像建立多层导航结构。在这种结构中，上层较为稀疏，节点之间的距离较远；下层较为密集，节点之间的距离较近。搜索从最上层开始，在这一层找到离目标最近的节点，然后进入下一层开始新的搜索。经过多次迭代后，就能快速接近目标位置。</p>
-<p>为了提高性能，HNSW 将图中每层节点的最大度数限制为<code translate="no">M</code> 。此外，您还可以使用<code translate="no">efConstruction</code> （建立索引时）或<code translate="no">ef</code> （搜索目标时）来指定搜索范围。</p>
+<p>为了提高性能，HNSW 将图的每一层上节点的最大度数限制为<code translate="no">M</code> 。此外，您还可以使用<code translate="no">efConstruction</code> （建立索引时）或<code translate="no">ef</code> （搜索目标时）来指定搜索范围。</p>
 <ul>
 <li><p>索引建立参数</p>
 <table>
@@ -508,7 +508,7 @@ title: 内存索引
 <tr><td><code translate="no">m</code></td><td>将向量分割成的子向量组的个数。</td><td>[1, 65536]</td><td>32</td></tr>
 <tr><td><code translate="no">nbits</code></td><td>每个子向量组量化成的比特数。</td><td>[1, 24]</td><td>8</td></tr>
 <tr><td><code translate="no">nrq</code></td><td>剩余子量化器的个数。</td><td>[1, 16]</td><td>2</td></tr>
-<tr><td><code translate="no">refine</code></td><td>建立索引时是否保留细化数据。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine</code></td><td>建立索引时是否保留精炼数据。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">refine_type</code></td><td>细化索引的数据类型。</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code> 、<code translate="no">FP32</code></td><td>无</td></tr>
 </tbody>
 </table>
@@ -592,6 +592,8 @@ title: 内存索引
 </thead>
 <tbody>
 <tr><td><code translate="no">inverted_index_algo</code></td><td>用于建立和查询索引的算法。详情请参阅<a href="/docs/zh/sparse_vector.md#Set-index-params-for-vector-field">稀疏向量</a>。</td><td><code translate="no">DAAT_MAXSCORE</code> (默认）， 、<code translate="no">DAAT_WAND</code> <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">bm25_k1</code></td><td>控制词频饱和度。数值越大，术语频率在文档排序中的重要性越高。</td><td>[1.2, 2.0]</td></tr>
+<tr><td><code translate="no">bm25_b</code></td><td>控制文档长度标准化的程度。默认为 0.75。</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
   <div class="alert note">

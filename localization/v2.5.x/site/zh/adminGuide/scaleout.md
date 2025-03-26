@@ -114,7 +114,7 @@ Milvus 只支持添加工作节点，不支持添加协调器组件。</div>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以手动或自动扩展 Milvus 集群。如果启用了自动缩放功能，当 CPU 和内存资源消耗达到你设定的值时，Milvus 集群就会自动缩小或扩大。</p>
+    </button></h2><p>您可以手动或自动扩展 Milvus 群集。关于使用水平 Pod Autoscaling (HPA) 进行自动扩展，请参阅<a href="/docs/zh/hpa.md">为 Milvus 配置 HPA</a>。如果启用了自动缩放，当 CPU 和内存资源消耗达到你设定的值时，Milvus 集群将自动缩小或扩大。</p>
 <p>目前，Milvus 2.1.0 只支持手动缩进和缩出。</p>
 <h4 id="Scaling-out" class="common-anchor-header">向外扩展</h4><p>运行<code translate="no">helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values</code> 手动缩减查询节点。</p>
 <p>如果成功，将在查询节点上添加三个正在运行的 pod，如下图所示。</p>

@@ -197,7 +197,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <tbody>
   <tr>
     <td>BIN_FLAT</td>
-    <td>Índice baseado em quantização</td>
+    <td>Índice baseado na quantização</td>
     <td><ul>
       <li>Depende de conjuntos de dados relativamente pequenos.</li>
       <li>Requer uma precisão perfeita.</li>
@@ -271,7 +271,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <li><p>Pesquisa comum</p>
 <table>
 <thead>
-<tr><th>Parâmetro</th><th>Descrição do parâmetro</th><th>Gama</th><th>Valor por defeito</th></tr>
+<tr><th>Parâmetro</th><th>Descrição do parâmetro</th><th>Intervalo</th><th>Valor por defeito</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">nprobe</code></td><td>Número de unidades a consultar</td><td>[1, nlist]</td><td>8</td></tr>
@@ -328,7 +328,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </ul></li>
 </ul>
 <h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) decompõe uniformemente o espaço vetorial de alta dimensão original em produtos cartesianos de <code translate="no">m</code> espaços vectoriais de baixa dimensão e quantifica depois os espaços vectoriais de baixa dimensão decompostos. Em vez de calcular as distâncias entre o vetor-alvo e o centro de todas as unidades, a quantização do produto permite o cálculo das distâncias entre o vetor-alvo e o centro de agrupamento de cada espaço de baixa dimensão e reduz consideravelmente a complexidade temporal e espacial do algoritmo.</p>
-<p>O IVF_PQ efectua o agrupamento de índices IVF antes de quantificar o produto de vectores. O seu ficheiro de índice é ainda mais pequeno do que o IVF_SQ8, mas também causa uma perda de precisão durante a pesquisa de vectores.</p>
+<p>O IVF_PQ efectua o agrupamento de índices IVF antes de quantizar o produto de vectores. O seu ficheiro de índice é ainda mais pequeno do que o IVF_SQ8, mas também causa uma perda de precisão durante a pesquisa de vectores.</p>
 <div class="alert note">
 <p>Os parâmetros de construção do índice e os parâmetros de pesquisa variam consoante a distribuição Milvus. Selecione primeiro a sua distribuição Milvus.</p>
 </div>
@@ -591,7 +591,9 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">inverted_index_algo</code></td><td>O algoritmo utilizado para construir e consultar o índice. Para obter detalhes, consulte <a href="/docs/pt/sparse_vector.md#Set-index-params-for-vector-field">Vetor esparso</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (predefinição), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">inverted_index_algo</code></td><td>O algoritmo utilizado para construir e consultar o índice. Para mais informações, consulte <a href="/docs/pt/sparse_vector.md#Set-index-params-for-vector-field">Vetor esparso</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (predefinição), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">bm25_k1</code></td><td>Controla a saturação da frequência do termo. Valores mais altos aumentam a importância das frequências de termos na classificação de documentos.</td><td>[1.2, 2.0]</td></tr>
+<tr><td><code translate="no">bm25_b</code></td><td>Controla a extensão em que o comprimento do documento é normalizado. A predefinição é 0,75.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
   <div class="alert note">

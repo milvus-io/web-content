@@ -327,7 +327,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) décompose uniformément l'espace vectoriel haute dimension original en produits cartésiens d'espaces vectoriels basse dimension <code translate="no">m</code>, puis quantifie les espaces vectoriels basse dimension décomposés. Au lieu de calculer les distances entre le vecteur cible et le centre de toutes les unités, la quantification par produit permet de calculer les distances entre le vecteur cible et le centre de regroupement de chaque espace à faible dimension, ce qui réduit considérablement la complexité temporelle et spatiale de l'algorithme.</p>
+<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) décompose uniformément l'espace vectoriel haute dimension original en produits cartésiens d'espaces vectoriels basse dimension <code translate="no">m</code>, puis quantifie les espaces vectoriels basse dimension décomposés. Au lieu de calculer les distances entre le vecteur cible et le centre de toutes les unités, la quantification par produit permet de calculer les distances entre le vecteur cible et le centre de regroupement de chaque espace de faible dimension, ce qui réduit considérablement la complexité temporelle et spatiale de l'algorithme.</p>
 <p>IVF_PQ effectue le regroupement de l'index IVF avant de quantifier le produit des vecteurs. Son fichier d'index est encore plus petit que IVF_SQ8, mais il entraîne également une perte de précision lors de la recherche de vecteurs.</p>
 <div class="alert note">
 <p>Les paramètres de construction de l'index et les paramètres de recherche varient en fonction de la distribution Milvus. Sélectionnez d'abord votre distribution Milvus.</p>
@@ -398,7 +398,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </tbody>
 </table>
 </li>
-<li><p>Recherche par plage</p>
+<li><p>Plage de recherche</p>
 <table>
 <thead>
 <tr><th>Paramètre</th><th>Description</th><th>Plage</th><th>Valeur par défaut</th></tr>
@@ -506,9 +506,9 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><td><code translate="no">M</code></td><td>M définit le nombre maximal de connexions sortantes dans le graphique. Un M plus élevé entraîne une plus grande précision/temps d'exécution à ef/efConstruction fixe.</td><td>[2, 2048]</td><td>Aucune</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction contrôle le compromis entre la vitesse de recherche et la vitesse de construction de l'index. L'augmentation du paramètre efConstruction peut améliorer la qualité de l'index, mais elle tend également à allonger le temps d'indexation.</td><td>[1, int_max]</td><td>Aucun</td></tr>
 <tr><td><code translate="no">m</code></td><td>Le nombre de groupes de sous-vecteurs à diviser le vecteur.</td><td>[1, 65536]</td><td>32</td></tr>
-<tr><td><code translate="no">nbits</code></td><td>Nombre de bits dans lesquels chaque groupe de sous-vecteurs est quantifié.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>Le nombre de bits dans lesquels chaque groupe de sous-vecteurs est quantifié.</td><td>[1, 24]</td><td>8</td></tr>
 <tr><td><code translate="no">nrq</code></td><td>Le nombre de sous-quantificateurs résiduels.</td><td>[1, 16]</td><td>2</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Si les données affinées sont réservées lors de la construction de l'index.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine</code></td><td>Si les données raffinées sont réservées lors de la construction de l'index.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">refine_type</code></td><td>Le type de données de l'index affiné.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Aucun</td></tr>
 </tbody>
 </table>
@@ -519,7 +519,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><th>Paramètre</th><th>Description de la recherche</th><th>Plage de valeurs</th><th>Valeur par défaut</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Paramètre contrôlant le compromis temps de recherche/précision. Une valeur plus élevée ( <code translate="no">ef</code> ) permet une recherche plus précise mais plus lente.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Aucun</td></tr>
+<tr><td><code translate="no">ef</code></td><td>Paramètre contrôlant le compromis temps de recherche/précision. Une valeur plus élevée ( <code translate="no">ef</code> ) permet une recherche plus précise mais plus lente.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Aucune</td></tr>
 <tr><td><code translate="no">refine_k</code></td><td>Le facteur d'agrandissement de refine par rapport à <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
@@ -592,6 +592,8 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </thead>
 <tbody>
 <tr><td><code translate="no">inverted_index_algo</code></td><td>L'algorithme utilisé pour construire et interroger l'index. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/sparse_vector.md#Set-index-params-for-vector-field">Vecteur épars</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (par défaut), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">bm25_k1</code></td><td>Contrôle la saturation de la fréquence des termes. Des valeurs élevées augmentent l'importance de la fréquence des termes dans le classement des documents.</td><td>[1.2, 2.0]</td></tr>
+<tr><td><code translate="no">bm25_b</code></td><td>Contrôle le degré de normalisation de la longueur des documents. La valeur par défaut est 0,75.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
   <div class="alert note">
@@ -604,7 +606,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><th>Paramètre</th><th>Description de la recherche</th><th>Plage de valeurs</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>La proportion de petites valeurs vectorielles qui sont exclues pendant le processus de recherche. Cette option permet d'affiner le processus de recherche en spécifiant le ratio des plus petites valeurs du vecteur de la requête à ignorer. Elle permet d'équilibrer la précision de la recherche et les performances. Plus la valeur définie pour <code translate="no">drop_ratio_search</code> est petite, moins ces petites valeurs contribuent au résultat final. En ignorant certaines petites valeurs, les performances de la recherche peuvent être améliorées avec un impact minimal sur la précision.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>La proportion de petites valeurs vectorielles qui sont exclues pendant le processus de recherche. Cette option permet d'affiner le processus de recherche en spécifiant le ratio des plus petites valeurs du vecteur de la requête à ignorer. Elle permet d'équilibrer la précision de la recherche et les performances. Plus la valeur définie pour <code translate="no">drop_ratio_search</code> est petite, moins ces petites valeurs contribuent au résultat final. En ignorant certaines petites valeurs, il est possible d'améliorer les performances de la recherche avec un impact minimal sur la précision.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

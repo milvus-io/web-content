@@ -26,7 +26,7 @@ summary: >-
 <p>Эта функция, использующая алгоритм BM25 для оценки релевантности, особенно ценна в сценариях поиска с расширенной генерацией (RAG), где приоритет отдается документам, которые точно соответствуют определенным поисковым терминам.</p>
 <div class="alert note">
 <ul>
-<li>Интегрируя полнотекстовый поиск с плотным векторным поиском на основе семантики, вы можете повысить точность и релевантность результатов поиска. Дополнительные сведения см. в разделе <a href="/docs/ru/multi-vector-search.md">"Гибридный поиск"</a>.</li>
+<li>Интегрируя полнотекстовый поиск с плотным векторным поиском на основе семантики, вы можете повысить точность и релевантность результатов поиска. Дополнительную информацию см. в разделе <a href="/docs/ru/multi-vector-search.md">"Гибридный поиск"</a>.</li>
 <li>Полнотекстовый поиск доступен в Milvus Standalone и Milvus Distributed, но не в Milvus Lite, хотя его добавление в Milvus Lite находится в дорожной карте.</li>
 </ul>
 </div>
@@ -200,7 +200,7 @@ schema.addFunction(Function.builder()
         .functionType(FunctionType.BM25)
         .name(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>)
         .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
-        .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;vector&quot;</span>))
+        .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;sparse&quot;</span>))
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">const <span class="hljs-built_in">functions</span> = [
@@ -209,7 +209,7 @@ schema.addFunction(Function.builder()
       description: <span class="hljs-string">&#x27;bm25 function&#x27;</span>,
       <span class="hljs-built_in">type</span>: FunctionType.BM25,
       input_field_names: [<span class="hljs-string">&#x27;text&#x27;</span>],
-      output_field_names: [<span class="hljs-string">&#x27;vector&#x27;</span>],
+      output_field_names: [<span class="hljs-string">&#x27;sparse&#x27;</span>],
       params: {},
     },
 ]；
@@ -272,18 +272,28 @@ index_params.add_index(
     index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
     index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-comment"># Inverted index type for sparse vectors</span>
     metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
-    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>}, <span class="hljs-comment"># Algorithm for building and querying the index. Valid values: DAAT_MAXSCORE, DAAT_WAND, TAAT_NAIVE.</span>
+    params={
+        <span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>, <span class="hljs-comment"># Algorithm for building and querying the index. Valid values: DAAT_MAXSCORE, DAAT_WAND, TAAT_NAIVE.</span>
+        <span class="hljs-string">&quot;bm25_k1&quot;</span>: <span class="hljs-number">1.2</span>,
+        <span class="hljs-string">&quot;bm25_b&quot;</span>: <span class="hljs-number">0.75</span>
+    }, 
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;
+<pre><code translate="no" class="language-java">import io.milvus.v2.common.IndexParam;
 
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">BM25</span>)
-        .<span class="hljs-title function_">build</span>());
+Map&lt;String, Object&gt; <span class="hljs-keyword">params</span> = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>); <span class="hljs-comment">// Algorithm for building and querying the index</span>
+<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
+<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
+
+List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+indexes.<span class="hljs-keyword">add</span>(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
+        .metricType(IndexParam.MetricType.BM25)
+        .<span class="hljs-keyword">params</span>(<span class="hljs-keyword">params</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
@@ -292,6 +302,8 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     index_type: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
     <span class="hljs-keyword">params</span>: {
       inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+      bm25_k1: <span class="hljs-number">1.2</span>,
+      bm25_b: <span class="hljs-number">0.75</span>,
     },
   },
 ];
@@ -301,20 +313,29 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
             &quot;fieldName&quot;: &quot;sparse&quot;,
             &quot;metricType&quot;: &quot;BM25&quot;,
             &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
-            &quot;params&quot;:{&quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;}
+            &quot;params&quot;: {
+                &quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;,
+                &quot;bm25_k1&quot;: 1.2,
+                &quot;bm25_b&quot;: 0.75
+            }
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<table data-block-token="XEoodLxOFoukWJx9aLXcH46snXc"><thead><tr><th data-block-token="PfGNdbuq9o9PEWxzAWecWWoInUf" colspan="1" rowspan="1"><p data-block-token="KX1VdsOJCoO0Exxhg8acsduwncd">Параметр</p>
-</th><th data-block-token="VNwBdAyWKoPktSxYaBtcn5rKnNb" colspan="1" rowspan="1"><p data-block-token="Oo1PduIsxo4HcMx2NRmcxvAMnld">Описание</p>
-</th></tr></thead><tbody><tr><td data-block-token="UxxWdkIBPoSbjOx7MO8csiFEn5d" colspan="1" rowspan="1"><p data-block-token="NYODddTbmoYoBrxPQ8ectvGxnPe"><code translate="no">field_name</code></p>
-</td><td data-block-token="L2ZGdkB2voKhmsx8ezecoPxmnVf" colspan="1" rowspan="1"><p data-block-token="Y16fdZ6hPoXVlgxSTQjctsTonac">Имя векторного поля для индексации. Для полнотекстового поиска это должно быть поле, в котором хранятся сгенерированные разреженные векторы. В данном примере задано значение <code translate="no">sparse</code>.</p>
-</td></tr><tr><td data-block-token="Wn1rdzso5o8AmqxqxiqccBpCnD4" colspan="1" rowspan="1"><p data-block-token="WLDrdOzSXoiKEOxoDREctDounRf"><code translate="no">index_type</code></p>
-</td><td data-block-token="I9TpdLWlXozM3Hx2Z9mcWvDHnNc" colspan="1" rowspan="1"><p data-block-token="Q3cgdK7OTo3kzXxQ1Y2cSarZned">Тип создаваемого индекса. <code translate="no">SPARSE_INVERTED_INDEX</code> - рекомендуемый тип индекса для разреженных векторов. Дополнительные сведения см. в разделе <a href="https://milvus.io/docs/sparse_vector.md">"Разреженный вектор</a>".</p>
-</td></tr><tr><td data-block-token="KJfgdQmD1odMgdxkG6uczBYknQh" colspan="1" rowspan="1"><p data-block-token="XVCsdz9Ulo93A2xavPtcF9Bvnec"><code translate="no">metric_type</code></p>
-</td><td data-block-token="S3NHds6MTodtrsxRILIc8E1wngh" colspan="1" rowspan="1"><p data-block-token="G9i7dPczzoyJRHxyXbecrWBBn0d">Для полнотекстового поиска значение этого параметра должно быть установлено на <code translate="no">BM25</code>.</p>
-</td></tr></tbody></table>
-<h3 id="Create-the-collection​" class="common-anchor-header">Создайте коллекцию</h3><p>Теперь создайте коллекцию, используя заданную схему и параметры индекса.</p>
+<table>
+<thead>
+<tr><th>Параметр</th><th>Описание</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">field_name</code></td><td>Имя векторного поля для индексации. Для полнотекстового поиска это должно быть поле, в котором хранятся сгенерированные разреженные векторы. В этом примере задано значение <code translate="no">sparse</code>.</td></tr>
+<tr><td><code translate="no">index_type</code></td><td>Тип создаваемого индекса. AUTOINDEX позволяет <include target="milvus">MilvusZilliz</include><include target="zilliz">Cloud</include> автоматически оптимизировать настройки индекса. Если вам нужно больше контроля над настройками индекса, вы можете выбрать один из различных типов индексов, доступных для разреженных векторов в <include target="milvus">MilvusZilliz</include><include target="zilliz">Cloud</include>. <include target="milvus">Дополнительные сведения см. в разделе Индексы, поддерживаемые в Milvus</include>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>Значение этого параметра должно быть установлено на <code translate="no">BM25</code> специально для функциональности полнотекстового поиска.</td></tr>
+<tr><td><code translate="no">params</code></td><td>Словарь дополнительных параметров, специфичных для данного индекса.</td></tr>
+<tr><td><code translate="no">params.inverted_index_algo</code></td><td>Алгоритм, используемый для построения и запроса индекса. Допустимые значения:<br>- <code translate="no">DAAT_MAXSCORE</code> (по умолчанию): Оптимизированная обработка запросов Document-at-a-Time (DAAT) с использованием алгоритма MaxScore. MaxScore обеспечивает лучшую производительность для больших значений k или запросов с большим количеством терминов, пропуская термины и документы, которые, вероятно, будут иметь минимальное влияние. Это достигается путем разделения терминов на существенные и несущественные группы на основе их максимальных баллов влияния, при этом основное внимание уделяется терминам, которые могут внести вклад в топ-k результатов.<br>- <code translate="no">DAAT_WAND</code>: Оптимизированная обработка запросов DAAT с помощью алгоритма WAND. WAND оценивает меньшее количество документов, попавших в запрос, используя максимальные оценки влияния для пропуска неконкурентных документов, но при этом он имеет более высокие накладные расходы на каждое попадание. Это делает WAND более эффективным для запросов с небольшими значениями k или коротких запросов, где пропуск документов более целесообразен.<br>- <code translate="no">TAAT_NAIVE</code>: обработка запросов с использованием базовых терминов по времени (TAAT). Хотя он медленнее, чем <code translate="no">DAAT_MAXSCORE</code> и <code translate="no">DAAT_WAND</code>, TAAT_NAIVE обладает уникальным преимуществом. В отличие от алгоритмов DAAT, использующих кэшированные оценки максимального влияния, которые остаются статичными независимо от изменений параметра глобальной коллекции (<code translate="no">avgdl</code>), TAAT_NAIVE динамически адаптируется к таким изменениям.</td></tr>
+<tr><td><code translate="no">params.bm25_k1</code></td><td>Управляет насыщенностью частот терминов. Более высокие значения увеличивают важность частот терминов при ранжировании документов. Диапазон значений: [1.2, 2.0].</td></tr>
+<tr><td><code translate="no">params.bm25_b</code></td><td>Управляет степенью нормализации длины документа. Обычно используются значения от 0 до 1, по умолчанию около 0,75. Значение 1 означает отсутствие нормализации длины, а значение 0 - полную нормализацию.</td></tr>
+</tbody>
+</table>
+<h3 id="Create-the-collection​" class="common-anchor-header">Создание коллекции</h3><p>Теперь создайте коллекцию, используя заданные параметры схемы и индекса.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
@@ -431,7 +452,7 @@ client.insert(InsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После того как вы вставили данные в свою коллекцию, вы можете выполнять полнотекстовый поиск с помощью запросов на основе необработанного текста. Milvus автоматически преобразует ваш запрос в разреженный вектор и ранжирует совпадающие результаты поиска с помощью алгоритма BM25, а затем возвращает результаты topK (<code translate="no">limit</code>).</p>
+    </button></h2><p>После того как вы вставили данные в свою коллекцию, вы можете выполнять полнотекстовый поиск с помощью запросов с сырым текстом. Milvus автоматически преобразует ваш запрос в разреженный вектор и ранжирует совпадающие результаты поиска с помощью алгоритма BM25, а затем возвращает результаты topK (<code translate="no">limit</code>).</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {​

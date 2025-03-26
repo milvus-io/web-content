@@ -84,7 +84,13 @@ title: Indexar campos vectoriales
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
+    <td class="tg-0pky">ÍNDICE_ESPARCIDO_INVERTIDO</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
+    <td class="tg-0pky">ÍNDICE_ESPARCIDO_INVERTIDO</td>
   </tr>
 </tbody>
 </table>
@@ -337,7 +343,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">sync</code></td>
-      <td>Controla cómo se construye el índice en relación con la petición del cliente. Valores válidos:<br><ul><li><code translate="no">True</code> (por defecto): El cliente espera hasta que el índice esté completamente construido antes de volver. Esto significa que no obtendrá una respuesta hasta que el proceso se haya completado.</li><li><code translate="no">False</code>: El cliente regresa inmediatamente después de recibir la petición y el índice se está construyendo en segundo plano. Para saber si se ha completado la creación del índice, utilice el método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
+      <td>Controla cómo se construye el índice en relación con la petición del cliente. Valores válidos:<br><ul><li><code translate="no">True</code> (por defecto): El cliente espera a que el índice esté completamente construido antes de devolverlo. Esto significa que no obtendrá una respuesta hasta que el proceso se haya completado.</li><li><code translate="no">False</code>: El cliente regresa inmediatamente después de recibir la petición y el índice se está construyendo en segundo plano. Para saber si se ha completado la creación del índice, utilice el método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>

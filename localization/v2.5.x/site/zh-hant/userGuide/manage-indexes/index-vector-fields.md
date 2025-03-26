@@ -82,6 +82,12 @@ title: 索引向量欄位
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
+    <td class="tg-0pky">稀疏反演索引</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
     <td class="tg-0pky">sparse_inverted_index</td>
   </tr>
 </tbody>
@@ -357,7 +363,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>
-      <td>用於排列特定欄位資料的演算法名稱。有關適用的演算法，請參閱「<a href="https://milvus.io/docs/index.md">記憶體內索引</a>」和<a href="https://milvus.io/docs/disk_index.md">「磁碟上索引</a>」。</td>
+      <td>用來排列特定欄位資料的演算法名稱。有關適用的演算法，請參閱「<a href="https://milvus.io/docs/index.md">記憶體內索引</a>」和<a href="https://milvus.io/docs/disk_index.md">「磁碟上索引</a>」。</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>

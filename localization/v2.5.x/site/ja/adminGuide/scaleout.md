@@ -51,7 +51,7 @@ title: Milvusクラスタのスケール
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>スケールアップ</span> </span></p>
 <p><a href="/docs/ja/architecture_overview.md">Milvusアーキテクチャに</a>よると、ステートレスワーカーノードにはクエリノード、データノード、インデックスノード、プロキシが含まれます。したがって、ビジネスニーズやアプリケーションシナリオに合わせて、これらのタイプのノードをスケールアウトすることができます。Milvusクラスタは手動または自動でスケールアウトすることができます。</p>
-<p>一般的に、作成したMilvusクラスタが過剰に使用されている場合はスケールアウトする必要があります。以下はMilvusクラスタのスケールアウトが必要となる典型的な状況です：</p>
+<p>一般的に、作成したMilvusクラスタが過度に使用されている場合はスケールアウトする必要があります。以下はMilvusクラスタのスケールアウトが必要となる典型的な状況です：</p>
 <ul>
 <li>CPUとメモリの使用率が一定期間高い。</li>
 <li>クエリのスループットが高くなった。</li>
@@ -114,9 +114,9 @@ Milvusはワーカーノードの追加のみをサポートしており、コ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusクラスタは手動または自動でスケールできます。自動スケールが有効な場合、CPUおよびメモリリソースの消費量が設定した値に達すると、Milvusクラスタは自動的に縮小または拡張されます。</p>
-<p>現在、Milvus 2.1.0では手動によるスケールインおよびスケールアウトのみサポートしています。</p>
-<h4 id="Scaling-out" class="common-anchor-header">スケールアウト</h4><p><code translate="no">helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values</code> を実行して手動でクエリノードをスケールアウトします。</p>
+    </button></h2><p>Milvusクラスタのスケーリングは手動または自動で行うことができます。Horizontal Pod Autoscaling (HPA)による自動スケーリングについては、<a href="/docs/ja/hpa.md">MilvusのHPAの設定を</a>参照してください。自動スケーリングが有効な場合、CPUおよびメモリリソースの消費量が設定した値に達すると、Milvusクラスタは自動的に縮小または拡張されます。</p>
+<p>現在、Milvus 2.1.0では手動でのスケールインおよびスケールアウトのみサポートしています。</p>
+<h4 id="Scaling-out" class="common-anchor-header">スケールアウト</h4><p><code translate="no">helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values</code> を実行してクエリノードを手動でスケールアウトします。</p>
 <p>成功すると、以下の例のようにクエリノード上で実行中のポッドが3つ追加されます。</p>
 <pre><code translate="no">NAME                                            READY   STATUS    RESTARTS   AGE
 my-release-etcd-0                               1/1     Running   0          2m

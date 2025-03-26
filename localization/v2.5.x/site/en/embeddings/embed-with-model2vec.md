@@ -21,7 +21,7 @@ title: Model2Vec
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Model2Vec is a lightweight and high-performance embedding technique that transforms Sentence Transformer models into compact, static models. It reduces model size by up to 50x and speeds up inference by up to 500x, with minimal performance loss. Model2Vec is ideal when you have resource-constrained devices.</p>
+    </button></h1><p><a href="https://github.com/MinishLab/model2vec">Model2Vec</a> is a lightweight and high-performance embedding technique that transforms Sentence Transformer models into compact, static models. It reduces model size by up to 50x and speeds up inference by up to 500x, with minimal performance loss. Model2Vec is ideal when you have resource-constrained devices.</p>
 <p>Milvus integrates with Model2Vec’s models via the <strong>Model2VecEmbeddingFunction</strong> class. This class provides methods for encoding documents and queries using the pretrained Model2Vec models and returning the embeddings as dense vectors compatible with Milvus indexing.</p>
 <p>It supports both loading models from the Hugging Face Hub and uploading local Model2Vec models, offering flexibility for deployment in various environments.</p>
 <p>To use this feature, install the necessary dependencies:</p>

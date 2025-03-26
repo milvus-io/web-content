@@ -87,6 +87,12 @@ title: Indicizzare i campi vettoriali
     <td class="tg-0pky">INDICE SPARSO_INVERTITO</td>
   </tr>
 </tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
+    <td class="tg-0pky">INDICE SPARSO_INVERTITO</td>
+  </tr>
+</tbody>
 </table>
 <div class="alert note">
 <p>A partire da Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> viene deprecato. Si raccomanda invece di utilizzare <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> per ottenere l'equivalenza e mantenere la compatibilità. Per ulteriori informazioni, consultare <a href="/docs/it/sparse_vector.md#Set-index-params-for-vector-field">Vettore sparso</a>.</p>

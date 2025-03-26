@@ -87,9 +87,15 @@ title: فهرسة الحقول المتجهة
     <td class="tg-0pky">الفهرس_المتفرق_المقلوب_الفهرس</td>
   </tr>
 </tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
+    <td class="tg-0pky">الفهرس_المتفرق_المقلوب_الفهرس</td>
+  </tr>
+</tbody>
 </table>
 <div class="alert note">
-<p>بدءًا من الإصدار Milvus 2.5.4 فصاعدًا، يتم إهمال <code translate="no">SPARSE_WAND</code>. بدلاً من ذلك، يوصى باستخدام <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> للمعادلة مع الحفاظ على التوافق. لمزيد من المعلومات، ارجع إلى <a href="/docs/ar/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
+<p>بدءًا من الإصدار Milvus 2.5.4 فصاعدًا، تم إهمال <code translate="no">SPARSE_WAND</code>. بدلاً من ذلك، يوصى باستخدام <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> للمعادلة مع الحفاظ على التوافق. لمزيد من المعلومات، ارجع إلى <a href="/docs/ar/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
 </div>
 </div>
 <p>يوصى بإنشاء فهارس لكل من الحقل المتجه والحقول القياسية التي يتم الوصول إليها بشكل متكرر.</p>

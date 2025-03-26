@@ -84,12 +84,18 @@ title: Vektorfelder indizieren
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
+    <td class="tg-0pky">SPÄRLICHER_INVERTIERTER_INDEX</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
     <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
   </tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>Ab Milvus 2.5.4 ist <code translate="no">SPARSE_WAND</code> veraltet. Stattdessen wird empfohlen, <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> zu verwenden, um Äquivalenz und Kompatibilität zu gewährleisten. Weitere Informationen finden Sie unter <a href="/docs/de/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
+<p>Ab Milvus 2.5.4 wird <code translate="no">SPARSE_WAND</code> veraltet sein. Stattdessen wird empfohlen, <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> zu verwenden, um Äquivalenz und Kompatibilität zu gewährleisten. Weitere Informationen finden Sie unter <a href="/docs/de/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
 </div>
 </div>
 <p>Es wird empfohlen, Indizes sowohl für das Vektorfeld als auch für skalare Felder, auf die häufig zugegriffen wird, zu erstellen.</p>

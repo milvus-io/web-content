@@ -84,6 +84,12 @@ title: Indexar campos vectoriais
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
+    <td class="tg-0pky">ÍNDICE_ESPARSO_INVERTIDO</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
     <td class="tg-0pky">ÍNDICE_INVERTIDO_ESPARSO</td>
   </tr>
 </tbody>
@@ -337,7 +343,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">sync</code></td>
-      <td>Controla a forma como o índice é criado em relação ao pedido do cliente. Valores válidos:<br><ul><li><code translate="no">True</code> (predefinição): O cliente espera até que o índice esteja totalmente construído antes de retornar. Isso significa que você não receberá uma resposta até que o processo esteja concluído.</li><li><code translate="no">False</code>: O cliente regressa imediatamente após a receção do pedido e o índice está a ser criado em segundo plano. Para saber se a criação do índice foi concluída, utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
+      <td>Controla a forma como o índice é criado em relação ao pedido do cliente. Valores válidos:<br><ul><li><code translate="no">True</code> (predefinição): O cliente espera até que o índice esteja totalmente construído antes de retornar. Isso significa que você não receberá uma resposta até que o processo seja concluído.</li><li><code translate="no">False</code>: O cliente regressa imediatamente após a receção do pedido e o índice está a ser criado em segundo plano. Para saber se a criação do índice foi concluída, utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>
@@ -351,7 +357,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>O nome do campo de destino ao qual se aplica este objeto IndexParam.</td>
+      <td>O nome do campo de destino a que se aplica este objeto IndexParam.</td>
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>

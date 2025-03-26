@@ -6,7 +6,7 @@ summary: >-
   RBAC. È possibile iniziare creando utenti e ruoli, quindi assegnare privilegi
   o gruppi di privilegi ai ruoli e infine gestire il controllo degli accessi
   assegnando ruoli agli utenti. Questo metodo garantisce l'efficienza e la
-  sicurezza della gestione degli accessi. Questa pagina illustra come creare
+  sicurezza della gestione degli accessi. Questa pagina spiega come creare
   utenti e ruoli in Milvus.
 title: Creare utenti e ruoli
 ---
@@ -204,10 +204,10 @@ client.<span class="hljs-title function_">list_users</span>()​
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
 ​
 client.<span class="hljs-title function_">create_role</span>(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)​
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">rbac</span>.<span class="hljs-property">request</span>.<span class="hljs-property">CreateRoleReq</span>;​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">CreateRoleReq</span> <span class="hljs-variable">createRoleReq</span> <span class="hljs-operator">=</span> CreateRoleReq.builder()​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.CreateRoleReq;​
+<span class="hljs-type">CreateRoleReq</span> <span class="hljs-variable">createRoleReq</span> <span class="hljs-operator">=</span> CreateRoleReq.builder()​
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)​
         .build();​
        ​

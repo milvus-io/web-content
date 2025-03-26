@@ -464,7 +464,7 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </table>
 </li>
 </ul>
-<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>Ide dasar dari PQ adalah untuk membagi vektor menjadi sub-vektor <code translate="no">m</code>, yang masing-masing akan menemukan <em>2^{nbits}</em> centroid berdasarkan kmeans, dan setiap sub-vektor akan memilih centroid terdekat sebagai perkiraan sub-vektor. Kemudian kita mencatat semua centroid, sehingga setiap subvektor dapat dikodekan sebagai <code translate="no">nbits</code>, dan vektor mengambang dengan panjang <code translate="no">dim</code> dapat dikodekan sebagai <em>m ⋅ n bit</em>.</p>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>Ide dasar dari PQ adalah membagi vektor menjadi sub-vektor <code translate="no">m</code>, yang masing-masing akan menemukan <em>2^{nbits}</em> centroid berdasarkan kmeans, dan setiap sub-vektor akan memilih centroid terdekat sebagai perkiraan sub-vektor. Kemudian kita mencatat semua centroid, sehingga setiap subvektor dapat dikodekan sebagai <code translate="no">nbits</code>, dan vektor mengambang dengan panjang <code translate="no">dim</code> dapat dikodekan sebagai <em>m ⋅ n bit</em>.</p>
 <p>Dikombinasikan dengan PQ, HNSW_PQ menawarkan pertukaran yang dapat dikontrol antara ukuran indeks dan akurasi, tetapi memiliki nilai QPS yang lebih rendah dan tingkat penarikan yang lebih tinggi daripada HNSW_SQ untuk tingkat kompresi yang sama. Dibandingkan dengan HNSW_SQ, dibutuhkan waktu lebih lama untuk membangun indeks.</p>
 <ul>
 <li><p>Parameter pembangunan indeks</p>
@@ -592,10 +592,12 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </thead>
 <tbody>
 <tr><td><code translate="no">inverted_index_algo</code></td><td>Algoritme yang digunakan untuk membangun dan menanyakan indeks. Untuk detailnya, lihat <a href="/docs/id/sparse_vector.md#Set-index-params-for-vector-field">Vektor Jarang</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (default), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">bm25_k1</code></td><td>Mengontrol saturasi frekuensi istilah. Nilai yang lebih tinggi meningkatkan pentingnya frekuensi istilah dalam pemeringkatan dokumen.</td><td>[1.2, 2.0]</td></tr>
+<tr><td><code translate="no">bm25_b</code></td><td>Mengontrol sejauh mana panjang dokumen dinormalisasi. Nilai defaultnya adalah 0,75.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
   <div class="alert note">
-<p>Parameter <code translate="no">drop_ratio_build</code> sudah tidak digunakan lagi sejak Milvus v2.5.4, yang masih dapat diterima selama pembuatan indeks, tetapi tidak lagi berpengaruh pada indeks.</p>
+<p>Parameter <code translate="no">drop_ratio_build</code> sudah tidak digunakan lagi sejak Milvus v2.5.4, yang masih dapat diterima selama pembuatan indeks, tetapi tidak lagi memiliki efek aktual pada indeks.</p>
   </div>
 </li>
 <li><p>Parameter pencarian</p>

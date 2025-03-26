@@ -19,7 +19,7 @@ title: Model2Vec
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Model2Vec 是一种轻量级、高性能的 Embeddings 技术，可将 Sentence Transformer 模型转换为紧凑的静态模型。它可将模型大小缩小 50 倍，推理速度提高 500 倍，而性能损失却微乎其微。Model2Vec 是资源受限设备的理想选择。</p>
+    </button></h1><p><a href="https://github.com/MinishLab/model2vec">Model2Vec</a>是一种轻量级、高性能的 Embeddings 技术，可将 Sentence Transformer 模型转换为紧凑的静态模型。它可将模型大小缩小 50 倍，推理速度提高 500 倍，而性能损失却微乎其微。Model2Vec 是资源受限设备的理想选择。</p>
 <p>Milvus 通过<strong>Model2VecEmbeddingFunction</strong>类与<strong>Model2Vec</strong>的模型集成。该类提供了使用预训练的 Model2Vec 模型对文档和查询进行编码的方法，并将嵌入作为与 Milvus 索引兼容的密集向量返回。</p>
 <p>它既支持从 Hugging Face 中枢加载模型，也支持上传本地 Model2Vec 模型，为在各种环境中部署提供了灵活性。</p>
 <p>要使用此功能，请安装必要的依赖项：</p>

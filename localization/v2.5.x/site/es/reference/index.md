@@ -278,7 +278,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </tbody>
 </table>
 </li>
-<li><p>Búsqueda por rangos</p>
+<li><p>Rango de búsqueda</p>
 <table>
 <thead>
 <tr><th>Parámetro</th><th>Descripción</th><th>Gama</th><th>Valor por defecto</th></tr>
@@ -315,20 +315,20 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </tbody>
 </table>
 </li>
-<li><p>Búsqueda por rangos</p>
+<li><p>Rango de búsqueda</p>
 <table>
 <thead>
 <tr><th>Parámetro</th><th>Descripción</th><th>Gama</th><th>Valor por defecto</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Número máximo de cubos que no devuelven ningún resultado de búsqueda.<br/>Este es un parámetro de búsqueda por rango y termina el proceso de búsqueda cuando el número de cubos vacíos consecutivos alcanza el valor especificado.<br/>Aumentar este valor puede mejorar la tasa de recuperación a costa de aumentar el tiempo de búsqueda.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Número máximo de buckets que no devuelven ningún resultado de búsqueda.<br/>Este es un parámetro de búsqueda por rango y termina el proceso de búsqueda cuando el número de buckets vacíos consecutivos alcanza el valor especificado.<br/>Aumentar este valor puede mejorar la tasa de recuperación a costa de aumentar el tiempo de búsqueda.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
 <h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Cuantización de productos) descompone uniformemente el espacio vectorial original de alta dimensión en productos cartesianos de <code translate="no">m</code> espacios vectoriales de baja dimensión y, a continuación, cuantiza los espacios vectoriales de baja dimensión descompuestos. En lugar de calcular las distancias entre el vector objetivo y el centro de todas las unidades, la cuantización de productos permite calcular las distancias entre el vector objetivo y el centro de agrupación de cada espacio de baja dimensión y reduce en gran medida la complejidad temporal y espacial del algoritmo.</p>
-<p>IVF_PQ realiza la agrupación de índices IVF antes de cuantificar el producto de vectores. Su archivo de índices es aún más pequeño que IVF_SQ8, pero también provoca una pérdida de precisión durante la búsqueda de vectores.</p>
+<p>IVF_PQ realiza la agrupación de índices IVF antes de cuantificar el producto de vectores. Su archivo de índices es incluso más pequeño que IVF_SQ8, pero también provoca una pérdida de precisión durante la búsqueda de vectores.</p>
 <div class="alert note">
 <p>Los parámetros de construcción del índice y los parámetros de búsqueda varían según la distribución Milvus. Seleccione primero su distribución de Milvus.</p>
 </div>
@@ -404,13 +404,13 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <tr><th>Parámetro</th><th>Descripción</th><th>Gama</th><th>Valor por defecto</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Número máximo de buckets que no devuelven ningún resultado de búsqueda.<br/>Este es un parámetro de búsqueda por rango y termina el proceso de búsqueda cuando el número de buckets vacíos consecutivos alcanza el valor especificado.<br/>Aumentar este valor puede mejorar la tasa de recuperación a costa de aumentar el tiempo de búsqueda.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Número máximo de cubos que no devuelven ningún resultado de búsqueda.<br/>Este es un parámetro de búsqueda por rango y termina el proceso de búsqueda cuando el número de cubos vacíos consecutivos alcanza el valor especificado.<br/>Aumentar este valor puede mejorar la tasa de recuperación a costa de aumentar el tiempo de búsqueda.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) es un algoritmo de indexación basado en grafos. Construye una estructura de navegación multicapa para una imagen de acuerdo con ciertas reglas. En esta estructura, las capas superiores son más dispersas y las distancias entre nodos son más lejanas; las capas inferiores son más densas y las distancias entre nodos son más cercanas. La búsqueda parte de la capa superior, encuentra el nodo más cercano al objetivo en esta capa y, a continuación, entra en la capa siguiente para iniciar otra búsqueda. Tras varias iteraciones, puede acercarse rápidamente a la posición del objetivo.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) es un algoritmo de indexación basado en grafos. Construye una estructura de navegación multicapa para una imagen de acuerdo con ciertas reglas. En esta estructura, las capas superiores son más dispersas y las distancias entre nodos son más lejanas; las capas inferiores son más densas y las distancias entre nodos son más cercanas. La búsqueda comienza en la capa superior, encuentra el nodo más cercano al objetivo en esta capa y, a continuación, entra en la capa siguiente para comenzar otra búsqueda. Tras varias iteraciones, puede acercarse rápidamente a la posición del objetivo.</p>
 <p>Para mejorar el rendimiento, HNSW limita el grado máximo de los nodos en cada capa del gráfico a <code translate="no">M</code>. Además, puede utilizar <code translate="no">efConstruction</code> (al construir el índice) o <code translate="no">ef</code> (al buscar objetivos) para especificar un rango de búsqueda.</p>
 <ul>
 <li><p>Parámetros de creación de índices</p>
@@ -435,7 +435,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </table>
 </li>
 </ul>
-<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>La cuantificación escalar (SQ) es una técnica utilizada para discretizar datos de coma flotante en un conjunto finito de valores basados en su magnitud. Por ejemplo, <strong>SQ6</strong> representa la cuantización en (2^6 = 64) valores discretos, donde cada número de punto flotante se codifica utilizando 6 bits. Del mismo modo, <strong>SQ8</strong> cuantiza los datos en (2^8 = 256) valores discretos, donde cada número de coma flotante se representa con 8 bits. Esta cuantización reduce la huella de memoria al tiempo que preserva la estructura esencial de los datos para un procesamiento eficiente.</p>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>La cuantización escalar (SQ) es una técnica utilizada para discretizar datos de coma flotante en un conjunto finito de valores basados en su magnitud. Por ejemplo, <strong>SQ6</strong> representa la cuantización en (2^6 = 64) valores discretos, donde cada número de punto flotante se codifica utilizando 6 bits. Del mismo modo, <strong>SQ8</strong> cuantiza los datos en (2^8 = 256) valores discretos, donde cada número de coma flotante se representa con 8 bits. Esta cuantización reduce la huella de memoria al tiempo que preserva la estructura esencial de los datos para un procesamiento eficiente.</p>
 <p>Combinado con SQ, HNSW_SQ ofrece un equilibrio controlable entre el tamaño del índice y la precisión, manteniendo un alto rendimiento de consulta por segundo (QPS). En comparación con el HNSW estándar, supone un modesto aumento del tiempo de construcción del índice.</p>
 <ul>
 <li><p>Parámetros de construcción de índices</p>
@@ -529,7 +529,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <div class="filter-binary">
 <h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>Este índice es exactamente igual que FLAT, salvo que sólo puede utilizarse para incrustaciones binarias.</p>
 <p>Para aplicaciones de búsqueda de similitud vectorial que requieran una precisión perfecta y dependan de conjuntos de datos relativamente pequeños (a escala de millones), el índice BIN_FLAT es una buena elección. BIN_FLAT no comprime los vectores y es el único índice que puede garantizar resultados de búsqueda exactos. Los resultados de BIN_FLAT también pueden utilizarse como punto de comparación para los resultados producidos por otros índices que tienen menos del 100% de recuperación.</p>
-<p>BIN_FLAT es preciso porque adopta un enfoque exhaustivo de la búsqueda, lo que significa que para cada consulta la entrada objetivo se compara con vectores de un conjunto de datos. Esto hace que BIN_FLAT sea el índice más lento de nuestra lista y poco adecuado para consultar datos vectoriales masivos. No hay parámetros para el índice BIN_FLAT en Milvus y su uso no requiere entrenamiento de datos ni almacenamiento adicional.</p>
+<p>BIN_FLAT es preciso porque adopta un enfoque exhaustivo de la búsqueda, lo que significa que para cada consulta la entrada objetivo se compara con vectores de un conjunto de datos. Esto hace que BIN_FLAT sea el índice más lento de nuestra lista y poco adecuado para consultar datos vectoriales masivos. No hay parámetros para el índice BIN_FLAT en Milvus, y su uso no requiere entrenamiento de datos ni almacenamiento adicional.</p>
 <ul>
 <li><p>Parámetros de búsqueda</p>
 <table>
@@ -592,6 +592,8 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </thead>
 <tbody>
 <tr><td><code translate="no">inverted_index_algo</code></td><td>El algoritmo utilizado para construir y consultar el índice. Para más detalles, consulte <a href="/docs/es/sparse_vector.md#Set-index-params-for-vector-field">Vector disperso</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (por defecto), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">bm25_k1</code></td><td>Controla la saturación de la frecuencia de términos. Los valores más altos aumentan la importancia de las frecuencias de términos en la clasificación de documentos.</td><td>[1.2, 2.0]</td></tr>
+<tr><td><code translate="no">bm25_b</code></td><td>Controla el grado de normalización de la longitud del documento. El valor predeterminado es 0,75.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
   <div class="alert note">

@@ -21,7 +21,7 @@ title: Model2Vec
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Model2Vec adalah teknik penyematan ringan dan berkinerja tinggi yang mengubah model Sentence Transformer menjadi model statis yang ringkas. Teknik ini mengurangi ukuran model hingga 50x dan mempercepat inferensi hingga 500x, dengan penurunan performa yang minimal. Model2Vec sangat ideal ketika Anda memiliki perangkat dengan sumber daya terbatas.</p>
+    </button></h1><p><a href="https://github.com/MinishLab/model2vec">Model2Vec</a> adalah teknik penyematan ringan dan berkinerja tinggi yang mengubah model Sentence Transformer menjadi model statis yang ringkas. Teknik ini mengurangi ukuran model hingga 50x dan mempercepat inferensi hingga 500x, dengan penurunan performa yang minimal. Model2Vec sangat ideal ketika Anda memiliki perangkat dengan sumber daya terbatas.</p>
 <p>Milvus terintegrasi dengan model-model Model2Vec melalui kelas <strong>Model2VecEmbeddingFunction</strong>. Kelas ini menyediakan metode untuk menyandikan dokumen dan kueri menggunakan model Model2Vec yang telah dilatih sebelumnya dan mengembalikan sematan sebagai vektor padat yang kompatibel dengan pengindeksan Milvus.</p>
 <p>Kelas ini mendukung pemuatan model dari Hugging Face Hub dan pengunggahan model Model2Vec lokal, yang menawarkan fleksibilitas untuk digunakan di berbagai lingkungan.</p>
 <p>Untuk menggunakan fitur ini, instal dependensi yang diperlukan:</p>

@@ -87,9 +87,15 @@ title: Mengindeks Bidang Vektor
     <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
   </tr>
 </tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
+    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
+  </tr>
+</tbody>
 </table>
 <div class="alert note">
-<p>Sejak Milvus 2.5.4 dan seterusnya, <code translate="no">SPARSE_WAND</code> tidak digunakan lagi. Sebagai gantinya, disarankan untuk menggunakan <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> untuk kesetaraan dengan tetap menjaga kompatibilitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md#Set-index-params-for-vector-field">Vektor</a> Jarang.</p>
+<p>Sejak Milvus 2.5.4 dan seterusnya, <code translate="no">SPARSE_WAND</code> sudah tidak digunakan lagi. Sebagai gantinya, disarankan untuk menggunakan <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> untuk kesetaraan sambil mempertahankan kompatibilitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md#Set-index-params-for-vector-field">Vektor</a> Jarang.</p>
 </div>
 </div>
 <p>Direkomendasikan untuk membuat indeks untuk bidang vektor dan bidang skalar yang sering diakses.</p>
@@ -429,7 +435,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Untuk memeriksa rincian indeks, gunakan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> untuk membuat daftar nama indeks dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md"><code translate="no">describe_index()</code></a> untuk mendapatkan rincian indeks.</p>
 </div>
 <div class="language-java">
-<p>Untuk memeriksa detail indeks, gunakan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> untuk mendapatkan detail indeks.</p>
+<p>Untuk memeriksa detail indeks, gunakan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> untuk mendapatkan rincian indeks.</p>
 </div>
 <div class="language-javascript">
 <p>Untuk memeriksa detail indeks, gunakan <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> untuk mendapatkan detail indeks.</p>

@@ -82,6 +82,12 @@ title: ベクトルフィールドのインデックス
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
+    <td class="tg-0pky">スパース・インバーテッド・インデックス</td>
+  </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td class="tg-0pky">BM25</td>
     <td class="tg-0pky">sparse_inverted_index</td>
   </tr>
 </tbody>

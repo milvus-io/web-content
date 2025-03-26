@@ -435,7 +435,7 @@ title: 記憶體索引
 </table>
 </li>
 </ul>
-<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>標量量化 (Scalar Quantization, SQ) 是一種技術，用來根據浮點資料的大小，將其離散成一組有限的數值。例如，<strong>SQ6</strong>表示量化為 (2^6 = 64) 個離散數值，其中每個浮點數使用 6 位元編碼。同樣地，<strong>SQ8</strong>將資料量化為 (2^8 = 256) 個離散值，其中每個浮點數使用 8 位元表示。這種量化方式可減少記憶體佔用量，同時保留資料的基本結構，以提高處理效率。</p>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>標量量化 (Scalar Quantization, SQ) 是一種技術，用來根據浮點資料的大小，將其離散成一組有限的數值。例如，<strong>SQ6</strong>表示量化為 (2^6 = 64) 個離散數值，其中每個浮點數使用 6 位元編碼。同樣地，<strong>SQ8</strong>將資料量化為 (2^8 = 256) 個離散數值，其中每個浮點數使用 8 位元表示。這種量化方式可減少記憶體佔用量，同時保留資料的基本結構，以提高處理效率。</p>
 <p>結合 SQ，HNSW_SQ 在索引大小與精確度之間提供了可控制的權衡，同時維持每秒高查詢 (QPS) 的效能。與標準的 HNSW 相比，它會導致索引建置時間的適度增加。</p>
 <ul>
 <li><p>索引建置參數</p>
@@ -464,7 +464,7 @@ title: 記憶體索引
 </table>
 </li>
 </ul>
-<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>PQ 的基本概念是將向量分割成<code translate="no">m</code> 個子向量，每個子向量會根據 kmeans 找到<em>2^{nbits}</em> 的 centroids，每個子向量會選擇最接近的 centroids 作為它的近似子向量。然後，我們記錄所有的中心點，因此每個子向量可編碼為<code translate="no">nbits</code> ，而長度為<code translate="no">dim</code> 的浮動向量可編碼為<em>m ⋅ nbits</em>位元。</p>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>PQ 的基本概念是將向量分割成<code translate="no">m</code> 個子向量，每個子向量會根據 kmeans 找到<em>2^{nbits}</em> 的 centroids，每個子向量會選擇最接近的 centroids 作為它的近似子向量。然後，我們記錄所有的中心點，因此每個子向量可以編碼為<code translate="no">nbits</code> ，而長度為<code translate="no">dim</code> 的浮動向量可以編碼為<em>m ⋅ nbits</em>位元。</p>
 <p>結合 PQ，HNSW_PQ 在索引大小與精確度之間提供了可控制的折衷，但在相同的壓縮率下，它的 QPS 值比 HNSW_SQ 低，召回率也比 HNSW_SQ 高。與 HNSW_SQ 相比，它需要更長的時間來建立索引。</p>
 <ul>
 <li><p>索引建立參數</p>
@@ -592,6 +592,8 @@ title: 記憶體索引
 </thead>
 <tbody>
 <tr><td><code translate="no">inverted_index_algo</code></td><td>用於建立和查詢索引的演算法。如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (預設值)， 、<code translate="no">DAAT_WAND</code> <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">bm25_k1</code></td><td>控制詞彙頻率飽和度。較高的值會增加術語頻率在文件排序中的重要性。</td><td>[1.2, 2.0]</td></tr>
+<tr><td><code translate="no">bm25_b</code></td><td>控制文件長度規範化的程度。預設為 0.75。</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
   <div class="alert note">

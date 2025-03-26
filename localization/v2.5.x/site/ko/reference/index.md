@@ -363,7 +363,7 @@ title: 인메모리 인덱스
 <tr><th>파라미터</th><th>설명</th><th>범위</th><th>기본값</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>검색 결과를 반환하지 않는 최대 버킷 수.<br/>이 값은 범위 검색 매개변수이며 연속된 빈 버킷 수가 지정된 값에 도달하는 동안 검색 프로세스를 종료합니다.<br/>이 값을 늘리면 검색 시간이 증가하는 대신 회수율이 향상될 수 있습니다.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>검색 결과를 반환하지 않는 최대 버킷 수.<br/>이 값은 범위 검색 매개변수이며 연속된 빈 버킷 수가 지정된 값에 도달하는 동안 검색 프로세스를 종료합니다.<br/>이 값을 늘리면 검색 시간이 증가하는 대신 리콜률을 향상시킬 수 있습니다.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -543,7 +543,7 @@ title: 인메모리 인덱스
 </li>
 </ul>
 <h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>이 인덱스는 이진 임베딩에만 사용할 수 있다는 점을 제외하면 IVF_FLAT과 완전히 동일합니다.</p>
-<p>BIN_IVF_FLAT은 벡터 데이터를 <code translate="no">nlist</code> 클러스터 단위로 나눈 다음, 대상 입력 벡터와 각 클러스터의 중심 사이의 거리를 비교합니다. 시스템이 쿼리하도록 설정된 클러스터 수에 따라(<code translate="no">nprobe</code>), 유사도 검색 결과는 대상 입력과 가장 유사한 클러스터의 벡터 간의 비교만을 기반으로 반환되므로 쿼리 시간이 대폭 단축됩니다.</p>
+<p>BIN_IVF_FLAT은 벡터 데이터를 <code translate="no">nlist</code> 클러스터 단위로 나눈 다음, 대상 입력 벡터와 각 클러스터의 중심 사이의 거리를 비교합니다. 시스템이 쿼리하도록 설정된 클러스터 수에 따라(<code translate="no">nprobe</code>), 유사도 검색 결과는 대상 입력과 가장 유사한 클러스터에 있는 벡터 간의 비교만을 기반으로 반환되므로 쿼리 시간이 대폭 단축됩니다.</p>
 <p><code translate="no">nprobe</code> 을 조정하면 주어진 시나리오에서 정확도와 속도 사이의 이상적인 균형을 찾을 수 있습니다. 쿼리 시간은 대상 입력 벡터의 수(<code translate="no">nq</code>)와 검색할 클러스터의 수(<code translate="no">nprobe</code>)가 모두 증가함에 따라 급격히 증가합니다.</p>
 <p>BIN_IVF_FLAT은 가장 기본적인 BIN_IVF 인덱스이며, 각 유닛에 저장된 인코딩된 데이터는 원본 데이터와 일치합니다.</p>
 <ul>
@@ -592,6 +592,8 @@ title: 인메모리 인덱스
 </thead>
 <tbody>
 <tr><td><code translate="no">inverted_index_algo</code></td><td>인덱스 구축 및 쿼리에 사용되는 알고리즘입니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md#Set-index-params-for-vector-field">스파스 벡터를</a> 참조하세요.</td><td><code translate="no">DAAT_MAXSCORE</code> (기본값), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">bm25_k1</code></td><td>용어 빈도 포화도를 제어합니다. 값이 클수록 문서 순위에서 용어 빈도의 중요도가 높아집니다.</td><td>[1.2, 2.0]</td></tr>
+<tr><td><code translate="no">bm25_b</code></td><td>문서 길이가 정규화되는 정도를 제어합니다. 기본값은 0.75입니다.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
   <div class="alert note">
@@ -604,7 +606,7 @@ title: 인메모리 인덱스
 <tr><th>파라미터</th><th>설명</th><th>범위</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>검색 과정에서 제외되는 작은 벡터 값의 비율입니다. 이 옵션을 사용하면 쿼리 벡터에서 무시할 가장 작은 값의 비율을 지정하여 검색 프로세스를 미세 조정할 수 있습니다. 검색 정확도와 성능의 균형을 맞추는 데 도움이 됩니다. <code translate="no">drop_ratio_search</code> 에 설정된 값이 작을수록 최종 점수에 기여하는 작은 값이 줄어듭니다. 일부 작은 값을 무시하면 정확도에 미치는 영향을 최소화하면서 검색 성능을 향상시킬 수 있습니다.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>검색 과정에서 제외되는 작은 벡터 값의 비율입니다. 이 옵션을 사용하면 쿼리 벡터에서 무시할 가장 작은 값의 비율을 지정하여 검색 프로세스를 미세 조정할 수 있습니다. 검색 정확도와 성능의 균형을 맞추는 데 도움이 됩니다. <code translate="no">drop_ratio_search</code> 에 설정된 값이 작을수록 최종 점수에 기여하는 작은 값이 줄어듭니다. 일부 작은 값을 무시하면 정확도에 미치는 영향을 최소화하면서 검색 성능을 개선할 수 있습니다.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

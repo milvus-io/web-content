@@ -19,6 +19,67 @@ title: Note di rilascio
         ></path>
       </svg>
     </button></h1><p>Scoprite le novità di Milvus! Questa pagina riassume le nuove funzionalità, i miglioramenti, i problemi noti e le correzioni di bug di ogni versione. In questa sezione è possibile trovare le note di rilascio per ogni versione successiva alla v2.5.0. Si consiglia di visitare regolarmente questa pagina per conoscere gli aggiornamenti.</p>
+<h2 id="v257" class="common-anchor-header">v2.5.7<button data-href="#v257" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Data di rilascio: 21 marzo 2025</p>
+<table>
+<thead>
+<tr><th>Versione di Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Node.js</th><th>Versione SDK Java</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.7</td><td>2.5.6</td><td>2.5.6</td><td>2.5.6</td></tr>
+</tbody>
+</table>
+<p>Siamo lieti di annunciare il rilascio di Milvus 2.5.7, caratterizzato dalla nuova funzione JSON Path Index. Questa funzione consente di creare indici invertiti su colonne dinamiche o JSON per migliorare significativamente le prestazioni delle query. Oltre a questa nuova funzionalità, sono stati apportati numerosi miglioramenti e correzioni di bug per migliorare l'affidabilità, la gestione degli errori e l'usabilità. Vi invitiamo a fare l'aggiornamento o a provarlo e, come sempre, il vostro feedback è molto apprezzato per continuare a migliorare Milvus!</p>
+<h3 id="Features" class="common-anchor-header">Caratteristiche</h3><ul>
+<li><strong>Indice dei percorsi JSON</strong>: Per rispondere alle esigenze degli utenti di schemi dinamici, Milvus 2.5.7 introduce la possibilità di costruire indici su colonne dinamiche e colonne JSON. Con questa funzione, è possibile creare indici invertiti per specifiche colonne dinamiche o percorsi JSON, aggirando di fatto il lento processo di caricamento JSON e migliorando notevolmente le prestazioni delle query. Per ulteriori informazioni, consultare <a href="/docs/it/use-json-fields.md">Campo JSON</a>.</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
+<li>Riordino delle sottoespressioni per le espressioni congiunte<a href="https://github.com/milvus-io/milvus/pull/40186">(#40186</a>)</li>
+<li>Aggiunta di altre opzioni di configurazione per <code translate="no">interimindex</code> per supportare modalità raffinate<a href="https://github.com/milvus-io/milvus/pull/40429">(#40429</a>)</li>
+<li>Utilizzare le metriche corrette dei contatori per il calcolo della WA complessiva<a href="https://github.com/milvus-io/milvus/pull/40679">(#40679</a>)</li>
+<li>Rendere aggiornabile la configurazione del segmento prune (<a href="https://github.com/milvus-io/milvus/pull/40632">#40632</a>)</li>
+<li>Aggiungere una politica di tenuta del canale basata sul blocco di L0<a href="https://github.com/milvus-io/milvus/pull/40535">(#40535</a>)</li>
+<li>Raffinare i metadati dei task con il blocco a livello di chiave (<a href="https://github.com/milvus-io/milvus/pull/40353">#40353</a>)</li>
+<li>Rimuovere le etichette di raccolta e partizione non necessarie dalle metriche<a href="https://github.com/milvus-io/milvus/pull/40593">(#40593</a>)</li>
+<li>Migliorare i messaggi di errore di importazione (<a href="https://github.com/milvus-io/milvus/pull/40597">#40597</a>)</li>
+<li>Evitare di convertire le fette di byte del corpo in stringhe in <code translate="no">httpserver</code> <a href="https://github.com/milvus-io/milvus/pull/40414">(#40414</a>)</li>
+<li>Registrare la posizione iniziale dei messaggi di cancellazione<a href="https://github.com/milvus-io/milvus/pull/40678">(#40678</a>)</li>
+<li>Supportare il recupero dei binlog dei segmenti con la nuova interfaccia <code translate="no">GetSegmentsInfo</code> <a href="https://github.com/milvus-io/milvus/pull/40466">(#40466</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
+<li>Utilizzare <code translate="no">newInsertDataWithFunctionOutputField</code> quando si importano file binlog<a href="https://github.com/milvus-io/milvus/pull/40742">(#40742</a>)</li>
+<li>Corretto un problema per cui le proprietà mmap non venivano applicate quando si creava una raccolta<a href="https://github.com/milvus-io/milvus/pull/40515">(#40515</a>)</li>
+<li>Non cancellare il file dei centroidi quando il campionamento fallisce; attendere invece il GC<a href="https://github.com/milvus-io/milvus/pull/40702">(#40702</a>)</li>
+<li>Corretti i problemi di perdita di messaggi durante la ricerca (<a href="https://github.com/milvus-io/milvus/pull/40736">#40736</a>)</li>
+<li>Rimossi gli obiettivi di ritardo dopo il dispatcher principale<a href="https://github.com/milvus-io/milvus/pull/40717">(#40717</a>)</li>
+<li>Aggiunto l'input clear bitmap per ogni ciclo batch (<a href="https://github.com/milvus-io/milvus/pull/40722">#40722</a>)</li>
+<li>Protetto <code translate="no">GetSegmentIndexes</code> con un RLock (<a href="https://github.com/milvus-io/milvus/pull/40720">#40720</a>)</li>
+<li>Evitati errori di segmentazione causati dal recupero di set di dati vettoriali vuoti<a href="https://github.com/milvus-io/milvus/pull/40546">(#40546</a>)</li>
+<li>Corretto il filtro "not-equal" degli indici JSON<a href="https://github.com/milvus-io/milvus/pull/40648">(#40648</a>)</li>
+<li>Corretto il caricamento di offset nulli nell'indice invertito<a href="https://github.com/milvus-io/milvus/pull/40524">(#40524</a>)</li>
+<li>Corretta la logica di garbage cleanup di <code translate="no">jsonKey</code> stats e migliorato il filtro JSON key stats (<a href="https://github.com/milvus-io/milvus/pull/40039">#40039</a>)</li>
+<li>Individuati gli errori di puntatori JSON non validi<a href="https://github.com/milvus-io/milvus/pull/40626">(#40626</a>)</li>
+<li>Il privilegio RBAC a stella ora restituisce il vuoto quando si elencano le politiche<a href="https://github.com/milvus-io/milvus/pull/40557">(#40557</a>)</li>
+<li>Evitato il panico quando un campo non esiste nello schema in QueryNode<a href="https://github.com/milvus-io/milvus/pull/40542">(#40542</a>)</li>
+<li>Corretto un problema di raccolta di riferimenti per la ricerca/query<a href="https://github.com/milvus-io/milvus/pull/40550">(#40550</a>)</li>
+<li>Gestite le righe vuote per i vettori sparsi<a href="https://github.com/milvus-io/milvus/pull/40586">(#40586</a>)</li>
+<li>Aggiunto un controllo dei parametri tipo/indice duplicati durante la creazione di collezioni<a href="https://github.com/milvus-io/milvus/pull/40465">(#40465</a>)</li>
+<li>Spostato <code translate="no">metaHeader</code> sul client per evitare le corse ai dati (<a href="https://github.com/milvus-io/milvus/pull/40444">#40444</a>).</li>
+</ul>
 <h2 id="v256" class="common-anchor-header">v2.5.6<button data-href="#v256" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -435,8 +496,8 @@ title: Note di rilascio
 <li><strong>Cursore persistente</strong>: Milvus supporta ora un cursore persistente per QueryIterator, consentendo agli utenti di riprendere l'iterazione dall'ultima posizione dopo un riavvio di Milvus senza dover riavviare l'intero processo di iterazione.</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><h4 id="Deletion-Optimization" class="common-anchor-header">Ottimizzazione della cancellazione</h4><p>Migliorata la velocità e ridotto l'uso della memoria per le cancellazioni su larga scala, ottimizzando l'uso dei blocchi e la gestione della memoria.</p>
-<h4 id="Dependencies-Upgrade" class="common-anchor-header">Aggiornamento delle dipendenze</h4><p>Aggiornamento a ETCD 3.5.16 e Pulsar 3.0.7 LTS, con correzione delle CVE esistenti e miglioramento della sicurezza. Nota: l'aggiornamento a Pulsar 3.x non è compatibile con le precedenti versioni 2.x.</p>
-<p>Per gli utenti che hanno già una distribuzione Milvus funzionante, è necessario aggiornare i componenti ETCD e Pulsar prima di poter utilizzare le nuove caratteristiche e funzioni. Per i dettagli, consultare <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar da 2.x a 3.x</a>.</p>
+<h4 id="Dependencies-Upgrade" class="common-anchor-header">Aggiornamento delle dipendenze</h4><p>Aggiornamento a ETCD 3.5.16 e Pulsar 3.0.7 LTS, con correzione delle CVE esistenti e miglioramento della sicurezza. Nota: L'aggiornamento a Pulsar 3.x non è compatibile con le precedenti versioni 2.x.</p>
+<p>Per gli utenti che hanno già una distribuzione Milvus funzionante, è necessario aggiornare i componenti ETCD e Pulsar prima di poter utilizzare le nuove caratteristiche e funzioni. Per ulteriori informazioni, consultare <a href="/docs/it/upgrade-pulsar-v3.md">Aggiornamento di Pulsar da 2.x a 3.x</a>.</p>
 <h4 id="Local-Storage-V2" class="common-anchor-header">Archiviazione locale V2</h4><p>Introdotto un nuovo formato di file locale in Milvus 2.5, che migliora l'efficienza del caricamento e delle query per i dati scalari, riduce l'overhead della memoria e getta le basi per le ottimizzazioni future.</p>
 <h4 id="Expression-Parsing-Optimization" class="common-anchor-header">Ottimizzazione del parsing delle espressioni</h4><p>Migliorato il parsing delle espressioni implementando la cache per le espressioni ripetute, aggiornando ANTLR e ottimizzando le prestazioni delle clausole <code translate="no">NOT IN</code>.</p>
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">Miglioramento delle prestazioni di concomitanza del DDL</h4><p>Ottimizzate le prestazioni di concorrenza delle operazioni del Data Definition Language (DDL).</p>

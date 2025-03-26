@@ -2,9 +2,9 @@
 id: index.md
 related_key: index
 summary: Meccanismo di indicizzazione a Milvus.
-title: Indice in-memory
+title: Indice in memoria
 ---
-<h1 id="In-memory-Index" class="common-anchor-header">Indice in-memory<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
+<h1 id="In-memory-Index" class="common-anchor-header">Indice in memoria<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,8 +60,8 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 <div class="filter">
  <a href="#floating">Incorporazioni in virgola mobile</a> <a href="#binary">Incorporazioni binarie</a> <a href="#sparse">Incorporazioni rade</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indici per le incorporazioni in virgola mobile</h3><p>Per le incorporazioni in virgola mobile a 128 dimensioni (vettori), la memoria occupata è 128 * la dimensione del float = 512 byte. Le <a href="/docs/it/metric.md">metriche di distanza</a> utilizzate per le incorporazioni in virgola mobile sono la distanza euclidea (<code translate="no">L2</code>) e il prodotto interno (<code translate="no">IP</code>).</p>
-<p>Questi tipi di indici includono <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, e <code translate="no">SCANN</code> per le ricerche di RNA basate su CPU.</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indici per le incorporazioni in virgola mobile</h3><p>Per le incorporazioni in virgola mobile (vettori) a 128 dimensioni, la memoria occupata è 128 * la dimensione del float = 512 byte. Le <a href="/docs/it/metric.md">metriche di distanza</a> utilizzate per le incorporazioni in virgola mobile sono la distanza euclidea (<code translate="no">L2</code>) e il prodotto interno (<code translate="no">IP</code>).</p>
+<p>Questi tipi di indici includono <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code> e <code translate="no">SCANN</code> per le ricerche di RNA basate su CPU.</p>
 </div>
 <div class="filter-binary">
 <h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indici per le incorporazioni binarie</h3><p>Per le incorporazioni binarie a 128 dimensioni, la memoria che occupano è 128 / 8 = 16 byte. Le metriche di distanza utilizzate per le incorporazioni binarie sono <code translate="no">JACCARD</code> e <code translate="no">HAMMING</code>.</p>
@@ -436,7 +436,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 </li>
 </ul>
 <h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>La quantizzazione scalare (SQ) è una tecnica utilizzata per discretizzare i dati in virgola mobile in un insieme finito di valori in base alla loro grandezza. Ad esempio, <strong>SQ6</strong> rappresenta la quantizzazione in (2^6 = 64) valori discreti, dove ogni numero in virgola mobile è codificato con 6 bit. Analogamente, <strong>SQ8</strong> quantizza i dati in (2^8 = 256) valori discreti, con ogni numero in virgola mobile rappresentato da 8 bit. Questa quantizzazione riduce l'ingombro in memoria, preservando la struttura essenziale dei dati per un'elaborazione efficiente.</p>
-<p>In combinazione con SQ, HNSW_SQ offre un compromesso controllabile tra dimensione dell'indice e precisione, mantenendo elevate prestazioni di query al secondo (QPS). Rispetto a HNSW standard, il tempo di costruzione dell'indice aumenta in modo modesto.</p>
+<p>In combinazione con SQ, HNSW_SQ offre un compromesso controllabile tra dimensione dell'indice e precisione, mantenendo elevate prestazioni di query al secondo (QPS). Rispetto a HNSW standard, si ottiene un modesto aumento del tempo di costruzione dell'indice.</p>
 <ul>
 <li><p>Parametri di costruzione dell'indice</p>
 <table>
@@ -444,7 +444,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 <tr><th>Parametro</th><th>Descrizione</th><th>Intervallo</th><th>Valore predefinito</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M definisce il numero massimo di connessioni in uscita nel grafico. Un numero più alto di M porta a una maggiore precisione/tempo di esecuzione a un valore fisso di ef/efConstruction.</td><td>[2, 2048]</td><td>Nessuno</td></tr>
+<tr><td><code translate="no">M</code></td><td>M definisce il numero massimo di connessioni in uscita nel grafico. Un numero più alto di M porta a una maggiore precisione/tempo di esecuzione a ef/efCostruzione fissa.</td><td>[2, 2048]</td><td>Nessuno</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction controlla il compromesso tra velocità di ricerca dell'indice e velocità di costruzione. L'aumento del parametro efConstruction può migliorare la qualità dell'indice, ma tende anche ad allungare i tempi di indicizzazione.</td><td>[1, int_max]</td><td>Nessuno</td></tr>
 <tr><td><code translate="no">sq_type</code></td><td>Tipo di quantizzatore scalare.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
 <tr><td><code translate="no">refine</code></td><td>Se i dati raffinati sono riservati durante la costruzione dell'indice.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
@@ -494,7 +494,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 </table>
 </li>
 </ul>
-<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ è simile a PQ e divide anche il vettore in gruppi <code translate="no">m</code>. Ogni sottovettore sarà codificato come <code translate="no">nbits</code>. Dopo aver completato una quantizzazione pq, calcola il residuo tra il vettore e il vettore quantizzato pq e applica la quantizzazione pq al vettore residuo. Verranno eseguite in totale <code translate="no">nrq</code> quantizzazioni pq complete, quindi un vettore fluttuante di lunghezza <code translate="no">dim</code> sarà codificato come <em>m ⋅ nbits ⋅ nrq</em> bit.</p>
+<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ è simile a PQ e divide il vettore in <code translate="no">m</code> gruppi. Ogni sottovettore sarà codificato come <code translate="no">nbits</code>. Dopo aver completato una quantizzazione pq, calcola il residuo tra il vettore e il vettore quantizzato pq e applica la quantizzazione pq al vettore residuo. Verranno eseguite in totale <code translate="no">nrq</code> quantizzazioni pq complete, quindi un vettore fluttuante di lunghezza <code translate="no">dim</code> sarà codificato come <em>m ⋅ nbits ⋅ nrq</em> bit.</p>
 <p>In combinazione con un quantizzatore di prodotto residuo (PRQ), HNSW_PRQ offre un compromesso ancora più controllabile tra dimensione dell'indice e precisione. Ha un valore QPS quasi equivalente e un tasso di richiamo superiore a HNSW_PQ a parità di tasso di compressione. Rispetto a HNSW_PQ, il tempo di costruzione dell'indice può aumentare di diverse volte.</p>
 <ul>
 <li><p>Parametri di costruzione dell'indice</p>
@@ -592,6 +592,8 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 </thead>
 <tbody>
 <tr><td><code translate="no">inverted_index_algo</code></td><td>L'algoritmo usato per costruire e interrogare l'indice. Per i dettagli, fare riferimento a <a href="/docs/it/sparse_vector.md#Set-index-params-for-vector-field">Vettore sparso</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (predefinito), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
+<tr><td><code translate="no">bm25_k1</code></td><td>Controlla la saturazione della frequenza dei termini. Valori più alti aumentano l'importanza delle frequenze dei termini nella classificazione dei documenti.</td><td>[1.2, 2.0]</td></tr>
+<tr><td><code translate="no">bm25_b</code></td><td>Controlla il grado di normalizzazione della lunghezza dei documenti. Il valore predefinito è 0,75.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
   <div class="alert note">
