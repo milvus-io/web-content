@@ -15,6 +15,7 @@ class MilvusDocsGen extends larkDocWriter {
         this.tokenFetcher = new larkTokenFetcher();
         this.alt_texts = alt_texts;
         this.inquirer = inquirer.createPromptModule();
+        this.tokens = [];
     }
 
     async write_docs(parent_title, parent_id=null) {
@@ -481,7 +482,8 @@ class MilvusDocsGen extends larkDocWriter {
     }
 
     async __get_section_titles(document_id) {
-        const blocks = await this.__fetch_doc_blocks(document_id);
+        const document_token = this.records.find(record => record.page_id === document_id)?.page_token;
+        const blocks = await this.__fetch_doc_blocks(document_token);
 
         if (!blocks) return null;
 
@@ -495,12 +497,11 @@ class MilvusDocsGen extends larkDocWriter {
         }))
     }
 
-    async __fetch_doc_blocks(document_id, page_token=null, blocks=[]) {
+    async __fetch_doc_blocks(document_token, page_token=null, blocks=[]) {
         const token = await this.tokenFetcher.token()
-        var document_token = document_id
 
         if (this.sourceType === "wiki") {
-            document_token = await this.__convert_wiki_token(document_id)
+            document_token = await this.__convert_wiki_token(document_token)
         }
 
         let url = `${process.env.FEISHU_HOST}/open-apis/docx/v1/documents/${document_token}/blocks` + (page_token? `?page_token=${page_token}` : "")
@@ -533,25 +534,36 @@ class MilvusDocsGen extends larkDocWriter {
     }
 
     async __convert_wiki_token(page_token) {
-        const token = await this.tokenFetcher.token()
-        let url = `${process.env.FEISHU_HOST}/open-apis/wiki/v2/spaces/get_node?token=${page_token}`
-        let response = await fetch(url, {
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-                'Authorization': `Bearer ${token}`
+        let obj_token = this.tokens.find(token => token.wiki === page_token)?.obj;
+
+        if (!obj_token) {
+            const token = await this.tokenFetcher.token()
+            let url = `${process.env.FEISHU_HOST}/open-apis/wiki/v2/spaces/get_node?token=${page_token}`
+            let response = await fetch(url, {
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+    
+            let status = response.status;
+            let headers = response.headers;
+            response = await response.json();
+    
+            if (response.code === 0) {
+                this.tokens.push({
+                    wiki: page_token,
+                    obj: response.data.node.obj_token
+                });
+    
+                return response.data.node.obj_token;
+            } else if (status === 429) {
+                const timeout = headers['x-ogw-ratelimit-reset']
+                await this.__wait(timeout * 1000)
+                return await this.__convert_wiki_token(page_token)
             }
-        });
-
-        let status = response.status;
-        let headers = response.headers;
-        response = await response.json();
-
-        if (response.code === 0) {
-            return response.data.node.obj_token;
-        } else if (status === 429) {
-            const timeout = headers['x-ogw-ratelimit-reset']
-            await this.__wait(timeout * 1000)
-            return await this.__convert_wiki_token(page_token)
+        } else {
+            return obj_token;
         }
     }
 
@@ -604,7 +616,7 @@ class MilvusDocsGen extends larkDocWriter {
         }
 
         // Convert the title to a slug format
-        const slug = matchingSection.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        const slug = matchingSection.title.replace(/\s+/g, '-').replace(/[^A-Za-z0-9-]/g, '');
         return slug;
     }
 

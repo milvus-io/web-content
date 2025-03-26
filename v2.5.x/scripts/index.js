@@ -67,6 +67,7 @@ program
             if (outputPath) {
                // replace imageDir with relative path to output directory
                content = content.replace(new RegExp(`/${imageDir}`, 'g'), path.relative(path.dirname(outputPath), path.resolve(imageDir)))
+               content = content.replaceAll('https://milvus.io/docs/', '')
                fs.writeFileSync(outputPath, [front_matters, content].join('\n\n'));
    
                // update position of current document in menu
@@ -114,8 +115,10 @@ program
             if (outputPath) {
                // replace imageDir with relative path to output directory
                content = content.replace(new RegExp(`/${imageDir}`, 'g'), path.relative(path.dirname(outputPath), path.resolve(imageDir)))
+               content = content.replaceAll('https://milvus.io/docs/', '')
                fs.writeFileSync(outputPath, [front_matters, content].join('\n\n'));
-   
+
+
                // update position of current document in menu
                if (milvusDocsGen.__is_new(page_id)) {
                   milvusDocsGen.__append_doc_to_menu(page_id, position)
