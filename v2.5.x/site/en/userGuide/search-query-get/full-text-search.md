@@ -195,7 +195,7 @@ schema.addFunction(Function.builder()
         .functionType(FunctionType.BM25)
         .name("text_bm25_emb")
         .inputFieldNames(Collections.singletonList("text"))
-        .outputFieldNames(Collections.singletonList("vector"))
+        .outputFieldNames(Collections.singletonList("sparse"))
         .build());
 ```
 
@@ -206,7 +206,7 @@ const functions = [
       description: 'bm25 function',
       type: FunctionType.BM25,
       input_field_names: ['text'],
-      output_field_names: ['vector'],
+      output_field_names: ['sparse'],
       params: {},
     },
 ]；
