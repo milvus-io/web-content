@@ -893,6 +893,12 @@
             "id": "embed-with-mgte.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "Близнецы",
+            "id": "embed-with-gemini.md",
+            "order": 13,
+            "children": []
           }
         ]
       },

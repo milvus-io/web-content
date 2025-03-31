@@ -893,6 +893,12 @@
             "id": "embed-with-mgte.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "雙子座",
+            "id": "embed-with-gemini.md",
+            "order": 13,
+            "children": []
           }
         ]
       },

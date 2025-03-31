@@ -893,6 +893,12 @@
             "id": "embed-with-mgte.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "Gemelli",
+            "id": "embed-with-gemini.md",
+            "order": 13,
+            "children": []
           }
         ]
       },
@@ -2179,7 +2185,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con matrioske embeddings",
+        "label": "Ricerca a imbuto con le matrici Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

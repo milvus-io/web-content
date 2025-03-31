@@ -893,6 +893,12 @@
             "id": "embed-with-mgte.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "الجوزاء",
+            "id": "embed-with-gemini.md",
+            "order": 13,
+            "children": []
           }
         ]
       },
