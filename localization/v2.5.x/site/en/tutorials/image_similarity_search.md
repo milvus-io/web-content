@@ -38,8 +38,8 @@ title: Image Search with Milvus
         ></path>
       </svg>
     </button></h2><p>First, we need to load the dataset and unextract it for further processing.</p>
-<pre><code translate="no" class="language-python">!wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.<span class="hljs-built_in">zip</span>
-!unzip -q -o reverse_image_search.<span class="hljs-built_in">zip</span>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.<span class="hljs-built_in">zip</span>
+$ unzip -q -o reverse_image_search.<span class="hljs-built_in">zip</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Prequisites" class="common-anchor-header">Prequisites<button data-href="#Prequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,7 +66,7 @@ title: Image Search with Milvus
 <li>pillow</li>
 </ul>
 <p>To run Colab, we provide the handy commands to install the necessary dependencies.</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus --upgrade
+<pre><code translate="no" class="language-shell">$ pip install pymilvus --upgrade
 $ pip install timm
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
@@ -236,7 +236,7 @@ display(concatenated_image)
 </code></pre>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/image_search_with_milvus_files/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
+    <img translate="no" src="/docs/v2.5.x/assets/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
     <span>png</span>
   </span>
 </p>
