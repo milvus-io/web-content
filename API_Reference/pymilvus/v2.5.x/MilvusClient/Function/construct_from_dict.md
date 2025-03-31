@@ -41,10 +41,6 @@ function_dict = {
     "input_field_names": ["text"],  
     "output_field_names": ["score"],  
     "description": "BM25 text search function",  
-    "params": {  
-        "bm25_k1": 1.2,  
-        "bm25_b": 0.75  
-    }  
 }  
 
 function = Function.construct_from_dict(function_dict)  
