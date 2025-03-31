@@ -60,8 +60,8 @@ summary: >-
       </svg>
     </button></h2><p>È possibile impostare la proprietà TTL quando si</p>
 <ul>
-<li><p><a href="/docs/it/set-collection-ttl.md#null">Creare un insieme.</a></p></li>
-<li><p><a href="/docs/it/set-collection-ttl.md#null">Modificare la proprietà TTL di un insieme esistente.</a></p></li>
+<li><p><a href="/docs/it/set-collection-ttl.md#Set-TTL-when-creating-a-collection">Creare un insieme.</a></p></li>
+<li><p><a href="/docs/it/set-collection-ttl.md#Set-TTL-for-an-existing-collection">Modificare la proprietà TTL di un insieme esistente.</a></p></li>
 </ul>
 <h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">Impostare il TTL quando si crea un insieme</h3><p>Il seguente frammento di codice mostra come impostare la proprietà TTL quando si crea una collezione.</p>
 <div class="multipleCode">

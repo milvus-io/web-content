@@ -57,8 +57,8 @@ summary: >-
       </svg>
     </button></h2><p>您可以在以下情况下设置 TTL 属性</p>
 <ul>
-<li><p><a href="/docs/zh/set-collection-ttl.md#null">创建一个 Collections。</a></p></li>
-<li><p><a href="/docs/zh/set-collection-ttl.md#null">更改现有 Collections 的 TTL 属性。</a></p></li>
+<li><p><a href="/docs/zh/set-collection-ttl.md#Set-TTL-when-creating-a-collection">创建一个 Collections。</a></p></li>
+<li><p><a href="/docs/zh/set-collection-ttl.md#Set-TTL-for-an-existing-collection">更改现有 Collections 的 TTL 属性。</a></p></li>
 </ul>
 <h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">创建 Collections 时设置 TTL</h3><p>以下代码片段演示了如何在创建 Collection 时设置 TTL 属性。</p>
 <div class="multipleCode">

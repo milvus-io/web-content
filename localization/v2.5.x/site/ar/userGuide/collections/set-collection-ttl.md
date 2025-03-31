@@ -59,8 +59,8 @@ summary: >-
       </svg>
     </button></h2><p>يمكنك تعيين خاصية TTL عندما تقوم بما يلي</p>
 <ul>
-<li><p><a href="/docs/ar/set-collection-ttl.md#null">إنشاء مجموعة.</a></p></li>
-<li><p><a href="/docs/ar/set-collection-ttl.md#null">تغيير خاصية TTL TTL لمجموعة موجودة.</a></p></li>
+<li><p><a href="/docs/ar/set-collection-ttl.md#Set-TTL-when-creating-a-collection">إنشاء مجموعة.</a></p></li>
+<li><p><a href="/docs/ar/set-collection-ttl.md#Set-TTL-for-an-existing-collection">تغيير خاصية TTL TTL لمجموعة موجودة.</a></p></li>
 </ul>
 <h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">تعيين TTL TTL عند إنشاء مجموعة</h3><p>يوضح مقتطف الشيفرة التالي كيفية تعيين خاصية TTL عند إنشاء مجموعة.</p>
 <div class="multipleCode">

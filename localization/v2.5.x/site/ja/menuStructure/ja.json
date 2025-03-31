@@ -1229,9 +1229,15 @@
             "children": []
           },
           {
+            "label": "HPAによるスケール",
+            "id": "hpa.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "規模の依存",
             "id": "scale-dependencies.md",
-            "order": 1,
+            "order": 2,
             "children": []
           }
         ]

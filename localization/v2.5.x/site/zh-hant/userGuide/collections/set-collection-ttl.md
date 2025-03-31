@@ -57,8 +57,8 @@ summary: >-
       </svg>
     </button></h2><p>您可以在以下情況設定 TTL 屬性</p>
 <ul>
-<li><p><a href="/docs/zh-hant/set-collection-ttl.md#null">建立一個集合。</a></p></li>
-<li><p><a href="/docs/zh-hant/set-collection-ttl.md#null">更改現有集合的 TTL 屬性。</a></p></li>
+<li><p><a href="/docs/zh-hant/set-collection-ttl.md#Set-TTL-when-creating-a-collection">建立一個集合。</a></p></li>
+<li><p><a href="/docs/zh-hant/set-collection-ttl.md#Set-TTL-for-an-existing-collection">更改現有集合的 TTL 屬性。</a></p></li>
 </ul>
 <h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">建立集合時設定 TTL</h3><p>以下程式碼片段示範如何在建立集合時設定 TTL 屬性。</p>
 <div class="multipleCode">

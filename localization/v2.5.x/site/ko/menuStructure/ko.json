@@ -1229,9 +1229,15 @@
             "children": []
           },
           {
+            "label": "HPA로 확장",
+            "id": "hpa.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "스케일 종속성",
             "id": "scale-dependencies.md",
-            "order": 1,
+            "order": 2,
             "children": []
           }
         ]

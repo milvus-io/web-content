@@ -1,8 +1,12 @@
 ---
 id: manage_databases.md
-title: Gestire i database
+title: Database
+summary: >-
+  Milvus introduce un livello di database al di sopra delle collezioni, fornendo
+  un modo più efficiente di gestire e organizzare i dati e supportando la
+  multi-tenancy.
 ---
-<h1 id="Manage-Databases" class="common-anchor-header">Gestire i database<button data-href="#Manage-Databases" class="anchor-icon" translate="no">
+<h1 id="Database" class="common-anchor-header">Database<button data-href="#Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,11 +21,8 @@ title: Gestire i database
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Come i motori di database tradizionali, anche in Milvus è possibile creare database e assegnare a determinati utenti i privilegi per gestirli. Tali utenti hanno quindi il diritto di gestire le collezioni nei database. Un cluster Milvus supporta un massimo di 64 database.</p>
-<div class="alert note">
-<p>I frammenti di codice di questa pagina utilizzano il <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">modulo ORM PyMilvus</a> per interagire con Milvus. I frammenti di codice con il nuovo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">SDK MilvusClient</a> saranno presto disponibili.</p>
-</div>
-<h2 id="Create-database" class="common-anchor-header">Creare il database<button data-href="#Create-database" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus introduce un livello di <strong>database</strong> al di sopra delle collezioni, fornendo un modo più efficiente di gestire e organizzare i dati e supportando la multi-tenancy.</p>
+<h2 id="What-is-a-database" class="common-anchor-header">Cos'è un database<button data-href="#What-is-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,64 +37,8 @@ title: Gestire i database
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><div class="language-python">
-<p>Usare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">connect()</a> per connettersi al server Milvus e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/create_database.md">create_database()</a> per creare un nuovo database:</p>
-</div>
-<div class="language-java">
-<p>Usate <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Connections/MilvusClient.md">MilvusClient</a> per connettervi al server Milvus e <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Database/createDatabase.md">createDatabase()</a> per creare un nuovo database:</p>
-</div>
-<div class="language-javascript">
-<p>Utilizzare <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md">MilvusClient</a> per connettersi al server Milvus e <a href="https://milvus.io/api-reference/node/v2.4.x/Database/createDatabase.md">createDatabase()</a> per creare un nuovo database:</p>
-</div>
-<div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, db
-
-conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
-
-database = db.<span class="hljs-title function_">create_database</span>(<span class="hljs-string">&quot;my_database&quot;</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.client.MilvusServiceClient;
-<span class="hljs-keyword">import</span> io.milvus.param.ConnectParam;
-<span class="hljs-keyword">import</span> io.milvus.param.collection.CreateDatabaseParam;
-
-<span class="hljs-comment">// 1. Connect to Milvus server</span>
-<span class="hljs-type">ConnectParam</span> <span class="hljs-variable">connectParam</span> <span class="hljs-operator">=</span> ConnectParam.newBuilder()
-    .withUri(CLUSTER_ENDPOINT)
-    .withToken(TOKEN)
-    .build();
-
-<span class="hljs-type">MilvusServiceClient</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusServiceClient</span>(connectParam);
-
-<span class="hljs-comment">// 3. Create a new database</span>
-<span class="hljs-type">CreateDatabaseParam</span> <span class="hljs-variable">createDatabaseParam</span> <span class="hljs-operator">=</span> CreateDatabaseParam.newBuilder()
-    .withDatabaseName(<span class="hljs-string">&quot;&quot;</span>)
-    .build();
-
-R&lt;RpcStatus&gt; response = client.createDatabase(createDatabaseParam);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
-
-<span class="hljs-comment">// 1. Set up a Milvus Client</span>
-client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ address });
-
-<span class="hljs-comment">// 3. Create a database</span>
-res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createDatabase</span>({
-    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database&quot;</span>,
-});
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
-
-<span class="hljs-comment">// {</span>
-<span class="hljs-comment">//   error_code: &#x27;Success&#x27;,</span>
-<span class="hljs-comment">//   reason: &#x27;&#x27;,</span>
-<span class="hljs-comment">//   code: 0,</span>
-<span class="hljs-comment">//   retriable: false,</span>
-<span class="hljs-comment">//   detail: &#x27;&#x27;</span>
-<span class="hljs-comment">// }</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>I frammenti di codice sopra riportati si collegano al database predefinito e creano un nuovo database chiamato <code translate="no">my_database</code>.</p>
-<h2 id="Use-a-database" class="common-anchor-header">Utilizzare un database<button data-href="#Use-a-database" class="anchor-icon" translate="no">
+    </button></h2><p>In Milvus, un database serve come unità logica per organizzare e gestire i dati. Per migliorare la sicurezza dei dati e ottenere la multi-tenancy, è possibile creare più database per isolare logicamente i dati per applicazioni o tenant diversi. Ad esempio, si crea un database per archiviare i dati dell'utente A e un altro database per l'utente B.</p>
+<h2 id="Create-database" class="common-anchor-header">Creare un database<button data-href="#Create-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,45 +53,115 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un cluster Milvus viene fornito con un database predefinito, denominato "default". Le collezioni vengono create nel database predefinito, a meno che non sia specificato diversamente.</p>
-<p>Per cambiare il database predefinito, procedere come segue:</p>
+    </button></h2><p>È possibile utilizzare l'API RESTful di Milvus o gli SDK per creare i dati in modo programmatico.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python">db.<span class="hljs-title function_">using_database</span>(<span class="hljs-string">&quot;my_database&quot;</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// No equivalent method is available.</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 4. Activate another database</span>
-res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">useDatabase</span>({
-    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database&quot;</span>,
-});
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
 
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
-<button class="copy-code-btn"></button></code></pre>
-<p>È anche possibile impostare un database da utilizzare al momento della connessione al cluster Milvus, come segue:</p>
-<div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python">conn = connections.<span class="hljs-title function_">connect</span>(
-    host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>,
-    port=<span class="hljs-string">&quot;19530&quot;</span>,
-    db_name=<span class="hljs-string">&quot;my_database&quot;</span>
+client = <span class="hljs-title class_">MilvusClient</span>(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
+
+client.<span class="hljs-title function_">create_database</span>(
+    db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">ConnectParam</span> <span class="hljs-variable">connectParam</span> <span class="hljs-operator">=</span> ConnectParam.newBuilder()
-    .withDatabaseName(<span class="hljs-string">&quot;my_database&quot;</span>)
-    .withUri(CLUSTER_ENDPOINT)
-    .withToken(TOKEN)
-    .build();
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.database.request.*;
 
-<span class="hljs-type">MilvusServiceClient</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusServiceClient</span>(connectParam);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
-<span class="hljs-keyword">const</span> db_name = <span class="hljs-string">&quot;my_database&quot;</span>;
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build();
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
 
-<span class="hljs-comment">// 1. Set up a Milvus Client</span>
-client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ address, db_name });
+<span class="hljs-type">CreateDatabaseReq</span> <span class="hljs-variable">createDatabaseReq</span> <span class="hljs-operator">=</span> CreateDatabaseReq.builder()
+        .databaseName(<span class="hljs-string">&quot;my_database_1&quot;</span>)
+        .build();
+client.createDatabase(createDatabaseReq);
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-databases" class="common-anchor-header">Elenco dei database<button data-href="#List-databases" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">MilvusClient</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ 
+    <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    <span class="hljs-attr">token</span>: <span class="hljs-string">&#x27;root:Milvus&#x27;</span> 
+});
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createDatabase</span>({
+    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>
+ });
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+    Username: <span class="hljs-string">&quot;Milvus&quot;</span>,
+    Password: <span class="hljs-string">&quot;root&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handle err</span>
+}
+
+err = cli.CreateDatabase(ctx, milvusclient.NewCreateDatabaseOption(<span class="hljs-string">&quot;my_database_1&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handle err</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;dbName&quot;: &quot;my_database_1&quot;
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>È anche possibile impostare le proprietà del database quando lo si crea. L'esempio seguente imposta il numero di repliche del database.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_database</span>(
+    db_name=<span class="hljs-string">&quot;my_database_2&quot;</span>,
+    properties={
+        <span class="hljs-string">&quot;database.replica.number&quot;</span>: <span class="hljs-number">3</span>
+    }
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">String</span>&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;database.replica.number&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>);
+<span class="hljs-title class_">CreateDatabaseReq</span> createDatabaseReq = <span class="hljs-title class_">CreateDatabaseReq</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">databaseName</span>(<span class="hljs-string">&quot;my_database_2&quot;</span>)
+        .<span class="hljs-title function_">properties</span>(properties)
+        .<span class="hljs-title function_">build</span>();
+client.<span class="hljs-title function_">createDatabase</span>(createDatabaseReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createDatabase</span>({
+    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;database.replica.number&quot;</span>: <span class="hljs-number">3</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err := cli.CreateDatabase(ctx, milvusclient.NewCreateDatabaseOption(<span class="hljs-string">&quot;my_database_2&quot;</span>).WithProperty(<span class="hljs-string">&quot;database.replica.number&quot;</span>, <span class="hljs-number">3</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handle err</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;dbName&quot;: &quot;my_database_2&quot;,
+    &quot;properties&quot;: {
+        &quot;database.replica.number&quot;: 3
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="View-databases" class="common-anchor-header">Visualizzare i database<button data-href="#View-databases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -161,89 +176,60 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><div class="language-python">
-<p>Per trovare tutti i database esistenti nel vostro cluster Milvus, utilizzate il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/list_database.md">list_database()</a>:</p>
-</div>
-<div class="language-java">
-<p>Per trovare tutti i database esistenti nel cluster Milvus, utilizzare il metodo <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Database/listDatabases.md">listDatabases()</a>:</p>
-</div>
-<div class="language-javascript">
-<p>Per trovare tutti i database esistenti nel cluster Milvus, utilizzare il metodo <a href="https://milvus.io/api-reference/node/v2.4.x/Database/listDatabases.md">listDatabases()</a>:</p>
-</div>
+    </button></h2><p>È possibile utilizzare l'API RESTful di Milvus o gli SDK per elencare tutti i database esistenti e visualizzarne i dettagli.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python">db.list_database()
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># List all existing databases</span>
+client.list_databases()
 
 <span class="hljs-comment"># Output</span>
-[<span class="hljs-string">&#x27;default&#x27;</span>, <span class="hljs-string">&#x27;my_database&#x27;</span>]
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.grpc.ListDatabasesResponse;
-<span class="hljs-keyword">import</span> io.milvus.param.R;
+<span class="hljs-comment"># [&#x27;default&#x27;, &#x27;my_database_1&#x27;, &#x27;my_database_2&#x27;]</span>
 
-<span class="hljs-comment">// 2. List all databases</span>
-R&lt;ListDatabasesResponse&gt; listDatabasesResponse = client.listDatabases();
-System.out.<span class="hljs-built_in">println</span>(listDatabasesResponse.getData());
-
-<span class="hljs-comment">// status {</span>
-<span class="hljs-comment">// }</span>
-<span class="hljs-comment">// db_names: &quot;default&quot;</span>
-<span class="hljs-comment">// db_names: &quot;my_database&quot;</span>
-<span class="hljs-comment">// created_timestamp: 1716794498117757990</span>
-<span class="hljs-comment">// created_timestamp: 1716797196479639477</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listDatabases</span>();
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">db_names</span>);
-
-<span class="hljs-comment">// [ &#x27;default&#x27;, &#x27;my_database&#x27; ]</span>
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-database" class="common-anchor-header">Eliminare un database<button data-href="#Drop-database" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Per eliminare un database, è necessario eliminare prima tutte le sue collezioni. Altrimenti, il drop fallisce.</p>
-<div class="language-python">
-<p>Per abbandonare un database, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/drop_database.md">drop_database()</a>:</p>
-</div>
-<div class="language-java">
-<p>Per abbandonare un database, utilizzare il metodo <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Database/dropDatabase.md">dropDatabase()</a>:</p>
-</div>
-<div class="language-javascript">
-<p>Per abbandonare un database, utilizzare il metodo <a href="https://milvus.io/api-reference/node/v2.4.x/Database/dropDatabase.md">dropDatabase()</a>:</p>
-</div>
-<div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python">db.drop_database(<span class="hljs-string">&quot;my_database&quot;</span>)
-
-db.list_database()
+<span class="hljs-comment"># Check database details</span>
+client.describe_database(
+    db_name=<span class="hljs-string">&quot;default&quot;</span>
+)
 
 <span class="hljs-comment"># Output</span>
-[<span class="hljs-string">&#x27;default&#x27;</span>]
+<span class="hljs-comment"># {&quot;name&quot;: &quot;default&quot;}</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.param.collection.DropDatabaseParam;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.database.response.*;
 
-<span class="hljs-type">DropDatabaseParam</span> <span class="hljs-variable">dropDatabaseParam</span> <span class="hljs-operator">=</span> DropDatabaseParam.newBuilder()
-    .withDatabaseName(<span class="hljs-string">&quot;my_database&quot;</span>)
-    .build();
+<span class="hljs-type">ListDatabasesResp</span> <span class="hljs-variable">listDatabasesResp</span> <span class="hljs-operator">=</span> client.listDatabases();
 
-response = client.dropDatabase(dropDatabaseParam);
+<span class="hljs-type">DescribeDatabaseResp</span> <span class="hljs-variable">descDBResp</span> <span class="hljs-operator">=</span> client.describeDatabase(DescribeDatabaseReq.builder()
+        .databaseName(<span class="hljs-string">&quot;default&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropDatabase</span>({
-    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database&quot;</span>,
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">describeDatabase</span>({ 
+    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&#x27;default&#x27;</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-RBAC-with-database" class="common-anchor-header">Utilizzare RBAC con il database<button data-href="#Use-RBAC-with-database" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// List all existing databases</span>
+databases, err := cli.ListDatabase(ctx, milvusclient.NewListDatabaseOption())
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handle err</span>
+}
+log.Println(databases)
+
+db, err := cli.DescribeDatabase(ctx, milvusclient.NewDescribeDatabaseOption(<span class="hljs-string">&quot;default&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handle err</span>
+}
+log.Println(db)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/describe&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;dbName&quot;: &quot;default&quot;
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Manage-database-properties" class="common-anchor-header">Gestire le proprietà dei database<button data-href="#Manage-database-properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -258,325 +244,125 @@ response = client.dropDatabase(dropDatabaseParam);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RBAC copre anche le operazioni con i database e garantisce la compatibilità con il futuro. Il termine <strong>database</strong> nelle API di autorizzazione (Concessione / Revoca / Concessione elenco) ha il seguente significato:</p>
-<ul>
-<li>Se né una connessione Milvus né una chiamata API Permission specificano un <code translate="no">db_name</code>, <strong>database</strong> si riferisce al database predefinito.</li>
-<li>Se una connessione Milvus specifica un <code translate="no">db_name</code>, ma una successiva chiamata a Permission API non lo fa, <strong>database</strong> si riferisce al database il cui nome è stato specificato nella connessione Milvus.</li>
-<li>Se una chiamata a Permission API viene effettuata su una connessione Milvus, con o senza <code translate="no">db_name</code> specificato, il <strong>database</strong> si riferisce al database il cui nome è stato specificato nella chiamata a Permission API.</li>
-</ul>
-<p>Il seguente frammento di codice è condiviso tra i blocchi elencati di seguito.</p>
+    </button></h2><p>Ogni database ha le sue proprietà; è possibile impostare le proprietà di un database quando lo si crea, come descritto in <a href="/docs/it/manage_databases.md#null">Creare un database</a>, oppure è possibile modificare e eliminare le proprietà di qualsiasi database esistente.</p>
+<p>La seguente tabella elenca le possibili proprietà del database.</p>
+<table>
+   <tr>
+     <th><p>Proprietà Nome</p></th>
+     <th><p>Tipo</p></th>
+     <th><p>Proprietà Descrizione</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">database.replica.number</code></p></td>
+     <td><p>intero</p></td>
+     <td><p>Il numero di repliche per il database specificato.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">database.resource_groups</code></p></td>
+     <td><p>stringa</p></td>
+     <td><p>I nomi dei gruppi di risorse associati al database specificato in un elenco comunemente separato.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">database.diskQuota.mb</code></p></td>
+     <td><p>intero</p></td>
+     <td><p>La dimensione massima dello spazio su disco per il database specificato, in megabyte (MB).</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">database.max.collections</code></p></td>
+     <td><p>intero</p></td>
+     <td><p>Il numero massimo di raccolte consentite nel database specificato.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">database.force.deny.writing</code></p></td>
+     <td><p>booleano</p></td>
+     <td><p>Se forzare il database specificato a negare le operazioni di scrittura.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">database.force.deny.reading</code></p></td>
+     <td><p>booleano</p></td>
+     <td><p>Se forzare il database specificato a negare le operazioni di lettura.</p></td>
+   </tr>
+</table>
+<h3 id="Alter-database-properties" class="common-anchor-header">Modifica delle proprietà del database</h3><p>È possibile modificare le proprietà di un database esistente come segue. L'esempio seguente limita il numero di collezioni che si possono creare nel database.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Role
-
-_URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-_TOKEN = <span class="hljs-string">&quot;root:Milvus&quot;</span>
-_DB_NAME = <span class="hljs-string">&quot;default&quot;</span>
-
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">connect_to_milvus</span>(<span class="hljs-params">db_name=<span class="hljs-string">&quot;default&quot;</span></span>):
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;connect to milvus\n&quot;</span>)
-    connections.connect(
-        uri=_URI,
-        token=_TOKEN,
-        db_name=db_name
-    )
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">URI</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
-<span class="hljs-type">String</span> <span class="hljs-variable">TOKEN</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;root:Milvus&quot;</span>;
-
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ConnectToMilvus</span> {
-    <span class="hljs-keyword">private</span> <span class="hljs-type">String</span> <span class="hljs-variable">_dbName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;default&quot;</span>;
-
-    <span class="hljs-keyword">public</span> <span class="hljs-title function_">newBuilder</span><span class="hljs-params">()</span> {}
-
-    <span class="hljs-keyword">public</span> MilvusServiceClient <span class="hljs-title function_">build</span><span class="hljs-params">()</span> {
-        <span class="hljs-type">ConnectParam</span> <span class="hljs-variable">connectParam</span> <span class="hljs-operator">=</span> ConnectParam.newBuilder()
-            .withUri(URI)
-            .withToken(TOKEN)
-            .withDatabaseName(_dbNAME)
-            .build();
-
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusServiceClient</span>(connectParam);
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">alter_database_properties</span>(
+    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;database.max.collections&quot;</span>: <span class="hljs-number">10</span>
     }
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">client.alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
+        .databaseName(<span class="hljs-string">&quot;my_database_1&quot;</span>)
+        .<span class="hljs-built_in">property</span>(<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">alterDatabaseProperties</span>({
+  <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>,
+  <span class="hljs-attr">properties</span>: {<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-string">&quot;10&quot;</span> },
+})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err := cli.AlterDatabaseProperties(ctx, milvusclient.NewAlterDatabasePropertiesOption(<span class="hljs-string">&quot;my_database_1&quot;</span>).
+    WithProperty(<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-number">1</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handle err</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
-    <span class="hljs-keyword">public</span> newBuilder <span class="hljs-title function_">withDbName</span><span class="hljs-params">(String dbName)</span> {
-        <span class="hljs-built_in">this</span>._dbName = dbName;
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;dbName&quot;: &quot;my_database&quot;,
+    &quot;properties&quot;: {
+        &quot;database.max.collections&quot;: 10
     }
-}
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
-<span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
-
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">connectToMilvus</span>(<span class="hljs-params">dbName = <span class="hljs-string">&quot;default&quot;</span></span>) {
-    <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
-        address,
-        token,
-        dbName,
-    });
-
-    <span class="hljs-keyword">return</span> client;
-}
+<h3 id="Drop-database-properties" class="common-anchor-header">Eliminare le proprietà del database</h3><p>È anche possibile ripristinare una proprietà del database eliminandola come segue. L'esempio seguente rimuove il limite del numero di collezioni che si possono creare nel database.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_database_properties</span>(
+    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>,
+    <span class="hljs-attr">property_keys</span>: [
+        <span class="hljs-string">&quot;database.max.collections&quot;</span>
+    ]
+)
 <button class="copy-code-btn"></button></code></pre>
-<ul>
-<li><p>Se né una connessione Milvus né una chiamata API di autorizzazione specificano un <code translate="no">db_name</code>, il <strong>database</strong> si riferisce al database predefinito.</p>
-<p><div class="multipleCode">
-<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
-<pre><code translate="no" class="language-python">_ROLE_NAME = <span class="hljs-string">&quot;test_role&quot;</span>
-_PRIVILEGE_INSERT = <span class="hljs-string">&quot;Insert&quot;</span>
-
-connect_to_milvus()
-role = Role(_ROLE_NAME)
-role.create()
-
-connect_to_milvus()
-role.grant(<span class="hljs-string">&quot;Collection&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>, _PRIVILEGE_INSERT)
-<span class="hljs-built_in">print</span>(role.list_grants())
-<span class="hljs-built_in">print</span>(role.list_grant(<span class="hljs-string">&quot;Collection&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>))
-role.revoke(<span class="hljs-string">&quot;Global&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>, _PRIVILEGE_INSERT)
+<pre><code translate="no" class="language-java">client.<span class="hljs-title function_">dropDatabaseProperties</span>(<span class="hljs-title class_">DropDatabasePropertiesReq</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">databaseName</span>(<span class="hljs-string">&quot;my_database_1&quot;</span>)
+        .<span class="hljs-title function_">propertyKeys</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-string">&quot;database.max.collections&quot;</span>))
+        .<span class="hljs-title function_">build</span>());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">ROLE_NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;test_role&quot;</span>;
-<span class="hljs-type">String</span> <span class="hljs-variable">PRIVILEGE_INSERT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Insert&quot;</span>;
-
-<span class="hljs-type">MilvusServiceClient</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConnectToMilvus</span>().build();
-R&lt;RpcStatus&gt; response = client.createRole(CreateRoleParam.newBuilder()
-    .withRoleName(ROLE_NAME)
-    .build());
-
-<span class="hljs-keyword">if</span> (response.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(response.getMessage());
-}
-
-response = client.grantRolePrivilege(GrantRolePriviledgeParam.newBuilder()
-    .withRoleName(ROLE_NAME)
-    .withObject(<span class="hljs-string">&quot;Collection&quot;</span>)
-    .withObjectName(<span class="hljs-string">&quot;*&quot;</span>)
-    .withPrivilege(PRIVILEGE_INSERT)
-    .build());
-
-<span class="hljs-keyword">if</span> (response.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(response.getMessage());
-}
-
-R&lt;SelectGrantResponse&gt; grants = client.selectGrantForRole(SelectGrantForRoleParam.newBuilder()
-    .withRoleName(ROLE_NAME)
-    .build());
-
-<span class="hljs-keyword">if</span> (grants.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(grants.getMessage());
-}
-
-System.out.println(grants.getData());
-
-grants = client.selectGrantForRoleAndObject(SelectGrantForRoleAndObjectParam.newBuilder()
-    .withRoleName(ROLE_NAME)
-    .withObject(<span class="hljs-string">&quot;Collection&quot;</span>)
-    .withObjectName(<span class="hljs-string">&quot;*&quot;</span>)
-    .build());
-
-<span class="hljs-keyword">if</span> (grants.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(grants.getMessage());
-}
-
-System.out.println(grants.getData());
-
-response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
-    .withRoleName(ROLE_NAME)
-    .withObject(<span class="hljs-string">&quot;Global&quot;</span>)
-    .withObjectName(<span class="hljs-string">&quot;*&quot;</span>)
-    .withPrivilege(PRIVILEGE_INSERT)
-    .build());
-
-<span class="hljs-keyword">if</span> (response.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(response.getMessage());
-}
-
-response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
-    .withRoleName(ROLE_NAME)
-    .withObject(<span class="hljs-string">&quot;Global&quot;</span>)
-    .withObjectName(<span class="hljs-string">&quot;*&quot;</span>)
-    .withPrivilege(PRIVILEGE_INSERT)
-    .build());
-
-<span class="hljs-keyword">if</span> (response.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(response.getMessage());
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">ROLE_NAME</span> = <span class="hljs-string">&quot;test_role&quot;</span>;
-<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PRIVILEGE_INSERT</span> = <span class="hljs-string">&quot;Insert&quot;</span>;
-
-<span class="hljs-keyword">const</span> client = <span class="hljs-title function_">connectToMilvus</span>();
-
-<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">demo</span>(<span class="hljs-params"></span>) {}
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createRole</span>({
-  <span class="hljs-attr">roleName</span>: <span class="hljs-variable constant_">ROLE_NAME</span>,
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">dropDatabaseProperties</span>({
+  <span class="hljs-attr">db_name</span>: my_database_1,
+  <span class="hljs-attr">properties</span>: [<span class="hljs-string">&quot;database.max.collections&quot;</span>],
 });
-
-<span class="hljs-keyword">const</span> grants = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listGrants</span>({
-  <span class="hljs-attr">roleName</span>: <span class="hljs-variable constant_">ROLE_NAME</span>,
-});
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(grants.<span class="hljs-property">grants</span>);
-
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">revokePrivilege</span>({
-  <span class="hljs-attr">roleName</span>: <span class="hljs-variable constant_">ROLE_NAME</span>,
-  <span class="hljs-attr">object</span>: <span class="hljs-string">&quot;Global&quot;</span>,
-  <span class="hljs-attr">objectName</span>: <span class="hljs-string">&quot;*&quot;</span>,
-  <span class="hljs-attr">privilege</span>: <span class="hljs-variable constant_">PRIVILEGE_INSERT</span>,
-});
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>Se una connessione Milvus specifica un <code translate="no">db_name</code>, ma una successiva chiamata a Permission API non lo fa, il <strong>database</strong> si riferisce al database il cui nome è stato specificato nella connessione Milvus.</p>
-<p><div class="multipleCode">
-<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> please make sure the &#x27;foo&#x27; db has been created</span>
-connect_to_milvus(db_name=<span class="hljs-string">&quot;foo&quot;</span>)
-
-<span class="hljs-comment"># This role will have the insert permission of all collections under foo db,</span>
-<span class="hljs-comment"># excluding the insert permissions of collections under other dbs</span>
-role.grant(<span class="hljs-string">&quot;Collection&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>, _PRIVILEGE_INSERT)
-<span class="hljs-built_in">print</span>(role.list_grants())
-<span class="hljs-built_in">print</span>(role.list_grant(<span class="hljs-string">&quot;Collection&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>))
-role.revoke(<span class="hljs-string">&quot;Global&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>, _PRIVILEGE_INSERT)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> please make sure the &#x27;foo&#x27; db has been created</span>
-MilvusServiceClient client = <span class="hljs-keyword">new</span> ConnectToMilvus().withDbName(<span class="hljs-string">&quot;foo&quot;</span>).build();
-
-<span class="hljs-comment">// This role will have the insert permission of all collections under foo db,</span>
-<span class="hljs-comment">// excluding the insert permissions of collections under other dbs</span>
-R&lt;RpcStatus&gt; response = client.grantRolePrivilege(GrantRolePriviledgeParam.newBuilder()
-    .withRoleName(ROLE_NAME)
-    .withObject(<span class="hljs-string">&quot;Collection&quot;</span>)
-    .withObjectName(<span class="hljs-string">&quot;*&quot;</span>)
-    .withPrivilege(PRIVILEGE_INSERT)
-    .build());
-
-<span class="hljs-keyword">if</span> (response.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(response.getMessage());
-}
-
-R&lt;SelectGrantResponse&gt; grants = client.selectGrantForRole(SelectGrantForRoleParam.newBuilder()
-    .withRoleName(ROLE_NAME)
-    .build());
-
-<span class="hljs-keyword">if</span> (grants.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(grants.getMessage());
-}
-
-System.<span class="hljs-keyword">out</span>.println(grants.getData());
-
-grants = client.selectGrantForRoleAndObject(SelectGrantForRoleAndObjectParam.newBuilder()
-    .withRoleName(ROLE_NAME)
-    .withObject(<span class="hljs-string">&quot;Collection&quot;</span>)
-    .withObjectName(<span class="hljs-string">&quot;*&quot;</span>)
-    .build());
-
-<span class="hljs-keyword">if</span> (grants.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(grants.getMessage());
-}
-
-System.<span class="hljs-keyword">out</span>.println(grants.getData());
-
-response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
-    .withRoleName(ROLE_NAME)
-    .withObject(<span class="hljs-string">&quot;Global&quot;</span>)
-    .withObjectName(<span class="hljs-string">&quot;*&quot;</span>)
-    .withPrivilege(PRIVILEGE_INSERT)
-    .build());
-
-<span class="hljs-keyword">if</span> (response.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(response.getMessage());
+<pre><code translate="no" class="language-go">err := cli.DropDatabaseProperties(ctx, milvusclient.NewDropDatabasePropertiesOption(<span class="hljs-string">&quot;my_database_1&quot;</span>, <span class="hljs-string">&quot;database.max.collections&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handle err</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> client = <span class="hljs-title function_">connectToMilvus</span>(<span class="hljs-string">&quot;foo&quot;</span>);
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
-<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">demo</span>(<span class="hljs-params"></span>) {}
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createRole</span>({
-  <span class="hljs-attr">roleName</span>: <span class="hljs-variable constant_">ROLE_NAME</span>,
-});
-
-<span class="hljs-keyword">const</span> grants = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listGrants</span>({
-  <span class="hljs-attr">roleName</span>: <span class="hljs-variable constant_">ROLE_NAME</span>,
-});
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(grants.<span class="hljs-property">grants</span>);
-
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">revokePrivilege</span>({
-  <span class="hljs-attr">roleName</span>: <span class="hljs-variable constant_">ROLE_NAME</span>,
-  <span class="hljs-attr">object</span>: <span class="hljs-string">&quot;Global&quot;</span>,
-  <span class="hljs-attr">objectName</span>: <span class="hljs-string">&quot;*&quot;</span>,
-  <span class="hljs-attr">privilege</span>: <span class="hljs-variable constant_">PRIVILEGE_INSERT</span>,
-});
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>Se una chiamata all'API Permission viene effettuata su una connessione Milvus, con o senza <code translate="no">db_name</code> specificato, il <strong>database</strong> fa riferimento al database il cui nome è stato specificato nella chiamata all'API Permission.</p>
-<p><div class="multipleCode">
-<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> please make sure the &#x27;foo&#x27; db has been created</span>
-
-db_name = <span class="hljs-string">&quot;foo&quot;</span>
-connect_to_milvus()
-role.grant(<span class="hljs-string">&quot;Collection&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>, _PRIVILEGE_INSERT, db_name=db_name)
-<span class="hljs-built_in">print</span>(role.list_grants(db_name=db_name))
-<span class="hljs-built_in">print</span>(role.list_grant(<span class="hljs-string">&quot;Collection&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>, db_name=db_name))
-role.revoke(<span class="hljs-string">&quot;Global&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>, _PRIVILEGE_INSERT, db_name=db_name)
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/alter&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;dbName&quot;: &quot;my_database&quot;,
+    &quot;propertyKeys&quot;: [
+        &quot;database.max.collections&quot;
+    ]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> please make sure the &#x27;foo&#x27; db has been created</span>
-
-<span class="hljs-type">String</span> <span class="hljs-variable">dbName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;foo&quot;</span>;
-<span class="hljs-type">MilvusServiceClient</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConnectToMilvus</span>().build();
-
-R&lt;RpcStatus&gt; response = client.grantRolePrivilege(GrantRolePriviledgeParam.newBuilder()
-    .withRoleName(ROLE_NAME)
-    .withObject(<span class="hljs-string">&quot;Collection&quot;</span>)
-    .withObjectName(<span class="hljs-string">&quot;*&quot;</span>)
-    .withPrivilege(PRIVILEGE_INSERT)
-    .withDatabaseName(dbName)
-    .build());
-
-<span class="hljs-keyword">if</span> (response.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(response.getMessage());
-}
-
-R&lt;SelectGrantResponse&gt; grants = client.selectGrantForRole(SelectGrantForRoleParam.newBuilder()
-    .withRoleName(ROLE_NAME)
-    .withDatabaseName(dbName)
-    .build());
-
-<span class="hljs-keyword">if</span> (grants.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(grants.getMessage());
-}
-
-System.out.println(grants.getData());
-
-grants = client.selectGrantForRoleAndObject(SelectGrantForRoleAndObjectParam.newBuilder()
-    .withRoleName(ROLE_NAME)
-    .withObject(<span class="hljs-string">&quot;Collection&quot;</span>)
-    .withObjectName(<span class="hljs-string">&quot;*&quot;</span>)
-    .withDatabaseName(dbName)
-    .build());
-
-<span class="hljs-keyword">if</span> (grants.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(grants.getMessage());
-}
-
-System.out.println(grants.getData());
-
-response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
-    .withRoleName(ROLE_NAME)
-    .withObject(<span class="hljs-string">&quot;Global&quot;</span>)
-    .withObjectName(<span class="hljs-string">&quot;*&quot;</span>)
-    .withPrivilege(PRIVILEGE_INSERT)
-    .withDatabaseName(dbName)
-    .build());
-
-<span class="hljs-keyword">if</span> (response.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(response.getMessage());
-}
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// The Node.js SDK currently cannot support this case.</span>
-<button class="copy-code-btn"></button></code></pre></li>
-</ul>
-<h2 id="Whats-next" class="common-anchor-header">Cosa c'è dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Drop-database" class="common-anchor-header">Eliminare il database<button data-href="#Drop-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -591,7 +377,39 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
-<li><p><a href="/docs/it/rbac.md">Abilitare RBAC</a></p></li>
-<li><p><a href="/docs/it/multi_tenancy.md">Multi-tenancy</a></p></li>
+    </button></h2><p>Quando un database non è più necessario, è possibile eliminarlo. Si noti che:</p>
+<ul>
+<li><p>I database predefiniti non possono essere eliminati.</p></li>
+<li><p>Prima di eliminare un database, è necessario eliminare tutte le collezioni nel database.</p></li>
 </ul>
+<p>È possibile utilizzare l'API RESTful di Milvus o gli SDK per creare dati in modo programmatico.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_database</span>(
+    db_name=<span class="hljs-string">&quot;my_database_2&quot;</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">client.<span class="hljs-title function_">dropDatabase</span>(<span class="hljs-title class_">DropDatabaseReq</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">databaseName</span>(<span class="hljs-string">&quot;my_database_2&quot;</span>)
+        .<span class="hljs-title function_">build</span>());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">dropDatabase</span>({
+  <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = cli.DropDatabase(ctx, milvusclient.NewDropDatabaseOption(<span class="hljs-string">&quot;my_database_2&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handle err</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/databases/drop&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;dbName&quot;: &quot;my_database&quot;
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>

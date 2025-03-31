@@ -2,11 +2,11 @@
 id: set-collection-ttl.md
 title: Establecer TTL de la colección
 summary: >-
-  Una vez insertados los datos en una colección, permanecen en ella por defecto.
-  Sin embargo, en algunos escenarios, es posible que desee eliminar o limpiar
-  los datos después de un cierto período. En tales casos, puede configurar la
-  propiedad Tiempo de vida (TTL) de la colección para que Milvus elimine
-  automáticamente los datos una vez que expire el TTL.
+  Una vez que los datos se insertan en una colección, permanecen allí por
+  defecto. Sin embargo, en algunos escenarios, es posible que desee eliminar o
+  limpiar los datos después de un cierto período. En tales casos, puede
+  configurar la propiedad Time-to-Live (TTL) de la colección para que Milvus
+  elimine automáticamente los datos una vez que expire el TTL.
 ---
 <h1 id="Set-Collection-TTL" class="common-anchor-header">Establecer TTL de la colección<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,8 +60,8 @@ summary: >-
       </svg>
     </button></h2><p>Puede establecer la propiedad TTL cuando</p>
 <ul>
-<li><p><a href="/docs/es/set-collection-ttl.md#null">Crear una colección.</a></p></li>
-<li><p><a href="/docs/es/set-collection-ttl.md#null">Modificar la propiedad TTL de una colección existente.</a></p></li>
+<li><p><a href="/docs/es/set-collection-ttl.md#Set-TTL-when-creating-a-collection">Crear una colección.</a></p></li>
+<li><p><a href="/docs/es/set-collection-ttl.md#Set-TTL-for-an-existing-collection">Modificar la propiedad TTL de una colección existente.</a></p></li>
 </ul>
 <h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">Establecer TTL al crear una colección</h3><p>El siguiente fragmento de código muestra cómo establecer la propiedad TTL al crear una colección.</p>
 <div class="multipleCode">

@@ -60,8 +60,8 @@ summary: >-
       </svg>
     </button></h2><p>Vous pouvez définir la propriété TTL lorsque vous</p>
 <ul>
-<li><p><a href="/docs/fr/set-collection-ttl.md#null">Créez une collection.</a></p></li>
-<li><p><a href="/docs/fr/set-collection-ttl.md#null">modifiez la propriété TTL d'une collection existante.</a></p></li>
+<li><p><a href="/docs/fr/set-collection-ttl.md#Set-TTL-when-creating-a-collection">Créez une collection.</a></p></li>
+<li><p><a href="/docs/fr/set-collection-ttl.md#Set-TTL-for-an-existing-collection">modifiez la propriété TTL d'une collection existante.</a></p></li>
 </ul>
 <h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">Définir le TTL lors de la création d'une collection</h3><p>L'extrait de code suivant montre comment définir la propriété TTL lors de la création d'une collection.</p>
 <div class="multipleCode">

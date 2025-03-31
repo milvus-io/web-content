@@ -124,7 +124,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая диаграмма",
+                "label": "Рулевая карта",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -1229,9 +1229,15 @@
             "children": []
           },
           {
+            "label": "Масштаб с HPA",
+            "id": "hpa.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Зависимости от масштаба",
             "id": "scale-dependencies.md",
-            "order": 1,
+            "order": 2,
             "children": []
           }
         ]

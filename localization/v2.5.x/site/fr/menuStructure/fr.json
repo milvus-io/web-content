@@ -1229,9 +1229,15 @@
             "children": []
           },
           {
+            "label": "Échelle avec HPA",
+            "id": "hpa.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Dépendances d'échelle",
             "id": "scale-dependencies.md",
-            "order": 1,
+            "order": 2,
             "children": []
           }
         ]

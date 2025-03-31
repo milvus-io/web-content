@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Time-to-Live (TTL) é normalmente utilizado em bases de dados para cenários em que os dados só devem permanecer válidos ou acessíveis durante um determinado período após qualquer inserção ou modificação. Depois, os dados podem ser removidos automaticamente.</p>
+    </button></h2><p>O Time-to-Live (TTL) é normalmente utilizado em bases de dados para cenários em que os dados só devem permanecer válidos ou acessíveis durante um determinado período após qualquer inserção ou modificação. Em seguida, os dados podem ser removidos automaticamente.</p>
 <p>Por exemplo, se ingerir dados diariamente mas só precisar de manter registos durante 14 dias, pode configurar o Milvus para remover automaticamente quaisquer dados mais antigos do que isso, definindo o TTL da coleção para <strong>14 × 24 × 3600 = 1209600</strong> segundos. Isto garante que apenas os dados mais recentes de 14 dias permaneçam na coleção.</p>
 <p>A propriedade TTL numa coleção Milvus é especificada como um número inteiro em segundos. Uma vez definida, quaisquer dados que ultrapassem o seu TTL serão automaticamente eliminados da coleção.</p>
 <p>Como o processo de eliminação é assíncrono, os dados podem não ser removidos dos resultados da pesquisa exatamente quando o TTL especificado tiver decorrido. Em vez disso, pode haver um atraso, uma vez que a remoção depende dos processos de recolha de lixo (GC) e de compactação, que ocorrem em intervalos não determinísticos.</p>
@@ -60,8 +60,8 @@ summary: >-
       </svg>
     </button></h2><p>É possível definir a propriedade TTL ao</p>
 <ul>
-<li><p><a href="/docs/pt/set-collection-ttl.md#null">Cria uma coleção.</a></p></li>
-<li><p><a href="/docs/pt/set-collection-ttl.md#null">Altera a propriedade TTL de uma coleção existente.</a></p></li>
+<li><p><a href="/docs/pt/set-collection-ttl.md#Set-TTL-when-creating-a-collection">Cria uma coleção.</a></p></li>
+<li><p><a href="/docs/pt/set-collection-ttl.md#Set-TTL-for-an-existing-collection">Altera a propriedade TTL de uma coleção existente.</a></p></li>
 </ul>
 <h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">Definir TTL ao criar uma coleção</h3><p>O seguinte trecho de código demonstra como definir a propriedade TTL quando você cria uma coleção.</p>
 <div class="multipleCode">

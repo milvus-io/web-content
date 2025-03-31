@@ -1229,9 +1229,15 @@
             "children": []
           },
           {
+            "label": "Scala con HPA",
+            "id": "hpa.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Dipendenze di scala",
             "id": "scale-dependencies.md",
-            "order": 1,
+            "order": 2,
             "children": []
           }
         ]
@@ -1503,7 +1509,7 @@
                 "children": []
               },
               {
-                "label": "Migrare tra istanze e bucket",
+                "label": "Migrazione tra istanze e bucket",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2173,7 +2179,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con le matrici Matryoshka",
+        "label": "Ricerca a imbuto con matrioske embeddings",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

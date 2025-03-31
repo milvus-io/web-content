@@ -1,9 +1,9 @@
 ---
 id: multimodal_rag_with_milvus.md
 summary: RAG متعدد الوسائط مع ميلفوس
-title: تعدد الوسائط RAG مع ميلفوس
+title: راج متعدد الوسائط مع ميلفوس
 ---
-<h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">تعدد الوسائط RAG مع ميلفوس<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">راج متعدد الوسائط مع ميلفوس<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ title: تعدد الوسائط RAG مع ميلفوس
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>إذا كنت ترغب في تجربة التأثير النهائي لهذا البرنامج التعليمي، يمكنك الانتقال مباشرةً إلى <a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a> وتجربته.</p>
+<p>إذا كنت ترغب في تجربة التأثير النهائي لهذا البرنامج التعليمي، يمكنك الانتقال مباشرةً إلى <a href="https://demos.milvus.io/multimodal-image-search/">العرض التوضيحي عبر الإنترنت</a> وتجربته.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
 <p>يستعرض هذا البرنامج التعليمي نظام RAG متعدد الوسائط المدعوم من Milvus، <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">ونموذج BGE المرئي،</a> و <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. باستخدام هذا النظام، يمكن للمستخدمين تحميل صورة وتحرير تعليمات نصية، والتي تتم معالجتها بواسطة نموذج الاسترجاع المركب من BGE للبحث عن الصور المرشحة. ثم يعمل نظام GPT-4o بعد ذلك كمُعيد تنقيح للصور، حيث يقوم باختيار الصورة الأنسب وتقديم الأساس المنطقي وراء الاختيار. يُتيح هذا المزيج القوي تجربة بحث سلسة وبديهية عن الصور، مستفيداً من Milvus للاسترجاع الفعّال، ونموذج BGE لمعالجة الصور ومطابقتها بدقة، وGPT-4o لإعادة الترتيب المتقدم.</p>
@@ -178,7 +178,7 @@ milvus_client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في هذا القسم، سنبحث أولاً عن الصور ذات الصلة عن طريق استعلام متعدد الوسائط ثم نستخدم خدمة LLM لإعادة تصنيف النتائج والعثور على أفضلها مع الشرح.</p>
+    </button></h2><p>في هذا القسم، سنبحث أولاً عن الصور ذات الصلة من خلال استعلام متعدد الوسائط ثم نستخدم خدمة LLM لإعادة تصنيف النتائج والعثور على أفضلها مع الشرح.</p>
 <h3 id="Run-search" class="common-anchor-header">تشغيل البحث</h3><p>نحن الآن جاهزون لإجراء البحث المتقدم عن الصور باستخدام بيانات الاستعلام المكونة من تعليمات الصور والنصوص.</p>
 <pre><code translate="no" class="language-python">query_image = os.path.join(
     data_dir, <span class="hljs-string">&quot;leopard.jpg&quot;</span>

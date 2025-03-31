@@ -36,7 +36,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Time-to-Live (TTL)は、挿入または変更後、一定期間だけデータが有効またはアクセス可能である必要がある場合にデータベースで一般的に使用されます。その後、データは自動的に削除されます。</p>
-<p>例えば、毎日データを取り込むが、14日間だけレコードを保持する必要がある場合、コレクションのTTLを<strong>14×24×3600=1209600</strong>秒に設定することで、それより古いデータを自動的に削除するようにMilvusを設定することができます。これにより、最新14日分のデータのみがコレクションに残ります。</p>
+<p>例えば、毎日データを取り込むが、14日間だけレコードを保持する必要がある場合、コレクションのTTLを<strong>14×24×3600=1209600</strong>秒に設定することで、それより古いデータを自動的に削除するようにMilvusを設定することができます。これにより、コレクションには最新の14日分のデータのみが残ります。</p>
 <p>MilvusコレクションのTTLプロパティは秒単位の整数で指定します。一度設定されると、TTLを超えたデータはコレクションから自動的に削除されます。</p>
 <p>削除処理は非同期処理であるため、指定したTTLが経過しても検索結果から正確にデータが削除されない場合があります。削除はガベージコレクション(GC)とコンパクション処理に依存し、これらの処理は非決定的な間隔で行われるため、遅延が発生する可能性があります。</p>
 <h2 id="Set-TTL" class="common-anchor-header">TTLの設定<button data-href="#Set-TTL" class="anchor-icon" translate="no">
@@ -56,8 +56,8 @@ summary: >-
       </svg>
     </button></h2><p>TTLプロパティを設定できるのは、以下の場合です。</p>
 <ul>
-<li><p><a href="/docs/ja/set-collection-ttl.md#null">コレクションを作成する。</a></p></li>
-<li><p><a href="/docs/ja/set-collection-ttl.md#null">既存のコレクションのTTLプロパティを変更する。</a></p></li>
+<li><p><a href="/docs/ja/set-collection-ttl.md#Set-TTL-when-creating-a-collection">コレクションを作成する。</a></p></li>
+<li><p><a href="/docs/ja/set-collection-ttl.md#Set-TTL-for-an-existing-collection">既存のコレクションのTTLプロパティを変更する。</a></p></li>
 </ul>
 <h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">コレクションの作成時にTTLを設定する</h3><p>次のコード・スニペットは、コレクションを作成するときにTTLプロパティを設定する方法を示しています。</p>
 <div class="multipleCode">

@@ -1229,9 +1229,15 @@
             "children": []
           },
           {
+            "label": "与 HPA 成比例",
+            "id": "hpa.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "规模依赖性",
             "id": "scale-dependencies.md",
-            "order": 1,
+            "order": 2,
             "children": []
           }
         ]
@@ -1491,7 +1497,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "在一个实例中进行备份和恢复",
+                "label": "在一个实例中进行备份和还原",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []

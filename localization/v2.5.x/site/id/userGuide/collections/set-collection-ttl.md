@@ -60,8 +60,8 @@ summary: >-
       </svg>
     </button></h2><p>Anda dapat mengatur properti TTL saat Anda</p>
 <ul>
-<li><p><a href="/docs/id/set-collection-ttl.md#null">Membuat koleksi.</a></p></li>
-<li><p><a href="/docs/id/set-collection-ttl.md#null">Mengubah properti TTL dari koleksi yang sudah ada.</a></p></li>
+<li><p><a href="/docs/id/set-collection-ttl.md#Set-TTL-when-creating-a-collection">Membuat koleksi.</a></p></li>
+<li><p><a href="/docs/id/set-collection-ttl.md#Set-TTL-for-an-existing-collection">Mengubah properti TTL dari koleksi yang sudah ada.</a></p></li>
 </ul>
 <h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">Mengatur TTL saat membuat koleksi</h3><p>Cuplikan kode berikut ini mendemonstrasikan cara menyetel properti TTL saat Anda membuat koleksi.</p>
 <div class="multipleCode">

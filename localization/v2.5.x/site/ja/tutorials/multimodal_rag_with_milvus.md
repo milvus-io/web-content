@@ -20,10 +20,10 @@ title: Milvusを使ったマルチモーダルRAG
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>このチュートリアルの最終的な効果を体験したい場合は、<a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a>に直接<a href="https://multimodal-demo.milvus.io/">アクセスして試す</a>ことができます。</p>
+<p>このチュートリアルの最終的な効果を体験したい場合は、<a href="https://demos.milvus.io/multimodal-image-search/">オンラインデモに</a>直接アクセスして試すことができます。</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
-<p>このチュートリアルでは、Milvus、<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">ビジュアライズドBGEモデル</a>、<a href="https://openai.com/index/hello-gpt-4o/">GPT-4oによる</a>マルチモーダルRAGを紹介しています。このシステムでは、ユーザーは画像をアップロードし、テキスト指示を編集することができます。このテキスト指示は、BGEの構成検索モデルによって処理され、候補画像を検索します。その後、GPT-4oがリランカーとして機能し、最適な画像を選択し、選択の根拠を提供します。この強力な組み合わせにより、Milvusによる効率的な検索、BGEモデルによる正確な画像処理とマッチング、GPT-4oによる高度なリランキングを活用した、シームレスで直感的な画像検索が可能になります。</p>
+<p>このチュートリアルでは、Milvus、<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">ビジュアライズドBGEモデル</a>、<a href="https://openai.com/index/hello-gpt-4o/">GPT-4oによる</a>マルチモーダルRAGを紹介します。このシステムでは、ユーザは画像をアップロードし、テキスト指示を編集することができます。このテキスト指示は、BGEの構成検索モデルによって処理され、候補画像を検索します。その後、GPT-4oがリランカーとして機能し、最適な画像を選択し、選択の根拠を提供します。この強力な組み合わせにより、Milvusによる効率的な検索、BGEモデルによる正確な画像処理とマッチング、GPT-4oによる高度なリランキングを活用した、シームレスで直感的な画像検索が可能になります。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

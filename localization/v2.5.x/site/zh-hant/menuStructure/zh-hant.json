@@ -1229,9 +1229,15 @@
             "children": []
           },
           {
+            "label": "與 HPA 配合使用",
+            "id": "hpa.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "規模依賴性",
             "id": "scale-dependencies.md",
-            "order": 1,
+            "order": 2,
             "children": []
           }
         ]

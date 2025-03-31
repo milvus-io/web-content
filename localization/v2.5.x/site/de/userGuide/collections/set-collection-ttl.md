@@ -40,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Time-to-Live (TTL) wird in Datenbanken häufig für Szenarien verwendet, in denen Daten nur für einen bestimmten Zeitraum nach dem Einfügen oder Ändern gültig oder zugänglich bleiben sollen. Danach können die Daten automatisch entfernt werden.</p>
-<p>Wenn Sie beispielsweise täglich Daten einspielen, aber nur 14 Tage lang Datensätze aufbewahren müssen, können Sie Milvus so konfigurieren, dass alle Daten, die älter sind als diese, automatisch entfernt werden, indem Sie die TTL der Sammlung auf <strong>14 × 24 × 3600 = 1209600</strong> Sekunden einstellen. Dadurch wird sichergestellt, dass nur die Daten der letzten 14 Tage in der Sammlung verbleiben.</p>
+<p>Wenn Sie beispielsweise täglich Daten einspielen, aber nur 14 Tage lang Datensätze aufbewahren müssen, können Sie Milvus so konfigurieren, dass alle Daten, die älter sind als dieser Zeitraum, automatisch entfernt werden, indem Sie die TTL der Sammlung auf <strong>14 × 24 × 3600 = 1209600</strong> Sekunden einstellen. Dadurch wird sichergestellt, dass nur die Daten der letzten 14 Tage in der Sammlung verbleiben.</p>
 <p>Die TTL-Eigenschaft in einer Milvus-Sammlung wird als ganze Zahl in Sekunden angegeben. Einmal festgelegt, werden alle Daten, die ihre TTL überschreiten, automatisch aus der Sammlung gelöscht.</p>
 <p>Da der Löschvorgang asynchron abläuft, werden die Daten möglicherweise nicht genau dann aus den Suchergebnissen entfernt, wenn die angegebene TTL verstrichen ist. Stattdessen kann es zu einer Verzögerung kommen, da die Entfernung von der Garbage Collection (GC) und den Verdichtungsprozessen abhängt, die in nicht-deterministischen Intervallen stattfinden.</p>
 <h2 id="Set-TTL" class="common-anchor-header">TTL setzen<button data-href="#Set-TTL" class="anchor-icon" translate="no">
@@ -60,8 +60,8 @@ summary: >-
       </svg>
     </button></h2><p>Sie können die TTL-Eigenschaft festlegen, wenn Sie</p>
 <ul>
-<li><p><a href="/docs/de/set-collection-ttl.md#null">eine Sammlung erstellen.</a></p></li>
-<li><p><a href="/docs/de/set-collection-ttl.md#null">die TTL-Eigenschaft einer bestehenden Sammlung ändern.</a></p></li>
+<li><p><a href="/docs/de/set-collection-ttl.md#Set-TTL-when-creating-a-collection">eine Sammlung erstellen.</a></p></li>
+<li><p><a href="/docs/de/set-collection-ttl.md#Set-TTL-for-an-existing-collection">die TTL-Eigenschaft einer bestehenden Sammlung ändern.</a></p></li>
 </ul>
 <h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">TTL bei der Erstellung einer Sammlung festlegen</h3><p>Das folgende Codeschnipsel zeigt, wie die TTL-Eigenschaft beim Erstellen einer Sammlung festgelegt wird.</p>
 <div class="multipleCode">

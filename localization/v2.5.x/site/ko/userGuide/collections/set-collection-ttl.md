@@ -58,8 +58,8 @@ summary: >-
       </svg>
     </button></h2><p>다음과 같은 경우 TTL 속성을 설정할 수 있습니다.</p>
 <ul>
-<li><p><a href="/docs/ko/set-collection-ttl.md#null">컬렉션을 만듭니다.</a></p></li>
-<li><p><a href="/docs/ko/set-collection-ttl.md#null">기존 컬렉션의 TTL 속성을 변경합니다.</a></p></li>
+<li><p><a href="/docs/ko/set-collection-ttl.md#Set-TTL-when-creating-a-collection">컬렉션을 만듭니다.</a></p></li>
+<li><p><a href="/docs/ko/set-collection-ttl.md#Set-TTL-for-an-existing-collection">기존 컬렉션의 TTL 속성을 변경합니다.</a></p></li>
 </ul>
 <h3 id="Set-TTL-when-creating-a-collection" class="common-anchor-header">컬렉션을 만들 때 TTL 설정하기</h3><p>다음 코드 스니펫은 컬렉션을 만들 때 TTL 속성을 설정하는 방법을 보여줍니다.</p>
 <div class="multipleCode">

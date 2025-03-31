@@ -20,10 +20,10 @@ title: RAG multimodal com Milvus
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Se quiser experimentar o efeito final deste tutorial, pode ir diretamente a <a href="https://multimodal-demo.milvus.io/">https://multimodal-demo.milvus.io/</a> e experimentá-lo.</p>
+<p>Se quiser experimentar o efeito final deste tutorial, pode ir diretamente para a <a href="https://demos.milvus.io/multimodal-image-search/">demonstração online</a> e experimentá-lo.</p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
-<p>Este tutorial apresenta o RAG multimodal alimentado pelo Milvus, <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">o modelo Visualized BGE</a> e <a href="https://openai.com/index/hello-gpt-4o/">o GPT-4o</a>. Com este sistema, os utilizadores podem carregar uma imagem e editar instruções de texto, que são processadas pelo modelo de recuperação composto da BGE para procurar imagens candidatas. O GPT-4o actua então como um reranker, selecionando a imagem mais adequada e fornecendo a lógica por detrás da escolha. Esta combinação poderosa permite uma experiência de pesquisa de imagens intuitiva e sem falhas, tirando partido do Milvus para uma recuperação eficiente, do modelo BGE para um processamento e correspondência precisos das imagens e do GPT-4o para uma classificação avançada.</p>
+<p>Este tutorial apresenta o RAG multimodal desenvolvido pelo Milvus, <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">o modelo Visualized BGE</a> e <a href="https://openai.com/index/hello-gpt-4o/">o GPT-4o</a>. Com este sistema, os utilizadores podem carregar uma imagem e editar instruções de texto, que são processadas pelo modelo de recuperação composto da BGE para procurar imagens candidatas. O GPT-4o actua então como um reranker, selecionando a imagem mais adequada e fornecendo a lógica por detrás da escolha. Esta combinação poderosa permite uma experiência de pesquisa de imagens intuitiva e sem falhas, tirando partido do Milvus para uma recuperação eficiente, do modelo BGE para um processamento e correspondência precisos das imagens e do GPT-4o para uma classificação avançada.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,7 +45,7 @@ title: RAG multimodal com Milvus
 $ pip install -e FlagEmbedding
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ser necessário <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
 </div>
 <h3 id="Download-Data" class="common-anchor-header">Descarregar dados</h3><p>O comando a seguir descarregará os dados do exemplo e os extrairá para uma pasta local "./images_folder", incluindo:</p>
 <ul>

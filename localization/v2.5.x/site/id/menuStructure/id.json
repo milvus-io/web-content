@@ -745,7 +745,7 @@
             "order": 6,
             "children": [
               {
-                "label": "Penjelasan Pemfilteran",
+                "label": "Penjelasan Penyaringan",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1229,9 +1229,15 @@
             "children": []
           },
           {
+            "label": "Skala dengan HPA",
+            "id": "hpa.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "Ketergantungan Skala",
             "id": "scale-dependencies.md",
-            "order": 1,
+            "order": 2,
             "children": []
           }
         ]

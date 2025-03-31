@@ -1229,9 +1229,15 @@
             "children": []
           },
           {
+            "label": "مقياس مع HPA",
+            "id": "hpa.md",
+            "order": 1,
+            "children": []
+          },
+          {
             "label": "تبعيات المقياس",
             "id": "scale-dependencies.md",
-            "order": 1,
+            "order": 2,
             "children": []
           }
         ]
