@@ -18,9 +18,9 @@ In this notebook, we will show you how to use Milvus to search for similar image
 First, we need to load the dataset and unextract it for further processing.
 
 
-```python
-!wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.zip
-!unzip -q -o reverse_image_search.zip
+```shell
+$ wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.zip
+$ unzip -q -o reverse_image_search.zip
 ```
 
 ## Prequisites
@@ -36,7 +36,7 @@ To run this notebook, you need to have the following dependencies installed:
 To run Colab, we provide the handy commands to install the necessary dependencies.
 
 
-```python
+```shell
 $ pip install pymilvus --upgrade
 $ pip install timm
 ```
@@ -187,7 +187,7 @@ display(concatenated_image)
 
 
     
-![png](image_search_with_milvus_files/image_search_with_milvus_14_1.png)
+![png](../../../assets/image_search_with_milvus_14_1.png)
     
 
 

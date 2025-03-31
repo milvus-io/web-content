@@ -21,17 +21,19 @@ To create embeddings in action, refer to [Using PyMilvus's Model To Generate Tex
 
 |  Embedding Function                                                                   |  Type   |  API or Open-sourced |
 | ------------------------------------------------------------------------------------- | ------- | -------------------- |
-|  [openai](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/OpenAIEmbeddingFunction/OpenAIEmbeddingFunction.md)                            |  Dense  |  API                 |
-|  [sentence-transformer](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/SentenceTransformerEmbeddingFunction/SentenceTransformerEmbeddingFunction.md) |  Dense  |  Open-sourced        |
-|  [Splade](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/SpladeEmbeddingFunction/SpladeEmbeddingFunction.md)                            |  Sparse |  Open-sourced        |
-|  [bge-m3](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/BGEM3EmbeddingFunction/BGEM3EmbeddingFunction.md)                             |  Hybrid |  Open-sourced        |
-|  [voyageai](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md)                            |  Dense  |  API                 |
-|  [jina](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/JinaEmbeddingFunction/JinaEmbeddingFunction.md)                            |  Dense  |  API                 |
-|  [cohere](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/CohereEmbeddingFunction/CohereEmbeddingFunction.md)                            |  Dense  |  API                 |
-|  [Instructor](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/InstructorEmbeddingFunction/InstructorEmbeddingFunction.md)                            |  Dense  |  Open-sourced                 |
-|  [Mistral AI](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MistralAIEmbeddingFunction/MistralAIEmbeddingFunction.md)                            |  Dense  |  API                 |
-|  [Nomic](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/NomicEmbeddingFunction/NomicEmbeddingFunction.md)                            |  Dense  |  API                 |
-|  [mGTE](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MGTEEmbeddingFunction/MGTEEmbeddingFunction.md)                            |  Hybrid  |  Open-sourced                 |
+|  [openai](https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/OpenAIEmbeddingFunction/OpenAIEmbeddingFunction.md)                            |  Dense  |  API                 |
+|  [sentence-transformer](https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/SentenceTransformerEmbeddingFunction/SentenceTransformerEmbeddingFunction.md) |  Dense  |  Open-sourced        |
+|  [Splade](https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/SpladeEmbeddingFunction/SpladeEmbeddingFunction.md)                            |  Sparse |  Open-sourced        |
+|  [bge-m3](https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/BGEM3EmbeddingFunction/BGEM3EmbeddingFunction.md)                             |  Hybrid |  Open-sourced        |
+|  [voyageai](https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md)                            |  Dense  |  API                 |
+|  [jina](https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/JinaEmbeddingFunction/JinaEmbeddingFunction.md)                            |  Dense  |  API                 |
+|  [cohere](https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/CohereEmbeddingFunction/CohereEmbeddingFunction.md)                            |  Dense  |  API                 |
+|  [Instructor](https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/InstructorEmbeddingFunction/InstructorEmbeddingFunction.md)                            |  Dense  |  Open-sourced                 |
+|  [Mistral AI](https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/MistralAIEmbeddingFunction/MistralAIEmbeddingFunction.md)                            |  Dense  |  API                 |
+|  [Nomic](https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/NomicEmbeddingFunction/NomicEmbeddingFunction.md)                            |  Dense  |  API                 |
+|  [mGTE](https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/Model2VecEmbeddingFunction/Model2VecEmbeddingFunction.md)                            |  Hybrid  |  Open-sourced                 |
+|  [Model2Vec](https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/Model2VecEmbeddingFunction/Model2VecEmbeddingFunction.md) |  Hybrid  |  Open-sourced                 |
+|  [Gemini](https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/GeminiEmbeddingFunction/GeminiEmbeddingFunction.md) | Hybrid | Private  |
 
 ## Example 1: Use default embedding function to generate dense vectors
 
