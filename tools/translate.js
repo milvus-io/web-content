@@ -108,7 +108,12 @@ async function bootstrap() {
         /**
          * step 5: convert md or mdx to html
          */
-        const params = { content, lang: targetLang, version };
+        const params = {
+          content,
+          lang: targetLang,
+          version,
+          betaTag: data.beta,
+        };
         const {
           html: htmlContent,
           codeList,

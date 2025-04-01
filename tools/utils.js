@@ -60,9 +60,9 @@ export function mkdir(filePath) {
  * @returns {Object} The HTML tree generated from the markdown content.
  */
 export const remarkableToHtml = async (
-  options = { lang: "en", content: "", version: VERSION }
+  options = { lang: "en", content: "", version: VERSION, betaTag: "" }
 ) => {
-  const { lang, content, version } = options;
+  const { lang, content, version, betaTag } = options;
   const path = lang === "en" ? PATH : PATH + lang + "/";
   const { tree, codeList, headingContent, anchorList } = Milvus.md2html(
     content,
@@ -70,6 +70,7 @@ export const remarkableToHtml = async (
       showAnchor: true,
       version,
       path,
+      betaTag,
     }
   );
 
@@ -225,7 +226,7 @@ export const generateMenuStructureLocales = async (params) => {
       : true;
 
     if (!cacheOutdated) {
-      console.info("-> Skip: menu structure is up-to-date.")
+      console.info("-> Skip: menu structure is up-to-date.");
       continue;
     }
 
