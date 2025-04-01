@@ -68,41 +68,41 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
     </button></h2><p>Since Milvus 2.2.3, you can configure Milvus coordinators to work in active-standby mode and enable the rolling upgrade feature for them, so that Milvus can respond to incoming requests during the coordinator upgrades. In previous releases, coordinators are to be removed and then created during an upgrade, which may introduce certain downtime of the service.</p>
 <p>Based on the rolling update capabilities provided by Kubernetes, the Milvus operator enforces an ordered update of the deployments according to their dependencies. In addition, Milvus implements a mechanism to ensure that its components remain compatible with those depending on them during the upgrade, significantly reducing potential service downtime.</p>
 <p>The rolling upgrade feature is disabled by default. You need to explicitly enable it through a configuration file.</p>
-<pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-spec:
-  components:
-    enableRollingUpdate: <span class="hljs-literal">true</span>
-    imageUpdateMode: rollingUpgrade <span class="hljs-comment"># Default value, can be omitted</span>
-    image: milvusdb/milvus:v2.4.23
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingUpgrade</span> <span class="hljs-comment"># Default value, can be omitted</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.4.23</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>In this above configuration file, set <code translate="no">spec.components.enableRollingUpdate</code> to <code translate="no">true</code> and set <code translate="no">spec.components.image</code> to the desired Milvus version.</p>
 <p>By default, Milvus performs rolling upgrade for coordinators in an ordered way, in which it replaces the coordinator pod images one after another. To reduce the upgrade time, consider setting <code translate="no">spec.components.imageUpdateMode</code> to <code translate="no">all</code> so that Milvus replaces all pod images at the same time.</p>
-<pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-spec:
-  components:
-    enableRollingUpdate: <span class="hljs-literal">true</span>
-    imageUpdateMode: all
-    image: milvusdb/milvus:v2.4.23
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">all</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.4.23</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>You can set <code translate="no">spec.components.imageUpdateMode</code> to <code translate="no">rollingDowngrade</code> to have Milvus replace coordinator pod images with a lower version.</p>
-<pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-spec:
-  components:
-    enableRollingUpdate: <span class="hljs-literal">true</span>
-    imageUpdateMode: rollingDowngrade
-    image: milvusdb/milvus:&lt;some-old-version&gt;
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">enableRollingUpdate:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">imageUpdateMode:</span> <span class="hljs-string">rollingDowngrade</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:&lt;some-old-version&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then save your configuration as a YAML file (for example, <code translate="no">milvusupgrade.yaml</code>) and patch this configuration file to your Milvus instance as follows:</p>
-<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge 
+<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge 
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Upgrade Milvus by changing its image<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -121,17 +121,17 @@ spec:
       </svg>
     </button></h2><p>In normal cases, you can simply update your Milvus to the latest by changing its image. However, note that there will be a certain downtime when upgrading Milvus in this way.</p>
 <p>Compose a configuration file as follows and save it as <strong>milvusupgrade.yaml</strong>:</p>
-<pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-spec:
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+<span class="hljs-attr">spec:</span>
   <span class="hljs-comment"># Omit other fields ...</span>
-  components:
-   image: milvusdb/milvus:v2.4.23
+  <span class="hljs-attr">components:</span>
+   <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.4.23</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then run the following to perform the upgrade:</p>
-<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --<span class="hljs-built_in">type</span> merge 
+<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge 
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Migrate-the-metadata" class="common-anchor-header">Migrate the metadata<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -150,16 +150,16 @@ spec:
       </svg>
     </button></h2><p>Since Milvus 2.2.0, the metadata is incompatible with that in previous releases. The following example snippets assume an upgrade from Milvus 2.1.4 to Milvus 2.4.23.</p>
 <h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. Create a <code translate="no">.yaml</code> file for metadata migration</h3><p>Create a metadata migration file. The following is an example. You need to specify the <code translate="no">name</code>, <code translate="no">sourceVersion</code>, and <code translate="no">targetVersion</code> in the configuration file. The following example sets the <code translate="no">name</code> to <code translate="no">my-release-upgrade</code>, <code translate="no">sourceVersion</code> to <code translate="no">v2.1.4</code>, and <code translate="no">targetVersion</code> to <code translate="no">v2.4.23</code>. This means that your Milvus cluster will be upgraded from v2.1.4 to v2.4.23.</p>
-<pre><code translate="no">apiVersion: milvus.io/v1beta1
-kind: MilvusUpgrade
-metadata:
-  name: my-release-upgrade
-spec:
-  milvus:
-    namespace: default
-    name: my-release
-  sourceVersion: <span class="hljs-string">&quot;v2.1.4&quot;</span>
-  targetVersion: <span class="hljs-string">&quot;v2.4.23&quot;</span>
+<pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">MilvusUpgrade</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-upgrade</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">milvus:</span>
+    <span class="hljs-attr">namespace:</span> <span class="hljs-string">default</span>
+    <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">sourceVersion:</span> <span class="hljs-string">&quot;v2.1.4&quot;</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-string">&quot;v2.4.23&quot;</span>
   <span class="hljs-comment"># below are some omit default values:</span>
   <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.4.23&quot;</span>
   <span class="hljs-comment"># toolImage: &quot;milvusdb/meta-migration:v2.2.0&quot;</span>
@@ -169,10 +169,10 @@ spec:
   <span class="hljs-comment"># maxRetry: 3</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2. Apply the new configuration</h3><p>Run the following command to create the new configuration.</p>
-<pre><code translate="no">$ kubectl create -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/zilliztech/milvus-operator/blob/main/config/samples/beta/milvusupgrade.yaml</span>
+<pre><code translate="no">$ kubectl <span class="hljs-built_in">create</span> -f https://github.com/zilliztech/milvus-operator/blob/main/<span class="hljs-built_in">config</span>/samples/beta/milvusupgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3. Check the status of metadata migration</h3><p>Run the following command to check the status of your metadata migration.</p>
-<pre><code translate="no">kubectl describe milvus release-name
+<pre><code translate="no">kubectl <span class="hljs-keyword">describe</span> milvus <span class="hljs-keyword">release</span><span class="hljs-operator">-</span>name
 <button class="copy-code-btn"></button></code></pre>
 <p>The status of <code translate="no">ready</code> in the output means that the metadata migration is successful.</p>
 <p>Or, you can also run <code translate="no">kubectl get pod</code> to check all the pods. If all the pods are <code translate="no">ready</code>, the metadata migration is successful.</p>

@@ -57,14 +57,14 @@ docs_embeddings = openai_ef.encode_documents(docs)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, openai_ef.dim, docs_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([ 1.76741909e-02, -2.04964578e-02, -1.09788161e-02, -5.27223349e-02,
-        4.23139781e-02, -6.64533582e-03,  4.21088142e-03,  1.04644023e-01,
-        5.10009527e-02,  5.32827862e-02, -3.26061808e-02, -3.66494283e-02,
+<pre><code translate="no" class="language-python">Embeddings: [array([ <span class="hljs-number">1.76741909e-02</span>, -<span class="hljs-number">2.04964578e-02</span>, -<span class="hljs-number">1.09788161e-02</span>, -<span class="hljs-number">5.27223349e-02</span>,
+        <span class="hljs-number">4.23139781e-02</span>, -<span class="hljs-number">6.64533582e-03</span>,  <span class="hljs-number">4.21088142e-03</span>,  <span class="hljs-number">1.04644023e-01</span>,
+        <span class="hljs-number">5.10009527e-02</span>,  <span class="hljs-number">5.32827862e-02</span>, -<span class="hljs-number">3.26061808e-02</span>, -<span class="hljs-number">3.66494283e-02</span>,
 ...
-       -8.93232748e-02,  6.68255147e-03,  3.55093405e-02, -5.09071983e-02,
-        3.74144339e-03,  4.72541340e-02,  2.11916920e-02,  1.00753829e-02,
-       -5.76633997e-02,  9.68257990e-03,  4.62721288e-02, -4.33261096e-02])]
-Dim: 512 (512,)
+       -<span class="hljs-number">8.93232748e-02</span>,  <span class="hljs-number">6.68255147e-03</span>,  <span class="hljs-number">3.55093405e-02</span>, -<span class="hljs-number">5.09071983e-02</span>,
+        <span class="hljs-number">3.74144339e-03</span>,  <span class="hljs-number">4.72541340e-02</span>,  <span class="hljs-number">2.11916920e-02</span>,  <span class="hljs-number">1.00753829e-02</span>,
+       -<span class="hljs-number">5.76633997e-02</span>,  <span class="hljs-number">9.68257990e-03</span>,  <span class="hljs-number">4.62721288e-02</span>, -<span class="hljs-number">4.33261096e-02</span>])]
+Dim: <span class="hljs-number">512</span> (<span class="hljs-number">512</span>,)
 <button class="copy-code-btn"></button></code></pre>
 <p>To create embeddings for queries, use the <strong>encode_queries()</strong> method:</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
@@ -78,12 +78,12 @@ query_embeddings = openai_ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim&quot;</span>, openai_ef.dim, query_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([ 0.00530251, -0.01907905, -0.01672608, -0.05030033,  0.01635982,
-       -0.03169853, -0.0033602 ,  0.09047844,  0.00030747,  0.11853652,
-       -0.02870182, -0.01526102,  0.05505067,  0.00993909, -0.07165466,
+<pre><code translate="no" class="language-python">Embeddings: [array([ <span class="hljs-number">0.00530251</span>, -<span class="hljs-number">0.01907905</span>, -<span class="hljs-number">0.01672608</span>, -<span class="hljs-number">0.05030033</span>,  <span class="hljs-number">0.01635982</span>,
+       -<span class="hljs-number">0.03169853</span>, -<span class="hljs-number">0.0033602</span> ,  <span class="hljs-number">0.09047844</span>,  <span class="hljs-number">0.00030747</span>,  <span class="hljs-number">0.11853652</span>,
+       -<span class="hljs-number">0.02870182</span>, -<span class="hljs-number">0.01526102</span>,  <span class="hljs-number">0.05505067</span>,  <span class="hljs-number">0.00993909</span>, -<span class="hljs-number">0.07165466</span>,
 ...
-       -9.78106782e-02, -2.22669560e-02,  1.21873049e-02, -4.83198799e-02,
-        5.32377362e-02, -1.90469325e-02,  5.62430918e-02,  1.02650477e-02,
-       -6.21757433e-02,  7.88027793e-02,  4.91846527e-04, -1.51633881e-02])]
-Dim 512 (512,)
+       -<span class="hljs-number">9.78106782e-02</span>, -<span class="hljs-number">2.22669560e-02</span>,  <span class="hljs-number">1.21873049e-02</span>, -<span class="hljs-number">4.83198799e-02</span>,
+        <span class="hljs-number">5.32377362e-02</span>, -<span class="hljs-number">1.90469325e-02</span>,  <span class="hljs-number">5.62430918e-02</span>,  <span class="hljs-number">1.02650477e-02</span>,
+       -<span class="hljs-number">6.21757433e-02</span>,  <span class="hljs-number">7.88027793e-02</span>,  <span class="hljs-number">4.91846527e-04</span>, -<span class="hljs-number">1.51633881e-02</span>])]
+Dim <span class="hljs-number">512</span> (<span class="hljs-number">512</span>,)
 <button class="copy-code-btn"></button></code></pre>

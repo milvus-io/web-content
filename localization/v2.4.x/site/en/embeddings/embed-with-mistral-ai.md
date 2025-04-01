@@ -57,11 +57,11 @@ docs_embeddings = ef.encode_documents(docs)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, ef.dim, docs_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([-0.06051636, 0.03207397, 0.04684448, ..., -0.01618958,
-       0.02442932, -0.01302338]), array([-0.04675293, 0.06512451, 0.04290771, ..., -0.01454926,
-       0.0014801 , 0.00686646]), array([-0.05978394, 0.08728027, 0.02217102, ..., -0.00681305,
-       0.03634644, -0.01802063])]
-Dim: 1024 (1024,)
+<pre><code translate="no" class="language-python">Embeddings: [array([-<span class="hljs-number">0.06051636</span>, <span class="hljs-number">0.03207397</span>, <span class="hljs-number">0.04684448</span>, ..., -<span class="hljs-number">0.01618958</span>,
+       <span class="hljs-number">0.02442932</span>, -<span class="hljs-number">0.01302338</span>]), array([-<span class="hljs-number">0.04675293</span>, <span class="hljs-number">0.06512451</span>, <span class="hljs-number">0.04290771</span>, ..., -<span class="hljs-number">0.01454926</span>,
+       <span class="hljs-number">0.0014801</span> , <span class="hljs-number">0.00686646</span>]), array([-<span class="hljs-number">0.05978394</span>, <span class="hljs-number">0.08728027</span>, <span class="hljs-number">0.02217102</span>, ..., -<span class="hljs-number">0.00681305</span>,
+       <span class="hljs-number">0.03634644</span>, -<span class="hljs-number">0.01802063</span>])]
+Dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 <button class="copy-code-btn"></button></code></pre>
 <p>To create embeddings for queries, use the <code translate="no">encode_queries()</code> method:</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>,
@@ -73,8 +73,8 @@ query_embeddings = ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim&quot;</span>, ef.dim, query_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([-0.04916382, 0.04568481, 0.03594971, ..., -0.02653503,
-       0.02804565, 0.00600815]), array([-0.05938721, 0.07098389, 0.01773071, ..., -0.01708984,
-       0.03582764, 0.00366592])]
-Dim 1024 (1024,)
+<pre><code translate="no" class="language-python">Embeddings: [array([-<span class="hljs-number">0.04916382</span>, <span class="hljs-number">0.04568481</span>, <span class="hljs-number">0.03594971</span>, ..., -<span class="hljs-number">0.02653503</span>,
+       <span class="hljs-number">0.02804565</span>, <span class="hljs-number">0.00600815</span>]), array([-<span class="hljs-number">0.05938721</span>, <span class="hljs-number">0.07098389</span>, <span class="hljs-number">0.01773071</span>, ..., -<span class="hljs-number">0.01708984</span>,
+       <span class="hljs-number">0.03582764</span>, <span class="hljs-number">0.00366592</span>])]
+Dim <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 <button class="copy-code-btn"></button></code></pre>

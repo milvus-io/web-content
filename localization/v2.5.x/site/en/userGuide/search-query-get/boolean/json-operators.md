@@ -68,8 +68,8 @@ title: JSON Operators
     </button></h2><p>The <code translate="no">json_contains</code> operator checks if a specific element or subarray exists within a JSON field. It’s useful when you want to ensure that a JSON array or object contains a particular value.​</p>
 <p><strong>Example</strong>​</p>
 <p>Imagine you have a collection of products, each with a <code translate="no">tags</code> field that contains a JSON array of strings, such as <code translate="no">[&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]</code>. You want to filter products that have the tag <code translate="no">&quot;sale&quot;</code>.​</p>
-<pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>]}​
-filter = <span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#x27;</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}​</span>
+<span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>In this example, Milvus will return all products where the <code translate="no">tags</code> field contains the element <code translate="no">&quot;sale&quot;</code>.​</p>
@@ -91,8 +91,8 @@ filter = <span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#
     </button></h2><p>The <code translate="no">json_contains_all</code> operator ensures that all elements of a specified JSON expression are present in the target field. It is particularly useful when you need to match multiple values within a JSON array.​</p>
 <p><strong>Example</strong>​</p>
 <p>Continuing with the product tags scenario, if you want to find all products that have the tags <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code>, and <code translate="no">&quot;new&quot;</code>, you can use the <code translate="no">json_contains_all</code> operator.​</p>
-<pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>, <span class="hljs-string">&quot;discount&quot;</span>]}​
-filter = <span class="hljs-string">&#x27;json_contains_all(tags, [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;])&#x27;</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;, &quot;discount&quot;]}​</span>
+<span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_contains_all(tags, [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;])&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>This query will return all products where the <code translate="no">tags</code> array contains all three specified elements: <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code>, and <code translate="no">&quot;new&quot;</code>.​</p>
@@ -114,8 +114,8 @@ filter = <span class="hljs-string">&#x27;json_contains_all(tags, [&quot;electron
     </button></h2><p>The <code translate="no">json_contains_any</code> operator filters entities where at least one member of the JSON expression exists within the field. This is useful when you want to match entities based on any one of several possible values.​</p>
 <p><strong>Example</strong>​</p>
 <p>Let’s say you want to filter products that have at least one of the tags <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code>, or <code translate="no">&quot;new&quot;</code>. You can use the <code translate="no">json_contains_any</code> operator to achieve this.​</p>
-<pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>]}​
-filter = <span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}​</span>
+<span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>In this case, Milvus will return all products that have at least one of the tags in the list <code translate="no">[&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;]</code>. Even if a product only has one of these tags, it will be included in the result.​</p>

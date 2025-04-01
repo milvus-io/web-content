@@ -68,9 +68,9 @@ title: Integrate Milvus with MindsDB
 <p>These are used for <code translate="no">SELECT</code> queries:</p>
 <ul>
 <li><code translate="no">search_default_limit</code>: default limit to be passed in select statements (default=100)</li>
-<li><code translate="no">search_metric_type</code>: metric type used for searches (default=&quot;L2&quot;)</li>
+<li><code translate="no">search_metric_type</code>: metric type used for searches (default="L2")</li>
 <li><code translate="no">search_ignore_growing</code>: whether to ignore growing segments during similarity searches (default=False)</li>
-<li><code translate="no">search_params</code>: specific to the <code translate="no">search_metric_type</code> (default={&quot;nprobe&quot;: 10})</li>
+<li><code translate="no">search_params</code>: specific to the <code translate="no">search_metric_type</code> (default={"nprobe": 10})</li>
 </ul>
 <p>These are used for <code translate="no">CREATE</code> queries:</p>
 <ul>
@@ -103,14 +103,14 @@ title: Integrate Milvus with MindsDB
       </svg>
     </button></h2><p>Before continuing, make sure that <code translate="no">pymilvus</code> version is same as this <a href="https://github.com/mindsdb/mindsdb/blob/main/mindsdb/integrations/handlers/milvus_handler/requirements.txt">pinned version</a>. If you find any issues with version compatibility, you can roll back your version of pymilvus, or customize it in this <a href="https://github.com/mindsdb/mindsdb/tree/main/mindsdb/integrations/handlers/milvus_handler">requirement file</a>.</p>
 <h3 id="Creating-connection" class="common-anchor-header">Creating connection</h3><p>In order to make use of this handler and connect to a Milvus server in MindsDB, the following syntax can be used:</p>
-<pre><code translate="no" class="language-sql">CREATE DATABASE milvus_datasource
-<span class="hljs-type">WITH</span>
-  <span class="hljs-variable">ENGINE</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;milvus&#x27;</span>,
-  PARAMETERS = {
-    <span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-string">&quot;./milvus_local.db&quot;</span>,
-    <span class="hljs-string">&quot;token&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
-    <span class="hljs-string">&quot;create_embedding_dim&quot;</span>: <span class="hljs-number">3</span>,
-    <span class="hljs-string">&quot;create_auto_id&quot;</span>: <span class="hljs-literal">true</span>
+<pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> DATABASE milvus_datasource
+<span class="hljs-keyword">WITH</span>
+  ENGINE <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;milvus&#x27;</span>,
+  PARAMETERS <span class="hljs-operator">=</span> {
+    &quot;uri&quot;: &quot;./milvus_local.db&quot;,
+    &quot;token&quot;: &quot;&quot;,
+    &quot;create_embedding_dim&quot;: <span class="hljs-number">3</span>,
+    &quot;create_auto_id&quot;: <span class="hljs-literal">true</span>
 };
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
@@ -121,11 +121,11 @@ title: Integrate Milvus with MindsDB
 </ul>
 </blockquote>
 <h3 id="Dropping-connection" class="common-anchor-header">Dropping connection</h3><p>To drop the connection, use this command</p>
-<pre><code translate="no" class="language-sql">DROP DATABASE milvus_datasource;
+<pre><code translate="no" class="language-sql"><span class="hljs-keyword">DROP</span> DATABASE milvus_datasource;
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Creating-tables" class="common-anchor-header">Creating tables</h3><p>To insert data from a pre-existing table, use <code translate="no">CREATE</code></p>
-<pre><code translate="no" class="language-sql">CREATE TABLE milvus_datasource.test
-(SELECT * FROM sqlitedb.test);
+<pre><code translate="no" class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> milvus_datasource.test
+(<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> sqlitedb.test);
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Dropping-collections" class="common-anchor-header">Dropping collections</h3><p>Dropping a collection is not supported</p>
 <h3 id="Querying-and-selecting" class="common-anchor-header">Querying and selecting</h3><p>To query database using a search vector, you can use <code translate="no">search_vector</code> in <code translate="no">WHERE</code> clause</p>
@@ -135,16 +135,16 @@ title: Integrate Milvus with MindsDB
 <li>Metadata column is not supported, but if the collection has dynamic schema enabled, you can query like normal, see the example below</li>
 <li>Dynamic fields cannot be displayed but can be queried</li>
 </ul>
-<pre><code translate="no" class="language-sql"><span class="hljs-variable constant_">SELECT</span> * <span class="hljs-keyword">from</span> milvus_datasource.<span class="hljs-property">test</span>
-<span class="hljs-variable constant_">WHERE</span> search_vector = <span class="hljs-string">&#x27;[3.0, 1.0, 2.0, 4.5]&#x27;</span>
-<span class="hljs-variable constant_">LIMIT</span> <span class="hljs-number">10</span>;
+<pre><code translate="no" class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> milvus_datasource.test
+<span class="hljs-keyword">WHERE</span> search_vector <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;[3.0, 1.0, 2.0, 4.5]&#x27;</span>
+LIMIT <span class="hljs-number">10</span>;
 <button class="copy-code-btn"></button></code></pre>
 <p>If you omit the <code translate="no">search_vector</code>, this becomes a basic search and <code translate="no">LIMIT</code> or <code translate="no">search_default_limit</code> amount of entries in collection are returned</p>
-<pre><code translate="no" class="language-sql"><span class="hljs-variable constant_">SELECT</span> * <span class="hljs-keyword">from</span> milvus_datasource.<span class="hljs-property">test</span>
+<pre><code translate="no" class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> milvus_datasource.test
 <button class="copy-code-btn"></button></code></pre>
 <p>You can use <code translate="no">WHERE</code> clause on dynamic fields like normal SQL</p>
-<pre><code translate="no" class="language-sql">SELECT * FROM milvus_datasource.createtest
-<span class="hljs-type">WHERE</span> <span class="hljs-variable">category</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;science&quot;</span>;
+<pre><code translate="no" class="language-sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> milvus_datasource.createtest
+<span class="hljs-keyword">WHERE</span> category <span class="hljs-operator">=</span> &quot;science&quot;;
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Deleting-records" class="common-anchor-header">Deleting records</h3><p>You can delete entries using <code translate="no">DELETE</code> just like in SQL.</p>
 <p>Caveats:</p>
@@ -152,12 +152,12 @@ title: Integrate Milvus with MindsDB
 <li>Milvus only supports deleting entities with clearly specified primary keys</li>
 <li>You can only use <code translate="no">IN</code> operator</li>
 </ul>
-<pre><code translate="no" class="language-sql">DELETE FROM milvus_datasource.test
-WHERE <span class="hljs-built_in">id</span> IN (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
+<pre><code translate="no" class="language-sql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> milvus_datasource.test
+<span class="hljs-keyword">WHERE</span> id <span class="hljs-keyword">IN</span> (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Inserting-records" class="common-anchor-header">Inserting records</h3><p>You can also insert individual rows like so:</p>
-<pre><code translate="no" class="language-sql">INSERT INTO milvus_test.testable (<span class="hljs-built_in">id</span>,content,metadata,embeddings)
-VALUES (<span class="hljs-string">&quot;id3&quot;</span>, <span class="hljs-string">&#x27;this is a test&#x27;</span>, <span class="hljs-string">&#x27;{&quot;test&quot;: &quot;test&quot;}&#x27;</span>, <span class="hljs-string">&#x27;[1.0, 8.0, 9.0]&#x27;</span>);
+<pre><code translate="no" class="language-sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> milvus_test.testable (id,content,metadata,embeddings)
+<span class="hljs-keyword">VALUES</span> (&quot;id3&quot;, <span class="hljs-string">&#x27;this is a test&#x27;</span>, <span class="hljs-string">&#x27;{&quot;test&quot;: &quot;test&quot;}&#x27;</span>, <span class="hljs-string">&#x27;[1.0, 8.0, 9.0]&#x27;</span>);
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Updating" class="common-anchor-header">Updating</h3><p>Updating records is not supported by Milvus API. You can try using combination of <code translate="no">DELETE</code> and <code translate="no">INSERT</code></p>
 <hr>

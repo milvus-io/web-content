@@ -49,7 +49,7 @@ title: Evaluation with Arize Pheonix
 <p>We will use OpenAI as the LLM in this example. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-# os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-*****************&quot;</span>
+<span class="hljs-comment"># os.environ[&quot;OPENAI_API_KEY&quot;] = &quot;sk-*****************&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Define-the-RAG-pipeline" class="common-anchor-header">Define the RAG pipeline<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -176,10 +176,10 @@ The class contains the <code translate="no">load</code> method, which loads the 
             <span class="hljs-keyword">return</span> response.choices[<span class="hljs-number">0</span>].message.content, retrieved_texts
 <button class="copy-code-btn"></button></code></pre>
 <p>Let’s initialize the RAG class with OpenAI and Milvus clients.</p>
-<pre><code translate="no" class="language-python">openai_client = <span class="hljs-title class_">OpenAI</span>()
-milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python">openai_client = OpenAI()
+milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
-my_rag = <span class="hljs-title function_">RAG</span>(openai_client=openai_client, milvus_client=milvus_client)
+my_rag = RAG(openai_client=openai_client, milvus_client=milvus_client)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>As for the argument of <code translate="no">MilvusClient</code>:</p>
@@ -401,7 +401,7 @@ hallucination_eval_df, qa_eval_df = run_evals(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">run_evals |██████████| 6/6 (100.0%) | ⏳ 00:03&lt;00:00 |  1.64it/s
 </code></pre>
-<pre><code translate="no" class="language-python">results_df = df.<span class="hljs-built_in">copy</span>()
+<pre><code translate="no" class="language-python">results_df = df.copy()
 results_df[<span class="hljs-string">&quot;hallucination_eval&quot;</span>] = hallucination_eval_df[<span class="hljs-string">&quot;label&quot;</span>]
 results_df[<span class="hljs-string">&quot;hallucination_explanation&quot;</span>] = hallucination_eval_df[<span class="hljs-string">&quot;explanation&quot;</span>]
 results_df[<span class="hljs-string">&quot;qa_eval&quot;</span>] = qa_eval_df[<span class="hljs-string">&quot;label&quot;</span>]

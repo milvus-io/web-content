@@ -44,14 +44,14 @@ summary: >-
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = <span class="hljs-title class_">MilvusClient</span>(
+client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-client.<span class="hljs-title function_">rename_collection</span>(
+client.rename_collection(
     old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
 )
@@ -153,9 +153,9 @@ curl --request POST \
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client.<span class="hljs-title function_">alter_collection_properties</span>(
+client.alter_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
 )
@@ -265,17 +265,17 @@ curl --request POST \
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_collection_properties</span>(
+<pre><code translate="no" class="language-python">client.drop_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     property_keys=[
         <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>
     ]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">client.<span class="hljs-title function_">dropCollectionProperties</span>(<span class="hljs-title class_">DropCollectionPropertiesReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .<span class="hljs-title function_">propertyKeys</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>))
-        .<span class="hljs-title function_">build</span>());
+<pre><code translate="no" class="language-java">client.dropCollectionProperties(DropCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .propertyKeys(Collections.singletonList(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>))
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">dropCollectionProperties</span>({
     <span class="hljs-attr">collection_name</span>:<span class="hljs-string">&quot;my_collection&quot;</span>,

@@ -30,8 +30,8 @@ title: Upgrade Pulsar in Milvus from V2 to V3
 <li><p>Before the operation, you need to stop all running clients from writing data to Milvus. Otherwise, the written data may be lost.​</p></li>
 <li><p>This article assumes that Milvus is installed in namespace <code translate="no">default</code> and named <code translate="no">my-release</code>. Please change the parameters to your own namespace and release name while executing the commands copied from this page.​</p></li>
 <li><p>Ensure that your work environment has permissions under the above-mentioned namespace in the Kubernetes cluster and the following commands are installed:​</p>
-<p>a. <code translate="no">kubectl</code> &gt;= 1.20​</p>
-<p>b. <code translate="no">helm</code> &gt;= 3.14.0​</p>
+<p>a. <code translate="no">kubectl</code> >= 1.20​</p>
+<p>b. <code translate="no">helm</code> >= 3.14.0​</p>
 <p>c. <code translate="no">cat</code>, <code translate="no">grep</code>, <code translate="no">awk</code> for string manipulate operations​</p>
 <p>d. <code translate="no">curl</code> or <strong>Attu v2.4+</strong> to interact with milvus management API​</p></li>
 </ol>
@@ -100,15 +100,15 @@ title: Upgrade Pulsar in Milvus from V2 to V3
 </ol>
 <h4 id="Approach-2-Using-management-API" class="common-anchor-header">Approach 2: Using management API</h4><ol>
 <li><p>Proxy port 9091 of Milvus proxy to the local host for subsequent operations.​</p>
-<pre><code translate="no" class="language-bash">kubectl -n <span class="hljs-keyword">default</span> port-forward deploy/my-release-milvus-proxy <span class="hljs-number">9091</span>:<span class="hljs-number">9091</span> &amp;​
+<pre><code translate="no" class="language-bash">kubectl -n default port-forward deploy/my-release-milvus-proxy 9091:9091 &amp;​
 <button class="copy-code-btn"></button></code></pre>
 <p>Output:​</p>
-<pre><code translate="no" class="language-yaml">[<span class="hljs-meta">1</span>] <span class="hljs-number">8116</span>​
-Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">9091</span> -&gt; <span class="hljs-number">9091</span>​
+<pre><code translate="no" class="language-yaml">[<span class="hljs-number">1</span>] <span class="hljs-number">8116</span><span class="hljs-string">​</span>
+<span class="hljs-string">Forwarding</span> <span class="hljs-string">from</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><span class="hljs-string">:9091</span> <span class="hljs-string">-&gt;</span> <span class="hljs-number">9091</span><span class="hljs-string">​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Save Pid for later cleanup.​</p>
-<pre><code translate="no" class="language-yaml">pid=8116​
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">pid=8116​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Trigger the action of persisting all inserted data from Pulsar to Ojbect Storage​.</p>
@@ -120,13 +120,13 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Output:​</p>
-<pre><code translate="no" class="language-yaml">{​
-  <span class="hljs-string">&quot;segmentIDs&quot;</span>: [​
-    <span class="hljs-number">454097953998181000</span>,​
-    <span class="hljs-number">454097953999383600</span>,​
-    <span class="hljs-number">454097953998180800</span>​
-  ]​
-}​
+<pre><code translate="no" class="language-yaml">{<span class="hljs-string">​</span>
+  <span class="hljs-attr">&quot;segmentIDs&quot;:</span> [<span class="hljs-string">​</span>
+    <span class="hljs-number">454097953998181000</span>,<span class="hljs-string">​</span>
+    <span class="hljs-number">454097953999383600</span>,<span class="hljs-string">​</span>
+    <span class="hljs-number">454097953998180800</span><span class="hljs-string">​</span>
+  ]<span class="hljs-string">​</span>
+}<span class="hljs-string">​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Check All segments flushed.​</p>
@@ -134,15 +134,15 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 
 <button class="copy-code-btn"></button></code></pre>
 <p>When it is finished, you should see the following output​</p>
-<pre><code translate="no" class="language-json">{<span class="hljs-string">&quot;status&quot;</span>:{},<span class="hljs-string">&quot;flushed&quot;</span>:<span class="hljs-literal">true</span>}​
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;flushed&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">}</span>​
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Stop the backendground <code translate="no">kubectl port-forward</code> process​</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-built_in">kill</span> <span class="hljs-variable">$pid</span>​
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">kill</span> <span class="hljs-string">$pid​</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Output:​</p>
-<pre><code translate="no" class="language-yaml">[<span class="hljs-meta">1</span>]  + <span class="hljs-number">8116</span> terminated  kubectl -n <span class="hljs-literal">default</span> port-forward deploy/my-release-milvus-proxy <span class="hljs-number">9091</span>:<span class="hljs-number">9091</span>                      ​
+<pre><code translate="no" class="language-yaml">[<span class="hljs-number">1</span>]  <span class="hljs-string">+</span> <span class="hljs-number">8116 </span><span class="hljs-string">terminated</span>  <span class="hljs-string">kubectl</span> <span class="hljs-string">-n</span> <span class="hljs-string">default</span> <span class="hljs-string">port-forward</span> <span class="hljs-string">deploy/my-release-milvus-proxy</span> <span class="hljs-number">9091</span><span class="hljs-string">:9091</span>                      <span class="hljs-string">​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
@@ -156,22 +156,22 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 <h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">Delete Pulsar V2 using Helm</h4><p>If you have installed Milvus using the Milvus Helm chart, following the steps below to stop the Milvus pod and delete the Pulsar V2 deployment.</p>
 <ol>
 <li><p>Save the current Milvus release values to <code translate="no">values.yaml</code> for later recover:​</p>
-<pre><code translate="no" class="language-bash">helm -n <span class="hljs-literal">default</span> <span class="hljs-keyword">get</span> values my-release -o yaml &gt; values.yaml​
-cat values.yaml​
+<pre><code translate="no" class="language-bash">helm -n default get values my-release -o yaml &gt; values.yaml​
+<span class="hljs-built_in">cat</span> values.yaml​
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Use the command to stop Milvus and all the dependencies. Don’t worry about the data volumes, they will be kept by default.​</p>
-<pre><code translate="no" class="language-bash">helm -n <span class="hljs-keyword">default</span> uninstall my-release​
+<pre><code translate="no" class="language-bash">helm -n default uninstall my-release​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Output​</p>
 <pre><code translate="no" class="language-bash">These resources were kept due to the resource policy:​
-[<span class="hljs-meta">PersistentVolumeClaim</span>] my-release-minio​
+[PersistentVolumeClaim] my-release-minio​
 ​
 release <span class="hljs-string">&quot;my-release&quot;</span> uninstalled​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>List pulsar PVCs &amp; PVs (Persistent Volume Claims &amp; Persistent Volume) needs to be cleared​</p>
+<li><p>List pulsar PVCs & PVs (Persistent Volume Claims & Persistent Volume) needs to be cleared​</p>
 <pre><code translate="no" class="language-bash">kubectl -n default get pvc -lapp=pulsar,release=my-release |grep -v NAME |awk <span class="hljs-string">&#x27;{print $1}&#x27;</span> &gt; pulsar-pvcs.txt​
 kubectl -n default get pvc -lapp=pulsar,release=my-release -o custom-columns=VOL:.spec.volumeName|grep -v VOL &gt; pulsar-pvs.txt​
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Volume Claims:&quot;</span>​
@@ -181,121 +181,121 @@ kubectl -n default get pvc -lapp=pulsar,release=my-release -o custom-columns=VOL
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Output​</p>
-<pre><code translate="no" class="language-yaml">Volume Claims:​
-my-release-pulsar-bookie-journal-my-release-pulsar-bookie-0​
-my-release-pulsar-bookie-journal-my-release-pulsar-bookie-1​
-my-release-pulsar-bookie-ledgers-my-release-pulsar-bookie-0​
-my-release-pulsar-bookie-ledgers-my-release-pulsar-bookie-1​
-my-release-pulsar-zookeeper-data-my-release-pulsar-zookeeper-0​
-Volumes:​
-pvc-f590a4de-df31-4ca8-a424-007eac3c619a​
-pvc-17b0e215-3e14-4d14-901e-1a1dda9ff5a3​
-pvc-72f83c25-6ea1-45ee-9559-0b783f2c530b​
-pvc-60dcb6e4-760d-46c7-af1a-d1fc153b0caf​
-pvc-2da33f64-c053-42b9-bb72-c5d50779aa0a​
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">Volume</span> <span class="hljs-string">Claims:​</span>
+<span class="hljs-string">my-release-pulsar-bookie-journal-my-release-pulsar-bookie-0​</span>
+<span class="hljs-string">my-release-pulsar-bookie-journal-my-release-pulsar-bookie-1​</span>
+<span class="hljs-string">my-release-pulsar-bookie-ledgers-my-release-pulsar-bookie-0​</span>
+<span class="hljs-string">my-release-pulsar-bookie-ledgers-my-release-pulsar-bookie-1​</span>
+<span class="hljs-string">my-release-pulsar-zookeeper-data-my-release-pulsar-zookeeper-0​</span>
+<span class="hljs-string">Volumes:​</span>
+<span class="hljs-string">pvc-f590a4de-df31-4ca8-a424-007eac3c619a​</span>
+<span class="hljs-string">pvc-17b0e215-3e14-4d14-901e-1a1dda9ff5a3​</span>
+<span class="hljs-string">pvc-72f83c25-6ea1-45ee-9559-0b783f2c530b​</span>
+<span class="hljs-string">pvc-60dcb6e4-760d-46c7-af1a-d1fc153b0caf​</span>
+<span class="hljs-string">pvc-2da33f64-c053-42b9-bb72-c5d50779aa0a​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Check if the PVC list of <code translate="no">pulsar-pvcs.txt</code> is all for Pulsar.​ Once you have confirmed that there is no error, delete the PVCs.</p>
-<pre><code translate="no" class="language-bash">cat pulsar-pvcs.<span class="hljs-property">txt</span> |xargs -I {} kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> pvc {} --wait=<span class="hljs-literal">false</span>​
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> pulsar-pvcs.txt |xargs -I {} kubectl -n default delete pvc {} --<span class="hljs-built_in">wait</span>=<span class="hljs-literal">false</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Output:​</p>
-<pre><code translate="no" class="language-yaml">persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-bookie-journal-my-release-pulsar-bookie-0&quot;</span> deleted​
-persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-bookie-journal-my-release-pulsar-bookie-1&quot;</span> deleted​
-persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-bookie-ledgers-my-release-pulsar-bookie-0&quot;</span> deleted​
-persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-bookie-ledgers-my-release-pulsar-bookie-1&quot;</span> deleted​
-persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-zookeeper-data-my-release-pulsar-zookeeper-0&quot;</span> deleted​
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">persistentvolumeclaim</span> <span class="hljs-string">&quot;my-release-pulsar-bookie-journal-my-release-pulsar-bookie-0&quot;</span> <span class="hljs-string">deleted​</span>
+<span class="hljs-string">persistentvolumeclaim</span> <span class="hljs-string">&quot;my-release-pulsar-bookie-journal-my-release-pulsar-bookie-1&quot;</span> <span class="hljs-string">deleted​</span>
+<span class="hljs-string">persistentvolumeclaim</span> <span class="hljs-string">&quot;my-release-pulsar-bookie-ledgers-my-release-pulsar-bookie-0&quot;</span> <span class="hljs-string">deleted​</span>
+<span class="hljs-string">persistentvolumeclaim</span> <span class="hljs-string">&quot;my-release-pulsar-bookie-ledgers-my-release-pulsar-bookie-1&quot;</span> <span class="hljs-string">deleted​</span>
+<span class="hljs-string">persistentvolumeclaim</span> <span class="hljs-string">&quot;my-release-pulsar-zookeeper-data-my-release-pulsar-zookeeper-0&quot;</span> <span class="hljs-string">deleted​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>(Optional) Depending on the storage class providing the PVC, you may also need to manually remove the PV.​</p>
-<pre><code translate="no" class="language-yaml">cat pulsar-pvs.<span class="hljs-property">txt</span> |xargs -I {} kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> pvc {} --wait=<span class="hljs-literal">false</span>​
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">cat</span> <span class="hljs-string">pulsar-pvs.txt</span> <span class="hljs-string">|xargs</span> <span class="hljs-string">-I</span> {} <span class="hljs-string">kubectl</span> <span class="hljs-string">-n</span> <span class="hljs-string">default</span> <span class="hljs-string">delete</span> <span class="hljs-string">pvc</span> {} <span class="hljs-string">--wait=false​</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <p>It’s OK if it outputs NotFound errors. It’s already deleted by kubernetes controllers.​</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-title class_">Error</span> <span class="hljs-keyword">from</span> <span class="hljs-title function_">server</span> (<span class="hljs-title class_">NotFound</span>): persistentvolumeclaims <span class="hljs-string">&quot;pvc-f590a4de-df31-4ca8-a424-007eac3c619a&quot;</span> not found​
-<span class="hljs-title class_">Error</span> <span class="hljs-keyword">from</span> <span class="hljs-title function_">server</span> (<span class="hljs-title class_">NotFound</span>): persistentvolumeclaims <span class="hljs-string">&quot;pvc-17b0e215-3e14-4d14-901e-1a1dda9ff5a3&quot;</span> not found​
-<span class="hljs-title class_">Error</span> <span class="hljs-keyword">from</span> <span class="hljs-title function_">server</span> (<span class="hljs-title class_">NotFound</span>): persistentvolumeclaims <span class="hljs-string">&quot;pvc-72f83c25-6ea1-45ee-9559-0b783f2c530b&quot;</span> not found​
-<span class="hljs-title class_">Error</span> <span class="hljs-keyword">from</span> <span class="hljs-title function_">server</span> (<span class="hljs-title class_">NotFound</span>): persistentvolumeclaims <span class="hljs-string">&quot;pvc-60dcb6e4-760d-46c7-af1a-d1fc153b0caf&quot;</span> not found​
-<span class="hljs-title class_">Error</span> <span class="hljs-keyword">from</span> <span class="hljs-title function_">server</span> (<span class="hljs-title class_">NotFound</span>): persistentvolumeclaims <span class="hljs-string">&quot;pvc-2da33f64-c053-42b9-bb72-c5d50779aa0a&quot;</span> not found​
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">Error from server (NotFound):</span> <span class="hljs-string">persistentvolumeclaims</span> <span class="hljs-string">&quot;pvc-f590a4de-df31-4ca8-a424-007eac3c619a&quot;</span> <span class="hljs-string">not</span> <span class="hljs-string">found​</span>
+<span class="hljs-attr">Error from server (NotFound):</span> <span class="hljs-string">persistentvolumeclaims</span> <span class="hljs-string">&quot;pvc-17b0e215-3e14-4d14-901e-1a1dda9ff5a3&quot;</span> <span class="hljs-string">not</span> <span class="hljs-string">found​</span>
+<span class="hljs-attr">Error from server (NotFound):</span> <span class="hljs-string">persistentvolumeclaims</span> <span class="hljs-string">&quot;pvc-72f83c25-6ea1-45ee-9559-0b783f2c530b&quot;</span> <span class="hljs-string">not</span> <span class="hljs-string">found​</span>
+<span class="hljs-attr">Error from server (NotFound):</span> <span class="hljs-string">persistentvolumeclaims</span> <span class="hljs-string">&quot;pvc-60dcb6e4-760d-46c7-af1a-d1fc153b0caf&quot;</span> <span class="hljs-string">not</span> <span class="hljs-string">found​</span>
+<span class="hljs-attr">Error from server (NotFound):</span> <span class="hljs-string">persistentvolumeclaims</span> <span class="hljs-string">&quot;pvc-2da33f64-c053-42b9-bb72-c5d50779aa0a&quot;</span> <span class="hljs-string">not</span> <span class="hljs-string">found​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <h4 id="Delete-Pulsar-V2-using-Milvus-Operator" class="common-anchor-header">Delete Pulsar V2 using Milvus Operator</h4><p>If you have installed Milvus using the Milvus Operator, following the steps below to stop the Milvus pod and delete the Pulsar V2 deployment.</p>
 <ol>
 <li><p>Save current Milvus Manifest to <code translate="no">milvus.yaml</code> for later use​.</p>
-<pre><code translate="no" class="language-bash">kubectl -n <span class="hljs-literal">default</span> <span class="hljs-keyword">get</span> milvus my-release -o yaml &gt; milvus.yaml​
-head milvus.yaml -n <span class="hljs-number">20</span>​
+<pre><code translate="no" class="language-bash">kubectl -n default get milvus my-release -o yaml &gt; milvus.yaml​
+<span class="hljs-built_in">head</span> milvus.yaml -n 20​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Output:​</p>
-<pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1​
-kind: Milvus​
-metadata:​
-  annotations:​
-    milvus.io/dependency-values-merged: <span class="hljs-string">&quot;true&quot;</span>​
-    milvus.io/pod-service-label-added: <span class="hljs-string">&quot;true&quot;</span>​
-    milvus.io/querynode-current-group-id: <span class="hljs-string">&quot;0&quot;</span>​
-  creationTimestamp: <span class="hljs-string">&quot;2024-11-22T08:06:59Z&quot;</span>​
-  finalizers:​
-  - milvus.milvus.io/finalizer​
-  generation: 3​
-  labels:​
-    app: milvus​
-    milvus.io/operator-version: 1.1.2​
-name: my-release​
-namespace: default​
-resourceVersion: <span class="hljs-string">&quot;692217324&quot;</span>​
-uid: 7a469ed0-9df1-494e-bd9a-340fac4305b5​
-spec:​
-  components:​
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1​</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus​</span>
+<span class="hljs-string">metadata:​</span>
+  <span class="hljs-string">annotations:​</span>
+    <span class="hljs-attr">milvus.io/dependency-values-merged:</span> <span class="hljs-string">&quot;true&quot;</span><span class="hljs-string">​</span>
+    <span class="hljs-attr">milvus.io/pod-service-label-added:</span> <span class="hljs-string">&quot;true&quot;</span><span class="hljs-string">​</span>
+    <span class="hljs-attr">milvus.io/querynode-current-group-id:</span> <span class="hljs-string">&quot;0&quot;</span><span class="hljs-string">​</span>
+  <span class="hljs-attr">creationTimestamp:</span> <span class="hljs-string">&quot;2024-11-22T08:06:59Z&quot;</span><span class="hljs-string">​</span>
+  <span class="hljs-string">finalizers:​</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">milvus.milvus.io/finalizer​</span>
+  <span class="hljs-attr">generation:</span> <span class="hljs-number">3</span><span class="hljs-string">​</span>
+  <span class="hljs-string">labels:​</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus​</span>
+    <span class="hljs-attr">milvus.io/operator-version:</span> <span class="hljs-number">1.1</span><span class="hljs-number">.2</span><span class="hljs-string">​</span>
+<span class="hljs-attr">name:</span> <span class="hljs-string">my-release​</span>
+<span class="hljs-attr">namespace:</span> <span class="hljs-string">default​</span>
+<span class="hljs-attr">resourceVersion:</span> <span class="hljs-string">&quot;692217324&quot;</span><span class="hljs-string">​</span>
+<span class="hljs-attr">uid:</span> <span class="hljs-string">7a469ed0-9df1-494e-bd9a-340fac4305b5​</span>
+<span class="hljs-string">spec:​</span>
+  <span class="hljs-string">components:​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Create an <code translate="no">patch.yaml</code> File with following content.</p>
-<pre><code translate="no" class="language-yaml"># a patch to retain etcd &amp; storage data and <span class="hljs-built_in">delete</span> pulsar data while <span class="hljs-built_in">delete</span> milvus​
-spec:​
-  dependencies:​
-    etcd:​
-      inCluster:​
-        deletionPolicy: Retain​
-        pvcDeletion: <span class="hljs-literal">false</span>​
-    storage:​
-      inCluster:​
-        deletionPolicy: Retain​
-        pvcDeletion: <span class="hljs-literal">false</span>​
-    pulsar:​
-      inCluster:​
-        deletionPolicy: Delete​
-        pvcDeletion: <span class="hljs-literal">true</span>​
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># a patch to retain etcd &amp; storage data and delete pulsar data while delete milvus​</span>
+<span class="hljs-string">spec:​</span>
+  <span class="hljs-string">dependencies:​</span>
+    <span class="hljs-string">etcd:​</span>
+      <span class="hljs-string">inCluster:​</span>
+        <span class="hljs-attr">deletionPolicy:</span> <span class="hljs-string">Retain​</span>
+        <span class="hljs-attr">pvcDeletion:</span> <span class="hljs-literal">false</span><span class="hljs-string">​</span>
+    <span class="hljs-string">storage:​</span>
+      <span class="hljs-string">inCluster:​</span>
+        <span class="hljs-attr">deletionPolicy:</span> <span class="hljs-string">Retain​</span>
+        <span class="hljs-attr">pvcDeletion:</span> <span class="hljs-literal">false</span><span class="hljs-string">​</span>
+    <span class="hljs-string">pulsar:​</span>
+      <span class="hljs-string">inCluster:​</span>
+        <span class="hljs-attr">deletionPolicy:</span> <span class="hljs-string">Delete​</span>
+        <span class="hljs-attr">pvcDeletion:</span> <span class="hljs-literal">true</span><span class="hljs-string">​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Use <code translate="no">kubectl patch</code> to retain etcd &amp; storage data and delete pulsar data while delete milvus​.</p>
-<pre><code translate="no" class="language-yaml">kubectl -n <span class="hljs-keyword">default</span> patch milvus my-release --patch-file patch.yaml --<span class="hljs-keyword">type</span>=merge​
+<li><p>Use <code translate="no">kubectl patch</code> to retain etcd & storage data and delete pulsar data while delete milvus​.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">kubectl</span> <span class="hljs-string">-n</span> <span class="hljs-string">default</span> <span class="hljs-string">patch</span> <span class="hljs-string">milvus</span> <span class="hljs-string">my-release</span> <span class="hljs-string">--patch-file</span> <span class="hljs-string">patch.yaml</span> <span class="hljs-string">--type=merge​</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Output:​</p>
 <pre><code translate="no" class="language-bash">milvus.milvus.io/my-release patched​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Stop Milvus and delete pulsar V2. Don’t worry about the etcd &amp; object storage data volumes, they will be kept by default.​</p>
-<pre><code translate="no" class="language-bash">kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> milvus my-release --wait=<span class="hljs-literal">false</span>​
-kubectl -n <span class="hljs-keyword">default</span> get milvus my-release​
-kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> milvus my-release --wait=<span class="hljs-literal">true</span>​
+<li><p>Stop Milvus and delete pulsar V2. Don’t worry about the etcd & object storage data volumes, they will be kept by default.​</p>
+<pre><code translate="no" class="language-bash">kubectl -n default delete milvus my-release --<span class="hljs-built_in">wait</span>=<span class="hljs-literal">false</span>​
+kubectl -n default get milvus my-release​
+kubectl -n default delete milvus my-release --<span class="hljs-built_in">wait</span>=<span class="hljs-literal">true</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Output: Note it might take a few minutes for milvus to graceful stop &amp; for operator to delete pulsar volumes.​</p>
+<p>Output: Note it might take a few minutes for milvus to graceful stop & for operator to delete pulsar volumes.​</p>
 <pre><code translate="no" class="language-bash">milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted​
 NAME         MODE      STATUS     UPDATED   AGE​
-my-release   cluster   Deleting   <span class="hljs-literal">True</span>      41m​
+my-release   cluster   Deleting   True      41m​
 milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Wait until the command finished.​</p></li>
 <li><p>Check again to see the Milvus Resource is gone​</p>
-<pre><code translate="no" class="language-yaml">kubectl -n <span class="hljs-literal">default</span> <span class="hljs-keyword">get</span> milvus my-release​
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">kubectl</span> <span class="hljs-string">-n</span> <span class="hljs-string">default</span> <span class="hljs-string">get</span> <span class="hljs-string">milvus</span> <span class="hljs-string">my-release​</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Output should be like:​</p>
-<pre><code translate="no" class="language-yaml">No resources found <span class="hljs-keyword">in</span> <span class="hljs-literal">default</span> <span class="hljs-keyword">namespace</span>.​
+<pre><code translate="no" class="language-yaml"><span class="hljs-literal">No</span> <span class="hljs-string">resources</span> <span class="hljs-string">found</span> <span class="hljs-string">in</span> <span class="hljs-string">default</span> <span class="hljs-string">namespace.​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
@@ -309,124 +309,124 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 <h4 id="Start-Pulsar-V3-and-using-Helm" class="common-anchor-header">Start Pulsar V3 and using Helm</h4><ol>
 <li><p>Edit the <code translate="no">values.yaml</code> saved in previous Step.​</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change the following:​</span>
-pulsar:​
-  enabled: false <span class="hljs-comment"># set to false​</span>
+<span class="hljs-string">pulsar:​</span>
+  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># set to false​</span>
   <span class="hljs-comment"># you may also clean up rest fields under pulsar field​</span>
   <span class="hljs-comment"># it&#x27;s ok to keep them though.​</span>
-pulsarv3:​
-  enabled: true​
+<span class="hljs-string">pulsarv3:​</span>
+  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span><span class="hljs-string">​</span>
   <span class="hljs-comment"># append other values for pulsar v3 chart if needs​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Update your local helm repo​</p>
-<pre><code translate="no" class="language-bash">helm repo <span class="hljs-keyword">add</span> zilliztech https:<span class="hljs-comment">//zilliztech.github.io/milvus-helm​</span>
+<pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm​
 helm repo update zilliztech​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Output​</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-string">&quot;zilliztech&quot;</span> already exists <span class="hljs-keyword">with</span> the same configuration, skipping​
-<span class="hljs-title class_">Hang</span> tight <span class="hljs-keyword">while</span> we grab the latest <span class="hljs-keyword">from</span> your chart repositories...​
-...<span class="hljs-title class_">Successfully</span> got an update <span class="hljs-keyword">from</span> the <span class="hljs-string">&quot;zilliztech&quot;</span> chart repository​
-<span class="hljs-title class_">Update</span> <span class="hljs-title class_">Complete</span>. ⎈<span class="hljs-title class_">Happy</span> <span class="hljs-title class_">Helming</span>!⎈​
+<pre><code translate="no" class="language-bash"><span class="hljs-string">&quot;zilliztech&quot;</span> already exists with the same configuration, skipping​
+Hang tight <span class="hljs-keyword">while</span> we grab the latest from your chart repositories...​
+...Successfully got an update from the <span class="hljs-string">&quot;zilliztech&quot;</span> chart repository​
+Update Complete. ⎈Happy Helming!⎈​
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Install your milvus release with the newest helm chart version using the edited <code translate="no">values.yaml</code> ​</p>
-<pre><code translate="no" class="language-bash">helm -n <span class="hljs-keyword">default</span> install my-release zilliztech/milvus --reset-values -f values.<span class="hljs-property">yaml</span>​
+<pre><code translate="no" class="language-bash">helm -n default install my-release zilliztech/milvus --reset-values -f values.yaml​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Output​</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-attr">NAME</span>: my-release​
-<span class="hljs-variable constant_">LAST</span> <span class="hljs-attr">DEPLOYED</span>: <span class="hljs-title class_">Fri</span> <span class="hljs-title class_">Nov</span> <span class="hljs-number">22</span> <span class="hljs-number">15</span>:<span class="hljs-number">31</span>:<span class="hljs-number">27</span> <span class="hljs-number">2024</span>​
-<span class="hljs-attr">NAMESPACE</span>: <span class="hljs-keyword">default</span>​
-<span class="hljs-attr">STATUS</span>: deployed​
-<span class="hljs-attr">REVISION</span>: <span class="hljs-number">1</span>​
-<span class="hljs-variable constant_">TEST</span> <span class="hljs-attr">SUITE</span>: <span class="hljs-title class_">None</span>​
+<pre><code translate="no" class="language-bash">NAME: my-release​
+LAST DEPLOYED: Fri Nov 22 15:31:27 2024​
+NAMESPACE: default​
+STATUS: deployed​
+REVISION: 1​
+TEST SUITE: None​
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Check the pods to see if all of them get scheduled and running​ with <code translate="no">kubectl -n default get pods</code>.</p>
 <p>It may take a few minutes for all pods to get started​</p>
 <p>Output is like:​</p>
 <pre><code translate="no" class="language-bash">NAME                                          READY   STATUS      RESTARTS   AGE​
-my-release-etcd<span class="hljs-number">-0</span>                             <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m3s​
-my-release-milvus-datanode<span class="hljs-number">-56487b</span>c4bc-s6mbd   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m5s​
-my-release-milvus-indexnode<span class="hljs-number">-6476894</span>d6-rv85d   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m5s​
-my-release-milvus-mixcoord<span class="hljs-number">-6</span>d8875cb9c<span class="hljs-number">-67f</span>cq   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m4s​
-my-release-milvus-proxy<span class="hljs-number">-7b</span>c45d57c5<span class="hljs-number">-2</span>qf8m      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m4s​
-my-release-milvus-querynode<span class="hljs-number">-77465747b</span>-kt7f4   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m4s​
-my-release-minio<span class="hljs-number">-684f</span>f4f5df-pnc97             <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m5s​
-my-release-pulsarv3-bookie<span class="hljs-number">-0</span>                  <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m3s​
-my-release-pulsarv3-bookie<span class="hljs-number">-1</span>                  <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m3s​
-my-release-pulsarv3-bookie<span class="hljs-number">-2</span>                  <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m3s​
-my-release-pulsarv3-bookie-<span class="hljs-keyword">init</span><span class="hljs-number">-6</span>z4tk         <span class="hljs-number">0</span>/<span class="hljs-number">1</span>     Completed   <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m1s​
-my-release-pulsarv3-broker<span class="hljs-number">-0</span>                  <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m2s​
-my-release-pulsarv3-broker<span class="hljs-number">-1</span>                  <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m2s​
-my-release-pulsarv3-proxy<span class="hljs-number">-0</span>                   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m2s​
-my-release-pulsarv3-proxy<span class="hljs-number">-1</span>                   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m2s​
-my-release-pulsarv3-pulsar-<span class="hljs-keyword">init</span>-wvqpc         <span class="hljs-number">0</span>/<span class="hljs-number">1</span>     Completed   <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m1s​
-my-release-pulsarv3-recovery<span class="hljs-number">-0</span>                <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m3s​
-my-release-pulsarv3-zookeeper<span class="hljs-number">-0</span>               <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m2s​
-my-release-pulsarv3-zookeeper<span class="hljs-number">-1</span>               <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m2s​
-my-release-pulsarv3-zookeeper<span class="hljs-number">-2</span>               <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">4</span>m2s​
+my-release-etcd-0                             1/1     Running     0          4m3s​
+my-release-milvus-datanode-56487bc4bc-s6mbd   1/1     Running     0          4m5s​
+my-release-milvus-indexnode-6476894d6-rv85d   1/1     Running     0          4m5s​
+my-release-milvus-mixcoord-6d8875cb9c-67fcq   1/1     Running     0          4m4s​
+my-release-milvus-proxy-7bc45d57c5-2qf8m      1/1     Running     0          4m4s​
+my-release-milvus-querynode-77465747b-kt7f4   1/1     Running     0          4m4s​
+my-release-minio-684ff4f5df-pnc97             1/1     Running     0          4m5s​
+my-release-pulsarv3-bookie-0                  1/1     Running     0          4m3s​
+my-release-pulsarv3-bookie-1                  1/1     Running     0          4m3s​
+my-release-pulsarv3-bookie-2                  1/1     Running     0          4m3s​
+my-release-pulsarv3-bookie-init-6z4tk         0/1     Completed   0          4m1s​
+my-release-pulsarv3-broker-0                  1/1     Running     0          4m2s​
+my-release-pulsarv3-broker-1                  1/1     Running     0          4m2s​
+my-release-pulsarv3-proxy-0                   1/1     Running     0          4m2s​
+my-release-pulsarv3-proxy-1                   1/1     Running     0          4m2s​
+my-release-pulsarv3-pulsar-init-wvqpc         0/1     Completed   0          4m1s​
+my-release-pulsarv3-recovery-0                1/1     Running     0          4m3s​
+my-release-pulsarv3-zookeeper-0               1/1     Running     0          4m2s​
+my-release-pulsarv3-zookeeper-1               1/1     Running     0          4m2s​
+my-release-pulsarv3-zookeeper-2               1/1     Running     0          4m2s​
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <h4 id="Start-Pulsar-V3-and-using-Milvus-Operator" class="common-anchor-header">Start Pulsar V3 and using Milvus Operator</h4><ol>
 <li><p>Edit the <code translate="no">milvus.yaml</code> saved in previous Step.​</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change the followings fields:​</span>
-apiVersion: milvus.io/v1beta1​
-kind: Milvus​
-metadata:​
-  annotations: null <span class="hljs-comment"># this field should be removed or set to null​</span>
-  resourceVersion: null <span class="hljs-comment"># this field should be removed or set to null​</span>
-  uid: null <span class="hljs-comment"># this field should be removed or set to null​</span>
-spec:​
-  dependencies:​
-    pulsar:​
-      inCluster:​
-        chartVersion: pulsar-v3​
+<span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1​</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus​</span>
+<span class="hljs-string">metadata:​</span>
+  <span class="hljs-attr">annotations:</span> <span class="hljs-literal">null</span> <span class="hljs-comment"># this field should be removed or set to null​</span>
+  <span class="hljs-attr">resourceVersion:</span> <span class="hljs-literal">null</span> <span class="hljs-comment"># this field should be removed or set to null​</span>
+  <span class="hljs-attr">uid:</span> <span class="hljs-literal">null</span> <span class="hljs-comment"># this field should be removed or set to null​</span>
+<span class="hljs-string">spec:​</span>
+  <span class="hljs-string">dependencies:​</span>
+    <span class="hljs-string">pulsar:​</span>
+      <span class="hljs-string">inCluster:​</span>
+        <span class="hljs-attr">chartVersion:</span> <span class="hljs-string">pulsar-v3​</span>
         <span class="hljs-comment"># delete all previous values for pulsar v2 and set it to null.​</span>
         <span class="hljs-comment"># you may add additional values here for pulsar v3 if you&#x27;re sure about it.​</span>
-        values: null​
+        <span class="hljs-attr">values:</span> <span class="hljs-literal">null</span><span class="hljs-string">​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Ensure your Milvus Operator is upgraded to v1.1.2 or later version​</p>
-<pre><code translate="no" class="language-yaml">helm repo <span class="hljs-keyword">add</span> milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator​</span>
-helm repo update milvus-<span class="hljs-keyword">operator</span>​
-helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>​
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">helm</span> <span class="hljs-string">repo</span> <span class="hljs-string">add</span> <span class="hljs-string">milvus-operator</span> <span class="hljs-string">https://zilliztech.github.io/milvus-operator​</span>
+<span class="hljs-string">helm</span> <span class="hljs-string">repo</span> <span class="hljs-string">update</span> <span class="hljs-string">milvus-operator​</span>
+<span class="hljs-string">helm</span> <span class="hljs-string">-n</span> <span class="hljs-string">milvus-operator</span> <span class="hljs-string">upgrade</span> <span class="hljs-string">milvus-operator</span> <span class="hljs-string">milvus-operator/milvus-operator​</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Use command to start milvus with pulsar v3​</p>
-<pre><code translate="no" class="language-yaml">kubectl create -f milvus.yaml​
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">kubectl</span> <span class="hljs-string">create</span> <span class="hljs-string">-f</span> <span class="hljs-string">milvus.yaml​</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Output​</p>
-<pre><code translate="no" class="language-yaml">milvus.milvus.io/my-release created​
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">milvus.milvus.io/my-release</span> <span class="hljs-string">created​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Check the pods to see if all of them get scheduled and running​ with <code translate="no">kubectl -n default get pods</code>. ​</p>
 <p>It may take a few minutes for all pods to get started.​</p>
 <p>Output is like:​</p>
-<pre><code translate="no" class="language-yaml">NAME                                            READY   STATUS      RESTARTS   AGE​
-my-release-etcd<span class="hljs-number">-0</span>                               <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">65</span>m​
-my-release-milvus-datanode<span class="hljs-number">-57f</span>d59ff58<span class="hljs-number">-5</span>mdrk     <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">93</span>s​
-my-release-milvus-indexnode<span class="hljs-number">-67867</span>c6b9b<span class="hljs-number">-4</span>wsbw    <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">93</span>s​
-my-release-milvus-mixcoord<span class="hljs-number">-797849f</span>9bb-sf8z5     <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">93</span>s​
-my-release-milvus-proxy<span class="hljs-number">-5</span>d5bf98445-c55m6        <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">93</span>s​
-my-release-milvus-querynode<span class="hljs-number">-0</span><span class="hljs-number">-64797f</span>5c9-lw4rh   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">92</span>s​
-my-release-minio<span class="hljs-number">-79476</span>ccb49-zvt2h               <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">65</span>m​
-my-release-pulsar-bookie<span class="hljs-number">-0</span>                      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m10s​
-my-release-pulsar-bookie<span class="hljs-number">-1</span>                      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m10s​
-my-release-pulsar-bookie<span class="hljs-number">-2</span>                      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m10s​
-my-release-pulsar-bookie-<span class="hljs-keyword">init</span>-v8fdj             <span class="hljs-number">0</span>/<span class="hljs-number">1</span>     Completed   <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m11s​
-my-release-pulsar-broker<span class="hljs-number">-0</span>                      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m11s​
-my-release-pulsar-broker<span class="hljs-number">-1</span>                      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m10s​
-my-release-pulsar-proxy<span class="hljs-number">-0</span>                       <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m11s​
-my-release-pulsar-proxy<span class="hljs-number">-1</span>                       <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m10s​
-my-release-pulsar-pulsar-<span class="hljs-keyword">init</span><span class="hljs-number">-5l</span>hx7             <span class="hljs-number">0</span>/<span class="hljs-number">1</span>     Completed   <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m11s​
-my-release-pulsar-recovery<span class="hljs-number">-0</span>                    <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m11s​
-my-release-pulsar-zookeeper<span class="hljs-number">-0</span>                   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m11s​
-my-release-pulsar-zookeeper<span class="hljs-number">-1</span>                   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m10s​
-my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">5</span>m10s​
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">NAME</span>                                            <span class="hljs-string">READY</span>   <span class="hljs-string">STATUS</span>      <span class="hljs-string">RESTARTS</span>   <span class="hljs-string">AGE​</span>
+<span class="hljs-string">my-release-etcd-0</span>                               <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">65m​</span>
+<span class="hljs-string">my-release-milvus-datanode-57fd59ff58-5mdrk</span>     <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">93s​</span>
+<span class="hljs-string">my-release-milvus-indexnode-67867c6b9b-4wsbw</span>    <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">93s​</span>
+<span class="hljs-string">my-release-milvus-mixcoord-797849f9bb-sf8z5</span>     <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">93s​</span>
+<span class="hljs-string">my-release-milvus-proxy-5d5bf98445-c55m6</span>        <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">93s​</span>
+<span class="hljs-string">my-release-milvus-querynode-0-64797f5c9-lw4rh</span>   <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">92s​</span>
+<span class="hljs-string">my-release-minio-79476ccb49-zvt2h</span>               <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">65m​</span>
+<span class="hljs-string">my-release-pulsar-bookie-0</span>                      <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">5m10s​</span>
+<span class="hljs-string">my-release-pulsar-bookie-1</span>                      <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">5m10s​</span>
+<span class="hljs-string">my-release-pulsar-bookie-2</span>                      <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">5m10s​</span>
+<span class="hljs-string">my-release-pulsar-bookie-init-v8fdj</span>             <span class="hljs-number">0</span><span class="hljs-string">/1</span>     <span class="hljs-string">Completed</span>   <span class="hljs-number">0</span>          <span class="hljs-string">5m11s​</span>
+<span class="hljs-string">my-release-pulsar-broker-0</span>                      <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">5m11s​</span>
+<span class="hljs-string">my-release-pulsar-broker-1</span>                      <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">5m10s​</span>
+<span class="hljs-string">my-release-pulsar-proxy-0</span>                       <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">5m11s​</span>
+<span class="hljs-string">my-release-pulsar-proxy-1</span>                       <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">5m10s​</span>
+<span class="hljs-string">my-release-pulsar-pulsar-init-5lhx7</span>             <span class="hljs-number">0</span><span class="hljs-string">/1</span>     <span class="hljs-string">Completed</span>   <span class="hljs-number">0</span>          <span class="hljs-string">5m11s​</span>
+<span class="hljs-string">my-release-pulsar-recovery-0</span>                    <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">5m11s​</span>
+<span class="hljs-string">my-release-pulsar-zookeeper-0</span>                   <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">5m11s​</span>
+<span class="hljs-string">my-release-pulsar-zookeeper-1</span>                   <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">5m10s​</span>
+<span class="hljs-string">my-release-pulsar-zookeeper-2</span>                   <span class="hljs-number">1</span><span class="hljs-string">/1</span>     <span class="hljs-string">Running</span>     <span class="hljs-number">0</span>          <span class="hljs-string">5m10s​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

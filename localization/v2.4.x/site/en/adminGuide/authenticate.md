@@ -47,39 +47,39 @@ title: Authenticate User Access
 </div>
 <div class="filter-docker">
 <p>To enable user authentication for your Milvus server, set common.security.authorizationEnabled to true in the Milvus config file <code translate="no">milvus.yaml</code>. For more information on configs, refer to <a href="https://milvus.io/docs/configure-docker.md?tab=component">Configure Milvus with Docker Compose</a>.</p>
-<pre><code translate="no" class="language-yaml">...
-<span class="hljs-attr">common</span>:
-...
-  <span class="hljs-attr">security</span>:
-    <span class="hljs-attr">authorizationEnabled</span>: <span class="hljs-literal">false</span>
-...
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">common:</span>
+<span class="hljs-string">...</span>
+  <span class="hljs-attr">security:</span>
+    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">false</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-helm">
 <p>To enable user authentication for your Milvus server, set authorizationEnabled to true in the Milvus config file <code translate="no">values.yaml</code>. For more information on configs, refer to <a href="https://milvus.io/docs/configure-helm.md?tab=component">Configure Milvus with Helm Charts</a>.</p>
-<pre><code translate="no" class="language-yaml">...
-<span class="hljs-attr">extraConfigFiles</span>:
-  user.<span class="hljs-property">yaml</span>: |+
-    <span class="hljs-attr">common</span>:
-      <span class="hljs-attr">security</span>:
-        <span class="hljs-attr">authorizationEnabled</span>: <span class="hljs-literal">true</span>
-...
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    common:
+      security:
+        authorizationEnabled: true
+</span><span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-operator">
 <p>To enable authentication, set <code translate="no">spec.common.security.authorizationEnabled</code> to <code translate="no">true</code> in the <code translate="no">Milvus</code> CRD. For more information on Milvus CRD, refer to <a href="https://milvus.io/docs/configure_operator.md?tab=component">Configure Milvus with Milvus Operator</a>.</p>
-<pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
   <span class="hljs-comment"># Omit other fields ...</span>
-  config:
-    common:
-      security:
-        authorizationEnabled: <span class="hljs-literal">true</span>
+  <span class="hljs-attr">config:</span>
+    <span class="hljs-attr">common:</span>
+      <span class="hljs-attr">security:</span>
+        <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <h2 id="Connect-to-Milvus-with-authentication" class="common-anchor-header">Connect to Milvus with authentication<button data-href="#Connect-to-Milvus-with-authentication" class="anchor-icon" translate="no">
@@ -191,9 +191,9 @@ client.update_password(
 <p>If you forget your old password, Milvus provides a configuration item that allows you to designate certain users as super users. This eliminates the need for the old password when you reset the password.</p>
 <p>By default, the <code translate="no">common.security.superUsers</code> field in the Milvus configuration file is empty, meaning that all users must provide the old password when resetting their password. However, you can designate specific users as super users who do not need to provide the old password. In the snippet below, <code translate="no">root</code> and <code translate="no">foo</code> are designated as super users.</p>
 <p>You should add the below configuration item in the Milvus configuration file that governs the running of your Milvus instance.</p>
-<pre><code translate="no" class="language-yaml">common:
-    security:
-        superUsers: root, foo
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">common:</span>
+    <span class="hljs-attr">security:</span>
+        <span class="hljs-attr">superUsers:</span> <span class="hljs-string">root,</span> <span class="hljs-string">foo</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Drop-a-user" class="common-anchor-header">Drop a user<button data-href="#Drop-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -211,7 +211,7 @@ client.update_password(
         ></path>
       </svg>
     </button></h2><p>To drop a user, use the <code translate="no">drop_user()</code> method.</p>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_user</span>(user_name=<span class="hljs-string">&quot;user_1&quot;</span>)
+<pre><code translate="no" class="language-python">client.drop_user(user_name=<span class="hljs-string">&quot;user_1&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 To drop a user, you cannot be the user being dropped. Otherwise, an error will be raised.

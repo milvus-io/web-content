@@ -61,7 +61,7 @@ BentoCloud is an AI Inference Platform for fast-moving AI teams, offering fully-
 <div class="alert note">
 <p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
 </div>
-<p>After sign in the BentoCloud, we can interact with deployed BentoCloud Services in Deployments, and the corresponding END_POINT and API are located in Playground -&gt; Python.
+<p>After sign in the BentoCloud, we can interact with deployed BentoCloud Services in Deployments, and the corresponding END_POINT and API are located in Playground -> Python.
 You can download the city data <a href="https://github.com/ytang07/bento_octo_milvus_RAG/tree/main/data">here</a>.</p>
 <h2 id="Serving-Embeddings-with-BentoMLBentoCloud" class="common-anchor-header">Serving Embeddings with BentoML/BentoCloud<button data-href="#Serving-Embeddings-with-BentoMLBentoCloud" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,9 +79,9 @@ You can download the city data <a href="https://github.com/ytang07/bento_octo_mi
         ></path>
       </svg>
     </button></h2><p>To use this endpoint, import <code translate="no">bentoml</code> and set up an HTTP client using the <code translate="no">SyncHTTPClient</code> by specifying the endpoint and optionally the token (if you turn on <code translate="no">Endpoint Authorization</code> on BentoCloud). Alternatively, you can use the same model served through BentoML using its <a href="https://github.com/bentoml/BentoSentenceTransformers">Sentence Transformers Embeddings</a> repository.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> <span class="hljs-type">bentoml</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bentoml
 
-<span class="hljs-variable">BENTO_EMBEDDING_MODEL_END_POINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;BENTO_EMBEDDING_MODEL_END_POINT&quot;</span>
+BENTO_EMBEDDING_MODEL_END_POINT = <span class="hljs-string">&quot;BENTO_EMBEDDING_MODEL_END_POINT&quot;</span>
 BENTO_API_TOKEN = <span class="hljs-string">&quot;BENTO_API_TOKEN&quot;</span>
 
 embedding_client = bentoml.SyncHTTPClient(
@@ -201,7 +201,7 @@ milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot
 <p>Or with old connections.connect API (not recommended):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections
 
-connections.<span class="hljs-title function_">connect</span>(uri=<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
+connections.connect(uri=<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Creating-Your-Milvus-Lite-Collection" class="common-anchor-header">Creating Your Milvus Lite Collection<button data-href="#Creating-Your-Milvus-Lite-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -269,9 +269,9 @@ milvus_client.insert(collection_name=COLLECTION_NAME, data=entries)
         ></path>
       </svg>
     </button></h2><p>To build a RAG app, we need to deploy an LLM on BentoCloud. Let’s use the latest Llama3 LLM. Once it is up and running, simply copy the endpoint and token of this model service and set up a client for it.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-variable constant_">BENTO_LLM_END_POINT</span> = <span class="hljs-string">&quot;BENTO_LLM_END_POINT&quot;</span>
+<pre><code translate="no" class="language-python">BENTO_LLM_END_POINT = <span class="hljs-string">&quot;BENTO_LLM_END_POINT&quot;</span>
 
-llm_client = bentoml.<span class="hljs-title class_">SyncHTTPClient</span>(<span class="hljs-variable constant_">BENTO_LLM_END_POINT</span>, token=<span class="hljs-variable constant_">BENTO_API_TOKEN</span>)
+llm_client = bentoml.SyncHTTPClient(BENTO_LLM_END_POINT, token=BENTO_API_TOKEN)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="LLM-Instructions" class="common-anchor-header">LLM Instructions<button data-href="#LLM-Instructions" class="anchor-icon" translate="no">
       <svg translate="no"

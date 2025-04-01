@@ -238,35 +238,35 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     <span class="hljs-comment">// LoadStateLoaded   -&gt; LoadState = 3</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
-
-$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/create&quot;</span> \
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span></span>
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/create&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
   &quot;collectionName&quot;: &quot;quick_setup&quot;,
   &quot;dimension&quot;: 5
-}&#x27;</span>
-
-<span class="hljs-comment"># Output</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {},</span>
-<span class="hljs-comment"># }</span>
-
-$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
--H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash"><span class="hljs-string">Output</span></span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-string">
+# {</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;data&quot;: {},</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quot;http://${MILVUS_URI}/v2/vectordb/collections/get_load_state&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-d &#x27;</span>{</span>
   &quot;collectionName&quot;: &quot;quick_setup&quot;
-}&#x27;</span>
-
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {</span>
-<span class="hljs-comment">#         &quot;loadProgress&quot;: 100,</span>
-<span class="hljs-comment">#         &quot;loadState&quot;: &quot;LoadStateLoaded&quot;</span>
-<span class="hljs-comment">#     }</span>
-<span class="hljs-comment"># }</span>
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">{</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;code&quot;</span>: 0,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;data&quot;</span>: {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;loadProgress&quot;</span>: 100,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;loadState&quot;</span>: <span class="hljs-string">&quot;LoadStateLoaded&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    }</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>The collection generated in the above code contains only two fields: <code translate="no">id</code> (as the primary key) and <code translate="no">vector</code> (as the vector field), with <code translate="no">auto_id</code> and <code translate="no">enable_dynamic_field</code> settings enabled by default.</p>
 <ul>
@@ -369,7 +369,7 @@ schema.WithField(
             WithDataType(entity.FieldTypeFloatVector).
             WithDim(<span class="hljs-number">5</span>))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> fields=<span class="hljs-string">&#x27;[{ \
+<pre><code translate="no" class="language-shell">export fields=&#x27;[{ \
     &quot;fieldName&quot;: &quot;my_id&quot;, \
     &quot;dataType&quot;: &quot;Int64&quot;, \
     &quot;isPrimary&quot;: true \
@@ -380,7 +380,7 @@ schema.WithField(
     &quot;elementTypeParams&quot;: { \
         &quot;dim&quot;: 5 \
     } \
-}]&#x27;</span>
+}]&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <table class="language-python">
   <thead>
@@ -559,10 +559,10 @@ schema.WithField(
   <a href="#go">Go</a>
   <a href="#shell">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-meta"># 3.3. Prepare index parameters</span>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.3. Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
-<span class="hljs-meta"># 3.4. Add indexes</span>
+<span class="hljs-comment"># 3.4. Add indexes</span>
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
     index_type=<span class="hljs-string">&quot;STL_SORT&quot;</span>
@@ -572,7 +572,7 @@ index_params.add_index(
     field_name=<span class="hljs-string">&quot;my_vector&quot;</span>, 
     index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-    <span class="hljs-keyword">params</span>={ <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span> }
+    params={ <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span> }
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
@@ -596,13 +596,13 @@ indexParams.add(indexParamForVectorField);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 3.2 Prepare index parameters</span>
 <span class="hljs-keyword">const</span> index_params = [{
-    field_name: <span class="hljs-string">&quot;my_id&quot;</span>,
-    index_type: <span class="hljs-string">&quot;STL_SORT&quot;</span>
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;my_id&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;STL_SORT&quot;</span>
 },{
-    field_name: <span class="hljs-string">&quot;my_vector&quot;</span>,
-    index_type: <span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
-    metric_type: <span class="hljs-string">&quot;IP&quot;</span>,
-    <span class="hljs-keyword">params</span>: { nlist: <span class="hljs-number">1024</span>}
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;my_vector&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;IP&quot;</span>,
+    <span class="hljs-attr">params</span>: { <span class="hljs-attr">nlist</span>: <span class="hljs-number">1024</span>}
 }]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// 3.3 Prepare index parameters</span>
@@ -613,7 +613,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
   log.Fatal(<span class="hljs-string">&quot;failed to new index:&quot;</span>, err.Error())
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> indexParams=<span class="hljs-string">&#x27;[{ \
+<pre><code translate="no" class="language-shell">export indexParams=&#x27;[{ \
     &quot;fieldName&quot;: &quot;my_id&quot;, \
     &quot;indexName&quot;: &quot;my_id&quot;, \
     &quot;params&quot;: { \
@@ -627,7 +627,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
         &quot;index_type&quot;: &quot;IVF_FLAT&quot;, \
         &quot;nlist&quot;: 1024 \
   } \
-}]&#x27;</span>
+}]&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <table class="language-python">
   <thead>
@@ -854,9 +854,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateLoaded</span>
 <span class="hljs-comment">//   </span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/create&quot;</span> \
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/create&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
     &quot;collectionName&quot;: &quot;customized_setup_1&quot;,
     &quot;schema&quot;: {
         &quot;autoId&quot;: false,
@@ -894,30 +894,30 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
             }            
         }
     ]
-}&#x27;</span>
-
-<span class="hljs-comment"># Output</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {},</span>
-<span class="hljs-comment"># }</span>
-
-$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
--H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash"><span class="hljs-string">Output</span></span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-string">
+# {</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;data&quot;: {},</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quot;http://${MILVUS_URI}/v2/vectordb/collections/get_load_state&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-d &#x27;</span>{</span>
     &quot;collectionName&quot;: &quot;customized_setup_1&quot;
-}&#x27;</span>
-
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {</span>
-<span class="hljs-comment">#         &quot;loadProgress&quot;: 100,</span>
-<span class="hljs-comment">#         &quot;loadState&quot;: &quot;LoadStateLoaded&quot;</span>
-<span class="hljs-comment">#     }</span>
-<span class="hljs-comment"># }</span>
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">{</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;code&quot;</span>: 0,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;data&quot;</span>: {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;loadProgress&quot;</span>: 100,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;loadState&quot;</span>: <span class="hljs-string">&quot;LoadStateLoaded&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    }</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection created above is loaded automatically. To learn more about loading and releasing a collection, refer to <a href="/docs/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a>.</p></li>
+<p>The collection created above is loaded automatically. To learn more about loading and releasing a collection, refer to <a href="/docs/manage-collections.md#Load--Release-Collection">Load & Release Collection</a>.</p></li>
 <li><p><strong>Create a collection and an index file separately.</strong></p>
 <p><div class="multipleCode">
 <a href="#python">Python </a>
@@ -994,9 +994,9 @@ fmt.Println(stateLoad)
 <span class="hljs-comment">// LoadStateLoading  -&gt; LoadState = 2</span>
 <span class="hljs-comment">// LoadStateLoaded   -&gt; LoadState = 3</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/create&quot;</span> \
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/create&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
     &quot;collectionName&quot;: &quot;customized_setup_2&quot;,
     &quot;schema&quot;: {
         &quot;autoId&quot;: false,
@@ -1017,29 +1017,29 @@ fmt.Println(stateLoad)
         ]
         
     }
-}&#x27;</span>
-
-<span class="hljs-comment"># Output</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {},</span>
-<span class="hljs-comment"># }</span>
-
-$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
--H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash"><span class="hljs-string">Output</span></span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-string">
+# {</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;data&quot;: {},</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quot;http://${MILVUS_URI}/v2/vectordb/collections/get_load_state&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-d &#x27;</span>{</span>
     &quot;collectionName&quot;: &quot;customized_setup_2&quot;
-}&#x27;</span>
-
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {</span>
-<span class="hljs-comment">#         &quot;loadState&quot;: &quot;LoadStateNotLoaded&quot;</span>
-<span class="hljs-comment">#     }</span>
-<span class="hljs-comment"># }</span>
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">{</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;code&quot;</span>: 0,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;data&quot;</span>: {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;loadState&quot;</span>: <span class="hljs-string">&quot;LoadStateNotLoaded&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    }</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a>.</p>
+<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/manage-collections.md#Load--Release-Collection">Load & Release Collection</a>.</p>
 <p><table class="language-python">
 <thead>
 <tr>
@@ -1178,7 +1178,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
-<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/manage-collections.md">Load &amp; Release Collection</a>.</p>
+<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/manage-collections.md">Load & Release Collection</a>.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a>
 <a href="#java">Java</a>
@@ -1262,9 +1262,9 @@ fmt.Println(stateLoad)
 <span class="hljs-comment">// LoadStateLoading  -&gt; LoadState = 2</span>
 <span class="hljs-comment">// LoadStateLoaded   -&gt; LoadState = 3</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/indexes/create&quot;</span> \
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/indexes/create&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
     &quot;collectionName&quot;: &quot;customized_setup_2&quot;,
     &quot;indexParams&quot;: [
         {
@@ -1277,27 +1277,27 @@ fmt.Println(stateLoad)
             }
         }
     ]
-}&#x27;</span>
-
-<span class="hljs-comment"># Output</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {},</span>
-<span class="hljs-comment"># }</span>
-
-$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
--H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash"><span class="hljs-string">Output</span></span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-string">
+# {</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;data&quot;: {},</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quot;http://${MILVUS_URI}/v2/vectordb/collections/get_load_state&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-d &#x27;</span>{</span>
     &quot;collectionName&quot;: &quot;customized_setup_2&quot;
-}&#x27;</span>
-
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {</span>
-<span class="hljs-comment">#         &quot;loadState&quot;: &quot;LoadStateNotLoaded&quot;</span>
-<span class="hljs-comment">#     }</span>
-<span class="hljs-comment"># }</span>
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">{</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;code&quot;</span>: 0,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;data&quot;</span>: {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;loadState&quot;</span>: <span class="hljs-string">&quot;LoadStateNotLoaded&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    }</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>
 <button class="copy-code-btn"></button></code></pre>
   <table class="language-python">
   <thead>
@@ -1516,54 +1516,54 @@ res = client.describe_collection(
 <span class="hljs-comment"># }</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">import io.milvus.v2.service.collection.request.DescribeCollectionReq;
-import io.milvus.v2.service.collection.response.DescribeCollectionResp;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.DescribeCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.response.DescribeCollectionResp;
 
-// 4. View collections
-DescribeCollectionReq describeCollectionReq = DescribeCollectionReq.builder()
+<span class="hljs-comment">// 4. View collections</span>
+<span class="hljs-type">DescribeCollectionReq</span> <span class="hljs-variable">describeCollectionReq</span> <span class="hljs-operator">=</span> DescribeCollectionReq.builder()
     .collectionName(<span class="hljs-string">&quot;customized_setup_2&quot;</span>)
     .build();
 
-DescribeCollectionResp describeCollectionRes = client.describeCollection(describeCollectionReq);
+<span class="hljs-type">DescribeCollectionResp</span> <span class="hljs-variable">describeCollectionRes</span> <span class="hljs-operator">=</span> client.describeCollection(describeCollectionReq);
 
 System.out.println(JSONObject.toJSON(describeCollectionRes));
 
-// Output:
-// {
-//     <span class="hljs-string">&quot;createTime&quot;</span>: 449005822816026627,
-//     <span class="hljs-string">&quot;collectionSchema&quot;</span>: {<span class="hljs-string">&quot;fieldSchemaList&quot;</span>: [
-//         {
-//             <span class="hljs-string">&quot;autoID&quot;</span>: <span class="hljs-literal">false</span>,
-//             <span class="hljs-string">&quot;dataType&quot;</span>: <span class="hljs-string">&quot;Int64&quot;</span>,
-//             <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;my_id&quot;</span>,
-//             <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
-//             <span class="hljs-string">&quot;isPrimaryKey&quot;</span>: <span class="hljs-literal">true</span>,
-//             <span class="hljs-string">&quot;maxLength&quot;</span>: 65535,
-//             <span class="hljs-string">&quot;isPartitionKey&quot;</span>: <span class="hljs-literal">false</span>
-//         },
-//         {
-//             <span class="hljs-string">&quot;autoID&quot;</span>: <span class="hljs-literal">false</span>,
-//             <span class="hljs-string">&quot;dataType&quot;</span>: <span class="hljs-string">&quot;FloatVector&quot;</span>,
-//             <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;my_vector&quot;</span>,
-//             <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
-//             <span class="hljs-string">&quot;isPrimaryKey&quot;</span>: <span class="hljs-literal">false</span>,
-//             <span class="hljs-string">&quot;dimension&quot;</span>: 5,
-//             <span class="hljs-string">&quot;maxLength&quot;</span>: 65535,
-//             <span class="hljs-string">&quot;isPartitionKey&quot;</span>: <span class="hljs-literal">false</span>
-//         }
-//     ]},
-//     <span class="hljs-string">&quot;vectorFieldName&quot;</span>: [<span class="hljs-string">&quot;my_vector&quot;</span>],
-//     <span class="hljs-string">&quot;autoID&quot;</span>: <span class="hljs-literal">false</span>,
-//     <span class="hljs-string">&quot;fieldNames&quot;</span>: [
-//         <span class="hljs-string">&quot;my_id&quot;</span>,
-//         <span class="hljs-string">&quot;my_vector&quot;</span>
-//     ],
-//     <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
-//     <span class="hljs-string">&quot;numOfPartitions&quot;</span>: 1,
-//     <span class="hljs-string">&quot;primaryFieldName&quot;</span>: <span class="hljs-string">&quot;my_id&quot;</span>,
-//     <span class="hljs-string">&quot;enableDynamicField&quot;</span>: <span class="hljs-literal">true</span>,
-//     <span class="hljs-string">&quot;collectionName&quot;</span>: <span class="hljs-string">&quot;customized_setup_2&quot;</span>
-// }
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// {</span>
+<span class="hljs-comment">//     &quot;createTime&quot;: 449005822816026627,</span>
+<span class="hljs-comment">//     &quot;collectionSchema&quot;: {&quot;fieldSchemaList&quot;: [</span>
+<span class="hljs-comment">//         {</span>
+<span class="hljs-comment">//             &quot;autoID&quot;: false,</span>
+<span class="hljs-comment">//             &quot;dataType&quot;: &quot;Int64&quot;,</span>
+<span class="hljs-comment">//             &quot;name&quot;: &quot;my_id&quot;,</span>
+<span class="hljs-comment">//             &quot;description&quot;: &quot;&quot;,</span>
+<span class="hljs-comment">//             &quot;isPrimaryKey&quot;: true,</span>
+<span class="hljs-comment">//             &quot;maxLength&quot;: 65535,</span>
+<span class="hljs-comment">//             &quot;isPartitionKey&quot;: false</span>
+<span class="hljs-comment">//         },</span>
+<span class="hljs-comment">//         {</span>
+<span class="hljs-comment">//             &quot;autoID&quot;: false,</span>
+<span class="hljs-comment">//             &quot;dataType&quot;: &quot;FloatVector&quot;,</span>
+<span class="hljs-comment">//             &quot;name&quot;: &quot;my_vector&quot;,</span>
+<span class="hljs-comment">//             &quot;description&quot;: &quot;&quot;,</span>
+<span class="hljs-comment">//             &quot;isPrimaryKey&quot;: false,</span>
+<span class="hljs-comment">//             &quot;dimension&quot;: 5,</span>
+<span class="hljs-comment">//             &quot;maxLength&quot;: 65535,</span>
+<span class="hljs-comment">//             &quot;isPartitionKey&quot;: false</span>
+<span class="hljs-comment">//         }</span>
+<span class="hljs-comment">//     ]},</span>
+<span class="hljs-comment">//     &quot;vectorFieldName&quot;: [&quot;my_vector&quot;],</span>
+<span class="hljs-comment">//     &quot;autoID&quot;: false,</span>
+<span class="hljs-comment">//     &quot;fieldNames&quot;: [</span>
+<span class="hljs-comment">//         &quot;my_id&quot;,</span>
+<span class="hljs-comment">//         &quot;my_vector&quot;</span>
+<span class="hljs-comment">//     ],</span>
+<span class="hljs-comment">//     &quot;description&quot;: &quot;&quot;,</span>
+<span class="hljs-comment">//     &quot;numOfPartitions&quot;: 1,</span>
+<span class="hljs-comment">//     &quot;primaryFieldName&quot;: &quot;my_id&quot;,</span>
+<span class="hljs-comment">//     &quot;enableDynamicField&quot;: true,</span>
+<span class="hljs-comment">//     &quot;collectionName&quot;: &quot;customized_setup_2&quot;</span>
+<span class="hljs-comment">// }</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 5. View Collections</span>
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">describeCollection</span>({
@@ -1633,62 +1633,62 @@ fmt.Printf(<span class="hljs-string">&quot;ConsistencyLevel: %v\nID: %v\nLoaded:
 <span class="hljs-comment">// SchemaCollectionName: customized_setup_2</span>
 <span class="hljs-comment">// SchemaDescription: 2024/11/12 14:06:53 my_rag_collection</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/describe&quot;</span> \
--H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-shell">curl -X POST &quot;http://${MILVUS_URI}/v2/vectordb/collections/describe&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-d &#x27;{
     &quot;dbName&quot;: &quot;default&quot;,
     &quot;collectionName&quot;: &quot;test_collection&quot;
-}&#x27;</span>
-
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {</span>
-<span class="hljs-comment">#         &quot;aliases&quot;: [],</span>
-<span class="hljs-comment">#         &quot;autoId&quot;: false,</span>
-<span class="hljs-comment">#         &quot;collectionID&quot;: 448707763883002014,</span>
-<span class="hljs-comment">#         &quot;collectionName&quot;: &quot;test_collection&quot;,</span>
-<span class="hljs-comment">#         &quot;consistencyLevel&quot;: &quot;Bounded&quot;,</span>
-<span class="hljs-comment">#         &quot;description&quot;: &quot;&quot;,</span>
-<span class="hljs-comment">#         &quot;enableDynamicField&quot;: true,</span>
-<span class="hljs-comment">#         &quot;fields&quot;: [</span>
-<span class="hljs-comment">#             {</span>
-<span class="hljs-comment">#                 &quot;autoId&quot;: false,</span>
-<span class="hljs-comment">#                 &quot;description&quot;: &quot;&quot;,</span>
-<span class="hljs-comment">#                 &quot;id&quot;: 100,</span>
-<span class="hljs-comment">#                 &quot;name&quot;: &quot;id&quot;,</span>
-<span class="hljs-comment">#                 &quot;partitionKey&quot;: false,</span>
-<span class="hljs-comment">#                 &quot;primaryKey&quot;: true,</span>
-<span class="hljs-comment">#                 &quot;type&quot;: &quot;Int64&quot;</span>
-<span class="hljs-comment">#             },</span>
-<span class="hljs-comment">#             {</span>
-<span class="hljs-comment">#                 &quot;autoId&quot;: false,</span>
-<span class="hljs-comment">#                 &quot;description&quot;: &quot;&quot;,</span>
-<span class="hljs-comment">#                 &quot;id&quot;: 101,</span>
-<span class="hljs-comment">#                 &quot;name&quot;: &quot;vector&quot;,</span>
-<span class="hljs-comment">#                 &quot;params&quot;: [</span>
-<span class="hljs-comment">#                     {</span>
-<span class="hljs-comment">#                         &quot;key&quot;: &quot;dim&quot;,</span>
-<span class="hljs-comment">#                         &quot;value&quot;: &quot;5&quot;</span>
-<span class="hljs-comment">#                     }</span>
-<span class="hljs-comment">#                 ],</span>
-<span class="hljs-comment">#                 &quot;partitionKey&quot;: false,</span>
-<span class="hljs-comment">#                 &quot;primaryKey&quot;: false,</span>
-<span class="hljs-comment">#                 &quot;type&quot;: &quot;FloatVector&quot;</span>
-<span class="hljs-comment">#             }</span>
-<span class="hljs-comment">#         ],</span>
-<span class="hljs-comment">#         &quot;indexes&quot;: [</span>
-<span class="hljs-comment">#             {</span>
-<span class="hljs-comment">#                 &quot;fieldName&quot;: &quot;vector&quot;,</span>
-<span class="hljs-comment">#                 &quot;indexName&quot;: &quot;vector&quot;,</span>
-<span class="hljs-comment">#                 &quot;metricType&quot;: &quot;COSINE&quot;</span>
-<span class="hljs-comment">#             }</span>
-<span class="hljs-comment">#         ],</span>
-<span class="hljs-comment">#         &quot;load&quot;: &quot;LoadStateLoaded&quot;,</span>
-<span class="hljs-comment">#         &quot;partitionsNum&quot;: 1,</span>
-<span class="hljs-comment">#         &quot;properties&quot;: [],</span>
-<span class="hljs-comment">#         &quot;shardsNum&quot;: 1</span>
-<span class="hljs-comment">#     }</span>
-<span class="hljs-comment"># }</span>
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">{</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;code&quot;</span>: 0,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;data&quot;</span>: {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;aliases&quot;</span>: [],</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;autoId&quot;</span>: <span class="hljs-literal">false</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;collectionID&quot;</span>: 448707763883002014,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;collectionName&quot;</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;consistencyLevel&quot;</span>: <span class="hljs-string">&quot;Bounded&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;enableDynamicField&quot;</span>: <span class="hljs-literal">true</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;fields&quot;</span>: [</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;autoId&quot;</span>: <span class="hljs-literal">false</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;id&quot;</span>: 100,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;id&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;partitionKey&quot;</span>: <span class="hljs-literal">false</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;primaryKey&quot;</span>: <span class="hljs-literal">true</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;Int64&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            },</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;autoId&quot;</span>: <span class="hljs-literal">false</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;id&quot;</span>: 101,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;vector&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;params&quot;</span>: [</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                    {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                        <span class="hljs-string">&quot;key&quot;</span>: <span class="hljs-string">&quot;dim&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                        <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;5&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                    }</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                ],</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;partitionKey&quot;</span>: <span class="hljs-literal">false</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;primaryKey&quot;</span>: <span class="hljs-literal">false</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;FloatVector&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            }</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        ],</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;indexes&quot;</span>: [</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;fieldName&quot;</span>: <span class="hljs-string">&quot;vector&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;indexName&quot;</span>: <span class="hljs-string">&quot;vector&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;metricType&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            }</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        ],</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;load&quot;</span>: <span class="hljs-string">&quot;LoadStateLoaded&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;partitionsNum&quot;</span>: 1,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;properties&quot;</span>: [],</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;shardsNum&quot;</span>: 1</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    }</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>To list all existing collections, you can do as follows:</p>
 <div class="multipleCode">
@@ -1726,9 +1726,9 @@ System.out.println(listCollectionsRes.getCollectionNames());
 <span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 5. List all collection names</span>
-<span class="hljs-type">ListCollectionsResp</span> <span class="hljs-variable">listCollectionsRes</span> <span class="hljs-operator">=</span> client.listCollections();
+<span class="hljs-title class_">ListCollectionsResp</span> listCollectionsRes = client.<span class="hljs-title function_">listCollections</span>();
 
-System.out.println(listCollectionsRes.getCollectionNames());
+<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(listCollectionsRes.<span class="hljs-title function_">getCollectionNames</span>());
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// [</span>
@@ -1750,22 +1750,22 @@ collections, err := client.ListCollections(ctx)
 <span class="hljs-comment">// customized_setup_2</span>
 <span class="hljs-comment">// quick_setup</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/list&quot;</span> \
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/list&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
     &quot;dbName&quot;: &quot;default&quot;
-}&#x27;</span>
-
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#   &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#   &quot;data&quot;: [</span>
-<span class="hljs-comment">#     &quot;quick_setup&quot;,</span>
-<span class="hljs-comment">#     &quot;customized_setup_1&quot;,</span>
-<span class="hljs-comment">#     &quot;customized_setup_2&quot;</span>
-<span class="hljs-comment">#   ]</span>
-<span class="hljs-comment"># }</span>
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash"><span class="hljs-string">{</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">  &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">  &quot;data&quot;: [</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;quick_setup&quot;,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;customized_setup_1&quot;,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;customized_setup_2&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">  ]</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load--Release-Collection" class="common-anchor-header">Load &amp; Release Collection<button data-href="#Load--Release-Collection" class="anchor-icon" translate="no">
+<h2 id="Load--Release-Collection" class="common-anchor-header">Load & Release Collection<button data-href="#Load--Release-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1895,32 +1895,32 @@ fmt.Println(stateLoad)
 <span class="hljs-comment">// LoadStateLoading  -&gt; LoadState = 2</span>
 <span class="hljs-comment">// LoadStateLoaded   -&gt; LoadState = 3</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/load&quot;</span> \
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/load&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
     &quot;collectionName&quot;: &quot;customized_setup_2&quot;
-}&#x27;</span>
-
-<span class="hljs-comment"># Output</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {},</span>
-<span class="hljs-comment"># }</span>
-
-$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
--H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash"><span class="hljs-string">Output</span></span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-string">
+# {</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;data&quot;: {},</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quot;http://${MILVUS_URI}/v2/vectordb/collections/get_load_state&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-d &#x27;</span>{</span>
   &quot;collectionName&quot;: &quot;customized_setup_2&quot;
-}&#x27;</span>
-
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {</span>
-<span class="hljs-comment">#         &quot;loadProgress&quot;: 100,</span>
-<span class="hljs-comment">#         &quot;loadState&quot;: &quot;LoadStateLoaded&quot;</span>
-<span class="hljs-comment">#     }</span>
-<span class="hljs-comment"># }</span>
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">{</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;code&quot;</span>: 0,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;data&quot;</span>: {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;loadProgress&quot;</span>: 100,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;loadState&quot;</span>: <span class="hljs-string">&quot;LoadStateLoaded&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    }</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Load-a-collection-partially-Public-Preview" class="common-anchor-header">Load a collection partially (Public Preview)</h3><div class="alert note">
 <p>This feature is currently in public preview. The API and functionality may change in the future.</p>
@@ -2046,33 +2046,33 @@ fmt.Println(stateLoad)
 
 <span class="hljs-comment">// meaning not loaded</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/release&quot;</span> \
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/release&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
     &quot;collectionName&quot;: &quot;customized_setup_2&quot;
-}&#x27;</span>
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash"><span class="hljs-string">Output</span></span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-string">
+# {</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;data&quot;: {},</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
+<span class="hljs-meta prompt_">
 
-<span class="hljs-comment"># Output</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {},</span>
-<span class="hljs-comment"># }</span>
-
-
-$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/get_load_state&quot;</span> \
--H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+$ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quot;http://${MILVUS_URI}/v2/vectordb/collections/get_load_state&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-d &#x27;</span>{</span>
   &quot;collectionName&quot;: &quot;customized_setup_2&quot;
-}&#x27;</span>
+}&#x27;
+<span class="hljs-meta prompt_">
 
-
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {</span>
-<span class="hljs-comment">#         &quot;loadState&quot;: &quot;LoadStateNotLoad&quot;</span>
-<span class="hljs-comment">#     }</span>
-<span class="hljs-comment"># }</span>
+# </span><span class="language-bash">{</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;code&quot;</span>: 0,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;data&quot;</span>: {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;loadState&quot;</span>: <span class="hljs-string">&quot;LoadStateNotLoad&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    }</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Set-up-aliases" class="common-anchor-header">Set up aliases<button data-href="#Set-up-aliases" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -2111,12 +2111,12 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.1. Create aliases</span>
 client.create_alias(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
-    <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;bob&quot;</span>
+    alias=<span class="hljs-string">&quot;bob&quot;</span>
 )
 
 client.create_alias(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
-    <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;alice&quot;</span>
+    alias=<span class="hljs-string">&quot;alice&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CreateAliasReq;
@@ -2164,33 +2164,33 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// Success</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/create&quot;</span> \
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/create&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
     &quot;collectionName&quot;: &quot;customized_setup_2&quot;,
     &quot;aliasName&quot;: &quot;bob&quot;
-}&#x27;</span>
-
-<span class="hljs-comment"># Output</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {}</span>
-<span class="hljs-comment"># }</span>
-
-$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/create&quot;</span> \
--H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash"><span class="hljs-string">Output</span></span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-string">
+# {</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;data&quot;: {}</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quot;http://${MILVUS_URI}/v2/vectordb/aliases/create&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-d &#x27;</span>{</span>
     &quot;collectionName&quot;: &quot;customized_setup_2&quot;,
     &quot;aliasName&quot;: &quot;alice&quot;
-}&#x27;</span>
-
-<span class="hljs-comment"># Output</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {}</span>
-<span class="hljs-comment"># }</span>
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Output</span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash">
+<span class="hljs-comment"># {</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;code&quot;</span>: 0,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;data&quot;</span>: {}</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <table class="language-python">
   <thead>
@@ -2330,19 +2330,19 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// [ &#x27;bob&#x27;, &#x27;alice&#x27; ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/list&quot;</span> \
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/list&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
     &quot;collectionName&quot;: &quot;customized_setup_2&quot;
-}&#x27;</span>
-
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: [</span>
-<span class="hljs-comment">#         &quot;bob&quot;,</span>
-<span class="hljs-comment">#         &quot;alice&quot;</span>
-<span class="hljs-comment">#     ]</span>
-<span class="hljs-comment"># }</span>
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash"><span class="hljs-string">{</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;data&quot;: [</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">        &quot;bob&quot;,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">        &quot;alice&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    ]</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Describe-aliases" class="common-anchor-header">Describe aliases</h3><div class="language-python">
 <p>To describe aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_alias.md"><code translate="no">describe_alias()</code></a> method, specifying the alias.</p>
@@ -2364,7 +2364,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.3. Describe aliases</span>
 res = client.describe_alias(
-    <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;bob&quot;</span>
+    alias=<span class="hljs-string">&quot;bob&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -2377,17 +2377,17 @@ res = client.describe_alias(
 <span class="hljs-comment">#     &quot;db_name&quot;: &quot;default&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">utility</span>.<span class="hljs-property">request</span>.<span class="hljs-property">DescribeAliasReq</span>;
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">utility</span>.<span class="hljs-property">response</span>.<span class="hljs-property">DescribeAliasResp</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.DescribeAliasReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.DescribeAliasResp;
 
 <span class="hljs-comment">// 9.3 Describe alias</span>
-<span class="hljs-title class_">DescribeAliasReq</span> describeAliasReq = <span class="hljs-title class_">DescribeAliasReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">alias</span>(<span class="hljs-string">&quot;bob&quot;</span>)
-    .<span class="hljs-title function_">build</span>();
+<span class="hljs-type">DescribeAliasReq</span> <span class="hljs-variable">describeAliasReq</span> <span class="hljs-operator">=</span> DescribeAliasReq.builder()
+    .alias(<span class="hljs-string">&quot;bob&quot;</span>)
+    .build();
 
-<span class="hljs-title class_">DescribeAliasResp</span> describeAliasRes = client.<span class="hljs-title function_">describeAlias</span>(describeAliasReq);
+<span class="hljs-type">DescribeAliasResp</span> <span class="hljs-variable">describeAliasRes</span> <span class="hljs-operator">=</span> client.describeAlias(describeAliasReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(describeAliasRes));
+System.out.println(JSONObject.toJSON(describeAliasRes));
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// {</span>
@@ -2420,20 +2420,20 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// }</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/describe&quot;</span> \
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/describe&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
     &quot;aliasName&quot;: &quot;bob&quot;
-}&#x27;</span>
-
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {</span>
-<span class="hljs-comment">#         &quot;aliasName&quot;: &quot;bob&quot;,</span>
-<span class="hljs-comment">#         &quot;collectionName&quot;: &quot;quick_setup&quot;,</span>
-<span class="hljs-comment">#         &quot;dbName&quot;: &quot;default&quot;</span>
-<span class="hljs-comment">#     }</span>
-<span class="hljs-comment"># }</span>
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash"><span class="hljs-string">{</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;data&quot;: {</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">        &quot;aliasName&quot;: &quot;bob&quot;,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">        &quot;collectionName&quot;: &quot;quick_setup&quot;,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">        &quot;dbName&quot;: &quot;default&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    }</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Reassign-aliases" class="common-anchor-header">Reassign aliases</h3><div class="language-python">
 <p>To reassign aliases to other collections, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/alter_alias.md"><code translate="no">alter_alias()</code></a> method, specifying the collection name and the alias.</p>
@@ -2494,7 +2494,7 @@ res = client.list_aliases(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.AlterAliasReq;
 
 <span class="hljs-comment">// 9.4 Reassign alias to other collections</span>
-AlterAliasReq alterAliasReq = AlterAliasReq.builder()
+<span class="hljs-type">AlterAliasReq</span> <span class="hljs-variable">alterAliasReq</span> <span class="hljs-operator">=</span> AlterAliasReq.builder()
     .collectionName(<span class="hljs-string">&quot;customized_setup_1&quot;</span>)
     .alias(<span class="hljs-string">&quot;alice&quot;</span>)
     .build();
@@ -2507,7 +2507,7 @@ listAliasesReq = ListAliasesReq.builder()
 
 listAliasRes = client.listAliases(listAliasesReq);
 
-System.out.<span class="hljs-built_in">println</span>(listAliasRes.getAlias());
+System.out.println(listAliasRes.getAlias());
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// [&quot;alice&quot;]</span>
@@ -2518,7 +2518,7 @@ listAliasesReq = ListAliasesReq.builder()
 
 listAliasRes = client.listAliases(listAliasesReq);
 
-System.out.<span class="hljs-built_in">println</span>(listAliasRes.getAlias());
+System.out.println(listAliasRes.getAlias());
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// [&quot;bob&quot;]</span>
@@ -2558,47 +2558,47 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// [ &#x27;bob&#x27; ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/alter&quot;</span> \
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/alter&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
      &quot;collectionName&quot;: &quot;customized_setup_1&quot;,
      &quot;aliasName&quot;: &quot;alice&quot;
-}&#x27;</span>
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash"><span class="hljs-string">{</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;data&quot;: {}</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
+<span class="hljs-meta prompt_">
 
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {}</span>
-<span class="hljs-comment"># }</span>
-
-
-$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/list&quot;</span> \
--H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+$ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quot;http://${MILVUS_URI}/v2/vectordb/aliases/list&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-d &#x27;</span>{</span>
     &quot;collectionName&quot;: &quot;customized_setup_1&quot;
-}&#x27;</span>
+}&#x27;
+<span class="hljs-meta prompt_">
 
+# </span><span class="language-bash">{</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;code&quot;</span>: 0,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;data&quot;</span>: [</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;alice&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    ]</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>
+<span class="hljs-meta prompt_">
 
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: [</span>
-<span class="hljs-comment">#         &quot;alice&quot;</span>
-<span class="hljs-comment">#     ]</span>
-<span class="hljs-comment"># }</span>
-
-
-$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/list&quot;</span> \
+$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/list&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
     &quot;collectionName&quot;: &quot;customized_setup_2&quot;
-}&#x27;</span>
+}&#x27;
+<span class="hljs-meta prompt_">
 
-
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: [</span>
-<span class="hljs-comment">#         &quot;bob&quot;</span>
-<span class="hljs-comment">#     ]</span>
-<span class="hljs-comment"># }</span>
+# </span><span class="language-bash"><span class="hljs-string">{</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;data&quot;: [</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">        &quot;bob&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    ]</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Drop-aliases" class="common-anchor-header">Drop aliases</h3><div class="language-python">
 <p>To drop aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_alias.md"><code translate="no">drop_alias()</code></a> method, specifying the alias.</p>
@@ -2619,11 +2619,11 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.5 Drop aliases</span>
 client.drop_alias(
-    <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;bob&quot;</span>
+    alias=<span class="hljs-string">&quot;bob&quot;</span>
 )
 
 client.drop_alias(
-    <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;alice&quot;</span>
+    alias=<span class="hljs-string">&quot;alice&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.DropAliasReq;
@@ -2664,29 +2664,29 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// Success</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/drop&quot;</span> \
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/drop&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
     &quot;aliasName&quot;: &quot;bob&quot;
-}&#x27;</span>
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash"><span class="hljs-string">{</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;data&quot;: {}</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
+<span class="hljs-meta prompt_">
 
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {}</span>
-<span class="hljs-comment"># }</span>
-
-
-$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/aliases/drop&quot;</span> \
--H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+$ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quot;http://${MILVUS_URI}/v2/vectordb/aliases/drop&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-d &#x27;</span>{</span>
     &quot;aliasName&quot;: &quot;alice&quot;
-}&#x27;</span>
+}&#x27;
+<span class="hljs-meta prompt_">
 
-
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {}</span>
-<span class="hljs-comment"># }</span>
+# </span><span class="language-bash">{</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;code&quot;</span>: 0,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;data&quot;</span>: {}</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Set-Properties" class="common-anchor-header">Set Properties<button data-href="#Set-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -2855,49 +2855,49 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// 10. Drop collections</span>
 
-err = client.<span class="hljs-title class_">DropCollection</span>(ctx, <span class="hljs-string">&quot;quick_setup&quot;</span>)
-<span class="hljs-keyword">if</span> err != nil {
-    log.<span class="hljs-title class_">Fatal</span>(<span class="hljs-string">&quot;failed to drop collection:&quot;</span>, err.<span class="hljs-title class_">Error</span>())
+err = client.DropCollection(ctx, <span class="hljs-string">&quot;quick_setup&quot;</span>)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to drop collection:&quot;</span>, err.Error())
 }
-err = client.<span class="hljs-title class_">DropCollection</span>(ctx, <span class="hljs-string">&quot;customized_setup_2&quot;</span>)
-<span class="hljs-keyword">if</span> err != nil {
-    log.<span class="hljs-title class_">Fatal</span>(<span class="hljs-string">&quot;failed to drop collection:&quot;</span>, err.<span class="hljs-title class_">Error</span>())
+err = client.DropCollection(ctx, <span class="hljs-string">&quot;customized_setup_2&quot;</span>)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to drop collection:&quot;</span>, err.Error())
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/drop&quot;</span> \
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/drop&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
     &quot;collectionName&quot;: &quot;quick_setup&quot;
-}&#x27;</span>
+}&#x27;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash"><span class="hljs-string">{</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;data&quot;: {}</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
+<span class="hljs-meta prompt_">
 
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {}</span>
-<span class="hljs-comment"># }</span>
-
-
-$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/drop&quot;</span> \
--H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+$ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quot;http://${MILVUS_URI}/v2/vectordb/collections/drop&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-d &#x27;</span>{</span>
     &quot;collectionName&quot;: &quot;customized_setup_1&quot;
-}&#x27;</span>
+}&#x27;
+<span class="hljs-meta prompt_">
 
+# </span><span class="language-bash">{</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;code&quot;</span>: 0,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    <span class="hljs-string">&quot;data&quot;</span>: {}</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>
+<span class="hljs-meta prompt_">
 
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {}</span>
-<span class="hljs-comment"># }</span>
-
-
-$ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/drop&quot;</span> \
+$ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/collections/drop&quot;</span> \
 -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+-d <span class="hljs-string">&#x27;{</span></span>
     &quot;collectionName&quot;: &quot;customized_setup_2&quot;
-}&#x27;</span>
+}&#x27;
+<span class="hljs-meta prompt_">
 
-
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
-<span class="hljs-comment">#     &quot;data&quot;: {}</span>
-<span class="hljs-comment"># }</span>
+# </span><span class="language-bash"><span class="hljs-string">{</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;code&quot;: 0,</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">    &quot;data&quot;: {}</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-string">}</span></span>
 <button class="copy-code-btn"></button></code></pre>

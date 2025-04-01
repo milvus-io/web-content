@@ -77,11 +77,11 @@ $ conda activate stack
 $ pip install -e .
 <button class="copy-code-btn"></button></code></pre>
 <p>Modify the content in <code translate="no">llama_stack/llama_stack/template/together/run.yaml</code>, changing the vector_io section to the relevant Milvus configuration. For example, add:</p>
-<pre><code translate="no" class="language-yaml">vector_io:
-- provider_id: milvus
-  provider_type: inline::milvus
-  config:
-    db_path: ~/.llama/distributions/together/milvus_store.db
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">vector_io:</span>
+<span class="hljs-bullet">-</span> <span class="hljs-attr">provider_id:</span> <span class="hljs-string">milvus</span>
+  <span class="hljs-attr">provider_type:</span> <span class="hljs-string">inline::milvus</span>
+  <span class="hljs-attr">config:</span>
+    <span class="hljs-attr">db_path:</span> <span class="hljs-string">~/.llama/distributions/together/milvus_store.db</span>
 
 <span class="hljs-comment">#  - provider_id: milvus</span>
 <span class="hljs-comment">#    provider_type: remote::milvus</span>
@@ -99,10 +99,10 @@ $ pip install -e .
 </ul></li>
 </ul>
 <h3 id="Build-distribution-from-the-template" class="common-anchor-header">Build distribution from the template</h3><p>Run the following command to build the distribution:</p>
-<pre><code translate="no" class="language-bash">$ llama stack build --template together --image-<span class="hljs-built_in">type</span> conda
+<pre><code translate="no" class="language-bash">$ llama stack build --template together --image-type conda
 <button class="copy-code-btn"></button></code></pre>
 <p>A file will be generated at <code translate="no">~/.llama/distributions/together/together-run.yaml</code>. Then, run this command to start the server:</p>
-<pre><code translate="no" class="language-bash">$ llama stack run --image-type conda ~<span class="hljs-regexp">/.llama/</span>distributions/together/together-run.<span class="hljs-property">yaml</span>
+<pre><code translate="no" class="language-bash">$ llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>If everything goes smoothly, you should see the Llama Stack server successfully running on port 8321.</p>
 <h2 id="Perform-RAG-from-client" class="common-anchor-header">Perform RAG from client<button data-href="#Perform-RAG-from-client" class="anchor-icon" translate="no">
@@ -199,8 +199,8 @@ If everything is working properly, the output should look like this:</p>
 finish init agent...
 Response: 
 * Fine-Tuning Llama3 with Chat Data
-* Evaluating fine-tuned Llama3-8B models with EleutherAI&#x27;s Eval Harness
+* Evaluating fine-tuned Llama3-8B models with EleutherAI's Eval Harness
 * Generating text with our fine-tuned Llama3 model
 * Faster generation via quantization
 * Fine-tuning on a custom chat dataset
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>

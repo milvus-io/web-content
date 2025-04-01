@@ -76,16 +76,16 @@ title: Deploy CDC Server
 </ul>
 <p>Example configuration:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># cdc meta data config</span>
-metaStoreConfig:
+<span class="hljs-attr">metaStoreConfig:</span>
   <span class="hljs-comment"># the metastore type, available value: etcd, mysql</span>
-  storeType: etcd
+  <span class="hljs-attr">storeType:</span> <span class="hljs-string">etcd</span>
   <span class="hljs-comment"># etcd address</span>
-  etcdEndpoints:
-    - localhost:<span class="hljs-number">2379</span>
+  <span class="hljs-attr">etcdEndpoints:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">localhost:2379</span>
   <span class="hljs-comment"># mysql connection address</span>
   <span class="hljs-comment"># mysqlSourceUrl: root:root@tcp(127.0.0.1:3306)/milvus-cdc?charset=utf8</span>
   <span class="hljs-comment"># meta data prefix, if multiple cdc services use the same store service, you can set different rootPaths to achieve multi-tenancy</span>
-  rootPath: cdc
+  <span class="hljs-attr">rootPath:</span> <span class="hljs-string">cdc</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Source Milvus Configuration:</strong></p>
 <p>Specify the connection details of the source Milvus, including etcd and message storage, to establish a connection between the Milvus-CDC server and the source Milvus.</p>
@@ -103,24 +103,24 @@ metaStoreConfig:
 </ul>
 <p>Example configuration:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus-source config, these settings are basically the same as the corresponding configuration of milvus.yaml in milvus source.</span>
-sourceConfig:
+<span class="hljs-attr">sourceConfig:</span>
   <span class="hljs-comment"># etcd config</span>
-  etcdAddress:
-    - localhost:<span class="hljs-number">2379</span>
-  etcdRootPath: by-dev
-  etcdMetaSubPath: meta
+  <span class="hljs-attr">etcdAddress:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">localhost:2379</span>
+  <span class="hljs-attr">etcdRootPath:</span> <span class="hljs-string">by-dev</span>
+  <span class="hljs-attr">etcdMetaSubPath:</span> <span class="hljs-string">meta</span>
   <span class="hljs-comment"># default partition name</span>
-  defaultPartitionName: _default
+  <span class="hljs-attr">defaultPartitionName:</span> <span class="hljs-string">_default</span>
   <span class="hljs-comment"># read buffer length, mainly used for buffering if writing data to milvus-target is slow.</span>
-  readChanLen: <span class="hljs-number">10</span>
-  replicateChan: by-dev-replicate-msg
+  <span class="hljs-attr">readChanLen:</span> <span class="hljs-number">10</span>
+  <span class="hljs-attr">replicateChan:</span> <span class="hljs-string">by-dev-replicate-msg</span>
   <span class="hljs-comment"># milvus-source mq config, which is pulsar or kafka</span>
-  pulsar:
-    address: pulsar://localhost:<span class="hljs-number">6650</span>
-    webAddress: localhost:<span class="hljs-number">80</span>
-    maxMessageSize: <span class="hljs-number">5242880</span>
-    tenant: public
-    namespace: default
+  <span class="hljs-attr">pulsar:</span>
+    <span class="hljs-attr">address:</span> <span class="hljs-string">pulsar://localhost:6650</span>
+    <span class="hljs-attr">webAddress:</span> <span class="hljs-string">localhost:80</span>
+    <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">5242880</span>
+    <span class="hljs-attr">tenant:</span> <span class="hljs-string">public</span>
+    <span class="hljs-attr">namespace:</span> <span class="hljs-string">default</span>
 <span class="hljs-comment">#    authPlugin: org.apache.pulsar.client.impl.auth.AuthenticationToken</span>
 <span class="hljs-comment">#    authParams: token:xxx</span>
 <span class="hljs-comment">#  kafka:</span>
@@ -129,7 +129,7 @@ sourceConfig:
 <h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Compile the Milvus-CDC server</h3><p>After saving the <code translate="no">cdc.yaml</code> file, navigate to the <code translate="no">milvus-cdc</code> directory and run one of the following commands to compile the server:</p>
 <ul>
 <li><p>For a binary file:</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">make</span> build
+<pre><code translate="no" class="language-bash">make build
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>For a Docker image:</p>
 <pre><code translate="no" class="language-bash">bash build_image.sh

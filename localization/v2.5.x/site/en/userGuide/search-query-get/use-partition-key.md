@@ -145,7 +145,7 @@ schema.addField(AddFieldReq.builder()​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export schema='{​
         &quot;autoId&quot;: true,​
         &quot;enabledDynamicField&quot;: false,​
         &quot;fields&quot;: [​
@@ -170,9 +170,9 @@ schema.addField(AddFieldReq.builder()​
                 }​
             }​
         ]​
-    }&#x27;</span>​
+    }'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Set-Partition-Numbers​" class="common-anchor-header">Set Partition Numbers​</h3><p>When you designate a scalar field in a collection as the Partition Key, Milvus automatically creates 16 partitions in the collection. Upon receiving an entity, Milvus chooses a partition based on the Partition Key value of this entity and stores the entity in the partition, resulting in some or all partitions holding entities with different Partition Key values. ​</p>
 <p>You can also determine the number of partitions to create along with the collection. This is valid only if you have a scalar field designated as the Partition Key.​</p>
 <div class="multipleCode">
@@ -185,7 +185,7 @@ schema.addField(AddFieldReq.builder()​
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
-    <span class="hljs-meta"># highlight-next-<span class="hljs-keyword">line</span>​</span>
+    <span class="hljs-comment"># highlight-next-line​</span>
     num_partitions=<span class="hljs-number">1024</span>​
 )​
 
@@ -207,24 +207,24 @@ schema.addField(AddFieldReq.builder()​
 })​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export params='{​
     &quot;partitionsNum&quot;: 1024​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&quot;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &quot;{​
     \&quot;collectionName\&quot;: \&quot;myCollection\&quot;,​
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,​
-    \&quot;params\&quot;: <span class="hljs-variable">$params</span>​
-}&quot;</span>​
+    \&quot;schema\&quot;: $schema,​
+    \&quot;params\&quot;: $params​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Create-Filtering-Condition​" class="common-anchor-header">Create Filtering Condition​</h3><p>When conducting ANN searches in a collection with the Partition Key feature enabled, you need to include a filtering expression involving the Partition Key in the search request. In the filtering expression, you can restrict the Partition Key value within a specific range so that Milvus restricts the search scope within the corresponding partitions.​</p>
 <p>When dealing with delete operations, It is advisable to include a filter expression that specifies a single partition key to achieve more efficient deletion. This approach limits the delete operation to a particular partition, reducing write amplification during compaction and conserving resources for compaction and indexing.</p>
 <p>The following examples demonstrate Partition-Key-based filtering based on a specific Partition Key value and a set of Partition Key values.​</p>
@@ -243,10 +243,10 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Filter based on a single partition key value, or​</span>
-<span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;​
+<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;​
 ​
 <span class="hljs-comment">// Filter based on multiple partition key values​</span>
-<span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] &amp;&amp; &lt;other conditions&gt;&quot;</span>;​
+<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] &amp;&amp; &lt;other conditions&gt;&quot;</span>;​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Filter based on a single partition key value, or​</span>
@@ -256,13 +256,13 @@ curl --request POST \​
 <span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-comment"># Filter based on a single partition key value, or​</span>
-export <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key == &quot;x&quot; &amp;&amp; &lt;other conditions&gt;&#x27;</span>​
+<pre><code translate="no" class="language-curl"># Filter based on a single partition key value, or​
+export filter='partition_key == &quot;x&quot; &amp;&amp; &lt;other conditions&gt;'​
 ​
-<span class="hljs-comment"># Filter based on multiple partition key values​</span>
-export <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>​
+# Filter based on multiple partition key values​
+export filter='partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <div class="alert note">
 <p>You have to replace <code translate="no">partition_key</code> with the name of the field that is designated as the partition key.</p>
 </div>
@@ -309,18 +309,18 @@ Once you have enabled Partition Key Isolation, you can include only a specific v
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">collection</span>.<span class="hljs-property">request</span>.<span class="hljs-property">CreateCollectionReq</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">String</span>&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-properties.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>);
+Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.put(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>);
 
-<span class="hljs-title class_">CreateCollectionReq</span> createCollectionReq = <span class="hljs-title class_">CreateCollectionReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .<span class="hljs-title function_">collectionSchema</span>(schema)
-        .<span class="hljs-title function_">numPartitions</span>(<span class="hljs-number">1024</span>)
-        .<span class="hljs-title function_">properties</span>(properties)
-        .<span class="hljs-title function_">build</span>();
-client.<span class="hljs-title function_">createCollection</span>(createCollectionReq);
+<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .collectionSchema(schema)
+        .numPartitions(<span class="hljs-number">1024</span>)
+        .properties(properties)
+        .build();
+client.createCollection(createCollectionReq);
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollection</span>({
@@ -331,22 +331,22 @@ client.<span class="hljs-title function_">createCollection</span>(createCollecti
 })
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-curl">export params='{
     &quot;partitionKeyIsolation&quot;: true
-}&#x27;</span>
+}'
 
-<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;
+export TOKEN=&quot;root:Milvus&quot;
 
 curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&quot;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+-d &quot;{
     \&quot;collectionName\&quot;: \&quot;myCollection\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
-    \&quot;params\&quot;: <span class="hljs-variable">$params</span>
-}&quot;</span>
+    \&quot;schema\&quot;: $schema,
+    \&quot;params\&quot;: $params
+}&quot;
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>Once you have enabled Partition Key Isolation, you can still set the Partition Key and number of partitions as described in <a href="#Set-Partition-Numbers">Set Partition Numbers</a>. Note that the Partition-Key-based filter should include only a specific Partition Key value.</p>

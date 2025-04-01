@@ -41,14 +41,14 @@ title: Index with GPU
 <p>It supports two parameters <code translate="no">initMemSize</code> and <code translate="no">maxMemSize</code> in <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus config file</a>. The pool size is initially set to <code translate="no">initMemSize</code>, and will be automatically expanded to <code translate="no">maxMemSize</code> after exceeding this limit.</p>
 <p>The default <code translate="no">initMemSize</code> is 1/2 of the available GPU memory when Milvus starts, and the default <code translate="no">maxMemSize</code> is equal to all available GPU memory.</p>
 <p>Up until Milvus 2.4.1( including version 2.4.1), Milvus used a unified GPU memory pool. For versions prior to 2.4.1( including version 2.4.1), it was recommended to set both of the value to 0.</p>
-<pre><code translate="no" class="language-yaml">gpu:
-  initMemSize: <span class="hljs-number">0</span> <span class="hljs-comment">#set the initial memory pool size.</span>
-  maxMemSize: <span class="hljs-number">0</span> <span class="hljs-comment">#maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. </span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
+  <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment">#set the initial memory pool size.</span>
+  <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment">#maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. </span>
 <button class="copy-code-btn"></button></code></pre>
 <p>From Milvus 2.4.1 onwards, the GPU memory pool is only used for temporary GPU data during searches. Therefore, it is recommended to set it to 2048 and 4096.</p>
-<pre><code translate="no" class="language-yaml">gpu:
-  initMemSize: <span class="hljs-number">2048</span> <span class="hljs-comment">#set the initial memory pool size.</span>
-  maxMemSize: <span class="hljs-number">4096</span> <span class="hljs-comment">#maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. </span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
+  <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">2048</span> <span class="hljs-comment">#set the initial memory pool size.</span>
+  <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">4096</span> <span class="hljs-comment">#maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. </span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Build-an-index" class="common-anchor-header">Build an index<button data-href="#Build-an-index" class="anchor-icon" translate="no">
       <svg translate="no"

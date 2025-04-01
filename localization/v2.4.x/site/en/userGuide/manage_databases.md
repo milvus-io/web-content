@@ -52,9 +52,9 @@ title: Manage Databases
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, db
 
-conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
+conn = connections.connect(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 
-database = db.<span class="hljs-title function_">create_database</span>(<span class="hljs-string">&quot;my_database&quot;</span>)
+database = db.create_database(<span class="hljs-string">&quot;my_database&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.client.MilvusServiceClient;
 <span class="hljs-keyword">import</span> io.milvus.param.ConnectParam;
@@ -118,7 +118,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
 </div>
-<pre><code translate="no" class="language-python">db.<span class="hljs-title function_">using_database</span>(<span class="hljs-string">&quot;my_database&quot;</span>)
+<pre><code translate="no" class="language-python">db.using_database(<span class="hljs-string">&quot;my_database&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// No equivalent method is available.</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -135,7 +135,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
 </div>
-<pre><code translate="no" class="language-python">conn = connections.<span class="hljs-title function_">connect</span>(
+<pre><code translate="no" class="language-python">conn = connections.connect(
     host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>,
     port=<span class="hljs-string">&quot;19530&quot;</span>,
     db_name=<span class="hljs-string">&quot;my_database&quot;</span>
@@ -194,7 +194,7 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
 
 <span class="hljs-comment">// 2. List all databases</span>
 R&lt;ListDatabasesResponse&gt; listDatabasesResponse = client.listDatabases();
-System.out.<span class="hljs-built_in">println</span>(listDatabasesResponse.getData());
+System.out.println(listDatabasesResponse.getData());
 
 <span class="hljs-comment">// status {</span>
 <span class="hljs-comment">// }</span>
@@ -464,7 +464,7 @@ role.grant(<span class="hljs-string">&quot;Collection&quot;</span>, <span class=
 role.revoke(<span class="hljs-string">&quot;Global&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>, _PRIVILEGE_INSERT)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> please make sure the &#x27;foo&#x27; db has been created</span>
-MilvusServiceClient client = <span class="hljs-keyword">new</span> ConnectToMilvus().withDbName(<span class="hljs-string">&quot;foo&quot;</span>).build();
+<span class="hljs-type">MilvusServiceClient</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConnectToMilvus</span>().withDbName(<span class="hljs-string">&quot;foo&quot;</span>).build();
 
 <span class="hljs-comment">// This role will have the insert permission of all collections under foo db,</span>
 <span class="hljs-comment">// excluding the insert permissions of collections under other dbs</span>
@@ -476,7 +476,7 @@ R&lt;RpcStatus&gt; response = client.grantRolePrivilege(GrantRolePriviledgeParam
     .build());
 
 <span class="hljs-keyword">if</span> (response.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(response.getMessage());
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(response.getMessage());
 }
 
 R&lt;SelectGrantResponse&gt; grants = client.selectGrantForRole(SelectGrantForRoleParam.newBuilder()
@@ -484,10 +484,10 @@ R&lt;SelectGrantResponse&gt; grants = client.selectGrantForRole(SelectGrantForRo
     .build());
 
 <span class="hljs-keyword">if</span> (grants.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(grants.getMessage());
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(grants.getMessage());
 }
 
-System.<span class="hljs-keyword">out</span>.println(grants.getData());
+System.out.println(grants.getData());
 
 grants = client.selectGrantForRoleAndObject(SelectGrantForRoleAndObjectParam.newBuilder()
     .withRoleName(ROLE_NAME)
@@ -496,10 +496,10 @@ grants = client.selectGrantForRoleAndObject(SelectGrantForRoleAndObjectParam.new
     .build());
 
 <span class="hljs-keyword">if</span> (grants.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(grants.getMessage());
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(grants.getMessage());
 }
 
-System.<span class="hljs-keyword">out</span>.println(grants.getData());
+System.out.println(grants.getData());
 
 response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
     .withRoleName(ROLE_NAME)
@@ -509,7 +509,7 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
     .build());
 
 <span class="hljs-keyword">if</span> (response.getStatus() != R.Status.Success.getCode()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(response.getMessage());
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(response.getMessage());
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> client = <span class="hljs-title function_">connectToMilvus</span>(<span class="hljs-string">&quot;foo&quot;</span>);

@@ -41,7 +41,7 @@ In current release, all parameters take effect only after Milvus restarts.
       </svg>
     </button></h2><p>You can configure Milvus with a configuration file <code translate="no">values.yaml</code>.</p>
 <h3 id="Download-a-configuration-file" class="common-anchor-header">Download a configuration file</h3><p><a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">Download</a> <code translate="no">values.yaml</code> directly or with the following command.</p>
-<pre><code translate="no">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Modify-the-configuration-file" class="common-anchor-header">Modify the configuration file</h3><p>Configure your Milvus instance to suit your application scenarios by adjusting corresponding parameters in <code translate="no">values.yaml</code>.</p>
 <p>Specifically, search for <code translate="no">extraConfigFiles</code> in <code translate="no">values.yaml</code> and put your configurations in this section as follows:</p>
@@ -49,14 +49,14 @@ In current release, all parameters take effect only after Milvus restarts.
 <span class="hljs-comment"># If set, this config will merge into milvus.yaml</span>
 <span class="hljs-comment"># Please follow the config structure in the milvus.yaml</span>
 <span class="hljs-comment"># at https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml</span>
-<span class="hljs-comment"># Note: this config will be the top priority which will override the config</span>
+<span class="hljs-comment"># <span class="hljs-doctag">Note:</span> this config will be the top priority which will override the config</span>
 <span class="hljs-comment"># in the image and helm chart.</span>
-extraConfigFiles:
-  user.yaml: |+
-    <span class="hljs-comment">#    For example to set the graceful time for query nodes</span>
-    <span class="hljs-comment">#    queryNodes:</span>
-    <span class="hljs-comment">#      gracefulTime: 10</span>
-<button class="copy-code-btn"></button></code></pre>
+<span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    #    For example to set the graceful time for query nodes
+    #    queryNodes:
+    #      gracefulTime: 10
+</span><button class="copy-code-btn"></button></code></pre>
 <p>Check the following links for more information about each parameter.</p>
 <p>Sorted by:</p>
 <div class="filter">
@@ -199,7 +199,7 @@ extraConfigFiles:
 </div>
 <p>For other parameters specifically to Kubernetes installation, See <a href="https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration">Milvus Helm Chart Configuration</a>.</p>
 <h3 id="Start-Milvus" class="common-anchor-header">Start Milvus</h3><p>Having finished modifying the configuration file, you can then start Milvus with the file.</p>
-<pre><code translate="no">$ helm upgrade my-release milvus/milvus -f values.yaml
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Milvus-via-command-line" class="common-anchor-header">Configure Milvus via command line<button data-href="#Configure-Milvus-via-command-line" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -218,11 +218,11 @@ extraConfigFiles:
       </svg>
     </button></h2><p>Alternatively, you can upgrade Milvus configurations directly with the Helm command.</p>
 <h3 id="Check-the-configurable-parameters" class="common-anchor-header">Check the configurable parameters</h3><p>Before upgrade, you can check the configurable parameters with Helm charts.</p>
-<pre><code translate="no">$ helm show values milvus/milvus
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm show values milvus/milvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Start-Milvus" class="common-anchor-header">Start Milvus</h3><p>Configure and start Milvus by adding <code translate="no">--values</code> or <code translate="no">--set</code> in the command for upgrade.</p>
-<pre><code translate="no"><span class="hljs-comment"># For instance, upgrade the Milvus cluster with compaction disabled</span>
-$ helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span>
+<pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For instance, upgrade the Milvus cluster with compaction disabled</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

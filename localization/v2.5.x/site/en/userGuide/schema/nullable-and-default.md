@@ -8,7 +8,7 @@ summary: >-
   you can skip the field when inserting data, or set it directly to a null
   value, and the system will treat it as null without causing an error.
 ---
-<h1 id="Nullable--Default​" class="common-anchor-header">Nullable &amp; Default​<button data-href="#Nullable--Default​" class="anchor-icon" translate="no">
+<h1 id="Nullable--Default​" class="common-anchor-header">Nullable & Default​<button data-href="#Nullable--Default​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -178,55 +178,55 @@ client.createCollection(requestCreate);​
 ​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> pkField=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export pkField='{​
     &quot;fieldName&quot;: &quot;id&quot;,​
     &quot;dataType&quot;: &quot;Int64&quot;,​
     &quot;isPrimary&quot;: true​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{​
+export vectorField='{​
     &quot;fieldName&quot;: &quot;vector&quot;,​
     &quot;dataType&quot;: &quot;FloatVector&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;dim&quot;: 5​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> nullField=<span class="hljs-string">&#x27;{​
+export nullField='{​
     &quot;fieldName&quot;: &quot;age&quot;,​
     &quot;dataType&quot;: &quot;Int64&quot;,​
     &quot;nullable&quot;: true​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{​
+export schema=&quot;{​
     \&quot;autoID\&quot;: false,​
     \&quot;fields\&quot;: [​
-        <span class="hljs-variable">$pkField</span>,​
-        <span class="hljs-variable">$vectorField</span>,​
-        <span class="hljs-variable">$nullField</span>​
+        $pkField,​
+        $vectorField,​
+        $nullField​
     ]​
-}&quot;</span>​
+}&quot;​
 ​
-<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
+export indexParams='[​
         {​
             &quot;fieldName&quot;: &quot;vector&quot;,​
             &quot;metricType&quot;: &quot;L2&quot;,​
             &quot;indexType&quot;: &quot;IVF_FLAT&quot;,​
             &quot;params&quot;:{&quot;nlist&quot;: 128}​
         }​
-    ]&#x27;</span>​
+    ]'​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&quot;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &quot;{​
     \&quot;collectionName\&quot;: \&quot;user_profiles_null\&quot;,​
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,​
-    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>​
-}&quot;</span>​
+    \&quot;schema\&quot;: $schema,​
+    \&quot;indexParams\&quot;: $indexParams​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Insert-entities" class="common-anchor-header">Insert entities</h3><p>When you insert data into a nullable field, insert null or directly omit this field:​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -261,33 +261,33 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 3, \&q
         .build());​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">const data = [​
-  { <span class="hljs-built_in">id</span>: <span class="hljs-number">1</span>, vector: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], age: <span class="hljs-number">30</span> },​
-  { <span class="hljs-built_in">id</span>: <span class="hljs-number">2</span>, vector: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>], age: null },​
-  { <span class="hljs-built_in">id</span>: <span class="hljs-number">3</span>, vector: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>] },​
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data = [​
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-attr">age</span>: <span class="hljs-number">30</span> },​
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>], <span class="hljs-attr">age</span>: <span class="hljs-literal">null</span> },​
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">vector</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>] },​
 ];​
 ​
-client.insert({​
-  collection_name: <span class="hljs-string">&quot;user_profiles_null&quot;</span>,​
-  data: data,​
+client.<span class="hljs-title function_">insert</span>({​
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;user_profiles_null&quot;</span>,​
+  <span class="hljs-attr">data</span>: data,​
 });​
 ​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;data&quot;: [​
         {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, 0.3, 0.4, 0.5], &quot;age&quot;: 30},​
         {&quot;id&quot;: 2, &quot;vector&quot;: [0.2, 0.3, 0.4, 0.5, 0.6], &quot;age&quot;: null}, ​
         {&quot;id&quot;: 3, &quot;vector&quot;: [0.3, 0.4, 0.5, 0.6, 0.7]} ​
     ],​
     &quot;collectionName&quot;: &quot;user_profiles_null&quot;​
-}&#x27;</span>​
+}'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Search-and-query-with-null-values​" class="common-anchor-header">Search and query with null values​</h3><p>When using the <code translate="no">search</code> method, if a field contains <code translate="no">null</code> values, the search result will return the field as null:​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -297,9 +297,9 @@ client.insert({​
 </div>
 <pre><code translate="no" class="language-python">res = client.search(​
     collection_name=<span class="hljs-string">&quot;user_profiles_null&quot;</span>,​
-    data=[[0.1, 0.2, 0.4, 0.3, 0.128]],​
-    <span class="hljs-built_in">limit</span>=2,​
-    search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: 16}},​
+    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.128</span>]],​
+    limit=<span class="hljs-number">2</span>,​
+    search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">16</span>}},​
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>]​
 )​
 ​
@@ -309,45 +309,45 @@ client.insert({​
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.15838398039340973, &#x27;entity&#x27;: {&#x27;age&#x27;: 30, &#x27;id&#x27;: 1}}, {&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.28278401494026184, &#x27;entity&#x27;: {&#x27;age&#x27;: None, &#x27;id&#x27;: 2}}]&quot;] ​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">request</span>.<span class="hljs-property">SearchReq</span>;​
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">request</span>.<span class="hljs-property">data</span>.<span class="hljs-property">FloatVec</span>;​
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">response</span>.<span class="hljs-property">SearchResp</span>;​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;​
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;​
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;​
 ​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-params.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">16</span>);​
-<span class="hljs-title class_">SearchResp</span> resp = client.<span class="hljs-title function_">search</span>(<span class="hljs-title class_">SearchReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;user_profiles_null&quot;</span>)​
-        .<span class="hljs-title function_">annsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)​
-        .<span class="hljs-title function_">data</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> float[]{<span class="hljs-number">0.</span>1f, <span class="hljs-number">0.</span>2f, <span class="hljs-number">0.</span>3f, <span class="hljs-number">0.</span>4f, <span class="hljs-number">0.</span>5f})))​
-        .<span class="hljs-title function_">topK</span>(<span class="hljs-number">2</span>)​
-        .<span class="hljs-title function_">searchParams</span>(params)​
-        .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>))​
-        .<span class="hljs-title function_">build</span>());​
+Map&lt;String,Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
+params.put(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">16</span>);​
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()​
+        .collectionName(<span class="hljs-string">&quot;user_profiles_null&quot;</span>)​
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)​
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>})))​
+        .topK(<span class="hljs-number">2</span>)​
+        .searchParams(params)​
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>))​
+        .build());​
 ​
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(resp.<span class="hljs-title function_">getSearchResults</span>());​
+System.out.println(resp.getSearchResults());​
 ​
 <span class="hljs-comment">// Output​</span>
 <span class="hljs-comment">//​</span>
 <span class="hljs-comment">// [[SearchResp.SearchResult(entity={id=1, age=30}, score=0.0, id=1), SearchResp.SearchResult(entity={id=2, age=null}, score=0.050000004, id=2)]]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">client.search({​
-    collection_name: <span class="hljs-string">&#x27;user_profiles_null&#x27;</span>,​
-    data: [<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>],​
-    limit: <span class="hljs-number">2</span>,​
-    output_fields: [<span class="hljs-string">&#x27;age&#x27;</span>, <span class="hljs-string">&#x27;id&#x27;</span>],​
-    <span class="hljs-built_in">filter</span>: <span class="hljs-string">&#x27;25 &lt;= age &lt;= 35&#x27;</span>,​
-    params: {​
-        nprobe: <span class="hljs-number">16</span>​
+<pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">search</span>({​
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;user_profiles_null&#x27;</span>,​
+    <span class="hljs-attr">data</span>: [<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>],​
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>,​
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;age&#x27;</span>, <span class="hljs-string">&#x27;id&#x27;</span>],​
+    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;25 &lt;= age &lt;= 35&#x27;</span>,​
+    <span class="hljs-attr">params</span>: {​
+        <span class="hljs-attr">nprobe</span>: <span class="hljs-number">16</span>​
     }​
 });​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/search&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;user_profiles_null&quot;,​
     &quot;data&quot;: [​
         [0.1, -0.2, 0.3, 0.4, 0.5]​
@@ -355,11 +355,11 @@ params.<span class="hljs-title function_">put</span>(<span class="hljs-string">&
     &quot;annsField&quot;: &quot;vector&quot;,​
     &quot;limit&quot;: 5,​
     &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;]​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;distance&quot;:0.16000001,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;distance&quot;:0.28999996,&quot;id&quot;:2},{&quot;age&quot;:null,&quot;distance&quot;:0.52000004,&quot;id&quot;:3}]}​</span>
+#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;distance&quot;:0.16000001,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;distance&quot;:0.28999996,&quot;id&quot;:2},{&quot;age&quot;:null,&quot;distance&quot;:0.52000004,&quot;id&quot;:3}]}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>When you use the <code translate="no">query</code> method for scalar filtering, the filtering results for null values are all false, indicating that they will not be selected.​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -409,18 +409,18 @@ System.out.println(resp.getQueryResults());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/query&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;user_profiles_null&quot;,​
     &quot;filter&quot;: &quot;age &gt;= 0&quot;,​
     &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;]​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}​</span>
+# {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>To return entities with null values, query without any scalar filtering condition as follows:</p>
 <div class="alert note">
 <p>The <code translate="no">query</code> method, when used without any filtering conditions, retrieves all entities in the collection, including those with null values. To restrict the number of returned entities, the <code translate="no">limit</code> parameter must be specified.</p>
@@ -442,9 +442,9 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment"># [&quot;{&#x27;id&#x27;: 1, &#x27;age&#x27;: 30}&quot;, &quot;{&#x27;id&#x27;: 2, &#x27;age&#x27;: None}&quot;, &quot;{&#x27;id&#x27;: 3, &#x27;age&#x27;: None}&quot;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">QueryResp resp = client.query(QueryReq.builder()​
+<pre><code translate="no" class="language-java"><span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()​
         .collectionName(<span class="hljs-string">&quot;user_profiles_null&quot;</span>)​
-        .<span class="hljs-built_in">filter</span>(<span class="hljs-string">&quot;&quot;</span>)​
+        .filter(<span class="hljs-string">&quot;&quot;</span>)​
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>))​
         .limit(<span class="hljs-number">10</span>)​
         .build());​
@@ -461,19 +461,19 @@ System.out.println(resp.getQueryResults());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/query&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;user_profiles_null&quot;,​
     &quot;expr&quot;: &quot;&quot;,​
     &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;]​,
     &quot;limit&quot;: 10
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;id&quot;:2},{&quot;age&quot;:null,&quot;id&quot;:3}]}​</span>
+# {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;id&quot;:2},{&quot;age&quot;:null,&quot;id&quot;:3}]}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Default-values​" class="common-anchor-header">Default values​<button data-href="#Default-values​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -598,65 +598,65 @@ client.createCollection(requestCreate);​
 ​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> pkField=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export pkField='{​
     &quot;fieldName&quot;: &quot;id&quot;,​
     &quot;dataType&quot;: &quot;Int64&quot;,​
     &quot;isPrimary&quot;: true​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{​
+export vectorField='{​
     &quot;fieldName&quot;: &quot;vector&quot;,​
     &quot;dataType&quot;: &quot;FloatVector&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;dim&quot;: 5​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> defaultValueField1=<span class="hljs-string">&#x27;{​
+export defaultValueField1='{​
     &quot;fieldName&quot;: &quot;age&quot;,​
     &quot;dataType&quot;: &quot;Int64&quot;,​
     &quot;defaultValue&quot;: 18​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> defaultValueField2=<span class="hljs-string">&#x27;{​
+export defaultValueField2='{​
     &quot;fieldName&quot;: &quot;status&quot;,​
     &quot;dataType&quot;: &quot;VarChar&quot;,​
     &quot;defaultValue&quot;: &quot;active&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;max_length&quot;: 10​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{​
+export schema=&quot;{​
     \&quot;autoID\&quot;: false,​
     \&quot;fields\&quot;: [​
-        <span class="hljs-variable">$pkField</span>,​
-        <span class="hljs-variable">$vectorField</span>,​
-        <span class="hljs-variable">$defaultValueField1</span>,​
-        <span class="hljs-variable">$defaultValueField2</span>​
+        $pkField,​
+        $vectorField,​
+        $defaultValueField1,​
+        $defaultValueField2​
     ]​
-}&quot;</span>​
+}&quot;​
 ​
-<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
+export indexParams='[​
         {​
             &quot;fieldName&quot;: &quot;vector&quot;,​
             &quot;metricType&quot;: &quot;L2&quot;,​
             &quot;indexType&quot;: &quot;IVF_FLAT&quot;,​
             &quot;params&quot;:{&quot;nlist&quot;: 128}​
         }​
-    ]&#x27;</span>​
+    ]'​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&quot;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &quot;{​
     \&quot;collectionName\&quot;: \&quot;user_profiles_default\&quot;,​
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,​
-    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>​
-}&quot;</span>​
+    \&quot;schema\&quot;: $schema,​
+    \&quot;indexParams\&quot;: $indexParams​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Insert-entities" class="common-anchor-header">Insert entities</h3><p>When inserting data, if you omit fields with a default value or set their value to null, the system uses the default value:​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -674,20 +674,20 @@ curl --request POST \​
 client.insert(collection_name=<span class="hljs-string">&quot;user_profiles_default&quot;</span>, data=data)​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">import com.google.gson.Gson;​
-import com.google.gson.JsonObject;​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;​
+<span class="hljs-keyword">import</span> com.google.gson.JsonObject;​
 ​
-import io.milvus.v2.service.vector.request.InsertReq;​
-import io.milvus.v2.service.vector.response.InsertResp;​
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;​
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;​
 ​
-List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();​
-Gson gson = <span class="hljs-keyword">new</span> Gson();​
-rows.<span class="hljs-keyword">add</span>(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 1, \&quot;vector\&quot;: [0.1, 0.2, 0.3, 0.4, 0.5], \&quot;age\&quot;: 30, \&quot;status\&quot;: \&quot;premium\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>));​
-rows.<span class="hljs-keyword">add</span>(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 2, \&quot;vector\&quot;: [0.2, 0.3, 0.4, 0.5, 0.6]}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>));​
-rows.<span class="hljs-keyword">add</span>(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 3, \&quot;vector\&quot;: [0.3, 0.4, 0.5, 0.6, 0.7], \&quot;age\&quot;: 25, \&quot;status\&quot;: null}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>));​
-rows.<span class="hljs-keyword">add</span>(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 4, \&quot;vector\&quot;: [0.4, 0.5, 0.6, 0.7, 0.8], \&quot;age\&quot;: null, \&quot;status\&quot;: \&quot;inactive\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>));​
+List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();​
+rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 1, \&quot;vector\&quot;: [0.1, 0.2, 0.3, 0.4, 0.5], \&quot;age\&quot;: 30, \&quot;status\&quot;: \&quot;premium\&quot;}&quot;</span>, JsonObject.class));​
+rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 2, \&quot;vector\&quot;: [0.2, 0.3, 0.4, 0.5, 0.6]}&quot;</span>, JsonObject.class));​
+rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 3, \&quot;vector\&quot;: [0.3, 0.4, 0.5, 0.6, 0.7], \&quot;age\&quot;: 25, \&quot;status\&quot;: null}&quot;</span>, JsonObject.class));​
+rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 4, \&quot;vector\&quot;: [0.4, 0.5, 0.6, 0.7, 0.8], \&quot;age\&quot;: null, \&quot;status\&quot;: \&quot;inactive\&quot;}&quot;</span>, JsonObject.class));​
 ​
-InsertResp insertR = client.insert(InsertReq.builder()​
+<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()​
         .collectionName(<span class="hljs-string">&quot;user_profiles_default&quot;</span>)​
         .data(rows)​
         .build());​
@@ -707,10 +707,10 @@ client.<span class="hljs-title function_">insert</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;data&quot;: [​
         {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, 0.3, 0.4, 0.5], &quot;age&quot;: 30, &quot;status&quot;: &quot;premium&quot;},​
         {&quot;id&quot;: 2, &quot;vector&quot;: [0.2, 0.3, 0.4, 0.5, 0.6]},​
@@ -718,9 +718,9 @@ client.<span class="hljs-title function_">insert</span>({​
         {&quot;id&quot;: 4, &quot;vector&quot;: [0.4, 0.5, 0.6, 0.7, 0.8], &quot;age&quot;: null, &quot;status&quot;: &quot;inactive&quot;}      ​
     ],​
     &quot;collectionName&quot;: &quot;user_profiles_default&quot;​
-}&#x27;</span>​
+}'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <div class="alert note">
 <p>For more information on how nullable and default value settings take effect, refer to <a href="#applicable-rules">Applicable rules</a>.</p>
 </div>
@@ -748,46 +748,46 @@ client.<span class="hljs-title function_">insert</span>({​
 ​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">request</span>.<span class="hljs-property">SearchReq</span>;​
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">request</span>.<span class="hljs-property">data</span>.<span class="hljs-property">FloatVec</span>;​
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">response</span>.<span class="hljs-property">SearchResp</span>;​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;​
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;​
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;​
 ​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-params.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">16</span>);​
-<span class="hljs-title class_">SearchResp</span> resp = client.<span class="hljs-title function_">search</span>(<span class="hljs-title class_">SearchReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;user_profiles_default&quot;</span>)​
-        .<span class="hljs-title function_">annsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)​
-        .<span class="hljs-title function_">data</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> float[]{<span class="hljs-number">0.</span>1f, <span class="hljs-number">0.</span>2f, <span class="hljs-number">0.</span>3f, <span class="hljs-number">0.</span>4f, <span class="hljs-number">0.</span>5f})))​
-        .<span class="hljs-title function_">searchParams</span>(params)​
-        .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;age == 18&quot;</span>)​
-        .<span class="hljs-title function_">topK</span>(<span class="hljs-number">10</span>)​
-        .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>))​
-        .<span class="hljs-title function_">build</span>());​
+Map&lt;String,Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
+params.put(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">16</span>);​
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()​
+        .collectionName(<span class="hljs-string">&quot;user_profiles_default&quot;</span>)​
+        .annsField(<span class="hljs-string">&quot;vector&quot;</span>)​
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>})))​
+        .searchParams(params)​
+        .filter(<span class="hljs-string">&quot;age == 18&quot;</span>)​
+        .topK(<span class="hljs-number">10</span>)​
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;status&quot;</span>))​
+        .build());​
 ​
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(resp.<span class="hljs-title function_">getSearchResults</span>());​
+System.out.println(resp.getSearchResults());​
 ​
 <span class="hljs-comment">// Output​</span>
 <span class="hljs-comment">//​</span>
 <span class="hljs-comment">// [[SearchResp.SearchResult(entity={id=2, age=18, status=active}, score=0.050000004, id=2), SearchResp.SearchResult(entity={id=4, age=18, status=inactive}, score=0.45000002, id=4)]]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">client.search({​
-    collection_name: <span class="hljs-string">&#x27;user_profiles_default&#x27;</span>,​
-    data: [<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>],​
-    limit: <span class="hljs-number">2</span>,​
-    output_fields: [<span class="hljs-string">&#x27;age&#x27;</span>, <span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;status&#x27;</span>],​
-    <span class="hljs-built_in">filter</span>: <span class="hljs-string">&#x27;age == 18&#x27;</span>,​
-    params: {​
-        nprobe: <span class="hljs-number">16</span>​
+<pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">search</span>({​
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;user_profiles_default&#x27;</span>,​
+    <span class="hljs-attr">data</span>: [<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.5</span>],​
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>,​
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;age&#x27;</span>, <span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;status&#x27;</span>],​
+    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;age == 18&#x27;</span>,​
+    <span class="hljs-attr">params</span>: {​
+        <span class="hljs-attr">nprobe</span>: <span class="hljs-number">16</span>​
     }​
 });​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/search&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;user_profiles_default&quot;,​
     &quot;data&quot;: [​
         [0.1, 0.2, 0.3, 0.4, 0.5]​
@@ -796,11 +796,11 @@ params.<span class="hljs-title function_">put</span>(<span class="hljs-string">&
     &quot;limit&quot;: 5,​
     &quot;filter&quot;: &quot;age == 18&quot;,​
     &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;, &quot;status&quot;]​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;distance&quot;:0.050000004,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:18,&quot;distance&quot;:0.45000002,&quot;id&quot;:4,&quot;status&quot;:&quot;inactive&quot;}]}​</span>
+# {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;distance&quot;:0.050000004,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:18,&quot;distance&quot;:0.45000002,&quot;id&quot;:4,&quot;status&quot;:&quot;inactive&quot;}]}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In a <code translate="no">query</code> operation, you can match or filter by default values directly:​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -866,30 +866,30 @@ System.out.println(statusResp.getQueryResults());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/query&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;user_profiles_default&quot;,​
     &quot;filter&quot;: &quot;age == 18&quot;,​
     &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;, &quot;status&quot;]​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:18,&quot;id&quot;:4,&quot;status&quot;:&quot;inactive&quot;}]}​</span>
+# {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:18,&quot;id&quot;:4,&quot;status&quot;:&quot;inactive&quot;}]}​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/query&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;user_profiles_default&quot;,​
     &quot;filter&quot;: &quot;status == \&quot;active\&quot;&quot;,​
     &quot;outputFields&quot;: [&quot;id&quot;, &quot;age&quot;, &quot;status&quot;]​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:25,&quot;id&quot;:3,&quot;status&quot;:&quot;active&quot;}]}​</span>
+# {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:25,&quot;id&quot;:3,&quot;status&quot;:&quot;active&quot;}]}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Applicable-rules" class="common-anchor-header">Applicable rules<button data-href="#Applicable-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

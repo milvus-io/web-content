@@ -37,16 +37,16 @@ title: Install Birdwatcher
     </button></h2><p>If you have installed Milvus Standalone <a href="/docs/install_standalone-docker.md">using docker</a>, you’d better download and install the built binary, install Birdwatcher as a common Go module, or build Birdwatcher from the source.</p>
 <ul>
 <li><p>Install it as a common Go module.</p>
-<pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/milvus-io/birdwatcher.git
-<span class="hljs-built_in">cd</span> birdwatcher
+<pre><code translate="no" class="language-shell">git clone https://github.com/milvus-io/birdwatcher.git
+cd birdwatcher
 go install github.com/milvus-io/birdwatcher
 <button class="copy-code-btn"></button></code></pre>
 <p>Then you can run Birdwatcher as follows:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span>
+<pre><code translate="no" class="language-shell">go run main.go
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Build it from the source.</p>
-<pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/milvus-io/birdwatcher.git
-<span class="hljs-built_in">cd</span> birdwatcher
+<pre><code translate="no" class="language-shell">git clone https://github.com/milvus-io/birdwatcher.git
+cd birdwatcher
 go build -o birdwatcher main.go
 <button class="copy-code-btn"></button></code></pre>
 <p>Then you can run Birdwatcher as follows:</p>
@@ -55,7 +55,7 @@ go build -o birdwatcher main.go
 <li><p>Download the already-built binary</p>
 <p>First, open the <a href="https://github.com/milvus-io/birdwatcher/releases/latest">latest release page</a>, and find the prepared binaries.</p>
 <pre><code translate="no" class="language-shell">wget -O birdwatcher.tar.gz \
-https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&lt;os&gt;_&lt;<span class="hljs-built_in">arch</span>&gt;.tar.gz
+https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&lt;os&gt;_&lt;arch&gt;.tar.gz
 <button class="copy-code-btn"></button></code></pre>
 <p>Then you can decompress the tarball and use Birdwatcher as follows:</p>
 <pre><code translate="no" class="language-shell">tar -xvzf birdwatcher.tar.gz
@@ -78,39 +78,39 @@ https://github.com/milvus-io/birdwatcher/releases/download/latest/birdwatcher_&l
         ></path>
       </svg>
     </button></h2><p>If you have installed either Milvus Standalone <a href="/docs/install_standalone-helm.md">using the Helm charts</a> or <a href="/docs/install_standalone-operator.md">the Milvus Operator</a> or Milvus Cluster <a href="/docs/install_cluster-helm.md">using the Helm charts</a> or <a href="/docs/install_cluster-milvusoperator.md">the Milvus Operator</a>, you are advised to install Birdwatcher as a Kubernetes pod.</p>
-<h3 id="Prepare-deploymentyml" class="common-anchor-header">Prepare deployment.yml</h3><pre><code translate="no" class="language-yml">apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: birdwatcher
-spec:
-  selector:
-    matchLabels:
-      app: birdwatcher
-  template:
-    metadata:
-      labels:
-        app: birdwatcher
-    spec:
-      containers:
-      - name: birdwatcher
-        image: milvusdb/birdwatcher
-        resources:
-          limits:
-            memory: <span class="hljs-string">&quot;128Mi&quot;</span>
-            cpu: <span class="hljs-string">&quot;500m&quot;</span>
+<h3 id="Prepare-deploymentyml" class="common-anchor-header">Prepare deployment.yml</h3><pre><code translate="no" class="language-yml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">apps/v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Deployment</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">birdwatcher</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">selector:</span>
+    <span class="hljs-attr">matchLabels:</span>
+      <span class="hljs-attr">app:</span> <span class="hljs-string">birdwatcher</span>
+  <span class="hljs-attr">template:</span>
+    <span class="hljs-attr">metadata:</span>
+      <span class="hljs-attr">labels:</span>
+        <span class="hljs-attr">app:</span> <span class="hljs-string">birdwatcher</span>
+    <span class="hljs-attr">spec:</span>
+      <span class="hljs-attr">containers:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">birdwatcher</span>
+        <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/birdwatcher</span>
+        <span class="hljs-attr">resources:</span>
+          <span class="hljs-attr">limits:</span>
+            <span class="hljs-attr">memory:</span> <span class="hljs-string">&quot;128Mi&quot;</span>
+            <span class="hljs-attr">cpu:</span> <span class="hljs-string">&quot;500m&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>If the image available on DockerHub is not the latest, you can build an image of Birdwatcher using the Dockerfile provided with the source code as follows:</p>
-<pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/milvus-io/birdwatcher.git
-<span class="hljs-built_in">cd</span> birdwatcher
+<pre><code translate="no" class="language-shell">git clone https://github.com/milvus-io/birdwatcher.git
+cd birdwatcher
 docker build -t milvusdb/birdwatcher .
 <button class="copy-code-btn"></button></code></pre>
 <p>To deploy a locally built image, you need to add <code translate="no">imagePullPolicy</code> to the above specs and set it to <code translate="no">Never</code>.</p>
-<pre><code translate="no" class="language-yaml">...
-      - name: birdwatcher
-        image: milvusdb/birdwatcher
-        imagePullPolicy: Never
-...
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">birdwatcher</span>
+        <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/birdwatcher</span>
+        <span class="hljs-attr">imagePullPolicy:</span> <span class="hljs-string">Never</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <h3 id="Apply-deploymentyml" class="common-anchor-header">Apply deployment.yml</h3><p>Save the above YAML in a file and name it <code translate="no">deployment.yml</code>, and run the following command</p>

@@ -26,46 +26,46 @@ summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on 
 </ul>
 <h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Tweak Milvus configurations</h3><p>This guide assumes that you have already <a href="/docs/eks.md">deployed a Milvus cluster behind a Layer-4 load balancer on AWS</a>.</p>
 <p>Before setting up a Layer-7 load balancer for this Milvus cluster, run the following command to remove the Layer-4 load balancer.</p>
-<pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
+<pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-TLS-certificates" class="common-anchor-header">Prepare TLS certificates</h3><p>TLS requires certificates to work. We’re using <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">ACM</a> to manage certificates and need to import an existing certificate into ACM. Refer to <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate-api-cli.html#import-certificate-api">Import Certificate</a>. The following is an example.</p>
-<pre><code translate="no" class="language-bash"># If the <span class="hljs-keyword">import</span>-certificate command is successful, it returns the arn of the imported certificate.
-aws acm <span class="hljs-keyword">import</span>-certificate --certificate fileb:<span class="hljs-comment">//Certificate.pem \</span>
-      --certificate-chain fileb:<span class="hljs-comment">//CertificateChain.pem \</span>
-      --private-key fileb:<span class="hljs-comment">//PrivateKey.pem  </span>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># If the import-certificate command is successful, it returns the arn of the imported certificate.</span>
+aws acm import-certificate --certificate fileb://Certificate.pem \
+      --certificate-chain fileb://CertificateChain.pem \
+      --private-key fileb://PrivateKey.pem  
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Create an Ingress to generate a Layer-7 Load Balancer</h3><p>Prepare the ingress file as follows and name it <code translate="no">ingress.yaml</code>. <strong>Do replace the certificate arn and host with your own.</strong></p>
-<pre><code translate="no" class="language-yaml">apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  namespace: milvus
-  name: milvus-demo
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/backend-protocol-version: GRPC
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: <span class="hljs-string">&#x27;[{&quot;HTTPS&quot;:443}]&#x27;</span>
-    alb.ingress.kubernetes.io/certificate-arn: <span class="hljs-string">&quot;arn:aws:acm:region:account-id:certificate/certificate-id&quot;</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">namespace:</span> <span class="hljs-string">milvus</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">milvus-demo</span>
+  <span class="hljs-attr">annotations:</span>
+    <span class="hljs-attr">alb.ingress.kubernetes.io/scheme:</span> <span class="hljs-string">internet-facing</span>
+    <span class="hljs-attr">alb.ingress.kubernetes.io/backend-protocol-version:</span> <span class="hljs-string">GRPC</span>
+    <span class="hljs-attr">alb.ingress.kubernetes.io/target-type:</span> <span class="hljs-string">ip</span>
+    <span class="hljs-attr">alb.ingress.kubernetes.io/listen-ports:</span> <span class="hljs-string">&#x27;[{&quot;HTTPS&quot;:443}]&#x27;</span>
+    <span class="hljs-attr">alb.ingress.kubernetes.io/certificate-arn:</span> <span class="hljs-string">&quot;arn:aws:acm:region:account-id:certificate/certificate-id&quot;</span>
 
-spec:
-  ingressClassName: alb
-  rules:
-    - host: milvus-demo.milvus.io
-      http:
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: milvus-demo
-              port:
-                number: 19530
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">ingressClassName:</span> <span class="hljs-string">alb</span>
+  <span class="hljs-attr">rules:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">host:</span> <span class="hljs-string">milvus-demo.milvus.io</span>
+      <span class="hljs-attr">http:</span>
+        <span class="hljs-attr">paths:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-attr">path:</span> <span class="hljs-string">/</span>
+          <span class="hljs-attr">pathType:</span> <span class="hljs-string">Prefix</span>
+          <span class="hljs-attr">backend:</span>
+            <span class="hljs-attr">service:</span>
+              <span class="hljs-attr">name:</span> <span class="hljs-string">milvus-demo</span>
+              <span class="hljs-attr">port:</span>
+                <span class="hljs-attr">number:</span> <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then you can create the Ingress by applying the file to your EKS cluster.</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>Now, wait for AWS to set up the Layer-7 load balancer. You can check the progress by running</p>
-<pre><code translate="no" class="language-bash">kubectl -f ingress.yaml <span class="hljs-keyword">get</span> -w
+<pre><code translate="no" class="language-bash">kubectl -f ingress.yaml get -w
 <button class="copy-code-btn"></button></code></pre>
 <p>The output should be similar to the following:</p>
 <pre><code translate="no" class="language-shell">NAME          CLASS   HOSTS                   ADDRESS                                                                PORTS   AGE

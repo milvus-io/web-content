@@ -98,19 +98,19 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/delete&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/delete&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;quick_setup&quot;,​
     &quot;filter&quot;: &quot;color in [\&quot;red_3314\&quot;, \&quot;purple_7392\&quot;]&quot;​
-}&#x27;</span>​
+}'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Delete-Entities-by-Primary-Keys​" class="common-anchor-header">Delete Entities by Primary Keys​<button data-href="#Delete-Entities-by-Primary-Keys​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,20 +173,20 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/delete&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/delete&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;quick_setup&quot;,​
     &quot;filter&quot;: &quot;id in [18, 19]&quot;​
-}&#x27;</span>​
-<span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{}}​</span>
+}'​
+## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{}}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Delete-Entities-from-Partitions​" class="common-anchor-header">Delete Entities from Partitions​<button data-href="#Delete-Entities-from-Partitions​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -250,23 +250,23 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/delete&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/delete&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;quick_setup&quot;,​
     &quot;partitionName&quot;: &quot;partitionA&quot;,​
     &quot;filter&quot;: &quot;id in [18, 19]&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;cost&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: {}​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;cost&quot;: 0,​
+#     &quot;data&quot;: {}​
+# }​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>

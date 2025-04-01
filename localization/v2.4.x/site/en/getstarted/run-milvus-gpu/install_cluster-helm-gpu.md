@@ -59,7 +59,7 @@ title: Run Milvus with GPU Support Using Helm Chart
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
-<span class="hljs-title function_">standard</span> <span class="hljs-params">(<span class="hljs-keyword">default</span>)</span>    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
+standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Check <a href="/docs/prerequisite-gpu.md">the hardware and software requirements</a> before installation.</p></li>
 </ul>
@@ -91,7 +91,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <p>The Milvus Helm Charts repo at <code translate="no">https://milvus-io.github.io/milvus-helm/</code> has been archived and you can get further updates from <code translate="no">https://zilliztech.github.io/milvus-helm/</code> as follows:</p>
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update
-<span class="hljs-comment"># upgrade existing helm release</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade existing helm release</span>
 helm upgrade my-release zilliztech/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>The archived repo is still available for the charts up to 4.0.31. For later releases, use the new repo instead.</p>
@@ -99,7 +99,7 @@ helm upgrade my-release zilliztech/milvus
 <ol start="2">
 <li>Update charts locally.</li>
 </ol>
-<pre><code translate="no">$ helm repo update
+<pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus" class="common-anchor-header">Start Milvus<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -122,20 +122,20 @@ helm upgrade my-release zilliztech/milvus
 <h3 id="1-Assign-a-single-GPU-device" class="common-anchor-header">1. Assign a single GPU device</h3><p>Milvus with GPU support allows you to assign one or more GPU devices.</p>
 <ul>
 <li><p>Milvus cluster</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
@@ -155,42 +155,42 @@ EOF</span>
 <h3 id="2-Assign-multiple-GPU-devices" class="common-anchor-header">2. Assign multiple GPU devices</h3><p>In addition to a single GPU device, you can also assign multiple GPU devices to Milvus.</p>
 <ul>
 <li><p>Milvus cluster</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>In the configuration above, the indexNode and queryNode share two GPUs. To assign different GPUs to the indexNode and the queryNode, you can modify the configuration accordingly by setting <code translate="no">extraEnv</code> in the configuration file as follows:</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;0&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;0&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;1&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -205,48 +205,48 @@ EOF</span>
   </div>
 </li>
 <li><p>Milvus standalone</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>In the configuration above, the indexNode and queryNode share two GPUs. To assign different GPUs to the indexNode and the queryNode, you can modify the configuration accordingly by setting extraEnv in the configuration file as follows:</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;0&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;0&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;1&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="2-Check-Milvus-status" class="common-anchor-header">2. Check Milvus status</h3><p>Run the following command to check Milvus status:</p>
-<pre><code translate="no" class="language-bash">$ kubectl <span class="hljs-keyword">get</span> pods
+<pre><code translate="no" class="language-bash">$ kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <p>After Milvus starts, the <code translate="no">READY</code> column displays <code translate="no">1/1</code> for all pods.</p>
 <ul>
@@ -283,18 +283,18 @@ my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0        
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. Forward a local port to Milvus</h3><p>Verify which local port the Milvus server is listening on. Replace the pod name with your own.</p>
-<pre><code translate="no" class="language-bash">$ kubectl <span class="hljs-keyword">get</span> pod my-release-milvus-proxy<span class="hljs-number">-6b</span>d7f5587-ds2xv --template
+<pre><code translate="no" class="language-bash">$ kubectl get pod my-release-milvus-proxy-6bd7f5587-ds2xv --template
 =<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
-<span class="hljs-number">19530</span>
+19530
 <button class="copy-code-btn"></button></code></pre>
 <p>Then, run the following command to forward a local port to the port at which Milvus serves.</p>
-<pre><code translate="no" class="language-bash">$ kubectl port-forward service/my-release-milvus <span class="hljs-number">27017</span>:<span class="hljs-number">19530</span>
-<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">27017</span> -&gt; <span class="hljs-number">19530</span>
+<pre><code translate="no" class="language-bash">$ kubectl port-forward service/my-release-milvus 27017:19530
+Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>Optionally, you can use <code translate="no">:19530</code> instead of <code translate="no">27017:19530</code> in the above command to let <code translate="no">kubectl</code> allocate a local port for you so that you don’t have to manage port conflicts.</p>
 <p>By default, kubectl’s port-forwarding only listens on <code translate="no">localhost</code>. Use the <code translate="no">address</code> flag if you want Milvus to listen on the selected or all IP addresses. The following command makes port-forward listen on all IP addresses on the host machine.</p>
-<pre><code translate="no" class="language-bash">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27017</span>:<span class="hljs-number">19530</span>
-<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27017</span> -&gt; <span class="hljs-number">19530</span>
+<pre><code translate="no" class="language-bash">$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
+Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">Uninstall Milvus<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -337,7 +337,7 @@ my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0        
 <li><a href="/docs/manage_databases.md">Manage Databases</a></li>
 <li><a href="/docs/manage-collections.md">Manage Collections</a></li>
 <li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert &amp; Delete</a></li>
+<li><a href="/docs/insert-update-delete.md">Insert, Upsert & Delete</a></li>
 <li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
 <li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>

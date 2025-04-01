@@ -37,7 +37,7 @@ title: Back up and Restore Data Using APIs
     </button></h2><p>You can either download the compiled binary or build from the source.</p>
 <p>To download the compiled binary, go to the <a href="https://github.com/zilliztech/milvus-backup/releases">release</a> page, where you can find all official releases. Remember, always use the binaries in the release marked as <strong>Latest</strong>.</p>
 <p>To compile from the source, do as follows:</p>
-<pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> git@github.com:zilliztech/milvus-backup.git
+<pre><code translate="no" class="language-shell">git clone git@github.com:zilliztech/milvus-backup.git
 go get
 go build
 <button class="copy-code-btn"></button></code></pre>
@@ -138,23 +138,23 @@ workspace
     </button></h2><div class="tab-wrapper"></div>
 <p>Note that running Milvus Backup against a Milvus instance will not normally affect the running of the instance. Your Milvus instance is fully functional during backup or restore.</p>
 <p>Run the following command to create a backup. Change <code translate="no">collection_names</code> and <code translate="no">backup_name</code> if necessary.</p>
-<pre><code translate="no" class="language-shell">curl --location --request POST <span class="hljs-string">&#x27;http://localhost:8080/api/v1/create&#x27;</span> \
---header <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
---data-raw <span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-shell">curl --location --request POST &#x27;http://localhost:8080/api/v1/create&#x27; \
+--header &#x27;Content-Type: application/json&#x27; \
+--data-raw &#x27;{
   &quot;async&quot;: true,
   &quot;backup_name&quot;: &quot;my_backup&quot;,
   &quot;collection_names&quot;: [
     &quot;hello_milvus&quot;
   ]
-}&#x27;</span>
+}&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>Once the command is executed, you can list the backups in the bucket specified in the Minio settings as follows:</p>
-<pre><code translate="no" class="language-shell">curl --location --request <span class="hljs-variable constant_">GET</span> <span class="hljs-string">&#x27;http://localhost:8080/api/v1/list&#x27;</span> \
---header <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span>
+<pre><code translate="no" class="language-shell">curl --location --request GET &#x27;http://localhost:8080/api/v1/list&#x27; \
+--header &#x27;Content-Type: application/json&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>And download the backup files as follows:</p>
-<pre><code translate="no" class="language-shell">curl --location --request <span class="hljs-variable constant_">GET</span> <span class="hljs-string">&#x27;http://localhost:8080/api/v1/get_backup?backup_id=&lt;test_backup_id&gt;&amp;backup_name=my_backup&#x27;</span> \
---header <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span>
+<pre><code translate="no" class="language-shell">curl --location --request GET &#x27;http://localhost:8080/api/v1/get_backup?backup_id=&lt;test_backup_id&gt;&amp;backup_name=my_backup&#x27; \
+--header &#x27;Content-Type: application/json&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>While running the above command, change <code translate="no">backup_id</code> and <code translate="no">backup_name</code> to the one returned by the list API.</p>
 <p>Now, you can save the backup files to a safe place for restoration in the future, or upload them to <a href="https://cloud.zilliz.com">Zilliz Cloud</a> to create a managed vector database with your data. For details, refer to <a href="https://zilliz.com/doc/migrate_from_milvus-2x">Migrate from Milvus to Zilliz Cloud</a>.</p>
@@ -175,36 +175,36 @@ workspace
       </svg>
     </button></h2><div class="tab-wrapper"></div>
 <p>You can call the restore API command with a <code translate="no">collection_suffix</code> option to create a new collection by restoring the data from the backup. Change <code translate="no">collection_names</code> and <code translate="no">backup_name</code> if necessary.</p>
-<pre><code translate="no" class="language-shell">curl --location --request POST <span class="hljs-string">&#x27;http://localhost:8080/api/v1/restore&#x27;</span> \
---header <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
---data-raw <span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-shell">curl --location --request POST &#x27;http://localhost:8080/api/v1/restore&#x27; \
+--header &#x27;Content-Type: application/json&#x27; \
+--data-raw &#x27;{
     &quot;async&quot;: true,
     &quot;collection_names&quot;: [
     &quot;hello_milvus&quot;
   ],
     &quot;collection_suffix&quot;: &quot;_recover&quot;,
     &quot;backup_name&quot;:&quot;my_backup&quot;
-}&#x27;</span>
+}&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>The <code translate="no">collection_suffix</code> option allows you to set a suffix for the new collection to be created. The above command will create a new collection called <strong>hello_milvus_recover</strong> in your Milvus instance.</p>
 <p>If you prefer to restore the backed-up collection without changing its name, drop the collection before restoring it from the backup. You can now clean the data generated in <a href="#Prepare-data">Prepare data</a> by running the following command.</p>
 <pre><code translate="no" class="language-shell">python example/clean_data.py
 <button class="copy-code-btn"></button></code></pre>
 <p>Then run the following command to restore the data from the backup.</p>
-<pre><code translate="no" class="language-shell">curl --location --request POST <span class="hljs-string">&#x27;http://localhost:8080/api/v1/restore&#x27;</span> \
---header <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
---data-raw <span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-shell">curl --location --request POST &#x27;http://localhost:8080/api/v1/restore&#x27; \
+--header &#x27;Content-Type: application/json&#x27; \
+--data-raw &#x27;{
     &quot;async&quot;: true,
     &quot;collection_names&quot;: [
     &quot;hello_milvus&quot;
   ],
     &quot;collection_suffix&quot;: &quot;&quot;,
     &quot;backup_name&quot;:&quot;my_backup&quot;
-}&#x27;</span>
+}&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>The restore process can be time-consuming depending on the size of the data to be restored. Therefore, all restore tasks are running asynchronously. You can check the status of a restore task by running:</p>
-<pre><code translate="no" class="language-shell">curl --location --request <span class="hljs-variable constant_">GET</span> <span class="hljs-string">&#x27;http://localhost:8080/api/v1/get_restore?id=&lt;test_restore_id&gt;&#x27;</span> \
---header <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span>
+<pre><code translate="no" class="language-shell">curl --location --request GET &#x27;http://localhost:8080/api/v1/get_restore?id=&lt;test_restore_id&gt;&#x27; \
+--header &#x27;Content-Type: application/json&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>Remember to change <code translate="no">test_restore_id</code> to the one restored by the restore API.</p>
 <h2 id="Verify-restored-data" class="common-anchor-header">Verify restored data<button data-href="#Verify-restored-data" class="anchor-icon" translate="no">

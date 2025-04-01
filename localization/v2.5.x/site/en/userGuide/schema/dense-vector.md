@@ -58,17 +58,17 @@ summary: >-
 <li><p><strong>Clustering Effect:</strong> Related concepts (such as <strong>Milvus</strong>, <strong>vector database</strong>, and <strong>retrieval system</strong>) are positioned close to each other in space, forming a semantic cluster.​</p></li>
 </ul>
 <p>Below is an example of a real dense vector representing the text <code translate="no">&quot;Milvus is an efficient vector database&quot;</code>:​</p>
-<pre><code translate="no" class="language-JSON">[​
-    -<span class="hljs-number">0.013052909</span>,​
-    <span class="hljs-number">0.020387933</span>,​
-    -<span class="hljs-number">0.007869</span>,​
-    -<span class="hljs-number">0.11111383</span>,​
-    -<span class="hljs-number">0.030188112</span>,​
-    -<span class="hljs-number">0.0053388323</span>,​
-    <span class="hljs-number">0.0010654867</span>,​
-    <span class="hljs-number">0.072027855</span>,​
+<pre><code translate="no" class="language-JSON"><span class="hljs-punctuation">[</span>​
+    <span class="hljs-number">-0.013052909</span><span class="hljs-punctuation">,</span>​
+    <span class="hljs-number">0.020387933</span><span class="hljs-punctuation">,</span>​
+    <span class="hljs-number">-0.007869</span><span class="hljs-punctuation">,</span>​
+    <span class="hljs-number">-0.11111383</span><span class="hljs-punctuation">,</span>​
+    <span class="hljs-number">-0.030188112</span><span class="hljs-punctuation">,</span>​
+    <span class="hljs-number">-0.0053388323</span><span class="hljs-punctuation">,</span>​
+    <span class="hljs-number">0.0010654867</span><span class="hljs-punctuation">,</span>​
+    <span class="hljs-number">0.072027855</span><span class="hljs-punctuation">,</span>​
     <span class="hljs-comment">// ... more dimensions​</span>
-]​
+<span class="hljs-punctuation">]</span>​
 ​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -162,32 +162,32 @@ schema.<span class="hljs-title function_">push</span>({​
 ​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> primaryField=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export primaryField='{​
     &quot;fieldName&quot;: &quot;pk&quot;,​
     &quot;dataType&quot;: &quot;VarChar&quot;,​
     &quot;isPrimary&quot;: true,​
     &quot;elementTypeParams&quot;: {​
         &quot;max_length&quot;: 100​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{​
+export vectorField='{​
     &quot;fieldName&quot;: &quot;dense_vector&quot;,​
     &quot;dataType&quot;: &quot;FloatVector&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;dim&quot;: 4​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{​
+export schema=&quot;{​
     \&quot;autoID\&quot;: true,​
     \&quot;fields\&quot;: [​
-        <span class="hljs-variable">$primaryField</span>,​
-        <span class="hljs-variable">$vectorField</span>​
+        $primaryField,​
+        $vectorField​
     ]​
-}&quot;</span>​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p><strong>Supported data types for dense vector fields</strong>:</p>
 <table>
 <thead>
@@ -214,22 +214,22 @@ index_params.add_index(​
     index_name=<span class="hljs-string">&quot;dense_vector_index&quot;</span>,​
     index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,​
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,​
-    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span>}​
+    params={<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span>}​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;​
-<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;​
+<span class="hljs-keyword">import</span> java.util.*;​
 ​
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;nlist&quot;</span>,<span class="hljs-number">128</span>);​
-indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;dense_vector&quot;</span>)​
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">IVF_FLAT</span>)​
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)​
-        .<span class="hljs-title function_">extraParams</span>(extraParams)​
-        .<span class="hljs-title function_">build</span>());​
+List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
+Map&lt;String,Object&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
+extraParams.put(<span class="hljs-string">&quot;nlist&quot;</span>,<span class="hljs-number">128</span>);​
+indexes.add(IndexParam.builder()​
+        .fieldName(<span class="hljs-string">&quot;dense_vector&quot;</span>)​
+        .indexType(IndexParam.IndexType.IVF_FLAT)​
+        .metricType(IndexParam.MetricType.IP)​
+        .extraParams(extraParams)​
+        .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MetricType</span>, <span class="hljs-title class_">IndexType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;​
@@ -245,7 +245,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 };​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
+<pre><code translate="no" class="language-curl">export indexParams='[​
         {​
             &quot;fieldName&quot;: &quot;dense_vector&quot;,​
             &quot;metricType&quot;: &quot;IP&quot;,​
@@ -253,9 +253,9 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
             &quot;indexType&quot;: &quot;IVF_FLAT&quot;,​
             &quot;params&quot;:{&quot;nlist&quot;: 128}​
         }​
-    ]&#x27;</span>​
+    ]'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In the example above, an index named <code translate="no">dense_vector_index</code> is created for the <code translate="no">dense_vector</code> field using the <code translate="no">IVF_FLAT</code> index type. The <code translate="no">metric_type</code> is set to <code translate="no">IP</code>, indicating that inner product will be used as the distance metric.​</p>
 <p>Milvus supports other index types as well. For more details, refer to <a href="https://milvus.io/docs/index.md?tab=floating">​Floating Vector Indexes</a>. Additionally, Milvus supports other metric types. For more information, refer to <a href="/docs/metric.md">​Metric Types</a>.​</p>
 <h3 id="Create-collection​" class="common-anchor-header">Create collection​</h3><p>Once the dense vector and index param settings are complete, you can create a collection containing dense vectors. The example below uses the <code translate="no">create_collection</code> method to create a collection named <code translate="no">my_dense_collection</code>.​</p>
@@ -266,7 +266,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
   <a href="#go">Go</a>
   <a href="#curl">cURL</a>
 </div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
+<pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_dense_collection&quot;</span>,​
     schema=schema,​
     index_params=index_params​
@@ -303,16 +303,16 @@ client.createCollection(requestCreate);​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&quot;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &quot;{​
     \&quot;collectionName\&quot;: \&quot;my_dense_collection\&quot;,​
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,​
-    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>​
-}&quot;</span>​
+    \&quot;schema\&quot;: $schema,​
+    \&quot;indexParams\&quot;: $indexParams​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Insert-data​" class="common-anchor-header">Insert data​</h3><p>After creating the collection, use the <code translate="no">insert</code> method to add data containing dense vectors. Ensure that the dimensionality of the dense vectors being inserted matches the <code translate="no">dim</code> value defined when adding the dense vector field.​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -326,7 +326,7 @@ client.createCollection(requestCreate);​
     {<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.8</span>]},​
 ]​
 ​
-client.<span class="hljs-title function_">insert</span>(​
+client.insert(​
     collection_name=<span class="hljs-string">&quot;my_dense_collection&quot;</span>,​
     data=data​
 )​
@@ -360,20 +360,20 @@ client.<span class="hljs-title function_">insert</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;data&quot;: [​
         {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.4]},​
         {&quot;dense_vector&quot;: [0.2, 0.3, 0.4, 0.5]}        ​
     ],​
     &quot;collectionName&quot;: &quot;my_dense_collection&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}​</span>
+## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Perform-similarity-search​" class="common-anchor-header">Perform similarity search​</h3><p>Semantic search based on dense vectors is one of the core features of Milvus, allowing you to quickly find data that is most similar to a query vector based on the distance between vectors. To perform a similarity search, prepare the query vector and search parameters, then call the <code translate="no">search</code> method.​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -383,17 +383,17 @@ client.<span class="hljs-title function_">insert</span>({​
   <a href="#curl">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">search_params = {​
-    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: 10}​
+    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}​
 }​
 ​
-query_vector = [0.1, 0.2, 0.3, 0.7]​
+query_vector = [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]​
 ​
 res = client.search(​
     collection_name=<span class="hljs-string">&quot;my_dense_collection&quot;</span>,​
     data=[query_vector],​
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,​
     search_params=search_params,​
-    <span class="hljs-built_in">limit</span>=5,​
+    limit=<span class="hljs-number">5</span>,​
     output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]​
 )​
 ​
@@ -403,47 +403,47 @@ res = client.search(​
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: &#x27;453718927992172271&#x27;, &#x27;distance&#x27;: 0.7599999904632568, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172271&#x27;}}, {&#x27;id&#x27;: &#x27;453718927992172270&#x27;, &#x27;distance&#x27;: 0.6299999952316284, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172270&#x27;}}]&quot;]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">request</span>.<span class="hljs-property">data</span>.<span class="hljs-property">FloatVec</span>;​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;​
 ​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;nprobe&quot;</span>,<span class="hljs-number">10</span>);​
+Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
+searchParams.put(<span class="hljs-string">&quot;nprobe&quot;</span>,<span class="hljs-number">10</span>);​
 ​
-<span class="hljs-title class_">FloatVec</span> queryVector = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> float[]{<span class="hljs-number">0.</span>1f, <span class="hljs-number">0.</span>3f, <span class="hljs-number">0.</span>3f, <span class="hljs-number">0.</span>4f});​
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>});​
 ​
-<span class="hljs-title class_">SearchResp</span> searchR = client.<span class="hljs-title function_">search</span>(<span class="hljs-title class_">SearchReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;my_dense_collection&quot;</span>)​
-        .<span class="hljs-title function_">data</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(queryVector))​
-        .<span class="hljs-title function_">annsField</span>(<span class="hljs-string">&quot;dense_vector&quot;</span>)​
-        .<span class="hljs-title function_">searchParams</span>(searchParams)​
-        .<span class="hljs-title function_">topK</span>(<span class="hljs-number">5</span>)​
-        .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-string">&quot;pk&quot;</span>))​
-        .<span class="hljs-title function_">build</span>());​
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchR</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()​
+        .collectionName(<span class="hljs-string">&quot;my_dense_collection&quot;</span>)​
+        .data(Collections.singletonList(queryVector))​
+        .annsField(<span class="hljs-string">&quot;dense_vector&quot;</span>)​
+        .searchParams(searchParams)​
+        .topK(<span class="hljs-number">5</span>)​
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;pk&quot;</span>))​
+        .build());​
         ​
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(searchR.<span class="hljs-title function_">getSearchResults</span>());​
+System.out.println(searchR.getSearchResults());​
 ​
 <span class="hljs-comment">// Output​</span>
 <span class="hljs-comment">//​</span>
 <span class="hljs-comment">// [[SearchResp.SearchResult(entity={pk=453444327741536779}, score=0.65, id=453444327741536779), SearchResp.SearchResult(entity={pk=453444327741536778}, score=0.65, id=453444327741536778)]]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">query_vector = [0.1, 0.2, 0.3, 0.7];​
+<pre><code translate="no" class="language-javascript">query_vector = [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>];​
 ​
-client.search({​
-    collection_name: my_dense_collection,​
-    data: query_vector,​
-    <span class="hljs-built_in">limit</span>: 5,​
-    output_fields: [<span class="hljs-string">&#x27;pk&#x27;</span>],​
-    params: {​
-        nprobe: 10​
+client.<span class="hljs-title function_">search</span>({​
+    <span class="hljs-attr">collection_name</span>: my_dense_collection,​
+    <span class="hljs-attr">data</span>: query_vector,​
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,​
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;pk&#x27;</span>],​
+    <span class="hljs-attr">params</span>: {​
+        <span class="hljs-attr">nprobe</span>: <span class="hljs-number">10</span>​
     }​
 });​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/search&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;my_dense_collection&quot;,​
     &quot;data&quot;: [​
         [0.1, 0.2, 0.3, 0.7]​
@@ -454,9 +454,9 @@ client.search({​
         &quot;params&quot;:{&quot;nprobe&quot;:10}​
     },​
     &quot;outputFields&quot;: [&quot;pk&quot;]​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}​</span>
+## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.55,&quot;id&quot;:&quot;453577185629572532&quot;,&quot;pk&quot;:&quot;453577185629572532&quot;},{&quot;distance&quot;:0.42,&quot;id&quot;:&quot;453577185629572531&quot;,&quot;pk&quot;:&quot;453577185629572531&quot;}]}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>For more information on similarity search parameters, refer to <a href="/docs/single-vector-search.md">​Basic ANN Search</a>.​</p>

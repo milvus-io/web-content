@@ -57,12 +57,12 @@ summary: >-
 <p>We will use the models from OpenAI. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>If you are using Jupyter Notebook, you need to run this line of code before running the asynchronous code.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> nest_asyncio
 
-nest_asyncio.<span class="hljs-title function_">apply</span>()
+nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-data" class="common-anchor-header">Prepare data</h3><p>You can download sample data with the following commands:</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/&#x27;</span>
@@ -90,12 +90,12 @@ $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-lla
 <span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">import</span> time
 
-<span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">core</span>.<span class="hljs-property">schema</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">TextNode</span>, <span class="hljs-title class_">NodeRelationship</span>, <span class="hljs-title class_">RelatedNodeInfo</span>
-<span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">core</span>.<span class="hljs-property">vector_stores</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">VectorStoreQuery</span>
-<span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">vector_stores</span>.<span class="hljs-property">milvus</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusVectorStore</span>
+<span class="hljs-keyword">from</span> llama_index.core.schema <span class="hljs-keyword">import</span> TextNode, NodeRelationship, RelatedNodeInfo
+<span class="hljs-keyword">from</span> llama_index.core.vector_stores <span class="hljs-keyword">import</span> VectorStoreQuery
+<span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
 
-<span class="hljs-variable constant_">URI</span> = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<span class="hljs-variable constant_">DIM</span> = <span class="hljs-number">768</span>
+URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+DIM = <span class="hljs-number">768</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
@@ -105,17 +105,17 @@ $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-lla
 </ul>
 </div>
 <p>Define an initialization function that we can use again to rebuild the Milvus collection.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-function">def <span class="hljs-title">init_vector_store</span>():
-    <span class="hljs-keyword">return</span> <span class="hljs-title">MilvusVectorStore</span>(<span class="hljs-params">
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_vector_store</span>():
+    <span class="hljs-keyword">return</span> MilvusVectorStore(
         uri=URI,
-        # token=TOKEN,
+        <span class="hljs-comment"># token=TOKEN,</span>
         dim=DIM,
         collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
         embedding_field=<span class="hljs-string">&quot;embedding&quot;</span>,
         id_field=<span class="hljs-string">&quot;id&quot;</span>,
         similarity_metric=<span class="hljs-string">&quot;COSINE&quot;</span>,
-        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (`<span class="hljs-string">&quot;Strong&quot;</span>`, `<span class="hljs-string">&quot;Session&quot;</span>`, `<span class="hljs-string">&quot;Bounded&quot;</span>`, `<span class="hljs-string">&quot;Eventually&quot;</span>`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-        overwrite</span>=True,  <span class="hljs-meta"># To overwrite the collection <span class="hljs-keyword">if</span> it already exists</span>
+        consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        overwrite=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># To overwrite the collection if it already exists</span>
     )
 
 
@@ -136,10 +136,10 @@ documents = SimpleDirectoryReader(
 <pre><code translate="no">Document ID: 41a6f99c-489f-49ff-9821-14e2561140eb
 </code></pre>
 <p>Instantiate a Hugging Face embedding model locally. Using a local model avoids the risk of reaching API rate limits during asynchronous data insertion, as concurrent API requests can quickly add up and use up your budget in public API. However, if you have a high rate limit, you may opt to use a remote model service instead.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">embeddings</span>.<span class="hljs-property">huggingface</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">HuggingFaceEmbedding</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.embeddings.huggingface <span class="hljs-keyword">import</span> HuggingFaceEmbedding
 
 
-embed_model = <span class="hljs-title class_">HuggingFaceEmbedding</span>(model_name=<span class="hljs-string">&quot;BAAI/bge-base-en-v1.5&quot;</span>)
+embed_model = HuggingFaceEmbedding(model_name=<span class="hljs-string">&quot;BAAI/bge-base-en-v1.5&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Create an index and insert the document.</p>
 <p>We set the <code translate="no">use_async</code> to <code translate="no">True</code> to enable async insert mode.</p>
@@ -155,9 +155,9 @@ index = VectorStoreIndex.from_documents(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Initialize the LLM.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">llms</span>.<span class="hljs-property">openai</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.llms.openai <span class="hljs-keyword">import</span> OpenAI
 
-llm = <span class="hljs-title class_">OpenAI</span>(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
+llm = OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>When building the query engine, you can also set the <code translate="no">use_async</code> parameter to <code translate="no">True</code> to enable asynchronous search.</p>
 <pre><code translate="no" class="language-python">query_engine = index.as_query_engine(use_async=<span class="hljs-literal">True</span>, llm=llm)
@@ -222,7 +222,7 @@ response = <span class="hljs-keyword">await</span> query_engine.aquery(<span cla
     end_time = time.time()
     <span class="hljs-keyword">return</span> end_time - start_time
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python">add_counts = [10, 100, 1000]
+<pre><code translate="no" class="language-python">add_counts = [<span class="hljs-number">10</span>, <span class="hljs-number">100</span>, <span class="hljs-number">1000</span>]
 <button class="copy-code-btn"></button></code></pre>
 <p>Get the event loop.</p>
 <pre><code translate="no" class="language-python">loop = asyncio.get_event_loop()
@@ -266,7 +266,7 @@ Sync add for 1000 took 62.91 seconds
 <h3 id="Async-search" class="common-anchor-header">Async search</h3><p>Re-initialize the vector store and add some documents before running the search.</p>
 <pre><code translate="no" class="language-python">vector_store = init_vector_store()
 node_list = produce_nodes(num_adding=<span class="hljs-number">1000</span>)
-inserted_ids = vector_store.<span class="hljs-keyword">add</span>(node_list)
+inserted_ids = vector_store.add(node_list)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">2025-01-24 20:08:57,982 [DEBUG][_create_connection]: Created new connection using: 351dc7ea4fb14d4386cfab02621ab7d1 (async_milvus_client.py:600)
 </code></pre>
@@ -284,7 +284,7 @@ inserted_ids = vector_store.<span class="hljs-keyword">add</span>(node_list)
     end_time = time.time()
     <span class="hljs-keyword">return</span> end_time - start_time
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python">query_counts = [10, 100, 1000]
+<pre><code translate="no" class="language-python">query_counts = [<span class="hljs-number">10</span>, <span class="hljs-number">100</span>, <span class="hljs-number">1000</span>]
 <button class="copy-code-btn"></button></code></pre>
 <p>Asynchronously search from Milvus store.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> count <span class="hljs-keyword">in</span> query_counts:

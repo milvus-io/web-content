@@ -63,12 +63,12 @@ title: Configure Milvus on the Fly
         ></path>
       </svg>
     </button></h2><p>On Milvus, <code translate="no">proxy.minPasswordLength</code> is set to <code translate="no">6</code> by default. To change this value, you can do as follows:</p>
-<pre><code translate="no" class="language-shell">$ etcdctl put by-dev/config/proxy/minPasswordLength 8
-<span class="hljs-comment"># or</span>
-$ birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:2379 --rootPath=by-dev,set config-etcd --key by-dev/config/proxy/minPasswordLength --value 8&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl put by-dev/config/proxy/minPasswordLength 8</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">or</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:2379 --rootPath=by-dev,set config-etcd --key by-dev/config/proxy/minPasswordLength --value 8&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then you can check the configurations as follows:</p>
-<pre><code translate="no" class="language-shell">$ etcdctl <span class="hljs-keyword">get</span> <span class="hljs-keyword">by</span>-dev/config/proxy/minPasswordLength
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl get by-dev/config/proxy/minPasswordLength</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Roll-back-configurations" class="common-anchor-header">Roll back configurations<button data-href="#Roll-back-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,12 +86,12 @@ $ birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:237
         ></path>
       </svg>
     </button></h2><p>Milvus also allows you to roll back your configurations in case the changed value no longer applies.</p>
-<pre><code translate="no" class="language-shell">$ etcdctl <span class="hljs-keyword">del</span> by-dev/config/proxy/minPasswordLength 
-<span class="hljs-comment"># or </span>
-$ birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:2379 --rootPath=by-dev,remove config-etcd --key by-dev/config/proxy/minPasswordLength&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl del by-dev/config/proxy/minPasswordLength</span> 
+<span class="hljs-meta prompt_"># </span><span class="language-bash">or</span> 
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:2379 --rootPath=by-dev,remove config-etcd --key by-dev/config/proxy/minPasswordLength&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then you can check the configurations as follows:</p>
-<pre><code translate="no" class="language-shell">$ etcdctl <span class="hljs-keyword">get</span> <span class="hljs-keyword">by</span>-dev/config/proxy/minPasswordLength
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl get by-dev/config/proxy/minPasswordLength</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="View-configurations" class="common-anchor-header">View configurations<button data-href="#View-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -109,15 +109,15 @@ $ birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:237
         ></path>
       </svg>
     </button></h2><p>Instead of viewing the value of a specific configuration item, you can also list all of them.</p>
-<pre><code translate="no" class="language-shell">$ etcdctl <span class="hljs-keyword">get</span> --prefix <span class="hljs-keyword">by</span>-dev/config
-<span class="hljs-meta"># or</span>
-$ birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:2379 --rootPath=by-dev,show config-etcd&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">etcdctl get --prefix by-dev/config</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">or</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">birdwatcher -olc <span class="hljs-string">&quot;#connect --etcd 127.0.0.1:2379 --rootPath=by-dev,show config-etcd&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <p>To view the configurations of a specific node:</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --etcd ip:port 
-Milvus(by-dev) &gt; show session          <span class="hljs-comment"># List all nodes with their server ID</span>
-Milvus(by-dev) &gt; visit querycoord <span class="hljs-number">1</span>    <span class="hljs-comment"># Visit a node by server ID</span>
-QueryCoord-<span class="hljs-number">1</span>(ip:port) &gt; configuration  <span class="hljs-comment"># List the configuration of the node</span>
+Milvus(by-dev) &gt; show session          # List all nodes with their server ID
+Milvus(by-dev) &gt; visit querycoord 1    # Visit a node by server ID
+QueryCoord-1(ip:port) &gt; configuration  # List the configuration of the node
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Applicable-configuration-items" class="common-anchor-header">Applicable configuration items<button data-href="#Applicable-configuration-items" class="anchor-icon" translate="no">
       <svg translate="no"

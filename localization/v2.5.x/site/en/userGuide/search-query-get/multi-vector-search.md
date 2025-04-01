@@ -203,7 +203,7 @@ schema.addField(AddFieldReq.builder()​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export schema='{​
         &quot;autoId&quot;: false,​
         &quot;enabledDynamicField&quot;: true,​
         &quot;fields&quot;: [​
@@ -231,9 +231,9 @@ schema.addField(AddFieldReq.builder()​
                 }​
             }​
         ]​
-    }&#x27;</span>​
+    }'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>During sparse vector searches, you can simplify the process of generating sparse embedding vectors by leveraging Full Text Search capabilities. For more details, see <a href="/docs/full-text-search.md">​Full Text Search</a>.​</p>
 <h4 id="Define-function-to-generate-sparse-vectors​" class="common-anchor-header">Define function to generate sparse vectors​</h4><p>To generate sparse vectors, you can use the Function feature in Milvus. The following example defines a Function to generate sparse vectors using the BM25 algorithm. For more information, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.​</p>
 <div class="multipleCode">
@@ -265,18 +265,18 @@ schema.addFunction(Function.builder()
         .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;sparse&quot;</span>))
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">const <span class="hljs-built_in">functions</span> = [
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> functions = [
     {
-      name: <span class="hljs-string">&#x27;text_bm25_emb&#x27;</span>,
-      description: <span class="hljs-string">&#x27;bm25 function&#x27;</span>,
-      <span class="hljs-built_in">type</span>: FunctionType.BM25,
-      input_field_names: [<span class="hljs-string">&#x27;text&#x27;</span>],
-      output_field_names: [<span class="hljs-string">&#x27;sparse&#x27;</span>],
-      params: {},
+      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;text_bm25_emb&#x27;</span>,
+      <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;bm25 function&#x27;</span>,
+      <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">BM25</span>,
+      <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&#x27;text&#x27;</span>],
+      <span class="hljs-attr">output_field_names</span>: [<span class="hljs-string">&#x27;sparse&#x27;</span>],
+      <span class="hljs-attr">params</span>: {},
     },
 ]；
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-curl">export schema='{
         &quot;autoId&quot;: true,
         &quot;enabledDynamicField&quot;: false,
         &quot;fields&quot;: [
@@ -307,8 +307,8 @@ schema.addFunction(Function.builder()
                 &quot;params&quot;: {}
             }
         ]
-    }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
+    }'
+</code></pre>
 <h4 id="Create-index​" class="common-anchor-header">Create index​</h4><p>After defining the collection schema, it is necessary to set up the vector indexes and the similarity metrics. In this example, an IVF_FLAT index is created for the dense vector field <code translate="no">dense</code>, and a SPARSE_INVERTED_INDEX is created for the sparse vector field <code translate="no">sparse</code>. To learn about the types of indexes supported, see <a href="https://milvus.io/docs/index.md?tab=floating">​Index Explained</a>.​</p>
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -338,32 +338,32 @@ index_params.add_index(
     params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>},  <span class="hljs-comment"># The ratio of small vector values to be dropped during indexing</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;​
-<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;​
+<span class="hljs-keyword">import</span> java.util.*;​
 ​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt; denseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-denseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;nlist&quot;</span>, <span class="hljs-number">128</span>);​
-<span class="hljs-title class_">IndexParam</span> indexParamForDenseField = <span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;dense&quot;</span>)​
-        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;dense_index&quot;</span>)​
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">IVF_FLAT</span>)​
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)​
-        .<span class="hljs-title function_">extraParams</span>(denseParams)​
-        .<span class="hljs-title function_">build</span>();​
+Map&lt;String, Object&gt; denseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
+denseParams.put(<span class="hljs-string">&quot;nlist&quot;</span>, <span class="hljs-number">128</span>);​
+<span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForDenseField</span> <span class="hljs-operator">=</span> IndexParam.builder()​
+        .fieldName(<span class="hljs-string">&quot;dense&quot;</span>)​
+        .indexName(<span class="hljs-string">&quot;dense_index&quot;</span>)​
+        .indexType(IndexParam.IndexType.IVF_FLAT)​
+        .metricType(IndexParam.MetricType.IP)​
+        .extraParams(denseParams)​
+        .build();​
 ​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt; sparseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-sparseParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);​ <span class="hljs-comment">// Algorithm used for building and querying the index</span>
-<span class="hljs-title class_">IndexParam</span> indexParamForSparseField = <span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>)​
-        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;sparse_index&quot;</span>)​
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">SPARSE_INVERTED_INDEX</span>)​
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">BM25</span>)​
-        .<span class="hljs-title function_">extraParams</span>(sparseParams)​
-        .<span class="hljs-title function_">build</span>();​
+Map&lt;String, Object&gt; sparseParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
+sparseParams.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);​ <span class="hljs-comment">// Algorithm used for building and querying the index</span>
+<span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForSparseField</span> <span class="hljs-operator">=</span> IndexParam.builder()​
+        .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)​
+        .indexName(<span class="hljs-string">&quot;sparse_index&quot;</span>)​
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)​
+        .metricType(IndexParam.MetricType.BM25)​
+        .extraParams(sparseParams)​
+        .build();​
 ​
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
-indexParams.<span class="hljs-title function_">add</span>(indexParamForDenseField);​
-indexParams.<span class="hljs-title function_">add</span>(indexParamForSparseField);​
+List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
+indexParams.add(indexParamForDenseField);​
+indexParams.add(indexParamForSparseField);​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [{​
@@ -377,7 +377,7 @@ indexParams.<span class="hljs-title function_">add</span>(indexParamForSparseFie
 }]​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
+<pre><code translate="no" class="language-curl">export indexParams='[​
         {​
             &quot;fieldName&quot;: &quot;dense&quot;,​
             &quot;metricType&quot;: &quot;IP&quot;,​
@@ -391,9 +391,9 @@ indexParams.<span class="hljs-title function_">add</span>(indexParamForSparseFie
             &quot;indexName&quot;: &quot;sparse_index&quot;,​
             &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;​
         }​
-    ]&#x27;</span>​
+    ]'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h4 id="Create-collection​" class="common-anchor-header">Create collection​</h4><p>Create a collection named <code translate="no">demo</code> with the collection schema and indexes configured in the previous two steps.​</p>
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -401,9 +401,9 @@ indexParams.<span class="hljs-title function_">add</span>(indexParamForSparseFie
     <a href="#javascript">Node.js</a>
     <a href="#curl">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
-client.<span class="hljs-title function_">create_collection</span>(​
+client.create_collection(​
     collection_name=<span class="hljs-string">&quot;hybrid_search_collection&quot;</span>,​
     schema=schema,​
     index_params=index_params​
@@ -425,20 +425,20 @@ client.createCollection(createCollectionReq);​
 })​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&quot;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &quot;{​
     \&quot;collectionName\&quot;: \&quot;hybrid_search_collection\&quot;,​
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,​
-    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>​
-}&quot;</span>​
+    \&quot;schema\&quot;: $schema,​
+    \&quot;indexParams\&quot;: $indexParams​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Insert-data​" class="common-anchor-header">Insert data​</h3><p>Insert the sparse-dense vectors into the the collection <code translate="no">demo</code>.​</p>
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -446,7 +446,7 @@ curl --request POST \​
     <a href="#javascript">Node.js</a>
     <a href="#curl">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
@@ -460,7 +460,7 @@ data = [
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;text&quot;</span>: docs[<span class="hljs-number">2</span>], <span class="hljs-string">&quot;dense&quot;</span>: [<span class="hljs-number">2.5525057315826416</span>, <span class="hljs-number">3.8815805912017822</span>, <span class="hljs-number">9.343480110168457</span>, <span class="hljs-number">7.888997554779053</span>, <span class="hljs-number">4.500918388366699</span>]},
 ]
 ​
-res = client.<span class="hljs-title function_">insert</span>(​
+res = client.insert(​
     collection_name=<span class="hljs-string">&quot;hybrid_search_collection&quot;</span>,​
     data=data​
 )​
@@ -537,10 +537,10 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;data&quot;: [
             {
                 &quot;id&quot;: 1,
@@ -559,9 +559,9 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);​
             }
         ],​
     &quot;collectionName&quot;: &quot;hybrid_search_collection&quot;​
-}&#x27;</span>​
+}'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Create-multiple-AnnSearchRequest-instances​" class="common-anchor-header">Create multiple AnnSearchRequest instances​</h3><p>Hybrid Search is implemented by creating multiple <code translate="no">AnnSearchRequest</code> in the <code translate="no">hybrid_search()</code> function, where each <code translate="no">AnnSearchRequest</code> represents a basic ANN search request for a specific vector field. Therefore, before conducting a Hybrid Search, it is necessary to create an <code translate="no">AnnSearchRequest</code> for each vector field.​</p>
 <div class="alert note">
 <p>In Hybrid Search, each <code translate="no">AnnSearchRequest</code> supports only one query vector.​</p>
@@ -573,7 +573,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);​
     <a href="#javascript">Node.js</a>
     <a href="#curl">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">AnnSearchRequest</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest​
 ​
 search_param_1 = {
     <span class="hljs-string">&quot;data&quot;</span>: [[<span class="hljs-number">0.7425515055656433</span>, <span class="hljs-number">7.774101734161377</span>, <span class="hljs-number">0.7397570610046387</span>, <span class="hljs-number">2.429982900619507</span>, <span class="hljs-number">3.8253049850463867</span>]],
@@ -584,7 +584,7 @@ search_param_1 = {
     },
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
-request_1 = <span class="hljs-title class_">AnnSearchRequest</span>(**search_param_1)
+request_1 = AnnSearchRequest(**search_param_1)
 
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [<span class="hljs-string">&#x27;Who started AI research&#x27;</span>],
@@ -594,7 +594,7 @@ search_param_2 = {
     },
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
-request_2 = <span class="hljs-title class_">AnnSearchRequest</span>(**search_param_2)
+request_2 = AnnSearchRequest(**search_param_2)
 
 reqs = [request_1, request_2]
 ​
@@ -669,7 +669,7 @@ reqs = [request_1, request_2]
 <span class="hljs-keyword">const</span> reqs = [search_param_1, search_param_2];
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> req=<span class="hljs-string">&#x27;[
+<pre><code translate="no" class="language-curl">export req='[
     {
         &quot;data&quot;: [[0.7425515055656433, 7.774101734161377, 0.7397570610046387, 2.429982900619507, 3.8253049850463867]], 
         &quot;anns_field&quot;: &quot;dense&quot;,
@@ -690,14 +690,14 @@ reqs = [request_1, request_2]
         },
         &quot;limit&quot;: 2
     }
-]&#x27;</span>
+]'
 
-curl -X POST <span class="hljs-string">&quot;http://your-milvus-server-address/v1/vector/search&quot;</span> \
-     -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-     -d <span class="hljs-string">&quot;<span class="hljs-variable">$req</span>&quot;</span>
+curl -X POST &quot;http://your-milvus-server-address/v1/vector/search&quot; \
+     -H &quot;Content-Type: application/json&quot; \
+     -d &quot;$req&quot;
 
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>Since the parameter <code translate="no">limit</code> is set to 2, each <code translate="no">AnnSearchRequest</code> returns 2 search results. In this example, 2 <code translate="no">AnnSearchRequest</code> are created, therefore a total of 4 search results will be returned.​</p>
 <h3 id="Configure-a-reranking-strategy​" class="common-anchor-header">Configure a reranking strategy​</h3><p>To merge and rerank the two sets of ANN search results, it is necessary to select an appropriate reranking strategy. Zilliz supports two types of reranking strategy: <strong>WeightedRanker</strong> and <strong>RRFRanker</strong>. When choosing a reranking strategy, one thing to consider is whether to there is any emphasis for one or more basic ANN search on the vector fields.​</p>
 <ul>
@@ -715,9 +715,9 @@ curl -X POST <span class="hljs-string">&quot;http://your-milvus-server-address/v
 <a href="#javascript">Node.js</a>
 <a href="#curl">cURL</a>
 </div></p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">WeightedRanker</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker​
 ​
-ranker = <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) ​
+ranker = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) ​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;​
@@ -731,12 +731,12 @@ ranker = <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs
 <span class="hljs-keyword">const</span> rerank = <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>);​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> rerank=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export rerank='{​
         &quot;strategy&quot;: &quot;ws&quot;,​
         &quot;params&quot;: {&quot;weights&quot;: [0.8,0.3]}​
-    }&#x27;</span>​
+    }'​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 <li><p><strong>Example 2: Using RRFRanker</strong>​</p>
 <p>When using the RRFRanker strategy, you need to input the parameter value <code translate="no">k</code> into the RRFRanker. The default value of <code translate="no">k</code> is 60. This parameter helps to determine how the ranks are combined from different ANN searches, aiming to balance and blend the importance across all searches.​</p>
 <p><div class="multipleCode">
@@ -745,9 +745,9 @@ ranker = <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs
 <a href="#javascript">Node.js</a>
 <a href="#curl">cURL</a>
 </div></p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">RRFRanker</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> RRFRanker​
 ​
-ranker = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>)​
+ranker = RRFRanker(<span class="hljs-number">100</span>)​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.BaseRanker;​
@@ -761,12 +761,12 @@ ranker = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-numb
 <span class="hljs-keyword">const</span> rerank = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-string">&quot;100&quot;</span>);​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> rerank=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export rerank='{​
         &quot;strategy&quot;: &quot;rrf&quot;,​
         &quot;params&quot;: { &quot;k&quot;: 100}​
-    }&#x27;</span>​
+    }'​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 </ol>
 <h3 id="Perform-a-Hybrid-Search​" class="common-anchor-header">Perform a Hybrid Search​</h3><p>Before conducting a Hybrid Search, it is necessary to load the collection into memory. If any vector fields in the collection do not have an index or are not loaded, an error will occur when calling the Hybrid Search method. ​</p>
 <div class="multipleCode">
@@ -821,12 +821,12 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/advanced_search&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&quot;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/advanced_search&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &quot;{​
     \&quot;collectionName\&quot;: \&quot;hybrid_search_collection\&quot;,​
-    \&quot;search\&quot;: <span class="hljs-variable">${req}</span>,​
+    \&quot;search\&quot;: ${req},​
     \&quot;rerank\&quot;: {​
         \&quot;strategy\&quot;:\&quot;rrf\&quot;,​
         \&quot;params\&quot;: {​
@@ -839,11 +839,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         \&quot;word_count\&quot;,​
         \&quot;book_describe\&quot;​
     ]​
-}&quot;</span>​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>The following is the output:​</p>
-<pre><code translate="no" class="language-json">[<span class="hljs-string">&quot;[&#x27;id: 844, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 876, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]​
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span><span class="hljs-string">&quot;[&#x27;id: 844, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 876, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span><span class="hljs-punctuation">]</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Since <code translate="no">limit=2</code> is specified in the Hybrid Search, Zilliz will rerank the four search results from step 3 and ultimately return only the top 2 most similar search results. ​</p>

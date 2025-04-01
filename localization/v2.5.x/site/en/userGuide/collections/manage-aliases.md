@@ -58,23 +58,23 @@ title: Manage Aliases​
   <a href="#go">Go</a>
   <a href="#curl">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus import MilvusClient​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 client = MilvusClient(​
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,​
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
 )​
 ​
-<span class="hljs-meta"># 9. Manage aliases​</span>
-<span class="hljs-meta"># 9.1. Create aliases​</span>
+<span class="hljs-comment"># 9. Manage aliases​</span>
+<span class="hljs-comment"># 9.1. Create aliases​</span>
 client.create_alias(​
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,​
-    <span class="hljs-keyword">alias</span>=<span class="hljs-string">&quot;bob&quot;</span>​
+    alias=<span class="hljs-string">&quot;bob&quot;</span>​
 )​
 ​
 client.create_alias(​
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,​
-    <span class="hljs-keyword">alias</span>=<span class="hljs-string">&quot;alice&quot;</span>​
+    alias=<span class="hljs-string">&quot;alice&quot;</span>​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -147,38 +147,38 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// Go 缺失​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/create&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/aliases/create&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;aliasName&quot;: &quot;bob&quot;,​
     &quot;collectionName&quot;: &quot;customized_setup_2&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: {}​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: {}​
+# }​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/create&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/aliases/create&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;aliasName&quot;: &quot;alice&quot;,​
     &quot;collectionName&quot;: &quot;customized_setup_2&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: {}​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: {}​
+# }​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="List-Aliases​" class="common-anchor-header">List Aliases​<button data-href="#List-Aliases​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -253,24 +253,24 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// Go 缺失​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/list&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{}&#x27;</span>​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/aliases/list&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: [​</span>
-<span class="hljs-comment">#         &quot;bob&quot;,​</span>
-<span class="hljs-comment">#         &quot;alice&quot;​</span>
-<span class="hljs-comment">#     ]​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: [​
+#         &quot;bob&quot;,​
+#         &quot;alice&quot;​
+#     ]​
+# }​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Describe-Alias​" class="common-anchor-header">Describe Alias​<button data-href="#Describe-Alias​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -296,7 +296,7 @@ curl --request POST \​
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.3. Describe aliases​</span>
 res = client.describe_alias(​
-    <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;bob&quot;</span>​
+    alias=<span class="hljs-string">&quot;bob&quot;</span>​
 )​
 ​
 <span class="hljs-built_in">print</span>(res)​
@@ -355,27 +355,27 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// Go 缺失​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/describe&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/aliases/describe&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;aliasName&quot;: &quot;bob&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: {​</span>
-<span class="hljs-comment">#         &quot;aliasName&quot;: &quot;bob&quot;,​</span>
-<span class="hljs-comment">#         &quot;collectionName&quot;: &quot;customized_setup_2&quot;,​</span>
-<span class="hljs-comment">#         &quot;dbName&quot;: &quot;default&quot;​</span>
-<span class="hljs-comment">#     }​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: {​
+#         &quot;aliasName&quot;: &quot;bob&quot;,​
+#         &quot;collectionName&quot;: &quot;customized_setup_2&quot;,​
+#         &quot;dbName&quot;: &quot;default&quot;​
+#     }​
+# }​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Alter-Alias​" class="common-anchor-header">Alter Alias​<button data-href="#Alter-Alias​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -508,55 +508,55 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// Go 缺失​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/alter&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/aliases/alter&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;aliasName&quot;: &quot;alice&quot;,​
     &quot;collectionName&quot;: &quot;customized_setup_1&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: {}​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: {}​
+# }​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/describe&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/aliases/describe&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;aliasName&quot;: &quot;bob&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: {​</span>
-<span class="hljs-comment">#         &quot;aliasName&quot;: &quot;bob&quot;,​</span>
-<span class="hljs-comment">#         &quot;collectionName&quot;: &quot;customized_setup_2&quot;,​</span>
-<span class="hljs-comment">#         &quot;dbName&quot;: &quot;default&quot;​</span>
-<span class="hljs-comment">#     }​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: {​
+#         &quot;aliasName&quot;: &quot;bob&quot;,​
+#         &quot;collectionName&quot;: &quot;customized_setup_2&quot;,​
+#         &quot;dbName&quot;: &quot;default&quot;​
+#     }​
+# }​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/aliases/describe&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/aliases/describe&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;aliasName&quot;: &quot;alice&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: {​</span>
-<span class="hljs-comment">#         &quot;aliasName&quot;: &quot;alice&quot;,​</span>
-<span class="hljs-comment">#         &quot;collectionName&quot;: &quot;customized_setup_1&quot;,​</span>
-<span class="hljs-comment">#         &quot;dbName&quot;: &quot;default&quot;​</span>
-<span class="hljs-comment">#     }​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: {​
+#         &quot;aliasName&quot;: &quot;alice&quot;,​
+#         &quot;collectionName&quot;: &quot;customized_setup_1&quot;,​
+#         &quot;dbName&quot;: &quot;default&quot;​
+#     }​
+# }​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>

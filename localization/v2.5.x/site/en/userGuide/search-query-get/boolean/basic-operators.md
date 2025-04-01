@@ -76,27 +76,27 @@ title: Basic Operators
 <li><p><code translate="no">IN</code>: Used to match values within a specific set or range.​</p></li>
 <li><p><code translate="no">LIKE</code>: Used to match a pattern (mostly for text fields).​</p></li>
 </ul>
-<h3 id="Example-1-Using-IN-to-Match-Multiple-Values​" class="common-anchor-header">Example 1: Using <code translate="no">IN</code> to Match Multiple Values​</h3><p>If you want to find all entities where the <code translate="no">color</code> is either &quot;red&quot;, &quot;green&quot;, or &quot;blue&quot;:​</p>
+<h3 id="Example-1-Using-IN-to-Match-Multiple-Values​" class="common-anchor-header">Example 1: Using <code translate="no">IN</code> to Match Multiple Values​</h3><p>If you want to find all entities where the <code translate="no">color</code> is either "red", "green", or "blue":​</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>This is useful when you want to check for membership in a list of values.​</p>
 <h3 id="Example-2-Using-LIKE-for-Pattern-Matching​" class="common-anchor-header">Example 2: Using <code translate="no">LIKE</code> for Pattern Matching​</h3><p>The <code translate="no">LIKE</code> operator is used for pattern matching in string fields. It can match substrings in different positions within the text: as a <strong>prefix</strong>, <strong>infix</strong>, or <strong>suffix</strong>. The <code translate="no">LIKE</code> operator uses the <code translate="no">%</code> symbol as a wildcard, which can match any number of characters (including zero).​</p>
-<h4 id="Prefix-Match-Starts-With​" class="common-anchor-header">Prefix Match (Starts With)​</h4><p>To perform a <strong>prefix</strong> match, where the string starts with a given pattern, you can place the pattern at the beginning and use <code translate="no">%</code> to match any characters following it. For example, to find all products whose <code translate="no">name</code> starts with &quot;Prod&quot;:​</p>
+<h4 id="Prefix-Match-Starts-With​" class="common-anchor-header">Prefix Match (Starts With)​</h4><p>To perform a <strong>prefix</strong> match, where the string starts with a given pattern, you can place the pattern at the beginning and use <code translate="no">%</code> to match any characters following it. For example, to find all products whose <code translate="no">name</code> starts with "Prod":​</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>This will match any product whose name starts with &quot;Prod&quot;, such as &quot;Product A&quot;, &quot;Product B&quot;, etc.​</p>
-<h4 id="Suffix-Match-Ends-With​" class="common-anchor-header">Suffix Match (Ends With)​</h4><p>For a <strong>suffix</strong> match, where the string ends with a given pattern, place the <code translate="no">%</code> symbol at the beginning of the pattern. For example, to find all products whose <code translate="no">name</code> ends with &quot;XYZ&quot;:​</p>
+<p>This will match any product whose name starts with "Prod", such as "Product A", "Product B", etc.​</p>
+<h4 id="Suffix-Match-Ends-With​" class="common-anchor-header">Suffix Match (Ends With)​</h4><p>For a <strong>suffix</strong> match, where the string ends with a given pattern, place the <code translate="no">%</code> symbol at the beginning of the pattern. For example, to find all products whose <code translate="no">name</code> ends with "XYZ":​</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%XYZ&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>This will match any product whose name ends with &quot;XYZ&quot;, such as &quot;ProductXYZ&quot;, &quot;SampleXYZ&quot;, etc.​</p>
-<h4 id="Infix-Match-Contains​" class="common-anchor-header">Infix Match (Contains)​</h4><p>To perform an <strong>infix</strong> match, where the pattern can appear anywhere in the string, you can place the <code translate="no">%</code> symbol at both the beginning and the end of the pattern. For example, to find all products whose <code translate="no">name</code> contains the word &quot;Pro&quot;:​</p>
+<p>This will match any product whose name ends with "XYZ", such as "ProductXYZ", "SampleXYZ", etc.​</p>
+<h4 id="Infix-Match-Contains​" class="common-anchor-header">Infix Match (Contains)​</h4><p>To perform an <strong>infix</strong> match, where the pattern can appear anywhere in the string, you can place the <code translate="no">%</code> symbol at both the beginning and the end of the pattern. For example, to find all products whose <code translate="no">name</code> contains the word "Pro":​</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;%Pro%&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>This will match any product whose name contains the substring &quot;Pro&quot;, such as &quot;Product&quot;, &quot;ProLine&quot;, or &quot;SuperPro&quot;.​</p>
+<p>This will match any product whose name contains the substring "Pro", such as "Product", "ProLine", or "SuperPro".​</p>
 <h2 id="Arithmetic-Operators​" class="common-anchor-header">Arithmetic Operators​<button data-href="#Arithmetic-Operators​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,11 +170,11 @@ title: Basic Operators
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &gt; 100 AND stock &gt; 50&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-OR-to-Combine-Conditions​" class="common-anchor-header">Example 2: Using <code translate="no">OR</code> to Combine Conditions​</h3><p>To find all products where <code translate="no">color</code> is either “red” or &quot;blue&quot;:​</p>
+<h3 id="Example-2-Using-OR-to-Combine-Conditions​" class="common-anchor-header">Example 2: Using <code translate="no">OR</code> to Combine Conditions​</h3><p>To find all products where <code translate="no">color</code> is either “red” or "blue":​</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition​" class="common-anchor-header">Example 3: Using <code translate="no">NOT</code> to Exclude a Condition​</h3><p>To find all products where <code translate="no">color</code> is not &quot;green&quot;:​</p>
+<h3 id="Example-3-Using-NOT-to-Exclude-a-Condition​" class="common-anchor-header">Example 3: Using <code translate="no">NOT</code> to Exclude a Condition​</h3><p>To find all products where <code translate="no">color</code> is not "green":​</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;NOT color == &quot;green&quot;&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>

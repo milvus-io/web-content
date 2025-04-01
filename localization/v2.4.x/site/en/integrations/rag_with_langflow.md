@@ -40,7 +40,7 @@ title: Building a RAG System Using Langflow with Milvus
         ></path>
       </svg>
     </button></h2><p>Before running this notebook, make sure you have the following dependencies installed:</p>
-<pre><code translate="no" class="language-shell">$ python -m pip install langflow -U
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">python -m pip install langflow -U</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Tutorial" class="common-anchor-header">Tutorial<button data-href="#Tutorial" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,7 +58,7 @@ title: Building a RAG System Using Langflow with Milvus
         ></path>
       </svg>
     </button></h2><p>Once all the dependencies are installed, start a Langflow dashboard by typing in the following command:</p>
-<pre><code translate="no" class="language-shell">$ python -m langflow run
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">python -m langflow run</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then a dashboard will pop up as shown below:
 
@@ -85,7 +85,7 @@ title: Building a RAG System Using Langflow with Milvus
 <li>Remove existing cards of Vector Store. Click on two AstraDB cards marked red in the above image, and press <strong>backspace</strong> to delete them.</li>
 <li>Click on the <strong>Vector Store</strong> option in the sidebar, chose Milvus and drag it into the canvas. Do this twice as we need 2 Milvus cards, one for storing the file processing workflow and one for search workflow.</li>
 <li>Link the Milvus Modules to the rest of the components. See the image below for reference.</li>
-<li>Configure the Milvus credentials for both Milvus modules. The simplest way is to use Milvus Lite by setting Connection URI to milvus_demo.db. If you have a Milvus server self-deployed or on Zilliz Cloud, set the Connection URI to server endpoint and Connection Password to token (for Milvus that’s concatenated &quot;<username>:<password>&quot;, for Zilliz Cloud it’s API Key). See below image for reference:</li>
+<li>Configure the Milvus credentials for both Milvus modules. The simplest way is to use Milvus Lite by setting Connection URI to milvus_demo.db. If you have a Milvus server self-deployed or on Zilliz Cloud, set the Connection URI to server endpoint and Connection Password to token (for Milvus that’s concatenated "<username>:<password>", for Zilliz Cloud it’s API Key). See below image for reference:</li>
 </ol>
 <p>
   <span class="img-wrapper">

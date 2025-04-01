@@ -191,14 +191,14 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 })​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/search&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;quick_setup&quot;,​
     &quot;data&quot;: [​
         [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
@@ -212,8 +212,8 @@ curl --request POST \​
             &quot;range_filter&quot;: 0.6​
         }​
     }​
-}&#x27;</span>​
-<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}​</span>
+}'​
+# {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p></TabItem></Tabs></p>

@@ -154,7 +154,7 @@ schema.addField(AddFieldReq.builder()
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-curl">export schema='{
         &quot;autoId&quot;: true,
         &quot;enabledDynamicField&quot;: false,
         &quot;fields&quot;: [
@@ -176,8 +176,8 @@ schema.addField(AddFieldReq.builder()
                 &quot;dataType&quot;: &quot;SparseFloatVector&quot;
             }
         ]
-    }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
+    }'
+</code></pre>
 <p>In this configuration,​</p>
 <ul>
 <li><p><code translate="no">id</code>: serves as the primary key and is automatically generated with <code translate="no">auto_id=True</code>.​</p></li>
@@ -213,18 +213,18 @@ schema.addFunction(Function.builder()
         .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;sparse&quot;</span>))
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">const <span class="hljs-built_in">functions</span> = [
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> functions = [
     {
-      name: <span class="hljs-string">&#x27;text_bm25_emb&#x27;</span>,
-      description: <span class="hljs-string">&#x27;bm25 function&#x27;</span>,
-      <span class="hljs-built_in">type</span>: FunctionType.BM25,
-      input_field_names: [<span class="hljs-string">&#x27;text&#x27;</span>],
-      output_field_names: [<span class="hljs-string">&#x27;sparse&#x27;</span>],
-      params: {},
+      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;text_bm25_emb&#x27;</span>,
+      <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;bm25 function&#x27;</span>,
+      <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">BM25</span>,
+      <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&#x27;text&#x27;</span>],
+      <span class="hljs-attr">output_field_names</span>: [<span class="hljs-string">&#x27;sparse&#x27;</span>],
+      <span class="hljs-attr">params</span>: {},
     },
 ]；
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-curl">export schema='{
         &quot;autoId&quot;: true,
         &quot;enabledDynamicField&quot;: false,
         &quot;fields&quot;: [
@@ -255,8 +255,8 @@ schema.addFunction(Function.builder()
                 &quot;params&quot;: {}
             }
         ]
-    }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
+    }'
+</code></pre>
 <table data-block-token="EfAfdS3iXoAULPxQ3mwckzTrnUb"><thead><tr><th data-block-token="O3sLd5KNXou4Egxq6XVcoNiJnMW" colspan="1" rowspan="1"><p data-block-token="QRttdgJBpo2hEuxb438c7eOgn2f">Parameter​</p>
 </th><th data-block-token="SMGGduN8zo3cgXxVnwZcW0UAnbA" colspan="1" rowspan="1"><p data-block-token="LY39dA2eOoyVUUxvKwlcyyjdn3e">Description​</p>
 </th></tr></thead><tbody><tr><td data-block-token="Pbj3dPvuno3x6kxnCsWcTb3knag" colspan="1" rowspan="1"><p data-block-token="EeHOdxCjloFUAGxuY1CcScCTnDe"><code translate="no">name</code>​</p>
@@ -294,35 +294,35 @@ index_params.add_index(
 )
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">import io.milvus.v2.common.IndexParam;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
-Map&lt;String, Object&gt; <span class="hljs-keyword">params</span> = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
-<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>); <span class="hljs-comment">// Algorithm for building and querying the index</span>
-<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
-<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
+Map&lt;String, Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+params.put(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>); <span class="hljs-comment">// Algorithm for building and querying the index</span>
+params.put(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>);
+params.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>);
 
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
-indexes.<span class="hljs-keyword">add</span>(IndexParam.builder()
+List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
         .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
         .metricType(IndexParam.MetricType.BM25)
-        .<span class="hljs-keyword">params</span>(<span class="hljs-keyword">params</span>)
+        .params(params)
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
-    field_name: <span class="hljs-string">&quot;sparse&quot;</span>,
-    metric_type: <span class="hljs-string">&quot;BM25&quot;</span>,
-    index_type: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
-    <span class="hljs-keyword">params</span>: {
-      inverted_index_algo: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
-      bm25_k1: <span class="hljs-number">1.2</span>,
-      bm25_b: <span class="hljs-number">0.75</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    <span class="hljs-attr">params</span>: {
+      <span class="hljs-attr">inverted_index_algo</span>: <span class="hljs-string">&#x27;DAAT_MAXSCORE&#x27;</span>,
+      <span class="hljs-attr">bm25_k1</span>: <span class="hljs-number">1.2</span>,
+      <span class="hljs-attr">bm25_b</span>: <span class="hljs-number">0.75</span>,
     },
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+<pre><code translate="no" class="language-curl">export indexParams='[
         {
             &quot;fieldName&quot;: &quot;sparse&quot;,
             &quot;metricType&quot;: &quot;BM25&quot;,
@@ -333,8 +333,8 @@ indexes.<span class="hljs-keyword">add</span>(IndexParam.builder()
                 &quot;bm25_b&quot;: 0.75
             }
         }
-    ]&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
+    ]'
+</code></pre>
 <table>
 <thead>
 <tr><th>Parameter</th><th>Description</th></tr>
@@ -356,7 +356,7 @@ indexes.<span class="hljs-keyword">add</span>(IndexParam.builder()
     <a href="#javascript">Node.js</a>
     <a href="#curl">cURL</a>
 </div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
+<pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, ​
     schema=schema, ​
     index_params=index_params​
@@ -372,26 +372,26 @@ indexes.<span class="hljs-keyword">add</span>(IndexParam.builder()
         .build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">await client.create_collection(
-    collection_name: <span class="hljs-string">&#x27;demo&#x27;</span>, 
-    schema: schema, 
-    index_params: index_params,
-    <span class="hljs-built_in">functions</span>: <span class="hljs-built_in">functions</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">create_collection</span>(
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;demo&#x27;</span>, 
+    <span class="hljs-attr">schema</span>: schema, 
+    <span class="hljs-attr">index_params</span>: index_params,
+    <span class="hljs-attr">functions</span>: functions
 );
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;
+export TOKEN=&quot;root:Milvus&quot;
 
 curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&quot;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+-d &quot;{
     \&quot;collectionName\&quot;: \&quot;demo\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
-    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
-}&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
+    \&quot;schema\&quot;: $schema,
+    \&quot;indexParams\&quot;: $indexParams
+}&quot;
+</code></pre>
 <h2 id="Insert-text-data" class="common-anchor-header">Insert text data<button data-href="#Insert-text-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -414,7 +414,7 @@ curl --request POST \
     <a href="#javascript">Node.js</a>
     <a href="#curl">cURL</a>
 </div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">insert</span>(<span class="hljs-string">&#x27;demo&#x27;</span>, [
+<pre><code translate="no" class="language-python">client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval is a field of study.&#x27;</span>},
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval focuses on finding relevant information in large datasets.&#x27;</span>},
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;data mining and information retrieval overlap in research.&#x27;</span>},
@@ -426,11 +426,11 @@ curl --request POST \
 
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
 
-Gson gson = new Gson();
-<span class="hljs-type">List</span>&lt;JsonObject&gt; rows = Arrays.asList(
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval is a field of study.\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval focuses on finding relevant information in large datasets.\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>),
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;data mining and information retrieval overlap in research.\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>)
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
+List&lt;JsonObject&gt; rows = Arrays.asList(
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval is a field of study.\&quot;}&quot;</span>, JsonObject.class),
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;information retrieval focuses on finding relevant information in large datasets.\&quot;}&quot;</span>, JsonObject.class),
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;text\&quot;: \&quot;data mining and information retrieval overlap in research.\&quot;}&quot;</span>, JsonObject.class)
 );
 
 client.insert(InsertReq.builder()
@@ -447,18 +447,18 @@ client.insert(InsertReq.builder()
 ]);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+-d '{
     &quot;data&quot;: [
         {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
         {&quot;text&quot;: &quot;information retrieval focuses on finding relevant information in large datasets.&quot;},
         {&quot;text&quot;: &quot;data mining and information retrieval overlap in research.&quot;}       
     ],
     &quot;collectionName&quot;: &quot;demo&quot;
-}&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
+}'
+</code></pre>
 <h2 id="Perform-full-text-search" class="common-anchor-header">Perform full text search<button data-href="#Perform-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -494,34 +494,34 @@ client.search(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">request</span>.<span class="hljs-property">SearchReq</span>;
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">request</span>.<span class="hljs-property">data</span>.<span class="hljs-property">EmbeddedText</span>;
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">response</span>.<span class="hljs-property">SearchResp</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>); <span class="hljs-comment">// Proportion of small vector values to ignore during the search</span>
-<span class="hljs-title class_">SearchResp</span> searchResp = client.<span class="hljs-title function_">search</span>(<span class="hljs-title class_">SearchReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;demo&quot;</span>)
-        .<span class="hljs-title function_">data</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)))
-        .<span class="hljs-title function_">annsField</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
-        .<span class="hljs-title function_">topK</span>(<span class="hljs-number">3</span>)
-        .<span class="hljs-title function_">searchParams</span>(searchParams)
-        .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-string">&quot;text&quot;</span>))
-        .<span class="hljs-title function_">build</span>());
+Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+searchParams.put(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>); <span class="hljs-comment">// Proportion of small vector values to ignore during the search</span>
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;demo&quot;</span>)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)))
+        .annsField(<span class="hljs-string">&quot;sparse&quot;</span>)
+        .topK(<span class="hljs-number">3</span>)
+        .searchParams(searchParams)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
+        .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.search(
-    collection_name: <span class="hljs-string">&#x27;demo&#x27;</span>, 
-    data: [<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
-    anns_field: <span class="hljs-string">&#x27;sparse&#x27;</span>,
-    limit: <span class="hljs-number">3</span>,
-    <span class="hljs-keyword">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>}, <span class="hljs-comment">// Proportion of small vector values to ignore during the search</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>(
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;demo&#x27;</span>, 
+    <span class="hljs-attr">data</span>: [<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
+    <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;sparse&#x27;</span>,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>}, <span class="hljs-comment">// Proportion of small vector values to ignore during the search</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---data-raw <span class="hljs-string">&#x27;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/search&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+--data-raw '{
     &quot;collectionName&quot;: &quot;demo&quot;,
     &quot;data&quot;: [
         &quot;whats the focus of information retrieval?&quot;
@@ -536,8 +536,8 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
             &quot;drop_ratio_search&quot;:0.2 # Proportion of small vector values to ignore during the search
         }
     }
-}&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
+}'
+</code></pre>
 <table data-block-token="M37Zdx7XdoYN41xdKtfcHcJpnqh"><thead><tr><th data-block-token="UhTwdxk3Mo5eLjxff0PcL1CHn8b" colspan="1" rowspan="1"><p data-block-token="OwUXdMhOgoRxjzx5t9ecKR9Zn6J">Parameter​</p>
 </th><th data-block-token="GM88dTMzTof30QxS9O2cVyrnnJd" colspan="1" rowspan="1"><p data-block-token="Nlp5dAJY8or40nxV6auc20XHnjh">Description​</p>
 </th></tr></thead><tbody><tr><td data-block-token="QpGIdQ2m0oogCvxColKcNWnYnUc" colspan="1" rowspan="1"><p data-block-token="TkffdBxkKo2hVvx9gGucca46nic"><code translate="no">search_params</code>​</p>

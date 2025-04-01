@@ -30,7 +30,7 @@ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <p>To instantiate the <strong>SpladeEmbeddingFunction</strong>, use the command:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
 
-splade_ef = model.<span class="hljs-property">sparse</span>.<span class="hljs-title class_">SpladeEmbeddingFunction</span>(
+splade_ef = model.sparse.SpladeEmbeddingFunction(
     model_name=<span class="hljs-string">&quot;naver/splade-cocondenser-selfdistil&quot;</span>, 
     device=<span class="hljs-string">&quot;cpu&quot;</span>
 )
@@ -57,14 +57,14 @@ docs_embeddings = splade_ef.encode_documents(docs)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Sparse dim:&quot;</span>, splade_ef.dim, <span class="hljs-built_in">list</span>(docs_embeddings)[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings:   (0, 2001) 0.6392706036567688
-  (0, 2034) 0.024093208834528923
-  (0, 2082) 0.3230178654193878
+<pre><code translate="no" class="language-python">Embeddings:   (<span class="hljs-number">0</span>, <span class="hljs-number">2001</span>) <span class="hljs-number">0.6392706036567688</span>
+  (<span class="hljs-number">0</span>, <span class="hljs-number">2034</span>) <span class="hljs-number">0.024093208834528923</span>
+  (<span class="hljs-number">0</span>, <span class="hljs-number">2082</span>) <span class="hljs-number">0.3230178654193878</span>
 ...
-  (2, 23602)    0.5671860575675964
-  (2, 26757)    0.5770265460014343
-  (2, 28639)    3.1990697383880615
-Sparse dim: 30522 (1, 30522)
+  (<span class="hljs-number">2</span>, <span class="hljs-number">23602</span>)    <span class="hljs-number">0.5671860575675964</span>
+  (<span class="hljs-number">2</span>, <span class="hljs-number">26757</span>)    <span class="hljs-number">0.5770265460014343</span>
+  (<span class="hljs-number">2</span>, <span class="hljs-number">28639</span>)    <span class="hljs-number">3.1990697383880615</span>
+Sparse dim: <span class="hljs-number">30522</span> (<span class="hljs-number">1</span>, <span class="hljs-number">30522</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>To create embeddings for queries, use the <strong>encode_queries()</strong> method:</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
@@ -78,12 +78,12 @@ query_embeddings = splade_ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Sparse dim:&quot;</span>, splade_ef.dim, <span class="hljs-built_in">list</span>(query_embeddings)[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings:   (0, 2001)        0.6353746056556702
-  (0, 2194)        0.015553371049463749
-  (0, 2301)        0.2756537199020386
+<pre><code translate="no" class="language-python">Embeddings:   (<span class="hljs-number">0</span>, <span class="hljs-number">2001</span>)        <span class="hljs-number">0.6353746056556702</span>
+  (<span class="hljs-number">0</span>, <span class="hljs-number">2194</span>)        <span class="hljs-number">0.015553371049463749</span>
+  (<span class="hljs-number">0</span>, <span class="hljs-number">2301</span>)        <span class="hljs-number">0.2756537199020386</span>
 ...
-  (1, 18522)        0.1282549500465393
-  (1, 23602)        0.13133203983306885
-  (1, 28639)        2.8150033950805664
-Sparse dim: 30522 (1, 30522)
+  (<span class="hljs-number">1</span>, <span class="hljs-number">18522</span>)        <span class="hljs-number">0.1282549500465393</span>
+  (<span class="hljs-number">1</span>, <span class="hljs-number">23602</span>)        <span class="hljs-number">0.13133203983306885</span>
+  (<span class="hljs-number">1</span>, <span class="hljs-number">28639</span>)        <span class="hljs-number">2.8150033950805664</span>
+Sparse dim: <span class="hljs-number">30522</span> (<span class="hljs-number">1</span>, <span class="hljs-number">30522</span>)
 <button class="copy-code-btn"></button></code></pre>

@@ -40,7 +40,7 @@ In current release, all parameters take effect only after Milvus restarts.
         ></path>
       </svg>
     </button></h2><p><a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.5.6/configs/milvus.yaml">Download</a> <code translate="no">milvus.yaml</code> directly or with the following command.</p>
-<pre><code translate="no">$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.5.6/configs/milvus.yaml
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v2.5.6/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-configuration-file" class="common-anchor-header">Modify the configuration file<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -215,8 +215,8 @@ In current release, all parameters take effect only after Milvus restarts.
       </svg>
     </button></h2><p>Download the installation file for Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-standalone-docker-compose.yml">standalone</a>, and save it as <code translate="no">docker-compose.yml</code>.</p>
 <p>You can also simply run the following command.</p>
-<pre><code translate="no"><span class="hljs-comment"># For Milvus standalone</span>
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-standalone-docker-compose.yml -O docker-compose.yml
+<pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For Milvus standalone</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-installation-file" class="common-anchor-header">Modify the installation file<button data-href="#Modify-the-installation-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -235,24 +235,24 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-stand
       </svg>
     </button></h2><p>In <code translate="no">docker-compose.yml</code>, add a <code translate="no">volumes</code> section under each <code translate="no">milvus-standalone</code>.</p>
 <p>Map the local path to your <code translate="no">milvus.yaml</code> file onto the corresponding docker container paths to the configuration files <code translate="no">/milvus/configs/milvus.yaml</code> under all <code translate="no">volumes</code> sections.</p>
-<pre><code translate="no" class="language-yaml">...
-  standalone:
-    container_name: milvus-standalone
-    image: milvusdb/milvus:v2.2.13
-    <span class="hljs-built_in">command</span>: [<span class="hljs-string">&quot;milvus&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;standalone&quot;</span>]
-    environment:
-      ETCD_ENDPOINTS: etcd:2379
-      MINIO_ADDRESS: minio:9000
-    volumes:
-      - /local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml   <span class="hljs-comment"># Map the local path to the container path</span>
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/volumes/milvus:/var/lib/milvus
-    ports:
-      - <span class="hljs-string">&quot;19530:19530&quot;</span>
-      - <span class="hljs-string">&quot;9091:9091&quot;</span>
-    depends_on:
-      - <span class="hljs-string">&quot;etcd&quot;</span>
-      - <span class="hljs-string">&quot;minio&quot;</span>
-...
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.2.13</span>
+    <span class="hljs-attr">command:</span> [<span class="hljs-string">&quot;milvus&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;standalone&quot;</span>]
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">ETCD_ENDPOINTS:</span> <span class="hljs-string">etcd:2379</span>
+      <span class="hljs-attr">MINIO_ADDRESS:</span> <span class="hljs-string">minio:9000</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml</span>   <span class="hljs-comment"># Map the local path to the container path</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;19530:19530&quot;</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;9091:9091&quot;</span>
+    <span class="hljs-attr">depends_on:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;etcd&quot;</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;minio&quot;</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 Data are stored in the <code translate="no">/volumes</code> folder according to the default configuration in <code translate="no">docker-compose.yml</code>. To change the folder to store data, edit <code translate="no">docker-compose.yml</code> or run <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code>.
@@ -273,7 +273,7 @@ Data are stored in the <code translate="no">/volumes</code> folder according to 
         ></path>
       </svg>
     </button></h2><p>Having finished modifying the configuration file and installation file, you can then start Milvus.</p>
-<pre><code translate="no">$ <span class="hljs-built_in">sudo</span> docker compose up -d
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

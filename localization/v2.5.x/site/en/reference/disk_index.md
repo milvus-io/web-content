@@ -118,14 +118,14 @@ Currently, a vector field only supports one index type. Milvus automatically del
         ></path>
       </svg>
     </button></h2><p>DiskANN is tunable. You can modify DiskANN-related parameters in <code translate="no">${MILVUS_ROOT_PATH}/configs/milvus.yaml</code> to improve its performance.</p>
-<pre><code translate="no" class="language-YAML">...
-DiskIndex:
-  MaxDegree: 56
-  SearchListSize: 100
-  PQCodeBugetGBRatio: 0.125
-  SearchCacheBudgetGBRatio: 0.125
-  BeamWidthRatio: 4.0
-...
+<pre><code translate="no" class="language-YAML"><span class="hljs-string">...</span>
+<span class="hljs-attr">DiskIndex:</span>
+  <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
+  <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
+  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
 <thead>

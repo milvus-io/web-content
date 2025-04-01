@@ -58,12 +58,12 @@ os.environ[<span class="hljs-string">&quot;LANGFUSE_HOST&quot;</span>] = <span c
 <span class="hljs-comment"># Your openai key</span>
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">core</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Settings</span>
-<span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">core</span>.<span class="hljs-property">callbacks</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">CallbackManager</span>
-<span class="hljs-keyword">from</span> langfuse.<span class="hljs-property">llama_index</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">LlamaIndexCallbackHandler</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> Settings
+<span class="hljs-keyword">from</span> llama_index.core.callbacks <span class="hljs-keyword">import</span> CallbackManager
+<span class="hljs-keyword">from</span> langfuse.llama_index <span class="hljs-keyword">import</span> LlamaIndexCallbackHandler
  
-langfuse_callback_handler = <span class="hljs-title class_">LlamaIndexCallbackHandler</span>()
-<span class="hljs-title class_">Settings</span>.<span class="hljs-property">callback_manager</span> = <span class="hljs-title class_">CallbackManager</span>([langfuse_callback_handler])
+langfuse_callback_handler = LlamaIndexCallbackHandler()
+Settings.callback_manager = CallbackManager([langfuse_callback_handler])
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Index-using-Milvus-Lite" class="common-anchor-header">Index using Milvus Lite<button data-href="#Index-using-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"

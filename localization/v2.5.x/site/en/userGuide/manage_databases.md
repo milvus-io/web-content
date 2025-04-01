@@ -60,14 +60,14 @@ summary: >-
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = <span class="hljs-title class_">MilvusClient</span>(
+client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-client.<span class="hljs-title function_">create_database</span>(
+client.create_database(
     db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -129,20 +129,20 @@ curl --request POST \
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_database</span>(
+<pre><code translate="no" class="language-python">client.create_database(
     db_name=<span class="hljs-string">&quot;my_database_2&quot;</span>,
     properties={
         <span class="hljs-string">&quot;database.replica.number&quot;</span>: <span class="hljs-number">3</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">String</span>&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-properties.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;database.replica.number&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>);
-<span class="hljs-title class_">CreateDatabaseReq</span> createDatabaseReq = <span class="hljs-title class_">CreateDatabaseReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">databaseName</span>(<span class="hljs-string">&quot;my_database_2&quot;</span>)
-        .<span class="hljs-title function_">properties</span>(properties)
-        .<span class="hljs-title function_">build</span>();
-client.<span class="hljs-title function_">createDatabase</span>(createDatabaseReq);
+<pre><code translate="no" class="language-java">Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.put(<span class="hljs-string">&quot;database.replica.number&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>);
+<span class="hljs-type">CreateDatabaseReq</span> <span class="hljs-variable">createDatabaseReq</span> <span class="hljs-operator">=</span> CreateDatabaseReq.builder()
+        .databaseName(<span class="hljs-string">&quot;my_database_2&quot;</span>)
+        .properties(properties)
+        .build();
+client.createDatabase(createDatabaseReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createDatabase</span>({
     <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,
@@ -305,16 +305,16 @@ curl --request POST \
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">alter_database_properties</span>(
-    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>,
-    <span class="hljs-attr">properties</span>: {
+<pre><code translate="no" class="language-python">client.alter_database_properties(
+    db_name: <span class="hljs-string">&quot;my_database_1&quot;</span>,
+    properties: {
         <span class="hljs-string">&quot;database.max.collections&quot;</span>: <span class="hljs-number">10</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">client.alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
         .databaseName(<span class="hljs-string">&quot;my_database_1&quot;</span>)
-        .<span class="hljs-built_in">property</span>(<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
+        .property(<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">alterDatabaseProperties</span>({
@@ -350,17 +350,17 @@ curl --request POST \
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_database_properties</span>(
-    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>,
-    <span class="hljs-attr">property_keys</span>: [
+<pre><code translate="no" class="language-python">client.drop_database_properties(
+    db_name: <span class="hljs-string">&quot;my_database_1&quot;</span>,
+    property_keys: [
         <span class="hljs-string">&quot;database.max.collections&quot;</span>
     ]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">client.<span class="hljs-title function_">dropDatabaseProperties</span>(<span class="hljs-title class_">DropDatabasePropertiesReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">databaseName</span>(<span class="hljs-string">&quot;my_database_1&quot;</span>)
-        .<span class="hljs-title function_">propertyKeys</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-string">&quot;database.max.collections&quot;</span>))
-        .<span class="hljs-title function_">build</span>());
+<pre><code translate="no" class="language-java">client.dropDatabaseProperties(DropDatabasePropertiesReq.builder()
+        .databaseName(<span class="hljs-string">&quot;my_database_1&quot;</span>)
+        .propertyKeys(Collections.singletonList(<span class="hljs-string">&quot;database.max.collections&quot;</span>))
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">dropDatabaseProperties</span>({
   <span class="hljs-attr">db_name</span>: my_database_1,
@@ -414,13 +414,13 @@ curl --request POST \
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_database</span>(
+<pre><code translate="no" class="language-python">client.drop_database(
     db_name=<span class="hljs-string">&quot;my_database_2&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">client.<span class="hljs-title function_">dropDatabase</span>(<span class="hljs-title class_">DropDatabaseReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">databaseName</span>(<span class="hljs-string">&quot;my_database_2&quot;</span>)
-        .<span class="hljs-title function_">build</span>());
+<pre><code translate="no" class="language-java">client.dropDatabase(DropDatabaseReq.builder()
+        .databaseName(<span class="hljs-string">&quot;my_database_2&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">dropDatabase</span>({
   <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,

@@ -483,18 +483,18 @@ res = client.describe_index(
 <span class="hljs-comment">#     &quot;index_name&quot;: &quot;vector_index&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">index</span>.<span class="hljs-property">request</span>.<span class="hljs-property">DescribeIndexReq</span>;
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">index</span>.<span class="hljs-property">response</span>.<span class="hljs-property">DescribeIndexResp</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.DescribeIndexReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.response.DescribeIndexResp;
 
 <span class="hljs-comment">// 5. Describe index</span>
 <span class="hljs-comment">// 5.1 List the index names</span>
-<span class="hljs-title class_">ListIndexesReq</span> listIndexesReq = <span class="hljs-title class_">ListIndexesReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;customized_setup&quot;</span>)
-    .<span class="hljs-title function_">build</span>();
+<span class="hljs-type">ListIndexesReq</span> <span class="hljs-variable">listIndexesReq</span> <span class="hljs-operator">=</span> ListIndexesReq.builder()
+    .collectionName(<span class="hljs-string">&quot;customized_setup&quot;</span>)
+    .build();
 
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">String</span>&gt; indexNames = client.<span class="hljs-title function_">listIndexes</span>(listIndexesReq);
+List&lt;String&gt; indexNames = client.listIndexes(listIndexesReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(indexNames);
+System.out.println(indexNames);
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// [</span>
@@ -502,14 +502,14 @@ res = client.describe_index(
 <span class="hljs-comment">// ]</span>
 
 <span class="hljs-comment">// 5.2 Describe an index</span>
-<span class="hljs-title class_">DescribeIndexReq</span> describeIndexReq = <span class="hljs-title class_">DescribeIndexReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;customized_setup&quot;</span>)
-    .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;vector_index&quot;</span>)
-    .<span class="hljs-title function_">build</span>();
+<span class="hljs-type">DescribeIndexReq</span> <span class="hljs-variable">describeIndexReq</span> <span class="hljs-operator">=</span> DescribeIndexReq.builder()
+    .collectionName(<span class="hljs-string">&quot;customized_setup&quot;</span>)
+    .indexName(<span class="hljs-string">&quot;vector_index&quot;</span>)
+    .build();
 
-<span class="hljs-title class_">DescribeIndexResp</span> describeIndexResp = client.<span class="hljs-title function_">describeIndex</span>(describeIndexReq);
+<span class="hljs-type">DescribeIndexResp</span> <span class="hljs-variable">describeIndexResp</span> <span class="hljs-operator">=</span> client.describeIndex(describeIndexReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(describeIndexResp));
+System.out.println(JSONObject.toJSON(describeIndexResp));
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// {</span>

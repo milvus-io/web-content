@@ -154,9 +154,9 @@ By the end of this notebook, you’ll have a comprehensive understanding of usin
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-shell">$ pip install llama-agents pymilvus openai python-dotenv
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-agents pymilvus openai python-dotenv</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ pip install llama-index-vector-stores-milvus llama-index-readers-file llama-index-llms-ollama llama-index-llms-mistralai llama-index-embeddings-mistralai
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install llama-index-vector-stores-milvus llama-index-readers-file llama-index-llms-ollama llama-index-llms-mistralai llama-index-embeddings-mistralai</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> This is ONLY necessary in jupyter notebook.</span>
 <span class="hljs-comment"># Details: Jupyter runs an event-loop behind the scenes.</span>
@@ -209,9 +209,9 @@ load_dotenv()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/10k/&#x27;</span>
-$ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/10k/uber_2021.pdf&#x27;</span>
-$ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/lyft_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/10k/lyft_2021.pdf&#x27;</span>
+    </button></h2><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/10k/&#x27;</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/10k/uber_2021.pdf&#x27;</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/lyft_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/10k/lyft_2021.pdf&#x27;</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h1 id="Prepare-Embedding-Model" class="common-anchor-header">Prepare Embedding Model<button data-href="#Prepare-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -254,9 +254,9 @@ Settings.embed_model = MistralAIEmbedding(model_name=<span class="hljs-string">&
       </svg>
     </button></h2><p>Llama Index uses LLMs to respond to prompts and queries, and is responsible for writing natural language responses.
 We define Mistral Nemo as the default one. Nemo offers a large context window of up to 128k tokens. Its reasoning, world knowledge, and coding accuracy are state-of-the-art in its size category.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">llms</span>.<span class="hljs-property">ollama</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Ollama</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.llms.ollama <span class="hljs-keyword">import</span> Ollama
 
-<span class="hljs-title class_">Settings</span>.<span class="hljs-property">llm</span> = <span class="hljs-title class_">Ollama</span>(<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
+Settings.llm = Ollama(<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Instanciate-Milvus-and-Load-Data" class="common-anchor-header">Instanciate Milvus and Load Data<button data-href="#Instanciate-Milvus-and-Load-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -530,15 +530,15 @@ llm = Ollama(model=<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-text">&gt; Question: What are the risk factors <span class="hljs-keyword">for</span> Uber?
+    </button></h2><pre><code translate="no" class="language-text">&gt; Question: What are the risk factors for Uber?
 
 &gt; Response without metadata filtering:
-Based on the provided context, <span class="hljs-built_in">which</span> pertains to Lyft<span class="hljs-string">&#x27;s Risk Factors section in their Annual Report, some of the potential risk factors applicable to a company like Uber might include:
+Based on the provided context, which pertains to Lyft&#x27;s Risk Factors section in their Annual Report, some of the potential risk factors applicable to a company like Uber might include:
 
 - General economic factors such as the impact of global pandemics or other crises on ride-sharing demand.
 - Operational factors like competition in ride-hailing services, unpredictability in results of operations, and uncertainty about market growth for ridesharing and related services.
 - Risks related to attracting and retaining qualified drivers and riders.
-</span><button class="copy-code-btn"></button></code></pre>
+<button class="copy-code-btn"></button></code></pre>
 <p>In this example, the system incorrectly provides information about Lyft instead of Uber, leading to a misleading response. It starts by saying that it doens’t have the information but then just goes on and on.</p>
 <h2 id="Using-an-Agent-to-Extract-Metadata-Filters" class="common-anchor-header">Using an Agent to Extract Metadata Filters<button data-href="#Using-an-Agent-to-Extract-Metadata-Filters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -606,7 +606,7 @@ Based on the provided context, <span class="hljs-built_in">which</span> pertains
         <span class="hljs-keyword">return</span> index.as_query_engine(filters=metadata_filters)
     <span class="hljs-keyword">return</span> index.as_query_engine()
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python">response = <span class="hljs-title function_">create_query_engine</span>(
+<pre><code translate="no" class="language-python">response = create_query_engine(
     <span class="hljs-string">&quot;What is Uber revenue? This should be in the file_name: uber_2021.pdf&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -730,15 +730,15 @@ agent_server_1 = AgentService(
 <span class="hljs-comment"># change logging level to enable or disable more verbose logging</span>
 logging.getLogger(<span class="hljs-string">&quot;llama_agents&quot;</span>).setLevel(logging.INFO)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python"><span class="hljs-meta">## Define Launcher</span>
+<pre><code translate="no" class="language-python"><span class="hljs-comment">## Define Launcher</span>
 launcher = LocalLauncher(
-    [<span class="hljs-meta">agent_server_1, tool_service</span>],
+    [agent_server_1, tool_service],
     control_plane,
     message_queue,
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">query_str = <span class="hljs-string">&quot;What are the risk factors for Uber?&quot;</span>
-result = launcher.<span class="hljs-title function_">launch_single</span>(query_str)
+result = launcher.launch_single(query_str)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">INFO:llama_agents.message_queues.simple - Consumer AgentService-27cde4ed-5163-4005-90fc-13c158eda7e3: Companies_analyst_agent has been registered.
 INFO:llama_agents.message_queues.simple - Consumer ToolService-b73c500a-5fbe-4f57-95c7-db74e173bd1b: default_tool_service has been registered.

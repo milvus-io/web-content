@@ -55,12 +55,12 @@ title: Requirements for Installing Milvus with GPU
       </svg>
     </button></h2><p>The NVIDIA driver for your GPU device must be on one of <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#linux-distributions">the supported Linux distributions</a>, and the NVIDIA Container Toolkit has been installed by following <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">this guide</a>.</p>
 <p>For Ubuntu 22.04 users, you can install the driver and the container toolkit with the following commands:</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> apt install --no-install-recommends nvidia-headless-545 nvidia-utils-545
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt install --no-install-recommends nvidia-headless-545 nvidia-utils-545</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>For other OS users, refer to the <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#installing-on-ubuntu-and-debian">official installation guide</a>.</p>
 <p>You can check whether the driver has been installed correctly by running the following command:</p>
-<pre><code translate="no" class="language-shell">$ modinfo nvidia | grep <span class="hljs-string">&quot;^version&quot;</span>
-<span class="hljs-attr">version</span>:        <span class="hljs-number">545.29</span><span class="hljs-number">.06</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">modinfo nvidia | grep <span class="hljs-string">&quot;^version&quot;</span></span>
+version:        545.29.06
 <button class="copy-code-btn"></button></code></pre>
 <p>You are recommended to use the drivers of version 545 and above.</p>
 <h2 id="Software-requirements" class="common-anchor-header">Software requirements<button data-href="#Software-requirements" class="anchor-icon" translate="no">
@@ -114,13 +114,13 @@ title: Requirements for Installing Milvus with GPU
 <ol start="2">
 <li>Start a K8s cluster using minikube</li>
 </ol>
-<pre><code translate="no" class="language-shell">$ minikube start
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">minikube start</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
 <li>Check the status of the K8s cluster</li>
 </ol>
 <p>You can check the status of the K8s cluster installed using the following command.</p>
-<pre><code translate="no" class="language-shell">$ kubectl cluster-info
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl cluster-info</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Ensure that you can access the K8s cluster via <code translate="no">kubectl</code>. If you have not installed <code translate="no">kubectl</code> locally, see <a href="https://minikube.sigs.k8s.io/docs/handbook/kubectl/">Use kubectl inside minikube</a>.</p>
@@ -135,7 +135,7 @@ title: Requirements for Installing Milvus with GPU
 </ol>
 <p>Deploy the <strong>nvidia-device-plugin</strong> with Helm by following <a href="https://gitlab.com/nvidia/kubernetes/device-plugin/-/blob/main/README.md#deployment-via-helm">these steps</a>.</p>
 <p>After setting up, view the GPU resources with the following command. Replace <code translate="no">&lt;gpu-worker-node&gt;</code> with the actual node name.</p>
-<pre><code translate="no" class="language-shell">  $ kubectl describe node &lt;gpu-worker-node&gt;
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">  $ </span><span class="language-bash">kubectl describe node &lt;gpu-worker-node&gt;</span>
 
   Capacity:
   ...

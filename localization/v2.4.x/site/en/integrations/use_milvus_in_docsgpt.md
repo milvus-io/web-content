@@ -57,8 +57,8 @@ title: Use Milvus in DocsGPT
         ></path>
       </svg>
     </button></h2><p>Clone the repository and navigate to it:</p>
-<pre><code translate="no" class="language-shell">$ git <span class="hljs-built_in">clone</span> https://github.com/arc53/DocsGPT.git
-$ <span class="hljs-built_in">cd</span> DocsGPT
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/arc53/DocsGPT.git</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> DocsGPT</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Add-dependency" class="common-anchor-header">Add dependency<button data-href="#Add-dependency" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,7 +76,7 @@ $ <span class="hljs-built_in">cd</span> DocsGPT
         ></path>
       </svg>
     </button></h2><p>Append <code translate="no">langchain-milvus</code> dependency to the <code translate="no">requirements.txt</code> file under the <code translate="no">application</code> folder:</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\nlangchain-milvus==0.1.6&quot;</span> &gt;&gt; ./application/requirements.txt
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\nlangchain-milvus==0.1.6&quot;</span> &gt;&gt; ./application/requirements.txt</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Set-environment-variables" class="common-anchor-header">Set environment variables<button data-href="#Set-environment-variables" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -94,20 +94,20 @@ $ <span class="hljs-built_in">cd</span> DocsGPT
         ></path>
       </svg>
     </button></h2><p>Add <code translate="no">VECTOR_STORE=milvus</code>, <code translate="no">MILVUS_URI=...</code>, <code translate="no">MILVUS_TOKEN=...</code> to the environment variables for both the <code translate="no">backend</code> and <code translate="no">worker</code> services in the <code translate="no">docker-compose.yaml</code> file, just like this:</p>
-<pre><code translate="no" class="language-yaml">  backend:
-    build: ./application
-    environment:
-      - VECTOR_STORE=milvus
-      - MILVUS_URI=...
-      - MILVUS_TOKEN=...
+<pre><code translate="no" class="language-yaml">  <span class="hljs-attr">backend:</span>
+    <span class="hljs-attr">build:</span> <span class="hljs-string">./application</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">VECTOR_STORE=milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">MILVUS_URI=...</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">MILVUS_TOKEN=...</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-yaml">  worker:
-    build: ./application
-    <span class="hljs-built_in">command</span>: celery -A application.app.celery worker -l INFO -B
-    environment:
-      - VECTOR_STORE=milvus
-      - MILVUS_URI=...
-      - MILVUS_TOKEN=...
+<pre><code translate="no" class="language-yaml">  <span class="hljs-attr">worker:</span>
+    <span class="hljs-attr">build:</span> <span class="hljs-string">./application</span>
+    <span class="hljs-attr">command:</span> <span class="hljs-string">celery</span> <span class="hljs-string">-A</span> <span class="hljs-string">application.app.celery</span> <span class="hljs-string">worker</span> <span class="hljs-string">-l</span> <span class="hljs-string">INFO</span> <span class="hljs-string">-B</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">VECTOR_STORE=milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">MILVUS_URI=...</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">MILVUS_TOKEN=...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>For the <code translate="no">MILVUS_URI</code> and <code translate="no">MILVUS_TOKEN</code>, you can either use fully managed <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(Recommended) service or manually started Milvus service.</p>
 <ul>
@@ -139,6 +139,6 @@ $ <span class="hljs-built_in">cd</span> DocsGPT
   </span>
 </p>
 <p>If you want to stop the services, run:</p>
-<pre><code translate="no" class="language-shell">$ docker compose down
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose down</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>For further details and more advanced setups, please refer to the <a href="https://github.com/arc53/DocsGPT">DocsGPT</a> official documentation.</p>

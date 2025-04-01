@@ -94,7 +94,7 @@ summary: Learn how to create an alert for Milvus services in Grafana.
     <span>Alert_query</span>
   </span>
 </p>
-<h3 id="3-Add-alert-notifications" class="common-anchor-header">3. Add alert notifications</h3><p>To receive alert notifications, add a &quot;notification channel&quot;. Then, specify the channel in the field &quot;Send to&quot;.</p>
+<h3 id="3-Add-alert-notifications" class="common-anchor-header">3. Add alert notifications</h3><p>To receive alert notifications, add a "notification channel". Then, specify the channel in the field "Send to".</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/alert_notification.png" alt="Alert_notification" class="doc-image" id="alert_notification" />

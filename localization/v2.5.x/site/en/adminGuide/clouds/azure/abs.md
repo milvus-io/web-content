@@ -39,15 +39,15 @@ For more details, refer to <a href="https://azure.github.io/azure-workload-ident
     </button></h2><ul>
 <li>Set env.</li>
 </ul>
-<pre><code translate="no" class="language-bash"><span class="hljs-keyword">export</span> <span class="hljs-variable constant_">RESOURCE_GROUP</span>=<span class="hljs-string">&quot;&lt;your resource group&gt;&quot;</span>
-<span class="hljs-keyword">export</span> <span class="hljs-variable constant_">AKS_CLUSTER</span>=<span class="hljs-string">&quot;&lt;your aks cluster name&gt;&quot;</span> 
-<span class="hljs-keyword">export</span> <span class="hljs-variable constant_">SUB_ID</span>=<span class="hljs-string">&quot;&lt;your Subscription ID&gt;&quot;</span>
-<span class="hljs-keyword">export</span> <span class="hljs-variable constant_">USER_ASSIGNED_IDENTITY_NAME</span>=<span class="hljs-string">&quot;workload-identity&quot;</span>
-<span class="hljs-keyword">export</span> <span class="hljs-variable constant_">SERVICE_ACCOUNT_NAME</span>=<span class="hljs-string">&quot;milvus-abs-access-sa&quot;</span>
-<span class="hljs-keyword">export</span> <span class="hljs-variable constant_">STORAGE_ACCOUNT_NAME</span>=<span class="hljs-string">&quot;milvustesting1&quot;</span>
-<span class="hljs-keyword">export</span> <span class="hljs-variable constant_">CONTAINER_NAME</span>=<span class="hljs-string">&quot;testmilvus&quot;</span>
-<span class="hljs-keyword">export</span> <span class="hljs-variable constant_">LOCATION</span>=<span class="hljs-string">&quot;&lt;your location&gt;&quot;</span>
-<span class="hljs-keyword">export</span> <span class="hljs-variable constant_">SERVICE_ACCOUNT_NAMESPACE</span>=<span class="hljs-string">&quot;default&quot;</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> RESOURCE_GROUP=<span class="hljs-string">&quot;&lt;your resource group&gt;&quot;</span>
+<span class="hljs-built_in">export</span> AKS_CLUSTER=<span class="hljs-string">&quot;&lt;your aks cluster name&gt;&quot;</span> 
+<span class="hljs-built_in">export</span> SUB_ID=<span class="hljs-string">&quot;&lt;your Subscription ID&gt;&quot;</span>
+<span class="hljs-built_in">export</span> USER_ASSIGNED_IDENTITY_NAME=<span class="hljs-string">&quot;workload-identity&quot;</span>
+<span class="hljs-built_in">export</span> SERVICE_ACCOUNT_NAME=<span class="hljs-string">&quot;milvus-abs-access-sa&quot;</span>
+<span class="hljs-built_in">export</span> STORAGE_ACCOUNT_NAME=<span class="hljs-string">&quot;milvustesting1&quot;</span>
+<span class="hljs-built_in">export</span> CONTAINER_NAME=<span class="hljs-string">&quot;testmilvus&quot;</span>
+<span class="hljs-built_in">export</span> LOCATION=<span class="hljs-string">&quot;&lt;your location&gt;&quot;</span>
+<span class="hljs-built_in">export</span> SERVICE_ACCOUNT_NAMESPACE=<span class="hljs-string">&quot;default&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Update an AKS cluster with OIDC Issuer and Workload Identity.</li>
@@ -88,7 +88,7 @@ metadata:
 EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Establish federated identity credential between the identity and the service account issuer &amp; subject.</li>
+<li>Establish federated identity credential between the identity and the service account issuer & subject.</li>
 </ul>
 <pre><code translate="no" class="language-bash">az identity federated-credential create \
   --name <span class="hljs-string">&quot;kubernetes-federated-credential&quot;</span> \
@@ -115,36 +115,36 @@ EOF</span>
     </button></h2><pre><code translate="no" class="language-bash">helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>the values.yaml contents:</p>
-<pre><code translate="no" class="language-yaml">cluster:
-  enabled: <span class="hljs-literal">true</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">cluster:</span>
+  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
 
-service:
-  <span class="hljs-built_in">type</span>: LoadBalancer
+<span class="hljs-attr">service:</span>
+  <span class="hljs-attr">type:</span> <span class="hljs-string">LoadBalancer</span>
 
-extraConfigFiles:
-  user.yaml: |+
+<span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     common:
       storageType: remote
+</span>
+<span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 
-minio:
-  enabled: <span class="hljs-literal">false</span>
+<span class="hljs-attr">labels:</span>
+  <span class="hljs-attr">azure.workload.identity/use:</span> <span class="hljs-string">&quot;true&quot;</span>
 
-labels:
-  azure.workload.identity/use: <span class="hljs-string">&quot;true&quot;</span>
+<span class="hljs-attr">serviceAccount:</span>
+  <span class="hljs-attr">create:</span> <span class="hljs-literal">false</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">milvus-abs-access-sa</span> <span class="hljs-comment"># SERVICE_ACCOUNT_NAME</span>
 
-serviceAccount:
-  create: <span class="hljs-literal">false</span>
-  name: milvus-abs-access-sa <span class="hljs-comment"># SERVICE_ACCOUNT_NAME</span>
-
-externalS3:
-  enabled: <span class="hljs-literal">true</span>
-  host: core.windows.net
-  port: 443
-  rootPath: my-release
-  bucketName: testmilvus <span class="hljs-comment"># CONTAINER_NAME</span>
-  cloudProvider: azure
-  useSSL: <span class="hljs-literal">true</span>
-  useIAM: <span class="hljs-literal">true</span>
-  accessKey: <span class="hljs-string">&quot;milvustesting1&quot;</span> <span class="hljs-comment"># STORAGE_ACCOUNT_NAME</span>
-  secretKey: <span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-attr">externalS3:</span>
+  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">host:</span> <span class="hljs-string">core.windows.net</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">443</span>
+  <span class="hljs-attr">rootPath:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">bucketName:</span> <span class="hljs-string">testmilvus</span> <span class="hljs-comment"># CONTAINER_NAME</span>
+  <span class="hljs-attr">cloudProvider:</span> <span class="hljs-string">azure</span>
+  <span class="hljs-attr">useSSL:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">useIAM:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">accessKey:</span> <span class="hljs-string">&quot;milvustesting1&quot;</span> <span class="hljs-comment"># STORAGE_ACCOUNT_NAME</span>
+  <span class="hljs-attr">secretKey:</span> <span class="hljs-string">&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

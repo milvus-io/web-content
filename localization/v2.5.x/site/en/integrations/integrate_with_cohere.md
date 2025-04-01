@@ -45,7 +45,7 @@ title: Question Answering Using Milvus and Cohere
 <span class="hljs-keyword">import</span> pandas
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>, <span class="hljs-title class_">Collection</span>, utility
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Parameters" class="common-anchor-header">Parameters<button data-href="#Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -252,69 +252,69 @@ search_questions = [<span class="hljs-string">&#x27;What kills bacteria?&#x27;</
 ret = [ { <span class="hljs-string">&quot;question&quot;</span>: x, <span class="hljs-string">&quot;candidates&quot;</span>: search(x) } <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> search_questions ]
 <button class="copy-code-btn"></button></code></pre>
 <p>The output should be similar to the following:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Output</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># [</span>
-<span class="hljs-comment">#     {</span>
-<span class="hljs-comment">#         &quot;question&quot;: &quot;What kills bacteria?&quot;,</span>
-<span class="hljs-comment">#         &quot;candidates&quot;: [</span>
-<span class="hljs-comment">#             {</span>
-<span class="hljs-comment">#                 &quot;answer&quot;: &quot;farming&quot;,</span>
-<span class="hljs-comment">#                 &quot;distance&quot;: 0.6261022090911865,</span>
-<span class="hljs-comment">#                 &quot;original_question&quot;: &quot;What makes bacteria resistant to antibiotic treatment?&quot;</span>
-<span class="hljs-comment">#             },</span>
-<span class="hljs-comment">#             {</span>
-<span class="hljs-comment">#                 &quot;answer&quot;: &quot;Phage therapy&quot;,</span>
-<span class="hljs-comment">#                 &quot;distance&quot;: 0.6093736886978149,</span>
-<span class="hljs-comment">#                 &quot;original_question&quot;: &quot;What has been talked about to treat resistant bacteria?&quot;</span>
-<span class="hljs-comment">#             },</span>
-<span class="hljs-comment">#             {</span>
-<span class="hljs-comment">#                 &quot;answer&quot;: &quot;oral contraceptives&quot;,</span>
-<span class="hljs-comment">#                 &quot;distance&quot;: 0.5902313590049744,</span>
-<span class="hljs-comment">#                 &quot;original_question&quot;: &quot;In therapy, what does the antibacterial interact with?&quot;</span>
-<span class="hljs-comment">#             },</span>
-<span class="hljs-comment">#             {</span>
-<span class="hljs-comment">#                 &quot;answer&quot;: &quot;slowing down the multiplication of bacteria or killing the bacteria&quot;,</span>
-<span class="hljs-comment">#                 &quot;distance&quot;: 0.5874154567718506,</span>
-<span class="hljs-comment">#                 &quot;original_question&quot;: &quot;How do antibiotics work?&quot;</span>
-<span class="hljs-comment">#             },</span>
-<span class="hljs-comment">#             {</span>
-<span class="hljs-comment">#                 &quot;answer&quot;: &quot;in intensive farming to promote animal growth&quot;,</span>
-<span class="hljs-comment">#                 &quot;distance&quot;: 0.5667208433151245,</span>
-<span class="hljs-comment">#                 &quot;original_question&quot;: &quot;Besides in treating human disease where else are antibiotics used?&quot;</span>
-<span class="hljs-comment">#             }</span>
-<span class="hljs-comment">#         ]</span>
-<span class="hljs-comment">#     },</span>
-<span class="hljs-comment">#     {</span>
-<span class="hljs-comment">#         &quot;question&quot;: &quot;What&#x27;s the biggest dog?&quot;,</span>
-<span class="hljs-comment">#         &quot;candidates&quot;: [</span>
-<span class="hljs-comment">#             {</span>
-<span class="hljs-comment">#                 &quot;answer&quot;: &quot;English Mastiff&quot;,</span>
-<span class="hljs-comment">#                 &quot;distance&quot;: 0.7875324487686157,</span>
-<span class="hljs-comment">#                 &quot;original_question&quot;: &quot;What breed was the largest dog known to have lived?&quot;</span>
-<span class="hljs-comment">#             },</span>
-<span class="hljs-comment">#             {</span>
-<span class="hljs-comment">#                 &quot;answer&quot;: &quot;forest elephants&quot;,</span>
-<span class="hljs-comment">#                 &quot;distance&quot;: 0.5886962413787842,</span>
-<span class="hljs-comment">#                 &quot;original_question&quot;: &quot;What large animals reside in the national park?&quot;</span>
-<span class="hljs-comment">#             },</span>
-<span class="hljs-comment">#             {</span>
-<span class="hljs-comment">#                 &quot;answer&quot;: &quot;Rico&quot;,</span>
-<span class="hljs-comment">#                 &quot;distance&quot;: 0.5634892582893372,</span>
-<span class="hljs-comment">#                 &quot;original_question&quot;: &quot;What is the name of the dog that could ID over 200 things?&quot;</span>
-<span class="hljs-comment">#             },</span>
-<span class="hljs-comment">#             {</span>
-<span class="hljs-comment">#                 &quot;answer&quot;: &quot;Iditarod Trail Sled Dog Race&quot;,</span>
-<span class="hljs-comment">#                 &quot;distance&quot;: 0.546872615814209,</span>
-<span class="hljs-comment">#                 &quot;original_question&quot;: &quot;Which dog-sled race in Alaska is the most famous?&quot;</span>
-<span class="hljs-comment">#             },</span>
-<span class="hljs-comment">#             {</span>
-<span class="hljs-comment">#                 &quot;answer&quot;: &quot;part of the family&quot;,</span>
-<span class="hljs-comment">#                 &quot;distance&quot;: 0.5387814044952393,</span>
-<span class="hljs-comment">#                 &quot;original_question&quot;: &quot;Most people today describe their dogs as what?&quot;</span>
-<span class="hljs-comment">#             }</span>
-<span class="hljs-comment">#         ]</span>
-<span class="hljs-comment">#     }</span>
-<span class="hljs-comment"># ]</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Output</span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash">
+<span class="hljs-comment"># [</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;question&quot;</span>: <span class="hljs-string">&quot;What kills bacteria?&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;candidates&quot;</span>: [</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;answer&quot;</span>: <span class="hljs-string">&quot;farming&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;distance&quot;</span>: 0.6261022090911865,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;original_question&quot;</span>: <span class="hljs-string">&quot;What makes bacteria resistant to antibiotic treatment?&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            },</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;answer&quot;</span>: <span class="hljs-string">&quot;Phage therapy&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;distance&quot;</span>: 0.6093736886978149,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;original_question&quot;</span>: <span class="hljs-string">&quot;What has been talked about to treat resistant bacteria?&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            },</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;answer&quot;</span>: <span class="hljs-string">&quot;oral contraceptives&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;distance&quot;</span>: 0.5902313590049744,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;original_question&quot;</span>: <span class="hljs-string">&quot;In therapy, what does the antibacterial interact with?&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            },</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;answer&quot;</span>: <span class="hljs-string">&quot;slowing down the multiplication of bacteria or killing the bacteria&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;distance&quot;</span>: 0.5874154567718506,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;original_question&quot;</span>: <span class="hljs-string">&quot;How do antibiotics work?&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            },</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;answer&quot;</span>: <span class="hljs-string">&quot;in intensive farming to promote animal growth&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;distance&quot;</span>: 0.5667208433151245,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;original_question&quot;</span>: <span class="hljs-string">&quot;Besides in treating human disease where else are antibiotics used?&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            }</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        ]</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    },</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;question&quot;</span>: <span class="hljs-string">&quot;What&#x27;s the biggest dog?&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        <span class="hljs-string">&quot;candidates&quot;</span>: [</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;answer&quot;</span>: <span class="hljs-string">&quot;English Mastiff&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;distance&quot;</span>: 0.7875324487686157,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;original_question&quot;</span>: <span class="hljs-string">&quot;What breed was the largest dog known to have lived?&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            },</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;answer&quot;</span>: <span class="hljs-string">&quot;forest elephants&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;distance&quot;</span>: 0.5886962413787842,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;original_question&quot;</span>: <span class="hljs-string">&quot;What large animals reside in the national park?&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            },</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;answer&quot;</span>: <span class="hljs-string">&quot;Rico&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;distance&quot;</span>: 0.5634892582893372,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;original_question&quot;</span>: <span class="hljs-string">&quot;What is the name of the dog that could ID over 200 things?&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            },</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;answer&quot;</span>: <span class="hljs-string">&quot;Iditarod Trail Sled Dog Race&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;distance&quot;</span>: 0.546872615814209,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;original_question&quot;</span>: <span class="hljs-string">&quot;Which dog-sled race in Alaska is the most famous?&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            },</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            {</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;answer&quot;</span>: <span class="hljs-string">&quot;part of the family&quot;</span>,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;distance&quot;</span>: 0.5387814044952393,</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">                <span class="hljs-string">&quot;original_question&quot;</span>: <span class="hljs-string">&quot;Most people today describe their dogs as what?&quot;</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">            }</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">        ]</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">    }</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">]</span>
 
 <button class="copy-code-btn"></button></code></pre>

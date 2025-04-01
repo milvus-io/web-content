@@ -65,39 +65,39 @@ title: Coordinator HA
 <li>Set <code translate="no">xxxCoordinator.activeStandby.enabled</code> to <code translate="no">true</code>.</li>
 </ul>
 <p>The following code snippet uses RootCoord as an example. You can do the same to coordinators of other types.</p>
-<pre><code translate="no" class="language-yaml">rootCoordinator:
-  enabled: true
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoordinator:</span>
+  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
   <span class="hljs-comment"># You can set the number of replicas greater than 1 only if you also need to set activeStandby.enabled to true.</span>
-  replicas: <span class="hljs-number">2</span>  <span class="hljs-comment"># Otherwise, remove this configuration item.</span>
-  resources: {}
-  nodeSelector: {}
-  affinity: {}
-  tolerations: []
-  extraEnv: []
-  heaptrack:
-    enabled: false
-  profiling:
-    enabled: false  <span class="hljs-comment"># Enable live profiling</span>
-  activeStandby:
-    enabled: true  <span class="hljs-comment"># Set this to true to have RootCoordinators work in active-standby mode.</span>
+  <span class="hljs-attr">replicas:</span> <span class="hljs-number">2</span>  <span class="hljs-comment"># Otherwise, remove this configuration item.</span>
+  <span class="hljs-attr">resources:</span> {}
+  <span class="hljs-attr">nodeSelector:</span> {}
+  <span class="hljs-attr">affinity:</span> {}
+  <span class="hljs-attr">tolerations:</span> []
+  <span class="hljs-attr">extraEnv:</span> []
+  <span class="hljs-attr">heaptrack:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
+  <span class="hljs-attr">profiling:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>  <span class="hljs-comment"># Enable live profiling</span>
+  <span class="hljs-attr">activeStandby:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>  <span class="hljs-comment"># Set this to true to have RootCoordinators work in active-standby mode.</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="With-Docker" class="common-anchor-header">With Docker</h3><p>To start multiple coordinators and have them work in active-standby mode, you can add some definitions to the <code translate="no">docker-compose</code> file that you use to start your Milvus cluster.</p>
 <p>The following code snippet uses RootCoord as an example. You can do the same to coordinators of other types.</p>
-<pre><code translate="no" class="language-yaml">  rootcoord:
-    container_name: milvus-rootcoord
-    image: milvusdb/milvus:v2<span class="hljs-number">.2</span><span class="hljs-number">.3</span>
-    command: [<span class="hljs-string">&quot;milvus&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;rootcoord&quot;</span>]
-    environment:
-      ETCD_ENDPOINTS: etcd:<span class="hljs-number">2379</span>
-      MINIO_ADDRESS: minio:<span class="hljs-number">9000</span>
-      PULSAR_ADDRESS: pulsar://pulsar:<span class="hljs-number">6650</span>
-      ROOT_COORD_ADDRESS: rootcoord:<span class="hljs-number">53100</span>
+<pre><code translate="no" class="language-yaml">  <span class="hljs-attr">rootcoord:</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.2.3</span>
+    <span class="hljs-attr">command:</span> [<span class="hljs-string">&quot;milvus&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;rootcoord&quot;</span>]
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">ETCD_ENDPOINTS:</span> <span class="hljs-string">etcd:2379</span>
+      <span class="hljs-attr">MINIO_ADDRESS:</span> <span class="hljs-string">minio:9000</span>
+      <span class="hljs-attr">PULSAR_ADDRESS:</span> <span class="hljs-string">pulsar://pulsar:6650</span>
+      <span class="hljs-attr">ROOT_COORD_ADDRESS:</span> <span class="hljs-string">rootcoord:53100</span>
       <span class="hljs-comment"># add ROOT_COORD_ENABLE_ACTIVE_STANDBY to enable active standby</span>
-      ROOT_COORD_ENABLE_ACTIVE_STANDBY: true
-    depends_on:
-      - <span class="hljs-string">&quot;etcd&quot;</span>
-      - <span class="hljs-string">&quot;pulsar&quot;</span>
-      - <span class="hljs-string">&quot;minio&quot;</span>
+      <span class="hljs-attr">ROOT_COORD_ENABLE_ACTIVE_STANDBY:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">depends_on:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;etcd&quot;</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;pulsar&quot;</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;minio&quot;</span>
 
 <span class="hljs-comment">#   add the following to have RootCoords work in active-standby mode</span>
 <span class="hljs-comment">#   rootcoord-1:</span>
@@ -119,42 +119,42 @@ title: Coordinator HA
 <h3 id="With-MacLinux-shell" class="common-anchor-header">With Mac/Linux shell</h3><p>To start multiple coordinators and have them work in active-standby mode, you can</p>
 <ol>
 <li><p>Download the Milvus source code to your local drive, and <a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">start up a Milvus cluster from the source code</a> as follows:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">sudo</span> ./scripts/start_cluster.sh
+<pre><code translate="no" class="language-shell">sudo ./scripts/start_cluster.sh
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus runs with only one coordinator of each type at the end of this step.</p></li>
 <li><p>Update <code translate="no">milvus.yaml</code> to change the port number of the coordinator of each type. The following uses <strong>rootCoord</strong> as an example.</p>
-<pre><code translate="no" class="language-yaml">rootCoord:
-  address: localhost
-  port: <span class="hljs-number">53100</span> <span class="hljs-comment"># change to 53001</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">53100</span> <span class="hljs-comment"># change to 53001</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Start the standby coordinator.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">nohup</span> ./bin/milvus run rootcoord &gt; /tmp/rootcoord2.<span class="hljs-built_in">log</span> 2&gt;&amp;1 &amp;
+<pre><code translate="no" class="language-shell">sudo nohup ./bin/milvus run rootcoord &gt; /tmp/rootcoord2.log 2&gt;&amp;1 &amp;
 <button class="copy-code-btn"></button></code></pre>
 <p>At the end of this step, run the following command to verify that two coordinator processes exists.</p>
 <pre><code translate="no" class="language-shell">ps aux|grep milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>The output should be similar to</p>
-<pre><code translate="no" class="language-shell">&gt; ps aux|grep milvus
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">&gt; </span><span class="language-bash">ps aux|grep milvus</span>
 root        12813   0.7 0.2 410709648   82432   ??  S   5:18PM  0:33.28 ./bin/milvus run rootcoord
 root        12816   0.5 0.2 409487968   62352   ??  S   5:18PM  0:22.69 ./bin/milvus run proxy
 root        17739   0.1 0.3 410289872   91792 s003  SN  6:01PM  0:00.30 ./bin/milvus run rootcoord
 ...
 <button class="copy-code-btn"></button></code></pre>
 <p>And the standby coordinator outputs a log entry every ten seconds as follows:</p>
-<pre><code translate="no" class="language-shell">[INFO] [sessionutil/session_util.go:649] [<span class="hljs-string">&quot;serverName: rootcoord is in STANDBY ...&quot;</span>]
+<pre><code translate="no" class="language-shell">[INFO] [sessionutil/session_util.go:649] [&quot;serverName: rootcoord is in STANDBY ...&quot;]
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Kill the active coordinator in a pair and watch the behavior of the standby coordinator.</p>
 <p>You can find that it takes 60 seconds for the standby coordinator to take over the active role.</p>
-<pre><code translate="no" class="language-shell">[2022/09/21 11:58:33.855 +08:00] [DEBUG] [sessionutil/session_util.go:677] [<span class="hljs-string">&quot;watch the ACTIVE key&quot;</span>] [DELETE=<span class="hljs-string">&quot;key:\&quot;by-dev/meta/session/rootcoord\&quot; mod_revision:167 &quot;</span>]
-[2022/09/21 11:58:33.856 +08:00] [DEBUG] [sessionutil/session_util.go:677] [<span class="hljs-string">&quot;watch the ACTIVE key&quot;</span>] [DELETE=<span class="hljs-string">&quot;key:\&quot;by-dev/meta/session/rootcoord-15\&quot; mod_revision:167 &quot;</span>]
-[2022/09/21 11:58:33.856 +08:00] [INFO] [sessionutil/session_util.go:683] [<span class="hljs-string">&quot;stop watching ACTIVE key&quot;</span>]
-[2022/09/21 11:58:33.856 +08:00] [INFO] [sessionutil/session_util.go:655] [<span class="hljs-string">&quot;start retrying to register as ACTIVE service...&quot;</span>]
-[2022/09/21 11:58:33.859 +08:00] [INFO] [sessionutil/session_util.go:641] [<span class="hljs-string">&quot;register ACTIVE service successfully&quot;</span>] [ServerID=19]
-[2022/09/21 11:58:33.859 +08:00] [INFO] [sessionutil/session_util.go:690] [<span class="hljs-string">&quot;quit STANDBY mode, this node will become ACTIVE&quot;</span>]
-[2022/09/21 11:58:33.859 +08:00] [INFO] [rootcoord/root_coord.go:638] [<span class="hljs-string">&quot;rootcoord switch from standby to active, activating&quot;</span>]
-[2022/09/21 11:58:33.859 +08:00] [INFO] [rootcoord/root_coord.go:306] [<span class="hljs-string">&quot;RootCoord Register Finished&quot;</span>]
-[2022/09/21 11:58:33.859 +08:00] [DEBUG] [rootcoord/service.go:148] [<span class="hljs-string">&quot;RootCoord start done ...&quot;</span>]
-[2022/09/21 11:58:33.859 +08:00] [DEBUG] [components/root_coord.go:58] [<span class="hljs-string">&quot;RootCoord successfully started&quot;</span>]
+<pre><code translate="no" class="language-shell">[2022/09/21 11:58:33.855 +08:00] [DEBUG] [sessionutil/session_util.go:677] [&quot;watch the ACTIVE key&quot;] [DELETE=&quot;key:\&quot;by-dev/meta/session/rootcoord\&quot; mod_revision:167 &quot;]
+[2022/09/21 11:58:33.856 +08:00] [DEBUG] [sessionutil/session_util.go:677] [&quot;watch the ACTIVE key&quot;] [DELETE=&quot;key:\&quot;by-dev/meta/session/rootcoord-15\&quot; mod_revision:167 &quot;]
+[2022/09/21 11:58:33.856 +08:00] [INFO] [sessionutil/session_util.go:683] [&quot;stop watching ACTIVE key&quot;]
+[2022/09/21 11:58:33.856 +08:00] [INFO] [sessionutil/session_util.go:655] [&quot;start retrying to register as ACTIVE service...&quot;]
+[2022/09/21 11:58:33.859 +08:00] [INFO] [sessionutil/session_util.go:641] [&quot;register ACTIVE service successfully&quot;] [ServerID=19]
+[2022/09/21 11:58:33.859 +08:00] [INFO] [sessionutil/session_util.go:690] [&quot;quit STANDBY mode, this node will become ACTIVE&quot;]
+[2022/09/21 11:58:33.859 +08:00] [INFO] [rootcoord/root_coord.go:638] [&quot;rootcoord switch from standby to active, activating&quot;]
+[2022/09/21 11:58:33.859 +08:00] [INFO] [rootcoord/root_coord.go:306] [&quot;RootCoord Register Finished&quot;]
+[2022/09/21 11:58:33.859 +08:00] [DEBUG] [rootcoord/service.go:148] [&quot;RootCoord start done ...&quot;]
+[2022/09/21 11:58:33.859 +08:00] [DEBUG] [components/root_coord.go:58] [&quot;RootCoord successfully started&quot;]
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <h2 id="Related-configuration-items" class="common-anchor-header">Related configuration items<button data-href="#Related-configuration-items" class="anchor-icon" translate="no">

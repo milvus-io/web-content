@@ -61,7 +61,7 @@ title: Install Milvus Python SDK
 <div class="alert note">
 It is recommended to install a PyMilvus version that matches the version of the Milvus server you installed. For more information, see <a href="/docs/release_notes.md">Release Notes</a>.
 </div>
-<pre><code translate="no">$ python3 -m pip install pymilvus==2.5.5
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">5</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Verify installation<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,7 +79,7 @@ It is recommended to install a PyMilvus version that matches the version of the 
         ></path>
       </svg>
     </button></h2><p>If PyMilvus is correctly installed, no exception will be raised when you run the following command.</p>
-<pre><code translate="no">$ python3 -c <span class="hljs-string">&quot;from pymilvus import Collection&quot;</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -c <span class="hljs-string">&quot;from pymilvus import Collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -102,7 +102,7 @@ It is recommended to install a PyMilvus version that matches the version of the 
 <ul>
 <li><a href="/docs/manage-collections.md">Manage Collections</a></li>
 <li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert &amp; Delete</a></li>
+<li><a href="/docs/insert-update-delete.md">Insert, Upsert & Delete</a></li>
 <li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
 <li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>

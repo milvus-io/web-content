@@ -116,7 +116,7 @@ fmt.Println(collectionNames)
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>If you have already created a collection named <code translate="no">quick_setup</code>, the result of the above example should be similar to the following.</p>
-<pre><code translate="no" class="language-json">[<span class="hljs-string">&quot;quick_setup&quot;</span>]
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span><span class="hljs-string">&quot;quick_setup&quot;</span><span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Describe-Collection" class="common-anchor-header">Describe Collection<button data-href="#Describe-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -200,33 +200,33 @@ fmt.Println(collection)
 <button class="copy-code-btn"></button></code></pre>
 <p>The result of the above example should be similar to the following.</p>
 <pre><code translate="no" class="language-plaintext">{
-    <span class="hljs-string">&#x27;collection_name&#x27;</span>: <span class="hljs-string">&#x27;quick_setup&#x27;</span>, 
-    <span class="hljs-string">&#x27;auto_id&#x27;</span>: <span class="hljs-literal">False</span>, 
-    <span class="hljs-string">&#x27;num_shards&#x27;</span>: <span class="hljs-number">1</span>, 
-    <span class="hljs-string">&#x27;description&#x27;</span>: <span class="hljs-string">&#x27;&#x27;</span>, 
-    <span class="hljs-string">&#x27;fields&#x27;</span>: [
+    &#x27;collection_name&#x27;: &#x27;quick_setup&#x27;, 
+    &#x27;auto_id&#x27;: False, 
+    &#x27;num_shards&#x27;: 1, 
+    &#x27;description&#x27;: &#x27;&#x27;, 
+    &#x27;fields&#x27;: [
         {
-            <span class="hljs-string">&#x27;field_id&#x27;</span>: <span class="hljs-number">100</span>, 
-            <span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;id&#x27;</span>, 
-            <span class="hljs-string">&#x27;description&#x27;</span>: <span class="hljs-string">&#x27;&#x27;</span>, 
-            <span class="hljs-string">&#x27;type&#x27;</span>: &lt;DataType.INT64: <span class="hljs-number">5</span>&gt;, 
-            <span class="hljs-string">&#x27;params&#x27;</span>: {}, 
-            <span class="hljs-string">&#x27;is_primary&#x27;</span>: <span class="hljs-literal">True</span>
+            &#x27;field_id&#x27;: 100, 
+            &#x27;name&#x27;: &#x27;id&#x27;, 
+            &#x27;description&#x27;: &#x27;&#x27;, 
+            &#x27;type&#x27;: &lt;DataType.INT64: 5&gt;, 
+            &#x27;params&#x27;: {}, 
+            &#x27;is_primary&#x27;: True
         }, 
         {
-            <span class="hljs-string">&#x27;field_id&#x27;</span>: <span class="hljs-number">101</span>, 
-            <span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;vector&#x27;</span>, 
-            <span class="hljs-string">&#x27;description&#x27;</span>: <span class="hljs-string">&#x27;&#x27;</span>, 
-            <span class="hljs-string">&#x27;type&#x27;</span>: &lt;DataType.FLOAT_VECTOR: <span class="hljs-number">101</span>&gt;, 
-            <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;dim&#x27;</span>: <span class="hljs-number">768</span>}
+            &#x27;field_id&#x27;: 101, 
+            &#x27;name&#x27;: &#x27;vector&#x27;, 
+            &#x27;description&#x27;: &#x27;&#x27;, 
+            &#x27;type&#x27;: &lt;DataType.FLOAT_VECTOR: 101&gt;, 
+            &#x27;params&#x27;: {&#x27;dim&#x27;: 768}
         }
     ], 
-    <span class="hljs-string">&#x27;functions&#x27;</span>: [], 
-    <span class="hljs-string">&#x27;aliases&#x27;</span>: [], 
-    <span class="hljs-string">&#x27;collection_id&#x27;</span>: <span class="hljs-number">456909630285026300</span>, 
-    <span class="hljs-string">&#x27;consistency_level&#x27;</span>: <span class="hljs-number">2</span>, 
-    <span class="hljs-string">&#x27;properties&#x27;</span>: {}, 
-    <span class="hljs-string">&#x27;num_partitions&#x27;</span>: <span class="hljs-number">1</span>, 
-    <span class="hljs-string">&#x27;enable_dynamic_field&#x27;</span>: <span class="hljs-literal">True</span>
+    &#x27;functions&#x27;: [], 
+    &#x27;aliases&#x27;: [], 
+    &#x27;collection_id&#x27;: 456909630285026300, 
+    &#x27;consistency_level&#x27;: 2, 
+    &#x27;properties&#x27;: {}, 
+    &#x27;num_partitions&#x27;: 1, 
+    &#x27;enable_dynamic_field&#x27;: True
 }
 <button class="copy-code-btn"></button></code></pre>

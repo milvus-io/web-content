@@ -42,7 +42,7 @@ summary: Learn how to enable TLS proxy in Milvus.
 <pre><code translate="no" class="language-shell">openssl version
 <button class="copy-code-btn"></button></code></pre>
 <p>If OpenSSL is not installed. It can be installed with the following command in Ubuntu.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">sudo</span> apt install openssl
+<pre><code translate="no" class="language-shell">sudo apt install openssl
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Create-files" class="common-anchor-header">Create files</h3><ol>
 <li>Create the <code translate="no">openssl.cnf</code> and <code translate="no">gen.sh</code> files.</li>
@@ -61,12 +61,12 @@ summary: Learn how to enable TLS proxy in Milvus.
 
 <span class="hljs-comment"># This definition stops the following lines choking if HOME isn&#x27;t</span>
 <span class="hljs-comment"># defined.</span>
-HOME            = .
-RANDFILE        = $ENV::HOME/.rnd
+<span class="hljs-attr">HOME</span>            = .
+<span class="hljs-attr">RANDFILE</span>        = <span class="hljs-variable">$ENV</span>::HOME/.rnd
 
 <span class="hljs-comment"># Extra OBJECT IDENTIFIER info:</span>
 <span class="hljs-comment">#oid_file       = $ENV::HOME/.oid</span>
-oid_section     = new_oids
+<span class="hljs-attr">oid_section</span>     = new_oids
 
 <span class="hljs-comment"># To use this configuration file with the &quot;-extfile&quot; option of the</span>
 <span class="hljs-comment"># &quot;openssl x509&quot; utility, name here the section containing the</span>
@@ -75,7 +75,7 @@ oid_section     = new_oids
 <span class="hljs-comment"># (Alternatively, use a configuration file that has only</span>
 <span class="hljs-comment"># X.509v3 extensions in its main [= default] section.)</span>
 
-[ new_oids ]
+<span class="hljs-section">[ new_oids ]</span>
 
 <span class="hljs-comment"># We can add new OIDs in here for use by &#x27;ca&#x27;, &#x27;req&#x27; and &#x27;ts&#x27;.</span>
 <span class="hljs-comment"># Add a simple OID like this:</span>
@@ -84,86 +84,86 @@ oid_section     = new_oids
 <span class="hljs-comment"># testoid2=${testoid1}.5.6</span>
 
 <span class="hljs-comment"># Policies used by the TSA examples.</span>
-tsa_policy1 = <span class="hljs-number">1.2</span><span class="hljs-number">.3</span><span class="hljs-number">.4</span><span class="hljs-number">.1</span>
-tsa_policy2 = <span class="hljs-number">1.2</span><span class="hljs-number">.3</span><span class="hljs-number">.4</span><span class="hljs-number">.5</span><span class="hljs-number">.6</span>
-tsa_policy3 = <span class="hljs-number">1.2</span><span class="hljs-number">.3</span><span class="hljs-number">.4</span><span class="hljs-number">.5</span><span class="hljs-number">.7</span>
+<span class="hljs-attr">tsa_policy1</span> = <span class="hljs-number">1.2</span>.<span class="hljs-number">3.4</span>.<span class="hljs-number">1</span>
+<span class="hljs-attr">tsa_policy2</span> = <span class="hljs-number">1.2</span>.<span class="hljs-number">3.4</span>.<span class="hljs-number">5.6</span>
+<span class="hljs-attr">tsa_policy3</span> = <span class="hljs-number">1.2</span>.<span class="hljs-number">3.4</span>.<span class="hljs-number">5.7</span>
 
 <span class="hljs-comment">####################################################################</span>
-[ ca ]
-default_ca  = CA_default        <span class="hljs-comment"># The default ca section</span>
+<span class="hljs-section">[ ca ]</span>
+<span class="hljs-attr">default_ca</span>  = CA_default        <span class="hljs-comment"># The default ca section</span>
 
 <span class="hljs-comment">####################################################################</span>
-[ CA_default ]
+<span class="hljs-section">[ CA_default ]</span>
 
-<span class="hljs-built_in">dir</span>     = ./demoCA      <span class="hljs-comment"># Where everything is kept</span>
-certs       = $<span class="hljs-built_in">dir</span>/certs        <span class="hljs-comment"># Where the issued certs are kept</span>
-crl_dir     = $<span class="hljs-built_in">dir</span>/crl      <span class="hljs-comment"># Where the issued crl are kept</span>
-database    = $<span class="hljs-built_in">dir</span>/index.txt    <span class="hljs-comment"># database index file.</span>
+<span class="hljs-attr">dir</span>     = ./demoCA      <span class="hljs-comment"># Where everything is kept</span>
+<span class="hljs-attr">certs</span>       = <span class="hljs-variable">$dir</span>/certs        <span class="hljs-comment"># Where the issued certs are kept</span>
+<span class="hljs-attr">crl_dir</span>     = <span class="hljs-variable">$dir</span>/crl      <span class="hljs-comment"># Where the issued crl are kept</span>
+<span class="hljs-attr">database</span>    = <span class="hljs-variable">$dir</span>/index.txt    <span class="hljs-comment"># database index file.</span>
 <span class="hljs-comment">#unique_subject = no            # Set to &#x27;no&#x27; to allow creation of</span>
                     <span class="hljs-comment"># several ctificates with same subject.</span>
-new_certs_dir   = $<span class="hljs-built_in">dir</span>/newcerts     <span class="hljs-comment"># default place for new certs.</span>
+<span class="hljs-attr">new_certs_dir</span>   = <span class="hljs-variable">$dir</span>/newcerts     <span class="hljs-comment"># default place for new certs.</span>
 
-certificate = $<span class="hljs-built_in">dir</span>/cacert.pem   <span class="hljs-comment"># The CA certificate</span>
-serial      = $<span class="hljs-built_in">dir</span>/serial       <span class="hljs-comment"># The current serial number</span>
-crlnumber   = $<span class="hljs-built_in">dir</span>/crlnumber    <span class="hljs-comment"># the current crl number</span>
+<span class="hljs-attr">certificate</span> = <span class="hljs-variable">$dir</span>/cacert.pem   <span class="hljs-comment"># The CA certificate</span>
+<span class="hljs-attr">serial</span>      = <span class="hljs-variable">$dir</span>/serial       <span class="hljs-comment"># The current serial number</span>
+<span class="hljs-attr">crlnumber</span>   = <span class="hljs-variable">$dir</span>/crlnumber    <span class="hljs-comment"># the current crl number</span>
                     <span class="hljs-comment"># must be commented out to leave a V1 CRL</span>
-crl     = $<span class="hljs-built_in">dir</span>/crl.pem      <span class="hljs-comment"># The current CRL</span>
-private_key = $<span class="hljs-built_in">dir</span>/private/cakey.pem<span class="hljs-comment"># The private key</span>
-RANDFILE    = $<span class="hljs-built_in">dir</span>/private/.rand    <span class="hljs-comment"># private random number file</span>
+<span class="hljs-attr">crl</span>     = <span class="hljs-variable">$dir</span>/crl.pem      <span class="hljs-comment"># The current CRL</span>
+<span class="hljs-attr">private_key</span> = <span class="hljs-variable">$dir</span>/private/cakey.pem<span class="hljs-comment"># The private key</span>
+<span class="hljs-attr">RANDFILE</span>    = <span class="hljs-variable">$dir</span>/private/.rand    <span class="hljs-comment"># private random number file</span>
 
-x509_extensions = usr_cert      <span class="hljs-comment"># The extentions to add to the cert</span>
+<span class="hljs-attr">x509_extensions</span> = usr_cert      <span class="hljs-comment"># The extentions to add to the cert</span>
 
 <span class="hljs-comment"># Comment out the following two lines for the &quot;traditional&quot;</span>
 <span class="hljs-comment"># (and highly broken) format.</span>
-name_opt    = ca_default        <span class="hljs-comment"># Subject Name options</span>
-cert_opt    = ca_default        <span class="hljs-comment"># Certificate field options</span>
+<span class="hljs-attr">name_opt</span>    = ca_default        <span class="hljs-comment"># Subject Name options</span>
+<span class="hljs-attr">cert_opt</span>    = ca_default        <span class="hljs-comment"># Certificate field options</span>
 
 <span class="hljs-comment"># Extension copying option: use with caution.</span>
-copy_extensions = copy
+<span class="hljs-attr">copy_extensions</span> = copy
 
 <span class="hljs-comment"># Extensions to add to a CRL. Note: Netscape communicator chokes on V2 CRLs</span>
 <span class="hljs-comment"># so this is commented out by default to leave a V1 CRL.</span>
 <span class="hljs-comment"># crlnumber must also be commented out to leave a V1 CRL.</span>
 <span class="hljs-comment"># crl_extensions    = crl_ext</span>
 
-default_days    = <span class="hljs-number">365</span>           <span class="hljs-comment"># how long to certify for</span>
-default_crl_days= <span class="hljs-number">30</span>            <span class="hljs-comment"># how long before next CRL</span>
-default_md  = default       <span class="hljs-comment"># use public key default MD</span>
-preserve    = no            <span class="hljs-comment"># keep passed DN ordering</span>
+<span class="hljs-attr">default_days</span>    = <span class="hljs-number">365</span>           <span class="hljs-comment"># how long to certify for</span>
+<span class="hljs-attr">default_crl_days</span>= <span class="hljs-number">30</span>            <span class="hljs-comment"># how long before next CRL</span>
+<span class="hljs-attr">default_md</span>  = default       <span class="hljs-comment"># use public key default MD</span>
+<span class="hljs-attr">preserve</span>    = <span class="hljs-literal">no</span>            <span class="hljs-comment"># keep passed DN ordering</span>
 
 <span class="hljs-comment"># A few difference way of specifying how similar the request should look</span>
 <span class="hljs-comment"># For type CA, the listed attributes must be the same, and the optional</span>
 <span class="hljs-comment"># and supplied fields are just that :-)</span>
-policy      = policy_match
+<span class="hljs-attr">policy</span>      = policy_match
 
 <span class="hljs-comment"># For the CA policy</span>
-[ policy_match ]
-countryName     = <span class="hljs-keyword">match</span>
-stateOrProvinceName = <span class="hljs-keyword">match</span>
-organizationName    = <span class="hljs-keyword">match</span>
-organizationalUnitName  = optional
-commonName      = supplied
-emailAddress        = optional
+<span class="hljs-section">[ policy_match ]</span>
+<span class="hljs-attr">countryName</span>     = match
+<span class="hljs-attr">stateOrProvinceName</span> = match
+<span class="hljs-attr">organizationName</span>    = match
+<span class="hljs-attr">organizationalUnitName</span>  = optional
+<span class="hljs-attr">commonName</span>      = supplied
+<span class="hljs-attr">emailAddress</span>        = optional
 
 <span class="hljs-comment"># For the &#x27;anything&#x27; policy</span>
 <span class="hljs-comment"># At this point in time, you must list all acceptable &#x27;object&#x27;</span>
 <span class="hljs-comment"># types.</span>
-[ policy_anything ]
-countryName     = optional
-stateOrProvinceName = optional
-localityName        = optional
-organizationName    = optional
-organizationalUnitName  = optional
-commonName      = supplied
-emailAddress        = optional
+<span class="hljs-section">[ policy_anything ]</span>
+<span class="hljs-attr">countryName</span>     = optional
+<span class="hljs-attr">stateOrProvinceName</span> = optional
+<span class="hljs-attr">localityName</span>        = optional
+<span class="hljs-attr">organizationName</span>    = optional
+<span class="hljs-attr">organizationalUnitName</span>  = optional
+<span class="hljs-attr">commonName</span>      = supplied
+<span class="hljs-attr">emailAddress</span>        = optional
 
 <span class="hljs-comment">####################################################################</span>
-[ req ]
-default_bits        = <span class="hljs-number">2048</span>
-default_keyfile     = privkey.pem
-distinguished_name  = req_distinguished_name
-attributes      = req_attributes
-x509_extensions = v3_ca <span class="hljs-comment"># The extentions to add to the self signed cert</span>
+<span class="hljs-section">[ req ]</span>
+<span class="hljs-attr">default_bits</span>        = <span class="hljs-number">2048</span>
+<span class="hljs-attr">default_keyfile</span>     = privkey.pem
+<span class="hljs-attr">distinguished_name</span>  = req_distinguished_name
+<span class="hljs-attr">attributes</span>      = req_attributes
+<span class="hljs-attr">x509_extensions</span> = v3_ca <span class="hljs-comment"># The extentions to add to the self signed cert</span>
 
 <span class="hljs-comment"># Passwords for private keys if not present they will be prompted for</span>
 <span class="hljs-comment"># input_password = secret</span>
@@ -176,54 +176,54 @@ x509_extensions = v3_ca <span class="hljs-comment"># The extentions to add to th
 <span class="hljs-comment"># nombstr : PrintableString, T61String (no BMPStrings or UTF8Strings).</span>
 <span class="hljs-comment"># MASK:XXXX a literal mask value.</span>
 <span class="hljs-comment"># WARNING: ancient versions of Netscape crash on BMPStrings or UTF8Strings.</span>
-string_mask = utf8only
+<span class="hljs-attr">string_mask</span> = utf8only
 
-req_extensions = v3_req <span class="hljs-comment"># The extensions to add to a certificate request</span>
+<span class="hljs-attr">req_extensions</span> = v3_req <span class="hljs-comment"># The extensions to add to a certificate request</span>
 
-[ req_distinguished_name ]
-countryName         = Country Name (<span class="hljs-number">2</span> letter code)
-countryName_default     = AU
-countryName_min         = <span class="hljs-number">2</span>
-countryName_max         = <span class="hljs-number">2</span>
+<span class="hljs-section">[ req_distinguished_name ]</span>
+<span class="hljs-attr">countryName</span>         = Country Name (<span class="hljs-number">2</span> letter code)
+<span class="hljs-attr">countryName_default</span>     = AU
+<span class="hljs-attr">countryName_min</span>         = <span class="hljs-number">2</span>
+<span class="hljs-attr">countryName_max</span>         = <span class="hljs-number">2</span>
 
-stateOrProvinceName     = State <span class="hljs-keyword">or</span> Province Name (full name)
-stateOrProvinceName_default = Some-State
+<span class="hljs-attr">stateOrProvinceName</span>     = State or Province Name (full name)
+<span class="hljs-attr">stateOrProvinceName_default</span> = Some-State
 
-localityName            = Locality Name (eg, city)
+<span class="hljs-attr">localityName</span>            = Locality Name (eg, city)
 
-<span class="hljs-number">0.</span>organizationName      = Organization Name (eg, company)
-<span class="hljs-number">0.</span>organizationName_default  = Internet Widgits Pty Ltd
+<span class="hljs-attr">0.organizationName</span>      = Organization Name (eg, company)
+<span class="hljs-attr">0.organizationName_default</span>  = Internet Widgits Pty Ltd
 
 <span class="hljs-comment"># we can do this but it is not needed normally :-)</span>
 <span class="hljs-comment">#1.organizationName     = Second Organization Name (eg, company)</span>
 <span class="hljs-comment">#1.organizationName_default = World Wide Web Pty Ltd</span>
 
-organizationalUnitName      = Organizational Unit Name (eg, section)
+<span class="hljs-attr">organizationalUnitName</span>      = Organizational Unit Name (eg, section)
 <span class="hljs-comment">#organizationalUnitName_default =</span>
 
-commonName          = Common Name (e.g. server FQDN <span class="hljs-keyword">or</span> YOUR name)
-commonName_max          = <span class="hljs-number">64</span>
+<span class="hljs-attr">commonName</span>          = Common Name (e.g. server FQDN or YOUR name)
+<span class="hljs-attr">commonName_max</span>          = <span class="hljs-number">64</span>
 
-emailAddress            = Email Address
-emailAddress_max        = <span class="hljs-number">64</span>
+<span class="hljs-attr">emailAddress</span>            = Email Address
+<span class="hljs-attr">emailAddress_max</span>        = <span class="hljs-number">64</span>
 
 <span class="hljs-comment"># SET-ex3           = SET extension number 3</span>
 
-[ req_attributes ]
-challengePassword       = A challenge password
-challengePassword_min       = <span class="hljs-number">4</span>
-challengePassword_max       = <span class="hljs-number">20</span>
+<span class="hljs-section">[ req_attributes ]</span>
+<span class="hljs-attr">challengePassword</span>       = A challenge password
+<span class="hljs-attr">challengePassword_min</span>       = <span class="hljs-number">4</span>
+<span class="hljs-attr">challengePassword_max</span>       = <span class="hljs-number">20</span>
 
-unstructuredName        = An optional company name
+<span class="hljs-attr">unstructuredName</span>        = An optional company name
 
-[ usr_cert ]
+<span class="hljs-section">[ usr_cert ]</span>
 
 <span class="hljs-comment"># These extensions are added when &#x27;ca&#x27; signs a request.</span>
 
 <span class="hljs-comment"># This goes against PKIX guidelines but some CAs do it and some software</span>
 <span class="hljs-comment"># requires this to avoid interpreting an end user certificate as a CA.</span>
 
-basicConstraints=CA:FALSE
+<span class="hljs-attr">basicConstraints</span>=CA:<span class="hljs-literal">FALSE</span>
 
 <span class="hljs-comment"># Here are some examples of the usage of nsCertType. If it is omitted</span>
 <span class="hljs-comment"># the certificate can be used for anything *except* object signing.</span>
@@ -244,11 +244,11 @@ basicConstraints=CA:FALSE
 <span class="hljs-comment"># keyUsage = nonRepudiation, digitalSignature, keyEncipherment</span>
 
 <span class="hljs-comment"># This will be displayed in Netscape&#x27;s comment listbox.</span>
-nsComment           = <span class="hljs-string">&quot;OpenSSL Generated Certificate&quot;</span>
+<span class="hljs-attr">nsComment</span>           = <span class="hljs-string">&quot;OpenSSL Generated Certificate&quot;</span>
 
 <span class="hljs-comment"># PKIX recommendations harmless if included in all certificates.</span>
-subjectKeyIdentifier=<span class="hljs-built_in">hash</span>
-authorityKeyIdentifier=keyid,issuer
+<span class="hljs-attr">subjectKeyIdentifier</span>=hash
+<span class="hljs-attr">authorityKeyIdentifier</span>=keyid,issuer
 
 <span class="hljs-comment"># This stuff is for subjectAltName and issuerAltname.</span>
 <span class="hljs-comment"># Import the email address.</span>
@@ -270,15 +270,15 @@ authorityKeyIdentifier=keyid,issuer
 <span class="hljs-comment"># This is required for TSA certificates.</span>
 <span class="hljs-comment"># extendedKeyUsage = critical,timeStamping</span>
 
-[ v3_req ]
+<span class="hljs-section">[ v3_req ]</span>
 
 <span class="hljs-comment"># Extensions to add to a certificate request</span>
 
-basicConstraints = CA:FALSE
-keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+<span class="hljs-attr">basicConstraints</span> = CA:<span class="hljs-literal">FALSE</span>
+<span class="hljs-attr">keyUsage</span> = nonRepudiation, digitalSignature, keyEncipherment
 
 
-[ v3_ca ]
+<span class="hljs-section">[ v3_ca ]</span>
 
 
 <span class="hljs-comment"># Extensions for a typical CA</span>
@@ -286,15 +286,15 @@ keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 
 <span class="hljs-comment"># PKIX recommendation.</span>
 
-subjectKeyIdentifier=<span class="hljs-built_in">hash</span>
+<span class="hljs-attr">subjectKeyIdentifier</span>=hash
 
-authorityKeyIdentifier=keyid:always,issuer
+<span class="hljs-attr">authorityKeyIdentifier</span>=keyid:always,issuer
 
 <span class="hljs-comment"># This is what PKIX recommends but some broken software chokes on critical</span>
 <span class="hljs-comment"># extensions.</span>
 <span class="hljs-comment">#basicConstraints = critical,CA:true</span>
 <span class="hljs-comment"># So we do this instead.</span>
-basicConstraints = CA:true
+<span class="hljs-attr">basicConstraints</span> = CA:<span class="hljs-literal">true</span>
 
 <span class="hljs-comment"># Key usage: this is typical for a CA certificate. However since it will</span>
 <span class="hljs-comment"># prevent it being used as an test self-signed certificate it is best</span>
@@ -315,21 +315,21 @@ basicConstraints = CA:true
 <span class="hljs-comment"># You can even override a supported extension:</span>
 <span class="hljs-comment"># basicConstraints= critical, DER:30:03:01:01:FF</span>
 
-[ crl_ext ]
+<span class="hljs-section">[ crl_ext ]</span>
 
 <span class="hljs-comment"># CRL extensions.</span>
 <span class="hljs-comment"># Only issuerAltName and authorityKeyIdentifier make any sense in a CRL.</span>
 
 <span class="hljs-comment"># issuerAltName=issuer:copy</span>
-authorityKeyIdentifier=keyid:always
+<span class="hljs-attr">authorityKeyIdentifier</span>=keyid:always
 
-[ proxy_cert_ext ]
+<span class="hljs-section">[ proxy_cert_ext ]</span>
 <span class="hljs-comment"># These extensions should be added when creating a proxy certificate</span>
 
 <span class="hljs-comment"># This goes against PKIX guidelines but some CAs do it and some software</span>
 <span class="hljs-comment"># requires this to avoid interpreting an end user certificate as a CA.</span>
 
-basicConstraints=CA:FALSE
+<span class="hljs-attr">basicConstraints</span>=CA:<span class="hljs-literal">FALSE</span>
 
 <span class="hljs-comment"># Here are some examples of the usage of nsCertType. If it is omitted</span>
 <span class="hljs-comment"># the certificate can be used for anything *except* object signing.</span>
@@ -350,11 +350,11 @@ basicConstraints=CA:FALSE
 <span class="hljs-comment"># keyUsage = nonRepudiation, digitalSignature, keyEncipherment</span>
 
 <span class="hljs-comment"># This will be displayed in Netscape&#x27;s comment listbox.</span>
-nsComment           = <span class="hljs-string">&quot;OpenSSL Generated Certificate&quot;</span>
+<span class="hljs-attr">nsComment</span>           = <span class="hljs-string">&quot;OpenSSL Generated Certificate&quot;</span>
 
 <span class="hljs-comment"># PKIX recommendations harmless if included in all certificates.</span>
-subjectKeyIdentifier=<span class="hljs-built_in">hash</span>
-authorityKeyIdentifier=keyid,issuer
+<span class="hljs-attr">subjectKeyIdentifier</span>=hash
+<span class="hljs-attr">authorityKeyIdentifier</span>=keyid,issuer
 
 <span class="hljs-comment"># This stuff is for subjectAltName and issuerAltname.</span>
 <span class="hljs-comment"># Import the email address.</span>
@@ -374,66 +374,66 @@ authorityKeyIdentifier=keyid,issuer
 <span class="hljs-comment">#nsSslServerName</span>
 
 <span class="hljs-comment"># This really needs to be in place for it to be a proxy certificate.</span>
-proxyCertInfo=critical,language:<span class="hljs-built_in">id</span>-ppl-anyLanguage,pathlen:<span class="hljs-number">3</span>,policy:foo
+<span class="hljs-attr">proxyCertInfo</span>=critical,language:id-ppl-anyLanguage,pathlen:<span class="hljs-number">3</span>,policy:foo
 
 <span class="hljs-comment">####################################################################</span>
-[ tsa ]
+<span class="hljs-section">[ tsa ]</span>
 
-default_tsa = tsa_config1   <span class="hljs-comment"># the default TSA section</span>
+<span class="hljs-attr">default_tsa</span> = tsa_config1   <span class="hljs-comment"># the default TSA section</span>
 
-[ tsa_config1 ]
+<span class="hljs-section">[ tsa_config1 ]</span>
 
 <span class="hljs-comment"># These are used by the TSA reply generation only.</span>
-<span class="hljs-built_in">dir</span>     = ./demoCA      <span class="hljs-comment"># TSA root directory</span>
-serial      = $<span class="hljs-built_in">dir</span>/tsaserial    <span class="hljs-comment"># The current serial number (mandatory)</span>
-crypto_device   = builtin       <span class="hljs-comment"># OpenSSL engine to use for signing</span>
-signer_cert = $<span class="hljs-built_in">dir</span>/tsacert.pem  <span class="hljs-comment"># The TSA signing certificate</span>
+<span class="hljs-attr">dir</span>     = ./demoCA      <span class="hljs-comment"># TSA root directory</span>
+<span class="hljs-attr">serial</span>      = <span class="hljs-variable">$dir</span>/tsaserial    <span class="hljs-comment"># The current serial number (mandatory)</span>
+<span class="hljs-attr">crypto_device</span>   = builtin       <span class="hljs-comment"># OpenSSL engine to use for signing</span>
+<span class="hljs-attr">signer_cert</span> = <span class="hljs-variable">$dir</span>/tsacert.pem  <span class="hljs-comment"># The TSA signing certificate</span>
                     <span class="hljs-comment"># (optional)</span>
-certs       = $<span class="hljs-built_in">dir</span>/cacert.pem   <span class="hljs-comment"># Certificate chain to include in reply</span>
+<span class="hljs-attr">certs</span>       = <span class="hljs-variable">$dir</span>/cacert.pem   <span class="hljs-comment"># Certificate chain to include in reply</span>
                     <span class="hljs-comment"># (optional)</span>
-signer_key  = $<span class="hljs-built_in">dir</span>/private/tsakey.pem <span class="hljs-comment"># The TSA private key (optional)</span>
+<span class="hljs-attr">signer_key</span>  = <span class="hljs-variable">$dir</span>/private/tsakey.pem <span class="hljs-comment"># The TSA private key (optional)</span>
 
-default_policy  = tsa_policy1       <span class="hljs-comment"># Policy if request did not specify it</span>
+<span class="hljs-attr">default_policy</span>  = tsa_policy1       <span class="hljs-comment"># Policy if request did not specify it</span>
                     <span class="hljs-comment"># (optional)</span>
-other_policies  = tsa_policy2, tsa_policy3  <span class="hljs-comment"># acceptable policies (optional)</span>
-digests     = md5, sha1     <span class="hljs-comment"># Acceptable message digests (mandatory)</span>
-accuracy    = secs:<span class="hljs-number">1</span>, millisecs:<span class="hljs-number">500</span>, microsecs:<span class="hljs-number">100</span>  <span class="hljs-comment"># (optional)</span>
-clock_precision_digits  = <span class="hljs-number">0</span> <span class="hljs-comment"># number of digits after dot. (optional)</span>
-ordering        = yes   <span class="hljs-comment"># Is ordering defined for timestamps?</span>
+<span class="hljs-attr">other_policies</span>  = tsa_policy2, tsa_policy3  <span class="hljs-comment"># acceptable policies (optional)</span>
+<span class="hljs-attr">digests</span>     = md5, sha1     <span class="hljs-comment"># Acceptable message digests (mandatory)</span>
+<span class="hljs-attr">accuracy</span>    = secs:<span class="hljs-number">1</span>, millisecs:<span class="hljs-number">500</span>, microsecs:<span class="hljs-number">100</span>  <span class="hljs-comment"># (optional)</span>
+<span class="hljs-attr">clock_precision_digits</span>  = <span class="hljs-number">0</span> <span class="hljs-comment"># number of digits after dot. (optional)</span>
+<span class="hljs-attr">ordering</span>        = <span class="hljs-literal">yes</span>   <span class="hljs-comment"># Is ordering defined for timestamps?</span>
                 <span class="hljs-comment"># (optional, default: no)</span>
-tsa_name        = yes   <span class="hljs-comment"># Must the TSA name be included in the reply?</span>
+<span class="hljs-attr">tsa_name</span>        = <span class="hljs-literal">yes</span>   <span class="hljs-comment"># Must the TSA name be included in the reply?</span>
                 <span class="hljs-comment"># (optional, default: no)</span>
-ess_cert_id_chain   = no    <span class="hljs-comment"># Must the ESS cert id chain be included?</span>
+<span class="hljs-attr">ess_cert_id_chain</span>   = <span class="hljs-literal">no</span>    <span class="hljs-comment"># Must the ESS cert id chain be included?</span>
                 <span class="hljs-comment"># (optional, default: no)</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>The <code translate="no">openssl.cnf</code> file is a default OpenSSL configuration file. See <a href="https://www.openssl.org/docs/manmaster/man5/config.html">manual page</a> for more information. The <code translate="no">gen.sh</code> file generates relevant certificate files. You can modify the <code translate="no">gen.sh</code> file for different purposes such as changing the validity period of the certificate file, the length of the certificate key or the certificate file names.</p>
 <p>It is necessary to configure the <code translate="no">CommonName</code> in the <code translate="no">gen.sh</code> file. The <code translate="no">CommonName</code> refers to the server name that the client should specify while connecting.</p>
 <p><details><summary><code translate="no">gen.sh</code></summary></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta">#!/usr/bin/env sh</span>
-<span class="hljs-comment"># your variables</span>
-Country=<span class="hljs-string">&quot;CN&quot;</span>
-State=<span class="hljs-string">&quot;Shanghai&quot;</span>
-Location=<span class="hljs-string">&quot;Shanghai&quot;</span>
-Organization=<span class="hljs-string">&quot;milvus&quot;</span>
-Organizational=<span class="hljs-string">&quot;milvus&quot;</span>
-CommonName=<span class="hljs-string">&quot;localhost&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/usr/bin/env sh</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">your variables</span>
+Country=&quot;CN&quot;
+State=&quot;Shanghai&quot;
+Location=&quot;Shanghai&quot;
+Organization=&quot;milvus&quot;
+Organizational=&quot;milvus&quot;
+CommonName=&quot;localhost&quot;
 
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;generate ca.key&quot;</span>
+echo &quot;generate ca.key&quot;
 openssl genrsa -out ca.key 2048
 
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;generate ca.pem&quot;</span>
-openssl req -new -x509 -key ca.key -out ca.pem -days 3650 -subj <span class="hljs-string">&quot;/C=<span class="hljs-variable">$Country</span>/ST=<span class="hljs-variable">$State</span>/L=<span class="hljs-variable">$Location</span>/O=<span class="hljs-variable">$Organization</span>/OU=<span class="hljs-variable">$Organizational</span>/CN=<span class="hljs-variable">$CommonName</span>&quot;</span>
+echo &quot;generate ca.pem&quot;
+openssl req -new -x509 -key ca.key -out ca.pem -days 3650 -subj &quot;/C=$Country/ST=$State/L=$Location/O=$Organization/OU=$Organizational/CN=$CommonName&quot;
 
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;generate server SAN certificate&quot;</span>
+echo &quot;generate server SAN certificate&quot;
 openssl genpkey -algorithm RSA -out server.key
-openssl req -new -nodes -key server.key -out server.csr -days 3650 -subj <span class="hljs-string">&quot;/C=<span class="hljs-variable">$Country</span>/O=<span class="hljs-variable">$Organization</span>/OU=<span class="hljs-variable">$Organizational</span>/CN=<span class="hljs-variable">$CommonName</span>&quot;</span> -config ./openssl.cnf -extensions v3_req
-openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> server.csr -out server.pem -CA ca.pem -CAkey ca.key -CAcreateserial -extfile ./openssl.cnf -extensions v3_req
+openssl req -new -nodes -key server.key -out server.csr -days 3650 -subj &quot;/C=$Country/O=$Organization/OU=$Organizational/CN=$CommonName&quot; -config ./openssl.cnf -extensions v3_req
+openssl x509 -req -days 3650 -in server.csr -out server.pem -CA ca.pem -CAkey ca.key -CAcreateserial -extfile ./openssl.cnf -extensions v3_req
 
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;generate client SAN certificate&quot;</span>
+echo &quot;generate client SAN certificate&quot;
 openssl genpkey -algorithm RSA -out client.key
-openssl req -new -nodes -key client.key -out client.csr -days 3650 -subj <span class="hljs-string">&quot;/C=<span class="hljs-variable">$Country</span>/O=<span class="hljs-variable">$Organization</span>/OU=<span class="hljs-variable">$Organizational</span>/CN=<span class="hljs-variable">$CommonName</span>&quot;</span> -config ./openssl.cnf -extensions v3_req
-openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -out client.pem -CA ca.pem -CAkey ca.key -CAcreateserial -extfile ./openssl.cnf -extensions v3_req
+openssl req -new -nodes -key client.key -out client.csr -days 3650 -subj &quot;/C=$Country/O=$Organization/OU=$Organizational/CN=$CommonName&quot; -config ./openssl.cnf -extensions v3_req
+openssl x509 -req -days 3650 -in client.csr -out client.pem -CA ca.pem -CAkey ca.key -CAcreateserial -extfile ./openssl.cnf -extensions v3_req
 
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
@@ -455,7 +455,7 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
 <li>Request CA certificate generation.</li>
 </ol>
 <p>You need to provide the basic information about the CA in this step. Choose the <code translate="no">x509</code> option to skip the request and directly generate a self-signing certificate.</p>
-<pre><code translate="no">openssl req -new -x509 -key ca.key -out ca.pem -days 3650 -subj <span class="hljs-string">&quot;/C=<span class="hljs-variable">$Country</span>/ST=<span class="hljs-variable">$State</span>/L=<span class="hljs-variable">$Location</span>/O=<span class="hljs-variable">$Organization</span>/OU=<span class="hljs-variable">$Organizational</span>/CN=<span class="hljs-variable">$CommonName</span>&quot;</span>
+<pre><code translate="no">openssl req -new -x509 -key ca.key -<span class="hljs-keyword">out</span> ca.pem -days <span class="hljs-number">3650</span> -subj <span class="hljs-string">&quot;/C=<span class="hljs-variable">$Country</span>/ST=<span class="hljs-variable">$State</span>/L=<span class="hljs-variable">$Location</span>/O=<span class="hljs-variable">$Organization</span>/OU=<span class="hljs-variable">$Organizational</span>/CN=<span class="hljs-variable">$CommonName</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>You will get a <code translate="no">ca.pem</code> file , a CA certificate that can be used to generate client-server certificates after this step.</p>
 <ol start="3">
@@ -475,7 +475,7 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
 <li>Sign the certificate.</li>
 </ol>
 <p>Open the <code translate="no">server.csr</code>, the <code translate="no">ca.key</code> and the <code translate="no">ca.pem</code> files to sign the certificate. The <code translate="no">CAcreateserial</code> command option is used to create a CA serial number file if it does not exist. You will get an <code translate="no">aca.srl</code> file after choosing this command option.</p>
-<pre><code translate="no">openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> server.csr -out server.pem -CA ca.pem -CAkey ca.key -CAcreateserial -extfile ./openssl.cnf -extensions v3_req
+<pre><code translate="no">openssl x509 -req -days <span class="hljs-number">3650</span> -<span class="hljs-keyword">in</span> server.csr -<span class="hljs-keyword">out</span> server.pem -CA ca.pem -<span class="hljs-built_in">CAkey</span> ca.key -<span class="hljs-built_in">CAcreateserial</span> -extfile ./openssl.cnf -extensions v3_req
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Set-up-a-Milvus-server-with-TLS" class="common-anchor-header">Set up a Milvus server with TLS<button data-href="#Set-up-a-Milvus-server-with-TLS" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -497,14 +497,14 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
 <p>This guide focuses on deployment using Docker Compose. For information on Milvus Operator deployment, refer to <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/security/encryption-in-transit.md">Milvus Operator TLS documentation</a>.</p>
 </div>
 <h3 id="1-Modify-the-Milvus-server-configuration" class="common-anchor-header">1. Modify the Milvus server configuration</h3><p>To enable TLS, set <code translate="no">common.security.tlsMode</code> in <code translate="no">milvus.yaml</code> to <code translate="no">1</code> (for one-way TLS) or <code translate="no">2</code> (for two-way TLS).</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">tls</span>:
-  <span class="hljs-attr">serverPemPath</span>: <span class="hljs-regexp">/milvus/</span>tls/server.<span class="hljs-property">pem</span>
-  <span class="hljs-attr">serverKeyPath</span>: <span class="hljs-regexp">/milvus/</span>tls/server.<span class="hljs-property">key</span>
-  <span class="hljs-attr">caPemPath</span>: <span class="hljs-regexp">/milvus/</span>tls/ca.<span class="hljs-property">pem</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">tls:</span>
+  <span class="hljs-attr">serverPemPath:</span> <span class="hljs-string">/milvus/tls/server.pem</span>
+  <span class="hljs-attr">serverKeyPath:</span> <span class="hljs-string">/milvus/tls/server.key</span>
+  <span class="hljs-attr">caPemPath:</span> <span class="hljs-string">/milvus/tls/ca.pem</span>
 
-<span class="hljs-attr">common</span>:
-  <span class="hljs-attr">security</span>:
-    <span class="hljs-attr">tlsMode</span>: <span class="hljs-number">1</span>
+<span class="hljs-attr">common:</span>
+  <span class="hljs-attr">security:</span>
+    <span class="hljs-attr">tlsMode:</span> <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Parameters:</p>
 <ul>
@@ -521,24 +521,24 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
 <pre><code translate="no">├── docker-compose.yml
 ├── milvus.yaml
 └── tls
-     ├── server.pem
+<span class="hljs-code">     ├── server.pem
      ├── server.key
      └── ca.pem
-<button class="copy-code-btn"></button></code></pre>
+</span><button class="copy-code-btn"></button></code></pre>
 <h4 id="Update-Docker-Compose-configuration" class="common-anchor-header">Update Docker Compose configuration</h4><p>Edit the <code translate="no">docker-compose.yaml</code> file to map the certificate file paths inside the container as shown below:</p>
-<pre><code translate="no" class="language-yaml">  standalone:
-    container_name: milvus-standalone
-    image: milvusdb/milvus:latest
-    <span class="hljs-built_in">command</span>: [<span class="hljs-string">&quot;milvus&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;standalone&quot;</span>]
-    security_opt:
-    - seccomp:unconfined
-    environment:
-      ETCD_ENDPOINTS: etcd:2379
-      MINIO_ADDRESS: minio:9000
-    volumes:
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/volumes/milvus:/var/lib/milvus
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/tls:/milvus/tls
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/milvus.yaml:/milvus/configs/milvus.yaml
+<pre><code translate="no" class="language-yaml">  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:latest</span>
+    <span class="hljs-attr">command:</span> [<span class="hljs-string">&quot;milvus&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;standalone&quot;</span>]
+    <span class="hljs-attr">security_opt:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">seccomp:unconfined</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">ETCD_ENDPOINTS:</span> <span class="hljs-string">etcd:2379</span>
+      <span class="hljs-attr">MINIO_ADDRESS:</span> <span class="hljs-string">minio:9000</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/tls:/milvus/tls</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Deploy-Milvus-using-Docker-Compose" class="common-anchor-header">Deploy Milvus using Docker Compose</h4><p>Execute the following command to deploy Milvus:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d

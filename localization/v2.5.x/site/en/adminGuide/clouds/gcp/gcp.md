@@ -73,53 +73,53 @@ summary: Learn how to deploy a Milvus cluster on GKE.
 <p>To facilitate your work, you also need to set up several firewall rules to allow external traffic over ICMP, RDP, and SSH as well as the traffic within the VPC.</p>
 <pre><code translate="no" class="language-bash">gcloud compute firewall-rules create milvus-network-allow-icmp \
     --project=milvus-testing-nonprod \
-    --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
+    --network=projects/milvus-testing-nonprod/global/networks/milvus-network \
     --description=<span class="hljs-string">&quot;Allows ICMP connections from any source to any instance on the network.&quot;</span> \
     --direction=INGRESS \
-    --priority=<span class="hljs-number">65534</span> \
-    --source-ranges=<span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">0</span> \
+    --priority=65534 \
+    --source-ranges=0.0.0.0/0 \
     --action=ALLOW \
     --rules=icmp
 
 gcloud compute firewall-rules create milvus-network-allow-internal \
     --project=milvus-testing-nonprod \
-    --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
+    --network=projects/milvus-testing-nonprod/global/networks/milvus-network \
     --description=<span class="hljs-string">&quot;Allows connections from any source in the network IP range to any instance on the network using all protocols.&quot;</span> \
     --direction=INGRESS \
-    --priority=<span class="hljs-number">65534</span> \
-    --source-ranges=<span class="hljs-number">10.128</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">9</span> \
-    --action=ALLOW --rules=<span class="hljs-built_in">all</span>
+    --priority=65534 \
+    --source-ranges=10.128.0.0/9 \
+    --action=ALLOW --rules=all
 
 gcloud compute firewall-rules create milvus-network-allow-rdp \
     --project=milvus-testing-nonprod \
-    --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
+    --network=projects/milvus-testing-nonprod/global/networks/milvus-network \
     --description=<span class="hljs-string">&quot;Allows RDP connections from any source to any instance on the network using port 3389.&quot;</span> \
     --direction=INGRESS \
-    --priority=<span class="hljs-number">65534</span> \
-    --source-ranges=<span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">0</span> \
+    --priority=65534 \
+    --source-ranges=0.0.0.0/0 \
     --action=ALLOW \
-    --rules=tcp:<span class="hljs-number">3389</span>
+    --rules=tcp:3389
 
 gcloud compute firewall-rules create milvus-network-allow-ssh \
     --project=milvus-testing-nonprod \
-    --network=projects/milvus-testing-nonprod/<span class="hljs-keyword">global</span>/networks/milvus-network \
+    --network=projects/milvus-testing-nonprod/global/networks/milvus-network \
     --description=<span class="hljs-string">&quot;Allows TCP connections from any source to any instance on the network using port 22.&quot;</span> \
     --direction=INGRESS \
-    --priority=<span class="hljs-number">65534</span> \
-    --source-ranges=<span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">0</span> \
+    --priority=65534 \
+    --source-ranges=0.0.0.0/0 \
     --action=ALLOW \
-    --rules=tcp:<span class="hljs-number">22</span>
+    --rules=tcp:22
 <button class="copy-code-btn"></button></code></pre>
 <p>Finally, you need to allow the incoming traffic to the Milvus instance we will create later at port <strong>19530</strong>.</p>
-<pre><code translate="no" class="language-bash">gcloud compute firewall-rules create allow-milvus-<span class="hljs-keyword">in</span> \
+<pre><code translate="no" class="language-bash">gcloud compute firewall-rules create allow-milvus-in \
     --project=milvus-testing-nonprod  \
     --description=<span class="hljs-string">&quot;Allow ingress traffic for Milvus on port 19530&quot;</span> \
-    --direction=<span class="hljs-variable constant_">INGRESS</span> \
-    --priority=<span class="hljs-number">1000</span> \
-    --network=projects/milvus-testing-nonprod/<span class="hljs-variable language_">global</span>/networks/milvus-network \
-    --action=<span class="hljs-variable constant_">ALLOW</span> \
-    --rules=<span class="hljs-attr">tcp</span>:<span class="hljs-number">19530</span> \
-    --source-ranges=<span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">0</span>
+    --direction=INGRESS \
+    --priority=1000 \
+    --network=projects/milvus-testing-nonprod/global/networks/milvus-network \
+    --action=ALLOW \
+    --rules=tcp:19530 \
+    --source-ranges=0.0.0.0/0
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Provision-a-Kubernetes-cluster" class="common-anchor-header">Provision a Kubernetes cluster<button data-href="#Provision-a-Kubernetes-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -147,18 +147,18 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
     --no-enable-basic-auth \
     --cluster-version <span class="hljs-string">&quot;1.28.10-gke.1075001&quot;</span> \
     --release-channel <span class="hljs-string">&quot;regular&quot;</span> \
-    --machine-<span class="hljs-built_in">type</span> <span class="hljs-string">&quot;c2-standard-4&quot;</span> \
-    --image-<span class="hljs-built_in">type</span> <span class="hljs-string">&quot;COS_CONTAINERD&quot;</span> \
-    --disk-<span class="hljs-built_in">type</span> <span class="hljs-string">&quot;pd-standard&quot;</span> \
+    --machine-type <span class="hljs-string">&quot;c2-standard-4&quot;</span> \
+    --image-type <span class="hljs-string">&quot;COS_CONTAINERD&quot;</span> \
+    --disk-type <span class="hljs-string">&quot;pd-standard&quot;</span> \
     --disk-size <span class="hljs-string">&quot;100&quot;</span> \
-    --<span class="hljs-built_in">max</span>-pods-per-node <span class="hljs-string">&quot;110&quot;</span> \
+    --max-pods-per-node <span class="hljs-string">&quot;110&quot;</span> \
     --num-nodes <span class="hljs-string">&quot;3&quot;</span> \
     --enable-ip-alias \
     --network <span class="hljs-string">&quot;projects/milvus-testing-nonprod/global/networks/milvus-network&quot;</span> \
     --subnetwork <span class="hljs-string">&quot;projects/milvus-testing-nonprod/regions/us-west1/subnetworks/milvus-network&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>It would take a couple of minutes for the Kubernetes cluster to go up. Once the cluster is ready, use the following command to fetch its credentials so that you can run <code translate="no">kubectl</code> commands in your terminal to communicate with the cluster remotely.</p>
-<pre><code translate="no" class="language-bash">gcloud container clusters <span class="hljs-keyword">get</span>-credentials milvus-cluster<span class="hljs-number">-1</span> --zone <span class="hljs-string">&quot;us-west1-a&quot;</span>
+<pre><code translate="no" class="language-bash">gcloud container clusters get-credentials milvus-cluster-1 --zone <span class="hljs-string">&quot;us-west1-a&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Use-Google-Cloud-Storage-GCS-as-external-object-storage" class="common-anchor-header">Use Google Cloud Storage (GCS) as external object storage<button data-href="#Use-Google-Cloud-Storage-GCS-as-external-object-storage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -178,7 +178,7 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
     </button></h2><ul>
 <li>Create bucket.</li>
 </ul>
-<pre><code translate="no" class="language-bash">gcloud storage buckets create <span class="hljs-attr">gs</span>:<span class="hljs-comment">//milvus-testing-nonprod --project=milvus-testing-nonprod --default-storage-class=STANDARD --location=us-west1 --uniform-bucket-level-access</span>
+<pre><code translate="no" class="language-bash">gcloud storage buckets create gs://milvus-testing-nonprod --project=milvus-testing-nonprod --default-storage-class=STANDARD --location=us-west1 --uniform-bucket-level-access
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Generate User Access Key and Secret Key, you should go to your project’s storage page. In the left sidebar of the dashboard, click Google Cloud Storage and then Settings. Select the INTEROPERABILITY tab. If you haven’t enabled it already, click on Interoperable Access. Then click CREATE A KEY button to create.</li>
@@ -192,25 +192,25 @@ gcloud compute firewall-rules create milvus-network-allow-ssh \
 <ul>
 <li>Add values.yaml</li>
 </ul>
-<pre><code translate="no" class="language-yaml">cluster:
-    enabled: <span class="hljs-literal">true</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">cluster:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
 
-service:
-    <span class="hljs-built_in">type</span>: LoadBalancer
+<span class="hljs-attr">service:</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">LoadBalancer</span>
 
-minio:
-    enabled: <span class="hljs-literal">false</span>
+<span class="hljs-attr">minio:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 
-externalS3:
-    enabled: <span class="hljs-literal">true</span>
-    host: storage.googleapis.com
-    port: 443
-    rootPath: milvus/my-release
-    bucketName: milvus-testing-nonprod
-    cloudProvider: gcp
-    useSSL: <span class="hljs-literal">true</span>
-    accessKey: <span class="hljs-string">&quot;&lt;access-key&gt;&quot;</span>
-    secretKey: <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span>
+<span class="hljs-attr">externalS3:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">host:</span> <span class="hljs-string">storage.googleapis.com</span>
+    <span class="hljs-attr">port:</span> <span class="hljs-number">443</span>
+    <span class="hljs-attr">rootPath:</span> <span class="hljs-string">milvus/my-release</span>
+    <span class="hljs-attr">bucketName:</span> <span class="hljs-string">milvus-testing-nonprod</span>
+    <span class="hljs-attr">cloudProvider:</span> <span class="hljs-string">gcp</span>
+    <span class="hljs-attr">useSSL:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">accessKey:</span> <span class="hljs-string">&quot;&lt;access-key&gt;&quot;</span>
+    <span class="hljs-attr">secretKey:</span> <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Deploy-Milvus" class="common-anchor-header">Deploy Milvus<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -251,7 +251,7 @@ helm install -f values.yaml my-release milvus/milvus
         ></path>
       </svg>
     </button></h2><p>Once all pods are running, run the following command to get the external IP address.</p>
-<pre><code translate="no" class="language-bash">kubectl <span class="hljs-keyword">get</span> services|grep my-release-milvus|grep LoadBalancer|awk <span class="hljs-string">&#x27;{print $4}&#x27;</span>
+<pre><code translate="no" class="language-bash">kubectl get services|grep my-release-milvus|grep LoadBalancer|awk <span class="hljs-string">&#x27;{print $4}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Hello-Milvus" class="common-anchor-header">Hello Milvus<button data-href="#Hello-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -39,71 +39,71 @@ summary: >-
       </svg>
     </button></h2><p>To start Milvus and Kafka without SASL/SSL, you disable authentication and encryption for both Kafka and Milvus. Use them only in a trusted environment.</p>
 <h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1. Start a Kafka service without SASL/SSL</h3><p>You can use the following <code translate="no">docker-compose.yaml</code> file to start a Kafka service without SASL/SSL:</p>
-<pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3&#x27;</span>
-services:
-  zookeeper:
-    image: wurstmeister/zookeeper:latest
-    container_name: zookeeper
-    ports:
-      - 2181:2181
-    restart: always
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">zookeeper:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">wurstmeister/zookeeper:latest</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">zookeeper</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-number">2181</span><span class="hljs-string">:2181</span>
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 
-  kafka:
-    image: wurstmeister/kafka:latest
-    container_name: kafka
-    ports:
-      - 9092:9092
-    environment:
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
-      - KAFKA_LISTENERS=PLAINTEXT://:9092
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    restart: always
+  <span class="hljs-attr">kafka:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">wurstmeister/kafka:latest</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">kafka</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-number">9092</span><span class="hljs-string">:9092</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_LISTENERS=PLAINTEXT://:9092</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/var/run/docker.sock:/var/run/docker.sock</span>
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then you can start the Kafka service with the following command:</p>
-<pre><code translate="no" class="language-shell">$ docker compose up -d
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Start Milvus and Connect to Kafka</h3><p>Once the Kafka service is started, you can start Milvus and connect to it. Use the following <code translate="no">docker-compose.yaml</code> file to start Milvus and connect to Kafka without SASL/SSL:</p>
-<pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3.5&#x27;</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
-services:
-  etcd:
-    ......
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">etcd:</span>
+    <span class="hljs-string">......</span>
     
-  minio:
-    ......
+  <span class="hljs-attr">minio:</span>
+    <span class="hljs-string">......</span>
       
-  standalone:
-    container_name: milvus-standalone
-    ......
-    volumes:
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/volumes/milvus:/var/lib/milvus
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/milvus.yaml:/milvus/configs/milvus.yaml
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
+    <span class="hljs-string">......</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Use the following command to download a Milvus configuration file template:</p>
-<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>And set the following parameters:</p>
-<pre><code translate="no" class="language-yaml">mq:
-  <span class="hljs-built_in">type</span>: kafka
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
+  <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
-kafka:
-  brokerList: <span class="hljs-string">&quot;127.0.0.1:9092&quot;</span>
-  saslUsername:
-  saslPassword:
-  saslMechanisms:
-  securityProtocol:
-  readTimeout: <span class="hljs-number">10</span> <span class="hljs-comment"># read message timeout in seconds</span>
-  ssl:
-    enabled: false <span class="hljs-comment"># Whether to support kafka secure connection mode</span>
-    tlsCert: 
-    tlsKey:
-    tlsCACert:
-    tlsKeyPassword:
+<span class="hljs-attr">kafka:</span>
+  <span class="hljs-attr">brokerList:</span> <span class="hljs-string">&quot;127.0.0.1:9092&quot;</span>
+  <span class="hljs-attr">saslUsername:</span>
+  <span class="hljs-attr">saslPassword:</span>
+  <span class="hljs-attr">saslMechanisms:</span>
+  <span class="hljs-attr">securityProtocol:</span>
+  <span class="hljs-attr">readTimeout:</span> <span class="hljs-number">10</span> <span class="hljs-comment"># read message timeout in seconds</span>
+  <span class="hljs-attr">ssl:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># Whether to support kafka secure connection mode</span>
+    <span class="hljs-attr">tlsCert:</span> 
+    <span class="hljs-attr">tlsKey:</span>
+    <span class="hljs-attr">tlsCACert:</span>
+    <span class="hljs-attr">tlsKeyPassword:</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then you can start Milvus with the following command:</p>
-<pre><code translate="no" class="language-shell">$ docker compose up -d
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">Connect Milus to Kafka with SASL/PLAIN Alone<button data-href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -122,93 +122,93 @@ kafka:
       </svg>
     </button></h2><p>To start Kafka with SASL/PLAIN authentication, you need to add the <code translate="no">kafka_server_jass.conf</code> file with proper settings.</p>
 <h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1. Start a Kafka service with SASL/PLAIN</h3><p>Put the following <code translate="no">docker-compose.yaml</code> file and <code translate="no">kafka_server_jaas.conf</code> file in the same directory.</p>
-<pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3&#x27;</span>
-services:
-  zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    container_name: zookeeper
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - 2181:2181
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">zookeeper:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">confluentinc/cp-zookeeper:latest</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">zookeeper</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">ZOOKEEPER_CLIENT_PORT:</span> <span class="hljs-number">2181</span>
+      <span class="hljs-attr">ZOOKEEPER_TICK_TIME:</span> <span class="hljs-number">2000</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-number">2181</span><span class="hljs-string">:2181</span>
 
-  kafka:
-    image: confluentinc/cp-kafka:latest
-    container_name: kafka
-    depends_on:
-      - zookeeper
-    ports:
-      - 9092:9092
-      - 9093:9093
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: <span class="hljs-string">&#x27;zookeeper:2181&#x27;</span>
-      ZOOKEEPER_SASL_ENABLED: <span class="hljs-string">&quot;false&quot;</span>
-      KAFKA_ADVERTISED_LISTENERS: SASL_PLAINTEXT://localhost:9093
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: SASL_PLAINTEXT:SASL_PLAINTEXT
-      KAFKA_SECURITY_INTER_BROKER_PROTOCOL: SASL_PLAINTEXT
-      KAFKA_SASL_MECHANISM_INTER_BROKER_PROTOCOL: PLAIN
-      KAFKA_SASL_ENABLED_MECHANISMS: PLAIN
-      KAFKA_CONFLUENT_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-      KAFKA_DEFAULT_REPLICATION_FACTOR: 1
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_OPTS: <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
-    volumes:
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf
+  <span class="hljs-attr">kafka:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">confluentinc/cp-kafka:latest</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">kafka</span>
+    <span class="hljs-attr">depends_on:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">zookeeper</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-number">9092</span><span class="hljs-string">:9092</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-number">9093</span><span class="hljs-string">:9093</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">KAFKA_BROKER_ID:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">KAFKA_ZOOKEEPER_CONNECT:</span> <span class="hljs-string">&#x27;zookeeper:2181&#x27;</span>
+      <span class="hljs-attr">ZOOKEEPER_SASL_ENABLED:</span> <span class="hljs-string">&quot;false&quot;</span>
+      <span class="hljs-attr">KAFKA_ADVERTISED_LISTENERS:</span> <span class="hljs-string">SASL_PLAINTEXT://localhost:9093</span>
+      <span class="hljs-attr">KAFKA_LISTENER_SECURITY_PROTOCOL_MAP:</span> <span class="hljs-string">SASL_PLAINTEXT:SASL_PLAINTEXT</span>
+      <span class="hljs-attr">KAFKA_SECURITY_INTER_BROKER_PROTOCOL:</span> <span class="hljs-string">SASL_PLAINTEXT</span>
+      <span class="hljs-attr">KAFKA_SASL_MECHANISM_INTER_BROKER_PROTOCOL:</span> <span class="hljs-string">PLAIN</span>
+      <span class="hljs-attr">KAFKA_SASL_ENABLED_MECHANISMS:</span> <span class="hljs-string">PLAIN</span>
+      <span class="hljs-attr">KAFKA_CONFLUENT_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">KAFKA_DEFAULT_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>In the <code translate="no">kafka_server_jass.conf</code> file, set the following parameters:</p>
-<pre><code translate="no" class="language-conf"><span class="hljs-title class_">KafkaServer</span> {
-    org.<span class="hljs-property">apache</span>.<span class="hljs-property">kafka</span>.<span class="hljs-property">common</span>.<span class="hljs-property">security</span>.<span class="hljs-property">plain</span>.<span class="hljs-property">PlainLoginModule</span> required
-    username=<span class="hljs-string">&quot;kafka&quot;</span>
-    password=<span class="hljs-string">&quot;pass123&quot;</span>
-    user_kafka=<span class="hljs-string">&quot;pass123&quot;</span>;
+<pre><code translate="no" class="language-conf">KafkaServer {
+    org.apache.kafka.common.security.plain.PlainLoginModule required
+    username=&quot;kafka&quot;
+    password=&quot;pass123&quot;
+    user_kafka=&quot;pass123&quot;;
 };
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>Then you can start the Kafka service with the following command:</p>
-<pre><code translate="no" class="language-shell">$ docker compose up -d
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Start Milvus and Connect to Kafka</h3><p>Once the Kafka service is started, you can start Milvus and connect to it. Use the following <code translate="no">docker-compose.yaml</code> file to start Milvus and connect to Kafka with SASL/PLAIN:</p>
-<pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3.5&#x27;</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
-services:
-  etcd:
-    ......
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">etcd:</span>
+    <span class="hljs-string">......</span>
     
-  minio:
-    ......
+  <span class="hljs-attr">minio:</span>
+    <span class="hljs-string">......</span>
       
-  standalone:
-    container_name: milvus-standalone
-    ......
-    volumes:
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/volumes/milvus:/var/lib/milvus
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/milvus.yaml:/milvus/configs/milvus.yaml
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
+    <span class="hljs-string">......</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Use the following command to download a Milvus configuration file template:</p>
-<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>And set the following parameters:</p>
-<pre><code translate="no" class="language-yaml">mq:
-  <span class="hljs-built_in">type</span>: kafka
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
+  <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
-kafka:
-  brokerList: <span class="hljs-string">&quot;127.0.0.1:9093&quot;</span>
-  saslUsername: kafka
-  saslPassword: pass123
-  saslMechanisms: PLAIN
-  securityProtocol: SASL_PLAINTEXT
-  readTimeout: <span class="hljs-number">10</span> <span class="hljs-comment"># read message timeout in seconds</span>
-  ssl:
-    enabled: false <span class="hljs-comment"># Whether to support kafka secure connection mode</span>
-    tlsCert: <span class="hljs-comment"># path to client&#x27;s public key</span>
-    tlsKey: <span class="hljs-comment"># path to client&#x27;s private key</span>
-    tlsCACert: <span class="hljs-comment"># file or directory path to CA certificate</span>
-    tlsKeyPassword: <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
+<span class="hljs-attr">kafka:</span>
+  <span class="hljs-attr">brokerList:</span> <span class="hljs-string">&quot;127.0.0.1:9093&quot;</span>
+  <span class="hljs-attr">saslUsername:</span> <span class="hljs-string">kafka</span>
+  <span class="hljs-attr">saslPassword:</span> <span class="hljs-string">pass123</span>
+  <span class="hljs-attr">saslMechanisms:</span> <span class="hljs-string">PLAIN</span>
+  <span class="hljs-attr">securityProtocol:</span> <span class="hljs-string">SASL_PLAINTEXT</span>
+  <span class="hljs-attr">readTimeout:</span> <span class="hljs-number">10</span> <span class="hljs-comment"># read message timeout in seconds</span>
+  <span class="hljs-attr">ssl:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># Whether to support kafka secure connection mode</span>
+    <span class="hljs-attr">tlsCert:</span> <span class="hljs-comment"># path to client&#x27;s public key</span>
+    <span class="hljs-attr">tlsKey:</span> <span class="hljs-comment"># path to client&#x27;s private key</span>
+    <span class="hljs-attr">tlsCACert:</span> <span class="hljs-comment"># file or directory path to CA certificate</span>
+    <span class="hljs-attr">tlsKeyPassword:</span> <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then you can start Milvus with the following command:</p>
-<pre><code translate="no" class="language-shell">$ docker compose up -d
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-Milvus-to-Kafka-with-SSL-Alone" class="common-anchor-header">Connect Milvus to Kafka with SSL Alone<button data-href="#Connect-Milvus-to-Kafka-with-SSL-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -397,19 +397,19 @@ EOF</span>
 <ul>
 <li><p>Generate CA certificate:</p>
 <p>The following assumes the CA certificate file is named <code translate="no">ca-cert</code> and the hostname of the broker is <code translate="no">kafka-ssl</code>:</p>
-<pre><code translate="no" class="language-shell">$ ./gen-ssl-certs.sh ca ca-cert kafka-ssl
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh ca ca-cert kafka-ssl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Generate server certificate and keystore:</p>
 <p>The following assumes the CA certificate file is named <code translate="no">ca-cert</code>, the prefix for all output files is <code translate="no">kafka_</code>, and the hostname of the broker is <code translate="no">kafka-ssl</code>:</p>
-<pre><code translate="no" class="language-shell">$ ./gen-ssl-certs.sh -k server ca-cert kafka_ kafka-ssl
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh -k server ca-cert kafka_ kafka-ssl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Generate client keys:</p>
 <p>The following assumes the CA certificate file is named <code translate="no">ca-cert</code>, the prefix for all output files is <code translate="no">kafka_</code>, and the client name is <code translate="no">kafka-client</code>:</p>
-<pre><code translate="no" class="language-shell">$ ./gen-ssl-certs.sh client ca-cert kafka_ kafka-client
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh client ca-cert kafka_ kafka-client</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <p>Once all necessary certificates are generated, you can see the following files in the <code translate="no">my_secrets</code> folder:</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">ls</span> -l my_secrets
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">ls</span> -l my_secrets</span>
 total 12
 -rw-rw-r-- 1 1.4K Feb 26 11:53 ca-cert
 -rw------- 1 1.9K Feb 26 11:53 ca-cert.key
@@ -425,88 +425,88 @@ total 12
 -rw-rw-r-- 1 1.4K Feb 26 11:54 kafka_server.truststore.jks
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Start-a-Kafka-service-with-SSL" class="common-anchor-header">2. Start a Kafka service with SSL</h3><p>Use the following <code translate="no">docker-compose.yaml</code> file to start a Kafka service with SSL:</p>
-<pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3&#x27;</span>
-services:
-  zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    container_name: zookeeper
-    hostname: zookeeper
-    ports:
-      - 2181:2181
-    environment:
-      ZOOKEEPER_SERVER_ID: 1
-      ZOOKEEPER_CLIENT_PORT: 2181
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">zookeeper:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">confluentinc/cp-zookeeper:latest</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">zookeeper</span>
+    <span class="hljs-attr">hostname:</span> <span class="hljs-string">zookeeper</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-number">2181</span><span class="hljs-string">:2181</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">ZOOKEEPER_SERVER_ID:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">ZOOKEEPER_CLIENT_PORT:</span> <span class="hljs-number">2181</span>
 
-  kafka-ssl:
-    image: confluentinc/cp-kafka:latest
-    container_name: kafka-ssl
-    hostname: kafka-ssl
-    ports:
-      - 9093:9093
-    depends_on:
-      - zookeeper
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: <span class="hljs-string">&#x27;zookeeper:2181&#x27;</span>
-      ZOOKEEPER_SASL_ENABLED: <span class="hljs-string">&quot;false&quot;</span>
-      KAFKA_ADVERTISED_LISTENERS: SSL://kafka-ssl:9093
-      KAFKA_SSL_KEYSTORE_FILENAME: kafka_server.keystore.jks
-      KAFKA_SSL_KEYSTORE_CREDENTIALS: cert_creds
-      KAFKA_SSL_KEY_CREDENTIALS: cert_creds
-      KAFKA_SSL_TRUSTSTORE_FILENAME: kafka_server.truststore.jks
-      KAFKA_SSL_TRUSTSTORE_CREDENTIALS: cert_creds
-      KAFKA_SSL_CLIENT_AUTH: <span class="hljs-string">&#x27;required&#x27;</span>
-      KAFKA_SECURITY_PROTOCOL: SSL
-      KAFKA_SECURITY_INTER_BROKER_PROTOCOL: SSL
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+  <span class="hljs-attr">kafka-ssl:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">confluentinc/cp-kafka:latest</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">kafka-ssl</span>
+    <span class="hljs-attr">hostname:</span> <span class="hljs-string">kafka-ssl</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-number">9093</span><span class="hljs-string">:9093</span>
+    <span class="hljs-attr">depends_on:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">zookeeper</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">KAFKA_BROKER_ID:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">KAFKA_ZOOKEEPER_CONNECT:</span> <span class="hljs-string">&#x27;zookeeper:2181&#x27;</span>
+      <span class="hljs-attr">ZOOKEEPER_SASL_ENABLED:</span> <span class="hljs-string">&quot;false&quot;</span>
+      <span class="hljs-attr">KAFKA_ADVERTISED_LISTENERS:</span> <span class="hljs-string">SSL://kafka-ssl:9093</span>
+      <span class="hljs-attr">KAFKA_SSL_KEYSTORE_FILENAME:</span> <span class="hljs-string">kafka_server.keystore.jks</span>
+      <span class="hljs-attr">KAFKA_SSL_KEYSTORE_CREDENTIALS:</span> <span class="hljs-string">cert_creds</span>
+      <span class="hljs-attr">KAFKA_SSL_KEY_CREDENTIALS:</span> <span class="hljs-string">cert_creds</span>
+      <span class="hljs-attr">KAFKA_SSL_TRUSTSTORE_FILENAME:</span> <span class="hljs-string">kafka_server.truststore.jks</span>
+      <span class="hljs-attr">KAFKA_SSL_TRUSTSTORE_CREDENTIALS:</span> <span class="hljs-string">cert_creds</span>
+      <span class="hljs-attr">KAFKA_SSL_CLIENT_AUTH:</span> <span class="hljs-string">&#x27;required&#x27;</span>
+      <span class="hljs-attr">KAFKA_SECURITY_PROTOCOL:</span> <span class="hljs-string">SSL</span>
+      <span class="hljs-attr">KAFKA_SECURITY_INTER_BROKER_PROTOCOL:</span> <span class="hljs-string">SSL</span>
+      <span class="hljs-attr">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
 
-    volumes:
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/my_secrets:/etc/kafka/secrets
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/etc/kafka/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then start the Kafka service with the following command:</p>
-<pre><code translate="no" class="language-shell">$ docker compose up -d
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3. Start Milvus and Connect to Kafka with SSL</h3><p>Once the Kafka service is started, you can start Milvus and connect to it. Use the following <code translate="no">docker-compose.yaml</code> file to start Milvus and connect to Kafka with SSL:</p>
-<pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3.5&#x27;</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
-services:
-  etcd:
-    ......
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">etcd:</span>
+    <span class="hljs-string">......</span>
     
-  minio:
-    ......
+  <span class="hljs-attr">minio:</span>
+    <span class="hljs-string">......</span>
       
-  standalone:
-    container_name: milvus-standalone
-    ......
-    volumes:
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/volumes/milvus:/var/lib/milvus
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/milvus.yaml:/milvus/configs/milvus.yaml
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/my_secrets:/milvus/secrets
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
+    <span class="hljs-string">......</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Use the following command to download a Milvus configuration file template:</p>
-<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>And set the following parameters:</p>
-<pre><code translate="no" class="language-yaml">mq:
-  <span class="hljs-built_in">type</span>: kafka
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
+  <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
-kafka:
-  brokerList: <span class="hljs-string">&quot;127.0.0.1:9093&quot;</span>
-  saslUsername: 
-  saslPassword: 
-  saslMechanisms: 
-  securityProtocol: SSL
-  readTimeout: <span class="hljs-number">10</span> <span class="hljs-comment"># read message timeout in seconds</span>
-  ssl:
-    enabled: true <span class="hljs-comment"># Whether to support kafka secure connection mode</span>
-    tlsCert: /milvus/secrets/kafka_client.pem <span class="hljs-comment"># path to client&#x27;s public key</span>
-    tlsKey: /milvus/secrets/kafka_client.key <span class="hljs-comment"># path to client&#x27;s private key</span>
-    tlsCACert: /milvus/secrets/ca-cert <span class="hljs-comment"># file or directory path to CA certificate</span>
-    tlsKeyPassword: abcdefgh <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
+<span class="hljs-attr">kafka:</span>
+  <span class="hljs-attr">brokerList:</span> <span class="hljs-string">&quot;127.0.0.1:9093&quot;</span>
+  <span class="hljs-attr">saslUsername:</span> 
+  <span class="hljs-attr">saslPassword:</span> 
+  <span class="hljs-attr">saslMechanisms:</span> 
+  <span class="hljs-attr">securityProtocol:</span> <span class="hljs-string">SSL</span>
+  <span class="hljs-attr">readTimeout:</span> <span class="hljs-number">10</span> <span class="hljs-comment"># read message timeout in seconds</span>
+  <span class="hljs-attr">ssl:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Whether to support kafka secure connection mode</span>
+    <span class="hljs-attr">tlsCert:</span> <span class="hljs-string">/milvus/secrets/kafka_client.pem</span> <span class="hljs-comment"># path to client&#x27;s public key</span>
+    <span class="hljs-attr">tlsKey:</span> <span class="hljs-string">/milvus/secrets/kafka_client.key</span> <span class="hljs-comment"># path to client&#x27;s private key</span>
+    <span class="hljs-attr">tlsCACert:</span> <span class="hljs-string">/milvus/secrets/ca-cert</span> <span class="hljs-comment"># file or directory path to CA certificate</span>
+    <span class="hljs-attr">tlsKeyPassword:</span> <span class="hljs-string">abcdefgh</span> <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then start Milvus with the following command:</p>
-<pre><code translate="no" class="language-shell">$ docker compose up -d
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">Connect Milvus to Kafka with SASL/PLAIN and SSL<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -526,94 +526,94 @@ kafka:
     </button></h2><p>To connect Milvus to Kafka with SASL/PLAIN and SSL, you need to repeat the steps in <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">Connect Milus to Kafka with SASL/PLAIN Alone</a> and <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">Connect Milus to Kafka with SSL Alone</a>.</p>
 <h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1. Start a Kafka service with SASL/PLAIN and SSL</h3><p>Use the <code translate="no">kafka_server_jass.conf</code> file mentioned in <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">Connect Milus to Kafka with SASL/PLAIN Alone</a> and the <code translate="no">my_secrets</code> folder generated in <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">Connect Milus to Kafka with SSL Alone</a> to start a Kafka service with SASL/PLAIN and SSL.</p>
 <p>The following <code translate="no">docker-compose.yaml</code> file can be used to start a Kafka service with SASL/PLAIN and SSL:</p>
-<pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3&#x27;</span>
-services:
-  zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    container_name: zookeeper
-    hostname: zookeeper
-    ports:
-      - 2181:2181
-    environment:
-      ZOOKEEPER_SERVER_ID: 1
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">zookeeper:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">confluentinc/cp-zookeeper:latest</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">zookeeper</span>
+    <span class="hljs-attr">hostname:</span> <span class="hljs-string">zookeeper</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-number">2181</span><span class="hljs-string">:2181</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">ZOOKEEPER_SERVER_ID:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">ZOOKEEPER_CLIENT_PORT:</span> <span class="hljs-number">2181</span>
+      <span class="hljs-attr">ZOOKEEPER_TICK_TIME:</span> <span class="hljs-number">2000</span>
 
 
-  kafka-ssl:
-    image: confluentinc/cp-kafka:latest
-    container_name: kafka-ssl
-    hostname: kafka-ssl
-    ports:
-      - 9093:9093
-    depends_on:
-      - zookeeper
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: <span class="hljs-string">&#x27;zookeeper:2181&#x27;</span>
-      ZOOKEEPER_SASL_ENABLED: <span class="hljs-string">&quot;false&quot;</span>
-      KAFKA_ADVERTISED_LISTENERS: SASL_SSL://kafka-ssl:9093
-      KAFKA_SSL_KEYSTORE_FILENAME: kafka_server.keystore.jks
-      KAFKA_SSL_KEYSTORE_CREDENTIALS: cert_creds
-      KAFKA_SSL_KEY_CREDENTIALS: cert_creds
-      KAFKA_SSL_TRUSTSTORE_FILENAME: kafka_server.truststore.jks
-      KAFKA_SSL_TRUSTSTORE_CREDENTIALS: cert_creds
-      KAFKA_SSL_CLIENT_AUTH: <span class="hljs-string">&#x27;required&#x27;</span>
-      KAFKA_SECURITY_PROTOCOL: SASL_SSL
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+  <span class="hljs-attr">kafka-ssl:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">confluentinc/cp-kafka:latest</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">kafka-ssl</span>
+    <span class="hljs-attr">hostname:</span> <span class="hljs-string">kafka-ssl</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-number">9093</span><span class="hljs-string">:9093</span>
+    <span class="hljs-attr">depends_on:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">zookeeper</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">KAFKA_BROKER_ID:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">KAFKA_ZOOKEEPER_CONNECT:</span> <span class="hljs-string">&#x27;zookeeper:2181&#x27;</span>
+      <span class="hljs-attr">ZOOKEEPER_SASL_ENABLED:</span> <span class="hljs-string">&quot;false&quot;</span>
+      <span class="hljs-attr">KAFKA_ADVERTISED_LISTENERS:</span> <span class="hljs-string">SASL_SSL://kafka-ssl:9093</span>
+      <span class="hljs-attr">KAFKA_SSL_KEYSTORE_FILENAME:</span> <span class="hljs-string">kafka_server.keystore.jks</span>
+      <span class="hljs-attr">KAFKA_SSL_KEYSTORE_CREDENTIALS:</span> <span class="hljs-string">cert_creds</span>
+      <span class="hljs-attr">KAFKA_SSL_KEY_CREDENTIALS:</span> <span class="hljs-string">cert_creds</span>
+      <span class="hljs-attr">KAFKA_SSL_TRUSTSTORE_FILENAME:</span> <span class="hljs-string">kafka_server.truststore.jks</span>
+      <span class="hljs-attr">KAFKA_SSL_TRUSTSTORE_CREDENTIALS:</span> <span class="hljs-string">cert_creds</span>
+      <span class="hljs-attr">KAFKA_SSL_CLIENT_AUTH:</span> <span class="hljs-string">&#x27;required&#x27;</span>
+      <span class="hljs-attr">KAFKA_SECURITY_PROTOCOL:</span> <span class="hljs-string">SASL_SSL</span>
+      <span class="hljs-attr">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
 
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: SASL_SSL:SASL_SSL
-      KAFKA_SECURITY_INTER_BROKER_PROTOCOL: SASL_SSL
-      KAFKA_SASL_MECHANISM_INTER_BROKER_PROTOCOL: PLAIN
-      KAFKA_SASL_ENABLED_MECHANISMS: PLAIN
-      KAFKA_CONFLUENT_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-      KAFKA_DEFAULT_REPLICATION_FACTOR: 1
-      KAFKA_OPTS: <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
+      <span class="hljs-attr">KAFKA_LISTENER_SECURITY_PROTOCOL_MAP:</span> <span class="hljs-string">SASL_SSL:SASL_SSL</span>
+      <span class="hljs-attr">KAFKA_SECURITY_INTER_BROKER_PROTOCOL:</span> <span class="hljs-string">SASL_SSL</span>
+      <span class="hljs-attr">KAFKA_SASL_MECHANISM_INTER_BROKER_PROTOCOL:</span> <span class="hljs-string">PLAIN</span>
+      <span class="hljs-attr">KAFKA_SASL_ENABLED_MECHANISMS:</span> <span class="hljs-string">PLAIN</span>
+      <span class="hljs-attr">KAFKA_CONFLUENT_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">KAFKA_DEFAULT_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
 
-    volumes:
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/my_secrets:/etc/kafka/secrets
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/etc/kafka/secrets</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then start the Kafka service with the following command:</p>
-<pre><code translate="no" class="language-shell">$ docker compose up -d
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. Start Milvus and Connect to Kafka with SASL/PLAIN and SSL</h3><p>Once the Kafka service is started, you can start Milvus and connect to it. Use the following <code translate="no">docker-compose.yaml</code> file to start Milvus and connect to Kafka with SASL/PLAIN and SSL:</p>
-<pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3.5&#x27;</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
-services:
-  etcd:
-    ......
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">etcd:</span>
+    <span class="hljs-string">......</span>
     
-  minio:
-    ......
+  <span class="hljs-attr">minio:</span>
+    <span class="hljs-string">......</span>
     
-  standalone:
-    container_name: milvus-standalone
-    ......
-    volumes:
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/volumes/milvus:/var/lib/milvus
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/milvus.yaml:/milvus/configs/milvus.yaml
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/my_secrets:/milvus/secrets
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
+    <span class="hljs-string">......</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Use the following command to download a Milvus configuration file template:</p>
-<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>And set the following parameters:</p>
-<pre><code translate="no" class="language-yaml">mq:
-  <span class="hljs-built_in">type</span>: kafka
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
+  <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
-kafka:
-  brokerList: <span class="hljs-string">&quot;127.0.0.1:9093&quot;</span>
-  saslUsername: kafka
-  saslPassword: pass123
-  saslMechanisms: PLAIN
-  securityProtocol: SASL_SSL
-  readTimeout: <span class="hljs-number">10</span> <span class="hljs-comment"># read message timeout in seconds</span>
-  ssl:
-    enabled: true <span class="hljs-comment"># Whether to support kafka secure connection mode</span>
-    tlsCert: /milvus/secrets/kafka_client.pem <span class="hljs-comment"># path to client&#x27;s public key</span>
-    tlsKey: /milvus/secrets/kafka_client.key <span class="hljs-comment"># path to client&#x27;s private key</span>
-    tlsCACert: /milvus/secrets/ca-cert <span class="hljs-comment"># file or directory path to CA certificate</span>
-    tlsKeyPassword: abcdefgh <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
+<span class="hljs-attr">kafka:</span>
+  <span class="hljs-attr">brokerList:</span> <span class="hljs-string">&quot;127.0.0.1:9093&quot;</span>
+  <span class="hljs-attr">saslUsername:</span> <span class="hljs-string">kafka</span>
+  <span class="hljs-attr">saslPassword:</span> <span class="hljs-string">pass123</span>
+  <span class="hljs-attr">saslMechanisms:</span> <span class="hljs-string">PLAIN</span>
+  <span class="hljs-attr">securityProtocol:</span> <span class="hljs-string">SASL_SSL</span>
+  <span class="hljs-attr">readTimeout:</span> <span class="hljs-number">10</span> <span class="hljs-comment"># read message timeout in seconds</span>
+  <span class="hljs-attr">ssl:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Whether to support kafka secure connection mode</span>
+    <span class="hljs-attr">tlsCert:</span> <span class="hljs-string">/milvus/secrets/kafka_client.pem</span> <span class="hljs-comment"># path to client&#x27;s public key</span>
+    <span class="hljs-attr">tlsKey:</span> <span class="hljs-string">/milvus/secrets/kafka_client.key</span> <span class="hljs-comment"># path to client&#x27;s private key</span>
+    <span class="hljs-attr">tlsCACert:</span> <span class="hljs-string">/milvus/secrets/ca-cert</span> <span class="hljs-comment"># file or directory path to CA certificate</span>
+    <span class="hljs-attr">tlsKeyPassword:</span> <span class="hljs-string">abcdefgh</span> <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>

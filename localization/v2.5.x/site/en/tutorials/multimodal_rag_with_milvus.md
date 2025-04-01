@@ -39,25 +39,25 @@ title: Multimodal RAG with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Install Dependencies</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai datasets opencv-python timm einops ftfy peft tqdm
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Install Dependencies</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai datasets opencv-python timm einops ftfy peft tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">$ git <span class="hljs-built_in">clone</span> https://github.com/FlagOpen/FlagEmbedding.git
-$ pip install -e FlagEmbedding
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/FlagOpen/FlagEmbedding.git</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -e FlagEmbedding</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
 </div>
 <h3 id="Download-Data" class="common-anchor-header">Download Data</h3><p>The following command will download the example data and extract to a local folder “./images_folder” including:</p>
 <ul>
-<li><p><strong>images</strong>: A subset of <a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> containing approximately 900 images from the categories &quot;Appliance&quot;, &quot;Cell_Phones_and_Accessories&quot;, and &quot;Electronics&quot;.</p></li>
+<li><p><strong>images</strong>: A subset of <a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> containing approximately 900 images from the categories "Appliance", "Cell_Phones_and_Accessories", and "Electronics".</p></li>
 <li><p><strong>leopard.jpg</strong>: An example query image.</p></li>
 </ul>
-<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
-$ tar -xzf amazon_reviews_2023_subset.<span class="hljs-property">tar</span>.<span class="hljs-property">gz</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">tar -xzf amazon_reviews_2023_subset.tar.gz</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Load-Embedding-Model" class="common-anchor-header">Load Embedding Model</h3><p>We will use the Visualized BGE model “bge-visualized-base-en-v1.5” to generate embeddings for both images and text.</p>
 <p><strong>1. Download weight</strong></p>
-<pre><code translate="no" class="language-shell">$ wget https://huggingface.co/BAAI/bge-visualized/resolve/main/Visualized_base_en_v1.5.pth
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://huggingface.co/BAAI/bge-visualized/resolve/main/Visualized_base_en_v1.5.pth</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>2. Build encoder</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch

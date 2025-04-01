@@ -224,41 +224,41 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/search&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;quick_setup&quot;,​
     &quot;data&quot;: [​
         [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
     ],​
     &quot;annsField&quot;: &quot;vector&quot;,​
     &quot;limit&quot;: 3​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: [​</span>
-<span class="hljs-comment">#         {​</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.08821295201778412,​</span>
-<span class="hljs-comment">#             &quot;id&quot;: 551​</span>
-<span class="hljs-comment">#         },​</span>
-<span class="hljs-comment">#         {​</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.0800950899720192,​</span>
-<span class="hljs-comment">#             &quot;id&quot;: 296​</span>
-<span class="hljs-comment">#         },​</span>
-<span class="hljs-comment">#         {​</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.07794742286205292,​</span>
-<span class="hljs-comment">#             &quot;id&quot;: 43​</span>
-<span class="hljs-comment">#         }​</span>
-<span class="hljs-comment">#     ]​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: [​
+#         {​
+#             &quot;distance&quot;: 0.08821295201778412,​
+#             &quot;id&quot;: 551​
+#         },​
+#         {​
+#             &quot;distance&quot;: 0.0800950899720192,​
+#             &quot;id&quot;: 296​
+#         },​
+#         {​
+#             &quot;distance&quot;: 0.07794742286205292,​
+#             &quot;id&quot;: 43​
+#         }​
+#     ]​
+# }​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>Milvus ranks the search results by their similarity scores to the query vector in descending order. The similarity score is also termed the distance to the query vector, and its value ranges vary with the metric types in use.​</p>
 <p>The following table lists the applicable metric types and the corresponding distance ranges.​</p>
 <table data-block-token="CTYBd8RSbogpjGxSmRCc937Qnud"><thead><tr><th data-block-token="Mk6idXTyjokI5FxIHgzc1FmhnLf" colspan="1" rowspan="1"><p data-block-token="DT2rdNtuYoJZPwxsZMCc9zTDnZf">Metric Type​</p>
@@ -401,17 +401,17 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 7. Search with multiple vectors​</span>
 <span class="hljs-keyword">const</span> query_vectors = [​
-    [<span class="hljs-meta">0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592</span>], ​
-    [<span class="hljs-meta">0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104</span>]​
+    [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], ​
+    [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>]​
 ]​
 ​
-res = <span class="hljs-keyword">await</span> client.search({​
-    collection_name: <span class="hljs-string">&quot;quick_setup&quot;</span>,​
-    vectors: query_vectors,​
-    limit: <span class="hljs-number">5</span>,​
+res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({​
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,​
+    <span class="hljs-attr">vectors</span>: query_vectors,​
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,​
 })​
 ​
-console.log(res.results)​
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)​
 ​
 <span class="hljs-comment">// Output​</span>
 <span class="hljs-comment">// ​</span>
@@ -429,14 +429,14 @@ console.log(res.results)​
 <span class="hljs-comment">// ]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/search&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;quick_setup&quot;,​
     &quot;data&quot;: [​
         [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],​
@@ -444,43 +444,43 @@ curl --request POST \​
     ],​
     &quot;annsField&quot;: &quot;vector&quot;,​
     &quot;limit&quot;: 3​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: [​</span>
-<span class="hljs-comment">#         [​</span>
-<span class="hljs-comment">#           {​</span>
-<span class="hljs-comment">#               &quot;distance&quot;: 0.08821295201778412,​</span>
-<span class="hljs-comment">#               &quot;id&quot;: 551​</span>
-<span class="hljs-comment">#           },​</span>
-<span class="hljs-comment">#           {​</span>
-<span class="hljs-comment">#               &quot;distance&quot;: 0.0800950899720192,​</span>
-<span class="hljs-comment">#               &quot;id&quot;: 296​</span>
-<span class="hljs-comment">#           },​</span>
-<span class="hljs-comment">#           {​</span>
-<span class="hljs-comment">#               &quot;distance&quot;: 0.07794742286205292,​</span>
-<span class="hljs-comment">#               &quot;id&quot;: 43​</span>
-<span class="hljs-comment">#           }​</span>
-<span class="hljs-comment">#         ],​</span>
-<span class="hljs-comment">#         [​</span>
-<span class="hljs-comment">#           {​</span>
-<span class="hljs-comment">#               &quot;distance&quot;: 0.04431751370429993,​</span>
-<span class="hljs-comment">#               &quot;id&quot;: 730​</span>
-<span class="hljs-comment">#           },​</span>
-<span class="hljs-comment">#           {​</span>
-<span class="hljs-comment">#               &quot;distance&quot;: 0.04231833666563034,​</span>
-<span class="hljs-comment">#               &quot;id&quot;: 333​</span>
-<span class="hljs-comment">#           },​</span>
-<span class="hljs-comment">#           {​</span>
-<span class="hljs-comment">#               &quot;distance&quot;: 0.04221535101532936,​</span>
-<span class="hljs-comment">#               &quot;id&quot;: 232​</span>
-<span class="hljs-comment">#           }​</span>
-<span class="hljs-comment">#        ]​</span>
-<span class="hljs-comment">#     ]​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: [​
+#         [​
+#           {​
+#               &quot;distance&quot;: 0.08821295201778412,​
+#               &quot;id&quot;: 551​
+#           },​
+#           {​
+#               &quot;distance&quot;: 0.0800950899720192,​
+#               &quot;id&quot;: 296​
+#           },​
+#           {​
+#               &quot;distance&quot;: 0.07794742286205292,​
+#               &quot;id&quot;: 43​
+#           }​
+#         ],​
+#         [​
+#           {​
+#               &quot;distance&quot;: 0.04431751370429993,​
+#               &quot;id&quot;: 730​
+#           },​
+#           {​
+#               &quot;distance&quot;: 0.04231833666563034,​
+#               &quot;id&quot;: 333​
+#           },​
+#           {​
+#               &quot;distance&quot;: 0.04221535101532936,​
+#               &quot;id&quot;: 232​
+#           }​
+#        ]​
+#     ]​
+# }​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="ANN-Search-in-Partition​" class="common-anchor-header">ANN Search in Partition​<button data-href="#ANN-Search-in-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -506,13 +506,13 @@ curl --request POST \​
   <a href="#curl">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search​</span>
-query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
+query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]​
 res = client.search(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     <span class="hljs-comment"># highlight-next-line​</span>
     partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],​
     data=[query_vector],​
-    <span class="hljs-built_in">limit</span>=3,​
+    limit=<span class="hljs-number">3</span>,​
 )​
 ​
 <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res:​
@@ -590,14 +590,14 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/search&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;quick_setup&quot;,​
     &quot;partitionNames&quot;: [&quot;partitionA&quot;],​
     &quot;data&quot;: [​
@@ -605,27 +605,27 @@ curl --request POST \​
     ],​
     &quot;annsField&quot;: &quot;vector&quot;,​
     &quot;limit&quot;: 3​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: [​</span>
-<span class="hljs-comment">#         {​</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.08821295201778412,​</span>
-<span class="hljs-comment">#             &quot;id&quot;: 551​</span>
-<span class="hljs-comment">#         },​</span>
-<span class="hljs-comment">#         {​</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.0800950899720192,​</span>
-<span class="hljs-comment">#             &quot;id&quot;: 296​</span>
-<span class="hljs-comment">#         },​</span>
-<span class="hljs-comment">#         {​</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.07794742286205292,​</span>
-<span class="hljs-comment">#             &quot;id&quot;: 43​</span>
-<span class="hljs-comment">#         }​</span>
-<span class="hljs-comment">#     ]​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: [​
+#         {​
+#             &quot;distance&quot;: 0.08821295201778412,​
+#             &quot;id&quot;: 551​
+#         },​
+#         {​
+#             &quot;distance&quot;: 0.0800950899720192,​
+#             &quot;id&quot;: 296​
+#         },​
+#         {​
+#             &quot;distance&quot;: 0.07794742286205292,​
+#             &quot;id&quot;: 43​
+#         }​
+#     ]​
+# }​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Use-Output-Fields​" class="common-anchor-header">Use Output Fields​<button data-href="#Use-Output-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -650,12 +650,12 @@ curl --request POST \​
   <a href="#curl">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search​</span>
-query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],​
+query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],​
 ​
 res = client.search(​
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,​
     data=[query_vector],​
-    <span class="hljs-built_in">limit</span>=3, <span class="hljs-comment"># The number of results to return​</span>
+    limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># The number of results to return​</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}，​
     <span class="hljs-comment"># highlight-next-line​</span>
     output_fields=[<span class="hljs-string">&quot;color&quot;</span>]​
@@ -719,34 +719,34 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <span class="hljs-comment">// SearchResp.SearchResult(entity={color=white_5015}, score=0.866088, id=7)​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">// <span class="hljs-number">4.</span> Single vector search​
-var query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],​
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 4. Single vector search​</span>
+<span class="hljs-keyword">var</span> query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],​
 ​
-res = <span class="hljs-keyword">await</span> client.search({​
-    collection_name: <span class="hljs-string">&quot;quick_setup&quot;</span>,​
-    data: query_vector,​
-    limit: <span class="hljs-number">3</span>, // The number of results to <span class="hljs-keyword">return</span>​
-    // highlight-<span class="hljs-built_in">next</span>-line​
-    output_fields: [<span class="hljs-string">&quot;color&quot;</span>]​
+res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({​
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;quick_setup&quot;</span>,​
+    <span class="hljs-attr">data</span>: query_vector,​
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>, <span class="hljs-comment">// The number of results to return​</span>
+    <span class="hljs-comment">// highlight-next-line​</span>
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;color&quot;</span>]​
 })​
 ​
-console.log(res.results)​
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)​
 ​
-// [​
-//   { score: <span class="hljs-number">0.08821295201778412</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;551&#x27;</span>, entity: {<span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;orange_6781&quot;</span>}},​
-//   { score: <span class="hljs-number">0.0800950899720192</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;296&#x27;</span> entity: {<span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_4794&quot;</span>}},​
-//   { score: <span class="hljs-number">0.07794742286205292</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;43&#x27;</span> entity: {<span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;grey_8510&quot;</span>}}​
-// ]​
+<span class="hljs-comment">// [​</span>
+<span class="hljs-comment">//   { score: 0.08821295201778412, id: &#x27;551&#x27;, entity: {&quot;color&quot;: &quot;orange_6781&quot;}},​</span>
+<span class="hljs-comment">//   { score: 0.0800950899720192, id: &#x27;296&#x27; entity: {&quot;color&quot;: &quot;red_4794&quot;}},​</span>
+<span class="hljs-comment">//   { score: 0.07794742286205292, id: &#x27;43&#x27; entity: {&quot;color&quot;: &quot;grey_8510&quot;}}​</span>
+<span class="hljs-comment">// ]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/search&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;quick_setup&quot;,​
     &quot;data&quot;: [​
         [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
@@ -754,30 +754,30 @@ curl --request POST \​
     &quot;annsField&quot;: &quot;vector&quot;,​
     &quot;limit&quot;: 3,​
     &quot;outputFields&quot;: [&quot;color&quot;]​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: [​</span>
-<span class="hljs-comment">#         {​</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.08821295201778412,​</span>
-<span class="hljs-comment">#             &quot;id&quot;: 551,​</span>
-<span class="hljs-comment">#             &quot;color&quot;: &quot;orange_6781&quot;​</span>
-<span class="hljs-comment">#         },​</span>
-<span class="hljs-comment">#         {​</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.0800950899720192,​</span>
-<span class="hljs-comment">#             &quot;id&quot;: 296,​</span>
-<span class="hljs-comment">#             &quot;color&quot;: &quot;red_4794&quot;​</span>
-<span class="hljs-comment">#         },​</span>
-<span class="hljs-comment">#         {​</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.07794742286205292,​</span>
-<span class="hljs-comment">#             &quot;id&quot;: 43​</span>
-<span class="hljs-comment">#             &quot;color&quot;: &quot;grey_8510&quot;​</span>
-<span class="hljs-comment">#         }​</span>
-<span class="hljs-comment">#     ]​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: [​
+#         {​
+#             &quot;distance&quot;: 0.08821295201778412,​
+#             &quot;id&quot;: 551,​
+#             &quot;color&quot;: &quot;orange_6781&quot;​
+#         },​
+#         {​
+#             &quot;distance&quot;: 0.0800950899720192,​
+#             &quot;id&quot;: 296,​
+#             &quot;color&quot;: &quot;red_4794&quot;​
+#         },​
+#         {​
+#             &quot;distance&quot;: 0.07794742286205292,​
+#             &quot;id&quot;: 43​
+#             &quot;color&quot;: &quot;grey_8510&quot;​
+#         }​
+#     ]​
+# }​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Use-Limit-and-Offset​" class="common-anchor-header">Use Limit and Offset​<button data-href="#Use-Limit-and-Offset​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -876,14 +876,14 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 })​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/search&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;quick_setup&quot;,​
     &quot;data&quot;: [​
         [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
@@ -891,9 +891,9 @@ curl --request POST \​
     &quot;annsField&quot;: &quot;vector&quot;,​
     &quot;limit&quot;: 3,​
     &quot;offset&quot;: 10​
-}&#x27;</span>​
+}'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Enhancing-ANN-Search​" class="common-anchor-header">Enhancing ANN Search​<button data-href="#Enhancing-ANN-Search​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

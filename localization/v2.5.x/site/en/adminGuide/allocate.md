@@ -68,30 +68,30 @@ Using Helm to upgrade resources will cause the running pods to perform rolling u
 <a href="#standalone">Milvus standalone</a> <a href="#cluster">Milvus cluster</a>
 </div>
 <div class="table-wrapper filter-standalone" markdown="block">
-<pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --<span class="hljs-built_in">set</span> standalone.resources.limits.cpu=2 --<span class="hljs-built_in">set</span> standalone.resources.limits.memory=4Gi --<span class="hljs-built_in">set</span> standalone.resources.requests.cpu=0.1 --<span class="hljs-built_in">set</span> standalone.resources.requests.memory=128Mi
+<pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set standalone.resources.limits.cpu=2 --set standalone.resources.limits.memory=4Gi --set standalone.resources.requests.cpu=0.1 --set standalone.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="table-wrapper filter-cluster" markdown="block">
-<pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --<span class="hljs-built_in">set</span> dataNode.resources.limits.cpu=2 --<span class="hljs-built_in">set</span> dataNode.resources.limits.memory=4Gi --<span class="hljs-built_in">set</span> dataNode.resources.requests.cpu=0.1 --<span class="hljs-built_in">set</span> dataNode.resources.requests.memory=128Mi
+<pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.limits.cpu=2 --set dataNode.resources.limits.memory=4Gi --set dataNode.resources.requests.cpu=0.1 --set dataNode.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <h3 id="Allocate-resources-by-setting-configuration-file" class="common-anchor-header">Allocate resources by setting configuration file</h3><p>You can also allocate CPU and memory resources by specifying the parameters <code translate="no">resources.requests</code> and <code translate="no">resources.limits</code> in the <code translate="no">resources.yaml</code> file.</p>
-<pre><code translate="no" class="language-Yaml"><span class="hljs-attr">dataNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">limits</span>:
-      <span class="hljs-attr">cpu</span>: <span class="hljs-string">&quot;4&quot;</span>
-      <span class="hljs-attr">memory</span>: <span class="hljs-string">&quot;16Gi&quot;</span>
-    <span class="hljs-attr">requests</span>:
-      <span class="hljs-attr">cpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-      <span class="hljs-attr">memory</span>: <span class="hljs-string">&quot;4Gi&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">limits</span>:
-      <span class="hljs-attr">cpu</span>: <span class="hljs-string">&quot;4&quot;</span>
-      <span class="hljs-attr">memory</span>: <span class="hljs-string">&quot;16Gi&quot;</span>
-    <span class="hljs-attr">requests</span>:
-      <span class="hljs-attr">cpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-      <span class="hljs-attr">memory</span>: <span class="hljs-string">&quot;4Gi&quot;</span>
+<pre><code translate="no" class="language-Yaml"><span class="hljs-attr">dataNode:</span>
+  <span class="hljs-attr">resources:</span>
+    <span class="hljs-attr">limits:</span>
+      <span class="hljs-attr">cpu:</span> <span class="hljs-string">&quot;4&quot;</span>
+      <span class="hljs-attr">memory:</span> <span class="hljs-string">&quot;16Gi&quot;</span>
+    <span class="hljs-attr">requests:</span>
+      <span class="hljs-attr">cpu:</span> <span class="hljs-string">&quot;1&quot;</span>
+      <span class="hljs-attr">memory:</span> <span class="hljs-string">&quot;4Gi&quot;</span>
+<span class="hljs-attr">queryNode:</span>
+  <span class="hljs-attr">resources:</span>
+    <span class="hljs-attr">limits:</span>
+      <span class="hljs-attr">cpu:</span> <span class="hljs-string">&quot;4&quot;</span>
+      <span class="hljs-attr">memory:</span> <span class="hljs-string">&quot;16Gi&quot;</span>
+    <span class="hljs-attr">requests:</span>
+      <span class="hljs-attr">cpu:</span> <span class="hljs-string">&quot;1&quot;</span>
+      <span class="hljs-attr">memory:</span> <span class="hljs-string">&quot;4Gi&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="3-Apply-configurations" class="common-anchor-header">3. Apply configurations<button data-href="#3-Apply-configurations" class="anchor-icon" translate="no">
       <svg translate="no"

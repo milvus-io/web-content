@@ -14,7 +14,7 @@ title: Build RAG with Milvus and Cognee
 <h3 id="Build-RAG-with-Milvus-and-Cognee" class="common-anchor-header">Build RAG with Milvus and Cognee</h3><p><a href="https://www.cognee.ai">Cognee</a> is a developer-first platform that streamlines AI application development with scalable, modular ECL (Extract, Cognify, Load) pipelines. By integrating seamlessly with Milvus,  Cognee enables efficient connection and retrieval of conversations, documents, and transcriptions, reducing hallucinations and optimizing operational costs.</p>
 <p>With strong support for vector stores like Milvus, graph databases, and LLMs, Cognee provides a flexible and customizable framework for building retrieval-augmented generation (RAG) systems. Its production-ready architecture ensures improved accuracy and efficiency for AI-powered applications.</p>
 <p>In this tutorial, we will show you how to build a RAG (Retrieval-Augmented Generation) pipeline with Milvus and Cognee.</p>
-<pre><code translate="no" class="language-shell">$ pip install pymilvus git+<span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/topoteretes/cognee.git</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus git+https://github.com/topoteretes/cognee.git</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
 <p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
@@ -25,11 +25,11 @@ title: Build RAG with Milvus and Cognee
 
 <span class="hljs-keyword">import</span> cognee
 
-cognee.<span class="hljs-property">config</span>.<span class="hljs-title function_">set_llm_api_key</span>(<span class="hljs-string">&quot;YOUR_OPENAI_API_KEY&quot;</span>)
+cognee.config.set_llm_api_key(<span class="hljs-string">&quot;YOUR_OPENAI_API_KEY&quot;</span>)
 
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;VECTOR_DB_PROVIDER&quot;</span>] = <span class="hljs-string">&quot;milvus&quot;</span>
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;VECTOR_DB_URL&quot;</span>] = <span class="hljs-string">&quot;./milvus.db&quot;</span>
+os.environ[<span class="hljs-string">&quot;VECTOR_DB_PROVIDER&quot;</span>] = <span class="hljs-string">&quot;milvus&quot;</span>
+os.environ[<span class="hljs-string">&quot;VECTOR_DB_URL&quot;</span>] = <span class="hljs-string">&quot;./milvus.db&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>As for the environment variables <code translate="no">VECTOR_DB_URL</code> and <code translate="no">VECTOR_DB_KEY</code>:</p>
@@ -41,10 +41,10 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;VE
 <p></a></p>
 <h3 id="Prepare-the-data" class="common-anchor-header">Prepare the data</h3><p>We use the FAQ pages from the <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus Documentation 2.4.x</a> as the private knowledge in our RAG, which is a good data source for a simple RAG pipeline.</p>
 <p>Download the zip file and extract documents to the folder <code translate="no">milvus_docs</code>.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
-$ unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>We load all markdown files from the folder <code translate="no">milvus_docs/en/faq</code>. For each document, we just simply use &quot;# &quot; to separate the content in the file, which can roughly separate the content of each main part of the markdown file.</p>
+<p>We load all markdown files from the folder <code translate="no">milvus_docs/en/faq</code>. For each document, we just simply use "# " to separate the content in the file, which can roughly separate the content of each main part of the markdown file.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -93,10 +93,10 @@ search_results = <span class="hljs-keyword">await</span> cognee.search(SearchTyp
 </code></pre>
 <p>This query searches the knowledge graph for a summary related to the query text, and the most related candidate is printed.</p>
 <h3 id="Querying-for-Chunks" class="common-anchor-header">Querying for Chunks</h3><p>Summaries offer high-level insights, but for more granular details, we can query specific chunks of data directly from the processed dataset. These chunks are derived from the original data that was added and analyzed during the knowledge graph creation.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> cognee.<span class="hljs-property">api</span>.<span class="hljs-property">v1</span>.<span class="hljs-property">search</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">SearchType</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> cognee.api.v1.search <span class="hljs-keyword">import</span> SearchType
 
 query_text = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
-search_results = <span class="hljs-keyword">await</span> cognee.<span class="hljs-title function_">search</span>(<span class="hljs-title class_">SearchType</span>.<span class="hljs-property">CHUNKS</span>, query_text=query_text)
+search_results = <span class="hljs-keyword">await</span> cognee.search(SearchType.CHUNKS, query_text=query_text)
 <button class="copy-code-btn"></button></code></pre>
 <p>Let’s format and display it for better readability!</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_and_print</span>(<span class="hljs-params">data</span>):
@@ -141,19 +141,19 @@ text = <span class="hljs-string">&quot;&quot;&quot;
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Querying-for-Insights" class="common-anchor-header">Querying for Insights</h3><p>By focusing on this smaller dataset, we can now clearly analyze the relationships and structure within the knowledge graph.</p>
 <pre><code translate="no" class="language-python">query_text = <span class="hljs-string">&quot;Tell me about NLP&quot;</span>
-search_results = await cognee.search(SearchType.INSIGHTS, query_text=query_text)
+search_results = <span class="hljs-keyword">await</span> cognee.search(SearchType.INSIGHTS, query_text=query_text)
 
-<span class="hljs-keyword">for</span> result_text in search_results:
+<span class="hljs-keyword">for</span> result_text <span class="hljs-keyword">in</span> search_results:
     <span class="hljs-built_in">print</span>(result_text)
 
-# Example output:
-# ({<span class="hljs-string">&#x27;id&#x27;</span>: UUID(<span class="hljs-string">&#x27;bc338a39-64d6-549a-acec-da60846dd90d&#x27;</span>), <span class="hljs-string">&#x27;updated_at&#x27;</span>: datetime.datetime(<span class="hljs-number">2024</span>, <span class="hljs-number">11</span>, <span class="hljs-number">21</span>, <span class="hljs-number">12</span>, <span class="hljs-number">23</span>, <span class="hljs-number">1</span>, <span class="hljs-number">211808</span>, tzinfo=datetime.timezone.utc), <span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;natural language processing&#x27;</span>, <span class="hljs-string">&#x27;description&#x27;</span>: <span class="hljs-string">&#x27;An interdisciplinary subfield of computer science and information retrieval.&#x27;</span>}, {<span class="hljs-string">&#x27;relationship_name&#x27;</span>: <span class="hljs-string">&#x27;is_a_subfield_of&#x27;</span>, <span class="hljs-string">&#x27;source_node_id&#x27;</span>: UUID(<span class="hljs-string">&#x27;bc338a39-64d6-549a-acec-da60846dd90d&#x27;</span>), <span class="hljs-string">&#x27;target_node_id&#x27;</span>: UUID(<span class="hljs-string">&#x27;6218dbab-eb6a-5759-a864-b3419755ffe0&#x27;</span>), <span class="hljs-string">&#x27;updated_at&#x27;</span>: datetime.datetime(<span class="hljs-number">2024</span>, <span class="hljs-number">11</span>, <span class="hljs-number">21</span>, <span class="hljs-number">12</span>, <span class="hljs-number">23</span>, <span class="hljs-number">15</span>, <span class="hljs-number">473137</span>, tzinfo=datetime.timezone.utc)}, {<span class="hljs-string">&#x27;id&#x27;</span>: UUID(<span class="hljs-string">&#x27;6218dbab-eb6a-5759-a864-b3419755ffe0&#x27;</span>), <span class="hljs-string">&#x27;updated_at&#x27;</span>: datetime.datetime(<span class="hljs-number">2024</span>, <span class="hljs-number">11</span>, <span class="hljs-number">21</span>, <span class="hljs-number">12</span>, <span class="hljs-number">23</span>, <span class="hljs-number">1</span>, <span class="hljs-number">211808</span>, tzinfo=datetime.timezone.utc), <span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;computer science&#x27;</span>, <span class="hljs-string">&#x27;description&#x27;</span>: <span class="hljs-string">&#x27;The study of computation and information processing.&#x27;</span>})
-# (...)
-#
-# It represents nodes and relationships in the knowledge graph:
-# - The first element is the source node (e.g., <span class="hljs-string">&#x27;natural language processing&#x27;</span>).
-# - The second element is the relationship between nodes (e.g., <span class="hljs-string">&#x27;is_a_subfield_of&#x27;</span>).
-# - The third element is the target node (e.g., <span class="hljs-string">&#x27;computer science&#x27;</span>).
+<span class="hljs-comment"># Example output:</span>
+<span class="hljs-comment"># ({&#x27;id&#x27;: UUID(&#x27;bc338a39-64d6-549a-acec-da60846dd90d&#x27;), &#x27;updated_at&#x27;: datetime.datetime(2024, 11, 21, 12, 23, 1, 211808, tzinfo=datetime.timezone.utc), &#x27;name&#x27;: &#x27;natural language processing&#x27;, &#x27;description&#x27;: &#x27;An interdisciplinary subfield of computer science and information retrieval.&#x27;}, {&#x27;relationship_name&#x27;: &#x27;is_a_subfield_of&#x27;, &#x27;source_node_id&#x27;: UUID(&#x27;bc338a39-64d6-549a-acec-da60846dd90d&#x27;), &#x27;target_node_id&#x27;: UUID(&#x27;6218dbab-eb6a-5759-a864-b3419755ffe0&#x27;), &#x27;updated_at&#x27;: datetime.datetime(2024, 11, 21, 12, 23, 15, 473137, tzinfo=datetime.timezone.utc)}, {&#x27;id&#x27;: UUID(&#x27;6218dbab-eb6a-5759-a864-b3419755ffe0&#x27;), &#x27;updated_at&#x27;: datetime.datetime(2024, 11, 21, 12, 23, 1, 211808, tzinfo=datetime.timezone.utc), &#x27;name&#x27;: &#x27;computer science&#x27;, &#x27;description&#x27;: &#x27;The study of computation and information processing.&#x27;})</span>
+<span class="hljs-comment"># (...)</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># It represents nodes and relationships in the knowledge graph:</span>
+<span class="hljs-comment"># - The first element is the source node (e.g., &#x27;natural language processing&#x27;).</span>
+<span class="hljs-comment"># - The second element is the relationship between nodes (e.g., &#x27;is_a_subfield_of&#x27;).</span>
+<span class="hljs-comment"># - The third element is the target node (e.g., &#x27;computer science&#x27;).</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>This output represents the results of a knowledge graph query, showcasing entities (nodes) and their relationships (edges) as extracted from the processed dataset. Each tuple includes a source entity, a relationship type, and a target entity, along with metadata like unique IDs, descriptions, and timestamps. The graph highlights key concepts and their semantic connections, providing a structured understanding of the dataset.</p>
 <p>Congratulations, you have learned the basic usage of cognee with Milvus. If you want to know more advanced usage of cognee, please refer to its official <a href="https://github.com/topoteretes/cognee">page</a> .</p>

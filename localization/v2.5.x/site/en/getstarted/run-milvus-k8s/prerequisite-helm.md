@@ -112,13 +112,13 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
 <ol start="2">
 <li>Start a K8s cluster using minikube</li>
 </ol>
-<pre><code translate="no" class="language-shell">$ minikube start
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">minikube start</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
 <li>Check the status of the K8s cluster</li>
 </ol>
 <p>You can check the status of the K8s cluster installed using the following command.</p>
-<pre><code translate="no" class="language-shell">$ kubectl cluster-info
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl cluster-info</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Ensure that you can access the K8s cluster via <code translate="no">kubectl</code>. If you have not installed <code translate="no">kubectl</code> locally, see <a href="https://minikube.sigs.k8s.io/docs/handbook/kubectl/">Use kubectl inside minikube</a>.</p>

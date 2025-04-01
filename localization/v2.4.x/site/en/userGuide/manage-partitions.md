@@ -158,16 +158,16 @@ res = client.list_partitions(collection_name=<span class="hljs-string">&quot;qui
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [&quot;_default&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">partition</span>.<span class="hljs-property">request</span>.<span class="hljs-property">ListPartitionsReq</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.ListPartitionsReq;
 
 <span class="hljs-comment">// 3. List all partitions in the collection</span>
-<span class="hljs-title class_">ListPartitionsReq</span> listPartitionsReq = <span class="hljs-title class_">ListPartitionsReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">build</span>();
+<span class="hljs-type">ListPartitionsReq</span> <span class="hljs-variable">listPartitionsReq</span> <span class="hljs-operator">=</span> ListPartitionsReq.builder()
+    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+    .build();
 
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">String</span>&gt; partitionNames = client.<span class="hljs-title function_">listPartitions</span>(listPartitionsReq);
+List&lt;String&gt; partitionNames = client.listPartitions(listPartitionsReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(partitionNames);
+System.out.println(partitionNames);
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// [&quot;_default&quot;]</span>
@@ -402,7 +402,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
 <p>The code snippet above checks whether the collection has a partition named <code translate="no">partitionA</code> and <code translate="no">partitionC</code>.</p>
-<h2 id="Load--Release-Partitions" class="common-anchor-header">Load &amp; Release Partitions<button data-href="#Load--Release-Partitions" class="anchor-icon" translate="no">
+<h2 id="Load--Release-Partitions" class="common-anchor-header">Load & Release Partitions<button data-href="#Load--Release-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -695,7 +695,7 @@ res = client.get_load_state(
 <span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">LoadPartitionsReq loadPartitionsReq = LoadPartitionsReq.builder()
+<pre><code translate="no" class="language-java"><span class="hljs-type">LoadPartitionsReq</span> <span class="hljs-variable">loadPartitionsReq</span> <span class="hljs-operator">=</span> LoadPartitionsReq.builder()
     .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
     .partitionNames(List.of(<span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>))
     .build();
@@ -709,7 +709,7 @@ getLoadStateReq = GetLoadStateReq.builder()
 
 state = client.getLoadState(getLoadStateReq);
 
-System.out.<span class="hljs-built_in">println</span>(state);
+System.out.println(state);
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// true</span>
@@ -721,7 +721,7 @@ getLoadStateReq = GetLoadStateReq.builder()
 
 state = client.getLoadState(getLoadStateReq);
 
-System.out.<span class="hljs-built_in">println</span>(state);
+System.out.println(state);
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// true</span>

@@ -60,14 +60,14 @@ docs_embeddings = ef.encode_documents(docs)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, ef.dim, docs_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([ <span class="hljs-number">1.08575663e-02</span>, <span class="hljs-number">3.87877878e-03</span>, <span class="hljs-number">3.18090729e-02</span>, <span class="hljs-number">-8.12458917e-02</span>,
-       <span class="hljs-number">-4.68971021e-02</span>, <span class="hljs-number">-5.85585833e-02</span>, <span class="hljs-number">-5.95418774e-02</span>, <span class="hljs-number">-8.55880603e-03</span>,
-       <span class="hljs-number">-5.54775111e-02</span>, <span class="hljs-number">-6.08020350e-02</span>, <span class="hljs-number">1.76202394e-02</span>, <span class="hljs-number">1.06648318e-02</span>,
-       <span class="hljs-number">-5.89960292e-02</span>, <span class="hljs-number">-7.46861771e-02</span>, <span class="hljs-number">6.60329172e-03</span>, <span class="hljs-number">-4.25189249e-02</span>,
+<pre><code translate="no" class="language-python">Embeddings: [array([ <span class="hljs-number">1.08575663e-02</span>, <span class="hljs-number">3.87877878e-03</span>, <span class="hljs-number">3.18090729e-02</span>, -<span class="hljs-number">8.12458917e-02</span>,
+       -<span class="hljs-number">4.68971021e-02</span>, -<span class="hljs-number">5.85585833e-02</span>, -<span class="hljs-number">5.95418774e-02</span>, -<span class="hljs-number">8.55880603e-03</span>,
+       -<span class="hljs-number">5.54775111e-02</span>, -<span class="hljs-number">6.08020350e-02</span>, <span class="hljs-number">1.76202394e-02</span>, <span class="hljs-number">1.06648318e-02</span>,
+       -<span class="hljs-number">5.89960292e-02</span>, -<span class="hljs-number">7.46861771e-02</span>, <span class="hljs-number">6.60329172e-03</span>, -<span class="hljs-number">4.25189249e-02</span>,
        ...
-       <span class="hljs-number">-1.26921125e-02</span>, <span class="hljs-number">3.01475357e-02</span>, <span class="hljs-number">8.25323071e-03</span>, <span class="hljs-number">-1.88470203e-02</span>,
-        <span class="hljs-number">6.04814291e-03</span>, <span class="hljs-number">-2.81618331e-02</span>, <span class="hljs-number">5.91602828e-03</span>, <span class="hljs-number">7.13866428e-02</span>],
-      dtype=<span class="hljs-type">float32</span>)]
+       -<span class="hljs-number">1.26921125e-02</span>, <span class="hljs-number">3.01475357e-02</span>, <span class="hljs-number">8.25323071e-03</span>, -<span class="hljs-number">1.88470203e-02</span>,
+        <span class="hljs-number">6.04814291e-03</span>, -<span class="hljs-number">2.81618331e-02</span>, <span class="hljs-number">5.91602828e-03</span>, <span class="hljs-number">7.13866428e-02</span>],
+      dtype=float32)]
 Dim: <span class="hljs-number">768</span> (<span class="hljs-number">768</span>,)
 <button class="copy-code-btn"></button></code></pre>
 <p>To create embeddings for queries, use the <code translate="no">encode_queries()</code> method:</p>
@@ -80,13 +80,13 @@ query_embeddings = ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim&quot;</span>, ef.dim, query_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([ <span class="hljs-number">1.21721877e-02</span>, <span class="hljs-number">1.88485277e-03</span>, <span class="hljs-number">3.01732980e-02</span>, <span class="hljs-number">-8.10302645e-02</span>,
-       <span class="hljs-number">-6.13401756e-02</span>, <span class="hljs-number">-3.98149453e-02</span>, <span class="hljs-number">-5.18723316e-02</span>, <span class="hljs-number">-6.76784338e-03</span>,
-       <span class="hljs-number">-6.59285188e-02</span>, <span class="hljs-number">-5.38365729e-02</span>, <span class="hljs-number">-5.13435388e-03</span>, <span class="hljs-number">-2.49210224e-02</span>,
-       <span class="hljs-number">-5.74403182e-02</span>, <span class="hljs-number">-7.03031123e-02</span>, <span class="hljs-number">6.63730130e-03</span>, <span class="hljs-number">-3.42259370e-02</span>,
+<pre><code translate="no" class="language-python">Embeddings: [array([ <span class="hljs-number">1.21721877e-02</span>, <span class="hljs-number">1.88485277e-03</span>, <span class="hljs-number">3.01732980e-02</span>, -<span class="hljs-number">8.10302645e-02</span>,
+       -<span class="hljs-number">6.13401756e-02</span>, -<span class="hljs-number">3.98149453e-02</span>, -<span class="hljs-number">5.18723316e-02</span>, -<span class="hljs-number">6.76784338e-03</span>,
+       -<span class="hljs-number">6.59285188e-02</span>, -<span class="hljs-number">5.38365729e-02</span>, -<span class="hljs-number">5.13435388e-03</span>, -<span class="hljs-number">2.49210224e-02</span>,
+       -<span class="hljs-number">5.74403182e-02</span>, -<span class="hljs-number">7.03031123e-02</span>, <span class="hljs-number">6.63730130e-03</span>, -<span class="hljs-number">3.42259370e-02</span>,
        ...
-        <span class="hljs-number">7.36595877e-03</span>, <span class="hljs-number">2.85532661e-02</span>, <span class="hljs-number">-1.55952033e-02</span>, <span class="hljs-number">2.13342719e-02</span>,
-        <span class="hljs-number">1.51187545e-02</span>, <span class="hljs-number">-2.82798670e-02</span>, <span class="hljs-number">2.69396193e-02</span>, <span class="hljs-number">6.16136603e-02</span>],
-      dtype=<span class="hljs-type">float32</span>)]
+        <span class="hljs-number">7.36595877e-03</span>, <span class="hljs-number">2.85532661e-02</span>, -<span class="hljs-number">1.55952033e-02</span>, <span class="hljs-number">2.13342719e-02</span>,
+        <span class="hljs-number">1.51187545e-02</span>, -<span class="hljs-number">2.82798670e-02</span>, <span class="hljs-number">2.69396193e-02</span>, <span class="hljs-number">6.16136603e-02</span>],
+      dtype=float32)]
 Dim <span class="hljs-number">768</span> (<span class="hljs-number">768</span>,)
 <button class="copy-code-btn"></button></code></pre>

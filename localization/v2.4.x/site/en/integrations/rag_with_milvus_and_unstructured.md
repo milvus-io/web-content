@@ -53,10 +53,10 @@ title: Build a RAG with Milvus and Unstructured
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;UNSTRUCTURED_API_KEY&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;UNSTRUCTURED_URL&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;UNSTRUCTURED_API_KEY&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;UNSTRUCTURED_URL&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-Milvus-and-OpenAI-clients" class="common-anchor-header">Prepare Milvus and OpenAI clients</h3><p>You can use the Milvus client to create a Milvus collection and insert data into it.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -68,15 +68,15 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.d
 <p>As for the argument of <code translate="no">MilvusClient</code>:</p>
 <ul>
 <li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “&lt;your_username&gt;:&lt;your_password&gt;” as the token, otherwise don’t set the token.</li>
+<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “<your_username>:<your_password>” as the token, otherwise don’t set the token.</li>
 <li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
 </ul>
 </div>
 <p>Check if the collection already exists and drop it if it does.</p>
 <pre><code translate="no" class="language-python">collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 
-<span class="hljs-keyword">if</span> milvus_client.<span class="hljs-title function_">has_collection</span>(collection_name):
-    milvus_client.<span class="hljs-title function_">drop_collection</span>(collection_name)
+<span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
+    milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>Prepare a OpenAI client to generate embeddings and generate responses.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI

@@ -132,50 +132,50 @@ schema.addField(AddFieldReq.builder()​
 ];​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> varcharField1=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export varcharField1='{​
     &quot;fieldName&quot;: &quot;varchar_field1&quot;,​
     &quot;dataType&quot;: &quot;VarChar&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;max_length&quot;: 100​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> varcharField2=<span class="hljs-string">&#x27;{​
+export varcharField2='{​
     &quot;fieldName&quot;: &quot;varchar_field2&quot;,​
     &quot;dataType&quot;: &quot;VarChar&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;max_length&quot;: 200​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> primaryField=<span class="hljs-string">&#x27;{​
+export primaryField='{​
     &quot;fieldName&quot;: &quot;pk&quot;,​
     &quot;dataType&quot;: &quot;Int64&quot;,​
     &quot;isPrimary&quot;: true​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{​
+export vectorField='{​
     &quot;fieldName&quot;: &quot;embedding&quot;,​
     &quot;dataType&quot;: &quot;FloatVector&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;dim&quot;: 3​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{​
+export schema=&quot;{​
     \&quot;autoID\&quot;: false,​
     \&quot;fields\&quot;: [​
-        <span class="hljs-variable">$varcharField1</span>,​
-        <span class="hljs-variable">$varcharField2</span>,​
-        <span class="hljs-variable">$primaryField</span>,​
-        <span class="hljs-variable">$vectorField</span>​
+        $varcharField1,​
+        $varcharField2,​
+        $primaryField,​
+        $vectorField​
     ]​
-}&quot;</span>​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In this example, we add two <code translate="no">VARCHAR</code> fields: <code translate="no">varchar_field1</code> and <code translate="no">varchar_field2</code>, with maximum lengths set to 100 and 200 characters, respectively. It is recommended to set <code translate="no">max_length</code> based on your data characteristics to ensure it accommodates the longest data while avoiding excessive space allocation. Additionally, we have added a primary field <code translate="no">pk</code> and a vector field <code translate="no">embedding</code>.​</p>
 <div class="alert note">
-<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
+<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field & AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
 </div>
 <h2 id="Set-index-params​" class="common-anchor-header">Set index params​<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -200,9 +200,9 @@ schema.addField(AddFieldReq.builder()​
     <a href="#javascript">Node.js</a>
     <a href="#curl">cURL</a>
 </div>
-<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()​
 ​
-index_params.<span class="hljs-title function_">add_index</span>(​
+index_params.add_index(​
     field_name=<span class="hljs-string">&quot;varchar_field1&quot;</span>,​
     index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,​
     index_name=<span class="hljs-string">&quot;varchar_index&quot;</span>​
@@ -228,15 +228,15 @@ indexes.add(IndexParam.builder()​
 )];​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
+<pre><code translate="no" class="language-curl">export indexParams='[​
         {​
             &quot;fieldName&quot;: &quot;varchar_field1&quot;,​
             &quot;indexName&quot;: &quot;varchar_index&quot;,​
             &quot;indexType&quot;: &quot;AUTOINDEX&quot;​
         }​
-    ]&#x27;</span>​
+    ]'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In addition to <code translate="no">AUTOINDEX</code>, you can specify other scalar index types, such as <code translate="no">INVERTED</code> or <code translate="no">BITMAP</code>. For supported index types, refer to <a href="https://milvus.io/docs/scalar_index.md">​Scalar Indexes</a>.​</p>
 <p>Moreover, before creating the collection, you must create an index for the vector field. In this example, we use <code translate="no">AUTOINDEX</code> to simplify vector index settings.​</p>
 <div class="multipleCode">
@@ -253,7 +253,7 @@ index_params.add_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">indexes.<span class="hljs-keyword">add</span>(IndexParam.builder()​
+<pre><code translate="no" class="language-java">indexes.add(IndexParam.builder()​
         .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)​
         .indexType(IndexParam.IndexType.AUTOINDEX)​
         .metricType(IndexParam.MetricType.COSINE)​
@@ -268,7 +268,7 @@ index_params.add_index(​
 });​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
+<pre><code translate="no" class="language-curl">export indexParams='[​
         {​
             &quot;fieldName&quot;: &quot;varchar_field1&quot;,​
             &quot;indexName&quot;: &quot;varchar_index&quot;,​
@@ -279,9 +279,9 @@ index_params.add_index(​
             &quot;metricType&quot;: &quot;COSINE&quot;,​
             &quot;indexType&quot;: &quot;AUTOINDEX&quot;​
         }​
-    ]&#x27;</span>​
+    ]'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Create-collection​" class="common-anchor-header">Create collection​<button data-href="#Create-collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -328,17 +328,17 @@ client.createCollection(requestCreate);​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&quot;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &quot;{​
     \&quot;collectionName\&quot;: \&quot;my_varchar_collection\&quot;,​
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,​
-    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>​
-}&quot;</span>​
-<span class="hljs-comment">## {&quot;code&quot;:0,&quot;data&quot;:{}}​</span>
+    \&quot;schema\&quot;: $schema,​
+    \&quot;indexParams\&quot;: $indexParams​
+}&quot;​
+## {&quot;code&quot;:0,&quot;data&quot;:{}}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Insert-data​" class="common-anchor-header">Insert data​<button data-href="#Insert-data​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -367,7 +367,7 @@ client.createCollection(requestCreate);​
     {<span class="hljs-string">&quot;varchar_field1&quot;</span>: <span class="hljs-string">&quot;Product C&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>: <span class="hljs-string">&quot;Best seller&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>]},​
 ]​
 ​
-client.<span class="hljs-title function_">insert</span>(​
+client.insert(​
     collection_name=<span class="hljs-string">&quot;my_varchar_collection&quot;</span>,​
     data=data​
 )​
@@ -418,21 +418,21 @@ client.<span class="hljs-title function_">insert</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;data&quot;: [​
         {&quot;varchar_field1&quot;: &quot;Product A&quot;, &quot;varchar_field2&quot;: &quot;High quality product&quot;, &quot;pk&quot;: 1, &quot;embedding&quot;: [0.1, 0.2, 0.3]},​
     {&quot;varchar_field1&quot;: &quot;Product B&quot;, &quot;varchar_field2&quot;: &quot;Affordable price&quot;, &quot;pk&quot;: 2, &quot;embedding&quot;: [0.4, 0.5, 0.6]},​
     {&quot;varchar_field1&quot;: &quot;Product C&quot;, &quot;varchar_field2&quot;: &quot;Best seller&quot;, &quot;pk&quot;: 3, &quot;embedding&quot;: [0.7, 0.8, 0.9]}       ​
     ],​
     &quot;collectionName&quot;: &quot;my_varchar_collection&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:3,&quot;insertIds&quot;:[1,2,3]}}​</span>
+## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:3,&quot;insertIds&quot;:[1,2,3]}}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In this example, we insert data that includes <code translate="no">VARCHAR</code> fields (<code translate="no">varchar_field1</code> and <code translate="no">varchar_field2</code>), a primary field (<code translate="no">pk</code>), and vector representations (<code translate="no">embedding</code>). To ensure that the inserted data matches the fields defined in the schema, it is recommended to check data types in advance to avoid insertion errors.​</p>
 <p>If you set <code translate="no">enable_dynamic_fields=True</code> when defining the schema, Milvus allows you to insert string fields that were not defined in advance. However, keep in mind that this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to <a href="/docs/enable-dynamic-field.md">​Dynamic Field</a>.​</p>
 <h2 id="Search-and-query​" class="common-anchor-header">Search and query​<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
@@ -489,25 +489,25 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment">// [QueryResp.QueryResult(entity={varchar_field1=Product A, varchar_field2=High quality product, pk=1})]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">client.query({​
-    collection_name: <span class="hljs-string">&#x27;my_varchar_collection&#x27;</span>,​
-    <span class="hljs-built_in">filter</span>: <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>,​
-    output_fields: [<span class="hljs-string">&#x27;varchar_field1&#x27;</span>, <span class="hljs-string">&#x27;varchar_field2&#x27;</span>]​
+<pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">query</span>({​
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_varchar_collection&#x27;</span>,​
+    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>,​
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;varchar_field1&#x27;</span>, <span class="hljs-string">&#x27;varchar_field2&#x27;</span>]​
 });​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/query&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;my_varchar_collection&quot;,​
     &quot;filter&quot;: &quot;varchar_field1 == \&quot;Product A\&quot;&quot;,​
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]​
-}&#x27;</span>​
-<span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;pk&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}​</span>
+}'​
+## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;pk&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>This query expression returns all matching entities and outputs their <code translate="no">varchar_field1</code> and <code translate="no">varchar_field2</code> fields. For more information on filter queries, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
 <h3 id="Vector-search-with-string-filtering​" class="common-anchor-header">Vector search with string filtering​</h3><p>In addition to basic scalar field filtering, you can combine vector similarity searches with scalar field filters. For example, the following code shows how to add a scalar field filter to a vector search:​</p>
 <div class="multipleCode">
@@ -553,23 +553,23 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment">// [[SearchResp.SearchResult(entity={varchar_field1=Product A, varchar_field2=High quality product}, score=-0.2364331, id=1)]]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">client.search({​
-    collection_name: <span class="hljs-string">&#x27;my_varchar_collection&#x27;</span>,​
-    data: [<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>],​
-    limit: <span class="hljs-number">5</span>,​
-    output_fields: [<span class="hljs-string">&#x27;varchar_field1&#x27;</span>, <span class="hljs-string">&#x27;varchar_field2&#x27;</span>],​
-    <span class="hljs-built_in">filter</span>: <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>​
-    params: {​
-       nprobe:<span class="hljs-number">10</span>​
+<pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">search</span>({​
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_varchar_collection&#x27;</span>,​
+    <span class="hljs-attr">data</span>: [<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>],​
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,​
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;varchar_field1&#x27;</span>, <span class="hljs-string">&#x27;varchar_field2&#x27;</span>],​
+    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>​
+    <span class="hljs-attr">params</span>: {​
+       <span class="hljs-attr">nprobe</span>:<span class="hljs-number">10</span>​
     }​
 });​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/search&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;my_varchar_collection&quot;,​
     &quot;data&quot;: [​
         [0.3, -0.6, 0.1]​
@@ -580,9 +580,9 @@ System.out.println(resp.getSearchResults());​
     },​
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;],​
     &quot;filter&quot;: &quot;varchar_field1 == \&quot;Product A\&quot;&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}​</span>
+## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In this example, we first define a query vector and add a filter condition <code translate="no">varchar_field1 == &quot;Product A&quot;</code> during the search. This ensures that the search results are not only similar to the query vector but also match the specified string filter condition. For more information, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>

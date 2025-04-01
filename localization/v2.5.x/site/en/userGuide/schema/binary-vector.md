@@ -145,34 +145,34 @@ schema.<span class="hljs-title function_">push</span>({​
 });​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> primaryField=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export primaryField='{​
     &quot;fieldName&quot;: &quot;pk&quot;,​
     &quot;dataType&quot;: &quot;VarChar&quot;,​
     &quot;isPrimary&quot;: true,​
     &quot;elementTypeParams&quot;: {​
         &quot;max_length&quot;: 100​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{​
+export vectorField='{​
     &quot;fieldName&quot;: &quot;binary_vector&quot;,​
     &quot;dataType&quot;: &quot;BinaryVector&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;dim&quot;: 128​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{​
+export schema=&quot;{​
     \&quot;autoID\&quot;: true,​
     \&quot;fields\&quot;: [​
-        <span class="hljs-variable">$primaryField</span>,​
-        <span class="hljs-variable">$vectorField</span>​
+        $primaryField,​
+        $vectorField​
     ],​
     \&quot;enableDynamicField\&quot;: true​
-}&quot;</span>​
+}&quot;​
 ​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In this example, a vector field named <code translate="no">binary_vector</code> is added for storing binary vectors. The data type of this field is <code translate="no">BINARY_VECTOR</code>, with a dimension of 128.​</p>
 <h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">Set index params for vector field​</h3><p>To speed up searches, an index must be created for the binary vector field. Indexing can significantly enhance the retrieval efficiency of large-scale vector data.​</p>
 <div class="multipleCode">
@@ -189,22 +189,22 @@ index_params.add_index(​
     index_name=<span class="hljs-string">&quot;binary_vector_index&quot;</span>,​
     index_type=<span class="hljs-string">&quot;BIN_IVF_FLAT&quot;</span>,​
     metric_type=<span class="hljs-string">&quot;HAMMING&quot;</span>,​
-    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span>}​
+    params={<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span>}​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">IndexParam</span>;​
-<span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.*;​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;​
+<span class="hljs-keyword">import</span> java.util.*;​
 ​
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-extraParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;nlist&quot;</span>,<span class="hljs-number">128</span>);​
-indexParams.<span class="hljs-title function_">add</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;binary_vector&quot;</span>)​
-        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">BIN_IVF_FLAT</span>)​
-        .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">HAMMING</span>)​
-        .<span class="hljs-title function_">extraParams</span>(extraParams)​
-        .<span class="hljs-title function_">build</span>());​
+List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();​
+Map&lt;String,Object&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
+extraParams.put(<span class="hljs-string">&quot;nlist&quot;</span>,<span class="hljs-number">128</span>);​
+indexParams.add(IndexParam.builder()​
+        .fieldName(<span class="hljs-string">&quot;binary_vector&quot;</span>)​
+        .indexType(IndexParam.IndexType.BIN_IVF_FLAT)​
+        .metricType(IndexParam.MetricType.HAMMING)​
+        .extraParams(extraParams)​
+        .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MetricType</span>, <span class="hljs-title class_">IndexType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;​
@@ -220,7 +220,7 @@ indexParams.<span class="hljs-title function_">add</span>(<span class="hljs-titl
 };​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
+<pre><code translate="no" class="language-curl">export indexParams='[​
         {​
             &quot;fieldName&quot;: &quot;binary_vector&quot;,​
             &quot;metricType&quot;: &quot;HAMMING&quot;,​
@@ -228,9 +228,9 @@ indexParams.<span class="hljs-title function_">add</span>(<span class="hljs-titl
             &quot;indexType&quot;: &quot;BIN_IVF_FLAT&quot;,​
             &quot;params&quot;:{&quot;nlist&quot;: 128}​
         }​
-    ]&#x27;</span>​
+    ]'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In the example above, an index named <code translate="no">binary_vector_index</code> is created for the <code translate="no">binary_vector</code> field, using the <code translate="no">BIN_IVF_FLAT</code> index type. The <code translate="no">metric_type</code> is set to <code translate="no">HAMMING</code>, indicating that Hamming distance is used for similarity measurement.​</p>
 <p>Besides <code translate="no">BIN_IVF_FLAT</code>, Milvus supports other index types for binary vectors. For more details, refer to <a href="https://milvus.io/docs/index.md?tab=binary">​Binary Vector Indexes</a>. Additionally, Milvus supports other similarity metrics for binary vectors. For more information, refer to <a href="/docs/metric.md">​Metric Types</a>.​</p>
 <h3 id="Create-collection​" class="common-anchor-header">Create collection​</h3><p>Once the binary vector and index settings are complete, create a collection that contains binary vectors. The example below uses the <code translate="no">create_collection</code> method to create a collection named <code translate="no">my_binary_collection</code>.​</p>
@@ -241,7 +241,7 @@ indexParams.<span class="hljs-title function_">add</span>(<span class="hljs-titl
   <a href="#go">Go</a>
   <a href="#curl">cURL</a>
 </div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
+<pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_binary_collection&quot;</span>,​
     schema=schema,​
     index_params=index_params​
@@ -277,16 +277,16 @@ client.createCollection(requestCreate);​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&quot;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &quot;{​
     \&quot;collectionName\&quot;: \&quot;my_binary_collection\&quot;,​
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,​
-    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>​
-}&quot;</span>​
+    \&quot;schema\&quot;: $schema,​
+    \&quot;indexParams\&quot;: $indexParams​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Insert-data​" class="common-anchor-header">Insert data​</h3><p>After creating the collection, use the <code translate="no">insert</code> method to add data containing binary vectors. Note that binary vectors should be provided in the form of a byte array, where each byte represents 8 boolean values.​</p>
 <p>For example, for a 128-dimensional binary vector, a 16-byte array is required (since 128 bits ÷ 8 bits/byte = 16 bytes). Below is an example code for inserting data:​</p>
 <div class="multipleCode">
@@ -373,15 +373,15 @@ client.<span class="hljs-title function_">insert</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&quot;{​
-    \&quot;data\&quot;: <span class="hljs-variable">$data</span>,​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &quot;{​
+    \&quot;data\&quot;: $data,​
     \&quot;collectionName\&quot;: \&quot;my_binary_collection\&quot;​
-}&quot;</span>​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Perform-similarity-search​" class="common-anchor-header">Perform similarity search​</h3><p>Similarity search is one of the core features of Milvus, allowing you to quickly find data that is most similar to a query vector based on the distance between vectors. To perform a similarity search using binary vectors, prepare the query vector and search parameters, then call the <code translate="no">search</code> method.​</p>
 <p>During search operations, binary vectors must also be provided in the form of a byte array. Ensure that the dimensionality of the query vector matches the dimension specified when defining <code translate="no">dim</code> and that every 8 boolean values are converted into 1 byte.​</p>
 <div class="multipleCode">
@@ -392,10 +392,10 @@ client.<span class="hljs-title function_">insert</span>({​
   <a href="#curl">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">search_params = {​
-    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: 10}​
+    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}​
 }​
 ​
-query_bool_list = [1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0] + [0] * 112​
+query_bool_list = [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>] + [<span class="hljs-number">0</span>] * <span class="hljs-number">112</span>​
 query_vector = convert_bool_list_to_bytes(query_bool_list)​
 ​
 res = client.search(​
@@ -403,7 +403,7 @@ res = client.search(​
     data=[query_vector],​
     anns_field=<span class="hljs-string">&quot;binary_vector&quot;</span>,​
     search_params=search_params,​
-    <span class="hljs-built_in">limit</span>=5,​
+    limit=<span class="hljs-number">5</span>,​
     output_fields=[<span class="hljs-string">&quot;pk&quot;</span>]​
 )​
 ​
@@ -413,62 +413,62 @@ res = client.search(​
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: &#x27;453718927992172268&#x27;, &#x27;distance&#x27;: 10.0, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172268&#x27;}}]&quot;] ​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">request</span>.<span class="hljs-property">SearchReq</span>;​
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">request</span>.<span class="hljs-property">data</span>.<span class="hljs-property">BinaryVec</span>;​
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">response</span>.<span class="hljs-property">SearchResp</span>;​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;​
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.BinaryVec;​
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;​
 ​
-<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
-searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;nprobe&quot;</span>,<span class="hljs-number">10</span>);​
+Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();​
+searchParams.put(<span class="hljs-string">&quot;nprobe&quot;</span>,<span class="hljs-number">10</span>);​
 ​
-boolean[] boolArray = {<span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>};​
-<span class="hljs-title class_">BinaryVec</span> queryVector = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BinaryVec</span>(<span class="hljs-title function_">convertBoolArrayToBytes</span>(boolArray));​
+<span class="hljs-type">boolean</span>[] boolArray = {<span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>};​
+<span class="hljs-type">BinaryVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BinaryVec</span>(convertBoolArrayToBytes(boolArray));​
 ​
-<span class="hljs-title class_">SearchResp</span> searchR = client.<span class="hljs-title function_">search</span>(<span class="hljs-title class_">SearchReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;my_binary_collection&quot;</span>)​
-        .<span class="hljs-title function_">data</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(queryVector))​
-        .<span class="hljs-title function_">annsField</span>(<span class="hljs-string">&quot;binary_vector&quot;</span>)​
-        .<span class="hljs-title function_">searchParams</span>(searchParams)​
-        .<span class="hljs-title function_">topK</span>(<span class="hljs-number">5</span>)​
-        .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-string">&quot;pk&quot;</span>))​
-        .<span class="hljs-title function_">build</span>());​
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchR</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()​
+        .collectionName(<span class="hljs-string">&quot;my_binary_collection&quot;</span>)​
+        .data(Collections.singletonList(queryVector))​
+        .annsField(<span class="hljs-string">&quot;binary_vector&quot;</span>)​
+        .searchParams(searchParams)​
+        .topK(<span class="hljs-number">5</span>)​
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;pk&quot;</span>))​
+        .build());​
         ​
- <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(searchR.<span class="hljs-title function_">getSearchResults</span>());​
+ System.out.println(searchR.getSearchResults());​
  ​
  <span class="hljs-comment">// Output​</span>
  <span class="hljs-comment">//​</span>
  <span class="hljs-comment">// [[SearchResp.SearchResult(entity={pk=453444327741536775}, score=0.0, id=453444327741536775), SearchResp.SearchResult(entity={pk=453444327741536776}, score=7.0, id=453444327741536776)]]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">query_vector = [1,0,1,0,1,1,1,1,1,1,1,1];​
+<pre><code translate="no" class="language-javascript">query_vector = [<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>];​
 ​
-client.search({​
-    collection_name: <span class="hljs-string">&#x27;my_binary_collection&#x27;</span>,​
-    data: query_vector,​
-    <span class="hljs-built_in">limit</span>: 5,​
-    output_fields: [<span class="hljs-string">&#x27;pk&#x27;</span>],​
-    params: {​
-        nprobe: 10​
+client.<span class="hljs-title function_">search</span>({​
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_binary_collection&#x27;</span>,​
+    <span class="hljs-attr">data</span>: query_vector,​
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,​
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;pk&#x27;</span>],​
+    <span class="hljs-attr">params</span>: {​
+        <span class="hljs-attr">nprobe</span>: <span class="hljs-number">10</span>​
     }​
 });​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> searchParams=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export searchParams='{​
         &quot;params&quot;:{&quot;nprobe&quot;:10}​
-    }&#x27;</span>​
+    }'​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&quot;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/search&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &quot;{​
     \&quot;collectionName\&quot;: \&quot;my_binary_collection\&quot;,​
-    \&quot;data\&quot;: <span class="hljs-variable">$data</span>,​
+    \&quot;data\&quot;: $data,​
     \&quot;annsField\&quot;: \&quot;binary_vector\&quot;,​
     \&quot;limit\&quot;: 5,​
-    \&quot;searchParams\&quot;:<span class="hljs-variable">$searchParams</span>,​
+    \&quot;searchParams\&quot;:$searchParams,​
     \&quot;outputFields\&quot;: [\&quot;pk\&quot;]​
-}&quot;</span>​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>For more information on similarity search parameters, refer to <a href="/docs/single-vector-search.md">​Basic ANN Search</a>.​</p>
 <p>​</p>

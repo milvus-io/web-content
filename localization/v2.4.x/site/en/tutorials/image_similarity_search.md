@@ -58,7 +58,7 @@ title: Image Search with Milvus
       </svg>
     </button></h2><p>To run this notebook, you need to have the following dependencies installed:</p>
 <ul>
-<li>pymilvus&gt;=2.4.2</li>
+<li>pymilvus>=2.4.2</li>
 <li>timm</li>
 <li>torch</li>
 <li>numpy</li>

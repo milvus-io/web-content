@@ -159,7 +159,7 @@ curl --request POST \​
 <pre><code translate="no" class="language-python">res = client.search(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     data=[query_vector],​
-    <span class="hljs-built_in">limit</span>=3,​
+    limit=<span class="hljs-number">3</span>,​
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}，​
     <span class="hljs-comment"># highlight-start​</span>
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​

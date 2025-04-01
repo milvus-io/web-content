@@ -53,7 +53,7 @@ $ <span class="hljs-built_in">sudo</span> apt install python-is-python3 python3-
 $ <span class="hljs-built_in">source</span> venv/bin/activate
 <button class="copy-code-btn"></button></code></pre>
 <p>Install the required python dependencies:</p>
-<pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai requests langchain-huggingface huggingface_hub tqdm
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests langchain-huggingface huggingface_hub tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Offline-Data-Loading" class="common-anchor-header">Offline Data Loading<button data-href="#Offline-Data-Loading" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,9 +75,9 @@ $ <span class="hljs-built_in">source</span> venv/bin/activate
 <p>In addition to Zilliz Cloud, self-hosted Milvus is also a (more complicated to set up) option. We can also deploy <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Milvus Standalone</a> and <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> on ARM-based machines. For more information about Milvus installation, please refer to the <a href="https://milvus.io/docs/install-overview.md">installation documentation</a>.</p>
 </div>
 <p>We set the <code translate="no">uri</code> and <code translate="no">token</code> as the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-milvus_client = <span class="hljs-title class_">MilvusClient</span>(
+milvus_client = MilvusClient(
     uri=<span class="hljs-string">&quot;&lt;your_zilliz_public_endpoint&gt;&quot;</span>, token=<span class="hljs-string">&quot;&lt;your_zilliz_api_key&gt;&quot;</span>
 )
 
@@ -85,7 +85,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Check if the collection already exists and drop it if it does.</p>
-<pre><code translate="no" class="language-python">if milvus_client.has_collection(collection_name):
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>Create a new collection with specified parameters.</p>
@@ -100,10 +100,10 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <p>We use inner product distance as the default metric type. For more information about distance types, you can refer to <a href="https://milvus.io/docs/metric.md?tab=floating">Similarity Metrics page</a></p>
 <h3 id="Prepare-the-data" class="common-anchor-header">Prepare the data</h3><p>We use the FAQ pages from the <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus Documentation 2.4.x</a> as the private knowledge in our RAG, which is a good data source for a simple RAG pipeline.</p>
 <p>Download the zip file and extract documents to the folder <code translate="no">milvus_docs</code>.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
-$ unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>We load all markdown files from the folder <code translate="no">milvus_docs/en/faq</code>. For each document, we just simply use &quot;# &quot; to separate the content in the file, which can roughly separate the content of each main part of the markdown file.</p>
+<p>We load all markdown files from the folder <code translate="no">milvus_docs/en/faq</code>. For each document, we just simply use "# " to separate the content in the file, which can roughly separate the content of each main part of the markdown file.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -115,9 +115,9 @@ text_lines = []
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>We prepare a simple but efficient embedding model <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2</a> that can convert text into embedding vectors.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_huggingface <span class="hljs-keyword">import</span> <span class="hljs-title class_">HuggingFaceEmbeddings</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_huggingface <span class="hljs-keyword">import</span> HuggingFaceEmbeddings
 
-embedding_model = <span class="hljs-title class_">HuggingFaceEmbeddings</span>(model_name=<span class="hljs-string">&quot;all-MiniLM-L6-v2&quot;</span>)
+embedding_model = HuggingFaceEmbeddings(model_name=<span class="hljs-string">&quot;all-MiniLM-L6-v2&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Iterate through the text lines, create embeddings, and then insert the data into Milvus.</p>
 <p>Here is a new field <code translate="no">text</code>, which is a non-defined field in the collection schema. It will be automatically added to the reserved JSON dynamic field, which can be treated as a normal field at a high level.</p>
@@ -152,7 +152,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>In this section, we will build and launch the <code translate="no">llama.cpp</code> service on the Arm-based CPU.</p>
-<h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Llama 3.1 model &amp; llama.cpp</h3><p>The <a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">Llama-3.1-8B model</a> from Meta belongs to the Llama 3.1 model family and is free to use for research and commercial purposes. Before you use the model, visit the Llama <a href="https://llama.meta.com/llama-downloads/">website</a> and fill in the form to request access.</p>
+<h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Llama 3.1 model & llama.cpp</h3><p>The <a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">Llama-3.1-8B model</a> from Meta belongs to the Llama 3.1 model family and is free to use for research and commercial purposes. Before you use the model, visit the Llama <a href="https://llama.meta.com/llama-downloads/">website</a> and fill in the form to request access.</p>
 <p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a> is an open source C/C++ project that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. You can conveniently host a Llama 3.1 model using <code translate="no">llama.cpp</code>.</p>
 <h3 id="Download-and-build-llamacpp" class="common-anchor-header">Download and build llama.cpp</h3><p>Run the following commands to install make, cmake, gcc, g++, and other essential tools required for building llama.cpp from source:</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">sudo</span> apt install make cmake -y
@@ -179,7 +179,7 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
     chat (conversation): ./llama-cli -m your_model.gguf -p &quot;You are a helpful assistant&quot; -cnv
 </code></pre>
 <p>You can now download the model using the huggingface cli:</p>
-<pre><code translate="no" class="language-bash">$ huggingface-cli download cognitivecomputations/dolphin-<span class="hljs-number">2.9</span><span class="hljs-number">.4</span>-llama3<span class="hljs-number">.1</span>-8b-gguf dolphin-<span class="hljs-number">2.9</span><span class="hljs-number">.4</span>-llama3<span class="hljs-number">.1</span>-8b-Q4_0.gguf --local-<span class="hljs-built_in">dir</span> . --local-<span class="hljs-built_in">dir</span>-use-symlinks <span class="hljs-literal">False</span>
+<pre><code translate="no" class="language-bash">$ huggingface-cli download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir . --local-dir-use-symlinks False
 <button class="copy-code-btn"></button></code></pre>
 <p>The GGUF model format, introduced by the llama.cpp team, uses compression and quantization to reduce weight precision to 4-bit integers, significantly decreasing computational and memory demands and making Arm CPUs effective for LLM inference.</p>
 <h3 id="Re-quantize-the-model-weights" class="common-anchor-header">Re-quantize the model weights</h3><p>To re-quantize, run</p>
@@ -191,7 +191,7 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 </div>
 <h3 id="Start-the-LLM-Service" class="common-anchor-header">Start the LLM Service</h3><p>You can utilize the llama.cpp server program and send requests via an OpenAI-compatible API. This allows you to develop applications that interact with the LLM multiple times without having to repeatedly start and stop it. Additionally, you can access the server from another machine where the LLM is hosted over the network.</p>
 <p>Start the server from the command line, and it listens on port 8080:</p>
-<pre><code translate="no" class="language-shell">$ ./llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -n 2048 -t 64 -c 65536  --port 8080
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -n 2048 -t 64 -c 65536  --port 8080</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'main: server is listening on 127.0.0.1:8080 - starting the main loop
 </code></pre>
@@ -215,9 +215,9 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
       </svg>
     </button></h2><h3 id="LLM-Client-and-Embedding-Model" class="common-anchor-header">LLM Client and Embedding Model</h3><p>We initialize the LLM client and prepare the embedding model.</p>
 <p>For the LLM, we use the OpenAI SDK to request the Llama service launched before. We don’t need to use any API key because it is actually our local llama.cpp service.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
-llm_client = <span class="hljs-title class_">OpenAI</span>(base_url=<span class="hljs-string">&quot;http://localhost:8080/v1&quot;</span>, api_key=<span class="hljs-string">&quot;no-key&quot;</span>)
+llm_client = OpenAI(base_url=<span class="hljs-string">&quot;http://localhost:8080/v1&quot;</span>, api_key=<span class="hljs-string">&quot;no-key&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Generate a test embedding and print its dimension and first few elements.</p>
 <pre><code translate="no" class="language-python">test_embedding = embedding_model.embed_query(<span class="hljs-string">&quot;This is a test&quot;</span>)
@@ -266,8 +266,8 @@ retrieved_lines_with_distances = [
 ]
 </code></pre>
 <h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">Use LLM to get a RAG response</h3><p>Convert the retrieved documents into a string format.</p>
-<pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.<span class="hljs-keyword">join</span>(
-    [<span class="hljs-meta">line_with_distance[0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
+<pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
+    [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Define system and user prompts for the Language Model. This prompt is assembled with the retrieved documents from Milvus.

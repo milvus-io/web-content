@@ -69,15 +69,15 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
         ></path>
       </svg>
     </button></h2><p>For search operations in Milvus, the <code translate="no">filter</code> expression is used to define the filtering condition, and the <code translate="no">filter_params</code> parameter is used to specify the values for the placeholders. The <code translate="no">filter_params</code> dictionary contains the dynamic values that Milvus will use to substitute into the filter expression.​</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">expr</span> = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>​
-filter_params = {<span class="hljs-string">&quot;age&quot;</span>: 25, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}​
+<pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>​
+filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}​
 res = client.search(​
     <span class="hljs-string">&quot;hello_milvus&quot;</span>,​
     vectors[:nq],​
-    filter=<span class="hljs-built_in">expr</span>,​
-    <span class="hljs-built_in">limit</span>=10,​
+    <span class="hljs-built_in">filter</span>=expr,​
+    limit=<span class="hljs-number">10</span>,​
     output_fields=[<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;city&quot;</span>],​
-    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;search_list&quot;</span>: 100}},​
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;search_list&quot;</span>: <span class="hljs-number">100</span>}},​
     filter_params=filter_params,​
 )​
 
@@ -99,11 +99,11 @@ res = client.search(​
         ></path>
       </svg>
     </button></h2><p>The same templating mechanism can be applied to query operations in Milvus. In the <code translate="no">query</code> function, you define the filter expression and use the <code translate="no">filter_params</code> to specify the values to substitute.​</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">expr</span> = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>​
-filter_params = {<span class="hljs-string">&quot;age&quot;</span>: 25, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}​
+<pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>​
+filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}​
 res = client.query(​
     <span class="hljs-string">&quot;hello_milvus&quot;</span>,​
-    filter=<span class="hljs-built_in">expr</span>,​
+    <span class="hljs-built_in">filter</span>=expr,​
     output_fields=[<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;city&quot;</span>],​
     filter_params=filter_params​
 )​
@@ -126,11 +126,11 @@ res = client.query(​
         ></path>
       </svg>
     </button></h2><p>You can also use filter expression templating in delete operations. Similar to search and query, the <code translate="no">filter</code> expression defines the conditions, and the <code translate="no">filter_params</code> provides the dynamic values for the placeholders.​</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">expr</span> = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>​
-filter_params = {<span class="hljs-string">&quot;age&quot;</span>: 25, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}​
+<pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; {age} AND city IN {city}&quot;</span>​
+filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}​
 res = client.delete(​
     <span class="hljs-string">&quot;hello_milvus&quot;</span>,​
-    filter=<span class="hljs-built_in">expr</span>,​
+    <span class="hljs-built_in">filter</span>=expr,​
     filter_params=filter_params​
 )​
 

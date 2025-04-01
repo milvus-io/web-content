@@ -61,7 +61,7 @@ summary: This article compares Milvus with other vector search solutions.
 <tr><th>Feature</th><th>Pinecone</th><th>Milvus</th><th>Remarks</th></tr>
 </thead>
 <tbody>
-<tr><td>Deployment Modes</td><td>SaaS-only</td><td>Milvus Lite, On-prem Standalone &amp; Cluster,  Zilliz Cloud Saas &amp; BYOC</td><td>Milvus offers greater flexibility in deployment modes.</td></tr>
+<tr><td>Deployment Modes</td><td>SaaS-only</td><td>Milvus Lite, On-prem Standalone & Cluster,  Zilliz Cloud Saas & BYOC</td><td>Milvus offers greater flexibility in deployment modes.</td></tr>
 <tr><td>Supported SDKs</td><td>Python, JavaScript/TypeScript</td><td>Python, Java, NodeJS, Go, Restful API, C#, Rust</td><td>Milvus supports a wider array of programming languages.</td></tr>
 <tr><td>Open-source Status</td><td>Closed</td><td>Open-source</td><td>Milvus is a popular open-source vector database.</td></tr>
 <tr><td>Scalability</td><td>Scale up/down only</td><td>Scale out/in and Scale up/down</td><td>Milvus features a distributed architecture for enhanced scalability.</td></tr>
@@ -119,7 +119,7 @@ summary: This article compares Milvus with other vector search solutions.
 <tr><th>Capability</th><th>Pinecone</th><th>Milvus</th></tr>
 </thead>
 <tbody>
-<tr><td>Deployment Modes</td><td>SaaS-only</td><td>Milvus Lite, On-prem Standalone &amp; Cluster,  Zilliz Cloud Saas &amp; BYOC</td></tr>
+<tr><td>Deployment Modes</td><td>SaaS-only</td><td>Milvus Lite, On-prem Standalone & Cluster,  Zilliz Cloud Saas & BYOC</td></tr>
 <tr><td>Embedding Functions</td><td>Not available</td><td>Support with <a href="https://github.com/milvus-io/milvus-model">pymilvus[model]</a></td></tr>
 <tr><td>Data Types</td><td>String, Number, Bool, List of String</td><td>String, VarChar, Number (Int, Float, Double), Bool, Array, JSON, Float Vector, Binary Vector, BFloat16, Float16, Sparse Vector</td></tr>
 <tr><td>Metric and Index Types</td><td>Cos, Dot, Euclidean<br/>P-family, S-family</td><td>Cosine, IP (Dot), L2 (Euclidean),  Hamming, Jaccard<br/>FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, HNSW, SCANN, GPU Indexes</td></tr>

@@ -37,14 +37,14 @@ summary: Learn how to configure message storage with Docker Compose or Helm.
         ></path>
       </svg>
     </button></h2><h3 id="1-Configure-Pulsar" class="common-anchor-header">1. Configure Pulsar</h3><p>To configure Pulsar with Docker Compose, provide your values for the <code translate="no">pulsar</code> section in the <code translate="no">milvus.yaml</code> file on the milvus/configs path.</p>
-<pre><code translate="no">pulsar:
-  address: localhost <span class="hljs-comment"># Address of pulsar</span>
-  port: <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
-  maxMessageSize: <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
+<pre><code translate="no"><span class="hljs-attr">pulsar:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
+  <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>See <a href="/docs/configure_pulsar.md">Pulsar-related configurations</a> for more information.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Run Milvus</h3><p>Run the following command to start Milvus that uses the Pulsar configurations.</p>
-<pre><code translate="no">docker compose up
+<pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">Configurations only take effect after Milvus starts. See <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Start Milvus</a> for more information.</div>
 <h2 id="Configure-Pulsar-with-Helm" class="common-anchor-header">Configure Pulsar with Helm<button data-href="#Configure-Pulsar-with-Helm" class="anchor-icon" translate="no">
@@ -68,16 +68,16 @@ summary: Learn how to configure message storage with Docker Compose or Helm.
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Using the YAML file</h3><ol>
 <li>Configure the <code translate="no">externalConfigFiles</code> section in the <code translate="no">values.yaml</code> file.</li>
 </ol>
-<pre><code translate="no" class="language-yaml">extraConfigFiles:
-  user.yaml: |+
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     pulsar:
-      address: localhost <span class="hljs-comment"># Address of pulsar</span>
-      port: <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of Pulsar</span>
-      webport: <span class="hljs-number">80</span> <span class="hljs-comment"># Web port of pulsar, if you connect direcly without proxy, should use 8080</span>
-      maxMessageSize: <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
+      address: localhost # Address of pulsar
+      port: 6650 # Port of Pulsar
+      webport: 80 # Web port of pulsar, if you connect direcly without proxy, should use 8080
+      maxMessageSize: 5242880 # 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
       tenant: public
       namespace: default    
-<button class="copy-code-btn"></button></code></pre>
+</span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>After configuring the preceding sections and saving the <code translate="no">values.yaml</code> file, run the following command to install Milvus which uses the Pulsar configurations.</li>
 </ol>
@@ -103,8 +103,8 @@ summary: Learn how to configure message storage with Docker Compose or Helm.
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Using the YAML file</h3><ol>
 <li>Configure the <code translate="no">externalConfigFiles</code> section in the <code translate="no">values.yaml</code> file if you want to use Kafka as the message storage system.</li>
 </ol>
-<pre><code translate="no" class="language-yaml">extraConfigFiles:
-  user.yaml: |+
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     kafka:
       brokerList:
         -  &lt;your_kafka_address&gt;:&lt;your_kafka_port&gt;
@@ -112,7 +112,7 @@ summary: Learn how to configure message storage with Docker Compose or Helm.
       saslPassword:
       saslMechanisms: PLAIN
       securityProtocol: SASL_SSL    
-<button class="copy-code-btn"></button></code></pre>
+</span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>After configuring the preceding sections and saving the <code translate="no">values.yaml</code> file, run the following command to install Milvus that uses the Kafka configurations.</li>
 </ol>
@@ -138,22 +138,22 @@ summary: Learn how to configure message storage with Docker Compose or Helm.
 <li><p>If you start Milvus with RocksMQ and want to change its settings, you can run <code translate="no">helm upgrade -f</code> with the changed settings in the following YAML file.</p></li>
 <li><p>If you have installed Milvus standalone using Helm with a message store other than RocksMQ and want to change it back to RocksMQ, run <code translate="no">helm upgrade -f</code> with the following YAML file after you have flushed all collections and stopped Milvus.</p></li>
 </ul>
-<pre><code translate="no" class="language-yaml">extraConfigFiles:
-  user.yaml: |+
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     rocksmq:
-      <span class="hljs-comment"># The path where the message is stored in rocksmq</span>
-      <span class="hljs-comment"># please adjust in embedded Milvus: /tmp/milvus/rdb_data</span>
+      # The path where the message is stored in rocksmq
+      # please adjust in embedded Milvus: /tmp/milvus/rdb_data
       path: /var/lib/milvus/rdb_data
-      lrucacheratio: <span class="hljs-number">0.06</span> <span class="hljs-comment"># rocksdb cache memory ratio</span>
-      rocksmqPageSize: <span class="hljs-number">67108864</span> <span class="hljs-comment"># 64 MB, 64 * 1024 * 1024 bytes, The size of each page of messages in rocksmq</span>
-      retentionTimeInMinutes: <span class="hljs-number">4320</span> <span class="hljs-comment"># 3 days, 3 * 24 * 60 minutes, The retention time of the message in rocksmq.</span>
-      retentionSizeInMB: <span class="hljs-number">8192</span> <span class="hljs-comment"># 8 GB, 8 * 1024 MB, The retention size of the message in rocksmq.</span>
-      compactionInterval: <span class="hljs-number">86400</span> <span class="hljs-comment"># 1 day, trigger rocksdb compaction every day to remove deleted data</span>
-      <span class="hljs-comment"># compaction compression type, only support use 0,7.</span>
-      <span class="hljs-comment"># 0 means not compress, 7 will use zstd</span>
-      <span class="hljs-comment"># len of types means num of rocksdb level.</span>
-      compressionTypes: [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">7</span>, <span class="hljs-number">7</span>, <span class="hljs-number">7</span>]    
-<button class="copy-code-btn"></button></code></pre>
+      lrucacheratio: 0.06 # rocksdb cache memory ratio
+      rocksmqPageSize: 67108864 # 64 MB, 64 * 1024 * 1024 bytes, The size of each page of messages in rocksmq
+      retentionTimeInMinutes: 4320 # 3 days, 3 * 24 * 60 minutes, The retention time of the message in rocksmq.
+      retentionSizeInMB: 8192 # 8 GB, 8 * 1024 MB, The retention size of the message in rocksmq.
+      compactionInterval: 86400 # 1 day, trigger rocksdb compaction every day to remove deleted data
+      # compaction compression type, only support use 0,7.
+      # 0 means not compress, 7 will use zstd
+      # len of types means num of rocksdb level.
+      compressionTypes: [0, 0, 7, 7, 7]    
+</span><button class="copy-code-btn"></button></code></pre>
 <div class="alert warning">
 <p>Changing the message store is not recommended. If this is you want to do this, stop all DDL operations, then call the FlushAll API to flush all collections, and finally stop Milvus in the end before you actually change the message store.</p>
 </div>
@@ -177,42 +177,42 @@ summary: Learn how to configure message storage with Docker Compose or Helm.
 <li><p>If you start Milvus with NATS and want to change its settings, you can run <code translate="no">helm upgrade -f</code> with the changed settings in the following YAML file.</p></li>
 <li><p>If you have installed Milvus standalone with a message store other than NATS and want to change it to NATS, run <code translate="no">helm upgrade -f</code> with the following YAML file after you flushed all collections and stopped Milvus.</p></li>
 </ul>
-<pre><code translate="no" class="language-yaml">extraConfigFiles:
-  user.yaml: |+
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     mq:
-      <span class="hljs-built_in">type</span>: natsmq
+      type: natsmq
     natsmq:
-      <span class="hljs-comment"># server side configuration for natsmq.</span>
+      # server side configuration for natsmq.
       server: 
-        <span class="hljs-comment"># 4222 by default, Port for nats server listening.</span>
-        port: <span class="hljs-number">4222</span> 
-        <span class="hljs-comment"># /var/lib/milvus/nats by default, directory to use for JetStream storage of nats.</span>
+        # 4222 by default, Port for nats server listening.
+        port: 4222 
+        # /var/lib/milvus/nats by default, directory to use for JetStream storage of nats.
         storeDir: /var/lib/milvus/nats 
-        <span class="hljs-comment"># (B) 16GB by default, Maximum size of the &#x27;file&#x27; storage.</span>
-        maxFileStore: <span class="hljs-number">17179869184</span> 
-        <span class="hljs-comment"># (B) 8MB by default, Maximum number of bytes in a message payload.</span>
-        maxPayload: <span class="hljs-number">8388608</span> 
-        <span class="hljs-comment"># (B) 64MB by default, Maximum number of bytes buffered for a connection applies to client connections.</span>
-        maxPending: <span class="hljs-number">67108864</span> 
-        <span class="hljs-comment"># (√ms) 4s by default, waiting for initialization of natsmq finished.</span>
-        initializeTimeout: <span class="hljs-number">4000</span> 
+        # (B) 16GB by default, Maximum size of the &#x27;file&#x27; storage.
+        maxFileStore: 17179869184 
+        # (B) 8MB by default, Maximum number of bytes in a message payload.
+        maxPayload: 8388608 
+        # (B) 64MB by default, Maximum number of bytes buffered for a connection applies to client connections.
+        maxPending: 67108864 
+        # (√ms) 4s by default, waiting for initialization of natsmq finished.
+        initializeTimeout: 4000 
         monitor:
-          <span class="hljs-comment"># false by default, If true enable debug log messages.</span>
+          # false by default, If true enable debug log messages.
           debug: false 
-          <span class="hljs-comment"># true by default, If set to false, log without timestamps.</span>
+          # true by default, If set to false, log without timestamps.
           logTime: true 
-          <span class="hljs-comment"># no log file by default, Log file path relative to.. .</span>
+          # no log file by default, Log file path relative to.. .
           logFile: 
-          <span class="hljs-comment"># (B) 0, unlimited by default, Size in bytes after the log file rolls over to a new one.</span>
-          logSizeLimit: <span class="hljs-number">0</span> 
+          # (B) 0, unlimited by default, Size in bytes after the log file rolls over to a new one.
+          logSizeLimit: 0 
         retention:
-          <span class="hljs-comment"># (min) 3 days by default, Maximum age of any message in the P-channel.</span>
-          maxAge: <span class="hljs-number">4320</span> 
-          <span class="hljs-comment"># (B) None by default, How many bytes the single P-channel may contain. Removing oldest messages if the P-channel exceeds this size.</span>
+          # (min) 3 days by default, Maximum age of any message in the P-channel.
+          maxAge: 4320 
+          # (B) None by default, How many bytes the single P-channel may contain. Removing oldest messages if the P-channel exceeds this size.
           maxBytes:
-          <span class="hljs-comment"># None by default, How many message the single P-channel may contain. Removing oldest messages if the P-channel exceeds this limit.    </span>
+          # None by default, How many message the single P-channel may contain. Removing oldest messages if the P-channel exceeds this limit.    
           maxMsgs: 
-<button class="copy-code-btn"></button></code></pre>
+</span><button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p><strong>Choose between RocksMQ and NATS?</strong></p>
 <p>RockMQ uses CGO to interact with RocksDB and manages the memory by itself, while the pure-GO NATS embedded in the Milvus installation delegates its memory management to Go’s garbage collector (GC).</p>

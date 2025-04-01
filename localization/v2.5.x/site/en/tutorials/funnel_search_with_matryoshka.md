@@ -34,11 +34,11 @@ title: Funnel Search with Matryoshka Embeddings
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> pymilvus
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>
-<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> <span class="hljs-title class_">SentenceTransformer</span>
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType
+<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer
 <span class="hljs-keyword">import</span> torch
-<span class="hljs-keyword">import</span> torch.<span class="hljs-property">nn</span>.<span class="hljs-property">functional</span> <span class="hljs-keyword">as</span> F
+<span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Load Matryoshka Embedding Model<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
@@ -82,7 +82,7 @@ title: Funnel Search with Matryoshka Embeddings
         ></path>
       </svg>
     </button></h2><p>The following code is a modification of that from the documentation page <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">“Movie Search with Sentence Transformers and Milvus”</a>. First, we load the dataset from HuggingFace. It contains around 35k entries, each corresponding to a movie having a Wikipedia article. We will use the <code translate="no">Title</code> and <code translate="no">PlotSummary</code> fields in this example.</p>
-<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, <span class="hljs-built_in">split</span>=<span class="hljs-string">&quot;train&quot;</span>)
+<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, split=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Dataset({
@@ -112,12 +112,12 @@ client.create_collection(collection_name=collection_name, schema=schema)
 <p>Milvus does not currently support searching over subsets of embeddings, so we break the embeddings into two parts: the head represents the initial subset of the vector to index and search, and the tail is the remainder. The model is trained for cosine distance similarity search, so we normalize the head embeddings. However, in order to calculate similarities for larger subsets later on, we need to store the norm of the head embedding, so we can unnormalize it before joining to the tail.</p>
 <p>To perform search via the first 1/6th of the embedding, we will need to create a vector search index over the <code translate="no">head_embedding</code> field. Later on, we will compare the results of “funnel search” with a regular vector search, and so build a search index over the full embedding also.</p>
 <p><em>Importantly, we use the <code translate="no">COSINE</code> rather than the <code translate="no">IP</code> distance metric, because otherwise we would need to keep track of the embedding norms, which would complicate the implementation (this will make more sense once the funnel search algorithm has been described).</em></p>
-<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
-index_params.<span class="hljs-title function_">add_index</span>(
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+index_params.add_index(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
 )
-index_params.<span class="hljs-title function_">add_index</span>(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
-client.<span class="hljs-title function_">create_index</span>(collection_name, index_params)
+index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
+client.create_index(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
 <p>Finally, we encode the plot summaries for all 35k movies and enter the corresponding embeddings in to the database.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
@@ -299,7 +299,7 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>We have been able to restore recall without performing any additional vector searches! Qualitatively, these results seem to have higher recall for “Raiders of the Lost Ark” and “The Shining” than the standard vector search in the tutorial, <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">“Movie Search using Milvus and Sentence Transformers”</a>, which uses a different embedding model. However, it is unable to find &quot;Ferris Bueller’s Day Off&quot;, which we will return to later in the notebook. (See the paper <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a> for more quantitative experiments and benchmarking.)</p>
+<p>We have been able to restore recall without performing any additional vector searches! Qualitatively, these results seem to have higher recall for “Raiders of the Lost Ark” and “The Shining” than the standard vector search in the tutorial, <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">“Movie Search using Milvus and Sentence Transformers”</a>, which uses a different embedding model. However, it is unable to find "Ferris Bueller’s Day Off", which we will return to later in the notebook. (See the paper <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a> for more quantitative experiments and benchmarking.)</p>
 <h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">Comparing Funnel Search to Regular Search<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -358,7 +358,7 @@ Fast and Loose
 Killing Ground
 Home Alone
 </code></pre>
-<p>With the exception of the results for &quot;A teenager fakes illness to get off school…&quot;, the results under funnel search are almost identical to the full search, even though the funnel search was performed on a search space of 128 dimensions vs 768 dimensions for the regular one.</p>
+<p>With the exception of the results for "A teenager fakes illness to get off school…", the results under funnel search are almost identical to the full search, even though the funnel search was performed on a search space of 128 dimensions vs 768 dimensions for the regular one.</p>
 <h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">Investigating Funnel Search Recall Failure for Ferris Bueller’s Day Off<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

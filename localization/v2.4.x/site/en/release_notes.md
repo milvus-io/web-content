@@ -294,7 +294,7 @@ title: Release Notes
 <li>Optimize CPU usage for health check requests (<a href="https://github.com/milvus-io/milvus/pull/35595">#35595</a>)</li>
 <li>Support templates for expressions in RESTful APIs (<a href="https://github.com/milvus-io/milvus/pull/38161">#38161</a>)</li>
 <li>Remove the limit on the number of load tasks per round (<a href="https://github.com/milvus-io/milvus/pull/38497">#38497</a>)</li>
-<li><code translate="no">alterindex</code> &amp; <code translate="no">altercollection</code> now support modifying properties (<a href="https://github.com/milvus-io/milvus/pull/38361">#38361</a> <a href="https://github.com/milvus-io/milvus/pull/38111">#38111</a> <a href="https://github.com/milvus-io/milvus/pull/38421">#38421</a>)</li>
+<li><code translate="no">alterindex</code> & <code translate="no">altercollection</code> now support modifying properties (<a href="https://github.com/milvus-io/milvus/pull/38361">#38361</a> <a href="https://github.com/milvus-io/milvus/pull/38111">#38111</a> <a href="https://github.com/milvus-io/milvus/pull/38421">#38421</a>)</li>
 <li><code translate="no">alterdatabase</code> supports deleting properties (<a href="https://github.com/milvus-io/milvus/pull/38450">#38450</a>)</li>
 <li>Add detailed replica counts for resource groups (<a href="https://github.com/milvus-io/milvus/pull/38315">#38315</a>)</li>
 <li>Support score-based balancing for channel policies  (<a href="https://github.com/milvus-io/milvus/pull/38378">#38378</a>)</li>
@@ -579,7 +579,7 @@ title: Release Notes
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
 <li>Fixed a flush performance issue (<a href="https://github.com/milvus-io/milvus/pull/36741">#36741</a>)</li>
-<li>Fixed a bug with JSON expressions in &quot;[]&quot; (<a href="https://github.com/milvus-io/milvus/pull/36722">#36722</a>)</li>
+<li>Fixed a bug with JSON expressions in "[]" (<a href="https://github.com/milvus-io/milvus/pull/36722">#36722</a>)</li>
 <li>Removed neighbors if compact target is unindexed (<a href="https://github.com/milvus-io/milvus/pull/36694">#36694</a>)</li>
 <li>Improved performance for Rocksmq when channel is full (<a href="https://github.com/milvus-io/milvus/pull/36618">#36618</a>)</li>
 <li>Fixed an issue where errors during unpinning were not deferred (<a href="https://github.com/milvus-io/milvus/pull/36665">#36665</a>)</li>
@@ -732,7 +732,7 @@ title: Release Notes
 <li>Ensured single startup of querycoord observers in 2.4 (<a href="https://github.com/milvus-io/milvus/pull/35817">#35817</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
-<li>Upgraded Milvus &amp; proto version to 2.4.11 (<a href="https://github.com/milvus-io/milvus/pull/36069">#36069</a>)</li>
+<li>Upgraded Milvus & proto version to 2.4.11 (<a href="https://github.com/milvus-io/milvus/pull/36069">#36069</a>)</li>
 <li>Addressed memory leak in unit tests and enable use_asan option for unittest builds (<a href="https://github.com/milvus-io/milvus/pull/35857">#35857</a>)</li>
 <li>Adjusted l0segmentsrowcount limits to more appropriate values (<a href="https://github.com/milvus-io/milvus/pull/36015">#36015</a>)</li>
 <li>Modified deltalog memory estimation factor to one (<a href="https://github.com/milvus-io/milvus/pull/36035">#36035</a>)</li>
@@ -1232,7 +1232,7 @@ title: Release Notes
 <li>Enabled batch uploading (<a href="https://github.com/milvus-io/milvus/pull/32788">#32788</a>)</li>
 <li>Changed default partition number to 16 when using partition key (<a href="https://github.com/milvus-io/milvus/pull/32950">#32950</a>)</li>
 <li>Improved reduce performance on very large top-k queries (<a href="https://github.com/milvus-io/milvus/pull/32871">#32871</a>)</li>
-<li>Utilized TestLocations ability to accelerate write &amp; compaction (<a href="https://github.com/milvus-io/milvus/pull/32948">#32948</a>)</li>
+<li>Utilized TestLocations ability to accelerate write & compaction (<a href="https://github.com/milvus-io/milvus/pull/32948">#32948</a>)</li>
 <li>Optimized plan parser pool to avoid unnecessary recycling (<a href="https://github.com/milvus-io/milvus/pull/32869">#32869</a>)</li>
 <li>Improved load speed (<a href="https://github.com/milvus-io/milvus/pull/32898">#32898</a>)</li>
 <li>Used collection default consistency level for restv2 (<a href="https://github.com/milvus-io/milvus/pull/32956">#32956</a>)</li>
@@ -1240,7 +1240,7 @@ title: Release Notes
 <li>Enabled channel exclusive balance policy (<a href="https://github.com/milvus-io/milvus/pull/32911">#32911</a>)</li>
 <li>Exposed describedatabase API in proxy (<a href="https://github.com/milvus-io/milvus/pull/32732">#32732</a>)</li>
 <li>Utilized coll2replica mapping when getting RG by collection (<a href="https://github.com/milvus-io/milvus/pull/32892">#32892</a>)</li>
-<li>Added more tracing for search &amp; query (<a href="https://github.com/milvus-io/milvus/pull/32734">#32734</a>)</li>
+<li>Added more tracing for search & query (<a href="https://github.com/milvus-io/milvus/pull/32734">#32734</a>)</li>
 <li>Supported dynamic config for opentelemetry trace (<a href="https://github.com/milvus-io/milvus/pull/32169">#32169</a>)</li>
 <li>Avoided iteration over channel results when updating leaderview (<a href="https://github.com/milvus-io/milvus/pull/32887">#32887</a>)</li>
 <li>Optimized vector offsets handling for parquet (<a href="https://github.com/milvus-io/milvus/pull/32822">#32822</a>)</li>
@@ -1267,7 +1267,7 @@ title: Release Notes
 <li>Fixed panic when the database didn’t exist in the rate limit interceptor (<a href="https://github.com/milvus-io/milvus/pull/33308">#33308</a>)</li>
 <li>Fixed quotacenter metrics collection failure due to incorrect parameters (<a href="https://github.com/milvus-io/milvus/pull/33399">#33399</a>)</li>
 <li>Fixed panic if processactivestandby returned an error (<a href="https://github.com/milvus-io/milvus/pull/33372">#33372</a>)</li>
-<li>Fixed search result truncation in restful v2 when nq &gt; 1 (<a href="https://github.com/milvus-io/milvus/pull/33363">#33363</a>)</li>
+<li>Fixed search result truncation in restful v2 when nq > 1 (<a href="https://github.com/milvus-io/milvus/pull/33363">#33363</a>)</li>
 <li>Added database name field for role operations in restful v2 (<a href="https://github.com/milvus-io/milvus/pull/33291">#33291</a>)</li>
 <li>Fixed global rate limit not working (<a href="https://github.com/milvus-io/milvus/pull/33336">#33336</a>)</li>
 <li>Fixed panic caused by failure of building index (<a href="https://github.com/milvus-io/milvus/pull/33314">#33314</a>)</li>
@@ -1473,7 +1473,7 @@ title: Release Notes
 <p>Example code can be found in <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/example_gpu_cagra.py">example_gpu_cagra.py</a>.</p>
 <h4 id="Sparse-Vector-Beta" class="common-anchor-header">Sparse Vector (Beta)</h4><p>In this release, we are introducing a new type of vector field called sparse vector. Sparse vectors are different from their dense counterparts as they tend to have several magnitude higher number of dimensions with only a handful being non-zero. This feature offers better interpretability due to its term-based nature and can be more effective in certain domains. Learned sparse models such as SPLADEv2/BGE-M3 have proven to be very useful for common first-stage ranking tasks. The main use case for this new feature in Milvus is to allow efficient approximate semantic nearest neighbor search over sparse vectors generated by neural models such as SPLADEv2/BGE-M3 and statistics models such as the BM25 algorithm. Milvus now supports effective and high-performance storage, indexing, and searching (MIPS, Maximum Inner Product Search) of sparse vectors.</p>
 <p>Example code can be found in <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/hello_sparse.py">hello_sparse.py</a>.</p>
-<h4 id="Multi-Embedding---Hybrid-Search" class="common-anchor-header">Multi Embedding &amp;  Hybrid Search</h4><p>Multi-vector support is the cornerstone for applications that require multi-model data processing or a mix of dense and sparse vectors. With multi-vector support, now you can:</p>
+<h4 id="Multi-Embedding---Hybrid-Search" class="common-anchor-header">Multi Embedding &  Hybrid Search</h4><p>Multi-vector support is the cornerstone for applications that require multi-model data processing or a mix of dense and sparse vectors. With multi-vector support, now you can:</p>
 <ul>
 <li>Store vector embeddings generated for unstructured text, image, or audio samples from multiple models.</li>
 <li>Conduct ANN searches that include multiple vectors of each entity.</li>

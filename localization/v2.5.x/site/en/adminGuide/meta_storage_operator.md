@@ -23,7 +23,7 @@ summary: Learn how to configure meta storage with Milvus Operator.
 <p>This topic assumes that you have deployed Milvus Operator.</p>
 <div class="alert note">See <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
 <p>You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.</p>
-<pre><code translate="no" class="language-YAML">kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
+<pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>You only need to edit the code template in <code translate="no">milvus_cluster_default.yaml</code> to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.</p>
 <h2 id="Configure-etcd" class="common-anchor-header">Configure etcd<button data-href="#Configure-etcd" class="anchor-icon" translate="no">
@@ -49,46 +49,46 @@ summary: Learn how to configure meta storage with Milvus Operator.
 <li><code translate="no">endpoints</code>: The endpoints of etcd.</li>
 </ul>
 <h3 id="External-etcd" class="common-anchor-header">External etcd</h3><h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an external etcd service.</p>
-<pre><code translate="no" class="language-YAML">kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
-  dependencies: <span class="hljs-comment"># Optional</span>
-    etcd: <span class="hljs-comment"># Optional</span>
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">dependencies:</span> <span class="hljs-comment"># Optional</span>
+    <span class="hljs-attr">etcd:</span> <span class="hljs-comment"># Optional</span>
       <span class="hljs-comment"># Whether (=true) to use an existed external etcd as specified in the field endpoints or </span>
       <span class="hljs-comment"># (=false) create a new etcd inside the same kubernetes cluster for milvus.</span>
-      external: true <span class="hljs-comment"># Optional default=false</span>
+      <span class="hljs-attr">external:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Optional default=false</span>
       <span class="hljs-comment"># The external etcd endpoints if external=true</span>
-      endpoints:
-      - <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.1</span>:<span class="hljs-number">2379</span>
-  components: {}
-  config: {}
+      <span class="hljs-attr">endpoints:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.1</span><span class="hljs-string">:2379</span>
+  <span class="hljs-attr">components:</span> {}
+  <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Internal-etcd" class="common-anchor-header">Internal etcd</h3><p><code translate="no">inCluster</code> indicates when a Milvus cluster starts, an etcd service starts automatically in the cluster.</p>
 <h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an internal etcd service.</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
-kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
-  dependencies:
-    etcd:
-      inCluster:
-        values:
-          replicaCount: 5
-          resources:
-            limits: 
-              cpu: <span class="hljs-string">&#x27;4&#x27;</span>
-              memory: 8Gi
-            requests:
-              cpu: 200m
-              memory: 512Mi
-  components: {}
-  config: {}              
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">dependencies:</span>
+    <span class="hljs-attr">etcd:</span>
+      <span class="hljs-attr">inCluster:</span>
+        <span class="hljs-attr">values:</span>
+          <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">5</span>
+          <span class="hljs-attr">resources:</span>
+            <span class="hljs-attr">limits:</span> 
+              <span class="hljs-attr">cpu:</span> <span class="hljs-string">&#x27;4&#x27;</span>
+              <span class="hljs-attr">memory:</span> <span class="hljs-string">8Gi</span>
+            <span class="hljs-attr">requests:</span>
+              <span class="hljs-attr">cpu:</span> <span class="hljs-string">200m</span>
+              <span class="hljs-attr">memory:</span> <span class="hljs-string">512Mi</span>
+  <span class="hljs-attr">components:</span> {}
+  <span class="hljs-attr">config:</span> {}              
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">The preceding example specifies the number of replicas as <code translate="no">5</code> and limits the compute resources for etcd.</div>
 <div class="alert note">Find the complete configuration items to configure an internal etcd service in <a href="https://github.com/bitnami/charts/blob/ba6f8356e725a8342fe738a3b73ae40d5488b2ad/bitnami/etcd/values.yaml">values.yaml</a>. Add configuration items as needed under <code translate="no">etcd.inCluster.values</code> as shown in the preceding example.</div>

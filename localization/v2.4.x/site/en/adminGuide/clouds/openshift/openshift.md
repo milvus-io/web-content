@@ -62,7 +62,7 @@ summary: Learn how to deploy a Milvus cluster on OpenShift.
 <li><p>Install Cert Manager following the official guide: <a href="https://cert-manager.io/docs/installation/">Cert Manager Installation</a>.</p></li>
 <li><p>Verify your Cert Manager is working:</p>
 <ol>
-<li><p>In your openshift console, navigate to <strong>Workloads</strong> &gt; <strong>Pods</strong>. Select the project <strong>cert-manager</strong>.</p>
+<li><p>In your openshift console, navigate to <strong>Workloads</strong> > <strong>Pods</strong>. Select the project <strong>cert-manager</strong>.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.4.x/assets/openshift-cert-manager-1.png" alt="cert-manager-1" class="doc-image" id="cert-manager-1" />
@@ -97,30 +97,30 @@ summary: Learn how to deploy a Milvus cluster on OpenShift.
 <ol>
 <li><p>Create the following manifest file named <code translate="no">milvus-operator-certificate.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus-operator-certificate.yaml</span>
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: milvus-operator-serving-cert
-  namespace: milvus-operator
-spec:
-  dnsNames:
-  - milvus-operator-webhook-service.milvus-operator.svc
-  - milvus-operator-webhook-service.milvus-operator.svc.cluster.local
-  issuerRef:
-    kind: Issuer
-    name: milvus-operator-selfsigned-issuer
-  secretName: milvus-operator-webhook-cert
----
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: milvus-operator-selfsigned-issuer
-  namespace: milvus-operator
-spec:
-  selfSigned: {}
+<span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cert-manager.io/v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Certificate</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">milvus-operator-serving-cert</span>
+  <span class="hljs-attr">namespace:</span> <span class="hljs-string">milvus-operator</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">dnsNames:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">milvus-operator-webhook-service.milvus-operator.svc</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">milvus-operator-webhook-service.milvus-operator.svc.cluster.local</span>
+  <span class="hljs-attr">issuerRef:</span>
+    <span class="hljs-attr">kind:</span> <span class="hljs-string">Issuer</span>
+    <span class="hljs-attr">name:</span> <span class="hljs-string">milvus-operator-selfsigned-issuer</span>
+  <span class="hljs-attr">secretName:</span> <span class="hljs-string">milvus-operator-webhook-cert</span>
+<span class="hljs-meta">---</span>
+<span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cert-manager.io/v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Issuer</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">milvus-operator-selfsigned-issuer</span>
+  <span class="hljs-attr">namespace:</span> <span class="hljs-string">milvus-operator</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">selfSigned:</span> {}
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Apply the file:</p>
-<pre><code translate="no" class="language-shell">kubectl apply -f milvus-<span class="hljs-keyword">operator</span>-certificate.yaml
+<pre><code translate="no" class="language-shell">kubectl apply -f milvus-operator-certificate.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <h2 id="Step-3-Install-Milvus-Operator" class="common-anchor-header">Step 3: Install Milvus Operator<button data-href="#Step-3-Install-Milvus-Operator" class="anchor-icon" translate="no">
@@ -141,8 +141,8 @@ spec:
     </button></h2><p>Now you can start installing the Milvus Operator. It is recommended to use Helm to install Milvus Operator to simplify the configuration process.</p>
 <ol>
 <li><p>Add the Milvus Operator Helm repository:</p>
-<pre><code translate="no" class="language-shell">helm repo <span class="hljs-keyword">add</span> milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator/</span>
-helm repo update milvus-<span class="hljs-keyword">operator</span>
+<pre><code translate="no" class="language-shell">helm repo add milvus-operator https://zilliztech.github.io/milvus-operator/
+helm repo update milvus-operator
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Install Milvus Operator:</p>
 <pre><code translate="no" class="language-shell">helm -n milvus-operator upgrade --install --create-namespace milvus-operator milvus-operator/milvus-operator

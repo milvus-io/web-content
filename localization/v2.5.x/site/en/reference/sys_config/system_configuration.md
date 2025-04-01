@@ -40,7 +40,7 @@ In current release, all parameters take effect only after being configured at th
         ></path>
       </svg>
     </button></h2><p>For the convenience of maintenance, Milvus classifies its configurations into %s sections based on its components, dependencies, and general usage.</p>
-<h3 id="etcd" class="common-anchor-header"><code translate="no">etcd</code></h3><p>Related configuration of etcd, used to store Milvus metadata &amp; service discovery.</p>
+<h3 id="etcd" class="common-anchor-header"><code translate="no">etcd</code></h3><p>Related configuration of etcd, used to store Milvus metadata & service discovery.</p>
 <p>See <a href="/docs/configure_etcd.md">etcd-related Configurations</a> for detailed description for each parameter under this section.</p>
 <h3 id="metastore" class="common-anchor-header"><code translate="no">metastore</code></h3><p>See <a href="/docs/configure_metastore.md">metastore-related Configurations</a> for detailed description for each parameter under this section.</p>
 <h3 id="tikv" class="common-anchor-header"><code translate="no">tikv</code></h3><p>Related configuration of tikv, used to store Milvus metadata.</p>
@@ -55,8 +55,8 @@ In current release, all parameters take effect only after being configured at th
 <p>You can change your mq by setting mq.type field.</p>
 <p>If you don’t set mq.type field as default, there is a note about enabling priority if we config multiple mq in this file.</p>
 <ol>
-<li><p>standalone(local) mode: rocksmq(default) &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
-<li><p>cluster mode:  Pulsar(default) &gt; Kafka (rocksmq and natsmq is unsupported in cluster mode)</p></li>
+<li><p>standalone(local) mode: rocksmq(default) > natsmq > Pulsar > Kafka</p></li>
+<li><p>cluster mode:  Pulsar(default) > Kafka (rocksmq and natsmq is unsupported in cluster mode)</p></li>
 </ol>
 <p>See <a href="/docs/configure_mq.md">mq-related Configurations</a> for detailed description for each parameter under this section.</p>
 <h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code></h3><p>Related configuration of pulsar, used to manage Milvus logs of recent mutation operations, output streaming log, and provide log publish-subscribe services.</p>

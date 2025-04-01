@@ -60,7 +60,7 @@ title: Collection Explained​
 <p>You should include all schema-defined fields in the entities to insert. To make some of them optional, consider​</p>
 <ul>
 <li><p><strong>Making them nullable or setting default values</strong>​</p>
-<p>For details on how to make a field nullable or set the default value, refer to <a href="/docs/nullable-and-default.md">​Nullable &amp; Default</a>.​</p></li>
+<p>For details on how to make a field nullable or set the default value, refer to <a href="/docs/nullable-and-default.md">​Nullable & Default</a>.​</p></li>
 <li><p><strong>Enabling dynamic field</strong>​</p>
 <p>For details on how to enable and use the dynamic field, refer to <a href="/docs/enable-dynamic-field.md">​Dynamic Field</a>.​</p></li>
 </ul>
@@ -82,7 +82,7 @@ title: Collection Explained​
     </button></h2><p>Similar to the primary field in a relational database, a collection has a primary field to distinguish an entity from others. Each value in the primary field is globally unique and corresponds to one specific entity. ​</p>
 <p>As shown in the above chart, the field named <strong>id</strong> serves as the primary field, and the first ID <strong>0</strong> corresponds to an entity titled <em>The Mortality Rate of Coronavirus is Not Important</em>. There will not be any other entity that has the primary field of 0. ​</p>
 <p>A primary field accepts only integers or strings. When inserting entities, you should include the primary field values by default. However, if you have enabled <strong>AutoId</strong> upon collection creation, Milvus will generate those values upon data insertion. In such a case, exclude the primary field values from the entities to be inserted.​</p>
-<p>For more information, please refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>.​</p>
+<p>For more information, please refer to <a href="/docs/primary-field.md">​Primary Field & AutoID</a>.​</p>
 <h2 id="Index​" class="common-anchor-header">Index​<button data-href="#Index​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -134,7 +134,7 @@ title: Collection Explained​
       </svg>
     </button></h2><p>Loading a collection is the prerequisite to conducting similarity searches and queries in collections. When you load a collection, Milvus loads all index files and the raw data in each field into memory for fast response to searches and queries.​</p>
 <p>Searches and queries are memory-intensive operations. To save the cost, you are advised to release the collections that are currently not in use.​</p>
-<p>For more details, refer to <a href="/docs/load-and-release.md">​Load &amp; Release</a>.​</p>
+<p>For more details, refer to <a href="/docs/load-and-release.md">​Load & Release</a>.​</p>
 <h2 id="Search-and-Query​" class="common-anchor-header">Search and Query​<button data-href="#Search-and-Query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -153,7 +153,7 @@ title: Collection Explained​
     </button></h2><p>Once you create indexes and load the collection, you can start a similarity search by feeding one or several query vectors. For example, when receiving the vector representation of your query carried in a search request, Milvus uses the specified metric type to measure the similarity between the query vector and those in the target collection before returning those that are semantically similar to the query.​</p>
 <p>You can also include metadata filtering within searches and queries to improve the relevancy of the results. Note that, metadata filtering conditions are mandatory in queries but optional in searches.​</p>
 <p>For details on applicable metric types, refer to <a href="/docs/metric.md">​Metric Types</a>.​</p>
-<p>For more information about searches and queries, refer to the articles in the <a href="/docs/single-vector-search.md">​Search &amp; Rerank</a> chapter, among which, basic features are:​</p>
+<p>For more information about searches and queries, refer to the articles in the <a href="/docs/single-vector-search.md">​Search & Rerank</a> chapter, among which, basic features are:​</p>
 <ul>
 <li><p><a href="/docs/single-vector-search.md">​Basic ANN Search</a>​</p></li>
 <li><p><a href="/docs/filtered-search.md">​Filtered Search</a>​</p></li>
@@ -271,4 +271,4 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For limits and restrictions on collections, refer to <a href="/docs/limitations.md">​Limits &amp; Restrictions</a>.​</p>
+    </button></h2><p>For limits and restrictions on collections, refer to <a href="/docs/limitations.md">​Limits & Restrictions</a>.​</p>

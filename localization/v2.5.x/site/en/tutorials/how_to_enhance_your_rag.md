@@ -95,7 +95,7 @@ title: How to Enhance the Performance of Your RAG Pipeline
   </span>
 </p>
 <p>This methodology bypasses the cross-domain asymmetry problem in the vector search process by directly engaging in query-to-query searches, alleviating the burden on vector searches. However, it introduces additional overhead and uncertainty in generating hypothetical questions.</p>
-<h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (Hypothetical Document Embeddings)</h3><p>HyDE stands for Hypothetical Document Embeddings. It leverages an LLM to craft a &quot;<strong><em>Hypothetical Document</em></strong>&quot; or a <strong><em>fake</em></strong> answer in response to a user query devoid of contextual information. This fake answer is then converted into vector embeddings and employed to query the most relevant document chunks within a vector database. Subsequently, the vector database retrieves the Top-K most relevant document chunks and transmits them to the LLM and the original user query to generate the final answer.</p>
+<h3 id="HyDE-Hypothetical-Document-Embeddings" class="common-anchor-header">HyDE (Hypothetical Document Embeddings)</h3><p>HyDE stands for Hypothetical Document Embeddings. It leverages an LLM to craft a "<strong><em>Hypothetical Document</em></strong>" or a <strong><em>fake</em></strong> answer in response to a user query devoid of contextual information. This fake answer is then converted into vector embeddings and employed to query the most relevant document chunks within a vector database. Subsequently, the vector database retrieves the Top-K most relevant document chunks and transmits them to the LLM and the original user query to generate the final answer.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/advanced_rag/hyde.png" alt="" class="doc-image" id="" />
@@ -105,7 +105,7 @@ title: How to Enhance the Performance of Your RAG Pipeline
 <p>This method is similar to the hypothetical question technique in addressing cross-domain asymmetry in vector searches. However, it also has drawbacks, such as the added computational costs and uncertainties of generating fake answers.</p>
 <p>For more information, refer to the <a href="https://arxiv.org/abs/2212.10496">HyDE</a> paper.</p>
 <h3 id="Creating-Sub-Queries" class="common-anchor-header">Creating Sub-Queries</h3><p>When a user query is too complicated, we can use an LLM to break it down into simpler sub-queries before passing them on to the vector database and the LLM. Let’s take a look at an example.</p>
-<p>Imagine a user asking: &quot;<strong><em>What are the differences in features between Milvus and Zilliz Cloud?</em></strong>&quot; This question is quite complex and might not have a straightforward answer in our knowledge base. To tackle this issue, we can split it into two simpler sub-queries:</p>
+<p>Imagine a user asking: "<strong><em>What are the differences in features between Milvus and Zilliz Cloud?</em></strong>" This question is quite complex and might not have a straightforward answer in our knowledge base. To tackle this issue, we can split it into two simpler sub-queries:</p>
 <ul>
 <li>Sub-query 1: “What are the features of Milvus?”</li>
 <li>Sub-query 2: “What are the features of Zilliz Cloud?”</li>
@@ -118,7 +118,7 @@ title: How to Enhance the Performance of Your RAG Pipeline
   </span>
 </p>
 <p>By breaking down the user query into sub-queries, we make it easier for our system to find relevant information and provide accurate answers, even to complex questions.</p>
-<h3 id="Creating-Stepback-Prompts" class="common-anchor-header">Creating Stepback Prompts</h3><p>Another way to simplify complex user queries is by creating <strong><em>stepback prompts</em></strong>. This technique involves abstracting complicated user queries into <em><em>&quot;</em>stepback questions</em>&quot;** using an LLM. Then, a vector database uses these stepback questions to retrieve the most relevant document chunks. Finally, the LLM generates a more accurate answer based on these retrieved document chunks.</p>
+<h3 id="Creating-Stepback-Prompts" class="common-anchor-header">Creating Stepback Prompts</h3><p>Another way to simplify complex user queries is by creating <strong><em>stepback prompts</em></strong>. This technique involves abstracting complicated user queries into <em><em>"</em>stepback questions</em>"** using an LLM. Then, a vector database uses these stepback questions to retrieve the most relevant document chunks. Finally, the LLM generates a more accurate answer based on these retrieved document chunks.</p>
 <p>Let’s illustrate this technique with an example. Consider the following query, which is quite complex and not straightforward to answer directly:</p>
 <p><strong><em>Original User Query: “I have a dataset with 10 billion records and want to store it in Milvus for querying. Is it possible?”</em></strong></p>
 <p>To simplify this user query, we can use an LLM to generate a more straightforward stepback question:</p>
@@ -226,7 +226,7 @@ title: How to Enhance the Performance of Your RAG Pipeline
   </span>
 </p>
 <p>This approach is similar to the earlier discussed hybrid retrieval and reranking method, wherein a reranker is utilized to sift out irrelevant document chunks.</p>
-<h3 id="Adjusting-the-chunk-order-in-the-prompt" class="common-anchor-header">Adjusting the chunk order in the prompt</h3><p>In the paper &quot;<a href="https://arxiv.org/abs/2307.03172">Lost in the middle</a>,&quot; researchers observed that LLMs often overlook information in the middle of given documents during the reasoning process. Instead, they tend to rely more on the information presented at the beginning and end of the documents.</p>
+<h3 id="Adjusting-the-chunk-order-in-the-prompt" class="common-anchor-header">Adjusting the chunk order in the prompt</h3><p>In the paper "<a href="https://arxiv.org/abs/2307.03172">Lost in the middle</a>," researchers observed that LLMs often overlook information in the middle of given documents during the reasoning process. Instead, they tend to rely more on the information presented at the beginning and end of the documents.</p>
 <p>Based on this observation, we can adjust the order of retrieved chunks to improve the answer quality: when retrieving multiple knowledge chunks, chunks with relatively low confidence are placed in the middle, and chunks with relatively high confidence are positioned at both ends.</p>
 <p>
   <span class="img-wrapper">

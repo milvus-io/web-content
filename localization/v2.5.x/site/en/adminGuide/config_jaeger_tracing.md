@@ -58,30 +58,30 @@ summary: >-
       </svg>
     </button></h2><p>Jaeger is a distributed tracing platform released as open source by <a href="http://uber.github.io/">Uber Technologies</a>.</p>
 <h3 id="1-Installing-the-Jaeger-Operator-on-Kubernetes" class="common-anchor-header">1. Installing the Jaeger Operator on Kubernetes</h3><p>To install the operator, run:</p>
-<pre><code translate="no" class="language-shell">$ kubectl create namespace observability
-$ kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.62.0/jaeger-operator.yaml -n observability
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl create namespace observability</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.62.0/jaeger-operator.yaml -n observability</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>At this point, there should be a <code translate="no">jaeger-operator</code> deployment available. You can view it by running the following command:</p>
-<pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> deployment jaeger-<span class="hljs-keyword">operator</span> -n observability
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get deployment jaeger-operator -n observability</span>
 
 NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-jaeger-<span class="hljs-keyword">operator</span>   <span class="hljs-number">1</span>         <span class="hljs-number">1</span>         <span class="hljs-number">1</span>            <span class="hljs-number">1</span>           <span class="hljs-number">48</span>s
+jaeger-operator   1         1         1            1           48s
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Deploy-Jaeger" class="common-anchor-header">2. Deploy Jaeger</h3><p>The simplest possible way to create a Jaeger instance is by creating a YAML file like the following example. This will install the default AllInOne strategy, which deploys the <strong>all-in-one</strong> image (combining <strong>jaeger-agent</strong>, <strong>jaeger-collector</strong>, <strong>jaeger-query</strong>, and Jaeger UI) in a single pod, using <strong>in-memory storage</strong> by default.</p>
 <p>If you want to store traces for a long time, please refer to <a href="https://www.jaegertracing.io/docs/1.62/operator/#production-strategy">production-strategy</a>.</p>
-<pre><code translate="no" class="language-yaml">apiVersion: jaegertracing.io/v1
-kind: Jaeger
-metadata:
-  name: jaeger
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">jaegertracing.io/v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Jaeger</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">jaeger</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>The YAML file can then be used with <code translate="no">kubectl</code>:</p>
-<pre><code translate="no" class="language-shell">$ kubectl apply -f simplest.yaml
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f simplest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>In a few seconds, a new in-memory all-in-one instance of Jaeger will be available, suitable for quick demos and development purposes. To check the instances that were created, list the jaeger objects:</p>
-<pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> jaegers
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get jaegers</span>
 
 NAME     STATUS    VERSION   STRATEGY   STORAGE   AGE
-jaeger   Running   <span class="hljs-number">1.62</span><span class="hljs-number">.0</span>    allinone   memory    <span class="hljs-number">13</span>s
+jaeger   Running   1.62.0    allinone   memory    13s
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-Milvus-with-Helm-Chart" class="common-anchor-header">Install Milvus with Helm Chart<button data-href="#Install-Milvus-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -99,21 +99,21 @@ jaeger   Running   <span class="hljs-number">1.62</span><span class="hljs-number
         ></path>
       </svg>
     </button></h2><p>You can install or upgrade Milvus with Helm Chart with the following settings:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles</span>:
-  user.<span class="hljs-property">yaml</span>: |+
-    <span class="hljs-attr">trace</span>:
-      <span class="hljs-attr">exporter</span>: jaeger
-      <span class="hljs-attr">sampleFraction</span>: <span class="hljs-number">1</span>
-      <span class="hljs-attr">jaeger</span>:
-        <span class="hljs-attr">url</span>: <span class="hljs-string">&quot;http://jaeger-collector:14268/api/traces&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
+    trace:
+      exporter: jaeger
+      sampleFraction: 1
+      jaeger:
+        url: &quot;http://jaeger-collector:14268/api/traces&quot;
+</span><button class="copy-code-btn"></button></code></pre>
 <p>To apply the above settings to a new Milvus deployment , you can run the following command:</p>
-<pre><code translate="no" class="language-shell">$ helm repo add zilliztech https://zilliztech.github.io/milvus-helm
-$ helm repo update
-$ helm upgrade --install -f values.yaml my-release milvus/milvus
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade --install -f values.yaml my-release milvus/milvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>To apply the above settings to an existing Milvus deployment, you can run the following command:</p>
-<pre><code translate="no" class="language-shell">$ helm upgrade my-release -f values.yaml milvus/milvus
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release -f values.yaml milvus/milvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="View-Traces" class="common-anchor-header">View Traces<button data-href="#View-Traces" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -131,10 +131,10 @@ $ helm upgrade --install -f values.yaml my-release milvus/milvus
         ></path>
       </svg>
     </button></h2><p>Once you have deployed Jaeger and Milvus with Helm Chart, an ingress has been enabled by dfault. You can view the ingress by running the following command:</p>
-<pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> ingress
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get ingress</span>
 
 NAME           CLASS    HOSTS   ADDRESS         PORTS   AGE
-jaeger-query   &lt;none&gt;   *       <span class="hljs-number">192.168</span><span class="hljs-number">.122</span><span class="hljs-number">.34</span>  <span class="hljs-number">80</span>      <span class="hljs-number">14</span>m
+jaeger-query   &lt;none&gt;   *       192.168.122.34  80      14m
 <button class="copy-code-btn"></button></code></pre>
 <p>Once the ingress is available, you can access the Jaeger UI by navigating to <code translate="no">http://${ADDRESS}</code>. Replace <code translate="no">${ADDRESS}</code> with the actual IP address of the ingress.</p>
 <p>The following screenshot shows the Jaeger UI with the traces of Milvus during a search operation and a load-collection operation:</p>

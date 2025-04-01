@@ -6,7 +6,7 @@ summary: >-
   queries in collections. This page focuses on the procedures for loading and
   releasing a collection.
 ---
-<h1 id="Load--Release" class="common-anchor-header">Load &amp; Release<button data-href="#Load--Release" class="anchor-icon" translate="no">
+<h1 id="Load--Release" class="common-anchor-header">Load & Release<button data-href="#Load--Release" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

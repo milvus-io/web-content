@@ -47,14 +47,14 @@ title: Grant Roles to Users​
   <a href="#javascript">Node.js</a>
   <a href="#shell">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
-client = <span class="hljs-title class_">MilvusClient</span>(​
+client = MilvusClient(​
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,​
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
 )​
 ​
-client.<span class="hljs-title function_">grant_role</span>(user_name=<span class="hljs-string">&quot;user_1&quot;</span>, role_name=<span class="hljs-string">&quot;role_a&quot;</span>)​
+client.grant_role(user_name=<span class="hljs-string">&quot;user_1&quot;</span>, role_name=<span class="hljs-string">&quot;role_a&quot;</span>)​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;​
@@ -91,17 +91,17 @@ milvusClient.<span class="hljs-title function_">grantRole</span>({​
  })​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-shell">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/grant_role&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/users/grant_role&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &#x27;{​
     &quot;roleName&quot;: &quot;role_a&quot;,​
     &quot;userName&quot;: &quot;user_1&quot;​
-}&#x27;</span>​
+}&#x27;​
 
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Describe-user​" class="common-anchor-header">Describe user​<button data-href="#Describe-user​" class="anchor-icon" translate="no">
@@ -127,9 +127,9 @@ curl --request POST \​
   <a href="#javascript">Node.js</a>
   <a href="#shell">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
-client.<span class="hljs-title function_">describe_user</span>(user_name=<span class="hljs-string">&quot;user_1&quot;</span>)​
+client.describe_user(user_name=<span class="hljs-string">&quot;user_1&quot;</span>)​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DescribeUserReq;​
@@ -147,12 +147,12 @@ milvusClient.<span class="hljs-title function_">describeUser</span>({<span class
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/describe&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/users/describe&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &#x27;{​
     &quot;userName&quot;: &quot;user_1&quot;​
-}&#x27;</span>​
+}&#x27;​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Below is an example output.​</p>
@@ -182,20 +182,20 @@ milvusClient.<span class="hljs-title function_">describeUser</span>({<span class
   <a href="#javascript">Node.js</a>
   <a href="#shell">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
-client.<span class="hljs-title function_">revoke_role</span>(​
+client.revoke_role(​
     user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,​
     role_name=<span class="hljs-string">&#x27;role_a&#x27;</span>​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">rbac</span>.<span class="hljs-property">request</span>.<span class="hljs-property">RevokeRoleReq</span>;​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.RevokeRoleReq;​
 ​
-client.<span class="hljs-title function_">revokeRole</span>(<span class="hljs-title class_">RevokeRoleReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">userName</span>(<span class="hljs-string">&quot;user_1&quot;</span>)​
-        .<span class="hljs-title function_">roleName</span>(<span class="hljs-string">&quot;role_a&quot;</span>)​
-        .<span class="hljs-title function_">build</span>());​
+client.revokeRole(RevokeRoleReq.builder()​
+        .userName(<span class="hljs-string">&quot;user_1&quot;</span>)​
+        .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)​
+        .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)​
@@ -204,12 +204,12 @@ client.<span class="hljs-title function_">revokeRole</span>(<span class="hljs-ti
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/revoke_role&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/users/revoke_role&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &#x27;{​
     &quot;userName&quot;: &quot;user_1&quot;,​
     &quot;roleName&quot;: &quot;role_a&quot;​
-}&#x27;</span>​
+}&#x27;​
 
 <button class="copy-code-btn"></button></code></pre>

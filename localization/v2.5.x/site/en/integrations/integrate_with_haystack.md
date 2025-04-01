@@ -49,7 +49,7 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and Haystack
 <p>We will use the models from OpenAI. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Prepare-the-data" class="common-anchor-header">Prepare the data<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,12 +69,12 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
     </button></h2><p>We use an online content about <a href="https://www.gutenberg.org/cache/epub/7785/pg7785.txt">Leonardo Da Vinci</a> as a store of private knowledge for our RAG pipeline, which is a good data source for a simple RAG pipeline.</p>
 <p>Download it and save it as a local text file.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
-<span class="hljs-keyword">import</span> urllib.<span class="hljs-type">request</span>
+<span class="hljs-keyword">import</span> urllib.request
 
-<span class="hljs-variable">url</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;https://www.gutenberg.org/cache/epub/7785/pg7785.txt&quot;</span>
+url = <span class="hljs-string">&quot;https://www.gutenberg.org/cache/epub/7785/pg7785.txt&quot;</span>
 file_path = <span class="hljs-string">&quot;./davinci.txt&quot;</span>
 
-<span class="hljs-keyword">if</span> not os.path.exists(file_path):
+<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(file_path):
     urllib.request.urlretrieve(url, file_path)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Create-the-indexing-Pipeline" class="common-anchor-header">Create the indexing Pipeline<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">

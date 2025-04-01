@@ -45,7 +45,7 @@ summary: This page discusses vector database integration with VoyageAI's embeddi
 <p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong>. (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
 </div>
 <p>With this, we’re ready to generate embeddings and use vector database to conduct semantic search.</p>
-<h2 id="Searching-book-titles-with-VoyageAI--Milvus" class="common-anchor-header">Searching book titles with VoyageAI &amp; Milvus<button data-href="#Searching-book-titles-with-VoyageAI--Milvus" class="anchor-icon" translate="no">
+<h2 id="Searching-book-titles-with-VoyageAI--Milvus" class="common-anchor-header">Searching book titles with VoyageAI & Milvus<button data-href="#Searching-book-titles-with-VoyageAI--Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -132,7 +132,7 @@ res = milvus_client.search(
 <pre><code translate="no">Query: When was artificial intelligence founded?
 [{'id': 0, 'distance': 0.7196218371391296, 'entity': {'text': 'Artificial intelligence was founded as an academic discipline in 1956.', 'subject': 'history'}}, {'id': 1, 'distance': 0.6297335028648376, 'entity': {'text': 'Alan Turing was the first person to conduct substantial research in AI.', 'subject': 'history'}}]
 </code></pre>
-<h2 id="Searching-images-with-VoyageAI--Milvus" class="common-anchor-header">Searching images with VoyageAI &amp; Milvus<button data-href="#Searching-images-with-VoyageAI--Milvus" class="anchor-icon" translate="no">
+<h2 id="Searching-images-with-VoyageAI--Milvus" class="common-anchor-header">Searching images with VoyageAI & Milvus<button data-href="#Searching-images-with-VoyageAI--Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

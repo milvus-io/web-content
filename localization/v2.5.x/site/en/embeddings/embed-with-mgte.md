@@ -54,15 +54,15 @@ docs_embeddings = ef.encode_documents(docs)
 <span class="hljs-built_in">print</span>(ef.dim)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings: {<span class="hljs-string">&#x27;dense&#x27;</span>: [tensor([<span class="hljs-number">-4.9149e-03</span>, <span class="hljs-number">1.6553e-02</span>, <span class="hljs-number">-9.5524e-03</span>, <span class="hljs-number">-2.1800e-02</span>, <span class="hljs-number">1.2075e-02</span>,
-        <span class="hljs-number">1.8500e-02</span>, <span class="hljs-number">-3.0632e-02</span>, <span class="hljs-number">5.5909e-02</span>, <span class="hljs-number">8.7365e-02</span>, <span class="hljs-number">1.8763e-02</span>,
-        <span class="hljs-number">2.1708e-03</span>, <span class="hljs-number">-2.7530e-02</span>, <span class="hljs-number">-1.1523e-01</span>, <span class="hljs-number">6.5810e-03</span>, <span class="hljs-number">-6.4674e-02</span>,
-        <span class="hljs-number">6.7966e-02</span>, <span class="hljs-number">1.3005e-01</span>, <span class="hljs-number">1.1942e-01</span>, <span class="hljs-number">-1.2174e-02</span>, <span class="hljs-number">-4.0426e-02</span>,
+<pre><code translate="no" class="language-python">Embeddings: {<span class="hljs-string">&#x27;dense&#x27;</span>: [tensor([-<span class="hljs-number">4.9149e-03</span>, <span class="hljs-number">1.6553e-02</span>, -<span class="hljs-number">9.5524e-03</span>, -<span class="hljs-number">2.1800e-02</span>, <span class="hljs-number">1.2075e-02</span>,
+        <span class="hljs-number">1.8500e-02</span>, -<span class="hljs-number">3.0632e-02</span>, <span class="hljs-number">5.5909e-02</span>, <span class="hljs-number">8.7365e-02</span>, <span class="hljs-number">1.8763e-02</span>,
+        <span class="hljs-number">2.1708e-03</span>, -<span class="hljs-number">2.7530e-02</span>, -<span class="hljs-number">1.1523e-01</span>, <span class="hljs-number">6.5810e-03</span>, -<span class="hljs-number">6.4674e-02</span>,
+        <span class="hljs-number">6.7966e-02</span>, <span class="hljs-number">1.3005e-01</span>, <span class="hljs-number">1.1942e-01</span>, -<span class="hljs-number">1.2174e-02</span>, -<span class="hljs-number">4.0426e-02</span>,
         ...
-        <span class="hljs-number">2.0129e-02</span>, <span class="hljs-number">-2.3657e-02</span>, <span class="hljs-number">2.2626e-02</span>, <span class="hljs-number">2.1858e-02</span>, <span class="hljs-number">-1.9181e-02</span>,
-        <span class="hljs-number">6.0706e-02</span>, <span class="hljs-number">-2.0558e-02</span>, <span class="hljs-number">-4.2050e-02</span>], device=<span class="hljs-string">&#x27;mps:0&#x27;</span>)], 
+        <span class="hljs-number">2.0129e-02</span>, -<span class="hljs-number">2.3657e-02</span>, <span class="hljs-number">2.2626e-02</span>, <span class="hljs-number">2.1858e-02</span>, -<span class="hljs-number">1.9181e-02</span>,
+        <span class="hljs-number">6.0706e-02</span>, -<span class="hljs-number">2.0558e-02</span>, -<span class="hljs-number">4.2050e-02</span>], device=<span class="hljs-string">&#x27;mps:0&#x27;</span>)], 
  <span class="hljs-string">&#x27;sparse&#x27;</span>: &lt;Compressed Sparse Row sparse array of dtype <span class="hljs-string">&#x27;float64&#x27;</span>
- <span class="hljs-keyword">with</span> <span class="hljs-number">41</span> <span class="hljs-function">stored elements <span class="hljs-keyword">and</span> <span class="hljs-title">shape</span> (<span class="hljs-params"><span class="hljs-number">3</span>, <span class="hljs-number">250002</span></span>)&gt;}</span>
+ <span class="hljs-keyword">with</span> <span class="hljs-number">41</span> stored elements <span class="hljs-keyword">and</span> shape (<span class="hljs-number">3</span>, <span class="hljs-number">250002</span>)&gt;}
 
 {<span class="hljs-string">&#x27;dense&#x27;</span>: <span class="hljs-number">768</span>, <span class="hljs-string">&#x27;sparse&#x27;</span>: <span class="hljs-number">250002</span>}
 <button class="copy-code-btn"></button></code></pre>
@@ -76,15 +76,15 @@ query_embeddings = ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(ef.dim)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings: {<span class="hljs-string">&#x27;dense&#x27;</span>: [tensor([ <span class="hljs-number">6.5883e-03</span>, <span class="hljs-number">-7.9415e-03</span>, <span class="hljs-number">-3.3669e-02</span>, <span class="hljs-number">-2.6450e-02</span>, <span class="hljs-number">1.4345e-02</span>,
-        <span class="hljs-number">1.9612e-02</span>, <span class="hljs-number">-8.1679e-02</span>, <span class="hljs-number">5.6361e-02</span>, <span class="hljs-number">6.9020e-02</span>, <span class="hljs-number">1.9827e-02</span>,
-       <span class="hljs-number">-9.2933e-03</span>, <span class="hljs-number">-1.9995e-02</span>, <span class="hljs-number">-1.0055e-01</span>, <span class="hljs-number">-5.4053e-02</span>, <span class="hljs-number">-8.5991e-02</span>,
-        <span class="hljs-number">8.3004e-02</span>, <span class="hljs-number">1.0870e-01</span>, <span class="hljs-number">1.1565e-01</span>, <span class="hljs-number">2.1268e-02</span>, <span class="hljs-number">-1.3782e-02</span>,
+<pre><code translate="no" class="language-python">Embeddings: {<span class="hljs-string">&#x27;dense&#x27;</span>: [tensor([ <span class="hljs-number">6.5883e-03</span>, -<span class="hljs-number">7.9415e-03</span>, -<span class="hljs-number">3.3669e-02</span>, -<span class="hljs-number">2.6450e-02</span>, <span class="hljs-number">1.4345e-02</span>,
+        <span class="hljs-number">1.9612e-02</span>, -<span class="hljs-number">8.1679e-02</span>, <span class="hljs-number">5.6361e-02</span>, <span class="hljs-number">6.9020e-02</span>, <span class="hljs-number">1.9827e-02</span>,
+       -<span class="hljs-number">9.2933e-03</span>, -<span class="hljs-number">1.9995e-02</span>, -<span class="hljs-number">1.0055e-01</span>, -<span class="hljs-number">5.4053e-02</span>, -<span class="hljs-number">8.5991e-02</span>,
+        <span class="hljs-number">8.3004e-02</span>, <span class="hljs-number">1.0870e-01</span>, <span class="hljs-number">1.1565e-01</span>, <span class="hljs-number">2.1268e-02</span>, -<span class="hljs-number">1.3782e-02</span>,
         ...
-        <span class="hljs-number">3.2847e-02</span>, <span class="hljs-number">-2.3751e-02</span>, <span class="hljs-number">3.4475e-02</span>, <span class="hljs-number">5.3623e-02</span>, <span class="hljs-number">-3.3894e-02</span>,
-        <span class="hljs-number">7.9408e-02</span>, <span class="hljs-number">8.2720e-03</span>, <span class="hljs-number">-2.3459e-02</span>], device=<span class="hljs-string">&#x27;mps:0&#x27;</span>)], 
+        <span class="hljs-number">3.2847e-02</span>, -<span class="hljs-number">2.3751e-02</span>, <span class="hljs-number">3.4475e-02</span>, <span class="hljs-number">5.3623e-02</span>, -<span class="hljs-number">3.3894e-02</span>,
+        <span class="hljs-number">7.9408e-02</span>, <span class="hljs-number">8.2720e-03</span>, -<span class="hljs-number">2.3459e-02</span>], device=<span class="hljs-string">&#x27;mps:0&#x27;</span>)], 
  <span class="hljs-string">&#x27;sparse&#x27;</span>: &lt;Compressed Sparse Row sparse array of dtype <span class="hljs-string">&#x27;float64&#x27;</span>
- <span class="hljs-keyword">with</span> <span class="hljs-number">13</span> <span class="hljs-function">stored elements <span class="hljs-keyword">and</span> <span class="hljs-title">shape</span> (<span class="hljs-params"><span class="hljs-number">2</span>, <span class="hljs-number">250002</span></span>)&gt;}</span>
+ <span class="hljs-keyword">with</span> <span class="hljs-number">13</span> stored elements <span class="hljs-keyword">and</span> shape (<span class="hljs-number">2</span>, <span class="hljs-number">250002</span>)&gt;}
 
 {<span class="hljs-string">&#x27;dense&#x27;</span>: <span class="hljs-number">768</span>, <span class="hljs-string">&#x27;sparse&#x27;</span>: <span class="hljs-number">250002</span>}
 <button class="copy-code-btn"></button></code></pre>

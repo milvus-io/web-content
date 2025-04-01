@@ -151,17 +151,17 @@ milvus_index.delete()
       </svg>
     </button></h2><p>By default, calling <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> or <code translate="no">sort_by_similarity()</code> will use a sklearn backend.</p>
 <p>To use the Milvus backend, simply set the optional backend parameter of <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> to <code translate="no">&quot;milvus&quot;</code>:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> fiftyone.<span class="hljs-property">brain</span> <span class="hljs-keyword">as</span> fob
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> fiftyone.brain <span class="hljs-keyword">as</span> fob
 
-fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<span class="hljs-string">&quot;milvus&quot;</span>, ...)
+fob.compute_similarity(..., backend=<span class="hljs-string">&quot;milvus&quot;</span>, ...)
 <button class="copy-code-btn"></button></code></pre>
 <p>Alternatively, you can permanently configure FiftyOne to use the Milvus backend by setting the following environment variable:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> <span class="hljs-variable constant_">FIFTYONE_BRAIN_DEFAULT_SIMILARITY_BACKEND</span>=milvus
+<pre><code translate="no" class="language-shell">export FIFTYONE_BRAIN_DEFAULT_SIMILARITY_BACKEND=milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>or by setting the <code translate="no">default_similarity_backend</code> parameter of your <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">brain config</a> located at <code translate="no">~/.fiftyone/brain_config.json</code>:</p>
-<pre><code translate="no" class="language-json">{
-    <span class="hljs-string">&quot;default_similarity_backend&quot;</span>: <span class="hljs-string">&quot;milvus&quot;</span>
-}
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;default_similarity_backend&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;milvus&quot;</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Authentication" class="common-anchor-header">Authentication<button data-href="#Authentication" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -180,19 +180,19 @@ fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<s
       </svg>
     </button></h2><p>If you are using a custom Milvus server, you can provide your credentials in a variety of ways.</p>
 <h3 id="Environment-variables-recommended" class="common-anchor-header">Environment variables (recommended)</h3><p>The recommended way to configure your Milvus credentials is to store them in the environment variables shown below, which are automatically accessed by FiftyOne whenever a connection to Milvus is made.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_URI=XXXXXX
-<span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_USER=XXXXXX
-<span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_PASSWORD=XXXXXX
+<pre><code translate="no" class="language-python">export FIFTYONE_BRAIN_SIMILARITY_MILVUS_URI=XXXXXX
+export FIFTYONE_BRAIN_SIMILARITY_MILVUS_USER=XXXXXX
+export FIFTYONE_BRAIN_SIMILARITY_MILVUS_PASSWORD=XXXXXX
 
 <span class="hljs-comment"># also available if necessary</span>
-<span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_SECURE=<span class="hljs-literal">true</span>
-<span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_TOKEN=XXXXXX
-<span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_DB_NAME=XXXXXX
-<span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_CLIENT_KEY_PATH=XXXXXX
-<span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_CLIENT_PEM_PATH=XXXXXX
-<span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_CA_PEM_PATH=XXXXXX
-<span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_PEM_PATH=XXXXXX
-<span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_NAME=XXXXXX
+export FIFTYONE_BRAIN_SIMILARITY_MILVUS_SECURE=true
+export FIFTYONE_BRAIN_SIMILARITY_MILVUS_TOKEN=XXXXXX
+export FIFTYONE_BRAIN_SIMILARITY_MILVUS_DB_NAME=XXXXXX
+export FIFTYONE_BRAIN_SIMILARITY_MILVUS_CLIENT_KEY_PATH=XXXXXX
+export FIFTYONE_BRAIN_SIMILARITY_MILVUS_CLIENT_PEM_PATH=XXXXXX
+export FIFTYONE_BRAIN_SIMILARITY_MILVUS_CA_PEM_PATH=XXXXXX
+export FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_PEM_PATH=XXXXXX
+export FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_NAME=XXXXXX
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="FiftyOne-Brain-config" class="common-anchor-header">FiftyOne Brain config</h3><p>You can also store your credentials in your <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">brain config</a> located at <code translate="no">~/.fiftyone/brain_config.json</code>:</p>
 <pre><code translate="no" class="language-python">{
@@ -264,15 +264,15 @@ milvus_index = fob.compute_similarity(
 </ul>
 <p>For detailed information on these parameters, see the <a href="/docs/authenticate.md">Milvus authentication documentation</a> and <a href="/docs/consistency.md">Milvus consistency levels documentation</a>.</p>
 <p>You can specify these parameters via any of the strategies described in the previous section. Here’s an example of a <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">brain config</a> that includes all of the available parameters:</p>
-<pre><code translate="no" class="language-json">{
-    <span class="hljs-string">&quot;similarity_backends&quot;</span>: {
-        <span class="hljs-string">&quot;milvus&quot;</span>: {
-            <span class="hljs-string">&quot;collection_name&quot;</span>: <span class="hljs-string">&quot;your_collection&quot;</span>,
-            <span class="hljs-string">&quot;metric&quot;</span>: <span class="hljs-string">&quot;dotproduct&quot;</span>,
-            <span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Strong&quot;</span>
-        }
-    }
-}
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;similarity_backends&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;milvus&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;collection_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;your_collection&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;metric&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;dotproduct&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;consistency_level&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Strong&quot;</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>However, typically these parameters are directly passed to <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> to configure a specific new index:</p>
 <pre><code translate="no" class="language-python">milvus_index = fob.compute_similarity(
@@ -281,7 +281,7 @@ milvus_index = fob.compute_similarity(
     brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     metric=<span class="hljs-string">&quot;dotproduct&quot;</span>,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Manage-brain-runs" class="common-anchor-header">Manage brain runs<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">

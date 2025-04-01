@@ -62,39 +62,39 @@ data = []
 
 <span class="hljs-built_in">print</span>(data[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">import java.util.*;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.*;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+<span class="hljs-keyword">import</span> com.google.gson.Gson;
+<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
 <span class="hljs-comment">// 3. Insert randomly generated vectors and JSON data into the collection</span>
 List&lt;String&gt; colors = Arrays.asList(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
-List&lt;JsonObject&gt; data = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+List&lt;JsonObject&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 
-Gson gson = <span class="hljs-keyword">new</span> Gson();
-Random rand = <span class="hljs-keyword">new</span> Random();
-<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
-    String current_color = colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>));
-    Integer current_tag = rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
+<span class="hljs-type">Random</span> <span class="hljs-variable">rand</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
+    <span class="hljs-type">String</span> <span class="hljs-variable">current_color</span> <span class="hljs-operator">=</span> colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>));
+    <span class="hljs-type">Integer</span> <span class="hljs-variable">current_tag</span> <span class="hljs-operator">=</span> rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
     List&lt;Integer&gt; current_coord = Arrays.asList(rand.nextInt(<span class="hljs-number">40</span>), rand.nextInt(<span class="hljs-number">40</span>), rand.nextInt(<span class="hljs-number">40</span>));
     List&lt;List&lt;String&gt;&gt; current_ref = Arrays.asList(
-            Arrays.asList(colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>)), colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>)), colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>))),
-            Arrays.asList(colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>)), colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>)), colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>))),
-            Arrays.asList(colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>)), colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>)), colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>)))
+            Arrays.asList(colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>)), colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>)), colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>))),
+            Arrays.asList(colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>)), colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>)), colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>))),
+            Arrays.asList(colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>)), colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>)), colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>)))
     );
-    JsonObject row = <span class="hljs-keyword">new</span> JsonObject();
-    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-built_in">long</span>) i);
-    row.<span class="hljs-keyword">add</span>(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
-    JsonObject color = <span class="hljs-keyword">new</span> JsonObject();
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-type">long</span>) i);
+    row.add(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">color</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
     color.addProperty(<span class="hljs-string">&quot;label&quot;</span>, current_color);
     color.addProperty(<span class="hljs-string">&quot;tag&quot;</span>, current_tag);
-    color.<span class="hljs-keyword">add</span>(<span class="hljs-string">&quot;coord&quot;</span>, gson.toJsonTree(current_coord));
-    color.<span class="hljs-keyword">add</span>(<span class="hljs-string">&quot;ref&quot;</span>, gson.toJsonTree(current_ref));
-    row.<span class="hljs-keyword">add</span>(<span class="hljs-string">&quot;color&quot;</span>, color);
-    data.<span class="hljs-keyword">add</span>(row);
+    color.add(<span class="hljs-string">&quot;coord&quot;</span>, gson.toJsonTree(current_coord));
+    color.add(<span class="hljs-string">&quot;ref&quot;</span>, gson.toJsonTree(current_ref));
+    row.add(<span class="hljs-string">&quot;color&quot;</span>, color);
+    data.add(row);
 }
 
-System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>));
+System.out.println(data.get(<span class="hljs-number">0</span>));
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 3. Insert randomly generated vectors </span>
 <span class="hljs-keyword">const</span> colors = [<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>]
@@ -122,7 +122,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 <button class="copy-code-btn"></button></code></pre>
 <p>You can view the structure of the generated data by checking its first entry.</p>
 <pre><code translate="no">{
-    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>,
+    &quot;id&quot;: <span class="hljs-number">0</span>,
     <span class="hljs-string">&quot;vector&quot;</span>: [
         -<span class="hljs-number">0.8017921296923975</span>,
         <span class="hljs-number">0.550046715206634</span>,
@@ -131,7 +131,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
         <span class="hljs-number">0.2705233937454232</span>
     ],
     <span class="hljs-string">&quot;color&quot;</span>: {
-        <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;blue&quot;</span>,
+        &quot;<span class="hljs-selector-tag">label</span>&quot;: <span class="hljs-string">&quot;blue&quot;</span>,
         <span class="hljs-string">&quot;tag&quot;</span>: <span class="hljs-number">9927</span>,
         <span class="hljs-string">&quot;coord&quot;</span>: [
             <span class="hljs-number">22</span>,
@@ -626,31 +626,31 @@ res = client.search(
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">// <span class="hljs-number">4.</span> Search <span class="hljs-keyword">with</span> partition key
-<span class="hljs-type">List</span>&lt;BaseVector&gt; query_vectors = Collections.singletonList(new FloatVec(new <span class="hljs-built_in">float</span>[]{<span class="hljs-number">0.3580376395471989</span>f, -<span class="hljs-number">0.6023495712049978</span>f, <span class="hljs-number">0.18414012509913835</span>f, -<span class="hljs-number">0.26286205330961354</span>f, <span class="hljs-number">0.9029438446296592</span>f}));
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// 4. Search with partition key</span>
+List&lt;BaseVector&gt; query_vectors = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3580376395471989f</span>, -<span class="hljs-number">0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, -<span class="hljs-number">0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>}));
 
-SearchReq searchReq = SearchReq.builder()
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
         .data(query_vectors)
-        .<span class="hljs-built_in">filter</span>(<span class="hljs-string">&quot;color[\&quot;label\&quot;] in [\&quot;red\&quot;]&quot;</span>)
+        .filter(<span class="hljs-string">&quot;color[\&quot;label\&quot;] in [\&quot;red\&quot;]&quot;</span>)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
         .topK(<span class="hljs-number">3</span>)
         .build();
 
-SearchResp searchResp = client.search(searchReq);
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 
-<span class="hljs-type">List</span>&lt;<span class="hljs-type">List</span>&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSearchResults();
-<span class="hljs-keyword">for</span> (<span class="hljs-type">List</span>&lt;SearchResp.SearchResult&gt; results : searchResults) {
+List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSearchResults();
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; results : searchResults) {
     System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
     <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
         System.out.println(result);
     }
 }
 
-// Output:
-// SearchResp.SearchResult(entity=\{color=\{<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">1018</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">3</span>,<span class="hljs-number">30</span>,<span class="hljs-number">1</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;yellow&quot;</span>,<span class="hljs-string">&quot;brown&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>],[<span class="hljs-string">&quot;yellow&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>],[<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">295</span>}, score=<span class="hljs-number">1.1190735</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">295</span>)
-// SearchResp.SearchResult(entity=\{color=\{<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">8141</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">38</span>,<span class="hljs-number">31</span>,<span class="hljs-number">29</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;blue&quot;</span>,<span class="hljs-string">&quot;white&quot;</span>,<span class="hljs-string">&quot;white&quot;</span>],[<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>],[<span class="hljs-string">&quot;yellow&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">667</span>}, score=<span class="hljs-number">1.0679582</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">667</span>)
-// SearchResp.SearchResult(entity=\{color=\{<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">6837</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">29</span>,<span class="hljs-number">9</span>,<span class="hljs-number">8</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>],[<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;white&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>],[<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">927</span>}, score=<span class="hljs-number">1.0029297</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">927</span>)
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity=\{color=\{&quot;label&quot;:&quot;red&quot;,&quot;tag&quot;:1018,&quot;coord&quot;:[3,30,1],&quot;ref&quot;:[[&quot;yellow&quot;,&quot;brown&quot;,&quot;orange&quot;],[&quot;yellow&quot;,&quot;purple&quot;,&quot;blue&quot;],[&quot;green&quot;,&quot;purple&quot;,&quot;purple&quot;]]}, id=295}, score=1.1190735, id=295)</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity=\{color=\{&quot;label&quot;:&quot;red&quot;,&quot;tag&quot;:8141,&quot;coord&quot;:[38,31,29],&quot;ref&quot;:[[&quot;blue&quot;,&quot;white&quot;,&quot;white&quot;],[&quot;green&quot;,&quot;orange&quot;,&quot;green&quot;],[&quot;yellow&quot;,&quot;green&quot;,&quot;black&quot;]]}, id=667}, score=1.0679582, id=667)</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity=\{color=\{&quot;label&quot;:&quot;red&quot;,&quot;tag&quot;:6837,&quot;coord&quot;:[29,9,8],&quot;ref&quot;:[[&quot;green&quot;,&quot;black&quot;,&quot;blue&quot;],[&quot;purple&quot;,&quot;white&quot;,&quot;green&quot;],[&quot;red&quot;,&quot;blue&quot;,&quot;black&quot;]]}, id=927}, score=1.0029297, id=927)</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 4. Basic search with a JSON field</span>
 query_vectors = [[<span class="hljs-number">0.6765405125697714</span>, <span class="hljs-number">0.759217474274025</span>, <span class="hljs-number">0.4122471841491111</span>, <span class="hljs-number">0.3346805565394215</span>, <span class="hljs-number">0.09679748345514638</span>]]
@@ -835,11 +835,11 @@ res = client.query(
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">// <span class="hljs-number">5.</span> Advanced search within a JSON field
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// 5. Advanced search within a JSON field</span>
 searchReq = SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
         .data(query_vectors)
-        .<span class="hljs-built_in">filter</span>(<span class="hljs-string">&quot;JSON_CONTAINS(color[\&quot;ref\&quot;], [\&quot;purple\&quot;, \&quot;pink\&quot;, \&quot;orange\&quot;])&quot;</span>)
+        .filter(<span class="hljs-string">&quot;JSON_CONTAINS(color[\&quot;ref\&quot;], [\&quot;purple\&quot;, \&quot;pink\&quot;, \&quot;orange\&quot;])&quot;</span>)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
         .topK(<span class="hljs-number">3</span>)
         .build();
@@ -847,17 +847,17 @@ searchReq = SearchReq.builder()
 searchResp = client.search(searchReq);
 
 searchResults = searchResp.getSearchResults();
-<span class="hljs-keyword">for</span> (<span class="hljs-type">List</span>&lt;SearchResp.SearchResult&gt; results : searchResults) {
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; results : searchResults) {
     System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
     <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
         System.out.println(result);
     }
 }
 
-// Output:
-// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">2963</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">15</span>,<span class="hljs-number">33</span>,<span class="hljs-number">30</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;white&quot;</span>,<span class="hljs-string">&quot;white&quot;</span>],[<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>],[<span class="hljs-string">&quot;yellow&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">273</span>}, score=<span class="hljs-number">0.46558747</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">273</span>)
-// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">4027</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">32</span>,<span class="hljs-number">34</span>,<span class="hljs-number">19</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;white&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>],[<span class="hljs-string">&quot;white&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;yellow&quot;</span>],[<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">344</span>}, score=<span class="hljs-number">0.2637315</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">344</span>)
-// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">1603</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">33</span>,<span class="hljs-number">12</span>,<span class="hljs-number">23</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;brown&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>],[<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>],[<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">205</span>}, score=<span class="hljs-number">0.26133868</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">205</span>)
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity={color={&quot;label&quot;:&quot;pink&quot;,&quot;tag&quot;:2963,&quot;coord&quot;:[15,33,30],&quot;ref&quot;:[[&quot;green&quot;,&quot;white&quot;,&quot;white&quot;],[&quot;purple&quot;,&quot;pink&quot;,&quot;orange&quot;],[&quot;yellow&quot;,&quot;black&quot;,&quot;pink&quot;]]}, id=273}, score=0.46558747, id=273)</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity={color={&quot;label&quot;:&quot;pink&quot;,&quot;tag&quot;:4027,&quot;coord&quot;:[32,34,19],&quot;ref&quot;:[[&quot;red&quot;,&quot;white&quot;,&quot;blue&quot;],[&quot;white&quot;,&quot;pink&quot;,&quot;yellow&quot;],[&quot;purple&quot;,&quot;pink&quot;,&quot;orange&quot;]]}, id=344}, score=0.2637315, id=344)</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity={color={&quot;label&quot;:&quot;black&quot;,&quot;tag&quot;:1603,&quot;coord&quot;:[33,12,23],&quot;ref&quot;:[[&quot;pink&quot;,&quot;brown&quot;,&quot;black&quot;],[&quot;black&quot;,&quot;purple&quot;,&quot;black&quot;],[&quot;purple&quot;,&quot;pink&quot;,&quot;orange&quot;]]}, id=205}, score=0.26133868, id=205)</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 5. Advanced search within a JSON field</span>
@@ -1075,7 +1075,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <pre><code translate="no" class="language-java">searchReq = SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
         .data(query_vectors)
-        .<span class="hljs-built_in">filter</span>(<span class="hljs-string">&quot;JSON_CONTAINS_ALL(color[\&quot;coord\&quot;], [4, 5])&quot;</span>)
+        .filter(<span class="hljs-string">&quot;JSON_CONTAINS_ALL(color[\&quot;coord\&quot;], [4, 5])&quot;</span>)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
         .topK(<span class="hljs-number">3</span>)
         .build();
@@ -1083,17 +1083,17 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 searchResp = client.search(searchReq);
 
 searchResults = searchResp.getSearchResults();
-<span class="hljs-keyword">for</span> (<span class="hljs-type">List</span>&lt;SearchResp.SearchResult&gt; results : searchResults) {
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; results : searchResults) {
     System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
     <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
         System.out.println(result);
     }
 } 
 
-// Output:
-// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">9899</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,<span class="hljs-number">25</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;yellow&quot;</span>],[<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>],[<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">708</span>}, score=<span class="hljs-number">0.56576324</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">708</span>)
-// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">2176</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">23</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>],[<span class="hljs-string">&quot;brown&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;brown&quot;</span>],[<span class="hljs-string">&quot;brown&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;yellow&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">981</span>}, score=<span class="hljs-number">0.5656834</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">981</span>)
-// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">3085</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">5</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;yellow&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>],[<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;red&quot;</span>],[<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">221</span>}, score=<span class="hljs-number">0.3708634</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">221</span>)
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity={color={&quot;label&quot;:&quot;green&quot;,&quot;tag&quot;:9899,&quot;coord&quot;:[5,4,25],&quot;ref&quot;:[[&quot;purple&quot;,&quot;black&quot;,&quot;yellow&quot;],[&quot;orange&quot;,&quot;green&quot;,&quot;purple&quot;],[&quot;red&quot;,&quot;purple&quot;,&quot;pink&quot;]]}, id=708}, score=0.56576324, id=708)</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity={color={&quot;label&quot;:&quot;red&quot;,&quot;tag&quot;:2176,&quot;coord&quot;:[4,5,23],&quot;ref&quot;:[[&quot;red&quot;,&quot;black&quot;,&quot;green&quot;],[&quot;brown&quot;,&quot;orange&quot;,&quot;brown&quot;],[&quot;brown&quot;,&quot;orange&quot;,&quot;yellow&quot;]]}, id=981}, score=0.5656834, id=981)</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity={color={&quot;label&quot;:&quot;pink&quot;,&quot;tag&quot;:3085,&quot;coord&quot;:[5,3,4],&quot;ref&quot;:[[&quot;yellow&quot;,&quot;orange&quot;,&quot;green&quot;],[&quot;black&quot;,&quot;pink&quot;,&quot;red&quot;],[&quot;orange&quot;,&quot;blue&quot;,&quot;blue&quot;]]}, id=221}, score=0.3708634, id=221)</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
@@ -1283,24 +1283,24 @@ searchResults = searchResp.getSearchResults();
 <pre><code translate="no" class="language-java">searchReq = SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
         .data(query_vectors)
-        .<span class="hljs-built_in">filter</span>(<span class="hljs-string">&quot;JSON_CONTAINS_ANY(color[\&quot;coord\&quot;], [4, 5])&quot;</span>)
+        .filter(<span class="hljs-string">&quot;JSON_CONTAINS_ANY(color[\&quot;coord\&quot;], [4, 5])&quot;</span>)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
         .topK(<span class="hljs-number">3</span>)
         .build();
 
 searchResp = client.search(searchReq);
 searchResults = searchResp.getSearchResults();
-<span class="hljs-keyword">for</span> (<span class="hljs-type">List</span>&lt;SearchResp.SearchResult&gt; results : searchResults) {
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; results : searchResults) {
     System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
     <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
         System.out.println(result);
     }
 } 
 
-// Output:
-// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;brown&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">8414</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">15</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;blue&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>],[<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>],[<span class="hljs-string">&quot;yellow&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">11</span>}, score=<span class="hljs-number">1.18235</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">11</span>)
-// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;yellow&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">2846</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">20</span>,<span class="hljs-number">4</span>,<span class="hljs-number">15</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;white&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>],[<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;yellow&quot;</span>],[<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;brown&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">589</span>}, score=<span class="hljs-number">1.1414992</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">589</span>)
-// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">6744</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">25</span>,<span class="hljs-number">33</span>,<span class="hljs-number">5</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;white&quot;</span>],[<span class="hljs-string">&quot;white&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;brown&quot;</span>],[<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;red&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">567</span>}, score=<span class="hljs-number">1.1087029</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">567</span>)
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity={color={&quot;label&quot;:&quot;brown&quot;,&quot;tag&quot;:8414,&quot;coord&quot;:[3,4,15],&quot;ref&quot;:[[&quot;blue&quot;,&quot;green&quot;,&quot;pink&quot;],[&quot;red&quot;,&quot;orange&quot;,&quot;pink&quot;],[&quot;yellow&quot;,&quot;pink&quot;,&quot;green&quot;]]}, id=11}, score=1.18235, id=11)</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity={color={&quot;label&quot;:&quot;yellow&quot;,&quot;tag&quot;:2846,&quot;coord&quot;:[20,4,15],&quot;ref&quot;:[[&quot;white&quot;,&quot;black&quot;,&quot;purple&quot;],[&quot;green&quot;,&quot;black&quot;,&quot;yellow&quot;],[&quot;red&quot;,&quot;purple&quot;,&quot;brown&quot;]]}, id=589}, score=1.1414992, id=589)</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity={color={&quot;label&quot;:&quot;pink&quot;,&quot;tag&quot;:6744,&quot;coord&quot;:[25,33,5],&quot;ref&quot;:[[&quot;orange&quot;,&quot;purple&quot;,&quot;white&quot;],[&quot;white&quot;,&quot;pink&quot;,&quot;brown&quot;],[&quot;red&quot;,&quot;pink&quot;,&quot;red&quot;]]}, id=567}, score=1.1087029, id=567)</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
@@ -1414,16 +1414,16 @@ searchResults = searchResp.getSearchResults();
 <tr><th><strong>Operator</strong></th><th><strong>Examples</strong></th><th><strong>Remarks</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><strong>&lt;</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &lt; 3'</code></td><td>This expression evaluates to true if the value of <code translate="no">json_field[&quot;A&quot;]</code> is less than <code translate="no">3</code>.</td></tr>
-<tr><td><strong>&gt;</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &gt; 1'</code></td><td>This expression evaluates to true if the value of <code translate="no">json_field[&quot;A&quot;]</code> is greater than <code translate="no">1</code>.</td></tr>
+<tr><td><strong><</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &lt; 3'</code></td><td>This expression evaluates to true if the value of <code translate="no">json_field[&quot;A&quot;]</code> is less than <code translate="no">3</code>.</td></tr>
+<tr><td><strong>></strong></td><td><code translate="no">'json_field[&quot;A&quot;] &gt; 1'</code></td><td>This expression evaluates to true if the value of <code translate="no">json_field[&quot;A&quot;]</code> is greater than <code translate="no">1</code>.</td></tr>
 <tr><td><strong>==</strong></td><td><code translate="no">'json_field[&quot;A&quot;] == 1'</code></td><td>This expression evaluates to true if the value of <code translate="no">json_field[&quot;A&quot;]</code> is equal to <code translate="no">1</code>.</td></tr>
 <tr><td><strong>!=</strong></td><td><code translate="no">'json_field[&quot;A&quot;][0]' != &quot;abc&quot;'</code></td><td>This expression evaluates to true if<br/> - <code translate="no">json_field</code> does not have a key named <code translate="no">A</code>.<br/> - <code translate="no">json_field</code> has a key named <code translate="no">A</code> but <code translate="no">json_field[&quot;A&quot;]</code> is not an array.<br/> - <code translate="no">json_field[&quot;A&quot;]</code> is an empty array.<br/> - <code translate="no">json_field[&quot;A&quot;]</code> is an array but the first element is not <code translate="no">abc</code>.<br/></td></tr>
-<tr><td><strong>&lt;=</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &lt;= 5'</code></td><td>This expression evaluates to true if the value of <code translate="no">json_field[&quot;A&quot;]</code> is less than or equal to <code translate="no">5</code>.</td></tr>
-<tr><td><strong>&gt;=</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &gt;= 1'</code></td><td>This expression evaluates to true if the value of <code translate="no">json_field[&quot;A&quot;]</code> is greater than or equal to <code translate="no">1</code>.</td></tr>
+<tr><td><strong><=</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &lt;= 5'</code></td><td>This expression evaluates to true if the value of <code translate="no">json_field[&quot;A&quot;]</code> is less than or equal to <code translate="no">5</code>.</td></tr>
+<tr><td><strong>>=</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &gt;= 1'</code></td><td>This expression evaluates to true if the value of <code translate="no">json_field[&quot;A&quot;]</code> is greater than or equal to <code translate="no">1</code>.</td></tr>
 <tr><td><strong>not</strong></td><td><code translate="no">'not json_field[&quot;A&quot;] == 1'</code></td><td>This expression evaluates to true if<br/> - <code translate="no">json_field</code> does not have a key named <code translate="no">A</code>.<br/> - <code translate="no">json_field[&quot;A&quot;]</code> is not equal to <code translate="no">1</code>.<br/></td></tr>
 <tr><td><strong>in</strong></td><td><code translate="no">'json_field[&quot;A&quot;] in [1, 2, 3]'</code></td><td>This expression evaluates to true if the value of <code translate="no">json_field[&quot;A&quot;]</code> is <code translate="no">1</code>, <code translate="no">2</code>, or <code translate="no">3</code>.</td></tr>
-<tr><td><strong>and (&amp;&amp;)</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &gt; 1 &amp;&amp; json_field[&quot;A&quot;] &lt; 3'</code></td><td>This expression evaluates to true if the value of <code translate="no">json_field[&quot;A&quot;]</code> is greater than 1 and less than <code translate="no">3</code>.</td></tr>
-<tr><td><strong>or (||)</strong></td><td><code translate="no">‘json_field[“A”] &gt; 1 || json_field[“A”] &lt; 3’</code></td><td>This expression evaluates to true if the value of <code translate="no">json_field[&quot;A&quot;]</code> is greater than <code translate="no">1</code> or less than <code translate="no">3</code>.</td></tr>
+<tr><td><strong>and (&&)</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &gt; 1 &amp;&amp; json_field[&quot;A&quot;] &lt; 3'</code></td><td>This expression evaluates to true if the value of <code translate="no">json_field[&quot;A&quot;]</code> is greater than 1 and less than <code translate="no">3</code>.</td></tr>
+<tr><td><strong>or (||)</strong></td><td><code translate="no">‘json_field[“A”] > 1 || json_field[“A”] < 3’</code></td><td>This expression evaluates to true if the value of <code translate="no">json_field[&quot;A&quot;]</code> is greater than <code translate="no">1</code> or less than <code translate="no">3</code>.</td></tr>
 <tr><td><strong>exists</strong></td><td><code translate="no">'exists json_field[&quot;A&quot;]'</code></td><td>This expression evaluates to true if <code translate="no">json_field</code> has a key named <code translate="no">A</code>.</td></tr>
 </tbody>
 </table>

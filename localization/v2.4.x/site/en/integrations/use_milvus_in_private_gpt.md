@@ -41,17 +41,17 @@ title: Use Milvus in PrivateGPT
         ></path>
       </svg>
     </button></h2><h3 id="1-Clone-the-PrivateGPT-Repository" class="common-anchor-header">1. Clone the PrivateGPT Repository</h3><p>Clone the repository and navigate to it:</p>
-<pre><code translate="no" class="language-shell">$ git <span class="hljs-built_in">clone</span> https://github.com/zylon-ai/private-gpt
-$ <span class="hljs-built_in">cd</span> private-gpt
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zylon-ai/private-gpt</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> private-gpt</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Install-Poetry" class="common-anchor-header">2. Install Poetry</h3><p>Install <a href="https://python-poetry.org/docs/#installing-with-the-official-installer">Poetry</a> for dependency management: Follow the instructions on the official Poetry website to install it.</p>
 <h3 id="3-Optional-Install-make" class="common-anchor-header">3. (Optional) Install make</h3><p>To run various scripts, you need to install make.</p>
 <p>macOS (Using Homebrew):</p>
-<pre><code translate="no" class="language-shell">$ brew install <span class="hljs-built_in">make</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">brew install make</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Windows
 (Using Chocolatey):</p>
-<pre><code translate="no" class="language-shell">$ choco install <span class="hljs-built_in">make</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">choco install make</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Install-Available-Modules" class="common-anchor-header">Install Available Modules<button data-href="#Install-Available-Modules" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,7 +77,7 @@ $ <span class="hljs-built_in">cd</span> private-gpt
 <li><strong>UI</strong>: Gradio</li>
 </ul>
 <p>Run the following command to use poetry to install the required module dependencies:</p>
-<pre><code translate="no" class="language-shell">$ poetry install --extras <span class="hljs-string">&quot;llms-ollama embeddings-ollama vector-stores-milvus ui&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">poetry install --extras <span class="hljs-string">&quot;llms-ollama embeddings-ollama vector-stores-milvus ui&quot;</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Ollama-service" class="common-anchor-header">Start Ollama service<button data-href="#Start-Ollama-service" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,13 +97,13 @@ $ <span class="hljs-built_in">cd</span> private-gpt
     </button></h2><p>Go to <a href="https://ollama.com/">ollama.ai</a> and follow the instructions to install Ollama on your machine.</p>
 <p>After the installation, make sure the Ollama desktop app is closed.</p>
 <p>Now, start Ollama service (it will start a local inference server, serving both the LLM and the Embeddings):</p>
-<pre><code translate="no" class="language-shell">$ ollama serve
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ollama serve</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Install the models to be used, the default <code translate="no">settings-ollama.yaml</code> is configured to user <code translate="no">llama3.1</code> 8b LLM (~4GB) and <code translate="no">nomic-embed-text</code> Embeddings (~275MB)</p>
 <p>By default, PrivateGPT will automatically pull models as needed. This behavior can be changed by modifying the <code translate="no">ollama.autopull_models</code> property.</p>
 <p>In any case, if you want to manually pull models, run the following commands:</p>
-<pre><code translate="no" class="language-shell">$ ollama pull llama3.1
-$ ollama pull nomic-embed-text
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ollama pull llama3.1</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">ollama pull nomic-embed-text</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>You can optionally change to your favorite models in the <code translate="no">settings-ollama.yaml</code> file and pull them manually.</p>
 <h2 id="Change-Milvus-Settings" class="common-anchor-header">Change Milvus Settings<button data-href="#Change-Milvus-Settings" class="anchor-icon" translate="no">
@@ -122,14 +122,14 @@ $ ollama pull nomic-embed-text
         ></path>
       </svg>
     </button></h2><p>In the file <code translate="no">settings-ollama.yaml</code>, set the vectorstore to milvus:</p>
-<pre><code translate="no" class="language-yaml">vectorstore:
-  database: milvus
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">vectorstore:</span>
+  <span class="hljs-attr">database:</span> <span class="hljs-string">milvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>You can also add some cumstom Milvus configuration to specify your settings.
 Like this:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">milvus</span>:
-  <span class="hljs-attr">uri</span>: <span class="hljs-attr">http</span>:<span class="hljs-comment">//localhost:19530</span>
-  <span class="hljs-attr">collection_name</span>: my_collection
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">milvus:</span>
+  <span class="hljs-attr">uri:</span> <span class="hljs-string">http://localhost:19530</span>
+  <span class="hljs-attr">collection_name:</span> <span class="hljs-string">my_collection</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>The available configuration options are:</p>
 <table>
@@ -159,7 +159,7 @@ Like this:</p>
         ></path>
       </svg>
     </button></h2><p>Once all settings are done, you can run PrivateGPT with a Gradio UI.</p>
-<pre><code translate="no" class="language-shell">PGPT_PROFILES=ollama <span class="hljs-built_in">make</span> run
+<pre><code translate="no" class="language-shell">PGPT_PROFILES=ollama make run
 <button class="copy-code-btn"></button></code></pre>
 <p>The UI will be available at <code translate="no">http://0.0.0.0:8001</code>.</p>
 <p>

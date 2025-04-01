@@ -85,13 +85,13 @@ embeddings = ef.encode_documents(docs)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, ef.dim, embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([<span class="hljs-number">-3.09392996e-02</span>, <span class="hljs-number">-1.80662833e-02</span>,  <span class="hljs-number">1.34775648e-02</span>,  <span class="hljs-number">2.77156215e-02</span>,
-       <span class="hljs-number">-4.86349640e-03</span>, <span class="hljs-number">-3.12581174e-02</span>, <span class="hljs-number">-3.55921760e-02</span>,  <span class="hljs-number">5.76934684e-03</span>,
+<pre><code translate="no" class="language-python">Embeddings: [array([-<span class="hljs-number">3.09392996e-02</span>, -<span class="hljs-number">1.80662833e-02</span>,  <span class="hljs-number">1.34775648e-02</span>,  <span class="hljs-number">2.77156215e-02</span>,
+       -<span class="hljs-number">4.86349640e-03</span>, -<span class="hljs-number">3.12581174e-02</span>, -<span class="hljs-number">3.55921760e-02</span>,  <span class="hljs-number">5.76934684e-03</span>,
         <span class="hljs-number">2.80773244e-03</span>,  <span class="hljs-number">1.35783911e-01</span>,  <span class="hljs-number">3.59678417e-02</span>,  <span class="hljs-number">6.17732145e-02</span>,
 ...
-       <span class="hljs-number">-4.61330153e-02</span>, <span class="hljs-number">-4.85207550e-02</span>,  <span class="hljs-number">3.13997865e-02</span>,  <span class="hljs-number">7.82178566e-02</span>,
-       <span class="hljs-number">-4.75336798e-02</span>,  <span class="hljs-number">5.21207601e-02</span>,  <span class="hljs-number">9.04406682e-02</span>, <span class="hljs-number">-5.36676683e-02</span>],
-      dtype=<span class="hljs-type">float32</span>)]
+       -<span class="hljs-number">4.61330153e-02</span>, -<span class="hljs-number">4.85207550e-02</span>,  <span class="hljs-number">3.13997865e-02</span>,  <span class="hljs-number">7.82178566e-02</span>,
+       -<span class="hljs-number">4.75336798e-02</span>,  <span class="hljs-number">5.21207601e-02</span>,  <span class="hljs-number">9.04406682e-02</span>, -<span class="hljs-number">5.36676683e-02</span>],
+      dtype=float32)]
 Dim: <span class="hljs-number">384</span> (<span class="hljs-number">384</span>,)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="common-anchor-header">Example 2: Generate dense and sparse vectors in one call with BGE M3 model<button data-href="#Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="anchor-icon" translate="no">
@@ -117,11 +117,11 @@ Dim: <span class="hljs-number">384</span> (<span class="hljs-number">384</span>,
 <li><p>Search and inspect the result.</p></li>
 </ol>
 <p>First, we need to install the necessary dependencies.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">hybrid</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">BGEM3EmbeddingFunction</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     utility,
-    <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>,
-    <span class="hljs-title class_">Collection</span>, <span class="hljs-title class_">AnnSearchRequest</span>, <span class="hljs-title class_">RRFRanker</span>, connections,
+    FieldSchema, CollectionSchema, DataType,
+    Collection, AnnSearchRequest, RRFRanker, connections,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Use BGE M3 to encode docs and queries for embedding retrieval.</p>
@@ -159,7 +159,7 @@ query_embeddings = bge_m3_ef([query])
       </svg>
     </button></h2><p>BM25 is a well-known method that uses word occurrence frequencies to determine the relevance between queries and documents. In this example, we will show how to use <code translate="no">BM25EmbeddingFunction</code> to generate sparse embeddings for both queries and documents.</p>
 <p>First, import the <strong>BM25EmbeddingFunction</strong> class.</p>
-<pre><code translate="no" class="language-xml"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">sparse</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">BM25EmbeddingFunction</span>
+<pre><code translate="no" class="language-xml">from pymilvus.model.sparse import BM25EmbeddingFunction
 <button class="copy-code-btn"></button></code></pre>
 <p>In BM25, it’s important to calculate the statistics in your documents to obtain the IDF (Inverse Document Frequency), which can represent the pattern in your documents. The IDF is a measure of how much information a word provides, that is, whether it’s common or rare across all documents.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. prepare a small corpus to search</span>
@@ -186,5 +186,5 @@ query_embeddings = new_bm25_ef.encode_queries([query])
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, new_bm25_ef.dim, <span class="hljs-built_in">list</span>(docs_embeddings)[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Dim: 21 (1, 21)
+<pre><code translate="no" class="language-python">Dim: <span class="hljs-number">21</span> (<span class="hljs-number">1</span>, <span class="hljs-number">21</span>)
 <button class="copy-code-btn"></button></code></pre>

@@ -61,28 +61,28 @@ jina_ef = JinaEmbeddingFunction(
 <pre><code translate="no" class="language-python:">
 ```python
 docs = [
-    <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
-    <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
-    <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
+    &quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;,
+    &quot;Alan Turing was the first person to conduct substantial research in AI.&quot;,
+    &quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;,
 ]
 
 docs_embeddings = jina_ef.encode_documents(docs)
 
-<span class="hljs-comment"># Print embeddings</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Embeddings:&quot;</span>, docs_embeddings)
-<span class="hljs-comment"># Print dimension and shape of embeddings</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, jina_ef.dim, docs_embeddings[<span class="hljs-number">0</span>].shape)
-<button class="copy-code-btn"></button></code></pre>
+# Print embeddings
+print(&quot;Embeddings:&quot;, docs_embeddings)
+# Print dimension and shape of embeddings
+print(&quot;Dim:&quot;, jina_ef.dim, docs_embeddings[0].shape)
+</code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([9.80641991e-02, -8.51697400e-02,  7.36531913e-02,  1.42558888e-02,
-       -2.23589484e-02,  1.68494112e-03, -3.50753777e-02, -3.11530549e-02,
-       -3.26012149e-02,  5.04568312e-03,  3.69836427e-02,  3.48948985e-02,
-        8.19722563e-03,  5.88679723e-02, -6.71099266e-03, -1.82369724e-02,
+<pre><code translate="no" class="language-python">Embeddings: [array([<span class="hljs-number">9.80641991e-02</span>, -<span class="hljs-number">8.51697400e-02</span>,  <span class="hljs-number">7.36531913e-02</span>,  <span class="hljs-number">1.42558888e-02</span>,
+       -<span class="hljs-number">2.23589484e-02</span>,  <span class="hljs-number">1.68494112e-03</span>, -<span class="hljs-number">3.50753777e-02</span>, -<span class="hljs-number">3.11530549e-02</span>,
+       -<span class="hljs-number">3.26012149e-02</span>,  <span class="hljs-number">5.04568312e-03</span>,  <span class="hljs-number">3.69836427e-02</span>,  <span class="hljs-number">3.48948985e-02</span>,
+        <span class="hljs-number">8.19722563e-03</span>,  <span class="hljs-number">5.88679723e-02</span>, -<span class="hljs-number">6.71099266e-03</span>, -<span class="hljs-number">1.82369724e-02</span>,
 ...
-        2.48654783e-02,  3.43279652e-02, -1.66154150e-02, -9.90478322e-03,
-       -2.96043139e-03, -8.57473817e-03, -7.39028037e-04,  6.25024503e-03,
-       -1.08831357e-02, -4.00776342e-02,  3.25369164e-02, -1.42691191e-03])]
-Dim: 1024 (1024,)
+        <span class="hljs-number">2.48654783e-02</span>,  <span class="hljs-number">3.43279652e-02</span>, -<span class="hljs-number">1.66154150e-02</span>, -<span class="hljs-number">9.90478322e-03</span>,
+       -<span class="hljs-number">2.96043139e-03</span>, -<span class="hljs-number">8.57473817e-03</span>, -<span class="hljs-number">7.39028037e-04</span>,  <span class="hljs-number">6.25024503e-03</span>,
+       -<span class="hljs-number">1.08831357e-02</span>, -<span class="hljs-number">4.00776342e-02</span>,  <span class="hljs-number">3.25369164e-02</span>, -<span class="hljs-number">1.42691191e-03</span>])]
+Dim: <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 <button class="copy-code-btn"></button></code></pre>
 <p>To create embeddings for queries, use the <code translate="no">encode_queries()</code> method. This method is designed for query embeddings in asymmetric retrieval tasks, such as search queries or questions. This method uses <code translate="no">retrieval.query</code> as the task.</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
@@ -94,15 +94,15 @@ query_embeddings = jina_ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim&quot;</span>, jina_ef.dim, query_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([8.79201014e-03,  1.47551354e-02,  4.02722731e-02, -2.52991207e-02,
-        1.12719582e-02,  3.75947170e-02,  3.97946090e-02, -7.36681819e-02,
-       -2.17952449e-02, -1.16298944e-02, -6.83426252e-03, -5.12507409e-02,
-        5.26071340e-02,  6.75181448e-02,  3.92445624e-02, -1.40817231e-02,
+<pre><code translate="no" class="language-python">Embeddings: [array([<span class="hljs-number">8.79201014e-03</span>,  <span class="hljs-number">1.47551354e-02</span>,  <span class="hljs-number">4.02722731e-02</span>, -<span class="hljs-number">2.52991207e-02</span>,
+        <span class="hljs-number">1.12719582e-02</span>,  <span class="hljs-number">3.75947170e-02</span>,  <span class="hljs-number">3.97946090e-02</span>, -<span class="hljs-number">7.36681819e-02</span>,
+       -<span class="hljs-number">2.17952449e-02</span>, -<span class="hljs-number">1.16298944e-02</span>, -<span class="hljs-number">6.83426252e-03</span>, -<span class="hljs-number">5.12507409e-02</span>,
+        <span class="hljs-number">5.26071340e-02</span>,  <span class="hljs-number">6.75181448e-02</span>,  <span class="hljs-number">3.92445624e-02</span>, -<span class="hljs-number">1.40817231e-02</span>,
 ...
-        8.81703943e-03,  4.24629413e-02, -2.32944116e-02, -2.05193572e-02,
-       -3.22035812e-02,  2.81896023e-03,  3.85326855e-02,  3.64372656e-02,
-       -1.65050142e-02, -4.26847413e-02,  2.02664156e-02, -1.72684863e-02])]
-Dim 1024 (1024,)
+        <span class="hljs-number">8.81703943e-03</span>,  <span class="hljs-number">4.24629413e-02</span>, -<span class="hljs-number">2.32944116e-02</span>, -<span class="hljs-number">2.05193572e-02</span>,
+       -<span class="hljs-number">3.22035812e-02</span>,  <span class="hljs-number">2.81896023e-03</span>,  <span class="hljs-number">3.85326855e-02</span>,  <span class="hljs-number">3.64372656e-02</span>,
+       -<span class="hljs-number">1.65050142e-02</span>, -<span class="hljs-number">4.26847413e-02</span>,  <span class="hljs-number">2.02664156e-02</span>, -<span class="hljs-number">1.72684863e-02</span>])]
+Dim <span class="hljs-number">1024</span> (<span class="hljs-number">1024</span>,)
 <button class="copy-code-btn"></button></code></pre>
 <p>To create embeddings of inputs for similarity matching (such as STS or symmetric retrieval tasks), text classification, clustering, or reranking tasks, use the appropriate <code translate="no">task</code> parameter value when instantiating the <code translate="no">JinaEmbeddingFunction</code> class.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction

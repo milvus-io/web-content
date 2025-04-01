@@ -23,8 +23,8 @@ summary: Learn how to configure mq for Milvus.
 <p>You can change your mq by setting mq.type field.</p>
 <p>If you don’t set mq.type field as default, there is a note about enabling priority if we config multiple mq in this file.</p>
 <ol>
-<li><p>standalone(local) mode: rocksmq(default) &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
-<li><p>cluster mode:  Pulsar(default) &gt; Kafka (rocksmq and natsmq is unsupported in cluster mode)</p></li>
+<li><p>standalone(local) mode: rocksmq(default) > natsmq > Pulsar > Kafka</p></li>
+<li><p>cluster mode:  Pulsar(default) > Kafka (rocksmq and natsmq is unsupported in cluster mode)</p></li>
 </ol>
 <h2 id="mqtype" class="common-anchor-header"><code translate="no">mq.type</code><button data-href="#mqtype" class="anchor-icon" translate="no">
       <svg translate="no"

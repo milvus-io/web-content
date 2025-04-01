@@ -53,28 +53,28 @@ title: Graph RAG with Milvus
 <p>We will use the models from OpenAI. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Import the necessary libraries and dependencies.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
 <span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> defaultdict
-<span class="hljs-keyword">from</span> scipy.<span class="hljs-property">sparse</span> <span class="hljs-keyword">import</span> csr_matrix
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">messages</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">AIMessage</span>, <span class="hljs-title class_">HumanMessage</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">prompts</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">ChatPromptTemplate</span>, <span class="hljs-title class_">HumanMessagePromptTemplate</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">output_parsers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">StrOutputParser</span>, <span class="hljs-title class_">JsonOutputParser</span>
-<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">ChatOpenAI</span>, <span class="hljs-title class_">OpenAIEmbeddings</span>
+<span class="hljs-keyword">from</span> scipy.sparse <span class="hljs-keyword">import</span> csr_matrix
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">from</span> langchain_core.messages <span class="hljs-keyword">import</span> AIMessage, HumanMessage
+<span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> ChatPromptTemplate, HumanMessagePromptTemplate
+<span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser, JsonOutputParser
+<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI, OpenAIEmbeddings
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <p>Initialize the instance of Milvus client, the LLM, and the embedding model.</p>
-<pre><code translate="no" class="language-python">milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>)
+<pre><code translate="no" class="language-python">milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>)
 
-llm = <span class="hljs-title class_">ChatOpenAI</span>(
+llm = ChatOpenAI(
     model=<span class="hljs-string">&quot;gpt-4o&quot;</span>,
     temperature=<span class="hljs-number">0</span>,
 )
-embedding_model = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
+embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>For the args in MilvusClient:</p>
@@ -168,30 +168,30 @@ In practice, you can use any approach to extract the triplets from your own cust
 <li>Here we construct the concept of relationship by directly concatenating the subject, predicate, and object with a space in between.</li>
 </ul>
 <p>We also prepare a dict to map entity id to relation id, and another dict to map relation id to passage id for later use.</p>
-<pre><code translate="no" class="language-python">entityid_2_relationids = defaultdict(list)
-relationid_2_passageids = defaultdict(list)
+<pre><code translate="no" class="language-python">entityid_2_relationids = defaultdict(<span class="hljs-built_in">list</span>)
+relationid_2_passageids = defaultdict(<span class="hljs-built_in">list</span>)
 
 entities = []
 relations = []
 passages = []
-<span class="hljs-keyword">for</span> passage_id, dataset_info in enumerate(nano_dataset):
+<span class="hljs-keyword">for</span> passage_id, dataset_info <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(nano_dataset):
     passage, triplets = dataset_info[<span class="hljs-string">&quot;passage&quot;</span>], dataset_info[<span class="hljs-string">&quot;triplets&quot;</span>]
-    passages.<span class="hljs-built_in">append</span>(passage)
-    <span class="hljs-keyword">for</span> triplet in triplets:
-        <span class="hljs-keyword">if</span> triplet[<span class="hljs-number">0</span>] not in entities:
-            entities.<span class="hljs-built_in">append</span>(triplet[<span class="hljs-number">0</span>])
-        <span class="hljs-keyword">if</span> triplet[<span class="hljs-number">2</span>] not in entities:
-            entities.<span class="hljs-built_in">append</span>(triplet[<span class="hljs-number">2</span>])
+    passages.append(passage)
+    <span class="hljs-keyword">for</span> triplet <span class="hljs-keyword">in</span> triplets:
+        <span class="hljs-keyword">if</span> triplet[<span class="hljs-number">0</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> entities:
+            entities.append(triplet[<span class="hljs-number">0</span>])
+        <span class="hljs-keyword">if</span> triplet[<span class="hljs-number">2</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> entities:
+            entities.append(triplet[<span class="hljs-number">2</span>])
         relation = <span class="hljs-string">&quot; &quot;</span>.join(triplet)
-        <span class="hljs-keyword">if</span> relation not in relations:
-            relations.<span class="hljs-built_in">append</span>(relation)
-            entityid_2_relationids[entities.index(triplet[<span class="hljs-number">0</span>])].<span class="hljs-built_in">append</span>(
+        <span class="hljs-keyword">if</span> relation <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> relations:
+            relations.append(relation)
+            entityid_2_relationids[entities.index(triplet[<span class="hljs-number">0</span>])].append(
                 <span class="hljs-built_in">len</span>(relations) - <span class="hljs-number">1</span>
             )
-            entityid_2_relationids[entities.index(triplet[<span class="hljs-number">2</span>])].<span class="hljs-built_in">append</span>(
+            entityid_2_relationids[entities.index(triplet[<span class="hljs-number">2</span>])].append(
                 <span class="hljs-built_in">len</span>(relations) - <span class="hljs-number">1</span>
             )
-        relationid_2_passageids[relations.index(relation)].<span class="hljs-built_in">append</span>(passage_id)
+        relationid_2_passageids[relations.index(relation)].append(passage_id)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Data-Insertion" class="common-anchor-header">Data Insertion</h3><p>Create Milvus collections for entity, relation, and passage. The entity collection and relation collection are used as the major collections for graph construction in our method, while the passage collection is used as the naive RAG retrieval comparison or auxiliary purpose.</p>
 <pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-built_in">len</span>(embedding_model.embed_query(<span class="hljs-string">&quot;foo&quot;</span>))
@@ -285,12 +285,12 @@ query_ner_embeddings = [
     embedding_model.embed_query(query_ner) <span class="hljs-keyword">for</span> query_ner <span class="hljs-keyword">in</span> query_ner_list
 ]
 
-top_k = 3
+top_k = <span class="hljs-number">3</span>
 
 entity_search_res = milvus_client.search(
     collection_name=entity_col_name,
     data=query_ner_embeddings,
-    <span class="hljs-built_in">limit</span>=top_k,
+    limit=top_k,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>],
 )
 
@@ -299,9 +299,9 @@ query_embedding = embedding_model.embed_query(query)
 relation_search_res = milvus_client.search(
     collection_name=relation_col_name,
     data=[query_embedding],
-    <span class="hljs-built_in">limit</span>=top_k,
+    limit=top_k,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>],
-)[0]
+)[<span class="hljs-number">0</span>]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Expand-Subgraph" class="common-anchor-header">Expand Subgraph</h3><p>We use the retrieved entities and relations to expand the subgraph and obtain the candidate relationships, and then merge them from the two ways. Here is a flow chart of the subgraph expansion process:
 
@@ -452,11 +452,11 @@ rerank_relation_ids = rerank_relations(
 
 final_passages = []
 final_passage_ids = []
-<span class="hljs-keyword">for</span> relation_id in rerank_relation_ids:
-    <span class="hljs-keyword">for</span> passage_id in relationid_2_passageids[relation_id]:
-        <span class="hljs-keyword">if</span> passage_id not in final_passage_ids:
-            final_passage_ids.<span class="hljs-built_in">append</span>(passage_id)
-            final_passages.<span class="hljs-built_in">append</span>(passages[passage_id])
+<span class="hljs-keyword">for</span> relation_id <span class="hljs-keyword">in</span> rerank_relation_ids:
+    <span class="hljs-keyword">for</span> passage_id <span class="hljs-keyword">in</span> relationid_2_passageids[relation_id]:
+        <span class="hljs-keyword">if</span> passage_id <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> final_passage_ids:
+            final_passage_ids.append(passage_id)
+            final_passages.append(passages[passage_id])
 passages_from_our_method = final_passages[:final_top_k]
 <button class="copy-code-btn"></button></code></pre>
 <p>We can compare the results with the naive RAG method, which retrieves the topK passages based on the query embedding directly from the passage collection.</p>

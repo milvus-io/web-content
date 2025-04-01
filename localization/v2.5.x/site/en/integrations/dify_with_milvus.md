@@ -38,7 +38,7 @@ title: Deploying Dify with Milvus
         ></path>
       </svg>
     </button></h2><p>Clone the Dify source code to your local machine:</p>
-<pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/langgenius/dify.git
+<pre><code translate="no" class="language-shell">git clone https://github.com/langgenius/dify.git
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Set-the-Environment-Variables" class="common-anchor-header">Set the Environment Variables<button data-href="#Set-the-Environment-Variables" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,16 +56,16 @@ title: Deploying Dify with Milvus
         ></path>
       </svg>
     </button></h2><p>Navigate to the Docker directory in the Dify source code</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">cd</span> dify/docker
+<pre><code translate="no" class="language-shell">cd dify/docker
 <button class="copy-code-btn"></button></code></pre>
 <p>Copy the environment configuration file</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">cp</span> .env.example .<span class="hljs-built_in">env</span>
+<pre><code translate="no" class="language-shell">cp .env.example .env
 <button class="copy-code-btn"></button></code></pre>
 <p>Change the value <code translate="no">VECTOR_STORE</code> in the <code translate="no">.env</code> file</p>
-<pre><code translate="no">VECTOR_STORE=milvus
+<pre><code translate="no"><span class="hljs-attr">VECTOR_STORE</span>=milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Make sure the Milvus configuration in the <code translate="no">.env</code> file has the following line:</p>
-<pre><code translate="no"><span class="hljs-variable constant_">MILVUS_URI</span>=<span class="hljs-attr">http</span>:<span class="hljs-comment">//host.docker.internal:19530</span>
+<pre><code translate="no"><span class="hljs-attr">MILVUS_URI</span>=http://host.docker.internal:<span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Note that by specifying <code translate="no">VECTOR_STORE=milvus</code>, Dify will bring up a Milvus Standalone server in docker. Even though you can access the server from outside of the Docker through <code translate="no">http://localhost:19530</code>, for other Dify containers to talk to it inside Docker environment, they need to connect to the special DNS name <code translate="no">host.docker.internal</code>. Thus we set <code translate="no">http://host.docker.internal:19530</code> as <code translate="no">MILVUS_URI</code>.</p>
 <p>For production deployment you may want to customize the authentication. For more information about how to set token or username and password in Milvus, you can refer the <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">authenticate page</a>.</p>

@@ -49,10 +49,10 @@ title: HDBSCAN Clustering with Milvus
         ></path>
       </svg>
     </button></h2><p>download news dataset from https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/</p>
-<pre><code translate="no" class="language-shell">$ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
-$ pip install hdbscan
-$ pip install plotly
-$ pip install umap-learn
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install hdbscan</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install plotly</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install umap-learn</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Download-Data" class="common-anchor-header">Download Data<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,7 +108,7 @@ connections.connect(uri=<span class="hljs-string">&quot;milvus.db&quot;</span>)
 <div class="alert note">
 <ul>
 <li>If you only need a local vector database for small scale data or prototyping, setting the uri as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “&lt;your_username&gt;:&lt;your_password&gt;” as the token, otherwise don’t set the token.</li>
+<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “<your_username>:<your_password>” as the token, otherwise don’t set the token.</li>
 <li>If you use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.</li>
 </ul>
 </div>

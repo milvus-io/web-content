@@ -114,8 +114,8 @@ title: Question Answering System
         ></path>
       </svg>
     </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 Prepare the Data</h3><p>We use the FAQ pages from the <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus Documentation 2.4.x</a> as the dataset for this example.</p>
-<h4 id="Download-and-Extract-Data" class="common-anchor-header">Download and Extract Data:</h4><pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
-unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
+<h4 id="Download-and-Extract-Data" class="common-anchor-header">Download and Extract Data:</h4><pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip
+unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Process-Markdown-Files" class="common-anchor-header">Process Markdown Files:</h4><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 

@@ -51,7 +51,7 @@ tokens = analyzer(corpus[<span class="hljs-number">0</span>])
 <p>The language of the text to be tokenized. Valid options are <strong>en</strong> (English), <strong>de</strong> (German), <strong>fr</strong> (French), <strong>ru</strong> (Russian), <strong>sp</strong> (Spanish), <strong>it</strong> (Italian), <strong>pt</strong> (Portuguese), <strong>zh</strong> (Chinese), <strong>jp</strong> (Japanese), <strong>kr</strong> (Korean).</p></li>
 </ul>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-attr">tokens</span>: [<span class="hljs-string">&#x27;artifici&#x27;</span>, <span class="hljs-string">&#x27;intellig&#x27;</span>, <span class="hljs-string">&#x27;found&#x27;</span>, <span class="hljs-string">&#x27;academ&#x27;</span>, <span class="hljs-string">&#x27;disciplin&#x27;</span>, <span class="hljs-string">&#x27;1956&#x27;</span>]
+<pre><code translate="no" class="language-python">tokens: [<span class="hljs-string">&#x27;artifici&#x27;</span>, <span class="hljs-string">&#x27;intellig&#x27;</span>, <span class="hljs-string">&#x27;found&#x27;</span>, <span class="hljs-string">&#x27;academ&#x27;</span>, <span class="hljs-string">&#x27;disciplin&#x27;</span>, <span class="hljs-string">&#x27;1956&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>
 <p>The BM25 algorithm processes text by first breaking it into tokens using a built-in analyzer, as shown with English language tokens like <strong>‘artifici’</strong>, <strong>‘intellig’</strong>, and <strong>‘academ’</strong>. It then gathers statistics on these tokens, evaluating their frequency and distribution across documents. The core of BM25 calculates the relevance score of each token based on its importance, with rarer tokens receiving higher scores. This concise process enables effective ranking of documents by relevance to a query.</p>
 <p>To gather statistics on the corpus, use the <strong>fit()</strong> method:</p>
@@ -79,14 +79,14 @@ docs_embeddings = bm25_ef.encode_documents(docs)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Sparse dim:&quot;</span>, bm25_ef.dim, <span class="hljs-built_in">list</span>(docs_embeddings)[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings:   (0, 0)        1.0208816705336425
-  (0, 1)        1.0208816705336425
-  (0, 3)        1.0208816705336425
+<pre><code translate="no" class="language-python">Embeddings:   (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)        <span class="hljs-number">1.0208816705336425</span>
+  (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)        <span class="hljs-number">1.0208816705336425</span>
+  (<span class="hljs-number">0</span>, <span class="hljs-number">3</span>)        <span class="hljs-number">1.0208816705336425</span>
 ...
-  (4, 16)        0.9606986899563318
-  (4, 17)        0.9606986899563318
-  (4, 20)        0.9606986899563318
-Sparse dim: 21 (1, 21)
+  (<span class="hljs-number">4</span>, <span class="hljs-number">16</span>)        <span class="hljs-number">0.9606986899563318</span>
+  (<span class="hljs-number">4</span>, <span class="hljs-number">17</span>)        <span class="hljs-number">0.9606986899563318</span>
+  (<span class="hljs-number">4</span>, <span class="hljs-number">20</span>)        <span class="hljs-number">0.9606986899563318</span>
+Sparse dim: <span class="hljs-number">21</span> (<span class="hljs-number">1</span>, <span class="hljs-number">21</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>To create embeddings for queries, use the <strong>encode_queries()</strong> method:</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
@@ -100,13 +100,13 @@ query_embeddings = bm25_ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Sparse dim:&quot;</span>, bm25_ef.dim, <span class="hljs-built_in">list</span>(query_embeddings)[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings:   (0, 0)        0.5108256237659907
-  (0, 1)        0.5108256237659907
-  (0, 2)        0.5108256237659907
-  (1, 6)        0.5108256237659907
-  (1, 7)        0.11554389108992644
-  (1, 14)        0.5108256237659907
-Sparse dim: 21 (1, 21)
+<pre><code translate="no" class="language-python">Embeddings:   (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)        <span class="hljs-number">0.5108256237659907</span>
+  (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)        <span class="hljs-number">0.5108256237659907</span>
+  (<span class="hljs-number">0</span>, <span class="hljs-number">2</span>)        <span class="hljs-number">0.5108256237659907</span>
+  (<span class="hljs-number">1</span>, <span class="hljs-number">6</span>)        <span class="hljs-number">0.5108256237659907</span>
+  (<span class="hljs-number">1</span>, <span class="hljs-number">7</span>)        <span class="hljs-number">0.11554389108992644</span>
+  (<span class="hljs-number">1</span>, <span class="hljs-number">14</span>)        <span class="hljs-number">0.5108256237659907</span>
+Sparse dim: <span class="hljs-number">21</span> (<span class="hljs-number">1</span>, <span class="hljs-number">21</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Notes:</strong></p>
 <p>When using <strong>BM25EmbeddingFunction</strong>, note that <strong>encoding_queries()</strong> and <strong>encoding_documents()</strong> operations cannot be interchanged mathematically. Therefore, there is no implemented <strong>bm25_ef(texts)</strong> available.</p>

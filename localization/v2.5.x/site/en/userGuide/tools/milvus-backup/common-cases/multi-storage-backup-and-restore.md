@@ -94,11 +94,11 @@ Storage</a>.</p></li>
       </svg>
     </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Step 1: Prepare configuration</h3><p>Go to the directory of the milvus-backup project and create a directory
 named configs:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">mkdir</span> configs
-<span class="hljs-built_in">cd</span> configs
+<pre><code translate="no" class="language-shell">mkdir configs
+cd configs
 <button class="copy-code-btn"></button></code></pre>
 <p>Download the backup config file <code translate="no">backup.yaml</code>:</p>
-<pre><code translate="no" class="language-shell">wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-backup/main/configs/backup.yaml</span>
+<pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/zilliztech/milvus-backup/main/configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>The file structure looks like this:</p>
 <pre><code translate="no">├── configs
@@ -111,15 +111,15 @@ milvus_A:</p>
 <ul>
 <li><p>Connection configs</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
-milvus:
-  address: milvus_A
-  port: <span class="hljs-number">19530</span>
-  authorizationEnabled: false
+<span class="hljs-attr">milvus:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">milvus_A</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">19530</span>
+  <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">false</span>
   <span class="hljs-comment"># tls mode values [0, 1, 2]</span>
   <span class="hljs-comment"># 0 is close, 1 is one-way authentication, 2 is two-way authentication.</span>
-  tlsMode: <span class="hljs-number">0</span>
-  user: <span class="hljs-string">&quot;root&quot;</span>
-  password: <span class="hljs-string">&quot;Milvus&quot;</span>
+  <span class="hljs-attr">tlsMode:</span> <span class="hljs-number">0</span>
+  <span class="hljs-attr">user:</span> <span class="hljs-string">&quot;root&quot;</span>
+  <span class="hljs-attr">password:</span> <span class="hljs-string">&quot;Milvus&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">milvus.address</code>: IP address or hostname of the milvus_A server.</p></li>
@@ -128,27 +128,27 @@ milvus:
 </ul></li>
 <li><p>Storage configs (MinIO/S3 settings)</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of minio, which is responsible for data persistence for Milvus.</span>
-minio:
+<span class="hljs-attr">minio:</span>
   <span class="hljs-comment"># cloudProvider: &quot;minio&quot; # deprecated use storageType instead</span>
-  storageType: <span class="hljs-string">&quot;minio&quot;</span> <span class="hljs-comment"># support storage type: local, minio, s3, aws, gcp, ali(aliyun), azure, tc(tencent)</span>
+  <span class="hljs-attr">storageType:</span> <span class="hljs-string">&quot;minio&quot;</span> <span class="hljs-comment"># support storage type: local, minio, s3, aws, gcp, ali(aliyun), azure, tc(tencent)</span>
   
-  address: minio_A <span class="hljs-comment"># Address of MinIO/S3</span>
-  port: <span class="hljs-number">9000</span>   <span class="hljs-comment"># Port of MinIO/S3</span>
-  accessKeyID: minioadmin  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
-  secretAccessKey: minioadmin <span class="hljs-comment"># MinIO/S3 encryption string</span>
-  useSSL: false <span class="hljs-comment"># Access to MinIO/S3 with SSL</span>
-  useIAM: false
-  iamEndpoint: <span class="hljs-string">&quot;&quot;</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">minio_A</span> <span class="hljs-comment"># Address of MinIO/S3</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">9000</span>   <span class="hljs-comment"># Port of MinIO/S3</span>
+  <span class="hljs-attr">accessKeyID:</span> <span class="hljs-string">minioadmin</span>  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
+  <span class="hljs-attr">secretAccessKey:</span> <span class="hljs-string">minioadmin</span> <span class="hljs-comment"># MinIO/S3 encryption string</span>
+  <span class="hljs-attr">useSSL:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># Access to MinIO/S3 with SSL</span>
+  <span class="hljs-attr">useIAM:</span> <span class="hljs-literal">false</span>
+  <span class="hljs-attr">iamEndpoint:</span> <span class="hljs-string">&quot;&quot;</span>
   
-  bucketName: <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Milvus Bucket name in MinIO/S3, make it the same as your milvus instance</span>
-  rootPath: <span class="hljs-string">&quot;files&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
+  <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Milvus Bucket name in MinIO/S3, make it the same as your milvus instance</span>
+  <span class="hljs-attr">rootPath:</span> <span class="hljs-string">&quot;files&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
 
   <span class="hljs-comment"># only for azure</span>
-  backupAccessKeyID: minioadmin  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
-  backupSecretAccessKey: minioadmin <span class="hljs-comment"># MinIO/S3 encryption string</span>
+  <span class="hljs-attr">backupAccessKeyID:</span> <span class="hljs-string">minioadmin</span>  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
+  <span class="hljs-attr">backupSecretAccessKey:</span> <span class="hljs-string">minioadmin</span> <span class="hljs-comment"># MinIO/S3 encryption string</span>
   
-  backupBucketName: <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Bucket name to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
-  backupRootPath: <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
+  <span class="hljs-attr">backupBucketName:</span> <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Bucket name to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
+  <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><code translate="no">minio.bucketName</code>: Name of the bucket used for data storage in milvus_A. In this example, set to <code translate="no">bucket_A</code>.</p></li>
 <li><p><code translate="no">minio.rootPath</code>: Root path within the bucket where data from milvus_A is stored. In this example, set to <code translate="no">files</code>.</p></li>
@@ -191,19 +191,19 @@ client</a> to download the backup files:</p>
 <ol>
 <li>Configure a MinIO host:</li>
 </ol>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta"># configure a Minio host</span>
-mc <span class="hljs-keyword">alias</span> <span class="hljs-keyword">set</span> my_minio https:<span class="hljs-comment">//&lt;minio_endpoint&gt; &lt;accessKey&gt; &lt;secretKey&gt;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">configure a Minio host</span>
+mc alias set my_minio https://&lt;minio_endpoint&gt; &lt;accessKey&gt; &lt;secretKey&gt;
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>List the available buckets:</li>
 </ol>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># List the available buckets</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">List the available buckets</span>
 mc ls my_minio
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
 <li>Download a bucket recursively:</li>
 </ol>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download a bucket recursively</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download a bucket recursively</span>
 mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <button class="copy-code-btn"></button></code></pre>
 <p>Once the backup files are downloaded, you can upload them to the object
@@ -231,38 +231,38 @@ Cloud</a>.</p>
 2 to modify configs for restoration to <code translate="no">milvus_B</code>, ensuring <code translate="no">minio.bucketName</code> is set to <code translate="no">bucket_B</code>.</p>
 <p>Here’s a sample configuration:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
-milvus:
-  address: milvus_B
-  port: <span class="hljs-number">19530</span>
-  authorizationEnabled: false
+<span class="hljs-attr">milvus:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">milvus_B</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">19530</span>
+  <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">false</span>
   <span class="hljs-comment"># tls mode values [0, 1, 2]</span>
   <span class="hljs-comment"># 0 is close, 1 is one-way authentication, 2 is two-way authentication.</span>
-  tlsMode: <span class="hljs-number">0</span>
-  user: <span class="hljs-string">&quot;root&quot;</span>
-  password: <span class="hljs-string">&quot;Milvus&quot;</span>
+  <span class="hljs-attr">tlsMode:</span> <span class="hljs-number">0</span>
+  <span class="hljs-attr">user:</span> <span class="hljs-string">&quot;root&quot;</span>
+  <span class="hljs-attr">password:</span> <span class="hljs-string">&quot;Milvus&quot;</span>
   
 <span class="hljs-comment"># Related configuration of minio, which is responsible for data persistence for Milvus.</span>
-minio:
+<span class="hljs-attr">minio:</span>
   <span class="hljs-comment"># cloudProvider: &quot;minio&quot; # deprecated use storageType instead</span>
-  storageType: <span class="hljs-string">&quot;minio&quot;</span> <span class="hljs-comment"># support storage type: local, minio, s3, aws, gcp, ali(aliyun), azure, tc(tencent)</span>
+  <span class="hljs-attr">storageType:</span> <span class="hljs-string">&quot;minio&quot;</span> <span class="hljs-comment"># support storage type: local, minio, s3, aws, gcp, ali(aliyun), azure, tc(tencent)</span>
   
-  address: minio_B <span class="hljs-comment"># Address of MinIO/S3</span>
-  port: <span class="hljs-number">9000</span>   <span class="hljs-comment"># Port of MinIO/S3</span>
-  accessKeyID: minioadmin  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
-  secretAccessKey: minioadmin <span class="hljs-comment"># MinIO/S3 encryption string</span>
-  useSSL: false <span class="hljs-comment"># Access to MinIO/S3 with SSL</span>
-  useIAM: false
-  iamEndpoint: <span class="hljs-string">&quot;&quot;</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">minio_B</span> <span class="hljs-comment"># Address of MinIO/S3</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">9000</span>   <span class="hljs-comment"># Port of MinIO/S3</span>
+  <span class="hljs-attr">accessKeyID:</span> <span class="hljs-string">minioadmin</span>  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
+  <span class="hljs-attr">secretAccessKey:</span> <span class="hljs-string">minioadmin</span> <span class="hljs-comment"># MinIO/S3 encryption string</span>
+  <span class="hljs-attr">useSSL:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># Access to MinIO/S3 with SSL</span>
+  <span class="hljs-attr">useIAM:</span> <span class="hljs-literal">false</span>
+  <span class="hljs-attr">iamEndpoint:</span> <span class="hljs-string">&quot;&quot;</span>
   
-  bucketName: <span class="hljs-string">&quot;bucket_B&quot;</span> <span class="hljs-comment"># Milvus Bucket name in MinIO/S3, make it the same as your milvus instance</span>
-  rootPath: <span class="hljs-string">&quot;files&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
+  <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;bucket_B&quot;</span> <span class="hljs-comment"># Milvus Bucket name in MinIO/S3, make it the same as your milvus instance</span>
+  <span class="hljs-attr">rootPath:</span> <span class="hljs-string">&quot;files&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
 
   <span class="hljs-comment"># only for azure</span>
-  backupAccessKeyID: minioadmin  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
-  backupSecretAccessKey: minioadmin <span class="hljs-comment"># MinIO/S3 encryption string</span>
+  <span class="hljs-attr">backupAccessKeyID:</span> <span class="hljs-string">minioadmin</span>  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
+  <span class="hljs-attr">backupSecretAccessKey:</span> <span class="hljs-string">minioadmin</span> <span class="hljs-comment"># MinIO/S3 encryption string</span>
   
-  backupBucketName: <span class="hljs-string">&quot;bucket_B&quot;</span> <span class="hljs-comment"># Bucket name to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
-  backupRootPath: <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
+  <span class="hljs-attr">backupBucketName:</span> <span class="hljs-string">&quot;bucket_B&quot;</span> <span class="hljs-comment"># Bucket name to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
+  <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Restore-from-the-backup" class="common-anchor-header">Step 2: Restore from the backup</h3><p>Restore the backup to <code translate="no">milvus_B</code>:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak

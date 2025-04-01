@@ -73,12 +73,12 @@ title: Manage CDC Tasks
 <li><p><strong>collection_infos</strong>: Collections to synchronize. Currently, only an asterisk (<strong>*</strong>) is supported, as Milvus-CDC synchronizes at the cluster level, not individual collections.</p></li>
 </ul>
 <p>Expected response:</p>
-<pre><code translate="no" class="language-json">{
-  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
-  <span class="hljs-string">&quot;data&quot;</span>: {
-    <span class="hljs-string">&quot;task_id&quot;</span>:<span class="hljs-string">&quot;xxxx&quot;</span>
-  }
-}
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;task_id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;xxxx&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="List-tasks" class="common-anchor-header">List tasks<button data-href="#List-tasks" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -102,26 +102,26 @@ title: Manage CDC Tasks
 <button class="copy-code-btn"></button></code></pre>
 <p>Replace <strong>localhost</strong> with the IP address of the target Milvus server.</p>
 <p>Expected response:</p>
-<pre><code translate="no" class="language-json">{
-  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
-  <span class="hljs-string">&quot;data&quot;</span>: {
-    <span class="hljs-string">&quot;tasks&quot;</span>: [
-      {
-        <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-string">&quot;xxxxx&quot;</span>,
-        <span class="hljs-string">&quot;milvus_connect_param&quot;</span>: {
-          <span class="hljs-string">&quot;uri&quot;</span>:<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-          <span class="hljs-string">&quot;connect_timeout&quot;</span>: <span class="hljs-number">10</span>
-        },
-        <span class="hljs-string">&quot;collection_infos&quot;</span>: [
-          {
-            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;*&quot;</span>
-          }
-        ],
-        <span class="hljs-string">&quot;state&quot;</span>: <span class="hljs-string">&quot;Running&quot;</span>
-      }
-    ]
-  }
-}
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;tasks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;task_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;xxxxx&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;milvus_connect_param&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+          <span class="hljs-attr">&quot;uri&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;http://localhost:19530&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;connect_timeout&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">10</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;collection_infos&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+          <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;*&quot;</span>
+          <span class="hljs-punctuation">}</span>
+        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;state&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Running&quot;</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Pause-a-task" class="common-anchor-header">Pause a task<button data-href="#Pause-a-task" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +153,7 @@ title: Manage CDC Tasks
 </ul>
 <p>Expected response:</p>
 <pre><code translate="no" class="language-bash">{
-  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
+  <span class="hljs-string">&quot;code&quot;</span>: 200,
   <span class="hljs-string">&quot;data&quot;</span>: {}
 }
 <button class="copy-code-btn"></button></code></pre>
@@ -187,7 +187,7 @@ title: Manage CDC Tasks
 </ul>
 <p>Expected response:</p>
 <pre><code translate="no" class="language-bash">{
-  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
+  <span class="hljs-string">&quot;code&quot;</span>: 200,
   <span class="hljs-string">&quot;data&quot;</span>: {}
 }
 <button class="copy-code-btn"></button></code></pre>
@@ -221,7 +221,7 @@ title: Manage CDC Tasks
 </ul>
 <p>Expected response:</p>
 <pre><code translate="no" class="language-bash">{
-  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
+  <span class="hljs-string">&quot;code&quot;</span>: 200,
   <span class="hljs-string">&quot;data&quot;</span>: {
     <span class="hljs-string">&quot;Task&quot;</span>: {
       <span class="hljs-string">&quot;collection_infos&quot;</span>: [
@@ -230,7 +230,7 @@ title: Manage CDC Tasks
         }
       ],
       <span class="hljs-string">&quot;milvus_connect_param&quot;</span>: {
-        <span class="hljs-string">&quot;connect_timeout&quot;</span>: <span class="hljs-number">10</span>,
+        <span class="hljs-string">&quot;connect_timeout&quot;</span>: 10,
         <span class="hljs-string">&quot;uri&quot;</span>:<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
       },
       <span class="hljs-string">&quot;state&quot;</span>: <span class="hljs-string">&quot;Running&quot;</span>,
@@ -268,8 +268,8 @@ title: Manage CDC Tasks
 <li><strong>task_id</strong>: ID of the CDC task to delete.</li>
 </ul>
 <p>Expected response:</p>
-<pre><code translate="no" class="language-json">{
-  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
-  <span class="hljs-string">&quot;data&quot;</span>: {}
-}
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -30,30 +30,30 @@ summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on 
 </ul>
 <h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Tweak Milvus configurations</h3><p>This guide assumes that you have already <a href="/docs/gcp.md">deployed a Milvus cluster behind a Layer-4 load balancer on GCP</a>.</p>
 <p>Before setting up a Layer-7 load balancer for this Milvus cluster, run the following command to remove the Layer-4 load balancer.</p>
-<pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
+<pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>
 <p>As a backend service of the Layer-7 load balancer, Milvus has to meet <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2">certain encryption requirements</a> so that it can understand the HTTP/2 requests from the load balancer. Therefore, you need to enable TLS on your Milvus cluster as follows.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus -f tls.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>the tls.yaml content:</p>
-<pre><code translate="no" class="language-yaml">extraConfigFiles:
-  user.yaml: |+
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     common:
       security:
         tlsMode: 1
-<button class="copy-code-btn"></button></code></pre>
+</span><button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-up-a-health-check-endpoint" class="common-anchor-header">Set up a health check endpoint</h3><p>To ensure service availability, Layer-7 load balancing on GCP requires probing the health conditions of the backend service. Therefore, we need to set up a BackendConfig to wrap up the health check endpoint and associate the BackendConfig with the Milvus service through annotations.</p>
 <p>The following snippet is the BackendConfig settings. Save it as <code translate="no">backendconfig.yaml</code> for later use.</p>
-<pre><code translate="no" class="language-yaml">apiVersion: cloud.google.com/v1
-kind: BackendConfig
-metadata:
-  name: my-release-backendconfig
-  namespace: default
-spec:
-  healthCheck:
-    port: 9091
-    requestPath: /healthz
-    <span class="hljs-built_in">type</span>: HTTP
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cloud.google.com/v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">BackendConfig</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-backendconfig</span>
+  <span class="hljs-attr">namespace:</span> <span class="hljs-string">default</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">healthCheck:</span>
+    <span class="hljs-attr">port:</span> <span class="hljs-number">9091</span>
+    <span class="hljs-attr">requestPath:</span> <span class="hljs-string">/healthz</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">HTTP</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then run the following command to create the health check endpoint.</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f backendconfig.yaml
@@ -77,27 +77,27 @@ spec:
 <h3 id="Prepare-TLS-certificates" class="common-anchor-header">Prepare TLS certificates</h3><p>TLS requires certificates to work. <strong>There are two ways to create certificates, namely self-managed and Google-managed.</strong></p>
 <p>This guide uses <strong>my-release.milvus.io</strong> as the domain name to access our Milvus service.</p>
 <h4 id="Create-self-managed-certificates" class="common-anchor-header">Create self-managed certificates</h4><p>Run the following commands to create a certificate.</p>
-<pre><code translate="no" class="language-bash"><span class="hljs-meta"># Generates a tls.key.</span>
-openssl genrsa -<span class="hljs-keyword">out</span> tls.key <span class="hljs-number">2048</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Generates a tls.key.</span>
+openssl genrsa -out tls.key 2048
 
-<span class="hljs-meta"># Creates a certificate and signs it with the preceding key.</span>
-openssl req -<span class="hljs-keyword">new</span> -key tls.key -<span class="hljs-keyword">out</span> tls.csr \
+<span class="hljs-comment"># Creates a certificate and signs it with the preceding key.</span>
+openssl req -new -key tls.key -out tls.csr \
     -subj <span class="hljs-string">&quot;/CN=my-release.milvus.io&quot;</span>
 
-openssl x509 -req -days <span class="hljs-number">99999</span> -<span class="hljs-keyword">in</span> tls.csr -signkey tls.key \
-    -<span class="hljs-keyword">out</span> tls.crt
+openssl x509 -req -days 99999 -<span class="hljs-keyword">in</span> tls.csr -signkey tls.key \
+    -out tls.crt
 <button class="copy-code-btn"></button></code></pre>
 <p>Then create a secret in your GKE cluster with these files for later use.</p>
 <pre><code translate="no" class="language-bash">kubectl create secret tls my-release-milvus-tls --cert=./tls.crt --key=./tls.key
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Create-Google-managed-certificates" class="common-anchor-header">Create Google-managed certificates</h4><p>The following snippet is a ManagedCertificate setting. Save it as <code translate="no">managed-crt.yaml</code> for later use.</p>
-<pre><code translate="no" class="language-yaml">apiVersion: networking.gke.io/v1
-kind: ManagedCertificate
-metadata:
-  name: my-release-milvus-tls
-spec:
-  domains:
-    - my-release.milvus.io
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.gke.io/v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">ManagedCertificate</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-milvus-tls</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">domains:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">my-release.milvus.io</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Create a managed certificate by applying the setting to your GKE cluster as follows:</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f ./managed-crt.yaml
@@ -117,48 +117,48 @@ spec:
 <h3 id="Create-an-Ingress-to-generate-a-Layer-7-Load-Balancer" class="common-anchor-header">Create an Ingress to generate a Layer-7 Load Balancer</h3><p>Create a YAML file with one of the following snippets.</p>
 <ul>
 <li><p>Using self-managed certificates</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion</span>: networking.<span class="hljs-property">k8s</span>.<span class="hljs-property">io</span>/v1
-<span class="hljs-attr">kind</span>: <span class="hljs-title class_">Ingress</span>
-<span class="hljs-attr">metadata</span>:
-  <span class="hljs-attr">name</span>: my-release-milvus
-  <span class="hljs-attr">namespace</span>: <span class="hljs-keyword">default</span>
-<span class="hljs-attr">spec</span>:
-  <span class="hljs-attr">tls</span>:
-  - <span class="hljs-attr">hosts</span>:
-    - my-release.<span class="hljs-property">milvus</span>.<span class="hljs-property">io</span>
-    <span class="hljs-attr">secretName</span>: my-release-milvus-tls
-  <span class="hljs-attr">rules</span>:
-  - <span class="hljs-attr">host</span>: my-release.<span class="hljs-property">milvus</span>.<span class="hljs-property">io</span>
-    <span class="hljs-attr">http</span>:
-      <span class="hljs-attr">paths</span>:
-      - <span class="hljs-attr">path</span>: /
-        <span class="hljs-attr">pathType</span>: <span class="hljs-title class_">Prefix</span>
-        <span class="hljs-attr">backend</span>:
-          <span class="hljs-attr">service</span>:
-            <span class="hljs-attr">name</span>: my-release-milvus
-            <span class="hljs-attr">port</span>:
-              <span class="hljs-attr">number</span>: <span class="hljs-number">19530</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-milvus</span>
+  <span class="hljs-attr">namespace:</span> <span class="hljs-string">default</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">tls:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">hosts:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">my-release.milvus.io</span>
+    <span class="hljs-attr">secretName:</span> <span class="hljs-string">my-release-milvus-tls</span>
+  <span class="hljs-attr">rules:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">host:</span> <span class="hljs-string">my-release.milvus.io</span>
+    <span class="hljs-attr">http:</span>
+      <span class="hljs-attr">paths:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">path:</span> <span class="hljs-string">/</span>
+        <span class="hljs-attr">pathType:</span> <span class="hljs-string">Prefix</span>
+        <span class="hljs-attr">backend:</span>
+          <span class="hljs-attr">service:</span>
+            <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-milvus</span>
+            <span class="hljs-attr">port:</span>
+              <span class="hljs-attr">number:</span> <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Using Google-managed certificates</p>
-<pre><code translate="no" class="language-yaml">apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: my-release-milvus
-  namespace: default
-  annotations:
-    networking.gke.io/managed-certificates: <span class="hljs-string">&quot;my-release-milvus-tls&quot;</span>
-spec:
-  rules:
-  - host: my-release.milvus.io
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: my-release-milvus
-            port:
-              number: 19530
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-milvus</span>
+  <span class="hljs-attr">namespace:</span> <span class="hljs-string">default</span>
+  <span class="hljs-attr">annotations:</span>
+    <span class="hljs-attr">networking.gke.io/managed-certificates:</span> <span class="hljs-string">&quot;my-release-milvus-tls&quot;</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">rules:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">host:</span> <span class="hljs-string">my-release.milvus.io</span>
+    <span class="hljs-attr">http:</span>
+      <span class="hljs-attr">paths:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">path:</span> <span class="hljs-string">/</span>
+        <span class="hljs-attr">pathType:</span> <span class="hljs-string">Prefix</span>
+        <span class="hljs-attr">backend:</span>
+          <span class="hljs-attr">service:</span>
+            <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-milvus</span>
+            <span class="hljs-attr">port:</span>
+              <span class="hljs-attr">number:</span> <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <p>Then you can create the Ingress by applying the file to your GKE cluster.</p>

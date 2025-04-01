@@ -38,23 +38,23 @@ title: Scale Dependencies
       </svg>
     </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">Increase resources per MinIO pod</h3><p>MinIO, an object storage system used by Milvus, can have its CPU and memory resources increased for each pod.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
-minio:
-  resources:
-     limits:
-       cpu: <span class="hljs-number">2</span>
-       memory: 8Gi
+<span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">resources:</span>
+     <span class="hljs-attr">limits:</span>
+       <span class="hljs-attr">cpu:</span> <span class="hljs-number">2</span>
+       <span class="hljs-attr">memory:</span> <span class="hljs-string">8Gi</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After saving the file, apply the changes with the following command:</p>
-<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f <span class="hljs-keyword">new</span>-values.<span class="hljs-property">yaml</span> milvus/milvus
+<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>You can also increase the disk capacity for the MioIO cluster by manually changing the value of <code translate="no">spec.resources.requests.storage</code> for each MioIO Persistent Volume Claim (PVC). Note that your default storage class should allow volume expansion.</p>
 <h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">Add an extra MinIO server pool (Recommended)</h3><p>You are advised to add an extra MioIO server pool for your Milvus instance.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yam;</span>
-minio:
-  zones: <span class="hljs-number">2</span>
+<span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">zones:</span> <span class="hljs-number">2</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After saving the file, apply the changes with the following command:</p>
-<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f <span class="hljs-keyword">new</span>-values.<span class="hljs-property">yaml</span> milvus/milvus
+<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>This adds an additional server pool to your MinIO cluster, allowing Milvus to write to the MinIO server pool based on the free disk capacity of each server pool. For example, if a group of three pools has a total of 10 TiB free space distributed across the pools as follows:</p>
 <table>
@@ -87,14 +87,14 @@ minio:
       </svg>
     </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Increase resource per Kafka broker pod</h3><p>Enhance the Kafka broker capacity by adjusting the CPU and memory resources for each broker pod.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
-kafka:
-  resources:
-     limits:
-        cpu: <span class="hljs-number">2</span>
-        memory: 12Gi
+<span class="hljs-attr">kafka:</span>
+  <span class="hljs-attr">resources:</span>
+     <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">cpu:</span> <span class="hljs-number">2</span>
+        <span class="hljs-attr">memory:</span> <span class="hljs-string">12Gi</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After saving the file, apply the changes with the following command:</p>
-<pre><code translate="no" class="language-bash">helm upgrade &lt;milvus-release&gt; --reuse-values -f <span class="hljs-keyword">new</span>-values.<span class="hljs-property">yaml</span> milvus/milvus
+<pre><code translate="no" class="language-bash">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>You can also increase the disk capacity for the Kafka cluster by manually changing the value of <code translate="no">spec.resources.requests.storage</code> for each Kafka Persistent Volume Claim (PVC). Ensure your default storage class allows volume expansion.</p>
 <h2 id="Add-an-extra-Kafka-broker-pool-Recommended" class="common-anchor-header">Add an extra Kafka broker pool (Recommended)<button data-href="#Add-an-extra-Kafka-broker-pool-Recommended" class="anchor-icon" translate="no">
@@ -114,11 +114,11 @@ kafka:
       </svg>
     </button></h2><p>You are advised to add an extra Kafka server pool for your Milvus instance.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
-kafka:
-  replicaCount: <span class="hljs-number">4</span>
+<span class="hljs-attr">kafka:</span>
+  <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">4</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After saving the file, apply the changes with the following command:</p>
-<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f <span class="hljs-keyword">new</span>-values.<span class="hljs-property">yaml</span> milvus/milvus
+<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>This will add an extra broker to your Kafka cluster.</p>
 <div class="alert note">
@@ -156,15 +156,15 @@ kafka:
         ></path>
       </svg>
     </button></h2><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
-pulsar:
-  broker:
-    resources:
-       limits:
-         cpu: <span class="hljs-number">4</span>
-         memory: 16Gi
+<span class="hljs-attr">pulsar:</span>
+  <span class="hljs-attr">broker:</span>
+    <span class="hljs-attr">resources:</span>
+       <span class="hljs-attr">limits:</span>
+         <span class="hljs-attr">cpu:</span> <span class="hljs-number">4</span>
+         <span class="hljs-attr">memory:</span> <span class="hljs-string">16Gi</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After saving the file, apply the changes with the following command:</p>
-<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f <span class="hljs-keyword">new</span>-values.<span class="hljs-property">yaml</span> milvus/milvus
+<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Increase-resources-per-Pulsar-bookie-pod" class="common-anchor-header">Increase resources per Pulsar bookie pod<button data-href="#Increase-resources-per-Pulsar-bookie-pod" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,40 +182,40 @@ pulsar:
         ></path>
       </svg>
     </button></h2><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
-pulsar:
-  bookkeeper:
-    resources:
-       limits:
-         cpu: <span class="hljs-number">4</span>
-         memory: 16Gi
+<span class="hljs-attr">pulsar:</span>
+  <span class="hljs-attr">bookkeeper:</span>
+    <span class="hljs-attr">resources:</span>
+       <span class="hljs-attr">limits:</span>
+         <span class="hljs-attr">cpu:</span> <span class="hljs-number">4</span>
+         <span class="hljs-attr">memory:</span> <span class="hljs-string">16Gi</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After saving the file, apply the changes with the following command:</p>
-<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f <span class="hljs-keyword">new</span>-values.<span class="hljs-property">yaml</span> milvus/milvus
+<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>You can also increase the disk capacity for the Pulsar cluster by manually changing the value of <code translate="no">spec.resources.requests.storage</code> for each Pulsar bookie’s Persistent Volume Claim (PVC). Note that your default storage class should allow volume expansion.</p>
 <p>A Pulsar bookie pod has two types of storage: <code translate="no">journal</code> and <code translate="no">legers</code>. For the <code translate="no">journal</code> type of storage, consider using <code translate="no">ssd</code> or <code translate="no">gp3</code> as the storage class. Here’s an example to specify storageclass for pulsar journal.</p>
-<pre><code translate="no">pulsar:
-  bookkeeper:
-    volumes:
-      journal:
-        size: 20Gi
-        storageClassName: gp3
+<pre><code translate="no"><span class="hljs-attr">pulsar:</span>
+  <span class="hljs-attr">bookkeeper:</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-attr">journal:</span>
+        <span class="hljs-attr">size:</span> <span class="hljs-string">20Gi</span>
+        <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">gp3</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Add-an-extra-Pulsar-broker-pod" class="common-anchor-header">Add an extra Pulsar broker pod</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
-pulsar:
-  broker:
-    replicaCount: <span class="hljs-number">3</span>
+<span class="hljs-attr">pulsar:</span>
+  <span class="hljs-attr">broker:</span>
+    <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After saving the file, apply the changes with the following command:</p>
-<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f <span class="hljs-keyword">new</span>-values.<span class="hljs-property">yaml</span> milvus/milvus
+<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Add-an-extra-Pulsar-bookie-pod-Recommended" class="common-anchor-header">Add an extra Pulsar bookie pod (Recommended)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
-pulsar:
-  bookkeeper:
-    replicaCount: <span class="hljs-number">3</span>
+<span class="hljs-attr">pulsar:</span>
+  <span class="hljs-attr">bookkeeper:</span>
+    <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">3</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After saving the file, apply the changes with the following command:</p>
-<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f <span class="hljs-keyword">new</span>-values.<span class="hljs-property">yaml</span> milvus/milvus
+<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="etcd" class="common-anchor-header">etcd<button data-href="#etcd" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -233,20 +233,20 @@ pulsar:
         ></path>
       </svg>
     </button></h2><h3 id="Increase-resources-per-etcd-pod-recommended" class="common-anchor-header">Increase resources per etcd pod (recommended)</h3><pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
-etcd:
-  resources:
-     limits:
-       cpu: <span class="hljs-number">2</span>
-       memory: 8Gi
+<span class="hljs-attr">etcd:</span>
+  <span class="hljs-attr">resources:</span>
+     <span class="hljs-attr">limits:</span>
+       <span class="hljs-attr">cpu:</span> <span class="hljs-number">2</span>
+       <span class="hljs-attr">memory:</span> <span class="hljs-string">8Gi</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After saving the file, apply the changes with the following command:</p>
-<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f <span class="hljs-keyword">new</span>-values.<span class="hljs-property">yaml</span> milvus/milvus
+<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Add-extra-etcd-pods" class="common-anchor-header">Add extra etcd pods</h3><p>The total number of etcd pods should be in odd numbers.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
-etcd:
-  replicaCount: <span class="hljs-number">5</span>
+<span class="hljs-attr">etcd:</span>
+  <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">5</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After saving the file, apply the changes with the following command:</p>
-<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f <span class="hljs-keyword">new</span>-values.<span class="hljs-property">yaml</span> milvus/milvus
+<pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
 <button class="copy-code-btn"></button></code></pre>

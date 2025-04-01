@@ -89,10 +89,10 @@ title: Question Answering System
     </button></h2><p>Applications using asyncio typically use the event loop as the orchestrator for managing asynchronous tasks and I/O operations. In this tutorial, we will get an event loop from asyncio and use it as the orchestrator.​</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> asyncio​
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np​
-<span class="hljs-keyword">from</span> scipy.<span class="hljs-property">sparse</span> <span class="hljs-keyword">import</span> csr_matrix​
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">AsyncMilvusClient</span>, <span class="hljs-title class_">DataType</span>, <span class="hljs-title class_">RRFRanker</span>, <span class="hljs-title class_">AnnSearchRequest</span>​
+<span class="hljs-keyword">from</span> scipy.sparse <span class="hljs-keyword">import</span> csr_matrix​
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, AsyncMilvusClient, DataType, RRFRanker, AnnSearchRequest​
 ​
-loop = asyncio.<span class="hljs-title function_">get_event_loop</span>()​
+loop = asyncio.get_event_loop()​
 
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-with-AsyncMilvusClient​" class="common-anchor-header">Connect with AsyncMilvusClient​<button data-href="#Connect-with-AsyncMilvusClient​" class="anchor-icon" translate="no">

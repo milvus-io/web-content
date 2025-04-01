@@ -39,15 +39,15 @@ title: Build RAG with Milvus + PII Masker
         ></path>
       </svg>
     </button></h2><h3 id="Get-started-with-PII-Masker" class="common-anchor-header">Get started with PII Masker</h3><p>Follow the <a href="https://github.com/HydroXai/pii-masker-v1/tree/main?tab=readme-ov-file#-installation">installation guide</a> of PII Masker to install the required dependencies and download the model. Here is a simple guide:</p>
-<pre><code translate="no" class="language-shell">$ git <span class="hljs-built_in">clone</span> https://github.com/HydroXai/pii-masker-v1.git
-$ <span class="hljs-built_in">cd</span> pii-masker-v1/pii-masker
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/HydroXai/pii-masker-v1.git</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> pii-masker-v1/pii-masker</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Download model from
 <code translate="no">https://huggingface.co/hydroxai/pii_model_weight</code>, and replace it with files in: <code translate="no">pii-masker/output_model/deberta3base_1024/</code></p>
-<h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependencies and Environment</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai requests tqdm dataset
+<h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependencies and Environment</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm dataset</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>We will use OpenAI as the LLM in this example. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-keyword">export</span> <span class="hljs-variable constant_">OPENAI_API_KEY</span>=sk-***********
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">export</span> OPENAI_API_KEY=sk-***********</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then you can create a python or jupyter notebook to run the following code.</p>
 <h3 id="Prepare-the-data" class="common-anchor-header">Prepare the data</h3><p>Let’s generate some fake lines which contain PII information for testing or demonstration purposes.</p>
@@ -59,17 +59,17 @@ $ <span class="hljs-built_in">cd</span> pii-masker-v1/pii-masker
 ]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Mask-the-data-with-PIIMasker" class="common-anchor-header">Mask the data with PIIMasker</h3><p>Let’s initialize the PIIMasker object and load the model.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> model <span class="hljs-keyword">import</span> <span class="hljs-title class_">PIIMasker</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> model <span class="hljs-keyword">import</span> PIIMasker
 
-masker = <span class="hljs-title class_">PIIMasker</span>()
+masker = PIIMasker()
 <button class="copy-code-btn"></button></code></pre>
 <p>We then masks PII from a list of text lines and prints the masked results.</p>
 <pre><code translate="no" class="language-python">masked_results = []
-<span class="hljs-keyword">for</span> full_text in text_lines:
+<span class="hljs-keyword">for</span> full_text <span class="hljs-keyword">in</span> text_lines:
     masked_text, _ = masker.mask_pii(full_text)
-    masked_results.<span class="hljs-built_in">append</span>(masked_text)
+    masked_results.append(masked_text)
 
-<span class="hljs-keyword">for</span> res in masked_results:
+<span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> masked_results:
     <span class="hljs-built_in">print</span>(res + <span class="hljs-string">&quot;\n&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Alice [B-NAME] , a resident of Dublin Ireland attended flower festival at Hyde Park on May 15 2023 [B-PHONE_NUM] She entered the park noon using her digital passport number 23 [B-ID_NUM] [B-NAME] afternoon admiring various flowers and plants attending gardening workshop having light snack one food stalls While there she met another visitor Mr Thompson who was visiting from London They exchanged tips shared contact information : ' s address 492 [I-STREET_ADDRESS] his cell phone + [B-PHONE_NUM] [B-NAME] details home Ranch [B-STREET_ADDRESS]
@@ -81,9 +81,9 @@ In an online forum discussion about culinary exchanges around the world [I-STREE
 Another user joined the conversation on topic of international volunteering opportunities . Identified as Female , she used email 2023 [B-EMAIL] share her story She noted 98 [B-ID_NUM] [I-PHONE_NUM] M [B-ID_NUM] residing in Germany but originally from Brazil provided + [B-PHONE_NUM] [I-PHONE_NUM] described address at 789 [I-STREET_ADDRESS] DE 10 178
 </code></pre>
 <h3 id="Prepare-the-Embedding-Model" class="common-anchor-header">Prepare the Embedding Model</h3><p>We initialize the OpenAI client to prepare the embedding model.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
-openai_client = <span class="hljs-title class_">OpenAI</span>()
+openai_client = OpenAI()
 <button class="copy-code-btn"></button></code></pre>
 <p>Define a function to generate text embeddings using OpenAI client. We use the <code translate="no">text-embedding-3-small</code> model as an example.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">emb_text</span>(<span class="hljs-params">text</span>):
@@ -117,31 +117,31 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">Create the Collection</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">Create the Collection</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>As for the argument of <code translate="no">MilvusClient</code>:</p>
 <ul>
 <li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “&lt;your_username&gt;:&lt;your_password&gt;” as the token, otherwise don’t set the token.</li>
+<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “<your_username>:<your_password>” as the token, otherwise don’t set the token.</li>
 <li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
 </ul>
 </div>
 <p>Check if the collection already exists and drop it if it does.</p>
 <pre><code translate="no" class="language-python">collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 
-<span class="hljs-keyword">if</span> milvus_client.<span class="hljs-title function_">has_collection</span>(collection_name):
-    milvus_client.<span class="hljs-title function_">drop_collection</span>(collection_name)
+<span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
+    milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>Create a new collection with specified parameters.</p>
 <p>If we don’t specify any field information, Milvus will automatically create a default <code translate="no">id</code> field for primary key, and a <code translate="no">vector</code> field to store the vector data. A reserved JSON field is used to store non-schema-defined fields and their values.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  # Inner product distance
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>Iterate through the masked text lines, create embeddings, and then insert the data into Milvus.</p>
@@ -208,12 +208,12 @@ retrieved_lines_with_distances = [
 ]
 </code></pre>
 <h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">Use LLM to get a RAG response</h3><p>Convert the retrieved documents into a string format.</p>
-<pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.<span class="hljs-keyword">join</span>(
-    [<span class="hljs-meta">line_with_distance[0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
+<pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
+    [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Define system and user prompts for the Lanage Model.</p>
-<p>Note: We tell LLM if there are no useful information in the snippets, just say &quot;I don’t know&quot;.</p>
+<p>Note: We tell LLM if there are no useful information in the snippets, just say "I don’t know".</p>
 <pre><code translate="no" class="language-python">SYSTEM_PROMPT = <span class="hljs-string">&quot;&quot;&quot;
 Human: You are an AI assistant. You are able to find answers to the questions from the contextual passage snippets provided. If there are no useful information in the snippets, just say &quot;I don&#x27;t know&quot;.
 AI:
@@ -240,5 +240,5 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">I don't know.
 </code></pre>
-<p>Here we can see, since we have replace the PII with masks, the LLM can not get the PII information in context. So it answers: &quot;I don’t know&quot;.
+<p>Here we can see, since we have replace the PII with masks, the LLM can not get the PII information in context. So it answers: "I don’t know".
 Through this way, we can effectively protect the privacy of users.</p>

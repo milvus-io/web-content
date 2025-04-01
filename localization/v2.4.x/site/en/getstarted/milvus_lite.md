@@ -59,8 +59,8 @@ title: Run Milvus Lite Locally
       </svg>
     </button></h2><p>Milvus Lite currently supports the following environmnets:</p>
 <ul>
-<li>Ubuntu &gt;= 20.04 (x86_64 and arm64)</li>
-<li>MacOS &gt;= 11.0 (Apple Silicon M1/M2 and x86_64)</li>
+<li>Ubuntu >= 20.04 (x86_64 and arm64)</li>
+<li>MacOS >= 11.0 (Apple Silicon M1/M2 and x86_64)</li>
 </ul>
 <p>Please note that Milvus Lite is only suitable for small scale vector search use cases. For a large scale use case, we recommend using <a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a> or <a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>. You can also consider the fully-managed Milvus on <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Set up Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
@@ -98,8 +98,8 @@ title: Run Milvus Lite Locally
         ></path>
       </svg>
     </button></h2><p>In <code translate="no">pymilvus</code>, specify a local file name as uri parameter of MilvusClient will use Milvus Lite.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>After running the above code snippet, a database file named <strong>milvus_demo.db</strong> will be generated in the current folder.</p>
 <blockquote>
@@ -223,7 +223,7 @@ res = client.delete(
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/rename_collection.md">rename_collection()</a></td><td>Renaming a collection is not supported.</td></tr>
 </tbody>
 </table>
-<h3 id="Field--Schema" class="common-anchor-header">Field &amp; Schema</h3><table>
+<h3 id="Field--Schema" class="common-anchor-header">Field & Schema</h3><table>
 <thead>
 <tr><th>Method / Parameter</th><th>Supported in Milvus Lite</th></tr>
 </thead>
@@ -244,7 +244,7 @@ res = client.delete(
 <tr><td><code translate="no">is_partition_key</code></td><td>N</td></tr>
 </tbody>
 </table>
-<h3 id="Insert--Search" class="common-anchor-header">Insert &amp; Search</h3><table>
+<h3 id="Insert--Search" class="common-anchor-header">Insert & Search</h3><table>
 <thead>
 <tr><th>Method / Parameter</th><th>Supported in Milvus Lite</th></tr>
 </thead>
@@ -290,7 +290,7 @@ res = client.delete(
 <tr><td><code translate="no">partition_name</code></td><td>N</td></tr>
 </tbody>
 </table>
-<h3 id="Load--Release" class="common-anchor-header">Load &amp; Release</h3><table>
+<h3 id="Load--Release" class="common-anchor-header">Load & Release</h3><table>
 <thead>
 <tr><th>Method / Parameter</th><th>Supported in Milvus Lite</th></tr>
 </thead>
@@ -330,7 +330,7 @@ res = client.delete(
 <h3 id="Vector-Index-Types" class="common-anchor-header">Vector Index Types</h3><p>Milvus Lite only supports <a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a> index type. It uses FLAT type regardless of the specified index type in collection.</p>
 <h3 id="Search-Features" class="common-anchor-header">Search Features</h3><p>Milvus Lite supports Sparse Vector, Multi-vector, Hybrid Search.</p>
 <h3 id="Partition" class="common-anchor-header">Partition</h3><p>Milvus Lite does not support partitions and partition-related methods.</p>
-<h3 id="Users--Roles" class="common-anchor-header">Users &amp; Roles</h3><p>Milvus Lite does not support users and roles and related methods.</p>
+<h3 id="Users--Roles" class="common-anchor-header">Users & Roles</h3><p>Milvus Lite does not support users and roles and related methods.</p>
 <h3 id="Alias" class="common-anchor-header">Alias</h3><p>Milvus Lite does not support aliases and alias-related methods.</p>
 <h2 id="Migrating-data-from-Milvus-Lite" class="common-anchor-header">Migrating data from Milvus Lite<button data-href="#Migrating-data-from-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -349,27 +349,27 @@ res = client.delete(
       </svg>
     </button></h2><p>All data stored in Milvus Lite can be easily exported and loaded into other types of Milvus deployment, such as Milvus Standalone on Docker, Milvus Distributed on K8s, or fully-managed Milvus on <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 <p>Milvus Lite provides a command line tool that can dump data into a json file, which can be imported into <a href="https://github.com/milvus-io/milvus">milvus</a> and <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(the fully managed cloud service for Milvus). The milvus-lite command will be installed together with milvus-lite python package</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Install</span>
-pip install -U <span class="hljs-string">&quot;pymilvus[bulk_writer]&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
+pip install -U &quot;pymilvus[bulk_writer]&quot;
 
 milvus-lite dump -h
 
 usage: milvus-lite dump [-h] [-d DB_FILE] [-c COLLECTION] [-p PATH]
 
 optional arguments:
-  -h, --<span class="hljs-built_in">help</span>            show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
+  -h, --help            show this help message and exit
   -d DB_FILE, --db-file DB_FILE
                         milvus lite db file
   -c COLLECTION, --collection COLLECTION
                         collection that need to be dumped
-  -p PATH, --path PATH  dump file storage <span class="hljs-built_in">dir</span>
+  -p PATH, --path PATH  dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
 <p>The following example dumps all data from <code translate="no">demo_collection</code> collection that’s stored in <code translate="no">./milvus_demo.db</code> (Milvus Lite database file)</p>
 <p>To export data:</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
-<span class="hljs-comment"># ./milvus_demo.db: milvus lite db file</span>
-<span class="hljs-comment"># demo_collection: collection that need to be dumped</span>
-<span class="hljs-comment">#./data_dir : dump file storage dir</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">./milvus_demo.db: milvus lite db file</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">demo_collection: collection that need to be dumped</span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash">./data_dir : dump file storage <span class="hljs-built_in">dir</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <p>With the dump file, you can upload data to Zilliz Cloud via <a href="https://docs.zilliz.com/docs/data-import">Data Import</a>, or upload data to Milvus servers via <a href="https://milvus.io/docs/import-data.md">Bulk Insert</a>.</p>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -395,7 +395,7 @@ optional arguments:
 <li><a href="/docs/manage_databases.md">Manage Databases</a></li>
 <li><a href="/docs/manage-collections.md">Manage Collections</a></li>
 <li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert &amp; Delete</a></li>
+<li><a href="/docs/insert-update-delete.md">Insert, Upsert & Delete</a></li>
 <li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
 <li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>

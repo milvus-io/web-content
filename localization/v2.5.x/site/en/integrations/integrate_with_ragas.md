@@ -49,7 +49,7 @@ title: Evaluation with Ragas
 <p>We will use OpenAI as the LLM in this example. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Define-the-RAG-pipeline" class="common-anchor-header">Define the RAG pipeline<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -177,10 +177,10 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
             <span class="hljs-keyword">return</span> response.choices[<span class="hljs-number">0</span>].message.content, retrieved_texts
 <button class="copy-code-btn"></button></code></pre>
 <p>Let’s initialize the RAG class with OpenAI and Milvus clients.</p>
-<pre><code translate="no" class="language-python">openai_client = <span class="hljs-title class_">OpenAI</span>()
-milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python">openai_client = OpenAI()
+milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
-my_rag = <span class="hljs-title function_">RAG</span>(openai_client=openai_client, milvus_client=milvus_client)
+my_rag = RAG(openai_client=openai_client, milvus_client=milvus_client)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>As for the argument of <code translate="no">MilvusClient</code>:</p>
@@ -334,14 +334,14 @@ df
     </button></h2><p>We use Ragas to evaluate the performance of our RAG pipeline results.</p>
 <p>Ragas provides a set of metrics that is easy to use. We take <code translate="no">Answer relevancy</code>, <code translate="no">Faithfulness</code>, <code translate="no">Context recall</code>, and <code translate="no">Context precision</code> as the metrics to evaluate our RAG pipeline. For more information about the metrics, please refer to the <a href="https://docs.ragas.io/en/latest/concepts/metrics/index.html">Ragas Metrics</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> ragas <span class="hljs-keyword">import</span> evaluate
-<span class="hljs-keyword">from</span> ragas.<span class="hljs-property">metrics</span> <span class="hljs-keyword">import</span> (
+<span class="hljs-keyword">from</span> ragas.metrics <span class="hljs-keyword">import</span> (
     answer_relevancy,
     faithfulness,
     context_recall,
     context_precision,
 )
 
-result = <span class="hljs-title function_">evaluate</span>(
+result = evaluate(
     rag_results,
     metrics=[
         answer_relevancy,

@@ -82,7 +82,7 @@ Here you will learn about what Milvus is, and how to install, use, and deploy Mi
 <li><a href="/docs/insert-update-delete.md">Insert, Upsert, and Delete</a></li>
 <li><a href="/docs/index-vector-fields.md">Index Vector Fields</a></li>
 <li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/get-and-scalar-query.md">Get &amp; Scalar Query</a></li>
+<li><a href="/docs/get-and-scalar-query.md">Get & Scalar Query</a></li>
 </ul>
 </div>
 <div class="recomment-item">

@@ -59,10 +59,10 @@ title: Image Search with Milvus - Integration
 
 url = <span class="hljs-string">&#x27;https://drive.google.com/uc?id=1OYDHLEy992qu5C4C8HV5uDIkOWRTAR1_&#x27;</span>
 output = <span class="hljs-string">&#x27;./paintings.zip&#x27;</span>
-gdown.<span class="hljs-title function_">download</span>(url, output)
+gdown.download(url, output)
 
-<span class="hljs-keyword">with</span> zipfile.<span class="hljs-title class_">ZipFile</span>(<span class="hljs-string">&quot;./paintings.zip&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> <span class="hljs-attr">zip_ref</span>:
-    zip_ref.<span class="hljs-title function_">extractall</span>(<span class="hljs-string">&quot;./paintings&quot;</span>)
+<span class="hljs-keyword">with</span> zipfile.ZipFile(<span class="hljs-string">&quot;./paintings.zip&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> zip_ref:
+    zip_ref.extractall(<span class="hljs-string">&quot;./paintings&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>The size of the dataset is 2.35 GB, and the time spent downloading it depends on your network condition.</p>

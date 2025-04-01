@@ -69,31 +69,31 @@ helm repo update
 <h3 id="2-Configure-Object-Storage-for-Loki" class="common-anchor-header">2. Configure Object Storage for Loki</h3><p>Choose one of the following storage options and create a <code translate="no">loki.yaml</code> configuration file:</p>
 <ul>
 <li><p>Option 1: Using MinIO for storage</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">loki</span>:
-  <span class="hljs-attr">commonConfig</span>:
-    <span class="hljs-attr">replication_factor</span>: <span class="hljs-number">1</span>
-  <span class="hljs-attr">auth_enabled</span>: <span class="hljs-literal">false</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">loki:</span>
+  <span class="hljs-attr">commonConfig:</span>
+    <span class="hljs-attr">replication_factor:</span> <span class="hljs-number">1</span>
+  <span class="hljs-attr">auth_enabled:</span> <span class="hljs-literal">false</span>
 
-<span class="hljs-attr">minio</span>:
-  <span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>
+<span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Option 2: Using AWS S3 for storage</p>
 <p>In the following example, replace <code translate="no">&lt;accessKey&gt;</code> and <code translate="no">&lt;keyId&gt;</code> with your own S3 access key and ID, <code translate="no">s3.endpoint</code> with the S3 endpoint, and <code translate="no">s3.region</code> with the S3 region.</p>
-<pre><code translate="no" class="language-yaml">loki:
-  commonConfig:
-    replication_factor: 1
-  auth_enabled: <span class="hljs-literal">false</span>
-  storage:
-    bucketNames:
-      chunks: loki-chunks
-      ruler: loki-ruler
-      admin: loki-admin
-    <span class="hljs-built_in">type</span>: <span class="hljs-string">&#x27;s3&#x27;</span>
-    s3:
-      endpoint: s3.us-west-2.amazonaws.com
-      region: us-west-2
-      secretAccessKey: &lt;accessKey&gt;
-      accessKeyId: &lt;keyId&gt;
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">loki:</span>
+  <span class="hljs-attr">commonConfig:</span>
+    <span class="hljs-attr">replication_factor:</span> <span class="hljs-number">1</span>
+  <span class="hljs-attr">auth_enabled:</span> <span class="hljs-literal">false</span>
+  <span class="hljs-attr">storage:</span>
+    <span class="hljs-attr">bucketNames:</span>
+      <span class="hljs-attr">chunks:</span> <span class="hljs-string">loki-chunks</span>
+      <span class="hljs-attr">ruler:</span> <span class="hljs-string">loki-ruler</span>
+      <span class="hljs-attr">admin:</span> <span class="hljs-string">loki-admin</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">&#x27;s3&#x27;</span>
+    <span class="hljs-attr">s3:</span>
+      <span class="hljs-attr">endpoint:</span> <span class="hljs-string">s3.us-west-2.amazonaws.com</span>
+      <span class="hljs-attr">region:</span> <span class="hljs-string">us-west-2</span>
+      <span class="hljs-attr">secretAccessKey:</span> <span class="hljs-string">&lt;accessKey&gt;</span>
+      <span class="hljs-attr">accessKeyId:</span> <span class="hljs-string">&lt;keyId&gt;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="3-Install-Loki" class="common-anchor-header">3. Install Loki</h3><p>Run the following commands to install Loki:</p>
@@ -117,9 +117,9 @@ helm install --values loki.yaml loki grafana/loki -n loki
       </svg>
     </button></h2><p>Promtail is a log collection agent for Loki. It reads logs from Milvus pods and sends them to Loki.</p>
 <h3 id="1-Create-Promtail-Configuration" class="common-anchor-header">1. Create Promtail Configuration</h3><p>Create a <code translate="no">promtail.yaml</code> configuration file:</p>
-<pre><code translate="no" class="language-yaml">config:
-  clients:
-    - url: http://loki-gateway/loki/api/v1/push
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">config:</span>
+  <span class="hljs-attr">clients:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">url:</span> <span class="hljs-string">http://loki-gateway/loki/api/v1/push</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Install-Promtail" class="common-anchor-header">2. Install Promtail</h3><p>Install Promtail using Helm:</p>
 <pre><code translate="no" class="language-shell">helm install  --values promtail.yaml promtail grafana/promtail -n loki
@@ -145,18 +145,18 @@ helm install --values loki.yaml loki grafana/loki -n loki
 helm install my-grafana grafana/grafana --namespace monitoring
 <button class="copy-code-btn"></button></code></pre>
 <p>Before you can access Grafana, you need to retrieve the <code translate="no">admin</code> password:</p>
-<pre><code translate="no" class="language-shell">kubectl get secret --namespace monitoring my-grafana -o jsonpath=<span class="hljs-string">&quot;{.data.admin-password}&quot;</span> | <span class="hljs-built_in">base64</span> --decode ; <span class="hljs-built_in">echo</span>
+<pre><code translate="no" class="language-shell">kubectl get secret --namespace monitoring my-grafana -o jsonpath=&quot;{.data.admin-password}&quot; | base64 --decode ; echo
 <button class="copy-code-btn"></button></code></pre>
 <p>Then, forward the Grafana port to your local machine:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> <span class="hljs-variable constant_">POD_NAME</span>=$(kubectl get pods --namespace monitoring -l <span class="hljs-string">&quot;app.kubernetes.io/name=grafana,app.kubernetes.io/instance=my-grafana&quot;</span> -o jsonpath=<span class="hljs-string">&quot;{.items[0].metadata.name}&quot;</span>)
-kubectl --namespace monitoring port-forward $POD_NAME <span class="hljs-number">3000</span>
+<pre><code translate="no" class="language-shell">export POD_NAME=$(kubectl get pods --namespace monitoring -l &quot;app.kubernetes.io/name=grafana,app.kubernetes.io/instance=my-grafana&quot; -o jsonpath=&quot;{.items[0].metadata.name}&quot;)
+kubectl --namespace monitoring port-forward $POD_NAME 3000
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Add-Loki-as-a-Data-Source-in-Grafana" class="common-anchor-header">2. Add Loki as a Data Source in Grafana</h3><p>Once Grafana is running, you need to add Loki as a data source to query logs.</p>
 <ol>
 <li>Open a web browser and navigate to <code translate="no">127.0.0.1:3000</code>. Log in using the username <code translate="no">admin</code> and the password obtained earlier.</li>
-<li>In the left-side menu, choose <strong>Connections</strong> &gt; <strong>Add new connection</strong>.</li>
+<li>In the left-side menu, choose <strong>Connections</strong> > <strong>Add new connection</strong>.</li>
 <li>On the page that appears, choose <strong>Loki</strong> as the data source type. You can enter <strong>loki</strong> in the search bar to find the data source.</li>
-<li>In the Loki data source settings, specify the <strong>Name</strong> and <strong>URL</strong>, and then click <strong>Save &amp; test</strong>.</li>
+<li>In the Loki data source settings, specify the <strong>Name</strong> and <strong>URL</strong>, and then click <strong>Save & test</strong>.</li>
 </ol>
 <p>
   <span class="img-wrapper">

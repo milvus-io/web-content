@@ -292,22 +292,22 @@ data = []
 <span class="hljs-built_in">print</span>(data[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">List&lt;String&gt; colors = Arrays.asList(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
-List&lt;JsonObject&gt; data = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
-Gson gson = <span class="hljs-keyword">new</span> Gson();
-Random rand = <span class="hljs-keyword">new</span> Random();
-<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
-    String current_color = colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>));
-    <span class="hljs-built_in">int</span> current_tag = rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
-    JsonObject row = <span class="hljs-keyword">new</span> JsonObject();
-    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-built_in">long</span>) i);
-    row.<span class="hljs-keyword">add</span>(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+List&lt;JsonObject&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
+<span class="hljs-type">Random</span> <span class="hljs-variable">rand</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
+    <span class="hljs-type">String</span> <span class="hljs-variable">current_color</span> <span class="hljs-operator">=</span> colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>));
+    <span class="hljs-type">int</span> <span class="hljs-variable">current_tag</span> <span class="hljs-operator">=</span> rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-type">long</span>) i);
+    row.add(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
     row.addProperty(<span class="hljs-string">&quot;color&quot;</span>, current_color);
     row.addProperty(<span class="hljs-string">&quot;tag&quot;</span>, current_tag);
     row.addProperty(<span class="hljs-string">&quot;color_tag&quot;</span>, current_color + <span class="hljs-string">&quot;_&quot;</span> + (rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>));
-    data.<span class="hljs-keyword">add</span>(row);
+    data.add(row);
 }
 
-System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>).toString());
+System.out.println(data.get(<span class="hljs-number">0</span>).toString());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> colors = [<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>]
 <span class="hljs-keyword">var</span> data = []
@@ -328,17 +328,17 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 <button class="copy-code-btn"></button></code></pre>
 <p>You can view the structure of the generated data by checking its first entry.</p>
 <pre><code translate="no">{
-    <span class="hljs-built_in">id</span>: <span class="hljs-number">0</span>,
-    vector: [
+    <span class="hljs-attr">id:</span> <span class="hljs-number">0</span>,
+    <span class="hljs-attr">vector:</span> [
         <span class="hljs-number">0.1275656405044483</span>,
         <span class="hljs-number">0.47417858592773277</span>,
         <span class="hljs-number">0.13858264437643286</span>,
         <span class="hljs-number">0.2390904907020377</span>,
         <span class="hljs-number">0.8447862593689635</span>
     ],
-    color: <span class="hljs-string">&#x27;blue&#x27;</span>,
-    tag: <span class="hljs-number">2064</span>,
-    color_tag: <span class="hljs-string">&#x27;blue_2064&#x27;</span>
+    <span class="hljs-attr">color:</span> <span class="hljs-string">&#x27;blue&#x27;</span>,
+    <span class="hljs-attr">tag:</span> <span class="hljs-number">2064</span>,
+    <span class="hljs-attr">color_tag:</span> <span class="hljs-string">&#x27;blue_2064&#x27;</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>Then you can safely insert the data into the collection.</p>
@@ -488,9 +488,9 @@ res = client.search(
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 4. Search with non-schema-defined fields</span>
-List&lt;BaseVector&gt; queryVectors = Collections.singletonList(<span class="hljs-keyword">new</span> FloatVec(<span class="hljs-keyword">new</span> <span class="hljs-built_in">float</span>[]{<span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>}));
+List&lt;BaseVector&gt; queryVectors = Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3580376395471989f</span>, -<span class="hljs-number">0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, -<span class="hljs-number">0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>}));
 
-SearchReq searchReq = SearchReq.builder()
+<span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;customized_setup&quot;</span>)
         .data(queryVectors)
         .filter(<span class="hljs-string">&quot;$meta[\&quot;color\&quot;] in [\&quot;red\&quot;, \&quot;green\&quot;]&quot;</span>)
@@ -498,13 +498,13 @@ SearchReq searchReq = SearchReq.builder()
         .topK(<span class="hljs-number">3</span>)
         .build();
 
-SearchResp searchResp = client.search(searchReq);
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 
 List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSearchResults();
 <span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; results : searchResults) {
-    System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+    System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
     <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
-        System.<span class="hljs-keyword">out</span>.println(result);
+        System.out.println(result);
     }
 }
 

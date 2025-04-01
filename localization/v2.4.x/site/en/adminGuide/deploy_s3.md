@@ -37,13 +37,13 @@ summary: Learn how to set up S3 storage for Milvus with Docker Compose or Helm.
         ></path>
       </svg>
     </button></h2><h3 id="1-Configure-S3" class="common-anchor-header">1. Configure S3</h3><p><a href="https://min.io/product/overview">MinIO</a> is compatible with S3. To configure S3 with Docker Compose, provide your values for the <code translate="no">minio</code> section in the <code translate="no">milvus.yaml</code> file on the milvus/configs path.</p>
-<pre><code translate="no" class="language-yaml">minio:
-  address: &lt;your_s3_endpoint&gt;
-  port: &lt;your_s3_port&gt;
-  accessKeyID: &lt;your_s3_access_key_id&gt;
-  secretAccessKey: &lt;your_s3_secret_access_key&gt;
-  useSSL: &lt;<span class="hljs-literal">true</span>/<span class="hljs-literal">false</span>&gt;
-  bucketName: <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_s3_endpoint&gt;</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-string">&lt;your_s3_port&gt;</span>
+  <span class="hljs-attr">accessKeyID:</span> <span class="hljs-string">&lt;your_s3_access_key_id&gt;</span>
+  <span class="hljs-attr">secretAccessKey:</span> <span class="hljs-string">&lt;your_s3_secret_access_key&gt;</span>
+  <span class="hljs-attr">useSSL:</span> <span class="hljs-string">&lt;true/false&gt;</span>
+  <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>See <a href="/docs/configure_minio.md">MinIO/S3 Configurations</a> for more information.</p>
 <h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. Refine docker-compose.yaml</h3><p>You’d also remove the <code translate="no">MINIO_ADDRESS</code> environment variable for milvus service at <code translate="no">docker-compose.yaml</code>. By default milvus will use local minio instead of external S3.</p>
@@ -87,20 +87,20 @@ summary: Learn how to set up S3 storage for Milvus with Docker Compose or Helm.
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Using the YAML file</h3><ol>
 <li>Configure the <code translate="no">minio</code> section in the <code translate="no">values.yaml</code> file.</li>
 </ol>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio</span>:
-  <span class="hljs-attr">enabled</span>: <span class="hljs-literal">false</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>Configure the <code translate="no">externalS3</code> section using your values in the <code translate="no">values.yaml</code> file.</li>
 </ol>
-<pre><code translate="no" class="language-yaml">externalS3:
-  enabled: <span class="hljs-literal">true</span>
-  host: <span class="hljs-string">&quot;&lt;your_s3_endpoint&gt;&quot;</span>
-  port: <span class="hljs-string">&quot;&lt;your_s3_port&gt;&quot;</span>
-  accessKey: <span class="hljs-string">&quot;&lt;your_s3_access_key_id&gt;&quot;</span>
-  secretKey: <span class="hljs-string">&quot;&lt;your_s3_secret_key&gt;&quot;</span>
-  useSSL: &lt;<span class="hljs-literal">true</span>/<span class="hljs-literal">false</span>&gt;
-  bucketName: <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">externalS3:</span>
+  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">host:</span> <span class="hljs-string">&quot;&lt;your_s3_endpoint&gt;&quot;</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-string">&quot;&lt;your_s3_port&gt;&quot;</span>
+  <span class="hljs-attr">accessKey:</span> <span class="hljs-string">&quot;&lt;your_s3_access_key_id&gt;&quot;</span>
+  <span class="hljs-attr">secretKey:</span> <span class="hljs-string">&quot;&lt;your_s3_secret_key&gt;&quot;</span>
+  <span class="hljs-attr">useSSL:</span> <span class="hljs-string">&lt;true/false&gt;</span>
+  <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
 <li>After configuring the preceding sections and saving the <code translate="no">values.yaml</code> file, run the following command to install Milvus that uses the S3 configurations.</li>
@@ -108,7 +108,7 @@ summary: Learn how to set up S3 storage for Milvus with Docker Compose or Helm.
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Using-a-command" class="common-anchor-header">Using a command</h3><p>To install Milvus and configure S3, run the following command using your values.</p>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">true</span>  --<span class="hljs-built_in">set</span> minio.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> externalS3.enabled=<span class="hljs-literal">true</span> --<span class="hljs-built_in">set</span> externalS3.host=&lt;your_s3_endpoint&gt; --<span class="hljs-built_in">set</span> externalS3.port=&lt;your_s3_port&gt; --<span class="hljs-built_in">set</span> externalS3.accessKey=&lt;your_s3_access_key_id&gt; --<span class="hljs-built_in">set</span> externalS3.secretKey=&lt;your_s3_secret_key&gt; --<span class="hljs-built_in">set</span> externalS3.bucketName=&lt;your_bucket_name&gt;
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus --set cluster.enabled=true  --set minio.enabled=false --set externalS3.enabled=true --set externalS3.host=&lt;your_s3_endpoint&gt; --set externalS3.port=&lt;your_s3_port&gt; --set externalS3.accessKey=&lt;your_s3_access_key_id&gt; --set externalS3.secretKey=&lt;your_s3_secret_key&gt; --set externalS3.bucketName=&lt;your_bucket_name&gt;
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

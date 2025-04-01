@@ -54,7 +54,7 @@ title: Install Milvus Go SDK
         ></path>
       </svg>
     </button></h2><p>Install the Milvus GO SDK and dependencies via <code translate="no">go get</code>.</p>
-<pre><code translate="no" class="language-bash">$ <span class="hljs-keyword">go</span> get -u github.com/milvus-io/milvus-sdk-<span class="hljs-keyword">go</span>/v2
+<pre><code translate="no" class="language-bash">$ go get -u github.com/milvus-io/milvus-sdk-go/v2
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,7 +77,7 @@ title: Install Milvus Go SDK
 <ul>
 <li><a href="/docs/manage-collections.md">Manage Collections</a></li>
 <li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert &amp; Delete</a></li>
+<li><a href="/docs/insert-update-delete.md">Insert, Upsert & Delete</a></li>
 <li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
 <li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>

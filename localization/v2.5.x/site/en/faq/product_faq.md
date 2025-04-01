@@ -84,15 +84,15 @@ title: Product FAQ
 <p>When selecting a consistency level, consider the trade-offs between consistency and performance. For operations requiring immediate visibility, use a “Strong” consistency level. For faster writes, prioritize weaker consistency (data might not be immediately visible). For more information, refer to <a href="/docs/consistency.md">Consistency</a>.</p>
 <h4 id="After-enabling-the-partition-key-feature-what-is-the-default-value-of-numpartitions-in-Milvus-and-why" class="common-anchor-header">After enabling the partition key feature, what is the default value of <code translate="no">num_partitions</code> in Milvus, and why?</h4><p>When the partition key feature is enabled, the default value of <code translate="no">num_partitions</code> in Milvus is set to <code translate="no">16</code>. This default is chosen for stability and performance reasons. You can adjust the <code translate="no">num_partitions</code> value as needed by specifying it in the <code translate="no">create_collection</code> function.</p>
 <h4 id="Is-there-a-maximum-length-limit-for-scalar-filtering-expressions" class="common-anchor-header">Is there a maximum length limit for scalar filtering expressions?</h4><p>Yes, the maximum length of a scalar filtering expression is constrained by the RPC transfer limit, which is defined in the <code translate="no">milvus.yaml</code> configuration file. Specifically, the limit is set by the <code translate="no">serverMaxRecvSize</code> parameter under the proxy section:</p>
-<pre><code translate="no" class="language-yaml">proxy:
-  grpc:
-    serverMaxRecvSize: <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
+  <span class="hljs-attr">grpc:</span>
+    <span class="hljs-attr">serverMaxRecvSize:</span> <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>By default, the maximum size of each RPC request is 64MB. Therefore, the length of the filtering expression must be less than this limit to ensure successful processing.</p>
 <h4 id="When-performing-a-bulk-vector-search-how-many-vectors-can-be-specified-at-once-Is-there-a-limit" class="common-anchor-header">When performing a bulk vector search, how many vectors can be specified at once? Is there a limit?</h4><p>Yes, the number of vectors that can be specified in a bulk vector search is limited by the RPC transfer size, as defined in the <code translate="no">milvus.yaml</code> configuration file. This limit is determined by the <code translate="no">serverMaxRecvSize</code> parameter under the proxy section:</p>
-<pre><code translate="no" class="language-yaml">proxy:
-  grpc:
-    serverMaxRecvSize: <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
+  <span class="hljs-attr">grpc:</span>
+    <span class="hljs-attr">serverMaxRecvSize:</span> <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>By default, the maximum size of each RPC request is 64MB. Therefore, the total size of the input vectors, including their dimensional data and metadata, must be less than this limit to ensure successful execution.</p>
 <h4 id="How-can-I-get-all-the-unique-value-of-a-given-scalar-field-from-a-collection" class="common-anchor-header">How can I get all the unique value of a given scalar field from a collection？</h4><p>Currently, there is no direct method to achieve this. As a workaround, we recommend using a query_iterator to retrieve all values for a specific field, and then perform deduplication manually. We plan to add direct support for this feature in Milvus 2.6. Example use of query_iterator:</p>

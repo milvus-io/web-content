@@ -47,20 +47,20 @@ Private resource configurations will overwrite global resource configurations. I
         ></path>
       </svg>
     </button></h2><p>When using Milvus Operator to start a Milvus cluster, you need to specify a configuration file. The example here uses the default configuration file.</p>
-<pre><code translate="no" class="language-yaml">kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>The details of the configuration file is as follows:</p>
-<pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
-  mode: cluster
-  dependencies: {}
-  components: {}
-  config: {}
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">mode:</span> <span class="hljs-string">cluster</span>
+  <span class="hljs-attr">dependencies:</span> {}
+  <span class="hljs-attr">components:</span> {}
+  <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <p>The field <code translate="no">spec.components</code> includes both the global and private resource configuration of all Milvus components. The following are four commonly used fields to configure global resource.</p>
 <ul>
@@ -72,28 +72,28 @@ spec:
 <p>If you want to configure more fields, see documentation <a href="https://pkg.go.dev/github.com/zilliztech/milvus-operator/apis/milvus.io/v1beta1#ComponentSpec">here</a>.</p>
 <p>To configure global resource for Milvus cluster, create a <code translate="no">milvuscluster_resource.yaml</code> file.</p>
 <h3 id="Example" class="common-anchor-header">Example</h3><p>The following example configures global resource for a Milvus cluster.</p>
-<pre><code translate="no">apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
-  mode: cluster
-  components:
-    nodeSelector: {}
-    tolerations: {}
-    <span class="hljs-built_in">env</span>: {}
-    resources:
-      limits:
-        cpu: <span class="hljs-string">&#x27;4&#x27;</span>
-        memory: 8Gi
-      requests:
-        cpu: 200m
-        memory: 512Mi
+<pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">mode:</span> <span class="hljs-string">cluster</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">nodeSelector:</span> {}
+    <span class="hljs-attr">tolerations:</span> {}
+    <span class="hljs-attr">env:</span> {}
+    <span class="hljs-attr">resources:</span>
+      <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">cpu:</span> <span class="hljs-string">&#x27;4&#x27;</span>
+        <span class="hljs-attr">memory:</span> <span class="hljs-string">8Gi</span>
+      <span class="hljs-attr">requests:</span>
+        <span class="hljs-attr">cpu:</span> <span class="hljs-string">200m</span>
+        <span class="hljs-attr">memory:</span> <span class="hljs-string">512Mi</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Run the following command to apply new configurations:</p>
-<pre><code translate="no">kubectl apply -f milvuscluster_resource.yaml
+<pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster_resource.yaml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 Cluster resources will be updated according to the configuration file if there is a Milvus cluster named <code translate="no">my-release</code> in the K8s cluster. Otherwise, a new Milvus cluster will be created.
@@ -269,53 +269,53 @@ In addition, when configuring proxy, there is an extra field called `serviceType
 </table>
 </div>
 <h3 id="Example" class="common-anchor-header">Example</h3><p>The example below configures the replicas and compute resources of proxy and datanode in the <code translate="no">milvuscluster.yaml</code> file.</p>
-<pre><code translate="no">apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
-  mode: cluster
-  components:
-    resources:
-      limits:
-        cpu: <span class="hljs-string">&#x27;4&#x27;</span>
-        memory: 8Gi
-      requests:
-        cpu: 200m
-        memory: 512Mi
-    rootCoord: 
-      replicas: 1
-      port: 8080
-      resources:
-        limits:
-          cpu: <span class="hljs-string">&#x27;6&#x27;</span>
-          memory: <span class="hljs-string">&#x27;10Gi&#x27;</span>
-    dataCoord: {}
-    queryCoord: {}
-    indexCoord: {}
-    dataNode: {}
-    indexNode: {}
-    queryNode: {}
-    proxy:
-      replicas: 1
-      serviceType: ClusterIP
-      resources:
-        limits:
-          cpu: <span class="hljs-string">&#x27;2&#x27;</span>
-          memory: 4Gi
-        requests:
-          cpu: 100m
-          memory: 128Mi
-  config: {}
-  dependencies: {}
+<pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">mode:</span> <span class="hljs-string">cluster</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">resources:</span>
+      <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">cpu:</span> <span class="hljs-string">&#x27;4&#x27;</span>
+        <span class="hljs-attr">memory:</span> <span class="hljs-string">8Gi</span>
+      <span class="hljs-attr">requests:</span>
+        <span class="hljs-attr">cpu:</span> <span class="hljs-string">200m</span>
+        <span class="hljs-attr">memory:</span> <span class="hljs-string">512Mi</span>
+    <span class="hljs-attr">rootCoord:</span> 
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">port:</span> <span class="hljs-number">8080</span>
+      <span class="hljs-attr">resources:</span>
+        <span class="hljs-attr">limits:</span>
+          <span class="hljs-attr">cpu:</span> <span class="hljs-string">&#x27;6&#x27;</span>
+          <span class="hljs-attr">memory:</span> <span class="hljs-string">&#x27;10Gi&#x27;</span>
+    <span class="hljs-attr">dataCoord:</span> {}
+    <span class="hljs-attr">queryCoord:</span> {}
+    <span class="hljs-attr">indexCoord:</span> {}
+    <span class="hljs-attr">dataNode:</span> {}
+    <span class="hljs-attr">indexNode:</span> {}
+    <span class="hljs-attr">queryNode:</span> {}
+    <span class="hljs-attr">proxy:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">1</span>
+      <span class="hljs-attr">serviceType:</span> <span class="hljs-string">ClusterIP</span>
+      <span class="hljs-attr">resources:</span>
+        <span class="hljs-attr">limits:</span>
+          <span class="hljs-attr">cpu:</span> <span class="hljs-string">&#x27;2&#x27;</span>
+          <span class="hljs-attr">memory:</span> <span class="hljs-string">4Gi</span>
+        <span class="hljs-attr">requests:</span>
+          <span class="hljs-attr">cpu:</span> <span class="hljs-string">100m</span>
+          <span class="hljs-attr">memory:</span> <span class="hljs-string">128Mi</span>
+  <span class="hljs-attr">config:</span> {}
+  <span class="hljs-attr">dependencies:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 This example configures not only global resources but also private compute resources for root coord and proxy. When using this configuration file to start a Milvus cluster, the private resources configurations will be applied to root coord and proxy, while the rest of the components will follow the global resource configuration.
 </div>
 <p>Run the following command to apply new configurations:</p>
-<pre><code translate="no">kubectl apply -f milvuscluster.yaml
+<pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

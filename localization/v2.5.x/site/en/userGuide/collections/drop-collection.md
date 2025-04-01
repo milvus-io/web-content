@@ -41,14 +41,14 @@ title: Drop Collection​
   <a href="#go">Go</a>
   <a href="#curl">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
-client = <span class="hljs-title class_">MilvusClient</span>(​
+client = MilvusClient(​
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,​
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
 )​
 ​
-client.<span class="hljs-title function_">drop_collection</span>(​
+client.drop_collection(​
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>​
 )​
 
@@ -124,20 +124,20 @@ err = cli.DropCollection(ctx, client.NewDropCollectionOption(<span class="hljs-s
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/drop&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;customized_setup_2&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: {}​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: {}​
+# }​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>

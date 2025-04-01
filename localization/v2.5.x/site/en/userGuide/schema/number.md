@@ -159,43 +159,43 @@ schema.addField(AddFieldReq.builder()​
 ​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> int64Field=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export int64Field='{​
     &quot;fieldName&quot;: &quot;age&quot;,​
     &quot;dataType&quot;: &quot;Int64&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> floatField=<span class="hljs-string">&#x27;{​
+export floatField='{​
     &quot;fieldName&quot;: &quot;price&quot;,​
     &quot;dataType&quot;: &quot;Float&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> pkField=<span class="hljs-string">&#x27;{​
+export pkField='{​
     &quot;fieldName&quot;: &quot;pk&quot;,​
     &quot;dataType&quot;: &quot;Int64&quot;,​
     &quot;isPrimary&quot;: true​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{​
+export vectorField='{​
     &quot;fieldName&quot;: &quot;embedding&quot;,​
     &quot;dataType&quot;: &quot;FloatVector&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;dim&quot;: 3​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{​
+export schema=&quot;{​
     \&quot;autoID\&quot;: false,​
     \&quot;fields\&quot;: [​
-        <span class="hljs-variable">$int64Field</span>,​
-        <span class="hljs-variable">$floatField</span>,​
-        <span class="hljs-variable">$pkField</span>,​
-        <span class="hljs-variable">$vectorField</span>​
+        $int64Field,​
+        $floatField,​
+        $pkField,​
+        $vectorField​
     ]​
-}&quot;</span>​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <div class="alert note">
-<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
+<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field & AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
 </div>
 <h2 id="Set-index-params​" class="common-anchor-header">Set index params​<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -220,9 +220,9 @@ schema.addField(AddFieldReq.builder()​
   <a href="#javascript">Node.js</a>
   <a href="#curl">cURL</a>
 </div>
-<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()​
 ​
-index_params.<span class="hljs-title function_">add_index</span>(​
+index_params.add_index(​
     field_name=<span class="hljs-string">&quot;age&quot;</span>,​
     index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,​
     index_name=<span class="hljs-string">&quot;inverted_index&quot;</span>​
@@ -247,15 +247,15 @@ indexes.add(IndexParam.builder()​
 );​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
+<pre><code translate="no" class="language-curl">export indexParams='[​
         {​
             &quot;fieldName&quot;: &quot;age&quot;,​
             &quot;indexName&quot;: &quot;inverted_index&quot;,​
             &quot;indexType&quot;: &quot;AUTOINDEX&quot;​
         }​
-    ]&#x27;</span>​
+    ]'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In addition to <code translate="no">AUTOINDEX</code>, you can specify other number field index types. For supported index types, refer to <a href="/docs/scalar_index.md">​Scalar Indexes</a>.​</p>
 <p>Moreover, before creating the collection, you must create an index for the vector field. In this example, we use <code translate="no">AUTOINDEX</code> to simplify vector index settings.​</p>
 <div class="multipleCode">
@@ -272,7 +272,7 @@ index_params.add_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">indexes.<span class="hljs-keyword">add</span>(IndexParam.builder()​
+<pre><code translate="no" class="language-java">indexes.add(IndexParam.builder()​
         .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)​
         .indexType(IndexParam.IndexType.AUTOINDEX)​
         .metricType(IndexParam.MetricType.COSINE)​
@@ -295,7 +295,7 @@ index_params.add_index(​
 ​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
+<pre><code translate="no" class="language-curl">export indexParams='[​
         {​
             &quot;fieldName&quot;: &quot;age&quot;,​
             &quot;indexName&quot;: &quot;inverted_index&quot;,​
@@ -306,9 +306,9 @@ index_params.add_index(​
             &quot;metricType&quot;: &quot;COSINE&quot;,​
             &quot;indexType&quot;: &quot;AUTOINDEX&quot;​
         }​
-    ]&#x27;</span>​
+    ]'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Create-collection​" class="common-anchor-header">Create collection​<button data-href="#Create-collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -355,16 +355,16 @@ client.createCollection(requestCreate);​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&quot;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &quot;{​
     \&quot;collectionName\&quot;: \&quot;my_scalar_collection\&quot;,​
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,​
-    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>​
-}&quot;</span>​
+    \&quot;schema\&quot;: $schema,​
+    \&quot;indexParams\&quot;: $indexParams​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Insert-data​" class="common-anchor-header">Insert data​<button data-href="#Insert-data​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -393,7 +393,7 @@ client.createCollection(requestCreate);​
     {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">35</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">199.99</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>]},​
 ]​
 ​
-client.<span class="hljs-title function_">insert</span>(​
+client.insert(​
     collection_name=<span class="hljs-string">&quot;my_scalar_collection&quot;</span>,​
     data=data​
 )​
@@ -431,19 +431,19 @@ client.<span class="hljs-title function_">insert</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;data&quot;: [​
         {&quot;age&quot;: 25, &quot;price&quot;: 99.99, &quot;pk&quot;: 1, &quot;embedding&quot;: [0.1, 0.2, 0.3]},​
         {&quot;age&quot;: 30, &quot;price&quot;: 149.50, &quot;pk&quot;: 2, &quot;embedding&quot;: [0.4, 0.5, 0.6]},​
         {&quot;age&quot;: 35, &quot;price&quot;: 199.99, &quot;pk&quot;: 3, &quot;embedding&quot;: [0.7, 0.8, 0.9]}       ​
     ],​
     &quot;collectionName&quot;: &quot;my_scalar_collection&quot;​
-}&#x27;</span>​
+}'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In this example, we insert data that includes <code translate="no">age</code>, <code translate="no">price</code>, <code translate="no">pk</code> (primary field), and vector representations (<code translate="no">embedding</code>). To ensure that the inserted data matches the fields defined in the schema, it’s recommended to check data types in advance to avoid errors.​</p>
 <p>If you set <code translate="no">enable_dynamic_fields=True</code> when defining the schema, Milvus allows you to insert number fields that were not defined in advance. However, keep in mind that this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to <a href="/docs/enable-dynamic-field.md">​Dynamic Field</a>.​</p>
 <h2 id="Search-and-query​" class="common-anchor-header">Search and query​<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
@@ -500,26 +500,26 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment">// [QueryResp.QueryResult(entity={price=149.5, pk=2, age=30}), QueryResp.QueryResult(entity={price=199.99, pk=3, age=35})]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">client.query({​
-    collection_name: <span class="hljs-string">&#x27;my_scalar_collection&#x27;</span>,​
-    <span class="hljs-built_in">filter</span>: <span class="hljs-string">&#x27;30 &lt;= age &lt;= 40&#x27;</span>,​
-    output_fields: [<span class="hljs-string">&#x27;age&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>]​
+<pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">query</span>({​
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_scalar_collection&#x27;</span>,​
+    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;30 &lt;= age &lt;= 40&#x27;</span>,​
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;age&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>]​
 });​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/query&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;my_scalar_collection&quot;,​
     &quot;filter&quot;: &quot;30 &lt;= age &lt;= 40&quot;,​
     &quot;outputFields&quot;: [&quot;age&quot;,&quot;price&quot;]​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;pk&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:35,&quot;pk&quot;:3,&quot;price&quot;:199.99}]}​</span>
+## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;pk&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:35,&quot;pk&quot;:3,&quot;price&quot;:199.99}]}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>This query expression returns all matching entities and outputs their <code translate="no">age</code> and <code translate="no">price</code> fields. For more information on filter queries, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
 <h3 id="Vector-search-with-number-filtering​" class="common-anchor-header">Vector search with number filtering​</h3><p>In addition to basic number field filtering, you can combine vector similarity searches with number field filters. For example, the following code shows how to add a number field filter to a vector search:​</p>
 <div class="multipleCode">
@@ -549,38 +549,38 @@ res = client.search(​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;​
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;​
 ​
-String <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;25 &lt;= age &lt;= 35&quot;</span>;​
+<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;25 &lt;= age &lt;= 35&quot;</span>;​
 ​
-SearchResp resp = client.search(SearchReq.builder()​
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()​
         .collectionName(<span class="hljs-string">&quot;my_scalar_collection&quot;</span>)​
         .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)​
-        .data(Collections.singletonList(new FloatVec(new <span class="hljs-built_in">float</span>[]{<span class="hljs-number">0.3</span>f, -<span class="hljs-number">0.6</span>f, <span class="hljs-number">0.1</span>f})))​
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3f</span>, -<span class="hljs-number">0.6f</span>, <span class="hljs-number">0.1f</span>})))​
         .topK(<span class="hljs-number">5</span>)​
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>))​
-        .<span class="hljs-built_in">filter</span>(<span class="hljs-built_in">filter</span>)​
+        .filter(filter)​
         .build());​
 ​
 System.out.println(resp.getSearchResults());​
 ​
-// Output​
-//​
-// [[SearchResp.SearchResult(entity={price=<span class="hljs-number">199.99</span>, age=<span class="hljs-number">35</span>}, score=-<span class="hljs-number">0.19054288</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">3</span>), SearchResp.SearchResult(entity={price=<span class="hljs-number">149.5</span>, age=<span class="hljs-number">30</span>}, score=-<span class="hljs-number">0.20163085</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">2</span>), SearchResp.SearchResult(entity={price=<span class="hljs-number">99.99</span>, age=<span class="hljs-number">25</span>}, score=-<span class="hljs-number">0.2364331</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">1</span>)]]​
+<span class="hljs-comment">// Output​</span>
+<span class="hljs-comment">//​</span>
+<span class="hljs-comment">// [[SearchResp.SearchResult(entity={price=199.99, age=35}, score=-0.19054288, id=3), SearchResp.SearchResult(entity={price=149.5, age=30}, score=-0.20163085, id=2), SearchResp.SearchResult(entity={price=99.99, age=25}, score=-0.2364331, id=1)]]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">client.search({​
-    collection_name: <span class="hljs-string">&#x27;my_scalar_collection&#x27;</span>,​
-    data: [<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>],​
-    limit: <span class="hljs-number">5</span>,​
-    output_fields: [<span class="hljs-string">&#x27;age&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>],​
-    <span class="hljs-built_in">filter</span>: <span class="hljs-string">&#x27;25 &lt;= age &lt;= 35&#x27;</span>​
+<pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">search</span>({​
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_scalar_collection&#x27;</span>,​
+    <span class="hljs-attr">data</span>: [<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>],​
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,​
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;age&#x27;</span>, <span class="hljs-string">&#x27;price&#x27;</span>],​
+    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;25 &lt;= age &lt;= 35&#x27;</span>​
 });​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/search&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;my_scalar_collection&quot;,​
     &quot;data&quot;: [​
         [0.3, -0.6, 0.1]​
@@ -588,9 +588,9 @@ System.out.println(resp.getSearchResults());​
     &quot;annsField&quot;: &quot;embedding&quot;,​
     &quot;limit&quot;: 5,​
     &quot;outputFields&quot;: [&quot;age&quot;, &quot;price&quot;]​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:35,&quot;distance&quot;:-0.19054288,&quot;id&quot;:3,&quot;price&quot;:199.99},{&quot;age&quot;:30,&quot;distance&quot;:-0.20163085,&quot;id&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:25,&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;price&quot;:99.99}]}​</span>
+## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:35,&quot;distance&quot;:-0.19054288,&quot;id&quot;:3,&quot;price&quot;:199.99},{&quot;age&quot;:30,&quot;distance&quot;:-0.20163085,&quot;id&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:25,&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;price&quot;:99.99}]}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In this example, we first define a query vector and add a filter condition <code translate="no">25 &lt;= age &lt;= 35</code> during the search. This ensures that the search results are not only similar to the query vector but also meet the specified age range. For more information, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>

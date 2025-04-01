@@ -76,7 +76,7 @@ summary: Learn how to deploy a Milvus cluster on Azure.
     </button></h2><ol>
 <li>Log on to the Azure portal.</li>
 <li>On the Azure portal menu or from the <strong>Home</strong> page, select <strong>Create a resource</strong>.</li>
-<li>Select <strong>Containers</strong> &gt; <strong>Kubernetes Service</strong>.</li>
+<li>Select <strong>Containers</strong> > <strong>Kubernetes Service</strong>.</li>
 <li>On the <strong>Basics</strong> page, configure the following options:</li>
 </ol>
 <ul>
@@ -157,12 +157,12 @@ summary: Learn how to deploy a Milvus cluster on Azure.
 <ol>
 <li>Run the following command to set your subscription.</li>
 </ol>
-<pre><code translate="no" class="language-shell">az account <span class="hljs-built_in">set</span> --subscription EXAMPLE-SUBSCRIPTION-ID
+<pre><code translate="no" class="language-shell">az account set --subscription EXAMPLE-SUBSCRIPTION-ID
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>Run the following command to download credentials and configure the Kubernetes CLI to use them.</li>
 </ol>
-<pre><code translate="no" class="language-shell">az aks <span class="hljs-keyword">get</span>-credentials --resource-<span class="hljs-keyword">group</span> YOUR-RESOURCE-GROUP --name YOUR-CLUSTER-NAME
+<pre><code translate="no" class="language-shell">az aks get-credentials --resource-group YOUR-RESOURCE-GROUP --name YOUR-CLUSTER-NAME
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 Use the same shell for the following procedures. If you switch to another shell, run the preceding commands again.
@@ -186,7 +186,7 @@ Use the same shell for the following procedures. If you switch to another shell,
 <ul>
 <li>Create storage account and container</li>
 </ul>
-<pre><code translate="no" class="language-bash">az storage account create -n milvustesting1 -g MyResourceGroup -l eastus --sku Standard_LRS --<span class="hljs-built_in">min</span>-tls-version TLS1_2
+<pre><code translate="no" class="language-bash">az storage account create -n milvustesting1 -g MyResourceGroup -l eastus --sku Standard_LRS --min-tls-version TLS1_2
 az storage container create -n testmilvus --account-name milvustesting1
 <button class="copy-code-btn"></button></code></pre>
 <ul>
@@ -197,30 +197,30 @@ az storage container create -n testmilvus --account-name milvustesting1
 <ul>
 <li>Add values.yaml</li>
 </ul>
-<pre><code translate="no" class="language-yaml">cluster:
-  enabled: <span class="hljs-literal">true</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">cluster:</span>
+  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
 
-service:
-  <span class="hljs-built_in">type</span>: LoadBalancer
+<span class="hljs-attr">service:</span>
+  <span class="hljs-attr">type:</span> <span class="hljs-string">LoadBalancer</span>
 
-extraConfigFiles:
-  user.yaml: |+
+<span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     common:
       storageType: remote
+</span>
+<span class="hljs-attr">minio:</span>
+  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 
-minio:
-  enabled: <span class="hljs-literal">false</span>
-
-externalS3:
-  enabled: <span class="hljs-literal">true</span>
-  host: core.windows.net
-  port: 443
-  rootPath: my-release
-  bucketName: testmilvus <span class="hljs-comment"># the storage account container name</span>
-  cloudProvider: azure
-  useSSL: <span class="hljs-literal">true</span>
-  accessKey: <span class="hljs-string">&quot;milvustesting1&quot;</span> <span class="hljs-comment"># the storage account name</span>
-  secretKey: <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span> 
+<span class="hljs-attr">externalS3:</span>
+  <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">host:</span> <span class="hljs-string">core.windows.net</span>
+  <span class="hljs-attr">port:</span> <span class="hljs-number">443</span>
+  <span class="hljs-attr">rootPath:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">bucketName:</span> <span class="hljs-string">testmilvus</span> <span class="hljs-comment"># the storage account container name</span>
+  <span class="hljs-attr">cloudProvider:</span> <span class="hljs-string">azure</span>
+  <span class="hljs-attr">useSSL:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">accessKey:</span> <span class="hljs-string">&quot;milvustesting1&quot;</span> <span class="hljs-comment"># the storage account name</span>
+  <span class="hljs-attr">secretKey:</span> <span class="hljs-string">&quot;&lt;secret-key&gt;&quot;</span> 
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Deploy-Milvus" class="common-anchor-header">Deploy Milvus<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -260,7 +260,7 @@ helm install -f values.yaml my-release milvus/milvus
         ></path>
       </svg>
     </button></h2><p>Once all pods are running, run the following command to get the external IP address.</p>
-<pre><code translate="no" class="language-bash">kubectl <span class="hljs-keyword">get</span> services|grep my-release-milvus|grep LoadBalancer|awk <span class="hljs-string">&#x27;{print $4}&#x27;</span>
+<pre><code translate="no" class="language-bash">kubectl get services|grep my-release-milvus|grep LoadBalancer|awk <span class="hljs-string">&#x27;{print $4}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Hello-Milvus" class="common-anchor-header">Hello Milvus<button data-href="#Hello-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

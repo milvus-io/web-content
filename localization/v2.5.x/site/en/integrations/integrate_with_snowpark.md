@@ -54,7 +54,7 @@ title: Milvus on Snowpark Container Services
       </svg>
     </button></h2><p>The following will let users understand the capabilities of Milvus and how to use Milvus in SPCS through configuration and code.</p>
 <h3 id="1-Obtain-account-information" class="common-anchor-header">1. Obtain account information</h3><p>Download the SPCS client: <a href="https://docs.snowflake.com/en/user-guide/snowsql-install-config">SnowSQL</a>, then log in to your account.</p>
-<pre><code translate="no" class="language-shell">snowsql -a <span class="hljs-variable">${instance_name}</span> -u <span class="hljs-variable">${user_name}</span>
+<pre><code translate="no" class="language-shell">snowsql -a ${instance_name} -u ${user_name}
 <button class="copy-code-btn"></button></code></pre>
 <p>The rule of <code translate="no">${instance_name}</code> is <code translate="no">${org_name}-${acct_name}</code>. The relevant information can be obtained by logging in to <a href="http://app.snowflake.com/sn">app.snowflake.com</a> and checking the personal account information.</p>
 <p>
@@ -64,96 +64,96 @@ title: Milvus on Snowpark Container Services
   </span>
 </p>
 <h3 id="2-Configure-Role-and-privileges" class="common-anchor-header">2. Configure Role and privileges</h3><p>Configure OAUTH integration.</p>
-<pre><code translate="no" class="language-sql"><span class="hljs-variable constant_">USE</span> <span class="hljs-variable constant_">ROLE</span> <span class="hljs-variable constant_">ACCOUNTADMIN</span>;
-<span class="hljs-variable constant_">CREATE</span> <span class="hljs-variable constant_">SECURITY</span> <span class="hljs-variable constant_">INTEGRATION</span> <span class="hljs-variable constant_">SNOWSERVICES_INGRESS_OAUTH</span>
-  <span class="hljs-variable constant_">TYPE</span>=oauth
-  <span class="hljs-variable constant_">OAUTH_CLIENT</span>=snowservices_ingress
-  <span class="hljs-variable constant_">ENABLED</span>=<span class="hljs-literal">true</span>;
+<pre><code translate="no" class="language-sql">USE ROLE ACCOUNTADMIN;
+<span class="hljs-keyword">CREATE</span> SECURITY INTEGRATION SNOWSERVICES_INGRESS_OAUTH
+  TYPE<span class="hljs-operator">=</span>oauth
+  OAUTH_CLIENT<span class="hljs-operator">=</span>snowservices_ingress
+  ENABLED<span class="hljs-operator">=</span><span class="hljs-literal">true</span>;
   
-<span class="hljs-variable constant_">USE</span> <span class="hljs-variable constant_">ROLE</span> <span class="hljs-variable constant_">ACCOUNTADMIN</span>;
-<span class="hljs-variable constant_">GRANT</span> <span class="hljs-variable constant_">BIND</span> <span class="hljs-variable constant_">SERVICE</span> <span class="hljs-variable constant_">ENDPOINT</span> <span class="hljs-variable constant_">ON</span> <span class="hljs-variable constant_">ACCOUNT</span> <span class="hljs-variable constant_">TO</span> <span class="hljs-variable constant_">ROLE</span> <span class="hljs-variable constant_">SYSADMIN</span>;
+USE ROLE ACCOUNTADMIN;
+<span class="hljs-keyword">GRANT</span> BIND SERVICE ENDPOINT <span class="hljs-keyword">ON</span> ACCOUNT <span class="hljs-keyword">TO</span> ROLE SYSADMIN;
 <button class="copy-code-btn"></button></code></pre>
 <p>Create a role for the service, note that the <code translate="no">${PASSWORD}</code> part here needs to be replaced by the user when the demo is</p>
 <pre><code translate="no" class="language-sql">USE ROLE SECURITYADMIN;
-CREATE ROLE MILVUS_ROLE;
+<span class="hljs-keyword">CREATE</span> ROLE MILVUS_ROLE;
 
 USE ROLE USERADMIN;
-CREATE USER milvus_user
-  PASSWORD=<span class="hljs-string">&#x27;milvususerok&#x27;</span>
-  DEFAULT_ROLE = <span class="hljs-type">MILVUS_ROLE</span>
-  <span class="hljs-variable">DEFAULT_SECONDARY_ROLES</span> <span class="hljs-operator">=</span> (<span class="hljs-string">&#x27;ALL&#x27;</span>)
-  MUST_CHANGE_PASSWORD = FALSE;
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> milvus_user
+  PASSWORD<span class="hljs-operator">=</span><span class="hljs-string">&#x27;milvususerok&#x27;</span>
+  DEFAULT_ROLE <span class="hljs-operator">=</span> MILVUS_ROLE
+  DEFAULT_SECONDARY_ROLES <span class="hljs-operator">=</span> (<span class="hljs-string">&#x27;ALL&#x27;</span>)
+  MUST_CHANGE_PASSWORD <span class="hljs-operator">=</span> <span class="hljs-literal">FALSE</span>;
   
 USE ROLE SECURITYADMIN;
-GRANT ROLE MILVUS_ROLE TO USER milvus_user;
+<span class="hljs-keyword">GRANT</span> ROLE MILVUS_ROLE <span class="hljs-keyword">TO</span> <span class="hljs-keyword">USER</span> milvus_user;
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="3-Create-data-storage-configuration" class="common-anchor-header">3. Create data storage configuration</h3><ul>
 <li><p>Create warehouse and database</p>
 <pre><code translate="no" class="language-sql">USE ROLE SYSADMIN;
-CREATE OR REPLACE WAREHOUSE MILVUS_WAREHOUSE WITH
-WAREHOUSE_SIZE=<span class="hljs-string">&#x27;X-SMALL&#x27;</span>
-AUTO_SUSPEND = <span class="hljs-number">180</span>
-AUTO_RESUME = <span class="hljs-literal">true</span>
-INITIALLY_SUSPENDED=<span class="hljs-literal">false</span>;
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">OR</span> REPLACE WAREHOUSE MILVUS_WAREHOUSE <span class="hljs-keyword">WITH</span>
+WAREHOUSE_SIZE<span class="hljs-operator">=</span><span class="hljs-string">&#x27;X-SMALL&#x27;</span>
+AUTO_SUSPEND <span class="hljs-operator">=</span> <span class="hljs-number">180</span>
+AUTO_RESUME <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>
+INITIALLY_SUSPENDED<span class="hljs-operator">=</span><span class="hljs-literal">false</span>;
 
 USE ROLE SYSADMIN;
-CREATE DATABASE IF NOT EXISTS MILVUS_DEMO;
+<span class="hljs-keyword">CREATE</span> DATABASE IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> MILVUS_DEMO;
 USE DATABASE MILVUS_DEMO;
-CREATE IMAGE REPOSITORY MILVUS_DEMO.PUBLIC.MILVUS_REPO;
-CREATE OR REPLACE STAGE YAML_STAGE;
-CREATE OR REPLACE STAGE <span class="hljs-type">DATA</span> <span class="hljs-variable">ENCRYPTION</span> <span class="hljs-operator">=</span> (TYPE = <span class="hljs-string">&#x27;SNOWFLAKE_SSE&#x27;</span>);
-CREATE OR REPLACE STAGE <span class="hljs-type">FILES</span> <span class="hljs-variable">ENCRYPTION</span> <span class="hljs-operator">=</span> (TYPE = <span class="hljs-string">&#x27;SNOWFLAKE_SSE&#x27;</span>);
+<span class="hljs-keyword">CREATE</span> IMAGE REPOSITORY MILVUS_DEMO.PUBLIC.MILVUS_REPO;
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">OR</span> REPLACE STAGE YAML_STAGE;
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">OR</span> REPLACE STAGE DATA ENCRYPTION <span class="hljs-operator">=</span> (TYPE <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;SNOWFLAKE_SSE&#x27;</span>);
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">OR</span> REPLACE STAGE FILES ENCRYPTION <span class="hljs-operator">=</span> (TYPE <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;SNOWFLAKE_SSE&#x27;</span>);
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Grant role privileges</p>
 <pre><code translate="no" class="language-sql">USE ROLE SECURITYADMIN;
-GRANT ALL PRIVILEGES ON DATABASE MILVUS_DEMO TO MILVUS_ROLE;
-GRANT ALL PRIVILEGES ON SCHEMA MILVUS_DEMO.PUBLIC TO MILVUS_ROLE;
-GRANT ALL PRIVILEGES ON WAREHOUSE MILVUS_WAREHOUSE TO MILVUS_ROLE;
-GRANT ALL PRIVILEGES ON STAGE MILVUS_DEMO.PUBLIC.FILES TO MILVUS_ROLE;
+<span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> PRIVILEGES <span class="hljs-keyword">ON</span> DATABASE MILVUS_DEMO <span class="hljs-keyword">TO</span> MILVUS_ROLE;
+<span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> PRIVILEGES <span class="hljs-keyword">ON</span> SCHEMA MILVUS_DEMO.PUBLIC <span class="hljs-keyword">TO</span> MILVUS_ROLE;
+<span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> PRIVILEGES <span class="hljs-keyword">ON</span> WAREHOUSE MILVUS_WAREHOUSE <span class="hljs-keyword">TO</span> MILVUS_ROLE;
+<span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> PRIVILEGES <span class="hljs-keyword">ON</span> STAGE MILVUS_DEMO.PUBLIC.FILES <span class="hljs-keyword">TO</span> MILVUS_ROLE;
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Configure ACL</p>
 <pre><code translate="no" class="language-sql">USE ROLE ACCOUNTADMIN;
 USE DATABASE MILVUS_DEMO;
 USE SCHEMA PUBLIC;
-CREATE NETWORK RULE <span class="hljs-type">allow_all_rule</span>
-<span class="hljs-variable">TYPE</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;HOST_PORT&#x27;</span>
-MODE= <span class="hljs-string">&#x27;EGRESS&#x27;</span>
-VALUE_LIST = (<span class="hljs-string">&#x27;0.0.0.0:443&#x27;</span>,<span class="hljs-string">&#x27;0.0.0.0:80&#x27;</span>);
+<span class="hljs-keyword">CREATE</span> NETWORK RULE allow_all_rule
+TYPE <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;HOST_PORT&#x27;</span>
+MODE<span class="hljs-operator">=</span> <span class="hljs-string">&#x27;EGRESS&#x27;</span>
+VALUE_LIST <span class="hljs-operator">=</span> (<span class="hljs-string">&#x27;0.0.0.0:443&#x27;</span>,<span class="hljs-string">&#x27;0.0.0.0:80&#x27;</span>);
 
-CREATE EXTERNAL ACCESS INTEGRATION allow_all_eai
-ALLOWED_NETWORK_RULES=(allow_all_rule)
-ENABLED=TRUE;
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> ACCESS INTEGRATION allow_all_eai
+ALLOWED_NETWORK_RULES<span class="hljs-operator">=</span>(allow_all_rule)
+ENABLED<span class="hljs-operator">=</span><span class="hljs-literal">TRUE</span>;
 
-GRANT USAGE ON INTEGRATION allow_all_eai TO ROLE SYSADMIN;
+<span class="hljs-keyword">GRANT</span> USAGE <span class="hljs-keyword">ON</span> INTEGRATION allow_all_eai <span class="hljs-keyword">TO</span> ROLE SYSADMIN;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="4-Create-images" class="common-anchor-header">4. Create images</h3><p>The image used by Milvus needs to be built locally and then uploaded by user. For the relevant configuration of the image, please refer to <a href="https://github.com/dald001/milvus_on_spcs">this repo</a>. After cloning the code, go to the root directory of the project and prepare to build the image.</p>
 <ul>
 <li><p>Build images locally</p>
 <p>Open your local shell and begin to build images.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">cd</span> <span class="hljs-variable">${repo_git_root_path}</span>
-docker build --<span class="hljs-built_in">rm</span> --no-cache --platform linux/amd64 -t milvus ./images/milvus
-docker build --<span class="hljs-built_in">rm</span> --no-cache --platform linux/amd64 -t jupyter ./images/jupyter
+<pre><code translate="no" class="language-shell">cd ${repo_git_root_path}
+docker build --rm --no-cache --platform linux/amd64 -t milvus ./images/milvus
+docker build --rm --no-cache --platform linux/amd64 -t jupyter ./images/jupyter
 <button class="copy-code-btn"></button></code></pre>
 <p>There are two images here, the first one is running the Milvus database, and the second one is the notebook used for display.</p>
 <p>After the local images are built, prepare to tag and upload them.</p></li>
 <li><p>Tag built images</p>
 <p>Log in to the docker hub of SPCS.</p>
-<pre><code translate="no" class="language-shell">docker login <span class="hljs-variable">${instance_name}</span>.registry.snowflakecomputing.com -u <span class="hljs-variable">${user_name}</span>
+<pre><code translate="no" class="language-shell">docker login ${instance_name}.registry.snowflakecomputing.com -u ${user_name}
 <button class="copy-code-btn"></button></code></pre>
 <p>And you can tag images for spcs now.</p>
-<pre><code translate="no" class="language-shell">docker tag milvus <span class="hljs-variable">${instance_name}</span>.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/milvus
-docker tag jupyter <span class="hljs-variable">${instance_name}</span>.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/jupyter
+<pre><code translate="no" class="language-shell">docker tag milvus ${instance_name}.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/milvus
+docker tag jupyter ${instance_name}.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/jupyter
 <button class="copy-code-btn"></button></code></pre>
 <p>Then use <code translate="no">docker images | grep milvus</code> in the local shell to check whether the image has been packaged and tagged successfully.</p>
 <pre><code translate="no" class="language-shell">docker images | grep milvus
-
-<span class="hljs-variable">${instance_name}</span>.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/milvus    latest        3721bbb8f62b   2 days ago    2.95GB
-<span class="hljs-variable">${instance_name}</span>.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/jupyter   latest        20633f5bcadf   2 days ago    2GB
+<span class="hljs-meta prompt_">
+$</span><span class="language-bash">{instance_name}.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/milvus    latest        3721bbb8f62b   2 days ago    2.95GB</span>
+<span class="hljs-meta prompt_">$</span><span class="language-bash">{instance_name}.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/jupyter   latest        20633f5bcadf   2 days ago    2GB</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Push images to SPCS</p>
-<pre><code translate="no" class="language-shell">docker push <span class="hljs-variable">${instance_name}</span>.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/milvus
-docker push <span class="hljs-variable">${instance_name}</span>.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/jupyter
+<pre><code translate="no" class="language-shell">docker push ${instance_name}.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/milvus
+docker push ${instance_name}.registry.snowflakecomputing.com/milvus_demo/public/milvus_repo/jupyter
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="5-Create-and-start-services" class="common-anchor-header">5. Create and start services</h3><p>Let us go back to the SnowSQL shell.</p>
@@ -161,20 +161,20 @@ docker push <span class="hljs-variable">${instance_name}</span>.registry.snowfla
 <li>Create Compute pools</li>
 </ul>
 <pre><code translate="no" class="language-sql">USE ROLE SYSADMIN;
-CREATE COMPUTE POOL IF NOT EXISTS <span class="hljs-type">MILVUS_COMPUTE_POOL</span>
-  <span class="hljs-variable">MIN_NODES</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>
-  MAX_NODES = <span class="hljs-number">1</span>
-  INSTANCE_FAMILY = <span class="hljs-type">CPU_X64_S</span>
-  <span class="hljs-variable">AUTO_RESUME</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;
-CREATE COMPUTE POOL IF NOT EXISTS <span class="hljs-type">JUPYTER_COMPUTE_POOL</span>
-  <span class="hljs-variable">MIN_NODES</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>
-  MAX_NODES = <span class="hljs-number">1</span>
-  INSTANCE_FAMILY = <span class="hljs-type">CPU_X64_S</span>
-  <span class="hljs-variable">AUTO_RESUME</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">CREATE</span> COMPUTE POOL IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> MILVUS_COMPUTE_POOL
+  MIN_NODES <span class="hljs-operator">=</span> <span class="hljs-number">1</span>
+  MAX_NODES <span class="hljs-operator">=</span> <span class="hljs-number">1</span>
+  INSTANCE_FAMILY <span class="hljs-operator">=</span> CPU_X64_S
+  AUTO_RESUME <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">CREATE</span> COMPUTE POOL IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> JUPYTER_COMPUTE_POOL
+  MIN_NODES <span class="hljs-operator">=</span> <span class="hljs-number">1</span>
+  MAX_NODES <span class="hljs-operator">=</span> <span class="hljs-number">1</span>
+  INSTANCE_FAMILY <span class="hljs-operator">=</span> CPU_X64_S
+  AUTO_RESUME <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;
 <button class="copy-code-btn"></button></code></pre>
 <p>Check the compute pools through <code translate="no">DESCRIBE</code> until the status is <code translate="no">ACTIVE</code> or <code translate="no">IDLE</code>.</p>
-<pre><code translate="no" class="language-sql">DESCRIBE COMPUTE POOL MILVUS_COMPUTE_POOL;
-DESCRIBE COMPUTE POOL JUPYTER_COMPUTE_POOL;
+<pre><code translate="no" class="language-sql"><span class="hljs-keyword">DESCRIBE</span> COMPUTE POOL MILVUS_COMPUTE_POOL;
+<span class="hljs-keyword">DESCRIBE</span> COMPUTE POOL JUPYTER_COMPUTE_POOL;
 <button class="copy-code-btn"></button></code></pre>
 <p>
   <span class="img-wrapper">
@@ -187,8 +187,8 @@ DESCRIBE COMPUTE POOL JUPYTER_COMPUTE_POOL;
 </ul>
 <p>After creating the compute pool, start preparing the spce file for the service. The files are also in <a href="https://github.com/dald001/milvus_on_spcs">this repo</a>. Please refer to the specs directory.</p>
 <p>Open the spec files of these two services, find <code translate="no">${org_name}-${acct_name}</code> in the spec file, and replace them with ${instance_name} of your own account. After modification, use SnowSQL to complete the upload.</p>
-<pre><code translate="no" class="language-sql">PUT file://<span class="hljs-variable">${path/to/jupyter.yaml}</span> @yaml_stage overwrite=<span class="hljs-literal">true</span> auto_compress=<span class="hljs-literal">false</span>;
-PUT file://<span class="hljs-variable">${path/to/milvus.yaml}</span> @yaml_stage overwrite=<span class="hljs-literal">true</span> auto_compress=<span class="hljs-literal">false</span>;
+<pre><code translate="no" class="language-sql">PUT file:<span class="hljs-operator">/</span><span class="hljs-operator">/</span>${path<span class="hljs-operator">/</span><span class="hljs-keyword">to</span><span class="hljs-operator">/</span>jupyter.yaml} <span class="hljs-variable">@yaml_stage</span> overwrite<span class="hljs-operator">=</span><span class="hljs-literal">true</span> auto_compress<span class="hljs-operator">=</span><span class="hljs-literal">false</span>;
+PUT file:<span class="hljs-operator">/</span><span class="hljs-operator">/</span>${path<span class="hljs-operator">/</span><span class="hljs-keyword">to</span><span class="hljs-operator">/</span>milvus.yaml} <span class="hljs-variable">@yaml_stage</span> overwrite<span class="hljs-operator">=</span><span class="hljs-literal">true</span> auto_compress<span class="hljs-operator">=</span><span class="hljs-literal">false</span>;
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Create service</li>
@@ -198,29 +198,29 @@ PUT file://<span class="hljs-variable">${path/to/milvus.yaml}</span> @yaml_stage
 USE DATABASE MILVUS_DEMO;
 USE SCHEMA PUBLIC;
 
-CREATE SERVICE MILVUS
-  IN COMPUTE POOL MILVUS_COMPUTE_POOL 
-  FROM <span class="hljs-meta">@YAML_STAGE</span>
-  SPEC=<span class="hljs-string">&#x27;milvus.yaml&#x27;</span>
-  MIN_INSTANCES=<span class="hljs-number">1</span>
-  MAX_INSTANCES=<span class="hljs-number">1</span>;
+<span class="hljs-keyword">CREATE</span> SERVICE MILVUS
+  <span class="hljs-keyword">IN</span> COMPUTE POOL MILVUS_COMPUTE_POOL 
+  <span class="hljs-keyword">FROM</span> <span class="hljs-variable">@YAML_STAGE</span>
+  SPEC<span class="hljs-operator">=</span><span class="hljs-string">&#x27;milvus.yaml&#x27;</span>
+  MIN_INSTANCES<span class="hljs-operator">=</span><span class="hljs-number">1</span>
+  MAX_INSTANCES<span class="hljs-operator">=</span><span class="hljs-number">1</span>;
 
-CREATE SERVICE JUPYTER
-  IN COMPUTE POOL JUPYTER_COMPUTE_POOL 
-  FROM <span class="hljs-meta">@YAML_STAGE</span>
-  SPEC=<span class="hljs-string">&#x27;jupyter.yaml&#x27;</span>
-  MIN_INSTANCES=<span class="hljs-number">1</span>
-  MAX_INSTANCES=<span class="hljs-number">1</span>;
+<span class="hljs-keyword">CREATE</span> SERVICE JUPYTER
+  <span class="hljs-keyword">IN</span> COMPUTE POOL JUPYTER_COMPUTE_POOL 
+  <span class="hljs-keyword">FROM</span> <span class="hljs-variable">@YAML_STAGE</span>
+  SPEC<span class="hljs-operator">=</span><span class="hljs-string">&#x27;jupyter.yaml&#x27;</span>
+  MIN_INSTANCES<span class="hljs-operator">=</span><span class="hljs-number">1</span>
+  MAX_INSTANCES<span class="hljs-operator">=</span><span class="hljs-number">1</span>;
 <button class="copy-code-btn"></button></code></pre>
 <p>The services can also be viewed through <code translate="no">SHOW SERVICES;</code>.</p>
-<pre><code translate="no" class="language-sql">SHOW SERVICES;
+<pre><code translate="no" class="language-sql"><span class="hljs-keyword">SHOW</span> SERVICES;
 
-+---------+---------------+-------------+----------+----------------------+--------------------------------------------------------+-----------------
-| name    | database_name | schema_name | owner    | compute_pool         | dns_name                                               | ......
-|---------+---------------+-------------+----------+----------------------+--------------------------------------------------------+-----------------
-| JUPYTER | MILVUS_DEMO   | PUBLIC      | SYSADMIN | JUPYTER_COMPUTE_POOL | jupyter.<span class="hljs-keyword">public</span>.milvus-demo.snowflakecomputing.<span class="hljs-keyword">internal</span> | ...... 
-| MILVUS  | MILVUS_DEMO   | PUBLIC      | SYSADMIN | MILVUS_COMPUTE_POOL  | milvus.<span class="hljs-keyword">public</span>.milvus-demo.snowflakecomputing.<span class="hljs-keyword">internal</span>  | ......
-+---------+---------------+-------------+----------+----------------------+--------------------------------------------------------+-----------------
+<span class="hljs-operator">+</span><span class="hljs-comment">---------+---------------+-------------+----------+----------------------+--------------------------------------------------------+-----------------</span>
+<span class="hljs-operator">|</span> name    <span class="hljs-operator">|</span> database_name <span class="hljs-operator">|</span> schema_name <span class="hljs-operator">|</span> owner    <span class="hljs-operator">|</span> compute_pool         <span class="hljs-operator">|</span> dns_name                                               <span class="hljs-operator">|</span> ......
+<span class="hljs-operator">|</span><span class="hljs-comment">---------+---------------+-------------+----------+----------------------+--------------------------------------------------------+-----------------</span>
+<span class="hljs-operator">|</span> JUPYTER <span class="hljs-operator">|</span> MILVUS_DEMO   <span class="hljs-operator">|</span> PUBLIC      <span class="hljs-operator">|</span> SYSADMIN <span class="hljs-operator">|</span> JUPYTER_COMPUTE_POOL <span class="hljs-operator">|</span> jupyter.public.milvus<span class="hljs-operator">-</span>demo.snowflakecomputing.internal <span class="hljs-operator">|</span> ...... 
+<span class="hljs-operator">|</span> MILVUS  <span class="hljs-operator">|</span> MILVUS_DEMO   <span class="hljs-operator">|</span> PUBLIC      <span class="hljs-operator">|</span> SYSADMIN <span class="hljs-operator">|</span> MILVUS_COMPUTE_POOL  <span class="hljs-operator">|</span> milvus.public.milvus<span class="hljs-operator">-</span>demo.snowflakecomputing.internal  <span class="hljs-operator">|</span> ......
+<span class="hljs-operator">+</span><span class="hljs-comment">---------+---------------+-------------+----------+----------------------+--------------------------------------------------------+-----------------</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>If you encounter problems starting the service, you can view service information through <code translate="no">CALL SYSTEM$GET_SERVICE_STATUS('milvus');</code>.</p>
 <p>
@@ -247,11 +247,11 @@ CREATE SERVICE JUPYTER
       </svg>
     </button></h2><p>Use <strong>SnowSQL</strong> to grant permissions.</p>
 <pre><code translate="no" class="language-sql">USE ROLE SECURITYADMIN;
-GRANT USAGE ON SERVICE MILVUS_DEMO.PUBLIC.JUPYTER TO ROLE MILVUS_ROLE;
+<span class="hljs-keyword">GRANT</span> USAGE <span class="hljs-keyword">ON</span> SERVICE MILVUS_DEMO.PUBLIC.JUPYTER <span class="hljs-keyword">TO</span> ROLE MILVUS_ROLE;
 <button class="copy-code-btn"></button></code></pre>
 <p>Then view and record the endpoint of the Jupyter nootbook.</p>
 <pre><code translate="no" class="language-sql">USE ROLE SYSADMIN;
-SHOW ENDPOINTS IN SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
+<span class="hljs-keyword">SHOW</span> ENDPOINTS <span class="hljs-keyword">IN</span> SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
 <button class="copy-code-btn"></button></code></pre>
 <p>Record the <code translate="no">ingress_url</code> part of the information, then open the browser and enter the <code translate="no">ingress_url</code>, use the milvus_user account to log in to the website.</p>
 <p>
@@ -274,7 +274,7 @@ SHOW ENDPOINTS IN SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
     <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>Then use a text as a query: &quot;Who started AI research?&quot;, perform the query after embedding processing, and finally obtain and display the most relevant results.</p>
+<p>Then use a text as a query: "Who started AI research?", perform the query after embedding processing, and finally obtain and display the most relevant results.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/snowflake-06.png" alt="Obtain and display the most relevant results" class="doc-image" id="obtain-and-display-the-most-relevant-results" />
@@ -299,22 +299,22 @@ SHOW ENDPOINTS IN SERVICE MILVUS_DEMO.PUBLIC.JUPYTER;
       </svg>
     </button></h2><p>After verification, you can use SnowSQL to cleanup the  services, roles, and data resources.</p>
 <pre><code translate="no" class="language-sql">USE ROLE ACCOUNTADMIN;
-DROP USER milvus_user;
+<span class="hljs-keyword">DROP</span> <span class="hljs-keyword">USER</span> milvus_user;
 
 USE ROLE SYSADMIN;
-DROP SERVICE MILVUS;
-DROP SERVICE JUPYTER;
+<span class="hljs-keyword">DROP</span> SERVICE MILVUS;
+<span class="hljs-keyword">DROP</span> SERVICE JUPYTER;
 
-DROP COMPUTE POOL MILVUS_COMPUTE_POOL;
-DROP COMPUTE POOL JUPYTER_COMPUTE_POOL;
+<span class="hljs-keyword">DROP</span> COMPUTE POOL MILVUS_COMPUTE_POOL;
+<span class="hljs-keyword">DROP</span> COMPUTE POOL JUPYTER_COMPUTE_POOL;
 
-DROP IMAGE REPOSITORY MILVUS_DEMO.PUBLIC.MILVUS_REPO;
-DROP DATABASE MILVUS_DEMO;
-DROP WAREHOUSE MILVUS_WAREHOUSE;
+<span class="hljs-keyword">DROP</span> IMAGE REPOSITORY MILVUS_DEMO.PUBLIC.MILVUS_REPO;
+<span class="hljs-keyword">DROP</span> DATABASE MILVUS_DEMO;
+<span class="hljs-keyword">DROP</span> WAREHOUSE MILVUS_WAREHOUSE;
 
 USE ROLE ACCOUNTADMIN;
-DROP ROLE MILVUS_ROLE;
-DROP SECURITY INTEGRATION SNOWSERVICES_INGRESS_OAUTH;
+<span class="hljs-keyword">DROP</span> ROLE MILVUS_ROLE;
+<span class="hljs-keyword">DROP</span> SECURITY INTEGRATION SNOWSERVICES_INGRESS_OAUTH;
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="About-Milvus" class="common-anchor-header">About Milvus<button data-href="#About-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

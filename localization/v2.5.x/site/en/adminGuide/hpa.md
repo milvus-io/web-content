@@ -81,58 +81,58 @@ title: Configure Horizontal Pod Autoscaling (HPA) for Milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Replace <code translate="no">&lt;your-release-name&gt;</code> with the name of your Milvus cluster.</p>
 <p>To verify that the change has been applied, run:</p>
-<pre><code translate="no" class="language-bash">kubectl <span class="hljs-keyword">get</span> milvus &lt;your-release-name&gt; -o jsonpath=<span class="hljs-string">&#x27;{.spec.components.proxy.replicas}&#x27;</span>
+<pre><code translate="no" class="language-bash">kubectl get milvus &lt;your-release-name&gt; -o jsonpath=<span class="hljs-string">&#x27;{.spec.components.proxy.replicas}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output should be <code translate="no">-1</code>, confirming that the <code translate="no">proxy</code> component is now under HPA control.</p>
 <p>Alternatively, you can define it in the CR YAML:</p>
-<pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: &lt;your-release-name&gt;
-spec:
-  mode: cluster
-  components:
-    proxy:
-      replicas: -1
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">&lt;your-release-name&gt;</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">mode:</span> <span class="hljs-string">cluster</span>
+  <span class="hljs-attr">components:</span>
+    <span class="hljs-attr">proxy:</span>
+      <span class="hljs-attr">replicas:</span> <span class="hljs-number">-1</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Define an HPA Resource</strong>:</p>
 <p>Create an HPA resource to target the deployment of the desired component. Below is an example for the <code translate="no">proxy</code> component:</p>
-<pre><code translate="no" class="language-yaml">apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: my-release-milvus-proxy-hpa
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: my-release-milvus-proxy
-  minReplicas: 2
-  maxReplicas: 10
-  metrics:
-    - <span class="hljs-built_in">type</span>: Resource
-      resource:
-        name: cpu
-        target:
-          <span class="hljs-built_in">type</span>: Utilization
-          averageUtilization: 60
-    - <span class="hljs-built_in">type</span>: Resource
-      resource:
-        name: memory
-        target:
-          <span class="hljs-built_in">type</span>: Utilization
-          averageUtilization: 60
-  behavior:
-    scaleUp:
-      policies:
-        - <span class="hljs-built_in">type</span>: Pods
-          value: 1
-          periodSeconds: 30
-    scaleDown:
-      stabilizationWindowSeconds: 300
-      policies:
-        - <span class="hljs-built_in">type</span>: Pods
-          value: 1
-          periodSeconds: 60
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">autoscaling/v2</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">HorizontalPodAutoscaler</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-milvus-proxy-hpa</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">scaleTargetRef:</span>
+    <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">apps/v1</span>
+    <span class="hljs-attr">kind:</span> <span class="hljs-string">Deployment</span>
+    <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-milvus-proxy</span>
+  <span class="hljs-attr">minReplicas:</span> <span class="hljs-number">2</span>
+  <span class="hljs-attr">maxReplicas:</span> <span class="hljs-number">10</span>
+  <span class="hljs-attr">metrics:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">type:</span> <span class="hljs-string">Resource</span>
+      <span class="hljs-attr">resource:</span>
+        <span class="hljs-attr">name:</span> <span class="hljs-string">cpu</span>
+        <span class="hljs-attr">target:</span>
+          <span class="hljs-attr">type:</span> <span class="hljs-string">Utilization</span>
+          <span class="hljs-attr">averageUtilization:</span> <span class="hljs-number">60</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">type:</span> <span class="hljs-string">Resource</span>
+      <span class="hljs-attr">resource:</span>
+        <span class="hljs-attr">name:</span> <span class="hljs-string">memory</span>
+        <span class="hljs-attr">target:</span>
+          <span class="hljs-attr">type:</span> <span class="hljs-string">Utilization</span>
+          <span class="hljs-attr">averageUtilization:</span> <span class="hljs-number">60</span>
+  <span class="hljs-attr">behavior:</span>
+    <span class="hljs-attr">scaleUp:</span>
+      <span class="hljs-attr">policies:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-attr">type:</span> <span class="hljs-string">Pods</span>
+          <span class="hljs-attr">value:</span> <span class="hljs-number">1</span>
+          <span class="hljs-attr">periodSeconds:</span> <span class="hljs-number">30</span>
+    <span class="hljs-attr">scaleDown:</span>
+      <span class="hljs-attr">stabilizationWindowSeconds:</span> <span class="hljs-number">300</span>
+      <span class="hljs-attr">policies:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-attr">type:</span> <span class="hljs-string">Pods</span>
+          <span class="hljs-attr">value:</span> <span class="hljs-number">1</span>
+          <span class="hljs-attr">periodSeconds:</span> <span class="hljs-number">60</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Replace <code translate="no">my-release</code> in <code translate="no">metadata.name</code> and <code translate="no">spec.scaleTargetRef.name</code> with your actual Milvus cluster name (e.g., <code translate="no">&lt;your-release-name&gt;-milvus-proxy-hpa</code> and <code translate="no">&lt;your-release-name&gt;-milvus-proxy</code>).</p></li>
 <li><p><strong>Apply the HPA Configuration</strong>:</p>
@@ -140,11 +140,11 @@ spec:
 <pre><code translate="no" class="language-bash">kubectl apply -f hpa.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>To verify that the HPA has been successfully created, run:</p>
-<pre><code translate="no" class="language-bash">kubectl <span class="hljs-keyword">get</span> hpa
+<pre><code translate="no" class="language-bash">kubectl get hpa
 <button class="copy-code-btn"></button></code></pre>
 <p>You should see output similar to:</p>
 <pre><code translate="no">NAME                          REFERENCE                            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
-my-release-milvus-proxy-hpa   Deployment/my-release-milvus-proxy   &lt;some&gt;/60%      2         10        2          &lt;time&gt;
+my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>proxy<span class="hljs-operator">-</span>hpa   Deployment<span class="hljs-operator">/</span>my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>milvus<span class="hljs-operator">-</span>proxy   <span class="hljs-operator">&lt;</span><span class="hljs-keyword">some</span><span class="hljs-operator">&gt;</span><span class="hljs-operator">/</span><span class="hljs-number">60</span><span class="hljs-operator">%</span>      <span class="hljs-number">2</span>         <span class="hljs-number">10</span>        <span class="hljs-number">2</span>          <span class="hljs-operator">&lt;</span><span class="hljs-type">time</span><span class="hljs-operator">&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>The <code translate="no">NAME</code> and <code translate="no">REFERENCE</code> fields will reflect your cluster name (e.g., <code translate="no">&lt;your-release-name&gt;-milvus-proxy-hpa</code> and <code translate="no">Deployment/&lt;your-release-name&gt;-milvus-proxy</code>).</p></li>
 </ol>

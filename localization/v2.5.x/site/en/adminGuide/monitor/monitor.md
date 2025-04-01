@@ -64,14 +64,14 @@ summary: Learn how to deploy monitoring services for a Milvus cluster using Prom
     </button></h2><p>This tutorial uses <a href="https://github.com/prometheus-operator/kube-prometheus">kube-prometheus</a> to save you the trouble of installing and manually configuring each monitoring and alerting component.</p>
 <p>Kube-prometheus collects Kubernetes manifests, <a href="http://grafana.com/">Grafana</a> dashboards, and <a href="https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/">Prometheus rules</a> combined with documentation and scripts.</p>
 <p>Before deploying monitoring services, you need to create a monitoring stack by using the configuration in the kube-prometheus manifests directory.</p>
-<pre><code translate="no">$ git <span class="hljs-built_in">clone</span> https://github.com/prometheus-operator/kube-prometheus.git
-$ <span class="hljs-built_in">cd</span> kube-prometheus
-$ kubectl apply --server-side -f manifests/setup
-$ kubectl <span class="hljs-built_in">wait</span> \
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/prometheus-operator/kube-prometheus.git</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> kube-prometheus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply --server-side -f manifests/setup</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl <span class="hljs-built_in">wait</span> \
         --<span class="hljs-keyword">for</span> condition=Established \
         --all CustomResourceDefinition \
-        --namespace=monitoring
-$ kubectl apply -f manifests/
+        --namespace=monitoring</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f manifests/</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 The default prometheus-k8s clusterrole can not capture milvus' metrics, need to patch:
@@ -95,17 +95,17 @@ The default prometheus-k8s clusterrole can not capture milvus' metrics, need to 
         ></path>
       </svg>
     </button></h2><h3 id="1-Access-the-dashboards" class="common-anchor-header">1. Access the dashboards</h3><p>Forward the Prometheus service to port <code translate="no">9090</code>, and Grafana service to port <code translate="no">3000</code>.</p>
-<pre><code translate="no">$ kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/prometheus-k8s 9090
-$ kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/prometheus-k8s 9090</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2. Enable ServiceMonitor</h3><p>The ServiceMonitor is not enabled for Milvus Helm by default. After installing the Prometheus Operator in the Kubernetes cluster, you can enable it by adding the parameter <code translate="no">metrics.serviceMonitor.enabled=true</code>.</p>
-<pre><code translate="no">$ helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> metrics.serviceMonitor.enabled=<span class="hljs-literal">true</span> --reuse-values
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> metrics.serviceMonitor.enabled=<span class="hljs-literal">true</span> --reuse-values</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>When the installation completes, use <code translate="no">kubectl</code> to check the ServiceMonitor resource.</p>
 <pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">NAME                           AGE
-my-release-milvus              54s
+<span class="hljs-keyword">my</span>-release-milvus              54s
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -63,7 +63,7 @@ client = MilvusClient(
         ></path>
       </svg>
     </button></h2><p>Create a user named <code translate="no">user_1</code> with the password <code translate="no">P@ssw0rd</code>:</p>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_user</span>(
+<pre><code translate="no" class="language-python">client.create_user(
     user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,
     password=<span class="hljs-string">&#x27;P@ssw0rd&#x27;</span>
 )
@@ -72,7 +72,7 @@ client = MilvusClient(
 <ul>
 <li>Update a user password. You need to provide both the original and the new password.</li>
 </ul>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">update_password</span>(
+<pre><code translate="no" class="language-python">client.update_password(
     user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,
     old_password=<span class="hljs-string">&#x27;P@ssw0rd&#x27;</span>,
     new_password=<span class="hljs-string">&#x27;P@ssw0rd123&#x27;</span>
@@ -91,8 +91,8 @@ client = MilvusClient(
 </ul>
 <pre><code translate="no" class="language-python">client.describe_user(user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>)
 
-# output:
-# {<span class="hljs-string">&#x27;user_name&#x27;</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>, <span class="hljs-string">&#x27;roles&#x27;</span>: ()}
+<span class="hljs-comment"># output:</span>
+<span class="hljs-comment"># {&#x27;user_name&#x27;: &#x27;user_1&#x27;, &#x27;roles&#x27;: ()}</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="3-Create-a-role" class="common-anchor-header">3. Create a role<button data-href="#3-Create-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,7 +110,7 @@ client = MilvusClient(
         ></path>
       </svg>
     </button></h2><p>The following example creates a role named <code translate="no">roleA</code>.</p>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_role</span>(
+<pre><code translate="no" class="language-python">client.create_role(
     role_name=<span class="hljs-string">&quot;roleA&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -120,8 +120,8 @@ client = MilvusClient(
 </ul>
 <pre><code translate="no" class="language-python">client.list_roles()
 
-# output:
-# [<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;public&#x27;</span>, <span class="hljs-string">&#x27;roleA&#x27;</span>]
+<span class="hljs-comment"># output:</span>
+<span class="hljs-comment"># [&#x27;admin&#x27;, &#x27;public&#x27;, &#x27;roleA&#x27;]</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="4-Grant-a-privilege-to-a-role" class="common-anchor-header">4. Grant a privilege to a role<button data-href="#4-Grant-a-privilege-to-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -158,14 +158,14 @@ client.grant_privilege(
     role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>
 )
 
-# output:
-# {<span class="hljs-string">&#x27;role&#x27;</span>: <span class="hljs-string">&#x27;roleA&#x27;</span>,
-#  <span class="hljs-string">&#x27;privileges&#x27;</span>: [{<span class="hljs-string">&#x27;object_type&#x27;</span>: <span class="hljs-string">&#x27;User&#x27;</span>,
-#    <span class="hljs-string">&#x27;object_name&#x27;</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>,
-#    <span class="hljs-string">&#x27;db_name&#x27;</span>: <span class="hljs-string">&#x27;default&#x27;</span>,
-#    <span class="hljs-string">&#x27;role_name&#x27;</span>: <span class="hljs-string">&#x27;roleA&#x27;</span>,
-#    <span class="hljs-string">&#x27;privilege&#x27;</span>: <span class="hljs-string">&#x27;SelectUser&#x27;</span>,
-#    <span class="hljs-string">&#x27;grantor_name&#x27;</span>: <span class="hljs-string">&#x27;root&#x27;</span>}]}
+<span class="hljs-comment"># output:</span>
+<span class="hljs-comment"># {&#x27;role&#x27;: &#x27;roleA&#x27;,</span>
+<span class="hljs-comment">#  &#x27;privileges&#x27;: [{&#x27;object_type&#x27;: &#x27;User&#x27;,</span>
+<span class="hljs-comment">#    &#x27;object_name&#x27;: &#x27;user_1&#x27;,</span>
+<span class="hljs-comment">#    &#x27;db_name&#x27;: &#x27;default&#x27;,</span>
+<span class="hljs-comment">#    &#x27;role_name&#x27;: &#x27;roleA&#x27;,</span>
+<span class="hljs-comment">#    &#x27;privilege&#x27;: &#x27;SelectUser&#x27;,</span>
+<span class="hljs-comment">#    &#x27;grantor_name&#x27;: &#x27;root&#x27;}]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="5-Grant-a-role-to-a-user" class="common-anchor-header">5. Grant a role to a user<button data-href="#5-Grant-a-role-to-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -195,8 +195,8 @@ client.grant_role(
     user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>
 )
 
-# output:
-# {<span class="hljs-string">&#x27;user_name&#x27;</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>, <span class="hljs-string">&#x27;roles&#x27;</span>: (<span class="hljs-string">&#x27;roleA&#x27;</span>)}
+<span class="hljs-comment"># output:</span>
+<span class="hljs-comment"># {&#x27;user_name&#x27;: &#x27;user_1&#x27;, &#x27;roles&#x27;: (&#x27;roleA&#x27;)}</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="6-Revoke-privileges" class="common-anchor-header">6. Revoke privileges<button data-href="#6-Revoke-privileges" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -229,7 +229,7 @@ client.grant_role(
 <ul>
 <li>Remove a user from a role. If you revoke a role that has not been granted to the user, an error will occur.</li>
 </ul>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">revoke_role</span>(
+<pre><code translate="no" class="language-python">client.revoke_role(
     user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,
     role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>
 )
@@ -237,12 +237,12 @@ client.grant_role(
 <ul>
 <li>Drop a role.</li>
 </ul>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_role</span>(role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>)
+<pre><code translate="no" class="language-python">client.drop_role(role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Drop a user.</li>
 </ul>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_user</span>(user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>)
+<pre><code translate="no" class="language-python">client.drop_user(user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

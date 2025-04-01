@@ -47,7 +47,7 @@ title: Efficient Data Loading into Milvus with VectorETL
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependency-and-Environment" class="common-anchor-header">Dependency and Environment</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade vector-etl pymilvus
+    </button></h2><h3 id="Dependency-and-Environment" class="common-anchor-header">Dependency and Environment</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade vector-etl pymilvus</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
@@ -56,9 +56,9 @@ title: Efficient Data Loading into Milvus with VectorETL
 <p>We will load documents from Amazon S3. Therefore, you need to prepare <code translate="no">AWS_ACCESS_KEY_ID</code> and <code translate="no">AWS_SECRET_ACCESS_KEY</code> as environment variables to securely access your S3 bucket. Additionally, we will use OpenAI’s <code translate="no">text-embedding-ada-002</code> embedding model to generate embeddings for the data. You should also prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;your-openai-api-key&quot;</span>
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;AWS_ACCESS_KEY_ID&quot;</span>] = <span class="hljs-string">&quot;your-aws-access-key-id&quot;</span>
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>] = <span class="hljs-string">&quot;your-aws-secret-access-key&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;your-openai-api-key&quot;</span>
+os.environ[<span class="hljs-string">&quot;AWS_ACCESS_KEY_ID&quot;</span>] = <span class="hljs-string">&quot;your-aws-access-key-id&quot;</span>
+os.environ[<span class="hljs-string">&quot;AWS_SECRET_ACCESS_KEY&quot;</span>] = <span class="hljs-string">&quot;your-aws-secret-access-key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Workflow" class="common-anchor-header">Workflow<button data-href="#Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,7 +76,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;AW
         ></path>
       </svg>
     </button></h2><h3 id="Defining-the-Data-Source-Amazon-S3" class="common-anchor-header">Defining the Data Source (Amazon S3)</h3><p>In this case, we are extracting documents from an Amazon S3 bucket. VectorETL allows us to specify the bucket name, the path to the files, and the type of data we are working with.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">source</span> = {
+<pre><code translate="no" class="language-python">source = {
     <span class="hljs-string">&quot;source_data_type&quot;</span>: <span class="hljs-string">&quot;Amazon S3&quot;</span>,
     <span class="hljs-string">&quot;bucket_name&quot;</span>: <span class="hljs-string">&quot;my-bucket&quot;</span>,
     <span class="hljs-string">&quot;key&quot;</span>: <span class="hljs-string">&quot;path/to/files/&quot;</span>,
@@ -88,7 +88,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;AW
 <h3 id="Configuring-the-Embedding-Model-OpenAI" class="common-anchor-header">Configuring the Embedding Model (OpenAI)</h3><p>Once we have our data source set up, we need to define the embedding model that will transform our textual data into vector embeddings. Here, we use OpenAI’s <code translate="no">text-embedding-ada-002</code> in this example.</p>
 <pre><code translate="no" class="language-python">embedding = {
     <span class="hljs-string">&quot;embedding_model&quot;</span>: <span class="hljs-string">&quot;OpenAI&quot;</span>,
-    <span class="hljs-string">&quot;api_key&quot;</span>: os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>],
+    <span class="hljs-string">&quot;api_key&quot;</span>: os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>],
     <span class="hljs-string">&quot;model_name&quot;</span>: <span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>,
 }
 <button class="copy-code-btn"></button></code></pre>

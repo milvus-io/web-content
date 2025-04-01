@@ -83,7 +83,7 @@ title: Install Milvus Nodejs SDK
       </svg>
     </button></h2><p>The recommended way to get started using the Milvus node.js client is by using npm (Node package manager) to install the dependency in your project.</p>
 <pre><code translate="no" class="language-javascript">npm install @zilliz/milvus2-sdk-node
-<span class="hljs-comment"># or ...</span>
+# or ...
 yarn add @zilliz/milvus2-sdk-node
 <button class="copy-code-btn"></button></code></pre>
 <p>This will download the Milvus node.js sdk and add a dependency entry in your package.json file.</p>
@@ -109,7 +109,7 @@ yarn add @zilliz/milvus2-sdk-node
 <ul>
 <li><a href="/docs/manage-collections.md">Manage Collections</a></li>
 <li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert &amp; Delete</a></li>
+<li><a href="/docs/insert-update-delete.md">Insert, Upsert & Delete</a></li>
 <li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
 <li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>

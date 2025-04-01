@@ -192,7 +192,7 @@ title: Release Notes
 <li>[2.5] Added and used lifetime context for compaction trigger (<a href="https://github.com/milvus-io/milvus/pull/39880">#39880</a>)</li>
 <li>[2.5] Checked collection release before target checks (<a href="https://github.com/milvus-io/milvus/pull/39843">#39843</a>)</li>
 <li>Fixed Rootcoord graceful stop failure and limited resource of CI (<a href="https://github.com/milvus-io/milvus/pull/39793">#39793</a>)</li>
-<li>[2.5] Removed load field &amp; schema column size check (<a href="https://github.com/milvus-io/milvus/pull/39834">#39834</a>, <a href="https://github.com/milvus-io/milvus/pull/39835">#39835</a>)</li>
+<li>[2.5] Removed load field & schema column size check (<a href="https://github.com/milvus-io/milvus/pull/39834">#39834</a>, <a href="https://github.com/milvus-io/milvus/pull/39835">#39835</a>)</li>
 <li>[2.5] Removed the mmap.enable param in the type param when creating index (<a href="https://github.com/milvus-io/milvus/pull/39806">#39806</a>)</li>
 <li>[2.5] Did not pass the index name when dropping properties (<a href="https://github.com/milvus-io/milvus/pull/39679">#39679</a>)</li>
 <li>[2.5] Segments returned both growing and sealed results (<a href="https://github.com/milvus-io/milvus/pull/39789">#39789</a>)</li>
@@ -243,7 +243,7 @@ title: Release Notes
 <li>[GoSDK][2.5] Synced GoSDK commits from master branch (<a href="https://github.com/milvus-io/milvus/pull/39823">#39823</a>)</li>
 <li>Kept consistency of memory and meta of broadcaster (<a href="https://github.com/milvus-io/milvus/pull/39721">#39721</a>)</li>
 <li>Broadcasted with event-based notification (<a href="https://github.com/milvus-io/milvus/pull/39550">#39550</a>)</li>
-<li>[2.5] Refined error message for schema &amp; index checking (<a href="https://github.com/milvus-io/milvus/pull/39565">#39565</a>)</li>
+<li>[2.5] Refined error message for schema & index checking (<a href="https://github.com/milvus-io/milvus/pull/39565">#39565</a>)</li>
 <li>[2.5] Reset default auto index type for scalar (<a href="https://github.com/milvus-io/milvus/pull/39820">#39820</a>)</li>
 <li>[2.5] Re-enqueued L0 compaction task when precheck failed (<a href="https://github.com/milvus-io/milvus/pull/39871">#39871</a>)</li>
 </ul>
@@ -474,9 +474,9 @@ title: Release Notes
 <h4 id="Bitmap-Index" class="common-anchor-header">Bitmap Index</h4><p>A new scalar data index has been added to the Milvus family. The BitMap index uses an array of bits, equal in length to the number of rows, to represent the existence of values and accelerate searches.</p>
 <p>Bitmap indexes have traditionally been effective for low-cardinality fields, which have a modest number of distinct values—for example, a column containing gender information with only two possible values: male and female.</p>
 <p>For details, refer to <a href="/docs/bitmap.md">Bitmap Index</a>.</p>
-<h4 id="Nullable--Default-Value" class="common-anchor-header">Nullable &amp; Default Value</h4><p>Milvus now supports setting nullable properties and default values for scalar fields other than the primary key field. For scalar fields marked as <code translate="no">nullable=True</code>, users can omit the field when inserting data; the system will treat it as a null value or default value (if set) without throwing an error.</p>
+<h4 id="Nullable--Default-Value" class="common-anchor-header">Nullable & Default Value</h4><p>Milvus now supports setting nullable properties and default values for scalar fields other than the primary key field. For scalar fields marked as <code translate="no">nullable=True</code>, users can omit the field when inserting data; the system will treat it as a null value or default value (if set) without throwing an error.</p>
 <p>Default values and nullable properties provide greater flexibility to Milvus. Users can utilize this feature for fields with uncertain values when creating collections. It also simplifies data migration from other database systems to Milvus, allowing for handling datasets containing null values while preserving original default value settings.</p>
-<p>For details, refer to <a href="/docs/nullable-and-default.md">Nullable &amp; Default Value</a>.</p>
+<p>For details, refer to <a href="/docs/nullable-and-default.md">Nullable & Default Value</a>.</p>
 <h4 id="Faiss-based-HNSW-SQPQPRQ" class="common-anchor-header">Faiss-based HNSW SQ/PQ/PRQ</h4><p>Through close collaboration with the Faiss community, the HNSW algorithm in Faiss has seen significant improvements in both functionality and performance. For considerations of stability and maintainability, Milvus 2.5 has officially migrated its support for HNSW from hnswlib to Faiss.</p>
 <p>Based on Faiss, Milvus 2.5 supports multiple quantization methods on HNSW to meet the needs of different scenarios: SQ (Scalar Quantizers), PQ (Product Quantizer), and PRQ (Product Residual Quantizer). SQ and PQ are more common; SQ provides good query performance and build speed, while PQ offers better recall at the same compression ratio. Many vector databases commonly use binary quantization, which is a simple form of SQ quantization.</p>
 <p>PRQ is a fusion of PQ and AQ (Additive Quantizer). Compared to PQ, it requires longer build times to deliver better recall, especially at high compression rates, saying binary compression.</p>
@@ -502,6 +502,6 @@ title: Release Notes
 <h4 id="Expression-Parsing-Optimization" class="common-anchor-header">Expression Parsing Optimization</h4><p>Improved expression parsing by implementing caching for repeated expressions, upgrading ANTLR, and optimizing the performance of <code translate="no">NOT IN</code> clauses.</p>
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">Improved DDL Concurrency Performance</h4><p>Optimized the concurrency performance of Data Definition Language (DDL) operations.</p>
 <h4 id="RESTful-API-Feature-Alignment" class="common-anchor-header">RESTful API Feature Alignment</h4><p>Aligned the functionalities of the RESTful API with other SDKs for consistency.</p>
-<h4 id="Security--Configuration-Updates" class="common-anchor-header">Security &amp; Configuration Updates</h4><p>Supported TLS to secure inter-node communication in more complex or enterprise environments. For details, refer to <a href="/docs/tls.md">Security Configuration</a>.</p>
+<h4 id="Security--Configuration-Updates" class="common-anchor-header">Security & Configuration Updates</h4><p>Supported TLS to secure inter-node communication in more complex or enterprise environments. For details, refer to <a href="/docs/tls.md">Security Configuration</a>.</p>
 <h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">Compaction Performance Enhancements</h4><p>Removed maximum segment limitations in mixed compaction and now prioritizes smaller segments first, improving efficiency and speeding up queries on large or fragmented datasets.</p>
 <h4 id="Score-Based-Channel-Balancing" class="common-anchor-header">Score-Based Channel Balancing</h4><p>Introduced a policy that dynamically balances loads across channels, enhancing resource utilization and overall stability in large-scale deployments.</p>

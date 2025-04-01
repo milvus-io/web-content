@@ -25,10 +25,10 @@ summary: >-
       </svg>
     </button></h1><p>The Array type is used to store fields containing multiple values of the same data type. It provides a flexible way to store attributes with multiple elements, making it especially useful in scenarios where a set of related data needs to be saved. In Milvus, you can store Array fields alongside vector data, enabling more complex query and filtering requirements.​</p>
 <p>For example, in a music recommendation system, an Array field can store a list of tags for a song; in user behavior analysis, it can store user ratings for songs. Below is an example of a typical Array field:​</p>
-<pre><code translate="no" class="language-JSON">{​
-  <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],​
-  <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>]​
-}​
+<pre><code translate="no" class="language-JSON"><span class="hljs-punctuation">{</span>​
+  <span class="hljs-attr">&quot;tags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;pop&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;rock&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;classic&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>​
+  <span class="hljs-attr">&quot;ratings&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">]</span>​
+<span class="hljs-punctuation">}</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>In this example, <code translate="no">tags</code> and <code translate="no">ratings</code> are both Array fields. The <code translate="no">tags</code> field is a string array representing song genres like pop, rock, and classic, while the <code translate="no">ratings</code> field is an integer array representing user ratings for the song, ranging from 1 to 5. These Array fields provide a flexible way to store multi-value data, making it easier to perform detailed analysis during queries and filtering.​</p>
@@ -151,7 +151,7 @@ schema.addField(AddFieldReq.builder()​
 ];​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> arrayField1=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export arrayField1='{​
     &quot;fieldName&quot;: &quot;tags&quot;,​
     &quot;dataType&quot;: &quot;Array&quot;,​
     &quot;elementDataType&quot;: &quot;VarChar&quot;,​
@@ -159,42 +159,42 @@ schema.addField(AddFieldReq.builder()​
         &quot;max_capacity&quot;: 10,​
         &quot;max_length&quot;: 65535​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> arrayField2=<span class="hljs-string">&#x27;{​
+export arrayField2='{​
     &quot;fieldName&quot;: &quot;ratings&quot;,​
     &quot;dataType&quot;: &quot;Array&quot;,​
     &quot;elementDataType&quot;: &quot;Int64&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;max_capacity&quot;: 5​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> pkField=<span class="hljs-string">&#x27;{​
+export pkField='{​
     &quot;fieldName&quot;: &quot;pk&quot;,​
     &quot;dataType&quot;: &quot;Int64&quot;,​
     &quot;isPrimary&quot;: true​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{​
+export vectorField='{​
     &quot;fieldName&quot;: &quot;embedding&quot;,​
     &quot;dataType&quot;: &quot;FloatVector&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;dim&quot;: 3​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{​
+export schema=&quot;{​
     \&quot;autoID\&quot;: false,​
     \&quot;fields\&quot;: [​
-        <span class="hljs-variable">$arrayField1</span>,​
-        <span class="hljs-variable">$arrayField2</span>,​
-        <span class="hljs-variable">$pkField</span>,​
-        <span class="hljs-variable">$vectorField</span>​
+        $arrayField1,​
+        $arrayField2,​
+        $pkField,​
+        $vectorField​
     ]​
-}&quot;</span>​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In this example:​</p>
 <ul>
 <li><p><code translate="no">tags</code> is a string array with <code translate="no">element_type</code> set to <code translate="no">VARCHAR</code>, indicating that elements in the array must be strings. <code translate="no">max_capacity</code> is set to 10, meaning the array can contain up to 10 elements.​</p></li>
@@ -202,7 +202,7 @@ schema.addField(AddFieldReq.builder()​
 <li><p>We also add a primary key field <code translate="no">pk</code> and a vector field <code translate="no">embedding</code>.​</p></li>
 </ul>
 <div class="alert note">
-<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
+<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field & AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
 </div>
 <h2 id="Set-index-params​" class="common-anchor-header">Set index params​<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -256,15 +256,15 @@ indexes.add(IndexParam.builder()​
 )];​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
+<pre><code translate="no" class="language-curl">export indexParams='[​
         {​
             &quot;fieldName&quot;: &quot;tags&quot;,​
             &quot;indexName&quot;: &quot;inverted_index&quot;,​
             &quot;indexType&quot;: &quot;AUTOINDEX&quot;​
         }​
-    ]&#x27;</span>​
+    ]'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In addition to <code translate="no">AUTOINDEX</code>, you can specify other scalar index types like <code translate="no">INVERTED</code> or <code translate="no">BITMAP</code>. For supported index types, refer to <a href="/docs/index-scalar-fields.md">​Scalar Indexes</a>.​</p>
 <p>Moreover, you must create an index for the vector field before creating the collection. In this example, we use <code translate="no">AUTOINDEX</code> to simplify vector index setup.​</p>
 <div class="multipleCode">
@@ -282,7 +282,7 @@ index_params.add_index(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">indexes.<span class="hljs-keyword">add</span>(IndexParam.builder()​
+<pre><code translate="no" class="language-java">indexes.add(IndexParam.builder()​
         .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)​
         .indexType(IndexParam.IndexType.AUTOINDEX)​
         .metricType(IndexParam.MetricType.COSINE)​
@@ -296,7 +296,7 @@ index_params.add_index(​
 });​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[​
+<pre><code translate="no" class="language-curl">export indexParams='[​
         {​
             &quot;fieldName&quot;: &quot;tags&quot;,​
             &quot;indexName&quot;: &quot;inverted_index&quot;,​
@@ -307,9 +307,9 @@ index_params.add_index(​
             &quot;metricType&quot;: &quot;COSINE&quot;,​
             &quot;indexType&quot;: &quot;AUTOINDEX&quot;​
         }​
-    ]&#x27;</span>​
+    ]'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Create-collection​" class="common-anchor-header">Create collection​<button data-href="#Create-collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -333,7 +333,7 @@ index_params.add_index(​
   <a href="#go">Go</a>
   <a href="#curl">cURL</a>
 </div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
+<pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_array_collection&quot;</span>,​
     schema=schema,​
     index_params=index_params​
@@ -356,16 +356,16 @@ client.createCollection(requestCreate);​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&quot;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &quot;{​
     \&quot;collectionName\&quot;: \&quot;my_array_collection\&quot;,​
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,​
-    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>​
-}&quot;</span>​
+    \&quot;schema\&quot;: $schema,​
+    \&quot;indexParams\&quot;: $indexParams​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Insert-data​" class="common-anchor-header">Insert data​<button data-href="#Insert-data​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -410,7 +410,7 @@ client.createCollection(requestCreate);​
     }​
 ]​
 ​
-client.<span class="hljs-title function_">insert</span>(​
+client.insert(​
     collection_name=<span class="hljs-string">&quot;my_array_collection&quot;</span>,​
     data=data​
 )​
@@ -462,10 +462,10 @@ client.<span class="hljs-title function_">insert</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;data&quot;: [​
         {​
         &quot;tags&quot;: [&quot;pop&quot;, &quot;rock&quot;, &quot;classic&quot;],​
@@ -487,9 +487,9 @@ client.<span class="hljs-title function_">insert</span>({​
     }       ​
     ],​
     &quot;collectionName&quot;: &quot;my_array_collection&quot;​
-}&#x27;</span>​
+}'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In this example:​</p>
 <ul>
 <li><p>Each data entry includes a primary field (<code translate="no">pk</code>), while <code translate="no">tags</code> and <code translate="no">ratings</code> are Array fields used to store tags and ratings.​</p></li>
@@ -550,25 +550,25 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment">// [QueryResp.QueryResult(entity={ratings=[3, 3, 4], pk=3, embedding=[0.7, 0.8, 0.9], tags=[electronic, dance]})]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">client.query({​
-    collection_name: <span class="hljs-string">&#x27;my_array_collection&#x27;</span>,​
-    <span class="hljs-built_in">filter</span>: <span class="hljs-string">&#x27;ratings[0] &lt; 4&#x27;</span>,​
-    output_fields: [<span class="hljs-string">&#x27;tags&#x27;</span>, <span class="hljs-string">&#x27;ratings&#x27;</span>, <span class="hljs-string">&#x27;embedding&#x27;</span>]​
+<pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">query</span>({​
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_array_collection&#x27;</span>,​
+    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;ratings[0] &lt; 4&#x27;</span>,​
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;tags&#x27;</span>, <span class="hljs-string">&#x27;ratings&#x27;</span>, <span class="hljs-string">&#x27;embedding&#x27;</span>]​
 });​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/query&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;my_array_collection&quot;,​
     &quot;filter&quot;: &quot;ratings[0] &lt; 4&quot;,​
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]​
-}&#x27;</span>​
-<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;embedding&quot;:[0.67,0.45,0.89],&quot;pk&quot;:3,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[3,3,4]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;electronic&quot;,&quot;dance&quot;]}}}}]}​</span>
+}'​
+# {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;embedding&quot;:[0.67,0.45,0.89],&quot;pk&quot;:3,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[3,3,4]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;electronic&quot;,&quot;dance&quot;]}}}}]}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In this query, Milvus filters out entities where the first element of the <code translate="no">ratings</code> array is less than 4, returning entities that match the condition.​</p>
 <h3 id="Vector-search-with-Array-filtering​" class="common-anchor-header">Vector search with Array filtering​</h3><p>By combining vector similarity with Array filtering, you can ensure that the retrieved data is not only similar in semantics but also meets specific conditions, making the search results more accurate and aligned with business needs.​</p>
 <div class="multipleCode">
@@ -615,20 +615,20 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment">// [[SearchResp.SearchResult(entity={ratings=[5, 4, 3], embedding=[0.1, 0.2, 0.3], tags=[pop, rock, classic]}, score=-0.2364331, id=1)]]​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">client.search({​
-    collection_name: <span class="hljs-string">&#x27;my_array_collection&#x27;</span>,​
-    data: [<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>],​
-    limit: <span class="hljs-number">5</span>,​
-    output_fields: [<span class="hljs-string">&#x27;tags&#x27;</span>, <span class="hljs-string">&#x27;ratings&#x27;</span>, <span class="hljs-string">&#x27;embdding&#x27;</span>],​
-    <span class="hljs-built_in">filter</span>: <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>​
+<pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">search</span>({​
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_array_collection&#x27;</span>,​
+    <span class="hljs-attr">data</span>: [<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>],​
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,​
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;tags&#x27;</span>, <span class="hljs-string">&#x27;ratings&#x27;</span>, <span class="hljs-string">&#x27;embdding&#x27;</span>],​
+    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>​
 });​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/search&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;collectionName&quot;: &quot;my_array_collection&quot;,​
     &quot;data&quot;: [​
         [0.3, -0.6, 0.1]​
@@ -637,11 +637,11 @@ System.out.println(resp.getSearchResults());​
     &quot;limit&quot;: 5,​
     &quot;filter&quot;: &quot;tags[0] == \&quot;pop\&quot;&quot;,​
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}​</span>
+# {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>In this example, Milvus returns the top 5 entities most similar to the query vector, with the <code translate="no">tags</code> array’s first element being <code translate="no">&quot;pop&quot;</code>.​</p>
 <p>Additionally, Milvus supports advanced Array filtering operators like <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, and <code translate="no">ARRAY_LENGTH</code> to further enhance query capabilities. For more details, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
 <h2 id="Limits​" class="common-anchor-header">Limits​<button data-href="#Limits​" class="anchor-icon" translate="no">

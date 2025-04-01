@@ -38,14 +38,14 @@ title: MMap-enabled Data Storage
 <h3 id="Before-cluster-deployment-global-configuration" class="common-anchor-header">Before cluster deployment: global configuration</h3><p>Before you deploy a cluster, <strong>cluster-level</strong> settings apply memory mapping across your entire cluster. This ensures all new objects will automatically adhere to these configurations. It’s important to note that modifying these settings requires a restart of the cluster to become effective.</p>
 <p>To adjust your cluster’s memory mapping settings, edit the <code translate="no">configs/milvus.yaml</code> file. Within this file, you can specify whether to enable memory mapping by default and determine the directory path for storing memory-mapped files. If the path (<code translate="no">mmapDirPath</code>) is left unspecified, the system defaults to storing memory-mapped files in <code translate="no">{localStorage.path}/mmap</code>. For more information, refer to <a href="https://milvus.io/docs/configure_localstorage.md#localStoragepath">Local Storage-related Configurations</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
-...
-queryNode:
-  mmap:
+<span class="hljs-string">...</span>
+<span class="hljs-attr">queryNode:</span>
+  <span class="hljs-attr">mmap:</span>
     <span class="hljs-comment"># Set memory mapping property for whole cluster</span>
-    mmapEnabled: false | true
+    <span class="hljs-attr">mmapEnabled:</span> <span class="hljs-literal">false</span> <span class="hljs-string">|</span> <span class="hljs-literal">true</span>
     <span class="hljs-comment"># Set memory-mapped directory path, if you leave mmapDirPath unspecified, the memory-mapped files will be stored in {localStorage.path}/ mmap by default. </span>
-    mmapDirPath: <span class="hljs-built_in">any</span>/valid/path 
-....
+    <span class="hljs-attr">mmapDirPath:</span> <span class="hljs-string">any/valid/path</span> 
+<span class="hljs-string">....</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After <code translate="no">2.4.10</code>, the configuration <code translate="no">queryNode.mmap.mmapEnabled</code> splits into below four seperate fields, and all defaults are <code translate="no">false</code>:</p>
 <ul>
@@ -55,14 +55,14 @@ queryNode:
 <li><code translate="no">queryNode.mmap.scalarIndex</code>, controls whether scalar index is mmap;</li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
-...
-queryNode:
-  mmap:
-    vectorField: false <span class="hljs-comment"># Enable mmap for loading vector data</span>
-    vectorIndex: false <span class="hljs-comment"># Enable mmap for loading vector index</span>
-    scalarField: false <span class="hljs-comment"># Enable mmap for loading scalar data</span>
-    scalarIndex: false <span class="hljs-comment"># Enable mmap for loading scalar index</span>
-....
+<span class="hljs-string">...</span>
+<span class="hljs-attr">queryNode:</span>
+  <span class="hljs-attr">mmap:</span>
+    <span class="hljs-attr">vectorField:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># Enable mmap for loading vector data</span>
+    <span class="hljs-attr">vectorIndex:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># Enable mmap for loading vector index</span>
+    <span class="hljs-attr">scalarField:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># Enable mmap for loading scalar data</span>
+    <span class="hljs-attr">scalarIndex:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># Enable mmap for loading scalar index</span>
+<span class="hljs-string">....</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>In addition, only vector index and vector data mmap can be turned on and off for a collection individually, but not for others.</p>
 <p>Compatibility: If the original configuration <code translate="no">queryNode.mmap.mmapEnabled</code> is set to <code translate="no">true</code>, the newly added configuration will be set to <code translate="no">true</code> at this time. If <code translate="no">queryNode.mmap.mmapEnabled</code> is set to <code translate="no">false</code>, if the new configuration is set to <code translate="no">true</code>, the final value will be <code translate="no">true</code>.</p>

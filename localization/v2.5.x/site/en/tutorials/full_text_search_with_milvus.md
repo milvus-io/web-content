@@ -47,8 +47,8 @@ title: Hybrid Search with Full Text and Semantic Search in Milvus
         ></path>
       </svg>
     </button></h2><h3 id="Download-the-dataset" class="common-anchor-header">Download the dataset</h3><p>The following command will download the example data used in original Anthropic <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">demo</a>.</p>
-<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
-$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Install-Milvus-25" class="common-anchor-header">Install Milvus 2.5</h3><p>Check the <a href="https://milvus.io/docs/install_standalone-docker-compose.md">official installation guide</a> for more details.</p>
 <h3 id="Install-PyMilvus" class="common-anchor-header">Install PyMilvus</h3><p>Run the following command to install PyMilvus:</p>
@@ -261,8 +261,8 @@ $ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.git
             <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>]
         ]
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python">dense_ef = <span class="hljs-title class_">BGEM3EmbeddingFunction</span>()
-standard_retriever = <span class="hljs-title class_">HybridRetriever</span>(
+<pre><code translate="no" class="language-python">dense_ef = BGEM3EmbeddingFunction()
+standard_retriever = HybridRetriever(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
     collection_name=<span class="hljs-string">&quot;milvus_hybrid&quot;</span>,
     dense_embedding_function=dense_ef,

@@ -61,16 +61,16 @@ title: Run Milvus in Docker (Linux)
 <ol>
 <li><p>Open Docker Desktop in administrator mode by right-clicking and selecting <strong>Run as administrator</strong>.​</p></li>
 <li><p>Download the installation script and save it as <code translate="no">standalone.bat</code>.​</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
+<pre><code translate="no" class="language-powershell">C:\&gt;Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 <li><p>Run the downloaded script to start Milvus as a Docker container.​</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;standalone.<span class="hljs-property">bat</span> start​
-<span class="hljs-title class_">Wait</span> <span class="hljs-keyword">for</span> <span class="hljs-title class_">Milvus</span> starting...​
-<span class="hljs-title class_">Start</span> successfully.​
-<span class="hljs-title class_">To</span> change the <span class="hljs-keyword">default</span> <span class="hljs-title class_">Milvus</span> configuration, edit user.<span class="hljs-property">yaml</span> and restart the service.​
+<pre><code translate="no" class="language-powershell">C:\&gt;standalone.bat start​
+Wait for Milvus starting...​
+Start successfully.​
+To change the default Milvus configuration, edit user.yaml and restart the service.​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>After running the installation script:​</p>
 <ul>
 <li><p>A docker container named <strong>milvus-standalone</strong> has been started at port <strong>19530</strong>.​</p></li>
@@ -78,16 +78,16 @@ title: Run Milvus in Docker (Linux)
 <li><p>The Milvus data volume is mapped to <strong>volumes/milvus</strong> in the current folder.​</p></li>
 </ul>
 <p>You can use the following commands to manage the Milvus container and stored data.​</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-comment"># Stop Milvus​</span>
+<pre><code translate="no" class="language-powershell"># Stop Milvus​
 C:\&gt;standalone.bat stop​
 Stop successfully.​
 ​
-<span class="hljs-comment"># Delete Milvus container​</span>
+# Delete Milvus container​
 C:\&gt;standalone.bat delete​
-Delete Milvus container successfully. <span class="hljs-comment"># Container has been removed.​</span>
-Delete successfully. <span class="hljs-comment"># Data has been removed.​</span>
+Delete Milvus container successfully. # Container has been removed.​
+Delete successfully. # Data has been removed.​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 </ol>
 <h3 id="From-WSL-2​" class="common-anchor-header">From WSL 2​</h3><p>If you prefer to start Milvus using Linux commands and shell scripts on Windows, ensure that you already have installed the WSL 2 command. For details on how to install WSL 2 command, you can refer to this <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Microsoft article</a>.​</p>
 <ol>
@@ -96,7 +96,7 @@ Delete successfully. <span class="hljs-comment"># Data has been removed.​</spa
 Ubuntu already installed.​
 Starting Ubuntu...​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 <li><p>Download the installation script​</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Download the installation script​</span>
 $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh​
@@ -109,7 +109,7 @@ $ bash standalone_embed.sh start​
 <pre><code translate="no" class="language-bash">$ bash standalone_embed.sh start​
 Wait <span class="hljs-keyword">for</span> Milvus Starting...​
 Start successfully.​
-To change the <span class="hljs-literal">default</span> Milvus configuration, <span class="hljs-keyword">add</span> your settings to the user.yaml file <span class="hljs-keyword">and</span> then restart the service.​
+To change the default Milvus configuration, add your settings to the user.yaml file and <span class="hljs-keyword">then</span> restart the service.​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>You can use the following commands to manage the Milvus container and stored data.​</p>
@@ -143,16 +143,16 @@ Delete successfully.​
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">From PowerShell or Windows Command Prompt​</h3><ol>
 <li><p>Open Docker Desktop in administrator mode by right-clicking and selecting <strong>Run as administrator</strong>.​</p></li>
 <li><p>Run the following commands in PowerShell or Windows Command Prompt to download the Docker Compose configuration file for Milvus Standalone and start Milvus.​</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-comment"># Download the configuration file and rename it as docker-compose.yml​</span>
+<pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
 C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
-<span class="hljs-comment"># Start Milvus​</span>
+# Start Milvus​
 C:\&gt;docker compose up -d​
-Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
-Creating milvus-minio ... <span class="hljs-keyword">done</span>​
-Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
+Creating milvus-etcd  ... done​
+Creating milvus-minio ... done​
+Creating milvus-standalone ... done​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>Depending on your network connection, downloading images for the Milvus installation may take a while. Once the containers named <strong>milvus-standalone</strong>, <strong>milvus-minio</strong>, and <strong>milvus-etcd</strong> are up, you can witness that ​</p>
 <ul>
 <li><p>The <strong>milvus-etcd</strong> container does not expose any ports to the host and maps its data to <strong>volumes/etcd</strong> in the current folder.​</p></li>
@@ -168,17 +168,17 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
 Ubuntu already installed.​
 Starting Ubuntu...​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 <li><p>Download the Milvus configuration file.​</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Start Milvus.​</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose up -d​
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d​</span>
 ​
-Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
-Creating milvus-minio ... <span class="hljs-keyword">done</span>​
-Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
+Creating milvus-etcd  ... done​
+Creating milvus-minio ... done​
+Creating milvus-standalone ... done​
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
@@ -212,24 +212,24 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
 <li><p>Check whether the Docker Desktop Service has been started.​</p>
 <p>You can run the following command to start the Docker Desktop Service.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
-The Docker <span class="hljs-keyword">for</span> Windows Service service <span class="hljs-keyword">is</span> starting.​
-The Docker <span class="hljs-keyword">for</span> Windows Service service was started successfully.​
+The Docker for Windows Service service is starting.​
+The Docker for Windows Service service was started successfully.​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 <li><p>Check whether WSL has been installed properly.​</p>
 <p>You can run the following command to install or update the WSL 2 command.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
-Checking <span class="hljs-keyword">for</span> updates.​
-The most recent version of Windows Subsystem <span class="hljs-keyword">for</span> Linux <span class="hljs-keyword">is</span> already installed.​
+Checking for updates.​
+The most recent version of Windows Subsystem for Linux is already installed.​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 <li><p>Check whether Docker Daemon has been started.​</p>
 <p>You need to go to the installation directory of Docker Desktop and run <code translate="no">.\DockerCli.exe -SwitchDaemon</code> to start Docker Daemon.​</p>
-<pre><code translate="no" class="language-powershell">C:\&gt;cd <span class="hljs-string">&quot;C:\Program Files\Docker\Docker&quot;</span>​
+<pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
-Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/engine/switch&quot;</span>: <span class="hljs-built_in">open</span> \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
+Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 <li><p>Check whether you have started Docker Desktop in <strong>administrator</strong> mode.​</p>
 <p>Ensure that you have started Docker Desktop in administrator mode. To do so, right-click on <strong>Docker Desktop</strong> and choose <strong>Run as administrator</strong>.​</p>
 <p>
@@ -241,14 +241,14 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 </ol>
 <h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">How can I deal with WSL-related issues while deploying Milvus?​</h3><p>If you have encountered WSL-related issues while running Milvus from WSL 2, you may need to check whether you have configured Docker Desktop to use the WSL 2-based engine as follows:​</p>
 <ol>
-<li><p>Ensure that “Use the WSL 2 based engine” is checked in <strong>Settings</strong> &gt; <strong>General</strong>. ​</p>
+<li><p>Ensure that “Use the WSL 2 based engine” is checked in <strong>Settings</strong> > <strong>General</strong>. ​</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />
     <span>Use the WSL 2 based engine in Docker Desktop Settings</span>
   </span>
 </p></li>
-<li><p>Select from your installed WSL 2 distributions which you want to enable Docker integration on by going to: <strong>Settings</strong> &gt; <strong>Resources</strong> &gt; <strong>WSL Integration</strong>.​</p>
+<li><p>Select from your installed WSL 2 distributions which you want to enable Docker integration on by going to: <strong>Settings</strong> > <strong>Resources</strong> > <strong>WSL Integration</strong>.​</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
@@ -293,7 +293,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 <li><a href="/docs/manage_databases.md">Manage Databases</a></li>
 <li><a href="/docs/manage-collections.md">Manage Collections</a></li>
 <li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert &amp; Delete</a></li>
+<li><a href="/docs/insert-update-delete.md">Insert, Upsert & Delete</a></li>
 <li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
 <li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>

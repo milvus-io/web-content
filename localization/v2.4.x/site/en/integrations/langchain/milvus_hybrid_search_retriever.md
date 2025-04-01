@@ -64,33 +64,33 @@ title: Milvus Hybrid Search Retriever
         ></path>
       </svg>
     </button></h2><p>If you want to get automated tracing from individual queries, you can also set your <a href="https://docs.smith.langchain.com/">LangSmith</a> API key by uncommenting below:</p>
-<pre><code translate="no" class="language-python"># os.environ[<span class="hljs-string">&quot;LANGSMITH_API_KEY&quot;</span>] = getpass.getpass(<span class="hljs-string">&quot;Enter your LangSmith API key: &quot;</span>)
-# os.environ[<span class="hljs-string">&quot;LANGSMITH_TRACING&quot;</span>] = <span class="hljs-string">&quot;true&quot;</span>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># os.environ[&quot;LANGSMITH_API_KEY&quot;] = getpass.getpass(&quot;Enter your LangSmith API key: &quot;)</span>
+<span class="hljs-comment"># os.environ[&quot;LANGSMITH_TRACING&quot;] = &quot;true&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Installation" class="common-anchor-header">Installation</h3><p>This retriever lives in the <code translate="no">langchain-milvus</code> package. This guide requires the following dependencies:</p>
 <pre><code translate="no" class="language-python">%pip install --upgrade --quiet pymilvus[model] langchain-milvus langchain-openai
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">output_parsers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">StrOutputParser</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">prompts</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">PromptTemplate</span>
-<span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">runnables</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">RunnablePassthrough</span>
-<span class="hljs-keyword">from</span> langchain_milvus.<span class="hljs-property">retrievers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusCollectionHybridSearchRetriever</span>
-<span class="hljs-keyword">from</span> langchain_milvus.<span class="hljs-property">utils</span>.<span class="hljs-property">sparse</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">BM25SparseEmbedding</span>
-<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">ChatOpenAI</span>, <span class="hljs-title class_">OpenAIEmbeddings</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser
+<span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
+<span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
+<span class="hljs-keyword">from</span> langchain_milvus.retrievers <span class="hljs-keyword">import</span> MilvusCollectionHybridSearchRetriever
+<span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BM25SparseEmbedding
+<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI, OpenAIEmbeddings
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
-    <span class="hljs-title class_">Collection</span>,
-    <span class="hljs-title class_">CollectionSchema</span>,
-    <span class="hljs-title class_">DataType</span>,
-    <span class="hljs-title class_">FieldSchema</span>,
-    <span class="hljs-title class_">WeightedRanker</span>,
+    Collection,
+    CollectionSchema,
+    DataType,
+    FieldSchema,
+    WeightedRanker,
     connections,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Start-the-Milvus-service" class="common-anchor-header">Start the Milvus service</h3><p>Please refer to the <a href="https://milvus.io/docs/install_standalone-docker.md">Milvus documentation</a> to start the Milvus service.</p>
 <p>After starting milvus, you need to specify your milvus connection URI.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-variable constant_">CONNECTION_URI</span> = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<pre><code translate="no" class="language-python">CONNECTION_URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-OpenAI-API-Key" class="common-anchor-header">Prepare OpenAI API Key</h3><p>Please refer to the <a href="https://platform.openai.com/account/api-keys">OpenAI documentation</a> to obtain your OpenAI API key, and set it as an environment variable.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> <span class="hljs-variable constant_">OPENAI_API_KEY</span>=&lt;your_api_key&gt;
+<pre><code translate="no" class="language-shell">export OPENAI_API_KEY=&lt;your_api_key&gt;
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-dense-and-sparse-embedding-functions" class="common-anchor-header">Prepare dense and sparse embedding functions</h3><p>Let us fictionalize 10 fake descriptions of novels. In actual production, it may be a large amount of text data.</p>
 <pre><code translate="no" class="language-python">texts = [
@@ -117,7 +117,7 @@ dense_dim
 <p>Initialize sparse embedding function.</p>
 <p>Note that the output of sparse embedding is a set of sparse vectors, which represents the index and weight of the keywords of the input text.</p>
 <pre><code translate="no" class="language-python">sparse_embedding_func = BM25SparseEmbedding(corpus=texts)
-sparse_embedding_func.embed_query(texts[1])
+sparse_embedding_func.embed_query(texts[<span class="hljs-number">1</span>])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{0: 0.4270424944042204,
  21: 1.845826690498331,
@@ -169,20 +169,20 @@ collection = Collection(
 <button class="copy-code-btn"></button></code></pre>
 <p>Define index for dense and sparse vectors</p>
 <pre><code translate="no" class="language-python">dense_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;FLAT&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
-collection.<span class="hljs-title function_">create_index</span>(<span class="hljs-string">&quot;dense_vector&quot;</span>, dense_index)
+collection.create_index(<span class="hljs-string">&quot;dense_vector&quot;</span>, dense_index)
 sparse_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>, <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
-collection.<span class="hljs-title function_">create_index</span>(<span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_index)
-collection.<span class="hljs-title function_">flush</span>()
+collection.create_index(<span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_index)
+collection.flush()
 <button class="copy-code-btn"></button></code></pre>
 <p>Insert entities into the collection and load the collection</p>
 <pre><code translate="no" class="language-python">entities = []
-<span class="hljs-keyword">for</span> text in texts:
+<span class="hljs-keyword">for</span> text <span class="hljs-keyword">in</span> texts:
     entity = {
         dense_field: dense_embedding_func.embed_documents([text])[<span class="hljs-number">0</span>],
         sparse_field: sparse_embedding_func.embed_documents([text])[<span class="hljs-number">0</span>],
         text_field: text,
     }
-    entities.<span class="hljs-built_in">append</span>(entity)
+    entities.append(entity)
 collection.insert(entities)
 collection.load()
 <button class="copy-code-btn"></button></code></pre>
@@ -204,9 +204,9 @@ collection.load()
     </button></h2><p>Now we can instantiate our retriever, defining search parameters for sparse and dense fields:</p>
 <pre><code translate="no" class="language-python">sparse_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
 dense_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
-retriever = <span class="hljs-title class_">MilvusCollectionHybridSearchRetriever</span>(
+retriever = MilvusCollectionHybridSearchRetriever(
     collection=collection,
-    rerank=<span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>),
+    rerank=WeightedRanker(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>),
     anns_fields=[dense_field, sparse_field],
     field_embeddings=[dense_embedding_func, sparse_embedding_func],
     field_search_params=[dense_search_params, sparse_search_params],
@@ -230,7 +230,7 @@ retriever = <span class="hljs-title class_">MilvusCollectionHybridSearchRetrieve
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-python">retriever.<span class="hljs-title function_">invoke</span>(<span class="hljs-string">&quot;What are the story about ventures?&quot;</span>)
+    </button></h2><pre><code translate="no" class="language-python">retriever.invoke(<span class="hljs-string">&quot;What are the story about ventures?&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(page_content=&quot;In 'The Lost Expedition' by Caspian Grey, a team of explorers ventures into the heart of the Amazon rainforest in search of a lost city, but soon finds themselves hunted by a ruthless treasure hunter and the treacherous jungle itself.&quot;, metadata={'doc_id': '449281835035545843'}),
  Document(page_content=&quot;In 'The Phantom Pilgrim' by Rowan Welles, a charismatic smuggler is hired by a mysterious organization to transport a valuable artifact across a war-torn continent, but soon finds themselves pursued by deadly assassins and rival factions.&quot;, metadata={'doc_id': '449281835035545845'}),
@@ -278,14 +278,14 @@ prompt = PromptTemplate(
 <button class="copy-code-btn"></button></code></pre>
 <p>Define a chain using the retriever and other components</p>
 <pre><code translate="no" class="language-python">rag_chain = (
-    {<span class="hljs-string">&quot;context&quot;</span>: retriever | format_docs, <span class="hljs-string">&quot;question&quot;</span>: <span class="hljs-title class_">RunnablePassthrough</span>()}
+    {<span class="hljs-string">&quot;context&quot;</span>: retriever | format_docs, <span class="hljs-string">&quot;question&quot;</span>: RunnablePassthrough()}
     | prompt
     | llm
-    | <span class="hljs-title class_">StrOutputParser</span>()
+    | StrOutputParser()
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Perform a query using the defined chain</p>
-<pre><code translate="no" class="language-python">rag_chain.<span class="hljs-title function_">invoke</span>(<span class="hljs-string">&quot;What novels has Lila written and what are their contents?&quot;</span>)
+<pre><code translate="no" class="language-python">rag_chain.invoke(<span class="hljs-string">&quot;What novels has Lila written and what are their contents?&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">&quot;Lila Rose has written 'The Memory Thief,' which follows a charismatic thief with the ability to steal and manipulate memories as they navigate a daring heist and a web of deceit and betrayal.&quot;
 </code></pre>

@@ -64,16 +64,16 @@ title: With Iterators
   <a href="#python">Python </a>
   <a href="#java">Java</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus import connections, Collection​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection​
 ​
 connections.connect(​
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,​
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
 )​
 ​
-<span class="hljs-meta"># create iterator​</span>
+<span class="hljs-comment"># create iterator​</span>
 query_vectors = [​
-    [<span class="hljs-meta">0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592</span>]]​
+    [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]]​
 ​
 collection = Collection(<span class="hljs-string">&quot;iterator_collection&quot;</span>)​
 ​
@@ -81,10 +81,10 @@ iterator = collection.search_iterator(​
     data=query_vectors,​
     anns_field=<span class="hljs-string">&quot;vector&quot;</span>,​
     param={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">16</span>}},​
-    <span class="hljs-meta"># highlight-next-<span class="hljs-keyword">line</span>​</span>
+    <span class="hljs-comment"># highlight-next-line​</span>
     batch_size=<span class="hljs-number">50</span>,​
     output_fields=[<span class="hljs-string">&quot;color&quot;</span>],​
-    <span class="hljs-meta"># highlight-next-<span class="hljs-keyword">line</span>​</span>
+    <span class="hljs-comment"># highlight-next-line​</span>
     limit=<span class="hljs-number">20000</span>​
 )​
 
@@ -151,15 +151,15 @@ iterator = collection.search_iterator(​
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.response.QueryResultsWrapper;​
 ​
-while (<span class="hljs-literal">true</span>) {​
+<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {​
     List&lt;QueryResultsWrapper.RowRecord&gt; res = searchIterator.next();​
     <span class="hljs-keyword">if</span> (res.isEmpty()) {​
-        searchIterator.<span class="hljs-built_in">close</span>();​
+        searchIterator.close();​
         <span class="hljs-keyword">break</span>;​
     }​
 ​
     <span class="hljs-keyword">for</span> (QueryResultsWrapper.RowRecord record : res) {​
-        System.out.<span class="hljs-built_in">println</span>(record);​
+        System.out.println(record);​
     }​
 }​
 

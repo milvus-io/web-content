@@ -113,20 +113,20 @@ helm install cert-manager jetstack/cert-manager \
     </button></h2><ul>
 <li>Create a cluster issuer, such as cluster-issuer.yaml, using the following example manifest. Replace MY_EMAIL_ADDRESS with a valid address from your organization.</li>
 </ul>
-<pre><code translate="no" class="language-yaml">apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
-metadata:
-  name: letsencrypt
-spec:
-  acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    email: MY_EMAIL_ADDRESS
-    privateKeySecretRef:
-      name: letsencrypt
-    solvers:
-    - http01:
-        ingress:
-          class: nginx
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">cert-manager.io/v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterIssuer</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">letsencrypt</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">acme:</span>
+    <span class="hljs-attr">server:</span> <span class="hljs-string">https://acme-v02.api.letsencrypt.org/directory</span>
+    <span class="hljs-attr">email:</span> <span class="hljs-string">MY_EMAIL_ADDRESS</span>
+    <span class="hljs-attr">privateKeySecretRef:</span>
+      <span class="hljs-attr">name:</span> <span class="hljs-string">letsencrypt</span>
+    <span class="hljs-attr">solvers:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">http01:</span>
+        <span class="hljs-attr">ingress:</span>
+          <span class="hljs-attr">class:</span> <span class="hljs-string">nginx</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Apply the issuer using the kubectl apply command.</li>
@@ -167,32 +167,32 @@ spec:
     </button></h2><pre><code translate="no" class="language-bash">kubectl apply -f ingress.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>the ingress.yaml contents:</p>
-<pre><code translate="no" class="language-yaml">apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: my-release-milvus
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-    nginx.ingress.kubernetes.io/backend-protocol: GRPC
-    nginx.ingress.kubernetes.io/force-ssl-redirect: <span class="hljs-string">&quot;true&quot;</span>
-    nginx.ingress.kubernetes.io/proxy-body-size: 2048m
-spec:
-  ingressClassName: nginx
-  tls:
-  - hosts:
-    - milvustest.eastus2.cloudapp.azure.com <span class="hljs-comment"># the FQDN</span>
-    secretName: tls-secret
-  rules:
-    - host: milvustest.eastus2.cloudapp.azure.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: my-release-milvus
-                port:
-                  number: 19530
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">networking.k8s.io/v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Ingress</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-milvus</span>
+  <span class="hljs-attr">annotations:</span>
+    <span class="hljs-attr">cert-manager.io/cluster-issuer:</span> <span class="hljs-string">letsencrypt</span>
+    <span class="hljs-attr">nginx.ingress.kubernetes.io/backend-protocol:</span> <span class="hljs-string">GRPC</span>
+    <span class="hljs-attr">nginx.ingress.kubernetes.io/force-ssl-redirect:</span> <span class="hljs-string">&quot;true&quot;</span>
+    <span class="hljs-attr">nginx.ingress.kubernetes.io/proxy-body-size:</span> <span class="hljs-string">2048m</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">ingressClassName:</span> <span class="hljs-string">nginx</span>
+  <span class="hljs-attr">tls:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">hosts:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">milvustest.eastus2.cloudapp.azure.com</span> <span class="hljs-comment"># the FQDN</span>
+    <span class="hljs-attr">secretName:</span> <span class="hljs-string">tls-secret</span>
+  <span class="hljs-attr">rules:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">host:</span> <span class="hljs-string">milvustest.eastus2.cloudapp.azure.com</span>
+      <span class="hljs-attr">http:</span>
+        <span class="hljs-attr">paths:</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-attr">path:</span> <span class="hljs-string">/</span>
+            <span class="hljs-attr">pathType:</span> <span class="hljs-string">Prefix</span>
+            <span class="hljs-attr">backend:</span>
+              <span class="hljs-attr">service:</span>
+                <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-milvus</span>
+                <span class="hljs-attr">port:</span>
+                  <span class="hljs-attr">number:</span> <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify" class="common-anchor-header">Verify<button data-href="#Verify" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -209,12 +209,12 @@ spec:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-bash">kubectl <span class="hljs-keyword">get</span> certificate 
+    </button></h2><pre><code translate="no" class="language-bash">kubectl get certificate 
 NAME         READY   SECRET       AGE
-tls-secret   True    tls-secret   <span class="hljs-number">8</span>m7s
-kubectl <span class="hljs-keyword">get</span> ingress
+tls-secret   True    tls-secret   8m7s
+kubectl get ingress
 NAME                CLASS   HOSTS                                   ADDRESS        PORTS     AGE
-my-release-milvus   nginx   milvustest.eastus2.cloudapp.azure.com   EXTERNAL-IP   <span class="hljs-number">80</span>, <span class="hljs-number">443</span>   <span class="hljs-number">8</span>m15s
+my-release-milvus   nginx   milvustest.eastus2.cloudapp.azure.com   EXTERNAL-IP   80, 443   8m15s
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Hello-Milvus" class="common-anchor-header">Hello Milvus<button data-href="#Hello-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -232,5 +232,5 @@ my-release-milvus   nginx   milvustest.eastus2.cloudapp.azure.com   EXTERNAL-IP 
         ></path>
       </svg>
     </button></h2><p>Please refer to <a href="https://milvus.io/docs/v2.3.x/example_code.md">Hello Milvus</a>, change uri args, then run the code.</p>
-<pre><code translate="no" class="language-python">connections.<span class="hljs-title function_">connect</span>(<span class="hljs-string">&quot;default&quot;</span>,uri=<span class="hljs-string">&quot;https://milvustest.eastus2.cloudapp.azure.com:443&quot;</span>) 
+<pre><code translate="no" class="language-python">connections.connect(<span class="hljs-string">&quot;default&quot;</span>,uri=<span class="hljs-string">&quot;https://milvustest.eastus2.cloudapp.azure.com:443&quot;</span>) 
 <button class="copy-code-btn"></button></code></pre>

@@ -67,8 +67,8 @@ title: >-
 <li>Download the latest kafka from <a href="https://kafka.apache.org/downloads">here</a>.</li>
 <li>Unzip the downloaded file and go to the kafka directory.</li>
 </ol>
-<pre><code translate="no" class="language-shell">$ tar -xzf kafka_2.13-3.6.1.tgz
-$ <span class="hljs-built_in">cd</span> kafka_2.13-3.6.1
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">tar -xzf kafka_2.13-3.6.1.tgz</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> kafka_2.13-3.6.1</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="STEP-3-Start-the-Kafka-Environment" class="common-anchor-header">STEP 3: Start the Kafka Environment<button data-href="#STEP-3-Start-the-Kafka-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -91,11 +91,11 @@ $ <span class="hljs-built_in">cd</span> kafka_2.13-3.6.1
 <p>Run the following commands in order to start all services in the correct order:</p>
 <ol>
 <li><p>Start the ZooKeeper service</p>
-<pre><code translate="no" class="language-shell">$ bin/zookeeper-server-start.sh config/zookeeper.properties
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bin/zookeeper-server-start.sh config/zookeeper.properties</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Start the Kafka broker service</p>
 <p>Open another terminal session and run:</p>
-<pre><code translate="no" class="language-shell">$ bin/kafka-server-start.sh config/server.properties
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bin/kafka-server-start.sh config/server.properties</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <p>Once all services have successfully launched, you will have a basic Kafka environment running and ready to use.</p>
@@ -120,7 +120,7 @@ $ <span class="hljs-built_in">cd</span> kafka_2.13-3.6.1
     </button></h2><p>Ensure you have Kafka and Zilliz Cloud setup and properly configured.</p>
 <ol>
 <li><p>If you don’t already have a topic in Kafka, create a topic (e.g. <code translate="no">topic_0</code>) in Kafka.</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">bin</span>/kafka-topics.sh --create --topic topic_0 --bootstrap-server localhost:<span class="hljs-number">9092</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bin/kafka-topics.sh --create --topic topic_0 --bootstrap-server localhost:9092</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>If you don’t already have a collection in Zilliz Cloud, create a collection with a vector field (in this example the vector has <code translate="no">dimension=8</code>). You can use the following example schema on Zilliz Cloud:</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/collection_schema.png" width="100%"  alt=""/></p>
@@ -147,18 +147,18 @@ $ <span class="hljs-built_in">cd</span> kafka_2.13-3.6.1
 <li><p>unzip the <code translate="no">zilliz-kafka-connect-milvus-xxx.zip</code> file you downloaded in Step 1.</p></li>
 <li><p>copy the <code translate="no">zilliz-kafka-connect-milvus</code> directories to the <code translate="no">libs</code> directory of your Kafka installation.</p></li>
 <li><p>modify the <code translate="no">connect-standalone.properties</code> file in the <code translate="no">config</code> directory of your Kafka installation.</p>
-<pre><code translate="no" class="language-properties">key.converter.schemas.enable=<span class="hljs-literal">false</span>
-value.converter.schemas.enable=<span class="hljs-literal">false</span>
+<pre><code translate="no" class="language-properties">key.converter.schemas.enable=false
+value.converter.schemas.enable=false
 plugin.path=libs/zilliz-kafka-connect-milvus-xxx
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 <li><p>create and configure a <code translate="no">milvus-sink-connector.properties</code> file in the <code translate="no">config</code> directory of your Kafka installation.</p>
 <pre><code translate="no" class="language-properties">name=zilliz-kafka-connect-milvus
-connector.<span class="hljs-keyword">class</span>=com.milvus.io.kafka.MilvusSinkConnector
-<span class="hljs-keyword">public</span>.endpoint=https:<span class="hljs-comment">//&lt;public.endpoint&gt;:port</span>
+connector.class=com.milvus.io.kafka.MilvusSinkConnector
+public.endpoint=https://&lt;public.endpoint&gt;:port
 token=*****************************************
 collection.name=topic_0
 topics=topic_0
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 </ol>
 <h2 id="Step-6-Launch-the-connector" class="common-anchor-header">Step 6: Launch the connector<button data-href="#Step-6-Launch-the-connector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -177,11 +177,11 @@ topics=topic_0
       </svg>
     </button></h2><ol>
 <li><p>Start the connector with the previous configuration file</p>
-<pre><code translate="no" class="language-shell">$ bin/connect-standalone.sh config/connect-standalone.properties config/milvus-sink-connector.properties
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bin/connect-standalone.sh config/connect-standalone.properties config/milvus-sink-connector.properties</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Try produce a message to the Kafka topic you just created in Kafka</p>
-<pre><code translate="no" class="language-shell">bin/kafka-<span class="hljs-variable language_">console</span>-producer.<span class="hljs-property">sh</span> --topic topic_0 --bootstrap-server <span class="hljs-attr">localhost</span>:<span class="hljs-number">9092</span>                        
-&gt;{<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;The Reported Mortality Rate of Coronavirus Is Not Important&quot;</span>, <span class="hljs-string">&quot;title_vector&quot;</span>: [<span class="hljs-number">0.041732933</span>, <span class="hljs-number">0.013779674</span>, -<span class="hljs-number">0.027564144</span>, -<span class="hljs-number">0.013061441</span>, <span class="hljs-number">0.009748648</span>, <span class="hljs-number">0.00082446384</span>, -<span class="hljs-number">0.00071647146</span>, <span class="hljs-number">0.048612226</span>], <span class="hljs-string">&quot;link&quot;</span>: <span class="hljs-string">&quot;https://medium.com/swlh/the-reported-mortality-rate-of-coronavirus-is-not-important-369989c8d912&quot;</span>}
+<pre><code translate="no" class="language-shell">bin/kafka-console-producer.sh --topic topic_0 --bootstrap-server localhost:9092                        
+<span class="hljs-meta prompt_">&gt;</span><span class="language-bash">{<span class="hljs-string">&quot;id&quot;</span>: 0, <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;The Reported Mortality Rate of Coronavirus Is Not Important&quot;</span>, <span class="hljs-string">&quot;title_vector&quot;</span>: [0.041732933, 0.013779674, -0.027564144, -0.013061441, 0.009748648, 0.00082446384, -0.00071647146, 0.048612226], <span class="hljs-string">&quot;link&quot;</span>: <span class="hljs-string">&quot;https://medium.com/swlh/the-reported-mortality-rate-of-coronavirus-is-not-important-369989c8d912&quot;</span>}</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Check if the entity has been inserted into the collection in Zilliz Cloud. Here is what it looks like on Zilliz Cloud if the insertion succeeds:</p>
 <p><img translate="no" src="https://github.com/zilliztech/kafka-connect-milvus/raw/main/src/main/resources/images/insearted_entities.png" width="80%" /></p></li>

@@ -38,14 +38,14 @@ title: Deploying FastGPT with Milvus
       </svg>
     </button></h2><p>Ensure that you have already installed <a href="https://docs.docker.com/compose/">Docker Compose</a>.<br>
 Execute the command below to download the docker-compose.yml file.</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">mkdir</span> fastgpt
-$ <span class="hljs-built_in">cd</span> fastgpt
-$ curl -O https://raw.githubusercontent.com/labring/FastGPT/main/projects/app/data/config.json
-
-<span class="hljs-comment"># milvus version</span>
-$ curl -o docker-compose.yml https://raw.githubusercontent.com/labring/FastGPT/main/files/docker/docker-compose-milvus.yml
-<span class="hljs-comment"># zilliz version</span>
-<span class="hljs-comment"># curl -o docker-compose.yml https://raw.githubusercontent.com/labring/FastGPT/main/files/docker/docker-compose-zilliz.yml</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mkdir</span> fastgpt</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> fastgpt</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -O https://raw.githubusercontent.com/labring/FastGPT/main/projects/app/data/config.json</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">milvus version</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -o docker-compose.yml https://raw.githubusercontent.com/labring/FastGPT/main/files/docker/docker-compose-milvus.yml</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">zilliz version</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">curl -o docker-compose.yml https://raw.githubusercontent.com/labring/FastGPT/main/files/docker/docker-compose-zilliz.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
 <p>If you’re using the Zilliz version, adjust the <code translate="no">MILVUS_ADDRESS</code> and <code translate="no">MILVUS_TOKEN</code> link parameters in the docker-compose.yml file, which corresponds to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
@@ -66,12 +66,12 @@ $ curl -o docker-compose.yml https://raw.githubusercontent.com/labring/FastGPT/m
         ></path>
       </svg>
     </button></h2><p>Execute in the same directory as docker-compose.yml. Ensure that the docker-compose version is ideally above 2.17, as some automation commands may not function otherwise.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Launch the container</span>
-$ docker compose up -d
-<span class="hljs-comment"># Wait for 10s, OneAPI typically needs to restart a few times to initially connect to Mysql</span>
-$ sleep <span class="hljs-number">10</span>
-<span class="hljs-comment"># Restart oneapi (Due to certain issues with the default Key of OneAPI, it will display &#x27;channel not found&#x27; if not restarted, this can be temporarily resolved by manually restarting once, while waiting for the author&#x27;s fix)</span>
-$ docker restart oneapi
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Launch the container</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Wait <span class="hljs-keyword">for</span> 10s, OneAPI typically needs to restart a few <span class="hljs-built_in">times</span> to initially connect to Mysql</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sleep</span> 10</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Restart oneapi (Due to certain issues with the default Key of OneAPI, it will display <span class="hljs-string">&#x27;channel not found&#x27;</span> <span class="hljs-keyword">if</span> not restarted, this can be temporarily resolved by manually restarting once, <span class="hljs-keyword">while</span> waiting <span class="hljs-keyword">for</span> the author<span class="hljs-string">&#x27;s fix)</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-string">docker restart oneapi</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Access-OneAPI-to-Add-Models" class="common-anchor-header">Access OneAPI to Add Models<button data-href="#Access-OneAPI-to-Add-Models" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -89,7 +89,7 @@ $ docker restart oneapi
         ></path>
       </svg>
     </button></h2><p>OneAPI can be accessed at <code translate="no">ip:3001</code>. The default username is root, and the password is 123456. You can alter the password after logging in.<br>
-Using OpenAI’s model as an example, click on the “Channel” tab, and select your chat model and embedding model under &quot;Models&quot;.<br>
+Using OpenAI’s model as an example, click on the “Channel” tab, and select your chat model and embedding model under "Models".<br>
 Input your <a href="https://platform.openai.com/docs/quickstart">OpenAI API Key</a> in the “Secrets” section.<br>
 For the use of models beyond OpenAI, and further information, please consult <a href="https://doc.fastgpt.in/docs/development/one-api/">One API</a>.</p>
 <h2 id="Setting-Tokens" class="common-anchor-header">Setting Tokens<button data-href="#Setting-Tokens" class="anchor-icon" translate="no">
@@ -141,5 +141,5 @@ Click “Copy” on your token, ensuring that the value of this token matches th
         ></path>
       </svg>
     </button></h2><p>Run the following command to stop the container.</p>
-<pre><code translate="no" class="language-shell">$ docker compose down
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose down</span>
 <button class="copy-code-btn"></button></code></pre>

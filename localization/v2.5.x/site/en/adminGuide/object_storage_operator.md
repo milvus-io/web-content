@@ -23,7 +23,7 @@ summary: Learn how to configure object storage with Milvus Operator.
 <p>This topic assumes that you have deployed Milvus Operator.</p>
 <div class="alert note">See <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
 <p>You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.</p>
-<pre><code translate="no" class="language-YAML">kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
+<pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>You only need to edit the code template in <code translate="no">milvus_cluster_default.yaml</code> to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.</p>
 <h2 id="Configure-object-storage" class="common-anchor-header">Configure object storage<button data-href="#Configure-object-storage" class="anchor-icon" translate="no">
@@ -43,25 +43,25 @@ summary: Learn how to configure object storage with Milvus Operator.
       </svg>
     </button></h2><p>A Milvus cluster uses MinIO or S3 as object storage to persist large-scale files, such as index files and binary logs. Add required fields under <code translate="no">spec.dependencies.storage</code> to configure object storage, possible options are <code translate="no">external</code> and <code translate="no">inCluster</code>.</p>
 <h3 id="Internal-object-storage" class="common-anchor-header">Internal object storage</h3><p>By default, Milvus Operator deploys an in-cluster MinIO for Milvus. The following is an example configuration to demonstrate how to use this MinIO as an internal object storage.</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
   <span class="hljs-comment"># Omit other fields ...</span>
-  dependencies:
+  <span class="hljs-attr">dependencies:</span>
     <span class="hljs-comment"># Omit other fields ...</span>
-    storage:
-      inCluster:
-        values:
-          mode: standalone
-          resources:
-            requests:
-              memory: 100Mi
-        deletionPolicy: Delete <span class="hljs-comment"># Delete | Retain, default: Retain</span>
-        pvcDeletion: true <span class="hljs-comment"># default: false</span>
+    <span class="hljs-attr">storage:</span>
+      <span class="hljs-attr">inCluster:</span>
+        <span class="hljs-attr">values:</span>
+          <span class="hljs-attr">mode:</span> <span class="hljs-string">standalone</span>
+          <span class="hljs-attr">resources:</span>
+            <span class="hljs-attr">requests:</span>
+              <span class="hljs-attr">memory:</span> <span class="hljs-string">100Mi</span>
+        <span class="hljs-attr">deletionPolicy:</span> <span class="hljs-string">Delete</span> <span class="hljs-comment"># Delete | Retain, default: Retain</span>
+        <span class="hljs-attr">pvcDeletion:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># default: false</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After the above configuration applies, the in-cluster MinIO will run in standalone mode with a memory limit of up to 100Mi. Note that</p>
 <ul>
@@ -78,76 +78,76 @@ spec:
 <li><p>Configure AWS S3 Access by AK/SK</p>
 <p>An S3 bucket can usually be accessed by a pair of an access key and an access secret key. You can create a <code translate="no">Secret</code> object to store them in your Kubernetes as follows:</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-comment"># # change the &lt;parameters&gt; to match your environment</span>
-apiVersion: v1
-kind: Secret
-metadata:
-  name: my-release-s3-secret
-<span class="hljs-built_in">type</span>: Opaque
-stringData:
-  accesskey: &lt;my-access-key&gt;
-  secretkey: &lt;my-secret-key&gt;
+<span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Secret</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-s3-secret</span>
+<span class="hljs-attr">type:</span> <span class="hljs-string">Opaque</span>
+<span class="hljs-attr">stringData:</span>
+  <span class="hljs-attr">accesskey:</span> <span class="hljs-string">&lt;my-access-key&gt;</span>
+  <span class="hljs-attr">secretkey:</span> <span class="hljs-string">&lt;my-secret-key&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then you can configure an AWS S3 bucket as the external object storage:</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-comment"># # change the &lt;parameters&gt; to match your environment</span>
-apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
+<span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
   <span class="hljs-comment"># Omit other fields ...</span>
-  config:
-    minio:
+  <span class="hljs-attr">config:</span>
+    <span class="hljs-attr">minio:</span>
       <span class="hljs-comment"># your bucket name</span>
-      bucketName: &lt;my-bucket&gt;
+      <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&lt;my-bucket&gt;</span>
       <span class="hljs-comment"># Optional, config the prefix of the bucket milvus will use</span>
-      rootPath: milvus/my-release
-      useSSL: true
-  dependencies:
-    storage:
+      <span class="hljs-attr">rootPath:</span> <span class="hljs-string">milvus/my-release</span>
+      <span class="hljs-attr">useSSL:</span> <span class="hljs-literal">true</span>
+  <span class="hljs-attr">dependencies:</span>
+    <span class="hljs-attr">storage:</span>
       <span class="hljs-comment"># enable external object storage</span>
-      external: true
-      <span class="hljs-built_in">type</span>: S3 <span class="hljs-comment"># MinIO | S3</span>
+      <span class="hljs-attr">external:</span> <span class="hljs-literal">true</span>
+      <span class="hljs-attr">type:</span> <span class="hljs-string">S3</span> <span class="hljs-comment"># MinIO | S3</span>
       <span class="hljs-comment"># the endpoint of AWS S3</span>
-      endpoint: s3.amazonaws.com:<span class="hljs-number">443</span>
+      <span class="hljs-attr">endpoint:</span> <span class="hljs-string">s3.amazonaws.com:443</span>
       <span class="hljs-comment"># the secret storing the access key and secret key</span>
-      secretRef: <span class="hljs-string">&quot;my-release-s3-secret&quot;</span>
+      <span class="hljs-attr">secretRef:</span> <span class="hljs-string">&quot;my-release-s3-secret&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Configure AWS S3 Access by AssumeRole</p>
 <p>Alternatively, you can make Milvus access your AWS S3 bucket using <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">AssumeRole</a>, so that only temporary credentials are involved instead of your actual AK/SK.</p>
 <p>If this is what you prefer, you need to prepare a role on your AWS console and get its ARN, which is usually in the form of <code translate="no">arn:aws:iam::&lt;your account id&gt;:role/&lt;role-name&gt;</code>.</p>
 <p>Then create a <code translate="no">ServiceAccount</code> object to store it in your Kubernetes as follows:</p>
-<pre><code translate="no" class="language-YAML">apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: my-release-sa
-  annotations:
-    eks.amazonaws.com/role-arn: &lt;my-role-arn&gt;
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">ServiceAccount</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-sa</span>
+  <span class="hljs-attr">annotations:</span>
+    <span class="hljs-attr">eks.amazonaws.com/role-arn:</span> <span class="hljs-string">&lt;my-role-arn&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Once all set, reference the above <code translate="no">ServiceAccount</code> in the template YAML file, and set <code translate="no">spec.config.minio.useIAM</code> to <code translate="no">true</code> to enable AssumeRole.</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
   <span class="hljs-comment"># Omit other fields ...</span>
-  components:
+  <span class="hljs-attr">components:</span>
     <span class="hljs-comment"># use the above ServiceAccount</span>
-    serviceAccountName: my-release-sa
-  config:
-    minio:
+    <span class="hljs-attr">serviceAccountName:</span> <span class="hljs-string">my-release-sa</span>
+  <span class="hljs-attr">config:</span>
+    <span class="hljs-attr">minio:</span>
       <span class="hljs-comment"># enable AssumeRole</span>
-      useIAM: true
+      <span class="hljs-attr">useIAM:</span> <span class="hljs-literal">true</span>
       <span class="hljs-comment"># Omit other fields ...</span>
-  dependencies:
-    storage:
+  <span class="hljs-attr">dependencies:</span>
+    <span class="hljs-attr">storage:</span>
       <span class="hljs-comment"># Omit other fields ...</span>
-      <span class="hljs-comment"># Note: you must use regional endpoint here, otherwise the minio client that milvus uses will fail to connect</span>
-      endpoint: s3.&lt;my-bucket-region&gt;.amazonaws.com:<span class="hljs-number">443</span>
-      secretRef: <span class="hljs-string">&quot;&quot;</span> <span class="hljs-comment"># we don&#x27;t need to specify the secret here</span>
+      <span class="hljs-comment"># <span class="hljs-doctag">Note:</span> you must use regional endpoint here, otherwise the minio client that milvus uses will fail to connect</span>
+      <span class="hljs-attr">endpoint:</span> <span class="hljs-string">s3.&lt;my-bucket-region&gt;.amazonaws.com:443</span>
+      <span class="hljs-attr">secretRef:</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-comment"># we don&#x27;t need to specify the secret here</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h4 id="Use-Google-Cloud-Storage-GCS-as-external-object-storage" class="common-anchor-header">Use Google Cloud Storage (GCS) as external object storage</h4><p>AWS S3 object storage is not the only choice. You can also use the object storage service from other public cloud providers, such as Google Cloud.</p>
@@ -155,56 +155,56 @@ spec:
 <li><p>Configure GCS Access by AK/SK</p>
 <p>The configuration is mostly similar to that of using AWS S3. You still need to create a <code translate="no">Secret</code> object to store your credentials in your Kubernetes.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-comment"># # change the &lt;parameters&gt; to match your environment</span>
-apiVersion: v1
-kind: Secret
-metadata:
-  name: my-release-gcp-secret
-<span class="hljs-built_in">type</span>: Opaque
-stringData:
-  accesskey: &lt;my-access-key&gt;
-  secretkey: &lt;my-secret-key&gt;
+<span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Secret</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-gcp-secret</span>
+<span class="hljs-attr">type:</span> <span class="hljs-string">Opaque</span>
+<span class="hljs-attr">stringData:</span>
+  <span class="hljs-attr">accesskey:</span> <span class="hljs-string">&lt;my-access-key&gt;</span>
+  <span class="hljs-attr">secretkey:</span> <span class="hljs-string">&lt;my-secret-key&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then, you only need to change <code translate="no">endpoint</code> to <code translate="no">storage.googleapis.com:443</code> and set <code translate="no">spec.config.minio.cloudProvider</code> to <code translate="no">gcp</code> as follows:</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-comment"># # change the &lt;parameters&gt; to match your environment</span>
-apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
+<span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
   <span class="hljs-comment"># Omit other fields ...</span>
-  config:
-    minio:
-      cloudProvider: gcp
-  dependencies:
-    storage:
+  <span class="hljs-attr">config:</span>
+    <span class="hljs-attr">minio:</span>
+      <span class="hljs-attr">cloudProvider:</span> <span class="hljs-string">gcp</span>
+  <span class="hljs-attr">dependencies:</span>
+    <span class="hljs-attr">storage:</span>
       <span class="hljs-comment"># Omit other fields ...</span>
-      endpoint: storage.googleapis.com:<span class="hljs-number">443</span>
+      <span class="hljs-attr">endpoint:</span> <span class="hljs-string">storage.googleapis.com:443</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Configure GCS Access by AssumeRole</p>
 <p>Similar to AWS S3, you can also use <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity">Workload Identity</a> to access GCS with temporary credentials if you are using GKE as your Kubernetes cluster.</p>
 <p>The annotation of the <code translate="no">ServiceAccount</code> is different from that of AWS EKS. You need to specify the GCP service account name instead of the role ARN.</p>
-<pre><code translate="no" class="language-YAML">apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: my-release-sa
-  annotations:
-    iam.gke.io/gcp-service-account: &lt;my-gcp-service-account-name&gt;
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">ServiceAccount</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release-sa</span>
+  <span class="hljs-attr">annotations:</span>
+    <span class="hljs-attr">iam.gke.io/gcp-service-account:</span> <span class="hljs-string">&lt;my-gcp-service-account-name&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then, you can configure your Milvus instance to use the above <code translate="no">ServiceAccount</code> and enable AssumeRole by setting <code translate="no">spec.config.minio.useIAM</code> to <code translate="no">true</code> as follows:</p>
-<pre><code translate="no" class="language-YAML">labels:
-    app: milvus
-spec:
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
   <span class="hljs-comment"># Omit other fields ...</span>
-  components:
+  <span class="hljs-attr">components:</span>
     <span class="hljs-comment"># use the above ServiceAccount</span>
-    serviceAccountName: my-release-sa
-  config:
-    minio:
-      cloudProvider: gcp
+    <span class="hljs-attr">serviceAccountName:</span> <span class="hljs-string">my-release-sa</span>
+  <span class="hljs-attr">config:</span>
+    <span class="hljs-attr">minio:</span>
+      <span class="hljs-attr">cloudProvider:</span> <span class="hljs-string">gcp</span>
       <span class="hljs-comment"># enable AssumeRole</span>
-      useIAM: true
+      <span class="hljs-attr">useIAM:</span> <span class="hljs-literal">true</span>
       <span class="hljs-comment"># Omit other fields ...  </span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

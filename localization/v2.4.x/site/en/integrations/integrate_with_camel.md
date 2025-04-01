@@ -82,12 +82,12 @@ response = requests.get(url)
       </svg>
     </button></h2><p>In this section we will set our customized RAG pipeline, we will take <code translate="no">VectorRetriever</code> as an example. We will set <code translate="no">OpenAIEmbedding</code> as the embeddding model and <code translate="no">MilvusStorage</code> as the storage for it.</p>
 <p>To set OpenAI embedding, we need to set the <code translate="no">OPENAI_API_KEY</code> in below.</p>
-<pre><code translate="no" class="language-python">os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
+<pre><code translate="no" class="language-python">os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Import and set the embedding instance:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.<span class="hljs-property">embeddings</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAIEmbedding</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.embeddings <span class="hljs-keyword">import</span> OpenAIEmbedding
 
-embedding_instance = <span class="hljs-title class_">OpenAIEmbedding</span>()
+embedding_instance = OpenAIEmbedding()
 <button class="copy-code-btn"></button></code></pre>
 <p>Import and set the vector storage instance:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.storages <span class="hljs-keyword">import</span> MilvusStorage
@@ -111,14 +111,14 @@ storage_instance = MilvusStorage(
 </div>
 <p>Import and set the retriever instance:</p>
 <p>By default, the <code translate="no">similarity_threshold</code> is set to 0.75. You can change it.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.<span class="hljs-property">retrievers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">VectorRetriever</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> VectorRetriever
 
-vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
+vector_retriever = VectorRetriever(
     embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>We use integrated <code translate="no">Unstructured Module</code> to split the content into small chunks, the content will be splited automacitlly with its <code translate="no">chunk_by_title</code> function, the max character for each chunk is 500 characters, which is a suitable length for <code translate="no">OpenAIEmbedding</code>. All the text in the chunks will be embed and stored to the vector storage instance, it will take some time, please wait.</p>
-<pre><code translate="no" class="language-python">vector_retriever.<span class="hljs-title function_">process</span>(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
+<pre><code translate="no" class="language-python">vector_retriever.process(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...
 [nltk_data]   Unzipping tokenizers/punkt.zip.

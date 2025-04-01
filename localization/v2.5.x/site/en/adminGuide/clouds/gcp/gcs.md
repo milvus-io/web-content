@@ -55,7 +55,7 @@ For more details, refer to <a href="https://cloud.google.com/kubernetes-engine/d
     </button></h2><ul>
 <li>Create bucket.</li>
 </ul>
-<pre><code translate="no" class="language-bash">gcloud storage buckets create <span class="hljs-attr">gs</span>:<span class="hljs-comment">//milvus-testing-nonprod --project=milvus-testing-nonprod --default-storage-class=STANDARD --location=us-west1 --uniform-bucket-level-access</span>
+<pre><code translate="no" class="language-bash">gcloud storage buckets create gs://milvus-testing-nonprod --project=milvus-testing-nonprod --default-storage-class=STANDARD --location=us-west1 --uniform-bucket-level-access
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Create a Kubernetes service account for your application to use.</li>
@@ -71,7 +71,7 @@ For more details, refer to <a href="https://cloud.google.com/kubernetes-engine/d
 <ul>
 <li>Ensure that your IAM service account has the roles you need. You can grant additional roles using the following command:</li>
 </ul>
-<pre><code translate="no" class="language-bash">gcloud projects <span class="hljs-keyword">add</span>-iam-policy-binding milvus-testing-nonprod \
+<pre><code translate="no" class="language-bash">gcloud projects add-iam-policy-binding milvus-testing-nonprod \
     --member <span class="hljs-string">&quot;serviceAccount:milvus-gcs-access-sa@milvus-testing-nonprod.iam.gserviceaccount.com&quot;</span> \
     --role <span class="hljs-string">&quot;roles/storage.admin&quot;</span> \
     --condition=<span class="hljs-string">&#x27;title=milvus-testing-nonprod,expression=resource.service == &quot;storage.googleapis.com&quot; &amp;&amp; resource.name.startsWith(&quot;projects/_/buckets/milvus-testing-nonprod&quot;)&#x27;</span>
@@ -79,7 +79,7 @@ For more details, refer to <a href="https://cloud.google.com/kubernetes-engine/d
 <ul>
 <li>Allow the Kubernetes service account to impersonate the IAM service account by adding an IAM policy binding between the two service accounts. This binding allows the Kubernetes service account to act as the IAM service account.</li>
 </ul>
-<pre><code translate="no" class="language-bash">gcloud iam service-accounts add-iam-policy-binding milvus-gcs-access-sa<span class="hljs-meta">@milvus</span>-testing-nonprod.iam.gserviceaccount.com \
+<pre><code translate="no" class="language-bash">gcloud iam service-accounts add-iam-policy-binding milvus-gcs-access-sa@milvus-testing-nonprod.iam.gserviceaccount.com \
     --role <span class="hljs-string">&quot;roles/iam.workloadIdentityUser&quot;</span> \
     --member <span class="hljs-string">&quot;serviceAccount:milvus-testing-nonprod.svc.id.goog[default/milvus-gcs-access-sa]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -87,8 +87,8 @@ For more details, refer to <a href="https://cloud.google.com/kubernetes-engine/d
 <li>Annotate the Kubernetes service account with the email address of the IAM service account.</li>
 </ul>
 <pre><code translate="no" class="language-bash">kubectl annotate serviceaccount milvus-gcs-access-sa \
-    --namespace <span class="hljs-keyword">default</span> \
-    iam.gke.io/gcp-service-account=milvus-gcs-access-sa<span class="hljs-meta">@milvus</span>-testing-nonprod.iam.gserviceaccount.com
+    --namespace default \
+    iam.gke.io/gcp-service-account=milvus-gcs-access-sa@milvus-testing-nonprod.iam.gserviceaccount.com
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-the-Workload-Identity-setup" class="common-anchor-header">Verify the Workload Identity setup<button data-href="#Verify-the-Workload-Identity-setup" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -127,26 +127,26 @@ For more details, refer to <a href="https://cloud.google.com/kubernetes-engine/d
     </button></h2><pre><code translate="no" class="language-bash">helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>the values.yaml contents:</p>
-<pre><code translate="no" class="language-yaml">cluster:
-    enabled: <span class="hljs-literal">true</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">cluster:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
 
-service:
-    <span class="hljs-built_in">type</span>: LoadBalancer
+<span class="hljs-attr">service:</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">LoadBalancer</span>
 
-minio:
-    enabled: <span class="hljs-literal">false</span>
+<span class="hljs-attr">minio:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 
-serviceAccount:
-    create: <span class="hljs-literal">false</span>
-    name: milvus-gcs-access-sa
+<span class="hljs-attr">serviceAccount:</span>
+    <span class="hljs-attr">create:</span> <span class="hljs-literal">false</span>
+    <span class="hljs-attr">name:</span> <span class="hljs-string">milvus-gcs-access-sa</span>
 
-externalS3:
-    enabled: <span class="hljs-literal">true</span>
-    host: storage.googleapis.com
-    port: 443
-    rootPath: milvus/my-release
-    bucketName: milvus-testing-nonprod
-    cloudProvider: gcp
-    useSSL: <span class="hljs-literal">true</span>
-    useIAM: <span class="hljs-literal">true</span>
+<span class="hljs-attr">externalS3:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">host:</span> <span class="hljs-string">storage.googleapis.com</span>
+    <span class="hljs-attr">port:</span> <span class="hljs-number">443</span>
+    <span class="hljs-attr">rootPath:</span> <span class="hljs-string">milvus/my-release</span>
+    <span class="hljs-attr">bucketName:</span> <span class="hljs-string">milvus-testing-nonprod</span>
+    <span class="hljs-attr">cloudProvider:</span> <span class="hljs-string">gcp</span>
+    <span class="hljs-attr">useSSL:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">useIAM:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>

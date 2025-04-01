@@ -38,8 +38,8 @@ title: Image Search with Milvus
         ></path>
       </svg>
     </button></h2><p>First, we need to load the dataset and unextract it for further processing.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.<span class="hljs-built_in">zip</span>
-$ unzip -q -o reverse_image_search.<span class="hljs-built_in">zip</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.zip</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q -o reverse_image_search.zip</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Prequisites" class="common-anchor-header">Prequisites<button data-href="#Prequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,7 +58,7 @@ $ unzip -q -o reverse_image_search.<span class="hljs-built_in">zip</span>
       </svg>
     </button></h2><p>To run this notebook, you need to have the following dependencies installed:</p>
 <ul>
-<li>pymilvus&gt;=2.4.2</li>
+<li>pymilvus>=2.4.2</li>
 <li>timm</li>
 <li>torch</li>
 <li>numpy</li>
@@ -66,8 +66,8 @@ $ unzip -q -o reverse_image_search.<span class="hljs-built_in">zip</span>
 <li>pillow</li>
 </ul>
 <p>To run Colab, we provide the handy commands to install the necessary dependencies.</p>
-<pre><code translate="no" class="language-shell">$ pip install pymilvus --upgrade
-$ pip install timm
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus --upgrade</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install timm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong>. (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>

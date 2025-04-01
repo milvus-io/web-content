@@ -37,7 +37,7 @@ title: Back up and Restore Data Using Commands
     </button></h2><p>You can either download the compiled binary or build from the source.</p>
 <p>To download the compiled binary, go to the <a href="https://github.com/zilliztech/milvus-backup/releases">release</a> page, where you can find all official releases. Remember, always use the binaries in the release marked as <strong>Latest</strong>.</p>
 <p>To compile from the source, do as follows:</p>
-<pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> git@github.com:zilliztech/milvus-backup.git
+<pre><code translate="no" class="language-shell">git clone git@github.com:zilliztech/milvus-backup.git
 go get
 go build
 <button class="copy-code-btn"></button></code></pre>
@@ -121,13 +121,13 @@ workspace
 <p>Once the command is executed, you can check the backup files in the bucket specified in the Minio settings. Specifically, you can download them using <strong>Minio Console</strong> or the <strong>mc</strong> client.</p>
 <p>To download from <a href="https://min.io/docs/minio/kubernetes/upstream/administration/minio-console.html">Minio Console</a>, log into Minio Console, locate the bucket specified in <code translate="no">minio.address</code>, select the files in the bucket, and click <strong>Download</strong> to download them.</p>
 <p>If you prefer <a href="https://min.io/docs/minio/linux/reference/minio-mc.html#mc-install">the mc client</a>, do as follows:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># configure a Minio host</span>
-mc alias <span class="hljs-built_in">set</span> my_minio https://&lt;minio_endpoint&gt; &lt;accessKey&gt; &lt;secretKey&gt;
-
-<span class="hljs-comment"># List the available buckets</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">configure a Minio host</span>
+mc alias set my_minio https://&lt;minio_endpoint&gt; &lt;accessKey&gt; &lt;secretKey&gt;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">List the available buckets</span>
 mc ls my_minio
-
-<span class="hljs-comment"># Download a bucket recursively</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Download a bucket recursively</span>
 mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <button class="copy-code-btn"></button></code></pre>
 <p>Now, you can save the backup files to a safe place for restoration in the future, or upload them to <a href="https://cloud.zilliz.com">Zilliz Cloud</a> to create a managed vector database with your data. For details, refer to <a href="https://zilliz.com/doc/migrate_from_milvus-2x">Migrate from Milvus to Zilliz Cloud</a>.</p>

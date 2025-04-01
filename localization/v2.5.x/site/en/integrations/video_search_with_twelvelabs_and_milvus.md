@@ -77,21 +77,21 @@ Python 3.7 or later installed on your system</p>
         ></path>
       </svg>
     </button></h2><p>Create a new directory for your project and navigate to it:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">mkdir</span> video-search-tutorial
-<span class="hljs-built_in">cd</span> video-search-tutorial
+<pre><code translate="no" class="language-shell">mkdir video-search-tutorial
+cd video-search-tutorial
 <button class="copy-code-btn"></button></code></pre>
 <p>Set up a virtual environment (optional but recommended):</p>
 <pre><code translate="no" class="language-shell">python -m venv venv
-<span class="hljs-built_in">source</span> venv/bin/activate  <span class="hljs-comment"># On Windows, use `venv\Scripts\activate`</span>
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 <button class="copy-code-btn"></button></code></pre>
 <p>Install the required Python libraries:</p>
 <pre><code translate="no" class="language-shell">pip install twelvelabs pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Create a new Python file for your project:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">touch</span> video_search.py
+<pre><code translate="no" class="language-shell">touch video_search.py
 <button class="copy-code-btn"></button></code></pre>
 <p>This video_search.py file will be the main script we use for the tutorial. Next, set up your Twelve Labs API key as an environment variable for security:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> <span class="hljs-variable constant_">TWELVE_LABS_API_KEY</span>=<span class="hljs-string">&#x27;your_api_key_here&#x27;</span>
+<pre><code translate="no" class="language-shell">export TWELVE_LABS_API_KEY=&#x27;your_api_key_here&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connecting-to-Milvus" class="common-anchor-header">Connecting to Milvus<button data-href="#Connecting-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

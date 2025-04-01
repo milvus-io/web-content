@@ -71,26 +71,26 @@ summary: >-
       </svg>
     </button></h2><p>The Clustering Compaction feature in Milvus is highly configurable. You can choose to trigger it manually or set it to be triggered automatically at intervals by Milvus. To enable clustering compaction, do as follows:</p>
 <h3 id="Global-Configuration" class="common-anchor-header">Global Configuration</h3><p>You need to modify your Milvus configuration file as shown below.</p>
-<pre><code translate="no" class="language-yaml">dataCoord:
-  compaction:
-    clustering:
-      <span class="hljs-built_in">enable</span>: <span class="hljs-literal">true</span> 
-      autoEnable: <span class="hljs-literal">false</span> 
-      triggerInterval: 600 
-      minInterval: 3600 
-      maxInterval: 259200 
-      newDataSizeThreshold: 512m 
-      <span class="hljs-built_in">timeout</span>: 7200
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
+  <span class="hljs-attr">compaction:</span>
+    <span class="hljs-attr">clustering:</span>
+      <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span> 
+      <span class="hljs-attr">autoEnable:</span> <span class="hljs-literal">false</span> 
+      <span class="hljs-attr">triggerInterval:</span> <span class="hljs-number">600</span> 
+      <span class="hljs-attr">minInterval:</span> <span class="hljs-number">3600</span> 
+      <span class="hljs-attr">maxInterval:</span> <span class="hljs-number">259200</span> 
+      <span class="hljs-attr">newDataSizeThreshold:</span> <span class="hljs-string">512m</span> 
+      <span class="hljs-attr">timeout:</span> <span class="hljs-number">7200</span>
      
-queryNode:
-  enableSegmentPrune: <span class="hljs-literal">true</span> 
+<span class="hljs-attr">queryNode:</span>
+  <span class="hljs-attr">enableSegmentPrune:</span> <span class="hljs-literal">true</span> 
 
-datanode:
-  clusteringCompaction:
-    memoryBufferRatio: 0.1 
-    workPoolSize: 8  
-common:
-  usePartitionKeyAsClusteringKey: <span class="hljs-literal">true</span> 
+<span class="hljs-attr">datanode:</span>
+  <span class="hljs-attr">clusteringCompaction:</span>
+    <span class="hljs-attr">memoryBufferRatio:</span> <span class="hljs-number">0.1</span> 
+    <span class="hljs-attr">workPoolSize:</span> <span class="hljs-number">8</span>  
+<span class="hljs-attr">common:</span>
+  <span class="hljs-attr">usePartitionKeyAsClusteringKey:</span> <span class="hljs-literal">true</span> 
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">dataCoord.compaction.clustering</code></p>

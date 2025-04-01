@@ -77,7 +77,7 @@ title: Consistency
   </span>
 </p>
 <p>We recommend choosing session as the consistency level for those scenarios where the demand for data consistency in the same session is high. An example can be deleting the data of a book entry from the library system, and after confirmation of the deletion and refreshing the page (a different session), the book should no longer be visible in the search results.</p>
-<h3 id="Eventually" class="common-anchor-header">Eventually</h3><p>There is no guaranteed order of reads and writes, and replicas eventually converge to the same state given that no further write operations are done. Under the consistency of &quot;eventually&quot;, replicas start working on read requests with the latest updated values. Eventually consistent is the weakest level among the four.</p>
+<h3 id="Eventually" class="common-anchor-header">Eventually</h3><p>There is no guaranteed order of reads and writes, and replicas eventually converge to the same state given that no further write operations are done. Under the consistency of "eventually", replicas start working on read requests with the latest updated values. Eventually consistent is the weakest level among the four.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.4.x/assets/Consistency_Eventual.png" alt="Eventual consistency" class="doc-image" id="eventual-consistency" />

@@ -173,14 +173,14 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/upsert&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;data&quot;: [​
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},​
         {&quot;id&quot;: 1, &quot;vector&quot;: [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], &quot;color&quot;: &quot;red_7025&quot;},​
@@ -194,28 +194,28 @@ curl --request POST \​
         {&quot;id&quot;: 9, &quot;vector&quot;: [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], &quot;color&quot;: &quot;purple_4976&quot;}        ​
     ],​
     &quot;collectionName&quot;: &quot;quick_setup&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: {​</span>
-<span class="hljs-comment">#         &quot;upsertCount&quot;: 10,​</span>
-<span class="hljs-comment">#         &quot;upsertIds&quot;: [​</span>
-<span class="hljs-comment">#             0,​</span>
-<span class="hljs-comment">#             1,​</span>
-<span class="hljs-comment">#             2,​</span>
-<span class="hljs-comment">#             3,​</span>
-<span class="hljs-comment">#             4,​</span>
-<span class="hljs-comment">#             5,​</span>
-<span class="hljs-comment">#             6,​</span>
-<span class="hljs-comment">#             7,​</span>
-<span class="hljs-comment">#             8,​</span>
-<span class="hljs-comment">#             9​</span>
-<span class="hljs-comment">#         ]​</span>
-<span class="hljs-comment">#     }​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: {​
+#         &quot;upsertCount&quot;: 10,​
+#         &quot;upsertIds&quot;: [​
+#             0,​
+#             1,​
+#             2,​
+#             3,​
+#             4,​
+#             5,​
+#             6,​
+#             7,​
+#             8,​
+#             9​
+#         ]​
+#     }​
+# }​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Upsert-Entities-in-a-Partition​" class="common-anchor-header">Upsert Entities in a Partition​<button data-href="#Upsert-Entities-in-a-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -264,32 +264,32 @@ res = client.upsert(​
 <span class="hljs-comment"># {&#x27;upsert_count&#x27;: 10}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">import io.milvus.v2.service.vector.request.UpsertReq;​
-import io.milvus.v2.service.vector.response.UpsertResp;​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.UpsertReq;​
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.UpsertResp;​
 ​
 ​
-Gson gson = <span class="hljs-keyword">new</span> Gson();​
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();​
 List&lt;JsonObject&gt; data = Arrays.asList(​
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 10, \&quot;vector\&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], \&quot;color\&quot;: \&quot;black_3651\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>),​
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 11, \&quot;vector\&quot;: [0.6060703043917468, -0.3765080534566074, -0.7710758854987239, 0.36993888322346136, 0.5507513364206531], \&quot;color\&quot;: \&quot;grey_2049\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>),​
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 12, \&quot;vector\&quot;: [-0.9041813104515337, -0.9610546012461163, 0.20033003106083358, 0.11842506351635174, 0.8327356724591011], \&quot;color\&quot;: \&quot;blue_6168\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>),​
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 13, \&quot;vector\&quot;: [0.3202914977909075, -0.7279137773695252, -0.04747830871620273, 0.8266053056909548, 0.8277957187455489], \&quot;color\&quot;: \&quot;blue_1672\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>),​
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 14, \&quot;vector\&quot;: [0.2975811497890859, 0.2946936202691086, 0.5399463833894609, 0.8385334966677529, -0.4450543984655133], \&quot;color\&quot;: \&quot;pink_1601\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>),​
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 15, \&quot;vector\&quot;: [-0.04697464305600074, -0.08509022265734134, 0.9067184632552001, -0.2281912685064822, -0.9747503428652762], \&quot;color\&quot;: \&quot;yellow_9925\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>),​
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 16, \&quot;vector\&quot;: [-0.9363075919673911, -0.8153981031085669, 0.7943039120490902, -0.2093886809842529, 0.0771191335807897], \&quot;color\&quot;: \&quot;orange_9872\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>),​
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 17, \&quot;vector\&quot;: [-0.050451522820639916, 0.18931572752321935, 0.7522886192190488, -0.9071793089474034, 0.6032647330692296], \&quot;color\&quot;: \&quot;red_6450\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>),​
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 18, \&quot;vector\&quot;: [-0.9181544231141592, 0.6700755998126806, -0.014174674636136642, 0.6325780463623432, -0.49662222164032976], \&quot;color\&quot;: \&quot;purple_7392\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>),​
-        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 19, \&quot;vector\&quot;: [0.11426945899602536, 0.6089190684002581, -0.5842735738352236, 0.057050610092692855, -0.035163433018196244], \&quot;color\&quot;: \&quot;pink_4996\&quot;}&quot;</span>, JsonObject.<span class="hljs-keyword">class</span>)​
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 10, \&quot;vector\&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], \&quot;color\&quot;: \&quot;black_3651\&quot;}&quot;</span>, JsonObject.class),​
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 11, \&quot;vector\&quot;: [0.6060703043917468, -0.3765080534566074, -0.7710758854987239, 0.36993888322346136, 0.5507513364206531], \&quot;color\&quot;: \&quot;grey_2049\&quot;}&quot;</span>, JsonObject.class),​
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 12, \&quot;vector\&quot;: [-0.9041813104515337, -0.9610546012461163, 0.20033003106083358, 0.11842506351635174, 0.8327356724591011], \&quot;color\&quot;: \&quot;blue_6168\&quot;}&quot;</span>, JsonObject.class),​
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 13, \&quot;vector\&quot;: [0.3202914977909075, -0.7279137773695252, -0.04747830871620273, 0.8266053056909548, 0.8277957187455489], \&quot;color\&quot;: \&quot;blue_1672\&quot;}&quot;</span>, JsonObject.class),​
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 14, \&quot;vector\&quot;: [0.2975811497890859, 0.2946936202691086, 0.5399463833894609, 0.8385334966677529, -0.4450543984655133], \&quot;color\&quot;: \&quot;pink_1601\&quot;}&quot;</span>, JsonObject.class),​
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 15, \&quot;vector\&quot;: [-0.04697464305600074, -0.08509022265734134, 0.9067184632552001, -0.2281912685064822, -0.9747503428652762], \&quot;color\&quot;: \&quot;yellow_9925\&quot;}&quot;</span>, JsonObject.class),​
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 16, \&quot;vector\&quot;: [-0.9363075919673911, -0.8153981031085669, 0.7943039120490902, -0.2093886809842529, 0.0771191335807897], \&quot;color\&quot;: \&quot;orange_9872\&quot;}&quot;</span>, JsonObject.class),​
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 17, \&quot;vector\&quot;: [-0.050451522820639916, 0.18931572752321935, 0.7522886192190488, -0.9071793089474034, 0.6032647330692296], \&quot;color\&quot;: \&quot;red_6450\&quot;}&quot;</span>, JsonObject.class),​
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 18, \&quot;vector\&quot;: [-0.9181544231141592, 0.6700755998126806, -0.014174674636136642, 0.6325780463623432, -0.49662222164032976], \&quot;color\&quot;: \&quot;purple_7392\&quot;}&quot;</span>, JsonObject.class),​
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 19, \&quot;vector\&quot;: [0.11426945899602536, 0.6089190684002581, -0.5842735738352236, 0.057050610092692855, -0.035163433018196244], \&quot;color\&quot;: \&quot;pink_4996\&quot;}&quot;</span>, JsonObject.class)​
 );​
 ​
-UpsertReq upsertReq = UpsertReq.builder()​
+<span class="hljs-type">UpsertReq</span> <span class="hljs-variable">upsertReq</span> <span class="hljs-operator">=</span> UpsertReq.builder()​
         .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)​
         .partitionName(<span class="hljs-string">&quot;partitionA&quot;</span>)​
         .data(data)​
         .build();​
 ​
-UpsertResp upsertResp = client.upsert(upsertReq);​
-System.<span class="hljs-keyword">out</span>.println(upsertResp);​
+<span class="hljs-type">UpsertResp</span> <span class="hljs-variable">upsertResp</span> <span class="hljs-operator">=</span> client.upsert(upsertReq);​
+System.out.println(upsertResp);​
 ​
 <span class="hljs-comment">// Output:​</span>
 <span class="hljs-comment">//​</span>
@@ -326,14 +326,14 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/upsert&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;data&quot;: [​
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.06998888224297328, 0.8582816610326578, -0.9657938677934292, 0.6527905683627726, -0.8668460657158576], &quot;color&quot;: &quot;black_3651&quot;},​
         {&quot;id&quot;: 11, &quot;vector&quot;: [0.6060703043917468, -0.3765080534566074, -0.7710758854987239, 0.36993888322346136, 0.5507513364206531], &quot;color&quot;: &quot;grey_2049&quot;},​
@@ -347,26 +347,26 @@ curl --request POST \​
         {&quot;id&quot;: 19, &quot;vector&quot;: [0.11426945899602536, 0.6089190684002581, -0.5842735738352236, 0.057050610092692855, -0.035163433018196244], &quot;color&quot;: &quot;pink_4996&quot;}​
     ],​
     &quot;collectionName&quot;: &quot;quick_setup&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: {​</span>
-<span class="hljs-comment">#         &quot;upsertCount&quot;: 10,​</span>
-<span class="hljs-comment">#         &quot;upsertIds&quot;: [​</span>
-<span class="hljs-comment">#             0,​</span>
-<span class="hljs-comment">#             1,​</span>
-<span class="hljs-comment">#             2,​</span>
-<span class="hljs-comment">#             3,​</span>
-<span class="hljs-comment">#             4,​</span>
-<span class="hljs-comment">#             5,​</span>
-<span class="hljs-comment">#             6,​</span>
-<span class="hljs-comment">#             7,​</span>
-<span class="hljs-comment">#             8,​</span>
-<span class="hljs-comment">#             9​</span>
-<span class="hljs-comment">#         ]​</span>
-<span class="hljs-comment">#     }​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: {​
+#         &quot;upsertCount&quot;: 10,​
+#         &quot;upsertIds&quot;: [​
+#             0,​
+#             1,​
+#             2,​
+#             3,​
+#             4,​
+#             5,​
+#             6,​
+#             7,​
+#             8,​
+#             9​
+#         ]​
+#     }​
+# }​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>​</p>

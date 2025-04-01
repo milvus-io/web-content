@@ -47,11 +47,11 @@ title: Configure Access Logs
 <li><strong>Config for uploading local access logs to MinIO</strong>: For cloud storage and backup.</li>
 </ul>
 <h3 id="Base-config" class="common-anchor-header">Base config</h3><p>Basic configuration involves enabling access logs and defining the log filename or using stdout.</p>
-<pre><code translate="no" class="language-yaml">proxy:
-  accessLog:
-    <span class="hljs-built_in">enable</span>: <span class="hljs-literal">true</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
+  <span class="hljs-attr">accessLog:</span>
+    <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
     <span class="hljs-comment"># If `filename` is emtpy, logs will be printed to stdout.</span>
-    filename: <span class="hljs-string">&quot;&quot;</span>
+    <span class="hljs-attr">filename:</span> <span class="hljs-string">&quot;&quot;</span>
     <span class="hljs-comment"># Additional formatter configurations...</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
@@ -59,14 +59,14 @@ title: Configure Access Logs
 <li><code translate="no">proxy.accessLog.filename</code>: The name of the access log file. If you leave this parameter empty, access logs will be printed to stdout.</li>
 </ul>
 <h3 id="Config-for-local-access-log-files" class="common-anchor-header">Config for local access log files</h3><p>Configure local storage for access log files with parameters including the local file path, file size, and rotation interval:</p>
-<pre><code translate="no" class="language-yaml">proxy:
-  accessLog:
-    enable: true
-    filename: <span class="hljs-string">&quot;access_log.txt&quot;</span> <span class="hljs-comment"># Name of the access log file</span>
-    localPath: <span class="hljs-string">&quot;/var/logs/milvus&quot;</span> <span class="hljs-comment"># Local file path where the access log file is stored</span>
-    maxSize: <span class="hljs-number">500</span> <span class="hljs-comment"># Max size for each single access log file. Unit: MB</span>
-    rotatedTime: <span class="hljs-number">24</span> <span class="hljs-comment"># Time interval for log rotation. Unit: seconds</span>
-    maxBackups: <span class="hljs-number">7</span> <span class="hljs-comment"># Max number of sealed access log files that can be retained</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
+  <span class="hljs-attr">accessLog:</span>
+    <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">filename:</span> <span class="hljs-string">&quot;access_log.txt&quot;</span> <span class="hljs-comment"># Name of the access log file</span>
+    <span class="hljs-attr">localPath:</span> <span class="hljs-string">&quot;/var/logs/milvus&quot;</span> <span class="hljs-comment"># Local file path where the access log file is stored</span>
+    <span class="hljs-attr">maxSize:</span> <span class="hljs-number">500</span> <span class="hljs-comment"># Max size for each single access log file. Unit: MB</span>
+    <span class="hljs-attr">rotatedTime:</span> <span class="hljs-number">24</span> <span class="hljs-comment"># Time interval for log rotation. Unit: seconds</span>
+    <span class="hljs-attr">maxBackups:</span> <span class="hljs-number">7</span> <span class="hljs-comment"># Max number of sealed access log files that can be retained</span>
     <span class="hljs-comment"># Additional formatter configurations...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>These parameters are specified when <code translate="no">filename</code> is not empty.</p>
@@ -77,17 +77,17 @@ title: Configure Access Logs
 <li><code translate="no">proxy.accessLog.maxBackups</code>: The maximum number of sealed access log files that can be retained. If the number of sealed access log files exceeds this limit, the oldest one will be deleted.</li>
 </ul>
 <h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">Config for uploading local access log files to MinIO</h3><p>Enable and configure settings to upload local access log files to MinIO:</p>
-<pre><code translate="no" class="language-yaml">proxy:
-  accessLog:
-    <span class="hljs-built_in">enable</span>: <span class="hljs-literal">true</span>
-    filename: <span class="hljs-string">&quot;access_log.txt&quot;</span>
-    localPath: <span class="hljs-string">&quot;/var/logs/milvus&quot;</span>
-    maxSize: 500
-    rotatedTime: 24 
-    maxBackups: 7
-    minioEnable: <span class="hljs-literal">true</span>
-    remotePath: <span class="hljs-string">&quot;/milvus/logs/access_logs&quot;</span>
-    remoteMaxTime: 0
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
+  <span class="hljs-attr">accessLog:</span>
+    <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">filename:</span> <span class="hljs-string">&quot;access_log.txt&quot;</span>
+    <span class="hljs-attr">localPath:</span> <span class="hljs-string">&quot;/var/logs/milvus&quot;</span>
+    <span class="hljs-attr">maxSize:</span> <span class="hljs-number">500</span>
+    <span class="hljs-attr">rotatedTime:</span> <span class="hljs-number">24</span> 
+    <span class="hljs-attr">maxBackups:</span> <span class="hljs-number">7</span>
+    <span class="hljs-attr">minioEnable:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">remotePath:</span> <span class="hljs-string">&quot;/milvus/logs/access_logs&quot;</span>
+    <span class="hljs-attr">remoteMaxTime:</span> <span class="hljs-number">0</span>
     <span class="hljs-comment"># Additional formatter configurations...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>When configuring MinIO parameters, ensure that you have set either <code translate="no">maxSize</code> or <code translate="no">rotatedTime</code>. Failure to do so may result in unsuccessful uploads of local access log files to MinIO.</p>
@@ -112,23 +112,23 @@ title: Configure Access Logs
         ></path>
       </svg>
     </button></h2><p>The default log format used for all methods is the <code translate="no">base</code> format, which does not require specific method associations. However, if you wish to customize the log output for specific methods, you can define a custom log format and apply it to the associated methods.</p>
-<pre><code translate="no" class="language-yaml">proxy:
-  accessLog:
-    <span class="hljs-built_in">enable</span>: <span class="hljs-literal">true</span>
-    filename: <span class="hljs-string">&quot;access_log.txt&quot;</span>
-    localPath: <span class="hljs-string">&quot;/var/logs/milvus&quot;</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
+  <span class="hljs-attr">accessLog:</span>
+    <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">filename:</span> <span class="hljs-string">&quot;access_log.txt&quot;</span>
+    <span class="hljs-attr">localPath:</span> <span class="hljs-string">&quot;/var/logs/milvus&quot;</span>
     <span class="hljs-comment"># Define custom formatters for access logs with format and applicable methods</span>
-    formatters:
+    <span class="hljs-attr">formatters:</span>
       <span class="hljs-comment"># The `base` formatter applies to all methods by default</span>
       <span class="hljs-comment"># The `base` formatter does not require specific method association</span>
-      base: 
+      <span class="hljs-attr">base:</span> 
         <span class="hljs-comment"># Format string; an empty string means no log output</span>
-        format: <span class="hljs-string">&quot;[<span class="hljs-variable">$time_now</span>] [ACCESS] &lt;<span class="hljs-variable">$user_name</span>: <span class="hljs-variable">$user_addr</span>&gt; <span class="hljs-variable">$method_name</span>-<span class="hljs-variable">$method_status</span>-<span class="hljs-variable">$error_code</span> [traceID: <span class="hljs-variable">$trace_id</span>] [timeCost: <span class="hljs-variable">$time_cost</span>]&quot;</span>
+        <span class="hljs-attr">format:</span> <span class="hljs-string">&quot;[$time_now] [ACCESS] &lt;$user_name: $user_addr&gt; $method_name-$method_status-$error_code [traceID: $trace_id] [timeCost: $time_cost]&quot;</span>
       <span class="hljs-comment"># Custom formatter for specific methods (e.g., Query, Search)</span>
-      query: 
-        format: <span class="hljs-string">&quot;[<span class="hljs-variable">$time_now</span>] [ACCESS] &lt;<span class="hljs-variable">$user_name</span>: <span class="hljs-variable">$user_addr</span>&gt; <span class="hljs-variable">$method_status</span>-<span class="hljs-variable">$method_name</span> [traceID: <span class="hljs-variable">$trace_id</span>] [timeCost: <span class="hljs-variable">$time_cost</span>] [database: <span class="hljs-variable">$database_name</span>] [collection: <span class="hljs-variable">$collection_name</span>] [partitions: <span class="hljs-variable">$partition_name</span>] [expr: <span class="hljs-variable">$method_expr</span>]&quot;</span>
+      <span class="hljs-attr">query:</span> 
+        <span class="hljs-attr">format:</span> <span class="hljs-string">&quot;[$time_now] [ACCESS] &lt;$user_name: $user_addr&gt; $method_status-$method_name [traceID: $trace_id] [timeCost: $time_cost] [database: $database_name] [collection: $collection_name] [partitions: $partition_name] [expr: $method_expr]&quot;</span>
         <span class="hljs-comment"># Specify the methods to which this custom formatter applies</span>
-        methods: [<span class="hljs-string">&quot;Query&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>]
+        <span class="hljs-attr">methods:</span> [<span class="hljs-string">&quot;Query&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.format</code>: Defines the log format with dynamic metrics. For more information, see <a href="#reference-supported-metrics">Supported metrics</a>.</li>

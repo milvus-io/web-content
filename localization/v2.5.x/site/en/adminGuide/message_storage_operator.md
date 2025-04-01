@@ -23,7 +23,7 @@ summary: Learn how to configure message storage with Milvus Operator.
 <p>This topic assumes that you have deployed Milvus Operator.</p>
 <div class="alert note">See <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information. </div>
 <p>You need to specify a configuration file for using Milvus Operator to start a Milvus cluster.</p>
-<pre><code translate="no" class="language-YAML">kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
+<pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>You only need to edit the code template in <code translate="no">milvus_cluster_default.yaml</code> to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Before you begin<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
@@ -55,8 +55,8 @@ summary: Learn how to configure message storage with Milvus Operator.
 <ul>
 <li>Only one message storage for one Milvus instance is supported. However we still have backward compatibility with multiple message storages set for one instance. The priority is as follows:
 <ul>
-<li>standalone mode:  RocksMQ (default) &gt; Pulsar &gt; Kafka</li>
-<li>cluster mode: Pulsar (default) &gt; Kafka</li>
+<li>standalone mode:  RocksMQ (default) > Pulsar > Kafka</li>
+<li>cluster mode: Pulsar (default) > Kafka</li>
 <li>Nats introduced in 2.3 do not participate in these priority rules for backward compatibility.</li>
 </ul></li>
 <li>The message storage cannot be changed while the Milvus system is running.</li>
@@ -82,27 +82,27 @@ summary: Learn how to configure message storage with Milvus Operator.
 <p>Currently, you can only configure RocksMQ as the message storage for Milvus standalone with Milvus Operator.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures a RocksMQ service.</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: milvus
-spec:
-  mode: standalone
-  dependencies:
-    msgStreamType: rocksmq
-    rocksmq:
-      persistence:
-        enabled: <span class="hljs-literal">true</span>
-        pvcDeletion: <span class="hljs-literal">true</span>
-        persistentVolumeClaim:
-          spec:
-            accessModes: [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
-            storageClassName: <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
-            resources:
-              requests:
-                storage: 10Gi  <span class="hljs-comment"># Specify your desired storage size</span>
-  components: {}
-  config: {}
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">mode:</span> <span class="hljs-string">standalone</span>
+  <span class="hljs-attr">dependencies:</span>
+    <span class="hljs-attr">msgStreamType:</span> <span class="hljs-string">rocksmq</span>
+    <span class="hljs-attr">rocksmq:</span>
+      <span class="hljs-attr">persistence:</span>
+        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
+        <span class="hljs-attr">pvcDeletion:</span> <span class="hljs-literal">true</span>
+        <span class="hljs-attr">persistentVolumeClaim:</span>
+          <span class="hljs-attr">spec:</span>
+            <span class="hljs-attr">accessModes:</span> [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
+            <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
+            <span class="hljs-attr">resources:</span>
+              <span class="hljs-attr">requests:</span>
+                <span class="hljs-attr">storage:</span> <span class="hljs-string">10Gi</span>  <span class="hljs-comment"># Specify your desired storage size</span>
+  <span class="hljs-attr">components:</span> {}
+  <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <h5 id="Key-configuration-options" class="common-anchor-header">Key configuration options:</h5><ul>
 <li><code translate="no">msgStreamType</code>: rocksmq: Explicitly sets RocksMQ as the message queue</li>
@@ -130,46 +130,46 @@ spec:
       </svg>
     </button></h2><p>NATS is an alternative message storage for NATS.</p>
 <h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures a NATS service.</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
-kind: Milvus
-metadata:
-  name: milvus
-spec:
-  dependencies: 
-    msgStreamType: <span class="hljs-string">&#x27;natsmq&#x27;</span>
-    natsmq:
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">dependencies:</span> 
+    <span class="hljs-attr">msgStreamType:</span> <span class="hljs-string">&#x27;natsmq&#x27;</span>
+    <span class="hljs-attr">natsmq:</span>
       <span class="hljs-comment"># server side configuration for natsmq.</span>
-      server: 
+      <span class="hljs-attr">server:</span> 
         <span class="hljs-comment"># 4222 by default, Port for nats server listening.</span>
-        port: <span class="hljs-number">4222</span> 
+        <span class="hljs-attr">port:</span> <span class="hljs-number">4222</span> 
         <span class="hljs-comment"># /var/lib/milvus/nats by default, directory to use for JetStream storage of nats.</span>
-        storeDir: /var/lib/milvus/nats 
+        <span class="hljs-attr">storeDir:</span> <span class="hljs-string">/var/lib/milvus/nats</span> 
         <span class="hljs-comment"># (B) 16GB by default, Maximum size of the &#x27;file&#x27; storage.</span>
-        maxFileStore: <span class="hljs-number">17179869184</span> 
+        <span class="hljs-attr">maxFileStore:</span> <span class="hljs-number">17179869184</span> 
         <span class="hljs-comment"># (B) 8MB by default, Maximum number of bytes in a message payload.</span>
-        maxPayload: <span class="hljs-number">8388608</span> 
+        <span class="hljs-attr">maxPayload:</span> <span class="hljs-number">8388608</span> 
         <span class="hljs-comment"># (B) 64MB by default, Maximum number of bytes buffered for a connection applies to client connections.</span>
-        maxPending: <span class="hljs-number">67108864</span> 
+        <span class="hljs-attr">maxPending:</span> <span class="hljs-number">67108864</span> 
         <span class="hljs-comment"># (√ms) 4s by default, waiting for initialization of natsmq finished.</span>
-        initializeTimeout: <span class="hljs-number">4000</span> 
-        monitor:
+        <span class="hljs-attr">initializeTimeout:</span> <span class="hljs-number">4000</span> 
+        <span class="hljs-attr">monitor:</span>
           <span class="hljs-comment"># false by default, If true enable debug log messages.</span>
-          debug: false 
+          <span class="hljs-attr">debug:</span> <span class="hljs-literal">false</span> 
           <span class="hljs-comment"># true by default, If set to false, log without timestamps.</span>
-          logTime: true 
+          <span class="hljs-attr">logTime:</span> <span class="hljs-literal">true</span> 
           <span class="hljs-comment"># no log file by default, Log file path relative to.. .</span>
-          logFile: 
+          <span class="hljs-attr">logFile:</span> 
           <span class="hljs-comment"># (B) 0, unlimited by default, Size in bytes after the log file rolls over to a new one.</span>
-          logSizeLimit: <span class="hljs-number">0</span> 
-        retention:
+          <span class="hljs-attr">logSizeLimit:</span> <span class="hljs-number">0</span> 
+        <span class="hljs-attr">retention:</span>
           <span class="hljs-comment"># (min) 3 days by default, Maximum age of any message in the P-channel.</span>
-          maxAge: <span class="hljs-number">4320</span> 
+          <span class="hljs-attr">maxAge:</span> <span class="hljs-number">4320</span> 
           <span class="hljs-comment"># (B) None by default, How many bytes the single P-channel may contain. Removing oldest messages if the P-channel exceeds this size.</span>
-          maxBytes:
+          <span class="hljs-attr">maxBytes:</span>
           <span class="hljs-comment"># None by default, How many message the single P-channel may contain. Removing oldest messages if the P-channel exceeds this limit.    </span>
-          maxMsgs: 
-  components: {}
-  config: {}
+          <span class="hljs-attr">maxMsgs:</span> 
+  <span class="hljs-attr">components:</span> {}
+  <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <p>To migrate the message storage from RocksMQ to NATS, do as follows:</p>
 <ol>
@@ -213,63 +213,63 @@ Fields used to configure an external Pulsar service include:</p>
 <li><code translate="no">endpoints</code>: The endpoints of Pulsar.</li>
 </ul>
 <h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an external Pulsar service.</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
-kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
-  dependencies: <span class="hljs-comment"># Optional</span>
-    pulsar: <span class="hljs-comment"># Optional</span>
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">dependencies:</span> <span class="hljs-comment"># Optional</span>
+    <span class="hljs-attr">pulsar:</span> <span class="hljs-comment"># Optional</span>
       <span class="hljs-comment"># Whether (=true) to use an existed external pulsar as specified in the field endpoints or </span>
       <span class="hljs-comment"># (=false) create a new pulsar inside the same kubernetes cluster for milvus.</span>
-      external: true <span class="hljs-comment"># Optional default=false</span>
+      <span class="hljs-attr">external:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Optional default=false</span>
       <span class="hljs-comment"># The external pulsar endpoints if external=true</span>
-      endpoints:
-      - <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.1</span>:<span class="hljs-number">6650</span>
-  components: {}
-  config: {}           
+      <span class="hljs-attr">endpoints:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.1</span><span class="hljs-string">:6650</span>
+  <span class="hljs-attr">components:</span> {}
+  <span class="hljs-attr">config:</span> {}           
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Internal-Pulsar" class="common-anchor-header">Internal Pulsar</h3><p><code translate="no">inCluster</code> indicates when a Milvus cluster starts, a Pulsar service starts automatically in the cluster.</p>
 <h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an internal Pulsar service.</p>
-<pre><code translate="no" class="language-YAML">apiVersion: milvus.io/v1alpha1
-kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
-  dependencies:
-    pulsar:
-      inCluster:
-        values:
-          components:
-            autorecovery: <span class="hljs-literal">false</span>
-          zookeeper:
-            replicaCount: 1
-          bookkeeper:
-            replicaCount: 1
-            resoureces:
-              <span class="hljs-built_in">limit</span>:
-                cpu: <span class="hljs-string">&#x27;4&#x27;</span>
-              memory: 8Gi
-            requests:
-              cpu: 200m
-              memory: 512Mi
-          broker:
-            replicaCount: 1
-            configData:
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">dependencies:</span>
+    <span class="hljs-attr">pulsar:</span>
+      <span class="hljs-attr">inCluster:</span>
+        <span class="hljs-attr">values:</span>
+          <span class="hljs-attr">components:</span>
+            <span class="hljs-attr">autorecovery:</span> <span class="hljs-literal">false</span>
+          <span class="hljs-attr">zookeeper:</span>
+            <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">1</span>
+          <span class="hljs-attr">bookkeeper:</span>
+            <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">1</span>
+            <span class="hljs-attr">resoureces:</span>
+              <span class="hljs-attr">limit:</span>
+                <span class="hljs-attr">cpu:</span> <span class="hljs-string">&#x27;4&#x27;</span>
+              <span class="hljs-attr">memory:</span> <span class="hljs-string">8Gi</span>
+            <span class="hljs-attr">requests:</span>
+              <span class="hljs-attr">cpu:</span> <span class="hljs-string">200m</span>
+              <span class="hljs-attr">memory:</span> <span class="hljs-string">512Mi</span>
+          <span class="hljs-attr">broker:</span>
+            <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">1</span>
+            <span class="hljs-attr">configData:</span>
               <span class="hljs-comment">## Enable `autoSkipNonRecoverableData` since bookkeeper is running</span>
               <span class="hljs-comment">## without persistence</span>
-              autoSkipNonRecoverableData: <span class="hljs-string">&quot;true&quot;</span>
-              managedLedgerDefaultEnsembleSize: <span class="hljs-string">&quot;1&quot;</span>
-              managedLedgerDefaultWriteQuorum: <span class="hljs-string">&quot;1&quot;</span>
-              managedLedgerDefaultAckQuorum: <span class="hljs-string">&quot;1&quot;</span>
-          proxy:
-            replicaCount: 1
-  components: {}
-  config: {}            
+              <span class="hljs-attr">autoSkipNonRecoverableData:</span> <span class="hljs-string">&quot;true&quot;</span>
+              <span class="hljs-attr">managedLedgerDefaultEnsembleSize:</span> <span class="hljs-string">&quot;1&quot;</span>
+              <span class="hljs-attr">managedLedgerDefaultWriteQuorum:</span> <span class="hljs-string">&quot;1&quot;</span>
+              <span class="hljs-attr">managedLedgerDefaultAckQuorum:</span> <span class="hljs-string">&quot;1&quot;</span>
+          <span class="hljs-attr">proxy:</span>
+            <span class="hljs-attr">replicaCount:</span> <span class="hljs-number">1</span>
+  <span class="hljs-attr">components:</span> {}
+  <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">This example specifies the numbers of replicas of each component of Pulsar, the compute resources of Pulsar BookKeeper, and other configurations.</div>
 <div class="alert note">Find the complete configuration items to configure an internal Pulsar service in <a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a>. Add configuration items as needed under <code translate="no">pulsar.inCluster.values</code> as shown in the preceding example.</div>
@@ -300,30 +300,30 @@ spec:
 <li><code translate="no">brokerList</code>: The list of brokers to send the messages to.</li>
 </ul>
 <h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an external Kafka service.</p>
-<pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1alpha1
-kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec:
-  config:
-    kafka:
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">config:</span>
+    <span class="hljs-attr">kafka:</span>
       <span class="hljs-comment"># securityProtocol supports: PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL </span>
-      securityProtocol: PLAINTEXT
+      <span class="hljs-attr">securityProtocol:</span> <span class="hljs-string">PLAINTEXT</span>
       <span class="hljs-comment"># saslMechanisms supports: PLAIN, SCRAM-SHA-256, SCRAM-SHA-512</span>
-      saslMechanisms: PLAIN
-      saslUsername: <span class="hljs-string">&quot;&quot;</span>
-      saslPassword: <span class="hljs-string">&quot;&quot;</span>
+      <span class="hljs-attr">saslMechanisms:</span> <span class="hljs-string">PLAIN</span>
+      <span class="hljs-attr">saslUsername:</span> <span class="hljs-string">&quot;&quot;</span>
+      <span class="hljs-attr">saslPassword:</span> <span class="hljs-string">&quot;&quot;</span>
   <span class="hljs-comment"># Omit other fields ...</span>
-  dependencies:
+  <span class="hljs-attr">dependencies:</span>
     <span class="hljs-comment"># Omit other fields ...</span>
-    msgStreamType: <span class="hljs-string">&quot;kafka&quot;</span>
-    kafka:
-      external: true
-      brokerList: 
-        - <span class="hljs-string">&quot;kafkaBrokerAddr1:9092&quot;</span>
-        - <span class="hljs-string">&quot;kafkaBrokerAddr2:9092&quot;</span>
+    <span class="hljs-attr">msgStreamType:</span> <span class="hljs-string">&quot;kafka&quot;</span>
+    <span class="hljs-attr">kafka:</span>
+      <span class="hljs-attr">external:</span> <span class="hljs-literal">true</span>
+      <span class="hljs-attr">brokerList:</span> 
+        <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;kafkaBrokerAddr1:9092&quot;</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;kafkaBrokerAddr2:9092&quot;</span>
         <span class="hljs-comment"># ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
@@ -331,24 +331,24 @@ spec:
 </blockquote>
 <h3 id="Internal-Kafka" class="common-anchor-header">Internal Kafka</h3><p><code translate="no">inCluster</code> indicates when a Milvus cluster starts, a Kafka service starts automatically in the cluster.</p>
 <h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures an internal Kafka service.</p>
-<pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1alpha1
-kind: Milvus
-metadata:
-  name: my-release
-  labels:
-    app: milvus
-spec: 
-  dependencies:
-    msgStreamType: <span class="hljs-string">&quot;kafka&quot;</span>
-    kafka:
-      inCluster: 
-        values: {} <span class="hljs-comment"># values can be found in https://artifacthub.io/packages/helm/bitnami/kafka</span>
-  components: {}
-  config: {}
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+  <span class="hljs-attr">labels:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">milvus</span>
+<span class="hljs-attr">spec:</span> 
+  <span class="hljs-attr">dependencies:</span>
+    <span class="hljs-attr">msgStreamType:</span> <span class="hljs-string">&quot;kafka&quot;</span>
+    <span class="hljs-attr">kafka:</span>
+      <span class="hljs-attr">inCluster:</span> 
+        <span class="hljs-attr">values:</span> {} <span class="hljs-comment"># values can be found in https://artifacthub.io/packages/helm/bitnami/kafka</span>
+  <span class="hljs-attr">components:</span> {}
+  <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <p>Find the complete configuration items to configure an internal Kafka service <a href="https://artifacthub.io/packages/helm/bitnami/kafka">here</a>. Add configuration items as needed under <code translate="no">kafka.inCluster.values</code>.</p>
 <p>Assuming that the configuration file is named <code translate="no">milvuscluster.yaml</code>, run the following command to apply the configuration.</p>
-<pre><code translate="no">kubectl apply -f milvuscluster.yaml
+<pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

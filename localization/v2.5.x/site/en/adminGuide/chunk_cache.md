@@ -59,9 +59,9 @@ title: Configure Chunk Cache
 <li><p>For Milvus instances installed using Operator</p>
 <p>Add the configuration to the <code translate="no">spec.components</code> section of the <code translate="no">Milvus</code> custom resource. For details, refer to <a href="/docs/configure_operator.md">Configure Milvus with Operator</a>.</p></li>
 </ul>
-<h3 id="Configuration-options" class="common-anchor-header">Configuration options</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode</span>:
-    <span class="hljs-attr">cache</span>:
-        <span class="hljs-attr">warmup</span>: <span class="hljs-keyword">async</span>
+<h3 id="Configuration-options" class="common-anchor-header">Configuration options</h3><pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>
+    <span class="hljs-attr">cache:</span>
+        <span class="hljs-attr">warmup:</span> <span class="hljs-string">async</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>The <code translate="no">warmup</code> parameter determines whether Milvus pre-loads data from the object storage into the cache on the local hard disk of the query nodes before it is needed. This parameter defaults to <code translate="no">disable</code>. Possible options are as follows:</p>
 <ul>

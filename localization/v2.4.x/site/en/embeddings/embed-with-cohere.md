@@ -28,9 +28,9 @@ title: Embed Cohere
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then, instantiate the <code translate="no">CohereEmbeddingFunction</code>:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">dense</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">CohereEmbeddingFunction</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> CohereEmbeddingFunction
 
-cohere_ef = <span class="hljs-title class_">CohereEmbeddingFunction</span>(
+cohere_ef = CohereEmbeddingFunction(
     model_name=<span class="hljs-string">&quot;embed-english-light-v3.0&quot;</span>,
     api_key=<span class="hljs-string">&quot;YOUR_COHERE_API_KEY&quot;</span>,
     input_type=<span class="hljs-string">&quot;search_document&quot;</span>,
@@ -74,14 +74,14 @@ docs_embeddings = cohere_ef.encode_documents(docs)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, cohere_ef.dim, docs_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([ <span class="hljs-number">3.43322754e-02</span>,  <span class="hljs-number">1.16252899e-03</span>, <span class="hljs-number">-5.25207520e-02</span>,  <span class="hljs-number">1.32846832e-03</span>,
-       <span class="hljs-number">-6.80541992e-02</span>,  <span class="hljs-number">6.10961914e-02</span>, <span class="hljs-number">-7.06176758e-02</span>,  <span class="hljs-number">1.48925781e-01</span>,
+<pre><code translate="no" class="language-python">Embeddings: [array([ <span class="hljs-number">3.43322754e-02</span>,  <span class="hljs-number">1.16252899e-03</span>, -<span class="hljs-number">5.25207520e-02</span>,  <span class="hljs-number">1.32846832e-03</span>,
+       -<span class="hljs-number">6.80541992e-02</span>,  <span class="hljs-number">6.10961914e-02</span>, -<span class="hljs-number">7.06176758e-02</span>,  <span class="hljs-number">1.48925781e-01</span>,
         <span class="hljs-number">1.54174805e-01</span>,  <span class="hljs-number">1.98516846e-02</span>,  <span class="hljs-number">2.43835449e-02</span>,  <span class="hljs-number">3.55224609e-02</span>,
-        <span class="hljs-number">1.82952881e-02</span>,  <span class="hljs-number">7.57446289e-02</span>, <span class="hljs-number">-2.40783691e-02</span>,  <span class="hljs-number">4.40063477e-02</span>,
+        <span class="hljs-number">1.82952881e-02</span>,  <span class="hljs-number">7.57446289e-02</span>, -<span class="hljs-number">2.40783691e-02</span>,  <span class="hljs-number">4.40063477e-02</span>,
 ...
-        <span class="hljs-number">0.06359863</span>, <span class="hljs-number">-0.01971436</span>, <span class="hljs-number">-0.02253723</span>,  <span class="hljs-number">0.00354195</span>,  <span class="hljs-number">0.00222015</span>,
-        <span class="hljs-number">0.00184727</span>,  <span class="hljs-number">0.03408813</span>, <span class="hljs-number">-0.00777817</span>,  <span class="hljs-number">0.04919434</span>,  <span class="hljs-number">0.01519775</span>,
-       <span class="hljs-number">-0.02862549</span>,  <span class="hljs-number">0.04760742</span>, <span class="hljs-number">-0.07891846</span>,  <span class="hljs-number">0.0124054</span> ], dtype=<span class="hljs-type">float32</span>)]
+        <span class="hljs-number">0.06359863</span>, -<span class="hljs-number">0.01971436</span>, -<span class="hljs-number">0.02253723</span>,  <span class="hljs-number">0.00354195</span>,  <span class="hljs-number">0.00222015</span>,
+        <span class="hljs-number">0.00184727</span>,  <span class="hljs-number">0.03408813</span>, -<span class="hljs-number">0.00777817</span>,  <span class="hljs-number">0.04919434</span>,  <span class="hljs-number">0.01519775</span>,
+       -<span class="hljs-number">0.02862549</span>,  <span class="hljs-number">0.04760742</span>, -<span class="hljs-number">0.07891846</span>,  <span class="hljs-number">0.0124054</span> ], dtype=float32)]
 Dim: <span class="hljs-number">384</span> (<span class="hljs-number">384</span>,)
 <button class="copy-code-btn"></button></code></pre>
 <p>To create embeddings for queries, use the <code translate="no">encode_queries()</code> method:</p>
@@ -94,13 +94,13 @@ query_embeddings = cohere_ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim&quot;</span>, cohere_ef.dim, query_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>The expected output is similar to the following:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([<span class="hljs-number">-1.33361816e-02</span>,  <span class="hljs-number">9.79423523e-04</span>, <span class="hljs-number">-7.28759766e-02</span>, <span class="hljs-number">-1.93786621e-02</span>,
-       <span class="hljs-number">-9.71679688e-02</span>,  <span class="hljs-number">4.34875488e-02</span>, <span class="hljs-number">-9.81445312e-02</span>,  <span class="hljs-number">1.16882324e-01</span>,
-        <span class="hljs-number">5.89904785e-02</span>, <span class="hljs-number">-4.19921875e-02</span>,  <span class="hljs-number">4.95910645e-02</span>,  <span class="hljs-number">5.83496094e-02</span>,
-        <span class="hljs-number">3.47595215e-02</span>, <span class="hljs-number">-5.87463379e-03</span>, <span class="hljs-number">-7.30514526e-03</span>,  <span class="hljs-number">2.92816162e-02</span>,
+<pre><code translate="no" class="language-python">Embeddings: [array([-<span class="hljs-number">1.33361816e-02</span>,  <span class="hljs-number">9.79423523e-04</span>, -<span class="hljs-number">7.28759766e-02</span>, -<span class="hljs-number">1.93786621e-02</span>,
+       -<span class="hljs-number">9.71679688e-02</span>,  <span class="hljs-number">4.34875488e-02</span>, -<span class="hljs-number">9.81445312e-02</span>,  <span class="hljs-number">1.16882324e-01</span>,
+        <span class="hljs-number">5.89904785e-02</span>, -<span class="hljs-number">4.19921875e-02</span>,  <span class="hljs-number">4.95910645e-02</span>,  <span class="hljs-number">5.83496094e-02</span>,
+        <span class="hljs-number">3.47595215e-02</span>, -<span class="hljs-number">5.87463379e-03</span>, -<span class="hljs-number">7.30514526e-03</span>,  <span class="hljs-number">2.92816162e-02</span>,
 ...
-        <span class="hljs-number">0.00749969</span>, <span class="hljs-number">-0.01192474</span>,  <span class="hljs-number">0.02719116</span>,  <span class="hljs-number">0.03347778</span>,  <span class="hljs-number">0.07696533</span>,
-        <span class="hljs-number">0.01409149</span>,  <span class="hljs-number">0.00964355</span>, <span class="hljs-number">-0.01681519</span>, <span class="hljs-number">-0.0073204</span> ,  <span class="hljs-number">0.00043154</span>,
-       <span class="hljs-number">-0.04577637</span>,  <span class="hljs-number">0.03591919</span>, <span class="hljs-number">-0.02807617</span>, <span class="hljs-number">-0.04812622</span>], dtype=<span class="hljs-type">float32</span>)]
+        <span class="hljs-number">0.00749969</span>, -<span class="hljs-number">0.01192474</span>,  <span class="hljs-number">0.02719116</span>,  <span class="hljs-number">0.03347778</span>,  <span class="hljs-number">0.07696533</span>,
+        <span class="hljs-number">0.01409149</span>,  <span class="hljs-number">0.00964355</span>, -<span class="hljs-number">0.01681519</span>, -<span class="hljs-number">0.0073204</span> ,  <span class="hljs-number">0.00043154</span>,
+       -<span class="hljs-number">0.04577637</span>,  <span class="hljs-number">0.03591919</span>, -<span class="hljs-number">0.02807617</span>, -<span class="hljs-number">0.04812622</span>], dtype=float32)]
 Dim <span class="hljs-number">384</span> (<span class="hljs-number">384</span>,)
 <button class="copy-code-btn"></button></code></pre>

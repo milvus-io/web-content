@@ -170,14 +170,14 @@ System.out.println(insertResp);​
 <span class="hljs-comment">// ​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;data&quot;: [​
         {&quot;id&quot;: 0, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},​
         {&quot;id&quot;: 1, &quot;vector&quot;: [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], &quot;color&quot;: &quot;red_7025&quot;},​
@@ -191,28 +191,28 @@ curl --request POST \​
         {&quot;id&quot;: 9, &quot;vector&quot;: [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], &quot;color&quot;: &quot;purple_4976&quot;}        ​
     ],​
     &quot;collectionName&quot;: &quot;quick_setup&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: {​</span>
-<span class="hljs-comment">#         &quot;insertCount&quot;: 10,​</span>
-<span class="hljs-comment">#         &quot;insertIds&quot;: [​</span>
-<span class="hljs-comment">#             0,​</span>
-<span class="hljs-comment">#             1,​</span>
-<span class="hljs-comment">#             2,​</span>
-<span class="hljs-comment">#             3,​</span>
-<span class="hljs-comment">#             4,​</span>
-<span class="hljs-comment">#             5,​</span>
-<span class="hljs-comment">#             6,​</span>
-<span class="hljs-comment">#             7,​</span>
-<span class="hljs-comment">#             8,​</span>
-<span class="hljs-comment">#             9​</span>
-<span class="hljs-comment">#         ]​</span>
-<span class="hljs-comment">#     }​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: {​
+#         &quot;insertCount&quot;: 10,​
+#         &quot;insertIds&quot;: [​
+#             0,​
+#             1,​
+#             2,​
+#             3,​
+#             4,​
+#             5,​
+#             6,​
+#             7,​
+#             8,​
+#             9​
+#         ]​
+#     }​
+# }​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Insert-Entities-into-a-Partition​" class="common-anchor-header">Insert Entities into a Partition​<button data-href="#Insert-Entities-into-a-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -329,14 +329,14 @@ System.out.println(insertResp);​
 <span class="hljs-comment">// ​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-curl">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d '{​
     &quot;data&quot;: [​
         {&quot;id&quot;: 10, &quot;vector&quot;: [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], &quot;color&quot;: &quot;pink_8682&quot;},​
         {&quot;id&quot;: 11, &quot;vector&quot;: [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], &quot;color&quot;: &quot;red_7025&quot;},​
@@ -351,25 +351,25 @@ curl --request POST \​
     ],​
     &quot;collectionName&quot;: &quot;quick_setup&quot;,​
     &quot;partitionName&quot;: &quot;partitionA&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-comment"># {​</span>
-<span class="hljs-comment">#     &quot;code&quot;: 0,​</span>
-<span class="hljs-comment">#     &quot;data&quot;: {​</span>
-<span class="hljs-comment">#         &quot;insertCount&quot;: 10,​</span>
-<span class="hljs-comment">#         &quot;insertIds&quot;: [​</span>
-<span class="hljs-comment">#             10,​</span>
-<span class="hljs-comment">#             11,​</span>
-<span class="hljs-comment">#             12,​</span>
-<span class="hljs-comment">#             13,​</span>
-<span class="hljs-comment">#             14,​</span>
-<span class="hljs-comment">#             15,​</span>
-<span class="hljs-comment">#             16,​</span>
-<span class="hljs-comment">#             17,​</span>
-<span class="hljs-comment">#             18,​</span>
-<span class="hljs-comment">#             19​</span>
-<span class="hljs-comment">#         ]​</span>
-<span class="hljs-comment">#     }​</span>
-<span class="hljs-comment"># }​</span>
+# {​
+#     &quot;code&quot;: 0,​
+#     &quot;data&quot;: {​
+#         &quot;insertCount&quot;: 10,​
+#         &quot;insertIds&quot;: [​
+#             10,​
+#             11,​
+#             12,​
+#             13,​
+#             14,​
+#             15,​
+#             16,​
+#             17,​
+#             18,​
+#             19​
+#         ]​
+#     }​
+# }​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>

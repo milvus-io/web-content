@@ -9,7 +9,7 @@ summary: >-
   how to create users and roles in Milvus.​
 title: Create Users & Roles​
 ---
-<h1 id="Create-Users--Roles​" class="common-anchor-header">Create Users &amp; Roles​<button data-href="#Create-Users--Roles​" class="anchor-icon" translate="no">
+<h1 id="Create-Users--Roles​" class="common-anchor-header">Create Users & Roles​<button data-href="#Create-Users--Roles​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,14 +53,14 @@ title: Create Users & Roles​
   <a href="#javascript">Node.js</a>
   <a href="#shell">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
-client = <span class="hljs-title class_">MilvusClient</span>(​
+client = MilvusClient(​
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,​
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
 )​
 ​
-client.<span class="hljs-title function_">create_user</span>(user_name=<span class="hljs-string">&quot;user_1&quot;</span>, password=<span class="hljs-string">&quot;P@ssw0rd&quot;</span>)​
+client.create_user(user_name=<span class="hljs-string">&quot;user_1&quot;</span>, password=<span class="hljs-string">&quot;P@ssw0rd&quot;</span>)​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;​
@@ -94,17 +94,17 @@ client.createUser(createUserReq);​
  });​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
+<pre><code translate="no" class="language-shell">export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;​
+export TOKEN=&quot;root:Milvus&quot;​
 ​
 curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/create&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/users/create&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &#x27;{​
     &quot;userName&quot;: &quot;user_1&quot;,​
     &quot;password&quot;: &quot;P@ssw0rd&quot;​
-}&#x27;</span>​
+}&#x27;​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Update-password​" class="common-anchor-header">Update password​</h3><p>After creating a user, you can update the password if you forget.​</p>
@@ -119,9 +119,9 @@ curl --request POST \​
   <a href="#javascript">Node.js</a>
   <a href="#shell">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
-client.<span class="hljs-title function_">update_password</span>(​
+client.update_password(​
     user_name=<span class="hljs-string">&quot;user_1&quot;</span>,​
     old_password=<span class="hljs-string">&quot;P@ssw0rd&quot;</span>,​
     new_password=<span class="hljs-string">&quot;NewP@ssw0rd&quot;</span>​
@@ -148,14 +148,14 @@ client.updatePassword(updatePasswordReq);​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/update_password&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/users/update_password&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &#x27;{​
     &quot;newPassword&quot;: &quot;P@ssw0rd!&quot;,​
     &quot;userName&quot;: &quot;user_1&quot;,​
     &quot;password&quot;: &quot;P@ssw0rd&quot;​
-}&#x27;</span>​
+}&#x27;​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="List-users​" class="common-anchor-header">List users​</h3><p>After creating several users, you can list and view all existing users.​</p>
@@ -165,12 +165,12 @@ client.updatePassword(updatePasswordReq);​
   <a href="#javascript">Node.js</a>
   <a href="#shell">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
-client.<span class="hljs-title function_">list_users</span>()​
+client.list_users()​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">String</span>&gt; resp = client.<span class="hljs-title function_">listUsers</span>();​
+<pre><code translate="no" class="language-java">List&lt;String&gt; resp = client.listUsers();​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)​
@@ -179,10 +179,10 @@ client.<span class="hljs-title function_">list_users</span>()​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/list&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{}&#x27;</span>​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/users/list&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &#x27;{}&#x27;​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Below is an example output. <code translate="no">root</code> is the default user automatically generated in Milvus. <code translate="no">user_1</code> is the new user that is just created.​</p>
@@ -208,7 +208,7 @@ client.<span class="hljs-title function_">list_users</span>()​
 <h3 id="Create-a-role​" class="common-anchor-header">Create a role​</h3><p>The following example demonstrates how to create a role named <code translate="no">role_a</code>. ​</p>
 <p>The role name must follow the following rule:​</p>
 <ul>
-<li>Must start with a letter and can only include uppercase or lowercase letters, numbers, and underscores.&quot;​</li>
+<li>Must start with a letter and can only include uppercase or lowercase letters, numbers, and underscores."​</li>
 </ul>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -216,9 +216,9 @@ client.<span class="hljs-title function_">list_users</span>()​
   <a href="#javascript">Node.js</a>
   <a href="#shell">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
-client.<span class="hljs-title function_">create_role</span>(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)​
+client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.CreateRoleReq;​
@@ -237,12 +237,12 @@ client.<span class="hljs-title function_">create_role</span>(role_name=<span cla
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/create&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/roles/create&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &#x27;{​
     &quot;roleName&quot;: &quot;role_a&quot;​
-}&#x27;</span>​
+}&#x27;​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="List-roles​" class="common-anchor-header">List roles​</h3><p>After creating several roles, you can list and view all existing roles.​</p>
@@ -252,12 +252,12 @@ client.<span class="hljs-title function_">create_role</span>(role_name=<span cla
   <a href="#javascript">Node.js</a>
   <a href="#shell">cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
-client.<span class="hljs-title function_">list_roles</span>()​
+client.list_roles()​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">String</span>&gt; roles = client.<span class="hljs-title function_">listRoles</span>();​
+<pre><code translate="no" class="language-java">List&lt;String&gt; roles = client.listRoles();​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)​
@@ -268,10 +268,10 @@ client.<span class="hljs-title function_">list_roles</span>()​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/list&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{}&#x27;</span>​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/roles/list&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &#x27;{}&#x27;​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Below is an example output. <code translate="no">admin</code> is the default role in Milvus. <code translate="no">role_a</code> is the new role that is just created.​</p>

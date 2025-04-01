@@ -38,7 +38,7 @@ title: Deploying Dify with Milvus
         ></path>
       </svg>
     </button></h2><p>Clone the Dify source code to your local machine:</p>
-<pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/langgenius/dify.git
+<pre><code translate="no" class="language-shell">git clone https://github.com/langgenius/dify.git
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Set-the-Environment-Variables" class="common-anchor-header">Set the Environment Variables<button data-href="#Set-the-Environment-Variables" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,17 +56,17 @@ title: Deploying Dify with Milvus
         ></path>
       </svg>
     </button></h2><p>Navigate to the Docker directory in the Dify source code</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">cd</span> dify/docker
+<pre><code translate="no" class="language-shell">cd dify/docker
 <button class="copy-code-btn"></button></code></pre>
 <p>Copy the environment configuration file</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">cp</span> .env.example .<span class="hljs-built_in">env</span>
+<pre><code translate="no" class="language-shell">cp .env.example .env
 <button class="copy-code-btn"></button></code></pre>
 <p>Change the value <code translate="no">VECTOR_STORE</code> in the <code translate="no">.env</code> file</p>
-<pre><code translate="no">VECTOR_STORE=milvus
+<pre><code translate="no"><span class="hljs-attr">VECTOR_STORE</span>=milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Change the Milvus configuration in the <code translate="no">.env</code> file</p>
-<pre><code translate="no">MILVUS_URI=xxx
-MILVUS_TOKEN=xxx
+<pre><code translate="no"><span class="hljs-attr">MILVUS_URI</span>=xxx
+<span class="hljs-attr">MILVUS_TOKEN</span>=xxx
 <button class="copy-code-btn"></button></code></pre>
 <p>In this setup, please use the external URI of the server, e.g.<code translate="no">http://172.16.16.16:19530</code>, as your <code translate="no">MILVUS_URI</code>.</p>
 <p>For the <code translate="no">MILVUS_TOKEN</code>, if you have not set a token for your Milvus server, you can set it to an empty string like <code translate="no">MILVUS_TOKEN=</code>, otherwise, you need to set it to your Milvus token. For more information about how to set token in Milvus, you can refer the <a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">authenticate page</a>.</p>

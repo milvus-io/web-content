@@ -6,7 +6,7 @@ summary: >-
   filtering.
 title: Get & Scalar Query
 ---
-<h1 id="Get--Scalar-Query" class="common-anchor-header">Get &amp; Scalar Query<button data-href="#Get--Scalar-Query" class="anchor-icon" translate="no">
+<h1 id="Get--Scalar-Query" class="common-anchor-header">Get & Scalar Query<button data-href="#Get--Scalar-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -381,7 +381,7 @@ res = client.insert(
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 4. Create partitions and insert some more data</span>
-CreatePartitionReq createPartitionReq = CreatePartitionReq.builder()
+<span class="hljs-type">CreatePartitionReq</span> <span class="hljs-variable">createPartitionReq</span> <span class="hljs-operator">=</span> CreatePartitionReq.builder()
         .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
         .partitionName(<span class="hljs-string">&quot;partitionA&quot;</span>)
         .build();
@@ -397,16 +397,16 @@ client.createPartition(createPartitionReq);
 
 data.clear();
 
-<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i=<span class="hljs-number">1000</span>; i&lt;<span class="hljs-number">1500</span>; i++) {
-    Random rand = <span class="hljs-keyword">new</span> Random();
-    String current_color = colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>));
-    <span class="hljs-built_in">int</span> current_tag = rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
-    JsonObject row = <span class="hljs-keyword">new</span> JsonObject();
-    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-built_in">long</span>) i);
-    row.<span class="hljs-keyword">add</span>(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1000</span>; i&lt;<span class="hljs-number">1500</span>; i++) {
+    <span class="hljs-type">Random</span> <span class="hljs-variable">rand</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
+    <span class="hljs-type">String</span> <span class="hljs-variable">current_color</span> <span class="hljs-operator">=</span> colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>));
+    <span class="hljs-type">int</span> <span class="hljs-variable">current_tag</span> <span class="hljs-operator">=</span> rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-type">long</span>) i);
+    row.add(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
     row.addProperty(<span class="hljs-string">&quot;color&quot;</span>, current_color);
     row.addProperty(<span class="hljs-string">&quot;tag&quot;</span>, current_tag);
-    data.<span class="hljs-keyword">add</span>(row);
+    data.add(row);
 }
 
 insertReq = InsertReq.builder()
@@ -417,23 +417,23 @@ insertReq = InsertReq.builder()
 
 insertResp = client.insert(insertReq);
 
-System.<span class="hljs-keyword">out</span>.println(insertResp.getInsertCnt());
+System.out.println(insertResp.getInsertCnt());
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// 500</span>
 
 data.clear();
 
-<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i=<span class="hljs-number">1500</span>; i&lt;<span class="hljs-number">2000</span>; i++) {
-    Random rand = <span class="hljs-keyword">new</span> Random();
-    String current_color = colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>));
-    <span class="hljs-built_in">int</span> current_tag = rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
-    JsonObject row = <span class="hljs-keyword">new</span> JsonObject();
-    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-built_in">long</span>) i);
-    row.<span class="hljs-keyword">add</span>(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1500</span>; i&lt;<span class="hljs-number">2000</span>; i++) {
+    <span class="hljs-type">Random</span> <span class="hljs-variable">rand</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
+    <span class="hljs-type">String</span> <span class="hljs-variable">current_color</span> <span class="hljs-operator">=</span> colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>));
+    <span class="hljs-type">int</span> <span class="hljs-variable">current_tag</span> <span class="hljs-operator">=</span> rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-type">long</span>) i);
+    row.add(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
     row.addProperty(<span class="hljs-string">&quot;color&quot;</span>, current_color);
     row.addProperty(<span class="hljs-string">&quot;tag&quot;</span>, current_tag);
-    data.<span class="hljs-keyword">add</span>(row);
+    data.add(row);
 }
 
 insertReq = InsertReq.builder()
@@ -444,7 +444,7 @@ insertReq = InsertReq.builder()
 
 insertResp = client.insert(insertReq);
 
-System.<span class="hljs-keyword">out</span>.println(insertResp.getInsertCnt());
+System.out.println(insertResp.getInsertCnt());
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// 500</span>
@@ -726,9 +726,9 @@ getReq = GetReq.builder()
         .partitionName(<span class="hljs-string">&quot;partitionA&quot;</span>)
         .build();
 
-entities = client.<span class="hljs-keyword">get</span>(getReq);
+entities = client.get(getReq);
 
-System.<span class="hljs-keyword">out</span>.println(entities.getGetResults());
+System.out.println(entities.getGetResults());
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// [</span>
@@ -848,16 +848,16 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 6. Use basic operators</span>
 
-<span class="hljs-title class_">QueryReq</span> queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;1000 &lt; tag &lt; 1500&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;color_tag&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+<span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()
+    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+    .filter(<span class="hljs-string">&quot;1000 &lt; tag &lt; 1500&quot;</span>)
+    .outputFields(Arrays.asList(<span class="hljs-string">&quot;color_tag&quot;</span>))
+    .limit(<span class="hljs-number">3</span>)
+    .build();
 
-<span class="hljs-title class_">QueryResp</span> queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+<span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));
+System.out.println(JSONObject.toJSON(queryResp));
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// {&quot;queryResults&quot;: [</span>
@@ -935,16 +935,16 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;color == \&quot;brown\&quot;&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;color_tag&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+<pre><code translate="no" class="language-java">queryReq = QueryReq.builder()
+    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+    .filter(<span class="hljs-string">&quot;color == \&quot;brown\&quot;&quot;</span>)
+    .outputFields(Arrays.asList(<span class="hljs-string">&quot;color_tag&quot;</span>))
+    .limit(<span class="hljs-number">3</span>)
+    .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));
+System.out.println(JSONObject.toJSON(queryResp));
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// {&quot;queryResults&quot;: [</span>
@@ -1021,16 +1021,16 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;color not in [\&quot;green\&quot;, \&quot;purple\&quot;]&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;color_tag&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+<pre><code translate="no" class="language-java">queryReq = QueryReq.builder()
+    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+    .filter(<span class="hljs-string">&quot;color not in [\&quot;green\&quot;, \&quot;purple\&quot;]&quot;</span>)
+    .outputFields(Arrays.asList(<span class="hljs-string">&quot;color_tag&quot;</span>))
+    .limit(<span class="hljs-number">3</span>)
+    .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));   
+System.out.println(JSONObject.toJSON(queryResp));   
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// {&quot;queryResults&quot;: [</span>
@@ -1107,16 +1107,16 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;color_tag like \&quot;red%\&quot;&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;color_tag&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+<pre><code translate="no" class="language-java">queryReq = QueryReq.builder()
+    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+    .filter(<span class="hljs-string">&quot;color_tag like \&quot;red%\&quot;&quot;</span>)
+    .outputFields(Arrays.asList(<span class="hljs-string">&quot;color_tag&quot;</span>))
+    .limit(<span class="hljs-number">3</span>)
+    .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));  
+System.out.println(JSONObject.toJSON(queryResp));  
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// {&quot;queryResults&quot;: [</span>
@@ -1193,16 +1193,16 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;(color == \&quot;red\&quot;) and (1000 &lt; tag &lt; 1500)&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;color_tag&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+<pre><code translate="no" class="language-java">queryReq = QueryReq.builder()
+    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+    .filter(<span class="hljs-string">&quot;(color == \&quot;red\&quot;) and (1000 &lt; tag &lt; 1500)&quot;</span>)
+    .outputFields(Arrays.asList(<span class="hljs-string">&quot;color_tag&quot;</span>))
+    .limit(<span class="hljs-number">3</span>)
+    .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));  
+System.out.println(JSONObject.toJSON(queryResp));  
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// {&quot;queryResults&quot;: [</span>
@@ -1291,15 +1291,15 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 7. Use advanced operators</span>
 <span class="hljs-comment">// Count the total number of entities in the collection</span>
-queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;count(*)&quot;</span>))
-    .<span class="hljs-title function_">build</span>();
+queryReq = QueryReq.builder()
+    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+    .filter(<span class="hljs-string">&quot;&quot;</span>)
+    .outputFields(Arrays.asList(<span class="hljs-string">&quot;count(*)&quot;</span>))
+    .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));
+System.out.println(JSONObject.toJSON(queryResp));
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// {&quot;queryResults&quot;: [{&quot;entity&quot;: {&quot;count(*)&quot;: 2000}}]}</span>
@@ -1342,16 +1342,16 @@ res = client.query(
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Count the number of entities in a partition</span>
-queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">partitionNames</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;partitionA&quot;</span>))
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;count(*)&quot;</span>))
-    .<span class="hljs-title function_">build</span>();
+queryReq = QueryReq.builder()
+    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+    .partitionNames(Arrays.asList(<span class="hljs-string">&quot;partitionA&quot;</span>))
+    .filter(<span class="hljs-string">&quot;&quot;</span>)
+    .outputFields(Arrays.asList(<span class="hljs-string">&quot;count(*)&quot;</span>))
+    .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));
+System.out.println(JSONObject.toJSON(queryResp));
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// {&quot;queryResults&quot;: [{&quot;entity&quot;: {&quot;count(*)&quot;: 500}}]}</span>
@@ -1394,15 +1394,15 @@ res = client.query(
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Count the number of entities that match a specific filter</span>
-queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;(color == \&quot;red\&quot;) and (1000 &lt; tag &lt; 1500)&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;count(*)&quot;</span>))
-    .<span class="hljs-title function_">build</span>();
+queryReq = QueryReq.builder()
+    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+    .filter(<span class="hljs-string">&quot;(color == \&quot;red\&quot;) and (1000 &lt; tag &lt; 1500)&quot;</span>)
+    .outputFields(Arrays.asList(<span class="hljs-string">&quot;count(*)&quot;</span>))
+    .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));
+System.out.println(JSONObject.toJSON(queryResp));
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// {&quot;queryResults&quot;: [{&quot;entity&quot;: {&quot;count(*)&quot;: 7}}]}</span>
@@ -1443,16 +1443,16 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <tr><th><strong>Operator</strong></th><th><strong>Description</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><strong>and (&amp;&amp;)</strong></td><td>True if both operands are true</td></tr>
+<tr><td><strong>and (&&)</strong></td><td>True if both operands are true</td></tr>
 <tr><td><strong>or (||)</strong></td><td>True if either operand is true</td></tr>
 <tr><td><strong>+, -, *, /</strong></td><td>Addition, subtraction, multiplication, and division</td></tr>
 <tr><td><strong>**</strong></td><td>Exponent</td></tr>
 <tr><td><strong>%</strong></td><td>Modulus</td></tr>
-<tr><td><strong>&lt;, &gt;</strong></td><td>Less than, greater than</td></tr>
+<tr><td><strong><, ></strong></td><td>Less than, greater than</td></tr>
 <tr><td><strong>==, !=</strong></td><td>Equal to, not equal to</td></tr>
-<tr><td><strong>&lt;=, &gt;=</strong></td><td>Less than or equal to, greater than or equal to</td></tr>
+<tr><td><strong><=, >=</strong></td><td>Less than or equal to, greater than or equal to</td></tr>
 <tr><td><strong>not</strong></td><td>Reverses the result of a given condition.</td></tr>
-<tr><td><strong>like</strong></td><td>Compares a value to similar values using wildcard operators.<br/> For example, like “prefix%” matches strings that begin with &quot;prefix&quot;.</td></tr>
+<tr><td><strong>like</strong></td><td>Compares a value to similar values using wildcard operators.<br/> For example, like “prefix%” matches strings that begin with "prefix".</td></tr>
 <tr><td><strong>in</strong></td><td>Tests if an expression matches any value in a list of values.</td></tr>
 </tbody>
 </table>
