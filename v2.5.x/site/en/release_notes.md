@@ -8,6 +8,51 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.8
+
+Release date: April 1, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.8          | 2.5.6              | 2.5.7               | 2.5.6            |
+
+We’re excited to announce the release of Milvus 2.5.8, featuring enhancements to JSON expressions, UTF-8 validation, memory usage, and balancing logic. This version also includes multiple important bug fixes to improve concurrency and data handling. We encourage you to upgrade or give it a try, and as always, your feedback helps us continually refine Milvus!
+
+### Features
+
+- Support JSON `null`/`exists` expressions ([#41002](https://github.com/milvus-io/milvus/pull/41002))
+- Support parsing sparse vectors from Parquet structs in bulk inserts ([#40874](https://github.com/milvus-io/milvus/pull/40874))
+
+### Improvements
+
+- Balance the collection with the largest row count first ([#40958](https://github.com/milvus-io/milvus/pull/40958))
+- Support UTF-8 string validation during import ([#40746](https://github.com/milvus-io/milvus/pull/40746))
+- Add UTF-8 validation for all VARCHAR fields ([#40993](https://github.com/milvus-io/milvus/pull/40993))
+- Avoid re-query if hybrid search only requests the PK as output field ([#40906](https://github.com/milvus-io/milvus/pull/40906))
+- Refine array views to optimize memory usage ([#40206](https://github.com/milvus-io/milvus/pull/40206))
+- Add a trigger interval configuration for auto-balancing ([#39918](https://github.com/milvus-io/milvus/pull/39918))
+- Convert multiple OR expressions to IN expression ([#40751](https://github.com/milvus-io/milvus/pull/40751))
+- Support detailed manual compaction criteria ([#40924](https://github.com/milvus-io/milvus/pull/40924))
+- Retain raw tokens for audit logging ([#40867](https://github.com/milvus-io/milvus/pull/40867))
+- Optimize DataCoord meta mutex usage ([#40753](https://github.com/milvus-io/milvus/pull/40753))
+- Introduce batch subscriptions in `MsgDispatcher` ([#40596](https://github.com/milvus-io/milvus/pull/40596))
+
+### Bug fixes
+
+- Fixed a crash involving nullable input and growing mmap data types ([#40980](https://github.com/milvus-io/milvus/pull/40980))
+- Fixed potential data loss in delete operations caused by duplicate binlog IDs ([#40985](https://github.com/milvus-io/milvus/pull/40985)), ([#40976](https://github.com/milvus-io/milvus/pull/40976))
+- Added field index locks for `GetSegmentsIndexStates` to avoid potential panic when insertion while creating collection ([#40969](https://github.com/milvus-io/milvus/pull/40969))
+- Fixed concurrency issues in Rocksmq consumer registration ([#40885](https://github.com/milvus-io/milvus/pull/40885))
+- Retrieve all child delta logs for segment loading ([#40957](https://github.com/milvus-io/milvus/pull/40957))
+- Fixed wrong results caused by using JSON index when `iterative_filter` is specified ([#40946](https://github.com/milvus-io/milvus/pull/40946))
+- Ensured higher priority for the `exists` operation ([#40865](https://github.com/milvus-io/milvus/pull/40865))
+- Corrected `WithGroupSize` while reducing ([#40920](https://github.com/milvus-io/milvus/pull/40920))
+- Increased the number of slots proportionally as segment size grows ([#40862](https://github.com/milvus-io/milvus/pull/40862))
+- Set task queue time before enqueue ([#40853](https://github.com/milvus-io/milvus/pull/40853))
+- Fixed channel imbalance on DataNodes ([#40854](https://github.com/milvus-io/milvus/pull/40854))
+- Set correct default configurations for task slots ([#40821](https://github.com/milvus-io/milvus/pull/40821))
+- Go SDK: Set nullable flags according to FieldSchema for row-based insert ([#40962](https://github.com/milvus-io/milvus/pull/40962))
+
 ## v2.5.7
 
 Release date: March 21, 2025
