@@ -19,6 +19,63 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v258" class="common-anchor-header">v2.5.8<button data-href="#v258" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: April 1, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.8</td><td>2.5.6</td><td>2.5.7</td><td>2.5.6</td></tr>
+</tbody>
+</table>
+<p>We’re excited to announce the release of Milvus 2.5.8, featuring enhancements to JSON expressions, UTF-8 validation, memory usage, and balancing logic. This version also includes multiple important bug fixes to improve concurrency and data handling. We encourage you to upgrade or give it a try, and as always, your feedback helps us continually refine Milvus!</p>
+<h3 id="Features" class="common-anchor-header">Features</h3><ul>
+<li>Support JSON <code translate="no">null</code>/<code translate="no">exists</code> expressions (<a href="https://github.com/milvus-io/milvus/pull/41002">#41002</a>)</li>
+<li>Support parsing sparse vectors from Parquet structs in bulk inserts (<a href="https://github.com/milvus-io/milvus/pull/40874">#40874</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Balance the collection with the largest row count first (<a href="https://github.com/milvus-io/milvus/pull/40958">#40958</a>)</li>
+<li>Support UTF-8 string validation during import (<a href="https://github.com/milvus-io/milvus/pull/40746">#40746</a>)</li>
+<li>Add UTF-8 validation for all VARCHAR fields (<a href="https://github.com/milvus-io/milvus/pull/40993">#40993</a>)</li>
+<li>Avoid re-query if hybrid search only requests the PK as output field (<a href="https://github.com/milvus-io/milvus/pull/40906">#40906</a>)</li>
+<li>Refine array views to optimize memory usage (<a href="https://github.com/milvus-io/milvus/pull/40206">#40206</a>)</li>
+<li>Add a trigger interval configuration for auto-balancing (<a href="https://github.com/milvus-io/milvus/pull/39918">#39918</a>)</li>
+<li>Convert multiple OR expressions to IN expression (<a href="https://github.com/milvus-io/milvus/pull/40751">#40751</a>)</li>
+<li>Support detailed manual compaction criteria (<a href="https://github.com/milvus-io/milvus/pull/40924">#40924</a>)</li>
+<li>Retain raw tokens for audit logging (<a href="https://github.com/milvus-io/milvus/pull/40867">#40867</a>)</li>
+<li>Optimize DataCoord meta mutex usage (<a href="https://github.com/milvus-io/milvus/pull/40753">#40753</a>)</li>
+<li>Introduce batch subscriptions in <code translate="no">MsgDispatcher</code> (<a href="https://github.com/milvus-io/milvus/pull/40596">#40596</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed a crash involving nullable input and growing mmap data types (<a href="https://github.com/milvus-io/milvus/pull/40980">#40980</a>)</li>
+<li>Fixed potential data loss in delete operations caused by duplicate binlog IDs (<a href="https://github.com/milvus-io/milvus/pull/40985">#40985</a>), (<a href="https://github.com/milvus-io/milvus/pull/40976">#40976</a>)</li>
+<li>Added field index locks for <code translate="no">GetSegmentsIndexStates</code> to avoid potential panic when insertion while creating collection (<a href="https://github.com/milvus-io/milvus/pull/40969">#40969</a>)</li>
+<li>Fixed concurrency issues in Rocksmq consumer registration (<a href="https://github.com/milvus-io/milvus/pull/40885">#40885</a>)</li>
+<li>Retrieve all child delta logs for segment loading (<a href="https://github.com/milvus-io/milvus/pull/40957">#40957</a>)</li>
+<li>Fixed wrong results caused by using JSON index when <code translate="no">iterative_filter</code> is specified (<a href="https://github.com/milvus-io/milvus/pull/40946">#40946</a>)</li>
+<li>Ensured higher priority for the <code translate="no">exists</code> operation (<a href="https://github.com/milvus-io/milvus/pull/40865">#40865</a>)</li>
+<li>Corrected <code translate="no">WithGroupSize</code> while reducing (<a href="https://github.com/milvus-io/milvus/pull/40920">#40920</a>)</li>
+<li>Increased the number of slots proportionally as segment size grows (<a href="https://github.com/milvus-io/milvus/pull/40862">#40862</a>)</li>
+<li>Set task queue time before enqueue (<a href="https://github.com/milvus-io/milvus/pull/40853">#40853</a>)</li>
+<li>Fixed channel imbalance on DataNodes (<a href="https://github.com/milvus-io/milvus/pull/40854">#40854</a>)</li>
+<li>Set correct default configurations for task slots (<a href="https://github.com/milvus-io/milvus/pull/40821">#40821</a>)</li>
+<li>Go SDK: Set nullable flags according to FieldSchema for row-based insert (<a href="https://github.com/milvus-io/milvus/pull/40962">#40962</a>)</li>
+</ul>
 <h2 id="v257" class="common-anchor-header">v2.5.7<button data-href="#v257" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
