@@ -230,7 +230,7 @@ curl --request POST \
 
 ## Manage database properties
 
-Each database has its own properties, you can set the properties of a database when you create the database as described in [Create database](manage_databases.md#null) or you can alter and drop the properties of any existing database.
+Each database has its own properties, you can set the properties of a database when you create the database as described in [Create database](manage_databases.md#Create-database) or you can alter and drop the properties of any existing database.
 
 The following table lists possible database properties.
 
@@ -387,6 +387,52 @@ curl --request POST \
         "database.max.collections"
     ]
 }'
+```
+
+## Use database
+
+You can switch from one database to another without disconnecting from Milvus.
+
+<div class="alert note">
+
+RESTful API does not support this operation.
+
+</div>
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+client.use_database(
+    db_name="my_database_2"
+)
+```
+
+```java
+client.useDatabase("my_database_2");
+```
+
+```javascript
+await milvusClient.useDatabase({
+  db_name: "my_database_2",
+});
+```
+
+```go
+err = cli.UseDatabase(ctx, milvusclient.NewUseDatabaseOption("my_database_2"))
+if err != nil {
+    // handle err
+}
+```
+
+```bash
+# This operation is unsupported because RESTful does not provide a persistent connection.
+# As a workaround, initiate the required request again with the target database.
 ```
 
 ## Drop database
