@@ -258,7 +258,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Each database has its own properties, you can set the properties of a database when you create the database as described in <a href="/docs/manage_databases.md#null">Create database</a> or you can alter and drop the properties of any existing database.</p>
+    </button></h2><p>Each database has its own properties, you can set the properties of a database when you create the database as described in <a href="/docs/manage_databases.md#Create-database">Create database</a> or you can alter and drop the properties of any existing database.</p>
 <p>The following table lists possible database properties.</p>
 <table>
    <tr>
@@ -385,6 +385,50 @@ curl --request POST \
         &quot;database.max.collections&quot;
     ]
 }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Use-database" class="common-anchor-header">Use database<button data-href="#Use-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>You can switch from one database to another without disconnecting from Milvus.</p>
+<div class="alert note">
+<p>RESTful API does not support this operation.</p>
+</div>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.use_database(
+    db_name=<span class="hljs-string">&quot;my_database_2&quot;</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">client.useDatabase(<span class="hljs-string">&quot;my_database_2&quot;</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">useDatabase</span>({
+  <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = cli.UseDatabase(ctx, milvusclient.NewUseDatabaseOption(<span class="hljs-string">&quot;my_database_2&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handle err</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># This operation is unsupported because RESTful does not provide a persistent connection.</span>
+<span class="hljs-comment"># As a workaround, initiate the required request again with the target database.</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Drop-database" class="common-anchor-header">Drop database<button data-href="#Drop-database" class="anchor-icon" translate="no">
       <svg translate="no"
