@@ -20,7 +20,7 @@ title: FLAT
         ></path>
       </svg>
     </button></h1><p>The <strong>FLAT</strong> index is one of the simplest and most straightforward methods for indexing and searching floating-point vectors. It relies on a brute-force approach, where each query vector is directly compared to every vector in the dataset, without any advanced preprocessing or data structuring. This approach guarantees accuracy, offering 100% recall, as every potential match is evaluated.</p>
-<p>However, this exhaustive search method comes with trade-offs. The FLAT index is the slowest indexing option compared to other index types in Milvus, as it performs a full scan of the dataset for every query. Consequently, it is not well-suited for environments with massive datasets, where performance is a concern. The primary advantage of the FLAT index is its simplicity and reliability, as it requires no training or complex parameter configurations.</p>
+<p>However, this exhaustive search method comes with trade-offs. The FLAT index is the slowest indexing option compared to other index types in Milvus, as it performs a full scan of the dataset for every query. Consequently, it is not well-suited for environments with massive datasets, where performance is a concern. The primary advantage of the FLAT index is its simplicity and reliability, as it requires no extra index buidling or complex index parameter configurations.</p>
 <h2 id="Build-index" class="common-anchor-header">Build index<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
