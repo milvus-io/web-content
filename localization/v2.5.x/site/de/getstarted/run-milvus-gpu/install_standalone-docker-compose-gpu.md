@@ -59,45 +59,45 @@ title: Milvus mit GPU-Unterstützung mit Docker Compose starten
         ></path>
       </svg>
     </button></h2><p>Um Milvus mit GPU-Unterstützung mit Docker Compose zu installieren, führen Sie die folgenden Schritte aus.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Herunterladen und Konfigurieren der YAML-Datei</h3><p>Laden Sie  herunter <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> und speichern Sie sie als docker-compose.yml manuell oder mit dem folgenden Befehl.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Herunterladen und Konfigurieren der YAML-Datei</h3><p>Laden Sie  herunter <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.8/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> und speichern Sie sie als docker-compose.yml manuell oder mit dem folgenden Befehl.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.8/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie müssen einige Änderungen an den Umgebungsvariablen des eigenständigen Dienstes in der YAML-Datei wie folgt vornehmen:</p>
 <ul>
 <li>Um Milvus ein bestimmtes GPU-Gerät zuzuweisen, suchen Sie das Feld <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> in der Definition des <code translate="no">standalone</code> -Dienstes und ersetzen Sie seinen Wert durch die ID der gewünschten GPU. Sie können das Tool <code translate="no">nvidia-smi</code> verwenden, das in den NVIDIA-GPU-Anzeigetreibern enthalten ist, um die ID eines GPU-Geräts zu ermitteln. Milvus unterstützt mehrere GPU-Geräte.</li>
 </ul>
 <p>Weisen Sie Milvus ein einzelnes GPU-Gerät zu:</p>
-<pre><code translate="no" class="language-yaml">...
-<span class="hljs-attr">standalone</span>:
-  ...
-  <span class="hljs-attr">deploy</span>:
-    <span class="hljs-attr">resources</span>:
-      <span class="hljs-attr">reservations</span>:
-        <span class="hljs-attr">devices</span>:
-          - <span class="hljs-attr">driver</span>: nvidia
-            <span class="hljs-attr">capabilities</span>: [<span class="hljs-string">&quot;gpu&quot;</span>]
-            <span class="hljs-attr">device_ids</span>: [<span class="hljs-string">&quot;0&quot;</span>]
-...
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">standalone:</span>
+  <span class="hljs-string">...</span>
+  <span class="hljs-attr">deploy:</span>
+    <span class="hljs-attr">resources:</span>
+      <span class="hljs-attr">reservations:</span>
+        <span class="hljs-attr">devices:</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-attr">driver:</span> <span class="hljs-string">nvidia</span>
+            <span class="hljs-attr">capabilities:</span> [<span class="hljs-string">&quot;gpu&quot;</span>]
+            <span class="hljs-attr">device_ids:</span> [<span class="hljs-string">&quot;0&quot;</span>]
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Weisen Sie Milvus mehrere GPU-Geräte zu:</p>
-<pre><code translate="no" class="language-yaml">...
-<span class="hljs-attr">standalone</span>:
-  ...
-  <span class="hljs-attr">deploy</span>:
-    <span class="hljs-attr">resources</span>:
-      <span class="hljs-attr">reservations</span>:
-        <span class="hljs-attr">devices</span>:
-          - <span class="hljs-attr">driver</span>: nvidia
-            <span class="hljs-attr">capabilities</span>: [<span class="hljs-string">&quot;gpu&quot;</span>]
-            <span class="hljs-attr">device_ids</span>: [<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>]
-...
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">standalone:</span>
+  <span class="hljs-string">...</span>
+  <span class="hljs-attr">deploy:</span>
+    <span class="hljs-attr">resources:</span>
+      <span class="hljs-attr">reservations:</span>
+        <span class="hljs-attr">devices:</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-attr">driver:</span> <span class="hljs-string">nvidia</span>
+            <span class="hljs-attr">capabilities:</span> [<span class="hljs-string">&quot;gpu&quot;</span>]
+            <span class="hljs-attr">device_ids:</span> [<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>]
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Start-Milvus" class="common-anchor-header">2. Starten Sie Milvus</h3><p>Starten Sie Milvus in dem Verzeichnis, in dem sich die Datei docker-compose.yml befindet, indem Sie den Befehl ausführen:</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose up -d
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
-Creating milvus-etcd  ... <span class="hljs-keyword">done</span>
-Creating milvus-minio ... <span class="hljs-keyword">done</span>
-Creating milvus-standalone ... <span class="hljs-keyword">done</span>
+Creating milvus-etcd  ... done
+Creating milvus-minio ... done
+Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Wenn Sie den obigen Befehl nicht ausführen konnten, überprüfen Sie, ob auf Ihrem System Docker Compose V1 installiert ist. Wenn dies der Fall ist, sollten Sie aufgrund der Hinweise auf <a href="https://docs.docker.com/compose/">dieser Seite</a> auf Docker Compose V2 migrieren.</p>
@@ -111,7 +111,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 </ul></li>
 </ul>
 <p>Mit folgendem Befehl können Sie überprüfen, ob die Container funktionieren und laufen:</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose ps
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
       Name                     Command                  State                            Ports
 --------------------------------------------------------------------------------------------------------------------
@@ -122,17 +122,17 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <p>Sie können auch auf die Milvus-WebUI unter <code translate="no">http://127.0.0.1:9091/webui/</code> zugreifen, um mehr über Ihre Milvus-Instanz zu erfahren. Einzelheiten finden Sie unter <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>.</p>
 <p>Wenn Sie Milvus in der Datei docker-compose.yml mehrere GPU-Geräte zugewiesen haben, können Sie angeben, welches GPU-Gerät sichtbar oder zur Verwendung verfügbar ist.</p>
 <p>Machen Sie das GPU-Gerät <code translate="no">0</code> für Milvus sichtbar:</p>
-<pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0 ./milvus run standalone
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Machen Sie die GPU-Geräte <code translate="no">0</code> und <code translate="no">1</code> für Milvus sichtbar:</p>
-<pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0,1 ./milvus run standalone
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0,1 ./milvus run standalone</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie können diesen Container wie folgt stoppen und löschen.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
-$ <span class="hljs-built_in">sudo</span> docker compose down
-
-<span class="hljs-comment"># Delete service data</span>
-$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose down</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Delete service data</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-memory-pool" class="common-anchor-header">Speicherpool konfigurieren<button data-href="#Configure-memory-pool" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -156,24 +156,24 @@ $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> 
 <p>Um den Speicherpool zu konfigurieren, ändern Sie die Einstellungen <code translate="no">initMemSize</code> und <code translate="no">maxMemSize</code> in der Datei <code translate="no">milvus.yaml</code> wie folgt.</p>
 <ol>
 <li><p>Verwenden Sie den folgenden Befehl, um <code translate="no">milvus.yaml</code> aus dem Milvus-Container auf Ihren lokalen Rechner zu kopieren. Ersetzen Sie <code translate="no">&lt;milvus_container_id&gt;</code> durch Ihre aktuelle Milvus-Container-ID.</p>
-<pre><code translate="no" class="language-shell">docker <span class="hljs-built_in">cp</span> &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
+<pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Öffnen Sie die kopierte Datei <code translate="no">milvus.yaml</code> mit Ihrem bevorzugten Texteditor. Zum Beispiel mit vim:</p>
 <pre><code translate="no" class="language-shell">vim milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Bearbeiten Sie die Einstellungen <code translate="no">initMemSize</code> und <code translate="no">maxMemSize</code> nach Bedarf und speichern Sie Ihre Änderungen:</p>
-<pre><code translate="no" class="language-yaml">...
-gpu:
-  initMemSize: 0
-  maxMemSize: 0
-...
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">gpu:</span>
+  <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span>
+  <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">0</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><code translate="no">initMemSize</code>: Anfangsgröße des Speicherpools. Die Voreinstellung ist 1024.</li>
 <li><code translate="no">maxMemSize</code>: Maximale Größe des Speicherpools. Die Voreinstellung ist 2048.</li>
 </ul></li>
 <li><p>Verwenden Sie den folgenden Befehl, um die geänderte Datei <code translate="no">milvus.yaml</code> zurück in den Milvus-Container zu kopieren. Ersetzen Sie <code translate="no">&lt;milvus_container_id&gt;</code> durch Ihre aktuelle Milvus-Container-ID.</p>
-<pre><code translate="no" class="language-shell">docker <span class="hljs-built_in">cp</span> milvus.yaml &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml
+<pre><code translate="no" class="language-shell">docker cp milvus.yaml &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Starten Sie den Milvus-Container neu, um die Änderungen zu übernehmen:</p>
 <pre><code translate="no" class="language-shell">docker stop &lt;milvus_container_id&gt;

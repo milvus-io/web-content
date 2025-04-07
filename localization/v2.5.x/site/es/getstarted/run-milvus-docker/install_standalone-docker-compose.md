@@ -56,15 +56,15 @@ title: Ejecutar Milvus con Docker Compose (Linux)
         ></path>
       </svg>
     </button></h2><p>Milvus proporciona un archivo de configuración Docker Compose en el repositorio Milvus. Para instalar Milvus utilizando Docker Compose, simplemente ejecute</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the configuration file</span>
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-standalone-docker-compose.yml -O docker-compose.yml
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.8/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Start Milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 
-<span class="hljs-comment"># Start Milvus</span>
-$ <span class="hljs-built_in">sudo</span> docker compose up -d
-
-Creating milvus-etcd  ... <span class="hljs-keyword">done</span>
-Creating milvus-minio ... <span class="hljs-keyword">done</span>
-Creating milvus-standalone ... <span class="hljs-keyword">done</span>
+Creating milvus-etcd  ... done
+Creating milvus-minio ... done
+Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
@@ -81,7 +81,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 </ul></li>
 </ul>
 <p>Puede comprobar si los contenedores están en funcionamiento utilizando el siguiente comando:</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker-compose ps
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker-compose ps</span>
 
       Name                     Command                  State                            Ports
 --------------------------------------------------------------------------------------------------------------------
@@ -106,11 +106,11 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
         ></path>
       </svg>
     </button></h2><p>Puede detener y eliminar este contenedor de la siguiente manera</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
-$ <span class="hljs-built_in">sudo</span> docker compose down
-
-<span class="hljs-comment"># Delete service data</span>
-$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose down</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Delete service data</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Lo que sigue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

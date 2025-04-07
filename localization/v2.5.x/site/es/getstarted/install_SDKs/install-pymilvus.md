@@ -40,7 +40,7 @@ title: Instalar Milvus Python SDK
     </button></h2><ul>
 <li>Se requiere Python 3.7 o posterior.</li>
 <li>Google protobuf está instalado. Puede instalarlo con el comando <code translate="no">pip3 install protobuf==3.20.0</code>.</li>
-<li>grpcio-tools está instalado. Puede instalarlo con el comando <code translate="no">pip3 install grpcio-tools</code>.</li>
+<li>grpcio-tools está instalado. Puedes instalarlo con el comando <code translate="no">pip3 install grpcio-tools</code>.</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">Instalar PyMilvus mediante pip<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +60,7 @@ title: Instalar Milvus Python SDK
     </button></h2><p>PyMilvus está disponible en <a href="https://pypi.org/project/pymilvus/">Python Package Index</a>.</p>
 <div class="alert note">
 Se recomienda instalar una versión de PyMilvus que coincida con la versión del servidor Milvus que ha instalado. Para más información, consulte <a href="/docs/es/release_notes.md">las Notas de la versión</a>.</div>
-<pre><code translate="no">$ python3 -m pip install pymilvus==2.5.5
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">6</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Verifique la instalación<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +78,7 @@ Se recomienda instalar una versión de PyMilvus que coincida con la versión del
         ></path>
       </svg>
     </button></h2><p>Si PyMilvus está correctamente instalado, no se producirá ninguna excepción cuando ejecute el siguiente comando.</p>
-<pre><code translate="no">$ python3 -c <span class="hljs-string">&quot;from pymilvus import Collection&quot;</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -c <span class="hljs-string">&quot;from pymilvus import Collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">A continuación<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

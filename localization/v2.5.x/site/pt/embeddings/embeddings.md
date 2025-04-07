@@ -19,7 +19,7 @@ title: Visão geral da incorporação
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A incorporação é um conceito de aprendizagem automática para mapear dados num espaço de elevada dimensão, onde dados de semântica semelhante são colocados próximos uns dos outros. Sendo normalmente uma Rede Neuronal Profunda do BERT ou de outras famílias de Transformadores, o modelo de incorporação pode representar eficazmente a semântica de texto, imagens e outros tipos de dados com uma série de números conhecidos como vectores. Uma caraterística fundamental destes modelos é que a distância matemática entre vectores no espaço de elevada dimensão pode indicar a semelhança da semântica do texto ou das imagens originais. Esta propriedade abre muitas aplicações de recuperação de informação, como os motores de pesquisa da Web, como o Google e o Bing, a pesquisa de produtos e as recomendações em sítios de comércio eletrónico, e o paradigma recentemente popular da Geração Aumentada de Recuperação (RAG) na IA generativa.</p>
+    </button></h1><p>A incorporação é um conceito de aprendizagem automática para mapear dados num espaço de elevada dimensão, onde os dados de semântica semelhante são colocados próximos uns dos outros. Sendo normalmente uma Rede Neural Profunda do BERT ou de outras famílias de Transformadores, o modelo de incorporação pode representar eficazmente a semântica de texto, imagens e outros tipos de dados com uma série de números conhecidos como vectores. Uma caraterística fundamental destes modelos é que a distância matemática entre vectores no espaço de elevada dimensão pode indicar a semelhança da semântica do texto ou das imagens originais. Esta propriedade abre muitas aplicações de recuperação de informação, como os motores de pesquisa da Web, como o Google e o Bing, a pesquisa de produtos e as recomendações em sítios de comércio eletrónico, e o paradigma recentemente popular da Geração Aumentada de Recuperação (RAG) na IA generativa.</p>
 <p>Existem duas categorias principais de embeddings, cada uma produzindo um tipo diferente de vetor:</p>
 <ul>
 <li><p><strong>Incorporação densa</strong>: A maioria dos modelos de incorporação representa a informação como um vetor de vírgula flutuante de centenas a milhares de dimensões. O resultado é designado por vectores "densos", uma vez que a maioria das dimensões tem valores diferentes de zero. Por exemplo, o popular modelo de incorporação de fonte aberta BAAI/bge-base-en-v1.5 produz vectores de 768 números de vírgula flutuante (vetor flutuante de 768 dimensões).</p></li>
@@ -32,20 +32,22 @@ title: Visão geral da incorporação
 <tr><th>Função de incorporação</th><th>Tipo de função</th><th>API ou código aberto</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/OpenAIEmbeddingFunction/OpenAIEmbeddingFunction.md">openai</a></td><td>Densa</td><td>API</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/SentenceTransformerEmbeddingFunction/SentenceTransformerEmbeddingFunction.md">transformador de frases</a></td><td>Denso</td><td>Open-sourced</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/SpladeEmbeddingFunction/SpladeEmbeddingFunction.md">Splade</a></td><td>Esparso</td><td>De fonte aberta</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/BGEM3EmbeddingFunction/BGEM3EmbeddingFunction.md">bge-m3</a></td><td>Híbrido</td><td>De fonte aberta</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md">voyageai</a></td><td>Densa</td><td>API</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/JinaEmbeddingFunction/JinaEmbeddingFunction.md">jina</a></td><td>Densa</td><td>API</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/CohereEmbeddingFunction/CohereEmbeddingFunction.md">cohere</a></td><td>Densa</td><td>API</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/InstructorEmbeddingFunction/InstructorEmbeddingFunction.md">Instrutor</a></td><td>Densa</td><td>Código aberto</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MistralAIEmbeddingFunction/MistralAIEmbeddingFunction.md">IA Mistral</a></td><td>Densa</td><td>API</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/NomicEmbeddingFunction/NomicEmbeddingFunction.md">Nomic</a></td><td>Densa</td><td>API</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MGTEEmbeddingFunction/MGTEEmbeddingFunction.md">mGTE</a></td><td>Híbrida</td><td>De fonte aberta</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/OpenAIEmbeddingFunction/OpenAIEmbeddingFunction.md">openai</a></td><td>Densa</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/SentenceTransformerEmbeddingFunction/SentenceTransformerEmbeddingFunction.md">transformador de frases</a></td><td>Denso</td><td>Open-sourced</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/SpladeEmbeddingFunction/SpladeEmbeddingFunction.md">Splade</a></td><td>Esparso</td><td>De fonte aberta</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/BGEM3EmbeddingFunction/BGEM3EmbeddingFunction.md">bge-m3</a></td><td>Híbrido</td><td>De fonte aberta</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md">voyageai</a></td><td>Densa</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/JinaEmbeddingFunction/JinaEmbeddingFunction.md">jina</a></td><td>Densa</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/CohereEmbeddingFunction/CohereEmbeddingFunction.md">cohere</a></td><td>Densa</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/InstructorEmbeddingFunction/InstructorEmbeddingFunction.md">Instrutor</a></td><td>Densa</td><td>Código aberto</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/MistralAIEmbeddingFunction/MistralAIEmbeddingFunction.md">IA Mistral</a></td><td>Densa</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/NomicEmbeddingFunction/NomicEmbeddingFunction.md">Nomic</a></td><td>Densa</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/Model2VecEmbeddingFunction/Model2VecEmbeddingFunction.md">mGTE</a></td><td>Híbrida</td><td>De fonte aberta</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/Model2VecEmbeddingFunction/Model2VecEmbeddingFunction.md">Modelo2Vec</a></td><td>Híbrido</td><td>De fonte aberta</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/GeminiEmbeddingFunction/GeminiEmbeddingFunction.md">Gemini</a></td><td>Híbrido</td><td>Privado</td></tr>
 </tbody>
 </table>
-<h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">Exemplo 1: Utilizar a função de incorporação predefinida para gerar vectores densos<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
+<h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">Exemplo 1: Usar a função de incorporação predefinida para gerar vectores densos<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,7 +62,7 @@ title: Visão geral da incorporação
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para usar funções de incorporação com Milvus, primeiro instale a biblioteca cliente PyMilvus com o subpacote <code translate="no">model</code> que envolve todos os utilitários para a geração de incorporação.</p>
+    </button></h2><p>Para usar funções de incorporação com Milvus, primeiro instale a biblioteca cliente PyMilvus com o subpacote <code translate="no">model</code> que envolve todos os utilitários para geração de incorporação.</p>
 <pre><code translate="no" class="language-python">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>O subpacote <code translate="no">model</code> suporta vários modelos de incorporação, desde <a href="https://milvus.io/docs/embed-with-openai.md">OpenAI</a>, <a href="https://milvus.io/docs/embed-with-sentence-transform.md">Sentence Transformers</a>, <a href="https://milvus.io/docs/embed-with-bgm-m3.md">BGE M3</a>, até modelos pré-treinados <a href="https://milvus.io/docs/embed-with-splade.md">SPLADE</a>. Por uma questão de simplicidade, este exemplo utiliza o <code translate="no">DefaultEmbeddingFunction</code> que é um modelo de transformador de frases <strong>totalmente MiniLM-L6-v2</strong>, o modelo tem cerca de 70MB e será descarregado durante a primeira utilização:</p>
@@ -84,16 +86,16 @@ embeddings = ef.encode_documents(docs)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, ef.dim, embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>O resultado esperado é semelhante ao seguinte:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([<span class="hljs-number">-3.09392996e-02</span>, <span class="hljs-number">-1.80662833e-02</span>,  <span class="hljs-number">1.34775648e-02</span>,  <span class="hljs-number">2.77156215e-02</span>,
-       <span class="hljs-number">-4.86349640e-03</span>, <span class="hljs-number">-3.12581174e-02</span>, <span class="hljs-number">-3.55921760e-02</span>,  <span class="hljs-number">5.76934684e-03</span>,
+<pre><code translate="no" class="language-python">Embeddings: [array([-<span class="hljs-number">3.09392996e-02</span>, -<span class="hljs-number">1.80662833e-02</span>,  <span class="hljs-number">1.34775648e-02</span>,  <span class="hljs-number">2.77156215e-02</span>,
+       -<span class="hljs-number">4.86349640e-03</span>, -<span class="hljs-number">3.12581174e-02</span>, -<span class="hljs-number">3.55921760e-02</span>,  <span class="hljs-number">5.76934684e-03</span>,
         <span class="hljs-number">2.80773244e-03</span>,  <span class="hljs-number">1.35783911e-01</span>,  <span class="hljs-number">3.59678417e-02</span>,  <span class="hljs-number">6.17732145e-02</span>,
 ...
-       <span class="hljs-number">-4.61330153e-02</span>, <span class="hljs-number">-4.85207550e-02</span>,  <span class="hljs-number">3.13997865e-02</span>,  <span class="hljs-number">7.82178566e-02</span>,
-       <span class="hljs-number">-4.75336798e-02</span>,  <span class="hljs-number">5.21207601e-02</span>,  <span class="hljs-number">9.04406682e-02</span>, <span class="hljs-number">-5.36676683e-02</span>],
-      dtype=<span class="hljs-type">float32</span>)]
+       -<span class="hljs-number">4.61330153e-02</span>, -<span class="hljs-number">4.85207550e-02</span>,  <span class="hljs-number">3.13997865e-02</span>,  <span class="hljs-number">7.82178566e-02</span>,
+       -<span class="hljs-number">4.75336798e-02</span>,  <span class="hljs-number">5.21207601e-02</span>,  <span class="hljs-number">9.04406682e-02</span>, -<span class="hljs-number">5.36676683e-02</span>],
+      dtype=float32)]
 Dim: <span class="hljs-number">384</span> (<span class="hljs-number">384</span>,)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="common-anchor-header">Exemplo 2: Gerar vectores densos e esparsos numa única chamada com o modelo BGE M3<button data-href="#Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="anchor-icon" translate="no">
+<h2 id="Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="common-anchor-header">Exemplo 2: Gerar vectores densos e esparsos numa chamada com o modelo BGE M3<button data-href="#Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -116,11 +118,11 @@ Dim: <span class="hljs-number">384</span> (<span class="hljs-number">384</span>,
 <li><p>Pesquisar e inspecionar o resultado.</p></li>
 </ol>
 <p>Primeiro, precisamos de instalar as dependências necessárias.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">hybrid</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">BGEM3EmbeddingFunction</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     utility,
-    <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>,
-    <span class="hljs-title class_">Collection</span>, <span class="hljs-title class_">AnnSearchRequest</span>, <span class="hljs-title class_">RRFRanker</span>, connections,
+    FieldSchema, CollectionSchema, DataType,
+    Collection, AnnSearchRequest, RRFRanker, connections,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Utilizar o BGE M3 para codificar documentos e consultas para recuperação por incorporação.</p>

@@ -239,7 +239,7 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </div>
 <div class="filter-floating">
 <h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>Untuk aplikasi pencarian kemiripan vektor yang membutuhkan akurasi sempurna dan bergantung pada set data yang relatif kecil (skala jutaan), indeks FLAT adalah pilihan yang baik. FLAT tidak memampatkan vektor, dan merupakan satu-satunya indeks yang dapat menjamin hasil pencarian yang tepat. Hasil dari FLAT juga dapat digunakan sebagai titik perbandingan untuk hasil yang dihasilkan oleh indeks lain yang memiliki recall kurang dari 100%.</p>
-<p>FLAT akurat karena menggunakan pendekatan yang menyeluruh dalam melakukan pencarian, yang berarti untuk setiap kueri, input target dibandingkan dengan setiap kumpulan vektor dalam kumpulan data. Hal ini membuat FLAT menjadi indeks paling lambat dalam daftar kami, dan tidak cocok untuk melakukan kueri data vektor yang sangat besar. Tidak ada parameter yang diperlukan untuk indeks FLAT di Milvus, dan untuk menggunakannya tidak memerlukan pelatihan data.</p>
+<p>FLAT akurat karena menggunakan pendekatan yang menyeluruh dalam melakukan pencarian, yang berarti untuk setiap kueri, input target dibandingkan dengan setiap kumpulan vektor dalam kumpulan data. Hal ini membuat FLAT menjadi indeks paling lambat dalam daftar kami, dan tidak cocok untuk melakukan kueri data vektor yang sangat besar. Tidak ada parameter yang diperlukan untuk indeks FLAT di Milvus, dan menggunakannya tidak memerlukan pembangunan indeks tambahan.</p>
 <ul>
 <li><p>Parameter pencarian</p>
 <table>

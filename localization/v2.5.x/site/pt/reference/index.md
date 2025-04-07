@@ -197,7 +197,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <tbody>
   <tr>
     <td>BIN_FLAT</td>
-    <td>Índice baseado na quantização</td>
+    <td>Índice baseado em quantização</td>
     <td><ul>
       <li>Depende de conjuntos de dados relativamente pequenos.</li>
       <li>Requer uma precisão perfeita.</li>
@@ -239,7 +239,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </div>
 <div class="filter-floating">
 <h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>Para aplicações de pesquisa de semelhança de vectores que requerem uma precisão perfeita e dependem de conjuntos de dados relativamente pequenos (à escala de um milhão), o índice FLAT é uma boa escolha. O FLAT não comprime vectores e é o único índice que pode garantir resultados de pesquisa exactos. Os resultados do FLAT também podem ser usados como um ponto de comparação para resultados produzidos por outros índices que têm menos de 100% de recuperação.</p>
-<p>O FLAT é exato porque adopta uma abordagem exaustiva à pesquisa, o que significa que, para cada consulta, a entrada de destino é comparada com todos os conjuntos de vectores de um conjunto de dados. Isso torna o FLAT o índice mais lento da nossa lista e pouco adequado para consultar dados vetoriais maciços. Não são necessários parâmetros para o índice FLAT no Milvus, e a sua utilização não necessita de formação de dados.</p>
+<p>O FLAT é exato porque adopta uma abordagem exaustiva à pesquisa, o que significa que, para cada consulta, a entrada de destino é comparada com todos os conjuntos de vectores de um conjunto de dados. Isso torna o FLAT o índice mais lento da nossa lista e pouco adequado para consultar dados vetoriais maciços. Não há parâmetros necessários para o índice FLAT no Milvus, e usá-lo não requer a construção de um índice extra.</p>
 <ul>
 <li><p>Parâmetros de pesquisa</p>
 <table>
@@ -252,7 +252,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </table>
 </li>
 </ul>
-<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>O IVF_FLAT divide os dados vectoriais em <code translate="no">nlist</code> unidades de clusters e, em seguida, compara as distâncias entre o vetor de entrada alvo e o centro de cada cluster. Dependendo do número de clusters que o sistema está definido para consultar (<code translate="no">nprobe</code>), os resultados da pesquisa de semelhança são devolvidos com base em comparações entre a entrada de destino e os vectores apenas no(s) cluster(s) mais semelhante(s) - reduzindo drasticamente o tempo de consulta.</p>
+<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT divide os dados vectoriais em <code translate="no">nlist</code> unidades de clusters e, em seguida, compara as distâncias entre o vetor de entrada alvo e o centro de cada cluster. Dependendo do número de clusters que o sistema está definido para consultar (<code translate="no">nprobe</code>), os resultados da pesquisa de semelhança são devolvidos com base em comparações entre a entrada de destino e os vectores apenas no(s) cluster(s) mais semelhante(s) - reduzindo drasticamente o tempo de consulta.</p>
 <p>Ao ajustar <code translate="no">nprobe</code>, é possível encontrar um equilíbrio ideal entre precisão e velocidade para um determinado cenário. Os resultados do <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">teste de desempenho do IVF_FLAT</a> demonstram que o tempo de consulta aumenta drasticamente à medida que o número de vectores de entrada alvo (<code translate="no">nq</code>) e o número de clusters a pesquisar (<code translate="no">nprobe</code>) aumentam.</p>
 <p>O IVF_FLAT é o índice IVF mais básico, e os dados codificados armazenados em cada unidade são consistentes com os dados originais.</p>
 <ul>

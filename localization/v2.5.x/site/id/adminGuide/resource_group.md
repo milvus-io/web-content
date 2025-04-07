@@ -36,7 +36,7 @@ title: Mengelola Grup Sumber Daya
         ></path>
       </svg>
     </button></h2><p>Grup sumber daya dapat menampung beberapa atau semua node kueri dalam cluster Milvus. Anda dapat menentukan bagaimana Anda ingin mengalokasikan node kueri di antara kelompok sumber daya berdasarkan apa yang paling masuk akal bagi Anda. Sebagai contoh, dalam skenario multi-koleksi, Anda dapat mengalokasikan jumlah node kueri yang sesuai untuk setiap kelompok sumber daya dan memuat koleksi ke dalam kelompok sumber daya yang berbeda, sehingga operasi di dalam setiap koleksi secara fisik tidak bergantung pada koleksi lain.</p>
-<p>Perhatikan bahwa sebuah instance Milvus mempertahankan sebuah grup sumber daya default untuk menampung semua node kueri pada saat start-up dan menamainya dengan <strong>__default_resource_group</strong>.</p>
+<p>Perhatikan bahwa sebuah instance Milvus memiliki sebuah grup sumber daya default untuk menampung semua node kueri pada saat start-up dan menamainya dengan <strong>__default_resource_group</strong>.</p>
 <p>Mulai dari versi 2.4.1, Milvus menyediakan API grup sumber daya deklaratif, sementara API grup sumber daya yang lama sudah tidak digunakan lagi. API deklaratif yang baru memungkinkan pengguna untuk mencapai idempoten, untuk melakukan pengembangan sekunder di lingkungan cloud-native dengan lebih mudah.</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">Konsep kelompok sumber daya<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -54,12 +54,12 @@ title: Mengelola Grup Sumber Daya
         ></path>
       </svg>
     </button></h2><p>Grup sumber daya dijelaskan oleh konfigurasi grup sumber daya:</p>
-<pre><code translate="no" class="language-json">{
-    <span class="hljs-string">&quot;requests&quot;</span>: { <span class="hljs-string">&quot;nodeNum&quot;</span>: <span class="hljs-number">1</span> },
-    <span class="hljs-string">&quot;limits&quot;</span>: { <span class="hljs-string">&quot;nodeNum&quot;</span>: <span class="hljs-number">1</span> },
-    <span class="hljs-string">&quot;transfer_from&quot;</span>: [{ <span class="hljs-string">&quot;resource_group&quot;</span>: <span class="hljs-string">&quot;rg1&quot;</span> }],
-    <span class="hljs-string">&quot;transfer_to&quot;</span>: [{ <span class="hljs-string">&quot;resource_group&quot;</span>: <span class="hljs-string">&quot;rg2&quot;</span> }]
-}
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;requests&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;nodeNum&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;limits&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;nodeNum&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;transfer_from&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;resource_group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;rg1&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;transfer_to&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;resource_group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;rg2&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Atribut <strong>permintaan</strong> menentukan kondisi yang harus dipenuhi oleh grup sumber daya.</li>
@@ -90,7 +90,7 @@ title: Mengelola Grup Sumber Daya
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Semua contoh kode pada halaman ini terdapat pada PyMilvus 2.5.5. Upgrade instalasi PyMilvus Anda sebelum menjalankannya.</p>
+<p>Semua contoh kode pada halaman ini terdapat pada PyMilvus 2.5.6. Upgrade instalasi PyMilvus Anda sebelum menjalankannya.</p>
 </div>
 <ol>
 <li><p>Membuat grup sumber daya.</p>
@@ -113,7 +113,7 @@ node_num = <span class="hljs-number">0</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Membuat daftar grup sumber daya.</p>
 <p>Setelah Anda membuat grup sumber daya, Anda dapat melihatnya di daftar grup sumber daya.</p>
-<p>Untuk melihat daftar grup sumber daya dalam instans Milvus, lakukan hal berikut:</p>
+<p>Untuk melihat daftar grup sumber daya dalam suatu instans Milvus, lakukan hal berikut:</p>
 <pre><code translate="no" class="language-python">rgs = milvus_client.list_resource_groups()
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Resource group list: <span class="hljs-subst">{rgs}</span>&quot;</span>)
 

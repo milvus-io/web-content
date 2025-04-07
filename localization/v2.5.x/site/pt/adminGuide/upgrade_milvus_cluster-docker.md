@@ -20,7 +20,7 @@ title: Atualizar o cluster do Milvus com o Docker Compose
         ></path>
       </svg>
     </button></h1><p>Este tópico descreve como atualizar seu Milvus usando o Docker Compose.</p>
-<p>Em casos normais, você pode <a href="#Upgrade-Milvus-by-changing-its-image">atualizar o Milvus alterando sua imagem</a>. No entanto, é necessário <a href="#Migrate-the-metadata">migrar os metadados</a> antes de qualquer atualização da v2.1.x para a v2.5.6.</p>
+<p>Em casos normais, você pode <a href="#Upgrade-Milvus-by-changing-its-image">atualizar o Milvus alterando sua imagem</a>. No entanto, é necessário <a href="#Migrate-the-metadata">migrar os metadados</a> antes de qualquer atualização da v2.1.x para a v2.5.8.</p>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Atualizar o Milvus alterando a sua imagem<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,38 +40,38 @@ title: Atualizar o cluster do Milvus com o Docker Compose
 <ol>
 <li><p>Altere as etiquetas de imagem do Milvus em <code translate="no">docker-compose.yaml</code>.</p>
 <p>Note que é necessário alterar as etiquetas de imagem para o Proxy, todos os coordenadores e todos os nós de trabalho.</p>
-<pre><code translate="no" class="language-yaml">...
-rootcoord:
-  container_name: milvus-rootcoord
-  image: milvusdb/milvus:v2.5.6
-...
-proxy:
-  container_name: milvus-proxy
-  image: milvusdb/milvus:v2.5.6
-...
-querycoord:
-  container_name: milvus-querycoord
-  image: milvusdb/milvus:v2.5.6  
-...
-querynode:
-  container_name: milvus-querynode
-  image: milvusdb/milvus:v2.5.6
-...
-indexcoord:
-  container_name: milvus-indexcoord
-  image: milvusdb/milvus:v2.5.6
-...
-indexnode:
-  container_name: milvus-indexnode
-  image: milvusdb/milvus:v2.5.6 
-...
-datacoord:
-  container_name: milvus-datacoord
-  image: milvusdb/milvus:v2.5.6   
-...
-datanode:
-  container_name: milvus-datanode
-  image: milvusdb/milvus:v2.5.6
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">rootcoord:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-rootcoord</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.8</span>
+<span class="hljs-string">...</span>
+<span class="hljs-attr">proxy:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-proxy</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.8</span>
+<span class="hljs-string">...</span>
+<span class="hljs-attr">querycoord:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-querycoord</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.8</span>  
+<span class="hljs-string">...</span>
+<span class="hljs-attr">querynode:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-querynode</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.8</span>
+<span class="hljs-string">...</span>
+<span class="hljs-attr">indexcoord:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-indexcoord</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.8</span>
+<span class="hljs-string">...</span>
+<span class="hljs-attr">indexnode:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-indexnode</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.8</span> 
+<span class="hljs-string">...</span>
+<span class="hljs-attr">datacoord:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datacoord</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.8</span>   
+<span class="hljs-string">...</span>
+<span class="hljs-attr">datanode:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-datanode</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.8</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Execute os seguintes comandos para realizar a atualização.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -95,26 +95,26 @@ docker compose up -d
       </svg>
     </button></h2><ol>
 <li><p>Parar todos os componentes do Milvus.</p>
-<pre><code translate="no">docker stop &lt;milvus-component-docker-container-name&gt;
+<pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Preparar o ficheiro de configuração <code translate="no">migrate.yaml</code> para a migração de metadados.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
-cmd:
+<span class="hljs-attr">cmd:</span>
   <span class="hljs-comment"># Option: run/backup/rollback</span>
-  <span class="hljs-built_in">type</span>: run
-  runWithBackup: true
-config:
-  sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.5</span><span class="hljs-number">.6</span>
-  backupFilePath: /tmp/migration.bak
-metastore:
-  <span class="hljs-built_in">type</span>: etcd
-etcd:
-  endpoints:
-    - milvus-etcd:<span class="hljs-number">2379</span>  <span class="hljs-comment"># Use the etcd container name</span>
-  rootPath: by-dev <span class="hljs-comment"># The root path where data is stored in etcd</span>
-  metaSubPath: meta
-  kvSubPath: kv
+  <span class="hljs-attr">type:</span> <span class="hljs-string">run</span>
+  <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">config:</span>
+  <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.5</span><span class="hljs-number">.8</span>
+  <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
+<span class="hljs-attr">metastore:</span>
+  <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>
+<span class="hljs-attr">etcd:</span>
+  <span class="hljs-attr">endpoints:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">milvus-etcd:2379</span>  <span class="hljs-comment"># Use the etcd container name</span>
+  <span class="hljs-attr">rootPath:</span> <span class="hljs-string">by-dev</span> <span class="hljs-comment"># The root path where data is stored in etcd</span>
+  <span class="hljs-attr">metaSubPath:</span> <span class="hljs-string">meta</span>
+  <span class="hljs-attr">kvSubPath:</span> <span class="hljs-string">kv</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Executar o contentor de migração.</p>
 <pre><code translate="no"><span class="hljs-comment"># Suppose your docker-compose run with the default milvus network,</span>
@@ -122,7 +122,7 @@ etcd:
 docker run --<span class="hljs-built_in">rm</span> -it --network milvus -v $(<span class="hljs-built_in">pwd</span>)/migration.yaml:/milvus/configs/migration.yaml milvus/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Inicie novamente os componentes do Milvus com a nova imagem do Milvus.</p>
-<pre><code translate="no">Update the milvus image tag in the docker-compose.yaml
+<pre><code translate="no">Update the milvus <span class="hljs-selector-tag">image</span> tag in the docker-compose<span class="hljs-selector-class">.yaml</span>
 docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
@@ -149,6 +149,6 @@ docker compose up -d
 <li>Se estiver pronto para implantar seu cluster em nuvens:<ul>
 <li>Saiba como <a href="/docs/pt/eks.md">implantar o Milvus no Amazon EKS com o Terraform</a></li>
 <li>Saiba como implantar <a href="/docs/pt/gcp.md">o Milvus Cluster no GCP com Kubernetes</a></li>
-<li>Saiba como <a href="/docs/pt/azure.md">implantar o Milvus no Microsoft Azure com o Kubernetes</a></li>
+<li>Saiba como implantar <a href="/docs/pt/azure.md">o Milvus no Microsoft Azure com o Kubernetes</a></li>
 </ul></li>
 </ul>

@@ -38,8 +38,8 @@ title: Búsqueda de imágenes con Milvus
         ></path>
       </svg>
     </button></h2><p>En primer lugar, tenemos que cargar el conjunto de datos y extraerlo para su posterior procesamiento.</p>
-<pre><code translate="no" class="language-python">!wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.<span class="hljs-built_in">zip</span>
-!unzip -q -o reverse_image_search.<span class="hljs-built_in">zip</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.zip</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q -o reverse_image_search.zip</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Prequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,8 +66,8 @@ title: Búsqueda de imágenes con Milvus
 <li>almohada</li>
 </ul>
 <p>Para ejecutar Colab, proporcionamos los prácticos comandos para instalar las dependencias necesarias.</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus --upgrade
-$ pip install timm
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus --upgrade</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install timm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si utilizas Google Colab, para activar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong>. (Haga clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla y seleccione "Reiniciar sesión" en el menú desplegable).</p>
@@ -236,7 +236,7 @@ display(concatenated_image)
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/image_search_with_milvus_files/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <pre><code translate="no">'results'
 </code></pre>

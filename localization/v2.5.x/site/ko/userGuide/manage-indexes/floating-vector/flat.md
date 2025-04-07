@@ -20,7 +20,7 @@ title: FLAT
         ></path>
       </svg>
     </button></h1><p><strong>FLAT</strong> 인덱스는 부동 소수점 벡터를 색인하고 검색하는 가장 간단하고 직관적인 방법 중 하나입니다. 이 방식은 고급 전처리나 데이터 구조화 없이 각 쿼리 벡터를 데이터 세트의 모든 벡터와 직접 비교하는 무차별 대입 방식에 의존합니다. 이 접근 방식은 모든 잠재적 일치 항목을 평가하기 때문에 100%의 정확도를 보장합니다.</p>
-<p>하지만 이 철저한 검색 방법에는 단점이 있습니다. FLAT 인덱스는 모든 쿼리에 대해 데이터 세트의 전체 스캔을 수행하기 때문에 Milvus의 다른 인덱스 유형에 비해 가장 느린 인덱싱 옵션입니다. 따라서 성능이 중요한 대규모 데이터 세트가 있는 환경에는 적합하지 않습니다. FLAT 인덱스의 가장 큰 장점은 교육이나 복잡한 매개변수 구성이 필요 없기 때문에 단순성과 신뢰성이 높다는 점입니다.</p>
+<p>하지만 이 철저한 검색 방법에는 단점이 있습니다. FLAT 인덱스는 모든 쿼리에 대해 데이터 세트의 전체 스캔을 수행하기 때문에 Milvus의 다른 인덱스 유형에 비해 가장 느린 인덱싱 옵션입니다. 따라서 성능이 중요한 대규모 데이터 세트가 있는 환경에는 적합하지 않습니다. FLAT 인덱스의 가장 큰 장점은 추가 인덱스 빌드나 복잡한 인덱스 매개변수 구성이 필요 없기 때문에 단순성과 안정성이 뛰어나다는 점입니다.</p>
 <h2 id="Build-index" class="common-anchor-header">인덱스 구축<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +36,7 @@ title: FLAT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus의 벡터 필드에 <code translate="no">FLAT</code> 인덱스를 구축하려면 <code translate="no">add_index()</code> 방법을 사용하여 인덱스에 <code translate="no">index_type</code> 및 <code translate="no">metric_type</code> 매개 변수를 지정합니다.</p>
+    </button></h2><p>Milvus에서 벡터 필드에 <code translate="no">FLAT</code> 인덱스를 구축하려면 <code translate="no">add_index()</code> 방법을 사용하여 인덱스에 <code translate="no">index_type</code> 및 <code translate="no">metric_type</code> 매개 변수를 지정합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>

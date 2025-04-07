@@ -38,8 +38,8 @@ title: Bildsuche mit Milvus
         ></path>
       </svg>
     </button></h2><p>Zunächst müssen wir den Datensatz laden und für die weitere Verarbeitung extrahieren.</p>
-<pre><code translate="no" class="language-python">!wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.<span class="hljs-built_in">zip</span>
-!unzip -q -o reverse_image_search.<span class="hljs-built_in">zip</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.zip</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q -o reverse_image_search.zip</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Prequisites" class="common-anchor-header">Vorraussetzungen<button data-href="#Prequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,8 +66,8 @@ title: Bildsuche mit Milvus
 <li>pillow</li>
 </ul>
 <p>Um Colab auszuführen, stellen wir die praktischen Befehle zur Installation der erforderlichen Abhängigkeiten zur Verfügung.</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus --upgrade
-$ pip install timm
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus --upgrade</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install timm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die gerade installierten Abhängigkeiten zu aktivieren. (Klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
@@ -168,7 +168,7 @@ client.create_collection(
 <li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, verwenden möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">öffentlichen Endpunkt und dem Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
 </ul>
 </div>
-<h2 id="Insert-the-Embeddings-to-Milvus" class="common-anchor-header">Einfügen der Einbettungen in Milvus<button data-href="#Insert-the-Embeddings-to-Milvus" class="anchor-icon" translate="no">
+<h2 id="Insert-the-Embeddings-to-Milvus" class="common-anchor-header">Einfügen der Embeddings in Milvus<button data-href="#Insert-the-Embeddings-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -236,7 +236,7 @@ display(concatenated_image)
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/image_search_with_milvus_files/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <pre><code translate="no">'results'
 </code></pre>

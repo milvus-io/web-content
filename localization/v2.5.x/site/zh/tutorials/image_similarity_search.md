@@ -38,8 +38,8 @@ title: 使用 Milvus 搜索图像
         ></path>
       </svg>
     </button></h2><p>首先，我们需要加载数据集并解压缩，以便进一步处理。</p>
-<pre><code translate="no" class="language-python">!wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.<span class="hljs-built_in">zip</span>
-!unzip -q -o reverse_image_search.<span class="hljs-built_in">zip</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.zip</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q -o reverse_image_search.zip</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Prequisites" class="common-anchor-header">前提条件<button data-href="#Prequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,8 +66,8 @@ title: 使用 Milvus 搜索图像
 <li>枕头</li>
 </ul>
 <p>要运行 Colab，我们提供了安装必要依赖项的便捷命令。</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus --upgrade
-$ pip install timm
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus --upgrade</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install timm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重启运行时</strong>。(点击屏幕上方的 "Runtime（运行时）"菜单，从下拉菜单中选择 "Restart session（重新启动会话）"）。</p>
@@ -143,7 +143,7 @@ $ pip install timm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>然后，我们需要创建一个 Milvus Collections 来存储图像嵌入信息。</p>
+    </button></h2><p>然后，我们需要创建一个 Milvus Collections 来存储图像嵌入信息</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Set up a Milvus client</span>
@@ -236,7 +236,7 @@ display(concatenated_image)
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/image_search_with_milvus_files/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <pre><code translate="no">'results'
 </code></pre>

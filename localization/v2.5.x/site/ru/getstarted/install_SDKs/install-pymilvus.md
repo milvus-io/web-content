@@ -60,7 +60,7 @@ title: Установка Milvus Python SDK
     </button></h2><p>PyMilvus доступен в <a href="https://pypi.org/project/pymilvus/">индексе пакетов Python</a>.</p>
 <div class="alert note">
 Рекомендуется устанавливать версию PyMilvus, соответствующую версии установленного вами сервера Milvus. Для получения дополнительной информации см. раздел <a href="/docs/ru/release_notes.md">Информация о выпуске</a>.</div>
-<pre><code translate="no">$ python3 -m pip install pymilvus==2.5.5
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">6</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Проверка установки<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +78,7 @@ title: Установка Milvus Python SDK
         ></path>
       </svg>
     </button></h2><p>Если PyMilvus установлен правильно, то при выполнении следующей команды не возникнет исключения.</p>
-<pre><code translate="no">$ python3 -c <span class="hljs-string">&quot;from pymilvus import Collection&quot;</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -c <span class="hljs-string">&quot;from pymilvus import Collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

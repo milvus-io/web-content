@@ -38,8 +38,8 @@ title: Поиск изображений с помощью Milvus
         ></path>
       </svg>
     </button></h2><p>Сначала нам нужно загрузить набор данных и извлечь его для дальнейшей обработки.</p>
-<pre><code translate="no" class="language-python">!wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.<span class="hljs-built_in">zip</span>
-!unzip -q -o reverse_image_search.<span class="hljs-built_in">zip</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.zip</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q -o reverse_image_search.zip</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Prequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,8 +66,8 @@ title: Поиск изображений с помощью Milvus
 <li>pillow</li>
 </ul>
 <p>Чтобы запустить Colab, мы предоставили удобные команды для установки необходимых зависимостей.</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus --upgrade
-$ pip install timm
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus --upgrade</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install timm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Если вы используете Google Colab, для включения только что установленных зависимостей вам, возможно, потребуется <strong>перезапустить среду выполнения</strong>. (Нажмите на меню "Время выполнения" в верхней части экрана и выберите "Перезапустить сессию" из выпадающего меню).</p>
@@ -236,7 +236,7 @@ display(concatenated_image)
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/image_search_with_milvus_files/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
    </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <pre><code translate="no">'results'
 </code></pre>

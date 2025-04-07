@@ -38,8 +38,8 @@ title: Docker Compose로 Milvus 구성하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">milvus.yaml</code> 을 직접<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.5.6/configs/milvus.yaml">다운로드하거나</a> 다음 명령을 사용하여<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.5.6/configs/milvus.yaml">다운로드합니다</a>.</p>
-<pre><code translate="no">$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.5.6/configs/milvus.yaml
+    </button></h2><p><code translate="no">milvus.yaml</code> 을 직접<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.5.8/configs/milvus.yaml">다운로드하거나</a> 다음 명령을 사용하여<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.5.8/configs/milvus.yaml">다운로드합니다</a>.</p>
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v2.5.8/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-configuration-file" class="common-anchor-header">구성 파일 수정하기<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -211,10 +211,10 @@ title: Docker Compose로 Milvus 구성하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-standalone-docker-compose.yml">스탠드얼론용</a> 설치 파일을 다운로드하고 <code translate="no">docker-compose.yml</code> 에 저장합니다.</p>
+    </button></h2><p>Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.8/milvus-standalone-docker-compose.yml">스탠드얼론용</a> 설치 파일을 다운로드하고 <code translate="no">docker-compose.yml</code> 에 저장합니다.</p>
 <p>다음 명령을 간단히 실행할 수도 있습니다.</p>
-<pre><code translate="no"><span class="hljs-comment"># For Milvus standalone</span>
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-standalone-docker-compose.yml -O docker-compose.yml
+<pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For Milvus standalone</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.8/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-installation-file" class="common-anchor-header">설치 파일 수정하기<button data-href="#Modify-the-installation-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -233,24 +233,24 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-stand
       </svg>
     </button></h2><p><code translate="no">docker-compose.yml</code> 에서 각 <code translate="no">milvus-standalone</code> 아래에 <code translate="no">volumes</code> 섹션을 추가합니다.</p>
 <p><code translate="no">milvus.yaml</code> 파일의 로컬 경로를 모든 <code translate="no">volumes</code> 섹션 아래에 있는 구성 파일 <code translate="no">/milvus/configs/milvus.yaml</code> 의 해당 도커 컨테이너 경로에 매핑합니다.</p>
-<pre><code translate="no" class="language-yaml">...
-  standalone:
-    container_name: milvus-standalone
-    image: milvusdb/milvus:v2.2.13
-    <span class="hljs-built_in">command</span>: [<span class="hljs-string">&quot;milvus&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;standalone&quot;</span>]
-    environment:
-      ETCD_ENDPOINTS: etcd:2379
-      MINIO_ADDRESS: minio:9000
-    volumes:
-      - /local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml   <span class="hljs-comment"># Map the local path to the container path</span>
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/volumes/milvus:/var/lib/milvus
-    ports:
-      - <span class="hljs-string">&quot;19530:19530&quot;</span>
-      - <span class="hljs-string">&quot;9091:9091&quot;</span>
-    depends_on:
-      - <span class="hljs-string">&quot;etcd&quot;</span>
-      - <span class="hljs-string">&quot;minio&quot;</span>
-...
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.2.13</span>
+    <span class="hljs-attr">command:</span> [<span class="hljs-string">&quot;milvus&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;standalone&quot;</span>]
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">ETCD_ENDPOINTS:</span> <span class="hljs-string">etcd:2379</span>
+      <span class="hljs-attr">MINIO_ADDRESS:</span> <span class="hljs-string">minio:9000</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml</span>   <span class="hljs-comment"># Map the local path to the container path</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;19530:19530&quot;</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;9091:9091&quot;</span>
+    <span class="hljs-attr">depends_on:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;etcd&quot;</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;minio&quot;</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 데이터는 <code translate="no">docker-compose.yml</code> 의 기본 구성에 따라 <code translate="no">/volumes</code> 폴더에 저장됩니다. 데이터를 저장할 폴더를 변경하려면 <code translate="no">docker-compose.yml</code> 을 편집하거나 <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code> 을 실행합니다.</div>
@@ -270,7 +270,7 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-stand
         ></path>
       </svg>
     </button></h2><p>구성 파일과 설치 파일 수정을 마쳤으면 Milvus를 시작할 수 있습니다.</p>
-<pre><code translate="no">$ <span class="hljs-built_in">sudo</span> docker compose up -d
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

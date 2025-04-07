@@ -55,14 +55,14 @@ summary: >-
     </button></h2><p>يمكنك استخدام واجهة برمجة تطبيقات Milvus RESTful API أو حزم SDK لإنشاء البيانات برمجيًا.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = <span class="hljs-title class_">MilvusClient</span>(
+client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-client.<span class="hljs-title function_">create_database</span>(
+client.create_database(
     db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -119,20 +119,20 @@ curl --request POST \
 <p>يمكنك أيضًا تعيين خصائص لقاعدة البيانات عند إنشائها. يقوم المثال التالي بتعيين عدد النسخ المتماثلة لقاعدة البيانات.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_database</span>(
+<pre><code translate="no" class="language-python">client.create_database(
     db_name=<span class="hljs-string">&quot;my_database_2&quot;</span>,
     properties={
         <span class="hljs-string">&quot;database.replica.number&quot;</span>: <span class="hljs-number">3</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">String</span>&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-properties.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;database.replica.number&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>);
-<span class="hljs-title class_">CreateDatabaseReq</span> createDatabaseReq = <span class="hljs-title class_">CreateDatabaseReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">databaseName</span>(<span class="hljs-string">&quot;my_database_2&quot;</span>)
-        .<span class="hljs-title function_">properties</span>(properties)
-        .<span class="hljs-title function_">build</span>();
-client.<span class="hljs-title function_">createDatabase</span>(createDatabaseReq);
+<pre><code translate="no" class="language-java">Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.put(<span class="hljs-string">&quot;database.replica.number&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>);
+<span class="hljs-type">CreateDatabaseReq</span> <span class="hljs-variable">createDatabaseReq</span> <span class="hljs-operator">=</span> CreateDatabaseReq.builder()
+        .databaseName(<span class="hljs-string">&quot;my_database_2&quot;</span>)
+        .properties(properties)
+        .build();
+client.createDatabase(createDatabaseReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createDatabase</span>({
     <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,
@@ -243,7 +243,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>كل قاعدة بيانات لها خصائصها الخاصة، يمكنك تعيين خصائص قاعدة البيانات عند إنشاء قاعدة البيانات كما هو موضح في <a href="/docs/ar/manage_databases.md#null">إنشاء قاعدة بيانات</a> أو يمكنك تغيير وإسقاط خصائص أي قاعدة بيانات موجودة.</p>
+    </button></h2><p>كل قاعدة بيانات لها خصائصها الخاصة، يمكنك تعيين خصائص قاعدة البيانات عند إنشاء قاعدة البيانات كما هو موضح في <a href="/docs/ar/manage_databases.md#Create-database">إنشاء قاعدة بيانات</a> أو يمكنك تغيير وإسقاط خصائص أي قاعدة بيانات موجودة.</p>
 <p>يسرد الجدول التالي خصائص قاعدة البيانات المحتملة.</p>
 <table>
    <tr>
@@ -285,16 +285,16 @@ curl --request POST \
 <h3 id="Alter-database-properties" class="common-anchor-header">تغيير خصائص قاعدة البيانات</h3><p>يمكنك تغيير خصائص قاعدة بيانات موجودة على النحو التالي. يحد المثال التالي من عدد المجموعات التي يمكنك إنشاؤها في قاعدة البيانات.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">alter_database_properties</span>(
-    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>,
-    <span class="hljs-attr">properties</span>: {
+<pre><code translate="no" class="language-python">client.alter_database_properties(
+    db_name: <span class="hljs-string">&quot;my_database_1&quot;</span>,
+    properties: {
         <span class="hljs-string">&quot;database.max.collections&quot;</span>: <span class="hljs-number">10</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">client.alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
         .databaseName(<span class="hljs-string">&quot;my_database_1&quot;</span>)
-        .<span class="hljs-built_in">property</span>(<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
+        .property(<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">alterDatabaseProperties</span>({
@@ -325,17 +325,17 @@ curl --request POST \
 <h3 id="Drop-database-properties" class="common-anchor-header">إسقاط خصائص قاعدة البيانات</h3><p>يمكنك أيضًا إعادة تعيين خاصية قاعدة بيانات عن طريق إسقاطها كما يلي. يزيل المثال التالي الحد من عدد المجموعات التي يمكنك إنشاؤها في قاعدة البيانات.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_database_properties</span>(
-    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>,
-    <span class="hljs-attr">property_keys</span>: [
+<pre><code translate="no" class="language-python">client.drop_database_properties(
+    db_name: <span class="hljs-string">&quot;my_database_1&quot;</span>,
+    property_keys: [
         <span class="hljs-string">&quot;database.max.collections&quot;</span>
     ]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">client.<span class="hljs-title function_">dropDatabaseProperties</span>(<span class="hljs-title class_">DropDatabasePropertiesReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">databaseName</span>(<span class="hljs-string">&quot;my_database_1&quot;</span>)
-        .<span class="hljs-title function_">propertyKeys</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-string">&quot;database.max.collections&quot;</span>))
-        .<span class="hljs-title function_">build</span>());
+<pre><code translate="no" class="language-java">client.dropDatabaseProperties(DropDatabasePropertiesReq.builder()
+        .databaseName(<span class="hljs-string">&quot;my_database_1&quot;</span>)
+        .propertyKeys(Collections.singletonList(<span class="hljs-string">&quot;database.max.collections&quot;</span>))
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">dropDatabaseProperties</span>({
   <span class="hljs-attr">db_name</span>: my_database_1,
@@ -361,6 +361,45 @@ curl --request POST \
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Use-database" class="common-anchor-header">استخدام قاعدة البيانات<button data-href="#Use-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>يمكنك التبديل من قاعدة بيانات إلى أخرى دون قطع الاتصال بـ Milvus.</p>
+<div class="alert note">
+<p>واجهة برمجة تطبيقات RESTful لا تدعم هذه العملية.</p>
+</div>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">client.use_database(
+    db_name=<span class="hljs-string">&quot;my_database_2&quot;</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">client.useDatabase(<span class="hljs-string">&quot;my_database_2&quot;</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">useDatabase</span>({
+  <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = cli.UseDatabase(ctx, milvusclient.NewUseDatabaseOption(<span class="hljs-string">&quot;my_database_2&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handle err</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># This operation is unsupported because RESTful does not provide a persistent connection.</span>
+<span class="hljs-comment"># As a workaround, initiate the required request again with the target database.</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Drop-database" class="common-anchor-header">إسقاط قاعدة البيانات<button data-href="#Drop-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -376,7 +415,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد عدم الحاجة إلى قاعدة البيانات، يمكنك إسقاط قاعدة البيانات. لاحظ ذلك:</p>
+    </button></h2><p>بمجرد انتفاء الحاجة إلى قاعدة البيانات، يمكنك إسقاط قاعدة البيانات. لاحظ أن:</p>
 <ul>
 <li><p>لا يمكن إسقاط قواعد البيانات الافتراضية.</p></li>
 <li><p>قبل إسقاط قاعدة البيانات، تحتاج إلى إسقاط جميع المجموعات في قاعدة البيانات أولاً.</p></li>
@@ -384,13 +423,13 @@ curl --request POST \
 <p>يمكنك استخدام واجهة برمجة تطبيقات Milvus RESTful API أو SDKs لإنشاء البيانات برمجيًا.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_database</span>(
+<pre><code translate="no" class="language-python">client.drop_database(
     db_name=<span class="hljs-string">&quot;my_database_2&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">client.<span class="hljs-title function_">dropDatabase</span>(<span class="hljs-title class_">DropDatabaseReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">databaseName</span>(<span class="hljs-string">&quot;my_database_2&quot;</span>)
-        .<span class="hljs-title function_">build</span>());
+<pre><code translate="no" class="language-java">client.dropDatabase(DropDatabaseReq.builder()
+        .databaseName(<span class="hljs-string">&quot;my_database_2&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">dropDatabase</span>({
   <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,

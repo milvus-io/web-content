@@ -124,7 +124,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая карта",
+                "label": "Рулевая диаграмма",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -144,7 +144,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая диаграмма",
+                "label": "Рулевая карта",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -895,9 +895,15 @@
             "children": []
           },
           {
+            "label": "Model2Vec",
+            "id": "embed-with-model2vec.md",
+            "order": 13,
+            "children": []
+          },
+          {
             "label": "Близнецы",
             "id": "embed-with-gemini.md",
-            "order": 13,
+            "order": 14,
             "children": []
           }
         ]

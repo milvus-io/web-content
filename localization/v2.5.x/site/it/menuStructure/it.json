@@ -895,9 +895,15 @@
             "children": []
           },
           {
+            "label": "Modello2Vec",
+            "id": "embed-with-model2vec.md",
+            "order": 13,
+            "children": []
+          },
+          {
             "label": "Gemelli",
             "id": "embed-with-gemini.md",
-            "order": 13,
+            "order": 14,
             "children": []
           }
         ]
@@ -1864,7 +1870,7 @@
             "children": []
           },
           {
-            "label": "Dificare",
+            "label": "Dify",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []

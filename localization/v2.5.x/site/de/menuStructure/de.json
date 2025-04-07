@@ -895,9 +895,15 @@
             "children": []
           },
           {
+            "label": "Model2Vec",
+            "id": "embed-with-model2vec.md",
+            "order": 13,
+            "children": []
+          },
+          {
             "label": "Zwillinge",
             "id": "embed-with-gemini.md",
-            "order": 13,
+            "order": 14,
             "children": []
           }
         ]

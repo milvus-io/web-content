@@ -20,8 +20,8 @@ title: FLAT
         ></path>
       </svg>
     </button></h1><p>Der <strong>FLAT-Index</strong> ist eine der einfachsten und unkompliziertesten Methoden zur Indizierung und Suche von Fließkomma-Vektoren. Er basiert auf einem Brute-Force-Ansatz, bei dem jeder Abfragevektor direkt mit jedem Vektor des Datensatzes verglichen wird, ohne dass eine erweiterte Vorverarbeitung oder Datenstrukturierung erforderlich ist. Dieser Ansatz garantiert Genauigkeit und bietet eine 100-prozentige Trefferquote, da jede potenzielle Übereinstimmung bewertet wird.</p>
-<p>Diese erschöpfende Suchmethode ist jedoch mit Kompromissen verbunden. Der FLAT-Index ist im Vergleich zu anderen Indextypen in Milvus die langsamste Indizierungsoption, da er bei jeder Abfrage einen vollständigen Scan des Datensatzes durchführt. Daher eignet er sich nicht für Umgebungen mit großen Datenmengen, bei denen die Leistung eine Rolle spielt. Der Hauptvorteil des FLAT-Index ist seine Einfachheit und Zuverlässigkeit, da er kein Training oder komplexe Parameterkonfigurationen erfordert.</p>
-<h2 id="Build-index" class="common-anchor-header">Index erstellen<button data-href="#Build-index" class="anchor-icon" translate="no">
+<p>Diese erschöpfende Suchmethode ist jedoch mit Kompromissen verbunden. Der FLAT-Index ist im Vergleich zu anderen Indextypen in Milvus die langsamste Indizierungsoption, da er bei jeder Abfrage einen vollständigen Scan des Datensatzes durchführt. Daher ist er für Umgebungen mit großen Datenmengen, bei denen die Leistung eine Rolle spielt, nicht gut geeignet. Der Hauptvorteil des FLAT-Index ist seine Einfachheit und Zuverlässigkeit, da er keine zusätzliche Indexerstellung oder komplexe Indexparameterkonfigurationen erfordert.</p>
+<h2 id="Build-index" class="common-anchor-header">Index aufbauen<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

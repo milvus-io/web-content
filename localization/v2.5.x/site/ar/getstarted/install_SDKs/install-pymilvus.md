@@ -60,7 +60,7 @@ title: تثبيت Milvus Python SDK
     </button></h2><p>يتوفر PyMilvus في <a href="https://pypi.org/project/pymilvus/">فهرس حزمة Python</a>.</p>
 <div class="alert note">
 يوصى بتثبيت إصدار PyMilvus الذي يطابق إصدار خادم Milvus الذي قمت بتثبيته. لمزيد من المعلومات، راجع <a href="/docs/ar/release_notes.md">ملاحظات الإصدار</a>.</div>
-<pre><code translate="no">$ python3 -m pip install pymilvus==2.5.5
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">6</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">تحقق من التثبيت<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +78,7 @@ title: تثبيت Milvus Python SDK
         ></path>
       </svg>
     </button></h2><p>إذا تم تثبيت PyMilvus بشكل صحيح، فلن يتم رفع أي استثناء عند تشغيل الأمر التالي.</p>
-<pre><code translate="no">$ python3 -c <span class="hljs-string">&quot;from pymilvus import Collection&quot;</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -c <span class="hljs-string">&quot;from pymilvus import Collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

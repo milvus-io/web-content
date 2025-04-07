@@ -60,7 +60,7 @@ title: Milvus 파이썬 SDK 설치하기
     </button></h2><p>파이밀버스는 <a href="https://pypi.org/project/pymilvus/">파이썬 패키지 색인에서</a> 찾을 수 있습니다.</p>
 <div class="alert note">
 설치한 Milvus 서버의 버전과 일치하는 PyMilvus 버전을 설치하는 것이 좋습니다. 자세한 내용은 <a href="/docs/ko/release_notes.md">릴리스 노트를</a> 참조하세요.</div>
-<pre><code translate="no">$ python3 -m pip install pymilvus==2.5.5
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">6</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">설치 확인<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +78,7 @@ title: Milvus 파이썬 SDK 설치하기
         ></path>
       </svg>
     </button></h2><p>PyMilvus가 올바르게 설치되었다면 다음 명령을 실행해도 예외가 발생하지 않습니다.</p>
-<pre><code translate="no">$ python3 -c <span class="hljs-string">&quot;from pymilvus import Collection&quot;</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -c <span class="hljs-string">&quot;from pymilvus import Collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

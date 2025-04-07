@@ -60,7 +60,7 @@ title: Installare l'SDK Milvus Python
     </button></h2><p>PyMilvus è disponibile nell'<a href="https://pypi.org/project/pymilvus/">indice dei pacchetti Python</a>.</p>
 <div class="alert note">
 Si raccomanda di installare una versione di PyMilvus che corrisponda alla versione del server Milvus installato. Per ulteriori informazioni, vedere le <a href="/docs/it/release_notes.md">Note di rilascio</a>.</div>
-<pre><code translate="no">$ python3 -m pip install pymilvus==2.5.5
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -m pip install pymilvus==<span class="hljs-number">2.5</span>.<span class="hljs-number">6</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Verifica dell'installazione<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +78,7 @@ Si raccomanda di installare una versione di PyMilvus che corrisponda alla versio
         ></path>
       </svg>
     </button></h2><p>Se PyMilvus è stato installato correttamente, non verrà sollevata alcuna eccezione quando si esegue il seguente comando.</p>
-<pre><code translate="no">$ python3 -c <span class="hljs-string">&quot;from pymilvus import Collection&quot;</span>
+<pre><code translate="no"><span class="hljs-variable">$ </span>python3 -c <span class="hljs-string">&quot;from pymilvus import Collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Cosa succede dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

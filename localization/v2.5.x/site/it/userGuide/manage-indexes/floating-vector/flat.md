@@ -20,7 +20,7 @@ title: FLAT
         ></path>
       </svg>
     </button></h1><p>L'indice <strong>FLAT</strong> è uno dei metodi più semplici e diretti per l'indicizzazione e la ricerca di vettori in virgola mobile. Si basa su un approccio a forza bruta, in cui ogni vettore interrogato viene confrontato direttamente con ogni vettore del set di dati, senza alcuna preelaborazione o strutturazione avanzata dei dati. Questo approccio garantisce l'accuratezza, offrendo un richiamo del 100%, poiché ogni potenziale corrispondenza viene valutata.</p>
-<p>Tuttavia, questo metodo di ricerca esaustivo comporta degli svantaggi. L'indice FLAT è l'opzione di indicizzazione più lenta rispetto ad altri tipi di indici in Milvus, poiché esegue una scansione completa del set di dati per ogni query. Di conseguenza, non è adatto ad ambienti con enormi insiemi di dati, dove le prestazioni sono un problema. Il vantaggio principale dell'indice FLAT è la sua semplicità e affidabilità, in quanto non richiede addestramento o complesse configurazioni di parametri.</p>
+<p>Tuttavia, questo metodo di ricerca esaustivo comporta degli svantaggi. L'indice FLAT è l'opzione di indicizzazione più lenta rispetto ad altri tipi di indici in Milvus, poiché esegue una scansione completa del set di dati per ogni query. Di conseguenza, non è adatto ad ambienti con enormi insiemi di dati, dove le prestazioni sono un problema. Il vantaggio principale dell'indice FLAT è la sua semplicità e affidabilità, in quanto non richiede la costruzione di indici aggiuntivi o la configurazione di parametri complessi.</p>
 <h2 id="Build-index" class="common-anchor-header">Creazione dell'indice<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

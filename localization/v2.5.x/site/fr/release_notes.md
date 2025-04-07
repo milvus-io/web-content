@@ -19,6 +19,63 @@ title: Notes de mise à jour
         ></path>
       </svg>
     </button></h1><p>Découvrez les nouveautés de Milvus ! Cette page résume les nouvelles fonctionnalités, les améliorations, les problèmes connus et les corrections de bogues de chaque version. Vous trouverez dans cette section les notes de version pour chaque version publiée après la v2.5.0. Nous vous conseillons de consulter régulièrement cette page pour prendre connaissance des mises à jour.</p>
+<h2 id="v258" class="common-anchor-header">v2.5.8<button data-href="#v258" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Date de publication : 1er avril 2025</p>
+<table>
+<thead>
+<tr><th>Version de Milvus</th><th>Version du SDK Python</th><th>Version du SDK Node.js</th><th>Version du SDK Java</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.8</td><td>2.5.6</td><td>2.5.7</td><td>2.5.6</td></tr>
+</tbody>
+</table>
+<p>Nous sommes heureux d'annoncer la sortie de Milvus 2.5.8, qui présente des améliorations au niveau des expressions JSON, de la validation UTF-8, de l'utilisation de la mémoire et de la logique d'équilibrage. Cette version inclut également de nombreuses corrections de bogues importantes pour améliorer la concurrence et le traitement des données. Nous vous encourageons à mettre à niveau ou à essayer Milvus, et comme toujours, vos commentaires nous aident à améliorer Milvus en permanence !</p>
+<h3 id="Features" class="common-anchor-header">Fonctionnalités</h3><ul>
+<li>Prise en charge des expressions JSON <code translate="no">null</code>/<code translate="no">exists</code> <a href="https://github.com/milvus-io/milvus/pull/41002">(#41002</a>)</li>
+<li>Prise en charge de l'analyse de vecteurs épars à partir de structures Parquet dans les insertions en bloc<a href="https://github.com/milvus-io/milvus/pull/40874">(#40874</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Améliorations</h3><ul>
+<li>Équilibre la collection avec le plus grand nombre de lignes en premier<a href="https://github.com/milvus-io/milvus/pull/40958">(#40958</a>)</li>
+<li>Prise en charge de la validation des chaînes UTF-8 lors de l'importation<a href="https://github.com/milvus-io/milvus/pull/40746">(#40746</a>)</li>
+<li>Ajout de la validation UTF-8 pour tous les champs VARCHAR<a href="https://github.com/milvus-io/milvus/pull/40993">(#40993</a>)</li>
+<li>Eviter les re-requêtes si la recherche hybride ne demande que le PK comme champ de sortie<a href="https://github.com/milvus-io/milvus/pull/40906">(#40906</a>)</li>
+<li>Amélioration des vues de tableaux pour optimiser l'utilisation de la mémoire<a href="https://github.com/milvus-io/milvus/pull/40206">(#40206</a>)</li>
+<li>Ajout d'une configuration d'intervalle de déclenchement pour l'équilibrage automatique<a href="https://github.com/milvus-io/milvus/pull/39918">(#39918</a>)</li>
+<li>Conversion de plusieurs expressions OR en expressions IN<a href="https://github.com/milvus-io/milvus/pull/40751">(#40751</a>)</li>
+<li>Prise en charge de critères de compactage manuels détaillés<a href="https://github.com/milvus-io/milvus/pull/40924">(#40924</a>)</li>
+<li>Conservation des jetons bruts pour la journalisation d'audit<a href="https://github.com/milvus-io/milvus/pull/40867">(#40867</a>)</li>
+<li>Optimisation de l'utilisation du mutex de la méta DataCoord<a href="https://github.com/milvus-io/milvus/pull/40753">(#40753</a>)</li>
+<li>Introduction des abonnements par lots dans <code translate="no">MsgDispatcher</code> <a href="https://github.com/milvus-io/milvus/pull/40596">(#40596</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Correction de bogues</h3><ul>
+<li>Correction d'un crash impliquant une entrée nullable et des types de données mmap croissants<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)</li>
+<li>Correction d'une perte potentielle de données lors d'opérations de suppression causée par des identifiants binlogs dupliqués<a href="https://github.com/milvus-io/milvus/pull/40985">(#40985</a>),<a href="https://github.com/milvus-io/milvus/pull/40976">(#40976</a>)</li>
+<li>Ajout de verrous d'index de champ pour <code translate="no">GetSegmentsIndexStates</code> afin d'éviter une panique potentielle lors de l'insertion pendant la création de la collection<a href="https://github.com/milvus-io/milvus/pull/40969">(#40969</a>)</li>
+<li>Correction des problèmes de concurrence dans l'enregistrement des consommateurs Rocksmq<a href="https://github.com/milvus-io/milvus/pull/40885">(#40885</a>)</li>
+<li>Récupération de tous les logs delta enfants pour le chargement des segments<a href="https://github.com/milvus-io/milvus/pull/40957">(#40957</a>)</li>
+<li>Correction des résultats erronés causés par l'utilisation de l'index JSON lorsque <code translate="no">iterative_filter</code> est spécifié<a href="https://github.com/milvus-io/milvus/pull/40946">(#40946</a>)</li>
+<li>Assurer une priorité plus élevée pour l'opération <code translate="no">exists</code> <a href="https://github.com/milvus-io/milvus/pull/40865">(#40865</a>)</li>
+<li>Correction de <code translate="no">WithGroupSize</code> lors de la réduction<a href="https://github.com/milvus-io/milvus/pull/40920">(#40920</a>)</li>
+<li>Augmentation du nombre de slots proportionnellement à l'augmentation de la taille du segment<a href="https://github.com/milvus-io/milvus/pull/40862">(#40862</a>)</li>
+<li>Définir le temps d'attente de la tâche avant la mise en file d'attente<a href="https://github.com/milvus-io/milvus/pull/40853">(#40853</a>)</li>
+<li>Correction du déséquilibre des canaux sur les DataNodes<a href="https://github.com/milvus-io/milvus/pull/40854">(#40854</a>)</li>
+<li>Mise en place de configurations par défaut correctes pour les slots de tâches<a href="https://github.com/milvus-io/milvus/pull/40821">(#40821</a>)</li>
+<li>Go SDK : Définir les drapeaux nullables selon FieldSchema pour l'insertion basée sur la ligne<a href="https://github.com/milvus-io/milvus/pull/40962">(#40962</a>)</li>
+</ul>
 <h2 id="v257" class="common-anchor-header">v2.5.7<button data-href="#v257" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +100,7 @@ title: Notes de mise à jour
 <tr><td>2.5.7</td><td>2.5.6</td><td>2.5.6</td><td>2.5.6</td></tr>
 </tbody>
 </table>
-<p>Nous sommes ravis d'annoncer la sortie de Milvus 2.5.7, marquée par la nouvelle fonctionnalité JSON Path Index. Celle-ci vous permet de construire des index inversés sur des colonnes dynamiques ou JSON afin d'améliorer de manière significative les performances des requêtes. Parallèlement à cette nouvelle fonctionnalité, nous avons apporté de nombreuses améliorations et corrections de bogues pour une meilleure fiabilité, une gestion plus fine des erreurs et une plus grande facilité d'utilisation. Nous vous encourageons à effectuer la mise à niveau ou à l'essayer et, comme toujours, vos commentaires sont très appréciés car nous continuons à améliorer Milvus !</p>
+<p>Nous sommes ravis d'annoncer la sortie de Milvus 2.5.7, marquée par la nouvelle fonctionnalité JSON Path Index. Celle-ci vous permet de construire des index inversés sur des colonnes dynamiques ou JSON afin d'améliorer de manière significative les performances des requêtes. Outre cette nouvelle fonctionnalité, nous avons apporté de nombreuses améliorations et corrections de bogues pour une meilleure fiabilité, une gestion plus fine des erreurs et une meilleure convivialité. Nous vous encourageons à effectuer la mise à niveau ou à l'essayer et, comme toujours, vos commentaires sont très appréciés car nous continuons à améliorer Milvus !</p>
 <h3 id="Features" class="common-anchor-header">Fonctionnalités</h3><ul>
 <li><strong>Index de chemin JSON</strong>: Pour répondre aux besoins des utilisateurs en matière de schémas dynamiques, Milvus 2.5.7 introduit la possibilité de créer des index sur les colonnes dynamiques et les colonnes JSON. Grâce à cette fonctionnalité, vous pouvez créer des index inversés pour des colonnes dynamiques ou des chemins JSON spécifiques, en contournant efficacement le processus de chargement JSON plus lent et en améliorant considérablement les performances des requêtes. Pour plus d'informations, voir <a href="/docs/fr/use-json-fields.md">Champ JSON</a>.</li>
 </ul>
@@ -134,7 +191,7 @@ title: Notes de mise à jour
 <li>Correction d'un problème où l'abandon des propriétés de la base de données via RESTful échouait<a href="https://github.com/milvus-io/milvus/pull/40260">(#40260</a>)</li>
 <li>Utilisation d'un type de message différent pour l'API <code translate="no">OperatePrivilegeV2</code> <a href="https://github.com/milvus-io/milvus/pull/40193">(#40193</a>)</li>
 <li>Correction d'une course aux données dans le cache delta des tâches<a href="https://github.com/milvus-io/milvus/pull/40262">(#40262</a>)</li>
-<li>Résolution d'une fuite dans le cache delta des tâches causée par des ID de tâches dupliqués<a href="https://github.com/milvus-io/milvus/pull/40184">(#40184</a>)</li>
+<li>Résolution d'une fuite du cache delta des tâches causée par des ID de tâches dupliqués<a href="https://github.com/milvus-io/milvus/pull/40184">(#40184</a>)</li>
 </ul>
 <h2 id="v255" class="common-anchor-header">v2.5.5<button data-href="#v255" class="anchor-icon" translate="no">
       <svg translate="no"

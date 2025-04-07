@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에서 데이터베이스는 데이터를 구성하고 관리하기 위한 논리적 단위 역할을 합니다. 데이터 보안을 강화하고 멀티 테넌시를 달성하기 위해 여러 데이터베이스를 생성하여 서로 다른 애플리케이션 또는 테넌트의 데이터를 논리적으로 분리할 수 있습니다. 예를 들어 사용자 A의 데이터를 저장하는 데이터베이스와 사용자 B를 위한 또 다른 데이터베이스를 만드는 것입니다.</p>
+    </button></h2><p>Milvus에서 데이터베이스는 데이터를 구성하고 관리하기 위한 논리적 단위 역할을 합니다. 데이터 보안을 강화하고 멀티 테넌시를 달성하기 위해 여러 데이터베이스를 만들어 서로 다른 애플리케이션 또는 테넌트에 대한 데이터를 논리적으로 분리할 수 있습니다. 예를 들어 사용자 A의 데이터를 저장하는 데이터베이스와 사용자 B를 위한 또 다른 데이터베이스를 만드는 것입니다.</p>
 <h2 id="Create-database" class="common-anchor-header">데이터베이스 만들기<button data-href="#Create-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,14 +55,14 @@ summary: >-
     </button></h2><p>Milvus RESTful API 또는 SDK를 사용하여 프로그래밍 방식으로 데이터를 생성할 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = <span class="hljs-title class_">MilvusClient</span>(
+client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-client.<span class="hljs-title function_">create_database</span>(
+client.create_database(
     db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -119,20 +119,20 @@ curl --request POST \
 <p>데이터베이스를 만들 때 데이터베이스에 대한 속성을 설정할 수도 있습니다. 다음 예는 데이터베이스의 복제본 수를 설정하는 예제입니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_database</span>(
+<pre><code translate="no" class="language-python">client.create_database(
     db_name=<span class="hljs-string">&quot;my_database_2&quot;</span>,
     properties={
         <span class="hljs-string">&quot;database.replica.number&quot;</span>: <span class="hljs-number">3</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">String</span>&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-properties.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;database.replica.number&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>);
-<span class="hljs-title class_">CreateDatabaseReq</span> createDatabaseReq = <span class="hljs-title class_">CreateDatabaseReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">databaseName</span>(<span class="hljs-string">&quot;my_database_2&quot;</span>)
-        .<span class="hljs-title function_">properties</span>(properties)
-        .<span class="hljs-title function_">build</span>();
-client.<span class="hljs-title function_">createDatabase</span>(createDatabaseReq);
+<pre><code translate="no" class="language-java">Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.put(<span class="hljs-string">&quot;database.replica.number&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>);
+<span class="hljs-type">CreateDatabaseReq</span> <span class="hljs-variable">createDatabaseReq</span> <span class="hljs-operator">=</span> CreateDatabaseReq.builder()
+        .databaseName(<span class="hljs-string">&quot;my_database_2&quot;</span>)
+        .properties(properties)
+        .build();
+client.createDatabase(createDatabaseReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createDatabase</span>({
     <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,
@@ -243,7 +243,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>각 데이터베이스에는 고유한 속성이 있으며 데이터베이스 생성에 설명된 대로 데이터베이스를 <a href="/docs/ko/manage_databases.md#null">만들</a> 때 데이터베이스 속성을 설정하거나 기존 데이터베이스의 속성을 변경하여 삭제할 수 있습니다.</p>
+    </button></h2><p>각 데이터베이스에는 고유한 속성이 있으며 데이터베이스 생성에 설명된 대로 데이터베이스를 <a href="/docs/ko/manage_databases.md#Create-database">만들</a> 때 데이터베이스 속성을 설정하거나 기존 데이터베이스의 속성을 변경하여 삭제할 수 있습니다.</p>
 <p>다음 표에는 사용 가능한 데이터베이스 속성이 나열되어 있습니다.</p>
 <table>
    <tr>
@@ -285,16 +285,16 @@ curl --request POST \
 <h3 id="Alter-database-properties" class="common-anchor-header">데이터베이스 속성 변경</h3><p>다음과 같이 기존 데이터베이스의 속성을 변경할 수 있습니다. 다음 예제는 데이터베이스에서 만들 수 있는 컬렉션의 수를 제한합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">alter_database_properties</span>(
-    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>,
-    <span class="hljs-attr">properties</span>: {
+<pre><code translate="no" class="language-python">client.alter_database_properties(
+    db_name: <span class="hljs-string">&quot;my_database_1&quot;</span>,
+    properties: {
         <span class="hljs-string">&quot;database.max.collections&quot;</span>: <span class="hljs-number">10</span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">client.alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
         .databaseName(<span class="hljs-string">&quot;my_database_1&quot;</span>)
-        .<span class="hljs-built_in">property</span>(<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
+        .property(<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">alterDatabaseProperties</span>({
@@ -325,17 +325,17 @@ curl --request POST \
 <h3 id="Drop-database-properties" class="common-anchor-header">데이터베이스 속성 삭제</h3><p>다음과 같이 데이터베이스 속성을 삭제하여 재설정할 수도 있습니다. 다음 예제는 데이터베이스에서 만들 수 있는 컬렉션 수에 대한 제한을 제거합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_database_properties</span>(
-    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>,
-    <span class="hljs-attr">property_keys</span>: [
+<pre><code translate="no" class="language-python">client.drop_database_properties(
+    db_name: <span class="hljs-string">&quot;my_database_1&quot;</span>,
+    property_keys: [
         <span class="hljs-string">&quot;database.max.collections&quot;</span>
     ]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">client.<span class="hljs-title function_">dropDatabaseProperties</span>(<span class="hljs-title class_">DropDatabasePropertiesReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">databaseName</span>(<span class="hljs-string">&quot;my_database_1&quot;</span>)
-        .<span class="hljs-title function_">propertyKeys</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-string">&quot;database.max.collections&quot;</span>))
-        .<span class="hljs-title function_">build</span>());
+<pre><code translate="no" class="language-java">client.dropDatabaseProperties(DropDatabasePropertiesReq.builder()
+        .databaseName(<span class="hljs-string">&quot;my_database_1&quot;</span>)
+        .propertyKeys(Collections.singletonList(<span class="hljs-string">&quot;database.max.collections&quot;</span>))
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">dropDatabaseProperties</span>({
   <span class="hljs-attr">db_name</span>: my_database_1,
@@ -361,6 +361,45 @@ curl --request POST \
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Use-database" class="common-anchor-header">데이터베이스 사용<button data-href="#Use-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus에서 연결을 끊지 않고도 한 데이터베이스에서 다른 데이터베이스로 전환할 수 있습니다.</p>
+<div class="alert note">
+<p>RESTful API는 이 작업을 지원하지 않습니다.</p>
+</div>
+<div class="multipleCode">
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">client.use_database(
+    db_name=<span class="hljs-string">&quot;my_database_2&quot;</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">client.useDatabase(<span class="hljs-string">&quot;my_database_2&quot;</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">useDatabase</span>({
+  <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = cli.UseDatabase(ctx, milvusclient.NewUseDatabaseOption(<span class="hljs-string">&quot;my_database_2&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handle err</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># This operation is unsupported because RESTful does not provide a persistent connection.</span>
+<span class="hljs-comment"># As a workaround, initiate the required request again with the target database.</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Drop-database" class="common-anchor-header">데이터베이스 삭제<button data-href="#Drop-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -384,13 +423,13 @@ curl --request POST \
 <p>Milvus RESTful API 또는 SDK를 사용하여 프로그래밍 방식으로 데이터를 생성할 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_database</span>(
+<pre><code translate="no" class="language-python">client.drop_database(
     db_name=<span class="hljs-string">&quot;my_database_2&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">client.<span class="hljs-title function_">dropDatabase</span>(<span class="hljs-title class_">DropDatabaseReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">databaseName</span>(<span class="hljs-string">&quot;my_database_2&quot;</span>)
-        .<span class="hljs-title function_">build</span>());
+<pre><code translate="no" class="language-java">client.dropDatabase(DropDatabaseReq.builder()
+        .databaseName(<span class="hljs-string">&quot;my_database_2&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">dropDatabase</span>({
   <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,

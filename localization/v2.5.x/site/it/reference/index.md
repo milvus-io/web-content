@@ -239,7 +239,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 </div>
 <div class="filter-floating">
 <h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>Per le applicazioni di ricerca di similarità vettoriale che richiedono una precisione perfetta e dipendono da insiemi di dati relativamente piccoli (su scala di milioni), l'indice FLAT è una buona scelta. FLAT non comprime i vettori ed è l'unico indice in grado di garantire risultati di ricerca esatti. I risultati di FLAT possono anche essere utilizzati come punto di confronto per i risultati prodotti da altri indici che hanno un richiamo inferiore al 100%.</p>
-<p>FLAT è accurato perché adotta un approccio esaustivo alla ricerca, il che significa che per ogni query l'input di destinazione viene confrontato con ogni insieme di vettori in un set di dati. Questo rende FLAT l'indice più lento del nostro elenco e poco adatto a interrogare dati vettoriali massicci. Non sono richiesti parametri per l'indice FLAT in Milvus e il suo utilizzo non richiede l'addestramento dei dati.</p>
+<p>FLAT è accurato perché adotta un approccio esaustivo alla ricerca, il che significa che per ogni query l'input di destinazione viene confrontato con ogni insieme di vettori in un set di dati. Questo rende FLAT l'indice più lento del nostro elenco e poco adatto a interrogare dati vettoriali massicci. Non sono richiesti parametri per l'indice FLAT in Milvus e il suo utilizzo non richiede la costruzione di un indice aggiuntivo.</p>
 <ul>
 <li><p>Parametri di ricerca</p>
 <table>

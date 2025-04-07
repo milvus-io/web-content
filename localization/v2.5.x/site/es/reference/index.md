@@ -239,7 +239,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </div>
 <div class="filter-floating">
 <h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>Para aplicaciones de búsqueda de similitud vectorial que requieren una precisión perfecta y dependen de conjuntos de datos relativamente pequeños (a escala de millones), el índice FLAT es una buena elección. FLAT no comprime los vectores y es el único índice que puede garantizar resultados de búsqueda exactos. Los resultados de FLAT también pueden utilizarse como punto de comparación para los resultados producidos por otros índices que tienen menos del 100% de recuperación.</p>
-<p>FLAT es preciso porque adopta un enfoque exhaustivo de la búsqueda, lo que significa que, para cada consulta, la entrada objetivo se compara con todos los conjuntos de vectores de un conjunto de datos. Esto hace que FLAT sea el índice más lento de nuestra lista y poco adecuado para consultar datos vectoriales masivos. No se requieren parámetros para el índice FLAT en Milvus, y su uso no requiere entrenamiento de datos.</p>
+<p>FLAT es preciso porque adopta un enfoque exhaustivo de la búsqueda, lo que significa que, para cada consulta, la entrada objetivo se compara con todos los conjuntos de vectores de un conjunto de datos. Esto hace que FLAT sea el índice más lento de nuestra lista y poco adecuado para consultar datos vectoriales masivos. No se requieren parámetros para el índice FLAT en Milvus, y su uso no requiere la creación de índices adicionales.</p>
 <ul>
 <li><p>Parámetros de búsqueda</p>
 <table>
@@ -284,7 +284,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <tr><th>Parámetro</th><th>Descripción</th><th>Gama</th><th>Valor por defecto</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Número máximo de buckets que no devuelven ningún resultado de búsqueda.<br/>Este es un parámetro de búsqueda por rango y termina el proceso de búsqueda cuando el número de buckets vacíos consecutivos alcanza el valor especificado.<br/>Aumentar este valor puede mejorar la tasa de recuperación a costa de aumentar el tiempo de búsqueda.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Número máximo de cubos que no devuelven ningún resultado de búsqueda.<br/>Este es un parámetro de búsqueda por rango y termina el proceso de búsqueda cuando el número de cubos vacíos consecutivos alcanza el valor especificado.<br/>Aumentar este valor puede mejorar la tasa de recuperación a costa de aumentar el tiempo de búsqueda.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -328,9 +328,9 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </ul></li>
 </ul>
 <h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Cuantización de productos) descompone uniformemente el espacio vectorial original de alta dimensión en productos cartesianos de <code translate="no">m</code> espacios vectoriales de baja dimensión y, a continuación, cuantiza los espacios vectoriales de baja dimensión descompuestos. En lugar de calcular las distancias entre el vector objetivo y el centro de todas las unidades, la cuantización de productos permite calcular las distancias entre el vector objetivo y el centro de agrupación de cada espacio de baja dimensión y reduce en gran medida la complejidad temporal y espacial del algoritmo.</p>
-<p>IVF_PQ realiza la agrupación de índices IVF antes de cuantificar el producto de vectores. Su archivo de índices es incluso más pequeño que IVF_SQ8, pero también provoca una pérdida de precisión durante la búsqueda de vectores.</p>
+<p>IVF_PQ realiza la agrupación de índices IVF antes de cuantificar el producto de vectores. Su archivo de índices es aún más pequeño que IVF_SQ8, pero también provoca una pérdida de precisión durante la búsqueda de vectores.</p>
 <div class="alert note">
-<p>Los parámetros de construcción del índice y los parámetros de búsqueda varían según la distribución Milvus. Seleccione primero su distribución de Milvus.</p>
+<p>Los parámetros de construcción del índice y los parámetros de búsqueda varían con la distribución Milvus. Seleccione primero su distribución de Milvus.</p>
 </div>
 <ul>
 <li><p>Parámetros de creación de índices</p>
@@ -357,13 +357,13 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </tbody>
 </table>
 </li>
-<li><p>Rango de búsqueda</p>
+<li><p>Búsqueda por rangos</p>
 <table>
 <thead>
 <tr><th>Parámetro</th><th>Descripción</th><th>Gama</th><th>Valor por defecto</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Número máximo de cubos que no devuelven ningún resultado de búsqueda.<br/>Este es un parámetro de búsqueda por rango y termina el proceso de búsqueda cuando el número de cubos vacíos consecutivos alcanza el valor especificado.<br/>Aumentar este valor puede mejorar la tasa de recuperación a costa de aumentar el tiempo de búsqueda.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Número máximo de buckets que no devuelven ningún resultado de búsqueda.<br/>Este es un parámetro de búsqueda por rango y termina el proceso de búsqueda cuando el número de buckets vacíos consecutivos alcanza el valor especificado.<br/>Aumentar este valor puede mejorar la tasa de recuperación a costa de aumentar el tiempo de búsqueda.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -410,7 +410,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </li>
 </ul></li>
 </ul>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) es un algoritmo de indexación basado en grafos. Construye una estructura de navegación multicapa para una imagen de acuerdo con ciertas reglas. En esta estructura, las capas superiores son más dispersas y las distancias entre nodos son más lejanas; las capas inferiores son más densas y las distancias entre nodos son más cercanas. La búsqueda comienza en la capa superior, encuentra el nodo más cercano al objetivo en esta capa y, a continuación, entra en la capa siguiente para comenzar otra búsqueda. Tras varias iteraciones, puede acercarse rápidamente a la posición del objetivo.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) es un algoritmo de indexación basado en grafos. Construye una estructura de navegación multicapa para una imagen de acuerdo con ciertas reglas. En esta estructura, las capas superiores son más dispersas y las distancias entre nodos son más lejanas; las capas inferiores son más densas y las distancias entre nodos son más cercanas. La búsqueda parte de la capa superior, encuentra el nodo más cercano al objetivo en esta capa y, a continuación, entra en la capa siguiente para iniciar otra búsqueda. Tras varias iteraciones, puede acercarse rápidamente a la posición del objetivo.</p>
 <p>Para mejorar el rendimiento, HNSW limita el grado máximo de los nodos en cada capa del gráfico a <code translate="no">M</code>. Además, puede utilizar <code translate="no">efConstruction</code> (al construir el índice) o <code translate="no">ef</code> (al buscar objetivos) para especificar un rango de búsqueda.</p>
 <ul>
 <li><p>Parámetros de creación de índices</p>
@@ -435,7 +435,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </table>
 </li>
 </ul>
-<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>La cuantización escalar (SQ) es una técnica utilizada para discretizar datos de coma flotante en un conjunto finito de valores basados en su magnitud. Por ejemplo, <strong>SQ6</strong> representa la cuantización en (2^6 = 64) valores discretos, donde cada número de punto flotante se codifica utilizando 6 bits. Del mismo modo, <strong>SQ8</strong> cuantiza los datos en (2^8 = 256) valores discretos, donde cada número de coma flotante se representa con 8 bits. Esta cuantización reduce la huella de memoria al tiempo que preserva la estructura esencial de los datos para un procesamiento eficiente.</p>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>La cuantificación escalar (SQ) es una técnica utilizada para discretizar datos de coma flotante en un conjunto finito de valores basados en su magnitud. Por ejemplo, <strong>SQ6</strong> representa la cuantización en (2^6 = 64) valores discretos, donde cada número de punto flotante se codifica utilizando 6 bits. Del mismo modo, <strong>SQ8</strong> cuantiza los datos en (2^8 = 256) valores discretos, donde cada número de coma flotante se representa con 8 bits. Esta cuantización reduce la huella de memoria al tiempo que preserva la estructura esencial de los datos para un procesamiento eficiente.</p>
 <p>Combinado con SQ, HNSW_SQ ofrece un equilibrio controlable entre el tamaño del índice y la precisión, manteniendo un alto rendimiento de consulta por segundo (QPS). En comparación con el HNSW estándar, supone un modesto aumento del tiempo de construcción del índice.</p>
 <ul>
 <li><p>Parámetros de construcción de índices</p>
@@ -476,7 +476,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <tr><td><code translate="no">M</code></td><td>M define el número máximo de conexiones salientes en el gráfico. M más alto conduce a una mayor precisión/tiempo de ejecución a ef/efConstrucción fija.</td><td>[2, 2048]</td><td>Ninguno</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction controla el equilibrio entre velocidad de búsqueda de índices y velocidad de construcción. Aumentar el parámetro efConstruction puede mejorar la calidad del índice, pero también tiende a alargar el tiempo de indexación.</td><td>[1, int_max]</td><td>Ninguno</td></tr>
 <tr><td><code translate="no">m</code></td><td>Número de grupos de subvectores en los que dividir el vector.</td><td>[1, 65536]</td><td>32</td></tr>
-<tr><td><code translate="no">nbits</code></td><td>El número de bits en que se cuantiza cada grupo de subvectores.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>El número de bits en los que se cuantiza cada grupo de subvectores.</td><td>[1, 24]</td><td>8</td></tr>
 <tr><td><code translate="no">refine</code></td><td>Si se reservan datos refinados durante la construcción del índice.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">refine_type</code></td><td>El tipo de datos del índice refinado.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Ninguno</td></tr>
 </tbody>
@@ -506,7 +506,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <tr><td><code translate="no">M</code></td><td>M define el número máximo de conexiones salientes en el gráfico. M más alto conduce a una mayor precisión/tiempo de ejecución a ef/efConstrucción fija.</td><td>[2, 2048]</td><td>Ninguno</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction controla el equilibrio entre velocidad de búsqueda de índices y velocidad de construcción. Aumentar el parámetro efConstruction puede mejorar la calidad del índice, pero también tiende a alargar el tiempo de indexación.</td><td>[1, int_max]</td><td>Ninguno</td></tr>
 <tr><td><code translate="no">m</code></td><td>Número de grupos de subvectores en los que dividir el vector.</td><td>[1, 65536]</td><td>32</td></tr>
-<tr><td><code translate="no">nbits</code></td><td>El número de bits en que se cuantiza cada grupo de subvectores.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>El número de bits en los que se cuantiza cada grupo de subvectores.</td><td>[1, 24]</td><td>8</td></tr>
 <tr><td><code translate="no">nrq</code></td><td>El número de subcuantizadores residuales.</td><td>[1, 16]</td><td>2</td></tr>
 <tr><td><code translate="no">refine</code></td><td>Si los datos refinados se reservan durante la construcción del índice.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">refine_type</code></td><td>El tipo de datos del índice refinado.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Ninguno</td></tr>
@@ -569,7 +569,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </tbody>
 </table>
 </li>
-<li><p>Rango de búsqueda</p>
+<li><p>Búsqueda por rangos</p>
 <table>
 <thead>
 <tr><th>Parámetro</th><th>Descripción</th><th>Gama</th><th>Valor por defecto</th></tr>

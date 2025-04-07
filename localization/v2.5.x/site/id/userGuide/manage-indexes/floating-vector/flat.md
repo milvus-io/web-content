@@ -20,7 +20,7 @@ title: FLAT
         ></path>
       </svg>
     </button></h1><p>Indeks <strong>FLAT</strong> adalah salah satu metode paling sederhana dan mudah untuk mengindeks dan mencari vektor floating-point. Metode ini mengandalkan pendekatan brute-force, di mana setiap vektor kueri secara langsung dibandingkan dengan setiap vektor dalam kumpulan data, tanpa prapemrosesan lanjutan atau penataan data. Pendekatan ini menjamin akurasi, menawarkan recall 100%, karena setiap kecocokan potensial dievaluasi.</p>
-<p>Namun, metode pencarian yang lengkap ini memiliki kekurangan. Indeks FLAT adalah opsi pengindeksan yang paling lambat dibandingkan dengan jenis indeks lainnya di Milvus, karena indeks ini melakukan pemindaian penuh terhadap kumpulan data untuk setiap kueri. Akibatnya, indeks ini tidak cocok untuk lingkungan dengan dataset yang sangat besar, di mana kinerja menjadi perhatian. Keuntungan utama dari indeks FLAT adalah kesederhanaan dan keandalannya, karena tidak memerlukan pelatihan atau konfigurasi parameter yang rumit.</p>
+<p>Namun, metode pencarian yang lengkap ini memiliki kekurangan. Indeks FLAT adalah opsi pengindeksan yang paling lambat dibandingkan dengan jenis indeks lainnya di Milvus, karena indeks ini melakukan pemindaian penuh terhadap set data untuk setiap kueri. Akibatnya, indeks ini tidak cocok untuk lingkungan dengan dataset yang sangat besar, di mana kinerja menjadi perhatian. Keuntungan utama dari indeks FLAT adalah kesederhanaan dan keandalannya, karena tidak memerlukan pembuatan indeks tambahan atau konfigurasi parameter indeks yang rumit.</p>
 <h2 id="Build-index" class="common-anchor-header">Membangun indeks<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

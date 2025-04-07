@@ -19,33 +19,35 @@ title: Visión general de la incrustación
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La incrustación es un concepto de aprendizaje automático para mapear datos en un espacio de alta dimensión, donde los datos de semántica similar se colocan cerca unos de otros. Al tratarse normalmente de una red neuronal profunda de BERT u otras familias de transformadores, el modelo de incrustación puede representar eficazmente la semántica de texto, imágenes y otros tipos de datos con una serie de números conocidos como vectores. Una característica clave de estos modelos es que la distancia matemática entre vectores en el espacio de alta dimensión puede indicar la similitud de la semántica del texto o las imágenes originales. Esta propiedad desbloquea muchas aplicaciones de recuperación de información, como los motores de búsqueda web como Google y Bing, la búsqueda de productos y las recomendaciones en sitios de comercio electrónico, y el recientemente popular paradigma de Generación Aumentada de Recuperación (RAG) en IA generativa.</p>
+    </button></h1><p>La incrustación es un concepto de aprendizaje automático para mapear datos en un espacio de alta dimensión, donde los datos de semántica similar se colocan cerca unos de otros. Al tratarse normalmente de una red neuronal profunda de BERT u otras familias de transformadores, el modelo de incrustación puede representar eficazmente la semántica de texto, imágenes y otros tipos de datos con una serie de números conocidos como vectores. Una característica clave de estos modelos es que la distancia matemática entre vectores en el espacio de alta dimensión puede indicar la similitud de la semántica del texto o las imágenes originales. Esta propiedad abre muchas aplicaciones de recuperación de información, como los motores de búsqueda web como Google y Bing, la búsqueda de productos y las recomendaciones en sitios de comercio electrónico, y el recientemente popular paradigma de la Generación Aumentada de Recuperación (RAG) en la IA generativa.</p>
 <p>Existen dos categorías principales de incrustaciones, cada una de las cuales produce un tipo diferente de vector:</p>
 <ul>
 <li><p><strong>Incrustación densa</strong>: La mayoría de los modelos de incrustación representan la información como un vector de coma flotante de cientos a miles de dimensiones. Los resultados se denominan vectores "densos", ya que la mayoría de las dimensiones tienen valores distintos de cero. Por ejemplo, el popular modelo de incrustación de código abierto BAAI/bge-base-en-v1.5 produce vectores de 768 números en coma flotante (vector flotante de 768 dimensiones).</p></li>
 <li><p><strong>Incrustación dispersa</strong>: Por el contrario, los vectores de salida de las incrustaciones dispersas tienen en su mayoría dimensiones cero, es decir, vectores "dispersos". Estos vectores suelen tener dimensiones mucho mayores (decenas de miles o más), lo que viene determinado por el tamaño del vocabulario de tokens. Los vectores dispersos pueden generarse mediante redes neuronales profundas o análisis estadísticos de corpus de texto. Debido a su interpretabilidad y a su mejor capacidad de generalización fuera del dominio, los desarrolladores adoptan cada vez más las incrustaciones dispersas como complemento de las incrustaciones densas.</p></li>
 </ul>
-<p>Milvus es una base de datos vectorial diseñada para la gestión, el almacenamiento y la recuperación de datos vectoriales. Gracias a la integración de los principales modelos de incrustación y <a href="https://milvus.io/docs/rerankers-overview.md">reordenación</a>, puede transformar fácilmente el texto original en vectores susceptibles de búsqueda o reordenar los resultados utilizando potentes modelos para obtener resultados más precisos para la GAR. Esta integración simplifica la transformación del texto y elimina la necesidad de componentes adicionales de incrustación o renumeración, agilizando así el desarrollo y la validación de la GAR.</p>
+<p>Milvus es una base de datos vectorial diseñada para la gestión, el almacenamiento y la recuperación de datos vectoriales. Gracias a la integración de los principales modelos de incrustación y <a href="https://milvus.io/docs/rerankers-overview.md">reordenación</a>, puede transformar fácilmente el texto original en vectores susceptibles de búsqueda o reordenar los resultados utilizando potentes modelos para obtener resultados más precisos para la GAR. Esta integración simplifica la transformación del texto y elimina la necesidad de componentes adicionales de incrustación o renumeración, lo que agiliza el desarrollo y la validación de la GAR.</p>
 <p>Para crear incrustaciones en acción, consulte <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Uso del modelo de PyMilvus para generar incrustaciones de texto</a>.</p>
 <table>
 <thead>
 <tr><th>Función de incrustación</th><th>Tipo</th><th>API o de código abierto</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/OpenAIEmbeddingFunction/OpenAIEmbeddingFunction.md">openai</a></td><td>Denso</td><td>API</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/SentenceTransformerEmbeddingFunction/SentenceTransformerEmbeddingFunction.md">transformador de frases</a></td><td>Denso</td><td>Fuente abierta</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/SpladeEmbeddingFunction/SpladeEmbeddingFunction.md">Splade</a></td><td>Sparse</td><td>Fuente abierta</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/BGEM3EmbeddingFunction/BGEM3EmbeddingFunction.md">bge-m3</a></td><td>Híbrido</td><td>Fuente abierta</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md">voyageai</a></td><td>Denso</td><td>API</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/JinaEmbeddingFunction/JinaEmbeddingFunction.md">jina</a></td><td>Densa</td><td>API</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/CohereEmbeddingFunction/CohereEmbeddingFunction.md">cohere</a></td><td>Denso</td><td>API</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/InstructorEmbeddingFunction/InstructorEmbeddingFunction.md">Instructor</a></td><td>Denso</td><td>Fuente abierta</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MistralAIEmbeddingFunction/MistralAIEmbeddingFunction.md">Mistral AI</a></td><td>Denso</td><td>API</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/NomicEmbeddingFunction/NomicEmbeddingFunction.md">Nomic</a></td><td>Denso</td><td>API</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MGTEEmbeddingFunction/MGTEEmbeddingFunction.md">mGTE</a></td><td>Híbrido</td><td>Fuente abierta</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/OpenAIEmbeddingFunction/OpenAIEmbeddingFunction.md">openai</a></td><td>Denso</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/SentenceTransformerEmbeddingFunction/SentenceTransformerEmbeddingFunction.md">transformador de frases</a></td><td>Denso</td><td>Fuente abierta</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/SpladeEmbeddingFunction/SpladeEmbeddingFunction.md">Splade</a></td><td>Sparse</td><td>Fuente abierta</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/BGEM3EmbeddingFunction/BGEM3EmbeddingFunction.md">bge-m3</a></td><td>Híbrido</td><td>Fuente abierta</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md">voyageai</a></td><td>Denso</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/JinaEmbeddingFunction/JinaEmbeddingFunction.md">jina</a></td><td>Densa</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/CohereEmbeddingFunction/CohereEmbeddingFunction.md">cohere</a></td><td>Denso</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/InstructorEmbeddingFunction/InstructorEmbeddingFunction.md">Instructor</a></td><td>Denso</td><td>Fuente abierta</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/MistralAIEmbeddingFunction/MistralAIEmbeddingFunction.md">Mistral AI</a></td><td>Denso</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/NomicEmbeddingFunction/NomicEmbeddingFunction.md">Nomic</a></td><td>Denso</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/Model2VecEmbeddingFunction/Model2VecEmbeddingFunction.md">mGTE</a></td><td>Híbrido</td><td>Fuente abierta</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/Model2VecEmbeddingFunction/Model2VecEmbeddingFunction.md">Model2Vec</a></td><td>Híbrido</td><td>De código abierto</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/EmbeddingModels/GeminiEmbeddingFunction/GeminiEmbeddingFunction.md">Géminis</a></td><td>Híbrido</td><td>Privado</td></tr>
 </tbody>
 </table>
-<h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">Ejemplo 1: Utilizar la función de incrustación por defecto para generar vectores densos<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
+<h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">Ejemplo 1: Usar la función de incrustación por defecto para generar vectores densos<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,13 +86,13 @@ embeddings = ef.encode_documents(docs)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, ef.dim, embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>El resultado esperado es similar al siguiente:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([<span class="hljs-number">-3.09392996e-02</span>, <span class="hljs-number">-1.80662833e-02</span>,  <span class="hljs-number">1.34775648e-02</span>,  <span class="hljs-number">2.77156215e-02</span>,
-       <span class="hljs-number">-4.86349640e-03</span>, <span class="hljs-number">-3.12581174e-02</span>, <span class="hljs-number">-3.55921760e-02</span>,  <span class="hljs-number">5.76934684e-03</span>,
+<pre><code translate="no" class="language-python">Embeddings: [array([-<span class="hljs-number">3.09392996e-02</span>, -<span class="hljs-number">1.80662833e-02</span>,  <span class="hljs-number">1.34775648e-02</span>,  <span class="hljs-number">2.77156215e-02</span>,
+       -<span class="hljs-number">4.86349640e-03</span>, -<span class="hljs-number">3.12581174e-02</span>, -<span class="hljs-number">3.55921760e-02</span>,  <span class="hljs-number">5.76934684e-03</span>,
         <span class="hljs-number">2.80773244e-03</span>,  <span class="hljs-number">1.35783911e-01</span>,  <span class="hljs-number">3.59678417e-02</span>,  <span class="hljs-number">6.17732145e-02</span>,
 ...
-       <span class="hljs-number">-4.61330153e-02</span>, <span class="hljs-number">-4.85207550e-02</span>,  <span class="hljs-number">3.13997865e-02</span>,  <span class="hljs-number">7.82178566e-02</span>,
-       <span class="hljs-number">-4.75336798e-02</span>,  <span class="hljs-number">5.21207601e-02</span>,  <span class="hljs-number">9.04406682e-02</span>, <span class="hljs-number">-5.36676683e-02</span>],
-      dtype=<span class="hljs-type">float32</span>)]
+       -<span class="hljs-number">4.61330153e-02</span>, -<span class="hljs-number">4.85207550e-02</span>,  <span class="hljs-number">3.13997865e-02</span>,  <span class="hljs-number">7.82178566e-02</span>,
+       -<span class="hljs-number">4.75336798e-02</span>,  <span class="hljs-number">5.21207601e-02</span>,  <span class="hljs-number">9.04406682e-02</span>, -<span class="hljs-number">5.36676683e-02</span>],
+      dtype=float32)]
 Dim: <span class="hljs-number">384</span> (<span class="hljs-number">384</span>,)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="common-anchor-header">Ejemplo 2: Generar vectores densos y dispersos en una llamada con el modelo BGE M3<button data-href="#Example-2-Generate-dense-and-sparse-vectors-in-one-call-with-BGE-M3-model" class="anchor-icon" translate="no">
@@ -116,11 +118,11 @@ Dim: <span class="hljs-number">384</span> (<span class="hljs-number">384</span>,
 <li><p>Buscar e inspeccionar el resultado.</p></li>
 </ol>
 <p>En primer lugar, necesitamos instalar las dependencias necesarias.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">hybrid</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">BGEM3EmbeddingFunction</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     utility,
-    <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>,
-    <span class="hljs-title class_">Collection</span>, <span class="hljs-title class_">AnnSearchRequest</span>, <span class="hljs-title class_">RRFRanker</span>, connections,
+    FieldSchema, CollectionSchema, DataType,
+    Collection, AnnSearchRequest, RRFRanker, connections,
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Utilizar BGE M3 para codificar documentos y consultas para la recuperación de incrustaciones.</p>

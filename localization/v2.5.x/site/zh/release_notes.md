@@ -19,6 +19,63 @@ title: 版本说明
         ></path>
       </svg>
     </button></h1><p>了解 Milvus 的新功能！本页总结了每个版本的新功能、改进、已知问题和错误修复。您可以在本部分找到 v2.5.0 之后每个版本的发布说明。我们建议您定期访问此页面以了解更新信息。</p>
+<h2 id="v258" class="common-anchor-header">v2.5.8<button data-href="#v258" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>发布日期：2025 年 4 月 1 日</p>
+<table>
+<thead>
+<tr><th>Milvus 版本</th><th>Python SDK 版本</th><th>Node.js SDK 版本</th><th>Java SDK 版本</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.8</td><td>2.5.6</td><td>2.5.7</td><td>2.5.6</td></tr>
+</tbody>
+</table>
+<p>我们很高兴地宣布 Milvus 2.5.8 版本发布，该版本增强了 JSON 表达式、UTF-8 验证、内存使用和平衡逻辑。该版本还包含多个重要的错误修复，以改进并发性和数据处理。我们鼓励您升级或试用，您的反馈将一如既往地帮助我们不断改进 Milvus！</p>
+<h3 id="Features" class="common-anchor-header">功能</h3><ul>
+<li>支持 JSON<code translate="no">null</code>/<code translate="no">exists</code> 表达式<a href="https://github.com/milvus-io/milvus/pull/41002">（#41002）</a></li>
+<li>支持在批量插入中解析来自 Parquet 结构的稀疏向量<a href="https://github.com/milvus-io/milvus/pull/40874">（#40874）</a></li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">改进</h3><ul>
+<li>先平衡行数最多的 Collections<a href="https://github.com/milvus-io/milvus/pull/40958">(#40958</a>)</li>
+<li>在导入过程中支持 UTF-8 字符串验证<a href="https://github.com/milvus-io/milvus/pull/40746">(#40746</a>)</li>
+<li>为所有 VARCHAR 字段添加 UTF-8 验证<a href="https://github.com/milvus-io/milvus/pull/40993">(#40993</a>)</li>
+<li>如果混合搜索只请求将 PK 作为输出字段，则避免重新查询<a href="https://github.com/milvus-io/milvus/pull/40906">(#40906</a>)</li>
+<li>改进数组视图以优化内存使用<a href="https://github.com/milvus-io/milvus/pull/40206">(#40206</a>)</li>
+<li>为自动平衡添加触发间隔配置<a href="https://github.com/milvus-io/milvus/pull/39918">（#39918）</a></li>
+<li>将多个 OR 表达式转换为 IN 表达式（<a href="https://github.com/milvus-io/milvus/pull/40751">＃40751）</a></li>
+<li>支持详细的手动压缩标准<a href="https://github.com/milvus-io/milvus/pull/40924">（＃40924）</a></li>
+<li>为审计日志保留原始令牌<a href="https://github.com/milvus-io/milvus/pull/40867">（#40867）</a></li>
+<li>优化 DataCoord 元互斥使用<a href="https://github.com/milvus-io/milvus/pull/40753">（#40753）</a></li>
+<li>在<code translate="no">MsgDispatcher</code> 中引入批量订阅<a href="https://github.com/milvus-io/milvus/pull/40596">（＃40596）</a></li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">错误修复</h3><ul>
+<li>修正了涉及可归零输入和不断增长的 mmap 数据类型的崩溃<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)</li>
+<li>修正了删除操作中因重复的 binlog ID 而可能造成的数据丢失<a href="https://github.com/milvus-io/milvus/pull/40985">(#40985</a>)、<a href="https://github.com/milvus-io/milvus/pull/40976">(#40976</a>)</li>
+<li>为<code translate="no">GetSegmentsIndexStates</code> 添加了字段索引锁，以避免在创建 Collections 时插入可能造成的恐慌<a href="https://github.com/milvus-io/milvus/pull/40969">(#40969</a>)</li>
+<li>修复了 Rocksmq 消费者注册中的并发问题<a href="https://github.com/milvus-io/milvus/pull/40885">(#40885</a>)</li>
+<li>为分段加载检索所有子 delta 日志<a href="https://github.com/milvus-io/milvus/pull/40957">(#40957</a>)</li>
+<li>修复了在指定<code translate="no">iterative_filter</code> 时使用 JSON 索引导致的错误结果<a href="https://github.com/milvus-io/milvus/pull/40946">(#40946</a>)</li>
+<li>确保<code translate="no">exists</code> 操作符具有更高的优先级<a href="https://github.com/milvus-io/milvus/pull/40865">(#40865</a>)</li>
+<li>修正了<code translate="no">WithGroupSize</code> 在缩小时的问题<a href="https://github.com/milvus-io/milvus/pull/40920">(#40920</a>)</li>
+<li>随着分段大小的增加，按比例增加插槽数量<a href="https://github.com/milvus-io/milvus/pull/40862">(#40862</a>)</li>
+<li>在 enqueue 之前设置任务队列时间<a href="https://github.com/milvus-io/milvus/pull/40853">(#40853</a>)</li>
+<li>修正了数据节点上的通道不平衡问题<a href="https://github.com/milvus-io/milvus/pull/40854">(#40854</a>)</li>
+<li>为任务插槽设置正确的默认配置<a href="https://github.com/milvus-io/milvus/pull/40821">(#40821</a>)</li>
+<li>Go SDK：根据基于行的插入的 FieldSchema 设置可空标志<a href="https://github.com/milvus-io/milvus/pull/40962">（#40962）</a></li>
+</ul>
 <h2 id="v257" class="common-anchor-header">v2.5.7<button data-href="#v257" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +100,7 @@ title: 版本说明
 <tr><td>2.5.7</td><td>2.5.6</td><td>2.5.6</td><td>2.5.6</td></tr>
 </tbody>
 </table>
-<p>我们很高兴地宣布发布 Milvus 2.5.7，其亮点是新引入的 JSON 路径索引功能。这使您可以在动态或 JSON 列上建立反向索引，从而显著提高查询性能。除了这些新功能，我们还进行了大量的增强和错误修复，以提高可靠性、改进错误处理并提高可用性。我们鼓励您升级或试用，并一如既往地感谢您的反馈，我们将继续改进 Milvus！</p>
+<p>我们很高兴地宣布 Milvus 2.5.7 版本发布，其亮点是新引入的 JSON 路径索引功能。这使您可以在动态或 JSON 列上建立反向索引，从而显著提高查询性能。除了这些新功能，我们还进行了大量的增强和错误修复，以提高可靠性、改进错误处理并提高可用性。我们鼓励您升级或试用，并一如既往地感谢您的反馈，我们将继续改进 Milvus！</p>
 <h3 id="Features" class="common-anchor-header">功能</h3><ul>
 <li><strong>JSON 路径索引</strong>：为满足用户对动态 Schema 的需求，Milvus 2.5.7 引入了在动态列和 JSON 列上建立索引的功能。利用该功能，您可以为特定动态列或 JSON 路径创建反转索引，从而有效绕过较慢的 JSON 加载过程，大大提高查询性能。有关详细信息，请参阅<a href="/docs/zh/use-json-fields.md">JSON 字段</a>。</li>
 </ul>
@@ -78,7 +135,7 @@ title: 版本说明
 <li>修复了搜索/查询的引用 Collections 问题<a href="https://github.com/milvus-io/milvus/pull/40550">（#40550）</a></li>
 <li>处理稀疏向量的空行<a href="https://github.com/milvus-io/milvus/pull/40586">（＃40586）</a></li>
 <li>创建集合时添加了重复类型/索引参数检查<a href="https://github.com/milvus-io/milvus/pull/40465">（#40465）</a></li>
-<li>将<code translate="no">metaHeader</code> 移至客户端以避免数据竞赛<a href="https://github.com/milvus-io/milvus/pull/40444">（#40444）</a></li>
+<li>将<code translate="no">metaHeader</code> 移至客户端以避免数据竞赛<a href="https://github.com/milvus-io/milvus/pull/40444">（＃40444）</a></li>
 </ul>
 <h2 id="v256" class="common-anchor-header">v2.5.6<button data-href="#v256" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -104,7 +161,7 @@ title: 版本说明
 <tr><td>2.5.6</td><td>2.5.5</td><td>2.5.5</td><td>2.5.5</td></tr>
 </tbody>
 </table>
-<p>我们很高兴地宣布 Milvus 2.5.6 版本发布，该版本对工具链、日志、度量和数组处理进行了有价值的改进，并修复了多个错误，提高了可靠性和性能。本次更新包括完善的并发处理、更强大的压缩任务以及其他重要改进。我们鼓励您升级或试用，并一如既往地欢迎您提供反馈意见，帮助我们不断改进 Milvus！</p>
+<p>我们很高兴地宣布 Milvus 2.5.6 版本发布，该版本对工具链、日志、度量和数组处理进行了有价值的改进，并修复了多个错误，提高了可靠性和性能。本次更新包括完善的并发处理、更强大的压缩任务以及其他关键改进。我们鼓励您升级或试用，并一如既往地欢迎您提供反馈意见，帮助我们不断改进 Milvus！</p>
 <h3 id="Improvements" class="common-anchor-header">改进</h3><ul>
 <li>将 Go 工具链升级到 1.22.7<a href="https://github.com/milvus-io/milvus/pull/40399">(#40399</a>)</li>
 <li>将 Rust 版本升级到 1.83<a href="https://github.com/milvus-io/milvus/pull/40317">(#40317</a>)</li>
@@ -118,7 +175,7 @@ title: 版本说明
 <h3 id="Bug-fixes" class="common-anchor-header">错误修复</h3><ul>
 <li>修正了忽略有效性导致的数组损坏<a href="https://github.com/milvus-io/milvus/pull/40433">(#40433</a>)</li>
 <li>修正了<code translate="no">null</code> 表达式对 JSON 字段不起作用的问题<a href="https://github.com/milvus-io/milvus/pull/40457">（#40457）</a></li>
-<li>修正了使用可空字段构建 Tantivy 时存储错误偏移的问题<a href="https://github.com/milvus-io/milvus/pull/40453">（＃40453）</a></li>
+<li>修正了在使用可空字段构建 Tantivy 时存储错误偏移的问题<a href="https://github.com/milvus-io/milvus/pull/40453">（＃40453）</a></li>
 <li>跳过执行零段的统计<a href="https://github.com/milvus-io/milvus/pull/40449">（#40449）</a></li>
 <li>修正了数组的内存大小估算<a href="https://github.com/milvus-io/milvus/pull/40377">(#40377</a>)</li>
 <li>传递一个编织袋指针以避免多重压缩<a href="https://github.com/milvus-io/milvus/pull/40401">（＃40401）</a></li>
@@ -273,7 +330,7 @@ title: 版本说明
 </table>
 <p>我们很高兴地宣布 Milvus 2.5.4 版本发布，该版本引入了关键性能优化和新功能，如 PartitionKey 隔离、带 DAAT MaxScore 的稀疏索引和增强的锁定机制。该版本的一个突出亮点是支持 10,000 个 Collections 和 100 万个分区，是多租户使用案例的一个重要里程碑。该版本还解决了多个错误，提高了整体稳定性和可靠性，其中两个关键错误可能会导致数据丢失。我们鼓励您升级或试用这一最新版本，并期待您的反馈意见帮助我们不断完善 Milvus！</p>
 <h3 id="Features" class="common-anchor-header">功能特点</h3><ul>
-<li>支持 PartitionKey 隔离，以提高使用多个分区 Key 时的性能<a href="https://github.com/milvus-io/milvus/pull/39245">（#39245</a>）。更多信息，请参阅<a href="/docs/zh/use-partition-key.md">使用分区密钥</a>。</li>
+<li>支持 PartitionKey 隔离，以提高使用多个分区 Key 时的性能<a href="https://github.com/milvus-io/milvus/pull/39245">（#39245</a>）。有关详细信息，请参阅<a href="/docs/zh/use-partition-key.md">使用分区密钥</a>。</li>
 <li>稀疏索引现在支持 DAAT MaxScore<a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>。有关详细信息，请参阅<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</li>
 <li>在表达式中添加对<code translate="no">is_null</code> 的支持<a href="https://github.com/milvus-io/milvus/pull/38931">(#38931</a>)</li>
 <li>可自定义根权限<a href="https://github.com/milvus-io/milvus/pull/39324">(#39324</a>)</li>

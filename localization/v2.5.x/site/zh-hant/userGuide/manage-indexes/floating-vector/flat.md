@@ -20,7 +20,7 @@ title: FLAT
         ></path>
       </svg>
     </button></h1><p><strong>FLAT</strong>索引是最簡單直接的浮點向量索引和搜尋方法之一。它依賴粗暴的方法，將每個查詢向量直接與資料集中的每個向量進行比較，而不需要任何進階的預處理或資料結構化。這種方法保證了精確度，提供 100% 的回復率，因為每個潛在的匹配都會被評估。</p>
-<p>不過，這種徹底的搜尋方法也有其優缺點。與 Milvus 中的其他索引類型相比，FLAT 索引是最慢的索引選項，因為它會對每個查詢執行資料集的完整掃描。因此，它並不適合擁有大量資料集的環境，因為在這種環境中，效能是最重要的。FLAT 索引的主要優點是簡單可靠，因為它不需要訓練或複雜的參數設定。</p>
+<p>不過，這種徹底的搜尋方法也有其取捨。與 Milvus 中的其他索引類型相比，FLAT 索引是最慢的索引選項，因為它會對每個查詢執行資料集的完整掃描。因此，它並不適合擁有大量資料集的環境，因為在這種環境中，效能是最重要的。FLAT 索引的主要優勢在於其簡單性及可靠性，因為它不需要額外建立索引或複雜的索引參數設定。</p>
 <h2 id="Build-index" class="common-anchor-header">建立索引<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +36,7 @@ title: FLAT
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要在 Milvus 的向量場上建立<code translate="no">FLAT</code> 索引，請使用<code translate="no">add_index()</code> 方法，指定<code translate="no">index_type</code> 和<code translate="no">metric_type</code> 索引的參數。</p>
+    </button></h2><p>要在 Milvus 的向量場上建立<code translate="no">FLAT</code> 索引，請使用<code translate="no">add_index()</code> 方法，指定<code translate="no">index_type</code> 和<code translate="no">metric_type</code> 索引參數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>

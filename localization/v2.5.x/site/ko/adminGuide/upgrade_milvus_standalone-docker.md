@@ -24,7 +24,7 @@ title: Docker Compose로 Milvus 독립형 업그레이드하기
         ></path>
       </svg>
     </button></h1><p>이 항목에서는 Docker Compose를 사용하여 Milvus를 업그레이드하는 방법을 설명합니다.</p>
-<p>일반적인 경우, <a href="#Upgrade-Milvus-by-changing-its-image">Milvus의 이미지를 변경하여 업그레이드할</a> 수 있습니다. 그러나 v2.1.x에서 v2.5.6으로 업그레이드하기 전에 <a href="#Migrate-the-metadata">메타데이터를 마이그레이션해야</a> 합니다.</p>
+<p>일반적인 경우, <a href="#Upgrade-Milvus-by-changing-its-image">Milvus의 이미지를 변경하여 업그레이드할</a> 수 있습니다. 그러나 v2.1.x에서 v2.5.8로 업그레이드하기 전에 <a href="#Migrate-the-metadata">메타데이터를 마이그레이션해야</a> 합니다.</p>
 <div class="alter note">
 <p>보안 문제로 인해 Milvus는 v2.2.5 릴리스와 함께 MinIO를 RELEASE.2023-03-20T20-16-18Z로 업그레이드합니다. Docker Compose를 사용하여 설치된 이전 Milvus 독립 실행형 릴리스에서 업그레이드하기 전에 단일 노드 단일 드라이브 MinIO 배포를 생성하고 기존 MinIO 설정 및 콘텐츠를 새 배포로 마이그레이션해야 합니다. 자세한 내용은 <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">이 가이드를</a> 참조하세요.</p>
 </div>
@@ -46,10 +46,10 @@ title: Docker Compose로 Milvus 독립형 업그레이드하기
     </button></h2><p>일반적인 경우 다음과 같이 Milvus를 업그레이드할 수 있습니다:</p>
 <ol>
 <li><p><code translate="no">docker-compose.yaml</code> 에서 Milvus 이미지 태그를 변경합니다.</p>
-<pre><code translate="no" class="language-yaml">...
-standalone:
-  container_name: milvus-standalone
-  image: milvusdb/milvus:v2.5.6
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">standalone:</span>
+  <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.5.8</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>다음 명령을 실행하여 업그레이드를 수행합니다.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -73,26 +73,26 @@ docker compose up -d
       </svg>
     </button></h2><ol>
 <li><p>모든 Milvus 컴포넌트를 중지합니다.</p>
-<pre><code translate="no">docker stop &lt;milvus-component-docker-container-name&gt;
+<pre><code translate="no">docker stop <span class="hljs-tag">&lt;<span class="hljs-name">milvus-component-docker-container-name</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>메타 마이그레이션을 위해 구성 파일 <code translate="no">migration.yaml</code> 을 준비합니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
-cmd:
+<span class="hljs-attr">cmd:</span>
   <span class="hljs-comment"># Option: run/backup/rollback</span>
-  <span class="hljs-built_in">type</span>: run
-  runWithBackup: true
-config:
-  sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.5</span><span class="hljs-number">.6</span>
-  backupFilePath: /tmp/migration.bak
-metastore:
-  <span class="hljs-built_in">type</span>: etcd
-etcd:
-  endpoints:
-    - milvus-etcd:<span class="hljs-number">2379</span>  <span class="hljs-comment"># Use the etcd container name</span>
-  rootPath: by-dev <span class="hljs-comment"># The root path where data is stored in etcd</span>
-  metaSubPath: meta
-  kvSubPath: kv
+  <span class="hljs-attr">type:</span> <span class="hljs-string">run</span>
+  <span class="hljs-attr">runWithBackup:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">config:</span>
+  <span class="hljs-attr">sourceVersion:</span> <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
+  <span class="hljs-attr">targetVersion:</span> <span class="hljs-number">2.5</span><span class="hljs-number">.8</span>
+  <span class="hljs-attr">backupFilePath:</span> <span class="hljs-string">/tmp/migration.bak</span>
+<span class="hljs-attr">metastore:</span>
+  <span class="hljs-attr">type:</span> <span class="hljs-string">etcd</span>
+<span class="hljs-attr">etcd:</span>
+  <span class="hljs-attr">endpoints:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">milvus-etcd:2379</span>  <span class="hljs-comment"># Use the etcd container name</span>
+  <span class="hljs-attr">rootPath:</span> <span class="hljs-string">by-dev</span> <span class="hljs-comment"># The root path where data is stored in etcd</span>
+  <span class="hljs-attr">metaSubPath:</span> <span class="hljs-string">meta</span>
+  <span class="hljs-attr">kvSubPath:</span> <span class="hljs-string">kv</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>마이그레이션 컨테이너를 실행합니다.</p>
 <pre><code translate="no"><span class="hljs-comment"># Suppose your docker-compose run with the default milvus network,</span>
@@ -100,7 +100,7 @@ etcd:
 docker run --<span class="hljs-built_in">rm</span> -it --network milvus -v $(<span class="hljs-built_in">pwd</span>)/migration.yaml:/milvus/configs/migration.yaml milvusdb/meta-migration:v2.2.0 /milvus/bin/meta-migration -config=/milvus/configs/migration.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>새 Milvus 이미지로 Milvus 컴포넌트를 다시 시작합니다.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment">// Run the following only after update the milvus image tag in the docker-compose.yaml</span>
+<pre><code translate="no" class="language-shell">// Run the following only after update the milvus image tag in the docker-compose.yaml
 docker compose down
 docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>

@@ -38,8 +38,8 @@ title: تكوين Milvus باستخدام Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.5.6/configs/milvus.yaml">قم بتنزيل</a> <code translate="no">milvus.yaml</code> مباشرة أو باستخدام الأمر التالي.</p>
-<pre><code translate="no">$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.5.6/configs/milvus.yaml
+    </button></h2><p><a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.5.8/configs/milvus.yaml">قم بتنزيل</a> <code translate="no">milvus.yaml</code> مباشرة أو باستخدام الأمر التالي.</p>
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v2.5.8/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-configuration-file" class="common-anchor-header">تعديل ملف التكوين<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -211,10 +211,10 @@ title: تكوين Milvus باستخدام Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قم بتنزيل ملف التثبيت الخاص بـ Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-standalone-docker-compose.yml">المستقل،</a> واحفظه بصيغة <code translate="no">docker-compose.yml</code>.</p>
+    </button></h2><p>قم بتنزيل ملف التثبيت الخاص بـ Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.8/milvus-standalone-docker-compose.yml">المستقل،</a> واحفظه بصيغة <code translate="no">docker-compose.yml</code>.</p>
 <p>يمكنك أيضاً ببساطة تشغيل الأمر التالي.</p>
-<pre><code translate="no"><span class="hljs-comment"># For Milvus standalone</span>
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-standalone-docker-compose.yml -O docker-compose.yml
+<pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For Milvus standalone</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.8/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-installation-file" class="common-anchor-header">تعديل ملف التثبيت<button data-href="#Modify-the-installation-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -233,24 +233,24 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-stand
       </svg>
     </button></h2><p>في <code translate="no">docker-compose.yml</code> ، أضف قسم <code translate="no">volumes</code> تحت كل <code translate="no">milvus-standalone</code>.</p>
 <p>قم بتعيين المسار المحلي لملف <code translate="no">milvus.yaml</code> الخاص بك على مسارات حاوية دوكر المقابلة لملفات التكوين <code translate="no">/milvus/configs/milvus.yaml</code> تحت كل <code translate="no">volumes</code> الأقسام.</p>
-<pre><code translate="no" class="language-yaml">...
-  standalone:
-    container_name: milvus-standalone
-    image: milvusdb/milvus:v2.2.13
-    <span class="hljs-built_in">command</span>: [<span class="hljs-string">&quot;milvus&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;standalone&quot;</span>]
-    environment:
-      ETCD_ENDPOINTS: etcd:2379
-      MINIO_ADDRESS: minio:9000
-    volumes:
-      - /local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml   <span class="hljs-comment"># Map the local path to the container path</span>
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/volumes/milvus:/var/lib/milvus
-    ports:
-      - <span class="hljs-string">&quot;19530:19530&quot;</span>
-      - <span class="hljs-string">&quot;9091:9091&quot;</span>
-    depends_on:
-      - <span class="hljs-string">&quot;etcd&quot;</span>
-      - <span class="hljs-string">&quot;minio&quot;</span>
-...
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.2.13</span>
+    <span class="hljs-attr">command:</span> [<span class="hljs-string">&quot;milvus&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;standalone&quot;</span>]
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">ETCD_ENDPOINTS:</span> <span class="hljs-string">etcd:2379</span>
+      <span class="hljs-attr">MINIO_ADDRESS:</span> <span class="hljs-string">minio:9000</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml</span>   <span class="hljs-comment"># Map the local path to the container path</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;19530:19530&quot;</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;9091:9091&quot;</span>
+    <span class="hljs-attr">depends_on:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;etcd&quot;</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;minio&quot;</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 يتم تخزين البيانات في المجلد <code translate="no">/volumes</code> وفقًا للتكوين الافتراضي في <code translate="no">docker-compose.yml</code>. لتغيير المجلد لتخزين البيانات، قم بتحرير <code translate="no">docker-compose.yml</code> أو قم بتشغيل <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code>.</div>
@@ -270,7 +270,7 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v2.5.6/milvus-stand
         ></path>
       </svg>
     </button></h2><p>بعد الانتهاء من تعديل ملف التهيئة وملف التثبيت، يمكنك بعد ذلك بدء تشغيل ميلفوس.</p>
-<pre><code translate="no">$ <span class="hljs-built_in">sudo</span> docker compose up -d
+<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
