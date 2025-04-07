@@ -243,7 +243,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 </div>
 <div class="filter-floating">
 <h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the FLAT index is a good choice. FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.</p>
-<p>FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to every set of vectors in a dataset. This makes FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters required for the FLAT index in Milvus, and using it does not need data training.</p>
+<p>FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to every set of vectors in a dataset. This makes FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters required for the FLAT index in Milvus, and using it does not need extra index buidling.</p>
 <ul>
 <li><p>Search parameters</p>
 <table>
