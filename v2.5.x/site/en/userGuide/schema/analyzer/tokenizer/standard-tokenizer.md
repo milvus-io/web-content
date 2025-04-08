@@ -15,6 +15,9 @@ To configure an analyzer using the `standard` tokenizer, set `tokenizer` to `sta
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -28,11 +31,31 @@ Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer", "standard");
 ```
 
+```javascript
+const analyzer_params = {
+    "tokenizer": "standard",
+};
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+analyzerParams='{
+  "tokenizer": "standard"
+}'
+```
+
 The `standard` tokenizer can work in conjunction with one or more filters. For example, the following code defines an analyzer that uses the `standard` tokenizer and `lowercase` filter:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -48,27 +71,75 @@ analyzerParams.put("tokenizer", "standard");
 analyzerParams.put("filter", Collections.singletonList("lowercase"));
 ```
 
+```javascript
+const analyzer_params = {
+    "tokenizer": "standard",
+    "filter": ["lowercase"]
+};
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+analyzerParams='{
+  "tokenizer": "standard",
+  "filter": [
+    "lowercase"
+  ]
+}'
+```
+
 <div class="alert note">
 
 For simpler setup, you may choose to use the `standard` [analyzer](standard-analyzer.md), which combines the `standard` tokenizer with the `lowercase`[ filter](lowercase-filter.md).
 
 </div>
 
-After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#null).
+After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#Example-use).
 
-## Example output
+## Examples
 
-Here’s an example of how the `standard` tokenizer processes text:
+Before applying the analyzer configuration to your collection schema, verify its behavior using the `run_analyzer` method.
 
-**Original text**:
+### Analyzer configuration
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
-"The Milvus vector database is built for scale!"
+analyzer_params = {
+    "tokenizer": "standard",
+    "filter": ["lowercase"]
+}
 ```
 
-**Expected output**:
+```java
+// java
+```
 
-```python
-["The", "Milvus", "vector", "database", "is", "built", "for", "scale"]
+```javascript
+// javascript
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+### Expected output
+
+```plaintext
+['the', 'milvus', 'vector', 'database', 'is', 'built', 'for', 'scale']
 ```
 

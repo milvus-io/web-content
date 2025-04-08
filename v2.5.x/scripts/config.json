@@ -24,6 +24,51 @@
                         "token": "KkS9wtS5IhcP9obYvc1cK10snfg",
                         "type": "board",
                         "alt_text": "resource-hierarchy"
+                    },
+                    {
+                        "token": "RoJFbyTsuoY8mHxoBBicgBH9nTc",
+                        "type": "image",
+                        "alt_text": "schema-explained"
+                    },
+                    {
+                        "token": "QOgMwbrhLhvvtbbk5TxcarhEn8i",
+                        "type": "board",
+                        "alt_text": "dense-vector"
+                    },
+                    {
+                        "token": "TuIGwtyEkh9g04bvo0icsWdynBd",
+                        "type": "board",
+                        "alt_text": "binary-vector"
+                    },
+                    {
+                        "token": "TF1uw4AQVhFdmBbrhyVcJO6WnXe",
+                        "type": "board",
+                        "alt_text": "use-binary-vector"
+                    },
+                    {
+                        "token": "No8KwR6wPhTIP6bKEqGcbBDWngc",
+                        "type": "board",
+                        "alt_text": "dense-vector"
+                    },
+                    {
+                        "token": "RHlkwqC3Mh1tBSb7G3gcMc8PnUO",
+                        "type": "board",
+                        "alt_text": "sparse-vector"
+                    },
+                    {
+                        "token": "QcKewe4XchpFUUblEyOcgEUpnbc",
+                        "type": "board",
+                        "alt_text": "use-sparse-vector"
+                    },
+                    {
+                        "token": "WeYVbC63So5YT2xSV5EcHf8qn3f",
+                        "type": "image",
+                        "alt_text": "schema-hands-on"
+                    },
+                    {
+                        "token": "X0Ttw7v2ShGLqjb9WFVcGxYLnSf",
+                        "type": "board",
+                        "alt_text": "vector-index-anatomy"
                     }
                 ]
             }

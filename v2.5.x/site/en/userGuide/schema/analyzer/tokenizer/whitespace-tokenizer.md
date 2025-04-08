@@ -15,6 +15,9 @@ To configure an analyzer using the `whitespace` tokenizer, set `tokenizer` to `w
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -28,11 +31,32 @@ Map<String, Object> analyzerParams = new HashMap<>();
 analyzerParams.put("tokenizer", "whitespace");
 ```
 
+```javascript
+const analyzer_params = {
+    "tokenizer": "standard",
+    "filter": ["lowercase"]
+};
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+analyzerParams='{
+  "tokenizer": "whitespace"
+}'
+```
+
 The whitespace tokenizer can work in conjunction with one or more filters. For example, the following code defines an analyzer that uses the `whitespace` tokenizer and `lowercase`[ filter](lowercase-filter.md):
 
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -48,21 +72,69 @@ analyzerParams.put("tokenizer", "whitespace");
 analyzerParams.put("filter", Collections.singletonList("lowercase"));
 ```
 
-After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#null).
-
-## Example output
-
-Here’s an example of how the `whitespace` tokenizer processes text:
-
-**Original text**:
-
-```python
-"The Milvus vector database is built for scale!"
+```javascript
+const analyzer_params = {
+    "tokenizer": "whitespace",
+    "filter": ["lowercase"]
+};
 ```
 
-**Expected output**:
+```go
+// go
+```
+
+```bash
+# restful
+analyzerParams='{
+  "tokenizer": "whitespace",
+  "filter": [
+    "lowercase"
+  ]
+}'
+```
+
+After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#Example-use).
+
+## Examples
+
+Before applying the analyzer configuration to your collection schema, verify its behavior using the `run_analyzer` method.
+
+### Analyzer configuration
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
-["The", "Milvus", "vector", "database", "is", "built", "for", "scale!"]
+analyzer_params = {
+    "tokenizer": "whitespace",
+    "filter": ["lowercase"]
+}
+```
+
+```java
+// java
+```
+
+```javascript
+// javascript
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+```
+
+### Expected output
+
+```plaintext
+['the', 'milvus', 'vector', 'database', 'is', 'built', 'for', 'scale!']
 ```
 

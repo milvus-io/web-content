@@ -1,231 +1,558 @@
 ---
 id: schema.md
-summary: Learn how to define a schema in Milvus.
-title: Manage Schema
+title: "Schema Explained"
+summary: "A schema defines the data structure of a collection. Before creating a collection, you need to work out a design of its schema. This page helps you understand the collection schema and design an example schema on your own."
 ---
 
-# Manage Schema
+# Schema Explained
 
-This topic introduces schema in Milvus. Schema is used to define the properties of a collection and the fields within.
+A schema defines the data structure of a collection. Before creating a collection, you need to work out a design of its schema. This page helps you understand the collection schema and design an example schema on your own.
 
+## Overview
 
-## Field schema
+On Zilliz Cloud, a collection schema assembles a table in a relational database, which defines how Zilliz Cloud organizes data in the collection. 
 
-A field schema is the logical definition of a field. It is the first thing you need to define before defining a [collection schema](#Collection-schema) and [managing collections](manage-collections.md). 
+A well-designed schema is essential as it abstracts the data model and decides if you can achieve the business objectives through a search. Furthermore, since every row of data inserted into the collection must follow the schema, it helps maintain data consistency and long-term quality. From a technical perspective, a well-defined schema leads to well-organized column data storage and a cleaner index structure, boosting search performance.
 
-Milvus supports only one primary key field in a collection.
+A collection schema has a primary key, a maximum of four vector fields, and several scalar fields. The following diagram illustrates how to map an article to a list of schema fields.
 
-### Field schema properties
+![schema-explained](../../../assets/schema-explained.png)
 
-<table class="properties">
-	<thead>
-	<tr>
-		<th>Properties</th>
-		<th>Description</th>
-		<th>Note</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>name</code></td>
-		<td>Name of the field in the collection to create</td>
-		<td>Data type: String.<br/>Mandatory</td>
-	</tr>
-	<tr>
-		<td><code>dtype</code></td>
-		<td>Data type of the field</td>
-		<td>Mandatory</td>
-	</tr>
-    <tr>
-		<td><code>description</code></td>
-		<td>Description of the field</td>
-		<td>Data type: String.<br/>Optional</td>
-	</tr>
-    <tr>
-		<td><code>is_primary</code></td>
-		<td>Whether to set the field as the primary key field or not</td>
-		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Mandatory for the primary key field</td>
-	</tr>
-        <tr>
-	        <td><code>auto_id</code> (Mandatory for primary key field)</td>
-        	<td>Switch to enable or disable automatic ID (primary key) allocation.</td>
-        	<td><code>True</code> or <code>False</code></td>
-        </tr>
-        <tr>
-        	<td><code>max_length</code> (Mandatory for VARCHAR field)</td>
-        	<td>Maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit.</td>
-        	<td>[1, 65,535]</td>
-        </tr>
-	<tr>
-		<td><code>dim</code></td>
-		<td>Dimension of the vector</td>
-    		<td>Data type: Integer &isin;[1, 32768].<br/>Mandatory for a dense vector field. Omit for a <a href="https://milvus.io/docs/sparse_vector.md">sparse vector</a> field.</td>
-	</tr>
-	<tr>
-		<td><code>is_partition_key</code></td>
-		<td>Whether this field is a partition-key field.</td>
-		<td>Data type: Boolean (<code>true</code> or <code>false</code>).</td>
-	</tr>
-	</tbody>
-</table>
+The data model design of a search system involves analyzing business needs and abstracting information into a schema-expressed data model. For instance, searching a piece of text must be "indexed" by converting the literal string into a vector through "embedding" and enabling vector search. Beyond this essential requirement, storing other properties such as publication timestamp and author may be necessary. This metadata allows for semantic searches to be refined through filtering, returning only texts published after a specific date or by a particular author. You can also retrieve these scalars with the main text to render the search result in the application. Each should be assigned a unique identifier to organize these text pieces, expressed as an integer or string. These elements are essential for achieving sophisticated search logic.
 
+Refer to [Schema Design Hands-On](schema-hands-on.md) to figure out how to make a well-designed schema.
 
-### Create a field schema
+## Create Schema
 
-To reduce the complexity in data inserts, Milvus allows you to specify a default value for each scalar field during field schema creation, excluding the primary key field. This indicates that if you leave a field empty when inserting data, the default value you specified for this field applies.
+The following code snippet demonstrates how to create a schema.
 
-Create a regular field schema:
-
-```python
-from pymilvus import DataType, FieldSchema
-id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
-age_field = FieldSchema(name="age", dtype=DataType.INT64, description="age")
-embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=128, description="vector")
-
-# The following creates a field and use it as the partition key
-position_field = FieldSchema(name="position", dtype=DataType.VARCHAR, max_length=256, is_partition_key=True)
-```
-
-Create a field schema with default field values:
-
-```python
-from pymilvus import DataType, FieldSchema
-
-fields = [
-  FieldSchema(name="id", dtype=DataType.INT64, is_primary=True),
-  # configure default value `25` for field `age`
-  FieldSchema(name="age", dtype=DataType.INT64, default_value=25, description="age"),
-  embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=128, description="vector")
-]
-```
-
-### Supported data types
-
-`DataType` defines the kind of data a field contains. Different fields support different data types.
-
-- Primary key field supports:
-  - INT64: numpy.int64
-  - VARCHAR: VARCHAR
-- Scalar field supports:
-  - BOOL: Boolean (`true` or `false`)
-  - INT8: numpy.int8
-  - INT16: numpy.int16
-  - INT32: numpy.int32
-  - INT64: numpy.int64
-  - FLOAT: numpy.float32
-  - DOUBLE: numpy.double
-  - VARCHAR: VARCHAR
-  - JSON: [JSON](use-json-fields.md)
-  - Array: [Array](array_data_type.md)
-
-  JSON as a composite data type is available. A JSON field comprises key-value pairs. Each key is a string, and a value can be a number, string, boolean value, array, or list. For details, refer to [JSON: a new data type](use-json-fields.md).
-  
-- Vector field supports:
-  - BINARY_VECTOR: Stores binary data as a sequence of 0s and 1s, used for compact feature representation in image processing and information retrieval.
-  - FLOAT_VECTOR: Stores 32-bit floating-point numbers, commonly used in scientific computing and machine learning for representing real numbers.
-  - FLOAT16_VECTOR: Stores 16-bit half-precision floating-point numbers, used in deep learning and GPU computations for memory and bandwidth efficiency.
-  - BFLOAT16_VECTOR: Stores 16-bit floating-point numbers with reduced precision but the same exponent range as Float32, popular in deep learning for reducing memory and computational requirements without significantly impacting accuracy.
-  - SPARSE_FLOAT_VECTOR: Stores a list of non-zero elements and their corresponding indices, used for representing sparse vectors. For more information, refer to [Sparse Vectors](sparse_vector.md).
-
-  Milvus supports multiple vector fields in a collection. For more information, refer to [Hybrid Search](multi-vector-search.md).
-
-## Collection schema
-
-A collection schema is the logical definition of a collection. Usually you need to define the [field schema](#Field-schema) before defining a collection schema and [managing collections](manage-collections.md).
-
-### Collection schema properties
-
-<table class="properties">
-	<thead>
-	<tr>
-		<th>Properties</th>
-		<th>Description</th>
-		<th>Note</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-		<td><code>field</code></td>
-		<td>Fields in the collection to create</td>
-		<td>Mandatory</td>
-	</tr>
-    <tr>
-		<td><code>description</code></td>
-		<td>Description of the collection</td>
-		<td>Data type: String.<br/>Optional</td>
-	</tr>
-    <tr>
-		<td><code>partition_key_field</code></td>
-		<td>Name of a field that is designed to act as the partition key.</td>
-		<td>Data type: String.<br/>Optional</td>
-	</tr>
-    <tr>
-		<td><code>enable_dynamic_field</code></td>
-		<td>Whether to enable dynamic schema or not</td>
-		<td>Data type: Boolean (<code>true</code> or <code>false</code>).<br/>Optional, defaults to <code>False</code>.<br/>For details on dynamic schema, refer to <a herf="enable-dynamic-field.md">Dynamic Schema</a> and the user guides for managing collections.</td>
-	</tr>
-	</tbody>
-</table>
-
-### Create a collection schema
-
-<div class="alert note">
-  Define the field schemas before defining a collection schema.
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
-from pymilvus import DataType, FieldSchema, CollectionSchema
-id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
-age_field = FieldSchema(name="age", dtype=DataType.INT64, description="age")
-embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=128, description="vector")
+from pymilvus import MilvusClient, DataType
 
-# Enable partition key on a field if you need to implement multi-tenancy based on the partition-key field
-position_field = FieldSchema(name="position", dtype=DataType.VARCHAR, max_length=256, is_partition_key=True)
-
-# Set enable_dynamic_field to True if you need to use dynamic fields. 
-schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=False, enable_dynamic_field=True, description="desc of a collection")
+schema = MilvusClient.create_schema()
 ```
 
-Create a collection with the schema specified:
+```java
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-```python
-from pymilvus import Collection, connections
-conn = connections.connect(host="127.0.0.1", port=19530)
-collection_name1 = "tutorial_1"
-collection1 = Collection(name=collection_name1, schema=schema, using='default', shards_num=2)
+CreateCollectionReq.CollectionSchema schema = client.createSchema();
 ```
-<div class="alert note">
 
-  - You can define the shard number with <code>shards_num</code>.
-  - You can define the Milvus server on which you wish to create a collection by specifying the alias in <code>using</code>.
-  - You can enable the partition key feature on a field by setting <code>is_partition_key</code> to <code>True</code> on the field if you need to implement [partition-key-based multi-tenancy](multi_tenancy.md).
-  - You can enable dynamic schema by setting <code>enable_dynamic_field</code> to <code>True</code> in the collection schema if you need to [enable dynamic field](enable-dynamic-field.md).
+```javascript
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 
+const schema = []
+```
+
+```go
+import "github.com/milvus-io/milvus/client/v2/entity"
+
+schema := entity.NewSchema()
+log.Println(schema)
+```
+
+```bash
+export schema='{
+    "fields": []
+}'
+```
+
+## Add Primary Field
+
+The primary field in a collection uniquely identifies an entity. It only accepts **Int64** or **VarChar** values. The following code snippets demonstrate how to add the primary field.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
 </div>
-  
-<br/>
-You can also create a collection with <code>Collection.construct_from_dataframe</code>, which automatically generates a collection schema from DataFrame and creates a collection.
 
 ```python
-from pymilvus import Collection
-import pandas as pd
-df = pd.DataFrame({
-    "id": [i for i in range(nb)],
-    "age": [random.randint(20, 40) for i in range(nb)],
-    "embedding": [[random.random() for _ in range(dim)] for _ in range(nb)],
-    "position": "test_pos"
-})
-
-collection, ins_res = Collection.construct_from_dataframe(
-    'my_collection',
-    df,
-    primary_field='id',
-    auto_id=False
-    )
+schema.add_field(
+    field_name="my_id",
+    datatype=DataType.INT64,
+    # highlight-start
+    is_primary=True,
+    auto_id=False,
+    # highlight-end
+)
 ```
 
-## What's next
+```java
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq; 
 
-- Learn how to prepare schema when [managing collections](manage-collections.md).
-- Read more about [dynamic schema](enable-dynamic-field.md).
-- Read more about partition-key in [Multi-tenancy](multi_tenancy.md).
+schema.addField(AddFieldReq.builder()
+        .fieldName("my_id")
+        .dataType(DataType.Int64)
+        // highlight-start
+        .isPrimaryKey(true)
+        .autoID(false)
+        // highlight-end
+        .build());
+```
+
+```javascript
+schema.push({
+    name: "my_id",
+    data_type: DataType.Int64,
+    // highlight-start
+    is_primary_key: true,
+    autoID: false
+    // highlight-end
+});
+```
+
+```go
+import "github.com/milvus-io/milvus/client/v2/entity"
+
+schema.WithField(entity.NewField().WithName("my_id").
+    WithDataType(entity.FieldTypeInt64).
+    // highlight-start
+    WithIsPrimaryKey(true).
+    WithIsAutoID(false),
+    // highlight-end
+)
+```
+
+```bash
+export primaryField='{
+    "fieldName": "my_id",
+    "dataType": "Int64",
+    "isPrimary": true
+}'
+
+export schema='{
+    \"autoID\": false,
+    \"fields\": [
+        $primaryField
+    ]
+}'
+```
+
+When adding a field, you can explicitly clarify the field as the primary field by setting its `is_primary` property to `True`. A primary field accepts **Int64** values by default. In this case, the primary field value should be integers similar to `12345`. If you choose to use **VarChar** values in the primary field, the value should be strings similar to `my_entity_1234`.
+
+You can also set the `autoId` properties to `True` to make Zilliz Cloud automatically allocate primary field values upon data insertions.
+
+For details, refer to [Primary Field & AutoId](primary-field.md).
+
+## Add Vector Fields
+
+Vector fields accept various sparse and dense vector embeddings. On Zilliz Cloud, you can add four vector fields to a collection. The following code snippets demonstrate how to add a vector field.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+schema.add_field(
+    field_name="my_vector",
+    datatype=DataType.FLOAT_VECTOR,
+    # highlight-next-line
+    dim=5
+)
+```
+
+```java
+schema.addField(AddFieldReq.builder()
+        .fieldName("my_vector")
+        .dataType(DataType.FloatVector)
+        // highlight-next-line
+        .dimension(5)
+        .build());
+```
+
+```javascript
+schema.push({
+    name: "my_vector",
+    data_type: DataType.FloatVector,
+    // highlight-next-line
+    dim: 5
+});
+```
+
+```go
+import "github.com/milvus-io/milvus/client/v2/entity"
+
+schema.WithField(entity.NewField().WithName("my_vector").
+    WithDataType(entity.FieldTypeFloatVector).
+    // highlight-next-line
+    WithDim(5),
+)
+```
+
+```bash
+export vectorField='{
+    "fieldName": "my_vector",
+    "dataType": "FloatVector",
+    "elementTypeParams": {
+        "dim": 5
+    }
+}'
+
+export schema="{
+    \"autoID\": false,
+    \"fields\": [
+        $primaryField,
+        $vectorField
+    ]
+}"
+```
+
+The `dim` paramter in the above code snippets indicates the dimensionality of the vector embeddings to be held in the vector field. The `FLOAT_VECTOR` value indicates that the vector field holds a list of 32-bit floating numbers, which are usually used to represent antilogarithms.In addition to that, Zilliz Cloud also supports the following types of vector embeddings:
+
+- `FLOAT16_VECTOR`
+
+    A vector field of this type holds a list of 16-bit half-precision floating numbers and usually applies to memory- or bandwidth-restricted deep learning or GPU-based computing scenarios.
+
+- `BFLOAT16_VECTOR`
+
+    A vector field of this type holds a list of 16-bit floating-point numbers that have reduced precision but the same exponent range as Float32. This type of data is commonly used in deep learning scenarios, as it reduces memory usage without significantly impacting accuracy.
+
+- `BINARY_VECTOR`
+
+    A vector field of this type holds a list of 0s and 1s. They serve as compact features for representing data in image processing and information retrieval scenarios.
+
+- `SPARSE_FLOAT_VECTOR`
+
+    A vector field of this type holds a list of non-zero numbers and their sequence numbers to represent sparse vector embeddings.
+
+## Add Scalar Fields
+
+In common cases, you can use scalar fields to store the metadata of the vector embeddings stored in Milvus, and conduct ANN searches with metadata filtering to improve the correctness of the search results. Zilliz Cloud supports multiple scalar field types, including **VarChar**, **Boolean**, **Int**, **Float**, **Double**, **Array**, and **JSON**.
+
+### Add String Fields
+
+In Milvus, you can use VarChar fields to store strings. For more on the VarChar field, refer to [String Field](string.md).
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+schema.add_field(
+    field_name="my_varchar",
+    datatype=DataType.VARCHAR,
+    # highlight-next-line
+    max_length=512
+)
+```
+
+```java
+schema.addField(AddFieldReq.builder()
+        .fieldName("my_varchar")
+        .dataType(DataType.VarChar)
+        // highlight-next-line
+        .maxLength(512)
+        .build());
+```
+
+```javascript
+schema.push({
+    name: "my_varchar",
+    data_type: DataType.VarChar,
+    // highlight-next-line
+    max_length: 512
+});
+```
+
+```go
+import "github.com/milvus-io/milvus/client/v2/entity"
+
+schema.WithField(entity.NewField().WithName("my_varchar").
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(512),
+)
+```
+
+```bash
+export varCharField='{
+    "fieldName": "my_varchar",
+    "dataType": "VarChar",
+    "elementTypeParams": {
+        "max_length": 256
+    }
+}'
+
+export schema="{
+    \"autoID\": false,
+    \"fields\": [
+        $primaryField,
+        $vectorField,
+        $varCharField
+    ]
+}"
+```
+
+### Add Number Fields
+
+The types of numbers that Milvus supports are `Int8`, `Int16`, `Int32`, `Int64`, `Float`, and `Double`. For more on the number fields, refer to [Number Field](number.md).
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+schema.add_field(
+    field_name="my_int64",
+    datatype=DataType.INT64,
+)
+```
+
+```java
+schema.addField(AddFieldReq.builder()
+        .fieldName("my_int64")
+        .dataType(DataType.Int64)
+        .build());
+```
+
+```javascript
+schema.push({
+    name: "my_int64",
+    data_type: DataType.Int64,
+});
+```
+
+```go
+import "github.com/milvus-io/milvus/client/v2/entity"
+
+schema.WithField(entity.NewField().WithName("my_int64").
+    WithDataType(entity.FieldTypeInt64),
+)
+```
+
+```bash
+export int64Field='{
+    "fieldName": "my_int64",
+    "dataType": "Int64"
+}'
+
+export schema="{
+    \"autoID\": false,
+    \"fields\": [
+        $primaryField,
+        $vectorField,
+        $varCharField,
+        $int64Field
+    ]
+}"
+```
+
+### Add Boolean Fields
+
+Milvus supports boolean fields. The following code snippets demonstrate how to add a boolean field.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+schema.add_field(
+    field_name="my_bool",
+    datatype=DataType.BOOL,
+)
+```
+
+```java
+schema.addField(AddFieldReq.builder()
+        .fieldName("my_bool")
+        .dataType(DataType.Bool)
+        .build());
+```
+
+```javascript
+schema.push({
+    name: "my_bool",
+    data_type: DataType.Boolean,
+});
+```
+
+```go
+import "github.com/milvus-io/milvus/client/v2/entity"
+
+schema.WithField(entity.NewField().WithName("my_bool").
+    WithDataType(entity.FieldTypeBool),
+)
+```
+
+```bash
+export boolField='{
+    "fieldName": "my_bool",
+    "dataType": "Boolean"
+}'
+
+export schema="{
+    \"autoID\": false,
+    \"fields\": [
+        $primaryField,
+        $vectorField,
+        $varCharField,
+        $int64Field,
+        $boolField
+    ]
+}"
+```
+
+### Add JSON fields
+
+A JSON field usually stores half-structured JSON data. For more on the JSON fields, refer to [JSON Field](use-json-fields.md).
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+schema.add_field(
+    field_name="my_json",
+    datatype=DataType.JSON,
+)
+```
+
+```java
+schema.addField(AddFieldReq.builder()
+        .fieldName("my_json")
+        .dataType(DataType.JSON)
+        .build());
+```
+
+```javascript
+schema.push({
+    name: "my_json",
+    data_type: DataType.JSON,
+});
+```
+
+```go
+import "github.com/milvus-io/milvus/client/v2/entity"
+
+schema.WithField(entity.NewField().WithName("my_json").
+    WithDataType(entity.FieldTypeJSON),
+)
+```
+
+```bash
+export jsonField='{
+    "fieldName": "my_json",
+    "dataType": "JSON"
+}'
+
+export schema="{
+    \"autoID\": false,
+    \"fields\": [
+        $primaryField,
+        $vectorField,
+        $varCharField,
+        $int64Field,
+        $boolField,
+        $jsonField
+    ]
+}"
+```
+
+### Add Array Fields
+
+An array field stores a list of elements. The data types of all elements in an array field should be the same. For more on the array fields, refer to [Array Field](array_data_type.md).
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+schema.add_field(
+    field_name="my_array",
+    datatype=DataType.ARRAY,
+    element_type=DataType.VARCHAR,
+    max_capacity=5,
+    max_length=512,
+)
+```
+
+```java
+schema.addField(AddFieldReq.builder()
+        .fieldName("my_array")
+        .dataType(DataType.Array)
+        .elementType(DataType.VarChar)
+        .maxCapacity(5)
+        .maxLength(512)
+        .build());
+```
+
+```javascript
+schema.push({
+    name: "my_array",
+    data_type: DataType.Array,
+    element_type: DataType.VarChar,
+    max_capacity: 5,
+    max_length: 512
+});
+```
+
+```go
+import "github.com/milvus-io/milvus/client/v2/entity"
+
+schema.WithField(entity.NewField().WithName("my_array").
+    WithDataType(entity.FieldTypeArray).
+    WithElementType(entity.FieldTypeInt64).
+    WithMaxLength(512).
+    WithMaxCapacity(5),
+)
+```
+
+```bash
+export arrayField='{
+    "fieldName": "my_array",
+    "dataType": "Array",
+    "elementDataType": "VarChar",
+    "elementTypeParams": {
+        "max_length": 512
+    }
+}'
+
+export schema="{
+    \"autoID\": false,
+    \"fields\": [
+        $primaryField,
+        $vectorField,
+        $varCharField,
+        $int64Field,
+        $boolField,
+        $jsonField,
+        $arrayField
+    ]
+}"
+```
+

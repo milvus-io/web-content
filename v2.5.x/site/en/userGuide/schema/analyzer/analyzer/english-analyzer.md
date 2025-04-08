@@ -1,91 +1,251 @@
 ---
 id: english-analyzer.md
-title: English Analyzer
-related_key: english, analyzer
-summary: The `english` analyzer in Milvus is designed to process English text, applying language-specific rules for tokenization and filtering.​
+title: "English"
+summary: "The english analyzer in Milvus is designed to process English text, applying language-specific rules for tokenization and filtering."
 ---
 
-# English​
+# English
 
-The `english` analyzer in Milvus is designed to process English text, applying language-specific rules for tokenization and filtering.​
+The `english` analyzer in Milvus is designed to process English text, applying language-specific rules for tokenization and filtering.
 
-### Definition​
+## Definition
 
-The `english` analyzer uses the following components:​
+The `english` analyzer uses the following components:
 
-- **Tokenizer**: Uses the [`standard tokenizer`](standard-tokenizer.md) to split text into discrete word units.​
+- **Tokenizer**: Uses the `standard`[ tokenizer](standard-tokenizer.md) to split text into discrete word units.
 
-- Filters: Includes multiple filters for comprehensive text processing:​
+- **Filters**: Includes multiple filters for comprehensive text processing:
 
-    - [`lowercase`](lowercase-filter.md): Converts all tokens to lowercase, enabling case-insensitive searches.​
+    - `lowercase`: Converts all tokens to lowercase, enabling case-insensitive searches.
 
-    - [`stemmer`](stemmer-filter.md): Reduces words to their root form to support broader matching (e.g., "running" becomes "run").​
+    - `stemmer`: Reduces words to their root form to support broader matching (e.g., "running" becomes "run").
 
-    - [`stop_words`](stop-filter.md): Removes common English stop words to focus on key terms in text.​
+    - `stop_words`: Removes common English stop words to focus on key terms in text.
 
-The functionality of the `english` analyzer is equivalent to the following custom analyzer configuration:​
+The functionality of the `english` analyzer is equivalent to the following custom analyzer configuration:
 
-```python
-analyzer_params = {​
-    "tokenizer": "standard",​
-    "filter": [​
-        "lowercase",​
-        {​
-            "type": "stemmer",​
-            "language": "english"​
-        }，{​
-            "type": "stop",​
-            "stop_words": "_english_",​
-        }​
-    ]​
-}​
-```
-
-### Configuration​
-
-To apply the `english` analyzer to a field, simply set `type` to `english` in `analyzer_params`, and include optional parameters as needed.​
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
-analyzer_params = {​
-    "type": "english",​
-}​
+analyzer_params = {
+        "tokenizer": "standard",
+        "filter": [
+                "lowercase",
+                {
+                        "type": "stemmer",
+                        "language": "english"
+                }, {
+                        "type": "stop",
+                        "stop_words": "_english_"
+                }
+        ]
+}
 ```
 
-The `english` analyzer accepts the following optional parameters: ​
+```java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("tokenizer", "standard");
+analyzerParams.put("filter",
+        Arrays.asList("lowercase",
+                new HashMap<String, Object>() {{
+                    put("type", "stemmer");
+                    put("language", "english");
+                }},
+                new HashMap<String, Object>() {{
+                    put("type", "stop");
+                    put("stop_words", Collections.singletonList("_english_"));
+                }}
+        )
+);
+```
 
-<table data-block-token="YMmUdQtabozHZnxC09QcajU0nvd"><thead><tr><th data-block-token="N1Qfdbd9Vok7mkx0OGpcx49cnUM" colspan="1" rowspan="1"><p data-block-token="PxYUdGyrMoa4x5x3sCpcF7JLn1e">Parameter​</p>
+```javascript
+const analyzer_params = {
+    "type": "standard", // Specifies the standard analyzer type
+    "stop_words", ["of"] // Optional: List of words to exclude from tokenization
+}
+```
 
-</th><th data-block-token="WIQKdcE3coxEirxwmpucXGuin7f" colspan="1" rowspan="1"><p data-block-token="VAHCdZFTkoeSJNxgPmicGnOZnWh">Description​</p>
+```go
+// go
+```
 
-</th></tr></thead><tbody><tr><td data-block-token="NzThd1pxQoektPxhqrQc7Oxcnhl" colspan="1" rowspan="1"><p data-block-token="SW6SdE2iyohhGaxQIfpcjZfCnBx"><code>stop_words</code>​</p>
+```bash
+# restful
+analyzerParams='{
+  "tokenizer": "standard",
+  "filter": [
+    "lowercase",
+    {
+      "type": "stemmer",
+      "language": "english"
+    },
+    {
+      "type": "stop",
+      "stop_words": "_english_"
+    }
+  ]
+}'
 
-</td><td data-block-token="KSAbdmKPCowsR7x7UO8c8ngFnnh" colspan="1" rowspan="1"><p data-block-token="F3E1dFjL3oUrl5xWq3ucpVPon7c">An array containing a list of stop words, which will be removed from tokenization. Defaults to <code>_english_</code>, a built-in set of common English stop words.​</p>
+```
 
-</td></tr></tbody></table>
+## Configuration
 
-Example configuration with custom stop words:​
+To apply the `english` analyzer to a field, simply set `type` to `english` in `analyzer_params`, and include optional parameters as needed.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
-analyzer_params = {​
-    "type": "english",​
-    "stop_words": ["a", "an", "the"]​
-}​
+analyzer_params = {
+    "type": "english",
+}
 ```
 
-After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#Example-use).​
+```java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("type", "english");
+```
 
-### Example output​
+```javascript
+const analyzer_params = {
+    "type": "english",
+}
+```
 
-Here’s how the `english` analyzer processes text.​
+```go
+// go
+```
 
-**Original text**:​
+```bash
+# restful
+analyzerParams='{
+  "type": "english"
+}'
+```
+
+The `english` analyzer accepts the following optional parameters: 
+
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Description</p></th>
+   </tr>
+   <tr>
+     <td><p><code>stop_words</code></p></td>
+     <td><p>An array containing a list of stop words, which will be removed from tokenization. Defaults to <code>_english_</code>, a built-in set of common English stop words.</p></td>
+   </tr>
+</table>
+
+Example configuration with custom stop words:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
-"The Milvus vector database is built for scale!"​
+analyzer_params = {
+    "type": "english",
+    "stop_words": ["a", "an", "the"]
+}
 ```
 
-**Expected output**:​
+```java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("type", "english");
+analyzerParams.put("stop_words", Arrays.asList("a", "an", "the"));
+```
+
+```javascript
+const analyzer_params = {
+    "type": "english",
+    "stop_words": ["a", "an", "the"]
+}
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+analyzerParams='{
+  "type": "english",
+  "stop_words": [
+    "a",
+    "an",
+    "the"
+  ]
+}'
+
+```
+
+After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#share-I38Md0nO2o1lw2xifGzccPpWncd).
+
+## Examples
+
+Before applying the analyzer configuration to your collection schema, verify its behavior using the `run_analyzer` method.
+
+### Analyzer configuration
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
-["milvus", "vector", "databas", "built", "scale"]​
+analyzer_params = {
+    "type": "english",
+    "stop_words": ["a", "an", "the"]
+}
 ```
+
+```java
+// java
+```
+
+```javascript
+// javascript
+```
+
+```go
+// go
+```
+
+```bash
+# restful
+analyzerParams='{
+  "type": "english",
+  "stop_words": [
+    "a",
+    "an",
+    "the"
+  ]
+}'
+
+```
+
+### Expected output
+
+```python
+English analyzer output: ['milvus', 'vector', 'databas', 'built', 'scale']
+```
+

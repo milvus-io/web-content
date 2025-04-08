@@ -263,7 +263,7 @@ class MilvusDocsGen extends larkDocWriter {
                 {
                     type: 'confirm',
                     name: 'confirm',
-                    message: `A file named ${alt_text}.png already exists. Do you want to overwrite it?`,
+                    message: `A file named ${alt_text.alt_text}.png already exists. Do you want to overwrite it?`,
                     default: true
                 }
             ])
@@ -271,7 +271,7 @@ class MilvusDocsGen extends larkDocWriter {
             confirm = confirm.confirm
         }
 
-        return alt_text.alt_text, confirm
+        return [ alt_text.alt_text, confirm ]
     }
 
     __locate_alt_text(token) {
@@ -286,7 +286,7 @@ class MilvusDocsGen extends larkDocWriter {
         let confirm = true;
 
         if (alt_text === image.token) {
-            alt_text, confirm = await this.__alt_text_prompt("image", image.token)
+            [ alt_text, confirm ] = await this.__alt_text_prompt("image", image.token)
         }
 
         if (this.skip_image_download) {
@@ -315,11 +315,11 @@ class MilvusDocsGen extends larkDocWriter {
     async __board(board, indent) {
         const root = this.imageDir.replace(/^static\//g, '')
 
-        let alt_text = this.__locate_alt_text(board.token)
-        let confirm = true;
+        var alt_text = this.__locate_alt_text(board.token)
+        var confirm = true;
 
         if (alt_text === board.token) {
-            alt_text, confirm = await this.__alt_text_prompt("board", board.token)
+            [ alt_text, confirm ] = await this.__alt_text_prompt("board", board.token)
         }
 
         if (this.skip_image_download) {

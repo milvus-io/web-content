@@ -1,227 +1,209 @@
 ---
 id: sparse_vector.md
-title: Sparse Vector
-summary: Sparse vectors are an important method of data representation in information retrieval and natural language processing. While dense vectors are popular for their excellent semantic understanding capabilities, sparse vectors often provide more accurate results when it comes to applications that require precise matching of keywords or phrases.​
+title: "Sparse Vector"
+summary: "Sparse vectors are an important method of data representation in information retrieval and natural language processing. While dense vectors are popular for their excellent semantic understanding capabilities, sparse vectors often provide more accurate results when it comes to applications that require precise matching of keywords or phrases."
 ---
 
-# Sparse Vector​
+# Sparse Vector
 
-Sparse vectors are an important method of data representation in information retrieval and natural language processing. While dense vectors are popular for their excellent semantic understanding capabilities, sparse vectors often provide more accurate results when it comes to applications that require precise matching of keywords or phrases.​
+Sparse vectors are an important method of data representation in information retrieval and natural language processing. While dense vectors are popular for their excellent semantic understanding capabilities, sparse vectors often provide more accurate results when it comes to applications that require precise matching of keywords or phrases.
 
-## Overview​
+## Overview
 
-A sparse vector is a special representation of high-dimensional vectors where most elements are zero, and only a few dimensions have non-zero values. This characteristic makes sparse vectors particularly effective in handling large-scale, high-dimensional, but sparse data. Common applications include:​
+A sparse vector is a special representation of high-dimensional vectors where most elements are zero, and only a few dimensions have non-zero values. This characteristic makes sparse vectors particularly effective in handling large-scale, high-dimensional, but sparse data. Common applications include:
 
-- **Text Analysis:** Representing documents as bag-of-words vectors, where each dimension corresponds to a word, and only words that appear in the document have non-zero values.​
+- **Text Analysis:** Representing documents as bag-of-words vectors, where each dimension corresponds to a word, and only words that appear in the document have non-zero values.
 
-- **Recommendation Systems:** User-item interaction matrices, where each dimension represents a user's rating for a particular item, with most users interacting with only a few items.​
+- **Recommendation Systems:** User-item interaction matrices, where each dimension represents a user's rating for a particular item, with most users interacting with only a few items.
 
-- **Image Processing:** Local feature representation, focusing only on key points in the image, resulting in high-dimensional sparse vectors.​
+- **Image Processing:** Local feature representation, focusing only on key points in the image, resulting in high-dimensional sparse vectors.
 
-As shown in the diagram below, dense vectors are typically represented as continuous arrays where each position has a value (e.g., `[0.3, 0.8, 0.2, 0.3, 0.1]`). In contrast, sparse vectors store only non-zero elements and their indices, often represented as key-value pairs (e.g., `[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]`). This representation significantly reduces storage space and increases computational efficiency, especially when dealing with extremely high-dimensional data (e.g., 10,000 dimensions).​
+As shown in the diagram below, dense vectors are typically represented as continuous arrays where each position has a value (e.g., `[0.3, 0.8, 0.2, 0.3, 0.1]`). In contrast, sparse vectors store only non-zero elements and their indices, often represented as key-value pairs (e.g., `[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]`). This representation significantly reduces storage space and increases computational efficiency, especially when dealing with extremely high-dimensional data (e.g., 10,000 dimensions).
 
-![Spare vector representation](../../../../assets/sparse-vector.png)
+![sparse-vector](../../../../assets/sparse-vector.png)
 
-Sparse vectors can be generated using various methods, such as [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) (Term Frequency-Inverse Document Frequency) and [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) in text processing. Additionally, Milvus offers convenient methods to help generate and process sparse vectors. For details, refer to <a href="embeddings.md">Embeddings</a>.​
+Sparse vectors can be generated using various methods, such as [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) (Term Frequency-Inverse Document Frequency) and [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) in text processing. Additionally, Milvus offers convenient methods to help generate and process sparse vectors. For details, refer to Embeddings.
 
-For text data, Milvus also provides full-text search capabilities, allowing you to perform vector searches directly on raw text data without using external embedding models to generate sparse vectors. For more information, refer to [​Full Text Search](full-text-search.md).​
+For text data, Milvus also provides full-text search capabilities, allowing you to perform vector searches directly on raw text data without using external embedding models to generate sparse vectors. For more information, refer to [Full Text Search](full-text-search.md).
 
-After vectorization, the data can be stored in Milvus for management and vector retrieval. The diagram below illustrates the basic process.​
+After vectorization, the data can be stored in Milvus for management and vector retrieval. The diagram below illustrates the basic process.
 
-![Use sparse vector in Milvus](../../../../assets/use-sparse-vector.png)
+![use-sparse-vector](../../../../assets/use-sparse-vector.png)
 
 <div class="alert note">
 
-In addition to sparse vectors, Milvus also supports dense vectors and binary vectors. Dense vectors are ideal for capturing deep semantic relationships, while binary vectors excel in scenarios like quick similarity comparisons and content deduplication. For more information, refer to [​Dense Vector](dense-vector.md) and [​Binary Vector](binary-vector.md).​
+In addition to sparse vectors, Milvus also supports dense vectors and binary vectors. Dense vectors are ideal for capturing deep semantic relationships, while binary vectors excel in scenarios like quick similarity comparisons and content deduplication. For more information, refer to [Dense Vector](dense-vector.md) and [Binary Vector](binary-vector.md).
 
 </div>
 
-## Use sparse vectors in Milvus​
+## Use sparse vectors
 
-Milvus supports representing sparse vectors in any of the following formats:​
+Milvus supports representing sparse vectors in any of the following formats:
 
-- Sparse Matrix (using the `scipy.sparse` class)
-
-    <div class="multipleCode">
-        <a href="#python">Python </a>
-        <a href="#java">Java</a>
-        <a href="#javascript">Node.js</a>
-        <a href="#curl">cURL</a>
-    </div>
+- **Sparse Matrix (using the `scipy.sparse` class)**
 
     ```python
-    from scipy.sparse import csr_matrix​
-    ​
-    # Create a sparse matrix​
-    row = [0, 0, 1, 2, 2, 2]​
-    col = [0, 2, 2, 0, 1, 2]​
-    data = [1, 2, 3, 4, 5, 6]​
-    sparse_matrix = csr_matrix((data, (row, col)), shape=(3, 3))​
-    ​
-    # Represent sparse vector using the sparse matrix​
-    sparse_vector = sparse_matrix.getrow(0)​
-
+    from scipy.sparse import csr_matrix
+    
+    # Create a sparse matrix
+    row = [0, 0, 1, 2, 2, 2]
+    col = [0, 2, 2, 0, 1, 2]
+    data = [1, 2, 3, 4, 5, 6]
+    sparse_matrix = csr_matrix((data, (row, col)), shape=(3, 3))
+    
+    # Represent sparse vector using the sparse matrix
+    sparse_vector = sparse_matrix.getrow(0)
     ```
 
-- List of Dictionaries (formatted as `{dimension_index: value, ...}`)
+- **List of Dictionaries (formatted as `{dimension_index: value, ...}`)**
 
     <div class="multipleCode">
-        <a href="#python">Python </a>
+        <a href="#python">Python</a>
         <a href="#java">Java</a>
-        <a href="#javascript">Node.js</a>
-        <a href="#curl">cURL</a>
     </div>
 
     ```python
-    # Represent sparse vector using a dictionary​
-    sparse_vector = [{1: 0.5, 100: 0.3, 500: 0.8, 1024: 0.2, 5000: 0.6}]​
-
-    ```    
+    # Represent sparse vector using a dictionary
+    sparse_vector = [{1: 0.5, 100: 0.3, 500: 0.8, 1024: 0.2, 5000: 0.6}]
+    ```
 
     ```java
-    SortedMap<Long, Float> sparseVector = new TreeMap<>();​
-    sparseVector.put(1L, 0.5f);​
-    sparseVector.put(100L, 0.3f);​
-    sparseVector.put(500L, 0.8f);​
-    sparseVector.put(1024L, 0.2f);​
-    sparseVector.put(5000L, 0.6f);​
-
-    ```    
-
-- List of Tuple Iterators (formatted as `[(dimension_index, value)]`)
-
-    <div class="multipleCode">
-        <a href="#python">Python </a>
-        <a href="#java">Java</a>
-        <a href="#javascript">Node.js</a>
-        <a href="#curl">cURL</a>
-    </div>
-
-    ```python
-    # Represent sparse vector using a list of tuples​
-    sparse_vector = [[(1, 0.5), (100, 0.3), (500, 0.8), (1024, 0.2), (5000, 0.6)]]​
-
+    SortedMap<Long, Float> sparseVector = new TreeMap<>();
+    sparseVector.put(1L, 0.5f);
+    sparseVector.put(100L, 0.3f);
+    sparseVector.put(500L, 0.8f);
+    sparseVector.put(1024L, 0.2f);
+    sparseVector.put(5000L, 0.6f);
     ```
 
-### Add vector field​
+- **List of Tuple Iterators (formatted as `[(dimension_index, value)]`)**
 
-To use sparse vectors in Milvus, define a field for storing sparse vectors when creating a collection. This process includes:​
+    ```python
+    # Represent sparse vector using a list of tuples
+    sparse_vector = [[(1, 0.5), (100, 0.3), (500, 0.8), (1024, 0.2), (5000, 0.6)]]
+    ```
 
-1. Setting `datatype` to the supported sparse vector data type, `SPARSE_FLOAT_VECTOR`.​
+### Add vector field
 
-2. No need to specify the dimension.​
+To use sparse vectors in Milvus, define a field for storing sparse vectors when creating a collection. This process includes:
+
+1. Setting `datatype` to the supported sparse vector data type, `SPARSE_FLOAT_VECTOR`.
+
+1. No need to specify the dimension.
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
-from pymilvus import MilvusClient, DataType​
-​
-client = MilvusClient(uri="http://localhost:19530")​
-​
-client.drop_collection(collection_name="my_sparse_collection")​
-​
-schema = client.create_schema(​
-    auto_id=True,​
-    enable_dynamic_fields=True,​
-)​
-​
-schema.add_field(field_name="pk", datatype=DataType.VARCHAR, is_primary=True, max_length=100)​
-schema.add_field(field_name="sparse_vector", datatype=DataType.SPARSE_FLOAT_VECTOR)​
+from pymilvus import MilvusClient, DataType
 
+client = MilvusClient(uri="http://localhost:19530")
+
+client.drop_collection(collection_name="my_sparse_collection")
+
+schema = client.create_schema(
+    auto_id=True,
+    enable_dynamic_fields=True,
+)
+
+schema.add_field(field_name="pk", datatype=DataType.VARCHAR, is_primary=True, max_length=100)
+schema.add_field(field_name="sparse_vector", datatype=DataType.SPARSE_FLOAT_VECTOR)
 ```
 
 ```java
-import io.milvus.v2.client.ConnectConfig;​
-import io.milvus.v2.client.MilvusClientV2;​
-​
-import io.milvus.v2.common.DataType;​
-import io.milvus.v2.service.collection.request.AddFieldReq;​
-import io.milvus.v2.service.collection.request.CreateCollectionReq;​
-​
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()​
-        .uri("http://localhost:19530")​
-        .build());​
-        ​
-CreateCollectionReq.CollectionSchema schema = client.createSchema();​
-schema.setEnableDynamicField(true);​
-schema.addField(AddFieldReq.builder()​
-        .fieldName("pk")​
-        .dataType(DataType.VarChar)​
-        .isPrimaryKey(true)​
-        .autoID(true)​
-        .maxLength(100)​
-        .build());​
-​
-schema.addField(AddFieldReq.builder()​
-        .fieldName("sparse_vector")​
-        .dataType(DataType.SparseFloatVector)​
-        .build());​
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
 
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .build());
+        
+CreateCollectionReq.CollectionSchema schema = client.createSchema();
+schema.setEnableDynamicField(true);
+schema.addField(AddFieldReq.builder()
+        .fieldName("pk")
+        .dataType(DataType.VarChar)
+        .isPrimaryKey(true)
+        .autoID(true)
+        .maxLength(100)
+        .build());
+
+schema.addField(AddFieldReq.builder()
+        .fieldName("sparse_vector")
+        .dataType(DataType.SparseFloatVector)
+        .build());
 ```
 
 ```javascript
-import { DataType } from "@zilliz/milvus2-sdk-node";​
-​
-const schema = [​
-  {​
-    name: "metadata",​
-    data_type: DataType.JSON,​
-  },​
-  {​
-    name: "pk",​
-    data_type: DataType.Int64,​
-    is_primary_key: true,​
-  },​
-  {​
-    name: "sparse_vector",​
-    data_type: DataType.SparseFloatVector,​
-  }​
-];​
-​
+import { DataType } from "@zilliz/milvus2-sdk-node";
+
+const schema = [
+  {
+    name: "metadata",
+    data_type: DataType.JSON,
+  },
+  {
+    name: "pk",
+    data_type: DataType.Int64,
+    is_primary_key: true,
+  },
+  {
+    name: "sparse_vector",
+    data_type: DataType.SparseFloatVector,
+  }
+];
 
 ```
 
-```curl
-export primaryField='{​
-    "fieldName": "pk",​
-    "dataType": "VarChar",​
-    "isPrimary": true,​
-    "elementTypeParams": {​
-        "max_length": 100​
-    }​
-}'​
-​
-export vectorField='{​
-    "fieldName": "sparse_vector",​
-    "dataType": "SparseFloatVector"​
-}'​
-​
-export schema="{​
-    \"autoID\": true,​
-    \"fields\": [​
-        $primaryField,​
-        $vectorField​
-    ]​
-}"​
-
+```go
+// go
 ```
 
-In this example, a vector field named `sparse_vector` is added for storing sparse vectors. The data type of this field is `SPARSE_FLOAT_VECTOR`.​
+```bash
+export primaryField='{
+    "fieldName": "pk",
+    "dataType": "VarChar",
+    "isPrimary": true,
+    "elementTypeParams": {
+        "max_length": 100
+    }
+}'
 
-### Set index params for vector field​
+export vectorField='{
+    "fieldName": "sparse_vector",
+    "dataType": "SparseFloatVector"
+}'
 
-The process of creating an index for sparse vectors is similar to that for [dense vectors](dense-vector.md), but with differences in the specified index type (`index_type`), distance metric (`metric_type`), and index parameters (`params`).​
+export schema="{
+    \"autoID\": true,
+    \"fields\": [
+        $primaryField,
+        $vectorField
+    ]
+}"
+```
+
+In this example, a vector field named `sparse_vector` is added for storing sparse vectors. The data type of this field is `SPARSE_FLOAT_VECTOR`.
+
+### Set index params for vector field
+
+The process of creating an index for sparse vectors is similar to that for [dense vectors](dense-vector.md), but with differences in the specified index type (`index_type`), distance metric (`metric_type`), and index parameters (`params`).
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -232,7 +214,7 @@ index_params.add_index(
     index_name="sparse_inverted_index",
     index_type="SPARSE_INVERTED_INDEX",
     metric_type="IP",
-    params={"inverted_index_algo": "DAAT_MAXSCORE"}, # Algorithm used for building and querying the index
+    params={"inverted_index_algo": "DAAT_MAXSCORE"}, # or "DAAT_WAND" or "TAAT_NAIVE"
 )
 
 ```
@@ -242,370 +224,345 @@ import io.milvus.v2.common.IndexParam;
 import java.util.*;
 
 List<IndexParam> indexes = new ArrayList<>();
+
 Map<String,Object> extraParams = new HashMap<>();
 extraParams.put("inverted_index_algo": "DAAT_MAXSCORE"); // Algorithm used for building and querying the index
+
 indexes.add(IndexParam.builder()
         .fieldName("sparse_vector")
+
         .indexName("sparse_inverted_index")
         .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .extraParams(extraParams)
-        .build());
 
+        .metricType(IndexParam.MetricType.IP)
+
+        .extraParams(extraParams)
+
+        .build());
 ```
 
 ```javascript
 const indexParams = await client.createIndex({
-    index_name: 'sparse_inverted_index',
     field_name: 'sparse_vector',
     metric_type: MetricType.IP,
+
+    index_name: 'sparse_inverted_index',
     index_type: IndexType.SPARSE_INVERTED_INDEX,
     params: {
-      inverted_index_algo: 'DAAT_MAXSCORE', // Algorithm used for building and querying the index
+      inverted_index_algo: 'DAAT_MAXSCORE', 
     },
-});
 
+});
 ```
 
-```curl
+```go
+// go
+```
+
+```bash
 export indexParams='[
         {
             "fieldName": "sparse_vector",
             "metricType": "IP",
+
             "indexName": "sparse_inverted_index",
             "indexType": "SPARSE_INVERTED_INDEX",
-            "params":{"inverted_index_algo": "DAAT_MAXSCORE"} # Algorithm used for building and querying the index
+            "params":{"inverted_index_algo": "DAAT_MAXSCORE"}
+
         }
     ]'
-
 ```
 
 In the example above:
 
 - `index_type`: The type of index to create for the sparse vector field. Valid Values:
 
-  - `SPARSE_INVERTED_INDEX`: A general-purpose inverted index for sparse vectors.
+    - `SPARSE_INVERTED_INDEX`: A general-purpose inverted index for sparse vectors.
 
-  <div class="alert note">
-
+    <div class="alert note">
+    
     From Milvus 2.5.4 onward, `SPARSE_WAND` is being deprecated. Instead, it is recommended to use `"inverted_index_algo": "DAAT_WAND"` for equivalency while maintaining compatibility.
 
-  </div>
+    </div>
 
 - `metric_type`: The metric used to calculate similarity between sparse vectors. Valid Values:
 
-  - `IP` (Inner Product): Measures similarity using dot product.
-  - `BM25`: Typically used for full-text search, focusing on textual similarity.
+    - `IP` (Inner Product): Measures similarity using dot product.
 
-    For further details, refer to [Metric Types](metric.md) and [Full Text Search](full-text-search.md).
+    - `BM25`: Typically used for full-text search, focusing on textual similarity.
+
+        For further details, refer to [Metric Types](metric.md) and [Full Text Search](full-text-search.md).
 
 - `params.inverted_index_algo`: The algorithm used for building and querying the index. Valid values:
 
-  - `"DAAT_MAXSCORE"` (default): Optimized Document-at-a-Time (DAAT) query processing using the MaxScore algorithm. MaxScore provides better performance for high k values or queries with many terms by skipping terms and documents likely to have minimal impact. It achieves this by partitioning terms into essential and non-essential groups based on their maximum impact scores, focusing on terms that can contribute to the top-k results.
+    - `"DAAT_MAXSCORE"` (default): Optimized Document-at-a-Time (DAAT) query processing using the MaxScore algorithm. MaxScore provides better performance for high *k* values or queries with many terms by skipping terms and documents likely to have minimal impact. It achieves this by partitioning terms into essential and non-essential groups based on their maximum impact scores, focusing on terms that can contribute to the top-k results.
 
-  - `"DAAT_WAND"`: Optimized DAAT query processing using the WAND algorithm. WAND evaluates fewer hit documents by leveraging maximum impact scores to skip non-competitive documents, but it has a higher per-hit overhead. This makes WAND more efficient for queries with small k values or short queries, where skipping is more feasible.
+    - `"DAAT_WAND"`: Optimized DAAT query processing using the WAND algorithm. WAND evaluates fewer hit documents by leveraging maximum impact scores to skip non-competitive documents, but it has a higher per-hit overhead. This makes WAND more efficient for queries with small *k* values or short queries, where skipping is more feasible.
 
-  - `"TAAT_NAIVE"`: Basic Term-at-a-Time (TAAT) query processing. While it is slower compared to `DAAT_MAXSCORE` and `DAAT_WAND`, `TAAT_NAIVE` offers a unique advantage. Unlike DAAT algorithms, which use cached maximum impact scores that remain static regardless of changes to the global collection parameter (avgdl), `TAAT_NAIVE` dynamically adapts to such changes.
+    - `"TAAT_NAIVE"`: Basic Term-at-a-Time (TAAT) query processing. While it is slower compared to `DAAT_MAXSCORE` and `DAAT_WAND`, `TAAT_NAIVE` offers a unique advantage. Unlike DAAT algorithms, which use cached maximum impact scores that remain static regardless of changes to the global collection parameter (avgdl), `TAAT_NAIVE` dynamically adapts to such changes.
 
-### Create collection​
+### Create collection
 
-Once the sparse vector and index settings are complete, you can create a collection that contains sparse vectors. The example below uses the <ins>`create_collection`</ins> method to create a collection named `my_sparse_collection`.​
+Once the sparse vector and index settings are complete, you can create a collection that contains sparse vectors. The example below uses the `create_collection` method to create a collection named `my_sparse_collection`.
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
-client.create_collection(​
-    collection_name="my_sparse_collection",​
-    schema=schema,​
-    index_params=index_params​
-)​
-
+client.create_collection(
+    collection_name="my_sparse_collection",
+    schema=schema,
+    index_params=index_params
+)
 ```
 
 ```java
-import io.milvus.v2.client.ConnectConfig;​
-import io.milvus.v2.client.MilvusClientV2;​
-​
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()​
-        .uri("http://localhost:19530")​
-        .build());​
-        ​
-CreateCollectionReq requestCreate = CreateCollectionReq.builder()​
-        .collectionName("my_sparse_collection")​
-        .collectionSchema(schema)​
-        .indexParams(indexes)​
-        .build();​
-client.createCollection(requestCreate);​
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
 
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .build());
+        
+CreateCollectionReq requestCreate = CreateCollectionReq.builder()
+        .collectionName("my_sparse_collection")
+        .collectionSchema(schema)
+        .indexParams(indexes)
+        .build();
+client.createCollection(requestCreate);
 ```
 
 ```javascript
-import { MilvusClient } from "@zilliz/milvus2-sdk-node";​
-​
-const client = new MilvusClient({​
-    address: 'http://localhost:19530'​
-});​
-​
-await client.createCollection({​
-    collection_name: 'my_sparse_collection',​
-    schema: schema,​
-    index_params: indexParams​
-});​
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
 
+const client = new MilvusClient({
+    address: 'http://localhost:19530'
+});
+
+await client.createCollection({
+    collection_name: 'my_sparse_collection',
+    schema: schema,
+    index_params: indexParams
+});
 ```
 
-```curl
-curl --request POST \​
---url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \​
---header "Authorization: Bearer ${TOKEN}" \​
---header "Content-Type: application/json" \​
--d "{​
-    \"collectionName\": \"my_sparse_collection\",​
-    \"schema\": $schema,​
-    \"indexParams\": $indexParams​
-}"​
-
+```go
+// go
 ```
 
-### Insert data​
+```bash
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d "{
+    \"collectionName\": \"my_sparse_collection\",
+    \"schema\": $schema,
+    \"indexParams\": $indexParams
+}"
+```
 
-After creating the collection, insert data containing sparse vectors.​
+### Insert data
+
+After creating the collection, insert data containing sparse vectors.
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
-sparse_vectors = [​
-    {"sparse_vector": {1: 0.5, 100: 0.3, 500: 0.8}},​
-    {"sparse_vector": {10: 0.1, 200: 0.7, 1000: 0.9}},​
-]​
-​
-client.insert(​
-    collection_name="my_sparse_collection",​
-    data=sparse_vectors​
-)​
+sparse_vectors = [
+    {"sparse_vector": {1: 0.5, 100: 0.3, 500: 0.8}},
+    {"sparse_vector": {10: 0.1, 200: 0.7, 1000: 0.9}},
+]
 
+client.insert(
+    collection_name="my_sparse_collection",
+    data=sparse_vectors
+)
 ```
 
 ```java
-import com.google.gson.Gson;​
-import com.google.gson.JsonObject;​
-import io.milvus.v2.service.vector.request.InsertReq;​
-import io.milvus.v2.service.vector.response.InsertResp;​
-​
-List<JsonObject> rows = new ArrayList<>();​
-Gson gson = new Gson();​
-{​
-    JsonObject row = new JsonObject();​
-    SortedMap<Long, Float> sparse = new TreeMap<>();​
-    sparse.put(1L, 0.5f);​
-    sparse.put(100L, 0.3f);​
-    sparse.put(500L, 0.8f);​
-    row.add("sparse_vector", gson.toJsonTree(sparse));​
-    rows.add(row);​
-}​
-{​
-    JsonObject row = new JsonObject();​
-    SortedMap<Long, Float> sparse = new TreeMap<>();​
-    sparse.put(10L, 0.1f);​
-    sparse.put(200L, 0.7f);​
-    sparse.put(1000L, 0.9f);​
-    row.add("sparse_vector", gson.toJsonTree(sparse));​
-    rows.add(row);​
-}​
-​
-InsertResp insertR = client.insert(InsertReq.builder()​
-        .collectionName("my_sparse_collection")​
-        .data(rows)​
-        .build());​
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import io.milvus.v2.service.vector.request.InsertReq;
+import io.milvus.v2.service.vector.response.InsertResp;
 
+List<JsonObject> rows = new ArrayList<>();
+Gson gson = new Gson();
+{
+    JsonObject row = new JsonObject();
+    SortedMap<Long, Float> sparse = new TreeMap<>();
+    sparse.put(1L, 0.5f);
+    sparse.put(100L, 0.3f);
+    sparse.put(500L, 0.8f);
+    row.add("sparse_vector", gson.toJsonTree(sparse));
+    rows.add(row);
+}
+{
+    JsonObject row = new JsonObject();
+    SortedMap<Long, Float> sparse = new TreeMap<>();
+    sparse.put(10L, 0.1f);
+    sparse.put(200L, 0.7f);
+    sparse.put(1000L, 0.9f);
+    row.add("sparse_vector", gson.toJsonTree(sparse));
+    rows.add(row);
+}
+
+InsertResp insertR = client.insert(InsertReq.builder()
+        .collectionName("my_sparse_collection")
+        .data(rows)
+        .build());
 ```
 
 ```javascript
-const data = [​
-  { sparse_vector: { "1": 0.5, "100": 0.3, "500": 0.8 } },​
-  { sparse_vector: { "10": 0.1, "200": 0.7, "1000": 0.9 } },​
-];​
-client.insert({​
-  collection_name: "my_sparse_collection",​
-  data: data,​
-});​
-​
+const data = [
+  { sparse_vector: { "1": 0.5, "100": 0.3, "500": 0.8 } },
+  { sparse_vector: { "10": 0.1, "200": 0.7, "1000": 0.9 } },
+];
+client.insert({
+  collection_name: "my_sparse_collection",
+  data: data,
+});
 
 ```
 
-```curl
-curl --request POST \​
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \​
---header "Authorization: Bearer ${TOKEN}" \​
---header "Content-Type: application/json" \​
--d '{​
-    "data": [​
-        {"sparse_vector": {"1": 0.5, "100": 0.3, "500": 0.8}},​
-        {"sparse_vector": {"10": 0.1, "200": 0.7, "1000": 0.9}}        ​
-    ],​
-    "collectionName": "my_sparse_collection"​
-}'​
-​
-## {"code":0,"cost":0,"data":{"insertCount":2,"insertIds":["453577185629572534","453577185629572535"]}}​
-
+```go
+// go
 ```
 
-### Perform similarity search​
+```bash
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d '{
+    "data": [
+        {"sparse_vector": {"1": 0.5, "100": 0.3, "500": 0.8}},
+        {"sparse_vector": {"10": 0.1, "200": 0.7, "1000": 0.9}}        
+    ],
+    "collectionName": "my_sparse_collection"
+}'
 
-To perform similarity search using sparse vectors, prepare the query vector and search parameters.​
+## {"code":0,"cost":0,"data":{"insertCount":2,"insertIds":["453577185629572534","453577185629572535"]}}
+```
+
+### Perform similarity search
+
+To perform similarity search using sparse vectors, prepare the query vector and search parameters.
+
+```python
+# Prepare search parameters
+search_params = {
+    "params": {"drop_ratio_search": 0.2},  # A tunable drop ratio parameter with a valid range between 0 and 1
+}
+
+# Prepare the query vector
+query_vector = [{1: 0.2, 50: 0.4, 1000: 0.7}]
+```
+
+In this example, `drop_ratio_search` is an optional parameter specifically for sparse vectors, allowing fine-tuning of small values in the query vector during the search. For example, with `{"drop_ratio_search": 0.2}`, the smallest 20% of values in the query vector will be ignored during the search.
+
+Then, execute the similarity search using the `search` method:
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
-# Prepare search parameters​
-search_params = {​
-    "params": {"drop_ratio_search": 0.2},  # Proportion of small vector values to ignore during the search
-}​
-​
-# Prepare the query vector​
-query_vector = [{1: 0.2, 50: 0.4, 1000: 0.7}]​
+res = client.search(
+    collection_name="my_sparse_collection",
+    data=query_vector,
+    limit=3,
+    output_fields=["pk"],
+    search_params=search_params,
+)
 
-```
+print(res)
 
-In this example, `drop_ratio_search` is an optional parameter specifically for sparse vectors, allowing fine-tuning of small values in the query vector during the search. For example, with `{"drop_ratio_search": 0.2}`, the smallest 20% of values in the query vector will be ignored during the search.​
-
-Then, execute the similarity search using the `search` method:​
-
-<div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
-
-```python
-res = client.search(​
-    collection_name="my_sparse_collection",​
-    data=query_vector,​
-    limit=3,​
-    output_fields=["pk"],​
-    search_params=search_params,​
-)​
-​
-print(res)​
-​
-# Output​
-# data: ["[{'id': '453718927992172266', 'distance': 0.6299999952316284, 'entity': {'pk': '453718927992172266'}}, {'id': '453718927992172265', 'distance': 0.10000000149011612, 'entity': {'pk': '453718927992172265'}}]"]​
-
+# Output
+# data: ["[{'id': '453718927992172266', 'distance': 0.6299999952316284, 'entity': {'pk': '453718927992172266'}}, {'id': '453718927992172265', 'distance': 0.10000000149011612, 'entity': {'pk': '453718927992172265'}}]"]
 ```
 
 ```java
-import io.milvus.v2.service.vector.request.SearchReq;​
-import io.milvus.v2.service.vector.request.data.SparseFloatVec;​
-import io.milvus.v2.service.vector.response.SearchResp;​
-​
-Map<String,Object> searchParams = new HashMap<>();​
-searchParams.put("drop_ratio_search", 0.2);​ // Proportion of small vector values to ignore during the search
-​
-SortedMap<Long, Float> sparse = new TreeMap<>();​
-sparse.put(10L, 0.1f);​
-sparse.put(200L, 0.7f);​
-sparse.put(1000L, 0.9f);​
-​
-SparseFloatVec queryVector = new SparseFloatVec(sparse);​
-​
-SearchResp searchR = client.search(SearchReq.builder()​
-        .collectionName("my_sparse_collection")​
-        .data(Collections.singletonList(queryVector))​
-        .annsField("sparse_vector")​
-        .searchParams(searchParams)​
-        .topK(3)​
-        .outputFields(Collections.singletonList("pk"))​
-        .build());​
-        ​
-System.out.println(searchR.getSearchResults());​
-​
-// Output​
-//​
-// [[SearchResp.SearchResult(entity={pk=453444327741536759}, score=1.31, id=453444327741536759), SearchResp.SearchResult(entity={pk=453444327741536756}, score=1.31, id=453444327741536756), SearchResp.SearchResult(entity={pk=453444327741536753}, score=1.31, id=453444327741536753)]]​
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.SparseFloatVec;
+import io.milvus.v2.service.vector.response.SearchResp;
 
+Map<String,Object> searchParams = new HashMap<>();
+searchParams.put("drop_ratio_search", 0.2);
+
+SortedMap<Long, Float> sparse = new TreeMap<>();
+sparse.put(10L, 0.1f);
+sparse.put(200L, 0.7f);
+sparse.put(1000L, 0.9f);
+
+SparseFloatVec queryVector = new SparseFloatVec(sparse);
+
+SearchResp searchR = client.search(SearchReq.builder()
+        .collectionName("my_sparse_collection")
+        .data(Collections.singletonList(queryVector))
+        .annsField("sparse_vector")
+        .searchParams(searchParams)
+        .topK(3)
+        .outputFields(Collections.singletonList("pk"))
+        .build());
+        
+System.out.println(searchR.getSearchResults());
+
+// Output
+//
+// [[SearchResp.SearchResult(entity={pk=453444327741536759}, score=1.31, id=453444327741536759), SearchResp.SearchResult(entity={pk=453444327741536756}, score=1.31, id=453444327741536756), SearchResp.SearchResult(entity={pk=453444327741536753}, score=1.31, id=453444327741536753)]]
 ```
 
 ```javascript
-client.search({​
-    collection_name: 'my_sparse_collection',​
-    data: {1: 0.2, 50: 0.4, 1000: 0.7},​
-    limit: 3,​
-    output_fields: ['pk'],​
-    params: {​
-        drop_ratio_search: 0.2​
-    }​
-});​
-
+await client.search({
+    collection_name: 'my_sparse_collection',
+    data: {1: 0.2, 50: 0.4, 1000: 0.7},
+    limit: 3,
+    output_fields: ['pk'],
+    params: {
+        drop_ratio_search: 0.2
+    }
+});
 ```
 
-```curl
-curl --request POST \​
---url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \​
---header "Authorization: Bearer ${TOKEN}" \​
---header "Content-Type: application/json" \​
--d '{​
-    "collectionName": "my_sparse_collection",​
-    "data": [​
-        {"1": 0.2, "50": 0.4, "1000": 0.7}​
-    ],​
-    "annsField": "sparse_vector",​
-    "limit": 3,​
-    "searchParams":{​
-        "params":{"drop_ratio_search": 0.2}​ # Proportion of small vector values to ignore during the search
-    },​
-    "outputFields": ["pk"]​
-}'​
-​
-## {"code":0,"cost":0,"data":[{"distance":0.63,"id":"453577185629572535","pk":"453577185629572535"},{"distance":0.1,"id":"453577185629572534","pk":"453577185629572534"}]}​
-
+```go
+// go
 ```
 
-For more information on similarity search parameters, refer to [​Basic ANN Search](single-vector-search.md).​
+```bash
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d '{
+    "collectionName": "my_sparse_collection",
+    "data": [
+        {"1": 0.2, "50": 0.4, "1000": 0.7}
+    ],
+    "annsField": "sparse_vector",
+    "limit": 3,
+    "searchParams":{
+        "params":{"drop_ratio_search": 0.2}
+    },
+    "outputFields": ["pk"]
+}'
 
-## Limits
+## {"code":0,"cost":0,"data":[{"distance":0.63,"id":"453577185629572535","pk":"453577185629572535"},{"distance":0.1,"id":"453577185629572534","pk":"453577185629572534"}]}
+```
 
-When using sparse vectors in Milvus, consider the following limits:
-
-- Currently, only the __IP__ and __BM25__ (for full-text search) distance metrics are supported for sparse vectors. The high dimensionality of sparse vectors makes L2 and cosine distance impractical.
-
-- For sparse vector fields, only the __SPARSE_INVERTED_INDEX__ index type is supported.
-
-- The data types supported for sparse vectors:
-
-    - The dimension part must be an unsigned 32-bit integer;
-    - The value part can be a non-negative 32-bit floating-point number.
-
-- Sparse vectors must meet the following requirements for insertion and search:
-
-    - At least one value in the vector is non-zero;
-    - Vector indices are non-negative.
-
-## FAQ
-
-- __Can the dimension of a sparse embedding be any discrete value within the uint32 space?__
-
-    Yes, with one exception. The dimension of a sparse embedding can be any value in the range of `[0, maximum of uint32)`. This means you cannot use the maximum value of uint32.
-
-- __Are searches on growing segments conducted through an index or by brute force?__
-
-    Searches on growing segments are conducted through an index of the same type as the sealed segment index. For new growing segments before the index is built, a brute force search is used.
-
-- __Is it possible to have both sparse and dense vectors in a single collection?__
-
-    Yes, with multiple vector type support, you can create collections with both sparse and dense vector columns and perform hybrid searches on them.
+For more information on similarity search parameters, refer to [Basic ANN Search](single-vector-search.md).
