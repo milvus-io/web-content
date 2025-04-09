@@ -1,34 +1,219 @@
 ---
 id: text_image_search.md
-summary: Build a text to image search engine with Milvus.
-title: Text to Image Search Engine
+summary: In this tutorial, we will explore how to implement text-based image retrieval using OpenAI’s CLIP (Contrastive Language-Image Pretraining) model and Milvus. We will generate image embeddings with CLIP, store them in Milvus, and perform efficient similarity searches.
+title: Text-to-Image Search with Milvus
 ---
 
-# Text to Image Search Engine
+# Text-to-Image Search with Milvus
 
-This tutorial demonstrates how to use Milvus, the open-source vector database, to build a text-to-image search engine. 
+Text-to-image search is an advanced technology that allows users to search for images using natural language text descriptions. It leverages a pretrained multimodal model to convert both text and images into embeddings in a shared semantic space, enabling similarity-based comparisons.
 
-You can quickly build a minimum viable text-to-image search engine by following the basic tutorial. Alternatively, you can also read the deep dive tutorial which covers everything from model selection to service deployment. You can build a more advanced text-to-image search engine catering to your own business need by following the instructions in the deep dive tutorial.
-
-- [Basic tutorial in notebook](https://github.com/towhee-io/examples/blob/main/image/text_image_search/1_build_text_image_search_engine.ipynb)
-
-- [Deep dive tutorial in notebook](https://github.com/towhee-io/examples/blob/main/image/text_image_search/2_deep_dive_text_image_search.ipynb)
+In this tutorial, we will explore how to implement text-based image retrieval using OpenAI’s CLIP (Contrastive Language-Image Pretraining) model and Milvus. We will generate image embeddings with CLIP, store them in Milvus, and perform efficient similarity searches.
 
 
-The ML model and third-party software used include:
+## Prerequisites
 
-- [CLIP](https://openai.com/blog/clip/)
+Before you start, make sure you have all the required packages and example data ready.
 
-- [Towhee](https://towhee.io/)
-
-- [Gradio](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj3nvvEhNj7AhVZSGwGHUFuA6sQFnoECA0QAQ&url=https%3A%2F%2Fgradio.app%2F&usg=AOvVaw0Rmnp2xYgYvkDcMb9d-9TR)
-
-- [OpenCV-Python](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjawLa4hNj7AhWrSGwGHSWKD1sQFnoECA0QAQ&url=https%3A%2F%2Fdocs.opencv.org%2F4.x%2Fd6%2Fd00%2Ftutorial_py_root.html&usg=AOvVaw3YMr9iiY-FTDoGSWWqppvP)
-
+### Install dependencies
+- **pymilvus>=2.4.2** for interacting with the Milvus database
+- **clip** for working with the CLIP model
+- **pillow** for image processing and visualization
 
 
-Nowadays, traditional text search engines are losing their charm with more and more people turning to TikTok as their favorite search engine. During a traditional text search, people input keywords and be shown all the texts containing the keyword. However, people complain that they cannot always find what they want in a search like this. What's more, the results are not intuitive enough. People say they find images and videos much more intuitive and pleasant than having to crawl through lines of text. The cross-modal text-to-image search engine emerged as a result. With such a new type of search engine, people can find relevant images by inputting a chunk of text of some keywords.
+```shell
+$ pip install --upgrade pymilvus pillow
+$ pip install git+https://github.com/openai/CLIP.git
+```
 
-In this tutorial, you will learn how to build a text-to-image search engine. This tutorial uses the CLIP model to extract features of images and convert them into vectors. Then these image vectors are stored in the Milvus vector database. When users input query texts, these texts are also converted into embedding vectors using the same ML model CLIP. Subsequently, a vector similarity search is performed in Milvus to retrieve the most similar image vectors to the input text vector. 
+<div class="alert note">
 
-![Text_image_search](../../../assets/text_to_image_workflow.png "Workflow of a text-to-image search engine.")
+If you're using Google Colab, you may need to **restart the runtime** (Navigate to the "Runtime" menu at the top of the interface, and select "Restart session" from the dropdown menu.)
+
+</div>
+
+### Download example data
+
+We will use a subset of the [ImageNet](https://www.image-net.org) dataset (100 classes, 10 images for each class) as example images. The following command will download the example data and extract it to the local folder `./images_folder`:
+
+
+```shell
+$ wget https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip
+$ unzip -q reverse_image_search.zip -d images_folder
+```
+
+### Set up Milvus
+
+Before proceeding, set up your Milvus server and connect using your URI (and optionally, a token):
+
+- **Milvus Lite (Recommended for Convenience)**: Set the URI to a local file, such as ./milvus.db. This automatically leverages [Milvus Lite](https://milvus.io/docs/milvus_lite.md) to store all data in a single file.
+
+- **Docker or Kubernetes (For Large-Scale Data)**: For handling larger datasets, deploy a more performant Milvus server using [Docker or Kubernetes](https://milvus.io/docs/quickstart.md). In this case, use the server URI, such as http://localhost:19530, to connect.
+
+- **Zilliz Cloud (Managed Service)**: If you’re using [Zilliz Cloud](https://zilliz.com/cloud), Milvus’s fully managed cloud service, set the the Public Endpoint as URI and API Key as token.
+
+
+```python
+from pymilvus import MilvusClient
+
+milvus_client = MilvusClient(uri="milvus.db")
+```
+
+## Getting Started
+
+Now that you have the necessary dependencies and data, it's time to set up feature extractors and start working with Milvus. This section will walk you through the key steps of building a text-to-image search system. Finally, we’ll demonstrate how to retrieve and visualize images based on text queries.
+
+### Define feature extractors
+
+We will use a pretrained CLIP model to generate image and text embeddings. In this section, we load the pretrained **ViT-B/32** variant of CLIP and define helper functions for encoding image and text:
+
+- `encode_image(image_path)`: Processes and encodes images into feature vectors
+- `encode_text(text)`: Encodes text queries into feature vectors
+
+Both functions normalize the output features to ensure consistent comparisons by converting vectors to unit length, which is essential for accurate cosine similarity calculations.
+
+
+```python
+import clip
+from PIL import Image
+
+
+# Load CLIP model
+model_name = "ViT-B/32"
+model, preprocess = clip.load(model_name)
+model.eval()
+
+
+# Define a function to encode images
+def encode_image(image_path):
+    image = preprocess(Image.open(image_path)).unsqueeze(0)
+    image_features = model.encode_image(image)
+    image_features /= image_features.norm(
+        dim=-1, keepdim=True
+    )  # Normalize the image features
+    return image_features.squeeze().tolist()
+
+
+# Define a function to encode text
+def encode_text(text):
+    text_tokens = clip.tokenize(text)
+    text_features = model.encode_text(text_tokens)
+    text_features /= text_features.norm(
+        dim=-1, keepdim=True
+    )  # Normalize the text features
+    return text_features.squeeze().tolist()
+```
+
+### Data Ingestion
+
+To enable semantic image search, we first need to generate embeddings for all images and store them in a vector database for efficient indexing and retrieval. This section provides a step-by-step guide to ingesting image data into Milvus.
+
+
+**1. Create Milvus Collection**
+
+Before storing image embeddings, you need to create a Milvus collection. The following code demonstrates how to create a collection using [quick start mode](https://milvus.io/docs/create-collection-instantly.md) with the default COSINE metric type. The collection includes the following fields:
+
+- `id`: A primary field with auto ID enabled.
+
+- `vector`: A field for storing floating-point vector embeddings.
+
+If you need a custom schema, refer to the [Milvus documentation](https://milvus.io/docs/create-collection.md) for detailed instructions.
+
+
+```python
+collection_name = "image_collection"
+
+# Drop the collection if it already exists
+if milvus_client.has_collection(collection_name):
+    milvus_client.drop_collection(collection_name)
+
+# Create a new collection in quickstart mode
+milvus_client.create_collection(
+    collection_name=collection_name,
+    dimension=512,  # this should match the dimension of the image embedding
+    auto_id=True,  # auto generate id and store in the id field
+    enable_dynamic_field=True,  # enable dynamic field for scalar fields
+)
+```
+
+**2. Insert Data into Milvus**
+
+In this step, we use a predefined image encoder to generate embeddings for all JPEG images in the example data directory. These embeddings are then inserted into the Milvus collection, along with their corresponding file paths. Each entry in the collection consists of:  
+
+- **Embedding vector**: The numerical representation of the image. Stored in the field `vector`.  
+- **File path**: The location of the image file for reference. Stored in the field `filepath` as a dynamic field.
+
+
+```python
+import os
+from glob import glob
+
+
+image_dir = "./images_folder/train"
+raw_data = []
+
+for image_path in glob(os.path.join(image_dir, "**/*.JPEG")):
+    image_embedding = encode_image(image_path)
+    image_dict = {"vector": image_embedding, "filepath": image_path}
+    raw_data.append(image_dict)
+insert_result = milvus_client.insert(collection_name=collection_name, data=raw_data)
+
+print("Inserted", insert_result["insert_count"], "images into Milvus.")
+```
+
+    Inserted 1000 images into Milvus.
+
+
+### Peform a Search
+
+Now, let's run a search using an example text query. This will retrieve the most relevant images based on their semantic similarity to the given text description.
+
+
+```python
+query_text = "a white dog"
+query_embedding = encode_text(query_text)
+
+search_results = milvus_client.search(
+    collection_name=collection_name,
+    data=[query_embedding],
+    limit=10,  # return top 10 results
+    output_fields=["filepath"],  # return the filepath field
+)
+```
+
+Visualize results:
+
+
+```python
+from IPython.display import display
+
+
+width = 150 * 5
+height = 150 * 2
+concatenated_image = Image.new("RGB", (width, height))
+
+result_images = []
+for result in search_results:
+    for hit in result:
+        filename = hit["entity"]["filepath"]
+        img = Image.open(filename)
+        img = img.resize((150, 150))
+        result_images.append(img)
+
+for idx, img in enumerate(result_images):
+    x = idx % 5
+    y = idx // 5
+    concatenated_image.paste(img, (x * 150, y * 150))
+print(f"Query text: {query_text}")
+print("\nSearch results:")
+display(concatenated_image)
+```
+
+    Query text: a white dog
+    
+    Search results:
+
+
+
+    
+![png](../../../assets/text_image_search_with_milvus_20_1.png)

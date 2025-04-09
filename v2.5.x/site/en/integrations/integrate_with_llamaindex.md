@@ -87,9 +87,60 @@ print("Document ID:", documents[0].doc_id)
 
 ### Create an index across the data
 
-Now that we have a document, we can can create an index and insert the document.
+Now that we have a document, we can can create an index and insert the document. For the index we will use a MilvusVectorStore. MilvusVectorStore takes in a few arguments:
 
-> Please note that **Milvus Lite** requires `pymilvus>=2.4.2`.
+#### basic args
+
+- `uri (str, optional)`: The URI to connect to, comes in the form of "https://address:port" for Milvus or Zilliz Cloud service, or "path/to/local/milvus.db" for the lite local Milvus. Defaults to "./milvus_llamaindex.db".
+- `token (str, optional)`: The token for log in. Empty if not using rbac, if using rbac it will most likely be "username:password".
+- `collection_name (str, optional)`: The name of the collection where data will be stored. Defaults to "llamalection".
+- `overwrite (bool, optional)`: Whether to overwrite existing collection with the same name. Defaults to False.
+
+#### scalar fields including doc id & text
+
+- `doc_id_field (str, optional)`: The name of the doc_id field for the collection. Defaults to DEFAULT_DOC_ID_KEY.
+- `text_key (str, optional)`: What key text is stored in in the passed collection. Used when bringing your own collection. Defaults to DEFAULT_TEXT_KEY.
+- `scalar_field_names (list, optional)`: The names of the extra scalar fields to be included in the collection schema.
+- `scalar_field_types (list, optional)`: The types of the extra scalar fields.
+
+#### dense field
+
+- `enable_dense (bool)`: A boolean flag to enable or disable dense embedding. Defaults to True.
+- `dim (int, optional)`: The dimension of the embedding vectors for the collection. Required when creating a new collection with enable_sparse is False.
+- `embedding_field (str, optional)`: The name of the dense embedding field for the collection, defaults to DEFAULT_EMBEDDING_KEY.
+- `index_config (dict, optional)`: The configuration used for building the dense embedding index. Defaults to None.
+- `search_config (dict, optional)`: The configuration used for searching the Milvus dense index. Note that this must be compatible with the index type specified by `index_config`. Defaults to None.
+- `similarity_metric (str, optional)`: The similarity metric to use for dense embedding, currently supports IP, COSINE and L2.
+
+#### sparse field
+
+- `enable_sparse (bool)`: A boolean flag to enable or disable sparse embedding. Defaults to False.
+- `sparse_embedding_field (str)`: The name of sparse embedding field, defaults to DEFAULT_SPARSE_EMBEDDING_KEY.
+- `sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)`: If enable_sparse is True, this object should be provided to convert text to a sparse embedding. If None, the default sparse embedding function (BGEM3SparseEmbeddingFunction) will be used.
+- `sparse_index_config (dict, optional)`: The configuration used to build the sparse embedding index. Defaults to None.
+
+#### hybrid ranker
+
+- `hybrid_ranker (str)`: Specifies the type of ranker used in hybrid search queries. Currently only supports ["RRFRanker", "WeightedRanker"]. Defaults to "RRFRanker".
+- `hybrid_ranker_params (dict, optional)`: Configuration parameters for the hybrid ranker. The structure of this dictionary depends on the specific ranker being used:
+
+    - For "RRFRanker", it should include:
+        - "k" (int): A parameter used in Reciprocal Rank Fusion (RRF). This value is used to calculate the rank scores as part of the RRF algorithm, which combines multiple ranking strategies into a single score to improve search relevance.
+    - For "WeightedRanker", it expects:
+        - "weights" (list of float): A list of exactly two weights:
+            1. The weight for the dense embedding component.
+            2. The weight for the sparse embedding component.
+            These weights are used to adjust the importance of the dense and sparse components of the embeddings in the hybrid retrieval process.
+    Defaults to an empty dictionary, implying that the ranker will operate with its predefined default settings.
+
+#### others
+
+- `collection_properties (dict, optional)`: The collection properties such as TTL (Time-To-Live) and MMAP (memory mapping). Defaults to None. It could include:
+    - "collection.ttl.seconds" (int): Once this property is set, data in the current collection expires in the specified time. Expired data in the collection will be cleaned up and will not be involved in searches or queries.
+    - "mmap.enabled" (bool): Whether to enable memory-mapped storage at the collection level.
+- `index_management (IndexManagement)`: Specifies the index management strategy to use. Defaults to "create_if_not_exists".
+- `batch_size (int)`: Configures the number of documents processed in one batch when inserting data into Milvus. Defaults to DEFAULT_BATCH_SIZE.
+- `consistency_level (str, optional)`: Which consistency level to use for a newly created collection. Defaults to "Session".
 
 
 ```python

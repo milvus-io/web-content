@@ -6,8 +6,6 @@ title: Milvus Hybrid Search Retriever
 
 # Milvus Hybrid Search Retriever
 
-## Overview
-
 Hybrid search combines the strengths of different search paradigms to enhance retrieval accuracy and robustness. It leverages the capabilities of both dense vector search and sparse vector search, as well as combinations of multiple dense vector search strategies, ensuring comprehensive and precise retrieval for diverse queries.
 
 ![](../../../../assets/hybrid_and_rerank.png)

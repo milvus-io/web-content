@@ -69,3 +69,7 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Integrate Milvus with MindsDB](integration_with_mindsdb.md) | Knowledge Engineering | Milvus, MindsDB |
 | [MCP + Milvus: Connecting AI with Vector Databases](milvus_and_mcp.md) | Agents | Milvus, MCP |
 | [Milvus Integration with OpenAI Agents: A Step-by-Step Guide](openai_agents_milvus.md) | Agents | Milvus, OpenAI |
+| [Build RAG with Milvus and Feast](build_RAG_with_milvus_and_feast.md) | Data Sources | Milvus, Feast |
+| [Build RAG with Milvus and Docling](build_RAG_with_milvus_and_docling.md) | Data Sources | Milvus, Docling |
+| [Using Full-Text Search with LangChain and Milvus](full_text_search_with_langchain.md) | Full-Text Search | Milvus, LangChain |
+| [Using Full-Text Search with LlamaIndex and Milvus](llamaindex_milvus_full_text_search.md) | Full-Text Search | Milvus, LlamaIndex |

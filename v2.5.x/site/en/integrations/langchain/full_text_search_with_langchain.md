@@ -13,18 +13,17 @@ title: Using Full-Text Search with LangChain and Milvus
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
 
-[Full-text search](https://milvus.io/docs/full-text-search.md#Full-Text-Search) is a traditional method for retrieving documents that contain specific terms or phrases by directly matching keywords within the text. It ranks results based on relevance, typically determined by factors such as term frequency and proximity. While semantic search excels at understanding intent and context, full-text search provides precision for exact keyword matching, making it a valuable complementary tool. The BM25 algorithm is a popular ranking method for full-text search, particularly useful in Retrieval-Augmented Generation (RAG).
+[Full-text search](https://milvus.io/docs/full-text-search.md#Full-Text-Search) is a traditional method for retrieving documents by matching specific keywords or phrases in the text. It ranks results based on relevance scores calculated from factors like term frequency. While semantic search is better at understanding meaning and context, full-text search excels at precise keyword matching, making it a useful complement to semantic search. The BM25 algorithm is widely used for ranking in full-text search and plays a key role in Retrieval-Augmented Generation (RAG).
 
-Since [Milvus 2.5](https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md), full-text search is natively supported through the Sparse-BM25 approach, by representing the BM25 algorithm as sparse vectors. Milvus accepts raw text as input and automatically converts it into sparse vectors stored in a specified field, eliminating the need for manual sparse embedding generation.
-
+[Milvus 2.5](https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md) introduces native full-text search capabilities using BM25. This approach converts text into sparse vectors that represent BM25 scores. You can simply input raw text and Milvus will automatically generate and store the sparse vectors, with no manual sparse embedding generation required.
+ 
 LangChain's integration with Milvus has also introduced this feature, simplifying the process of incorporating full-text search into RAG applications. By combining full-text search with semantic search with dense vectors, you can achieve a hybrid approach that leverages both semantic context from dense embeddings and precise keyword relevance from word matching. This integration enhances the accuracy, relevance, and user experience of search systems.
 
 This tutorial will show how to use LangChain and Milvus to implement full-text search in your application.
 
 <div class="alert note">
 
-- Full-text search is available in Milvus Standalone and Milvus Distributed, but not in Milvus Lite, although it is on the roadmap for future inclusion. It will also be available in Zilliz Cloud (fully-managed Milvus) soon. Please reach out to [support@zilliz.com](mailto:support@zilliz.com) for more information.
-
+- Full-text search is currently available in Milvus Standalone, Milvus Distributed, and Zilliz Cloud, though not yet supported in Milvus Lite (which has this feature planned for future implementation). Reach out support@zilliz.com for more information.
 - Before proceeding with this tutorial, ensure you have a basic understanding of [full-text search](https://milvus.io/docs/full-text-search.md#Full-Text-Search) and the [basic usage](https://milvus.io/docs/basic_usage_langchain.md) of LangChain Milvus integration.
 
 </div>

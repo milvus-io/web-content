@@ -4,15 +4,14 @@ summary: This notebook shows how to create an agent that can query Milvus using 
 title: "Milvus Integration with OpenAI Agents: A Step-by-Step Guide"
 ---
 
-
-# Milvus Integration with OpenAI Agents: A Step-by-Step Guide
-
 <a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
+
+# Milvus Integration with OpenAI Agents: A Step-by-Step Guide
 
 This notebook shows how to create an agent that can query Milvus using natural language through Function Calling. We'll combine OpenAI's Agents framework with Milvus's powerful vector search capabilities to create a nice search experience.
 
@@ -26,10 +25,11 @@ The OpenAI Agents SDK enables you to build agentic AI apps in a lightweight, eas
 
 In combination with Python, these primitives are powerful enough to express complex relationships between tools and agents, and allow you to build real-world applications without a steep learning curve. In addition, the SDK comes with built-in tracing that lets you visualize and debug your agentic flows, as well as evaluate them and even fine-tune models for your application.
 
+![](../../../assets/openai-agent.png)
+
 ## Milvus
 
 Milvus is a high-performance, highly scalable Open-Source vector database that runs efficiently across a wide range of environments, from a laptop to large-scale distributed systems. It is available as both open-source software and a [Cloud Offering](https://zilliz.com/).
-
 
 ## Setup and Dependencies
 
@@ -378,3 +378,4 @@ asyncio.run(main())
     3. ID: 456486814660619143, Text: Vector search is revolutionising modern information retrieval systems.
     4. ID: 456486814660619140, Text: Information retrieval helps users find relevant documents in large datasets.
     5. ID: 456486814660619141, Text: Search engines use information retrieval techniques to index and rank web pages.
+
