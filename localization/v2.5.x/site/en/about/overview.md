@@ -31,7 +31,7 @@ summary: >-
     display: inline-block;
     width: 20px;
     height: 20px;
-    background: url('../../../assets/hearing.png') no-repeat center center;
+    background: url('https://milvus.io/docs/v2.5.x/assets/hearing.png') no-repeat center center;
     background-size: contain;
     cursor: pointer;
     margin-left: 4px;
