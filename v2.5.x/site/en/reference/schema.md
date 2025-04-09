@@ -16,7 +16,7 @@ A well-designed schema is essential as it abstracts the data model and decides i
 
 A collection schema has a primary key, a maximum of four vector fields, and several scalar fields. The following diagram illustrates how to map an article to a list of schema fields.
 
-![schema-design-anatomy](../../../assets/schema-design-anatomy.png)
+![Schema Design Anatomy](../../../assets/schema-design-anatomy.png)
 
 The data model design of a search system involves analyzing business needs and abstracting information into a schema-expressed data model. For instance, searching a piece of text must be "indexed" by converting the literal string into a vector through "embedding" and enabling vector search. Beyond this essential requirement, storing other properties such as publication timestamp and author may be necessary. This metadata allows for semantic searches to be refined through filtering, returning only texts published after a specific date or by a particular author. You can also retrieve these scalars with the main text to render the search result in the application. Each should be assigned a unique identifier to organize these text pieces, expressed as an integer or string. These elements are essential for achieving sophisticated search logic.
 

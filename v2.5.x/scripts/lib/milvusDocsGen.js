@@ -289,8 +289,10 @@ class MilvusDocsGen extends larkDocWriter {
             [ alt_text, confirm ] = await this.__alt_text_prompt("image", image.token)
         }
 
+        const caption = alt_text.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+
         if (this.skip_image_download) {
-            return `![${alt_text}](/${root}/${alt_text}.png)`;
+            return `![${caption}](/${root}/${alt_text}.png)`;
         }
 
         try {
@@ -309,7 +311,7 @@ class MilvusDocsGen extends larkDocWriter {
             this.__image(image)
         }
 
-        return `![${alt_text}](/${root}/${alt_text}.png)`;
+        return `![${caption}](/${root}/${alt_text}.png)`;
     }
 
     async __board(board, indent) {
@@ -322,8 +324,10 @@ class MilvusDocsGen extends larkDocWriter {
             [ alt_text, confirm ] = await this.__alt_text_prompt("board", board.token)
         }
 
+        const caption = alt_text.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+
         if (this.skip_image_download) {
-            return `![${alt_text}](/${root}/${alt_text}.png)`;
+            return `![${caption}](/${root}/${alt_text}.png)`;
         }
 
         console.log(`Downloading image ${alt_text}.png ...`)
@@ -349,7 +353,7 @@ class MilvusDocsGen extends larkDocWriter {
             });  
         }              
 
-        return `![${alt_text}](/${root}/${alt_text}.png)`;
+        return `![${caption}](/${root}/${alt_text}.png)`;
     }
 
     async __callout(block, indent) {
