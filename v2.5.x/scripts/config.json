@@ -26,11 +26,6 @@
                         "alt_text": "resource-hierarchy"
                     },
                     {
-                        "token": "RoJFbyTsuoY8mHxoBBicgBH9nTc",
-                        "type": "image",
-                        "alt_text": "schema-explained"
-                    },
-                    {
                         "token": "QOgMwbrhLhvvtbbk5TxcarhEn8i",
                         "type": "board",
                         "alt_text": "dense-vector"
@@ -69,6 +64,11 @@
                         "token": "X0Ttw7v2ShGLqjb9WFVcGxYLnSf",
                         "type": "board",
                         "alt_text": "vector-index-anatomy"
+                    },
+                    {
+                        "token": "RoJFbyTsuoY8mHxoBBicgBH9nTc",
+                        "type": "image",
+                        "alt_text": "schema-design-anatomy"
                     }
                 ]
             }
