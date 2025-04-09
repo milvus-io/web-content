@@ -417,7 +417,7 @@ class MilvusDocsGen extends larkDocWriter {
         return '---\n' +
             `id: ${id}\n` +
             `title: "${title}"\n` +
-            `summary: "${this.__filter_content(summary, this.targets)}"` +
+            `summary: "${this.__filter_content(summary.replace(/"/g, '\\"'), this.targets)}"` +
             `${keywords ? '\n' + keywords : ""}` +
             `${beta ? '\n' + beta : ""}` +
             '\n---\n'.replace(/\n\s*/g, '')
