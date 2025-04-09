@@ -45,7 +45,7 @@ Dense vectors can be generated using various [embedding](https://en.wikipedia.or
 
 Once data is vectorized, it can be stored in Milvus for management and vector retrieval. The diagram below shows the basic process.
 
-![dense-vector](../../../../assets/dense-vector.png)
+![use-dense-vector](../../../../assets/use-dense-vector.png)
 
 <div class="alert note">
 

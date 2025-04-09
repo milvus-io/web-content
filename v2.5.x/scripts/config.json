@@ -26,11 +26,6 @@
                         "alt_text": "resource-hierarchy"
                     },
                     {
-                        "token": "QOgMwbrhLhvvtbbk5TxcarhEn8i",
-                        "type": "board",
-                        "alt_text": "dense-vector"
-                    },
-                    {
                         "token": "TuIGwtyEkh9g04bvo0icsWdynBd",
                         "type": "board",
                         "alt_text": "binary-vector"
@@ -39,11 +34,6 @@
                         "token": "TF1uw4AQVhFdmBbrhyVcJO6WnXe",
                         "type": "board",
                         "alt_text": "use-binary-vector"
-                    },
-                    {
-                        "token": "No8KwR6wPhTIP6bKEqGcbBDWngc",
-                        "type": "board",
-                        "alt_text": "dense-vector"
                     },
                     {
                         "token": "RHlkwqC3Mh1tBSb7G3gcMc8PnUO",
@@ -69,6 +59,16 @@
                         "token": "RoJFbyTsuoY8mHxoBBicgBH9nTc",
                         "type": "image",
                         "alt_text": "schema-design-anatomy"
+                    },
+                    {
+                        "token": "QOgMwbrhLhvvtbbk5TxcarhEn8i",
+                        "type": "board",
+                        "alt_text": "dense-vector"
+                    },
+                    {
+                        "token": "No8KwR6wPhTIP6bKEqGcbBDWngc",
+                        "type": "board",
+                        "alt_text": "use-dense-vector"
                     }
                 ]
             }
