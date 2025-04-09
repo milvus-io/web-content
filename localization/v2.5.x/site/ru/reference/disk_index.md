@@ -40,13 +40,9 @@ title: Индекс на диске
       </svg>
     </button></h2><p>Чтобы использовать DiskANN, обратите внимание, что</p>
 <ul>
-<li>По умолчанию DiskANN отключен. Если вы предпочитаете индексы в памяти, а не на диске, рекомендуется отключить эту функцию для повышения производительности.<ul>
-<li>Чтобы отключить ее, вы можете изменить <code translate="no">queryNode.enableDisk</code> на <code translate="no">false</code> в конфигурационном файле milvus.</li>
-<li>Чтобы включить ее снова, вы можете установить <code translate="no">queryNode.enableDisk</code> на <code translate="no">true</code>.</li>
-</ul></li>
-<li>Экземпляр Milvus работает на Ubuntu 18.04.6 или более поздней версии.</li>
-<li>Для достижения полной производительности путь данных Milvus должен быть смонтирован на NVMe SSD:<ul>
-<li>Для автономного экземпляра Milvus путь к данным должен быть <strong>/var/lib/milvus/data</strong> в контейнере, в котором работает экземпляр.</li>
+<li>Экземпляр Milvus работает под управлением Ubuntu 18.04.6 или более поздней версии.</li>
+<li>Путь данных Milvus должен быть смонтирован на NVMe SSD для достижения полной производительности:<ul>
+<li>Для автономного экземпляра Milvus путь данных должен быть <strong>/var/lib/milvus/data</strong> в контейнере, в котором работает экземпляр.</li>
 <li>Для экземпляра Milvus Cluster путь к данным должен быть <strong>/var/lib/milvus/data</strong> в контейнерах, где работают QueryNodes и IndexNodes.</li>
 </ul></li>
 </ul>
@@ -115,14 +111,14 @@ title: Индекс на диске
         ></path>
       </svg>
     </button></h2><p>DiskANN можно настраивать. Вы можете изменить параметры, связанные с DiskANN, в <code translate="no">${MILVUS_ROOT_PATH}/configs/milvus.yaml</code>, чтобы улучшить его производительность.</p>
-<pre><code translate="no" class="language-YAML">...
-DiskIndex:
-  MaxDegree: 56
-  SearchListSize: 100
-  PQCodeBugetGBRatio: 0.125
-  SearchCacheBudgetGBRatio: 0.125
-  BeamWidthRatio: 4.0
-...
+<pre><code translate="no" class="language-YAML"><span class="hljs-string">...</span>
+<span class="hljs-attr">DiskIndex:</span>
+  <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
+  <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
+  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
 <thead>

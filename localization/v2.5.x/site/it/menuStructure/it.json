@@ -593,9 +593,15 @@
             ]
           },
           {
+            "label": "Alterare il campo di raccolta",
+            "id": "alter-collection-field.md",
+            "order": 12,
+            "children": []
+          },
+          {
             "label": "Le mani in pasta",
             "id": "schema-hands-on.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -632,9 +638,15 @@
         "isMenu": true,
         "children": [
           {
+            "label": "Indice spiegato",
+            "id": "index-explained.md",
+            "order": 0,
+            "children": []
+          },
+          {
             "label": "Indici vettoriali",
             "id": "vector-index",
-            "order": 0,
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -672,7 +684,7 @@
           {
             "label": "Indici scalari",
             "id": "scalar-index",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -1387,7 +1399,7 @@
             "children": []
           },
           {
-            "label": "Compattazione dei cluster",
+            "label": "Compattazione del clustering",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1870,7 +1882,7 @@
             "children": []
           },
           {
-            "label": "Dify",
+            "label": "Dificare",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []

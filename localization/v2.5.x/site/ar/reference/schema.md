@@ -1,9 +1,11 @@
 ---
 id: schema.md
-summary: تعلم كيفية تعريف مخطط في ميلفوس.
-title: إدارة المخطط
+title: شرح المخطط
+summary: >-
+  يحدد المخطط بنية بيانات المجموعة. قبل إنشاء مجموعة، تحتاج إلى وضع تصميم
+  لمخططها. تساعدك هذه الصفحة على فهم مخطط المجموعة وتصميم مثال للمخطط بنفسك.
 ---
-<h1 id="Manage-Schema" class="common-anchor-header">إدارة المخطط<button data-href="#Manage-Schema" class="anchor-icon" translate="no">
+<h1 id="Schema-Explained" class="common-anchor-header">شرح المخطط<button data-href="#Schema-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +20,8 @@ title: إدارة المخطط
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يقدم هذا الموضوع المخطط في ملفوس. يُستخدم المخطط لتحديد خصائص المجموعة والحقول الموجودة بداخلها.</p>
-<h2 id="Field-schema" class="common-anchor-header">مخطط الحقل<button data-href="#Field-schema" class="anchor-icon" translate="no">
+    </button></h1><p>يحدد المخطط بنية بيانات المجموعة. قبل إنشاء مجموعة، تحتاج إلى وضع تصميم لمخططها. تساعدك هذه الصفحة على فهم مخطط المجموعة وتصميم مثال للمخطط بنفسك.</p>
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,111 +36,16 @@ title: إدارة المخطط
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>مخطط الحقل هو التعريف المنطقي للحقل. وهو أول ما تحتاج إلى تعريفه قبل تحديد <a href="#Collection-schema">مخطط المجموعة</a> <a href="/docs/ar/manage-collections.md">وإدارة المجموعات</a>.</p>
-<p>يدعم Milvus حقل مفتاح أساسي واحد فقط في المجموعة.</p>
-<h3 id="Field-schema-properties" class="common-anchor-header">خصائص مخطط الحقل</h3><table class="properties">
-    <thead>
-    <tr>
-        <th>الخصائص</th>
-        <th>الوصف</th>
-        <th>ملاحظة</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><code translate="no">name</code></td>
-        <td>اسم الحقل في المجموعة المراد إنشاؤها</td>
-        <td>نوع البيانات: سلسلة.<br/>إلزامي</td>
-    </tr>
-    <tr>
-        <td><code translate="no">dtype</code></td>
-        <td>نوع بيانات الحقل</td>
-        <td>إلزامي</td>
-    </tr>
-    <tr>
-        <td><code translate="no">description</code></td>
-        <td>وصف الحقل</td>
-        <td>نوع البيانات: سلسلة.<br/>اختياري</td>
-    </tr>
-    <tr>
-        <td><code translate="no">is_primary</code></td>
-        <td>ما إذا كان سيتم تعيين الحقل كحقل مفتاح أساسي أم لا</td>
-        <td>نوع البيانات: منطقية (<code translate="no">true</code> أو <code translate="no">false</code>).<br/>إلزامي لحقل المفتاح الأساسي</td>
-    </tr>
-        <tr>
-            <td><code translate="no">auto_id</code> (إلزامي لحقل المفتاح الأساسي)</td>
-            <td>التبديل لتمكين أو تعطيل التخصيص التلقائي للمعرف (المفتاح الأساسي).</td>
-            <td><code translate="no">True</code> أو <code translate="no">False</code></td>
-        </tr>
-        <tr>
-            <td><code translate="no">max_length</code> (إلزامي لحقل VARCHAR)</td>
-            <td>الحد الأقصى لطول البايت للسلاسل المسموح بإدراجها. لاحظ أن الأحرف متعددة البايتات (على سبيل المثال، أحرف Unicode) قد تشغل أكثر من بايت واحد لكل منها، لذا تأكد من أن طول البايت للسلاسل المدرجة لا يتجاوز الحد المحدد.</td>
-            <td>[1, 65,535]</td>
-        </tr>
-    <tr>
-        <td><code translate="no">dim</code></td>
-        <td>بُعد المتجه</td>
-            <td>نوع البيانات: عدد صحيح &isin; [1، 32768].<br/>إلزامي لحقل متجه كثيف. حذف لحقل <a href="https://milvus.io/docs/sparse_vector.md">متجه متناثر</a>.</td>
-    </tr>
-    <tr>
-        <td><code translate="no">is_partition_key</code></td>
-        <td>ما إذا كان هذا الحقل هو حقل مفتاح التقسيم.</td>
-        <td>نوع البيانات: منطقية (<code translate="no">true</code> أو <code translate="no">false</code>).</td>
-    </tr>
-    </tbody>
-</table>
-<h3 id="Create-a-field-schema" class="common-anchor-header">إنشاء مخطط حقل</h3><p>لتقليل التعقيد في إدخالات البيانات، يسمح لك Milvus بتحديد قيمة افتراضية لكل حقل متجه أثناء إنشاء مخطط الحقل، باستثناء حقل المفتاح الأساسي. يشير هذا إلى أنه إذا تركت حقلاً فارغًا عند إدراج البيانات، يتم تطبيق القيمة الافتراضية التي حددتها لهذا الحقل.</p>
-<p>إنشاء مخطط حقل عادي:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema
-id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
-age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
-embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
-
-<span class="hljs-comment"># The following creates a field and use it as the partition key</span>
-position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">256</span>, is_partition_key=<span class="hljs-literal">True</span>)
-<button class="copy-code-btn"></button></code></pre>
-<p>إنشاء مخطط حقل بقيم الحقول الافتراضية:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema
-
-fields = [
-  FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
-  <span class="hljs-comment"># configure default value `25` for field `age`</span>
-  FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, default_value=<span class="hljs-number">25</span>, description=<span class="hljs-string">&quot;age&quot;</span>),
-  embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
-]
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Supported-data-types" class="common-anchor-header">أنواع البيانات المدعومة</h3><p><code translate="no">DataType</code> يحدد نوع البيانات التي يحتوي عليها الحقل. تدعم الحقول المختلفة أنواع بيانات مختلفة.</p>
-<ul>
-<li><p>يدعم حقل المفتاح الأساسي:</p>
-<ul>
-<li>INT64: numpy.int64</li>
-<li>varchar: varchar</li>
-</ul></li>
-<li><p>يدعم الحقل العددي:</p>
-<ul>
-<li>BOOL: منطقية (<code translate="no">true</code> أو <code translate="no">false</code>)</li>
-<li>INT8: numpy.int8</li>
-<li>INT16: numpy.int16</li>
-<li>INT32: numpy.int32</li>
-<li>INT64: numpy.int64</li>
-<li>FLOAT: numpy.float32</li>
-<li>مزدوج: numpy.double.numpy.double</li>
-<li>varchar: varchar</li>
-<li>JSON: <a href="/docs/ar/use-json-fields.md">JSON</a></li>
-<li>صفيف: <a href="/docs/ar/array_data_type.md">مصفوفة</a></li>
-</ul>
-<p>يتوفر JSON كنوع بيانات مركب. يتألف حقل JSON من أزواج مفاتيح وقيمة. كل مفتاح عبارة عن سلسلة، ويمكن أن تكون القيمة رقمًا أو سلسلة أو قيمة منطقية أو مصفوفة أو قائمة. لمزيد من التفاصيل، راجع <a href="/docs/ar/use-json-fields.md">JSON: نوع بيانات جديد</a>.</p></li>
-<li><p>يدعم حقل المتجه:</p>
-<ul>
-<li>BINARY_VECTOR: يخزّن البيانات الثنائية كسلسلة من 0 و1، ويستخدم لتمثيل الميزات المدمجة في معالجة الصور واسترجاع المعلومات.</li>
-<li>FLOAT_VECTOR: يخزن الأرقام ذات الفاصلة العائمة 32 بت، وتستخدم عادةً في الحوسبة العلمية والتعلم الآلي لتمثيل الأرقام الحقيقية.</li>
-<li>FLOAT16_VECTOR: يخزّن الأرقام ذات الفاصلة العائمة نصف الدقيقة ذات 16 بت، وتستخدم في التعلم العميق وحسابات وحدة معالجة الرسومات من أجل كفاءة الذاكرة وعرض النطاق الترددي.</li>
-<li>BFLOAT16_VECTOR: يخزّن الأرقام ذات الفاصلة العائمة 16 بت بدقة منخفضة ولكن بنفس نطاق الأس مثل Float32، وهي شائعة في التعلّم العميق لتقليل متطلبات الذاكرة والحسابات دون التأثير على الدقة بشكل كبير.</li>
-<li>SPARSE_FLOAT_VECTOR: يخزن قائمة بالعناصر غير الصفرية والمؤشرات المقابلة لها، وتستخدم لتمثيل المتجهات المتفرقة. لمزيد من المعلومات، راجع <a href="/docs/ar/sparse_vector.md">المتجهات المتفرقة</a>.</li>
-</ul>
-<p>يدعم ميلفوس حقول متجهات متعددة في مجموعة. لمزيد من المعلومات، راجع <a href="/docs/ar/multi-vector-search.md">البحث المختلط</a>.</p></li>
-</ul>
-<h2 id="Collection-schema" class="common-anchor-header">مخطط المجموعة<button data-href="#Collection-schema" class="anchor-icon" translate="no">
+    </button></h2><p>في زيليز كلاود، يقوم مخطط المجموعة بتجميع جدول في قاعدة بيانات علائقية، والذي يحدد كيفية تنظيم زيليز كلاود للبيانات في المجموعة.</p>
+<p>يعد المخطط المصمم جيدًا أمرًا ضروريًا لأنه يلخص نموذج البيانات ويقرر ما إذا كان بإمكانك تحقيق أهداف العمل من خلال البحث. علاوة على ذلك، نظرًا لأن كل صف من البيانات المدرجة في المجموعة يجب أن يتبع المخطط، فإنه يساعد في الحفاظ على اتساق البيانات والجودة على المدى الطويل. من من منظور تقني، يؤدي المخطط المحدد جيدًا إلى تخزين بيانات الأعمدة بشكل جيد التنظيم وهيكل فهرس أنظف، مما يعزز أداء البحث.</p>
+<p>يحتوي مخطط المجموعة على مفتاح أساسي، وأربعة حقول متجهة كحد أقصى، والعديد من الحقول القياسية. يوضح الرسم البياني التالي كيفية تعيين مقالة إلى قائمة حقول المخطط.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="schema-explained" class="doc-image" id="schema-explained" />
+   </span> <span class="img-wrapper"> <span>شرح المخطط</span> </span></p>
+<p>يتضمن تصميم نموذج البيانات لنظام البحث تحليل احتياجات العمل وتجريد المعلومات في نموذج بيانات معبر عن المخطط. على سبيل المثال، يجب "فهرسة" البحث في جزء من النص عن طريق تحويل السلسلة الحرفية إلى متجه من خلال "التضمين" وتمكين البحث في المتجه. بالإضافة إلى هذا الشرط الأساسي، قد يكون من الضروري تخزين خصائص أخرى مثل الطابع الزمني للنشر والمؤلف. تسمح هذه البيانات الوصفية بتنقيح عمليات البحث الدلالية من خلال التصفية، وإرجاع النصوص المنشورة بعد تاريخ محدد أو من قبل مؤلف معين فقط. يمكنك أيضًا استرداد هذه المقاييس مع النص الرئيسي لعرض نتيجة البحث في التطبيق. يجب تعيين مُعرِّف فريد لكل منها لتنظيم هذه الأجزاء النصية، معبراً عنه كعدد صحيح أو سلسلة. هذه العناصر ضرورية لتحقيق منطق بحث متطور.</p>
+<p>راجع <a href="/docs/ar/schema-hands-on.md">التدريب العملي على تصميم المخطط</a> لمعرفة كيفية إنشاء مخطط جيد التصميم.</p>
+<h2 id="Create-Schema" class="common-anchor-header">إنشاء مخطط<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -153,84 +60,31 @@ fields = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>مخطط المجموعة هو التعريف المنطقي للمجموعة. وعادةً ما تحتاج إلى تعريف <a href="#Field-schema">مخطط الحقل</a> قبل تعريف مخطط المجموعة <a href="/docs/ar/manage-collections.md">وإدارة المجموعات</a>.</p>
-<h3 id="Collection-schema-properties" class="common-anchor-header">خصائص مخطط المجموعة</h3><table class="properties">
-    <thead>
-    <tr>
-        <th>الخصائص</th>
-        <th>الوصف</th>
-        <th>ملاحظة</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><code translate="no">field</code></td>
-        <td>الحقول في المجموعة المراد إنشاؤها</td>
-        <td>إلزامي</td>
-    </tr>
-    <tr>
-        <td><code translate="no">description</code></td>
-        <td>وصف المجموعة</td>
-        <td>نوع البيانات: سلسلة.<br/>اختياري</td>
-    </tr>
-    <tr>
-        <td><code translate="no">partition_key_field</code></td>
-        <td>اسم الحقل الذي تم تصميمه ليكون بمثابة مفتاح التقسيم.</td>
-        <td>نوع البيانات: سلسلة.<br/>اختياري.</td>
-    </tr>
-    <tr>
-        <td><code translate="no">enable_dynamic_field</code></td>
-        <td>ما إذا كان سيتم تمكين المخطط الديناميكي أم لا</td>
-        <td>نوع البيانات: منطقية (<code translate="no">true</code> أو <code translate="no">false</code>).<br/>اختياري، الإعداد الافتراضي <code translate="no">False</code>.<br/>للحصول على تفاصيل حول المخطط الديناميكي، راجع <a herf="enable-dynamic-field.md">المخطط الديناميكي</a> وأدلة المستخدم لإدارة المجموعات.</td>
-    </tr>
-    </tbody>
-</table>
-<h3 id="Create-a-collection-schema" class="common-anchor-header">إنشاء مخطط مجموعة</h3><div class="alert note">
-  حدد مخططات الحقول قبل تحديد مخطط مجموعة.</div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema, CollectionSchema
-id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
-age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
-embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
+    </button></h2><p>يوضح المقتطف البرمجي التالي كيفية إنشاء مخطط.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-<span class="hljs-comment"># Enable partition key on a field if you need to implement multi-tenancy based on the partition-key field</span>
-position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">256</span>, is_partition_key=<span class="hljs-literal">True</span>)
+schema = MilvusClient.create_schema()
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-<span class="hljs-comment"># Set enable_dynamic_field to True if you need to use dynamic fields. </span>
-schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
 <button class="copy-code-btn"></button></code></pre>
-<p>قم بإنشاء مجموعة بالمخطط المحدد:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>, connections
-conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
-collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
-collection1 = <span class="hljs-title class_">Collection</span>(name=collection_name1, schema=schema, using=<span class="hljs-string">&#x27;default&#x27;</span>, shards_num=<span class="hljs-number">2</span>)
-<button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<ul>
-<li>يمكنك تعريف رقم الجزء مع <code translate="no">shards_num</code>.</li>
-<li>يمكنك تحديد خادم ميلفوس الذي ترغب في إنشاء مجموعة عليه من خلال تحديد الاسم المستعار في <code translate="no">using</code>.</li>
-<li>يمكنك تمكين ميزة مفتاح التقسيم على أحد الحقول عن طريق تعيين <code translate="no">is_partition_key</code> إلى <code translate="no">True</code> على الحقل إذا كنت بحاجة إلى تنفيذ <a href="/docs/ar/multi_tenancy.md">التآخي المتعدد المستند إلى مفتاح التقسيم</a>.</li>
-<li>يمكنك تمكين المخطط الديناميكي عن طريق تعيين <code translate="no">enable_dynamic_field</code> إلى <code translate="no">True</code> في مخطط المجموعة إذا كنت بحاجة إلى <a href="/docs/ar/enable-dynamic-field.md">تمكين الحقل الديناميكي</a>.</li>
-</ul>
-</div>
-<p><br/>
-يمكنك أيضًا إنشاء مجموعة باستخدام <code translate="no">Collection.construct_from_dataframe</code> ، والتي تقوم تلقائيًا بإنشاء مخطط مجموعة من DataFrame وإنشاء مجموعة.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
-<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
-df = pd.DataFrame({
-    <span class="hljs-string">&quot;id&quot;</span>: [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],
-    <span class="hljs-string">&quot;age&quot;</span>: [random.randint(<span class="hljs-number">20</span>, <span class="hljs-number">40</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],
-    <span class="hljs-string">&quot;embedding&quot;</span>: [[random.random() <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(dim)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],
-    <span class="hljs-string">&quot;position&quot;</span>: <span class="hljs-string">&quot;test_pos&quot;</span>
-})
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
-collection, ins_res = Collection.construct_from_dataframe(
-    <span class="hljs-string">&#x27;my_collection&#x27;</span>,
-    df,
-    primary_field=<span class="hljs-string">&#x27;id&#x27;</span>,
-    auto_id=<span class="hljs-literal">False</span>
-    )
+<span class="hljs-keyword">const</span> schema = []
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema := entity.NewSchema()
+log.Println(schema)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+    &quot;fields&quot;: []
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Add-Primary-Field" class="common-anchor-header">إضافة حقل أساسي<button data-href="#Add-Primary-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -245,8 +99,378 @@ collection, ins_res = Collection.construct_from_dataframe(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
-<li>تعرف على كيفية إعداد المخطط عند <a href="/docs/ar/manage-collections.md">إدارة المجموعات</a>.</li>
-<li>اقرأ المزيد عن <a href="/docs/ar/enable-dynamic-field.md">المخطط الديناميكي</a>.</li>
-<li>اقرأ المزيد حول مفتاح التقسيم في <a href="/docs/ar/multi_tenancy.md">تعدد التآلف</a>.</li>
+    </button></h2><p>يُعرِّف الحقل الأساسي في المجموعة كيانًا ما بشكل فريد. يقبل فقط قيم <strong>Int64</strong> أو <strong>VarChar</strong>. توضح مقتطفات الشيفرة التالية كيفية إضافة الحقل الأساسي.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
+    datatype=DataType.INT64,
+    <span class="hljs-comment"># highlight-start</span>
+    is_primary=<span class="hljs-literal">True</span>,
+    auto_id=<span class="hljs-literal">False</span>,
+    <span class="hljs-comment"># highlight-end</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; 
+
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)
+        .dataType(DataType.Int64)
+        <span class="hljs-comment">// highlight-start</span>
+        .isPrimaryKey(<span class="hljs-literal">true</span>)
+        .autoID(<span class="hljs-literal">false</span>)
+        <span class="hljs-comment">// highlight-end</span>
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_id&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
+    <span class="hljs-comment">// highlight-start</span>
+    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>
+    <span class="hljs-comment">// highlight-end</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_id&quot;</span>).
+    WithDataType(entity.FieldTypeInt64).
+    <span class="hljs-comment">// highlight-start</span>
+    WithIsPrimaryKey(<span class="hljs-literal">true</span>).
+    WithIsAutoID(<span class="hljs-literal">false</span>),
+    <span class="hljs-comment">// highlight-end</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> primaryField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;my_id&quot;,
+    &quot;dataType&quot;: &quot;Int64&quot;,
+    &quot;isPrimary&quot;: true
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        $primaryField
+    ]
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>عند إضافة حقل، يمكنك توضيح الحقل صراحةً كحقل أساسي عن طريق تعيين الخاصية <code translate="no">is_primary</code> إلى <code translate="no">True</code>. يقبل الحقل الأساسي قيم <strong>Int64</strong> افتراضيًا. في هذه الحالة، يجب أن تكون قيمة الحقل الأساسي أعدادًا صحيحة مشابهة لـ <code translate="no">12345</code>. إذا اخترت استخدام قيم <strong>VarChar</strong> في الحقل الأساسي، فيجب أن تكون القيمة سلاسل مشابهة لـ <code translate="no">my_entity_1234</code>.</p>
+<p>يمكنك أيضًا تعيين خصائص <code translate="no">autoId</code> على <code translate="no">True</code> لجعل Zilliz Cloud يخصص قيم الحقل الأساسي تلقائيًا عند إدراج البيانات.</p>
+<p>لمزيد من التفاصيل، راجع <a href="/docs/ar/primary-field.md">الحقل الأساسي والمعرف التلقائي</a>.</p>
+<h2 id="Add-Vector-Fields" class="common-anchor-header">إضافة حقول متجهة<button data-href="#Add-Vector-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>تقبل الحقول المتجهة العديد من التضمينات المتجهة المتفرقة والكثيفة. في Zilliz Cloud، يمكنك إضافة أربعة حقول متجهة إلى مجموعة. توضح المقتطفات البرمجية التالية كيفية إضافة حقل متجه.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
+    datatype=DataType.FLOAT_VECTOR,
+    <span class="hljs-comment"># highlight-next-line</span>
+    dim=<span class="hljs-number">5</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)
+        .dataType(DataType.FloatVector)
+        <span class="hljs-comment">// highlight-next-line</span>
+        .dimension(<span class="hljs-number">5</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_vector&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
+    <span class="hljs-comment">// highlight-next-line</span>
+    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    <span class="hljs-comment">// highlight-next-line</span>
+    WithDim(<span class="hljs-number">5</span>),
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;my_vector&quot;,
+    &quot;dataType&quot;: &quot;FloatVector&quot;,
+    &quot;elementTypeParams&quot;: {
+        &quot;dim&quot;: 5
+    }
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>
+    ]
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>تشير المعلمة <code translate="no">dim</code> في مقتطفات التعليمات البرمجية أعلاه إلى بُعدية التضمينات المتجهة التي سيتم الاحتفاظ بها في الحقل المتجه. تشير القيمة <code translate="no">FLOAT_VECTOR</code> إلى أن الحقل المتجه يحمل قائمة من الأرقام العائمة 32 بت، والتي تستخدم عادةً لتمثيل مضادات الجذر، بالإضافة إلى ذلك، تدعم Zilliz Cloud أيضًا الأنواع التالية من تضمينات المتجهات:</p>
+<ul>
+<li><p><code translate="no">FLOAT16_VECTOR</code></p>
+<p>يحتفظ حقل متجه من هذا النوع بقائمة من الأعداد العائمة نصف الدقة 16 بت، وعادةً ما ينطبق على سيناريوهات التعلم العميق أو الحوسبة القائمة على وحدة معالجة الرسومات أو الحوسبة المقيدة بالذاكرة أو عرض النطاق الترددي.</p></li>
+<li><p><code translate="no">BFLOAT16_VECTOR</code></p>
+<p>يحتفظ حقل متجه من هذا النوع بقائمة من الأرقام ذات الفاصلة العائمة 16 بت ذات دقة مخفضة ولكن بنفس نطاق الأس مثل Float32. يُستخدم هذا النوع من البيانات بشكل شائع في سيناريوهات التعلم العميق، حيث أنه يقلل من استخدام الذاكرة دون التأثير على الدقة بشكل كبير.</p></li>
+<li><p><code translate="no">BINARY_VECTOR</code></p>
+<p>يحتوي الحقل المتجه من هذا النوع على قائمة من 0 و1. وهي بمثابة ميزات مضغوطة لتمثيل البيانات في سيناريوهات معالجة الصور واسترجاع المعلومات.</p></li>
+<li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
+<p>ويحتوي الحقل المتجه من هذا النوع على قائمة من الأرقام غير الصفرية وأرقام تسلسلها لتمثيل تضمينات متجهات متفرقة.</p></li>
 </ul>
+<h2 id="Add-Scalar-Fields" class="common-anchor-header">إضافة الحقول العددية<button data-href="#Add-Scalar-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>في الحالات الشائعة، يمكنك استخدام الحقول القياسية لتخزين البيانات الوصفية للتضمينات المتجهة المخزنة في ميلفوس، وإجراء عمليات بحث الشبكة الآلية مع تصفية البيانات الوصفية لتحسين صحة نتائج البحث. تدعم Zilliz Cloud العديد من أنواع الحقول القياسية، بما في ذلك <strong>VarChar</strong> و <strong>Boolean</strong> و <strong>Int</strong> و <strong>Float</strong> و <strong>Double</strong> و <strong>Array</strong> و <strong>JSON</strong>.</p>
+<h3 id="Add-String-Fields" class="common-anchor-header">إضافة حقول سلسلة</h3><p>في ميلفوس، يمكنك استخدام حقول VarChar لتخزين السلاسل. لمعرفة المزيد عن حقل VarChar، راجع <a href="/docs/ar/string.md">حقل السلسلة</a>.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
+    datatype=DataType.VARCHAR,
+    <span class="hljs-comment"># highlight-next-line</span>
+    max_length=<span class="hljs-number">512</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)
+        .dataType(DataType.VarChar)
+        <span class="hljs-comment">// highlight-next-line</span>
+        .maxLength(<span class="hljs-number">512</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
+    <span class="hljs-comment">// highlight-next-line</span>
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_varchar&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">512</span>),
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> varCharField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;my_varchar&quot;,
+    &quot;dataType&quot;: &quot;VarChar&quot;,
+    &quot;elementTypeParams&quot;: {
+        &quot;max_length&quot;: 256
+    }
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>
+    ]
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Add-Number-Fields" class="common-anchor-header">إضافة حقول الأرقام</h3><p>أنواع الأرقام التي يدعمها ميلفوس هي <code translate="no">Int8</code> و <code translate="no">Int16</code> و و <code translate="no">Int32</code> و <code translate="no">Int64</code> و <code translate="no">Float</code> و <code translate="no">Double</code>. لمعرفة المزيد عن حقول الأرقام، راجع <a href="/docs/ar/number.md">حقل الأرقام</a>.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;my_int64&quot;</span>,
+    datatype=DataType.INT64,
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_int64&quot;</span>)
+        .dataType(DataType.Int64)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_int64&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_int64&quot;</span>).
+    WithDataType(entity.FieldTypeInt64),
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> int64Field=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;my_int64&quot;,
+    &quot;dataType&quot;: &quot;Int64&quot;
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>
+    ]
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Add-Boolean-Fields" class="common-anchor-header">إضافة حقول منطقية</h3><p>يدعم ميلفوس الحقول المنطقية. توضح مقتطفات التعليمات البرمجية التالية كيفية إضافة حقل منطقي.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;my_bool&quot;</span>,
+    datatype=DataType.BOOL,
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_bool&quot;</span>)
+        .dataType(DataType.Bool)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_bool&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Boolean</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_bool&quot;</span>).
+    WithDataType(entity.FieldTypeBool),
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> boolField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;my_bool&quot;,
+    &quot;dataType&quot;: &quot;Boolean&quot;
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>
+    ]
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Add-JSON-fields" class="common-anchor-header">إضافة حقول JSON</h3><p>عادةً ما يخزن حقل JSON بيانات JSON نصف مهيكلة. للمزيد عن حقول JSON، راجع <a href="/docs/ar/use-json-fields.md">حقل JSON</a>.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">نودجيس</a> <a href="#go">جو</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;my_json&quot;</span>,
+    datatype=DataType.JSON,
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_json&quot;</span>)
+        .dataType(DataType.JSON)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_json&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">JSON</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_json&quot;</span>).
+    WithDataType(entity.FieldTypeJSON),
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> jsonField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;my_json&quot;,
+    &quot;dataType&quot;: &quot;JSON&quot;
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>,
+        <span class="hljs-variable">$jsonField</span>
+    ]
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Add-Array-Fields" class="common-anchor-header">إضافة حقول مصفوفة</h3><p>يخزن حقل المصفوفة قائمة من العناصر. يجب أن تكون أنواع البيانات لجميع العناصر في حقل المصفوفة متشابهة. للمزيد عن حقول المصفوفة، راجع <a href="/docs/ar/array_data_type.md">حقل المصفوفة</a>.</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;my_array&quot;</span>,
+    datatype=DataType.ARRAY,
+    element_type=DataType.VARCHAR,
+    max_capacity=<span class="hljs-number">5</span>,
+    max_length=<span class="hljs-number">512</span>,
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_array&quot;</span>)
+        .dataType(DataType.Array)
+        .elementType(DataType.VarChar)
+        .maxCapacity(<span class="hljs-number">5</span>)
+        .maxLength(<span class="hljs-number">512</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_array&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Array</span>,
+    <span class="hljs-attr">element_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
+    <span class="hljs-attr">max_capacity</span>: <span class="hljs-number">5</span>,
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_array&quot;</span>).
+    WithDataType(entity.FieldTypeArray).
+    WithElementType(entity.FieldTypeInt64).
+    WithMaxLength(<span class="hljs-number">512</span>).
+    WithMaxCapacity(<span class="hljs-number">5</span>),
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> arrayField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;my_array&quot;,
+    &quot;dataType&quot;: &quot;Array&quot;,
+    &quot;elementDataType&quot;: &quot;VarChar&quot;,
+    &quot;elementTypeParams&quot;: {
+        &quot;max_length&quot;: 512
+    }
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>,
+        <span class="hljs-variable">$jsonField</span>,
+        <span class="hljs-variable">$arrayField</span>
+    ]
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>

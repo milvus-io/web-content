@@ -593,9 +593,15 @@
             ]
           },
           {
+            "label": "تغيير حقل التجميع",
+            "id": "alter-collection-field.md",
+            "order": 12,
+            "children": []
+          },
+          {
             "label": "التدريب العملي",
             "id": "schema-hands-on.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -632,9 +638,15 @@
         "isMenu": true,
         "children": [
           {
+            "label": "شرح الفهرس",
+            "id": "index-explained.md",
+            "order": 0,
+            "children": []
+          },
+          {
             "label": "فهارس المتجهات",
             "id": "vector-index",
-            "order": 0,
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -672,7 +684,7 @@
           {
             "label": "الفهارس العددية",
             "id": "scalar-index",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {

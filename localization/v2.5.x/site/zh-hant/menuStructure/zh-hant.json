@@ -593,9 +593,15 @@
             ]
           },
           {
+            "label": "更改收藏欄位",
+            "id": "alter-collection-field.md",
+            "order": 12,
+            "children": []
+          },
+          {
             "label": "上手操作",
             "id": "schema-hands-on.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -632,9 +638,15 @@
         "isMenu": true,
         "children": [
           {
+            "label": "索引說明",
+            "id": "index-explained.md",
+            "order": 0,
+            "children": []
+          },
+          {
             "label": "向量索引",
             "id": "vector-index",
-            "order": 0,
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -672,7 +684,7 @@
           {
             "label": "標量索引",
             "id": "scalar-index",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {

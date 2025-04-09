@@ -593,9 +593,15 @@
             ]
           },
           {
+            "label": "수집 필드 변경",
+            "id": "alter-collection-field.md",
+            "order": 12,
+            "children": []
+          },
+          {
             "label": "실습",
             "id": "schema-hands-on.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -632,9 +638,15 @@
         "isMenu": true,
         "children": [
           {
+            "label": "색인 설명",
+            "id": "index-explained.md",
+            "order": 0,
+            "children": []
+          },
+          {
             "label": "벡터 인덱스",
             "id": "vector-index",
-            "order": 0,
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -672,7 +684,7 @@
           {
             "label": "스칼라 인덱스",
             "id": "scalar-index",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {

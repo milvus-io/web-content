@@ -593,9 +593,15 @@
             ]
           },
           {
+            "label": "Alterar campo de recogida",
+            "id": "alter-collection-field.md",
+            "order": 12,
+            "children": []
+          },
+          {
             "label": "Práctico",
             "id": "schema-hands-on.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -632,9 +638,15 @@
         "isMenu": true,
         "children": [
           {
+            "label": "Explicación del índice",
+            "id": "index-explained.md",
+            "order": 0,
+            "children": []
+          },
+          {
             "label": "Índices vectoriales",
             "id": "vector-index",
-            "order": 0,
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -672,7 +684,7 @@
           {
             "label": "Índices escalares",
             "id": "scalar-index",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -1352,7 +1364,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Rastreo de Jaeger",
+                "label": "Seguimiento de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []

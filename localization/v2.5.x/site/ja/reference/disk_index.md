@@ -40,12 +40,8 @@ title: ディスク上のインデックス
       </svg>
     </button></h2><p>DiskANNを使用するには、以下の点に注意してください。</p>
 <ul>
-<li>DiskANNはデフォルトで無効になっています。オンディスクインデックスよりもインメモリインデックスを好む場合は、より良いパフォーマンスのためにこの機能を無効にすることをお勧めします。<ul>
-<li>無効にするには、milvus設定ファイルの<code translate="no">queryNode.enableDisk</code> を<code translate="no">false</code> に変更してください。</li>
-<li>再び有効にするには、<code translate="no">queryNode.enableDisk</code> を<code translate="no">true</code> に設定します。</li>
-</ul></li>
-<li>milvusインスタンスはUbuntu 18.04.6またはそれ以降のリリースで動作します。</li>
-<li>MilvusデータパスはNVMe SSDにマウントしてください：<ul>
+<li>MilvusインスタンスがUbuntu 18.04.6またはそれ以降のリリースで動作していること。</li>
+<li>MilvusのデータパスはNVMe SSDにマウントされている必要があります：<ul>
 <li>Milvusスタンドアロンインスタンスの場合、データパスはインスタンスが動作するコンテナ内の<strong>/var/lib/milvus/dataに</strong>する必要があります。</li>
 <li>Milvusクラスタインスタンスの場合、データパスはQueryNodesおよびIndexNodesが実行されるコンテナ内の<strong>/var/lib/milvus/data</strong>である必要があります。</li>
 </ul></li>
@@ -87,7 +83,7 @@ title: ディスク上のインデックス
       </svg>
     </button></h2><ul>
 <li><p>インデックス構築パラメータ</p>
-<p>DiskANNインデックスを構築する場合、<code translate="no">DISKANN</code> をインデックスタイプとして使用します。インデックスパラメータは必要ありません。</p></li>
+<p>DiskANNインデックスを構築する場合、インデックスタイプとして<code translate="no">DISKANN</code> を使用します。インデックスパラメータは必要ありません。</p></li>
 <li><p>検索パラメータ</p>
 <table>
 <thead>
@@ -115,14 +111,14 @@ title: ディスク上のインデックス
         ></path>
       </svg>
     </button></h2><p>DiskANNは調整可能である。<code translate="no">${MILVUS_ROOT_PATH}/configs/milvus.yaml</code> 、DiskANN関連のパラメータを変更して性能を向上させることができます。</p>
-<pre><code translate="no" class="language-YAML">...
-DiskIndex:
-  MaxDegree: 56
-  SearchListSize: 100
-  PQCodeBugetGBRatio: 0.125
-  SearchCacheBudgetGBRatio: 0.125
-  BeamWidthRatio: 4.0
-...
+<pre><code translate="no" class="language-YAML"><span class="hljs-string">...</span>
+<span class="hljs-attr">DiskIndex:</span>
+  <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
+  <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
+  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
 <thead>
@@ -130,7 +126,7 @@ DiskIndex:
 </thead>
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>Vamanaグラフの最大次数。 <br/> 値を大きくすると想起率が高くなるが、インデックスのサイズと構築時間が増加する。</td><td>[1, 512]</td><td>56</td></tr>
-<tr><td><code translate="no">SearchListSize</code></td><td>候補リストのサイズ。 <br/> 値が大きいほどインデックス構築にかかる時間が長くなるが、高い想起率が得られる。 <br/> インデックス構築時間を短縮する必要がない限り、<code translate="no">MaxDegree</code> より小さい値に設定する。</td><td>[1, int32_max］</td><td>100</td></tr>
+<tr><td><code translate="no">SearchListSize</code></td><td>候補リストのサイズ。 <br/> 値を大きくするとインデックス構築に費やす時間が長くなるが、想起率は高くなる。 <br/> インデックス構築時間を短縮する必要がない限り、<code translate="no">MaxDegree</code> より小さい値に設定する。</td><td>[1, int32_max］</td><td>100</td></tr>
 <tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>PQコードのサイズ制限。 <br/> 値を大きくすると想起率が高くなるが、メモリ使用量が増加する。</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>生データに対するキャッシュされたノード番号の比率。 <br/> 値を大きくするとインデックス構築性能が向上するが、メモリ使用量は増加する。</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>検索反復あたりの最大 IO リクエスト数と CPU 数との比率。</td><td>[1, max(128 / CPU数, 16)] を指定する。</td><td>4.0</td></tr>
@@ -154,6 +150,6 @@ DiskIndex:
     </button></h2><ul>
 <li><p><code translate="no">io_setup() failed; returned -11, errno=11:Resource temporarily unavailable</code> エラーの対処法は？</p>
 <p>Linuxカーネルは非同期ノンブロッキングI/O（Asynchronous non-blocking I/O: AIO）機能を提供しており、プロセスが複数のI/O操作を同時に開始しても、そのいずれかが完了するのを待つ必要はありません。これは、処理とI/Oが重複するアプリケーションのパフォーマンスを向上させるのに役立ちます。</p>
-<p>この性能は、proc ファイルシステム内の<code translate="no">/proc/sys/fs/aio-max-nr</code> 仮想ファイルを使用して調整できる。<code translate="no">aio-max-nr</code> パラメーターは、許容される同時リクエストの最大数を決定する。</p>
+<p>この性能は、procファイルシステム内の<code translate="no">/proc/sys/fs/aio-max-nr</code> 仮想ファイルを使用して調整できる。<code translate="no">aio-max-nr</code> パラメーターは、許容される同時リクエストの最大数を決定する。</p>
 <p><code translate="no">aio-max-nr</code> のデフォルトは<code translate="no">65535</code> であるが、<code translate="no">10485760</code> に設定することもできる。</p></li>
 </ul>

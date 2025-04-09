@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>텍스트 처리에서 <strong>분석기는</strong> 원시 텍스트를 구조화되고 검색 가능한 형식으로 변환하는 중요한 구성 요소입니다. 각 분석기는 일반적으로 <strong>토큰화기와</strong> <strong>필터라는</strong> 두 가지 핵심 요소로 구성됩니다. 이들은 함께 입력 텍스트를 토큰으로 변환하고, 이러한 토큰을 정제하며, 효율적인 색인 및 검색을 위해 준비합니다.</p>
+    </button></h1><p>텍스트 처리에서 <strong>분석기는</strong> 원시 텍스트를 구조화된 검색 가능한 형식으로 변환하는 중요한 구성 요소입니다. 각 분석기는 일반적으로 <strong>토큰화기와</strong> <strong>필터라는</strong> 두 가지 핵심 요소로 구성됩니다. 이들은 함께 입력 텍스트를 토큰으로 변환하고, 이러한 토큰을 정제하며, 효율적인 색인 및 검색을 위해 준비합니다.</p>
 <p>Milvus에서 분석기는 컬렉션 스키마에 <code translate="no">VARCHAR</code> 필드를 추가할 때 컬렉션 생성 중에 구성됩니다. 분석기가 생성한 토큰은 키워드 매칭을 위한 인덱스를 구축하는 데 사용하거나 전체 텍스트 검색을 위해 스파스 임베딩으로 변환할 수 있습니다. 자세한 내용은 <a href="/docs/ko/keyword-match.md">텍스트 검색</a> 또는 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
 <div class="alert note">
 <p>분석기를 사용하면 성능에 영향을 미칠 수 있습니다:</p>
@@ -84,7 +84,7 @@ summary: >-
 <h3 id="Built-in-analyzer" class="common-anchor-header">기본 제공 분석기</h3><p>Milvus의 기본 제공 분석기는 특정 토큰화기 및 필터로 미리 구성되어 있으므로 이러한 구성 요소를 직접 정의할 필요 없이 즉시 사용할 수 있습니다. 각 기본 제공 분석기는 사전 설정된 토큰화 도구와 필터가 포함된 템플릿 역할을 하며, 사용자 지정을 위한 선택적 매개변수를 제공합니다.</p>
 <p>예를 들어 <code translate="no">standard</code> 기본 제공 분석기를 사용하려면 <code translate="no">standard</code> 이름을 <code translate="no">type</code> 로 지정하고 선택적으로 이 분석기 유형에 특정한 추가 구성(예: <code translate="no">stop_words</code>)을 포함하면 됩니다:</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Uses the standard built-in analyzer</span>
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>] <span class="hljs-comment"># Defines a list of common words (stop words) to exclude from tokenization</span>
@@ -99,14 +99,40 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>] <span class="hljs-comment">// Defines a list of common words (stop words) to exclude from tokenization</span>
 };
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;standard&quot;,
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 <code translate="no">standard</code> 기본 제공 분석기의 구성은 <code translate="no">tokenizer</code> 및 <code translate="no">filter</code> 옵션을 명시적으로 정의하여 유사한 기능을 달성하는 <a href="/docs/ko/analyzer-overview.md#null">사용자 지정 분석기를</a> 설정하는 것과 같습니다:</p>
+<p>분석기의 실행 결과를 확인하려면 <code translate="no">run_analyzer</code> 메서드를 사용합니다:</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
+
+<span class="hljs-comment"># Run analyzer</span>
+result = client.run_analyzer(
+    text,
+    analyzer_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>출력은 다음과 같습니다:</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
+<button class="copy-code-btn"></button></code></pre>
+<p>이는 분석기가 입력 텍스트를 올바르게 토큰화하여 <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, <code translate="no">&quot;for&quot;</code> 를 필터링하고 나머지 의미 있는 토큰을 반환한다는 것을 보여줍니다.</p>
+<p>위의 <code translate="no">standard</code> 기본 제공 분석기의 구성은 <code translate="no">tokenizer</code> 및 <code translate="no">filter</code> 옵션을 명시적으로 정의하여 유사한 기능을 달성하는 <a href="/docs/ko/analyzer-overview.md#share-N6FndaYZFoIPxExGXTDcEyHgnDc">사용자</a> 정의 분석기를 다음 매개 변수로 설정하는 것과 동일합니다:</p>
+<div class="multipleCode">
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -138,6 +164,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
     ]
 };
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;standard&quot;,
        &quot;filter&quot;:  [
@@ -163,7 +191,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>토큰화기 지정 예시</strong>:</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,
 }
@@ -175,10 +203,13 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,
 };
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>선택할 수 있는 토큰화기 목록은 토큰화기 <a href="/docs/ko/tokenizers">참조를</a> 참조하세요.</p>
 <h4 id="Filter" class="common-anchor-header">필터</h4><p><strong>필터는</strong> 토큰화 도구가 생성한 토큰에 대해 필요에 따라 토큰을 변형하거나 정제하는 <strong>선택적</strong> 구성 요소입니다. 예를 들어, 토큰화된 용어 <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> 에 <code translate="no">lowercase</code> 필터를 적용하면 다음과 같은 결과가 나올 수 있습니다:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
@@ -194,7 +225,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 </ul>
 <p><strong>기본 제공 필터 사용 예제입니다:</strong></p>
 <p><div class="multipleCode">
-<a href="#python">파이썬</a><a href="#java">자바</a><a href="#javascript">NodeJS</a><a href="#bash">cURL</a></div></p>
+<a href="#python">파이썬</a><a href="#java">자바</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Mandatory: Specifies tokenizer</span>
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>], <span class="hljs-comment"># Optional: Built-in filter that converts text to lowercase</span>
@@ -209,6 +240,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>], <span class="hljs-comment">// Optional: Built-in filter that converts text to lowercase</span>
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;standard&quot;,
        &quot;filter&quot;:  [&quot;lowercase&quot;]
@@ -222,7 +255,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 </ul>
 <p><strong>사용자 지정 필터 구성 예제:</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#bash">cURL</a></div></p>
+<a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Mandatory: Specifies tokenizer</span>
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -251,6 +284,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
     ]
 };
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;standard&quot;,
        &quot;filter&quot;:  [
@@ -278,77 +313,25 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 예에서는 임베딩을 위한 벡터 필드와 텍스트 처리 기능을 위한 두 개의 <code translate="no">VARCHAR</code> 필드가 있는 컬렉션 스키마를 정의합니다. 각 <code translate="no">VARCHAR</code> 필드는 서로 다른 처리 요구를 처리하기 위해 자체 분석기 설정으로 구성됩니다.</p>
+    </button></h2><p>이 예에서는 다음을 포함하는 컬렉션 스키마를 만듭니다:</p>
+<ul>
+<li><p>임베딩을 위한 벡터 필드.</p></li>
+<li><p>텍스트 처리를 위한 <code translate="no">VARCHAR</code> 필드 2개:</p>
+<ul>
+<li><p>한 필드는 기본 제공 분석기를 사용합니다.</p></li>
+<li><p>다른 하나는 사용자 지정 분석기를 사용합니다.</p></li>
+</ul></li>
+</ul>
+<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">1단계: MilvusClient 초기화 및 스키마 만들기</h3><p>Milvus 클라이언트를 설정하고 새 스키마를 만드는 것으로 시작합니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># Set up a Milvus client</span>
-client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
-<span class="hljs-comment"># Create schema</span>
+<span class="hljs-comment"># Create a new schema</span>
 schema = client.create_schema(auto_id=<span class="hljs-literal">True</span>, enable_dynamic_field=<span class="hljs-literal">False</span>)
-
-<span class="hljs-comment"># Add fields to schema</span>
-
-<span class="hljs-comment"># Use a built-in analyzer</span>
-analyzer_params_built_in = {
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
-}
-
-<span class="hljs-comment"># Add VARCHAR field `title_en`</span>
-schema.add_field(
-    field_name=<span class="hljs-string">&#x27;title_en&#x27;</span>, 
-    datatype=DataType.VARCHAR, 
-    max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>,
-    analyzer_params=analyzer_params_built_in,
-    enable_match=<span class="hljs-literal">True</span>, 
-)
-
-<span class="hljs-comment"># Configure a custom analyzer</span>
-analyzer_params_custom = {
-    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
-    <span class="hljs-string">&quot;filter&quot;</span>: [
-        <span class="hljs-string">&quot;lowercase&quot;</span>, <span class="hljs-comment"># Built-in filter</span>
-        {
-            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>, <span class="hljs-comment"># Custom filter</span>
-            <span class="hljs-string">&quot;max&quot;</span>: <span class="hljs-number">40</span>
-        },
-        {
-            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stop&quot;</span>, <span class="hljs-comment"># Custom filter</span>
-            <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>]
-        }
-    ]
-}
-
-<span class="hljs-comment"># Add VARCHAR field `title`</span>
-schema.add_field(
-    field_name=<span class="hljs-string">&#x27;title&#x27;</span>, 
-    datatype=DataType.VARCHAR, 
-    max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>,
-    analyzer_params=analyzer_params_custom,
-    enable_match=<span class="hljs-literal">True</span>, 
-)
-
-<span class="hljs-comment"># Add vector field</span>
-schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">3</span>)
-<span class="hljs-comment"># Add primary field</span>
-schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
-
-<span class="hljs-comment"># Set up index params for vector field</span>
-index_params = client.prepare_index_params()
-index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>, index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>)
-
-<span class="hljs-comment"># Create collection with defined schema</span>
-client.create_collection(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    schema=schema,
-    index_params=index_params
-)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -367,8 +350,30 @@ client.create_collection(
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder()
         .enableDynamicField(<span class="hljs-literal">false</span>)
         .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
-<span class="hljs-comment">// Add fields to schema</span>
+<span class="hljs-comment">// Set up a Milvus client</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">2단계: 분석기 구성 정의 및 확인</h3><ol>
+<li><p><strong>기본 제공 분석기를 구성하고 확인합니다</strong> (<code translate="no">english</code>)<strong>:</strong></p>
+<ul>
+<li><strong>구성:</strong> 기본 제공 영어 분석기에 대한 분석기 매개 변수를 정의합니다.</li>
+</ul>
+<p><div class="multipleCode">
+<a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Built-in analyzer configuration for English text processing</span>
+analyzer_params_built_in = {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
+}
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// Add fields to schema</span>
 <span class="hljs-comment">// Use a built-in analyzer</span>
 Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>);
@@ -381,8 +386,40 @@ schema.addField(AddFieldReq.builder()
         .analyzerParams(analyzerParamsBuiltin)
         .enableMatch(<span class="hljs-literal">true</span>)
         .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Use a built-in analyzer for VARCHAR field `title_en`</span>
+<span class="hljs-keyword">const</span> analyzerParamsBuiltIn = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;english&quot;</span>,
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p><strong>사용자 지정 분석기를 구성하고 확인합니다:</strong></p>
+<ul>
+<li><strong>구성:</strong> 기본 제공 소문자 필터 및 토큰 길이 및 중지 단어에 대한 사용자 지정 필터와 함께 표준 토큰화기를 사용하는 사용자 지정 분석기를 정의합니다.</li>
+</ul>
+<p><div class="multipleCode">
+<a href="#python">파이썬</a><a href="#java">자바</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Custom analyzer configuration with a standard tokenizer and custom filters</span>
+analyzer_params_custom = {
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [
+        <span class="hljs-string">&quot;lowercase&quot;</span>,  <span class="hljs-comment"># Built-in filter: convert tokens to lowercase</span>
+        {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>,  <span class="hljs-comment"># Custom filter: restrict token length</span>
+            <span class="hljs-string">&quot;max&quot;</span>: <span class="hljs-number">40</span>
+        },
+        {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stop&quot;</span>,  <span class="hljs-comment"># Custom filter: remove specified stop words</span>
+            <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>]
+        }
+    ]
+}
 
-<span class="hljs-comment">// Configure a custom analyzer</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// Configure a custom analyzer</span>
 Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;standard&quot;</span>);
 analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
@@ -393,11 +430,62 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
                 }},
                 <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
                     put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;stop&quot;</span>);
-                    put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arrays.asList(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>));
+                    put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arrays.asList(<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>));
                 }}
         )
 );
-schema.addField(AddFieldReq.builder()
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Configure a custom analyzer for VARCHAR field `title`</span>
+<span class="hljs-keyword">const</span> analyzerParamsCustom = {
+  <span class="hljs-attr">tokenizer</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+  <span class="hljs-attr">filter</span>: [
+    <span class="hljs-string">&quot;lowercase&quot;</span>,
+    {
+      <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;length&quot;</span>,
+      <span class="hljs-attr">max</span>: <span class="hljs-number">40</span>,
+    },
+    {
+      <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;stop&quot;</span>,
+      <span class="hljs-attr">stop_words</span>: [<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>],
+    },
+  ],
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">3단계: 스키마에 필드 추가</h3><p>이제 분석기 구성을 확인했으므로 스키마 필드에 추가합니다:</p>
+<div class="multipleCode">
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Add VARCHAR field &#x27;title_en&#x27; using the built-in analyzer configuration</span>
+schema.add_field(
+    field_name=<span class="hljs-string">&#x27;title_en&#x27;</span>,
+    datatype=DataType.VARCHAR,
+    max_length=<span class="hljs-number">1000</span>,
+    enable_analyzer=<span class="hljs-literal">True</span>,
+    analyzer_params=analyzer_params_built_in,
+    enable_match=<span class="hljs-literal">True</span>,
+)
+
+<span class="hljs-comment"># Add VARCHAR field &#x27;title&#x27; using the custom analyzer configuration</span>
+schema.add_field(
+    field_name=<span class="hljs-string">&#x27;title&#x27;</span>,
+    datatype=DataType.VARCHAR,
+    max_length=<span class="hljs-number">1000</span>,
+    enable_analyzer=<span class="hljs-literal">True</span>,
+    analyzer_params=analyzer_params_custom,
+    enable_match=<span class="hljs-literal">True</span>,
+)
+
+<span class="hljs-comment"># Add a vector field for embeddings</span>
+schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">3</span>)
+
+<span class="hljs-comment"># Add a primary key field</span>
+schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
         .dataType(DataType.VarChar)
         .maxLength(<span class="hljs-number">1000</span>)
@@ -419,49 +507,8 @@ schema.addField(AddFieldReq.builder()
         .isPrimaryKey(<span class="hljs-literal">true</span>)
         .autoID(<span class="hljs-literal">true</span>)
         .build());
-
-<span class="hljs-comment">// Set up index params for vector field</span>
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.COSINE)
-        .build());
-
-<span class="hljs-comment">// Create collection with defined schema</span>
-<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
-        .collectionSchema(schema)
-        .indexParams(indexes)
-        .build();
-client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-comment">// Set up a Milvus client</span>
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>);
-<span class="hljs-comment">// Use a built-in analyzer for VARCHAR field `title_en`</span>
-<span class="hljs-keyword">const</span> analyzerParamsBuiltIn = {
-  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;english&quot;</span>,
-};
-
-<span class="hljs-comment">// Configure a custom analyzer for VARCHAR field `title`</span>
-<span class="hljs-keyword">const</span> analyzerParamsCustom = {
-  <span class="hljs-attr">tokenizer</span>: <span class="hljs-string">&quot;standard&quot;</span>,
-  <span class="hljs-attr">filter</span>: [
-    <span class="hljs-string">&quot;lowercase&quot;</span>,
-    {
-      <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;length&quot;</span>,
-      <span class="hljs-attr">max</span>: <span class="hljs-number">40</span>,
-    },
-    {
-      <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;stop&quot;</span>,
-      <span class="hljs-attr">stop_words</span>: [<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>],
-    },
-  ],
-};
-
-<span class="hljs-comment">// Create schema</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Create schema</span>
 <span class="hljs-keyword">const</span> schema = {
   <span class="hljs-attr">auto_id</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">fields</span>: [
@@ -493,8 +540,41 @@ client.createCollection(requestCreate);
     },
   ],
 };
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">4단계: 인덱스 매개변수 준비 및 컬렉션 만들기</h3><div class="multipleCode">
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up index parameters for the vector field</span>
+index_params = client.prepare_index_params()
+index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>, index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>)
 
-<span class="hljs-comment">// Set up index params for vector field</span>
+<span class="hljs-comment"># Create the collection with the defined schema and index parameters</span>
+client.create_collection(
+    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
+    schema=schema,
+    index_params=index_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// Set up index params for vector field</span>
+List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+indexes.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build());
+
+<span class="hljs-comment">// Create collection with defined schema</span>
+<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
+        .collectionSchema(schema)
+        .indexParams(indexes)
+        .build();
+client.createCollection(requestCreate);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Set up index params for vector field</span>
 <span class="hljs-keyword">const</span> indexParams = [
   {
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
@@ -511,78 +591,8 @@ client.createCollection(requestCreate);
 });
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Collection created successfully!&quot;</span>);
-
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
-        &quot;autoId&quot;: true,
-        &quot;enabledDynamicField&quot;: false,
-        &quot;fields&quot;: [
-            {
-                &quot;fieldName&quot;: &quot;id&quot;,
-                &quot;dataType&quot;: &quot;Int64&quot;,
-                &quot;isPrimary&quot;: true
-            },
-            {
-                &quot;fieldName&quot;: &quot;title_en&quot;,
-                &quot;dataType&quot;: &quot;VarChar&quot;,
-                &quot;elementTypeParams&quot;: {
-                    &quot;max_length&quot;: 1000,
-                    &quot;enable_analyzer&quot;: true,
-                    &quot;enable_match&quot;: true,
-                    &quot;analyzer_params&quot;: {&quot;type&quot;: &quot;english&quot;}
-                }
-            },
-            {
-                &quot;fieldName&quot;: &quot;title&quot;,
-                &quot;dataType&quot;: &quot;VarChar&quot;,
-                &quot;elementTypeParams&quot;: {
-                    &quot;max_length&quot;: 1000,
-                    &quot;enable_analyzer&quot;: true,
-                    &quot;enable_match&quot;: true,
-                    &quot;analyzer_params&quot;: {
-                        &quot;tokenizer&quot;: &quot;standard&quot;,
-                        &quot;filter&quot;:[
-                            &quot;lowercase&quot;,
-                            {
-                                &quot;type&quot;:&quot;length&quot;,
-                                &quot;max&quot;:40
-                            },
-                            {
-                                &quot;type&quot;:&quot;stop&quot;,
-                                &quot;stop_words&quot;:[&quot;of&quot;,&quot;to&quot;]
-                            }
-                        ]
-                    }
-                }
-            },
-            {
-                &quot;fieldName&quot;: &quot;embedding&quot;,
-                &quot;dataType&quot;: &quot;FloatVector&quot;,
-                &quot;elementTypeParams&quot;: {
-                    &quot;dim&quot;:3
-                }
-            }
-        ]
-    }&#x27;</span>
-    
-<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
-        {
-            &quot;fieldName&quot;: &quot;embedding&quot;,
-            &quot;metricType&quot;: &quot;COSINE&quot;,
-            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
-        }
-    ]&#x27;</span>
-
-<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-
-curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;YOUR_COLLECTION_NAME\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
-    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
-}&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

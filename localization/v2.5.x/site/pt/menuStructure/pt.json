@@ -593,9 +593,15 @@
             ]
           },
           {
+            "label": "Alterar o campo de recolha",
+            "id": "alter-collection-field.md",
+            "order": 12,
+            "children": []
+          },
+          {
             "label": "Mãos à obra",
             "id": "schema-hands-on.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -632,9 +638,15 @@
         "isMenu": true,
         "children": [
           {
+            "label": "Índice explicado",
+            "id": "index-explained.md",
+            "order": 0,
+            "children": []
+          },
+          {
             "label": "Índices vectoriais",
             "id": "vector-index",
-            "order": 0,
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -672,7 +684,7 @@
           {
             "label": "Índices escalares",
             "id": "scalar-index",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -1067,7 +1079,7 @@
                     "children": []
                   },
                   {
-                    "label": "Azure",
+                    "label": "Azulejo",
                     "id": "ingress.md",
                     "order": 3,
                     "children": []

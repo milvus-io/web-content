@@ -38,12 +38,8 @@ title: الفهرسة على القرص
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستخدام DiskANN، لاحظ أن</p>
+    </button></h2><p>لاستخدام DiskANN، لاحظ ما يلي</p>
 <ul>
-<li>يتم تعطيل DiskANN افتراضيًا. إذا كنت تفضل الفهرس داخل الذاكرة على الفهرس على القرص، يُنصح بتعطيل هذه الميزة للحصول على أداء أفضل.<ul>
-<li>لتعطيلها، يمكنك تغيير <code translate="no">queryNode.enableDisk</code> إلى <code translate="no">false</code> في ملف تكوين ميلفوس الخاص بك.</li>
-<li>لتمكينها مرة أخرى، يمكنك تعيين <code translate="no">queryNode.enableDisk</code> إلى <code translate="no">true</code>.</li>
-</ul></li>
 <li>يعمل مثيل Milvus على Ubuntu 18.04.6 أو إصدار أحدث.</li>
 <li>يجب تثبيت مسار بيانات Milvus على محرك أقراص NVMe SSD للحصول على أداء كامل:<ul>
 <li>بالنسبة لمثيل Milvus Standalone، يجب أن يكون مسار البيانات هو <strong>/var/lib/milvus/data</strong> في الحاوية التي يعمل فيها المثيل.</li>
@@ -115,14 +111,14 @@ title: الفهرسة على القرص
         ></path>
       </svg>
     </button></h2><p>DiskANN قابل للضبط. يمكنك تعديل المعلمات المتعلقة بـ DiskANN في <code translate="no">${MILVUS_ROOT_PATH}/configs/milvus.yaml</code> لتحسين أدائه.</p>
-<pre><code translate="no" class="language-YAML">...
-DiskIndex:
-  MaxDegree: 56
-  SearchListSize: 100
-  PQCodeBugetGBRatio: 0.125
-  SearchCacheBudgetGBRatio: 0.125
-  BeamWidthRatio: 4.0
-...
+<pre><code translate="no" class="language-YAML"><span class="hljs-string">...</span>
+<span class="hljs-attr">DiskIndex:</span>
+  <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
+  <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
+  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
 <thead>

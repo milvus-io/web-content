@@ -2,9 +2,9 @@
 id: disk_index.md
 related_key: disk_index
 summary: Mecanismo de indexação de discos em Milvus.
-title: Índice no disco
+title: Índice em disco
 ---
-<h1 id="On-disk-Index" class="common-anchor-header">Índice no disco<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
+<h1 id="On-disk-Index" class="common-anchor-header">Índice em disco<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,11 +40,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus exclui
       </svg>
     </button></h2><p>Para usar o DiskANN, observe que</p>
 <ul>
-<li>DiskANN está desativado por padrão. Se preferir um índice na memória em vez de um índice no disco, é aconselhável desativar esta funcionalidade para obter um melhor desempenho.<ul>
-<li>Para a desativar, pode alterar <code translate="no">queryNode.enableDisk</code> para <code translate="no">false</code> no seu ficheiro de configuração milvus.</li>
-<li>Para a ativar novamente, pode definir <code translate="no">queryNode.enableDisk</code> para <code translate="no">true</code>.</li>
-</ul></li>
-<li>A instância do Milvus é executada no Ubuntu 18.04.6 ou numa versão posterior.</li>
+<li>A instância do Milvus é executada no Ubuntu 18.04.6 ou em uma versão posterior.</li>
 <li>O caminho de dados do Milvus deve ser montado em um SSD NVMe para obter desempenho total:<ul>
 <li>Para uma instância Milvus Standalone, o caminho de dados deve ser <strong>/var/lib/milvus/data</strong> no contentor onde a instância é executada.</li>
 <li>Para uma instância de Milvus Cluster, o caminho de dados deve ser <strong>/var/lib/milvus/data</strong> nos contentores onde são executados os QueryNodes e os IndexNodes.</li>
@@ -94,7 +90,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus exclui
 <tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th><th>Valor por defeito</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">search_list</code></td><td>Tamanho da lista de candidatos, um tamanho maior oferece uma taxa de recuperação mais elevada com desempenho degradado.</td><td>[topk, int32_max]</td><td>16</td></tr>
+<tr><td><code translate="no">search_list</code></td><td>Tamanho da lista de candidatos, um tamanho maior oferece uma taxa de recuperação mais elevada com um desempenho degradado.</td><td>[topk, int32_max]</td><td>16</td></tr>
 </tbody>
 </table>
 </li>
@@ -115,14 +111,14 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus exclui
         ></path>
       </svg>
     </button></h2><p>A DiskANN pode ser afinada. Pode modificar os parâmetros relacionados com a DiskANN em <code translate="no">${MILVUS_ROOT_PATH}/configs/milvus.yaml</code> para melhorar o seu desempenho.</p>
-<pre><code translate="no" class="language-YAML">...
-DiskIndex:
-  MaxDegree: 56
-  SearchListSize: 100
-  PQCodeBugetGBRatio: 0.125
-  SearchCacheBudgetGBRatio: 0.125
-  BeamWidthRatio: 4.0
-...
+<pre><code translate="no" class="language-YAML"><span class="hljs-string">...</span>
+<span class="hljs-attr">DiskIndex:</span>
+  <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
+  <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
+  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
 <thead>
@@ -153,7 +149,7 @@ DiskIndex:
       </svg>
     </button></h2><ul>
 <li><p>Como lidar com o erro <code translate="no">io_setup() failed; returned -11, errno=11:Resource temporarily unavailable</code>?</p>
-<p>O kernel Linux fornece o recurso AIO (Asynchronous non-blocking I/O) que permite que um processo inicie várias operações de E/S simultaneamente sem ter que esperar que qualquer uma delas seja concluída. Isso ajuda a melhorar o desempenho de aplicativos que podem sobrepor processamento e E/S.</p>
+<p>O kernel Linux fornece o recurso AIO (Asynchronous non-blocking I/O) que permite que um processo inicie várias operações de E/S simultaneamente sem ter que esperar que qualquer uma delas seja concluída. Isto ajuda a melhorar o desempenho das aplicações que podem sobrepor o processamento e as E/S.</p>
 <p>O desempenho pode ser ajustado usando o arquivo virtual <code translate="no">/proc/sys/fs/aio-max-nr</code> no sistema de arquivos proc. O parâmetro <code translate="no">aio-max-nr</code> determina o número máximo de pedidos simultâneos permitidos.</p>
 <p>O parâmetro <code translate="no">aio-max-nr</code> é predefinido para <code translate="no">65535</code>, pode ser configurado para <code translate="no">10485760</code>.</p></li>
 </ul>

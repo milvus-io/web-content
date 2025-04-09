@@ -40,11 +40,7 @@ title: 盘上索引
       </svg>
     </button></h2><p>要使用 DiskANN，请注意</p>
 <ul>
-<li>DiskANN 默认为禁用。如果你更喜欢内存索引而不是磁盘索引，建议你禁用该功能以获得更好的性能。<ul>
-<li>要禁用该功能，可在 Milvus 配置文件中将<code translate="no">queryNode.enableDisk</code> 更改为<code translate="no">false</code> 。</li>
-<li>要重新启用该功能，可将<code translate="no">queryNode.enableDisk</code> 设为<code translate="no">true</code> 。</li>
-</ul></li>
-<li>Milvus 实例在 Ubuntu 18.04.6 或更高版本上运行。</li>
+<li>Milvus 实例运行在 Ubuntu 18.04.6 或更高版本上。</li>
 <li>Milvus 数据路径应挂载到 NVMe SSD 上，以充分发挥性能：<ul>
 <li>对于 Milvus Standalone 实例，数据路径应为实例运行容器中的<strong>/var/lib/milvus/data</strong>。</li>
 <li>对于 Milvus 群集实例，数据路径应为查询节点和索引节点所在容器中的<strong>/var/lib/milvus/data</strong>。</li>
@@ -67,7 +63,7 @@ title: 盘上索引
       </svg>
     </button></h2><p>要使用 DiskANN，请确保</p>
 <ul>
-<li>数据中只使用至少 1 维的浮点矢量。</li>
+<li>数据中只使用至少 1 维的浮点型向量。</li>
 <li>仅使用欧氏距离 (L2)、内积 (IP) 或 COSINE 来测量向量之间的距离。</li>
 </ul>
 <h2 id="Index-and-search-settings" class="common-anchor-header">索引和搜索设置<button data-href="#Index-and-search-settings" class="anchor-icon" translate="no">
@@ -115,14 +111,14 @@ title: 盘上索引
         ></path>
       </svg>
     </button></h2><p>DiskANN 是可调的。您可以在<code translate="no">${MILVUS_ROOT_PATH}/configs/milvus.yaml</code> 中修改与 DiskANN 相关的参数，以提高其性能。</p>
-<pre><code translate="no" class="language-YAML">...
-DiskIndex:
-  MaxDegree: 56
-  SearchListSize: 100
-  PQCodeBugetGBRatio: 0.125
-  SearchCacheBudgetGBRatio: 0.125
-  BeamWidthRatio: 4.0
-...
+<pre><code translate="no" class="language-YAML"><span class="hljs-string">...</span>
+<span class="hljs-attr">DiskIndex:</span>
+  <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
+  <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
+  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
 <thead>
@@ -131,7 +127,7 @@ DiskIndex:
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>Vamana 图形的最大阶数。 <br/> 数值越大，召回率越高，但会增加索引的大小和建立索引的时间。</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>候选列表的大小。 <br/> 该值越大，建立索引的时间越长，但召回率越高。 <br/> 除非需要缩短建立索引的时间，否则请将其设置为小于<code translate="no">MaxDegree</code> 的值。</td><td>[1，int32_max］</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>PQ 代码的大小限制。 <br/> 该值越大，调用率越高，但会增加内存使用量。</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>PQ 代码的大小限制。 <br/> 数值越大，调用率越高，但会增加内存使用量。</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>缓存节点数与原始数据之比。 <br/> 数值越大，建立索引的性能越好，但内存使用量也会增加。</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>每次搜索迭代的最大 IO 请求数与 CPU 数量之比。</td><td>[1，max(128 / CPU 数量，16)</td><td>4.0</td></tr>
 </tbody>
@@ -155,5 +151,5 @@ DiskIndex:
 <li><p>如何处理<code translate="no">io_setup() failed; returned -11, errno=11:Resource temporarily unavailable</code> 错误？</p>
 <p>Linux 内核提供了异步非阻塞 I/O（AIO）功能，允许一个进程同时启动多个 I/O 操作，而无需等待任何一个操作完成。这有助于提高处理和 I/O 重叠的应用程序的性能。</p>
 <p>可以使用 proc 文件系统中的<code translate="no">/proc/sys/fs/aio-max-nr</code> 虚拟文件来调整性能。<code translate="no">aio-max-nr</code> 参数决定允许的最大并发请求数。</p>
-<p><code translate="no">aio-max-nr</code> 的默认值为<code translate="no">65535</code> ，您可以将其设置为<code translate="no">10485760</code> 。</p></li>
+<p><code translate="no">aio-max-nr</code> 默认为<code translate="no">65535</code> ，也可设置为<code translate="no">10485760</code> 。</p></li>
 </ul>

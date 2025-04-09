@@ -40,10 +40,6 @@ title: 온디스크 인덱스
       </svg>
     </button></h2><p>DiskANN을 사용하려면 다음 사항에 유의하세요.</p>
 <ul>
-<li>DiskANN은 기본적으로 비활성화되어 있습니다. 온디스크 인덱스보다 인메모리 인덱스를 선호하는 경우 더 나은 성능을 위해 이 기능을 비활성화하는 것이 좋습니다.<ul>
-<li>이 기능을 비활성화하려면 milvus 구성 파일에서 <code translate="no">queryNode.enableDisk</code> 을 <code translate="no">false</code> 으로 변경하면 됩니다.</li>
-<li>다시 활성화하려면 <code translate="no">queryNode.enableDisk</code> 을 <code translate="no">true</code> 으로 설정하면 됩니다.</li>
-</ul></li>
 <li>Milvus 인스턴스는 Ubuntu 18.04.6 이상 릴리스에서 실행됩니다.</li>
 <li>Milvus 데이터 경로는 전체 성능을 위해 NVMe SSD에 마운트해야 합니다:<ul>
 <li>Milvus 독립 실행형 인스턴스의 경우, 데이터 경로는 인스턴스가 실행되는 컨테이너의 <strong>/var/lib/milvus/data여야</strong> 합니다.</li>
@@ -115,14 +111,14 @@ title: 온디스크 인덱스
         ></path>
       </svg>
     </button></h2><p>DiskANN은 조정할 수 있습니다. <code translate="no">${MILVUS_ROOT_PATH}/configs/milvus.yaml</code> 에서 DiskANN 관련 매개변수를 수정하여 성능을 개선할 수 있습니다.</p>
-<pre><code translate="no" class="language-YAML">...
-DiskIndex:
-  MaxDegree: 56
-  SearchListSize: 100
-  PQCodeBugetGBRatio: 0.125
-  SearchCacheBudgetGBRatio: 0.125
-  BeamWidthRatio: 4.0
-...
+<pre><code translate="no" class="language-YAML"><span class="hljs-string">...</span>
+<span class="hljs-attr">DiskIndex:</span>
+  <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
+  <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
+  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
 <thead>

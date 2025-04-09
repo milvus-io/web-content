@@ -144,7 +144,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая карта",
+                "label": "Рулевая диаграмма",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -593,9 +593,15 @@
             ]
           },
           {
+            "label": "Изменить поле коллекции",
+            "id": "alter-collection-field.md",
+            "order": 12,
+            "children": []
+          },
+          {
             "label": "Собственноручно",
             "id": "schema-hands-on.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -632,9 +638,15 @@
         "isMenu": true,
         "children": [
           {
+            "label": "Объяснение индекса",
+            "id": "index-explained.md",
+            "order": 0,
+            "children": []
+          },
+          {
             "label": "Векторные индексы",
             "id": "vector-index",
-            "order": 0,
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -672,7 +684,7 @@
           {
             "label": "Скалярные индексы",
             "id": "scalar-index",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {

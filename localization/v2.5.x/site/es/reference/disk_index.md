@@ -40,12 +40,8 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
       </svg>
     </button></h2><p>Para utilizar DiskANN, tenga en cuenta que</p>
 <ul>
-<li>DiskANN está desactivado por defecto. Si prefiere el índice en memoria al índice en disco, se recomienda desactivar esta función para obtener un mejor rendimiento.<ul>
-<li>Para desactivarla, puede cambiar <code translate="no">queryNode.enableDisk</code> a <code translate="no">false</code> en su archivo de configuración de milvus.</li>
-<li>Para habilitarla de nuevo, puede cambiar <code translate="no">queryNode.enableDisk</code> por <code translate="no">true</code>.</li>
-</ul></li>
-<li>La instancia de Milvus funciona en Ubuntu 18.04.6 o una versión posterior.</li>
-<li>La ruta de datos de Milvus debería montarse en un SSD NVMe para un rendimiento completo:<ul>
+<li>La instancia de Milvus se ejecuta en Ubuntu 18.04.6 o una versión posterior.</li>
+<li>La ruta de datos de Milvus debe montarse en una SSD NVMe para un rendimiento completo:<ul>
 <li>Para una instancia Milvus Standalone, la ruta de datos debe ser <strong>/var/lib/milvus/data</strong> en el contenedor donde se ejecuta la instancia.</li>
 <li>Para una instancia Milvus Cluster, la ruta de datos debe ser <strong>/var/lib/milvus/data</strong> en los contenedores donde se ejecutan los QueryNodes y los IndexNodes.</li>
 </ul></li>
@@ -115,21 +111,21 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
         ></path>
       </svg>
     </button></h2><p>DiskANN es ajustable. Puede modificar los parámetros relacionados con DiskANN en <code translate="no">${MILVUS_ROOT_PATH}/configs/milvus.yaml</code> para mejorar su rendimiento.</p>
-<pre><code translate="no" class="language-YAML">...
-DiskIndex:
-  MaxDegree: 56
-  SearchListSize: 100
-  PQCodeBugetGBRatio: 0.125
-  SearchCacheBudgetGBRatio: 0.125
-  BeamWidthRatio: 4.0
-...
+<pre><code translate="no" class="language-YAML"><span class="hljs-string">...</span>
+<span class="hljs-attr">DiskIndex:</span>
+  <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
+  <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
+  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
 <thead>
 <tr><th>Parámetro</th><th>Descripción</th><th>Rango de valores</th><th>Valor por defecto</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">MaxDegree</code></td><td>Grado máximo del gráfico Vamana. <br/> Un valor mayor ofrece una mayor tasa de recuperación, pero aumenta el tamaño y el tiempo de creación del índice.</td><td>[1, 512]</td><td>56</td></tr>
+<tr><td><code translate="no">MaxDegree</code></td><td>Grado máximo del gráfico Vamana. <br/> Un valor mayor ofrece una mayor tasa de recuperación, pero aumenta el tamaño y el tiempo de construcción del índice.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>Tamaño de la lista de candidatos. <br/> Un valor mayor incrementa el tiempo empleado en construir el índice pero ofrece una mayor tasa de recuperación. <br/> Ajústalo a un valor menor que <code translate="no">MaxDegree</code> a menos que necesites reducir el tiempo de construcción del índice.</td><td>[1, int32_max]</td><td>100</td></tr>
 <tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Límite de tamaño del código PQ. <br/> Un valor mayor ofrece una mayor tasa de recuperación, pero aumenta el uso de memoria.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Relación entre los números de los nodos almacenados en caché y los datos sin procesar. <br/> Un valor mayor mejora el rendimiento de la creación de índices, pero aumenta el uso de memoria.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>

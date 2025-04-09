@@ -40,13 +40,9 @@ title: 磁碟上索引
       </svg>
     </button></h2><p>要使用 DiskANN，請注意</p>
 <ul>
-<li>DiskANN 預設為停用。如果您偏好記憶體索引而非磁碟索引，建議您停用此功能以獲得更好的效能。<ul>
-<li>若要停用此功能，您可以在 milvus 配置文件中將<code translate="no">queryNode.enableDisk</code> 改為<code translate="no">false</code> 。</li>
-<li>若要再次啟用，您可以將<code translate="no">queryNode.enableDisk</code> 設為<code translate="no">true</code> 。</li>
-</ul></li>
 <li>Milvus 實例在 Ubuntu 18.04.6 或更新版本上執行。</li>
 <li>Milvus 資料路徑應掛載至 NVMe SSD，以獲得完整效能：<ul>
-<li>對於 Milvus 獨立實例，資料路徑應該是實例執行所在容器中的<strong>/var/lib/milvus/data</strong>。</li>
+<li>對於 Milvus 獨立實例，資料路徑應該是實例執行容器中的<strong>/var/lib/milvus/data</strong>。</li>
 <li>對於 Milvus 叢集實例，資料路徑應該是 QueryNodes 和 IndexNodes 執行所在容器中的<strong>/var/lib/milvus/data</strong>。</li>
 </ul></li>
 </ul>
@@ -115,14 +111,14 @@ title: 磁碟上索引
         ></path>
       </svg>
     </button></h2><p>DiskANN 是可調整的。您可以在<code translate="no">${MILVUS_ROOT_PATH}/configs/milvus.yaml</code> 中修改 DiskANN 相關的參數，以改善其效能。</p>
-<pre><code translate="no" class="language-YAML">...
-DiskIndex:
-  MaxDegree: 56
-  SearchListSize: 100
-  PQCodeBugetGBRatio: 0.125
-  SearchCacheBudgetGBRatio: 0.125
-  BeamWidthRatio: 4.0
-...
+<pre><code translate="no" class="language-YAML"><span class="hljs-string">...</span>
+<span class="hljs-attr">DiskIndex:</span>
+  <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
+  <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
+  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
 <thead>

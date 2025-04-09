@@ -593,9 +593,15 @@
             ]
           },
           {
+            "label": "Modifier le champ de collecte",
+            "id": "alter-collection-field.md",
+            "order": 12,
+            "children": []
+          },
+          {
             "label": "Travaux pratiques",
             "id": "schema-hands-on.md",
-            "order": 12,
+            "order": 13,
             "children": []
           }
         ]
@@ -632,9 +638,15 @@
         "isMenu": true,
         "children": [
           {
+            "label": "L'indice expliqué",
+            "id": "index-explained.md",
+            "order": 0,
+            "children": []
+          },
+          {
             "label": "Indices vectoriels",
             "id": "vector-index",
-            "order": 0,
+            "order": 1,
             "isMenu": true,
             "children": [
               {
@@ -672,7 +684,7 @@
           {
             "label": "Index scalaires",
             "id": "scalar-index",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -1888,7 +1900,7 @@
             "children": []
           },
           {
-            "label": "PrivateGPT",
+            "label": "PrivéGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 10,
             "children": []

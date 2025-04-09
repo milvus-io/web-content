@@ -1,9 +1,12 @@
 ---
 id: schema.md
-summary: 'Узнайте, как определить схему в Milvus.'
-title: Управление схемой
+title: Объяснение схемы
+summary: >-
+  Схема определяет структуру данных коллекции. Прежде чем создавать коллекцию,
+  необходимо разработать ее схему. Эта страница поможет вам понять схему
+  коллекции и самостоятельно разработать пример схемы.
 ---
-<h1 id="Manage-Schema" class="common-anchor-header">Управление схемой<button data-href="#Manage-Schema" class="anchor-icon" translate="no">
+<h1 id="Schema-Explained" class="common-anchor-header">Объяснение схемы<button data-href="#Schema-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +21,8 @@ title: Управление схемой
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В этой теме рассказывается о схемах в Milvus. Схема используется для определения свойств коллекции и полей в ней.</p>
-<h2 id="Field-schema" class="common-anchor-header">Схема поля<button data-href="#Field-schema" class="anchor-icon" translate="no">
+    </button></h1><p>Схема определяет структуру данных коллекции. Прежде чем создавать коллекцию, необходимо разработать ее схему. Эта страница поможет вам понять схему коллекции и самостоятельно разработать пример схемы.</p>
+<h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,111 +37,16 @@ title: Управление схемой
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Схема поля - это логическое определение поля. Это первое, что необходимо определить, прежде чем определять <a href="#Collection-schema">схему коллекции</a> и <a href="/docs/ru/manage-collections.md">управлять коллекциями</a>.</p>
-<p>Milvus поддерживает только одно поле первичного ключа в коллекции.</p>
-<h3 id="Field-schema-properties" class="common-anchor-header">Свойства схемы поля</h3><table class="properties">
-    <thead>
-    <tr>
-        <th>Свойства</th>
-        <th>Описание</th>
-        <th>Примечание</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><code translate="no">name</code></td>
-        <td>Имя создаваемого поля в коллекции</td>
-        <td>Тип данных: Строка.<br/>Обязательно</td>
-    </tr>
-    <tr>
-        <td><code translate="no">dtype</code></td>
-        <td>Тип данных поля</td>
-        <td>Обязательный</td>
-    </tr>
-    <tr>
-        <td><code translate="no">description</code></td>
-        <td>Описание поля</td>
-        <td>Тип данных: Строка.<br/>Необязательно.</td>
-    </tr>
-    <tr>
-        <td><code translate="no">is_primary</code></td>
-        <td>Устанавливать ли поле в качестве поля первичного ключа или нет</td>
-        <td>Тип данных: Boolean (<code translate="no">true</code> или <code translate="no">false</code>).<br/>Обязательно для поля первичного ключа</td>
-    </tr>
-        <tr>
-            <td><code translate="no">auto_id</code> (Обязательно для поля первичного ключа)</td>
-            <td>Переключатель для включения или отключения автоматического присвоения идентификатора (первичного ключа).</td>
-            <td><code translate="no">True</code> или <code translate="no">False</code></td>
-        </tr>
-        <tr>
-            <td><code translate="no">max_length</code> (Обязательно для поля VARCHAR)</td>
-            <td>Максимальная длина байта для строк, разрешенных к вставке. Обратите внимание, что многобайтовые символы (например, символы Юникода) могут занимать более одного байта каждый, поэтому убедитесь, что длина байта вставляемых строк не превышает указанного предела.</td>
-            <td>[1, 65,535]</td>
-        </tr>
-    <tr>
-        <td><code translate="no">dim</code></td>
-        <td>Размерность вектора</td>
-            <td>Тип данных: Integer &isin;[1, 32768].<br/>Обязательно для плотного векторного поля. Опустите для <a href="https://milvus.io/docs/sparse_vector.md">разреженного векторного</a> поля.</td>
-    </tr>
-    <tr>
-        <td><code translate="no">is_partition_key</code></td>
-        <td>Является ли это поле полем с ключом раздела.</td>
-        <td>Тип данных: Булево (<code translate="no">true</code> или <code translate="no">false</code>).</td>
-    </tr>
-    </tbody>
-</table>
-<h3 id="Create-a-field-schema" class="common-anchor-header">Создание схемы поля</h3><p>Чтобы уменьшить сложность при вставке данных, Milvus позволяет указать значение по умолчанию для каждого скалярного поля при создании схемы поля, за исключением поля первичного ключа. Это означает, что если вы оставите поле пустым при вставке данных, то к нему будет применено значение по умолчанию, указанное вами для этого поля.</p>
-<p>Создайте обычную схему поля:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema
-id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
-age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
-embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
-
-<span class="hljs-comment"># The following creates a field and use it as the partition key</span>
-position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">256</span>, is_partition_key=<span class="hljs-literal">True</span>)
-<button class="copy-code-btn"></button></code></pre>
-<p>Создать схему поля со значениями по умолчанию:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema
-
-fields = [
-  FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
-  <span class="hljs-comment"># configure default value `25` for field `age`</span>
-  FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, default_value=<span class="hljs-number">25</span>, description=<span class="hljs-string">&quot;age&quot;</span>),
-  embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
-]
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Supported-data-types" class="common-anchor-header">Поддерживаемые типы данных</h3><p><code translate="no">DataType</code> определяет тип данных, которые содержит поле. Разные поля поддерживают разные типы данных.</p>
-<ul>
-<li><p>Поле первичного ключа поддерживает:</p>
-<ul>
-<li>INT64: numpy.int64</li>
-<li>VARCHAR: VARCHAR</li>
-</ul></li>
-<li><p>Скалярное поле поддерживает:</p>
-<ul>
-<li>BOOL: Boolean (<code translate="no">true</code> или <code translate="no">false</code>)</li>
-<li>INT8: numpy.int8</li>
-<li>INT16: numpy.int16</li>
-<li>INT32: numpy.int32</li>
-<li>INT64: numpy.int64</li>
-<li>FLOAT: numpy.float32</li>
-<li>DOUBLE: numpy.double</li>
-<li>VARCHAR: VARCHAR</li>
-<li>JSON: <a href="/docs/ru/use-json-fields.md">JSON</a></li>
-<li>Array: <a href="/docs/ru/array_data_type.md">Array</a></li>
-</ul>
-<p>Доступен JSON как составной тип данных. Поле JSON состоит из пар ключ-значение. Каждый ключ - это строка, а значение может быть числом, строкой, булевым значением, массивом или списком. Подробнее см. в разделе <a href="/docs/ru/use-json-fields.md">JSON: новый тип данных</a>.</p></li>
-<li><p>Поддерживается векторное поле:</p>
-<ul>
-<li>BINARY_VECTOR: хранит двоичные данные в виде последовательности 0 и 1, используется для компактного представления признаков при обработке изображений и поиске информации.</li>
-<li>FLOAT_VECTOR: хранит 32-битные числа с плавающей точкой, широко используемые в научных вычислениях и машинном обучении для представления вещественных чисел.</li>
-<li>FLOAT16_VECTOR: хранит 16-битные числа с плавающей точкой половинной точности, используемые в глубоком обучении и вычислениях на GPU для повышения эффективности использования памяти и пропускной способности.</li>
-<li>BFLOAT16_VECTOR: хранит 16-битные числа с плавающей точкой с пониженной точностью, но с тем же диапазоном экспонент, что и Float32. Это популярно в глубоком обучении для снижения требований к памяти и вычислениям без существенного влияния на точность.</li>
-<li>SPARSE_FLOAT_VECTOR: хранит список ненулевых элементов и соответствующих им индексов, используется для представления разреженных векторов. Для получения дополнительной информации обратитесь к разделу <a href="/docs/ru/sparse_vector.md">"Разреженные векторы</a>".</li>
-</ul>
-<p>Milvus поддерживает несколько векторных полей в коллекции. Дополнительные сведения см. в разделе <a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a>.</p></li>
-</ul>
-<h2 id="Collection-schema" class="common-anchor-header">Схема коллекции<button data-href="#Collection-schema" class="anchor-icon" translate="no">
+    </button></h2><p>В Zilliz Cloud схема коллекции представляет собой таблицу в реляционной базе данных, которая определяет, как Zilliz Cloud организует данные в коллекции.</p>
+<p>Хорошо продуманная схема очень важна, поскольку она абстрагирует модель данных и определяет, можно ли достичь бизнес-целей с помощью поиска. Кроме того, поскольку каждая строка данных, вставляемая в коллекцию, должна соответствовать схеме, это помогает поддерживать согласованность данных и долгосрочное качество. С технической точки зрения четко определенная схема приводит к хорошо организованному хранению данных в столбцах и более чистой структуре индексов, что повышает производительность поиска.</p>
+<p>Схема коллекции имеет первичный ключ, максимум четыре векторных поля и несколько скалярных полей. На следующей диаграмме показано, как сопоставить статью со списком полей схемы.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="schema-explained" class="doc-image" id="schema-explained" />
+   </span> <span class="img-wrapper"> <span>схема с пояснениями</span> </span></p>
+<p>Проектирование модели данных поисковой системы включает в себя анализ потребностей бизнеса и абстрагирование информации в виде модели данных, выраженной в виде схемы. Например, поиск по фрагменту текста должен быть "проиндексирован" путем преобразования буквенной строки в вектор с помощью "встраивания" и включения векторного поиска. Помимо этого основного требования, может потребоваться хранение других свойств, таких как временная метка публикации и автор. Эти метаданные позволяют уточнять семантический поиск с помощью фильтрации, возвращая только тексты, опубликованные после определенной даты или определенным автором. Вы также можете получить эти скаляры вместе с основным текстом, чтобы отобразить результат поиска в приложении. Для упорядочивания этих фрагментов текста каждому из них должен быть присвоен уникальный идентификатор, выраженный в виде целого числа или строки. Эти элементы необходимы для реализации сложной логики поиска.</p>
+<p>Обратитесь к <a href="/docs/ru/schema-hands-on.md">Schema Design Hands-On</a>, чтобы узнать, как создать хорошо продуманную схему.</p>
+<h2 id="Create-Schema" class="common-anchor-header">Создание схемы<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -153,84 +61,31 @@ fields = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Схема коллекции - это логическое определение коллекции. Обычно перед определением схемы коллекции и <a href="/docs/ru/manage-collections.md">управлением коллекциями</a> необходимо определить <a href="#Field-schema">схему поля</a>.</p>
-<h3 id="Collection-schema-properties" class="common-anchor-header">Свойства схемы коллекции</h3><table class="properties">
-    <thead>
-    <tr>
-        <th>Свойства</th>
-        <th>Описание</th>
-        <th>Примечание</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><code translate="no">field</code></td>
-        <td>Поля в создаваемой коллекции</td>
-        <td>Обязательное</td>
-    </tr>
-    <tr>
-        <td><code translate="no">description</code></td>
-        <td>Описание коллекции</td>
-        <td>Тип данных: Строка.<br/>Необязательно.</td>
-    </tr>
-    <tr>
-        <td><code translate="no">partition_key_field</code></td>
-        <td>Имя поля, которое будет выступать в качестве ключа раздела.</td>
-        <td>Тип данных: Строка.<br/>Необязательно.</td>
-    </tr>
-    <tr>
-        <td><code translate="no">enable_dynamic_field</code></td>
-        <td>Включать ли динамическую схему или нет.</td>
-        <td>Тип данных: Булево (<code translate="no">true</code> или <code translate="no">false</code>).<br/>Необязательно, по умолчанию <code translate="no">False</code>.<br/>Подробнее о динамической схеме см. в разделе <a herf="enable-dynamic-field.md">Динамическая схема</a> и в руководствах пользователя по управлению коллекциями.</td>
-    </tr>
-    </tbody>
-</table>
-<h3 id="Create-a-collection-schema" class="common-anchor-header">Создание схемы коллекции</h3><div class="alert note">
-  Перед определением схемы коллекции определите схемы полей.</div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema, CollectionSchema
-id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
-age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
-embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
+    </button></h2><p>Следующий фрагмент кода демонстрирует, как создать схему.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-<span class="hljs-comment"># Enable partition key on a field if you need to implement multi-tenancy based on the partition-key field</span>
-position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">256</span>, is_partition_key=<span class="hljs-literal">True</span>)
+schema = MilvusClient.create_schema()
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
-<span class="hljs-comment"># Set enable_dynamic_field to True if you need to use dynamic fields. </span>
-schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
 <button class="copy-code-btn"></button></code></pre>
-<p>Создайте коллекцию с указанной схемой:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>, connections
-conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
-collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
-collection1 = <span class="hljs-title class_">Collection</span>(name=collection_name1, schema=schema, using=<span class="hljs-string">&#x27;default&#x27;</span>, shards_num=<span class="hljs-number">2</span>)
-<button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<ul>
-<li>Вы можете определить номер шарда с помощью <code translate="no">shards_num</code>.</li>
-<li>Вы можете определить сервер Milvus, на котором хотите создать коллекцию, указав псевдоним в <code translate="no">using</code>.</li>
-<li>Вы можете включить функцию ключа раздела для поля, установив <code translate="no">is_partition_key</code> на <code translate="no">True</code> для поля, если вам нужно реализовать <a href="/docs/ru/multi_tenancy.md">многопользовательскую работу на основе ключа раздела</a>.</li>
-<li>Можно включить динамическую схему, установив <code translate="no">enable_dynamic_field</code> на <code translate="no">True</code> в схеме коллекции, если необходимо <a href="/docs/ru/enable-dynamic-field.md">включить динамическое поле</a>.</li>
-</ul>
-</div>
-<p><br/>
-Вы также можете создать коллекцию с помощью <code translate="no">Collection.construct_from_dataframe</code>, который автоматически генерирует схему коллекции из DataFrame и создает коллекцию.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
-<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
-df = pd.DataFrame({
-    <span class="hljs-string">&quot;id&quot;</span>: [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],
-    <span class="hljs-string">&quot;age&quot;</span>: [random.randint(<span class="hljs-number">20</span>, <span class="hljs-number">40</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],
-    <span class="hljs-string">&quot;embedding&quot;</span>: [[random.random() <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(dim)] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],
-    <span class="hljs-string">&quot;position&quot;</span>: <span class="hljs-string">&quot;test_pos&quot;</span>
-})
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
-collection, ins_res = Collection.construct_from_dataframe(
-    <span class="hljs-string">&#x27;my_collection&#x27;</span>,
-    df,
-    primary_field=<span class="hljs-string">&#x27;id&#x27;</span>,
-    auto_id=<span class="hljs-literal">False</span>
-    )
+<span class="hljs-keyword">const</span> schema = []
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema := entity.NewSchema()
+log.Println(schema)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+    &quot;fields&quot;: []
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Add-Primary-Field" class="common-anchor-header">Добавить первичное поле<button data-href="#Add-Primary-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -245,8 +100,378 @@ collection, ins_res = Collection.construct_from_dataframe(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
-<li>Узнайте, как подготовить схему при <a href="/docs/ru/manage-collections.md">управлении коллекциями</a>.</li>
-<li>Подробнее о <a href="/docs/ru/enable-dynamic-field.md">динамической схеме</a>.</li>
-<li>Подробнее о разделе-ключе в <a href="/docs/ru/multi_tenancy.md">Multi-tenancy</a>.</li>
+    </button></h2><p>Первичное поле в коллекции уникально идентифицирует сущность. Оно принимает только значения <strong>Int64</strong> или <strong>VarChar</strong>. Следующие фрагменты кода демонстрируют, как добавить первичное поле.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
+    datatype=DataType.INT64,
+    <span class="hljs-comment"># highlight-start</span>
+    is_primary=<span class="hljs-literal">True</span>,
+    auto_id=<span class="hljs-literal">False</span>,
+    <span class="hljs-comment"># highlight-end</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; 
+
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)
+        .dataType(DataType.Int64)
+        <span class="hljs-comment">// highlight-start</span>
+        .isPrimaryKey(<span class="hljs-literal">true</span>)
+        .autoID(<span class="hljs-literal">false</span>)
+        <span class="hljs-comment">// highlight-end</span>
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_id&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
+    <span class="hljs-comment">// highlight-start</span>
+    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>
+    <span class="hljs-comment">// highlight-end</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_id&quot;</span>).
+    WithDataType(entity.FieldTypeInt64).
+    <span class="hljs-comment">// highlight-start</span>
+    WithIsPrimaryKey(<span class="hljs-literal">true</span>).
+    WithIsAutoID(<span class="hljs-literal">false</span>),
+    <span class="hljs-comment">// highlight-end</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> primaryField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;my_id&quot;,
+    &quot;dataType&quot;: &quot;Int64&quot;,
+    &quot;isPrimary&quot;: true
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        $primaryField
+    ]
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>При добавлении поля вы можете явно указать его как первичное, установив для свойства <code translate="no">is_primary</code> значение <code translate="no">True</code>. По умолчанию первичное поле принимает значения <strong>Int64</strong>. В этом случае значением первичного поля должны быть целые числа, аналогичные <code translate="no">12345</code>. Если вы решили использовать в первичном поле значения <strong>VarChar</strong>, то значения должны быть строками, аналогичными <code translate="no">my_entity_1234</code>.</p>
+<p>Вы также можете установить для свойства <code translate="no">autoId</code> значение <code translate="no">True</code>, чтобы Zilliz Cloud автоматически выделял значения первичного поля при вставке данных.</p>
+<p>Подробнее см. в разделе <a href="/docs/ru/primary-field.md">Первичное поле и автоидентификатор</a>.</p>
+<h2 id="Add-Vector-Fields" class="common-anchor-header">Добавление векторных полей<button data-href="#Add-Vector-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Векторные поля принимают различные разреженные и плотные векторные вложения. В Zilliz Cloud вы можете добавить в коллекцию четыре векторных поля. Следующие фрагменты кода демонстрируют, как добавить векторное поле.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
+    datatype=DataType.FLOAT_VECTOR,
+    <span class="hljs-comment"># highlight-next-line</span>
+    dim=<span class="hljs-number">5</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)
+        .dataType(DataType.FloatVector)
+        <span class="hljs-comment">// highlight-next-line</span>
+        .dimension(<span class="hljs-number">5</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_vector&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
+    <span class="hljs-comment">// highlight-next-line</span>
+    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    <span class="hljs-comment">// highlight-next-line</span>
+    WithDim(<span class="hljs-number">5</span>),
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;my_vector&quot;,
+    &quot;dataType&quot;: &quot;FloatVector&quot;,
+    &quot;elementTypeParams&quot;: {
+        &quot;dim&quot;: 5
+    }
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>
+    ]
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Параметр <code translate="no">dim</code> в приведенных выше фрагментах кода указывает на размерность векторных вкраплений, которые будут храниться в векторном поле. Значение <code translate="no">FLOAT_VECTOR</code> указывает на то, что векторное поле содержит список 32-битных плавающих чисел, которые обычно используются для представления антилогарифмов. Кроме того, Zilliz Cloud также поддерживает следующие типы векторных вкраплений:</p>
+<ul>
+<li><p><code translate="no">FLOAT16_VECTOR</code></p>
+<p>Векторное поле этого типа содержит список 16-битных чисел с плавающей запятой половинной точности и обычно применяется в сценариях глубокого обучения или вычислений на базе GPU с ограничением памяти или пропускной способности.</p></li>
+<li><p><code translate="no">BFLOAT16_VECTOR</code></p>
+<p>Векторное поле этого типа содержит список 16-битных чисел с плавающей точкой, которые имеют пониженную точность, но тот же диапазон экспонент, что и Float32. Этот тип данных часто используется в сценариях глубокого обучения, так как позволяет сократить расход памяти без существенного влияния на точность.</p></li>
+<li><p><code translate="no">BINARY_VECTOR</code></p>
+<p>Векторное поле этого типа содержит список 0 и 1. Они служат компактными элементами для представления данных в сценариях обработки изображений и поиска информации.</p></li>
+<li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
+<p>Векторное поле этого типа содержит список ненулевых чисел и их порядковых номеров для представления разреженных векторных вкраплений.</p></li>
 </ul>
+<h2 id="Add-Scalar-Fields" class="common-anchor-header">Добавление скалярных полей<button data-href="#Add-Scalar-Fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>В распространенных случаях вы можете использовать скалярные поля для хранения метаданных векторных вкраплений, хранящихся в Milvus, и проводить ANN-поиск с фильтрацией метаданных для повышения корректности результатов поиска. Zilliz Cloud поддерживает несколько типов скалярных полей, включая <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, <strong>Float</strong>, <strong>Double</strong>, <strong>Array</strong> и <strong>JSON</strong>.</p>
+<h3 id="Add-String-Fields" class="common-anchor-header">Добавление строковых полей</h3><p>В Milvus вы можете использовать поля VarChar для хранения строк. Подробнее о поле VarChar см. в разделе <a href="/docs/ru/string.md">"Строковое поле"</a>.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
+    datatype=DataType.VARCHAR,
+    <span class="hljs-comment"># highlight-next-line</span>
+    max_length=<span class="hljs-number">512</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)
+        .dataType(DataType.VarChar)
+        <span class="hljs-comment">// highlight-next-line</span>
+        .maxLength(<span class="hljs-number">512</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
+    <span class="hljs-comment">// highlight-next-line</span>
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_varchar&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">512</span>),
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> varCharField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;my_varchar&quot;,
+    &quot;dataType&quot;: &quot;VarChar&quot;,
+    &quot;elementTypeParams&quot;: {
+        &quot;max_length&quot;: 256
+    }
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>
+    ]
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Add-Number-Fields" class="common-anchor-header">Добавление числовых полей</h3><p>Milvus поддерживает следующие типы чисел: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code> и <code translate="no">Double</code>. Подробнее о числовых полях см. в разделе <a href="/docs/ru/number.md">Числовое поле</a>.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;my_int64&quot;</span>,
+    datatype=DataType.INT64,
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_int64&quot;</span>)
+        .dataType(DataType.Int64)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_int64&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_int64&quot;</span>).
+    WithDataType(entity.FieldTypeInt64),
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> int64Field=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;my_int64&quot;,
+    &quot;dataType&quot;: &quot;Int64&quot;
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>
+    ]
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Add-Boolean-Fields" class="common-anchor-header">Добавление булевых полей</h3><p>Milvus поддерживает булевы поля. В следующих фрагментах кода показано, как добавить булево поле.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;my_bool&quot;</span>,
+    datatype=DataType.BOOL,
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_bool&quot;</span>)
+        .dataType(DataType.Bool)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_bool&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Boolean</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_bool&quot;</span>).
+    WithDataType(entity.FieldTypeBool),
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> boolField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;my_bool&quot;,
+    &quot;dataType&quot;: &quot;Boolean&quot;
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>
+    ]
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Add-JSON-fields" class="common-anchor-header">Добавление полей JSON</h3><p>Поле JSON обычно хранит полуструктурированные данные JSON. Подробнее о полях JSON читайте в разделе <a href="/docs/ru/use-json-fields.md">Поле JSON</a>.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;my_json&quot;</span>,
+    datatype=DataType.JSON,
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_json&quot;</span>)
+        .dataType(DataType.JSON)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_json&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">JSON</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_json&quot;</span>).
+    WithDataType(entity.FieldTypeJSON),
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> jsonField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;my_json&quot;,
+    &quot;dataType&quot;: &quot;JSON&quot;
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>,
+        <span class="hljs-variable">$jsonField</span>
+    ]
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Add-Array-Fields" class="common-anchor-header">Добавление полей массива</h3><p>Поле массива хранит список элементов. Типы данных всех элементов в поле массива должны быть одинаковыми. Подробнее о полях массива см. в разделе <a href="/docs/ru/array_data_type.md">Поле массива</a>.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">schema.add_field(
+    field_name=<span class="hljs-string">&quot;my_array&quot;</span>,
+    datatype=DataType.ARRAY,
+    element_type=DataType.VARCHAR,
+    max_capacity=<span class="hljs-number">5</span>,
+    max_length=<span class="hljs-number">512</span>,
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;my_array&quot;</span>)
+        .dataType(DataType.Array)
+        .elementType(DataType.VarChar)
+        .maxCapacity(<span class="hljs-number">5</span>)
+        .maxLength(<span class="hljs-number">512</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_array&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Array</span>,
+    <span class="hljs-attr">element_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
+    <span class="hljs-attr">max_capacity</span>: <span class="hljs-number">5</span>,
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_array&quot;</span>).
+    WithDataType(entity.FieldTypeArray).
+    WithElementType(entity.FieldTypeInt64).
+    WithMaxLength(<span class="hljs-number">512</span>).
+    WithMaxCapacity(<span class="hljs-number">5</span>),
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> arrayField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;my_array&quot;,
+    &quot;dataType&quot;: &quot;Array&quot;,
+    &quot;elementDataType&quot;: &quot;VarChar&quot;,
+    &quot;elementTypeParams&quot;: {
+        &quot;max_length&quot;: 512
+    }
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$primaryField</span>,
+        <span class="hljs-variable">$vectorField</span>,
+        <span class="hljs-variable">$varCharField</span>,
+        <span class="hljs-variable">$int64Field</span>,
+        <span class="hljs-variable">$boolField</span>,
+        <span class="hljs-variable">$jsonField</span>,
+        <span class="hljs-variable">$arrayField</span>
+    ]
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>

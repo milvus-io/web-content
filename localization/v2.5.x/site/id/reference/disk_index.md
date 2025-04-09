@@ -40,10 +40,6 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
       </svg>
     </button></h2><p>Untuk menggunakan DiskANN, perhatikan bahwa</p>
 <ul>
-<li>DiskANN dinonaktifkan secara default. Jika Anda lebih memilih indeks dalam memori daripada indeks pada disk, Anda disarankan untuk menonaktifkan fitur ini untuk kinerja yang lebih baik.<ul>
-<li>Untuk menonaktifkannya, Anda dapat mengubah <code translate="no">queryNode.enableDisk</code> menjadi <code translate="no">false</code> pada berkas konfigurasi milvus Anda.</li>
-<li>Untuk mengaktifkannya kembali, Anda dapat mengatur <code translate="no">queryNode.enableDisk</code> ke <code translate="no">true</code>.</li>
-</ul></li>
 <li>Instance Milvus berjalan pada Ubuntu 18.04.6 atau rilis yang lebih baru.</li>
 <li>Jalur data Milvus harus dipasang ke SSD NVMe untuk performa penuh:<ul>
 <li>Untuk instans Milvus Standalone, jalur data harus berada di <strong>/var/lib/milvus/data</strong> di dalam kontainer tempat instans berjalan.</li>
@@ -115,14 +111,14 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
         ></path>
       </svg>
     </button></h2><p>DiskANN dapat disetel. Anda dapat memodifikasi parameter terkait DiskANN di <code translate="no">${MILVUS_ROOT_PATH}/configs/milvus.yaml</code> untuk meningkatkan kinerjanya.</p>
-<pre><code translate="no" class="language-YAML">...
-DiskIndex:
-  MaxDegree: 56
-  SearchListSize: 100
-  PQCodeBugetGBRatio: 0.125
-  SearchCacheBudgetGBRatio: 0.125
-  BeamWidthRatio: 4.0
-...
+<pre><code translate="no" class="language-YAML"><span class="hljs-string">...</span>
+<span class="hljs-attr">DiskIndex:</span>
+  <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
+  <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
+  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
 <thead>

@@ -86,7 +86,7 @@ summary: >-
 <h3 id="Built-in-analyzer" class="common-anchor-header">Penganalisis bawaan</h3><p>Penganalisis bawaan di Milvus telah dikonfigurasi sebelumnya dengan tokenizer dan filter tertentu, sehingga Anda dapat langsung menggunakannya tanpa perlu mendefinisikan komponen-komponen ini sendiri. Setiap penganalisis bawaan berfungsi sebagai templat yang mencakup tokenizer dan filter yang telah ditetapkan sebelumnya, dengan parameter opsional untuk penyesuaian.</p>
 <p>Sebagai contoh, untuk menggunakan penganalisis bawaan <code translate="no">standard</code>, cukup tentukan namanya <code translate="no">standard</code> sebagai <code translate="no">type</code> dan secara opsional menyertakan konfigurasi tambahan yang spesifik untuk jenis penganalisis ini, seperti <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Uses the standard built-in analyzer</span>
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>] <span class="hljs-comment"># Defines a list of common words (stop words) to exclude from tokenization</span>
@@ -101,14 +101,40 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>] <span class="hljs-comment">// Defines a list of common words (stop words) to exclude from tokenization</span>
 };
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;standard&quot;,
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Konfigurasi penganalisis bawaan <code translate="no">standard</code> di atas setara dengan menyiapkan <a href="/docs/id/analyzer-overview.md#null">penganalisis kustom</a> dengan parameter berikut, di mana opsi <code translate="no">tokenizer</code> dan <code translate="no">filter</code> secara eksplisit ditentukan untuk mencapai fungsionalitas yang serupa:</p>
+<p>Untuk memeriksa hasil eksekusi penganalisis, gunakan metode <code translate="no">run_analyzer</code>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
+
+<span class="hljs-comment"># Run analyzer</span>
+result = client.run_analyzer(
+    text,
+    analyzer_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Keluarannya adalah:</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
+<button class="copy-code-btn"></button></code></pre>
+<p>Ini menunjukkan bahwa penganalisis melakukan tokenisasi dengan benar pada teks masukan dengan menyaring kata berhenti <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, dan <code translate="no">&quot;for&quot;</code>, sambil mengembalikan token yang bermakna.</p>
+<p>Konfigurasi penganalisis bawaan <code translate="no">standard</code> di atas setara dengan menyiapkan <a href="/docs/id/analyzer-overview.md#share-N6FndaYZFoIPxExGXTDcEyHgnDc">penganalisis khusus</a> dengan parameter berikut, di mana opsi <code translate="no">tokenizer</code> dan <code translate="no">filter</code> secara eksplisit didefinisikan untuk mencapai fungsionalitas yang serupa:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -140,6 +166,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
     ]
 };
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;standard&quot;,
        &quot;filter&quot;:  [
@@ -165,7 +193,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Contoh menentukan tokenizer</strong>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,
 }
@@ -177,11 +205,14 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,
 };
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Filter" class="common-anchor-header">Filter</h4><p><strong>Filter</strong> adalah komponen <strong>opsional</strong> yang bekerja pada token yang dihasilkan oleh tokenizer, mengubah atau menyempurnakannya sesuai kebutuhan. Misalnya, setelah menerapkan filter <code translate="no">lowercase</code> ke istilah yang di-tokenize <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, hasilnya mungkin seperti ini:</p>
+<p>Untuk daftar tokenizer yang tersedia untuk dipilih, lihat <a href="/docs/id/tokenizers">Referensi Tokenizer</a>.</p>
+<h4 id="Filter" class="common-anchor-header">Filter</h4><p><strong>Filter</strong> adalah komponen <strong>opsional</strong> yang bekerja pada token yang dihasilkan oleh tokenizer, mengubah atau menyempurnakannya sesuai kebutuhan. Misalnya, setelah menerapkan filter <code translate="no">lowercase</code> pada istilah yang di-tokenize <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, hasilnya mungkin:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>Filter dalam penganalisis khusus dapat berupa filter <strong>bawaan</strong> atau <strong>khusus</strong>, tergantung pada kebutuhan konfigurasi.</p>
@@ -189,14 +220,14 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <li><p><strong>Filter bawaan</strong>: Telah dikonfigurasi sebelumnya oleh Milvus, yang membutuhkan pengaturan minimal. Anda dapat menggunakan filter ini secara langsung dengan menentukan namanya. Filter di bawah ini adalah filter bawaan untuk penggunaan langsung:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: Mengonversi teks menjadi huruf kecil, memastikan pencocokan yang tidak peka huruf. Untuk detailnya, lihat <a href="/docs/id/lowercase-filter.md">Huruf Kecil</a>.</p></li>
-<li><p><code translate="no">asciifolding</code>: Mengonversi karakter non-ASCII menjadi ekuivalen ASCII, menyederhanakan penanganan teks multibahasa. Untuk detailnya, lihat <a href="/docs/id/ascii-folding-filter.md">ASCII folding (Pelipatan ASCII</a>).</p></li>
+<li><p><code translate="no">asciifolding</code>: Mengonversi karakter non-ASCII menjadi ekuivalen ASCII, menyederhanakan penanganan teks multibahasa. Untuk rinciannya, lihat <a href="/docs/id/ascii-folding-filter.md">ASCII folding (Pelipatan ASCII</a>).</p></li>
 <li><p><code translate="no">alphanumonly</code>: Mempertahankan hanya karakter alfanumerik dengan menghapus karakter lainnya. Untuk rinciannya, lihat <a href="/docs/id/alphanumonly-filter.md">Hanya alfanumerik</a>.</p></li>
 <li><p><code translate="no">cnalphanumonly</code>: Menghapus token yang berisi karakter apa pun selain karakter Cina, huruf Inggris, atau angka. Untuk detailnya, lihat <a href="/docs/id/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 <li><p><code translate="no">cncharonly</code>: Menghapus token yang berisi karakter non-Cina. Untuk detailnya, lihat <a href="/docs/id/cncharonly-filter.md">Cncharonly</a>.</p></li>
 </ul>
 <p><strong>Contoh penggunaan filter bawaan:</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#bash">cURL</a></div></p>
+<a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Mandatory: Specifies tokenizer</span>
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>], <span class="hljs-comment"># Optional: Built-in filter that converts text to lowercase</span>
@@ -211,6 +242,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>], <span class="hljs-comment">// Optional: Built-in filter that converts text to lowercase</span>
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;standard&quot;,
        &quot;filter&quot;:  [&quot;lowercase&quot;]
@@ -224,7 +257,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 </ul>
 <p><strong>Contoh mengonfigurasi filter khusus:</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#bash">cURL</a></div></p>
+<a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Mandatory: Specifies tokenizer</span>
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -253,6 +286,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
     ]
 };
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;standard&quot;,
        &quot;filter&quot;:  [
@@ -280,77 +315,25 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dalam contoh ini, kita mendefinisikan skema koleksi dengan bidang vektor untuk penyematan dan dua bidang <code translate="no">VARCHAR</code> untuk kemampuan pemrosesan teks. Setiap bidang <code translate="no">VARCHAR</code> dikonfigurasikan dengan pengaturan penganalisisnya sendiri untuk menangani kebutuhan pemrosesan yang berbeda.</p>
+    </button></h2><p>Dalam contoh ini, Anda akan membuat skema koleksi yang mencakup:</p>
+<ul>
+<li><p>Bidang vektor untuk penyematan.</p></li>
+<li><p>Dua bidang <code translate="no">VARCHAR</code> untuk pemrosesan teks:</p>
+<ul>
+<li><p>Satu bidang menggunakan penganalisis bawaan.</p></li>
+<li><p>Bidang lainnya menggunakan penganalisis khusus.</p></li>
+</ul></li>
+</ul>
+<h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">Langkah 1: Inisialisasi MilvusClient dan buat skema</h3><p>Mulailah dengan menyiapkan klien Milvus dan membuat skema baru.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># Set up a Milvus client</span>
-client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
-<span class="hljs-comment"># Create schema</span>
+<span class="hljs-comment"># Create a new schema</span>
 schema = client.create_schema(auto_id=<span class="hljs-literal">True</span>, enable_dynamic_field=<span class="hljs-literal">False</span>)
-
-<span class="hljs-comment"># Add fields to schema</span>
-
-<span class="hljs-comment"># Use a built-in analyzer</span>
-analyzer_params_built_in = {
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
-}
-
-<span class="hljs-comment"># Add VARCHAR field `title_en`</span>
-schema.add_field(
-    field_name=<span class="hljs-string">&#x27;title_en&#x27;</span>, 
-    datatype=DataType.VARCHAR, 
-    max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>,
-    analyzer_params=analyzer_params_built_in,
-    enable_match=<span class="hljs-literal">True</span>, 
-)
-
-<span class="hljs-comment"># Configure a custom analyzer</span>
-analyzer_params_custom = {
-    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
-    <span class="hljs-string">&quot;filter&quot;</span>: [
-        <span class="hljs-string">&quot;lowercase&quot;</span>, <span class="hljs-comment"># Built-in filter</span>
-        {
-            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>, <span class="hljs-comment"># Custom filter</span>
-            <span class="hljs-string">&quot;max&quot;</span>: <span class="hljs-number">40</span>
-        },
-        {
-            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stop&quot;</span>, <span class="hljs-comment"># Custom filter</span>
-            <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>]
-        }
-    ]
-}
-
-<span class="hljs-comment"># Add VARCHAR field `title`</span>
-schema.add_field(
-    field_name=<span class="hljs-string">&#x27;title&#x27;</span>, 
-    datatype=DataType.VARCHAR, 
-    max_length=<span class="hljs-number">1000</span>, 
-    enable_analyzer=<span class="hljs-literal">True</span>,
-    analyzer_params=analyzer_params_custom,
-    enable_match=<span class="hljs-literal">True</span>, 
-)
-
-<span class="hljs-comment"># Add vector field</span>
-schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">3</span>)
-<span class="hljs-comment"># Add primary field</span>
-schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
-
-<span class="hljs-comment"># Set up index params for vector field</span>
-index_params = client.prepare_index_params()
-index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>, index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>)
-
-<span class="hljs-comment"># Create collection with defined schema</span>
-client.create_collection(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
-    schema=schema,
-    index_params=index_params
-)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -369,8 +352,30 @@ client.create_collection(
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder()
         .enableDynamicField(<span class="hljs-literal">false</span>)
         .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
-<span class="hljs-comment">// Add fields to schema</span>
+<span class="hljs-comment">// Set up a Milvus client</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">Langkah 2: Tentukan dan verifikasi konfigurasi penganalisis</h3><ol>
+<li><p><strong>Konfigurasikan dan verifikasi penganalisis bawaan</strong> (<code translate="no">english</code>)<strong>:</strong></p>
+<ul>
+<li><strong>Konfigurasi:</strong> Tentukan parameter penganalisis untuk penganalisis bahasa Inggris bawaan.</li>
+</ul>
+<p><div class="multipleCode">
+<a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Built-in analyzer configuration for English text processing</span>
+analyzer_params_built_in = {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
+}
+
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// Add fields to schema</span>
 <span class="hljs-comment">// Use a built-in analyzer</span>
 Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>);
@@ -383,8 +388,40 @@ schema.addField(AddFieldReq.builder()
         .analyzerParams(analyzerParamsBuiltin)
         .enableMatch(<span class="hljs-literal">true</span>)
         .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Use a built-in analyzer for VARCHAR field `title_en`</span>
+<span class="hljs-keyword">const</span> analyzerParamsBuiltIn = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;english&quot;</span>,
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p><strong>Mengonfigurasi dan memverifikasi penganalisis khusus:</strong></p>
+<ul>
+<li><strong>Konfigurasi:</strong> Tentukan penganalisis khusus yang menggunakan tokenizer standar bersama dengan filter huruf kecil bawaan dan filter khusus untuk panjang token dan kata henti.</li>
+</ul>
+<p><div class="multipleCode">
+<a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Custom analyzer configuration with a standard tokenizer and custom filters</span>
+analyzer_params_custom = {
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [
+        <span class="hljs-string">&quot;lowercase&quot;</span>,  <span class="hljs-comment"># Built-in filter: convert tokens to lowercase</span>
+        {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>,  <span class="hljs-comment"># Custom filter: restrict token length</span>
+            <span class="hljs-string">&quot;max&quot;</span>: <span class="hljs-number">40</span>
+        },
+        {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stop&quot;</span>,  <span class="hljs-comment"># Custom filter: remove specified stop words</span>
+            <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>]
+        }
+    ]
+}
 
-<span class="hljs-comment">// Configure a custom analyzer</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// Configure a custom analyzer</span>
 Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;standard&quot;</span>);
 analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
@@ -395,11 +432,62 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
                 }},
                 <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
                     put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;stop&quot;</span>);
-                    put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arrays.asList(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>));
+                    put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arrays.asList(<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>));
                 }}
         )
 );
-schema.addField(AddFieldReq.builder()
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Configure a custom analyzer for VARCHAR field `title`</span>
+<span class="hljs-keyword">const</span> analyzerParamsCustom = {
+  <span class="hljs-attr">tokenizer</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+  <span class="hljs-attr">filter</span>: [
+    <span class="hljs-string">&quot;lowercase&quot;</span>,
+    {
+      <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;length&quot;</span>,
+      <span class="hljs-attr">max</span>: <span class="hljs-number">40</span>,
+    },
+    {
+      <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;stop&quot;</span>,
+      <span class="hljs-attr">stop_words</span>: [<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>],
+    },
+  ],
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
+<button class="copy-code-btn"></button></code></pre></li>
+</ol>
+<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">Langkah 3: Menambahkan bidang ke skema</h3><p>Setelah Anda memverifikasi konfigurasi penganalisis Anda, tambahkan ke bidang skema Anda:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Add VARCHAR field &#x27;title_en&#x27; using the built-in analyzer configuration</span>
+schema.add_field(
+    field_name=<span class="hljs-string">&#x27;title_en&#x27;</span>,
+    datatype=DataType.VARCHAR,
+    max_length=<span class="hljs-number">1000</span>,
+    enable_analyzer=<span class="hljs-literal">True</span>,
+    analyzer_params=analyzer_params_built_in,
+    enable_match=<span class="hljs-literal">True</span>,
+)
+
+<span class="hljs-comment"># Add VARCHAR field &#x27;title&#x27; using the custom analyzer configuration</span>
+schema.add_field(
+    field_name=<span class="hljs-string">&#x27;title&#x27;</span>,
+    datatype=DataType.VARCHAR,
+    max_length=<span class="hljs-number">1000</span>,
+    enable_analyzer=<span class="hljs-literal">True</span>,
+    analyzer_params=analyzer_params_custom,
+    enable_match=<span class="hljs-literal">True</span>,
+)
+
+<span class="hljs-comment"># Add a vector field for embeddings</span>
+schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">3</span>)
+
+<span class="hljs-comment"># Add a primary key field</span>
+schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
         .dataType(DataType.VarChar)
         .maxLength(<span class="hljs-number">1000</span>)
@@ -421,49 +509,8 @@ schema.addField(AddFieldReq.builder()
         .isPrimaryKey(<span class="hljs-literal">true</span>)
         .autoID(<span class="hljs-literal">true</span>)
         .build());
-
-<span class="hljs-comment">// Set up index params for vector field</span>
-List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.COSINE)
-        .build());
-
-<span class="hljs-comment">// Create collection with defined schema</span>
-<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
-        .collectionSchema(schema)
-        .indexParams(indexes)
-        .build();
-client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-comment">// Set up a Milvus client</span>
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>);
-<span class="hljs-comment">// Use a built-in analyzer for VARCHAR field `title_en`</span>
-<span class="hljs-keyword">const</span> analyzerParamsBuiltIn = {
-  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;english&quot;</span>,
-};
-
-<span class="hljs-comment">// Configure a custom analyzer for VARCHAR field `title`</span>
-<span class="hljs-keyword">const</span> analyzerParamsCustom = {
-  <span class="hljs-attr">tokenizer</span>: <span class="hljs-string">&quot;standard&quot;</span>,
-  <span class="hljs-attr">filter</span>: [
-    <span class="hljs-string">&quot;lowercase&quot;</span>,
-    {
-      <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;length&quot;</span>,
-      <span class="hljs-attr">max</span>: <span class="hljs-number">40</span>,
-    },
-    {
-      <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;stop&quot;</span>,
-      <span class="hljs-attr">stop_words</span>: [<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>],
-    },
-  ],
-};
-
-<span class="hljs-comment">// Create schema</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Create schema</span>
 <span class="hljs-keyword">const</span> schema = {
   <span class="hljs-attr">auto_id</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">fields</span>: [
@@ -495,8 +542,41 @@ client.createCollection(requestCreate);
     },
   ],
 };
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">Langkah 4: Siapkan parameter indeks dan buat koleksi</h3><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up index parameters for the vector field</span>
+index_params = client.prepare_index_params()
+index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>, index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>)
 
-<span class="hljs-comment">// Set up index params for vector field</span>
+<span class="hljs-comment"># Create the collection with the defined schema and index parameters</span>
+client.create_collection(
+    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
+    schema=schema,
+    index_params=index_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// Set up index params for vector field</span>
+List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+indexes.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build());
+
+<span class="hljs-comment">// Create collection with defined schema</span>
+<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
+        .collectionSchema(schema)
+        .indexParams(indexes)
+        .build();
+client.createCollection(requestCreate);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Set up index params for vector field</span>
 <span class="hljs-keyword">const</span> indexParams = [
   {
     <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
@@ -513,78 +593,8 @@ client.createCollection(requestCreate);
 });
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Collection created successfully!&quot;</span>);
-
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
-        &quot;autoId&quot;: true,
-        &quot;enabledDynamicField&quot;: false,
-        &quot;fields&quot;: [
-            {
-                &quot;fieldName&quot;: &quot;id&quot;,
-                &quot;dataType&quot;: &quot;Int64&quot;,
-                &quot;isPrimary&quot;: true
-            },
-            {
-                &quot;fieldName&quot;: &quot;title_en&quot;,
-                &quot;dataType&quot;: &quot;VarChar&quot;,
-                &quot;elementTypeParams&quot;: {
-                    &quot;max_length&quot;: 1000,
-                    &quot;enable_analyzer&quot;: true,
-                    &quot;enable_match&quot;: true,
-                    &quot;analyzer_params&quot;: {&quot;type&quot;: &quot;english&quot;}
-                }
-            },
-            {
-                &quot;fieldName&quot;: &quot;title&quot;,
-                &quot;dataType&quot;: &quot;VarChar&quot;,
-                &quot;elementTypeParams&quot;: {
-                    &quot;max_length&quot;: 1000,
-                    &quot;enable_analyzer&quot;: true,
-                    &quot;enable_match&quot;: true,
-                    &quot;analyzer_params&quot;: {
-                        &quot;tokenizer&quot;: &quot;standard&quot;,
-                        &quot;filter&quot;:[
-                            &quot;lowercase&quot;,
-                            {
-                                &quot;type&quot;:&quot;length&quot;,
-                                &quot;max&quot;:40
-                            },
-                            {
-                                &quot;type&quot;:&quot;stop&quot;,
-                                &quot;stop_words&quot;:[&quot;of&quot;,&quot;to&quot;]
-                            }
-                        ]
-                    }
-                }
-            },
-            {
-                &quot;fieldName&quot;: &quot;embedding&quot;,
-                &quot;dataType&quot;: &quot;FloatVector&quot;,
-                &quot;elementTypeParams&quot;: {
-                    &quot;dim&quot;:3
-                }
-            }
-        ]
-    }&#x27;</span>
-    
-<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
-        {
-            &quot;fieldName&quot;: &quot;embedding&quot;,
-            &quot;metricType&quot;: &quot;COSINE&quot;,
-            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
-        }
-    ]&#x27;</span>
-
-<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-
-curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;YOUR_COLLECTION_NAME\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
-    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
-}&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
