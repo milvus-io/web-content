@@ -249,8 +249,8 @@ import (
 )
 
 indexOptions := []milvusclient.CreateIndexOption{
-    client.NewCreateIndexOption(collectionName, "my_vector", index.NewAutoIndex(entity.COSINE)).WithIndexName("my_vector"),
-    client.NewCreateIndexOption(collectionName, "my_id", index.NewAutoIndex()).WithIndexName("my_id"),
+    milvusclient.NewCreateIndexOption(collectionName, "my_vector", index.NewAutoIndex(entity.COSINE)).WithIndexName("my_vector"),
+    milvusclient.NewCreateIndexOption(collectionName, "my_id", index.NewAutoIndex()).WithIndexName("my_id"),
 }
 ```
 
@@ -360,7 +360,7 @@ console.log(res.state)
 ```go
 import "github.com/milvus-io/milvus/client/v2/milvusclient"
 
-err := milvusclient.CreateCollection(ctx, client.NewCreateCollectionOption("customized_setup_1", schema).
+err := milvusclient.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_1", schema).
     WithIndexOptions(indexOptions...),
 )
 if err != nil {
@@ -465,7 +465,7 @@ console.log(res.state)
 ```go
 import "github.com/milvus-io/milvus/client/v2/milvusclient"
 
-err := milvusclient.CreateCollection(ctx, client.NewCreateCollectionOption("customized_setup_2", schema))
+err := milvusclient.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_2", schema))
 if err != nil {
     // handle error
 }
@@ -626,7 +626,7 @@ import (
     "github.com/milvus-io/milvus/pkg/common"
 )
 
-err := cli.CreateCollection(ctx, client.NewCreateCollectionOption("customized_setup_4", schema).WithProperty(common.MmapEnabledKey, true))
+err := cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_4", schema).WithProperty(common.MmapEnabledKey, true))
 if err != nil {
     // handle error
 }
@@ -790,7 +790,7 @@ import (
     "github.com/milvus-io/milvus/client/v2/entity"
 )
 
-err := cli.CreateCollection(ctx, client.NewCreateCollectionOption("customized_setup_6", schema).
+err := cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_6", schema).
     WithConsistencyLevel(entity.ClBounded))
 if err != nil {
     // handle error
