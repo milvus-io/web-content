@@ -82,6 +82,10 @@ title: 整合概述
 <tr><td><a href="/docs/zh-hant/llamaindex_milvus_async.md">使用 Milvus 和 LlamaIndex Async API 建立 RAG</a></td><td>協調</td><td>Milvus、LlamaIndex</td></tr>
 <tr><td><a href="/docs/zh-hant/integration_with_mindsdb.md">整合 Milvus 與 MindsDB</a></td><td>知識工程</td><td>Milvus、MindsDB</td></tr>
 <tr><td><a href="/docs/zh-hant/milvus_and_mcp.md">MCP + Milvus：連結 AI 與向量資料庫</a></td><td>代理</td><td>Milvus、MCP</td></tr>
-<tr><td><a href="/docs/zh-hant/openai_agents_milvus.md">Milvus 與 OpenAI 代理的整合：逐步指南</a></td><td>代理程式</td><td>Milvus、OpenAI</td></tr>
+<tr><td><a href="/docs/zh-hant/openai_agents_milvus.md">Milvus 與 OpenAI 代理的整合：分步指南</a></td><td>代理程式</td><td>Milvus、OpenAI</td></tr>
+<tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_feast.md">使用 Milvus 和 Feast 建立 RAG</a></td><td>資料來源</td><td>Milvus、Feast</td></tr>
+<tr><td><a href="/docs/zh-hant/build_RAG_with_milvus_and_docling.md">使用 Milvus 和 Docling 建立 RAG</a></td><td>資料來源</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/zh-hant/full_text_search_with_langchain.md">使用 LangChain 和 Milvus 進行全文檢索</a></td><td>全文檢索</td><td>Milvus、LangChain</td></tr>
+<tr><td><a href="/docs/zh-hant/llamaindex_milvus_full_text_search.md">使用 LlamaIndex 和 Milvus 進行全文檢索</a></td><td>全文檢索</td><td>Milvus、LlamaIndex</td></tr>
 </tbody>
 </table>

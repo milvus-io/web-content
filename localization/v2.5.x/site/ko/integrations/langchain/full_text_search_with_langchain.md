@@ -24,14 +24,14 @@ title: LangChain 및 Milvus에서 전체 텍스트 검색 사용하기
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">전체 텍스트 검색은</a> 텍스트 내에서 키워드를 직접 일치시켜 특정 용어나 구문이 포함된 문서를 검색하는 전통적인 방법입니다. 일반적으로 용어 빈도 및 근접성과 같은 요소에 의해 결정되는 관련성에 따라 결과의 순위를 매깁니다. 시맨틱 검색은 의도와 문맥을 이해하는 데 탁월하지만, 전체 텍스트 검색은 정확한 키워드 매칭을 위한 정밀도를 제공하므로 상호 보완적인 도구로 유용합니다. BM25 알고리즘은 전체 텍스트 검색에 널리 사용되는 순위 지정 방법으로, 특히 검색 증강 생성(RAG)에 유용합니다.</p>
-<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5부터는</a> BM25 알고리즘을 스파스 벡터로 표현하는 스파스-BM25 접근 방식을 통해 전체 텍스트 검색이 기본적으로 지원됩니다. Milvus는 원시 텍스트를 입력으로 받아 지정된 필드에 저장된 스파스 벡터로 자동 변환하므로 수동으로 스파스 임베딩을 생성할 필요가 없습니다.</p>
-<p>LangChain과 Milvus의 통합으로 이 기능도 도입되어 전체 텍스트 검색을 RAG 애플리케이션에 통합하는 프로세스가 간소화되었습니다. 전체 텍스트 검색과 밀도 벡터를 사용한 시맨틱 검색을 결합함으로써 밀도 임베딩의 시맨틱 컨텍스트와 단어 매칭의 정확한 키워드 관련성을 모두 활용하는 하이브리드 접근 방식을 달성할 수 있습니다. 이러한 통합은 검색 시스템의 정확성, 연관성 및 사용자 경험을 향상시킵니다.</p>
+<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">전체 텍스트 검색은</a> 텍스트의 특정 키워드나 구문을 일치시켜 문서를 검색하는 전통적인 방법입니다. 이는 용어 빈도 등의 요소로 계산된 관련성 점수를 기반으로 결과의 순위를 매깁니다. 시맨틱 검색은 의미와 문맥을 이해하는 데 더 효과적이지만, 전체 텍스트 검색은 정확한 키워드 매칭에 탁월하므로 시맨틱 검색을 보완하는 데 유용합니다. BM25 알고리즘은 전체 텍스트 검색에서 순위를 매기는 데 널리 사용되며 검색 증강 세대(RAG)에서 핵심적인 역할을 합니다.</p>
+<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5에는</a> BM25를 사용한 기본 전체 텍스트 검색 기능이 도입되었습니다. 이 접근 방식은 텍스트를 BM25 점수를 나타내는 스파스 벡터로 변환합니다. 사용자는 원시 텍스트를 입력하기만 하면, 수동으로 스파스 임베딩을 생성할 필요 없이 Milvus가 자동으로 스파스 벡터를 생성하고 저장합니다.</p>
+<p>LangChain과 Milvus의 통합으로 이 기능도 도입되어 전체 텍스트 검색을 RAG 애플리케이션에 통합하는 프로세스가 간소화되었습니다. 전체 텍스트 검색과 고밀도 벡터를 사용한 시맨틱 검색을 결합함으로써, 고밀도 임베딩의 시맨틱 컨텍스트와 단어 매칭의 정확한 키워드 관련성을 모두 활용하는 하이브리드 접근 방식을 달성할 수 있습니다. 이러한 통합은 검색 시스템의 정확도, 연관성 및 사용자 경험을 향상시킵니다.</p>
 <p>이 튜토리얼에서는 애플리케이션에서 전체 텍스트 검색을 구현하기 위해 LangChain과 Milvus를 사용하는 방법을 보여드립니다.</p>
 <div class="alert note">
 <ul>
-<li><p>전체 텍스트 검색은 Milvus 독립형 및 Milvus 분산형에서 사용할 수 있지만, 향후 로드맵에 포함될 예정이지만 Milvus Lite에서는 사용할 수 없습니다. 이 기능은 조만간 Zilliz Cloud(완전 관리형 Milvus)에서도 제공될 예정입니다. 자세한 내용은 <a href="mailto:support@zilliz.com">support@zilliz.com</a> 으로 문의하세요.</p></li>
-<li><p>이 튜토리얼을 진행하기 전에 <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">전체 텍스트 검색에</a> 대한 기본적인 이해와 LangChain Milvus 연동의 <a href="https://milvus.io/docs/basic_usage_langchain.md">기본 사용법을</a> 숙지하고 있어야 합니다.</p></li>
+<li>전체 텍스트 검색은 현재 Milvus 독립형, Milvus 분산형 및 Zilliz Cloud에서 사용할 수 있지만, Milvus Lite(향후 이 기능이 구현될 예정)에서는 아직 지원되지 않습니다. 자세한 내용은 support@zilliz.com 으로 문의하세요.</li>
+<li>이 튜토리얼을 진행하기 전에 <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">전체 텍스트 검색과</a> LangChain Milvus 통합의 <a href="https://milvus.io/docs/basic_usage_langchain.md">기본 사용법에</a> 대한 기본적인 이해가 있는지 확인하세요.</li>
 </ul>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -50,7 +50,7 @@ title: LangChain 및 Milvus에서 전체 텍스트 검색 사용하기
         ></path>
       </svg>
     </button></h2><p>이 노트북을 실행하기 전에 다음 종속성이 설치되어 있는지 확인하세요:</p>
-<pre><code translate="no" class="language-shell">$ pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 <span class="hljs-comment">#langchain-voyageai</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 <span class="hljs-comment">#langchain-voyageai</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colab을 사용하는 경우, 방금 설치한 종속성을 활성화하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택).</p>
@@ -58,19 +58,19 @@ title: LangChain 및 Milvus에서 전체 텍스트 검색 사용하기
 <p>OpenAI의 모델을 사용하겠습니다. <a href="https://platform.openai.com/docs/quickstart">OpenAI에서</a> 환경 변수 <code translate="no">OPENAI_API_KEY</code> 를 준비해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus 서버 <code translate="no">URI</code> (및 선택적으로 <code translate="no">TOKEN</code>)를 지정합니다. Milvus 서버를 설치하고 시작하는 방법은 이 <a href="https://milvus.io/docs/install_standalone-docker-compose.md">가이드를</a> 따르세요.</p>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>몇 가지 예제 문서를 준비합니다:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like this apple&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;fruit&quot;</span>}),
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like swimming&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;sport&quot;</span>}),
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like dogs&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like this apple&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;fruit&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like swimming&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;sport&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like dogs&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
 ]
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Initialization-with-BM25-Function" class="common-anchor-header">BM25 함수를 사용한 초기화<button data-href="#Initialization-with-BM25-Function" class="anchor-icon" translate="no">
@@ -114,7 +114,7 @@ vectorstore = Milvus.from_documents(
 </ul>
 <p>위에서 언급한 Milvus 초기화 매개변수에서는 <code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code> 도 지정합니다. <code translate="no">sparse</code> 필드는 <code translate="no">BM25BuiltInFunction</code> 에 정의된 출력 필드로 간주되므로 다른 <code translate="no">dense</code> 필드는 OpenAIEmbedding의 출력 필드에 자동으로 할당됩니다.</p>
 <p>실제로, 특히 여러 임베딩이나 함수를 결합할 때는 모호성을 피하기 위해 각 함수에 대한 입력 및 출력 필드를 명시적으로 지정하는 것이 좋습니다.</p>
-<p>다음 예시에서는 <code translate="no">BM25BuiltInFunction</code> 의 입력 및 출력 필드를 명시적으로 지정하여 내장 함수가 어떤 필드를 위한 것인지 명확히 합니다.</p>
+<p>다음 예시에서는 <code translate="no">BM25BuiltInFunction</code> 의 입력 및 출력 필드를 명시적으로 지정하여 내장 함수가 어떤 필드를 위한 것인지 명확히 했습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
 
 embedding1 = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>)
@@ -146,12 +146,12 @@ vectorstore.vector_fields
 <p>하이브리드 검색을 수행할 때는 쿼리 텍스트를 전달하고 선택적으로 topK 및 재랭커 매개변수를 설정하기만 하면 됩니다. <code translate="no">vectorstore</code> 인스턴스는 벡터 임베딩과 내장 함수를 자동으로 처리하고 마지막으로 재랭커를 사용하여 결과를 구체화합니다. 검색 프로세스의 기본 구현 세부 사항은 사용자에게 숨겨져 있습니다.</p>
 <pre><code translate="no" class="language-python">vectorstore.similarity_search(
     <span class="hljs-string">&quot;Do I like apples?&quot;</span>, k=<span class="hljs-number">1</span>
-)  # , ranker_type=<span class="hljs-string">&quot;weighted&quot;</span>, ranker_params={<span class="hljs-string">&quot;weights&quot;</span>:[<span class="hljs-number">0.3</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]})
+)  <span class="hljs-comment"># , ranker_type=&quot;weighted&quot;, ranker_params={&quot;weights&quot;:[0.3, 0.3, 0.4]})</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'category': 'fruit', 'pk': 454646931479251897}, page_content='I like this apple')]
 </code></pre>
 <p>하이브리드 검색에 대한 자세한 내용은 <a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">하이브리드 검색 소개</a> 및 이 <a href="https://milvus.io/docs/milvus_hybrid_search_retriever.md">LangChain Milvus 하이브리드 검색 튜토리얼을</a> 참조하세요.</p>
-<h3 id="BM25-search-without-embedding" class="common-anchor-header">임베딩 없이 BM25 검색</h3><p>임베딩 기반 시맨틱 검색을 사용하지 않고 BM25 함수를 사용하여 전체 텍스트 검색만 수행하려면 임베딩 파라미터를 <code translate="no">None</code> 로 설정하고, BM25 함수 인스턴스로 지정된 <code translate="no">builtin_function</code> 만 유지하면 됩니다. 벡터 필드에는 "스파스" 필드만 있습니다. 예를 들어</p>
+<h3 id="BM25-search-without-embedding" class="common-anchor-header">임베딩 없이 BM25 검색</h3><p>임베딩 기반 시맨틱 검색을 사용하지 않고 BM25 함수로만 전체 텍스트 검색을 수행하려면 임베딩 파라미터를 <code translate="no">None</code> 로 설정하고 BM25 함수 인스턴스로 지정된 <code translate="no">builtin_function</code> 만 유지하면 됩니다. 벡터 필드에는 "스파스" 필드만 있습니다. 예를 들어</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=<span class="hljs-literal">None</span>,
@@ -336,9 +336,9 @@ rag_chain = (
 <button class="copy-code-btn"></button></code></pre>
 <p>특정 질문으로 RAG 체인을 호출하고 응답을 검색합니다.</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
-res = rag_chain.<span class="hljs-title function_">invoke</span>(query)
+res = rag_chain.invoke(query)
 res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively generate and execute these programming statements.'
 </code></pre>
-<p>축하합니다! Milvus와 LangChain으로 하이브리드(밀도 벡터 + 스파스 bm25 함수) 검색 RAG 체인을 구축하셨습니다.</p>
+<p>축하합니다! Milvus와 LangChain으로 구동되는 하이브리드(밀도 벡터 + 스파스 bm25 함수) 검색 RAG 체인을 구축하셨습니다.</p>

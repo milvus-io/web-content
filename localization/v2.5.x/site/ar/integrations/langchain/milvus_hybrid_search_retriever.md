@@ -1,9 +1,9 @@
 ---
 id: milvus_hybrid_search_retriever.md
 summary: يوضح هذا الدفتر كيفية استخدام الوظائف المتعلقة بقاعدة بيانات متجهات ميلفوس.
-title: مسترد البحث الهجين ميلفوس الهجين
+title: مسترجع البحث الهجين ميلفوس الهجين
 ---
-<h1 id="Milvus-Hybrid-Search-Retriever" class="common-anchor-header">مسترد البحث الهجين ميلفوس الهجين<button data-href="#Milvus-Hybrid-Search-Retriever" class="anchor-icon" translate="no">
+<h1 id="Milvus-Hybrid-Search-Retriever" class="common-anchor-header">مسترجع البحث الهجين ميلفوس الهجين<button data-href="#Milvus-Hybrid-Search-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,22 +18,7 @@ title: مسترد البحث الهجين ميلفوس الهجين
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>يجمع البحث الهجين بين نقاط القوة في نماذج البحث المختلفة لتعزيز دقة الاسترجاع وقوته. فهو يستفيد من إمكانات كل من البحث المتجه الكثيف المتجه والبحث المتجه المتناثر، بالإضافة إلى مجموعات من استراتيجيات البحث المتجه الكثيف المتعددة، مما يضمن استرجاعًا شاملاً ودقيقًا للاستعلامات المتنوعة.</p>
+    </button></h1><p>يجمع البحث الهجين بين نقاط القوة في نماذج البحث المختلفة لتعزيز دقة الاسترجاع وقوته. فهو يستفيد من إمكانيات كل من البحث المتجه الكثيف المتجه والبحث المتجه المتناثر، بالإضافة إلى مجموعات من استراتيجيات البحث المتجه الكثيف المتعددة، مما يضمن استرجاعًا شاملاً ودقيقًا لاستعلامات متنوعة.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
@@ -63,7 +48,7 @@ title: مسترد البحث الهجين ميلفوس الهجين
         ></path>
       </svg>
     </button></h2><p>قبل تشغيل هذا الدفتر، تأكد من تثبيت التبعيات التالية:</p>
-<pre><code translate="no" class="language-shell">$ pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 pymilvus[model] <span class="hljs-comment">#langchain-voyageai</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 pymilvus[model] <span class="hljs-comment">#langchain-voyageai</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
@@ -71,53 +56,53 @@ title: مسترد البحث الهجين ميلفوس الهجين
 <p>سنستخدم النماذج من OpenAI. يجب عليك إعداد متغيرات البيئة <code translate="no">OPENAI_API_KEY</code> من <a href="https://platform.openai.com/docs/quickstart">OpenAI</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>حدد خادم Milvus <code translate="no">URI</code> (واختيارياً <code translate="no">TOKEN</code>). لمعرفة كيفية تثبيت خادم ميلفوس وبدء تشغيله باتباع هذا <a href="https://milvus.io/docs/install_standalone-docker-compose.md">الدليل</a>.</p>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>قم بإعداد بعض الأمثلة على المستندات، وهي عبارة عن ملخصات قصص خيالية مصنفة حسب الموضوع أو النوع.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Whispering Walls&#x27; by Ava Moreno, a young journalist named Sophia uncovers a decades-old conspiracy hidden within the crumbling walls of an ancient mansion, where the whispers of the past threaten to destroy her own sanity.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Mystery&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Last Refuge&#x27; by Ethan Blackwood, a group of survivors must band together to escape a post-apocalyptic wasteland, where the last remnants of humanity cling to life in a desperate bid for survival.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Post-Apocalyptic&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Memory Thief&#x27; by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Heist/Thriller&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The City of Echoes&#x27; by Julian Saint Clair, a brilliant detective must navigate a labyrinthine metropolis where time is currency, and the rich can live forever, but at a terrible cost to the poor.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Science Fiction&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Starlight Serenade&#x27; by Ruby Flynn, a shy astronomer discovers a mysterious melody emanating from a distant star, which leads her on a journey to uncover the secrets of the universe and her own heart.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Science Fiction/Romance&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Shadow Weaver&#x27; by Piper Redding, a young orphan discovers she has the ability to weave powerful illusions, but soon finds herself at the center of a deadly game of cat and mouse between rival factions vying for control of the mystical arts.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Fantasy&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Lost Expedition&#x27; by Caspian Grey, a team of explorers ventures into the heart of the Amazon rainforest in search of a lost city, but soon finds themselves hunted by a ruthless treasure hunter and the treacherous jungle itself.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Adventure&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Clockwork Kingdom&#x27; by Augusta Wynter, a brilliant inventor discovers a hidden world of clockwork machines and ancient magic, where a rebellion is brewing against the tyrannical ruler of the land.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Steampunk/Fantasy&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Phantom Pilgrim&#x27; by Rowan Welles, a charismatic smuggler is hired by a mysterious organization to transport a valuable artifact across a war-torn continent, but soon finds themselves pursued by deadly assassins and rival factions.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Adventure/Thriller&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Dreamwalker&#x27;s Journey&#x27; by Lyra Snow, a young dreamwalker discovers she has the ability to enter people&#x27;s dreams, but soon finds herself trapped in a surreal world of nightmares and illusions, where the boundaries between reality and fantasy blur.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Fantasy&quot;</span>},
     ),
@@ -157,11 +142,11 @@ vectorstore = Milvus.from_documents(
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>عند استخدام <code translate="no">BM25BuiltInFunction</code> ، يُرجى ملاحظة أن البحث في النص الكامل متاح في Milvus Standalone وMilvus Distributed، ولكن ليس في Milvus Lite، على الرغم من أنه على خارطة الطريق لإدراجه في المستقبل. سيكون متاحًا أيضًا في Zilliz Cloud (ميلفوس المدارة بالكامل) قريبًا. يرجى التواصل مع <a href="mailto:support@zilliz.com">support@zilliz.com</a> لمزيد من المعلومات.</li>
+<li>عند استخدام <code translate="no">BM25BuiltInFunction</code> ، يُرجى ملاحظة أن البحث عن النص الكامل متاح في Milvus Standalone وMilvus Distributed، ولكن ليس في Milvus Lite، على الرغم من أنه على خارطة الطريق لإدراجه في المستقبل. سيكون متاحًا أيضًا في Zilliz Cloud (ميلفوس المدارة بالكامل) قريبًا. يرجى التواصل مع <a href="mailto:support@zilliz.com">support@zilliz.com</a> لمزيد من المعلومات.</li>
 </ul>
 </div>
 <p>في الكود أعلاه، نحدد مثيلًا لـ <code translate="no">BM25BuiltInFunction</code> ونمرره إلى الكائن <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> هي فئة غلاف خفيفة الوزن لـ <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> في ميلفوس. يمكننا استخدامه مع <code translate="no">OpenAIEmbeddings</code> لتهيئة مثيل مخزن متجه البحث الهجين الكثيف + المتناثر Milvus للبحث الهجين Milvus.</p>
-<p><code translate="no">BM25BuiltInFunction</code> لا تتطلب من العميل تمرير مجموعة من المفردات أو التدريب، فكلها تتم معالجتها تلقائيًا في نهاية خادم Milvus، لذلك لا يحتاج المستخدمون إلى الاهتمام بأي مفردات أو مجموعة مفردات. بالإضافة إلى ذلك، يمكن للمستخدمين أيضًا تخصيص <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">المحلل</a> لتنفيذ معالجة النص المخصص في BM25.</p>
+<p><code translate="no">BM25BuiltInFunction</code> لا يتطلب من العميل تمرير مجموعة من المفردات أو التدريب، فكلها تتم معالجتها تلقائيًا في نهاية خادم Milvus، لذلك لا يحتاج المستخدمون إلى الاهتمام بأي مفردات أو مجموعة مفردات. بالإضافة إلى ذلك، يمكن للمستخدمين أيضًا تخصيص <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">المحلل</a> لتنفيذ معالجة النص المخصص في BM25.</p>
 <p>لمزيد من المعلومات حول <code translate="no">BM25BuiltInFunction</code> ، يُرجى الرجوع إلى <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">البحث عن النص الكامل</a> <a href="https://milvus.io/docs/full_text_search_with_langchain.md">واستخدام البحث عن النص الكامل مع LangChain وMilvus</a>.</p>
 <h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">الخيار 2: استخدام التضمين المتناثر الكثيف والمخصص في LangChain</h3><p>يمكنك أن ترث الفئة <code translate="no">BaseSparseEmbedding</code> من <code translate="no">langchain_milvus.utils.sparse</code> ، وتنفيذ الطريقتين <code translate="no">embed_query</code> و <code translate="no">embed_documents</code> لتخصيص عملية التضمين المتناثر. يسمح لك ذلك بتخصيص أي طريقة تضمين متناثرة بناءً على إحصائيات تردد المصطلح (مثل <a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>) أو الشبكات العصبية (مثل <a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>).</p>
 <p>إليك مثال على ذلك:</p>
@@ -279,8 +264,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=True,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=<span class="hljs-literal">True</span>,
 )
 
 vectorstore.vector_fields
@@ -300,8 +285,8 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=True,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=<span class="hljs-literal">True</span>,
 )
 
 query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
@@ -313,7 +298,7 @@ vectorstore.similarity_search(
 <pre><code translate="no">[Document(metadata={'pk': 454646931479252186, 'category': 'Heist/Thriller'}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
 </code></pre>
 <p>فيما يلي مثال على إعادة ترتيب RRRF:</p>
-<pre><code translate="no" class="language-python">vectorstore.<span class="hljs-title function_">similarity_search</span>(query, k=<span class="hljs-number">1</span>, ranker_type=<span class="hljs-string">&quot;rrf&quot;</span>, ranker_params={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>})
+<pre><code translate="no" class="language-python">vectorstore.similarity_search(query, k=<span class="hljs-number">1</span>, ranker_type=<span class="hljs-string">&quot;rrf&quot;</span>, ranker_params={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>})
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'category': 'Heist/Thriller', 'pk': 454646931479252186}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
 </code></pre>
@@ -364,7 +349,7 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
 </code></pre>
-<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">تحميل المستند إلى مخزن ميلفوس المتجه</h3><p>كما في المقدمة أعلاه، نقوم بتهيئة وتحميل المستندات المعدة في مخزن Milvus vector، والذي يحتوي على حقلي متجهين: <code translate="no">dense</code> لتضمين OpenAI و <code translate="no">sparse</code> لدالة BM25.</p>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">تحميل المستند إلى مخزن ميلفوس المتجه</h3><p>كما في المقدمة أعلاه، نقوم بتهيئة وتحميل المستندات المُعدّة في مخزن Milvus vector، والذي يحتوي على حقلي متجهين: <code translate="no">dense</code> لتضمين OpenAI و <code translate="no">sparse</code> لدالة BM25.</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=OpenAIEmbeddings(),
@@ -373,8 +358,8 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=True,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">بناء سلسلة RAG</h3><p>نقوم بإعداد مثيل LLM والموجه، ثم ندمجهما في سلسلة RAG باستخدام لغة تعبير LangChain Expression Language.</p>
@@ -428,7 +413,7 @@ rag_chain = (
 <button class="copy-code-btn"></button></code></pre>
 <p>قم باستدعاء سلسلة RAG مع سؤال محدد واسترجاع الإجابة</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
-res = rag_chain.<span class="hljs-title function_">invoke</span>(query)
+res = rag_chain.invoke(query)
 res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively perform these tasks.'

@@ -43,9 +43,9 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Значения по умолчанию</strong>: Поля ARRAY не поддерживают значения по умолчанию. Однако вы можете установить атрибут <code translate="no">nullable</code> на <code translate="no">True</code>, чтобы разрешить нулевые значения. Подробности см. в разделе <a href="/docs/ru/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
-<li><p><strong>Тип данных</strong>: Все элементы в поле Array должны иметь одинаковый тип данных, как указано в атрибуте <code translate="no">element_type</code>.</p></li>
-<li><p><strong>Емкость массива</strong>: Количество элементов в поле массива должно быть меньше или равно максимальной емкости, определенной при создании массива, как указано на <code translate="no">max_capacity</code>.</p></li>
-<li><p><strong>Работа со строками</strong>: Строковые значения в полях массива хранятся как есть, без семантического экранирования или преобразования. Например, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> и <code translate="no">&quot;a\&quot;b&quot;</code> хранятся в том виде, в котором они были введены, а <code translate="no">'a'b'</code> и <code translate="no">&quot;a&quot;b&quot;</code> считаются недопустимыми значениями.</p></li>
+<li><p><strong>Тип данных</strong>: Все элементы поля Array должны иметь одинаковый тип данных, указанный в атрибуте <code translate="no">element_type</code>. Если вы установили <code translate="no">element_type</code> на <code translate="no">VARCHAR</code>, вы также должны установить <code translate="no">max_length</code> для элементов массива.</p></li>
+<li><p><strong>Емкость массива</strong>: Количество элементов в поле массива должно быть меньше или равно максимальной емкости, определенной при создании массива, как указано на <code translate="no">max_capacity</code>. Значение должно быть целым числом в диапазоне от <strong>1</strong> до <strong>4096</strong>.</p></li>
+<li><p><strong>Работа со строками</strong>: Строковые значения в полях массива хранятся как есть, без семантического экранирования или преобразования. Например, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> и <code translate="no">&quot;a\&quot;b&quot;</code> хранятся как введенные, а <code translate="no">'a'b'</code> и <code translate="no">&quot;a&quot;b&quot;</code> считаются недопустимыми значениями.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Добавление поля ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,7 +70,7 @@ summary: >-
 </ol>
 <p>Вот как определить схему коллекции, включающую поля ARRAY:</p>
 <div class="alert note">
-<p>Если при определении схемы задать параметр <code translate="no">enable_dynamic_fields=True</code>, Milvus позволит вам вставлять скалярные поля, которые не были определены заранее. Однако это может увеличить сложность запросов и управления, что потенциально может повлиять на производительность. Дополнительную информацию см. в разделе <a href="/docs/ru/enable-dynamic-field.md">Динамическое поле</a>.</p>
+<p>Если при определении схемы задать параметр <code translate="no">enable_dynamic_fields=True</code>, Milvus позволит вам вставлять скалярные поля, которые не были определены заранее. Однако это может повысить сложность запросов и управления, что потенциально может повлиять на производительность. Дополнительную информацию см. в разделе <a href="/docs/ru/enable-dynamic-field.md">Динамическое поле</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#http">HTTP</a></div>

@@ -5,6 +5,12 @@ summary: >-
   架構與 Milvus 強大的向量搜尋功能，創造出美好的搜尋體驗。
 title: Milvus 與 OpenAI Agents 的整合：逐步指南
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="common-anchor-header">Milvus 與 OpenAI Agents 的整合：逐步指南<button data-href="#Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,13 +26,7 @@ title: Milvus 與 OpenAI Agents 的整合：逐步指南
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>本手冊將介紹如何透過 Function Calling 建立一個可以使用自然語言查詢 Milvus 的 Agents。我們將結合 OpenAI 的 Agents 架構與 Milvus 強大的向量搜尋功能，創造出優質的搜尋體驗。</p>
+    </button></h1><p>本手冊將介紹如何透過 Function Calling 建立一個可以使用自然語言查詢 Milvus 的 Agents。我們將結合 OpenAI 的 Agents 架構與 Milvus 強大的向量搜尋功能，創造出優質的搜尋體驗。</p>
 <h2 id="OpenAI-Agents" class="common-anchor-header">OpenAI Agents<button data-href="#OpenAI-Agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,13 +42,19 @@ title: Milvus 與 OpenAI Agents 的整合：逐步指南
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>OpenAI Agents SDK 可讓您以輕量、易用且抽象程度極低的套件，建立代理式 AI 應用程式。這是他們之前代理實驗 Swarm 的生產就緒升級版。Agents SDK 有一套非常小的基元：</p>
+    </button></h2><p>OpenAI Agents SDK 可讓您以輕量、易用且抽象程度極低的套件，建立代理式 AI 應用程式。這是他們之前代理實驗 Swarm 的生產就緒升級版。Agents SDK 有一組非常小的基元：</p>
 <ul>
 <li>代理 (Agents)，也就是配備了指令與工具的 LLM。</li>
 <li>交接 (Handoffs)，可讓代理委派其他代理執行特定任務</li>
 <li>Guardrails (護欄)，可讓代理的輸入得到驗證。</li>
 </ul>
 <p>結合 Python，這些基元功能強大，足以表達工具與代理之間的複雜關係，讓您不需經過艱辛的學習就能建立真實世界的應用程式。此外，SDK 還內建追蹤功能，讓您可視化和除錯您的代理流程，以及評估它們，甚至針對您的應用程式微調模型。</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.5.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <span></span>
+  </span>
+</p>
 <h2 id="Milvus" class="common-anchor-header">Milvus<button data-href="#Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,23 +87,23 @@ title: Milvus 與 OpenAI Agents 的整合：逐步指南
         ></path>
       </svg>
     </button></h2><p>首先，我們需要使用必要的函式庫設定環境，並初始化 asyncio 以取得 Jupyter 的相容性。</p>
-<pre><code translate="no" class="language-shell">$ pip install openai pymilvus pydantic nest_asyncio
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install openai pymilvus pydantic nest_asyncio</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面頂端的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> asyncio
 <span class="hljs-keyword">import</span> nest_asyncio
 <span class="hljs-keyword">from</span> dotenv <span class="hljs-keyword">import</span> load_dotenv
 
-<span class="hljs-title function_">load_dotenv</span>()
+load_dotenv()
 
-nest_asyncio.<span class="hljs-title function_">apply</span>()
+nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
 <p>我們將使用 OpenAI 的模型。您應該準備<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作為環境變數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connecting-to-Milvus-and-Creating-a-Schema" class="common-anchor-header">連接至 Milvus 並建立模式<button data-href="#Connecting-to-Milvus-and-Creating-a-Schema" class="anchor-icon" translate="no">
       <svg translate="no"

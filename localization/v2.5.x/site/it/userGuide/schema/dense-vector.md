@@ -74,8 +74,8 @@ summary: >-
 <p>Una volta vettorializzati, i dati possono essere archiviati in Milvus per la gestione e il recupero dei vettori. Il diagramma seguente mostra il processo di base.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/dense-vector.png" alt="dense-vector" class="doc-image" id="dense-vector" />
-   </span> <span class="img-wrapper"> <span>vettore denso</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-dense-vector.png" alt="use-dense-vector" class="doc-image" id="use-dense-vector" />
+   </span> <span class="img-wrapper"> <span>usa-vettore denso</span> </span></p>
 <div class="alert note">
 <p>Oltre ai vettori densi, Milvus supporta anche vettori sparsi e vettori binari. I vettori sparsi sono adatti a corrispondenze precise basate su termini specifici, come la ricerca di parole chiave e la corrispondenza di termini, mentre i vettori binari sono comunemente usati per gestire in modo efficiente i dati binarizzati, come la corrispondenza di modelli di immagini e alcune applicazioni di hashing. Per ulteriori informazioni, consultare <a href="/docs/it/binary-vector.md">Vettori binari</a> e <a href="/docs/it/sparse_vector.md">vettori sparsi</a>.</p>
 </div>

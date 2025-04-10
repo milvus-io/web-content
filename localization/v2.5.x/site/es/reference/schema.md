@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Un esquema define la estructura de datos de una colección. Antes de crear una colección, es necesario diseñar su esquema. Esta página le ayudará a entender el esquema de una colección y a diseñar un esquema de ejemplo por su cuenta.</p>
+    </button></h1><p>Un esquema define la estructura de datos de una colección. Antes de crear una colección, es necesario diseñar su esquema. Esta página le ayudará a comprender el esquema de una colección y a diseñar un esquema de ejemplo por su cuenta.</p>
 <h2 id="Overview" class="common-anchor-header">Visión general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,9 +42,9 @@ summary: >-
 <p>Un esquema de colección tiene una clave primaria, un máximo de cuatro campos vectoriales y varios campos escalares. El siguiente diagrama ilustra cómo asignar un artículo a una lista de campos de esquema.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="schema-explained" class="doc-image" id="schema-explained" />
-   </span> <span class="img-wrapper"> <span>esquema explicado</span> </span></p>
-<p>El diseño del modelo de datos de un sistema de búsqueda implica analizar las necesidades empresariales y abstraer la información en un modelo de datos expresado en esquemas. Por ejemplo, la búsqueda de un fragmento de texto debe "indexarse" convirtiendo la cadena literal en un vector mediante "incrustación" y permitiendo la búsqueda vectorial. Más allá de este requisito esencial, puede ser necesario almacenar otras propiedades, como la fecha de publicación y el autor. Estos metadatos permiten refinar las búsquedas semánticas mediante filtrado, devolviendo sólo los textos publicados después de una fecha concreta o por un autor determinado. También puede recuperar estos escalares con el texto principal para mostrar el resultado de la búsqueda en la aplicación. A cada uno de ellos se le debe asignar un identificador único para organizar estas piezas de texto, expresado como un número entero o una cadena. Estos elementos son esenciales para lograr una lógica de búsqueda sofisticada.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
+   </span> <span class="img-wrapper"> <span>Anatomía del diseño del esquema</span> </span></p>
+<p>El diseño del modelo de datos de un sistema de búsqueda implica analizar las necesidades empresariales y abstraer la información en un modelo de datos expresado en un esquema. Por ejemplo, la búsqueda de un fragmento de texto debe "indexarse" convirtiendo la cadena literal en un vector mediante "incrustación" y permitiendo la búsqueda vectorial. Más allá de este requisito esencial, puede ser necesario almacenar otras propiedades, como la fecha de publicación y el autor. Estos metadatos permiten refinar las búsquedas semánticas mediante filtrado, devolviendo sólo los textos publicados después de una fecha concreta o por un autor determinado. También puede recuperar estos escalares con el texto principal para mostrar el resultado de la búsqueda en la aplicación. A cada uno de ellos se le debe asignar un identificador único para organizar estas piezas de texto, expresado como un número entero o una cadena. Estos elementos son esenciales para lograr una lógica de búsqueda sofisticada.</p>
 <p>Consulte <a href="/docs/es/schema-hands-on.md">Schema Design Hands-On</a> para averiguar cómo hacer un esquema bien diseñado.</p>
 <h2 id="Create-Schema" class="common-anchor-header">Crear esquema<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"

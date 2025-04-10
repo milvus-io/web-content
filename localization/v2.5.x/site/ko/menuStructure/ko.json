@@ -1728,7 +1728,7 @@
             "children": []
           },
           {
-            "label": "12개의 실험실",
+            "label": "12개의 랩",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
@@ -1854,6 +1854,12 @@
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
+              },
+              {
+                "label": "전체 텍스트 검색",
+                "id": "llamaindex_milvus_full_text_search.md",
+                "order": 2,
+                "children": []
               }
             ]
           },
@@ -1871,9 +1877,22 @@
           },
           {
             "label": "HayStack",
-            "id": "integrate_with_haystack.md",
+            "id": "haystack",
             "order": 4,
-            "children": []
+            "children": [
+              {
+                "label": "RAG",
+                "id": "integrate_with_haystack.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "전체 텍스트 검색",
+                "id": "full_text_search_with_milvus_and_haystack.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           },
           {
             "label": "코타에몬",
@@ -2094,6 +2113,24 @@
             "id": "ETL_using_vectorETL.md",
             "order": 8,
             "children": []
+          },
+          {
+            "label": "잔치",
+            "id": "build_RAG_with_milvus_and_feast.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "미스트랄 OCR",
+            "id": "mistral_ocr_with_milvus.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "도클링",
+            "id": "build_RAG_with_milvus_and_docling.md",
+            "order": 11,
+            "children": []
           }
         ]
       },
@@ -2221,6 +2258,12 @@
         "children": []
       },
       {
+        "label": "Milvus를 사용한 텍스트-이미지 검색",
+        "id": "text_image_search.md",
+        "order": 16,
+        "children": []
+      },
+      {
         "label": "자세히 알아보기",
         "id": "explore-more",
         "order": 99,
@@ -2259,12 +2302,6 @@
             "label": "텍스트 검색 엔진",
             "id": "text_search_engine.md",
             "order": 10,
-            "children": []
-          },
-          {
-            "label": "텍스트-이미지 검색 엔진",
-            "id": "text_image_search.md",
-            "order": 11,
             "children": []
           },
           {

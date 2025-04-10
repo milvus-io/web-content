@@ -1364,7 +1364,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Seguimiento de Jaeger",
+                "label": "Rastreo de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -1854,6 +1854,12 @@
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
+              },
+              {
+                "label": "Búsqueda de texto completo",
+                "id": "llamaindex_milvus_full_text_search.md",
+                "order": 2,
+                "children": []
               }
             ]
           },
@@ -1871,9 +1877,22 @@
           },
           {
             "label": "Pajar",
-            "id": "integrate_with_haystack.md",
+            "id": "haystack",
             "order": 4,
-            "children": []
+            "children": [
+              {
+                "label": "RAG",
+                "id": "integrate_with_haystack.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Búsqueda de texto completo",
+                "id": "full_text_search_with_milvus_and_haystack.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Kotaemon",
@@ -2094,6 +2113,24 @@
             "id": "ETL_using_vectorETL.md",
             "order": 8,
             "children": []
+          },
+          {
+            "label": "Fiesta",
+            "id": "build_RAG_with_milvus_and_feast.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Mistral OCR",
+            "id": "mistral_ocr_with_milvus.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Docling",
+            "id": "build_RAG_with_milvus_and_docling.md",
+            "order": 11,
+            "children": []
           }
         ]
       },
@@ -2221,6 +2258,12 @@
         "children": []
       },
       {
+        "label": "Búsqueda de texto a imagen con Milvus",
+        "id": "text_image_search.md",
+        "order": 16,
+        "children": []
+      },
+      {
         "label": "Más información",
         "id": "explore-more",
         "order": 99,
@@ -2259,12 +2302,6 @@
             "label": "Motor de búsqueda de texto",
             "id": "text_search_engine.md",
             "order": 10,
-            "children": []
-          },
-          {
-            "label": "Buscador de texto a imagen",
-            "id": "text_image_search.md",
-            "order": 11,
             "children": []
           },
           {

@@ -7,6 +7,12 @@ summary: >-
   Milvus, um ein schönes Sucherlebnis zu schaffen.
 title: 'Milvus-Integration mit OpenAI-Agenten: Eine Schritt-für-Schritt-Anleitung'
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="common-anchor-header">Milvus-Integration mit OpenAI-Agenten: Eine Schritt-für-Schritt-Anleitung<button data-href="#Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,13 +28,7 @@ title: 'Milvus-Integration mit OpenAI-Agenten: Eine Schritt-für-Schritt-Anleitu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>Dieses Notizbuch zeigt, wie man einen Agenten erstellt, der Milvus mit natürlicher Sprache durch Funktionsaufrufe abfragen kann. Wir kombinieren das OpenAI Agents-Framework mit den leistungsstarken Vektorsuchfunktionen von Milvus, um eine schöne Sucherfahrung zu schaffen.</p>
+    </button></h1><p>Dieses Notizbuch zeigt, wie man einen Agenten erstellt, der Milvus mit natürlicher Sprache durch Funktionsaufrufe abfragen kann. Wir kombinieren das OpenAI Agents-Framework mit den leistungsstarken Vektorsuchfunktionen von Milvus, um ein schönes Sucherlebnis zu schaffen.</p>
 <h2 id="OpenAI-Agents" class="common-anchor-header">OpenAI-Agenten<button data-href="#OpenAI-Agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,6 +51,12 @@ title: 'Milvus-Integration mit OpenAI-Agenten: Eine Schritt-für-Schritt-Anleitu
 <li>Guardrails, die es ermöglichen, die Eingaben der Agenten zu validieren</li>
 </ul>
 <p>In Kombination mit Python sind diese Primitive leistungsfähig genug, um komplexe Beziehungen zwischen Tools und Agenten auszudrücken, und ermöglichen es Ihnen, reale Anwendungen ohne eine steile Lernkurve zu erstellen. Darüber hinaus verfügt das SDK über eine integrierte Ablaufverfolgung, mit der Sie Ihre Agentenflüsse visualisieren und debuggen sowie auswerten und sogar Modelle für Ihre Anwendung feinabstimmen können.</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.5.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <span></span>
+  </span>
+</p>
 <h2 id="Milvus" class="common-anchor-header">Milvus<button data-href="#Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,7 +89,7 @@ title: 'Milvus-Integration mit OpenAI-Agenten: Eine Schritt-für-Schritt-Anleitu
         ></path>
       </svg>
     </button></h2><p>Zunächst müssen wir unsere Umgebung mit den erforderlichen Bibliotheken einrichten und asyncio für die Jupyter-Kompatibilität initialisieren.</p>
-<pre><code translate="no" class="language-shell">$ pip install openai pymilvus pydantic nest_asyncio
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install openai pymilvus pydantic nest_asyncio</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Laufzeitumgebung neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Laufzeit" am oberen Rand des Bildschirms und wählen Sie "Sitzung neu starten" aus dem Dropdown-Menü).</p>
@@ -92,14 +98,14 @@ title: 'Milvus-Integration mit OpenAI-Agenten: Eine Schritt-für-Schritt-Anleitu
 <span class="hljs-keyword">import</span> nest_asyncio
 <span class="hljs-keyword">from</span> dotenv <span class="hljs-keyword">import</span> load_dotenv
 
-<span class="hljs-title function_">load_dotenv</span>()
+load_dotenv()
 
-nest_asyncio.<span class="hljs-title function_">apply</span>()
+nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
 <p>Wir werden die Modelle von OpenAI verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connecting-to-Milvus-and-Creating-a-Schema" class="common-anchor-header">Verbindung zu Milvus herstellen und ein Schema erstellen<button data-href="#Connecting-to-Milvus-and-Creating-a-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -125,7 +131,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
 <h3 id="Full-Text-Search-in-Milvus-25" class="common-anchor-header">Volltextsuche in Milvus 2.5</h3><ul>
 <li>Einheitliches System für die Vektor- und Schlagwortsuche (einheitliche APIs)</li>
 <li>Eingebauter sparse-BM25-Algorithmus (ähnlich wie Elasticsearch, aber vektorbasiert)</li>
-<li>Keine Notwendigkeit der manuellen Erzeugung von Einbettungen für die Schlagwortsuche</li>
+<li>Keine Notwendigkeit der manuellen Erzeugung von Einbettungen für die Stichwortsuche</li>
 </ul>
 <p><img translate="no" src="https://milvus.io/docs/v2.5.x/assets/full-text-search.png" width="70%" alt="img"></p>
 <h2 id="Install-Milvus-with-Docker" class="common-anchor-header">Milvus mit Docker installieren<button data-href="#Install-Milvus-with-Docker" class="anchor-icon" translate="no">

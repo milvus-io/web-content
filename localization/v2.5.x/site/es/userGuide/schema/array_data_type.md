@@ -43,9 +43,9 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Valores por defecto</strong>: Los campos ARRAY no admiten valores por defecto. Sin embargo, puede establecer el atributo <code translate="no">nullable</code> en <code translate="no">True</code> para permitir valores nulos. Para más detalles, consulte <a href="/docs/es/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
-<li><p><strong>Tipo de datos</strong>: Todos los elementos de un campo Array deben tener el mismo tipo de datos, tal y como se especifica en <code translate="no">element_type</code>.</p></li>
-<li><p><strong>Capacidad</strong> de<strong>la matriz</strong>: El número de elementos de un campo Matriz debe ser inferior o igual a la capacidad máxima definida cuando se creó la Matriz, tal y como se especifica en <code translate="no">max_capacity</code>.</p></li>
-<li><p><strong>Tratamiento de cadenas</strong>: Los valores de cadena de los campos de matriz se almacenan tal cual, sin escapes semánticos ni conversiones. Por ejemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, y <code translate="no">&quot;a\&quot;b&quot;</code> se almacenan tal y como se introducen, mientras que <code translate="no">'a'b'</code> y <code translate="no">&quot;a&quot;b&quot;</code> se consideran valores no válidos.</p></li>
+<li><p><strong>Tipo de datos</strong>: Todos los elementos de un campo Array deben tener el mismo tipo de datos, tal y como se especifica en <code translate="no">element_type</code>. Si establece <code translate="no">element_type</code> en <code translate="no">VARCHAR</code>, también debe establecer <code translate="no">max_length</code> para los elementos del array.</p></li>
+<li><p><strong>Capacidad de la matriz</strong>: El número de elementos de un campo Array debe ser menor o igual que la capacidad máxima definida al crear el Array, tal y como se especifica en <code translate="no">max_capacity</code>. El valor debe ser un número entero entre <strong>1</strong> y <strong>4096</strong>.</p></li>
+<li><p><strong>Manejo de cadenas</strong>: Los valores de cadena de los campos de matriz se almacenan tal cual, sin escapes semánticos ni conversiones. Por ejemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, y <code translate="no">&quot;a\&quot;b&quot;</code> se almacenan tal y como se introducen, mientras que <code translate="no">'a'b'</code> y <code translate="no">&quot;a&quot;b&quot;</code> se consideran valores no válidos.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Añadir un campo ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +65,7 @@ summary: >-
     </button></h2><p>Para utilizar campos ARRAY Milvus, defina el tipo de campo correspondiente al crear el esquema de la colección. Este proceso incluye:</p>
 <ol>
 <li><p>Establecer <code translate="no">datatype</code> en el tipo de datos Array soportado, <code translate="no">ARRAY</code>.</p></li>
-<li><p>Utilizar el parámetro <code translate="no">element_type</code> para especificar el tipo de datos de los elementos del array. Este puede ser cualquier tipo de datos escalar soportado por Milvus, como <code translate="no">VARCHAR</code> o <code translate="no">INT64</code>. Todos los elementos en el mismo Array deben ser del mismo tipo de datos.</p></li>
+<li><p>Utilizar el parámetro <code translate="no">element_type</code> para especificar el tipo de datos de los elementos del array. Este puede ser cualquier tipo de dato escalar soportado por Milvus, como <code translate="no">VARCHAR</code> o <code translate="no">INT64</code>. Todos los elementos en el mismo Array deben ser del mismo tipo de dato.</p></li>
 <li><p>Utilizando el parámetro <code translate="no">max_capacity</code> para definir la capacidad máxima del array, es decir, el número máximo de elementos que puede contener.</p></li>
 </ol>
 <p>A continuación se explica cómo definir un esquema de colección que incluya campos ARRAY:</p>

@@ -40,7 +40,7 @@ title: 使用 Milvus 和 LlamaIndex 的检索增强生成（RAG）
         ></path>
       </svg>
     </button></h2><h3 id="Install-dependencies" class="common-anchor-header">安装依赖项</h3><p>本页面上的代码片段需要 pymilvus 和 llamaindex 依赖项。您可以使用以下命令安装它们：</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=2.4.2
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -52,10 +52,10 @@ title: 使用 Milvus 和 LlamaIndex 的检索增强生成（RAG）
 <h3 id="Setup-OpenAI" class="common-anchor-header">设置 OpenAI</h3><p>首先让我们添加 openai api 密钥。这将允许我们访问 chatgpt。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> openai
 
-openai.<span class="hljs-property">api_key</span> = <span class="hljs-string">&quot;sk-***********&quot;</span>
+openai.api_key = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-data" class="common-anchor-header">准备数据</h3><p>您可以使用以下命令下载样本数据：</p>
-<pre><code translate="no" class="language-python">! <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/&#x27;</span>
+<pre><code translate="no" class="language-python">! mkdir -p <span class="hljs-string">&#x27;data/&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham_essay.txt&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/uber_2021.pdf&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -86,10 +86,57 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 95f25e4d-f270-4650-87ce-006d69d82033
 </code></pre>
-<h3 id="Create-an-index-across-the-data" class="common-anchor-header">创建数据索引</h3><p>现在我们有了文档，可以创建索引并插入文档。</p>
-<blockquote>
-<p>请注意，<strong>Milvus Lite</strong>需要<code translate="no">pymilvus&gt;=2.4.2</code> 。</p>
-</blockquote>
+<h3 id="Create-an-index-across-the-data" class="common-anchor-header">创建数据索引</h3><p>现在我们有了文档，可以创建索引并插入文档。对于索引，我们将使用 MilvusVectorStore。MilvusVectorStore 需要几个参数：</p>
+<h4 id="basic-args" class="common-anchor-header">基本参数</h4><ul>
+<li><code translate="no">uri (str, optional)</code>:要连接的 URI，对于 Milvus 或 Zilliz Cloud 服务，其形式为 "https://address:port"；对于本地的精简版 Milvus，其形式为 "path/to/local/milvus.db"。默认为"./milvus_llamaindex.db"。</li>
+<li><code translate="no">token (str, optional)</code>:登录令牌。不使用 rbac 时为空，使用 rbac 时很可能是 "username:password"。</li>
+<li><code translate="no">collection_name (str, optional)</code>:用于存储数据的 Collection 的名称。默认为 "llamalection"。</li>
+<li><code translate="no">overwrite (bool, optional)</code>:是否覆盖同名的现有 Collection。默认为 "假"。</li>
+</ul>
+<h4 id="scalar-fields-including-doc-id--text" class="common-anchor-header">标量字段，包括 doc id 和文本</h4><ul>
+<li><code translate="no">doc_id_field (str, optional)</code>:Collections 的 doc_id 字段名称。默认为 DEFAULT_DOC_ID_KEY。</li>
+<li><code translate="no">text_key (str, optional)</code>:在传递的 Collections 中存储什么键文本。在使用自己的 Collections 时使用。默认为 DEFAULT_TEXT_KEY。</li>
+<li><code translate="no">scalar_field_names (list, optional)</code>:要包含在 Collections Schema 中的额外标量字段的名称。</li>
+<li><code translate="no">scalar_field_types (list, optional)</code>:额外标量字段的类型。</li>
+</ul>
+<h4 id="dense-field" class="common-anchor-header">密集字段</h4><ul>
+<li><code translate="no">enable_dense (bool)</code>:布尔标志，用于启用或禁用密集嵌入。默认为 True。</li>
+<li><code translate="no">dim (int, optional)</code>:Collections 的嵌入向量维度。创建新 Collections 时必须使用，且 enable_sparse 为 False。</li>
+<li><code translate="no">embedding_field (str, optional)</code>:Collections 的密集嵌入字段名称，默认为 DEFAULT_EMBEDDING_KEY。</li>
+<li><code translate="no">index_config (dict, optional)</code>:用于构建密集嵌入索引的配置。默认为 "无"。</li>
+<li><code translate="no">search_config (dict, optional)</code>:用于搜索 Milvus 密集索引的配置。注意必须与<code translate="no">index_config</code> 指定的索引类型兼容。默认为无。</li>
+<li><code translate="no">similarity_metric (str, optional)</code>:用于高密度 Embeddings 的相似度量，目前支持 IP、COSINE 和 L2。</li>
+</ul>
+<h4 id="sparse-field" class="common-anchor-header">稀疏字段</h4><ul>
+<li><code translate="no">enable_sparse (bool)</code>:布尔标志，用于启用或禁用稀疏嵌入。默认为假。</li>
+<li><code translate="no">sparse_embedding_field (str)</code>:稀疏嵌入字段的名称，默认为 DEFAULT_SPARSE_EMBEDDING_KEY。</li>
+<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>:如果 enable_sparse 为 True，则应提供此对象将文本转换为稀疏嵌入。如果为 None，将使用默认的稀疏嵌入函数（BGEM3SparseEmbeddingFunction）。</li>
+<li><code translate="no">sparse_index_config (dict, optional)</code>:用于构建稀疏嵌入索引的配置。默认为 "无"。</li>
+</ul>
+<h4 id="hybrid-ranker" class="common-anchor-header">混合排序器</h4><ul>
+<li><p><code translate="no">hybrid_ranker (str)</code>:指定混合搜索查询中使用的排名器类型。目前只支持 ["RRFRanker", "WeightedRanker"]。默认为 "RRFRanker"。</p></li>
+<li><p><code translate="no">hybrid_ranker_params (dict, optional)</code>:混合排名器的配置参数。该字典的结构取决于所使用的特定排名器：</p>
+<ul>
+<li>对于 "RRFRanker"，它应包括<ul>
+<li>"k"（int）：互易排序融合（RRF）中使用的参数。该值用于计算 RRF 算法中的排名分数，该算法将多种排名策略合并为一个分数，以提高搜索相关性。</li>
+</ul></li>
+<li>对于 "WeightedRanker"（加权排名器），它的期望值是<ul>
+<li>"权重"（浮点数列表）：一个包含两个权重的列表：<ol>
+<li>密集嵌入组件的权重。</li>
+<li>稀疏嵌入成分的权重。 这些权重用于调整混合检索过程中嵌入的密集和稀疏成分的重要性。 默认为空字典，这意味着排名器将以其预定义的默认设置进行操作。</li>
+</ol></li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="others" class="common-anchor-header">其他</h4><ul>
+<li><code translate="no">collection_properties (dict, optional)</code>:Collections 属性，如 TTL（生存时间）和 MMAP（内存映射）。默认为 "无"。可以包括<ul>
+<li>"collection.ttl.seconds"（int）：设置此属性后，当前 Collections 中的数据将在指定时间内过期。Collection 中过期的数据将被清理，不会参与搜索或查询。</li>
+<li>"mmap.enabled"（bool）：是否在 Collections 级别启用内存映射存储。</li>
+</ul></li>
+<li><code translate="no">index_management (IndexManagement)</code>:指定要使用的索引管理策略。默认为 "create_if_not_exists"。</li>
+<li><code translate="no">batch_size (int)</code>:配置向 Milvus 插入数据时一个批次中处理的文档数量。默认为 DEFAULT_BATCH_SIZE。</li>
+<li><code translate="no">consistency_level (str, optional)</code>:对新创建的 Collections 使用哪种一致性级别。默认为 "Session"。</li>
+</ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an index over the documents</span>
 <span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
@@ -100,7 +147,7 @@ storage_context = StorageContext.from_defaults(vector_store=vector_store)
 index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><code translate="no">MilvusVectorStore</code> 的参数：</p>
+<p>对于<code translate="no">MilvusVectorStore</code> 的参数：</p>
 <ul>
 <li>将<code translate="no">uri</code> 设置为本地文件，如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</li>
 <li>如果数据规模较大，可以在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器 uri，例如<code translate="no">http://localhost:19530</code> ，作为您的<code translate="no">uri</code> 。</li>

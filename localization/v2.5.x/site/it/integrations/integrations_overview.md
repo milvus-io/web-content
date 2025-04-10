@@ -75,15 +75,19 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_cognee.md">Costruire RAG con Milvus e Cognee</a></td><td>Ingegneria della conoscenza</td><td>Milvus, Cognee</td></tr>
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_gemini.md">Costruire RAG con Milvus e Gemini</a></td><td>LLM</td><td>Milvus, Gemini</td></tr>
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_ollama.md">Costruire RAG con Milvus e Ollama</a></td><td>LLM</td><td>Milvus, Ollama</td></tr>
-<tr><td><a href="/docs/it/milvus_rag_with_dynamiq.md">Come iniziare con Dynamiq e Milvus</a></td><td>Orchestrazione</td><td>Milvus, Dynamiq</td></tr>
+<tr><td><a href="/docs/it/milvus_rag_with_dynamiq.md">Iniziare con Dynamiq e Milvus</a></td><td>Orchestrazione</td><td>Milvus, Dynamiq</td></tr>
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_deepseek.md">Costruire RAG con Milvus e DeepSeek</a></td><td>LLM</td><td>Milvus, DeepSeek</td></tr>
 <tr><td><a href="/docs/it/integrate_with_agno.md">Integrare Milvus con Agno</a></td><td>Agenti</td><td>Milvus, Agno</td></tr>
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_crawl4ai.md">Costruire RAG con Milvus e Crawl4AI</a></td><td>Fonti di dati</td><td>Milvus, Crawl4AI</td></tr>
-<tr><td><a href="/docs/it/build_RAG_with_milvus_and_firecrawl.md">Creazione di RAG con Milvus e Firecrawl</a></td><td>Fonti di dati</td><td>Milvus, Firecrawl</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_firecrawl.md">Costruire RAG con Milvus e Firecrawl</a></td><td>Fonti di dati</td><td>Milvus, Firecrawl</td></tr>
 <tr><td><a href="/docs/it/llama_stack_with_milvus.md">Costruire RAG con Llama Stack con Milvus</a></td><td>Orchestrazione</td><td>Milvus, Llama Stack</td></tr>
 <tr><td><a href="/docs/it/llamaindex_milvus_async.md">RAG con Milvus e LlamaIndex Async API</a></td><td>Ochestrazione</td><td>Milvus, LlamaIndex</td></tr>
 <tr><td><a href="/docs/it/integration_with_mindsdb.md">Integrare Milvus con MindsDB</a></td><td>Ingegneria della conoscenza</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/it/milvus_and_mcp.md">MCP + Milvus: connettere l'intelligenza artificiale con i database vettoriali</a></td><td>Agenti</td><td>Milvus, MCP</td></tr>
 <tr><td><a href="/docs/it/openai_agents_milvus.md">Integrazione di Milvus con gli agenti OpenAI: Una guida passo-passo</a></td><td>Agenti</td><td>Milvus, OpenAI</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_feast.md">Costruire RAG con Milvus e Feast</a></td><td>Fonti di dati</td><td>Milvus, Feast</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_docling.md">Creare RAG con Milvus e Docling</a></td><td>Fonti di dati</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/it/full_text_search_with_langchain.md">Utilizzare la ricerca full text con LangChain e Milvus</a></td><td>Ricerca a tutto testo</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/it/llamaindex_milvus_full_text_search.md">Utilizzo della ricerca a tutto testo con LlamaIndex e Milvus</a></td><td>Ricerca a tutto testo</td><td>Milvus, LlamaIndex</td></tr>
 </tbody>
 </table>

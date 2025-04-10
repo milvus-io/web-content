@@ -25,7 +25,7 @@ title: 集成概述
 </thead>
 <tbody>
 <tr><td><a href="/docs/zh/integrate_with_llamaindex.md">使用 Milvus 和 LlamaIndex 的 RAG</a></td><td>RAG</td><td>Milvus 和 LLamaIndex</td></tr>
-<tr><td><a href="/docs/zh/integrate_with_langchain.md">RAG 与 Milvus 和 LangChain</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/zh/integrate_with_langchain.md">使用 Milvus 和 LangChain 的 RAG</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/zh/milvus_hybrid_search_retriever.md">Milvus 混合搜索检索器在 LangChain 中的应用</a></td><td>混合搜索</td><td>Milvus、LangChain</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_openai.md">使用 Milvus 和 OpenAI 的语义搜索</a></td><td>语义搜索</td><td>Milvus、OpenAI</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_cohere.md">使用 Milvus 和 Cohere 进行问题解答</a></td><td>语义搜索</td><td>Milvus、Cohere</td></tr>
@@ -83,5 +83,9 @@ title: 集成概述
 <tr><td><a href="/docs/zh/integration_with_mindsdb.md">Milvus 与 MindsDB 集成</a></td><td>知识工程</td><td>Milvus、MindsDB</td></tr>
 <tr><td><a href="/docs/zh/milvus_and_mcp.md">MCP + Milvus：连接人工智能与向量数据库</a></td><td>Agents</td><td>Milvus、MCP</td></tr>
 <tr><td><a href="/docs/zh/openai_agents_milvus.md">Milvus 与 OpenAI Agents 的集成：分步指南</a></td><td>Agents</td><td>Milvus、OpenAI</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_feast.md">使用 Milvus 和 Feast 构建 RAG</a></td><td>数据源</td><td>Milvus、Feast</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_docling.md">使用 Milvus 和 Docling 构建 RAG</a></td><td>数据源</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/zh/full_text_search_with_langchain.md">使用 LangChain 和 Milvus 进行全文搜索</a></td><td>全文搜索</td><td>Milvus、LangChain</td></tr>
+<tr><td><a href="/docs/zh/llamaindex_milvus_full_text_search.md">使用 LlamaIndex 和 Milvus 进行全文搜索</a></td><td>全文搜索</td><td>Milvus, LlamaIndex</td></tr>
 </tbody>
 </table>

@@ -83,5 +83,9 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/integration_with_mindsdb.md">Milvus와 MindsDB 통합</a></td><td>지식 엔지니어링</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/ko/milvus_and_mcp.md">MCP + Milvus: AI와 벡터 데이터베이스의 연결</a></td><td>에이전트</td><td>Milvus, MCP</td></tr>
 <tr><td><a href="/docs/ko/openai_agents_milvus.md">Milvus와 OpenAI 에이전트 통합: 단계별 가이드</a></td><td>에이전트</td><td>Milvus, OpenAI</td></tr>
+<tr><td><a href="/docs/ko/build_RAG_with_milvus_and_feast.md">Milvus와 Feast로 RAG 구축하기</a></td><td>데이터 소스</td><td>밀버스, 피스트</td></tr>
+<tr><td><a href="/docs/ko/build_RAG_with_milvus_and_docling.md">밀버스와 도클링으로 RAG 구축하기</a></td><td>데이터 소스</td><td>밀버스, 도클링</td></tr>
+<tr><td><a href="/docs/ko/full_text_search_with_langchain.md">LangChain과 Milvus로 전체 텍스트 검색 사용하기</a></td><td>전체 텍스트 검색</td><td>밀버스, LangChain</td></tr>
+<tr><td><a href="/docs/ko/llamaindex_milvus_full_text_search.md">라마인덱스와 밀버스로 전체 텍스트 검색 사용하기</a></td><td>전체 텍스트 검색</td><td>밀버스, 라마인덱스</td></tr>
 </tbody>
 </table>

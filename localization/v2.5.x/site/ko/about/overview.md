@@ -6,7 +6,7 @@ summary: >-
   Milvus는 노트북부터 대규모 분산 시스템에 이르기까지 다양한 환경에서 효율적으로 실행되는 고성능, 확장성 높은 벡터 데이터베이스입니다.
   오픈 소스 소프트웨어와 클라우드 서비스로 모두 제공됩니다.
 ---
-<h1 id="What-is-Milvus" class="common-anchor-header">Milvus란 무엇인가요?<button data-href="#What-is-Milvus" class="anchor-icon" translate="no">
+<h1 id="What-is-Milvus" class="common-anchor-header">밀부스란 무엇인가요?<button data-href="#What-is-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus는 노트북부터 대규모 분산 시스템에 이르기까지 다양한 환경에서 효율적으로 실행되는 고성능, 확장성 높은 벡터 데이터베이스입니다. 오픈 소스 소프트웨어와 클라우드 서비스로 모두 제공됩니다.</p>
-<p>Milvus는 Apache 2.0 라이선스에 따라 배포되는 LF AI &amp; Data Foundation 산하의 오픈 소스 프로젝트입니다. 대부분의 기여자는 대규모 시스템 구축과 하드웨어 인식 코드 최적화를 전문으로 하는 고성능 컴퓨팅(HPC) 커뮤니티의 전문가들입니다. 핵심 기여자로는 Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba, Microsoft의 전문가들이 포함됩니다.</p>
+    </button></h1><p><span>밀부스</span> (<span> <span style="display: inline-block; vertical-align: middle;">
+<audio id="milvus-audio" style="display: none;">
+<source src="https://en-audio.howtopronounce.com/15783806805e142d8844912.mp3" type="audio/mp3" />
+</audio>
+<span style="
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('https://milvus.io/docs/v2.5.x/assets/hearing.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    margin-left: 4px;
+  " onclick="document.getElementById('milvus-audio').play()"></span>
+</span> )는 빠른 비행 속도, 예리한 시력, 놀라운 적응력으로 유명한 매목 매과 밀부스속에 속하는 맹금류입니다.</span> </p>
+<style>
+  audio::-webkit-media-controls { display: none !important; }</style>
+<p>질리즈는 노트북부터 대규모 분산 시스템에 이르기까지 다양한 환경에서 효율적으로 실행되는 확장성이 뛰어난 오픈소스 고성능 벡터 데이터베이스를 위해 밀버스라는 이름을 채택했습니다. 오픈 소스 소프트웨어와 클라우드 서비스로 모두 제공됩니다.</p>
+<p>Zilliz가 개발하여 곧 Linux 재단 산하 LF AI &amp; Data Foundation에 기부한 Milvus는 세계 최고의 오픈 소스 벡터 데이터베이스 프로젝트 중 하나가 되었습니다. Apache 2.0 라이선스에 따라 배포되며, 대부분의 기여자는 대규모 시스템 구축과 하드웨어 인식 코드 최적화를 전문으로 하는 고성능 컴퓨팅(HPC) 커뮤니티의 전문가들입니다. 핵심 기여자로는 Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba, Microsoft의 전문가들이 포함됩니다.</p>
+<p>흥미롭게도 모든 Zilliz 오픈소스 프로젝트의 이름은 자유, 선견지명, 기술의 민첩한 진화를 상징하는 새의 이름을 따서 명명합니다.</p>
 <h2 id="Unstructured-Data-Embeddings-and-Milvus" class="common-anchor-header">비정형 데이터, 임베딩, 밀버스<button data-href="#Unstructured-Data-Embeddings-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

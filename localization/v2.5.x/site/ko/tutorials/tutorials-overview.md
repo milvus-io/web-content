@@ -35,6 +35,9 @@ title: 튜토리얼 개요
 <tr><td><a href="/docs/ko/contextual_retrieval_with_milvus.md">Milvus를 사용한 문맥 검색</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/hdbscan_clustering_with_milvus.md">Milvus를 사용한 HDBSCAN 클러스터링</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/use_ColPali_with_milvus.md">Milvus로 다중 모달 검색에 ColPali 사용</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/quickstart_with_attu.md">Attu로 빠른 시작</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/use-async-milvus-client-with-asyncio.md">asyncio와 함께 AsyncMilvusClient 사용</a></td><td>AsyncIO</td><td>AsyncIO, 벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/text_image_search.md">Milvus를 사용한 텍스트-이미지 검색</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/vector_visualization.md">벡터 시각화</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/movie_recommendation_with_milvus.md">Milvus를 사용한 영화 추천</a></td><td>추천 시스템</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/funnel_search_with_matryoshka.md">마트료시카 임베딩을 사용한 퍼널 검색</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
@@ -44,9 +47,6 @@ title: 튜토리얼 개요
 <tr><td><a href="/docs/ko/audio_similarity_search.md">오디오 유사도 검색</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/dna_sequence_classification.md">DNA 분류</a></td><td>분류</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/text_search_engine.md">텍스트 검색 엔진</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/text_image_search.md">텍스트로 이미지 검색</a></td><td>시맨틱 검색</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/image_deduplication_system.md">이미지 중복 제거</a></td><td>중복 제거</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/quickstart_with_attu.md">Attu로 빠르게 시작하기</a></td><td>퀵스타트</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/use-async-milvus-client-with-asyncio.md">asyncio와 함께 AsyncMilvusClient 사용</a></td><td>AsyncIO</td><td>AsyncIO, 벡터 검색</td></tr>
 </tbody>
 </table>

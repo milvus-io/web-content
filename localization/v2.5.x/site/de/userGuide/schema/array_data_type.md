@@ -43,9 +43,9 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Standardwerte</strong>: ARRAY-Felder unterstützen keine Standardwerte. Sie können jedoch das Attribut <code translate="no">nullable</code> auf <code translate="no">True</code> setzen, um Nullwerte zuzulassen. Einzelheiten finden Sie unter <a href="/docs/de/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
-<li><p><strong>Datentyp</strong>: Alle Elemente in einem Array-Feld müssen denselben Datentyp haben, wie in <code translate="no">element_type</code> angegeben.</p></li>
-<li><p><strong>Array-Kapazität</strong>: Die Anzahl der Elemente in einem Array-Feld muss kleiner oder gleich der maximalen Kapazität sein, die bei der Erstellung des Arrays festgelegt wurde, wie unter <code translate="no">max_capacity</code> angegeben.</p></li>
-<li><p><strong>String-Behandlung</strong>: String-Werte in Array-Feldern werden so gespeichert, wie sie sind, ohne semantisches Escaping oder Konvertierung. Zum Beispiel werden <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> und <code translate="no">&quot;a\&quot;b&quot;</code> wie eingegeben gespeichert, während <code translate="no">'a'b'</code> und <code translate="no">&quot;a&quot;b&quot;</code> als ungültige Werte betrachtet werden.</p></li>
+<li><p><strong>Datentyp</strong>: Alle Elemente in einem Array-Feld müssen denselben Datentyp haben, der durch <code translate="no">element_type</code> festgelegt ist. Wenn Sie <code translate="no">element_type</code> auf <code translate="no">VARCHAR</code> setzen, sollten Sie auch <code translate="no">max_length</code> für die Array-Elemente festlegen.</p></li>
+<li><p><strong>Array-Kapazität</strong>: Die Anzahl der Elemente in einem Array-Feld muss kleiner oder gleich der maximalen Kapazität sein, die bei der Erstellung des Arrays festgelegt wurde, wie in <code translate="no">max_capacity</code> angegeben. Der Wert sollte eine ganze Zahl im Bereich von <strong>1</strong> bis <strong>4096</strong> sein.</p></li>
+<li><p><strong>Behandlung von Zeichenketten</strong>: String-Werte in Array-Feldern werden so gespeichert, wie sie sind, ohne semantisches Escaping oder Konvertierung. Zum Beispiel werden <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> und <code translate="no">&quot;a\&quot;b&quot;</code> wie eingegeben gespeichert, während <code translate="no">'a'b'</code> und <code translate="no">&quot;a&quot;b&quot;</code> als ungültige Werte betrachtet werden.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">ARRAY-Feld hinzufügen<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -225,7 +225,7 @@ export schema=&quot;{
         ></path>
       </svg>
     </button></h2><p>Die Indizierung trägt zur Verbesserung der Such- und Abfrageleistung bei. In Milvus ist die Indexierung für Vektorfelder obligatorisch, für skalare Felder jedoch optional.</p>
-<p>Das folgende Beispiel erstellt Indizes für das Vektorfeld <code translate="no">embedding</code> und das ARRAY-Feld <code translate="no">tags</code>, die beide den Indextyp <code translate="no">AUTOINDEX</code> verwenden. Bei diesem Typ wählt Milvus automatisch den am besten geeigneten Index auf der Grundlage des Datentyps aus. Sie können auch den Indextyp und die Parameter für jedes Feld anpassen. Einzelheiten finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
+<p>Das folgende Beispiel erstellt Indizes für das Vektorfeld <code translate="no">embedding</code> und das ARRAY-Feld <code translate="no">tags</code>, die beide den Indextyp <code translate="no">AUTOINDEX</code> verwenden. Bei diesem Typ wählt Milvus automatisch den am besten geeigneten Index auf der Grundlage des Datentyps aus. Sie können auch den Indextyp und die Parameter für jedes Feld anpassen. Details finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>
@@ -606,7 +606,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Zusätzlich zur grundlegenden skalaren Feldfilterung können Sie die Suche nach Vektorähnlichkeit mit skalaren Feldfiltern kombinieren. Der folgende Code zeigt zum Beispiel, wie man einen Skalarfeldfilter zu einer Vektorsuche hinzufügt:</p>
+    </button></h2><p>Zusätzlich zur grundlegenden skalaren Feldfilterung können Sie die Vektorsuche mit skalaren Feldfiltern kombinieren. Der folgende Code zeigt zum Beispiel, wie man einen Skalarfeldfilter zu einer Vektorsuche hinzufügt:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>
@@ -673,4 +673,4 @@ System.out.println(resp.getSearchResults());
 
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Darüber hinaus unterstützt Milvus erweiterte Array-Filter-Operatoren wie <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> und <code translate="no">ARRAY_LENGTH</code>, um die Abfragemöglichkeiten weiter zu verbessern. Weitere Details finden Sie unter <a href="/docs/de/array-operators.md">ARRAY-Operatoren</a>.</p>
+<p>Darüber hinaus unterstützt Milvus erweiterte Array-Filteroperatoren wie <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> und <code translate="no">ARRAY_LENGTH</code>, um die Abfragemöglichkeiten weiter zu verbessern. Weitere Details finden Sie unter <a href="/docs/de/array-operators.md">ARRAY-Operatoren</a>.</p>

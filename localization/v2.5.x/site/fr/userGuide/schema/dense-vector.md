@@ -75,8 +75,8 @@ summary: >-
 <p>Une fois les données vectorisées, elles peuvent être stockées dans Milvus à des fins de gestion et d'extraction de vecteurs. Le diagramme ci-dessous illustre le processus de base.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/dense-vector.png" alt="dense-vector" class="doc-image" id="dense-vector" />
-   </span> <span class="img-wrapper"> <span>vecteur dense</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-dense-vector.png" alt="use-dense-vector" class="doc-image" id="use-dense-vector" />
+   </span> <span class="img-wrapper"> <span>utiliser-vecteur-dense</span> </span></p>
 <div class="alert note">
 <p>Outre les vecteurs denses, Milvus prend également en charge les vecteurs épars et les vecteurs binaires. Les vecteurs épars conviennent aux correspondances précises basées sur des termes spécifiques, telles que la recherche par mot-clé et la correspondance de termes, tandis que les vecteurs binaires sont couramment utilisés pour traiter efficacement les données binarisées, telles que la correspondance de motifs d'images et certaines applications de hachage. Pour plus d'informations, reportez-vous aux sections <a href="/docs/fr/binary-vector.md">Vecteur binaire</a> et <a href="/docs/fr/sparse_vector.md">Vecteur clairsemé</a>.</p>
 </div>

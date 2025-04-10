@@ -21,9 +21,26 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 是一個高效能、高度可擴充的向量資料庫，可在從筆記型電腦到大型分散式系統等各種環境中有效率地執行。它同時以開源軟體和雲端服務的形式提供。</p>
-<p>Milvus 是 LF AI &amp; Data Foundation 的開源專案，以 Apache 2.0 授權釋出。大多數的貢獻者都是來自高效能運算 (HPC) 社群的專家，專精於建立大型系統和優化硬體感知程式碼。核心貢獻者包括來自 Zilliz、ARM、NVIDIA、AMD、Intel、Meta、IBM、Salesforce、阿里巴巴和微軟的專業人士。</p>
-<h2 id="Unstructured-Data-Embeddings-and-Milvus" class="common-anchor-header">非結構化資料、嵌入式與 Milvus<button data-href="#Unstructured-Data-Embeddings-and-Milvus" class="anchor-icon" translate="no">
+    </button></h1><p><span>Milvus<span style="display: inline-block; vertical-align: middle;">
+<audio id="milvus-audio" style="display: none;">
+<source src="https://en-audio.howtopronounce.com/15783806805e142d8844912.mp3" type="audio/mp3" />
+</audio>
+<span style="
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('https://milvus.io/docs/v2.5.x/assets/hearing.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    margin-left: 4px;
+  " onclick="document.getElementById('milvus-audio').play()"></span>
+</span></span>是鷹科(Accipaitridae)Milvus屬的猛禽，以飛行速度快、視力敏銳、適應力強而聞名。</p>
+<style>
+  audio::-webkit-media-controls { display: none !important; }</style>
+<p>Zilliz 採用 Milvus 作為其開放原始碼的高效能、高擴充性向量資料庫的名稱，可在從筆記型電腦到大型分散式系統等各種環境中有效率地執行。它同時以開源軟體和雲端服務的形式提供。</p>
+<p>Milvus 由 Zilliz 開發，並很快捐贈給 Linux 基金會下的 LF AI &amp; Data 基金會，目前已成為全球領先的開源向量資料庫專案之一。它以 Apache 2.0 授權釋出，大部分的貢獻者都是來自高效能運算 (HPC) 社群的專家，專精於建立大型系統和優化硬體感知程式碼。核心貢獻者包括來自 Zilliz、ARM、NVIDIA、AMD、Intel、Meta、IBM、Salesforce、阿里巴巴和微軟的專業人士。</p>
+<p>有趣的是，Zilliz 的每個開放原始碼專案都以鳥的名字命名，這個命名方式象徵著自由、前瞻性以及技術的敏捷演進。</p>
+<h2 id="Unstructured-Data-Embeddings-and-Milvus" class="common-anchor-header">非結構化資料、嵌入與 Milvus<button data-href="#Unstructured-Data-Embeddings-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,7 +55,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>非結構化資料，例如文字、圖片和音訊，格式各異，並帶有豐富的基本語意，因此分析起來極具挑戰性。為了管理這種複雜性，我們使用 embeddings 將非結構化資料轉換成可捕捉其基本特徵的數值向量。這些向量隨後會儲存在向量資料庫中，以實現快速、可擴展的搜尋和分析。</p>
+    </button></h2><p>非結構化資料，例如文字、圖片和音訊，格式各異，並帶有豐富的基本語意，因此分析起來相當具有挑戰性。為了管理這種複雜性，我們使用 embeddings 將非結構化資料轉換成可捕捉其基本特徵的數值向量。這些向量隨後會儲存在向量資料庫中，以實現快速、可擴展的搜尋和分析。</p>
 <p>Milvus 提供強大的資料建模功能，讓您能夠將非結構化資料或多模式資料組織成結構化的集合。它支援各種不同屬性建模的資料類型，包括常見的數值和字元類型、各種向量類型、陣列、集合和 JSON，讓您省去維護多個資料庫系統的麻煩。</p>
 <p>
   
@@ -91,7 +108,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>Milvus 高度解耦的系統架構</span> </span></p>
-<p>Milvus 本身是完全無狀態的，因此可借助 Kubernetes 或公有雲輕鬆擴展。此外，Milvus 各個元件都有很好的解耦功能，其中最重要的三個任務 - 搜尋、資料插入和索引/壓縮 - 都被設計成容易並行化的流程，並將複雜的邏輯分離出來。這可確保相對應的查詢節點、資料節點和索引節點都能獨立擴充，以最佳化效能和成本效益。</p>
+<p>Milvus 本身是完全無狀態的，因此可借助 Kubernetes 或公有雲輕鬆擴展。此外，Milvus 各個元件都有很好的解耦功能，其中最重要的三項任務 - 搜尋、資料插入和索引/壓縮 - 都被設計成容易並行化的流程，並將複雜的邏輯分離出來。這可確保相對應的查詢節點、資料節點和索引節點都能獨立擴充，以最佳化效能和成本效益。</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Milvus 支援的搜尋類型<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,7 +171,7 @@ summary: >-
 <li><p>搜尋演算法 Milvus 支援一組可調整的索引和搜尋演算法。如需詳細資訊，請參閱「<a href="/docs/zh-hant/index.md">記憶體內索引</a>」、<a href="/docs/zh-hant/disk_index.md">「磁碟上索引</a>」和「<a href="/docs/zh-hant/gpu_index.md">GPU 索引</a>」。</p></li>
 <li><p>分區和分區鍵值 分區是 Milvus 資料集中的子分區。您可以選擇標量欄位作為分割鍵，以獲得更好的搜尋效能。如需詳細資訊，請參閱<a href="/docs/zh-hant/manage-partitions.md">管理分割區和</a> <a href="/docs/zh-hant/use-partition-key.md">使用分割區金鑰</a>。</p></li>
 <li><p>可調整的一致性模型 一致性可確保每個 Milvus 節點或副本在特定時間寫入或讀取資料時，擁有相同的資料視圖。在 Milvus 中執行 ANN 搜尋時，您可以輕鬆調整一致性層級。如需詳細資訊，請參閱<a href="/docs/zh-hant/consistency.md">一致性</a>。</p></li>
-<li><p>高通量資料匯入 若要匯入大量資料到 Milvus，而不是一個接一個地插入，請考慮使用我們的高通量資料匯入工具。詳情請參閱<a href="/docs/zh-hant/prepare-source-data.md">準備來源資料</a>和<a href="/docs/zh-hant/import-data.md">匯入資料</a>。</p></li>
+<li><p>高通量資料匯入 要匯入大量資料到 Milvus，而不是一個接一個地插入，請考慮使用我們的高通量資料匯入工具。詳情請參閱<a href="/docs/zh-hant/prepare-source-data.md">準備來源資料</a>和<a href="/docs/zh-hant/import-data.md">匯入資料</a>。</p></li>
 <li><p>多租用支援 Milvus 實現了許多面向多租用場景的功能，包括分區鑰匙、集群鑰匙等。詳情請參閱<a href="/docs/zh-hant/multi_tenancy.md">多租戶策略</a>。</p></li>
 </ul>
 <h3 id="Security-and-Authorization" class="common-anchor-header">安全性與授權</h3><ul>

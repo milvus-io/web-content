@@ -37,12 +37,12 @@ summary: >-
       </svg>
     </button></h2><p>Zilliz Cloudでは、コレクションスキーマは、Zilliz Cloudがコレクション内のデータをどのように整理するかを定義するリレーショナルデータベースのテーブルを組み立てます。</p>
 <p>よく設計されたスキーマは、データモデルを抽象化し、検索によってビジネス目標を達成できるかどうかを決定するため、不可欠です。さらに、コレクションに挿入されるすべてのデータ行はスキーマに従わなければならないため、データの一貫性と長期的な品質の維持に役立ちます。技術的な観点からは、よく定義されたスキーマは、よく整理されたカラム・データ・ストレージとすっきりしたインデックス構造につながり、検索パフォーマンスを向上させます。</p>
-<p>コレクション・スキーマには、プライマリ・キー、最大4つのベクトル・フィールド、およびいくつかのスカラー・フィールドがあります。次の図は、アーティクルをスキーマフィールドのリストにマッピングする方法を示しています。</p>
+<p>コレクション・スキーマには、プライマリ・キー、最大4つのベクトル・フィールド、およびいくつかのスカラー・フィールドがあります。以下の図は、アーティクルをスキーマフィールドのリストにマッピングする方法を示している。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="schema-explained" class="doc-image" id="schema-explained" />
-   </span> <span class="img-wrapper"> <span>スキーマの説明</span> </span></p>
-<p>検索システムのデータモデル設計には、ビジネスニーズを分析し、情報をスキーマで表現されたデータモデルに抽象化することが含まれます。例えば、テキストの一部を検索するには、「埋め込み」によってリテラル文字列をベクトルに変換し、ベクトル検索を可能にすることによって「インデックス化」されなければならない。この必須要件以外にも、出版物のタイムスタンプや著者などのプロパティを格納することが必要な場合がある。このメタデータにより、フィルタリングによってセマンティック検索を絞り込むことができ、特定の日付以降に出版されたテキストや、特定の著者によるテキストだけを返すことができる。アプリケーションで検索結果をレンダリングするために、メインテキストとともにこれらのスカラーを取得することもできます。これらのテキストの断片を整理するために、それぞれに整数または文字列で表される一意の識別子を割り当てる必要があります。これらの要素は洗練された検索ロジックを実現するために不可欠です。</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
+   </span> <span class="img-wrapper"> <span>スキーマ設計の解剖</span> </span></p>
+<p>検索システムのデータモデル設計には、ビジネスニーズを分析し、情報をスキーマで表現されたデータモデルに抽象化することが含まれます。例えば、テキストの一部を検索するには、リテラル文字列を「埋め込み」によってベクトルに変換し、ベクトル検索を可能にすることで「インデックス化」しなければならない。この必須要件以外にも、出版物のタイムスタンプや著者などのプロパティを格納することが必要な場合がある。このメタデータにより、フィルタリングによってセマンティック検索を絞り込むことができ、特定の日付以降に出版されたテキストや、特定の著者によるテキストだけを返すことができる。アプリケーションで検索結果をレンダリングするために、メインテキストと一緒にこれらのスカラーを取得することもできます。これらのテキスト片を整理するために、それぞれに整数または文字列で表される一意の識別子を割り当てる必要があります。これらの要素は洗練された検索ロジックを実現するために不可欠です。</p>
 <p><a href="/docs/ja/schema-hands-on.md">スキーマ設計ハンズオンを</a>参照して、よく設計されたスキーマの作り方を把握してください。</p>
 <h2 id="Create-Schema" class="common-anchor-header">スキーマの作成<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -154,7 +154,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_i
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>フィールドを追加するとき、そのフィールドの<code translate="no">is_primary</code> プロパティを<code translate="no">True</code> に設定することで、フィールドを明示的にプライマリ・フィールドとして明確にすることができる。プライマリ・フィールドはデフォルトで<strong>Int64</strong>値を受け入れる。この場合、プライマリ・フィールドの値は<code translate="no">12345</code> と同様の整数でなければなりません。プライマリ・フィールドに<strong>VarChar</strong>値を使用する場合は、<code translate="no">my_entity_1234</code> と同様の文字列でなければなりません。</p>
+<p>フィールドを追加する際、<code translate="no">is_primary</code> プロパティを<code translate="no">True</code> に設定することで、フィールドをプライマリ・フィールドとして明示的に明示することができる。プライマリ・フィールドはデフォルトで<strong>Int64</strong>値を受け入れる。この場合、プライマリ・フィールドの値は<code translate="no">12345</code> と同様の整数でなければなりません。プライマリ・フィールドに<strong>VarChar</strong>値を使用する場合は、<code translate="no">my_entity_1234</code> と同様の文字列でなければなりません。</p>
 <p>また、<code translate="no">autoId</code> プロパティを<code translate="no">True</code> に設定すると、データ挿入時に Zilliz Cloud が自動的にプライマリフィールドの値を割り当てるようになります。</p>
 <p>詳しくは、<a href="/docs/ja/primary-field.md">プライマリフィールドとAutoIdを</a>参照してください。</p>
 <h2 id="Add-Vector-Fields" class="common-anchor-header">ベクターフィールドの追加<button data-href="#Add-Vector-Fields" class="anchor-icon" translate="no">
@@ -229,7 +229,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
 <li><p><code translate="no">BINARY_VECTOR</code></p>
 <p>このタイプのベクトル・フィールドは、0と1のリストを保持する。画像処理や情報検索のシナリオでデータを表現するためのコンパクトな特徴として機能する。</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
-<p>このタイプのベクトル・フィールドは、非ゼロ数のリストとそのシーケンス番号を保持し、スパースなベクトル埋め込みを表現する。</p></li>
+<p>この型のベクトル・フィールドは、非ゼロ数のリストとそのシーケンス番号を保持し、スパースなベクトル埋め込みを表現する。</p></li>
 </ul>
 <h2 id="Add-Scalar-Fields" class="common-anchor-header">スカラーフィールドの追加<button data-href="#Add-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -35,6 +35,9 @@ title: Visão geral dos tutoriais
 <tr><td><a href="/docs/pt/contextual_retrieval_with_milvus.md">Recuperação contextual com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/hdbscan_clustering_with_milvus.md">Agrupamento HDBSCAN com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/use_ColPali_with_milvus.md">Utilizar ColPali para recuperação multimodal com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/quickstart_with_attu.md">Início rápido com Attu</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/use-async-milvus-client-with-asyncio.md">Utilizar AsyncMilvusClient com asyncio</a></td><td>AsyncIO</td><td>AsyncIO, pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/text_image_search.md">Pesquisa de texto para imagem com Milvus</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/vector_visualization.md">Visualização vetorial</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/movie_recommendation_with_milvus.md">Recomendação de filmes com Milvus</a></td><td>Sistema de recomendação</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/funnel_search_with_matryoshka.md">Pesquisa de funil com Matryoshka Embeddings</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
@@ -44,9 +47,6 @@ title: Visão geral dos tutoriais
 <tr><td><a href="/docs/pt/audio_similarity_search.md">Pesquisa de similaridade de áudio</a></td><td>Pesquisa Semântica</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/dna_sequence_classification.md">Classificação de ADN</a></td><td>Classificação</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/text_search_engine.md">Motor de pesquisa de texto</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/text_image_search.md">Pesquisa de imagem por texto</a></td><td>Pesquisa Semântica</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/image_deduplication_system.md">Deduplicação de imagens</a></td><td>Deduplicação</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/quickstart_with_attu.md">Início rápido com o Attu</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/use-async-milvus-client-with-asyncio.md">Utilizar AsyncMilvusClient com asyncio</a></td><td>AsyncIO</td><td>AsyncIO, pesquisa vetorial</td></tr>
 </tbody>
 </table>

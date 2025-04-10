@@ -85,5 +85,9 @@ title: Обзор интеграций
 <tr><td><a href="/docs/ru/integration_with_mindsdb.md">Интеграция Milvus с MindsDB</a></td><td>Инженерия знаний</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/ru/milvus_and_mcp.md">MCP + Milvus: соединение ИИ с векторными базами данных</a></td><td>Агенты</td><td>Milvus, MCP</td></tr>
 <tr><td><a href="/docs/ru/openai_agents_milvus.md">Интеграция Milvus с агентами OpenAI: Пошаговое руководство</a></td><td>Агенты</td><td>Milvus, OpenAI</td></tr>
+<tr><td><a href="/docs/ru/build_RAG_with_milvus_and_feast.md">Построение RAG с помощью Milvus и Feast</a></td><td>Источники данных</td><td>Milvus, Feast</td></tr>
+<tr><td><a href="/docs/ru/build_RAG_with_milvus_and_docling.md">Постройте RAG с помощью Milvus и Docling</a></td><td>Источники данных</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/ru/full_text_search_with_langchain.md">Использование полнотекстового поиска с помощью LangChain и Milvus</a></td><td>Полнотекстовый поиск</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/ru/llamaindex_milvus_full_text_search.md">Использование полнотекстового поиска с помощью LlamaIndex и Milvus</a></td><td>Полнотекстовый поиск</td><td>Milvus, LlamaIndex</td></tr>
 </tbody>
 </table>

@@ -23,9 +23,26 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus adalah basis data vektor berkinerja tinggi dan sangat skalabel yang berjalan secara efisien di berbagai lingkungan, mulai dari laptop hingga sistem terdistribusi berskala besar. Milvus tersedia sebagai perangkat lunak sumber terbuka dan layanan cloud.</p>
-<p>Milvus adalah proyek sumber terbuka di bawah LF AI &amp; Data Foundation yang didistribusikan di bawah lisensi Apache 2.0. Sebagian besar kontributor adalah para ahli dari komunitas komputasi berkinerja tinggi (HPC), yang berspesialisasi dalam membangun sistem berskala besar dan mengoptimalkan kode yang sadar akan perangkat keras. Kontributor inti termasuk para profesional dari Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba, dan Microsoft.</p>
-<h2 id="Unstructured-Data-Embeddings-and-Milvus" class="common-anchor-header">Data Tidak Terstruktur, Penyematan, dan Milvus<button data-href="#Unstructured-Data-Embeddings-and-Milvus" class="anchor-icon" translate="no">
+    </button></h1><p><span>Milvus <span style="display: inline-block; vertical-align: middle;">
+<audio id="milvus-audio" style="display: none;">
+<source src="https://en-audio.howtopronounce.com/15783806805e142d8844912.mp3" type="audio/mp3" />
+</audio>
+<span style="
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('https://milvus.io/docs/v2.5.x/assets/hearing.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    margin-left: 4px;
+  " onclick="document.getElementById('milvus-audio').play()"></span>
+</span></span> adalah burung pemangsa dalam genus Milvus dari keluarga elang Accipaitridae, yang dikenal karena kecepatannya dalam terbang, penglihatannya yang tajam, dan kemampuannya beradaptasi yang luar biasa.</p>
+<style>
+  audio::-webkit-media-controls { display: none !important; }</style>
+<p>Zilliz mengadopsi nama Milvus untuk basis data vektor sumber terbuka berkinerja tinggi dan berskala tinggi yang berjalan secara efisien di berbagai lingkungan, mulai dari laptop hingga sistem terdistribusi berskala besar. Ini tersedia sebagai perangkat lunak sumber terbuka dan layanan cloud.</p>
+<p>Dikembangkan oleh Zilliz dan segera disumbangkan ke LF AI &amp; Data Foundation di bawah Linux Foundation, Milvus telah menjadi salah satu proyek basis data vektor sumber terbuka terkemuka di dunia. Milvus didistribusikan di bawah lisensi Apache 2.0, dan sebagian besar kontributornya adalah para ahli dari komunitas komputasi berkinerja tinggi (HPC), yang berspesialisasi dalam membangun sistem berskala besar dan mengoptimalkan kode yang sadar akan perangkat keras. Kontributor inti termasuk para profesional dari Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba, dan Microsoft.</p>
+<p>Menariknya, setiap proyek sumber terbuka Zilliz dinamai dengan nama burung, yang merupakan konvensi penamaan yang melambangkan kebebasan, pandangan ke depan, dan evolusi teknologi yang gesit.</p>
+<h2 id="Unstructured-Data-Embeddings-and-Milvus" class="common-anchor-header">Data Tidak Terstruktur, Embeddings, dan Milvus<button data-href="#Unstructured-Data-Embeddings-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,7 +57,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data tidak terstruktur, seperti teks, gambar, dan audio, memiliki format yang beragam dan memiliki semantik yang kaya, sehingga sulit untuk dianalisis. Untuk mengelola kerumitan ini, embeddings digunakan untuk mengubah data yang tidak terstruktur menjadi vektor numerik yang menangkap karakteristik esensialnya. Vektor-vektor ini kemudian disimpan dalam basis data vektor, sehingga memungkinkan pencarian dan analisis yang cepat dan terukur.</p>
+    </button></h2><p>Data tidak terstruktur, seperti teks, gambar, dan audio, memiliki format yang beragam dan memiliki semantik yang kaya, sehingga menantang untuk dianalisis. Untuk mengelola kerumitan ini, embeddings digunakan untuk mengubah data yang tidak terstruktur menjadi vektor numerik yang menangkap karakteristik esensialnya. Vektor-vektor ini kemudian disimpan dalam basis data vektor, sehingga memungkinkan pencarian dan analisis yang cepat dan terukur.</p>
 <p>Milvus menawarkan kemampuan pemodelan data yang kuat, memungkinkan Anda untuk mengatur data yang tidak terstruktur atau multi-modal ke dalam koleksi yang terstruktur. Milvus mendukung berbagai tipe data untuk pemodelan atribut yang berbeda, termasuk tipe numerik dan karakter yang umum, berbagai tipe vektor, larik, set, dan JSON, sehingga Anda tidak perlu repot mengelola banyak sistem basis data.</p>
 <p>
   

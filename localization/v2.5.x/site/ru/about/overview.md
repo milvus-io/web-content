@@ -8,7 +8,7 @@ summary: >-
   крупномасштабных распределенных систем. Она доступна как в виде программного
   обеспечения с открытым исходным кодом, так и в виде облачного сервиса.
 ---
-<h1 id="What-is-Milvus" class="common-anchor-header">Что такое Milvus?<button data-href="#What-is-Milvus" class="anchor-icon" translate="no">
+<h1 id="What-is-Milvus" class="common-anchor-header">Что такое милвус?<button data-href="#What-is-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus - это высокопроизводительная и масштабируемая векторная база данных, которая эффективно работает в самых разных средах, от ноутбука до крупномасштабных распределенных систем. Она доступна как в виде программного обеспечения с открытым исходным кодом, так и в виде облачного сервиса.</p>
-<p>Milvus - это проект с открытым исходным кодом в рамках LF AI &amp; Data Foundation, распространяемый под лицензией Apache 2.0. Большинство участников проекта - эксперты из сообщества высокопроизводительных вычислений (HPC), специализирующиеся на создании крупномасштабных систем и оптимизации кода с учетом аппаратного обеспечения. Среди основных участников - специалисты из Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba и Microsoft.</p>
+    </button></h1><p><span>Milvus <span style="display: inline-block; vertical-align: middle;">
+<audio id="milvus-audio" style="display: none;">
+<source src="https://en-audio.howtopronounce.com/15783806805e142d8844912.mp3" type="audio/mp3" />
+</audio>
+<span style="
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('https://milvus.io/docs/v2.5.x/assets/hearing.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    margin-left: 4px;
+  " onclick="document.getElementById('milvus-audio').play()"></span>
+</span></span> - хищная птица из рода Milvus семейства ястребиных Accipaitridae, отличающаяся скоростью полета, острым зрением и удивительной приспособляемостью.</p>
+<style>
+  audio::-webkit-media-controls { display: none !important; }</style>
+<p>Zilliz выбрала название Milvus для своей высокопроизводительной и масштабируемой векторной базы данных с открытым исходным кодом, которая эффективно работает в самых разных средах, от ноутбука до крупных распределенных систем. Она доступна как в виде программного обеспечения с открытым исходным кодом, так и в виде облачного сервиса.</p>
+<p>Разработанная компанией Zilliz и вскоре переданная LF AI &amp; Data Foundation в рамках Linux Foundation, Milvus стала одним из ведущих мировых проектов векторных баз данных с открытым исходным кодом. Он распространяется под лицензией Apache 2.0, а большинство участников - эксперты из сообщества высокопроизводительных вычислений (HPC), специализирующиеся на создании крупномасштабных систем и оптимизации кода с учетом аппаратного обеспечения. В число основных участников входят специалисты из Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba и Microsoft.</p>
+<p>Интересно, что каждый проект Zilliz с открытым исходным кодом назван в честь птицы, что символизирует свободу, предвидение и быстрое развитие технологий.</p>
 <h2 id="Unstructured-Data-Embeddings-and-Milvus" class="common-anchor-header">Неструктурированные данные, эмбеддинги и Milvus<button data-href="#Unstructured-Data-Embeddings-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,7 +110,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>Архитектура системы Milvus с высокой степенью разделения</span> </span></p>
-<p>Сама система Milvus полностью статична, поэтому ее можно легко масштабировать с помощью Kubernetes или публичных облаков. Кроме того, компоненты Milvus хорошо развязаны, а три наиболее важные задачи - поиск, вставка данных и индексирование/уплотнение - спроектированы как легко распараллеливаемые процессы с разделенной сложной логикой. Это гарантирует, что соответствующий узел запроса, узел данных и узел индекса могут масштабироваться как вверх, так и вниз независимо друг от друга, оптимизируя производительность и экономическую эффективность.</p>
+<p>Сама система Milvus полностью статична, поэтому ее можно легко масштабировать с помощью Kubernetes или публичных облаков. Кроме того, компоненты Milvus хорошо развязаны, а три наиболее важные задачи - поиск, вставка данных и индексация/уплотнение - спроектированы как легко распараллеливаемые процессы с разделенной сложной логикой. Это гарантирует, что соответствующий узел запроса, узел данных и узел индекса могут масштабироваться как вверх, так и вниз независимо друг от друга, оптимизируя производительность и экономическую эффективность.</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Типы поиска, поддерживаемые Milvus<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,6 +191,6 @@ summary: >-
 <li><p>Интеграции Promethus и Grafana Prometheus - это набор инструментов для мониторинга и оповещения систем Kubernetes с открытым исходным кодом. Grafana - это стек визуализации с открытым исходным кодом, который может подключаться ко всем источникам данных. Вы можете использовать Promethus и Grafana в качестве поставщика услуг мониторинга для визуального контроля производительности распределенного Milvus. Подробнее см. в разделе <a href="/docs/ru/monitor.md">Развертывание служб мониторинга</a>.</p></li>
 <li><p>Milvus Backup Milvus Backup - это инструмент, позволяющий пользователям создавать резервные копии и восстанавливать данные Milvus. Он предоставляет как CLI, так и API, чтобы вписаться в различные сценарии применения. Более подробную информацию см. в разделе <a href="/docs/ru/milvus_backup_overview.md">Milvus Backup</a>.</p></li>
 <li><p>Milvus Capture Data Change (CDC) Milvus-CDC может захватывать и синхронизировать инкрементные данные в экземплярах Milvus и обеспечивает надежность бизнес-данных, беспрепятственно перенося их между исходным и целевым экземплярами, что позволяет легко выполнять инкрементное резервное копирование и аварийное восстановление. Подробную информацию см. в разделе <a href="/docs/ru/milvus-cdc-overview.md">Milvus CDC</a>.</p></li>
-<li><p>Коннекторы Milvus Компания Milvus разработала набор коннекторов, позволяющих легко интегрировать Milvus со сторонними инструментами, такими как Apache Spark. В настоящее время вы можете использовать наш коннектор Spark для передачи данных Milvus в Apache Spark для машинного обучения. Подробности см. в разделе <a href="/docs/ru/integrate_with_spark.md">Spark-Milvus Connector</a>.</p></li>
+<li><p>Коннекторы Milvus Компания Milvus разработала набор коннекторов для беспрепятственной интеграции Milvus со сторонними инструментами, такими как Apache Spark. В настоящее время вы можете использовать наш коннектор Spark для передачи данных Milvus в Apache Spark для машинного обучения. Подробности см. в разделе <a href="/docs/ru/integrate_with_spark.md">Spark-Milvus Connector</a>.</p></li>
 <li><p>Vector Transmission Services (VTS) Milvus предоставляет набор инструментов для передачи данных между экземпляром Milvus и множеством источников данных, включая кластеры Zilliz, Elasticsearch, Postgres (PgVector) и другой экземпляр Milvus. Подробности см. в разделе <a href="https://github.com/zilliztech/vts">VTS</a>.</p></li>
 </ul>

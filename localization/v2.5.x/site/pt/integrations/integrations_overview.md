@@ -35,7 +35,7 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/integrate_with_pytorch.md">Pesquisa de imagens usando Milvus e Pytorch</a></td><td>Pesquisa semântica</td><td>Milvus, Pytorch</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_sentencetransformers.md">Pesquisa de filmes usando Milvus e SentenceTransfromers</a></td><td>Pesquisa semântica</td><td>Milvus, SentenceTransformers</td></tr>
 <tr><td><a href="/docs/pt/basic_usage_langchain.md">Usar Milvus como um armazenamento vetorial em LangChain</a></td><td>Pesquisa semântica</td><td>Milvus, LangChain</td></tr>
-<tr><td><a href="/docs/pt/full_text_search_with_langchain.md">Usar a pesquisa de texto integral com LangChain e Milvus</a></td><td>Pesquisa de texto completo</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/pt/full_text_search_with_langchain.md">Utilização da pesquisa de texto integral com LangChain e Milvus</a></td><td>Pesquisa de texto completo</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_haystack.md">RAG com Milvus e Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_voxel51.md">Realizar pesquisas de visão com Milvus e FiftyOne</a></td><td>Pesquisa semântica</td><td>Milvus, FiftyOne</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_voyageai.md">Pesquisa semântica com Milvus e VoyageAI</a></td><td>Pesquisa semântica</td><td>Milvus, VoyageAI</td></tr>
@@ -85,5 +85,9 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/integration_with_mindsdb.md">Integrar o Milvus com o MindsDB</a></td><td>Engenharia do conhecimento</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/pt/milvus_and_mcp.md">MCP + Milvus: Ligar a IA às bases de dados vectoriais</a></td><td>Agentes</td><td>Milvus, MCP</td></tr>
 <tr><td><a href="/docs/pt/openai_agents_milvus.md">Integração do Milvus com agentes OpenAI: Um guia passo-a-passo</a></td><td>Agentes</td><td>Milvus, OpenAI</td></tr>
+<tr><td><a href="/docs/pt/build_RAG_with_milvus_and_feast.md">Construir RAG com Milvus e Feast</a></td><td>Fontes de dados</td><td>Milvus, Feast</td></tr>
+<tr><td><a href="/docs/pt/build_RAG_with_milvus_and_docling.md">Criar RAG com Milvus e Docling</a></td><td>Fontes de dados</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/pt/full_text_search_with_langchain.md">Utilizar a pesquisa de texto integral com LangChain e Milvus</a></td><td>Pesquisa de texto integral</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/pt/llamaindex_milvus_full_text_search.md">Utilização da pesquisa de texto integral com LlamaIndex e Milvus</a></td><td>Pesquisa de texto integral</td><td>Milvus, LlamaIndex</td></tr>
 </tbody>
 </table>

@@ -5,6 +5,12 @@ summary: >-
   에이전트 프레임워크와 Milvus의 강력한 벡터 검색 기능을 결합하여 멋진 검색 환경을 만들어 보겠습니다.
 title: 'Milvus와 OpenAI 에이전트 통합: 단계별 가이드'
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="common-anchor-header">Milvus와 OpenAI 에이전트 통합: 단계별 가이드<button data-href="#Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,13 +26,7 @@ title: 'Milvus와 OpenAI 에이전트 통합: 단계별 가이드'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>이 노트북에서는 함수 호출을 통해 자연어를 사용하여 Milvus를 쿼리할 수 있는 에이전트를 만드는 방법을 보여드립니다. OpenAI의 에이전트 프레임워크와 Milvus의 강력한 벡터 검색 기능을 결합하여 멋진 검색 환경을 만들어 보겠습니다.</p>
+    </button></h1><p>이 노트북에서는 함수 호출을 통해 자연어를 사용하여 Milvus를 쿼리할 수 있는 에이전트를 만드는 방법을 보여드립니다. OpenAI의 에이전트 프레임워크와 Milvus의 강력한 벡터 검색 기능을 결합하여 멋진 검색 환경을 만들어 보겠습니다.</p>
 <h2 id="OpenAI-Agents" class="common-anchor-header">OpenAI 에이전트<button data-href="#OpenAI-Agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,6 +49,12 @@ title: 'Milvus와 OpenAI 에이전트 통합: 단계별 가이드'
 <li>에이전트에 대한 입력의 유효성을 검사할 수 있는 가드레일</li>
 </ul>
 <p>이러한 기본 요소는 Python과 함께 사용하면 도구와 에이전트 간의 복잡한 관계를 표현할 수 있을 만큼 강력하며, 가파른 학습 곡선 없이 실제 애플리케이션을 구축할 수 있습니다. 또한 SDK에는 에이전트 플로우를 시각화하고 디버깅할 수 있는 추적 기능이 내장되어 있어 이를 평가하고 애플리케이션에 맞게 모델을 미세 조정할 수도 있습니다.</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.5.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <span></span>
+  </span>
+</p>
 <h2 id="Milvus" class="common-anchor-header">Milvus<button data-href="#Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +87,7 @@ title: 'Milvus와 OpenAI 에이전트 통합: 단계별 가이드'
         ></path>
       </svg>
     </button></h2><p>먼저 필요한 라이브러리로 환경을 설정하고 Jupyter 호환성을 위해 비동기화를 초기화해야 합니다.</p>
-<pre><code translate="no" class="language-shell">$ pip install openai pymilvus pydantic nest_asyncio
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install openai pymilvus pydantic nest_asyncio</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colab을 사용하는 경우 방금 설치한 종속 요소를 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택).</p>
@@ -90,14 +96,14 @@ title: 'Milvus와 OpenAI 에이전트 통합: 단계별 가이드'
 <span class="hljs-keyword">import</span> nest_asyncio
 <span class="hljs-keyword">from</span> dotenv <span class="hljs-keyword">import</span> load_dotenv
 
-<span class="hljs-title function_">load_dotenv</span>()
+load_dotenv()
 
-nest_asyncio.<span class="hljs-title function_">apply</span>()
+nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
 <p>OpenAI의 모델을 사용합니다. 환경 변수로 <code translate="no">OPENAI_API_KEY</code> <a href="https://platform.openai.com/docs/quickstart">API 키를</a> 준비해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connecting-to-Milvus-and-Creating-a-Schema" class="common-anchor-header">Milvus에 연결하고 스키마 만들기<button data-href="#Connecting-to-Milvus-and-Creating-a-Schema" class="anchor-icon" translate="no">
       <svg translate="no"

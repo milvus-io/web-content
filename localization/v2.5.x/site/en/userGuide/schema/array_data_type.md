@@ -43,8 +43,8 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Default Values</strong>: ARRAY fields do not support default values. However, you can set the <code translate="no">nullable</code> attribute to <code translate="no">True</code> to allow null values. For details, refer to <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p></li>
-<li><p><strong>Data Type</strong>: All elements in an Array field must have the same data type, as specified by the <code translate="no">element_type</code>.</p></li>
-<li><p><strong>Array Capacity</strong>: The number of elements in an Array field must be less than or equal to the maximum capacity defined when the Array was created, as specified by <code translate="no">max_capacity</code>.</p></li>
+<li><p><strong>Data Type</strong>: All elements in an Array field must have the same data type, as specified by the <code translate="no">element_type</code>. If you set <code translate="no">element_type</code> to <code translate="no">VARCHAR</code>, you should also set <code translate="no">max_length</code> for the array elements.</p></li>
+<li><p><strong>Array Capacity</strong>: The number of elements in an Array field must be less than or equal to the maximum capacity defined when the Array was created, as specified by <code translate="no">max_capacity</code>. The value should be an integer within the range from <strong>1</strong> to <strong>4096</strong>.</p></li>
 <li><p><strong>String Handling</strong>: String values in Array fields are stored as-is, without semantic escaping or conversion. For example, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, and <code translate="no">&quot;a\&quot;b&quot;</code> are stored as entered, while <code translate="no">'a'b'</code> and <code translate="no">&quot;a&quot;b&quot;</code> are considered invalid values.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Add ARRAY field<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">

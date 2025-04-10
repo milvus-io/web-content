@@ -85,5 +85,9 @@ title: Übersicht über Integrationen
 <tr><td><a href="/docs/de/integration_with_mindsdb.md">Integration von Milvus mit MindsDB</a></td><td>Wissensmanagement</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/de/milvus_and_mcp.md">MCP + Milvus: Verknüpfung von KI mit Vektordatenbanken</a></td><td>Agenten</td><td>Milvus, MCP</td></tr>
 <tr><td><a href="/docs/de/openai_agents_milvus.md">Milvus-Integration mit OpenAI-Agenten: Eine Schritt-für-Schritt-Anleitung</a></td><td>Agenten</td><td>Milvus, OpenAI</td></tr>
+<tr><td><a href="/docs/de/build_RAG_with_milvus_and_feast.md">RAG mit Milvus und Feast aufbauen</a></td><td>Daten-Quellen</td><td>Milvus, Feast</td></tr>
+<tr><td><a href="/docs/de/build_RAG_with_milvus_and_docling.md">Aufbau von RAG mit Milvus und Docling</a></td><td>Datenquellen</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/de/full_text_search_with_langchain.md">Verwendung der Volltextsuche mit LangChain und Milvus</a></td><td>Volltext-Suche</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/de/llamaindex_milvus_full_text_search.md">Verwendung der Volltextsuche mit LlamaIndex und Milvus</a></td><td>Volltext-Suche</td><td>Milvus, LlamaIndex</td></tr>
 </tbody>
 </table>

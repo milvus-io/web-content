@@ -6,6 +6,12 @@ summary: >-
   البحث المتجه القوية في Milvus لإنشاء تجربة بحث رائعة.
 title: 'تكامل Milvus مع وكلاء OpenAI: دليل خطوة بخطوة'
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="common-anchor-header">تكامل Milvus مع وكلاء OpenAI: دليل خطوة بخطوة<button data-href="#Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,13 +27,7 @@ title: 'تكامل Milvus مع وكلاء OpenAI: دليل خطوة بخطوة'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>يوضح هذا الدفتر كيفية إنشاء وكيل يمكنه الاستعلام عن Milvus باستخدام اللغة الطبيعية من خلال استدعاء الوظائف. سنقوم بدمج إطار عمل وكلاء OpenAI مع إمكانيات البحث المتجه القوية في Milvus لإنشاء تجربة بحث رائعة.</p>
+    </button></h1><p>يوضح هذا الدفتر كيفية إنشاء وكيل يمكنه الاستعلام عن Milvus باستخدام اللغة الطبيعية من خلال استدعاء الوظائف. سنقوم بدمج إطار عمل وكلاء OpenAI مع إمكانيات البحث المتجه القوية في Milvus لإنشاء تجربة بحث رائعة.</p>
 <h2 id="OpenAI-Agents" class="common-anchor-header">وكلاء OpenAI<button data-href="#OpenAI-Agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,6 +50,12 @@ title: 'تكامل Milvus مع وكلاء OpenAI: دليل خطوة بخطوة'
 <li>حواجز الحماية، والتي تمكّن من التحقق من صحة المدخلات إلى الوكلاء</li>
 </ul>
 <p>بالاقتران مع Python، هذه الأساسيات قوية بما يكفي للتعبير عن العلاقات المعقدة بين الأدوات والوكلاء، وتسمح لك ببناء تطبيقات في العالم الحقيقي دون منحنى تعليمي حاد. بالإضافة إلى ذلك، تأتي مجموعة أدوات تطوير البرمجيات مع ميزة التتبع المدمجة التي تتيح لك تصور وتصحيح تدفقات وكلائك، بالإضافة إلى تقييمها وحتى ضبط النماذج الخاصة بتطبيقك.</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.5.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <span></span>
+  </span>
+</p>
 <h2 id="Milvus" class="common-anchor-header">ميلفوس<button data-href="#Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +88,7 @@ title: 'تكامل Milvus مع وكلاء OpenAI: دليل خطوة بخطوة'
         ></path>
       </svg>
     </button></h2><p>أولاً، نحن بحاجة إلى إعداد بيئتنا بالمكتبات اللازمة وتهيئة asyncio للتوافق مع Jupyter.</p>
-<pre><code translate="no" class="language-shell">$ pip install openai pymilvus pydantic nest_asyncio
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install openai pymilvus pydantic nest_asyncio</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، فقد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
@@ -91,14 +97,14 @@ title: 'تكامل Milvus مع وكلاء OpenAI: دليل خطوة بخطوة'
 <span class="hljs-keyword">import</span> nest_asyncio
 <span class="hljs-keyword">from</span> dotenv <span class="hljs-keyword">import</span> load_dotenv
 
-<span class="hljs-title function_">load_dotenv</span>()
+load_dotenv()
 
-nest_asyncio.<span class="hljs-title function_">apply</span>()
+nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
 <p>سنستخدم النماذج من OpenAI. يجب عليك إعداد <a href="https://platform.openai.com/docs/quickstart">مفتاح api</a> <code translate="no">OPENAI_API_KEY</code> كمتغير بيئة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connecting-to-Milvus-and-Creating-a-Schema" class="common-anchor-header">الاتصال بميلفوس وإنشاء مخطط<button data-href="#Connecting-to-Milvus-and-Creating-a-Schema" class="anchor-icon" translate="no">
       <svg translate="no"

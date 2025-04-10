@@ -31,7 +31,7 @@ title: Vue d'ensemble des intégrations
 <tr><td><a href="/docs/fr/milvus_hybrid_search_retriever.md">Milvus Hybrid Search Retriever dans LangChain</a></td><td>Recherche hybride</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_openai.md">Recherche sémantique avec Milvus et OpenAI</a></td><td>Recherche sémantique</td><td>Milvus, OpenAI</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_cohere.md">Réponse aux questions avec Milvus et Cohere</a></td><td>Recherche sémantique</td><td>Milvus, Cohere</td></tr>
-<tr><td><a href="/docs/fr/integrate_with_hugging-face.md">Réponse aux questions avec Milvus et HuggingFace</a></td><td>Réponse aux questions</td><td>Milvus, HuggingFace</td></tr>
+<tr><td><a href="/docs/fr/integrate_with_hugging-face.md">Réponse aux questions en utilisant Milvus et HuggingFace</a></td><td>Réponse aux questions</td><td>Milvus, HuggingFace</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_pytorch.md">Recherche d'images avec Milvus et Pytorch</a></td><td>Recherche sémantique</td><td>Milvus, Pytorch</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_sentencetransformers.md">Recherche de films avec Milvus et SentenceTransfromers</a></td><td>Recherche sémantique</td><td>Milvus, SentenceTransformers</td></tr>
 <tr><td><a href="/docs/fr/basic_usage_langchain.md">Utiliser Milvus comme magasin de vecteurs dans LangChain</a></td><td>Recherche sémantique</td><td>Milvus, LangChain</td></tr>
@@ -85,5 +85,9 @@ title: Vue d'ensemble des intégrations
 <tr><td><a href="/docs/fr/integration_with_mindsdb.md">Intégrer Milvus avec MindsDB</a></td><td>Ingénierie des connaissances</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/fr/milvus_and_mcp.md">MCP + Milvus : connecter l'IA aux bases de données vectorielles</a></td><td>Agents</td><td>Milvus, MCP</td></tr>
 <tr><td><a href="/docs/fr/openai_agents_milvus.md">Intégration de Milvus avec les agents OpenAI : Un guide étape par étape</a></td><td>Agents</td><td>Milvus, OpenAI</td></tr>
+<tr><td><a href="/docs/fr/build_RAG_with_milvus_and_feast.md">Construire RAG avec Milvus et Feast</a></td><td>Sources de données</td><td>Milvus, Feast</td></tr>
+<tr><td><a href="/docs/fr/build_RAG_with_milvus_and_docling.md">Construire RAG avec Milvus et Docling</a></td><td>Sources de données</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/fr/full_text_search_with_langchain.md">Utilisation de la recherche plein texte avec LangChain et Milvus</a></td><td>Recherche plein texte</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/fr/llamaindex_milvus_full_text_search.md">Utilisation de la recherche plein texte avec LlamaIndex et Milvus</a></td><td>Recherche plein texte</td><td>Milvus, LlamaIndex</td></tr>
 </tbody>
 </table>

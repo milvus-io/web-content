@@ -62,13 +62,13 @@ summary: >-
 
 <button class="copy-code-btn"></button></code></pre>
 <p>密なベクトルは、画像の場合はCNNモデル（<a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>、<a href="https://pytorch.org/vision/stable/models/vgg.html">VGGなど</a>）、テキストの場合は言語モデル（<a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>、<a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vecなど</a>）など、さまざまな<a href="https://en.wikipedia.org/wiki/Embedding">埋め込み</a>モデルを使用して生成することができます。これらのモデルは生データを高次元空間のポイントに変換し、データの意味的特徴を捉えます。さらにMilvusは、Embeddingsで詳述されているように、ユーザが高密度ベクトルを生成し処理するのに役立つ便利なメソッドを提供しています。</p>
-<p>一度ベクトル化されたデータはMilvusに保存され、管理やベクトル検索に利用することができます。下図は基本的なプロセスを示しています。</p>
+<p>一度ベクトル化されたデータはMilvusに保存され、管理やベクトル検索に利用することができます。下の図は基本的なプロセスを示しています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/dense-vector.png" alt="dense-vector" class="doc-image" id="dense-vector" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-dense-vector.png" alt="use-dense-vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>密ベクトル</span> </span></p>
 <div class="alert note">
-<p>Milvusは密ベクトル以外にも、疎ベクトルやバイナリベクトルにも対応しています。スパースベクトルはキーワード検索や用語マッチングなど、特定の用語に基づいた正確なマッチングに適しており、バイナリベクトルは画像パターンマッチングや特定のハッシュアプリケーションなど、2値化されたデータを効率的に処理するために一般的に使用されます。詳細については、<a href="/docs/ja/binary-vector.md">バイナリ・ベクトルと</a> <a href="/docs/ja/sparse_vector.md">スパース・ベクトルを</a>参照してください。</p>
+<p>Milvusは密なベクトル以外にも、疎なベクトルやバイナリベクトルにも対応しています。スパースベクトルはキーワード検索やタームマッチのような特定の用語に基づく正確なマッチングに適しており、バイナリベクトルは画像パターンマッチングや特定のハッシュアプリケーションのような2値化されたデータを効率的に処理するために一般的に使用されます。詳細については、<a href="/docs/ja/binary-vector.md">バイナリ・ベクトルと</a> <a href="/docs/ja/sparse_vector.md">スパース・ベクトルを</a>参照してください。</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">密なベクトルを使う<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"

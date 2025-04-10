@@ -4,6 +4,12 @@ summary: >-
   このノートブックでは、Milvusに自然言語で問い合わせができるエージェントを作成する方法を紹介します。OpenAIのエージェントフレームワークとMilvusの強力なベクトル検索機能を組み合わせて、素敵な検索体験を作りましょう。
 title: MilvusとOpenAIエージェントの統合：ステップバイステップガイド
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="common-anchor-header">MilvusとOpenAIエージェントの統合：ステップバイステップガイド<button data-href="#Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,13 +25,7 @@ title: MilvusとOpenAIエージェントの統合：ステップバイステッ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>このノートブックでは、関数呼び出しを通して自然言語を使ってMilvusに問い合わせができるエージェントを作成する方法を紹介します。OpenAIのエージェントフレームワークとMilvusの強力なベクトル検索機能を組み合わせて、素敵な検索体験を作りましょう。</p>
+    </button></h1><p>このノートブックでは、関数呼び出しを通して自然言語を使ってMilvusに問い合わせができるエージェントを作成する方法を紹介します。OpenAIのエージェントフレームワークとMilvusの強力なベクトル検索機能を組み合わせて、素敵な検索体験を作りましょう。</p>
 <h2 id="OpenAI-Agents" class="common-anchor-header">OpenAIエージェント<button data-href="#OpenAI-Agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,6 +48,12 @@ title: MilvusとOpenAIエージェントの統合：ステップバイステッ�
 <li>エージェントへの入力を検証するガードレール</li>
 </ul>
 <p>Pythonと組み合わせることで、これらのプリミティブはツールとエージェント間の複雑な関係を表現するのに十分強力であり、急な学習曲線なしに実世界のアプリケーションを構築することができます。加えて、SDKには組み込みのトレーシング機能があり、エージェントフローを可視化してデバッグしたり、評価したり、アプリケーションのモデルを微調整したりすることができます。</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.5.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <span></span>
+  </span>
+</p>
 <h2 id="Milvus" class="common-anchor-header">Milvus<button data-href="#Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +86,7 @@ title: MilvusとOpenAIエージェントの統合：ステップバイステッ�
         ></path>
       </svg>
     </button></h2><p>まず、Jupyterとの互換性を保つために、必要なライブラリとasyncioを初期化して環境をセットアップする必要がある。</p>
-<pre><code translate="no" class="language-shell">$ pip install openai pymilvus pydantic nest_asyncio
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install openai pymilvus pydantic nest_asyncio</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</p>
@@ -89,14 +95,14 @@ title: MilvusとOpenAIエージェントの統合：ステップバイステッ�
 <span class="hljs-keyword">import</span> nest_asyncio
 <span class="hljs-keyword">from</span> dotenv <span class="hljs-keyword">import</span> load_dotenv
 
-<span class="hljs-title function_">load_dotenv</span>()
+load_dotenv()
 
-nest_asyncio.<span class="hljs-title function_">apply</span>()
+nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
 <p>OpenAIのモデルを使います。環境変数として<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connecting-to-Milvus-and-Creating-a-Schema" class="common-anchor-header">Milvusへの接続とスキーマの作成<button data-href="#Connecting-to-Milvus-and-Creating-a-Schema" class="anchor-icon" translate="no">
       <svg translate="no"

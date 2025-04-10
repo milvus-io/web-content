@@ -24,14 +24,14 @@ title: 使用 LangChain 和 Milvus 進行全文檢索
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文</a>檢索是一種傳統的方法，透過直接比對文字中的關鍵字，來檢索包含特定詞彙或短語的文件。它根據相關性對結果進行排序，通常由詞彙頻率和接近度等因素決定。語意搜尋擅長於理解意圖和上下文，而全文搜尋則提供精確的關鍵字匹配，使其成為有價值的補充工具。BM25 演算法是全文搜尋常用的排序方法，在檢索增強世代 (Retrieval-Augmented Generation, RAG) 中尤其有用。</p>
-<p>自<a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a> 以來，透過 Sparse-BM25 方法，將 BM25 演算法表示為稀疏向量，即可原生支援全文搜尋。Milvus 接受原始文字作為輸入，並自動將其轉換為儲存於指定欄位的稀疏向量，省去了手動產生稀疏嵌入的需求。</p>
-<p>LangChain 與 Milvus 的整合也引進了這項功能，簡化了將全文檢索融入 RAG 應用程式的過程。透過結合全文檢索與密集向量的語意檢索，您可以達成一種混合方法，同時利用密集嵌入的語意上下文與字詞比對的精確關鍵字相關性。這種整合可以增強搜尋系統的精確度、相關性和使用者體驗。</p>
-<p>本教學將介紹如何使用 LangChain 和 Milvus 在您的應用程式中實作全文搜尋。</p>
+<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文</a>檢索是一種透過匹配文字中特定關鍵字或短語來檢索文件的傳統方法。它會根據詞彙頻率等因素計算出的相關性分數對結果進行排序。語意搜尋更擅長於理解意義和上下文，而全文搜尋則擅長於精確的關鍵字匹配，因此是語意搜尋的有效補充。BM25 演算法廣泛用於全文檢索的排序，並在檢索增強世代 (Retrieval-Augmented Generation, RAG) 中扮演關鍵角色。</p>
+<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a>引入了使用 BM25 的原生全文搜尋功能。此方法可將文字轉換成代表 BM25 分數的稀疏向量。您只需輸入原始文字，Milvus 就會自動產生並儲存稀疏向量，不需要手動產生稀疏嵌入。</p>
+<p>LangChain 與 Milvus 的整合也引進了這項功能，簡化了將全文檢索融入 RAG 應用程式的過程。透過結合全文檢索與密集向量的語意檢索，您可以達成一種混合方法，同時利用密集內嵌的語意上下文與字詞比對的精確關鍵字相關性。這種整合可以增強搜尋系統的精確度、相關性和使用者體驗。</p>
+<p>本教學將介紹如何使用 LangChain 和 Milvus 在您的應用程式中實作全文檢索。</p>
 <div class="alert note">
 <ul>
-<li><p>全文檢索在 Milvus Standalone 和 Milvus Distributed 中可用，但在 Milvus Lite 中不可用，儘管它在未來加入的路線圖上。不久之後，Zilliz Cloud (完全管理的 Milvus) 也會提供此功能。如需詳細資訊，請聯絡<a href="mailto:support@zilliz.com">support@zilliz.com</a>。</p></li>
-<li><p>在進行本教學之前，請確保您對<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文檢索</a>有基本的了解，以及 LangChain Milvus 整合的<a href="https://milvus.io/docs/basic_usage_langchain.md">基本用法</a>。</p></li>
+<li>目前，Milvus Standalone、Milvus Distributed 和 Zilliz Cloud 都提供全文搜尋功能，但 Milvus Lite 尚未支援此功能 (此功能將於未來實作)。如需更多資訊，請聯絡 support@zilliz.com。</li>
+<li>在繼續本教學之前，請確保您對<a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">全文檢索</a>有基本的了解，以及 LangChain Milvus 整合的<a href="https://milvus.io/docs/basic_usage_langchain.md">基本用法</a>。</li>
 </ul>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -50,7 +50,7 @@ title: 使用 LangChain 和 Milvus 進行全文檢索
         ></path>
       </svg>
     </button></h2><p>在執行本筆記本之前，請確認您已經安裝以下的相依性：</p>
-<pre><code translate="no" class="language-shell">$ pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 <span class="hljs-comment">#langchain-voyageai</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 <span class="hljs-comment">#langchain-voyageai</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
@@ -58,19 +58,19 @@ title: 使用 LangChain 和 Milvus 進行全文檢索
 <p>我們將使用 OpenAI 的模型。您應該準備<a href="https://platform.openai.com/docs/quickstart">OpenAI</a> 的環境變數<code translate="no">OPENAI_API_KEY</code> 。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>指定您的 Milvus 伺服器<code translate="no">URI</code> (也可選擇<code translate="no">TOKEN</code>)。關於如何安裝和啟動 Milvus 伺服器，請參考本<a href="https://milvus.io/docs/install_standalone-docker-compose.md">指南</a>。</p>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>準備一些範例文件：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like this apple&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;fruit&quot;</span>}),
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like swimming&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;sport&quot;</span>}),
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like dogs&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like this apple&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;fruit&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like swimming&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;sport&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like dogs&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
 ]
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Initialization-with-BM25-Function" class="common-anchor-header">使用 BM25 功能初始化<button data-href="#Initialization-with-BM25-Function" class="anchor-icon" translate="no">
@@ -146,7 +146,7 @@ vectorstore.vector_fields
 <p>執行混合搜尋時，我們只需傳入查詢文字，並選擇性地設定 topK 和 reranker 參數。<code translate="no">vectorstore</code> 範例會自動處理向量嵌入和內建函數，最後再使用 reranker 來精煉結果。搜尋過程的底層實作細節對使用者是隱藏的。</p>
 <pre><code translate="no" class="language-python">vectorstore.similarity_search(
     <span class="hljs-string">&quot;Do I like apples?&quot;</span>, k=<span class="hljs-number">1</span>
-)  # , ranker_type=<span class="hljs-string">&quot;weighted&quot;</span>, ranker_params={<span class="hljs-string">&quot;weights&quot;</span>:[<span class="hljs-number">0.3</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]})
+)  <span class="hljs-comment"># , ranker_type=&quot;weighted&quot;, ranker_params={&quot;weights&quot;:[0.3, 0.3, 0.4]})</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'category': 'fruit', 'pk': 454646931479251897}, page_content='I like this apple')]
 </code></pre>
@@ -334,9 +334,9 @@ rag_chain = (
 
 <span class="hljs-comment"># rag_chain.get_graph().print_ascii()</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>使用特定的問題來呼叫 RAG 鏈，並擷取回應</p>
+<p>以特定的問題來啟動 RAG 鏈，並擷取回應</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
-res = rag_chain.<span class="hljs-title function_">invoke</span>(query)
+res = rag_chain.invoke(query)
 res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively generate and execute these programming statements.'

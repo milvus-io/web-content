@@ -42,7 +42,7 @@ title: MilvusとLlamaIndexによる検索拡張生成(RAG)
         ></path>
       </svg>
     </button></h2><h3 id="Install-dependencies" class="common-anchor-header">依存関係のインストール</h3><p>このページのコードスニペットにはpymilvusとllamaindexの依存関係が必要です。以下のコマンドでインストールできます：</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=2.4.2
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -54,10 +54,10 @@ title: MilvusとLlamaIndexによる検索拡張生成(RAG)
 <h3 id="Setup-OpenAI" class="common-anchor-header">OpenAIのセットアップ</h3><p>まず、openai api keyを追加します。これでchatgptにアクセスできるようになる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> openai
 
-openai.<span class="hljs-property">api_key</span> = <span class="hljs-string">&quot;sk-***********&quot;</span>
+openai.api_key = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-data" class="common-anchor-header">データの準備</h3><p>以下のコマンドでサンプルデータをダウンロードできます：</p>
-<pre><code translate="no" class="language-python">! <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/&#x27;</span>
+<pre><code translate="no" class="language-python">! mkdir -p <span class="hljs-string">&#x27;data/&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham_essay.txt&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/uber_2021.pdf&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -88,10 +88,57 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 95f25e4d-f270-4650-87ce-006d69d82033
 </code></pre>
-<h3 id="Create-an-index-across-the-data" class="common-anchor-header">データを横断するインデックスの作成</h3><p>文書ができたので、インデックスを作成し、文書を挿入することができます。</p>
-<blockquote>
-<p><strong>Milvus Liteには</strong> <code translate="no">pymilvus&gt;=2.4.2</code> が必要です。</p>
-</blockquote>
+<h3 id="Create-an-index-across-the-data" class="common-anchor-header">データを横断するインデックスの作成</h3><p>文書ができたので、インデックスを作成して文書を挿入することができます。インデックスにはMilvusVectorStoreを使います。MilvusVectorStoreはいくつかの引数をとります：</p>
+<h4 id="basic-args" class="common-anchor-header">基本引数</h4><ul>
+<li><code translate="no">uri (str, optional)</code>:接続先のURIは、MilvusやZillizクラウドサービスの場合は "https://address:port"、ローカルMilvusの場合は "path/to/local/milvus.db "となる。デフォルトは"./milvus_llamaindex.db "です。</li>
+<li><code translate="no">token (str, optional)</code>:ログイン用トークン。rbacを使用しない場合は空、rbacを使用する場合は "username:password "となる。</li>
+<li><code translate="no">collection_name (str, optional)</code>:データを保存するコレクション名。デフォルトは "llamalection"。</li>
+<li><code translate="no">overwrite (bool, optional)</code>:既存の同じ名前のコレクションを上書きするかどうか。デフォルトはFalse。</li>
+</ul>
+<h4 id="scalar-fields-including-doc-id--text" class="common-anchor-header">doc idとtextを含むスカラーフィールド</h4><ul>
+<li><code translate="no">doc_id_field (str, optional)</code>:コレクションのdoc_idフィールドの名前。デフォルトは DEFAULT_DOC_ID_KEY です。</li>
+<li><code translate="no">text_key (str, optional)</code>:渡されたコレクションのどのキーテキストに格納されるか。独自のコレクションを持ってくるときに使用する。デフォルトは DEFAULT_TEXT_KEY です。</li>
+<li><code translate="no">scalar_field_names (list, optional)</code>:コレクションスキーマに含まれる追加スカラーフィールドの名前。</li>
+<li><code translate="no">scalar_field_types (list, optional)</code>:追加のスカラー・フィールドの型。</li>
+</ul>
+<h4 id="dense-field" class="common-anchor-header">密フィールド</h4><ul>
+<li><code translate="no">enable_dense (bool)</code>:密な埋め込みを有効または無効にするブーリアン・フラグ。デフォルトはTrue。</li>
+<li><code translate="no">dim (int, optional)</code>:コレクションの埋め込みベクトルの次元。enable_sparse が False で新しいコレクションを作成するときに必要です。</li>
+<li><code translate="no">embedding_field (str, optional)</code>:コレクションの密埋め込みフィールドの名前。デフォルトは DEFAULT_EMBEDDING_KEY です。</li>
+<li><code translate="no">index_config (dict, optional)</code>:密埋め込みインデックスの構築に使用する設定。デフォルトはNone。</li>
+<li><code translate="no">search_config (dict, optional)</code>:Milvus密インデックスを検索するための設定。これは<code translate="no">index_config</code> で指定されたインデックスタイプと互換性がなければならないことに注意してください。デフォルトはなし。</li>
+<li><code translate="no">similarity_metric (str, optional)</code>:密な埋め込みに使用する類似度メトリックで、現在は IP, COSINE, L2 をサポートしています。</li>
+</ul>
+<h4 id="sparse-field" class="common-anchor-header">スパースフィールド</h4><ul>
+<li><code translate="no">enable_sparse (bool)</code>:スパース埋め込みを有効または無効にするブール値のフラグ。デフォルトはFalse。</li>
+<li><code translate="no">sparse_embedding_field (str)</code>:スパース埋め込みフィールドの名前。デフォルトは DEFAULT_SPARSE_EMBEDDING_KEY です。</li>
+<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>:enable_sparse が True の場合、テキストをスパース埋め込みに変換するためにこのオブジェクトを提供する必要があります。Noneの場合、デフォルトのスパース埋め込み関数(BGEM3SparseEmbeddingFunction)が使用される。</li>
+<li><code translate="no">sparse_index_config (dict, optional)</code>:スパース埋め込みインデックスの構築に使用される設定。デフォルトはNoneです。</li>
+</ul>
+<h4 id="hybrid-ranker" class="common-anchor-header">ハイブリッドランカー</h4><ul>
+<li><p><code translate="no">hybrid_ranker (str)</code>:ハイブリッド検索クエリで使用するランカーのタイプを指定します。現在は["RRFRanker", "WeightedRanker"]のみサポート。デフォルトは "RRFRanker"。</p></li>
+<li><p><code translate="no">hybrid_ranker_params (dict, optional)</code>:ハイブリッドランカーの設定パラメータ。この辞書の構造は使用される特定のランカーに依存する：</p>
+<ul>
+<li>RRFRanker "の場合、以下を含むべきである：<ul>
+<li>"k"(int)：k」（int）：RRF（Reciprocal Rank Fusion）で使用されるパラメータ。この値はRRFアルゴリズムの一部としてランクスコアを計算するために使用され、複数のランキング戦略を1つのスコアにまとめ、検索の関連性を向上させます。</li>
+</ul></li>
+<li>WeightedRanker "には、次のようなものが期待されます：<ul>
+<li>"weights"（floatのリスト）：2つの重みのリスト：<ol>
+<li>密な埋め込みコンポーネントの重み。</li>
+<li>これらの重みは、ハイブリッド検索プロセスにおいて、埋め込み要素の密な成分と疎な成分の重要度を調整するために使用されます。 デフォルトは空の辞書で、ランカーは事前に定義されたデフォルト設定で動作することを意味します。</li>
+</ol></li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="others" class="common-anchor-header">その他</h4><ul>
+<li><code translate="no">collection_properties (dict, optional)</code>:TTL (Time-To-Live)やMMAP (memory mapping)などのコレクション・プロパティ。デフォルトはNone。以下を含むことができる：<ul>
+<li>"collection.ttl.seconds"（int）：このプロパティが設定されると、現在のコレクション内のデータは指定された時間で期限切れになる。コレクション内の期限切れデータはクリーンアップされ、検索やクエリに関与しない。</li>
+<li>"mmap.enabled" (bool)：コレクション・レベルでメモリ・マップド・ストレージを有効にするかどうか。</li>
+</ul></li>
+<li><code translate="no">index_management (IndexManagement)</code>:使用するインデックス管理ストラテジを指定します。デフォルトは "create_if_not_exists"。</li>
+<li><code translate="no">batch_size (int)</code>:Milvusへのデータ挿入時に1バッチで処理する文書数を設定します。デフォルトはDEFAULT_BATCH_SIZEです。</li>
+<li><code translate="no">consistency_level (str, optional)</code>:新しく作成されたコレクションにどの一貫性レベルを使用するか。デフォルトは "Session "です。</li>
+</ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an index over the documents</span>
 <span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
@@ -102,9 +149,9 @@ storage_context = StorageContext.from_defaults(vector_store=vector_store)
 index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><code translate="no">MilvusVectorStore</code> ：</p>
+<p><code translate="no">MilvusVectorStore</code> のパラメータについて：</p>
 <ul>
-<li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法です。このファイルにすべてのデータが格納されるため、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite が</a>自動的に利用されます。</li>
+<li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法である。</li>
 <li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
@@ -169,7 +216,7 @@ res = query_engine.query(<span class="hljs-string">&quot;What is the number?&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>特定のソースをフィルタリングして結果を生成することができます。次の例では、ディレクトリからすべての文書を読み込み、その後メタデータに基づいてそれらをフィルタリングしています。</p>
+    </button></h2><p>特定のソースをフィルタリングして結果を生成することができます。次の例では、ディレクトリからすべての文書をロードし、その後メタデータに基づいてそれらをフィルタリングしています。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.vector_stores <span class="hljs-keyword">import</span> ExactMatchFilter, MetadataFilters
 
 <span class="hljs-comment"># Load all the two documents loaded before</span>
@@ -190,7 +237,7 @@ res = query_engine.query(<span class="hljs-string">&quot;What challenges did the
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">The disease posed challenges related to the adverse impact on the business and operations, including reduced demand for Mobility offerings globally, affecting travel behavior and demand. Additionally, the pandemic led to driver supply constraints, impacted by concerns regarding COVID-19, with uncertainties about when supply levels would return to normal. The rise of the Omicron variant further affected travel, resulting in advisories and restrictions that could adversely impact both driver supply and consumer demand for Mobility offerings.
 </code></pre>
-<p>こ こ で フ ァ イ ル<code translate="no">paul_graham_essay.txt</code> か ら 文書を取得す る と 、 別の結果が得 ら れます。</p>
+<p>今度はファイル<code translate="no">paul_graham_essay.txt</code> から取得すると、異なる結果が得られます。</p>
 <pre><code translate="no" class="language-python">filters = MetadataFilters(
     filters=[ExactMatchFilter(key=<span class="hljs-string">&quot;file_name&quot;</span>, value=<span class="hljs-string">&quot;paul_graham_essay.txt&quot;</span>)]
 )

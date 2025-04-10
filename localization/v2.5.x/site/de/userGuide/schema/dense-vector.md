@@ -30,7 +30,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Dichte Vektoren sind numerische Datendarstellungen, die häufig beim maschinellen Lernen und bei der Datenanalyse verwendet werden. Sie bestehen aus Arrays mit reellen Zahlen, bei denen die meisten oder alle Elemente ungleich Null sind. Im Vergleich zu spärlichen Vektoren enthalten dichte Vektoren mehr Informationen auf der gleichen Dimensionsebene, da jede Dimension sinnvolle Werte enthält. Mit dieser Darstellung können komplexe Muster und Beziehungen effektiv erfasst werden, was die Analyse und Verarbeitung von Daten in hochdimensionalen Räumen erleichtert. Dichte Vektoren haben in der Regel eine feste Anzahl von Dimensionen, die je nach Anwendung und Anforderungen von einigen Dutzend bis zu mehreren Hundert oder sogar Tausend reichen.</p>
-<p>Dichte Vektoren werden hauptsächlich in Szenarien verwendet, die ein Verständnis der Semantik von Daten erfordern, wie z. B. bei der semantischen Suche und bei Empfehlungssystemen. Bei der semantischen Suche helfen dichte Vektoren, die zugrundeliegenden Verbindungen zwischen Abfragen und Dokumenten zu erfassen und so die Relevanz der Suchergebnisse zu verbessern. In Empfehlungssystemen helfen sie bei der Erkennung von Ähnlichkeiten zwischen Nutzern und Objekten und bieten so individuellere Vorschläge.</p>
+<p>Dichte Vektoren werden hauptsächlich in Szenarien verwendet, die ein Verständnis der Semantik von Daten erfordern, wie z. B. bei der semantischen Suche und bei Empfehlungssystemen. Bei der semantischen Suche helfen dichte Vektoren, die zugrundeliegenden Verbindungen zwischen Abfragen und Dokumenten zu erfassen und so die Relevanz der Suchergebnisse zu verbessern. In Empfehlungssystemen helfen sie bei der Erkennung von Ähnlichkeiten zwischen Nutzern und Objekten und bieten so personalisierte Vorschläge.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -75,10 +75,10 @@ summary: >-
 <p>Sobald die Daten vektorisiert sind, können sie in Milvus zur Verwaltung und zum Abruf der Vektoren gespeichert werden. Das folgende Diagramm zeigt den grundlegenden Prozess.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/dense-vector.png" alt="dense-vector" class="doc-image" id="dense-vector" />
-   </span> <span class="img-wrapper"> <span>dichter Vektor</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-dense-vector.png" alt="use-dense-vector" class="doc-image" id="use-dense-vector" />
+   </span> <span class="img-wrapper"> <span>use-dense-vector</span> </span></p>
 <div class="alert note">
-<p>Neben dichten Vektoren unterstützt Milvus auch spärliche Vektoren und binäre Vektoren. Sparse-Vektoren eignen sich für präzise Übereinstimmungen auf der Grundlage spezifischer Begriffe, z. B. bei der Suche nach Schlüsselwörtern und beim Term-Matching, während binäre Vektoren in der Regel für den effizienten Umgang mit binarisierten Daten verwendet werden, z. B. für den Abgleich von Bildmustern und bestimmte Hashing-Anwendungen. Weitere Informationen finden Sie unter <a href="/docs/de/binary-vector.md">Binäre Vektoren</a> und <a href="/docs/de/sparse_vector.md">dichte Vektoren</a>.</p>
+<p>Neben dichten Vektoren unterstützt Milvus auch spärliche Vektoren und binäre Vektoren. Sparse-Vektoren eignen sich für präzise Übereinstimmungen auf der Grundlage spezifischer Begriffe, wie z. B. bei der Suche nach Schlüsselwörtern und dem Abgleich von Begriffen, während binäre Vektoren in der Regel für den effizienten Umgang mit binarisierten Daten verwendet werden, wie z. B. beim Abgleich von Bildmustern und bestimmten Hashing-Anwendungen. Weitere Informationen finden Sie unter <a href="/docs/de/binary-vector.md">Binäre Vektoren</a> und <a href="/docs/de/sparse_vector.md">dichte Vektoren</a>.</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">Dichte Vektoren verwenden<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -203,7 +203,7 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-     <td><p>Speichert 16-Bit-Gehirn-Fließkommazahlen (bfloat16), die denselben Exponentenbereich wie Float32 bieten, aber eine geringere Genauigkeit aufweisen. Geeignet für Szenarien, in denen große Mengen von Vektoren schnell verarbeitet werden müssen, wie z. B. bei der Suche nach Bildern in großem Maßstab.</p></td>
+     <td><p>Speichert 16-Bit-Gehirn-Fließkommazahlen (bfloat16), die den gleichen Exponentenbereich wie Float32 bieten, aber eine geringere Genauigkeit aufweisen. Geeignet für Szenarien, in denen große Mengen von Vektoren schnell verarbeitet werden müssen, wie z. B. bei der Suche nach Bildern in großem Maßstab.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
@@ -260,7 +260,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Im obigen Beispiel wird ein Index namens <code translate="no">dense_vector_index</code> für das Feld <code translate="no">dense_vector</code> unter Verwendung des Index-Typs <code translate="no">AUTOINDEX</code> erstellt. <code translate="no">metric_type</code> wird auf <code translate="no">IP</code> gesetzt, was anzeigt, dass das innere Produkt als Abstandsmetrik verwendet wird.</p>
-<p>Milvus bietet verschiedene Indexarten für eine bessere Vektorsuche. AUTOINDEX ist ein spezieller Indextyp, der entwickelt wurde, um die Lernkurve der Vektorsuche zu glätten. Sie können aus einer Vielzahl von Indexarten wählen. Einzelheiten finden Sie unter xxx.</p>
+<p>Milvus bietet verschiedene Indexarten für eine bessere Vektorsuche. AUTOINDEX ist ein spezieller Indextyp, der entwickelt wurde, um die Lernkurve der Vektorsuche zu glätten. Sie können aus einer Vielzahl von Index-Typen wählen. Einzelheiten finden Sie unter xxx.</p>
 <p>Milvus unterstützt andere metrische Typen. Weitere Informationen finden Sie unter <a href="/docs/de/metric.md">Metrische Typen</a>.</p>
 <h3 id="Create-collection" class="common-anchor-header">Sammlung erstellen</h3><p>Sobald die Einstellungen für den dichten Vektor und die Index-Parameter abgeschlossen sind, können Sie eine Sammlung erstellen, die dichte Vektoren enthält. Das folgende Beispiel verwendet die Methode <code translate="no">create_collection</code>, um eine Sammlung namens <code translate="no">my_dense_collection</code> zu erstellen.</p>
 <div class="multipleCode">
@@ -380,7 +380,7 @@ client.<span class="hljs-title function_">insert</span>({
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Ähnlichkeitssuche durchführen</h3><p>Die semantische Suche auf der Basis von dichten Vektoren ist eine der Kernfunktionen von Milvus, die es Ihnen ermöglicht, schnell Daten zu finden, die einem Abfragevektor auf der Grundlage des Abstands zwischen Vektoren am ähnlichsten sind. Um eine Ähnlichkeitssuche durchzuführen, bereiten Sie den Abfragevektor und die Suchparameter vor und rufen dann die Methode <code translate="no">search</code> auf.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Ähnlichkeitssuche durchführen</h3><p>Die semantische Suche auf der Basis von dichten Vektoren ist eine der Kernfunktionen von Milvus, die es Ihnen ermöglicht, schnell Daten zu finden, die einem Abfragevektor am ähnlichsten sind, basierend auf dem Abstand zwischen den Vektoren. Um eine Ähnlichkeitssuche durchzuführen, bereiten Sie den Abfragevektor und die Suchparameter vor und rufen dann die Methode <code translate="no">search</code> auf.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {

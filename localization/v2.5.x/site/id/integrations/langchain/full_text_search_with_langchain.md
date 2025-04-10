@@ -26,14 +26,14 @@ title: Menggunakan Pencarian Teks Lengkap dengan LangChain dan Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Pencarian teks lengkap</a> adalah metode tradisional untuk mengambil dokumen yang berisi istilah atau frasa tertentu dengan mencocokkan kata kunci secara langsung di dalam teks. Metode ini memberi peringkat hasil berdasarkan relevansi, biasanya ditentukan oleh faktor-faktor seperti frekuensi istilah dan kedekatan. Meskipun pencarian semantik unggul dalam memahami maksud dan konteks, pencarian teks lengkap memberikan ketepatan pencocokan kata kunci yang tepat, menjadikannya alat pelengkap yang berharga. Algoritma BM25 adalah metode pemeringkatan yang populer untuk pencarian teks lengkap, terutama berguna dalam Retrieval-Augmented Generation (RAG).</p>
-<p>Sejak <a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a>, pencarian teks lengkap didukung secara native melalui pendekatan Sparse-BM25, dengan merepresentasikan algoritme BM25 sebagai vektor jarang. Milvus menerima teks mentah sebagai input dan secara otomatis mengubahnya menjadi vektor jarang yang disimpan di bidang tertentu, sehingga tidak perlu lagi membuat penyematan jarang secara manual.</p>
+<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Pencarian teks lengkap</a> adalah metode tradisional untuk mengambil dokumen dengan mencocokkan kata kunci atau frasa tertentu dalam teks. Metode ini memberi peringkat hasil berdasarkan skor relevansi yang dihitung dari faktor-faktor seperti frekuensi istilah. Meskipun pencarian semantik lebih baik dalam memahami makna dan konteks, pencarian teks lengkap unggul dalam pencocokan kata kunci yang tepat, menjadikannya pelengkap yang berguna untuk pencarian semantik. Algoritma BM25 banyak digunakan untuk menentukan peringkat dalam pencarian teks lengkap dan memainkan peran penting dalam Retrieval-Augmented Generation (RAG).</p>
+<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a> memperkenalkan kemampuan pencarian teks lengkap menggunakan BM25. Pendekatan ini mengubah teks menjadi vektor jarang yang mewakili skor BM25. Anda cukup memasukkan teks mentah dan Milvus akan secara otomatis menghasilkan dan menyimpan vektor jarang, tanpa perlu melakukan pembuatan embedding jarang secara manual.</p>
 <p>Integrasi LangChain dengan Milvus juga telah memperkenalkan fitur ini, menyederhanakan proses penggabungan pencarian teks lengkap ke dalam aplikasi RAG. Dengan menggabungkan pencarian teks lengkap dengan pencarian semantik dengan vektor padat, Anda dapat mencapai pendekatan hibrida yang memanfaatkan konteks semantik dari sematan padat dan relevansi kata kunci yang tepat dari pencocokan kata. Integrasi ini meningkatkan akurasi, relevansi, dan pengalaman pengguna sistem pencarian.</p>
 <p>Tutorial ini akan menunjukkan cara menggunakan LangChain dan Milvus untuk mengimplementasikan pencarian teks lengkap dalam aplikasi Anda.</p>
 <div class="alert note">
 <ul>
-<li><p>Pencarian teks lengkap tersedia di Milvus Standalone dan Milvus Distributed, tetapi tidak di Milvus Lite, meskipun ada di peta jalan untuk penyertaan di masa depan. Fitur ini juga akan segera tersedia di Zilliz Cloud (Milvus yang dikelola sepenuhnya). Silakan hubungi <a href="mailto:support@zilliz.com">support@zilliz.com</a> untuk informasi lebih lanjut.</p></li>
-<li><p>Sebelum melanjutkan dengan tutorial ini, pastikan Anda memiliki pemahaman dasar tentang <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">pencarian teks lengkap</a> dan <a href="https://milvus.io/docs/basic_usage_langchain.md">penggunaan dasar</a> integrasi LangChain Milvus.</p></li>
+<li>Pencarian teks lengkap saat ini tersedia di Milvus Standalone, Milvus Distributed, dan Zilliz Cloud, meskipun belum didukung di Milvus Lite (yang memiliki fitur ini yang direncanakan untuk implementasi di masa depan). Hubungi support@zilliz.com untuk informasi lebih lanjut.</li>
+<li>Sebelum melanjutkan dengan tutorial ini, pastikan Anda memiliki pemahaman dasar tentang <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">pencarian teks lengkap</a> dan <a href="https://milvus.io/docs/basic_usage_langchain.md">penggunaan dasar</a> integrasi LangChain Milvus.</li>
 </ul>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -52,7 +52,7 @@ title: Menggunakan Pencarian Teks Lengkap dengan LangChain dan Milvus
         ></path>
       </svg>
     </button></h2><p>Sebelum menjalankan buku catatan ini, pastikan Anda telah menginstal dependensi berikut ini:</p>
-<pre><code translate="no" class="language-shell">$ pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 <span class="hljs-comment">#langchain-voyageai</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 <span class="hljs-comment">#langchain-voyageai</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja terinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
@@ -60,19 +60,19 @@ title: Menggunakan Pencarian Teks Lengkap dengan LangChain dan Milvus
 <p>Kita akan menggunakan model dari OpenAI. Anda harus menyiapkan variabel lingkungan <code translate="no">OPENAI_API_KEY</code> dari <a href="https://platform.openai.com/docs/quickstart">OpenAI</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Tentukan server Milvus Anda <code translate="no">URI</code> (dan secara opsional <code translate="no">TOKEN</code>). Untuk cara menginstal dan menjalankan server Milvus, ikuti <a href="https://milvus.io/docs/install_standalone-docker-compose.md">panduan</a> ini.</p>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Siapkan beberapa contoh dokumen:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like this apple&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;fruit&quot;</span>}),
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like swimming&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;sport&quot;</span>}),
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like dogs&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like this apple&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;fruit&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like swimming&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;sport&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like dogs&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
 ]
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Initialization-with-BM25-Function" class="common-anchor-header">Inisialisasi dengan Fungsi BM25<button data-href="#Initialization-with-BM25-Function" class="anchor-icon" translate="no">
@@ -148,7 +148,7 @@ vectorstore.vector_fields
 <p>Ketika melakukan pencarian hibrida, kita hanya perlu memasukkan teks kueri dan secara opsional mengatur parameter topK dan reranker. Instance <code translate="no">vectorstore</code> akan secara otomatis menangani penyematan vektor dan fungsi bawaan dan akhirnya menggunakan reranker untuk menyaring hasil. Detail implementasi yang mendasari proses pencarian disembunyikan dari pengguna.</p>
 <pre><code translate="no" class="language-python">vectorstore.similarity_search(
     <span class="hljs-string">&quot;Do I like apples?&quot;</span>, k=<span class="hljs-number">1</span>
-)  # , ranker_type=<span class="hljs-string">&quot;weighted&quot;</span>, ranker_params={<span class="hljs-string">&quot;weights&quot;</span>:[<span class="hljs-number">0.3</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]})
+)  <span class="hljs-comment"># , ranker_type=&quot;weighted&quot;, ranker_params={&quot;weights&quot;:[0.3, 0.3, 0.4]})</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'category': 'fruit', 'pk': 454646931479251897}, page_content='I like this apple')]
 </code></pre>
@@ -275,7 +275,7 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
 </code></pre>
-<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Muat dokumen ke dalam penyimpanan vektor Milvus</h3><p>Seperti pengantar di atas, kita menginisialisasi dan memuat dokumen yang telah disiapkan ke dalam penyimpanan vektor Milvus, yang berisi dua bidang vektor: <code translate="no">dense</code> untuk penyematan OpenAI dan <code translate="no">sparse</code> untuk fungsi BM25.</p>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Memuat dokumen ke dalam penyimpanan vektor Milvus</h3><p>Seperti pengantar di atas, kita menginisialisasi dan memuat dokumen yang telah disiapkan ke dalam penyimpanan vektor Milvus, yang berisi dua bidang vektor: <code translate="no">dense</code> untuk penyematan OpenAI dan <code translate="no">sparse</code> untuk fungsi BM25.</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=OpenAIEmbeddings(),
@@ -338,7 +338,7 @@ rag_chain = (
 <button class="copy-code-btn"></button></code></pre>
 <p>Panggil rantai RAG dengan pertanyaan spesifik dan ambil jawabannya</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
-res = rag_chain.<span class="hljs-title function_">invoke</span>(query)
+res = rag_chain.invoke(query)
 res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively generate and execute these programming statements.'

@@ -85,5 +85,9 @@ title: نظرة عامة على عمليات التكامل
 <tr><td><a href="/docs/ar/integration_with_mindsdb.md">تكامل Milvus مع MindsDB</a></td><td>هندسة المعرفة</td><td>ميلفوس، مايندز دي بي</td></tr>
 <tr><td><a href="/docs/ar/milvus_and_mcp.md">MCP + ميلفوس: ربط الذكاء الاصطناعي بقواعد بيانات المتجهات</a></td><td>الوكلاء</td><td>ميلفوس، MCP</td></tr>
 <tr><td><a href="/docs/ar/openai_agents_milvus.md">تكامل ميلفوس مع وكلاء OpenAI: دليل خطوة بخطوة</a></td><td>الوكلاء</td><td>ميلفوس، OpenAI</td></tr>
+<tr><td><a href="/docs/ar/build_RAG_with_milvus_and_feast.md">بناء RAG مع ميلفوس وفيست</a></td><td>مصادر البيانات</td><td>ميلفوس، وليمة</td></tr>
+<tr><td><a href="/docs/ar/build_RAG_with_milvus_and_docling.md">بناء RAG باستخدام Milvus وDocling</a></td><td>مصادر البيانات</td><td>ميلفوس، دوكلينج</td></tr>
+<tr><td><a href="/docs/ar/full_text_search_with_langchain.md">استخدام البحث عن النص الكامل مع LangChain و Milvus</a></td><td>البحث عن النص الكامل</td><td>ميلفوس، لانغ تشين</td></tr>
+<tr><td><a href="/docs/ar/llamaindex_milvus_full_text_search.md">استخدام البحث عن النص الكامل مع LlamaIndex و Milvus</a></td><td>البحث عن النص الكامل</td><td>ميلفوس، لاما إندكس</td></tr>
 </tbody>
 </table>

@@ -35,11 +35,11 @@ summary: 模式定義了集合的資料結構。在建立一個集合之前，�
         ></path>
       </svg>
     </button></h2><p>在 Milvus 中，集合模式是在關係數據庫中組合一個表，它定義了 Milvus 如何組織集合中的數據。</p>
-<p>一個設計良好的模式是非常重要的，因為它抽象了資料模型，並決定您是否可以透過搜尋來達成業務目標。此外，由於插入到資料集中的每一行資料都必須遵循模式，因此它有助於保持資料的一致性和長期品質。從技術角度來看，定義良好的模式可帶來組織良好的列資料儲存和更乾淨的索引結構，從而提升搜尋效能。</p>
+<p>一個設計良好的模式是非常重要的，因為它抽象了資料模型，並決定您是否可以透過搜尋來達成業務目標。此外，由於插入到資料集中的每一行資料都必須遵循模式，因此它有助於維持資料的一致性和長期品質。從技術角度來看，定義良好的模式可帶來組織良好的列資料儲存和更乾淨的索引結構，從而提升搜尋效能。</p>
 <p>集合模式有一個主索引鍵、最多四個向量欄位和幾個標量欄位。下圖說明如何將文章映射到模式欄位清單。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.PNG" alt="Schema design" class="doc-image" id="schema-design" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="Schema design" class="doc-image" id="schema-design" />
    </span> <span class="img-wrapper"> <span>模式設計</span> </span></p>
 <p>搜尋系統的資料模式設計包括分析業務需求，並將資訊抽象為模式表達的資料模式。例如，搜尋一段文字時，必須透過「嵌入」將字面字串轉換為向量，並啟用向量搜尋來「建立索引」。除了這個基本要求之外，儲存其他屬性（例如出版時間戳和作者）可能也是必要的。這些元資料允許透過篩選來精細語意搜尋，僅傳回在特定日期之後或由特定作者出版的文字。您也可以擷取這些標量與主要文字，以便在應用程式中呈現搜尋結果。每個標量都應該指定一個唯一的識別碼，以整數或字串的形式來組織這些文字片段。這些元素對於達成精密的搜尋邏輯是不可或缺的。</p>
 <p>請參閱<a href="/docs/zh-hant/schema-hands-on.md">模式設計實作</a>，以瞭解如何製作設計良好的模式。</p>
@@ -61,9 +61,9 @@ summary: 模式定義了集合的資料結構。在建立一個集合之前，�
     </button></h2><p>以下程式碼片段示範如何建立模式。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
-schema = <span class="hljs-title class_">MilvusClient</span>.<span class="hljs-title function_">create_schema</span>()​
+schema = MilvusClient.create_schema()​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;​
@@ -76,11 +76,11 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 <span class="hljs-keyword">const</span> schema = []​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export schema='{​
     &quot;fields&quot;: []​
-}&#x27;</span>​
+}'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h2 id="Add-Primary-Field​" class="common-anchor-header">新增主要欄位<button data-href="#Add-Primary-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,17 +109,17 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">common</span>.<span class="hljs-property">DataType</span>;​
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">collection</span>.<span class="hljs-property">request</span>.<span class="hljs-property">AddFieldReq</span>; ​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;​
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; ​
 ​
-schema.<span class="hljs-title function_">addField</span>(<span class="hljs-title class_">AddFieldReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;my_id&quot;</span>)​
-        .<span class="hljs-title function_">dataType</span>(<span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>)​
+schema.addField(AddFieldReq.builder()​
+        .fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)​
+        .dataType(DataType.Int64)​
         <span class="hljs-comment">// highlight-start​</span>
-        .<span class="hljs-title function_">isPrimaryKey</span>(<span class="hljs-literal">true</span>)​
-        .<span class="hljs-title function_">autoID</span>(<span class="hljs-literal">false</span>)​
+        .isPrimaryKey(<span class="hljs-literal">true</span>)​
+        .autoID(<span class="hljs-literal">false</span>)​
         <span class="hljs-comment">// highlight-end​</span>
-        .<span class="hljs-title function_">build</span>());​
+        .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
@@ -132,20 +132,20 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 });​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> primaryField=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export primaryField='{​
     &quot;fieldName&quot;: &quot;my_id&quot;,​
     &quot;dataType&quot;: &quot;Int64&quot;,​
     &quot;isPrimary&quot;: true​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{​
+export schema='{​
     \&quot;autoID\&quot;: false,​
     \&quot;fields\&quot;: [​
         $primaryField​
     ]​
-}&#x27;</span>​
+}'​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>新增欄位時，您可以透過設定其<code translate="no">is_primary</code> 屬性為<code translate="no">True</code> ，明確地將該欄位澄清為主要欄位。primary 欄位預設接受<strong>Int64</strong>值。在這種情況下，主字段值應該是類似<code translate="no">12345</code> 的整數。如果您選擇在主字段中使用<strong>VarChar</strong>值，則值應該是類似<code translate="no">my_entity_1234</code> 的字串。</p>
 <p>您也可以設定<code translate="no">autoId</code> 屬性為<code translate="no">True</code> ，讓 Milvus 在插入資料時自動分配主字段值。</p>
 <p>詳情請參考<a href="/docs/zh-hant/primary-field.md">Primary Field &amp; AutoID</a>。</p>
@@ -170,17 +170,17 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,​
     datatype=DataType.FLOAT_VECTOR,​
-    <span class="hljs-meta"># highlight-next-<span class="hljs-keyword">line</span>​</span>
+    <span class="hljs-comment"># highlight-next-line​</span>
     dim=<span class="hljs-number">5</span>​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">schema.<span class="hljs-title function_">addField</span>(<span class="hljs-title class_">AddFieldReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;my_vector&quot;</span>)​
-        .<span class="hljs-title function_">dataType</span>(<span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>)​
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
+        .fieldName(<span class="hljs-string">&quot;my_vector&quot;</span>)​
+        .dataType(DataType.FloatVector)​
         <span class="hljs-comment">// highlight-next-line​</span>
-        .<span class="hljs-title function_">dimension</span>(<span class="hljs-number">5</span>)​
-        .<span class="hljs-title function_">build</span>());​
+        .dimension(<span class="hljs-number">5</span>)​
+        .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
@@ -191,27 +191,27 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 });​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export vectorField='{​
     &quot;fieldName&quot;: &quot;my_vector&quot;,​
     &quot;dataType&quot;: &quot;FloatVector&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;dim&quot;: 5​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{​
+export schema=&quot;{​
     \&quot;autoID\&quot;: false,​
     \&quot;fields\&quot;: [​
-        <span class="hljs-variable">$primaryField</span>,​
-        <span class="hljs-variable">$vectorField</span>​
+        $primaryField,​
+        $vectorField​
     ]​
-}&quot;</span>​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
-<p>上述程式碼片段中的<code translate="no">dim</code> 參數表示向量字段中要保存的向量內嵌的維度。<code translate="no">FLOAT_VECTOR</code> 的值表示向量欄位持有 32 位元浮動數的清單，通常用來表示反斜率。除此之外，Milvus 也支援下列類型的向量嵌入。</p>
+</code></pre>
+<p>上述程式碼片段中的<code translate="no">dim</code> 參數表示向量字段中要保存的向量內嵌的維度。<code translate="no">FLOAT_VECTOR</code> 值表示向量欄位持有 32 位元浮動數的清單，通常用來表示反斜率。除此之外，Milvus 也支援下列類型的向量嵌入。</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
-<p>此類型的向量欄位持有 16 位元半精度浮點數的清單，通常適用於記憶體或頻寬受限的深度學習或基於 GPU 的運算情境。</p></li>
+<p>此類型的向量欄位會保存 16 位元半精度浮點數的清單，通常適用於記憶體或頻寬受限的深度學習或基於 GPU 的運算情境。</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>此類型的向量欄位會存放 16 位元浮點數的清單，這些浮點數的精確度降低，但指數範圍與 Float32 相同。這種類型的資料常用於深度學習的情境，因為它可以減少記憶體使用量，卻不會顯著影響精確度。</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
@@ -241,17 +241,17 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,​
     datatype=DataType.VARCHAR,​
-    <span class="hljs-meta"># highlight-next-<span class="hljs-keyword">line</span>​</span>
+    <span class="hljs-comment"># highlight-next-line​</span>
     max_length=<span class="hljs-number">512</span>​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">schema.<span class="hljs-title function_">addField</span>(<span class="hljs-title class_">AddFieldReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;my_varchar&quot;</span>)​
-        .<span class="hljs-title function_">dataType</span>(<span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>)​
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
+        .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)​
+        .dataType(DataType.VarChar)​
         <span class="hljs-comment">// highlight-next-line​</span>
-        .<span class="hljs-title function_">maxLength</span>(<span class="hljs-number">512</span>)​
-        .<span class="hljs-title function_">build</span>());​
+        .maxLength(<span class="hljs-number">512</span>)​
+        .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
@@ -262,37 +262,37 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 });​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> varCharField=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export varCharField='{​
     &quot;fieldName&quot;: &quot;my_varchar&quot;,​
     &quot;dataType&quot;: &quot;VarChar&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;max_length&quot;: 256​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{​
+export schema=&quot;{​
     \&quot;autoID\&quot;: false,​
     \&quot;fields\&quot;: [​
-        <span class="hljs-variable">$primaryField</span>,​
-        <span class="hljs-variable">$vectorField</span>,​
-        <span class="hljs-variable">$varCharField</span>​
+        $primaryField,​
+        $vectorField,​
+        $varCharField​
     ]​
-}&quot;</span>​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Add-Number-Fields​" class="common-anchor-header">新增數字欄位</h3><p>Milvus 支援的數字類型有<code translate="no">Int8</code>,<code translate="no">Int16</code>,<code translate="no">Int32</code>,<code translate="no">Int64</code>,<code translate="no">Float</code>, 和<code translate="no">Double</code> 。有關數字欄位的詳細資訊，請參閱<a href="/docs/zh-hant/number.md">數字</a>欄位。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">schema.<span class="hljs-title function_">add_field</span>(​
+<pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_int64&quot;</span>,​
-    datatype=<span class="hljs-title class_">DataType</span>.<span class="hljs-property">INT64</span>,​
+    datatype=DataType.INT64,​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">schema.<span class="hljs-title function_">addField</span>(<span class="hljs-title class_">AddFieldReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;my_int64&quot;</span>)​
-        .<span class="hljs-title function_">dataType</span>(<span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>)​
-        .<span class="hljs-title function_">build</span>());​
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
+        .fieldName(<span class="hljs-string">&quot;my_int64&quot;</span>)​
+        .dataType(DataType.Int64)​
+        .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
@@ -301,35 +301,35 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 });​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> int64Field=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export int64Field='{​
     &quot;fieldName&quot;: &quot;my_int64&quot;,​
     &quot;dataType&quot;: &quot;Int64&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{​
+export schema=&quot;{​
     \&quot;autoID\&quot;: false,​
     \&quot;fields\&quot;: [​
-        <span class="hljs-variable">$primaryField</span>,​
-        <span class="hljs-variable">$vectorField</span>,​
-        <span class="hljs-variable">$varCharField</span>,​
-        <span class="hljs-variable">$int64Field</span>​
+        $primaryField,​
+        $vectorField,​
+        $varCharField,​
+        $int64Field​
     ]​
-}&quot;</span>​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Add-Boolean-Fields​" class="common-anchor-header">新增布林欄位</h3><p>Milvus 支援布林欄位。以下程式碼片段示範如何新增布林欄位。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">schema.<span class="hljs-title function_">add_field</span>(​
+<pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_bool&quot;</span>,​
-    datatype=<span class="hljs-title class_">DataType</span>.<span class="hljs-property">BOOL</span>,​
+    datatype=DataType.BOOL,​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">schema.<span class="hljs-title function_">addField</span>(<span class="hljs-title class_">AddFieldReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;my_bool&quot;</span>)​
-        .<span class="hljs-title function_">dataType</span>(<span class="hljs-title class_">DataType</span>.<span class="hljs-property">Bool</span>)​
-        .<span class="hljs-title function_">build</span>());​
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
+        .fieldName(<span class="hljs-string">&quot;my_bool&quot;</span>)​
+        .dataType(DataType.Bool)​
+        .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
@@ -338,36 +338,36 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 });​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> boolField=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export boolField='{​
     &quot;fieldName&quot;: &quot;my_bool&quot;,​
     &quot;dataType&quot;: &quot;Boolean&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{​
+export schema=&quot;{​
     \&quot;autoID\&quot;: false,​
     \&quot;fields\&quot;: [​
-        <span class="hljs-variable">$primaryField</span>,​
-        <span class="hljs-variable">$vectorField</span>,​
-        <span class="hljs-variable">$varCharField</span>,​
-        <span class="hljs-variable">$int64Field</span>,​
-        <span class="hljs-variable">$boolField</span>​
+        $primaryField,​
+        $vectorField,​
+        $varCharField,​
+        $int64Field,​
+        $boolField​
     ]​
-}&quot;</span>​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Add-JSON-fields​" class="common-anchor-header">新增 JSON 欄位</h3><p>JSON 欄位通常儲存半結構化的 JSON 資料。有關 JSON 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/use-json-fields.md">JSON</a> 欄位。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">schema.<span class="hljs-title function_">add_field</span>(​
+<pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_json&quot;</span>,​
-    datatype=<span class="hljs-title class_">DataType</span>.<span class="hljs-property">JSON</span>,​
+    datatype=DataType.JSON,​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">schema.<span class="hljs-title function_">addField</span>(<span class="hljs-title class_">AddFieldReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;my_json&quot;</span>)​
-        .<span class="hljs-title function_">dataType</span>(<span class="hljs-title class_">DataType</span>.<span class="hljs-property">JSON</span>)​
-        .<span class="hljs-title function_">build</span>());​
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
+        .fieldName(<span class="hljs-string">&quot;my_json&quot;</span>)​
+        .dataType(DataType.JSON)​
+        .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
@@ -376,43 +376,43 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 });​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> jsonField=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export jsonField='{​
     &quot;fieldName&quot;: &quot;my_json&quot;,​
     &quot;dataType&quot;: &quot;JSON&quot;​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{​
+export schema=&quot;{​
     \&quot;autoID\&quot;: false,​
     \&quot;fields\&quot;: [​
-        <span class="hljs-variable">$primaryField</span>,​
-        <span class="hljs-variable">$vectorField</span>,​
-        <span class="hljs-variable">$varCharField</span>,​
-        <span class="hljs-variable">$int64Field</span>,​
-        <span class="hljs-variable">$boolField</span>,​
-        <span class="hljs-variable">$jsonField</span>​
+        $primaryField,​
+        $vectorField,​
+        $varCharField,​
+        $int64Field,​
+        $boolField,​
+        $jsonField​
     ]​
-}&quot;</span>​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <h3 id="Add-Array-Fields​" class="common-anchor-header">新增陣列欄位</h3><p>陣列欄位儲存元素清單。陣列欄位中所有元素的資料類型應該相同。有關陣列欄位的詳細資訊，請參閱<a href="/docs/zh-hant/array_data_type.md">陣列</a>欄位。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">schema.<span class="hljs-title function_">add_field</span>(​
+<pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_array&quot;</span>,​
-    datatype=<span class="hljs-title class_">DataType</span>.<span class="hljs-property">ARRAY</span>,​
-    element_type=<span class="hljs-title class_">DataType</span>.<span class="hljs-property">VARCHAR</span>,​
+    datatype=DataType.ARRAY,​
+    element_type=DataType.VARCHAR,​
     max_capacity=<span class="hljs-number">5</span>,​
     max_length=<span class="hljs-number">512</span>,​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">schema.<span class="hljs-title function_">addField</span>(<span class="hljs-title class_">AddFieldReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;my_array&quot;</span>)​
-        .<span class="hljs-title function_">dataType</span>(<span class="hljs-title class_">DataType</span>.<span class="hljs-property">Array</span>)​
-        .<span class="hljs-title function_">elementType</span>(<span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>)​
-        .<span class="hljs-title function_">maxCapacity</span>(<span class="hljs-number">5</span>)​
-        .<span class="hljs-title function_">maxLength</span>(<span class="hljs-number">512</span>)​
-        .<span class="hljs-title function_">build</span>());​
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()​
+        .fieldName(<span class="hljs-string">&quot;my_array&quot;</span>)​
+        .dataType(DataType.Array)​
+        .elementType(DataType.VarChar)​
+        .maxCapacity(<span class="hljs-number">5</span>)​
+        .maxLength(<span class="hljs-number">512</span>)​
+        .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">schema.<span class="hljs-title function_">push</span>({​
@@ -424,27 +424,27 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 });​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> arrayField=<span class="hljs-string">&#x27;{​
+<pre><code translate="no" class="language-curl">export arrayField='{​
     &quot;fieldName&quot;: &quot;my_array&quot;,​
     &quot;dataType&quot;: &quot;Array&quot;,​
     &quot;elementDataType&quot;: &quot;VarChar&quot;,​
     &quot;elementTypeParams&quot;: {​
         &quot;max_length&quot;: 512​
     }​
-}&#x27;</span>​
+}'​
 ​
-<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{​
+export schema=&quot;{​
     \&quot;autoID\&quot;: false,​
     \&quot;fields\&quot;: [​
-        <span class="hljs-variable">$primaryField</span>,​
-        <span class="hljs-variable">$vectorField</span>,​
-        <span class="hljs-variable">$varCharField</span>,​
-        <span class="hljs-variable">$int64Field</span>,​
-        <span class="hljs-variable">$boolField</span>,​
-        <span class="hljs-variable">$jsonField</span>,​
-        <span class="hljs-variable">$arrayField</span>​
+        $primaryField,​
+        $vectorField,​
+        $varCharField,​
+        $int64Field,​
+        $boolField,​
+        $jsonField,​
+        $arrayField​
     ]​
-}&quot;</span>​
+}&quot;​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p></p>

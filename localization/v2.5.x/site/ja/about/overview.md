@@ -20,8 +20,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusは、ラップトップから大規模な分散システムまで、幅広い環境で効率的に動作する、高性能で拡張性の高いベクトルデータベースです。オープンソースソフトウェアとしても、クラウドサービスとしても利用可能です。</p>
-<p>Milvusは、Apache 2.0ライセンスの下で配布されているLF AI &amp; Data Foundationのオープンソースプロジェクトです。貢献者の多くは、大規模システムの構築やハードウェアを考慮したコードの最適化を専門とするハイパフォーマンス・コンピューティング（HPC）コミュニティの専門家です。中心的な貢献者には、Zilliz、ARM、NVIDIA、AMD、Intel、Meta、IBM、Salesforce、Alibaba、Microsoftの専門家が含まれる。</p>
+    </button></h1><p><span>Milvus<span style="display: inline-block; vertical-align: middle;">
+<audio id="milvus-audio" style="display: none;">
+<source src="https://en-audio.howtopronounce.com/15783806805e142d8844912.mp3" type="audio/mp3" />
+</audio>
+<span style="
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('https://milvus.io/docs/v2.5.x/assets/hearing.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    margin-left: 4px;
+  " onclick="document.getElementById('milvus-audio').play()"></span>
+</span></span>はタカ目タカ科Milvus属の猛禽類で、その飛行速度、鋭い視力、驚くべき適応性で有名である。</p>
+<style>
+  audio::-webkit-media-controls { display: none !important; }.</style>
+<p>Milvusは、ラップトップから大規模な分散システムまで、幅広い環境で効率的に動作する、オープンソースの高性能で拡張性の高いベクトルデータベースの名前です。オープンソースソフトウェアとしても、クラウドサービスとしても利用できる。</p>
+<p>MilvusはZillizによって開発され、まもなくLinux Foundation傘下のLF AI &amp; Data Foundationに寄贈され、世界有数のオープンソース・ベクターデータベースプロジェクトとなった。MilvusはApache 2.0ライセンスの下で配布されており、ほとんどの貢献者はハイパフォーマンス・コンピューティング（HPC）コミュニティの専門家であり、大規模システムの構築やハードウェアを考慮したコードの最適化を専門としている。中心的な貢献者には、Zilliz、ARM、NVIDIA、AMD、Intel、Meta、IBM、Salesforce、Alibaba、Microsoftの専門家が含まれる。</p>
+<p>興味深いことに、Zillizのオープンソース・プロジェクトにはすべて鳥の名前が付けられており、これは自由、先見性、テクノロジーの機敏な進化を象徴する命名規則となっている。</p>
 <h2 id="Unstructured-Data-Embeddings-and-Milvus" class="common-anchor-header">非構造化データ、エンベッディング、milvus<button data-href="#Unstructured-Data-Embeddings-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,13 +54,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>テキスト、画像、音声などの非構造化データは、形式が様々で、その根底に豊富なセマンティクスを持つため、分析が困難です。この複雑さを管理するために、エンベッディングは非構造化データをその本質的な特徴を捉える数値ベクトルに変換するために使用されます。これらのベクトルはベクトルデータベースに格納され、高速でスケーラブルな検索と分析を可能にします。</p>
+    </button></h2><p>テキスト、画像、音声のような非構造化データは、形式が様々であり、豊富なセマンティクスを持っているため、分析が困難です。この複雑さを管理するために、エンベッディングは非構造化データをその本質的な特徴を捉える数値ベクトルに変換するために使用されます。これらのベクトルはベクトルデータベースに格納され、高速でスケーラブルな検索と分析を可能にします。</p>
 <p>Milvusは堅牢なデータモデリング機能を備えており、非構造化データやマルチモーダルデータを構造化されたコレクションに整理することができます。Milvusは、一般的な数値型や文字型、様々なベクトル型、配列、集合、JSONなど、様々な属性モデリングに対応したデータ型を幅広くサポートしており、複数のデータベースシステムを管理する手間を省くことができます。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
    </span> <span class="img-wrapper"> <span>非構造化データ、エンベッディング、Milvus</span> </span></p>
-<p>Milvusは3つのデプロイメントモードを提供し、Jupyter Notebooksでのローカルプロトタイピングから数百億のベクトルを管理する大規模なKubernetesクラスタまで、幅広いデータスケールをカバーします：</p>
+<p>Milvusは3つのデプロイメントモードを提供し、Jupyter Notebooksでのローカルプロトタイピングから数百億のベクトルを管理する巨大なKubernetesクラスタまで、幅広いデータスケールをカバーします：</p>
 <ul>
 <li>Milvus Liteは、アプリケーションに簡単に統合できるPythonライブラリです。Milvusの軽量版として、Jupyter Notebooksでの迅速なプロトタイピングや、リソースが限られたエッジデバイスでの実行に最適です。<a href="/docs/ja/milvus_lite.md">詳細は</a>こちら。</li>
 <li>Milvus Standaloneは、シングルマシンサーバーデプロイメントで、すべてのコンポーネントが単一のDockerイメージにバンドルされており、デプロイに便利です。詳細は<a href="/docs/ja/install_standalone-docker.md">こちら</a>。</li>
@@ -67,7 +84,7 @@ summary: >-
     </button></h2><p>Milvusは初日から非常に効率的なベクトルデータベースシステムとして設計されました。ほとんどの場合、Milvusは他のベクトルデータベースを2～5倍凌駕しています（VectorDBBenchの結果を参照）。この高い性能は、いくつかの重要な設計上の決定の結果です：</p>
 <p><strong>ハードウェアを考慮した最適化</strong>：Milvusを様々なハードウェア環境に対応させるため、AVX512、SIMD、GPU、NVMe SSDなど、多くのハードウェアアーキテクチャとプラットフォームに特化して性能を最適化しました。</p>
 <p><strong>高度な検索アルゴリズム</strong>：milvusは、IVF、HNSW、DiskANNなど、幅広いインメモリおよびオンディスクインデックス/検索アルゴリズムをサポートしており、これらはすべて深く最適化されています。FAISSやHNSWLibのような一般的な実装と比較して、Milvusは30%から70%の性能向上を実現しています。</p>
-<p><strong>C++の検索エンジン</strong>：ベクトルデータベースの性能の80%以上は検索エンジンによって決まります。Milvusは、高性能、低レベル最適化、効率的なリソース管理のために、この重要なコンポーネントにC++を使用しています。最も重要なことは、Milvusはハードウェアの能力を十分に活用するために、アセンブリレベルのベクトル化からマルチスレッド並列化、スケジューリングに至るまで、ハードウェアを意識した数多くのコード最適化を統合していることです。</p>
+<p><strong>C++の検索エンジン</strong>：ベクトルデータベースの性能の80%以上は検索エンジンによって決まります。Milvusは、高性能、低レベル最適化、効率的なリソース管理のために、この重要なコンポーネントにC++を使用しています。最も重要な点として、Milvusはハードウェアの能力をフルに活用するために、アセンブリレベルのベクトル化からマルチスレッド並列化、スケジューリングに至るまで、ハードウェアを意識した数多くのコード最適化を統合しています。</p>
 <p><strong>列指向</strong>：Milvusは列指向のベクトルデータベースシステムです。主な利点はデータアクセスパターンにある。クエリを実行する際、列指向データベースは行全体ではなく、クエリに関係する特定のフィールドのみを読み込むため、アクセスされるデータ量が大幅に削減される。さらに、列ベースのデータに対する操作は簡単にベクトル化することができるため、列全体に一度に操作を適用することができ、パフォーマンスをさらに向上させることができます。</p>
 <h2 id="What-Makes-Milvus-so-Scalable" class="common-anchor-header">Milvusがスケーラブルである理由<button data-href="#What-Makes-Milvus-so-Scalable" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -171,6 +188,6 @@ summary: >-
 <li><p>PromethusとGrafanaの統合 PrometheusはKubernetesのためのオープンソースのシステム監視とアラートツールキットです。Grafanaはオープンソースの可視化スタックで、あらゆるデータソースと接続できます。PromethusとGrafanaを監視サービスプロバイダとして使用することで、分散したMilvusのパフォーマンスを視覚的に監視することができます。詳細については、<a href="/docs/ja/monitor.md">監視サービスのデプロイを</a>参照してください。</p></li>
 <li><p>Milvusバックアップ Milvusバックアップは、Milvusデータのバックアップとリストアを可能にするツールです。CLIとAPIの両方を提供し、様々なアプリケーションシナリオに対応します。詳細は<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご参照ください。</p></li>
 <li><p>Milvus Capture Data Change (CDC) Milvus-CDCはMilvusインスタンス内の増分データをキャプチャして同期し、ソースインスタンスとターゲットインスタンス間でシームレスに転送することでビジネスデータの信頼性を確保し、増分バックアップやディザスタリカバリを容易に行うことができます。詳細は<a href="/docs/ja/milvus-cdc-overview.md">Milvus CDCを</a>ご参照ください。</p></li>
-<li><p>Milvusコネクタ Milvusは、MilvusをApache Sparkなどのサードパーティツールとシームレスに統合するためのコネクタ群を計画しています。現在、Spark Connectorを使用することで、MilvusのデータをApache Sparkに供給し、機械学習処理を行うことができます。詳細は<a href="/docs/ja/integrate_with_spark.md">Spark-Milvus Connectorを</a>ご参照ください。</p></li>
+<li><p>Milvusコネクタ Milvusは、MilvusとApache Sparkなどのサードパーティツールをシームレスに統合するためのコネクタ群を計画しています。現在、Spark Connectorを使用することで、MilvusのデータをApache Sparkに供給し、機械学習処理を行うことができます。詳細は<a href="/docs/ja/integrate_with_spark.md">Spark-Milvus Connectorを</a>ご参照ください。</p></li>
 <li><p>Vector Transmission Services (VTS) Milvusは、MilvusインスタンスとZillizクラスタ、Elasticsearch、Postgres (PgVector)、別のMilvusインスタンスなどのデータソース間でデータを転送するためのツールセットを提供しています。詳細は<a href="https://github.com/zilliztech/vts">VTSを</a>ご参照ください。</p></li>
 </ul>

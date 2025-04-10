@@ -43,9 +43,9 @@ summary: >-
 <p>Um esquema de coleção tem uma chave primária, um máximo de quatro campos vectoriais e vários campos escalares. O diagrama a seguir ilustra como mapear um artigo para uma lista de campos de esquema.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="schema-explained" class="doc-image" id="schema-explained" />
-   </span> <span class="img-wrapper"> <span>esquema-explicado</span> </span></p>
-<p>A conceção do modelo de dados de um sistema de pesquisa envolve a análise das necessidades comerciais e a abstração da informação num modelo de dados expresso em esquema. Por exemplo, a pesquisa de um texto deve ser "indexada" convertendo a cadeia literal num vetor através da "incorporação" e permitindo a pesquisa vetorial. Para além deste requisito essencial, pode ser necessário armazenar outras propriedades, como o carimbo temporal da publicação e o autor. Estes metadados permitem que as pesquisas semânticas sejam refinadas através de filtragem, devolvendo apenas textos publicados após uma data específica ou por um determinado autor. Também pode obter estes escalares com o texto principal para apresentar o resultado da pesquisa na aplicação. A cada um deles deve ser atribuído um identificador único para organizar estas partes de texto, expresso como um número inteiro ou uma cadeia de caracteres. Esses elementos são essenciais para obter uma lógica de pesquisa sofisticada.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
+   </span> <span class="img-wrapper"> <span>Anatomia do desenho do esquema</span> </span></p>
+<p>A conceção do modelo de dados de um sistema de pesquisa envolve a análise das necessidades comerciais e a abstração da informação num modelo de dados expresso em esquema. Por exemplo, a pesquisa de um pedaço de texto deve ser "indexada" convertendo a cadeia literal num vetor através da "incorporação" e permitindo a pesquisa vetorial. Para além deste requisito essencial, pode ser necessário armazenar outras propriedades, como o carimbo temporal da publicação e o autor. Estes metadados permitem que as pesquisas semânticas sejam refinadas através de filtragem, devolvendo apenas textos publicados após uma data específica ou por um determinado autor. Também pode obter estes escalares com o texto principal para apresentar o resultado da pesquisa na aplicação. A cada um deles deve ser atribuído um identificador único para organizar estas partes de texto, expresso como um número inteiro ou uma cadeia de caracteres. Esses elementos são essenciais para obter uma lógica de pesquisa sofisticada.</p>
 <p>Consulte a secção <a href="/docs/pt/schema-hands-on.md">Prática de conceção de esquemas</a> para saber como criar um esquema bem concebido.</p>
 <h2 id="Create-Schema" class="common-anchor-header">Criar esquema<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -418,7 +418,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_j
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Array-Fields" class="common-anchor-header">Adicionar campos de matriz</h3><p>Um campo de matriz armazena uma lista de elementos. Os tipos de dados de todos os elementos num campo de matriz devem ser os mesmos. Para mais informações sobre os campos de matriz, consulte <a href="/docs/pt/array_data_type.md">Campo de matriz</a>.</p>
+<h3 id="Add-Array-Fields" class="common-anchor-header">Adicionar campos de matriz</h3><p>Um campo de matriz armazena uma lista de elementos. Os tipos de dados de todos os elementos de um campo de matriz devem ser os mesmos. Para mais informações sobre os campos de matriz, consulte <a href="/docs/pt/array_data_type.md">Campo de matriz</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(

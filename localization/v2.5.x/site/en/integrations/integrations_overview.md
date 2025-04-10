@@ -85,5 +85,9 @@ title: Integrations Overview
 <tr><td><a href="/docs/integration_with_mindsdb.md">Integrate Milvus with MindsDB</a></td><td>Knowledge Engineering</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/milvus_and_mcp.md">MCP + Milvus: Connecting AI with Vector Databases</a></td><td>Agents</td><td>Milvus, MCP</td></tr>
 <tr><td><a href="/docs/openai_agents_milvus.md">Milvus Integration with OpenAI Agents: A Step-by-Step Guide</a></td><td>Agents</td><td>Milvus, OpenAI</td></tr>
+<tr><td><a href="/docs/build_RAG_with_milvus_and_feast.md">Build RAG with Milvus and Feast</a></td><td>Data Sources</td><td>Milvus, Feast</td></tr>
+<tr><td><a href="/docs/build_RAG_with_milvus_and_docling.md">Build RAG with Milvus and Docling</a></td><td>Data Sources</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/full_text_search_with_langchain.md">Using Full-Text Search with LangChain and Milvus</a></td><td>Full-Text Search</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/llamaindex_milvus_full_text_search.md">Using Full-Text Search with LlamaIndex and Milvus</a></td><td>Full-Text Search</td><td>Milvus, LlamaIndex</td></tr>
 </tbody>
 </table>

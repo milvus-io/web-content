@@ -35,8 +35,11 @@ title: 教學總覽
 <tr><td><a href="/docs/zh-hant/contextual_retrieval_with_milvus.md">使用 Milvus 進行上下文檢索</a></td><td>快速啟動</td><td>向量檢索</td></tr>
 <tr><td><a href="/docs/zh-hant/hdbscan_clustering_with_milvus.md">使用 Milvus 進行 HDBSCAN 聚類</a></td><td>快速啟動</td><td>向量檢索</td></tr>
 <tr><td><a href="/docs/zh-hant/use_ColPali_with_milvus.md">使用 ColPali 與 Milvus 進行多模式檢索</a></td><td>快速啟動</td><td>向量搜尋</td></tr>
-<tr><td><a href="/docs/zh-hant/vector_visualization.md">向量可視化</a></td><td>快速啟動</td><td>向量搜尋</td></tr>
-<tr><td><a href="/docs/zh-hant/movie_recommendation_with_milvus.md">使用 Milvus 推薦電影</a></td><td>推薦系統</td><td>向量搜尋</td></tr>
+<tr><td><a href="/docs/zh-hant/quickstart_with_attu.md">使用Attu快速入門</a></td><td>快速啟動</td><td>向量檢索</td></tr>
+<tr><td><a href="/docs/zh-hant/use-async-milvus-client-with-asyncio.md">使用 AsyncMilvusClient 與 asyncio</a></td><td>AsyncIO</td><td>AsyncIO、向量搜尋</td></tr>
+<tr><td><a href="/docs/zh-hant/text_image_search.md">使用 Milvus 進行文字到圖片搜尋</a></td><td>語意搜尋</td><td>向量搜尋</td></tr>
+<tr><td><a href="/docs/zh-hant/vector_visualization.md">向量可視化</a></td><td>快速入門</td><td>向量搜尋</td></tr>
+<tr><td><a href="/docs/zh-hant/movie_recommendation_with_milvus.md">使用 Milvus 的電影推薦</a></td><td>推薦系統</td><td>向量搜尋</td></tr>
 <tr><td><a href="/docs/zh-hant/funnel_search_with_matryoshka.md">使用 Matryoshka 嵌入式進行漏斗搜尋</a></td><td>快速啟動</td><td>向量搜尋</td></tr>
 <tr><td><a href="/docs/zh-hant/question_answering_system.md">問題回答系統</a></td><td>問題回答</td><td>向量搜尋</td></tr>
 <tr><td><a href="/docs/zh-hant/recommendation_system.md">推薦系統</a></td><td>推薦系統</td><td>向量搜尋</td></tr>
@@ -44,9 +47,6 @@ title: 教學總覽
 <tr><td><a href="/docs/zh-hant/audio_similarity_search.md">音訊類似性搜尋</a></td><td>語意搜尋</td><td>向量搜尋</td></tr>
 <tr><td><a href="/docs/zh-hant/dna_sequence_classification.md">DNA 分類</a></td><td>分類</td><td>向量搜尋</td></tr>
 <tr><td><a href="/docs/zh-hant/text_search_engine.md">文字搜尋引擎</a></td><td>語意搜尋</td><td>向量搜尋</td></tr>
-<tr><td><a href="/docs/zh-hant/text_image_search.md">以文字搜尋圖像</a></td><td>語意搜尋</td><td>向量搜尋</td></tr>
-<tr><td><a href="/docs/zh-hant/image_deduplication_system.md">影像重複資料刪除</a></td><td>重複資料刪除</td><td>向量搜尋</td></tr>
-<tr><td><a href="/docs/zh-hant/quickstart_with_attu.md">使用 Attu 快速入門</a></td><td>快速啟動</td><td>向量搜尋</td></tr>
-<tr><td><a href="/docs/zh-hant/use-async-milvus-client-with-asyncio.md">使用 AsyncMilvusClient 與 asyncio</a></td><td>AsyncIO</td><td>AsyncIO、向量搜尋</td></tr>
+<tr><td><a href="/docs/zh-hant/image_deduplication_system.md">影像重複刪除</a></td><td>重複資料刪除</td><td>向量搜尋</td></tr>
 </tbody>
 </table>

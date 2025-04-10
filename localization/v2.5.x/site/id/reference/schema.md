@@ -39,11 +39,11 @@ summary: >-
       </svg>
     </button></h2><p>Di Zilliz Cloud, skema koleksi menyusun tabel dalam database relasional, yang menentukan bagaimana Zilliz Cloud mengatur data dalam koleksi.</p>
 <p>Skema yang dirancang dengan baik sangat penting karena skema ini mengabstraksikan model data dan memutuskan apakah Anda dapat mencapai tujuan bisnis melalui pencarian. Selain itu, karena setiap baris data yang dimasukkan ke dalam koleksi harus mengikuti skema, hal ini membantu menjaga konsistensi data dan kualitas jangka panjang. Dari perspektif teknis, skema yang terdefinisi dengan baik akan menghasilkan penyimpanan data kolom yang terorganisir dengan baik dan struktur indeks yang lebih bersih, sehingga meningkatkan kinerja pencarian.</p>
-<p>Skema koleksi memiliki kunci utama, maksimal empat bidang vektor, dan beberapa bidang skalar. Diagram berikut ini mengilustrasikan cara memetakan sebuah artikel ke daftar ruas skema.</p>
+<p>Skema koleksi memiliki kunci utama, maksimal empat bidang vektor, dan beberapa bidang skalar. Diagram berikut ini mengilustrasikan cara memetakan artikel ke daftar bidang skema.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="schema-explained" class="doc-image" id="schema-explained" />
-   </span> <span class="img-wrapper"> <span>penjelasan skema</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
+   </span> <span class="img-wrapper"> <span>Anatomi Desain Skema</span> </span></p>
 <p>Desain model data dari sistem pencarian melibatkan analisis kebutuhan bisnis dan abstraksi informasi ke dalam model data yang diekspresikan dengan skema. Misalnya, pencarian sepotong teks harus "diindeks" dengan mengubah string literal menjadi vektor melalui "penyematan" dan memungkinkan pencarian vektor. Di luar persyaratan penting ini, menyimpan properti lain seperti stempel waktu publikasi dan penulis mungkin diperlukan. Metadata ini memungkinkan pencarian semantik disempurnakan melalui penyaringan, yang hanya mengembalikan teks yang diterbitkan setelah tanggal tertentu atau oleh penulis tertentu. Anda juga dapat mengambil skalar ini dengan teks utama untuk merender hasil pencarian dalam aplikasi. Masing-masing harus diberi pengenal unik untuk mengatur potongan-potongan teks ini, yang dinyatakan sebagai bilangan bulat atau string. Elemen-elemen ini sangat penting untuk mencapai logika pencarian yang canggih.</p>
 <p>Lihat Panduan <a href="/docs/id/schema-hands-on.md">Praktis Desain Skema</a> untuk mengetahui cara membuat skema yang dirancang dengan baik.</p>
 <h2 id="Create-Schema" class="common-anchor-header">Membuat Skema<button data-href="#Create-Schema" class="anchor-icon" translate="no">

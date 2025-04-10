@@ -35,7 +35,10 @@ title: Обзор учебников
 <tr><td><a href="/docs/ru/contextual_retrieval_with_milvus.md">Контекстный поиск с Milvus</a></td><td>Быстрый старт</td><td>векторный поиск</td></tr>
 <tr><td><a href="/docs/ru/hdbscan_clustering_with_milvus.md">Кластеризация HDBSCAN с помощью Milvus</a></td><td>Быстрый старт</td><td>векторный поиск</td></tr>
 <tr><td><a href="/docs/ru/use_ColPali_with_milvus.md">Использование ColPali для мультимодального поиска с Milvus</a></td><td>Быстрый запуск</td><td>векторный поиск</td></tr>
-<tr><td><a href="/docs/ru/vector_visualization.md">Визуализация векторов</a></td><td>Быстрый старт</td><td>векторный поиск</td></tr>
+<tr><td><a href="/docs/ru/quickstart_with_attu.md">Быстрый старт с Attu</a></td><td>Быстрый старт</td><td>векторный поиск</td></tr>
+<tr><td><a href="/docs/ru/use-async-milvus-client-with-asyncio.md">Использование AsyncMilvusClient с asyncio</a></td><td>AsyncIO</td><td>AsyncIO, векторный поиск</td></tr>
+<tr><td><a href="/docs/ru/text_image_search.md">Поиск по тексту и изображению с помощью Milvus</a></td><td>Семантический поиск</td><td>векторный поиск</td></tr>
+<tr><td><a href="/docs/ru/vector_visualization.md">Векторная визуализация</a></td><td>Быстрый старт</td><td>векторный поиск</td></tr>
 <tr><td><a href="/docs/ru/movie_recommendation_with_milvus.md">Рекомендация фильмов с помощью Milvus</a></td><td>Система рекомендаций</td><td>векторный поиск</td></tr>
 <tr><td><a href="/docs/ru/funnel_search_with_matryoshka.md">Поиск воронки с помощью вкраплений "Матрешки</a></td><td>Быстрый старт</td><td>векторный поиск</td></tr>
 <tr><td><a href="/docs/ru/question_answering_system.md">Система ответов на вопросы</a></td><td>Ответы на вопросы</td><td>векторный поиск</td></tr>
@@ -44,9 +47,6 @@ title: Обзор учебников
 <tr><td><a href="/docs/ru/audio_similarity_search.md">Поиск по сходству аудио</a></td><td>Семантический поиск</td><td>векторный поиск</td></tr>
 <tr><td><a href="/docs/ru/dna_sequence_classification.md">Классификация ДНК</a></td><td>Классификация</td><td>векторный поиск</td></tr>
 <tr><td><a href="/docs/ru/text_search_engine.md">Система текстового поиска</a></td><td>Семантический поиск</td><td>векторный поиск</td></tr>
-<tr><td><a href="/docs/ru/text_image_search.md">Поиск изображений по тексту</a></td><td>Семантический поиск</td><td>векторный поиск</td></tr>
 <tr><td><a href="/docs/ru/image_deduplication_system.md">Дедупликация изображений</a></td><td>Дедупликация</td><td>векторный поиск</td></tr>
-<tr><td><a href="/docs/ru/quickstart_with_attu.md">Быстрый старт с Attu</a></td><td>Быстрый старт</td><td>векторный поиск</td></tr>
-<tr><td><a href="/docs/ru/use-async-milvus-client-with-asyncio.md">Использование AsyncMilvusClient с asyncio</a></td><td>AsyncIO</td><td>AsyncIO, векторный поиск</td></tr>
 </tbody>
 </table>

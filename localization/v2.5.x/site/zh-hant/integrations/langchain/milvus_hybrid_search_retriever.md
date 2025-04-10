@@ -1,9 +1,9 @@
 ---
 id: milvus_hybrid_search_retriever.md
 summary: 本筆記本說明如何使用與 Milvus 向量資料庫相關的功能。
-title: Milvus 混合型搜索尋回犬
+title: Milvus 混合搜尋檢索器
 ---
-<h1 id="Milvus-Hybrid-Search-Retriever" class="common-anchor-header">Milvus 混合型搜索尋回犬<button data-href="#Milvus-Hybrid-Search-Retriever" class="anchor-icon" translate="no">
+<h1 id="Milvus-Hybrid-Search-Retriever" class="common-anchor-header">Milvus 混合搜尋檢索器<button data-href="#Milvus-Hybrid-Search-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,31 +18,16 @@ title: Milvus 混合型搜索尋回犬
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Overview" class="common-anchor-header">總覽<button data-href="#Overview" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>混合搜尋結合了不同搜尋範式的優點，以提高檢索的準確性和穩健性。它充分利用了密集向量搜尋和稀疏向量搜尋的能力，以及多種密集向量搜尋策略的組合，確保對各種查詢進行全面而精確的檢索。</p>
+    </button></h1><p>混合搜尋結合了不同搜尋範式的優點，以提高檢索的精確度和穩健性。它充分利用了密集向量搜尋和稀疏向量搜尋的能力，以及多種密集向量搜尋策略的組合，確保對各種查詢進行全面而精確的檢索。</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>本圖說明最常見的混合搜尋情況，也就是密集 + 稀疏混合搜尋。在這種情況下，候選人會同時使用語意向量相似性和精確的關鍵字匹配進行檢索。來自這些方法的結果會合併、重新排序，並傳送到 LLM 以產生最終答案。這種方法兼顧了精確度與語意理解，對於不同的查詢情境非常有效。</p>
+<p>此圖說明最常見的混合搜尋情況，也就是密集 + 稀疏混合搜尋。在這種情況下，候選人會同時使用語意向量相似性和精確的關鍵字匹配進行檢索。來自這些方法的結果會合併、重新排序，並傳送到 LLM 以產生最終答案。這種方法兼顧了精確度與語意理解，對於不同的查詢情境非常有效。</p>
 <p>除了密集 + 稀疏混合搜尋之外，混合策略也可以結合多種密集向量模型。例如，一個密集向量模型可能專門捕捉語義上的細微差異，而另一個則著重於上下文嵌入或特定領域的表達。透過合併這些模型的結果並重新排序，這類型的混合搜尋可確保檢索過程更仔細、更能感知上下文。</p>
-<p>LangChain Milvus 整合提供了一個彈性的方式來實作混合搜尋，它支援任何數量的向量領域，以及任何自訂的密集或稀疏嵌入模型，這讓 LangChain Milvus 可以彈性的適應各種混合搜尋的使用情境，同時也相容於 LangChain 的其他功能。</p>
+<p>LangChain Milvus 整合提供了一個彈性的方式來實現混合搜尋，它支援任何數量的向量領域，以及任何自訂的密集或稀疏嵌入模型，這使得 LangChain Milvus 能夠靈活地適應各種混合搜尋的使用情境，同時與 LangChain 的其他功能相容。</p>
 <p>在本教程中，我們將從最常見的 dense + sparse 情況開始，然後介紹任何數目的一般混合搜尋使用方式。</p>
 <div class="alert note">
 <p><a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a> 是 Milvus 和 LangChain 混合搜尋的另一種實作，<strong>即將被廢棄</strong>。請使用本文件中的方法來實作混合搜尋，因為它比較有彈性，而且與 LangChain 相容。</p>
@@ -63,7 +48,7 @@ title: Milvus 混合型搜索尋回犬
         ></path>
       </svg>
     </button></h2><p>在執行本筆記本之前，請確認您已經安裝下列的相依性：</p>
-<pre><code translate="no" class="language-shell">$ pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 pymilvus[model] <span class="hljs-comment">#langchain-voyageai</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 pymilvus[model] <span class="hljs-comment">#langchain-voyageai</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面上方的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
@@ -71,53 +56,53 @@ title: Milvus 混合型搜索尋回犬
 <p>我們將使用 OpenAI 的模型。您應該準備<a href="https://platform.openai.com/docs/quickstart">OpenAI</a> 的環境變數<code translate="no">OPENAI_API_KEY</code> 。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>指定您的 Milvus 伺服器<code translate="no">URI</code> (也可選擇<code translate="no">TOKEN</code>)。關於如何安裝和啟動 Milvus 伺服器，請參考本<a href="https://milvus.io/docs/install_standalone-docker-compose.md">指南</a>。</p>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>準備一些範例文件，這些文件是依主題或類型分類的虛構故事摘要。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Whispering Walls&#x27; by Ava Moreno, a young journalist named Sophia uncovers a decades-old conspiracy hidden within the crumbling walls of an ancient mansion, where the whispers of the past threaten to destroy her own sanity.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Mystery&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Last Refuge&#x27; by Ethan Blackwood, a group of survivors must band together to escape a post-apocalyptic wasteland, where the last remnants of humanity cling to life in a desperate bid for survival.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Post-Apocalyptic&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Memory Thief&#x27; by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Heist/Thriller&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The City of Echoes&#x27; by Julian Saint Clair, a brilliant detective must navigate a labyrinthine metropolis where time is currency, and the rich can live forever, but at a terrible cost to the poor.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Science Fiction&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Starlight Serenade&#x27; by Ruby Flynn, a shy astronomer discovers a mysterious melody emanating from a distant star, which leads her on a journey to uncover the secrets of the universe and her own heart.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Science Fiction/Romance&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Shadow Weaver&#x27; by Piper Redding, a young orphan discovers she has the ability to weave powerful illusions, but soon finds herself at the center of a deadly game of cat and mouse between rival factions vying for control of the mystical arts.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Fantasy&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Lost Expedition&#x27; by Caspian Grey, a team of explorers ventures into the heart of the Amazon rainforest in search of a lost city, but soon finds themselves hunted by a ruthless treasure hunter and the treacherous jungle itself.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Adventure&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Clockwork Kingdom&#x27; by Augusta Wynter, a brilliant inventor discovers a hidden world of clockwork machines and ancient magic, where a rebellion is brewing against the tyrannical ruler of the land.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Steampunk/Fantasy&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Phantom Pilgrim&#x27; by Rowan Welles, a charismatic smuggler is hired by a mysterious organization to transport a valuable artifact across a war-torn continent, but soon finds themselves pursued by deadly assassins and rival factions.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Adventure/Thriller&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Dreamwalker&#x27;s Journey&#x27; by Lyra Snow, a young dreamwalker discovers she has the ability to enter people&#x27;s dreams, but soon finds herself trapped in a surreal world of nightmares and illusions, where the boundaries between reality and fantasy blur.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Fantasy&quot;</span>},
     ),
@@ -255,7 +240,7 @@ vectorstore.vector_fields
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">['dense1', 'dense2', 'sparse']
 </code></pre>
-<p>在這個範例中，我們有三個向量場。其中，<code translate="no">sparse</code> 用作<code translate="no">BM25BuiltInFunction</code> 的輸出欄位，而另外兩個，<code translate="no">dense1</code> 和<code translate="no">dense2</code> ，則自動指定為兩個<code translate="no">OpenAIEmbeddings</code> 模型的輸出欄位（基於順序）。</p>
+<p>在這個範例中，我們有三個向量場。其中，<code translate="no">sparse</code> 用作<code translate="no">BM25BuiltInFunction</code> 的輸出欄位，而另外兩個，<code translate="no">dense1</code> 和<code translate="no">dense2</code> ，則自動指定為兩個<code translate="no">OpenAIEmbeddings</code> 模型的輸出欄位（根據順序）。</p>
 <h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">指定多向量欄位的索引參數</h3><p>預設情況下，每個向量欄位的索引類型會由嵌入或內建函數的類型自動決定。不過，您也可以指定每個向量欄位的索引類型，以最佳化搜尋效能。</p>
 <pre><code translate="no" class="language-python">dense_index_param_1 = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
@@ -279,8 +264,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=True,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=<span class="hljs-literal">True</span>,
 )
 
 vectorstore.vector_fields
@@ -300,8 +285,8 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=True,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=<span class="hljs-literal">True</span>,
 )
 
 query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
@@ -313,7 +298,7 @@ vectorstore.similarity_search(
 <pre><code translate="no">[Document(metadata={'pk': 454646931479252186, 'category': 'Heist/Thriller'}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
 </code></pre>
 <p>以下是 RRF reranking 的範例：</p>
-<pre><code translate="no" class="language-python">vectorstore.<span class="hljs-title function_">similarity_search</span>(query, k=<span class="hljs-number">1</span>, ranker_type=<span class="hljs-string">&quot;rrf&quot;</span>, ranker_params={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>})
+<pre><code translate="no" class="language-python">vectorstore.similarity_search(query, k=<span class="hljs-number">1</span>, ranker_type=<span class="hljs-string">&quot;rrf&quot;</span>, ranker_params={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>})
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'category': 'Heist/Thriller', 'pk': 454646931479252186}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
 </code></pre>
@@ -373,8 +358,8 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=True,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">建立 RAG 鏈</h3><p>我們準備好 LLM 實例和提示，然後用 LangChain Expression Language 將它們結合成 RAG 管道。</p>
@@ -426,9 +411,9 @@ rag_chain = (
 
 <span class="hljs-comment"># rag_chain.get_graph().print_ascii()</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>以特定的問題來啟動 RAG 鏈，並擷取回應</p>
+<p>使用特定的問題來呼叫 RAG 鏈，並擷取回應</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
-res = rag_chain.<span class="hljs-title function_">invoke</span>(query)
+res = rag_chain.invoke(query)
 res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively perform these tasks.'

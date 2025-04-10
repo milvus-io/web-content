@@ -74,8 +74,8 @@ summary: >-
 <p>Setelah data menjadi vektor, data tersebut dapat disimpan di Milvus untuk pengelolaan dan pengambilan vektor. Diagram di bawah ini menunjukkan proses dasarnya.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/dense-vector.png" alt="dense-vector" class="doc-image" id="dense-vector" />
-   </span> <span class="img-wrapper"> <span>vektor padat</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-dense-vector.png" alt="use-dense-vector" class="doc-image" id="use-dense-vector" />
+   </span> <span class="img-wrapper"> <span>use-dense-vector</span> </span></p>
 <div class="alert note">
 <p>Selain vektor padat, Milvus juga mendukung vektor jarang dan vektor biner. Vektor jarang cocok untuk pencocokan yang tepat berdasarkan istilah tertentu, seperti pencarian kata kunci dan pencocokan istilah, sedangkan vektor biner biasanya digunakan untuk menangani data binari secara efisien, seperti pencocokan pola gambar dan aplikasi hashing tertentu. Untuk informasi lebih lanjut, lihat <a href="/docs/id/binary-vector.md">Vektor Biner</a> dan <a href="/docs/id/sparse_vector.md">Vektor</a> <a href="/docs/id/binary-vector.md">Jarang</a>.</p>
 </div>

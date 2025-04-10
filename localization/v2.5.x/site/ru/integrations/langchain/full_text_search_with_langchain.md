@@ -26,14 +26,14 @@ title: Использование полнотекстового поиска с
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Полнотекстовый поиск</a> - это традиционный метод поиска документов, содержащих определенные термины или фразы, путем прямого сопоставления ключевых слов в тексте. Он ранжирует результаты на основе релевантности, которая обычно определяется такими факторами, как частота и близость терминов. В то время как семантический поиск позволяет лучше понять замысел и контекст, полнотекстовый поиск обеспечивает точность точного подбора ключевых слов, что делает его ценным дополнительным инструментом. Алгоритм BM25 - это популярный метод ранжирования для полнотекстового поиска, особенно полезный в Retrieval-Augmented Generation (RAG).</p>
-<p>Начиная с <a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a>, полнотекстовый поиск поддерживается с помощью подхода Sparse-BM25, представляющего алгоритм BM25 в виде разреженных векторов. Milvus принимает на вход необработанный текст и автоматически преобразует его в разреженные векторы, хранящиеся в указанном поле, устраняя необходимость в ручной генерации разреженных вкраплений.</p>
-<p>Интеграция LangChain с Milvus также добавила эту функцию, упростив процесс внедрения полнотекстового поиска в приложения RAG. Комбинируя полнотекстовый поиск с семантическим поиском с помощью плотных векторов, вы можете получить гибридный подход, который использует как семантический контекст из плотных вкраплений, так и точную релевантность ключевых слов из сопоставления слов. Такая интеграция повышает точность, релевантность и удобство работы с поисковыми системами.</p>
+<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Полнотекстовый поиск</a> - это традиционный метод поиска документов по определенным ключевым словам или фразам в тексте. Он ранжирует результаты на основе оценки релевантности, рассчитанной с учетом таких факторов, как частота встречаемости терминов. В то время как семантический поиск лучше понимает смысл и контекст, полнотекстовый поиск превосходит его в точности подбора ключевых слов, что делает его полезным дополнением к семантическому поиску. Алгоритм BM25 широко используется для ранжирования в полнотекстовом поиске и играет ключевую роль в Retrieval-Augmented Generation (RAG).</p>
+<p>В<a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5</a> реализованы встроенные возможности полнотекстового поиска с использованием BM25. Этот подход преобразует текст в разреженные векторы, которые представляют собой оценки BM25. Вы можете просто ввести необработанный текст, и Milvus автоматически сгенерирует и сохранит разреженные векторы, без необходимости ручной генерации разреженных вкраплений.</p>
+<p>Интеграция LangChain с Milvus также добавила эту функцию, упростив процесс включения полнотекстового поиска в приложения RAG. Комбинируя полнотекстовый поиск с семантическим поиском с помощью плотных векторов, вы можете получить гибридный подход, который использует как семантический контекст из плотных вкраплений, так и точную релевантность ключевых слов из сопоставления слов. Такая интеграция повышает точность, релевантность и удобство работы с поисковыми системами.</p>
 <p>В этом руководстве мы покажем, как использовать LangChain и Milvus для реализации полнотекстового поиска в вашем приложении.</p>
 <div class="alert note">
 <ul>
-<li><p>Полнотекстовый поиск доступен в Milvus Standalone и Milvus Distributed, но не в Milvus Lite, хотя он включен в дорожную карту для будущего включения. В ближайшее время он также будет доступен в Zilliz Cloud (полностью управляемый Milvus). За дополнительной информацией обращайтесь на <a href="mailto:support@zilliz.com">support@zilliz.com</a>.</p></li>
-<li><p>Прежде чем приступить к этому руководству, убедитесь, что вы имеете базовое представление о <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">полнотекстовом поиске</a> и <a href="https://milvus.io/docs/basic_usage_langchain.md">базовом использовании</a> интеграции LangChain Milvus.</p></li>
+<li>В настоящее время полнотекстовый поиск доступен в Milvus Standalone, Milvus Distributed и Zilliz Cloud, хотя пока не поддерживается в Milvus Lite (в котором эта функция запланирована на будущее). За дополнительной информацией обращайтесь по адресу support@zilliz.com.</li>
+<li>Прежде чем приступить к этому руководству, убедитесь, что вы имеете базовое представление о <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">полнотекстовом поиске</a> и <a href="https://milvus.io/docs/basic_usage_langchain.md">базовом использовании</a> интеграции LangChain Milvus.</li>
 </ul>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -52,7 +52,7 @@ title: Использование полнотекстового поиска с
         ></path>
       </svg>
     </button></h2><p>Перед запуском этого блокнота убедитесь, что у вас установлены следующие зависимости:</p>
-<pre><code translate="no" class="language-shell">$ pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 <span class="hljs-comment">#langchain-voyageai</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 <span class="hljs-comment">#langchain-voyageai</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Если вы используете Google Colab, то для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
@@ -60,19 +60,19 @@ title: Использование полнотекстового поиска с
 <p>Мы будем использовать модели из OpenAI. Вам необходимо подготовить переменные окружения <code translate="no">OPENAI_API_KEY</code> из <a href="https://platform.openai.com/docs/quickstart">OpenAI</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Укажите ваш сервер Milvus <code translate="no">URI</code> (и, по желанию, <code translate="no">TOKEN</code>). О том, как установить и запустить сервер Milvus, читайте в этом <a href="https://milvus.io/docs/install_standalone-docker-compose.md">руководстве</a>.</p>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Подготовьте несколько примеров документов:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like this apple&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;fruit&quot;</span>}),
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like swimming&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;sport&quot;</span>}),
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like dogs&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like this apple&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;fruit&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like swimming&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;sport&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like dogs&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
 ]
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Initialization-with-BM25-Function" class="common-anchor-header">Инициализация с помощью функции BM25<button data-href="#Initialization-with-BM25-Function" class="anchor-icon" translate="no">
@@ -108,7 +108,7 @@ vectorstore = Milvus.from_documents(
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>В приведенном выше коде мы определяем экземпляр <code translate="no">BM25BuiltInFunction</code> и передаем его объекту <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> - это облегченный класс-обертка для <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> в Milvus.</p>
+<p>В приведенном выше коде мы определяем экземпляр <code translate="no">BM25BuiltInFunction</code> и передаем его объекту <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> - это легкий класс-обертка для <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> в Milvus.</p>
 <p>Вы можете указать поля ввода и вывода для этой функции в параметрах <code translate="no">BM25BuiltInFunction</code>:</p>
 <ul>
 <li><code translate="no">input_field_names</code> (str): Имя поля ввода, по умолчанию <code translate="no">text</code>. Оно указывает, какое поле эта функция считывает в качестве входного.</li>
@@ -148,7 +148,7 @@ vectorstore.vector_fields
 <p>При выполнении гибридного поиска нам нужно только передать текст запроса и опционально задать параметры topK и reranker. Экземпляр <code translate="no">vectorstore</code> автоматически обработает векторные вкрапления и встроенные функции и, наконец, использует реранкер для уточнения результатов. Основные детали реализации процесса поиска скрыты от пользователя.</p>
 <pre><code translate="no" class="language-python">vectorstore.similarity_search(
     <span class="hljs-string">&quot;Do I like apples?&quot;</span>, k=<span class="hljs-number">1</span>
-)  # , ranker_type=<span class="hljs-string">&quot;weighted&quot;</span>, ranker_params={<span class="hljs-string">&quot;weights&quot;</span>:[<span class="hljs-number">0.3</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]})
+)  <span class="hljs-comment"># , ranker_type=&quot;weighted&quot;, ranker_params={&quot;weights&quot;:[0.3, 0.3, 0.4]})</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'category': 'fruit', 'pk': 454646931479251897}, page_content='I like this apple')]
 </code></pre>
@@ -188,7 +188,7 @@ vectorstore.vector_fields
       </svg>
     </button></h2><p>Анализаторы играют важную роль в полнотекстовом поиске, разбивая предложение на лексемы и выполняя лексический анализ, например, стемминг и удаление стоп-слов. Анализаторы обычно зависят от конкретного языка. Вы можете обратиться к <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">этому руководству</a>, чтобы узнать больше об анализаторах в Milvus.</p>
 <p>Milvus поддерживает два типа анализаторов: <strong>Встроенные анализаторы</strong> и <strong>Пользовательские анализаторы</strong>. По умолчанию на сайте <code translate="no">BM25BuiltInFunction</code> будет использоваться <a href="https://milvus.io/docs/standard-analyzer.md">стандартный встроенный анализатор</a>, который является самым базовым анализатором и выполняет токенизацию текста с пунктуацией.</p>
-<p>Если вы хотите использовать другой анализатор или настроить его под себя, вы можете передать параметр <code translate="no">analyzer_params</code> в инициализации <code translate="no">BM25BuiltInFunction</code>.</p>
+<p>Если вы хотите использовать другой анализатор или настроить его, вы можете передать параметр <code translate="no">analyzer_params</code> в инициализации <code translate="no">BM25BuiltInFunction</code>.</p>
 <pre><code translate="no" class="language-python">analyzer_params_custom = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -338,7 +338,7 @@ rag_chain = (
 <button class="copy-code-btn"></button></code></pre>
 <p>Вызовите цепочку RAG с определенным вопросом и получите ответ</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
-res = rag_chain.<span class="hljs-title function_">invoke</span>(query)
+res = rag_chain.invoke(query)
 res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively generate and execute these programming statements.'

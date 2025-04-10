@@ -3,9 +3,9 @@ id: milvus_hybrid_search_retriever.md
 summary: >-
   Este caderno mostra como utilizar a funcionalidade relacionada com a base de
   dados de vectores Milvus.
-title: Milvus Hybrid Search Retriever
+title: Recuperador de pesquisa híbrida Milvus
 ---
-<h1 id="Milvus-Hybrid-Search-Retriever" class="common-anchor-header">Milvus Hybrid Search Retriever<button data-href="#Milvus-Hybrid-Search-Retriever" class="anchor-icon" translate="no">
+<h1 id="Milvus-Hybrid-Search-Retriever" class="common-anchor-header">Recuperador de pesquisa híbrida Milvus<button data-href="#Milvus-Hybrid-Search-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,22 +20,7 @@ title: Milvus Hybrid Search Retriever
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>A pesquisa híbrida combina os pontos fortes de diferentes paradigmas de pesquisa para melhorar a precisão e a robustez da recuperação. Aproveita as capacidades da pesquisa de vectores densos e da pesquisa de vectores esparsos, bem como as combinações de várias estratégias de pesquisa de vectores densos, garantindo uma recuperação abrangente e precisa para diversas consultas.</p>
+    </button></h1><p>A pesquisa híbrida combina os pontos fortes de diferentes paradigmas de pesquisa para melhorar a precisão e a robustez da recuperação. Aproveita as capacidades da pesquisa de vectores densos e da pesquisa de vectores esparsos, bem como as combinações de várias estratégias de pesquisa de vectores densos, garantindo uma recuperação abrangente e precisa para diversas consultas.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
@@ -43,11 +28,11 @@ title: Milvus Hybrid Search Retriever
   </span>
 </p>
 <p>Este diagrama ilustra o cenário de pesquisa híbrida mais comum, que é a pesquisa híbrida densa + esparsa. Neste caso, os candidatos são recuperados utilizando a semelhança de vectores semânticos e a correspondência precisa de palavras-chave. Os resultados destes métodos são fundidos, reavaliados e transmitidos a um LLM para gerar a resposta final. Esta abordagem equilibra precisão e compreensão semântica, tornando-a altamente eficaz para diversos cenários de consulta.</p>
-<p>Para além da pesquisa híbrida densa + esparsa, as estratégias híbridas também podem combinar vários modelos de vectores densos. Por exemplo, um modelo de vectores densos pode especializar-se na captura de nuances semânticas, enquanto outro se concentra em incorporações contextuais ou representações específicas do domínio. Ao fundir os resultados destes modelos e ao reordená-los, este tipo de pesquisa híbrida garante um processo de recuperação mais matizado e sensível ao contexto.</p>
+<p>Para além da pesquisa híbrida densa + esparsa, as estratégias híbridas também podem combinar vários modelos de vectores densos. Por exemplo, um modelo de vectores densos pode especializar-se na captura de nuances semânticas, enquanto outro se concentra em incorporações contextuais ou representações específicas do domínio. Ao fundir os resultados destes modelos e ao reordená-los, este tipo de pesquisa híbrida assegura um processo de recuperação mais matizado e sensível ao contexto.</p>
 <p>A integração do LangChain Milvus fornece uma forma flexível de implementar a pesquisa híbrida, suporta qualquer número de campos vectoriais e quaisquer modelos de incorporação densos ou esparsos personalizados, o que permite ao LangChain Milvus adaptar-se de forma flexível a vários cenários de utilização de pesquisa híbrida e, ao mesmo tempo, ser compatível com outras capacidades do LangChain.</p>
 <p>Neste tutorial, começaremos com o caso mais comum denso + esparso e, em seguida, apresentaremos várias abordagens gerais de uso de pesquisa híbrida.</p>
 <div class="alert note">
-<p>O <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a>, que é outra implementação de busca híbrida com Milvus e LangChain, <strong>está prestes a ser descontinuado</strong>. Por favor, use a abordagem deste documento para implementar a pesquisa híbrida, pois ela é mais flexível e compatível com LangChain.</p>
+<p>O <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever</a>, que é outra implementação de busca híbrida com Milvus e LangChain, <strong>está prestes a ser descontinuado</strong>. Use a abordagem deste documento para implementar a pesquisa híbrida, pois ela é mais flexível e compatível com LangChain.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +50,7 @@ title: Milvus Hybrid Search Retriever
         ></path>
       </svg>
     </button></h2><p>Antes de executar este notebook, certifique-se de ter as seguintes dependências instaladas:</p>
-<pre><code translate="no" class="language-shell">$ pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 pymilvus[model] <span class="hljs-comment">#langchain-voyageai</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 pymilvus[model] <span class="hljs-comment">#langchain-voyageai</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
@@ -73,53 +58,53 @@ title: Milvus Hybrid Search Retriever
 <p>Vamos utilizar os modelos do OpenAI. Deve preparar as variáveis de ambiente <code translate="no">OPENAI_API_KEY</code> do <a href="https://platform.openai.com/docs/quickstart">OpenAI</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Especifique o seu servidor Milvus <code translate="no">URI</code> (e, opcionalmente, o <code translate="no">TOKEN</code>). Para saber como instalar e iniciar o servidor Milvus, siga este <a href="https://milvus.io/docs/install_standalone-docker-compose.md">guia</a>.</p>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Prepare alguns documentos de exemplo, que são resumos de histórias fictícias categorizadas por tema ou género.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Whispering Walls&#x27; by Ava Moreno, a young journalist named Sophia uncovers a decades-old conspiracy hidden within the crumbling walls of an ancient mansion, where the whispers of the past threaten to destroy her own sanity.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Mystery&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Last Refuge&#x27; by Ethan Blackwood, a group of survivors must band together to escape a post-apocalyptic wasteland, where the last remnants of humanity cling to life in a desperate bid for survival.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Post-Apocalyptic&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Memory Thief&#x27; by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Heist/Thriller&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The City of Echoes&#x27; by Julian Saint Clair, a brilliant detective must navigate a labyrinthine metropolis where time is currency, and the rich can live forever, but at a terrible cost to the poor.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Science Fiction&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Starlight Serenade&#x27; by Ruby Flynn, a shy astronomer discovers a mysterious melody emanating from a distant star, which leads her on a journey to uncover the secrets of the universe and her own heart.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Science Fiction/Romance&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Shadow Weaver&#x27; by Piper Redding, a young orphan discovers she has the ability to weave powerful illusions, but soon finds herself at the center of a deadly game of cat and mouse between rival factions vying for control of the mystical arts.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Fantasy&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Lost Expedition&#x27; by Caspian Grey, a team of explorers ventures into the heart of the Amazon rainforest in search of a lost city, but soon finds themselves hunted by a ruthless treasure hunter and the treacherous jungle itself.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Adventure&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Clockwork Kingdom&#x27; by Augusta Wynter, a brilliant inventor discovers a hidden world of clockwork machines and ancient magic, where a rebellion is brewing against the tyrannical ruler of the land.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Steampunk/Fantasy&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Phantom Pilgrim&#x27; by Rowan Welles, a charismatic smuggler is hired by a mysterious organization to transport a valuable artifact across a war-torn continent, but soon finds themselves pursued by deadly assassins and rival factions.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Adventure/Thriller&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Dreamwalker&#x27;s Journey&#x27; by Lyra Snow, a young dreamwalker discovers she has the ability to enter people&#x27;s dreams, but soon finds herself trapped in a surreal world of nightmares and illusions, where the boundaries between reality and fantasy blur.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Fantasy&quot;</span>},
     ),
@@ -281,8 +266,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=True,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=<span class="hljs-literal">True</span>,
 )
 
 vectorstore.vector_fields
@@ -292,7 +277,7 @@ vectorstore.vector_fields
 <div class="alert note">
 <p>Mantenha a ordem da lista de parâmetros de índice consistente com a ordem de <code translate="no">vectorstore.vector_fields</code> para evitar confusões.</p>
 </div>
-<h3 id="Rerank-the-candidates" class="common-anchor-header">Classificar novamente os candidatos</h3><p>Após a primeira fase de recuperação, é necessário classificar novamente os candidatos para obter um melhor resultado. Pode escolher <a href="https://milvus.io/docs/reranking.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a> ou <a href="https://milvus.io/docs/reranking.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a> consoante os seus requisitos. Pode consultar a secção <a href="https://milvus.io/docs/reranking.md#Reranking">Reranking</a> para obter mais informações.</p>
+<h3 id="Rerank-the-candidates" class="common-anchor-header">Classificar novamente os candidatos</h3><p>Após a primeira fase de recuperação, é necessário classificar novamente os candidatos para obter um melhor resultado. Pode escolher <a href="https://milvus.io/docs/reranking.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a> ou <a href="https://milvus.io/docs/reranking.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a> consoante os seus requisitos. Para mais informações, consulte a secção <a href="https://milvus.io/docs/reranking.md#Reranking">Reranking</a>.</p>
 <p>Eis um exemplo de classificação ponderada:</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
@@ -302,8 +287,8 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=True,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=<span class="hljs-literal">True</span>,
 )
 
 query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
@@ -315,7 +300,7 @@ vectorstore.similarity_search(
 <pre><code translate="no">[Document(metadata={'pk': 454646931479252186, 'category': 'Heist/Thriller'}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
 </code></pre>
 <p>Aqui está um exemplo de classificação RRF:</p>
-<pre><code translate="no" class="language-python">vectorstore.<span class="hljs-title function_">similarity_search</span>(query, k=<span class="hljs-number">1</span>, ranker_type=<span class="hljs-string">&quot;rrf&quot;</span>, ranker_params={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>})
+<pre><code translate="no" class="language-python">vectorstore.similarity_search(query, k=<span class="hljs-number">1</span>, ranker_type=<span class="hljs-string">&quot;rrf&quot;</span>, ranker_params={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>})
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'category': 'Heist/Thriller', 'pk': 454646931479252186}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
 </code></pre>
@@ -375,8 +360,8 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=True,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">Construir a cadeia RAG</h3><p>Preparamos a instância LLM e o prompt e, em seguida, combinamo-los num pipeline RAG utilizando a linguagem de expressão LangChain.</p>
@@ -430,7 +415,7 @@ rag_chain = (
 <button class="copy-code-btn"></button></code></pre>
 <p>Invocar a cadeia RAG com uma pergunta específica e obter a resposta</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
-res = rag_chain.<span class="hljs-title function_">invoke</span>(query)
+res = rag_chain.invoke(query)
 res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively perform these tasks.'

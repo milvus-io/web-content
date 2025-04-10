@@ -1,9 +1,9 @@
 ---
 id: milvus_hybrid_search_retriever.md
 summary: 이 노트북은 Milvus 벡터 데이터베이스와 관련된 기능을 사용하는 방법을 보여줍니다.
-title: 밀버스 하이브리드 서치 리트리버
+title: Milvus 하이브리드 검색 리트리버
 ---
-<h1 id="Milvus-Hybrid-Search-Retriever" class="common-anchor-header">밀버스 하이브리드 서치 리트리버<button data-href="#Milvus-Hybrid-Search-Retriever" class="anchor-icon" translate="no">
+<h1 id="Milvus-Hybrid-Search-Retriever" class="common-anchor-header">Milvus 하이브리드 검색 리트리버<button data-href="#Milvus-Hybrid-Search-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,22 +18,7 @@ title: 밀버스 하이브리드 서치 리트리버
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>하이브리드 검색은 서로 다른 검색 패러다임의 강점을 결합하여 검색 정확도와 견고성을 향상시킵니다. 밀도 벡터 검색과 희소 벡터 검색의 기능은 물론, 여러 밀도 벡터 검색 전략의 조합을 활용하여 다양한 쿼리에 대해 포괄적이고 정확한 검색을 보장합니다.</p>
+    </button></h1><p>하이브리드 검색은 서로 다른 검색 패러다임의 강점을 결합하여 검색 정확도와 견고성을 향상시킵니다. 밀도 벡터 검색과 희소 벡터 검색의 기능은 물론, 여러 밀도 벡터 검색 전략의 조합을 활용하여 다양한 쿼리에 대해 포괄적이고 정확한 검색을 보장합니다.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.5.x/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
@@ -45,7 +30,7 @@ title: 밀버스 하이브리드 서치 리트리버
 <p>LangChain Milvus 통합은 하이브리드 검색을 구현하는 유연한 방법을 제공하며, 임의의 수의 벡터 필드와 사용자 정의 밀도 또는 희소 임베딩 모델을 지원하여 다양한 하이브리드 검색 사용 시나리오에 유연하게 적응할 수 있으며 동시에 LangChain의 다른 기능과 호환됩니다.</p>
 <p>이 튜토리얼에서는 가장 일반적인 밀도 + 스파스 사례부터 시작하여 여러 가지 일반적인 하이브리드 검색 사용 방식을 소개합니다.</p>
 <div class="alert note">
-<p>Milvus와 LangChain을 사용한 하이브리드 검색의 또 다른 구현인 <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever는</a> <strong>곧 사용 중단될</strong> 예정입니다. 이 문서의 접근 방식이 더 유연하고 LangChain과 호환되므로 하이브리드 검색을 구현할 때는 이 접근 방식을 사용하시기 바랍니다.</p>
+<p>Milvus와 LangChain을 사용한 하이브리드 검색의 또 다른 구현인 <a href="https://api.python.langchain.com/en/latest/milvus/retrievers/langchain_milvus.retrievers.milvus_hybrid_search.MilvusCollectionHybridSearchRetriever.html">MilvusCollectionHybridSearchRetriever는</a> <strong>곧</strong> 더 이상 <strong>사용되지 않을</strong> 예정입니다. 이 문서의 접근 방식이 더 유연하고 LangChain과 호환되므로 하이브리드 검색을 구현할 때는 이 접근 방식을 사용하시기 바랍니다.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,7 +48,7 @@ title: 밀버스 하이브리드 서치 리트리버
         ></path>
       </svg>
     </button></h2><p>이 노트북을 실행하기 전에 다음 종속성이 설치되어 있는지 확인하세요:</p>
-<pre><code translate="no" class="language-shell">$ pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 pymilvus[model] <span class="hljs-comment">#langchain-voyageai</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 pymilvus[model] <span class="hljs-comment">#langchain-voyageai</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colab을 사용하는 경우, 방금 설치한 종속성을 활성화하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택).</p>
@@ -71,53 +56,53 @@ title: 밀버스 하이브리드 서치 리트리버
 <p>OpenAI의 모델을 사용하겠습니다. <a href="https://platform.openai.com/docs/quickstart">OpenAI에서</a> 환경 변수 <code translate="no">OPENAI_API_KEY</code> 를 준비해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus 서버 <code translate="no">URI</code> (및 선택적으로 <code translate="no">TOKEN</code>)를 지정합니다. 이 <a href="https://milvus.io/docs/install_standalone-docker-compose.md">가이드에</a> 따라 Milvus 서버를 설치하고 시작하는 방법을 확인하세요.</p>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>테마 또는 장르별로 분류된 가상의 스토리 요약본인 예제 문서를 준비합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Whispering Walls&#x27; by Ava Moreno, a young journalist named Sophia uncovers a decades-old conspiracy hidden within the crumbling walls of an ancient mansion, where the whispers of the past threaten to destroy her own sanity.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Mystery&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Last Refuge&#x27; by Ethan Blackwood, a group of survivors must band together to escape a post-apocalyptic wasteland, where the last remnants of humanity cling to life in a desperate bid for survival.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Post-Apocalyptic&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Memory Thief&#x27; by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Heist/Thriller&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The City of Echoes&#x27; by Julian Saint Clair, a brilliant detective must navigate a labyrinthine metropolis where time is currency, and the rich can live forever, but at a terrible cost to the poor.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Science Fiction&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Starlight Serenade&#x27; by Ruby Flynn, a shy astronomer discovers a mysterious melody emanating from a distant star, which leads her on a journey to uncover the secrets of the universe and her own heart.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Science Fiction/Romance&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Shadow Weaver&#x27; by Piper Redding, a young orphan discovers she has the ability to weave powerful illusions, but soon finds herself at the center of a deadly game of cat and mouse between rival factions vying for control of the mystical arts.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Fantasy&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Lost Expedition&#x27; by Caspian Grey, a team of explorers ventures into the heart of the Amazon rainforest in search of a lost city, but soon finds themselves hunted by a ruthless treasure hunter and the treacherous jungle itself.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Adventure&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Clockwork Kingdom&#x27; by Augusta Wynter, a brilliant inventor discovers a hidden world of clockwork machines and ancient magic, where a rebellion is brewing against the tyrannical ruler of the land.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Steampunk/Fantasy&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Phantom Pilgrim&#x27; by Rowan Welles, a charismatic smuggler is hired by a mysterious organization to transport a valuable artifact across a war-torn continent, but soon finds themselves pursued by deadly assassins and rival factions.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Adventure/Thriller&quot;</span>},
     ),
-    <span class="hljs-title class_">Document</span>(
+    Document(
         page_content=<span class="hljs-string">&quot;In &#x27;The Dreamwalker&#x27;s Journey&#x27; by Lyra Snow, a young dreamwalker discovers she has the ability to enter people&#x27;s dreams, but soon finds herself trapped in a surreal world of nightmares and illusions, where the boundaries between reality and fantasy blur.&quot;</span>,
         metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;Fantasy&quot;</span>},
     ),
@@ -214,7 +199,7 @@ vectorstore = Milvus.from_documents(
     drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>이 방법은 BM25를 사용하는 방법이지만, 사용자가 용어 빈도 통계를 위해 말뭉치를 관리해야 합니다. 대신 Milvus 서버 측에서 모든 것을 처리하는 BM25 내장 함수(옵션 1)를 사용하는 것을 권장합니다. 이렇게 하면 사용자가 말뭉치 관리나 어휘 훈련에 신경 쓸 필요가 없습니다. 자세한 내용은 <a href="https://milvus.io/docs/full_text_search_with_langchain.md">LangChain 및 Milvus에서 전체 텍스트 검색 사용하기를</a> 참조하세요.</p>
+<p>이 방법은 BM25를 사용하는 방법이지만, 사용자가 용어 빈도 통계를 위해 말뭉치를 관리해야 합니다. 대신 Milvus 서버 측에서 모든 것을 처리하는 BM25 내장 함수(옵션 1)를 사용하는 것을 권장합니다. 이렇게 하면 사용자가 말뭉치 관리나 어휘 훈련에 신경 쓸 필요가 없습니다. 자세한 내용은 <a href="https://milvus.io/docs/full_text_search_with_langchain.md">LangChain 및 Milvus로 전체 텍스트 검색 사용하기를</a> 참조하세요.</p>
 <h2 id="Define-multiple-arbitrary-vector-fields" class="common-anchor-header">여러 개의 임의의 벡터 필드 정의하기<button data-href="#Define-multiple-arbitrary-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -279,8 +264,8 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=True,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=<span class="hljs-literal">True</span>,
 )
 
 vectorstore.vector_fields
@@ -300,8 +285,8 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=True,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=<span class="hljs-literal">True</span>,
 )
 
 query = <span class="hljs-string">&quot;What are the novels Lila has written and what are their contents?&quot;</span>
@@ -313,7 +298,7 @@ vectorstore.similarity_search(
 <pre><code translate="no">[Document(metadata={'pk': 454646931479252186, 'category': 'Heist/Thriller'}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
 </code></pre>
 <p>다음은 RRF 재랭크의 예입니다:</p>
-<pre><code translate="no" class="language-python">vectorstore.<span class="hljs-title function_">similarity_search</span>(query, k=<span class="hljs-number">1</span>, ranker_type=<span class="hljs-string">&quot;rrf&quot;</span>, ranker_params={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>})
+<pre><code translate="no" class="language-python">vectorstore.similarity_search(query, k=<span class="hljs-number">1</span>, ranker_type=<span class="hljs-string">&quot;rrf&quot;</span>, ranker_params={<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>})
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'category': 'Heist/Thriller', 'pk': 454646931479252186}, page_content=&quot;In 'The Memory Thief' by Lila Rose, a charismatic thief with the ability to steal and manipulate memories is hired by a mysterious client to pull off a daring heist, but soon finds themselves trapped in a web of deceit and betrayal.&quot;)]
 </code></pre>
@@ -373,8 +358,8 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  # Supported values are (<span class="hljs-string">`&quot;Strong&quot;`</span>, <span class="hljs-string">`&quot;Session&quot;`</span>, <span class="hljs-string">`&quot;Bounded&quot;`</span>, <span class="hljs-string">`&quot;Eventually&quot;`</span>). See https:<span class="hljs-comment">//milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
-    drop_old=True,
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Build-RAG-chain" class="common-anchor-header">RAG 체인 구축</h3><p>LLM 인스턴스와 프롬프트를 준비한 다음 LangChain 표현 언어를 사용하여 RAG 파이프라인으로 결합합니다.</p>
@@ -428,9 +413,9 @@ rag_chain = (
 <button class="copy-code-btn"></button></code></pre>
 <p>특정 질문으로 RAG 체인을 호출하고 응답을 검색합니다.</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
-res = rag_chain.<span class="hljs-title function_">invoke</span>(query)
+res = rag_chain.invoke(query)
 res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively perform these tasks.'
 </code></pre>
-<p>축하합니다! Milvus와 LangChain으로 하이브리드(밀도 벡터 + 스파스 bm25 함수) 검색 RAG 체인을 구축하셨습니다.</p>
+<p>축하합니다! Milvus와 LangChain으로 구동되는 하이브리드(밀도 벡터 + 스파스 bm25 함수) 검색 RAG 체인을 구축하셨습니다.</p>

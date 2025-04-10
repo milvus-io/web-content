@@ -65,8 +65,8 @@ summary: >-
 <p>一旦数据被向量化，就可以存储在 Milvus 中进行管理和向量检索。下图显示了基本流程。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/dense-vector.png" alt="dense-vector" class="doc-image" id="dense-vector" />
-   </span> <span class="img-wrapper"> <span>密集向量</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-dense-vector.png" alt="use-dense-vector" class="doc-image" id="use-dense-vector" />
+   </span> <span class="img-wrapper"> <span>使用密集向量</span> </span></p>
 <div class="alert note">
 <p>除了密集向量，Milvus 还支持稀疏向量和二进制向量。稀疏向量适用于基于特定术语的精确匹配，如关键词搜索和术语匹配，而二进制向量常用于高效处理二进制化数据，如图像模式匹配和某些散列应用。更多信息，请参阅<a href="/docs/zh/binary-vector.md">二进制向量</a>和<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</p>
 </div>

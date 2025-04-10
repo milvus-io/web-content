@@ -7,6 +7,12 @@ summary: >-
   dari Milvus untuk menciptakan pengalaman pencarian yang bagus.
 title: 'Integrasi Milvus dengan Agen OpenAI: Panduan Langkah-demi-Langkah'
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="common-anchor-header">Integrasi Milvus dengan Agen OpenAI: Panduan Langkah-demi-Langkah<button data-href="#Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,13 +28,7 @@ title: 'Integrasi Milvus dengan Agen OpenAI: Panduan Langkah-demi-Langkah'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>Buku catatan ini menunjukkan cara membuat agen yang dapat menanyakan Milvus menggunakan bahasa alami melalui Pemanggilan Fungsi. Kami akan menggabungkan kerangka kerja Agents OpenAI dengan kemampuan pencarian vektor yang kuat dari Milvus untuk menciptakan pengalaman pencarian yang bagus.</p>
+    </button></h1><p>Buku catatan ini menunjukkan cara membuat agen yang dapat menanyakan Milvus menggunakan bahasa alami melalui Pemanggilan Fungsi. Kami akan menggabungkan kerangka kerja Agents OpenAI dengan kemampuan pencarian vektor yang kuat dari Milvus untuk menciptakan pengalaman pencarian yang bagus.</p>
 <h2 id="OpenAI-Agents" class="common-anchor-header">Agen OpenAI<button data-href="#OpenAI-Agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,6 +51,12 @@ title: 'Integrasi Milvus dengan Agen OpenAI: Panduan Langkah-demi-Langkah'
 <li>Pagar, yang memungkinkan input ke agen untuk divalidasi</li>
 </ul>
 <p>Jika dikombinasikan dengan Python, primitif-primitif ini cukup kuat untuk mengekspresikan hubungan yang kompleks antara alat dan agen, dan memungkinkan Anda untuk membangun aplikasi dunia nyata tanpa kurva pembelajaran yang curam. Selain itu, SDK ini dilengkapi dengan penelusuran bawaan yang memungkinkan Anda memvisualisasikan dan men-debug alur agen Anda, serta mengevaluasinya dan bahkan menyempurnakan model untuk aplikasi Anda.</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.5.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <span></span>
+  </span>
+</p>
 <h2 id="Milvus" class="common-anchor-header">Milvus<button data-href="#Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,7 +89,7 @@ title: 'Integrasi Milvus dengan Agen OpenAI: Panduan Langkah-demi-Langkah'
         ></path>
       </svg>
     </button></h2><p>Pertama, kita perlu menyiapkan lingkungan kita dengan pustaka yang diperlukan dan menginisialisasi asyncio untuk kompatibilitas Jupyter.</p>
-<pre><code translate="no" class="language-shell">$ pip install openai pymilvus pydantic nest_asyncio
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install openai pymilvus pydantic nest_asyncio</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>memulai ulang runtime</strong> (klik menu "Runtime" di bagian atas layar, dan pilih "Restart session" dari menu tarik-turun).</p>
@@ -92,14 +98,14 @@ title: 'Integrasi Milvus dengan Agen OpenAI: Panduan Langkah-demi-Langkah'
 <span class="hljs-keyword">import</span> nest_asyncio
 <span class="hljs-keyword">from</span> dotenv <span class="hljs-keyword">import</span> load_dotenv
 
-<span class="hljs-title function_">load_dotenv</span>()
+load_dotenv()
 
-nest_asyncio.<span class="hljs-title function_">apply</span>()
+nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
 <p>Kita akan menggunakan model dari OpenAI. Anda harus menyiapkan <a href="https://platform.openai.com/docs/quickstart">kunci api</a> <code translate="no">OPENAI_API_KEY</code> sebagai variabel lingkungan.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connecting-to-Milvus-and-Creating-a-Schema" class="common-anchor-header">Menghubungkan ke Milvus dan Membuat Skema<button data-href="#Connecting-to-Milvus-and-Creating-a-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -322,7 +328,7 @@ client.insert(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'insert_count': 37, 'ids': [456486814660619140, 456486814660619141, 456486814660619142, 456486814660619143, 456486814660619144, 456486814660619145, 456486814660619146, 456486814660619147, 456486814660619148, 456486814660619149, 456486814660619150, 456486814660619151, 456486814660619152, 456486814660619153, 456486814660619154, 456486814660619155, 456486814660619156, 456486814660619157, 456486814660619158, 456486814660619159, 456486814660619160, 456486814660619161, 456486814660619162, 456486814660619163, 456486814660619164, 456486814660619165, 456486814660619166, 456486814660619167, 456486814660619168, 456486814660619169, 456486814660619170, 456486814660619171, 456486814660619172, 456486814660619173, 456486814660619174, 456486814660619175, 456486814660619176], 'cost': 0}
 </code></pre>
-<h2 id="Defining-Output-Types-for-Structured-Results" class="common-anchor-header">Menentukan Jenis Keluaran untuk Hasil Terstruktur<button data-href="#Defining-Output-Types-for-Structured-Results" class="anchor-icon" translate="no">
+<h2 id="Defining-Output-Types-for-Structured-Results" class="common-anchor-header">Mendefinisikan Jenis Keluaran untuk Hasil Terstruktur<button data-href="#Defining-Output-Types-for-Structured-Results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

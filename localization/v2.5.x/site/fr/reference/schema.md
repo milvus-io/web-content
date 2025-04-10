@@ -40,11 +40,11 @@ summary: >-
       </svg>
     </button></h2><p>Sur Zilliz Cloud, un schéma de collection assemble une table dans une base de données relationnelle, qui définit comment Zilliz Cloud organise les données dans la collection.</p>
 <p>Un schéma bien conçu est essentiel car il abstrait le modèle de données et détermine si vous pouvez atteindre les objectifs de l'entreprise par le biais d'une recherche. En outre, comme chaque ligne de données insérée dans la collection doit respecter le schéma, il contribue à maintenir la cohérence des données et la qualité à long terme. D'un point de vue technique, un schéma bien défini permet un stockage des données en colonnes bien organisé et une structure d'index plus propre, ce qui améliore les performances de recherche.</p>
-<p>Un schéma de collection comporte une clé primaire, un maximum de quatre champs vectoriels et plusieurs champs scalaires. Le diagramme suivant illustre la manière de faire correspondre un article à une liste de champs de schéma.</p>
+<p>Un schéma de collection comporte une clé primaire, un maximum de quatre champs vectoriels et plusieurs champs scalaires. Le diagramme suivant illustre comment mapper un article à une liste de champs de schéma.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="schema-explained" class="doc-image" id="schema-explained" />
-   </span> <span class="img-wrapper"> <span>Explication du schéma</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
+   </span> <span class="img-wrapper"> <span>Anatomie de la conception des schémas</span> </span></p>
 <p>La conception du modèle de données d'un système de recherche implique l'analyse des besoins de l'entreprise et l'abstraction des informations dans un modèle de données exprimé par un schéma. Par exemple, la recherche d'un morceau de texte doit être "indexée" en convertissant la chaîne littérale en un vecteur par "incorporation" et en permettant la recherche vectorielle. Au-delà de cette exigence essentielle, il peut être nécessaire de stocker d'autres propriétés telles que l'horodatage de la publication et l'auteur. Ces métadonnées permettent d'affiner les recherches sémantiques par filtrage, en ne renvoyant que les textes publiés après une date spécifique ou par un auteur particulier. Vous pouvez également récupérer ces scalaires avec le texte principal pour rendre le résultat de la recherche dans l'application. Un identifiant unique doit être attribué à chaque scalaire pour organiser ces morceaux de texte, sous la forme d'un nombre entier ou d'une chaîne de caractères. Ces éléments sont essentiels pour obtenir une logique de recherche sophistiquée.</p>
 <p>Reportez-vous à <a href="/docs/fr/schema-hands-on.md">Schema Design Hands-On</a> pour savoir comment créer un schéma bien conçu.</p>
 <h2 id="Create-Schema" class="common-anchor-header">Créer un schéma<button data-href="#Create-Schema" class="anchor-icon" translate="no">
@@ -250,7 +250,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
         ></path>
       </svg>
     </button></h2><p>Dans des cas courants, vous pouvez utiliser des champs scalaires pour stocker les métadonnées des intégrations vectorielles stockées dans Milvus et effectuer des recherches ANN avec filtrage des métadonnées pour améliorer l'exactitude des résultats de la recherche. Zilliz Cloud prend en charge plusieurs types de champs scalaires, notamment <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, <strong>Float</strong>, <strong>Double</strong>, <strong>Array</strong> et <strong>JSON</strong>.</p>
-<h3 id="Add-String-Fields" class="common-anchor-header">Ajouter des champs de type chaîne</h3><p>Dans Milvus, vous pouvez utiliser des champs VarChar pour stocker des chaînes de caractères. Pour plus d'informations sur le champ VarChar, reportez-vous à la section <a href="/docs/fr/string.md">Champ de chaîne</a>.</p>
+<h3 id="Add-String-Fields" class="common-anchor-header">Ajouter des champs de type chaîne</h3><p>Dans Milvus, vous pouvez utiliser des champs VarChar pour stocker des chaînes de caractères. Pour plus d'informations sur le champ VarChar, voir <a href="/docs/fr/string.md">Champ de chaîne</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(

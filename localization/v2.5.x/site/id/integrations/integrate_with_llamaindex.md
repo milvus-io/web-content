@@ -42,7 +42,7 @@ title: Retrieval-Augmented Generation (RAG) dengan Milvus dan LlamaIndex
         ></path>
       </svg>
     </button></h2><h3 id="Install-dependencies" class="common-anchor-header">Menginstal ketergantungan</h3><p>Potongan kode pada halaman ini membutuhkan dependensi pymilvus dan llamaindex. Anda dapat menginstalnya dengan menggunakan perintah berikut:</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=2.4.2
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -54,10 +54,10 @@ title: Retrieval-Augmented Generation (RAG) dengan Milvus dan LlamaIndex
 <h3 id="Setup-OpenAI" class="common-anchor-header">Menyiapkan OpenAI</h3><p>Pertama-tama, mari kita mulai dengan menambahkan kunci api openai. Ini akan memungkinkan kita untuk mengakses chatgpt.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> openai
 
-openai.<span class="hljs-property">api_key</span> = <span class="hljs-string">&quot;sk-***********&quot;</span>
+openai.api_key = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-data" class="common-anchor-header">Menyiapkan data</h3><p>Anda dapat mengunduh data sampel dengan perintah berikut:</p>
-<pre><code translate="no" class="language-python">! <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/&#x27;</span>
+<pre><code translate="no" class="language-python">! mkdir -p <span class="hljs-string">&#x27;data/&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham_essay.txt&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/uber_2021.pdf&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -88,10 +88,57 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 95f25e4d-f270-4650-87ce-006d69d82033
 </code></pre>
-<h3 id="Create-an-index-across-the-data" class="common-anchor-header">Membuat indeks di seluruh data</h3><p>Sekarang kita telah memiliki sebuah dokumen, kita dapat membuat sebuah indeks dan menyisipkan dokumen tersebut.</p>
-<blockquote>
-<p>Harap dicatat bahwa <strong>Milvus Lite</strong> membutuhkan <code translate="no">pymilvus&gt;=2.4.2</code>.</p>
-</blockquote>
+<h3 id="Create-an-index-across-the-data" class="common-anchor-header">Membuat indeks di seluruh data</h3><p>Sekarang setelah kita memiliki sebuah dokumen, kita dapat membuat sebuah indeks dan menyisipkan dokumen tersebut. Untuk indeks kita akan menggunakan MilvusVectorStore. MilvusVectorStore membutuhkan beberapa argumen:</p>
+<h4 id="basic-args" class="common-anchor-header">argumen dasar</h4><ul>
+<li><code translate="no">uri (str, optional)</code>: URI yang akan disambungkan, berupa "https://address:port" untuk layanan Milvus atau Zilliz Cloud, atau "path/to/local/milvus.db" untuk Milvus lokal lite. Defaultnya adalah "./milvus_llamaindex.db".</li>
+<li><code translate="no">token (str, optional)</code>: Token untuk masuk. Kosongkan jika tidak menggunakan rbac, jika menggunakan rbac kemungkinan besar akan menjadi "username:password".</li>
+<li><code translate="no">collection_name (str, optional)</code>: Nama koleksi di mana data akan disimpan. Defaultnya adalah "llamalection".</li>
+<li><code translate="no">overwrite (bool, optional)</code>: Apakah akan menimpa koleksi yang sudah ada dengan nama yang sama. Nilai defaultnya adalah "False".</li>
+</ul>
+<h4 id="scalar-fields-including-doc-id--text" class="common-anchor-header">bidang skalar termasuk id dokumen &amp; teks</h4><ul>
+<li><code translate="no">doc_id_field (str, optional)</code>: Nama bidang doc_id untuk koleksi. Defaultnya adalah DEFAULT_DOC_ID_KEY.</li>
+<li><code translate="no">text_key (str, optional)</code>: Teks kunci apa yang disimpan dalam koleksi yang dilewatkan. Digunakan saat membawa koleksi Anda sendiri. Defaultnya adalah DEFAULT_TEXT_KEY.</li>
+<li><code translate="no">scalar_field_names (list, optional)</code>: Nama-nama bidang skalar tambahan yang akan disertakan dalam skema koleksi.</li>
+<li><code translate="no">scalar_field_types (list, optional)</code>: Jenis-jenis bidang skalar ekstra.</li>
+</ul>
+<h4 id="dense-field" class="common-anchor-header">bidang padat</h4><ul>
+<li><code translate="no">enable_dense (bool)</code>: Bendera boolean untuk mengaktifkan atau menonaktifkan penyematan padat. Nilai defaultnya adalah True (Benar).</li>
+<li><code translate="no">dim (int, optional)</code>: Dimensi vektor penyematan untuk koleksi. Diperlukan saat membuat koleksi baru dengan enable_sparse bernilai False.</li>
+<li><code translate="no">embedding_field (str, optional)</code>: Nama bidang penyematan padat untuk koleksi, defaultnya adalah DEFAULT_EMBEDDING_KEY.</li>
+<li><code translate="no">index_config (dict, optional)</code>: Konfigurasi yang digunakan untuk membangun indeks sematan padat. Defaultnya adalah None.</li>
+<li><code translate="no">search_config (dict, optional)</code>: Konfigurasi yang digunakan untuk mencari indeks padat Milvus. Perhatikan bahwa ini harus kompatibel dengan jenis indeks yang ditentukan oleh <code translate="no">index_config</code>. Setelan default untuk Tidak Ada.</li>
+<li><code translate="no">similarity_metric (str, optional)</code>: Metrik kemiripan yang digunakan untuk penyematan padat, saat ini mendukung IP, COSINE, dan L2.</li>
+</ul>
+<h4 id="sparse-field" class="common-anchor-header">sparse field</h4><ul>
+<li><code translate="no">enable_sparse (bool)</code>: Bendera boolean untuk mengaktifkan atau menonaktifkan penyematan jarang. Defaultnya adalah False.</li>
+<li><code translate="no">sparse_embedding_field (str)</code>: Nama bidang penyematan jarang, defaultnya adalah DEFAULT_SPARSE_EMBEDDING_KEY.</li>
+<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: Jika enable_sparse bernilai True, objek ini harus disediakan untuk mengonversi teks ke sematan jarang. Jika Tidak Ada, fungsi penyematan jarang default (BGEM3SparseEmbeddingFunction) akan digunakan.</li>
+<li><code translate="no">sparse_index_config (dict, optional)</code>: Konfigurasi yang digunakan untuk membangun indeks sematan jarang. Defaultnya adalah Tidak Ada.</li>
+</ul>
+<h4 id="hybrid-ranker" class="common-anchor-header">pemeringkat hibrida</h4><ul>
+<li><p><code translate="no">hybrid_ranker (str)</code>: Menentukan jenis pemeringkat yang digunakan dalam kueri penelusuran hibrida. Saat ini hanya mendukung ["RRFRanker", "WeightedRanker"]. Nilai default untuk "RRFRanker".</p></li>
+<li><p><code translate="no">hybrid_ranker_params (dict, optional)</code>: Parameter konfigurasi untuk pemeringkat hibrida. Struktur kamus ini tergantung pada pemeringkat spesifik yang digunakan:</p>
+<ul>
+<li>Untuk "RRFRanker", harus menyertakan:<ul>
+<li>"k" (int): Parameter yang digunakan dalam Reciprocal Rank Fusion (RRF). Nilai ini digunakan untuk menghitung skor peringkat sebagai bagian dari algoritme RRF, yang menggabungkan beberapa strategi peringkat menjadi satu skor untuk meningkatkan relevansi penelusuran.</li>
+</ul></li>
+<li>Untuk "WeightedRanker", ini mengharapkan:<ul>
+<li>"bobot" (daftar float): Daftar yang terdiri dari dua bobot:<ol>
+<li>Bobot untuk komponen sematan padat.</li>
+<li>Bobot untuk komponen sematan jarang. Bobot ini digunakan untuk menyesuaikan pentingnya komponen sematan padat dan jarang dalam proses pengambilan hibrida. Default ke kamus kosong, menyiratkan bahwa pemeringkat akan beroperasi dengan pengaturan default yang telah ditetapkan sebelumnya.</li>
+</ol></li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="others" class="common-anchor-header">lainnya</h4><ul>
+<li><code translate="no">collection_properties (dict, optional)</code>: Properti koleksi seperti TTL (Time-To-Live) dan MMAP (pemetaan memori). Defaultnya adalah Tidak Ada. Ini bisa termasuk:<ul>
+<li>"collection.ttl.seconds" (int): Setelah properti ini ditetapkan, data dalam koleksi saat ini akan kedaluwarsa dalam waktu yang ditentukan. Data yang kedaluwarsa dalam koleksi akan dibersihkan dan tidak akan dilibatkan dalam pencarian atau kueri.</li>
+<li>"mmap.enabled" (bool): Apakah akan mengaktifkan penyimpanan yang dipetakan memori di tingkat koleksi.</li>
+</ul></li>
+<li><code translate="no">index_management (IndexManagement)</code>: Menentukan strategi manajemen indeks yang akan digunakan. Nilai defaultnya adalah "buat_jika_tidak_ada".</li>
+<li><code translate="no">batch_size (int)</code>: Mengonfigurasi jumlah dokumen yang diproses dalam satu batch saat memasukkan data ke dalam Milvus. Nilai defaultnya adalah DEFAULT_BATCH_SIZE.</li>
+<li><code translate="no">consistency_level (str, optional)</code>: Tingkat konsistensi yang digunakan untuk koleksi yang baru dibuat. Defaultnya adalah "Session".</li>
+</ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an index over the documents</span>
 <span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
@@ -104,7 +151,7 @@ index = VectorStoreIndex.from_documents(documents, storage_context=storage_conte
 <div class="alert note">
 <p>Untuk parameter <code translate="no">MilvusVectorStore</code>:</p>
 <ul>
-<li>Mengatur <code translate="no">uri</code> sebagai file lokal, misalnya<code translate="no">./milvus.db</code>, adalah metode yang paling mudah, karena secara otomatis <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> akan menyimpan semua data dalam file ini.</li>
+<li>Mengatur <code translate="no">uri</code> sebagai file lokal, misalnya<code translate="no">./milvus.db</code>, adalah metode yang paling mudah, karena secara otomatis menggunakan <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> untuk menyimpan semua data dalam file ini.</li>
 <li>Jika Anda memiliki data dalam skala besar, Anda dapat mengatur server Milvus yang lebih berkinerja pada <a href="https://milvus.io/docs/quickstart.md">docker atau kubernetes</a>. Dalam pengaturan ini, silakan gunakan uri server, misalnya<code translate="no">http://localhost:19530</code>, sebagai <code translate="no">uri</code>.</li>
 <li>Jika Anda ingin menggunakan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, layanan cloud yang dikelola sepenuhnya untuk Milvus, sesuaikan <code translate="no">uri</code> dan <code translate="no">token</code>, yang sesuai dengan <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">kunci Public Endpoint dan Api</a> di Zilliz Cloud.</li>
 </ul>

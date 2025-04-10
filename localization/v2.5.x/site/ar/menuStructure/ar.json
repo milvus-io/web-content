@@ -1854,6 +1854,12 @@
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
+              },
+              {
+                "label": "البحث في النص الكامل",
+                "id": "llamaindex_milvus_full_text_search.md",
+                "order": 2,
+                "children": []
               }
             ]
           },
@@ -1871,9 +1877,22 @@
           },
           {
             "label": "هاي ستاك",
-            "id": "integrate_with_haystack.md",
+            "id": "haystack",
             "order": 4,
-            "children": []
+            "children": [
+              {
+                "label": "RAG",
+                "id": "integrate_with_haystack.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "البحث في النص الكامل",
+                "id": "full_text_search_with_milvus_and_haystack.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           },
           {
             "label": "كوتيمون",
@@ -2094,6 +2113,24 @@
             "id": "ETL_using_vectorETL.md",
             "order": 8,
             "children": []
+          },
+          {
+            "label": "وليمة",
+            "id": "build_RAG_with_milvus_and_feast.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "ميسترال OCR",
+            "id": "mistral_ocr_with_milvus.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "دوكلينج",
+            "id": "build_RAG_with_milvus_and_docling.md",
+            "order": 11,
+            "children": []
           }
         ]
       },
@@ -2221,6 +2258,12 @@
         "children": []
       },
       {
+        "label": "البحث بتحويل النص إلى صورة مع ميلفوس",
+        "id": "text_image_search.md",
+        "order": 16,
+        "children": []
+      },
+      {
         "label": "اكتشف المزيد",
         "id": "explore-more",
         "order": 99,
@@ -2259,12 +2302,6 @@
             "label": "محرك البحث عن النص",
             "id": "text_search_engine.md",
             "order": 10,
-            "children": []
-          },
-          {
-            "label": "محرك البحث عن النص إلى صورة",
-            "id": "text_image_search.md",
-            "order": 11,
             "children": []
           },
           {

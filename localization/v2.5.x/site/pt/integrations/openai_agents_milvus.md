@@ -2,11 +2,17 @@
 id: openai_agents_milvus.md
 summary: >-
   Este notebook mostra como criar um agente que pode consultar o Milvus usando
-  linguagem natural através de Chamada de Função. Combinaremos a estrutura de
+  linguagem natural através de Chamada de Função. Vamos combinar a estrutura de
   agentes da OpenAI com as poderosas capacidades de pesquisa vetorial do Milvus
   para criar uma experiência de pesquisa agradável.
 title: 'Integração do Milvus com agentes OpenAI: Um Guia Passo-a-Passo'
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="common-anchor-header">Integração do Milvus com agentes OpenAI: Um Guia Passo-a-Passo<button data-href="#Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,13 +28,7 @@ title: 'Integração do Milvus com agentes OpenAI: Um Guia Passo-a-Passo'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>Este caderno mostra como criar um agente que pode consultar o Milvus usando linguagem natural através de Chamada de Função. Vamos combinar a estrutura de Agentes da OpenAI com as poderosas capacidades de pesquisa vetorial do Milvus para criar uma experiência de pesquisa agradável.</p>
+    </button></h1><p>Este caderno mostra como criar um agente que pode consultar o Milvus usando linguagem natural através de Chamada de Função. Vamos combinar a estrutura de Agentes da OpenAI com as poderosas capacidades de pesquisa vetorial do Milvus para criar uma experiência de pesquisa agradável.</p>
 <h2 id="OpenAI-Agents" class="common-anchor-header">Agentes OpenAI<button data-href="#OpenAI-Agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,6 +51,12 @@ title: 'Integração do Milvus com agentes OpenAI: Um Guia Passo-a-Passo'
 <li>Guardrails, que permitem validar as entradas dos agentes</li>
 </ul>
 <p>Em combinação com Python, estas primitivas são suficientemente poderosas para expressar relações complexas entre ferramentas e agentes, e permitem-lhe construir aplicações do mundo real sem uma curva de aprendizagem acentuada. Além disso, o SDK vem com rastreamento integrado que permite visualizar e depurar seus fluxos agênticos, bem como avaliá-los e até mesmo ajustar modelos para sua aplicação.</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.5.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <span></span>
+  </span>
+</p>
 <h2 id="Milvus" class="common-anchor-header">Milvus<button data-href="#Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,7 +89,7 @@ title: 'Integração do Milvus com agentes OpenAI: Um Guia Passo-a-Passo'
         ></path>
       </svg>
     </button></h2><p>Primeiro, precisamos de configurar o nosso ambiente com as bibliotecas necessárias e inicializar o asyncio para compatibilidade com o Jupyter.</p>
-<pre><code translate="no" class="language-shell">$ pip install openai pymilvus pydantic nest_asyncio
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install openai pymilvus pydantic nest_asyncio</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ser necessário <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
@@ -92,14 +98,14 @@ title: 'Integração do Milvus com agentes OpenAI: Um Guia Passo-a-Passo'
 <span class="hljs-keyword">import</span> nest_asyncio
 <span class="hljs-keyword">from</span> dotenv <span class="hljs-keyword">import</span> load_dotenv
 
-<span class="hljs-title function_">load_dotenv</span>()
+load_dotenv()
 
-nest_asyncio.<span class="hljs-title function_">apply</span>()
+nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
 <p>Vamos utilizar os modelos do OpenAI. Deve preparar a <a href="https://platform.openai.com/docs/quickstart">chave api</a> <code translate="no">OPENAI_API_KEY</code> como uma variável de ambiente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connecting-to-Milvus-and-Creating-a-Schema" class="common-anchor-header">Ligação ao Milvus e criação de um esquema<button data-href="#Connecting-to-Milvus-and-Creating-a-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -366,7 +372,7 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>De seguida, vamos criar uma ferramenta de função personalizada que o nosso agente pode utilizar para pesquisar na base de dados Milvus. Esta ferramenta irá:</p>
+    </button></h2><p>De seguida, criaremos uma ferramenta de função personalizada que o nosso agente pode utilizar para pesquisar na base de dados Milvus. Esta ferramenta irá:</p>
 <ol>
 <li>Aceitar um nome de coleção, texto de consulta e parâmetro de limite</li>
 <li>Executar uma pesquisa BM25 na coleção Milvus</li>

@@ -7,6 +7,12 @@ summary: >-
   para crear una experiencia de búsqueda agradable.
 title: 'Integración de Milvus con Agentes OpenAI: Una Guía Paso a Paso'
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="common-anchor-header">Integración de Milvus con Agentes OpenAI: Una Guía Paso a Paso<button data-href="#Milvus-Integration-with-OpenAI-Agents-A-Step-by-Step-Guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,13 +28,7 @@ title: 'Integración de Milvus con Agentes OpenAI: Una Guía Paso a Paso'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/openai_agents_milvus.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p>Este cuaderno muestra cómo crear un agente que pueda consultar Milvus utilizando lenguaje natural a través de Llamadas a Funciones. Combinaremos el framework de Agentes de OpenAI con las potentes capacidades de búsqueda vectorial de Milvus para crear una agradable experiencia de búsqueda.</p>
+    </button></h1><p>Este cuaderno muestra cómo crear un agente que pueda consultar Milvus utilizando lenguaje natural a través de Llamadas a Funciones. Combinaremos el framework de Agentes de OpenAI con las potentes capacidades de búsqueda vectorial de Milvus para crear una agradable experiencia de búsqueda.</p>
 <h2 id="OpenAI-Agents" class="common-anchor-header">Agentes OpenAI<button data-href="#OpenAI-Agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,13 +44,19 @@ title: 'Integración de Milvus con Agentes OpenAI: Una Guía Paso a Paso'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El SDK de OpenAI Agents le permite crear aplicaciones de IA agéntica en un paquete ligero y fácil de usar con muy pocas abstracciones. Es una actualización lista para producción de su anterior experimentación para agentes, Swarm. El SDK de agentes tiene un conjunto muy reducido de primitivas:</p>
+    </button></h2><p>El SDK OpenAI Agents le permite crear aplicaciones de IA agéntica en un paquete ligero y fácil de usar con muy pocas abstracciones. Es una actualización lista para producción de su anterior experimentación para agentes, Swarm. El SDK de Agentes tiene un conjunto muy pequeño de primitivas:</p>
 <ul>
 <li>Agentes, que son LLM equipados con instrucciones y herramientas.</li>
 <li>Handoffs, que permiten a los agentes delegar en otros agentes para tareas específicas</li>
 <li>Guardrails, que permiten validar las entradas a los agentes.</li>
 </ul>
 <p>En combinación con Python, estas primitivas son lo suficientemente potentes como para expresar relaciones complejas entre herramientas y agentes, y permiten crear aplicaciones del mundo real sin una curva de aprendizaje pronunciada. Además, el SDK viene con trazado integrado que le permite visualizar y depurar sus flujos de agentes, así como evaluarlos e incluso ajustar los modelos para su aplicación.</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.5.x/assets/openai-agent.png" alt="" class="doc-image" id="" />
+    <span></span>
+  </span>
+</p>
 <h2 id="Milvus" class="common-anchor-header">Milvus<button data-href="#Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +72,7 @@ title: 'Integración de Milvus con Agentes OpenAI: Una Guía Paso a Paso'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus es una base de datos vectorial de código abierto altamente escalable y de alto rendimiento que se ejecuta eficazmente en una amplia gama de entornos, desde un ordenador portátil hasta sistemas distribuidos a gran escala. Está disponible como software de código abierto y como <a href="https://zilliz.com/">oferta en la nube</a>.</p>
+    </button></h2><p>Milvus es una base de datos vectorial de código abierto de alto rendimiento y gran escalabilidad que se ejecuta eficientemente en una amplia gama de entornos, desde un ordenador portátil hasta sistemas distribuidos a gran escala. Está disponible como software de código abierto y como <a href="https://zilliz.com/">oferta en la nube</a>.</p>
 <h2 id="Setup-and-Dependencies" class="common-anchor-header">Configuración y dependencias<button data-href="#Setup-and-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,7 +89,7 @@ title: 'Integración de Milvus con Agentes OpenAI: Una Guía Paso a Paso'
         ></path>
       </svg>
     </button></h2><p>En primer lugar, tenemos que configurar nuestro entorno con las bibliotecas necesarias e inicializar asyncio para la compatibilidad con Jupyter.</p>
-<pre><code translate="no" class="language-shell">$ pip install openai pymilvus pydantic nest_asyncio
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install openai pymilvus pydantic nest_asyncio</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si utilizas Google Colab, para habilitar las dependencias que acabas de instalar, es posible que tengas que <strong>reiniciar el tiempo de ejecución</strong> (haz clic en el menú "Tiempo de ejecución" en la parte superior de la pantalla y selecciona "Reiniciar sesión" en el menú desplegable).</p>
@@ -92,14 +98,14 @@ title: 'Integración de Milvus con Agentes OpenAI: Una Guía Paso a Paso'
 <span class="hljs-keyword">import</span> nest_asyncio
 <span class="hljs-keyword">from</span> dotenv <span class="hljs-keyword">import</span> load_dotenv
 
-<span class="hljs-title function_">load_dotenv</span>()
+load_dotenv()
 
-nest_asyncio.<span class="hljs-title function_">apply</span>()
+nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
 <p>Utilizaremos los modelos de OpenAI. Deberá preparar la <a href="https://platform.openai.com/docs/quickstart">clave api</a> <code translate="no">OPENAI_API_KEY</code> como variable de entorno.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connecting-to-Milvus-and-Creating-a-Schema" class="common-anchor-header">Conexión a Milvus y creación de un esquema<button data-href="#Connecting-to-Milvus-and-Creating-a-Schema" class="anchor-icon" translate="no">
       <svg translate="no"

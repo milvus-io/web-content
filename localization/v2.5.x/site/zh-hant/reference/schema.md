@@ -39,9 +39,9 @@ summary: 模式定義了集合的資料結構。在建立一個集合之前，�
 <p>集合模式有一個主索引鍵、最多四個向量欄位和幾個標量欄位。下圖說明如何將文章映射到模式欄位清單。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="schema-explained" class="doc-image" id="schema-explained" />
-   </span> <span class="img-wrapper"> <span>模式說明</span> </span></p>
-<p>搜尋系統的資料模型設計包括分析業務需求，並將資訊抽象為模式表達的資料模型。例如，搜尋一段文字時，必須透過「嵌入」將字面字串轉換為向量，並啟用向量搜尋，以建立「索引」。除了這個基本要求之外，儲存其他屬性（例如出版時間戳和作者）可能也是必要的。這些元資料允許透過篩選來精細語意搜尋，僅傳回在特定日期之後或由特定作者出版的文字。您也可以擷取這些標量與主要文字，以便在應用程式中呈現搜尋結果。每個標量都應該指定一個唯一的識別碼，以整數或字串的形式來組織這些文字片段。這些元素對於達成精密的搜尋邏輯是不可或缺的。</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
+   </span> <span class="img-wrapper"> <span>模式設計剖析</span> </span></p>
+<p>搜尋系統的資料模型設計包括分析業務需求，並將資訊抽象為模式表達的資料模型。舉例來說，搜尋一段文字必須透過「嵌入」將字面字串轉換為向量，並啟用向量搜尋來「建立索引」。除了這個基本要求之外，儲存其他屬性（例如出版時間戳和作者）可能也是必要的。這些元資料允許透過篩選來精細語意搜尋，僅傳回在特定日期之後或由特定作者出版的文字。您也可以擷取這些標量與主要文字，以便在應用程式中呈現搜尋結果。每個標量都應該指定一個唯一的識別碼，以整數或字串的形式來組織這些文字片段。這些元素對於達成精密的搜尋邏輯是不可或缺的。</p>
 <p>請參閱<a href="/docs/zh-hant/schema-hands-on.md">模式設計實作</a>，以瞭解如何製作設計良好的模式。</p>
 <h2 id="Create-Schema" class="common-anchor-header">建立模式<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"

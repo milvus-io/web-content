@@ -8,7 +8,7 @@ summary: >-
   l'ordinateur portable aux systèmes distribués à grande échelle. Elle est
   disponible sous forme de logiciel libre et de service en nuage.
 ---
-<h1 id="What-is-Milvus" class="common-anchor-header">Qu'est-ce que Milvus ?<button data-href="#What-is-Milvus" class="anchor-icon" translate="no">
+<h1 id="What-is-Milvus" class="common-anchor-header">Qu'est-ce que le Milvus ?<button data-href="#What-is-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus est une base de données vectorielle hautement performante et évolutive qui s'exécute efficacement dans un large éventail d'environnements, de l'ordinateur portable aux systèmes distribués à grande échelle. Elle est disponible à la fois sous forme de logiciel libre et de service en nuage.</p>
-<p>Milvus est un projet open-source de LF AI &amp; Data Foundation distribué sous la licence Apache 2.0. La plupart des contributeurs sont des experts de la communauté du calcul haute performance (HPC), spécialisés dans la construction de systèmes à grande échelle et dans l'optimisation de codes tenant compte du matériel. Les principaux contributeurs sont des professionnels de Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba et Microsoft.</p>
+    </button></h1><p><span>Milvus <span style="display: inline-block; vertical-align: middle;">
+<audio id="milvus-audio" style="display: none;">
+<source src="https://en-audio.howtopronounce.com/15783806805e142d8844912.mp3" type="audio/mp3" />
+</audio>
+<span style="
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('https://milvus.io/docs/v2.5.x/assets/hearing.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    margin-left: 4px;
+  " onclick="document.getElementById('milvus-audio').play()"></span>
+</span></span> est un oiseau de proie du genre Milvus de la famille des faucons Accipaitridae, célèbre pour sa rapidité en vol, son acuité visuelle et sa remarquable capacité d'adaptation.</p>
+<style>
+  audio::-webkit-media-controls { display : none !important ; }</style>
+<p>Zilliz adopte le nom de Milvus pour sa base de données vectorielles open-source hautement performante et évolutive, qui fonctionne efficacement dans un large éventail d'environnements, de l'ordinateur portable aux systèmes distribués à grande échelle. Elle est disponible à la fois sous forme de logiciel libre et de service en nuage.</p>
+<p>Développé par Zilliz et rapidement donné à la LF AI &amp; Data Foundation sous la Fondation Linux, Milvus est devenu l'un des principaux projets de base de données vectorielles open-source au monde. Il est distribué sous la licence Apache 2.0, et la plupart des contributeurs sont des experts de la communauté du calcul à haute performance (HPC), spécialisés dans la construction de systèmes à grande échelle et l'optimisation de codes tenant compte du matériel. Les principaux contributeurs sont des professionnels de Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba et Microsoft.</p>
+<p>Il est intéressant de noter que chaque projet open-source de Zilliz porte le nom d'un oiseau, une convention qui symbolise la liberté, la prévoyance et l'évolution agile de la technologie.</p>
 <h2 id="Unstructured-Data-Embeddings-and-Milvus" class="common-anchor-header">Données non structurées, Embeddings et Milvus<button data-href="#Unstructured-Data-Embeddings-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +57,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les données non structurées, telles que le texte, les images et le son, varient en termes de format et comportent une sémantique sous-jacente riche, ce qui rend leur analyse difficile. Pour gérer cette complexité, les embeddings sont utilisés pour convertir les données non structurées en vecteurs numériques qui capturent leurs caractéristiques essentielles. Ces vecteurs sont ensuite stockés dans une base de données vectorielle, ce qui permet des recherches et des analyses rapides et évolutives.</p>
+    </button></h2><p>Les données non structurées, telles que le texte, les images et le son, varient en termes de format et comportent une riche sémantique sous-jacente, ce qui rend leur analyse difficile. Pour gérer cette complexité, les embeddings sont utilisés pour convertir les données non structurées en vecteurs numériques qui capturent leurs caractéristiques essentielles. Ces vecteurs sont ensuite stockés dans une base de données vectorielle, ce qui permet des recherches et des analyses rapides et évolutives.</p>
 <p>Milvus offre de solides capacités de modélisation des données, ce qui vous permet d'organiser vos données non structurées ou multimodales en collections structurées. Il prend en charge un large éventail de types de données pour différentes modélisations d'attributs, notamment les types numériques et de caractères courants, divers types de vecteurs, des tableaux, des ensembles et JSON, ce qui vous évite d'avoir à gérer plusieurs systèmes de base de données.</p>
 <p>
   
@@ -135,7 +152,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Outre les fonctions de recherche clés mentionnées ci-dessus, Milvus fournit également un ensemble de fonctions mises en œuvre autour des recherches ANN afin que vous puissiez utiliser pleinement ses capacités.</p>
+    </button></h2><p>Outre les principales fonctionnalités de recherche mentionnées ci-dessus, Milvus fournit également un ensemble de fonctionnalités mises en œuvre autour des recherches ANN afin que vous puissiez utiliser pleinement ses capacités.</p>
 <h3 id="API-and-SDK" class="common-anchor-header">API et SDK</h3><ul>
 <li><a href="https://milvus.io/api-reference/restful/v2.4.x/About.md">API RESTful</a> (officielle)</li>
 <li><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">PyMilvus</a> (SDK Python) (officiel)</li>
@@ -160,12 +177,12 @@ summary: >-
 <li><p>Prise en charge de la multi-tenance Milvus a mis en œuvre de nombreuses fonctionnalités orientées vers les scénarios de multi-tenance, y compris la clé de partition, la clé de clustering, etc. Pour plus de détails, voir <a href="/docs/fr/multi_tenancy.md">Stratégies multi-tenant</a>.</p></li>
 </ul>
 <h3 id="Security-and-Authorization" class="common-anchor-header">Sécurité et autorisation</h3><ul>
-<li><p>Modèle de cohérence réglable La cohérence garantit que chaque nœud ou réplica Milvus a la même vue des données lorsqu'il écrit ou lit des données à un moment donné. Vous pouvez facilement régler le niveau de cohérence lorsque vous effectuez des recherches ANN dans Milvus. Pour plus de détails, voir <a href="/docs/fr/consistency.md">Cohérence</a>.</p></li>
+<li><p>Modèle de cohérence ajustable La cohérence garantit que chaque nœud ou réplica Milvus a la même vue des données lorsqu'il écrit ou lit des données à un moment donné. Vous pouvez facilement régler le niveau de cohérence lorsque vous effectuez des recherches ANN dans Milvus. Pour plus de détails, voir <a href="/docs/fr/consistency.md">Cohérence</a>.</p></li>
 <li><p>Isolation des données et contrôle des ressources Dans les scénarios de multi-location, l'isolation des données est l'exigence de base en matière de sécurité. Milvus met en œuvre plusieurs fonctionnalités pour résoudre vos problèmes de sécurité. Pour plus de détails, voir <a href="/docs/fr/resource_group.md">Gestion des groupes de ressources</a> et <a href="/docs/fr/clustering-compaction.md">Compaction du clustering</a>.</p></li>
 </ul>
 <h3 id="AI-Integrations" class="common-anchor-header">Intégrations AI</h3><ul>
 <li><p>Intégrations de modèles d'intégration Les modèles d'intégration convertissent les données non structurées en leur représentation numérique dans un espace de données à haute dimension afin que vous puissiez les stocker dans Milvus. Actuellement, PyMilvus, le SDK Python, intègre plusieurs modèles d'intégration afin que vous puissiez rapidement préparer vos données en intégrations vectorielles. Pour plus de détails, voir <a href="/docs/fr/embeddings.md">Vue d'ensemble de l'intégration</a>.</p></li>
-<li><p>Intégrations de modèles de reranking Dans le domaine de la recherche d'informations et de l'IA générative, un reranker est un outil essentiel qui optimise l'ordre des résultats des recherches initiales. PyMilvus intègre également plusieurs modèles de reclassement afin d'optimiser l'ordre des résultats renvoyés par les recherches initiales. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/rerankers-overview.md">Vue d'ensemble des modèles de reclassement</a>.</p></li>
+<li><p>Intégrations de modèles de reclassement Dans le domaine de la recherche d'informations et de l'IA générative, un reclasseur est un outil essentiel qui optimise l'ordre des résultats des recherches initiales. PyMilvus intègre également plusieurs modèles de reclassement afin d'optimiser l'ordre des résultats renvoyés par les recherches initiales. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/rerankers-overview.md">Vue d'ensemble des modèles de reclassement</a>.</p></li>
 <li><p>LangChain et autres intégrations d'outils d'IA À l'ère de la GenAI, les outils tels que LangChain suscitent beaucoup d'attention de la part des développeurs d'applications. En tant que composant de base, Milvus sert généralement de magasin de vecteurs dans ces outils. Pour savoir comment intégrer Milvus dans vos outils d'IA préférés, reportez-vous à nos <a href="/docs/fr/integrate_with_openai.md">intégrations</a> et <a href="/docs/fr/build-rag-with-milvus.md">tutoriels</a>.</p></li>
 </ul>
 <h3 id="Tools-and-Ecosystem" class="common-anchor-header">Outils et écosystème</h3><ul>

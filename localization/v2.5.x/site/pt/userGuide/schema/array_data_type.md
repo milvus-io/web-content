@@ -43,9 +43,9 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Valores predefinidos</strong>: Os campos ARRAY não suportam valores predefinidos. No entanto, você pode definir o atributo <code translate="no">nullable</code> como <code translate="no">True</code> para permitir valores nulos. Para obter detalhes, consulte <a href="/docs/pt/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
-<li><p><strong>Tipo de dados</strong>: Todos os elementos de um campo Matriz devem ter o mesmo tipo de dados, conforme especificado pelo atributo <code translate="no">element_type</code>.</p></li>
-<li><p><strong>Capacidade da matriz</strong>: O número de elementos em um campo Matriz deve ser menor ou igual à capacidade máxima definida quando a Matriz foi criada, conforme especificado por <code translate="no">max_capacity</code>.</p></li>
-<li><p><strong>Tratamento de cadeias de caracteres</strong>: Os valores de cadeia de caracteres em campos de matriz são armazenados como estão, sem escape semântico ou conversão. Por exemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> e <code translate="no">&quot;a\&quot;b&quot;</code> são armazenados como introduzidos, enquanto <code translate="no">'a'b'</code> e <code translate="no">&quot;a&quot;b&quot;</code> são considerados valores inválidos.</p></li>
+<li><p><strong>Tipo de dados</strong>: Todos os elementos de um campo Matriz têm de ter o mesmo tipo de dados, conforme especificado pelo atributo <code translate="no">element_type</code>. Se definir <code translate="no">element_type</code> para <code translate="no">VARCHAR</code>, deve também definir <code translate="no">max_length</code> para os elementos da matriz.</p></li>
+<li><p><strong>Capacidade da matriz</strong>: O número de elementos num campo Array tem de ser inferior ou igual à capacidade máxima definida quando o Array foi criado, conforme especificado por <code translate="no">max_capacity</code>. O valor deve ser um número inteiro no intervalo de <strong>1</strong> a <strong>4096</strong>.</p></li>
+<li><p><strong>Tratamento de cadeias de caracteres</strong>: Os valores de cadeia de caracteres nos campos de matriz são armazenados como estão, sem escape semântico ou conversão. Por exemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> e <code translate="no">&quot;a\&quot;b&quot;</code> são armazenados como introduzidos, enquanto <code translate="no">'a'b'</code> e <code translate="no">&quot;a&quot;b&quot;</code> são considerados valores inválidos.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Adicionar um campo ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,7 +66,7 @@ summary: >-
 <ol>
 <li><p>Definir <code translate="no">datatype</code> como o tipo de dados Array suportado, <code translate="no">ARRAY</code>.</p></li>
 <li><p>Utilizar o parâmetro <code translate="no">element_type</code> para especificar o tipo de dados dos elementos da matriz. Pode ser qualquer tipo de dados escalar suportado pelo Milvus, como <code translate="no">VARCHAR</code> ou <code translate="no">INT64</code>. Todos os elementos do mesmo Array têm de ter o mesmo tipo de dados.</p></li>
-<li><p>Usando o parâmetro <code translate="no">max_capacity</code> para definir a capacidade máxima do array, ou seja, o número máximo de elementos que ele pode conter.</p></li>
+<li><p>Utilizar o parâmetro <code translate="no">max_capacity</code> para definir a capacidade máxima do array, ou seja, o número máximo de elementos que pode conter.</p></li>
 </ol>
 <p>Eis como definir um esquema de coleção que inclui campos ARRAY:</p>
 <div class="alert note">

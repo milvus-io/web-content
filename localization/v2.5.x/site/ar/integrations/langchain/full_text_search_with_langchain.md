@@ -26,14 +26,14 @@ title: استخدام البحث عن النص الكامل مع LangChain وMil
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/langchain/full_text_search_with_langchain.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">البحث في النص الكامل</a> هو طريقة تقليدية لاسترجاع المستندات التي تحتوي على مصطلحات أو عبارات محددة عن طريق المطابقة المباشرة للكلمات الرئيسية داخل النص. ويقوم بترتيب النتائج بناءً على مدى ملاءمتها، وعادةً ما يتم تحديدها من خلال عوامل مثل تكرار المصطلح والقرب. في حين أن البحث الدلالي يتفوق في فهم القصد والسياق، فإن البحث في النص الكامل يوفر دقة مطابقة الكلمات المفتاحية بدقة، مما يجعله أداة تكميلية قيّمة. تُعد خوارزمية BM25 طريقة ترتيب شائعة للبحث في النص الكامل، وهي مفيدة بشكل خاص في التوليد المعزز للاسترجاع (RAG).</p>
-<p>منذ <a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">الإصدار Milvus 2.5،</a> أصبح البحث في النص الكامل مدعومًا في الأصل من خلال نهج Sparse-BM25، من خلال تمثيل خوارزمية BM25 كمتجهات متفرقة. يقبل Milvus النص الخام كمدخلات ويقوم تلقائيًا بتحويله إلى متجهات متفرقة مخزنة في حقل محدد، مما يلغي الحاجة إلى توليد التضمين المتناثر يدويًا.</p>
+<p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">البحث في النص الكامل</a> هو طريقة تقليدية لاسترجاع المستندات عن طريق مطابقة كلمات أو عبارات محددة في النص. يقوم بترتيب النتائج بناءً على درجات الملاءمة المحسوبة من عوامل مثل تكرار المصطلح. في حين أن البحث الدلالي أفضل في فهم المعنى والسياق، فإن البحث في النص الكامل يتفوق في مطابقة الكلمات المفتاحية بدقة، مما يجعله مكملاً مفيدًا للبحث الدلالي. تُستخدم خوارزمية BM25 على نطاق واسع للترتيب في البحث في النص الكامل وتلعب دورًا رئيسيًا في التوليد المعزز للاسترجاع (RAG).</p>
+<p>يقدم<a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">الإصدار Milvus 2.5</a> إمكانات البحث في النص الكامل الأصلي باستخدام BM25. يقوم هذا النهج بتحويل النص إلى متجهات متفرقة تمثل درجات BM25. يمكنك ببساطة إدخال نص أولي وسيقوم Milvus تلقائيًا بإنشاء المتجهات المتفرقة وتخزينها، دون الحاجة إلى إنشاء تضمين يدوي متناثر.</p>
 <p>وقد أدى تكامل LangChain مع Milvus إلى تقديم هذه الميزة أيضًا، مما يسهّل عملية دمج البحث في النص الكامل في تطبيقات RAG. من خلال الجمع بين البحث في النص الكامل مع البحث الدلالي مع المتجهات الكثيفة، يمكنك تحقيق نهج هجين يستفيد من كل من السياق الدلالي من التضمينات الكثيفة وملاءمة الكلمات الرئيسية الدقيقة من مطابقة الكلمات. يعمل هذا التكامل على تحسين دقة أنظمة البحث وملاءمتها وتجربة المستخدم.</p>
-<p>سيوضح هذا البرنامج التعليمي كيفية استخدام LangChain و Milvus لتنفيذ البحث في النص الكامل في تطبيقك.</p>
+<p>سيوضح هذا البرنامج التعليمي كيفية استخدام LangChain وMilvus لتنفيذ البحث في النص الكامل في تطبيقك.</p>
 <div class="alert note">
 <ul>
-<li><p>يتوفر البحث عن النص الكامل في Milvus Standalone وMilvus Distributed، ولكن ليس في Milvus Lite، على الرغم من أنه على خارطة الطريق لإدراجه في المستقبل. سيكون متاحًا أيضًا في Zilliz Cloud (Milvus المدار بالكامل) قريبًا. يرجى التواصل مع <a href="mailto:support@zilliz.com">support@zilliz.com</a> لمزيد من المعلومات.</p></li>
-<li><p>قبل متابعة هذا البرنامج التعليمي، تأكد من أن لديك فهمًا أساسيًا <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">للبحث في النص الكامل</a> <a href="https://milvus.io/docs/basic_usage_langchain.md">والاستخدام الأساسي</a> لتكامل LangChain Milvus.</p></li>
+<li>يتوفر البحث عن النص الكامل حاليًا في Milvus Standalone وMilvus Distributed وZilliz Cloud، على الرغم من عدم دعم هذه الميزة بعد في Milvus Lite (والتي من المقرر تطبيق هذه الميزة في المستقبل). تواصل مع support@zilliz.com لمزيد من المعلومات.</li>
+<li>قبل الشروع في هذا البرنامج التعليمي، تأكد من أن لديك فهمًا أساسيًا <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">للبحث في النص الكامل</a> <a href="https://milvus.io/docs/basic_usage_langchain.md">والاستخدام الأساسي</a> لتكامل لانج تشين ميلفوس.</li>
 </ul>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -52,7 +52,7 @@ title: استخدام البحث عن النص الكامل مع LangChain وMil
         ></path>
       </svg>
     </button></h2><p>قبل تشغيل هذا الدفتر، تأكد من تثبيت التبعيات التالية:</p>
-<pre><code translate="no" class="language-shell">$ pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 <span class="hljs-comment">#langchain-voyageai</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 <span class="hljs-comment">#langchain-voyageai</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
@@ -60,19 +60,19 @@ title: استخدام البحث عن النص الكامل مع LangChain وMil
 <p>سنستخدم النماذج من OpenAI. يجب عليك إعداد متغيرات البيئة <code translate="no">OPENAI_API_KEY</code> من <a href="https://platform.openai.com/docs/quickstart">OpenAI</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>حدد خادم Milvus <code translate="no">URI</code> (واختيارياً <code translate="no">TOKEN</code>). لمعرفة كيفية تثبيت خادم ميلفوس وبدء تشغيله باتباع هذا <a href="https://milvus.io/docs/install_standalone-docker-compose.md">الدليل</a>.</p>
 <pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>إعداد بعض الأمثلة المستندات:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like this apple&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;fruit&quot;</span>}),
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like swimming&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;sport&quot;</span>}),
-    <span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;I like dogs&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like this apple&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;fruit&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like swimming&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;sport&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like dogs&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
 ]
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Initialization-with-BM25-Function" class="common-anchor-header">التهيئة مع وظيفة BM25<button data-href="#Initialization-with-BM25-Function" class="anchor-icon" translate="no">
@@ -148,7 +148,7 @@ vectorstore.vector_fields
 <p>عند إجراء البحث المختلط، نحتاج فقط إلى تمرير نص الاستعلام وتعيين معلمات topK و reranker اختياريًا. سيتعامل مثيل <code translate="no">vectorstore</code> تلقائيًا مع التضمينات المتجهة والوظائف المدمجة ويستخدم أخيرًا أداة إعادة الترتيب لتنقيح النتائج. يتم إخفاء تفاصيل التنفيذ الأساسية لعملية البحث عن المستخدم.</p>
 <pre><code translate="no" class="language-python">vectorstore.similarity_search(
     <span class="hljs-string">&quot;Do I like apples?&quot;</span>, k=<span class="hljs-number">1</span>
-)  # , ranker_type=<span class="hljs-string">&quot;weighted&quot;</span>, ranker_params={<span class="hljs-string">&quot;weights&quot;</span>:[<span class="hljs-number">0.3</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]})
+)  <span class="hljs-comment"># , ranker_type=&quot;weighted&quot;, ranker_params={&quot;weights&quot;:[0.3, 0.3, 0.4]})</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[Document(metadata={'category': 'fruit', 'pk': 454646931479251897}, page_content='I like this apple')]
 </code></pre>
@@ -338,7 +338,7 @@ rag_chain = (
 <button class="copy-code-btn"></button></code></pre>
 <p>قم باستدعاء سلسلة RAG بسؤال محدد واسترجاع الإجابة</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
-res = rag_chain.<span class="hljs-title function_">invoke</span>(query)
+res = rag_chain.invoke(query)
 res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively generate and execute these programming statements.'

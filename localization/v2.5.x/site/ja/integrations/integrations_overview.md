@@ -21,11 +21,11 @@ title: インテグレーション概要
     </button></h1><p>このページでは、Milvusとサードパーティツールを連携させるためのチュートリアルをご紹介します。</p>
 <table>
 <thead>
-<tr><th>チュートリアル</th><th>ユースケース</th><th>パートナーまたはスタック</th></tr>
+<tr><th>チュートリアル</th><th>使用例</th><th>パートナーまたはスタック</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/ja/integrate_with_llamaindex.md">MilvusとLlamaIndexを使用したRAG</a></td><td>RAG</td><td>MilvusとLLamaIndexの組み合わせ</td></tr>
-<tr><td><a href="/docs/ja/integrate_with_langchain.md">MilvusとLangChainとのRAG</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/ja/integrate_with_langchain.md">MilvusとLangChainを使用したRAG</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/ja/milvus_hybrid_search_retriever.md">LangChainのMilvusハイブリッド検索レトリバー</a></td><td>ハイブリッド検索</td><td>MilvusとLangChainのハイブリッド検索</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_openai.md">MilvusとOpenAIによるセマンティック検索</a></td><td>セマンティック検索</td><td>Milvus、OpenAI</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_cohere.md">MilvusとCohereを使った質問応答</a></td><td>セマンティック検索</td><td>Milvus、Cohere</td></tr>
@@ -83,5 +83,9 @@ title: インテグレーション概要
 <tr><td><a href="/docs/ja/integration_with_mindsdb.md">MilvusとMindsDBの統合</a></td><td>ナレッジエンジニアリング</td><td>Milvus、MindsDB</td></tr>
 <tr><td><a href="/docs/ja/milvus_and_mcp.md">MCP + Milvus: AIとベクターデータベースをつなぐ</a></td><td>エージェント</td><td>Milvus、MCP</td></tr>
 <tr><td><a href="/docs/ja/openai_agents_milvus.md">MilvusとOpenAIエージェントの統合：ステップバイステップガイド</a></td><td>エージェント</td><td>Milvus, OpenAI</td></tr>
+<tr><td><a href="/docs/ja/build_RAG_with_milvus_and_feast.md">MilvusとFeastでRAGを構築する</a></td><td>データソース</td><td>Milvus、Feast</td></tr>
+<tr><td><a href="/docs/ja/build_RAG_with_milvus_and_docling.md">MilvusとDoclingでRAGを構築する</a></td><td>データソース</td><td>Milvus、Docling</td></tr>
+<tr><td><a href="/docs/ja/full_text_search_with_langchain.md">LangChainとMilvusを使った全文検索</a></td><td>全文検索</td><td>Milvus、LangChain</td></tr>
+<tr><td><a href="/docs/ja/llamaindex_milvus_full_text_search.md">LlamaIndexとMilvusによる全文検索</a></td><td>全文検索</td><td>Milvus, LlamaIndex</td></tr>
 </tbody>
 </table>

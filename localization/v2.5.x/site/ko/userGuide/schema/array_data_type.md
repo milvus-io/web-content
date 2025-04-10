@@ -41,9 +41,9 @@ summary: 'ARRAY 필드는 동일한 데이터 유형의 정렬된 요소 집합�
       </svg>
     </button></h2><ul>
 <li><p><strong>기본값</strong>: ARRAY 필드는 기본값을 지원하지 않습니다. 그러나 <code translate="no">nullable</code> 속성을 <code translate="no">True</code> 으로 설정하여 null 값을 허용할 수 있습니다. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p></li>
-<li><p><strong>데이터 유형</strong>: 배열 필드의 모든 요소는 <code translate="no">element_type</code> 에 지정된 대로 동일한 데이터 유형을 가져야 합니다.</p></li>
-<li><p><strong>배열 용량</strong>: 배열 필드의 요소 수는 <code translate="no">max_capacity</code> 에 지정된 대로 배열을 만들 때 정의된 최대 용량보다 작거나 같아야 합니다.</p></li>
-<li><p><strong>문자열 처리</strong>: 배열 필드의 문자열 값은 의미 이스케이프나 변환 없이 있는 그대로 저장됩니다. 예를 들어 <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, <code translate="no">&quot;a\&quot;b&quot;</code> 은 입력한 대로 저장되지만 <code translate="no">'a'b'</code> 및 <code translate="no">&quot;a&quot;b&quot;</code> 은 잘못된 값으로 간주됩니다.</p></li>
+<li><p><strong>데이터 유형</strong>: 배열 필드의 모든 요소는 <code translate="no">element_type</code> 에 지정된 대로 동일한 데이터 유형을 가져야 합니다. <code translate="no">element_type</code> 을 <code translate="no">VARCHAR</code> 으로 설정한 경우 배열 요소에 대해서도 <code translate="no">max_length</code> 을 설정해야 합니다.</p></li>
+<li><p><strong>배열 용량</strong>: 배열 필드의 요소 수는 <code translate="no">max_capacity</code> 에 지정된 대로 배열을 생성할 때 정의된 최대 용량보다 작거나 같아야 합니다. 값은 <strong>1에서</strong> <strong>4096</strong> 범위 내의 정수여야 합니다.</p></li>
+<li><p><strong>문자열 처리</strong>: 배열 필드의 문자열 값은 시맨틱 이스케이프나 변환 없이 있는 그대로 저장됩니다. 예를 들어 <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, <code translate="no">&quot;a\&quot;b&quot;</code> 은 입력한 대로 저장되고 <code translate="no">'a'b'</code> 및 <code translate="no">&quot;a&quot;b&quot;</code> 은 유효하지 않은 값으로 간주됩니다.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">ARRAY 필드 추가<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"

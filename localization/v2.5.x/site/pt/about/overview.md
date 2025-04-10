@@ -23,8 +23,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O Milvus é uma base de dados vetorial de alto desempenho e altamente escalável que funciona de forma eficiente numa vasta gama de ambientes, desde um computador portátil a sistemas distribuídos de grande escala. Está disponível como software de código aberto e como um serviço na nuvem.</p>
-<p>O Milvus é um projeto de código aberto da LF AI &amp; Data Foundation distribuído ao abrigo da licença Apache 2.0. A maioria dos colaboradores são especialistas da comunidade de computação de alto desempenho (HPC), especializados na construção de sistemas de grande escala e na otimização de código sensível ao hardware. Os principais colaboradores incluem profissionais da Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba e Microsoft.</p>
+    </button></h1><p><span>O Milvus <span style="display: inline-block; vertical-align: middle;">
+<audio id="milvus-audio" style="display: none;">
+<source src="https://en-audio.howtopronounce.com/15783806805e142d8844912.mp3" type="audio/mp3" />
+</audio>
+<span style="
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('https://milvus.io/docs/v2.5.x/assets/hearing.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    margin-left: 4px;
+  " onclick="document.getElementById('milvus-audio').play()"></span>
+</span></span> é uma ave de rapina do género Milvus da família dos falcões Accipaitridae, famosa pela sua velocidade de voo, visão aguçada e notável adaptabilidade.</p>
+<style>
+  audio::-webkit-media-controls { display: none !important; }</style>
+<p>A Zilliz adopta o nome Milvus para a sua base de dados vetorial de código aberto, de elevado desempenho e altamente escalável, que funciona eficientemente numa vasta gama de ambientes, desde um computador portátil a sistemas distribuídos de grande escala. Está disponível como software de código aberto e como um serviço na nuvem.</p>
+<p>Desenvolvido por Zilliz e rapidamente doado à LF AI &amp; Data Foundation no âmbito da Linux Foundation, o Milvus tornou-se um dos principais projectos de bases de dados vectoriais de código aberto do mundo. É distribuído ao abrigo da licença Apache 2.0 e a maioria dos colaboradores são especialistas da comunidade de computação de alto desempenho (HPC), especializados na criação de sistemas de grande escala e na otimização de código sensível ao hardware. Os principais colaboradores incluem profissionais da Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba e Microsoft.</p>
+<p>Curiosamente, cada projeto de código aberto Zilliz tem o nome de um pássaro, uma convenção de nomes que simboliza a liberdade, a previsão e a evolução ágil da tecnologia.</p>
 <h2 id="Unstructured-Data-Embeddings-and-Milvus" class="common-anchor-header">Dados não estruturados, Embeddings e Milvus<button data-href="#Unstructured-Data-Embeddings-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +57,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dados não estruturados, como texto, imagens e áudio, variam em formato e carregam uma rica semântica subjacente, o que torna sua análise desafiadora. Para gerir esta complexidade, os embeddings são utilizados para converter dados não estruturados em vectores numéricos que captam as suas caraterísticas essenciais. Estes vectores são depois armazenados numa base de dados vetorial, permitindo pesquisas e análises rápidas e escaláveis.</p>
+    </button></h2><p>Os dados não estruturados, tais como texto, imagens e áudio, variam em formato e transportam uma semântica subjacente rica, o que torna a sua análise difícil. Para gerir esta complexidade, os embeddings são utilizados para converter dados não estruturados em vectores numéricos que captam as suas caraterísticas essenciais. Estes vectores são depois armazenados numa base de dados vetorial, permitindo pesquisas e análises rápidas e escaláveis.</p>
 <p>Milvus oferece capacidades robustas de modelação de dados, permitindo-lhe organizar os seus dados não estruturados ou multimodais em colecções estruturadas. Suporta uma vasta gama de tipos de dados para diferentes modelações de atributos, incluindo tipos numéricos e de caracteres comuns, vários tipos de vectores, matrizes, conjuntos e JSON, poupando-lhe o esforço de manter vários sistemas de bases de dados.</p>
 <p>
   
@@ -70,7 +87,7 @@ summary: >-
     </button></h2><p>Milvus foi concebido desde o primeiro dia para ser um sistema de base de dados vetorial altamente eficiente. Na maioria dos casos, Milvus supera outros bancos de dados vetoriais em 2-5x (veja os resultados do VectorDBBench). Esse alto desempenho é o resultado de várias decisões importantes de projeto:</p>
 <p><strong>Otimização sensível ao hardware</strong>: Para acomodar o Milvus em vários ambientes de hardware, optimizámos o seu desempenho especificamente para muitas arquitecturas e plataformas de hardware, incluindo AVX512, SIMD, GPUs e SSD NVMe.</p>
 <p><strong>Algoritmos de pesquisa avançados</strong>: O Milvus suporta uma vasta gama de algoritmos de indexação/pesquisa na memória e no disco, incluindo IVF, HNSW, DiskANN, entre outros, todos profundamente optimizados. Em comparação com implementações populares como FAISS e HNSWLib, Milvus oferece desempenho 30%-70% melhor.</p>
-<p><strong>Mecanismo de pesquisa em C++</strong>: Mais de 80% do desempenho de uma base de dados vetorial é determinado pelo seu motor de pesquisa. O Milvus utiliza C++ para este componente crítico devido ao elevado desempenho da linguagem, à otimização de baixo nível e à gestão eficiente dos recursos. Mais importante ainda, Milvus integra numerosas optimizações de código sensíveis ao hardware, que vão desde a vectorização ao nível da montagem até à paralelização e programação multi-thread, para tirar o máximo partido das capacidades do hardware.</p>
+<p><strong>Mecanismo de pesquisa em C++</strong>: Mais de 80% do desempenho de uma base de dados vetorial é determinado pelo seu motor de pesquisa. O Milvus utiliza C++ para este componente crítico devido ao elevado desempenho da linguagem, à otimização de baixo nível e à gestão eficiente dos recursos. Mais importante ainda, o Milvus integra numerosas optimizações de código sensíveis ao hardware, que vão desde a vectorização ao nível da montagem até à paralelização e programação multi-thread, para tirar o máximo partido das capacidades do hardware.</p>
 <p><strong>Orientado a colunas</strong>: Milvus é um sistema de banco de dados vetorial orientado a colunas. As principais vantagens vêm dos padrões de acesso aos dados. Ao efetuar consultas, uma base de dados orientada por colunas lê apenas os campos específicos envolvidos na consulta, em vez de linhas inteiras, o que reduz consideravelmente a quantidade de dados acedidos. Além disso, as operações em dados baseados em colunas podem ser facilmente vectorizadas, permitindo que as operações sejam aplicadas em todas as colunas de uma só vez, melhorando ainda mais o desempenho.</p>
 <h2 id="What-Makes-Milvus-so-Scalable" class="common-anchor-header">O que torna o Milvus tão escalável<button data-href="#What-Makes-Milvus-so-Scalable" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -169,7 +186,7 @@ summary: >-
 <li><p>LangChain e outras integrações de ferramentas de IA Na era da GenAI, as ferramentas, como a LangChain, ganham muita atenção dos programadores de aplicações. Como componente central, o Milvus serve normalmente como armazém de vectores nessas ferramentas. Para saber como integrar o Milvus nas suas ferramentas de IA favoritas, consulte as nossas <a href="/docs/pt/integrate_with_openai.md">Integrações</a> e <a href="/docs/pt/build-rag-with-milvus.md">Tutoriais</a>.</p></li>
 </ul>
 <h3 id="Tools-and-Ecosystem" class="common-anchor-header">Ferramentas e Ecossistema</h3><ul>
-<li><p>Attu Attu é um GUI intuitivo e tudo-em-um que o ajuda a gerir o Milvus e os dados que armazena. Para mais informações, consulte o repositório <a href="https://github.com/zilliztech/attu">Attu</a>.</p></li>
+<li><p>Attu Attu é um GUI tudo-em-um intuitivo que o ajuda a gerir Milvus e os dados que armazena. Para mais informações, consulte o repositório <a href="https://github.com/zilliztech/attu">Attu</a>.</p></li>
 <li><p>Birdwatcher O Birdwatcher é uma ferramenta de depuração para o Milvus. Usando-o para se conectar ao etcd, você pode verificar o estado do seu sistema Milvus ou configurá-lo em tempo real. Para obter detalhes, consulte <a href="/docs/pt/birdwatcher_overview.md">BirdWatcher</a>.</p></li>
 <li><p>Integrações do Promethus e do Grafana O Prometheus é um kit de ferramentas de monitoramento e alerta de sistema de código aberto para o Kubernetes. Grafana é uma pilha de visualização de código aberto que pode se conectar a todas as fontes de dados. Você pode usar o Promethus e o Grafana como provedor de serviços de monitoramento para monitorar visualmente o desempenho do Milvus distribuído. Para obter detalhes, consulte <a href="/docs/pt/monitor.md">Implantação de serviços de monitoramento</a>.</p></li>
 <li><p>Milvus Backup O Milvus Backup é uma ferramenta que permite aos utilizadores fazer cópias de segurança e restaurar dados do Milvus. Ele fornece tanto CLI e API para se encaixar em diferentes cenários de aplicação. Para mais informações, consulte <a href="/docs/pt/milvus_backup_overview.md">Milvus Backup</a>.</p></li>

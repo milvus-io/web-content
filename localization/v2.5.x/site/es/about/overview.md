@@ -23,8 +23,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus es una base de datos vectorial de alto rendimiento y altamente escalable que se ejecuta eficientemente en una amplia gama de entornos, desde un ordenador portátil hasta sistemas distribuidos a gran escala. Está disponible como software de código abierto y como servicio en la nube.</p>
-<p>Milvus es un proyecto de código abierto de LF AI &amp; Data Foundation distribuido bajo la licencia Apache 2.0. La mayoría de los colaboradores son expertos de la comunidad de la computación de alto rendimiento (HPC), especializados en la creación de sistemas a gran escala y en la optimización de código compatible con el hardware. Entre los principales colaboradores se encuentran profesionales de Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba y Microsoft.</p>
+    </button></h1><p><span>Milvus <span style="display: inline-block; vertical-align: middle;">
+<audio id="milvus-audio" style="display: none;">
+<source src="https://en-audio.howtopronounce.com/15783806805e142d8844912.mp3" type="audio/mp3" />
+</audio>
+<span style="
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('https://milvus.io/docs/v2.5.x/assets/hearing.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    margin-left: 4px;
+  " onclick="document.getElementById('milvus-audio').play()"></span>
+</span></span> es un ave rapaz del género Milvus de la familia de los halcones Accipaitridae, famosa por su velocidad de vuelo, aguda visión y notable adaptabilidad.</p>
+<style>
+  audio::-webkit-media-controls { display: none !important; }</style>
+<p>Zilliz adopta el nombre de Milvus para su base de datos vectorial de código abierto, altamente escalable y de alto rendimiento, que funciona con eficacia en una amplia gama de entornos, desde un ordenador portátil hasta sistemas distribuidos a gran escala. Está disponible como software de código abierto y como servicio en la nube.</p>
+<p>Desarrollado por Zilliz y pronto donado a la LF AI &amp; Data Foundation en el marco de la Linux Foundation, Milvus se ha convertido en uno de los principales proyectos de bases de datos vectoriales de código abierto del mundo. Se distribuye bajo la licencia Apache 2.0, y la mayoría de los colaboradores son expertos de la comunidad de computación de alto rendimiento (HPC), especializados en la construcción de sistemas a gran escala y en la optimización de código compatible con el hardware. Entre los principales colaboradores figuran profesionales de Zilliz, ARM, NVIDIA, AMD, Intel, Meta, IBM, Salesforce, Alibaba y Microsoft.</p>
+<p>Curiosamente, todos los proyectos de código abierto de Zilliz llevan el nombre de un pájaro, una convención que simboliza la libertad, la previsión y la evolución ágil de la tecnología.</p>
 <h2 id="Unstructured-Data-Embeddings-and-Milvus" class="common-anchor-header">Datos no estructurados, incrustaciones y Milvus<button data-href="#Unstructured-Data-Embeddings-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +58,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Los datos no estructurados, como texto, imágenes y audio, varían de formato y contienen una rica semántica subyacente, lo que dificulta su análisis. Para gestionar esta complejidad, se utilizan embebimientos que convierten los datos no estructurados en vectores numéricos que capturan sus características esenciales. A continuación, estos vectores se almacenan en una base de datos vectorial, lo que permite realizar búsquedas y análisis rápidos y escalables.</p>
-<p>Milvus ofrece sólidas capacidades de modelado de datos, lo que le permite organizar sus datos no estructurados o multimodales en colecciones estructuradas. Admite una amplia gama de tipos de datos para el modelado de diferentes atributos, incluidos los tipos numéricos y de caracteres comunes, varios tipos de vectores, matrices, conjuntos y JSON, lo que le ahorra el esfuerzo de mantener múltiples sistemas de bases de datos.</p>
+<p>Milvus ofrece sólidas capacidades de modelado de datos, lo que le permite organizar sus datos no estructurados o multimodales en colecciones estructuradas. Admite una amplia gama de tipos de datos para el modelado de diferentes atributos, incluidos los tipos numéricos y de caracteres comunes, varios tipos de vectores, matrices, conjuntos y JSON, lo que le ahorra el esfuerzo de mantener varios sistemas de bases de datos.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
@@ -135,7 +152,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Además de las características clave de búsqueda mencionadas anteriormente, Milvus también proporciona un conjunto de características implementadas en torno a las búsquedas RNA para que pueda utilizar plenamente sus capacidades.</p>
+    </button></h2><p>Además de las funciones de búsqueda clave mencionadas anteriormente, Milvus también proporciona un conjunto de funciones implementadas en torno a las búsquedas RNA para que pueda utilizar plenamente sus capacidades.</p>
 <h3 id="API-and-SDK" class="common-anchor-header">API y SDK</h3><ul>
 <li><a href="https://milvus.io/api-reference/restful/v2.4.x/About.md">API RESTful</a> (oficial)</li>
 <li><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">PyMilvus</a> (Python SDK) (oficial)</li>
@@ -156,7 +173,7 @@ summary: >-
 <li><p>Algoritmos de búsqueda Milvus soporta un conjunto de algoritmos de indexación y búsqueda sintonizables. Para más detalles, consulte <a href="/docs/es/index.md">Índice en memoria</a>, <a href="/docs/es/disk_index.md">Índice en disco</a> e <a href="/docs/es/gpu_index.md">Índice GPU</a>.</p></li>
 <li><p>Particiones y claves de partición Las particiones son subdivisiones de una colección Milvus. Puede elegir un campo escalar como clave de partición para mejorar el rendimiento de la búsqueda. Para más detalles, consulte <a href="/docs/es/manage-partitions.md">Gestionar particiones</a> y <a href="/docs/es/use-partition-key.md">Utilizar clave de partición</a>.</p></li>
 <li><p>Modelo de Consistencia Sintonizable La consistencia asegura que cada nodo o réplica de Milvus tenga la misma vista de los datos cuando escribe o lee datos en un momento dado. Puede sintonizar fácilmente el nivel de consistencia al realizar búsquedas RNA en Milvus. Para más detalles, consulte <a href="/docs/es/consistency.md">Consistencia</a>.</p></li>
-<li><p>Importación de Datos de Alto Rendimiento Para importar un gran volumen de datos a Milvus en lugar de insertarlos uno tras otro, considere utilizar nuestras herramientas de importación de datos de alto rendimiento. Para más detalles, consulte <a href="/docs/es/prepare-source-data.md">Preparar datos de origen</a> e <a href="/docs/es/import-data.md">importar datos</a>.</p></li>
+<li><p>Importación de datos de alto rendimiento Para importar un gran volumen de datos a Milvus en lugar de insertarlos uno tras otro, considere el uso de nuestras herramientas de importación de datos de alto rendimiento. Para más detalles, consulte <a href="/docs/es/prepare-source-data.md">Preparar datos de origen</a> e <a href="/docs/es/import-data.md">importar datos</a>.</p></li>
 <li><p>Soporte multi-tenancy Milvus ha implementado muchas características orientadas a escenarios multi-tenancy, incluyendo Partition Key, Clustering Key, y más. Para más detalles, consulte <a href="/docs/es/multi_tenancy.md">Estrategias multi-tenancy</a>.</p></li>
 </ul>
 <h3 id="Security-and-Authorization" class="common-anchor-header">Seguridad y autorización</h3><ul>

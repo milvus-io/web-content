@@ -348,7 +348,7 @@
             "children": []
           },
           {
-            "label": "Creare istantaneamente una collezione",
+            "label": "Creare una collezione istantanea",
             "id": "create-collection-instantly.md",
             "order": 2,
             "children": []
@@ -1399,7 +1399,7 @@
             "children": []
           },
           {
-            "label": "Compattazione del clustering",
+            "label": "Compattazione dei cluster",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1854,6 +1854,12 @@
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
+              },
+              {
+                "label": "Ricerca full-text",
+                "id": "llamaindex_milvus_full_text_search.md",
+                "order": 2,
+                "children": []
               }
             ]
           },
@@ -1871,9 +1877,22 @@
           },
           {
             "label": "Pila di fieno",
-            "id": "integrate_with_haystack.md",
+            "id": "haystack",
             "order": 4,
-            "children": []
+            "children": [
+              {
+                "label": "RAG",
+                "id": "integrate_with_haystack.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Ricerca full-text",
+                "id": "full_text_search_with_milvus_and_haystack.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Kotaemon",
@@ -2094,6 +2113,24 @@
             "id": "ETL_using_vectorETL.md",
             "order": 8,
             "children": []
+          },
+          {
+            "label": "Festa",
+            "id": "build_RAG_with_milvus_and_feast.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Mistral OCR",
+            "id": "mistral_ocr_with_milvus.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Docling",
+            "id": "build_RAG_with_milvus_and_docling.md",
+            "order": 11,
+            "children": []
           }
         ]
       },
@@ -2203,7 +2240,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con le matrici Matryoshka",
+        "label": "Ricerca a imbuto con matrioske embeddings",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -2218,6 +2255,12 @@
         "label": "Utilizzare AsyncMilvusClient con asyncio",
         "id": "use-async-milvus-client-with-asyncio.md",
         "order": 15,
+        "children": []
+      },
+      {
+        "label": "Ricerca da testo a immagine con Milvus",
+        "id": "text_image_search.md",
+        "order": 16,
         "children": []
       },
       {
@@ -2244,7 +2287,7 @@
             "children": []
           },
           {
-            "label": "Ricerca della somiglianza audio",
+            "label": "Ricerca di somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []
@@ -2259,12 +2302,6 @@
             "label": "Motore di ricerca testuale",
             "id": "text_search_engine.md",
             "order": 10,
-            "children": []
-          },
-          {
-            "label": "Motore di ricerca da testo a immagine",
-            "id": "text_image_search.md",
-            "order": 11,
             "children": []
           },
           {

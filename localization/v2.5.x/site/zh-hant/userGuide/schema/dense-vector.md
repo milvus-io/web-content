@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>密集向量是廣泛用於機器學習和資料分析的數值資料表示。它們由實數陣列組成，其中大多數或所有元素都是非零的。相較於稀疏向量，密集向量在相同的維度層級包含更多的資訊，因為每個維度都持有有意義的數值。這種表示方式可以有效捕捉複雜的模式和關係，讓資料更容易在高維空間中分析和處理。密集向量通常有固定的維數，從幾十到幾百甚至上千不等，這取決於特定的應用程式和需求。</p>
+    </button></h1><p>密集向量是廣泛用於機器學習和資料分析的數值資料表示。它們由實數陣列組成，其中大多數或所有元素都是非零的。相較於稀疏向量，密集向量在相同的維度層級包含更多的資訊，因為每個維度都持有有意義的數值。這種表示方式可以有效捕捉複雜的模式和關係，讓資料更容易在高維空間中分析和處理。密集向量通常有固定的維數，從幾十維到幾百維甚至上千維不等，視特定的應用程式和需求而定。</p>
 <p>密集向量主要用於需要瞭解資料語意的情境，例如語意搜尋和推薦系統。在語意搜尋中，密集向量有助於捕捉查詢與文件之間的潛在關聯，從而改善搜尋結果的相關性。在推薦系統中，密集向量有助於識別使用者與項目之間的相似性，提供更個人化的建議。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -62,11 +62,11 @@ summary: >-
 
 <button class="copy-code-btn"></button></code></pre>
 <p>稠密向量可以使用各種<a href="https://en.wikipedia.org/wiki/Embedding">嵌入</a>模型產生，例如針對影像的 CNN 模型 (如<a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>、<a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>)，以及針對文字的語言模型 (如<a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>、<a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>)。這些模型可將原始資料轉換為高維空間中的點數，捕捉資料的語意特徵。此外，Milvus 還提供方便的方法，協助使用者產生和處理密集向量，詳情請參閱 Embeddings。</p>
-<p>一旦資料被向量化，就可以儲存在 Milvus 中進行管理和向量檢索。下圖顯示了基本流程。</p>
+<p>一旦資料被向量化，就可以儲存在 Milvus 中進行管理和向量檢索。下圖顯示基本流程。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/dense-vector.png" alt="dense-vector" class="doc-image" id="dense-vector" />
-   </span> <span class="img-wrapper"> <span>密集向量</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-dense-vector.png" alt="use-dense-vector" class="doc-image" id="use-dense-vector" />
+   </span> <span class="img-wrapper"> <span>使用密集向量</span> </span></p>
 <div class="alert note">
 <p>除了密集向量，Milvus 也支援稀疏向量和二進位向量。稀疏向量適用於基於特定詞彙的精確匹配，例如關鍵字搜尋和詞彙匹配；而二進制向量則常用於有效處理二進制資料，例如圖像模式匹配和某些雜湊應用。如需詳細資訊，請參閱<a href="/docs/zh-hant/binary-vector.md">二進位向量</a>和<a href="/docs/zh-hant/sparse_vector.md">稀疏向量</a>。</p>
 </div>

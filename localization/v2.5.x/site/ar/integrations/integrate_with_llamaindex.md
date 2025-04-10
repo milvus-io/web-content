@@ -42,7 +42,7 @@ title: التوليد المعزّز للاسترجاع (RAG) باستخدام M
         ></path>
       </svg>
     </button></h2><h3 id="Install-dependencies" class="common-anchor-header">تثبيت التبعيات</h3><p>تتطلب مقتطفات التعليمات البرمجية في هذه الصفحة تبعيات pymilvus و llamaindex. يمكنك تثبيتها باستخدام الأوامر التالية:</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=2.4.2
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -54,10 +54,10 @@ title: التوليد المعزّز للاسترجاع (RAG) باستخدام M
 <h3 id="Setup-OpenAI" class="common-anchor-header">إعداد OpenAI</h3><p>لنبدأ أولاً بإضافة مفتاح Openai api. سيسمح لنا ذلك بالوصول إلى chatgpt.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> openai
 
-openai.<span class="hljs-property">api_key</span> = <span class="hljs-string">&quot;sk-***********&quot;</span>
+openai.api_key = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-data" class="common-anchor-header">إعداد البيانات</h3><p>يمكنك تنزيل عينة من البيانات باستخدام الأوامر التالية:</p>
-<pre><code translate="no" class="language-python">! <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/&#x27;</span>
+<pre><code translate="no" class="language-python">! mkdir -p <span class="hljs-string">&#x27;data/&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham_essay.txt&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/uber_2021.pdf&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -88,10 +88,57 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 95f25e4d-f270-4650-87ce-006d69d82033
 </code></pre>
-<h3 id="Create-an-index-across-the-data" class="common-anchor-header">إنشاء فهرس عبر البيانات</h3><p>الآن بعد أن أصبح لدينا مستند، يمكننا إنشاء فهرس وإدراج المستند.</p>
-<blockquote>
-<p>يرجى ملاحظة أن <strong>ميلفوس لايت</strong> يتطلب <code translate="no">pymilvus&gt;=2.4.2</code>.</p>
-</blockquote>
+<h3 id="Create-an-index-across-the-data" class="common-anchor-header">إنشاء فهرس عبر البيانات</h3><p>الآن بعد أن أصبح لدينا مستند، يمكننا إنشاء فهرس وإدراج المستند. بالنسبة للفهرس سنستخدم MilvusVectorStore. يأخذ MilvusVectorStore بعض الوسيطات:</p>
+<h4 id="basic-args" class="common-anchor-header">الوسيطات الأساسية</h4><ul>
+<li><code translate="no">uri (str, optional)</code>: URI المطلوب الاتصال به، ويأتي على شكل "https://address:port" لخدمة Milvus أو خدمة Zilliz Cloud، أو "المسار/إلى/إلى/المحلي/ilvus.db" لـ Milvus.db المحلي الخفيف. الافتراضي إلى "./milvus_llamaindex.db".</li>
+<li><code translate="no">token (str, optional)</code>: الرمز المميز لتسجيل الدخول. فارغ في حالة عدم استخدام rbac، وفي حالة استخدام rbac سيكون على الأرجح "اسم المستخدم: كلمة المرور".</li>
+<li><code translate="no">collection_name (str, optional)</code>: اسم المجموعة التي سيتم تخزين البيانات فيها. افتراضي إلى "llamalection".</li>
+<li><code translate="no">overwrite (bool, optional)</code>: ما إذا كان سيتم الكتابة فوق المجموعة الموجودة بنفس الاسم. الإعداد الافتراضي إلى خطأ.</li>
+</ul>
+<h4 id="scalar-fields-including-doc-id--text" class="common-anchor-header">الحقول العددية بما في ذلك معرف المستند والنص</h4><ul>
+<li><code translate="no">doc_id_field (str, optional)</code>: اسم حقل doc_id للمجموعة. افتراضي إلى DEFAULT_DOC_ID_KEY.</li>
+<li><code translate="no">text_key (str, optional)</code>: ما نص المفتاح المخزن في المجموعة التي تم تمريرها. يُستخدم عند إحضار المجموعة الخاصة بك. يُستخدم افتراضيًا إلى DEFAULT_TEXT_KEY.</li>
+<li><code translate="no">scalar_field_names (list, optional)</code>: أسماء الحقول العددية الإضافية التي سيتم تضمينها في مخطط المجموعة.</li>
+<li><code translate="no">scalar_field_types (list, optional)</code>: أنواع الحقول العددية الإضافية.</li>
+</ul>
+<h4 id="dense-field" class="common-anchor-header">حقل كثيف</h4><ul>
+<li><code translate="no">enable_dense (bool)</code>: علامة منطقية لتمكين أو تعطيل التضمين الكثيف. الإعداد الافتراضي إلى صواب.</li>
+<li><code translate="no">dim (int, optional)</code>: بُعد متجهات التضمين للمجموعة. مطلوبة عند إنشاء مجموعة جديدة مع تمكين_التضمين_الكثيف False.</li>
+<li><code translate="no">embedding_field (str, optional)</code>: :: اسم حقل التضمين الكثيف للمجموعة، افتراضيًا إلى DEFAULT_EMBEDDING_KEY.</li>
+<li><code translate="no">index_config (dict, optional)</code>: التكوين المستخدم لبناء فهرس التضمين الكثيف. الافتراضي إلى لا شيء.</li>
+<li><code translate="no">search_config (dict, optional)</code>: التكوين المستخدم للبحث في فهرس ميلفوس الكثيف. لاحظ أن هذا يجب أن يكون متوافقًا مع نوع الفهرس المحدد بواسطة <code translate="no">index_config</code>. الإعداد الافتراضي إلى لا شيء.</li>
+<li><code translate="no">similarity_metric (str, optional)</code>: مقياس التشابه المستخدم للتضمين الكثيف، يدعم حاليًا IP وCOSINE و L2.</li>
+</ul>
+<h4 id="sparse-field" class="common-anchor-header">حقل متناثر</h4><ul>
+<li><code translate="no">enable_sparse (bool)</code>: علامة منطقية لتمكين أو تعطيل التضمين المتناثر. الإعداد الافتراضي إلى خطأ.</li>
+<li><code translate="no">sparse_embedding_field (str)</code>: اسم حقل التضمين المتناثر، افتراضيًا إلى DEFAULT_SPARSE_EMBEDDING_KEY.</li>
+<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: إذا كان enable_sparse صحيحًا، فيجب توفير هذا الكائن لتحويل النص إلى تضمين متناثر. إذا كانت بلا، فسيتم استخدام دالة التضمين المتناثر الافتراضية (BGEM3SparseEmbeddingFunction).</li>
+<li><code translate="no">sparse_index_config (dict, optional)</code>: التكوين المستخدم لبناء فهرس التضمين المتناثر. الإعداد الافتراضي إلى بلا.</li>
+</ul>
+<h4 id="hybrid-ranker" class="common-anchor-header">مصنف هجين</h4><ul>
+<li><p><code translate="no">hybrid_ranker (str)</code>: يحدد نوع مصنف التصنيف المستخدم في استعلامات البحث المختلط. يدعم حاليًا فقط ["RRFRFRanker"، "RRFRanker"، "WeightedRanker"]. الافتراضي إلى "RRFRFRanker".</p></li>
+<li><p><code translate="no">hybrid_ranker_params (dict, optional)</code>: معلمات التكوين لمصنّف البحث الهجين. تعتمد بنية هذا القاموس على مصنف التصنيف المحدد المستخدم:</p>
+<ul>
+<li>بالنسبة إلى "RRFRFRanker"، يجب أن يتضمن:<ul>
+<li>"k" (int): معلمة تُستخدم في دمج الرتب المتبادل (RRF). تُستخدم هذه القيمة لحساب درجات الترتيب كجزء من خوارزمية RRF، والتي تجمع بين استراتيجيات ترتيب متعددة في درجة واحدة لتحسين ملاءمة البحث.</li>
+</ul></li>
+<li>بالنسبة لـ "WeightedRanker"، فإنه يتوقع<ul>
+<li>"الأوزان" (قائمة عائمة): قائمة بأوزان اثنين بالضبط:<ol>
+<li>الوزن لمكون التضمين الكثيف.</li>
+<li>الوزن الخاص بمكون التضمين المتناثر. تُستخدم هذه الأوزان لضبط أهمية المكونات الكثيفة والمتناثرة للتضمينات في عملية الاسترجاع المختلطة. يُفترض أن يكون افتراضيًا لقاموس فارغ، مما يعني أن المصنف سيعمل بإعداداته الافتراضية المحددة مسبقًا.</li>
+</ol></li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="others" class="common-anchor-header">أخرى</h4><ul>
+<li><code translate="no">collection_properties (dict, optional)</code>: خصائص التجميع مثل TTL (الوقت المستغرق) و MMAP (تعيين الذاكرة). الإعدادات الافتراضية إلى لا شيء. يمكن أن تتضمن<ul>
+<li>"collection.ttl.ttl.seconds" (int): بمجرد تعيين هذه الخاصية، تنتهي صلاحية البيانات في المجموعة الحالية في الوقت المحدد. سيتم تنظيف البيانات منتهية الصلاحية في المجموعة ولن يتم تضمينها في عمليات البحث أو الاستعلامات.</li>
+<li>"mmap.enabled" (صامت): ما إذا كان سيتم تمكين التخزين المعين بالذاكرة على مستوى المجموعة.</li>
+</ul></li>
+<li><code translate="no">index_management (IndexManagement)</code>: يحدد استراتيجية إدارة الفهرس المراد استخدامها. الإعداد الافتراضي إلى "create_if_not_existing".</li>
+<li><code translate="no">batch_size (int)</code>: تكوين عدد المستندات التي تتم معالجتها في دفعة واحدة عند إدراج البيانات في Milvus. الإعداد الافتراضي إلى DEFAULT_BATCH_SIZE.</li>
+<li><code translate="no">consistency_level (str, optional)</code>: مستوى الاتساق المطلوب استخدامه لمجموعة تم إنشاؤها حديثاً. الإعداد الافتراضي إلى "جلسة عمل".</li>
+</ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an index over the documents</span>
 <span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
@@ -102,9 +149,9 @@ storage_context = StorageContext.from_defaults(vector_store=vector_store)
 index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>لمعلمات <code translate="no">MilvusVectorStore</code>:</p>
+<p>بالنسبة لمعلمات <code translate="no">MilvusVectorStore</code>:</p>
 <ul>
-<li>يعد تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هو الطريقة الأكثر ملاءمة، حيث أنه يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">ملف Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
+<li>يعد تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، الطريقة الأكثر ملاءمة، حيث يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">ملف Milvus Lite</a> لتخزين جميع البيانات في هذا الملف.</li>
 <li>إذا كان لديك حجم كبير من البيانات، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يُرجى استخدام الخادم uri، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
 <li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
 </ul>

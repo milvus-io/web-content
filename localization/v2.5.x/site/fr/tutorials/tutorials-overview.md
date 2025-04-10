@@ -29,7 +29,7 @@ title: Vue d'ensemble des didacticiels
 <tr><td><a href="/docs/fr/build-rag-with-milvus.md">Construire RAG avec Milvus</a></td><td>RAG</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/how_to_enhance_your_rag.md">RAG avancé</a></td><td>RAG</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/full_text_search_with_milvus.md">Recherche en texte intégral avec Milvus</a></td><td>Démarrage rapide</td><td>Recherche en texte intégral</td></tr>
-<tr><td><a href="/docs/fr/hybrid_search_with_milvus.md">Recherche hybride avec Milvus</a></td><td>Recherche hybride</td><td>recherche hybride, multi vecteur, intégration dense, intégration clairsemée</td></tr>
+<tr><td><a href="/docs/fr/hybrid_search_with_milvus.md">Recherche hybride avec Milvus</a></td><td>Recherche hybride</td><td>recherche hybride, multi vectorielle, intégration dense, intégration clairsemée</td></tr>
 <tr><td><a href="/docs/fr/image_similarity_search.md">Recherche d'images avec Milvus</a></td><td>Recherche sémantique</td><td>recherche vectorielle, champ dynamique</td></tr>
 <tr><td><a href="/docs/fr/multimodal_rag_with_milvus.md">RAG multimodal avec Milvus</a></td><td>RAG</td><td>Recherche vectorielle, champ dynamique</td></tr>
 <tr><td><a href="/docs/fr/multimodal_rag_with_milvus.md">Recherche multimodale utilisant des vecteurs multiples</a></td><td>Recherche sémantique</td><td>multi vectorielle, recherche hybride</td></tr>
@@ -37,6 +37,9 @@ title: Vue d'ensemble des didacticiels
 <tr><td><a href="/docs/fr/contextual_retrieval_with_milvus.md">Recherche contextuelle avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/hdbscan_clustering_with_milvus.md">HDBSCAN Clustering avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/use_ColPali_with_milvus.md">Utiliser ColPali pour la recherche multimodale avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/quickstart_with_attu.md">Démarrage rapide avec Attu</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/use-async-milvus-client-with-asyncio.md">Utiliser AsyncMilvusClient avec asyncio</a></td><td>AsyncIO</td><td>AsyncIO, recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/text_image_search.md">Recherche texte-image avec Milvus</a></td><td>Recherche sémantique</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/vector_visualization.md">Visualisation vectorielle</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/movie_recommendation_with_milvus.md">Recommandation de films avec Milvus</a></td><td>Système de recommandation</td><td>Recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/funnel_search_with_matryoshka.md">Recherche en entonnoir avec Matryoshka Embeddings</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
@@ -46,9 +49,6 @@ title: Vue d'ensemble des didacticiels
 <tr><td><a href="/docs/fr/audio_similarity_search.md">Recherche de similarité audio</a></td><td>Recherche sémantique</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/dna_sequence_classification.md">Classification de l'ADN</a></td><td>Classification</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/text_search_engine.md">Moteur de recherche textuelle</a></td><td>Recherche sémantique</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/text_image_search.md">Recherche d'images par texte</a></td><td>Recherche sémantique</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/image_deduplication_system.md">Déduplication d'images</a></td><td>Déduplication</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/quickstart_with_attu.md">Démarrage rapide avec Attu</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/use-async-milvus-client-with-asyncio.md">Utiliser AsyncMilvusClient avec asyncio</a></td><td>AsyncIO</td><td>AsyncIO, recherche vectorielle</td></tr>
 </tbody>
 </table>

@@ -5,6 +5,12 @@ summary: >-
   Recuperación (RAG) utilizando Haystack y Milvus.
 title: Retrieval-Augmented Generation (RAG) con Milvus y Haystack
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/rag_with_milvus_and_haystack.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/haystack/rag_with_milvus_and_haystack.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="common-anchor-header">Retrieval-Augmented Generation (RAG) con Milvus y Haystack<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,9 +26,7 @@ title: Retrieval-Augmented Generation (RAG) con Milvus y Haystack
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_haystack.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_haystack.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Esta guía muestra cómo construir un sistema de Generación Aumentada por Recuperación (RAG) utilizando Haystack y Milvus.</p>
+    </button></h1><p>Esta guía muestra cómo construir un sistema de Generación Aumentada por Recuperación (RAG) utilizando Haystack y Milvus.</p>
 <p>El sistema RAG combina un sistema de recuperación con un modelo generativo para generar texto nuevo basado en una petición dada. En primer lugar, el sistema recupera documentos relevantes de un corpus utilizando Milvus y, a continuación, utiliza un modelo generativo para generar un nuevo texto basado en los documentos recuperados.</p>
 <p><a href="https://haystack.deepset.ai/">Haystack</a> es el framework de código abierto en Python de deepset para crear aplicaciones personalizadas con grandes modelos lingüísticos (LLM). <a href="https://milvus.io/">Milvus</a> es la base de datos vectorial de código abierto más avanzada del mundo, creada para potenciar la búsqueda de similitudes incrustadas y las aplicaciones de IA.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -49,7 +53,7 @@ title: Retrieval-Augmented Generation (RAG) con Milvus y Haystack
 <p>Utilizaremos los modelos de OpenAI. Debes preparar la <a href="https://platform.openai.com/docs/quickstart">clave api</a> <code translate="no">OPENAI_API_KEY</code> como variable de entorno.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Prepare-the-data" class="common-anchor-header">Preparar los datos<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,12 +73,12 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
     </button></h2><p>Utilizamos un contenido online sobre <a href="https://www.gutenberg.org/cache/epub/7785/pg7785.txt">Leonardo Da Vinci</a> como almacén de conocimiento privado para nuestro pipeline RAG, que es una buena fuente de datos para un pipeline RAG sencillo.</p>
 <p>Descárgalo y guárdalo como archivo de texto local.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
-<span class="hljs-keyword">import</span> urllib.<span class="hljs-type">request</span>
+<span class="hljs-keyword">import</span> urllib.request
 
-<span class="hljs-variable">url</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;https://www.gutenberg.org/cache/epub/7785/pg7785.txt&quot;</span>
+url = <span class="hljs-string">&quot;https://www.gutenberg.org/cache/epub/7785/pg7785.txt&quot;</span>
 file_path = <span class="hljs-string">&quot;./davinci.txt&quot;</span>
 
-<span class="hljs-keyword">if</span> not os.path.exists(file_path):
+<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(file_path):
     urllib.request.urlretrieve(url, file_path)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Create-the-indexing-Pipeline" class="common-anchor-header">Crear el proceso de indexación<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">

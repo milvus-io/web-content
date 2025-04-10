@@ -42,7 +42,7 @@ title: Retrieval-erweiterte Generierung (RAG) mit Milvus und LlamaIndex
         ></path>
       </svg>
     </button></h2><h3 id="Install-dependencies" class="common-anchor-header">Abhängigkeiten installieren</h3><p>Die Codeschnipsel auf dieser Seite benötigen die Abhängigkeiten pymilvus und llamaindex. Sie können diese mit den folgenden Befehlen installieren:</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=2.4.2
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -54,10 +54,10 @@ title: Retrieval-erweiterte Generierung (RAG) mit Milvus und LlamaIndex
 <h3 id="Setup-OpenAI" class="common-anchor-header">OpenAI einrichten</h3><p>Beginnen wir mit dem Hinzufügen des openai api Schlüssels. Dies wird uns den Zugang zu chatgpt ermöglichen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> openai
 
-openai.<span class="hljs-property">api_key</span> = <span class="hljs-string">&quot;sk-***********&quot;</span>
+openai.api_key = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-data" class="common-anchor-header">Daten vorbereiten</h3><p>Sie können Beispieldaten mit den folgenden Befehlen herunterladen:</p>
-<pre><code translate="no" class="language-python">! <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/&#x27;</span>
+<pre><code translate="no" class="language-python">! mkdir -p <span class="hljs-string">&#x27;data/&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham_essay.txt&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/uber_2021.pdf&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -88,10 +88,57 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 95f25e4d-f270-4650-87ce-006d69d82033
 </code></pre>
-<h3 id="Create-an-index-across-the-data" class="common-anchor-header">Erstellen Sie einen Index über die Daten</h3><p>Nun, da wir ein Dokument haben, können wir einen Index erstellen und das Dokument einfügen.</p>
-<blockquote>
-<p>Bitte beachten Sie, dass <strong>Milvus Lite</strong> <code translate="no">pymilvus&gt;=2.4.2</code> benötigt.</p>
-</blockquote>
+<h3 id="Create-an-index-across-the-data" class="common-anchor-header">Erstellen Sie einen Index über die Daten</h3><p>Nun, da wir ein Dokument haben, können wir einen Index erstellen und das Dokument einfügen. Für den Index werden wir einen MilvusVectorStore verwenden. MilvusVectorStore nimmt ein paar Argumente entgegen:</p>
+<h4 id="basic-args" class="common-anchor-header">Grundargumente</h4><ul>
+<li><code translate="no">uri (str, optional)</code>: Die URI, zu der eine Verbindung hergestellt werden soll, kommt in Form von "https://address:port" für Milvus oder Zilliz Cloud Service, oder "path/to/local/milvus.db" für das lite local Milvus. Die Standardeinstellung ist "./milvus_llamaindex.db".</li>
+<li><code translate="no">token (str, optional)</code>: Das Token für den Log-In. Leer, wenn kein rbac verwendet wird. Wenn rbac verwendet wird, wird es wahrscheinlich "username:password" sein.</li>
+<li><code translate="no">collection_name (str, optional)</code>: Der Name der Sammlung, in der die Daten gespeichert werden sollen. Der Standardwert ist "llamalection".</li>
+<li><code translate="no">overwrite (bool, optional)</code>: Ob eine bestehende Sammlung mit demselben Namen überschrieben werden soll. Der Standardwert ist False.</li>
+</ul>
+<h4 id="scalar-fields-including-doc-id--text" class="common-anchor-header">skalare Felder einschließlich doc id &amp; text</h4><ul>
+<li><code translate="no">doc_id_field (str, optional)</code>: Der Name des doc_id-Feldes für die Sammlung. Der Standardwert ist DEFAULT_DOC_ID_KEY.</li>
+<li><code translate="no">text_key (str, optional)</code>: Welcher Schlüsseltext in der übergebenen Sammlung gespeichert wird. Wird verwendet, wenn Sie Ihre eigene Sammlung mitbringen. Der Standardwert ist DEFAULT_TEXT_KEY.</li>
+<li><code translate="no">scalar_field_names (list, optional)</code>: Die Namen der zusätzlichen skalaren Felder, die in das Sammlungsschema aufgenommen werden sollen.</li>
+<li><code translate="no">scalar_field_types (list, optional)</code>: Die Typen der zusätzlichen skalaren Felder.</li>
+</ul>
+<h4 id="dense-field" class="common-anchor-header">dichtes Feld</h4><ul>
+<li><code translate="no">enable_dense (bool)</code>: Ein boolesches Flag zum Aktivieren oder Deaktivieren der dichten Einbettung. Die Voreinstellung ist True.</li>
+<li><code translate="no">dim (int, optional)</code>: Die Dimension der Einbettungsvektoren für die Sammlung. Erforderlich bei der Erstellung einer neuen Sammlung mit enable_sparse ist False.</li>
+<li><code translate="no">embedding_field (str, optional)</code>: Name des dichten Einbettungsfeldes für die Sammlung, Standardwert ist DEFAULT_EMBEDDING_KEY.</li>
+<li><code translate="no">index_config (dict, optional)</code>: Die für die Erstellung des Dense Embedding Index verwendete Konfiguration. Der Standardwert ist None.</li>
+<li><code translate="no">search_config (dict, optional)</code>: Die Konfiguration, die für die Suche im dichten Milvus-Index verwendet wird. Beachten Sie, dass dies mit dem durch <code translate="no">index_config</code> angegebenen Indextyp kompatibel sein muss. Der Standardwert ist None.</li>
+<li><code translate="no">similarity_metric (str, optional)</code>: Die Ähnlichkeitsmetrik, die für die dichte Einbettung verwendet werden soll. Derzeit werden IP, COSINE und L2 unterstützt.</li>
+</ul>
+<h4 id="sparse-field" class="common-anchor-header">sparse field</h4><ul>
+<li><code translate="no">enable_sparse (bool)</code>: Ein boolesches Flag zum Aktivieren oder Deaktivieren der Sparse-Einbettung. Der Standardwert ist False.</li>
+<li><code translate="no">sparse_embedding_field (str)</code>: Der Name des Sparse-Embedding-Feldes, Standardwert ist DEFAULT_SPARSE_EMBEDDING_KEY.</li>
+<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: Wenn enable_sparse True ist, sollte dieses Objekt bereitgestellt werden, um Text in eine Sparse-Einbettung zu konvertieren. Wenn None, wird die Standard-Sparse-Embedding-Funktion (BGEM3SparseEmbeddingFunction) verwendet.</li>
+<li><code translate="no">sparse_index_config (dict, optional)</code>: Die Konfiguration, die zur Erstellung des Sparse Embedding Index verwendet wird. Der Standardwert ist None.</li>
+</ul>
+<h4 id="hybrid-ranker" class="common-anchor-header">Hybrid-Rangierer</h4><ul>
+<li><p><code translate="no">hybrid_ranker (str)</code>: Gibt den Typ des Rankers an, der in hybriden Suchanfragen verwendet wird. Unterstützt derzeit nur ["RRFRanker", "WeightedRanker"]. Der Standardwert ist "RRFRanker".</p></li>
+<li><p><code translate="no">hybrid_ranker_params (dict, optional)</code>: Konfigurationsparameter für den hybriden Ranker. Die Struktur dieses Wörterbuchs hängt von dem spezifischen Ranker ab, der verwendet wird:</p>
+<ul>
+<li>Für "RRFRanker" sollte es enthalten:<ul>
+<li>"k" (int): Ein bei der Reciprocal Rank Fusion (RRF) verwendeter Parameter. Dieser Wert wird zur Berechnung der Rank Scores als Teil des RRF-Algorithmus verwendet, der mehrere Ranking-Strategien zu einem einzigen Score kombiniert, um die Suchrelevanz zu verbessern.</li>
+</ul></li>
+<li>Für "WeightedRanker" wird erwartet:<ul>
+<li>"Gewichte" (Liste von Floats): Eine Liste mit genau zwei Gewichten:<ol>
+<li>Die Gewichtung für die dichte Einbettungskomponente.</li>
+<li>Das Gewicht für die spärliche Einbettungskomponente. Diese Gewichte werden verwendet, um die Bedeutung der dichten und spärlichen Komponenten der Einbettungen im hybriden Retrievalprozess anzupassen. Der Standardwert ist ein leeres Wörterbuch, was bedeutet, dass der Ranker mit seinen vordefinierten Standardeinstellungen arbeitet.</li>
+</ol></li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="others" class="common-anchor-header">andere</h4><ul>
+<li><code translate="no">collection_properties (dict, optional)</code>: Die Eigenschaften der Sammlung wie TTL (Time-To-Live) und MMAP (Memory Mapping). Die Standardeinstellung ist Keine. Sie könnte enthalten:<ul>
+<li>"collection.ttl.seconds" (int): Sobald diese Eigenschaft gesetzt ist, laufen die Daten in der aktuellen Sammlung nach der angegebenen Zeit ab. Abgelaufene Daten in der Sammlung werden aufgeräumt und nicht in Suchvorgängen oder Abfragen berücksichtigt.</li>
+<li>"mmap.enabled" (bool): Ob die Memory-Mapped-Speicherung auf der Ebene der Sammlung aktiviert werden soll.</li>
+</ul></li>
+<li><code translate="no">index_management (IndexManagement)</code>: Gibt die zu verwendende Indexverwaltungsstrategie an. Der Standardwert ist "create_if_not_exists".</li>
+<li><code translate="no">batch_size (int)</code>: Konfiguriert die Anzahl der in einem Stapel verarbeiteten Dokumente beim Einfügen von Daten in Milvus. Der Standardwert ist DEFAULT_BATCH_SIZE.</li>
+<li><code translate="no">consistency_level (str, optional)</code>: Welche Konsistenzstufe für eine neu erstellte Sammlung verwendet werden soll. Der Standardwert ist "Session".</li>
+</ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an index over the documents</span>
 <span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore

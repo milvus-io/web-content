@@ -42,7 +42,7 @@ title: Retrieval-Augmented Generation (RAG) con Milvus y LlamaIndex
         ></path>
       </svg>
     </button></h2><h3 id="Install-dependencies" class="common-anchor-header">Instale las dependencias</h3><p>Los fragmentos de código de esta página requieren las dependencias pymilvus y llamaindex. Puede instalarlas utilizando los siguientes comandos:</p>
-<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=2.4.2
+<pre><code translate="no" class="language-python">$ pip install pymilvus&gt;=<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-python">$ pip install llama-index-vector-stores-milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -54,10 +54,10 @@ title: Retrieval-Augmented Generation (RAG) con Milvus y LlamaIndex
 <h3 id="Setup-OpenAI" class="common-anchor-header">Configuración de OpenAI</h3><p>Empecemos por añadir la clave api openai. Esto nos permitirá acceder a chatgpt.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> openai
 
-openai.<span class="hljs-property">api_key</span> = <span class="hljs-string">&quot;sk-***********&quot;</span>
+openai.api_key = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-data" class="common-anchor-header">Preparar los datos</h3><p>Puedes descargar datos de muestra con los siguientes comandos:</p>
-<pre><code translate="no" class="language-python">! <span class="hljs-built_in">mkdir</span> -p <span class="hljs-string">&#x27;data/&#x27;</span>
+<pre><code translate="no" class="language-python">! mkdir -p <span class="hljs-string">&#x27;data/&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt&#x27;</span> -O <span class="hljs-string">&#x27;data/paul_graham_essay.txt&#x27;</span>
 ! wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/uber_2021.pdf&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -88,10 +88,57 @@ documents = SimpleDirectoryReader(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document ID: 95f25e4d-f270-4650-87ce-006d69d82033
 </code></pre>
-<h3 id="Create-an-index-across-the-data" class="common-anchor-header">Crear un índice a través de los datos</h3><p>Ahora que tenemos un documento, podemos crear un índice e insertar el documento.</p>
-<blockquote>
-<p>Tenga en cuenta que <strong>Milvus Lite</strong> requiere <code translate="no">pymilvus&gt;=2.4.2</code>.</p>
-</blockquote>
+<h3 id="Create-an-index-across-the-data" class="common-anchor-header">Crear un índice a través de los datos</h3><p>Ahora que tenemos un documento, podemos crear un índice e insertar el documento. Para el índice utilizaremos un MilvusVectorStore. MilvusVectorStore toma algunos argumentos:</p>
+<h4 id="basic-args" class="common-anchor-header">argumentos básicos</h4><ul>
+<li><code translate="no">uri (str, optional)</code>: El URI al que conectarse, viene en forma de "https://address:port" para Milvus o Zilliz Cloud service, o "path/to/local/milvus.db" para el Milvus local lite. Por defecto es "./milvus_llamaindex.db".</li>
+<li><code translate="no">token (str, optional)</code>: El token para iniciar sesión. Vacío si no se utiliza rbac, si se utiliza rbac lo más probable es que sea "username:password".</li>
+<li><code translate="no">collection_name (str, optional)</code>: El nombre de la colección donde se almacenarán los datos. Por defecto es "llamalection".</li>
+<li><code translate="no">overwrite (bool, optional)</code>: Si se sobrescribirá la colección existente con el mismo nombre. Por defecto es False.</li>
+</ul>
+<h4 id="scalar-fields-including-doc-id--text" class="common-anchor-header">campos escalares incluyendo doc id &amp; text</h4><ul>
+<li><code translate="no">doc_id_field (str, optional)</code>: El nombre del campo doc_id para la colección. Por defecto es DEFAULT_DOC_ID_KEY.</li>
+<li><code translate="no">text_key (str, optional)</code>: En qué texto clave se almacena en la colección pasada. Se utiliza cuando se trae una colección propia. Por defecto es DEFAULT_TEXT_KEY.</li>
+<li><code translate="no">scalar_field_names (list, optional)</code>: Los nombres de los campos escalares extra a incluir en el esquema de la colección.</li>
+<li><code translate="no">scalar_field_types (list, optional)</code>: Los tipos de los campos escalares adicionales.</li>
+</ul>
+<h4 id="dense-field" class="common-anchor-header">campo denso</h4><ul>
+<li><code translate="no">enable_dense (bool)</code>: Un indicador booleano para activar o desactivar la incrustación densa. Por defecto es True.</li>
+<li><code translate="no">dim (int, optional)</code>: La dimensión de los vectores de incrustación para la colección. Requerido cuando se crea una nueva colección con enable_sparse es False.</li>
+<li><code translate="no">embedding_field (str, optional)</code>: El nombre del campo de incrustación densa para la colección, por defecto DEFAULT_EMBEDDING_KEY.</li>
+<li><code translate="no">index_config (dict, optional)</code>: La configuración utilizada para construir el índice de incrustación densa. Por defecto es None.</li>
+<li><code translate="no">search_config (dict, optional)</code>: La configuración utilizada para buscar en el índice denso de Milvus. Tenga en cuenta que debe ser compatible con el tipo de índice especificado por <code translate="no">index_config</code>. Por defecto None.</li>
+<li><code translate="no">similarity_metric (str, optional)</code>: La métrica de similitud a utilizar para la incrustación densa, actualmente soporta IP, COSINE y L2.</li>
+</ul>
+<h4 id="sparse-field" class="common-anchor-header">campo disperso</h4><ul>
+<li><code translate="no">enable_sparse (bool)</code>: Un indicador booleano para activar o desactivar la incrustación dispersa. Por defecto es False.</li>
+<li><code translate="no">sparse_embedding_field (str)</code>: El nombre del campo de incrustación dispersa, por defecto DEFAULT_SPARSE_EMBEDDING_KEY.</li>
+<li><code translate="no">sparse_embedding_function (Union[BaseSparseEmbeddingFunction, BaseMilvusBuiltInFunction], optional)</code>: Si enable_sparse es True, este objeto debe proporcionarse para convertir el texto a una incrustación dispersa. Si es None, se utilizará la función de incrustación dispersa por defecto (BGEM3SparseEmbeddingFunction).</li>
+<li><code translate="no">sparse_index_config (dict, optional)</code>: La configuración utilizada para construir el índice de incrustación dispersa. Por defecto es None.</li>
+</ul>
+<h4 id="hybrid-ranker" class="common-anchor-header">clasificador híbrido</h4><ul>
+<li><p><code translate="no">hybrid_ranker (str)</code>: Especifica el tipo de clasificador utilizado en las consultas de búsqueda híbrida. Actualmente sólo admite ["RRFRanker", "WeightedRanker"]. Por defecto es "RRFRanker".</p></li>
+<li><p><code translate="no">hybrid_ranker_params (dict, optional)</code>: Parámetros de configuración del clasificador híbrido. La estructura de este diccionario depende del clasificador específico que se utilice:</p>
+<ul>
+<li>Para "RRFRanker", debe incluir:<ul>
+<li>"k" (int): Parámetro utilizado en la fusión de rangos recíprocos (RRF). Este valor se utiliza para calcular las puntuaciones de clasificación como parte del algoritmo RRF, que combina múltiples estrategias de clasificación en una única puntuación para mejorar la relevancia de la búsqueda.</li>
+</ul></li>
+<li>Para "WeightedRanker", se espera<ul>
+<li>"pesos" (lista de float): Una lista de exactamente dos pesos:<ol>
+<li>El peso del componente de incrustación densa.</li>
+<li>Estas ponderaciones se utilizan para ajustar la importancia de los componentes denso y disperso de las incrustaciones en el proceso de recuperación híbrido. Por defecto, el diccionario está vacío, lo que implica que el clasificador funcionará con su configuración predeterminada.</li>
+</ol></li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="others" class="common-anchor-header">otros</h4><ul>
+<li><code translate="no">collection_properties (dict, optional)</code>: Las propiedades de la colección, como TTL (Time-To-Live) y MMAP (memory mapping). Por defecto es Ninguno. Puede incluir:<ul>
+<li>"colección.ttl.segundos" (int): Una vez establecida esta propiedad, los datos de la colección actual caducan en el tiempo especificado. Los datos caducados de la colección se limpiarán y no participarán en las búsquedas o consultas.</li>
+<li>"mmap.enabled" (bool): Si se habilita el almacenamiento en mapa de memoria a nivel de colección.</li>
+</ul></li>
+<li><code translate="no">index_management (IndexManagement)</code>: Especifica la estrategia de gestión de índices a utilizar. Por defecto es "create_if_not_exists".</li>
+<li><code translate="no">batch_size (int)</code>: Configura el número de documentos procesados en un lote al insertar datos en Milvus. Por defecto es DEFAULT_BATCH_SIZE.</li>
+<li><code translate="no">consistency_level (str, optional)</code>: Qué nivel de consistencia utilizar para una colección recién creada. Por defecto es "Sesión".</li>
+</ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an index over the documents</span>
 <span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
 <span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
@@ -105,7 +152,7 @@ index = VectorStoreIndex.from_documents(documents, storage_context=storage_conte
 <p>Para los parámetros de <code translate="no">MilvusVectorStore</code>:</p>
 <ul>
 <li>Establecer el <code translate="no">uri</code> como un archivo local, por ejemplo<code translate="no">./milvus.db</code>, es el método más conveniente, ya que utiliza automáticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> para almacenar todos los datos en este archivo.</li>
-<li>Si tiene una gran escala de datos, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. En esta configuración, por favor utilice la uri del servidor, por ejemplo<code translate="no">http://localhost:19530</code>, como su <code translate="no">uri</code>.</li>
+<li>Si tiene una gran escala de datos, puede configurar un servidor Milvus de mayor rendimiento en <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. En esta configuración, por favor utilice la uri del servidor, por ejemplo<code translate="no">http://localhost:19530</code>, como su <code translate="no">uri</code>.</li>
 <li>Si desea utilizar <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, ajuste <code translate="no">uri</code> y <code translate="no">token</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">punto final público y a la clave Api</a> en Zilliz Cloud.</li>
 </ul>
 </div>

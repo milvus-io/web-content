@@ -41,9 +41,9 @@ summary: >-
 <p>컬렉션 스키마에는 기본 키, 최대 4개의 벡터 필드, 여러 개의 스칼라 필드가 있습니다. 다음 다이어그램은 문서를 스키마 필드 목록에 매핑하는 방법을 보여줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-explained.png" alt="schema-explained" class="doc-image" id="schema-explained" />
-   </span> <span class="img-wrapper"> <span>스키마 설명</span> </span></p>
-<p>검색 시스템의 데이터 모델 설계에는 비즈니스 요구 사항을 분석하고 스키마로 표현된 데이터 모델로 정보를 추상화하는 작업이 포함됩니다. 예를 들어, 텍스트를 검색하려면 '임베딩'을 통해 리터럴 문자열을 벡터로 변환하고 벡터 검색을 가능하게 함으로써 '색인화'해야 합니다. 이 필수 요건 외에도 게시 타임스탬프나 작성자 같은 다른 속성을 저장해야 할 수도 있습니다. 이 메타데이터를 사용하면 필터링을 통해 시맨틱 검색을 세분화하여 특정 날짜 이후에 또는 특정 작성자가 게시한 텍스트만 반환할 수 있습니다. 또한 이러한 스칼라를 기본 텍스트와 함께 검색하여 애플리케이션에서 검색 결과를 렌더링할 수도 있습니다. 이러한 텍스트 조각을 구성하기 위해 각각에 정수 또는 문자열로 표현되는 고유 식별자를 할당해야 합니다. 이러한 요소는 정교한 검색 로직을 구현하는 데 필수적입니다.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
+   </span> <span class="img-wrapper"> <span>스키마 디자인 구조</span> </span></p>
+<p>검색 시스템의 데이터 모델 설계에는 비즈니스 요구 사항을 분석하고 스키마로 표현된 데이터 모델로 정보를 추상화하는 작업이 포함됩니다. 예를 들어, 텍스트를 검색하려면 '임베딩'을 통해 리터럴 문자열을 벡터로 변환하고 벡터 검색을 활성화하여 '인덱싱'해야 합니다. 이 필수 요건 외에도 게시 타임스탬프나 작성자 같은 다른 속성을 저장해야 할 수도 있습니다. 이 메타데이터를 사용하면 필터링을 통해 시맨틱 검색을 세분화하여 특정 날짜 이후에 또는 특정 작성자가 게시한 텍스트만 반환할 수 있습니다. 또한 이러한 스칼라를 기본 텍스트와 함께 검색하여 애플리케이션에서 검색 결과를 렌더링할 수도 있습니다. 이러한 텍스트 조각을 구성하기 위해 각각에 정수 또는 문자열로 표현되는 고유 식별자를 할당해야 합니다. 이러한 요소는 정교한 검색 로직을 구현하는 데 필수적입니다.</p>
 <p>스키마 <a href="/docs/ko/schema-hands-on.md">디자인 실습을</a> 참조하여 잘 설계된 스키마를 만드는 방법을 알아보세요.</p>
 <h2 id="Create-Schema" class="common-anchor-header">스키마 만들기<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"

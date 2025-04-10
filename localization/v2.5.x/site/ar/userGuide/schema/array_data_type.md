@@ -43,9 +43,9 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>القيم الافتراضية</strong>: لا تدعم حقول ARRAY القيم الافتراضية. ومع ذلك، يمكنك تعيين السمة <code translate="no">nullable</code> إلى <code translate="no">True</code> للسماح بالقيم الفارغة. لمزيد من التفاصيل، ارجع إلى <a href="/docs/ar/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
-<li><p><strong>نوع البيانات</strong>: يجب أن يكون لجميع العناصر في حقل المصفوفة نفس نوع البيانات، كما هو محدد في <code translate="no">element_type</code>.</p></li>
-<li><p><strong>سعة المصفوفة</strong>: يجب أن يكون عدد العناصر في حقل المصفوفة أقل من أو يساوي السعة القصوى المحددة عند إنشاء المصفوفة، كما هو محدد في <code translate="no">max_capacity</code>.</p></li>
-<li><p><strong>التعامل مع السلسلة</strong>: يتم تخزين قيم السلسلة في حقول المصفوفات كما هي، دون هروب دلالي أو تحويل. على سبيل المثال، <code translate="no">'a&quot;b'</code> و <code translate="no">&quot;a'b&quot;</code> و و <code translate="no">'a\'b'</code> و <code translate="no">&quot;a\&quot;b&quot;</code> يتم تخزينها كما تم إدخالها، بينما <code translate="no">'a'b'</code> و <code translate="no">&quot;a&quot;b&quot;</code> تعتبر قيمًا غير صالحة.</p></li>
+<li><p><strong>نوع البيانات</strong>: يجب أن يكون لجميع العناصر في حقل المصفوفة نفس نوع البيانات، كما هو محدد من قبل <code translate="no">element_type</code>. إذا قمت بتعيين <code translate="no">element_type</code> إلى <code translate="no">VARCHAR</code> ، يجب عليك أيضًا تعيين <code translate="no">max_length</code> لعناصر المصفوفة.</p></li>
+<li><p><strong>سعة المصفوفة</strong>: يجب أن يكون عدد العناصر في حقل المصفوفة أقل من أو يساوي السعة القصوى المحددة عند إنشاء المصفوفة، كما هو محدد بواسطة <code translate="no">max_capacity</code>. يجب أن تكون القيمة عددًا صحيحًا ضمن النطاق من <strong>1</strong> إلى <strong>4096</strong>.</p></li>
+<li><p><strong>التعامل مع السلسلة</strong>: يتم تخزين قيم السلسلة في حقول المصفوفات كما هي، دون هروب دلالي أو تحويل. على سبيل المثال، يتم تخزين <code translate="no">'a&quot;b'</code> و <code translate="no">&quot;a'b&quot;</code> و <code translate="no">'a\'b'</code> و <code translate="no">&quot;a\&quot;b&quot;</code> كما تم إدخالها، بينما <code translate="no">'a'b'</code> و <code translate="no">&quot;a&quot;b&quot;</code> تعتبر قيمًا غير صالحة.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">إضافة حقل ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"

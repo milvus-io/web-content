@@ -35,8 +35,11 @@ title: نظرة عامة على البرامج التعليمية
 <tr><td><a href="/docs/ar/contextual_retrieval_with_milvus.md">الاسترجاع السياقي مع ميلفوس</a></td><td>البدء السريع</td><td>البحث المتجه</td></tr>
 <tr><td><a href="/docs/ar/hdbscan_clustering_with_milvus.md">تجميع HDBSCAN مع ميلفوس</a></td><td>البدء السريع</td><td>البحث المتجه</td></tr>
 <tr><td><a href="/docs/ar/use_ColPali_with_milvus.md">استخدام كولبالي للاسترجاع متعدد الوسائط مع ميلفوس</a></td><td>البدء السريع</td><td>البحث المتجه</td></tr>
+<tr><td><a href="/docs/ar/quickstart_with_attu.md">البدء السريع مع أتو</a></td><td>البدء السريع</td><td>البحث المتجه</td></tr>
+<tr><td><a href="/docs/ar/use-async-milvus-client-with-asyncio.md">استخدم AsyncMilvusClient مع Asyncio</a></td><td>AsyncIO</td><td>AsyncIO، البحث المتجه</td></tr>
+<tr><td><a href="/docs/ar/text_image_search.md">البحث من نص إلى صورة مع ميلفوس</a></td><td>البحث الدلالي</td><td>البحث المتجه</td></tr>
 <tr><td><a href="/docs/ar/vector_visualization.md">تصور المتجهات</a></td><td>البدء السريع</td><td>البحث المتجه</td></tr>
-<tr><td><a href="/docs/ar/movie_recommendation_with_milvus.md">توصية الفيلم مع ميلفوس</a></td><td>نظام التوصية</td><td>البحث المتجه</td></tr>
+<tr><td><a href="/docs/ar/movie_recommendation_with_milvus.md">توصية الأفلام مع ميلفوس</a></td><td>نظام التوصية</td><td>البحث المتجه</td></tr>
 <tr><td><a href="/docs/ar/funnel_search_with_matryoshka.md">البحث القمعي باستخدام تضمينات ماتريوشكا</a></td><td>البدء السريع</td><td>البحث المتجه</td></tr>
 <tr><td><a href="/docs/ar/question_answering_system.md">نظام الإجابة على الأسئلة</a></td><td>الإجابة عن الأسئلة</td><td>البحث المتجه</td></tr>
 <tr><td><a href="/docs/ar/recommendation_system.md">نظام التوصية</a></td><td>نظام التوصية</td><td>البحث المتجه</td></tr>
@@ -44,9 +47,6 @@ title: نظرة عامة على البرامج التعليمية
 <tr><td><a href="/docs/ar/audio_similarity_search.md">بحث تشابه الصوت</a></td><td>البحث الدلالي</td><td>البحث المتجه</td></tr>
 <tr><td><a href="/docs/ar/dna_sequence_classification.md">تصنيف الحمض النووي</a></td><td>التصنيف</td><td>البحث المتجه</td></tr>
 <tr><td><a href="/docs/ar/text_search_engine.md">محرك البحث النصي</a></td><td>البحث الدلالي</td><td>البحث المتجه</td></tr>
-<tr><td><a href="/docs/ar/text_image_search.md">البحث في الصور حسب النص</a></td><td>البحث الدلالي</td><td>البحث المتجه</td></tr>
-<tr><td><a href="/docs/ar/image_deduplication_system.md">إلغاء تكرار الصور</a></td><td>إلغاء التكرار</td><td>البحث المتجه</td></tr>
-<tr><td><a href="/docs/ar/quickstart_with_attu.md">البدء السريع مع أتو</a></td><td>البدء السريع</td><td>البحث المتجه</td></tr>
-<tr><td><a href="/docs/ar/use-async-milvus-client-with-asyncio.md">استخدم AsyncMilvusClient مع Asyncio</a></td><td>AsyncIO</td><td>AsyncIO، البحث المتجه</td></tr>
+<tr><td><a href="/docs/ar/image_deduplication_system.md">إلغاء تكرار الصور</a></td><td>الازدواجية</td><td>البحث المتجه</td></tr>
 </tbody>
 </table>

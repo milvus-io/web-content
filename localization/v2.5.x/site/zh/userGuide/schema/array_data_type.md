@@ -41,8 +41,8 @@ summary: ARRAY 字段存储同一数据类型元素的有序集合。下面举�
       </svg>
     </button></h2><ul>
 <li><p><strong>默认值</strong>：ARRAY 字段不支持默认值。但是，可以将<code translate="no">nullable</code> 属性设置为<code translate="no">True</code> ，以允许空值。有关详情，请参阅<a href="/docs/zh/nullable-and-default.md">Nullable &amp; Default</a>。</p></li>
-<li><p><strong>数据类型</strong>：数组字段中的所有元素必须具有相同的数据类型，具体由<code translate="no">element_type</code> 指定。</p></li>
-<li><p><strong>数组容量</strong>：数组字段中元素的数量必须小于或等于创建数组时定义的最大容量，具体由<code translate="no">max_capacity</code> 指定。</p></li>
+<li><p><strong>数据类型</strong>：数组字段中的所有元素必须具有相同的数据类型，由<code translate="no">element_type</code> 指定。如果将<code translate="no">element_type</code> 设置为<code translate="no">VARCHAR</code> ，则还应为数组元素设置<code translate="no">max_length</code> 。</p></li>
+<li><p><strong>数组容量</strong>：数组字段中元素的数量必须小于或等于创建数组时定义的最大容量，具体由<code translate="no">max_capacity</code> 指定。该值应为<strong>1</strong>至<strong>4096</strong> 范围内的整数。</p></li>
 <li><p><strong>字符串处理</strong>：数组字段中的字符串值按原样存储，不进行语义转义或转换。例如，<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 和<code translate="no">&quot;a\&quot;b&quot;</code> 按输入值存储，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 则被视为无效值。</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">添加 ARRAY 字段<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
@@ -222,7 +222,7 @@ export schema=&quot;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>索引有助于提高搜索和查询性能。在 Milvus 中，对于向量字段，索引是强制的，但对于标量字段，索引是可选的。</p>
+    </button></h2><p>索引有助于提高搜索和查询性能。在 Milvus 中，对于向量字段必须建立索引，但对于标量字段则是可选的。</p>
 <p>下面的示例使用<code translate="no">AUTOINDEX</code> 索引类型为向量字段<code translate="no">embedding</code> 和 ARRAY 字段<code translate="no">tags</code> 创建了索引。使用这种类型，Milvus 会根据数据类型自动选择最合适的索引。您还可以自定义每个字段的索引类型和参数。有关详情，请参阅<a href="/docs/zh/index-explained.md">索引说明</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>

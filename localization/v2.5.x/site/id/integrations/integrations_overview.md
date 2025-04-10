@@ -85,5 +85,9 @@ title: Ikhtisar Integrasi
 <tr><td><a href="/docs/id/integration_with_mindsdb.md">Mengintegrasikan Milvus dengan MindsDB</a></td><td>Rekayasa Pengetahuan</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/id/milvus_and_mcp.md">MCP + Milvus: Menghubungkan AI dengan Basis Data Vektor</a></td><td>Agen</td><td>Milvus, MCP</td></tr>
 <tr><td><a href="/docs/id/openai_agents_milvus.md">Integrasi Milvus dengan Agen OpenAI: Panduan Langkah-demi-Langkah</a></td><td>Agen</td><td>Milvus, OpenAI</td></tr>
+<tr><td><a href="/docs/id/build_RAG_with_milvus_and_feast.md">Membangun RAG dengan Milvus dan Feast</a></td><td>Sumber Data</td><td>Milvus, Feast</td></tr>
+<tr><td><a href="/docs/id/build_RAG_with_milvus_and_docling.md">Membangun RAG dengan Milvus dan Docling</a></td><td>Sumber Data</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/id/full_text_search_with_langchain.md">Menggunakan Pencarian Teks Lengkap dengan LangChain dan Milvus</a></td><td>Pencarian Teks Lengkap</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/id/llamaindex_milvus_full_text_search.md">Menggunakan Pencarian Teks Lengkap dengan LlamaIndex dan Milvus</a></td><td>Pencarian Teks Lengkap</td><td>Milvus, LlamaIndex</td></tr>
 </tbody>
 </table>
