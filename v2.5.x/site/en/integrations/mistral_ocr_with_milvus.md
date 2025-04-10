@@ -1,6 +1,6 @@
 ---
 id: mistral_ocr_with_milvus.md
-summary: This tutorial demonstrates how to build a document understanding system using:
+summary: This tutorial demonstrates how to build a document understanding system using Milvus and Mistral OCR.
 title: Document Understanding with Mistral OCR and Milvus
 ---
 
