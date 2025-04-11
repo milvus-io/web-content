@@ -54,40 +54,6 @@ First, let's install the required packages:
 $ pip install mistralai pymilvus python-dotenv
 ```
 
-    Requirement already satisfied: mistralai in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (1.5.1)
-    Requirement already satisfied: pymilvus in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (2.5.3)
-    Requirement already satisfied: python-dotenv in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (1.0.1)
-    Requirement already satisfied: eval-type-backport>=0.2.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from mistralai) (0.2.2)
-    Requirement already satisfied: httpx>=0.27.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from mistralai) (0.28.1)
-    Requirement already satisfied: jsonpath-python>=1.0.6 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from mistralai) (1.0.6)
-    Requirement already satisfied: pydantic>=2.9.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from mistralai) (2.10.4)
-    Requirement already satisfied: python-dateutil>=2.8.2 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from mistralai) (2.9.0.post0)
-    Requirement already satisfied: typing-inspect>=0.9.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from mistralai) (0.9.0)
-    Requirement already satisfied: setuptools>69 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pymilvus) (75.6.0)
-    Requirement already satisfied: grpcio<=1.67.1,>=1.49.1 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pymilvus) (1.67.1)
-    Requirement already satisfied: protobuf>=3.20.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pymilvus) (5.29.2)
-    Requirement already satisfied: ujson>=2.0.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pymilvus) (5.10.0)
-    Requirement already satisfied: pandas>=1.2.4 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pymilvus) (2.2.3)
-    Requirement already satisfied: milvus-lite>=2.4.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pymilvus) (2.4.11)
-    Requirement already satisfied: anyio in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from httpx>=0.27.0->mistralai) (4.7.0)
-    Requirement already satisfied: certifi in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from httpx>=0.27.0->mistralai) (2024.2.2)
-    Requirement already satisfied: httpcore==1.* in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from httpx>=0.27.0->mistralai) (1.0.7)
-    Requirement already satisfied: idna in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from httpx>=0.27.0->mistralai) (3.6)
-    Requirement already satisfied: h11<0.15,>=0.13 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from httpcore==1.*->httpx>=0.27.0->mistralai) (0.14.0)
-    Requirement already satisfied: tqdm in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from milvus-lite>=2.4.0->pymilvus) (4.67.1)
-    Requirement already satisfied: numpy>=1.26.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pandas>=1.2.4->pymilvus) (2.2.1)
-    Requirement already satisfied: pytz>=2020.1 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pandas>=1.2.4->pymilvus) (2024.2)
-    Requirement already satisfied: tzdata>=2022.7 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pandas>=1.2.4->pymilvus) (2024.2)
-    Requirement already satisfied: annotated-types>=0.6.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pydantic>=2.9.0->mistralai) (0.7.0)
-    Requirement already satisfied: pydantic-core==2.27.2 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pydantic>=2.9.0->mistralai) (2.27.2)
-    Requirement already satisfied: typing-extensions>=4.12.2 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pydantic>=2.9.0->mistralai) (4.12.2)
-    Requirement already satisfied: six>=1.5 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from python-dateutil>=2.8.2->mistralai) (1.17.0)
-    Requirement already satisfied: mypy-extensions>=0.3.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from typing-inspect>=0.9.0->mistralai) (1.0.0)
-    Requirement already satisfied: sniffio>=1.1 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from anyio->httpx>=0.27.0->mistralai) (1.3.1)
-    
-    [1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m A new release of pip is available: [0m[31;49m24.0[0m[39;49m -> [0m[32;49m25.0.1[0m
-    [1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m To update, run: [0m[32;49mpip install --upgrade pip[0m
-
 
 ## Environment Setup
 
