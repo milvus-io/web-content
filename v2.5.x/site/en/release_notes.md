@@ -8,6 +8,48 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.9
+
+Release date: April 11, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.9          | 2.5.6              | 2.5.7               | 2.5.7            |
+
+We’re excited to announce Milvus 2.5.9, bringing improved performance for JSON key statistics, enhanced indexing capabilities, and several critical bug fixes that bolster stability and data handling. We encourage you to upgrade or give this version a try, and as always, your feedback is greatly appreciated as we continue to refine Milvus.
+
+### Improvements
+
+- Support skipping score normalization for the weighted re-ranker ([#40905](https://github.com/milvus-io/milvus/pull/40905))
+- Improve the performance of JSON key stats building by adding documents in batches ([#40898](https://github.com/milvus-io/milvus/pull/40898))
+- Use `int32` when creating array indexes for `int8`/`int16` element types ([#41186](https://github.com/milvus-io/milvus/pull/41186))
+- Align brute-force search results with JSON index behavior for the `exists` expression ([#41056](https://github.com/milvus-io/milvus/pull/41056))
+
+### Bug fixes
+
+- Fixed an issue causing traceID confusion if the client sent a traceID ([#41149](https://github.com/milvus-io/milvus/pull/41149))
+- Fixed a potential crash due to incorrect usage of `noexcept`, leading to IO failures ([#41221](https://github.com/milvus-io/milvus/pull/41221))
+- Resolved an infinite normal balance loop triggered after balance suspension ([#41196](https://github.com/milvus-io/milvus/pull/41196))
+- Show collections now supports objects granted to custom privilege groups ([#41204](https://github.com/milvus-io/milvus/pull/41204))
+- Fixed a failure to retrieve replicate channel positions ([#41189](https://github.com/milvus-io/milvus/pull/41189))
+- Fixed a potential thread leak caused by RESTful timeouts ([#41184](https://github.com/milvus-io/milvus/pull/41184))
+- Added a clear bitmap for batch skip mode ([#41165](https://github.com/milvus-io/milvus/pull/41165))
+- Fixed an issue where removing an index type failed in local-mode remote storage ([#41163](https://github.com/milvus-io/milvus/pull/41163))
+- Use `element_type` for array `isNull` operators ([#41158](https://github.com/milvus-io/milvus/pull/41158))
+- Removed metrics reset to ensure accurate reporting ([#41081](https://github.com/milvus-io/milvus/pull/41081))
+- Fixed a bug preventing `null` data from being filtered by `null` expressions ([#41135](https://github.com/milvus-io/milvus/pull/41135))
+- Ignored growing segments with no start position for seal policy ([#41131](https://github.com/milvus-io/milvus/pull/41131))
+- Avoided updating original search/query requests during retries ([#41127](https://github.com/milvus-io/milvus/pull/41127))
+- Fixed a segmentation fault if `LoadArrowReaderFromRemote` runs in an exception path ([#41071](https://github.com/milvus-io/milvus/pull/41071))
+- Addressed manual balance and balance check issues ([#41038](https://github.com/milvus-io/milvus/pull/41038))
+- Validated schema is not `nil` for JSON stats with lazy `DescribeCollection` ([#41068](https://github.com/milvus-io/milvus/pull/41068))
+- Fixed a cursor movement bug when comparing two columns ([#41054](https://github.com/milvus-io/milvus/pull/41054))
+- Resolved a crash when inserting both `null` and non-null arrays with growing mmap open ([#41052](https://github.com/milvus-io/milvus/pull/41052))
+- Fixed an arm64 compilation issue ([#41058](https://github.com/milvus-io/milvus/pull/41058))
+- Added a bypass thread pool mode to avoid blocking insert/load operations by growing indexes ([#41013](https://github.com/milvus-io/milvus/pull/41013))
+- Fixed JSON format errors ([#41031](https://github.com/milvus-io/milvus/pull/41031))
+- Fixed a 404 error in WebUI when `http.enablepprof` is false ([#41007](https://github.com/milvus-io/milvus/pull/41007))
+
 ## v2.5.8
 
 Release date: April 1, 2025
