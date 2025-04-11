@@ -19,6 +19,61 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v259" class="common-anchor-header">v2.5.9<button data-href="#v259" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: April 11, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.9</td><td>2.5.6</td><td>2.5.7</td><td>2.5.7</td></tr>
+</tbody>
+</table>
+<p>We’re excited to announce Milvus 2.5.9, bringing improved performance for JSON key statistics, enhanced indexing capabilities, and several critical bug fixes that bolster stability and data handling. We encourage you to upgrade or give this version a try, and as always, your feedback is greatly appreciated as we continue to refine Milvus.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Support skipping score normalization for the weighted re-ranker (<a href="https://github.com/milvus-io/milvus/pull/40905">#40905</a>)</li>
+<li>Improve the performance of JSON key stats building by adding documents in batches (<a href="https://github.com/milvus-io/milvus/pull/40898">#40898</a>)</li>
+<li>Use <code translate="no">int32</code> when creating array indexes for <code translate="no">int8</code>/<code translate="no">int16</code> element types (<a href="https://github.com/milvus-io/milvus/pull/41186">#41186</a>)</li>
+<li>Align brute-force search results with JSON index behavior for the <code translate="no">exists</code> expression (<a href="https://github.com/milvus-io/milvus/pull/41056">#41056</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed an issue causing traceID confusion if the client sent a traceID (<a href="https://github.com/milvus-io/milvus/pull/41149">#41149</a>)</li>
+<li>Fixed a potential crash due to incorrect usage of <code translate="no">noexcept</code>, leading to IO failures (<a href="https://github.com/milvus-io/milvus/pull/41221">#41221</a>)</li>
+<li>Resolved an infinite normal balance loop triggered after balance suspension (<a href="https://github.com/milvus-io/milvus/pull/41196">#41196</a>)</li>
+<li>Show collections now supports objects granted to custom privilege groups (<a href="https://github.com/milvus-io/milvus/pull/41204">#41204</a>)</li>
+<li>Fixed a failure to retrieve replicate channel positions (<a href="https://github.com/milvus-io/milvus/pull/41189">#41189</a>)</li>
+<li>Fixed a potential thread leak caused by RESTful timeouts (<a href="https://github.com/milvus-io/milvus/pull/41184">#41184</a>)</li>
+<li>Added a clear bitmap for batch skip mode (<a href="https://github.com/milvus-io/milvus/pull/41165">#41165</a>)</li>
+<li>Fixed an issue where removing an index type failed in local-mode remote storage (<a href="https://github.com/milvus-io/milvus/pull/41163">#41163</a>)</li>
+<li>Use <code translate="no">element_type</code> for array <code translate="no">isNull</code> operators (<a href="https://github.com/milvus-io/milvus/pull/41158">#41158</a>)</li>
+<li>Removed metrics reset to ensure accurate reporting (<a href="https://github.com/milvus-io/milvus/pull/41081">#41081</a>)</li>
+<li>Fixed a bug preventing <code translate="no">null</code> data from being filtered by <code translate="no">null</code> expressions (<a href="https://github.com/milvus-io/milvus/pull/41135">#41135</a>)</li>
+<li>Ignored growing segments with no start position for seal policy (<a href="https://github.com/milvus-io/milvus/pull/41131">#41131</a>)</li>
+<li>Avoided updating original search/query requests during retries (<a href="https://github.com/milvus-io/milvus/pull/41127">#41127</a>)</li>
+<li>Fixed a segmentation fault if <code translate="no">LoadArrowReaderFromRemote</code> runs in an exception path (<a href="https://github.com/milvus-io/milvus/pull/41071">#41071</a>)</li>
+<li>Addressed manual balance and balance check issues (<a href="https://github.com/milvus-io/milvus/pull/41038">#41038</a>)</li>
+<li>Validated schema is not <code translate="no">nil</code> for JSON stats with lazy <code translate="no">DescribeCollection</code> (<a href="https://github.com/milvus-io/milvus/pull/41068">#41068</a>)</li>
+<li>Fixed a cursor movement bug when comparing two columns (<a href="https://github.com/milvus-io/milvus/pull/41054">#41054</a>)</li>
+<li>Resolved a crash when inserting both <code translate="no">null</code> and non-null arrays with growing mmap open (<a href="https://github.com/milvus-io/milvus/pull/41052">#41052</a>)</li>
+<li>Fixed an arm64 compilation issue (<a href="https://github.com/milvus-io/milvus/pull/41058">#41058</a>)</li>
+<li>Added a bypass thread pool mode to avoid blocking insert/load operations by growing indexes (<a href="https://github.com/milvus-io/milvus/pull/41013">#41013</a>)</li>
+<li>Fixed JSON format errors (<a href="https://github.com/milvus-io/milvus/pull/41031">#41031</a>)</li>
+<li>Fixed a 404 error in WebUI when <code translate="no">http.enablepprof</code> is false (<a href="https://github.com/milvus-io/milvus/pull/41007">#41007</a>)</li>
+</ul>
 <h2 id="v258" class="common-anchor-header">v2.5.8<button data-href="#v258" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
