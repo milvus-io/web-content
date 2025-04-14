@@ -199,8 +199,6 @@ After defining `analyzer_params`, you can apply them to a `VARCHAR` field when d
 
 ## Examples
 
-Before applying the analyzer configuration to your collection schema, verify its behavior using the `run_analyzer` method.
-
 ### Analyzer configuration
 
 <div class="multipleCode">

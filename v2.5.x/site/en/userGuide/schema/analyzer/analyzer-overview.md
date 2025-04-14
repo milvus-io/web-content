@@ -97,43 +97,6 @@ export analyzerParams='{
     }'
 ```
 
-To check the execution result of an analyzer, use the `run_analyzer` method:
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
-
-```python
-# Sample text to analyze
-text = "An efficient system relies on a robust analyzer to correctly process text for various applications."
-
-# Run analyzer
-result = client.run_analyzer(
-    text,
-    analyzer_params
-)
-```
-
-```java
-// java
-```
-
-```javascript
-// javascript
-```
-
-```go
-// go
-```
-
-```bash
-# restful
-```
-
 The output will be:
 
 ```plaintext

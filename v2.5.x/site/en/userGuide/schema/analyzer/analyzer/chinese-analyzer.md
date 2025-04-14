@@ -109,8 +109,6 @@ The `chinese` analyzer does not accept any optional parameters.
 
 ## Examples
 
-Before applying the analyzer configuration to your collection schema, verify its behavior using the `run_analyzer` method.
-
 ### Analyzer configuration
 
 <div class="multipleCode">
