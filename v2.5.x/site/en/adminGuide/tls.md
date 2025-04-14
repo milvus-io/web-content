@@ -464,7 +464,7 @@ client = MilvusClient(
 )
 ```
 
-See [example_tls1.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py) and [example_tls2.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py) for more information.
+See [example_tls1.py](https://github.com/milvus-io/pymilvus/blob/master/examples/cert/example_tls1.py) and [example_tls2.py](https://github.com/milvus-io/pymilvus/blob/master/examples/cert/example_tls2.py) for more information.
 
 ## Connect to the Milvus RESTful server with TLS
 
