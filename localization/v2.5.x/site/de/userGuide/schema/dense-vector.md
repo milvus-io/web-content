@@ -203,14 +203,10 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-     <td><p>Speichert 16-Bit-Gehirn-Fließkommazahlen (bfloat16), die den gleichen Exponentenbereich wie Float32 bieten, aber eine geringere Genauigkeit aufweisen. Geeignet für Szenarien, in denen große Mengen von Vektoren schnell verarbeitet werden müssen, wie z. B. bei der Suche nach Bildern in großem Maßstab.</p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Speichert Vektoren, deren einzelne Elemente in jeder Dimension 8-Bit-Ganzzahlen (int8) sind, wobei jedes Element von -128 bis 127 reicht. INT8_VECTOR wurde für quantisierte Deep-Learning-Modelle (z. B. ResNet, EfficientNet) entwickelt und reduziert die Modellgröße und beschleunigt die Inferenz mit minimalem Präzisionsverlust.</p></td>
+     <td><p>Speichert 16-Bit-Gehirn-Fließkommazahlen (bfloat16), die denselben Bereich von Exponenten wie Float32 bieten, aber eine geringere Präzision aufweisen. Geeignet für Szenarien, in denen große Mengen von Vektoren schnell verarbeitet werden müssen, z. B. bei der Suche nach Bildern in großem Maßstab.</p></td>
    </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Index-Parameter für Vektorfeld festlegen</h3><p>Um die semantische Suche zu beschleunigen, muss ein Index für das Vektorfeld erstellt werden. Die Indexierung kann die Abfrageeffizienz von großen Vektordaten erheblich verbessern.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Index-Parameter für Vektorfeld festlegen</h3><p>Um die semantische Suche zu beschleunigen, muss ein Index für das Vektorfeld erstellt werden. Die Indizierung kann die Abfrageeffizienz von großen Vektordaten erheblich verbessern.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -380,7 +376,7 @@ client.<span class="hljs-title function_">insert</span>({
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search" class="common-anchor-header">Ähnlichkeitssuche durchführen</h3><p>Die semantische Suche auf der Basis von dichten Vektoren ist eine der Kernfunktionen von Milvus, die es Ihnen ermöglicht, schnell Daten zu finden, die einem Abfragevektor am ähnlichsten sind, basierend auf dem Abstand zwischen den Vektoren. Um eine Ähnlichkeitssuche durchzuführen, bereiten Sie den Abfragevektor und die Suchparameter vor und rufen dann die Methode <code translate="no">search</code> auf.</p>
+<h3 id="Perform-similarity-search" class="common-anchor-header">Ähnlichkeitssuche durchführen</h3><p>Die semantische Suche auf der Basis von dichten Vektoren ist eine der Kernfunktionen von Milvus, die es Ihnen ermöglicht, schnell Daten zu finden, die einem Abfragevektor auf der Grundlage des Abstands zwischen Vektoren am ähnlichsten sind. Um eine Ähnlichkeitssuche durchzuführen, bereiten Sie den Abfragevektor und die Suchparameter vor und rufen dann die Methode <code translate="no">search</code> auf.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {

@@ -38,10 +38,10 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Uma coleção é uma tabela bidimensional com colunas fixas e linhas variantes. Cada coluna representa um campo e cada linha representa uma entidade. É necessário um esquema para implementar esta gestão estrutural de dados. Cada entidade a inserir tem de cumprir os condicionalismos definidos no esquema.</p>
-<p>Pode determinar todos os aspectos de uma coleção, incluindo o esquema, os parâmetros de índice, o tipo de métrica e se deve ser carregada aquando da criação, para garantir que a coleção satisfaz totalmente os seus requisitos.</p>
+<p>É possível determinar todos os aspectos de uma coleção, incluindo o esquema, os parâmetros de índice, o tipo de métrica e se deve ser carregada aquando da criação, para garantir que a coleção satisfaz plenamente os seus requisitos.</p>
 <p>Para criar uma coleção, é necessário</p>
 <ul>
-<li><p><a href="/docs/pt/create-collection.md#Create-Schema">Criar um esquema</a></p></li>
+<li><p><a href="/docs/pt/create-collection.md#Create-Schema">Criar o esquema</a></p></li>
 <li><p><a href="/docs/pt/create-collection.md#Optional-Set-Index-Parameters">Definir parâmetros de índice</a> (opcional)</p></li>
 <li><p><a href="/docs/pt/create-collection.md#Create-a-Collection">Criar coleção</a></p></li>
 </ul>
@@ -206,7 +206,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
     </button></h2><p>Criar um índice em um campo específico acelera a pesquisa em relação a esse campo. Um índice regista a ordem das entidades dentro de uma coleção. Como mostrado nos seguintes trechos de código, você pode usar <code translate="no">metric_type</code> e <code translate="no">index_type</code> para selecionar maneiras apropriadas para Milvus indexar um campo e medir semelhanças entre embeddings vetoriais.</p>
 <p>No Milvus, pode utilizar <code translate="no">AUTOINDEX</code> como o tipo de índice para todos os campos vectoriais e um de <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code> como o tipo de métrica com base nas suas necessidades.</p>
 <p>Como demonstrado no fragmento de código acima, é necessário definir o tipo de índice e o tipo métrico para os campos vectoriais e apenas o tipo de índice para os campos escalares. Os índices são obrigatórios para campos vectoriais e é aconselhável criar índices em campos escalares frequentemente utilizados em condições de filtragem.</p>
-<p>Para obter detalhes, consulte <a href="/docs/pt/index-vector-fields.md">Indexar campos vetoriais</a> e <a href="/docs/pt/index-scalar-fields.md">Indexar campos escalares</a>.</p>
+<p>Para obter detalhes, consulte <a href="/docs/pt/index-vector-fields.md">Indexar campos vetoriais</a> e Indexar <a href="/docs/pt/index-scalar-fields.md">campos escalares</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.3. Prepare index parameters</span>
@@ -260,8 +260,8 @@ indexParams.add(indexParamForVectorField);
 )
 
 indexOptions := []milvusclient.CreateIndexOption{
-    client.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_vector&quot;</span>, index.NewAutoIndex(entity.COSINE)).WithIndexName(<span class="hljs-string">&quot;my_vector&quot;</span>),
-    client.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_id&quot;</span>, index.NewAutoIndex()).WithIndexName(<span class="hljs-string">&quot;my_id&quot;</span>),
+    milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_vector&quot;</span>, index.NewAutoIndex(entity.COSINE)).WithIndexName(<span class="hljs-string">&quot;my_vector&quot;</span>),
+    milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_id&quot;</span>, index.NewAutoIndex()).WithIndexName(<span class="hljs-string">&quot;my_id&quot;</span>),
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
@@ -366,7 +366,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
 
-err := milvusclient.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_1&quot;</span>, schema).
+err := milvusclient.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_1&quot;</span>, schema).
     WithIndexOptions(indexOptions...),
 )
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -453,7 +453,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
 
-err := milvusclient.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_2&quot;</span>, schema))
+err := milvusclient.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_2&quot;</span>, schema))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle error</span>
 }
@@ -501,11 +501,11 @@ curl --request POST \
 <p>O seguinte trecho de código demonstra como definir o número do fragmento ao criar uma coleção.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-meta"># With shard number</span>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># With shard number</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_3&quot;</span>,
     schema=schema,
-    <span class="hljs-meta"># highlight-next-<span class="hljs-keyword">line</span></span>
+    <span class="hljs-comment"># highlight-next-line</span>
     num_shards=<span class="hljs-number">1</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -585,28 +585,28 @@ client.createCollection(customizedSetupReq4);
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/pkg/common&quot;</span>
 )
 
-err := cli.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_4&quot;</span>, schema).WithProperty(common.MmapEnabledKey, <span class="hljs-literal">true</span>))
+err := cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_4&quot;</span>, schema).WithProperty(common.MmapEnabledKey, <span class="hljs-literal">true</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle error</span>
 }
 fmt.Println(<span class="hljs-string">&quot;collection created&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-plaintext">export params=&#x27;{
     &quot;mmap.enabled&quot;: True
-}&#x27;</span>
+}&#x27;
 
-<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;
+export TOKEN=&quot;root:Milvus&quot;
 
 curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&quot;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+-d &quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
-    \&quot;params\&quot;: <span class="hljs-variable">$params</span>
-}&quot;</span>
+    \&quot;schema\&quot;: $schema,
+    \&quot;params\&quot;: $params
+}&quot;
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Collection-TTL" class="common-anchor-header">Definir TTL da coleção</h3><p>Se os dados de uma coleção precisarem ser descartados por um período específico, considere definir seu Tempo de Vida (TTL) em segundos. Uma vez que o TTL se esgota, Milvus exclui as entidades da coleção. A eliminação é assíncrona, indicando que as pesquisas e consultas ainda são possíveis antes de a eliminação estar concluída.</p>
 <p>O seguinte trecho de código define o TTL para um dia (86400 segundos). Aconselha-se a definir o TTL para um par de dias, no mínimo.</p>
@@ -710,7 +710,7 @@ client.<span class="hljs-title function_">createCollection</span>(createCollecti
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
 )
 
-err := cli.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_6&quot;</span>, schema).
+err := cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_6&quot;</span>, schema).
     WithConsistencyLevel(entity.ClBounded))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle error</span>

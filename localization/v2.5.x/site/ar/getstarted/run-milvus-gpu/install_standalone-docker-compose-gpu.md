@@ -59,8 +59,8 @@ title: تشغيل Milvus مع دعم وحدة معالجة الرسومات با
         ></path>
       </svg>
     </button></h2><p>لتثبيت Milvus مع دعم GPU باستخدام Docker Compose، اتبع الخطوات التالية.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. تنزيل ملف YAML وتكوينه</h3><p>تنزيل <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.8/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> واحفظه بصيغة docker-compose.yml يدويًا، أو باستخدام الأمر التالي.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.8/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. تنزيل ملف YAML وتكوينه</h3><p>تنزيل <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.9/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> واحفظه بصيغة docker-compose.yml يدويًا، أو باستخدام الأمر التالي.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.9/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>تحتاج إلى إجراء بعض التغييرات على متغيرات البيئة الخاصة بالخدمة المستقلة في ملف YAML على النحو التالي:</p>
 <ul>
@@ -220,5 +220,5 @@ docker start &lt;milvus_container_id&gt;
 <li><p>استكشف Milvus <a href="/docs/ar/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
 <li><p>استكشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
 <li><p>استكشف <a href="https://milvus.io/docs/attu.md">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
-<li><p><a href="/docs/ar/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
+<li><p><a href="/docs/ar/monitor.md">مراقبة ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

@@ -2,7 +2,7 @@
 id: stop-filter.md
 title: ストップ
 summary: >-
-  ストップ・フィルタは、トークン化されたテキストから指定されたストップ・ワードを除去し、一般的で意味の薄い単語を排除するのに役立ちます。stop_wordsパラメータを使ってストップワードのリストを設定することができます。
+  ストップ・フィルタは、トークン化されたテキストから指定されたストップ・ワードを除去し、一般的で意味の薄い単語を排除するのに役立ちます。stop_wordsパラメータを使ってストップワードのリストを設定できます。
 ---
 <h1 id="Stop" class="common-anchor-header">ストップ<button data-href="#Stop" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">stop</code> フィルタは、トークン化されたテキストから指定されたストップ ワードを除去し、一般的であまり意味のない単語を取り除くのに役立ちます。ストップワードのリストは<code translate="no">stop_words</code> パラメータで設定できます。</p>
+    </button></h1><p><code translate="no">stop</code> フィルタは、トークン化されたテキストから指定されたストップ ワードを除去し、一般的であまり意味のない単語の除去に役立ちます。ストップワードのリストは<code translate="no">stop_words</code> パラメータで設定できます。</p>
 <h2 id="Configuration" class="common-anchor-header">設定方法<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,7 +91,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
    <tr>
      <td><p><code translate="no">stop_words</code></p></td>
-     <td><p>トークン化から削除する単語のリスト。デフォルトでは、一般的な英語のストップワードを含む、事前に定義された<code translate="no">_english_</code> のリストが使われます。<code translate="no">_english_</code> の詳細は<a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/stop_words.rs">こちらを</a>ご覧ください。</p></td>
+     <td><p>トークン化から除去する単語のリスト。デフォルトでは、一般的な英語のストップワードを含む、事前に定義された<code translate="no">_english_</code> のリストが使われます。<code translate="no">_english_</code> の詳細は<a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/stop_words.rs">こちらを</a>ご覧ください。</p></td>
    </tr>
 </table>
 <p><code translate="no">stop</code> フィルタは、トークナイザによって生成された単語を処理するため、トークナイザと組み合わせて使用する必要があります。Milvusで利用可能なトークナイザーのリストについては、<a href="/docs/ja/tokenizers">トークナイザーリファレンスを</a>参照してください。</p>
@@ -111,8 +111,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>アナライザ設定をコレクションスキーマに適用する前に、<code translate="no">run_analyzer</code> メソッドを使用して動作を確認してください。</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザ構成</h3><div class="multipleCode">
+    </button></h2><h3 id="Analyzer-configuration" class="common-anchor-header">アナライザ設定</h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,

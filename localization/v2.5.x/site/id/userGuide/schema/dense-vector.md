@@ -204,10 +204,6 @@ schema.WithField(entity.NewField().
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
      <td><p>Menyimpan angka Brain Floating Point (bfloat16) 16-bit, menawarkan rentang eksponen yang sama dengan Float32 tetapi dengan presisi yang lebih rendah. Cocok untuk skenario yang perlu memproses vektor dalam jumlah besar dengan cepat, seperti pengambilan gambar berskala besar.</p></td>
    </tr>
-   <tr>
-     <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Menyimpan vektor yang masing-masing elemennya dalam setiap dimensi adalah bilangan bulat 8-bit (int8), dengan setiap elemen berkisar antara -128 hingga 127. Dirancang untuk model pembelajaran mendalam yang terkuantisasi (misalnya, ResNet, EfficientNet), INT8_VECTOR mengurangi ukuran model dan mempercepat kesimpulan dengan kehilangan presisi minimal.</p></td>
-   </tr>
 </table>
 <h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Tetapkan parameter indeks untuk bidang vektor</h3><p>Untuk mempercepat pencarian semantik, indeks harus dibuat untuk bidang vektor. Pengindeksan dapat secara signifikan meningkatkan efisiensi pengambilan data vektor berskala besar.</p>
 <div class="multipleCode">

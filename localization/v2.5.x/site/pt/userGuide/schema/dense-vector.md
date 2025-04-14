@@ -53,10 +53,10 @@ summary: >-
 <p>A imagem acima ilustra a representação de vectores densos num espaço 2D. Embora os vectores densos em aplicações do mundo real tenham frequentemente dimensões muito superiores, esta ilustração 2D transmite eficazmente vários conceitos-chave:</p>
 <ul>
 <li><p><strong>Representação multidimensional:</strong> Cada ponto representa um objeto concetual (como <strong>Milvus</strong>, <strong>base de dados vetorial</strong>, <strong>sistema de recuperação</strong>, etc.), sendo a sua posição determinada pelos valores das suas dimensões.</p></li>
-<li><p><strong>Relações semânticas:</strong> As distâncias entre pontos reflectem a semelhança semântica entre conceitos. Pontos mais próximos indicam conceitos que estão mais relacionados semanticamente.</p></li>
+<li><p><strong>Relações Semânticas:</strong> As distâncias entre pontos reflectem a semelhança semântica entre conceitos. Pontos mais próximos indicam conceitos que estão mais relacionados semanticamente.</p></li>
 <li><p><strong>Efeito de agrupamento:</strong> Os conceitos relacionados (como <strong>Milvus</strong>, <strong>base de dados vetorial</strong> e <strong>sistema de recuperação</strong>) são posicionados próximos uns dos outros no espaço, formando um agrupamento semântico.</p></li>
 </ul>
-<p>Abaixo está um exemplo de um vetor denso real que representa o texto <code translate="no">&quot;Milvus is an efficient vector database&quot;</code>:</p>
+<p>Segue-se um exemplo de um vetor denso real que representa o texto <code translate="no">&quot;Milvus is an efficient vector database&quot;</code>:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-number">-0.013052909</span><span class="hljs-punctuation">,</span>
     <span class="hljs-number">0.020387933</span><span class="hljs-punctuation">,</span>
@@ -70,12 +70,12 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Os vectores densos podem ser gerados utilizando vários modelos <a href="https://en.wikipedia.org/wiki/Embedding">de incorporação</a>, como os modelos CNN (como <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) para imagens e modelos de linguagem (como <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) para texto. Estes modelos transformam os dados em bruto em pontos num espaço de elevada dimensão, capturando as caraterísticas semânticas dos dados. Adicionalmente, Milvus oferece métodos convenientes para ajudar os utilizadores a gerar e processar vectores densos, como detalhado em Embeddings.</p>
+<p>Os vectores densos podem ser gerados utilizando vários modelos <a href="https://en.wikipedia.org/wiki/Embedding">de incorporação</a>, tais como modelos CNN (como <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG</a>) para imagens e modelos de linguagem (como <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec</a>) para texto. Estes modelos transformam os dados em bruto em pontos num espaço de elevada dimensão, capturando as caraterísticas semânticas dos dados. Adicionalmente, Milvus oferece métodos convenientes para ajudar os utilizadores a gerar e processar vectores densos, como detalhado em Embeddings.</p>
 <p>Uma vez os dados vectorizados, podem ser armazenados no Milvus para gestão e recuperação de vectores. O diagrama abaixo mostra o processo básico.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-dense-vector.png" alt="use-dense-vector" class="doc-image" id="use-dense-vector" />
-   </span> <span class="img-wrapper"> <span>usar-vetor denso</span> </span></p>
+   </span> <span class="img-wrapper"> <span>use-dense-vetor</span> </span></p>
 <div class="alert note">
 <p>Para além dos vectores densos, o Milvus também suporta vectores esparsos e vectores binários. Os vectores esparsos são adequados para correspondências precisas com base em termos específicos, como a pesquisa de palavras-chave e a correspondência de termos, enquanto os vectores binários são normalmente utilizados para tratar eficazmente dados binarizados, como a correspondência de padrões de imagem e determinadas aplicações de hashing. Para obter mais informações, consulte <a href="/docs/pt/binary-vector.md">Vetor binário</a> e <a href="/docs/pt/sparse_vector.md">Vetor esparso</a>.</p>
 </div>
@@ -204,12 +204,8 @@ schema.WithField(entity.NewField().
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
      <td><p>Armazena números Brain Floating Point (bfloat16) de 16 bits, oferecendo a mesma gama de expoentes que o Float32, mas com precisão reduzida. Adequado para cenários que necessitam de processar rapidamente grandes volumes de vectores, como a recuperação de imagens em grande escala.</p></td>
    </tr>
-   <tr>
-     <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Armazena vectores cujos elementos individuais em cada dimensão são números inteiros de 8 bits (int8), com cada elemento a variar entre -128 e 127. Projetado para modelos de aprendizado profundo quantizados (por exemplo, ResNet, EfficientNet), o INT8_VECTOR reduz o tamanho do modelo e acelera a inferência com perda mínima de precisão.</p></td>
-   </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Definir parâmetros de índice para campo vetorial</h3><p>Para acelerar as pesquisas semânticas, um índice deve ser criado para o campo vetorial. A indexação pode melhorar significativamente a eficiência da recuperação de dados vetoriais em grande escala.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Definir parâmetros de índice para o campo de vetor</h3><p>Para acelerar as pesquisas semânticas, deve ser criado um índice para o campo de vetor. A indexação pode melhorar significativamente a eficiência da recuperação de dados vetoriais em grande escala.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()

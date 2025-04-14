@@ -259,8 +259,8 @@ indexParams.add(indexParamForVectorField);
 )
 
 indexOptions := []milvusclient.CreateIndexOption{
-    client.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_vector&quot;</span>, index.NewAutoIndex(entity.COSINE)).WithIndexName(<span class="hljs-string">&quot;my_vector&quot;</span>),
-    client.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_id&quot;</span>, index.NewAutoIndex()).WithIndexName(<span class="hljs-string">&quot;my_id&quot;</span>),
+    milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_vector&quot;</span>, index.NewAutoIndex(entity.COSINE)).WithIndexName(<span class="hljs-string">&quot;my_vector&quot;</span>),
+    milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_id&quot;</span>, index.NewAutoIndex()).WithIndexName(<span class="hljs-string">&quot;my_id&quot;</span>),
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
@@ -365,7 +365,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
 
-err := milvusclient.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_1&quot;</span>, schema).
+err := milvusclient.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_1&quot;</span>, schema).
     WithIndexOptions(indexOptions...),
 )
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -452,7 +452,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
 
-err := milvusclient.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_2&quot;</span>, schema))
+err := milvusclient.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_2&quot;</span>, schema))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle error</span>
 }
@@ -500,11 +500,11 @@ curl --request POST \
 <p>다음 코드 스니펫은 컬렉션을 만들 때 샤드 번호를 설정하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-meta"># With shard number</span>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># With shard number</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_3&quot;</span>,
     schema=schema,
-    <span class="hljs-meta"># highlight-next-<span class="hljs-keyword">line</span></span>
+    <span class="hljs-comment"># highlight-next-line</span>
     num_shards=<span class="hljs-number">1</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -584,28 +584,28 @@ client.createCollection(customizedSetupReq4);
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/pkg/common&quot;</span>
 )
 
-err := cli.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_4&quot;</span>, schema).WithProperty(common.MmapEnabledKey, <span class="hljs-literal">true</span>))
+err := cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_4&quot;</span>, schema).WithProperty(common.MmapEnabledKey, <span class="hljs-literal">true</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle error</span>
 }
 fmt.Println(<span class="hljs-string">&quot;collection created&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-plaintext">export params=&#x27;{
     &quot;mmap.enabled&quot;: True
-}&#x27;</span>
+}&#x27;
 
-<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;
+export TOKEN=&quot;root:Milvus&quot;
 
 curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&quot;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+-d &quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
-    \&quot;params\&quot;: <span class="hljs-variable">$params</span>
-}&quot;</span>
+    \&quot;schema\&quot;: $schema,
+    \&quot;params\&quot;: $params
+}&quot;
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Collection-TTL" class="common-anchor-header">컬렉션 TTL 설정</h3><p>컬렉션의 데이터를 특정 기간 동안 삭제해야 하는 경우 TTL(Time-To-Live)을 초 단위로 설정하는 것이 좋습니다. TTL이 초과되면 Milvus는 컬렉션의 엔티티를 삭제합니다. 삭제는 비동기식으로 이루어지므로 삭제가 완료되기 전에도 검색과 쿼리가 여전히 가능합니다.</p>
 <p>다음 코드 스니펫은 TTL을 하루(86400초)로 설정합니다. TTL을 최소 이틀로 설정하는 것이 좋습니다.</p>
@@ -709,7 +709,7 @@ client.<span class="hljs-title function_">createCollection</span>(createCollecti
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
 )
 
-err := cli.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_6&quot;</span>, schema).
+err := cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_6&quot;</span>, schema).
     WithConsistencyLevel(entity.ClBounded))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle error</span>

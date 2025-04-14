@@ -202,11 +202,7 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-     <td><p>Memorizza numeri Brain Floating Point (bfloat16) a 16 bit, offrendo la stessa gamma di esponenti di Float32 ma con una precisione ridotta. Adatto a scenari che richiedono l'elaborazione rapida di grandi volumi di vettori, come il recupero di immagini su larga scala.</p></td>
-   </tr>
-   <tr>
-     <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Memorizza vettori i cui singoli elementi in ciascuna dimensione sono numeri interi a 8 bit (int8), con ciascun elemento compreso tra -128 e 127. Progettato per modelli di deep learning quantizzati (ad esempio, ResNet, EfficientNet), INT8_VECTOR riduce le dimensioni del modello e velocizza l'inferenza con una perdita minima di precisione.</p></td>
+     <td><p>Memorizza numeri Brain Floating Point (bfloat16) a 16 bit, offrendo la stessa gamma di esponenti di Float32 ma con una precisione ridotta. È adatto a scenari che richiedono l'elaborazione rapida di grandi volumi di vettori, come il recupero di immagini su larga scala.</p></td>
    </tr>
 </table>
 <h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Impostare i parametri dell'indice per il campo vettoriale</h3><p>Per accelerare le ricerche semantiche, è necessario creare un indice per il campo vettoriale. L'indicizzazione può migliorare significativamente l'efficienza di recupero dei dati vettoriali su larga scala.</p>

@@ -195,12 +195,8 @@ schema.WithField(entity.NewField().
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
      <td><p>16ビットのBfloat16（Brain Floating Point）数を格納し、Float32と同じ範囲の指数を提供するが、精度は低下する。大規模な画像検索など、大量のベクトルを高速に処理する必要があるシナリオに適している。</p></td>
    </tr>
-   <tr>
-     <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>各次元の各要素が8ビット整数（int8）であるベクトルを格納し、各要素の範囲は-128～127である。量子化された深層学習モデル（ResNet、EfficientNetなど）用に設計されたINT8_VECTORは、最小限の精度損失でモデルサイズを縮小し、推論を高速化します。</p></td>
-   </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">ベクトルフィールドにインデックスパラメータを設定</h3><p>セマンティック検索を高速化するには、ベクトルフィールドにインデックスを作成する必要があります。インデックスを作成することで、大規模なベクトルデータの検索効率を大幅に向上させることができる。</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">ベクトルフィールドにインデックスパラメータを設定する</h3><p>セマンティック検索を高速化するには、ベクトルフィールドにインデックスを作成する必要があります。インデックスを作成することで、大規模なベクトルデータの検索効率を大幅に向上させることができます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()

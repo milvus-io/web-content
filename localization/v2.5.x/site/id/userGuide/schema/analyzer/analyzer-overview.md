@@ -108,30 +108,10 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk memeriksa hasil eksekusi penganalisis, gunakan metode <code translate="no">run_analyzer</code>:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
-text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
-
-<span class="hljs-comment"># Run analyzer</span>
-result = client.run_analyzer(
-    text,
-    analyzer_params
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
 <p>Keluarannya adalah:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<p>Ini menunjukkan bahwa penganalisis melakukan tokenisasi dengan benar pada teks masukan dengan menyaring kata berhenti <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, dan <code translate="no">&quot;for&quot;</code>, sambil mengembalikan token yang bermakna.</p>
+<p>Ini menunjukkan bahwa penganalisis menandai teks masukan dengan benar dengan menyaring kata-kata berhenti <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, dan <code translate="no">&quot;for&quot;</code>, sambil mengembalikan token yang bermakna yang tersisa.</p>
 <p>Konfigurasi penganalisis bawaan <code translate="no">standard</code> di atas setara dengan menyiapkan <a href="/docs/id/analyzer-overview.md#share-N6FndaYZFoIPxExGXTDcEyHgnDc">penganalisis khusus</a> dengan parameter berikut, di mana opsi <code translate="no">tokenizer</code> dan <code translate="no">filter</code> secara eksplisit didefinisikan untuk mencapai fungsionalitas yang serupa:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

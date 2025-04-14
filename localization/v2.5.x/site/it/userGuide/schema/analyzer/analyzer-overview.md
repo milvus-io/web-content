@@ -24,7 +24,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Nell'elaborazione del testo, un <strong>analizzatore</strong> è un componente cruciale che converte il testo grezzo in un formato strutturato e ricercabile. Ogni analizzatore è generalmente composto da due elementi fondamentali: <strong>tokenizer</strong> e <strong>filtro</strong>. Insieme, trasformano il testo in ingresso in token, li raffinano e li preparano per un'indicizzazione e un recupero efficienti.</p>
-<p>In Milvus, gli analizzatori sono configurati durante la creazione della raccolta, quando si aggiungono i campi <code translate="no">VARCHAR</code> allo schema della raccolta. I token prodotti da un analizzatore possono essere usati per costruire un indice per la corrispondenza con le parole chiave o convertiti in embedding sparsi per la ricerca full text. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/keyword-match.md">Corrispondenza di testo</a> o <a href="/docs/it/full-text-search.md">Ricerca a testo completo</a>.</p>
+<p>In Milvus, gli analizzatori vengono configurati durante la creazione della raccolta, quando si aggiungono i campi <code translate="no">VARCHAR</code> allo schema della raccolta. I token prodotti da un analizzatore possono essere usati per costruire un indice per la corrispondenza con le parole chiave o convertiti in embedding sparsi per la ricerca full text. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/keyword-match.md">Corrispondenza di testo</a> o <a href="/docs/it/full-text-search.md">Ricerca a testo completo</a>.</p>
 <div class="alert note">
 <p>L'uso degli analizzatori può influire sulle prestazioni:</p>
 <ul>
@@ -108,30 +108,10 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per verificare il risultato dell'esecuzione di un analizzatore, utilizzare il metodo <code translate="no">run_analyzer</code>:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
-text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
-
-<span class="hljs-comment"># Run analyzer</span>
-result = client.run_analyzer(
-    text,
-    analyzer_params
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
 <p>L'output sarà:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<p>Questo dimostra che l'analizzatore ha correttamente tokenizzato il testo in ingresso filtrando le stop words <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, e <code translate="no">&quot;for&quot;</code>, restituendo i restanti tokens significativi.</p>
+<p>Questo dimostra che l'analizzatore tokenizza correttamente il testo in ingresso, filtrando le stop words <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code> e <code translate="no">&quot;for&quot;</code> e restituendo i restanti token significativi.</p>
 <p>La configurazione dell'analizzatore integrato <code translate="no">standard</code> di cui sopra è equivalente alla configurazione di un <a href="/docs/it/analyzer-overview.md#share-N6FndaYZFoIPxExGXTDcEyHgnDc">analizzatore personalizzato</a> con i seguenti parametri, dove le opzioni <code translate="no">tokenizer</code> e <code translate="no">filter</code> sono definite esplicitamente per ottenere una funzionalità simile:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -251,7 +231,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Filtri personalizzati</strong>: I filtri personalizzati consentono configurazioni specifiche. È possibile definire un filtro personalizzato scegliendo un tipo di filtro valido (<code translate="no">filter.type</code>) e aggiungendo impostazioni specifiche per ogni tipo di filtro. Esempi di tipi di filtro che supportano la personalizzazione:</p>
 <ul>
-<li><p><code translate="no">stop</code>: Rimuove le parole comuni specificate impostando un elenco di parole di arresto (ad esempio, <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). Per ulteriori informazioni, consultare <a href="/docs/it/stop-filter.md">Stop</a>.</p></li>
+<li><p><code translate="no">stop</code>: Rimuove le parole comuni specificate impostando un elenco di parole di arresto (ad esempio, <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). Per i dettagli, fare riferimento a <a href="/docs/it/stop-filter.md">Stop</a>.</p></li>
 <li><p><code translate="no">length</code>: Esclude i token in base a criteri di lunghezza, come l'impostazione di una lunghezza massima dei token. Per i dettagli, vedere <a href="/docs/it/length-filter.md">Lunghezza</a>.</p></li>
 <li><p><code translate="no">stemmer</code>: Riduce le parole alla loro forma radicale per una corrispondenza più flessibile. Per ulteriori informazioni, vedere <a href="/docs/it/stemmer-filter.md">Stemmer</a>.</p></li>
 </ul>

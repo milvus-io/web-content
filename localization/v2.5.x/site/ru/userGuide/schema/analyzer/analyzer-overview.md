@@ -108,30 +108,10 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Чтобы проверить результат выполнения анализатора, используйте метод <code translate="no">run_analyzer</code>:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
-text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
-
-<span class="hljs-comment"># Run analyzer</span>
-result = client.run_analyzer(
-    text,
-    analyzer_params
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Вывод будет следующим:</p>
+<p>Результат будет следующим:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<p>Это свидетельствует о том, что анализатор правильно выполняет токенизацию входного текста, отфильтровывая стоп-слова <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, и <code translate="no">&quot;for&quot;</code>, и возвращая оставшиеся осмысленные лексемы.</p>
+<p>Это демонстрирует, что анализатор корректно токенизирует входной текст, отфильтровывая стоп-слова <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, и <code translate="no">&quot;for&quot;</code>, и возвращая оставшиеся значимые лексемы.</p>
 <p>Конфигурация встроенного анализатора <code translate="no">standard</code>, приведенная выше, эквивалентна настройке <a href="/docs/ru/analyzer-overview.md#share-N6FndaYZFoIPxExGXTDcEyHgnDc">пользовательского анализатора</a> со следующими параметрами, где опции <code translate="no">tokenizer</code> и <code translate="no">filter</code> явно определены для достижения аналогичной функциональности:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -217,7 +197,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <button class="copy-code-btn"></button></code></pre>
 <p>Фильтры в пользовательском анализаторе могут быть как <strong>встроенными</strong>, так и <strong>пользовательскими</strong>, в зависимости от потребностей конфигурации.</p>
 <ul>
-<li><p><strong>Встроенные фильтры</strong>: Предварительно сконфигурированы Milvus и требуют минимальной настройки. Вы можете использовать эти фильтры из коробки, указав их имена. Приведенные ниже фильтры являются встроенными для прямого использования:</p>
+<li><p><strong>Встроенные фильтры</strong>: Предварительно настроенные Milvus, требующие минимальной настройки. Вы можете использовать эти фильтры из коробки, указав их имена. Приведенные ниже фильтры являются встроенными для прямого использования:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: Преобразует текст в нижний регистр, обеспечивая сопоставление без учета регистра. Подробнее см. в разделе <a href="/docs/ru/lowercase-filter.md">Нижний регистр</a>.</p></li>
 <li><p><code translate="no">asciifolding</code>: Преобразует не ASCII-символы в ASCII-эквиваленты, упрощая работу с многоязычным текстом. Подробнее см. в разделе <a href="/docs/ru/ascii-folding-filter.md">Сложение ASCII</a>.</p></li>

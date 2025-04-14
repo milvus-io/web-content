@@ -87,7 +87,7 @@ summary: >-
       </svg>
     </button></h2><h3 id="Add-vector-field" class="common-anchor-header">新增向量領域</h3><p>要在 Milvus 中使用密集向量，首先要在建立集合時定義一個向量欄位來儲存密集向量。這個過程包括</p>
 <ol>
-<li><p>將<code translate="no">datatype</code> 設定為支援的密集向量資料類型。關於支援的密集向量資料類型，請參閱資料類型。</p></li>
+<li><p>將<code translate="no">datatype</code> 設定為支援的密集向量資料類型。有關支援的密集向量資料類型，請參閱資料類型。</p></li>
 <li><p>使用<code translate="no">dim</code> 參數指定密集向量的尺寸。</p></li>
 </ol>
 <p>在下面的範例中，我們新增一個名為<code translate="no">dense_vector</code> 的向量欄位來儲存密集向量。欄位的資料類型是<code translate="no">FLOAT_VECTOR</code> ，維度是<code translate="no">4</code> 。</p>
@@ -195,12 +195,8 @@ schema.WithField(entity.NewField().
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
      <td><p>儲存 16 位元腦浮點 (bfloat16) 數字，提供與 Float32 相同的指數範圍，但精確度較低。適用於需要快速處理大量向量的情況，例如大規模的影像檢索。</p></td>
    </tr>
-   <tr>
-     <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>儲存向量，其每個維度的個別元素為 8 位元整數 (int8)，每個元素的範圍為 -128 到 127。INT8_VECTOR 專為量化深度學習模型 (例如 ResNet、EfficientNet) 而設計，可減少模型大小，並加快推論速度，同時將精確度損失降至最低。</p></td>
-   </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">為向量場設定索引參數</h3><p>為了加速語意搜尋，必須為向量欄位建立索引。索引可以顯著改善大規模向量資料的檢索效率。</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">為向量欄位設定索引參數</h3><p>為了加速語意搜尋，必須為向量欄位建立索引。索引可大幅提升大規模向量資料的檢索效率。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -249,7 +245,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上面的範例中，使用<code translate="no">AUTOINDEX</code> 索引類型為<code translate="no">dense_vector</code> 欄位建立一個名為<code translate="no">dense_vector_index</code> 的索引。<code translate="no">metric_type</code> 設定為<code translate="no">IP</code> ，表示將使用內積作為距離指標。</p>
+<p>在上面的範例中，使用<code translate="no">AUTOINDEX</code> 索引類型為<code translate="no">dense_vector</code> 欄位建立了一個名為<code translate="no">dense_vector_index</code> 的索引。<code translate="no">metric_type</code> 設定為<code translate="no">IP</code> ，表示將使用內積作為距離指標。</p>
 <p>Milvus 提供多種索引類型，以提供更好的向量搜尋體驗。AUTOINDEX 是一種特殊的索引類型，專為平滑向量搜尋的學習曲線而設計。有很多索引類型可供您選擇。詳情請參考 xxx。</p>
 <p>Milvus 支援其他公制類型。如需詳細資訊，請參考<a href="/docs/zh-hant/metric.md">公制類型</a>。</p>
 <h3 id="Create-collection" class="common-anchor-header">建立集合</h3><p>一旦密集向量和索引參數設定完成，你就可以建立一個包含密集向量的集合。以下範例使用<code translate="no">create_collection</code> 方法建立一個名為<code translate="no">my_dense_collection</code> 的集合。</p>

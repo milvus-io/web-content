@@ -257,8 +257,8 @@ indexParams.add(indexParamForVectorField);
 )
 
 indexOptions := []milvusclient.CreateIndexOption{
-    client.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_vector&quot;</span>, index.NewAutoIndex(entity.COSINE)).WithIndexName(<span class="hljs-string">&quot;my_vector&quot;</span>),
-    client.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_id&quot;</span>, index.NewAutoIndex()).WithIndexName(<span class="hljs-string">&quot;my_id&quot;</span>),
+    milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_vector&quot;</span>, index.NewAutoIndex(entity.COSINE)).WithIndexName(<span class="hljs-string">&quot;my_vector&quot;</span>),
+    milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_id&quot;</span>, index.NewAutoIndex()).WithIndexName(<span class="hljs-string">&quot;my_id&quot;</span>),
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
@@ -363,7 +363,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
 
-err := milvusclient.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_1&quot;</span>, schema).
+err := milvusclient.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_1&quot;</span>, schema).
     WithIndexOptions(indexOptions...),
 )
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -385,7 +385,7 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>您也可以在沒有任何索引參數的情況下建立集合，然後再加入索引參數。在這種情況下，Milvus 在建立集合時不會載入。.</p>
-<p>下面的程式碼片段示範了如何在沒有集合的情況下建立集合，而集合的載入狀態在建立時仍然是未載入。</p>
+<p>下面的程式碼片段示範了如何在沒有集合的情況下建立集合，而在建立集合時，集合的載入狀態仍然是未載入。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
@@ -450,7 +450,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
 
-err := milvusclient.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_2&quot;</span>, schema))
+err := milvusclient.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_2&quot;</span>, schema))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle error</span>
 }
@@ -492,17 +492,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>你可以為要建立的集合設定屬性，使它適合你的服務。適用的屬性如下。</p>
+    </button></h2><p>您可以為要建立的集合設定屬性，使它適合您的服務。適用的屬性如下。</p>
 <h3 id="Set-Shard-Number" class="common-anchor-header">設定分片編號</h3><p>分片是集合的水平切片。每個分片對應一個資料輸入通道。每個集合預設都有一個分片。您可以在建立資料集時，根據預期的吞吐量和要插入資料集的資料量，設定適當的分片數量。</p>
 <p>在一般情況下，每當預期吞吐量增加 500 MB/秒或要插入的資料量增加 100 GB 時，就考慮增加一個分片。此建議是基於我們自己的經驗，可能不完全符合您的應用程式情境。您可以調整此數字以符合自己的需求，或直接使用預設值。</p>
 <p>以下程式碼片段示範如何在建立集合時設定 Shard 編號。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-meta"># With shard number</span>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># With shard number</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_3&quot;</span>,
     schema=schema,
-    <span class="hljs-meta"># highlight-next-<span class="hljs-keyword">line</span></span>
+    <span class="hljs-comment"># highlight-next-line</span>
     num_shards=<span class="hljs-number">1</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -582,28 +582,28 @@ client.createCollection(customizedSetupReq4);
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/pkg/common&quot;</span>
 )
 
-err := cli.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_4&quot;</span>, schema).WithProperty(common.MmapEnabledKey, <span class="hljs-literal">true</span>))
+err := cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_4&quot;</span>, schema).WithProperty(common.MmapEnabledKey, <span class="hljs-literal">true</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle error</span>
 }
 fmt.Println(<span class="hljs-string">&quot;collection created&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-plaintext">export params=&#x27;{
     &quot;mmap.enabled&quot;: True
-}&#x27;</span>
+}&#x27;
 
-<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;
+export TOKEN=&quot;root:Milvus&quot;
 
 curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&quot;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+-d &quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
-    \&quot;params\&quot;: <span class="hljs-variable">$params</span>
-}&quot;</span>
+    \&quot;schema\&quot;: $schema,
+    \&quot;params\&quot;: $params
+}&quot;
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Collection-TTL" class="common-anchor-header">設定集合 TTL</h3><p>如果集合中的資料需要在特定時間內丟棄，請考慮設定其 Time-To-Live (TTL)，單位為秒。一旦 TTL 超時，Milvus 就會刪除集合中的實體。刪除是異步的，表示在刪除完成之前，仍可進行搜尋與查詢。</p>
 <p>以下程式碼片段將 TTL 設定為一天 (86400 秒)。建議您至少將 TTL 設定為幾天。</p>
@@ -707,7 +707,7 @@ client.<span class="hljs-title function_">createCollection</span>(createCollecti
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
 )
 
-err := cli.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_6&quot;</span>, schema).
+err := cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_6&quot;</span>, schema).
     WithConsistencyLevel(entity.ClBounded))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle error</span>

@@ -2,10 +2,10 @@
 id: decompounder-filter.md
 title: Décompacteur
 summary: >-
-  Le filtre de décompactage divise les mots composés en composants individuels
-  sur la base d'un dictionnaire spécifié, ce qui facilite la recherche de
-  parties de termes composés. Ce filtre est particulièrement utile pour les
-  langues qui utilisent fréquemment des mots composés, comme l'allemand.
+  Le filtre décompounder divise les mots composés en composants individuels sur
+  la base d'un dictionnaire spécifié, ce qui facilite la recherche de parties de
+  termes composés. Ce filtre est particulièrement utile pour les langues qui
+  utilisent fréquemment des mots composés, comme l'allemand.
 ---
 <h1 id="Decompounder" class="common-anchor-header">Décompacteur<button data-href="#Decompounder" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -100,9 +100,9 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>Une liste de composants de mots utilisés pour diviser les termes composés. Ce dictionnaire détermine comment les mots composés sont décomposés en termes individuels.</p></td>
    </tr>
 </table>
-<p>Le filtre <code translate="no">decompounder</code> opère sur les termes générés par le tokenizer, il doit donc être utilisé en combinaison avec un tokenizer. Pour obtenir la liste des tokenizers disponibles dans Milvus, reportez-vous à <a href="/docs/fr/tokenizers">Tokenizer Reference (Référence des tokenizers)</a>.</p>
+<p>Le filtre <code translate="no">decompounder</code> opère sur les termes générés par le tokenizer, il doit donc être utilisé en combinaison avec un tokenizer. Pour obtenir la liste des tokenizers disponibles dans Milvus, reportez-vous à <a href="/docs/fr/tokenizers">Tokenizer Reference</a>.</p>
 <p>Après avoir défini <code translate="no">analyzer_params</code>, vous pouvez les appliquer à un champ <code translate="no">VARCHAR</code> lors de la définition d'un schéma de collection. Cela permet à Milvus de traiter le texte de ce champ à l'aide de l'analyseur spécifié pour une tokenisation et un filtrage efficaces. Pour plus de détails, voir <a href="/docs/fr/analyzer-overview.md#Example-use">Exemple d'utilisation</a>.</p>
-<h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">
+<h2 id="Examples" class="common-anchor-header">Exemples d'utilisation<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -117,8 +117,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Avant d'appliquer la configuration de l'analyseur à votre schéma de collecte, vérifiez son comportement à l'aide de la méthode <code translate="no">run_analyzer</code>.</p>
-<h3 id="Analyzer-configuration" class="common-anchor-header">Configuration de l'analyseur</h3><div class="multipleCode">
+    </button></h2><h3 id="Analyzer-configuration" class="common-anchor-header">Configuration de l'analyseur</h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,

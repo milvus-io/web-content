@@ -75,7 +75,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-dense-vector.png" alt="use-dense-vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>استخدام المتجهات الكثيفة</span> </span></p>
 <div class="alert note">
-<p>إلى جانب المتجهات الكثيفة، يدعم ميلفوس أيضًا المتجهات المتفرقة والمتجهات الثنائية. تُعد المتجهات المتفرقة مناسبة للمطابقات الدقيقة بناءً على مصطلحات محددة، مثل البحث عن الكلمات الرئيسية ومطابقة المصطلحات، بينما تُستخدم المتجهات الثنائية بشكل شائع للتعامل بكفاءة مع البيانات ثنائية الثنائية، مثل مطابقة أنماط الصور وبعض تطبيقات التجزئة. لمزيد من المعلومات، راجع المتجهات <a href="/docs/ar/binary-vector.md">الثنائية</a> والمتجهات <a href="/docs/ar/sparse_vector.md">المتفرقة</a>.</p>
+<p>إلى جانب المتجهات الكثيفة، يدعم ميلفوس أيضًا المتجهات المتفرقة والمتجهات الثنائية. تُعد المتجهات المتفرقة مناسبة للمطابقات الدقيقة بناءً على مصطلحات محددة، مثل البحث عن الكلمات الرئيسية ومطابقة المصطلحات، بينما تُستخدم المتجهات الثنائية بشكل شائع للتعامل بكفاءة مع البيانات ثنائية الثنائيات مثل مطابقة أنماط الصور وبعض تطبيقات التجزئة. لمزيد من المعلومات، راجع المتجهات <a href="/docs/ar/binary-vector.md">الثنائية</a> والمتجهات <a href="/docs/ar/sparse_vector.md">المتفرقة</a>.</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">استخدام المتجهات الكثيفة<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -202,12 +202,8 @@ schema.WithField(entity.NewField().
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
      <td><p>يخزّن أرقام الفاصلة العائمة الدماغية ذات 16 بت (bfloat16)، حيث يقدم نفس نطاق الأسس مثل Float32 ولكن بدقة أقل. مناسب للسيناريوهات التي تحتاج إلى معالجة كميات كبيرة من المتجهات بسرعة، مثل استرجاع الصور على نطاق واسع.</p></td>
    </tr>
-   <tr>
-     <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>يخزِّن المتجهات التي تكون عناصرها الفردية في كل بُعد عبارة عن أعداد صحيحة 8 بت (int8)، بحيث يتراوح كل عنصر من -128 إلى 127. تم تصميم INT8_VECTOR لنماذج التعلّم العميق المكمّلة (مثل ResNet وEfficientNet)، حيث يقلل INT8_VECTOR من حجم النموذج ويسرّع الاستدلال بأقل خسارة في الدقة.</p></td>
-   </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">تعيين بارامترات الفهرس لحقل المتجهات</h3><p>لتسريع عمليات البحث الدلالي، يجب إنشاء فهرس للحقل المتجه. يمكن للفهرسة تحسين كفاءة استرجاع البيانات المتجهة واسعة النطاق بشكل كبير.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">تعيين بارامترات الفهرس لحقل المتجهات</h3><p>لتسريع عمليات البحث الدلالية، يجب إنشاء فهرس للحقل المتجه. يمكن للفهرسة تحسين كفاءة استرجاع البيانات المتجهة واسعة النطاق بشكل كبير.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()

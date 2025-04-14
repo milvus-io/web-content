@@ -195,10 +195,6 @@ schema.WithField(entity.NewField().
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
      <td><p>存储 16 位脑浮点（bfloat16）数，提供与 Float32 相同的指数范围，但精度有所降低。适用于需要快速处理大量向量的场景，如大规模图像检索。</p></td>
    </tr>
-   <tr>
-     <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>存储向量，其每个维度的单个元素均为 8 位整数（int8），每个元素的范围为 -128 至 127。INT8_VECTOR 专为量化深度学习模型（如 ResNet、EfficientNet）而设计，可减少模型大小并加快推理速度，同时将精度损失降到最低。</p></td>
-   </tr>
 </table>
 <h3 id="Set-index-params-for-vector-field" class="common-anchor-header">为向量场设置索引参数</h3><p>为了加速语义搜索，必须为向量场创建索引。索引可以大大提高大规模向量数据的检索效率。</p>
 <div class="multipleCode">

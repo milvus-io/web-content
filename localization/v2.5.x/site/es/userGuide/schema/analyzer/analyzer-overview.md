@@ -108,30 +108,10 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para comprobar el resultado de la ejecución de un analizador, utilice el método <code translate="no">run_analyzer</code>:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
-text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
-
-<span class="hljs-comment"># Run analyzer</span>
-result = client.run_analyzer(
-    text,
-    analyzer_params
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
 <p>La salida será:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<p>Esto demuestra que el analizador tokeniza correctamente el texto de entrada filtrando las palabras de parada <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, y <code translate="no">&quot;for&quot;</code>, y devolviendo el resto de tokens significativos.</p>
+<p>Esto demuestra que el analizador tokeniza correctamente el texto de entrada filtrando las palabras de parada <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, y <code translate="no">&quot;for&quot;</code>, y devolviendo los tokens significativos restantes.</p>
 <p>La configuración del analizador integrado <code translate="no">standard</code> anterior es equivalente a la configuración de un <a href="/docs/es/analyzer-overview.md#share-N6FndaYZFoIPxExGXTDcEyHgnDc">analizador personalizado</a> con los siguientes parámetros, donde las opciones <code translate="no">tokenizer</code> y <code translate="no">filter</code> se definen explícitamente para lograr una funcionalidad similar:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -220,7 +200,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <li><p><strong>Filtros integrados</strong>: Preconfigurados por Milvus, requieren una configuración mínima. Puede utilizar estos filtros directamente especificando sus nombres. Los siguientes filtros están incorporados para su uso directo:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: Convierte el texto a minúsculas, asegurando una coincidencia insensible a mayúsculas y minúsculas. Para más detalles, consulte <a href="/docs/es/lowercase-filter.md">Minúsculas</a>.</p></li>
-<li><p><code translate="no">asciifolding</code>: Convierte los caracteres no ASCII en equivalentes ASCII, lo que simplifica el tratamiento de textos multilingües. Para más detalles, consulte <a href="/docs/es/ascii-folding-filter.md">Plegado ASCII</a>.</p></li>
+<li><p><code translate="no">asciifolding</code>: Convierte los caracteres no ASCII en equivalentes ASCII, lo que simplifica el tratamiento de textos multilingües. Para más información, consulte <a href="/docs/es/ascii-folding-filter.md">Plegado ASCII</a>.</p></li>
 <li><p><code translate="no">alphanumonly</code>: Conserva sólo los caracteres alfanuméricos eliminando los demás. Para más detalles, consulte <a href="/docs/es/alphanumonly-filter.md">Sólo alfanuméricos</a>.</p></li>
 <li><p><code translate="no">cnalphanumonly</code>: Elimina los tokens que contienen caracteres que no sean chinos, letras inglesas o dígitos. Para obtener más información, consulte <a href="/docs/es/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 <li><p><code translate="no">cncharonly</code>: Elimina los tokens que contienen caracteres no chinos. Para más información, consulte <a href="/docs/es/cncharonly-filter.md">Cncharonly</a>.</p></li>

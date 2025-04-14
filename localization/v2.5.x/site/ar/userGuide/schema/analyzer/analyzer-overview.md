@@ -2,8 +2,8 @@
 id: analyzer-overview.md
 title: نظرة عامة على المحلل
 summary: >-
-  في معالجة النصوص، يعد المحلل مكونًا أساسيًا يحول النص الخام إلى تنسيق منظم
-  وقابل للبحث. يتكون كل محلل عادةً من عنصرين أساسيين: مُحلل الرموز والمرشح.
+  في معالجة النصوص، يعتبر المحلل عنصرًا أساسيًا في تحويل النص الخام إلى تنسيق
+  منظم وقابل للبحث. يتكون كل محلل عادةً من عنصرين أساسيين: مُحلل الرموز والمرشح.
   يقومان معًا بتحويل النص المدخل إلى رموز، وتنقيح هذه الرموز، وإعدادها للفهرسة
   والاسترجاع بكفاءة.
 ---
@@ -27,7 +27,7 @@ summary: >-
 <div class="alert note">
 <p>قد يؤثر استخدام المحللات على الأداء:</p>
 <ul>
-<li><p><strong>البحث عن النص الكامل:</strong> بالنسبة للبحث عن النص الكامل، تستهلك قنوات <strong>DataNode</strong> <strong>وQueryNode</strong> البيانات بشكل أبطأ لأنها يجب أن تنتظر اكتمال الترميز. ونتيجة لذلك، تستغرق البيانات التي تم إدخالها حديثًا وقتًا أطول لتصبح متاحة للبحث.</p></li>
+<li><p><strong>البحث عن النص الكامل:</strong> للبحث عن النص الكامل، تستهلك قناتا <strong>DataNode</strong> <strong>وQueryNode</strong> البيانات بشكل أبطأ لأنه يجب أن تنتظر اكتمال الترميز. ونتيجة لذلك، تستغرق البيانات التي تم إدخالها حديثًا وقتًا أطول لتصبح متاحة للبحث.</p></li>
 <li><p><strong>مطابقة الكلمات المفتاحية:</strong> بالنسبة لمطابقة الكلمات المفتاحية، يكون إنشاء الفهرس أبطأ أيضًا نظرًا لأن الترميز يحتاج إلى الانتهاء من الترميز قبل أن يتم إنشاء الفهرس.</p></li>
 </ul>
 </div>
@@ -46,7 +46,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يتكوّن المحلّل في ميلفوس من <strong>أداة ترميز</strong> واحدة فقط <strong>وصفر أو أكثر من</strong> المرشحات.</p>
+    </button></h2><p>يتكوّن المحلّل في ميلفوس من مُحلّل واحد فقط من <strong>أداة ترميز</strong> واحدة <strong>وصفر أو أكثر من</strong> المرشحات.</p>
 <ul>
 <li><p><strong>أداة الترميز</strong>: يقوم أداة الترميز بتقسيم النص المدخل إلى وحدات منفصلة تسمى الرموز. قد تكون هذه الرموز عبارة عن كلمات أو عبارات، اعتمادًا على نوع الرمز المميز.</p></li>
 <li><p><strong>المرشحات</strong>: يمكن تطبيق المرشحات على الرموز الرمزية لزيادة تنقيحها، على سبيل المثال، بجعلها صغيرة أو إزالة الكلمات الشائعة.</p></li>
@@ -107,26 +107,6 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>للتحقق من نتيجة تنفيذ محلل ما، استخدم الطريقة <code translate="no">run_analyzer</code>:</p>
-<div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
-text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
-
-<span class="hljs-comment"># Run analyzer</span>
-result = client.run_analyzer(
-    text,
-    analyzer_params
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
 <p>سيكون الناتج:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
@@ -178,7 +158,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
    ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يقدم Milvus المحللات المدمجة التالية، كل منها مصمم لتلبية احتياجات معالجة نصية محددة:</p>
+<p>يقدم ميلفوس المحللات المدمجة التالية، كل منها مصمم لتلبية احتياجات معالجة نصية محددة:</p>
 <ul>
 <li><p><code translate="no">standard</code>: مناسب لمعالجة النصوص للأغراض العامة، مع تطبيق الترميز القياسي والتصفية بالأحرف الصغيرة.</p></li>
 <li><p><code translate="no">english</code>: مُحسّن للنصوص باللغة الإنجليزية، مع دعم كلمات التوقف الإنجليزية.</p></li>
@@ -547,7 +527,7 @@ schema.addField(AddFieldReq.builder()
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">الخطوة 4: إعداد معلمات الفهرس وإنشاء المجموعة</h3><div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#javascript">جافا NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up index parameters for the vector field</span>
 index_params = client.prepare_index_params()
 index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>, index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>)

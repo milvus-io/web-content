@@ -8,8 +8,8 @@ summary: >-
   En comparación con los vectores dispersos, los vectores densos contienen más
   información en el mismo nivel dimensional, ya que cada dimensión contiene
   valores significativos. Esta representación puede capturar eficazmente
-  patrones y relaciones complejas, facilitando el análisis y el procesamiento de
-  datos en espacios de altas dimensiones. Los vectores densos suelen tener un
+  patrones y relaciones complejas, facilitando el análisis y procesamiento de
+  datos en espacios de alta dimensión. Los vectores densos suelen tener un
   número fijo de dimensiones, que oscila entre unas pocas docenas y varios
   cientos o incluso miles, en función de la aplicación y los requisitos
   específicos.
@@ -205,12 +205,8 @@ schema.WithField(entity.NewField().
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
      <td><p>Almacena números de coma flotante cerebral de 16 bits (bfloat16), ofreciendo el mismo rango de exponentes que Float32 pero con precisión reducida. Adecuado para escenarios que necesitan procesar grandes volúmenes de vectores rápidamente, como la recuperación de imágenes a gran escala.</p></td>
    </tr>
-   <tr>
-     <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>Almacena vectores cuyos elementos individuales en cada dimensión son enteros de 8 bits (int8), con cada elemento entre -128 y 127. Diseñado para modelos de aprendizaje profundo cuantizados (por ejemplo, ResNet, EfficientNet), INT8_VECTOR reduce el tamaño del modelo y acelera la inferencia con una pérdida de precisión mínima.</p></td>
-   </tr>
 </table>
-<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Establecer parámetros de índice para el campo vectorial</h3><p>Para acelerar las búsquedas semánticas, debe crearse un índice para el campo vectorial. La indexación puede mejorar significativamente la eficacia de la recuperación de datos vectoriales a gran escala.</p>
+<h3 id="Set-index-params-for-vector-field" class="common-anchor-header">Establecer parámetros de índice para el campo vectorial</h3><p>Para acelerar las búsquedas semánticas, es necesario crear un índice para el campo vectorial. La indexación puede mejorar significativamente la eficiencia de la recuperación de datos vectoriales a gran escala.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()

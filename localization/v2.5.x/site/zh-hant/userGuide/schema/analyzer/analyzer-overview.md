@@ -104,30 +104,10 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>若要檢查分析器的執行結果，請使用<code translate="no">run_analyzer</code> 方法：</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
-text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
-
-<span class="hljs-comment"># Run analyzer</span>
-result = client.run_analyzer(
-    text,
-    analyzer_params
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>輸出結果將會是</p>
+<p>輸出將會是</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<p>這顯示分析器正確地對輸入文字進行標記化，過濾掉停止詞<code translate="no">&quot;a&quot;</code>,<code translate="no">&quot;an&quot;</code>, 和<code translate="no">&quot;for&quot;</code>, 並回傳其餘有意義的標記。</p>
+<p>這顯示分析器透過篩選出停止詞<code translate="no">&quot;a&quot;</code>,<code translate="no">&quot;an&quot;</code>, 和<code translate="no">&quot;for&quot;</code> 來正確地對輸入文字進行標記化，同時回傳其餘有意義的標記。</p>
 <p>上述<code translate="no">standard</code> 內建分析器的配置等同於使用下列參數設定<a href="/docs/zh-hant/analyzer-overview.md#share-N6FndaYZFoIPxExGXTDcEyHgnDc">自訂分析器</a>，其中<code translate="no">tokenizer</code> 和<code translate="no">filter</code> 選項是明確定義，以達到類似功能：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -249,7 +229,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <ul>
 <li><p><code translate="no">stop</code>:透過設定停止詞清單 (例如<code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>)，移除指定的常用字。詳情請參閱<a href="/docs/zh-hant/stop-filter.md">停止</a>。</p></li>
 <li><p><code translate="no">length</code>:根據長度標準排除標記，例如設定最大標記長度。詳情請參閱<a href="/docs/zh-hant/length-filter.md">Length</a>。</p></li>
-<li><p><code translate="no">stemmer</code>:將字詞縮減為字根形式，以便進行更靈活的匹配。如需詳細資訊，請參閱<a href="/docs/zh-hant/stemmer-filter.md">Stemmer</a>。</p></li>
+<li><p><code translate="no">stemmer</code>:將字詞縮減為字根形式，以便進行更靈活的匹配。詳情請參閱<a href="/docs/zh-hant/stemmer-filter.md">Stemmer</a>。</p></li>
 </ul>
 <p><strong>設定自訂篩選器的範例：</strong></p>
 <p><div class="multipleCode">

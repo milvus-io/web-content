@@ -18,7 +18,62 @@ title: Catatan Rilis
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cari tahu apa yang baru di Milvus! Halaman ini merangkum fitur-fitur baru, peningkatan, masalah yang diketahui, dan perbaikan bug di setiap rilis. Anda dapat menemukan catatan rilis untuk setiap versi yang dirilis setelah v2.5.0 di bagian ini. Kami menyarankan agar Anda secara teratur mengunjungi halaman ini untuk mempelajari tentang pembaruan.</p>
+    </button></h1><p>Cari tahu apa yang baru di Milvus! Halaman ini merangkum fitur-fitur baru, peningkatan, masalah yang diketahui, dan perbaikan bug di setiap rilis. Anda dapat menemukan catatan rilis untuk setiap versi yang dirilis setelah v2.5.0 di bagian ini. Kami menyarankan agar Anda secara teratur mengunjungi halaman ini untuk mengetahui pembaruan.</p>
+<h2 id="v259" class="common-anchor-header">v2.5.9<button data-href="#v259" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Tanggal rilis: 11 April 2025</p>
+<table>
+<thead>
+<tr><th>Versi Milvus</th><th>Versi Python SDK</th><th>Versi SDK Node.js</th><th>Versi Java SDK</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.9</td><td>2.5.6</td><td>2.5.7</td><td>2.5.7</td></tr>
+</tbody>
+</table>
+<p>Kami sangat senang mengumumkan Milvus 2.5.9, yang membawa peningkatan kinerja untuk statistik kunci JSON, kemampuan pengindeksan yang lebih baik, dan beberapa perbaikan bug penting yang meningkatkan stabilitas dan penanganan data. Kami mendorong Anda untuk meng-upgrade atau mencoba versi ini, dan seperti biasa, umpan balik Anda sangat kami hargai karena kami terus menyempurnakan Milvus.</p>
+<h3 id="Improvements" class="common-anchor-header">Perbaikan</h3><ul>
+<li>Mendukung normalisasi skor lompatan untuk perangkingan ulang berbobot<a href="https://github.com/milvus-io/milvus/pull/40905">(#40905</a>)</li>
+<li>Meningkatkan performa pembuatan statistik kunci JSON dengan menambahkan dokumen secara berkelompok<a href="https://github.com/milvus-io/milvus/pull/40898">(#40898</a>)</li>
+<li>Gunakan <code translate="no">int32</code> saat membuat indeks larik untuk tipe elemen <code translate="no">int8</code>/<code translate="no">int16</code> <a href="https://github.com/milvus-io/milvus/pull/41186">(#41186</a>)</li>
+<li>Menyelaraskan hasil pencarian brute-force dengan perilaku indeks JSON untuk ekspresi <code translate="no">exists</code> <a href="https://github.com/milvus-io/milvus/pull/41056">(#41056</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<li>Memperbaiki masalah yang menyebabkan kebingungan traceID jika klien mengirim traceID<a href="https://github.com/milvus-io/milvus/pull/41149">(#41149</a>)</li>
+<li>Memperbaiki potensi kerusakan karena penggunaan <code translate="no">noexcept</code> yang salah, yang menyebabkan kegagalan IO<a href="https://github.com/milvus-io/milvus/pull/41221">(#41221</a>)</li>
+<li>Menyelesaikan loop saldo normal tak terbatas yang dipicu setelah penangguhan saldo<a href="https://github.com/milvus-io/milvus/pull/41196">(#41196</a>)</li>
+<li>Tampilkan koleksi sekarang mendukung objek yang diberikan ke grup hak istimewa khusus<a href="https://github.com/milvus-io/milvus/pull/41204">(#41204</a>)</li>
+<li>Memperbaiki kegagalan untuk mengambil posisi saluran replikasi<a href="https://github.com/milvus-io/milvus/pull/41189">(#41189</a>)</li>
+<li>Memperbaiki potensi kebocoran thread yang disebabkan oleh batas waktu RESTful<a href="https://github.com/milvus-io/milvus/pull/41184">(#41184</a>)</li>
+<li>Menambahkan bitmap yang jelas untuk mode lompatan batch<a href="https://github.com/milvus-io/milvus/pull/41165">(#41165</a>)</li>
+<li>Memperbaiki masalah di mana menghapus tipe indeks gagal dalam penyimpanan jarak jauh mode lokal<a href="https://github.com/milvus-io/milvus/pull/41163">(#41163</a>)</li>
+<li>Gunakan <code translate="no">element_type</code> untuk operator array <code translate="no">isNull</code> <a href="https://github.com/milvus-io/milvus/pull/41158">(#41158</a>)</li>
+<li>Menghapus pengaturan ulang metrik untuk memastikan pelaporan yang akurat<a href="https://github.com/milvus-io/milvus/pull/41081">(#41081</a>)</li>
+<li>Memperbaiki bug yang mencegah data <code translate="no">null</code> disaring oleh ekspresi <code translate="no">null</code> <a href="https://github.com/milvus-io/milvus/pull/41135">(#41135</a>)</li>
+<li>Mengabaikan segmen yang sedang berkembang tanpa posisi awal untuk kebijakan segel<a href="https://github.com/milvus-io/milvus/pull/41131">(#41131)</a></li>
+<li>Menghindari memperbarui permintaan pencarian/kueri asli selama percobaan ulang<a href="https://github.com/milvus-io/milvus/pull/41127">(#41127</a>)</li>
+<li>Memperbaiki kesalahan segmentasi jika <code translate="no">LoadArrowReaderFromRemote</code> berjalan di jalur pengecualian<a href="https://github.com/milvus-io/milvus/pull/41071">(#41071</a>)</li>
+<li>Mengatasi masalah saldo manual dan pemeriksaan saldo<a href="https://github.com/milvus-io/milvus/pull/41038">(#41038</a>)</li>
+<li>Skema yang divalidasi tidak <code translate="no">nil</code> untuk statistik JSON dengan lazy <code translate="no">DescribeCollection</code> <a href="https://github.com/milvus-io/milvus/pull/41068">(#41068</a>)</li>
+<li>Memperbaiki bug pergerakan kursor saat membandingkan dua kolom<a href="https://github.com/milvus-io/milvus/pull/41054">(#41054</a>)</li>
+<li>Mengatasi kerusakan saat memasukkan array <code translate="no">null</code> dan non-null dengan mmap yang sedang terbuka<a href="https://github.com/milvus-io/milvus/pull/41052">(#41052)</a></li>
+<li>Memperbaiki masalah kompilasi arm64<a href="https://github.com/milvus-io/milvus/pull/41058">(#41058</a>)</li>
+<li>Menambahkan mode bypass thread pool untuk menghindari pemblokiran operasi penyisipan/memuat dengan menumbuhkan indeks<a href="https://github.com/milvus-io/milvus/pull/41013">(#41013</a>)</li>
+<li>Memperbaiki kesalahan format JSON<a href="https://github.com/milvus-io/milvus/pull/41031">(#41031</a>)</li>
+<li>Memperbaiki kesalahan 404 di WebUI ketika <code translate="no">http.enablepprof</code> salah<a href="https://github.com/milvus-io/milvus/pull/41007">(#41007</a>)</li>
+</ul>
 <h2 id="v258" class="common-anchor-header">v2.5.8<button data-href="#v258" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -186,7 +241,7 @@ title: Catatan Rilis
 <li>Peningkatan penanganan kesalahan dan uji unit untuk fungsi <code translate="no">InitMetaCache</code> <a href="https://github.com/milvus-io/milvus/pull/40324">(#40324</a>)</li>
 <li>Menambahkan pemeriksaan parameter duplikat untuk <code translate="no">CreateIndex</code> <a href="https://github.com/milvus-io/milvus/pull/40330">(#40330</a>)</li>
 <li>Menyelesaikan masalah yang mencegah tugas pemadatan ketika ukuran melebihi batas maksimum<a href="https://github.com/milvus-io/milvus/pull/40350">(#40350</a>)</li>
-<li>Memperbaiki konsumsi duplikat dari aliran untuk segmen yang tidak terlihat<a href="https://github.com/milvus-io/milvus/pull/40318">(#40318</a>)</li>
+<li>Memperbaiki konsumsi duplikat dari stream untuk segmen yang tidak terlihat<a href="https://github.com/milvus-io/milvus/pull/40318">(#40318</a>)</li>
 <li>Mengubah variabel CMake untuk beralih ke <code translate="no">knowhere-cuvs</code> <a href="https://github.com/milvus-io/milvus/pull/40289">(#40289</a>)</li>
 <li>Memperbaiki masalah di mana menjatuhkan properti DB melalui RESTful gagal<a href="https://github.com/milvus-io/milvus/pull/40260">(#40260</a>)</li>
 <li>Menggunakan tipe pesan yang berbeda untuk API <code translate="no">OperatePrivilegeV2</code> <a href="https://github.com/milvus-io/milvus/pull/40193">(#40193</a>)</li>
@@ -283,7 +338,7 @@ title: Catatan Rilis
 <li>[2.5] Memeriksa pemadatan L0 hanya dengan saluran yang sama saat menyatakan<a href="https://github.com/milvus-io/milvus/pull/39543">(#39543</a>)</li>
 <li>[2.5] Estimasi memori pemuat segmen yang disesuaikan untuk indeks sementara<a href="https://github.com/milvus-io/milvus/pull/39509">(#39509</a>)</li>
 <li>[2.5] Menggunakan start pos ts untuk segmen segel berdasarkan kebijakan seumur hidup<a href="https://github.com/milvus-io/milvus/pull/39994">(#39994)</a></li>
-<li>Menghapus meta tugas ketika tugas tidak lagi diperlukan<a href="https://github.com/milvus-io/milvus/pull/40146">(#40146</a>)</li>
+<li>Menghapus meta tugas ketika tugas tidak lagi dibutuhkan<a href="https://github.com/milvus-io/milvus/pull/40146">(#40146</a>)</li>
 <li>[2.5] Mempercepat pencatatan objek selama impor binlog<a href="https://github.com/milvus-io/milvus/pull/40048">(#40048</a>)</li>
 <li>Mendukung pembuatan koleksi dengan deskripsi<a href="https://github.com/milvus-io/milvus/pull/40028">(#40028</a>)</li>
 <li>[2.5] Interval batas waktu permintaan indeks yang diekspor dalam konfigurasi<a href="https://github.com/milvus-io/milvus/pull/40118">(#40118</a>)</li>
@@ -331,7 +386,7 @@ title: Catatan Rilis
 <p>Kami sangat senang mengumumkan rilis Milvus 2.5.4, yang memperkenalkan pengoptimalan kinerja utama dan fitur-fitur baru seperti isolasi PartitionKey, Sparse Index dengan DAAT MaxScore, dan mekanisme penguncian yang disempurnakan. Sorotan yang menonjol dari rilis ini adalah dukungannya untuk 10.000 koleksi dan 1 juta partisi, yang menandai tonggak penting untuk kasus penggunaan multi-penyewa. Versi ini juga mengatasi beberapa bug yang meningkatkan stabilitas dan keandalan secara keseluruhan, dua bug kritis dapat menyebabkan kehilangan data. Kami mendorong Anda untuk meng-upgrade atau mencoba rilis terbaru ini, dan kami menantikan umpan balik Anda untuk membantu kami terus menyempurnakan Milvus!</p>
 <h3 id="Features" class="common-anchor-header">Fitur</h3><ul>
 <li>Mendukung isolasi PartitionKey untuk meningkatkan kinerja dengan beberapa kunci partisi<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). Untuk informasi lebih lanjut, lihat <a href="/docs/id/use-partition-key.md">Gunakan Kunci Partisi</a>.</li>
-<li>Sparse Index sekarang mendukung DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md">Vektor Jarang</a>.</li>
+<li>Sparse Index kini mendukung DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md">Vektor Jarang</a>.</li>
 <li>Menambahkan dukungan untuk <code translate="no">is_null</code> dalam ekspresi<a href="https://github.com/milvus-io/milvus/pull/38931">(#38931</a>)</li>
 <li>Hak akses root dapat disesuaikan<a href="https://github.com/milvus-io/milvus/pull/39324">(#39324</a>)</li>
 </ul>

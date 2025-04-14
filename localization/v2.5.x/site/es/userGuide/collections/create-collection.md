@@ -260,8 +260,8 @@ indexParams.add(indexParamForVectorField);
 )
 
 indexOptions := []milvusclient.CreateIndexOption{
-    client.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_vector&quot;</span>, index.NewAutoIndex(entity.COSINE)).WithIndexName(<span class="hljs-string">&quot;my_vector&quot;</span>),
-    client.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_id&quot;</span>, index.NewAutoIndex()).WithIndexName(<span class="hljs-string">&quot;my_id&quot;</span>),
+    milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_vector&quot;</span>, index.NewAutoIndex(entity.COSINE)).WithIndexName(<span class="hljs-string">&quot;my_vector&quot;</span>),
+    milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;my_id&quot;</span>, index.NewAutoIndex()).WithIndexName(<span class="hljs-string">&quot;my_id&quot;</span>),
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
@@ -366,7 +366,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
 
-err := milvusclient.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_1&quot;</span>, schema).
+err := milvusclient.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_1&quot;</span>, schema).
     WithIndexOptions(indexOptions...),
 )
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -453,7 +453,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
 
-err := milvusclient.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_2&quot;</span>, schema))
+err := milvusclient.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_2&quot;</span>, schema))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle error</span>
 }
@@ -496,16 +496,16 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Puede establecer propiedades para la colección a crear para que se ajuste a su servicio. Las propiedades aplicables son las siguientes.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Establecer número de fragmentos</h3><p>Los fragmentos son partes horizontales de una colección. Cada fragmento corresponde a un canal de entrada de datos. Por defecto, cada colección tiene un fragmento. Puede establecer el número apropiado de fragmentos al crear una colección basándose en el rendimiento esperado y el volumen de los datos a insertar en la colección.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">Establecer número de fragmentos</h3><p>Los fragmentos son partes horizontales de una colección. Cada fragmento corresponde a un canal de entrada de datos. Cada colección tiene un fragmento por defecto. Puede establecer el número apropiado de fragmentos al crear una colección basándose en el rendimiento esperado y el volumen de los datos a insertar en la colección.</p>
 <p>En casos comunes, considere aumentar el número de fragmentos en uno cada vez que el rendimiento esperado aumente en 500 MB/s o el volumen de datos a insertar aumente en 100 GB. Esta sugerencia se basa en nuestra propia experiencia y puede no ajustarse completamente a sus escenarios de aplicación. Puede ajustar este número a sus propias necesidades o simplemente utilizar el valor por defecto.</p>
 <p>El siguiente fragmento de código muestra cómo establecer el número de fragmentos al crear una colección.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-meta"># With shard number</span>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># With shard number</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_3&quot;</span>,
     schema=schema,
-    <span class="hljs-meta"># highlight-next-<span class="hljs-keyword">line</span></span>
+    <span class="hljs-comment"># highlight-next-line</span>
     num_shards=<span class="hljs-number">1</span>
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -585,28 +585,28 @@ client.createCollection(customizedSetupReq4);
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/pkg/common&quot;</span>
 )
 
-err := cli.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_4&quot;</span>, schema).WithProperty(common.MmapEnabledKey, <span class="hljs-literal">true</span>))
+err := cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_4&quot;</span>, schema).WithProperty(common.MmapEnabledKey, <span class="hljs-literal">true</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle error</span>
 }
 fmt.Println(<span class="hljs-string">&quot;collection created&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
+<pre><code translate="no" class="language-plaintext">export params=&#x27;{
     &quot;mmap.enabled&quot;: True
-}&#x27;</span>
+}&#x27;
 
-<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+export CLUSTER_ENDPOINT=&quot;http://localhost:19530&quot;
+export TOKEN=&quot;root:Milvus&quot;
 
 curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&quot;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/collections/create&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+-d &quot;{
     \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
-    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
-    \&quot;params\&quot;: <span class="hljs-variable">$params</span>
-}&quot;</span>
+    \&quot;schema\&quot;: $schema,
+    \&quot;params\&quot;: $params
+}&quot;
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Collection-TTL" class="common-anchor-header">Establecer TTL de la colección</h3><p>Si los datos de una colección deben eliminarse durante un período específico, considere establecer su tiempo de vida (TTL) en segundos. Una vez que el TTL se agota, Milvus elimina las entidades de la colección. El borrado es asíncrono, lo que indica que las búsquedas y consultas siguen siendo posibles antes de que se complete el borrado.</p>
 <p>El siguiente fragmento de código establece el TTL en un día (86400 segundos). Se recomienda establecer el TTL en un par de días como mínimo.</p>
@@ -710,7 +710,7 @@ client.<span class="hljs-title function_">createCollection</span>(createCollecti
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
 )
 
-err := cli.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_6&quot;</span>, schema).
+err := cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_6&quot;</span>, schema).
     WithConsistencyLevel(entity.ClBounded))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle error</span>

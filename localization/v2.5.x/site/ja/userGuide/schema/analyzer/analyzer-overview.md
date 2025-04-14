@@ -20,9 +20,9 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>テキスト処理において、<strong>アナライザーは</strong>生テキストを構造化された検索可能な形式に変換する重要なコンポーネントである。アナライザーは通常、<strong>トークナイザーと</strong> <strong>フィルターという</strong>2つのコア要素で構成される。これらは共に入力テキストをトークンに変換し、トークンを洗練させ、効率的なインデックス作成と検索に備えます。</p>
-<p>Milvusでは、アナライザはコレクション作成時に<code translate="no">VARCHAR</code> フィールドをコレクションスキーマに追加する際に設定されます。アナライザによって生成されたトークンは、キーワードマッチングのためのインデックスを構築するために使用したり、全文検索のためにスパース埋め込みに変換したりすることができます。詳細については、<a href="/docs/ja/keyword-match.md">Text Match</a>または<a href="/docs/ja/full-text-search.md">Full Text Search</a> を参照してください。</p>
+<p>Milvusでは、アナライザはコレクション作成時に<code translate="no">VARCHAR</code> フィールドをコレクションスキーマに追加する際に設定されます。アナライザによって生成されたトークンは、キーワードマッチングのインデックスを構築するために使用したり、全文検索のためにスパース埋め込みに変換したりすることができます。詳細については、<a href="/docs/ja/keyword-match.md">Text Match</a>または<a href="/docs/ja/full-text-search.md">Full Text Search</a> を参照してください。</p>
 <div class="alert note">
-<p>アナライザーの使用は、パフォーマンスに影響する場合があります：</p>
+<p>アナライザの使用は、パフォーマンスに影響する場合があります：</p>
 <ul>
 <li><p><strong>全文検索：</strong>全文検索：全文検索の場合、<strong>DataNodeと</strong> <strong>QueryNode</strong>チャネルはトークン化の完了を待つ必要があるため、データの消費が遅くなります。その結果、新しく取り込まれたデータが検索に利用できるようになるまでに時間がかかる。</p></li>
 <li><p><strong>キーワードマッチ：</strong>キーワードマッチの場合、インデックスを構築する前にトークン化が完了する必要があるため、インデックス作成も遅くなります。</p></li>
@@ -104,30 +104,10 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>アナライザーの実行結果を確認するには、<code translate="no">run_analyzer</code> メソッドを使用する：</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
-text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
-
-<span class="hljs-comment"># Run analyzer</span>
-result = client.run_analyzer(
-    text,
-    analyzer_params
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>と出力されます：</p>
+<p>と出力される：</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<p>これは、解析器が入力テキストを適切にトークン化し、ストップワード<code translate="no">&quot;a&quot;</code> 、<code translate="no">&quot;an&quot;</code> 、<code translate="no">&quot;for&quot;</code> をフィルタリングして、残りの意味のあるトークンを返していることを示しています。</p>
+<p>これは、解析器が入力テキストを適切にトークン化し、ストップワード<code translate="no">&quot;a&quot;</code> 、<code translate="no">&quot;an&quot;</code> 、<code translate="no">&quot;for&quot;</code> をフィルタリングする一方で、残りの意味のあるトークンを返すことを示しています。</p>
 <p>上記の<code translate="no">standard</code> 組み込み解析器の設定は、以下のパラメータで<a href="/docs/ja/analyzer-overview.md#share-N6FndaYZFoIPxExGXTDcEyHgnDc">カスタム解析器を</a>設定するのと同じです。<code translate="no">tokenizer</code> と<code translate="no">filter</code> オプションは、同様の機能を実現するために明示的に定義されています：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -396,7 +376,7 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>カスタム・アナライザーの設定と検証：</strong></p>
 <ul>
-<li><strong>設定：</strong>標準のトークナイザーと組み込みの小文字フィルター、トークンの長さとストップワードのカスタムフィルターを使用するカスタムアナライザーを定義します。</li>
+<li><strong>設定：</strong>標準のトークナイザーと組み込みの小文字フィルター、トークンの長さとストップワード用のカスタムフィルターを使用するカスタムアナライザーを定義します。</li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
@@ -543,7 +523,7 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">ステップ 4: インデックス・パラメータの準備とコレクションの作成</h3><div class="multipleCode">
+<h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">ステップ 4: インデックス・パラメーターを準備し、コレクションを作成する。</h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up index parameters for the vector field</span>
 index_params = client.prepare_index_params()

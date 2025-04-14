@@ -96,7 +96,7 @@ title: Mistral OCR 및 Milvus를 사용한 문서 이해
 <ol>
 <li>URL을 통한 문서(PDF/이미지) 처리</li>
 <li>OCR을 사용하여 텍스트 추출</li>
-<li>Milvus에 텍스트와 벡터 임베딩 저장하기</li>
+<li>Milvus에 텍스트 및 벡터 임베딩 저장하기</li>
 <li>문서 컬렉션 전체에서 시맨틱 검색 수행</li>
 </ol>
 <hr>
@@ -118,40 +118,6 @@ title: Mistral OCR 및 Milvus를 사용한 문서 이해
     </button></h2><p>먼저 필요한 패키지를 설치해 보겠습니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install mistralai pymilvus python-dotenv</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Requirement already satisfied: mistralai in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (1.5.1)
-Requirement already satisfied: pymilvus in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (2.5.3)
-Requirement already satisfied: python-dotenv in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (1.0.1)
-Requirement already satisfied: eval-type-backport&gt;=0.2.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from mistralai) (0.2.2)
-Requirement already satisfied: httpx&gt;=0.27.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from mistralai) (0.28.1)
-Requirement already satisfied: jsonpath-python&gt;=1.0.6 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from mistralai) (1.0.6)
-Requirement already satisfied: pydantic&gt;=2.9.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from mistralai) (2.10.4)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from mistralai) (2.9.0.post0)
-Requirement already satisfied: typing-inspect&gt;=0.9.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from mistralai) (0.9.0)
-Requirement already satisfied: setuptools&gt;69 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pymilvus) (75.6.0)
-Requirement already satisfied: grpcio&lt;=1.67.1,&gt;=1.49.1 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pymilvus) (1.67.1)
-Requirement already satisfied: protobuf&gt;=3.20.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pymilvus) (5.29.2)
-Requirement already satisfied: ujson&gt;=2.0.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pymilvus) (5.10.0)
-Requirement already satisfied: pandas&gt;=1.2.4 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pymilvus) (2.2.3)
-Requirement already satisfied: milvus-lite&gt;=2.4.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pymilvus) (2.4.11)
-Requirement already satisfied: anyio in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from httpx&gt;=0.27.0-&gt;mistralai) (4.7.0)
-Requirement already satisfied: certifi in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from httpx&gt;=0.27.0-&gt;mistralai) (2024.2.2)
-Requirement already satisfied: httpcore==1.* in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from httpx&gt;=0.27.0-&gt;mistralai) (1.0.7)
-Requirement already satisfied: idna in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from httpx&gt;=0.27.0-&gt;mistralai) (3.6)
-Requirement already satisfied: h11&lt;0.15,&gt;=0.13 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from httpcore==1.*-&gt;httpx&gt;=0.27.0-&gt;mistralai) (0.14.0)
-Requirement already satisfied: tqdm in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from milvus-lite&gt;=2.4.0-&gt;pymilvus) (4.67.1)
-Requirement already satisfied: numpy&gt;=1.26.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pandas&gt;=1.2.4-&gt;pymilvus) (2.2.1)
-Requirement already satisfied: pytz&gt;=2020.1 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pandas&gt;=1.2.4-&gt;pymilvus) (2024.2)
-Requirement already satisfied: tzdata&gt;=2022.7 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pandas&gt;=1.2.4-&gt;pymilvus) (2024.2)
-Requirement already satisfied: annotated-types&gt;=0.6.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pydantic&gt;=2.9.0-&gt;mistralai) (0.7.0)
-Requirement already satisfied: pydantic-core==2.27.2 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pydantic&gt;=2.9.0-&gt;mistralai) (2.27.2)
-Requirement already satisfied: typing-extensions&gt;=4.12.2 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from pydantic&gt;=2.9.0-&gt;mistralai) (4.12.2)
-Requirement already satisfied: six&gt;=1.5 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from python-dateutil&gt;=2.8.2-&gt;mistralai) (1.17.0)
-Requirement already satisfied: mypy-extensions&gt;=0.3.0 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from typing-inspect&gt;=0.9.0-&gt;mistralai) (1.0.0)
-Requirement already satisfied: sniffio&gt;=1.1 in /Users/stephen/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from anyio-&gt;httpx&gt;=0.27.0-&gt;mistralai) (1.3.1)
-
-[1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m A new release of pip is available: [0m[31;49m24.0[0m[39;49m -&gt; [0m[32;49m25.0.1[0m
-[1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m To update, run: [0m[32;49mpip install --upgrade pip[0m
-</code></pre>
 <h2 id="Environment-Setup" class="common-anchor-header">환경 설정<button data-href="#Environment-Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -690,4 +656,4 @@ Content: | Model | Answer |
 <li>Milvus에 텍스트와 벡터 모두 저장</li>
 <li>처리된 모든 문서에서 시맨틱 검색 수행</li>
 </ol>
-<p>이 접근 방식은 단순한 키워드 매칭을 넘어서는 강력한 문서 이해 기능을 지원하여 사용자가 정확한 텍스트 매칭이 아닌 의미를 기반으로 정보를 찾을 수 있도록 합니다.</p>
+<p>이 접근 방식은 단순한 키워드 매칭을 넘어서는 강력한 문서 이해 기능을 지원하여 사용자가 정확한 텍스트 매칭이 아닌 의미를 기반으로 정보를 찾을 수 있게 해줍니다.</p>
