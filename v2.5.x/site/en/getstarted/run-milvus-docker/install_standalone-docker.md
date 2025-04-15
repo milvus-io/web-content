@@ -31,6 +31,8 @@ $ bash standalone_embed.sh start
 
 <div class="alert note">
 
+If you want to use [Backup](https://milvus.io/docs/milvus_backup_overview.md) in standalone deployment mode, it is recommended to use the [Docker Compose](https://milvus.io/docs/install_standalone-docker-compose.md) deployment method.
+
 If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we'll provide you with the necessary support.
 
 </div>
