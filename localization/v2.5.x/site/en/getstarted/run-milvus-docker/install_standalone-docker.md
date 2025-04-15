@@ -63,6 +63,7 @@ title: Run Milvus in Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<p>If you want to use <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> in standalone deployment mode, it is recommended to use the <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a> deployment method.</p>
 <p>If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we’ll provide you with the necessary support.</p>
 </div>
 <p>After running the installation script:</p>
