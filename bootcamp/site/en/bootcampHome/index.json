@@ -46,7 +46,7 @@
         "title": "Multimodal RAG",
         "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb",
         "desc": "Demonstrate a multimodal RAG system using Milvus, a visualized BGE model, and GPT-4o to perform image retrieval based on text instructions and image queries.",
-        "liveDemo": "https://multimodal-demo.milvus.io/"
+        "liveDemo": "https://demos.milvus.io/multimodal-image-search/"
       },
 
       {
