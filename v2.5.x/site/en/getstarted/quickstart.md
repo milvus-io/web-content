@@ -297,4 +297,6 @@ Milvus Lite is great for getting started with a local python program. If you hav
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 ```
 
+To migrate data from Milvus Lite to Milvus deployed on Docker or Kubernetes, refer to [Migrating data from Milvus Lite](https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite).
+
 Milvus provides REST and gRPC API, with client libraries in languages such as [Python](https://milvus.io/docs/install-pymilvus.md), [Java](https://milvus.io/docs/install-java.md), [Go](https://milvus.io/docs/install-go.md), C# and [Node.js](https://milvus.io/docs/install-node.md).
