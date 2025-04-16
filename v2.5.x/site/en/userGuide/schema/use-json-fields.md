@@ -40,8 +40,6 @@ A [JSON](https://en.wikipedia.org/wiki/JSON) field is a scalar field that stores
 
     - `'a'b'` and `"a"b"` are considered invalid.
 
-- **JSON Indexing**: When indexing a JSON field, you can specify one or more paths in the JSON field to accelerate filtering. Each additional path increases indexing overhead, so plan your indexing strategy carefully. For more considerations on indexing a JSON field, refer to [Considerations on JSON indexing](use-json-fields.md#share-N2tOdsWXEo0VgsxmzRZcSa50n0e).
-
 ## Add JSON field
 
 To add this JSON field `metadata` to your collection schema, use `DataType.JSON`. The example below defines a JSON field `metadata` that allows null values:
