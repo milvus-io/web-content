@@ -1,7 +1,8 @@
 ---
 id: milvus_and_mcp.md
 summary: "This tutorial walks you through setting up an MCP server for Milvus, allowing AI applications to perform vector searches, manage collections, and retrieve data using natural language commands—without writing custom database queries."
-title: Integrate Milvus with MindsDB
+title: > 
+ MCP + Milvus: Connecting AI with Vector Databases
 ---
 
 # MCP + Milvus: Connecting AI with Vector Databases
