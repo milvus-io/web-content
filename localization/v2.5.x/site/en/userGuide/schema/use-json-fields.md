@@ -60,7 +60,6 @@ summary: >-
 <li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, and <code translate="no">&quot;a\\&quot;b&quot;</code> are stored exactly as they are.</p></li>
 <li><p><code translate="no">'a'b'</code> and <code translate="no">&quot;a&quot;b&quot;</code> are considered invalid.</p></li>
 </ul></li>
-<li><p><strong>JSON Indexing</strong>: When indexing a JSON field, you can specify one or more paths in the JSON field to accelerate filtering. Each additional path increases indexing overhead, so plan your indexing strategy carefully. For more considerations on indexing a JSON field, refer to <a href="/docs/use-json-fields.md#share-N2tOdsWXEo0VgsxmzRZcSa50n0e">Considerations on JSON indexing</a>.</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">Add JSON field<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
