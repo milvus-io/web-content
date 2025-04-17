@@ -280,22 +280,22 @@ client = MilvusClient(
 
 client.grant_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;Search&quot;</span>
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>
+    privilege=<span class="hljs-string">&quot;Search&quot;</span>,
+    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
     db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
 )
     
 client.grant_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>
+    privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>,
+    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
     db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
 )
 
 client.grant_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>
-    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>
+    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>,
     db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -474,22 +474,22 @@ client = MilvusClient(
 
 client.revoke_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;Search&quot;</span>
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>
+    privilege=<span class="hljs-string">&quot;Search&quot;</span>,
+    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
     db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
 )
     
 client.revoke_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>
+    privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>,
+    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
     db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
 )
 
 client.revoke_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>
-    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>
+    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>,
     db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
