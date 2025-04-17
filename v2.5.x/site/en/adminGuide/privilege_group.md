@@ -560,7 +560,7 @@ The following example demonstrates how to create a privilege group named `privil
 
 ```python
 from pymilvus import MilvusClient​
-client.create_privileg_group(group_name='privilege_group_1'）​
+client.create_privilege_group(group_name='privilege_group_1'）​
 
 ```
 

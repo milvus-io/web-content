@@ -475,22 +475,22 @@ client = MilvusClient(
 
 client.grant_privilege_v2(
     role_name="role_a",
-    privilege="Search"
-    collection_name='collection_01'
+    privilege="Search",
+    collection_name='collection_01',
     db_name='default',
 )
     
 client.grant_privilege_v2(
     role_name="role_a",
-    privilege="privilege_group_1"
-    collection_name='collection_01'
+    privilege="privilege_group_1",
+    collection_name='collection_01',
     db_name='default',
 )
 
 client.grant_privilege_v2(
     role_name="role_a",
-    privilege="ClusterReadOnly"
-    collection_name='*'
+    privilege="ClusterReadOnly",
+    collection_name='*',
     db_name='*',
 )
 ```
@@ -670,22 +670,22 @@ client = MilvusClient(
 
 client.revoke_privilege_v2(
     role_name="role_a",
-    privilege="Search"
-    collection_name='collection_01'
+    privilege="Search",
+    collection_name='collection_01',
     db_name='default',
 )
     
 client.revoke_privilege_v2(
     role_name="role_a",
-    privilege="privilege_group_1"
-    collection_name='collection_01'
+    privilege="privilege_group_1",
+    collection_name='collection_01',
     db_name='default',
 )
 
 client.revoke_privilege_v2(
     role_name="role_a",
-    privilege="ClusterReadOnly"
-    collection_name='*'
+    privilege="ClusterReadOnly",
+    collection_name='*',
     db_name='*',
 )
 ```
