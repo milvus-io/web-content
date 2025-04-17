@@ -1,8 +1,9 @@
 ---
 id: drop-collection.md
-title: 放弃收藏
+title: 删除 Collection
 ---
-<h1 id="Drop-Collection​" class="common-anchor-header">放弃收藏<button data-href="#Drop-Collection​" class="anchor-icon" translate="no">
+
+<h1 id="Drop-Collection​" class="common-anchor-header">删除 Collection<button data-href="#Drop-Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -48,6 +49,7 @@ client.<span class="hljs-title function_">drop_collection</span>(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.DropCollectionReq;​
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;​
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;​
