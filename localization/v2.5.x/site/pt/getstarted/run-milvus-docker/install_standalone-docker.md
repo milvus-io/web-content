@@ -56,18 +56,19 @@ title: Executar o Milvus no Docker (Linux)
         ></path>
       </svg>
     </button></h2><p>O Milvus fornece um script de instalação para o instalar como um contentor Docker. O script está disponível no <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">repositório do Milvus</a>. Para instalar o Milvus no Docker, basta executar</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the installation script</span>
-$ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
-
-<span class="hljs-comment"># Start the Docker container</span>
-$ bash standalone_embed.sh start
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Start the Docker container</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se tiver algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema, e iremos fornecer-lhe o apoio necessário.</p>
+<p>Se pretender utilizar <a href="https://milvus.io/docs/milvus_backup_overview.md">o Backup</a> no modo de implementação autónomo, recomenda-se a utilização do método de implementação <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
+<p>Se tiver algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema e fornecer-lhe-emos o apoio necessário.</p>
 </div>
 <p>Depois de executar o script de instalação:</p>
 <ul>
-<li>Um contentor docker chamado milvus foi iniciado na porta <strong>19530</strong>.</li>
+<li>Um contêiner docker chamado milvus foi iniciado na porta <strong>19530</strong>.</li>
 <li>Um etcd incorporado é instalado juntamente com o Milvus no mesmo contentor e funciona no porto <strong>2379</strong>. Seu arquivo de configuração é mapeado para <strong>embedEtcd.yaml</strong> na pasta atual.</li>
 <li>Para alterar a configuração predefinida do Milvus, adicione as suas definições ao ficheiro <strong>user.yaml</strong> na pasta atual e, em seguida, reinicie o serviço.</li>
 <li>O volume de dados do Milvus é mapeado para <strong>volumes/milvus</strong> na pasta atual.</li>
@@ -89,15 +90,15 @@ $ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h2><p>Pode parar e eliminar este contentor da seguinte forma</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
-$ bash standalone_embed.sh stop
-
-<span class="hljs-comment"># Delete Milvus data</span>
-$ bash standalone_embed.sh delete
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh stop</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Delete Milvus data</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh delete</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Pode atualizar a versão mais recente do Milvus da seguinte forma</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># upgrade Milvus</span>
-$ bash standalone_embed.sh upgrade
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade Milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">O que se segue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -137,6 +138,6 @@ $ bash standalone_embed.sh upgrade
 <li><p>Explore <a href="/docs/pt/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a observabilidade e gestão do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para backups de dados do Milvus.</p></li>
 <li><p>Explore o <a href="/docs/pt/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e actualizações de configuração dinâmica.</p></li>
-<li><p>Explore o <a href="https://milvus.io/docs/attu.md">Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
+<li><p>Explore <a href="https://milvus.io/docs/attu.md">o Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
 <li><p><a href="/docs/pt/monitor.md">Monitore o Milvus com o Prometheus</a>.</p></li>
 </ul>

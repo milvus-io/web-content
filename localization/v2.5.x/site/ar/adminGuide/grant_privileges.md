@@ -266,64 +266,64 @@ title: منح امتياز أو مجموعة امتيازات للأدوار
 <p>يوضح المثال التالي كيفية منح الامتياز <code translate="no">PrivilegeSearch</code> على <code translate="no">collection_01</code> ضمن قاعدة البيانات الافتراضية بالإضافة إلى مجموعة امتيازات باسم <code translate="no">privilege_group_1</code> للدور <code translate="no">role_a</code>.</p>
 <div class="multipleCode">
  <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#go">جو جو</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = <span class="hljs-title class_">MilvusClient</span>(
+client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-client.<span class="hljs-title function_">grant_privilege_v2</span>(
+client.grant_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;Search&quot;</span>
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>
+    privilege=<span class="hljs-string">&quot;Search&quot;</span>,
+    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
     db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
 )
     
-client.<span class="hljs-title function_">grant_privilege_v2</span>(
+client.grant_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>
+    privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>,
+    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
     db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
 )
 
-client.<span class="hljs-title function_">grant_privilege_v2</span>(
+client.grant_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>
-    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>
+    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>,
     db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">rbac</span>.<span class="hljs-property">request</span>.<span class="hljs-property">GrantPrivilegeReqV2</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.GrantPrivilegeReqV2
 
-client.<span class="hljs-title function_">grantPrivilegeV2</span>(<span class="hljs-title class_">GrantPrivilegeReqV2</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">roleName</span>(<span class="hljs-string">&quot;role_a&quot;</span>)
-        .<span class="hljs-title function_">privilege</span>(<span class="hljs-string">&quot;Search&quot;</span>)
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;collection_01&quot;</span>)
-        .<span class="hljs-title function_">dbName</span>(<span class="hljs-string">&quot;default&quot;</span>)
-        .<span class="hljs-title function_">build</span>());
+client.grantPrivilegeV2(GrantPrivilegeReqV2.builder()
+        .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
+        .privilege(<span class="hljs-string">&quot;Search&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;collection_01&quot;</span>)
+        .dbName(<span class="hljs-string">&quot;default&quot;</span>)
+        .build());
 
-client.<span class="hljs-title function_">grantPrivilegeV2</span>(<span class="hljs-title class_">GrantPrivilegeReqV2</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">roleName</span>(<span class="hljs-string">&quot;role_a&quot;</span>)
-        .<span class="hljs-title function_">privilege</span>(<span class="hljs-string">&quot;privilege_group_1&quot;</span>)
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;collection_01&quot;</span>)
-        .<span class="hljs-title function_">dbName</span>(<span class="hljs-string">&quot;default&quot;</span>)
-        .<span class="hljs-title function_">build</span>());
+client.grantPrivilegeV2(GrantPrivilegeReqV2.builder()
+        .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
+        .privilege(<span class="hljs-string">&quot;privilege_group_1&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;collection_01&quot;</span>)
+        .dbName(<span class="hljs-string">&quot;default&quot;</span>)
+        .build());
 
-client.<span class="hljs-title function_">grantPrivilegeV2</span>(<span class="hljs-title class_">GrantPrivilegeReqV2</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">roleName</span>(<span class="hljs-string">&quot;role_a&quot;</span>)
-        .<span class="hljs-title function_">privilege</span>(<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>)
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;*&quot;</span>)
-        .<span class="hljs-title function_">dbName</span>(<span class="hljs-string">&quot;*&quot;</span>)
-        .<span class="hljs-title function_">build</span>());
+client.grantPrivilegeV2(GrantPrivilegeReqV2.builder()
+        .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
+        .privilege(<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;*&quot;</span>)
+        .dbName(<span class="hljs-string">&quot;*&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus-sdk-go/v2/client&quot;</span>
 
-client.<span class="hljs-title class_">GrantV2</span>(context.<span class="hljs-title class_">Background</span>(), <span class="hljs-string">&quot;role_a&quot;</span>, <span class="hljs-string">&quot;collection_01&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>, entity.<span class="hljs-title class_">WithOperatePrivilegeDatabase</span>(<span class="hljs-string">&quot;default&quot;</span>))
+client.GrantV2(context.Background(), <span class="hljs-string">&quot;role_a&quot;</span>, <span class="hljs-string">&quot;collection_01&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>, entity.WithOperatePrivilegeDatabase(<span class="hljs-string">&quot;default&quot;</span>))
 
-client.<span class="hljs-title class_">GrantV2</span>(context.<span class="hljs-title class_">Background</span>(), <span class="hljs-string">&quot;role_a&quot;</span>, <span class="hljs-string">&quot;collection_01&quot;</span>, <span class="hljs-string">&quot;privilege_group_1&quot;</span>, entity.<span class="hljs-title class_">WithOperatePrivilegeDatabase</span>(<span class="hljs-string">&quot;default&quot;</span>))
+client.GrantV2(context.Background(), <span class="hljs-string">&quot;role_a&quot;</span>, <span class="hljs-string">&quot;collection_01&quot;</span>, <span class="hljs-string">&quot;privilege_group_1&quot;</span>, entity.WithOperatePrivilegeDatabase(<span class="hljs-string">&quot;default&quot;</span>))
 
-client.<span class="hljs-title class_">GrantV2</span>(context.<span class="hljs-title class_">Background</span>(), <span class="hljs-string">&quot;role_a&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>, <span class="hljs-string">&quot;ClusterReadOnly&quot;</span>, entity.<span class="hljs-title class_">WithOperatePrivilegeDatabase</span>(<span class="hljs-string">&quot;*&quot;</span>))
+client.GrantV2(context.Background(), <span class="hljs-string">&quot;role_a&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>, <span class="hljs-string">&quot;ClusterReadOnly&quot;</span>, entity.WithOperatePrivilegeDatabase(<span class="hljs-string">&quot;*&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)
 
@@ -339,37 +339,37 @@ client.<span class="hljs-title class_">GrantV2</span>(context.<span class="hljs-
  });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/grant_privilege_v2&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/roles/grant_privilege_v2&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+-d &#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;Search&quot;,
     &quot;collectionName&quot;: &quot;collection_01&quot;,
     &quot;dbName&quot;:&quot;default&quot;
-}&#x27;</span>
+}&#x27;
 
 curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/grant_privilege_v2&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/roles/grant_privilege_v2&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+-d &#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;privilege_group_1&quot;,
     &quot;collectionName&quot;: &quot;collection_01&quot;,
     &quot;dbName&quot;:&quot;default&quot;
-}&#x27;</span>
+}&#x27;
 
 curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/grant_privilege_v2&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/roles/grant_privilege_v2&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+-d &#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;ClusterReadOnly&quot;,
     &quot;collectionName&quot;: &quot;*&quot;,
     &quot;dbName&quot;:&quot;*&quot;
-}&#x27;</span>
+}&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Describe-a-role" class="common-anchor-header">وصف الدور<button data-href="#Describe-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -386,12 +386,12 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوضح المثال التالي كيفية عرض الامتيازات الممنوحة للدور role_a باستخدام طريقة وصف_الدور.</p>
+    </button></h2><p>يوضّح المثال التالي كيفية عرض الامتيازات الممنوحة للدور role_a باستخدام طريقة وصف_الدور.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client.<span class="hljs-title function_">describe_role</span>(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
+client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.response.DescribeRoleResp;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DescribeRoleReq
@@ -404,34 +404,34 @@ List&lt;DescribeRoleResp.GrantInfo&gt; infos = resp.getGrantInfos();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus-sdk-go/v2/client&quot;</span>
 
-client.<span class="hljs-title class_">ListRoles</span>(context.<span class="hljs-title class_">Background</span>())
+client.ListRoles(context.Background())
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)
 
 <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">describeRole</span>({<span class="hljs-attr">roleName</span>: <span class="hljs-string">&#x27;role_a&#x27;</span>});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/describe&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/roles/describe&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+-d &#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;
-}&#x27;</span>
+}&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>فيما يلي مثال على الإخراج.</p>
-<pre><code translate="no" class="language-json">{
-     <span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;role_a&quot;</span>,
-     <span class="hljs-string">&quot;privileges&quot;</span>: [
-         {
-             <span class="hljs-string">&quot;collection_name&quot;</span>: <span class="hljs-string">&quot;collection_01&quot;</span>,
-             <span class="hljs-string">&quot;db_name&quot;</span>: <span class="hljs-string">&quot;default&quot;</span>,
-             <span class="hljs-string">&quot;role_name&quot;</span>: <span class="hljs-string">&quot;role_a&quot;</span>,
-             <span class="hljs-string">&quot;privilege&quot;</span>: <span class="hljs-string">&quot;Search&quot;</span>,
-             <span class="hljs-string">&quot;grantor_name&quot;</span>: <span class="hljs-string">&quot;root&quot;</span>
-         },
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+     <span class="hljs-attr">&quot;role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;role_a&quot;</span><span class="hljs-punctuation">,</span>
+     <span class="hljs-attr">&quot;privileges&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+         <span class="hljs-punctuation">{</span>
+             <span class="hljs-attr">&quot;collection_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;collection_01&quot;</span><span class="hljs-punctuation">,</span>
+             <span class="hljs-attr">&quot;db_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">,</span>
+             <span class="hljs-attr">&quot;role_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;role_a&quot;</span><span class="hljs-punctuation">,</span>
+             <span class="hljs-attr">&quot;privilege&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Search&quot;</span><span class="hljs-punctuation">,</span>
+             <span class="hljs-attr">&quot;grantor_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;root&quot;</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
          <span class="hljs-string">&quot;privilege_group_1&quot;</span>
-     ]
-}
+     <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Revoke-a-privilege-or-a-privilege-group-from-a-role" class="common-anchor-header">إبطال امتياز أو مجموعة امتيازات من دور ما<button data-href="#Revoke-a-privilege-or-a-privilege-group-from-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -451,95 +451,95 @@ client.<span class="hljs-title class_">ListRoles</span>(context.<span class="hlj
     </button></h2><p>يوضح المثال التالي كيفية إبطال الامتياز <code translate="no">PrivilegeSearch</code> على <code translate="no">collection_01</code> ضمن قاعدة البيانات الافتراضية بالإضافة إلى مجموعة الامتيازات <code translate="no">privilege_group_1</code> التي تم منحها للدور <code translate="no">role_a</code>.</p>
 <div class="multipleCode">
  <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#shell">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = <span class="hljs-title class_">MilvusClient</span>(
+client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-client.<span class="hljs-title function_">revoke_privilege_v2</span>(
+client.revoke_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;Search&quot;</span>
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>
+    privilege=<span class="hljs-string">&quot;Search&quot;</span>,
+    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
     db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
 )
     
-client.<span class="hljs-title function_">revoke_privilege_v2</span>(
+client.revoke_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>
-    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>
+    privilege=<span class="hljs-string">&quot;privilege_group_1&quot;</span>,
+    collection_name=<span class="hljs-string">&#x27;collection_01&#x27;</span>,
     db_name=<span class="hljs-string">&#x27;default&#x27;</span>,
 )
 
-client.<span class="hljs-title function_">revoke_privilege_v2</span>(
+client.revoke_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
-    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>
-    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>
+    privilege=<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+    collection_name=<span class="hljs-string">&#x27;*&#x27;</span>,
     db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">rbac</span>.<span class="hljs-property">request</span>.<span class="hljs-property">RevokePrivilegeReqV2</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.RevokePrivilegeReqV2
 
-client.<span class="hljs-title function_">revokePrivilegeV2</span>(<span class="hljs-title class_">RevokePrivilegeReqV2</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">roleName</span>(<span class="hljs-string">&quot;role_a&quot;</span>)
-        .<span class="hljs-title function_">privilege</span>(<span class="hljs-string">&quot;Search&quot;</span>)
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;collection_01&quot;</span>)
-        .<span class="hljs-title function_">dbName</span>(<span class="hljs-string">&quot;default&quot;</span>)
-        .<span class="hljs-title function_">build</span>());
+client.revokePrivilegeV2(RevokePrivilegeReqV2.builder()
+        .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
+        .privilege(<span class="hljs-string">&quot;Search&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;collection_01&quot;</span>)
+        .dbName(<span class="hljs-string">&quot;default&quot;</span>)
+        .build());
 
-client.<span class="hljs-title function_">revokePrivilegeV2</span>(<span class="hljs-title class_">RevokePrivilegeReqV2</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">roleName</span>(<span class="hljs-string">&quot;role_a&quot;</span>)
-        .<span class="hljs-title function_">privilege</span>(<span class="hljs-string">&quot;privilege_group_1&quot;</span>)
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;collection_01&quot;</span>)
-        .<span class="hljs-title function_">dbName</span>(<span class="hljs-string">&quot;default&quot;</span>)
-        .<span class="hljs-title function_">build</span>());
+client.revokePrivilegeV2(RevokePrivilegeReqV2.builder()
+        .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
+        .privilege(<span class="hljs-string">&quot;privilege_group_1&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;collection_01&quot;</span>)
+        .dbName(<span class="hljs-string">&quot;default&quot;</span>)
+        .build());
 
-client.<span class="hljs-title function_">revokePrivilegeV2</span>(<span class="hljs-title class_">RevokePrivilegeReqV2</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">roleName</span>(<span class="hljs-string">&quot;role_a&quot;</span>)
-        .<span class="hljs-title function_">privilege</span>(<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>)
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;*&quot;</span>)
-        .<span class="hljs-title function_">dbName</span>(<span class="hljs-string">&quot;*&quot;</span>)
-        .<span class="hljs-title function_">build</span>());
+client.revokePrivilegeV2(RevokePrivilegeReqV2.builder()
+        .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
+        .privilege(<span class="hljs-string">&quot;ClusterReadOnly&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;*&quot;</span>)
+        .dbName(<span class="hljs-string">&quot;*&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus-sdk-go/v2/client&quot;</span>
 
-client.<span class="hljs-title class_">RevokeV2</span>(context.<span class="hljs-title class_">Background</span>(), <span class="hljs-string">&quot;role_a&quot;</span>, <span class="hljs-string">&quot;collection_01&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>, entity.<span class="hljs-title class_">WithOperatePrivilegeDatabase</span>(<span class="hljs-string">&quot;default&quot;</span>))
+client.RevokeV2(context.Background(), <span class="hljs-string">&quot;role_a&quot;</span>, <span class="hljs-string">&quot;collection_01&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>, entity.WithOperatePrivilegeDatabase(<span class="hljs-string">&quot;default&quot;</span>))
 
-client.<span class="hljs-title class_">RevokeV2</span>(context.<span class="hljs-title class_">Background</span>(), <span class="hljs-string">&quot;role_a&quot;</span>, <span class="hljs-string">&quot;collection_01&quot;</span>, <span class="hljs-string">&quot;privielge_group_1&quot;</span>, entity.<span class="hljs-title class_">WithOperatePrivilegeDatabase</span>(<span class="hljs-string">&quot;default&quot;</span>))
+client.RevokeV2(context.Background(), <span class="hljs-string">&quot;role_a&quot;</span>, <span class="hljs-string">&quot;collection_01&quot;</span>, <span class="hljs-string">&quot;privielge_group_1&quot;</span>, entity.WithOperatePrivilegeDatabase(<span class="hljs-string">&quot;default&quot;</span>))
 
-client.<span class="hljs-title class_">RevokeV2</span>(context.<span class="hljs-title class_">Background</span>(), <span class="hljs-string">&quot;role_a&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>, <span class="hljs-string">&quot;ClusterReadOnly&quot;</span>, entity.<span class="hljs-title class_">WithOperatePrivilegeDatabase</span>(<span class="hljs-string">&quot;*&quot;</span>))
+client.RevokeV2(context.Background(), <span class="hljs-string">&quot;role_a&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>, <span class="hljs-string">&quot;ClusterReadOnly&quot;</span>, entity.WithOperatePrivilegeDatabase(<span class="hljs-string">&quot;*&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/revoke_privilege_v2&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/roles/revoke_privilege_v2&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+-d &#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;Search&quot;,
     &quot;collectionName&quot;: &quot;collection_01&quot;,
     &quot;dbName&quot;:&quot;default&quot;
-}&#x27;</span>
+}&#x27;
 
 curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/revoke_privilege_v2&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/roles/revoke_privilege_v2&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+-d &#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;Search&quot;,
     &quot;collectionName&quot;: &quot;collection_01&quot;,
     &quot;dbName&quot;:&quot;default&quot;
-}&#x27;</span>
+}&#x27;
 
 curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/revoke_privilege_v2&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
--d <span class="hljs-string">&#x27;{
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/roles/revoke_privilege_v2&quot; \
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \
+--header &quot;Content-Type: application/json&quot; \
+-d &#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
     &quot;privilege&quot;: &quot;ClusterReadOnly&quot;,
     &quot;collectionName&quot;: &quot;*&quot;,
     &quot;dbName&quot;:&quot;*&quot;
-}&#x27;</span>
+}&#x27;
 <button class="copy-code-btn"></button></code></pre>

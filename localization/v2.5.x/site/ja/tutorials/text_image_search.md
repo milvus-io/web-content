@@ -5,6 +5,12 @@ summary: >-
   Pretraining)モデルとMilvusを使って、テキストベースの画像検索を実装する方法を探ります。CLIPで画像埋め込みを生成し、Milvusに保存し、効率的な類似検索を行います。
 title: Milvusによるテキスト画像検索
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Text-to-Image-Search-with-Milvus" class="common-anchor-header">Milvusによるテキスト画像検索<button data-href="#Text-to-Image-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +53,7 @@ title: Milvusによるテキスト画像検索
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install git+https://github.com/openai/CLIP.git</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colabを使用している場合、<strong>ランタイムを再起動</strong>する必要があるかもしれません (インターフェースの上部にある "Runtime "メニューに移動し、ドロップダウンメニューから "Restart session "を選択してください)。</p>
+<p>Google Colabを使用している場合、<strong>ランタイムを再起動</strong>する必要があるかもしれません(インターフェースの上部にある "Runtime "メニューに移動し、ドロップダウンメニューから "Restart session "を選択してください)。</p>
 </div>
 <h3 id="Download-example-data" class="common-anchor-header">サンプルデータのダウンロード</h3><p><a href="https://www.image-net.org">ImageNet</a>データセットのサブセット（100クラス、各クラス10画像）をサンプル画像として使います。以下のコマンドでサンプルデータをダウンロードし、ローカルフォルダ<code translate="no">./images_folder</code> に展開します：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip</span>

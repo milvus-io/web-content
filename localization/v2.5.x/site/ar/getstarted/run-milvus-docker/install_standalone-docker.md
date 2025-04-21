@@ -56,18 +56,19 @@ title: تشغيل Milvus في Docker (لينكس)
         ></path>
       </svg>
     </button></h2><p>يوفر Milvus نصاً برمجياً للتثبيت لتثبيته كحاوية دوكر. يتوفر البرنامج النصي في <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">مستودع ميلفوس</a>. لتثبيت Milvus في Docker، ما عليك سوى تشغيل</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the installation script</span>
-$ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
-
-<span class="hljs-comment"># Start the Docker container</span>
-$ bash standalone_embed.sh start
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Start the Docker container</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>إذا واجهت أي مشاكل في سحب الصورة، اتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل عن المشكلة، وسنقدم لك الدعم اللازم.</p>
+<p>إذا كنت ترغب في استخدام <a href="https://milvus.io/docs/milvus_backup_overview.md">النسخ الاحتياطي</a> في وضع النشر المستقل، فمن المستحسن استخدام طريقة نشر <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
+<p>إذا واجهتك أي مشاكل في سحب الصورة، فاتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل عن المشكلة، وسنقدم لك الدعم اللازم.</p>
 </div>
 <p>بعد تشغيل البرنامج النصي للتثبيت:</p>
 <ul>
-<li>تم تشغيل حاوية دوكر باسم milvus على المنفذ <strong>19530</strong>.</li>
+<li>تم بدء تشغيل حاوية docker باسم milvus على المنفذ <strong>19530</strong>.</li>
 <li>تم تثبيت برنامج تضمين إلخd مع ميلفوس في نفس الحاوية ويعمل على المنفذ <strong>2379</strong>. يتم تعيين ملف التكوين الخاص به إلى <strong>embedEtcd.yaml</strong> في المجلد الحالي.</li>
 <li>لتغيير تكوين Milvus الافتراضي، أضف إعداداتك إلى ملف <strong>user.yaml</strong> في المجلد الحالي ثم أعد تشغيل الخدمة.</li>
 <li>يتم تعيين وحدة تخزين بيانات Milvus إلى <strong>وحدات التخزين/ملف Milvus</strong> في المجلد الحالي.</li>
@@ -89,15 +90,15 @@ $ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h2><p>يمكنك إيقاف وحذف هذه الحاوية كما يلي</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
-$ bash standalone_embed.sh stop
-
-<span class="hljs-comment"># Delete Milvus data</span>
-$ bash standalone_embed.sh delete
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh stop</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Delete Milvus data</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh delete</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك ترقية أحدث إصدار من Milvus على النحو التالي</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># upgrade Milvus</span>
-$ bash standalone_embed.sh upgrade
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade Milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">ما التالي<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

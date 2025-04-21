@@ -57,7 +57,6 @@ summary: JSON 字段是一种标量字段，与向量嵌入一起以键值对的
 <li><p><code translate="no">'a&quot;b'</code>,<code translate="no">&quot;a'b&quot;</code>,<code translate="no">'a\\'b'</code>, 和<code translate="no">&quot;a\\&quot;b&quot;</code> 会按原样存储。</p></li>
 <li><p><code translate="no">'a'b'</code> 和 被视为无效。<code translate="no">&quot;a&quot;b&quot;</code> </p></li>
 </ul></li>
-<li><p><strong>JSON 索引</strong>：为 JSON 字段编制索引时，可以在 JSON 字段中指定一个或多个路径，以加快过滤速度。每增加一条路径都会增加索引开销，因此请仔细规划索引策略。有关 JSON 字段索引的更多注意事项，请参阅<a href="/docs/zh/use-json-fields.md#share-N2tOdsWXEo0VgsxmzRZcSa50n0e">JSON 索引注意事项</a>。</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">添加 JSON 字段<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,7 +73,7 @@ summary: JSON 字段是一种标量字段，与向量嵌入一起以键值对的
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要将此 JSON 字段<code translate="no">metadata</code> 添加到 Collections Schema 中，请使用<code translate="no">DataType.JSON</code> 。下面的示例定义了一个允许空值的 JSON 字段<code translate="no">metadata</code> ：</p>
+    </button></h2><p>要将此 JSON 字段<code translate="no">metadata</code> 添加到您的 Collections Schema 中，请使用<code translate="no">DataType.JSON</code> 。下面的示例定义了一个允许空值的 JSON 字段<code translate="no">metadata</code> ：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
@@ -372,7 +371,7 @@ curl --request POST \
 <ul>
 <li><p><strong>过滤逻辑</strong>：</p>
 <ul>
-<li><p>如果<strong>创建了一个双类型索引</strong>（<code translate="no">json_cast_type=&quot;double&quot;</code> ），则只有数字类型的过滤条件才能使用该索引。如果过滤器将双索引与非数值型条件进行比较，Milvus 就会退回到蛮力搜索。</p></li>
+<li><p>如果<strong>创建了一个双类型索引</strong>（<code translate="no">json_cast_type=&quot;double&quot;</code> ），那么只有数字类型的过滤条件才能使用该索引。如果过滤器将双索引与非数值型条件进行比较，Milvus 就会退回到蛮力搜索。</p></li>
 <li><p>如果<strong>创建了 varchar 类型的索引</strong>(<code translate="no">json_cast_type=&quot;varchar&quot;</code>)，则只有字符串类型的过滤条件才能使用该索引。否则，Milvus 将退回蛮力搜索。</p></li>
 <li><p><strong>布尔</strong>索引的行为与 varchar 类型类似。</p></li>
 </ul></li>
@@ -382,7 +381,7 @@ curl --request POST \
 </ul></li>
 <li><p><strong>数值精度</strong>：</p>
 <ul>
-<li>在内部，Milvus 将所有数值字段索引为双倍。如果数值超过 ，就会失去精度，对超出范围的数值进行的查询可能无法完全匹配。</li>
+<li>在内部，Milvus 将所有数值字段索引为双倍。如果数值超过 ，就会失去精度，对超出范围的数值的查询可能无法完全匹配。</li>
 </ul></li>
 <li><p><strong>数据完整性</strong>：</p>
 <ul>

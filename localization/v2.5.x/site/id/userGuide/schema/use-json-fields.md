@@ -54,13 +54,12 @@ summary: >-
 <li><p><strong>Kamus Bersarang</strong>: Setiap kamus bersarang dalam nilai bidang JSON diperlakukan sebagai string biasa untuk penyimpanan.</p></li>
 <li><p><strong>Nilai Default</strong>: Bidang JSON tidak mendukung nilai default. Namun, Anda dapat menyetel atribut <code translate="no">nullable</code> ke <code translate="no">True</code> untuk mengizinkan nilai null. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
 <li><p><strong>Pencocokan Jenis</strong>: Jika nilai kunci bidang JSON adalah bilangan bulat atau float, nilai tersebut hanya dapat dibandingkan (melalui filter ekspresi) dengan kunci numerik lain dengan jenis yang sama.</p></li>
-<li><p><strong>Penamaan</strong>: Ketika menamai kunci JSON, disarankan untuk hanya menggunakan huruf, angka, dan garis bawah. Menggunakan karakter lain dapat menyebabkan masalah saat melakukan penyaringan atau pencarian.</p></li>
+<li><p><strong>Penamaan</strong>: Ketika menamai kunci JSON, disarankan untuk hanya menggunakan huruf, angka, dan garis bawah. Menggunakan karakter lain dapat menyebabkan masalah ketika melakukan penyaringan atau pencarian.</p></li>
 <li><p><strong>Penanganan String</strong>: Milvus menyimpan nilai string dalam bidang JSON seperti yang dimasukkan, tanpa konversi semantik. Sebagai contoh</p>
 <ul>
 <li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, dan <code translate="no">&quot;a\\&quot;b&quot;</code> disimpan persis seperti apa adanya.</p></li>
 <li><p><code translate="no">'a'b'</code> dan <code translate="no">&quot;a&quot;b&quot;</code> dianggap tidak valid.</p></li>
 </ul></li>
-<li><p><strong>Pengindeksan JSON</strong>: Saat mengindeks bidang JSON, Anda dapat menentukan satu atau beberapa jalur di bidang JSON untuk mempercepat pemfilteran. Setiap jalur tambahan akan meningkatkan biaya pengindeksan, jadi rencanakan strategi pengindeksan Anda dengan hati-hati. Untuk pertimbangan lebih lanjut tentang pengindeksan bidang JSON, lihat <a href="/docs/id/use-json-fields.md#share-N2tOdsWXEo0VgsxmzRZcSa50n0e">Pertimbangan pengindeksan JSON</a>.</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">Menambahkan bidang JSON<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -362,7 +361,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Menentukan jalur JSON mana yang akan diindeks. Anda dapat menargetkan kunci bersarang, posisi larik, atau keduanya (misalnya, <code translate="no">metadata["product_info"]["category"]</code> atau <code translate="no">metadata["tags"][0]</code>). Jika jalurnya tidak ada atau elemen lariknya tidak ada untuk baris tertentu, maka baris tersebut akan dilewati begitu saja selama pengindeksan, dan tidak ada kesalahan yang dilemparkan.</p></td>
+     <td><p>Menentukan jalur JSON mana yang akan diindeks. Anda dapat menargetkan kunci bersarang, posisi larik, atau keduanya (misalnya, <code translate="no">metadata["product_info"]["category"]</code> atau <code translate="no">metadata["tags"][0]</code>). Jika jalurnya tidak ada atau elemen lariknya tidak ada untuk baris tertentu, maka baris tersebut akan dilewati begitu saja saat pengindeksan, dan tidak ada kesalahan yang dilemparkan.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>

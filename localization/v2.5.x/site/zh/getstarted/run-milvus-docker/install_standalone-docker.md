@@ -56,14 +56,15 @@ title: 在 Docker 中运行 Milvus (Linux)
         ></path>
       </svg>
     </button></h2><p>Milvus 提供了一个安装脚本，可将其安装为 docker 容器。该脚本可在<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">Milvus 存储库中</a>找到。要在 Docker 中安装 Milvus，只需运行</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the installation script</span>
-$ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
-
-<span class="hljs-comment"># Start the Docker container</span>
-$ bash standalone_embed.sh start
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Start the Docker container</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果在拉取镜像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，并提供有关问题的详细信息，我们会为你提供必要的支持。</p>
+<p>如果你想在独立部署模式下使用<a href="https://milvus.io/docs/milvus_backup_overview.md">备份</a>，建议使用<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>部署方法。</p>
+<p>如果在拉取镜像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们并提供有关问题的详细信息，我们将为您提供必要的支持。</p>
 </div>
 <p>运行安装脚本后</p>
 <ul>
@@ -89,15 +90,15 @@ $ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h2><p>停止和删除此容器的方法如下</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
-$ bash standalone_embed.sh stop
-
-<span class="hljs-comment"># Delete Milvus data</span>
-$ bash standalone_embed.sh delete
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh stop</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Delete Milvus data</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh delete</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>你可以按以下步骤升级最新版本的 Milvus</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># upgrade Milvus</span>
-$ bash standalone_embed.sh upgrade
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade Milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

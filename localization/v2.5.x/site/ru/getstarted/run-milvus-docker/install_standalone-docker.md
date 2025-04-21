@@ -56,14 +56,15 @@ title: Запуск Milvus в Docker (Linux)
         ></path>
       </svg>
     </button></h2><p>Milvus предоставляет сценарий установки для установки в качестве контейнера docker. Сценарий доступен в <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">репозитории Milvus</a>. Чтобы установить Milvus в Docker, просто выполните команду</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the installation script</span>
-$ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
-
-<span class="hljs-comment"># Start the Docker container</span>
-$ bash standalone_embed.sh start
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Start the Docker container</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Если у вас возникнут проблемы с извлечением образа, напишите нам по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a> с подробным описанием проблемы, и мы окажем вам необходимую поддержку.</p>
+<p>Если вы хотите использовать <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> в режиме автономного развертывания, рекомендуется использовать метод развертывания <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
+<p>Если у вас возникнут проблемы с извлечением образа, свяжитесь с нами по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a>, подробно описав проблему, и мы окажем вам необходимую поддержку.</p>
 </div>
 <p>После запуска сценария установки:</p>
 <ul>
@@ -89,15 +90,15 @@ $ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h2><p>Остановить и удалить этот контейнер можно следующим образом.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
-$ bash standalone_embed.sh stop
-
-<span class="hljs-comment"># Delete Milvus data</span>
-$ bash standalone_embed.sh delete
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh stop</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Delete Milvus data</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh delete</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Обновить Milvus до последней версии можно следующим образом.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># upgrade Milvus</span>
-$ bash standalone_embed.sh upgrade
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade Milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

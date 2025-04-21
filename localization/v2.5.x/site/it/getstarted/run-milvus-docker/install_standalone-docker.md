@@ -56,13 +56,14 @@ title: Eseguire Milvus in Docker (Linux)
         ></path>
       </svg>
     </button></h2><p>Milvus fornisce uno script di installazione per installarlo come contenitore Docker. Lo script è disponibile nel <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">repository di Milvus</a>. Per installare Milvus in Docker, è sufficiente eseguire</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the installation script</span>
-$ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
-
-<span class="hljs-comment"># Start the Docker container</span>
-$ bash standalone_embed.sh start
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Start the Docker container</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
+<p>Se si desidera utilizzare <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> in modalità di distribuzione standalone, si consiglia di utilizzare il metodo di distribuzione <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>Se si riscontrano problemi nell'estrazione dell'immagine, contattateci all'indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> con i dettagli del problema e vi forniremo il supporto necessario.</p>
 </div>
 <p>Dopo aver eseguito lo script di installazione:</p>
@@ -89,15 +90,15 @@ $ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h2><p>È possibile arrestare ed eliminare questo contenitore come segue</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
-$ bash standalone_embed.sh stop
-
-<span class="hljs-comment"># Delete Milvus data</span>
-$ bash standalone_embed.sh delete
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh stop</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Delete Milvus data</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh delete</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>È possibile aggiornare l'ultima versione di Milvus come segue</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># upgrade Milvus</span>
-$ bash standalone_embed.sh upgrade
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade Milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh upgrade</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Cosa succede dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

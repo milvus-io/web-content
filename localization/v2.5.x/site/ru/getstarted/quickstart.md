@@ -21,7 +21,7 @@ title: Быстрый старт
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Векторы, формат выходных данных нейросетевых моделей, могут эффективно кодировать информацию и играть ключевую роль в таких приложениях ИИ, как база знаний, семантический поиск, поиск с расширенной генерацией (Retrieval Augmented Generation, RAG) и других.</p>
-<p>Milvus - это векторная база данных с открытым исходным кодом, которая подходит для ИИ-приложений любого масштаба - от запуска демонстрационного чатбота в Jupyter notebook до создания веб-поиска, обслуживающего миллиарды пользователей. В этом руководстве мы расскажем вам, как установить Milvus локально за несколько минут и использовать клиентскую библиотеку Python для генерации, хранения и поиска векторов.</p>
+<p>Milvus - это векторная база данных с открытым исходным кодом, которая подходит для ИИ-приложений любого масштаба - от запуска демонстрационного чатбота в Jupyter notebook до создания веб-поиска, обслуживающего миллиарды пользователей. В этом руководстве мы расскажем вам, как за несколько минут установить Milvus локально и использовать клиентскую библиотеку Python для генерации, хранения и поиска векторов.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Установка Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +43,7 @@ title: Быстрый старт
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <blockquote>
-<p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong>. (Нажмите на меню "Время выполнения" в верхней части экрана и выберите "Перезапустить сессию" из выпадающего меню).</p>
+<p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong>. (Нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
 </blockquote>
 </div>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">Настройка базы данных векторов<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
@@ -61,10 +61,10 @@ title: Быстрый старт
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы создать локальную векторную базу данных Milvus, просто создайте <code translate="no">MilvusClient</code>, указав имя файла для хранения всех данных, например &quot;milvus_demo.db&quot;.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+    </button></h2><p>Чтобы создать локальную векторную базу данных Milvus, просто создайте <code translate="no">MilvusClient</code>, указав имя файла для хранения всех данных, например "milvus_demo.db".</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
+client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Create-a-Collection" class="common-anchor-header">Создание коллекции<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,7 +110,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В этом руководстве мы используем векторы для выполнения семантического поиска по тексту. Нам необходимо сгенерировать векторы для текста, загрузив модели встраивания. Это можно легко сделать с помощью утилитных функций из библиотеки <code translate="no">pymilvus[model]</code>.</p>
+    </button></h2><p>В этом руководстве мы используем векторы для выполнения семантического поиска по тексту. Нам нужно сгенерировать векторы для текста, загрузив модели встраивания. Это можно легко сделать с помощью утилитных функций из библиотеки <code translate="no">pymilvus[model]</code>.</p>
 <h2 id="Represent-text-with-vectors" class="common-anchor-header">Представление текста с помощью векторов<button data-href="#Represent-text-with-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,9 +160,9 @@ data = [
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Data has&quot;</span>, <span class="hljs-built_in">len</span>(data), <span class="hljs-string">&quot;entities, each with fields: &quot;</span>, data[<span class="hljs-number">0</span>].keys())
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Vector dim:&quot;</span>, <span class="hljs-built_in">len</span>(data[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;vector&quot;</span>]))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no"><span class="hljs-title class_">Dim</span>: <span class="hljs-number">768</span> (<span class="hljs-number">768</span>,)
-<span class="hljs-title class_">Data</span> has <span class="hljs-number">3</span> entities, each <span class="hljs-keyword">with</span> <span class="hljs-attr">fields</span>:  <span class="hljs-title function_">dict_keys</span>([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
-<span class="hljs-title class_">Vector</span> <span class="hljs-attr">dim</span>: <span class="hljs-number">768</span>
+<pre><code translate="no">Dim: <span class="hljs-number">768</span> (<span class="hljs-number">768</span>,)
+Data has <span class="hljs-number">3</span> entities, <span class="hljs-keyword">each</span> <span class="hljs-keyword">with</span> fields:  dict_keys([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
+Vector dim: <span class="hljs-number">768</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Alternatively-Use-fake-representation-with-random-vectors" class="common-anchor-header">[Альтернатива] Использовать фальшивое представление со случайными векторами<button data-href="#Alternatively-Use-fake-representation-with-random-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -179,7 +179,7 @@ data = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Если вы не смогли загрузить модель из-за проблем с сетью, в качестве обходного пути вы можете использовать случайные векторы для представления текста и все равно завершить пример. Только учтите, что результат поиска не будет отражать семантическое сходство, так как векторы будут фальшивыми.</p>
+    </button></h2><p>Если вы не смогли загрузить модель из-за проблем с сетью, в качестве обходного пути вы можете использовать случайные векторы для представления текста и все равно завершить пример. Только учтите, что результат поиска не будет отражать семантическое сходство, поскольку векторы будут ненастоящими.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Text strings to search from.</span>
@@ -198,8 +198,8 @@ data = [
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Data has&quot;</span>, <span class="hljs-built_in">len</span>(data), <span class="hljs-string">&quot;entities, each with fields: &quot;</span>, data[<span class="hljs-number">0</span>].keys())
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Vector dim:&quot;</span>, <span class="hljs-built_in">len</span>(data[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;vector&quot;</span>]))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no"><span class="hljs-title class_">Data</span> has <span class="hljs-number">3</span> entities, each <span class="hljs-keyword">with</span> <span class="hljs-attr">fields</span>:  <span class="hljs-title function_">dict_keys</span>([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
-<span class="hljs-title class_">Vector</span> <span class="hljs-attr">dim</span>: <span class="hljs-number">768</span>
+<pre><code translate="no">Data has <span class="hljs-number">3</span> entities, <span class="hljs-keyword">each</span> <span class="hljs-keyword">with</span> fields:  dict_keys([<span class="hljs-string">&#x27;id&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-string">&#x27;subject&#x27;</span>])
+Vector dim: <span class="hljs-number">768</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-Data" class="common-anchor-header">Вставка данных<button data-href="#Insert-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -221,7 +221,7 @@ data = [
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">{<span class="hljs-string">&#x27;insert_count&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;ids&#x27;</span>: [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>], <span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
+<pre><code translate="no">{<span class="hljs-string">&#x27;insert_count&#x27;</span>: 3, <span class="hljs-string">&#x27;ids&#x27;</span>: [0, 1, 2], <span class="hljs-string">&#x27;cost&#x27;</span>: 0}
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Semantic-Search" class="common-anchor-header">Семантический поиск<button data-href="#Semantic-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -253,7 +253,7 @@ res = client.search(
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no"><span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , <span class="hljs-attr">extra_info</span>: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
+<pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
 <p>На выходе получается список результатов, каждый из которых соответствует запросу на векторный поиск. Каждый запрос содержит список результатов, где каждый результат содержит первичный ключ сущности, расстояние до вектора запроса и данные о сущности с указанными <code translate="no">output_fields</code>.</p>
 <h2 id="Vector-Search-with-Metadata-Filtering" class="common-anchor-header">Векторный поиск с фильтрацией метаданных<button data-href="#Vector-Search-with-Metadata-Filtering" class="anchor-icon" translate="no">
@@ -297,7 +297,7 @@ res = client.search(
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no"><span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.27030569314956665, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Computational synthesis with AI algorithms predicts molecular properties.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}, {&#x27;id&#x27;: 3, &#x27;distance&#x27;: 0.16425910592079163, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Machine learning has been used for drug design.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}]&quot;</span>] , <span class="hljs-attr">extra_info</span>: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
+<pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.27030569314956665, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Computational synthesis with AI algorithms predicts molecular properties.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}, {&#x27;id&#x27;: 3, &#x27;distance&#x27;: 0.16425910592079163, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Machine learning has been used for drug design.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
 <p>По умолчанию скалярные поля не индексируются. Если вам нужно выполнить поиск с фильтрацией метаданных в большом наборе данных, вы можете рассмотреть возможность использования фиксированной схемы, а также включить <a href="https://milvus.io/docs/scalar_index.md">индекс</a> для повышения производительности поиска.</p>
 <p>Помимо векторного поиска, вы можете выполнять и другие типы поиска:</p>
@@ -310,7 +310,7 @@ res = client.search(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Прямое получение сущностей по первичному ключу:</p>
-<pre><code translate="no" class="language-python">res = client.<span class="hljs-title function_">query</span>(
+<pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
     ids=[<span class="hljs-number">0</span>, <span class="hljs-number">2</span>],
     output_fields=[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;subject&quot;</span>],
@@ -364,9 +364,9 @@ res = client.delete(
         ></path>
       </svg>
     </button></h2><p>Поскольку все данные Milvus Lite хранятся в локальном файле, вы можете загрузить все данные в память даже после завершения работы программы, создав <code translate="no">MilvusClient</code> с существующим файлом. Например, это позволит восстановить коллекции из файла "milvus_demo.db" и продолжить запись данных в него.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
+client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Drop-the-collection" class="common-anchor-header">Удаление коллекции<button data-href="#Drop-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -403,6 +403,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
         ></path>
       </svg>
     </button></h2><p>Milvus Lite отлично подходит для начала работы с локальной программой на python. Если у вас большие объемы данных или вы хотите использовать Milvus в производстве, вы можете узнать о развертывании Milvus на <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> и <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Все режимы развертывания Milvus используют один и тот же API, поэтому при переходе к другому режиму развертывания код на стороне клиента не придется сильно менять. Просто укажите <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI и токен</a> сервера Milvus, развернутого в любом месте:</p>
-<pre><code translate="no" class="language-python">client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+<pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+<p>Чтобы перенести данные с Milvus Lite на Milvus, развернутый на Docker или Kubernetes, обратитесь к разделу <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">Перенос данных с Milvus Lite</a>.</p>
 <p>Milvus предоставляет API REST и gRPC, а также клиентские библиотеки на таких языках, как <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# и <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>

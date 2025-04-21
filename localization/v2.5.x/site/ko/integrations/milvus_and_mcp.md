@@ -3,7 +3,7 @@ id: milvus_and_mcp.md
 summary: >-
   이 튜토리얼에서는 사용자 지정 데이터베이스 쿼리를 작성하지 않고도 AI 애플리케이션이 벡터 검색을 수행하고, 컬렉션을 관리하고, 자연어
   명령을 사용하여 데이터를 검색할 수 있도록 Milvus용 MCP 서버를 설정하는 방법을 안내합니다.
-title: Milvus와 MindsDB 통합
+title: 'MCP + Milvus: AI와 벡터 데이터베이스의 연결'
 ---
 <h1 id="MCP-+-Milvus-Connecting-AI-with-Vector-Databases" class="common-anchor-header">MCP + Milvus: AI와 벡터 데이터베이스의 연결<button data-href="#MCP-+-Milvus-Connecting-AI-with-Vector-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -36,7 +36,7 @@ title: Milvus와 MindsDB 통합
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>MCP(모델 컨텍스트 프로토콜)</strong> 는 Claude 및 Cursor와 같은 AI 애플리케이션이 외부 데이터 소스 및 툴과 원활하게 상호 작용할 수 있도록 지원하는 개방형 프로토콜입니다. 맞춤형 AI 애플리케이션을 구축하든, AI 워크플로를 통합하든, 채팅 인터페이스를 개선하든, MCP는 대규모 언어 모델(LLM)을 관련 컨텍스트 데이터와 연결하는 표준화된 방법을 제공합니다.</p>
+    </button></h2><p><strong>MCP(모델 컨텍스트 프로토콜)</strong> 는 Claude 및 Cursor와 같은 AI 애플리케이션이 외부 데이터 소스 및 툴과 원활하게 상호 작용할 수 있도록 지원하는 개방형 프로토콜입니다. 맞춤형 AI 애플리케이션을 구축하든, AI 워크플로를 통합하든, 채팅 인터페이스를 개선하든, MCP는 대규모 언어 모델(LLM)을 관련 문맥 데이터와 연결하는 표준화된 방법을 제공합니다.</p>
 <p>이 튜토리얼에서는 사용자 지정 데이터베이스 쿼리를 작성하지 <strong>않고도</strong>AI 애플리케이션이 벡터 검색을 수행하고, 컬렉션을 관리하고, <strong>자연어 명령을</strong>사용하여 데이터를 검색할 수 있도록 <strong>Milvus용 MCP 서버를 설정하는</strong> 방법을 안내합니다.</p>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,7 +74,7 @@ title: Milvus와 MindsDB 통합
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 MCP 서버를 사용하는 권장 방법은 설치 없이 uv로 직접 실행하는 것입니다. 아래 예제에서 Claude 데스크톱과 커서가 이 서버를 사용하도록 구성한 방법이 바로 이 방법입니다.</p>
+    </button></h2><p>이 MCP 서버를 사용하는 권장 방법은 설치 없이 uv로 직접 실행하는 것입니다. 아래 예제에서 Claude 데스크톱과 커서가 이 서버를 사용하도록 구성한 방식입니다.</p>
 <p>리포지토리를 복제하려는 경우:</p>
 <pre><code translate="no" class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/mcp-server-milvus.git
 <span class="hljs-built_in">cd</span> mcp-server-milvus
@@ -125,21 +125,21 @@ title: Milvus와 MindsDB 통합
 </ul></li>
 <li>다음 구성을 추가합니다:</li>
 </ol>
-<pre><code translate="no" class="language-json">{
-  <span class="hljs-string">&quot;mcpServers&quot;</span>: {
-    <span class="hljs-string">&quot;milvus&quot;</span>: {
-      <span class="hljs-string">&quot;command&quot;</span>: <span class="hljs-string">&quot;/PATH/TO/uv&quot;</span>,
-      <span class="hljs-string">&quot;args&quot;</span>: [
-        <span class="hljs-string">&quot;--directory&quot;</span>,
-        <span class="hljs-string">&quot;/path/to/mcp-server-milvus/src/mcp_server_milvus&quot;</span>,
-        <span class="hljs-string">&quot;run&quot;</span>,
-        <span class="hljs-string">&quot;server.py&quot;</span>,
-        <span class="hljs-string">&quot;--milvus-uri&quot;</span>,
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;mcpServers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;milvus&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/PATH/TO/uv&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;--directory&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;/path/to/mcp-server-milvus/src/mcp_server_milvus&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;run&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;server.py&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;--milvus-uri&quot;</span><span class="hljs-punctuation">,</span>
         <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-      ]
-    }
-  }
-}
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="4">
 <li>Claude Desktop을 재시작하여 변경 사항을 적용합니다.</li>
@@ -174,21 +174,21 @@ title: Milvus와 MindsDB 통합
 <h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">옵션 2: 프로젝트별 구성 사용(권장)</h3><ol>
 <li><strong>프로젝트 루트 디렉터리에</strong> <code translate="no">.cursor/mcp.json</code> 파일을 만듭니다:</li>
 </ol>
-<pre><code translate="no" class="language-json">{
-  <span class="hljs-string">&quot;mcpServers&quot;</span>: {
-    <span class="hljs-string">&quot;milvus&quot;</span>: {
-      <span class="hljs-string">&quot;command&quot;</span>: <span class="hljs-string">&quot;/PATH/TO/uv&quot;</span>,
-      <span class="hljs-string">&quot;args&quot;</span>: [
-        <span class="hljs-string">&quot;--directory&quot;</span>,
-        <span class="hljs-string">&quot;/path/to/mcp-server-milvus/src/mcp_server_milvus&quot;</span>,
-        <span class="hljs-string">&quot;run&quot;</span>,
-        <span class="hljs-string">&quot;server.py&quot;</span>,
-        <span class="hljs-string">&quot;--milvus-uri&quot;</span>,
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;mcpServers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;milvus&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/PATH/TO/uv&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;--directory&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;/path/to/mcp-server-milvus/src/mcp_server_milvus&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;run&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;server.py&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;--milvus-uri&quot;</span><span class="hljs-punctuation">,</span>
         <span class="hljs-string">&quot;http://127.0.0.1:19530&quot;</span>
-      ]
-    }
-  }
-}
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>커서를 다시 시작하여 구성을 적용합니다.</li>
@@ -297,7 +297,7 @@ title: Milvus와 MindsDB 통합
         ></path>
       </svg>
     </button></h2><p>서버를 직접 실행합니다:</p>
-<pre><code translate="no" class="language-bash">uv run server.<span class="hljs-property">py</span> --milvus-uri <span class="hljs-attr">http</span>:<span class="hljs-comment">//localhost:19530</span>
+<pre><code translate="no" class="language-bash">uv run server.py --milvus-uri http://localhost:19530
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Examples" class="common-anchor-header">예시<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -314,46 +314,46 @@ title: Milvus와 MindsDB 통합
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">Claude 데스크톱 사용</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">예제 1: 컬렉션 나열하기</h4><pre><code translate="no">What are the collections I have in my Milvus DB?
+    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">Claude 데스크톱 사용</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">예제 1: 컬렉션 나열하기</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
 <button class="copy-code-btn"></button></code></pre>
 <p>그런 다음 Claude는 MCP를 사용하여 Milvus DB에서 이 정보를 확인합니다.</p>
-<pre><code translate="no">I&#x27;ll check what collections are available in your Milvus database.
+<pre><code translate="no">I<span class="hljs-comment">&#x27;ll check what collections are available in your Milvus database.</span>
 
-&gt; View result from milvus-list-collections from milvus (local)
+&gt; View result <span class="hljs-keyword">from</span> milvus-list-collections <span class="hljs-keyword">from</span> milvus (local)
 
-Here are the collections in your Milvus database:
+Here are the collections <span class="hljs-keyword">in</span> your Milvus database:
 
-1. rag_demo
-2. test
-3. chat_messages
-4. text_collection
-5. image_collection
-6. customized_setup
-7. streaming_rag_demo
+<span class="hljs-number">1</span>. rag_demo
+<span class="hljs-number">2</span>. test
+<span class="hljs-number">3</span>. chat_messages
+<span class="hljs-number">4</span>. text_collection
+<span class="hljs-number">5</span>. image_collection
+<span class="hljs-number">6</span>. customized_setup
+<span class="hljs-number">7</span>. streaming_rag_demo
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-2-Searching-for-Documents" class="common-anchor-header">예 2: 문서 검색</h4><pre><code translate="no"><span class="hljs-title class_">Find</span> documents <span class="hljs-keyword">in</span> my text_collection that mention <span class="hljs-string">&quot;machine learning&quot;</span>
+<h4 id="Example-2-Searching-for-Documents" class="common-anchor-header">예 2: 문서 검색</h4><pre><code translate="no">Find documents in <span class="hljs-keyword">my</span> text_collection that mention <span class="hljs-string">&quot;machine learning&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Claude는 Milvus의 전체 텍스트 검색 기능을 사용하여 관련 문서를 찾습니다:</p>
-<pre><code translate="no">I&#x27;ll search for documents about machine learning in your text_collection.
+<pre><code translate="no">I<span class="hljs-comment">&#x27;ll search for documents about machine learning in your text_collection.</span>
 
-&gt; View result from milvus-text-search from milvus (local)
+&gt; View result <span class="hljs-keyword">from</span> milvus-<span class="hljs-keyword">text</span>-search <span class="hljs-keyword">from</span> milvus (local)
 
 Here are the documents I found that mention machine learning:
-[Results will appear here based on your actual data]
+[Results will appear here based <span class="hljs-keyword">on</span> your actual data]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Using-Cursor" class="common-anchor-header">커서 사용</h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">예시: 컬렉션 만들기</h4><p>커서의 작곡기에서 요청할 수 있습니다:</p>
 <pre><code translate="no">Create a <span class="hljs-keyword">new</span> collection called <span class="hljs-string">&#x27;articles&#x27;</span> <span class="hljs-function"><span class="hljs-keyword">in</span> Milvus <span class="hljs-keyword">with</span> fields <span class="hljs-keyword">for</span> <span class="hljs-title">title</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-title">content</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-keyword">and</span> a vector <span class="hljs-title">field</span> (<span class="hljs-params"><span class="hljs-number">128</span> dimensions</span>)
 </span><button class="copy-code-btn"></button></code></pre>
 <p>커서는 MCP 서버를 사용하여 이 작업을 실행합니다:</p>
-<pre><code translate="no">I<span class="hljs-string">&#x27;ll create a new collection called &#x27;</span>articles<span class="hljs-string">&#x27; with the specified fields.
+<pre><code translate="no">I<span class="hljs-comment">&#x27;ll create a new collection called &#x27;articles&#x27; with the specified fields.</span>
 
-&gt; View result from milvus-create-collection from milvus (local)
+&gt; View result <span class="hljs-keyword">from</span> milvus-create-collection <span class="hljs-keyword">from</span> milvus (local)
 
-Collection &#x27;</span>articles<span class="hljs-string">&#x27; has been created successfully with the following schema:
-- title: string
-- content: string
-- vector: float vector[128]
-</span><button class="copy-code-btn"></button></code></pre>
+Collection <span class="hljs-comment">&#x27;articles&#x27; has been created successfully with the following schema:</span>
+- title: <span class="hljs-type">string</span>
+- content: <span class="hljs-type">string</span>
+- vector: float vector[<span class="hljs-number">128</span>]
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Troubleshooting" class="common-anchor-header">문제 해결<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -369,7 +369,7 @@ Collection &#x27;</span>articles<span class="hljs-string">&#x27; has been create
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Common-Issues" class="common-anchor-header">일반적인 문제</h3><h4 id="Connection-Errors" class="common-anchor-header">연결 오류</h4><p>&quot;Milvus 서버에 연결하지 못했습니다&quot;와 같은 오류가 표시되는 경우:</p>
+    </button></h2><h3 id="Common-Issues" class="common-anchor-header">일반적인 문제</h3><h4 id="Connection-Errors" class="common-anchor-header">연결 오류</h4><p>"Milvus 서버에 연결하지 못했습니다"와 같은 오류가 표시되는 경우:</p>
 <ol>
 <li>Milvus 인스턴스가 실행 중인지 확인합니다: <code translate="no">docker ps</code> (Docker를 사용하는 경우).</li>
 <li>구성에서 URI가 올바른지 확인합니다.</li>

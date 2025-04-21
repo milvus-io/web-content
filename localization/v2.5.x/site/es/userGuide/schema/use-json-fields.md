@@ -60,7 +60,6 @@ summary: >-
 <li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, y <code translate="no">&quot;a\\&quot;b&quot;</code> se almacenan tal cual.</p></li>
 <li><p><code translate="no">'a'b'</code> y <code translate="no">&quot;a&quot;b&quot;</code> se consideran inválidos.</p></li>
 </ul></li>
-<li><p><strong>Indexación JSON</strong>: Al indexar un campo JSON, puede especificar una o más rutas en el campo JSON para acelerar el filtrado. Cada ruta adicional aumenta la sobrecarga de indexación, por lo que debe planificar cuidadosamente su estrategia de indexación. Para más consideraciones sobre la indexación de un campo JSON, consulte <a href="/docs/es/use-json-fields.md#share-N2tOdsWXEo0VgsxmzRZcSa50n0e">Consideraciones sobre la indexación JSON</a>.</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">Añadir campo JSON<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"

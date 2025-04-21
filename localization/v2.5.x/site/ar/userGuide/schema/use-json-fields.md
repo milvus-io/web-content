@@ -59,7 +59,6 @@ summary: >-
 <li><p><code translate="no">'a&quot;b'</code> <code translate="no">&quot;a'b&quot;</code> و و و يتم تخزينها كما هي تمامًا. <code translate="no">'a\\'b'</code> <code translate="no">&quot;a\\&quot;b&quot;</code> </p></li>
 <li><p><code translate="no">'a'b'</code> و <code translate="no">&quot;a&quot;b&quot;</code> تعتبر غير صالحة.</p></li>
 </ul></li>
-<li><p><strong>فهرسة JSON</strong>: عند فهرسة حقل JSON، يمكنك تحديد مسار واحد أو أكثر في حقل JSON لتسريع التصفية. يزيد كل مسار إضافي من عبء الفهرسة الزائد، لذا خطط لاستراتيجية الفهرسة بعناية. لمزيد من الاعتبارات حول فهرسة حقل JSON، راجع <a href="/docs/ar/use-json-fields.md#share-N2tOdsWXEo0VgsxmzRZcSa50n0e">اعتبارات فهرسة JSON</a>.</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">إضافة حقل JSON<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +77,7 @@ summary: >-
       </svg>
     </button></h2><p>لإضافة حقل JSON <code translate="no">metadata</code> إلى مخطط مجموعتك، استخدم <code translate="no">DataType.JSON</code>. يحدد المثال أدناه حقل JSON <code translate="no">metadata</code> الذي يسمح بقيم فارغة:</p>
 <div class="multipleCode">
-   <a href="#python">بيثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -366,7 +365,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>نوع البيانات الذي سيقوم ميلفوس بإرسال قيم JSON المستخرجة إليه عند بناء الفهرس. القيم الصالحة:</p><ul><li><p><code translate="no">"bool"</code> أو <code translate="no">"BOOL"</code></p></li><li><p><code translate="no">"double"</code> أو <code translate="no">"DOUBLE"</code></p></li><li><p><code translate="no">"varchar"</code> أو <code translate="no">"VARCHAR"</code></p><p><strong>ملاحظة</strong>: بالنسبة لقيم الأعداد الصحيحة، يستخدم Milvus داخليًا مزدوجًا للفهرس. الأعداد الصحيحة الكبيرة التي تزيد عن 2^53 تفقد الدقة. في حال فشل الإرسال (بسبب عدم تطابق النوع)، لا يتم طرح أي خطأ، ولا تتم فهرسة قيمة ذلك الصف.</p></li></ul></td>
+     <td><p>نوع البيانات الذي سيقوم ميلفوس بإرسال قيم JSON المستخرجة إليه عند بناء الفهرس. القيم الصالحة:</p><ul><li><p><code translate="no">"bool"</code> أو <code translate="no">"BOOL"</code></p></li><li><p><code translate="no">"double"</code> أو <code translate="no">"DOUBLE"</code></p></li><li><p><code translate="no">"varchar"</code> أو <code translate="no">"VARCHAR"</code></p><p><strong>ملاحظة</strong>: بالنسبة لقيم الأعداد الصحيحة، يستخدم Milvus داخليًا مزدوجًا للفهرس. الأعداد الصحيحة الكبيرة التي تزيد عن 2^53 تفقد الدقة. إذا فشلت عملية الإرسال (بسبب عدم تطابق النوع)، لا يتم طرح أي خطأ، ولا تتم فهرسة قيمة ذلك الصف.</p></li></ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -388,7 +387,7 @@ curl --request POST \
 </ul></li>
 <li><p><strong>تكامل البيانات</strong>:</p>
 <ul>
-<li>لا يقوم Milvus بتحليل مفاتيح JSON أو تحويلها إلى ما هو أبعد من الصب المحدد. إذا كانت البيانات المصدر غير متناسقة (على سبيل المثال، تخزن بعض الصفوف سلسلة للمفتاح <code translate="no">&quot;k&quot;</code> بينما تخزن أخرى رقمًا)، فلن تتم فهرسة بعض الصفوف.</li>
+<li>لا يقوم Milvus بتحليل مفاتيح JSON أو تحويلها إلى ما هو أبعد من الصب المحدد. إذا كانت بيانات المصدر غير متناسقة (على سبيل المثال، تخزن بعض الصفوف سلسلة للمفتاح <code translate="no">&quot;k&quot;</code> بينما تخزن أخرى رقمًا)، فلن تتم فهرسة بعض الصفوف.</li>
 </ul></li>
 </ul>
 <h3 id="Index-a-vector-field" class="common-anchor-header">فهرسة حقل متجه</h3><p>يقوم المثال التالي بإنشاء فهرس على الحقل المتجه <code translate="no">embedding</code> ، باستخدام نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار ميلفوس تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والبارامترات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
@@ -856,7 +855,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بالإضافة إلى تصفية الحقل القياسي الأساسي، يمكنك دمج عمليات البحث عن التشابه المتجه مع مرشحات الحقل القياسي. على سبيل المثال، يوضح الرمز التالي كيفية إضافة عامل تصفية الحقل القياسي إلى بحث متجه:</p>
+    </button></h2><p>بالإضافة إلى تصفية الحقل القياسي الأساسي، يمكنك دمج عمليات البحث عن تشابه المتجهات مع مرشحات الحقل القياسي. على سبيل المثال، يوضح الرمز التالي كيفية إضافة عامل تصفية الحقل القياسي إلى بحث متجه:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;brand&quot;] == &quot;BrandA&quot;&#x27;</span>

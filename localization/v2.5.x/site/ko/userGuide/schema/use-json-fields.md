@@ -59,7 +59,6 @@ summary: >-
 <li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, <code translate="no">&quot;a\\&quot;b&quot;</code> 는 그대로 저장됩니다.</p></li>
 <li><p><code translate="no">'a'b'</code> 와 <code translate="no">&quot;a&quot;b&quot;</code> 는 유효하지 않은 것으로 간주됩니다.</p></li>
 </ul></li>
-<li><p><strong>JSON 인덱싱</strong>: JSON 필드를 색인할 때 JSON 필드에 하나 이상의 경로를 지정하여 필터링을 가속화할 수 있습니다. 경로가 추가될 때마다 인덱싱 오버헤드가 증가하므로 인덱싱 전략을 신중하게 계획하세요. JSON 필드 인덱싱에 대한 자세한 고려 <a href="/docs/ko/use-json-fields.md#share-N2tOdsWXEo0VgsxmzRZcSa50n0e">사항은 JSON 인덱싱에 대한 고려 사항을</a> 참조하세요.</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">JSON 필드 추가<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,7 +75,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션 스키마에 이 JSON 필드 <code translate="no">metadata</code> 를 추가하려면 <code translate="no">DataType.JSON</code> 을 사용합니다. 아래 예제에서는 null 값을 허용하는 JSON 필드 <code translate="no">metadata</code> 를 정의합니다:</p>
+    </button></h2><p>컬렉션 스키마에 이 JSON 필드 <code translate="no">metadata</code> 를 추가하려면 <code translate="no">DataType.JSON</code> 을 사용합니다. 아래 예제에서는 null 값을 허용하는 <code translate="no">metadata</code> JSON 필드를 정의합니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>

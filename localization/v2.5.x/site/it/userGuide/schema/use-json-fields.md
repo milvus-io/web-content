@@ -54,13 +54,12 @@ summary: >-
 <li><p><strong>Dizionari annidati</strong>: I dizionari annidati all'interno dei valori dei campi JSON vengono trattati come stringhe semplici per la memorizzazione.</p></li>
 <li><p><strong>Valori predefiniti</strong>: I campi JSON non supportano valori predefiniti. Tuttavia, è possibile impostare l'attributo <code translate="no">nullable</code> su <code translate="no">True</code> per consentire valori nulli. Per maggiori dettagli, consultare <a href="/docs/it/nullable-and-default.md">Nullable e Default</a>.</p></li>
 <li><p><strong>Corrispondenza di tipo</strong>: se il valore chiave di un campo JSON è un intero o un float, può essere confrontato (tramite filtri di espressione) solo con un'altra chiave numerica dello stesso tipo.</p></li>
-<li><p><strong>Denominazione</strong>: Quando si nominano le chiavi JSON, si consiglia di utilizzare solo lettere, numeri e trattini bassi. L'uso di altri caratteri può causare problemi durante il filtraggio o la ricerca.</p></li>
+<li><p><strong>Denominazione</strong>: Quando si nominano le chiavi JSON, si raccomanda di usare solo lettere, numeri e trattini bassi. L'uso di altri caratteri può causare problemi durante il filtraggio o la ricerca.</p></li>
 <li><p><strong>Gestione delle stringhe</strong>: Milvus memorizza i valori delle stringhe nei campi JSON così come sono stati inseriti, senza conversione semantica. Ad esempio:</p>
 <ul>
 <li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, e <code translate="no">&quot;a\\&quot;b&quot;</code> sono memorizzati esattamente come sono.</p></li>
 <li><p><code translate="no">'a'b'</code> e <code translate="no">&quot;a&quot;b&quot;</code> sono considerati non validi.</p></li>
 </ul></li>
-<li><p><strong>Indicizzazione JSON</strong>: Quando si indicizza un campo JSON, è possibile specificare uno o più percorsi nel campo JSON per accelerare il filtraggio. Ogni percorso aggiuntivo aumenta l'overhead dell'indicizzazione, quindi pianificare attentamente la strategia di indicizzazione. Per ulteriori considerazioni sull'indicizzazione di un campo JSON, consultare <a href="/docs/it/use-json-fields.md#share-N2tOdsWXEo0VgsxmzRZcSa50n0e">Considerazioni sull'indicizzazione JSON</a>.</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">Aggiungere un campo JSON<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -695,7 +694,7 @@ fmt.Println(resp)
       </svg>
     </button></h2><p>Dopo aver inserito le entità, utilizzare il metodo <code translate="no">query</code> per recuperare le entità che corrispondono alle espressioni di filtro specificate.</p>
 <div class="alert note">
-<p>Per i campi JSON che consentono valori nulli, il campo sarà trattato come nullo se l'intero oggetto JSON è mancante o impostato su <code translate="no">None</code>. Per ulteriori informazioni, consultare <a href="/docs/it/basic-operators.md#JSON-Fields-with-Null-Values">Campi JSON con valori nulli</a>.</p>
+<p>Per i campi JSON che consentono valori nulli, il campo sarà trattato come nullo se l'intero oggetto JSON è mancante o impostato su <code translate="no">None</code>. Per ulteriori informazioni, fare riferimento a <a href="/docs/it/basic-operators.md#JSON-Fields-with-Null-Values">Campi JSON con valori nulli</a>.</p>
 </div>
 <p>Per recuperare le entità in cui <code translate="no">metadata</code> non è nullo:</p>
 <div class="multipleCode">

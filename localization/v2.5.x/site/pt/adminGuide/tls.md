@@ -42,7 +42,7 @@ summary: Saiba como ativar o proxy TLS no Milvus.
 <pre><code translate="no" class="language-shell">openssl version
 <button class="copy-code-btn"></button></code></pre>
 <p>Se o OpenSSL não estiver instalado. Ele pode ser instalado com o seguinte comando no Ubuntu.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">sudo</span> apt install openssl
+<pre><code translate="no" class="language-shell">sudo apt install openssl
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Create-files" class="common-anchor-header">Criar ficheiros</h3><ol>
 <li>Crie o ficheiro <code translate="no">gen.sh</code>.</li>
@@ -55,44 +55,44 @@ summary: Saiba como ativar o proxy TLS no Milvus.
 </ol>
 <p>É necessário configurar o <code translate="no">CommonName</code> no ficheiro <code translate="no">gen.sh</code>. O <code translate="no">CommonName</code> refere-se ao nome do servidor que o cliente deve especificar durante a ligação.</p>
 <p><details><summary><code translate="no">gen.sh</code></summary></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta">#!/usr/bin/env sh</span>
-<span class="hljs-comment"># your variables</span>
-Country=<span class="hljs-string">&quot;US&quot;</span>
-State=<span class="hljs-string">&quot;CA&quot;</span>
-Location=<span class="hljs-string">&quot;Redwood City&quot;</span>
-Organization=<span class="hljs-string">&quot;zilliz&quot;</span>
-OrganizationUnit=<span class="hljs-string">&quot;devops&quot;</span>
-CommonName=<span class="hljs-string">&quot;localhost&quot;</span>
-ExpireDays=3650 <span class="hljs-comment"># 10 years</span>
-
-<span class="hljs-comment"># generate private key for ca, server and client</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/usr/bin/env sh</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">your variables</span>
+Country=&quot;US&quot;
+State=&quot;CA&quot;
+Location=&quot;Redwood City&quot;
+Organization=&quot;zilliz&quot;
+OrganizationUnit=&quot;devops&quot;
+CommonName=&quot;localhost&quot;
+ExpireDays=3650 # 10 years
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">generate private key <span class="hljs-keyword">for</span> ca, server and client</span>
 openssl genpkey -quiet -algorithm rsa:2048 -out ca.key
 openssl genpkey -quiet -algorithm rsa:2048 -out server.key
 openssl genpkey -quiet -algorithm rsa:2048 -out client.key
-
-<span class="hljs-comment"># create a new ca certificate</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">create a new ca certificate</span>
 openssl req -x509 -new -nodes -key ca.key -sha256 -days 36500 -out ca.pem \
-  -subj <span class="hljs-string">&quot;/C=<span class="hljs-variable">$Country</span>/ST=<span class="hljs-variable">$State</span>/L=<span class="hljs-variable">$Location</span>/O=<span class="hljs-variable">$Organization</span>/OU=<span class="hljs-variable">$OrganizationUnit</span>/CN=<span class="hljs-variable">$CommonName</span>&quot;</span>
-
-<span class="hljs-comment"># prepare extension config for signing certificates</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;[v3_req]
+  -subj &quot;/C=$Country/ST=$State/L=$Location/O=$Organization/OU=$OrganizationUnit/CN=$CommonName&quot;
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">prepare extension config <span class="hljs-keyword">for</span> signing certificates</span>
+echo &#x27;[v3_req]
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 extendedKeyUsage = serverAuth
 subjectAltName = @alt_names
 [alt_names]
-DNS = &#x27;</span><span class="hljs-variable">$CommonName</span> &gt; openssl.cnf
-
-<span class="hljs-comment"># sign server certificate with ca</span>
+DNS = &#x27;$CommonName &gt; openssl.cnf
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">sign server certificate with ca</span>
 openssl req -new -key server.key\
-  -subj <span class="hljs-string">&quot;/C=<span class="hljs-variable">$Country</span>/ST=<span class="hljs-variable">$State</span>/L=<span class="hljs-variable">$Location</span>/O=<span class="hljs-variable">$Organization</span>/OU=<span class="hljs-variable">$OrganizationUnit</span>/CN=<span class="hljs-variable">$CommonName</span>&quot;</span>\
-  | openssl x509 -req -days <span class="hljs-variable">$ExpireDays</span> -out server.pem -CA ca.pem -CAkey ca.key -CAcreateserial \
+  -subj &quot;/C=$Country/ST=$State/L=$Location/O=$Organization/OU=$OrganizationUnit/CN=$CommonName&quot;\
+  | openssl x509 -req -days $ExpireDays -out server.pem -CA ca.pem -CAkey ca.key -CAcreateserial \
     -extfile ./openssl.cnf -extensions v3_req
-
-<span class="hljs-comment"># sign client certificate with ca</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">sign client certificate with ca</span>
 openssl req -new -key client.key\
-  -subj <span class="hljs-string">&quot;/C=<span class="hljs-variable">$Country</span>/ST=<span class="hljs-variable">$State</span>/L=<span class="hljs-variable">$Location</span>/O=<span class="hljs-variable">$Organization</span>/OU=<span class="hljs-variable">$OrganizationUnit</span>/CN=<span class="hljs-variable">$CommonName</span>&quot;</span>\
-  | openssl x509 -req -days <span class="hljs-variable">$ExpireDays</span> -out client.pem -CA ca.pem -CAkey ca.key -CAcreateserial \
+  -subj &quot;/C=$Country/ST=$State/L=$Location/O=$Organization/OU=$OrganizationUnit/CN=$CommonName&quot;\
+  | openssl x509 -req -days $ExpireDays -out client.pem -CA ca.pem -CAkey ca.key -CAcreateserial \
     -extfile ./openssl.cnf -extensions v3_req
 
 <button class="copy-code-btn"></button></code></pre>
@@ -107,39 +107,39 @@ openssl req -new -key client.key\
 <h3 id="Renew-certificates-optional" class="common-anchor-header">Renovar certificados (opcional)</h3><p>Se pretender renovar os certificados em alguns casos, por exemplo, se expirarem em breve, pode utilizar o seguinte script.</p>
 <p>É necessário ter <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code> no seu diretório de trabalho.</p>
 <p><details><summary><code translate="no">renew.sh</code></summary></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta">#!/usr/bin/env sh</span>
-<span class="hljs-comment"># your variables</span>
-Country=<span class="hljs-string">&quot;US&quot;</span>
-State=<span class="hljs-string">&quot;CA&quot;</span>
-Location=<span class="hljs-string">&quot;Redwood City&quot;</span>
-Organization=<span class="hljs-string">&quot;zilliz&quot;</span>
-OrganizationUnit=<span class="hljs-string">&quot;devops&quot;</span>
-CommonName=<span class="hljs-string">&quot;localhost&quot;</span>
-ExpireDays=3650 <span class="hljs-comment"># 10 years</span>
-
-<span class="hljs-comment"># generate private key for ca, server and client</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/usr/bin/env sh</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">your variables</span>
+Country=&quot;US&quot;
+State=&quot;CA&quot;
+Location=&quot;Redwood City&quot;
+Organization=&quot;zilliz&quot;
+OrganizationUnit=&quot;devops&quot;
+CommonName=&quot;localhost&quot;
+ExpireDays=3650 # 10 years
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">generate private key <span class="hljs-keyword">for</span> ca, server and client</span>
 openssl genpkey -quiet -algorithm rsa:2048 -out server.key
 openssl genpkey -quiet -algorithm rsa:2048 -out client.key
-
-<span class="hljs-comment"># prepare extension config for signing certificates</span>
-<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;[v3_req]
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">prepare extension config <span class="hljs-keyword">for</span> signing certificates</span>
+echo &#x27;[v3_req]
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 extendedKeyUsage = serverAuth
 subjectAltName = @alt_names
 [alt_names]
-DNS = &#x27;</span><span class="hljs-variable">$CommonName</span> &gt; openssl.cnf
-
-<span class="hljs-comment"># sign server certificate with ca</span>
+DNS = &#x27;$CommonName &gt; openssl.cnf
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">sign server certificate with ca</span>
 openssl req -new -key server.key\
-  -subj <span class="hljs-string">&quot;/C=<span class="hljs-variable">$Country</span>/ST=<span class="hljs-variable">$State</span>/L=<span class="hljs-variable">$Location</span>/O=<span class="hljs-variable">$Organization</span>/OU=<span class="hljs-variable">$OrganizationUnit</span>/CN=<span class="hljs-variable">$CommonName</span>&quot;</span>\
-  | openssl x509 -req -days <span class="hljs-variable">$ExpireDays</span> -out server.pem -CA ca.pem -CAkey ca.key -CAcreateserial \
+  -subj &quot;/C=$Country/ST=$State/L=$Location/O=$Organization/OU=$OrganizationUnit/CN=$CommonName&quot;\
+  | openssl x509 -req -days $ExpireDays -out server.pem -CA ca.pem -CAkey ca.key -CAcreateserial \
     -extfile ./openssl.cnf -extensions v3_req
-
-<span class="hljs-comment"># sign client certificate with ca</span>
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">sign client certificate with ca</span>
 openssl req -new -key client.key\
-  -subj <span class="hljs-string">&quot;/C=<span class="hljs-variable">$Country</span>/ST=<span class="hljs-variable">$State</span>/L=<span class="hljs-variable">$Location</span>/O=<span class="hljs-variable">$Organization</span>/OU=<span class="hljs-variable">$OrganizationUnit</span>/CN=<span class="hljs-variable">$CommonName</span>&quot;</span>\
-  | openssl x509 -req -days <span class="hljs-variable">$ExpireDays</span> -out client.pem -CA ca.pem -CAkey ca.key -CAcreateserial \
+  -subj &quot;/C=$Country/ST=$State/L=$Location/O=$Organization/OU=$OrganizationUnit/CN=$CommonName&quot;\
+  | openssl x509 -req -days $ExpireDays -out client.pem -CA ca.pem -CAkey ca.key -CAcreateserial \
     -extfile ./openssl.cnf -extensions v3_req
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
@@ -164,19 +164,19 @@ openssl req -new -key client.key\
       </svg>
     </button></h2><p>Esta secção descreve os passos para configurar um servidor Milvus com encriptação TLS.</p>
 <h3 id="Setup-for-Docker-Compose" class="common-anchor-header">Configuração para o Docker Compose</h3><h4 id="1-Modify-the-Milvus-server-configuration" class="common-anchor-header">1. Modificar a configuração do servidor Milvus</h4><p>Para ativar o TLS externo, adicione as seguintes configurações no ficheiro <code translate="no">milvus.yaml</code>:</p>
-<pre><code translate="no" class="language-yaml">proxy:
-  http:
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
+  <span class="hljs-attr">http:</span>
     <span class="hljs-comment"># for now milvus do not support config restful on same port with grpc</span>
     <span class="hljs-comment"># so we set to 8080, grpc will still use 19530</span>
-    port: <span class="hljs-number">8080</span> 
-tls:
-  serverPemPath: /milvus/tls/server.pem
-  serverKeyPath: /milvus/tls/server.key
-  caPemPath: /milvus/tls/ca.pem
+    <span class="hljs-attr">port:</span> <span class="hljs-number">8080</span> 
+<span class="hljs-attr">tls:</span>
+  <span class="hljs-attr">serverPemPath:</span> <span class="hljs-string">/milvus/tls/server.pem</span>
+  <span class="hljs-attr">serverKeyPath:</span> <span class="hljs-string">/milvus/tls/server.key</span>
+  <span class="hljs-attr">caPemPath:</span> <span class="hljs-string">/milvus/tls/ca.pem</span>
 
-common:
-  security:
-    tlsMode: <span class="hljs-number">1</span>
+<span class="hljs-attr">common:</span>
+  <span class="hljs-attr">security:</span>
+    <span class="hljs-attr">tlsMode:</span> <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Parâmetros:</p>
 <ul>
@@ -189,14 +189,14 @@ common:
 </ul></li>
 </ul>
 <p>Para ativar o TLS interno, adicione as seguintes configurações no arquivo <code translate="no">milvus.yaml</code>:</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">internaltls</span>:
-  <span class="hljs-attr">serverPemPath</span>: <span class="hljs-regexp">/milvus/</span>tls/server.<span class="hljs-property">pem</span>
-  <span class="hljs-attr">serverKeyPath</span>: <span class="hljs-regexp">/milvus/</span>tls/server.<span class="hljs-property">key</span>
-  <span class="hljs-attr">caPemPath</span>: <span class="hljs-regexp">/milvus/</span>tls/ca.<span class="hljs-property">pem</span>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">internaltls:</span>
+  <span class="hljs-attr">serverPemPath:</span> <span class="hljs-string">/milvus/tls/server.pem</span>
+  <span class="hljs-attr">serverKeyPath:</span> <span class="hljs-string">/milvus/tls/server.key</span>
+  <span class="hljs-attr">caPemPath:</span> <span class="hljs-string">/milvus/tls/ca.pem</span>
 
-<span class="hljs-attr">common</span>:
-  <span class="hljs-attr">security</span>:
-    <span class="hljs-attr">internaltlsEnabled</span>: <span class="hljs-literal">true</span> 
+<span class="hljs-attr">common:</span>
+  <span class="hljs-attr">security:</span>
+    <span class="hljs-attr">internaltlsEnabled:</span> <span class="hljs-literal">true</span> 
 <button class="copy-code-btn"></button></code></pre>
 <p>Parâmetros:</p>
 <ul>
@@ -209,160 +209,160 @@ common:
 <pre><code translate="no">├── docker-compose.yml
 ├── milvus.yaml
 └── tls
-     ├── server.pem
+<span class="hljs-code">     ├── server.pem
      ├── server.key
      └── ca.pem
-<button class="copy-code-btn"></button></code></pre>
+</span><button class="copy-code-btn"></button></code></pre>
 <h4 id="Update-Docker-Compose-configuration" class="common-anchor-header">Atualizar a configuração do Docker Compose</h4><p>Edite o ficheiro <code translate="no">docker-compose.yaml</code> para mapear os caminhos do ficheiro de certificado dentro do contentor, conforme mostrado abaixo:</p>
-<pre><code translate="no" class="language-yaml">  standalone:
-    container_name: milvus-standalone
-    image: milvusdb/milvus:latest
-    <span class="hljs-built_in">command</span>: [<span class="hljs-string">&quot;milvus&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;standalone&quot;</span>]
-    security_opt:
-    - seccomp:unconfined
-    environment:
-      ETCD_ENDPOINTS: etcd:2379
-      MINIO_ADDRESS: minio:9000
-    volumes:
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/volumes/milvus:/var/lib/milvus
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/tls:/milvus/tls
-      - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/milvus.yaml:/milvus/configs/milvus.yaml
+<pre><code translate="no" class="language-yaml">  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:latest</span>
+    <span class="hljs-attr">command:</span> [<span class="hljs-string">&quot;milvus&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;standalone&quot;</span>]
+    <span class="hljs-attr">security_opt:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">seccomp:unconfined</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">ETCD_ENDPOINTS:</span> <span class="hljs-string">etcd:2379</span>
+      <span class="hljs-attr">MINIO_ADDRESS:</span> <span class="hljs-string">minio:9000</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/tls:/milvus/tls</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h5 id="Deploy-Milvus-using-Docker-Compose" class="common-anchor-header">Implantar o Milvus usando o Docker Compose</h5><p>Execute o seguinte comando para implantar o Milvus:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Setup-for-Milvus-Operator" class="common-anchor-header">Configuração para o operador do Milvus</h3><p>Coloque os ficheiros de certificado no seu diretório de trabalho. A estrutura do diretório deve ser semelhante a esta:</p>
-<pre><code translate="no">├── milvus.yaml (to be created later)
+<h3 id="Setup-for-Milvus-Operator" class="common-anchor-header">Configuração para o Milvus Operator</h3><p>Coloque os ficheiros de certificado no seu diretório de trabalho. A estrutura do diretório deve ser semelhante a esta:</p>
+<pre><code translate="no">├── milvus.yaml (<span class="hljs-keyword">to</span> be created later)
 ├── server.pem
-├── server.key
+├── server.<span class="hljs-keyword">key</span>
 └── ca.pem
 <button class="copy-code-btn"></button></code></pre>
 <p>Crie um segredo com os ficheiros de certificado:</p>
-<pre><code translate="no" class="language-bash">kubectl create secret generic certs --<span class="hljs-keyword">from</span>-file=server.<span class="hljs-property">pem</span> --<span class="hljs-keyword">from</span>-file=server.<span class="hljs-property">key</span> --<span class="hljs-keyword">from</span>-file=ca.<span class="hljs-property">pem</span>
+<pre><code translate="no" class="language-bash">kubectl create secret generic certs --from-file=server.pem --from-file=server.key --from-file=ca.pem
 <button class="copy-code-btn"></button></code></pre>
 <p>Para ativar o TLS externo, adicione as seguintes configurações no ficheiro <code translate="no">milvus.yaml</code>:</p>
-<pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-spec:
-  config:
-    proxy:
-      http:
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">config:</span>
+    <span class="hljs-attr">proxy:</span>
+      <span class="hljs-attr">http:</span>
         <span class="hljs-comment"># for now not support config restful on same port with grpc</span>
         <span class="hljs-comment"># so we set to 8080, grpc will still use 19530</span>
-        port: <span class="hljs-number">8080</span> 
-    common:
-      security:
-        tlsMode: <span class="hljs-number">1</span> <span class="hljs-comment"># tlsMode for external service 1 for one-way TLS, 2 for Mutual TLS, 0 for disable</span>
-    tls:
-      serverPemPath: /certs/server.pem
-      serverKeyPath: /certs/server.key
-      caPemPath: /certs/ca.pem
-  components:
+        <span class="hljs-attr">port:</span> <span class="hljs-number">8080</span> 
+    <span class="hljs-attr">common:</span>
+      <span class="hljs-attr">security:</span>
+        <span class="hljs-attr">tlsMode:</span> <span class="hljs-number">1</span> <span class="hljs-comment"># tlsMode for external service 1 for one-way TLS, 2 for Mutual TLS, 0 for disable</span>
+    <span class="hljs-attr">tls:</span>
+      <span class="hljs-attr">serverPemPath:</span> <span class="hljs-string">/certs/server.pem</span>
+      <span class="hljs-attr">serverKeyPath:</span> <span class="hljs-string">/certs/server.key</span>
+      <span class="hljs-attr">caPemPath:</span> <span class="hljs-string">/certs/ca.pem</span>
+  <span class="hljs-attr">components:</span>
     <span class="hljs-comment"># mount the certs secret to the milvus container</span>
-    volumes:
-      - name: certs
-        secret:
-          secretName: certs
-    volumeMounts:
-      - name: certs
-        mountPath: /certs
-        readOnly: true
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">certs</span>
+        <span class="hljs-attr">secret:</span>
+          <span class="hljs-attr">secretName:</span> <span class="hljs-string">certs</span>
+    <span class="hljs-attr">volumeMounts:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">certs</span>
+        <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/certs</span>
+        <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para ativar o TLS interno, adicione as seguintes configurações no arquivo <code translate="no">milvus.yaml</code>:</p>
 <p>Não se esqueça de substituir o campo <code translate="no">internaltls.sni</code> pelo CommonName nos seus certificados.</p>
-<pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
-kind: Milvus
-metadata:
-  name: my-release
-spec:
-  config:
-    proxy:
-      http:
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">my-release</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">config:</span>
+    <span class="hljs-attr">proxy:</span>
+      <span class="hljs-attr">http:</span>
         <span class="hljs-comment"># for now not support config restful on same port with grpc</span>
         <span class="hljs-comment"># so we set to 8080, grpc will still use 19530</span>
-        port: <span class="hljs-number">8080</span> 
-    common:
-      security:
-        internaltlsEnabled: true <span class="hljs-comment"># whether to enable internal tls</span>
+        <span class="hljs-attr">port:</span> <span class="hljs-number">8080</span> 
+    <span class="hljs-attr">common:</span>
+      <span class="hljs-attr">security:</span>
+        <span class="hljs-attr">internaltlsEnabled:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># whether to enable internal tls</span>
     <span class="hljs-comment"># Configure tls certificates path for internal service</span>
-    internaltls:
-      serverPemPath: /certs/server.pem
-      serverKeyPath: /certs/server.key
-      caPemPath: /certs/ca.pem
-      sni: localhost <span class="hljs-comment"># the CommonName in your certificates</span>
-  components:
+    <span class="hljs-attr">internaltls:</span>
+      <span class="hljs-attr">serverPemPath:</span> <span class="hljs-string">/certs/server.pem</span>
+      <span class="hljs-attr">serverKeyPath:</span> <span class="hljs-string">/certs/server.key</span>
+      <span class="hljs-attr">caPemPath:</span> <span class="hljs-string">/certs/ca.pem</span>
+      <span class="hljs-attr">sni:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># the CommonName in your certificates</span>
+  <span class="hljs-attr">components:</span>
     <span class="hljs-comment"># mount the certs secret to the milvus container</span>
-    volumes:
-      - name: certs
-        secret:
-          secretName: certs
-    volumeMounts:
-      - name: certs
-        mountPath: /certs
-        readOnly: true
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">certs</span>
+        <span class="hljs-attr">secret:</span>
+          <span class="hljs-attr">secretName:</span> <span class="hljs-string">certs</span>
+    <span class="hljs-attr">volumeMounts:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">certs</span>
+        <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/certs</span>
+        <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>criar o Milvus CR:</p>
 <pre><code translate="no" class="language-bash">kubectl create -f milvus.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="setup-for-Milvus-Helm" class="common-anchor-header">configuração para o Milvus Helm</h3><p>Coloque os ficheiros de certificados no seu diretório de trabalho. A estrutura do diretório deve ter o seguinte aspeto:</p>
-<pre><code translate="no">├── values.yaml (to be created later)
+<pre><code translate="no">├── values.yaml (<span class="hljs-keyword">to</span> be created later)
 ├── server.pem
-├── server.key
+├── server.<span class="hljs-keyword">key</span>
 └── ca.pem
 <button class="copy-code-btn"></button></code></pre>
 <p>Crie um segredo com os ficheiros de certificados:</p>
-<pre><code translate="no" class="language-bash">kubectl create secret generic certs --<span class="hljs-keyword">from</span>-file=server.<span class="hljs-property">pem</span> --<span class="hljs-keyword">from</span>-file=server.<span class="hljs-property">key</span> --<span class="hljs-keyword">from</span>-file=ca.<span class="hljs-property">pem</span>
+<pre><code translate="no" class="language-bash">kubectl create secret generic certs --from-file=server.pem --from-file=server.key --from-file=ca.pem
 <button class="copy-code-btn"></button></code></pre>
 <p>Para ativar o TLS externo, adicione as seguintes configurações no ficheiro <code translate="no">values.yaml</code>:</p>
-<pre><code translate="no" class="language-yaml">extraConfigFiles:
-  user.yaml: |+
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     proxy:
       http:
-        <span class="hljs-comment"># for now not support config restful on same port with grpc</span>
-        <span class="hljs-comment"># so we set to 8080, grpc will still use 19530</span>
-        port: <span class="hljs-number">8080</span> 
+        # for now not support config restful on same port with grpc
+        # so we set to 8080, grpc will still use 19530
+        port: 8080 
     common:
       security:
-        tlsMode: <span class="hljs-number">1</span> <span class="hljs-comment"># tlsMode for external service 1 means set to 2 to enable Mutual TLS</span>
-    <span class="hljs-comment"># Configure tls certificates path for external service</span>
+        tlsMode: 1 # tlsMode for external service 1 means set to 2 to enable Mutual TLS
+    # Configure tls certificates path for external service
     tls:
       serverPemPath: /certs/server.pem
       serverKeyPath: /certs/server.key
       caPemPath: /certs/ca.pem
-<span class="hljs-comment"># mount the certs secret to the milvus container</span>
-volumes:
-  - name: certs
-    secret:
-      secretName: certs
-volumeMounts:
-  - name: certs
-    mountPath: /certs
-    readOnly: true
+</span><span class="hljs-comment"># mount the certs secret to the milvus container</span>
+<span class="hljs-attr">volumes:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">certs</span>
+    <span class="hljs-attr">secret:</span>
+      <span class="hljs-attr">secretName:</span> <span class="hljs-string">certs</span>
+<span class="hljs-attr">volumeMounts:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">certs</span>
+    <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/certs</span>
+    <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para ativar o TLS interno, adicione as seguintes configurações no arquivo <code translate="no">values.yaml</code>:</p>
 <p>Não se esqueça de substituir o campo <code translate="no">internaltls.sni</code> pelo CommonName nos seus certificados.</p>
-<pre><code translate="no" class="language-yaml">extraConfigFiles:
-  user.yaml: |+
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
+  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     common:
       security:
-        internaltlsEnabled: <span class="hljs-literal">true</span> <span class="hljs-comment"># whether to enable internal tls</span>
-    <span class="hljs-comment"># Configure tls certificates path for internal service</span>
+        internaltlsEnabled: true # whether to enable internal tls
+    # Configure tls certificates path for internal service
     internaltls:
       serverPemPath: /certs/server.pem
       serverKeyPath: /certs/server.key
       caPemPath: /certs/ca.pem
       sni: localhost
-<span class="hljs-comment"># mount the certs secret to the milvus container</span>
-volumes:
-  - name: certs
-    secret:
-      secretName: certs
-volumeMounts:
-  - name: certs
-    mountPath: /certs
-    readOnly: <span class="hljs-literal">true</span>
+</span><span class="hljs-comment"># mount the certs secret to the milvus container</span>
+<span class="hljs-attr">volumes:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">certs</span>
+    <span class="hljs-attr">secret:</span>
+      <span class="hljs-attr">secretName:</span> <span class="hljs-string">certs</span>
+<span class="hljs-attr">volumeMounts:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">certs</span>
+    <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/certs</span>
+    <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Criar a versão milvus:</p>
 <pre><code translate="no" class="language-bash">helm repo add milvus https://zilliztech.github.io/milvus-helm/
@@ -386,7 +386,7 @@ helm install my-release milvus/milvus -f values.yaml
       </svg>
     </button></h2><p>É difícil verificar o TLS interno diretamente. Pode verificar o registo do Milvus para ver se o TLS interno está ativado.</p>
 <p>No registo do Milvus, deverá ver a seguinte mensagem se o TLS interno estiver ativado:</p>
-<pre><code translate="no">[...<span class="hljs-built_in">date</span> time...] [INFO] [utils/util.go:56] [<span class="hljs-string">&quot;Internal TLS Enabled&quot;</span>] [value=<span class="hljs-literal">true</span>]
+<pre><code translate="no"><span class="hljs-selector-attr">[...date time...]</span> <span class="hljs-selector-attr">[INFO]</span> <span class="hljs-selector-attr">[utils/util.go:56]</span> <span class="hljs-selector-attr">[<span class="hljs-string">&quot;Internal TLS Enabled&quot;</span>]</span> <span class="hljs-selector-attr">[value=true]</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-to-the-Milvus-server-with-TLS" class="common-anchor-header">Ligar ao servidor Milvus com TLS<button data-href="#Connect-to-the-Milvus-server-with-TLS" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -426,7 +426,7 @@ client = MilvusClient(
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Consulte <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py">example_tls1.py</a> e <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py">example_tls2.py</a> para obter mais informações.</p>
+<p>Consulte <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/cert/example_tls1.py">example_tls1.py</a> e <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/cert/example_tls2.py">example_tls2.py</a> para obter mais informações.</p>
 <h2 id="Connect-to-the-Milvus-RESTful-server-with-TLS" class="common-anchor-header">Ligar ao servidor Milvus RESTful com TLS<button data-href="#Connect-to-the-Milvus-RESTful-server-with-TLS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -57,7 +57,6 @@ summary: JSON 欄位是一種標量欄位，它以鍵值對的方式，與向量
 <li><p><code translate="no">'a&quot;b'</code>,<code translate="no">&quot;a'b&quot;</code>,<code translate="no">'a\\'b'</code>, 和<code translate="no">&quot;a\\&quot;b&quot;</code> 會如實儲存。</p></li>
 <li><p><code translate="no">'a'b'</code> 和 被視為無效。<code translate="no">&quot;a&quot;b&quot;</code> </p></li>
 </ul></li>
-<li><p><strong>JSON 索引</strong>：索引 JSON 欄位時，您可以在 JSON 欄位中指定一個或多個路徑，以加速篩選。每個額外的路徑都會增加索引開銷，因此請仔細規劃您的索引策略。如需更多關於 JSON 欄位索引的注意事項，請參閱<a href="/docs/zh-hant/use-json-fields.md#share-N2tOdsWXEo0VgsxmzRZcSa50n0e">JSON 索引的注意事項</a>。</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">新增 JSON 欄位<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,7 +73,7 @@ summary: JSON 欄位是一種標量欄位，它以鍵值對的方式，與向量
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要將此 JSON 欄位<code translate="no">metadata</code> 加入您的集合模式，請使用<code translate="no">DataType.JSON</code> 。下面的範例定義了一個允許 null 值的 JSON 欄位<code translate="no">metadata</code> ：</p>
+    </button></h2><p>若要將此 JSON 欄位<code translate="no">metadata</code> 加入您的集合模式，請使用<code translate="no">DataType.JSON</code> 。下面的範例定義了一個允許 null 值的 JSON 欄位<code translate="no">metadata</code> ：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
@@ -372,7 +371,7 @@ curl --request POST \
 <ul>
 <li><p><strong>過濾邏輯</strong>：</p>
 <ul>
-<li><p>如果您<strong>建立了雙重類型的索引</strong>(<code translate="no">json_cast_type=&quot;double&quot;</code>)，則只有數值類型的篩選條件才能使用該索引。如果篩選條件將雙索引與非數字條件比較，Milvus 會退回到暴力搜尋。</p></li>
+<li><p>如果您<strong>建立了雙重類型的索引</strong>(<code translate="no">json_cast_type=&quot;double&quot;</code>)，則只有數值類型的篩選條件才能使用該索引。如果篩選條件將雙索引與非數字條件比較，Milvus 就會退回到暴力搜尋。</p></li>
 <li><p>如果您<strong>建立了 varchar 類型的索引</strong>(<code translate="no">json_cast_type=&quot;varchar&quot;</code>)，只有字串類型的篩選條件可以使用該索引。否則，Milvus 會回到暴力搜尋。</p></li>
 <li><p><strong>布林</strong>索引的行為與 varchar-type 類似。</p></li>
 </ul></li>

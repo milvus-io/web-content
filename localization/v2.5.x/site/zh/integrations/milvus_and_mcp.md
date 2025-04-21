@@ -3,7 +3,7 @@ id: milvus_and_mcp.md
 summary: >-
   本教程将指导您为 Milvus 设置 MCP 服务器，让人工智能应用程序能够使用自然语言命令执行向量搜索、管理 Collections
   和检索数据，而无需编写自定义数据库查询。
-title: Milvus 与 MindsDB 集成
+title: MCP + Milvus：连接人工智能与向量数据库
 ---
 <h1 id="MCP-+-Milvus-Connecting-AI-with-Vector-Databases" class="common-anchor-header">MCP + Milvus：连接人工智能与向量数据库<button data-href="#MCP-+-Milvus-Connecting-AI-with-Vector-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +37,7 @@ title: Milvus 与 MindsDB 集成
         ></path>
       </svg>
     </button></h2><p><strong>模型上下文协议（MCP）</strong>是一种开放式协议，可使人工智能应用程序（如 Claude 和 Cursor）与外部数据源和工具进行无缝交互。无论您是要构建自定义 AI 应用程序、集成 AI 工作流，还是要增强聊天界面，MCP 都提供了一种将大型语言模型 (LLM) 与相关上下文数据连接起来的标准化方法。</p>
-<p>本教程将指导您<strong>为 Milvus 设置 MCP 服务器</strong>，让人工智能应用能够使用<strong>自然语言命令</strong>执行向量搜索、管理 Collections 和检索数据，<strong>而无需</strong>编写自定义数据库查询。</p>
+<p>本教程将指导您<strong>为 Milvus 设置 MCP 服务器</strong>，使人工智能应用能够使用<strong>自然语言命令</strong>执行向量搜索、管理 Collections 和检索数据，<strong>而无需</strong>编写自定义数据库查询。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,21 +125,21 @@ title: Milvus 与 MindsDB 集成
 </ul></li>
 <li>添加以下配置：</li>
 </ol>
-<pre><code translate="no" class="language-json">{
-  <span class="hljs-string">&quot;mcpServers&quot;</span>: {
-    <span class="hljs-string">&quot;milvus&quot;</span>: {
-      <span class="hljs-string">&quot;command&quot;</span>: <span class="hljs-string">&quot;/PATH/TO/uv&quot;</span>,
-      <span class="hljs-string">&quot;args&quot;</span>: [
-        <span class="hljs-string">&quot;--directory&quot;</span>,
-        <span class="hljs-string">&quot;/path/to/mcp-server-milvus/src/mcp_server_milvus&quot;</span>,
-        <span class="hljs-string">&quot;run&quot;</span>,
-        <span class="hljs-string">&quot;server.py&quot;</span>,
-        <span class="hljs-string">&quot;--milvus-uri&quot;</span>,
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;mcpServers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;milvus&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/PATH/TO/uv&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;--directory&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;/path/to/mcp-server-milvus/src/mcp_server_milvus&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;run&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;server.py&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;--milvus-uri&quot;</span><span class="hljs-punctuation">,</span>
         <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-      ]
-    }
-  }
-}
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="4">
 <li>重新启动 Claude Desktop 以应用更改。</li>
@@ -174,21 +174,21 @@ title: Milvus 与 MindsDB 集成
 <h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">选项 2：使用特定于项目的配置（推荐）</h3><ol>
 <li>在<strong>项目根目录</strong>下创建<code translate="no">.cursor/mcp.json</code> 文件：</li>
 </ol>
-<pre><code translate="no" class="language-json">{
-  <span class="hljs-string">&quot;mcpServers&quot;</span>: {
-    <span class="hljs-string">&quot;milvus&quot;</span>: {
-      <span class="hljs-string">&quot;command&quot;</span>: <span class="hljs-string">&quot;/PATH/TO/uv&quot;</span>,
-      <span class="hljs-string">&quot;args&quot;</span>: [
-        <span class="hljs-string">&quot;--directory&quot;</span>,
-        <span class="hljs-string">&quot;/path/to/mcp-server-milvus/src/mcp_server_milvus&quot;</span>,
-        <span class="hljs-string">&quot;run&quot;</span>,
-        <span class="hljs-string">&quot;server.py&quot;</span>,
-        <span class="hljs-string">&quot;--milvus-uri&quot;</span>,
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;mcpServers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;milvus&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/PATH/TO/uv&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;--directory&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;/path/to/mcp-server-milvus/src/mcp_server_milvus&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;run&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;server.py&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;--milvus-uri&quot;</span><span class="hljs-punctuation">,</span>
         <span class="hljs-string">&quot;http://127.0.0.1:19530&quot;</span>
-      ]
-    }
-  }
-}
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>重新启动 Cursor 以应用配置。</li>
@@ -297,7 +297,7 @@ title: Milvus 与 MindsDB 集成
         ></path>
       </svg>
     </button></h2><p>直接运行服务器：</p>
-<pre><code translate="no" class="language-bash">uv run server.<span class="hljs-property">py</span> --milvus-uri <span class="hljs-attr">http</span>:<span class="hljs-comment">//localhost:19530</span>
+<pre><code translate="no" class="language-bash">uv run server.py --milvus-uri http://localhost:19530
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -314,46 +314,46 @@ title: Milvus 与 MindsDB 集成
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">使用克劳德桌面</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">示例 1：列出 Collection</h4><pre><code translate="no">What are the collections I have in my Milvus DB?
+    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">使用克劳德桌面</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">示例 1：列出 Collection</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
 <button class="copy-code-btn"></button></code></pre>
 <p>Claude 将使用 MCP 在我们的 Milvus DB 上检查这些信息。</p>
-<pre><code translate="no">I&#x27;ll check what collections are available in your Milvus database.
+<pre><code translate="no">I<span class="hljs-comment">&#x27;ll check what collections are available in your Milvus database.</span>
 
-&gt; View result from milvus-list-collections from milvus (local)
+&gt; View result <span class="hljs-keyword">from</span> milvus-list-collections <span class="hljs-keyword">from</span> milvus (local)
 
-Here are the collections in your Milvus database:
+Here are the collections <span class="hljs-keyword">in</span> your Milvus database:
 
-1. rag_demo
-2. test
-3. chat_messages
-4. text_collection
-5. image_collection
-6. customized_setup
-7. streaming_rag_demo
+<span class="hljs-number">1</span>. rag_demo
+<span class="hljs-number">2</span>. test
+<span class="hljs-number">3</span>. chat_messages
+<span class="hljs-number">4</span>. text_collection
+<span class="hljs-number">5</span>. image_collection
+<span class="hljs-number">6</span>. customized_setup
+<span class="hljs-number">7</span>. streaming_rag_demo
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-2-Searching-for-Documents" class="common-anchor-header">示例 2：搜索文件</h4><pre><code translate="no"><span class="hljs-title class_">Find</span> documents <span class="hljs-keyword">in</span> my text_collection that mention <span class="hljs-string">&quot;machine learning&quot;</span>
+<h4 id="Example-2-Searching-for-Documents" class="common-anchor-header">示例 2：搜索文件</h4><pre><code translate="no">Find documents in <span class="hljs-keyword">my</span> text_collection that mention <span class="hljs-string">&quot;machine learning&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>克劳德将使用 Milvus 的全文搜索功能查找相关文档：</p>
-<pre><code translate="no">I&#x27;ll search for documents about machine learning in your text_collection.
+<pre><code translate="no">I<span class="hljs-comment">&#x27;ll search for documents about machine learning in your text_collection.</span>
 
-&gt; View result from milvus-text-search from milvus (local)
+&gt; View result <span class="hljs-keyword">from</span> milvus-<span class="hljs-keyword">text</span>-search <span class="hljs-keyword">from</span> milvus (local)
 
 Here are the documents I found that mention machine learning:
-[Results will appear here based on your actual data]
+[Results will appear here based <span class="hljs-keyword">on</span> your actual data]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Using-Cursor" class="common-anchor-header">使用光标</h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">示例：创建 Collections</h4><p>在 Cursor 的 Composer 中，你可以询问：</p>
 <pre><code translate="no">Create a <span class="hljs-keyword">new</span> collection called <span class="hljs-string">&#x27;articles&#x27;</span> <span class="hljs-function"><span class="hljs-keyword">in</span> Milvus <span class="hljs-keyword">with</span> fields <span class="hljs-keyword">for</span> <span class="hljs-title">title</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-title">content</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-keyword">and</span> a vector <span class="hljs-title">field</span> (<span class="hljs-params"><span class="hljs-number">128</span> dimensions</span>)
 </span><button class="copy-code-btn"></button></code></pre>
 <p>Cursor 将使用 MCP 服务器执行此操作：</p>
-<pre><code translate="no">I<span class="hljs-string">&#x27;ll create a new collection called &#x27;</span>articles<span class="hljs-string">&#x27; with the specified fields.
+<pre><code translate="no">I<span class="hljs-comment">&#x27;ll create a new collection called &#x27;articles&#x27; with the specified fields.</span>
 
-&gt; View result from milvus-create-collection from milvus (local)
+&gt; View result <span class="hljs-keyword">from</span> milvus-create-collection <span class="hljs-keyword">from</span> milvus (local)
 
-Collection &#x27;</span>articles<span class="hljs-string">&#x27; has been created successfully with the following schema:
-- title: string
-- content: string
-- vector: float vector[128]
-</span><button class="copy-code-btn"></button></code></pre>
+Collection <span class="hljs-comment">&#x27;articles&#x27; has been created successfully with the following schema:</span>
+- title: <span class="hljs-type">string</span>
+- content: <span class="hljs-type">string</span>
+- vector: float vector[<span class="hljs-number">128</span>]
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Troubleshooting" class="common-anchor-header">故障排除<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -369,7 +369,7 @@ Collection &#x27;</span>articles<span class="hljs-string">&#x27; has been create
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Common-Issues" class="common-anchor-header">常见问题</h3><h4 id="Connection-Errors" class="common-anchor-header">连接错误</h4><p>如果看到类似 &quot;连接 Milvus 服务器失败 &quot;的错误：</p>
+    </button></h2><h3 id="Common-Issues" class="common-anchor-header">常见问题</h3><h4 id="Connection-Errors" class="common-anchor-header">连接错误</h4><p>如果看到类似 "连接 Milvus 服务器失败 "的错误：</p>
 <ol>
 <li>验证你的 Milvus 实例是否正在运行：<code translate="no">docker ps</code> （如果使用 Docker）</li>
 <li>检查配置中的 URI 是否正确</li>
@@ -391,7 +391,7 @@ Collection &#x27;</span>articles<span class="hljs-string">&#x27; has been create
 </ol>
 <h3 id="Getting-Help" class="common-anchor-header">获取帮助</h3><p>如果您继续遇到问题：</p>
 <ol>
-<li>查看<a href="https://github.com/zilliztech/mcp-server-milvus/issues">GitHub Issues</a>中的类似问题</li>
+<li>查看<a href="https://github.com/zilliztech/mcp-server-milvus/issues">GitHub Issues</a>中的类似<a href="https://github.com/zilliztech/mcp-server-milvus/issues">问题</a></li>
 <li>加入<a href="https://discord.gg/zilliz">Zilliz 社区 Discord</a>寻求支持</li>
 <li>提交一个新问题，并详细说明您的问题</li>
 </ol>

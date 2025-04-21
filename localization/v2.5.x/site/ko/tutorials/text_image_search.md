@@ -5,6 +5,12 @@ summary: >-
   방법을 살펴봅니다. CLIP으로 이미지 임베딩을 생성하고 Milvus에 저장한 후 효율적인 유사도 검색을 수행해 보겠습니다.
 title: Milvus를 사용한 텍스트-이미지 검색
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Text-to-Image-Search-with-Milvus" class="common-anchor-header">Milvus를 사용한 텍스트-이미지 검색<button data-href="#Text-to-Image-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

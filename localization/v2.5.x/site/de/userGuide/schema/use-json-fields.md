@@ -51,7 +51,7 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p><strong>Feldgröße</strong>: JSON-Felder sind auf eine Größe von 65.536 Byte begrenzt.</p></li>
-<li><p><strong>Verschachtelte Wörterbücher</strong>: Alle verschachtelten Dictionaries innerhalb von JSON-Feldwerten werden bei der Speicherung als einfache Strings behandelt.</p></li>
+<li><p><strong>Verschachtelte Wörterbücher</strong>: Alle verschachtelten Dictionaries innerhalb von JSON-Feldwerten werden bei der Speicherung als einfache Zeichenketten behandelt.</p></li>
 <li><p><strong>Standardwerte</strong>: JSON-Felder unterstützen keine Standardwerte. Sie können jedoch das Attribut <code translate="no">nullable</code> auf <code translate="no">True</code> setzen, um Nullwerte zuzulassen. Einzelheiten finden Sie unter <a href="/docs/de/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
 <li><p><strong>Typübereinstimmung</strong>: Wenn der Schlüsselwert eines JSON-Feldes ein Integer- oder Float-Wert ist, kann er nur (über Ausdrucksfilter) mit einem anderen numerischen Schlüssel desselben Typs verglichen werden.</p></li>
 <li><p><strong>Benennung</strong>: Es wird empfohlen, bei der Benennung von JSON-Schlüsseln nur Buchstaben, Zahlen und Unterstriche zu verwenden. Die Verwendung anderer Zeichen kann zu Problemen bei der Filterung oder Suche führen.</p></li>
@@ -60,7 +60,6 @@ summary: >-
 <li><p><code translate="no">'a&quot;b'</code> <code translate="no">&quot;a'b&quot;</code>, und werden genau so gespeichert, wie sie sind. <code translate="no">'a\\'b'</code> <code translate="no">&quot;a\\&quot;b&quot;</code> </p></li>
 <li><p><code translate="no">'a'b'</code> und <code translate="no">&quot;a&quot;b&quot;</code> werden als ungültig betrachtet.</p></li>
 </ul></li>
-<li><p><strong>JSON-Indizierung</strong>: Bei der Indizierung eines JSON-Feldes können Sie einen oder mehrere Pfade im JSON-Feld angeben, um die Filterung zu beschleunigen. Jeder zusätzliche Pfad erhöht den Indizierungs-Overhead, daher sollten Sie Ihre Indizierungsstrategie sorgfältig planen. Weitere Überlegungen zur Indizierung eines JSON-Feldes finden Sie unter <a href="/docs/de/use-json-fields.md#share-N2tOdsWXEo0VgsxmzRZcSa50n0e">Überlegungen zur JSON-Indizierung</a>.</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">JSON-Feld hinzufügen<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,7 +76,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um dieses JSON-Feld <code translate="no">metadata</code> zu Ihrem Auflistungsschema hinzuzufügen, verwenden Sie <code translate="no">DataType.JSON</code>. Im folgenden Beispiel wird ein JSON-Feld <code translate="no">metadata</code> definiert, das Nullwerte zulässt:</p>
+    </button></h2><p>Um dieses JSON-Feld <code translate="no">metadata</code> zu Ihrem Sammlungsschema hinzuzufügen, verwenden Sie <code translate="no">DataType.JSON</code>. Das folgende Beispiel definiert ein JSON-Feld <code translate="no">metadata</code>, das Nullwerte zulässt:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
@@ -362,7 +361,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_path</code></p></td>
-     <td><p>Gibt an, welcher JSON-Pfad indiziert werden soll. Sie können auf verschachtelte Schlüssel, Array-Positionen oder beides abzielen (z. B. <code translate="no">metadata["product_info"]["category"]</code> oder <code translate="no">metadata["tags"][0]</code>). Wenn der Pfad fehlt oder das Array-Element für eine bestimmte Zeile nicht existiert, wird diese Zeile bei der Indizierung einfach übersprungen und es wird kein Fehler ausgelöst.</p></td>
+     <td><p>Gibt an, welcher JSON-Pfad indiziert werden soll. Sie können auf verschachtelte Schlüssel, Array-Positionen oder beides abzielen (z. B. <code translate="no">metadata["product_info"]["category"]</code> oder <code translate="no">metadata["tags"][0]</code>). Wenn der Pfad fehlt oder das Array-Element für eine bestimmte Zeile nicht existiert, wird diese Zeile während der Indizierung einfach übersprungen und es wird kein Fehler ausgelöst.</p></td>
      <td><p><code translate="no">"metadata[\"product_info\"][\"category\"]"</code></p></td>
    </tr>
    <tr>

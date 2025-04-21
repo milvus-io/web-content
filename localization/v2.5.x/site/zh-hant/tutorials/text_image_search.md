@@ -5,6 +5,12 @@ summary: >-
   Milvus 實現基於文字的圖像檢索。我們將透過 CLIP 產生圖片嵌入，將圖片嵌入儲存於 Milvus，並執行有效率的相似性搜尋。
 title: 使用 Milvus 進行文字轉圖像搜尋
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/text_image_search_with_milvus.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Text-to-Image-Search-with-Milvus" class="common-anchor-header">使用 Milvus 進行文字轉圖像搜尋<button data-href="#Text-to-Image-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

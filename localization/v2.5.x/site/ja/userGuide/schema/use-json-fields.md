@@ -58,7 +58,6 @@ summary: >-
 <li><p><code translate="no">'a&quot;b'</code> <code translate="no">&quot;a'b&quot;</code>, , はそのまま保存されます。<code translate="no">'a\\'b'</code> <code translate="no">&quot;a\\&quot;b&quot;</code> </p></li>
 <li><p><code translate="no">'a'b'</code> および は無効とみなされます。<code translate="no">&quot;a&quot;b&quot;</code> </p></li>
 </ul></li>
-<li><p><strong>JSONインデックス</strong>：JSONフィールドにインデックスを作成する場合、フィルタリングを高速化するために、JSONフィールドに1つ以上のパスを指定することができます。パスを追加するごとにインデックス作成のオーバーヘッドが増加するため、インデックス作成戦略を慎重に計画してください。JSONフィールドのインデックス付けに関する考察は、<a href="/docs/ja/use-json-fields.md#share-N2tOdsWXEo0VgsxmzRZcSa50n0e">JSONインデックス付けに関する考察を</a>参照してください。</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">JSONフィールドの追加<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +74,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>この JSON フィールド<code translate="no">metadata</code> をコレクションスキーマに追加するには、<code translate="no">DataType.JSON</code> を使用します。以下の例では、ヌル値を許可する JSON フィールド<code translate="no">metadata</code> を定義しています：</p>
+    </button></h2><p>この JSON フィールド<code translate="no">metadata</code> をコレクションスキーマに追加するには、<code translate="no">DataType.JSON</code> を使用します。以下の例では、NULL 値を許可する JSON フィールド<code translate="no">metadata</code> を定義している：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
@@ -373,7 +372,7 @@ curl --request POST \
 <ul>
 <li><p><strong>フィルタリングロジック</strong>：</p>
 <ul>
-<li><p><strong>ダブル型インデックス (</strong><code translate="no">json_cast_type=&quot;double&quot;</code><strong>) を作成した</strong>場合、数値型フィルタ条件のみがそのインデックスを使用できます。フィルタでダブルインデックスと数値以外の条件が比較された場合、Milvusは総当たり検索にフォールバックします。</p></li>
+<li><p><strong>ダブル型インデックス (</strong><code translate="no">json_cast_type=&quot;double&quot;</code><strong>) を作成した</strong>場合、数値型フィルタ条件のみがそのインデックスを使用できます。フィルタがdoubleインデックスと数値以外の条件を比較した場合、milvusは総当たり検索にフォールバックします。</p></li>
 <li><p><strong>varchar型インデックス(</strong><code translate="no">json_cast_type=&quot;varchar&quot;</code><strong>)を作成した</strong>場合、文字列型フィルタ条件のみがインデックスを使用できます。そうでない場合、Milvusは総当り検索に戻ります。</p></li>
 <li><p><strong>ブール型</strong>インデックスもvarchar型インデックスと同様の動作をします。</p></li>
 </ul></li>

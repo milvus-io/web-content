@@ -5,7 +5,7 @@ summary: >-
   permitindo que as aplicações de IA efectuem pesquisas vectoriais, gerem
   colecções e recuperem dados utilizando comandos de linguagem natural - sem
   escrever consultas de bases de dados personalizadas.
-title: Integrar o Milvus com o MindsDB
+title: 'MCP + Milvus: Ligar a IA a bases de dados vectoriais'
 ---
 <h1 id="MCP-+-Milvus-Connecting-AI-with-Vector-Databases" class="common-anchor-header">MCP + Milvus: Ligar a IA às bases de dados vectoriais<button data-href="#MCP-+-Milvus-Connecting-AI-with-Vector-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -127,21 +127,21 @@ title: Integrar o Milvus com o MindsDB
 </ul></li>
 <li>Adicione a seguinte configuração:</li>
 </ol>
-<pre><code translate="no" class="language-json">{
-  <span class="hljs-string">&quot;mcpServers&quot;</span>: {
-    <span class="hljs-string">&quot;milvus&quot;</span>: {
-      <span class="hljs-string">&quot;command&quot;</span>: <span class="hljs-string">&quot;/PATH/TO/uv&quot;</span>,
-      <span class="hljs-string">&quot;args&quot;</span>: [
-        <span class="hljs-string">&quot;--directory&quot;</span>,
-        <span class="hljs-string">&quot;/path/to/mcp-server-milvus/src/mcp_server_milvus&quot;</span>,
-        <span class="hljs-string">&quot;run&quot;</span>,
-        <span class="hljs-string">&quot;server.py&quot;</span>,
-        <span class="hljs-string">&quot;--milvus-uri&quot;</span>,
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;mcpServers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;milvus&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/PATH/TO/uv&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;--directory&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;/path/to/mcp-server-milvus/src/mcp_server_milvus&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;run&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;server.py&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;--milvus-uri&quot;</span><span class="hljs-punctuation">,</span>
         <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-      ]
-    }
-  }
-}
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="4">
 <li>Reinicie o Claude Desktop para aplicar as alterações.</li>
@@ -176,26 +176,26 @@ title: Integrar o Milvus com o MindsDB
 <h3 id="Option-2-Using-Project-specific-Configuration-Recommended" class="common-anchor-header">Opção 2: Usar a configuração específica do projeto (recomendado)</h3><ol>
 <li>Crie um ficheiro <code translate="no">.cursor/mcp.json</code> no <strong>diretório raiz do</strong> seu <strong>projeto</strong>:</li>
 </ol>
-<pre><code translate="no" class="language-json">{
-  <span class="hljs-string">&quot;mcpServers&quot;</span>: {
-    <span class="hljs-string">&quot;milvus&quot;</span>: {
-      <span class="hljs-string">&quot;command&quot;</span>: <span class="hljs-string">&quot;/PATH/TO/uv&quot;</span>,
-      <span class="hljs-string">&quot;args&quot;</span>: [
-        <span class="hljs-string">&quot;--directory&quot;</span>,
-        <span class="hljs-string">&quot;/path/to/mcp-server-milvus/src/mcp_server_milvus&quot;</span>,
-        <span class="hljs-string">&quot;run&quot;</span>,
-        <span class="hljs-string">&quot;server.py&quot;</span>,
-        <span class="hljs-string">&quot;--milvus-uri&quot;</span>,
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;mcpServers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;milvus&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/PATH/TO/uv&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;--directory&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;/path/to/mcp-server-milvus/src/mcp_server_milvus&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;run&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;server.py&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-string">&quot;--milvus-uri&quot;</span><span class="hljs-punctuation">,</span>
         <span class="hljs-string">&quot;http://127.0.0.1:19530&quot;</span>
-      ]
-    }
-  }
-}
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>Reinicie o Cursor para aplicar a configuração.</li>
 </ol>
-<p>Após adicionar o servidor, pode ser necessário pressionar o botão atualizar nas configurações do MCP para preencher a lista de ferramentas. O Agente de composição utilizará automaticamente as ferramentas Milvus quando for relevante para as suas consultas.</p>
+<p>Depois de adicionar o servidor, pode ser necessário pressionar o botão atualizar nas configurações do MCP para preencher a lista de ferramentas. O Agente de composição utilizará automaticamente as ferramentas Milvus quando for relevante para as suas consultas.</p>
 <h2 id="Verifying-the-Integration" class="common-anchor-header">Verificação da integração<button data-href="#Verifying-the-Integration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -239,7 +239,7 @@ title: Integrar o Milvus com o MindsDB
 <li><strong><code translate="no">milvus-vector-search</code></strong> → Realizar pesquisa de similaridade de vetores em uma coleção.</li>
 <li><strong><code translate="no">milvus-hybrid-search</code></strong> → Efetuar uma pesquisa híbrida que combine a similaridade vetorial e a filtragem de atributos.</li>
 <li><strong><code translate="no">milvus-multi-vector-search</code></strong> → Realizar pesquisa de similaridade vetorial com múltiplos vetores de consulta.</li>
-<li><strong><code translate="no">milvus-query</code></strong> → Consulta de colecções utilizando expressões de filtragem.</li>
+<li><strong><code translate="no">milvus-query</code></strong> → Consultar uma coleção utilizando expressões de filtragem.</li>
 <li><strong><code translate="no">milvus-count</code></strong> → Contar entidades em uma coleção.</li>
 </ul>
 <h3 id="📁-Collection-Management" class="common-anchor-header">📁 Gestão de colecções</h3><ul>
@@ -299,7 +299,7 @@ title: Integrar o Milvus com o MindsDB
         ></path>
       </svg>
     </button></h2><p>Para executar o servidor diretamente:</p>
-<pre><code translate="no" class="language-bash">uv run server.<span class="hljs-property">py</span> --milvus-uri <span class="hljs-attr">http</span>:<span class="hljs-comment">//localhost:19530</span>
+<pre><code translate="no" class="language-bash">uv run server.py --milvus-uri http://localhost:19530
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -316,46 +316,46 @@ title: Integrar o Milvus com o MindsDB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">Usando o Claude Desktop</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">Exemplo 1: Listagem de colecções</h4><pre><code translate="no">What are the collections I have in my Milvus DB?
+    </button></h2><h3 id="Using-Claude-Desktop" class="common-anchor-header">Usando o Claude Desktop</h3><h4 id="Example-1-Listing-Collections" class="common-anchor-header">Exemplo 1: Listagem de colecções</h4><pre><code translate="no">What are the collections <span class="hljs-selector-tag">I</span> have in my Milvus DB?
 <button class="copy-code-btn"></button></code></pre>
 <p>O Claude irá então usar o MCP para verificar esta informação na nossa base de dados Milvus.</p>
-<pre><code translate="no">I&#x27;ll check what collections are available in your Milvus database.
+<pre><code translate="no">I<span class="hljs-comment">&#x27;ll check what collections are available in your Milvus database.</span>
 
-&gt; View result from milvus-list-collections from milvus (local)
+&gt; View result <span class="hljs-keyword">from</span> milvus-list-collections <span class="hljs-keyword">from</span> milvus (local)
 
-Here are the collections in your Milvus database:
+Here are the collections <span class="hljs-keyword">in</span> your Milvus database:
 
-1. rag_demo
-2. test
-3. chat_messages
-4. text_collection
-5. image_collection
-6. customized_setup
-7. streaming_rag_demo
+<span class="hljs-number">1</span>. rag_demo
+<span class="hljs-number">2</span>. test
+<span class="hljs-number">3</span>. chat_messages
+<span class="hljs-number">4</span>. text_collection
+<span class="hljs-number">5</span>. image_collection
+<span class="hljs-number">6</span>. customized_setup
+<span class="hljs-number">7</span>. streaming_rag_demo
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-2-Searching-for-Documents" class="common-anchor-header">Exemplo 2: Pesquisa de documentos</h4><pre><code translate="no"><span class="hljs-title class_">Find</span> documents <span class="hljs-keyword">in</span> my text_collection that mention <span class="hljs-string">&quot;machine learning&quot;</span>
+<h4 id="Example-2-Searching-for-Documents" class="common-anchor-header">Exemplo 2: Pesquisa de documentos</h4><pre><code translate="no">Find documents in <span class="hljs-keyword">my</span> text_collection that mention <span class="hljs-string">&quot;machine learning&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>O Claude utilizará as capacidades de pesquisa de texto integral do Milvus para encontrar documentos relevantes:</p>
-<pre><code translate="no">I&#x27;ll search for documents about machine learning in your text_collection.
+<pre><code translate="no">I<span class="hljs-comment">&#x27;ll search for documents about machine learning in your text_collection.</span>
 
-&gt; View result from milvus-text-search from milvus (local)
+&gt; View result <span class="hljs-keyword">from</span> milvus-<span class="hljs-keyword">text</span>-search <span class="hljs-keyword">from</span> milvus (local)
 
 Here are the documents I found that mention machine learning:
-[Results will appear here based on your actual data]
+[Results will appear here based <span class="hljs-keyword">on</span> your actual data]
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Using-Cursor" class="common-anchor-header">Utilizar o Cursor</h3><h4 id="Example-Creating-a-Collection" class="common-anchor-header">Exemplo: Criar uma coleção</h4><p>No Compositor do Cursor, pode perguntar:</p>
 <pre><code translate="no">Create a <span class="hljs-keyword">new</span> collection called <span class="hljs-string">&#x27;articles&#x27;</span> <span class="hljs-function"><span class="hljs-keyword">in</span> Milvus <span class="hljs-keyword">with</span> fields <span class="hljs-keyword">for</span> <span class="hljs-title">title</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-title">content</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>), <span class="hljs-keyword">and</span> a vector <span class="hljs-title">field</span> (<span class="hljs-params"><span class="hljs-number">128</span> dimensions</span>)
 </span><button class="copy-code-btn"></button></code></pre>
-<p>O Cursor irá utilizar o servidor MCP para executar esta operação:</p>
-<pre><code translate="no">I<span class="hljs-string">&#x27;ll create a new collection called &#x27;</span>articles<span class="hljs-string">&#x27; with the specified fields.
+<p>O Cursor utilizará o servidor MCP para executar esta operação:</p>
+<pre><code translate="no">I<span class="hljs-comment">&#x27;ll create a new collection called &#x27;articles&#x27; with the specified fields.</span>
 
-&gt; View result from milvus-create-collection from milvus (local)
+&gt; View result <span class="hljs-keyword">from</span> milvus-create-collection <span class="hljs-keyword">from</span> milvus (local)
 
-Collection &#x27;</span>articles<span class="hljs-string">&#x27; has been created successfully with the following schema:
-- title: string
-- content: string
-- vector: float vector[128]
-</span><button class="copy-code-btn"></button></code></pre>
+Collection <span class="hljs-comment">&#x27;articles&#x27; has been created successfully with the following schema:</span>
+- title: <span class="hljs-type">string</span>
+- content: <span class="hljs-type">string</span>
+- vector: float vector[<span class="hljs-number">128</span>]
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Troubleshooting" class="common-anchor-header">Resolução de problemas<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -371,7 +371,7 @@ Collection &#x27;</span>articles<span class="hljs-string">&#x27; has been create
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Common-Issues" class="common-anchor-header">Problemas comuns</h3><h4 id="Connection-Errors" class="common-anchor-header">Erros de ligação</h4><p>Se você vir erros como &quot;Falha ao conectar ao servidor Milvus&quot;:</p>
+    </button></h2><h3 id="Common-Issues" class="common-anchor-header">Problemas comuns</h3><h4 id="Connection-Errors" class="common-anchor-header">Erros de ligação</h4><p>Se você vir erros como "Falha ao conectar ao servidor Milvus":</p>
 <ol>
 <li>Verifique se a sua instância do Milvus está em execução: <code translate="no">docker ps</code> (se estiver a utilizar o Docker)</li>
 <li>Verifique se o URI está correto na sua configuração</li>

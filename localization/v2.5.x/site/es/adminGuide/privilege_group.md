@@ -174,7 +174,7 @@ title: Crear grupo de privilegios
 </td><td data-block-token="Qy0hdcNmCozPYJxgwLTcN8GTnEg" colspan="1" rowspan="1"><p data-block-token="MtYUdaQhaokzKHxK5Pdcyon4njg">❌</p>
 </td><td data-block-token="MtHIdzYy1okjY2xWeYBcFbEonib" colspan="1" rowspan="1"><p data-block-token="XMWPdrJmDopCJXxD1BecOOLtnrc">✔️</p>
 </td><td data-block-token="VzBMdgT4kozS5RxCDsicez8EnHc" colspan="1" rowspan="1"><p data-block-token="MUHKdAgcLoQwORxx2pPcnkGhn4b">✔️</p>
-</td></tr><tr><td data-block-token="PXWfdasKooDEK9xzkDiceusAnrc" colspan="1" rowspan="1"><p data-block-token="JmwadvvReofe4PxNL7EcEqSunoe">Equilibrio de carga</p>
+</td></tr><tr><td data-block-token="PXWfdasKooDEK9xzkDiceusAnrc" colspan="1" rowspan="1"><p data-block-token="JmwadvvReofe4PxNL7EcEqSunoe">Balance de carga</p>
 </td><td data-block-token="AmQsdzbXnopfqLxijVNcIMgonpg" colspan="1" rowspan="1"><p data-block-token="T3RMdwWDloPBpkx6jANcuVoWnnf">❌</p>
 </td><td data-block-token="IeZxdN9PIo8JeDx03tNcf5YSnsg" colspan="1" rowspan="1"><p data-block-token="WK29dSgVjoUoEhxC3JHcGD35nNf">✔️</p>
 </td><td data-block-token="WLL9dKmQdo56mAx01V9c53UdnSg" colspan="1" rowspan="1"><p data-block-token="Qbeid5LfoovciMxYYWnc4Z4unAX">✔️</p>
@@ -344,44 +344,44 @@ title: Crear grupo de privilegios
 <h3 id="Create-a-privilege-group​" class="common-anchor-header">Creación de un grupo de privilegios</h3><p>El siguiente ejemplo muestra cómo crear un grupo de privilegios denominado <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
-client.<span class="hljs-title function_">create_privileg_group</span>(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>）​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
+client.create_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>）​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">rbac</span>.<span class="hljs-property">request</span>.<span class="hljs-property">CreatePrivilegeGroupReq</span>;​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.CreatePrivilegeGroupReq;​
 ​
-client.<span class="hljs-title function_">createPrivilegeGroup</span>(<span class="hljs-title class_">CreatePrivilegeGroupReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">groupName</span>(<span class="hljs-string">&quot;privilege_group_1&quot;</span>)​
-        .<span class="hljs-title function_">build</span>());​
+client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()​
+        .groupName(<span class="hljs-string">&quot;privilege_group_1&quot;</span>)​
+        .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus-sdk-go/v2/client&quot;</span>​
 ​
-client.<span class="hljs-title class_">CreatePrivilegeGroup</span>(context.<span class="hljs-title class_">Background</span>(), <span class="hljs-string">&quot;privilege_group_1&quot;</span>)​
+client.CreatePrivilegeGroup(context.Background(), <span class="hljs-string">&quot;privilege_group_1&quot;</span>)​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/create&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/privilege_groups/create&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &#x27;{​
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;​
-}&#x27;</span>​
+}&#x27;​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Add-privileges-to-a-privilege-group​" class="common-anchor-header">Adición de privilegios a un grupo de privilegios</h3><p>El siguiente ejemplo muestra cómo añadir los privilegios <code translate="no">PrivilegeBackupRBAC</code> y <code translate="no">PrivilegeRestoreRBAC</code> al grupo de privilegios <code translate="no">privilege_group_1</code> que se acaba de crear.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
-client.<span class="hljs-title function_">add_privileges_to_group</span>(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=[<span class="hljs-string">&#x27;Query&#x27;</span>, <span class="hljs-string">&#x27;Search&#x27;</span>])​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
+client.add_privileges_to_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=[<span class="hljs-string">&#x27;Query&#x27;</span>, <span class="hljs-string">&#x27;Search&#x27;</span>])​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">rbac</span>.<span class="hljs-property">request</span>.<span class="hljs-property">AddPrivilegesToGroupReq</span>;​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.AddPrivilegesToGroupReq;​
 ​
-client.<span class="hljs-title function_">addPrivilegesToGroup</span>(<span class="hljs-title class_">AddPrivilegesToGroupReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">groupName</span>(<span class="hljs-string">&quot;privilege_group_1&quot;</span>)​
-        .<span class="hljs-title function_">privileges</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;Query&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>))​
-        .<span class="hljs-title function_">build</span>());​
+client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()​
+        .groupName(<span class="hljs-string">&quot;privilege_group_1&quot;</span>)​
+        .privileges(Arrays.asList(<span class="hljs-string">&quot;Query&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>))​
+        .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus-sdk-go/v2/client&quot;</span>​
@@ -390,28 +390,28 @@ client.AddPrivilegesToGroup(context.Background(), <span class="hljs-string">&quo
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/add_privileges_to_group&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/privilege_groups/add_privileges_to_group&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &#x27;{​
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;,​
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]​
-}&#x27;</span>​
+}&#x27;​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Remove-privileges-from-a-privilege-group​" class="common-anchor-header">Eliminar privilegios de un grupo de privilegios</h3><p>El siguiente ejemplo muestra cómo eliminar el privilegio <code translate="no">PrivilegeRestoreRBAC</code> del grupo de privilegios <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
-client.<span class="hljs-title function_">remove_privileges_from_group</span>(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=<span class="hljs-string">&#x27;Search&#x27;</span>)​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
+client.remove_privileges_from_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=<span class="hljs-string">&#x27;Search&#x27;</span>)​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">rbac</span>.<span class="hljs-property">request</span>.<span class="hljs-property">RemovePrivilegesFromGroupReq</span>;​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.RemovePrivilegesFromGroupReq;​
 ​
-client.<span class="hljs-title function_">removePrivilegesFromGroup</span>(<span class="hljs-title class_">RemovePrivilegesFromGroupReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">groupName</span>(<span class="hljs-string">&quot;privilege_group_1&quot;</span>)​
-        .<span class="hljs-title function_">privileges</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-string">&quot;Search&quot;</span>))​
-        .<span class="hljs-title function_">build</span>());​
+client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()​
+        .groupName(<span class="hljs-string">&quot;privilege_group_1&quot;</span>)​
+        .privileges(Collections.singletonList(<span class="hljs-string">&quot;Search&quot;</span>))​
+        .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus-sdk-go/v2/client&quot;</span>​
@@ -420,20 +420,20 @@ client.RemovePrivilegesFromGroup(context.Background(), <span class="hljs-string"
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/remove_privileges_from_group&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/privilege_groups/remove_privileges_from_group&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &#x27;{​
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;,​
     &quot;privileges&quot;:[&quot;Search&quot;]​
-}&#x27;</span>​
+}&#x27;​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="List-privilege-groups​" class="common-anchor-header">Listar grupos de privilegios</h3><p>El siguiente ejemplo muestra cómo listar todos los grupos de privilegios existentes.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
-client.<span class="hljs-title function_">list_privilege_groups</span>()​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
+client.list_privilege_groups()​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.PrivilegeGroup;​
@@ -447,14 +447,14 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();​
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus-sdk-go/v2/client&quot;</span>​
 ​
-client.<span class="hljs-title class_">ListPrivilegeGroups</span>(context.<span class="hljs-title class_">Background</span>())​
+client.ListPrivilegeGroups(context.Background())​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/list&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{}&#x27;</span>​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/privilege_groups/list&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &#x27;{}&#x27;​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>A continuación se muestra un ejemplo de salida.</p>
@@ -464,28 +464,28 @@ client.<span class="hljs-title class_">ListPrivilegeGroups</span>(context.<span 
 <h3 id="Drop-a-privilege-group​" class="common-anchor-header">Eliminar un grupo de privilegios</h3><p>El siguiente ejemplo muestra cómo eliminar el grupo de privilegios <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
-client.<span class="hljs-title function_">drop_privilege_group</span>(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>)​
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
+client.drop_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>)​
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">rbac</span>.<span class="hljs-property">request</span>.<span class="hljs-property">DropPrivilegeGroupReq</span>;​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DropPrivilegeGroupReq;​
 ​
-client.<span class="hljs-title function_">dropPrivilegeGroup</span>(<span class="hljs-title class_">DropPrivilegeGroupReq</span>.<span class="hljs-title function_">builder</span>()​
-        .<span class="hljs-title function_">groupName</span>(<span class="hljs-string">&quot;privilege_group_1&quot;</span>)​
-        .<span class="hljs-title function_">build</span>());​
+client.dropPrivilegeGroup(DropPrivilegeGroupReq.builder()​
+        .groupName(<span class="hljs-string">&quot;privilege_group_1&quot;</span>)​
+        .build());​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus-sdk-go/v2/client&quot;</span>​
 ​
-client.<span class="hljs-title class_">DropPrivilegeGroup</span>(context.<span class="hljs-title class_">Background</span>(), <span class="hljs-string">&quot;privilege_group_1&quot;</span>)​
+client.DropPrivilegeGroup(context.Background(), <span class="hljs-string">&quot;privilege_group_1&quot;</span>)​
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/privilege_groups/drop&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
+--url &quot;${CLUSTER_ENDPOINT}/v2/vectordb/privilege_groups/drop&quot; \​
+--header &quot;Authorization: Bearer ${TOKEN}&quot; \​
+--header &quot;Content-Type: application/json&quot; \​
+-d &#x27;{​
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;​
-}&#x27;</span>​
+}&#x27;​
 
 <button class="copy-code-btn"></button></code></pre>

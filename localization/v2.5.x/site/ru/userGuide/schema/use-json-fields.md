@@ -52,7 +52,7 @@ summary: >-
     </button></h2><ul>
 <li><p><strong>Размер поля</strong>: Размер полей JSON ограничен 65 536 байтами.</p></li>
 <li><p><strong>Вложенные словари</strong>: Любые вложенные словари в значениях полей JSON рассматриваются как обычные строки для хранения.</p></li>
-<li><p><strong>Значения по умолчанию</strong>: Поля JSON не поддерживают значения по умолчанию. Однако вы можете установить атрибут <code translate="no">nullable</code> на <code translate="no">True</code>, чтобы разрешить нулевые значения. Подробнее см. в разделе <a href="/docs/ru/nullable-and-default.md">Нулевые и по умолчанию</a>.</p></li>
+<li><p><strong>Значения по умолчанию</strong>: Поля JSON не поддерживают значения по умолчанию. Однако вы можете установить атрибут <code translate="no">nullable</code> на <code translate="no">True</code>, чтобы разрешить нулевые значения. Подробнее см. в разделе <a href="/docs/ru/nullable-and-default.md">Nullable &amp; Default</a>.</p></li>
 <li><p><strong>Сопоставление типов</strong>: если ключевое значение поля JSON является целым числом или плавающей точкой, его можно сравнивать (с помощью фильтров выражений) только с другим числовым ключом того же типа.</p></li>
 <li><p><strong>Именование</strong>: При именовании JSON-ключей рекомендуется использовать только буквы, цифры и символы подчеркивания. Использование других символов может вызвать проблемы при фильтрации или поиске.</p></li>
 <li><p><strong>Работа со строками</strong>: Milvus хранит строковые значения в полях JSON в том виде, в котором они были введены, без семантического преобразования. Например:</p>
@@ -60,9 +60,8 @@ summary: >-
 <li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, и <code translate="no">&quot;a\\&quot;b&quot;</code> хранятся именно так, как они есть.</p></li>
 <li><p><code translate="no">'a'b'</code> и <code translate="no">&quot;a&quot;b&quot;</code> считаются недействительными.</p></li>
 </ul></li>
-<li><p><strong>Индексирование JSON</strong>: При индексировании JSON-поля можно указать один или несколько путей в JSON-поле для ускорения фильтрации. Каждый дополнительный путь увеличивает накладные расходы на индексирование, поэтому тщательно планируйте стратегию индексирования. Дополнительные сведения об индексировании JSON-поля см. в разделе <a href="/docs/ru/use-json-fields.md#share-N2tOdsWXEo0VgsxmzRZcSa50n0e">Сведения об индексировании JSON</a>.</p></li>
 </ul>
-<h2 id="Add-JSON-field" class="common-anchor-header">Добавить поле JSON<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
+<h2 id="Add-JSON-field" class="common-anchor-header">Добавить JSON-поле<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,7 +76,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы добавить это JSON-поле <code translate="no">metadata</code> в схему коллекции, используйте <code translate="no">DataType.JSON</code>. В примере ниже определено поле JSON <code translate="no">metadata</code>, допускающее нулевые значения:</p>
+    </button></h2><p>Чтобы добавить это JSON-поле <code translate="no">metadata</code> в схему коллекции, используйте <code translate="no">DataType.JSON</code>. В примере ниже определено JSON-поле <code translate="no">metadata</code>, допускающее нулевые значения:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Import necessary libraries</span>
