@@ -8,6 +8,35 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.10
+
+Release date: April 21, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.10          | 2.5.6              | 2.5.8               | 2.5.7            |
+
+Milvus 2.5.10 delivers improved search and load performance, enhanced metrics reporting, and expanded SVE support for accelerated metric computation. This release also includes multiple bug fixes that boost stability and correctness. We encourage you to upgrade or give it a try—your feedback is invaluable in helping us make Milvus even better!
+
+### Improvements
+
+- Ignore reporting index metrics for non‑existent indexes ([#41296](https://github.com/milvus-io/milvus/pull/41296))
+- Use scan mode for LIKE even when an inverted index exists ([#41309](https://github.com/milvus-io/milvus/pull/41309))
+- Optimize performance for LIKE expressions ([#41222](https://github.com/milvus-io/milvus/pull/41222))
+- Optimize index format for improved load performance ([#41041](https://github.com/milvus-io/milvus/pull/41041))
+- RESTful: make the default timeout configurable ([#41225](https://github.com/milvus-io/milvus/pull/41225))
+- Enable SVE support for L2 metric computation in FP16 / NY functions ([knowhere #1134](https://github.com/zilliztech/knowhere/pull/1134))
+
+### Bug fixes
+
+- Fix JSON index not working for string filters ([#41383](https://github.com/milvus-io/milvus/pull/41383))
+- Skip dimension check for non‑vector fields in pre‑check ([#41329](https://github.com/milvus-io/milvus/pull/41329))
+- Alter collection now updates the schema correctly ([#41308](https://github.com/milvus-io/milvus/pull/41308))
+- Update knowhere version to fix macOS build ([#41315](https://github.com/milvus-io/milvus/pull/41315))
+- Prevent panic when listing indexes before segment index initialization completes ([#41299](https://github.com/milvus-io/milvus/pull/41299))
+- Resolve performance regression by changing a log level ([#41269](https://github.com/milvus-io/milvus/pull/41269))
+- Close client before removing worker client ([#41254](https://github.com/milvus-io/milvus/pull/41254))
+
 ## v2.5.9
 
 Release date: April 11, 2025
