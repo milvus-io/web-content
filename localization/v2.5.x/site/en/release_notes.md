@@ -19,6 +19,48 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2510" class="common-anchor-header">v2.5.10<button data-href="#v2510" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: April 21, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.10</td><td>2.5.6</td><td>2.5.8</td><td>2.5.7</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.10 delivers improved search and load performance, enhanced metrics reporting, and expanded SVE support for accelerated metric computation. This release also includes multiple bug fixes that boost stability and correctness. We encourage you to upgrade or give it a try—your feedback is invaluable in helping us make Milvus even better!</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Ignore reporting index metrics for non‑existent indexes (<a href="https://github.com/milvus-io/milvus/pull/41296">#41296</a>)</li>
+<li>Use scan mode for LIKE even when an inverted index exists (<a href="https://github.com/milvus-io/milvus/pull/41309">#41309</a>)</li>
+<li>Optimize performance for LIKE expressions (<a href="https://github.com/milvus-io/milvus/pull/41222">#41222</a>)</li>
+<li>Optimize index format for improved load performance (<a href="https://github.com/milvus-io/milvus/pull/41041">#41041</a>)</li>
+<li>RESTful: make the default timeout configurable (<a href="https://github.com/milvus-io/milvus/pull/41225">#41225</a>)</li>
+<li>Enable SVE support for L2 metric computation in FP16 / NY functions (<a href="https://github.com/zilliztech/knowhere/pull/1134">knowhere #1134</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fix JSON index not working for string filters (<a href="https://github.com/milvus-io/milvus/pull/41383">#41383</a>)</li>
+<li>Skip dimension check for non‑vector fields in pre‑check (<a href="https://github.com/milvus-io/milvus/pull/41329">#41329</a>)</li>
+<li>Alter collection now updates the schema correctly (<a href="https://github.com/milvus-io/milvus/pull/41308">#41308</a>)</li>
+<li>Update knowhere version to fix macOS build (<a href="https://github.com/milvus-io/milvus/pull/41315">#41315</a>)</li>
+<li>Prevent panic when listing indexes before segment index initialization completes (<a href="https://github.com/milvus-io/milvus/pull/41299">#41299</a>)</li>
+<li>Resolve performance regression by changing a log level (<a href="https://github.com/milvus-io/milvus/pull/41269">#41269</a>)</li>
+<li>Close client before removing worker client (<a href="https://github.com/milvus-io/milvus/pull/41254">#41254</a>)</li>
+</ul>
 <h2 id="v259" class="common-anchor-header">v2.5.9<button data-href="#v259" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
