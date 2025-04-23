@@ -4,10 +4,14 @@ summary: This guide demonstrates how to use Ragas to evaluate a Retrieval-Augmen
 title: Evaluation with Ragas
 ---
 
-# Evaluation with Ragas
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_parent">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_blank">
+    <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a>
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_blank"><img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a>
+# Evaluation with Ragas
 
 This guide demonstrates how to use Ragas to evaluate a Retrieval-Augmented Generation (RAG) pipeline built upon [Milvus](https://milvus.io/).
 
@@ -23,17 +27,17 @@ The RAG system combines a retrieval system with a generative model to generate n
 Before running this notebook, make sure you have the following dependencies installed:
 
 
-```python
+```shell
 $ pip install --upgrade pymilvus openai requests tqdm pandas ragas
 ```
 
 <div class="alert note">
 
-If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (Click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
-
-</div>
+If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
 
 We will use OpenAI as the LLM in this example. You should prepare the [api key](https://platform.openai.com/docs/quickstart) `OPENAI_API_KEY` as an environment variable.
+
+</div>
 
 
 ```python
@@ -105,7 +109,7 @@ Use the following pieces of information enclosed in <context> tags to provide an
             collection_name=self.collection_name,
             dimension=embedding_dim,
             metric_type="IP",  # Inner product distance
-            consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+            consistency_level="Strong",  # Strong consistency level
         )
 
     def load(self, texts: List[str]):
@@ -201,7 +205,7 @@ text_lines = file_text.split("# ")
 my_rag.load(text_lines)  # Load the text data into RAG pipeline
 ```
 
-    Creating embeddings: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 47/47 [00:16<00:00,  2.80it/s]
+    Creating embeddings: 100%|██████████| 27/27 [00:20<00:00,  1.34it/s]
 
 
 Let's define a query question about the content of the development guide documentation. And then use the `answer` method to get the answer and the retrieved context texts.
@@ -215,8 +219,8 @@ my_rag.answer(question, return_retrieved_text=True)
 
 
 
-    ('The hardware requirements specification to build and run Milvus from source code is 8GB of RAM and 50GB of free disk space.',
-     ['Hardware Requirements\n\nThe following specification (either physical or virtual machine resources) is recommended for Milvus to build and run from source code.\n\n```\n- 8GB of RAM\n- 50GB of free disk space\n```\n\n##',
+    ('The hardware requirements specification for building Milvus and running it from source code is as follows:\n\n- 8GB of RAM\n- 50GB of free disk space',
+     ['Hardware Requirements\n\nThe following specification (either physical or virtual machine resources) is recommended for Milvus to build and run from source code.\n\n```yaml\n- 8GB of RAM\n- 50GB of free disk space\n```\n\n##',
       'Building Milvus on a local OS/shell environment\n\nThe details below outline the hardware and software requirements for building on Linux and MacOS.\n\n##',
       "Software Requirements\n\nAll Linux distributions are available for Milvus development. However a majority of our contributor worked with Ubuntu or CentOS systems, with a small portion of Mac (both x86_64 and Apple Silicon) contributors. If you would like Milvus to build and run on other distributions, you are more than welcome to file an issue and contribute!\n\nHere's a list of verified OS types where Milvus can successfully build and run:\n\n- Debian/Ubuntu\n- Amazon Linux\n- MacOS (x86_64)\n- MacOS (Apple Silicon)\n\n##"])
 
@@ -226,39 +230,41 @@ Now let's prepare some questions with its corresponding ground truth answers. We
 
 
 ```python
+from ragas import EvaluationDataset
 from datasets import Dataset
 import pandas as pd
 
-question_list = [
+user_input_list = [
     "what is the hardware requirements specification if I want to build Milvus and run from source code?",
     "What is the programming language used to write Knowhere?",
     "What should be ensured before running code coverage?",
 ]
-ground_truth_list = [
+reference_list = [
     "If you want to build Milvus and run from source code, the recommended hardware requirements specification is:\n\n- 8GB of RAM\n- 50GB of free disk space.",
     "The programming language used to write Knowhere is C++.",
     "Before running code coverage, you should make sure that your code changes are covered by unit tests.",
 ]
-contexts_list = []
-answer_list = []
-for question in tqdm(question_list, desc="Answering questions"):
-    answer, contexts = my_rag.answer(question, return_retrieved_text=True)
-    contexts_list.append(contexts)
-    answer_list.append(answer)
+retrieved_contexts_list = []
+response_list = []
+
+for user_input in tqdm(user_input_list, desc="Answering questions"):
+    response, retrieved_context = my_rag.answer(user_input, return_retrieved_text=True)
+    retrieved_contexts_list.append(retrieved_context)
+    response_list.append(response)
 
 df = pd.DataFrame(
     {
-        "question": question_list,
-        "contexts": contexts_list,
-        "answer": answer_list,
-        "ground_truth": ground_truth_list,
+        "user_input": user_input_list,
+        "retrieved_contexts": retrieved_contexts_list,
+        "response": response_list,
+        "reference": reference_list,
     }
 )
-rag_results = Dataset.from_pandas(df)
+rag_results = EvaluationDataset.from_pandas(df)
 df
 ```
 
-    Answering questions: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:03<00:00,  1.29s/it]
+    Answering questions: 100%|██████████| 3/3 [00:04<00:00,  1.37s/it]
 
 
 
@@ -282,10 +288,10 @@ df
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>question</th>
-      <th>contexts</th>
-      <th>answer</th>
-      <th>ground_truth</th>
+      <th>user_input</th>
+      <th>retrieved_contexts</th>
+      <th>response</th>
+      <th>reference</th>
     </tr>
   </thead>
   <tbody>
@@ -293,21 +299,21 @@ df
       <th>0</th>
       <td>what is the hardware requirements specificatio...</td>
       <td>[Hardware Requirements\n\nThe following specif...</td>
-      <td>The hardware requirements specification for bu...</td>
+      <td>The hardware requirements specification to bui...</td>
       <td>If you want to build Milvus and run from sourc...</td>
     </tr>
     <tr>
       <th>1</th>
       <td>What is the programming language used to write...</td>
       <td>[CMake &amp; Conan\n\nThe algorithm library of Mil...</td>
-      <td>The programming language used to write the Kno...</td>
+      <td>The programming language used to write Knowher...</td>
       <td>The programming language used to write Knowher...</td>
     </tr>
     <tr>
       <th>2</th>
       <td>What should be ensured before running code cov...</td>
       <td>[Code coverage\n\nBefore submitting your pull ...</td>
-      <td>Before running code coverage, you should ensur...</td>
+      <td>Before running code coverage, it should be ens...</td>
       <td>Before running code coverage, you should make ...</td>
     </tr>
   </tbody>
@@ -325,33 +331,32 @@ Ragas provides a set of metrics that is easy to use. We take `Answer relevancy`,
 
 ```python
 from ragas import evaluate
-from ragas.metrics import (
-    answer_relevancy,
-    faithfulness,
-    context_recall,
-    context_precision,
-)
+from ragas.metrics import AnswerRelevancy, Faithfulness, ContextRecall, ContextPrecision
 
-result = evaluate(
-    rag_results,
+from ragas.llms import LangchainLLMWrapper
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(model="gpt-4o-mini")
+evaluator_llm = LangchainLLMWrapper(llm)
+
+results = evaluate(
+    dataset=rag_results,
     metrics=[
-        answer_relevancy,
-        faithfulness,
-        context_recall,
-        context_precision,
+        AnswerRelevancy(llm=evaluator_llm),
+        Faithfulness(llm=evaluator_llm),
+        ContextRecall(llm=evaluator_llm),
+        ContextPrecision(llm=evaluator_llm),
     ],
 )
-
-result
+results
 ```
 
-
-    Evaluating:   0%|          | 0/12 [00:00<?, ?it/s]
-
+    Evaluating: 100%|██████████| 12/12 [00:10<00:00,  1.11it/s]
 
 
 
 
-    {'answer_relevancy': 0.9445, 'faithfulness': 1.0000, 'context_recall': 1.0000, 'context_precision': 1.0000}
+
+    {'answer_relevancy': 0.9894, 'faithfulness': 1.0000, 'context_recall': 1.0000, 'context_precision': 1.0000}
 
 

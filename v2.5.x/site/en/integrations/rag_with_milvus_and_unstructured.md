@@ -4,14 +4,14 @@ summary: In this tutorial, we will use Unstructured to ingest PDF documents and 
 title: Build a RAG with Milvus and Unstructured
 ---
 
-# Build a RAG with Milvus and Unstructured
-
 <a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_unstructured.ipynb" target="_parent">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_unstructured.ipynb" target="_blank">
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
+
+# Build a RAG with Milvus and Unstructured
 
 [Unstructured](https://docs.unstructured.io/welcome) provides a platform and tools to ingest and process unstructured documents for Retrieval Augmented Generation (RAG) and model fine-tuning. It offers both a no-code UI platform and serverless API services, allowing users to process data on Unstructured-hosted compute resources.
 
@@ -22,29 +22,28 @@ In this tutorial, we will use Unstructured to ingest PDF documents and then use 
 ### Dependencies and Environment
 
 
-```python
-$ pip install -qU "unstructured-ingest[pdf]" unstructured pymilvus openai
+```shell
+$ pip install -qU "unstructured[pdf]" pymilvus openai
 ```
 
 <div class="alert note">
 
+**Installation Options:**
+- For processing all document formats: `pip install "unstructured[all-docs]"`
+- For specific formats (e.g., PDF): `pip install "unstructured[pdf]"`
+- For more installation options, see the [Unstructured documentation](https://docs.unstructured.io/open-source/installation/full-installation)
+
 If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
 
-</div>
-
-You can get your `UNSTRUCTURED_API_KEY` and `UNSTRUCTURED_URL` environment variables from [here](https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide).
-
 We will use OpenAI as the LLM in this example. You should prepare the [api key](https://platform.openai.com/docs/quickstart) `OPENAI_API_KEY` as an environment variable.
+
+</div>
 
 
 ```python
 import os
 
-
-os.environ["UNSTRUCTURED_API_KEY"] = "***********"
-os.environ["UNSTRUCTURED_URL"] = "***********"
-
-os.environ["OPENAI_API_KEY"] = "***********"
+os.environ["OPENAI_API_KEY"] = "sk-***********"
 ```
 
 ### Prepare Milvus and OpenAI clients
@@ -55,7 +54,7 @@ You can use the Milvus client to create a Milvus collection and insert data into
 from pymilvus import MilvusClient, DataType
 
 # Initialize Milvus client
-milvus_client = MilvusClient(uri="./milvus_demo.db")  # TODO
+milvus_client = MilvusClient(uri="./milvus_demo.db")
 ```
 
 <div class="alert note">
@@ -136,7 +135,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     schema=schema,
     index_params=index_params,
-    consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    consistency_level="Strong",
 )
 
 milvus_client.load_collection(collection_name=collection_name)
@@ -144,60 +143,35 @@ milvus_client.load_collection(collection_name=collection_name)
 
 ## Load data from Unstructured
 Unstructured provides a flexible and powerful ingestion pipeline to process various file types, including PDF, HTML, and more.
-We will use the ingest functionality to partition PDF files in a local directory. And then load the data into Milvus.
+We will partition and chunk a local PDF file. And then load the data into Milvus.
 
 
 ```python
-from unstructured_ingest.v2.pipeline.pipeline import Pipeline
-from unstructured_ingest.v2.interfaces import ProcessorConfig
-from unstructured_ingest.v2.processes.connectors.local import (
-    LocalIndexerConfig,
-    LocalDownloaderConfig,
-    LocalConnectionConfig,
-    LocalUploaderConfig,
-)
-from unstructured_ingest.v2.processes.partitioner import PartitionerConfig
+import warnings
+from unstructured.partition.auto import partition
 
-directory_with_pdfs = "./pdf_files"
-directory_with_results = "./pdf_processed_outputs"
+warnings.filterwarnings("ignore")
 
-Pipeline.from_configs(
-    context=ProcessorConfig(),
-    indexer_config=LocalIndexerConfig(input_path=directory_with_pdfs),
-    downloader_config=LocalDownloaderConfig(),
-    source_connection_config=LocalConnectionConfig(),
-    partitioner_config=PartitionerConfig(
-        partition_by_api=True,
-        api_key=os.getenv("UNSTRUCTURED_API_KEY"),
-        partition_endpoint=os.getenv("UNSTRUCTURED_API_URL"),
-        strategy="hi_res",
-        additional_partition_args={
-            "split_pdf_page": True,
-            "split_pdf_concurrency_level": 15,
-        },
-    ),
-    uploader_config=LocalUploaderConfig(output_dir=directory_with_results),
-).run()
-
-
-from unstructured.staging.base import elements_from_json
-
-
-def load_processed_files(directory_path):
-    elements = []
-    for filename in os.listdir(directory_path):
-        if filename.endswith(".json"):
-            file_path = os.path.join(directory_path, filename)
-            try:
-                elements.extend(elements_from_json(filename=file_path))
-            except IOError:
-                print(f"Error: Could not read file {filename}.")
-
-    return elements
-
-
-elements = load_processed_files(directory_with_results)
+elements = partition(
+    filename="./pdf_files/WhatisMilvus.pdf",
+    strategy="hi_res",
+    chunking_strategy="by_title",
+)  # Replace with the path to your PDF file
 ```
+
+Let's examine the partitioned elements from the PDF file. Each element represents a chunk of content extracted by Unstructured's partitioning process.
+
+
+```python
+for element in elements:
+    print(element)
+    break
+```
+
+    What is Milvus?
+    
+    Milvus is a high-performance, highly scalable vector database that runs efficiently across a wide range of environments, from a laptop to large-scale distributed systems. It is available as both open-source software and a cloud service.
+
 
 Insert data into Milvus.
 
@@ -215,6 +189,13 @@ for i, element in enumerate(elements):
     )
 milvus_client.insert(collection_name=collection_name, data=data)
 ```
+
+
+
+
+    {'insert_count': 29, 'ids': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28], 'cost': 0}
+
+
 
 ## Retrieve and Generate Response
 
@@ -271,10 +252,6 @@ print(f"Question: {question}")
 print(f"Answer: {answer}")
 ```
 
-    INFO: HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
-    INFO: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-
-
     Question: What is the Advanced Search Algorithms in Milvus?
-    Answer: The Advanced Search Algorithms in Milvus refer to a wide range of in-memory and on-disk indexing/search algorithms it supports, including IVF, HNSW, DiskANN, and more. These algorithms have been deeply optimized, and Milvus delivers 30%-70% better performance compared to popular implementations like FAISS and HNSWLib.
+    Answer: The Advanced Search Algorithms in Milvus include a wide range of in-memory and on-disk indexing/search algorithms such as IVF, HNSW, and DiskANN. These algorithms have been deeply optimized, and Milvus delivers 30%-70% better performance compared to popular implementations like FAISS and HNSWLib.
 
