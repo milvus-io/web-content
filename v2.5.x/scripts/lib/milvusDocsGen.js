@@ -142,6 +142,8 @@ class MilvusDocsGen extends larkDocWriter {
             paragraph = await this.__auto_link(paragraph, this.docs)
         }
 
+        paragraph = this.__filter_content(paragraph, this.targets)
+
         return paragraph;        
     }
 
