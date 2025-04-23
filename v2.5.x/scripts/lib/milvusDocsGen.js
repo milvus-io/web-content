@@ -257,7 +257,7 @@ class MilvusDocsGen extends larkDocWriter {
         })
 
         const would_be_file_path = path.join(this.imageDir, alt_text.alt_text + ".png")
-        let confirm = false;
+        let confirm = true;
         if (fs.existsSync(would_be_file_path)) {
             confirm = await inquirer.prompt([
                 {
