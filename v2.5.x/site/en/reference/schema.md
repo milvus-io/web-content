@@ -56,7 +56,6 @@ const schema = []
 import "github.com/milvus-io/milvus/client/v2/entity"
 
 schema := entity.NewSchema()
-log.Println(schema)
 ```
 
 ```bash
@@ -114,8 +113,6 @@ schema.push({
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
-
 schema.WithField(entity.NewField().WithName("my_id").
     WithDataType(entity.FieldTypeInt64).
     // highlight-start
@@ -186,8 +183,6 @@ schema.push({
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
-
 schema.WithField(entity.NewField().WithName("my_vector").
     WithDataType(entity.FieldTypeFloatVector).
     // highlight-next-line
@@ -275,8 +270,6 @@ schema.push({
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
-
 schema.WithField(entity.NewField().WithName("my_varchar").
     WithDataType(entity.FieldTypeVarChar).
     WithMaxLength(512),
@@ -288,7 +281,7 @@ export varCharField='{
     "fieldName": "my_varchar",
     "dataType": "VarChar",
     "elementTypeParams": {
-        "max_length": 256
+        "max_length": 512
     }
 }'
 
@@ -336,8 +329,6 @@ schema.push({
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
-
 schema.WithField(entity.NewField().WithName("my_int64").
     WithDataType(entity.FieldTypeInt64),
 )
@@ -394,8 +385,6 @@ schema.push({
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
-
 schema.WithField(entity.NewField().WithName("my_bool").
     WithDataType(entity.FieldTypeBool),
 )
@@ -453,8 +442,6 @@ schema.push({
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
-
 schema.WithField(entity.NewField().WithName("my_json").
     WithDataType(entity.FieldTypeJSON),
 )
@@ -522,8 +509,6 @@ schema.push({
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
-
 schema.WithField(entity.NewField().WithName("my_array").
     WithDataType(entity.FieldTypeArray).
     WithElementType(entity.FieldTypeInt64).

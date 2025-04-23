@@ -43,7 +43,7 @@ from pymilvus import MilvusClient
 
 # With TTL
 client.create_collection(
-    collection_name="customized_setup_5",
+    collection_name="my_collection",
     schema=schema,
     # highlight-start
     properties={
@@ -61,18 +61,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 // With TTL
-CreateCollectionReq customizedSetupReq5 = CreateCollectionReq.builder()
-        .collectionName("customized_setup_5")
+CreateCollectionReq customizedSetupReq = CreateCollectionReq.builder()
+        .collectionName("my_collection")
         .collectionSchema(schema)
         // highlight-next-line
         .property(Constant.TTL_SECONDS, "1209600")
         .build();
-client.createCollection(customizedSetupReq5);
+client.createCollection(customizedSetupReq);
 ```
 
 ```javascript
 const createCollectionReq = {
-    collection_name: "customized_setup_5",
+    collection_name: "my_collection",
     schema: schema,
     // highlight-start
     properties: {
@@ -83,21 +83,12 @@ const createCollectionReq = {
 ```
 
 ```go
-import (
-    "context"
-    "fmt"
-    "log"
-
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
-    "github.com/milvus-io/milvus/pkg/common"
-)
-
-err = cli.CreateCollection(ctx, client.NewCreateCollectionOption("customized_setup_5", schema).
-        WithProperty(common.CollectionTTLConfigKey, 1209600)) //  TTL in seconds
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("my_collection", schema).
+    WithProperty(common.CollectionTTLConfigKey, 1209600)) //  TTL in seconds
 if err != nil {
-        // handle error
+    fmt.Println(err.Error())
+    // handle error
 }
-fmt.Println("collection created")
 ```
 
 ```bash
@@ -113,7 +104,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d "{
-    \"collectionName\": \"customized_setup_5\",
+    \"collectionName\": \"my_collection\",
     \"schema\": $schema,
     \"params\": $params
 }"
@@ -160,22 +151,10 @@ res = await client.alterCollection({
 ```
 
 ```go
-ctx, cancel := context.WithCancel(context.Background())
-defer cancel()
-
-milvusAddr := "127.0.0.1:19530"
-
-cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: milvusAddr,
-})
+err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption("my_collection").
+    WithProperty(common.CollectionTTLConfigKey, 60))
 if err != nil {
-    log.Fatal("failed to connect to milvus server: ", err.Error())
-}
-
-defer cli.Close(ctx)
-
-err = cli.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption("my_collection").WithProperty(common.CollectionTTLConfigKey, 60))
-if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
 ```
@@ -186,7 +165,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d "{
-    \"collectionName\": \"customized_setup_5\",
+    \"collectionName\": \"my_collection\",
     \"properties\": {
         \"collection.ttl.seconds\": 1209600
     }
@@ -232,22 +211,9 @@ res = await client.dropCollectionProperties({
 ```
 
 ```go
-ctx, cancel := context.WithCancel(context.Background())
-defer cancel()
-
-milvusAddr := "127.0.0.1:19530"
-
-cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: milvusAddr,
-})
+err = client.DropCollectionProperties(ctx, milvusclient.NewDropCollectionPropertiesOption("my_collection", common.CollectionTTLConfigKey))
 if err != nil {
-    log.Fatal("failed to connect to milvus server: ", err.Error())
-}
-
-defer cli.Close(ctx)
-
-err = cli.DropCollectionProperties(ctx, milvusclient.NewDropCollectionPropertiesOption("my_collection", common.CollectionTTLConfigKey))
-if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
 ```
@@ -258,7 +224,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d "{
-    \"collectionName\": \"customized_setup_5\",
+    \"collectionName\": \""my_collection"\",
     \"properties\": {
         \"collection.ttl.seconds\": 60
     }

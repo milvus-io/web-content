@@ -41,7 +41,7 @@ const analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"cncharonly"}}
 ```
 
 ```bash
@@ -79,7 +79,9 @@ analyzer_params = {
 ```
 
 ```java
-// java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("tokenizer", "standard");
+analyzerParams.put("filter", Collections.singletonList("cncharonly"));
 ```
 
 ```javascript
@@ -87,7 +89,7 @@ analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"cncharonly"}}
 ```
 
 ```bash

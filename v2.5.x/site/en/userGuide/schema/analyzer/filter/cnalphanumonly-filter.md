@@ -36,12 +36,12 @@ analyzerParams.put("filter", Collections.singletonList("cnalphanumonly"));
 ```javascript
 const analyzer_params = {
     "tokenizer": "standard",
-    "filter": ["asciifolding"],
+    "filter": ["cnalphanumonly"],
 };
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"cnalphanumonly"}}
 ```
 
 ```bash
@@ -78,7 +78,9 @@ analyzer_params = {
 ```
 
 ```java
-// java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("tokenizer", "standard");
+analyzerParams.put("filter", Collections.singletonList("cnalphanumonly"));
 ```
 
 ```javascript
@@ -86,7 +88,7 @@ analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "standard", "filter": []any{"cnalphanumonly"}}
 ```
 
 ```bash

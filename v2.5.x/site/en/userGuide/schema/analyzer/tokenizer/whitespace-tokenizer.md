@@ -33,13 +33,12 @@ analyzerParams.put("tokenizer", "whitespace");
 
 ```javascript
 const analyzer_params = {
-    "tokenizer": "standard",
-    "filter": ["lowercase"]
+    "tokenizer": "whitespace"
 };
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "whitespace"}
 ```
 
 ```bash
@@ -80,7 +79,7 @@ const analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "whitespace", "filter": []any{"lowercase"}}
 ```
 
 ```bash
@@ -115,7 +114,9 @@ analyzer_params = {
 ```
 
 ```java
-// java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("tokenizer", "whitespace");
+analyzerParams.put("filter", Collections.singletonList("lowercase"));
 ```
 
 ```javascript
@@ -123,7 +124,7 @@ analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "whitespace", "filter": []any{"lowercase"}}
 ```
 
 ```bash

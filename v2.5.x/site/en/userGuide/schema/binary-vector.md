@@ -16,7 +16,7 @@ Binary vectors are a method of encoding complex objects (like images, text, or a
 
 The diagram below shows how binary vectors represent the presence of keywords in text content. In this example, a 10-dimensional binary vector is used to represent two different texts (**Text 1** and **Text 2**), where each dimension corresponds to a word in the vocabulary: 1 indicates the presence of the word in the text, while 0 indicates its absence.
 
-![binary-vector](../../../../assets/binary-vector.png)
+![Binary Vector](../../../../assets/binary-vector.png)
 
 Binary vectors have the following characteristics:
 
@@ -32,7 +32,7 @@ Binary vectors can be generated through various methods. In text processing, pre
 
 After binary vectorization, the data can be stored in Milvus for management and vector retrieval. The diagram below shows the basic process.
 
-![use-binary-vector](../../../../assets/use-binary-vector.png)
+![Use Binary Vector](../../../../assets/use-binary-vector.png)
 
 <div class="alert note">
 
@@ -112,12 +112,36 @@ schema.push({
 ```
 
 ```go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/column"
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/index"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "localhost:19530"
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
+
 schema := entity.NewSchema()
 schema.WithField(entity.NewField().
     WithName("pk").
     WithDataType(entity.FieldTypeVarChar).
-    WithMaxLength(100).
-    WithIsAutoID(true),
+    WithIsAutoID(true).
+    WithIsPrimaryKey(true).
+    WithMaxLength(100),
 ).WithField(entity.NewField().
     WithName("binary_vector").
     WithDataType(entity.FieldTypeBinaryVector).
@@ -205,13 +229,8 @@ const indexParams = {
 ```
 
 ```go
-import (
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-)
-
 idx := index.NewAutoIndex(entity.HAMMING)
-indexOption := milvusclient.NewCreateIndexOption("my_binary_collection", "binary_vector", idx)
+indexOption := milvusclient.NewCreateIndexOption("my_collection", "binary_vector", idx)
 ```
 
 ```bash
@@ -233,7 +252,7 @@ Additionally, Milvus supports other similarity metrics for binary vectors. For m
 
 ### Create collection
 
-Once the binary vector and index settings are complete, create a collection that contains binary vectors. The example below uses the `create_collection` method to create a collection named `my_binary_collection`.
+Once the binary vector and index settings are complete, create a collection that contains binary vectors. The example below uses the `create_collection` method to create a collection named `my_collection`.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -245,7 +264,7 @@ Once the binary vector and index settings are complete, create a collection that
 
 ```python
 client.create_collection(
-    collection_name="my_binary_collection",
+    collection_name="my_collection",
     schema=schema,
     index_params=index_params
 )
@@ -260,7 +279,7 @@ MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .build());
 
 CreateCollectionReq requestCreate = CreateCollectionReq.builder()
-        .collectionName("my_binary_collection")
+        .collectionName("my_collection")
         .collectionSchema(schema)
         .indexParams(indexParams)
         .build();
@@ -275,17 +294,18 @@ const client = new MilvusClient({
 });
 
 await client.createCollection({
-    collection_name: 'my_dense_collection',
+    collection_name: 'my_collection',
     schema: schema,
     index_params: indexParams
 });
 ```
 
 ```go
-err = cli.CreateCollection(ctx,
-    milvusclient.NewCreateCollectionOption("my_binary_collection", schema).
+err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption("my_collection", schema).
         WithIndexOptions(indexOption))
 if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
 ```
@@ -296,7 +316,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d "{
-    \"collectionName\": \"my_binary_collection\",
+    \"collectionName\": \"my_collection\",
     \"schema\": $schema,
     \"indexParams\": $indexParams
 }"
@@ -337,7 +357,7 @@ bool_vectors = [
 data = [{"binary_vector": convert_bool_list_to_bytes(bool_vector) for bool_vector in bool_vectors}]
 
 client.insert(
-    collection_name="my_binary_collection",
+    collection_name="my_collection",
     data=data
 )
 ```
@@ -377,7 +397,7 @@ Gson gson = new Gson();
 }
 
 InsertResp insertR = client.insert(InsertReq.builder()
-        .collectionName("my_binary_collection")
+        .collectionName("my_collection")
         .data(rows)
         .build());
 ```
@@ -389,17 +409,21 @@ const data = [
 ];
 
 client.insert({
-  collection_name: "my_binary_collection",
+  collection_name: "my_collection",
   data: data,
 });
 ```
 
 ```go
-cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("quick_setup").
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
     WithBinaryVectorColumn("binary_vector", 128, [][]byte{
         {0b10011011, 0b01010100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0b10011011, 0b01010101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     }))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle err
+}
 ```
 
 ```bash
@@ -409,7 +433,7 @@ curl --request POST \
 --header "Content-Type: application/json" \
 -d "{
     \"data\": $data,
-    \"collectionName\": \"my_binary_collection\"
+    \"collectionName\": \"my_collection\"
 }"
 ```
 
@@ -436,7 +460,7 @@ query_bool_list = [1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0] + [0] * 112
 query_vector = convert_bool_list_to_bytes(query_bool_list)
 
 res = client.search(
-    collection_name="my_binary_collection",
+    collection_name="my_collection",
     data=[query_vector],
     anns_field="binary_vector",
     search_params=search_params,
@@ -462,7 +486,7 @@ boolean[] boolArray = {true, false, false, true, true, false, true, true, false,
 BinaryVec queryVector = new BinaryVec(convertBoolArrayToBytes(boolArray));
 
 SearchResp searchR = client.search(SearchReq.builder()
-        .collectionName("my_binary_collection")
+        .collectionName("my_collection")
         .data(Collections.singletonList(queryVector))
         .annsField("binary_vector")
         .searchParams(searchParams)
@@ -481,7 +505,7 @@ SearchResp searchR = client.search(SearchReq.builder()
 query_vector = [1,0,1,0,1,1,1,1,1,1,1,1];
 
 client.search({
-    collection_name: 'my_binary_collection',
+    collection_name: 'my_collection',
     data: query_vector,
     limit: 5,
     output_fields: ['pk'],
@@ -496,19 +520,22 @@ queryVector := []byte{0b10011011, 0b01010100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 
 annSearchParams := index.NewCustomAnnParam()
 annSearchParams.WithExtraParam("nprobe", 10)
-resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
-    "my_binary_collection", // collectionName
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "my_collection", // collectionName
     5,                      // limit
     []entity.Vector{entity.BinaryVector(queryVector)},
-).WithOutputFields("pk").WithAnnParam(annSearchParams))
+).WithANNSField("binary_vector").
+    WithOutputFields("pk").
+    WithAnnParam(annSearchParams))
 if err != nil {
-    log.Fatal("failed to perform basic ANN search collection: ", err.Error())
+    fmt.Println(err.Error())
+    // handle err
 }
 
 for _, resultSet := range resultSets {
-    log.Println("IDs: ", resultSet.IDs)
-    log.Println("Scores: ", resultSet.Scores)
-    log.Println("Pks: ", resultSet.GetColumn("pk"))
+    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
+    fmt.Println("Scores: ", resultSet.Scores)
+    fmt.Println("Pks: ", resultSet.GetColumn("pk").FieldData().GetScalars())
 }
 ```
 
@@ -522,7 +549,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d "{
-    \"collectionName\": \"my_binary_collection\",
+    \"collectionName\": \"my_collection\",
     \"data\": $data,
     \"annsField\": \"binary_vector\",
     \"limit\": 5,

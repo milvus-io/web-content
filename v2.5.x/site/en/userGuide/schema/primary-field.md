@@ -126,9 +126,6 @@ schema.add_field(
 ```
 
 ```java
-import io.milvus.v2.common.DataType;
-import io.milvus.v2.service.collection.request.AddFieldReq; 
-
 schema.addField(AddFieldReq.builder()
         .fieldName("my_id")
         .dataType(DataType.VarChar)

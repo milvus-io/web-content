@@ -14,7 +14,7 @@ Dense vectors are mainly used in scenarios that require understanding the semant
 
 Dense vectors are typically represented as arrays of floating-point numbers with a fixed length, such as `[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]`. The dimensionality of these vectors usually ranges from hundreds to thousands, such as 128, 256, 768, or 1024. Each dimension captures specific semantic features of an object, making it applicable to various scenarios through similarity calculations.
 
-![dense-vector](../../../../assets/dense-vector.png)
+![Dense Vector](../../../../assets/dense-vector.png)
 
 The image above illustrates the representation of dense vectors in a 2D space. Although dense vectors in real-world applications often have much higher dimensions, this 2D illustration effectively conveys several key concepts:
 
@@ -45,7 +45,7 @@ Dense vectors can be generated using various [embedding](https://en.wikipedia.or
 
 Once data is vectorized, it can be stored in Milvus for management and vector retrieval. The diagram below shows the basic process.
 
-![use-dense-vector](../../../../assets/use-dense-vector.png)
+![Use Dense Vector](../../../../assets/use-dense-vector.png)
 
 <div class="alert note">
 
@@ -122,16 +122,41 @@ import { DataType } from "@zilliz/milvus2-sdk-node";
 schema.push({
   name: "dense_vector",
   data_type: DataType.FloatVector,
-  dim: 128,
+  dim: 4,
 });
 
 ```
 
 ```go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/column"
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/index"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "localhost:19530"
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
+
 schema := entity.NewSchema()
 schema.WithField(entity.NewField().
     WithName("pk").
     WithDataType(entity.FieldTypeVarChar).
+    WithIsPrimaryKey(true).
+    WithIsAutoID(true).
     WithMaxLength(100),
 ).WithField(entity.NewField().
     WithName("dense_vector").
@@ -186,6 +211,10 @@ export schema="{
      <td><p><code>BFLOAT16_VECTOR</code></p></td>
      <td><p>Stores 16-bit Brain Floating Point (bfloat16) numbers, offering the same range of exponents as Float32 but with reduced precision. Suitable for scenarios that need to process large volumes of vectors quickly, such as large-scale image retrieval.</p></td>
    </tr>
+   <tr>
+     <td></td>
+     <td></td>
+   </tr>
 </table>
 
 ### Set index params for vector field
@@ -236,13 +265,8 @@ const indexParams = {
 ```
 
 ```go
-import (
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-)
-
-index := index.NewAutoIndex(entity.IP)
-indexOption := milvusclient.NewCreateIndexOption("my_dense_collection", "dense_vector", idx)
+idx := index.NewAutoIndex(index.MetricType(entity.IP))
+indexOption := milvusclient.NewCreateIndexOption("my_collection", "dense_vector", idx)
 ```
 
 ```bash
@@ -264,7 +288,7 @@ Milvus supports other metric types. For more information, refer to [Metric Types
 
 ### Create collection
 
-Once the dense vector and index param settings are complete, you can create a collection containing dense vectors. The example below uses the `create_collection` method to create a collection named `my_dense_collection`.
+Once the dense vector and index param settings are complete, you can create a collection containing dense vectors. The example below uses the `create_collection` method to create a collection named `my_collection`.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -276,7 +300,7 @@ Once the dense vector and index param settings are complete, you can create a co
 
 ```python
 client.create_collection(
-    collection_name="my_dense_collection",
+    collection_name="my_collection",
     schema=schema,
     index_params=index_params
 )
@@ -291,7 +315,7 @@ MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .build());
 
 CreateCollectionReq requestCreate = CreateCollectionReq.builder()
-        .collectionName("my_dense_collection")
+        .collectionName("my_collection")
         .collectionSchema(schema)
         .indexParams(indexes)
         .build();
@@ -306,7 +330,7 @@ const client = new MilvusClient({
 });
 
 await client.createCollection({
-    collection_name: 'my_dense_collection',
+    collection_name: 'my_collection',
     schema: schema,
     index_params: indexParams
 });
@@ -314,16 +338,11 @@ await client.createCollection({
 ```
 
 ```go
-import (
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
-)
-
-err = cli.CreateCollection(ctx,
-    milvusclient.NewCreateCollectionOption(collectionName, schema).
+err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption("my_collection", schema).
         WithIndexOptions(indexOption))
 if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
 ```
@@ -334,7 +353,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d "{
-    \"collectionName\": \"my_dense_collection\",
+    \"collectionName\": \"my_collection\",
     \"schema\": $schema,
     \"indexParams\": $indexParams
 }"
@@ -359,7 +378,7 @@ data = [
 ]
 
 client.insert(
-    collection_name="my_dense_collection",
+    collection_name="my_collection",
     data=data
 )
 ```
@@ -376,7 +395,7 @@ rows.add(gson.fromJson("{\"dense_vector\": [0.1, 0.2, 0.3, 0.4]}", JsonObject.cl
 rows.add(gson.fromJson("{\"dense_vector\": [0.2, 0.3, 0.4, 0.5]}", JsonObject.class));
 
 InsertResp insertR = client.insert(InsertReq.builder()
-        .collectionName("my_dense_collection")
+        .collectionName("my_collection")
         .data(rows)
         .build());
 ```
@@ -388,18 +407,22 @@ const data = [
 ];
 
 client.insert({
-  collection_name: "my_dense_collection",
+  collection_name: "my_collection",
   data: data,
 });
 ```
 
 ```go
-cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_dense_collection").
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
     WithFloatVectorColumn("dense_vector", 4, [][]float32{
         {0.1, 0.2, 0.3, 0.7},
         {0.2, 0.3, 0.4, 0.8},
     }),
 )
+if err != nil {
+    fmt.Println(err.Error())
+    // handle err
+}
 ```
 
 ```bash
@@ -412,7 +435,7 @@ curl --request POST \
         {"dense_vector": [0.1, 0.2, 0.3, 0.4]},
         {"dense_vector": [0.2, 0.3, 0.4, 0.5]}        
     ],
-    "collectionName": "my_dense_collection"
+    "collectionName": "my_collection"
 }'
 
 ## {"code":0,"cost":0,"data":{"insertCount":2,"insertIds":["453577185629572531","453577185629572532"]}}
@@ -438,7 +461,7 @@ search_params = {
 query_vector = [0.1, 0.2, 0.3, 0.7]
 
 res = client.search(
-    collection_name="my_dense_collection",
+    collection_name="my_collection",
     data=[query_vector],
     anns_field="dense_vector",
     search_params=search_params,
@@ -461,7 +484,7 @@ searchParams.put("nprobe",10);
 FloatVec queryVector = new FloatVec(new float[]{0.1f, 0.3f, 0.3f, 0.4f});
 
 SearchResp searchR = client.search(SearchReq.builder()
-        .collectionName("my_dense_collection")
+        .collectionName("my_collection")
         .data(Collections.singletonList(queryVector))
         .annsField("dense_vector")
         .searchParams(searchParams)
@@ -480,7 +503,7 @@ System.out.println(searchR.getSearchResults());
 query_vector = [0.1, 0.2, 0.3, 0.7];
 
 client.search({
-    collection_name: my_dense_collection,
+    collection_name: 'my_collection',
     data: query_vector,
     limit: 5,
     output_fields: ['pk'],
@@ -495,22 +518,22 @@ queryVector := []float32{0.1, 0.2, 0.3, 0.7}
 
 annParam := index.NewCustomAnnParam()
 annParam.WithExtraParam("nprobe", 10)
-resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
-    "my_dense_collection", // collectionName
-    5,             // limit
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "my_collection", // collectionName
+    5,                     // limit
     []entity.Vector{entity.FloatVector(queryVector)},
-    
-).
-WithOutputFields("pk").
-WithAnnParam(annParam))
+).WithANNSField("dense_vector").
+    WithOutputFields("pk").
+    WithAnnParam(annParam))
 if err != nil {
-    log.Fatal("failed to perform basic ANN search collection: ", err.Error())
+    fmt.Println(err.Error())
+    // handle error
 }
 
 for _, resultSet := range resultSets {
-    log.Println("IDs: ", resultSet.IDs)
-    log.Println("Scores: ", resultSet.Scores)
-    log.Println("Pks: ", resultSet.GetColumn("pk"))
+    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
+    fmt.Println("Scores: ", resultSet.Scores)
+    fmt.Println("Pks: ", resultSet.GetColumn("pk").FieldData().GetScalars())
 }
 ```
 
@@ -520,7 +543,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-    "collectionName": "my_dense_collection",
+    "collectionName": "my_collection",
     "data": [
         [0.1, 0.2, 0.3, 0.7]
     ],

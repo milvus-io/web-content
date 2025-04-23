@@ -40,6 +40,8 @@ A [JSON](https://en.wikipedia.org/wiki/JSON) field is a scalar field that stores
 
     - `'a'b'` and `"a"b"` are considered invalid.
 
+- **JSON Indexing**: When indexing a JSON field, you can specify one or more paths in the JSON field to accelerate filtering. Each additional path increases indexing overhead, so plan your indexing strategy carefully. For more considerations on indexing a JSON field, refer to [Considerations on JSON indexing](use-json-fields.md#Considerations-on-JSON-indexing).
+
 ## Add JSON field
 
 To add this JSON field `metadata` to your collection schema, use `DataType.JSON`. The example below defines a JSON field `metadata` that allows null values:
@@ -109,7 +111,29 @@ schema.addField(AddFieldReq.builder()
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/column"
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/index"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "localhost:19530"
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
 
 schema := entity.NewSchema()
 schema.WithField(entity.NewField().
@@ -212,12 +236,12 @@ index_params = client.prepare_index_params()
 
 # Example 1: Index the 'category' key inside 'product_info' as a string
 index_params.add_index(
-    field_name="metadata",
-    index_type="INVERTED",
-    index_name="json_index_1",
+    field_name="metadata", # JSON field name to index
+    index_type="INVERTED", # Index type. Set to INVERTED
+    index_name="json_index_1", # Index name
     params={
-        "json_path": "metadata[\"product_info\"][\"category\"]",
-        "json_cast_type": "varchar"
+        "json_path": "metadata[\"product_info\"][\"category\"]", # Path in JSON field to index
+        "json_cast_type": "varchar" # Data type that the extracted JSON values will be cast to
     }
 )
 
@@ -262,8 +286,8 @@ indexes.add(IndexParam.builder()
 ```go
 jsonIndex1 := index.NewJSONPathIndex(index.Inverted, "varchar", `metadata["product_info"]["category"]`)
 jsonIndex2 := index.NewJSONPathIndex(index.Inverted, "double", `metadata["price"]`)
-indexOpt1 := milvusclient.NewCreateIndexOption("my_json_collection", "meta", jsonIndex1)
-indexOpt2 := milvusclient.NewCreateIndexOption("my_json_collection", "meta", jsonIndex2)
+indexOpt1 := milvusclient.NewCreateIndexOption("my_collection", "metadata", jsonIndex1)
+indexOpt2 := milvusclient.NewCreateIndexOption("my_collection", "metadata", jsonIndex2)
 ```
 
 ```javascript
@@ -359,12 +383,12 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code>params.json_cast_type</code></p></td>
-     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p><ul><li><p><code>"bool"</code> or <code>"BOOL"</code></p></li><li><p><code>"double"</code> or <code>"DOUBLE"</code></p></li><li><p><code>"varchar"</code> or <code>"VARCHAR"</code></p><p><strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If the cast fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</p></li></ul></td>
+     <td><p>Data type that Milvus will cast the extracted JSON values to when building the index. Valid values:</p><ul><li><p><code>"bool"</code> or <code>"BOOL"</code></p></li><li><p><code>"double"</code> or <code>"DOUBLE"</code></p></li><li><p><code>"varchar"</code> or <code>"VARCHAR"</code></p><p><strong>Note</strong>: For integer values, Milvus internally uses double for the index. Large integers above 2^53 lose precision. If type casting fails (due to type mismatch), no error is thrown, and that row’s value is not indexed.</p></li></ul></td>
      <td><p><code>"varchar"</code></p></td>
    </tr>
 </table>
 
-**Considerations on JSON indexing**
+#### Considerations on JSON indexing
 
 - **Filtering logic**:
 
@@ -380,7 +404,7 @@ curl --request POST \
 
 - **Numeric precision**:
 
-    - Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds , it loses precision, and queries on those out-of-range values may not match exactly.
+    - Internally, Milvus indexes all numeric fields as doubles. If a numeric value exceeds 2^{53}, it loses precision, and queries on those out-of-range values may not match exactly.
 
 - **Data integrity**:
 
@@ -427,7 +451,7 @@ indexes.add(IndexParam.builder()
 
 ```go
 vectorIndex := index.NewAutoIndex(entity.COSINE)
-indexOpt := milvusclient.NewCreateIndexOption("my_json_collection", "embedding", vectorIndex)
+indexOpt := milvusclient.NewCreateIndexOption("my_collection", "embedding", vectorIndex)
 ```
 
 ```javascript
@@ -465,7 +489,7 @@ Once the schema and index are defined, create a collection that includes string 
 
 ```python
 client.create_collection(
-    collection_name="my_json_collection",
+    collection_name="my_collection",
     schema=schema,
     index_params=index_params
 )
@@ -473,7 +497,7 @@ client.create_collection(
 
 ```java
 CreateCollectionReq requestCreate = CreateCollectionReq.builder()
-        .collectionName("my_json_collection")
+        .collectionName("my_collection")
         .collectionSchema(schema)
         .indexParams(indexes)
         .build();
@@ -481,17 +505,17 @@ client.createCollection(requestCreate);
 ```
 
 ```go
-err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("my_json_collection", schema).
-        WithIndexOptions(indexOpt1, indexOpt2, indexOpt))
-    if err != nil {
-        // handler err
-    }
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("my_collection", schema).
+    WithIndexOptions(indexOpt1, indexOpt2, indexOpt))
+if err != nil {
+    fmt.Println(err.Error())
+    // handler err
 }
 ```
 
 ```javascript
 await client.create_collection({
-    collection_name: "my_json_collection",
+    collection_name: "my_collection",
     schema: schema,
     index_params: indexParams
 });
@@ -503,7 +527,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d "{
-    \"collectionName\": \"my_json_collection\",
+    \"collectionName\": \"my_collection\",
     \"schema\": $schema,
     \"indexParams\": $indexParams
 }"
@@ -557,7 +581,7 @@ data = [
 ]
 
 client.insert(
-    collection_name="my_json_collection",
+    collection_name="my_collection",
     data=data
 )
 ```
@@ -577,18 +601,13 @@ rows.add(gson.fromJson("{\"pk\":3,\"embedding\":[0.91,0.18,0.23]}", JsonObject.c
 rows.add(gson.fromJson("{\"metadata\":{\"product_info\":{\"category\":null,\"brand\":\"BrandB\"},\"price\":59.99,\"in_stock\":null},\"pk\":4,\"embedding\":[0.56,0.38,0.21]}", JsonObject.class));
 
 InsertResp insertR = client.insert(InsertReq.builder()
-        .collectionName("my_json_collection")
+        .collectionName("my_collection")
         .data(rows)
         .build());
 ```
 
 ```go
-import (
-    "github.com/milvus-io/milvus/client/v2/column"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
-)
-
-resp, err := cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_json_collection").
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
     WithInt64Column("pk", []int64{1, 2, 3, 4}).
     WithFloatVectorColumn("embedding", 3, [][]float32{
         {0.12, 0.34, 0.56},
@@ -598,24 +617,24 @@ resp, err := cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_json_co
     }).WithColumns(
     column.NewColumnJSONBytes("metadata", [][]byte{
         []byte(`{
-        "product_info": {"category": "electronics", "brand": "BrandA"},
-        "price": 99.99,
-        "in_stock": True,
-        "tags": ["summer_sale"]
-    }`),
+    "product_info": {"category": "electronics", "brand": "BrandA"},
+    "price": 99.99,
+    "in_stock": True,
+    "tags": ["summer_sale"]
+}`),
         []byte(`null`),
         []byte(`null`),
         []byte(`"metadata": {
-        "product_info": {"category": None, "brand": "BrandB"},
-        "price": 59.99,
-        "in_stock": None
-    }`),
+    "product_info": {"category": None, "brand": "BrandB"},
+    "price": 59.99,
+    "in_stock": None
+}`),
     }),
 ))
 if err != nil {
+    fmt.Println(err.Error())
     // handle err
 }
-fmt.Println(resp)
 ```
 
 ```javascript
@@ -653,7 +672,7 @@ const data = [
 ];
 
 await client.insert({
-    collection_name: "my_json_collection",
+    collection_name: "my_collection",
     data: data
 });
 ```
@@ -695,7 +714,7 @@ curl --request POST \
               "embedding": [0.56, 0.38, 0.21]
          }
     ],
-    "collectionName": "my_json_collection"
+    "collectionName": "my_collection"
 }'
 ```
 
@@ -725,7 +744,7 @@ To retrieve entities where `metadata` is not null:
 filter = 'metadata is not null'
 
 res = client.query(
-    collection_name="my_json_collection",
+    collection_name="my_collection",
     filter=filter,
     output_fields=["metadata", "pk"]
 )
@@ -749,7 +768,7 @@ import io.milvus.v2.service.vector.response.QueryResp;
 
 String filter = "metadata is not null";
 QueryResp resp = client.query(QueryReq.builder()
-        .collectionName("my_json_collection")
+        .collectionName("my_collection")
         .filter(filter)
         .outputFields(Arrays.asList("metadata", "pk"))
         .build());
@@ -765,15 +784,17 @@ System.out.println(resp.getQueryResults());
 ```
 
 ```go
-rs, err := cli.Query(ctx, milvusclient.NewQueryOption("my_json_collection").
-    WithFilter("metadata is not null").
+filter := "metadata is not null"
+rs, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+    WithFilter(filter).
     WithOutputFields("metadata", "pk"))
 if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
 
-fmt.Println(rs.GetColumn("pk"))
-fmt.Println(rs.GetColumn("metadata"))
+fmt.Println("pk", rs.GetColumn("pk").FieldData().GetScalars())
+fmt.Println("metadata", rs.GetColumn("metadata").FieldData().GetScalars())
 ```
 
 ```javascript
@@ -790,7 +811,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-    "collectionName": "my_json_collection",
+    "collectionName": "my_collection",
     "filter": "metadata is not null",
     "outputFields": ["metadata", "pk"]
 }'
@@ -812,7 +833,7 @@ To retrieve entities where `metadata["product_info"]["category"]` is `"electroni
 filter = 'metadata["product_info"]["category"] == "electronics"'
 
 res = client.query(
-    collection_name="my_json_collection",
+    collection_name="my_collection",
     filter=filter,
     output_fields=["metadata", "pk"]
 )
@@ -834,7 +855,7 @@ print(res)
 String filter = "metadata[\"product_info\"][\"category\"] == \"electronics\"";
 
 QueryResp resp = client.query(QueryReq.builder()
-        .collectionName("my_json_collection")
+        .collectionName("my_collection")
         .filter(filter)
         .outputFields(Arrays.asList("metadata", "pk"))
         .build());
@@ -846,21 +867,23 @@ System.out.println(resp.getQueryResults());
 ```
 
 ```go
-rs, err := cli.Query(ctx, milvusclient.NewQueryOption("my_json_collection").
-    WithFilter(`metadata["product_info"]["category"] == "electronics"`).
+filter = `metadata["product_info"]["category"] == "electronics"`
+rs, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+    WithFilter(filter).
     WithOutputFields("metadata", "pk"))
 if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
 
-fmt.Println(rs.GetColumn("pk"))
-fmt.Println(rs.GetColumn("metadata"))
+fmt.Println("pk", rs.GetColumn("pk").FieldData().GetScalars())
+fmt.Println("metadata", rs.GetColumn("metadata").FieldData().GetScalars())
 ```
 
 ```javascript
 const filter = 'metadata["category"] == "electronics"';
 const res = await client.query({
-    collection_name: "my_json_collection",
+    collection_name: "my_collection",
     filter: filter,
     output_fields: ["metadata", "pk"]
 });
@@ -880,7 +903,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-  "collectionName": "my_json_collection",
+  "collectionName": "my_collection",
   "filter": "metadata[\"product_info\"][\"category\"] == \"electronics\"",
   "outputFields": ["metadata", "pk"]
 }'
@@ -904,7 +927,7 @@ In addition to basic scalar field filtering, you can combine vector similarity s
 filter = 'metadata["product_info"]["brand"] == "BrandA"'
 
 res = client.search(
-    collection_name="my_json_collection",
+    collection_name="my_collection",
     data=[[0.3, -0.6, 0.1]],
     limit=5,
     search_params={"params": {"nprobe": 10}},
@@ -933,7 +956,7 @@ import io.milvus.v2.service.vector.response.SearchResp;
 String filter = "metadata[\"product_info\"][\"brand\"] == \"BrandA\"";
 
 SearchResp resp = client.search(SearchReq.builder()
-        .collectionName("my_json_collection")
+        .collectionName("my_collection")
         .annsField("embedding")
         .data(Collections.singletonList(new FloatVec(new float[]{0.3f, -0.6f, 0.1f})))
         .topK(5)
@@ -955,27 +978,33 @@ System.out.println(resp.getSearchResults());
 
 ```go
 queryVector := []float32{0.3, -0.6, -0.1}
+filter = "metadata[\"product_info\"][\"brand\"] == \"BrandA\""
 
 annParam := index.NewCustomAnnParam()
 annParam.WithExtraParam("nprobe", 10)
-resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
-    "my_json_collection", // collectionName
-    5,                    // limit
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "my_collection", // collectionName
+    5,               // limit
     []entity.Vector{entity.FloatVector(queryVector)},
-).WithOutputFields("metadata").WithAnnParam(annParam))
+).WithANNSField("embedding").
+    WithFilter(filter).
+    WithOutputFields("metadata").
+    WithAnnParam(annParam))
 if err != nil {
-    log.Fatal("failed to perform basic ANN search collection: ", err.Error())
+    fmt.Println(err.Error())
+    // handle error
 }
 
 for _, resultSet := range resultSets {
-    log.Println("IDs: ", resultSet.IDs)
-    log.Println("Scores: ", resultSet.Scores)
+    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
+    fmt.Println("Scores: ", resultSet.Scores)
+    fmt.Println("metadata", resultSet.GetColumn("metadata").FieldData().GetScalars())
 }
 ```
 
 ```javascript
 await client.search({
-    collection_name: 'my_json_collection',
+    collection_name: 'my_collection',
     data: [0.3, -0.6, 0.1],
     limit: 5,
     output_fields: ['metadata'],
@@ -990,7 +1019,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-  "collectionName": "my_json_collection",
+  "collectionName": "my_collection",
   "data": [
     [0.3, -0.6, 0.1]
   ],

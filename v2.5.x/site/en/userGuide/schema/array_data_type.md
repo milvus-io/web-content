@@ -119,7 +119,53 @@ schema.addField(AddFieldReq.builder()
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/column"
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/index"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "localhost:19530"
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
+
+schema := entity.NewSchema()
+schema.WithField(entity.NewField().
+    WithName("pk").
+    WithDataType(entity.FieldTypeInt64).
+    WithIsPrimaryKey(true),
+).WithField(entity.NewField().
+    WithName("embedding").
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(3),
+).WithField(entity.NewField().
+    WithName("tags").
+    WithDataType(entity.FieldTypeArray).
+    WithElementType(entity.FieldTypeVarChar).
+    WithMaxCapacity(10).
+    WithMaxLength(65535).
+    WithNullable(true),
+).WithField(entity.NewField().
+    WithName("ratings").
+    WithDataType(entity.FieldTypeArray).
+    WithElementType(entity.FieldTypeInt64).
+    WithMaxCapacity(5).
+    WithNullable(true),
+)
 ```
 
 ```javascript
@@ -249,7 +295,8 @@ indexes.add(IndexParam.builder()
 ```
 
 ```go
-// go
+indexOpt1 := milvusclient.NewCreateIndexOption("my_collection", "tags", index.NewInvertedIndex())
+indexOpt2 := milvusclient.NewCreateIndexOption("my_collection", "embedding", index.NewAutoIndex(entity.COSINE))
 ```
 
 ```javascript
@@ -295,7 +342,7 @@ Once the schema and index are defined, create a collection that includes ARRAY f
 
 ```python
 client.create_collection(
-    collection_name="my_array_collection",
+    collection_name="my_collection",
     schema=schema,
     index_params=index_params
 )
@@ -303,7 +350,7 @@ client.create_collection(
 
 ```java
 CreateCollectionReq requestCreate = CreateCollectionReq.builder()
-        .collectionName("my_array_collection")
+        .collectionName("my_collection")
         .collectionSchema(schema)
         .indexParams(indexes)
         .build();
@@ -311,12 +358,17 @@ client.createCollection(requestCreate);
 ```
 
 ```go
-// go
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("my_collection", schema).
+    WithIndexOptions(indexOpt1, indexOpt2))
+if err != nil {
+    fmt.Println(err.Error())
+    // handler err
+}
 ```
 
 ```javascript
 client.create_collection({
-    collection_name: "my_array_collection",
+    collection_name: "my_collection",
     schema: schema,
     index_params: indexParams
 })
@@ -328,7 +380,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d "{
-    \"collectionName\": \"my_array_collection\",
+    \"collectionName\": \"my_collection\",
     \"schema\": $schema,
     \"indexParams\": $indexParams
 }"
@@ -369,7 +421,7 @@ data = [
 ]
 
 client.insert(
-    collection_name="my_array_collection",
+    collection_name="my_collection",
     data=data
 )
 ```
@@ -388,13 +440,30 @@ rows.add(gson.fromJson("{\"tags\": null, \"ratings\": [4, 5], \"pk\": 2, \"embed
 rows.add(gson.fromJson("{\"ratings\": [9, 5], \"pk\": 3, \"embedding\": [0.18, 0.11, 0.23]}", JsonObject.class));
 
 InsertResp insertR = client.insert(InsertReq.builder()
-        .collectionName("my_array_collection")
+        .collectionName("my_collection")
         .data(rows)
         .build());
 ```
 
 ```go
-// go
+column1, _ := column.NewNullableColumnVarCharArray("tags",
+    [][]string{{"pop", "rock", "classic"}},
+    []bool{true, false, false})
+column2, _ := column.NewNullableColumnInt64Array("ratings",
+    [][]int64{{5, 4, 3}, {4, 5}, {9, 5}},
+    []bool{true, true, true})
+
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
+    WithInt64Column("pk", []int64{1, 2, 3}).
+    WithFloatVectorColumn("embedding", 3, [][]float32{
+        {0.12, 0.34, 0.56},
+        {0.78, 0.91, 0.23},
+        {0.18, 0.11, 0.23},
+    }).WithColumns(column1, column2))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle err
+}
 ```
 
 ```javascript
@@ -420,7 +489,7 @@ const data = [
 ];
 
 client.insert({
-  collection_name: "my_array_collection",
+  collection_name: "my_collection",
   data: data,
 });
 ```
@@ -451,7 +520,7 @@ curl --request POST \
         "embedding": [0.67, 0.45, 0.89]
     }       
     ],
-    "collectionName": "my_array_collection"
+    "collectionName": "my_collection"
 }'
 ```
 
@@ -475,7 +544,7 @@ To retrieve entities where the `tags` is not null:
 filter = 'tags IS NOT NULL'
 
 res = client.query(
-    collection_name="my_array_collection",
+    collection_name="my_collection",
     filter=filter,
     output_fields=["tags", "ratings", "pk"]
 )
@@ -494,7 +563,7 @@ import io.milvus.v2.service.vector.response.QueryResp;
 
 String filter = "tags IS NOT NULL";
 QueryResp resp = client.query(QueryReq.builder()
-        .collectionName("my_array_collection")
+        .collectionName("my_collection")
         .filter(filter)
         .outputFields(Arrays.asList("tags", "ratings", "pk"))
         .build());
@@ -507,13 +576,24 @@ System.out.println(resp.getQueryResults());
 ```
 
 ```go
-// go
+filter := "tags IS NOT NULL"
+rs, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+    WithFilter(filter).
+    WithOutputFields("tags", "ratings", "pk"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+fmt.Println("pk", rs.GetColumn("pk").FieldData().GetScalars())
+fmt.Println("tags", rs.GetColumn("tags").FieldData().GetScalars())
+fmt.Println("ratings", rs.GetColumn("ratings").FieldData().GetScalars())
 ```
 
 ```javascript
 client.query({
-    collection_name: 'my_array_collection',
-    filter: 'ratings[0] < 4',
+    collection_name: 'my_collection',
+    filter: 'tags IS NOT NULL',
     output_fields: ['tags', 'ratings', 'embedding']
 });
 ```
@@ -524,11 +604,11 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-    "collectionName": "my_array_collection",
-    "filter": "ratings[0] < 4",
+    "collectionName": "my_collection",
+    "filter": "tags IS NOT NULL",
     "outputFields": ["tags", "ratings", "embedding"]
 }'
-# {"code":0,"cost":0,"data":[{"embedding":[0.67,0.45,0.89],"pk":3,"ratings":{"Data":{"LongData":{"data":[3,3,4]}}},"tags":{"Data":{"StringData":{"data":["electronic","dance"]}}}}]}
+
 ```
 
 To retrieve entities where the value of the first element of `ratings` is greater than 4:
@@ -545,7 +625,7 @@ To retrieve entities where the value of the first element of `ratings` is greate
 filter = 'ratings[0] > 4'
 
 res = client.query(
-    collection_name="my_array_collection",
+    collection_name="my_collection",
     filter=filter,
     output_fields=["tags", "ratings", "embedding"]
 )
@@ -563,7 +643,7 @@ print(res)
 String filter = "ratings[0] > 4"
 
 QueryResp resp = client.query(QueryReq.builder()
-        .collectionName("my_array_collection")
+        .collectionName("my_collection")
         .filter(filter)
         .outputFields(Arrays.asList("tags", "ratings", "pk"))
         .build());
@@ -578,7 +658,18 @@ System.out.println(resp.getQueryResults());
 ```
 
 ```go
-// go
+filter = "ratings[0] > 4"
+rs, err = client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+    WithFilter(filter).
+    WithOutputFields("tags", "ratings", "pk"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+fmt.Println("pk", rs.GetColumn("pk"))
+fmt.Println("tags", rs.GetColumn("tags"))
+fmt.Println("ratings", rs.GetColumn("ratings"))
 ```
 
 ```javascript
@@ -586,7 +677,7 @@ System.out.println(resp.getQueryResults());
 const filter = 'ratings[0] > 4';
 
 const res = await client.query({
-    collection_name:"my_array_collection",
+    collection_name:"my_collection",
     filter:filter,
     output_fields: ["tags", "ratings", "embedding"]
 });
@@ -607,7 +698,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-  "collectionName": "my_array_collection",
+  "collectionName": "my_collection",
   "filter": "ratings[0] > 4",
   "outputFields": ["tags", "ratings", "embedding"]
 }'
@@ -629,7 +720,7 @@ In addition to basic scalar field filtering, you can combine vector similarity s
 filter = 'tags[0] == "pop"'
 
 res = client.search(
-    collection_name="my_array_collection",
+    collection_name="my_collection",
     data=[[0.3, -0.6, 0.1]],
     limit=5,
     search_params={"params": {"nprobe": 10}},
@@ -651,7 +742,7 @@ import io.milvus.v2.service.vector.response.SearchResp;
 
 String filter = "tags[0] == \"pop\"";
 SearchResp resp = client.search(SearchReq.builder()
-        .collectionName("my_array_collection")
+        .collectionName("my_collection")
         .annsField("embedding")
         .data(Collections.singletonList(new FloatVec(new float[]{0.3f, -0.6f, 0.1f})))
         .topK(5)
@@ -667,12 +758,36 @@ System.out.println(resp.getSearchResults());
 ```
 
 ```go
-// go
+queryVector := []float32{0.3, -0.6, 0.1}
+filter = "tags[0] == \"pop\""
+
+annParam := index.NewCustomAnnParam()
+annParam.WithExtraParam("nprobe", 10)
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "my_collection", // collectionName
+    5,               // limit
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField("embedding").
+    WithFilter(filter).
+    WithOutputFields("tags", "ratings", "embedding").
+    WithAnnParam(annParam))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+for _, resultSet := range resultSets {
+    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
+    fmt.Println("Scores: ", resultSet.Scores)
+    fmt.Println("tags", resultSet.GetColumn("tags").FieldData().GetScalars())
+    fmt.Println("ratings", resultSet.GetColumn("ratings").FieldData().GetScalars())
+    fmt.Println("embedding", resultSet.GetColumn("embedding").FieldData().GetVectors())
+}
 ```
 
 ```javascript
 client.search({
-    collection_name: 'my_array_collection',
+    collection_name: 'my_collection',
     data: [0.3, -0.6, 0.1],
     limit: 5,
     output_fields: ['tags', 'ratings', 'embdding'],
@@ -686,7 +801,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-    "collectionName": "my_array_collection",
+    "collectionName": "my_collection",
     "data": [
         [0.3, -0.6, 0.1]
     ],

@@ -34,7 +34,7 @@ from pymilvus import MilvusClient
 client= MilvusClient(uri="http://localhost:19530")
 
 client.create_collection(
-    collection_name="my_dynamic_collection",
+    collection_name="my_collection",
     dimension=5,
     # highlight-next-line
     enable_dynamic_field=True
@@ -51,7 +51,7 @@ MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
         .build());
         
 CreateCollectionReq createCollectionReq = CreateCollectionReq.builder()
-    .collectionName("my_dynamic_collection")
+    .collectionName("my_collection")
     .dimension(5)
     // highlight-next-line
     .enableDynamicField(true)
@@ -77,11 +77,13 @@ await client.createCollection({
 ```go
 import (
     "context"
+    "fmt"
 
+    "github.com/milvus-io/milvus/client/v2/column"
     "github.com/milvus-io/milvus/client/v2/entity"
     "github.com/milvus-io/milvus/client/v2/index"
     "github.com/milvus-io/milvus/client/v2/milvusclient"
-)    
+)  
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
@@ -90,7 +92,16 @@ cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
 })
 if err != nil {
+    fmt.Println(err.Error())
     // handle err
+}
+defer client.Close(ctx)
+
+err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions("my_collection", 5).
+    WithAutoID(false).
+    WithDynamicSchema(true))
+if err != nil {
+    fmt.Println(err.Error())
 }
 ```
 
@@ -100,7 +111,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-    "collectionName": "my_dynamic_collection",
+    "collectionName": "my_collection",
     "dimension": 5,
     "enableDynamicField": true
 }'
@@ -156,7 +167,7 @@ data=[
 ]
 
 res = client.insert(
-    collection_name="my_dynamic_collection",
+    collection_name="my_collection",
     data=data
 )
 
@@ -188,7 +199,7 @@ List<JsonObject> data = Arrays.asList(
 );
 
 InsertReq insertReq = InsertReq.builder()
-        .collectionName("my_dynamic_collection")
+        .collectionName("my_collection")
         .data(data)
         .build();
 
@@ -232,9 +243,12 @@ console.log(res.insert_cnt)
 ```
 
 ```go
-resp, err := cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("quick_setup").
-    WithInt64Column("id", []int64{1, 2, 3, 4, 5, 6, 7, 8, 9}).
-    WithVarcharColumn("color", []string{"pink_8682", "red_7025", "orange_6781", "pink_9298", "red_4794", "yellow_4222", "red_9392", "grey_8510", "white_9381", "purple_4976"}).
+dynamicColumn := column.NewColumnString("color", []string{
+    "pink_8682", "red_7025", "orange_6781", "pink_9298", "red_4794", "yellow_4222", "red_9392", "grey_8510", "white_9381", "purple_4976",
+})
+
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
+    WithInt64Column("id", []int64{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}).
     WithFloatVectorColumn("vector", 5, [][]float32{
         {0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592},
         {0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104},
@@ -246,12 +260,13 @@ resp, err := cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("quick_setu
         {-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052},
         {0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336},
         {0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608},
-    }),
+    }).
+    WithColumns(dynamicColumn),
 )
 if err != nil {
+    fmt.Println(err.Error())
     // handle err
 }
-fmt.Println(resp)
 ```
 
 ```bash
@@ -275,7 +290,7 @@ curl --request POST \
         {"id": 8, "vector": [0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336], "color": "white_9381"},
         {"id": 9, "vector": [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], "color": "purple_4976"}        
     ],
-    "collectionName": "my_dynamic_collection"
+    "collectionName": "my_collection"
 }'
 
 # {
@@ -342,7 +357,7 @@ index_params.add_index(
 
 # Create the index
 client.create_index(
-    collection_name="my_dynamic_collection",
+    collection_name="my_collection",
     index_params=index_params
 )
 ```
@@ -363,25 +378,22 @@ indexes.add(IndexParam.builder()
         .build());
 
 client.createIndex(CreateIndexReq.builder()
-        .collectionName("my_dynamic_collection")
+        .collectionName("my_collection")
         .indexParams(indexes)
         .build());
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/index"
-
-jsonPathIndex := index.NewJSONPathIndex(index.Inverted,
-    "varchar", // cast type
-    "color",   // json path
-)
-indexTask, err := cli.CreateIndex(ctx, milvusclient.NewCreateIndexOption("my_dynamic_collection", "color", jsonPathIndex))
+indexTask, err := client.CreateIndex(ctx, milvusclient.NewCreateIndexOption("my_collection", "color",
+    index.NewJSONPathIndex(index.Inverted, "varchar", "color")))
 if err != nil {
-    // handler err
+    fmt.Println(err.Error())
+    // handle error
 }
 
 err = indexTask.Await(ctx)
 if err != nil {
+    fmt.Println(err.Error())
     // handler err
 }
 ```
@@ -399,7 +411,7 @@ const index_params = {
 
 // Create the index
 await client.create_index({
-    collection_name: "my_dynamic_collection",
+    collection_name: "my_collection",
     index_params: index_params
 });
 ```
@@ -411,7 +423,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-    "collectionName": "my_dynamic_collection",
+    "collectionName": "my_collection",
     "indexParams": [
         {
             "fieldName": "color",
@@ -442,7 +454,7 @@ Milvus supports the use of filter expressions during queries and searches, allow
 query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
 
 res = client.search(
-    collection_name="my_dynamic_collection",
+    collection_name="my_collection",
     data=[query_vector],
     limit=5,
     # highlight-start
@@ -465,7 +477,7 @@ import io.milvus.v2.service.vector.response.SearchResp
 
 FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});
 SearchResp resp = client.search(SearchReq.builder()
-        .collectionName("my_dynamic_collection")
+        .collectionName("my_collection")
         .annsField("vector")
         .data(Collections.singletonList(queryVector))
         .outputFields(Collections.singletonList("color"))
@@ -503,19 +515,22 @@ const res = await client.search({
 ```go
 queryVector := []float32{0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592}
 
-resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
-    "my_dynamic_collection", // collectionName
-    5,             // limit
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "my_collection", // collectionName
+    5,                       // limit
     []entity.Vector{entity.FloatVector(queryVector)},
-).WithOutputFields("color").WithFilter(`color like "%red%"`))
+).WithFilter("color like \"red%\"").
+    WithANNSField("vector").
+    WithOutputFields("color"))
 if err != nil {
-    log.Fatal("failed to perform basic ANN search collection: ", err.Error())
+    fmt.Println(err.Error())
+    // handle error
 }
 
 for _, resultSet := range resultSets {
-    log.Println("IDs: ", resultSet.IDs)
-    log.Println("Scores: ", resultSet.Scores)
-    log.Println("Colors: ", resultSet.GetColumn("color"))
+    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
+    fmt.Println("Scores: ", resultSet.Scores)
+    fmt.Println("color: ", resultSet.GetColumn("color").FieldData().GetScalars())
 }
 ```
 
@@ -528,7 +543,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-    "collectionName": "my_dynamic_collection",
+    "collectionName": "my_collection",
     "data": [
         [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
     ],
@@ -545,21 +560,24 @@ In the filter expression used in the code example above, `color like "red%" and 
 ```json
 [
     {
-        "id": 4, 
-        "distance": 0.3345786594834839,
+        "id": 1, 
+        "distance": 0.6290165,
         "entity": {
-            "vector": [0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106], 
-            "color": "red_4794", 
-            "likes": 122
+            "color": "red_7025"
+        }
+    },
+    {
+        "id": 4, 
+        "distance": 0.5975797,
+        "entity": {
+            "color": "red_4794"
         }
     },
     {
         "id": 6, 
-        "distance": 0.6638239834383389，
+        "distance": -0.24996188，
         "entity": {
-            "vector": [0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987], 
-            "color": "red_9392", 
-            "likes": 58
+            "color": "red_9392"
         }
     },
 ]

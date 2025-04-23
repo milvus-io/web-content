@@ -21,7 +21,7 @@ The `jieba` tokenizer processes Chinese text by breaking it down into its compon
 ```python
 # Simple configuration: only specifying the tokenizer name
 analyzer_params = {
-    "tokenizer": "jieba",  
+    "tokenizer": "jieba",  # Use the default settings: dict=["_default_"], mode="search", hmm=true
 }
 ```
 
@@ -37,7 +37,7 @@ const analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "jieba"}
 ```
 
 ```bash
@@ -46,8 +46,6 @@ analyzerParams='{
   "tokenizer": "jieba"
 }'
 ```
-
-After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#Example-use).
 
 ## Examples
 
@@ -63,12 +61,21 @@ After defining `analyzer_params`, you can apply them to a `VARCHAR` field when d
 
 ```python
 analyzer_params = {
-    "tokenizer": "jieba",  
+    "tokenizer": {
+        "type": "jieba",
+        "dict": ["结巴分词器"],
+        "mode": "exact",
+        "hmm": False
+    }
 }
 ```
 
 ```java
-// java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("type", "jieba");
+analyzerParams.put("dict", Collections.singletonList("结巴分词器"));
+analyzerParams.put("mode", "exact");
+analyzerParams.put("hmm", false);
 ```
 
 ```javascript
@@ -76,7 +83,7 @@ analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"type": "jieba", "dict": []any{"结巴分词器"}, "mode": "exact", "hmm": false}
 ```
 
 ```bash

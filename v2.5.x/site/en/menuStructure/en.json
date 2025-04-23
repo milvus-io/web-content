@@ -300,7 +300,7 @@
       },
       {
         "label": "Consistency Level",
-        "id": "consistency.md",
+        "id": "tune_consistency.md",
         "order": 10,
         "children": []
       },
@@ -801,21 +801,27 @@
             "children": []
           },
           {
+            "label": "Elasticsearch Queries to Milvus",
+            "id": "elasticsearch-queries-to-milvus.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Search Iterators",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Use Partition Key",
             "id": "use-partition-key.md",
-            "order": 9,
+            "order": 11,
             "children": []
           },
           {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 10,
+            "order": 12,
             "children": []
           }
         ]
@@ -1453,6 +1459,12 @@
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "Drop Users & Roles",
+                "id": "drop_users_roles.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -1774,7 +1786,7 @@
                 "label": "RAG",
                 "id": "integrate_with_haystack.md",
                 "order": 0,
-                "children": []                
+                "children": []
               },
               {
                 "label": "Full-text Search",
@@ -2148,7 +2160,7 @@
             "label": "Docling",
             "id": "build_RAG_with_milvus_and_docling.md",
             "order": 11,
-            "children": []            
+            "children": []
           }
         ]
       },

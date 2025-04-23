@@ -47,7 +47,7 @@ const analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "jieba", "filter": []any{"cnalphanumonly"}}
 ```
 
 ```bash
@@ -91,7 +91,7 @@ const analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"type": "chinese"}
 ```
 
 ```bash
@@ -126,7 +126,8 @@ analyzer_params = {
 ```
 
 ```java
-// java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("type", "chinese");
 ```
 
 ```javascript
@@ -134,7 +135,7 @@ analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"type": "chinese"}
 ```
 
 ```bash

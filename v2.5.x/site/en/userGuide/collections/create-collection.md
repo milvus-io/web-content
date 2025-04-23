@@ -39,7 +39,6 @@ You can set default values for any scalar field and make it nullable. For detail
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -137,10 +136,30 @@ const fields = [
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
+import (
+    "context"
+    "fmt"
+    
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/index"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/pkg/v2/common"
+)
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "localhost:19530"
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
 
 schema := entity.NewSchema().WithDynamicFieldEnabled(true).
-        WithField(entity.NewField().WithName("my_id").WithIsAutoID(true).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
+        WithField(entity.NewField().WithName("my_id").WithIsAutoID(false).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
         WithField(entity.NewField().WithName("my_vector").WithDataType(entity.FieldTypeFloatVector).WithDim(5)).
         WithField(entity.NewField().WithName("my_varchar").WithDataType(entity.FieldTypeVarChar).WithMaxLength(512))
 ```
@@ -248,9 +267,10 @@ import (
     "github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
+collectionName := "customized_setup_1"
 indexOptions := []milvusclient.CreateIndexOption{
-    milvusclient.NewCreateIndexOption(collectionName, "my_vector", index.NewAutoIndex(entity.COSINE)).WithIndexName("my_vector"),
-    milvusclient.NewCreateIndexOption(collectionName, "my_id", index.NewAutoIndex()).WithIndexName("my_id"),
+    milvusclient.NewCreateIndexOption(collectionName, "my_vector", index.NewAutoIndex(entity.COSINE)),
+    milvusclient.NewCreateIndexOption(collectionName, "my_id", index.NewAutoIndex(entity.COSINE)),
 }
 ```
 
@@ -358,12 +378,10 @@ console.log(res.state)
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
-
-err := milvusclient.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_1", schema).
-    WithIndexOptions(indexOptions...),
-)
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_1", schema).
+    WithIndexOptions(indexOptions...))
 if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
 fmt.Println("collection created")
@@ -463,13 +481,19 @@ console.log(res.state)
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
-
-err := milvusclient.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_2", schema))
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_2", schema))
 if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
 fmt.Println("collection created")
+
+state, err := client.GetLoadState(ctx, milvusclient.NewGetLoadStateOption("customized_setup_2"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+fmt.Println(state.State)
 ```
 
 ```bash
@@ -547,10 +571,9 @@ const createCollectionReq = {
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
-
-err := cli.CreateCollection(ctx, client.NewCreateCollectionOption("customized_setup_3", schema).WithShardNum(1))
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_3", schema).WithShardNum(1))
 if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
 fmt.Println("collection created")
@@ -621,13 +644,10 @@ client.create_collection({
 ```
 
 ```go
-import (
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
-    "github.com/milvus-io/milvus/pkg/common"
-)
-
-err := cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_4", schema).WithProperty(common.MmapEnabledKey, true))
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_4", schema).
+    WithProperty(common.MmapEnabledKey, true))
 if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
 fmt.Println("collection created")
@@ -705,15 +725,11 @@ const createCollectionReq = {
 ```
 
 ```go
-import (
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
-    "github.com/milvus-io/milvus/pkg/common"
-)
-
-err = cli.CreateCollection(ctx, client.NewCreateCollectionOption("customized_setup_5", schema).
-        WithProperty(common.CollectionTTLConfigKey, 86400)) //  TTL in seconds
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_5", schema).
+    WithProperty(common.CollectionTTLConfigKey, true))
 if err != nil {
-        // handle error
+    fmt.Println(err.Error())
+    // handle error
 }
 fmt.Println("collection created")
 ```
@@ -785,14 +801,10 @@ client.createCollection(createCollectionReq);
 ```
 
 ```go
-import (
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
-    "github.com/milvus-io/milvus/client/v2/entity"
-)
-
-err := cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_6", schema).
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("customized_setup_6", schema).
     WithConsistencyLevel(entity.ClBounded))
 if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
 fmt.Println("collection created")

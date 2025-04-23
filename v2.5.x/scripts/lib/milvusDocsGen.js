@@ -503,8 +503,9 @@ class MilvusDocsGen extends larkDocWriter {
         }))
     }
 
-    async __fetch_doc_blocks(document_token, page_token=null, blocks=[]) {
+    async __fetch_doc_blocks(document_id, page_token=null, blocks=[]) {
         const token = await this.tokenFetcher.token()
+        let document_token = document_id
 
         if (this.sourceType === "wiki") {
             document_token = await this.__convert_wiki_token(document_token)

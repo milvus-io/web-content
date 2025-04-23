@@ -10,7 +10,7 @@ Information Retrieval (IR) systems, also known as search engines, are essential 
 
 Milvus supports defining the data model through a collection schema. A collection organizes unstructured data like text and images, along with their vector representations, including dense and sparse vectors in various precision used for semantic search. Additionally, Milvus supports storing and filtering non-vector data types called "Scalar". Scalar types include BOOL, INT8/16/32/64, FLOAT/DOUBLE, VARCHAR, JSON, and Array.
 
-![schema-hands-on](../../../../assets/schema-hands-on.png)
+![Schema Hands On](../../../../assets/schema-hands-on.png)
 
 The data model design of a search system involves analyzing business needs and abstracting information into a schema-expressed data model. For instance, to search a piece of text, it must be "indexed" by converting the literal string into a vector through "embedding", enabling vector search. Beyond this basic requirement, it may be necessary to store other properties such as publication timestamp and author. This metadata allows for semantic searches to be refined through filtering, returning only texts published after a specific date or by a particular author. They may also need to be retrieved together with the main text, for rendering the search result in the application. To organize these text pieces, each should be assigned a unique identifier, expressed as an integer or string. These elements are essential for achieving sophisticated search logic.
 
@@ -115,6 +115,7 @@ import io.milvus.v2.common.DataType;
 import io.milvus.v2.service.collection.request.AddFieldReq;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 
+String collectionName = "my_collection";
 CreateCollectionReq.CollectionSchema schema = client.createSchema();
 
 schema.addField(AddFieldReq.builder()
@@ -198,7 +199,74 @@ const schema = [
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/index"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "localhost:19530"
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
+
+collectionName := "my_collection"
+schema := entity.NewSchema()
+schema.WithField(entity.NewField().
+    WithName("article_id").
+    WithDataType(entity.FieldTypeInt64).
+    WithIsPrimaryKey(true).
+    WithDescription("article id"),
+).WithField(entity.NewField().
+    WithName("title").
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(200).
+    WithDescription("article title"),
+).WithField(entity.NewField().
+    WithName("author_info").
+    WithDataType(entity.FieldTypeJSON).
+    WithDescription("author information"),
+).WithField(entity.NewField().
+    WithName("publish_ts").
+    WithDataType(entity.FieldTypeInt32).
+    WithDescription("publish timestamp"),
+).WithField(entity.NewField().
+    WithName("image_url").
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(500).
+    WithDescription("image url"),
+).WithField(entity.NewField().
+    WithName("image_vector").
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(768).
+    WithDescription("image vector"),
+).WithField(entity.NewField().
+    WithName("summary").
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(1000).
+    WithDescription("article summary"),
+).WithField(entity.NewField().
+    WithName("summary_dense_vector").
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(768).
+    WithDescription("summary dense vector"),
+).WithField(entity.NewField().
+    WithName("summary_sparse_vector").
+    WithDataType(entity.FieldTypeSparseVector).
+    WithDescription("summary sparse vector"),
+)
 ```
 
 ```bash
@@ -388,34 +456,14 @@ const index_params = [
 ```
 
 ```go
-import io.milvus.v2.common.IndexParam;
-
-import java.util.ArrayList;
-import java.util.List;
-
-List<IndexParam> indexes = new ArrayList<>();
-indexes.add(IndexParam.builder()
-        .fieldName("image_vector")
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName("summary_dense_vector")
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName("summary_sparse_vector")
-        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName("publish_ts")
-        .indexType(IndexParam.IndexType.INVERTED)
-        .build());
+indexOption1 := milvusclient.NewCreateIndexOption(collectionName, "image_vector",
+    index.NewAutoIndex(index.MetricType(entity.IP)))
+indexOption2 := milvusclient.NewCreateIndexOption(collectionName, "summary_dense_vector",
+    index.NewAutoIndex(index.MetricType(entity.IP)))
+indexOption3 := milvusclient.NewCreateIndexOption(collectionName, "summary_sparse_vector",
+    index.NewSparseInvertedIndex(index.MetricType(entity.IP), 0.2))
+indexOption4 := milvusclient.NewCreateIndexOption(collectionName, "publish_ts",
+    index.NewInvertedIndex())
 ```
 
 ```bash
@@ -494,7 +542,13 @@ const client.create_collection({
 ```
 
 ```go
-// go
+err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption(collectionName, schema).
+        WithIndexOptions(indexOption1, indexOption2, indexOption3, indexOption4))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```bash
@@ -504,7 +558,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 --data "{
-  \"collectionName\": \"test_collection\",
+  \"collectionName\": \"my_collection\",
   \"schema\": $schema,
   \"indexParams\": $indexParams
 }"
@@ -543,7 +597,12 @@ console.log(collection_desc);
 ```
 
 ```go
-// go
+desc, err := client.DescribeCollection(ctx, milvusclient.NewDescribeCollectionOption(collectionName))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+fmt.Println(desc.Schema)
 ```
 
 ```bash

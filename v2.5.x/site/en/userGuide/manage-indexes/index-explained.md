@@ -69,7 +69,7 @@ Selecting an appropriate index type for a vector search can significantly impact
 
 As demonstrated in the diagram below, an index type in Milvus consists of three core components, namely **data structure**, **quantization**, and **refiner**. Quantization and refiner are optional, but are widely used because of a significant gains-better-than-costs balance. 
 
-![vector-index-anatomy](../../../../assets/vector-index-anatomy.png)
+![Vector Index Anatomy](../../../../assets/vector-index-anatomy.png)
 
 During index creation, Milvus combines the chosen data structure and quantization method to determine an optimal **expansion rate**. At query time, the system retrieves `topK × expansion rate` candidate vectors, applies the refiner to recalculate distances with higher precision, and finally returns the most accurate `topK` results. This hybrid approach balances speed and accuracy by restricting resource-intensive refinement to a filtered subset of candidates.
 

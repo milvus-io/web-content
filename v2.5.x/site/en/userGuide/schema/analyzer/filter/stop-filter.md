@@ -54,7 +54,11 @@ const analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "standard",
+    "filter": []any{map[string]any{
+        "type":       "stop",
+        "stop_words": []string{"of", "to", "_english_"},
+    }}}
 ```
 
 ```bash
@@ -115,7 +119,16 @@ analyzer_params = {
 ```
 
 ```java
-// java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("tokenizer", "standard");
+analyzerParams.put("filter",
+        Collections.singletonList(
+                new HashMap<String, Object>() {{
+                    put("type", "stop");
+                    put("stop_words", Arrays.asList("of", "to", "_english_"));
+                }}
+        )
+);
 ```
 
 ```javascript
@@ -123,7 +136,11 @@ analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "standard",
+    "filter": []any{map[string]any{
+        "type":       "stop",
+        "stop_words": []string{"of", "to", "_english_"},
+    }}}
 ```
 
 ```bash

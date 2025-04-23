@@ -47,14 +47,18 @@ analyzerParams.put("filter",
 const analyzer_params = {
     "tokenizer": "standard",
     "filter":[{
-        "type": "stop", // Specifies the filter type as stop
-        "stop_words": ["of", "to", "_english_"], // Defines custom stop words and includes the English stop word list
+        "type": "stemmer", // Specifies the filter type as stop
+        "language": "english", 
     }],
 };
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "standard",
+    "filter": []any{map[string]any{
+        "type":     "stemmer",
+        "language": "english",
+    }}}
 ```
 
 ```bash
@@ -111,7 +115,16 @@ analyzer_params = {
 ```
 
 ```java
-// java
+Map<String, Object> analyzerParams = new HashMap<>();
+analyzerParams.put("tokenizer", "standard");
+analyzerParams.put("filter",
+        Collections.singletonList(
+                new HashMap<String, Object>() {{
+                    put("type", "stemmer");
+                    put("language", "english");
+                }}
+        )
+);
 ```
 
 ```javascript
@@ -119,7 +132,11 @@ analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "standard",
+    "filter": []any{map[string]any{
+        "type":     "stemmer",
+        "language": "english",
+    }}}
 ```
 
 ```bash

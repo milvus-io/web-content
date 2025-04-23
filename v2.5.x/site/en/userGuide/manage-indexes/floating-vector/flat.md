@@ -1,15 +1,14 @@
 ---
 id: flat.md
-order: 0
-summary: This article will introduce the FLAT index in Milvus.
-title: FLAT
+title: "FLAT"
+summary: "The FLAT index is one of the simplest and most straightforward methods for indexing and searching floating-point vectors. It relies on a brute-force approach, where each query vector is directly compared to every vector in the dataset, without any advanced preprocessing or data structuring. This approach guarantees accuracy, offering 100% recall, as every potential match is evaluated."
 ---
 
 # FLAT
 
 The **FLAT** index is one of the simplest and most straightforward methods for indexing and searching floating-point vectors. It relies on a brute-force approach, where each query vector is directly compared to every vector in the dataset, without any advanced preprocessing or data structuring. This approach guarantees accuracy, offering 100% recall, as every potential match is evaluated.
 
-However, this exhaustive search method comes with trade-offs. The FLAT index is the slowest indexing option compared to other index types in Milvus, as it performs a full scan of the dataset for every query. Consequently, it is not well-suited for environments with massive datasets, where performance is a concern. The primary advantage of the FLAT index is its simplicity and reliability, as it requires no extra index buidling or complex index parameter configurations.
+However, this exhaustive search method comes with trade-offs. The FLAT index is the slowest indexing option, as it performs a full scan of the dataset for every query. Consequently, it is not well-suited for environments with massive datasets, where performance is a concern. The primary advantage of the FLAT index is its simplicity and reliability, as it requires no training or complex parameter configurations.
 
 ## Build index
 
@@ -33,7 +32,9 @@ index_params.add_index(
 In this configuration:
 
 - `index_type`: The type of index to be built. In this example, set the value to `FLAT`.
+
 - `metric_type`: The method used to calculate the distance between vectors. Supported values include `COSINE`, `L2`, and `IP`. For details, refer to [Metric Types](metric.md).
+
 - `params`: No extra parameters are needed for the FLAT index.
 
 Once the index parameters are configured, you can create the index by using the `create_index()` method directly or passing the index params in the `create_collection` method. For details, refer to [Create Collection](create-collection.md).
@@ -45,6 +46,7 @@ Once the index is built and entities are inserted, you can perform similarity se
 ```python
 res = MilvusClient.search(
     collection_name="your_collection_name", # Collection name
+    anns_field="vector_field", # Vector field name
     data=[[0.1, 0.2, 0.3, 0.4, 0.5]],  # Query vector
     limit=3,  # TopK results to return
     search_params={"params": {}}  # No additional parameters required for FLAT

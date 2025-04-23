@@ -1,82 +1,454 @@
 ---
 id: reranking.md
-summary: This topic covers the reranking process, explaining its significance and implementation of two reranking methods.
-title: Reranking
+title: "Reranking"
+summary: "Hybrid Search achieves more precise search results through multiple simultaneous ANN searches. Multiple searches return several sets of results, which require a reranking strategy to help merge and reorder the results and return a single set of results. This guide will introduce the reranking strategies supported by Milvus and provide tips for selecting the appropriate reranking strategy."
 ---
 
 # Reranking
 
-Milvus enables hybrid search capabilities using the [hybrid_search()](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md) API, incorporating sophisticated reranking strategies to refine search results from multiple `AnnSearchRequest` instances. This topic covers the reranking process, explaining its significance and implementation of different reranking strategies in Milvus.
+Hybrid Search achieves more precise search results through multiple simultaneous ANN searches. Multiple searches return several sets of results, which require a reranking strategy to help merge and reorder the results and return a single set of results. This guide will introduce the reranking strategies supported by Milvus and provide tips for selecting the appropriate reranking strategy.
 
 ## Overview
 
-The following figure illustrates the execution of a hybrid search in Milvus and highlights the role of reranking in the process.
+The following diagram shows the main workflow of conducting a Hybrid Search in a multi-modal search application . In the diagram, one path is basic ANN search on texts and the other path is basic ANN search on images. Each path generates a set of results based on the text and image similarity score respectively (**Limit 1** and **Limit 2**). Then a reranking strategy is applied to rerank two sets of results based on a unified standard, ultimately merging the two sets of results into a final set of search results, **Limit(final)**.
 
-<img src="../../../assets/multi-vector-rerank.png" alt="reranking_process" width="300"/>
+![Multi Vector Rerank](../../../../assets/multi-vector-rerank.png)
 
-Reranking in hybrid search is a crucial step that consolidates results from several vector fields, ensuring the final output is relevant and accurately prioritized. Currently, Milvus offers these reranking strategies:
+In Hybrid Search, reranking is a crucial step that integrates the results from multiple vector searches to ensure the final output is the most relevant and accurate. Currently, Milvus supports the following two reranking strategies:
 
-- `WeightedRanker`: This approach merges results by calculating a weighted average of scores (or vector distances) from different vector searches. It assigns weights based on the significance of each vector field.
+- **[WeightedRanker](reranking.md#WeightedRanker)**: This strategy merges results by calculating a weighted score of scores (or distances) from different vector searches. Weights are assigned based on the importance of each vector field, allowing for customization according to specific use-case priorities.
 
-- `RRFRanker`: This strategy combines results based on their ranks across different vector columns.
+- **[RRFRanker](reranking.md#RRFRanker) (Reciprocal Rank Fusion Ranker)**: This strategy combines results based on ranking. It uses a method that balances the ranks of results from different searches, often leading to a more fair and effective integration of diverse data types or modalities.
 
-## Weighted Scoring (WeightedRanker)
+## WeightedRanker
 
-The `WeightedRanker` strategy assigns different weights to results from each vector retrieval route based on the significance of each vector field. This reranking strategy is applied when the significance of each vector field varies, allowing you to emphasize certain vector fields over others by assigning them higher weights. For example, in a multimodal search, the text description might be considered more important than the color distribution in images.
+The WeightedRanker strategy allocates different weights to the results of each path of vector search based on their importance. 
 
-WeightedRanker’s basic process is as follows:
+### Mechanism of WeightedRanker
 
-- **Collect Scores During Retrieval**: Gather results and their scores from different vector retrieval routes.
-- **Score Normalization**: Normalize the scores from each route to a [0,1] range, where values closer to 1 indicate higher relevance. This normalization is crucial due to score distributions varying with different metric types. For instance, the distance for IP ranges from [-∞,+∞], while the distance for L2 ranges from [0,+∞]. Milvus employs the `arctan` function, transforming values to the [0,1] range to provide a standardized basis for different metric types.
+The main workflow of the WeightedRanker strategy is as follows:
 
-    <img src="../../../assets/arctan.png" alt="arctan-function" width="300"/>
+1. **Collect Search Scores**: Gather the results and scores from each path of vector search (score_1, score_2).
 
-- **Weight Allocation**: Assign a weight `w𝑖` to each vector retrieval route. Users specify the weights, which reflect the data source's reliability, accuracy, or other pertinent metrics. Each weight ranges from [0,1].
-- **Score Fusion**: Calculate a weighted average of the normalized scores to derive the final score. The results are then ranked based on these highest to lowest scores to generate the final sorted results.
+1. **Score Normalization**: Each search may use different similarity metrics, resulting in varied score distributions. For instance, using Inner Product (IP) as a similarity type could result in scores ranging from [−∞,+∞], while using Euclidean distance (L2) results in scores ranging from [0,+∞]. Because the score ranges from different searches vary and cannot be directly compared, it is necessary to normalize the scores from each path of search. Typically, `arctan` function is applied to transform the scores into a range between [0, 1] (score_1_normalized, score_2_normalized). Scores closer to 1 indicate higher similarity.
 
-![weighted-reranker](/assets/weighted-reranker.png)
+1. **Assign Weights**: Based on the importance assigned to different vector fields, weights (**wi**) are allocated to the normalized scores (score_1_normalized, score_2_normalized). The weights of each path should range between [0,1]. The resulting weighted scores are score_1_weighted and score_2_weighted.
 
-To use this strategy, apply a `WeightedRanker` instance and set weight values by passing in a variable number of numeric arguments.
+1. **Merge Scores**: The weighted scores (score_1_weighted, score_2_weighted) are ranked from highest to lowest to produce a final set of scores (score_final).
+
+![Weighted Reranker](../../../../assets/weighted-reranker.png)
+
+### Example of WeightedRanker
+
+This example demonstrates a multimodal Hybrid Search (topK=5) involving images and text and illustrates how the WeightedRanker strategy reranks the results from two ANN searches.
+
+- Results of ANN search on images （topK=5)：
+
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Score (image)</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>0.92</p></td>
+   </tr>
+   <tr>
+     <td><p>203</p></td>
+     <td><p>0.88</p></td>
+   </tr>
+   <tr>
+     <td><p>150</p></td>
+     <td><p>0.85</p></td>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>0.83</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>0.8</p></td>
+   </tr>
+</table>
+
+- Results of ANN search on texts （topK=5)：
+
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Score (text)</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>0.91</p></td>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>0.87</p></td>
+   </tr>
+   <tr>
+     <td><p>110</p></td>
+     <td><p>0.85</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>0.82</p></td>
+   </tr>
+   <tr>
+     <td><p>250</p></td>
+     <td><p>0.78</p></td>
+   </tr>
+</table>
+
+- Use WeightedRanker assign weights to image and text search results. Suppose the weight for the image ANN search is 0.6 and the weight for the text search is 0.4.
+
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Score (image)</strong></p></th>
+     <th><p><strong>Score (text)</strong></p></th>
+     <th><p><strong>Weighted Score</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>0.92</p></td>
+     <td><p>0.87</p></td>
+     <td><p>0.6×0.92+0.4×0.87=0.90</p></td>
+   </tr>
+   <tr>
+     <td><p>203</p></td>
+     <td><p>0.88</p></td>
+     <td><p>N/A</p></td>
+     <td><p>0.6×0.88+0.4×0=0.528</p></td>
+   </tr>
+   <tr>
+     <td><p>150</p></td>
+     <td><p>0.85</p></td>
+     <td><p>N/A</p></td>
+     <td><p>0.6×0.85+0.4×0=0.51</p></td>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>0.83</p></td>
+     <td><p>0.91</p></td>
+     <td><p>0.6×0.83+0.4×0.91=0.86</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>0.80</p></td>
+     <td><p>0.82</p></td>
+     <td><p>0.6×0.80+0.4×0.82=0.81</p></td>
+   </tr>
+   <tr>
+     <td><p>110</p></td>
+     <td><p>Not in Image</p></td>
+     <td><p>0.85</p></td>
+     <td><p>0.6×0+0.4×0.85=0.34</p></td>
+   </tr>
+   <tr>
+     <td><p>250</p></td>
+     <td><p>Not in Image</p></td>
+     <td><p>0.78</p></td>
+     <td><p>0.6×0+0.4×0.78=0.312</p></td>
+   </tr>
+</table>
+
+- The final results after reranking（topK=5)：
+
+<table>
+   <tr>
+     <th><p><strong>Rank</strong></p></th>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Final Score</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>1</p></td>
+     <td><p>101</p></td>
+     <td><p>0.90</p></td>
+   </tr>
+   <tr>
+     <td><p>2</p></td>
+     <td><p>198</p></td>
+     <td><p>0.86</p></td>
+   </tr>
+   <tr>
+     <td><p>3</p></td>
+     <td><p>175</p></td>
+     <td><p>0.81</p></td>
+   </tr>
+   <tr>
+     <td><p>4</p></td>
+     <td><p>203</p></td>
+     <td><p>0.528</p></td>
+   </tr>
+   <tr>
+     <td><p>5</p></td>
+     <td><p>150</p></td>
+     <td><p>0.51</p></td>
+   </tr>
+</table>
+
+### Usage of WeightedRanker
+
+When using the WeightedRanker strategy, it is necessary to input weight values. The number of weight values to input should correspond to the number of basic ANN search requests in the Hybrid Search. The input weight values should fall in the range of [0,1], with values closer to 1 indicating greater importance.
+
+For example, suppose there are two basic ANN search requests in a Hybrid Search: text search and image search. If the text search is considered more important, it should be assigned a greater weight.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 from pymilvus import WeightedRanker
 
-# Use WeightedRanker to combine results with specified weights
-rerank = WeightedRanker(0.8, 0.8, 0.7) 
+rerank= WeightedRanker(0.8, 0.3) 
 ```
 
-Note that:
+```java
+import io.milvus.v2.service.vector.request.ranker.WeightedRanker;
 
-- Each weight value ranges from 0 (least important) to 1 (most important), influencing the final aggregated score.
+WeightedRanker rerank = new WeightedRanker(Arrays.asList(0.8f, 0.3f))
+```
 
-- The total number of weight values provided in `WeightedRanker` should equal the number of `AnnSearchRequest` instances you have created earlier.
+```go
+import "github.com/milvus-io/milvus/client/v2/milvusclient"
 
-- It is worth noting that due to the different measurements of the different metric types, we normalize the distances of the recall results so that they lie in the interval [0,1], where 0 means different and 1 means similar. The final score will be the sum of the weight values and distances.
+reranker := milvusclient.NewWeightedReranker([]float64{0.8, 0.3})
+```
 
-## Reciprocal Rank Fusion (RRFRanker)
+```javascript
+rerank: WeightedRanker(0.8, 0.3)
+```
 
-RRF is a data fusion method that combines ranking lists based on the reciprocal of their ranks. It is an effective way to balance the influence of each vector field, especially when there is no clear precedence of importance. This strategy is typically used when you want to give equal consideration to all vector fields or when there is uncertainty about the relative importance of each field.
+```bash
+export rerank='{
+        "strategy": "ws",
+        "params": {"weights": [0.8,0.3]}
+    }'
+```
 
-RRF’s basic process is as follows:
+## RRFRanker
 
-- **Collect Rankings During Retrieval**: Retrievers across multiple vector fields retrieve and sort results.
-- **Rank Fusion**: The RRF algorithm weighs and combines the ranks from each retriever. The formula is as follows:
+Reciprocal Rank Fusion (RRF) is a data fusion method that combines ranked lists based on the reciprocal of their rankings. This reranking strategy effectively balances the importance of each path of vector search.
 
-    ![rrf-ranker](/assets/rrf-ranker.png)
+### Mechanism of RRFRanker
 
-    Here, 𝑁 represents the number of different retrieval routes, rank𝑖(𝑑) is the rank position of retrieved document 𝑑 by the 𝑖th retriever, and 𝑘 is a smoothing parameter, typically set to 60.
-- **Comprehensive Ranking**: Re-rank the retrieved results based on the combined scores to produce the final results.
+The main workflow of the RRFRanker strategy is as follows:
 
-To use this strategy, apply an `RRFRanker` instance.
+1. **Collect Search Rankings**: Collect the rankings of results from each path of vector search (rank_1, rank_2).
+
+1. **Merge Rankings**: Convert the rankings from each path (rank_rrf_1, rank_rrf_2) according to a formula .
+
+    The calculation formula involves *N*, which represents the number of retrievals. *ranki*(*d*) is the ranking position of document *d*  generated by the *i(th)* retriever. *k* is a smoothing parameter typically set at 60.
+
+1. **Aggregate Rankings**: Re-rank the search results based on the combined rankings to produce the final results.
+
+![RRF Reranker](../../../../assets/RRF-reranker.png)
+
+### Example of RRFRanker
+
+This example demonstrates a Hybrid Search (topK=5) on sparse-dense vectors and illustrates how the RRFRanker strategy reranks the results from two ANN searches.
+
+- Results of ANN search on sparse vectors of texts （topK=5)：
+
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Rank (sparse)</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>1</p></td>
+   </tr>
+   <tr>
+     <td><p>203</p></td>
+     <td><p>2</p></td>
+   </tr>
+   <tr>
+     <td><p>150</p></td>
+     <td><p>3</p></td>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>4</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>5</p></td>
+   </tr>
+</table>
+
+- Results of ANN search on dense vectors of texts （topK=5)：
+
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Rank (dense)</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>1</p></td>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>2</p></td>
+   </tr>
+   <tr>
+     <td><p>110</p></td>
+     <td><p>3</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>4</p></td>
+   </tr>
+   <tr>
+     <td><p>250</p></td>
+     <td><p>5</p></td>
+   </tr>
+</table>
+
+- Use RRF to rearrange the rankings of the two sets of search results. Assume that the smoothing parameter `k` is set at 60.
+
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Score (Sparse)</strong></p></th>
+     <th><p><strong>Score (Dense)</strong></p></th>
+     <th><p><strong>Final Score</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>1</p></td>
+     <td><p>2</p></td>
+     <td><p>1/(60+1)+1/(60+2) = 0.01639</p></td>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>4</p></td>
+     <td><p>1</p></td>
+     <td><p>1/(60+4)+1/(60+1) = 0.01593</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>5</p></td>
+     <td><p>4</p></td>
+     <td><p>1/(60+5)+1/(60+4) = 0.01554</p></td>
+   </tr>
+   <tr>
+     <td><p>203</p></td>
+     <td><p>2</p></td>
+     <td><p>N/A</p></td>
+     <td><p>1/(60+2) = 0.01613</p></td>
+   </tr>
+   <tr>
+     <td><p>150</p></td>
+     <td><p>3</p></td>
+     <td><p>N/A</p></td>
+     <td><p>1/(60+3) = 0.01587</p></td>
+   </tr>
+   <tr>
+     <td><p>110</p></td>
+     <td><p>N/A</p></td>
+     <td><p>3</p></td>
+     <td><p>1/(60+3) = 0.01587</p></td>
+   </tr>
+   <tr>
+     <td><p>250</p></td>
+     <td><p>N/A</p></td>
+     <td><p>5</p></td>
+     <td><p>1/(60+5) = 0.01554</p></td>
+   </tr>
+</table>
+
+- The final results after reranking（topK=5)：
+
+<table>
+   <tr>
+     <th><p><strong>Rank</strong></p></th>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Final Score</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>1</p></td>
+     <td><p>101</p></td>
+     <td><p>0.01639</p></td>
+   </tr>
+   <tr>
+     <td><p>2</p></td>
+     <td><p>203</p></td>
+     <td><p>0.01613</p></td>
+   </tr>
+   <tr>
+     <td><p>3</p></td>
+     <td><p>198</p></td>
+     <td><p>0.01593</p></td>
+   </tr>
+   <tr>
+     <td><p>4</p></td>
+     <td><p>150</p></td>
+     <td><p>0.01587</p></td>
+   </tr>
+   <tr>
+     <td><p>5</p></td>
+     <td><p>110</p></td>
+     <td><p>0.01587</p></td>
+   </tr>
+</table>
+
+### Usage of RRFRanker
+
+When using the RRF reranking strategy, you need to configure the parameter `k`. It is a smoothing parameter that can effectively alter the relative weights of full-text search versus vector search. The default value of this parameter is 60, and it can be adjusted within a range of (0, 16384). The value should be floating-point numbers. The recommended value is between [10, 100]. While `k=60` is a common choice, the optimal `k` value can vary depending on your specific applications and datasets. We recommend testing and adjusting this parameter based on your specific use case to achieve the best performance.
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#bash">cURL</a>
+</div>
 
 ```python
 from pymilvus import RRFRanker
 
-# Default k value is 60
-ranker = RRFRanker()
-
-# Or specify k value
-ranker = RRFRanker(k=100)
+ranker = RRFRanker(100)
 ```
 
-RRF allows balancing influence across fields without specifying explicit weights. The top matches agreed upon by multiple fields will be prioritized in the final ranking.
+```java
+import io.milvus.v2.service.vector.request.ranker.RRFRanker;
+
+RRFRanker ranker = new RRFRanker(100);
+```
+
+```go
+reranker := milvusclient.NewRRFReranker().WithK(100)
+```
+
+```javascript
+rerank: RRFRanker("100")
+```
+
+```bash
+"rerank": {
+    "strategy": "rrf",
+    "params": {
+        "k": 100
+    }
+}
+export rerank='{
+        "strategy": "rrf",
+        "params": {"k": 100}
+    }'
+```
+
+## Select the right reranking strategy
+
+When choosing a reranking strategy, one thing to consider is whether to there is any emphasis for one or more basic ANN search on the vector fields.
+
+- **WeightedRanker**: This strategy is recommended if you require the results to emphasize a particular vector field. The WeightedRanker allows you to assign higher weights to certain vector fields, emphasizing them more. For instance, in multimodal searches, textual descriptions of an image might be considered more important than the colors in this image.
+
+- **RRFRanker (Reciprocal Rank Fusion Ranker)**: This strategy is recommended when there is no specific emphasis. The RRF can effectively balance the importance of each vector field.
+

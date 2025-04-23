@@ -1,216 +1,201 @@
 ---
 id: basic-operators.md
-summary: Milvus provides a rich set of basic operators to help you filter and query data efficiently. These operators allow you to refine your search conditions based on scalar fields, numeric calculations, logical conditions, and more. Understanding how to use these operators is crucial for building precise queries and maximizing the efficiency of your searches.​
-title: Basic Operators
+title: "Basic Operators"
+summary: "Milvus provides a rich set of basic operators to help you filter and query data efficiently. These operators allow you to refine your search conditions based on scalar fields, numeric calculations, logical conditions, and more. Understanding how to use these operators is crucial for building precise queries and maximizing the efficiency of your searches."
 ---
 
-# Basic Operators​
+# Basic Operators
 
-Milvus provides a rich set of basic operators to help you filter and query data efficiently. These operators allow you to refine your search conditions based on scalar fields, numeric calculations, logical conditions, and more. Understanding how to use these operators is crucial for building precise queries and maximizing the efficiency of your searches.​
+Milvus provides a rich set of basic operators to help you filter and query data efficiently. These operators allow you to refine your search conditions based on scalar fields, numeric calculations, logical conditions, and more. Understanding how to use these operators is crucial for building precise queries and maximizing the efficiency of your searches.
 
-## Comparison operators​
+## Comparison operators
 
-Comparison operators are used to filter data based on equality, inequality, or size. They are applicable to numeric, text, and date fields.​
+Comparison operators are used to filter data based on equality, inequality, or size. They are applicable to numeric and text fields.
 
-### Supported Comparison Operators:​
+### Supported Comparison Operators:
 
-- `==` (Equal to)​
+- `==` (Equal to)
 
-- `!=` (Not equal to)​
+- `!=` (Not equal to)
 
-- `>` (Greater than)​
+- `>` (Greater than)
 
-- `<` (Less than)​
+- `<` (Less than)
 
-- `>=` (Greater than or equal to)​
+- `>=` (Greater than or equal to)
 
-- `<=` (Less than or equal to)​
+- `<=` (Less than or equal to)
 
-### Example 1: Filtering with Greater Than or Equal To (`>=`)​
+### Example 1: Filtering with Equal To (`==`)
 
-If you want to find all entities with `rating` greater than or equal to 4:​
+Assume you have a field named `status` and you want to find all entities where `status` is "active". You can use the equality operator `==`:
 
 ```python
-filter = 'rating >= 4'​
-
+filter = 'status == "active"'
 ```
 
-### Example 2: Filtering with Less Than or Equal To (`<=`)​
+### Example 2: Filtering with Not Equal To (`!=`)
 
-To find entities with `discount` less than or equal to 10%:​
+To find entities where `status` is not "inactive":
 
 ```python
-filter = 'discount <= 10'​
-
+filter = 'status != "inactive"'
 ```
 
-## Range operators​
+### Example 3: Filtering with Greater Than (`>`)
 
-Range operators help filter data based on specific sets or ranges of values.​
-
-### Supported Range Operators:​
-
-- `IN`: Used to match values within a specific set or range.​
-
-- `LIKE`: Used to match a pattern (mostly for text fields).​
-
-### Example 1: Using `IN` to Match Multiple Values​
-
-If you want to find all entities where the `color` is either "red", "green", or "blue":​
+If you want to find all entities with an `age` greater than 30:
 
 ```python
-filter = 'color in ["red", "green", "blue"]'​
-
+filter = 'age > 30'
 ```
 
-This is useful when you want to check for membership in a list of values.​
+### Example 4: Filtering with Less Than
 
-### Example 2: Using `LIKE` for Pattern Matching​
-
-The `LIKE` operator is used for pattern matching in string fields. It can match substrings in different positions within the text: as a **prefix**, **infix**, or **suffix**. The `LIKE` operator uses the `%` symbol as a wildcard, which can match any number of characters (including zero).​
-
-#### Prefix Match (Starts With)​
-
-To perform a **prefix** match, where the string starts with a given pattern, you can place the pattern at the beginning and use `%` to match any characters following it. For example, to find all products whose `name` starts with "Prod":​
+To find entities where `price` is less than 100:
 
 ```python
-filter = 'name LIKE "Prod%"'​
-
+filter = 'price < 100'
 ```
 
-This will match any product whose name starts with "Prod", such as "Product A", "Product B", etc.​
+### Example 5: Filtering with Greater Than or Equal To (`>=`)
 
-#### Suffix Match (Ends With)​
-
-For a **suffix** match, where the string ends with a given pattern, place the `%` symbol at the beginning of the pattern. For example, to find all products whose `name` ends with "XYZ":​
+If you want to find all entities with `rating` greater than or equal to 4:
 
 ```python
-filter = 'name LIKE "%XYZ"'​
-
+filter = 'rating >= 4'
 ```
 
-This will match any product whose name ends with "XYZ", such as "ProductXYZ", "SampleXYZ", etc.​
+### Example 6: Filtering with Less Than or Equal To
 
-#### Infix Match (Contains)​
-
-To perform an **infix** match, where the pattern can appear anywhere in the string, you can place the `%` symbol at both the beginning and the end of the pattern. For example, to find all products whose `name` contains the word "Pro":​
+To find entities with `discount` less than or equal to 10%:
 
 ```python
-filter = 'name LIKE "%Pro%"'​
-
+filter = 'discount <= 10'
 ```
 
-This will match any product whose name contains the substring "Pro", such as "Product", "ProLine", or "SuperPro".​
+## Range operators
 
-## Arithmetic Operators​
+Range operators help filter data based on specific sets or ranges of values.
 
-Arithmetic operators allow you to create conditions based on calculations involving numeric fields.​
+### Supported Range Operators:
 
-### Supported Arithmetic Operators:​
+- `IN`: Used to match values within a specific set or range.
 
-- `+` (Addition)​
+- `LIKE`: Used to match a pattern (mostly for text fields).
 
-- `-` (Subtraction)​
+### Example 1: Using `IN` to Match Multiple Values
 
-- `*` (Multiplication)​
-
-- `/` (Division)​
-
-- `%` (Modulus)​
-
-- `**` (Exponentiation)​
-
-### Example 1: Using Addition (`+`)​
-
-To find entities where the `total` price is the sum of `base_price` and `tax`:​
+If you want to find all entities where the `color` is either "red", "green", or "blue":
 
 ```python
-filter = 'total == base_price + tax'​
-
+filter = 'color in ["red", "green", "blue"]'
 ```
 
-### Example 2: Using Subtraction (`-`)​
+This is useful when you want to check for membership in a list of values.
 
-To find entities where `quantity` is greater than 50 and `quantity_sold` is less than 30:​
+### Example 2: Using `LIKE` for Pattern Matching
+
+The `LIKE` operator is used for pattern matching in string fields. It can match substrings in different positions within the text: as a **prefix**, **infix**, or **suffix**. The `LIKE` operator uses the `%` symbol as a wildcard, which can match any number of characters (including zero).
+
+### Prefix Match (Starts With)
+
+To perform a **prefix** match, where the string starts with a given pattern, you can place the pattern at the beginning and use `%` to match any characters following it. For example, to find all products whose `name` starts with "Prod":
 
 ```python
-filter = 'quantity - quantity_sold > 50'​
-
+filter = 'name LIKE "Prod%"'
 ```
 
-### Example 3: Using Multiplication (`*`)​
+This will match any product whose name starts with "Prod", such as "Product A", "Product B", etc.
 
-To find entities where `price` is greater than 100 and `quantity` is greater than 10, multiplied:​
+### Suffix Match (Ends With)
+
+For a **suffix** match, where the string ends with a given pattern, place the `%` symbol at the beginning of the pattern. For example, to find all products whose `name` ends with "XYZ":
 
 ```python
-filter = 'price * quantity > 1000'​
-
+filter = 'name LIKE "%XYZ"'
 ```
 
-### Example 4: Using Division (`/`)​
+This will match any product whose name ends with "XYZ", such as "ProductXYZ", "SampleXYZ", etc.
 
-To find products where `total_price` divided by `quantity` is less than 50:​
+### Infix Match (Contains)
+
+To perform an **infix** match, where the pattern can appear anywhere in the string, you can place the `%` symbol at both the beginning and the end of the pattern. For example, to find all products whose `name` contains the word "Pro":
 
 ```python
-filter = 'total_price / quantity < 50'​
-
+filter = 'name LIKE "%Pro%"'
 ```
 
-### Example 5: Using Modulus (`%`)​
+This will match any product whose name contains the substring "Pro", such as "Product", "ProLine", or "SuperPro".
 
-To find entities where the `id` is an even number (i.e., divisible by 2):​
+## Arithmetic Operators
+
+Arithmetic operators allow you to create conditions based on calculations involving numeric fields.
+
+### Supported Arithmetic Operators:
+
+- `+` (Addition)
+
+- `-` (Subtraction)
+
+- `*` (Multiplication)
+
+- `/` (Division)
+
+- `%` (Modulus)
+
+- `**` (Exponentiation)
+
+### Example 1: Using Modulus (`%`)
+
+To find entities where the `id` is an even number (i.e., divisible by 2):
 
 ```python
-filter = 'id % 2 == 0'​
-
+filter = 'id % 2 == 0'
 ```
 
-### Example 6: Using Exponentiation (`**`)​
+### Example 2: Using Exponentiation (`**`)
 
-To find entities where `price` raised to the power of 2 is greater than 1000:​
+To find entities where `price` raised to the power of 2 is greater than 1000:
 
 ```python
-filter = 'price ** 2 > 1000'​
-
+filter = 'price ** 2 > 1000'
 ```
 
-## Logical Operators​
+## Logical Operators
 
-Logical operators are used to combine multiple conditions into a more complex filter expression. These include `AND`, `OR`, and `NOT`.​
+Logical operators are used to combine multiple conditions into a more complex filter expression. These include `AND`, `OR`, and `NOT`.
 
-### Supported Logical Operators:​
+### Supported Logical Operators:
 
-- `AND`: Combines multiple conditions that must all be true.​
+- `AND`: Combines multiple conditions that must all be true.
 
-- `OR`: Combines conditions where at least one must be true.​
+- `OR`: Combines conditions where at least one must be true.
 
-- `NOT`: Negates a condition.​
+- `NOT`: Negates a condition.
 
-### Example 1: Using `AND` to Combine Conditions​
+### Example 1: Using `AND` to Combine Conditions
 
-To find all products where `price` is greater than 100 and `stock` is greater than 50:​
+To find all products where `price` is greater than 100 and `stock` is greater than 50:
 
 ```python
-filter = 'price > 100 AND stock > 50'​
-
+filter = 'price > 100 AND stock > 50'
 ```
 
-### Example 2: Using `OR` to Combine Conditions​
+### Example 2: Using `OR` to Combine Conditions
 
-To find all products where `color` is either "red" or "blue":​
+To find all products where `color` is either "red" or "blue":
 
 ```python
-filter = 'color == "red" OR color == "blue"'​
-
+filter = 'color == "red" OR color == "blue"'
 ```
 
-### Example 3: Using `NOT` to Exclude a Condition​
+### Example 3: Using `NOT` to Exclude a Condition
 
-To find all products where `color` is not "green":​
+To find all products where `color` is not "green":
 
 ```python
-filter = 'NOT color == "green"'​
-
+filter = 'NOT color == "green"'
 ```
 
 ## IS NULL and IS NOT NULL Operators
@@ -218,6 +203,7 @@ filter = 'NOT color == "green"'​
 The `IS NULL` and `IS NOT NULL` operators are used to filter fields based on whether they contain a null value (absence of data).
 
 - `IS NULL`: Identifies entities where a specific field contains a null value, i.e., the value is absent or undefined.
+
 - `IS NOT NULL`: Identifies entities where a specific field contains any value other than null, meaning the field has a valid, defined value.
 
 <div class="alert note">
@@ -232,7 +218,7 @@ Milvus allows filtering on regular scalar fields, such as strings or numbers, wi
 
 <div class="alert note">
 
-An empty string `""` is not treated as a null value for a VARCHAR field.
+An empty string `""` is not treated as a null value for a `VARCHAR` field.
 
 </div>
 
@@ -259,11 +245,12 @@ filter = 'description IS NOT NULL AND price > 10'
 Milvus allows filtering on JSON fields that contain null values. A JSON field is treated as null in the following ways:
 
 - The entire JSON object is explicitly set to None (null), for example, `{"metadata": None}`.
+
 - The JSON field itself is completely missing from the entity.
 
 <div class="alert note">
 
-If some elements within a JSON object are null (e.g. individual keys), the field is still considered non-null. For example, `{"metadata": {"category": None, "price": 99.99}}` is not treated as null, even though the `category` key is null.
+If some elements within a JSON object are null (e.g. individual keys), the field is still considered non-null. For example, `\{"metadata": \{"category": None, "price": 99.99}}` is not treated as null, even though the `category` key is null.
 
 </div>
 
@@ -326,6 +313,7 @@ filter = 'metadata IS NOT NULL'
 Milvus allows filtering on ARRAY fields that contain null values. An ARRAY field is treated as null in the following ways:
 
 - The entire ARRAY field is explicitly set to None (null), for example, `"tags": None`.
+
 - The ARRAY field is completely missing from the entity.
 
 <div class="alert note">
@@ -360,7 +348,7 @@ data = [
 
 **Example 1: Retrieve entities where `tags` is null**
 
-To retrieve entities where the `tags` field is either missing or explicitly set to None:
+To retrieve entities where the `tags` field is either missing or explicitly set to `None`:
 
 ```python
 filter = 'tags IS NULL'
@@ -386,24 +374,22 @@ filter = 'tags IS NOT NULL'
 # ]
 ```
 
-## Tips on Using Basic Operators with JSON and ARRAY Fields​
+## Tips on Using Basic Operators with JSON and ARRAY Fields
 
-While the basic operators in Milvus are versatile and can be applied to scalar fields, they can also be effectively used with the keys and indexes in the JSON and ARRAY fields.​
+While the basic operators in Milvus are versatile and can be applied to scalar fields, they can also be effectively used with the keys and indexes in the JSON and ARRAY fields.
 
-For example, if you have a `product` field that contains multiple keys like `price`, `model`, and `tags`, always reference the key directly:​
-
-```python
-filter = 'product["price"] > 1000'​
-
-```
-
-To find records where the first temperature in an array of recorded temperatures exceeds a certain value, use:​
+For example, if you have a `product` field that contains multiple keys like `price`, `model`, and `tags`, always reference the key directly:
 
 ```python
-filter = 'history_temperatures[0] > 30'​
-
+filter = 'product["price"] > 1000'
 ```
 
-## Conclusion​
+To find records where the first temperature in an array of recorded temperatures exceeds a certain value, use:
 
-Milvus offers a range of basic operators that give you flexibility in filtering and querying your data. By combining comparison, range, arithmetic, and logical operators, you can create powerful filter expressions to narrow down your search results and retrieve the data you need efficiently.​
+```python
+filter = 'history_temperatures[0] > 30'
+```
+
+## Conclusion
+
+Milvus offers a range of basic operators that give you flexibility in filtering and querying your data. By combining comparison, range, arithmetic, and logical operators, you can create powerful filter expressions to narrow down your search results and retrieve the data you need efficiently.

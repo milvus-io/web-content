@@ -1292,8 +1292,46 @@ class larkDocWriter {
         if (!this.page_blocks) {
             throw new Error('Page blocks not found');
         }
+
         // console.log(this.page_blocks)
         return this.page_blocks.find(x => x['block_id'] === block_id);
+    }
+
+    async __equation(element, elements, asis=false) {
+        let content = element['equation']['content'];
+        let style = element['equation']['text_element_style'];
+
+        let prev = elements[elements.indexOf(element) - 1] || null;
+        let prev_element_type = prev? prev['equation'] ? 'equation' : 'text_run' : null;
+        let next = elements[elements.indexOf(element) + 1] || null;
+        let next_element_type = next? next['equation'] ? 'equation' : 'text_run' : null;
+        let rip_off_line_breaks = false;
+
+        // single element 
+        if ((!prev || prev_element_type === 'text_run') && (!next || next_element_type === 'text_run')) {
+            content = content.trim();
+        }
+
+        // last element
+        if (prev && prev_element_type === 'equation' && (!next || next_element_type === 'text_run')) {
+            if (rip_off_line_breaks) content = content.trim()
+        }
+
+        // first element
+        if ((!prev || prev_element_type === 'text_run') && next && next_element_type === 'equation') {
+            content = content.trim();
+
+            if (!(prev && prev['text_run']['content'].endsWith('\n'))) {
+                rip_off_line_breaks = true;
+            }
+        }
+
+        // middle element
+        if (prev && prev_element_type === 'equation' && next && next_element_type === 'equation') {
+            content = content.trim();
+        }
+
+        return content;        
     }
 
     async __text_run(element, elements, asis=false) {
@@ -1343,34 +1381,37 @@ class larkDocWriter {
     }
 
     __style_markdown(element, elements, style_name, decorator) {
-        let content = element['text_run']['content'];
-        let style = element['text_run']['text_element_style'];
+        let element_type = element['equation'] ? 'equation' : 'text_run';
+        let content = element[element_type]['content'];
+        let style = element[element_type]['text_element_style'];
 
         let prev = elements[elements.indexOf(element) - 1] || null;
+        let prev_element_type = prev? prev['equation'] ? 'equation' : 'text_run' : null;
         let next = elements[elements.indexOf(element) + 1] || null;
+        let next_element_type = next? next['equation'] ? 'equation' : 'text_run' : null;
 
         if (!content.match(/^\s+$/)) {
             // single element
-            if ((!prev || (prev && !prev['text_run']['text_element_style'][style_name])) && style[style_name] && (!next || (next && !next['text_run']['text_element_style'][style_name]))) {
+            if ((!prev || prev_element_type === 'equation' || (prev && !prev[prev_element_type]['text_element_style'][style_name])) && style[style_name] && (!next || next_element_type === 'equation' || (next && !next[next_element_type]['text_element_style'][style_name]))) {
                 let prefix_spaces = content.match(/^\s*/)[0];
                 let suffix_spaces = content.match(/\s*$/)[0];
                 content = `${prefix_spaces}${decorator}${content.trim()}${decorator}${suffix_spaces}`;
             }
 
             // first element
-            if ((!prev || (prev && !prev['text_run']['text_element_style'][style_name])) && style[style_name] && next && next['text_run']['text_element_style'][style_name]) {
+            if ((!prev || prev_element_type === 'equation' || (prev && !prev[prev_element_type]['text_element_style'][style_name])) && style[style_name] && next && next_element_type === 'text_run' && next[next_element_type]['text_element_style'][style_name]) {
                 let prefix_spaces = content.match(/^\s*/)[0];
                 content = `${prefix_spaces}${decorator}${content.trimStart()}`;
             }
 
             // last element
-            if (prev && prev['text_run']['text_element_style'][style_name] && style[style_name] && (!next || (next && !next['text_run']['text_element_style'][style_name]))) {
+            if (prev && prev_element_type === 'text_run' && prev[prev_element_type]['text_element_style'][style_name] && style[style_name] && (!next || next_element_type === 'equation' || (next && !next[next_element_type]['text_element_style'][style_name]))) {
                 let suffix_spaces = content.match(/\s*$/)[0];
                 content = `${content.trimEnd()}${decorator}${suffix_spaces}`;
             }
 
             // middle element
-            if (prev && prev['text_run']['text_element_style'][style_name] && style[style_name] && next && next['text_run']['text_element_style'][style_name]) {
+            if (prev && prev_element_type === 'text_run' && prev[prev_element_type]['text_element_style'][style_name] && style[style_name] && next && next_element_type === 'text_run' && next[next_element_type]['text_element_style'][style_name]) {
                 content = `${content}`;
             }
         }
@@ -1453,6 +1494,9 @@ class larkDocWriter {
             }
             if ('mention_doc' in element) {
                 paragraph += await this.__mention_doc(element);
+            }
+            if ('equation' in element) {
+                paragraph += await this.__equation(element, elements);
             }
         }
 

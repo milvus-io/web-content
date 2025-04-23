@@ -36,7 +36,7 @@ Tokenizers support only UTF-8 format. Support for other formats will be added in
 
 The workflow below shows how an analyzer processes text.
 
-![analyzer-process-workflow](../../../../../assets/analyzer-process-workflow.png)
+![Analyzer Process Workflow](../../../../../assets/analyzer-process-workflow.png)
 
 ## Analyzer types
 
@@ -87,7 +87,7 @@ const analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams := map[string]any{"type": "standard", "stop_words": []string{"a", "an", "for"}}
 ```
 
 ```bash
@@ -97,15 +97,7 @@ export analyzerParams='{
     }'
 ```
 
-The output will be:
-
-```plaintext
-['efficient', 'system', 'relies', 'on', 'robust', 'analyzer', 'to', 'correctly', 'process', 'text', 'various', 'applications']
-```
-
-This demonstrates that the analyzer properly tokenizes the input text by filtering out the stop words `"a"`, `"an"`, and `"for"`, while returning the remaining meaningful tokens.
-
-The configuration of the `standard` built-in analyzer above is equivalent to setting up a [custom analyzer](analyzer-overview.md#share-N6FndaYZFoIPxExGXTDcEyHgnDc) with the following parameters, where `tokenizer` and `filter` options are explicitly defined to achieve similar functionality:
+The configuration of the `standard` built-in analyzer above is equivalent to setting up a [custom analyzer](analyzer-overview.md#Custom-analyzer) with the following parameters, where `tokenizer` and `filter` options are explicitly defined to achieve similar functionality:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -153,7 +145,11 @@ const analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "standard",
+    "filter": []any{"lowercase", map[string]any{
+        "type":       "stop",
+        "stop_words": []string{"a", "an", "for"},
+    }}}
 ```
 
 ```bash
@@ -221,7 +217,7 @@ const analyzer_params = {
 ```
 
 ```go
-// go
+analyzerParams = map[string]any{"tokenizer": "whitespace"}
 ```
 
 ```bash
@@ -285,7 +281,8 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
     ```
 
     ```go
-    // go
+    analyzerParams = map[string]any{"tokenizer": "standard",
+            "filter": []any{"lowercase"}}
     ```
 
     ```bash
@@ -348,7 +345,11 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
     ```
 
     ```go
-    // go
+    analyzerParams = map[string]any{"tokenizer": "standard",
+        "filter": []any{map[string]any{
+            "type":       "stop",
+            "stop_words": []string{"of", "to"},
+        }}}
     ```
 
     ```bash
@@ -427,7 +428,29 @@ const client = new MilvusClient("http://localhost:19530");
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/column"
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/index"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)  
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle err
+}
+defer client.Close(ctx)
+
+schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
 ```
 
 ```bash
@@ -457,19 +480,8 @@ const client = new MilvusClient("http://localhost:19530");
     ```
 
     ```java
-    // Add fields to schema
-    // Use a built-in analyzer
     Map<String, Object> analyzerParamsBuiltin = new HashMap<>();
     analyzerParamsBuiltin.put("type", "english");
-    // Add VARCHAR field `title_en`
-    schema.addField(AddFieldReq.builder()
-            .fieldName("title_en")
-            .dataType(DataType.VarChar)
-            .maxLength(1000)
-            .enableAnalyzer(true)
-            .analyzerParams(analyzerParamsBuiltin)
-            .enableMatch(true)
-            .build());
     ```
 
     ```javascript
@@ -480,7 +492,7 @@ const client = new MilvusClient("http://localhost:19530");
     ```
 
     ```go
-    // go
+    analyzerParams := map[string]any{"type": "english"}
     ```
 
     ```bash
@@ -555,7 +567,15 @@ const client = new MilvusClient("http://localhost:19530");
     ```
 
     ```go
-    // go
+    analyzerParams = map[string]any{"tokenizer": "standard",
+        "filter": []any{"lowercase", 
+        map[string]any{
+            "type": "length",
+            "max":  40,
+        map[string]any{
+            "type": "stop",
+            "stop_words": []string{"of", "to"},
+        }}}
     ```
 
     ```bash
@@ -663,7 +683,23 @@ const schema = {
 ```
 
 ```go
-// go
+schema.WithField(entity.NewField().
+    WithName("id").
+    WithDataType(entity.FieldTypeInt64).
+    WithIsPrimaryKey(true).
+    WithIsAutoID(true),
+).WithField(entity.NewField().
+    WithName("embedding").
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(3),
+).WithField(entity.NewField().
+    WithName("title").
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(1000).
+    WithEnableAnalyzer(true).
+    WithAnalyzerParams(analyzerParams).
+    WithEnableMatch(true),
+)
 ```
 
 ```bash
@@ -687,7 +723,7 @@ index_params.add_index(field_name="embedding", metric_type="COSINE", index_type=
 
 # Create the collection with the defined schema and index parameters
 client.create_collection(
-    collection_name="YOUR_COLLECTION_NAME",
+    collection_name="my_collection",
     schema=schema,
     index_params=index_params
 )
@@ -704,7 +740,7 @@ indexes.add(IndexParam.builder()
 
 // Create collection with defined schema
 CreateCollectionReq requestCreate = CreateCollectionReq.builder()
-        .collectionName("YOUR_COLLECTION_NAME")
+        .collectionName("my_collection")
         .collectionSchema(schema)
         .indexParams(indexes)
         .build();
@@ -723,7 +759,7 @@ const indexParams = [
 
 // Create collection with defined schema
 await client.createCollection({
-  collection_name: "YOUR_COLLECTION_NAME",
+  collection_name: "my_collection",
   schema: schema,
   index_params: indexParams,
 });
@@ -732,7 +768,16 @@ console.log("Collection created successfully!");
 ```
 
 ```go
-// go
+idx := index.NewAutoIndex(index.MetricType(entity.COSINE))
+indexOption := milvusclient.NewCreateIndexOption("my_collection", "embedding", idx)
+
+err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption("my_collection", schema).
+        WithIndexOptions(indexOption))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```bash

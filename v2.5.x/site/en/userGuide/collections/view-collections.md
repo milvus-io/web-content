@@ -72,21 +72,21 @@ import (
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-milvusAddr := "127.0.0.1:19530"
+milvusAddr := "localhost:19530"
 token := "root:Milvus"
-
-cli, err := client.New(ctx, &milvusclient.ClientConfig{
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
     APIKey:  token,
 })
 if err != nil {
-    log.Fatal("failed to connect to milvus server: ", err.Error())
+    fmt.Println(err.Error())
+    // handle err
 }
+defer client.Close(ctx)
 
-defer cli.Close(ctx)
-
-collectionNames, err := cli.ListCollections(ctx, milvusclient.NewListCollectionOption())
+collectionNames, err := client.ListCollections(ctx, milvusclient.NewListCollectionOption())
 if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
 
@@ -147,30 +147,10 @@ console.log(res);
 ```
 
 ```go
-import (
-    "context"
-    "fmt"
-
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
-)
-
-ctx, cancel := context.WithCancel(context.Background())
-defer cancel()
-
-milvusAddr := "127.0.0.1:19530"
-
-cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: milvusAddr,
-})
+collection, err := client.DescribeCollection(ctx, milvusclient.NewDescribeCollectionOption("quick_setup"))
 if err != nil {
-    log.Fatal("failed to connect to milvus server: ", err.Error())
-}
-
-defer cli.Close(ctx)
-
-collection, err := cli.DescribeCollection(ctx, milvusclient.NewDescribeCollectionOption("quick_setup"))
-if err != nil {
-    // handle error
+    fmt.Println(err.Error())
+    // handle err
 }
 
 fmt.Println(collection)

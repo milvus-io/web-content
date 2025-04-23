@@ -20,7 +20,7 @@ A sparse vector is a special representation of high-dimensional vectors where mo
 
 As shown in the diagram below, dense vectors are typically represented as continuous arrays where each position has a value (e.g., `[0.3, 0.8, 0.2, 0.3, 0.1]`). In contrast, sparse vectors store only non-zero elements and their indices, often represented as key-value pairs (e.g., `[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]`). This representation significantly reduces storage space and increases computational efficiency, especially when dealing with extremely high-dimensional data (e.g., 10,000 dimensions).
 
-![sparse-vector](../../../../assets/sparse-vector.png)
+![Sparse Vector](../../../../assets/sparse-vector.png)
 
 Sparse vectors can be generated using various methods, such as [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) (Term Frequency-Inverse Document Frequency) and [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) in text processing. Additionally, Milvus offers convenient methods to help generate and process sparse vectors. For details, refer to Embeddings.
 
@@ -28,7 +28,7 @@ For text data, Milvus also provides full-text search capabilities, allowing you 
 
 After vectorization, the data can be stored in Milvus for management and vector retrieval. The diagram below illustrates the basic process.
 
-![use-sparse-vector](../../../../assets/use-sparse-vector.png)
+![Use Sparse Vector](../../../../assets/use-sparse-vector.png)
 
 <div class="alert note">
 
@@ -104,8 +104,6 @@ from pymilvus import MilvusClient, DataType
 
 client = MilvusClient(uri="http://localhost:19530")
 
-client.drop_collection(collection_name="my_sparse_collection")
-
 schema = client.create_schema(
     auto_id=True,
     enable_dynamic_fields=True,
@@ -165,7 +163,40 @@ const schema = [
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/column"
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/index"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "localhost:19530"
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
+
+schema := entity.NewSchema()
+schema.WithField(entity.NewField().
+    WithName("pk").
+    WithDataType(entity.FieldTypeVarChar).
+    WithIsAutoID(true).
+    WithIsPrimaryKey(true).
+    WithMaxLength(100),
+).WithField(entity.NewField().
+    WithName("sparse_vector").
+    WithDataType(entity.FieldTypeSparseVector),
+)
 ```
 
 ```bash
@@ -256,7 +287,8 @@ const indexParams = await client.createIndex({
 ```
 
 ```go
-// go
+idx := index.NewSparseInvertedIndex(entity.IP, 0.2)
+indexOption := milvusclient.NewCreateIndexOption("my_collection", "sparse_vector", idx)
 ```
 
 ```bash
@@ -275,7 +307,7 @@ export indexParams='[
 
 In the example above:
 
-- `index_type`: The type of index to create for the sparse vector field. Valid Values:
+- `index_type`: The type of index to create for the sparse vector field.
 
     - `SPARSE_INVERTED_INDEX`: A general-purpose inverted index for sparse vectors.
 
@@ -303,7 +335,7 @@ In the example above:
 
 ### Create collection
 
-Once the sparse vector and index settings are complete, you can create a collection that contains sparse vectors. The example below uses the `create_collection` method to create a collection named `my_sparse_collection`.
+Once the sparse vector and index settings are complete, you can create a collection that contains sparse vectors. The example below uses the `create_collection` method to create a collection named `my_collection`.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -315,22 +347,15 @@ Once the sparse vector and index settings are complete, you can create a collect
 
 ```python
 client.create_collection(
-    collection_name="my_sparse_collection",
+    collection_name="my_collection",
     schema=schema,
     index_params=index_params
 )
 ```
 
 ```java
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-
-MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .build());
-        
 CreateCollectionReq requestCreate = CreateCollectionReq.builder()
-        .collectionName("my_sparse_collection")
+        .collectionName("my_collection")
         .collectionSchema(schema)
         .indexParams(indexes)
         .build();
@@ -345,14 +370,20 @@ const client = new MilvusClient({
 });
 
 await client.createCollection({
-    collection_name: 'my_sparse_collection',
+    collection_name: 'my_collection',
     schema: schema,
     index_params: indexParams
 });
 ```
 
 ```go
-// go
+err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption("my_collection", schema).
+        WithIndexOptions(indexOption))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```bash
@@ -361,7 +392,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d "{
-    \"collectionName\": \"my_sparse_collection\",
+    \"collectionName\": \"my_collection\",
     \"schema\": $schema,
     \"indexParams\": $indexParams
 }"
@@ -386,7 +417,7 @@ sparse_vectors = [
 ]
 
 client.insert(
-    collection_name="my_sparse_collection",
+    collection_name="my_collection",
     data=sparse_vectors
 )
 ```
@@ -419,7 +450,7 @@ Gson gson = new Gson();
 }
 
 InsertResp insertR = client.insert(InsertReq.builder()
-        .collectionName("my_sparse_collection")
+        .collectionName("my_collection")
         .data(rows)
         .build());
 ```
@@ -430,14 +461,26 @@ const data = [
   { sparse_vector: { "10": 0.1, "200": 0.7, "1000": 0.9 } },
 ];
 client.insert({
-  collection_name: "my_sparse_collection",
+  collection_name: "my_collection",
   data: data,
 });
 
 ```
 
 ```go
-// go
+v := make([]entity.SparseEmbedding, 0, 2)
+sparseVector1, _ := entity.NewSliceSparseEmbedding([]uint32{1, 100, 500}, []float32{0.5, 0.3, 0.8})
+v = append(v, sparseVector1)
+sparseVector2, _ := entity.NewSliceSparseEmbedding([]uint32{10, 200, 1000}, []float32{0.1, 0.7, 0.9})
+v = append(v, sparseVector2)
+column := column.NewColumnSparseVectors("sparse_vector", v)
+
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
+    WithColumns(column))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle err
+}
 ```
 
 ```bash
@@ -450,7 +493,7 @@ curl --request POST \
         {"sparse_vector": {"1": 0.5, "100": 0.3, "500": 0.8}},
         {"sparse_vector": {"10": 0.1, "200": 0.7, "1000": 0.9}}        
     ],
-    "collectionName": "my_sparse_collection"
+    "collectionName": "my_collection"
 }'
 
 ## {"code":0,"cost":0,"data":{"insertCount":2,"insertIds":["453577185629572534","453577185629572535"]}}
@@ -484,7 +527,7 @@ Then, execute the similarity search using the `search` method:
 
 ```python
 res = client.search(
-    collection_name="my_sparse_collection",
+    collection_name="my_collection",
     data=query_vector,
     limit=3,
     output_fields=["pk"],
@@ -506,14 +549,14 @@ Map<String,Object> searchParams = new HashMap<>();
 searchParams.put("drop_ratio_search", 0.2);
 
 SortedMap<Long, Float> sparse = new TreeMap<>();
-sparse.put(10L, 0.1f);
-sparse.put(200L, 0.7f);
-sparse.put(1000L, 0.9f);
+sparse.put(1L, 0.2f);
+sparse.put(50L, 0.4f);
+sparse.put(1000L, 0.7f);
 
 SparseFloatVec queryVector = new SparseFloatVec(sparse);
 
 SearchResp searchR = client.search(SearchReq.builder()
-        .collectionName("my_sparse_collection")
+        .collectionName("my_collection")
         .data(Collections.singletonList(queryVector))
         .annsField("sparse_vector")
         .searchParams(searchParams)
@@ -525,12 +568,12 @@ System.out.println(searchR.getSearchResults());
 
 // Output
 //
-// [[SearchResp.SearchResult(entity={pk=453444327741536759}, score=1.31, id=453444327741536759), SearchResp.SearchResult(entity={pk=453444327741536756}, score=1.31, id=453444327741536756), SearchResp.SearchResult(entity={pk=453444327741536753}, score=1.31, id=453444327741536753)]]
+// [[SearchResp.SearchResult(entity={pk=457270974427187729}, score=0.63, id=457270974427187729), SearchResp.SearchResult(entity={pk=457270974427187728}, score=0.1, id=457270974427187728)]]
 ```
 
 ```javascript
 await client.search({
-    collection_name: 'my_sparse_collection',
+    collection_name: 'my_collection',
     data: {1: 0.2, 50: 0.4, 1000: 0.7},
     limit: 3,
     output_fields: ['pk'],
@@ -541,7 +584,33 @@ await client.search({
 ```
 
 ```go
-// go
+queryVector, _ := entity.NewSliceSparseEmbedding([]uint32{1, 50, 1000}, []float32{0.2, 0.4, 0.7})
+
+annSearchParams := index.NewCustomAnnParam()
+annSearchParams.WithExtraParam("drop_ratio_search", 0.2)
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "my_collection", // collectionName
+    3,                      // limit
+    []entity.Vector{entity.SparseEmbedding(queryVector)},
+).WithANNSField("sparse_vector").
+    WithOutputFields("pk").
+    WithAnnParam(annSearchParams))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle err
+}
+
+for _, resultSet := range resultSets {
+    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
+    fmt.Println("Scores: ", resultSet.Scores)
+    fmt.Println("Pks: ", resultSet.GetColumn("pk").FieldData().GetScalars())
+}
+
+// Results:
+//   IDs:  string_data:{data:"457270974427187705"  data:"457270974427187704"}
+//   Scores:  [0.63 0.1]
+//   Pks:  string_data:{data:"457270974427187705"  data:"457270974427187704"}
+
 ```
 
 ```bash
@@ -550,7 +619,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-    "collectionName": "my_sparse_collection",
+    "collectionName": "my_collection",
     "data": [
         {"1": 0.2, "50": 0.4, "1000": 0.7}
     ],

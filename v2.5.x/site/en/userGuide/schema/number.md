@@ -166,7 +166,49 @@ const schema = [
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/column"
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/index"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "localhost:19530"
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
+
+schema := entity.NewSchema()
+schema.WithField(entity.NewField().
+    WithName("pk").
+    WithDataType(entity.FieldTypeInt64).
+    WithIsPrimaryKey(true),
+).WithField(entity.NewField().
+    WithName("embedding").
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(3),
+).WithField(entity.NewField().
+    WithName("price").
+    WithDataType(entity.FieldTypeFloat).
+    WithNullable(true),
+).WithField(entity.NewField().
+    WithName("age").
+    WithDataType(entity.FieldTypeInt64).
+    WithNullable(true).
+    WithDefaultValueLong(18),
+)
 ```
 
 ```bash
@@ -273,7 +315,10 @@ const indexParams = [
 ```
 
 ```go
-// go
+indexOption1 := milvusclient.NewCreateIndexOption("my_collection", "embedding",
+    index.NewAutoIndex(index.MetricType(entity.IP)))
+indexOption2 := milvusclient.NewCreateIndexOption("my_collection", "age",
+    index.NewInvertedIndex())
 ```
 
 ```bash
@@ -306,7 +351,7 @@ Once the schema and indexes are defined, create a collection that includes numbe
 ```python
 # Create Collection
 client.create_collection(
-    collection_name="my_scalar_collection",
+    collection_name="my_collection",
     schema=schema,
     index_params=index_params
 )
@@ -314,7 +359,7 @@ client.create_collection(
 
 ```java
 CreateCollectionReq requestCreate = CreateCollectionReq.builder()
-        .collectionName("my_scalar_collection")
+        .collectionName("my_collection")
         .collectionSchema(schema)
         .indexParams(indexes)
         .build();
@@ -323,14 +368,20 @@ client.createCollection(requestCreate);
 
 ```javascript
 client.create_collection({
-    collection_name: "my_scalar_collection",
+    collection_name: "my_collection",
     schema: schema,
     index_params: indexParams
 })
 ```
 
 ```go
-// go
+err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption("my_collection", schema).
+        WithIndexOptions(indexOption1, indexOption2))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
 ```
 
 ```bash
@@ -339,7 +390,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d "{
-    \"collectionName\": \"my_scalar_collection\",
+    \"collectionName\": \"my_collection\",
     \"schema\": $schema,
     \"indexParams\": $indexParams
 }"
@@ -369,7 +420,7 @@ data = [
 ]
 
 client.insert(
-    collection_name="my_scalar_collection",
+    collection_name="my_collection",
     data=data
 )
 ```
@@ -391,7 +442,7 @@ rows.add(gson.fromJson("{\"age\": null, \"price\": 59.99, \"pk\": 5, \"embedding
 rows.add(gson.fromJson("{\"age\": 60, \"price\": null, \"pk\": 6, \"embedding\": [0.1, 0.6, 0.9]}", JsonObject.class));
 
 InsertResp insertR = client.insert(InsertReq.builder()
-        .collectionName("my_scalar_collection")
+        .collectionName("my_collection")
         .data(rows)
         .build());
 ```
@@ -404,14 +455,36 @@ const data = [
 ];
 
 client.insert({
-  collection_name: "my_scalar_collection",
+  collection_name: "my_collection",
   data: data,
 });
 
 ```
 
 ```go
-// go
+column1, _ := column.NewNullableColumnFloat("price",
+    []float32{99.99, 59.99},
+    []bool{true, false, false, false, true, false})
+column2, _ := column.NewNullableColumnInt64("age",
+    []int64{25, 30, 45, 60},
+    []bool{true, true, false, true, false, true})
+
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption("my_collection").
+    WithInt64Column("pk", []int64{1, 2, 3, 4, 5, 6}).
+    WithFloatVectorColumn("embedding", 3, [][]float32{
+        {0.1, 0.2, 0.3},
+        {0.4, 0.5, 0.6},
+        {0.2, 0.3, 0.1},
+        {0.9, 0.1, 0.4},
+        {0.8, 0.5, 0.3},
+        {0.1, 0.6, 0.9},
+    }).
+    WithColumns(column1, column2),
+)
+if err != nil {
+    fmt.Println(err.Error())
+    // handle err
+}
 ```
 
 ```bash
@@ -425,7 +498,7 @@ curl --request POST \
         {"age": 30, "price": 149.50, "pk": 2, "embedding": [0.4, 0.5, 0.6]},
         {"age": 35, "price": 199.99, "pk": 3, "embedding": [0.7, 0.8, 0.9]}       
     ],
-    "collectionName": "my_scalar_collection"
+    "collectionName": "my_collection"
 }'
 ```
 
@@ -447,7 +520,7 @@ To retrieve entities where the `age` is greater than 30:
 filter = 'age > 30'
 
 res = client.query(
-    collection_name="my_scalar_collection",
+    collection_name="my_collection",
     filter=filter,
     output_fields=["age", "price", "pk"]
 )
@@ -468,30 +541,40 @@ import io.milvus.v2.service.vector.response.QueryResp;
 String filter = "age > 30";
 
 QueryResp resp = client.query(QueryReq.builder()
-        .collectionName("my_scalar_collection")
+        .collectionName("my_collection")
         .filter(filter)
-        .outputFields(Arrays.asList("age", "price"))
+        .outputFields(Arrays.asList("age", "price", "pk"))
         .build());
 System.out.println(resp.getQueryResults());
 
 // Output
 //
 // [
-//    QueryResp.QueryResult(entity={price=null, pk=4, age=45}),
-//   QueryResp.QueryResult(entity={price=null, pk=6, age=60})
+//    QueryResp.QueryResult(entity={price=null, pk=4, age=45}), 
+//    QueryResp.QueryResult(entity={price=null, pk=6, age=60})
 // ]
 ```
 
 ```javascript
 client.query({
-    collection_name: 'my_scalar_collection',
-    filter: '30 <= age <= 40',
-    output_fields: ['age', 'price']
+    collection_name: 'my_collection',
+    filter: 'age > 30',
+    output_fields: ['age', 'price', 'pk']
 });
 ```
 
 ```go
-// go
+filter := "age > 30"
+queryResult, err := client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+    WithFilter(filter).
+    WithOutputFields("pk", "age", "price"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+fmt.Println("pk", queryResult.GetColumn("pk").FieldData().GetScalars())
+fmt.Println("age", queryResult.GetColumn("age").FieldData().GetScalars())
+fmt.Println("price", queryResult.GetColumn("price").FieldData().GetScalars())
 ```
 
 ```bash
@@ -500,9 +583,9 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-    "collectionName": "my_scalar_collection",
-    "filter": "30 <= age <= 40",
-    "outputFields": ["age","price"]
+    "collectionName": "my_collection",
+    "filter": "age > 30",
+    "outputFields": ["age","price", "pk"]
 }'
 
 ## {"code":0,"cost":0,"data":[{"age":30,"pk":2,"price":149.5},{"age":35,"pk":3,"price":199.99}]}
@@ -522,7 +605,7 @@ To retrieve entities where the `price` is null:
 filter = 'price is null'
 
 res = client.query(
-    collection_name="my_scalar_collection",
+    collection_name="my_collection",
     filter=filter,
     output_fields=["age", "price", "pk"]
 )
@@ -542,9 +625,9 @@ print(res)
 String filter = "price is null";
 
 QueryResp resp = client.query(QueryReq.builder()
-        .collectionName("my_scalar_collection")
+        .collectionName("my_collection")
         .filter(filter)
-        .outputFields(Arrays.asList("age", "price"))
+        .outputFields(Arrays.asList("age", "price", "pk"))
         .build());
 System.out.println(resp.getQueryResults());
 
@@ -562,7 +645,7 @@ System.out.println(resp.getQueryResults());
 const filter = 'price is null';
 
 const res = await client.query({
-    collection_name:"my_scalar_collection",
+    collection_name:"my_collection",
     filter:filter,
     output_fields=["age", "price", "pk"]
 });
@@ -577,7 +660,17 @@ console.log(res);
 ```
 
 ```go
-// go
+filter = "price is null"
+queryResult, err = client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+    WithFilter(filter).
+    WithOutputFields("pk", "age", "price"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+fmt.Println("pk", queryResult.GetColumn("pk"))
+fmt.Println("age", queryResult.GetColumn("age"))
+fmt.Println("price", queryResult.GetColumn("price"))
 ```
 
 ```bash
@@ -587,7 +680,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-  "collectionName": "my_scalar_collection",
+  "collectionName": "my_collection",
   "filter": "price is null",
   "outputFields": ["age", "price", "pk"]
 }'
@@ -607,7 +700,7 @@ To retrieve entities where `age` has the value `18`, use the following expressio
 filter = 'age == 18'
 
 res = client.query(
-    collection_name="my_scalar_collection",
+    collection_name="my_collection",
     filter=filter,
     output_fields=["age", "price", "pk"]
 )
@@ -625,9 +718,9 @@ print(res)
 String filter = "age == 18";
 
 QueryResp resp = client.query(QueryReq.builder()
-        .collectionName("my_scalar_collection")
+        .collectionName("my_collection")
         .filter(filter)
-        .outputFields(Arrays.asList("age", "price"))
+        .outputFields(Arrays.asList("age", "price", "pk"))
         .build());
 System.out.println(resp.getQueryResults());
 
@@ -643,7 +736,7 @@ System.out.println(resp.getQueryResults());
 const filter = 'age == 18';
 
 const res = await client.query({
-    collection_name:"my_scalar_collection",
+    collection_name:"my_collection",
     filter:filter,
     output_fields=["age", "price", "pk"]
 });
@@ -658,7 +751,17 @@ console.log(res);
 ```
 
 ```go
-// go
+filter = "age == 18"
+queryResult, err = client.Query(ctx, milvusclient.NewQueryOption("my_collection").
+    WithFilter(filter).
+    WithOutputFields("pk", "age", "price"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+fmt.Println("pk", queryResult.GetColumn("pk"))
+fmt.Println("age", queryResult.GetColumn("age"))
+fmt.Println("price", queryResult.GetColumn("price"))
 ```
 
 ```bash
@@ -668,7 +771,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-  "collectionName": "my_scalar_collection",
+  "collectionName": "my_collection",
   "filter": "age == 18",
   "outputFields": ["age", "price", "pk"]
 }'
@@ -690,7 +793,7 @@ In addition to basic number field filtering, you can combine vector similarity s
 filter = "25 <= age <= 35"
 
 res = client.search(
-    collection_name="my_scalar_collection",
+    collection_name="my_collection",
     data=[[0.3, -0.6, 0.1]],
     limit=5,
     search_params={"params": {"nprobe": 10}},
@@ -714,7 +817,7 @@ import io.milvus.v2.service.vector.response.SearchResp;
 String filter = "25 <= age <= 35";
 
 SearchResp resp = client.search(SearchReq.builder()
-        .collectionName("my_scalar_collection")
+        .collectionName("my_collection")
         .annsField("embedding")
         .data(Collections.singletonList(new FloatVec(new float[]{0.3f, -0.6f, 0.1f})))
         .topK(5)
@@ -736,7 +839,7 @@ System.out.println(resp.getSearchResults());
 
 ```javascript
 await client.search({
-    collection_name: 'my_scalar_collection',
+    collection_name: 'my_collection',
     data: [0.3, -0.6, 0.1],
     limit: 5,
     output_fields: ['age', 'price'],
@@ -745,7 +848,30 @@ await client.search({
 ```
 
 ```go
-// go
+queryVector := []float32{0.3, -0.6, 0.1}
+filter = "25 <= age <= 35"
+
+annParam := index.NewCustomAnnParam()
+annParam.WithExtraParam("nprobe", 10)
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "my_collection", // collectionName
+    5,               // limit
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField("embedding").
+    WithFilter(filter).
+    WithAnnParam(annParam).
+    WithOutputFields("age", "price"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+
+for _, resultSet := range resultSets {
+    fmt.Println("IDs: ", resultSet.IDs.FieldData().GetScalars())
+    fmt.Println("Scores: ", resultSet.Scores)
+    fmt.Println("age: ", resultSet.GetColumn("age"))
+    fmt.Println("price: ", resultSet.GetColumn("price"))
+}
 ```
 
 ```bash
@@ -754,7 +880,7 @@ curl --request POST \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 -d '{
-    "collectionName": "my_scalar_collection",
+    "collectionName": "my_collection",
     "data": [
         [0.3, -0.6, 0.1]
     ],

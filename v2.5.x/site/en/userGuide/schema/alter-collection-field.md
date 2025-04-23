@@ -77,9 +77,34 @@ await client.alterCollectionFieldProperties({
 ```
 
 ```go
-err = cli.AlterCollectionFieldProperty(ctx, milvusclient.NewAlterCollectionFieldPropertiesOption("my_collection", "varchar").WithProperty("max_length", "1024"))
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/pkg/v2/common"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "localhost:19530"
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
 if err != nil {
-    // handle err
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
+
+err = client.AlterCollectionFieldProperty(ctx, milvusclient.NewAlterCollectionFieldPropertiesOption(
+    "my_collection", "varchar").WithProperty(common.MaxLengthKey, 1024))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
 }
 ```
 
@@ -141,9 +166,11 @@ await client.alterCollectionFieldProperties({
 ```
 
 ```go
-err = cli.AlterCollectionFieldProperty(ctx, milvusclient.NewAlterCollectionFieldPropertiesOption("my_collection", "array").WithProperty("max_capacity", "64"))
+err = client.AlterCollectionFieldProperty(ctx, milvusclient.NewAlterCollectionFieldPropertiesOption(
+    "my_collection", "array").WithProperty(common.MaxCapacityKey, 64))
 if err != nil {
-    // handle err
+    fmt.Println(err.Error())
+    // handle error
 }
 ```
 
@@ -203,9 +230,11 @@ await client.alterCollectionProperties({
 ```
 
 ```go
-err = cli.AlterCollectionFieldProperty(ctx, milvusclient.NewAlterCollectionFieldPropertiesOption("my_collection", "doc_chunk").WithProperty(common.MmapEnabledKey, "true"))
+err = client.AlterCollectionFieldProperty(ctx, milvusclient.NewAlterCollectionFieldPropertiesOption(
+    "my_collection", "doc_chunk").WithProperty(common.MmapEnabledKey, true))
 if err != nil {
-    // handle err
+    fmt.Println(err.Error())
+    // handle error
 }
 ```
 

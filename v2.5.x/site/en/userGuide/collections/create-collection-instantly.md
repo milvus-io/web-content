@@ -147,24 +147,32 @@ console.log(res.state)
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
 
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-collectionName := `quick_setup`
-
-cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+milvusAddr := "localhost:19530"
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
 })
 if err != nil {
-    // handle err
-}
-
-err = cli.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(collectionName, 5))
-if err != nil {
+    fmt.Println(err.Error())
     // handle error
 }
+defer client.Close(ctx)
+
+err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions("quick_setup", 5))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+fmt.Println("collection created")
 ```
 
 ```bash
@@ -315,26 +323,35 @@ console.log(res.state)
 ```
 
 ```go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v2/entity"
+    "github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
-cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
 })
 if err != nil {
+    fmt.Println(err.Error())
     // handle err
 }
+defer client.Close(ctx)
 
-err = cli.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions("custom_quick_setup", 512).
+err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions("custom_quick_setup", 5).
     WithPKFieldName("my_id").
     WithVarcharPK(true, 512).
     WithVectorFieldName("my_vector").
     WithMetricType(entity.L2).
-    WithShardNum(5).
     WithAutoID(true),
 )
 if err != nil {
-    log.Println(err.Error())
+    fmt.Println(err.Error())
     // handle error
 }
 ```
