@@ -1681,128 +1681,6 @@
         "children": []
       },
       {
-        "label": "嵌入模型",
-        "id": "integrate-embeddings-models",
-        "order": 1,
-        "children": [
-          {
-            "label": "OpenAI",
-            "id": "integrate_with_openai.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Cohere",
-            "id": "integrate_with_cohere.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "擁抱臉",
-            "id": "integrate_with_hugging-face.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "PyTorch",
-            "id": "integrate_with_pytorch.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "句子變形",
-            "id": "integrate_with_sentencetransformers.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "VoyageAI",
-            "id": "integrate_with_voyageai.md",
-            "order": 8,
-            "children": []
-          },
-          {
-            "label": "Jina AI",
-            "id": "integrate_with_jina.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "十二實驗室",
-            "id": "video_search_with_twelvelabs_and_milvus.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "BentoML",
-            "id": "integrate_with_bentoml.md",
-            "order": 5,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "法學碩士",
-        "id": "integrate-llms",
-        "order": 2,
-        "children": [
-          {
-            "label": "vLLM",
-            "id": "milvus_rag_with_vllm.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Mistral AI",
-            "id": "llama_agents_metadata.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "煙花",
-            "id": "build_RAG_with_milvus_and_fireworks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Lepton",
-            "id": "build_RAG_with_milvus_and_lepton.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "SiliconFlow",
-            "id": "build_RAG_with_milvus_and_siliconflow.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "SambaNova",
-            "id": "use_milvus_with_sambanova.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "雙子座",
-            "id": "build_RAG_with_milvus_and_gemini.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "Ollama",
-            "id": "build_RAG_with_milvus_and_ollama.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "深度搜尋",
-            "id": "build_RAG_with_milvus_and_deepseek.md",
-            "order": 8,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "編曲",
         "id": "orchestrate-with-milvus",
         "order": 3,
@@ -1859,6 +1737,18 @@
                 "label": "全文檢索",
                 "id": "llamaindex_milvus_full_text_search.md",
                 "order": 2,
+                "children": []
+              },
+              {
+                "label": "混合搜尋",
+                "id": "llamaindex_milvus_hybrid_search.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "元資料篩選",
+                "id": "llamaindex_milvus_metadata_filter.md",
+                "order": 4,
                 "children": []
               }
             ]
@@ -1982,43 +1872,6 @@
         ]
       },
       {
-        "label": "知識工程",
-        "id": "knowledge-engineering",
-        "order": 5,
-        "children": [
-          {
-            "label": "為什麼",
-            "id": "integrate_with_whyhow.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "萬娜",
-            "id": "integrate_with_vanna.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "知識表",
-            "id": "knowledge_table_with_milvus.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Cognee",
-            "id": "build_RAG_with_milvus_and_cognee.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "MindsDB",
-            "id": "integration_with_mindsdb.md",
-            "order": 4,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "評估與可觀察性",
         "id": "evaluation-observability",
         "order": 6,
@@ -2050,6 +1903,171 @@
           {
             "label": "深度評估",
             "id": "evaluation_with_deepeval.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "AIMon",
+            "id": "AIMon_milvus_integration.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "嵌入模型",
+        "id": "integrate-embeddings-models",
+        "order": 1,
+        "children": [
+          {
+            "label": "OpenAI",
+            "id": "integrate_with_openai.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Cohere",
+            "id": "integrate_with_cohere.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "擁抱臉",
+            "id": "integrate_with_hugging-face.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "PyTorch",
+            "id": "integrate_with_pytorch.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "句子變形",
+            "id": "integrate_with_sentencetransformers.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "VoyageAI",
+            "id": "integrate_with_voyageai.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "Jina AI",
+            "id": "integrate_with_jina.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "十二實驗室",
+            "id": "video_search_with_twelvelabs_and_milvus.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "BentoML",
+            "id": "integrate_with_bentoml.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "法學碩士",
+        "id": "integrate-llms",
+        "order": 2,
+        "children": [
+          {
+            "label": "vLLM",
+            "id": "milvus_rag_with_vllm.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Mistral AI",
+            "id": "llama_agents_metadata.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "煙花",
+            "id": "build_RAG_with_milvus_and_fireworks.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Lepton",
+            "id": "build_RAG_with_milvus_and_lepton.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "SiliconFlow",
+            "id": "build_RAG_with_milvus_and_siliconflow.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "SambaNova",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "雙子座",
+            "id": "build_RAG_with_milvus_and_gemini.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Ollama",
+            "id": "build_RAG_with_milvus_and_ollama.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "深度搜尋",
+            "id": "build_RAG_with_milvus_and_deepseek.md",
+            "order": 8,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "知識工程",
+        "id": "knowledge-engineering",
+        "order": 5,
+        "children": [
+          {
+            "label": "為什麼",
+            "id": "integrate_with_whyhow.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "萬娜",
+            "id": "integrate_with_vanna.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "知識表",
+            "id": "knowledge_table_with_milvus.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Cognee",
+            "id": "build_RAG_with_milvus_and_cognee.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "MindsDB",
+            "id": "integration_with_mindsdb.md",
             "order": 4,
             "children": []
           }

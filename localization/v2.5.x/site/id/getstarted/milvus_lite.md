@@ -98,8 +98,8 @@ title: Menjalankan Milvus Lite Secara Lokal
         ></path>
       </svg>
     </button></h2><p>Pada <code translate="no">pymilvus</code>, tentukan nama file lokal sebagai parameter uri dari MilvusClient yang akan digunakan oleh Milvus Lite.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Setelah menjalankan potongan kode di atas, sebuah file database bernama <strong>milvus_demo.db</strong> akan dibuat di folder saat ini.</p>
 <blockquote>
@@ -325,7 +325,7 @@ res = client.delete(
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 </tbody>
 </table>
-<h3 id="Vector-Index-Types" class="common-anchor-header">Jenis Indeks Vektor</h3><p>Milvus Lite hanya mendukung jenis indeks <a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>. Ia menggunakan jenis FLAT terlepas dari jenis indeks yang ditentukan dalam koleksi.</p>
+<h3 id="Vector-Index-Types" class="common-anchor-header">Jenis Indeks Vektor</h3><p>Milvus Lite hanya mendukung tipe indeks <a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>. Ia menggunakan jenis FLAT terlepas dari jenis indeks yang ditentukan dalam koleksi.</p>
 <h3 id="Search-Features" class="common-anchor-header">Fitur Pencarian</h3><p>Milvus Lite mendukung Vektor Jarang, Multi-vektor, Pencarian Hibrida.</p>
 <h3 id="Partition" class="common-anchor-header">Partisi</h3><p>Milvus Lite tidak mendukung partisi dan metode yang berhubungan dengan partisi.</p>
 <h3 id="Users--Roles" class="common-anchor-header">Pengguna &amp; Peran</h3><p>Milvus Lite tidak mendukung pengguna dan peran serta metode terkait.</p>
@@ -347,27 +347,27 @@ res = client.delete(
       </svg>
     </button></h2><p>Semua data yang disimpan di Milvus Lite dapat dengan mudah diekspor dan dimuat ke dalam jenis penerapan Milvus lainnya, seperti Milvus Standalone di Docker, Milvus Distributed di K8, atau Milvus yang dikelola sepenuhnya di <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 <p>Milvus Lite menyediakan alat baris perintah yang dapat membuang data ke dalam file json, yang dapat diimpor ke dalam <a href="https://github.com/milvus-io/milvus">milvus</a> dan <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(layanan cloud terkelola penuh untuk Milvus). Perintah milvus-lite akan diinstal bersama dengan paket python milvus-lite</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Install</span>
-pip install -U <span class="hljs-string">&quot;pymilvus[bulk_writer]&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
+pip install -U &quot;pymilvus[bulk_writer]&quot;
 
 milvus-lite dump -h
 
 usage: milvus-lite dump [-h] [-d DB_FILE] [-c COLLECTION] [-p PATH]
 
 optional arguments:
-  -h, --<span class="hljs-built_in">help</span>            show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
+  -h, --help            show this help message and exit
   -d DB_FILE, --db-file DB_FILE
                         milvus lite db file
   -c COLLECTION, --collection COLLECTION
                         collection that need to be dumped
-  -p PATH, --path PATH  dump file storage <span class="hljs-built_in">dir</span>
+  -p PATH, --path PATH  dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
 <p>Contoh berikut ini membuang semua data dari koleksi <code translate="no">demo_collection</code> yang disimpan di <code translate="no">./milvus_demo.db</code> (file basis data Milvus Lite)</p>
 <p>Untuk mengekspor data:</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
-<span class="hljs-comment"># ./milvus_demo.db: milvus lite db file</span>
-<span class="hljs-comment"># demo_collection: collection that need to be dumped</span>
-<span class="hljs-comment">#./data_dir : dump file storage dir</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">./milvus_demo.db: milvus lite db file</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">demo_collection: collection that need to be dumped</span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash">./data_dir : dump file storage <span class="hljs-built_in">dir</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Dengan file dump, Anda dapat mengunggah data ke Zilliz Cloud melalui <a href="https://docs.zilliz.com/docs/data-import">Impor Data</a>, atau mengunggah data ke server Milvus melalui <a href="https://milvus.io/docs/import-data.md">Bulk Insert</a>.</p>
 <h2 id="Whats-next" class="common-anchor-header">Apa selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -407,6 +407,6 @@ optional arguments:
 </ul></li>
 <li><p>Jelajahi <a href="/docs/id/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
-<li><p>Jelajahi <a href="https://milvus.io/docs/attu.md">Attu</a>, alat GUI sumber terbuka untuk manajemen Milvus yang intuitif.</p></li>
+<li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk manajemen Milvus yang intuitif.</p></li>
 <li><p><a href="/docs/id/monitor.md">Memantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

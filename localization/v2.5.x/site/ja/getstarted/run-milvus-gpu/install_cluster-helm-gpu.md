@@ -59,7 +59,7 @@ title: Helmチャートを使用したGPUサポート付きMilvusの実行
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
-<span class="hljs-title function_">standard</span> <span class="hljs-params">(<span class="hljs-keyword">default</span>)</span>    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
+standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>インストール前に<a href="/docs/ja/prerequisite-gpu.md">ハードウェアとソフトウェアの要件を</a>確認してください。</p></li>
 </ul>
@@ -91,7 +91,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <p><code translate="no">https://milvus-io.github.io/milvus-helm/</code> にある Milvus Helm Charts リポジトリはアーカイブされ、<code translate="no">https://zilliztech.github.io/milvus-helm/</code> から以下のように更新を取得できます：</p>
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update
-<span class="hljs-comment"># upgrade existing helm release</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade existing helm release</span>
 helm upgrade my-release zilliztech/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>アーカイブされたリポジトリは4.0.31までのチャートで利用可能です。それ以降のリリースについては、代わりに新しいレポを使用してください。</p>
@@ -99,7 +99,7 @@ helm upgrade my-release zilliztech/milvus
 <ol start="2">
 <li>ローカルでのチャート更新</li>
 </ol>
-<pre><code translate="no">$ helm repo update
+<pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus" class="common-anchor-header">Milvusの起動<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -122,20 +122,20 @@ helm upgrade my-release zilliztech/milvus
 <h3 id="1-Assign-a-single-GPU-device" class="common-anchor-header">1.単一のGPUデバイスを割り当てる</h3><p>GPUをサポートするMilvusでは、1つ以上のGPUデバイスを割り当てることができます。</p>
 <ul>
 <li><p>Milvusクラスタ</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
@@ -155,42 +155,42 @@ EOF</span>
 <h3 id="2-Assign-multiple-GPU-devices" class="common-anchor-header">2.複数のGPUデバイスの割り当て</h3><p>Milvusには、1つのGPUデバイスに加えて、複数のGPUデバイスを割り当てることができます。</p>
 <ul>
 <li><p>Milvusクラスタ</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>上記の構成では、indexNodeとqueryNodeが2つのGPUを共有しています。indexNodeとqueryNodeに異なるGPUを割り当てるには、設定ファイルの<code translate="no">extraEnv</code> ：</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;0&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;0&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;1&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -204,48 +204,48 @@ EOF</span>
   </div>
 </li>
 <li><p>Milvusスタンドアローン</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>上記の構成では、indexNodeとqueryNodeは2つのGPUを共有しています。indexNodeとqueryNodeに異なるGPUを割り当てるには、設定ファイルのextraEnvを以下のように設定することで、適宜設定を変更することができます：</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;0&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;0&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;1&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="2-Check-Milvus-status" class="common-anchor-header">2.Milvusステータスのチェック</h3><p>以下のコマンドを実行して、Milvusのステータスをチェックします：</p>
-<pre><code translate="no" class="language-bash">$ kubectl <span class="hljs-keyword">get</span> pods
+<pre><code translate="no" class="language-bash">$ kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvusが起動すると、<code translate="no">READY</code> 列にすべてのPodの<code translate="no">1/1</code> が表示されます。</p>
 <ul>
@@ -282,18 +282,18 @@ my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0        
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3.ローカルポートをMilvusに転送する。</h3><p>Milvusサーバがリッスンしているローカルポートを確認します。ポッド名を自分のものに置き換えてください。</p>
-<pre><code translate="no" class="language-bash">$ kubectl <span class="hljs-keyword">get</span> pod my-release-milvus-proxy<span class="hljs-number">-6b</span>d7f5587-ds2xv --template
+<pre><code translate="no" class="language-bash">$ kubectl get pod my-release-milvus-proxy-6bd7f5587-ds2xv --template
 =<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
-<span class="hljs-number">19530</span>
+19530
 <button class="copy-code-btn"></button></code></pre>
 <p>次に、以下のコマンドを実行し、ローカルポートをMilvusがリッスンしているポートに転送する。</p>
-<pre><code translate="no" class="language-bash">$ kubectl port-forward service/my-release-milvus <span class="hljs-number">27017</span>:<span class="hljs-number">19530</span>
-<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">27017</span> -&gt; <span class="hljs-number">19530</span>
+<pre><code translate="no" class="language-bash">$ kubectl port-forward service/my-release-milvus 27017:19530
+Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>オプションとして、上記のコマンドで<code translate="no">27017:19530</code> の代わりに<code translate="no">:19530</code> を使用すると、<code translate="no">kubectl</code> にローカルポートを割り当てさせることができ、ポートの競合を管理する必要がなくなります。</p>
 <p>デフォルトでは、kubectlのポートフォワーディングは<code translate="no">localhost</code> のみをリッスンします。Milvusに選択したIPアドレスまたはすべてのIPアドレスをリッスンさせたい場合は、<code translate="no">address</code> フラグを使用してください。以下のコマンドは、port-forwardをホストマシンのすべてのIPアドレスでリッスンするようにします。</p>
-<pre><code translate="no" class="language-bash">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27017</span>:<span class="hljs-number">19530</span>
-<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27017</span> -&gt; <span class="hljs-number">19530</span>
+<pre><code translate="no" class="language-bash">$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
+Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>これで、転送されたポートを使ってMilvusに接続できるようになります。</p>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">Milvus WebUIへのアクセス<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
@@ -313,8 +313,8 @@ my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0        
       </svg>
     </button></h2><p>MilvusにはMilvus WebUIというGUIツールが組み込まれており、ブラウザからアクセスすることができます。Milvus WebUIは、シンプルで直感的なインターフェースにより、システムの監視性を向上させます。Milvus Web UIを使用することで、Milvusのコンポーネントや依存関係の統計やメトリクスの観察、データベースやコレクションの詳細の確認、Milvusの詳細な設定の一覧などを行うことができます。Milvus Web UIの詳細については、<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>参照してください。</p>
 <p>Milvus Web UIへのアクセスを有効にするには、プロキシポッドをローカルポートにポートフォワードする必要があります。</p>
-<pre><code translate="no" class="language-shell">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27018</span>:<span class="hljs-number">9091</span>
-<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27018</span> -&gt; <span class="hljs-number">9091</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
+Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <p>これで、Milvus Web UI に<code translate="no">http://localhost:27018</code> からアクセスできるようになります。</p>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">Milvusのアンインストール<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
@@ -373,6 +373,6 @@ my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0        
 <li><p><a href="/docs/ja/milvus-webui.md">Milvusの</a>観測と管理のための直感的なWebインターフェースである<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご覧ください。</p></li>
 <li><p><a href="/docs/ja/milvus_backup_overview.md">Milvus</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
 <li><p>Milvusのデバッグとダイナミックなコンフィギュレーション更新のためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
-<li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://milvus.io/docs/attu.md">Attuを</a>ご紹介します。</p></li>
+<li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://github.com/zilliztech/attu">Attuを</a>ご紹介します。</p></li>
 <li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

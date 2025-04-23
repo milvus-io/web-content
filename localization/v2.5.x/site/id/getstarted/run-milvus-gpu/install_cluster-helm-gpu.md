@@ -59,7 +59,7 @@ title: Menjalankan Milvus dengan Dukungan GPU Menggunakan Helm Chart
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
-<span class="hljs-title function_">standard</span> <span class="hljs-params">(<span class="hljs-keyword">default</span>)</span>    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
+standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Periksa <a href="/docs/id/prerequisite-gpu.md">persyaratan perangkat keras dan perangkat lunak</a> sebelum penginstalan.</p></li>
 </ul>
@@ -91,7 +91,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <p>Repositori Milvus Helm Chart di <code translate="no">https://milvus-io.github.io/milvus-helm/</code> telah diarsipkan dan Anda dapat memperoleh pembaruan lebih lanjut dari <code translate="no">https://zilliztech.github.io/milvus-helm/</code> sebagai berikut:</p>
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update
-<span class="hljs-comment"># upgrade existing helm release</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade existing helm release</span>
 helm upgrade my-release zilliztech/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Repo yang diarsipkan masih tersedia untuk grafik hingga versi 4.0.31. Untuk rilis yang lebih baru, gunakan repo yang baru.</p>
@@ -99,7 +99,7 @@ helm upgrade my-release zilliztech/milvus
 <ol start="2">
 <li>Memperbarui grafik secara lokal.</li>
 </ol>
-<pre><code translate="no">$ helm repo update
+<pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus" class="common-anchor-header">Memulai Milvus<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -122,20 +122,20 @@ helm upgrade my-release zilliztech/milvus
 <h3 id="1-Assign-a-single-GPU-device" class="common-anchor-header">1. Menetapkan satu perangkat GPU</h3><p>Milvus dengan dukungan GPU memungkinkan Anda untuk menetapkan satu atau beberapa perangkat GPU.</p>
 <ul>
 <li><p>Gugus Milvus</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
@@ -155,42 +155,42 @@ EOF</span>
 <h3 id="2-Assign-multiple-GPU-devices" class="common-anchor-header">2. Menetapkan beberapa perangkat GPU</h3><p>Selain satu perangkat GPU, Anda juga dapat menetapkan beberapa perangkat GPU ke Milvus.</p>
 <ul>
 <li><p>Milvus cluster</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Pada konfigurasi di atas, indexNode dan queryNode menggunakan dua GPU. Untuk menetapkan GPU yang berbeda ke indexNode dan queryNode, Anda dapat memodifikasi konfigurasi yang sesuai dengan mengatur <code translate="no">extraEnv</code> dalam file konfigurasi sebagai berikut:</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;0&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;0&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;1&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -204,48 +204,48 @@ EOF</span>
   </div>
 </li>
 <li><p>Milvus mandiri</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Pada konfigurasi di atas, indexNode dan queryNode menggunakan dua GPU. Untuk menetapkan GPU yang berbeda ke indexNode dan queryNode, Anda dapat memodifikasi konfigurasi yang sesuai dengan mengatur extraEnv dalam file konfigurasi sebagai berikut:</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;0&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;0&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;1&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="2-Check-Milvus-status" class="common-anchor-header">2. Memeriksa status Milvus</h3><p>Jalankan perintah berikut untuk memeriksa status Milvus:</p>
-<pre><code translate="no" class="language-bash">$ kubectl <span class="hljs-keyword">get</span> pods
+<pre><code translate="no" class="language-bash">$ kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <p>Setelah Milvus dimulai, kolom <code translate="no">READY</code> akan menampilkan <code translate="no">1/1</code> untuk semua pod.</p>
 <ul>
@@ -282,18 +282,18 @@ my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0        
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. Meneruskan port lokal ke Milvus</h3><p>Verifikasi port lokal mana yang didengarkan oleh server Milvus. Ganti nama pod dengan nama Anda sendiri.</p>
-<pre><code translate="no" class="language-bash">$ kubectl <span class="hljs-keyword">get</span> pod my-release-milvus-proxy<span class="hljs-number">-6b</span>d7f5587-ds2xv --template
+<pre><code translate="no" class="language-bash">$ kubectl get pod my-release-milvus-proxy-6bd7f5587-ds2xv --template
 =<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
-<span class="hljs-number">19530</span>
+19530
 <button class="copy-code-btn"></button></code></pre>
 <p>Kemudian, jalankan perintah berikut untuk meneruskan porta lokal ke porta yang dilayani oleh Milvus.</p>
-<pre><code translate="no" class="language-bash">$ kubectl port-forward service/my-release-milvus <span class="hljs-number">27017</span>:<span class="hljs-number">19530</span>
-<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">27017</span> -&gt; <span class="hljs-number">19530</span>
+<pre><code translate="no" class="language-bash">$ kubectl port-forward service/my-release-milvus 27017:19530
+Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>Secara opsional, Anda dapat menggunakan <code translate="no">:19530</code> dan bukan <code translate="no">27017:19530</code> pada perintah di atas untuk membiarkan <code translate="no">kubectl</code> mengalokasikan porta lokal untuk Anda sehingga Anda tidak perlu mengelola konflik porta.</p>
 <p>Secara default, penerusan porta kubectl hanya mendengarkan <code translate="no">localhost</code>. Gunakan flag <code translate="no">address</code> jika Anda ingin Milvus mendengarkan pada alamat IP yang dipilih atau semua alamat IP. Perintah berikut ini membuat port-forward mendengarkan semua alamat IP pada mesin host.</p>
-<pre><code translate="no" class="language-bash">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27017</span>:<span class="hljs-number">19530</span>
-<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27017</span> -&gt; <span class="hljs-number">19530</span>
+<pre><code translate="no" class="language-bash">$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
+Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>Sekarang, Anda dapat terhubung ke Milvus menggunakan port yang diteruskan.</p>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">Mengakses Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
@@ -313,8 +313,8 @@ my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0        
       </svg>
     </button></h2><p>Milvus dilengkapi dengan alat GUI bawaan yang disebut Milvus WebUI yang dapat Anda akses melalui peramban. Milvus Web UI meningkatkan kemampuan pengamatan sistem dengan antarmuka yang sederhana dan intuitif. Anda dapat menggunakan Milvus Web UI untuk mengamati statistik dan metrik komponen dan ketergantungan Milvus, memeriksa detail basis data dan koleksi, dan membuat daftar konfigurasi Milvus yang terperinci. Untuk detail tentang Milvus Web UI, lihat <a href="/docs/id/milvus-webui.md">Milvus WebUI</a></p>
 <p>Untuk mengaktifkan akses ke Milvus Web UI, anda perlu melakukan port-forward proxy pod ke port lokal.</p>
-<pre><code translate="no" class="language-shell">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27018</span>:<span class="hljs-number">9091</span>
-<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27018</span> -&gt; <span class="hljs-number">9091</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
+Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <p>Sekarang, Anda dapat mengakses Milvus Web UI di <code translate="no">http://localhost:27018</code>.</p>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">Copot pemasangan Milvus<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
@@ -373,6 +373,6 @@ my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0        
 <li><p>Jelajahi <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pengamatan dan manajemen Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
-<li><p>Jelajahi <a href="https://milvus.io/docs/attu.md">Attu</a>, alat GUI sumber terbuka untuk manajemen Milvus yang intuitif.</p></li>
+<li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk manajemen Milvus yang intuitif.</p></li>
 <li><p><a href="/docs/id/monitor.md">Memantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

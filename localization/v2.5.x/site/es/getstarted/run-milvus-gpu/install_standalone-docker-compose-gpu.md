@@ -59,8 +59,8 @@ title: Ejecutar Milvus con soporte GPU usando Docker Compose
         ></path>
       </svg>
     </button></h2><p>Para instalar Milvus con soporte GPU utilizando Docker Compose, siga estos pasos.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descargue y configure el archivo YAML</h3><p>Descarga <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.9/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> y guárdelo como docker-compose.yml manualmente, o con el siguiente comando.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.9/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descargue y configure el archivo YAML</h3><p>Descarga <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.10/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> y guárdelo como docker-compose.yml manualmente, o con el siguiente comando.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.10/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Es necesario realizar algunos cambios en las variables de entorno del servicio autónomo en el archivo YAML como se indica a continuación:</p>
 <ul>
@@ -219,6 +219,6 @@ docker start &lt;milvus_container_id&gt;
 <li><p>Explore Milvus <a href="/docs/es/milvus-webui.md">WebUI</a>, una interfaz web intuitiva para la observabilidad y gestión de Milvus.</p></li>
 <li><p>Explore Milvus <a href="/docs/es/milvus_backup_overview.md">Backup</a>, una herramienta de código abierto para las copias de seguridad de los datos de Milvus.</p></li>
 <li><p>Explore <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para depurar Milvus y actualizaciones de configuración dinámicas.</p></li>
-<li><p>Explore <a href="https://milvus.io/docs/attu.md">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
+<li><p>Explore <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
 <li><p><a href="/docs/es/monitor.md">Supervise Milvus con Prometheus</a>.</p></li>
 </ul>

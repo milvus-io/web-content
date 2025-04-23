@@ -1681,128 +1681,6 @@
         "children": []
       },
       {
-        "label": "모델 임베딩",
-        "id": "integrate-embeddings-models",
-        "order": 1,
-        "children": [
-          {
-            "label": "OpenAI",
-            "id": "integrate_with_openai.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Cohere",
-            "id": "integrate_with_cohere.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "허깅페이스",
-            "id": "integrate_with_hugging-face.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "PyTorch",
-            "id": "integrate_with_pytorch.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "문장 트랜스포머",
-            "id": "integrate_with_sentencetransformers.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "VoyageAI",
-            "id": "integrate_with_voyageai.md",
-            "order": 8,
-            "children": []
-          },
-          {
-            "label": "Jina AI",
-            "id": "integrate_with_jina.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "12개의 랩",
-            "id": "video_search_with_twelvelabs_and_milvus.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "BentoML",
-            "id": "integrate_with_bentoml.md",
-            "order": 5,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "LLM",
-        "id": "integrate-llms",
-        "order": 2,
-        "children": [
-          {
-            "label": "vLLM",
-            "id": "milvus_rag_with_vllm.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "미스트랄 AI",
-            "id": "llama_agents_metadata.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "불꽃놀이",
-            "id": "build_RAG_with_milvus_and_fireworks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Lepton",
-            "id": "build_RAG_with_milvus_and_lepton.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "실리콘 플로우",
-            "id": "build_RAG_with_milvus_and_siliconflow.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "삼바노바",
-            "id": "use_milvus_with_sambanova.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "쌍둥이자리",
-            "id": "build_RAG_with_milvus_and_gemini.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "Ollama",
-            "id": "build_RAG_with_milvus_and_ollama.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "DeepSeek",
-            "id": "build_RAG_with_milvus_and_deepseek.md",
-            "order": 8,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "오케스트레이션",
         "id": "orchestrate-with-milvus",
         "order": 3,
@@ -1859,6 +1737,18 @@
                 "label": "전체 텍스트 검색",
                 "id": "llamaindex_milvus_full_text_search.md",
                 "order": 2,
+                "children": []
+              },
+              {
+                "label": "하이브리드 검색",
+                "id": "llamaindex_milvus_hybrid_search.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "메타데이터 필터링",
+                "id": "llamaindex_milvus_metadata_filter.md",
+                "order": 4,
                 "children": []
               }
             ]
@@ -1982,43 +1872,6 @@
         ]
       },
       {
-        "label": "지식 엔지니어링",
-        "id": "knowledge-engineering",
-        "order": 5,
-        "children": [
-          {
-            "label": "이유와 방법",
-            "id": "integrate_with_whyhow.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Vanna",
-            "id": "integrate_with_vanna.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "지식 표",
-            "id": "knowledge_table_with_milvus.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Cognee",
-            "id": "build_RAG_with_milvus_and_cognee.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "MindsDB",
-            "id": "integration_with_mindsdb.md",
-            "order": 4,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "평가 및 관찰 가능성",
         "id": "evaluation-observability",
         "order": 6,
@@ -2050,6 +1903,171 @@
           {
             "label": "DeepEval",
             "id": "evaluation_with_deepeval.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "AIMon",
+            "id": "AIMon_milvus_integration.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "모델 임베딩",
+        "id": "integrate-embeddings-models",
+        "order": 1,
+        "children": [
+          {
+            "label": "OpenAI",
+            "id": "integrate_with_openai.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Cohere",
+            "id": "integrate_with_cohere.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "허깅페이스",
+            "id": "integrate_with_hugging-face.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "PyTorch",
+            "id": "integrate_with_pytorch.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "문장 트랜스포머",
+            "id": "integrate_with_sentencetransformers.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "VoyageAI",
+            "id": "integrate_with_voyageai.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "Jina AI",
+            "id": "integrate_with_jina.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "12개의 실험실",
+            "id": "video_search_with_twelvelabs_and_milvus.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "BentoML",
+            "id": "integrate_with_bentoml.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "LLM",
+        "id": "integrate-llms",
+        "order": 2,
+        "children": [
+          {
+            "label": "vLLM",
+            "id": "milvus_rag_with_vllm.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "미스트랄 AI",
+            "id": "llama_agents_metadata.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "불꽃놀이",
+            "id": "build_RAG_with_milvus_and_fireworks.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Lepton",
+            "id": "build_RAG_with_milvus_and_lepton.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "실리콘 플로우",
+            "id": "build_RAG_with_milvus_and_siliconflow.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "삼바노바",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "쌍둥이자리",
+            "id": "build_RAG_with_milvus_and_gemini.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Ollama",
+            "id": "build_RAG_with_milvus_and_ollama.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "DeepSeek",
+            "id": "build_RAG_with_milvus_and_deepseek.md",
+            "order": 8,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "지식 엔지니어링",
+        "id": "knowledge-engineering",
+        "order": 5,
+        "children": [
+          {
+            "label": "이유와 방법",
+            "id": "integrate_with_whyhow.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Vanna",
+            "id": "integrate_with_vanna.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "지식 표",
+            "id": "knowledge_table_with_milvus.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Cognee",
+            "id": "build_RAG_with_milvus_and_cognee.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "MindsDB",
+            "id": "integration_with_mindsdb.md",
             "order": 4,
             "children": []
           }

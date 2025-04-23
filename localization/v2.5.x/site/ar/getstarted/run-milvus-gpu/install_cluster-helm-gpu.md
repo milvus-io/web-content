@@ -59,12 +59,12 @@ title: تشغيل Milvus مع دعم وحدة معالجة الرسومات با
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
-<span class="hljs-title function_">standard</span> <span class="hljs-params">(<span class="hljs-keyword">default</span>)</span>    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
+standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>تحقق من <a href="/docs/ar/prerequisite-gpu.md">متطلبات الأجهزة والبرامج</a> قبل التثبيت.</p></li>
 </ul>
 <div class="alert note">
-<p>إذا واجهتك أي مشاكل في سحب الصورة، اتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل عن المشكلة، وسنقدم لك الدعم اللازم.</p>
+<p>إذا واجهت أي مشاكل في سحب الصورة، اتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل حول المشكلة، وسنقدم لك الدعم اللازم.</p>
 </div>
 <h2 id="Install-Helm-Chart-for-Milvus" class="common-anchor-header">تثبيت مخطط Helm لـ Milvus<button data-href="#Install-Helm-Chart-for-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -91,7 +91,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <p>تمت أرشفة الريبو الخاص بـ Milvus Helm Charts على <code translate="no">https://milvus-io.github.io/milvus-helm/</code> ويمكنك الحصول على المزيد من التحديثات من <code translate="no">https://zilliztech.github.io/milvus-helm/</code> على النحو التالي:</p>
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update
-<span class="hljs-comment"># upgrade existing helm release</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">upgrade existing helm release</span>
 helm upgrade my-release zilliztech/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>لا يزال الريبو المؤرشف متاحًا للمخططات حتى الإصدار 4.0.31. للإصدارات الأحدث، استخدم الريبو الجديد بدلاً من ذلك.</p>
@@ -99,7 +99,7 @@ helm upgrade my-release zilliztech/milvus
 <ol start="2">
 <li>تحديث الرسوم البيانية محليًا.</li>
 </ol>
-<pre><code translate="no">$ helm repo update
+<pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Milvus" class="common-anchor-header">ابدأ تشغيل ميلفوس<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -122,20 +122,20 @@ helm upgrade my-release zilliztech/milvus
 <h3 id="1-Assign-a-single-GPU-device" class="common-anchor-header">1. تعيين جهاز وحدة معالجة رسومات واحد</h3><p>يسمح لك Milvus مع دعم وحدة معالجة الرسومات بتعيين جهاز واحد أو أكثر من أجهزة وحدة معالجة الرسومات.</p>
 <ul>
 <li><p>مجموعة Milvus العنقودية</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
@@ -155,42 +155,42 @@ EOF</span>
 <h3 id="2-Assign-multiple-GPU-devices" class="common-anchor-header">2. تعيين أجهزة GPU متعددة لوحدة معالجة الرسومات</h3><p>بالإضافة إلى جهاز GPU واحد، يمكنك أيضاً تعيين أجهزة GPU متعددة إلى Milvus.</p>
 <ul>
 <li><p>مجموعة ميلفوس العنقودية</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>في التهيئة أعلاه، تشترك عقدة الفهرس وعقدة الاستعلام في وحدتي معالجة رسومات. لتعيين وحدتي GPU مختلفتين لوحدتي GPU إلى عقدة الفهرس وعقدة الاستعلام، يمكنك تعديل التكوين وفقًا لذلك من خلال تعيين <code translate="no">extraEnv</code> في ملف التكوين على النحو التالي:</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;0&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;0&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;1&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -204,48 +204,48 @@ EOF</span>
   </div>
 </li>
 <li><p>ميلفوس مستقل</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;2&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;2&quot;
+    limits:
+      nvidia.com/gpu: &quot;2&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>في التهيئة أعلاه، تشترك عقدة الفهرس وعقدة الاستعلام في وحدتي معالجة رسومات. لتعيين وحدات معالجة رسومات مختلفة إلى عقدة الفهرس وعقدة الاستعلام، يمكنك تعديل التكوين وفقًا لذلك عن طريق تعيين extraEnv في ملف التكوين على النحو التالي:</p>
-<pre><code translate="no" class="language-bash">cat &lt;&lt;<span class="hljs-variable constant_">EOF</span> &gt; custom-values.<span class="hljs-property">yaml</span>
-<span class="hljs-attr">indexNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;0&quot;</span>
-<span class="hljs-attr">queryNode</span>:
-  <span class="hljs-attr">resources</span>:
-    <span class="hljs-attr">requests</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-    <span class="hljs-attr">limits</span>:
-      nvidia.<span class="hljs-property">com</span>/<span class="hljs-attr">gpu</span>: <span class="hljs-string">&quot;1&quot;</span>
-  <span class="hljs-attr">extraEnv</span>:
-    - <span class="hljs-attr">name</span>: <span class="hljs-variable constant_">CUDA_VISIBLE_DEVICES</span>
-      <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;1&quot;</span>
-<span class="hljs-variable constant_">EOF</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF &gt; custom-values.yaml
+indexNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;0&quot;
+queryNode:
+  resources:
+    requests:
+      nvidia.com/gpu: &quot;1&quot;
+    limits:
+      nvidia.com/gpu: &quot;1&quot;
+  extraEnv:
+    - name: CUDA_VISIBLE_DEVICES
+      value: &quot;1&quot;
+EOF</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">$ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> etcd.replicaCount=1 --<span class="hljs-built_in">set</span> minio.mode=standalone --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> -f custom-values.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="2-Check-Milvus-status" class="common-anchor-header">2. تحقق من حالة ميلفوس</h3><p>قم بتشغيل الأمر التالي للتحقق من حالة Milvus:</p>
-<pre><code translate="no" class="language-bash">$ kubectl <span class="hljs-keyword">get</span> pods
+<pre><code translate="no" class="language-bash">$ kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <p>بعد بدء تشغيل Milvus، يعرض العمود <code translate="no">READY</code> <code translate="no">1/1</code> لجميع الكبسولات.</p>
 <ul>
@@ -282,18 +282,18 @@ my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0        
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. إعادة توجيه منفذ محلي إلى ميلفوس</h3><p>تحقق من المنفذ المحلي الذي يستمع إليه خادم Milvus. استبدل اسم الكبسولة باسمك.</p>
-<pre><code translate="no" class="language-bash">$ kubectl <span class="hljs-keyword">get</span> pod my-release-milvus-proxy<span class="hljs-number">-6b</span>d7f5587-ds2xv --template
+<pre><code translate="no" class="language-bash">$ kubectl get pod my-release-milvus-proxy-6bd7f5587-ds2xv --template
 =<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
-<span class="hljs-number">19530</span>
+19530
 <button class="copy-code-btn"></button></code></pre>
-<p>ثم، قم بتشغيل الأمر التالي لإعادة توجيه منفذ محلي إلى المنفذ الذي يعمل عليه Milvus.</p>
-<pre><code translate="no" class="language-bash">$ kubectl port-forward service/my-release-milvus <span class="hljs-number">27017</span>:<span class="hljs-number">19530</span>
-<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">27017</span> -&gt; <span class="hljs-number">19530</span>
+<p>بعد ذلك، قم بتشغيل الأمر التالي لإعادة توجيه منفذ محلي إلى المنفذ الذي يعمل عليه Milvus.</p>
+<pre><code translate="no" class="language-bash">$ kubectl port-forward service/my-release-milvus 27017:19530
+Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>اختياريًا، يمكنك استخدام <code translate="no">:19530</code> بدلًا من <code translate="no">27017:19530</code> في الأمر أعلاه للسماح لـ <code translate="no">kubectl</code> بتخصيص منفذ محلي لك حتى لا تضطر إلى إدارة تعارضات المنافذ.</p>
 <p>بشكل افتراضي، يستمع منفذ إعادة توجيه المنفذ الخاص بـ kubectl بشكل افتراضي فقط على <code translate="no">localhost</code>. استخدم العلامة <code translate="no">address</code> إذا كنت تريد أن يستمع ميلفوس على عناوين IP المحددة أو جميع عناوين IP. الأمر التالي يجعل الأمر التالي المنفذ إلى الأمام يستمع على جميع عناوين IP على الجهاز المضيف.</p>
-<pre><code translate="no" class="language-bash">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27017</span>:<span class="hljs-number">19530</span>
-<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27017</span> -&gt; <span class="hljs-number">19530</span>
+<pre><code translate="no" class="language-bash">$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
+Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>الآن، يمكنك الاتصال ب Milvus باستخدام المنفذ المعاد توجيهه.</p>
 <h2 id="Access-Milvus-WebUI" class="common-anchor-header">الوصول إلى Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
@@ -311,10 +311,10 @@ my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0        
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يأتي Milvus مزودًا بأداة واجهة مستخدم رسومية مدمجة تسمى Milvus WebUI والتي يمكنك الوصول إليها من خلال متصفحك. تعزز واجهة مستخدم Milvus WebUI إمكانية مراقبة النظام بواجهة بسيطة وبديهية. يمكنك استخدام واجهة مستخدم الويب Milvus Web UI لمراقبة الإحصائيات والمقاييس الخاصة بمكونات وتبعيات Milvus، والتحقق من تفاصيل قاعدة البيانات والتجميع، وسرد تكوينات Milvus المفصلة. للحصول على تفاصيل حول واجهة مستخدم ميلفوس ويب، راجع واجهة مستخدم ميلفوس <a href="/docs/ar/milvus-webui.md">ويب</a></p>
+    </button></h2><p>يأتي Milvus مزودًا بأداة واجهة مستخدم رسومية مدمجة تسمى Milvus WebUI والتي يمكنك الوصول إليها من خلال متصفحك. تعزز واجهة مستخدم Milvus WebUI إمكانية مراقبة النظام بواجهة بسيطة وبديهية. يمكنك استخدام واجهة مستخدم ويب Milvus Web UI لمراقبة الإحصائيات والمقاييس الخاصة بمكونات وتبعيات Milvus، والتحقق من تفاصيل قاعدة البيانات والتجميع، وسرد تكوينات Milvus المفصلة. للحصول على تفاصيل حول واجهة مستخدم ميلفوس ويب، راجع واجهة مستخدم ميلفوس <a href="/docs/ar/milvus-webui.md">ويب</a></p>
 <p>لتمكين الوصول إلى واجهة مستخدم ويب Milvus Web UI، تحتاج إلى إعادة توجيه منفذ إلى منفذ محلي.</p>
-<pre><code translate="no" class="language-shell">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27018</span>:<span class="hljs-number">9091</span>
-<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27018</span> -&gt; <span class="hljs-number">9091</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
+Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <p>الآن، يمكنك الوصول إلى واجهة مستخدم ويب Milvus Web UI على <code translate="no">http://localhost:27018</code>.</p>
 <h2 id="Uninstall-Milvus" class="common-anchor-header">إلغاء تثبيت ميلفوس<button data-href="#Uninstall-Milvus" class="anchor-icon" translate="no">
@@ -373,6 +373,6 @@ my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0        
 <li><p>استكشف <a href="/docs/ar/milvus-webui.md">واجهة Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
 <li><p>استكشف Milvus <a href="/docs/ar/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
 <li><p>استكشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
-<li><p>استكشف <a href="https://milvus.io/docs/attu.md">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
-<li><p><a href="/docs/ar/monitor.md">مراقبة ميلفوس باستخدام بروميثيوس</a>.</p></li>
+<li><p>استكشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
+<li><p><a href="/docs/ar/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

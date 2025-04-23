@@ -98,8 +98,8 @@ title: تشغيل ميلفوس لايت محلياً
         ></path>
       </svg>
     </button></h2><p>في <code translate="no">pymilvus</code> ، حدد اسم ملف محلي كمعلمة uri لـ MilvusClient سيستخدم Milvus Lite.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>بعد تشغيل مقتطف الشفرة أعلاه، سيتم إنشاء ملف قاعدة بيانات باسم <strong>milvus_demo.db</strong> في المجلد الحالي.</p>
 <blockquote>
@@ -326,7 +326,7 @@ res = client.delete(
 </tbody>
 </table>
 <h3 id="Vector-Index-Types" class="common-anchor-header">أنواع الفهرس المتجه</h3><p>يدعم Milvus Lite نوع الفهرس <a href="https://milvus.io/docs/index.md?tab=floating#FLAT">المسطح</a> فقط. يستخدم نوع FLAT بغض النظر عن نوع الفهرس المحدد في المجموعة.</p>
-<h3 id="Search-Features" class="common-anchor-header">ميزات البحث</h3><p>يدعم Milvus Lite المتجهات المتفرقة والمتجهات المتعددة والبحث الهجين.</p>
+<h3 id="Search-Features" class="common-anchor-header">ميزات البحث</h3><p>يدعم Milvus Lite البحث الهجين في المتجهات المتفرقة والمتجهات المتعددة.</p>
 <h3 id="Partition" class="common-anchor-header">التقسيم</h3><p>لا يدعم Milvus Lite الأقسام والطرق المتعلقة بالتقسيم.</p>
 <h3 id="Users--Roles" class="common-anchor-header">المستخدمون والأدوار</h3><p>لا يدعم Milvus Lite المستخدمين والأدوار والأساليب ذات الصلة.</p>
 <h3 id="Alias" class="common-anchor-header">الأسماء المستعارة</h3><p>لا يدعم Milvus Lite الأسماء المستعارة والأساليب المتعلقة بالأسماء المستعارة.</p>
@@ -347,27 +347,27 @@ res = client.delete(
       </svg>
     </button></h2><p>يمكن تصدير جميع البيانات المخزنة في Milvus Lite بسهولة وتحميلها إلى أنواع أخرى من نشر Milvus، مثل Milvus Standalone على Docker، أو Milvus Distributed على K8s، أو Milvus المدارة بالكامل على <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 <p>يوفّر Milvus Lite أداة سطر أوامر يمكنها تفريغ البيانات في ملف json، والذي يمكن استيراده إلى <a href="https://github.com/milvus-io/milvus">milvus</a> وZilliz <a href="https://zilliz.com/cloud">Cloud</a>(الخدمة السحابية المدارة بالكامل لـ Milvus). سيتم تثبيت أمر ميلفوس لايت مع حزمة ميلفوس لايت بايثون</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Install</span>
-pip install -U <span class="hljs-string">&quot;pymilvus[bulk_writer]&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
+pip install -U &quot;pymilvus[bulk_writer]&quot;
 
 milvus-lite dump -h
 
 usage: milvus-lite dump [-h] [-d DB_FILE] [-c COLLECTION] [-p PATH]
 
 optional arguments:
-  -h, --<span class="hljs-built_in">help</span>            show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
+  -h, --help            show this help message and exit
   -d DB_FILE, --db-file DB_FILE
                         milvus lite db file
   -c COLLECTION, --collection COLLECTION
                         collection that need to be dumped
-  -p PATH, --path PATH  dump file storage <span class="hljs-built_in">dir</span>
+  -p PATH, --path PATH  dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
 <p>يقوم المثال التالي بتفريغ جميع البيانات من مجموعة <code translate="no">demo_collection</code> المخزنة في <code translate="no">./milvus_demo.db</code> (ملف قاعدة بيانات Milvus Lite)</p>
 <p>لتصدير البيانات:</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
-<span class="hljs-comment"># ./milvus_demo.db: milvus lite db file</span>
-<span class="hljs-comment"># demo_collection: collection that need to be dumped</span>
-<span class="hljs-comment">#./data_dir : dump file storage dir</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">./milvus_demo.db: milvus lite db file</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">demo_collection: collection that need to be dumped</span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash">./data_dir : dump file storage <span class="hljs-built_in">dir</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <p>باستخدام ملف التفريغ، يمكنك تحميل البيانات إلى زيليز كلاود عبر <a href="https://docs.zilliz.com/docs/data-import">استيراد البيانات،</a> أو تحميل البيانات إلى خوادم ميلفوس عبر <a href="https://milvus.io/docs/import-data.md">الإدراج بالجملة</a>.</p>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -407,6 +407,6 @@ optional arguments:
 </ul></li>
 <li><p>استكشف <a href="/docs/ar/milvus_backup_overview.md">Milvus Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطي لبيانات Milvus.</p></li>
 <li><p>استكشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
-<li><p>استكشف <a href="https://milvus.io/docs/attu.md">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
+<li><p>استكشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
 <li><p><a href="/docs/ar/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

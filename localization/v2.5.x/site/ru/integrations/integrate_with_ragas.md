@@ -5,6 +5,12 @@ summary: >-
   Retrieval-Augmented Generation (RAG), построенного на базе Milvus.
 title: Оценка с помощью Ragas
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Evaluation-with-Ragas" class="common-anchor-header">Оценка с помощью Ragas<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,9 +26,7 @@ title: Оценка с помощью Ragas
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>Это руководство демонстрирует, как использовать Ragas для оценки конвейера Retrieval-Augmented Generation (RAG), построенного на базе <a href="https://milvus.io/">Milvus</a>.</p>
+    </button></h1><p>Это руководство демонстрирует, как использовать Ragas для оценки конвейера Retrieval-Augmented Generation (RAG), построенного на базе <a href="https://milvus.io/">Milvus</a>.</p>
 <p>Система RAG объединяет поисковую систему с генеративной моделью для создания нового текста на основе заданного запроса. Сначала система извлекает релевантные документы из корпуса с помощью Milvus, а затем использует генеративную модель для создания нового текста на основе извлеченных документов.</p>
 <p><a href="https://docs.ragas.io/en/latest/index.html#">Ragas</a> - это фреймворк, который помогает оценивать конвейеры RAG. Существуют инструменты и фреймворки, которые помогают создавать такие конвейеры, но оценить их и определить количественную производительность может быть непросто. Именно здесь на помощь приходит Ragas (RAG Assessment).</p>
 <h2 id="Prerequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -41,15 +45,15 @@ title: Оценка с помощью Ragas
         ></path>
       </svg>
     </button></h2><p>Прежде чем запускать этот блокнот, убедитесь, что у вас установлены следующие зависимости:</p>
-<pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas ragas
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus openai requests tqdm pandas ragas</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
-</div>
 <p>В этом примере мы будем использовать OpenAI в качестве LLM. Вам следует подготовить <a href="https://platform.openai.com/docs/quickstart">api ключ</a> <code translate="no">OPENAI_API_KEY</code> в качестве переменной окружения.</p>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Define-the-RAG-pipeline" class="common-anchor-header">Определение конвейера RAG<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -123,7 +127,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+            consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -176,10 +180,10 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
             <span class="hljs-keyword">return</span> response.choices[<span class="hljs-number">0</span>].message.content, retrieved_texts
 <button class="copy-code-btn"></button></code></pre>
 <p>Инициализируем класс RAG с клиентами OpenAI и Milvus.</p>
-<pre><code translate="no" class="language-python">openai_client = <span class="hljs-title class_">OpenAI</span>()
-milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python">openai_client = OpenAI()
+milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
-my_rag = <span class="hljs-title function_">RAG</span>(openai_client=openai_client, milvus_client=milvus_client)
+my_rag = RAG(openai_client=openai_client, milvus_client=milvus_client)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Что касается аргумента <code translate="no">MilvusClient</code>:</p>
@@ -221,50 +225,52 @@ file_path = <span class="hljs-string">&quot;./Milvus_DEVELOPMENT.md&quot;</span>
 text_lines = file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 my_rag.load(text_lines)  <span class="hljs-comment"># Load the text data into RAG pipeline</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Creating embeddings: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 47/47 [00:16&lt;00:00,  2.80it/s]
+<pre><code translate="no">Creating embeddings: 100%|██████████| 27/27 [00:20&lt;00:00,  1.34it/s]
 </code></pre>
 <p>Определим вопрос запроса о содержании документации руководства по разработке. А затем воспользуемся методом <code translate="no">answer</code>, чтобы получить ответ и извлеченные контекстные тексты.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;what is the hardware requirements specification if I want to build Milvus and run from source code?&quot;</span>
 my_rag.answer(question, return_retrieved_text=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">('The hardware requirements specification to build and run Milvus from source code is 8GB of RAM and 50GB of free disk space.',
- ['Hardware Requirements\n\nThe following specification (either physical or virtual machine resources) is recommended for Milvus to build and run from source code.\n\n```\n- 8GB of RAM\n- 50GB of free disk space\n```\n\n##',
+<pre><code translate="no">('The hardware requirements specification for building Milvus and running it from source code is as follows:\n\n- 8GB of RAM\n- 50GB of free disk space',
+ ['Hardware Requirements\n\nThe following specification (either physical or virtual machine resources) is recommended for Milvus to build and run from source code.\n\n```yaml\n- 8GB of RAM\n- 50GB of free disk space\n```\n\n##',
   'Building Milvus on a local OS/shell environment\n\nThe details below outline the hardware and software requirements for building on Linux and MacOS.\n\n##',
   &quot;Software Requirements\n\nAll Linux distributions are available for Milvus development. However a majority of our contributor worked with Ubuntu or CentOS systems, with a small portion of Mac (both x86_64 and Apple Silicon) contributors. If you would like Milvus to build and run on other distributions, you are more than welcome to file an issue and contribute!\n\nHere's a list of verified OS types where Milvus can successfully build and run:\n\n- Debian/Ubuntu\n- Amazon Linux\n- MacOS (x86_64)\n- MacOS (Apple Silicon)\n\n##&quot;])
 </code></pre>
 <p>Теперь подготовим несколько вопросов с соответствующими им ответами. Мы получим ответы и контексты из нашего конвейера RAG.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> Dataset
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> ragas <span class="hljs-keyword">import</span> EvaluationDataset
+<span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> Dataset
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
-question_list = [
+user_input_list = [
     <span class="hljs-string">&quot;what is the hardware requirements specification if I want to build Milvus and run from source code?&quot;</span>,
     <span class="hljs-string">&quot;What is the programming language used to write Knowhere?&quot;</span>,
     <span class="hljs-string">&quot;What should be ensured before running code coverage?&quot;</span>,
 ]
-ground_truth_list = [
+reference_list = [
     <span class="hljs-string">&quot;If you want to build Milvus and run from source code, the recommended hardware requirements specification is:\n\n- 8GB of RAM\n- 50GB of free disk space.&quot;</span>,
     <span class="hljs-string">&quot;The programming language used to write Knowhere is C++.&quot;</span>,
     <span class="hljs-string">&quot;Before running code coverage, you should make sure that your code changes are covered by unit tests.&quot;</span>,
 ]
-contexts_list = []
-answer_list = []
-<span class="hljs-keyword">for</span> question <span class="hljs-keyword">in</span> tqdm(question_list, desc=<span class="hljs-string">&quot;Answering questions&quot;</span>):
-    answer, contexts = my_rag.answer(question, return_retrieved_text=<span class="hljs-literal">True</span>)
-    contexts_list.append(contexts)
-    answer_list.append(answer)
+retrieved_contexts_list = []
+response_list = []
+
+<span class="hljs-keyword">for</span> user_input <span class="hljs-keyword">in</span> tqdm(user_input_list, desc=<span class="hljs-string">&quot;Answering questions&quot;</span>):
+    response, retrieved_context = my_rag.answer(user_input, return_retrieved_text=<span class="hljs-literal">True</span>)
+    retrieved_contexts_list.append(retrieved_context)
+    response_list.append(response)
 
 df = pd.DataFrame(
     {
-        <span class="hljs-string">&quot;question&quot;</span>: question_list,
-        <span class="hljs-string">&quot;contexts&quot;</span>: contexts_list,
-        <span class="hljs-string">&quot;answer&quot;</span>: answer_list,
-        <span class="hljs-string">&quot;ground_truth&quot;</span>: ground_truth_list,
+        <span class="hljs-string">&quot;user_input&quot;</span>: user_input_list,
+        <span class="hljs-string">&quot;retrieved_contexts&quot;</span>: retrieved_contexts_list,
+        <span class="hljs-string">&quot;response&quot;</span>: response_list,
+        <span class="hljs-string">&quot;reference&quot;</span>: reference_list,
     }
 )
-rag_results = Dataset.from_pandas(df)
+rag_results = EvaluationDataset.from_pandas(df)
 df
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Answering questions: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:03&lt;00:00,  1.29s/it]
+<pre><code translate="no">Answering questions: 100%|██████████| 3/3 [00:04&lt;00:00,  1.37s/it]
 </code></pre>
 <div>
 <style scoped>
@@ -281,16 +287,16 @@ df
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>вопрос</th>
-      <th>контексты</th>
+      <th>пользовательский_ввод</th>
+      <th>полученные_контексты</th>
       <th>ответ</th>
-      <th>обоснованная_истина</th>
+      <th>ссылка</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Что такое спецификация требований к оборудованию...</td>
+      <td>какие требования к оборудованию...</td>
       <td>[Требования к аппаратному обеспечению\n\nСледующая специф...</td>
       <td>Спецификация требований к аппаратному обеспечению для бу...</td>
       <td>Если вы хотите собрать Milvus и запустить его из источн...</td>
@@ -299,15 +305,15 @@ df
       <th>1</th>
       <td>Какой язык программирования используется для написа...</td>
       <td>[CMake &amp; Conan\n\nБиблиотека алгоритмов Mil...</td>
-      <td>Язык программирования, используемый для написания Kno...</td>
+      <td>Язык программирования, используемый для написания Knowher...</td>
       <td>Язык программирования, используемый для написания Knowher...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Что необходимо убедиться перед запуском кода, покрывающег...</td>
+      <td>Что необходимо убедиться перед запуском кода, покрыв...</td>
       <td>[Покрытие кода\n\nПеред отправкой вашего pull ...</td>
-      <td>Прежде чем выполнять покрытие кода, вы должны убедиться, что...</td>
-      <td>Перед выполнением покрытия кода необходимо сделать ...</td>
+      <td>Перед запуском покрытия кода следует убедиться, что...</td>
+      <td>Перед выполнением покрытия кода, вы должны сделать ...</td>
     </tr>
   </tbody>
 </table>
@@ -327,33 +333,33 @@ df
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Мы используем Ragas для оценки производительности наших результатов работы конвейера RAG.</p>
+    </button></h2><p>Мы используем Ragas для оценки производительности результатов работы нашего конвейера RAG.</p>
 <p>Ragas предоставляет набор метрик, которые легко использовать. Мы взяли <code translate="no">Answer relevancy</code>, <code translate="no">Faithfulness</code>, <code translate="no">Context recall</code> и <code translate="no">Context precision</code> в качестве метрик для оценки нашего конвейера RAG. Более подробную информацию о метриках можно найти в разделе <a href="https://docs.ragas.io/en/latest/concepts/metrics/index.html">Метрики Ragas</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> ragas <span class="hljs-keyword">import</span> evaluate
-<span class="hljs-keyword">from</span> ragas.<span class="hljs-property">metrics</span> <span class="hljs-keyword">import</span> (
-    answer_relevancy,
-    faithfulness,
-    context_recall,
-    context_precision,
-)
+<span class="hljs-keyword">from</span> ragas.metrics <span class="hljs-keyword">import</span> AnswerRelevancy, Faithfulness, ContextRecall, ContextPrecision
 
-result = <span class="hljs-title function_">evaluate</span>(
-    rag_results,
+<span class="hljs-keyword">from</span> ragas.llms <span class="hljs-keyword">import</span> LangchainLLMWrapper
+<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI
+
+llm = ChatOpenAI(model=<span class="hljs-string">&quot;gpt-4o-mini&quot;</span>)
+evaluator_llm = LangchainLLMWrapper(llm)
+
+results = evaluate(
+    dataset=rag_results,
     metrics=[
-        answer_relevancy,
-        faithfulness,
-        context_recall,
-        context_precision,
+        AnswerRelevancy(llm=evaluator_llm),
+        Faithfulness(llm=evaluator_llm),
+        ContextRecall(llm=evaluator_llm),
+        ContextPrecision(llm=evaluator_llm),
     ],
 )
-
-result
+results
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Evaluating:   0%|          | 0/12 [00:00&lt;?, ?it/s]
+<pre><code translate="no">Evaluating: 100%|██████████| 12/12 [00:10&lt;00:00,  1.11it/s]
 
 
 
 
 
-{'answer_relevancy': 0.9445, 'faithfulness': 1.0000, 'context_recall': 1.0000, 'context_precision': 1.0000}
+{'answer_relevancy': 0.9894, 'faithfulness': 1.0000, 'context_recall': 1.0000, 'context_precision': 1.0000}
 </code></pre>

@@ -59,8 +59,8 @@ title: 使用 Docker Compose 运行支持 GPU 的 Milvus
         ></path>
       </svg>
     </button></h2><p>要使用 Docker Compose 安装支持 GPU 的 Milvus，请按照以下步骤操作。</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.下载并配置 YAML 文件</h3><p>下载 <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.9/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>并手动保存为 docker-compose.yml，或使用以下命令。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.9/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.下载并配置 YAML 文件</h3><p>下载 <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.10/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>并手动保存为 docker-compose.yml，或使用以下命令。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.10/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>您需要对 YAML 文件中单机服务的环境变量做如下修改：</p>
 <ul>
@@ -219,6 +219,6 @@ docker start &lt;milvus_container_id&gt;
 <li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
 <li><p>探索<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
-<li><p>探索<a href="https://milvus.io/docs/attu.md">Attu</a>，一个用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一个用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
 <li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

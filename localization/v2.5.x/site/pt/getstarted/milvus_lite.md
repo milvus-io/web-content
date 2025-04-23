@@ -98,8 +98,8 @@ title: Executar o Milvus Lite Localmente
         ></path>
       </svg>
     </button></h2><p>Em <code translate="no">pymilvus</code>, especifique um nome de ficheiro local como parâmetro uri do MilvusClient para utilizar o Milvus Lite.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Depois de executar o trecho de código acima, um arquivo de banco de dados chamado <strong>milvus_demo.db</strong> será gerado na pasta atual.</p>
 <blockquote>
@@ -300,7 +300,7 @@ res = client.delete(
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a></td><td>A obtenção do estado do carregamento não é suportada.</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/refresh_load.md">refresh_load()</a></td><td>Não é suportado o carregamento dos dados não carregados de uma coleção carregada.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/refresh_load.md">refresh_load()</a></td><td>Não é possível carregar os dados não carregados de uma coleção carregada.</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/close.md">close()</a></td><td>Y</td></tr>
 </tbody>
 </table>
@@ -327,7 +327,7 @@ res = client.delete(
 </table>
 <h3 id="Vector-Index-Types" class="common-anchor-header">Tipos de índices vectoriais</h3><p>O Milvus Lite suporta apenas o tipo de índice <a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>. Utiliza o tipo FLAT independentemente do tipo de índice especificado na coleção.</p>
 <h3 id="Search-Features" class="common-anchor-header">Recursos de pesquisa</h3><p>Milvus Lite suporta Vetor Esparso, Multi-vetor, Busca Híbrida.</p>
-<h3 id="Partition" class="common-anchor-header">Partição</h3><p>O Milvus Lite não suporta partições e métodos relacionados a partições.</p>
+<h3 id="Partition" class="common-anchor-header">Partição</h3><p>Milvus Lite não suporta partições e métodos relacionados a partições.</p>
 <h3 id="Users--Roles" class="common-anchor-header">Utilizadores e Funções</h3><p>Milvus Lite não suporta usuários e funções e métodos relacionados.</p>
 <h3 id="Alias" class="common-anchor-header">Alias</h3><p>O Milvus Lite não suporta aliases e métodos relacionados a aliases.</p>
 <h2 id="Migrating-data-from-Milvus-Lite" class="common-anchor-header">Migrando dados do Milvus Lite<button data-href="#Migrating-data-from-Milvus-Lite" class="anchor-icon" translate="no">
@@ -347,29 +347,29 @@ res = client.delete(
       </svg>
     </button></h2><p>Todos os dados armazenados no Milvus Lite podem ser facilmente exportados e carregados noutros tipos de implementação do Milvus, como o Milvus Standalone no Docker, o Milvus Distributed no K8s ou o Milvus totalmente gerido no <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 <p>Milvus Lite fornece uma ferramenta de linha de comando que pode despejar dados em um arquivo json, que pode ser importado para <a href="https://github.com/milvus-io/milvus">milvus</a> e <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(o serviço de nuvem totalmente gerenciado para Milvus). O comando milvus-lite será instalado juntamente com o pacote python milvus-lite</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Install</span>
-pip install -U <span class="hljs-string">&quot;pymilvus[bulk_writer]&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
+pip install -U &quot;pymilvus[bulk_writer]&quot;
 
 milvus-lite dump -h
 
 usage: milvus-lite dump [-h] [-d DB_FILE] [-c COLLECTION] [-p PATH]
 
 optional arguments:
-  -h, --<span class="hljs-built_in">help</span>            show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
+  -h, --help            show this help message and exit
   -d DB_FILE, --db-file DB_FILE
                         milvus lite db file
   -c COLLECTION, --collection COLLECTION
                         collection that need to be dumped
-  -p PATH, --path PATH  dump file storage <span class="hljs-built_in">dir</span>
+  -p PATH, --path PATH  dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
 <p>O exemplo seguinte descarrega todos os dados da coleção <code translate="no">demo_collection</code> que estão armazenados em <code translate="no">./milvus_demo.db</code> (ficheiro de base de dados do Milvus Lite)</p>
 <p>Para exportar dados:</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
-<span class="hljs-comment"># ./milvus_demo.db: milvus lite db file</span>
-<span class="hljs-comment"># demo_collection: collection that need to be dumped</span>
-<span class="hljs-comment">#./data_dir : dump file storage dir</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">./milvus_demo.db: milvus lite db file</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">demo_collection: collection that need to be dumped</span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash">./data_dir : dump file storage <span class="hljs-built_in">dir</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Com o ficheiro dump, pode carregar os dados para o Zilliz Cloud via <a href="https://docs.zilliz.com/docs/data-import">Data Import</a>, ou carregar os dados para os servidores Milvus via <a href="https://milvus.io/docs/import-data.md">Bulk Insert</a>.</p>
+<p>Com o ficheiro dump, pode carregar dados para o Zilliz Cloud via <a href="https://docs.zilliz.com/docs/data-import">Data Import</a>, ou carregar dados para os servidores Milvus via <a href="https://milvus.io/docs/import-data.md">Bulk Insert</a>.</p>
 <h2 id="Whats-next" class="common-anchor-header">O que se segue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -407,6 +407,6 @@ optional arguments:
 </ul></li>
 <li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para backups de dados do Milvus.</p></li>
 <li><p>Explore o <a href="/docs/pt/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e actualizações de configuração dinâmica.</p></li>
-<li><p>Explore <a href="https://milvus.io/docs/attu.md">o Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
+<li><p>Explore <a href="https://github.com/zilliztech/attu">o Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
 <li><p><a href="/docs/pt/monitor.md">Monitore o Milvus com o Prometheus</a>.</p></li>
 </ul>

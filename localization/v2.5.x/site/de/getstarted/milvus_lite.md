@@ -41,7 +41,7 @@ title: Lokale Ausführung von Milvus Lite
 <li>Laptops</li>
 <li>Edge-Geräte</li>
 </ul>
-<p>Milvus Lite nutzt dieselbe API wie Milvus Standalone und Distributed und deckt die meisten Funktionen ab, wie z. B. die Persistenz und Verwaltung von Vektordaten, Vektor-CRUD-Operationen, Sparse- und Dense-Vektor-Suche, Metadatenfilterung, Multi-Vektor- und Hybrid-Suche. Zusammen bieten sie eine konsistente Erfahrung über verschiedene Arten von Umgebungen hinweg, von Edge-Geräten bis hin zu Clustern in der Cloud, passend zu Anwendungsfällen unterschiedlicher Größe. Mit demselben clientseitigen Code können Sie GenAI-Anwendungen mit Milvus Lite auf einem Laptop oder Jupyter Notebook, Milvus Standalone auf einem Docker-Container oder Milvus Distributed auf einem Kubernetes-Cluster mit Milliarden von Vektoren in der Produktion ausführen.</p>
+<p>Milvus Lite nutzt dieselbe API wie Milvus Standalone und Distributed und deckt die meisten Funktionen ab, wie z. B. die Persistenz und Verwaltung von Vektordaten, Vektor-CRUD-Operationen, Sparse- und Dense-Vektor-Suche, Metadatenfilterung, Multi-Vektor- und Hybrid-Suche. Zusammen bieten sie eine konsistente Erfahrung über verschiedene Arten von Umgebungen hinweg, von Edge-Geräten bis hin zu Clustern in der Cloud, passend zu Anwendungsfällen unterschiedlicher Größe. Mit demselben clientseitigen Code können Sie GenAI-Anwendungen mit Milvus Lite auf einem Laptop oder Jupyter Notebook, mit Milvus Standalone auf einem Docker-Container oder mit Milvus Distributed auf einem Kubernetes-Cluster mit Milliarden von Vektoren in der Produktion ausführen.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,8 +98,8 @@ title: Lokale Ausführung von Milvus Lite
         ></path>
       </svg>
     </button></h2><p>Wenn Sie in <code translate="no">pymilvus</code> einen lokalen Dateinamen als uri-Parameter von MilvusClient angeben, wird Milvus Lite verwendet.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Nach Ausführung des obigen Codeausschnitts wird eine Datenbankdatei mit dem Namen <strong>milvus_demo.db</strong> im aktuellen Ordner erstellt.</p>
 <blockquote>
@@ -120,7 +120,7 @@ client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Im Folgenden finden Sie eine einfache Demo, die zeigt, wie Milvus Lite für die Textsuche verwendet wird. Es gibt umfangreichere <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">Beispiele</a> für die Verwendung von Milvus Lite zur Erstellung von Anwendungen wie <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb">RAG</a>, <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/image_search_with_milvus.ipynb">Bildsuche</a> und die Verwendung von Milvus Lite in beliebten RAG-Frameworks wie <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb">LangChain</a> und <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb">LlamaIndex</a>!</p>
+    </button></h2><p>Nachfolgend finden Sie eine einfache Demo, die zeigt, wie Milvus Lite für die Textsuche verwendet wird. Es gibt umfangreichere <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials">Beispiele</a> für die Verwendung von Milvus Lite zur Erstellung von Anwendungen wie <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb">RAG</a>, <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/image_search_with_milvus.ipynb">Bildsuche</a> und die Verwendung von Milvus Lite in beliebten RAG-Frameworks wie <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb">LangChain</a> und <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb">LlamaIndex</a>!</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -312,7 +312,7 @@ res = client.delete(
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md">list_indexes()</a></td><td>Das Auflisten von Indizes wird unterstützt.</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">field_name</code></td><td>Y</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">create_index()</a></td><td>Unterstützt nur den Indextyp <code translate="no">FLAT</code>.</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">create_index()</a></td><td>Unterstützt nur den Index-Typ <code translate="no">FLAT</code>.</td></tr>
 <tr><td><code translate="no">index_params</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md">drop_index()</a></td><td>Das Löschen von Indizes wird unterstützt.</td></tr>
@@ -347,27 +347,27 @@ res = client.delete(
       </svg>
     </button></h2><p>Alle in Milvus Lite gespeicherten Daten können einfach exportiert und in andere Milvus-Bereitstellungsarten geladen werden, wie Milvus Standalone auf Docker, Milvus Distributed auf K8s oder vollständig verwaltetes Milvus auf <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 <p>Milvus Lite bietet ein Kommandozeilen-Tool, das Daten in eine json-Datei ausgeben kann, die in <a href="https://github.com/milvus-io/milvus">Milvus</a> und <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(der vollständig verwaltete Cloud-Service für Milvus) importiert werden kann. Der Befehl milvus-lite wird zusammen mit dem Python-Paket milvus-lite installiert.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Install</span>
-pip install -U <span class="hljs-string">&quot;pymilvus[bulk_writer]&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
+pip install -U &quot;pymilvus[bulk_writer]&quot;
 
 milvus-lite dump -h
 
 usage: milvus-lite dump [-h] [-d DB_FILE] [-c COLLECTION] [-p PATH]
 
 optional arguments:
-  -h, --<span class="hljs-built_in">help</span>            show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
+  -h, --help            show this help message and exit
   -d DB_FILE, --db-file DB_FILE
                         milvus lite db file
   -c COLLECTION, --collection COLLECTION
                         collection that need to be dumped
-  -p PATH, --path PATH  dump file storage <span class="hljs-built_in">dir</span>
+  -p PATH, --path PATH  dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
 <p>Das folgende Beispiel exportiert alle Daten aus der Sammlung <code translate="no">demo_collection</code>, die in <code translate="no">./milvus_demo.db</code> (Milvus Lite Datenbankdatei) gespeichert sind</p>
 <p>Zum Exportieren von Daten:</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
-<span class="hljs-comment"># ./milvus_demo.db: milvus lite db file</span>
-<span class="hljs-comment"># demo_collection: collection that need to be dumped</span>
-<span class="hljs-comment">#./data_dir : dump file storage dir</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">./milvus_demo.db: milvus lite db file</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">demo_collection: collection that need to be dumped</span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash">./data_dir : dump file storage <span class="hljs-built_in">dir</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Mit der Dump-Datei können Sie Daten über <a href="https://docs.zilliz.com/docs/data-import">Data Import</a> in die Zilliz-Cloud hochladen oder über <a href="https://milvus.io/docs/import-data.md">Bulk Insert</a> auf die Milvus-Server hochladen.</p>
 <h2 id="Whats-next" class="common-anchor-header">Wie geht es weiter?<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -406,7 +406,7 @@ optional arguments:
 <li><a href="/docs/de/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p>Erkunden Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zum Debuggen von Milvus und dynamischen Konfigurations-Updates.</p></li>
-<li><p>Entdecken Sie <a href="https://milvus.io/docs/attu.md">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Milvus-Verwaltung.</p></li>
+<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und für dynamische Konfigurations-Updates.</p></li>
+<li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Milvus-Verwaltung.</p></li>
 <li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

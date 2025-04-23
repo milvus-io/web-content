@@ -18,7 +18,7 @@ title: ローカルでMilvus Liteを動かす
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このページでは、Milvus Liteを使ってローカルでMilvusを実行する方法を説明します。Milvus Liteは<a href="https://github.com/milvus-io/milvus">Milvusの</a>軽量版です。<a href="https://github.com/milvus-io/milvus">Milvusは</a>オープンソースのベクトルデータベースで、ベクトル埋め込みと類似性検索によりAIアプリケーションを強化します。</p>
+    </button></h1><p>このページでは、Milvus Liteを使ってローカルでMilvusを実行する方法を説明します。Milvus Liteは<a href="https://github.com/milvus-io/milvus">Milvusの</a>軽量版です。<a href="https://github.com/milvus-io/milvus">Milvusは</a>オープンソースのベクトルデータベースであり、ベクトル埋め込みと類似性検索によってAIアプリケーションを強化します。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,8 +98,8 @@ title: ローカルでMilvus Liteを動かす
         ></path>
       </svg>
     </button></h2><p><code translate="no">pymilvus</code> で、MilvusClientのuriパラメータにローカルファイル名を指定すると、Milvus Liteが使用されます。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>上記のコードを実行すると、カレントフォルダに<strong>milvus_demo.dbという</strong>データベースファイルが生成されます。</p>
 <blockquote>
@@ -347,27 +347,27 @@ res = client.delete(
       </svg>
     </button></h2><p>Milvus Liteに保存されている全てのデータは、Docker上のMilvus Standalone、K8s上のMilvus Distributed、<a href="https://zilliz.com/cloud">Zilliz Cloud</a>上のフルマネージドMilvusなど、他のタイプのMilvusデプロイメントに簡単にエクスポートおよびロードすることができます。</p>
 <p>Milvus Liteは、<a href="https://github.com/milvus-io/milvus">milvusや</a> <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(Milvusのフルマネージドクラウドサービス)にインポート可能なデータをjsonファイルにダンプするコマンドラインツールを提供します。milvus-liteコマンドはmilvus-lite pythonパッケージと一緒にインストールされます。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Install</span>
-pip install -U <span class="hljs-string">&quot;pymilvus[bulk_writer]&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
+pip install -U &quot;pymilvus[bulk_writer]&quot;
 
 milvus-lite dump -h
 
 usage: milvus-lite dump [-h] [-d DB_FILE] [-c COLLECTION] [-p PATH]
 
 optional arguments:
-  -h, --<span class="hljs-built_in">help</span>            show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
+  -h, --help            show this help message and exit
   -d DB_FILE, --db-file DB_FILE
                         milvus lite db file
   -c COLLECTION, --collection COLLECTION
                         collection that need to be dumped
-  -p PATH, --path PATH  dump file storage <span class="hljs-built_in">dir</span>
+  -p PATH, --path PATH  dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
 <p>以下の例では、<code translate="no">./milvus_demo.db</code> (Milvus Liteデータベースファイル)に保存されている<code translate="no">demo_collection</code> コレクションの全データをダンプします。</p>
 <p>データをエクスポートする：</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
-<span class="hljs-comment"># ./milvus_demo.db: milvus lite db file</span>
-<span class="hljs-comment"># demo_collection: collection that need to be dumped</span>
-<span class="hljs-comment">#./data_dir : dump file storage dir</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">./milvus_demo.db: milvus lite db file</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">demo_collection: collection that need to be dumped</span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash">./data_dir : dump file storage <span class="hljs-built_in">dir</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <p>このダンプファイルを使って、<a href="https://docs.zilliz.com/docs/data-import">Data Importで</a>Zilliz Cloudにデータをアップロードしたり、<a href="https://milvus.io/docs/import-data.md">Bulk Insertで</a>Milvusサーバにデータをアップロードすることができます。</p>
 <h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -407,6 +407,6 @@ optional arguments:
 </ul></li>
 <li><p><a href="/docs/ja/milvus_backup_overview.md">Milvusの</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
 <li><p>Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherの</a>ご紹介。</p></li>
-<li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://milvus.io/docs/attu.md">Attuを</a>ご覧ください。</p></li>
+<li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://github.com/zilliztech/attu">Attuを</a>ご紹介します。</p></li>
 <li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Pode escolher o caminho de atualização para o seu Milvus da seguinte forma:</p>
-<div style="display: none;">- [Conduzir uma atualização contínua](#conduct-a-rolling-upgrade) do Milvus v2.2.3 e versões posteriores para a v2.5.9.</div>
+<div style="display: none;">- [Conduzir uma atualização contínua](#conduct-a-rolling-upgrade) do Milvus v2.2.3 e versões posteriores para a v2.5.10.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Atualizar o Milvus utilizando o Helm</a> para uma atualização de uma versão menor antes da v2.2.3 para a v2.5.9.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrar os metadados</a> antes da atualização do Milvus v2.1.x para a v2.5.9.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Atualizar o Milvus utilizando o Helm</a> para uma atualização de uma versão menor antes da v2.2.3 para a v2.5.10.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrar os metadados</a> antes da atualização do Milvus v2.1.x para a v2.5.10.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Realizar uma atualização contínua<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -140,13 +140,13 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tbody>
 <tr><td><code translate="no">i</code></td><td>Nome da instância Milvus</td><td><code translate="no">None</code></td><td>Verdadeiro</td></tr>
 <tr><td><code translate="no">n</code></td><td>Espaço de nomes em que o Milvus está instalado</td><td><code translate="no">default</code></td><td>Falso</td></tr>
-<tr><td><code translate="no">t</code></td><td>Versão de destino do Milvus</td><td><code translate="no">None</code></td><td>Verdadeiro</td></tr>
+<tr><td><code translate="no">t</code></td><td>Versão alvo do Milvus</td><td><code translate="no">None</code></td><td>Verdadeiro</td></tr>
 <tr><td><code translate="no">w</code></td><td>Nova etiqueta de imagem do Milvus</td><td><code translate="no">milvusdb/milvus:v2.2.3</code></td><td>Verdadeiro</td></tr>
 <tr><td><code translate="no">o</code></td><td>Funcionamento</td><td><code translate="no">update</code></td><td>Falso</td></tr>
 </tbody>
 </table>
-<p>Depois de ter assegurado que todas as implementações na sua instância Milvus estão no seu estado normal. Pode executar o seguinte comando para atualizar a instância do Milvus para a versão 2.5.9.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.9 -w &#x27;milvusdb/milvus:v2.5.9&#x27;
+<p>Depois de se ter assegurado de que todas as implementações na sua instância Milvus estão no seu estado normal. Pode executar o seguinte comando para atualizar a instância do Milvus para a versão 2.5.10.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.10 -w &#x27;milvusdb/milvus:v2.5.10&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -230,7 +230,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <span class="hljs-meta prompt_"># </span><span class="language-bash">milvusdb/milvus:v2.1.4</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="4-Migrate-the-metadata" class="common-anchor-header">4. Migrar os metadados</h3><p>Uma grande mudança no Milvus 2.2 é a estrutura de metadados dos índices de segmento. Por conseguinte, é necessário utilizar o Helm para migrar os metadados durante a atualização do Milvus da v2.1.x para a v2.2.0. Eis <a href="https://github.com/milvus-io/milvus/blob/master/deployments/migrate-meta/migrate.sh">um script</a> para migrar os metadados em segurança.</p>
-<p>Este script se aplica apenas ao Milvus instalado em um cluster K8s. Se ocorrer um erro durante o processo, reverta primeiro para a versão anterior com a operação de reversão.</p>
+<p>Este script só se aplica ao Milvus instalado em um cluster K8s. Se ocorrer um erro durante o processo, reverta primeiro para a versão anterior com a operação de reversão.</p>
 <p>A tabela seguinte lista as operações que pode efetuar para a meta-migração.</p>
 <table>
 <thead>

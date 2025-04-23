@@ -98,8 +98,8 @@ title: 本地運行 Milvus Lite
         ></path>
       </svg>
     </button></h2><p>在<code translate="no">pymilvus</code> 中，指定一個本地檔案名稱作為 MilvusClient 的 uri 參數，將會使用 Milvus Lite。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>執行上述程式碼片段後，會在目前的資料夾中產生一個名為<strong>milvus_demo.db</strong>的資料庫檔案。</p>
 <blockquote>
@@ -347,27 +347,27 @@ res = client.delete(
       </svg>
     </button></h2><p>所有儲存於 Milvus Lite 的資料都可以輕鬆匯出並載入其他類型的 Milvus 部署，例如 Docker 上的 Milvus Standalone、K8s 上的 Milvus Distributed 或<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上的完全管理式 Milvus。</p>
 <p>Milvus Lite 提供一個命令列工具，可以將資料轉換成 json 檔案，並將其匯入<a href="https://github.com/milvus-io/milvus">Milvus</a>和<a href="https://zilliz.com/cloud">Zilliz Cloud</a>(Milvus 的完全管理雲端服務)。milvus-lite 指令會與 milvus-lite python 套件一起安裝。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Install</span>
-pip install -U <span class="hljs-string">&quot;pymilvus[bulk_writer]&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
+pip install -U &quot;pymilvus[bulk_writer]&quot;
 
 milvus-lite dump -h
 
 usage: milvus-lite dump [-h] [-d DB_FILE] [-c COLLECTION] [-p PATH]
 
 optional arguments:
-  -h, --<span class="hljs-built_in">help</span>            show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
+  -h, --help            show this help message and exit
   -d DB_FILE, --db-file DB_FILE
                         milvus lite db file
   -c COLLECTION, --collection COLLECTION
                         collection that need to be dumped
-  -p PATH, --path PATH  dump file storage <span class="hljs-built_in">dir</span>
+  -p PATH, --path PATH  dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
 <p>以下範例會將<code translate="no">demo_collection</code> 套件中儲存於<code translate="no">./milvus_demo.db</code> (Milvus Lite 資料庫檔案) 的所有資料匯出。</p>
 <p>匯出資料：</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
-<span class="hljs-comment"># ./milvus_demo.db: milvus lite db file</span>
-<span class="hljs-comment"># demo_collection: collection that need to be dumped</span>
-<span class="hljs-comment">#./data_dir : dump file storage dir</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">./milvus_demo.db: milvus lite db file</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">demo_collection: collection that need to be dumped</span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash">./data_dir : dump file storage <span class="hljs-built_in">dir</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <p>使用轉儲檔案，您可以透過<a href="https://docs.zilliz.com/docs/data-import">資料匯入</a>上傳資料到 Zilliz Cloud，或透過<a href="https://milvus.io/docs/import-data.md">大量插入</a>上傳資料到 Milvus 伺服器。</p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -407,6 +407,6 @@ optional arguments:
 </ul></li>
 <li><p>探索<a href="/docs/zh-hant/milvus_backup_overview.md">Milvus 備份</a>，Milvus 資料備份的開放原始碼工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/birdwatcher_overview.md">Birdwatcher</a>，用於調試 Milvus 和動態配置更新的開放源碼工具。</p></li>
-<li><p>探索<a href="https://milvus.io/docs/attu.md">Attu</a>，用於直覺式 Milvus 管理的開放原始碼 GUI 工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一個用於直覺式 Milvus 管理的開放原始碼 GUI 工具。</p></li>
 <li><p><a href="/docs/zh-hant/monitor.md">使用 Prometheus 監控 Milvus</a>。</p></li>
 </ul>

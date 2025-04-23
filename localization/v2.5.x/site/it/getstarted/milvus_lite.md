@@ -62,7 +62,7 @@ title: Eseguire Milvus Lite a livello locale
 <li>Ubuntu &gt;= 20.04 (x86_64 e arm64)</li>
 <li>MacOS &gt;= 11.0 (Apple Silicon M1/M2 e x86_64)</li>
 </ul>
-<p>Si noti che Milvus Lite è adatto solo per casi di ricerca vettoriale su piccola scala. Per i casi di utilizzo su larga scala, si consiglia di utilizzare <a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a> o <a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>. Si può anche prendere in considerazione Milvus completamente gestito su <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
+<p>Si noti che Milvus Lite è adatto solo per casi di ricerca vettoriale su piccola scala. Per i casi di utilizzo su larga scala, si consiglia di utilizzare <a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a> o <a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>. Si può anche considerare Milvus completamente gestito su <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Configurazione di Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,7 +81,7 @@ title: Eseguire Milvus Lite a livello locale
     </button></h2><pre><code translate="no" class="language-shell">pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Si consiglia di utilizzare <code translate="no">pymilvus</code>. Dal momento che <code translate="no">milvus-lite</code> è incluso in <code translate="no">pymilvus</code> versione 2.4.2 o superiore, è possibile <code translate="no">pip install</code> con <code translate="no">-U</code> per forzare l'aggiornamento all'ultima versione e <code translate="no">milvus-lite</code> viene installato automaticamente.</p>
-<p>Se si desidera installare esplicitamente il pacchetto <code translate="no">milvus-lite</code>, o se si è installata una versione precedente di <code translate="no">milvus-lite</code> e si desidera aggiornarla, si può utilizzare <code translate="no">pip install -U milvus-lite</code>.</p>
+<p>Se si desidera installare esplicitamente il pacchetto <code translate="no">milvus-lite</code>, o se si è installata una versione precedente di <code translate="no">milvus-lite</code> e si desidera aggiornarla, si può usare <code translate="no">pip install -U milvus-lite</code>.</p>
 <h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">Connettersi a Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,12 +98,12 @@ title: Eseguire Milvus Lite a livello locale
         ></path>
       </svg>
     </button></h2><p>In <code translate="no">pymilvus</code>, specificando un nome di file locale come parametro uri di MilvusClient, si utilizzerà Milvus Lite.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Dopo aver eseguito il frammento di codice di cui sopra, nella cartella corrente verrà generato un file di database denominato <strong>milvus_demo.db</strong>.</p>
 <blockquote>
-<p><strong><em>NOTA:</em></strong> Si noti che la stessa API si applica anche a Milvus Standalone, Milvus Distributed e Zilliz Cloud; l'unica differenza consiste nel sostituire il nome del file locale con l'endpoint del server remoto e le credenziali, ad esempio<code translate="no">client = MilvusClient(uri=&quot;http://localhost:19530&quot;, token=&quot;username:password&quot;)</code>.</p>
+<p><strong><em>NOTA:</em></strong> Si noti che la stessa API si applica anche a Milvus Standalone, Milvus Distributed e Zilliz Cloud, con l'unica differenza di sostituire il nome del file locale con l'endpoint del server remoto e le credenziali, ad esempio<code translate="no">client = MilvusClient(uri=&quot;http://localhost:19530&quot;, token=&quot;username:password&quot;)</code>.</p>
 </blockquote>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -326,7 +326,7 @@ res = client.delete(
 </tbody>
 </table>
 <h3 id="Vector-Index-Types" class="common-anchor-header">Tipi di indici vettoriali</h3><p>Milvus Lite supporta solo il tipo di indice <a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>. Utilizza il tipo FLAT indipendentemente dal tipo di indice specificato nella raccolta.</p>
-<h3 id="Search-Features" class="common-anchor-header">Caratteristiche di ricerca</h3><p>Milvus Lite supporta le funzioni Sparse Vector, Multi-vector e Hybrid Search.</p>
+<h3 id="Search-Features" class="common-anchor-header">Caratteristiche della ricerca</h3><p>Milvus Lite supporta le funzioni Sparse Vector, Multi-vector e Hybrid Search.</p>
 <h3 id="Partition" class="common-anchor-header">Partizione</h3><p>Milvus Lite non supporta le partizioni e i metodi relativi alle partizioni.</p>
 <h3 id="Users--Roles" class="common-anchor-header">Utenti e ruoli</h3><p>Milvus Lite non supporta utenti e ruoli e i relativi metodi.</p>
 <h3 id="Alias" class="common-anchor-header">Alias</h3><p>Milvus Lite non supporta gli alias e i metodi relativi agli alias.</p>
@@ -346,30 +346,30 @@ res = client.delete(
         ></path>
       </svg>
     </button></h2><p>Tutti i dati memorizzati in Milvus Lite possono essere facilmente esportati e caricati in altri tipi di distribuzione Milvus, come Milvus Standalone su Docker, Milvus Distributed su K8s o Milvus completamente gestito su <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
-<p>Milvus Lite fornisce uno strumento a riga di comando che consente di scaricare i dati in un file json, che può essere importato in <a href="https://github.com/milvus-io/milvus">Milvus</a> e <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(il servizio cloud completamente gestito per Milvus). Il comando milvus-lite viene installato insieme al pacchetto python milvus-lite.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Install</span>
-pip install -U <span class="hljs-string">&quot;pymilvus[bulk_writer]&quot;</span>
+<p>Milvus Lite fornisce uno strumento a riga di comando che consente di scaricare i dati in un file json, che può essere importato in <a href="https://github.com/milvus-io/milvus">Milvus</a> e <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(il servizio cloud completamente gestito per Milvus). Il comando milvus-lite sarà installato insieme al pacchetto python milvus-lite.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
+pip install -U &quot;pymilvus[bulk_writer]&quot;
 
 milvus-lite dump -h
 
 usage: milvus-lite dump [-h] [-d DB_FILE] [-c COLLECTION] [-p PATH]
 
 optional arguments:
-  -h, --<span class="hljs-built_in">help</span>            show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
+  -h, --help            show this help message and exit
   -d DB_FILE, --db-file DB_FILE
                         milvus lite db file
   -c COLLECTION, --collection COLLECTION
                         collection that need to be dumped
-  -p PATH, --path PATH  dump file storage <span class="hljs-built_in">dir</span>
+  -p PATH, --path PATH  dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
 <p>L'esempio seguente esporta tutti i dati della collezione <code translate="no">demo_collection</code> memorizzati in <code translate="no">./milvus_demo.db</code> (file del database Milvus Lite).</p>
 <p>Per esportare i dati:</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
-<span class="hljs-comment"># ./milvus_demo.db: milvus lite db file</span>
-<span class="hljs-comment"># demo_collection: collection that need to be dumped</span>
-<span class="hljs-comment">#./data_dir : dump file storage dir</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">./milvus_demo.db: milvus lite db file</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">demo_collection: collection that need to be dumped</span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash">./data_dir : dump file storage <span class="hljs-built_in">dir</span></span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Con il file di dump, è possibile caricare i dati su Zilliz Cloud tramite <a href="https://docs.zilliz.com/docs/data-import">Data Import</a>, oppure caricare i dati sui server Milvus tramite <a href="https://milvus.io/docs/import-data.md">Bulk Insert</a>.</p>
+<p>Con il file di dump, è possibile caricare i dati su Zilliz Cloud tramite <a href="https://docs.zilliz.com/docs/data-import">Data Import</a> o caricare i dati sui server Milvus tramite <a href="https://milvus.io/docs/import-data.md">Bulk Insert</a>.</p>
 <h2 id="Whats-next" class="common-anchor-header">Cosa succede dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -407,6 +407,6 @@ optional arguments:
 </ul></li>
 <li><p>Esplorate <a href="/docs/it/milvus_backup_overview.md">Milvus Backup</a>, uno strumento open-source per il backup dei dati di Milvus.</p></li>
 <li><p>Esplorate <a href="/docs/it/birdwatcher_overview.md">Birdwatcher</a>, uno strumento open-source per il debug di Milvus e gli aggiornamenti dinamici della configurazione.</p></li>
-<li><p>Esplorate <a href="https://milvus.io/docs/attu.md">Attu</a>, uno strumento open-source per la gestione intuitiva di Milvus.</p></li>
+<li><p>Esplorate <a href="https://github.com/zilliztech/attu">Attu</a>, uno strumento open-source per la gestione intuitiva di Milvus.</p></li>
 <li><p><a href="/docs/it/monitor.md">Monitorate Milvus con Prometheus</a>.</p></li>
 </ul>

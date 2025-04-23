@@ -59,8 +59,8 @@ title: Запуск Milvus с поддержкой GPU с помощью Docker 
         ></path>
       </svg>
     </button></h2><p>Чтобы установить Milvus с поддержкой GPU с помощью Docker Compose, выполните следующие действия.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Загрузите и настройте YAML-файл</h3><p>Скачайте <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.9/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> и сохраните его как docker-compose.yml вручную или с помощью следующей команды.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.9/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Загрузите и настройте YAML-файл</h3><p>Скачайте <a href="https://github.com/milvus-io/milvus/releases/download/v2.5.10/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> и сохраните его как docker-compose.yml вручную или с помощью следующей команды.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.5.10/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>В YAML-файле необходимо внести некоторые изменения в переменные окружения автономной службы:</p>
 <ul>
@@ -219,6 +219,6 @@ docker start &lt;milvus_container_id&gt;
 <li><p>Изучите <a href="/docs/ru/milvus-webui.md">Milvus WebUI</a>, интуитивно понятный веб-интерфейс для наблюдения и управления Milvus.</p></li>
 <li><p>Изучите <a href="/docs/ru/milvus_backup_overview.md">Milvus Backup</a>, инструмент с открытым исходным кодом для резервного копирования данных Milvus.</p></li>
 <li><p>Изучите <a href="/docs/ru/birdwatcher_overview.md">Birdwatcher</a>, инструмент с открытым исходным кодом для отладки Milvus и динамического обновления конфигурации.</p></li>
-<li><p>Изучите <a href="https://milvus.io/docs/attu.md">Attu</a>, инструмент с открытым исходным кодом GUI для интуитивного управления Milvus.</p></li>
+<li><p>Изучите <a href="https://github.com/zilliztech/attu">Attu</a>, инструмент с открытым исходным кодом GUI для интуитивного управления Milvus.</p></li>
 <li><p><a href="/docs/ru/monitor.md">Мониторинг Milvus с помощью Prometheus</a>.</p></li>
 </ul>

@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以為您的 Milvus 選擇升級路徑，如下所示：</p>
-<div style="display: none;">- 進行滾動升級](#conduct-a-rolling-upgrade) 從 Milvus v2.2.3 及以後的版本升級到 v2.5.9。</div>
+<div style="display: none;">- 進行滾動升級](#conduct-a-rolling-upgrade) 從 Milvus v2.2.3 及以後的版本升級到 v2.5.10。</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升級 Milvus</a>，從 v2.2.3 之前的次要版本升級到 v2.5.9。</p></li>
-<li><p>在從 Milvus v2.1.x 升級到 v2.5.9 之前<a href="#Migrate-the-metadata">遷移元資料</a>。</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升級 Milvus</a>，從 v2.2.3 之前的次要版本升級到 v2.5.10。</p></li>
+<li><p>在從 Milvus v2.1.x 升級到 v2.5.10 之前<a href="#Migrate-the-metadata">遷移元資料</a>。</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">進行滾動升級<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -131,7 +131,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
       </svg>
     </button></h2><p>自 Milvus 2.2.3 起，您可以設定 Milvus 協調器工作在主動待命模式，並啟用它們的滾動升級功能，以便 Milvus 能在協調器升級期間回應傳入的請求。在之前的版本中，協調器需要在升級過程中移除然後再創建，這可能會導致服務出現一定的停機時間。</p>
 <p>滾動升級需要協調器在主動待命模式下工作。您可以使用我們提供的<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">腳本</a>，設定協調器在主動待命模式下工作，並開始滾動升級。</p>
-<p>基於 Kubernetes 提供的滾動更新功能，上述腳本會根據部署的依賴關係強制執行有序更新。此外，Milvus 實作了一套機制，以確保其元件在升級過程中與依賴元件的系統保持相容，大幅減少潛在的服務停機時間。</p>
+<p>基於 Kubernetes 提供的滾動更新功能，上述腳本會根據部署的依賴關係強制執行有序更新。此外，Milvus 實作了一套機制，以確保其元件在升級期間仍能與那些依賴它們的元件相容，大幅減少潛在的服務停機時間。</p>
 <p>該腳本只適用於與 Helm 一起安裝的 Milvus 的升級。下表列出了腳本中可用的命令旗標。</p>
 <table>
 <thead>
@@ -145,14 +145,14 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作</td><td><code translate="no">update</code></td><td>假</td></tr>
 </tbody>
 </table>
-<p>一旦您確保 Milvus 實例中的所有部署都處於正常狀態。您可以執行以下指令，將 Milvus 實例升級至 2.5.9。</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.9 -w &#x27;milvusdb/milvus:v2.5.9&#x27;
+<p>一旦您確保 Milvus 實例中的所有部署都處於正常狀態。您可以執行以下指令，將 Milvus 實例升級至 2.5.10。</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.10 -w &#x27;milvusdb/milvus:v2.5.10&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
 <li>腳本硬體編碼了部署的升級順序，無法變更。</li>
 <li>腳本使用<code translate="no">kubectl patch</code> 更新部署，並使用<code translate="no">kubectl rollout status</code> 觀察其狀態。</li>
-<li>腳本使用<code translate="no">kubectl patch</code> 將部署的<code translate="no">app.kubernetes.io/version</code> 標籤更新為指令中<code translate="no">-t</code> 旗標之後指定的標籤。</li>
+<li>腳本使用<code translate="no">kubectl patch</code> 更新部署的<code translate="no">app.kubernetes.io/version</code> 標籤，使其成為指令中<code translate="no">-t</code> 旗標之後指定的標籤。</li>
 </ol>
 </div>
 </div>

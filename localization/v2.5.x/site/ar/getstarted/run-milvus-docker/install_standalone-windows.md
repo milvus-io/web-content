@@ -61,16 +61,16 @@ title: تشغيل Milvus في Docker (لينكس)
 <ol>
 <li><p>افتح Docker Desktop في وضع المسؤول عن طريق النقر بزر الماوس الأيمن واختيار <strong>تشغيل كمسؤول</strong>.</p></li>
 <li><p>قم بتنزيل البرنامج النصي للتثبيت واحفظه باسم <code translate="no">standalone.bat</code>.</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;<span class="hljs-title class_">Invoke</span>-<span class="hljs-title class_">WebRequest</span> <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​</span>
+<pre><code translate="no" class="language-powershell">C:\&gt;Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 <li><p>قم بتشغيل البرنامج النصي الذي تم تنزيله لبدء تشغيل ميلفوس كحاوية Docker.</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-attr">C</span>:\&gt;standalone.<span class="hljs-property">bat</span> start​
-<span class="hljs-title class_">Wait</span> <span class="hljs-keyword">for</span> <span class="hljs-title class_">Milvus</span> starting...​
-<span class="hljs-title class_">Start</span> successfully.​
-<span class="hljs-title class_">To</span> change the <span class="hljs-keyword">default</span> <span class="hljs-title class_">Milvus</span> configuration, edit user.<span class="hljs-property">yaml</span> and restart the service.​
+<pre><code translate="no" class="language-powershell">C:\&gt;standalone.bat start​
+Wait for Milvus starting...​
+Start successfully.​
+To change the default Milvus configuration, edit user.yaml and restart the service.​
 
-<button class="copy-code-btn"></button></code></pre>
+</code></pre>
 <p>بعد تشغيل البرنامج النصي للتثبيت.</p>
 <ul>
 <li><p>تم بدء تشغيل حاوية docker باسم <strong>milvus-standalone</strong> على المنفذ <strong>19530</strong>.</p></li>
@@ -78,16 +78,16 @@ title: تشغيل Milvus في Docker (لينكس)
 <li><p>يتم تعيين وحدة تخزين بيانات Milvus إلى <strong>volumes/milvus</strong> في المجلد الحالي.</p></li>
 </ul>
 <p>يمكنك استخدام الأوامر التالية لإدارة حاوية Milvus والبيانات المخزنة.</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-comment"># Stop Milvus​</span>
+<pre><code translate="no" class="language-powershell"># Stop Milvus​
 C:\&gt;standalone.bat stop​
 Stop successfully.​
 ​
-<span class="hljs-comment"># Delete Milvus container​</span>
+# Delete Milvus container​
 C:\&gt;standalone.bat delete​
-Delete Milvus container successfully. <span class="hljs-comment"># Container has been removed.​</span>
-Delete successfully. <span class="hljs-comment"># Data has been removed.​</span>
+Delete Milvus container successfully. # Container has been removed.​
+Delete successfully. # Data has been removed.​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 </ol>
 <h3 id="From-WSL-2​" class="common-anchor-header">من WSL 2</h3><p>إذا كنت تفضل بدء تشغيل ميلفوس باستخدام أوامر لينكس والبرامج النصية على ويندوز، تأكد من أنك قمت بالفعل بتثبيت الأمر WSL 2. للحصول على تفاصيل حول كيفية تثبيت الأمر WSL 2، يمكنك الرجوع إلى <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">مقالة مايكروسوفت</a> هذه.</p>
 <ol>
@@ -96,7 +96,7 @@ Delete successfully. <span class="hljs-comment"># Data has been removed.​</spa
 Ubuntu already installed.​
 Starting Ubuntu...​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 <li><p>قم بتنزيل البرنامج النصي للتثبيت</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Download the installation script​</span>
 $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh​
@@ -109,7 +109,7 @@ $ bash standalone_embed.sh start​
 <pre><code translate="no" class="language-bash">$ bash standalone_embed.sh start​
 Wait <span class="hljs-keyword">for</span> Milvus Starting...​
 Start successfully.​
-To change the <span class="hljs-literal">default</span> Milvus configuration, <span class="hljs-keyword">add</span> your settings to the user.yaml file <span class="hljs-keyword">and</span> then restart the service.​
+To change the default Milvus configuration, add your settings to the user.yaml file and <span class="hljs-keyword">then</span> restart the service.​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك استخدام الأوامر التالية لإدارة حاوية ميلفوس والبيانات المخزنة.</p>
@@ -143,17 +143,17 @@ Delete successfully.​
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">من PowerShell أو موجه أوامر Windows</h3><ol>
 <li><p>افتح Docker Desktop في وضع المسؤول عن طريق النقر بزر الماوس الأيمن وتحديد <strong>تشغيل كمسؤول</strong>.</p></li>
 <li><p>قم بتشغيل الأوامر التالية في PowerShell أو موجه أوامر Windows لتنزيل ملف تكوين Docker Compose لـ Milvus Standalone وبدء تشغيل Milvus.</p>
-<pre><code translate="no" class="language-powershell"><span class="hljs-comment"># Download the configuration file and rename it as docker-compose.yml​</span>
+<pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
 C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
-<span class="hljs-comment"># Start Milvus​</span>
+# Start Milvus​
 C:\&gt;docker compose up -d​
-Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
-Creating milvus-minio ... <span class="hljs-keyword">done</span>​
-Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
+Creating milvus-etcd  ... done​
+Creating milvus-minio ... done​
+Creating milvus-standalone ... done​
 
-<button class="copy-code-btn"></button></code></pre>
-<p>اعتمادًا على اتصال الشبكة لديك، قد يستغرق تنزيل الصور لتثبيت Milvus بعض الوقت. بمجرد أن تصبح الحاويات المسماة <strong>milvus-standalone</strong> و <strong>milvus-minio</strong> و <strong>milvus-etcd</strong> جاهزة يمكنك مشاهدة ما يلي</p>
+</code></pre>
+<p>اعتمادًا على اتصال الشبكة لديك، قد يستغرق تنزيل الصور لتثبيت Milvus بعض الوقت. بمجرد أن تصبح الحاويات المسماة <strong>milvus-standalone</strong> و <strong>milvus-minio</strong> و <strong>milvus-etcd</strong> جاهزة، يمكنك مشاهدة ما يلي</p>
 <ul>
 <li><p>لا تعرض حاوية <strong>milvus-etcd</strong> أي منافذ للمضيف وتقوم بتعيين بياناتها إلى <strong>وحدات التخزين/etcd</strong> في المجلد الحالي.</p></li>
 <li><p>تخدم حاوية <strong>milvus-minio</strong> المنفذين <strong>9090</strong> <strong>و9091</strong> محليًا باستخدام بيانات اعتماد المصادقة الافتراضية وتعيّن بياناتها إلى <strong>وحدات التخزين/minio</strong> في المجلد الحالي.</p></li>
@@ -168,17 +168,17 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
 Ubuntu already installed.​
 Starting Ubuntu...​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 <li><p>قم بتنزيل ملف تهيئة ميلفوس.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>ابدأ تشغيل ميلفوس.</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose up -d​
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d​</span>
 ​
-Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
-Creating milvus-minio ... <span class="hljs-keyword">done</span>​
-Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
+Creating milvus-etcd  ... done​
+Creating milvus-minio ... done​
+Creating milvus-standalone ... done​
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
@@ -210,24 +210,24 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
 <li><p>تحقق من بدء تشغيل خدمة Docker Desktop Service.</p>
 <p>يمكنك تشغيل الأمر التالي لبدء تشغيل خدمة Docker Desktop Service.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
-The Docker <span class="hljs-keyword">for</span> Windows Service service <span class="hljs-keyword">is</span> starting.​
-The Docker <span class="hljs-keyword">for</span> Windows Service service was started successfully.​
+The Docker for Windows Service service is starting.​
+The Docker for Windows Service service was started successfully.​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 <li><p>تحقق مما إذا كان قد تم تثبيت WSL بشكل صحيح.</p>
 <p>يمكنك تشغيل الأمر التالي لتثبيت الأمر WSL 2 أو تحديثه.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
-Checking <span class="hljs-keyword">for</span> updates.​
-The most recent version of Windows Subsystem <span class="hljs-keyword">for</span> Linux <span class="hljs-keyword">is</span> already installed.​
+Checking for updates.​
+The most recent version of Windows Subsystem for Linux is already installed.​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 <li><p>تحقق مما إذا كان قد تم بدء تشغيل Docker Daemon.</p>
 <p>تحتاج إلى الانتقال إلى دليل تثبيت Docker Desktop وتشغيل <code translate="no">.\DockerCli.exe -SwitchDaemon</code> لبدء تشغيل Docker Daemon.</p>
-<pre><code translate="no" class="language-powershell">C:\&gt;cd <span class="hljs-string">&quot;C:\Program Files\Docker\Docker&quot;</span>​
+<pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
-Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/engine/switch&quot;</span>: <span class="hljs-built_in">open</span> \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
+Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
-<button class="copy-code-btn"></button></code></pre></li>
+</code></pre></li>
 <li><p>تحقق مما إذا كنت قد بدأت تشغيل Docker Desktop في وضع <strong>المسؤول</strong>.</p>
 <p>تأكد من بدء تشغيل Docker Desktop في وضع المسؤول. للقيام بذلك، انقر بزر الماوس الأيمن على <strong>Docker Desktop</strong> واختر <strong>تشغيل كمسؤول</strong>.</p>
 <p>
@@ -252,7 +252,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>فشل قراءة موجه خطأ في قراءة التكوين أثناء بدء تشغيل Milvus</span> </span></p>
-<p>للتعامل مع الخطأ الذي يُطلب منك أثناء بدء تشغيل Milvus الذي يقرأ "فشل قراءة التهيئة"، عليك التحقق مما إذا كان وحدة التخزين المثبتة في حاوية Milvus صحيحة. إذا كان وحدة التخزين مثبتة بشكل صحيح في الحاوية، يمكنك استخدام الأمر <code translate="no">docker exec</code> للدخول إلى الحاوية وإدراج مجلد <strong>/milvus/configs</strong> على النحو التالي.</p>
+<p>للتعامل مع الخطأ الذي يُطلب منك أثناء بدء تشغيل Milvus والذي يقرأ "فشل قراءة التهيئة"، عليك التحقق مما إذا كان وحدة التخزين المثبتة في حاوية Milvus صحيحة. إذا كان وحدة التخزين مثبتة بشكل صحيح في الحاوية، يمكنك استخدام الأمر <code translate="no">docker exec</code> للدخول إلى الحاوية وإدراج مجلد <strong>/milvus/configs</strong> على النحو التالي.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
@@ -281,7 +281,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 <li><a href="/docs/ar/manage_databases.md">إدارة قواعد البيانات</a></li>
 <li><a href="/docs/ar/manage-collections.md">إدارة المجموعات</a></li>
 <li><a href="/docs/ar/manage-partitions.md">إدارة الأقسام</a></li>
-<li><a href="/docs/ar/insert-update-delete.md">إدراج وإضافة وحذف</a></li>
+<li><a href="/docs/ar/insert-update-delete.md">إدراج وإدراج وحذف وإدراج وحذف</a></li>
 <li><a href="/docs/ar/single-vector-search.md">البحث في متجه واحد</a></li>
 <li><a href="/docs/ar/multi-vector-search.md">البحث الهجين</a></li>
 </ul></li>
@@ -296,6 +296,6 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 <li><p>استكشف <a href="/docs/ar/milvus-webui.md">واجهة Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
 <li><p>استكشف Milvus <a href="/docs/ar/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
 <li><p>استكشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
-<li><p>استكشف <a href="https://milvus.io/docs/attu.md">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
-<li><p><a href="/docs/ar/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
+<li><p>استكشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
+<li><p><a href="/docs/ar/monitor.md">مراقبة ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

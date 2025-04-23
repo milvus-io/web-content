@@ -19,6 +19,48 @@ title: Catatan Rilis
         ></path>
       </svg>
     </button></h1><p>Cari tahu apa yang baru di Milvus! Halaman ini merangkum fitur-fitur baru, peningkatan, masalah yang diketahui, dan perbaikan bug di setiap rilis. Anda dapat menemukan catatan rilis untuk setiap versi yang dirilis setelah v2.5.0 di bagian ini. Kami menyarankan agar Anda secara teratur mengunjungi halaman ini untuk mengetahui pembaruan.</p>
+<h2 id="v2510" class="common-anchor-header">v2.5.10<button data-href="#v2510" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Tanggal rilis: 21 April 2025</p>
+<table>
+<thead>
+<tr><th>Versi Milvus</th><th>Versi Python SDK</th><th>Versi SDK Node.js</th><th>Versi Java SDK</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.10</td><td>2.5.6</td><td>2.5.8</td><td>2.5.7</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.10 memberikan peningkatan kinerja pencarian dan pemuatan, pelaporan metrik yang lebih baik, dan dukungan SVE yang diperluas untuk komputasi metrik yang dipercepat. Rilis ini juga mencakup beberapa perbaikan bug yang meningkatkan stabilitas dan ketepatan. Kami mendorong Anda untuk meng-upgrade atau mencobanya-umpan balik Anda sangat berharga dalam membantu kami membuat Milvus menjadi lebih baik!</p>
+<h3 id="Improvements" class="common-anchor-header">Perbaikan</h3><ul>
+<li>Abaikan metrik indeks pelaporan untuk indeks yang tidak ada<a href="https://github.com/milvus-io/milvus/pull/41296">(#41296</a>)</li>
+<li>Gunakan mode pemindaian untuk LIKE bahkan ketika ada indeks terbalik<a href="https://github.com/milvus-io/milvus/pull/41309">(#41309</a>)</li>
+<li>Mengoptimalkan kinerja untuk ekspresi SUKA<a href="https://github.com/milvus-io/milvus/pull/41222">(#41222)</a></li>
+<li>Mengoptimalkan format indeks untuk meningkatkan kinerja pemuatan<a href="https://github.com/milvus-io/milvus/pull/41041">(#41041</a>)</li>
+<li>RESTful: membuat batas waktu default dapat dikonfigurasi<a href="https://github.com/milvus-io/milvus/pull/41225">(#41225</a>)</li>
+<li>Mengaktifkan dukungan SVE untuk komputasi metrik L2 dalam fungsi FP16 / NY<a href="https://github.com/zilliztech/knowhere/pull/1134">(knowhere #1134</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<li>Memperbaiki indeks JSON yang tidak berfungsi untuk filter string<a href="https://github.com/milvus-io/milvus/pull/41383">(#41383</a>)</li>
+<li>Lewati pemeriksaan dimensi untuk bidang non-vektor dalam pemeriksaan awal<a href="https://github.com/milvus-io/milvus/pull/41329">(#41329)</a></li>
+<li>Alter collection sekarang memperbarui skema dengan benar<a href="https://github.com/milvus-io/milvus/pull/41308">(#41308</a>)</li>
+<li>Perbarui versi knowhere untuk memperbaiki build macOS<a href="https://github.com/milvus-io/milvus/pull/41315">(#41315</a>)</li>
+<li>Mencegah kepanikan saat mendaftarkan indeks sebelum inisialisasi indeks segmen selesai<a href="https://github.com/milvus-io/milvus/pull/41299">(#41299</a>)</li>
+<li>Mengatasi regresi kinerja dengan mengubah level log<a href="https://github.com/milvus-io/milvus/pull/41269">(#41269</a>)</li>
+<li>Tutup klien sebelum menghapus klien pekerja<a href="https://github.com/milvus-io/milvus/pull/41254">(#41254</a>)</li>
+</ul>
 <h2 id="v259" class="common-anchor-header">v2.5.9<button data-href="#v259" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -383,7 +425,7 @@ title: Catatan Rilis
 <tr><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>Kami sangat senang mengumumkan rilis Milvus 2.5.4, yang memperkenalkan pengoptimalan kinerja utama dan fitur-fitur baru seperti isolasi PartitionKey, Sparse Index dengan DAAT MaxScore, dan mekanisme penguncian yang disempurnakan. Sorotan yang menonjol dari rilis ini adalah dukungannya untuk 10.000 koleksi dan 1 juta partisi, yang menandai tonggak penting untuk kasus penggunaan multi-penyewa. Versi ini juga mengatasi beberapa bug yang meningkatkan stabilitas dan keandalan secara keseluruhan, dua bug kritis dapat menyebabkan kehilangan data. Kami mendorong Anda untuk meng-upgrade atau mencoba rilis terbaru ini, dan kami menantikan umpan balik Anda untuk membantu kami terus menyempurnakan Milvus!</p>
+<p>Kami sangat senang mengumumkan rilis Milvus 2.5.4, yang memperkenalkan pengoptimalan kinerja utama dan fitur-fitur baru seperti isolasi PartitionKey, Sparse Index dengan DAAT MaxScore, dan mekanisme penguncian yang disempurnakan. Sorotan yang menonjol dari rilis ini adalah dukungannya untuk 10.000 koleksi dan 1 juta partisi, yang menandai tonggak penting untuk kasus penggunaan multi-penyewa. Versi ini juga menangani beberapa bug yang meningkatkan stabilitas dan keandalan secara keseluruhan, dua bug kritis dapat menyebabkan kehilangan data. Kami mendorong Anda untuk meng-upgrade atau mencoba rilis terbaru ini, dan kami menantikan umpan balik Anda untuk membantu kami terus menyempurnakan Milvus!</p>
 <h3 id="Features" class="common-anchor-header">Fitur</h3><ul>
 <li>Mendukung isolasi PartitionKey untuk meningkatkan kinerja dengan beberapa kunci partisi<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). Untuk informasi lebih lanjut, lihat <a href="/docs/id/use-partition-key.md">Gunakan Kunci Partisi</a>.</li>
 <li>Sparse Index kini mendukung DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md">Vektor Jarang</a>.</li>

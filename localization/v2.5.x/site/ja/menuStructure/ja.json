@@ -883,7 +883,7 @@
             "children": []
           },
           {
-            "label": "インストラクター",
+            "label": "講師",
             "id": "embed-with-instructor.md",
             "order": 9,
             "children": []
@@ -1681,128 +1681,6 @@
         "children": []
       },
       {
-        "label": "モデルの埋め込み",
-        "id": "integrate-embeddings-models",
-        "order": 1,
-        "children": [
-          {
-            "label": "オープンAI",
-            "id": "integrate_with_openai.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "コヒーレ",
-            "id": "integrate_with_cohere.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "ハグ顔",
-            "id": "integrate_with_hugging-face.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "パイトーチ",
-            "id": "integrate_with_pytorch.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "センテンス・トランスフォーマー",
-            "id": "integrate_with_sentencetransformers.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "ボヤージュAI",
-            "id": "integrate_with_voyageai.md",
-            "order": 8,
-            "children": []
-          },
-          {
-            "label": "ジーナAI",
-            "id": "integrate_with_jina.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "トゥエルブ・ラボ",
-            "id": "video_search_with_twelvelabs_and_milvus.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "ベントML",
-            "id": "integrate_with_bentoml.md",
-            "order": 5,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "LLM",
-        "id": "integrate-llms",
-        "order": 2,
-        "children": [
-          {
-            "label": "ブイエルエルエム",
-            "id": "milvus_rag_with_vllm.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "ミストラルAI",
-            "id": "llama_agents_metadata.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "花火",
-            "id": "build_RAG_with_milvus_and_fireworks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "レプトン",
-            "id": "build_RAG_with_milvus_and_lepton.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "シリコンフロー",
-            "id": "build_RAG_with_milvus_and_siliconflow.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "サンバ・ノヴァ",
-            "id": "use_milvus_with_sambanova.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "ジェミニ",
-            "id": "build_RAG_with_milvus_and_gemini.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "オーラマ",
-            "id": "build_RAG_with_milvus_and_ollama.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "ディープシーク",
-            "id": "build_RAG_with_milvus_and_deepseek.md",
-            "order": 8,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "オーケストレーション",
         "id": "orchestrate-with-milvus",
         "order": 3,
@@ -1859,6 +1737,18 @@
                 "label": "全文検索",
                 "id": "llamaindex_milvus_full_text_search.md",
                 "order": 2,
+                "children": []
+              },
+              {
+                "label": "ハイブリッド検索",
+                "id": "llamaindex_milvus_hybrid_search.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "メタデータのフィルタリング",
+                "id": "llamaindex_milvus_metadata_filter.md",
+                "order": 4,
                 "children": []
               }
             ]
@@ -1982,43 +1872,6 @@
         ]
       },
       {
-        "label": "ナレッジ・エンジニアリング",
-        "id": "knowledge-engineering",
-        "order": 5,
-        "children": [
-          {
-            "label": "なぜなぜ",
-            "id": "integrate_with_whyhow.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "バンナ",
-            "id": "integrate_with_vanna.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "ナレッジ・テーブル",
-            "id": "knowledge_table_with_milvus.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "コグニー",
-            "id": "build_RAG_with_milvus_and_cognee.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "マインド・データベース",
-            "id": "integration_with_mindsdb.md",
-            "order": 4,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "評価と観測可能性",
         "id": "evaluation-observability",
         "order": 6,
@@ -2050,6 +1903,171 @@
           {
             "label": "ディープエヴァル",
             "id": "evaluation_with_deepeval.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "エーモン",
+            "id": "AIMon_milvus_integration.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "モデルの埋め込み",
+        "id": "integrate-embeddings-models",
+        "order": 1,
+        "children": [
+          {
+            "label": "オープンAI",
+            "id": "integrate_with_openai.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "コヒーレ",
+            "id": "integrate_with_cohere.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "ハグ顔",
+            "id": "integrate_with_hugging-face.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "パイトーチ",
+            "id": "integrate_with_pytorch.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "センテンス・トランスフォーマー",
+            "id": "integrate_with_sentencetransformers.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "ボヤージュAI",
+            "id": "integrate_with_voyageai.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "ジーナAI",
+            "id": "integrate_with_jina.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "トゥエルブ・ラボ",
+            "id": "video_search_with_twelvelabs_and_milvus.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "ベントML",
+            "id": "integrate_with_bentoml.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "LLM",
+        "id": "integrate-llms",
+        "order": 2,
+        "children": [
+          {
+            "label": "ブイエルエルエム",
+            "id": "milvus_rag_with_vllm.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "ミストラルAI",
+            "id": "llama_agents_metadata.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "花火",
+            "id": "build_RAG_with_milvus_and_fireworks.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "レプトン",
+            "id": "build_RAG_with_milvus_and_lepton.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "シリコンフロー",
+            "id": "build_RAG_with_milvus_and_siliconflow.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "サンバ・ノヴァ",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "ジェミニ",
+            "id": "build_RAG_with_milvus_and_gemini.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "オーラマ",
+            "id": "build_RAG_with_milvus_and_ollama.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "ディープシーク",
+            "id": "build_RAG_with_milvus_and_deepseek.md",
+            "order": 8,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "ナレッジ・エンジニアリング",
+        "id": "knowledge-engineering",
+        "order": 5,
+        "children": [
+          {
+            "label": "なぜなぜ",
+            "id": "integrate_with_whyhow.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "バンナ",
+            "id": "integrate_with_vanna.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "ナレッジ・テーブル",
+            "id": "knowledge_table_with_milvus.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "コグニー",
+            "id": "build_RAG_with_milvus_and_cognee.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "マインド・データベース",
+            "id": "integration_with_mindsdb.md",
             "order": 4,
             "children": []
           }

@@ -98,8 +98,8 @@ title: Milvus Lite 로컬 실행
         ></path>
       </svg>
     </button></h2><p><code translate="no">pymilvus</code> 에서 MilvusClient의 uri 파라미터로 로컬 파일 이름을 지정하면 Milvus Lite가 사용됩니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>위의 코드 스니펫을 실행하면 현재 폴더에 <strong>milvus_demo.db라는</strong> 데이터베이스 파일이 생성됩니다.</p>
 <blockquote>
@@ -347,27 +347,27 @@ res = client.delete(
       </svg>
     </button></h2><p>Milvus Lite에 저장된 모든 데이터는 쉽게 내보내고 다른 유형의 Milvus 배포(예: Docker의 Milvus Standalone, K8s의 Milvus Distributed 또는 <a href="https://zilliz.com/cloud">Zilliz Cloud의</a> 완전 관리형 Milvus)로 로드할 수 있습니다.</p>
 <p>밀버스 라이트는 데이터를 json 파일로 덤프할 수 있는 명령줄 도구를 제공하며, 이를 <a href="https://github.com/milvus-io/milvus">밀버스</a> 및 <a href="https://zilliz.com/cloud">질리즈 클라우드</a>(밀버스를 위한 완전 관리형 클라우드 서비스)로 가져올 수 있습니다. milvus-lite 명령은 milvus-lite 파이썬 패키지와 함께 설치됩니다.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Install</span>
-pip install -U <span class="hljs-string">&quot;pymilvus[bulk_writer]&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
+pip install -U &quot;pymilvus[bulk_writer]&quot;
 
 milvus-lite dump -h
 
 usage: milvus-lite dump [-h] [-d DB_FILE] [-c COLLECTION] [-p PATH]
 
 optional arguments:
-  -h, --<span class="hljs-built_in">help</span>            show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
+  -h, --help            show this help message and exit
   -d DB_FILE, --db-file DB_FILE
                         milvus lite db file
   -c COLLECTION, --collection COLLECTION
                         collection that need to be dumped
-  -p PATH, --path PATH  dump file storage <span class="hljs-built_in">dir</span>
+  -p PATH, --path PATH  dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
 <p>다음 예제는 <code translate="no">./milvus_demo.db</code> (Milvus Lite 데이터베이스 파일)에 저장된 <code translate="no">demo_collection</code> 컬렉션의 모든 데이터를 덤프합니다.</p>
 <p>데이터를 내보내려면:</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
-<span class="hljs-comment"># ./milvus_demo.db: milvus lite db file</span>
-<span class="hljs-comment"># demo_collection: collection that need to be dumped</span>
-<span class="hljs-comment">#./data_dir : dump file storage dir</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">./milvus_demo.db: milvus lite db file</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">demo_collection: collection that need to be dumped</span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash">./data_dir : dump file storage <span class="hljs-built_in">dir</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <p>덤프 파일을 가지고 <a href="https://docs.zilliz.com/docs/data-import">데이터 가져오기를</a> 통해 질리즈 클라우드에 데이터를 업로드하거나, <a href="https://milvus.io/docs/import-data.md">대량 삽입을</a> 통해 밀버스 서버에 데이터를 업로드할 수 있습니다.</p>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -407,6 +407,6 @@ optional arguments:
 </ul></li>
 <li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
 <li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher를</a> 살펴보세요.</p></li>
-<li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://milvus.io/docs/attu.md">Attu를</a> 살펴보세요.</p></li>
+<li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://github.com/zilliztech/attu">Attu를</a> 살펴보세요.</p></li>
 <li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
 </ul>

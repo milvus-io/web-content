@@ -348,7 +348,7 @@
             "children": []
           },
           {
-            "label": "Creare una collezione istantanea",
+            "label": "Creare istantaneamente una collezione",
             "id": "create-collection-instantly.md",
             "order": 2,
             "children": []
@@ -1681,128 +1681,6 @@
         "children": []
       },
       {
-        "label": "Modelli di incorporazione",
-        "id": "integrate-embeddings-models",
-        "order": 1,
-        "children": [
-          {
-            "label": "OpenAI",
-            "id": "integrate_with_openai.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Cohere",
-            "id": "integrate_with_cohere.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Faccia da abbracciare",
-            "id": "integrate_with_hugging-face.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "PyTorch",
-            "id": "integrate_with_pytorch.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "Trasformatori di frasi",
-            "id": "integrate_with_sentencetransformers.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "ViaggioAI",
-            "id": "integrate_with_voyageai.md",
-            "order": 8,
-            "children": []
-          },
-          {
-            "label": "Jina AI",
-            "id": "integrate_with_jina.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "Dodici laboratori",
-            "id": "video_search_with_twelvelabs_and_milvus.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "BentoML",
-            "id": "integrate_with_bentoml.md",
-            "order": 5,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "LLM",
-        "id": "integrate-llms",
-        "order": 2,
-        "children": [
-          {
-            "label": "vLLM",
-            "id": "milvus_rag_with_vllm.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Mistral AI",
-            "id": "llama_agents_metadata.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Fuochi d'artificio",
-            "id": "build_RAG_with_milvus_and_fireworks.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Lepton",
-            "id": "build_RAG_with_milvus_and_lepton.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "SiliconFlow",
-            "id": "build_RAG_with_milvus_and_siliconflow.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "SambaNova",
-            "id": "use_milvus_with_sambanova.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "Gemelli",
-            "id": "build_RAG_with_milvus_and_gemini.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "Ollama",
-            "id": "build_RAG_with_milvus_and_ollama.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "DeepSeek",
-            "id": "build_RAG_with_milvus_and_deepseek.md",
-            "order": 8,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "Orchestrazione",
         "id": "orchestrate-with-milvus",
         "order": 3,
@@ -1859,6 +1737,18 @@
                 "label": "Ricerca full-text",
                 "id": "llamaindex_milvus_full_text_search.md",
                 "order": 2,
+                "children": []
+              },
+              {
+                "label": "Ricerca ibrida",
+                "id": "llamaindex_milvus_hybrid_search.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Filtraggio dei metadati",
+                "id": "llamaindex_milvus_metadata_filter.md",
+                "order": 4,
                 "children": []
               }
             ]
@@ -1982,43 +1872,6 @@
         ]
       },
       {
-        "label": "Ingegneria della conoscenza",
-        "id": "knowledge-engineering",
-        "order": 5,
-        "children": [
-          {
-            "label": "PerchéCome",
-            "id": "integrate_with_whyhow.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Vanna",
-            "id": "integrate_with_vanna.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Tabella delle conoscenze",
-            "id": "knowledge_table_with_milvus.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Cognee",
-            "id": "build_RAG_with_milvus_and_cognee.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "MindsDB",
-            "id": "integration_with_mindsdb.md",
-            "order": 4,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "Valutazione e osservabilità",
         "id": "evaluation-observability",
         "order": 6,
@@ -2050,6 +1903,171 @@
           {
             "label": "DeepEval",
             "id": "evaluation_with_deepeval.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "AIMon",
+            "id": "AIMon_milvus_integration.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Modelli di incorporazione",
+        "id": "integrate-embeddings-models",
+        "order": 1,
+        "children": [
+          {
+            "label": "OpenAI",
+            "id": "integrate_with_openai.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Cohere",
+            "id": "integrate_with_cohere.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Faccia da abbracciare",
+            "id": "integrate_with_hugging-face.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "PyTorch",
+            "id": "integrate_with_pytorch.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Trasformatori di frasi",
+            "id": "integrate_with_sentencetransformers.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "ViaggioAI",
+            "id": "integrate_with_voyageai.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "Jina AI",
+            "id": "integrate_with_jina.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "Dodici laboratori",
+            "id": "video_search_with_twelvelabs_and_milvus.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "BentoML",
+            "id": "integrate_with_bentoml.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "LLM",
+        "id": "integrate-llms",
+        "order": 2,
+        "children": [
+          {
+            "label": "vLLM",
+            "id": "milvus_rag_with_vllm.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Mistral AI",
+            "id": "llama_agents_metadata.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Fuochi d'artificio",
+            "id": "build_RAG_with_milvus_and_fireworks.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Lepton",
+            "id": "build_RAG_with_milvus_and_lepton.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "SiliconFlow",
+            "id": "build_RAG_with_milvus_and_siliconflow.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "SambaNova",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Gemelli",
+            "id": "build_RAG_with_milvus_and_gemini.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Ollama",
+            "id": "build_RAG_with_milvus_and_ollama.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "DeepSeek",
+            "id": "build_RAG_with_milvus_and_deepseek.md",
+            "order": 8,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Ingegneria della conoscenza",
+        "id": "knowledge-engineering",
+        "order": 5,
+        "children": [
+          {
+            "label": "PerchéCome",
+            "id": "integrate_with_whyhow.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Vanna",
+            "id": "integrate_with_vanna.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Tabella delle conoscenze",
+            "id": "knowledge_table_with_milvus.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Cognee",
+            "id": "build_RAG_with_milvus_and_cognee.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "MindsDB",
+            "id": "integration_with_mindsdb.md",
             "order": 4,
             "children": []
           }
@@ -2240,7 +2258,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con matrioske embeddings",
+        "label": "Ricerca a imbuto con le matrici Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -2287,7 +2305,7 @@
             "children": []
           },
           {
-            "label": "Ricerca di somiglianza audio",
+            "label": "Ricerca della somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

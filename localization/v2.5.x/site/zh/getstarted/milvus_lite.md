@@ -82,7 +82,7 @@ title: 本地运行 Milvus Lite
 <button class="copy-code-btn"></button></code></pre>
 <p>我们建议使用<code translate="no">pymilvus</code> 。由于<code translate="no">milvus-lite</code> 已包含在<code translate="no">pymilvus</code> 2.4.2 或更高版本中，因此可通过<code translate="no">pip install</code> 与<code translate="no">-U</code> 强制更新到最新版本，<code translate="no">milvus-lite</code> 会自动安装。</p>
 <p>如果你想明确安装<code translate="no">milvus-lite</code> 软件包，或者你已经安装了旧版本的<code translate="no">milvus-lite</code> 并想更新它，可以使用<code translate="no">pip install -U milvus-lite</code> 。</p>
-<h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">连接 Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
+<h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">连接到 Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,8 +98,8 @@ title: 本地运行 Milvus Lite
         ></path>
       </svg>
     </button></h2><p>在<code translate="no">pymilvus</code> 中，指定一个本地文件名作为 MilvusClient 的 uri 参数将使用 Milvus Lite。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
-client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>运行上述代码段后，将在当前文件夹下生成名为<strong>milvus_demo.db 的</strong>数据库文件。</p>
 <blockquote>
@@ -215,7 +215,7 @@ res = client.delete(
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md">list_collections()</a></td><td>支持列出所有 Collections。</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md">drop_collection()</a></td><td>支持删除某个 Collection。</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md">drop_collection()</a></td><td>支持删除 Collections。</td></tr>
 <tr><td><code translate="no">collection_name</code></td><td>Y</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/rename_collection.md">rename_collection()</a></td><td>不支持重命名 Collections。</td></tr>
@@ -346,28 +346,28 @@ res = client.delete(
         ></path>
       </svg>
     </button></h2><p>所有存储在 Milvus Lite 中的数据都可以轻松导出并加载到其他类型的 Milvus 部署中，例如 Docker 上的 Milvus Standalone、K8s 上的 Milvus Distributed 或<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上的全托管 Milvus。</p>
-<p>Milvus Lite 提供了一个命令行工具，可以将数据转储到 json 文件，该文件可以导入<a href="https://github.com/milvus-io/milvus">Milvus</a>和<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全托管云服务）。milvus-lite 命令将与 milvus-lite python 软件包一起安装。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-comment"># Install</span>
-pip install -U <span class="hljs-string">&quot;pymilvus[bulk_writer]&quot;</span>
+<p>Milvus Lite 提供了一个命令行工具，可以将数据转储到一个 json 文件，该文件可以导入<a href="https://github.com/milvus-io/milvus">Milvus</a>和<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全托管云服务）。milvus-lite 命令将与 milvus-lite python 软件包一起安装。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Install</span>
+pip install -U &quot;pymilvus[bulk_writer]&quot;
 
 milvus-lite dump -h
 
 usage: milvus-lite dump [-h] [-d DB_FILE] [-c COLLECTION] [-p PATH]
 
 optional arguments:
-  -h, --<span class="hljs-built_in">help</span>            show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
+  -h, --help            show this help message and exit
   -d DB_FILE, --db-file DB_FILE
                         milvus lite db file
   -c COLLECTION, --collection COLLECTION
                         collection that need to be dumped
-  -p PATH, --path PATH  dump file storage <span class="hljs-built_in">dir</span>
+  -p PATH, --path PATH  dump file storage dir
 <button class="copy-code-btn"></button></code></pre>
 <p>下面的示例转储了<code translate="no">demo_collection</code> Collections 中的所有数据，这些数据存储在<code translate="no">./milvus_demo.db</code> （Milvus Lite 数据库文件）中。</p>
 <p>导出数据：</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
-<span class="hljs-comment"># ./milvus_demo.db: milvus lite db file</span>
-<span class="hljs-comment"># demo_collection: collection that need to be dumped</span>
-<span class="hljs-comment">#./data_dir : dump file storage dir</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">./milvus_demo.db: milvus lite db file</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">demo_collection: collection that need to be dumped</span>
+<span class="hljs-meta prompt_">#</span><span class="language-bash">./data_dir : dump file storage <span class="hljs-built_in">dir</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <p>有了转储文件，你可以通过<a href="https://docs.zilliz.com/docs/data-import">数据导入</a>将数据上传到 Zilliz Cloud，或通过<a href="https://milvus.io/docs/import-data.md">批量插入</a>将数据上传到 Milvus 服务器。</p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -407,6 +407,6 @@ optional arguments:
 </ul></li>
 <li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
 <li><p>探索<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
-<li><p>探索<a href="https://milvus.io/docs/attu.md">Attu</a>，一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>，一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
 <li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

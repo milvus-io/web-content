@@ -70,10 +70,10 @@ title: تشغيل Milvus في Docker (لينكس)
 <ul>
 <li>تم بدء تشغيل حاوية docker باسم milvus على المنفذ <strong>19530</strong>.</li>
 <li>تم تثبيت برنامج تضمين إلخd مع ميلفوس في نفس الحاوية ويعمل على المنفذ <strong>2379</strong>. يتم تعيين ملف التكوين الخاص به إلى <strong>embedEtcd.yaml</strong> في المجلد الحالي.</li>
-<li>لتغيير تكوين Milvus الافتراضي، أضف إعداداتك إلى ملف <strong>user.yaml</strong> في المجلد الحالي ثم أعد تشغيل الخدمة.</li>
+<li>لتغيير تكوين Milvus الافتراضي، أضف الإعدادات الخاصة بك إلى ملف <strong>user.yaml</strong> في المجلد الحالي ثم أعد تشغيل الخدمة.</li>
 <li>يتم تعيين وحدة تخزين بيانات Milvus إلى <strong>وحدات التخزين/ملف Milvus</strong> في المجلد الحالي.</li>
 </ul>
-<p>يمكنك الوصول إلى Milvus WebUI على <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد عن مثيل Milvus الخاص بك. للحصول على التفاصيل، ارجع إلى <a href="/docs/ar/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>يمكنك الوصول إلى Milvus WebUI على <code translate="no">http://127.0.0.1:9091/webui/</code> لمعرفة المزيد حول مثيل Milvus الخاص بك. للحصول على التفاصيل، ارجع إلى <a href="/docs/ar/milvus-webui.md">Milvus WebUI</a>.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">إيقاف وحذف ميلفوس<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -138,6 +138,6 @@ title: تشغيل Milvus في Docker (لينكس)
 <li><p>استكشف <a href="/docs/ar/milvus-webui.md">واجهة Milvus WebUI،</a> وهي واجهة ويب سهلة الاستخدام لمراقبة وإدارة Milvus.</p></li>
 <li><p>استكشف Milvus <a href="/docs/ar/milvus_backup_overview.md">Backup،</a> وهي أداة مفتوحة المصدر للنسخ الاحتياطية لبيانات Milvus.</p></li>
 <li><p>استكشف <a href="/docs/ar/birdwatcher_overview.md">Birdwatcher،</a> وهي أداة مفتوحة المصدر لتصحيح أخطاء ميلفوس وتحديثات التكوين الديناميكية.</p></li>
-<li><p>استكشف <a href="https://milvus.io/docs/attu.md">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
-<li><p><a href="/docs/ar/monitor.md">راقب ميلفوس باستخدام بروميثيوس</a>.</p></li>
+<li><p>استكشف <a href="https://github.com/zilliztech/attu">Attu،</a> وهي أداة مفتوحة المصدر لواجهة المستخدم الرسومية لإدارة Milvus بسهولة.</p></li>
+<li><p><a href="/docs/ar/monitor.md">مراقبة ميلفوس باستخدام بروميثيوس</a>.</p></li>
 </ul>

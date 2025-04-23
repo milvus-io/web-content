@@ -5,6 +5,12 @@ summary: >-
   seguida, usaremos o Milvus para criar um pipeline RAG.
 title: Criar um RAG com Milvus e Unstructured
 ---
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_unstructured.ipynb" target="_parent">
+<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_unstructured.ipynb" target="_blank">
+<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
+</a></p>
 <h1 id="Build-a-RAG-with-Milvus-and-Unstructured" class="common-anchor-header">Criar um RAG com Milvus e Unstructured<button data-href="#Build-a-RAG-with-Milvus-and-Unstructured" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,13 +26,7 @@ title: Criar um RAG com Milvus e Unstructured
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_unstructured.ipynb" target="_parent">
-<img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_unstructured.ipynb" target="_blank">
-<img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a></p>
-<p><a href="https://docs.unstructured.io/welcome">O Unstructured</a> fornece uma plataforma e ferramentas para ingerir e processar documentos não estruturados para Retrieval Augmented Generation (RAG) e afinação de modelos. Ele oferece uma plataforma de interface do usuário sem código e serviços de API sem servidor, permitindo que os usuários processem dados em recursos de computação hospedados pelo Unstructured.</p>
+    </button></h1><p><a href="https://docs.unstructured.io/welcome">O Unstructured</a> fornece uma plataforma e ferramentas para ingerir e processar documentos não estruturados para Retrieval Augmented Generation (RAG) e afinação de modelos. Ele oferece uma plataforma de interface do usuário sem código e serviços de API sem servidor, permitindo que os usuários processem dados em recursos de computação hospedados pelo Unstructured.</p>
 <p>Neste tutorial, usaremos o Unstructured para ingerir documentos PDF e, em seguida, usaremos o Milvus para criar um pipeline RAG.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,40 +43,41 @@ title: Criar um RAG com Milvus e Unstructured
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependências e ambiente</h3><pre><code translate="no" class="language-python">$ pip install -qU <span class="hljs-string">&quot;unstructured-ingest[pdf]&quot;</span> unstructured pymilvus openai
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependências e ambiente</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -qU <span class="hljs-string">&quot;unstructured[pdf]&quot;</span> pymilvus openai</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
-</div>
-<p>Pode obter as variáveis de ambiente <code translate="no">UNSTRUCTURED_API_KEY</code> e <code translate="no">UNSTRUCTURED_URL</code> <a href="https://docs.unstructured.io/api-reference/api-services/saas-api-development-guide">aqui</a>.</p>
+<p><strong>Opções de instalação:</strong></p>
+<ul>
+<li>Para processar todos os formatos de documento: <code translate="no">pip install &quot;unstructured[all-docs]&quot;</code></li>
+<li>Para formatos específicos (por exemplo, PDF): <code translate="no">pip install &quot;unstructured[pdf]&quot;</code></li>
+<li>Para obter mais opções de instalação, consulte a <a href="https://docs.unstructured.io/open-source/installation/full-installation">documentação do Unstructured</a></li>
+</ul>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
 <p>Neste exemplo, vamos utilizar o OpenAI como LLM. Deve preparar a <a href="https://platform.openai.com/docs/quickstart">chave api</a> <code translate="no">OPENAI_API_KEY</code> como uma variável de ambiente.</p>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;UNSTRUCTURED_API_KEY&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;UNSTRUCTURED_URL&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
-
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;***********&quot;</span>
+os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Prepare-Milvus-and-OpenAI-clients" class="common-anchor-header">Preparar os clientes Milvus e OpenAI</h3><p>Pode utilizar o cliente Milvus para criar uma coleção Milvus e inserir dados na mesma.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># Initialize Milvus client</span>
-milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)  <span class="hljs-comment"># TODO</span>
+milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Quanto ao argumento de <code translate="no">MilvusClient</code>:</p>
 <ul>
 <li>Definir o <code translate="no">uri</code> como um ficheiro local, por exemplo,<code translate="no">./milvus.db</code>, é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
-<li>Se tiver uma grande escala de dados, digamos mais de um milhão de vectores, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Nesta configuração, use o endereço e a porta do servidor como seu uri, por exemplo,<code translate="no">http://localhost:19530</code>. Se você ativar o recurso de autenticação no Milvus, use "&lt;seu_nome_de_usuário&gt;:&lt;sua_senha&gt;" como o token, caso contrário, não defina o token.</li>
-<li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste os campos <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</li>
+<li>Se tiver uma grande escala de dados, digamos mais de um milhão de vectores, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Nesta configuração, use o endereço e a porta do servidor como seu uri, por exemplo,<code translate="no">http://localhost:19530</code>. Se ativar a funcionalidade de autenticação no Milvus, utilize "<your_username>:<your_password>" como token, caso contrário não defina o token.</li>
+<li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</li>
 </ul>
 </div>
 <p>Verifique se a coleção já existe e elimine-a se existir.</p>
 <pre><code translate="no" class="language-python">collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 
-<span class="hljs-keyword">if</span> milvus_client.<span class="hljs-title function_">has_collection</span>(collection_name):
-    milvus_client.<span class="hljs-title function_">drop_collection</span>(collection_name)
+<span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
+    milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p>Prepare um cliente OpenAI para gerar embeddings e gerar respostas.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
@@ -140,7 +141,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     schema=schema,
     index_params=index_params,
-    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,
 )
 
 milvus_client.load_collection(collection_name=collection_name)
@@ -160,57 +161,27 @@ milvus_client.load_collection(collection_name=collection_name)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Unstructured fornece um pipeline de ingestão flexível e poderoso para processar vários tipos de arquivo, incluindo PDF, HTML e outros. Usaremos a funcionalidade de ingestão para particionar arquivos PDF em um diretório local. E depois carregar os dados no Milvus.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> unstructured_ingest.v2.pipeline.pipeline <span class="hljs-keyword">import</span> Pipeline
-<span class="hljs-keyword">from</span> unstructured_ingest.v2.interfaces <span class="hljs-keyword">import</span> ProcessorConfig
-<span class="hljs-keyword">from</span> unstructured_ingest.v2.processes.connectors.local <span class="hljs-keyword">import</span> (
-    LocalIndexerConfig,
-    LocalDownloaderConfig,
-    LocalConnectionConfig,
-    LocalUploaderConfig,
-)
-<span class="hljs-keyword">from</span> unstructured_ingest.v2.processes.partitioner <span class="hljs-keyword">import</span> PartitionerConfig
+    </button></h2><p>O Unstructured fornece um pipeline de ingestão flexível e poderoso para processar vários tipos de arquivo, incluindo PDF, HTML e muito mais. Vamos particionar e dividir um arquivo PDF local. E, em seguida, carregaremos os dados no Milvus.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> warnings
+<span class="hljs-keyword">from</span> unstructured.partition.auto <span class="hljs-keyword">import</span> partition
 
-directory_with_pdfs = <span class="hljs-string">&quot;./pdf_files&quot;</span>
-directory_with_results = <span class="hljs-string">&quot;./pdf_processed_outputs&quot;</span>
+warnings.filterwarnings(<span class="hljs-string">&quot;ignore&quot;</span>)
 
-Pipeline.from_configs(
-    context=ProcessorConfig(),
-    indexer_config=LocalIndexerConfig(input_path=directory_with_pdfs),
-    downloader_config=LocalDownloaderConfig(),
-    source_connection_config=LocalConnectionConfig(),
-    partitioner_config=PartitionerConfig(
-        partition_by_api=<span class="hljs-literal">True</span>,
-        api_key=os.getenv(<span class="hljs-string">&quot;UNSTRUCTURED_API_KEY&quot;</span>),
-        partition_endpoint=os.getenv(<span class="hljs-string">&quot;UNSTRUCTURED_API_URL&quot;</span>),
-        strategy=<span class="hljs-string">&quot;hi_res&quot;</span>,
-        additional_partition_args={
-            <span class="hljs-string">&quot;split_pdf_page&quot;</span>: <span class="hljs-literal">True</span>,
-            <span class="hljs-string">&quot;split_pdf_concurrency_level&quot;</span>: <span class="hljs-number">15</span>,
-        },
-    ),
-    uploader_config=LocalUploaderConfig(output_dir=directory_with_results),
-).run()
-
-
-<span class="hljs-keyword">from</span> unstructured.staging.base <span class="hljs-keyword">import</span> elements_from_json
-
-
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">load_processed_files</span>(<span class="hljs-params">directory_path</span>):
-    elements = []
-    <span class="hljs-keyword">for</span> filename <span class="hljs-keyword">in</span> os.listdir(directory_path):
-        <span class="hljs-keyword">if</span> filename.endswith(<span class="hljs-string">&quot;.json&quot;</span>):
-            file_path = os.path.join(directory_path, filename)
-            <span class="hljs-keyword">try</span>:
-                elements.extend(elements_from_json(filename=file_path))
-            <span class="hljs-keyword">except</span> IOError:
-                <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Error: Could not read file <span class="hljs-subst">{filename}</span>.&quot;</span>)
-
-    <span class="hljs-keyword">return</span> elements
-
-
-elements = load_processed_files(directory_with_results)
+elements = partition(
+    filename=<span class="hljs-string">&quot;./pdf_files/WhatisMilvus.pdf&quot;</span>,
+    strategy=<span class="hljs-string">&quot;hi_res&quot;</span>,
+    chunking_strategy=<span class="hljs-string">&quot;by_title&quot;</span>,
+)  <span class="hljs-comment"># Replace with the path to your PDF file</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Vamos examinar os elementos particionados do ficheiro PDF. Cada elemento representa um pedaço de conteúdo extraído pelo processo de particionamento do Unstructured.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> element <span class="hljs-keyword">in</span> elements:
+    <span class="hljs-built_in">print</span>(element)
+    <span class="hljs-keyword">break</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">What is Milvus?
+
+Milvus is a high-performance, highly scalable vector database that runs efficiently across a wide range of environments, from a laptop to large-scale distributed systems. It is available as both open-source software and a cloud service.
+</code></pre>
 <p>Inserir dados no Milvus.</p>
 <pre><code translate="no" class="language-python">data = []
 <span class="hljs-keyword">for</span> i, element <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(elements):
@@ -224,7 +195,9 @@ elements = load_processed_files(directory_with_results)
     )
 milvus_client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Retrieve-and-Generate-Response" class="common-anchor-header">Recuperar e gerar respostas<button data-href="#Retrieve-and-Generate-Response" class="anchor-icon" translate="no">
+<pre><code translate="no">{'insert_count': 29, 'ids': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28], 'cost': 0}
+</code></pre>
+<h2 id="Retrieve-and-Generate-Response" class="common-anchor-header">Recuperar e gerar resposta<button data-href="#Retrieve-and-Generate-Response" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -250,7 +223,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     )
     <span class="hljs-keyword">return</span> [(res[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;text&quot;</span>], res[<span class="hljs-string">&quot;distance&quot;</span>]) <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> search_res[<span class="hljs-number">0</span>]]
 <button class="copy-code-btn"></button></code></pre>
-<p>Defina uma função para gerar uma resposta utilizando os documentos recuperados no pipeline RAG.</p>
+<p>Definir uma função para gerar uma resposta utilizando os documentos recuperados no pipeline RAG.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_rag_response</span>(<span class="hljs-params">question</span>):
     retrieved_docs = retrieve_documents(question)
     context = <span class="hljs-string">&quot;\n&quot;</span>.join([<span class="hljs-string">f&quot;Text: <span class="hljs-subst">{doc[<span class="hljs-number">0</span>]}</span>\n&quot;</span> <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> retrieved_docs])
@@ -280,10 +253,6 @@ answer = generate_rag_response(question)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Question: <span class="hljs-subst">{question}</span>&quot;</span>)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Answer: <span class="hljs-subst">{answer}</span>&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">INFO: HTTP Request: POST https://api.openai.com/v1/embeddings &quot;HTTP/1.1 200 OK&quot;
-INFO: HTTP Request: POST https://api.openai.com/v1/chat/completions &quot;HTTP/1.1 200 OK&quot;
-
-
-Question: What is the Advanced Search Algorithms in Milvus?
-Answer: The Advanced Search Algorithms in Milvus refer to a wide range of in-memory and on-disk indexing/search algorithms it supports, including IVF, HNSW, DiskANN, and more. These algorithms have been deeply optimized, and Milvus delivers 30%-70% better performance compared to popular implementations like FAISS and HNSWLib.
+<pre><code translate="no">Question: What is the Advanced Search Algorithms in Milvus?
+Answer: The Advanced Search Algorithms in Milvus include a wide range of in-memory and on-disk indexing/search algorithms such as IVF, HNSW, and DiskANN. These algorithms have been deeply optimized, and Milvus delivers 30%-70% better performance compared to popular implementations like FAISS and HNSWLib.
 </code></pre>

@@ -19,6 +19,48 @@ title: Note di rilascio
         ></path>
       </svg>
     </button></h1><p>Scoprite le novità di Milvus! Questa pagina riassume le nuove funzionalità, i miglioramenti, i problemi noti e le correzioni di bug di ogni versione. In questa sezione è possibile trovare le note di rilascio per ogni versione successiva alla v2.5.0. Si consiglia di visitare regolarmente questa pagina per conoscere gli aggiornamenti.</p>
+<h2 id="v2510" class="common-anchor-header">v2.5.10<button data-href="#v2510" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Data di rilascio: 21 aprile 2025</p>
+<table>
+<thead>
+<tr><th>Versione Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Node.js</th><th>Versione SDK Java</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.10</td><td>2.5.6</td><td>2.5.8</td><td>2.5.7</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.10 migliora le prestazioni di ricerca e caricamento, migliora la reportistica sulle metriche e amplia il supporto SVE per il calcolo accelerato delle metriche. Questa versione include anche numerose correzioni di bug che migliorano la stabilità e la correttezza. Vi invitiamo ad aggiornare o a provare: il vostro feedback è prezioso per aiutarci a rendere Milvus ancora migliore!</p>
+<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
+<li>Ignorare la segnalazione delle metriche degli indici per indici inesistenti<a href="https://github.com/milvus-io/milvus/pull/41296">(#41296</a>)</li>
+<li>Utilizzo della modalità di scansione per LIKE anche quando esiste un indice invertito (<a href="https://github.com/milvus-io/milvus/pull/41309">#41309</a>)</li>
+<li>Ottimizzazione delle prestazioni per le espressioni LIKE (<a href="https://github.com/milvus-io/milvus/pull/41222">#41222</a>)</li>
+<li>Ottimizzare il formato degli indici per migliorare le prestazioni di caricamento (<a href="https://github.com/milvus-io/milvus/pull/41041">#41041</a>)</li>
+<li>RESTful: rendere configurabile il timeout predefinito (<a href="https://github.com/milvus-io/milvus/pull/41225">#41225</a>)</li>
+<li>Abilitazione del supporto SVE per il calcolo della metrica L2 nelle funzioni FP16 / NY<a href="https://github.com/zilliztech/knowhere/pull/1134">(knowhere #1134</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
+<li>Correggere l'indice JSON che non funziona per i filtri stringa<a href="https://github.com/milvus-io/milvus/pull/41383">(#41383</a>)</li>
+<li>Salta il controllo delle dimensioni per i campi non vettoriali nel pre-check<a href="https://github.com/milvus-io/milvus/pull/41329">(#41329</a>)</li>
+<li>Alter collection ora aggiorna correttamente lo schema (<a href="https://github.com/milvus-io/milvus/pull/41308">#41308</a>)</li>
+<li>Aggiornare la versione di knowhere per correggere la build di macOS<a href="https://github.com/milvus-io/milvus/pull/41315">(#41315</a>)</li>
+<li>Prevenire il panico quando si elencano gli indici prima che l'inizializzazione dell'indice di segmento sia completata<a href="https://github.com/milvus-io/milvus/pull/41299">(#41299</a>)</li>
+<li>Risolvere la regressione delle prestazioni cambiando un livello di log (<a href="https://github.com/milvus-io/milvus/pull/41269">#41269</a>)</li>
+<li>Chiudere il client prima di rimuovere il client worker (<a href="https://github.com/milvus-io/milvus/pull/41254">#41254</a>)</li>
+</ul>
 <h2 id="v259" class="common-anchor-header">v2.5.9<button data-href="#v259" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +79,7 @@ title: Note di rilascio
     </button></h2><p>Data di rilascio: 11 aprile 2025</p>
 <table>
 <thead>
-<tr><th>Versione Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Node.js</th><th>Versione SDK Java</th></tr>
+<tr><th>Versione Milvus</th><th>Versione dell'SDK Python</th><th>Versione SDK Node.js</th><th>Versione SDK Java</th></tr>
 </thead>
 <tbody>
 <tr><td>2.5.9</td><td>2.5.6</td><td>2.5.7</td><td>2.5.7</td></tr>
@@ -155,7 +197,7 @@ title: Note di rilascio
 <tr><td>2.5.7</td><td>2.5.6</td><td>2.5.6</td><td>2.5.6</td></tr>
 </tbody>
 </table>
-<p>Siamo lieti di annunciare il rilascio di Milvus 2.5.7, caratterizzato dalla nuova funzione JSON Path Index. Questa funzione consente di creare indici invertiti su colonne dinamiche o JSON per migliorare significativamente le prestazioni delle query. Oltre a questa nuova funzionalità, abbiamo apportato numerosi miglioramenti e correzioni di bug per migliorare l'affidabilità, la gestione degli errori e l'usabilità. Vi invitiamo a fare l'aggiornamento o a provarlo e, come sempre, il vostro feedback è molto apprezzato per continuare a migliorare Milvus!</p>
+<p>Siamo lieti di annunciare il rilascio di Milvus 2.5.7, caratterizzato dalla nuova funzione JSON Path Index. Questa funzione consente di creare indici invertiti su colonne dinamiche o JSON per migliorare significativamente le prestazioni delle query. Oltre a questa nuova funzionalità, sono stati apportati numerosi miglioramenti e correzioni di bug per migliorare l'affidabilità, la gestione degli errori e l'usabilità. Vi invitiamo a fare l'aggiornamento o a provarlo e, come sempre, il vostro feedback è molto apprezzato per continuare a migliorare Milvus!</p>
 <h3 id="Features" class="common-anchor-header">Caratteristiche</h3><ul>
 <li><strong>Indice dei percorsi JSON</strong>: Per rispondere alle esigenze degli utenti di schemi dinamici, Milvus 2.5.7 introduce la possibilità di costruire indici su colonne dinamiche e colonne JSON. Con questa funzione, è possibile creare indici invertiti per specifiche colonne dinamiche o percorsi JSON, aggirando di fatto il lento processo di caricamento JSON e migliorando notevolmente le prestazioni delle query. Per ulteriori informazioni, consultare <a href="/docs/it/use-json-fields.md">Campo JSON</a>.</li>
 </ul>
@@ -164,7 +206,7 @@ title: Note di rilascio
 <li>Aggiunta di altre opzioni di configurazione per <code translate="no">interimindex</code> per supportare modalità raffinate<a href="https://github.com/milvus-io/milvus/pull/40429">(#40429</a>)</li>
 <li>Utilizzare le metriche corrette dei contatori per il calcolo della WA complessiva<a href="https://github.com/milvus-io/milvus/pull/40679">(#40679</a>)</li>
 <li>Rendere aggiornabile la configurazione del segmento prune (<a href="https://github.com/milvus-io/milvus/pull/40632">#40632</a>)</li>
-<li>Aggiungere una politica di tenuta del canale basata sul blocco di L0<a href="https://github.com/milvus-io/milvus/pull/40535">(#40535</a>)</li>
+<li>Aggiungere una politica di chiusura del canale basata sul blocco di L0<a href="https://github.com/milvus-io/milvus/pull/40535">(#40535</a>)</li>
 <li>Raffinare i metadati dei task con il blocco a livello di chiave (<a href="https://github.com/milvus-io/milvus/pull/40353">#40353</a>)</li>
 <li>Rimuovere le etichette di raccolta e partizione non necessarie dalle metriche<a href="https://github.com/milvus-io/milvus/pull/40593">(#40593</a>)</li>
 <li>Migliorare i messaggi di errore di importazione (<a href="https://github.com/milvus-io/milvus/pull/40597">#40597</a>)</li>
@@ -331,7 +373,7 @@ title: Note di rilascio
 <li>[2.5] Scaricate le informazioni di pprof se l'avanzamento dell'arresto del componente è scaduto (<a href="https://github.com/milvus-io/milvus/pull/39760">#39760</a>)</li>
 <li>[2.5] Aggiunta API di gestione per controllare lo stato di bilanciamento delle querycoord (<a href="https://github.com/milvus-io/milvus/pull/39909">#39909</a>)</li>
 </ul>
-<h4 id="StatsCompactionIndex-Task-Scheduler-Optimization" class="common-anchor-header">Statistiche/Compattazione/Ottimizzazione dello schedulatore dei task di indice</h4><ul>
+<h4 id="StatsCompactionIndex-Task-Scheduler-Optimization" class="common-anchor-header">Statistiche/Compattazione/Ottimizzazione dello scheduler dei task indice</h4><ul>
 <li>Affinata la politica di pianificazione delle attività di indice (<a href="https://github.com/milvus-io/milvus/pull/40104">#40104</a>)</li>
 <li>[2.5] Limitata la velocità di generazione dei task di statistiche<a href="https://github.com/milvus-io/milvus/pull/39645">(#39645</a>)</li>
 <li>Aggiunte le configurazioni per la pianificazione della compattazione<a href="https://github.com/milvus-io/milvus/pull/39511">(#39511</a>)</li>
@@ -357,7 +399,7 @@ title: Note di rilascio
 <li>Trasmissione con notifica basata su eventi<a href="https://github.com/milvus-io/milvus/pull/39550">(#39550</a>)</li>
 <li>[2.5] Raffinato il messaggio di errore per il controllo di schemi e indici<a href="https://github.com/milvus-io/milvus/pull/39565">(#39565</a>)</li>
 <li>[2.5] Ripristinato il tipo di indice automatico predefinito per gli scalari<a href="https://github.com/milvus-io/milvus/pull/39820">(#39820</a>)</li>
-<li>[2.5] Reinserito il task di compattazione L0 quando la verifica preliminare non è riuscita<a href="https://github.com/milvus-io/milvus/pull/39871">(#39871</a>)</li>
+<li>[2.5] Reinserito il task di compattazione L0 quando il precontrollo non è riuscito<a href="https://github.com/milvus-io/milvus/pull/39871">(#39871</a>)</li>
 </ul>
 <h2 id="v254" class="common-anchor-header">v2.5.4<button data-href="#v254" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -402,7 +444,7 @@ title: Note di rilascio
 <li>Velocizzato il caricamento dei dati accelerando la generazione, la pianificazione e l'esecuzione dei task in QueryCoord<a href="https://github.com/milvus-io/milvus/pull/38905">(#38905</a>)</li>
 <li>Ridotto il blocco in DataCoord per velocizzare le operazioni di caricamento e inserimento<a href="https://github.com/milvus-io/milvus/pull/38904">(#38904</a>)</li>
 <li>Aggiunti i nomi dei campi primari in <code translate="no">SearchResult</code> e <code translate="no">QueryResults</code> <a href="https://github.com/milvus-io/milvus/pull/39222">(#39222</a>)</li>
-<li>Usato sia la dimensione del binlog che la dimensione dell'indice come standard di limitazione della quota del disco (<a href="https://github.com/milvus-io/milvus/pull/38844">#38844</a>)</li>
+<li>Usato sia la dimensione del binlog che la dimensione dell'indice come standard di limitazione della quota disco (<a href="https://github.com/milvus-io/milvus/pull/38844">#38844</a>)</li>
 <li>Ottimizzato l'uso della memoria per la ricerca full-text knowhere/#1011</li>
 <li>Aggiunto il controllo di versione per gli indici scalari<a href="https://github.com/milvus-io/milvus/pull/39236">(#39236</a>)</li>
 <li>Migliorata la velocità di recupero delle informazioni sulle collezioni da RootCoord evitando copie non necessarie<a href="https://github.com/milvus-io/milvus/pull/38902">(#38902</a>)</li>
@@ -576,7 +618,7 @@ title: Note di rilascio
 </table>
 <p>Milvus 2.5.0 apporta significativi miglioramenti per migliorare l'usabilità, la scalabilità e le prestazioni per gli utenti che si occupano di ricerca vettoriale e di gestione di dati su larga scala. Con questa versione, Milvus integra nuove potenti funzionalità come la ricerca basata sui termini, la compattazione dei cluster per ottimizzare le query e il supporto versatile per i metodi di ricerca vettoriale rada e densa. I miglioramenti nella gestione dei cluster, nell'indicizzazione e nella gestione dei dati introducono nuovi livelli di flessibilità e facilità d'uso, rendendo Milvus un database vettoriale ancora più robusto e facile da usare.</p>
 <h3 id="Key-Features" class="common-anchor-header">Caratteristiche principali</h3><h4 id="Full-Text-Search" class="common-anchor-header">Ricerca a testo pieno</h4><p>Milvus 2.5 supporta la ricerca full text implementata con Sparse-BM25! Questa funzione è un importante complemento alle forti capacità di ricerca semantica di Milvus, soprattutto in scenari che coinvolgono parole rare o termini tecnici. Nelle versioni precedenti, Milvus supportava vettori sparsi per aiutare gli scenari di ricerca per parole chiave. Questi vettori sparsi venivano generati al di fuori di Milvus da modelli neurali come SPLADEv2/BGE-M3 o da modelli statistici come l'algoritmo BM25.</p>
-<p>Grazie a <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, Milvus 2.5 dispone di analizzatori integrati e di estrazione di vettori sparsi, estendendo l'API dalla ricezione di soli vettori come input all'accettazione diretta di testo. Le informazioni statistiche del BM25 vengono aggiornate in tempo reale durante l'inserimento dei dati, migliorando l'usabilità e l'accuratezza. Inoltre, i vettori sparsi basati su algoritmi di prossimità approssimata (ANN) offrono prestazioni più potenti rispetto ai sistemi di ricerca per parole chiave standard.</p>
+<p>Grazie a <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, Milvus 2.5 dispone di analizzatori integrati e di estrazione di vettori sparsi, estendendo l'API dalla ricezione di soli vettori come input all'accettazione diretta di testo. Le informazioni statistiche del BM25 vengono aggiornate in tempo reale durante l'inserimento dei dati, migliorando l'usabilità e l'accuratezza. Inoltre, i vettori sparsi basati su algoritmi di prossimità approssimativa (ANN) offrono prestazioni più potenti rispetto ai sistemi di ricerca per parole chiave standard.</p>
 <p>Per maggiori dettagli, consultare la <a href="/docs/it/analyzer-overview.md">Panoramica dell'analizzatore</a> e la <a href="/docs/it/full-text-search.md">Ricerca a testo completo</a>.</p>
 <h4 id="Cluster-Management-WebUI-Beta" class="common-anchor-header">WebUI di gestione dei cluster (Beta)</h4><p>Per supportare al meglio i dati massivi e le funzionalità più ricche, il sofisticato design di Milvus include varie dipendenze, numerosi ruoli dei nodi, strutture di dati complesse e altro ancora. Questi aspetti possono rappresentare una sfida per l'utilizzo e la manutenzione.</p>
 <p>Milvus 2.5 introduce una WebUI integrata per la gestione dei cluster, che riduce le difficoltà di manutenzione del sistema visualizzando le complesse informazioni dell'ambiente di runtime di Milvus. Queste includono dettagli su database e collezioni, segmenti, canali, dipendenze, stato di salute dei nodi, informazioni sui task, query lente e altro ancora.</p>
@@ -615,5 +657,5 @@ title: Note di rilascio
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">Miglioramento delle prestazioni di concomitanza del DDL</h4><p>Ottimizzate le prestazioni di concorrenza delle operazioni del Data Definition Language (DDL).</p>
 <h4 id="RESTful-API-Feature-Alignment" class="common-anchor-header">Allineamento delle funzionalità dell'API RESTful</h4><p>Allineate le funzionalità dell'API RESTful con gli altri SDK per coerenza.</p>
 <h4 id="Security--Configuration-Updates" class="common-anchor-header">Aggiornamenti di sicurezza e configurazione</h4><p>Supportato TLS per proteggere la comunicazione tra i nodi in ambienti più complessi o aziendali. Per i dettagli, consultare la sezione <a href="/docs/it/tls.md">Configurazione della sicurezza</a>.</p>
-<h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">Miglioramenti delle prestazioni di compattazione</h4><p>Eliminati i limiti massimi dei segmenti nella compattazione mista e ora viene data priorità ai segmenti più piccoli, migliorando l'efficienza e accelerando le query su insiemi di dati grandi o frammentati.</p>
+<h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">Miglioramenti delle prestazioni di compattazione</h4><p>Eliminati i limiti massimi di segmento nella compattazione mista e ora viene data priorità ai segmenti più piccoli, migliorando l'efficienza e accelerando le query su insiemi di dati grandi o frammentati.</p>
 <h4 id="Score-Based-Channel-Balancing" class="common-anchor-header">Bilanciamento dei canali basato sui punteggi</h4><p>Introdotto un criterio che bilancia dinamicamente i carichi tra i canali, migliorando l'utilizzo delle risorse e la stabilità complessiva nelle distribuzioni su larga scala.</p>
