@@ -164,24 +164,32 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateLoaded</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
 
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-collectionName := <span class="hljs-string">`quick_setup`</span>
-
-cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    <span class="hljs-comment">// handle err</span>
-}
-
-err = cli.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(collectionName, <span class="hljs-number">5</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-number">5</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(<span class="hljs-string">&quot;collection created&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -328,26 +336,35 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateLoaded</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">ctx, cancel := context.WithCancel(context.Background())
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle err</span>
 }
+<span class="hljs-keyword">defer</span> client.Close(ctx)
 
-err = cli.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<span class="hljs-string">&quot;custom_quick_setup&quot;</span>, <span class="hljs-number">512</span>).
+err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<span class="hljs-string">&quot;custom_quick_setup&quot;</span>, <span class="hljs-number">5</span>).
     WithPKFieldName(<span class="hljs-string">&quot;my_id&quot;</span>).
     WithVarcharPK(<span class="hljs-literal">true</span>, <span class="hljs-number">512</span>).
     WithVectorFieldName(<span class="hljs-string">&quot;my_vector&quot;</span>).
     WithMetricType(entity.L2).
-    WithShardNum(<span class="hljs-number">5</span>).
     WithAutoID(<span class="hljs-literal">true</span>),
 )
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Println(err.Error())
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>

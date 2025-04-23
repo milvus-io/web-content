@@ -50,7 +50,7 @@ summary: >-
      <th><p>Tipos de índice aplicables</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>VECTOR_FLOT16</p></li><li><p>BFLOAT16_VECTOR</p></li></ul></td>
+     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>VECTOR_FLOAT16</p></li><li><p>BFLOAT16_VECTOR</p></li></ul></td>
      <td><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
    </tr>
    <tr>
@@ -110,9 +110,9 @@ summary: >-
     </button></h2><p>Como se muestra en el siguiente diagrama, un tipo de índice en Milvus consta de tres componentes principales, a saber, <strong>estructura de datos</strong>, <strong>cuantificación</strong> y <strong>refinador</strong>. La cuantificación y el refinador son opcionales, pero se utilizan ampliamente debido a un importante equilibrio entre beneficios y costes.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector-index-anatomy.png" alt="vector-index-anatomy" class="doc-image" id="vector-index-anatomy" />
-   </span> <span class="img-wrapper"> <span>vector-index-anatomy</span> </span></p>
-<p>Durante la creación del índice, Milvus combina la estructura de datos elegida y el método de cuantificación para determinar un <strong>índice de expansión</strong> óptimo. En el momento de la consulta, el sistema recupera <code translate="no">topK × expansion rate</code> vectores candidatos, aplica el refinador para recalcular las distancias con mayor precisión y, por último, devuelve los resultados más exactos <code translate="no">topK</code>. Este enfoque híbrido equilibra velocidad y precisión al restringir el refinamiento, que consume muchos recursos, a un subconjunto filtrado de candidatos.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   </span> <span class="img-wrapper"> <span>Anatomía del índice vectorial</span> </span></p>
+<p>Durante la creación del índice, Milvus combina la estructura de datos y el método de cuantificación elegidos para determinar un <strong>índice de expansión</strong> óptimo. En el momento de la consulta, el sistema recupera <code translate="no">topK × expansion rate</code> vectores candidatos, aplica el refinador para recalcular las distancias con mayor precisión y, por último, devuelve los resultados más exactos <code translate="no">topK</code>. Este enfoque híbrido equilibra velocidad y precisión al restringir el refinamiento, que consume muchos recursos, a un subconjunto filtrado de candidatos.</p>
 <h3 id="Data-structure" class="common-anchor-header">Estructura de datos</h3><p>La estructura de datos constituye la base del índice. Los tipos más comunes son:</p>
 <ul>
 <li><p><strong>Archivo invertido (IVF)</strong></p>
@@ -148,7 +148,7 @@ summary: >-
       </svg>
     </button></h2><p>Al evaluar el rendimiento, es fundamental equilibrar <strong>el tiempo de compilación</strong>, las <strong>consultas por segundo (QPS)</strong> y <strong>la tasa de recuperación</strong>. Las reglas generales son las siguientes:</p>
 <ul>
-<li><p><strong>Los tipos de índice basados en grafos</strong> suelen superar a <strong>las variantes IVF</strong> en términos de <strong>QPS</strong>.</p></li>
+<li><p><strong>Los tipos de índice basados en grafos</strong> suelen superar a <strong>las variantes IV</strong> F en términos de <strong>QPS</strong>.</p></li>
 <li><p>Las<strong>variantes IVF</strong> encajan especialmente en los escenarios con <strong>un topK grande (por ejemplo, más de 2.000)</strong>.</p></li>
 <li><p><strong>PQ</strong> suele ofrecer un mejor índice de recuperación con índices de compresión similares en comparación con <strong>SQ</strong>, aunque este último proporciona un rendimiento más rápido.</p></li>
 <li><p>El uso de discos duros para parte del índice (como en <strong>DiskANN</strong>) ayuda a gestionar grandes conjuntos de datos, pero también introduce posibles cuellos de botella de IOPS.</p></li>
@@ -246,7 +246,7 @@ summary: >-
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 2 bytes = 2.0 MB
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Calcular la compresión causada por la cuantización.</strong></p>
-<p>Las variantes de IVF suelen utilizar PQ y SQ8, y el uso de memoria puede calcularse de la siguiente manera:</p>
+<p>Las variantes de IVF suelen utilizar PQ y SQ8, y el uso de memoria puede calcularse del siguiente modo:</p>
 <ul>
 <li><p>Utilizando PQ con 8 subcuantizadores</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8.0 MB
@@ -289,7 +289,7 @@ summary: >-
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Graph-based-index-memory-usage" class="common-anchor-header">Uso de memoria de índices basados en gráficos</h3><p>Los índices basados en grafos, como el HNSW, requieren una cantidad significativa de memoria para almacenar tanto la estructura del grafo como las incrustaciones de vectores sin procesar. A continuación se muestra un desglose detallado de la memoria consumida por 1 millón de vectores de 128 dimensiones indexados utilizando el tipo de índice HNSW.</p>
+<h3 id="Graph-based-index-memory-usage" class="common-anchor-header">Uso de memoria de índices basados en gráficos</h3><p>Los índices basados en grafos, como el HNSW, requieren una cantidad significativa de memoria para almacenar tanto la estructura del grafo como las incrustaciones de vectores sin procesar. A continuación se muestra un desglose detallado de la memoria consumida por 1 millón de vectores de 128 dimensiones indexados mediante el tipo de índice HNSW.</p>
 <ol>
 <li><p><strong>Calcular la memoria utilizada por la estructura gráfica.</strong></p>
 <p>Cada vector en HNSW mantiene conexiones con sus vecinos. Con un grado de grafo (aristas por nodo) de 32, la memoria consumida puede calcularse del siguiente modo:</p>

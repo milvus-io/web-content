@@ -1,8 +1,12 @@
 ---
 id: hnsw.md
-order: 1
-summary: In diesem Artikel wird der HNSW-Index in Milvus vorgestellt.
 title: HNSW
+summary: >-
+  Der HNSW-Index ist ein graphbasierter Indizierungsalgorithmus, der die
+  Leistung bei der Suche nach hochdimensionalen fließenden Vektoren verbessern
+  kann. Er bietet eine hervorragende Suchgenauigkeit und eine geringe
+  Latenzzeit, erfordert aber einen hohen Speicheraufwand, um seine hierarchische
+  Graphenstruktur zu erhalten.
 ---
 <h1 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,22 +43,22 @@ title: HNSW
 <p>In dieser Hierarchie enthält jede Ebene Knoten, die Datenpunkte darstellen und durch Kanten verbunden sind, die ihre Nähe anzeigen. Die höheren Schichten ermöglichen Sprünge über große Entfernungen, um schnell in die Nähe des Ziels zu gelangen, während die unteren Schichten eine feinkörnige Suche ermöglichen, um möglichst genaue Ergebnisse zu erzielen.</p>
 <p>Und so funktioniert es:</p>
 <ol>
-<li><strong>Einstiegspunkt</strong>: Die Suche beginnt an einem festen Einstiegspunkt auf der obersten Ebene, der ein vorher festgelegter Knoten im Graphen ist.</li>
-<li><strong>Gierige Suche</strong>: Der Algorithmus bewegt sich gierig zum nächstgelegenen Nachbarn auf der aktuellen Ebene, bis er nicht mehr näher an den Abfragevektor herankommt. Die oberen Ebenen dienen der Navigation und fungieren als grober Filter, um potenzielle Einstiegspunkte für die feinere Suche auf den unteren Ebenen zu finden.</li>
-<li><strong>Ebene absteigen</strong>: Sobald in der aktuellen Ebene ein <strong>lokales Minimum</strong> erreicht ist, springt der Algorithmus über eine zuvor hergestellte Verbindung in die untere Ebene und wiederholt die gierige Suche.</li>
-<li><strong>Letzte</strong> <strong>Verfeinerung</strong>: Dieser Prozess wird fortgesetzt, bis die unterste Ebene erreicht ist, wo in einem letzten Verfeinerungsschritt die nächsten Nachbarn ermittelt werden.</li>
+<li><p><strong>Einstiegspunkt</strong>: Die Suche beginnt an einem festen Einstiegspunkt auf der obersten Ebene, der ein vorher festgelegter Knoten im Graphen ist.</p></li>
+<li><p><strong>Gierige Suche</strong>: Der Algorithmus bewegt sich gierig zum nächstgelegenen Nachbarn auf der aktuellen Ebene, bis er dem Abfragevektor nicht mehr näher kommt. Die oberen Ebenen dienen der Navigation und fungieren als grober Filter, um potenzielle Einstiegspunkte für die feinere Suche auf den unteren Ebenen zu finden.</p></li>
+<li><p><strong>Ebene absteigen</strong>: Sobald in der aktuellen Ebene ein <strong>lokales Minimum</strong> erreicht ist, springt der Algorithmus über eine zuvor hergestellte Verbindung in die untere Ebene und wiederholt die gierige Suche.</p></li>
+<li><p><strong>Letzte</strong> <strong>Verfeinerung</strong>: Dieser Prozess wird fortgesetzt, bis die unterste Ebene erreicht ist, wo in einem letzten Verfeinerungsschritt die nächsten Nachbarn ermittelt werden.</p></li>
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/hnsw.png" alt="HNSW" class="doc-image" id="hnsw" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/HNSW.png" alt="HNSW" class="doc-image" id="hnsw" />
    </span> <span class="img-wrapper"> <span>HNSW</span> </span></p>
 <p>Die Leistung von HNSW hängt von mehreren Schlüsselparametern ab, die sowohl die Struktur des Graphen als auch das Suchverhalten steuern. Dazu gehören:</p>
 <ul>
-<li><code translate="no">M</code>: Die maximale Anzahl von Kanten oder Verbindungen, die jeder Knoten im Graphen auf jeder Ebene der Hierarchie haben kann. Eine höhere <code translate="no">M</code> führt zu einem dichteren Graphen und erhöht die Auffindbarkeit und die Genauigkeit, da die Suche mehr Pfade zu erkunden hat, was aber auch mehr Speicherplatz verbraucht und die Einfügezeit aufgrund der zusätzlichen Verbindungen verlangsamt. Wie in der obigen Abbildung dargestellt, bedeutet <strong>M = 5</strong>, dass jeder Knoten im HNSW-Graphen direkt mit maximal 5 anderen Knoten verbunden ist. Dadurch entsteht eine mäßig dichte Graphenstruktur, bei der die Knoten über mehrere Pfade zu anderen Knoten gelangen.</li>
-<li><code translate="no">efConstruction</code>: Die Anzahl der Kandidaten, die bei der Indexerstellung berücksichtigt werden. Eine höhere <code translate="no">efConstruction</code> führt im Allgemeinen zu einer besseren Qualität des Graphen, erfordert aber mehr Zeit für die Erstellung.</li>
-<li><code translate="no">ef</code>: Die Anzahl der Nachbarn, die während einer Suche ausgewertet werden. Eine Erhöhung von <code translate="no">ef</code> verbessert die Wahrscheinlichkeit, die nächsten Nachbarn zu finden, verlangsamt aber den Suchprozess.</li>
+<li><p><code translate="no">M</code>: Die maximale Anzahl von Kanten oder Verbindungen, die jeder Knoten im Graphen auf jeder Ebene der Hierarchie haben kann. Eine höhere <code translate="no">M</code> führt zu einem dichteren Graphen und erhöht die Auffindbarkeit und die Genauigkeit, da die Suche mehr Pfade zu erkunden hat, was aber auch mehr Speicherplatz verbraucht und die Einfügezeit aufgrund zusätzlicher Verbindungen verlangsamt. Wie in der obigen Abbildung dargestellt, bedeutet <strong>M = 5</strong>, dass jeder Knoten im HNSW-Graphen direkt mit maximal 5 anderen Knoten verbunden ist. Dadurch entsteht eine mäßig dichte Graphenstruktur, bei der die Knoten über mehrere Pfade zu anderen Knoten gelangen.</p></li>
+<li><p><code translate="no">efConstruction</code>: Die Anzahl der Kandidaten, die bei der Indexerstellung berücksichtigt werden. Eine höhere <code translate="no">efConstruction</code> führt im Allgemeinen zu einer besseren Qualität des Graphen, erfordert aber mehr Zeit für die Erstellung.</p></li>
+<li><p><code translate="no">ef</code>: Die Anzahl der Nachbarn, die während einer Suche ausgewertet werden. Eine Erhöhung von <code translate="no">ef</code> verbessert die Wahrscheinlichkeit, die nächsten Nachbarn zu finden, verlangsamt aber den Suchprozess.</p></li>
 </ul>
-<p>Wie Sie diese Einstellungen an Ihre Bedürfnisse anpassen können, erfahren Sie unter <a href="#index-params">Index-Parameter</a>.</p>
+<p>Wie Sie diese Einstellungen an Ihre Bedürfnisse anpassen können, erfahren Sie unter <a href="/docs/de/hnsw.md#Index-params">Index-Parameter</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Index erstellen<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,10 +97,10 @@ index_params.add_index(
 <li><p><code translate="no">metric_type</code>: Die Methode zur Berechnung des Abstands zwischen Vektoren. Unterstützte Werte sind <code translate="no">COSINE</code>, <code translate="no">L2</code> und <code translate="no">IP</code>. Einzelheiten finden Sie unter <a href="/docs/de/metric.md">Metrische Typen</a>.</p></li>
 <li><p><code translate="no">params</code>: Zusätzliche Konfigurationsoptionen für den Aufbau des Index.</p>
 <ul>
-<li><code translate="no">M</code>: Maximale Anzahl von Nachbarn, mit denen sich jeder Knoten verbinden kann.</li>
-<li><code translate="no">efConstruction</code>: Anzahl der Nachbarschaftskandidaten, die während des Indexaufbaus für eine Verbindung in Frage kommen.</li>
+<li><p><code translate="no">M</code>: Maximale Anzahl von Nachbarn, mit denen sich jeder Knoten verbinden kann.</p></li>
+<li><p><code translate="no">efConstruction</code>: Anzahl der Nachbarschaftskandidaten, die während des Indexaufbaus für eine Verbindung in Frage kommen.</p></li>
 </ul>
-<p>Weitere Informationen zu den für den Index <code translate="no">HNSW</code> verfügbaren Parametern finden Sie unter <a href="#Index-building-params">Indexaufbau-Parameter</a>.</p></li>
+<p>Weitere Informationen zu den für den Index <code translate="no">HNSW</code> verfügbaren Parametern finden Sie unter <a href="/docs/de/hnsw.md#Index-building-params">Indexaufbau-Parameter</a>.</p></li>
 </ul>
 <p>Sobald die Indexparameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode <code translate="no">create_index()</code> direkt verwenden oder die Indexparameter in der Methode <code translate="no">create_collection</code> übergeben. Weitere Informationen finden Sie unter <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Suche im Index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
@@ -123,6 +127,7 @@ index_params.add_index(
 
 res = MilvusClient.search(
     collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
     limit=<span class="hljs-number">10</span>,  <span class="hljs-comment"># TopK results to return</span>
     search_params=search_params
@@ -134,7 +139,7 @@ res = MilvusClient.search(
 <ul>
 <li><code translate="no">ef</code>: Anzahl der Nachbarn, die bei einer Suche berücksichtigt werden sollen.</li>
 </ul>
-<p>Weitere Suchparameter, die für den Index <code translate="no">HNSW</code> verfügbar sind, finden Sie unter <a href="#index-specific-search-params">Indexspezifische Suchparameter</a>.</p></li>
+<p>Weitere Suchparameter, die für den Index <code translate="no">HNSW</code> verfügbar sind, finden Sie unter <a href="/docs/de/hnsw.md#Index-specific-search-params">Indexspezifische Suchparameter</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Index-Parameter<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -152,22 +157,39 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Dieser Abschnitt gibt einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchen im Index verwendet werden.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/hnsw.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
 <table>
-<thead>
-<tr><th><strong>Parameter</strong></th><th><strong>Beschreibung</strong></th><th><strong>Wertebereich</strong></th><th><strong>Tuning-Vorschlag</strong></th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">M</code></td><td>Maximale Anzahl von Verbindungen （oder Kanten), die jeder Knoten im Graphen haben kann, einschließlich ausgehender und eingehender Kanten.<br>Dieser Parameter wirkt sich direkt auf den Indexaufbau und die Suche aus.</td><td><strong>Typ</strong>: Integer<br><strong>Bereich</strong>: [2, 2048]<br><strong>Standardwert</strong>: <code translate="no">30</code> (bis zu 30 ausgehende und 30 eingehende Kanten pro Knoten)</td><td>Eine größere <code translate="no">M</code> führt im Allgemeinen zu einer <strong>höheren Genauigkeit</strong>, <strong>erhöht</strong> jedoch <strong>den Speicher-Overhead</strong> und <strong>verlangsamt sowohl den Indexaufbau als auch die Suche</strong>.<br>Erwägen Sie eine Erhöhung von <code translate="no">M</code> für Datensätze mit hoher Dimensionalität oder wenn eine hohe Wiederauffindbarkeit entscheidend ist.<br>Ziehen Sie eine Verringerung von <code translate="no">M</code> in Betracht, wenn die Speichernutzung und die Suchgeschwindigkeit im Vordergrund stehen.<br>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: [5, 100].</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>Anzahl der Nachbarschaftskandidaten, die bei der Indexerstellung für die Verbindung berücksichtigt werden.<br>Für jedes neue Element wird ein größerer Pool von Kandidaten ausgewertet, aber die maximale Anzahl der tatsächlich hergestellten Verbindungen ist immer noch durch <code translate="no">M</code> begrenzt.</td><td><strong>Typ</strong>: Integer<br><strong>Bereich</strong>: [1, <em>int_max</em>]<br><strong>Standardwert</strong>: <code translate="no">360</code></td><td>Ein höherer <code translate="no">efConstruction</code> führt normalerweise zu einem <strong>genaueren Index</strong>, da mehr potenzielle Verbindungen untersucht werden. Dies führt jedoch auch zu einer <strong>längeren Indizierungszeit und einem erhöhten Speicherverbrauch</strong> während der Erstellung.<br>Erwägen Sie, <code translate="no">efConstruction</code> zu erhöhen, um die Genauigkeit zu verbessern, insbesondere in Szenarien, in denen die Indizierungszeit weniger kritisch ist.<br>Ziehen Sie eine Verringerung von <code translate="no">efConstruction</code> in Betracht, um den Indexaufbau zu beschleunigen, wenn Ressourcenbeschränkungen ein Problem darstellen.<br>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs festzulegen: [50, 500].</td></tr>
-</tbody>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Beschreibung</p></th>
+     <th><p>Wertebereich</p></th>
+     <th><p>Tuning-Vorschlag</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">M</code></p></td>
+     <td><p>Maximale Anzahl von Verbindungen （oder Kanten), die jeder Knoten im Graphen haben kann, einschließlich ausgehender und eingehender Kanten. Dieser Parameter wirkt sich direkt auf den Indexaufbau und die Suche aus.</p></td>
+     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [2, 2048]</p><p><strong>Standardwert</strong>: <code translate="no">30</code> (bis zu 30 ausgehende und 30 eingehende Kanten pro Knoten)</p></td>
+     <td><p>Eine größere <code translate="no">M</code> führt im Allgemeinen zu einer <strong>höheren Genauigkeit</strong>, <strong>erhöht</strong> jedoch <strong>den Speicher-Overhead</strong> und <strong>verlangsamt sowohl den Indexaufbau als auch die Suche</strong>. Erwägen Sie eine Erhöhung von <code translate="no">M</code> für Datensätze mit hoher Dimensionalität oder wenn eine hohe Wiederauffindbarkeit entscheidend ist.</p><p>Ziehen Sie eine Verringerung von <code translate="no">M</code> in Betracht, wenn die Speichernutzung und die Suchgeschwindigkeit im Vordergrund stehen.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs festzulegen: [5, 100].</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">efConstruction</code></p></td>
+     <td><p>Anzahl der Nachbarschaftskandidaten, die bei der Indexerstellung für die Verbindung berücksichtigt werden. Für jedes neue Element wird ein größerer Pool von Kandidaten ausgewertet, aber die maximale Anzahl der tatsächlich hergestellten Verbindungen ist immer noch durch <code translate="no">M</code> begrenzt.</p></td>
+     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, <em>int_max</em>]</p><p><strong>Standardwert</strong>: <code translate="no">360</code></p></td>
+     <td><p>Ein höherer <code translate="no">efConstruction</code> führt normalerweise zu einem <strong>genaueren Index</strong>, da mehr potenzielle Verbindungen untersucht werden. Dies führt jedoch auch zu einer <strong>längeren Indizierungszeit und einem erhöhten Speicherverbrauch</strong> während der Erstellung. Erwägen Sie, <code translate="no">efConstruction</code> zu erhöhen, um die Genauigkeit zu verbessern, insbesondere in Szenarien, in denen die Indizierungszeit weniger kritisch ist.</p><p>Ziehen Sie eine Verringerung von <code translate="no">efConstruction</code> in Betracht, um den Indexaufbau zu beschleunigen, wenn Ressourcenbeschränkungen ein Problem darstellen.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs festzulegen: [50, 500].</p></td>
+   </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/hnsw.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
 <table>
-<thead>
-<tr><th><strong>Parameter</strong></th><th><strong>Beschreibung</strong></th><th><strong>Wertebereich</strong></th><th><strong>Tuning-Vorschlag</strong></th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">ef</code></td><td><strong>Steuert die Breite der Suche während der Abfrage der nächsten Nachbarn.</strong> Er bestimmt, wie viele Knoten besucht und als potenzielle nächste Nachbarn bewertet werden. Dieser Parameter wirkt sich nur auf den Suchprozess aus und gilt ausschließlich für die unterste Schicht des Graphen.</td><td><strong>Typ</strong>: Integer<br><strong>Bereich</strong>: [1, <em>int_max</em>]<br><strong>Standardwert</strong>: <em>limit</em> (TopK nearest neighbors to return)</td><td>Eine größere <code translate="no">ef</code> führt im Allgemeinen zu einer <strong>höheren Suchgenauigkeit</strong>, da mehr potenzielle Nachbarn berücksichtigt werden. Dies <strong>erhöht</strong> jedoch auch <strong>die Suchzeit</strong>.<br>Erwägen Sie, <code translate="no">ef</code> zu erhöhen, wenn eine hohe Wiederfindungsrate entscheidend ist und die Suchgeschwindigkeit weniger wichtig ist.<br>Ziehen Sie in Erwägung, <code translate="no">ef</code> zu verringern, um schnelleren Suchen den Vorzug zu geben, insbesondere in Szenarien, in denen eine leichte Verringerung der Genauigkeit akzeptabel ist.<br>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: [K, 10K].</td></tr>
-</tbody>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Beschreibung</p></th>
+     <th><p>Wertebereich</p></th>
+     <th><p>Tuning-Vorschlag</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">ef</code></p></td>
+     <td><p>Steuert die Breite der Suche während der Abfrage der nächsten Nachbarn. Er bestimmt, wie viele Knoten besucht und als potenzielle nächste Nachbarn bewertet werden.  Dieser Parameter wirkt sich nur auf den Suchprozess aus und gilt ausschließlich für die unterste Schicht des Graphen.</p></td>
+     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, <em>int_max</em>]</p><p><strong>Standardwert</strong>: <em>limit</em> (TopK nächste Nachbarn, die zurückgegeben werden)</p></td>
+     <td><p>Eine größere <code translate="no">ef</code> führt im Allgemeinen zu einer <strong>höheren Suchgenauigkeit</strong>, da mehr potenzielle Nachbarn berücksichtigt werden. Dies <strong>erhöht</strong> jedoch auch <strong>die Suchzeit</strong>. Erwägen Sie, <code translate="no">ef</code> zu erhöhen, wenn eine hohe Wiederfindungsrate entscheidend ist und die Suchgeschwindigkeit weniger wichtig ist.</p><p>Ziehen Sie in Erwägung, <code translate="no">ef</code> zu verringern, um schnelleren Suchen den Vorzug zu geben, insbesondere in Szenarien, in denen eine leichte Verringerung der Genauigkeit akzeptabel ist.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: [K, 10K].</p></td>
+   </tr>
 </table>

@@ -49,7 +49,7 @@ summary: >-
       </svg>
     </button></h2><p>Um analisador no Milvus consiste exatamente num <strong>tokenizador</strong> e em <strong>zero ou mais</strong> filtros.</p>
 <ul>
-<li><p><strong>Tokenizador</strong>: O tokenizador divide o texto de entrada em unidades discretas chamadas tokens. Esses tokens podem ser palavras ou frases, dependendo do tipo de tokenizador.</p></li>
+<li><p><strong>Tokenizador</strong>: O tokenizador divide o texto de entrada em unidades discretas chamadas tokens. Estes tokens podem ser palavras ou frases, dependendo do tipo de tokenizador.</p></li>
 <li><p><strong>Filtros</strong>: Os filtros podem ser aplicados aos tokens para refiná-los ainda mais, por exemplo, tornando-os minúsculos ou removendo palavras comuns.</p></li>
 </ul>
 <div class="alert note">
@@ -58,8 +58,8 @@ summary: >-
 <p>O fluxo de trabalho abaixo mostra como um analisador processa o texto.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/analyzer-process-workflow.png" alt="analyzer-process-workflow" class="doc-image" id="analyzer-process-workflow" />
-   </span> <span class="img-wrapper"> <span>analisador-processo-fluxo de trabalho</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/analyzer-process-workflow.png" alt="Analyzer Process Workflow" class="doc-image" id="analyzer-process-workflow" />
+   </span> <span class="img-wrapper"> <span>Fluxo de trabalho do analisador</span> </span></p>
 <h2 id="Analyzer-types" class="common-anchor-header">Tipos de analisadores<button data-href="#Analyzer-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,13 +77,13 @@ summary: >-
       </svg>
     </button></h2><p>O Milvus fornece dois tipos de analisadores para responder a diferentes necessidades de processamento de texto:</p>
 <ul>
-<li><p><strong>Analisador incorporado</strong>: Trata-se de configurações predefinidas que abrangem tarefas comuns de processamento de texto com um mínimo de configuração. Os analisadores incorporados são ideais para pesquisas de carácter geral, uma vez que não requerem uma configuração complexa.</p></li>
+<li><p><strong>Analisador incorporado</strong>: Trata-se de configurações predefinidas que abrangem tarefas comuns de processamento de texto com uma configuração mínima. Os analisadores incorporados são ideais para pesquisas de carácter geral, uma vez que não requerem uma configuração complexa.</p></li>
 <li><p><strong>Analisador personalizado</strong>: Para requisitos mais avançados, os analisadores personalizados permitem-lhe definir a sua própria configuração, especificando o tokenizador e zero ou mais filtros. Este nível de personalização é especialmente útil para casos de utilização especializados em que é necessário um controlo preciso do processamento de texto.</p></li>
 </ul>
 <div class="alert note">
 <p>Se omitir as configurações do analisador durante a criação da coleção, o Milvus utiliza por defeito o analisador <code translate="no">standard</code> para todo o processamento de texto. Para obter detalhes, consulte <a href="/docs/pt/standard-analyzer.md">Padrão</a>.</p>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">Analisador incorporado</h3><p>Os analisadores incorporados no Milvus são pré-configurados com tokenizadores e filtros específicos, permitindo a sua utilização imediata sem necessidade de definir estes componentes. Cada analisador incorporado serve como um modelo que inclui um tokenizador e filtros predefinidos, com parâmetros opcionais para personalização.</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">Analisador incorporado</h3><p>Os analisadores incorporados no Milvus são pré-configurados com tokenizadores e filtros específicos, permitindo a sua utilização imediata sem necessidade de definir estes componentes. Cada analisador integrado serve como um modelo que inclui um tokenizador e filtros predefinidos, com parâmetros opcionais para personalização.</p>
 <p>Por exemplo, para usar o analisador interno <code translate="no">standard</code>, basta especificar seu nome <code translate="no">standard</code> como <code translate="no">type</code> e, opcionalmente, incluir configurações extras específicas para esse tipo de analisador, como <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -101,18 +101,14 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>] <span class="hljs-comment">// Defines a list of common words (stop words) to exclude from tokenization</span>
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-string">&quot;stop_words&quot;</span>: []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>}}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;standard&quot;,
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O resultado será:</p>
-<pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
-<button class="copy-code-btn"></button></code></pre>
-<p>Isso demonstra que o analisador tokeniza corretamente o texto de entrada filtrando as palavras de parada <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, e <code translate="no">&quot;for&quot;</code>, enquanto retorna os tokens significativos restantes.</p>
-<p>A configuração do analisador interno <code translate="no">standard</code> acima é equivalente à configuração de um <a href="/docs/pt/analyzer-overview.md#share-N6FndaYZFoIPxExGXTDcEyHgnDc">analisador personalizado</a> com os seguintes parâmetros, onde as opções <code translate="no">tokenizer</code> e <code translate="no">filter</code> são explicitamente definidas para obter uma funcionalidade semelhante:</p>
+<p>A configuração do analisador incorporado <code translate="no">standard</code> acima é equivalente à configuração de um <a href="/docs/pt/analyzer-overview.md#Custom-analyzer">analisador personalizado</a> com os seguintes parâmetros, onde as opções <code translate="no">tokenizer</code> e <code translate="no">filter</code> são explicitamente definidas para alcançar uma funcionalidade semelhante:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -146,7 +142,11 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
     ]
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-string">&quot;lowercase&quot;</span>, <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+        <span class="hljs-string">&quot;type&quot;</span>:       <span class="hljs-string">&quot;stop&quot;</span>,
+        <span class="hljs-string">&quot;stop_words&quot;</span>: []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>},
+    }}}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;standard&quot;,
@@ -185,14 +185,14 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obter uma lista de tokenizadores disponíveis para escolha, consulte <a href="/docs/pt/tokenizers">Referência de tokenizador</a>.</p>
-<h4 id="Filter" class="common-anchor-header">Filtro</h4><p><strong>Os filtros</strong> são componentes <strong>opcionais</strong> que trabalham nos tokens produzidos pelo tokenizador, transformando-os ou refinando-os conforme necessário. Por exemplo, depois de aplicar um filtro <code translate="no">lowercase</code> aos termos tokenizados <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, o resultado pode ser:</p>
+<h4 id="Filter" class="common-anchor-header">Filtro</h4><p><strong>Os filtros</strong> são componentes <strong>opcionais</strong> que trabalham nos tokens produzidos pelo tokenizador, transformando-os ou refinando-os conforme necessário. Por exemplo, após aplicar um filtro <code translate="no">lowercase</code> aos termos tokenizados <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, o resultado pode ser:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>Os filtros em um analisador personalizado podem ser <strong>incorporados</strong> ou <strong>personalizados</strong>, dependendo das necessidades de configuração.</p>
@@ -222,14 +222,15 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>], <span class="hljs-comment">// Optional: Built-in filter that converts text to lowercase</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+        <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-string">&quot;lowercase&quot;</span>}}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;standard&quot;,
        &quot;filter&quot;:  [&quot;lowercase&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Filtros personalizados</strong>: Os filtros personalizados permitem configurações especializadas. É possível definir um filtro personalizado escolhendo um tipo de filtro válido (<code translate="no">filter.type</code>) e adicionando configurações específicas para cada tipo de filtro. Exemplos de tipos de filtro que suportam personalização:</p>
+<li><p><strong>Filtros personalizados</strong>: Os filtros personalizados permitem configurações especializadas. É possível definir um filtro personalizado escolhendo um tipo de filtro válido (<code translate="no">filter.type</code>) e adicionando configurações específicas para cada tipo de filtro. Exemplos de tipos de filtro que suportam a personalização:</p>
 <ul>
 <li><p><code translate="no">stop</code>: Remove palavras comuns especificadas, definindo uma lista de palavras de paragem (por exemplo, <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). Para mais informações, consulte <a href="/docs/pt/stop-filter.md">Parar</a>.</p></li>
 <li><p><code translate="no">length</code>: Exclui tokens com base em critérios de comprimento, como a definição de um comprimento máximo de token. Para obter detalhes, consulte <a href="/docs/pt/length-filter.md">Comprimento</a>.</p></li>
@@ -266,7 +267,11 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
     ]
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+        <span class="hljs-string">&quot;type&quot;</span>:       <span class="hljs-string">&quot;stop&quot;</span>,
+        <span class="hljs-string">&quot;stop_words&quot;</span>: []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>},
+    }}}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> analyzerParams=<span class="hljs-string">&#x27;{
        &quot;type&quot;: &quot;standard&quot;,
@@ -278,7 +283,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter uma lista de tipos de filtros disponíveis e os seus parâmetros específicos, consulte <a href="/docs/pt/filters">Referência de filtros</a>.</p></li>
+<p>Para obter uma lista dos tipos de filtros disponíveis e dos seus parâmetros específicos, consulte <a href="/docs/pt/filters">Referência de filtros</a>.</p></li>
 </ul>
 <h2 id="Example-use" class="common-anchor-header">Exemplo de utilização<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -338,7 +343,29 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 <span class="hljs-comment">// Set up a Milvus client</span>
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)  
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).WithDynamicFieldEnabled(<span class="hljs-literal">false</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -355,32 +382,21 @@ analyzer_params_built_in = {
 }
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Add fields to schema</span>
-<span class="hljs-comment">// Use a built-in analyzer</span>
-Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>);
-<span class="hljs-comment">// Add VARCHAR field `title_en`</span>
-schema.addField(AddFieldReq.builder()
-        .fieldName(<span class="hljs-string">&quot;title_en&quot;</span>)
-        .dataType(DataType.VarChar)
-        .maxLength(<span class="hljs-number">1000</span>)
-        .enableAnalyzer(<span class="hljs-literal">true</span>)
-        .analyzerParams(analyzerParamsBuiltin)
-        .enableMatch(<span class="hljs-literal">true</span>)
-        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Use a built-in analyzer for VARCHAR field `title_en`</span>
 <span class="hljs-keyword">const</span> analyzerParamsBuiltIn = {
   <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;english&quot;</span>,
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Configurar e verificar um analisador personalizado:</strong></p>
 <ul>
-<li><strong>Configuração:</strong> Defina um analisador personalizado que utiliza um tokenizador padrão juntamente com um filtro de minúsculas incorporado e filtros personalizados para comprimento de token e palavras de paragem.</li>
+<li><strong>Configuração:</strong> Defina um analisador personalizado que utilize um tokenizador padrão juntamente com um filtro de minúsculas incorporado e filtros personalizados para comprimento de token e palavras de paragem.</li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
@@ -433,7 +449,15 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
   ],
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-string">&quot;lowercase&quot;</span>, 
+    <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>,
+        <span class="hljs-string">&quot;max&quot;</span>:  <span class="hljs-number">40</span>,
+    <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stop&quot;</span>,
+        <span class="hljs-string">&quot;stop_words&quot;</span>: []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>},
+    }}}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre></li>
@@ -523,7 +547,23 @@ schema.addField(AddFieldReq.builder()
   ],
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;id&quot;</span>).
+    WithDataType(entity.FieldTypeInt64).
+    WithIsPrimaryKey(<span class="hljs-literal">true</span>).
+    WithIsAutoID(<span class="hljs-literal">true</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;embedding&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(<span class="hljs-number">3</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;title&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">1000</span>).
+    WithEnableAnalyzer(<span class="hljs-literal">true</span>).
+    WithAnalyzerParams(analyzerParams).
+    WithEnableMatch(<span class="hljs-literal">true</span>),
+)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -535,7 +575,7 @@ index_params.add_index(field_name=<span class="hljs-string">&quot;embedding&quot
 
 <span class="hljs-comment"># Create the collection with the defined schema and index parameters</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params
 )
@@ -550,7 +590,7 @@ indexes.add(IndexParam.builder()
 
 <span class="hljs-comment">// Create collection with defined schema</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
         .indexParams(indexes)
         .build();
@@ -567,14 +607,23 @@ client.createCollection(requestCreate);
 
 <span class="hljs-comment">// Create collection with defined schema</span>
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>,
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
   <span class="hljs-attr">schema</span>: schema,
   <span class="hljs-attr">index_params</span>: indexParams,
 });
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Collection created successfully!&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">idx := index.NewAutoIndex(index.MetricType(entity.COSINE))
+indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>, idx)
+
+err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
+        WithIndexOptions(indexOption))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

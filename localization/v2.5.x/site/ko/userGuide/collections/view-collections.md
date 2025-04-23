@@ -82,21 +82,21 @@ System.out.println(resp.getCollectionNames());
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;127.0.0.1:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
 token := <span class="hljs-string">&quot;root:Milvus&quot;</span>
-
-cli, err := client.New(ctx, &amp;milvusclient.ClientConfig{
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
     APIKey:  token,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
 }
+<span class="hljs-keyword">defer</span> client.Close(ctx)
 
-<span class="hljs-keyword">defer</span> cli.Close(ctx)
-
-collectionNames, err := cli.ListCollections(ctx, milvusclient.NewListCollectionOption())
+collectionNames, err := client.ListCollections(ctx, milvusclient.NewListCollectionOption())
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 
@@ -109,7 +109,7 @@ fmt.Println(collectionNames)
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>이미 <code translate="no">quick_setup</code> 라는 이름의 컬렉션을 만든 경우 위 예제의 결과는 다음과 비슷할 것입니다.</p>
-<pre><code translate="no" class="language-json">[<span class="hljs-string">&quot;quick_setup&quot;</span>]
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span><span class="hljs-string">&quot;quick_setup&quot;</span><span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Describe-Collection" class="common-anchor-header">컬렉션 설명<button data-href="#Describe-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -126,7 +126,7 @@ fmt.Println(collectionNames)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>특정 컬렉션의 세부 정보를 얻을 수도 있습니다. 다음 예제에서는 이미 quick_setup이라는 이름의 컬렉션을 만들었다고 가정합니다.</p>
+    </button></h2><p>특정 컬렉션의 세부 정보를 얻을 수도 있습니다. 다음 예제에서는 이미 quick_setup이라는 컬렉션을 만들었다고 가정합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.describe_collection(
@@ -150,30 +150,10 @@ System.out.println(resp);
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;context&quot;</span>
-    <span class="hljs-string">&quot;fmt&quot;</span>
-
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
-)
-
-ctx, cancel := context.WithCancel(context.Background())
-<span class="hljs-keyword">defer</span> cancel()
-
-milvusAddr := <span class="hljs-string">&quot;127.0.0.1:19530&quot;</span>
-
-cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: milvusAddr,
-})
+<pre><code translate="no" class="language-go">collection, err := client.DescribeCollection(ctx, milvusclient.NewDescribeCollectionOption(<span class="hljs-string">&quot;quick_setup&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())
-}
-
-<span class="hljs-keyword">defer</span> cli.Close(ctx)
-
-collection, err := cli.DescribeCollection(ctx, milvusclient.NewDescribeCollectionOption(<span class="hljs-string">&quot;quick_setup&quot;</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    <span class="hljs-comment">// handle error</span>
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
 }
 
 fmt.Println(collection)
@@ -188,33 +168,33 @@ fmt.Println(collection)
 <button class="copy-code-btn"></button></code></pre>
 <p>위 예제의 결과는 다음과 유사해야 합니다.</p>
 <pre><code translate="no" class="language-plaintext">{
-    <span class="hljs-string">&#x27;collection_name&#x27;</span>: <span class="hljs-string">&#x27;quick_setup&#x27;</span>, 
-    <span class="hljs-string">&#x27;auto_id&#x27;</span>: <span class="hljs-literal">False</span>, 
-    <span class="hljs-string">&#x27;num_shards&#x27;</span>: <span class="hljs-number">1</span>, 
-    <span class="hljs-string">&#x27;description&#x27;</span>: <span class="hljs-string">&#x27;&#x27;</span>, 
-    <span class="hljs-string">&#x27;fields&#x27;</span>: [
+    &#x27;collection_name&#x27;: &#x27;quick_setup&#x27;, 
+    &#x27;auto_id&#x27;: False, 
+    &#x27;num_shards&#x27;: 1, 
+    &#x27;description&#x27;: &#x27;&#x27;, 
+    &#x27;fields&#x27;: [
         {
-            <span class="hljs-string">&#x27;field_id&#x27;</span>: <span class="hljs-number">100</span>, 
-            <span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;id&#x27;</span>, 
-            <span class="hljs-string">&#x27;description&#x27;</span>: <span class="hljs-string">&#x27;&#x27;</span>, 
-            <span class="hljs-string">&#x27;type&#x27;</span>: &lt;DataType.INT64: <span class="hljs-number">5</span>&gt;, 
-            <span class="hljs-string">&#x27;params&#x27;</span>: {}, 
-            <span class="hljs-string">&#x27;is_primary&#x27;</span>: <span class="hljs-literal">True</span>
+            &#x27;field_id&#x27;: 100, 
+            &#x27;name&#x27;: &#x27;id&#x27;, 
+            &#x27;description&#x27;: &#x27;&#x27;, 
+            &#x27;type&#x27;: &lt;DataType.INT64: 5&gt;, 
+            &#x27;params&#x27;: {}, 
+            &#x27;is_primary&#x27;: True
         }, 
         {
-            <span class="hljs-string">&#x27;field_id&#x27;</span>: <span class="hljs-number">101</span>, 
-            <span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;vector&#x27;</span>, 
-            <span class="hljs-string">&#x27;description&#x27;</span>: <span class="hljs-string">&#x27;&#x27;</span>, 
-            <span class="hljs-string">&#x27;type&#x27;</span>: &lt;DataType.FLOAT_VECTOR: <span class="hljs-number">101</span>&gt;, 
-            <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;dim&#x27;</span>: <span class="hljs-number">768</span>}
+            &#x27;field_id&#x27;: 101, 
+            &#x27;name&#x27;: &#x27;vector&#x27;, 
+            &#x27;description&#x27;: &#x27;&#x27;, 
+            &#x27;type&#x27;: &lt;DataType.FLOAT_VECTOR: 101&gt;, 
+            &#x27;params&#x27;: {&#x27;dim&#x27;: 768}
         }
     ], 
-    <span class="hljs-string">&#x27;functions&#x27;</span>: [], 
-    <span class="hljs-string">&#x27;aliases&#x27;</span>: [], 
-    <span class="hljs-string">&#x27;collection_id&#x27;</span>: <span class="hljs-number">456909630285026300</span>, 
-    <span class="hljs-string">&#x27;consistency_level&#x27;</span>: <span class="hljs-number">2</span>, 
-    <span class="hljs-string">&#x27;properties&#x27;</span>: {}, 
-    <span class="hljs-string">&#x27;num_partitions&#x27;</span>: <span class="hljs-number">1</span>, 
-    <span class="hljs-string">&#x27;enable_dynamic_field&#x27;</span>: <span class="hljs-literal">True</span>
+    &#x27;functions&#x27;: [], 
+    &#x27;aliases&#x27;: [], 
+    &#x27;collection_id&#x27;: 456909630285026300, 
+    &#x27;consistency_level&#x27;: 2, 
+    &#x27;properties&#x27;: {}, 
+    &#x27;num_partitions&#x27;: 1, 
+    &#x27;enable_dynamic_field&#x27;: True
 }
 <button class="copy-code-btn"></button></code></pre>

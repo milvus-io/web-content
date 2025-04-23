@@ -300,7 +300,7 @@
       },
       {
         "label": "一貫性レベル",
-        "id": "consistency.md",
+        "id": "tune_consistency.md",
         "order": 10,
         "children": []
       },
@@ -801,21 +801,27 @@
             "children": []
           },
           {
+            "label": "Elasticsearchからmilvusへのクエリ",
+            "id": "elasticsearch-queries-to-milvus.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "検索イテレータ",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "パーティション・キーの使用",
             "id": "use-partition-key.md",
-            "order": 9,
+            "order": 11,
             "children": []
           },
           {
             "label": "再ランキング",
             "id": "reranking.md",
-            "order": 10,
+            "order": 12,
             "children": []
           }
         ]
@@ -883,7 +889,7 @@
             "children": []
           },
           {
-            "label": "講師",
+            "label": "インストラクター",
             "id": "embed-with-instructor.md",
             "order": 9,
             "children": []
@@ -1452,6 +1458,12 @@
                 "label": "補助金の役割",
                 "id": "grant_roles.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "ユーザーとロールの削除",
+                "id": "drop_users_roles.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -2293,7 +2305,7 @@
             "children": []
           },
           {
-            "label": "推薦システム",
+            "label": "レコメンダー・システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

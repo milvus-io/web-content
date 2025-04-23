@@ -1,9 +1,17 @@
 ---
 id: mmap.md
-summary: MMap ermöglicht mehr Daten in einem einzigen Knoten.
-title: MMap-aktivierte Datenspeicherung
+title: mmap verwenden
+summary: >-
+  Memory Mapping (Mmap) ermöglicht den direkten Speicherzugriff auf große
+  Dateien auf der Festplatte, so dass Milvus Indizes und Daten sowohl im
+  Speicher als auch auf der Festplatte speichern kann. Dieser Ansatz hilft bei
+  der Optimierung der Datenplatzierungspolitik auf der Grundlage der
+  Zugriffshäufigkeit und erweitert die Speicherkapazität für Sammlungen, ohne
+  die Suchleistung wesentlich zu beeinträchtigen. Diese Seite hilft Ihnen zu
+  verstehen, wie Milvus mmap verwendet, um eine schnelle und effiziente
+  Datenspeicherung und -abfrage zu ermöglichen.
 ---
-<h1 id="MMap-enabled-Data-Storage" class="common-anchor-header">MMap-aktivierte Datenspeicherung<button data-href="#MMap-enabled-Data-Storage" class="anchor-icon" translate="no">
+<h1 id="Use-mmap" class="common-anchor-header">mmap verwenden<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +26,8 @@ title: MMap-aktivierte Datenspeicherung
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus ermöglichen memory-mapped Dateien die direkte Zuordnung von Dateiinhalten zum Speicher. Diese Funktion erhöht die Speichereffizienz, insbesondere in Situationen, in denen der verfügbare Speicher knapp, das vollständige Laden von Daten aber nicht möglich ist. Dieser Optimierungsmechanismus kann die Datenkapazität erhöhen und gleichzeitig die Leistung bis zu einer bestimmten Grenze sicherstellen; wenn jedoch die Datenmenge den Speicherplatz zu sehr übersteigt, kann die Such- und Abfrageleistung ernsthaft beeinträchtigt werden, weshalb Sie diese Funktion je nach Bedarf ein- oder ausschalten sollten.</p>
-<h2 id="Configure-memory-mapping" class="common-anchor-header">Konfigurieren Sie die Speicherzuordnung<button data-href="#Configure-memory-mapping" class="anchor-icon" translate="no">
+    </button></h1><p>Memory Mapping (Mmap) ermöglicht den direkten Speicherzugriff auf große Dateien auf der Festplatte, so dass Milvus Indizes und Daten sowohl im Speicher als auch auf der Festplatte speichern kann. Dieser Ansatz hilft bei der Optimierung der Datenplatzierungspolitik auf der Grundlage der Zugriffshäufigkeit und erweitert die Speicherkapazität für Sammlungen, ohne die Suchleistung wesentlich zu beeinträchtigen. Diese Seite hilft Ihnen zu verstehen, wie Milvus mmap verwendet, um eine schnelle und effiziente Datenspeicherung und -abfrage zu ermöglichen.</p>
+<h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,157 +42,491 @@ title: MMap-aktivierte Datenspeicherung
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ab Milvus 2.4 haben Sie die Möglichkeit, die statische Konfigurationsdatei anzupassen, um die Standardeinstellungen für die Speicherzuordnung des gesamten Clusters vor der Bereitstellung zu konfigurieren. Darüber hinaus haben Sie die Möglichkeit, Parameter dynamisch zu ändern, um die Speicherzuordnungseinstellungen sowohl auf Cluster- als auch auf Indexebene fein abzustimmen. Zukünftige Updates werden die Speichermapping-Funktionen um Konfigurationen auf Feldebene erweitern.</p>
-<h3 id="Before-cluster-deployment-global-configuration" class="common-anchor-header">Vor dem Cluster-Einsatz: globale Konfiguration</h3><p>Bevor Sie einen Cluster bereitstellen, wird mit den Einstellungen <strong>auf Clusterebene</strong> das Memory Mapping auf Ihren gesamten Cluster angewendet. Dadurch wird sichergestellt, dass alle neuen Objekte automatisch mit diesen Konfigurationen übereinstimmen. Es ist wichtig zu beachten, dass eine Änderung dieser Einstellungen einen Neustart des Clusters erfordert, um wirksam zu werden.</p>
-<p>Um die Einstellungen für das Memory Mapping Ihres Clusters anzupassen, bearbeiten Sie die Datei <code translate="no">configs/milvus.yaml</code>. In dieser Datei können Sie angeben, ob das Memory Mapping standardmäßig aktiviert werden soll, und den Verzeichnispfad für die Speicherung der Memory-Mapping-Dateien festlegen. Wenn der Pfad (<code translate="no">mmapDirPath</code>) nicht angegeben wird, speichert das System speicherzugeordnete Dateien standardmäßig in <code translate="no">{localStorage.path}/mmap</code>. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/configure_localstorage.md#localStoragepath">Konfigurationen für den lokalen Speicher</a>.</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
-...
-queryNode:
-  mmap:
-    <span class="hljs-comment"># Set memory mapping property for whole cluster</span>
-    mmapEnabled: false | true
-    <span class="hljs-comment"># Set memory-mapped directory path, if you leave mmapDirPath unspecified, the memory-mapped files will be stored in {localStorage.path}/ mmap by default. </span>
-    mmapDirPath: <span class="hljs-built_in">any</span>/valid/path 
-....
+    </button></h2><p>Milvus verwendet Sammlungen, um Vektoreinbettungen und ihre Metadaten zu organisieren, wobei jede Zeile in der Sammlung eine Entität darstellt. Wie in der linken Abbildung unten dargestellt, speichert das Vektorfeld die Vektoreinbettungen und die Skalarfelder deren Metadaten. Wenn Sie Indizes für bestimmte Felder erstellt und die Sammlung geladen haben, lädt Milvus die erstellten Indizes und Feldrohdaten in den Speicher.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" />
+   </span> <span class="img-wrapper"> <span>Mmap illustriert</span> </span></p>
+<p>Milvus ist ein speicherintensives Datenbanksystem, und die verfügbare Speichergröße bestimmt die Kapazität einer Sammlung. Das Laden von Feldern mit einer großen Datenmenge in den Speicher ist unmöglich, wenn die Datengröße die Speicherkapazität übersteigt, was bei KI-gesteuerten Anwendungen der Normalfall ist.</p>
+<p>Um solche Probleme zu lösen, führt Milvus mmap ein, um das Laden von heißen und kalten Daten in Sammlungen auszugleichen. Wie in der rechten Abbildung oben dargestellt, können Sie Milvus so konfigurieren, dass die Rohdaten in bestimmten Feldern in den Speicher gemappt werden, anstatt sie vollständig in den Speicher zu laden. Auf diese Weise können Sie direkten Speicherzugriff auf die Felder erhalten, ohne sich um Speicherprobleme zu kümmern, und die Kapazität der Sammlung erweitern.</p>
+<p>Wenn Sie die Datenplatzierungsverfahren in der linken und rechten Abbildung vergleichen, können Sie feststellen, dass der Speicherverbrauch in der linken Abbildung viel höher ist als in der rechten. Wenn mmap aktiviert ist, werden die Daten, die in den Speicher geladen werden sollten, auf die Festplatte ausgelagert und im Seiten-Cache des Betriebssystems zwischengespeichert, wodurch der Speicherbedarf verringert wird. Allerdings können Cache-Treffer zu einer Leistungsverschlechterung führen. Einzelheiten hierzu finden Sie in <a href="https://en.wikipedia.org/wiki/Mmap">diesem Artikel</a>.</p>
+<p>Wenn Sie mmap auf Milvus konfigurieren, müssen Sie sich an einen Grundsatz halten: Lassen Sie die Daten und Indizes, auf die häufig zugegriffen wird, immer vollständig in den Speicher geladen und verwenden Sie mmap für die übrigen Felder.</p>
+<h2 id="Use-mmap-in-Milvus" class="common-anchor-header">Verwendung von mmap in Milvus<button data-href="#Use-mmap-in-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus bietet hierarchische mmap-Einstellungen auf globaler, Feld-, Index- und Sammlungsebene, wobei die Index- und Feldebene Vorrang vor der Sammlungsebene und die Sammlungsebene vor der globalen Ebene hat.</p>
+<h3 id="Global-mmap-settings" class="common-anchor-header">Globale mmap-Einstellungen</h3><p>Die Einstellung auf Clusterebene ist die globale Einstellung und hat den geringsten Vorrang. Milvus bietet mehrere mmap-bezogene Einstellungen in <code translate="no">milvus.yaml</code>. Diese Einstellungen gelten für alle Sammlungen des Clusters.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">queryNode:</span>
+  <span class="hljs-attr">mmap:</span>
+    <span class="hljs-attr">scalarField:</span> <span class="hljs-literal">false</span>
+    <span class="hljs-attr">scalarIndex:</span> <span class="hljs-literal">false</span>
+    <span class="hljs-attr">vectorField:</span> <span class="hljs-literal">false</span>
+    <span class="hljs-attr">vectorIndex:</span> <span class="hljs-literal">false</span>
+    <span class="hljs-comment"># The following should be a path on a high-performance disk</span>
+    <span class="hljs-attr">mmapDirPath:</span> <span class="hljs-string">any/valid/path</span> 
+<span class="hljs-string">....</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nach <code translate="no">2.4.10</code> teilt sich die Konfiguration <code translate="no">queryNode.mmap.mmapEnabled</code> in die folgenden vier separaten Felder auf, und alle Voreinstellungen sind <code translate="no">false</code>:</p>
-<ul>
-<li><code translate="no">queryNode.mmap.vectorField</code>, steuert, ob Vektordaten mmap sind;</li>
-<li><code translate="no">queryNode.mmap.vectorIndex</code>, steuert, ob der Vektorindex mmap ist;</li>
-<li><code translate="no">queryNode.mmap.scalarField</code>, steuert, ob skalare Daten mmap sind;</li>
-<li><code translate="no">queryNode.mmap.scalarIndex</code>, steuert, ob der Skalarindex mmap ist;</li>
-</ul>
-<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
-...
-queryNode:
-  mmap:
-    vectorField: false <span class="hljs-comment"># Enable mmap for loading vector data</span>
-    vectorIndex: false <span class="hljs-comment"># Enable mmap for loading vector index</span>
-    scalarField: false <span class="hljs-comment"># Enable mmap for loading scalar data</span>
-    scalarIndex: false <span class="hljs-comment"># Enable mmap for loading scalar index</span>
-....
-<button class="copy-code-btn"></button></code></pre>
-<p>Darüber hinaus können nur Vektorindex und Vektordaten mmap für eine einzelne Sammlung ein- und ausgeschaltet werden, nicht aber für andere.</p>
-<p>Kompatibilität: Wenn die ursprüngliche Konfiguration <code translate="no">queryNode.mmap.mmapEnabled</code> auf <code translate="no">true</code> eingestellt ist, wird die neu hinzugefügte Konfiguration zu diesem Zeitpunkt auf <code translate="no">true</code> eingestellt. Wenn <code translate="no">queryNode.mmap.mmapEnabled</code> auf <code translate="no">false</code> eingestellt ist, wird die neue Konfiguration auf <code translate="no">true</code> eingestellt, der endgültige Wert ist <code translate="no">true</code>.</p>
-<h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">Während des Clusterbetriebs: dynamische Konfiguration</h3><p>Während der Cluster-Laufzeit können Sie die Einstellungen für das Memory Mapping entweder auf der Ebene der Sammlung oder des Index dynamisch anpassen.</p>
-<p>Auf der <strong>Sammlungsebene</strong> wird das Memory Mapping auf alle nicht indizierten Rohdaten innerhalb einer Sammlung angewendet, mit Ausnahme von Primärschlüsseln, Zeitstempeln und Zeilen-IDs. Dieser Ansatz eignet sich besonders für die umfassende Verwaltung großer Datensätze.</p>
-<p>Für dynamische Anpassungen der Speicherzuordnungseinstellungen innerhalb einer Sammlung verwenden Sie die Methode <code translate="no">set_properties()</code>. Hier können Sie <code translate="no">mmap.enabled</code> je nach Bedarf zwischen <code translate="no">True</code> oder <code translate="no">False</code> hin- und herschalten.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Get existing collection</span>
-collection = Collection(<span class="hljs-string">&quot;test_collection&quot;</span>) <span class="hljs-comment"># Replace with your collection name</span>
+<table>
+   <tr>
+     <th><p>Konfigurieren Element</p></th>
+     <th><p>Beschreibung</p></th>
+     <th><p>Standardwert</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">queryNode.mmap.scalarField</code></p></td>
+     <td><p>Gibt an, ob die Rohdaten aller skalaren Felder in den Speicher abgebildet werden sollen. Die Einstellung <code translate="no">true</code> bewirkt, dass Milvus die Rohdaten der Skalarfelddaten einer Sammlung in den Speicher abbildet, anstatt sie beim Empfang einer Ladeanforderung für diese Sammlung vollständig zu laden.</p></td>
+     <td><p><code translate="no">false</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">queryNode.mmap.scalarIndex</code></p></td>
+     <td><p>Gibt an, ob alle skalaren Feldindizes in den Speicher abgebildet werden sollen. Die Einstellung <code translate="no">true</code> bewirkt, dass Milvus die Skalarfeld-Indizes einer Sammlung in den Speicher abbildet, anstatt sie beim Empfang einer Ladeanforderung für diese Sammlung vollständig zu laden.</p><p>Derzeit wird nur das Skalarfeld unterstützt, das den folgenden Index-Typ verwendet:</p><ul><li>INVERTED</li></ul></td>
+     <td><p><code translate="no">false</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">queryNode.mmap.vectorField</code></p></td>
+     <td><p>Gibt an, ob die Rohdaten aller Vektorfelder im Speicher abgebildet werden sollen. Die Einstellung <code translate="no">true</code> bewirkt, dass Milvus die Rohdaten der Vektorfelddaten einer Sammlung in den Speicher abbildet, anstatt sie beim Empfang einer Ladeanforderung für diese Sammlung vollständig zu laden.</p></td>
+     <td><p><code translate="no">false</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">queryNode.mmap.vectorIndex</code></p></td>
+     <td><p>Gibt an, ob alle Vektorfeld-Indizes in den Speicher abgebildet werden sollen. Die Einstellung <code translate="no">true</code> bewirkt, dass Milvus die Vektorfeld-Indizes einer Sammlung in den Speicher abbildet, anstatt sie beim Empfang einer Ladeanforderung für diese Sammlung vollständig zu laden.</p><p>Derzeit werden nur die Vektorfelder mit den folgenden Index-Typen unterstützt:</p><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>HNSW</p></li><li><p>SCANN</p></li><li><p>SPÄRLICHER_INVERTIERTER_INDEX</p></li><li><p>SPARSE_WAND</p></li></ul></td>
+     <td><p><code translate="no">false</code></p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">queryNode.mmap.mmapDirPath</code></p></td>
+     <td><p>Gibt den Pfad zu den memory-mapped Dateien an. Der Standardwert gilt, wenn dieser nicht angegeben wird. </p><p>Der Platzhalter <code translate="no">localStorage.path</code> im Standardwert gibt das Festplattenlaufwerk von Milvus QueryNodes an. Stellen Sie sicher, dass Ihre QueryNodes über eine leistungsstarke Festplatte verfügen, um optimale mmap-Vorteile zu erzielen.</p></td>
+     <td><p><code translate="no">{localStorage.path}/mmap</code></p></td>
+   </tr>
+</table>
+<p>Um die oben genannten Einstellungen auf Ihren Milvus-Cluster anzuwenden, folgen Sie bitte den Schritten in <a href="/docs/de/configure-helm.md#Configure-Milvus-via-configuration-file">Konfigurieren Sie Milvus mit Helm</a> und <a href="/docs/de/configure_operator.md">Konfigurieren Sie Milvus mit Milvus Operators</a>.</p>
+<p>Manchmal sind die globalen mmap-Einstellungen für bestimmte Anwendungsfälle nicht flexibel. Um alternative Einstellungen auf eine bestimmte Sammlung oder ihre Indizes anzuwenden, sollten Sie mmap speziell für eine Sammlung, ein Feld oder einen Index konfigurieren. Sie müssen eine Sammlung freigeben und laden, bevor die Änderungen an den mmap-Einstellungen wirksam werden.</p>
+<h3 id="Field-specific-mmap-settings" class="common-anchor-header">Feldspezifische mmap-Einstellungen</h3><p>Um feldspezifisches mmap zu konfigurieren, müssen Sie den Parameter <code translate="no">mmap_enabled</code> beim Hinzufügen eines Feldes angeben. Sie können mmap für dieses spezifische Feld aktivieren, indem Sie diesen Parameter auf <code translate="no">True</code> setzen.</p>
+<p>Das folgende Beispiel zeigt, wie Sie feldspezifisches mmap konfigurieren, wenn Sie ein Feld hinzufügen.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-<span class="hljs-comment"># Set memory mapping property to True or Flase</span>
-collection.set_properties({<span class="hljs-string">&#x27;mmap.enabled&#x27;</span>: <span class="hljs-literal">True</span>})
-<button class="copy-code-btn"></button></code></pre>
-<p>Nach <code translate="no">2.4.10</code> verwenden Sie für die Speicherzuordnungseinstellungen innerhalb einer Sammlung die Methode <code translate="no">add_field</code>. Hier können Sie <code translate="no">mmap_enabled</code> je nach Bedarf zwischen <code translate="no">True</code> oder <code translate="no">False</code> hin- und herschalten.</p>
-<pre><code translate="no" class="language-python">schema = MilvusClient.create_schema()
+CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
-schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, mmap_enabled=<span class="hljs-literal">True</span>)
-<button class="copy-code-btn"></button></code></pre>
-<p>Bei Einstellungen <strong>auf Indexebene</strong> kann die Speicherzuordnung speziell auf Vektorindizes angewendet werden, ohne andere Datentypen zu beeinträchtigen. Diese Funktion ist von unschätzbarem Wert für Sammlungen, die eine optimierte Leistung für Vektorsuchen erfordern.</p>
-<p>Um das Memory Mapping für einen Index innerhalb einer Sammlung zu aktivieren oder zu deaktivieren, rufen Sie die Methode <code translate="no">alter_index()</code> auf, geben den Namen des Zielindex in <code translate="no">index_name</code> an und setzen <code translate="no">mmap.enabled</code> auf <code translate="no">True</code> oder <code translate="no">False</code>.</p>
-<pre><code translate="no" class="language-python">collection.alter_index(
-    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Replace with your vector index name</span>
-    extra_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>} <span class="hljs-comment"># Enable memory mapping for index</span>
+client = MilvusClient(
+    uri=CLUSTER_ENDPOINT,
+    token=TOKEN
+)
+
+schema = MilvusClient.create_schema()
+schema.add_field(<span class="hljs-string">&quot;id&quot;</span>, DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">False</span>)
+schema.add_field(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
+
+schema = MilvusClient.create_schema()
+
+<span class="hljs-comment"># Add a scalar field and enable mmap</span>
+schema.add_field(
+    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+    datatype=DataType.INT64,
+    is_primary=<span class="hljs-literal">True</span>,
+    mmap_enabled=<span class="hljs-literal">True</span>,
+)
+
+<span class="hljs-comment"># Alter mmap settings on a specific field</span>
+<span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
+client.alter_collection_field(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+    field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Customize-storage-path-in-different-deployments" class="common-anchor-header">Anpassen des Speicherpfads in verschiedenen Bereitstellungen<button data-href="#Customize-storage-path-in-different-deployments" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Memory-mapped Dateien werden standardmäßig im Verzeichnis <code translate="no">/mmap</code> innerhalb von <code translate="no">localStorage.path</code> abgelegt. Hier erfahren Sie, wie Sie diese Einstellung für verschiedene Bereitstellungsmethoden anpassen können:</p>
-<ul>
-<li>Für Milvus, das mit Helm Chart installiert wurde:</li>
-</ul>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># new-values.yaml</span>
-extraConfigFiles:
-   user.yaml: |+
-      queryNode:
-         mmap:
-           mmapEnabled: <span class="hljs-literal">true</span>
-           mmapDirPath: any/valid/path
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.param.Constant;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.*;
+
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-type">String</span> <span class="hljs-variable">CLUSTER_ENDPOINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">TOKEN</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;root:Milvus&quot;</span>;
+client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(CLUSTER_ENDPOINT)
+        .token(TOKEN)
+        .build());
         
-helm upgrade &lt;milvus-release&gt; --reuse-values -f new-values.yaml milvus/milvus
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
+
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
+        .dataType(DataType.Int64)
+        .isPrimaryKey(<span class="hljs-literal">true</span>)
+        .autoID(<span class="hljs-literal">false</span>)
+        .build());
+
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+        .dataType(DataType.FloatVector)
+        .dimension(<span class="hljs-number">5</span>)
+        .build());
+
+Map&lt;String, String&gt; typeParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, String&gt;() {{
+    put(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;false&quot;</span>);
+}};
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;doc_chunk&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">512</span>)
+        .typeParams(typeParams)
+        .build());
+
+<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">req</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .collectionSchema(schema)
+        .build();
+client.createCollection(req);
+
+client.alterCollectionField(AlterCollectionFieldReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .fieldName(<span class="hljs-string">&quot;doc_chunk&quot;</span>)
+        .property(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;true&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
-<ul>
-<li>Für Milvus, das mit Milvus Operator installiert wurde:</li>
-</ul>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># patch.yaml</span>
-spec:
-  config:
-    queryNode:
-      mmap:
-        mmapEnabled: <span class="hljs-literal">true</span>
-        mmapDirPath: any/valid/path
-      
- kubectl patch milvus &lt;milvus-name&gt; --patch-file patch.yaml
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">CLUSTER_ENDPOINT</span>=<span class="hljs-string">&quot;YOUR_CLUSTER_ENDPOINT&quot;</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">TOKEN</span>=<span class="hljs-string">&quot;YOUR_TOKEN&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">await</span> <span class="hljs-title class_">MilvusClient</span>({
+    <span class="hljs-attr">address</span>: <span class="hljs-variable constant_">CLUSTER_ENDPOINT</span>,
+    <span class="hljs-attr">token</span>: <span class="hljs-variable constant_">TOKEN</span>
+});
+
+<span class="hljs-keyword">const</span> schema = [
+{
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;vector&#x27;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>
+},
+{
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;doc_chunk&quot;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
+    <span class="hljs-string">&#x27;mmap.enabled&#x27;</span>: <span class="hljs-literal">false</span>,
+}
+];
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">schema</span>: schema
+});
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionFieldProperties</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;doc_chunk&quot;</span>,
+    <span class="hljs-attr">properties</span>: {<span class="hljs-string">&quot;mmap_enable&quot;</span>: <span class="hljs-literal">true</span>}
+});
 <button class="copy-code-btn"></button></code></pre>
-<ul>
-<li>Für Milvus, das mit Docker installiert wurde:</li>
-</ul>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># A new installation script is provided to enable mmap-related settings.</span>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>Memory Mapping kann nicht für eine geladene Sammlung aktiviert werden. Stellen Sie sicher, dass die Sammlung freigegeben wurde, bevor Sie Memory Mapping aktivieren.</p></li>
-<li><p>Memory Mapping wird für DiskANN- oder GPU-Klasse-Indizes nicht unterstützt.</p></li>
-</ul>
-<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>In welchen Szenarien ist es empfehlenswert, Memory Mapping zu aktivieren? Was sind die Nachteile nach der Aktivierung dieser Funktion?</strong></p>
-<p>Memory Mapping wird empfohlen, wenn der Speicher begrenzt ist oder wenn die Leistungsanforderungen moderat sind. Die Aktivierung dieser Funktion erhöht die Kapazität für das Laden von Daten. Bei einer Konfiguration mit 2 CPUs und 8 GB Arbeitsspeicher können durch die Aktivierung des Memory Mappings beispielsweise bis zu viermal mehr Daten geladen werden, als wenn die Funktion nicht aktiviert ist. Die Auswirkungen auf die Leistung sind unterschiedlich:</p>
-<ul>
-<li><p>Bei ausreichendem Arbeitsspeicher ist die erwartete Leistung ähnlich wie bei der Verwendung von reinem Arbeitsspeicher.</p></li>
-<li><p>Bei unzureichendem Speicher kann sich die erwartete Leistung verschlechtern.</p></li>
-</ul></li>
-<li><p><strong>Welche Beziehung besteht zwischen Konfigurationen auf Sammlungs- und Indexebene?</strong></p>
-<p>Collection-Level und Index-Level sind keine allumfassenden Beziehungen. Collection-Level steuert, ob die Originaldaten mmap-fähig sind oder nicht, während Index-Level nur für Vektorindizes gilt.</p></li>
-<li><p><strong>Gibt es einen empfohlenen Indextyp für Memory Mapping?</strong></p>
-<p>Ja, HNSW wird für die Aktivierung von mmap empfohlen. Wir haben HNSW-, IVF_FLAT- und IVF_PQ/SQ-Indizes getestet. Die Leistung der IVF-Indizes ist stark gesunken, während der Leistungsabfall durch die Aktivierung von mmap für HNSW-Indizes noch im Rahmen der Erwartungen liegt.</p></li>
-<li><p><strong>Welche Art von lokalem Speicher ist für das Memory Mapping erforderlich?</strong></p>
-<p>Eine hochwertige Festplatte erhöht die Leistung, wobei NVMe-Laufwerke die bevorzugte Option sind.</p></li>
-<li><p><strong>Können skalare Daten einem Speicher-Mapping unterzogen werden?</strong></p>
-<p>Memory Mapping kann auf skalare Daten angewendet werden, nicht aber auf Indizes, die auf skalaren Feldern basieren.</p></li>
-<li><p><strong>Wie wird die Priorität für Speicherzuordnungskonfigurationen über verschiedene Ebenen hinweg bestimmt?</strong></p>
-<p>Wenn in Milvus explizit Speicher-Mapping-Konfigurationen über mehrere Ebenen hinweg definiert werden, haben Konfigurationen auf Index- und Sammlungsebene die höchste Priorität, gefolgt von Konfigurationen auf Clusterebene.</p></li>
-<li><p><strong>Was passiert, wenn ich ein Upgrade von Milvus 2.3 durchführe und den Verzeichnispfad für das Memory Mapping konfiguriert habe?</strong></p>
-<p>Wenn Sie ein Upgrade von Milvus 2.3 durchführen und den Speicherabbildungsverzeichnispfad (<code translate="no">mmapDirPath</code>) konfiguriert haben, wird Ihre Konfiguration beibehalten, und die Standardeinstellung für das aktivierte Speicherabbild (<code translate="no">mmapEnabled</code>) lautet <code translate="no">true</code>. Es ist wichtig, die Metadaten zu migrieren, um die Konfiguration Ihrer bestehenden Memory-Mapping-Dateien zu synchronisieren. Weitere Einzelheiten finden Sie unter <a href="https://milvus.io/docs/upgrade_milvus_standalone-docker.md#Migrate-the-metadata">Migrieren der Metadaten</a>.</p></li>
-</ul>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment">#restful</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+
+<span class="hljs-built_in">export</span> idField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;id&quot;,
+    &quot;dataType&quot;: &quot;Int64&quot;,
+    &quot;elementTypeParams&quot;: {
+        &quot;max_length&quot;: 512
+    },
+    &quot;isPrimary&quot;: true,
+    &quot;auto_id&quot;: false
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;vector&quot;,
+    &quot;dataType&quot;: &quot;FloatVector&quot;,
+    &quot;elementTypeParams&quot;: {
+       &quot;dim&quot;: 5
+    }
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> docChunkField=<span class="hljs-string">&#x27;{
+    &quot;fieldName&quot;: &quot;doc_chunk&quot;,
+    &quot;dataType&quot;: &quot;Int64&quot;,
+    &quot;elementTypeParams&quot;: {
+        &quot;max_length&quot;: 512,
+        &quot;mmap.enabled&quot;: false
+    }
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
+    \&quot;autoID\&quot;: false,
+    \&quot;fields\&quot;: [
+        <span class="hljs-variable">$idField</span>,
+        <span class="hljs-variable">$docChunkField</span>,
+        <span class="hljs-variable">$vectorField</span>
+    ]
+}&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--data <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
+}&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/fields/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;fieldName&quot;: &quot;doc_chunk&quot;,
+    &quot;fieldParams&quot;:{
+        &quot;mmap.enabled&quot;: true
+    }
+}&#x27;</span>
+
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Ziehen Sie in Erwägung, mmap für die Felder zu aktivieren, die große Datenmengen speichern. Es werden sowohl skalare Felder als auch Vektorfelder unterstützt.</p>
+</div>
+<p>Anschließend können Sie eine Sammlung mit dem oben erstellten Schema erstellen. Wenn eine Anfrage zum Laden der Sammlung eingeht, mappt Milvus die Rohdaten des <strong>doc_chunk-Feldes</strong> in den Speicher.</p>
+<h3 id="Index-specific-mmap-settings" class="common-anchor-header">Indexspezifische mmap-Einstellungen</h3><p>Um indexspezifisches mmap zu konfigurieren, müssen Sie die Eigenschaft <code translate="no">mmap.enable</code> in die Indexparameter aufnehmen, wenn Sie den Index hinzufügen. Sie können mmap für diesen spezifischen Index aktivieren, indem Sie die Eigenschaft auf <code translate="no">true</code> setzen.</p>
+<p>Das folgende Beispiel zeigt, wie Sie indexspezifisches mmap konfigurieren, wenn Sie einen Index hinzufügen.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a varchar field</span>
+schema.add_field(
+    field_name=<span class="hljs-string">&quot;title&quot;</span>,
+    datatype=DataType.VARCHAR,
+    max_length=<span class="hljs-number">512</span>   
+)
+
+index_params = MilvusClient.prepare_index_params()
+
+<span class="hljs-comment"># Create index on the varchar field with mmap settings</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;title&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-comment"># highlight-next-line</span>
+    params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }
+)
+
+<span class="hljs-comment"># Change mmap settings for an index</span>
+<span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
+client.alter_index_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    index_name=<span class="hljs-string">&quot;title&quot;</span>,
+    properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">512</span>)
+        .build());
+        
+List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+Map&lt;String, Object&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+    put(Constant.MMAP_ENABLED, <span class="hljs-literal">false</span>);
+}};
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams)
+        .build());
+        
+client.alterIndexProperties(AlterIndexPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;title&quot;</span>)
+        .property(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;true&quot;</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Create index on the varchar field with mmap settings</span>
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;title&quot;</span>,
+    <span class="hljs-attr">params</span>: { <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">false</span> }
+});
+
+<span class="hljs-comment">// Change mmap settings for an index</span>
+<span class="hljs-comment">// The following assumes that you have a collection named `my_collection`</span>
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterIndexProperties</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;title&quot;</span>,
+    <span class="hljs-attr">properties</span>:{<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">true</span>}
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;indexParams&quot;: [
+        {
+            &quot;fieldName&quot;: &quot;doc_chunk&quot;,
+            &quot;params&quot;: {
+                &quot;index_type&quot;: &quot;AUTOINDEX&quot;,
+                &quot;mmap.enabled&quot;: true
+            }
+        }
+    ]
+}&#x27;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;indexName&quot;: &quot;doc_chunk&quot;,
+    &quot;properties&quot;: {
+        &quot;mmap.enabled&quot;: false
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Dies gilt sowohl für die Indizes von Vektor- als auch von Skalarfeldern.</p>
+</div>
+<p>Dann können Sie die Indexparameter in einer Sammlung referenzieren. Beim Empfang einer Anfrage zum Laden der Sammlung mappt Milvus den Index des <strong>Titelfeldes</strong> in den Arbeitsspeicher.</p>
+<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">Sammlungsspezifische mmap-Einstellungen</h3><p>Um eine sammlungsweite mmap-Strategie zu konfigurieren, müssen Sie die Eigenschaft <code translate="no">mmap.enabled</code> in die Anforderung zum Erstellen einer Sammlung aufnehmen. Sie können mmap für eine Sammlung aktivieren, indem Sie diese Eigenschaft auf <code translate="no">true</code> setzen.</p>
+<p>Das folgende Beispiel veranschaulicht, wie mmap in einer Sammlung mit dem Namen <strong>my_collection</strong> bei deren Erstellung aktiviert wird. Wenn eine Anfrage zum Laden der Sammlung eingeht, mappt Milvus die Rohdaten aller Felder in den Arbeitsspeicher.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Enable mmap when creating a collection</span>
+client.create_collection(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    schema=schema,
+    properties={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;true&quot;</span> }
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">req</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .collectionSchema(schema)
+        .property(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;false&quot;</span>)
+        .build();
+client.createCollection(req);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">scheme</span>: schema,
+    <span class="hljs-attr">properties</span>: { <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">false</span> }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--data <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
+    \&quot;params\&quot;: {
+        \&quot;mmap.enabled\&quot;: \&quot;false\&quot;
+    }
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Sie können auch die mmap-Einstellungen einer bestehenden Sammlung ändern.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Release collection before change mmap settings</span>
+client.release_collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
+
+<span class="hljs-comment"># Ensure that the collection has already been released </span>
+<span class="hljs-comment"># and run the following</span>
+client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={
+        <span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
+    }
+)
+
+<span class="hljs-comment"># Load the collection to make the above change take effect</span>
+client.load_collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">client.releaseCollection(ReleaseCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .build());
+        
+client.alterCollectionProperties(AlterCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .property(Constant.MMAP_ENABLED, <span class="hljs-string">&quot;false&quot;</span>)
+        .build());
+
+client.loadCollection(LoadCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .build());
+       
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Release collection before change mmap settings</span>
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">releaseCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>
+});
+
+<span class="hljs-comment">// Ensure that the collection has already been released </span>
+<span class="hljs-comment">// and run the following</span>
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionProperties</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">false</span>
+    }
+});
+
+<span class="hljs-comment">// Load the collection to make the above change take effect</span>
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/release&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;
+}&#x27;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;mmmap.enabled&quot;: false
+    }
+}&#x27;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Sie müssen die Sammlung freigeben, um Änderungen an ihren Eigenschaften vorzunehmen, und die Sammlung neu laden, damit die Änderungen wirksam werden.</p>

@@ -68,7 +68,7 @@ summary: >-
 
 <span class="hljs-comment"># With TTL</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;customized_setup_5&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     <span class="hljs-comment"># highlight-start</span>
     properties={
@@ -84,16 +84,16 @@ client.create_collection(
 <span class="hljs-keyword">import</span> java.util.Map;
 
 <span class="hljs-comment">// With TTL</span>
-<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq5</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_5&quot;</span>)
+<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
         <span class="hljs-comment">// highlight-next-line</span>
         .property(Constant.TTL_SECONDS, <span class="hljs-string">&quot;1209600&quot;</span>)
         .build();
-client.createCollection(customizedSetupReq5);
+client.createCollection(customizedSetupReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> createCollectionReq = {
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_5&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
     <span class="hljs-comment">// highlight-start</span>
     <span class="hljs-attr">properties</span>: {
@@ -102,21 +102,12 @@ client.createCollection(customizedSetupReq5);
     <span class="hljs-comment">// highlight-end</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;context&quot;</span>
-    <span class="hljs-string">&quot;fmt&quot;</span>
-    <span class="hljs-string">&quot;log&quot;</span>
-
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/pkg/common&quot;</span>
-)
-
-err = cli.CreateCollection(ctx, client.NewCreateCollectionOption(<span class="hljs-string">&quot;customized_setup_5&quot;</span>, schema).
-        WithProperty(common.CollectionTTLConfigKey, <span class="hljs-number">1209600</span>)) <span class="hljs-comment">//  TTL in seconds</span>
+<pre><code translate="no" class="language-go">err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
+    WithProperty(common.CollectionTTLConfigKey, <span class="hljs-number">1209600</span>)) <span class="hljs-comment">//  TTL in seconds</span>
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-        <span class="hljs-comment">// handle error</span>
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
 }
-fmt.Println(<span class="hljs-string">&quot;collection created&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
     &quot;ttlSeconds&quot;: 1209600
@@ -130,7 +121,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
@@ -138,20 +129,20 @@ curl --request POST \
 <h3 id="Set-TTL-for-an-existing-collection" class="common-anchor-header">기존 컬렉션의 TTL 설정</h3><p>다음 코드 스니펫은 기존 컬렉션의 TTL 속성을 변경하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">alter_collection_properties</span>(
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">String</span>&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-properties.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>, <span class="hljs-string">&quot;1209600&quot;</span>);
+<pre><code translate="no" class="language-java">Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.put(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>, <span class="hljs-string">&quot;1209600&quot;</span>);
 
-<span class="hljs-title class_">AlterCollectionReq</span> alterCollectionReq = <span class="hljs-title class_">AlterCollectionReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .<span class="hljs-title function_">properties</span>(properties)
-        .<span class="hljs-title function_">build</span>();
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
 
-client.<span class="hljs-title function_">alterCollection</span>(alterCollectionReq);
+client.alterCollection(alterCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -160,22 +151,10 @@ client.<span class="hljs-title function_">alterCollection</span>(alterCollection
     }
 })
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">ctx, cancel := context.WithCancel(context.Background())
-<span class="hljs-keyword">defer</span> cancel()
-
-milvusAddr := <span class="hljs-string">&quot;127.0.0.1:19530&quot;</span>
-
-cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: milvusAddr,
-})
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithProperty(common.CollectionTTLConfigKey, <span class="hljs-number">60</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())
-}
-
-<span class="hljs-keyword">defer</span> cli.Close(ctx)
-
-err = cli.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(common.CollectionTTLConfigKey, <span class="hljs-number">60</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
@@ -184,7 +163,7 @@ err = cli.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionProperti
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;properties\&quot;: {
         \&quot;collection.ttl.seconds\&quot;: 1209600
     }
@@ -208,7 +187,7 @@ err = cli.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionProperti
     </button></h2><p>컬렉션의 데이터를 무기한 보관하기로 결정한 경우 해당 컬렉션에서 TTL 설정을 삭제하면 됩니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_collection_properties</span>(
+<pre><code translate="no" class="language-python">client.drop_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     property_keys=[<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>]
 )
@@ -216,34 +195,21 @@ err = cli.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionProperti
 <pre><code translate="no" class="language-java">propertyKeys = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[<span class="hljs-number">1</span>]
 propertyKeys[<span class="hljs-number">0</span>] = <span class="hljs-string">&quot;collection.ttl.second&quot;</span>
 
-<span class="hljs-title class_">DropCollectionReq</span> dropCollectionReq = <span class="hljs-title class_">DropCollectionReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .<span class="hljs-title function_">propertyKeys</span>(propertyKeys)
-        .<span class="hljs-title function_">build</span>();
+<span class="hljs-type">DropCollectionReq</span> <span class="hljs-variable">dropCollectionReq</span> <span class="hljs-operator">=</span> DropCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .propertyKeys(propertyKeys)
+        .build();
 
-client.<span class="hljs-title function_">dropCollection</span>(dropCollectionReq);
+client.dropCollection(dropCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollectionProperties</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">properties</span>: [<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>]
 })
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">ctx, cancel := context.WithCancel(context.Background())
-<span class="hljs-keyword">defer</span> cancel()
-
-milvusAddr := <span class="hljs-string">&quot;127.0.0.1:19530&quot;</span>
-
-cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: milvusAddr,
-})
+<pre><code translate="no" class="language-go">err = client.DropCollectionProperties(ctx, milvusclient.NewDropCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>, common.CollectionTTLConfigKey))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())
-}
-
-<span class="hljs-keyword">defer</span> cli.Close(ctx)
-
-err = cli.DropCollectionProperties(ctx, milvusclient.NewDropCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>, common.CollectionTTLConfigKey))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
@@ -252,7 +218,7 @@ err = cli.DropCollectionProperties(ctx, milvusclient.NewDropCollectionProperties
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;customized_setup_5\&quot;,
+    \&quot;collectionName\&quot;: \&quot;&quot;</span>my_collection<span class="hljs-string">&quot;\&quot;,
     \&quot;properties\&quot;: {
         \&quot;collection.ttl.seconds\&quot;: 60
     }

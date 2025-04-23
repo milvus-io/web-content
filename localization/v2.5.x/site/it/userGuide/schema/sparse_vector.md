@@ -49,15 +49,15 @@ summary: >-
 <p>Come mostrato nel diagramma seguente, i vettori densi sono tipicamente rappresentati come array continui in cui ogni posizione ha un valore (ad esempio, <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). Al contrario, i vettori sparsi memorizzano solo gli elementi non nulli e i loro indici, spesso rappresentati come coppie chiave-valore (ad esempio, <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>). Questa rappresentazione riduce significativamente lo spazio di archiviazione e aumenta l'efficienza computazionale, soprattutto quando si tratta di dati ad altissima dimensionalità (ad esempio, 10.000 dimensioni).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector.png" alt="sparse-vector" class="doc-image" id="sparse-vector" />
-   </span> <span class="img-wrapper"> <span>vettore sparso</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector.png" alt="Sparse Vector" class="doc-image" id="sparse-vector" />
+   </span> <span class="img-wrapper"> <span>Vettore sparso</span> </span></p>
 <p>I vettori sparsi possono essere generati utilizzando vari metodi, come <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) e <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> nell'elaborazione dei testi. Inoltre, Milvus offre metodi pratici per generare ed elaborare vettori sparsi. Per maggiori dettagli, consultare Embeddings.</p>
 <p>Per i dati di testo, Milvus offre anche funzionalità di ricerca full-text, che consentono di eseguire ricerche vettoriali direttamente sui dati di testo grezzi senza utilizzare modelli di incorporamento esterni per generare vettori sparsi. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca a testo completo</a>.</p>
 <p>Dopo la vettorizzazione, i dati possono essere archiviati in Milvus per la gestione e il recupero dei vettori. Il diagramma seguente illustra il processo di base.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-sparse-vector.png" alt="use-sparse-vector" class="doc-image" id="use-sparse-vector" />
-   </span> <span class="img-wrapper"> <span>usa-vettore sparso</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-sparse-vector.png" alt="Use Sparse Vector" class="doc-image" id="use-sparse-vector" />
+   </span> <span class="img-wrapper"> <span>Utilizzo di vettori sparsi</span> </span></p>
 <div class="alert note">
 <p>Oltre ai vettori sparsi, Milvus supporta anche vettori densi e vettori binari. I vettori densi sono ideali per catturare relazioni semantiche profonde, mentre i vettori binari eccellono in scenari come il confronto rapido delle somiglianze e la deduplicazione dei contenuti. Per ulteriori informazioni, consultare <a href="/docs/it/dense-vector.md">Vettori densi</a> e <a href="/docs/it/binary-vector.md">vettori binari</a>.</p>
 </div>
@@ -119,8 +119,6 @@ sparse_vector = [[(<span class="hljs-number">1</span>, <span class="hljs-number"
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
-client.drop_collection(collection_name=<span class="hljs-string">&quot;my_sparse_collection&quot;</span>)
-
 schema = client.create_schema(
     auto_id=<span class="hljs-literal">True</span>,
     enable_dynamic_fields=<span class="hljs-literal">True</span>,
@@ -174,7 +172,40 @@ schema.addField(AddFieldReq.builder()
 ];
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+schema := entity.NewSchema()
+schema.WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;pk&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithIsAutoID(<span class="hljs-literal">true</span>).
+    WithIsPrimaryKey(<span class="hljs-literal">true</span>).
+    WithMaxLength(<span class="hljs-number">100</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;sparse_vector&quot;</span>).
+    WithDataType(entity.FieldTypeSparseVector),
+)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> primaryField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;pk&quot;,
@@ -245,7 +276,8 @@ indexes.add(IndexParam.builder()
 
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">idx := index.NewSparseInvertedIndex(entity.IP, <span class="hljs-number">0.2</span>)
+indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;sparse_vector&quot;</span>, idx)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
         {
@@ -261,12 +293,12 @@ indexes.add(IndexParam.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p>Nell'esempio precedente:</p>
 <ul>
-<li><p><code translate="no">index_type</code>: Il tipo di indice da creare per il campo vettoriale rado. Valori validi:</p>
+<li><p><code translate="no">index_type</code>: Il tipo di indice da creare per il campo vettoriale rado.</p>
 <ul>
-<li><code translate="no">SPARSE_INVERTED_INDEX</code>: Un indice invertito generico per vettori sparsi.</li>
+<li><code translate="no">SPARSE_INVERTED_INDEX</code>: Un indice invertito di uso generale per vettori sparsi.</li>
 </ul>
 <p><div class="alert note"></p>
-<p>A partire da Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> viene deprecato. Si raccomanda invece di utilizzare <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> per equivalenza, pur mantenendo la compatibilità.</p>
+<p>A partire da Milvus 2.5.4, <code translate="no">SPARSE_WAND</code> sarà deprecato. Si raccomanda invece di utilizzare <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> per l'equivalenza, pur mantenendo la compatibilità.</p>
 <p></div></p></li>
 <li><p><code translate="no">metric_type</code>: La metrica utilizzata per calcolare la somiglianza tra vettori sparsi. Valori validi:</p>
 <ul>
@@ -276,29 +308,22 @@ indexes.add(IndexParam.builder()
 </ul></li>
 <li><p><code translate="no">params.inverted_index_algo</code>: L'algoritmo usato per costruire e interrogare l'indice. Valori validi:</p>
 <ul>
-<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (predefinito): Elaborazione ottimizzata delle query Document-at-a-Time (DAAT) con l'algoritmo MaxScore. MaxScore fornisce prestazioni migliori per valori elevati di <em>k</em> o per query con molti termini, saltando termini e documenti che potrebbero avere un impatto minimo. Ciò si ottiene suddividendo i termini in gruppi essenziali e non essenziali in base ai loro punteggi di impatto massimo, concentrandosi sui termini che possono contribuire ai risultati top-k.</p></li>
-<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: Elaborazione ottimizzata delle query DAAT con l'algoritmo WAND. WAND valuta un minor numero di documenti trovati, sfruttando i punteggi di impatto massimo per saltare i documenti non competitivi, ma ha un overhead più elevato per ogni singolo colpo. Questo rende WAND più efficiente per le query con valori <em>k</em> piccoli o per le query brevi, dove il salto è più fattibile.</p></li>
+<li><p><code translate="no">&quot;DAAT_MAXSCORE&quot;</code> (predefinito): Elaborazione ottimizzata delle query Document-at-a-Time (DAAT) con l'algoritmo MaxScore. MaxScore fornisce prestazioni migliori per valori elevati di <em>k</em> o per query con molti termini, saltando termini e documenti che potrebbero avere un impatto minimo. Ciò si ottiene suddividendo i termini in gruppi essenziali e non essenziali in base ai punteggi di impatto massimo, concentrandosi sui termini che possono contribuire ai risultati top-k.</p></li>
+<li><p><code translate="no">&quot;DAAT_WAND&quot;</code>: Elaborazione ottimizzata delle query DAAT con l'algoritmo WAND. WAND valuta un minor numero di documenti trovati, sfruttando i punteggi di impatto massimo per saltare i documenti non competitivi, ma ha un overhead più elevato per ogni singolo colpo. Ciò rende WAND più efficiente per le query con valori <em>k</em> piccoli o per le query brevi, dove il salto è più fattibile.</p></li>
 <li><p><code translate="no">&quot;TAAT_NAIVE&quot;</code>: Elaborazione di query Basic Term-at-a-Time (TAAT). Pur essendo più lento rispetto a <code translate="no">DAAT_MAXSCORE</code> e <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code> offre un vantaggio unico. A differenza degli algoritmi DAAT, che utilizzano punteggi di impatto massimo memorizzati nella cache che rimangono statici indipendentemente dalle modifiche al parametro globale della raccolta (avgdl), <code translate="no">TAAT_NAIVE</code> si adatta dinamicamente a tali modifiche.</p></li>
 </ul></li>
 </ul>
-<h3 id="Create-collection" class="common-anchor-header">Creare la raccolta</h3><p>Una volta completate le impostazioni dei vettori sparsi e degli indici, è possibile creare una collezione che contenga vettori sparsi. L'esempio seguente utilizza il metodo <code translate="no">create_collection</code> per creare un insieme chiamato <code translate="no">my_sparse_collection</code>.</p>
+<h3 id="Create-collection" class="common-anchor-header">Creare la raccolta</h3><p>Una volta completate le impostazioni dei vettori sparsi e degli indici, è possibile creare una collezione che contenga vettori sparsi. L'esempio seguente utilizza il metodo <code translate="no">create_collection</code> per creare un insieme chiamato <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
-    collection_name=<span class="hljs-string">&quot;my_sparse_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
-<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
-
-<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
-        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-        .build());
-        
-<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_sparse_collection&quot;</span>)
+<pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
         .indexParams(indexes)
         .build();
@@ -311,19 +336,25 @@ client.createCollection(requestCreate);
 });
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_sparse_collection&#x27;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">schema</span>: schema,
     <span class="hljs-attr">index_params</span>: indexParams
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
+        WithIndexOptions(indexOption))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;my_sparse_collection\&quot;,
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
@@ -337,7 +368,7 @@ client.createCollection(requestCreate);
 ]
 
 client.insert(
-    collection_name=<span class="hljs-string">&quot;my_sparse_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=sparse_vectors
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -368,7 +399,7 @@ List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class=
 }
 
 <span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_sparse_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(rows)
         .build());
 <button class="copy-code-btn"></button></code></pre>
@@ -377,12 +408,24 @@ List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class=
   { <span class="hljs-attr">sparse_vector</span>: { <span class="hljs-string">&quot;10&quot;</span>: <span class="hljs-number">0.1</span>, <span class="hljs-string">&quot;200&quot;</span>: <span class="hljs-number">0.7</span>, <span class="hljs-string">&quot;1000&quot;</span>: <span class="hljs-number">0.9</span> } },
 ];
 client.<span class="hljs-title function_">insert</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_sparse_collection&quot;</span>,
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
   <span class="hljs-attr">data</span>: data,
 });
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">v := <span class="hljs-built_in">make</span>([]entity.SparseEmbedding, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>)
+sparseVector1, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">1</span>, <span class="hljs-number">100</span>, <span class="hljs-number">500</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.5</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.8</span>})
+v = <span class="hljs-built_in">append</span>(v, sparseVector1)
+sparseVector2, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">10</span>, <span class="hljs-number">200</span>, <span class="hljs-number">1000</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.9</span>})
+v = <span class="hljs-built_in">append</span>(v, sparseVector2)
+column := column.NewColumnSparseVectors(<span class="hljs-string">&quot;sparse_vector&quot;</span>, v)
+
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithColumns(column))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
@@ -393,7 +436,7 @@ client.<span class="hljs-title function_">insert</span>({
         {&quot;sparse_vector&quot;: {&quot;1&quot;: 0.5, &quot;100&quot;: 0.3, &quot;500&quot;: 0.8}},
         {&quot;sparse_vector&quot;: {&quot;10&quot;: 0.1, &quot;200&quot;: 0.7, &quot;1000&quot;: 0.9}}        
     ],
-    &quot;collectionName&quot;: &quot;my_sparse_collection&quot;
+    &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572534&quot;,&quot;453577185629572535&quot;]}}</span>
@@ -407,12 +450,12 @@ search_params = {
 <span class="hljs-comment"># Prepare the query vector</span>
 query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, <code translate="no">drop_ratio_search</code> è un parametro opzionale specifico per i vettori sparsi, che consente di regolare con precisione i piccoli valori del vettore di interrogazione durante la ricerca. Ad esempio, con <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, il 20% più piccolo dei valori nel vettore di interrogazione sarà ignorato durante la ricerca.</p>
+<p>In questo esempio, <code translate="no">drop_ratio_search</code> è un parametro opzionale specifico per i vettori sparsi, che consente di regolare con precisione piccoli valori nel vettore di interrogazione durante la ricerca. Ad esempio, con <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, il 20% più piccolo dei valori nel vettore di interrogazione sarà ignorato durante la ricerca.</p>
 <p>Quindi, eseguire la ricerca di similarità con il metodo <code translate="no">search</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_sparse_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=query_vector,
     limit=<span class="hljs-number">3</span>,
     output_fields=[<span class="hljs-string">&quot;pk&quot;</span>],
@@ -432,14 +475,14 @@ Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <s
 searchParams.put(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>);
 
 SortedMap&lt;Long, Float&gt; sparse = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeMap</span>&lt;&gt;();
-sparse.put(<span class="hljs-number">10L</span>, <span class="hljs-number">0.1f</span>);
-sparse.put(<span class="hljs-number">200L</span>, <span class="hljs-number">0.7f</span>);
-sparse.put(<span class="hljs-number">1000L</span>, <span class="hljs-number">0.9f</span>);
+sparse.put(<span class="hljs-number">1L</span>, <span class="hljs-number">0.2f</span>);
+sparse.put(<span class="hljs-number">50L</span>, <span class="hljs-number">0.4f</span>);
+sparse.put(<span class="hljs-number">1000L</span>, <span class="hljs-number">0.7f</span>);
 
 <span class="hljs-type">SparseFloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SparseFloatVec</span>(sparse);
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchR</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_sparse_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(Collections.singletonList(queryVector))
         .annsField(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
         .searchParams(searchParams)
@@ -451,10 +494,10 @@ System.out.println(searchR.getSearchResults());
 
 <span class="hljs-comment">// Output</span>
 <span class="hljs-comment">//</span>
-<span class="hljs-comment">// [[SearchResp.SearchResult(entity={pk=453444327741536759}, score=1.31, id=453444327741536759), SearchResp.SearchResult(entity={pk=453444327741536756}, score=1.31, id=453444327741536756), SearchResp.SearchResult(entity={pk=453444327741536753}, score=1.31, id=453444327741536753)]]</span>
+<span class="hljs-comment">// [[SearchResp.SearchResult(entity={pk=457270974427187729}, score=0.63, id=457270974427187729), SearchResp.SearchResult(entity={pk=457270974427187728}, score=0.1, id=457270974427187728)]]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_sparse_collection&#x27;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">data</span>: {<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>},
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;pk&#x27;</span>],
@@ -463,14 +506,40 @@ System.out.println(searchR.getSearchResults());
     }
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">queryVector, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32</span>{<span class="hljs-number">1</span>, <span class="hljs-number">50</span>, <span class="hljs-number">1000</span>}, []<span class="hljs-type">float32</span>{<span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.7</span>})
+
+annSearchParams := index.NewCustomAnnParam()
+annSearchParams.WithExtraParam(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>)
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,                      <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.SparseEmbedding(queryVector)},
+).WithANNSField(<span class="hljs-string">&quot;sparse_vector&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;pk&quot;</span>).
+    WithAnnParam(annSearchParams))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
+}
+
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+    fmt.Println(<span class="hljs-string">&quot;Pks: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;pk&quot;</span>).FieldData().GetScalars())
+}
+
+<span class="hljs-comment">// Results:</span>
+<span class="hljs-comment">//   IDs:  string_data:{data:&quot;457270974427187705&quot;  data:&quot;457270974427187704&quot;}</span>
+<span class="hljs-comment">//   Scores:  [0.63 0.1]</span>
+<span class="hljs-comment">//   Pks:  string_data:{data:&quot;457270974427187705&quot;  data:&quot;457270974427187704&quot;}</span>
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_sparse_collection&quot;,
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
         {&quot;1&quot;: 0.2, &quot;50&quot;: 0.4, &quot;1000&quot;: 0.7}
     ],

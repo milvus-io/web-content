@@ -49,11 +49,11 @@ client = MilvusClient(
 
 <span class="hljs-comment"># 7. Load the collection</span>
 client.load_collection(
-    collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -82,14 +82,14 @@ res = client.get_load_state(
 
 <span class="hljs-comment">// 6. Load the collection</span>
 <span class="hljs-type">LoadCollectionReq</span> <span class="hljs-variable">loadCollectionReq</span> <span class="hljs-operator">=</span> LoadCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_1&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .build();
 
 client.loadCollection(loadCollectionReq);
 
 <span class="hljs-comment">// 7. Get load state of the collection</span>
 <span class="hljs-type">GetLoadStateReq</span> <span class="hljs-variable">loadStateReq</span> <span class="hljs-operator">=</span> GetLoadStateReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_1&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .build();
 
 <span class="hljs-type">Boolean</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> client.getLoadState(loadStateReq);
@@ -106,7 +106,7 @@ System.out.println(res);
 
 <span class="hljs-comment">// 7. Load the collection</span>
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollection</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_1&quot;</span>
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>
 })
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">error_code</span>)
@@ -117,7 +117,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// </span>
 
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">getLoadState</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_1&quot;</span>
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>
 })
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">state</span>)
@@ -130,21 +130,41 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
-    <span class="hljs-string">&quot;log&quot;</span>
-
+    
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
 )
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
 
-loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;customized_setup_1&quot;</span>))
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+    
+loadTask, err := client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
 }
 
 <span class="hljs-comment">// sync wait collection to be loaded</span>
 err = loadTask.Await(ctx)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
+
+state, err := client.GetLoadState(ctx, milvusclient.NewGetLoadStateOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(state)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -154,7 +174,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;customized_setup_1&quot;
+    &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 
 <span class="hljs-comment"># {</span>
@@ -167,7 +187,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;customized_setup_1&quot;
+    &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 
 <span class="hljs-comment"># {</span>
@@ -198,18 +218,18 @@ curl --request POST \
 <div class="alert note">
 <p>부분 컬렉션 로딩은 현재 베타 버전이며 프로덕션 사용에는 권장되지 않습니다.</p>
 </div>
-<p>다음 코드 스니펫은 <strong>customized_setup_2라는</strong> 컬렉션을 생성하고 컬렉션에 <strong>my_id</strong> 및 <strong>my_vector라는</strong> 두 개의 필드가 있다고 가정합니다.</p>
+<p>다음 코드 스니펫은 <strong>my_collection이라는</strong> 컬렉션을 생성하고 컬렉션에 <strong>my_id와</strong> <strong>my_vector라는</strong> 두 개의 필드가 있다고 가정합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_collection(
-    collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-comment"># highlight-next-line</span>
     load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
     skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -222,7 +242,7 @@ res = client.get_load_state(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 6. Load the collection</span>
 <span class="hljs-type">LoadCollectionReq</span> <span class="hljs-variable">loadCollectionReq</span> <span class="hljs-operator">=</span> LoadCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_1&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .loadFields(Arrays.asList(<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>))
         .build();
 
@@ -230,48 +250,47 @@ client.loadCollection(loadCollectionReq);
 
 <span class="hljs-comment">// 7. Get load state of the collection</span>
 <span class="hljs-type">GetLoadStateReq</span> <span class="hljs-variable">loadStateReq</span> <span class="hljs-operator">=</span> GetLoadStateReq.builder()
-        .collectionName(<span class="hljs-string">&quot;customized_setup_1&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .build();
 
 <span class="hljs-type">Boolean</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> client.getLoadState(loadStateReq);
 System.out.println(res);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">load_collection</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_1&quot;</span>,
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
   <span class="hljs-attr">load_fields</span>: [<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>], <span class="hljs-comment">// Load only the specified fields</span>
   <span class="hljs-attr">skip_load_dynamic_field</span>: <span class="hljs-literal">true</span> <span class="hljs-comment">//Skip loading the dynamic field</span>
 });
 
 <span class="hljs-keyword">const</span> loadState = client.<span class="hljs-title function_">getCollectionLoadState</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customized_setup_1&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
 })
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(loadState);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;context&quot;</span>
-    <span class="hljs-string">&quot;fmt&quot;</span>
-    <span class="hljs-string">&quot;log&quot;</span>
-
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2&quot;</span>
-)
-
-ctx, cancel := context.WithCancel(context.Background())
-<span class="hljs-keyword">defer</span> cancel()
-
-loadTask, err := cli.LoadCollection(ctx, client.NewLoadCollectionOption(<span class="hljs-string">&quot;customized_setup_1&quot;</span>).
-    WithLoadFields(<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>))
+<pre><code translate="no" class="language-go">loadTask, err := client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+        WithLoadFields(<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 
 <span class="hljs-comment">// sync wait collection to be loaded</span>
 err = loadTask.Await(ctx)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
+
+state, err := client.GetLoadState(ctx, milvusclient.NewGetLoadStateOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(state)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># REST</span>
+Not support yet
 <button class="copy-code-btn"></button></code></pre>
 <p>특정 필드를 로드하도록 선택한 경우 <code translate="no">load_fields</code> 에 포함된 필드만 검색 및 쿼리에서 필터 및 출력 필드로 사용할 수 있다는 점에 유의할 필요가 있습니다. 항상 <code translate="no">load_fields</code> 에 기본 필드의 이름과 하나 이상의 벡터 필드를 포함해야 합니다.</p>
 <p><code translate="no">skip_load_dynamic_field</code> 을 사용하여 동적 필드를 로드할지 여부를 결정할 수도 있습니다. 동적 필드는 <strong>$meta라는</strong> 이름의 예약된 JSON 필드이며 스키마에 정의되지 않은 모든 필드와 해당 값을 키-값 쌍으로 저장합니다. 동적 필드를 로드할 때 필드의 모든 키가 로드되어 필터링 및 출력에 사용할 수 있습니다. 동적 필드의 모든 키가 메타데이터 필터링 및 출력에 포함되지 않는 경우 <code translate="no">skip_load_dynamic_field</code> 을 <code translate="no">True</code> 으로 설정합니다.</p>
@@ -297,11 +316,11 @@ err = loadTask.Await(ctx)
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 8. Release the collection</span>
 client.release_collection(
-    collection_name=<span class="hljs-string">&quot;custom_quick_setup&quot;</span>
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;custom_quick_setup&quot;</span>
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -316,13 +335,13 @@ res = client.get_load_state(
 
 <span class="hljs-comment">// 8. Release the collection</span>
 <span class="hljs-type">ReleaseCollectionReq</span> <span class="hljs-variable">releaseCollectionReq</span> <span class="hljs-operator">=</span> ReleaseCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;custom_quick_setup&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .build();
 
 client.releaseCollection(releaseCollectionReq);
 
 <span class="hljs-type">GetLoadStateReq</span> <span class="hljs-variable">loadStateReq</span> <span class="hljs-operator">=</span> GetLoadStateReq.builder()
-        .collectionName(<span class="hljs-string">&quot;custom_quick_setup&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .build();
 <span class="hljs-type">Boolean</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> client.getLoadState(loadStateReq);
 System.out.println(res);
@@ -332,7 +351,7 @@ System.out.println(res);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 8. Release the collection</span>
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">releaseCollection</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;custom_quick_setup&quot;</span>
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>
 })
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">error_code</span>)
@@ -343,7 +362,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// </span>
 
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">getLoadState</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;custom_quick_setup&quot;</span>
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>
 })
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">state</span>)
@@ -353,16 +372,18 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateNotLoad</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;context&quot;</span>
-
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
-)
-
-err := cli.ReleaseCollection(ctx, milvusclient.NewReleaseCollectionOption(<span class="hljs-string">&quot;custom_quick_setup&quot;</span>))
+<pre><code translate="no" class="language-go">err = client.ReleaseCollection(ctx, milvusclient.NewReleaseCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
+
+state, err := client.GetLoadState(ctx, milvusclient.NewGetLoadStateOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(state)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -372,7 +393,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;custom_quick_setup&quot;
+    &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 
 <span class="hljs-comment"># {</span>
@@ -385,7 +406,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;custom_quick_setup&quot;
+    &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 
 <span class="hljs-comment"># {</span>

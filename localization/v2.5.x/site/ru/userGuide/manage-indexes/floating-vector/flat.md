@@ -1,8 +1,13 @@
 ---
 id: flat.md
-order: 0
-summary: В этой статье мы познакомимся с индексом FLAT в Milvus.
 title: FLAT
+summary: >-
+  Индекс FLAT - один из самых простых и понятных методов индексирования и поиска
+  векторов с плавающей точкой. Он основан на подходе "грубой силы", когда каждый
+  вектор запроса напрямую сравнивается с каждым вектором в наборе данных, без
+  какой-либо предварительной обработки или структурирования данных. Такой подход
+  гарантирует точность, обеспечивая 100 % отзыв, поскольку оценивается каждое
+  потенциальное совпадение.
 ---
 <h1 id="FLAT" class="common-anchor-header">FLAT<button data-href="#FLAT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +25,7 @@ title: FLAT
         ></path>
       </svg>
     </button></h1><p>Индекс <strong>FLAT</strong> - один из самых простых и понятных методов индексирования и поиска векторов с плавающей точкой. Он основан на подходе грубой силы, когда каждый вектор запроса напрямую сравнивается с каждым вектором в наборе данных, без какой-либо предварительной обработки или структурирования данных. Такой подход гарантирует точность, обеспечивая 100 % отзыв, поскольку оценивается каждое потенциальное совпадение.</p>
-<p>Однако такой метод исчерпывающего поиска имеет свои недостатки. Индекс FLAT - самый медленный вариант индексирования по сравнению с другими типами индексов в Milvus, поскольку он выполняет полное сканирование набора данных для каждого запроса. Следовательно, он не очень хорошо подходит для сред с большими наборами данных, где важна производительность. Основным преимуществом индекса FLAT является его простота и надежность, поскольку он не требует создания дополнительных индексов или сложной настройки параметров индекса.</p>
+<p>Однако такой метод исчерпывающего поиска имеет свои недостатки. Индекс FLAT - самый медленный вариант индексирования, поскольку для каждого запроса он выполняет полное сканирование набора данных. Следовательно, он не очень хорошо подходит для сред с большими наборами данных, где важна производительность. Основным преимуществом индекса FLAT является его простота и надежность, поскольку он не требует обучения или сложной настройки параметров.</p>
 <h2 id="Build-index" class="common-anchor-header">Построение индекса<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,9 +57,9 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>В данной конфигурации:</p>
 <ul>
-<li><code translate="no">index_type</code>: Тип индекса, который будет построен. В этом примере задайте значение <code translate="no">FLAT</code>.</li>
-<li><code translate="no">metric_type</code>: Метод, используемый для вычисления расстояния между векторами. Поддерживаются следующие значения: <code translate="no">COSINE</code>, <code translate="no">L2</code> и <code translate="no">IP</code>. Подробнее см. в разделе <a href="/docs/ru/metric.md">Типы метрик</a>.</li>
-<li><code translate="no">params</code>: Для индекса FLAT дополнительные параметры не требуются.</li>
+<li><p><code translate="no">index_type</code>: Тип индекса, который будет построен. В этом примере задайте значение <code translate="no">FLAT</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: Метод, используемый для вычисления расстояния между векторами. Поддерживаются следующие значения: <code translate="no">COSINE</code>, <code translate="no">L2</code> и <code translate="no">IP</code>. Подробнее см. в разделе <a href="/docs/ru/metric.md">Типы метрик</a>.</p></li>
+<li><p><code translate="no">params</code>: Для индекса FLAT дополнительные параметры не требуются.</p></li>
 </ul>
 <p>После настройки параметров индекса вы можете создать индекс, используя метод <code translate="no">create_index()</code> напрямую или передавая параметры индекса в метод <code translate="no">create_collection</code>. Подробнее см. в разделе <a href="/docs/ru/create-collection.md">Создание коллекции</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Поиск по индексу<button data-href="#Search-on-index" class="anchor-icon" translate="no">
@@ -75,6 +80,7 @@ index_params.add_index(
     </button></h2><p>После того как индекс создан и сущности вставлены в него, вы можете выполнять поиск по сходству в индексе.</p>
 <pre><code translate="no" class="language-python">res = MilvusClient.search(
     collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
     limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
     search_params={<span class="hljs-string">&quot;params&quot;</span>: {}}  <span class="hljs-comment"># No additional parameters required for FLAT</span>

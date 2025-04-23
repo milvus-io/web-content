@@ -300,7 +300,7 @@
       },
       {
         "label": "Уровень согласованности",
-        "id": "consistency.md",
+        "id": "tune_consistency.md",
         "order": 10,
         "children": []
       },
@@ -801,21 +801,27 @@
             "children": []
           },
           {
+            "label": "Запросы Elasticsearch к Milvus",
+            "id": "elasticsearch-queries-to-milvus.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Поисковые итераторы",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Использование ключа раздела",
             "id": "use-partition-key.md",
-            "order": 9,
+            "order": 11,
             "children": []
           },
           {
             "label": "Рерайтинг",
             "id": "reranking.md",
-            "order": 10,
+            "order": 12,
             "children": []
           }
         ]
@@ -1453,6 +1459,12 @@
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "Убрать пользователей и роли",
+                "id": "drop_users_roles.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -2017,7 +2029,7 @@
             "children": []
           },
           {
-            "label": "Gemini",
+            "label": "Близнецы",
             "id": "build_RAG_with_milvus_and_gemini.md",
             "order": 6,
             "children": []

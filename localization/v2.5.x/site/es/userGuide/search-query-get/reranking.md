@@ -1,11 +1,16 @@
 ---
 id: reranking.md
+title: Nueva clasificación
 summary: >-
-  Este tema aborda el proceso de reordenación, explicando su importancia y la
-  aplicación de dos métodos de reordenación.
-title: Reordenación
+  La búsqueda híbrida consigue resultados más precisos mediante múltiples
+  búsquedas simultáneas de RNA. Las búsquedas múltiples devuelven varios
+  conjuntos de resultados, que requieren una estrategia de reordenación para
+  ayudar a combinar y reordenar los resultados y devolver un único conjunto de
+  resultados. Esta guía presentará las estrategias de reordenación que admite
+  Milvus y proporcionará consejos para seleccionar la estrategia de reordenación
+  adecuada.
 ---
-<h1 id="Reranking" class="common-anchor-header">Reordenación<button data-href="#Reranking" class="anchor-icon" translate="no">
+<h1 id="Reranking" class="common-anchor-header">Nueva clasificación<button data-href="#Reranking" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +25,7 @@ title: Reordenación
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus permite capacidades de búsqueda híbrida utilizando la API <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">hybrid_search()</a>, incorporando sofisticadas estrategias de reordenación para refinar los resultados de búsqueda de múltiples instancias de <code translate="no">AnnSearchRequest</code>. Este tema cubre el proceso de reordenación, explicando su significado y la implementación de diferentes estrategias de reordenación en Milvus.</p>
+    </button></h1><p>La búsqueda híbrida consigue resultados más precisos mediante múltiples búsquedas simultáneas de RNA. Las búsquedas múltiples devuelven varios conjuntos de resultados, que requieren una estrategia de reordenación para ayudar a combinar y reordenar los resultados y devolver un único conjunto de resultados. En esta guía se presentan las estrategias de reordenación compatibles con Milvus y se ofrecen consejos para seleccionar la estrategia de reordenación adecuada.</p>
 <h2 id="Overview" class="common-anchor-header">Visión general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,14 +41,17 @@ title: Reordenación
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La siguiente figura ilustra la ejecución de una búsqueda híbrida en Milvus y destaca el papel de la reordenación en el proceso.</p>
-<p><img translate="no" src="/docs/v2.5.x/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
-<p>La reordenación en la búsqueda híbrida es un paso crucial que consolida los resultados de varios campos vectoriales, garantizando que el resultado final sea relevante y esté correctamente priorizado. Actualmente, Milvus ofrece estas estrategias de reordenación:</p>
+    </button></h2><p>El siguiente diagrama muestra el flujo de trabajo principal de una búsqueda híbrida en una aplicación de búsqueda multimodal. En el diagrama, una ruta es la búsqueda RNA básica en textos y la otra es la búsqueda RNA básica en imágenes. Cada ruta genera un conjunto de resultados basados en la puntuación de similitud del texto y la imagen respectivamente<strong>(Límite 1</strong> y <strong>Límite 2</strong>). A continuación, se aplica una estrategia de reordenación para reordenar los dos conjuntos de resultados en función de una norma unificada y, por último, fusionar los dos conjuntos de resultados en un conjunto final de resultados de búsqueda, <strong>Limit(final)</strong>.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/multi-vector-rerank.png" alt="Multi Vector Rerank" class="doc-image" id="multi-vector-rerank" />
+   </span> <span class="img-wrapper"> <span>Reranking multivectorial</span> </span></p>
+<p>En la búsqueda híbrida, el reordenamiento es un paso crucial que integra los resultados de múltiples búsquedas vectoriales para garantizar que el resultado final sea el más relevante y preciso. Actualmente, Milvus admite las dos estrategias de reordenación siguientes:</p>
 <ul>
-<li><p><code translate="no">WeightedRanker</code>: Este enfoque fusiona resultados calculando una media ponderada de puntuaciones (o distancias vectoriales) de diferentes búsquedas vectoriales. Asigna pesos en función de la importancia de cada campo vectorial.</p></li>
-<li><p><code translate="no">RRFRanker</code>: Esta estrategia combina los resultados en función de sus clasificaciones en diferentes columnas de vectores.</p></li>
+<li><p><strong><a href="/docs/es/reranking.md#WeightedRanker">WeightedRanker</a></strong>: Esta estrategia fusiona los resultados calculando una puntuación ponderada de puntuaciones (o distancias) de diferentes búsquedas vectoriales. Las ponderaciones se asignan en función de la importancia de cada campo vectorial, lo que permite personalizarlas según las prioridades específicas de cada caso de uso.</p></li>
+<li><p><strong><a href="/docs/es/reranking.md#RRFRanker">RRFRanker</a> (Reciprocal Rank Fusion Ranker)</strong>: Esta estrategia combina los resultados basándose en la clasificación. Utiliza un método que equilibra los rangos de los resultados de diferentes búsquedas, lo que a menudo conduce a una integración más justa y eficaz de diversos tipos o modalidades de datos.</p></li>
 </ul>
-<h2 id="Weighted-Scoring-WeightedRanker" class="common-anchor-header">Puntuación ponderada (WeightedRanker)<button data-href="#Weighted-Scoring-WeightedRanker" class="anchor-icon" translate="no">
+<h2 id="WeightedRanker" class="common-anchor-header">WeightedRanker<button data-href="#WeightedRanker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,32 +66,189 @@ title: Reordenación
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La estrategia <code translate="no">WeightedRanker</code> asigna diferentes pesos a los resultados de cada ruta de recuperación de vectores en función de la importancia de cada campo vectorial. Esta estrategia de reordenación se aplica cuando la importancia de cada campo vectorial varía, lo que permite destacar ciertos campos vectoriales sobre otros asignándoles pesos más altos. Por ejemplo, en una búsqueda multimodal, la descripción del texto podría considerarse más importante que la distribución del color en las imágenes.</p>
-<p>El proceso básico de WeightedRanker es el siguiente:</p>
-<ul>
-<li><p><strong>Recopilar puntuaciones durante la recuperación</strong>: Recoge los resultados y sus puntuaciones de diferentes rutas de recuperación de vectores.</p></li>
-<li><p><strong>Normalización de puntuaciones</strong>: Normalizar las puntuaciones de cada ruta a un rango [0,1], donde los valores más cercanos a 1 indican mayor relevancia. Esta normalización es crucial debido a que las distribuciones de las puntuaciones varían según los distintos tipos de métricas. Por ejemplo, la distancia para IP oscila entre [-∞,+∞], mientras que la distancia para L2 oscila entre [0,+∞]. Milvus emplea la función <code translate="no">arctan</code>, transformando los valores al rango [0,1] para proporcionar una base estandarizada para los diferentes tipos de métrica.</p>
-<p><img translate="no" src="/docs/v2.5.x/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
-<li><p><strong>Asignación de pesos</strong>: Asigna un peso <code translate="no">w𝑖</code> a cada ruta de recuperación de vectores. Los usuarios especifican las ponderaciones, que reflejan la fiabilidad, precisión u otras métricas pertinentes de la fuente de datos. Cada peso oscila entre [0,1].</p></li>
-<li><p><strong>Fusión de puntuaciones</strong>: Calcula una media ponderada de las puntuaciones normalizadas para obtener la puntuación final. A continuación, se ordenan los resultados en función de estas puntuaciones de mayor a menor para generar los resultados finales ordenados.</p></li>
-</ul>
+    </button></h2><p>La estrategia WeightedRanker asigna diferentes pesos a los resultados de cada ruta de búsqueda vectorial en función de su importancia.</p>
+<h3 id="Mechanism-of-WeightedRanker" class="common-anchor-header">Mecanismo de WeightedRanker</h3><p>El flujo de trabajo principal de la estrategia WeightedRanker es el siguiente:</p>
+<ol>
+<li><p><strong>Recopilar puntuaciones de búsqueda</strong>: Recopila los resultados y puntuaciones de cada ruta de búsqueda vectorial (puntuación_1, puntuación_2).</p></li>
+<li><p><strong>Normalización de puntuaciones</strong>: Cada búsqueda puede utilizar diferentes métricas de similitud, lo que resulta en distribuciones de puntuación variadas. Por ejemplo, si se utiliza el producto interior (PI) como tipo de similitud, las puntuaciones pueden oscilar entre [-∞,+∞], mientras que si se utiliza la distancia euclídea (L2), las puntuaciones oscilan entre [0,+∞]. Dado que los rangos de puntuación de las distintas búsquedas varían y no pueden compararse directamente, es necesario normalizar las puntuaciones de cada ruta de búsqueda. Normalmente, se aplica la función <code translate="no">arctan</code> para transformar las puntuaciones en un rango entre [0, 1] (puntuación_1_normalizada, puntuación_2_normalizada). Las puntuaciones más cercanas a 1 indican una mayor similitud.</p></li>
+<li><p><strong>Asignar pesos</strong>: En función de la importancia asignada a los distintos campos vectoriales, se asignan pesos<strong>(wi</strong>) a las puntuaciones normalizadas (puntuación_1_normalizada, puntuación_2_normalizada). Los pesos de cada ruta deben oscilar entre [0,1]. Las puntuaciones ponderadas resultantes son puntuación_1_ponderada y puntuación_2_ponderada.</p></li>
+<li><p><strong>Fusionar puntuaciones</strong>: Las puntuaciones ponderadas (puntuación_1_ponderada, puntuación_2_ponderada) se ordenan de mayor a menor para producir un conjunto final de puntuaciones (puntuación_final).</p></li>
+</ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x//assets/weighted-reranker.png" alt="weighted-reranker" class="doc-image" id="weighted-reranker" />
-   </span> <span class="img-wrapper"> <span>weighted-reranker</span> </span></p>
-<p>Para utilizar esta estrategia, aplique una instancia de <code translate="no">WeightedRanker</code> y establezca los valores de ponderación pasando un número variable de argumentos numéricos.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/weighted-reranker.png" alt="Weighted Reranker" class="doc-image" id="weighted-reranker" />
+   </span> <span class="img-wrapper"> <span>Reranker ponderado</span> </span></p>
+<h3 id="Example-of-WeightedRanker" class="common-anchor-header">Ejemplo de WeightedRanker</h3><p>Este ejemplo muestra una búsqueda híbrida multimodal (topK=5) que incluye imágenes y texto e ilustra cómo la estrategia WeightedRanker reordena los resultados de dos búsquedas RNA.</p>
+<ul>
+<li>Resultados de la búsqueda RNA en imágenes （topK=5)：</li>
+</ul>
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Puntuación (imagen)</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>0.92</p></td>
+   </tr>
+   <tr>
+     <td><p>203</p></td>
+     <td><p>0.88</p></td>
+   </tr>
+   <tr>
+     <td><p>150</p></td>
+     <td><p>0.85</p></td>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>0.83</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>0.8</p></td>
+   </tr>
+</table>
+<ul>
+<li>Resultados de la búsqueda RNA en los textos （topK=5)：</li>
+</ul>
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Puntuación (texto)</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>0.91</p></td>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>0.87</p></td>
+   </tr>
+   <tr>
+     <td><p>110</p></td>
+     <td><p>0.85</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>0.82</p></td>
+   </tr>
+   <tr>
+     <td><p>250</p></td>
+     <td><p>0.78</p></td>
+   </tr>
+</table>
+<ul>
+<li>Utilice WeightedRanker para asignar ponderaciones a los resultados de la búsqueda de imágenes y de texto. Supongamos que la ponderación para la búsqueda RNA de imagen es 0,6 y la ponderación para la búsqueda de texto es 0,4.</li>
+</ul>
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Puntuación (imagen)</strong></p></th>
+     <th><p><strong>Puntuación (texto)</strong></p></th>
+     <th><p><strong>Puntuación ponderada</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>0.92</p></td>
+     <td><p>0.87</p></td>
+     <td><p>0.6×0.92+0.4×0.87=0.90</p></td>
+   </tr>
+   <tr>
+     <td><p>203</p></td>
+     <td><p>0.88</p></td>
+     <td><p>0,88</p></td>
+     <td><p>0.6×0.88+0.4×0=0.528</p></td>
+   </tr>
+   <tr>
+     <td><p>150</p></td>
+     <td><p>0.85</p></td>
+     <td><p>N/A</p></td>
+     <td><p>0.6×0.85+0.4×0=0.51</p></td>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>0.83</p></td>
+     <td><p>0.91</p></td>
+     <td><p>0.6×0.83+0.4×0.91=0.86</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>0.80</p></td>
+     <td><p>0.82</p></td>
+     <td><p>0.6×0.80+0.4×0.82=0.81</p></td>
+   </tr>
+   <tr>
+     <td><p>110</p></td>
+     <td><p>No en la imagen</p></td>
+     <td><p>0.85</p></td>
+     <td><p>0.6×0+0.4×0.85=0.34</p></td>
+   </tr>
+   <tr>
+     <td><p>250</p></td>
+     <td><p>No en la imagen</p></td>
+     <td><p>0.78</p></td>
+     <td><p>0.6×0+0.4×0.78=0.312</p></td>
+   </tr>
+</table>
+<ul>
+<li>Los resultados finales después de reranking（topK=5)：</li>
+</ul>
+<table>
+   <tr>
+     <th><p><strong>Clasificación</strong></p></th>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Puntuación final</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>1</p></td>
+     <td><p>101</p></td>
+     <td><p>0.90</p></td>
+   </tr>
+   <tr>
+     <td><p>2</p></td>
+     <td><p>198</p></td>
+     <td><p>0.86</p></td>
+   </tr>
+   <tr>
+     <td><p>3</p></td>
+     <td><p>175</p></td>
+     <td><p>0.81</p></td>
+   </tr>
+   <tr>
+     <td><p>4</p></td>
+     <td><p>203</p></td>
+     <td><p>0.528</p></td>
+   </tr>
+   <tr>
+     <td><p>5</p></td>
+     <td><p>150</p></td>
+     <td><p>0.51</p></td>
+   </tr>
+</table>
+<h3 id="Usage-of-WeightedRanker" class="common-anchor-header">Uso de WeightedRanker</h3><p>Cuando se utiliza la estrategia WeightedRanker, es necesario introducir valores de ponderación. El número de valores de ponderación a introducir debe corresponder al número de peticiones de búsqueda de RNA básicas en la búsqueda híbrida. Los valores de ponderación deben estar comprendidos en el intervalo [0,1], y los valores más próximos a 1 indican mayor importancia.</p>
+<p>Por ejemplo, supongamos que en una búsqueda híbrida hay dos peticiones básicas de búsqueda RNA: búsqueda de texto y búsqueda de imágenes. Si la búsqueda de texto se considera más importante, se le asignará un peso mayor.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
 
-<span class="hljs-comment"># Use WeightedRanker to combine results with specified weights</span>
-rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.7</span>) 
+rerank= WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) 
 <button class="copy-code-btn"></button></code></pre>
-<p>Tenga en cuenta que:</p>
-<ul>
-<li><p>Cada valor de peso va de 0 (menos importante) a 1 (más importante), influyendo en la puntuación final agregada.</p></li>
-<li><p>El número total de valores de peso proporcionados en <code translate="no">WeightedRanker</code> debe ser igual al número de instancias de <code translate="no">AnnSearchRequest</code> que haya creado anteriormente.</p></li>
-<li><p>Cabe señalar que, debido a las diferentes medidas de los distintos tipos de métricas, normalizamos las distancias de los resultados de recall para que se sitúen en el intervalo [0,1], donde 0 significa diferente y 1 similar. La puntuación final será la suma de los valores de ponderación y las distancias.</p></li>
-</ul>
-<h2 id="Reciprocal-Rank-Fusion-RRFRanker" class="common-anchor-header">Fusión por rango recíproco (RRFRanker)<button data-href="#Reciprocal-Rank-Fusion-RRFRanker" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.WeightedRanker;
+
+<span class="hljs-type">WeightedRanker</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">WeightedRanker</span>(Arrays.asList(<span class="hljs-number">0.8f</span>, <span class="hljs-number">0.3f</span>))
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+
+reranker := milvusclient.NewWeightedReranker([]<span class="hljs-type">float64</span>{<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-attr">rerank</span>: <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> rerank=<span class="hljs-string">&#x27;{
+        &quot;strategy&quot;: &quot;ws&quot;,
+        &quot;params&quot;: {&quot;weights&quot;: [0.8,0.3]}
+    }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="RRFRanker" class="common-anchor-header">RRFRanker<button data-href="#RRFRanker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,25 +263,208 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RRF es un método de fusión de datos que combina listas de clasificación basadas en la recíproca de sus rangos. Es una forma eficaz de equilibrar la influencia de cada campo vectorial, especialmente cuando no existe una clara precedencia de importancia. Esta estrategia se suele utilizar cuando se quiere dar la misma consideración a todos los campos vectoriales o cuando hay incertidumbre sobre la importancia relativa de cada campo.</p>
-<p>El proceso básico de la RRF es el siguiente:</p>
-<ul>
-<li><p><strong>Recopilación de clasificaciones durante la recuperación</strong>: Los recuperadores de múltiples campos vectoriales recuperan y ordenan los resultados.</p></li>
-<li><p><strong>Fusión de rankings</strong>: El algoritmo RRF pondera y combina las clasificaciones de cada recuperador. La fórmula es la siguiente</p>
+    </button></h2><p>Reciprocal Rank Fusion (RRF) es un método de fusión de datos que combina listas clasificadas basándose en la recíproca de sus clasificaciones. Esta estrategia de reordenación equilibra eficazmente la importancia de cada ruta de búsqueda vectorial.</p>
+<h3 id="Mechanism-of-RRFRanker" class="common-anchor-header">Mecanismo de RRFRanker</h3><p>El flujo de trabajo principal de la estrategia RRFRanker es el siguiente:</p>
+<ol>
+<li><p><strong>Recopilación de clasificaciones de búsqueda</strong>: Recopila las clasificaciones de los resultados de cada ruta de búsqueda vectorial (rank_1, rank_2).</p></li>
+<li><p><strong>Combinar clasificaciones</strong>: Convertir los rankings de cada camino (rank_rrf_1, rank_rrf_2) según una fórmula .</p>
+<p>En la fórmula de cálculo interviene <em>N</em>, que representa el número de recuperaciones. <em>ranki</em><em>(d</em>) es la posición en la clasificación del documento <em>d</em> generada por el recuperador <em>i(th)</em>. <em>k</em> es un parámetro de suavizado que suele fijarse en 60.</p></li>
+<li><p><strong>Clasificación agregada</strong>: Vuelve a clasificar los resultados de la búsqueda basándose en las clasificaciones combinadas para producir los resultados finales.</p></li>
+</ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x//assets/rrf-ranker.png" alt="rrf-ranker" class="doc-image" id="rrf-ranker" />
-   </span> <span class="img-wrapper"> <span>rrf-ranker</span> </span></p>
-<p>Aquí, 𝑁 representa el número de rutas de recuperación diferentes, rank𝑖(𝑑) es la posición en el ranking del documento recuperado 𝑑 por el 𝑖º recuperador, y 𝑘 es un parámetro de suavizado, normalmente fijado en 60.</p></li>
-<li><p><strong>Clasificación exhaustiva</strong>: Reordena los resultados recuperados basándose en las puntuaciones combinadas para producir los resultados finales.</p></li>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/RRF-reranker.png" alt="RRF Reranker" class="doc-image" id="rrf-reranker" />
+   </span> <span class="img-wrapper"> <span>RRF Reranker</span> </span></p>
+<h3 id="Example-of-RRFRanker" class="common-anchor-header">Ejemplo de RRFRanker</h3><p>Este ejemplo muestra una búsqueda híbrida (topK=5) en vectores dispersos y densos e ilustra cómo la estrategia RRFRanker vuelve a clasificar los resultados de dos búsquedas RNA.</p>
+<ul>
+<li>Resultados de la búsqueda RNA en vectores dispersos de textos （topK=5)：</li>
 </ul>
-<p>Para utilizar esta estrategia, aplique una instancia de <code translate="no">RRFRanker</code>.</p>
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Rango (disperso)</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>1</p></td>
+   </tr>
+   <tr>
+     <td><p>203</p></td>
+     <td><p>2</p></td>
+   </tr>
+   <tr>
+     <td><p>150</p></td>
+     <td><p>3</p></td>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>4</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>5</p></td>
+   </tr>
+</table>
+<ul>
+<li>Resultados de la búsqueda RNA en vectores densos de textos （topK=5)：</li>
+</ul>
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Rango (denso)</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>1</p></td>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>2</p></td>
+   </tr>
+   <tr>
+     <td><p>110</p></td>
+     <td><p>3</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>4</p></td>
+   </tr>
+   <tr>
+     <td><p>250</p></td>
+     <td><p>5</p></td>
+   </tr>
+</table>
+<ul>
+<li>Utilice RRF para reordenar las clasificaciones de los dos conjuntos de resultados de búsqueda. Suponga que el parámetro de suavizado <code translate="no">k</code> está fijado en 60.</li>
+</ul>
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Puntuación (dispersa)</strong></p></th>
+     <th><p><strong>Puntuación (densa)</strong></p></th>
+     <th><p><strong>Puntuación final</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>1</p></td>
+     <td><p>2</p></td>
+     <td><p>1/(60+1)+1/(60+2) = 0.01639</p></td>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>4</p></td>
+     <td><p>1</p></td>
+     <td><p>1/(60+4)+1/(60+1) = 0.01593</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>5</p></td>
+     <td><p>4</p></td>
+     <td><p>1/(60+5)+1/(60+4) = 0.01554</p></td>
+   </tr>
+   <tr>
+     <td><p>203</p></td>
+     <td><p>2</p></td>
+     <td><p>N/A</p></td>
+     <td><p>1/(60+2) = 0.01613</p></td>
+   </tr>
+   <tr>
+     <td><p>150</p></td>
+     <td><p>3</p></td>
+     <td><p>N/A</p></td>
+     <td><p>1/(60+3) = 0.01587</p></td>
+   </tr>
+   <tr>
+     <td><p>110</p></td>
+     <td><p>N/A</p></td>
+     <td><p>3</p></td>
+     <td><p>1/(60+3) = 0.01587</p></td>
+   </tr>
+   <tr>
+     <td><p>250</p></td>
+     <td><p>N/A</p></td>
+     <td><p>5</p></td>
+     <td><p>1/(60+5) = 0.01554</p></td>
+   </tr>
+</table>
+<ul>
+<li>Los resultados finales tras la reordenación（topK=5)：</li>
+</ul>
+<table>
+   <tr>
+     <th><p><strong>Clasificación</strong></p></th>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Puntuación final</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>1</p></td>
+     <td><p>101</p></td>
+     <td><p>0.01639</p></td>
+   </tr>
+   <tr>
+     <td><p>2</p></td>
+     <td><p>203</p></td>
+     <td><p>0.01613</p></td>
+   </tr>
+   <tr>
+     <td><p>3</p></td>
+     <td><p>198</p></td>
+     <td><p>0.01593</p></td>
+   </tr>
+   <tr>
+     <td><p>4</p></td>
+     <td><p>150</p></td>
+     <td><p>0.01587</p></td>
+   </tr>
+   <tr>
+     <td><p>5</p></td>
+     <td><p>110</p></td>
+     <td><p>0.01587</p></td>
+   </tr>
+</table>
+<h3 id="Usage-of-RRFRanker" class="common-anchor-header">Uso de RRFRanker</h3><p>Cuando se utiliza la estrategia RRF reranking, es necesario configurar el parámetro <code translate="no">k</code>. Se trata de un parámetro de suavizado que puede alterar eficazmente los pesos relativos de la búsqueda de texto completo frente a la búsqueda vectorial. El valor por defecto de este parámetro es 60, y puede ajustarse dentro de un rango de (0, 16384). El valor debe ser un número de coma flotante. El valor recomendado está entre [10, 100]. Aunque <code translate="no">k=60</code> es una opción habitual, el valor óptimo de <code translate="no">k</code> puede variar en función de sus aplicaciones y conjuntos de datos específicos. Recomendamos probar y ajustar este parámetro en función de su caso de uso específico para lograr el mejor rendimiento.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> RRFRanker
 
-<span class="hljs-comment"># Default k value is 60</span>
-ranker = RRFRanker()
-
-<span class="hljs-comment"># Or specify k value</span>
-ranker = RRFRanker(k=<span class="hljs-number">100</span>)
+ranker = RRFRanker(<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>RRF permite equilibrar la influencia entre campos sin especificar pesos explícitos. Las mejores coincidencias acordadas por varios campos tendrán prioridad en la clasificación final.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.RRFRanker;
+
+<span class="hljs-type">RRFRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">reranker := milvusclient.NewRRFReranker().WithK(<span class="hljs-number">100</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-attr">rerank</span>: <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-string">&quot;100&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-string">&quot;rerank&quot;</span>: {
+    <span class="hljs-string">&quot;strategy&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+    <span class="hljs-string">&quot;params&quot;</span>: {
+        <span class="hljs-string">&quot;k&quot;</span>: 100
+    }
+}
+<span class="hljs-built_in">export</span> rerank=<span class="hljs-string">&#x27;{
+        &quot;strategy&quot;: &quot;rrf&quot;,
+        &quot;params&quot;: {&quot;k&quot;: 100}
+    }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Select-the-right-reranking-strategy" class="common-anchor-header">Seleccionar la estrategia de reordenación adecuada<button data-href="#Select-the-right-reranking-strategy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>A la hora de elegir una estrategia de reranking, hay que tener en cuenta si se hace hincapié en una o varias búsquedas básicas de RNA en los campos vectoriales.</p>
+<ul>
+<li><p><strong>WeightedRanker</strong>: Esta estrategia se recomienda si necesita que los resultados hagan hincapié en un campo vectorial concreto. El WeightedRanker permite asignar pesos más altos a determinados campos vectoriales, enfatizándolos más. Por ejemplo, en las búsquedas multimodales, las descripciones textuales de una imagen podrían considerarse más importantes que los colores de esta imagen.</p></li>
+<li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)</strong>: Esta estrategia se recomienda cuando no hay un énfasis específico. El RRF puede equilibrar eficazmente la importancia de cada campo vectorial.</p></li>
+</ul>

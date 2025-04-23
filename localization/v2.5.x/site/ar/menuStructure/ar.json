@@ -300,7 +300,7 @@
       },
       {
         "label": "مستوى الاتساق",
-        "id": "consistency.md",
+        "id": "tune_consistency.md",
         "order": 10,
         "children": []
       },
@@ -801,21 +801,27 @@
             "children": []
           },
           {
+            "label": "استعلامات البحث المرن إلى ميلفوس",
+            "id": "elasticsearch-queries-to-milvus.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "مكرر البحث",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "استخدام مفتاح التقسيم",
             "id": "use-partition-key.md",
-            "order": 9,
+            "order": 11,
             "children": []
           },
           {
             "label": "إعادة التصنيف",
             "id": "reranking.md",
-            "order": 10,
+            "order": 12,
             "children": []
           }
         ]
@@ -1452,6 +1458,12 @@
                 "label": "أدوار المنحة",
                 "id": "grant_roles.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "إسقاط المستخدمين والأدوار",
+                "id": "drop_users_roles.md",
+                "order": 5,
                 "children": []
               }
             ]

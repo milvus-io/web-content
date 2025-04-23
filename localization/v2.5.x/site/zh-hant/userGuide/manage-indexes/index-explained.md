@@ -3,7 +3,7 @@ id: index-explained.md
 title: 索引說明
 summary: >-
   索引是建立在資料之上的額外結構。其內部結構取決於所使用的近似近鄰搜尋演算法。索引可加快搜尋速度，但會在搜尋過程中產生額外的預處理時間、空間和
-  RAM。此外，使用索引通常會降低召回率（雖然影響微乎其微，但仍很重要）。因此，本文將解釋如何將使用索引的成本最小化，同時將效益最大化。
+  RAM。此外，使用索引通常會降低召回率（雖然影響微乎其微，但仍然很重要）。因此，本文將解釋如何將使用索引的成本最小化，同時將效益最大化。
 ---
 <h1 id="Index-Explained" class="common-anchor-header">索引說明<button data-href="#Index-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -101,12 +101,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如下圖所示，Milvus 的索引類型包含三個核心元件，<strong>即資料結構</strong>、<strong>量化</strong>和<strong>精煉器</strong>。量化和精煉器是可選的，但由於有顯著的收益-好於成本-平衡，因此被廣泛使用。</p>
+    </button></h2><p>如下圖所示，Milvus 的索引類型包含三個核心元件，<strong>即資料結構</strong>、<strong>量化</strong>和<strong>精煉器</strong>。量化和精煉器是可選的，但由於具有顯著的收益-好於成本平衡，因此被廣泛使用。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector-index-anatomy.png" alt="vector-index-anatomy" class="doc-image" id="vector-index-anatomy" />
-   </span> <span class="img-wrapper"> <span>向量索引解剖</span> </span></p>
-<p>在建立索引時，Milvus 會結合所選的資料結構和量化方法，以決定最佳的<strong>擴充率</strong>。在查詢時，系統會擷取<code translate="no">topK × expansion rate</code> 候選向量，應用精煉器以更高的精確度重新計算距離，最後再傳回最精確的<code translate="no">topK</code> 結果。這種混合方法將資源密集的精煉限制在經過篩選的候選向量子集中，從而在速度和精確度之間取得平衡。</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   </span> <span class="img-wrapper"> <span>向量索引剖析</span> </span></p>
+<p>在建立索引時，Milvus 會結合所選的資料結構和量化方法，以決定最佳的<strong>擴充率</strong>。在查詢時，系統會擷取<code translate="no">topK × expansion rate</code> 候選向量，應用精煉器以更高的精確度重新計算距離，最後傳回最精確的<code translate="no">topK</code> 結果。這種混合方法將資源密集的精煉限制在經過篩選的候選向量子集中，從而在速度和精確度之間取得平衡。</p>
 <h3 id="Data-structure" class="common-anchor-header">資料結構</h3><p>資料結構形成索引的基礎層。常見的類型包括</p>
 <ul>
 <li><p><strong>反向檔案 (IVF)</strong></p>
@@ -118,7 +118,7 @@ summary: >-
 </ul>
 <h3 id="Quantization" class="common-anchor-header">量化</h3><p>量化可透過更粗略的表示方式，減少記憶體佔用量和計算成本：</p>
 <ul>
-<li><p><strong>Scalar Quantization</strong>(例如<strong>SQ8</strong>) 可讓 Milvus 將每個向量維度壓縮為單一位元組 (8-bit)，相較於 32 位元浮點運算可減少 75% 的記憶體使用量，同時保留合理的精確度。</p></li>
+<li><p><strong>Scalar Quantization</strong>(例如<strong>SQ8</strong>) 可讓 Milvus 將每個向量維度壓縮為單一位元組 (8-bit)，相較於 32 位元浮點運算，可減少 75% 的記憶體使用量，同時保留合理的精確度。</p></li>
 <li><p><strong>Product Quantization</strong><strong>(PQ</strong>) 可讓 Milvus 將向量分割成子向量，並使用基於編碼簿的聚類技術進行編碼。這可達到更高的壓縮率 (例如 4-32 倍)，但代價是記憶力略有降低，因此適用於記憶體有限的環境。</p></li>
 </ul>
 <h3 id="Refiner" class="common-anchor-header">精煉</h3><p>量化本身就是有損失的。為了維持召回率，量化會持續產生比所需更多的 Top-K 候選結果，讓精煉器能使用更高的精確度，從這些候選結果中進一步選出 Top-K 結果，進而提升召回率。</p>
@@ -171,7 +171,7 @@ summary: >-
 <li><p>對於 top-K 較大（與向量嵌入的總數相比）的搜尋，IVF 變體是比基於圖的索引類型更好的選擇。</p></li>
 <li><p>對於具有中等大小 top-K 和高過濾率的搜尋，IVF 變異是更好的選擇。</p></li>
 </ul>
-<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">決策矩陣：選擇最適當的索引類型</h3><p>下表為決策矩陣，供您在選擇適當索引類型時參考。</p>
+<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">決策矩陣：選擇最適合的索引類型</h3><p>下表為決策矩陣，供您在選擇適當索引類型時參考。</p>
 <table>
    <tr>
      <th><p>場景</p></th>
@@ -227,7 +227,7 @@ summary: >-
     </button></h2><div class="alert note">
 <p>本節重點在於計算特定索引類型的記憶體消耗，並包含許多技術細節。如果本節與您的興趣不符，您可以放心跳過。</p>
 </div>
-<p>索引的記憶體消耗量受其資料結構、透過量化的壓縮率，以及使用中的精煉器所影響。一般來說，基於圖表的索引通常會因為圖表結構（例如<strong>HNSW</strong>）而佔用較多記憶體，這通常意味著每個向量的空間開銷較大。相較之下，IVF 及其變體則更節省記憶體，因為適用的每向量空間開銷較少。然而，<strong>DiskANN</strong>等先進技術允許索引的一部分（例如圖形或精煉器）駐留在磁碟上，以減少記憶體負載，同時維持效能。</p>
+<p>索引的記憶體消耗量受其資料結構、透過量化的壓縮率，以及使用中的精煉器所影響。一般而言，基於圖表的索引通常會因為圖表的結構（例如<strong>HNSW</strong>）而佔用較多記憶體，這通常意味著每個向量的空間開銷較大。相較之下，IVF 及其變體則更節省記憶體，因為適用的每向量空間開銷較少。然而，<strong>DiskANN</strong>等先進技術允許索引的一部分（例如圖形或精煉器）駐留在磁碟上，以減少記憶體負載，同時維持效能。</p>
 <p>具體來說，索引的記憶體使用量可以如下計算：</p>
 <h3 id="IVF-index-memory-usage" class="common-anchor-header">IVF 索引記憶體使用量</h3><p>IVF 索引透過將資料分割成群組，在記憶體效率與搜尋效能之間取得平衡。以下是使用 IVF 變異索引的 100 萬個 128 維向量所使用的記憶體明細。</p>
 <ol>
@@ -295,18 +295,18 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>當您使用 HNSW 為 100 萬個 128 維向量嵌入建立索引時，使用的總記憶體為<strong>128 MB (圖形) + 512 MB (向量) = 640 MB</strong>。</p></li>
 <li><p><strong>計算量化所造成的壓縮。</strong></p>
-<p>量化可減少向量大小。例如，使用具有 8 個子量化器的 PQ（每個向量 8 位元組）會導致大幅壓縮。經壓縮的向量嵌入所消耗的記憶體可以如下計算：</p>
+<p>量化可減少向量大小。例如，使用具有 8 個子量化器的 PQ（每個向量 8 位元組）會導致大幅壓縮。經壓縮的向量嵌入所消耗的記憶體可計算如下：</p>
 <pre><code translate="no" class="language-plaintext">1,000,000 vectors × 8 bytes = 8 MB
 <button class="copy-code-btn"></button></code></pre>
 <p>與原始向量嵌入相比，這可達到 64 倍的壓縮率，而<strong>HNSWPQ</strong>索引類型使用的總記憶體為<strong>128 MB (圖形) + 8 MB (壓縮向量) = 136 MB</strong>。</p></li>
 <li><p><strong>計算精煉開銷。</strong></p>
-<p>精煉（例如使用原始向量重新排序）會暫時將高精度資料載入記憶體。對於擷取前 10 個結果且擴充率為 5 的搜尋，精煉開銷可估算如下：</p>
+<p>精煉（例如使用原始向量重新排序）會暫時將高精確度資料載入記憶體。對於擷取前 10 個結果且擴充率為 5 的搜尋，精煉開銷可估算如下：</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Other-considerations" class="common-anchor-header">其他注意事項</h3><p>IVF 和基於圖的索引會透過量化來最佳化記憶體的使用，而記憶體映射檔案 (mmap) 和 DiskANN 則會處理資料集超出可用隨機存取記憶體 (RAM) 的情況。</p>
+<h3 id="Other-considerations" class="common-anchor-header">其他注意事項</h3><p>IVF 和基於圖表的索引會透過量化來最佳化記憶體的使用，而記憶體映射檔案 (mmap) 和 DiskANN 則會處理資料集超出可用隨機存取記憶體 (RAM) 的情況。</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN 是基於 Vamana 圖形的索引，可連結資料點，以便在搜尋過程中有效導航，同時應用 PQ 來縮小向量的大小，並快速計算向量之間的近似距離。</p>
-<p>Vamana 圖形儲存在磁碟上，這使得 DiskANN 可以處理大型資料集，否則記憶體就無法容納這些資料集。這對十億點的資料集特別有用。</p>
+<p>Vamana 圖形儲存在磁碟上，這使得 DiskANN 可以處理大型資料集，否則這些資料集會太大，無法放入記憶體中。這對十億點的資料集特別有用。</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">記憶體映射檔案 (mmap)</h4><p>記憶體映射 (Mmap) 可直接存取磁碟上的大型檔案，讓 Milvus 在記憶體和硬碟中同時儲存索引和資料。此方法可根據存取頻率減少 I/O 呼叫的開銷，有助於最佳化 I/O 作業，從而擴大資料集的儲存容量，且不會顯著影響搜尋效能。</p>
 <p>具體來說，您可以設定 Milvus 對某些欄位的原始資料進行記憶體映射，而不是將其完全載入記憶體。如此一來，您就可以直接取得欄位的記憶體存取權，而不必擔心記憶體問題，並擴大資料集的容量。</p>

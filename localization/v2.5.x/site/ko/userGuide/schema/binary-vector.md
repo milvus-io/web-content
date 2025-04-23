@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이진 벡터는 기존의 고차원 부동소수점 벡터를 0과 1만 포함하는 이진 벡터로 변환하는 특별한 형태의 데이터 표현입니다. 이러한 변환은 벡터의 크기를 압축할 뿐만 아니라 의미 정보를 유지하면서 저장 및 계산 비용을 줄여줍니다. 중요하지 않은 특징에 대한 정밀도가 필수적이지 않은 경우, 이진 벡터는 원래 부동소수점 벡터의 무결성과 유용성 대부분을 효과적으로 유지할 수 있습니다.</p>
+    </button></h1><p>이진 벡터는 기존의 고차원 부동소수점 벡터를 0과 1만 포함하는 이진 벡터로 변환하는 특별한 형태의 데이터 표현입니다. 이러한 변환은 벡터의 크기를 압축할 뿐만 아니라 의미 정보를 유지하면서 저장 및 계산 비용을 줄여줍니다. 중요하지 않은 특징에 대한 정밀도가 필수적이지 않은 경우, 이진 벡터는 원래 부동 소수점 벡터의 무결성과 유용성을 대부분 효과적으로 유지할 수 있습니다.</p>
 <p>바이너리 벡터는 특히 계산 효율성과 스토리지 최적화가 중요한 상황에서 폭넓게 활용될 수 있습니다. 검색 엔진이나 추천 시스템과 같은 대규모 AI 시스템에서는 방대한 양의 데이터를 실시간으로 처리하는 것이 핵심입니다. 바이너리 벡터는 벡터의 크기를 줄임으로써 정확도를 크게 떨어뜨리지 않으면서 지연 시간과 계산 비용을 낮추는 데 도움이 됩니다. 또한 바이너리 벡터는 메모리와 처리 능력이 제한된 모바일 디바이스나 임베디드 시스템과 같은 리소스 제약이 있는 환경에서 유용합니다. 바이너리 벡터를 사용하면 이러한 제한된 환경에서도 고성능을 유지하면서 복잡한 AI 기능을 구현할 수 있습니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,11 +42,11 @@ summary: >-
 <p>아래 다이어그램은 이진 벡터가 텍스트 콘텐츠에서 키워드의 존재를 나타내는 방법을 보여줍니다. 이 예에서는 10차원 이진 벡터가 두 개의 서로 다른 텍스트<strong>(텍스트 1과</strong> <strong>텍스트 2</strong>)를 표현하는 데 사용되며, 각 차원은 어휘의 단어에 해당합니다(1은 텍스트에 단어가 있음을 나타내고 0은 단어가 없음을 나타냅니다).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/binary-vector.png" alt="binary-vector" class="doc-image" id="binary-vector" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
    </span> <span class="img-wrapper"> <span>이진 벡터</span> </span></p>
 <p>이진 벡터에는 다음과 같은 특징이 있습니다:</p>
 <ul>
-<li><p><strong>효율적인 저장 공간:</strong> 각 차원에는 1비트만 저장 공간이 필요하므로 저장 공간을 크게 줄일 수 있습니다.</p></li>
+<li><p><strong>효율적인 저장 공간:</strong> 각 차원에는 1비트만 저장 공간이 필요하므로 저장 공간이 크게 줄어듭니다.</p></li>
 <li><p><strong>빠른 계산:</strong> XOR과 같은 비트 연산을 사용해 벡터 간의 유사도를 빠르게 계산할 수 있습니다.</p></li>
 <li><p><strong>고정 길이:</strong> 원본 텍스트 길이에 관계없이 벡터의 길이가 일정하게 유지되므로 색인 및 검색이 더 쉬워집니다.</p></li>
 <li><p><strong>간단하고 직관적입니다:</strong> 키워드의 존재 여부를 직접 반영하므로 특정 전문 검색 작업에 적합합니다.</p></li>
@@ -55,8 +55,8 @@ summary: >-
 <p>이진 벡터화 후에는 데이터를 Milvus에 저장하여 관리 및 벡터 검색을 수행할 수 있습니다. 아래 다이어그램은 기본 프로세스를 보여줍니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-binary-vector.png" alt="use-binary-vector" class="doc-image" id="use-binary-vector" />
-   </span> <span class="img-wrapper"> <span>사용-바이너리 벡터</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
+   </span> <span class="img-wrapper"> <span>바이너리 벡터 사용</span> </span></p>
 <div class="alert note">
 <p>이진 벡터는 특정 시나리오에서는 탁월하지만, 표현 능력에 한계가 있어 복잡한 의미 관계를 포착하기 어렵습니다. 따라서 실제 시나리오에서는 효율성과 표현력의 균형을 맞추기 위해 이진 벡터를 다른 벡터 유형과 함께 사용하는 경우가 많습니다. 자세한 내용은 <a href="/docs/ko/dense-vector.md">고밀도 벡터</a> 및 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>
 </div>
@@ -129,12 +129,36 @@ schema.<span class="hljs-title function_">push</span>({
   <span class="hljs-attr">dim</span>: <span class="hljs-number">128</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">schema := entity.NewSchema()
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+schema := entity.NewSchema()
 schema.WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;pk&quot;</span>).
     WithDataType(entity.FieldTypeVarChar).
-    WithMaxLength(<span class="hljs-number">100</span>).
-    WithIsAutoID(<span class="hljs-literal">true</span>),
+    WithIsAutoID(<span class="hljs-literal">true</span>).
+    WithIsPrimaryKey(<span class="hljs-literal">true</span>).
+    WithMaxLength(<span class="hljs-number">100</span>),
 ).WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;binary_vector&quot;</span>).
     WithDataType(entity.FieldTypeBinaryVector).
@@ -202,13 +226,8 @@ indexParams.add(IndexParam.builder()
   <span class="hljs-attr">index_type</span>: <span class="hljs-title class_">IndexType</span>.<span class="hljs-property">AUTOINDEX</span>
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-)
-
-idx := index.NewAutoIndex(entity.HAMMING)
-indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_binary_collection&quot;</span>, <span class="hljs-string">&quot;binary_vector&quot;</span>, idx)
+<pre><code translate="no" class="language-go">idx := index.NewAutoIndex(entity.HAMMING)
+indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;binary_vector&quot;</span>, idx)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
         {
@@ -222,11 +241,11 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <p>위의 예에서는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 <code translate="no">binary_vector</code> 필드에 대해 <code translate="no">binary_vector_index</code> 라는 이름의 인덱스가 생성됩니다. <code translate="no">metric_type</code> 은 <code translate="no">HAMMING</code> 으로 설정되어 유사도 측정에 해밍 거리가 사용되었음을 나타냅니다.</p>
 <p>밀버스는 더 나은 벡터 검색 환경을 위해 다양한 인덱스 유형을 제공합니다. 자동 인덱스는 벡터 검색의 학습 곡선을 원활하게 하기 위해 고안된 특수 인덱스 유형입니다. 다양한 인덱스 유형 중에서 선택할 수 있습니다. 자세한 내용은 xxx를 참조하세요.</p>
 <p>또한 Milvus는 이진 벡터에 대한 다른 유사성 메트릭도 지원합니다. 자세한 내용은 <a href="/docs/ko/metric.md">메트릭 유형을</a> 참조하세요.</p>
-<h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기</h3><p>바이너리 벡터 및 인덱스 설정이 완료되면 바이너리 벡터를 포함하는 컬렉션을 만듭니다. 아래 예제에서는 <code translate="no">create_collection</code> 메서드를 사용하여 <code translate="no">my_binary_collection</code> 이라는 이름의 컬렉션을 생성합니다.</p>
+<h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기</h3><p>바이너리 벡터 및 인덱스 설정이 완료되면 바이너리 벡터를 포함하는 컬렉션을 만듭니다. 아래 예제에서는 <code translate="no">create_collection</code> 메서드를 사용하여 <code translate="no">my_collection</code> 이라는 이름의 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
-    collection_name=<span class="hljs-string">&quot;my_binary_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params
 )
@@ -239,7 +258,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         .build());
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_binary_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
         .indexParams(indexParams)
         .build();
@@ -252,15 +271,16 @@ client.createCollection(requestCreate);
 });
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_dense_collection&#x27;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">schema</span>: schema,
     <span class="hljs-attr">index_params</span>: indexParams
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">err = cli.CreateCollection(ctx,
-    milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_binary_collection&quot;</span>, schema).
+<pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithIndexOptions(indexOption))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
@@ -269,7 +289,7 @@ client.createCollection(requestCreate);
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;my_binary_collection\&quot;,
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
@@ -298,7 +318,7 @@ bool_vectors = [
 data = [{<span class="hljs-string">&quot;binary_vector&quot;</span>: convert_bool_list_to_bytes(bool_vector) <span class="hljs-keyword">for</span> bool_vector <span class="hljs-keyword">in</span> bool_vectors}]
 
 client.insert(
-    collection_name=<span class="hljs-string">&quot;my_binary_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=data
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -336,7 +356,7 @@ List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class=
 }
 
 <span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_binary_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(rows)
         .build());
 <button class="copy-code-btn"></button></code></pre>
@@ -346,15 +366,19 @@ List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class=
 ];
 
 client.<span class="hljs-title function_">insert</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_binary_collection&quot;</span>,
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
   <span class="hljs-attr">data</span>: data,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;quick_setup&quot;</span>).
+<pre><code translate="no" class="language-go">_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
     WithBinaryVectorColumn(<span class="hljs-string">&quot;binary_vector&quot;</span>, <span class="hljs-number">128</span>, [][]<span class="hljs-type">byte</span>{
         {<span class="hljs-number">0</span>b10011011, <span class="hljs-number">0</span>b01010100, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>},
         {<span class="hljs-number">0</span>b10011011, <span class="hljs-number">0</span>b01010101, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>},
     }))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
@@ -362,7 +386,7 @@ client.<span class="hljs-title function_">insert</span>({
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
-    \&quot;collectionName\&quot;: \&quot;my_binary_collection\&quot;
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Perform-similarity-search" class="common-anchor-header">유사도 검색 수행</h3><p>유사도 검색은 밀버스의 핵심 기능 중 하나로, 벡터 사이의 거리를 기준으로 쿼리 벡터와 가장 유사한 데이터를 빠르게 찾을 수 있습니다. 이진 벡터를 사용하여 유사도 검색을 수행하려면 쿼리 벡터와 검색 매개변수를 준비한 다음 <code translate="no">search</code> 메서드를 호출합니다.</p>
@@ -377,7 +401,7 @@ query_bool_list = [<span class="hljs-number">1</span>, <span class="hljs-number"
 query_vector = convert_bool_list_to_bytes(query_bool_list)
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_binary_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
     anns_field=<span class="hljs-string">&quot;binary_vector&quot;</span>,
     search_params=search_params,
@@ -401,7 +425,7 @@ searchParams.put(<span class="hljs-string">&quot;nprobe&quot;</span>,<span class
 <span class="hljs-type">BinaryVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BinaryVec</span>(convertBoolArrayToBytes(boolArray));
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchR</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_binary_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(Collections.singletonList(queryVector))
         .annsField(<span class="hljs-string">&quot;binary_vector&quot;</span>)
         .searchParams(searchParams)
@@ -418,7 +442,7 @@ searchParams.put(<span class="hljs-string">&quot;nprobe&quot;</span>,<span class
 <pre><code translate="no" class="language-javascript">query_vector = [<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>];
 
 client.<span class="hljs-title function_">search</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_binary_collection&#x27;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">data</span>: query_vector,
     <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;pk&#x27;</span>],
@@ -431,19 +455,22 @@ client.<span class="hljs-title function_">search</span>({
 
 annSearchParams := index.NewCustomAnnParam()
 annSearchParams.WithExtraParam(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">10</span>)
-resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
-    <span class="hljs-string">&quot;my_binary_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
     <span class="hljs-number">5</span>,                      <span class="hljs-comment">// limit</span>
     []entity.Vector{entity.BinaryVector(queryVector)},
-).WithOutputFields(<span class="hljs-string">&quot;pk&quot;</span>).WithAnnParam(annSearchParams))
+).WithANNSField(<span class="hljs-string">&quot;binary_vector&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;pk&quot;</span>).
+    WithAnnParam(annSearchParams))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatal(<span class="hljs-string">&quot;failed to perform basic ANN search collection: &quot;</span>, err.Error())
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
 }
 
 <span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
-    log.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs)
-    log.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
-    log.Println(<span class="hljs-string">&quot;Pks: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;pk&quot;</span>))
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+    fmt.Println(<span class="hljs-string">&quot;Pks: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;pk&quot;</span>).FieldData().GetScalars())
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> searchParams=<span class="hljs-string">&#x27;{
@@ -455,7 +482,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;my_binary_collection\&quot;,
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
     \&quot;annsField\&quot;: \&quot;binary_vector\&quot;,
     \&quot;limit\&quot;: 5,

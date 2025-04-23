@@ -3,8 +3,8 @@ id: decompounder-filter.md
 title: Dekompounder
 summary: >-
   Der Decompounder-Filter zerlegt zusammengesetzte Wörter auf der Grundlage
-  eines bestimmten Wörterbuchs in einzelne Komponenten, was die Suche nach
-  Teilen zusammengesetzter Begriffe erleichtert. Dieser Filter ist besonders
+  eines angegebenen Wörterbuchs in einzelne Komponenten, um die Suche nach
+  Teilen zusammengesetzter Begriffe zu erleichtern. Dieser Filter ist besonders
   nützlich für Sprachen, die häufig zusammengesetzte Wörter verwenden, wie z. B.
   Deutsch.
 ---
@@ -69,7 +69,11 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
     }],
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+        <span class="hljs-string">&quot;type&quot;</span>:       <span class="hljs-string">&quot;decompounder&quot;</span>,
+        <span class="hljs-string">&quot;word_list&quot;</span>: []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;dampf&quot;</span>, <span class="hljs-string">&quot;schiff&quot;</span>, <span class="hljs-string">&quot;fahrt&quot;</span>, <span class="hljs-string">&quot;brot&quot;</span>, <span class="hljs-string">&quot;backen&quot;</span>, <span class="hljs-string">&quot;automat&quot;</span>},
+    }}}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 analyzerParams=<span class="hljs-string">&#x27;{
@@ -102,7 +106,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
    </tr>
 </table>
 <p>Der Filter <code translate="no">decompounder</code> arbeitet mit den vom Tokenizer erzeugten Begriffen, muss also in Kombination mit einem Tokenizer verwendet werden. Eine Liste der in Milvus verfügbaren Tokenizer finden Sie in der <a href="/docs/de/tokenizers">Tokenizer-Referenz</a>.</p>
-<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dies ermöglicht es Milvus, den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung zu verarbeiten. Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
+<p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dies ermöglicht es Milvus, den Text in diesem Feld mit dem angegebenen Analysator für eine effiziente Tokenisierung und Filterung zu verarbeiten. Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -128,11 +132,24 @@ analyzerParams=<span class="hljs-string">&#x27;{
     }],
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;standard&quot;</span>);
+analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
+        Collections.singletonList(
+                <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+                    put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;decompounder&quot;</span>);
+                    put(<span class="hljs-string">&quot;word_list&quot;</span>, Arrays.asList(<span class="hljs-string">&quot;dampf&quot;</span>, <span class="hljs-string">&quot;schiff&quot;</span>, <span class="hljs-string">&quot;fahrt&quot;</span>, <span class="hljs-string">&quot;brot&quot;</span>, <span class="hljs-string">&quot;backen&quot;</span>, <span class="hljs-string">&quot;automat&quot;</span>));
+                }}
+        )
+);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+        <span class="hljs-string">&quot;type&quot;</span>:       <span class="hljs-string">&quot;decompounder&quot;</span>,
+        <span class="hljs-string">&quot;word_list&quot;</span>: []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;dampf&quot;</span>, <span class="hljs-string">&quot;schiff&quot;</span>, <span class="hljs-string">&quot;fahrt&quot;</span>, <span class="hljs-string">&quot;brot&quot;</span>, <span class="hljs-string">&quot;backen&quot;</span>, <span class="hljs-string">&quot;automat&quot;</span>},
+    }}}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 analyzerParams=<span class="hljs-string">&#x27;{

@@ -300,7 +300,7 @@
       },
       {
         "label": "Niveau de cohérence",
-        "id": "consistency.md",
+        "id": "tune_consistency.md",
         "order": 10,
         "children": []
       },
@@ -801,21 +801,27 @@
             "children": []
           },
           {
+            "label": "Requêtes Elasticsearch vers Milvus",
+            "id": "elasticsearch-queries-to-milvus.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Recherche d'itérateurs",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Utiliser la clé de partition",
             "id": "use-partition-key.md",
-            "order": 9,
+            "order": 11,
             "children": []
           },
           {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 10,
+            "order": 12,
             "children": []
           }
         ]
@@ -1453,6 +1459,12 @@
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
+              },
+              {
+                "label": "Supprimer des utilisateurs et des rôles",
+                "id": "drop_users_roles.md",
+                "order": 5,
+                "children": []
               }
             ]
           },
@@ -1539,7 +1551,7 @@
                 "children": []
               },
               {
-                "label": "Migrer d'une instance à l'autre dans un environnement S3",
+                "label": "Migrer d'une instance à l'autre d'un environnement S3 à l'autre",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []

@@ -8,8 +8,8 @@ summary: >-
   pré-processamento, espaço e RAM adicionais durante a pesquisa. Além disso, a
   utilização de um índice reduz normalmente a taxa de recuperação (embora o
   efeito seja insignificante, não deixa de ser importante). Portanto, este
-  artigo explica como minimizar os custos da utilização de um índice e, ao mesmo
-  tempo, maximizar os benefícios.
+  artigo explica como minimizar os custos da utilização de um índice e maximizar
+  os benefícios.
 ---
 <h1 id="Index-Explained" class="common-anchor-header">Índice explicado<button data-href="#Index-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,7 +59,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>VECTOR_FLOAT_ESPARSO</p></td>
-     <td><p>SPARSE_INVERTED_INDEX</p></td>
+     <td><p>ÍNDICE_INVERTIDO_ESPARSO</p></td>
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
@@ -110,8 +110,8 @@ summary: >-
     </button></h2><p>Como demonstrado no diagrama abaixo, um tipo de índice em Milvus consiste em três componentes principais, nomeadamente <strong>a estrutura de dados</strong>, <strong>a quantização</strong> e <strong>o refinador</strong>. A quantização e o refinador são opcionais, mas são amplamente utilizados devido a um equilíbrio significativo entre ganhos e custos.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector-index-anatomy.png" alt="vector-index-anatomy" class="doc-image" id="vector-index-anatomy" />
-   </span> <span class="img-wrapper"> <span>Anatomia de um índice vetorial</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   </span> <span class="img-wrapper"> <span>Anatomia do Índice Vetorial</span> </span></p>
 <p>Durante a criação do índice, o Milvus combina a estrutura de dados escolhida e o método de quantização para determinar uma <strong>taxa de expansão</strong> óptima. No momento da consulta, o sistema recupera <code translate="no">topK × expansion rate</code> os vectores candidatos, aplica o refinador para recalcular as distâncias com maior precisão e, finalmente, devolve os resultados mais exactos <code translate="no">topK</code>. Esta abordagem híbrida equilibra a velocidade e a precisão, restringindo o refinamento, que consome muitos recursos, a um subconjunto filtrado de candidatos.</p>
 <h3 id="Data-structure" class="common-anchor-header">Estrutura de dados</h3><p>A estrutura de dados constitui a camada fundamental do índice. Os tipos comuns incluem:</p>
 <ul>
@@ -177,7 +177,7 @@ summary: >-
 <li><p>Para uma pesquisa com um top-K grande (comparado com o número total de incorporações vectoriais), as variantes de FIV são uma melhor escolha do que os tipos de índices baseados em grafos.</p></li>
 <li><p>Para uma pesquisa com um top-K de dimensão média e um rácio de filtragem elevado, as variantes FIV são a melhor escolha.</p></li>
 </ul>
-<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">Matriz de decisão: Escolher o tipo de índice mais adequado</h3><p>A tabela a seguir é uma matriz de decisão que pode ser consultada ao escolher um tipo de índice apropriado.</p>
+<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">Matriz de decisão: Escolher o tipo de índice mais adequado</h3><p>A tabela seguinte é uma matriz de decisão que pode ser consultada ao escolher um tipo de índice adequado.</p>
 <table>
    <tr>
      <th><p>Cenário</p></th>
@@ -235,7 +235,7 @@ summary: >-
 </div>
 <p>O consumo de memória de um índice é influenciado pela sua estrutura de dados, taxa de compressão através da quantização e o refinador em uso. De um modo geral, os índices baseados em grafos têm tipicamente um maior consumo de memória devido à estrutura do grafo (por exemplo, <strong>HNSW</strong>), o que implica normalmente uma sobrecarga de espaço por vetor. Em contrapartida, o IVF e as suas variantes são mais eficientes em termos de memória, uma vez que se aplica menos sobrecarga de espaço por vetor. No entanto, técnicas avançadas como a <strong>DiskANN</strong> permitem que partes do índice, como o gráfico ou o refinador, residam no disco, reduzindo a carga de memória e mantendo o desempenho.</p>
 <p>Especificamente, a utilização de memória de um índice pode ser calculada da seguinte forma:</p>
-<h3 id="IVF-index-memory-usage" class="common-anchor-header">Utilização de memória do índice IVF</h3><p>Os índices IVF equilibram a eficiência da memória com o desempenho da pesquisa ao particionar os dados em clusters. Segue-se uma análise da memória utilizada por 1 milhão de vectores de 128 dimensões indexados com variantes de IVF.</p>
+<h3 id="IVF-index-memory-usage" class="common-anchor-header">Utilização de memória do índice IVF</h3><p>Os índices IVF equilibram a eficiência da memória com o desempenho da pesquisa, particionando os dados em clusters. Segue-se uma análise da memória utilizada por 1 milhão de vectores de 128 dimensões indexados com variantes de IVF.</p>
 <ol>
 <li><p><strong>Calcule a memória utilizada pelos centróides.</strong></p>
 <p>Os tipos de índice da série IVF permitem que o Milvus agrupe vectores em grupos utilizando o particionamento baseado em centróides. Cada centróide é incluído no índice na incorporação de vectores em bruto. Quando divide os vectores em 2.000 clusters, a utilização de memória pode ser calculada da seguinte forma:</p>
@@ -315,4 +315,4 @@ summary: >-
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>O DiskANN é um índice baseado no grafo Vamana que liga pontos de dados para uma navegação eficiente durante a pesquisa, aplicando PQ para reduzir o tamanho dos vectores e permitir um cálculo rápido da distância aproximada entre vectores.</p>
 <p>O grafo Vamana é armazenado no disco, o que permite ao DiskANN lidar com grandes conjuntos de dados que, de outra forma, seriam demasiado grandes para caber na memória. Isto é particularmente útil para conjuntos de dados de milhares de milhões de pontos.</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">Ficheiros mapeados na memória (mmap)</h4><p>O mapeamento de memória (Mmap) permite o acesso direto à memória de grandes ficheiros no disco, permitindo ao Milvus armazenar índices e dados tanto na memória como nos discos rígidos. Esta abordagem ajuda a otimizar as operações de E/S, reduzindo a sobrecarga das chamadas de E/S com base na frequência de acesso, expandindo assim a capacidade de armazenamento das colecções sem afetar significativamente o desempenho da pesquisa.</p>
-<p>Especificamente, é possível configurar o Milvus para mapear em memória os dados brutos em determinados campos em vez de carregá-los totalmente na memória. Desta forma, pode obter acesso direto à memória dos campos sem se preocupar com problemas de memória e aumentar a capacidade da coleção.</p>
+<p>Especificamente, é possível configurar o Milvus para mapear em memória os dados brutos em determinados campos, em vez de carregá-los totalmente na memória. Desta forma, pode obter acesso direto à memória dos campos sem se preocupar com problemas de memória e aumentar a capacidade da coleção.</p>

@@ -26,7 +26,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>المتجهات الكثيفة هي تمثيلات رقمية للبيانات تُستخدم على نطاق واسع في التعلم الآلي وتحليل البيانات. وهي تتكون من مصفوفات بأرقام حقيقية، حيث تكون معظم العناصر أو جميعها غير صفرية. بالمقارنة مع المتجهات المتناثرة، تحتوي المتجهات الكثيفة على المزيد من المعلومات على نفس مستوى الأبعاد، حيث يحتوي كل بُعد على قيم ذات معنى. يمكن لهذا التمثيل التقاط أنماط وعلاقات معقدة بشكل فعال، مما يسهل تحليل البيانات ومعالجتها في مساحات عالية الأبعاد. عادةً ما تحتوي المتجهات الكثيفة على عدد ثابت من الأبعاد، يتراوح بين بضع عشرات إلى عدة مئات أو حتى الآلاف، اعتمادًا على التطبيق والمتطلبات المحددة.</p>
+    </button></h1><p>المتجهات الكثيفة هي تمثيلات رقمية للبيانات تُستخدم على نطاق واسع في التعلم الآلي وتحليل البيانات. وهي تتكون من مصفوفات بأرقام حقيقية، حيث تكون معظم العناصر أو جميعها غير صفرية. بالمقارنة مع المتجهات المتناثرة، تحتوي المتجهات الكثيفة على مزيد من المعلومات على نفس مستوى الأبعاد، حيث يحتوي كل بُعد على قيم ذات معنى. يمكن لهذا التمثيل التقاط أنماط وعلاقات معقدة بشكل فعال، مما يسهل تحليل البيانات ومعالجتها في مساحات عالية الأبعاد. عادةً ما تحتوي المتجهات الكثيفة على عدد ثابت من الأبعاد، يتراوح بين بضع عشرات إلى عدة مئات أو حتى الآلاف، اعتمادًا على التطبيق والمتطلبات المحددة.</p>
 <p>تُستخدم المتجهات الكثيفة بشكل أساسي في السيناريوهات التي تتطلب فهم دلالات البيانات، مثل أنظمة البحث الدلالي والتوصيات. في البحث الدلالي، تساعد المتجهات الكثيفة في التقاط الروابط الأساسية بين الاستعلامات والمستندات، مما يحسن من أهمية نتائج البحث. أما في أنظمة التوصيات، فهي تساعد في تحديد أوجه التشابه بين المستخدمين والعناصر، مما يوفر اقتراحات أكثر تخصيصًا.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,8 +46,8 @@ summary: >-
     </button></h2><p>عادةً ما يتم تمثيل المتجهات الكثيفة كمصفوفات من أرقام الفاصلة العائمة ذات الطول الثابت، مثل <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code>. تتراوح أبعاد هذه المتجهات عادةً من مئات إلى آلاف الأبعاد، مثل 128 أو 256 أو 768 أو 1024. يلتقط كل بُعد سمات دلالية محددة لكائن ما، مما يجعلها قابلة للتطبيق على سيناريوهات مختلفة من خلال حسابات التشابه.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/dense-vector.png" alt="dense-vector" class="doc-image" id="dense-vector" />
-   </span> <span class="img-wrapper"> <span>متجه كثيف</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" />
+   </span> <span class="img-wrapper"> <span>المتجه الكثيف</span> </span></p>
 <p>توضح الصورة أعلاه تمثيل المتجهات الكثيفة في فضاء ثنائي الأبعاد. على الرغم من أن المتجهات الكثيفة في تطبيقات العالم الحقيقي غالبًا ما يكون لها أبعاد أعلى بكثير، إلا أن هذا الرسم التوضيحي ثنائي الأبعاد ينقل بشكل فعال العديد من المفاهيم الأساسية:</p>
 <ul>
 <li><p><strong>التمثيل متعدد الأبعاد:</strong> تمثل كل نقطة كائنًا مفاهيميًا (مثل <strong>ميلفوس،</strong> <strong>قاعدة بيانات المتجهات،</strong> <strong>نظام الاسترجاع،</strong> إلخ)، مع تحديد موضعها من خلال قيم أبعادها.</p></li>
@@ -72,10 +72,10 @@ summary: >-
 <p>بمجرد تحويل البيانات إلى متجهات، يمكن تخزينها في ميلفوس لإدارتها واسترجاع المتجهات. يوضح الرسم البياني أدناه العملية الأساسية.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-dense-vector.png" alt="use-dense-vector" class="doc-image" id="use-dense-vector" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-dense-vector.png" alt="Use Dense Vector" class="doc-image" id="use-dense-vector" />
    </span> <span class="img-wrapper"> <span>استخدام المتجهات الكثيفة</span> </span></p>
 <div class="alert note">
-<p>إلى جانب المتجهات الكثيفة، يدعم ميلفوس أيضًا المتجهات المتفرقة والمتجهات الثنائية. تُعد المتجهات المتفرقة مناسبة للمطابقات الدقيقة بناءً على مصطلحات محددة، مثل البحث عن الكلمات الرئيسية ومطابقة المصطلحات، بينما تُستخدم المتجهات الثنائية بشكل شائع للتعامل بكفاءة مع البيانات ثنائية الثنائيات مثل مطابقة أنماط الصور وبعض تطبيقات التجزئة. لمزيد من المعلومات، راجع المتجهات <a href="/docs/ar/binary-vector.md">الثنائية</a> والمتجهات <a href="/docs/ar/sparse_vector.md">المتفرقة</a>.</p>
+<p>إلى جانب المتجهات الكثيفة، يدعم ميلفوس أيضًا المتجهات المتفرقة والمتجهات الثنائية. تُعد المتجهات المتفرقة مناسبة للمطابقات الدقيقة بناءً على مصطلحات محددة، مثل البحث عن الكلمات الرئيسية ومطابقة المصطلحات، بينما تُستخدم المتجهات الثنائية بشكل شائع للتعامل بكفاءة مع البيانات ثنائية الثنائية، مثل مطابقة أنماط الصور وبعض تطبيقات التجزئة. لمزيد من المعلومات، راجع المتجهات <a href="/docs/ar/binary-vector.md">الثنائية</a> والمتجهات <a href="/docs/ar/sparse_vector.md">المتفرقة</a>.</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">استخدام المتجهات الكثيفة<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -144,14 +144,39 @@ schema.addField(AddFieldReq.builder()
 schema.<span class="hljs-title function_">push</span>({
   <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,
   <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
-  <span class="hljs-attr">dim</span>: <span class="hljs-number">128</span>,
+  <span class="hljs-attr">dim</span>: <span class="hljs-number">4</span>,
 });
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">schema := entity.NewSchema()
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+schema := entity.NewSchema()
 schema.WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;pk&quot;</span>).
     WithDataType(entity.FieldTypeVarChar).
+    WithIsPrimaryKey(<span class="hljs-literal">true</span>).
+    WithIsAutoID(<span class="hljs-literal">true</span>).
     WithMaxLength(<span class="hljs-number">100</span>),
 ).WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;dense_vector&quot;</span>).
@@ -202,10 +227,14 @@ schema.WithField(entity.NewField().
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
      <td><p>يخزّن أرقام الفاصلة العائمة الدماغية ذات 16 بت (bfloat16)، حيث يقدم نفس نطاق الأسس مثل Float32 ولكن بدقة أقل. مناسب للسيناريوهات التي تحتاج إلى معالجة كميات كبيرة من المتجهات بسرعة، مثل استرجاع الصور على نطاق واسع.</p></td>
    </tr>
+   <tr>
+     <td></td>
+     <td></td>
+   </tr>
 </table>
 <h3 id="Set-index-params-for-vector-field" class="common-anchor-header">تعيين بارامترات الفهرس لحقل المتجهات</h3><p>لتسريع عمليات البحث الدلالية، يجب إنشاء فهرس للحقل المتجه. يمكن للفهرسة تحسين كفاءة استرجاع البيانات المتجهة واسعة النطاق بشكل كبير.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -235,13 +264,8 @@ indexes.add(IndexParam.builder()
     <span class="hljs-attr">index_type</span>: <span class="hljs-title class_">IndexType</span>.<span class="hljs-property">AUTOINDEX</span>
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-)
-
-index := index.NewAutoIndex(entity.IP)
-indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_dense_collection&quot;</span>, <span class="hljs-string">&quot;dense_vector&quot;</span>, idx)
+<pre><code translate="no" class="language-go">idx := index.NewAutoIndex(index.MetricType(entity.IP))
+indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;dense_vector&quot;</span>, idx)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
         {
@@ -255,11 +279,11 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <p>في المثال أعلاه، يتم إنشاء فهرس باسم <code translate="no">dense_vector_index</code> للحقل <code translate="no">dense_vector</code> باستخدام نوع الفهرس <code translate="no">AUTOINDEX</code>. تم تعيين <code translate="no">metric_type</code> على <code translate="no">IP</code> ، مما يشير إلى أنه سيتم استخدام المنتج الداخلي كمقياس للمسافة.</p>
 <p>يوفر Milvus أنواعًا مختلفة من الفهارس للحصول على تجربة بحث متجهية أفضل. AUTOINDEX هو نوع فهرس خاص مصمم لتسهيل منحنى تعلم البحث المتجه. هناك الكثير من أنواع الفهارس المتاحة لتختار من بينها. لمزيد من التفاصيل، راجع xxx.</p>
 <p>يدعم ميلفوس أنواع الفهارس المترية الأخرى. لمزيد من المعلومات، راجع <a href="/docs/ar/metric.md">أنواع المقاييس</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">إنشاء مجموعة</h3><p>بمجرد اكتمال إعدادات المتجه الكثيف ومعلمة الفهرس يمكنك إنشاء مجموعة تحتوي على متجهات كثيفة. يستخدم المثال أدناه طريقة <code translate="no">create_collection</code> لإنشاء مجموعة باسم <code translate="no">my_dense_collection</code>.</p>
+<h3 id="Create-collection" class="common-anchor-header">إنشاء مجموعة</h3><p>بمجرد اكتمال إعدادات المتجه الكثيف ومعلمة الفهرس يمكنك إنشاء مجموعة تحتوي على متجهات كثيفة. يستخدم المثال أدناه طريقة <code translate="no">create_collection</code> لإنشاء مجموعة باسم <code translate="no">my_collection</code>.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
-    collection_name=<span class="hljs-string">&quot;my_dense_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params
 )
@@ -272,7 +296,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         .build());
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_dense_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
         .indexParams(indexes)
         .build();
@@ -285,22 +309,17 @@ client.createCollection(requestCreate);
 });
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_dense_collection&#x27;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">schema</span>: schema,
     <span class="hljs-attr">index_params</span>: indexParams
 });
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
-)
-
-err = cli.CreateCollection(ctx,
-    milvusclient.NewCreateCollectionOption(collectionName, schema).
+<pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithIndexOptions(indexOption))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
@@ -309,7 +328,7 @@ err = cli.CreateCollection(ctx,
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;my_dense_collection\&quot;,
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
@@ -323,7 +342,7 @@ err = cli.CreateCollection(ctx,
 ]
 
 client.insert(
-    collection_name=<span class="hljs-string">&quot;my_dense_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=data
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -338,7 +357,7 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;dense_vector\&quo
 rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;dense_vector\&quot;: [0.2, 0.3, 0.4, 0.5]}&quot;</span>, JsonObject.class));
 
 <span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_dense_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(rows)
         .build());
 <button class="copy-code-btn"></button></code></pre>
@@ -348,16 +367,20 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;dense_vector\&quo
 ];
 
 client.<span class="hljs-title function_">insert</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_dense_collection&quot;</span>,
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
   <span class="hljs-attr">data</span>: data,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_dense_collection&quot;</span>).
+<pre><code translate="no" class="language-go">_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
     WithFloatVectorColumn(<span class="hljs-string">&quot;dense_vector&quot;</span>, <span class="hljs-number">4</span>, [][]<span class="hljs-type">float32</span>{
         {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>},
         {<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.8</span>},
     }),
 )
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
@@ -368,7 +391,7 @@ client.<span class="hljs-title function_">insert</span>({
         {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.4]},
         {&quot;dense_vector&quot;: [0.2, 0.3, 0.4, 0.5]}        
     ],
-    &quot;collectionName&quot;: &quot;my_dense_collection&quot;
+    &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}</span>
@@ -383,7 +406,7 @@ client.<span class="hljs-title function_">insert</span>({
 query_vector = [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_dense_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
     anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
     search_params=search_params,
@@ -404,7 +427,7 @@ searchParams.put(<span class="hljs-string">&quot;nprobe&quot;</span>,<span class
 <span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>});
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchR</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_dense_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(Collections.singletonList(queryVector))
         .annsField(<span class="hljs-string">&quot;dense_vector&quot;</span>)
         .searchParams(searchParams)
@@ -421,7 +444,7 @@ System.out.println(searchR.getSearchResults());
 <pre><code translate="no" class="language-javascript">query_vector = [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>];
 
 client.<span class="hljs-title function_">search</span>({
-    <span class="hljs-attr">collection_name</span>: my_dense_collection,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">data</span>: query_vector,
     <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;pk&#x27;</span>],
@@ -434,22 +457,22 @@ client.<span class="hljs-title function_">search</span>({
 
 annParam := index.NewCustomAnnParam()
 annParam.WithExtraParam(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">10</span>)
-resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
-    <span class="hljs-string">&quot;my_dense_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
-    <span class="hljs-number">5</span>,             <span class="hljs-comment">// limit</span>
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">5</span>,                     <span class="hljs-comment">// limit</span>
     []entity.Vector{entity.FloatVector(queryVector)},
-    
-).
-WithOutputFields(<span class="hljs-string">&quot;pk&quot;</span>).
-WithAnnParam(annParam))
+).WithANNSField(<span class="hljs-string">&quot;dense_vector&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;pk&quot;</span>).
+    WithAnnParam(annParam))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatal(<span class="hljs-string">&quot;failed to perform basic ANN search collection: &quot;</span>, err.Error())
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
 }
 
 <span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
-    log.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs)
-    log.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
-    log.Println(<span class="hljs-string">&quot;Pks: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;pk&quot;</span>))
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+    fmt.Println(<span class="hljs-string">&quot;Pks: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;pk&quot;</span>).FieldData().GetScalars())
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -457,7 +480,7 @@ WithAnnParam(annParam))
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_dense_collection&quot;,
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
         [0.1, 0.2, 0.3, 0.7]
     ],

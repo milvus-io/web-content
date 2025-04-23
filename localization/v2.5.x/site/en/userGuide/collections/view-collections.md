@@ -89,21 +89,21 @@ System.out.println(resp.getCollectionNames());
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;127.0.0.1:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
 token := <span class="hljs-string">&quot;root:Milvus&quot;</span>
-
-cli, err := client.New(ctx, &amp;milvusclient.ClientConfig{
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
     APIKey:  token,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
 }
+<span class="hljs-keyword">defer</span> client.Close(ctx)
 
-<span class="hljs-keyword">defer</span> cli.Close(ctx)
-
-collectionNames, err := cli.ListCollections(ctx, milvusclient.NewListCollectionOption())
+collectionNames, err := client.ListCollections(ctx, milvusclient.NewListCollectionOption())
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 
@@ -162,30 +162,10 @@ System.out.println(resp);
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;context&quot;</span>
-    <span class="hljs-string">&quot;fmt&quot;</span>
-
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
-)
-
-ctx, cancel := context.WithCancel(context.Background())
-<span class="hljs-keyword">defer</span> cancel()
-
-milvusAddr := <span class="hljs-string">&quot;127.0.0.1:19530&quot;</span>
-
-cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: milvusAddr,
-})
+<pre><code translate="no" class="language-go">collection, err := client.DescribeCollection(ctx, milvusclient.NewDescribeCollectionOption(<span class="hljs-string">&quot;quick_setup&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())
-}
-
-<span class="hljs-keyword">defer</span> cli.Close(ctx)
-
-collection, err := cli.DescribeCollection(ctx, milvusclient.NewDescribeCollectionOption(<span class="hljs-string">&quot;quick_setup&quot;</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    <span class="hljs-comment">// handle error</span>
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
 }
 
 fmt.Println(collection)

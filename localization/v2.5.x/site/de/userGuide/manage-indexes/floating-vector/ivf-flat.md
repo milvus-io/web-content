@@ -1,8 +1,9 @@
 ---
 id: ivf-flat.md
-order: 1
-summary: In diesem Artikel wird der Index IVF_FLAT in Milvus vorgestellt.
 title: IVF_FLAT
+summary: >-
+  Der IVF_FLAT-Index ist ein Indizierungsalgorithmus, der die Suchleistung für
+  Fließkomma-Vektoren verbessern kann.
 ---
 <h1 id="IVFFLAT" class="common-anchor-header">IVF_FLAT<button data-href="#IVFFLAT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,26 +39,26 @@ title: IVF_FLAT
       </svg>
     </button></h2><p>Der Begriff <strong>IVF_FLAT</strong> steht für <strong>Inverted File Flat</strong>, was den zweistufigen Ansatz für die Indizierung und Suche nach Fließkomma-Vektoren umschreibt:</p>
 <ul>
-<li><strong>Inverted File (IVF):</strong> Bezieht sich auf das Clustering des Vektorraums in überschaubare Regionen unter Verwendung von <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a>. Jeder Cluster wird durch einen <strong>Zentroid</strong> repräsentiert, der als Referenzpunkt für die Vektoren darin dient.</li>
-<li><strong>Flach:</strong> Gibt an, dass die Vektoren innerhalb jedes Clusters in ihrer ursprünglichen Form (flache Struktur) gespeichert werden, ohne Komprimierung oder Quantisierung, um präzise Abstandsberechnungen zu ermöglichen.</li>
+<li><p><strong>Inverted File (IVF):</strong> Bezieht sich auf das Clustering des Vektorraums in handhabbare Regionen unter Verwendung von <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a>. Jeder Cluster wird durch einen <strong>Zentroid</strong> repräsentiert, der als Referenzpunkt für die Vektoren innerhalb des Clusters dient.</p></li>
+<li><p><strong>Flach:</strong> Gibt an, dass die Vektoren innerhalb jedes Clusters in ihrer ursprünglichen Form (flache Struktur) gespeichert werden, ohne Komprimierung oder Quantisierung, um präzise Abstandsberechnungen zu ermöglichen.</p></li>
 </ul>
-<p>Die folgende Abbildung zeigt, wie das funktioniert:</p>
+<p>Die folgende Abbildung zeigt, wie dies funktioniert:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/ivf-1.png" alt="ivf-flat-1.png" class="doc-image" id="ivf-flat-1.png" />
-   </span> <span class="img-wrapper"> <span>ivf-flat-1.png</span> </span></p>
-<p>Diese Indizierungsmethode beschleunigt den Suchprozess, hat aber auch einen potenziellen Nachteil: Der Kandidat, der als der nächstgelegene zur Einbettung der Anfrage gefunden wurde, ist möglicherweise nicht der exakt nächstgelegene. Dies kann der Fall sein, wenn die nächstgelegene Einbettung zur Abfrageeinbettung in einem anderen Cluster liegt als demjenigen, der auf der Grundlage des nächstgelegenen Schwerpunkts ausgewählt wurde (siehe Visualisierung unten).</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/IVF-FLAT-workflow.png" alt="IVF FLAT Workflow" class="doc-image" id="ivf-flat-workflow" />
+   </span> <span class="img-wrapper"> <span>IVF FLAT Arbeitsablauf</span> </span></p>
+<p>Diese Indizierungsmethode beschleunigt den Suchprozess, hat aber einen potenziellen Nachteil: Der Kandidat, der als der nächstgelegene zur Einbettung der Anfrage gefunden wurde, ist möglicherweise nicht der exakt nächstgelegene. Dies kann der Fall sein, wenn die nächstgelegene Einbettung zur Abfrageeinbettung in einem anderen Cluster liegt als demjenigen, der auf der Grundlage des nächstgelegenen Schwerpunkts ausgewählt wurde (siehe Visualisierung unten).</p>
 <p>Um dieses Problem zu lösen, bietet <strong>IVF_FLAT</strong> zwei Hyperparameter, die wir einstellen können:</p>
 <ul>
-<li><code translate="no">nlist</code>: Gibt die Anzahl der Partitionen an, die mit dem k-means-Algorithmus erstellt werden sollen.</li>
-<li><code translate="no">nprobe</code>: Legt die Anzahl der Partitionen fest, die bei der Suche nach Kandidaten berücksichtigt werden sollen.</li>
+<li><p><code translate="no">nlist</code>: Gibt die Anzahl der Partitionen an, die mit dem k-means-Algorithmus erstellt werden sollen.</p></li>
+<li><p><code translate="no">nprobe</code>: Legt die Anzahl der Partitionen fest, die bei der Suche nach Kandidaten berücksichtigt werden sollen.</p></li>
 </ul>
 <p>Wenn wir nun <code translate="no">nprobe</code> auf 3 statt auf 1 setzen, erhalten wir das folgende Ergebnis:</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/ivf-2.png" alt="ivf-flat-2.png" class="doc-image" id="ivf-flat-2.png" />
-   </span> <span class="img-wrapper"> <span>ivf-flat-2.png</span> </span></p>
-<p>Wenn Sie den Wert <code translate="no">nprobe</code> erhöhen, können Sie mehr Partitionen in die Suche einbeziehen, was dazu beitragen kann, dass die der Abfrage am nächsten liegende Einbettung nicht übersehen wird, selbst wenn sie sich in einer anderen Partition befindet. Dies hat jedoch den Nachteil, dass sich die Suchzeit erhöht, da mehr Kandidaten evaluiert werden müssen. Weitere Informationen zur Einstellung der Indexparameter finden Sie unter <a href="#index-params">Indexparameter</a>.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/IVF-FLAT-workflow-2.png" alt="IVF FLAT Workflow 2" class="doc-image" id="ivf-flat-workflow-2" />
+   </span> <span class="img-wrapper"> <span>IVF FLAT Workflow 2</span> </span></p>
+<p>Wenn Sie den Wert <code translate="no">nprobe</code> erhöhen, können Sie mehr Partitionen in die Suche einbeziehen, was dazu beitragen kann, dass die der Abfrage am nächsten liegende Einbettung nicht übersehen wird, selbst wenn sie sich in einer anderen Partition befindet. Dies hat jedoch den Nachteil, dass sich die Suchzeit erhöht, da mehr Kandidaten evaluiert werden müssen. Weitere Informationen zur Einstellung der Indexparameter finden Sie unter <a href="/docs/de/ivf-flat.md#Index-params">Indexparameter</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Index erstellen<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -88,7 +89,6 @@ index_params.add_index(
         <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">64</span>, <span class="hljs-comment"># Number of clusters for the index</span>
     } <span class="hljs-comment"># Index building params</span>
 )
-
 <button class="copy-code-btn"></button></code></pre>
 <p>In dieser Konfiguration:</p>
 <ul>
@@ -98,7 +98,7 @@ index_params.add_index(
 <ul>
 <li><code translate="no">nlist</code>: Anzahl der Cluster zur Unterteilung des Datensatzes.</li>
 </ul>
-<p>Weitere Informationen zu den für den Index <code translate="no">IVF_FLAT</code> verfügbaren Erstellungsparametern finden Sie unter <a href="#Index-building-params">Indexerstellungsparameter</a>.</p></li>
+<p>Weitere Informationen zu den für den Index <code translate="no">IVF_FLAT</code> verfügbaren Erstellungsparametern finden Sie unter <a href="/docs/de/ivf-flat.md#Index-building-params">Indexerstellungsparameter</a>.</p></li>
 </ul>
 <p>Sobald die Indexparameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode <code translate="no">create_index()</code> direkt verwenden oder die Indexparameter in der Methode <code translate="no">create_collection</code> übergeben. Weitere Informationen finden Sie unter <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Suche im Index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
@@ -119,17 +119,17 @@ index_params.add_index(
     </button></h2><p>Sobald der Index erstellt und die Entitäten eingefügt sind, können Sie Ähnlichkeitssuchen im Index durchführen.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
-        <span class="hljs-string">&quot;nprobe&quot;</span>: 10, <span class="hljs-comment"># Number of clusters to search</span>
+        <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of clusters to search</span>
     }
 }
 
 res = MilvusClient.search(
     collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    data=[[0.1, 0.2, 0.3, 0.4, 0.5]],  <span class="hljs-comment"># Query vector</span>
-    <span class="hljs-built_in">limit</span>=3,  <span class="hljs-comment"># TopK results to return</span>
+    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
+    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
+    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
     search_params=search_params
 )
-
 <button class="copy-code-btn"></button></code></pre>
 <p>In dieser Konfiguration:</p>
 <ul>
@@ -137,7 +137,7 @@ res = MilvusClient.search(
 <ul>
 <li><code translate="no">nprobe</code>: Anzahl der Cluster, nach denen gesucht werden soll.</li>
 </ul>
-<p>Weitere Suchparameter, die für den Index <code translate="no">IVF_FLAT</code> verfügbar sind, finden Sie unter <a href="#index-specific-search-params">Indexspezifische Suchparameter</a>.</p></li>
+<p>Weitere Suchparameter, die für den Index <code translate="no">IVF_FLAT</code> verfügbar sind, finden Sie unter <a href="/docs/de/ivf-flat.md#Index-specific-search-params">Indexspezifische Suchparameter</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Index-Parameter<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -155,21 +155,33 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Dieser Abschnitt gibt einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchen im Index verwendet werden.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/ivf-flat.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
 <table>
-<thead>
-<tr><th><strong>Parameter</strong></th><th><strong>Beschreibung</strong></th><th><strong>Wertebereich</strong></th><th><strong>Tuning-Vorschlag</strong></th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">nlist</code></td><td>Die Anzahl der Cluster, die bei der Indexerstellung mit dem k-means-Algorithmus erstellt werden. Jeder Cluster, der durch einen Schwerpunkt dargestellt wird, speichert eine Liste von Vektoren. Durch Erhöhen dieses Parameters wird die Anzahl der Vektoren in jedem Cluster reduziert, wodurch kleinere, konzentriertere Partitionen entstehen.</td><td><strong>Typ</strong>: Integer<br><strong>Bereich</strong>: [1, 65536]<br><strong>Standardwert</strong>: <code translate="no">128</code></td><td>Größere <code translate="no">nlist</code> Werte verbessern die Wiederauffindbarkeit durch die Erstellung von feineren Clustern, erhöhen aber die Indexerstellungszeit. In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs festzulegen: [32, 4096].</td></tr>
-</tbody>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Beschreibung</p></th>
+     <th><p>Wertebereich</p></th>
+     <th><p>Tuning-Vorschlag</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">nlist</code></p></td>
+     <td><p>Die Anzahl der Cluster, die mit dem k-means-Algorithmus während des Indexaufbaus erstellt werden. Jeder Cluster, der durch einen Zentroid dargestellt wird, speichert eine Liste von Vektoren. Durch Erhöhen dieses Parameters wird die Anzahl der Vektoren in jedem Cluster reduziert, wodurch kleinere, konzentriertere Partitionen entstehen.</p></td>
+     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, 65536]</p><p><strong>Standardwert</strong>: <code translate="no">128</code></p></td>
+     <td><p>Größere <code translate="no">nlist</code> Werte verbessern die Wiederauffindbarkeit durch die Erstellung von feineren Clustern, erhöhen aber die Indexerstellungszeit. Optimieren Sie den Wert anhand der Größe des Datensatzes und der verfügbaren Ressourcen. In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs festzulegen: [32, 4096].</p></td>
+   </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/ivf-flat.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
 <table>
-<thead>
-<tr><th><strong>Parameter</strong></th><th><strong>Beschreibung</strong></th><th><strong>Wertebereich</strong></th><th><strong>Tuning-Vorschlag</strong></th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">nprobe</code></td><td>Höhere Werte erlauben es, mehr Cluster zu durchsuchen, was die Wiederauffindbarkeit durch Erweiterung des Suchbereichs verbessert, allerdings auf Kosten einer erhöhten Abfragelatenz.</td><td><strong>Typ</strong>: Integer<br><strong>Bereich</strong>: [1, <em>nlist</em>]<br><strong>Standardwert</strong>: <code translate="no">8</code></td><td>Eine Erhöhung dieses Wertes verbessert die Wiederauffindbarkeit, kann aber die Suche verlangsamen. Setzen Sie <code translate="no">nprobe</code> proportional zu <code translate="no">nlist</code>, um ein Gleichgewicht zwischen Geschwindigkeit und Genauigkeit herzustellen.<br>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs einzustellen: [1, nlist].</td></tr>
-</tbody>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Beschreibung</p></th>
+     <th><p>Wertebereich</p></th>
+     <th><p>Tuning-Vorschlag</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">nprobe</code></p></td>
+     <td><p>Die Anzahl der Cluster, in denen nach Kandidaten gesucht wird. Höhere Werte erlauben es, mehr Cluster zu durchsuchen, was die Wiederauffindbarkeit durch Erweiterung des Suchbereichs verbessert, allerdings auf Kosten einer erhöhten Abfragelatenz.</p></td>
+     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, <em>nlist</em>]</p><p><strong>Standardwert</strong>: <code translate="no">8</code></p></td>
+     <td><p>Eine Erhöhung dieses Wertes verbessert die Auffindbarkeit, kann aber die Suche verlangsamen. Stellen Sie <code translate="no">nprobe</code> proportional zu <code translate="no">nlist</code> ein, um Geschwindigkeit und Genauigkeit auszugleichen.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs einzustellen: [1, nlist].</p></td>
+   </tr>
 </table>

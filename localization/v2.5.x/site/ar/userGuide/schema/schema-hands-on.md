@@ -27,8 +27,8 @@ summary: >-
 <p>يدعم Milvus تحديد نموذج البيانات من خلال مخطط تجميع. وتنظم المجموعة البيانات غير المهيكلة مثل النصوص والصور، إلى جانب تمثيلاتها المتجهة، بما في ذلك المتجهات الكثيفة والمتناثرة بدقة مختلفة تستخدم للبحث الدلالي. بالإضافة إلى ذلك، يدعم Milvus تخزين وتصفية أنواع البيانات غير المتجهة التي تسمى "Scalar". تشمل الأنواع العددية BOOL و INT8/16/32/64 و FLOAT/DOUBLE و VARCHAR و JSON و Array.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-hands-on.png" alt="schema-hands-on" class="doc-image" id="schema-hands-on" />
-   </span> <span class="img-wrapper"> <span>المخطط-التدريب العملي</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-hands-on.png" alt="Schema Hands On" class="doc-image" id="schema-hands-on" />
+   </span> <span class="img-wrapper"> <span>التدريب العملي على المخطط</span> </span></p>
 <p>يتضمن تصميم نموذج البيانات لنظام البحث تحليل احتياجات العمل وتجريد المعلومات في نموذج بيانات معبر عن المخطط. على سبيل المثال، للبحث في جزء من النص، يجب "فهرسته" من خلال تحويل السلسلة الحرفية إلى متجه من خلال "التضمين"، مما يتيح البحث في المتجه. بالإضافة إلى هذا الشرط الأساسي، قد يكون من الضروري تخزين خصائص أخرى مثل الطابع الزمني للنشر والمؤلف. تسمح هذه البيانات الوصفية بتنقيح عمليات البحث الدلالي من خلال التصفية، بحيث لا تُعيد سوى النصوص المنشورة بعد تاريخ محدد أو من قبل مؤلف معين. قد يلزم أيضًا استرجاعها مع النص الرئيسي، لعرض نتيجة البحث في التطبيق. ولتنظيم هذه الأجزاء النصية، يجب تعيين معرّف فريد لكل منها، يتم التعبير عنه كعدد صحيح أو سلسلة. هذه العناصر ضرورية لتحقيق منطق بحث متطور.</p>
 <p>يعد المخطط المصمم جيدًا مهمًا لأنه يلخص نموذج البيانات ويقرر ما إذا كان يمكن تحقيق أهداف العمل من خلال البحث. علاوة على ذلك، نظرًا لأن كل صف من البيانات التي يتم إدراجها في المجموعة يجب أن يتبع المخطط، فإنه يساعد بشكل كبير في الحفاظ على اتساق البيانات والجودة على المدى الطويل. من من منظور تقني، يؤدي المخطط المحدد جيدًا إلى تخزين بيانات الأعمدة بشكل جيد التنظيم وهيكل فهرس أنظف، مما يمكن أن يعزز أداء البحث.</p>
 <h2 id="An-Example-News-Search" class="common-anchor-header">مثال على ذلك: البحث عن الأخبار<button data-href="#An-Example-News-Search" class="anchor-icon" translate="no">
@@ -53,7 +53,7 @@ summary: >-
 <li><p>للتصفية استنادًا إلى وقت النشر، يتم تخزين التواريخ كحقل قياسي ويلزم وجود فهرس للحقل القياسي للتصفية الفعالة. يمكن تخزين هياكل بيانات أخرى أكثر تعقيدًا مثل JSON في عدد قياسي وإجراء بحث مصفى على محتوياتها (فهرسة JSON ميزة قادمة).</p></li>
 <li><p>لاسترداد الصورة المصغرة للصور بالبايت وعرضها على صفحة نتائج البحث، يتم تخزين عنوان url الخاص بالصورة أيضًا. وبالمثل، لنص الملخص والعنوان. (بدلاً من ذلك، يمكننا تخزين بيانات النص الخام وبيانات ملف الصورة كحقول قياسية إذا لزم الأمر).</p></li>
 <li><p>لتحسين نتيجة البحث على النص الملخص، نقوم بتصميم نهج بحث هجين. بالنسبة لأحد مسارات الاسترجاع، نستخدم نموذج التضمين العادي لتوليد متجه كثيف من النص، مثل OpenAI's <code translate="no">text-embedding-3-large</code> أو نموذج <code translate="no">bge-large-en-v1.5</code> المفتوح المصدر. هذه النماذج جيدة في تمثيل الدلالات الإجمالية للنص. والمسار الآخر هو استخدام نماذج التضمين المتناثر مثل BM25 أو SPLADE لتوليد متجه متناثر، يشبه البحث في النص الكامل الذي يجيد استيعاب التفاصيل والمفاهيم الفردية في النص. يدعم Milvus استخدام كليهما في نفس مجموعة البيانات بفضل ميزة المتجهات المتعددة. يمكن إجراء البحث على متجهات متعددة في عملية واحدة <code translate="no">hybrid_search()</code>.</p></li>
-<li><p>أخيرًا، نحتاج أيضًا إلى حقل معرّف لتحديد كل صفحة أخبار فردية، يشار إليها رسميًا باسم "كيان" في مصطلحات ميلفوس. يُستخدم هذا الحقل كمفتاح أساسي (أو "pk" اختصارًا).</p></li>
+<li><p>أخيرًا، نحتاج أيضًا إلى حقل معرّف لتحديد كل صفحة أخبار فردية، يشار إليه رسميًا باسم "كيان" في مصطلحات ميلفوس. يُستخدم هذا الحقل كمفتاح أساسي (أو "pk" اختصارًا).</p></li>
 </ul>
 <table>
    <tr>
@@ -66,7 +66,7 @@ summary: >-
      <th><p>متجه_الصورة</p></th>
      <th><p>ملخص</p></th>
      <th><p>ملخص_المتجه_الكثيف</p></th>
-     <th><p>ملخص_المتجه_المتفرق</p></th>
+     <th><p>ملخص_ملخص_المتجه_الكثيف</p></th>
    </tr>
    <tr>
      <td><p>النوع</p></td>
@@ -137,6 +137,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;summary_sparse_vecto
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
+<span class="hljs-type">String</span> <span class="hljs-variable">collectionName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;my_collection&quot;</span>;
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
 
 schema.addField(AddFieldReq.builder()
@@ -216,7 +217,74 @@ schema.addField(AddFieldReq.builder()
   { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;summary_sparse_vector&quot;</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;SPARSE_FLOAT_VECTOR&quot;</span>, <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;summary sparse vector&quot;</span> },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+collectionName := <span class="hljs-string">&quot;my_collection&quot;</span>
+schema := entity.NewSchema()
+schema.WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;article_id&quot;</span>).
+    WithDataType(entity.FieldTypeInt64).
+    WithIsPrimaryKey(<span class="hljs-literal">true</span>).
+    WithDescription(<span class="hljs-string">&quot;article id&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;title&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">200</span>).
+    WithDescription(<span class="hljs-string">&quot;article title&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;author_info&quot;</span>).
+    WithDataType(entity.FieldTypeJSON).
+    WithDescription(<span class="hljs-string">&quot;author information&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;publish_ts&quot;</span>).
+    WithDataType(entity.FieldTypeInt32).
+    WithDescription(<span class="hljs-string">&quot;publish timestamp&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;image_url&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">500</span>).
+    WithDescription(<span class="hljs-string">&quot;image url&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;image_vector&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(<span class="hljs-number">768</span>).
+    WithDescription(<span class="hljs-string">&quot;image vector&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;summary&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">1000</span>).
+    WithDescription(<span class="hljs-string">&quot;article summary&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;summary_dense_vector&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(<span class="hljs-number">768</span>).
+    WithDescription(<span class="hljs-string">&quot;summary dense vector&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>).
+    WithDataType(entity.FieldTypeSparseVector).
+    WithDescription(<span class="hljs-string">&quot;summary sparse vector&quot;</span>),
+)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <span class="hljs-built_in">export</span> idField=<span class="hljs-string">&#x27;{
@@ -383,34 +451,14 @@ indexes.add(IndexParam.builder()
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
-
-<span class="hljs-keyword">import</span> java.util.ArrayList;
-<span class="hljs-keyword">import</span> java.util.List;
-
-List&lt;IndexParam&gt; indexes = <span class="hljs-built_in">new</span> ArrayList&lt;&gt;();
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;image_vector&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;summary_dense_vector&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>)
-        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;publish_ts&quot;</span>)
-        .indexType(IndexParam.IndexType.INVERTED)
-        .build());
+<pre><code translate="no" class="language-go">indexOption1 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;image_vector&quot;</span>,
+    index.NewAutoIndex(index.MetricType(entity.IP)))
+indexOption2 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;summary_dense_vector&quot;</span>,
+    index.NewAutoIndex(index.MetricType(entity.IP)))
+indexOption3 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;summary_sparse_vector&quot;</span>,
+    index.NewSparseInvertedIndex(index.MetricType(entity.IP), <span class="hljs-number">0.2</span>))
+indexOption4 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;publish_ts&quot;</span>,
+    index.NewInvertedIndex())
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 indexParams=<span class="hljs-string">&#x27;[
@@ -468,7 +516,13 @@ client.createCollection(requestCreate);
     <span class="hljs-attr">index_params</span>: index_params,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption(collectionName, schema).
+        WithIndexOptions(indexOption1, indexOption2, indexOption3, indexOption4))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl --request POST \
@@ -476,7 +530,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --data <span class="hljs-string">&quot;{
-  \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
+  \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
@@ -500,7 +554,12 @@ System.out.println(descResp);
 });
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(collection_desc);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">desc, err := client.DescribeCollection(ctx, milvusclient.NewDescribeCollectionOption(collectionName))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(desc.Schema)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl --request POST \

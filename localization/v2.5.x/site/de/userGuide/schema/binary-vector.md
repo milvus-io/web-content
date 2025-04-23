@@ -27,7 +27,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Binäre Vektoren sind eine besondere Form der Datendarstellung, bei der herkömmliche hochdimensionale Fließkomma-Vektoren in binäre Vektoren umgewandelt werden, die nur 0en und 1en enthalten. Durch diese Umwandlung wird nicht nur die Größe des Vektors komprimiert, sondern es werden auch die Speicher- und Rechenkosten reduziert, während die semantischen Informationen erhalten bleiben. Wenn die Genauigkeit für unkritische Merkmale nicht entscheidend ist, können binäre Vektoren die Integrität und den Nutzen der ursprünglichen Fließkomma-Vektoren weitgehend erhalten.</p>
-<p>Binäre Vektoren haben ein breites Anwendungsspektrum, insbesondere in Situationen, in denen Berechnungseffizienz und Speicheroptimierung entscheidend sind. In groß angelegten KI-Systemen wie Suchmaschinen oder Empfehlungssystemen ist die Echtzeitverarbeitung großer Datenmengen von entscheidender Bedeutung. Durch die Verkleinerung der Vektoren tragen binäre Vektoren zur Senkung der Latenzzeit und der Rechenkosten bei, ohne die Genauigkeit wesentlich zu beeinträchtigen. Darüber hinaus sind binäre Vektoren in ressourcenbeschränkten Umgebungen nützlich, wie z. B. bei mobilen Geräten und eingebetteten Systemen, wo Speicher und Verarbeitungsleistung begrenzt sind. Durch die Verwendung binärer Vektoren können komplexe KI-Funktionen in diesen eingeschränkten Umgebungen bei gleichbleibend hoher Leistung implementiert werden.</p>
+<p>Binäre Vektoren haben ein breites Anwendungsspektrum, insbesondere in Situationen, in denen Berechnungseffizienz und Speicheroptimierung entscheidend sind. In groß angelegten KI-Systemen wie Suchmaschinen oder Empfehlungssystemen ist die Echtzeitverarbeitung großer Datenmengen von entscheidender Bedeutung. Durch die Verkleinerung der Vektoren tragen binäre Vektoren dazu bei, die Latenzzeit und die Rechenkosten zu senken, ohne die Genauigkeit wesentlich zu beeinträchtigen. Darüber hinaus sind Binärvektoren in ressourcenbeschränkten Umgebungen nützlich, wie z. B. bei mobilen Geräten und eingebetteten Systemen, wo Speicher und Verarbeitungsleistung begrenzt sind. Durch die Verwendung binärer Vektoren können komplexe KI-Funktionen in diesen eingeschränkten Umgebungen bei gleichbleibend hoher Leistung implementiert werden.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,8 +47,8 @@ summary: >-
 <p>Das folgende Diagramm zeigt, wie binäre Vektoren das Vorhandensein von Schlüsselwörtern in Textinhalten darstellen. In diesem Beispiel wird ein 10-dimensionaler Binärvektor verwendet, um zwei verschiedene Texte<strong>(Text 1</strong> und <strong>Text 2</strong>) darzustellen, wobei jede Dimension einem Wort des Vokabulars entspricht: 1 bedeutet, dass das Wort im Text vorhanden ist, während 0 sein Fehlen anzeigt.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/binary-vector.png" alt="binary-vector" class="doc-image" id="binary-vector" />
-   </span> <span class="img-wrapper"> <span>Binärvektor</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/binary-vector.png" alt="Binary Vector" class="doc-image" id="binary-vector" />
+   </span> <span class="img-wrapper"> <span>Binärer Vektor</span> </span></p>
 <p>Binäre Vektoren haben die folgenden Eigenschaften:</p>
 <ul>
 <li><p><strong>Effiziente Speicherung:</strong> Jede Dimension benötigt nur 1 Bit Speicherplatz, was den Speicherplatz erheblich reduziert.</p></li>
@@ -56,14 +56,14 @@ summary: >-
 <li><p><strong>Feste Länge:</strong> Die Länge des Vektors bleibt unabhängig von der ursprünglichen Textlänge konstant, was die Indizierung und das Auffinden erleichtert.</p></li>
 <li><p><strong>Einfach und intuitiv:</strong> Spiegelt direkt das Vorhandensein von Schlüsselwörtern wider und eignet sich daher für bestimmte spezialisierte Suchaufgaben.</p></li>
 </ul>
-<p>Binäre Vektoren können mit verschiedenen Methoden erzeugt werden. Bei der Textverarbeitung können vordefinierte Vokabulare verwendet werden, um entsprechende Bits auf der Grundlage des Vorhandenseins von Wörtern zu setzen. Bei der Bildverarbeitung können Wahrnehmungs-Hashing-Algorithmen (wie <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) binäre Merkmale von Bildern erzeugen. Bei Anwendungen des maschinellen Lernens können die Modellausgaben binarisiert werden, um binäre Vektordarstellungen zu erhalten.</p>
+<p>Binäre Vektoren können durch verschiedene Methoden erzeugt werden. Bei der Textverarbeitung können vordefinierte Vokabulare verwendet werden, um entsprechende Bits auf der Grundlage des Vorhandenseins von Wörtern zu setzen. Bei der Bildverarbeitung können Wahrnehmungs-Hashing-Algorithmen (wie <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) binäre Merkmale von Bildern erzeugen. Bei Anwendungen des maschinellen Lernens können die Modellausgaben binarisiert werden, um binäre Vektordarstellungen zu erhalten.</p>
 <p>Nach der binären Vektorisierung können die Daten in Milvus zur Verwaltung und zum Abruf der Vektoren gespeichert werden. Das folgende Diagramm zeigt den grundlegenden Prozess.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-binary-vector.png" alt="use-binary-vector" class="doc-image" id="use-binary-vector" />
-   </span> <span class="img-wrapper"> <span>Verwendung binärer Vektoren</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-binary-vector.png" alt="Use Binary Vector" class="doc-image" id="use-binary-vector" />
+   </span> <span class="img-wrapper"> <span>Binäre Vektoren verwenden</span> </span></p>
 <div class="alert note">
-<p>Obwohl sich binäre Vektoren in bestimmten Szenarien hervorragend eignen, sind sie in ihrer Aussagekraft eingeschränkt, so dass es schwierig ist, komplexe semantische Beziehungen zu erfassen. Daher werden in realen Szenarien häufig binäre Vektoren zusammen mit anderen Vektortypen verwendet, um ein Gleichgewicht zwischen Effizienz und Aussagekraft herzustellen. Weitere Informationen finden Sie unter <a href="/docs/de/dense-vector.md">Dense Vector</a> und <a href="/docs/de/sparse_vector.md">Sparse Vector</a>.</p>
+<p>Obwohl sich binäre Vektoren in bestimmten Szenarien hervorragend eignen, sind sie in ihrer Aussagekraft eingeschränkt, so dass es schwierig ist, komplexe semantische Beziehungen zu erfassen. Daher werden in realen Szenarien häufig binäre Vektoren zusammen mit anderen Vektortypen verwendet, um ein Gleichgewicht zwischen Effizienz und Aussagekraft zu erreichen. Weitere Informationen finden Sie unter <a href="/docs/de/dense-vector.md">Dense Vector</a> und <a href="/docs/de/sparse_vector.md">Sparse Vector</a>.</p>
 </div>
 <h2 id="Use-binary-vectors" class="common-anchor-header">Binäre Vektoren verwenden<button data-href="#Use-binary-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -83,7 +83,7 @@ summary: >-
     </button></h2><h3 id="Add-vector-field" class="common-anchor-header">Vektorfeld hinzufügen</h3><p>Um binäre Vektoren in Milvus zu verwenden, definieren Sie zunächst ein Vektorfeld zum Speichern von binären Vektoren, wenn Sie eine Sammlung erstellen. Dieser Prozess beinhaltet:</p>
 <ol>
 <li><p>Einstellung von <code translate="no">datatype</code> auf den unterstützten binären Vektordatentyp, d.h. <code translate="no">BINARY_VECTOR</code>.</p></li>
-<li><p>Angeben der Dimensionen des Vektors mit dem Parameter <code translate="no">dim</code>. Beachten Sie, dass <code translate="no">dim</code> ein Vielfaches von 8 sein muss, da binäre Vektoren beim Einfügen in ein Byte-Array umgewandelt werden müssen. Alle 8 booleschen Werte (0 oder 1) werden in 1 Byte gepackt. Wenn zum Beispiel <code translate="no">dim=128</code> verwendet wird, ist ein 16-Byte-Array für das Einfügen erforderlich.</p></li>
+<li><p>Angeben der Dimensionen des Vektors mit dem Parameter <code translate="no">dim</code>. Beachten Sie, dass <code translate="no">dim</code> ein Vielfaches von 8 sein muss, da binäre Vektoren beim Einfügen in ein Byte-Array konvertiert werden müssen. Alle 8 booleschen Werte (0 oder 1) werden in 1 Byte gepackt. Wenn zum Beispiel <code translate="no">dim=128</code> verwendet wird, ist ein 16-Byte-Array zum Einfügen erforderlich.</p></li>
 </ol>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -134,12 +134,36 @@ schema.<span class="hljs-title function_">push</span>({
   <span class="hljs-attr">dim</span>: <span class="hljs-number">128</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">schema := entity.NewSchema()
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+schema := entity.NewSchema()
 schema.WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;pk&quot;</span>).
     WithDataType(entity.FieldTypeVarChar).
-    WithMaxLength(<span class="hljs-number">100</span>).
-    WithIsAutoID(<span class="hljs-literal">true</span>),
+    WithIsAutoID(<span class="hljs-literal">true</span>).
+    WithIsPrimaryKey(<span class="hljs-literal">true</span>).
+    WithMaxLength(<span class="hljs-number">100</span>),
 ).WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;binary_vector&quot;</span>).
     WithDataType(entity.FieldTypeBinaryVector).
@@ -207,13 +231,8 @@ indexParams.add(IndexParam.builder()
   <span class="hljs-attr">index_type</span>: <span class="hljs-title class_">IndexType</span>.<span class="hljs-property">AUTOINDEX</span>
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-)
-
-idx := index.NewAutoIndex(entity.HAMMING)
-indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_binary_collection&quot;</span>, <span class="hljs-string">&quot;binary_vector&quot;</span>, idx)
+<pre><code translate="no" class="language-go">idx := index.NewAutoIndex(entity.HAMMING)
+indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;binary_vector&quot;</span>, idx)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
         {
@@ -227,11 +246,11 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <p>Im obigen Beispiel wird ein Index mit dem Namen <code translate="no">binary_vector_index</code> für das Feld <code translate="no">binary_vector</code> erstellt, wobei der Indextyp <code translate="no">AUTOINDEX</code> verwendet wird. <code translate="no">metric_type</code> ist auf <code translate="no">HAMMING</code> gesetzt, was anzeigt, dass die Hamming-Distanz für die Ähnlichkeitsmessung verwendet wird.</p>
 <p>Milvus bietet verschiedene Indexarten für eine bessere Vektorsuche. AUTOINDEX ist ein spezieller Indextyp, der entwickelt wurde, um die Lernkurve der Vektorsuche zu glätten. Sie können aus einer Vielzahl von Index-Typen wählen. Einzelheiten finden Sie unter xxx.</p>
 <p>Außerdem unterstützt Milvus andere Ähnlichkeitsmetriken für binäre Vektoren. Weitere Informationen finden Sie unter <a href="/docs/de/metric.md">Metrik-Typen</a>.</p>
-<h3 id="Create-collection" class="common-anchor-header">Sammlung erstellen</h3><p>Sobald die Einstellungen für binäre Vektoren und Indizes abgeschlossen sind, erstellen Sie eine Sammlung, die binäre Vektoren enthält. Das folgende Beispiel verwendet die Methode <code translate="no">create_collection</code>, um eine Sammlung mit dem Namen <code translate="no">my_binary_collection</code> zu erstellen.</p>
+<h3 id="Create-collection" class="common-anchor-header">Sammlung erstellen</h3><p>Sobald die Einstellungen für binäre Vektoren und Indizes abgeschlossen sind, erstellen Sie eine Sammlung, die binäre Vektoren enthält. Das folgende Beispiel verwendet die Methode <code translate="no">create_collection</code>, um eine Sammlung mit dem Namen <code translate="no">my_collection</code> zu erstellen.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
-    collection_name=<span class="hljs-string">&quot;my_binary_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params
 )
@@ -244,7 +263,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         .build());
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_binary_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
         .indexParams(indexParams)
         .build();
@@ -257,15 +276,16 @@ client.createCollection(requestCreate);
 });
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_dense_collection&#x27;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">schema</span>: schema,
     <span class="hljs-attr">index_params</span>: indexParams
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">err = cli.CreateCollection(ctx,
-    milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_binary_collection&quot;</span>, schema).
+<pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithIndexOptions(indexOption))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
@@ -274,7 +294,7 @@ client.createCollection(requestCreate);
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;my_binary_collection\&quot;,
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
@@ -303,7 +323,7 @@ bool_vectors = [
 data = [{<span class="hljs-string">&quot;binary_vector&quot;</span>: convert_bool_list_to_bytes(bool_vector) <span class="hljs-keyword">for</span> bool_vector <span class="hljs-keyword">in</span> bool_vectors}]
 
 client.insert(
-    collection_name=<span class="hljs-string">&quot;my_binary_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=data
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -341,7 +361,7 @@ List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class=
 }
 
 <span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_binary_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(rows)
         .build());
 <button class="copy-code-btn"></button></code></pre>
@@ -351,15 +371,19 @@ List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class=
 ];
 
 client.<span class="hljs-title function_">insert</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_binary_collection&quot;</span>,
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
   <span class="hljs-attr">data</span>: data,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;quick_setup&quot;</span>).
+<pre><code translate="no" class="language-go">_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
     WithBinaryVectorColumn(<span class="hljs-string">&quot;binary_vector&quot;</span>, <span class="hljs-number">128</span>, [][]<span class="hljs-type">byte</span>{
         {<span class="hljs-number">0</span>b10011011, <span class="hljs-number">0</span>b01010100, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>},
         {<span class="hljs-number">0</span>b10011011, <span class="hljs-number">0</span>b01010101, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>},
     }))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
@@ -367,7 +391,7 @@ client.<span class="hljs-title function_">insert</span>({
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
-    \&quot;collectionName\&quot;: \&quot;my_binary_collection\&quot;
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Perform-similarity-search" class="common-anchor-header">Ähnlichkeitssuche durchführen</h3><p>Die Ähnlichkeitssuche ist eine der Hauptfunktionen von Milvus, die es Ihnen ermöglicht, schnell Daten zu finden, die einem Abfragevektor am ähnlichsten sind, basierend auf dem Abstand zwischen den Vektoren. Um eine Ähnlichkeitssuche mit binären Vektoren durchzuführen, bereiten Sie den Abfragevektor und die Suchparameter vor und rufen dann die Methode <code translate="no">search</code> auf.</p>
@@ -382,7 +406,7 @@ query_bool_list = [<span class="hljs-number">1</span>, <span class="hljs-number"
 query_vector = convert_bool_list_to_bytes(query_bool_list)
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_binary_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[query_vector],
     anns_field=<span class="hljs-string">&quot;binary_vector&quot;</span>,
     search_params=search_params,
@@ -406,7 +430,7 @@ searchParams.put(<span class="hljs-string">&quot;nprobe&quot;</span>,<span class
 <span class="hljs-type">BinaryVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BinaryVec</span>(convertBoolArrayToBytes(boolArray));
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchR</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_binary_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(Collections.singletonList(queryVector))
         .annsField(<span class="hljs-string">&quot;binary_vector&quot;</span>)
         .searchParams(searchParams)
@@ -423,7 +447,7 @@ searchParams.put(<span class="hljs-string">&quot;nprobe&quot;</span>,<span class
 <pre><code translate="no" class="language-javascript">query_vector = [<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>];
 
 client.<span class="hljs-title function_">search</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_binary_collection&#x27;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">data</span>: query_vector,
     <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;pk&#x27;</span>],
@@ -436,19 +460,22 @@ client.<span class="hljs-title function_">search</span>({
 
 annSearchParams := index.NewCustomAnnParam()
 annSearchParams.WithExtraParam(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">10</span>)
-resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
-    <span class="hljs-string">&quot;my_binary_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
     <span class="hljs-number">5</span>,                      <span class="hljs-comment">// limit</span>
     []entity.Vector{entity.BinaryVector(queryVector)},
-).WithOutputFields(<span class="hljs-string">&quot;pk&quot;</span>).WithAnnParam(annSearchParams))
+).WithANNSField(<span class="hljs-string">&quot;binary_vector&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;pk&quot;</span>).
+    WithAnnParam(annSearchParams))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatal(<span class="hljs-string">&quot;failed to perform basic ANN search collection: &quot;</span>, err.Error())
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
 }
 
 <span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
-    log.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs)
-    log.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
-    log.Println(<span class="hljs-string">&quot;Pks: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;pk&quot;</span>))
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+    fmt.Println(<span class="hljs-string">&quot;Pks: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;pk&quot;</span>).FieldData().GetScalars())
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> searchParams=<span class="hljs-string">&#x27;{
@@ -460,7 +487,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;my_binary_collection\&quot;,
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;data\&quot;: <span class="hljs-variable">$data</span>,
     \&quot;annsField\&quot;: \&quot;binary_vector\&quot;,
     \&quot;limit\&quot;: 5,

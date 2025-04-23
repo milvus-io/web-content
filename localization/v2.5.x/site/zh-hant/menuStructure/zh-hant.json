@@ -300,7 +300,7 @@
       },
       {
         "label": "一致性等級",
-        "id": "consistency.md",
+        "id": "tune_consistency.md",
         "order": 10,
         "children": []
       },
@@ -801,21 +801,27 @@
             "children": []
           },
           {
+            "label": "Elasticsearch 查詢至 Milvus",
+            "id": "elasticsearch-queries-to-milvus.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "搜尋迭代器",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "使用磁碟分割金鑰",
             "id": "use-partition-key.md",
-            "order": 9,
+            "order": 11,
             "children": []
           },
           {
             "label": "重新排名",
             "id": "reranking.md",
-            "order": 10,
+            "order": 12,
             "children": []
           }
         ]
@@ -1452,6 +1458,12 @@
                 "label": "補助角色",
                 "id": "grant_roles.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "刪除使用者與角色",
+                "id": "drop_users_roles.md",
+                "order": 5,
                 "children": []
               }
             ]

@@ -4,8 +4,8 @@ title: Nur alphanumerische Begriffe
 summary: >-
   Der alphanumonly-Filter entfernt Token, die Nicht-ASCII-Zeichen enthalten, und
   behält nur alphanumerische Begriffe bei. Dieser Filter ist nützlich für die
-  Verarbeitung von Text, bei dem nur einfache Buchstaben und Zahlen relevant
-  sind und Sonderzeichen oder Symbole ausgeschlossen sind.
+  Verarbeitung von Text, bei dem nur die Grundbuchstaben und Zahlen relevant
+  sind und keine Sonderzeichen oder Symbole enthalten sind.
 ---
 <h1 id="Alphanumonly" class="common-anchor-header">Nur alphanumerische Begriffe<button data-href="#Alphanumonly" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,10 +52,10 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
-    <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;asciifolding&quot;</span>],
+    <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;alphanumonly&quot;</span>],
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-string">&quot;alphanumonly&quot;</span>}}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 analyzerParams=<span class="hljs-string">&#x27;{
@@ -90,11 +90,13 @@ analyzerParams=<span class="hljs-string">&#x27;{
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;alphanumonly&quot;</span>],
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;standard&quot;</span>);
+analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collections.singletonList(<span class="hljs-string">&quot;alphanumonly&quot;</span>));
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-string">&quot;alphanumonly&quot;</span>}}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>

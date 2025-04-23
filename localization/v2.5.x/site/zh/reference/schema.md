@@ -37,13 +37,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>在 Zilliz Cloud 上，Collection Schema 是关系数据库中一个表的组合，它定义了 Zilliz Cloud 如何组织 Collection 中的数据。</p>
-<p>设计良好的 Schema 至关重要，因为它抽象了数据模型，并决定能否通过搜索实现业务目标。此外，由于插入 Collections 的每一行数据都必须遵循 Schema，因此有助于保持数据的一致性和长期质量。从技术角度来看，定义明确的 Schema 会带来组织良好的列数据存储和更简洁的索引结构，从而提升搜索性能。</p>
-<p>一个 Collections Schema 有一个主键、最多四个向量字段和几个标量字段。下图说明了如何将文章映射到模式字段列表。</p>
+<p>设计良好的 Schema 至关重要，因为它抽象了数据模型，并决定能否通过搜索实现业务目标。此外，由于插入 Collections 的每一行数据都必须遵循 Schema，因此有助于保持数据的一致性和长期质量。从技术角度看，定义明确的 Schema 会带来组织良好的列数据存储和更简洁的索引结构，从而提升搜索性能。</p>
+<p>一个 Collection Schema 有一个主键、最多四个向量字段和几个标量字段。下图说明了如何将文章映射到模式字段列表。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
    </span> <span class="img-wrapper"> <span>Schema 设计剖析</span> </span></p>
-<p>搜索系统的数据模型设计包括分析业务需求，并将信息抽象为模式表达的数据模型。例如，搜索一段文本必须 "索引"，通过 "嵌入 "将字面字符串转换为向量，并启用向量搜索。除了这一基本要求外，可能还需要存储出版时间戳和作者等其他属性。有了这些元数据，就可以通过过滤来完善语义搜索，只返回特定日期之后或特定作者发表的文本。您还可以检索这些标量与主文本，以便在应用程序中呈现搜索结果。每个标量都应分配一个唯一标识符，以整数或字符串的形式组织这些文本片段。这些元素对于实现复杂的搜索逻辑至关重要。</p>
+<p>搜索系统的数据模型设计包括分析业务需求，并将信息抽象为模式表达的数据模型。例如，搜索一段文本必须通过 "嵌入 "将字面字符串转换为向量并启用向量搜索，从而实现 "索引"。除了这一基本要求外，可能还需要存储出版时间戳和作者等其他属性。有了这些元数据，就可以通过过滤来完善语义搜索，只返回特定日期之后或特定作者发表的文本。您还可以检索这些标量与主文本，以便在应用程序中呈现搜索结果。每个标量都应分配一个唯一标识符，以整数或字符串的形式组织这些文本片段。这些元素对于实现复杂的搜索逻辑至关重要。</p>
 <p>请参考<a href="/docs/zh/schema-hands-on.md">Schema Design Hands-On</a>，了解如何制作一个精心设计的模式。</p>
 <h2 id="Create-Schema" class="common-anchor-header">创建 Schema<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +78,6 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
 
 schema := entity.NewSchema()
-log.Println(schema)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
     &quot;fields&quot;: []
@@ -132,9 +131,7 @@ schema.addField(AddFieldReq.builder()
     <span class="hljs-comment">// highlight-end</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_id&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_id&quot;</span>).
     WithDataType(entity.FieldTypeInt64).
     <span class="hljs-comment">// highlight-start</span>
     WithIsPrimaryKey(<span class="hljs-literal">true</span>).
@@ -197,9 +194,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_i
     <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
     WithDataType(entity.FieldTypeFloatVector).
     <span class="hljs-comment">// highlight-next-line</span>
     WithDim(<span class="hljs-number">5</span>),
@@ -272,9 +267,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
     <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_varchar&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_varchar&quot;</span>).
     WithDataType(entity.FieldTypeVarChar).
     WithMaxLength(<span class="hljs-number">512</span>),
 )
@@ -283,7 +276,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
     &quot;fieldName&quot;: &quot;my_varchar&quot;,
     &quot;dataType&quot;: &quot;VarChar&quot;,
     &quot;elementTypeParams&quot;: {
-        &quot;max_length&quot;: 256
+        &quot;max_length&quot;: 512
     }
 }&#x27;</span>
 
@@ -314,9 +307,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_int64&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_int64&quot;</span>).
     WithDataType(entity.FieldTypeInt64),
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -353,9 +344,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_i
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Boolean</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_bool&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_bool&quot;</span>).
     WithDataType(entity.FieldTypeBool),
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -393,9 +382,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_b
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">JSON</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_json&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_json&quot;</span>).
     WithDataType(entity.FieldTypeJSON),
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -443,9 +430,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_j
     <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_array&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_array&quot;</span>).
     WithDataType(entity.FieldTypeArray).
     WithElementType(entity.FieldTypeInt64).
     WithMaxLength(<span class="hljs-number">512</span>).

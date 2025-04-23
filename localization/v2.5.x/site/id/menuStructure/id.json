@@ -300,7 +300,7 @@
       },
       {
         "label": "Tingkat Konsistensi",
-        "id": "consistency.md",
+        "id": "tune_consistency.md",
         "order": 10,
         "children": []
       },
@@ -801,21 +801,27 @@
             "children": []
           },
           {
+            "label": "Kueri Elasticsearch ke Milvus",
+            "id": "elasticsearch-queries-to-milvus.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Iterator Pencarian",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Gunakan Kunci Partisi",
             "id": "use-partition-key.md",
-            "order": 9,
+            "order": 11,
             "children": []
           },
           {
             "label": "Pemeringkatan ulang",
             "id": "reranking.md",
-            "order": 10,
+            "order": 12,
             "children": []
           }
         ]
@@ -1452,6 +1458,12 @@
                 "label": "Peran Hibah",
                 "id": "grant_roles.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "Jatuhkan Pengguna &amp; Peran",
+                "id": "drop_users_roles.md",
+                "order": 5,
                 "children": []
               }
             ]

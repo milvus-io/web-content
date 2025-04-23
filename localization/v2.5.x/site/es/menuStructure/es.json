@@ -300,7 +300,7 @@
       },
       {
         "label": "Nivel de coherencia",
-        "id": "consistency.md",
+        "id": "tune_consistency.md",
         "order": 10,
         "children": []
       },
@@ -801,21 +801,27 @@
             "children": []
           },
           {
+            "label": "Consultas de Elasticsearch a Milvus",
+            "id": "elasticsearch-queries-to-milvus.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Iteradores de búsqueda",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Utilizar clave de partición",
             "id": "use-partition-key.md",
-            "order": 9,
+            "order": 11,
             "children": []
           },
           {
             "label": "Nueva clasificación",
             "id": "reranking.md",
-            "order": 10,
+            "order": 12,
             "children": []
           }
         ]
@@ -1452,6 +1458,12 @@
                 "label": "Funciones de las subvenciones",
                 "id": "grant_roles.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "Eliminar usuarios y funciones",
+                "id": "drop_users_roles.md",
+                "order": 5,
                 "children": []
               }
             ]

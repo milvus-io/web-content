@@ -1,8 +1,12 @@
 ---
 id: ivf-pq.md
-order: 2
-summary: Este artículo presentará el índice IVF_PQ en Milvus.
 title: IVF_PQ
+summary: >-
+  El índice IVF_PQ es un algoritmo de indexación basado en la cuantización para
+  la búsqueda aproximada del vecino más próximo en espacios de alta dimensión.
+  Aunque no es tan rápido como algunos métodos basados en grafos, IVF_PQ suele
+  requerir bastante menos memoria, lo que lo convierte en una opción práctica
+  para grandes conjuntos de datos.
 ---
 <h1 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,31 +43,30 @@ title: IVF_PQ
 <h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF es como crear un índice en un libro. En lugar de escanear cada página (o, en nuestro caso, cada vector), se buscan palabras clave específicas (clusters) en el índice para encontrar rápidamente las páginas (vectores) relevantes. En nuestro caso, los vectores se agrupan en clusters, y el algoritmo buscará dentro de unos pocos clusters que estén cerca del vector de consulta.</p>
 <p>El funcionamiento es el siguiente</p>
 <ol>
-<li><strong>Agrupación:</strong> El conjunto de datos vectoriales se divide en un número determinado de clusters, utilizando un algoritmo de agrupación como k-means. Cada cluster tiene un centroide (un vector representativo del cluster).</li>
-<li><strong>Asignación:</strong> Cada vector se asigna al cluster cuyo centroide está más próximo a él.</li>
-<li><strong>Índice invertido:</strong> Se crea un índice que asigna el centroide de cada cluster a la lista de vectores asignados a ese cluster.</li>
-<li><strong>Búsqueda:</strong> Cuando se buscan los vecinos más cercanos, el algoritmo de búsqueda compara el vector de consulta con los centroides de los clústeres y selecciona el clúster o clústeres más prometedores. A continuación, la búsqueda se reduce a los vectores que se encuentran dentro de esos clusters seleccionados.</li>
+<li><p><strong>Agrupación:</strong> El conjunto de datos vectoriales se divide en un número determinado de clusters, utilizando un algoritmo de agrupación como k-means. Cada cluster tiene un centroide (un vector representativo del cluster).</p></li>
+<li><p><strong>Asignación:</strong> Cada vector se asigna al cluster cuyo centroide está más próximo a él.</p></li>
+<li><p><strong>Índice invertido:</strong> Se crea un índice que asigna el centroide de cada cluster a la lista de vectores asignados a ese cluster.</p></li>
+<li><p><strong>Búsqueda:</strong> Cuando se buscan los vecinos más cercanos, el algoritmo de búsqueda compara el vector de consulta con los centroides de los clústeres y selecciona el clúster o clústeres más prometedores. A continuación, la búsqueda se reduce a los vectores que se encuentran dentro de esos clusters seleccionados.</p></li>
 </ol>
 <p>Para obtener más información sobre los detalles técnicos, consulte <a href="/docs/es/ivf-flat.md">IVF_FLAT</a>.</p>
 <h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>La cuantificación de productos (PQ)</strong> es un método de compresión de vectores de alta dimensión que reduce significativamente los requisitos de almacenamiento y permite realizar rápidas operaciones de búsqueda de similitudes.</p>
 <p>El proceso PQ consta de las siguientes etapas</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/ivf-pq-1.png" alt="pq-process-1" class="doc-image" id="pq-process-1" />
-   </span> <span class="img-wrapper"> <span>proceso pq-1</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/ivf-pq-1.png" alt="Ivf Pq 1" class="doc-image" id="ivf-pq-1" />
+   </span> <span class="img-wrapper"> <span>Ivf Pq 1</span> </span></p>
 <ol>
-<li><strong>Descomposición dimensional</strong>: El algoritmo comienza descomponiendo cada vector de alta dimensión en <code translate="no">m</code> subvectores de igual tamaño. Esta descomposición transforma el espacio original de D dimensiones en <code translate="no">m</code> subespacios disjuntos, donde cada subespacio contiene <em>D/m</em> dimensiones. El parámetro <code translate="no">m</code> controla la granularidad de la descomposición e influye directamente en la relación de compresión.</li>
-<li><strong>Generación del libro de códigos del subespacio</strong>: Dentro de cada subespacio, el algoritmo aplica <a href="https://en.wikipedia.org/wiki/K-means_clustering">la agrupación k-means</a> para aprender un conjunto de vectores representativos (centroides). Estos centroides forman colectivamente un libro de códigos para ese subespacio. El número de centroides de cada libro de códigos viene determinado por el parámetro <code translate="no">nbits</code>, donde cada libro de códigos contiene 2^nbits de centroides. Por ejemplo, si <code translate="no">nbits = 8</code>, cada libro de códigos contendrá 256 centroides. A cada centroide se le asigna un índice único con <code translate="no">nbits</code> bits.</li>
-<li><strong>Cuantificación</strong><strong>vectorial</strong>: Para cada subvector del vector original, PQ identifica su centroide más cercano dentro del subespacio correspondiente utilizando un tipo de métrica específico. Este proceso asigna cada subvector a su vector representativo más cercano en el libro de códigos. En lugar de almacenar todas las coordenadas del subvector, sólo se conserva el índice del centroide correspondiente.</li>
-<li><strong>Representación comprimida</strong>: La representación comprimida final consta de <code translate="no">m</code> índices, uno de cada subespacio, denominados colectivamente <strong>códigos PQ</strong>. Esta codificación reduce los requisitos de almacenamiento de <em>D × 32</em> bits (suponiendo números en coma flotante de 32 bits) a <em>m</em> × <em>nbits</em> bits, con lo que se consigue una compresión sustancial al tiempo que se conserva la capacidad de aproximar distancias vectoriales.</li>
+<li><p><strong>Descomposición dimensional</strong>: El algoritmo comienza descomponiendo cada vector de alta dimensión en <code translate="no">m</code> subvectores de igual tamaño. Esta descomposición transforma el espacio original de D dimensiones en <code translate="no">m</code> subespacios disjuntos, donde cada subespacio contiene <em>D/m</em> dimensiones. El parámetro <code translate="no">m</code> controla la granularidad de la descomposición e influye directamente en la relación de compresión.</p></li>
+<li><p><strong>Generación del libro de códigos del subespacio</strong>: Dentro de cada subespacio, el algoritmo aplica <a href="https://en.wikipedia.org/wiki/K-means_clustering">la agrupación k-means</a> para aprender un conjunto de vectores representativos (centroides). Estos centroides forman colectivamente un libro de códigos para ese subespacio. El número de centroides de cada libro de códigos viene determinado por el parámetro <code translate="no">nbits</code>, donde cada libro de códigos contiene 2^{\textit{nbits}} centroides. Por ejemplo, si <code translate="no">nbits = 8</code>, cada libro de códigos contendrá 256 centroides. A cada centroide se le asigna un índice único con <code translate="no">nbits</code> bits.</p></li>
+<li><p><strong>Cuantificación</strong><strong>vectorial</strong>: Para cada subvector del vector original, PQ identifica su centroide más cercano dentro del subespacio correspondiente utilizando un tipo de métrica específico. Este proceso asigna cada subvector a su vector representativo más cercano en el libro de códigos. En lugar de almacenar todas las coordenadas del subvector, sólo se conserva el índice del centroide correspondiente.</p></li>
+<li><p><strong>Representación comprimida</strong>: La representación comprimida final consta de <code translate="no">m</code> índices, uno de cada subespacio, denominados colectivamente <strong>códigos PQ</strong>. Esta codificación reduce los requisitos de almacenamiento de <em>D × 32</em> bits (suponiendo números en coma flotante de 32 bits) a <em>m</em> × <em>nbits</em> bits, con lo que se consigue una compresión sustancial al tiempo que se conserva la capacidad de aproximar distancias vectoriales.</p></li>
 </ol>
-<p>Para obtener más información sobre el ajuste y la optimización de los parámetros, consulte <a href="#index-params">Parámetros del índice</a>.</p>
+<p>Para obtener más información sobre el ajuste y la optimización de los parámetros, consulte <a href="/docs/es/ivf-pq.md#Index-params">Parámetros del índice</a>.</p>
 <div class="alert note">
-<p><strong>Ejemplo de compresión</strong></p>
 <p>Considere un vector con <em>D = 128</em> dimensiones utilizando números de coma flotante de 32 bits. Con los parámetros PQ <em>m = 64</em> (subvectores) y <em>nbits = 8</em> (por tanto <em>k =</em> 2^8 <em>= 256</em> centroides por subespacio), podemos comparar los requisitos de almacenamiento:</p>
 <ul>
-<li>Vector original: 128 dimensiones × 32 bits = 4.096 bits</li>
-<li>Vector comprimido PQ: 64 subvectores × 8 bits = 512 bits</li>
+<li><p>Vector original: 128 dimensiones × 32 bits = 4.096 bits</p></li>
+<li><p>Vector comprimido PQ: 64 subvectores × 8 bits = 512 bits</p></li>
 </ul>
 <p>Esto supone una reducción de 8 veces en los requisitos de almacenamiento.</p>
 </div>
@@ -71,28 +74,28 @@ title: IVF_PQ
 <p>Cuando se realiza una búsqueda de similitud con un vector de consulta, PQ permite un cálculo eficiente de la distancia a través de los siguientes pasos:</p>
 <ol>
 <li><p><strong>Preprocesamiento de la consulta</strong></p>
-<ol>
-<li>El vector de consulta se descompone en <code translate="no">m</code> subvectores, que coinciden con la estructura de descomposición original de PQ.</li>
-<li>Para cada subvector de consulta y su correspondiente libro de códigos (que contiene 2^nbits de centroides), se calculan y almacenan las distancias a todos los centroides.</li>
-<li>Esto genera <code translate="no">m</code> tablas de búsqueda, donde cada tabla contiene distancias de 2^nbits.</li>
-</ol></li>
+<ul>
+<li><p>El vector de consulta se descompone en <code translate="no">m</code> subvectores, que coinciden con la estructura de descomposición original de PQ.</p></li>
+<li><p>Para cada subvector de consulta y su correspondiente libro de códigos (que contiene 2^{\textit{nbits}} centroides), se calculan y almacenan las distancias a todos los centroides.</p></li>
+<li><p>Esto genera <code translate="no">m</code> tablas de búsqueda, donde cada tabla contiene 2^ {\textit{nbits}} distancias.</p></li>
+</ul></li>
 <li><p><strong>Aproximación de distancias</strong></p>
 <p>Para cualquier vector de base de datos representado por códigos PQ, su distancia aproximada al vector de consulta se calcula del siguiente modo:</p>
-<ol>
-<li>Para cada uno de los subvectores de <code translate="no">m</code>, recupere la distancia precalculada de la tabla de consulta correspondiente utilizando el índice centroide almacenado.</li>
-<li>Sume estas distancias <code translate="no">m</code> para obtener la distancia aproximada basada en un tipo métrico específico (por ejemplo, la distancia euclídea).</li>
-</ol></li>
+<ul>
+<li><p>Para cada uno de los subvectores de <code translate="no">m</code>, se recupera la distancia precalculada de la tabla de consulta correspondiente utilizando el índice centroide almacenado.</p></li>
+<li><p>Sume estas distancias <code translate="no">m</code> para obtener la distancia aproximada basada en un tipo métrico específico (por ejemplo, la distancia euclídea).</p></li>
+</ul></li>
 </ol>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/ivf-pq-2.png" alt="pq-process-1" class="doc-image" id="pq-process-1" />
-   </span> <span class="img-wrapper"> <span>proceso pq-1</span> </span></p>
-<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ</h3><p>El índice <strong>IVF_PQ</strong> combina los puntos fuertes de <strong>IVF</strong> y <strong>PQ</strong> para acelerar las búsquedas. El proceso funciona en dos pasos:</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/ivf-pq-2.png" alt="Ivf Pq 2" class="doc-image" id="ivf-pq-2" />
+   </span> <span class="img-wrapper"> <span>Ivf Pq 2</span> </span></p>
+<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ</h3><p>El índice <strong>IVF_PQ</strong> combina los puntos fuertes de <strong>IVF</strong> y <strong>PQ</strong> para acelerar las búsquedas. El proceso funciona en dos etapas:</p>
 <ol>
-<li><strong>Filtrado grueso con IVF</strong>: IVF particiona el espacio vectorial en clusters, reduciendo el alcance de la búsqueda. En lugar de evaluar todo el conjunto de datos, el algoritmo se centra sólo en los clusters más cercanos al vector de consulta.</li>
-<li><strong>Comparación detallada con PQ</strong>: dentro de los conglomerados seleccionados, PQ utiliza representaciones vectoriales comprimidas y cuantizadas para calcular rápidamente distancias aproximadas.</li>
+<li><p><strong>Filtrado grueso con IVF</strong>: IVF particiona el espacio vectorial en clusters, reduciendo el alcance de la búsqueda. En lugar de evaluar todo el conjunto de datos, el algoritmo se centra sólo en los clusters más cercanos al vector de consulta.</p></li>
+<li><p><strong>Comparación detallada con PQ</strong>: dentro de los conglomerados seleccionados, PQ utiliza representaciones vectoriales comprimidas y cuantizadas para calcular rápidamente distancias aproximadas.</p></li>
 </ol>
-<p>El rendimiento del índice <strong>IVF_PQ</strong> depende en gran medida de los parámetros que controlan los algoritmos IVF y PQ. El ajuste de estos parámetros es crucial para lograr los resultados óptimos para un conjunto de datos y una aplicación determinados. Encontrará información más detallada sobre estos parámetros y cómo ajustarlos en <a href="#index-params">Parámetros del índice</a>.</p>
+<p>El rendimiento del índice <strong>IVF_PQ</strong> depende en gran medida de los parámetros que controlan los algoritmos IVF y PQ. El ajuste de estos parámetros es crucial para lograr los resultados óptimos para un conjunto de datos y una aplicación determinados. Encontrará información más detallada sobre estos parámetros y cómo ajustarlos en <a href="/docs/es/ivf-pq.md#Index-params">Parámetros del índice</a>.</p>
 <h2 id="Build-index" class="common-anchor-header">Crear índice<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -132,9 +135,9 @@ index_params.add_index(
 <ul>
 <li><code translate="no">m</code>: Número de subvectores en los que se divide el vector.</li>
 </ul>
-<p>Para conocer más parámetros de construcción disponibles para el índice <code translate="no">IVF_PQ</code>, consulte <a href="#Index-building-params">Parámetros de construcción del índice</a>.</p></li>
+<p>Para conocer más parámetros de construcción disponibles para el índice <code translate="no">IVF_PQ</code>, consulte <a href="/docs/es/ivf-pq.md#Index-building-params">Parámetros de construcción del índice</a>.</p></li>
 </ul>
-<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando el método <code translate="no">create_index()</code> directamente o pasando los parámetros del índice en el método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
+<p>Una vez configurados los parámetros del índice, puede crear el índice utilizando directamente el método <code translate="no">create_index()</code> o pasando los parámetros del índice al método <code translate="no">create_collection</code>. Para más detalles, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Búsqueda en el índice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -153,17 +156,17 @@ index_params.add_index(
     </button></h2><p>Una vez creado el índice e insertadas las entidades, puede realizar búsquedas de similitud en el índice.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
-        <span class="hljs-string">&quot;nprobe&quot;</span>: 10, <span class="hljs-comment"># Number of clusters to search</span>
+        <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of clusters to search</span>
     }
 }
 
 res = MilvusClient.search(
     collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-    data=[[0.1, 0.2, 0.3, 0.4, 0.5]],  <span class="hljs-comment"># Query vector</span>
-    <span class="hljs-built_in">limit</span>=3,  <span class="hljs-comment"># TopK results to return</span>
+    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
+    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
     search_params=search_params
 )
-
 <button class="copy-code-btn"></button></code></pre>
 <p>En esta configuración:</p>
 <ul>
@@ -171,7 +174,7 @@ res = MilvusClient.search(
 <ul>
 <li><code translate="no">nprobe</code>: Número de clusters a buscar.</li>
 </ul>
-<p>Para conocer más parámetros de búsqueda disponibles para el índice <code translate="no">IVF_PQ</code>, consulte <a href="#index-specific-search-params">Parámetros de búsqueda específicos del índice</a>.</p></li>
+<p>Para conocer más parámetros de búsqueda disponibles para el índice <code translate="no">IVF_PQ</code>, consulte <a href="/docs/es/ivf-pq.md#Index-specific-search-params">Parámetros de búsqueda específicos del índice</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Parámetros del índice<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -189,23 +192,50 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>En esta sección se ofrece una descripción general de los parámetros utilizados para crear un índice y realizar búsquedas en él.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parámetros de creación de índices</h3><p>La siguiente tabla enumera los parámetros que pueden configurarse en <code translate="no">params</code> al <a href="#Build-index">crear un índice</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parámetros de creación de índices</h3><p>La siguiente tabla enumera los parámetros que pueden configurarse en <code translate="no">params</code> al <a href="/docs/es/ivf-pq.md#Build-index">crear un índice</a>.</p>
 <table>
-<thead>
-<tr><th></th><th><strong>Parámetro</strong></th><th><strong>Descripción</strong></th><th><strong>Rango de valores</strong></th><th><strong>Sugerencia de ajuste</strong></th></tr>
-</thead>
-<tbody>
-<tr><td>IVF</td><td><code translate="no">nlist</code></td><td>El número de clusters a crear usando el algoritmo k-means durante la construcción del índice.</td><td><strong>Tipo</strong> Entero<br><strong>Rango</strong>: [1, 65536]<br><strong>Valor por defecto</strong>: <code translate="no">128</code></td><td>Los valores mayores de <code translate="no">nlist</code> mejoran la recuperación al crear clusters más refinados, pero aumentan el tiempo de creación del índice. Optimice en función del tamaño del conjunto de datos y de los recursos disponibles.<br>En la mayoría de los casos, se recomienda establecer un valor dentro de este intervalo: [32, 4096].</td></tr>
-<tr><td>PQ</td><td><code translate="no">m</code></td><td>Número de subvectores (utilizados para la cuantificación) en los que se dividirá cada vector de alta dimensión durante el proceso de cuantificación.</td><td><strong>Tipo</strong>: Entero<br><strong>Rango</strong>: [1, 65536]<br><strong>Valor por defecto</strong>: Ninguno</td><td>Un valor más alto de <code translate="no">m</code> puede mejorar la precisión, pero también aumenta la complejidad computacional y el uso de memoria.<br><code translate="no">m</code> debe ser un divisor de la dimensión del vector<em>(D</em>) para garantizar una descomposición adecuada. Un valor comúnmente recomendado es <em>m = D/2</em>.<br>En la mayoría de los casos, le recomendamos que establezca un valor dentro de este rango: [D/8, D].</td></tr>
-<tr><td></td><td><code translate="no">nbits</code></td><td>El número de bits utilizados para representar el índice del centroide de cada subvector en la forma comprimida. Determina directamente el tamaño de cada libro de códigos, que contendrá 2^nbits de centroides. Por ejemplo, si <code translate="no">nbits</code> se establece en 8, cada subvector estará representado por un índice centroide de 8 bits. Esto permite 2^8 (256) centroides posibles en el libro de códigos para ese subvector.</td><td><strong>Tipo</strong>: Entero<br><strong>Rango</strong>: [1, 64]<br><strong>Valor por defecto</strong>: <code translate="no">8</code></td><td>Un valor más alto de <code translate="no">nbits</code> permite libros de códigos más grandes, lo que potencialmente conduce a representaciones más precisas de los vectores originales. Sin embargo, también implica utilizar más bits para almacenar cada índice, lo que se traduce en una menor compresión.<br>En la mayoría de los casos, recomendamos establecer un valor dentro de este rango: [1, 16].</td></tr>
-</tbody>
+   <tr>
+     <th></th>
+     <th><p>Parámetro</p></th>
+     <th><p>Descripción</p></th>
+     <th><p>Rango de valores</p></th>
+     <th><p>Sugerencia de ajuste</p></th>
+   </tr>
+   <tr>
+     <td><p>IVF</p></td>
+     <td><p><code translate="no">nlist</code></p></td>
+     <td><p>El número de clusters a crear usando el algoritmo k-means durante la construcción del índice.</p></td>
+     <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, 65536]</p><p><strong>Valor por defecto</strong>: <code translate="no">128</code></p></td>
+     <td><p>Los valores mayores de <code translate="no">nlist</code> mejoran la recuperación al crear clusters más refinados, pero aumentan el tiempo de creación del índice. Optimice en función del tamaño del conjunto de datos y de los recursos disponibles. En la mayoría de los casos, se recomienda establecer un valor dentro de este intervalo: [32, 4096].</p></td>
+   </tr>
+   <tr>
+     <td rowspan="2"><p>PQ</p></td>
+     <td><p><code translate="no">m</code></p></td>
+     <td><p>Número de subvectores (utilizados para la cuantificación) en los que se dividirá cada vector de alta dimensión durante el proceso de cuantificación.</p></td>
+     <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, 65536]</p><p><strong>Valor por defecto</strong>: Ninguno</p></td>
+     <td><p>Un valor más alto de <code translate="no">m</code> puede mejorar la precisión, pero también aumenta la complejidad computacional y el uso de memoria. <code translate="no">m</code> debe ser un divisor de la dimensión del vector<em>(D</em>) para garantizar una descomposición adecuada. Un valor comúnmente recomendado es <em>m = D/2</em>.</p><p>En la mayoría de los casos, le recomendamos que establezca un valor dentro de este rango: [D/8, D].</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">nbits</code></p></td>
+     <td><p>El número de bits utilizados para representar el índice del centroide de cada subvector en la forma comprimida. Determina directamente el tamaño de cada libro de códigos. Cada libro de códigos contendrá 2^{\textit{nbits}} centroides. Por ejemplo, si <code translate="no">nbits</code> se establece en 8, cada subvector estará representado por un índice centroide de 8 bits. Esto permite 2^8 (256) centroides posibles en el libro de códigos para ese subvector.</p></td>
+     <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, 64]</p><p><strong>Valor por defecto</strong>: <code translate="no">8</code></p></td>
+     <td><p>Un valor más alto de <code translate="no">nbits</code> permite libros de códigos más grandes, lo que potencialmente conduce a representaciones más precisas de los vectores originales. Sin embargo, también implica utilizar más bits para almacenar cada índice, lo que se traduce en una menor compresión. En la mayoría de los casos, recomendamos establecer un valor dentro de este rango: [1, 16].</p></td>
+   </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parámetros de búsqueda específicos de cada índice</h3><p>En la tabla siguiente se enumeran los parámetros que pueden configurarse en <code translate="no">search_params.params</code> al <a href="#Search-on-index">buscar en el índice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parámetros de búsqueda específicos de cada índice</h3><p>En la tabla siguiente se enumeran los parámetros que pueden configurarse en <code translate="no">search_params.params</code> al <a href="/docs/es/ivf-pq.md#Search-on-index">buscar en el índice</a>.</p>
 <table>
-<thead>
-<tr><th></th><th><strong>Parámetro</strong></th><th><strong>Descripción</strong></th><th><strong>Rango de valores</strong></th><th><strong>Sugerencia de ajuste</strong></th></tr>
-</thead>
-<tbody>
-<tr><td>IVF</td><td><code translate="no">nprobe</code></td><td>El número de clusters para buscar candidatos.</td><td><strong>Tipo</strong> Entero<br><strong>Rango</strong>: [1, <em>nlist</em>]<br><strong>Valor por defecto</strong>: <code translate="no">8</code></td><td>Los valores más altos permiten buscar en más grupos, lo que mejora la recuperación al ampliar el alcance de la búsqueda, pero a costa de aumentar la latencia de la consulta.<br>Establezca <code translate="no">nprobe</code> proporcionalmente a <code translate="no">nlist</code> para equilibrar velocidad y precisión.<br>En la mayoría de los casos, se recomienda establecer un valor dentro de este rango: [1, nlist].</td></tr>
-</tbody>
+   <tr>
+     <th></th>
+     <th><p>Parámetro</p></th>
+     <th><p>Descripción</p></th>
+     <th><p>Rango de valores</p></th>
+     <th><p>Sugerencia de ajuste</p></th>
+   </tr>
+   <tr>
+     <td><p>IVF</p></td>
+     <td><p><code translate="no">nprobe</code></p></td>
+     <td><p>El número de clusters para buscar candidatos.</p></td>
+     <td><p><strong>Tipo</strong>: Entero <strong>Rango</strong>: [1, <em>nlist</em>]</p><p><strong>Valor por defecto</strong>: <code translate="no">8</code></p></td>
+     <td><p>Los valores más altos permiten buscar en más conglomerados, lo que mejora la recuperación al ampliar el alcance de la búsqueda, pero a costa de aumentar la latencia de la consulta. Establezca <code translate="no">nprobe</code> proporcionalmente a <code translate="no">nlist</code> para equilibrar velocidad y precisión.</p><p>En la mayoría de los casos, se recomienda establecer un valor dentro de este rango: [1, nlist].</p></td>
+   </tr>
 </table>

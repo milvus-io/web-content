@@ -1,8 +1,13 @@
 ---
 id: flat.md
-order: 0
-summary: Artikel ini akan memperkenalkan indeks FLAT di Milvus.
 title: FLAT
+summary: >-
+  Indeks FLAT adalah salah satu metode yang paling sederhana dan mudah untuk
+  mengindeks dan mencari vektor floating-point. Metode ini mengandalkan
+  pendekatan brute-force, di mana setiap vektor kueri secara langsung
+  dibandingkan dengan setiap vektor dalam kumpulan data, tanpa prapemrosesan
+  lanjutan atau penataan data. Pendekatan ini menjamin akurasi, menawarkan
+  recall 100%, karena setiap kecocokan potensial dievaluasi.
 ---
 <h1 id="FLAT" class="common-anchor-header">FLAT<button data-href="#FLAT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +25,7 @@ title: FLAT
         ></path>
       </svg>
     </button></h1><p>Indeks <strong>FLAT</strong> adalah salah satu metode paling sederhana dan mudah untuk mengindeks dan mencari vektor floating-point. Metode ini mengandalkan pendekatan brute-force, di mana setiap vektor kueri secara langsung dibandingkan dengan setiap vektor dalam kumpulan data, tanpa prapemrosesan lanjutan atau penataan data. Pendekatan ini menjamin akurasi, menawarkan recall 100%, karena setiap kecocokan potensial dievaluasi.</p>
-<p>Namun, metode pencarian yang lengkap ini memiliki kekurangan. Indeks FLAT adalah opsi pengindeksan yang paling lambat dibandingkan dengan jenis indeks lainnya di Milvus, karena indeks ini melakukan pemindaian penuh terhadap set data untuk setiap kueri. Akibatnya, indeks ini tidak cocok untuk lingkungan dengan dataset yang sangat besar, di mana kinerja menjadi perhatian. Keuntungan utama dari indeks FLAT adalah kesederhanaan dan keandalannya, karena tidak memerlukan pembuatan indeks tambahan atau konfigurasi parameter indeks yang rumit.</p>
+<p>Namun, metode pencarian yang lengkap ini memiliki kekurangan. Indeks FLAT adalah opsi pengindeksan yang paling lambat, karena indeks ini melakukan pemindaian penuh dataset untuk setiap kueri. Akibatnya, indeks ini tidak cocok untuk lingkungan dengan kumpulan data yang sangat besar, di mana kinerja menjadi perhatian. Keuntungan utama dari indeks FLAT adalah kesederhanaan dan keandalannya, karena tidak memerlukan pelatihan atau konfigurasi parameter yang rumit.</p>
 <h2 id="Build-index" class="common-anchor-header">Membangun indeks<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,9 +57,9 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>Dalam konfigurasi ini:</p>
 <ul>
-<li><code translate="no">index_type</code>: Jenis indeks yang akan dibangun. Dalam contoh ini, tetapkan nilainya ke <code translate="no">FLAT</code>.</li>
-<li><code translate="no">metric_type</code>: Metode yang digunakan untuk menghitung jarak antara vektor. Nilai yang didukung termasuk <code translate="no">COSINE</code>, <code translate="no">L2</code>, dan <code translate="no">IP</code>. Untuk detailnya, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</li>
-<li><code translate="no">params</code>: Tidak ada parameter tambahan yang diperlukan untuk indeks FLAT.</li>
+<li><p><code translate="no">index_type</code>: Jenis indeks yang akan dibangun. Dalam contoh ini, tetapkan nilainya ke <code translate="no">FLAT</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: Metode yang digunakan untuk menghitung jarak antara vektor. Nilai yang didukung termasuk <code translate="no">COSINE</code>, <code translate="no">L2</code>, dan <code translate="no">IP</code>. Untuk detailnya, lihat <a href="/docs/id/metric.md">Jenis Metrik</a>.</p></li>
+<li><p><code translate="no">params</code>: Tidak ada parameter tambahan yang diperlukan untuk indeks FLAT.</p></li>
 </ul>
 <p>Setelah parameter indeks dikonfigurasi, Anda dapat membuat indeks dengan menggunakan metode <code translate="no">create_index()</code> secara langsung atau mengoper parameter indeks dalam metode <code translate="no">create_collection</code>. Untuk detailnya, lihat <a href="/docs/id/create-collection.md">Membuat Koleksi</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Mencari di indeks<button data-href="#Search-on-index" class="anchor-icon" translate="no">
@@ -75,6 +80,7 @@ index_params.add_index(
     </button></h2><p>Setelah indeks dibuat dan entitas dimasukkan, Anda dapat melakukan pencarian kemiripan pada indeks.</p>
 <pre><code translate="no" class="language-python">res = MilvusClient.search(
     collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
     limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
     search_params={<span class="hljs-string">&quot;params&quot;</span>: {}}  <span class="hljs-comment"># No additional parameters required for FLAT</span>

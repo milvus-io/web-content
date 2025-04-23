@@ -1,10 +1,12 @@
 ---
 id: with-iterators.md
-order: 4
-summary: Milvus 提供搜索和查询迭代器，用于迭代大量实体的结果。
-title: 使用迭代器
+title: 搜索迭代器
+summary: >-
+  ANN Search 对单次查询可调用的实体数量有最大限制，因此仅使用基本 ANN Search 可能无法满足大规模检索的需求。对于 topK 超过
+  16,384 的 ANN Search 请求，建议考虑使用 SearchIterator。本节将介绍如何使用 SearchIterator
+  以及相关注意事项。
 ---
-<h1 id="Search-Iterator​" class="common-anchor-header">搜索迭代器<button data-href="#Search-Iterator​" class="anchor-icon" translate="no">
+<h1 id="Search-Iterator" class="common-anchor-header">搜索迭代器<button data-href="#Search-Iterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +22,7 @@ title: 使用迭代器
         ></path>
       </svg>
     </button></h1><p>ANN Search 对单次查询可调用的实体数量有最大限制，因此仅使用基本 ANN Search 可能无法满足大规模检索的需求。对于 topK 超过 16,384 的 ANN Search 请求，建议考虑使用 SearchIterator。本节将介绍如何使用 SearchIterator 以及相关注意事项。</p>
-<h2 id="Overview​" class="common-anchor-header">概述<button data-href="#Overview​" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,13 +38,13 @@ title: 使用迭代器
         ></path>
       </svg>
     </button></h2><p>Search 请求返回搜索结果，而 SearchIterator 返回迭代器。您可以调用该迭代器的<strong>next()</strong>方法来获取搜索结果。</p>
-<p>具体来说，您可以如下使用 SearchIterator。</p>
+<p>具体来说，您可以如下使用 SearchIterator：</p>
 <ol>
 <li><p>创建一个 SearchIterator，并设置<strong>每次搜索请求返回的实体数</strong>和<strong>返回的实体总数</strong>。</p></li>
 <li><p>在循环中调用 SearchIterator 的<strong>next()</strong>方法，以分页方式获取搜索结果。</p></li>
 <li><p>如果<strong>next()</strong>方法返回的结果为空，则调用迭代器的<strong>close()</strong>方法结束循环。</p></li>
 </ol>
-<h2 id="Create-SearchIterator​" class="common-anchor-header">创建搜索迭代器<button data-href="#Create-SearchIterator​" class="anchor-icon" translate="no">
+<h2 id="Create-SearchIterator" class="common-anchor-header">创建搜索迭代器<button data-href="#Create-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,59 +61,84 @@ title: 使用迭代器
       </svg>
     </button></h2><p>以下代码片段演示了如何创建一个 SearchIterator。</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus import connections, Collection​
-​
-connections.connect(​
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,​
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
-)​
-​
-<span class="hljs-meta"># create iterator​</span>
-query_vectors = [​
-    [<span class="hljs-meta">0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592</span>]]​
-​
-collection = Collection(<span class="hljs-string">&quot;iterator_collection&quot;</span>)​
-​
-iterator = collection.search_iterator(​
-    data=query_vectors,​
-    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,​
-    param={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">16</span>}},​
-    <span class="hljs-meta"># highlight-next-<span class="hljs-keyword">line</span>​</span>
-    batch_size=<span class="hljs-number">50</span>,​
-    output_fields=[<span class="hljs-string">&quot;color&quot;</span>],​
-    <span class="hljs-meta"># highlight-next-<span class="hljs-keyword">line</span>​</span>
-    limit=<span class="hljs-number">20000</span>​
-)​
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection
+
+connections.connect(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
+
+<span class="hljs-comment"># create iterator</span>
+query_vectors = [
+    [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]]
+
+collection = Collection(<span class="hljs-string">&quot;iterator_collection&quot;</span>)
+
+iterator = collection.search_iterator(
+    data=query_vectors,
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
+    param={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">16</span>}},
+    <span class="hljs-comment"># highlight-next-line</span>
+    batch_size=<span class="hljs-number">50</span>,
+    output_fields=[<span class="hljs-string">&quot;color&quot;</span>],
+    <span class="hljs-comment"># highlight-next-line</span>
+    limit=<span class="hljs-number">20000</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.orm.iterator.SearchIterator;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam.MetricType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build());
+
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3580376395471989f</span>, -<span class="hljs-number">0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, -<span class="hljs-number">0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>});
+<span class="hljs-type">SearchIterator</span> <span class="hljs-variable">searchIterator</span> <span class="hljs-operator">=</span> client.searchIterator(SearchIteratorReq.builder()
+        .collectionName(<span class="hljs-string">&quot;iterator_collection&quot;</span>)
+        .vectors(Collections.singletonList(queryVector))
+        .vectorFieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+        .batchSize(<span class="hljs-number">500L</span>)
+        .outputFields(Lists.newArrayList(<span class="hljs-string">&quot;color&quot;</span>))
+        .topK(<span class="hljs-number">20000</span>)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
+
+<span class="hljs-keyword">const</span> milvusClient = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>,
+  <span class="hljs-attr">token</span>: <span class="hljs-string">&#x27;root:Milvus&#x27;</span>,
+});
+
+<span class="hljs-keyword">const</span> queryVectors = [
+[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
+];
+<span class="hljs-keyword">const</span> collectionName = <span class="hljs-string">&#x27;iterator_collection&#x27;</span>;
+
+<span class="hljs-keyword">const</span> iterator = milvusClient.<span class="hljs-title function_">searchIterator</span>({
+    <span class="hljs-attr">collection_name</span>: collectionName,
+    <span class="hljs-attr">vectors</span>: queryVectors,
+    <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;vector&#x27;</span>,
+    <span class="hljs-attr">params</span>: { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;L2&#x27;</span>, <span class="hljs-attr">params</span>: { <span class="hljs-attr">nprobe</span>: <span class="hljs-number">16</span> } },
+    <span class="hljs-attr">batch_size</span>: <span class="hljs-number">50</span>,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;color&#x27;</span>],
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">20000</span>,
+});
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;​
-<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;​
-<span class="hljs-keyword">import</span> io.milvus.orm.iterator.SearchIterator;​
-<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam.MetricType;​
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;​
-​
-<span class="hljs-keyword">import</span> java.util.*;​
-​
-<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()​
-        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
-        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)​
-        .build());​
-​
-<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3580376395471989f</span>, -<span class="hljs-number">0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, -<span class="hljs-number">0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>});​
-<span class="hljs-type">SearchIterator</span> <span class="hljs-variable">searchIterator</span> <span class="hljs-operator">=</span> client.searchIterator(SearchIteratorReq.builder()​
-        .collectionName(<span class="hljs-string">&quot;iterator_collection&quot;</span>)​
-        .vectors(Collections.singletonList(queryVector))​
-        .vectorFieldName(<span class="hljs-string">&quot;vector&quot;</span>)​
-        .batchSize(<span class="hljs-number">500L</span>)​
-        .outputFields(Lists.newArrayList(<span class="hljs-string">&quot;color&quot;</span>))​
-        .topK(<span class="hljs-number">20000</span>)​
-        .metricType(IndexParam.MetricType.COSINE)​
-        .build());​
-
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上述示例中，我们将每次搜索返回的实体数<strong>（batch_size/</strong><strong>batchSize</strong>）设为 50，将返回的实体总数<strong>（topK</strong>）设为 20,000。</p>
-<h2 id="Use-SearchIterator​" class="common-anchor-header">使用 SearchIterator<button data-href="#Use-SearchIterator​" class="anchor-icon" translate="no">
+<p>在上述示例中，您将每次搜索返回的实体数<strong>（batch_size/</strong><strong>batchSize</strong>）设置为 50，将返回的实体总数<strong>（topK</strong>）设置为 20,000。</p>
+<h2 id="Use-SearchIterator" class="common-anchor-header">使用 SearchIterator<button data-href="#Use-SearchIterator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,34 +155,40 @@ iterator = collection.search_iterator(​
       </svg>
     </button></h2><p>SearchIterator 就绪后，您可以调用它的 next() 方法，以分页方式获取搜索结果。</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
-<pre><code translate="no" class="language-python">results = []​
-​
-<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:​
-    <span class="hljs-comment"># highlight-next-line​</span>
-    result = iterator.<span class="hljs-built_in">next</span>()​
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> result:​
-        <span class="hljs-comment"># highlight-next-line​</span>
-        iterator.close()​
-        <span class="hljs-keyword">break</span>​
-    ​
-    <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> result:​
-        results.append(hit.to_dict())​
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">results = []
 
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    <span class="hljs-comment"># highlight-next-line</span>
+    result = iterator.<span class="hljs-built_in">next</span>()
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> result:
+        <span class="hljs-comment"># highlight-next-line</span>
+        iterator.close()
+        <span class="hljs-keyword">break</span>
+    
+    <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> result:
+        results.append(hit.to_dict())
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.response.QueryResultsWrapper;​
-​
-while (<span class="hljs-literal">true</span>) {​
-    List&lt;QueryResultsWrapper.RowRecord&gt; res = searchIterator.next();​
-    <span class="hljs-keyword">if</span> (res.isEmpty()) {​
-        searchIterator.<span class="hljs-built_in">close</span>();​
-        <span class="hljs-keyword">break</span>;​
-    }​
-​
-    <span class="hljs-keyword">for</span> (QueryResultsWrapper.RowRecord record : res) {​
-        System.out.<span class="hljs-built_in">println</span>(record);​
-    }​
-}​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.response.QueryResultsWrapper;
 
+<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+    List&lt;QueryResultsWrapper.RowRecord&gt; res = searchIterator.next();
+    <span class="hljs-keyword">if</span> (res.isEmpty()) {
+        searchIterator.close();
+        <span class="hljs-keyword">break</span>;
+    }
+
+    <span class="hljs-keyword">for</span> (QueryResultsWrapper.RowRecord record : res) {
+        System.out.println(record);
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">for</span> <span class="hljs-title function_">await</span> (<span class="hljs-keyword">const</span> result <span class="hljs-keyword">of</span> iterator) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result);
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在上述代码示例中，您创建了一个无限循环，并在循环中调用<strong>next()</strong>方法将搜索结果存储到一个变量中，然后在<strong>next()</strong>没有返回任何结果时关闭迭代器。</p>

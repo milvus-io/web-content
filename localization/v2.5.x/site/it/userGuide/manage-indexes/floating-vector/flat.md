@@ -1,8 +1,13 @@
 ---
 id: flat.md
-order: 0
-summary: Questo articolo introduce l'indice FLAT in Milvus.
 title: FLAT
+summary: >-
+  L'indice FLAT è uno dei metodi più semplici e diretti per l'indicizzazione e
+  la ricerca di vettori in virgola mobile. Si basa su un approccio a forza
+  bruta, in cui ogni vettore interrogato viene confrontato direttamente con ogni
+  vettore del set di dati, senza alcuna preelaborazione o strutturazione
+  avanzata dei dati. Questo approccio garantisce l'accuratezza, offrendo un
+  richiamo del 100%, poiché ogni potenziale corrispondenza viene valutata.
 ---
 <h1 id="FLAT" class="common-anchor-header">FLAT<button data-href="#FLAT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +25,7 @@ title: FLAT
         ></path>
       </svg>
     </button></h1><p>L'indice <strong>FLAT</strong> è uno dei metodi più semplici e diretti per l'indicizzazione e la ricerca di vettori in virgola mobile. Si basa su un approccio a forza bruta, in cui ogni vettore interrogato viene confrontato direttamente con ogni vettore del set di dati, senza alcuna preelaborazione o strutturazione avanzata dei dati. Questo approccio garantisce l'accuratezza, offrendo un richiamo del 100%, poiché ogni potenziale corrispondenza viene valutata.</p>
-<p>Tuttavia, questo metodo di ricerca esaustivo comporta degli svantaggi. L'indice FLAT è l'opzione di indicizzazione più lenta rispetto ad altri tipi di indici in Milvus, poiché esegue una scansione completa del set di dati per ogni query. Di conseguenza, non è adatto ad ambienti con enormi insiemi di dati, dove le prestazioni sono un problema. Il vantaggio principale dell'indice FLAT è la sua semplicità e affidabilità, in quanto non richiede la costruzione di indici aggiuntivi o la configurazione di parametri complessi.</p>
+<p>Tuttavia, questo metodo di ricerca esaustivo comporta degli svantaggi. L'indice FLAT è l'opzione di indicizzazione più lenta, poiché esegue una scansione completa del set di dati per ogni query. Di conseguenza, non è adatto ad ambienti con enormi insiemi di dati, dove le prestazioni sono un problema. Il vantaggio principale dell'indice FLAT è la sua semplicità e affidabilità, in quanto non richiede addestramento o complesse configurazioni di parametri.</p>
 <h2 id="Build-index" class="common-anchor-header">Creazione dell'indice<button data-href="#Build-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,9 +57,9 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>In questa configurazione:</p>
 <ul>
-<li><code translate="no">index_type</code>: Il tipo di indice da costruire. In questo esempio, impostare il valore su <code translate="no">FLAT</code>.</li>
-<li><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per maggiori dettagli, consultare <a href="/docs/it/metric.md">Tipi di metriche</a>.</li>
-<li><code translate="no">params</code>: Per l'indice FLAT non sono necessari parametri aggiuntivi.</li>
+<li><p><code translate="no">index_type</code>: Il tipo di indice da costruire. In questo esempio, impostare il valore su <code translate="no">FLAT</code>.</p></li>
+<li><p><code translate="no">metric_type</code>: Il metodo utilizzato per calcolare la distanza tra i vettori. I valori supportati sono <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code>. Per maggiori dettagli, consultare <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
+<li><p><code translate="no">params</code>: Per l'indice FLAT non sono necessari parametri aggiuntivi.</p></li>
 </ul>
 <p>Una volta configurati i parametri dell'indice, è possibile creare l'indice utilizzando direttamente il metodo <code translate="no">create_index()</code> o passando i parametri dell'indice nel metodo <code translate="no">create_collection</code>. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/create-collection.md">Creazione di una raccolta</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Ricerca nell'indice<button data-href="#Search-on-index" class="anchor-icon" translate="no">
@@ -75,6 +80,7 @@ index_params.add_index(
     </button></h2><p>Una volta creato l'indice e inserite le entità, è possibile eseguire ricerche di similarità sull'indice.</p>
 <pre><code translate="no" class="language-python">res = MilvusClient.search(
     collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
     limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
     search_params={<span class="hljs-string">&quot;params&quot;</span>: {}}  <span class="hljs-comment"># No additional parameters required for FLAT</span>

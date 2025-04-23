@@ -21,11 +21,11 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>資訊檢索 (IR) 系統也稱為搜尋引擎，對於各種 AI 應用程式來說是不可或缺的，例如檢索增生 (RAG)、圖像搜尋和產品推薦。開發 IR 系統的第一步是設計資料模型，這包括分析業務需求、決定如何組織資訊，以及為資料編制索引，使其在語意上可被搜尋。</p>
-<p>Milvus 支援透過集合模式來定義資料模型。集合可組織文本和圖像等非結構化資料，以及它們的向量表示，包括用於語義搜索的各種精確度的密集和稀疏向量。此外，Milvus 還支援儲存和過濾稱為「標量」的非向量資料類型。Scalar 類型包括 BOOL、INT8/16/32/64、FLOAT/DOUBLE、VARCHAR、JSON 及 Array。</p>
+<p>Milvus 支援透過集合模式來定義資料模型。集合可組織文字和影像等非結構化資料，以及它們的向量表示，包括用於語意搜尋的各種精確度的密集向量和稀疏向量。此外，Milvus 還支援儲存和過濾稱為「標量」的非向量資料類型。Scalar 類型包括 BOOL、INT8/16/32/64、FLOAT/DOUBLE、VARCHAR、JSON 和 Array。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-hands-on.png" alt="schema-hands-on" class="doc-image" id="schema-hands-on" />
-   </span> <span class="img-wrapper"> <span>模式-實作</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-hands-on.png" alt="Schema Hands On" class="doc-image" id="schema-hands-on" />
+   </span> <span class="img-wrapper"> <span>模式實作</span> </span></p>
 <p>搜尋系統的資料模型設計包括分析業務需求，並將資訊抽象為模式表達的資料模型。舉例來說，若要搜尋一段文字，就必須透過「嵌入」（embedding）將字面上的字串轉換成向量，使向量搜尋成為「索引」。除了這個基本要求之外，可能還需要儲存其他屬性，例如出版時間戳和作者。這些元資料允許透過篩選來精細語意搜尋，僅傳回在特定日期之後或由特定作者出版的文字。它們也可能需要與主要文字一起檢索，以便在應用程式中呈現搜尋結果。為了組織這些文字片段，應該為每個片段指定一個唯一的識別碼，以整數或字串表示。這些元素對於達成複雜的搜尋邏輯非常重要。</p>
 <p>設計良好的模式非常重要，因為它可以抽象出資料模型，並決定是否可以透過搜尋來達成業務目標。此外，由於插入到資料集中的每一行資料都需要遵循模式，因此對維持資料一致性和長期品質大有幫助。從技術角度來看，定義良好的模式可帶來組織良好的列資料儲存和更乾淨的索引結構，進而提升搜尋效能。</p>
 <h2 id="An-Example-News-Search" class="common-anchor-header">舉例說明：新聞搜尋<button data-href="#An-Example-News-Search" class="anchor-icon" translate="no">
@@ -134,6 +134,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;summary_sparse_vecto
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
+<span class="hljs-type">String</span> <span class="hljs-variable">collectionName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;my_collection&quot;</span>;
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
 
 schema.addField(AddFieldReq.builder()
@@ -213,7 +214,74 @@ schema.addField(AddFieldReq.builder()
   { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;summary_sparse_vector&quot;</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;SPARSE_FLOAT_VECTOR&quot;</span>, <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;summary sparse vector&quot;</span> },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+collectionName := <span class="hljs-string">&quot;my_collection&quot;</span>
+schema := entity.NewSchema()
+schema.WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;article_id&quot;</span>).
+    WithDataType(entity.FieldTypeInt64).
+    WithIsPrimaryKey(<span class="hljs-literal">true</span>).
+    WithDescription(<span class="hljs-string">&quot;article id&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;title&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">200</span>).
+    WithDescription(<span class="hljs-string">&quot;article title&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;author_info&quot;</span>).
+    WithDataType(entity.FieldTypeJSON).
+    WithDescription(<span class="hljs-string">&quot;author information&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;publish_ts&quot;</span>).
+    WithDataType(entity.FieldTypeInt32).
+    WithDescription(<span class="hljs-string">&quot;publish timestamp&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;image_url&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">500</span>).
+    WithDescription(<span class="hljs-string">&quot;image url&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;image_vector&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(<span class="hljs-number">768</span>).
+    WithDescription(<span class="hljs-string">&quot;image vector&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;summary&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">1000</span>).
+    WithDescription(<span class="hljs-string">&quot;article summary&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;summary_dense_vector&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(<span class="hljs-number">768</span>).
+    WithDescription(<span class="hljs-string">&quot;summary dense vector&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>).
+    WithDataType(entity.FieldTypeSparseVector).
+    WithDescription(<span class="hljs-string">&quot;summary sparse vector&quot;</span>),
+)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <span class="hljs-built_in">export</span> idField=<span class="hljs-string">&#x27;{
@@ -380,34 +448,14 @@ indexes.add(IndexParam.builder()
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
-
-<span class="hljs-keyword">import</span> java.util.ArrayList;
-<span class="hljs-keyword">import</span> java.util.List;
-
-List&lt;IndexParam&gt; indexes = <span class="hljs-built_in">new</span> ArrayList&lt;&gt;();
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;image_vector&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;summary_dense_vector&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>)
-        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;publish_ts&quot;</span>)
-        .indexType(IndexParam.IndexType.INVERTED)
-        .build());
+<pre><code translate="no" class="language-go">indexOption1 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;image_vector&quot;</span>,
+    index.NewAutoIndex(index.MetricType(entity.IP)))
+indexOption2 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;summary_dense_vector&quot;</span>,
+    index.NewAutoIndex(index.MetricType(entity.IP)))
+indexOption3 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;summary_sparse_vector&quot;</span>,
+    index.NewSparseInvertedIndex(index.MetricType(entity.IP), <span class="hljs-number">0.2</span>))
+indexOption4 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;publish_ts&quot;</span>,
+    index.NewInvertedIndex())
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 indexParams=<span class="hljs-string">&#x27;[
@@ -441,7 +489,7 @@ indexParams=<span class="hljs-string">&#x27;[
 ]&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>一旦設定並套用索引參數，Milvus 就能優化處理向量和標量資料的複雜查詢。此索引可增強文集內相似性搜尋的效能與精確度，讓您能有效率地檢索以影像向量與摘要向量為基礎的文章。透過利用<code translate="no">AUTOINDEX</code> 來處理密集向量、<code translate="no">SPARSE_INVERTED_INDEX</code> 來處理稀疏向量，以及<code translate="no">INVERTED_INDEX</code> 來處理標量值，Milvus 可以快速識別並傳回最相關的結果，大幅改善整體使用者體驗以及資料擷取流程的效能。</p>
+<p>一旦設定並套用索引參數，Milvus 就能優化處理向量和標量資料的複雜查詢。此索引可增強文集內相似性搜尋的效能與精確度，讓您能有效率地檢索以影像向量與摘要向量為基礎的文章。透過利用<code translate="no">AUTOINDEX</code> 來處理密集向量、<code translate="no">SPARSE_INVERTED_INDEX</code> 來處理稀疏向量，以及<code translate="no">INVERTED_INDEX</code> 來處理標量值，Milvus 可以快速識別並傳回最相關的結果，大幅改善資料檢索流程的整體使用者體驗與效能。</p>
 <p>索引和度量有許多種類。關於它們的更多資訊，您可以參考<a href="/docs/zh-hant/overview.md#Index-types">Milvus 索引類型</a>和<a href="/docs/zh-hant/glossary.md#Metric-type">Milvus 度量類型</a>。</p>
 <h3 id="Create-Collection" class="common-anchor-header">建立資料庫</h3><p>定義模式和索引後，我們使用這些參數建立一個「集合」。對 Milvus 來說，Collection 就像關係資料庫的資料表。</p>
 <div class="multipleCode">
@@ -465,7 +513,13 @@ client.createCollection(requestCreate);
     <span class="hljs-attr">index_params</span>: index_params,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption(collectionName, schema).
+        WithIndexOptions(indexOption1, indexOption2, indexOption3, indexOption4))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl --request POST \
@@ -473,7 +527,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --data <span class="hljs-string">&quot;{
-  \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
+  \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
@@ -497,7 +551,12 @@ System.out.println(descResp);
 });
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(collection_desc);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">desc, err := client.DescribeCollection(ctx, milvusclient.NewDescribeCollectionOption(collectionName))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(desc.Schema)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl --request POST \
@@ -524,5 +583,5 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><h3 id="Loading-Index" class="common-anchor-header">載入索引</h3><p>在 Milvus 中建立集合時，您可以選擇立即載入索引，或是延遲到批量擷取某些資料之後。一般而言，您不需要明確選擇，因為上面的範例顯示，索引會在建立資料集後，自動為任何擷取的資料建立。這樣就可以立即搜尋擷取的資料。但是，如果您在建立資料集後有大量的大量插入，並且在某一點之前不需要搜尋任何資料，您可以在建立資料集時省略 index_params 來延遲索引建立，並且在擷取所有資料後，明確呼叫 load 來建立索引。此方法對於在大型集合上建立索引更有效率，但在呼叫 load() 之前無法進行任何搜尋。</p>
-<h3 id="How-to-Define-Data-Model-For-Multi-tenancy" class="common-anchor-header">如何為多租戶定義資料模型</h3><p>多租戶的概念常用於單一軟體應用程式或服務需要服務多個獨立使用者或組織的情況，每個使用者或組織都有自己獨立的環境。這種情況常見於雲端運算、SaaS (軟體即服務) 應用程式和資料庫系統。舉例來說，雲端儲存服務可能會利用多租用權，讓不同的公司在共用相同底層基礎架構的同時，分別儲存和管理其資料。此方法可最大化資源利用率和效率，同時確保每個租戶的資料安全性和隱私。</p>
-<p>區分租戶的最簡單方法就是將他們的資料和資源彼此隔離。每個租戶可以獨佔存取特定資源，或與其他租戶共享資源，以管理 Milvus 實體，例如資料庫、集合和分割。有特定的方法與這些實體對齊以實現多租戶。您可以參考<a href="/docs/zh-hant/multi_tenancy.md#Multi-tenancy-strategies">Milvus 多重租賃頁面以</a>取得更多資訊。</p>
+<h3 id="How-to-Define-Data-Model-For-Multi-tenancy" class="common-anchor-header">如何為多租戶定義資料模型</h3><p>多租戶的概念常用於單一軟體應用程式或服務需要服務多個獨立使用者或組織的情況，每個使用者或組織都有自己獨立的環境。這種情況常見於雲端運算、SaaS (軟體即服務) 應用程式和資料庫系統。舉例來說，雲端儲存服務可能會利用多租用權，讓不同的公司在共用相同底層基礎架構的同時，分別儲存和管理他們的資料。此方法可最大化資源利用率和效率，同時確保每個租戶的資料安全性和隱私。</p>
+<p>區分租戶的最簡單方法就是將他們的資料和資源彼此隔離。每個租戶可以獨佔存取特定資源，或與其他租戶共享資源，以管理 Milvus 實體，例如資料庫、集合和分割。有特定的方法與這些實體對齊以實現多租戶。您可以參考<a href="/docs/zh-hant/multi_tenancy.md#Multi-tenancy-strategies">Milvus 多重租用頁面</a>，以獲得更多資訊。</p>

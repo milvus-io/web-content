@@ -26,12 +26,12 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Information Retrieval (IR)-Systeme, auch bekannt als Suchmaschinen, sind für verschiedene KI-Anwendungen wie Retrieval-augmented Generation (RAG), Bildsuche und Produktempfehlungen unerlässlich. Der erste Schritt bei der Entwicklung eines IR-Systems ist das Entwerfen des Datenmodells. Dazu gehört die Analyse der Geschäftsanforderungen, die Festlegung, wie Informationen organisiert werden sollen, und die Indizierung der Daten, um sie semantisch durchsuchbar zu machen.</p>
-<p>Milvus unterstützt die Definition des Datenmodells durch ein Sammlungsschema. Eine Sammlung organisiert unstrukturierte Daten wie Text und Bilder zusammen mit ihren Vektordarstellungen, einschließlich dichter und spärlicher Vektoren in unterschiedlicher Präzision, die für die semantische Suche verwendet werden. Zusätzlich unterstützt Milvus die Speicherung und Filterung von Nicht-Vektor-Datentypen, die als "Skalar" bezeichnet werden. Zu den Skalar-Typen gehören BOOL, INT8/16/32/64, FLOAT/DOUBLE, VARCHAR, JSON und Array.</p>
+<p>Milvus unterstützt die Definition des Datenmodells durch ein Sammlungsschema. Eine Sammlung organisiert unstrukturierte Daten wie Text und Bilder zusammen mit ihren Vektordarstellungen, einschließlich dichter und spärlicher Vektoren in unterschiedlicher Präzision, die für die semantische Suche verwendet werden. Zusätzlich unterstützt Milvus die Speicherung und Filterung von Nicht-Vektor-Datentypen, die als "Skalar" bezeichnet werden. Zu den Skalartypen gehören BOOL, INT8/16/32/64, FLOAT/DOUBLE, VARCHAR, JSON und Array.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-hands-on.png" alt="schema-hands-on" class="doc-image" id="schema-hands-on" />
-   </span> <span class="img-wrapper"> <span>schema-anwendung</span> </span></p>
-<p>Der Entwurf eines Datenmodells für ein Suchsystem beinhaltet die Analyse der Geschäftsanforderungen und die Abstraktion der Informationen in ein schemaexprimiertes Datenmodell. Um beispielsweise einen Text zu durchsuchen, muss er "indiziert" werden, indem die Zeichenkette durch "Einbettung" in einen Vektor umgewandelt wird, was eine Vektorsuche ermöglicht. Über diese Grundvoraussetzung hinaus kann es erforderlich sein, weitere Eigenschaften wie den Zeitstempel der Veröffentlichung und den Autor zu speichern. Mit diesen Metadaten kann die semantische Suche durch Filterung verfeinert werden, so dass nur Texte gefunden werden, die nach einem bestimmten Datum oder von einem bestimmten Autor veröffentlicht wurden. Möglicherweise müssen sie auch zusammen mit dem Haupttext abgerufen werden, damit das Suchergebnis in der Anwendung angezeigt werden kann. Um diese Textteile zu organisieren, sollte jedem ein eindeutiger Bezeichner zugewiesen werden, ausgedrückt als Ganzzahl oder Zeichenkette. Diese Elemente sind für eine ausgefeilte Suchlogik unerlässlich.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-hands-on.png" alt="Schema Hands On" class="doc-image" id="schema-hands-on" />
+   </span> <span class="img-wrapper"> <span>Schema Hands On</span> </span></p>
+<p>Der Entwurf eines Datenmodells für ein Suchsystem beinhaltet die Analyse der Geschäftsanforderungen und die Abstraktion der Informationen in ein schemaexprimiertes Datenmodell. Um beispielsweise einen Text zu durchsuchen, muss er "indiziert" werden, indem die Zeichenkette durch "Einbettung" in einen Vektor umgewandelt wird, was die Vektorsuche ermöglicht. Über diese Grundvoraussetzung hinaus kann es erforderlich sein, weitere Eigenschaften wie den Zeitstempel der Veröffentlichung und den Autor zu speichern. Mit diesen Metadaten kann die semantische Suche durch Filterung verfeinert werden, so dass nur Texte gefunden werden, die nach einem bestimmten Datum oder von einem bestimmten Autor veröffentlicht wurden. Möglicherweise müssen sie auch zusammen mit dem Haupttext abgerufen werden, damit das Suchergebnis in der Anwendung angezeigt werden kann. Um diese Textteile zu organisieren, sollte jedem ein eindeutiger Bezeichner zugewiesen werden, ausgedrückt als Ganzzahl oder Zeichenkette. Diese Elemente sind für eine ausgefeilte Suchlogik unerlässlich.</p>
 <p>Ein gut durchdachtes Schema ist wichtig, da es das Datenmodell abstrahiert und entscheidet, ob die Geschäftsziele durch die Suche erreicht werden können. Da außerdem jede in die Sammlung eingefügte Datenzeile dem Schema entsprechen muss, trägt es wesentlich zur Wahrung der Datenkonsistenz und langfristigen Qualität bei. Aus technischer Sicht führt ein gut definiertes Schema zu einer gut organisierten Speicherung von Spaltendaten und einer sauberen Indexstruktur, was die Suchleistung steigern kann.</p>
 <h2 id="An-Example-News-Search" class="common-anchor-header">Ein Beispiel: Nachrichtensuche<button data-href="#An-Example-News-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,10 +52,10 @@ summary: >-
 <ul>
 <li><p>Um Bilder über Text zu suchen, können wir Bilder über ein multimodales Einbettungsmodell in Vektoren einbetten, die Text- und Bilddaten im selben latenten Raum abbilden können.</p></li>
 <li><p>Der zusammenfassende Text eines Artikels wird über ein Text-Einbettungsmodell in Vektoren eingebettet.</p></li>
-<li><p>Um nach dem Veröffentlichungszeitpunkt zu filtern, werden die Daten als skalares Feld gespeichert, und für eine effiziente Filterung ist ein Index für das skalare Feld erforderlich. Andere, komplexere Datenstrukturen wie JSON können in einem Skalarfeld gespeichert werden, und eine gefilterte Suche wird nach deren Inhalt durchgeführt (die Indizierung von JSON ist ein zukünftiges Feature).</p></li>
+<li><p>Um nach dem Veröffentlichungszeitpunkt zu filtern, werden die Daten als skalares Feld gespeichert, und für eine effiziente Filterung ist ein Index für das skalare Feld erforderlich. Andere, komplexere Datenstrukturen wie JSON können in einem Skalarfeld gespeichert werden, und eine gefilterte Suche wird nach ihrem Inhalt durchgeführt (die Indizierung von JSON ist eine zukünftige Funktion).</p></li>
 <li><p>Um die Bytes der Bildminiaturen abzurufen und auf der Suchergebnisseite darzustellen, wird auch die Bildurl gespeichert. Ähnliches gilt für den Zusammenfassungstext und den Titel. (Alternativ könnten wir die Rohdaten der Text- und Bilddateien als skalare Felder speichern, falls erforderlich).</p></li>
-<li><p>Zur Verbesserung der Suchergebnisse für den Zusammenfassungstext entwickeln wir einen hybriden Suchansatz. Für einen Suchpfad verwenden wir ein reguläres Einbettungsmodell, um einen dichten Vektor aus dem Text zu generieren, wie z. B. <code translate="no">text-embedding-3-large</code> von OpenAI oder das Open-Source-Modell <code translate="no">bge-large-en-v1.5</code>. Diese Modelle sind gut geeignet, um die Gesamtsemantik des Textes darzustellen. Der andere Weg ist die Verwendung von spärlichen Einbettungsmodellen wie BM25 oder SPLADE, um einen spärlichen Vektor zu generieren, der der Volltextsuche ähnelt und gut geeignet ist, die Details und einzelnen Konzepte im Text zu erfassen. Milvus unterstützt dank seiner Multi-Vektor-Funktion die Verwendung beider in derselben Datensammlung. Die Suche in mehreren Vektoren kann in einer einzigen <code translate="no">hybrid_search()</code> Operation durchgeführt werden.</p></li>
-<li><p>Schließlich benötigen wir auch ein ID-Feld zur Identifizierung jeder einzelnen Nachrichtenseite, die in der Milvus-Terminologie formell als "Entität" bezeichnet wird. Dieses Feld wird als Primärschlüssel (oder kurz "pk") verwendet.</p></li>
+<li><p>Zur Verbesserung der Suchergebnisse für den Zusammenfassungstext entwickeln wir einen hybriden Suchansatz. Für einen Suchpfad verwenden wir ein reguläres Einbettungsmodell, um einen dichten Vektor aus dem Text zu generieren, wie z. B. das Modell von OpenAI <code translate="no">text-embedding-3-large</code> oder das Open-Source-Modell <code translate="no">bge-large-en-v1.5</code>. Diese Modelle sind gut geeignet, um die Gesamtsemantik des Textes darzustellen. Der andere Weg ist die Verwendung von spärlichen Einbettungsmodellen wie BM25 oder SPLADE, um einen spärlichen Vektor zu generieren, der der Volltextsuche ähnelt und gut geeignet ist, die Details und einzelnen Konzepte im Text zu erfassen. Milvus unterstützt dank seiner Multi-Vektor-Funktion die Verwendung beider in derselben Datensammlung. Die Suche in mehreren Vektoren kann in einer einzigen <code translate="no">hybrid_search()</code> Operation durchgeführt werden.</p></li>
+<li><p>Schließlich benötigen wir auch ein ID-Feld zur Identifizierung jeder einzelnen Nachrichtenseite, in der Milvus-Terminologie formell als "Entität" bezeichnet. Dieses Feld wird als Primärschlüssel (oder kurz "pk") verwendet.</p></li>
 </ul>
 <table>
    <tr>
@@ -139,6 +139,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;summary_sparse_vecto
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
+<span class="hljs-type">String</span> <span class="hljs-variable">collectionName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;my_collection&quot;</span>;
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
 
 schema.addField(AddFieldReq.builder()
@@ -218,7 +219,74 @@ schema.addField(AddFieldReq.builder()
   { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;summary_sparse_vector&quot;</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;SPARSE_FLOAT_VECTOR&quot;</span>, <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;summary sparse vector&quot;</span> },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+collectionName := <span class="hljs-string">&quot;my_collection&quot;</span>
+schema := entity.NewSchema()
+schema.WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;article_id&quot;</span>).
+    WithDataType(entity.FieldTypeInt64).
+    WithIsPrimaryKey(<span class="hljs-literal">true</span>).
+    WithDescription(<span class="hljs-string">&quot;article id&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;title&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">200</span>).
+    WithDescription(<span class="hljs-string">&quot;article title&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;author_info&quot;</span>).
+    WithDataType(entity.FieldTypeJSON).
+    WithDescription(<span class="hljs-string">&quot;author information&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;publish_ts&quot;</span>).
+    WithDataType(entity.FieldTypeInt32).
+    WithDescription(<span class="hljs-string">&quot;publish timestamp&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;image_url&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">500</span>).
+    WithDescription(<span class="hljs-string">&quot;image url&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;image_vector&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(<span class="hljs-number">768</span>).
+    WithDescription(<span class="hljs-string">&quot;image vector&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;summary&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">1000</span>).
+    WithDescription(<span class="hljs-string">&quot;article summary&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;summary_dense_vector&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(<span class="hljs-number">768</span>).
+    WithDescription(<span class="hljs-string">&quot;summary dense vector&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>).
+    WithDataType(entity.FieldTypeSparseVector).
+    WithDescription(<span class="hljs-string">&quot;summary sparse vector&quot;</span>),
+)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <span class="hljs-built_in">export</span> idField=<span class="hljs-string">&#x27;{
@@ -308,7 +376,7 @@ schema.addField(AddFieldReq.builder()
 </ul>
 <p>Was <code translate="no">auto_id</code> in <code translate="no">MilvusClient.create_schema</code> betrifft, so ist AutoID ein Attribut des Primärfeldes, das bestimmt, ob die automatische Erhöhung für das Primärfeld aktiviert werden soll.  Da wir das Feld<code translate="no">article_id</code> als Primärschlüssel festlegen und die Artikel-ID manuell hinzufügen wollen, setzen wir <code translate="no">auto_id</code> auf False, um diese Funktion zu deaktivieren.</p>
 <p>Nachdem wir alle Felder zum Schemaobjekt hinzugefügt haben, stimmt unser Schemaobjekt mit den Einträgen in der obigen Tabelle überein.</p>
-<h3 id="Define-Index" class="common-anchor-header">Index definieren</h3><p>Nach der Definition des Schemas mit verschiedenen Feldern, einschließlich Metadaten und Vektorfeldern für Bild- und Zusammenfassungsdaten, besteht der nächste Schritt in der Vorbereitung der Indexparameter. Die Indexierung ist entscheidend für die Optimierung der Suche und des Abrufs von Vektoren und gewährleistet eine effiziente Abfrageleistung. Im folgenden Abschnitt werden wir die Indexparameter für die angegebenen Vektor- und Skalarfelder in der Sammlung definieren.</p>
+<h3 id="Define-Index" class="common-anchor-header">Definieren des Index</h3><p>Nach der Definition des Schemas mit verschiedenen Feldern, einschließlich Metadaten und Vektorfeldern für Bild- und Zusammenfassungsdaten, besteht der nächste Schritt in der Vorbereitung der Indexparameter. Die Indexierung ist entscheidend für die Optimierung der Suche und des Abrufs von Vektoren und gewährleistet eine effiziente Abfrageleistung. Im folgenden Abschnitt werden wir die Indexparameter für die angegebenen Vektor- und Skalarfelder in der Sammlung definieren.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -385,34 +453,14 @@ indexes.add(IndexParam.builder()
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
-
-<span class="hljs-keyword">import</span> java.util.ArrayList;
-<span class="hljs-keyword">import</span> java.util.List;
-
-List&lt;IndexParam&gt; indexes = <span class="hljs-built_in">new</span> ArrayList&lt;&gt;();
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;image_vector&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;summary_dense_vector&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>)
-        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;publish_ts&quot;</span>)
-        .indexType(IndexParam.IndexType.INVERTED)
-        .build());
+<pre><code translate="no" class="language-go">indexOption1 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;image_vector&quot;</span>,
+    index.NewAutoIndex(index.MetricType(entity.IP)))
+indexOption2 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;summary_dense_vector&quot;</span>,
+    index.NewAutoIndex(index.MetricType(entity.IP)))
+indexOption3 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;summary_sparse_vector&quot;</span>,
+    index.NewSparseInvertedIndex(index.MetricType(entity.IP), <span class="hljs-number">0.2</span>))
+indexOption4 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;publish_ts&quot;</span>,
+    index.NewInvertedIndex())
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 indexParams=<span class="hljs-string">&#x27;[
@@ -446,7 +494,7 @@ indexParams=<span class="hljs-string">&#x27;[
 ]&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Sobald die Indexparameter eingerichtet und angewendet wurden, ist Milvus für die Bearbeitung komplexer Abfragen auf Vektor- und Skalardaten optimiert. Diese Indizierung verbessert die Leistung und Genauigkeit von Ähnlichkeitssuchen innerhalb der Sammlung und ermöglicht ein effizientes Abrufen von Artikeln auf der Grundlage von Bildvektoren und zusammenfassenden Vektoren. Durch die Nutzung von <code translate="no">AUTOINDEX</code> für dichte Vektoren, <code translate="no">SPARSE_INVERTED_INDEX</code> für spärliche Vektoren und <code translate="no">INVERTED_INDEX</code> für Skalare kann Milvus schnell die relevantesten Ergebnisse identifizieren und zurückgeben, was die allgemeine Benutzererfahrung und die Effektivität des Datenabrufs erheblich verbessert.</p>
+<p>Sobald die Indexparameter eingerichtet und angewendet wurden, ist Milvus für die Bearbeitung komplexer Abfragen auf Vektor- und Skalardaten optimiert. Diese Indexierung verbessert die Leistung und Genauigkeit von Ähnlichkeitssuchen innerhalb der Sammlung und ermöglicht ein effizientes Abrufen von Artikeln auf der Grundlage von Bildvektoren und zusammenfassenden Vektoren. Durch die Nutzung von <code translate="no">AUTOINDEX</code> für dichte Vektoren, <code translate="no">SPARSE_INVERTED_INDEX</code> für spärliche Vektoren und <code translate="no">INVERTED_INDEX</code> für Skalare kann Milvus schnell die relevantesten Ergebnisse identifizieren und zurückgeben, was die allgemeine Benutzererfahrung und die Effektivität des Datenabrufs erheblich verbessert.</p>
 <p>Es gibt viele Arten von Indizes und Metriken. Weitere Informationen dazu finden Sie unter <a href="/docs/de/overview.md#Index-types">Milvus Index-Typ</a> und <a href="/docs/de/glossary.md#Metric-type">Milvus Metrik-Typ</a>.</p>
 <h3 id="Create-Collection" class="common-anchor-header">Sammlung erstellen</h3><p>Wenn das Schema und die Indizes definiert sind, erstellen wir eine "Sammlung" mit diesen Parametern. Eine Sammlung ist für Milvus wie eine Tabelle in einer relationalen DB.</p>
 <div class="multipleCode">
@@ -470,7 +518,13 @@ client.createCollection(requestCreate);
     <span class="hljs-attr">index_params</span>: index_params,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption(collectionName, schema).
+        WithIndexOptions(indexOption1, indexOption2, indexOption3, indexOption4))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl --request POST \
@@ -478,7 +532,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --data <span class="hljs-string">&quot;{
-  \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
+  \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
@@ -502,7 +556,12 @@ System.out.println(descResp);
 });
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(collection_desc);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">desc, err := client.DescribeCollection(ctx, milvusclient.NewDescribeCollectionOption(collectionName))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(desc.Schema)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl --request POST \

@@ -80,7 +80,6 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
 
 schema := entity.NewSchema()
-log.Println(schema)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
     &quot;fields&quot;: []
@@ -134,9 +133,7 @@ schema.addField(AddFieldReq.builder()
     <span class="hljs-comment">// highlight-end</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_id&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_id&quot;</span>).
     WithDataType(entity.FieldTypeInt64).
     <span class="hljs-comment">// highlight-start</span>
     WithIsPrimaryKey(<span class="hljs-literal">true</span>).
@@ -199,9 +196,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_i
     <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
     WithDataType(entity.FieldTypeFloatVector).
     <span class="hljs-comment">// highlight-next-line</span>
     WithDim(<span class="hljs-number">5</span>),
@@ -250,7 +245,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
         ></path>
       </svg>
     </button></h2><p>Dans des cas courants, vous pouvez utiliser des champs scalaires pour stocker les métadonnées des intégrations vectorielles stockées dans Milvus et effectuer des recherches ANN avec filtrage des métadonnées pour améliorer l'exactitude des résultats de la recherche. Zilliz Cloud prend en charge plusieurs types de champs scalaires, notamment <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, <strong>Float</strong>, <strong>Double</strong>, <strong>Array</strong> et <strong>JSON</strong>.</p>
-<h3 id="Add-String-Fields" class="common-anchor-header">Ajouter des champs de type chaîne</h3><p>Dans Milvus, vous pouvez utiliser des champs VarChar pour stocker des chaînes de caractères. Pour plus d'informations sur le champ VarChar, voir <a href="/docs/fr/string.md">Champ de chaîne</a>.</p>
+<h3 id="Add-String-Fields" class="common-anchor-header">Ajouter des champs de type chaîne</h3><p>Dans Milvus, vous pouvez utiliser des champs VarChar pour stocker des chaînes de caractères. Pour plus d'informations sur le champ VarChar, reportez-vous à la section <a href="/docs/fr/string.md">Champ de chaîne</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -274,9 +269,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
     <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_varchar&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_varchar&quot;</span>).
     WithDataType(entity.FieldTypeVarChar).
     WithMaxLength(<span class="hljs-number">512</span>),
 )
@@ -285,7 +278,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
     &quot;fieldName&quot;: &quot;my_varchar&quot;,
     &quot;dataType&quot;: &quot;VarChar&quot;,
     &quot;elementTypeParams&quot;: {
-        &quot;max_length&quot;: 256
+        &quot;max_length&quot;: 512
     }
 }&#x27;</span>
 
@@ -316,9 +309,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_int64&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_int64&quot;</span>).
     WithDataType(entity.FieldTypeInt64),
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -355,9 +346,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_i
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Boolean</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_bool&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_bool&quot;</span>).
     WithDataType(entity.FieldTypeBool),
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -395,9 +384,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_b
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">JSON</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_json&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_json&quot;</span>).
     WithDataType(entity.FieldTypeJSON),
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -445,9 +432,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_j
     <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_array&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_array&quot;</span>).
     WithDataType(entity.FieldTypeArray).
     WithElementType(entity.FieldTypeInt64).
     WithMaxLength(<span class="hljs-number">512</span>).

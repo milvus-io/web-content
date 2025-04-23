@@ -38,8 +38,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Zilliz Cloud stellt ein Kollektionsschema eine Tabelle in einer relationalen Datenbank dar, die definiert, wie Zilliz Cloud die Daten in der Kollektion organisiert.</p>
-<p>Ein gut entworfenes Schema ist essentiell, da es das Datenmodell abstrahiert und entscheidet, ob Sie die Geschäftsziele durch eine Suche erreichen können. Da jede in die Sammlung eingefügte Datenzeile dem Schema entsprechen muss, hilft es außerdem, die Datenkonsistenz und die langfristige Qualität zu erhalten. Aus technischer Sicht führt ein gut definiertes Schema zu einer gut organisierten Speicherung von Spaltendaten und einer sauberen Indexstruktur, was die Suchleistung erhöht.</p>
+    </button></h2><p>In Zilliz Cloud stellt ein Sammelschema eine Tabelle in einer relationalen Datenbank dar, die definiert, wie Zilliz Cloud die Daten in der Sammlung organisiert.</p>
+<p>Ein gut entworfenes Schema ist essentiell, da es das Datenmodell abstrahiert und entscheidet, ob Sie die Geschäftsziele durch eine Suche erreichen können. Da außerdem jede in die Sammlung eingefügte Datenzeile dem Schema entsprechen muss, trägt es dazu bei, die Datenkonsistenz und langfristige Qualität zu erhalten. Aus technischer Sicht führt ein gut definiertes Schema zu einer gut organisierten Speicherung von Spaltendaten und einer sauberen Indexstruktur, was die Suchleistung erhöht.</p>
 <p>Ein Sammlungsschema hat einen Primärschlüssel, maximal vier Vektorfelder und mehrere skalare Felder. Das folgende Diagramm veranschaulicht, wie ein Artikel auf eine Liste von Schemafeldern abgebildet werden kann.</p>
 <p>
   
@@ -80,7 +80,6 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
 
 schema := entity.NewSchema()
-log.Println(schema)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
     &quot;fields&quot;: []
@@ -134,9 +133,7 @@ schema.addField(AddFieldReq.builder()
     <span class="hljs-comment">// highlight-end</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_id&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_id&quot;</span>).
     WithDataType(entity.FieldTypeInt64).
     <span class="hljs-comment">// highlight-start</span>
     WithIsPrimaryKey(<span class="hljs-literal">true</span>).
@@ -199,9 +196,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_i
     <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
     WithDataType(entity.FieldTypeFloatVector).
     <span class="hljs-comment">// highlight-next-line</span>
     WithDim(<span class="hljs-number">5</span>),
@@ -274,9 +269,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
     <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_varchar&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_varchar&quot;</span>).
     WithDataType(entity.FieldTypeVarChar).
     WithMaxLength(<span class="hljs-number">512</span>),
 )
@@ -285,7 +278,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
     &quot;fieldName&quot;: &quot;my_varchar&quot;,
     &quot;dataType&quot;: &quot;VarChar&quot;,
     &quot;elementTypeParams&quot;: {
-        &quot;max_length&quot;: 256
+        &quot;max_length&quot;: 512
     }
 }&#x27;</span>
 
@@ -316,9 +309,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_int64&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_int64&quot;</span>).
     WithDataType(entity.FieldTypeInt64),
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -355,9 +346,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_i
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Boolean</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_bool&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_bool&quot;</span>).
     WithDataType(entity.FieldTypeBool),
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -395,9 +384,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_b
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">JSON</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_json&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_json&quot;</span>).
     WithDataType(entity.FieldTypeJSON),
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -445,9 +432,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_j
     <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_array&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_array&quot;</span>).
     WithDataType(entity.FieldTypeArray).
     WithElementType(entity.FieldTypeInt64).
     WithMaxLength(<span class="hljs-number">512</span>).

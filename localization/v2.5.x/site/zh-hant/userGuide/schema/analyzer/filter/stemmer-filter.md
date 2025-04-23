@@ -61,12 +61,16 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>:[{
-        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stop&quot;</span>, <span class="hljs-comment">// Specifies the filter type as stop</span>
-        <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>, <span class="hljs-string">&quot;_english_&quot;</span>], <span class="hljs-comment">// Defines custom stop words and includes the English stop word list</span>
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stemmer&quot;</span>, <span class="hljs-comment">// Specifies the filter type as stop</span>
+        <span class="hljs-string">&quot;language&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>, 
     }],
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+        <span class="hljs-string">&quot;type&quot;</span>:     <span class="hljs-string">&quot;stemmer&quot;</span>,
+        <span class="hljs-string">&quot;language&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>,
+    }}}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 analyzerParams=<span class="hljs-string">&#x27;{
@@ -91,7 +95,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
      <td><p>指定詞幹處理的語言。支援的語言包括<code translate="no">"arabic"</code>,<code translate="no">"danish"</code>,<code translate="no">"dutch"</code>,<code translate="no">"english"</code>,<code translate="no">"finnish"</code>,<code translate="no">"french"</code>,<code translate="no">"german"</code>,<code translate="no">"greek"</code>,<code translate="no">"hungarian"</code>,<code translate="no">"italian"</code>,<code translate="no">"norwegian"</code>,<code translate="no">"portuguese"</code>,<code translate="no">"romanian"</code>,<code translate="no">"russian"</code>,<code translate="no">"spanish"</code>,<code translate="no">"swedish"</code>,<code translate="no">"tamil"</code> 、<code translate="no">"turkish"</code></p></td>
    </tr>
 </table>
-<p><code translate="no">stemmer</code> 過濾器會在 tokenizer 產生的詞彙上運作，因此必須與 tokenizer 結合使用。如需 Milvus 中可用的 tokenizer 清單，請參考<a href="/docs/zh-hant/tokenizers">Tokenizer Reference</a>。</p>
+<p><code translate="no">stemmer</code> 過濾器對由 tokenizer 產生的詞彙進行操作，因此它必須與 tokenizer 結合使用。如需 Milvus 中可用的 tokenizer 清單，請參考<a href="/docs/zh-hant/tokenizers">Tokenizer Reference</a>。</p>
 <p>定義<code translate="no">analyzer_params</code> 之後，您可以在定義集合模式時，將它們套用到<code translate="no">VARCHAR</code> 欄位。這允許 Milvus 使用指定的分析器來處理該欄位中的文字，以進行有效的標記化和過濾。詳情請參閱<a href="/docs/zh-hant/analyzer-overview.md#Example-use">範例使用</a>。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -118,11 +122,24 @@ analyzerParams=<span class="hljs-string">&#x27;{
     }],
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;standard&quot;</span>);
+analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
+        Collections.singletonList(
+                <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+                    put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;stemmer&quot;</span>);
+                    put(<span class="hljs-string">&quot;language&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>);
+                }}
+        )
+);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+        <span class="hljs-string">&quot;type&quot;</span>:     <span class="hljs-string">&quot;stemmer&quot;</span>,
+        <span class="hljs-string">&quot;language&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>,
+    }}}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 analyzerParams=<span class="hljs-string">&#x27;{

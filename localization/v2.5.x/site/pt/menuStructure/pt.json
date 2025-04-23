@@ -300,7 +300,7 @@
       },
       {
         "label": "Nível de consistência",
-        "id": "consistency.md",
+        "id": "tune_consistency.md",
         "order": 10,
         "children": []
       },
@@ -801,21 +801,27 @@
             "children": []
           },
           {
+            "label": "Consultas Elasticsearch para Milvus",
+            "id": "elasticsearch-queries-to-milvus.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Iteradores de pesquisa",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Utilizar chave de partição",
             "id": "use-partition-key.md",
-            "order": 9,
+            "order": 11,
             "children": []
           },
           {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 10,
+            "order": 12,
             "children": []
           }
         ]
@@ -1292,19 +1298,19 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Controlo",
+            "label": "Monitoring",
             "id": "monitoring",
             "order": 0,
             "isMenu": true,
             "children": [
               {
-                "label": "Arquitetura",
+                "label": "Architecture",
                 "id": "monitor_overview.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Implementar serviços de monitorização",
+                "label": "Deploy Monitoring Services",
                 "id": "monitor.md",
                 "order": 1,
                 "children": []
@@ -1452,6 +1458,12 @@
                 "label": "Funções de subvenção",
                 "id": "grant_roles.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "Largar utilizadores e funções",
+                "id": "drop_users_roles.md",
+                "order": 5,
                 "children": []
               }
             ]

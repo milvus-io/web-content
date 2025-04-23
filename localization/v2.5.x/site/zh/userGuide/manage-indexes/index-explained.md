@@ -104,8 +104,8 @@ summary: >-
     </button></h2><p>如下图所示，Milvus 中的索引类型由三个核心部分组成，即<strong>数据结构</strong>、<strong>量化</strong>和<strong>细化器</strong>。量化和精炼器是可选的，但由于收益大于成本的显著平衡而被广泛使用。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector-index-anatomy.png" alt="vector-index-anatomy" class="doc-image" id="vector-index-anatomy" />
-   </span> <span class="img-wrapper"> <span>向量索引解剖学</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   </span> <span class="img-wrapper"> <span>向量索引剖析</span> </span></p>
 <p>在创建索引时，Milvus 会结合所选的数据结构和量化方法来确定最佳<strong>扩展率</strong>。在查询时，系统会检索<code translate="no">topK × expansion rate</code> 候选向量，应用精炼器以更高的精度重新计算距离，最后返回最精确的<code translate="no">topK</code> 结果。这种混合方法通过将资源密集型细化限制在候选矢量的过滤子集上，在速度和精确度之间取得了平衡。</p>
 <h3 id="Data-structure" class="common-anchor-header">数据结构</h3><p>数据结构是索引的基础层。常见类型包括</p>
 <ul>
@@ -144,7 +144,7 @@ summary: >-
 <ul>
 <li><p>就<strong>QPS</strong> 而言，<strong>基于图形的索引类型</strong>通常优于<strong>IVF 变体</strong>。</p></li>
 <li><p><strong>IVF 变体</strong>尤其适用于<strong>topK 较大的</strong>情况<strong>（例如，超过 2,000 个）</strong>。</p></li>
-<li><p>与<strong>SQ</strong><strong>相比，PQ</strong>通常能在相似的压缩率下提供更好的召回率，尽管后者的性能更快。</p></li>
+<li><p>与<strong>SQ</strong><strong>相比，PQ</strong>通常能在相似的压缩率下提供更好的召回率，但后者的性能更快。</p></li>
 <li><p>将硬盘用于部分索引（如<strong>DiskANN</strong>）有助于管理大型数据集，但也会带来潜在的 IOPS 瓶颈。</p></li>
 </ul>
 <h3 id="Capacity" class="common-anchor-header">容量</h3><p>容量通常涉及数据大小与可用 RAM 之间的关系。在处理容量问题时，请考虑以下几点：</p>
@@ -227,7 +227,7 @@ summary: >-
     </button></h2><div class="alert note">
 <p>本节主要计算特定索引类型的内存消耗，包括许多技术细节。如果本节内容与您的兴趣不符，您可以放心跳过。</p>
 </div>
-<p>索引的内存消耗受其数据结构、通过量化实现的压缩率以及使用中的精炼器的影响。一般来说，由于图的结构（如<strong>HNSW</strong>），基于图的索引通常会占用较多内存，这通常意味着每个向量的空间开销较大。相比之下，IVF 及其变体更节省内存，因为适用的每个向量空间开销更少。不过，<strong>DiskANN</strong>等先进技术允许索引的一部分（如图或细化器）驻留在磁盘上，从而在保持性能的同时减少了内存负荷。</p>
+<p>索引的内存消耗受其数据结构、通过量化实现的压缩率以及所使用的精炼器的影响。一般来说，由于图的结构（如<strong>HNSW</strong>），基于图的索引通常会占用较多内存，这通常意味着每个向量的空间开销较大。相比之下，IVF 及其变体更节省内存，因为适用的每个向量空间开销更少。不过，<strong>DiskANN</strong>等先进技术允许索引的一部分（如图或细化器）驻留在磁盘上，从而在保持性能的同时减少了内存负荷。</p>
 <p>具体来说，索引的内存使用量可按以下方式计算：</p>
 <h3 id="IVF-index-memory-usage" class="common-anchor-header">IVF 索引内存使用量</h3><p>IVF 索引通过将数据划分为数据集群，在内存效率和搜索性能之间取得平衡。以下是使用 IVF 变体索引的 100 万个 128 维向量所使用的内存明细。</p>
 <ol>
@@ -306,7 +306,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <h3 id="Other-considerations" class="common-anchor-header">其他考虑因素</h3><p>IVF 和基于图的索引可通过量化优化内存使用，而内存映射文件（mmap）和 DiskANN 则可解决数据集超出可用随机存取内存（RAM）的情况。</p>
-<h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN 是一种基于 Vamana 图的索引，它将数据点连接起来，以便在搜索过程中高效导航，同时应用 PQ 来缩小向量的大小，并能快速计算向量之间的近似距离。</p>
+<h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN 是一种基于 Vamana 图的索引，它将数据点连接起来，以便在搜索过程中高效导航，同时应用 PQ 来减小向量的大小，并能快速计算向量之间的近似距离。</p>
 <p>Vamana 图存储在磁盘上，这使得 DiskANN 能够处理那些内存无法容纳的大型数据集。这对十亿点数据集尤其有用。</p>
 <h4 id="Memory-mapped-files-mmap" class="common-anchor-header">内存映射文件 (mmap)</h4><p>内存映射（Mmap）可实现对磁盘上大型文件的直接内存访问，从而允许 Milvus 在内存和硬盘中同时存储索引和数据。这种方法可根据访问频率减少 I/O 调用的开销，有助于优化 I/O 操作，从而在不对搜索性能造成重大影响的情况下扩大 Collections 的存储容量。</p>
-<p>具体来说，你可以配置 Milvus 对某些字段中的原始数据进行内存映射，而不是将它们完全加载到内存中。这样，你就可以获得对字段的直接内存访问，而不必担心内存问题，并扩展了 Collections 的容量。</p>
+<p>具体来说，你可以配置 Milvus 对某些字段中的原始数据进行内存映射，而不是将它们完全加载到内存中。这样，你就可以直接对字段进行内存访问，而不必担心内存问题，并扩展了 Collections 的容量。</p>

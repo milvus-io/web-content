@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>No Milvus, <code translate="no">VARCHAR</code> é o tipo de dados utilizado para armazenar dados de cadeia. Quando se define um campo <code translate="no">VARCHAR</code>, são obrigatórios dois parâmetros:</p>
+    </button></h1><p>No Milvus, <code translate="no">VARCHAR</code> é o tipo de dados utilizado para armazenar dados de cadeia. Quando define um campo <code translate="no">VARCHAR</code>, são obrigatórios dois parâmetros:</p>
 <ul>
 <li><p>Definir o <code translate="no">datatype</code> como <code translate="no">DataType.VARCHAR</code>.</p></li>
 <li><p>Especifique o parâmetro <code translate="no">max_length</code>, que define o número máximo de caracteres que o campo <code translate="no">VARCHAR</code> pode armazenar. O intervalo válido para <code translate="no">max_length</code> é de 1 a 65.535.</p></li>
@@ -144,7 +144,51 @@ schema.addField(AddFieldReq.builder()
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+schema := entity.NewSchema()
+schema.WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;pk&quot;</span>).
+    WithDataType(entity.FieldTypeInt64).
+    WithIsPrimaryKey(<span class="hljs-literal">true</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;embedding&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(<span class="hljs-number">3</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;varchar_field1&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">100</span>).
+    WithNullable(<span class="hljs-literal">true</span>).
+    WithDefaultValueString(<span class="hljs-string">&quot;Unknown&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;varchar_field2&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">200</span>).
+    WithNullable(<span class="hljs-literal">true</span>),
+)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> varcharField1=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;varchar_field1&quot;,
@@ -241,7 +285,10 @@ indexes.add(IndexParam.builder()
         .metricType(IndexParam.MetricType.COSINE)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">indexOption1 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>,
+    index.NewAutoIndex(index.MetricType(entity.IP)))
+indexOption2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;varchar_field1&quot;</span>,
+    index.NewInvertedIndex())
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = [{
     <span class="hljs-attr">index_name</span>: <span class="hljs-string">&#x27;varchar_index&#x27;</span>,
@@ -297,22 +344,28 @@ indexParams.<span class="hljs-title function_">push</span>({
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;my_varchar_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_varchar_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
         .indexParams(indexes)
         .build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
+        WithIndexOptions(indexOption1, indexOption2))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">create_collection</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_varchar_collection&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
     <span class="hljs-attr">index_params</span>: index_params
 });
@@ -322,7 +375,7 @@ client.createCollection(requestCreate);
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;my_varchar_collection\&quot;,
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
@@ -359,7 +412,7 @@ data = [
 
 <span class="hljs-comment"># Insert data</span>
 client.insert(
-    collection_name=<span class="hljs-string">&quot;my_varchar_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=data
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -379,11 +432,34 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;varchar_field1\&q
 rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;varchar_field1\&quot;: \&quot;\&quot;, \&quot;varchar_field2\&quot;: \&quot;Best seller\&quot;, \&quot;pk\&quot;: 7, \&quot;embedding\&quot;: [0.8, 0.5, 0.3]}&quot;</span>, JsonObject.class));
 
 <span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_varchar_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(rows)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">column1, _ := column.NewNullableColumnVarChar(<span class="hljs-string">&quot;varchar_field1&quot;</span>,
+    []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Product A&quot;</span>, <span class="hljs-string">&quot;Product B&quot;</span>, <span class="hljs-string">&quot;Product C&quot;</span>, <span class="hljs-string">&quot;Unknown&quot;</span>, <span class="hljs-string">&quot;&quot;</span>},
+    []<span class="hljs-type">bool</span>{<span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>})
+column2, _ := column.NewNullableColumnVarChar(<span class="hljs-string">&quot;varchar_field2&quot;</span>,
+    []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;High quality product&quot;</span>, <span class="hljs-string">&quot;Exclusive deal&quot;</span>, <span class="hljs-string">&quot;Best seller&quot;</span>},
+    []<span class="hljs-type">bool</span>{<span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>})
+
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithInt64Column(<span class="hljs-string">&quot;pk&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>}).
+    WithFloatVectorColumn(<span class="hljs-string">&quot;embedding&quot;</span>, <span class="hljs-number">3</span>, [][]<span class="hljs-type">float32</span>{
+        {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>},
+        {<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>},
+        {<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.1</span>},
+        {<span class="hljs-number">0.5</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.2</span>},
+        {<span class="hljs-number">0.6</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.8</span>},
+        {<span class="hljs-number">0.8</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.3</span>},
+        {<span class="hljs-number">0.8</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.3</span>},
+    }).
+    WithColumns(column1, column2),
+)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data = [
   {
@@ -407,7 +483,7 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;varchar_field1\&q
 ];
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_sparse_collection&quot;</span>,
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
   <span class="hljs-attr">data</span>: data,
 });
 
@@ -426,7 +502,7 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;varchar_field1\&q
         {&quot;varchar_field1&quot;: &quot;Unknown&quot;, &quot;varchar_field2&quot;: null, &quot;pk&quot;: 6, &quot;embedding&quot;: [0.8, 0.5, 0.3]},  
         {&quot;varchar_field1&quot;: &quot;&quot;, &quot;varchar_field2&quot;: &quot;Best seller&quot;, &quot;pk&quot;: 7, &quot;embedding&quot;: [0.8, 0.5, 0.3]}  
     ],
-    &quot;collectionName&quot;: &quot;my_varchar_collection&quot;
+    &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:3,&quot;insertIds&quot;:[1,2,3]}}</span>
@@ -454,7 +530,7 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;varchar_field1\&q
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_varchar_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
     output_fields=[<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>]
 )
@@ -471,7 +547,7 @@ res = client.query(
 
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;varchar_field1 == \&quot;Product A\&quot;&quot;</span>;
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_varchar_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .filter(filter)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>))
         .build());
@@ -482,10 +558,24 @@ System.out.println(resp.getQueryResults());
 <span class="hljs-comment">//</span>
 <span class="hljs-comment">// [QueryResp.QueryResult(entity={varchar_field1=Product A, varchar_field2=High quality product, pk=1})]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;varchar_field1 == \&quot;Product A\&quot;&quot;</span>
+queryResult, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(filter).
+    WithOutputFields(<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(<span class="hljs-string">&quot;varchar_field1&quot;</span>, queryResult.GetColumn(<span class="hljs-string">&quot;varchar_field1&quot;</span>).FieldData().GetScalars())
+fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryResult.GetColumn(<span class="hljs-string">&quot;varchar_field2&quot;</span>).FieldData().GetScalars())
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// varchar_field1 string_data:{data:&quot;Product A&quot;}</span>
+<span class="hljs-comment">// varchar_field2 string_data:{data:&quot;High quality product&quot;}</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_varchar_collection&#x27;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;varchar_field1&#x27;</span>, <span class="hljs-string">&#x27;varchar_field2&#x27;</span>]
 });
@@ -495,7 +585,7 @@ System.out.println(resp.getQueryResults());
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_varchar_collection&quot;,
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field1 == \&quot;Product A\&quot;&quot;,
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
@@ -508,7 +598,7 @@ System.out.println(resp.getQueryResults());
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field2 is null&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_varchar_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
     output_fields=[<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>]
 )
@@ -525,7 +615,7 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;varchar_field2 is null&quot;</span>;
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_varchar_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .filter(filter)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>))
         .build());
@@ -541,10 +631,19 @@ System.out.println(resp.getQueryResults());
 <span class="hljs-comment">//    QueryResp.QueryResult(entity={varchar_field1=Unknown, varchar_field2=null, pk=6})</span>
 <span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">filter = <span class="hljs-string">&quot;varchar_field2 is null&quot;</span>
+queryResult, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(filter).
+    WithOutputFields(<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(<span class="hljs-string">&quot;varchar_field1&quot;</span>, queryResult.GetColumn(<span class="hljs-string">&quot;varchar_field1&quot;</span>))
+fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryResult.GetColumn(<span class="hljs-string">&quot;varchar_field2&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_varchar_collection&#x27;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;varchar_field2 is null&#x27;</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;varchar_field1&#x27;</span>, <span class="hljs-string">&#x27;varchar_field2&#x27;</span>]
 });
@@ -555,7 +654,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_varchar_collection&quot;,
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field2 is null&quot;,
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
@@ -567,7 +666,7 @@ curl --request POST \
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Unknown&quot;&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_varchar_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
     output_fields=[<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>]
 )
@@ -583,7 +682,7 @@ res = client.query(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;varchar_field1 == \&quot;Unknown\&quot;&quot;</span>;
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_varchar_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .filter(filter)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>))
         .build());
@@ -598,11 +697,20 @@ System.out.println(resp.getQueryResults());
 <span class="hljs-comment">//    QueryResp.QueryResult(entity={varchar_field1=Unknown, varchar_field2=null, pk=6})</span>
 <span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">filter = <span class="hljs-string">&quot;varchar_field1 == \&quot;Unknown\&quot;&quot;</span>
+queryResult, err = client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(filter).
+    WithOutputFields(<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(<span class="hljs-string">&quot;varchar_field1&quot;</span>, queryResult.GetColumn(<span class="hljs-string">&quot;varchar_field1&quot;</span>))
+fmt.Println(<span class="hljs-string">&quot;varchar_field2&quot;</span>, queryResult.GetColumn(<span class="hljs-string">&quot;varchar_field2&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_varchar_collection&#x27;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;varchar_field1 == &quot;Unknown&quot;&#x27;</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;varchar_field1&#x27;</span>, <span class="hljs-string">&#x27;varchar_field2&#x27;</span>]
 });
@@ -613,7 +721,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_varchar_collection&quot;,
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;varchar_field1 == \&quot;Unknown\&quot;&quot;,
     &quot;outputFields&quot;: [&quot;varchar_field1&quot;, &quot;varchar_field2&quot;]
 }&#x27;</span>
@@ -642,7 +750,7 @@ curl --request POST \
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field2 == &quot;Best seller&quot;&#x27;</span>
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_varchar_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>]],
     limit=<span class="hljs-number">5</span>,
     search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
@@ -662,7 +770,7 @@ res = client.search(
 
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;varchar_field2 == \&quot;Best seller\&quot;&quot;</span>;
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_varchar_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)
         .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3f</span>, -<span class="hljs-number">0.6f</span>, <span class="hljs-number">0.1f</span>})))
         .topK(<span class="hljs-number">5</span>)
@@ -676,14 +784,37 @@ System.out.println(resp.getSearchResults());
 <span class="hljs-comment">//</span>
 <span class="hljs-comment">// [[SearchResp.SearchResult(entity={varchar_field1=, varchar_field2=Best seller}, score=-0.04468164, id=7)]]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.3</span>, <span class="hljs-number">-0.6</span>, <span class="hljs-number">0.1</span>}
+filter = <span class="hljs-string">&quot;varchar_field2 == \&quot;Best seller\&quot;&quot;</span>
+
+annParam := index.NewCustomAnnParam()
+annParam.WithExtraParam(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">10</span>)
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">5</span>,                       <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField(<span class="hljs-string">&quot;embedding&quot;</span>).
+    WithFilter(filter).
+    WithAnnParam(annParam).
+    WithOutputFields(<span class="hljs-string">&quot;varchar_field1&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+    fmt.Println(<span class="hljs-string">&quot;varchar_field1: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;varchar_field1&quot;</span>))
+    fmt.Println(<span class="hljs-string">&quot;varchar_field2: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;varchar_field2&quot;</span>))
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_varchar_collection&#x27;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">data</span>: [<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>],
     <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;varchar_field1&#x27;</span>, <span class="hljs-string">&#x27;varchar_field2&#x27;</span>],
-    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>
+    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;varchar_field2 == &quot;Best seller&quot;&#x27;</span>
     <span class="hljs-attr">params</span>: {
        <span class="hljs-attr">nprobe</span>:<span class="hljs-number">10</span>
     }
@@ -694,7 +825,7 @@ System.out.println(resp.getSearchResults());
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_varchar_collection&quot;,
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;data&quot;: [
         [0.3, -0.6, 0.1]
     ],

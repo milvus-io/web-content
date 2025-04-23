@@ -29,8 +29,8 @@ summary: >-
 <p>Milvus supporta la definizione del modello di dati attraverso uno schema di raccolta. Una raccolta organizza i dati non strutturati come testo e immagini, insieme alle loro rappresentazioni vettoriali, compresi i vettori densi e radi in varie precisioni utilizzate per la ricerca semantica. Inoltre, Milvus supporta la memorizzazione e il filtraggio di tipi di dati non vettoriali chiamati "Scalar". I tipi di scalare includono BOOL, INT8/16/32/64, FLOAT/DOUBLE, VARCHAR, JSON e Array.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-hands-on.png" alt="schema-hands-on" class="doc-image" id="schema-hands-on" />
-   </span> <span class="img-wrapper"> <span>schema - hands-on</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-hands-on.png" alt="Schema Hands On" class="doc-image" id="schema-hands-on" />
+   </span> <span class="img-wrapper"> <span>Schema Hands On</span> </span></p>
 <p>La progettazione del modello di dati di un sistema di ricerca comporta l'analisi delle esigenze aziendali e l'astrazione delle informazioni in un modello di dati espresso in forma di schema. Per esempio, per cercare un testo, è necessario "indicizzarlo" convertendo la stringa letterale in un vettore attraverso l'"embedding", che consente la ricerca vettoriale. Oltre a questo requisito di base, può essere necessario memorizzare altre proprietà, come la data di pubblicazione e l'autore. Questi metadati consentono di affinare le ricerche semantiche attraverso il filtraggio, restituendo solo i testi pubblicati dopo una data specifica o da un particolare autore. Può anche essere necessario recuperarli insieme al testo principale, per rendere il risultato della ricerca nell'applicazione. Per organizzare questi pezzi di testo, a ciascuno di essi deve essere assegnato un identificatore univoco, espresso come un numero intero o una stringa. Questi elementi sono essenziali per ottenere una logica di ricerca sofisticata.</p>
 <p>Uno schema ben progettato è importante perché astrae il modello dei dati e decide se gli obiettivi aziendali possono essere raggiunti attraverso la ricerca. Inoltre, dal momento che ogni riga di dati inserita nella raccolta deve seguire lo schema, esso aiuta notevolmente a mantenere la coerenza dei dati e la qualità a lungo termine. Da un punto di vista tecnico, uno schema ben definito porta a una memorizzazione ben organizzata dei dati delle colonne e a una struttura dell'indice più pulita, che può aumentare le prestazioni di ricerca.</p>
 <h2 id="An-Example-News-Search" class="common-anchor-header">Un esempio: Ricerca di notizie<button data-href="#An-Example-News-Search" class="anchor-icon" translate="no">
@@ -139,6 +139,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;summary_sparse_vecto
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
+<span class="hljs-type">String</span> <span class="hljs-variable">collectionName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;my_collection&quot;</span>;
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
 
 schema.addField(AddFieldReq.builder()
@@ -218,7 +219,74 @@ schema.addField(AddFieldReq.builder()
   { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;summary_sparse_vector&quot;</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;SPARSE_FLOAT_VECTOR&quot;</span>, <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;summary sparse vector&quot;</span> },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+collectionName := <span class="hljs-string">&quot;my_collection&quot;</span>
+schema := entity.NewSchema()
+schema.WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;article_id&quot;</span>).
+    WithDataType(entity.FieldTypeInt64).
+    WithIsPrimaryKey(<span class="hljs-literal">true</span>).
+    WithDescription(<span class="hljs-string">&quot;article id&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;title&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">200</span>).
+    WithDescription(<span class="hljs-string">&quot;article title&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;author_info&quot;</span>).
+    WithDataType(entity.FieldTypeJSON).
+    WithDescription(<span class="hljs-string">&quot;author information&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;publish_ts&quot;</span>).
+    WithDataType(entity.FieldTypeInt32).
+    WithDescription(<span class="hljs-string">&quot;publish timestamp&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;image_url&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">500</span>).
+    WithDescription(<span class="hljs-string">&quot;image url&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;image_vector&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(<span class="hljs-number">768</span>).
+    WithDescription(<span class="hljs-string">&quot;image vector&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;summary&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithMaxLength(<span class="hljs-number">1000</span>).
+    WithDescription(<span class="hljs-string">&quot;article summary&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;summary_dense_vector&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(<span class="hljs-number">768</span>).
+    WithDescription(<span class="hljs-string">&quot;summary dense vector&quot;</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>).
+    WithDataType(entity.FieldTypeSparseVector).
+    WithDescription(<span class="hljs-string">&quot;summary sparse vector&quot;</span>),
+)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <span class="hljs-built_in">export</span> idField=<span class="hljs-string">&#x27;{
@@ -385,34 +453,14 @@ indexes.add(IndexParam.builder()
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
-
-<span class="hljs-keyword">import</span> java.util.ArrayList;
-<span class="hljs-keyword">import</span> java.util.List;
-
-List&lt;IndexParam&gt; indexes = <span class="hljs-built_in">new</span> ArrayList&lt;&gt;();
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;image_vector&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;summary_dense_vector&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>)
-        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
-        .metricType(IndexParam.MetricType.IP)
-        .build());
-
-indexes.add(IndexParam.builder()
-        .fieldName(<span class="hljs-string">&quot;publish_ts&quot;</span>)
-        .indexType(IndexParam.IndexType.INVERTED)
-        .build());
+<pre><code translate="no" class="language-go">indexOption1 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;image_vector&quot;</span>,
+    index.NewAutoIndex(index.MetricType(entity.IP)))
+indexOption2 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;summary_dense_vector&quot;</span>,
+    index.NewAutoIndex(index.MetricType(entity.IP)))
+indexOption3 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;summary_sparse_vector&quot;</span>,
+    index.NewSparseInvertedIndex(index.MetricType(entity.IP), <span class="hljs-number">0.2</span>))
+indexOption4 := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;publish_ts&quot;</span>,
+    index.NewInvertedIndex())
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 indexParams=<span class="hljs-string">&#x27;[
@@ -470,7 +518,13 @@ client.createCollection(requestCreate);
     <span class="hljs-attr">index_params</span>: index_params,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption(collectionName, schema).
+        WithIndexOptions(indexOption1, indexOption2, indexOption3, indexOption4))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl --request POST \
@@ -478,7 +532,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --data <span class="hljs-string">&quot;{
-  \&quot;collectionName\&quot;: \&quot;test_collection\&quot;,
+  \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
   \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
@@ -502,7 +556,12 @@ System.out.println(descResp);
 });
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(collection_desc);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">desc, err := client.DescribeCollection(ctx, milvusclient.NewDescribeCollectionOption(collectionName))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(desc.Schema)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl --request POST \
@@ -529,5 +588,5 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><h3 id="Loading-Index" class="common-anchor-header">Caricamento dell'indice</h3><p>Quando si crea una collezione in Milvus, si può scegliere di caricare l'indice immediatamente o di rimandarlo a dopo l'ingestione di alcuni dati. In genere non è necessario fare una scelta esplicita, poiché gli esempi precedenti mostrano che l'indice viene creato automaticamente per tutti i dati ingeriti subito dopo la creazione della raccolta. Ciò consente di ricercare immediatamente i dati ingeriti. Tuttavia, se si ha un grande inserimento di massa dopo la creazione della raccolta e non si ha bisogno di cercare alcun dato fino a un certo punto, si può rimandare la costruzione dell'indice omettendo index_params nella creazione della raccolta e costruire l'indice chiamando esplicitamente load dopo aver ingerito tutti i dati. Questo metodo è più efficiente per costruire l'indice su un insieme di grandi dimensioni, ma non è possibile effettuare ricerche fino a quando non si chiama load().</p>
-<h3 id="How-to-Define-Data-Model-For-Multi-tenancy" class="common-anchor-header">Come definire il modello dei dati per la multi-tendenza</h3><p>Il concetto di più tenancy è comunemente usato in scenari in cui una singola applicazione o servizio software deve servire più utenti o organizzazioni indipendenti, ognuno con il proprio ambiente isolato. Ciò si verifica spesso nel cloud computing, nelle applicazioni SaaS (Software as a Service) e nei sistemi di database. Ad esempio, un servizio di cloud storage può utilizzare la multi-tenancy per consentire a diverse aziende di archiviare e gestire i propri dati separatamente, pur condividendo la stessa infrastruttura sottostante. Questo approccio massimizza l'utilizzo delle risorse e l'efficienza, garantendo al tempo stesso la sicurezza e la privacy dei dati per ciascun tenant.</p>
+<h3 id="How-to-Define-Data-Model-For-Multi-tenancy" class="common-anchor-header">Come definire il modello dei dati per la multi-tendenza</h3><p>Il concetto di più tenancy è comunemente usato in scenari in cui una singola applicazione o servizio software deve servire più utenti o organizzazioni indipendenti, ciascuno con il proprio ambiente isolato. Ciò si verifica spesso nel cloud computing, nelle applicazioni SaaS (Software as a Service) e nei sistemi di database. Ad esempio, un servizio di cloud storage può utilizzare la multi-tenancy per consentire a diverse aziende di archiviare e gestire i propri dati separatamente, pur condividendo la stessa infrastruttura sottostante. Questo approccio massimizza l'utilizzo delle risorse e l'efficienza, garantendo al tempo stesso la sicurezza e la privacy dei dati per ciascun tenant.</p>
 <p>Il modo più semplice per differenziare i tenant è isolare i loro dati e le loro risorse gli uni dagli altri. Ogni tenant ha accesso esclusivo a risorse specifiche o condivide risorse con altri per gestire entità Milvus come database, collezioni e partizioni. Esistono metodi specifici allineati a queste entità per implementare la multi-tenancy. Per ulteriori informazioni, consultare la <a href="/docs/it/multi_tenancy.md#Multi-tenancy-strategies">pagina Milvus multi-tenancy</a>.</p>

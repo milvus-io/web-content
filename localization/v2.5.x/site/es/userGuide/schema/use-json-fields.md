@@ -60,6 +60,7 @@ summary: >-
 <li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, y <code translate="no">&quot;a\\&quot;b&quot;</code> se almacenan tal cual.</p></li>
 <li><p><code translate="no">'a'b'</code> y <code translate="no">&quot;a&quot;b&quot;</code> se consideran inválidos.</p></li>
 </ul></li>
+<li><p><strong>Indexación JSON</strong>: Al indexar un campo JSON, puede especificar una o más rutas en el campo JSON para acelerar el filtrado. Cada ruta adicional aumenta la sobrecarga de indexación, por lo que debe planificar cuidadosamente su estrategia de indexación. Para más consideraciones sobre la indexación de un campo JSON, consulte <a href="/docs/es/use-json-fields.md#Considerations-on-JSON-indexing">Consideraciones sobre la indexación JSON</a>.</p></li>
 </ul>
 <h2 id="Add-JSON-field" class="common-anchor-header">Añadir campo JSON<button data-href="#Add-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -131,7 +132,29 @@ schema.addField(AddFieldReq.builder()
         .dimension(<span class="hljs-number">3</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: milvusAddr,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
 
 schema := entity.NewSchema()
 schema.WithField(entity.NewField().
@@ -228,12 +251,12 @@ schema.WithField(entity.NewField().
 
 <span class="hljs-comment"># Example 1: Index the &#x27;category&#x27; key inside &#x27;product_info&#x27; as a string</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
-    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>,
-    index_name=<span class="hljs-string">&quot;json_index_1&quot;</span>,
+    field_name=<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-comment"># JSON field name to index</span>
+    index_type=<span class="hljs-string">&quot;INVERTED&quot;</span>, <span class="hljs-comment"># Index type. Set to INVERTED</span>
+    index_name=<span class="hljs-string">&quot;json_index_1&quot;</span>, <span class="hljs-comment"># Index name</span>
     params={
-        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;product_info\&quot;][\&quot;category\&quot;]&quot;</span>,
-        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span>
+        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata[\&quot;product_info\&quot;][\&quot;category\&quot;]&quot;</span>, <span class="hljs-comment"># Path in JSON field to index</span>
+        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;varchar&quot;</span> <span class="hljs-comment"># Data type that the extracted JSON values will be cast to</span>
     }
 )
 
@@ -274,8 +297,8 @@ indexes.add(IndexParam.builder()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">jsonIndex1 := index.NewJSONPathIndex(index.Inverted, <span class="hljs-string">&quot;varchar&quot;</span>, <span class="hljs-string">`metadata[&quot;product_info&quot;][&quot;category&quot;]`</span>)
 jsonIndex2 := index.NewJSONPathIndex(index.Inverted, <span class="hljs-string">&quot;double&quot;</span>, <span class="hljs-string">`metadata[&quot;price&quot;]`</span>)
-indexOpt1 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_json_collection&quot;</span>, <span class="hljs-string">&quot;meta&quot;</span>, jsonIndex1)
-indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_json_collection&quot;</span>, <span class="hljs-string">&quot;meta&quot;</span>, jsonIndex2)
+indexOpt1 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>, jsonIndex1)
+indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>, jsonIndex2)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = [
     {
@@ -366,16 +389,15 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Tipo de datos al que Milvus convertirá los valores JSON extraídos cuando construya el índice. Valores válidos:</p><ul><li><p><code translate="no">"bool"</code> o <code translate="no">"BOOL"</code></p></li><li><p><code translate="no">"double"</code> o <code translate="no">"DOUBLE"</code></p></li><li><p><code translate="no">"varchar"</code> o <code translate="no">"VARCHAR"</code></p><p><strong>Nota</strong>: Para valores enteros, Milvus utiliza internamente double para el índice. Los enteros grandes por encima de 2^53 pierden precisión. Si la conversión falla (debido a un desajuste de tipo), no se lanza ningún error, y el valor de esa fila no se indexa.</p></li></ul></td>
+     <td><p>Tipo de datos al que Milvus convertirá los valores JSON extraídos cuando construya el índice. Valores válidos:</p><ul><li><p><code translate="no">"bool"</code> o <code translate="no">"BOOL"</code></p></li><li><p><code translate="no">"double"</code> o <code translate="no">"DOUBLE"</code></p></li><li><p><code translate="no">"varchar"</code> o <code translate="no">"VARCHAR"</code></p><p><strong>Nota</strong>: Para valores enteros, Milvus utiliza internamente double para el índice. Los enteros grandes por encima de 2^53 pierden precisión. Si la conversión de tipos falla (debido a un desajuste de tipos), no se lanza ningún error, y el valor de esa fila no se indexa.</p></li></ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
-<p><strong>Consideraciones sobre la indexación JSON</strong></p>
-<ul>
+<h4 id="Considerations-on-JSON-indexing" class="common-anchor-header">Consideraciones sobre la indexación JSON</h4><ul>
 <li><p><strong>Lógica de filtrado</strong>:</p>
 <ul>
 <li><p>Si <strong>crea un índice de tipo doble</strong> (<code translate="no">json_cast_type=&quot;double&quot;</code>), sólo las condiciones de filtro de tipo numérico pueden utilizar el índice. Si el filtro compara un índice doble con una condición no numérica, Milvus vuelve a la búsqueda por fuerza bruta.</p></li>
-<li><p>Si <strong>crea un índice de tipo varchar</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), sólo las condiciones de filtro de tipo cadena pueden utilizar el índice. De lo contrario, Milvus vuelve a la fuerza bruta.</p></li>
+<li><p>Si <strong>crea un índice de tipo varchar</strong> (<code translate="no">json_cast_type=&quot;varchar&quot;</code>), sólo las condiciones de filtro de tipo cadena pueden utilizar el índice. En caso contrario, Milvus vuelve a la fuerza bruta.</p></li>
 <li><p>La indexación<strong>booleana</strong> se comporta de forma similar a la de tipo varchar.</p></li>
 </ul></li>
 <li><p><strong>Expresiones de términos</strong>:</p>
@@ -384,11 +406,11 @@ curl --request POST \
 </ul></li>
 <li><p><strong>Precisión numérica</strong>:</p>
 <ul>
-<li>Internamente, Milvus indexa todos los campos numéricos como dobles. Si un valor numérico excede , pierde precisión, y las consultas sobre esos valores fuera de rango pueden no coincidir exactamente.</li>
+<li>Internamente, Milvus indexa todos los campos numéricos como dobles. Si un valor numérico supera 2^{53}, pierde precisión, y las consultas sobre esos valores fuera de rango pueden no coincidir exactamente.</li>
 </ul></li>
 <li><p><strong>Integridad de los datos</strong>:</p>
 <ul>
-<li>Milvus no analiza ni transforma claves JSON más allá de su reparto especificado. Si los datos de origen son inconsistentes (por ejemplo, algunas filas almacenan una cadena para la clave <code translate="no">&quot;k&quot;</code> mientras que otras almacenan un número), algunas filas no serán indexadas.</li>
+<li>Milvus no analiza ni transforma las claves JSON más allá del reparto especificado. Si los datos de origen son incoherentes (por ejemplo, algunas filas almacenan una cadena para la clave <code translate="no">&quot;k&quot;</code> mientras que otras almacenan un número), algunas filas no se indexarán.</li>
 </ul></li>
 </ul>
 <h3 id="Index-a-vector-field" class="common-anchor-header">Indexar un campo vectorial</h3><p>El siguiente ejemplo crea un índice en el campo vectorial <code translate="no">embedding</code>, utilizando el tipo de índice <code translate="no">AUTOINDEX</code>. Con este tipo, Milvus selecciona automáticamente el índice más adecuado en función del tipo de datos. También puede personalizar el tipo de índice y los parámetros para cada campo. Para más detalles, consulte <a href="/docs/es/index-explained.md">Índice Explicado</a>.</p>
@@ -418,7 +440,7 @@ indexes.add(IndexParam.builder()
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">vectorIndex := index.NewAutoIndex(entity.COSINE)
-indexOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_json_collection&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>, vectorIndex)
+indexOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>, vectorIndex)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
     <span class="hljs-attr">index_name</span>: <span class="hljs-string">&#x27;embedding_index&#x27;</span>,
@@ -452,31 +474,31 @@ indexOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una vez definidos el esquema y el índice, cree una colección que incluya campos de cadena.</p>
+    </button></h2><p>Una vez definidos el esquema y el índice, crea una colección que incluya campos de cadena.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
-    collection_name=<span class="hljs-string">&quot;my_json_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_json_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .collectionSchema(schema)
         .indexParams(indexes)
         .build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_json_collection&quot;</span>, schema).
-        WithIndexOptions(indexOpt1, indexOpt2, indexOpt))
-    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-        <span class="hljs-comment">// handler err</span>
-    }
+<pre><code translate="no" class="language-go">err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
+    WithIndexOptions(indexOpt1, indexOpt2, indexOpt))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handler err</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">create_collection</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_json_collection&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">schema</span>: schema,
     <span class="hljs-attr">index_params</span>: indexParams
 });
@@ -486,7 +508,7 @@ client.createCollection(requestCreate);
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&quot;{
-    \&quot;collectionName\&quot;: \&quot;my_json_collection\&quot;,
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
@@ -544,7 +566,7 @@ data = [
 ]
 
 client.insert(
-    collection_name=<span class="hljs-string">&quot;my_json_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=data
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -562,16 +584,11 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;pk\&quot;:3,\&quo
 rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;metadata\&quot;:{\&quot;product_info\&quot;:{\&quot;category\&quot;:null,\&quot;brand\&quot;:\&quot;BrandB\&quot;},\&quot;price\&quot;:59.99,\&quot;in_stock\&quot;:null},\&quot;pk\&quot;:4,\&quot;embedding\&quot;:[0.56,0.38,0.21]}&quot;</span>, JsonObject.class));
 
 <span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_json_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(rows)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
-)
-
-resp, err := cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_json_collection&quot;</span>).
+<pre><code translate="no" class="language-go">_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
     WithInt64Column(<span class="hljs-string">&quot;pk&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>}).
     WithFloatVectorColumn(<span class="hljs-string">&quot;embedding&quot;</span>, <span class="hljs-number">3</span>, [][]<span class="hljs-type">float32</span>{
         {<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>},
@@ -581,24 +598,24 @@ resp, err := cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class
     }).WithColumns(
     column.NewColumnJSONBytes(<span class="hljs-string">&quot;metadata&quot;</span>, [][]<span class="hljs-type">byte</span>{
         []<span class="hljs-type">byte</span>(<span class="hljs-string">`{
-        &quot;product_info&quot;: {&quot;category&quot;: &quot;electronics&quot;, &quot;brand&quot;: &quot;BrandA&quot;},
-        &quot;price&quot;: 99.99,
-        &quot;in_stock&quot;: True,
-        &quot;tags&quot;: [&quot;summer_sale&quot;]
-    }`</span>),
+    &quot;product_info&quot;: {&quot;category&quot;: &quot;electronics&quot;, &quot;brand&quot;: &quot;BrandA&quot;},
+    &quot;price&quot;: 99.99,
+    &quot;in_stock&quot;: True,
+    &quot;tags&quot;: [&quot;summer_sale&quot;]
+}`</span>),
         []<span class="hljs-type">byte</span>(<span class="hljs-string">`null`</span>),
         []<span class="hljs-type">byte</span>(<span class="hljs-string">`null`</span>),
         []<span class="hljs-type">byte</span>(<span class="hljs-string">`&quot;metadata&quot;: {
-        &quot;product_info&quot;: {&quot;category&quot;: None, &quot;brand&quot;: &quot;BrandB&quot;},
-        &quot;price&quot;: 59.99,
-        &quot;in_stock&quot;: None
-    }`</span>),
+    &quot;product_info&quot;: {&quot;category&quot;: None, &quot;brand&quot;: &quot;BrandB&quot;},
+    &quot;price&quot;: 59.99,
+    &quot;in_stock&quot;: None
+}`</span>),
     }),
 ))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle err</span>
 }
-fmt.Println(resp)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data = [
     {
@@ -634,7 +651,7 @@ fmt.Println(resp)
 ];
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_json_collection&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">data</span>: data
 });
 <button class="copy-code-btn"></button></code></pre>
@@ -674,7 +691,7 @@ fmt.Println(resp)
               &quot;embedding&quot;: [0.56, 0.38, 0.21]
          }
     ],
-    &quot;collectionName&quot;: &quot;my_json_collection&quot;
+    &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Query-with-filter-expressions" class="common-anchor-header">Consulta con expresiones de filtro<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
@@ -704,7 +721,7 @@ fmt.Println(resp)
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata is not null&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_json_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
     output_fields=[<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
 )
@@ -726,7 +743,7 @@ res = client.query(
 
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;metadata is not null&quot;</span>;
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_json_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .filter(filter)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>))
         .build());
@@ -740,15 +757,17 @@ System.out.println(resp.getQueryResults());
 <span class="hljs-comment">//    QueryResp.QueryResult(entity={metadata={&quot;product_info&quot;:{&quot;category&quot;:null,&quot;brand&quot;:&quot;BrandB&quot;},&quot;price&quot;:59.99,&quot;in_stock&quot;:null}, pk=4})</span>
 <span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">rs, err := cli.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_json_collection&quot;</span>).
-    WithFilter(<span class="hljs-string">&quot;metadata is not null&quot;</span>).
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;metadata is not null&quot;</span>
+rs, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(filter).
     WithOutputFields(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 
-fmt.Println(rs.GetColumn(<span class="hljs-string">&quot;pk&quot;</span>))
-fmt.Println(rs.GetColumn(<span class="hljs-string">&quot;metadata&quot;</span>))
+fmt.Println(<span class="hljs-string">&quot;pk&quot;</span>, rs.GetColumn(<span class="hljs-string">&quot;pk&quot;</span>).FieldData().GetScalars())
+fmt.Println(<span class="hljs-string">&quot;metadata&quot;</span>, rs.GetColumn(<span class="hljs-string">&quot;metadata&quot;</span>).FieldData().GetScalars())
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_scalar_collection&#x27;</span>,
@@ -761,7 +780,7 @@ fmt.Println(rs.GetColumn(<span class="hljs-string">&quot;metadata&quot;</span>))
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;my_json_collection&quot;,
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;filter&quot;: &quot;metadata is not null&quot;,
     &quot;outputFields&quot;: [&quot;metadata&quot;, &quot;pk&quot;]
 }&#x27;</span>
@@ -774,7 +793,7 @@ fmt.Println(rs.GetColumn(<span class="hljs-string">&quot;metadata&quot;</span>))
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>
 
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;my_json_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
     output_fields=[<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
 )
@@ -794,7 +813,7 @@ res = client.query(
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;metadata[\&quot;product_info\&quot;][\&quot;category\&quot;] == \&quot;electronics\&quot;&quot;</span>;
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_json_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .filter(filter)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>))
         .build());
@@ -804,19 +823,21 @@ System.out.println(resp.getQueryResults());
 <span class="hljs-comment">// Output</span>
 <span class="hljs-comment">// [QueryResp.QueryResult(entity={metadata={&quot;product_info&quot;:{&quot;category&quot;:&quot;electronics&quot;,&quot;brand&quot;:&quot;BrandA&quot;},&quot;price&quot;:99.99,&quot;in_stock&quot;:true,&quot;tags&quot;:[&quot;summer_sale&quot;]}, pk=1})]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">rs, err := cli.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_json_collection&quot;</span>).
-    WithFilter(<span class="hljs-string">`metadata[&quot;product_info&quot;][&quot;category&quot;] == &quot;electronics&quot;`</span>).
+<pre><code translate="no" class="language-go">filter = <span class="hljs-string">`metadata[&quot;product_info&quot;][&quot;category&quot;] == &quot;electronics&quot;`</span>
+rs, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(filter).
     WithOutputFields(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 
-fmt.Println(rs.GetColumn(<span class="hljs-string">&quot;pk&quot;</span>))
-fmt.Println(rs.GetColumn(<span class="hljs-string">&quot;metadata&quot;</span>))
+fmt.Println(<span class="hljs-string">&quot;pk&quot;</span>, rs.GetColumn(<span class="hljs-string">&quot;pk&quot;</span>).FieldData().GetScalars())
+fmt.Println(<span class="hljs-string">&quot;metadata&quot;</span>, rs.GetColumn(<span class="hljs-string">&quot;metadata&quot;</span>).FieldData().GetScalars())
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;metadata[&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>;
 <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_json_collection&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">filter</span>: filter,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>]
 });
@@ -834,7 +855,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-  &quot;collectionName&quot;: &quot;my_json_collection&quot;,
+  &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;filter&quot;: &quot;metadata[\&quot;product_info\&quot;][\&quot;category\&quot;] == \&quot;electronics\&quot;&quot;,
   &quot;outputFields&quot;: [&quot;metadata&quot;, &quot;pk&quot;]
 }&#x27;</span>
@@ -862,7 +883,7 @@ curl --request POST \
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;brand&quot;] == &quot;BrandA&quot;&#x27;</span>
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;my_json_collection&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     data=[[<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>]],
     limit=<span class="hljs-number">5</span>,
     search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
@@ -889,7 +910,7 @@ res = client.search(
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;metadata[\&quot;product_info\&quot;][\&quot;brand\&quot;] == \&quot;BrandA\&quot;&quot;</span>;
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
-        .collectionName(<span class="hljs-string">&quot;my_json_collection&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .annsField(<span class="hljs-string">&quot;embedding&quot;</span>)
         .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3f</span>, -<span class="hljs-number">0.6f</span>, <span class="hljs-number">0.1f</span>})))
         .topK(<span class="hljs-number">5</span>)
@@ -909,25 +930,31 @@ System.out.println(resp.getSearchResults());
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.3</span>, <span class="hljs-number">-0.6</span>, <span class="hljs-number">-0.1</span>}
+filter = <span class="hljs-string">&quot;metadata[\&quot;product_info\&quot;][\&quot;brand\&quot;] == \&quot;BrandA\&quot;&quot;</span>
 
 annParam := index.NewCustomAnnParam()
 annParam.WithExtraParam(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">10</span>)
-resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
-    <span class="hljs-string">&quot;my_json_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
-    <span class="hljs-number">5</span>,                    <span class="hljs-comment">// limit</span>
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">5</span>,               <span class="hljs-comment">// limit</span>
     []entity.Vector{entity.FloatVector(queryVector)},
-).WithOutputFields(<span class="hljs-string">&quot;metadata&quot;</span>).WithAnnParam(annParam))
+).WithANNSField(<span class="hljs-string">&quot;embedding&quot;</span>).
+    WithFilter(filter).
+    WithOutputFields(<span class="hljs-string">&quot;metadata&quot;</span>).
+    WithAnnParam(annParam))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatal(<span class="hljs-string">&quot;failed to perform basic ANN search collection: &quot;</span>, err.Error())
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
 }
 
 <span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
-    log.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs)
-    log.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+    fmt.Println(<span class="hljs-string">&quot;metadata&quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;metadata&quot;</span>).FieldData().GetScalars())
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_json_collection&#x27;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">data</span>: [<span class="hljs-number">0.3</span>, -<span class="hljs-number">0.6</span>, <span class="hljs-number">0.1</span>],
     <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;metadata&#x27;</span>],
@@ -940,7 +967,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-  &quot;collectionName&quot;: &quot;my_json_collection&quot;,
+  &quot;collectionName&quot;: &quot;my_collection&quot;,
   &quot;data&quot;: [
     [0.3, -0.6, 0.1]
   ],

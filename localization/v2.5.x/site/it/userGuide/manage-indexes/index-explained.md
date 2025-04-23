@@ -49,7 +49,7 @@ summary: >-
      <th><p>Tipi di indice applicabili</p></th>
    </tr>
    <tr>
-     <td><ul><li><p>VETTORE_FIAT</p></li><li><p>VETTORE_FLAT16</p></li><li><p>BFLOAT16_VECTOR</p></li></ul></td>
+     <td><ul><li><p>VETTORE_FLAT</p></li><li><p>VETTORE_FLAT16</p></li><li><p>BFLOAT16_VECTOR</p></li></ul></td>
      <td><ul><li><p>PIATTO</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>HNSW</p></li><li><p>DISKANN</p></li></ul></td>
    </tr>
    <tr>
@@ -73,7 +73,7 @@ summary: >-
      <td><ul><li>INVERTITO</li><li>STL_SORT</li></ul></td>
    </tr>
    <tr>
-     <td><ul><li>FIORITO</li><li>DOPPIO</li></ul></td>
+     <td><ul><li>FIAT</li><li>DOPPIO</li></ul></td>
      <td><p>INVERTITO</p></td>
    </tr>
    <tr>
@@ -106,12 +106,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Come illustrato nel diagramma seguente, un tipo di indice in Milvus è costituito da tre componenti fondamentali: <strong>struttura dei dati</strong>, <strong>quantizzazione</strong> e <strong>raffinatore</strong>. La quantizzazione e il raffinatore sono opzionali, ma sono ampiamente utilizzati grazie a un significativo equilibrio tra guadagni e costi.</p>
+    </button></h2><p>Come illustrato nel diagramma seguente, un tipo di indice in Milvus è costituito da tre componenti fondamentali: la <strong>struttura dei dati</strong>, la <strong>quantizzazione</strong> e il <strong>raffinatore</strong>. La quantizzazione e il raffinatore sono opzionali, ma sono ampiamente utilizzati grazie a un significativo equilibrio tra guadagni e costi.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector-index-anatomy.png" alt="vector-index-anatomy" class="doc-image" id="vector-index-anatomy" />
-   </span> <span class="img-wrapper"> <span>anatomia dell'indice vettoriale</span> </span></p>
-<p>Durante la creazione dell'indice, Milvus combina la struttura dei dati scelta e il metodo di quantizzazione per determinare un <strong>tasso di espansione</strong> ottimale. Al momento dell'interrogazione, il sistema recupera <code translate="no">topK × expansion rate</code> vettori candidati, applica il raffinatore per ricalcolare le distanze con maggiore precisione e infine restituisce i risultati <code translate="no">topK</code> più accurati. Questo approccio ibrido bilancia velocità e precisione limitando il raffinamento, che richiede molte risorse, a un sottoinsieme filtrato di candidati.</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   </span> <span class="img-wrapper"> <span>Anatomia dell'indice vettoriale</span> </span></p>
+<p>Durante la creazione dell'indice, Milvus combina la struttura dei dati e il metodo di quantizzazione scelti per determinare un <strong>tasso di espansione</strong> ottimale. Al momento dell'interrogazione, il sistema recupera <code translate="no">topK × expansion rate</code> vettori candidati, applica il raffinatore per ricalcolare le distanze con maggiore precisione e infine restituisce i risultati <code translate="no">topK</code> più accurati. Questo approccio ibrido bilancia velocità e precisione limitando il raffinamento, che richiede molte risorse, a un sottoinsieme filtrato di candidati.</p>
 <h3 id="Data-structure" class="common-anchor-header">Struttura dei dati</h3><p>La struttura dei dati costituisce il livello fondamentale dell'indice. I tipi più comuni sono:</p>
 <ul>
 <li><p><strong>File invertito (IVF)</strong></p>
@@ -128,7 +128,7 @@ summary: >-
 </ul>
 <h3 id="Refiner" class="common-anchor-header">Raffinatore</h3><p>La quantizzazione è intrinsecamente soggetta a perdite. Per mantenere il tasso di richiamo, la quantizzazione produce costantemente un numero di candidati top-K superiore al necessario, consentendo ai raffinatori di utilizzare una maggiore precisione per selezionare ulteriormente i risultati top-K da questi candidati, migliorando il tasso di richiamo.</p>
 <p>Ad esempio, il raffinatore FP32 opera sui risultati di ricerca restituiti dalla quantizzazione ricalcolando le distanze utilizzando la precisione FP32 anziché i valori quantizzati.</p>
-<p>Ciò è fondamentale per le applicazioni che richiedono un compromesso tra efficienza della ricerca e precisione, come la ricerca semantica o i sistemi di raccomandazione, dove piccole variazioni di distanza hanno un impatto significativo sulla qualità dei risultati.</p>
+<p>Ciò è fondamentale per le applicazioni che richiedono un compromesso tra efficienza della ricerca e precisione, come la ricerca semantica o i sistemi di raccomandazione, in cui piccole variazioni di distanza hanno un impatto significativo sulla qualità dei risultati.</p>
 <h3 id="Summary" class="common-anchor-header">Sintesi</h3><p>Questa architettura a livelli - filtraggio grossolano tramite strutture di dati, calcolo efficiente tramite quantizzazione e regolazione della precisione tramite raffinamento - consente a Milvus di ottimizzare il compromesso accuratezza-prestazioni in modo adattivo.</p>
 <h2 id="Performance-trade-offs" class="common-anchor-header">Scambi di prestazioni<button data-href="#Performance-trade-offs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -150,7 +150,7 @@ summary: >-
 <li><p><strong>I tipi di indice basati su grafi</strong> di solito superano le <strong>varianti FIV</strong> in termini di <strong>QPS</strong>.</p></li>
 <li><p><strong>Le varianti IVF</strong> sono particolarmente adatte agli scenari con <strong>un topK elevato (ad esempio, oltre 2.000)</strong>.</p></li>
 <li><p><strong>PQ</strong> offre in genere un tasso di richiamo migliore a tassi di compressione simili rispetto a <strong>SQ</strong>, anche se quest'ultimo offre prestazioni più veloci.</p></li>
-<li><p>L'utilizzo di dischi rigidi per parte dell'indice (come in <strong>DiskANN</strong>) aiuta a gestire grandi insiemi di dati, ma introduce anche potenziali colli di bottiglia IOPS.</p></li>
+<li><p>L'utilizzo di dischi rigidi per una parte dell'indice (come in <strong>DiskANN</strong>) aiuta a gestire grandi insiemi di dati, ma introduce anche potenziali colli di bottiglia IOPS.</p></li>
 </ul>
 <h3 id="Capacity" class="common-anchor-header">Capacità</h3><p>La capacità di solito riguarda il rapporto tra le dimensioni dei dati e la RAM disponibile. Quando si parla di capacità, si consideri quanto segue:</p>
 <ul>
@@ -282,7 +282,7 @@ summary: >-
 <td><p>515,0 MB</p></td>
 </tr>
 </table></p></li>
-<li><p><strong>Calcolare l'overhead di raffinazione.</strong></p>
+<li><p><strong>Calcolare l'overhead di raffinamento.</strong></p>
 <p>Le varianti FIV sono spesso abbinate a un raffinatore per riordinare i candidati. Per una ricerca che recupera i primi 10 risultati con un tasso di espansione di 5, il refinement overhead può essere stimato come segue:</p>
 <pre><code translate="no" class="language-plaintext">10 (topK) x 5 (expansion rate) = 50 candidates
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB

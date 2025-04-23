@@ -2,10 +2,10 @@
 id: decompounder-filter.md
 title: Décompacteur
 summary: >-
-  Le filtre décompounder divise les mots composés en composants individuels sur
-  la base d'un dictionnaire spécifié, ce qui facilite la recherche de parties de
-  termes composés. Ce filtre est particulièrement utile pour les langues qui
-  utilisent fréquemment des mots composés, comme l'allemand.
+  Le filtre de décompactage divise les mots composés en composants individuels
+  sur la base d'un dictionnaire spécifié, ce qui facilite la recherche de
+  parties de termes composés. Ce filtre est particulièrement utile pour les
+  langues qui utilisent fréquemment des mots composés, comme l'allemand.
 ---
 <h1 id="Decompounder" class="common-anchor-header">Décompacteur<button data-href="#Decompounder" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,11 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
     }],
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+        <span class="hljs-string">&quot;type&quot;</span>:       <span class="hljs-string">&quot;decompounder&quot;</span>,
+        <span class="hljs-string">&quot;word_list&quot;</span>: []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;dampf&quot;</span>, <span class="hljs-string">&quot;schiff&quot;</span>, <span class="hljs-string">&quot;fahrt&quot;</span>, <span class="hljs-string">&quot;brot&quot;</span>, <span class="hljs-string">&quot;backen&quot;</span>, <span class="hljs-string">&quot;automat&quot;</span>},
+    }}}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 analyzerParams=<span class="hljs-string">&#x27;{
@@ -127,11 +131,24 @@ analyzerParams=<span class="hljs-string">&#x27;{
     }],
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;standard&quot;</span>);
+analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
+        Collections.singletonList(
+                <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+                    put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;decompounder&quot;</span>);
+                    put(<span class="hljs-string">&quot;word_list&quot;</span>, Arrays.asList(<span class="hljs-string">&quot;dampf&quot;</span>, <span class="hljs-string">&quot;schiff&quot;</span>, <span class="hljs-string">&quot;fahrt&quot;</span>, <span class="hljs-string">&quot;brot&quot;</span>, <span class="hljs-string">&quot;backen&quot;</span>, <span class="hljs-string">&quot;automat&quot;</span>));
+                }}
+        )
+);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+        <span class="hljs-string">&quot;type&quot;</span>:       <span class="hljs-string">&quot;decompounder&quot;</span>,
+        <span class="hljs-string">&quot;word_list&quot;</span>: []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;dampf&quot;</span>, <span class="hljs-string">&quot;schiff&quot;</span>, <span class="hljs-string">&quot;fahrt&quot;</span>, <span class="hljs-string">&quot;brot&quot;</span>, <span class="hljs-string">&quot;backen&quot;</span>, <span class="hljs-string">&quot;automat&quot;</span>},
+    }}}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 analyzerParams=<span class="hljs-string">&#x27;{

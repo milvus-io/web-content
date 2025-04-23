@@ -45,7 +45,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-design-anatomy.png" alt="Schema Design Anatomy" class="doc-image" id="schema-design-anatomy" />
    </span> <span class="img-wrapper"> <span>Anatomia do desenho do esquema</span> </span></p>
-<p>A conceção do modelo de dados de um sistema de pesquisa envolve a análise das necessidades comerciais e a abstração da informação num modelo de dados expresso em esquema. Por exemplo, a pesquisa de um pedaço de texto deve ser "indexada" convertendo a cadeia literal num vetor através da "incorporação" e permitindo a pesquisa vetorial. Para além deste requisito essencial, pode ser necessário armazenar outras propriedades, como o carimbo temporal da publicação e o autor. Estes metadados permitem que as pesquisas semânticas sejam refinadas através de filtragem, devolvendo apenas textos publicados após uma data específica ou por um determinado autor. Também pode obter estes escalares com o texto principal para apresentar o resultado da pesquisa na aplicação. A cada um deles deve ser atribuído um identificador único para organizar estas partes de texto, expresso como um número inteiro ou uma cadeia de caracteres. Esses elementos são essenciais para obter uma lógica de pesquisa sofisticada.</p>
+<p>A conceção do modelo de dados de um sistema de pesquisa envolve a análise das necessidades comerciais e a abstração da informação num modelo de dados expresso em esquema. Por exemplo, a pesquisa de um pedaço de texto deve ser "indexada" convertendo a cadeia literal num vetor através de "incorporação" e permitindo a pesquisa vetorial. Para além deste requisito essencial, pode ser necessário armazenar outras propriedades, como o carimbo temporal da publicação e o autor. Estes metadados permitem que as pesquisas semânticas sejam refinadas através de filtragem, devolvendo apenas textos publicados após uma data específica ou por um determinado autor. Também pode obter estes escalares com o texto principal para apresentar o resultado da pesquisa na aplicação. A cada um deles deve ser atribuído um identificador único para organizar estas partes de texto, expresso como um número inteiro ou uma cadeia de caracteres. Esses elementos são essenciais para obter uma lógica de pesquisa sofisticada.</p>
 <p>Consulte a secção <a href="/docs/pt/schema-hands-on.md">Prática de conceção de esquemas</a> para saber como criar um esquema bem concebido.</p>
 <h2 id="Create-Schema" class="common-anchor-header">Criar esquema<button data-href="#Create-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,7 +80,6 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
 
 schema := entity.NewSchema()
-log.Println(schema)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
     &quot;fields&quot;: []
@@ -134,9 +133,7 @@ schema.addField(AddFieldReq.builder()
     <span class="hljs-comment">// highlight-end</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_id&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_id&quot;</span>).
     WithDataType(entity.FieldTypeInt64).
     <span class="hljs-comment">// highlight-start</span>
     WithIsPrimaryKey(<span class="hljs-literal">true</span>).
@@ -175,7 +172,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os campos de vetor aceitam vários embeddings de vetor esparsos e densos. No Zilliz Cloud, é possível adicionar quatro campos vetoriais a uma coleção. Os seguintes trechos de código demonstram como adicionar um campo vetorial.</p>
+    </button></h2><p>Os campos de vetor aceitam vários embeddings de vetor esparsos e densos. No Zilliz Cloud, é possível adicionar quatro campos vetoriais a uma coleção. Os seguintes trechos de código demonstram como adicionar um campo de vetor.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -199,9 +196,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_i
     <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
     WithDataType(entity.FieldTypeFloatVector).
     <span class="hljs-comment">// highlight-next-line</span>
     WithDim(<span class="hljs-number">5</span>),
@@ -249,7 +244,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Em casos comuns, é possível utilizar campos escalares para armazenar os metadados dos embeddings vectoriais armazenados no Milvus e realizar pesquisas ANN com filtragem de metadados para melhorar a correção dos resultados da pesquisa. O Zilliz Cloud suporta múltiplos tipos de campos escalares, incluindo <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, <strong>Float</strong>, <strong>Double</strong>, <strong>Array</strong> e <strong>JSON</strong>.</p>
+    </button></h2><p>Em casos comuns, pode utilizar campos escalares para armazenar os metadados dos embeddings vectoriais armazenados no Milvus e realizar pesquisas ANN com filtragem de metadados para melhorar a correção dos resultados da pesquisa. O Zilliz Cloud suporta múltiplos tipos de campos escalares, incluindo <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, <strong>Float</strong>, <strong>Double</strong>, <strong>Array</strong> e <strong>JSON</strong>.</p>
 <h3 id="Add-String-Fields" class="common-anchor-header">Adicionar campos String</h3><p>No Milvus, é possível usar campos VarChar para armazenar strings. Para saber mais sobre o campo VarChar, consulte <a href="/docs/pt/string.md">Campo de cadeia de caracteres</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -274,9 +269,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
     <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_varchar&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_varchar&quot;</span>).
     WithDataType(entity.FieldTypeVarChar).
     WithMaxLength(<span class="hljs-number">512</span>),
 )
@@ -285,7 +278,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
     &quot;fieldName&quot;: &quot;my_varchar&quot;,
     &quot;dataType&quot;: &quot;VarChar&quot;,
     &quot;elementTypeParams&quot;: {
-        &quot;max_length&quot;: 256
+        &quot;max_length&quot;: 512
     }
 }&#x27;</span>
 
@@ -316,9 +309,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_v
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_int64&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_int64&quot;</span>).
     WithDataType(entity.FieldTypeInt64),
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -355,9 +346,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_i
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Boolean</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_bool&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_bool&quot;</span>).
     WithDataType(entity.FieldTypeBool),
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -395,9 +384,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_b
     <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">JSON</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_json&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_json&quot;</span>).
     WithDataType(entity.FieldTypeJSON),
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -418,7 +405,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_j
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Array-Fields" class="common-anchor-header">Adicionar campos de matriz</h3><p>Um campo de matriz armazena uma lista de elementos. Os tipos de dados de todos os elementos de um campo de matriz devem ser os mesmos. Para mais informações sobre os campos de matriz, consulte <a href="/docs/pt/array_data_type.md">Campo de matriz</a>.</p>
+<h3 id="Add-Array-Fields" class="common-anchor-header">Adicionar campos de matriz</h3><p>Um campo de matriz armazena uma lista de elementos. Os tipos de dados de todos os elementos num campo de matriz devem ser os mesmos. Para mais informações sobre os campos de matriz, consulte <a href="/docs/pt/array_data_type.md">Campo de matriz</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -445,9 +432,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_j
     <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-
-schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_array&quot;</span>).
+<pre><code translate="no" class="language-go">schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_array&quot;</span>).
     WithDataType(entity.FieldTypeArray).
     WithElementType(entity.FieldTypeInt64).
     WithMaxLength(<span class="hljs-number">512</span>).

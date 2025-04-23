@@ -300,7 +300,7 @@
       },
       {
         "label": "Livello di coerenza",
-        "id": "consistency.md",
+        "id": "tune_consistency.md",
         "order": 10,
         "children": []
       },
@@ -348,7 +348,7 @@
             "children": []
           },
           {
-            "label": "Creare istantaneamente una collezione",
+            "label": "Creare una collezione istantanea",
             "id": "create-collection-instantly.md",
             "order": 2,
             "children": []
@@ -801,21 +801,27 @@
             "children": []
           },
           {
+            "label": "Query Elasticsearch a Milvus",
+            "id": "elasticsearch-queries-to-milvus.md",
+            "order": 9,
+            "children": []
+          },
+          {
             "label": "Iteratori di ricerca",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 10,
             "children": []
           },
           {
             "label": "Utilizzare la chiave di partizione",
             "id": "use-partition-key.md",
-            "order": 9,
+            "order": 11,
             "children": []
           },
           {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 10,
+            "order": 12,
             "children": []
           }
         ]
@@ -1452,6 +1458,12 @@
                 "label": "Ruoli delle sovvenzioni",
                 "id": "grant_roles.md",
                 "order": 4,
+                "children": []
+              },
+              {
+                "label": "Eliminare utenti e ruoli",
+                "id": "drop_users_roles.md",
+                "order": 5,
                 "children": []
               }
             ]
@@ -2305,7 +2317,7 @@
             "children": []
           },
           {
-            "label": "Ricerca della somiglianza audio",
+            "label": "Ricerca di somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

@@ -1,10 +1,9 @@
 ---
 id: drop_users_roles.md
-related_key: enable RBAC
-summary: データのセキュリティを確保するために、使用しなくなったユーザとロールは削除することをお勧めします。このガイドでは、ユーザとロールを削除する方法を紹介します。
 title: ユーザとロールの削除
+summary: データのセキュリティを確保するために、使用しなくなったユーザとロールは削除することをお勧めします。このガイドでは、ユーザとロールを削除する方法を紹介します。
 ---
-<h1 id="Drop-Users--Roles​" class="common-anchor-header">ユーザとロールの削除<button data-href="#Drop-Users--Roles​" class="anchor-icon" translate="no">
+<h1 id="Drop-Users--Roles" class="common-anchor-header">ユーザとロールの削除<button data-href="#Drop-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +19,7 @@ title: ユーザとロールの削除
         ></path>
       </svg>
     </button></h1><p>データのセキュリティを確保するために、使用しなくなったユーザとロールは削除することをお勧めします。このガイドでは、ユーザとロールを削除する方法を紹介します。</p>
-<h2 id="Drop-a-user​" class="common-anchor-header">ユーザの削除<button data-href="#Drop-a-user​" class="anchor-icon" translate="no">
+<h2 id="Drop-a-user" class="common-anchor-header">ユーザの削除<button data-href="#Drop-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,88 +39,111 @@ title: ユーザとロールの削除
 <p><code translate="no">root</code> ユーザは削除できません。</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
-​
-client = MilvusClient(​
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,​
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
-)​
-​
-<span class="hljs-comment"># create a user​</span>
-client.drop_user(user_name=<span class="hljs-string">&quot;user_1&quot;</span>)​
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#plaintext">プレーンテキスト</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig​
-<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2​
-<span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DropUserReq​
-​
-<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">connectConfig</span> <span class="hljs-operator">=</span> ConnectConfig.builder()​
-        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
-        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)​
-        .build();​
-        ​
-<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(connectConfig);​
-​
-<span class="hljs-type">DropUserReq</span> <span class="hljs-variable">dropUserReq</span> <span class="hljs-operator">=</span> DropUserReq.builder()​
-        .userName(<span class="hljs-string">&quot;user_1&quot;</span>)​
-        .build();​
-client.dropUser(dropUserReq);​
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
 
+<span class="hljs-comment"># create a user</span>
+client.drop_user(user_name=<span class="hljs-string">&quot;user_1&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)​
-​
-<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;​
-<span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;​
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});​
-​
-milvusClient.<span class="hljs-title function_">deleteUser</span>({​
-    <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>​
-})​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2
+<span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DropUserReq
 
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>​
-​
-curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/drop&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
-    &quot;userName&quot;: &quot;user_1&quot;​
-}&#x27;</span>​
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">connectConfig</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build();
+        
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(connectConfig);
 
+<span class="hljs-type">DropUserReq</span> <span class="hljs-variable">dropUserReq</span> <span class="hljs-operator">=</span> DropUserReq.builder()
+        .userName(<span class="hljs-string">&quot;user_1&quot;</span>)
+        .build();
+client.dropUser(dropUserReq);
 <button class="copy-code-btn"></button></code></pre>
-<p>ユーザがドロップされると、ドロップ操作が成功したかどうかを確認するために、すべての既存ユーザをリストすることができます。</p>
+<pre><code translate="no" class="language-plaintext">import (
+    &quot;context&quot;
+    &quot;fmt&quot;
+
+    &quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: &quot;localhost:19530&quot;,
+    APIKey:  &quot;root:Milvus&quot;,
+})
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+defer client.Close(ctx)
+
+err = client.DropUser(ctx, milvusclient.NewDropUserOption(&quot;user_1&quot;))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)
+
+<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
+<span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});
+
+milvusClient.<span class="hljs-title function_">deleteUser</span>({
+    <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>
+})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/drop&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;userName&quot;: &quot;user_1&quot;
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>ユーザをドロップすると、既存のすべてのユーザを一覧表示して、ドロップ操作が成功したかどうかを確認できます。</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
-​
-client.<span class="hljs-title function_">list_users</span>()​
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
+client.list_users()
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">rbac</span>.<span class="hljs-property">request</span>.<span class="hljs-property">listUsersReq</span>​
-​
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">String</span>&gt; resp = client.<span class="hljs-title function_">listUsers</span>();​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.listUsersReq
 
+List&lt;String&gt; resp = client.listUsers();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)​
-​
-milvusClient.<span class="hljs-title function_">listUsers</span>()​
-
+<pre><code translate="no" class="language-go">users, err := client.ListUsers(ctx, milvusclient.NewListUserOption())
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/list&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{}&#x27;</span>​
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)
 
+<span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">listUsers</span>();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/list&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>以下は出力例です。リストに<code translate="no">user_1</code> 。ドロップ操作は成功しています。</p>
-<pre><code translate="no">[<span class="hljs-string">&#x27;root&#x27;</span>]​
-
+<pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;root&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-a-role​" class="common-anchor-header">ロールの削除<button data-href="#Drop-a-role​" class="anchor-icon" translate="no">
+<h2 id="Drop-a-role" class="common-anchor-header">ロールの削除<button data-href="#Drop-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,65 +160,66 @@ milvusClient.<span class="hljs-title function_">listUsers</span>()​
       </svg>
     </button></h2><p>次の例は、ロール<code translate="no">role_a</code> を削除する方法を示しています。</p>
 <div class="alert note">
-<p>組み込みのロール<code translate="no">admin</code> は削除できません。</p>
+<p>組み込みロール<code translate="no">admin</code> は削除できません。</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
-​
-client.<span class="hljs-title function_">drop_role</span>(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)​
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
+client.drop_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DropRoleReq​
-​
-<span class="hljs-type">DropRoleReq</span> <span class="hljs-variable">dropRoleReq</span> <span class="hljs-operator">=</span> DropRoleReq.builder()​
-        .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)​
-        .build();​
-client.dropRole(dropRoleReq);​
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DropRoleReq
 
+<span class="hljs-type">DropRoleReq</span> <span class="hljs-variable">dropRoleReq</span> <span class="hljs-operator">=</span> DropRoleReq.builder()
+        .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
+        .build();
+client.dropRole(dropRoleReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)​
-​
-milvusClient.<span class="hljs-title function_">dropRole</span>({​
-   <span class="hljs-attr">roleName</span>: <span class="hljs-string">&#x27;role_a&#x27;</span>,​
- })​
+<pre><code translate="no" class="language-go">err = client.DropRole(ctx, milvusclient.NewDropRoleOption(<span class="hljs-string">&quot;role_a&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)
 
+<span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">dropRole</span>({
+   <span class="hljs-attr">roleName</span>: <span class="hljs-string">&#x27;role_a&#x27;</span>,
+ });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/drop&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{​
-    &quot;roleName&quot;: &quot;role_a&quot;​
-}&#x27;</span>​
-
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/drop&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;roleName&quot;: &quot;role_a&quot;
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ロールを削除すると、既存のすべてのロールを一覧表示して、削除操作が成功したかどうかを確認できます。</p>
+<p>ロールが削除されると、既存のすべてのロールを一覧表示して、削除操作が成功したかどうかを確認できます。</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
-​
-client.<span class="hljs-title function_">list_roles</span>()​
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
+client.list_roles()
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">String</span>&gt; resp = client.<span class="hljs-title function_">listRoles</span>();​
-
+<pre><code translate="no" class="language-java">List&lt;String&gt; resp = client.listRoles();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)​
-​
-milvusClient.<span class="hljs-title function_">listRoles</span>(​
-    <span class="hljs-attr">includeUserInfo</span>: <span class="hljs-title class_">True</span>​
-)​
-
+<pre><code translate="no" class="language-go">roles, err := client.ListRoles(ctx, milvusclient.NewListRoleOption())
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-shell">curl --request POST \​
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/list&quot;</span> \​
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \​
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \​
--d <span class="hljs-string">&#x27;{}&#x27;</span>​
-
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listRoles</span>({
+    <span class="hljs-attr">includeUserInfo</span>: <span class="hljs-literal">true</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/roles/list&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>以下は出力例です。リストに<code translate="no">role_a</code> 。ドロップ操作は成功しています。</p>
-<pre><code translate="no">[<span class="hljs-string">&#x27;admin&#x27;</span>]​
-
+<pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;admin&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>

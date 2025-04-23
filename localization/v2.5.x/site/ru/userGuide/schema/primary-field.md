@@ -4,7 +4,7 @@ title: Первичное поле и автоидентификатор
 summary: >-
   Первичное поле уникально идентифицирует сущность. На этой странице описано,
   как добавить первичное поле в два разных типа данных и как разрешить Milvus
-  автоматически распределять значения первичного поля.
+  автоматически присваивать значения первичного поля.
 ---
 <h1 id="Primary-Field--AutoID" class="common-anchor-header">Первичное поле и автоидентификатор<button data-href="#Primary-Field--AutoID" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -149,10 +149,7 @@ schema.WithField(entity.NewField().WithName(<span class="hljs-string">&quot;my_i
     <span class="hljs-comment"># highlight-end</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq; 
-
-schema.addField(AddFieldReq.builder()
+<pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;my_id&quot;</span>)
         .dataType(DataType.VarChar)
         <span class="hljs-comment">// highlight-start</span>

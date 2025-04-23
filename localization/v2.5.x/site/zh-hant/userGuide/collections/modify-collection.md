@@ -37,14 +37,14 @@ summary: 您可以重新命名一個集合或變更其設定。本頁主要介�
     </button></h2><p>您可以重命名集合，如下所示。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = <span class="hljs-title class_">MilvusClient</span>(
+client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-client.<span class="hljs-title function_">rename_collection</span>(
+client.rename_collection(
     old_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     new_name=<span class="hljs-string">&quot;my_new_collection&quot;</span>
 )
@@ -85,7 +85,6 @@ client.renameCollection(renameCollectionReq);
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
-    <span class="hljs-string">&quot;log&quot;</span>
 
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
 )
@@ -93,21 +92,22 @@ client.renameCollection(renameCollectionReq);
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;127.0.0.1:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
 token := <span class="hljs-string">&quot;root:Milvus&quot;</span>
 
-cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
     APIKey:  token,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
 }
+<span class="hljs-keyword">defer</span> client.Close(ctx)
 
-<span class="hljs-keyword">defer</span> cli.Close(ctx)
-
-err = cli.RenameCollection(ctx, milvusclient.NewRenameCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;my_new_collection&quot;</span>))
+err = client.RenameCollection(ctx, milvusclient.NewRenameCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;my_new_collection&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
@@ -141,9 +141,9 @@ curl --request POST \
     </button></h2><p>以下程式碼片段示範如何設定集合的 TTL。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client.<span class="hljs-title function_">alter_collection_properties</span>(
+client.alter_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>}
 )
@@ -169,31 +169,9 @@ client.alterCollection(alterCollectionReq);
     }
 })
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;context&quot;</span>
-    <span class="hljs-string">&quot;fmt&quot;</span>
-    <span class="hljs-string">&quot;log&quot;</span>
-
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/pkg/common&quot;</span>
-)
-
-ctx, cancel := context.WithCancel(context.Background())
-<span class="hljs-keyword">defer</span> cancel()
-
-milvusAddr := <span class="hljs-string">&quot;127.0.0.1:19530&quot;</span>
-
-cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: milvusAddr,
-})
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(common.CollectionTTLConfigKey, <span class="hljs-number">60</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())
-}
-
-<span class="hljs-keyword">defer</span> cli.Close(ctx)
-
-err = cli.AlterCollection(ctx, milvusclient.NewAlterCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(common.CollectionTTLConfigKey, <span class="hljs-number">60</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
@@ -219,11 +197,11 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>如果一個 collection 的資料需要在特定時間後刪除，請考慮設定它的 Time-To-Live (TTL)，單位為秒。一旦 TTL 超時，Milvus 會刪除集合中的所有實體。  刪除是異步的，表示在刪除完成之前，搜尋和查詢仍是可能的。詳情請參閱<a href="/docs/zh-hant/set-collection-ttl.md">設定集合 TTL</a>。</p></td>
+     <td><p>如果一個 collection 的資料需要在特定時間後刪除，可以考慮設定它的 Time-To-Live (TTL)，單位是秒。一旦 TTL 超時，Milvus 會刪除集合中的所有實體。  刪除是異步的，表示在刪除完成之前，搜尋和查詢仍是可能的。詳情請參閱<a href="/docs/zh-hant/set-collection-ttl.md">設定集合 TTL</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>記憶體映射 (Mmap) 可以直接存取磁碟上的大型檔案，讓 Milvus 可以同時在記憶體和硬碟中儲存索引和資料。此方法有助於根據存取頻率最佳化資料放置政策，在不影響搜尋效能的情況下擴充資料集的儲存容量。</p><p>如需詳細資訊，請參閱<a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">使用 mmap</a>。</p></td>
+     <td><p>記憶體映射 (Mmap) 可以直接存取磁碟上的大型檔案，讓 Milvus 可以同時在記憶體和硬碟中儲存索引和資料。此方法有助於根據存取頻率最佳化資料放置政策，在不影響搜尋效能的情況下擴充資料集的儲存容量。</p><p>如需詳細資訊，請參閱<a href="/docs/zh-hant/mmap.md">使用 mmap</a>。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
@@ -248,24 +226,28 @@ curl --request POST \
     </button></h2><p>您也可以透過丟棄集合屬性來重設集合屬性，如下所示。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_collection_properties</span>(
+<pre><code translate="no" class="language-python">client.drop_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     property_keys=[
         <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>
     ]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">client.<span class="hljs-title function_">dropCollectionProperties</span>(<span class="hljs-title class_">DropCollectionPropertiesReq</span>.<span class="hljs-title function_">builder</span>()
-        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .<span class="hljs-title function_">propertyKeys</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>))
-        .<span class="hljs-title function_">build</span>());
+<pre><code translate="no" class="language-java">client.dropCollectionProperties(DropCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .propertyKeys(Collections.singletonList(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>))
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">dropCollectionProperties</span>({
     <span class="hljs-attr">collection_name</span>:<span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">properties</span>: [<span class="hljs-string">&#x27;collection.ttl.seconds&#x27;</span>],
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// TODO</span>
+<pre><code translate="no" class="language-go">err = client.DropCollectionProperties(ctx, milvusclient.NewDropCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>, common.CollectionTTLConfigKey))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> \

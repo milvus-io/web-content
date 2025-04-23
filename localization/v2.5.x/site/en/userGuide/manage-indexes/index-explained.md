@@ -109,8 +109,8 @@ summary: >-
     </button></h2><p>As demonstrated in the diagram below, an index type in Milvus consists of three core components, namely <strong>data structure</strong>, <strong>quantization</strong>, and <strong>refiner</strong>. Quantization and refiner are optional, but are widely used because of a significant gains-better-than-costs balance.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/vector-index-anatomy.png" alt="vector-index-anatomy" class="doc-image" id="vector-index-anatomy" />
-    <span>vector-index-anatomy</span>
+    <img translate="no" src="/docs/v2.5.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+    <span>Vector Index Anatomy</span>
   </span>
 </p>
 <p>During index creation, Milvus combines the chosen data structure and quantization method to determine an optimal <strong>expansion rate</strong>. At query time, the system retrieves <code translate="no">topK × expansion rate</code> candidate vectors, applies the refiner to recalculate distances with higher precision, and finally returns the most accurate <code translate="no">topK</code> results. This hybrid approach balances speed and accuracy by restricting resource-intensive refinement to a filtered subset of candidates.</p>

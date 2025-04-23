@@ -103,9 +103,9 @@ summary: >-
     </button></h2><p>下図に示すように、Milvusのインデックスタイプは、<strong>データ構造</strong>、<strong>量子化</strong>、<strong>リファイナーという</strong>3つのコアコンポーネントから構成されています。量子化とリファイナーはオプションですが、コストよりも利益が大きいため、広く使用されています。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector-index-anatomy.png" alt="vector-index-anatomy" class="doc-image" id="vector-index-anatomy" />
-   </span> <span class="img-wrapper"> <span>ベクトルインデックス解剖</span> </span></p>
-<p>インデックス作成時、milvusは選択されたデータ構造と量子化法を組み合わせ、最適な<strong>展開率を</strong>決定する。クエリー時には、<code translate="no">topK × expansion rate</code> 候補ベクトルを検索し、リファイナーを適用してより高い精度で距離を再計算し、最終的に最も正確な<code translate="no">topK</code> 結果を返す。このハイブリッド・アプローチは、リソースを大量に消費する精密化を、フィルタリングされた候補のサブセットに制限することで、速度と精度のバランスをとっている。</p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
+   </span> <span class="img-wrapper"> <span>ベクトルインデックスの解剖</span> </span></p>
+<p>インデックス作成時、milvusは選択されたデータ構造と量子化方法を組み合わせ、最適な<strong>展開率を</strong>決定する。クエリ時には、<code translate="no">topK × expansion rate</code> 候補ベクトルを検索し、リファイナーを適用してより高い精度で距離を再計算し、最終的に最も正確な<code translate="no">topK</code> 結果を返す。このハイブリッド・アプローチは、リソースを大量に消費する精密化を、フィルタリングされた候補のサブセットに制限することで、速度と精度のバランスをとっている。</p>
 <h3 id="Data-structure" class="common-anchor-header">データ構造</h3><p>データ構造はインデックスの基礎となるレイヤーを形成する。一般的なタイプは以下の通り：</p>
 <ul>
 <li><p><strong>転置ファイル（IVF）</strong></p>
