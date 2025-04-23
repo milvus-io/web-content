@@ -71,6 +71,7 @@ export const remarkableToHtml = async (
       version,
       path,
       betaTag,
+      useLatex: true,
     }
   );
 
