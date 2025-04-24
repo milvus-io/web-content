@@ -1307,29 +1307,34 @@ class larkDocWriter {
         let next_element_type = next? next['equation'] ? 'equation' : 'text_run' : null;
         let rip_off_line_breaks = false;
 
-        // single element 
-        if ((!prev || prev_element_type === 'text_run') && (!next || next_element_type === 'text_run')) {
-            content = content.trim();
+        // separate single equation
+        if (!prev && !next) {
+            content = `$$\n${content.trim()}\n$$\n`;
+        }
+        
+        // inline single equation 
+        if ((!prev || prev_element_type === 'text_run') && (!next ||next_element_type === 'text_run')) {
+            content = `$${content.trim()}$`;
         }
 
-        // last element
-        if (prev && prev_element_type === 'equation' && (!next || next_element_type === 'text_run')) {
-            if (rip_off_line_breaks) content = content.trim()
-        }
+        // // first element
+        // if ((!prev || prev_element_type === 'text_run') && next && next_element_type === 'equation') {
+        //     content = `$${content.trim()}`;
 
-        // first element
-        if ((!prev || prev_element_type === 'text_run') && next && next_element_type === 'equation') {
-            content = content.trim();
+        //     if (!(prev && prev['text_run']['content'].endsWith('\n'))) {
+        //         rip_off_line_breaks = true;
+        //     }
+        // }
 
-            if (!(prev && prev['text_run']['content'].endsWith('\n'))) {
-                rip_off_line_breaks = true;
-            }
-        }
+        // // middle element
+        // if (prev && prev_element_type === 'equation' && next && next_element_type === 'equation') {
+        //     content = content.trim();
+        // }
 
-        // middle element
-        if (prev && prev_element_type === 'equation' && next && next_element_type === 'equation') {
-            content = content.trim();
-        }
+        // // last element
+        // if (prev && prev_element_type === 'equation' && (!next || next_element_type === 'text_run')) {
+        //     if (rip_off_line_breaks) content = content.trim()
+        // }
 
         return content;        
     }
