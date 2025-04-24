@@ -25,6 +25,7 @@ jobs:
       - name: Yarn install
         uses: borales/actions-yarn@v4
         with:
+          cmd: install
 
       - name: Generate EN Docs
         run: |
