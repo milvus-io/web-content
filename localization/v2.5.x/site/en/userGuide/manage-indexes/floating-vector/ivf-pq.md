@@ -58,13 +58,13 @@ summary: >-
 </p>
 <ol>
 <li><p><strong>Dimension decomposition</strong>: The algorithm begins by decomposing each high-dimensional vector into <code translate="no">m</code> equal-sized sub-vectors. This decomposition transforms the original D-dimensional space into <code translate="no">m</code> disjoint subspaces, where each subspace contains <em>D/m</em> dimensions. The parameter <code translate="no">m</code> controls the granularity of the decomposition and directly influences the compression ratio.</p></li>
-<li><p><strong>Subspace codebook generation</strong>: Within each subspace, the algorithm applies <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a> to learn a set of representative vectors (centroids). These centroids collectively form a codebook for that subspace. The number of centroids in each codebook is determined by the parameter <code translate="no">nbits</code>, where each codebook contains 2^{\textit{nbits}} centroids. For example, if <code translate="no">nbits = 8</code>, each codebook will contain 256 centroids. Each centroid is assigned a unique index with <code translate="no">nbits</code> bits.</p></li>
+<li><p><strong>Subspace codebook generation</strong>: Within each subspace, the algorithm applies <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a> to learn a set of representative vectors (centroids). These centroids collectively form a codebook for that subspace. The number of centroids in each codebook is determined by the parameter <code translate="no">nbits</code>, where each codebook contains $2^{\textit{nbits}}$ centroids. For example, if <code translate="no">nbits = 8</code>, each codebook will contain 256 centroids. Each centroid is assigned a unique index with <code translate="no">nbits</code> bits.</p></li>
 <li><p><strong>Vector</strong> <strong>quantization</strong>: For each sub-vector in the original vector, PQ identifies its nearest centroid within the corresponding subspace using a specific metric type. This process effectively maps each sub-vector to its closest representative vector in the codebook. Instead of storing the full sub-vector coordinates, only the index of the matched centroid is retained.</p></li>
 <li><p><strong>Compressed representation</strong>: The final compressed representation consists of <code translate="no">m</code> indices, one from each subspace, collectively referred to as <strong>PQ codes</strong>. This encoding reduces the storage requirement from <em>D × 32</em> bits (assuming 32-bit floating-point numbers) to <em>m</em> × <em>nbits</em> bits, achieving substantial compression while preserving the ability to approximate vector distances.</p></li>
 </ol>
 <p>For more details on parameter tuning and optimization, refer to <a href="/docs/ivf-pq.md#Index-params">Index params</a>.</p>
 <div class="alert note">
-<p>Consider a vector with <em>D = 128</em> dimensions using 32-bit floating-point numbers. With PQ parameters <em>m = 64</em> (sub-vectors) and <em>nbits = 8</em> (thus <em>k =</em> 2^8 <em>= 256</em> centroids per subspace), we can compare the storage requirements:</p>
+<p>Consider a vector with <em>D = 128</em> dimensions using 32-bit floating-point numbers. With PQ parameters <em>m = 64</em> (sub-vectors) and <em>nbits = 8</em> (thus <em>k =</em> $2^8$ <em>= 256</em> centroids per subspace), we can compare the storage requirements:</p>
 <ul>
 <li><p>Original vector: 128 dimensions × 32 bits = 4,096 bits</p></li>
 <li><p>PQ-compressed vector: 64 sub-vectors × 8 bits = 512 bits</p></li>
@@ -77,8 +77,8 @@ summary: >-
 <li><p><strong>Query preprocessing</strong></p>
 <ul>
 <li><p>The query vector is decomposed into <code translate="no">m</code> sub-vectors, matching the original PQ decomposition structure.</p></li>
-<li><p>For each query sub-vector and its corresponding codebook (containing 2^{\textit{nbits}} centroids), compute and store distances to all centroids.</p></li>
-<li><p>This generates <code translate="no">m</code> lookup tables, where each table contains 2^{\textit{nbits}} distances.</p></li>
+<li><p>For each query sub-vector and its corresponding codebook (containing $2^{\textit{nbits}}$ centroids), compute and store distances to all centroids.</p></li>
+<li><p>This generates <code translate="no">m</code> lookup tables, where each table contains $2^{\textit{nbits}}$ distances.</p></li>
 </ul></li>
 <li><p><strong>Distance approximation</strong></p>
 <p>For any database vector represented by PQ codes, its approximate distance to the query vector is computed as follows:</p>
@@ -220,7 +220,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>The number of bits used to represent each sub-vector's centroid index in the compressed form. It directly determines the size of each codebook. Each codebook will contain 2^{\textit{nbits}} centroids. For example, if <code translate="no">nbits</code> is set to 8, each sub-vector will be represented by an 8-bit centroid's index. This allows for 2^8 (256) possible centroids in the codebook for that sub-vector.</p></td>
+     <td><p>The number of bits used to represent each sub-vector's centroid index in the compressed form. It directly determines the size of each codebook. Each codebook will contain $2^{\textit{nbits}}$ centroids. For example, if <code translate="no">nbits</code> is set to 8, each sub-vector will be represented by an 8-bit centroid's index. This allows for $2^8$ (256) possible centroids in the codebook for that sub-vector.</p></td>
      <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, 64]</p><p><strong>Default value</strong>: <code translate="no">8</code></p></td>
      <td><p>A higher <code translate="no">nbits</code> value allows for larger codebooks, potentially leading to more accurate representations of the original vectors. However, it also means using more bits to store each index, resulting in less compression. In most cases, we recommend you set a value within this range: [1, 16].</p></td>
    </tr>
