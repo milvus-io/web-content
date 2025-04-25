@@ -263,22 +263,26 @@ summary: >-
       </svg>
     </button></h2><p>BM25 is a widely used text relevance measurement method, specifically designed for <a href="/docs/full-text-search.md">full text search</a>. It combines the following three key factors:</p>
 <ul>
-<li><p><strong>Term Frequency (TF):</strong> Measures how frequently a term appears in a document. While higher frequencies often indicate greater importance, BM25 uses the saturation parameter k_1 to prevent overly frequent terms from dominating the relevance score.</p></li>
+<li><p><strong>Term Frequency (TF):</strong> Measures how frequently a term appears in a document. While higher frequencies often indicate greater importance, BM25 uses the saturation parameter $k_1$ to prevent overly frequent terms from dominating the relevance score.</p></li>
 <li><p><strong>Inverse Document Frequency (IDF):</strong> Reflects the importance of a term across the entire corpus. Terms appearing in fewer documents receive a higher IDF value, indicating greater contribution to relevance.</p></li>
-<li><p><strong>Document Length Normalization:</strong> Longer documents tend to score higher due to containing more terms. BM25 mitigates this bias by normalizing document lengths, with parameter b controlling the strength of this normalization.</p></li>
+<li><p><strong>Document Length Normalization:</strong> Longer documents tend to score higher due to containing more terms. BM25 mitigates this bias by normalizing document lengths, with parameter $b$ controlling the strength of this normalization.</p></li>
 </ul>
 <p>The BM25 scoring is calculated as follows:</p>
-<p>score(D, Q)=\sum_{i=1}^{n}IDF(q_i)\cdot {{TF(q_i,D)\cdot(k_1+1)}\over{TF(q_i, D)+k_1\cdot(1-b+b\cdot {{|D|}\over{avgdl}})}}</p>
+<p>$$
+score(D, Q)=\sum_{i=1}^{n}IDF(q_i)\cdot {{TF(q_i,D)\cdot(k_1+1)}\over{TF(q_i, D)+k_1\cdot(1-b+b\cdot {{|D|}\over{avgdl}})}}
+$$</p>
 <p>Parameter description:</p>
 <ul>
-<li><p>Q: The query text provided by the user.</p></li>
-<li><p>D: The document being evaluated.</p></li>
-<li><p>TF(q_i, D): Term frequency, representing how often term q_iappears in document D.</p></li>
-<li><p>IDF(q_i): Inverse document frequency, calculated as:</p>
-<p>IDF(q_i)=\log({N-n(q_i)+0.5\over n(q_i)+0.5} + 1)</p>
-<p>where N is the total number of documents in the corpus, andn(q_i) is the number of documents containing term q_i.</p></li>
-<li><p>|D|: Length of document D (total number of terms).</p></li>
-<li><p>avgdl: Average length of all documents in the corpus.</p></li>
-<li><p>k_1: Controls the influence of term frequency on the score. Higher values increase the importance of term frequency. The typical range is [1.2, 2.0], while Milvus allows a range of [0, 3].</p></li>
-<li><p>b: Controls the degree of length normalization, ranging from 0 to 1. When the value is 0, no normalization is applied; when the value is 1, full normalization is applied.</p></li>
+<li><p>$Q$: The query text provided by the user.</p></li>
+<li><p>$D$: The document being evaluated.</p></li>
+<li><p>$TF(q_i, D)$: Term frequency, representing how often term $q_i$appears in document $D$.</p></li>
+<li><p>$IDF(q_i)$: Inverse document frequency, calculated as:</p>
+<p>$$
+IDF(q_i)=\log({N-n(q_i)+0.5\over n(q_i)+0.5} + 1)
+$$</p>
+<p>where $N$ is the total number of documents in the corpus, and$n(q_i)$ is the number of documents containing term $q_i$.</p></li>
+<li><p>$|D|$: Length of document $D$ (total number of terms).</p></li>
+<li><p>$avgdl$: Average length of all documents in the corpus.</p></li>
+<li><p>$k_1$: Controls the influence of term frequency on the score. Higher values increase the importance of term frequency. The typical range is [1.2, 2.0], while Milvus allows a range of [0, 3].</p></li>
+<li><p>$b$: Controls the degree of length normalization, ranging from 0 to 1. When the value is 0, no normalization is applied; when the value is 1, full normalization is applied.</p></li>
 </ul>
