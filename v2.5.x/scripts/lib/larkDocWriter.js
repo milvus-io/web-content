@@ -687,7 +687,14 @@ class larkDocWriter {
             if (this.block_types[block['block_type']-1] === undefined) {
                 markdown.push('[Unsupported block type]');
             } else if (this.block_types[block['block_type']-1] === 'text') {
-                markdown.push(idt + await this.__text(block['text']));
+                let content = await this.__text(block['text']);
+                if (content.trim().indexOf('\n') > 0) {
+                    content = content.split('\n').map(line => idt + line).join('\n');
+                } else {
+                    content = idt + content;
+                }
+
+                markdown.push(content);
             } else if (this.block_types[block['block_type']-1].includes('heading')) {
                 const level = parseInt(this.block_types[block['block_type']-1].slice(-1));
                 markdown.push(idt + await this.__heading(block[`heading${level}`], level));
@@ -778,7 +785,7 @@ class larkDocWriter {
     }
 
     async __text(text) {
-        return await this.__text_elements(text['elements']);
+        return await this.__text_elements(text['elements'])
     }
 
     async __heading(heading, level) {
@@ -818,7 +825,9 @@ class larkDocWriter {
             children = await this.__markdown(children, indent+4)
         }
 
-        return ' '.repeat(indent) + '- ' + await this.__text_elements(block['bullet']['elements']) + '\n\n' + children;
+        let content = await this.__text_elements(block['bullet']['elements'])
+
+        return ' '.repeat(indent) + '- ' + content + '\n\n' + children;
     }
 
     async __ordered(block, indent) {
@@ -1299,42 +1308,21 @@ class larkDocWriter {
 
     async __equation(element, elements, asis=false) {
         let content = element['equation']['content'];
-        let style = element['equation']['text_element_style'];
 
         let prev = elements[elements.indexOf(element) - 1] || null;
         let prev_element_type = prev? prev['equation'] ? 'equation' : 'text_run' : null;
         let next = elements[elements.indexOf(element) + 1] || null;
         let next_element_type = next? next['equation'] ? 'equation' : 'text_run' : null;
-        let rip_off_line_breaks = false;
 
         // separate single equation
         if (!prev && !next) {
-            content = `$$\n${content.trim()}\n$$\n`;
+            return `$$\n${content.trim()}\n$$\n`;
         }
         
         // inline single equation 
         if ((!prev || prev_element_type === 'text_run') && (!next ||next_element_type === 'text_run')) {
-            content = `$${content.trim()}$`;
+            return `$${content.trim()}$`;
         }
-
-        // // first element
-        // if ((!prev || prev_element_type === 'text_run') && next && next_element_type === 'equation') {
-        //     content = `$${content.trim()}`;
-
-        //     if (!(prev && prev['text_run']['content'].endsWith('\n'))) {
-        //         rip_off_line_breaks = true;
-        //     }
-        // }
-
-        // // middle element
-        // if (prev && prev_element_type === 'equation' && next && next_element_type === 'equation') {
-        //     content = content.trim();
-        // }
-
-        // // last element
-        // if (prev && prev_element_type === 'equation' && (!next || next_element_type === 'text_run')) {
-        //     if (rip_off_line_breaks) content = content.trim()
-        // }
 
         return content;        
     }
