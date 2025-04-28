@@ -224,8 +224,6 @@ export analyzerParams='{
     }'
 ```
 
-For a list of tokenizers available to choose from, refer to [Tokenizer Reference](tokenizers).
-
 #### Filter
 
 **Filters** are **optional** components working on the tokens produced by the tokenizer, transforming or refining them as needed. For example, after applying a `lowercase` filter to the tokenized terms `["Vector", "Database", "Built", "for", "Scale"]`, the result might be:
@@ -361,8 +359,6 @@ Filters in a custom analyzer can be either **built-in** or **custom**, depending
         ]
     }'
     ```
-
-    For a list of available filter types and their specific parameters, refer to [Filter Reference](filters).
 
 ## Example use
 
