@@ -56,5 +56,8 @@
   { "source": "Manage Collections", "target": "管理 Collections" },
   { "source": "Limit Collection Counts", "target": "Collection 数量限制" },
   { "source": "Operational FAQs", "target": "操作常见问题" },
-  { "source": "Drop Collection", "target": "删除 Collection" }
+  { "source": "Drop Collection", "target": "删除 Collection" },
+  { "source": "Root coord", "target": "Root coord" },
+  { "source": "Query coord", "target": "Query coord" },
+  { "source": "Data coord", "target": "Data coord" }
 ]
