@@ -244,6 +244,26 @@
                         "token": "Kj2kbpNmHoTUUixjDC1ccTntnnV",
                         "type": "image",
                         "alt_text": "JACCARD-distance-formula"
+                    },
+                    {
+                        "token": "NVV9w0w49hZJ61bNzG4cdi9gn6C",
+                        "type": "board",
+                        "alt_text": "database-level-multi-tenancy"
+                    },
+                    {
+                        "token": "SNxNwi64ChMFdubYKmrcGOH5ncg",
+                        "type": "board",
+                        "alt_text": "collection-level-multi-tenancy"
+                    },
+                    {
+                        "token": "D5cawfOk0hKkJmbJwHwc54a5n4f",
+                        "type": "board",
+                        "alt_text": "partition-level-multi-tenancy"
+                    },
+                    {
+                        "token": "GzOrwUHnEhaPGybcp7ActPwsnMh",
+                        "type": "board",
+                        "alt_text": "partition-key-level-multi-tenancy"
                     }
                 ]
             }

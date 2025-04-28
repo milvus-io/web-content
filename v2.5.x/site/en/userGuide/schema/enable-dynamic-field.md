@@ -12,7 +12,7 @@ All fields defined in the schema of a collection must be included in the entitie
 
 In Milvus, you can create a collection schema by setting the names and data types for each field in the collection. When you add a field to the schema, make sure that this field is included in the entity you intend to insert. If you want some fields to be optional, enabling the dynamic field is one option.
 
-The dynamic field is a reserved field named **\$meta**, which is of the JavaScript Object Notation (JSON) type. Any fields in the entities that are not defined in the schema will be stored in this reserved JSON field as key-value pairs.
+The dynamic field is a reserved field named **$meta**, which is of the JavaScript Object Notation (JSON) type. Any fields in the entities that are not defined in the schema will be stored in this reserved JSON field as key-value pairs.
 
 For a collection with the dynamic field enabled, you can use keys in the dynamic field for scalar filtering, just as you would with fields explicitly defined in the schema.
 

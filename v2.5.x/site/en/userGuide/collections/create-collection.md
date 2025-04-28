@@ -833,6 +833,6 @@ For more on consistency levels, see [Consistency Level](tune_consistency.md).
 
 ### Enable Dynamic Field
 
-The dynamic field in a collection is a reserved JavaScript Object Notation (JSON) field named **\$meta**. Once you have enabled this field, Milvus saves all non-schema-defined fields carried in each entity and their values as key-value pairs in the reserved field.
+The dynamic field in a collection is a reserved JavaScript Object Notation (JSON) field named **$meta**. Once you have enabled this field, Milvus saves all non-schema-defined fields carried in each entity and their values as key-value pairs in the reserved field.
 
 For details on how to use the dynamic field, refer to [Dynamic Field](enable-dynamic-field.md).

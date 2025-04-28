@@ -294,7 +294,7 @@ Not support yet
 
 If you choose to load specific fields, it is worth noting that only the fields included in `load_fields` can be used as filters and output fields in searches and queries. You should always include the names of the primary field and at least one vector field in `load_fields`.
 
-You can also use `skip_load_dynamic_field` to determine whether to load the dynamic field. The dynamic field is a reserved JSON field named **\$meta** and saves all non-schema-defined fields and their values in key-value pairs. When loading the dynamic field, all keys in the fields are loaded and available for filtering and output. If all keys in the dynamic field are not involved in metadata filtering and output, set `skip_load_dynamic_field` to `True`.
+You can also use `skip_load_dynamic_field` to determine whether to load the dynamic field. The dynamic field is a reserved JSON field named **$meta** and saves all non-schema-defined fields and their values in key-value pairs. When loading the dynamic field, all keys in the fields are loaded and available for filtering and output. If all keys in the dynamic field are not involved in metadata filtering and output, set `skip_load_dynamic_field` to `True`.
 
 To load more fields after the collection load, you need to release the collection first to avoid possible errors prompted because of index changes.
 

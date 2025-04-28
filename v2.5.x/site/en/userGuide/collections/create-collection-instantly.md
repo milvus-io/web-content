@@ -26,7 +26,7 @@ When you create a collection instantly with default settings, the following sett
 
 - **COSINE** is used to measure similarities between vector embeddings.
 
-- The reserves dynamic field named **\$meta** is enabled to save non-schema-defined fields and their values in key-value pairs.
+- The reserves dynamic field named **$meta** is enabled to save non-schema-defined fields and their values in key-value pairs.
 
 - The collection is automatically loaded upon creation.
 
