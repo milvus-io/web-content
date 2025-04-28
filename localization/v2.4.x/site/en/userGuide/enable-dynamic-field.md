@@ -551,7 +551,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>It is worth noting that <strong>color</strong>, <strong>tag</strong>, and <strong>color_tag</strong> are not present when you define the collection schema, but you can use them as schema-defined fields when you conduct searches and queries.</p>
-<p>If the name of a non-schema-defined field contains characters other than digits, letters, and underscores, such as plus signs (+), asterisks (*), or dollar signs ($), you have to include the key within <strong>$meta[]</strong> as shown in the following code snippet when using it in a boolean expression or including it in the output fields.</p>
+<p>If the name of a non-schema-defined field contains characters other than digits, letters, and underscores, such as plus signs (+), asterisks (*), or dollar signs (<span class="katex-error" title="ParseError: KaTeX parse error: Expected group after &#x27;_&#x27; at position 39: …the key within _̲_" style="color:#cc0000">), you have to include the key within __</span>meta[]__ as shown in the following code snippet when using it in a boolean expression or including it in the output fields.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-meta">... </span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;$meta[&quot;$key&quot;] in [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]&#x27;</span>, 
 output_fields=<span class="hljs-string">&#x27;$meta[&quot;$key&quot;]&#x27;</span>  
