@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Una collezione è una tabella bidimensionale con colonne fisse e righe variabili. Ogni colonna rappresenta un campo e ogni riga rappresenta un'entità. Per implementare questa gestione strutturale dei dati è necessario uno schema. Ogni entità da inserire deve soddisfare i vincoli definiti nello schema.</p>
-<p>È possibile determinare ogni aspetto di una collezione, compreso il suo schema, i parametri dell'indice, il tipo di metrica e se caricarla o meno al momento della creazione, per garantire che la collezione soddisfi pienamente i propri requisiti.</p>
+<p>È possibile determinare ogni aspetto di una collezione, compresi lo schema, i parametri dell'indice, il tipo di metrica e se caricarla o meno al momento della creazione, per garantire che la collezione soddisfi pienamente i requisiti.</p>
 <p>Per creare una raccolta, è necessario</p>
 <ul>
 <li><p><a href="/docs/it/create-collection.md#Create-Schema">Creare lo schema</a></p></li>
@@ -314,7 +314,7 @@ indexOptions := []milvusclient.CreateIndexOption{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se si è creata una collezione con parametri di indice, Milvus carica automaticamente la collezione alla sua creazione. In questo caso, tutti i campi indicati nei parametri dell'indice vengono indicizzati.</p>
+    </button></h2><p>Se si è creata una collezione con parametri di indice, Milvus carica automaticamente la collezione alla sua creazione. In questo caso, tutti i campi indicati nei parametri dell'indice sono indicizzati.</p>
 <p>I seguenti frammenti di codice dimostrano come creare la collezione con parametri di indice e verificarne lo stato di caricamento.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -747,6 +747,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni sui livelli di consistenza, vedere <a href="/docs/it/consistency.md">Livello di consistenza</a>.</p>
+<p>Per ulteriori informazioni sui livelli di consistenza, vedere <a href="/docs/it/tune_consistency.md">Livello di consistenza</a>.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">Abilitare il campo dinamico</h3><p>Il campo dinamico di una collezione è un campo riservato JavaScript Object Notation (JSON) chiamato <strong>$meta</strong>. Una volta abilitato questo campo, Milvus salva tutti i campi non definiti da schemi in ogni entità e i loro valori come coppie chiave-valore nel campo riservato.</p>
 <p>Per i dettagli su come utilizzare il campo dinamico, consultare <a href="/docs/it/enable-dynamic-field.md">Campo dinamico</a>.</p>

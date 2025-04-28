@@ -747,6 +747,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Подробнее об уровнях согласованности см. в разделе <a href="/docs/ru/consistency.md">Уровень согласованности</a>.</p>
+<p>Подробнее об уровнях согласованности см. в разделе <a href="/docs/ru/tune_consistency.md">Уровень согласованности</a>.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">Включение динамического поля</h3><p>Динамическое поле в коллекции - это зарезервированное поле JavaScript Object Notation (JSON) с именем <strong>$meta</strong>. После включения этого поля Milvus сохраняет все не определенные схемой поля, содержащиеся в каждой сущности, и их значения в виде пар ключ-значение в зарезервированном поле.</p>
 <p>Подробнее о том, как использовать динамическое поле, читайте в разделе <a href="/docs/ru/enable-dynamic-field.md">Динамическое поле</a>.</p>

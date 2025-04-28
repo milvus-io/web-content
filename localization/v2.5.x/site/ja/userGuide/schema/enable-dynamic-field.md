@@ -36,8 +36,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvusでは、コレクション内の各フィールドの名前とデータ型を設定することで、コレクションスキーマを作成できます。スキーマにフィールドを追加するときは、挿入するエンティティにこのフィールドが含まれていることを確認します。一部のフィールドをオプションにする場合は、ダイナミック・フィールドを有効にすることも 1 つの方法です。</p>
-<p>動的フィールドは、<code translate="no">$meta</code> という名前の予約フィールドで、JavaScript Object Notation（JSON）タイプです。スキーマで定義されていないエンティティのフィールドは、この予約済み JSON フィールドにキーと値のペアで格納されます。</p>
-<p>ダイナミック・フィールドが有効なコレクションでは、スキーマで明示的に定義されたフィールドと同様に、ダイナミック・ フィールドのキーを使用してスカラー・フィルタリングを行うことができます。</p>
+<p>ダイナミック・フィールドは、<strong>$meta</strong> という名前の予約フィールドで、JavaScript Object Notation (JSON) 型です。スキーマで定義されていないエンティティのフィールドはすべて、この予約済み JSON フィールドにキーと値のペアで格納されます。</p>
+<p>動的フィールドを有効にしたコレクションでは、スキーマで明示的に定義したフィールドと同様に、動的フィールドのキーを使用してスカラーフィルタリングを行うことができます。</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">ダイナミック・フィールドの有効化<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -520,7 +520,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;distance&quot;:0.6290165,&quot;id&quot;:1},{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975797,&quot;id&quot;:4},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.24996185,&quot;id&quot;:6}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコード例で使用されているフィルタ式<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> では、<code translate="no">color</code> フィールドの値が<strong>"red"</strong> で始まらなければならないという条件が指定されています<strong>。</strong>サンプル・データでは、この条件を満たすのは2つのエンティティだけです。したがって、<code translate="no">limit</code> (topK) を<code translate="no">3</code> 以下に設定すると、これらのエンティティの両方が返される。</p>
+<p>上記のコード例で使用されているフィルタ式<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> では、<code translate="no">color</code> フィールドの値が<strong>"red"</strong> で始まらなければならないという条件が指定されています<strong>。</strong>サンプル・データでは、この条件を満たすのは2つのエンティティだけです。したがって、<code translate="no">limit</code> (topK) を<code translate="no">3</code> 以下に設定すると、これらのエンティティの両方が返されます。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> 

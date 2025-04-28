@@ -46,7 +46,7 @@ summary: >-
 <li><p>Le champ primaire accepte les entiers et désactive <strong>AutoId</strong>.</p></li>
 <li><p>Le champ vectoriel accepte les intégrations de vecteurs flottants.</p></li>
 <li><p><strong>AUTOINDEX</strong> est utilisé pour créer un index sur le champ vectoriel.</p></li>
-<li><p><strong>COSINE</strong> est utilisé pour mesurer les similarités entre les intégrations vectorielles.</p></li>
+<li><p><strong>COSINE</strong> est utilisé pour mesurer les similitudes entre les intégrations vectorielles.</p></li>
 <li><p>Le champ dynamique de réserves nommé <strong>$meta</strong> est activé pour enregistrer des champs non définis par le schéma et leurs valeurs dans des paires clé-valeur.</p></li>
 <li><p>La collection est automatiquement chargée lors de la création.</p></li>
 </ul>

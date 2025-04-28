@@ -49,7 +49,7 @@ summary: >-
       </svg>
     </button></h2><p>Um analisador no Milvus consiste exatamente num <strong>tokenizador</strong> e em <strong>zero ou mais</strong> filtros.</p>
 <ul>
-<li><p><strong>Tokenizador</strong>: O tokenizador divide o texto de entrada em unidades discretas chamadas tokens. Estes tokens podem ser palavras ou frases, dependendo do tipo de tokenizador.</p></li>
+<li><p><strong>Tokenizador</strong>: O tokenizador divide o texto de entrada em unidades discretas chamadas tokens. Esses tokens podem ser palavras ou frases, dependendo do tipo de tokenizador.</p></li>
 <li><p><strong>Filtros</strong>: Os filtros podem ser aplicados aos tokens para refiná-los ainda mais, por exemplo, tornando-os minúsculos ou removendo palavras comuns.</p></li>
 </ul>
 <div class="alert note">
@@ -59,7 +59,7 @@ summary: >-
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/analyzer-process-workflow.png" alt="Analyzer Process Workflow" class="doc-image" id="analyzer-process-workflow" />
-   </span> <span class="img-wrapper"> <span>Fluxo de trabalho do analisador</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Fluxo de trabalho do processo do analisador</span> </span></p>
 <h2 id="Analyzer-types" class="common-anchor-header">Tipos de analisadores<button data-href="#Analyzer-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,10 +163,9 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <ul>
 <li><p><code translate="no">standard</code>: Adequado para processamento de texto de uso geral, aplicando tokenização padrão e filtragem de minúsculas.</p></li>
 <li><p><code translate="no">english</code>: Optimizado para texto em inglês, com suporte para stop words em inglês.</p></li>
-<li><p><code translate="no">chinese</code>: Especializado para o processamento de texto em chinês, incluindo tokenização adaptada às estruturas do idioma chinês.</p></li>
+<li><p><code translate="no">chinese</code>: Especializado para o processamento de texto chinês, incluindo tokenização adaptada às estruturas da língua chinesa.</p></li>
 </ul>
-<p>Para obter uma lista de analisadores incorporados e as respectivas definições personalizáveis, consulte <a href="/docs/pt/built-in-analyzers">Referência do analisador incorporado</a>.</p>
-<h3 id="Custom-analyzer" class="common-anchor-header">Analisador personalizado</h3><p>Para um processamento de texto mais avançado, os analisadores personalizados no Milvus permitem-lhe construir um pipeline de tratamento de texto personalizado especificando tanto um <strong>tokenizador</strong> como <strong>filtros</strong>. Esta configuração é ideal para casos de uso especializado onde é necessário um controlo preciso.</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">Analisador personalizado</h3><p>Para um processamento de texto mais avançado, os analisadores personalizados no Milvus permitem-lhe construir um pipeline de tratamento de texto personalizado, especificando tanto um <strong>tokenizador</strong> como <strong>filtros</strong>. Esta configuração é ideal para casos de utilização especializados em que é necessário um controlo preciso.</p>
 <h4 id="Tokenizer" class="common-anchor-header">Tokenizador</h4><p>O <strong>tokenizador</strong> é um componente <strong>obrigatório</strong> para um analisador personalizado, que inicia o pipeline do analisador dividindo o texto de entrada em unidades discretas ou <strong>tokens</strong>. A tokenização segue regras específicas, como a divisão por espaços em branco ou pontuação, dependendo do tipo de tokenizador. Este processo permite um tratamento mais preciso e independente de cada palavra ou frase.</p>
 <p>Por exemplo, um tokenizador converteria o texto <code translate="no">&quot;Vector Database Built for Scale&quot;</code> em tokens separados:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
@@ -191,8 +190,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter uma lista de tokenizadores disponíveis para escolha, consulte <a href="/docs/pt/tokenizers">Referência de tokenizador</a>.</p>
-<h4 id="Filter" class="common-anchor-header">Filtro</h4><p><strong>Os filtros</strong> são componentes <strong>opcionais</strong> que trabalham nos tokens produzidos pelo tokenizador, transformando-os ou refinando-os conforme necessário. Por exemplo, após aplicar um filtro <code translate="no">lowercase</code> aos termos tokenizados <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, o resultado pode ser:</p>
+<h4 id="Filter" class="common-anchor-header">Filtro</h4><p><strong>Os filtros</strong> são componentes <strong>opcionais</strong> que trabalham nos tokens produzidos pelo tokenizador, transformando-os ou refinando-os conforme necessário. Por exemplo, depois de aplicar um filtro <code translate="no">lowercase</code> aos termos tokenizados <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, o resultado pode ser:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>Os filtros em um analisador personalizado podem ser <strong>incorporados</strong> ou <strong>personalizados</strong>, dependendo das necessidades de configuração.</p>
@@ -230,7 +228,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
        &quot;filter&quot;:  [&quot;lowercase&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Filtros personalizados</strong>: Os filtros personalizados permitem configurações especializadas. É possível definir um filtro personalizado escolhendo um tipo de filtro válido (<code translate="no">filter.type</code>) e adicionando configurações específicas para cada tipo de filtro. Exemplos de tipos de filtro que suportam a personalização:</p>
+<li><p><strong>Filtros personalizados</strong>: Os filtros personalizados permitem configurações especializadas. É possível definir um filtro personalizado escolhendo um tipo de filtro válido (<code translate="no">filter.type</code>) e adicionando configurações específicas para cada tipo de filtro. Exemplos de tipos de filtro que suportam personalização:</p>
 <ul>
 <li><p><code translate="no">stop</code>: Remove palavras comuns especificadas, definindo uma lista de palavras de paragem (por exemplo, <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). Para mais informações, consulte <a href="/docs/pt/stop-filter.md">Parar</a>.</p></li>
 <li><p><code translate="no">length</code>: Exclui tokens com base em critérios de comprimento, como a definição de um comprimento máximo de token. Para obter detalhes, consulte <a href="/docs/pt/length-filter.md">Comprimento</a>.</p></li>
@@ -282,8 +280,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
        }
     ]
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Para obter uma lista dos tipos de filtros disponíveis e dos seus parâmetros específicos, consulte <a href="/docs/pt/filters">Referência de filtros</a>.</p></li>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h2 id="Example-use" class="common-anchor-header">Exemplo de utilização<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -302,7 +299,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
       </svg>
     </button></h2><p>Neste exemplo, você criará um esquema de coleção que inclui:</p>
 <ul>
-<li><p>Um campo de vetor para embeddings.</p></li>
+<li><p>Um campo vetorial para embeddings.</p></li>
 <li><p>Dois campos <code translate="no">VARCHAR</code> para processamento de texto:</p>
 <ul>
 <li><p>Um campo utiliza um analisador incorporado.</p></li>

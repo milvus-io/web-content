@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>No Milvus, é possível criar um esquema de coleção definindo os nomes e tipos de dados para cada campo da coleção. Quando se adiciona um campo ao esquema, é necessário certificar-se de que esse campo está incluído na entidade que se pretende inserir. Se pretender que alguns campos sejam opcionais, uma opção é ativar o campo dinâmico.</p>
-<p>O campo dinâmico é um campo reservado chamado <code translate="no">$meta</code>, que é do tipo JavaScript Object Notation (JSON). Quaisquer campos nas entidades que não estejam definidos no esquema serão armazenados neste campo JSON reservado como pares de valores chave.</p>
+<p>O campo dinâmico é um campo reservado denominado <strong>$meta</strong>, que é do tipo JavaScript Object Notation (JSON). Quaisquer campos nas entidades que não estejam definidos no esquema serão armazenados neste campo JSON reservado como pares de valores chave.</p>
 <p>Para uma coleção com o campo dinâmico ativado, pode utilizar chaves no campo dinâmico para filtragem escalar, tal como faria com campos explicitamente definidos no esquema.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">Ativar o campo dinâmico<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -331,7 +331,7 @@ curl --request POST \
 <li><p>Os valores suportados em <code translate="no">json_cast_type</code> são <code translate="no">bool</code> (ou <code translate="no">BOOL</code>), <code translate="no">double</code> (ou <code translate="no">DOUBLE</code>) e <code translate="no">varchar</code> (ou <code translate="no">VARCHAR</code>).</p></li>
 <li><p>Se a análise ou a conversão falhar (por exemplo, ao tentar analisar uma cadeia de caracteres como double), essas linhas serão ignoradas no índice.</p></li>
 </ul></li>
-<li><p><strong>Especifique o caminho JSON</strong> para essa chave como <code translate="no">json_path</code>. Como o campo dinâmico é armazenado como JSON, pode especificar algo como <code translate="no">&quot;color&quot;</code>, ou se tiver estruturas aninhadas, pode especificar caminhos mais profundos (por exemplo, <code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>).</p></li>
+<li><p><strong>Especifique o caminho JSON</strong> para essa chave como <code translate="no">json_path</code>. Uma vez que o campo dinâmico é armazenado como JSON, pode especificar algo como <code translate="no">&quot;color&quot;</code>, ou se tiver estruturas aninhadas, pode especificar caminhos mais profundos (por exemplo, <code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code>).</p></li>
 <li><p><strong>Crie um índice INVERTED</strong>. Atualmente, apenas o tipo <code translate="no">INVERTED</code> é suportado para a indexação do caminho JSON.</p></li>
 </ol>
 <p>Para obter detalhes sobre parâmetros e considerações, consulte <a href="/docs/pt/use-json-fields.md#Index-a-JSON-field">Indexar um campo JSON</a>.</p>

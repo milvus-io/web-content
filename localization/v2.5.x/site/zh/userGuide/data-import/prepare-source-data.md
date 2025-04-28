@@ -47,7 +47,7 @@ summary: 本页讨论了在开始批量将数据插入 Collections 之前应该�
 <li><p><strong>是否启用自动识别</strong></p>
 <p><strong>id</strong>字段作为 Collections 的主字段。要使主字段自动递增，可以在 Schema 中启用<strong>AutoID</strong>。在这种情况下，应从源数据的每一行中排除<strong>id</strong>字段。</p></li>
 <li><p><strong>是否启用动态字段</strong></p>
-<p>如果模式启用了动态字段，目标 Collections 还可以存储其预定义模式中未包含的字段。<strong>$meta</strong>字段是一个保留的 JSON 字段，用于以键值对的形式保存动态字段及其值。在上图中，字段<strong>dynamic_field_1</strong>和<strong>dynamic_field_2</strong>及其值将作为键值对保存在<strong>$meta</strong>字段中。</p></li>
+<p>如果模式启用了动态字段，目标 Collections 还可以存储其预定义模式中未包含的字段。<strong>$meta</strong>字段是一个预留 JSON 字段，用于以键值对形式保存动态字段及其值。在上图中，字段<strong>dynamic_field_1</strong>和<strong>dynamic_field_2</strong>及其值将作为键值对保存在<strong>$meta</strong>字段中。</p></li>
 </ul>
 <p>下面的代码展示了如何为上图所示的 Collections 设置 Schema。</p>
 <div class="language-python">
@@ -604,17 +604,17 @@ writer = RemoteBulkWriter(
 <span class="hljs-comment">#  [&#x27;d4220a9e-45be-4ccb-8cb5-bf09304b9f23/2.parquet&#x27;]]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// localBulkWriter.getBatchFiles();</span>
-remoteBulkWriter.<span class="hljs-title function_">getBatchFiles</span>();
+remoteBulkWriter.getBatchFiles();
 
 <span class="hljs-comment">// </span>
 
 <span class="hljs-comment">// Close the BulkWriter</span>
 <span class="hljs-keyword">try</span> {
-    localBulkWriter.<span class="hljs-title function_">close</span>();
-    remoteBulkWriter.<span class="hljs-title function_">close</span>();            
-} <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) {
+    localBulkWriter.close();
+    remoteBulkWriter.close();            
+} <span class="hljs-keyword">catch</span> (Exception e) {
     <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> handle exception</span>
-    e.<span class="hljs-title function_">printStackTrace</span>();
+    e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>BulkWriter</strong>会生成一个 UUID，在提供的输出目录中使用 UUID 创建一个子文件夹，并将所有生成的文件放入该子文件夹中。<a href="https://assets.zilliz.com/bulk_writer.zip">单击此处</a>下载准备好的示例数据。</p>
@@ -622,10 +622,10 @@ remoteBulkWriter.<span class="hljs-title function_">getBatchFiles</span>();
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
-│       └── <span class="hljs-number">1.j</span>son 
+│       └── 1.json 
 
 <span class="hljs-comment"># Parquet</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
-│       └── <span class="hljs-number">1.</span>parquet 
+│       └── 1.parquet 
 <button class="copy-code-btn"></button></code></pre>

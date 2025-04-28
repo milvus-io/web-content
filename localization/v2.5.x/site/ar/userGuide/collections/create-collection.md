@@ -746,6 +746,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمعرفة المزيد عن مستويات الاتساق، راجع <a href="/docs/ar/consistency.md">مستوى الاتساق</a>.</p>
+<p>لمعرفة المزيد عن مستويات الاتساق، راجع <a href="/docs/ar/tune_consistency.md">مستوى الاتساق</a>.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">تمكين الحقل الديناميكي</h3><p>الحقل الديناميكي في المجموعة هو حقل تدوين كائنات جافا سكريبت (JSON) محجوز باسم <strong>$meta</strong>. بمجرد تمكين هذا الحقل، يحفظ Milvus جميع الحقول غير المعرفة من قبل الهيكلية التي يحملها كل كيان وقيمها كأزواج قيمة مفتاح في الحقل المحجوز.</p>
 <p>للحصول على تفاصيل حول كيفية استخدام الحقل الديناميكي، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>

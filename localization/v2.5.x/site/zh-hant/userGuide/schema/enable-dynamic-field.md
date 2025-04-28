@@ -35,7 +35,7 @@ summary: 在要插入的實體中，必須包含在集合的模式中定義的�
         ></path>
       </svg>
     </button></h2><p>在 Milvus 中，您可以透過設定集合中每個欄位的名稱和資料類型來建立集合模式。當您在模式中加入欄位時，請確認此欄位包含在您要插入的實體中。如果您希望某些欄位是可選的，啟用動態欄位是一個選擇。</p>
-<p>動態欄位是一個保留欄位，名為<code translate="no">$meta</code> ，屬於 JavaScript Object Notation (JSON) 類型。實體中任何未在模式中定義的欄位，都會以鍵值對的形式儲存在這個保留的 JSON 欄位中。</p>
+<p>動態欄位是名為<strong>$meta</strong> 的保留欄位，屬於 JavaScript Object Notation (JSON) 類型。實體中任何未在模式中定義的欄位，都會以鍵值對的形式儲存在這個保留的 JSON 欄位中。</p>
 <p>對於啟用動態欄位的集合，您可以使用動態欄位中的鍵進行標量篩選，就像使用模式中明確定義的欄位一樣。</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">啟用動態欄位<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"

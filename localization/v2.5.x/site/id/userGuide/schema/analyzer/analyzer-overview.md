@@ -165,7 +165,6 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p><code translate="no">english</code>: Dioptimalkan untuk teks berbahasa Inggris, dengan dukungan untuk kata henti dalam bahasa Inggris.</p></li>
 <li><p><code translate="no">chinese</code>: Khusus untuk memproses teks bahasa Mandarin, termasuk tokenisasi yang diadaptasi untuk struktur bahasa Mandarin.</p></li>
 </ul>
-<p>Untuk daftar penganalisis internal dan pengaturan yang dapat disesuaikan, lihat <a href="/docs/id/built-in-analyzers">Referensi Penganalisis Internal</a>.</p>
 <h3 id="Custom-analyzer" class="common-anchor-header">Penganalisis khusus</h3><p>Untuk pemrosesan teks yang lebih canggih, penganalisis khusus di Milvus memungkinkan Anda untuk membuat pipeline penanganan teks yang disesuaikan dengan menentukan <strong>tokenizer</strong> dan <strong>filter</strong>. Pengaturan ini ideal untuk kasus penggunaan khusus yang memerlukan kontrol yang tepat.</p>
 <h4 id="Tokenizer" class="common-anchor-header">Tokenizer</h4><p><strong>Tokenizer</strong> adalah komponen <strong>wajib</strong> untuk penganalisis khusus, yang memulai pipeline penganalisis dengan memecah teks input menjadi unit diskrit atau <strong>token</strong>. Tokenisasi mengikuti aturan khusus, seperti pemisahan dengan spasi atau tanda baca, tergantung pada jenis tokenizer. Proses ini memungkinkan penanganan yang lebih tepat dan independen untuk setiap kata atau frasa.</p>
 <p>Sebagai contoh, tokenizer akan mengubah teks <code translate="no">&quot;Vector Database Built for Scale&quot;</code> menjadi token-token yang terpisah:</p>
@@ -191,8 +190,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk daftar tokenizer yang tersedia untuk dipilih, lihat <a href="/docs/id/tokenizers">Referensi Tokenizer</a>.</p>
-<h4 id="Filter" class="common-anchor-header">Filter</h4><p><strong>Filter</strong> adalah komponen <strong>opsional</strong> yang bekerja pada token yang dihasilkan oleh tokenizer, mengubah atau menyempurnakannya sesuai kebutuhan. Misalnya, setelah menerapkan filter <code translate="no">lowercase</code> pada istilah yang di-tokenize <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, hasilnya mungkin:</p>
+<h4 id="Filter" class="common-anchor-header">Filter</h4><p><strong>Filter</strong> adalah komponen <strong>opsional</strong> yang bekerja pada token yang dihasilkan oleh tokenizer, mengubah atau menyempurnakannya sesuai kebutuhan. Misalnya, setelah menerapkan filter <code translate="no">lowercase</code> ke istilah yang di-tokenize <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, hasilnya mungkin seperti ini:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>Filter dalam penganalisis khusus dapat berupa filter <strong>bawaan</strong> atau <strong>khusus</strong>, tergantung pada kebutuhan konfigurasi.</p>
@@ -282,8 +280,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
        }
     ]
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Untuk daftar jenis filter yang tersedia dan parameter spesifiknya, lihat <a href="/docs/id/filters">Referensi Filter</a>.</p></li>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h2 id="Example-use" class="common-anchor-header">Contoh penggunaan<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -745,6 +745,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>一貫性レベルの詳細については、<a href="/docs/ja/consistency.md">一貫性レベルを</a>参照してください。</p>
+<p>一貫性レベルの詳細については、<a href="/docs/ja/tune_consistency.md">一貫性レベルを</a>参照してください。</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">ダイナミック・フィールドの有効化</h3><p>コレクション内の動的フィールドは、<strong>$metaという</strong>名前の予約済みJavaScript Object Notation（JSON）フィールドです。このフィールドを有効にすると、Milvusは各エンティティで保持されるすべての非スキーマ定義フィールドとその値をkey-valueペアとして予約フィールドに保存します。</p>
 <p>動的フィールドの使用方法の詳細については、<a href="/docs/ja/enable-dynamic-field.md">動的フィールドを</a>参照してください。</p>

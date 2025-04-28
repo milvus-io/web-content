@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>IVF_PQ</strong>索引是一種<strong>基於量化的</strong>索引演算法，用於高維空間中的近似近鄰搜尋。雖然速度不如某些基於圖的方法，但<strong>IVF_PQ</strong>通常需要較少的記憶體，因此是大型資料集的實用選擇。</p>
+    </button></h1><p><strong>IVF_PQ</strong>索引是一種<strong>基於量化的</strong>索引演算法，用於高維空間的近似近鄰搜尋。雖然速度比不上某些基於圖的方法，但<strong>IVF_PQ</strong>通常需要較少的記憶體，因此是大型資料集的實用選擇。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,13 +54,13 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Ivf Pq 1</span> </span></p>
 <ol>
 <li><p><strong>尺寸分解</strong>：該演算法首先將每個高維向量分解為<code translate="no">m</code> 大小相等的子向量。此分解將原始的 D 維空間轉換為<code translate="no">m</code> 不相交的子空間，其中每個子空間包含<em>D/m</em>維。參數<code translate="no">m</code> 控制分解的粒度，並直接影響壓縮比。</p></li>
-<li><p><strong>子空間編碼本製作</strong>：在每個子空間中，演算法應用<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means 聚類</a>來學習一組代表性向量 (中心點)。這些中心點共同形成該子空間的編碼簿。每個編碼本的中心點數量由參數<code translate="no">nbits</code> 決定，其中每個編碼本包含 2^{textit{nbits}} 個中心點。例如，如果<code translate="no">nbits = 8</code> ，每個編碼本將包含 256 個中心點。每個中心點都會被指派一個唯一的索引，其位元為<code translate="no">nbits</code> 位元。</p></li>
+<li><p><strong>子空間編碼本製作</strong>：在每個子空間中，演算法應用<a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means 聚類</a>來學習一組代表性向量 (中心點)。這些中心點共同形成該子空間的編碼簿。每個編碼簿中的中心點數量由參數<code translate="no">nbits</code> 決定，其中每個編碼簿包含<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits 中心點。例如，如果</span></span></span></span></span></span></span></span></span> <code translate="no">nbits = 8</code> ，每個編碼本將包含 256 個中心點。每個中心點都會被指派一個獨特的<code translate="no">nbits</code> 位元索引。</p></li>
 <li><p><strong>向量</strong> <strong>量化</strong>：對於原始向量中的每個子向量，PQ 會使用特定的度量類型在對應的子空間中找出其最近的中心點。此過程能有效地將每個子向量映射到編碼簿中最接近的代表向量。與其儲存完整的子向量座標，不如只保留匹配中心點的索引。</p></li>
-<li><p><strong>壓縮表示</strong>：最後的壓縮表示由<code translate="no">m</code> 索引組成，每個子空間一個，統稱為<strong>PQ 編碼</strong>。此編碼可將儲存需求從<em>D × 32</em>位元 (假設為 32 位元浮點數) 減少到<em>m</em>×<em>nbits</em>位元，在保留近似向量距離能力的同時，達到大幅壓縮的效果。</p></li>
+<li><p><strong>壓縮表示</strong>：最終的壓縮表示由<code translate="no">m</code> 索引組成，每個子空間一個，統稱為<strong>PQ 編碼</strong>。此編碼可將儲存需求從<em>D × 32</em>位元 (假設為 32 位元浮點數) 減少到<em>m</em>×<em>nbits</em>位元，在保留近似向量距離能力的同時，達到大幅壓縮的效果。</p></li>
 </ol>
 <p>有關參數調整與最佳化的詳細資訊，請參閱<a href="/docs/zh-hant/ivf-pq.md#Index-params">Index params</a>。</p>
 <div class="alert note">
-<p>考慮一個使用 32 位元浮點數的<em>D = 128</em>維向量。在 PQ 參數<em>m = 64</em>(子向量) 和<em>nbits = 8</em>(因此每個子空間的中心點數為<em>k =</em>2^8<em>= 256</em>) 的情況下，我們可以比較儲存需求：</p>
+<p>考慮一個使用 32 位元浮點數的<em>D = 128</em>維向量。在 PQ 參數<em>m = 64</em>(子向量) 和<em>nbits = 8</em>(因此<em>k =</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">282^8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> 8</span></span></span></span></span></span></span></span></span> <em>= 256</em>centroids per subspace) 的情況下，我們可以比較儲存需求：</p>
 <ul>
 <li><p>原始向量：128 維 × 32 位元 = 4,096 位元</p></li>
 <li><p>PQ 壓縮向量：64 個子向量 × 8 位元 = 512 位元</p></li>
@@ -73,8 +73,8 @@ summary: >-
 <li><p><strong>查詢預處理</strong></p>
 <ul>
 <li><p>將查詢向量分解為<code translate="no">m</code> 子向量，以符合原始 PQ 分解結構。</p></li>
-<li><p>對於每個查詢子向量及其對應的編碼本（包含 2^{textit{nbits}} 中心點），計算並儲存與所有中心點的距離。</p></li>
-<li><p>這會產生<code translate="no">m</code> 查詢表，其中每個表格包含 2^{\textit{nbits}} 距離。</p></li>
+<li><p>對於每個查詢子向量及其對應的編碼簿 (包含<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits centroids)，計算並儲存與所有 centroids 的距離。</span></span></span></span></span></span></span></span></span></p></li>
+<li><p>這會產生<code translate="no">m</code> 查詢表，其中每個表格包含<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span>2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits 距離。</span></span></span></span></span></span></span></span></span></p></li>
 </ul></li>
 <li><p><strong>距離近似</strong></p>
 <p>對於任何以 PQ 代碼表示的資料庫向量，其與查詢向量的近似距離計算如下：</p>
@@ -201,7 +201,7 @@ res = MilvusClient.search(
    <tr>
      <td><p>IVF</p></td>
      <td><p><code translate="no">nlist</code></p></td>
-     <td><p>在建立索引時使用 k-means 演算法建立的叢集數目。</p></td>
+     <td><p>在建立索引時使用 k-means 演算法建立的叢集數。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 65536]</p><p><strong>預設值</strong>：<code translate="no">128</code></p></td>
      <td><p>較大的<code translate="no">nlist</code> 值會透過建立更精細的叢集來改善回復率，但會增加索引建立時間。根據資料集大小和可用資源進行最佳化。在大多數情況下，我們建議您設定此範圍內的值：[32, 4096].</p></td>
    </tr>
@@ -214,7 +214,7 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>用來以壓縮形式表示每個子向量中心點索引的位元數。它直接決定每個編碼簿的大小。每個編碼本將包含 2^{textit{nbits}} 個中心點。例如，如果<code translate="no">nbits</code> 設定為 8，則每個子向量將由 8 位元的中心點索引來表示。如此一來，該子向量的編碼簿中就有 2^8 (256) 個可能的中心點。</p></td>
+     <td><p>用來以壓縮形式表示每個子向量中心點索引的位元數。它直接決定每個編碼簿的大小。每個編碼本將包含 $2^{textit{nbits}}$ 的中心點。例如，如果<code translate="no">nbits</code> 設定為 8，則每個子向量將由 8 位元的 centroid 索引表示。如此一來，該子向量的編碼簿中就有 2^8$ (256) 個可能的中心點。</p></td>
      <td><p><strong>類型</strong>：整數<strong>範圍</strong>：[1, 64]</p><p><strong>預設值</strong>：<code translate="no">8</code></p></td>
      <td><p><code translate="no">nbits</code> 較高的值允許較大的編碼簿，可能會導致原始向量的表示更精確。不過，這也意味著要使用更多位元來儲存每個索引，導致較少的壓縮。在大多數情況下，我們建議您設定此範圍內的值：[1, 16].</p></td>
    </tr>

@@ -747,6 +747,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk mengetahui lebih lanjut tentang tingkat konsistensi, lihat <a href="/docs/id/consistency.md">Tingkat Konsistensi</a>.</p>
-<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Mengaktifkan Bidang Dinamis</h3><p>Bidang dinamis dalam koleksi adalah bidang JavaScript Object Notation (JSON) yang dicadangkan bernama <strong>$meta</strong>. Setelah Anda mengaktifkan bidang ini, Milvus menyimpan semua bidang yang tidak ditentukan skema yang dibawa dalam setiap entitas dan nilainya sebagai pasangan nilai-kunci dalam bidang yang dicadangkan.</p>
+<p>Untuk mengetahui lebih lanjut tentang tingkat konsistensi, lihat <a href="/docs/id/tune_consistency.md">Tingkat Konsistensi</a>.</p>
+<h3 id="Enable-Dynamic-Field" class="common-anchor-header">Mengaktifkan Bidang Dinamis</h3><p>Bidang dinamis dalam koleksi adalah bidang JavaScript Object Notation (JSON) yang dicadangkan bernama <strong>$meta</strong>. Setelah Anda mengaktifkan bidang ini, Milvus menyimpan semua bidang yang tidak ditentukan skema yang dibawa dalam setiap entitas dan nilainya sebagai pasangan kunci-nilai dalam bidang yang dicadangkan.</p>
 <p>Untuk detail mengenai cara menggunakan bidang dinamis, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>

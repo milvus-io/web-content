@@ -3,8 +3,8 @@ id: analyzer-overview.md
 title: 분석기 개요
 summary: >-
   텍스트 처리에서 분석기는 원시 텍스트를 구조화되고 검색 가능한 형식으로 변환하는 중요한 구성 요소입니다. 각 분석기는 일반적으로 토큰화기와
-  필터라는 두 가지 핵심 요소로 구성됩니다. 이들은 함께 입력 텍스트를 토큰으로 변환하고, 이러한 토큰을 정제하며, 효율적인 색인 및 검색을
-  위해 준비합니다.
+  필터라는 두 가지 핵심 요소로 구성됩니다. 이 두 요소는 함께 입력 텍스트를 토큰으로 변환하고, 이러한 토큰을 정제하며, 효율적인 색인 및
+  검색을 위해 준비합니다.
 ---
 <h1 id="Analyzer-Overview" class="common-anchor-header">분석기 개요<button data-href="#Analyzer-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,14 +75,14 @@ summary: >-
       </svg>
     </button></h2><p>Milvus는 서로 다른 텍스트 처리 요구 사항을 충족하기 위해 두 가지 유형의 분석기를 제공합니다:</p>
 <ul>
-<li><p><strong>기본 제공 분석기</strong>: 최소한의 설정으로 일반적인 텍스트 처리 작업을 처리하는 사전 정의된 구성입니다. 기본 제공 분석기는 복잡한 구성이 필요하지 않으므로 범용 검색에 이상적입니다.</p></li>
+<li><p><strong>기본 제공 분석기</strong>: 최소한의 설정으로 일반적인 텍스트 처리 작업을 처리할 수 있는 사전 정의된 구성입니다. 기본 제공 분석기는 복잡한 구성이 필요하지 않으므로 범용 검색에 이상적입니다.</p></li>
 <li><p><strong>사용자 정의 분석기</strong>: 보다 고급 요구 사항이 필요한 경우, 사용자 정의 분석기를 사용하면 토큰화 도구와 0개 이상의 필터를 모두 지정하여 자신만의 구성을 정의할 수 있습니다. 이 수준의 사용자 지정은 텍스트 처리에 대한 정밀한 제어가 필요한 특수한 사용 사례에 특히 유용합니다.</p></li>
 </ul>
 <div class="alert note">
 <p>수집 생성 중에 분석기 구성을 생략하는 경우, Milvus는 기본적으로 모든 텍스트 처리에 <code translate="no">standard</code> 분석기를 사용합니다. 자세한 내용은 <a href="/docs/ko/standard-analyzer.md">표준을</a> 참조하세요.</p>
 </div>
 <h3 id="Built-in-analyzer" class="common-anchor-header">기본 제공 분석기</h3><p>Milvus의 기본 제공 분석기는 특정 토큰화기 및 필터로 미리 구성되어 있으므로 이러한 구성 요소를 직접 정의할 필요 없이 즉시 사용할 수 있습니다. 각 기본 제공 분석기는 사전 설정된 토큰화 도구와 필터가 포함된 템플릿 역할을 하며, 사용자 지정을 위한 선택적 매개변수를 제공합니다.</p>
-<p>예를 들어 <code translate="no">standard</code> 기본 제공 분석기를 사용하려면 <code translate="no">standard</code> 이름을 <code translate="no">type</code> 로 지정하고 선택적으로 이 분석기 유형에 특정한 추가 구성(예: <code translate="no">stop_words</code>)을 포함하기만 하면 됩니다:</p>
+<p>예를 들어 <code translate="no">standard</code> 기본 제공 분석기를 사용하려면 <code translate="no">standard</code> 이름을 <code translate="no">type</code> 로 지정하고 선택적으로 이 분석기 유형에 특정한 추가 구성(예: <code translate="no">stop_words</code>)을 포함하면 됩니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -163,10 +163,9 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p><code translate="no">english</code>: 영어 중단어 지원으로 영어 텍스트에 최적화되어 있습니다.</p></li>
 <li><p><code translate="no">chinese</code>: 중국어 구조에 맞는 토큰화 등 중국어 텍스트 처리에 특화되어 있습니다.</p></li>
 </ul>
-<p>기본 제공 분석기 목록과 사용자 지정 가능한 설정은 <a href="/docs/ko/built-in-analyzers">기본 제공 분석기 참조를</a> 참조하세요.</p>
 <h3 id="Custom-analyzer" class="common-anchor-header">사용자 지정 분석기</h3><p>보다 고급 텍스트 처리를 위해 Milvus의 사용자 지정 분석기를 사용하면 <strong>토큰화기와</strong> <strong>필터를</strong> 모두 지정하여 맞춤형 텍스트 처리 파이프라인을 구축할 수 있습니다. 이 설정은 정밀한 제어가 필요한 특수한 사용 사례에 이상적입니다.</p>
 <h4 id="Tokenizer" class="common-anchor-header">토큰화 도구</h4><p><strong>토큰화</strong> 도구는 사용자 정의 분석기의 <strong>필수</strong> 구성 요소로, 입력 텍스트를 개별 단위 또는 <strong>토큰으로</strong> 분해하여 분석기 파이프라인을 시작합니다. 토큰화는 토큰화 유형에 따라 공백이나 구두점으로 분할하는 등의 특정 규칙을 따릅니다. 이 프로세스를 통해 각 단어나 구를 보다 정확하고 독립적으로 처리할 수 있습니다.</p>
-<p>예를 들어, 토큰화기는 <code translate="no">&quot;Vector Database Built for Scale&quot;</code> 텍스트를 별도의 토큰으로 변환합니다:</p>
+<p>예를 들어, 토큰화 도구는 <code translate="no">&quot;Vector Database Built for Scale&quot;</code> 텍스트를 별도의 토큰으로 변환합니다:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>토큰화기 지정 예시</strong>:</p>
@@ -189,13 +188,12 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>선택할 수 있는 토큰화기 목록은 토큰화기 <a href="/docs/ko/tokenizers">참조를</a> 참조하세요.</p>
 <h4 id="Filter" class="common-anchor-header">필터</h4><p><strong>필터는</strong> 토큰화 도구가 생성한 토큰에 대해 필요에 따라 토큰을 변형하거나 정제하는 <strong>선택적</strong> 구성 요소입니다. 예를 들어, 토큰화된 용어 <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> 에 <code translate="no">lowercase</code> 필터를 적용하면 다음과 같은 결과가 나올 수 있습니다:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>사용자 정의 분석기의 필터는 구성 요구 사항에 따라 <strong>기본 제공</strong> 또는 <strong>사용자 정의가</strong> 가능합니다.</p>
 <ul>
-<li><p><strong>기본 제공 필터</strong>: Milvus에서 미리 구성한 필터로, 최소한의 설정만 필요합니다. 이러한 필터는 이름을 지정하여 바로 사용할 수 있습니다. 아래 필터는 바로 사용할 수 있는 기본 제공 필터입니다:</p>
+<li><p><strong>기본 제공 필터</strong>: Milvus에서 미리 구성한 것으로, 최소한의 설정만 필요합니다. 이러한 필터는 이름을 지정하여 바로 사용할 수 있습니다. 아래 필터는 바로 사용할 수 있는 기본 제공 필터입니다:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: 텍스트를 소문자로 변환하여 대소문자를 구분하지 않는 매칭을 보장합니다. 자세한 내용은 <a href="/docs/ko/lowercase-filter.md">소문자를</a> 참조하세요.</p></li>
 <li><p><code translate="no">asciifolding</code>: ASCII가 아닌 문자를 ASCII에 해당하는 문자로 변환하여 다국어 텍스트 처리를 간소화합니다. 자세한 내용은 <a href="/docs/ko/ascii-folding-filter.md">ASCII 접기를</a> 참조하세요.</p></li>
@@ -236,7 +234,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 </ul>
 <p><strong>사용자 지정 필터 구성 예제:</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
+<a href="#python">파이썬</a><a href="#java">자바</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Mandatory: Specifies tokenizer</span>
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -280,8 +278,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
        }
     ]
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>사용 가능한 필터 유형 및 특정 매개변수 목록은 <a href="/docs/ko/filters">필터 참조를</a> 참조하세요.</p></li>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h2 id="Example-use" class="common-anchor-header">사용 예<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"

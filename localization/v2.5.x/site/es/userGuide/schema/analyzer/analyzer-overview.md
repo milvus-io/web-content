@@ -165,8 +165,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p><code translate="no">english</code>: Optimizado para texto en inglés, con soporte para palabras vacías en inglés.</p></li>
 <li><p><code translate="no">chinese</code>: Especializado para el tratamiento de texto chino, con tokenización adaptada a las estructuras del idioma chino.</p></li>
 </ul>
-<p>Para obtener una lista de los analizadores incorporados y sus ajustes personalizables, consulte <a href="/docs/es/built-in-analyzers">Referencia de analizadores incorporados</a>.</p>
-<h3 id="Custom-analyzer" class="common-anchor-header">Analizador personalizado</h3><p>Para un procesamiento de texto más avanzado, los analizadores personalizados de Milvus le permiten construir un canal de tratamiento de texto a medida especificando tanto un <strong>tokenizador</strong> como <strong>filtros</strong>. Esta configuración es ideal para casos de uso especializados en los que se requiere un control preciso.</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">Analizador personalizado</h3><p>Para un procesamiento de texto más avanzado, los analizadores personalizados de Milvus le permiten construir una cadena de procesamiento de texto a medida especificando tanto un <strong>tokenizador</strong> como <strong>filtros</strong>. Esta configuración es ideal para casos de uso especializado en los que se requiere un control preciso.</p>
 <h4 id="Tokenizer" class="common-anchor-header">Tokenizador</h4><p>El <strong>tokenizador</strong> es un componente <strong>obligatorio</strong> para un analizador personalizado, que inicia el proceso de análisis descomponiendo el texto de entrada en unidades discretas o <strong>tokens</strong>. La tokenización sigue reglas específicas, como la división por espacios en blanco o signos de puntuación, dependiendo del tipo de tokenizador. Este proceso permite un tratamiento más preciso e independiente de cada palabra o frase.</p>
 <p>Por ejemplo, un tokenizador convertiría el texto <code translate="no">&quot;Vector Database Built for Scale&quot;</code> en tokens separados:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
@@ -191,7 +190,6 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obtener una lista de los tokenizadores disponibles, consulte <a href="/docs/es/tokenizers">Referencia de tokenizadores</a>.</p>
 <h4 id="Filter" class="common-anchor-header">Filtro</h4><p><strong>Los filtros</strong> son componentes <strong>opcionales</strong> que trabajan sobre los tokens producidos por el tokenizador, transformándolos o refinándolos según sea necesario. Por ejemplo, tras aplicar un filtro <code translate="no">lowercase</code> a los términos tokenizados <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, el resultado podría ser:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
@@ -282,8 +280,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
        }
     ]
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Para obtener una lista de los tipos de filtro disponibles y sus parámetros específicos, consulte <a href="/docs/es/filters">Referencia de filtros</a>.</p></li>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h2 id="Example-use" class="common-anchor-header">Ejemplo de uso<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"

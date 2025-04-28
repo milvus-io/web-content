@@ -37,11 +37,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Uma coleção é uma tabela bidimensional com colunas fixas e linhas variantes. Cada coluna representa um campo e cada linha representa uma entidade. É necessário um esquema para implementar esta gestão de dados estruturais. Cada entidade a inserir tem de cumprir os condicionalismos definidos no esquema.</p>
-<p>É possível determinar todos os aspectos de uma coleção, incluindo o esquema, os parâmetros de índice, o tipo de métrica e se deve ser carregada aquando da criação, para garantir que a coleção satisfaz plenamente os seus requisitos.</p>
+    </button></h2><p>Uma coleção é uma tabela bidimensional com colunas fixas e linhas variantes. Cada coluna representa um campo e cada linha representa uma entidade. É necessário um esquema para implementar esta gestão estrutural de dados. Cada entidade a inserir tem de cumprir os condicionalismos definidos no esquema.</p>
+<p>Pode determinar todos os aspectos de uma coleção, incluindo o esquema, os parâmetros de índice, o tipo de métrica e se deve ser carregada aquando da criação, para garantir que a coleção satisfaz totalmente os seus requisitos.</p>
 <p>Para criar uma coleção, é necessário</p>
 <ul>
-<li><p><a href="/docs/pt/create-collection.md#Create-Schema">Criar um esquema</a></p></li>
+<li><p><a href="/docs/pt/create-collection.md#Create-Schema">Criar o esquema</a></p></li>
 <li><p><a href="/docs/pt/create-collection.md#Optional-Set-Index-Parameters">Definir parâmetros de índice</a> (opcional)</p></li>
 <li><p><a href="/docs/pt/create-collection.md#Create-a-Collection">Criar coleção</a></p></li>
 </ul>
@@ -223,10 +223,10 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A criação de um índice em um campo específico acelera a pesquisa nesse campo. Um índice registra a ordem das entidades dentro de uma coleção. Como mostrado nos seguintes trechos de código, pode utilizar <code translate="no">metric_type</code> e <code translate="no">index_type</code> para selecionar formas apropriadas para o Milvus indexar um campo e medir as semelhanças entre as incorporações vectoriais.</p>
+    </button></h2><p>A criação de um índice em um campo específico acelera a pesquisa nesse campo. Um índice registra a ordem das entidades dentro de uma coleção. Como mostrado nos seguintes trechos de código, pode utilizar <code translate="no">metric_type</code> e <code translate="no">index_type</code> para selecionar formas apropriadas para Milvus indexar um campo e medir semelhanças entre embeddings vectoriais.</p>
 <p>No Milvus, pode utilizar <code translate="no">AUTOINDEX</code> como o tipo de índice para todos os campos vectoriais e um de <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code> como o tipo de métrica com base nas suas necessidades.</p>
 <p>Como demonstrado no fragmento de código acima, é necessário definir o tipo de índice e o tipo métrico para os campos vectoriais e apenas o tipo de índice para os campos escalares. Os índices são obrigatórios para campos vectoriais e é aconselhável criar índices em campos escalares frequentemente utilizados em condições de filtragem.</p>
-<p>Para obter detalhes, consulte <a href="/docs/pt/index-vector-fields.md">Indexar campos vetoriais</a> e <a href="/docs/pt/index-scalar-fields.md">Indexar campos escalares</a>.</p>
+<p>Para obter detalhes, consulte <a href="/docs/pt/index-vector-fields.md">Indexar campos vetoriais</a> e Indexar <a href="/docs/pt/index-scalar-fields.md">campos escalares</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.3. Prepare index parameters</span>
@@ -629,7 +629,7 @@ curl --request POST \
     \&quot;params\&quot;: $params
 }&quot;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL" class="common-anchor-header">Definir TTL da coleção</h3><p>Se os dados de uma coleção precisarem ser descartados por um período específico, considere definir seu Tempo de Vida (TTL) em segundos. Uma vez que o TTL se esgota, Milvus exclui as entidades da coleção. A eliminação é assíncrona, indicando que as pesquisas e consultas ainda são possíveis antes de a eliminação estar concluída.</p>
+<h3 id="Set-Collection-TTL" class="common-anchor-header">Definir TTL da coleção</h3><p>Se os dados de uma coleção precisarem ser descartados por um período específico, considere definir seu tempo de vida (TTL) em segundos. Uma vez que o TTL se esgota, Milvus exclui as entidades da coleção. A eliminação é assíncrona, indicando que as pesquisas e consultas ainda são possíveis antes de a eliminação estar concluída.</p>
 <p>O seguinte trecho de código define o TTL para um dia (86400 segundos). Aconselha-se a definir o TTL para um par de dias, no mínimo.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -747,6 +747,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para saber mais sobre os níveis de consistência, consulte <a href="/docs/pt/consistency.md">Nível de consistência</a>.</p>
+<p>Para saber mais sobre os níveis de consistência, consulte <a href="/docs/pt/tune_consistency.md">Nível de consistência</a>.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">Habilitar campo dinâmico</h3><p>O campo dinâmico em uma coleção é um campo reservado de Notação de Objeto JavaScript (JSON) chamado <strong>$meta</strong>. Depois de ativar este campo, o Milvus guarda todos os campos não definidos pelo esquema transportados em cada entidade e os seus valores como pares chave-valor no campo reservado.</p>
 <p>Para obter detalhes sobre como usar o campo dinâmico, consulte <a href="/docs/pt/enable-dynamic-field.md">Campo dinâmico</a>.</p>

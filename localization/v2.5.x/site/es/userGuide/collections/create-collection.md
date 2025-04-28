@@ -747,6 +747,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obtener más información sobre los niveles de consistencia, consulte <a href="/docs/es/consistency.md">Nivel de consistencia</a>.</p>
+<p>Para obtener más información sobre los niveles de consistencia, consulte <a href="/docs/es/tune_consistency.md">Nivel de consistencia</a>.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">Habilitar campo dinámico</h3><p>El campo dinámico de una colección es un campo reservado de JavaScript Object Notation (JSON) llamado <strong>$meta</strong>. Una vez habilitado este campo, Milvus guarda todos los campos no definidos por el esquema que lleva cada entidad y sus valores como pares clave-valor en el campo reservado.</p>
 <p>Para más detalles sobre cómo utilizar el campo dinámico, consulte <a href="/docs/es/enable-dynamic-field.md">Campo dinámico</a>.</p>

@@ -1,6 +1,6 @@
 ---
 id: analyzer-overview.md
-title: Analyzer Überblick
+title: Analyzer Übersicht
 summary: >-
   In der Textverarbeitung ist ein Analysator eine entscheidende Komponente, die
   Rohtext in ein strukturiertes, durchsuchbares Format umwandelt. Jeder Analyzer
@@ -8,7 +8,7 @@ summary: >-
   wandeln sie den Eingabetext in Token um, verfeinern diese Token und bereiten
   sie für eine effiziente Indizierung und Abfrage vor.
 ---
-<h1 id="Analyzer-Overview" class="common-anchor-header">Analyzer Überblick<button data-href="#Analyzer-Overview" class="anchor-icon" translate="no">
+<h1 id="Analyzer-Overview" class="common-anchor-header">Analyzer Übersicht<button data-href="#Analyzer-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -50,7 +50,7 @@ summary: >-
     </button></h2><p>Ein Analyzer in Milvus besteht aus genau einem <strong>Tokenizer</strong> und <strong>null oder mehr</strong> Filtern.</p>
 <ul>
 <li><p><strong>Tokenisierer</strong>: Der Tokenisierer zerlegt den Eingabetext in diskrete Einheiten, die Token genannt werden. Diese Token können Wörter oder Phrasen sein, je nach Tokenizer-Typ.</p></li>
-<li><p><strong>Filter</strong>: Filter können auf Token angewandt werden, um sie weiter zu verfeinern, z. B. durch Kleinschreibung oder das Entfernen häufiger Wörter.</p></li>
+<li><p><strong>Filter</strong>: Filter können auf Token angewandt werden, um sie weiter zu verfeinern, z. B. indem sie kleingeschrieben oder gemeinsame Wörter entfernt werden.</p></li>
 </ul>
 <div class="alert note">
 <p>Tokenizer unterstützen nur das UTF-8-Format. Die Unterstützung für andere Formate wird in zukünftigen Versionen hinzugefügt werden.</p>
@@ -163,10 +163,9 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <ul>
 <li><p><code translate="no">standard</code>: Geeignet für die allgemeine Textverarbeitung, mit Standard-Tokenisierung und Kleinbuchstaben-Filterung.</p></li>
 <li><p><code translate="no">english</code>: Optimiert für englischsprachige Texte, mit Unterstützung für englische Stoppwörter.</p></li>
-<li><p><code translate="no">chinese</code>: Spezialisiert für die Verarbeitung von chinesischem Text, einschließlich einer an die chinesischen Sprachstrukturen angepassten Tokenisierung.</p></li>
+<li><p><code translate="no">chinese</code>: Spezialisiert auf die Verarbeitung chinesischer Texte, einschließlich Tokenisierung, die an die Strukturen der chinesischen Sprache angepasst ist.</p></li>
 </ul>
-<p>Eine Liste der eingebauten Analysatoren und ihrer anpassbaren Einstellungen finden Sie unter <a href="/docs/de/built-in-analyzers">Referenz der eingebauten Analysatoren</a>.</p>
-<h3 id="Custom-analyzer" class="common-anchor-header">Benutzerdefinierter Analyzer</h3><p>Für eine fortgeschrittene Textverarbeitung können Sie mit den benutzerdefinierten Analysatoren in Milvus eine maßgeschneiderte Textverarbeitungspipeline aufbauen, indem Sie sowohl einen <strong>Tokenizer</strong> als auch <strong>Filter</strong> angeben. Dieses Setup ist ideal für spezielle Anwendungsfälle, bei denen eine präzise Kontrolle erforderlich ist.</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">Benutzerdefinierter Analysator</h3><p>Für fortgeschrittene Textverarbeitung können Sie mit den benutzerdefinierten Analysatoren in Milvus eine maßgeschneiderte Textverarbeitungspipeline aufbauen, indem Sie sowohl einen <strong>Tokenizer</strong> als auch <strong>Filter</strong> angeben. Diese Konfiguration ist ideal für spezielle Anwendungsfälle, bei denen eine präzise Kontrolle erforderlich ist.</p>
 <h4 id="Tokenizer" class="common-anchor-header">Tokenisierer</h4><p>Der <strong>Tokenizer</strong> ist eine <strong>obligatorische</strong> Komponente für einen benutzerdefinierten Analyzer, der die Analyzer-Pipeline startet, indem er den Eingabetext in diskrete Einheiten oder <strong>Token</strong> zerlegt. Die Tokenisierung folgt je nach Tokenizer-Typ bestimmten Regeln, wie z. B. der Aufteilung nach Leerzeichen oder Interpunktion. Dieser Prozess ermöglicht eine präzisere und unabhängige Behandlung jedes Worts oder Satzes.</p>
 <p>Ein Tokenizer würde zum Beispiel den Text <code translate="no">&quot;Vector Database Built for Scale&quot;</code> in einzelne Token umwandeln:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
@@ -191,8 +190,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Eine Liste der zur Auswahl stehenden Tokenizer finden Sie unter <a href="/docs/de/tokenizers">Tokenizer-Referenz</a>.</p>
-<h4 id="Filter" class="common-anchor-header">Filter</h4><p><strong>Filter</strong> sind <strong>optionale</strong> Komponenten, die mit den vom Tokenizer erzeugten Token arbeiten und sie nach Bedarf umwandeln oder verfeinern. Nach Anwendung eines <code translate="no">lowercase</code> -Filters auf die tokenisierten Begriffe <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> könnte das Ergebnis zum Beispiel so aussehen:</p>
+<h4 id="Filter" class="common-anchor-header">Filter</h4><p><strong>Filter</strong> sind <strong>optionale</strong> Komponenten, die mit den vom Tokenizer erzeugten Token arbeiten und sie je nach Bedarf transformieren oder verfeinern. Nach Anwendung eines <code translate="no">lowercase</code> -Filters auf die tokenisierten Begriffe <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> könnte das Ergebnis zum Beispiel so aussehen:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>Filter in einem benutzerdefinierten Analyzer können entweder <strong>eingebaut</strong> oder <strong>benutzerdefiniert</strong> sein, je nach Konfigurationsbedarf.</p>
@@ -282,8 +280,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
        }
     ]
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Eine Liste der verfügbaren Filtertypen und ihrer spezifischen Parameter finden Sie in der <a href="/docs/de/filters">Filterreferenz</a>.</p></li>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h2 id="Example-use" class="common-anchor-header">Beispiel für die Verwendung<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -305,7 +302,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p>Ein Vektorfeld für Einbettungen.</p></li>
 <li><p>Zwei <code translate="no">VARCHAR</code> Felder für die Textverarbeitung:</p>
 <ul>
-<li><p>Ein Feld verwendet einen integrierten Analyzer.</p></li>
+<li><p>Ein Feld verwendet einen eingebauten Analyzer.</p></li>
 <li><p>Das andere verwendet einen benutzerdefinierten Analyzer.</p></li>
 </ul></li>
 </ul>
@@ -462,7 +459,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">Schritt 3: Felder zum Schema hinzufügen</h3><p>Nachdem Sie Ihre Analysator-Konfigurationen überprüft haben, fügen Sie diese zu den Feldern Ihres Schemas hinzu:</p>
+<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">Schritt 3: Felder zum Schema hinzufügen</h3><p>Nachdem Sie die Konfigurationen Ihres Analysators überprüft haben, fügen Sie diese zu den Feldern Ihres Schemas hinzu:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add VARCHAR field &#x27;title_en&#x27; using the built-in analyzer configuration</span>

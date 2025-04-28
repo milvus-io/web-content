@@ -3,8 +3,8 @@ id: prepare-source-data.md
 order: 0
 title: Quelldaten vorbereiten
 summary: >-
-  Auf dieser Seite geht es um etwas, das Sie bedenken sollten, bevor Sie Daten
-  in großen Mengen in Ihre Sammlung einfügen.
+  Auf dieser Seite geht es um etwas, das Sie bedenken sollten, bevor Sie mit der
+  Masseneintragung von Daten in Ihre Sammlung beginnen.
 ---
 <h1 id="Prepare-Source-Data" class="common-anchor-header">Quelldaten vorbereiten<button data-href="#Prepare-Source-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -270,7 +270,7 @@ writer = LocalBulkWriter(
 <li>Verweisen Sie auf das erstellte Schema in <code translate="no">CollectionSchema()</code>.</li>
 <li>Legen Sie das Ausgabeverzeichnis in <code translate="no">withLocalPath()</code> fest.</li>
 <li>Legen Sie den Ausgabedateityp in <code translate="no">withFileType()</code> fest.</li>
-<li>Wenn Ihr Datensatz eine große Anzahl von Datensätzen enthält, empfiehlt es sich, Ihre Daten zu segmentieren, indem Sie <code translate="no">withChunkSize()</code> auf einen geeigneten Wert setzen.</li>
+<li>Wenn Ihr Datensatz eine große Anzahl von Datensätzen enthält, empfiehlt es sich, Ihre Daten zu segmentieren, indem Sie <code translate="no">withChunkSize()</code> auf einen geeigneten Wert einstellen.</li>
 </ul>
 <p>Einzelheiten zu den Parametereinstellungen finden Sie unter LocalBulkWriter in der SDK-Referenz.</p>
 </div>
@@ -373,7 +373,7 @@ writer = RemoteBulkWriter(
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Ein <strong>BulkWriter</strong> hat zwei Methoden: <code translate="no">append_row()</code> fügt eine Zeile aus einem Quelldatensatz hinzu, und <code translate="no">commit()</code> überträgt hinzugefügte Zeilen in eine lokale Datei oder einen Remote Bucket.</p>
+<p>Ein <strong>BulkWriter</strong> hat zwei Methoden: <code translate="no">append_row()</code> fügt eine Zeile aus einem Quelldatensatz hinzu, und <code translate="no">commit()</code> überträgt hinzugefügte Zeilen in eine lokale Datei oder einen Remote-Bucket.</p>
 </div>
 <div class="language-java">
 <p>Ein <strong>BulkWriter</strong> hat zwei Methoden: <code translate="no">appendRow()</code> fügt eine Zeile aus einem Quelldatensatz hinzu, und <code translate="no">commit()</code> überträgt hinzugefügte Zeilen in eine lokale Datei oder einen Remote-Bucket.</p>
@@ -606,28 +606,28 @@ writer = RemoteBulkWriter(
 <span class="hljs-comment">#  [&#x27;d4220a9e-45be-4ccb-8cb5-bf09304b9f23/2.parquet&#x27;]]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// localBulkWriter.getBatchFiles();</span>
-remoteBulkWriter.<span class="hljs-title function_">getBatchFiles</span>();
+remoteBulkWriter.getBatchFiles();
 
 <span class="hljs-comment">// </span>
 
 <span class="hljs-comment">// Close the BulkWriter</span>
 <span class="hljs-keyword">try</span> {
-    localBulkWriter.<span class="hljs-title function_">close</span>();
-    remoteBulkWriter.<span class="hljs-title function_">close</span>();            
-} <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) {
+    localBulkWriter.close();
+    remoteBulkWriter.close();            
+} <span class="hljs-keyword">catch</span> (Exception e) {
     <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> handle exception</span>
-    e.<span class="hljs-title function_">printStackTrace</span>();
+    e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>BulkWriter</strong> generiert eine UUID, erstellt einen Unterordner unter Verwendung der UUID im angegebenen Ausgabeverzeichnis und legt alle generierten Dateien in diesem Unterordner ab. <a href="https://assets.zilliz.com/bulk_writer.zip">Klicken Sie hier</a>, um die vorbereiteten Beispieldaten herunterzuladen.</p>
+<p><strong>BulkWriter</strong> generiert eine UUID, erstellt einen Unterordner mit der UUID im angegebenen Ausgabeverzeichnis und legt alle generierten Dateien in diesem Unterordner ab. <a href="https://assets.zilliz.com/bulk_writer.zip">Klicken Sie hier</a>, um die vorbereiteten Beispieldaten herunterzuladen.</p>
 <p>Mögliche Ordnerstrukturen sind wie folgt:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
-│       └── <span class="hljs-number">1.j</span>son 
+│       └── 1.json 
 
 <span class="hljs-comment"># Parquet</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
-│       └── <span class="hljs-number">1.</span>parquet 
+│       └── 1.parquet 
 <button class="copy-code-btn"></button></code></pre>

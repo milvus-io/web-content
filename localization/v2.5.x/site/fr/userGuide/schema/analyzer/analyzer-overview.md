@@ -108,7 +108,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>La configuration de l'analyseur intégré <code translate="no">standard</code> ci-dessus est équivalente à la configuration d'un <a href="/docs/fr/analyzer-overview.md#Custom-analyzer">analyseur personnalisé</a> avec les paramètres suivants, où les options <code translate="no">tokenizer</code> et <code translate="no">filter</code> sont explicitement définies pour obtenir une fonctionnalité similaire :</p>
+<p>La configuration de l'analyseur intégré <code translate="no">standard</code> ci-dessus est équivalente à la configuration d'un <a href="/docs/fr/analyzer-overview.md#Custom-analyzer">analyseur personnalisé</a> avec les paramètres suivants, où les options <code translate="no">tokenizer</code> et <code translate="no">filter</code> sont explicitement définies pour obtenir des fonctionnalités similaires :</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -163,10 +163,9 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <ul>
 <li><p><code translate="no">standard</code>: Adapté au traitement de texte général, appliquant la tokenisation standard et le filtrage des minuscules.</p></li>
 <li><p><code translate="no">english</code>: Optimisé pour les textes en anglais, avec prise en charge des mots vides en anglais.</p></li>
-<li><p><code translate="no">chinese</code>: Spécialisé pour le traitement de textes chinois, avec une tokénisation adaptée aux structures de la langue chinoise.</p></li>
+<li><p><code translate="no">chinese</code>: Spécialisé dans le traitement de textes chinois, avec une tokénisation adaptée aux structures de la langue chinoise.</p></li>
 </ul>
-<p>Pour obtenir une liste des analyseurs intégrés et de leurs paramètres personnalisables, reportez-vous à la section <a href="/docs/fr/built-in-analyzers">Référence des analyseurs intégrés</a>.</p>
-<h3 id="Custom-analyzer" class="common-anchor-header">Analyseur personnalisé</h3><p>Pour un traitement de texte plus avancé, les analyseurs personnalisés de Milvus vous permettent de construire un pipeline de traitement de texte personnalisé en spécifiant à la fois un <strong>tokenizer</strong> et des <strong>filtres</strong>. Cette configuration est idéale pour les cas d'utilisation spécialisés nécessitant un contrôle précis.</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">Analyseur personnalisé</h3><p>Pour un traitement de texte plus avancé, les analyseurs personnalisés de Milvus vous permettent de construire un pipeline de traitement de texte sur mesure en spécifiant à la fois un <strong>tokenizer</strong> et des <strong>filtres</strong>. Cette configuration est idéale pour les cas d'utilisation spécialisés nécessitant un contrôle précis.</p>
 <h4 id="Tokenizer" class="common-anchor-header">Tokenizer</h4><p>Le <strong>tokenizer</strong> est un composant <strong>obligatoire</strong> pour un analyseur personnalisé, qui initie le pipeline de l'analyseur en décomposant le texte d'entrée en unités discrètes ou en <strong>tokens</strong>. La tokenisation suit des règles spécifiques, telles que la division par des espaces blancs ou la ponctuation, en fonction du type de tokenizer. Ce processus permet un traitement plus précis et indépendant de chaque mot ou phrase.</p>
 <p>Par exemple, un tokenizer convertit le texte <code translate="no">&quot;Vector Database Built for Scale&quot;</code> en jetons distincts :</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
@@ -191,8 +190,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour obtenir une liste des tokenizers disponibles, reportez-vous à la section <a href="/docs/fr/tokenizers">Référence des tokenizers</a>.</p>
-<h4 id="Filter" class="common-anchor-header">Filtre</h4><p>Les<strong>filtres</strong> sont des composants <strong>optionnels</strong> qui travaillent sur les jetons produits par le tokenizer, les transformant ou les affinant si nécessaire. Par exemple, après avoir appliqué un filtre <code translate="no">lowercase</code> aux termes tokenizés <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, le résultat pourrait être :</p>
+<h4 id="Filter" class="common-anchor-header">Filtre</h4><p>Les<strong>filtres</strong> sont des composants <strong>optionnels</strong> qui travaillent sur les jetons produits par le tokenizer, en les transformant ou en les affinant si nécessaire. Par exemple, après avoir appliqué un filtre <code translate="no">lowercase</code> aux termes tokenizés <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, le résultat pourrait être :</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>Les filtres d'un analyseur personnalisé peuvent être <strong>intégrés</strong> ou <strong>personnalisés</strong>, en fonction des besoins de configuration.</p>
@@ -282,8 +280,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
        }
     ]
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Pour une liste des types de filtres disponibles et de leurs paramètres spécifiques, reportez-vous à la section <a href="/docs/fr/filters">Référence des filtres</a>.</p></li>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h2 id="Example-use" class="common-anchor-header">Exemple d'utilisation<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -302,7 +299,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
       </svg>
     </button></h2><p>Dans cet exemple, vous allez créer un schéma de collection qui inclut :</p>
 <ul>
-<li><p>Un champ vectoriel pour les encastrements.</p></li>
+<li><p>Un champ vectoriel pour les embeddings.</p></li>
 <li><p>Deux champs <code translate="no">VARCHAR</code> pour le traitement du texte :</p>
 <ul>
 <li><p>Un champ utilise un analyseur intégré.</p></li>

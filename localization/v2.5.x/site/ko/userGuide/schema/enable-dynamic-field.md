@@ -37,7 +37,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus에서는 컬렉션의 각 필드에 대한 이름과 데이터 유형을 설정하여 컬렉션 스키마를 만들 수 있습니다. 스키마에 필드를 추가할 때 이 필드가 삽입하려는 엔티티에 포함되어 있는지 확인하세요. 일부 필드를 선택 사항으로 사용하려는 경우 동적 필드를 활성화하는 것도 한 가지 옵션입니다.</p>
-<p>동적 필드는 JavaScript 객체 표기법(JSON) 유형인 <code translate="no">$meta</code> 이라는 이름의 예약 필드입니다. 스키마에 정의되지 않은 엔티티의 모든 필드는 이 예약된 JSON 필드에 키-값 쌍으로 저장됩니다.</p>
+<p>동적 필드는 <strong>$meta라는</strong> 이름의 예약된 필드이며 JSON(JavaScript 객체 표기법) 유형입니다. 스키마에 정의되지 않은 엔티티의 모든 필드는 이 예약된 JSON 필드에 키-값 쌍으로 저장됩니다.</p>
 <p>동적 필드가 활성화된 컬렉션의 경우 스키마에 명시적으로 정의된 필드와 마찬가지로 동적 필드의 키를 스칼라 필터링에 사용할 수 있습니다.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">동적 필드 활성화<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"

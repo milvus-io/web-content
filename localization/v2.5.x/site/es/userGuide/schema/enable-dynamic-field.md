@@ -2,10 +2,10 @@
 id: enable-dynamic-field.md
 title: Campo dinámico
 summary: >-
-  Todos los campos definidos en el esquema de una colección deben estar
-  incluidos en las entidades que se van a insertar. Si desea que algunos campos
-  sean opcionales, considere la posibilidad de habilitar el campo dinámico. Este
-  tema describe cómo habilitar y utilizar el campo dinámico.
+  Todos los campos definidos en el esquema de una colección deben incluirse en
+  las entidades que se van a insertar. Si desea que algunos campos sean
+  opcionales, considere la posibilidad de habilitar el campo dinámico. Este tema
+  describe cómo habilitar y utilizar el campo dinámico.
 ---
 <h1 id="Dynamic-Field" class="common-anchor-header">Campo dinámico<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,8 +39,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>En Milvus, puede crear un esquema de colección estableciendo los nombres y tipos de datos para cada campo de la colección. Cuando añada un campo al esquema, asegúrese de que este campo está incluido en la entidad que pretende insertar. Si desea que algunos campos sean opcionales, una opción es habilitar el campo dinámico.</p>
-<p>El campo dinámico es un campo reservado denominado <code translate="no">$meta</code>, que es del tipo JavaScript Object Notation (JSON). Cualquier campo de las entidades que no esté definido en el esquema se almacenará en este campo JSON reservado como pares clave-valor.</p>
-<p>Para una colección con el campo dinámico habilitado, puede utilizar claves en el campo dinámico para el filtrado escalar, al igual que lo haría con campos definidos explícitamente en el esquema.</p>
+<p>El campo dinámico es un campo reservado llamado <strong>$meta</strong>, que es del tipo JavaScript Object Notation (JSON). Cualquier campo de las entidades que no esté definido en el esquema se almacenará en este campo JSON reservado como pares clave-valor.</p>
+<p>Para una colección con el campo dinámico habilitado, puede utilizar claves en el campo dinámico para el filtrado escalar, del mismo modo que lo haría con campos definidos explícitamente en el esquema.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">Activar el campo dinámico<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

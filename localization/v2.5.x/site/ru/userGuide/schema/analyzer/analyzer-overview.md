@@ -83,7 +83,7 @@ summary: >-
 <div class="alert note">
 <p>Если вы не указываете конфигурацию анализатора при создании коллекции, Milvus по умолчанию использует анализатор <code translate="no">standard</code> для обработки всего текста. Подробнее см. в разделе <a href="/docs/ru/standard-analyzer.md">Стандартный</a>.</p>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">Встроенный анализатор</h3><p>Встроенные анализаторы в Milvus предварительно сконфигурированы с определенными токенизаторами и фильтрами, что позволяет использовать их сразу, без необходимости определять эти компоненты самостоятельно. Каждый встроенный анализатор представляет собой шаблон, включающий в себя предустановленные токенизаторы и фильтры, с дополнительными параметрами для настройки.</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">Встроенный анализатор</h3><p>Встроенные анализаторы в Milvus предварительно сконфигурированы с определенными токенизаторами и фильтрами, что позволяет использовать их сразу, без необходимости определять эти компоненты самостоятельно. Каждый встроенный анализатор представляет собой шаблон, включающий в себя предустановленные токенизаторы и фильтры с дополнительными параметрами для настройки.</p>
 <p>Например, чтобы использовать встроенный анализатор <code translate="no">standard</code>, достаточно указать его имя <code translate="no">standard</code> в качестве <code translate="no">type</code> и опционально включить дополнительные конфигурации, специфичные для этого типа анализатора, например <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -163,9 +163,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <ul>
 <li><p><code translate="no">standard</code>: : Подходит для обработки текста общего назначения, применяя стандартную токенизацию и фильтрацию строчных букв.</p></li>
 <li><p><code translate="no">english</code>: Оптимизирован для англоязычных текстов, с поддержкой английских стоп-слов.</p></li>
-<li><p><code translate="no">chinese</code>: : Специализирован для обработки китайского текста, включая токенизацию, адаптированную к структурам китайского языка.</p></li>
+<li><p><code translate="no">chinese</code>: Специализирован для обработки китайского текста, включая токенизацию, адаптированную к структурам китайского языка.</p></li>
 </ul>
-<p>Список встроенных анализаторов и их настраиваемых параметров см. в разделе <a href="/docs/ru/built-in-analyzers">Справочник встроенных анализаторов</a>.</p>
 <h3 id="Custom-analyzer" class="common-anchor-header">Пользовательский анализатор</h3><p>Для более сложной обработки текста пользовательские анализаторы в Milvus позволяют создать индивидуальный конвейер обработки текста, указав <strong>токенизатор</strong> и <strong>фильтры</strong>. Такая настройка идеально подходит для специализированных случаев, когда требуется точный контроль.</p>
 <h4 id="Tokenizer" class="common-anchor-header">Токенизатор</h4><p><strong>Токенизатор</strong> - <strong>обязательный</strong> компонент пользовательского анализатора, который запускает конвейер анализатора, разбивая входной текст на дискретные единицы или <strong>лексемы</strong>. В зависимости от типа токенизатора токенизация выполняется по определенным правилам, таким как разбиение на пробельные символы или знаки препинания. Этот процесс позволяет более точно и независимо обрабатывать каждое слово или фразу.</p>
 <p>Например, токенизатор преобразует текст <code translate="no">&quot;Vector Database Built for Scale&quot;</code> в отдельные лексемы:</p>
@@ -191,7 +190,6 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Список токенизаторов, доступных для выбора, см. в разделе <a href="/docs/ru/tokenizers">Справочник по токенизаторам</a>.</p>
 <h4 id="Filter" class="common-anchor-header">Фильтр</h4><p><strong>Фильтры</strong> - это <strong>необязательные</strong> компоненты, работающие с токенами, полученными токенизатором, преобразуя или уточняя их по мере необходимости. Например, после применения фильтра <code translate="no">lowercase</code> к токенизированным терминам <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, результат может быть следующим:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
@@ -282,8 +280,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
        }
     ]
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Список доступных типов фильтров и их специфических параметров см. в разделе <a href="/docs/ru/filters">Справочник фильтров</a>.</p></li>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h2 id="Example-use" class="common-anchor-header">Пример использования<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"

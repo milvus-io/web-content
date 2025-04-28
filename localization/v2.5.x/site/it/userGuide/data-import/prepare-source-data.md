@@ -4,7 +4,7 @@ order: 0
 title: Preparare i dati di origine
 summary: >-
   In questa pagina si parla di un aspetto da tenere in considerazione prima di
-  iniziare a inserire i dati in blocco nella propria raccolta.
+  iniziare a inserire dati in blocco nella propria raccolta.
 ---
 <h1 id="Prepare-Source-Data" class="common-anchor-header">Preparare i dati di origine<button data-href="#Prepare-Source-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,7 +47,7 @@ summary: >-
 <p>Ci sono altre due cose da considerare quando si progetta lo schema:</p>
 <ul>
 <li><p><strong>Se abilitare l'AutoID</strong></p>
-<p>Il campo <strong>id</strong> è il campo primario della collezione. Per fare in modo che il campo primario si incrementi automaticamente, si può abilitare l'<strong>AutoID</strong> nello schema. In questo caso, è necessario escludere il campo <strong>id</strong> da ogni riga dei dati di origine.</p></li>
+<p>Il campo <strong>id</strong> è il campo primario della collezione. Per fare in modo che il campo primario si incrementi automaticamente, è possibile abilitare l'<strong>AutoID</strong> nello schema. In questo caso, è necessario escludere il campo <strong>id</strong> da ogni riga dei dati di origine.</p></li>
 <li><p><strong>Abilitare o meno i campi dinamici</strong></p>
 <p>La collezione di destinazione può memorizzare anche campi non inclusi nel suo schema predefinito, se lo schema abilita i campi dinamici. Il campo <strong>$meta</strong> è un campo JSON riservato per contenere i campi dinamici e i loro valori in coppie chiave-valore. Nello schema precedente, i campi <strong>dynamic_field_1</strong> e <strong>dynamic_field_2</strong> e i relativi valori saranno salvati come coppie chiave-valore nel campo <strong>$meta</strong>.</p></li>
 </ul>
@@ -255,7 +255,7 @@ writer = LocalBulkWriter(
 <span class="hljs-type">LocalBulkWriter</span> <span class="hljs-variable">localBulkWriter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LocalBulkWriter</span>(localBulkWriterParam);
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>Quando si crea un <strong>LocalBulkWriter</strong>, occorre:</p>
+<p>Quando si crea un <strong>LocalBulkWriter</strong>, si deve:</p>
 <ul>
 <li>Fare riferimento allo schema creato in <code translate="no">schema</code>.</li>
 <li>Impostare <code translate="no">local_path</code> come directory di output.</li>
@@ -265,7 +265,7 @@ writer = LocalBulkWriter(
 <p>Per informazioni dettagliate sulle impostazioni dei parametri, consultare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">LocalBulkWriter</a> nel riferimento dell'SDK.</p>
 </div>
 <div class="language-java">
-<p>Quando si crea un <strong>LocalBulkWriter</strong>, occorre:</p>
+<p>Quando si crea un <strong>LocalBulkWriter</strong>, si deve:</p>
 <ul>
 <li>Fare riferimento allo schema creato in <code translate="no">CollectionSchema()</code>.</li>
 <li>Impostare la directory di output in <code translate="no">withLocalPath()</code>.</li>
@@ -373,7 +373,7 @@ writer = RemoteBulkWriter(
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Un <strong>BulkWriter</strong> ha due metodi: <code translate="no">append_row()</code> aggiunge una riga da un set di dati di origine e <code translate="no">commit()</code> esegue il commit delle righe aggiunte in un file locale o in un bucket remoto.</p>
+<p>Un <strong>BulkWriter</strong> ha due metodi: <code translate="no">append_row()</code> aggiunge una riga da un set di dati di origine e <code translate="no">commit()</code> commette le righe aggiunte in un file locale o in un bucket remoto.</p>
 </div>
 <div class="language-java">
 <p>Un <strong>BulkWriter</strong> ha due metodi: <code translate="no">appendRow()</code> aggiunge una riga da un set di dati di origine e <code translate="no">commit()</code> esegue il commit delle righe aggiunte in un file locale o in un bucket remoto.</p>
@@ -606,17 +606,17 @@ writer = RemoteBulkWriter(
 <span class="hljs-comment">#  [&#x27;d4220a9e-45be-4ccb-8cb5-bf09304b9f23/2.parquet&#x27;]]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// localBulkWriter.getBatchFiles();</span>
-remoteBulkWriter.<span class="hljs-title function_">getBatchFiles</span>();
+remoteBulkWriter.getBatchFiles();
 
 <span class="hljs-comment">// </span>
 
 <span class="hljs-comment">// Close the BulkWriter</span>
 <span class="hljs-keyword">try</span> {
-    localBulkWriter.<span class="hljs-title function_">close</span>();
-    remoteBulkWriter.<span class="hljs-title function_">close</span>();            
-} <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) {
+    localBulkWriter.close();
+    remoteBulkWriter.close();            
+} <span class="hljs-keyword">catch</span> (Exception e) {
     <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> handle exception</span>
-    e.<span class="hljs-title function_">printStackTrace</span>();
+    e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>BulkWriter</strong> genera un UUID, crea una sottocartella utilizzando l'UUID nella directory di output fornita e colloca tutti i file generati nella sottocartella. <a href="https://assets.zilliz.com/bulk_writer.zip">Fare clic qui</a> per scaricare i dati di esempio preparati.</p>
@@ -624,10 +624,10 @@ remoteBulkWriter.<span class="hljs-title function_">getBatchFiles</span>();
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
-│       └── <span class="hljs-number">1.j</span>son 
+│       └── 1.json 
 
 <span class="hljs-comment"># Parquet</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
-│       └── <span class="hljs-number">1.</span>parquet 
+│       └── 1.parquet 
 <button class="copy-code-btn"></button></code></pre>

@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>In Milvus können Sie ein Sammlungsschema erstellen, indem Sie die Namen und Datentypen für jedes Feld in der Sammlung festlegen. Wenn Sie ein Feld zum Schema hinzufügen, stellen Sie sicher, dass dieses Feld in der Entität enthalten ist, die Sie einfügen möchten. Wenn Sie möchten, dass einige Felder optional sind, ist die Aktivierung des dynamischen Feldes eine Möglichkeit.</p>
-<p>Bei dem dynamischen Feld handelt es sich um ein reserviertes Feld mit der Bezeichnung <code translate="no">$meta</code>, das vom Typ JavaScript Object Notation (JSON) ist. Alle Felder in den Entitäten, die nicht im Schema definiert sind, werden in diesem reservierten JSON-Feld als Schlüssel-Wert-Paare gespeichert.</p>
+<p>Das dynamische Feld ist ein reserviertes Feld namens <strong>$meta</strong>, das vom Typ JavaScript Object Notation (JSON) ist. Alle Felder in den Entitäten, die nicht im Schema definiert sind, werden in diesem reservierten JSON-Feld als Schlüssel-Wert-Paare gespeichert.</p>
 <p>Bei einer Sammlung mit aktiviertem dynamischen Feld können Sie die Schlüssel im dynamischen Feld für die skalare Filterung verwenden, genau wie bei explizit im Schema definierten Feldern.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">Aktivieren des dynamischen Felds<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"

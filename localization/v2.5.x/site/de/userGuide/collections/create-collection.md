@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Sie können eine Sammlung erstellen, indem Sie ihr Schema, die Indexparameter und den Metrik-Typ festlegen und bestimmen, ob sie bei der Erstellung geladen werden soll. Auf dieser Seite erfahren Sie, wie Sie eine Sammlung von Grund auf erstellen können.</p>
-<h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Eine Sammlung ist eine zweidimensionale Tabelle mit festen Spalten und variablen Zeilen. Jede Spalte steht für ein Feld und jede Zeile für eine Entität. Um eine solche strukturelle Datenverwaltung zu implementieren, ist ein Schema erforderlich. Jede Entität, die eingefügt werden soll, muss den im Schema definierten Beschränkungen entsprechen.</p>
-<p>Sie können jeden Aspekt einer Sammlung bestimmen, einschließlich des Schemas, der Indexparameter, des Metrik-Typs und ob sie bei der Erstellung geladen werden soll, um sicherzustellen, dass die Sammlung Ihre Anforderungen vollständig erfüllt.</p>
+<p>Sie können jeden Aspekt einer Sammlung bestimmen, einschließlich des Schemas, der Indexparameter, des metrischen Typs und ob sie bei der Erstellung geladen werden soll, um sicherzustellen, dass die Sammlung Ihren Anforderungen entspricht.</p>
 <p>Um eine Sammlung zu erstellen, müssen Sie</p>
 <ul>
 <li><p><a href="/docs/de/create-collection.md#Create-Schema">Schema erstellen</a></p></li>
@@ -522,7 +522,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Sie können Eigenschaften für die zu erstellende Sammlung festlegen, damit sie in Ihren Dienst passt. Die anwendbaren Eigenschaften sind wie folgt.</p>
-<h3 id="Set-Shard-Number" class="common-anchor-header">Shard-Nummer festlegen</h3><p>Shards sind horizontale Abschnitte einer Sammlung. Jeder Shard entspricht einem Dateneingangskanal. Jede Sammlung hat standardmäßig einen Shard. Sie können bei der Erstellung einer Sammlung die entsprechende Anzahl von Scherben auf der Grundlage des erwarteten Durchsatzes und des Datenvolumens, das in die Sammlung eingefügt werden soll, festlegen.</p>
+<h3 id="Set-Shard-Number" class="common-anchor-header">Shard-Nummer festlegen</h3><p>Shards sind horizontale Abschnitte einer Sammlung. Jeder Shard entspricht einem Dateneingangskanal. Jede Sammlung hat standardmäßig einen Shard. Sie können bei der Erstellung einer Sammlung die entsprechende Anzahl von Scherben auf der Grundlage des erwarteten Durchsatzes und des Volumens der in die Sammlung einzufügenden Daten festlegen.</p>
 <p>In den meisten Fällen sollten Sie die Anzahl der Shards jedes Mal um eins erhöhen, wenn der erwartete Durchsatz um 500 MB/s oder das einzufügende Datenvolumen um 100 GB steigt. Dieser Vorschlag basiert auf unseren eigenen Erfahrungen und ist möglicherweise nicht vollständig auf Ihre Anwendungsszenarien abgestimmt. Sie können diese Zahl an Ihre eigenen Bedürfnisse anpassen oder einfach den Standardwert verwenden.</p>
 <p>Der folgende Codeschnipsel zeigt, wie man die Shard-Nummer beim Erstellen einer Sammlung festlegt.</p>
 <div class="multipleCode">
@@ -748,6 +748,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Weitere Informationen zu Konsistenzstufen finden Sie unter <a href="/docs/de/consistency.md">Konsistenzstufe</a>.</p>
+<p>Weitere Informationen zu Konsistenzstufen finden Sie unter <a href="/docs/de/tune_consistency.md">Konsistenzstufe</a>.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">Dynamisches Feld aktivieren</h3><p>Das dynamische Feld in einer Sammlung ist ein reserviertes JavaScript Object Notation (JSON)-Feld namens <strong>$meta</strong>. Sobald Sie dieses Feld aktiviert haben, speichert Milvus alle nicht schema-definierten Felder, die in jeder Entität enthalten sind, und ihre Werte als Schlüssel-Wert-Paare in dem reservierten Feld.</p>
 <p>Einzelheiten zur Verwendung des dynamischen Feldes finden Sie unter <a href="/docs/de/enable-dynamic-field.md">Dynamisches Feld</a>.</p>

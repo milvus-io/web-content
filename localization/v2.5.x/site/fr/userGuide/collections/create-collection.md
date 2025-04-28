@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Une collection est une table bidimensionnelle avec des colonnes fixes et des lignes variantes. Chaque colonne représente un champ et chaque ligne une entité. Un schéma est nécessaire pour mettre en œuvre une telle gestion structurelle des données. Chaque entité à insérer doit répondre aux contraintes définies dans le schéma.</p>
-<p>Vous pouvez déterminer tous les aspects d'une collection, y compris son schéma, ses paramètres d'index, son type de métrique, et décider de la charger ou non lors de sa création, afin de vous assurer que la collection répond pleinement à vos besoins.</p>
+<p>Vous pouvez déterminer tous les aspects d'une collection, y compris son schéma, ses paramètres d'index, son type de métrique, et décider de la charger ou non lors de sa création afin de vous assurer que la collection répond pleinement à vos besoins.</p>
 <p>Pour créer une collection, vous devez</p>
 <ul>
 <li><p><a href="/docs/fr/create-collection.md#Create-Schema">Créer un schéma</a></p></li>
@@ -748,6 +748,6 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour en savoir plus sur les niveaux de cohérence, voir <a href="/docs/fr/consistency.md">Niveau de cohérence</a>.</p>
+<p>Pour en savoir plus sur les niveaux de cohérence, voir <a href="/docs/fr/tune_consistency.md">Niveau de cohérence</a>.</p>
 <h3 id="Enable-Dynamic-Field" class="common-anchor-header">Activer le champ dynamique</h3><p>Le champ dynamique d'une collection est un champ JavaScript Object Notation (JSON) réservé nommé <strong>$meta</strong>. Une fois ce champ activé, Milvus enregistre tous les champs non définis par le schéma dans chaque entité et leurs valeurs en tant que paires clé-valeur dans le champ réservé.</p>
 <p>Pour plus de détails sur l'utilisation du champ dynamique, voir <a href="/docs/fr/enable-dynamic-field.md">Champ dynamique</a>.</p>

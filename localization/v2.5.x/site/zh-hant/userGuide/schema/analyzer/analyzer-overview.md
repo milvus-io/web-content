@@ -161,7 +161,6 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p><code translate="no">english</code>:針對英文文字最佳化，支援英文停止詞。</p></li>
 <li><p><code translate="no">chinese</code>:專門處理中文文字，包括針對中文語言結構的標記化。</p></li>
 </ul>
-<p>有關內建分析器及其自訂設定的清單，請參閱<a href="/docs/zh-hant/built-in-analyzers">內建</a>分析器參考。</p>
 <h3 id="Custom-analyzer" class="common-anchor-header">自訂分析器</h3><p>對於更進階的文字處理，Milvus 的自訂分析器可讓您透過指定<strong>標記器</strong>和<strong>過濾器</strong>，建立量身打造的文字處理管道。此設定非常適合需要精確控制的特殊使用個案。</p>
 <h4 id="Tokenizer" class="common-anchor-header">標記器</h4><p><strong>標記器</strong>是自訂分析器的<strong>必備</strong>元件，可將輸入文字分解為離散的單位或<strong>標記</strong>，從而啟動分析器管道。記號化遵循特定規則，例如依據記號化類型以空白或標點分割。此過程能更精確、獨立地處理每個字或詞組。</p>
 <p>例如，令牌化器會將文字<code translate="no">&quot;Vector Database Built for Scale&quot;</code> 轉換成獨立的令牌：</p>
@@ -187,8 +186,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>如需可供選擇的 tokenizer 清單，請參閱<a href="/docs/zh-hant/tokenizers">Tokenizer Reference</a>。</p>
-<h4 id="Filter" class="common-anchor-header">過濾器</h4><p><strong>過濾器</strong>是<strong>可選的</strong>元件，用來處理 tokenizer 產生的 token，並視需要轉換或精煉它們。例如，將<code translate="no">lowercase</code> 過濾器套用到標記化的詞彙<code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> 之後，結果可能是：</p>
+<h4 id="Filter" class="common-anchor-header">過濾器</h4><p><strong>過濾器</strong>是<strong>可選的</strong>元件，用來處理 tokenizer 產生的 token，並視需要轉換或精煉它們。例如，在將一個<code translate="no">lowercase</code> 過濾器套用到標記化的詞彙<code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> 之後，結果可能是：</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>自訂分析器中的篩選器可以是<strong>內建</strong>或<strong>自訂的</strong>，視配置需求而定。</p>
@@ -278,8 +276,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
        }
     ]
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>如需可用篩選器類型及其特定參數的清單，請參閱<a href="/docs/zh-hant/filters">篩選器參考</a>。</p></li>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h2 id="Example-use" class="common-anchor-header">使用範例<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -296,9 +293,9 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本範例中，您將建立一個集合模式，其中包括</p>
+    </button></h2><p>在這個範例中，您將建立一個集合模式，其中包括</p>
 <ul>
-<li><p>一個向量欄位，用於嵌入。</p></li>
+<li><p>一個向量欄位用於嵌入。</p></li>
 <li><p>兩個<code translate="no">VARCHAR</code> 欄位用於文字處理：</p>
 <ul>
 <li><p>一個欄位使用內建分析器。</p></li>

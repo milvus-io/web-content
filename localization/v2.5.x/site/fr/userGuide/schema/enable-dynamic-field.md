@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Dans Milvus, vous pouvez créer un schéma de collection en définissant les noms et les types de données de chaque champ de la collection. Lorsque vous ajoutez un champ au schéma, assurez-vous que ce champ est inclus dans l'entité que vous avez l'intention d'insérer. Si vous souhaitez que certains champs soient facultatifs, vous pouvez activer le champ dynamique.</p>
-<p>Le champ dynamique est un champ réservé nommé <code translate="no">$meta</code>, qui est de type JavaScript Object Notation (JSON). Tous les champs des entités qui ne sont pas définis dans le schéma seront stockés dans ce champ JSON réservé sous forme de paires clé-valeur.</p>
+<p>Le champ dynamique est un champ réservé nommé <strong>$meta</strong>, qui est de type JavaScript Object Notation (JSON). Tous les champs des entités qui ne sont pas définis dans le schéma seront stockés dans ce champ JSON réservé sous forme de paires clé-valeur.</p>
 <p>Pour une collection dont le champ dynamique est activé, vous pouvez utiliser les clés du champ dynamique pour le filtrage scalaire, comme vous le feriez avec des champs explicitement définis dans le schéma.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">Activer le champ dynamique<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"

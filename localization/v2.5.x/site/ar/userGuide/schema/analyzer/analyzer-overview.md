@@ -2,8 +2,8 @@
 id: analyzer-overview.md
 title: نظرة عامة على المحلل
 summary: >-
-  في معالجة النصوص، يعد المحلل مكونًا أساسيًا يحول النص الخام إلى تنسيق منظم
-  وقابل للبحث. يتكون كل محلل عادةً من عنصرين أساسيين: مُحلل الرموز والمرشح.
+  في معالجة النصوص، يعتبر المحلل عنصرًا أساسيًا في تحويل النص الخام إلى تنسيق
+  منظم وقابل للبحث. يتكون كل محلل عادةً من عنصرين أساسيين: مُحلل الرموز والمرشح.
   يقومان معًا بتحويل النص المدخل إلى رموز، وتنقيح هذه الرموز، وإعدادها للفهرسة
   والاسترجاع بكفاءة.
 ---
@@ -162,10 +162,9 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <ul>
 <li><p><code translate="no">standard</code>: مناسب لمعالجة النصوص للأغراض العامة، مع تطبيق الترميز القياسي والتصفية بالأحرف الصغيرة.</p></li>
 <li><p><code translate="no">english</code>: مُحسّن للنصوص باللغة الإنجليزية، مع دعم كلمات التوقف الإنجليزية.</p></li>
-<li><p><code translate="no">chinese</code>: مخصص لمعالجة النصوص الصينية، بما في ذلك الترميز المخصص لتراكيب اللغة الصينية.</p></li>
+<li><p><code translate="no">chinese</code>: متخصص في معالجة النصوص الصينية، بما في ذلك الترميز المخصص لتراكيب اللغة الصينية.</p></li>
 </ul>
-<p>للحصول على قائمة بالمحللات المدمجة وإعداداتها القابلة للتخصيص، راجع <a href="/docs/ar/built-in-analyzers">مرجع المحلل المدمج</a>.</p>
-<h3 id="Custom-analyzer" class="common-anchor-header">محلل مخصص</h3><p>لمزيد من معالجة النصوص المتقدمة، تتيح لك المحللات المخصصة في Milvus إنشاء خط أنابيب مخصص لمعالجة النصوص من خلال تحديد كل من <strong>أداة الترميز</strong> <strong>والمرشحات</strong>. يعد هذا الإعداد مثاليًا لحالات الاستخدام المتخصصة التي تتطلب تحكمًا دقيقًا.</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">محلل مخصص</h3><p>لمزيد من المعالجة المتقدمة للنصوص، تتيح لك المحللات المخصصة في Milvus إنشاء خط أنابيب مخصص لمعالجة النصوص من خلال تحديد كل من <strong>أداة الترميز</strong> <strong>والمرشحات</strong>. يعد هذا الإعداد مثاليًا لحالات الاستخدام المتخصصة التي تتطلب تحكمًا دقيقًا.</p>
 <h4 id="Tokenizer" class="common-anchor-header">أداة الترميز</h4><p>يعدّ أداة <strong>الترميز</strong> مكوّنًا <strong>إلزاميًا</strong> لمحلل مخصص، حيث يبدأ خط أنابيب المحلل عن طريق تقسيم نص الإدخال إلى وحدات أو <strong>رموز</strong> منفصلة. تتبع عملية الترميز قواعد محددة، مثل التقسيم حسب المسافات البيضاء أو علامات الترقيم، اعتمادًا على نوع أداة الترميز. تسمح هذه العملية بمعالجة أكثر دقة واستقلالية لكل كلمة أو عبارة.</p>
 <p>على سبيل المثال، تقوم أداة الترميز بتحويل النص <code translate="no">&quot;Vector Database Built for Scale&quot;</code> إلى رموز منفصلة:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
@@ -190,8 +189,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>للاطلاع على قائمة الرموز الرمزية المتاحة للاختيار من بينها، راجع <a href="/docs/ar/tokenizers">مرجع الرموز الرمزية</a>.</p>
-<h4 id="Filter" class="common-anchor-header">المرشحات</h4><p><strong>الفلاتر</strong> هي مكوّنات <strong>اختيارية</strong> تعمل على الرموز التي ينتجها الرمز المميز، وتقوم بتحويلها أو تنقيحها حسب الحاجة. على سبيل المثال، بعد تطبيق مرشح <code translate="no">lowercase</code> على المصطلحات المرمزة <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> ، قد تكون النتيجة:</p>
+<h4 id="Filter" class="common-anchor-header">المرشحات</h4><p><strong>الفلاتر</strong> هي مكوّنات <strong>اختيارية</strong> تعمل على الرموز التي ينتجها مُصنِّف الرموز الرموز الرمزية، وتقوم بتحويلها أو تنقيحها حسب الحاجة. على سبيل المثال، بعد تطبيق مرشح <code translate="no">lowercase</code> على المصطلحات المرمزة <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> ، قد تكون النتيجة:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكن أن تكون الفلاتر في محلل مخصص إما <strong>مدمجة</strong> أو <strong>مخصصة،</strong> حسب احتياجات التكوين.</p>
@@ -281,8 +279,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
        }
     ]
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>للاطلاع على قائمة بأنواع الفلاتر المتاحة ومعلماتها المحددة، راجع <a href="/docs/ar/filters">مرجع الفلاتر</a>.</p></li>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h2 id="Example-use" class="common-anchor-header">مثال على الاستخدام<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -299,10 +296,10 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في هذا المثال، ستقوم بإنشاء مخطط مجموعة يتضمن:</p>
+    </button></h2><p>في هذا المثال، ستقوم في هذا المثال بإنشاء مخطط مجموعة يتضمن:</p>
 <ul>
 <li><p>حقل متجه للتضمينات.</p></li>
-<li><p>حقلا <code translate="no">VARCHAR</code> لمعالجة النصوص:</p>
+<li><p>حقلان <code translate="no">VARCHAR</code> لمعالجة النصوص:</p>
 <ul>
 <li><p>يستخدم أحد الحقلين محللاً مدمجًا.</p></li>
 <li><p>يستخدم الآخر محللاً مخصصًا.</p></li>

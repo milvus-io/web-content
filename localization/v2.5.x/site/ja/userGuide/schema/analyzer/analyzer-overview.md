@@ -161,8 +161,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p><code translate="no">english</code>:英語のストップワードに対応し、英語テキストに最適化されています。</p></li>
 <li><p><code translate="no">chinese</code>:中国語のテキスト処理に特化し、中国語の言語構造に適応したトークン化を含む。</p></li>
 </ul>
-<p>内蔵アナライザーの一覧とカスタマイズ可能な設定については、<a href="/docs/ja/built-in-analyzers">内蔵アナライザー・リファレンスを</a>ご参照ください。</p>
-<h3 id="Custom-analyzer" class="common-anchor-header">カスタムアナライザ</h3><p>より高度なテキスト処理のために、Milvusのカスタムアナライザでは、<strong>トークナイザと</strong> <strong>フィルタの</strong>両方を指定することで、独自のテキスト処理パイプラインを構築することができます。この設定は、精密な制御が必要な特殊なユースケースに最適です。</p>
+<h3 id="Custom-analyzer" class="common-anchor-header">カスタムアナライザー</h3><p>より高度なテキスト処理のために、Milvusのカスタムアナライザーでは、<strong>トークナイザーと</strong> <strong>フィルターの</strong>両方を指定することで、独自のテキスト処理パイプラインを構築することができます。この設定は、精密な制御が必要な特殊なユースケースに最適です。</p>
 <h4 id="Tokenizer" class="common-anchor-header">トークナイザー</h4><p><strong>トークナイザーは</strong>カスタムアナライザーに<strong>必須の</strong>コンポーネントで、入力テキストを個別の単位（<strong>トークン</strong>）に分解することでアナライザーパイプラインを開始します。トークン化は、トークナイザーのタイプに応じて、空白や句読点による分割など、特定のルールに従います。この処理により、各単語や語句をより正確かつ独立に扱うことができます。</p>
 <p>たとえば、トークナイザーはテキスト<code translate="no">&quot;Vector Database Built for Scale&quot;</code> を個別のトークンに変換します：</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
@@ -187,8 +186,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>選択可能なトークナイザーのリストについては、「<a href="/docs/ja/tokenizers">Tokenizer Reference</a>」を参照してください。</p>
-<h4 id="Filter" class="common-anchor-header">フィルター</h4><p><strong>フィルターは</strong>、トークナイザーが生成したトークンに作用し、必要に応じて変換や精製を行う<strong>オプションの</strong>コンポーネントです。たとえば、トークン化された用語<code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> に<code translate="no">lowercase</code> フィルタを適用すると、次のようになります：</p>
+<h4 id="Filter" class="common-anchor-header">フィルター</h4><p><strong>フィルタは</strong>、トークナイザによって生成されたトークンに作用する<strong>オプションの</strong>コンポーネントで、必要に応じて変換や精製を行います。たとえば、トークン化された用語<code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> に<code translate="no">lowercase</code> フィルタを適用すると、次のようになります：</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>カスタム・アナライザーのフィルターは、構成のニーズに応じて、<strong>組み込み</strong>または<strong>カスタムの</strong>いずれかになります。</p>
@@ -278,8 +276,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
        }
     ]
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>使用可能なフィルター・タイプのリストとそのパラメータについては、「<a href="/docs/ja/filters">フィルター・リファレンス</a>」を参照してください。</p></li>
+<button class="copy-code-btn"></button></code></pre></li>
 </ul>
 <h2 id="Example-use" class="common-anchor-header">使用例<button data-href="#Example-use" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -301,7 +298,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p>埋め込み用のベクトル・フィールド。</p></li>
 <li><p>テキスト処理用の2つの<code translate="no">VARCHAR</code> フィールド：</p>
 <ul>
-<li><p>1つのフィールドは組み込みのアナライザを使用します。</p></li>
+<li><p>1つのフィールドは組み込みのアナライザを使用する。</p></li>
 <li><p>もう一つはカスタムアナライザを使用する。</p></li>
 </ul></li>
 </ul>
@@ -392,7 +389,7 @@ analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <sp
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>カスタム・アナライザーの設定と検証：</strong></p>
 <ul>
-<li><strong>設定：</strong>標準のトークナイザーと組み込みの小文字フィルター、トークンの長さとストップワードのカスタムフィルターを使用するカスタムアナライザーを定義します。</li>
+<li><strong>設定：</strong>標準のトークナイザーと組み込みの小文字フィルター、トークンの長さとストップワード用のカスタムフィルターを使用するカスタムアナライザーを定義します。</li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>

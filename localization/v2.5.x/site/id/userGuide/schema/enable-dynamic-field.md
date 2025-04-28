@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Di Milvus, Anda dapat membuat skema koleksi dengan mengatur nama dan tipe data untuk setiap field di dalam koleksi. Ketika Anda menambahkan field ke dalam skema, pastikan bahwa field tersebut sudah termasuk dalam entitas yang ingin Anda masukkan. Jika Anda ingin beberapa field menjadi opsional, mengaktifkan field dinamis adalah salah satu pilihan.</p>
-<p>Bidang dinamis adalah bidang yang dicadangkan bernama <code translate="no">$meta</code>, yang bertipe JavaScript Object Notation (JSON). Setiap field dalam entitas yang tidak didefinisikan dalam skema akan disimpan dalam field JSON yang dicadangkan ini sebagai pasangan kunci-nilai.</p>
+<p>Bidang dinamis adalah bidang yang dicadangkan bernama <strong>$meta</strong>, yang merupakan tipe JavaScript Object Notation (JSON). Setiap field dalam entitas yang tidak didefinisikan dalam skema akan disimpan dalam field JSON yang dicadangkan ini sebagai pasangan kunci-nilai.</p>
 <p>Untuk koleksi dengan bidang dinamis yang diaktifkan, Anda dapat menggunakan kunci dalam bidang dinamis untuk pemfilteran skalar, sama seperti yang Anda lakukan dengan bidang yang secara eksplisit didefinisikan dalam skema.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">Mengaktifkan bidang dinamis<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
