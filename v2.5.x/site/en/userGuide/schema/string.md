@@ -10,7 +10,7 @@ In Milvus, `VARCHAR` is the data type used for storing string data. When you def
 
 - Set the `datatype` to `DataType.VARCHAR`.
 
-- Specify the `max_length`, which defines the maximum number of characters the `VARCHAR` field can store. The valid range for `max_length` is from 1 to 65,535.
+- Specify the `max_length`, which defines the maximum number of bytes the `VARCHAR` field can store. The valid range for `max_length` is from 1 to 65,535.
 
 <div class="alert note">
 
@@ -22,9 +22,9 @@ Milvus supports null values and default values for `VARCHAR` fields. To enable t
 
 To store string data in Milvus, define a `VARCHAR` field in your collection schema. Below is an example of defining a collection schema with two `VARCHAR` fields:
 
-- `varchar_field1`: stores up to 100 characters, allows null values, and has a default value of `"Unknown"`.
+- `varchar_field1`: stores up to 100 bytes, allows null values, and has a default value of `"Unknown"`.
 
-- `varchar_field2`: stores up to 200 characters, allows null values, but does not have a default value.
+- `varchar_field2`: stores up to 200 bytes, allows null values, but does not have a default value.
 
 <div class="alert note">
 
