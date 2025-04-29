@@ -23,7 +23,7 @@ summary: >-
     </button></h1><p>In Milvus, <code translate="no">VARCHAR</code> is the data type used for storing string data. When you define a <code translate="no">VARCHAR</code> field, two parameters are mandatory:</p>
 <ul>
 <li><p>Set the <code translate="no">datatype</code> to <code translate="no">DataType.VARCHAR</code>.</p></li>
-<li><p>Specify the <code translate="no">max_length</code>, which defines the maximum number of characters the <code translate="no">VARCHAR</code> field can store. The valid range for <code translate="no">max_length</code> is from 1 to 65,535.</p></li>
+<li><p>Specify the <code translate="no">max_length</code>, which defines the maximum number of bytes the <code translate="no">VARCHAR</code> field can store. The valid range for <code translate="no">max_length</code> is from 1 to 65,535.</p></li>
 </ul>
 <div class="alert note">
 <p>Milvus supports null values and default values for <code translate="no">VARCHAR</code> fields. To enable these features, set <code translate="no">nullable</code> to <code translate="no">True</code> and <code translate="no">default_value</code> to a string value. For details, refer to <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p>
@@ -45,8 +45,8 @@ summary: >-
       </svg>
     </button></h2><p>To store string data in Milvus, define a <code translate="no">VARCHAR</code> field in your collection schema. Below is an example of defining a collection schema with two <code translate="no">VARCHAR</code> fields:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: stores up to 100 characters, allows null values, and has a default value of <code translate="no">&quot;Unknown&quot;</code>.</p></li>
-<li><p><code translate="no">varchar_field2</code>: stores up to 200 characters, allows null values, but does not have a default value.</p></li>
+<li><p><code translate="no">varchar_field1</code>: stores up to 100 bytes, allows null values, and has a default value of <code translate="no">&quot;Unknown&quot;</code>.</p></li>
+<li><p><code translate="no">varchar_field2</code>: stores up to 200 bytes, allows null values, but does not have a default value.</p></li>
 </ul>
 <div class="alert note">
 <p>If you set <code translate="no">enable_dynamic_fields=True</code> when defining the schema, Milvus allows you to insert scalar fields that were not defined in advance. However, this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to <a href="/docs/enable-dynamic-field.md">Dynamic Field</a>.</p>
