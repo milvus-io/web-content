@@ -2,9 +2,8 @@
 id: multi_tenancy.md
 title: Implement Multi-tenancy
 summary: >-
-  In Zilliz Cloud, multi-tenancy means multiple customers or teams—referred to
-  as tenants— share the same cluster while maintaining isolated data
-  environments.
+  In Milvus, multi-tenancy means multiple customers or teams—referred to as
+  tenants— share the same cluster while maintaining isolated data environments.
 ---
 <h1 id="Implement-Multi-tenancy" class="common-anchor-header">Implement Multi-tenancy<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Zilliz Cloud, multi-tenancy means multiple customers or teams—referred to as <strong>tenants</strong>— share the same cluster while maintaining isolated data environments.</p>
-<p>Zilliz Cloud supports four multi-tenancy strategies, each offering a different trade-off between scalability, data isolation, and flexibility. This guide walks you through each option, helping you choose the most suitable strategy for your use case.</p>
-<h2 id="Multi-tenancy-strategies-in-Zilliz-Cloud" class="common-anchor-header">Multi-tenancy strategies in Zilliz Cloud<button data-href="#Multi-tenancy-strategies-in-Zilliz-Cloud" class="anchor-icon" translate="no">
+    </button></h1><p>In Milvus, multi-tenancy means multiple customers or teams—referred to as <strong>tenants</strong>— share the same cluster while maintaining isolated data environments.</p>
+<p>Milvus supports four multi-tenancy strategies, each offering a different trade-off between scalability, data isolation, and flexibility. This guide walks you through each option, helping you choose the most suitable strategy for your use case.</p>
+<h2 id="Multi-tenancy-strategies" class="common-anchor-header">Multi-tenancy strategies<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Zilliz Cloud supports multi-tenancy at four levels: <strong>Database</strong>, <strong>Collection</strong>, <strong>Partition</strong>, and <strong>Partition Key</strong>.</p>
+    </button></h2><p>Milvus supports multi-tenancy at four levels: <strong>Database</strong>, <strong>Collection</strong>, <strong>Partition</strong>, and <strong>Partition Key</strong>.</p>
 <h3 id="Database-level-multi-tenancy" class="common-anchor-header">Database-level multi-tenancy</h3><p>With database-level multi-tenancy, each tenant receives a corresponding <a href="/docs/manage_databases.md">database</a> containing one or more collections.</p>
 <p>
   <span class="img-wrapper">
@@ -47,7 +46,7 @@ summary: >-
   </span>
 </p>
 <ul>
-<li><p><strong>Scalability</strong>: The database-level multi-tenancy strategy is only available on Zilliz Cloud’s Dedicated cluster plans and supports a maximum of 64 tenants by default.</p></li>
+<li><p><strong>Scalability</strong>: The database-level multi-tenancy strategy  supports a maximum of 64 tenants by default.</p></li>
 <li><p><strong>Data isolation</strong>: The data in each database is fully separated, offering enterprise-grade data isolation ideal for regulated environments or customers with strict compliance needs.</p></li>
 <li><p><strong>Flexibility</strong>: Each database can have collections with different schemas, offering highly flexible data organization and allowing each tenant to have its own data schema.</p></li>
 <li><p><strong>Others</strong>: This strategy also supports RBAC, enabling fine-grained control over user access per tenant. Additionally, you can flexibly load or release data for specific tenants to manage hot and cold data effectively.</p></li>
@@ -116,13 +115,6 @@ summary: >-
      <th><p><strong>Partition key-level</strong></p></th>
    </tr>
    <tr>
-     <td><p><strong>Plan availability</strong></p></td>
-     <td><p>Dedicated plans only</p></td>
-     <td><p>All plans</p></td>
-     <td><p>All plans</p></td>
-     <td><p>All plans</p></td>
-   </tr>
-   <tr>
      <td><p><strong>Data Isolation</strong></p></td>
      <td><p>Physical</p></td>
      <td><p>Physical</p></td>
@@ -131,9 +123,9 @@ summary: >-
    </tr>
    <tr>
      <td><p><strong>Max. number of tenants</strong></p></td>
-     <td><p></include target="milvus">By default, 64. You can increase it by modifying the <code translate="no">maxDatabaseNum</code> parameter in the Milvus.yaml configuration file. </include></p></td>
-     <td><p></include target="milvus">By default, 65,536. You can increase it by modifying the <code translate="no">maxCollectionNum</code> parameter in the Milvus.yaml configuration file. </include></p></td>
-     <td><p></include target="milvus">Up to 1,024 per collection. </include></p></td>
+     <td><p>By default, 64. You can increase it by modifying the <code translate="no">maxDatabaseNum</code> parameter in the Milvus.yaml configuration file. </p></td>
+     <td><p>By default, 65,536. You can increase it by modifying the <code translate="no">maxCollectionNum</code> parameter in the Milvus.yaml configuration file.</p></td>
+     <td><p>Up to 1,024 per collection. </p></td>
      <td><p>Millions</p></td>
    </tr>
    <tr>
@@ -169,10 +161,10 @@ summary: >-
      <td><p>Yes</p></td>
      <td><p>Yes</p></td>
      <td><p>Yes</p></td>
-     <td><p>No Currently, not supported for the partition key-level strategy. But if you have massive tenants and require effective handling of hot and cold data, please <a href="https://zilliz.com/contact-sales">contact us</a>.</p></td>
+     <td><p>No Currently, not supported for the partition key-level strategy.</p></td>
    </tr>
 </table>
-<p>There are several factors to consider when you choose the multi-tenancy strategy in Zilliz Cloud.</p>
+<p>There are several factors to consider when you choose the multi-tenancy strategy in Milvus.</p>
 <ol>
 <li><p><strong>Scalability:</strong> Partition Key > Partition > Collection > Database</p>
 <p>If you expect to support a very large number of tenants (millions or more), use the partition key-level strategy.</p></li>
@@ -182,8 +174,8 @@ summary: >-
 <p>Database-level and collection-level strategies provide full flexibility in data schemas. If your tenants’ data structures are different, choose database-level or collection-level multi-tenancy.</p></li>
 <li><p><strong>Others</strong></p>
 <ol>
-<li><p><strong>Performance:</strong> Search performance is determined by various factors including indexes, search parameters, and machine configurations. Zilliz Cloud also support performance-tuning. It is recommended to test the actual performance before you select a multi-tenancy strategy.</p></li>
-<li><p><strong>Effective handling of hot and cold data</strong>: Currently, the database-level, collection-level, and partition-level strategy all support hot and cold data handling. For those who want to choose the partition key-level strategy but require hot and cold data handling, please <a href="https://zilliz.com/contact-sales">contact us</a>.</p></li>
+<li><p><strong>Performance:</strong> Search performance is determined by various factors, including indexes, search parameters, and machine configurations. Milvus also support performance-tuning. It is recommended to test the actual performance before you select a multi-tenancy strategy.</p></li>
+<li><p><strong>Effective handling of hot and cold data</strong>: Currently, the database-level, collection-level, and partition-level strategies all support hot and cold data handling.</p></li>
 <li><p><strong>Cross-tenant searches</strong>: Only the partition-level and partition-key-level strategies support cross-tenant queries.</p></li>
 </ol></li>
 </ol>
