@@ -340,7 +340,7 @@ For more concept details, e.g., `analyzer`, `tokenizer`, `filter`, `enable_match
 We have learned how to use the basic BM25 build-in function in Haystack and Milvus and prepared a loaded `document_store`. Let's introduce an optimized RAG implementation with hybrid search.
 
 
-![](../../../../images/advanced_rag/hybrid_and_rerank.png)
+![](https://github.com/milvus-io/bootcamp/blob/master/images/advanced_rag/hybrid_and_rerank.png?raw=1)
 
 This diagram shows the Hybrid Retrieve & Reranking process, combining BM25 for keyword matching and dense vector search for semantic retrieval. Results from both methods are merged, reranked, and passed to an LLM to generate the final answer.
 
