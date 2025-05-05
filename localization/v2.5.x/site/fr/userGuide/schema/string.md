@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Dans Milvus, <code translate="no">VARCHAR</code> est le type de données utilisé pour stocker des données de type chaîne. Lorsque vous définissez un champ <code translate="no">VARCHAR</code>, deux paramètres sont obligatoires :</p>
 <ul>
 <li><p>Définir <code translate="no">datatype</code> sur <code translate="no">DataType.VARCHAR</code>.</p></li>
-<li><p>Spécifiez le paramètre <code translate="no">max_length</code>, qui définit le nombre maximum de caractères que le champ <code translate="no">VARCHAR</code> peut stocker. La plage valide pour <code translate="no">max_length</code> est comprise entre 1 et 65 535.</p></li>
+<li><p>Spécifiez le paramètre <code translate="no">max_length</code>, qui définit le nombre maximum d'octets que le champ <code translate="no">VARCHAR</code> peut stocker. La plage valide pour <code translate="no">max_length</code> est comprise entre 1 et 65 535.</p></li>
 </ul>
 <div class="alert note">
 <p>Milvus prend en charge les valeurs nulles et les valeurs par défaut pour les champs <code translate="no">VARCHAR</code>. Pour activer ces fonctions, définissez <code translate="no">nullable</code> sur <code translate="no">True</code> et <code translate="no">default_value</code> sur une valeur de chaîne. Pour plus de détails, voir <a href="/docs/fr/nullable-and-default.md">Nullable &amp; Default</a>.</p>
@@ -46,8 +46,8 @@ summary: >-
       </svg>
     </button></h2><p>Pour stocker des données de type chaîne dans Milvus, définissez un champ <code translate="no">VARCHAR</code> dans votre schéma de collection. Vous trouverez ci-dessous un exemple de définition d'un schéma de collecte avec deux champs <code translate="no">VARCHAR</code>:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>VARCHAR : stocke jusqu'à 100 caractères, autorise les valeurs nulles et a une valeur par défaut de <code translate="no">&quot;Unknown&quot;</code>.</p></li>
-<li><p><code translate="no">varchar_field2</code>Le champ : stocke jusqu'à 200 caractères, autorise les valeurs nulles, mais n'a pas de valeur par défaut.</p></li>
+<li><p><code translate="no">varchar_field1</code>VARCHAR : stocke jusqu'à 100 octets, autorise les valeurs nulles et a une valeur par défaut de <code translate="no">&quot;Unknown&quot;</code>.</p></li>
+<li><p><code translate="no">varchar_field2</code>Le champ : stocke jusqu'à 200 octets, autorise les valeurs nulles, mais n'a pas de valeur par défaut.</p></li>
 </ul>
 <div class="alert note">
 <p>Si vous définissez <code translate="no">enable_dynamic_fields=True</code> lors de la définition du schéma, Milvus vous permet d'insérer des champs scalaires qui n'ont pas été définis à l'avance. Cependant, cela peut augmenter la complexité des requêtes et de la gestion, ce qui peut avoir un impact sur les performances. Pour plus d'informations, voir <a href="/docs/fr/enable-dynamic-field.md">Champ dynamique</a>.</p>
@@ -249,7 +249,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>L'indexation permet d'améliorer les performances de recherche et de requête. Dans Milvus, l'indexation est obligatoire pour les champs vectoriels mais facultative pour les champs scalaires.</p>
-<p>L'exemple suivant crée des index sur le champ vectoriel <code translate="no">embedding</code> et le champ scalaire <code translate="no">varchar_field1</code>, tous deux utilisant le type d'index <code translate="no">AUTOINDEX</code>. Avec ce type, Milvus sélectionne automatiquement l'index le plus approprié en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, reportez-vous à <a href="/docs/fr/index-explained.md">Index Explained</a>.</p>
+<p>L'exemple suivant crée des index sur le champ vectoriel <code translate="no">embedding</code> et le champ scalaire <code translate="no">varchar_field1</code>, tous deux utilisant le type d'index <code translate="no">AUTOINDEX</code>. Avec ce type, Milvus sélectionne automatiquement l'index le plus approprié en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, voir <a href="/docs/fr/index-explained.md">Index expliqué</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

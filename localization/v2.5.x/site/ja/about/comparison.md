@@ -18,7 +18,7 @@ summary: この記事では、Milvusと他のベクトル検索ソリューシ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>様々なベクターデータベースの選択肢を検討する際、この包括的なガイドは、Milvusのユニークな機能を理解し、特定のニーズに最も適したデータベースを選択するのに役立ちます。Milvusはオープンソースの主要なベクターデータベースであり、<a href="https://zilliz.com/cloud">Zilliz Cloudは</a>Milvusのフルマネージドサービスを提供しています。Milvusを競合他社に対して客観的に評価するには、<a href="https://github.com/zilliztech/VectorDBBench#quick-start">ベンチマークツールを</a>使用してパフォーマンス指標を分析することを検討してください。</p>
+    </button></h1><p>様々なベクターデータベースの選択肢を検討する際、この包括的なガイドは、Milvusのユニークな機能を理解し、特定のニーズに最適なデータベースを選択するのに役立ちます。Milvusはオープンソースの主要なベクターデータベースであり、<a href="https://zilliz.com/cloud">Zilliz Cloudは</a>Milvusのフルマネージドサービスを提供しています。Milvusを競合他社に対して客観的に評価するには、<a href="https://github.com/zilliztech/VectorDBBench#quick-start">ベンチマークツールを</a>使用してパフォーマンス指標を分析することを検討してください。</p>
 <h2 id="Milvus-highlights" class="common-anchor-header">Milvusのハイライト<button data-href="#Milvus-highlights" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -155,5 +155,5 @@ summary: この記事では、Milvusと他のベクトル検索ソリューシ�
     </button></h2><ul>
 <li><p><strong>トライアル</strong>：Milvus<a href="https://milvus.io/docs/quickstart.md">クイックスタート</a>または<a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloudにサインアップして</a>、Milvusを直接体験してください。</p></li>
 <li><p><strong>もっと知る</strong>：Milvusの<a href="/docs/ja/glossary.md">用語集と</a> <a href="https://milvus.io/docs/manage-collections.md">ユーザーガイドを</a>ご覧ください。</p></li>
-<li><p><strong>他の選択肢を探す</strong>：ベクターデータベースの選択肢をより幅広く比較するには、<a href="https://zilliz.com/comparison">この</a>ページのその他のリソースをご覧ください。</p></li>
+<li><p><strong>他の選択肢を探す</strong>：ベクターデータベースの選択肢をより幅広く比較するために、<a href="https://zilliz.com/comparison">このページの</a>その他のリソースをご覧ください。</p></li>
 </ul>

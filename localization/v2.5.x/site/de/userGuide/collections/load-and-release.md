@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Wenn Sie eine Sammlung laden, lädt Milvus die Indexdateien und die Rohdaten aller Felder in den Speicher, um schnell auf Suchen und Abfragen reagieren zu können. Entitäten, die nach dem Laden einer Sammlung eingefügt werden, werden automatisch indiziert und geladen.</p>
-<p>Die folgenden Codeschnipsel demonstrieren, wie eine Sammlung geladen wird.</p>
+<p>Die folgenden Codeschnipsel zeigen, wie eine Sammlung geladen wird.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

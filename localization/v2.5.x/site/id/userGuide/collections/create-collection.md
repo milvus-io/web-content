@@ -2,9 +2,9 @@
 id: create-collection.md
 title: Membuat Koleksi
 summary: >-
-  Anda dapat membuat koleksi dengan mendefinisikan skema, parameter indeks,
-  jenis metrik, dan apakah akan memuatnya saat pembuatan. Halaman ini
-  memperkenalkan cara membuat koleksi dari awal.
+  Anda dapat membuat koleksi dengan menentukan skema, parameter indeks, jenis
+  metrik, dan apakah akan dimuat pada saat pembuatan. Halaman ini memperkenalkan
+  cara membuat koleksi dari awal.
 ---
 <h1 id="Create-Collection" class="common-anchor-header">Membuat Koleksi<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"

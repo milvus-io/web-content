@@ -1,7 +1,7 @@
 ---
 id: comparison.md
 title: 比较
-summary: 本文将 Milvus 与其他向量搜索解决方案进行比较。
+summary: 本文对 Milvus 与其他向量搜索解决方案进行了比较。
 ---
 <h1 id="Comparing-Milvus-with-Alternatives" class="common-anchor-header">Milvus 与替代产品的比较<button data-href="#Comparing-Milvus-with-Alternatives" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -135,7 +135,7 @@ summary: 本文将 Milvus 与其他向量搜索解决方案进行比较。
 <li><p><strong>度量和索引类型</strong>：Milvus 支持多种度量和索引类型，以适应各种使用情况，而 Pinecone 的选择较为有限。虽然在 Milvus 中必须为向量建立索引，但也提供了 AUTO_INDEX 选项来简化配置过程。</p></li>
 <li><p><strong>Schema 设计</strong>：Milvus 为模式设计提供了灵活的<code translate="no">create_collection</code> 模式，包括快速设置动态模式以获得类似 Pinecone 的无模式体验，以及自定义设置预定义模式字段和索引以获得类似关系数据库管理系统（RDBMS）的体验。</p></li>
 <li><p><strong>多向量字段</strong>：Milvus 支持在单个 Collections 中存储多个向量字段，这些字段可以是稀疏的，也可以是密集的，维度也可能不同。Pinecone 不提供类似功能。</p></li>
-<li><p><strong>工具</strong>：Milvus 为数据库管理和利用提供了更广泛的工具选择，如 Attu、Birdwatcher、Backup、CLI、CDC 以及 Spark 和 Kafka 连接器。</p></li>
+<li><p><strong>工具</strong>：Milvus 为数据库管理和使用提供了更广泛的工具选择，如 Attu、Birdwatcher、Backup、CLI、CDC 以及 Spark 和 Kafka 连接器。</p></li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">下一步计划<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

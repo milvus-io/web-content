@@ -40,7 +40,7 @@ summary: >-
       </svg>
     </button></h2><p>In Milvus è possibile creare uno schema di raccolta impostando i nomi e i tipi di dati per ogni campo della raccolta. Quando si aggiunge un campo allo schema, bisogna assicurarsi che questo campo sia incluso nell'entità che si intende inserire. Se si desidera che alcuni campi siano opzionali, è possibile attivare il campo dinamico.</p>
 <p>Il campo dinamico è un campo riservato denominato <strong>$meta</strong>, di tipo JavaScript Object Notation (JSON). Tutti i campi delle entità che non sono definiti nello schema saranno memorizzati in questo campo JSON riservato come coppie chiave-valore.</p>
-<p>Per un insieme con il campo dinamico abilitato, è possibile utilizzare le chiavi del campo dinamico per il filtraggio scalare, proprio come si farebbe con i campi esplicitamente definiti nello schema.</p>
+<p>Per una collezione con il campo dinamico abilitato, è possibile utilizzare le chiavi del campo dinamico per il filtraggio scalare, proprio come si farebbe con i campi esplicitamente definiti nello schema.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">Abilitare il campo dinamico<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

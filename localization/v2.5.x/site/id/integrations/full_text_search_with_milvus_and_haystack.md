@@ -317,7 +317,7 @@ indexing_pipeline.run({<span class="hljs-string">&quot;dense_doc_embedder&quot;<
     </button></h2><p>Kita telah mempelajari cara menggunakan fungsi bawaan BM25 dasar di Haystack dan Milvus dan menyiapkan <code translate="no">document_store</code> yang telah dimuat. Mari kita perkenalkan implementasi RAG yang dioptimalkan dengan pencarian hybrid.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/images/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://github.com/milvus-io/bootcamp/blob/master/images/advanced_rag/hybrid_and_rerank.png?raw=1" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

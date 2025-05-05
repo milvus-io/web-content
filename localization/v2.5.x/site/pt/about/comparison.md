@@ -18,7 +18,7 @@ summary: Este artigo compara o Milvus com outras soluções de pesquisa vetorial
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ao explorar várias opções de bases de dados vectoriais, este guia abrangente ajudá-lo-á a compreender as caraterísticas únicas do Milvus, garantindo que escolhe a base de dados que melhor se adapta às suas necessidades específicas. Em particular, o Milvus é uma das principais bases de dados vectoriais de código aberto, e <a href="https://zilliz.com/cloud">a Zilliz Cloud</a> oferece um serviço Milvus totalmente gerido. Para avaliar objetivamente o Milvus em relação aos seus concorrentes, considere a utilização de <a href="https://github.com/zilliztech/VectorDBBench#quick-start">ferramentas de benchmark</a> para analisar as métricas de desempenho.</p>
+    </button></h1><p>Ao explorar várias opções de bases de dados vectoriais, este guia abrangente irá ajudá-lo a compreender as caraterísticas únicas do Milvus, garantindo que escolhe a base de dados que melhor se adapta às suas necessidades específicas. Em particular, o Milvus é uma das principais bases de dados vectoriais de código aberto, e <a href="https://zilliz.com/cloud">a Zilliz Cloud</a> oferece um serviço Milvus totalmente gerido. Para avaliar objetivamente o Milvus em relação aos seus concorrentes, considere a utilização de <a href="https://github.com/zilliztech/VectorDBBench#quick-start">ferramentas de benchmark</a> para analisar as métricas de desempenho.</p>
 <h2 id="Milvus-highlights" class="common-anchor-header">Destaques do Milvus<button data-href="#Milvus-highlights" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,10 +35,10 @@ summary: Este artigo compara o Milvus com outras soluções de pesquisa vetorial
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Funcionalidade</strong>: O Milvus vai além da pesquisa básica de semelhança de vectores, suportando funcionalidades avançadas como <a href="https://milvus.io/docs/sparse_vector.md">vetor esparso</a>, <a href="https://milvus.io/docs/single-vector-search.md#Bulk-vector-search">vetor em massa</a>, <a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">pesquisa filtrada</a> e capacidades <a href="https://milvus.io/docs/multi-vector-search.md">de pesquisa híbrida</a>.</p></li>
+<li><p><strong>Funcionalidade</strong>: O Milvus vai além da pesquisa básica de semelhanças vectoriais, suportando funcionalidades avançadas como <a href="https://milvus.io/docs/sparse_vector.md">vetor esparso</a>, <a href="https://milvus.io/docs/single-vector-search.md#Bulk-vector-search">vetor em massa</a>, <a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">pesquisa filtrada</a> e capacidades <a href="https://milvus.io/docs/multi-vector-search.md">de pesquisa híbrida</a>.</p></li>
 <li><p><strong>Flexibilidade</strong>: O Milvus acomoda vários modos de implantação e vários SDKs, tudo dentro de um ecossistema robusto e integrado.</p></li>
 <li><p><strong>Desempenho</strong>: O Milvus garante o processamento em tempo real com alta taxa de transferência e baixa latência, alimentado por algoritmos de indexação otimizados, como <a href="https://milvus.io/docs/index.md#HNSW">HNSW</a> e <a href="https://milvus.io/docs/disk_index.md">DiskANN</a>, e <a href="https://milvus.io/docs/gpu_index.md">aceleração</a> avançada <a href="https://milvus.io/docs/gpu_index.md">de GPU</a>.</p></li>
-<li><p><strong>Escalabilidade</strong>: A sua arquitetura distribuída personalizada é escalável sem esforço, acomodando desde pequenos conjuntos de dados até colecções que excedem os 10 mil milhões de vectores.</p></li>
+<li><p><strong>Escalabilidade</strong>: A sua arquitetura distribuída personalizada é escalável sem esforço, acomodando desde pequenos conjuntos de dados a colecções que excedem os 10 mil milhões de vectores.</p></li>
 </ul>
 <h2 id="Overall-comparison" class="common-anchor-header">Comparação geral<button data-href="#Overall-comparison" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -55,7 +55,7 @@ summary: Este artigo compara o Milvus com outras soluções de pesquisa vetorial
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para comparar Milvus e Pinecone, duas soluções de bases de dados vectoriais, a tabela seguinte está estruturada de modo a realçar as diferenças entre as várias caraterísticas.</p>
+    </button></h2><p>Para comparar entre Milvus e Pinecone, duas soluções de bases de dados vectoriais, a tabela seguinte está estruturada de modo a realçar as diferenças entre as várias caraterísticas.</p>
 <table>
 <thead>
 <tr><th>Caraterística</th><th>Pinecone</th><th>Milvus</th><th>Observações</th></tr>
@@ -85,7 +85,7 @@ summary: Este artigo compara o Milvus com outras soluções de pesquisa vetorial
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Embora ambas desempenhem funções semelhantes como bases de dados vectoriais, a terminologia específica do domínio entre Milvus e Pinecone apresenta ligeiras variações. Segue-se uma comparação pormenorizada da terminologia.</p>
+    </button></h2><p>Embora ambos desempenhem funções semelhantes como bases de dados vectoriais, a terminologia específica do domínio entre Milvus e Pinecone apresenta ligeiras variações. Segue-se uma comparação pormenorizada da terminologia.</p>
 <table>
 <thead>
 <tr><th>Pinecone</th><th>Milvus</th><th>Observações</th></tr>
@@ -131,7 +131,7 @@ summary: Este artigo compara o Milvus com outras soluções de pesquisa vetorial
 <h3 id="Key-insights" class="common-anchor-header">Principais informações</h3><ul>
 <li><p><strong>Modos de implementação</strong>: O Milvus oferece uma variedade de opções de implantação, incluindo implantação local, Docker, Kubernetes on-premises, Cloud SaaS e Bring Your Own Cloud (BYOC) para empresas, enquanto o Pinecone está limitado à implantação SaaS.</p></li>
 <li><p><strong>Funções de incorporação</strong>: O Milvus suporta bibliotecas de incorporação adicionais, permitindo a utilização direta de modelos de incorporação para transformar dados de origem em vectores.</p></li>
-<li><p><strong>Tipos de dados</strong>: Milvus suporta uma gama mais ampla de tipos de dados do que Pinecone, incluindo matrizes e JSON. Pinecone suporta apenas uma estrutura de metadados plana com strings, números, booleanos ou listas de strings como valores, enquanto Milvus pode lidar com qualquer objeto JSON, incluindo estruturas aninhadas, dentro de um campo JSON. Pinecone limita o tamanho dos metadados a 40KB por vetor.</p></li>
+<li><p><strong>Tipos de dados</strong>: Milvus suporta uma gama mais ampla de tipos de dados do que Pinecone, incluindo matrizes e JSON. Pinecone suporta apenas uma estrutura de metadados plana com strings, números, booleanos ou listas de strings como valores, enquanto Milvus pode lidar com qualquer objeto JSON, incluindo estruturas aninhadas, dentro de um campo JSON. O Pinecone limita o tamanho dos metadados a 40KB por vetor.</p></li>
 <li><p><strong>Tipos de métricas e índices</strong>: Milvus suporta uma vasta seleção de tipos de métricas e índices para acomodar vários casos de utilização, enquanto Pinecone tem uma seleção mais limitada. Embora um índice para vetor seja obrigatório no Milvus, está disponível uma opção AUTO_INDEX para simplificar o processo de configuração.</p></li>
 <li><p><strong>Desenho de esquemas</strong>: Milvus oferece modos <code translate="no">create_collection</code> flexíveis para a conceção de esquemas, incluindo uma configuração rápida com um esquema dinâmico para uma experiência sem esquema semelhante a Pinecone e uma configuração personalizada com campos de esquema predefinidos e índices semelhantes a um sistema de gestão de base de dados relacional (RDBMS).</p></li>
 <li><p><strong>Múltiplos campos vectoriais</strong>: Milvus permite o armazenamento de múltiplos campos vectoriais numa única coleção, que pode ser esparsa ou densa e pode variar em dimensionalidade. O Pinecone não oferece uma funcionalidade comparável.</p></li>

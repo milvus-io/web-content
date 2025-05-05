@@ -328,7 +328,7 @@ curl --request POST \
 <li><p>サポートされている<code translate="no">json_cast_type</code> の値は、<code translate="no">bool</code> （または<code translate="no">BOOL</code> ）、<code translate="no">double</code> （または<code translate="no">DOUBLE</code> ）、<code translate="no">varchar</code> （または<code translate="no">VARCHAR</code> ）です。</p></li>
 <li><p>パースやキャストに失敗した場合（例えば、文字列をdoubleとしてパースしようとした場合）、その行はインデックス内でスキップされます。</p></li>
 </ul></li>
-<li><p>そのキーへの<strong>JSONパスを</strong> <code translate="no">json_path</code> として<strong>指定</strong>します。動的フィールドはJSONとして格納されるので、<code translate="no">&quot;color&quot;</code> のように指定することもできますし、入れ子構造になっている場合は、より深いパスを指定することもできます（例えば、<code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code> ）。</p></li>
+<li><p>そのキーへの<strong>JSONパスを</strong> <code translate="no">json_path</code> として<strong>指定</strong>します。ダイナミック・フィールドはJSONとして格納されるので、<code translate="no">&quot;color&quot;</code> のように指定することもできますし、入れ子構造になっている場合は、より深いパスを指定することもできます（例えば、<code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code> ）。</p></li>
 <li><p><strong>INVERTEDインデックスを作成する</strong>。現在のところ、<code translate="no">INVERTED</code> タイプのみがJSONパスのインデックスに対応しています。</p></li>
 </ol>
 <p>パラメータと考慮点の詳細については、<a href="/docs/ja/use-json-fields.md#Index-a-JSON-field">JSONフィールドのインデックスを</a>参照してください。</p>

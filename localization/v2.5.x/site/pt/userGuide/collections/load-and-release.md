@@ -3,7 +3,7 @@ id: load-and-release.md
 title: Carregar e libertar
 summary: >-
   O carregamento de uma coleção é o pré-requisito para a realização de pesquisas
-  e consultas por semelhança em colecções. Esta página centra-se nos
+  e consultas por semelhança nas colecções. Esta página centra-se nos
   procedimentos de carregamento e libertação de uma coleção.
 ---
 <h1 id="Load--Release" class="common-anchor-header">Carregar e libertar<button data-href="#Load--Release" class="anchor-icon" translate="no">

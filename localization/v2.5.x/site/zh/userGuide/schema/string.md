@@ -21,7 +21,7 @@ summary: 在 Milvus 中，VARCHAR 是用于存储字符串数据的数据类型�
     </button></h1><p>在 Milvus 中，<code translate="no">VARCHAR</code> 是用于存储字符串数据的数据类型。定义<code translate="no">VARCHAR</code> 字段时，有两个参数是必须的：</p>
 <ul>
 <li><p>将<code translate="no">datatype</code> 设置为<code translate="no">DataType.VARCHAR</code> 。</p></li>
-<li><p>指定<code translate="no">max_length</code> ，它定义了<code translate="no">VARCHAR</code> 字段可存储的最大字符数。<code translate="no">max_length</code> 的有效范围为 1 至 65,535 个字符。</p></li>
+<li><p>指定<code translate="no">max_length</code> ，它定义了<code translate="no">VARCHAR</code> 字段可存储的最大字节数。<code translate="no">max_length</code> 的有效范围为 1 至 65,535 字节。</p></li>
 </ul>
 <div class="alert note">
 <p>Milvus 支持<code translate="no">VARCHAR</code> 字段的空值和默认值。要启用这些功能，可将<code translate="no">nullable</code> 设置为<code translate="no">True</code> ，将<code translate="no">default_value</code> 设置为字符串值。有关详情，请参阅<a href="/docs/zh/nullable-and-default.md">可空值和默认值</a>。</p>
@@ -43,8 +43,8 @@ summary: 在 Milvus 中，VARCHAR 是用于存储字符串数据的数据类型�
       </svg>
     </button></h2><p>要在 Milvus 中存储字符串数据，请在 Collections Schema 中定义一个<code translate="no">VARCHAR</code> 字段。下面是一个定义了两个<code translate="no">VARCHAR</code> 字段的 Collections 模式的示例：</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>VARCHAR：最多存储 100 个字符，允许空值，默认值为<code translate="no">&quot;Unknown&quot;</code> 。</p></li>
-<li><p><code translate="no">varchar_field2</code>：字段最多可储存 200 个字符，允许空值，但没有默认值。</p></li>
+<li><p><code translate="no">varchar_field1</code>VARCHAR：最多存储 100 字节，允许空值，默认值为<code translate="no">&quot;Unknown&quot;</code> 。</p></li>
+<li><p><code translate="no">varchar_field2</code>：字段最多存储 200 字节，允许空值，但没有默认值。</p></li>
 </ul>
 <div class="alert note">
 <p>如果在定义 Schema 时设置<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允许插入事先未定义的标量字段。不过，这可能会增加查询和管理的复杂性，并可能影响性能。有关详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">动态字段</a>。</p>

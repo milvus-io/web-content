@@ -23,7 +23,7 @@ summary: >-
     </button></h1><p>In Milvus, <code translate="no">VARCHAR</code> è il tipo di dati utilizzato per memorizzare dati stringa. Quando si definisce un campo <code translate="no">VARCHAR</code>, due parametri sono obbligatori:</p>
 <ul>
 <li><p>Impostare <code translate="no">datatype</code> su <code translate="no">DataType.VARCHAR</code>.</p></li>
-<li><p>Specificare <code translate="no">max_length</code>, che definisce il numero massimo di caratteri che il campo <code translate="no">VARCHAR</code> può memorizzare. L'intervallo valido per <code translate="no">max_length</code> è compreso tra 1 e 65.535.</p></li>
+<li><p>Specificare <code translate="no">max_length</code>, che definisce il numero massimo di byte che il campo <code translate="no">VARCHAR</code> può memorizzare. L'intervallo valido per <code translate="no">max_length</code> va da 1 a 65.535.</p></li>
 </ul>
 <div class="alert note">
 <p>Milvus supporta i valori nulli e i valori predefiniti per i campi <code translate="no">VARCHAR</code>. Per abilitare queste funzioni, impostare <code translate="no">nullable</code> su <code translate="no">True</code> e <code translate="no">default_value</code> su un valore di stringa. Per maggiori dettagli, consultare <a href="/docs/it/nullable-and-default.md">Nullable e Default</a>.</p>
@@ -45,8 +45,8 @@ summary: >-
       </svg>
     </button></h2><p>Per memorizzare dati stringa in Milvus, definire un campo <code translate="no">VARCHAR</code> nello schema della raccolta. Di seguito è riportato un esempio di definizione di uno schema di raccolta con due campi <code translate="no">VARCHAR</code>:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: memorizza fino a 100 caratteri, consente valori nulli e ha un valore predefinito di <code translate="no">&quot;Unknown&quot;</code>.</p></li>
-<li><p><code translate="no">varchar_field2</code>: memorizza fino a 200 caratteri, ammette valori nulli, ma non ha un valore predefinito.</p></li>
+<li><p><code translate="no">varchar_field1</code>: memorizza fino a 100 byte, consente valori nulli e ha un valore predefinito di <code translate="no">&quot;Unknown&quot;</code>.</p></li>
+<li><p><code translate="no">varchar_field2</code>: memorizza fino a 200 byte, ammette valori nulli, ma non ha un valore predefinito.</p></li>
 </ul>
 <div class="alert note">
 <p>Se si imposta <code translate="no">enable_dynamic_fields=True</code> durante la definizione dello schema, Milvus consente di inserire campi scalari che non sono stati definiti in precedenza. Tuttavia, ciò può aumentare la complessità delle query e della gestione, con un potenziale impatto sulle prestazioni. Per ulteriori informazioni, consultare <a href="/docs/it/enable-dynamic-field.md">Campo dinamico</a>.</p>

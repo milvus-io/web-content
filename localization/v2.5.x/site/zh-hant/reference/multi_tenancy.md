@@ -1,10 +1,9 @@
 ---
 id: multi_tenancy.md
-related_key: multi-tenancy
-summary: Milvus 中的多租戶。
-title: 多租户策略
+title: 實施多租戶
+summary: 在 Milvus 中，多租户意味着多个客户或团队（称为租户）共享同一个集群，同时保持隔离的数据环境。
 ---
-<h1 id="Multi-tenancy-strategies" class="common-anchor-header">多租户策略<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
+<h1 id="Implement-Multi-tenancy" class="common-anchor-header">實施多租戶<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,9 +18,9 @@ title: 多租户策略
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在許多用例中，開發人員希望運行一個 Milvus 集群並為多個租戶提供服務，例如幾個產品團隊或數百萬的最終用戶。本指南說明在 Milvus 上實現多租戶的幾種不同策略。</p>
-<p>Milvus 的設計支援資料庫、集合或分割層級的多重租用。多租用的目的是將資料和資源彼此分開。在不同的層級實施多租用可以達到不同程度的隔離，但也涉及不同的開銷。在此，我們將解釋它們之間的權衡。</p>
-<h2 id="Database-oriented-multi-tenancy" class="common-anchor-header">面向資料庫的多租戶<button data-href="#Database-oriented-multi-tenancy" class="anchor-icon" translate="no">
+    </button></h1><p>在 Milvus 中，多租戶是指多個客戶或團隊（稱為<strong>租戶）</strong>共用同一集群，同時保持隔離的資料環境。</p>
+<p>Milvus 支援四種多租戶策略，每種策略都在可擴展性、資料隔離和靈活性之間提供不同的權衡。本指南將介紹每個選項，協助您選擇最適合您使用個案的策略。</p>
+<h2 id="Multi-tenancy-strategies" class="common-anchor-header">多租用策略<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,8 +35,52 @@ title: 多租户策略
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>自 Milvus 版本 2.2.9 起，您可以在單一 Milvus 集群中創建多個資料庫。此功能可實現面向資料庫的多租戶，為每個租戶分配一個資料庫，以便他們可以創建自己的集合。這種方法可為租戶提供最佳的資料和資源隔離，但一個叢集中最多只能有 64 個資料庫。</p>
-<h2 id="Collection-oriented-multi-tenancy" class="common-anchor-header">面向集合的多租戶<button data-href="#Collection-oriented-multi-tenancy" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus 支援四個層級的多租戶：<strong>資料庫</strong>、<strong>資料集</strong>、<strong>分區</strong>和<strong>分區鑰匙</strong>。</p>
+<h3 id="Database-level-multi-tenancy" class="common-anchor-header">資料庫層級多租戶</h3><p>使用資料庫級多租戶，每個租戶都會收到一個對應的<a href="/docs/zh-hant/manage_databases.md">資料庫</a>，其中包含一個或多個集合。</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/database-level-multi-tenancy.png" alt="Database Level Multi Tenancy" class="doc-image" id="database-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>資料庫層級多租戶</span> </span></p>
+<ul>
+<li><p><strong>可擴展性</strong>：資料庫層級多租戶策略預設最多支援 64 個租戶。</p></li>
+<li><p><strong>資料隔離</strong>：每個資料庫中的資料完全分離，提供企業級的資料隔離，非常適合受監管的環境或有嚴格合規需求的客戶。</p></li>
+<li><p><strong>彈性</strong>：每個資料庫都可以擁有不同模式的集合，提供高度彈性的資料組織，並允許每個租戶擁有自己的資料模式。</p></li>
+<li><p><strong>其他</strong>：此策略也支援 RBAC，可針對每個租戶的使用者存取進行精細控制。此外，您可以彈性載入或釋放特定租戶的資料，以有效管理冷熱資料。</p></li>
+</ul>
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">集合層級多重租用</h3><p>使用集合層級多租戶功能，每個租戶都會被指派一個<a href="/docs/zh-hant/manage-collections.md">集合</a>，提供強大的資料隔離功能。</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-level-multi-tenancy.png" alt="Collection Level Multi Tenancy" class="doc-image" id="collection-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>集合層級多租戶</span> </span></p>
+<ul>
+<li><p><strong>可擴充性</strong>：由於群集預設最多可容納 65,536 個集合，因此此策略可在群集中容納相同數量的租戶。</p></li>
+<li><p><strong>資料隔離</strong>：資料集彼此實體隔離。此策略提供強大的資料隔離。</p></li>
+<li><p><strong>彈性</strong>：此策略允許每個集合擁有自己的模式，可容納不同資料模式的租戶。</p></li>
+<li><p><strong>其他</strong>：此策略也支援 RBAC，允許對租戶進行細粒度存取控制。此外，您可以彈性載入或釋放特定租戶的資料，以有效管理冷熱資料。</p></li>
+</ul>
+<h3 id="Partition-level-multi-tenancy" class="common-anchor-header">分割層級多重租用</h3><p>在磁碟分割層級多重租用中，每個租戶都會被指派到共用集合中手動建立的<a href="/docs/zh-hant/manage-partitions.md">磁碟分割</a>。</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-level-multi-tenancy.png" alt="Partition Level Multi Tenancy" class="doc-image" id="partition-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>分割層級多重租用</span> </span></p>
+<ul>
+<li><p><strong>可擴充性</strong>：每個集合最多可容納 1,024 個分割區，讓其中的租戶數目相同。</p></li>
+<li><p><strong>資料隔離</strong>：每個租戶的資料都由分割區實際分隔。</p></li>
+<li><p><strong>彈性</strong>：此策略要求所有租戶共用相同的資料模式。而且需要手動建立分區。</p></li>
+<li><p><strong>其他</strong>：分區層級不支援 RBAC。租戶可以單獨或跨多個分區進行查詢，這使得此方法非常適合涉及跨租戶區段的聚合查詢或分析的場景。此外，您可以彈性載入或釋放特定租戶的資料，以有效管理冷熱資料。</p></li>
+</ul>
+<h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">分區鑰匙層級多租戶</h3><p>使用此策略，所有租戶共用單一集合和模式，但每個租戶的資料會根據<a href="/docs/zh-hant/use-partition-key.md">分割區金鑰值</a>自動路由至 16 個實體隔離的分割區。雖然每個實體磁碟分割可包含多個租戶，但不同租戶的資料在邏輯上仍是分開的。</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" />
+   </span> <span class="img-wrapper"> <span>分割區金鑰層級多租戶</span> </span></p>
+<ul>
+<li><p><strong>可擴充性</strong>：磁碟分割金鑰層級策略提供最具擴充能力的方法，可支援數百萬個租戶。</p></li>
+<li><p><strong>資料隔離</strong>：此策略提供相對較弱的資料隔離，因為多位租戶可以共用一個實體磁碟分割。</p></li>
+<li><p><strong>彈性</strong>：由於所有租戶必須共用相同的資料模式，因此此策略提供的資料彈性有限。</p></li>
+<li><p><strong>其他</strong>：分區鑰匙層級不支援 RBAC。租戶可以單獨或跨越多個分區進行查詢，這使得此方法非常適合涉及跨租戶區段的聚合查詢或分析的場景。</p></li>
+</ul>
+<h2 id="Choosing-the-right-multi-tenancy-strategy" class="common-anchor-header">選擇正確的多租戶策略<button data-href="#Choosing-the-right-multi-tenancy-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,55 +95,77 @@ title: 多租户策略
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>有兩種可能的方式來實現面向集合的多租戶。</p>
-<h3 id="One-collection-for-all-tenants" class="common-anchor-header">所有租戶使用一個集合</h3><p>使用單一集合來實現多租戶，方法是加入租戶欄位來區分租戶，這是一個簡單的選項。在針對特定租戶進行 ANN 搜尋時，可加入過濾表達式，過濾掉所有屬於其他租戶的實體。這是實現多租戶的最簡單方法。不過，請注意過濾器的效能可能會成為 ANN 搜尋的瓶頸。為了改善搜尋效能，您可以使用以下面向分割的多租戶方式進行最佳化。</p>
-<h3 id="One-collection-per-tenant" class="common-anchor-header">每個租戶一個集合</h3><p>另一種方法是為每個租戶建立一個集合來儲存自己的資料，而不是將所有租戶的資料儲存在單一集合中。這可提供更好的資料隔離和查詢效能。不過，請記住這種方法在排程上需要較多資源，而且一個群集中最多只能有 10,000 個集合。</p>
-<h2 id="Partition-oriented-multi-tenancy" class="common-anchor-header">面向分區的多租戶<button data-href="#Partition-oriented-multi-tenancy" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>有兩種方法可以實現面向分區的多租戶：</p>
-<h3 id="One-partition-per-tenant" class="common-anchor-header">每個租戶一個分割區</h3><p>管理單一集合比管理多個集合容易得多。與其建立多個集合，不如考慮為每個租戶指派一個分割區，以達到彈性的資料隔離和記憶體管理。面向分区的多租户的搜索性能比面向集合的多租户要好得多。但請注意，集合的租戶數目不應超過集合所能容納的最大分割數目。</p>
-<h3 id="Partition-key-based-multi-tenancy" class="common-anchor-header">基於分區鑰匙的多重租用</h3><p>Milvus 2.2.9 引入了一個名為分區鑰匙的新功能。在建立集合時，指定一個租戶欄位，並使其成為分區關鍵欄位。Milvus 會根據分區 key 欄位的哈希值，將實體儲存於分區中。在進行 ANN 搜尋時，Milvus 只會搜尋包含分割區金鑰的分割區。這將大幅縮小搜尋的範圍，從而達到比沒有分割區金鑰更好的效能。</p>
-</div>
-<p>此策略解除了 Milvus 集合可支援的最大租戶數限制，並大大簡化了資源管理，因為 Milvus 會自動為您管理磁碟分割。</p>
-<p>總括而言，您可以使用上述任一種或多種多租戶策略來形成您自己的解決方案。下表對這些策略在資料隔離、搜尋效能和最大租戶數方面進行了比較。</p>
+    </button></h2><p>下表全面比較了四種層級的多租戶策略。</p>
 <table>
-<thead>
-<tr><th></th><th>資料隔離</th><th>搜尋效能</th><th>最大租戶數</th><th>推薦方案</th></tr>
-</thead>
-<tbody>
-<tr><td>資料庫導向</td><td>強大</td><td>強</td><td>64</td><td>適用於需要集合隨專案而異者，特別適合組織內各部門間的資料隔離。</td></tr>
-<tr><td>一個集合適用於所有</td><td>弱</td><td>中等</td><td>不適用</td><td>適用於資源有限且對資料隔離並不敏感的企業。</td></tr>
-<tr><td>每個租戶一個集合</td><td>強</td><td>強</td><td>少於 10,000</td><td>適用於每個群集只有少於 10,000 位租用者的情況。</td></tr>
-<tr><td>每個租戶一個分割區</td><td>中</td><td>強</td><td>1,024</td><td>適用於每個群集只有少於 1,024 位租用者的情況。</td></tr>
-<tr><td>基於分割區金鑰</td><td>中</td><td>強</td><td>10,000,000+</td><td>適用於預測租戶數快速增加到數百萬的企業。</td></tr>
-</tbody>
+   <tr>
+     <th></th>
+     <th><p><strong>資料庫層級</strong></p></th>
+     <th><p><strong>資料集層級</strong></p></th>
+     <th><p><strong>分割層級</strong></p></th>
+     <th><p><strong>分割鑰匙層級</strong></p></th>
+   </tr>
+   <tr>
+     <td><p><strong>資料隔離</strong></p></td>
+     <td><p>物理層級</p></td>
+     <td><p>實體</p></td>
+     <td><p>實體</p></td>
+     <td><p>物理 + 邏輯</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>最大租戶數</strong></p></td>
+     <td><p>預設為 64。您可以透過修改 Milvus.yaml 配置檔案中的<code translate="no">maxDatabaseNum</code> 參數來增加它。 </p></td>
+     <td><p>預設為 65,536。您可以透過修改 Milvus.yaml 配置檔案中的<code translate="no">maxCollectionNum</code> 參數來增加。</p></td>
+     <td><p>每個集合最多 1,024 個。 </p></td>
+     <td><p>百萬</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>資料模式彈性</strong></p></td>
+     <td><p>高</p></td>
+     <td><p>中</p></td>
+     <td><p>低</p></td>
+     <td><p>低</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>RBAC 支援</strong></p></td>
+     <td><p>是</p></td>
+     <td><p>有</p></td>
+     <td><p>不支援</p></td>
+     <td><p>不支援</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>搜尋效能</strong></p></td>
+     <td><p>強</p></td>
+     <td><p>強</p></td>
+     <td><p>中等</p></td>
+     <td><p>中等</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>跨租户搜索支持</strong></p></td>
+     <td><p>無</p></td>
+     <td><p>不支援</p></td>
+     <td><p>是</p></td>
+     <td><p>是</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>支援有效處理冷熱資料</strong></p></td>
+     <td><p>是</p></td>
+     <td><p>是</p></td>
+     <td><p>是</p></td>
+     <td><p>No 目前不支援分割區金鑰層級策略。</p></td>
+   </tr>
 </table>
-<h2 id="Whats-next" class="common-anchor-header">下一步是什麼<button data-href="#Whats-next" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p><a href="/docs/zh-hant/manage_databases.md">管理資料庫</a><a href="/docs/zh-hant/schema.md">模式</a></p>
+<p>當您選擇 Milvus 的多租戶策略時，有幾個因素需要考慮。</p>
+<ol>
+<li><p><strong>擴充性：</strong>分割區金鑰 &gt; 分割區 &gt; 集合 &gt; 資料庫</p>
+<p>如果您預期會支援非常多的租戶 (數百萬或更多)，請使用分割區金鑰層級策略。</p></li>
+<li><p><strong>強大的資料隔離需求</strong>：資料庫 = 資料集 &gt; 磁碟分割 &gt; 磁碟分割金鑰</p>
+<p>如果您有嚴格的實體資料隔離要求，請選擇資料庫、集合或磁碟分割層級策略。</p></li>
+<li><p><strong>每個租戶資料的彈性資料模式：</strong>資料庫 &gt; 資料集 &gt; 磁碟分割 = 磁碟分割金鑰</p>
+<p>資料庫層級和資料集層級策略提供完全彈性的資料模式。如果您租戶的資料結構不同，請選擇資料庫層級或集合層級的多重租用。</p></li>
+<li><p><strong>其他</strong></p>
+<ol>
+<li><p><strong>效能：</strong>搜尋效能取決於各種因素，包括索引、搜尋參數和機器配置。Milvus 也支援效能調整。建議您在選擇多租用策略前，先測試實際效能。</p></li>
+<li><p><strong>有效處理冷熱資料</strong>：目前，資料庫層級、集合層級和分割區層級的策略都支援冷熱資料處理。</p></li>
+<li><p><strong>跨租用戶搜尋</strong>：只有磁碟分割層級和磁碟分割 key 層級策略支援跨租客查詢。</p></li>
+</ol></li>
+</ol>

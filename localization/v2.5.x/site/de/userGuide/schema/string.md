@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>In Milvus ist <code translate="no">VARCHAR</code> der Datentyp, der zum Speichern von Zeichenkettendaten verwendet wird. Wenn Sie ein <code translate="no">VARCHAR</code> Feld definieren, sind zwei Parameter obligatorisch:</p>
 <ul>
 <li><p>Setzen Sie den <code translate="no">datatype</code> auf <code translate="no">DataType.VARCHAR</code>.</p></li>
-<li><p>Geben Sie die <code translate="no">max_length</code> an, die die maximale Anzahl von Zeichen definiert, die das Feld <code translate="no">VARCHAR</code> speichern kann. Der gültige Bereich für <code translate="no">max_length</code> liegt zwischen 1 und 65.535.</p></li>
+<li><p>Geben Sie die <code translate="no">max_length</code> an, die die maximale Anzahl von Bytes definiert, die das <code translate="no">VARCHAR</code> Feld speichern kann. Der gültige Bereich für <code translate="no">max_length</code> liegt zwischen 1 und 65.535.</p></li>
 </ul>
 <div class="alert note">
 <p>Milvus unterstützt Nullwerte und Standardwerte für <code translate="no">VARCHAR</code> Felder. Um diese Funktionen zu aktivieren, setzen Sie <code translate="no">nullable</code> auf <code translate="no">True</code> und <code translate="no">default_value</code> auf einen String-Wert. Details finden Sie unter <a href="/docs/de/nullable-and-default.md">Nullable &amp; Default</a>.</p>
@@ -46,8 +46,8 @@ summary: >-
       </svg>
     </button></h2><p>Um String-Daten in Milvus zu speichern, definieren Sie ein <code translate="no">VARCHAR</code> Feld in Ihrem Sammlungsschema. Unten sehen Sie ein Beispiel für die Definition eines Sammlungsschemas mit zwei <code translate="no">VARCHAR</code> Feldern:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: speichert bis zu 100 Zeichen, erlaubt Nullwerte und hat einen Standardwert von <code translate="no">&quot;Unknown&quot;</code>.</p></li>
-<li><p><code translate="no">varchar_field2</code>: speichert bis zu 200 Zeichen, lässt Nullwerte zu, hat aber keinen Standardwert.</p></li>
+<li><p><code translate="no">varchar_field1</code>: speichert bis zu 100 Bytes, erlaubt Nullwerte und hat einen Standardwert von <code translate="no">&quot;Unknown&quot;</code>.</p></li>
+<li><p><code translate="no">varchar_field2</code>: speichert bis zu 200 Bytes, lässt Nullwerte zu, hat aber keinen Standardwert.</p></li>
 </ul>
 <div class="alert note">
 <p>Wenn Sie bei der Definition des Schemas <code translate="no">enable_dynamic_fields=True</code> einstellen, können Sie mit Milvus skalare Felder einfügen, die nicht im Voraus definiert wurden. Dies kann jedoch die Komplexität von Abfragen und Verwaltung erhöhen und möglicherweise die Leistung beeinträchtigen. Weitere Informationen finden Sie unter <a href="/docs/de/enable-dynamic-field.md">Dynamisches Feld</a>.</p>
@@ -249,7 +249,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>Die Indizierung trägt zur Verbesserung der Such- und Abfrageleistung bei. In Milvus ist die Indexierung für Vektorfelder obligatorisch, für skalare Felder jedoch optional.</p>
-<p>Das folgende Beispiel erstellt Indizes für das Vektorfeld <code translate="no">embedding</code> und das Skalarfeld <code translate="no">varchar_field1</code>, die beide den Indextyp <code translate="no">AUTOINDEX</code> verwenden. Bei diesem Typ wählt Milvus automatisch den am besten geeigneten Index auf der Grundlage des Datentyps aus. Sie können auch den Indextyp und die Parameter für jedes Feld anpassen. Einzelheiten finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
+<p>Das folgende Beispiel erstellt Indizes für das Vektorfeld <code translate="no">embedding</code> und das Skalarfeld <code translate="no">varchar_field1</code>, die beide den Indextyp <code translate="no">AUTOINDEX</code> verwenden. Bei diesem Typ wählt Milvus automatisch den am besten geeigneten Index auf der Grundlage des Datentyps aus. Sie können auch den Indextyp und die Parameter für jedes Feld anpassen. Details finden Sie unter <a href="/docs/de/index-explained.md">Index erklärt</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index params</span>

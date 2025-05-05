@@ -329,7 +329,7 @@ curl --request POST \
 <li><p>支持的<code translate="no">json_cast_type</code> 值有<code translate="no">bool</code> （或<code translate="no">BOOL</code> ）、<code translate="no">double</code> （或<code translate="no">DOUBLE</code> ）和<code translate="no">varchar</code> （或<code translate="no">VARCHAR</code> ）。</p></li>
 <li><p>如果解析或转换失败（例如，试图将字符串解析为 double），索引将跳过这些行。</p></li>
 </ul></li>
-<li><p>将该键的<strong>JSON 路径指定</strong>为<code translate="no">json_path</code> 。由于动态字段是以 JSON 格式存储的，因此可以指定类似<code translate="no">&quot;color&quot;</code> 这样的路径，如果有嵌套结构，则可以指定更深的路径（例如<code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code> ）。</p></li>
+<li><p>将该键的<strong>JSON 路径指定</strong>为<code translate="no">json_path</code> 。由于 Dynamic Field 是以 JSON 格式存储的，因此可以指定类似<code translate="no">&quot;color&quot;</code> 这样的路径，如果有嵌套结构，则可以指定更深的路径（例如<code translate="no">my_json[&quot;field&quot;][&quot;subfield&quot;]</code> ）。</p></li>
 <li><p><strong>创建 INVERTED 索引</strong>。目前，JSON 路径索引只支持<code translate="no">INVERTED</code> 类型。</p></li>
 </ol>
 <p>有关参数和注意事项的详细信息，请参阅<a href="/docs/zh/use-json-fields.md#Index-a-JSON-field">JSON 字段索引</a>。</p>

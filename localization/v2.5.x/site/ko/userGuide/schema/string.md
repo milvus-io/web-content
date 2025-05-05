@@ -23,10 +23,10 @@ summary: >-
     </button></h1><p>Milvus에서 <code translate="no">VARCHAR</code> 은 문자열 데이터를 저장하는 데 사용되는 데이터 유형입니다. <code translate="no">VARCHAR</code> 필드를 정의할 때 두 개의 매개 변수는 필수입니다:</p>
 <ul>
 <li><p><code translate="no">datatype</code> 을 <code translate="no">DataType.VARCHAR</code> 으로 설정합니다.</p></li>
-<li><p><code translate="no">VARCHAR</code> 필드에 저장할 수 있는 최대 문자 수를 정의하는 <code translate="no">max_length</code> 를 지정합니다. <code translate="no">max_length</code> 의 유효한 범위는 1에서 65,535까지입니다.</p></li>
+<li><p><code translate="no">VARCHAR</code> 필드에 저장할 수 있는 최대 바이트 수를 정의하는 <code translate="no">max_length</code> 를 지정합니다. <code translate="no">max_length</code> 의 유효한 범위는 1에서 65,535까지입니다.</p></li>
 </ul>
 <div class="alert note">
-<p>Milvus는 <code translate="no">VARCHAR</code> 필드에 대해 널 값과 기본값을 지원합니다. 이러한 기능을 사용하려면 <code translate="no">nullable</code> 을 <code translate="no">True</code> 으로, <code translate="no">default_value</code> 을 문자열 값으로 설정하세요. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p>
+<p>Milvus는 <code translate="no">VARCHAR</code> 필드에 대해 null 값과 기본값을 지원합니다. 이러한 기능을 사용하려면 <code translate="no">nullable</code> 을 <code translate="no">True</code> 으로, <code translate="no">default_value</code> 을 문자열 값으로 설정하세요. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p>
 </div>
 <h2 id="Add-VARCHAR-field" class="common-anchor-header">VARCHAR 필드 추가<button data-href="#Add-VARCHAR-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,11 +45,11 @@ summary: >-
       </svg>
     </button></h2><p>Milvus에 문자열 데이터를 저장하려면 컬렉션 스키마에 <code translate="no">VARCHAR</code> 필드를 정의하세요. 다음은 두 개의 <code translate="no">VARCHAR</code> 필드가 있는 컬렉션 스키마를 정의하는 예제입니다:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>: 최대 100자까지 저장, null 값 허용, 기본값은 <code translate="no">&quot;Unknown&quot;</code> 입니다.</p></li>
-<li><p><code translate="no">varchar_field2</code>: 최대 200자까지 저장하고, null 값을 허용하지만 기본값은 없습니다.</p></li>
+<li><p><code translate="no">varchar_field1</code>: 최대 100바이트까지 저장하고, null 값을 허용하며, 기본값은 <code translate="no">&quot;Unknown&quot;</code> 입니다.</p></li>
+<li><p><code translate="no">varchar_field2</code>: 최대 200바이트까지 저장하고, null 값을 허용하지만 기본값은 없습니다.</p></li>
 </ul>
 <div class="alert note">
-<p>스키마를 정의할 때 <code translate="no">enable_dynamic_fields=True</code> 을 설정하면 Milvus에서 미리 정의하지 않은 스칼라 필드를 삽입할 수 있습니다. 그러나 이렇게 하면 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
+<p>스키마를 정의할 때 <code translate="no">enable_dynamic_fields=True</code> 을 설정하면 Milvus에서는 미리 정의하지 않은 스칼라 필드를 삽입할 수 있습니다. 그러나 이렇게 하면 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

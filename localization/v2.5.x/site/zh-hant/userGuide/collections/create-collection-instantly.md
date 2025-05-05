@@ -1,7 +1,7 @@
 ---
 id: create-collection-instantly.md
 title: 立即建立集合
-summary: 您可以透過設定名稱和向量場的維度，立即建立一個集合。Milvus 會自動索引向量欄位，並在建立時載入集合。本頁面示範如何使用預設值立即建立集合。
+summary: 您可以透過設定名稱和向量場的維度，立即建立一個集合。Milvus 會自動索引向量欄位，並在建立時載入集合。本頁面示範如何使用預設設定立即建立集合。
 ---
 <h1 id="Create-Collection-Instantly" class="common-anchor-header">立即建立集合<button data-href="#Create-Collection-Instantly" class="anchor-icon" translate="no">
       <svg translate="no"

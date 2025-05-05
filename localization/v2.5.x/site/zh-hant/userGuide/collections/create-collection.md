@@ -1,7 +1,7 @@
 ---
 id: create-collection.md
 title: 建立資料集
-summary: 您可以透過定義模式、索引參數、度量類型，以及是否在建立時載入，來建立一個集合。本頁面將介紹如何從頭開始建立一個集合。
+summary: 您可以透過定義模式、索引參數、度量類型，以及是否在建立時載入，來建立集合。本頁面介紹如何從頭開始建立一個集合。
 ---
 <h1 id="Create-Collection" class="common-anchor-header">建立資料集<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"

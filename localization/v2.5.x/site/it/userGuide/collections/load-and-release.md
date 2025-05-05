@@ -217,7 +217,7 @@ curl --request POST \
       </svg>
     </button></h2><p>Milvus può caricare solo i campi coinvolti nelle ricerche e nelle query, riducendo l'uso della memoria e migliorando le prestazioni della ricerca.</p>
 <div class="alert note">
-<p>Il caricamento parziale delle collezioni è attualmente in fase beta e non è consigliato per l'uso in produzione.</p>
+<p>Il caricamento parziale delle collezioni è attualmente in fase beta e non è raccomandato per l'uso in produzione.</p>
 </div>
 <p>Il seguente frammento di codice presuppone che sia stata creata una collezione denominata <strong>my_collection</strong> e che nella collezione siano presenti due campi denominati <strong>my_id</strong> e <strong>my_vector</strong>.</p>
 <div class="multipleCode">

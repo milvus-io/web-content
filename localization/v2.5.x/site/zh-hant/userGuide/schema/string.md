@@ -21,7 +21,7 @@ summary: 在 Milvus 中，VARCHAR 是用來儲存字串資料的資料類型。�
     </button></h1><p>在 Milvus 中，<code translate="no">VARCHAR</code> 是用來儲存字串資料的資料類型。當您定義<code translate="no">VARCHAR</code> 欄位時，有兩個參數是必須的：</p>
 <ul>
 <li><p>設定<code translate="no">datatype</code> 為<code translate="no">DataType.VARCHAR</code> 。</p></li>
-<li><p>指定<code translate="no">max_length</code>, 定義<code translate="no">VARCHAR</code> 欄位可儲存的最大字元數。<code translate="no">max_length</code> 的有效範圍從 1 到 65,535 不等。</p></li>
+<li><p>指定<code translate="no">max_length</code>, 定義<code translate="no">VARCHAR</code> 欄位可儲存的最大位元組數。<code translate="no">max_length</code> 的有效範圍是 1 到 65,535 。</p></li>
 </ul>
 <div class="alert note">
 <p>Milvus 支援<code translate="no">VARCHAR</code> 欄位的空值和預設值。若要啟用這些功能，請將<code translate="no">nullable</code> 設為<code translate="no">True</code> ，並將<code translate="no">default_value</code> 設為字串值。如需詳細資訊，請參閱<a href="/docs/zh-hant/nullable-and-default.md">Nullable &amp; Default</a>。</p>
@@ -41,13 +41,13 @@ summary: 在 Milvus 中，VARCHAR 是用來儲存字串資料的資料類型。�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要在 Milvus 中儲存字串資料，請在您的 collection schema 中定義<code translate="no">VARCHAR</code> 欄位。以下是定義一個有兩個<code translate="no">VARCHAR</code> 欄位的集合模式的範例：</p>
+    </button></h2><p>要在 Milvus 中儲存字串資料，請在您的 collection schema 中定義<code translate="no">VARCHAR</code> 欄位。下面是一個定義有兩個<code translate="no">VARCHAR</code> 欄位的集合模式的範例：</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>：最多可儲存 100 個字元，允許空值，預設值為<code translate="no">&quot;Unknown&quot;</code> 。</p></li>
-<li><p><code translate="no">varchar_field2</code>：最多可儲存 200 個字元，允許空值，但沒有預設值。</p></li>
+<li><p><code translate="no">varchar_field1</code>：最多可儲存 100 位元組，允許空值，預設值為<code translate="no">&quot;Unknown&quot;</code> 。</p></li>
+<li><p><code translate="no">varchar_field2</code>：最多可儲存 200 位元組，允許空值，但沒有預設值。</p></li>
 </ul>
 <div class="alert note">
-<p>如果您在定義模式時設定<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允許您插入未事先定義的標量欄位。但是，這可能會增加查詢和管理的複雜性，潛在地影響性能。如需詳細資訊，請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>。</p>
+<p>如果您在定義模式時設定<code translate="no">enable_dynamic_fields=True</code> ，Milvus 允許您插入未事先定義的標量欄位。但是，這可能會增加查詢和管理的複雜性，有可能影響效能。如需詳細資訊，請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

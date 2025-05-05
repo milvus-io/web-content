@@ -2,7 +2,7 @@
 id: create-collection.md
 title: コレクションの作成
 summary: >-
-  スキーマ、インデックスパラメータ、メトリックタイプ、作成時にロードするかどうかを定義して、コレクションを作成できます。このページでは、コレクションをゼロから作成する方法を紹介します。
+  スキーマ、インデックスパラメータ、メトリックタイプ、作成時にロードするかどうかを定義してコレクションを作成できます。このページでは、コレクションをゼロから作成する方法を紹介します。
 ---
 <h1 id="Create-Collection" class="common-anchor-header">コレクションの作成<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -688,7 +688,7 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Consistency-Level" class="common-anchor-header">一貫性レベルの設定</h3><p>コレクションを作成する際に、コレクション内の検索とクエリの一貫性レベルを設定できます。また、特定の検索やクエリ中にコレクションの一貫性レベルを変更することもできます。</p>
+<h3 id="Set-Consistency-Level" class="common-anchor-header">一貫性レベルの設定</h3><p>コレクションを作成する際に、コレクション内の検索とクエリの一貫性レベルを設定することができます。また、特定の検索やクエリ中にコレクションの一貫性レベルを変更することもできます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With consistency level</span>

@@ -20,10 +20,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>No Milvus, <code translate="no">VARCHAR</code> é o tipo de dados utilizado para armazenar dados de cadeia. Quando define um campo <code translate="no">VARCHAR</code>, são obrigatórios dois parâmetros:</p>
+    </button></h1><p>No Milvus, <code translate="no">VARCHAR</code> é o tipo de dados utilizado para armazenar dados de cadeia. Quando se define um campo <code translate="no">VARCHAR</code>, são obrigatórios dois parâmetros:</p>
 <ul>
 <li><p>Definir o <code translate="no">datatype</code> como <code translate="no">DataType.VARCHAR</code>.</p></li>
-<li><p>Especifique o parâmetro <code translate="no">max_length</code>, que define o número máximo de caracteres que o campo <code translate="no">VARCHAR</code> pode armazenar. O intervalo válido para <code translate="no">max_length</code> é de 1 a 65.535.</p></li>
+<li><p>Especifique o parâmetro <code translate="no">max_length</code>, que define o número máximo de bytes que o campo <code translate="no">VARCHAR</code> pode armazenar. O intervalo válido para <code translate="no">max_length</code> é de 1 a 65.535.</p></li>
 </ul>
 <div class="alert note">
 <p>O Milvus suporta valores nulos e valores predefinidos para os campos <code translate="no">VARCHAR</code>. Para ativar estas funcionalidades, defina <code translate="no">nullable</code> para <code translate="no">True</code> e <code translate="no">default_value</code> para um valor de cadeia de caracteres. Para obter detalhes, consulte <a href="/docs/pt/nullable-and-default.md">Nullable &amp; Default</a>.</p>
@@ -45,11 +45,11 @@ summary: >-
       </svg>
     </button></h2><p>Para armazenar dados de cadeia de caracteres no Milvus, defina um campo <code translate="no">VARCHAR</code> no seu esquema de coleção. Segue-se um exemplo de definição de um esquema de coleção com dois campos <code translate="no">VARCHAR</code>:</p>
 <ul>
-<li><p><code translate="no">varchar_field1</code>VARCHAR: armazena até 100 caracteres, permite valores nulos e tem um valor predefinido de <code translate="no">&quot;Unknown&quot;</code>.</p></li>
-<li><p><code translate="no">varchar_field2</code>: armazena até 200 caracteres, permite valores nulos, mas não tem um valor predefinido.</p></li>
+<li><p><code translate="no">varchar_field1</code>VARCHAR: armazena até 100 bytes, permite valores nulos e tem um valor predefinido de <code translate="no">&quot;Unknown&quot;</code>.</p></li>
+<li><p><code translate="no">varchar_field2</code>: armazena até 200 bytes, permite valores nulos, mas não tem um valor predefinido.</p></li>
 </ul>
 <div class="alert note">
-<p>Se definir <code translate="no">enable_dynamic_fields=True</code> aquando da definição do esquema, o Milvus permite-lhe inserir campos escalares que não foram previamente definidos. No entanto, isto pode aumentar a complexidade das consultas e da gestão, podendo afetar o desempenho. Para obter mais informações, consulte <a href="/docs/pt/enable-dynamic-field.md">Campo dinâmico</a>.</p>
+<p>Se definir <code translate="no">enable_dynamic_fields=True</code> aquando da definição do esquema, o Milvus permite-lhe inserir campos escalares que não foram previamente definidos. No entanto, isto pode aumentar a complexidade das consultas e da gestão, afectando potencialmente o desempenho. Para obter mais informações, consulte <a href="/docs/pt/enable-dynamic-field.md">Campo dinâmico</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
