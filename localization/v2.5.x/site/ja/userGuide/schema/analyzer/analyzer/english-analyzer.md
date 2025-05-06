@@ -40,7 +40,7 @@ summary: Milvusの英語アナライザーは、トークン化とフィルタ�
 <li><p><strong>フィルター</strong>：包括的なテキスト処理のための複数のフィルターを含む：</p>
 <ul>
 <li><p><code translate="no">lowercase</code>:すべてのトークンを小文字に変換し、大文字小文字を区別しない検索を可能にします。</p></li>
-<li><p><code translate="no">stemmer</code>:より広範なマッチングをサポートするため、単語を語根形に変換（例："running "は "run "に）。</p></li>
+<li><p><code translate="no">stemmer</code>:より広範なマッチングをサポートするため、単語をその語源に変換（例："running "は "run "に）。</p></li>
 <li><p><code translate="no">stop_words</code>:一般的な英語のストップワードを削除し、テキスト内の重要な用語に焦点を当てます。</p></li>
 </ul></li>
 </ul>
@@ -200,7 +200,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Analyzer-configuration" class="common-anchor-header">アナライザ設定</h3><div class="multipleCode">
+    </button></h2><p>アナライザ設定をコレクションスキーマに適用する前に、<code translate="no">run_analyzer</code> メソッドを使用して動作を確認してください。</p>
+<h3 id="Analyzer-configuration" class="common-anchor-header">アナライザ構成</h3><div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>,
@@ -225,6 +226,23 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">を使用した検証<code translate="no">run_analyzer</code></h3><div class="multipleCode">
+   <a href="#python">Python</a> <a href="#javascript">Java NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURLを使用した</a>検証</div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+sample_text = <span class="hljs-string">&quot;Milvus is a vector database built for scale!&quot;</span>
+
+<span class="hljs-comment"># Run the standard analyzer with the defined configuration</span>
+result = MilvusClient.run_analyzer(sample_text, analyzer_params)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;English analyzer output:&quot;</span>, result)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Expected-output" class="common-anchor-header">期待される出力</h3><pre><code translate="no" class="language-python">English analyzer output: [<span class="hljs-string">&#x27;milvus&#x27;</span>, <span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;databas&#x27;</span>, <span class="hljs-string">&#x27;built&#x27;</span>, <span class="hljs-string">&#x27;scale&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>

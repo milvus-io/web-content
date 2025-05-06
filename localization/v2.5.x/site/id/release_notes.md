@@ -19,6 +19,72 @@ title: Catatan Rilis
         ></path>
       </svg>
     </button></h1><p>Cari tahu apa yang baru di Milvus! Halaman ini merangkum fitur-fitur baru, peningkatan, masalah yang diketahui, dan perbaikan bug di setiap rilis. Anda dapat menemukan catatan rilis untuk setiap versi yang dirilis setelah v2.5.0 di bagian ini. Kami menyarankan agar Anda secara teratur mengunjungi halaman ini untuk mengetahui pembaruan.</p>
+<h2 id="v2511" class="common-anchor-header">v2.5.11<button data-href="#v2511" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>Versi Milvus</th><th>Versi Python SDK</th><th>Versi SDK Node.js</th><th>Versi Java SDK</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.11</td><td>2.5.8</td><td>2.5.8</td><td>2.5.8</td></tr>
+</tbody>
+</table>
+<p>Kami sangat senang mengumumkan peluncuran Milvus 2.5.11! Versi ini memperkenalkan fitur-fitur baru yang hebat seperti kemampuan multi-analyzer dan dukungan tokenizer yang diperluas (Jieba, Lindera, ICU, Pengenal Bahasa). Kami juga telah melakukan beberapa peningkatan, termasuk pembaruan kumpulan thread pemuatan segmen dinamis dan pemfilteran hapus yang dioptimalkan selama impor binlog. Perbaikan bug utama mengatasi potensi masalah penurunan segmen, kegagalan pencarian BM25, dan kesalahan pemfilteran statistik JSON.</p>
+<p>Kami menyarankan Anda untuk meningkatkan ke 2.5.11 untuk memanfaatkan peningkatan dan perbaikan ini!</p>
+<h3 id="Features" class="common-anchor-header">Fitur</h3><ul>
+<li>Menambahkan kemampuan untuk mengonfigurasi beberapa penganalisis (tokenizer) dan memilih salah satu yang sesuai berdasarkan instruksi dari data input<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
+<li>Meningkatkan fungsionalitas BM25 Analyzer<a href="https://github.com/milvus-io/milvus/pull/41456">(#41456</a>).<ul>
+<li>Memperkenalkan API <code translate="no">run_analyzer</code> untuk uji coba untuk membantu menganalisis hasil tokenisasi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/analyzer-overview.md">Ikhtisar Penganalisis</a>.</li>
+<li>Pembuat Token<ul>
+<li>Menambahkan dukungan untuk menyesuaikan parameter tokenizer Jieba.</li>
+<li>Menambahkan dukungan untuk tokenizer Lindera. Untuk informasi lebih lanjut, lihat <a href="/docs/id/lindera-tokenizer.md">Lindera</a>.</li>
+<li>Menambahkan dukungan untuk tokenizer ICU. Untuk informasi lebih lanjut, lihat <a href="/docs/id/icu-tokenizer.md">ICU</a>.</li>
+<li>Menambahkan tokenizer Pengenal Bahasa untuk deteksi bahasa.</li>
+</ul></li>
+<li>Filter<ul>
+<li>Dukungan bahasa yang diperluas untuk filter kata henti bawaan. Untuk informasi lebih lanjut, lihat <a href="/docs/id/stop-filter.md">Berhenti</a>.</li>
+<li>Menambahkan filter <code translate="no">remove_punct</code> untuk menghapus tanda baca. Untuk informasi lebih lanjut, lihat <a href="/docs/id/removepunct-filter.md">Hapus</a> Tanda Baca.</li>
+<li>Menambahkan filter <code translate="no">regex</code> untuk pemfilteran teks berbasis pola. Untuk informasi lebih lanjut, lihat <a href="/docs/id/regex-filter.md">Regex</a>.</li>
+</ul></li>
+</ul></li>
+<li>Menambahkan dukungan untuk memodifikasi kapasitas maksimum bidang larik<a href="https://github.com/milvus-io/milvus/pull/41406">(#41406</a>)<a href="https://github.com/milvus-io/milvus/pull/41406">.</a></li>
+<li>Menambahkan dukungan untuk ekspresi rentang biner dalam indeks jalur JSON<a href="https://github.com/milvus-io/milvus/pull/41317">(#41317)</a>.</li>
+<li>Menambahkan dukungan untuk jenis pencocokan infiks dan sufiks dalam statistik JSON<a href="https://github.com/milvus-io/milvus/pull/41388">(#41388)</a>.</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Peningkatan</h3><ul>
+<li>Mengaktifkan pembaruan dinamis pada ukuran kumpulan utas pemuatan Segmen<a href="https://github.com/milvus-io/milvus/pull/41549">(#41549).</a></li>
+<li>Pemfilteran hapus yang dipercepat selama impor binlog<a href="https://github.com/milvus-io/milvus/pull/41552">(#41552)</a>.</li>
+<li>Menambahkan parameter pemantauan untuk rasio filter ekspresi<a href="https://github.com/milvus-io/milvus/pull/41403">(#41403).</a></li>
+<li>Menambahkan opsi konfigurasi untuk memaksa membangun ulang indeks ke versi terbaru<a href="https://github.com/milvus-io/milvus/pull/41432">(#41432).</a></li>
+<li>Memperbaiki pesan log kesalahan untuk kebijakan daftar<a href="https://github.com/milvus-io/milvus/pull/41368">(#41368).</a></li>
+<li>Penanganan yang disesuaikan untuk tanda hubung di header metadata gRPC<a href="https://github.com/milvus-io/milvus/pull/41372">(#41372).</a></li>
+<li>Meningkatkan versi Go ke 1.21.4 untuk menangani CVE<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a><a href="https://github.com/milvus-io/milvus/pull/41522">)</a>.<em>(Catatan: Teks asli menyebutkan "2.14", diasumsikan kesalahan ketik dikoreksi ke versi terbaru 1.21.4</em>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Perbaikan bug</h3><ul>
+<li>Memperbaiki masalah di mana segmen mungkin tidak dijatuhkan dengan benar saat menjatuhkan partisi<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>).</li>
+<li>Memperbaiki penyisipan massal untuk menggunakan daftar bidang input dari fungsi runner, bukan daftar bidang skema<a href="https://github.com/milvus-io/milvus/pull/41561">(#41561).</a></li>
+<li>Memperbaiki kegagalan pencarian BM25 yang terjadi ketika <code translate="no">avgdl</code> (panjang dokumen rata-rata) adalah NaN<a href="https://github.com/milvus-io/milvus/pull/41503">(#41503</a>)<a href="https://github.com/milvus-io/milvus/pull/41503">.</a></li>
+<li>Memperbaiki label yang tidak akurat di metrik QueryNode<a href="https://github.com/milvus-io/milvus/pull/41422">(#41422)</a>.</li>
+<li>Memperbaiki masalah di mana pembuatan indeks statistik JSON dapat gagal jika data berisi peta kosong<a href="https://github.com/milvus-io/milvus/pull/41506">(#41506).</a></li>
+<li>Memperbaiki API <code translate="no">AlterCollection</code> untuk menyimpan stempel waktu modifikasi dengan benar<a href="https://github.com/milvus-io/milvus/pull/41469">(#41469).</a></li>
+<li>Memperbaiki kesalahan pemfilteran yang terputus-putus pada statistik JSON di <code translate="no">ConjunctExpr</code> dan meningkatkan logika penghitungan slot tugas untuk mempercepat pembuatan statistik JSON<a href="https://github.com/milvus-io/milvus/pull/41458">(#41458).</a></li>
+<li>Memperbaiki kebocoran oracle IDF dalam penghitungan statistik BM25<a href="https://github.com/milvus-io/milvus/pull/41426">(#41426)</a>.</li>
+<li>Memastikan topik yang telah dibuat sebelumnya diperiksa terlebih dahulu selama validasi nomor pecahan<a href="https://github.com/milvus-io/milvus/pull/41421">(#41421).</a></li>
+<li>Memperbaiki laporan kebuntuan yang salah yang terjadi pada unit test<a href="https://github.com/milvus-io/milvus/pull/41377">(#41377).</a></li>
+</ul>
 <h2 id="v2510" class="common-anchor-header">v2.5.10<button data-href="#v2510" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -425,7 +491,7 @@ title: Catatan Rilis
 <tr><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>Kami sangat senang mengumumkan rilis Milvus 2.5.4, yang memperkenalkan pengoptimalan kinerja utama dan fitur-fitur baru seperti isolasi PartitionKey, Sparse Index dengan DAAT MaxScore, dan mekanisme penguncian yang disempurnakan. Sorotan yang menonjol dari rilis ini adalah dukungannya untuk 10.000 koleksi dan 1 juta partisi, yang menandai tonggak penting untuk kasus penggunaan multi-penyewa. Versi ini juga menangani beberapa bug yang meningkatkan stabilitas dan keandalan secara keseluruhan, dua bug kritis dapat menyebabkan kehilangan data. Kami mendorong Anda untuk meng-upgrade atau mencoba rilis terbaru ini, dan kami menantikan umpan balik Anda untuk membantu kami terus menyempurnakan Milvus!</p>
+<p>Kami sangat senang mengumumkan rilis Milvus 2.5.4, yang memperkenalkan pengoptimalan kinerja utama dan fitur-fitur baru seperti isolasi PartitionKey, Sparse Index dengan DAAT MaxScore, dan mekanisme penguncian yang disempurnakan. Sorotan yang menonjol dari rilis ini adalah dukungannya untuk 10.000 koleksi dan 1 juta partisi, yang menandai tonggak penting untuk kasus penggunaan multi-penyewa. Versi ini juga mengatasi beberapa bug yang meningkatkan stabilitas dan keandalan secara keseluruhan, dua bug kritis dapat menyebabkan kehilangan data. Kami mendorong Anda untuk meng-upgrade atau mencoba rilis terbaru ini, dan kami menantikan umpan balik Anda untuk membantu kami terus menyempurnakan Milvus!</p>
 <h3 id="Features" class="common-anchor-header">Fitur</h3><ul>
 <li>Mendukung isolasi PartitionKey untuk meningkatkan kinerja dengan beberapa kunci partisi<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). Untuk informasi lebih lanjut, lihat <a href="/docs/id/use-partition-key.md">Gunakan Kunci Partisi</a>.</li>
 <li>Sparse Index kini mendukung DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md">Vektor Jarang</a>.</li>

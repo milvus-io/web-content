@@ -108,6 +108,30 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Untuk memeriksa hasil eksekusi penganalisis, gunakan metode <code translate="no">run_analyzer</code>:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
+
+<span class="hljs-comment"># Run analyzer</span>
+result = client.run_analyzer(
+    text,
+    analyzer_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Keluarannya adalah:</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
+<button class="copy-code-btn"></button></code></pre>
+<p>Ini menunjukkan bahwa penganalisis melakukan tokenisasi dengan benar pada teks masukan dengan menyaring kata berhenti <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, dan <code translate="no">&quot;for&quot;</code>, sambil mengembalikan token yang bermakna.</p>
 <p>Konfigurasi penganalisis bawaan <code translate="no">standard</code> di atas setara dengan menyiapkan <a href="/docs/id/analyzer-overview.md#Custom-analyzer">penganalisis khusus</a> dengan parameter berikut, di mana opsi <code translate="no">tokenizer</code> dan <code translate="no">filter</code> secara eksplisit didefinisikan untuk mencapai fungsionalitas yang serupa:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -306,6 +330,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p>Bidang lainnya menggunakan penganalisis khusus.</p></li>
 </ul></li>
 </ul>
+<p>Sebelum memasukkan konfigurasi ini ke dalam koleksi Anda, Anda akan memverifikasi setiap penganalisis menggunakan metode <code translate="no">run_analyzer</code>.</p>
 <h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">Langkah 1: Inisialisasi MilvusClient dan buat skema</h3><p>Mulailah dengan menyiapkan klien Milvus dan membuat skema baru.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -369,7 +394,8 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 <h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">Langkah 2: Tentukan dan verifikasi konfigurasi penganalisis</h3><ol>
 <li><p><strong>Konfigurasikan dan verifikasi penganalisis bawaan</strong> (<code translate="no">english</code>)<strong>:</strong></p>
 <ul>
-<li><strong>Konfigurasi:</strong> Tentukan parameter penganalisis untuk penganalisis bahasa Inggris bawaan.</li>
+<li><p><strong>Konfigurasi:</strong> Tentukan parameter penganalisis untuk penganalisis bahasa Inggris bawaan.</p></li>
+<li><p><strong>Verifikasi:</strong> Gunakan <code translate="no">run_analyzer</code> untuk memeriksa apakah konfigurasi menghasilkan tokenisasi yang diharapkan.</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
@@ -377,6 +403,14 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 analyzer_params_built_in = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
 }
+
+<span class="hljs-comment"># Verify built-in analyzer configuration</span>
+sample_text = <span class="hljs-string">&quot;Milvus simplifies text analysis for search.&quot;</span>
+result = client.run_analyzer(sample_text, analyzer_params_built_in)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Built-in analyzer output:&quot;</span>, result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># Built-in analyzer output: [&#x27;milvus&#x27;, &#x27;simplifi&#x27;, &#x27;text&#x27;, &#x27;analysi&#x27;, &#x27;search&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -393,7 +427,8 @@ analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <sp
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Mengonfigurasi dan memverifikasi penganalisis khusus:</strong></p>
 <ul>
-<li><strong>Konfigurasi:</strong> Tentukan penganalisis khusus yang menggunakan tokenizer standar bersama dengan filter huruf kecil bawaan dan filter khusus untuk panjang token dan kata henti.</li>
+<li><p><strong>Konfigurasi:</strong> Tentukan penganalisis khusus yang menggunakan tokenizer standar bersama dengan filter huruf kecil bawaan dan filter khusus untuk panjang token dan kata henti.</p></li>
+<li><p><strong>Verifikasi:</strong> Gunakan <code translate="no">run_analyzer</code> untuk memastikan konfigurasi kustom memproses teks sesuai dengan yang diinginkan.</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
@@ -412,6 +447,14 @@ analyzer_params_custom = {
         }
     ]
 }
+
+<span class="hljs-comment"># Verify custom analyzer configuration</span>
+sample_text = <span class="hljs-string">&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;</span>
+result = client.run_analyzer(sample_text, analyzer_params_custom)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Custom analyzer output:&quot;</span>, result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># Custom analyzer output: [&#x27;milvus&#x27;, &#x27;provides&#x27;, &#x27;flexible&#x27;, &#x27;customizable&#x27;, &#x27;analyzers&#x27;, &#x27;robust&#x27;, &#x27;text&#x27;, &#x27;processing&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Configure a custom analyzer</span>
@@ -459,7 +502,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">Langkah 3: Menambahkan bidang ke skema</h3><p>Setelah Anda memverifikasi konfigurasi penganalisis Anda, tambahkan ke bidang skema Anda:</p>
+<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">Langkah 3: Menambahkan bidang ke skema</h3><p>Setelah Anda memverifikasi konfigurasi penganalisis Anda, tambahkan konfigurasi tersebut ke dalam bidang skema Anda:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add VARCHAR field &#x27;title_en&#x27; using the built-in analyzer configuration</span>

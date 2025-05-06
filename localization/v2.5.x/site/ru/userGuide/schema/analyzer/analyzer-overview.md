@@ -83,7 +83,7 @@ summary: >-
 <div class="alert note">
 <p>Если вы не указываете конфигурацию анализатора при создании коллекции, Milvus по умолчанию использует анализатор <code translate="no">standard</code> для обработки всего текста. Подробнее см. в разделе <a href="/docs/ru/standard-analyzer.md">Стандартный</a>.</p>
 </div>
-<h3 id="Built-in-analyzer" class="common-anchor-header">Встроенный анализатор</h3><p>Встроенные анализаторы в Milvus предварительно сконфигурированы с определенными токенизаторами и фильтрами, что позволяет использовать их сразу, без необходимости определять эти компоненты самостоятельно. Каждый встроенный анализатор представляет собой шаблон, включающий в себя предустановленные токенизаторы и фильтры с дополнительными параметрами для настройки.</p>
+<h3 id="Built-in-analyzer" class="common-anchor-header">Встроенный анализатор</h3><p>Встроенные анализаторы в Milvus предварительно сконфигурированы с определенными токенизаторами и фильтрами, что позволяет использовать их сразу, без необходимости определять эти компоненты самостоятельно. Каждый встроенный анализатор представляет собой шаблон, включающий в себя предустановленные токенизаторы и фильтры, а также дополнительные параметры для настройки.</p>
 <p>Например, чтобы использовать встроенный анализатор <code translate="no">standard</code>, достаточно указать его имя <code translate="no">standard</code> в качестве <code translate="no">type</code> и опционально включить дополнительные конфигурации, специфичные для этого типа анализатора, например <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -108,7 +108,31 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Приведенная выше конфигурация встроенного анализатора <code translate="no">standard</code> эквивалентна настройке <a href="/docs/ru/analyzer-overview.md#Custom-analyzer">пользовательского анализатора</a> со следующими параметрами, где опции <code translate="no">tokenizer</code> и <code translate="no">filter</code> явно определены для достижения аналогичной функциональности:</p>
+<p>Чтобы проверить результат выполнения анализатора, используйте метод <code translate="no">run_analyzer</code>:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
+
+<span class="hljs-comment"># Run analyzer</span>
+result = client.run_analyzer(
+    text,
+    analyzer_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>На выходе мы получим следующее:</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
+<button class="copy-code-btn"></button></code></pre>
+<p>Это свидетельствует о том, что анализатор правильно выполняет токенизацию входного текста, отфильтровывая стоп-слова <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, и <code translate="no">&quot;for&quot;</code>, и возвращая оставшиеся осмысленные лексемы.</p>
+<p>Конфигурация встроенного анализатора <code translate="no">standard</code>, приведенная выше, эквивалентна настройке <a href="/docs/ru/analyzer-overview.md#Custom-analyzer">пользовательского анализатора</a> со следующими параметрами, где опции <code translate="no">tokenizer</code> и <code translate="no">filter</code> явно определены для достижения аналогичной функциональности:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -166,7 +190,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p><code translate="no">chinese</code>: Специализирован для обработки китайского текста, включая токенизацию, адаптированную к структурам китайского языка.</p></li>
 </ul>
 <h3 id="Custom-analyzer" class="common-anchor-header">Пользовательский анализатор</h3><p>Для более сложной обработки текста пользовательские анализаторы в Milvus позволяют создать индивидуальный конвейер обработки текста, указав <strong>токенизатор</strong> и <strong>фильтры</strong>. Такая настройка идеально подходит для специализированных случаев, когда требуется точный контроль.</p>
-<h4 id="Tokenizer" class="common-anchor-header">Токенизатор</h4><p><strong>Токенизатор</strong> - <strong>обязательный</strong> компонент пользовательского анализатора, который запускает конвейер анализатора, разбивая входной текст на дискретные единицы или <strong>лексемы</strong>. В зависимости от типа токенизатора токенизация выполняется по определенным правилам, таким как разбиение на пробельные символы или знаки препинания. Этот процесс позволяет более точно и независимо обрабатывать каждое слово или фразу.</p>
+<h4 id="Tokenizer" class="common-anchor-header">Токенизатор</h4><p><strong>Токенизатор</strong> - это <strong>обязательный</strong> компонент пользовательского анализатора, который запускает конвейер анализатора, разбивая входной текст на дискретные единицы или <strong>токены</strong>. В зависимости от типа токенизатора токенизация выполняется по определенным правилам, таким как разбиение на пробельные символы или знаки препинания. Этот процесс позволяет более точно и независимо обрабатывать каждое слово или фразу.</p>
 <p>Например, токенизатор преобразует текст <code translate="no">&quot;Vector Database Built for Scale&quot;</code> в отдельные лексемы:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
@@ -306,6 +330,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p>Другое использует пользовательский анализатор.</p></li>
 </ul></li>
 </ul>
+<p>Перед включением этих конфигураций в коллекцию вы проверите каждый анализатор с помощью метода <code translate="no">run_analyzer</code>.</p>
 <h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">Шаг 1: Инициализация MilvusClient и создание схемы</h3><p>Начните с настройки клиента Milvus и создания новой схемы.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -369,7 +394,8 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 <h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">Шаг 2: Определите и проверьте конфигурацию анализатора</h3><ol>
 <li><p><strong>Настройте и проверьте встроенный анализатор</strong> (<code translate="no">english</code>)<strong>:</strong></p>
 <ul>
-<li><strong>Конфигурация:</strong> Определите параметры анализатора для встроенного анализатора английского языка.</li>
+<li><p><strong>Конфигурация:</strong> Определите параметры анализатора для встроенного анализатора английского языка.</p></li>
+<li><p><strong>Проверка:</strong> Используйте <code translate="no">run_analyzer</code>, чтобы проверить, что конфигурация производит ожидаемую токенизацию.</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
@@ -377,6 +403,14 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 analyzer_params_built_in = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
 }
+
+<span class="hljs-comment"># Verify built-in analyzer configuration</span>
+sample_text = <span class="hljs-string">&quot;Milvus simplifies text analysis for search.&quot;</span>
+result = client.run_analyzer(sample_text, analyzer_params_built_in)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Built-in analyzer output:&quot;</span>, result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># Built-in analyzer output: [&#x27;milvus&#x27;, &#x27;simplifi&#x27;, &#x27;text&#x27;, &#x27;analysi&#x27;, &#x27;search&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -393,7 +427,8 @@ analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <sp
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Настройка и проверка пользовательского анализатора:</strong></p>
 <ul>
-<li><strong>Конфигурация:</strong> Определите пользовательский анализатор, который использует стандартный токенизатор вместе со встроенным фильтром строчных букв и пользовательскими фильтрами для длины токена и стоп-слов.</li>
+<li><p><strong>Конфигурация:</strong> Определите пользовательский анализатор, который использует стандартный токенизатор вместе со встроенным фильтром строчных букв и пользовательскими фильтрами для длины токена и стоп-слов.</p></li>
+<li><p><strong>Проверка:</strong> Используйте <code translate="no">run_analyzer</code>, чтобы убедиться, что пользовательская конфигурация обрабатывает текст так, как нужно.</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
@@ -412,6 +447,14 @@ analyzer_params_custom = {
         }
     ]
 }
+
+<span class="hljs-comment"># Verify custom analyzer configuration</span>
+sample_text = <span class="hljs-string">&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;</span>
+result = client.run_analyzer(sample_text, analyzer_params_custom)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Custom analyzer output:&quot;</span>, result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># Custom analyzer output: [&#x27;milvus&#x27;, &#x27;provides&#x27;, &#x27;flexible&#x27;, &#x27;customizable&#x27;, &#x27;analyzers&#x27;, &#x27;robust&#x27;, &#x27;text&#x27;, &#x27;processing&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Configure a custom analyzer</span>
@@ -459,7 +502,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">Шаг 3: Добавьте поля в схему</h3><p>Теперь, когда вы проверили конфигурации анализатора, добавьте их в поля схемы:</p>
+<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">Шаг 3: Добавьте поля в схему</h3><p>Теперь, когда вы проверили свои конфигурации анализатора, добавьте их в поля схемы:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add VARCHAR field &#x27;title_en&#x27; using the built-in analyzer configuration</span>

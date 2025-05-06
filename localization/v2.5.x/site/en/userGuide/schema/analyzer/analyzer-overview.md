@@ -115,6 +115,35 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>To check the execution result of an analyzer, use the <code translate="no">run_analyzer</code> method:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
+
+<span class="hljs-comment"># Run analyzer</span>
+result = client.run_analyzer(
+    text,
+    analyzer_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>The output will be:</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
+<button class="copy-code-btn"></button></code></pre>
+<p>This demonstrates that the analyzer properly tokenizes the input text by filtering out the stop words <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, and <code translate="no">&quot;for&quot;</code>, while returning the remaining meaningful tokens.</p>
 <p>The configuration of the <code translate="no">standard</code> built-in analyzer above is equivalent to setting up a <a href="/docs/analyzer-overview.md#Custom-analyzer">custom analyzer</a> with the following parameters, where <code translate="no">tokenizer</code> and <code translate="no">filter</code> options are explicitly defined to achieve similar functionality:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -333,6 +362,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <li><p>The other uses a custom analyzer.</p></li>
 </ul></li>
 </ul>
+<p>Before incorporating these configurations into your collection, you’ll verify each analyzer using the <code translate="no">run_analyzer</code> method.</p>
 <h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">Step 1: Initialize MilvusClient and create schema</h3><p>Begin by setting up the Milvus client and creating a new schema.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -401,7 +431,8 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 <h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">Step 2: Define and verify analyzer configurations</h3><ol>
 <li><p><strong>Configure and verify a built-in analyzer</strong> (<code translate="no">english</code>)<strong>:</strong></p>
 <ul>
-<li><strong>Configuration:</strong> Define the analyzer parameters for the built-in English analyzer.</li>
+<li><p><strong>Configuration:</strong> Define the analyzer parameters for the built-in English analyzer.</p></li>
+<li><p><strong>Verification:</strong> Use <code translate="no">run_analyzer</code> to check that the configuration produces the expected tokenization.</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a>
@@ -414,6 +445,14 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 analyzer_params_built_in = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
 }
+
+<span class="hljs-comment"># Verify built-in analyzer configuration</span>
+sample_text = <span class="hljs-string">&quot;Milvus simplifies text analysis for search.&quot;</span>
+result = client.run_analyzer(sample_text, analyzer_params_built_in)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Built-in analyzer output:&quot;</span>, result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># Built-in analyzer output: [&#x27;milvus&#x27;, &#x27;simplifi&#x27;, &#x27;text&#x27;, &#x27;analysi&#x27;, &#x27;search&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -430,7 +469,8 @@ analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <sp
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>Configure and verify a custom analyzer:</strong></p>
 <ul>
-<li><strong>Configuration:</strong> Define a custom analyzer that uses a standard tokenizer along with a built-in lowercase filter and custom filters for token length and stop words.</li>
+<li><p><strong>Configuration:</strong> Define a custom analyzer that uses a standard tokenizer along with a built-in lowercase filter and custom filters for token length and stop words.</p></li>
+<li><p><strong>Verification:</strong> Use <code translate="no">run_analyzer</code> to ensure the custom configuration processes text as intended.</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a>
@@ -454,6 +494,14 @@ analyzer_params_custom = {
         }
     ]
 }
+
+<span class="hljs-comment"># Verify custom analyzer configuration</span>
+sample_text = <span class="hljs-string">&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;</span>
+result = client.run_analyzer(sample_text, analyzer_params_custom)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Custom analyzer output:&quot;</span>, result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># Custom analyzer output: [&#x27;milvus&#x27;, &#x27;provides&#x27;, &#x27;flexible&#x27;, &#x27;customizable&#x27;, &#x27;analyzers&#x27;, &#x27;robust&#x27;, &#x27;text&#x27;, &#x27;processing&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Configure a custom analyzer</span>

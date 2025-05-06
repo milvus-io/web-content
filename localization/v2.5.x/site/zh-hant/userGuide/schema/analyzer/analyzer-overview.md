@@ -104,7 +104,31 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Arra
        &quot;stop_words&quot;: [&quot;a&quot;, &quot;an&quot;, &quot;for&quot;]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上述<code translate="no">standard</code> 內建分析器的配置等同於使用下列參數設定<a href="/docs/zh-hant/analyzer-overview.md#Custom-analyzer">自訂分析器</a>，其中<code translate="no">tokenizer</code> 與<code translate="no">filter</code> 選項是明確定義，以達到類似功能：</p>
+<p>若要檢查分析器的執行結果，請使用<code translate="no">run_analyzer</code> 方法：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
+text = <span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>
+
+<span class="hljs-comment"># Run analyzer</span>
+result = client.run_analyzer(
+    text,
+    analyzer_params
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>輸出結果將會是</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
+<button class="copy-code-btn"></button></code></pre>
+<p>這顯示分析器正確地對輸入文字進行標記化，過濾掉停止詞<code translate="no">&quot;a&quot;</code>,<code translate="no">&quot;an&quot;</code>, 和<code translate="no">&quot;for&quot;</code>, 並回傳其餘有意義的標記。</p>
+<p>上述<code translate="no">standard</code> 內建分析器的配置等同於使用下列參數設定<a href="/docs/zh-hant/analyzer-overview.md#Custom-analyzer">自訂分析器</a>，其中<code translate="no">tokenizer</code> 和<code translate="no">filter</code> 選項是明確定義，以達到類似功能：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">analyzer_params = {
@@ -293,15 +317,16 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在這個範例中，您將建立一個集合模式，其中包括</p>
+    </button></h2><p>在本範例中，您將建立一個集合模式，其中包括</p>
 <ul>
 <li><p>一個向量欄位用於嵌入。</p></li>
 <li><p>兩個<code translate="no">VARCHAR</code> 欄位用於文字處理：</p>
 <ul>
 <li><p>一個欄位使用內建分析器。</p></li>
-<li><p>另一個使用自訂的分析器。</p></li>
+<li><p>另一個使用自訂分析器。</p></li>
 </ul></li>
 </ul>
+<p>在將這些配置納入您的集合之前，您會使用<code translate="no">run_analyzer</code> 方法驗證每個分析器。</p>
 <h3 id="Step-1-Initialize-MilvusClient-and-create-schema" class="common-anchor-header">步驟 1：初始化 MilvusClient 並建立模式</h3><p>首先設定 Milvus 用戶端並建立新模式。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -365,7 +390,8 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 <h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">步驟 2：定義並驗證分析器配置</h3><ol>
 <li><p><strong>設定並驗證內建分析器</strong>(<code translate="no">english</code>)<strong>：</strong></p>
 <ul>
-<li><strong>配置：</strong>定義內建英文分析器的分析器參數。</li>
+<li><p><strong>配置：</strong>定義內建英文分析器的分析器參數。</p></li>
+<li><p><strong>驗證：</strong>使用<code translate="no">run_analyzer</code> 檢查配置是否產生預期的標記化。</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
@@ -373,6 +399,14 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 analyzer_params_built_in = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
 }
+
+<span class="hljs-comment"># Verify built-in analyzer configuration</span>
+sample_text = <span class="hljs-string">&quot;Milvus simplifies text analysis for search.&quot;</span>
+result = client.run_analyzer(sample_text, analyzer_params_built_in)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Built-in analyzer output:&quot;</span>, result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># Built-in analyzer output: [&#x27;milvus&#x27;, &#x27;simplifi&#x27;, &#x27;text&#x27;, &#x27;analysi&#x27;, &#x27;search&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParamsBuiltin = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -389,7 +423,8 @@ analyzerParamsBuiltin.put(<span class="hljs-string">&quot;type&quot;</span>, <sp
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>設定並驗證自訂分析器：</strong></p>
 <ul>
-<li><strong>配置：</strong>定義自訂分析器，該分析器使用標準的 tokenizer 以及內建的小寫篩選器和自訂的 token 長度與停止字篩選器。</li>
+<li><p><strong>配置：</strong>定義一個自訂分析器，使用標準的 tokenizer 以及內建的小寫篩選器和自訂的 token 長度與停止字篩選器。</p></li>
+<li><p><strong>驗證：</strong>使用<code translate="no">run_analyzer</code> 確保自訂組態按照預期處理文字。</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a><a href="#java">Java</a><a href="#javascript">NodeJS</a><a href="#go">Go</a><a href="#bash">cURL</a></div></p>
@@ -408,6 +443,14 @@ analyzer_params_custom = {
         }
     ]
 }
+
+<span class="hljs-comment"># Verify custom analyzer configuration</span>
+sample_text = <span class="hljs-string">&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;</span>
+result = client.run_analyzer(sample_text, analyzer_params_custom)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Custom analyzer output:&quot;</span>, result)
+
+<span class="hljs-comment"># Expected output:</span>
+<span class="hljs-comment"># Custom analyzer output: [&#x27;milvus&#x27;, &#x27;provides&#x27;, &#x27;flexible&#x27;, &#x27;customizable&#x27;, &#x27;analyzers&#x27;, &#x27;robust&#x27;, &#x27;text&#x27;, &#x27;processing&#x27;]</span>
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Configure a custom analyzer</span>
@@ -455,7 +498,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">步驟 3：新增欄位至模式</h3><p>現在您已經驗證了您的分析器配置，請將它們新增到您的模式欄位：</p>
+<h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">步驟 3：新增欄位至模式</h3><p>現在您已經驗證您的分析器配置，請將它們新增至模式欄位：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add VARCHAR field &#x27;title_en&#x27; using the built-in analyzer configuration</span>

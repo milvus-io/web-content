@@ -19,6 +19,72 @@ title: 릴리스 노트
         ></path>
       </svg>
     </button></h1><p>Milvus의 새로운 기능을 알아보세요! 이 페이지에는 각 릴리스의 새로운 기능, 개선 사항, 알려진 문제 및 버그 수정 사항이 요약되어 있습니다. 이 섹션에서 v2.5.0 이후 출시된 각 버전에 대한 릴리스 노트를 확인할 수 있습니다. 이 페이지를 정기적으로 방문하여 업데이트에 대해 알아보는 것이 좋습니다.</p>
+<h2 id="v2511" class="common-anchor-header">v2.5.11<button data-href="#v2511" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>Milvus 버전</th><th>Python SDK 버전</th><th>Node.js SDK 버전</th><th>Java SDK 버전</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.11</td><td>2.5.8</td><td>2.5.8</td><td>2.5.8</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.11의 출시를 발표하게 되어 기쁩니다! 이번 버전에는 다중 분석기 기능과 확장된 토큰화 도구 지원(Jieba, Lindera, ICU, 언어 식별자)과 같은 강력한 새 기능이 도입되었습니다. 또한 동적 세그먼트 로딩 스레드 풀 업데이트와 빈로그 가져오기 중 최적화된 삭제 필터링 등 몇 가지 개선 사항도 있었습니다. 주요 버그 수정은 잠재적인 세그먼트 드롭 문제, BM25 검색 실패, JSON 통계 필터링 오류를 해결합니다.</p>
+<p>2.5.11로 업그레이드하여 이러한 개선 사항과 수정 사항을 활용하시기 바랍니다!</p>
+<h3 id="Features" class="common-anchor-header">주요 기능</h3><ul>
+<li>여러 분석기(토큰화기)를 구성하고 입력 데이터의 지시에 따라 적절한 분석기를 선택할 수 있는 기능이 추가되었습니다<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
+<li>BM25 분석기 기능 개선<a href="https://github.com/milvus-io/milvus/pull/41456">(#41456</a>).<ul>
+<li>토큰화 결과를 분석하는 데 도움이 되는 드라이런용 <code translate="no">run_analyzer</code> API를 도입했습니다. 자세한 내용은 <a href="/docs/ko/analyzer-overview.md">분석기 개요를</a> 참조하세요.</li>
+<li>토큰화 도구<ul>
+<li>Jieba 토큰화 매개변수 사용자 지정에 대한 지원이 추가되었습니다.</li>
+<li>린데라 토큰화 도구에 대한 지원이 추가되었습니다. 자세한 내용은 <a href="/docs/ko/lindera-tokenizer.md">린데라를</a> 참조하세요.</li>
+<li>ICU 토큰화기에 대한 지원이 추가되었습니다. 자세한 내용은 <a href="/docs/ko/icu-tokenizer.md">ICU를</a> 참조하세요.</li>
+<li>언어 감지를 위한 언어 식별자 토큰라이저를 추가했습니다.</li>
+</ul></li>
+<li>필터<ul>
+<li>기본 제공 중지 단어 필터의 지원 언어가 확장되었습니다. 자세한 내용은 <a href="/docs/ko/stop-filter.md">중지를</a> 참조하세요.</li>
+<li>문장 부호를 제거하는 <code translate="no">remove_punct</code> 필터를 추가했습니다. 자세한 내용은 <a href="/docs/ko/removepunct-filter.md">구두점 제거하기를</a> 참조하세요.</li>
+<li>패턴 기반 텍스트 필터링을 위한 <code translate="no">regex</code> 필터를 추가했습니다. 자세한 내용은 <a href="/docs/ko/regex-filter.md">정규식을</a> 참조하세요.</li>
+</ul></li>
+</ul></li>
+<li>배열 필드의 최대 용량 수정을 위한 지원이 추가되었습니다<a href="https://github.com/milvus-io/milvus/pull/41406">(#41406</a>).</li>
+<li>JSON 경로 인덱스에서 이진 범위 표현식에 대한 지원이 추가되었습니다<a href="https://github.com/milvus-io/milvus/pull/41317">(#41317</a>).</li>
+<li>JSON 통계에서 접미사 및 접미사 일치 유형에 대한 지원이 추가되었습니다<a href="https://github.com/milvus-io/milvus/pull/41388">(#41388</a>).</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">개선 사항</h3><ul>
+<li>세그먼트 로딩 스레드 풀의 크기를 동적으로 업데이트할 수 있게 되었습니다<a href="https://github.com/milvus-io/milvus/pull/41549">(#41549</a>).</li>
+<li>빈로그 가져오기 중 삭제 필터링이 가속화되었습니다<a href="https://github.com/milvus-io/milvus/pull/41552">(#41552</a>).</li>
+<li>표현식 필터 비율에 대한 모니터링 매개변수 추가<a href="https://github.com/milvus-io/milvus/pull/41403">(#41403</a>).</li>
+<li>인덱스를 최신 버전으로 강제로 재구축하는 구성 옵션이 추가되었습니다<a href="https://github.com/milvus-io/milvus/pull/41432">(#41432</a>).</li>
+<li>목록 정책에 대한 오류 로그 메시지를 개선했습니다<a href="https://github.com/milvus-io/milvus/pull/41368">(#41368</a>).</li>
+<li>gRPC 메타데이터 헤더의 하이픈 처리를 조정했습니다<a href="https://github.com/milvus-io/milvus/pull/41372">(#41372</a>).</li>
+<li>CVE<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>)를 해결하기 위해 Go 버전을 1.21.4로 업그레이드했습니다.<em>(참고: 원본 텍스트에는 "2.14"라고 언급되어 있었으나, 오타가 그럴듯한 최신 버전 1.21.4로 수정되었습니다</em>.)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">버그 수정</h3><ul>
+<li>파티션을 삭제할 때 세그먼트가 제대로 삭제되지 않을 수 있는 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>).</li>
+<li>스키마의 필드 목록 대신 함수 실행기의 입력 필드 목록을 사용하도록 대량 삽입을 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/41561">(#41561</a>).</li>
+<li><code translate="no">avgdl</code> (평균 문서 길이)가 NaN일 때 발생하는 BM25 검색 실패를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/41503">(#41503</a>).</li>
+<li>쿼리 노드 메트릭의 부정확한 레이블을 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/41422">(#41422</a>).</li>
+<li>데이터에 빈 맵이 포함된 경우 JSON 통계 인덱스 생성이 실패할 수 있는 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/41506">(#41506</a>).</li>
+<li>수정 타임스탬프를 올바르게 저장하도록 <code translate="no">AlterCollection</code> API를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/41469">(#41469</a>).</li>
+<li><code translate="no">ConjunctExpr</code> 에서 JSON 통계의 간헐적인 필터링 오류를 수정하고 작업 슬롯 계산 로직을 개선하여 JSON 통계 작성 속도를 높였습니다<a href="https://github.com/milvus-io/milvus/pull/41458">(#41458</a>).</li>
+<li>BM25 통계 계산에서 IDF 오라클 누수를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/41426">(#41426</a>).</li>
+<li>샤드 번호 유효성 검사 중에 미리 생성된 토픽이 먼저 확인되도록 했습니다<a href="https://github.com/milvus-io/milvus/pull/41421">(#41421</a>).</li>
+<li>단위 테스트에서 발생하는 잘못된 교착 상태 보고를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/41377">(#41377</a>).</li>
+</ul>
 <h2 id="v2510" class="common-anchor-header">v2.5.10<button data-href="#v2510" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,7 +226,7 @@ title: 릴리스 노트
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">버그 수정</h3><ul>
 <li>널링 가능한 입력 및 증가하는 mmap 데이터 유형과 관련된 크래시 수정<a href="https://github.com/milvus-io/milvus/pull/40980">(#40980</a>)</li>
-<li>중복된 빈로그 ID<a href="https://github.com/milvus-io/milvus/pull/40985">(#40985</a>),<a href="https://github.com/milvus-io/milvus/pull/40976">(#40976</a>)로 인한 삭제 작업의 잠재적인 데이터 손실 수정</li>
+<li>중복된 빈로그 ID<a href="https://github.com/milvus-io/milvus/pull/40985">(#40985</a>),<a href="https://github.com/milvus-io/milvus/pull/40976">(#40976</a>)로 인한 삭제 작업의 잠재적 데이터 손실 수정</li>
 <li>컬렉션 생성 중 삽입 시 잠재적인 패닉을 방지하기 위해 <code translate="no">GetSegmentsIndexStates</code> 에 대한 필드 인덱스 잠금 추가<a href="https://github.com/milvus-io/milvus/pull/40969">(#40969</a>).</li>
 <li>Rocksmq 소비자 등록의 동시성 문제 수정<a href="https://github.com/milvus-io/milvus/pull/40885">(#40885</a>).</li>
 <li>세그먼트 로딩을 위해 모든 하위 델타 로그 검색<a href="https://github.com/milvus-io/milvus/pull/40957">(#40957</a>)</li>
@@ -217,7 +283,7 @@ title: 릴리스 노트
 <h3 id="Bug-fixes" class="common-anchor-header">버그 수정</h3><ul>
 <li>빈로그 파일을 가져올 때 <code translate="no">newInsertDataWithFunctionOutputField</code> 사용<a href="https://github.com/milvus-io/milvus/pull/40742">(#40742</a>)</li>
 <li>컬렉션을 만들 때 mmap 속성을 적용하지 못하는 문제 수정<a href="https://github.com/milvus-io/milvus/pull/40515">(#40515</a>)</li>
-<li>샘플링에 실패할 때 centroids 파일을 삭제하지 말고 GC를 기다리도록 수정<a href="https://github.com/milvus-io/milvus/pull/40702">(#40702</a>).</li>
+<li>샘플링에 실패할 때 centroids 파일을 삭제하지 말고 GC를 기다리세요<a href="https://github.com/milvus-io/milvus/pull/40702">(#40702</a>).</li>
 <li>탐색 중 메시지 손실 문제 수정<a href="https://github.com/milvus-io/milvus/pull/40736">(#40736</a>)</li>
 <li>메인 디스패처 이후의 지연 타겟 제거<a href="https://github.com/milvus-io/milvus/pull/40717">(#40717</a>)</li>
 <li>모든 배치 루프에 대한 명확한 비트맵 입력 추가<a href="https://github.com/milvus-io/milvus/pull/40722">(#40722</a>).</li>
@@ -314,7 +380,7 @@ title: 릴리스 노트
 <tr><td>2.5.5</td><td>2.5.4</td><td>2.5.5</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.5는 단일 클러스터가 지원할 수 있는 컬렉션과 파티션의 수를 크게 개선했습니다. 이제 10,000개의 컬렉션과 100,000개의 파티션으로 Milvus를 실행하는 것이 완전히 가능해졌습니다. 또한, 이번 릴리스에서는 일치 통계 누락과 다단계 쿼리에서의 교착 상태 문제를 비롯한 몇 가지 중요한 버그가 해결되었습니다. 또한, 수많은 통합 가시성 및 보안 개선 사항도 포함되어 있습니다. Milvus 2.5.x를 실행 중인 모든 사용자는 가능한 한 빨리 업그레이드할 것을 강력히 권장합니다.</p>
+<p>Milvus 2.5.5는 단일 클러스터가 지원할 수 있는 컬렉션과 파티션의 수를 크게 개선했습니다. 이제 10,000개의 컬렉션과 100,000개의 파티션으로 Milvus를 실행하는 것이 완전히 가능해졌습니다. 또한 이번 릴리스에서는 일치 통계 누락과 다단계 쿼리에서의 교착 상태 문제를 비롯한 몇 가지 중요한 버그가 해결되었습니다. 또한, 수많은 통합 가시성 및 보안 개선 사항도 포함되어 있습니다. Milvus 2.5.x를 실행 중인 모든 사용자는 가능한 한 빨리 업그레이드할 것을 강력히 권장합니다.</p>
 <h3 id="Dependency-Upgrade" class="common-anchor-header">종속성 업그레이드</h3><p>ETCD 3.5.18로 업그레이드하여 몇 가지 CVE를 수정했습니다.</p>
 <ul>
 <li>[2.5] 래프트를 CUV로 업데이트<a href="https://github.com/milvus-io/milvus/pull/39221">(#39221)</a></li>
@@ -657,5 +723,5 @@ title: 릴리스 노트
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">DDL 동시성 성능 개선</h4><p>데이터 정의 언어(DDL) 작업의 동시성 성능을 최적화했습니다.</p>
 <h4 id="RESTful-API-Feature-Alignment" class="common-anchor-header">RESTful API 기능 조정</h4><p>일관성을 위해 RESTful API의 기능을 다른 SDK와 정렬했습니다.</p>
 <h4 id="Security--Configuration-Updates" class="common-anchor-header">보안 및 구성 업데이트</h4><p>보다 복잡한 환경이나 엔터프라이즈 환경에서 노드 간 통신을 보호하기 위해 TLS를 지원합니다. 자세한 내용은 <a href="/docs/ko/tls.md">보안 구성을</a> 참조하세요.</p>
-<h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">압축 성능 향상</h4><p>혼합 압축에서 최대 세그먼트 제한을 제거하고 이제 작은 세그먼트부터 우선순위를 지정하여 효율성이 향상되고 대규모 또는 조각화된 데이터 세트의 쿼리 속도가 빨라졌습니다.</p>
+<h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">압축 성능 개선</h4><p>혼합 압축에서 최대 세그먼트 제한을 제거하고 이제 작은 세그먼트부터 우선순위를 지정하여 효율성이 향상되고 대규모 또는 조각화된 데이터 세트의 쿼리 속도가 빨라졌습니다.</p>
 <h4 id="Score-Based-Channel-Balancing" class="common-anchor-header">점수 기반 채널 밸런싱</h4><p>채널 간 부하를 동적으로 분산하는 정책을 도입하여 대규모 배포에서 리소스 활용률과 전반적인 안정성을 향상시켰습니다.</p>
