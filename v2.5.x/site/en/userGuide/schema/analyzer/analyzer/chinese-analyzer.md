@@ -109,6 +109,8 @@ The `chinese` analyzer does not accept any optional parameters.
 
 ## Examples
 
+Before applying the analyzer configuration to your collection schema, verify its behavior using the `run_analyzer` method.
+
 ### Analyzer configuration
 
 <div class="multipleCode">
@@ -136,6 +138,41 @@ analyzerParams.put("type", "chinese");
 
 ```go
 analyzerParams = map[string]any{"type": "chinese"}
+```
+
+```bash
+# restful
+```
+
+### Verification using `run_analyzer`
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+# Sample text to analyze
+sample_text = "Milvus 是一个高性能、可扩展的向量数据库！"
+
+# Run the standard analyzer with the defined configuration
+result = MilvusClient.run_analyzer(sample_text, analyzer_params)
+print("Chinese analyzer output:", result)
+```
+
+```java
+// java
+```
+
+```javascript
+// javascript
+```
+
+```go
+// go
 ```
 
 ```bash

@@ -524,7 +524,19 @@
                   {
                     "label": "Jieba",
                     "id": "jieba-tokenizer.md",
-                    "order": 1,
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Lindera",
+                    "id": "lindera-tokenizer.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "ICU",
+                    "id": "icu-tokenizer.md",
+                    "order": 4,
                     "children": []
                   }
                 ]
@@ -586,6 +598,18 @@
                     "label": "Stemmer",
                     "id": "stemmer-filter.md",
                     "order": 8,
+                    "children": []
+                  },
+                  {
+                    "label": "Remove Punct",
+                    "id": "removepunct-filter.md",
+                    "order": 9,
+                    "children": []
+                  },
+                  {
+                    "label": "Regex",
+                    "id": "regex-filter.md",
+                    "order": 10,
                     "children": []
                   }
                 ]

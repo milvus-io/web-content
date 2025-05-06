@@ -1,16 +1,16 @@
 ---
-id: whitespace-tokenizer.md
-title: "Whitespace"
-summary: "The whitespace tokenizer divides text into terms whenever there is a space between words."
+id: icu-tokenizer.md
+title: "ICU"
+summary: "The icu tokenizer is built on the Internationalization Components of Unicode (ICU) open‑source project, which provides key tools for software internationalization. By using ICU's word‑break algorithm, the tokenizer can accurately split text into words across the majority of the world’s languages."
 ---
 
-# Whitespace
+# ICU
 
-The `whitespace` tokenizer divides text into terms whenever there is a space between words.
+The `icu` tokenizer is built on the [Internationalization Components of Unicode](http://site.icu-project.org/) (ICU) open‑source project, which provides key tools for software internationalization. By using ICU's word‑break algorithm, the tokenizer can accurately split text into words across the majority of the world’s languages.
 
 ## Configuration
 
-To configure an analyzer using the `whitespace` tokenizer, set `tokenizer` to `whitespace` in `analyzer_params`.
+To configure an analyzer using the `icu` tokenizer, set `tokenizer` to `icu` in `analyzer_params`.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -22,33 +22,27 @@ To configure an analyzer using the `whitespace` tokenizer, set `tokenizer` to `w
 
 ```python
 analyzer_params = {
-    "tokenizer": "whitespace",
+    "tokenizer": "icu",
 }
 ```
 
 ```java
-Map<String, Object> analyzerParams = new HashMap<>();
-analyzerParams.put("tokenizer", "whitespace");
+// java
 ```
 
 ```javascript
-const analyzer_params = {
-    "tokenizer": "whitespace"
-};
+// node
 ```
 
 ```go
-analyzerParams = map[string]any{"tokenizer": "whitespace"}
+// go
 ```
 
 ```bash
-# restful
-analyzerParams='{
-  "tokenizer": "whitespace"
-}'
+# curl
 ```
 
-The whitespace tokenizer can work in conjunction with one or more filters. For example, the following code defines an analyzer that uses the `whitespace` tokenizer and `lowercase`[ filter](lowercase-filter.md):
+The `icu` tokenizer can work in conjunction with one or more filters. For example, the following code defines an analyzer that uses the `icu` tokenizer and [remove punct filter](removepunct-filter.md):
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -60,36 +54,25 @@ The whitespace tokenizer can work in conjunction with one or more filters. For e
 
 ```python
 analyzer_params = {
-    "tokenizer": "whitespace",
-    "filter": ["lowercase"]
+    "tokenizer": "icu",
+    "filter": ["removepunct"]
 }
 ```
 
 ```java
-Map<String, Object> analyzerParams = new HashMap<>();
-analyzerParams.put("tokenizer", "whitespace");
-analyzerParams.put("filter", Collections.singletonList("lowercase"));
+// java
 ```
 
 ```javascript
-const analyzer_params = {
-    "tokenizer": "whitespace",
-    "filter": ["lowercase"]
-};
+// node
 ```
 
 ```go
-analyzerParams = map[string]any{"tokenizer": "whitespace", "filter": []any{"lowercase"}}
+// go
 ```
 
 ```bash
-# restful
-analyzerParams='{
-  "tokenizer": "whitespace",
-  "filter": [
-    "lowercase"
-  ]
-}'
+# curl
 ```
 
 After defining `analyzer_params`, you can apply them to a `VARCHAR` field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to [Example use](analyzer-overview.md#Example-use).
@@ -110,27 +93,24 @@ Before applying the analyzer configuration to your collection schema, verify its
 
 ```python
 analyzer_params = {
-    "tokenizer": "whitespace",
-    "filter": ["lowercase"]
+    "tokenizer": "icu",
 }
 ```
 
 ```java
-Map<String, Object> analyzerParams = new HashMap<>();
-analyzerParams.put("tokenizer", "whitespace");
-analyzerParams.put("filter", Collections.singletonList("lowercase"));
+// java
 ```
 
 ```javascript
-// javascript
+// node
 ```
 
 ```go
-analyzerParams = map[string]any{"tokenizer": "whitespace", "filter": []any{"lowercase"}}
+// go
 ```
 
 ```bash
-# restful
+# curl
 ```
 
 ### Verification using `run_analyzer`
@@ -145,7 +125,7 @@ analyzerParams = map[string]any{"tokenizer": "whitespace", "filter": []any{"lowe
 
 ```python
 # Sample text to analyze
-sample_text = "The Milvus vector database is built for scale!"
+sample_text = "Привет! Как дела?"
 
 # Run the standard analyzer with the defined configuration
 result = MilvusClient.run_analyzer(sample_text, analyzer_params)
@@ -171,6 +151,6 @@ print(result)
 ### Expected output
 
 ```plaintext
-['the', 'milvus', 'vector', 'database', 'is', 'built', 'for', 'scale!']
+['Привет', '!', ' ', 'Как', ' ', 'дела', '?']
 ```
 

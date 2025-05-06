@@ -155,6 +155,8 @@ After defining `analyzer_params`, you can apply them to a `VARCHAR` field when d
 
 ## Examples
 
+Before applying the analyzer configuration to your collection schema, verify its behavior using the `run_analyzer` method.
+
 ### Analyzer configuration
 
 <div class="multipleCode">
@@ -194,6 +196,41 @@ analyzerParams='{
     "of"
   ]
 }'
+```
+
+### Verification using `run_analyzer`
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+# Sample text to analyze
+sample_text = "The Milvus vector database is built for scale!"
+
+# Run the standard analyzer with the defined configuration
+result = MilvusClient.run_analyzer(sample_text, analyzer_params)
+print("Standard analyzer output:", result)
+```
+
+```java
+// java
+```
+
+```javascript
+// javascript
+```
+
+```go
+// go
+```
+
+```bash
+# restful
 ```
 
 ### Expected output
