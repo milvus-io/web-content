@@ -66,11 +66,11 @@ summary: >-
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="CollectionAdmin",
-     collection_name="\*", 
+     collection_name="*", 
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>Input the name of your target database and a wildcard <code translate="no">\*</code> as the collection name.</p></td>
+     <td><p>Input the name of your target database and a wildcard <code translate="no">*</code> as the collection name.</p></td>
    </tr>
    <tr>
      <td rowspan="2"><p><strong>Database</strong></p></td>
@@ -78,22 +78,22 @@ summary: >-
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="DatabaseAdmin", 
-     collection_name="\*", 
+     collection_name="*", 
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>Input the name of your target database and a wildcard <code translate="no">\*</code> as the collection name.</p></td>
+     <td><p>Input the name of your target database and a wildcard <code translate="no">*</code> as the collection name.</p></td>
    </tr>
    <tr>
      <td><p>All databases under the current instance</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="DatabaseAdmin", 
-     collection_name="\*", 
-     db_name="\*"
+     collection_name="*", 
+     db_name="*"
  )
 </code></pre></td>
-     <td><p>Input <code translate="no">\*</code> as the database name and <code translate="no">\*</code> as the collection name.</p></td>
+     <td><p>Input <code translate="no">*</code> as the database name and <code translate="no">*</code> as the collection name.</p></td>
    </tr>
    <tr>
      <td><p><strong>Instance</strong></p></td>
@@ -101,11 +101,11 @@ summary: >-
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="ClusterAdmin", 
-     collection_name="\*", 
-     db_name="\*"
+     collection_name="*", 
+     db_name="*"
  )
 </code></pre></td>
-     <td><p>Input <code translate="no">\*</code> as the database name and <code translate="no">\*</code> as the collection name.</p></td>
+     <td><p>Input <code translate="no">*</code> as the database name and <code translate="no">*</code> as the collection name.</p></td>
    </tr>
 </table>
 <ul>
