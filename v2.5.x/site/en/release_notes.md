@@ -20,7 +20,7 @@ We encourage you to upgrade to 2.5.11 to take advantage of these enhancements an
 
 ### Features
 
-- Added the ability to configure multiple analyzers (tokenizers) and select the appropriate one based on the instruction of the input data ([#41444](https://github.com/milvus-io/milvus/pull/41444)).
+- Added the ability to configure multiple analyzers (tokenizers) for multi languages support and select the appropriate one based on the instruction of the input data ([#41444](https://github.com/milvus-io/milvus/pull/41444)).
 - Enhanced the BM25 Analyzer functionality ([#41456](https://github.com/milvus-io/milvus/pull/41456)).
   - Introduced a `run_analyzer` API for dry runs to help analyze tokenization results. For more information, refer to [Analyzer Overview](analyzer-overview.md).
   - Tokenizers
@@ -44,7 +44,7 @@ We encourage you to upgrade to 2.5.11 to take advantage of these enhancements an
 - Added a configuration option to force rebuilding indexes to the latest version ([#41432](https://github.com/milvus-io/milvus/pull/41432)).
 - Improved the error log message for the list policy ([#41368](https://github.com/milvus-io/milvus/pull/41368)).
 - Adapted handling for hyphens in gRPC metadata headers ([#41372](https://github.com/milvus-io/milvus/pull/41372)).
-- Upgraded Go version to 1.21.4 to address CVEs ([#41522](https://github.com/milvus-io/milvus/pull/41522), [#41319](https://github.com/milvus-io/milvus/pull/41319)). (*Note: Original text mentioned "2.14", assumed typo corrected to a plausible recent version 1.21.4*).
+- Upgraded Go version to 1.24.1 to address CVEs ([#41522](https://github.com/milvus-io/milvus/pull/41522), [#41319](https://github.com/milvus-io/milvus/pull/41319)).
 
 ### Bug fixes
 
