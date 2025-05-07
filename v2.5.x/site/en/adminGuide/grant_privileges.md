@@ -32,25 +32,25 @@ Milvus 2.5 introduces a new version of API which streamlines the grant operation
        <tr>
          <td><p>All collections under a specific database</p></td>
          <td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="*", db_name="db1")</p></td>
-         <td><p>Input the name of your target database and a wildcard <code>*</code> as the collection name.</p></td>
+         <td><p>Input the name of your target database and a wildcard <code>\*</code> as the collection name.</p></td>
        </tr>
        <tr>
          <td><p><strong>Database</strong></p></td>
          <td><p>A specific database</p></td>
          <td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="db1")</p></td>
-         <td><p>Input the name of your target database and a wildcard <code>*</code> as the collection name.</p></td>
+         <td><p>Input the name of your target database and a wildcard <code>\*</code> as the collection name.</p></td>
        </tr>
        <tr>
          <td></td>
          <td><p>All databases under the current instance</p></td>
-         <td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="</em>")</p></td>
-         <td><p>Input <code>*</code> as the database name and <code>*</code> as the collection name.</p></td>
+         <td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="*")</p></td>
+         <td><p>Input <code>\*</code> as the database name and <code>\*</code> as the collection name.</p></td>
        </tr>
        <tr>
          <td><p><strong>Instance</strong></p></td>
          <td><p>The current instance</p></td>
-         <td><p>client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="<em>", db_name="</em>")</p></td>
-         <td><p>Input <code>*</code> as the database name and <code>*</code> as the collection name.</p></td>
+         <td><p>client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="*", db_name="*")</p></td>
+         <td><p>Input <code>\*</code> as the database name and <code>\*</code> as the collection name.</p></td>
        </tr>
     </table>
 
