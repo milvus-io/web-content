@@ -389,7 +389,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Tipe data yang akan digunakan Milvus untuk meng-cast nilai JSON yang diekstrak ketika membangun indeks. Nilai yang valid:</p><ul><li><p><code translate="no">"bool"</code> atau <code translate="no">"BOOL"</code></p></li><li><p><code translate="no">"double"</code> atau <code translate="no">"DOUBLE"</code></p></li><li><p><code translate="no">"varchar"</code> atau <code translate="no">"VARCHAR"</code></p><p><strong>Catatan</strong>: Untuk nilai bilangan bulat, Milvus secara internal menggunakan double untuk indeks. Bilangan bulat besar di atas 2^53 akan kehilangan presisi. Jika pengecekan tipe gagal (karena ketidakcocokan tipe), tidak ada kesalahan yang dilemparkan, dan nilai baris tersebut tidak diindeks.</p></li></ul></td>
+     <td><p>Tipe data yang akan digunakan Milvus untuk meng-cast nilai JSON yang diekstrak ketika membangun indeks. Nilai yang valid:</p><ul><li><code translate="no">"bool"</code> atau <code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> atau <code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> atau <code translate="no">"VARCHAR"</code><strong>Catatan</strong>: Untuk nilai bilangan bulat, Milvus secara internal menggunakan double untuk indeks. Bilangan bulat besar di atas 2^53 akan kehilangan presisi. Jika pengecekan tipe gagal (karena ketidakcocokan tipe), tidak ada kesalahan yang dilemparkan, dan nilai baris tersebut tidak diindeks.</li></ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -406,7 +406,7 @@ curl --request POST \
 </ul></li>
 <li><p><strong>Ketepatan numerik</strong>:</p>
 <ul>
-<li>Secara internal, Milvus mengindeks semua bidang numerik sebagai ganda. Jika nilai numerik melebihi 2^{53}, maka nilai tersebut akan kehilangan presisi, dan kueri pada nilai di luar rentang tersebut mungkin tidak akan cocok dengan tepat.</li>
+<li>Secara internal, Milvus mengindeks semua bidang numerik sebagai ganda. Jika nilai numerik melebihi <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>, maka nilai tersebut akan kehilangan presisi, dan kueri pada nilai di luar rentang tersebut mungkin tidak akan cocok dengan tepat.</li>
 </ul></li>
 <li><p><strong>Integritas data</strong>:</p>
 <ul>
@@ -474,7 +474,7 @@ indexOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah skema dan indeks ditentukan, buatlah koleksi yang menyertakan bidang string.</p>
+    </button></h2><p>Setelah skema dan indeks ditentukan, buatlah koleksi yang menyertakan bidang JSON.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(

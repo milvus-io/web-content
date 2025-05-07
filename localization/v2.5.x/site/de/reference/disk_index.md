@@ -1,7 +1,7 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: Plattenindex-Mechanismus in Milvus.
+summary: Plattenindex-Mechanismus in Milvus für plattenoptimierte Vektorsuche.
 title: On-Disk-Index
 ---
 <h1 id="On-disk-Index" class="common-anchor-header">On-Disk-Index<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
@@ -19,8 +19,8 @@ title: On-Disk-Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In diesem Artikel wird ein Algorithmus zur Indexierung auf der Festplatte namens DiskANN vorgestellt. DiskANN basiert auf Vamana-Graphen und ermöglicht eine effiziente Suche in großen Datenbeständen.</p>
-<p>Um die Abfrageleistung zu verbessern, können Sie für jedes Vektorfeld <a href="/docs/de/index-vector-fields.md">einen Indextyp angeben</a>.</p>
+    </button></h1><p>Dieser Artikel stellt DiskANN vor, einen On-Disk-Indexierungsalgorithmus für festplattenoptimierte Vektorsuchen. DiskANN basiert auf Vamana-Graphen und ermöglicht effiziente On-Disk-Vektorsuchen in großen Datensätzen.</p>
+<p>Um die Abfrageleistung zu verbessern, können Sie für jedes Vektorfeld <a href="/docs/de/index-vector-fields.md">einen Index-Typ angeben</a>.</p>
 <div class="alert note"> 
 Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automatisch den alten Index, wenn der Indextyp gewechselt wird.</div>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -38,7 +38,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um DiskANN zu verwenden, müssen Sie Folgendes beachten</p>
+    </button></h2><p>Um DiskANN in Milvus zu verwenden, müssen Sie beachten, dass</p>
 <ul>
 <li>Die Milvus-Instanz läuft auf Ubuntu 18.04.6 oder einer späteren Version.</li>
 <li>Der Milvus-Datenpfad sollte auf eine NVMe-SSD gemountet werden, um die volle Leistung zu erreichen:<ul>
@@ -125,7 +125,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Wertebereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">MaxDegree</code></td><td>Maximaler Grad des Vamana-Graphen. <br/> Ein größerer Wert bietet eine höhere Auffindungsrate, erhöht jedoch die Größe des Index und die Zeit für den Aufbau des Index.</td><td>[1, 512]</td><td>56</td></tr>
+<tr><td><code translate="no">MaxDegree</code></td><td>Maximaler Grad des Vamana-Graphen. <br/> Ein größerer Wert bietet eine höhere Wiederauffindungsrate, erhöht aber die Größe des Index und die Zeit für den Aufbau des Index.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>Größe der Kandidatenliste. <br/> Ein größerer Wert erhöht den Zeitaufwand für den Aufbau des Indexes, bietet aber eine höhere Wiederfindungsrate. <br/> Setzen Sie ihn auf einen Wert kleiner als <code translate="no">MaxDegree</code>, es sei denn, Sie müssen die Zeit für den Indexaufbau reduzieren.</td><td>[1, int32_max]</td><td>100</td></tr>
 <tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Größenbeschränkung für den PQ-Code. <br/> Ein größerer Wert bietet eine höhere Abrufrate, erhöht aber den Speicherverbrauch.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Verhältnis von zwischengespeicherten Knotennummern zu Rohdaten. <br/> Ein größerer Wert verbessert die Indexerstellungsleistung bei erhöhtem Speicherbedarf.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>

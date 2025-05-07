@@ -47,35 +47,35 @@ summary: 创建角色后，就可以向角色授予权限。本指南将介绍�
 </tr>
 <tr>
 <td rowspan="2"><p><strong>Collections</strong></p></td>
-<td><p>特定的 Collection</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</p></td>
-<td><p>输入目标集合的名称和目标集合所属数据库的名称。</p></td>
+<td><p>特定 Collections</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</code></p></td>
+<td><p>输入目标 Collection 的名称和目标 Collection 所属数据库的名称。</p></td>
 </tr>
 <tr>
-<td><p>特定数据库下的所有 Collections</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>输入目标数据库名称和通配符 <code translate="no"></em></code>作为 Collections 名称。</p></td>
+<td><p>特定数据库下的所有集合</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="*", db_name="db1")</code></p></td>
+<td><p>输入目标数据库名称和通配符<code translate="no">*</code> 作为 Collection 名称。</p></td>
 </tr>
 <tr>
 <td><p><strong>数据库</strong></p></td>
 <td><p>特定数据库</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>输入目标数据库的名称和通配符 <code translate="no"></em></code>作为 Collections 名称。</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="db1")</code></p></td>
+<td><p>输入目标数据库的名称和通配符<code translate="no">*</code> 作为 Collections 名称。</p></td>
 </tr>
 <tr>
 <td></td>
 <td><p>当前实例下的所有数据库</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name=""<em>, db_name=</em>"")</p></td>
-<td><p>输入 <code translate="no"><em></code>作为数据库名称， <code translate="no"></em></code>作为 Collections 名称。</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="*")</code></p></td>
+<td><p>输入<code translate="no">*</code> 作为数据库名称，输入<code translate="no">*</code> 作为 Collections 名称。</p></td>
 </tr>
 <tr>
 <td><p><strong>实例</strong></p></td>
 <td><p>当前实例</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name=""<em>, db_name=</em>"")</p></td>
-<td><p>输入 <code translate="no"><em></code>作为数据库名称， <code translate="no"></em></code>作为 Collections 名称。</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="*", db_name="*")</code></p></td>
+<td><p>输入<code translate="no">*</code> 作为数据库名称，输入<code translate="no">*</code> 作为 Collections 名称。</p></td>
 </tr>
 </table></p></li>
-<li><p><strong>权限</strong>：需要授予角色的特定权限或<a href="/docs/zh/privilege_group.md">权限组</a>。目前，Milvus 提供 56 种可授予的特权。下表列出了 Milvus 中的特权。</p>
+<li><p><strong>权限</strong>：需要授予角色的特定权限或<a href="/docs/zh/privilege_group.md">权限组</a>。目前，Milvus 提供了 56 种可授予的特权。下表列出了 Milvus 中的特权。</p>
 <p><div class="alert note"></p>
 <p>下表中的类型列是用户为方便快速查找特权而设置的，仅用于分类目的。授予权限时，不需要了解类型。只需输入相应的权限即可。</p>
 <p></div></p>
@@ -166,7 +166,7 @@ summary: 创建角色后，就可以向角色授予权限。本指南将介绍�
 <tr>
 <td><p>加载</p></td>
 <td><p>加载 Collections</p></td>
-<td><p><a href="/docs/zh/load-and-release.md">加载集合/获取加载进度/</a><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">获取</a><a href="/docs/zh/load-and-release.md">加载状态</a></p></td>
+<td><p><a href="/docs/zh/load-and-release.md">加载集合/</a><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">获取</a><a href="/docs/zh/load-and-release.md">加载进度/获取加载状态</a></p></td>
 </tr>
 <tr>
 <td><p>释放</p></td>

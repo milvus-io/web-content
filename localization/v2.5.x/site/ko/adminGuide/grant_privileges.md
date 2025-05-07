@@ -48,31 +48,31 @@ summary: 역할이 만들어지면 해당 역할에 권한을 부여할 수 있�
 <tr>
 <td rowspan="2"><p><strong>컬렉션</strong></p></td>
 <td><p>특정 컬렉션</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</code></p></td>
 <td><p>대상 컬렉션의 이름과 대상 컬렉션이 속한 데이터베이스의 이름을 입력합니다.</p></td>
 </tr>
 <tr>
 <td><p>특정 데이터베이스 아래의 모든 컬렉션</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>대상 데이터베이스의 이름과 와일드카드( <code translate="no"></em></code> 를 컬렉션 이름으로 입력합니다.</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="*", db_name="db1")</code></p></td>
+<td><p>대상 데이터베이스의 이름과 와일드카드 <code translate="no">*</code> 를 컬렉션 이름으로 입력합니다.</p></td>
 </tr>
 <tr>
 <td><p><strong>데이터베이스</strong></p></td>
 <td><p>특정 데이터베이스</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>대상 데이터베이스의 이름과 와일드카드( <code translate="no"></em></code> 를 컬렉션 이름으로 입력합니다.</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="db1")</code></p></td>
+<td><p>대상 데이터베이스의 이름과 와일드카드 <code translate="no">*</code> 를 컬렉션 이름으로 입력합니다.</p></td>
 </tr>
 <tr>
 <td></td>
 <td><p>현재 인스턴스 아래의 모든 데이터베이스</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="</em>")</p></td>
-<td><p>입력 <code translate="no"><em></code> 을 데이터베이스 이름으로, 그리고 <code translate="no"></em></code> 을 컬렉션 이름으로 입력합니다.</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="*")</code></p></td>
+<td><p>데이터베이스 이름으로 <code translate="no">*</code>, 컬렉션 이름으로 <code translate="no">*</code> 을 입력합니다.</p></td>
 </tr>
 <tr>
 <td><p><strong>인스턴스</strong></p></td>
 <td><p>현재 인스턴스</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="<em>", db_name="</em>")</p></td>
-<td><p>입력 <code translate="no"><em></code> 을 데이터베이스 이름으로, 그리고 <code translate="no"></em></code> 을 컬렉션 이름으로 입력합니다.</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="*", db_name="*")</code></p></td>
+<td><p>데이터베이스 이름으로 <code translate="no">*</code>, 컬렉션 이름으로 <code translate="no">*</code> 을 입력합니다.</p></td>
 </tr>
 </table></p></li>
 <li><p><strong>권한</strong>: 역할에 부여해야 하는 특정 권한 또는 <a href="/docs/ko/privilege_group.md">권한 그룹입니다</a>. 현재 Milvus는 부여할 수 있는 56가지 유형의 권한을 제공합니다. 아래 표에는 Milvus의 권한이 나열되어 있습니다.</p>
@@ -115,7 +115,7 @@ summary: 역할이 만들어지면 해당 역할에 권한을 부여할 수 있�
 <tr>
 <td rowspan="18"><p>수집 권한</p></td>
 <td><p>GetFlushState</p></td>
-<td><p>컬렉션 플러시 작업 상태 확인</p></td>
+<td><p>컬렉션 플러시 작업의 상태를 확인합니다.</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
 </tr>
 <tr>

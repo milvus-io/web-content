@@ -121,7 +121,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>قائمة القواميس المستخدمة لتعريف المفردات. يمكنك توفير كلمات القاموس الخاص بك أو دمجها مع القاموس الافتراضي باستخدام <code translate="no">"_default_"</code>. على سبيل المثال، <code translate="no">["_default_", "结巴分词器"]</code>. للحصول على تفاصيل القاموس الافتراضي، ارجع إلى <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict</a>.</p></td>
+     <td><p>قائمة القواميس التي سيقوم المحلل بتحميلها كمصدر للمفردات. خيارات مدمجة:</p><ul><li><p><code translate="no">"_default_"</code>: يقوم بتحميل قاموس اللغة الصينية المبسطة المدمج في المحرك. لمزيد من التفاصيل، راجع <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt.</a></p></li><li><p><code translate="no">"_extend_default_"</code>: يقوم بتحميل كل شيء في <code translate="no">"_default_"</code> بالإضافة إلى ملحق إضافي للغة الصينية التقليدية. لمزيد من التفاصيل، راجع <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p><p>يمكنك أيضًا مزج القاموس المدمج مع أي عدد من القواميس المخصصة. مثال: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>
@@ -135,7 +135,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح هذا لميلفوس بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد لترميز وتصفية فعالة. لمزيد من التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">مثال الاستخدام</a>.</p>
+<p>بعد تحديد <code translate="no">analyzer_params</code> ، يمكنك تطبيقها على حقل <code translate="no">VARCHAR</code> عند تحديد مخطط المجموعة. يسمح ذلك لميلفوس بمعالجة النص في ذلك الحقل باستخدام المحلل المحدد لترميز وتصفية فعالة. لمزيد من التفاصيل، راجع <a href="/docs/ar/analyzer-overview.md#Example-use">مثال الاستخدام</a>.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

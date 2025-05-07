@@ -51,34 +51,34 @@ summary: >-
 <tr>
 <td rowspan="2"><p><strong>Koleksi</strong></p></td>
 <td><p>Koleksi tertentu</p></td>
-<td><p>client.grant_privilege_v2(nama_peran = "roleA", hak_keahlian = "CollectionAdmin", nama_koleksi = "col1", nama_db = "db1")</p></td>
-<td><p>Masukkan nama koleksi target Anda dan nama basis data tempat koleksi target berada.</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</code></p></td>
+<td><p>Masukkan nama koleksi target Anda dan nama pangkalan data tempat koleksi target berada.</p></td>
 </tr>
 <tr>
-<td><p>Semua koleksi di bawah basis data tertentu</p></td>
-<td><p>client.grant_privilege_v2(nama_peran = "peranA", hak_akses = "CollectionAdmin", nama_koleksi = "<em>", nama_db = "db1")</p></td>
-<td><p>Masukkan nama basis data target Anda dan wildcard <code translate="no"></em></code> sebagai nama koleksi.</p></td>
+<td><p>Semua koleksi di bawah pangkalan data tertentu</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="*", db_name="db1")</code></p></td>
+<td><p>Masukkan nama pangkalan data target Anda dan karakter pengganti <code translate="no">*</code> sebagai nama koleksi.</p></td>
 </tr>
 <tr>
 <td><p><strong>Basis data</strong></p></td>
 <td><p>Basis data tertentu</p></td>
-<td><p>client.grant_privilege_v2(nama_peran = "peranA", hak_akses = "DatabaseAdmin", nama_koleksi = "<em>", nama_basis = "db1")</p></td>
-<td><p>Masukkan nama basis data target Anda dan wildcard <code translate="no"></em></code> sebagai nama koleksi.</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="db1")</code></p></td>
+<td><p>Masukkan nama basis data target Anda dan wildcard <code translate="no">*</code> sebagai nama koleksi.</p></td>
 </tr>
 <tr>
 <td></td>
-<td><p>Semua basis data di bawah instans saat ini</p></td>
-<td><p>client.grant_privilege_v2(nama_peran = "peranA", hak_akses = "DatabaseAdmin", nama_koleksi = "<em>", nama_basis = "</em>")</p></td>
-<td><p>Masukan <code translate="no"><em></code> sebagai nama basis data dan <code translate="no"></em></code> sebagai nama koleksi.</p></td>
+<td><p>Semua basis data di bawah contoh saat ini</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="*")</code></p></td>
+<td><p>Masukkan <code translate="no">*</code> sebagai nama basis data dan <code translate="no">*</code> sebagai nama koleksi.</p></td>
 </tr>
 <tr>
 <td><p><strong>Instance</strong></p></td>
 <td><p>Instance saat ini</p></td>
-<td><p>client.grant_privilege_v2(nama_peran = "peranA", hak = "ClusterAdmin", nama_koleksi = "<em>", nama_db = "</em>")</p></td>
-<td><p>Masukan <code translate="no"><em></code> sebagai nama basis data dan <code translate="no"></em></code> sebagai nama koleksi.</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="*", db_name="*")</code></p></td>
+<td><p>Masukkan <code translate="no">*</code> sebagai nama basis data dan <code translate="no">*</code> sebagai nama koleksi.</p></td>
 </tr>
 </table></p></li>
-<li><p><strong>Hak istimewa</strong>: Privilege atau <a href="/docs/id/privilege_group.md">kelompok</a> privilese tertentu yang perlu Anda berikan kepada suatu role. Saat ini, Milvus menyediakan 56 jenis hak istimewa yang dapat anda berikan. Tabel di bawah ini mencantumkan daftar hak istimewa di Milvus.</p>
+<li><p><strong>Privilege</strong>: Hak istimewa atau <a href="/docs/id/privilege_group.md">kelompok hak istimewa</a> tertentu yang perlu Anda berikan kepada suatu peran. Saat ini, Milvus menyediakan 56 jenis privilese yang dapat Anda berikan. Tabel di bawah ini mencantumkan daftar hak istimewa di Milvus.</p>
 <p><div class="alert note"></p>
 <p>Kolom jenis pada tabel di bawah ini digunakan untuk memudahkan anda mencari hak istimewa dengan cepat dan hanya digunakan untuk tujuan klasifikasi. Ketika memberikan hak istimewa, anda tidak perlu memahami jenisnya. Anda hanya perlu memasukkan hak istimewa yang sesuai.</p>
 <p></div></p>

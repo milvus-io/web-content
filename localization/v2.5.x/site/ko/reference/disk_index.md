@@ -1,7 +1,7 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: Milvus의 디스크 인덱스 메커니즘.
+summary: 디스크에 최적화된 벡터 검색을 위한 Milvus의 디스크 인덱스 메커니즘.
 title: 온디스크 인덱스
 ---
 <h1 id="On-disk-Index" class="common-anchor-header">온디스크 인덱스<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
@@ -19,10 +19,10 @@ title: 온디스크 인덱스
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 문서에서는 DiskANN이라는 온디스크 인덱싱 알고리즘을 소개합니다. DiskANN은 Vamana 그래프를 기반으로 대규모 데이터 세트 내에서 효율적인 검색을 지원합니다.</p>
+    </button></h1><p>이 문서에서는 디스크에 최적화된 벡터 검색을 위한 온디스크 인덱싱 알고리즘인 DiskANN을 소개합니다. DiskANN은 Vamana 그래프를 기반으로 대규모 데이터 세트 내에서 효율적인 온디스크 벡터 검색을 지원합니다.</p>
 <p>쿼리 성능을 향상시키기 위해 각 벡터 필드에 대해 <a href="/docs/ko/index-vector-fields.md">인덱스 유형을 지정할</a> 수 있습니다.</p>
 <div class="alert note"> 
-현재 벡터 필드는 하나의 인덱스 유형만 지원합니다. Milvus는 인덱스 유형을 전환할 때 이전 인덱스를 자동으로 삭제합니다.</div>
+현재 벡터 필드는 하나의 인덱스 유형만 지원합니다. 인덱스 유형을 전환할 때 Milvus는 이전 인덱스를 자동으로 삭제합니다.</div>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,7 @@ title: 온디스크 인덱스
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DiskANN을 사용하려면 다음 사항에 유의하세요.</p>
+    </button></h2><p>Milvus에서 DiskANN을 사용하려면 다음 사항에 유의하세요.</p>
 <ul>
 <li>Milvus 인스턴스는 Ubuntu 18.04.6 이상 릴리스에서 실행됩니다.</li>
 <li>Milvus 데이터 경로는 전체 성능을 위해 NVMe SSD에 마운트해야 합니다:<ul>

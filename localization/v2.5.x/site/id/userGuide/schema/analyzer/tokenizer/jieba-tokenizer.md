@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Tokenizer <code translate="no">jieba</code> memproses teks bahasa Mandarin dengan memecahnya menjadi beberapa komponen kata.</p>
+    </button></h1><p>Tokenizer <code translate="no">jieba</code> memproses teks bahasa Mandarin dengan memecahnya menjadi kata-kata komponennya.</p>
 <h2 id="Configuration" class="common-anchor-header">Konfigurasi<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -121,12 +121,12 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>Daftar kamus yang digunakan untuk mendefinisikan kosakata. Anda dapat menyediakan kata-kata kamus Anda sendiri atau menggabungkannya dengan kamus default menggunakan <code translate="no">"_default_"</code>. Misalnya, <code translate="no">["_default_", "结巴分词器"]</code>. Untuk detail kamus default, lihat kamus.</p></td>
+     <td><p>Daftar kamus yang akan dimuat oleh penganalisis sebagai sumber kosakata. Opsi bawaan:</p><ul><li><p><code translate="no">"_default_"</code>: Memuat kamus bahasa Mandarin Sederhana bawaan mesin. Untuk detailnya, lihat <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li><li><p><code translate="no">"_extend_default_"</code>: Memuat semua yang ada di <code translate="no">"_default_"</code> ditambah dengan tambahan suplemen Bahasa Mandarin Tradisional. Untuk detailnya, lihat <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p><p>Anda juga dapat menggabungkan kamus bawaan dengan sejumlah kamus khusus. Contoh: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mode</code></p></td>
-     <td><p>Mode segmentasi. Nilai yang mungkin:</p><ul><li><p><code translate="no">"exact"</code>: Mencoba mensegmentasi kalimat dengan cara yang paling tepat, sehingga ideal untuk analisis teks.</p></li><li><p><code translate="no">"search"</code>: Dibangun di atas mode eksak dengan memecah lebih lanjut kata-kata yang panjang untuk meningkatkan daya ingat, sehingga cocok untuk tokenisasi mesin pencari.</p><p>Untuk informasi lebih lanjut, lihat <a href="https://github.com/fxsjy/jieba">Proyek Jieba GitHub</a>.</p></li></ul></td>
+     <td><p>Mode segmentasi. Nilai-nilai yang mungkin:</p><ul><li><p><code translate="no">"exact"</code>: Mencoba menyegmentasikan kalimat dengan cara yang paling tepat, sehingga ideal untuk analisis teks.</p></li><li><p><code translate="no">"search"</code>: Dibangun di atas mode eksak dengan memecah lebih lanjut kata-kata yang panjang untuk meningkatkan daya ingat, sehingga cocok untuk tokenisasi mesin pencari.</p><p>Untuk informasi lebih lanjut, lihat <a href="https://github.com/fxsjy/jieba">Proyek Jieba GitHub</a>.</p></li></ul></td>
      <td><p><code translate="no">"search"</code></p></td>
    </tr>
    <tr>

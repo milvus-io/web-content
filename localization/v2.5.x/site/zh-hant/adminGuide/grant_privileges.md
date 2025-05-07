@@ -48,31 +48,31 @@ summary: 建立角色後，就可以授予角色權限。本指南將介紹如�
 <tr>
 <td rowspan="2"><p><strong>集合</strong></p></td>
 <td><p>特定的集合</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</p></td>
-<td><p>輸入目標集合的名稱，以及目標集合所屬資料庫的名稱。</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</code></p></td>
+<td><p>輸入目標集合的名稱以及目標集合所屬資料庫的名稱。</p></td>
 </tr>
 <tr>
 <td><p>特定資料庫下的所有集合</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>輸入目標資料庫的名稱和通配符 <code translate="no"></em></code>作為集合名稱。</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="*", db_name="db1")</code></p></td>
+<td><p>輸入目標資料庫的名稱和通配符<code translate="no">*</code> 作為集合名稱。</p></td>
 </tr>
 <tr>
 <td><p><strong>資料庫</strong></p></td>
-<td><p>特定的資料庫</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>輸入目標資料庫的名稱和通配符 <code translate="no"></em></code>作為集合名稱。</p></td>
+<td><p>特定資料庫</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="db1")</code></p></td>
+<td><p>輸入目標資料庫的名稱和通配符<code translate="no">*</code> 作為集合名稱。</p></td>
 </tr>
 <tr>
 <td></td>
-<td><p>目前實例下的所有資料庫</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name=""<em>, db_name=</em>"")</p></td>
-<td><p>輸入 <code translate="no"><em></code>作為資料庫名稱，並輸入 <code translate="no"></em></code>為集合名稱。</p></td>
+<td><p>當前實例下的所有資料庫</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="*")</code></p></td>
+<td><p>輸入<code translate="no">*</code> 作為資料庫名稱，並輸入<code translate="no">*</code> 作為集合名稱。</p></td>
 </tr>
 <tr>
 <td><p><strong>實例</strong></p></td>
-<td><p>目前的實體</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name=""<em>, db_name=</em>"")</p></td>
-<td><p>輸入 <code translate="no"><em></code>作為資料庫名稱，並輸入 <code translate="no"></em></code>為集合名稱。</p></td>
+<td><p>目前的實例</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="*", db_name="*")</code></p></td>
+<td><p>輸入<code translate="no">*</code> 作為資料庫名稱，輸入<code translate="no">*</code> 作為集合名稱。</p></td>
 </tr>
 </table></p></li>
 <li><p><strong>權限</strong>：您需要賦予角色的特定權限或<a href="/docs/zh-hant/privilege_group.md">權限群</a>。目前，Milvus 提供 56 種可授予的特權。下表列出了 Milvus 中的特權。</p>

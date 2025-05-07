@@ -520,7 +520,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;distance&quot;:0.6290165,&quot;id&quot;:1},{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975797,&quot;id&quot;:4},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.24996185,&quot;id&quot;:6}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコード例で使用されているフィルタ式<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> では、<code translate="no">color</code> フィールドの値が<strong>"red"</strong> で始まらなければならないという条件が指定されています<strong>。</strong>サンプル・データでは、この条件を満たすのは2つのエンティティだけです。したがって、<code translate="no">limit</code> (topK) を<code translate="no">3</code> 以下に設定すると、これらのエンティティの両方が返されます。</p>
+<p>上記のコード例で使用されているフィルタ式<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> では、<code translate="no">color</code> フィールドの値が<strong>"red"</strong> で始まらなければならないという条件が指定されています<strong>。</strong>サンプル・データでは、この条件を満たすのは2つのエンティティだけです。したがって、<code translate="no">limit</code> (topK) を<code translate="no">3</code> 以下に設定すると、これらのエンティティの両方が返される。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> 

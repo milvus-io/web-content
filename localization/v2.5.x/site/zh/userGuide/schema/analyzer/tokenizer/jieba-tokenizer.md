@@ -119,12 +119,12 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>用于定义词汇的词典列表。您可以提供自己的字典词，或使用<code translate="no">"_default_"</code> 将它们与默认字典相结合。例如，<code translate="no">["_default_", "结巴分词器"]</code> 。有关默认词典的详细信息，请参阅<a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict</a>。</p></td>
+     <td><p>分析器将作为词汇源加载的词典列表。内置选项：</p><ul><li><p><code translate="no">"_default_"</code>:加载引擎内置的简体中文词典。详情请参阅<a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>。</p></li><li><p><code translate="no">"_extend_default_"</code>:加载<code translate="no">"_default_"</code> 中的所有内容以及额外的繁体中文补充。详情请参阅<a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>。</p><p>您也可以将内置词典与任意数量的自定义词典混合使用。示例：<code translate="no">["_default_", "结巴分词器"]</code> 。</p></li></ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mode</code></p></td>
-     <td><p>分割模式。可能的值：</p><ul><li><p><code translate="no">"exact"</code>:尝试以最精确的方式分割句子，是文本分析的理想选择。</p></li><li><p><code translate="no">"search"</code>:在精确模式的基础上进一步分解长词以提高召回率，适合搜索引擎标记化。</p><p>更多信息，请参阅<a href="https://github.com/fxsjy/jieba">Jieba GitHub 项目</a>。</p></li></ul></td>
+     <td><p>分段模式。可能的值：</p><ul><li><p><code translate="no">"exact"</code>:尝试以最精确的方式分割句子，是文本分析的理想选择。</p></li><li><p><code translate="no">"search"</code>:在精确模式的基础上进一步分解长词以提高召回率，适合搜索引擎标记化。</p><p>更多信息，请参阅<a href="https://github.com/fxsjy/jieba">Jieba GitHub 项目</a>。</p></li></ul></td>
      <td><p><code translate="no">"search"</code></p></td>
    </tr>
    <tr>

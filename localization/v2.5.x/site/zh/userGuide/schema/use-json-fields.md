@@ -386,7 +386,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>在建立索引时，Milvus 将把提取的 JSON 值转换成的数据类型。有效值</p><ul><li><p><code translate="no">"bool"</code> 或<code translate="no">"BOOL"</code></p></li><li><p><code translate="no">"double"</code> 或<code translate="no">"DOUBLE"</code></p></li><li><p><code translate="no">"varchar"</code> 或<code translate="no">"VARCHAR"</code></p><p><strong>注意</strong>：对于整数值，Milvus 内部使用 double 作为索引。超过 2^53 的大整数将失去精度。如果类型转换失败（由于类型不匹配），不会抛出错误，也不会索引该行的值。</p></li></ul></td>
+     <td><p>在建立索引时，Milvus 将把提取的 JSON 值转换成的数据类型。有效值</p><ul><li><code translate="no">"bool"</code> 或<code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> 或<code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> 或<code translate="no">"VARCHAR"</code><strong>注意</strong>：对于整数值，Milvus 内部使用 double 作为索引。超过 2^53 的大整数会降低精度。如果类型转换失败（由于类型不匹配），不会抛出错误，也不会索引该行的值。</li></ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -403,7 +403,7 @@ curl --request POST \
 </ul></li>
 <li><p><strong>数值精度</strong>：</p>
 <ul>
-<li>在内部，Milvus 将所有数值字段索引为双倍。如果数值超过 2^{53}，就会失去精度，对超出范围的数值进行查询时可能无法精确匹配。</li>
+<li>在内部，Milvus 将所有数值字段索引为双倍。如果数值超过<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>，就会失去精度，对这些超出范围的数值进行的查询可能无法完全匹配。</li>
 </ul></li>
 <li><p><strong>数据完整性</strong>：</p>
 <ul>
@@ -471,7 +471,7 @@ indexOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>定义好 Schema 和索引后，创建一个包含字符串字段的 Collection。</p>
+    </button></h2><p>定义好 Schema 和索引后，创建一个包含 JSON 字段的 Collection。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -874,7 +874,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>除了基本的标量字段筛选外，您还可以将向量相似性搜索与标量字段筛选结合起来。例如，下面的代码展示了如何在向量搜索中添加标量字段过滤器：</p>
+    </button></h2><p>除了基本的标量字段筛选外，您还可以将向量相似性搜索与标量字段筛选结合起来。例如，以下代码展示了如何在向量搜索中添加标量字段过滤器：</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;product_info&quot;][&quot;brand&quot;] == &quot;BrandA&quot;&#x27;</span>
