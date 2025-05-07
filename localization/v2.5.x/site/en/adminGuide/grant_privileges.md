@@ -50,30 +50,30 @@ summary: >-
 <tr>
 <td rowspan="2"><p><strong>Collection</strong></p></td>
 <td><p>A specific collection</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</code></p></td>
 <td><p>Input the name of your target collection and the name of the database to which the target collection belongs.</p></td>
 </tr>
 <tr>
 <td><p>All collections under a specific database</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="<em>“, db_name="db1”)</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="*", db_name="db1")</code></p></td>
 <td><p>Input the name of your target database and a wildcard <code translate="no">*</code> as the collection name.</p></td>
 </tr>
 <tr>
 <td><p><strong>Database</strong></p></td>
 <td><p>A specific database</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="</em>“, db_name="db1”)</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="db1")</code></p></td>
 <td><p>Input the name of your target database and a wildcard <code translate="no">*</code> as the collection name.</p></td>
 </tr>
 <tr>
 <td></td>
 <td><p>All databases under the current instance</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>“, db_name=”</em>")</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="*")</code></p></td>
 <td><p>Input <code translate="no">*</code> as the database name and <code translate="no">*</code> as the collection name.</p></td>
 </tr>
 <tr>
 <td><p><strong>Instance</strong></p></td>
 <td><p>The current instance</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="<em>“, db_name=”</em>")</p></td>
+<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="*", db_name="*")</code></p></td>
 <td><p>Input <code translate="no">*</code> as the database name and <code translate="no">*</code> as the collection name.</p></td>
 </tr>
 </table></p></li>
