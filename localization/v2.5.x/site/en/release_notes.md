@@ -45,7 +45,7 @@ title: Release Notes
 <p>We’re excited to announce the release of Milvus 2.5.11! This version introduces powerful new features like the multi-analyzer capability and expanded tokenizer support (Jieba, Lindera, ICU, Language Identifier). We’ve also made several improvements, including dynamic segment loading thread pool updates and optimized delete filtering during binlog imports. Key bug fixes address potential segment drop issues, BM25 search failures, and JSON stats filtering errors.</p>
 <p>We encourage you to upgrade to 2.5.11 to take advantage of these enhancements and fixes!</p>
 <h3 id="Features" class="common-anchor-header">Features</h3><ul>
-<li>Added the ability to configure multiple analyzers (tokenizers) and select the appropriate one based on the instruction of the input data (<a href="https://github.com/milvus-io/milvus/pull/41444">#41444</a>).</li>
+<li>Added the ability to configure multiple analyzers (tokenizers) for multi languages support and select the appropriate one based on the instruction of the input data (<a href="https://github.com/milvus-io/milvus/pull/41444">#41444</a>).</li>
 <li>Enhanced the BM25 Analyzer functionality (<a href="https://github.com/milvus-io/milvus/pull/41456">#41456</a>).
 <ul>
 <li>Introduced a <code translate="no">run_analyzer</code> API for dry runs to help analyze tokenization results. For more information, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a>.</li>
@@ -74,7 +74,7 @@ title: Release Notes
 <li>Added a configuration option to force rebuilding indexes to the latest version (<a href="https://github.com/milvus-io/milvus/pull/41432">#41432</a>).</li>
 <li>Improved the error log message for the list policy (<a href="https://github.com/milvus-io/milvus/pull/41368">#41368</a>).</li>
 <li>Adapted handling for hyphens in gRPC metadata headers (<a href="https://github.com/milvus-io/milvus/pull/41372">#41372</a>).</li>
-<li>Upgraded Go version to 1.21.4 to address CVEs (<a href="https://github.com/milvus-io/milvus/pull/41522">#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>). (<em>Note: Original text mentioned "2.14", assumed typo corrected to a plausible recent version 1.21.4</em>).</li>
+<li>Upgraded Go version to 1.24.1 to address CVEs (<a href="https://github.com/milvus-io/milvus/pull/41522">#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
 <li>Fixed an issue where segments might not be correctly dropped when dropping a partition (<a href="https://github.com/milvus-io/milvus/pull/41543">#41543</a>).</li>
