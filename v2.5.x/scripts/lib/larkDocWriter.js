@@ -1217,11 +1217,16 @@ class larkDocWriter {
                 if (merge) {
                     const colspan = merge.col_span > 1 ? ` colspan="${merge.col_span}"` : "";
                     const rowspan = merge.row_span > 1 ? ` rowspan="${merge.row_span}"` : "";
-                    const cell_text = this.__filter_content(cell_texts[cell_idx], this.targets).trim().replace(/^\n/, '');
+                    let cell_text = this.__filter_content(cell_texts[cell_idx], this.targets).trim()
+                        .replace(/^\n/, '')
+                        .replace(/<br\/>/g, '\n')
+
+                    cell_text = converter.makeHtml(cell_text)
+                        
                     if (i === 0) {
-                        html += ` ${' '.repeat(indent)}    <th${colspan}${rowspan}>${converter.makeHtml(cell_text.replace(/<br\/>/g, '\n')).replace(/\n/g, '')}</th>\n`;
+                        html += ` ${' '.repeat(indent)}    <th${colspan}${rowspan}>${cell_text}</th>\n`;
                     } else {
-                        html += ` ${' '.repeat(indent)}    <td${colspan}${rowspan}>${converter.makeHtml(cell_text.replace(/<br\/>/g, '\n')).replace(/\n/g, '')}</td>\n`;
+                        html += ` ${' '.repeat(indent)}    <td${colspan}${rowspan}>${cell_text}</td>\n`;
                     }
                 }
             }
