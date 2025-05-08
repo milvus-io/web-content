@@ -18,7 +18,7 @@ For a collection with the dynamic field enabled, you can use keys in the dynamic
 
 ## Enable dynamic field
 
-Collections created using the method described in [Create Collection Instantly](create-collection-instantly.md) have the dynamic field enabled by default. You can also enable the dynamic field manually when creating a collection with custom settings.
+You can enable the dynamic field manually when creating a collection with custom settings.
 
 <div class="multipleCode">
     <a href="#python">Python</a>

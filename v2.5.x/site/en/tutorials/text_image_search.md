@@ -117,7 +117,7 @@ To enable semantic image search, we first need to generate embeddings for all im
 
 **1. Create Milvus Collection**
 
-Before storing image embeddings, you need to create a Milvus collection. The following code demonstrates how to create a collection using [quick start mode](https://milvus.io/docs/create-collection-instantly.md) with the default COSINE metric type. The collection includes the following fields:
+Before storing image embeddings, you need to create a Milvus collection. The following code demonstrates how to create a collection in a quick-setup mode with the default COSINE metric type. The collection includes the following fields:
 
 - `id`: A primary field with auto ID enabled.
 
