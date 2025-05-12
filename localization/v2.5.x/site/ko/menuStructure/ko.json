@@ -348,12 +348,6 @@
             "children": []
           },
           {
-            "label": "즉시 컬렉션 생성",
-            "id": "create-collection-instantly.md",
-            "order": 2,
-            "children": []
-          },
-          {
             "label": "컬렉션 보기",
             "id": "view-collections.md",
             "order": 3,

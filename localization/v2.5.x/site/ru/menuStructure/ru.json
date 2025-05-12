@@ -144,7 +144,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая карта",
+                "label": "Рулевая диаграмма",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -345,12 +345,6 @@
             "label": "Создать коллекцию",
             "id": "create-collection.md",
             "order": 1,
-            "children": []
-          },
-          {
-            "label": "Создайте коллекцию мгновенно",
-            "id": "create-collection-instantly.md",
-            "order": 2,
             "children": []
           },
           {
@@ -583,7 +577,7 @@
                     "children": []
                   },
                   {
-                    "label": "Остановите",
+                    "label": "Остановить",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []

@@ -39,44 +39,76 @@ summary: >-
     </button></h2><p>Milvus 2.5 introduce una nueva versión de la API que agiliza la operación de concesión. Ya no es necesario buscar el tipo de objeto cuando se concede un privilegio a un rol. A continuación se indican los parámetros y las explicaciones correspondientes.</p>
 <ul>
 <li><p><strong>role_name:</strong> El nombre del rol de destino al que deben concederse privilegios o grupos de privilegios.</p></li>
-<li><p><strong>Recurso</strong>: El recurso de destino de un privilegio, que puede ser una instancia, base de datos o colección específica. La siguiente tabla explica cómo especificar el recurso en el método <code translate="no">client.grantV2()</code>.</p>
-<p><table>
-<tr>
-<th><p><strong>Nivel</strong></p></th>
-<th><p><strong>Recurso</strong></p></th>
-<th><p><strong>Método de concesión</strong></p></th>
-<th><p><strong>Notas</strong></p></th>
-</tr>
-<tr>
-<td rowspan="2"><p><strong>Colección</strong></p></td>
-<td><p>Una colección específica</p></td>
-<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</code></p></td>
-<td><p>Introduzca el nombre de la colección de destino y el nombre de la base de datos a la que pertenece la colección de destino.</p></td>
-</tr>
-<tr>
-<td><p>Todas las colecciones de una base de datos específica</p></td>
-<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="*", db_name="db1")</code></p></td>
-<td><p>Introduzca el nombre de la base de datos de destino y un comodín <code translate="no">*</code> como nombre de la colección.</p></td>
-</tr>
-<tr>
-<td><p><strong>Base de datos</strong></p></td>
-<td><p>Una base de datos específica</p></td>
-<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="db1")</code></p></td>
-<td><p>Introduzca el nombre de la base de datos de destino y el comodín <code translate="no">*</code> como nombre de la colección.</p></td>
-</tr>
-<tr>
-<td></td>
-<td><p>Todas las bases de datos de la instancia actual</p></td>
-<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="*")</code></p></td>
-<td><p>Introduzca <code translate="no">*</code> como nombre de la base de datos y <code translate="no">*</code> como nombre de la colección.</p></td>
-</tr>
-<tr>
-<td><p><strong>Instancia</strong></p></td>
-<td><p>La instancia actual</p></td>
-<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="*", db_name="*")</code></p></td>
-<td><p>Introduzca <code translate="no">*</code> como nombre de la base de datos y <code translate="no">*</code> como nombre de la colección.</p></td>
-</tr>
-</table></p></li>
+<li><p><strong>Recurso</strong>: El recurso de destino de un privilegio, que puede ser una instancia, base de datos o colección específica.</p></li>
+</ul>
+<p>La siguiente tabla explica cómo especificar el recurso en el método <code translate="no">client.grantV2()</code>.</p>
+<table>
+   <tr>
+     <th><p><strong>Nivel</strong></p></th>
+     <th><p><strong>Recurso</strong></p></th>
+     <th><p><strong>Método de concesión</strong></p></th>
+     <th><p><strong>Notas</strong></p></th>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Colección</strong></p></td>
+     <td><p>Una colección específica</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="col1", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Introduzca el nombre de la colección de destino y el nombre de la base de datos a la que pertenece la colección de destino.</p></td>
+   </tr>
+   <tr>
+     <td><p>Todas las colecciones de una base de datos específica</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Introduzca el nombre de la base de datos de destino y un comodín <code translate="no">*</code> como nombre de la colección.</p></td>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Base de datos</strong></p></td>
+     <td><p>Una base de datos específica</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Introduzca el nombre de la base de datos de destino y el comodín <code translate="no">*</code> como nombre de la colección.</p></td>
+   </tr>
+   <tr>
+     <td><p>Todas las bases de datos de la instancia actual</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Introduzca <code translate="no">*</code> como nombre de la base de datos y <code translate="no">*</code> como nombre de la colección.</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Instancia</strong></p></td>
+     <td><p>La instancia actual</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="ClusterAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Introduzca <code translate="no">*</code> como nombre de la base de datos y <code translate="no">*</code> como nombre de la colección.</p></td>
+   </tr>
+</table>
+<ul>
 <li><p><strong>Privilegio</strong>: El privilegio específico o <a href="/docs/es/privilege_group.md">grupo de privilegios</a> que necesita otorgar a un rol. Actualmente, Milvus proporciona 56 tipos de privilegios que puede conceder. La siguiente tabla enumera los privilegios en Milvus.</p>
 <p><div class="alert note"></p>
 <p>La columna de tipo en la tabla de abajo es de usuario para facilitar su búsqueda rápida de privilegios y se utiliza sólo con fines de clasificación. Cuando conceda privilegios, no necesita entender los tipos. Sólo tiene que introducir los privilegios correspondientes.</p>

@@ -54,7 +54,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/ko/create-collection-instantly.md">컬렉션 즉시 만들기에</a> 설명된 방법을 사용하여 만든 컬렉션에는 기본적으로 동적 필드가 활성화되어 있습니다. 사용자 지정 설정으로 컬렉션을 만들 때 동적 필드를 수동으로 활성화할 수도 있습니다.</p>
+    </button></h2><p>사용자 지정 설정으로 컬렉션을 만들 때 동적 필드를 수동으로 활성화할 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -151,7 +151,7 @@ err = client.CreateCollection(ctx, milvusclient.SimpleCreateCollectionOptions(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션에서 동적 필드를 사용 설정하면 스키마에 정의되지 않은 모든 필드와 해당 값이 동적 필드에 키-값 쌍으로 저장됩니다.</p>
+    </button></h2><p>컬렉션에서 동적 필드를 사용하도록 설정하면 스키마에 정의되지 않은 모든 필드와 해당 값이 동적 필드에 키-값 쌍으로 저장됩니다.</p>
 <p>예를 들어 컬렉션 스키마에 동적 필드가 활성화된 상태에서 <code translate="no">id</code> 및 <code translate="no">vector</code> 이라는 두 개의 필드만 정의되어 있다고 가정해 보겠습니다. 이제 이 컬렉션에 다음 데이터 집합을 삽입합니다.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>id<span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> vector<span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> color<span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -521,7 +521,7 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;distance&quot;:0.6290165,&quot;id&quot;:1},{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975797,&quot;id&quot;:4},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.24996185,&quot;id&quot;:6}]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위 코드 예제에서 사용된 필터 표현식 <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> 에서 조건은 <code translate="no">color</code> 필드의 값이 <strong>"red"</strong>로 시작해야 한다고 지정합니다. 샘플 데이터에서 이 조건을 충족하는 엔티티는 두 개뿐입니다. 따라서 <code translate="no">limit</code> (topK)가 <code translate="no">3</code> 이하로 설정되면 이 두 엔티티가 모두 반환됩니다.</p>
+<p>위의 코드 예제에서 사용된 필터 표현식 <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> 에서 조건은 <code translate="no">color</code> 필드의 값이 <strong>"red"</strong>로 시작해야 한다고 지정합니다. 샘플 데이터에서 이 조건을 충족하는 엔티티는 두 개뿐입니다. 따라서 <code translate="no">limit</code> (topK)가 <code translate="no">3</code> 이하로 설정되면 이 두 엔티티가 모두 반환됩니다.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> 

@@ -124,9 +124,9 @@ model.<span class="hljs-built_in">eval</span>()
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Data-Ingestion" class="common-anchor-header">Dateneingabe</h3><p>Um eine semantische Bildsuche zu ermöglichen, müssen wir zunächst Einbettungen für alle Bilder erzeugen und sie in einer Vektordatenbank speichern, um sie effizient indizieren und abrufen zu können. Dieser Abschnitt enthält eine schrittweise Anleitung zur Aufnahme von Bilddaten in Milvus.</p>
 <p><strong>1. Milvus-Sammlung erstellen</strong></p>
-<p>Bevor Sie Bildeinbettungen speichern können, müssen Sie eine Milvus-Sammlung erstellen. Der folgende Code veranschaulicht, wie eine Sammlung im <a href="https://milvus.io/docs/create-collection-instantly.md">Schnellstartmodus</a> mit dem Standard-Metrik-Typ COSINE erstellt wird. Die Sammlung enthält die folgenden Felder:</p>
+<p>Bevor Sie Bildeinbettungen speichern können, müssen Sie eine Milvus-Sammlung erstellen. Der folgende Code veranschaulicht, wie eine Sammlung im Schnelleinstellungsmodus mit dem Standard-Metrik-Typ COSINE erstellt wird. Die Sammlung enthält die folgenden Felder:</p>
 <ul>
-<li><p><code translate="no">id</code>: Ein Primärfeld mit aktivierter Auto-ID.</p></li>
+<li><p><code translate="no">id</code>: Ein Primärfeld mit aktivierter automatischer ID.</p></li>
 <li><p><code translate="no">vector</code>: Ein Feld zum Speichern von Fließkomma-Vektoreinbettungen.</p></li>
 </ul>
 <p>Wenn Sie ein benutzerdefiniertes Schema benötigen, finden Sie detaillierte Anweisungen in der <a href="https://milvus.io/docs/create-collection.md">Milvus-Dokumentation</a>.</p>

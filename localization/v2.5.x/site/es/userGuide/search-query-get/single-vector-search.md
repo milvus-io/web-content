@@ -71,8 +71,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En las búsquedas RNA, una búsqueda de un solo vector se refiere a una búsqueda que implica sólo un vector de consulta. Basándose en el índice pre-construido y en el tipo de métrica incluido en la petición de búsqueda, Milvus encontrará los K vectores más similares al vector de consulta.</p>
-<p>En esta sección, aprenderá a realizar una búsqueda de un solo vector. El fragmento de código supone que ha creado una colección de <a href="/docs/es/create-collection-instantly.md#Quick-Setup">forma rápida</a>. La petición de búsqueda lleva un único vector de consulta y pide a Milvus que utilice Inner Product (IP) para calcular la similitud entre los vectores de consulta y los vectores de la colección y devuelve los tres más similares.</p>
+    </button></h2><p>En las búsquedas RNA, una búsqueda monovectorial se refiere a una búsqueda que implica sólo un vector de consulta. Basándose en el índice pre-construido y en el tipo de métrica incluido en la petición de búsqueda, Milvus encontrará los K vectores más similares al vector de consulta.</p>
+<p>En esta sección, aprenderá a realizar una búsqueda de un solo vector. La petición de búsqueda lleva un único vector de consulta y pide a Milvus que utilice el Producto Interior (PI) para calcular la similitud entre los vectores de consulta y los vectores de la colección y devuelve los tres más similares.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

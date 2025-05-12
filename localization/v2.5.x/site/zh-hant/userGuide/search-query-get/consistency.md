@@ -34,8 +34,7 @@ title: 一致性
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 是一個將儲存和計算分開的系統。在這個系統中，<strong>資料節點 (DataNodes</strong>) 負責資料的持久化，並最終將資料儲存在分散式物件儲存空間 (例如 MinIO/S3)。<strong>QueryNodes</strong>負責處理搜尋等計算任務。這些任務涉及<strong>批次資料</strong>和<strong>串流資料</strong>的處理。簡單來說，批次資料可以理解為已經儲存於物件儲存空間的資料，而串流資料則是指尚未儲存於物件儲存空間的資料。由於網路延遲的關係，QueryNodes 通常無法保存最新的串流資料。如果沒有額外的保障措施，直接在串流資料上執行 Search 可能會導致許多未承諾的資料點遺失，影響搜尋結果的準確性。</p>
-<p>Milvus 是一個將儲存和計算分開的系統。在這個系統中，DataNodes 負責資料的持久化，並最終將資料儲存於分散式物件儲存空間，例如 MinIO/S3。QueryNodes 負責處理搜尋等計算任務。這些任務涉及批次資料和串流資料的處理。簡單來說，批次資料可理解為已儲存在物件儲存空間的資料，而串流資料則是指尚未儲存在物件儲存空間的資料。由於網路延遲的關係，QueryNodes 通常無法儲存最新的串流資料。如果沒有額外的保障措施，直接在串流資料上執行 Search 可能會導致遺失許多未承諾的資料點，影響搜尋結果的準確性。</p>
+    </button></h2><p>Milvus 是一個將儲存和計算分開的系統。在這個系統中，<strong>資料節點 (DataNodes</strong>) 負責資料的持久化，並最終將資料儲存在分散式物件儲存空間 (例如 MinIO/S3)。<strong>QueryNodes</strong>負責處理搜尋等計算任務。這些任務涉及<strong>批次資料</strong>和<strong>串流資料</strong>的處理。簡單來說，批次資料可以理解為已經儲存於物件儲存空間的資料，而串流資料則是指尚未儲存於物件儲存空間的資料。由於網路延遲的關係，QueryNodes 通常無法保存最新的串流資料。如果沒有額外的保障措施，直接在串流資料上執行 Search 可能會導致遺失許多未承諾的資料點，影響搜尋結果的準確性。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
@@ -147,7 +146,7 @@ curl --request POST \​
 <pre><code translate="no" class="language-python">res = client.search(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     data=[query_vector],​
-    <span class="hljs-built_in">limit</span>=3,​
+    limit=<span class="hljs-number">3</span>,​
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}，​
     <span class="hljs-comment"># highlight-start​</span>
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​

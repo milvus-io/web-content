@@ -348,12 +348,6 @@
             "children": []
           },
           {
-            "label": "Buat Koleksi Secara Instan",
-            "id": "create-collection-instantly.md",
-            "order": 2,
-            "children": []
-          },
-          {
             "label": "Lihat Koleksi",
             "id": "view-collections.md",
             "order": 3,

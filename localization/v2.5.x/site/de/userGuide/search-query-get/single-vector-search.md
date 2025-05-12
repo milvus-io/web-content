@@ -2,13 +2,12 @@
 id: single-vector-search.md
 title: Einfache Vektorsuche
 summary: >-
-  Auf der Grundlage einer Indexdatei, in der die sortierte Reihenfolge der
-  Vektoreinbettungen aufgezeichnet ist, findet die ANN-Suche (Approximate
-  Nearest Neighbor) eine Untergruppe von Vektoreinbettungen auf der Grundlage
-  des Abfragevektors in einer empfangenen Suchanfrage, vergleicht den
-  Abfragevektor mit denen in der Untergruppe und liefert die ähnlichsten
-  Ergebnisse. Mit der ANN-Suche bietet Milvus ein effizientes Sucherlebnis. Auf
-  dieser Seite erfahren Sie, wie Sie grundlegende ANN-Suchen durchführen können.
+  Based on an index file recording the sorted order of vector embeddings, the
+  Approximate Nearest Neighbor (ANN) search locates a subset of vector
+  embeddings based on the query vector carried in a received search request,
+  compares the query vector with those in the subgroup, and returns the most
+  similar results. With ANN search, Milvus provides an efficient search
+  experience. This page helps you to learn how to conduct basic ANN searches.
 ---
 <h1 id="Basic-Vector-Search" class="common-anchor-header">Einfache Vektorsuche<button data-href="#Basic-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,7 +71,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Bei der ANN-Suche bezieht sich eine Ein-Vektor-Suche auf eine Suche, die nur einen Abfragevektor umfasst. Basierend auf dem vorgefertigten Index und dem metrischen Typ, der in der Suchanfrage enthalten ist, findet Milvus die Top-K Vektoren, die dem Abfragevektor am ähnlichsten sind.</p>
-<p>In diesem Abschnitt erfahren Sie, wie Sie eine Ein-Vektor-Suche durchführen können. Das Code-Snippet geht davon aus, dass Sie eine Sammlung in einer <a href="/docs/de/create-collection-instantly.md#Quick-Setup">Quick-Setup-Art</a> erstellt haben. Die Suchanfrage enthält einen einzigen Abfragevektor und bittet Milvus, das Innere Produkt (IP) zu verwenden, um die Ähnlichkeit zwischen den Abfragevektoren und den Vektoren in der Sammlung zu berechnen und die drei ähnlichsten zurückzugeben.</p>
+<p>In diesem Abschnitt erfahren Sie, wie Sie eine Ein-Vektor-Suche durchführen können. Die Suchanfrage enthält einen einzigen Abfragevektor und bittet Milvus, das Innere Produkt (IP) zu verwenden, um die Ähnlichkeit zwischen den Abfragevektoren und den Vektoren in der Sammlung zu berechnen und die drei ähnlichsten Vektoren zurückzugeben.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -271,7 +270,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
-     <td><p>Ein größerer Wert weist auf eine höhere Ähnlichkeit hin.</p></td>
+     <td><p>Ein größerer Wert deutet auf eine höhere Ähnlichkeit hin.</p></td>
      <td><p>[-1, 1]</p></td>
    </tr>
    <tr>

@@ -35,7 +35,6 @@ title: Konsistenz
         ></path>
       </svg>
     </button></h2><p>Milvus ist ein System, das Speicherung und Berechnung voneinander trennt. In diesem System sind <strong>DataNodes</strong> für die Persistenz der Daten verantwortlich und speichern sie schließlich in einem verteilten Objektspeicher wie MinIO/S3. <strong>QueryNodes</strong> übernehmen Berechnungsaufgaben wie die Suche. Diese Aufgaben umfassen sowohl die Verarbeitung von <strong>Stapeldaten</strong> als auch von <strong>Streaming-Daten</strong>. Einfach ausgedrückt, kann man unter Stapeldaten Daten verstehen, die bereits im Objektspeicher gespeichert wurden, während sich Streaming-Daten auf Daten beziehen, die noch nicht im Objektspeicher gespeichert wurden. Aufgrund der Netzwerklatenz verfügen die QueryNodes oft nicht über die aktuellsten Streaming-Daten. Ohne zusätzliche Sicherheitsvorkehrungen kann die direkte Durchführung einer Suche auf Streaming-Daten zum Verlust vieler unbestätigter Datenpunkte führen, was die Genauigkeit der Suchergebnisse beeinträchtigt.</p>
-<p>Milvus ist ein System, das Speicherung und Berechnung voneinander trennt. In diesem System sind die DataNodes für die Persistenz der Daten verantwortlich und speichern sie schließlich in einem verteilten Objektspeicher wie MinIO/S3. QueryNodes übernehmen Berechnungsaufgaben wie die Suche. Diese Aufgaben umfassen sowohl die Verarbeitung von Stapeldaten als auch von Streaming-Daten. Einfach ausgedrückt, kann man unter Stapeldaten Daten verstehen, die bereits im Objektspeicher gespeichert wurden, während sich Streaming-Daten auf Daten beziehen, die noch nicht im Objektspeicher gespeichert wurden. Aufgrund der Netzwerklatenz verfügen die QueryNodes oft nicht über die aktuellsten Streaming-Daten. Ohne zusätzliche Sicherheitsvorkehrungen kann die direkte Durchführung einer Suche in Streaming-Daten zum Verlust vieler unbestätigter Datenpunkte führen, was die Genauigkeit der Suchergebnisse beeinträchtigt.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
@@ -147,7 +146,7 @@ curl --request POST \​
 <pre><code translate="no" class="language-python">res = client.search(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     data=[query_vector],​
-    <span class="hljs-built_in">limit</span>=3,​
+    limit=<span class="hljs-number">3</span>,​
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}，​
     <span class="hljs-comment"># highlight-start​</span>
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​

@@ -67,7 +67,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In questa sezione, si effettuerà l'upsert delle Entità in una Raccolta creata <a href="/docs/it/create-collection-instantly.md#Quick-Setup">in modo rapido</a>. Una Collection creata in questo modo ha solo due campi, denominati <strong>id</strong> e <strong>vector</strong>. Inoltre, questa Collection ha il campo dinamico abilitato, quindi le Entità nel codice di esempio includono un campo chiamato <strong>colore</strong>, non definito nello Schema.</p>
+    </button></h2><p>In questa sezione, si effettuerà l'upsert delle Entità in una Raccolta creata in modo rapido. Una Collection creata in questo modo ha solo due campi, denominati <strong>id</strong> e <strong>vector</strong>. Inoltre, questa Collection ha il campo dinamico abilitato, quindi le Entità nel codice di esempio includono un campo chiamato <strong>colore</strong>, non definito nello Schema.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

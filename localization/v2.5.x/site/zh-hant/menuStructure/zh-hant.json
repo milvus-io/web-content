@@ -348,12 +348,6 @@
             "children": []
           },
           {
-            "label": "立即建立收藏集",
-            "id": "create-collection-instantly.md",
-            "order": 2,
-            "children": []
-          },
-          {
             "label": "檢視館藏",
             "id": "view-collections.md",
             "order": 3,

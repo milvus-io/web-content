@@ -122,10 +122,10 @@ model.<span class="hljs-built_in">eval</span>()
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Data-Ingestion" class="common-anchor-header">数据输入</h3><p>要实现语义图像搜索，我们首先需要为所有图像生成 Embeddings，并将其存储到向量数据库中，以便进行高效索引和检索。本节将逐步介绍如何将图像数据导入 Milvus。</p>
 <p><strong>1.创建 Milvus Collections</strong></p>
-<p>在存储图像 Embeddings 之前，需要创建一个 Milvus Collections。下面的代码演示了如何使用<a href="https://milvus.io/docs/create-collection-instantly.md">快速启动模式</a>和默认的 COSINE 度量类型创建一个 Collection。Collections 包括以下字段：</p>
+<p>在存储图像 Embeddings 之前，需要创建一个 Milvus Collections。下面的代码演示了如何以默认的 COSINE 度量类型在快速设置模式下创建一个 Collection。Collections 包括以下字段：</p>
 <ul>
 <li><p><code translate="no">id</code>:启用自动 ID 的主字段。</p></li>
-<li><p><code translate="no">vector</code>:一个用于存储浮点向量 Embeddings 的字段。</p></li>
+<li><p><code translate="no">vector</code>:用于存储浮点向量 Embeddings 的字段。</p></li>
 </ul>
 <p>如果需要自定义 Schema，详细说明请参阅<a href="https://milvus.io/docs/create-collection.md">Milvus 文档</a>。</p>
 <pre><code translate="no" class="language-python">collection_name = <span class="hljs-string">&quot;image_collection&quot;</span>

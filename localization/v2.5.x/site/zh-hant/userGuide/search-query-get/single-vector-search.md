@@ -68,7 +68,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>在 ANN 搜尋中，單向量搜尋指的是只涉及一個查詢向量的搜尋。根據預先建立的索引和搜尋請求所帶的度量類型，Milvus 會找出與查詢向量最相似的前 K 個向量。</p>
-<p>在本節中，您將學習如何進行單一向量搜尋。程式碼片段假設您已經以<a href="/docs/zh-hant/create-collection-instantly.md#Quick-Setup">快速設定的</a>方式建立了一個集合。搜尋請求帶有單一的查詢向量，並要求 Milvus 使用 Inner Product (IP) 來計算查詢向量與集合中向量的相似度，並傳回三個最相似的向量。</p>
+<p>在本節中，您將學習如何進行單一向量搜尋。搜尋請求會攜帶一個單一的查詢向量，並要求 Milvus 使用 Inner Product (IP) 來計算查詢向量與集合中向量的相似度，並傳回三個最相似的向量。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

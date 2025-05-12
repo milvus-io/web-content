@@ -1,11 +1,11 @@
 ---
 id: upsert-entities.md
-title: 更新实体
+title: Upsert 实体
 summary: >-
   Upsert 操作结合了更新和插入数据的操作。Milvus 通过检查主键是否存在来决定执行更新还是插入操作。本节将介绍如何 Upsert
   实体，以及在不同情况下 Upsert 操作的具体行为。
 ---
-<h1 id="Upsert-Entities" class="common-anchor-header">更新实体<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
+<h1 id="Upsert-Entities" class="common-anchor-header">Upsert 实体<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -64,7 +64,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本节将把实体上载到<a href="/docs/zh/create-collection-instantly.md#Quick-Setup">以快速设置方式</a>创建的 Collections 中。以这种方式创建的 Collection 只有两个字段，即<strong>id</strong>和<strong>向量</strong>。此外，该 Collections 启用了动态字段，因此示例代码中的实体包含一个名为<strong>color</strong>的字段，该字段在 Schema 中未定义。</p>
+    </button></h2><p>本节将把实体上载到以快速设置方式创建的 Collections 中。以这种方式创建的 Collection 只有两个字段，即<strong>id</strong>和<strong>向量</strong>。此外，该 Collections 启用了动态字段，因此示例代码中的实体包含一个名为<strong>color</strong>的字段，该字段在 Schema 中未定义。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

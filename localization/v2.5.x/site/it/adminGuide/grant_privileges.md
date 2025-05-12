@@ -39,44 +39,76 @@ summary: >-
     </button></h2><p>Milvus 2.5 introduce una nuova versione dell'API che semplifica l'operazione di assegnazione. Non è più necessario cercare il tipo di oggetto quando si concede un privilegio a un ruolo. Di seguito sono riportati i parametri e le relative spiegazioni.</p>
 <ul>
 <li><p><strong>nome_ruolo:</strong> il nome del ruolo di destinazione a cui devono essere concessi i privilegi o i gruppi di privilegi.</p></li>
-<li><p><strong>Risorsa</strong>: La risorsa di destinazione di un privilegio, che può essere un'istanza specifica, un database o una raccolta. La tabella seguente spiega come specificare la risorsa nel metodo <code translate="no">client.grantV2()</code>.</p>
-<p><table>
-<tr>
-<th><p><strong>Livello</strong></p></th>
-<th><p><strong>Risorsa</strong></p></th>
-<th><p><strong>Metodo di concessione</strong></p></th>
-<th><p><strong>Note</strong></p></th>
-</tr>
-<tr>
-<td rowspan="2"><p><strong>Collezione</strong></p></td>
-<td><p>Una raccolta specifica</p></td>
-<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</code></p></td>
-<td><p>Immettere il nome della raccolta di destinazione e il nome del database a cui appartiene la raccolta di destinazione.</p></td>
-</tr>
-<tr>
-<td><p>Tutte le raccolte sotto un database specifico</p></td>
-<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="*", db_name="db1")</code></p></td>
-<td><p>Immettere il nome del database di destinazione e un carattere jolly <code translate="no">*</code> come nome della raccolta.</p></td>
-</tr>
-<tr>
-<td><p><strong>Database</strong></p></td>
-<td><p>Un database specifico</p></td>
-<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="db1")</code></p></td>
-<td><p>Immettere il nome del database di destinazione e il carattere jolly <code translate="no">*</code> come nome della raccolta.</p></td>
-</tr>
-<tr>
-<td></td>
-<td><p>Tutti i database dell'istanza corrente</p></td>
-<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="*", db_name="*")</code></p></td>
-<td><p>Immettere <code translate="no">*</code> come nome del database e <code translate="no">*</code> come nome dell'insieme.</p></td>
-</tr>
-<tr>
-<td><p><strong>Istanza</strong></p></td>
-<td><p>L'istanza corrente</p></td>
-<td><p><code translate="no">client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="*", db_name="*")</code></p></td>
-<td><p>Immettere <code translate="no">*</code> come nome del database e <code translate="no">*</code> come nome dell'insieme.</p></td>
-</tr>
-</table></p></li>
+<li><p><strong>Risorsa</strong>: La risorsa di destinazione di un privilegio, che può essere un'istanza specifica, un database o una raccolta.</p></li>
+</ul>
+<p>La tabella seguente spiega come specificare la risorsa nel metodo <code translate="no">client.grantV2()</code>.</p>
+<table>
+   <tr>
+     <th><p><strong>Livello</strong></p></th>
+     <th><p><strong>Risorsa</strong></p></th>
+     <th><p><strong>Metodo di concessione</strong></p></th>
+     <th><p><strong>Note</strong></p></th>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Collezione</strong></p></td>
+     <td><p>Una raccolta specifica</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="col1", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Immettere il nome della raccolta di destinazione e il nome del database a cui appartiene la raccolta di destinazione.</p></td>
+   </tr>
+   <tr>
+     <td><p>Tutte le raccolte sotto un database specifico</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Immettere il nome del database di destinazione e un carattere jolly <code translate="no">*</code> come nome della raccolta.</p></td>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Database</strong></p></td>
+     <td><p>Un database specifico</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Immettere il nome del database di destinazione e il carattere jolly <code translate="no">*</code> come nome della raccolta.</p></td>
+   </tr>
+   <tr>
+     <td><p>Tutti i database dell'istanza corrente</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Immettere <code translate="no">*</code> come nome del database e <code translate="no">*</code> come nome dell'insieme.</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Istanza</strong></p></td>
+     <td><p>L'istanza corrente</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="ClusterAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Immettere <code translate="no">*</code> come nome del database e <code translate="no">*</code> come nome dell'insieme.</p></td>
+   </tr>
+</table>
+<ul>
 <li><p><strong>Privilegio</strong>: Il privilegio specifico o il <a href="/docs/it/privilege_group.md">gruppo di privilegi</a> da concedere a un ruolo. Attualmente, Milvus offre 56 tipi di privilegi che possono essere concessi. La tabella seguente elenca i privilegi di Milvus.</p>
 <p><div class="alert note"></p>
 <p>La colonna del tipo nella tabella sottostante è utilizzata per facilitare la ricerca rapida dei privilegi ed è usata solo a scopo di classificazione. Quando si concedono privilegi, non è necessario comprendere i tipi. È sufficiente inserire i privilegi corrispondenti.</p>
@@ -336,7 +368,7 @@ summary: >-
 <td><p><a href="/docs/it/users_and_roles.md">AggiornaCredenziale</a></p></td>
 </tr>
 <tr>
-<td><p>AbbandonaProprietà</p></td>
+<td><p>Eliminare la proprietà</p></td>
 <td><p>Elimina la password di un utente o di un ruolo</p></td>
 <td><p><a href="/docs/it/drop_users_roles.md">EliminaCredenziale/AbbandonaRuolo</a></p></td>
 </tr>

@@ -66,7 +66,7 @@ summary: >-
 <p>Вы можете установить значения по умолчанию для любого скалярного поля и сделать его нулевым. Подробнее см. в разделе <a href="/docs/ru/nullable-and-default.md">Nullable &amp; Default</a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a></div>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -406,8 +406,8 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Вы также можете создать коллекцию без параметров индекса и добавить их впоследствии. В этом случае Milvus не загружает коллекцию при ее создании. .</p>
-<p>Следующий фрагмент кода демонстрирует, как создать коллекцию без коллекции, при этом статус загрузки коллекции при создании остается незагруженным.</p>
+<p>Вы также можете создать коллекцию без индексных параметров и добавить их впоследствии. В этом случае Milvus не загружает коллекцию при ее создании. .</p>
+<p>Следующий фрагмент кода демонстрирует, как создать коллекцию без индекса, при этом статус загрузки коллекции при создании остается незагруженным.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
@@ -504,7 +504,6 @@ curl --request POST \
     \&quot;collectionName\&quot;: \&quot;customized_setup_2\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus также предоставляет возможность мгновенного создания коллекции. Подробнее см. в разделе <a href="/docs/ru/create-collection-instantly.md">"Мгновенное создание коллекции"</a>.</p>
 <h2 id="Set-Collection-Properties" class="common-anchor-header">Установка свойств коллекции<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
