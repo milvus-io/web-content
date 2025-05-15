@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Die Upsert-Operation kombiniert die Aktionen des Aktualisierens und Einfügens von Daten. Milvus bestimmt, ob eine Aktualisierung oder eine Einfügeoperation durchgeführt werden soll, indem es prüft, ob der Primärschlüssel existiert. In diesem Abschnitt wird erläutert, wie eine Entität eingefügt werden kann und wie sich die Upsert-Operation in verschiedenen Szenarien verhält.</p>
+    </button></h1><p>Die Upsert-Operation kombiniert die Aktionen des Aktualisierens und Einfügens von Daten. Milvus entscheidet, ob eine Aktualisierung oder eine Einfügung durchgeführt werden soll, indem es prüft, ob der Primärschlüssel existiert. In diesem Abschnitt wird erläutert, wie eine Entität eingefügt werden kann und wie sich die Upsert-Operation in verschiedenen Szenarien verhält.</p>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,7 +67,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In diesem Abschnitt werden Sie Entitäten in eine Sammlung einfügen, die <a href="/docs/de/create-collection-instantly.md#Quick-Setup">mit der Schnelleinrichtung</a> erstellt wurde. Eine auf diese Weise erstellte Sammlung hat nur zwei Felder, nämlich <strong>id</strong> und <strong>vector</strong>. Außerdem ist in dieser Collection das dynamische Feld aktiviert, so dass die Entities im Beispielcode ein Feld namens <strong>color</strong> enthalten, das nicht im Schema definiert ist.</p>
+    </button></h2><p>In diesem Abschnitt werden Sie Entitäten in eine Sammlung einfügen, die mit der Schnelleinrichtung erstellt wurde. Eine auf diese Weise erstellte Sammlung hat nur zwei Felder, <strong>id</strong> und <strong>vector</strong>. Außerdem ist in dieser Collection das dynamische Feld aktiviert, so dass die Entities im Beispielcode ein Feld namens <strong>color</strong> enthalten, das nicht im Schema definiert ist.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

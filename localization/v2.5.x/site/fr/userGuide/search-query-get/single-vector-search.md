@@ -73,7 +73,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Dans les recherches ANN, une recherche à vecteur unique fait référence à une recherche impliquant un seul vecteur d'interrogation. En fonction de l'index préconstruit et du type de métrique indiqué dans la requête de recherche, Milvus trouve les K vecteurs les plus similaires au vecteur de la requête.</p>
-<p>Dans cette section, vous apprendrez à effectuer une recherche sur un seul vecteur. L'extrait de code suppose que vous avez créé une collection de manière <a href="/docs/fr/create-collection-instantly.md#Quick-Setup">rapide</a>. La requête de recherche comporte un seul vecteur d'interrogation et demande à Milvus d'utiliser le produit intérieur (PI) pour calculer la similarité entre les vecteurs d'interrogation et les vecteurs de la collection et renvoie les trois vecteurs les plus similaires.</p>
+<p>Dans cette section, vous apprendrez à effectuer une recherche sur un seul vecteur. La requête de recherche contient un seul vecteur d'interrogation et demande à Milvus d'utiliser le produit intérieur (PI) pour calculer la similarité entre les vecteurs d'interrogation et les vecteurs de la collection et renvoie les trois vecteurs les plus similaires.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -979,7 +979,7 @@ curl --request POST \
 <p>Pour en savoir plus sur le filtrage des métadonnées et les conditions de filtrage, voir <a href="/docs/fr/filtered-search.md">Recherche filtrée</a> et <a href="/docs/fr/filtering">Filtrage</a>.</p></li>
 <li><p>Recherche par plage</p>
 <p>Vous pouvez améliorer la pertinence des résultats de la recherche en limitant la distance ou le score des entités renvoyées à une plage spécifique. Dans Milvus, une recherche par plage consiste à dessiner deux cercles concentriques dont le centre est l'intégration vectorielle la plus similaire au vecteur de la requête. La requête de recherche spécifie le rayon des deux cercles et Milvus renvoie tous les enregistrements vectoriels qui se trouvent dans le cercle extérieur mais pas dans le cercle intérieur.</p>
-<p>Pour plus d'informations sur la recherche par plage, reportez-vous à la section <a href="/docs/fr/range-search.md">Recherche par plage</a>.</p></li>
+<p>Pour en savoir plus sur la recherche par plage, reportez-vous à la section <a href="/docs/fr/range-search.md">Recherche par plage</a>.</p></li>
 <li><p>Recherche de regroupement</p>
 <p>Si les entités renvoyées ont la même valeur dans un champ spécifique, les résultats de la recherche peuvent ne pas représenter la distribution de tous les ancrages vectoriels dans l'espace vectoriel. Pour diversifier les résultats de la recherche, envisagez d'utiliser la recherche par regroupement.</p>
 <p>Pour en savoir plus sur la recherche par regroupement, reportez-vous à la section <a href="/docs/fr/grouping-search.md">Recherche par regroupement</a>,</p></li>
@@ -999,7 +999,7 @@ curl --request POST \
 <p>L'implication de plusieurs champs scalaires dans le filtrage des métadonnées et l'utilisation d'une condition de filtrage assez compliquée peuvent affecter l'efficacité de la recherche. Une fois que vous avez défini un champ scalaire comme clé de partition et que vous utilisez une condition de filtrage impliquant la clé de partition dans la requête de recherche, cela peut aider à restreindre l'étendue de la recherche dans les partitions correspondant aux valeurs de clé de partition spécifiées.</p>
 <p>Pour plus d'informations sur la clé de partition, reportez-vous à la section <a href="/docs/fr/use-partition-key.md">Utiliser la clé de partition</a>.</p></li>
 <li><p>Utiliser mmap</p>
-<p>Pour plus d'informations sur les paramètres mmap, voir <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p></li>
+<p>Pour plus d'informations sur les paramètres de mmap, voir la section <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p></li>
 <li><p>Compaction de la mise en grappe</p>
 <p>Pour plus d'informations sur les compactions de mise en cluster, voir <a href="/docs/fr/clustering-compaction.md">Compaction de mise en cluster</a>.</p></li>
 </ul>

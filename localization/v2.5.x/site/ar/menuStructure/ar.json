@@ -348,12 +348,6 @@
             "children": []
           },
           {
-            "label": "إنشاء المجموعة على الفور",
-            "id": "create-collection-instantly.md",
-            "order": 2,
-            "children": []
-          },
-          {
             "label": "عرض المجموعات",
             "id": "view-collections.md",
             "order": 3,

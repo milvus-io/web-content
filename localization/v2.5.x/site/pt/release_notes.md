@@ -45,8 +45,8 @@ title: Notas de lançamento
 <p>Temos o prazer de anunciar o lançamento do Milvus 2.5.11! Esta versão introduz novas e poderosas funcionalidades como a capacidade de multi-analisador e suporte alargado a tokenizadores (Jieba, Lindera, ICU, Language Identifier). Também fizemos várias melhorias, incluindo atualizações dinâmicas do pool de threads de carregamento de segmentos e filtragem de exclusão otimizada durante as importações de binlogs. As principais correções de erros abordam possíveis problemas de queda de segmento, falhas de pesquisa BM25 e erros de filtragem de estatísticas JSON.</p>
 <p>Recomendamos que atualize para a versão 2.5.11 para aproveitar essas melhorias e correções!</p>
 <h3 id="Features" class="common-anchor-header">Recursos</h3><ul>
-<li>Adicionada a capacidade de configurar vários analisadores (tokenizadores) e selecionar o apropriado com base na instrução dos dados de entrada<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
-<li>Aprimorada a funcionalidade do analisador BM25<a href="https://github.com/milvus-io/milvus/pull/41456">(#41456</a>).<ul>
+<li>Adicionada a capacidade de configurar vários analisadores (tokenizadores) para suporte a vários idiomas e selecionar o apropriado com base na instrução dos dados de entrada<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
+<li>Melhoria da funcionalidade do analisador BM25<a href="https://github.com/milvus-io/milvus/pull/41456">(#41456</a>).<ul>
 <li>Introduziu uma API <code translate="no">run_analyzer</code> para execuções secas para ajudar a analisar os resultados da tokenização. Para obter mais informações, consulte <a href="/docs/pt/analyzer-overview.md">Visão geral do analisador</a>.</li>
 <li>Tokenizadores<ul>
 <li>Adicionado suporte para personalizar os parâmetros do tokenizador Jieba.</li>
@@ -70,12 +70,12 @@ title: Notas de lançamento
 <li>Adicionados parâmetros de monitorização para o rácio do filtro de expressão<a href="https://github.com/milvus-io/milvus/pull/41403">(#41403</a>).</li>
 <li>Adicionada uma opção de configuração para forçar a reconstrução de índices para a versão mais recente<a href="https://github.com/milvus-io/milvus/pull/41432">(#41432</a>).</li>
 <li>Melhorada a mensagem de registo de erros para a política de lista<a href="https://github.com/milvus-io/milvus/pull/41368">(#41368</a>).</li>
-<li>Manuseamento adaptado para hífenes em cabeçalhos de metadados gRPC<a href="https://github.com/milvus-io/milvus/pull/41372">(#41372</a>).</li>
-<li>Atualizada a versão do Go para 1.21.4 para tratar de CVEs<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).<em>(Nota: O texto original mencionava "2.14", erro de digitação assumido corrigido para uma versão plausível e recente 1.21.4</em>).</li>
+<li>Manuseamento adaptado para hífenes nos cabeçalhos de metadados gRPC<a href="https://github.com/milvus-io/milvus/pull/41372">(#41372</a>).</li>
+<li>Atualização da versão Go para 1.24.1 para resolver CVEs<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Correcções de erros</h3><ul>
-<li>Corrigido um problema em que os segmentos podiam não ser corretamente eliminados quando se eliminava uma partição<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>).</li>
-<li>Corrigida a inserção em massa para usar a lista de campos de entrada do executor da função em vez da lista de campos do esquema<a href="https://github.com/milvus-io/milvus/pull/41561">(#41561</a>).</li>
+<h3 id="Bug-fixes" class="common-anchor-header">Correções de erros</h3><ul>
+<li>Corrigido um problema em que os segmentos poderiam não ser descartados corretamente ao descartar uma partição<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>).</li>
+<li>Corrigida a inserção em massa para utilizar a lista de campos de entrada do executor da função em vez da lista de campos do esquema<a href="https://github.com/milvus-io/milvus/pull/41561">(#41561</a>).</li>
 <li>Corrigidas as falhas de pesquisa BM25 que ocorriam quando <code translate="no">avgdl</code> (comprimento médio do documento) era NaN<a href="https://github.com/milvus-io/milvus/pull/41503">(#41503</a>).</li>
 <li>Correção de etiquetas imprecisas nas métricas QueryNode<a href="https://github.com/milvus-io/milvus/pull/41422">(#41422</a>).</li>
 <li>Foi corrigido um problema em que a criação do índice de estatísticas JSON podia falhar se os dados contivessem um mapa vazio<a href="https://github.com/milvus-io/milvus/pull/41506">(#41506</a>).</li>
@@ -713,7 +713,7 @@ title: Notas de lançamento
 </ul>
 <h4 id="Iterator-Enhancements" class="common-anchor-header">Aprimoramentos do iterador</h4><ul>
 <li><strong>Suporte a MVCC</strong>: Os utilizadores podem agora utilizar iteradores sem serem afectados por alterações de dados subsequentes, como inserções e eliminações, graças ao Controlo de Concorrência Multi-Versão (MVCC).</li>
-<li><strong>Cursor Persistente</strong>: O Milvus suporta agora um cursor persistente para o QueryIterator, permitindo aos utilizadores retomar a iteração a partir da última posição após um reinício do Milvus sem necessidade de reiniciar todo o processo de iteração.</li>
+<li><strong>Cursor Persistente</strong>: O Milvus agora suporta um cursor persistente para o QueryIterator, permitindo que os utilizadores retomem a iteração a partir da última posição após um reinício do Milvus sem necessidade de reiniciar todo o processo de iteração.</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">Melhorias</h3><h4 id="Deletion-Optimization" class="common-anchor-header">Otimização da eliminação</h4><p>Melhoria da velocidade e redução da utilização de memória para eliminações em grande escala, optimizando a utilização de bloqueios e a gestão de memória.</p>
 <h4 id="Dependencies-Upgrade" class="common-anchor-header">Atualização de dependências</h4><p>Atualizada para ETCD 3.5.16 e Pulsar 3.0.7 LTS, corrigindo CVEs existentes e melhorando a segurança. Nota: A atualização para o Pulsar 3.x não é compatível com as versões anteriores 2.x.</p>

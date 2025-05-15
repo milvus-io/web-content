@@ -56,7 +56,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Sebelum memasukkan data, Anda perlu mengatur data Anda ke dalam daftar kamus sesuai dengan Skema, dengan setiap kamus mewakili Entitas dan berisi semua bidang yang didefinisikan dalam Skema. Jika Koleksi memiliki field dinamis yang diaktifkan, setiap kamus juga dapat menyertakan field yang tidak didefinisikan dalam Skema.</p>
-<p>Pada bagian ini, Anda akan memasukkan Entitas ke dalam Koleksi yang dibuat <a href="/docs/id/create-collection-instantly.md#Quick-Setup">dengan cara penyiapan cepat</a>. Koleksi yang dibuat dengan cara ini hanya memiliki dua field, yaitu <strong>id</strong> dan <strong>vektor</strong>. Selain itu, Koleksi ini memiliki field dinamis yang diaktifkan, sehingga Entitas dalam kode contoh menyertakan field bernama <strong>color</strong> yang tidak didefinisikan dalam Skema.</p>
+<p>Pada bagian ini, Anda akan memasukkan Entitas ke dalam Koleksi yang dibuat dengan cara penyiapan cepat. Koleksi yang dibuat dengan cara ini hanya memiliki dua field, yaitu <strong>id</strong> dan <strong>vektor</strong>. Selain itu, Koleksi ini memiliki field dinamis yang diaktifkan, sehingga Entitas dalam kode contoh menyertakan field bernama <strong>color</strong> yang tidak didefinisikan dalam Skema.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

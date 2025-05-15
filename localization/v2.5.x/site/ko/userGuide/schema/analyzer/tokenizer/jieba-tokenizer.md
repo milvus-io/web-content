@@ -119,12 +119,12 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>어휘를 정의하는 데 사용되는 사전 목록입니다. 자체 사전 단어를 제공하거나 <code translate="no">"_default_"</code> 을 사용하여 기본 사전과 결합할 수 있습니다. 예를 들어 <code translate="no">["_default_", "结巴分词器"]</code>. 기본 사전에 대한 자세한 내용은 <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">딕셔너리를</a> 참조하세요.</p></td>
+     <td><p>분석기가 어휘 소스로 로드할 사전 목록입니다. 기본 제공 옵션:</p><ul><li><p><code translate="no">"_default_"</code>: 엔진에 내장된 중국어 간체 사전을 로드합니다. 자세한 내용은 <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt를</a> 참조하세요.</p></li><li><p><code translate="no">"_extend_default_"</code>: <code translate="no">"_default_"</code> 의 모든 항목과 추가 중국어 번체 보충 자료를 로드합니다. 자세한 내용은 <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big을</a> 참조하세요.</p><p>기본 제공 사전과 사용자 지정 사전을 얼마든지 혼합할 수도 있습니다. 예: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mode</code></p></td>
-     <td><p>세분화 모드. 사용 가능한 값</p><ul><li><p><code translate="no">"exact"</code>: 가장 정확한 방식으로 문장을 분할하려고 시도하므로 텍스트 분석에 이상적입니다.</p></li><li><p><code translate="no">"search"</code>: 정확한 모드를 기반으로 긴 단어를 더 세분화하여 기억력을 향상시켜 검색 엔진 토큰화에 적합합니다.</p><p>자세한 내용은 <a href="https://github.com/fxsjy/jieba">Jieba 깃허브 프로젝트를</a> 참조하세요.</p></li></ul></td>
+     <td><p>세분화 모드. 사용 가능한 값</p><ul><li><p><code translate="no">"exact"</code>: 가장 정확한 방식으로 문장을 세분화하여 텍스트 분석에 이상적입니다.</p></li><li><p><code translate="no">"search"</code>: 정확한 모드를 기반으로 긴 단어를 더 세분화하여 기억력을 향상시켜 검색 엔진 토큰화에 적합합니다.</p><p>자세한 내용은 <a href="https://github.com/fxsjy/jieba">Jieba 깃허브 프로젝트를</a> 참조하세요.</p></li></ul></td>
      <td><p><code translate="no">"search"</code></p></td>
    </tr>
    <tr>

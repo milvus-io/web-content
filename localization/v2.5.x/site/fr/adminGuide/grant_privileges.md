@@ -39,55 +39,87 @@ summary: >-
       </svg>
     </button></h2><p>Milvus 2.5 introduit une nouvelle version de l'API qui rationalise l'opération d'octroi. Il n'est plus nécessaire de rechercher le type d'objet lors de l'octroi d'un privilège à un rôle. Voici les paramètres et les explications correspondantes.</p>
 <ul>
-<li><p><strong>role_name :</strong> Le nom du rôle cible auquel le(s) privilège(s) ou le(s) groupe(s) de privilèges doit/doivent être accordé(s).</p></li>
-<li><p><strong>Ressource</strong>: La ressource cible d'un privilège, qui peut être une instance, une base de données ou une collection spécifique. Le tableau suivant explique comment spécifier la ressource dans la méthode <code translate="no">client.grantV2()</code>.</p>
-<p><table>
-<tr>
-<th><p><strong>Niveau</strong></p></th>
-<th><p><strong>Ressource</strong></p></th>
-<th><p><strong>Méthode d'octroi</strong></p></th>
-<th><p><strong>Notes</strong></p></th>
-</tr>
-<tr>
-<td rowspan="2"><p><strong>Collection</strong></p></td>
-<td><p>Une collection spécifique</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</p></td>
-<td><p>Saisissez le nom de votre collection cible et le nom de la base de données à laquelle la collection cible appartient.</p></td>
-</tr>
-<tr>
-<td><p>Toutes les collections d'une base de données spécifique</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>Saisissez le nom de votre base de données cible et un caractère générique <code translate="no"></em></code> comme nom de collection.</p></td>
-</tr>
-<tr>
-<td><p><strong>Base de données</strong></p></td>
-<td><p>Une base de données spécifique</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>Saisissez le nom de votre base de données cible et un caractère générique <code translate="no"></em></code> comme nom de collection.</p></td>
-</tr>
-<tr>
-<td></td>
-<td><p>Toutes les bases de données de l'instance actuelle</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name=</em>"")</p></td>
-<td><p>Entrer <code translate="no"><em></code> comme nom de la base de données et <code translate="no"></em></code> comme nom de la collection.</p></td>
-</tr>
-<tr>
-<td><p><strong>Instance</strong></p></td>
-<td><p>L'instance actuelle</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name=""<em>, db_name="</em>")</p></td>
-<td><p>Entrer <code translate="no"><em></code> comme nom de la base de données et <code translate="no"></em></code> comme nom de la collection.</p></td>
-</tr>
-</table></p></li>
+<li><p><strong>role_name :</strong> Le nom du rôle cible auquel le(s) privilège(s) ou le(s) groupe(s) de privilèges doit(vent) être accordé(s).</p></li>
+<li><p><strong>Ressource</strong>: La ressource cible d'un privilège, qui peut être une instance, une base de données ou une collection spécifique.</p></li>
+</ul>
+<p>Le tableau suivant explique comment spécifier la ressource dans la méthode <code translate="no">client.grantV2()</code>.</p>
+<table>
+   <tr>
+     <th><p><strong>Niveau</strong></p></th>
+     <th><p><strong>Ressource</strong></p></th>
+     <th><p><strong>Méthode d'octroi</strong></p></th>
+     <th><p><strong>Notes</strong></p></th>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Collection</strong></p></td>
+     <td><p>Une collection spécifique</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="col1", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Saisissez le nom de votre collection cible et le nom de la base de données à laquelle la collection cible appartient.</p></td>
+   </tr>
+   <tr>
+     <td><p>Toutes les collections d'une base de données spécifique</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Saisissez le nom de votre base de données cible et un caractère générique <code translate="no">*</code> comme nom de collection.</p></td>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Base de données</strong></p></td>
+     <td><p>Une base de données spécifique</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Saisissez le nom de votre base de données cible et un joker <code translate="no">*</code> comme nom de collection.</p></td>
+   </tr>
+   <tr>
+     <td><p>Toutes les bases de données de l'instance actuelle</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Saisissez <code translate="no">*</code> comme nom de base de données et <code translate="no">*</code> comme nom de collection.</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Instance</strong></p></td>
+     <td><p>L'instance actuelle</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="ClusterAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Saisissez <code translate="no">*</code> comme nom de base de données et <code translate="no">*</code> comme nom de collection.</p></td>
+   </tr>
+</table>
+<ul>
 <li><p><strong>Privilège</strong>: Le privilège spécifique ou le <a href="/docs/fr/privilege_group.md">groupe de privilèges</a> que vous devez accorder à un rôle. Actuellement, Milvus propose 56 types de privilèges que vous pouvez accorder. Le tableau ci-dessous répertorie les privilèges dans Milvus.</p>
 <p><div class="alert note"></p>
-<p>La colonne "type" du tableau ci-dessous est utilisée pour faciliter la recherche rapide des privilèges et n'est utilisée qu'à des fins de classification. Lors de l'octroi de privilèges, il n'est pas nécessaire de comprendre les types. Il vous suffit de saisir les privilèges correspondants.</p>
+<p>La colonne "type" du tableau ci-dessous est utilisée pour faciliter la recherche rapide des privilèges et n'est utilisée qu'à des fins de classification. Lors de l'octroi de privilèges, il n'est pas nécessaire de comprendre les types. Il suffit de saisir les privilèges correspondants.</p>
 <p></div></p>
 <p><table>
 <tr>
 <th><p><strong>Type de privilège</strong></p></th>
 <th><p><strong>Privilège</strong></p></th>
 <th><p><strong>Description de l'API</strong></p></th>
-<th><p><strong>Description de l'API concernée du côté du client</strong></p></th>
+<th><p><strong>Description de l'API pertinente du côté client</strong></p></th>
 </tr>
 <tr>
 <td rowspan="5"><p>Privilèges relatifs aux bases de données</p></td>
@@ -276,7 +308,7 @@ summary: >-
 </tr>
 <tr>
 <td><p>TransferNode</p></td>
-<td><p>Transférer des nœuds entre des groupes de ressources</p></td>
+<td><p>Transférer des nœuds entre les groupes de ressources</p></td>
 <td><p><a href="/docs/fr/resource_group.md">TransferNode</a></p></td>
 </tr>
 <tr>

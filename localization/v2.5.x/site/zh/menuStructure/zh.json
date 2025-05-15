@@ -348,12 +348,6 @@
             "children": []
           },
           {
-            "label": "即时创建 Collections",
-            "id": "create-collection-instantly.md",
-            "order": 2,
-            "children": []
-          },
-          {
             "label": "查看 Collections",
             "id": "view-collections.md",
             "order": 3,
@@ -1528,7 +1522,7 @@
         "children": []
       },
       {
-        "label": "Milvus 后备电源",
+        "label": "Milvus 备份",
         "id": "milvus_backup",
         "order": 1,
         "children": [

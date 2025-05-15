@@ -10,6 +10,22 @@ Milvus Command-Line Interface (CLI) is a command-line tool that supports databas
 
 This topic introduces all supported commands and the corresponding options. Some examples are also included for your reference.
 
+## Command Groups
+
+Milvus CLI commands are organized into the following groups:
+
+- `create`: Create collection, database, partition, user, role, or index
+- `delete`: Delete collection, database, partition, alias, user, role, or index
+- `list`: List collections, databases, partitions, users, roles, grants, or indexes
+- `show`: Show connection, database, collection, loading_progress, or index_progress
+- `grant`: Grant role or privilege
+- `revoke`: Revoke role or privilege
+- `load`: Load collection or partition
+- `release`: Release collection or partition
+- `use`: Use database
+- `rename`: Rename collection
+- `insert`: Insert entities (file or row)
+
 ## clear
 
 Clears the screen.
@@ -39,13 +55,13 @@ connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 
 <h3 id="connect">Options</h3>
 
-| Option | Full name | Description                                                                                                                |
-| :----- | :-------- | :------------------------------------------------------------------------------------------------------------------------- |
-| -uri   | --uri     | (Optional) The uri name. The default is "http://127.0.0.1:19530".                                                          |
-| -t     | --token   | (Optional) The zilliz cloud apikey or `username:password`. The default is None.                                            |
-| -tls   | --tlsmode | (Optional) Set TLS mode: 0 (No encryption), 1 (One-way encryption), 2 (Two-way encryption not support yet). Default is 0   |
-| -cert  | --cert    | (Optional) Path to the client certificate file. Work with One-way encryption                                               |
-| --help | n/a       | Displays help for using the command.                                                                                       |
+| Option | Full name | Description                                                                                                              |
+| :----- | :-------- | :----------------------------------------------------------------------------------------------------------------------- |
+| -uri   | --uri     | (Optional) The uri name. The default is "http://127.0.0.1:19530".                                                        |
+| -t     | --token   | (Optional) The zilliz cloud apikey or `username:password`. The default is None.                                          |
+| -tls   | --tlsmode | (Optional) Set TLS mode: 0 (No encryption), 1 (One-way encryption), 2 (Two-way encryption not support yet). Default is 0 |
+| -cert  | --cert    | (Optional) Path to the client certificate file. Work with One-way encryption                                             |
+| --help | n/a       | Displays help for using the command.                                                                                     |
 
 <h3 id="connect">Example</h3>
 
@@ -65,10 +81,10 @@ create database -db (text)
 
 ### Options
 
-| Option | Full name  | Description                             |
-| :----- | :--------- | :-------------------------------------- |
-| -db    | --database | [Required] The database name in milvus. |
-| --help | n/a        | Displays help for using the command.    |
+| Option | Full name | Description                             |
+| :----- | :-------- | :-------------------------------------- |
+| -db    | --db_name | [Required] The database name in milvus. |
+| --help | n/a       | Displays help for using the command.    |
 
 ### Examples
 
@@ -92,10 +108,10 @@ use database -db (text)
 
 ### Options
 
-| Option | Full name  | Description                             |
-| :----- | :--------- | :-------------------------------------- |
-| -db    | --database | [Required] The database name in milvus. |
-| --help | n/a        | Displays help for using the command.    |
+| Option | Full name | Description                             |
+| :----- | :-------- | :-------------------------------------- |
+| -db    | --db_name | [Required] The database name in milvus. |
+| --help | n/a       | Displays help for using the command.    |
 
 ### Examples
 
@@ -139,10 +155,10 @@ delete database -db (text)
 
 ### Options
 
-| Option | Full name  | Description                             |
-| :----- | :--------- | :-------------------------------------- |
-| -db    | --database | [Required] The database name in milvus. |
-| --help | n/a        | Displays help for using the command.    |
+| Option | Full name | Description                             |
+| :----- | :-------- | :-------------------------------------- |
+| -db    | --db_name | [Required] The database name in milvus. |
+| --help | n/a       | Displays help for using the command.    |
 
 ### Examples
 
@@ -152,6 +168,9 @@ The following example delete the database <code>testdb</code> in milvus.
 
 ```shell
 milvus_cli > delete database -db testdb
+
+Warning! You are trying to delete the database. This action cannot be undone!
+Do you want to continue? [y/N]: y
 ```
 
 ## create user
@@ -257,29 +276,38 @@ Creates a collection.
 <h3 id="create-collection">Syntax</h3>
 
 ```shell
-create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
+create collection
 ```
 
-<h3 id="create-collection">Options</h3>
-
-| Option | Full name              | Description                                                                            |
-| :----- | :--------------------- | :------------------------------------------------------------------------------------- |
-| -c     | --collection-name      | The nam of the collection.                                                             |
-| -f     | --schema-field         | (Multiple) The field schema in the `<fieldName>:<dataType>:<dimOfVector/desc>` format. |
-| -p     | --schema-primary-field | The name of the primary key field.                                                     |
-| -a     | --schema-auto-id       | (Optional) Flag to generate IDs automatically.                                         |
-| -desc  | --schema-description   | (Optional) The description of the collection.                                          |
-| -level | --consistency-level    | (Optional) Consistency level: Bounded,Session,Strong, Eventual .                       |
-| -d     | --is-dynamic           | (Optional) Collection schema supports dynamic fields or not.                           |
-| -s     | --shards-num           | (Optional) Shards number                                                               |
-| --help | n/a                    | Displays help for using the command.                                                   |
-
-<h3 id="create-collection">Example</h3>
+<h3 id="create-collection">Interactive Example</h3>
 
 ```shell
-## For array field: --schema-field support <fieldName>:<dataType>:<maxCapacity>:<elementDataType>(:<maxLength>if Varchar)
+milvus_cli > create collection
 
-milvus_cli > create collection -c car -f id:INT64:primary_field -f vector:FLOAT_VECTOR:128 -f color:INT64:color -f brand:ARRAY:64:VARCHAR:128 -p id -A -d 'car_collection'
+Please input collection name: car
+Please input auto id [False]: False
+Please input description []: car collection
+Is support dynamic field [False]: False
+Please input consistency level(Strong(0),Bounded(1), Session(2), and Eventually(3)) [1]: 1
+Please input shards number [1]: 1
+
+Field name: id
+Field type (INT64, VARCHAR, FLOAT_VECTOR, etc.): INT64
+Field description []: primary key
+Is id the primary key? [y/N]: y
+
+Field name: vector
+Field type (INT64, VARCHAR, FLOAT_VECTOR, etc.): FLOAT_VECTOR
+Field description []: vector field
+Dimension: 128
+
+Field name: color
+Field type (INT64, VARCHAR, FLOAT_VECTOR, etc.): INT64
+Field description []: color field
+Nullable [False]: False
+Default value (type: INT64) [Not set]: 0
+
+Do you want to add embedding function? [y/N]: n
 ```
 
 ## create partition
@@ -319,31 +347,17 @@ Creates an index for a field.
 create index
 ```
 
-<h3 id="creat-index">Options</h3>
-
-| Option | Full name | Description                          |
-| :----- | :-------- | :----------------------------------- |
-| --help | n/a       | Displays help for using the command. |
-
-<h3 id="creat-index">Example</h3>
-
-To create an index for a field and be prompted for the required input:
+<h3 id="creat-index">Interactive Example</h3>
 
 ```shell
 milvus_cli > create index
 
 Collection name (car, car2): car2
-
 The name of the field to create an index for (vector): vector
-
 Index name: vectorIndex
-
-# Default is ''
-Index type FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
-
-# Default is ''
-Index metric type (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
-
+Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SCANN, STL_SORT, Trie, INVERTED): IVF_FLAT
+Vector Index metric type (L2, IP, HAMMING, TANIMOTO, COSINE): L2
+Index params nlist: 2
 Timeout []:
 ```
 
@@ -368,6 +382,9 @@ delete user -u (text)
 
 ```shell
 milvus_cli > delete user -u zilliz
+
+Warning! You are trying to delete the user in milvus. This action cannot be undone!
+Do you want to continue? [y/N]: y
 ```
 
 ## delete role
@@ -411,7 +428,6 @@ delete alias -a (text)
 | :----- | :----------- | :----------------------------------- |
 | -a     | --alias-name | The alias.                           |
 | --help | n/a          | Displays help for using the command. |
-|        |
 
 ## delete collection
 
@@ -434,6 +450,9 @@ delete collection -c (text)
 
 ```shell
 milvus_cli > delete collection -c car
+
+Warning! You are trying to delete the collection. This action cannot be undone!
+Do you want to continue? [y/N]: y
 ```
 
 ## delete entities
@@ -461,8 +480,7 @@ milvus_cli > delete entities -c car
 
 The expression to specify entities to be deleted, such as "film_id in [ 0, 1 ]": film_id in [ 0, 1 ]
 
-You are trying to delete the entities of collection. This action cannot be undone!
-
+Warning! You are trying to delete the entities of collection. This action cannot be undone!
 Do you want to continue? [y/N]: y
 ```
 
@@ -514,6 +532,9 @@ delete index -c (text) -in (text)
 
 ```shell
 milvus_cli > delete index -c car -in indexName
+
+Warning! You are trying to delete the index of collection. This action cannot be undone!
+Do you want to continue? [y/N]: y
 ```
 
 ## grant role
@@ -522,6 +543,10 @@ Grant role to user
 
 <h3 id="grant-user">Syntax</h3>
 
+```shell
+grant role -r (text) -u (text)
+```
+
 <h3 >Options</h3>
 
 | Option | Full name  | Description                          |
@@ -533,7 +558,7 @@ Grant role to user
 <h3 >Example</h3>
 
 ```shell
-grant role -r role1 -u user1
+milvus_cli > grant role -r role1 -u user1
 ```
 
 ## grant privilege
@@ -542,16 +567,20 @@ Assigns a privilege to a role.
 
 <h3 id="assign-privilege">Syntax</h3>
 
-<h3 >Options</h3>
-
-| Option | Full name | Description                          |
-| :----- | :-------- | :----------------------------------- |
-| --help | n/a       | Displays help for using the command. |
-
-<h3 >Example</h3>
-
 ```shell
 grant privilege
+```
+
+<h3 id="assign-privilege">Interactive Example</h3>
+
+```shell
+milvus_cli > grant privilege
+
+Role name: role1
+The type of object for which the privilege is to be assigned. (Global, Collection, User): Collection
+The name of the object to control access for: object1
+The name of the privilege to assign. (CreateCollection, DropCollection, etc.): CreateCollection
+The name of the database to which the object belongs. [default]: default
 ```
 
 ## revoke role
@@ -559,6 +588,10 @@ grant privilege
 Revokes the role assigned to a user.
 
 <h3 id="grant-user">Syntax</h3>
+
+```shell
+revoke role -r (text) -u (text)
+```
 
 <h3 >Options</h3>
 
@@ -571,7 +604,7 @@ Revokes the role assigned to a user.
 <h3 >Example</h3>
 
 ```shell
-grant role -r role1 -u user1
+milvus_cli > revoke role -r role1 -u user1
 ```
 
 ## revoke privilege
@@ -580,16 +613,20 @@ Revokes a privilege already assigned to a role.
 
 <h3 id="revoke-privilege">Syntax</h3>
 
-<h3 >Options</h3>
-
-| Option | Full name | Description                          |
-| :----- | :-------- | :----------------------------------- |
-| --help | n/a       | Displays help for using the command. |
-
-<h3 >Example</h3>
-
 ```shell
 revoke privilege
+```
+
+<h3 id="revoke-privilege">Interactive Example</h3>
+
+```shell
+milvus_cli > revoke privilege
+
+Role name: role1
+The type of object for which the privilege is to be assigned. (Global, Collection, User): Collection
+The name of the object to control access for: object1
+The name of the privilege to assign. (CreateCollection, DropCollection, etc.): CreateCollection
+The name of the database to which the object belongs. [default]: default
 ```
 
 ## show collection
@@ -713,29 +750,30 @@ help <command>
 | use     | Use database                                                              |
 | version | Shows the version of Milvus_CLI.                                          |
 
-## import
+## insert
 
 Imports local or remote data into a partition.
 
-<h3 id="import">Syntax</h3>
+<h3 id="insert">Syntax</h3>
 
 ```shell
-import -c (text)[-p (text)] <file_path>
+insert file -c (text) [-p (text)] [-t (text)] <file_path>
 ```
 
-<h3 id="import">Options</h3>
+<h3 id="insert">Options</h3>
 
-| Option | Full name         | Description                                                                                                                                           |
-| :----- | :---------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| -c     | --collection-name | The name of the collection that the data are inserted into.                                                                                           |
-| -p     | --partition       | (Optional) The name of the partition that the data are inserted into. Not passing this partition option indicates choosing the "\_default" partition. |
-| --help | n/a               | Displays help for using the command.                                                                                                                  |
+| Option | Full name         | Description                                                                                                                                                            |
+| :----- | :---------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -c     | --collection-name | The name of the collection that the data are inserted into.                                                                                                            |
+| -p     | --partition       | (Optional) The name of the partition that the data are inserted into. Not passing this partition option indicates choosing the "\_default" partition.                  |
+| -t     | --timeout         | (Optional) An optional duration of time in seconds to allow for the RPC. If timeout is not set, the client keeps waiting until the server responds or an error occurs. |
+| --help | n/a               | Displays help for using the command.                                                                                                                                   |
 
-<h3 id="import">Example 1</h3>
+<h3 id="insert">Example 1</h3>
 The following example imports a local CSV file.
 
 ```shell
-milvus_cli > import -c car 'examples/import_csv/vectors.csv'
+milvus_cli > insert file -c car 'examples/import_csv/vectors.csv'
 
 Reading csv file...  [####################################]  100%
 
@@ -753,11 +791,11 @@ Milvus timestamp:           428849214449254403
 --------------------------  ------------------
 ```
 
-<h3 id="import">Example 2</h3>
+<h3 id="insert">Example 2</h3>
 The following example imports a remote CSV file.
 
 ```shell
-milvus_cli > import -c car 'https://raw.githubusercontent.com/milvus-
+milvus_cli > insert file -c car 'https://raw.githubusercontent.com/milvus-
 io/milvus_cli/main/examples/import_csv/vectors.csv'
 
 Reading file from remote URL.
@@ -777,6 +815,31 @@ Total insert entities:                   50000
 Total collection entities:              150000
 Milvus timestamp:           428849214449254403
 --------------------------  ------------------
+```
+
+## insert row
+
+Inserts a row of data into a collection.
+
+<h3 id="insert-row">Syntax</h3>
+
+```shell
+insert row
+```
+
+<h3 id="insert-row">Interactive Example</h3>
+
+```shell
+milvus_cli > insert row
+
+Collection name: car
+Partition name [_default]: _default
+Enter value for id (INT64): 1
+Enter value for vector (FLOAT_VECTOR): [1.0, 2.0, 3.0]
+Enter value for color (INT64): 100
+Enter value for brand (VARCHAR): Toyota
+
+Inserted successfully.
 ```
 
 ## list users
@@ -894,7 +957,7 @@ Loads a collection or partition from hard drive space into RAM.
 <h3 id="load">Syntax</h3>
 
 ```shell
-load -c (text) [-p (text)]
+load collection -c (text) [-p (text)]
 ```
 
 <h3 id="load">Options</h3>
@@ -915,56 +978,23 @@ Shows query results that match all the criteria that you enter.
 query
 ```
 
-<h3 id="query">Options</h3>
-
-| Option | Full name | Description                          |
-| :----- | :-------- | :----------------------------------- |
-| --help | n/a       | Displays help for using the command. |
-
-<h3 id="query">Example</h3>
-<h4 id="query">Example 1</h4>
-
-To perform a query and be prompted for the required input:
+<h3 id="query">Interactive Example</h3>
 
 ```shell
 milvus_cli > query
 
 Collection name: car
 
-The query expression: id in [ 428960801420883491, 428960801420883492,
-428960801420883493 ]
+The query expression: id in [ 428960801420883491, 428960801420883492, 428960801420883493 ]
 
-Name of partitions that contain entities(split by "," if multiple) []:
-default
+Name of partitions that contain entities(split by "," if multiple) []: default
 
 A list of fields to return(split by "," if multiple) []: color, brand
 
 timeout []:
 
 Guarantee timestamp. This instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date. [0]:
-Graceful time. Only used in bounded consistency level. If graceful_time is set, PyMilvus will use current timestamp minus the graceful_time as the guarantee_timestamp. This option is 5s by default if not set. [5]:
-```
 
-<h4 id="query">Example 2</h4>
-
-To perform a query and be prompted for the required input:
-
-```shell
-milvus_cli > query
-
-Collection name: car
-
-The query expression: id > 428960801420883491
-
-Name of partitions that contain entities(split by "," if multiple) []:
-default
-
-A list of fields to return(split by "," if multiple) []: id, color,
-brand
-
-timeout []:
-
-Guarantee timestamp. This instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date. [0]:
 Graceful time. Only used in bounded consistency level. If graceful_time is set, PyMilvus will use current timestamp minus the graceful_time as the guarantee_timestamp. This option is 5s by default if not set. [5]:
 ```
 
@@ -975,7 +1005,7 @@ Releases a collection or partition from RAM.
 <h3 id="release">Syntax</h3>
 
 ```shell
-release -c (text) [-p (text)]
+release collection -c (text) [-p (text)]
 ```
 
 <h3 id="release">Options</h3>
@@ -996,24 +1026,14 @@ Performs a vector similarity search or hybrid search.
 search
 ```
 
-<h3 id="search">Options</h3>
-
-| Option | Full name | Description                          |
-| :----- | :-------- | :----------------------------------- |
-| --help | n/a       | Displays help for using the command. |
-
-<h3 id="search">Examples</h3>
-<h4 id="search">Example 1</h4>
-
-To perform a search on a csv file and be prompted for the required input:
+<h3 id="search">Interactive Example</h3>
 
 ```shell
 milvus_cli > search
 
 Collection name (car, test_collection): car
 
-The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file
-out headers): examples/import_csv/search_vectors.csv
+The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field's of collection. You can also import a csv file without headers): examples/import_csv/search_vectors.csv
 
 The vector field used to search of collection (vector): vector
 
@@ -1028,64 +1048,6 @@ The names of partitions to search (split by "," if multiple) ['_default'] []: _d
 timeout []:
 
 Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]:
-
-```
-
-<h4 id="search">Example 2</h4>
-
-To perform a search on an indexed collection and be prompted for the required input:
-
-```shell
-milvus_cli > search
-
-Collection name (car, test_collection): car
-
-The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file without headers):
-    [[0.71, 0.76, 0.17, 0.13, 0.42, 0.07, 0.15, 0.67, 0.58, 0.02, 0.39, 0.47, 0.58, 0.88, 0.73, 0.31, 0.23, 0.57, 0.33, 0.2, 0.03, 0.43, 0.78, 0.49, 0.17, 0.56, 0.76, 0.54, 0.45, 0.46, 0.05, 0.1, 0.43, 0.63, 0.29, 0.44, 0.65, 0.01, 0.35, 0.46, 0.66, 0.7, 0.88, 0.07, 0.49, 0.92, 0.57, 0.5, 0.16, 0.77, 0.98, 0.1, 0.44, 0.88, 0.82, 0.16, 0.67, 0.63, 0.57, 0.55, 0.95, 0.13, 0.64, 0.43, 0.71, 0.81, 0.43, 0.65, 0.76, 0.7, 0.05, 0.24, 0.03, 0.9, 0.46, 0.28, 0.92, 0.25, 0.97, 0.79, 0.73, 0.97, 0.49, 0.28, 0.64, 0.19, 0.23, 0.51, 0.09, 0.1, 0.53, 0.03, 0.23, 0.94, 0.87, 0.14, 0.42, 0.82, 0.91, 0.11, 0.91, 0.37, 0.26, 0.6, 0.89, 0.6, 0.32, 0.11, 0.98, 0.67, 0.12, 0.66, 0.47, 0.02, 0.15, 0.6, 0.64, 0.57, 0.14, 0.81, 0.75, 0.11, 0.49, 0.78, 0.16, 0.63, 0.57, 0.18]]
-
-The vector field used to search of collection (vector): vector
-
-Search parameter nprobe's value: 10
-
-The specified number of decimal places of returned distance [-1]: 5
-
-The max number of returned record, also known as topk: 2
-
-The boolean expression used to filter attribute []: id > 0
-
-The names of partitions to search (split by "," if multiple) ['_default'] []: _default
-
-timeout []:
-
-Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]:
-
-```
-
-<h4 id="search">Example 3</h4>
-
-To perform a search on a non-indexed collection and be prompted for the required input:
-
-```shell
-milvus_cli > search
-
-Collection name (car, car2): car
-
-The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file without headers): examples/import_csv/search_vectors.csv
-
-The vector field used to search of collection (vector): vector
-
-The specified number of decimal places of returned distance [-1]: 5
-
-The max number of returned record, also known as topk: 2
-
-The boolean expression used to filter attribute []:
-
-The names of partitions to search (split by "," if multiple) ['_default'] []:
-
-timeout []:
-
-Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]:
-
 ```
 
 ## list connection

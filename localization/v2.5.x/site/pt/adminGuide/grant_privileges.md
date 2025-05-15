@@ -40,45 +40,77 @@ summary: >-
     </button></h2><p>O Milvus 2.5 introduz uma nova versão da API que simplifica a operação de concessão. Já não é necessário procurar o tipo de objeto quando se concede um privilégio a uma função. Seguem-se os parâmetros e as respectivas explicações.</p>
 <ul>
 <li><p><strong>Nome_da_função:</strong> O nome da função de destino à qual devem ser concedidos privilégios ou grupos de privilégios.</p></li>
-<li><p><strong>Recurso</strong>: O recurso de destino de um privilégio, que pode ser uma instância específica, um banco de dados ou uma coleção. A tabela a seguir explica como especificar o recurso no método <code translate="no">client.grantV2()</code>.</p>
-<p><table>
-<tr>
-<th><p><strong>Nível</strong></p></th>
-<th><p><strong>Recurso</strong></p></th>
-<th><p><strong>Método de concessão</strong></p></th>
-<th><p><strong>Notas</strong></p></th>
-</tr>
-<tr>
-<td rowspan="2"><p><strong>Coleção</strong></p></td>
-<td><p>Uma coleção específica</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</p></td>
-<td><p>Introduza o nome da sua coleção de destino e o nome da base de dados à qual a coleção de destino pertence.</p></td>
-</tr>
-<tr>
-<td><p>Todas as colecções numa base de dados específica</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>Introduza o nome da sua base de dados de destino e um wildcard <code translate="no"></em></code> como o nome da coleção.</p></td>
-</tr>
-<tr>
-<td><p><strong>Base de dados</strong></p></td>
-<td><p>Uma base de dados específica</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>Introduza o nome da sua base de dados de destino e um wildcard <code translate="no"></em></code> como o nome da coleção.</p></td>
-</tr>
-<tr>
-<td></td>
-<td><p>Todas as bases de dados na instância atual</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name=</em>"")</p></td>
-<td><p>Introduzir <code translate="no"><em></code> como o nome da base de dados e <code translate="no"></em></code> como o nome da coleção.</p></td>
-</tr>
-<tr>
-<td><p><strong>Instância</strong></p></td>
-<td><p>A instância atual</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="<em>", db_name="</em>")</p></td>
-<td><p>Introduzir <code translate="no"><em></code> como o nome da base de dados e <code translate="no"></em></code> como o nome da coleção.</p></td>
-</tr>
-</table></p></li>
-<li><p><strong>Privilégio</strong>: O privilégio específico ou <a href="/docs/pt/privilege_group.md">o grupo de privilégios</a> que é necessário conceder a uma função. Atualmente, o Milvus oferece 56 tipos de privilégios que podem ser concedidos. A tabela abaixo lista os privilégios no Milvus.</p>
+<li><p><strong>Recurso</strong>: O recurso de destino de um privilégio, que pode ser uma instância específica, um banco de dados ou uma coleção.</p></li>
+</ul>
+<p>A tabela a seguir explica como especificar o recurso no método <code translate="no">client.grantV2()</code>.</p>
+<table>
+   <tr>
+     <th><p><strong>Nível</strong></p></th>
+     <th><p><strong>Recurso</strong></p></th>
+     <th><p><strong>Método de concessão</strong></p></th>
+     <th><p><strong>Notas</strong></p></th>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Coleção</strong></p></td>
+     <td><p>Uma coleção específica</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="col1", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Introduza o nome da sua coleção de destino e o nome da base de dados a que pertence a coleção de destino.</p></td>
+   </tr>
+   <tr>
+     <td><p>Todas as colecções de uma base de dados específica</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Introduza o nome da sua base de dados de destino e um wildcard <code translate="no">*</code> como nome da coleção.</p></td>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Base de dados</strong></p></td>
+     <td><p>Uma base de dados específica</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Introduza o nome da sua base de dados de destino e um wildcard <code translate="no">*</code> como nome da coleção.</p></td>
+   </tr>
+   <tr>
+     <td><p>Todas as bases de dados na instância atual</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Introduza <code translate="no">*</code> como o nome da base de dados e <code translate="no">*</code> como o nome da coleção.</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Instância</strong></p></td>
+     <td><p>A instância atual</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="ClusterAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Introduza <code translate="no">*</code> como o nome da base de dados e <code translate="no">*</code> como o nome da coleção.</p></td>
+   </tr>
+</table>
+<ul>
+<li><p><strong>Privilégio</strong>: O privilégio específico ou o <a href="/docs/pt/privilege_group.md">grupo de privilégios</a> que é necessário conceder a uma função. Atualmente, o Milvus oferece 56 tipos de privilégios que podem ser concedidos. A tabela abaixo lista os privilégios no Milvus.</p>
 <p><div class="alert note"></p>
 <p>A coluna do tipo na tabela abaixo é utilizada para facilitar a pesquisa rápida de privilégios e é utilizada apenas para fins de classificação. Ao conceder privilégios, não precisa de compreender os tipos. Basta introduzir os privilégios correspondentes.</p>
 <p></div></p>

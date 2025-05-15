@@ -76,4 +76,3 @@ The proxy cannot allocate search requests to query nodes completely equally and 
 ## What's next
 
 - Learn how to [load a collection](load_collection.md) as multiple replicas.
-- Learn how to [load a partition](load_partition.md) as multiple replicas.

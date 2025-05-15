@@ -34,14 +34,13 @@ title: 일관성
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 저장과 계산을 분리하는 시스템입니다. 이 시스템에서 <strong>데이터 노드는</strong> 데이터의 지속성을 담당하며 궁극적으로 MinIO/S3와 같은 분산형 객체 스토리지에 데이터를 저장합니다. <strong>쿼리 노드는</strong> 검색과 같은 계산 작업을 처리합니다. 이러한 작업에는 <strong>배치 데이터와</strong> <strong>스트리밍 데이터</strong> 처리가 모두 포함됩니다. 간단히 말해, 배치 데이터는 이미 객체 스토리지에 저장된 데이터로 이해할 수 있으며, 스트리밍 데이터는 아직 객체 스토리지에 저장되지 않은 데이터를 말합니다. 네트워크 지연 시간으로 인해 쿼리 노드는 종종 가장 최근의 스트리밍 데이터를 보유하지 않습니다. 추가적인 안전장치 없이 스트리밍 데이터에 대해 직접 검색을 수행하면 커밋되지 않은 많은 데이터 포인트가 손실되어 검색 결과의 정확도에 영향을 미칠 수 있습니다.</p>
-<p>Milvus는 저장과 계산을 분리하는 시스템입니다. 이 시스템에서 데이터 노드는 데이터의 지속성을 담당하며 궁극적으로 MinIO/S3와 같은 분산형 객체 스토리지에 데이터를 저장합니다. 쿼리 노드는 검색과 같은 계산 작업을 처리합니다. 이러한 작업에는 배치 데이터와 스트리밍 데이터 처리가 모두 포함됩니다. 간단히 말해, 배치 데이터는 이미 객체 스토리지에 저장된 데이터로 이해할 수 있으며, 스트리밍 데이터는 아직 객체 스토리지에 저장되지 않은 데이터를 의미합니다. 네트워크 지연 시간으로 인해 쿼리 노드는 종종 가장 최근의 스트리밍 데이터를 보유하지 않습니다. 추가적인 안전장치 없이 스트리밍 데이터에서 직접 검색을 수행하면 커밋되지 않은 많은 데이터 포인트가 손실되어 검색 결과의 정확도에 영향을 미칠 수 있습니다.</p>
+    </button></h2><p>Milvus는 저장과 계산을 분리하는 시스템입니다. 이 시스템에서 <strong>데이터 노드는</strong> 데이터의 지속성을 담당하며 궁극적으로 MinIO/S3와 같은 분산형 객체 스토리지에 데이터를 저장합니다. <strong>쿼리 노드는</strong> 검색과 같은 계산 작업을 처리합니다. 이러한 작업에는 <strong>배치 데이터와</strong> <strong>스트리밍 데이터</strong> 처리가 모두 포함됩니다. 간단히 말해, 배치 데이터는 이미 객체 스토리지에 저장된 데이터로 이해할 수 있으며, 스트리밍 데이터는 아직 객체 스토리지에 저장되지 않은 데이터를 말합니다. 네트워크 지연 시간으로 인해 쿼리 노드는 종종 가장 최근의 스트리밍 데이터를 보유하지 않습니다. 추가적인 안전장치 없이 스트리밍 데이터에서 직접 검색을 수행하면 커밋되지 않은 많은 데이터 포인트가 손실되어 검색 결과의 정확도에 영향을 미칠 수 있습니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
    </span> <span class="img-wrapper"> <span>배치 데이터와 스트리밍 데이터</span> </span></p>
 <p>위 그림에서 보듯이, 쿼리 노드는 검색 요청을 받은 후 스트리밍 데이터와 배치 데이터를 동시에 수신할 수 있습니다. 하지만 네트워크 지연 시간으로 인해 쿼리 노드가 얻은 스트리밍 데이터는 불완전할 수 있습니다.</p>
-<p>이 문제를 해결하기 위해 Milvus는 데이터 대기열의 각 레코드에 타임스탬프를 찍고 데이터 대기열에 동기화 타임스탬프를 지속적으로 삽입합니다. 동기화 타임스탬프(syncT)가 수신될 때마다 쿼리 노드는 이를 서비스 시간으로 설정하며, 이는 쿼리 노드가 해당 서비스 시간 이전의 모든 데이터를 볼 수 있다는 것을 의미합니다. 밀버스는 서비스 타임을 기반으로 일관성과 가용성에 대한 다양한 사용자 요구 사항을 충족하기 위해 보증 타임스탬프(GuaranteeT)를 제공할 수 있습니다. 사용자는 검색 요청에 GuaranteeT를 지정하여 검색 범위에 특정 시점 이전의 데이터를 포함해야 할 필요성을 쿼리 노드에 알릴 수 있습니다.</p>
+<p>이 문제를 해결하기 위해 Milvus는 데이터 대기열의 각 레코드에 타임스탬프를 찍고 데이터 대기열에 동기화 타임스탬프를 지속적으로 삽입합니다. 동기화 타임스탬프(syncT)가 수신될 때마다 쿼리 노드는 이를 서비스 시간으로 설정하여 쿼리 노드가 해당 서비스 시간 이전의 모든 데이터를 볼 수 있도록 합니다. 밀버스는 서비스 타임을 기반으로 일관성과 가용성에 대한 다양한 사용자 요구 사항을 충족하기 위해 보증 타임스탬프(GuaranteeT)를 제공할 수 있습니다. 사용자는 검색 요청에 GuaranteeT를 지정하여 검색 범위에 특정 시점 이전의 데이터를 포함해야 할 필요성을 쿼리 노드에 알릴 수 있습니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/service-time-and-guarantee-time.png" alt="ServiceTime and GuaranteeTs" class="doc-image" id="servicetime-and-guaranteets" />
@@ -147,7 +146,7 @@ curl --request POST \​
 <pre><code translate="no" class="language-python">res = client.search(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     data=[query_vector],​
-    <span class="hljs-built_in">limit</span>=3,​
+    limit=<span class="hljs-number">3</span>,​
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}，​
     <span class="hljs-comment"># highlight-start​</span>
     consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,​
@@ -206,4 +205,4 @@ curl --request POST \​
  <span class="hljs-type">QueryResp</span> <span class="hljs-variable">getResp</span> <span class="hljs-operator">=</span> client.query(queryReq);​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>이 매개변수는 쿼리 반복기에서도 사용할 수 있습니다. <code translate="no">consistency_level</code> 매개변수에 사용할 수 있는 값은 <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, <code translate="no">Session</code> 입니다.</p>
+<p>이 매개 변수는 쿼리 반복기에서도 사용할 수 있습니다. <code translate="no">consistency_level</code> 매개변수에 사용할 수 있는 값은 <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, <code translate="no">Session</code> 입니다.</p>

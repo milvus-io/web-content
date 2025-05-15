@@ -57,7 +57,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Avant d'insérer des données, vous devez organiser vos données dans une liste de dictionnaires conformément au schéma, chaque dictionnaire représentant une entité et contenant tous les champs définis dans le schéma. Si le champ dynamique est activé dans la collection, chaque dictionnaire peut également inclure des champs qui ne sont pas définis dans le schéma.</p>
-<p>Dans cette section, vous allez insérer des entités dans une collection créée de <a href="/docs/fr/create-collection-instantly.md#Quick-Setup">manière rapide</a>. Une collection créée de cette manière ne comporte que deux champs, nommés <strong>id</strong> et <strong>vector</strong>. En outre, cette Collection a activé le champ dynamique, de sorte que les Entités dans le code de l'exemple incluent un champ appelé <strong>color</strong> qui n'est pas défini dans le schéma.</p>
+<p>Dans cette section, vous allez insérer des entités dans une collection créée de manière rapide. Une collection créée de cette manière ne comporte que deux champs, nommés <strong>id</strong> et <strong>vector</strong>. En outre, cette Collection a activé le champ dynamique, de sorte que les Entités dans le code de l'exemple incluent un champ appelé <strong>color</strong> qui n'est pas défini dans le schéma.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

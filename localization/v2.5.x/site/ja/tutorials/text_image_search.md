@@ -53,7 +53,7 @@ title: Milvusによるテキスト画像検索
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install git+https://github.com/openai/CLIP.git</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colabを使用している場合、<strong>ランタイムを再起動</strong>する必要があるかもしれません(インターフェースの上部にある "Runtime "メニューに移動し、ドロップダウンメニューから "Restart session "を選択してください)。</p>
+<p>Google Colabを使用している場合、<strong>ランタイムを再起動</strong>する必要があるかもしれません (インターフェースの上部にある "Runtime "メニューに移動し、ドロップダウンメニューから "Restart session "を選択してください)。</p>
 </div>
 <h3 id="Download-example-data" class="common-anchor-header">サンプルデータのダウンロード</h3><p><a href="https://www.image-net.org">ImageNet</a>データセットのサブセット（100クラス、各クラス10画像）をサンプル画像として使います。以下のコマンドでサンプルデータをダウンロードし、ローカルフォルダ<code translate="no">./images_folder</code> に展開します：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip</span>
@@ -84,7 +84,7 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;milvus.db&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>必要な依存関係やデータが揃ったところで、いよいよ機能抽出ツールをセットアップしてMilvusを使い始めましょう。このセクションでは、テキストから画像への検索システムを構築するための重要なステップを説明します。最後に、テキストクエリに基づいて画像を検索し、視覚化する方法を示します。</p>
+    </button></h2><p>必要な依存関係やデータが揃ったところで、いよいよ機能抽出ツールをセットアップし、Milvusを使い始めましょう。このセクションでは、テキストから画像への検索システムを構築するための重要なステップを説明します。最後に、テキストクエリに基づいて画像を検索し、視覚化する方法を示します。</p>
 <h3 id="Define-feature-extractors" class="common-anchor-header">特徴抽出器の定義</h3><p>画像とテキストの埋め込みを生成するために、事前に学習されたCLIPモデルを使用します。このセクションでは、事前に学習された<strong>ViT-B/32</strong>variant of CLIPをロードし、画像とテキストをエンコードするためのヘルパー関数を定義する：</p>
 <ul>
 <li><code translate="no">encode_image(image_path)</code>:画像を処理して特徴ベクトルにエンコードする。</li>
@@ -122,7 +122,7 @@ model.<span class="hljs-built_in">eval</span>()
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Data-Ingestion" class="common-anchor-header">データの取り込み</h3><p>セマンティック画像検索を可能にするために、まずすべての画像の埋め込みを生成し、効率的なインデックス付けと検索のためにベクトルデータベースに格納する必要があります。このセクションでは、画像データをmilvusに取り込むためのステップバイステップのガイドを提供します。</p>
 <p><strong>1.Milvusコレクションの作成</strong></p>
-<p>画像の埋め込みを保存する前に、Milvusコレクションを作成する必要があります。以下のコードは、デフォルトのCOSINEメトリックタイプで<a href="https://milvus.io/docs/create-collection-instantly.md">クイックスタートモードを</a>使用してコレクションを作成する方法を示しています。コレクションには以下のフィールドが含まれます：</p>
+<p>画像の埋め込みを保存する前に、Milvusコレクションを作成する必要があります。以下のコードは、デフォルトのCOSINE メトリックタイプでクイックセットアップモードでコレクションを作成する方法を示しています。コレクションは以下のフィールドを含む：</p>
 <ul>
 <li><p><code translate="no">id</code>:オートIDが有効なプライマリフィールド。</p></li>
 <li><p><code translate="no">vector</code>:浮動小数点ベクトル埋め込みを格納するフィールド。</p></li>

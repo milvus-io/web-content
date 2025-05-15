@@ -40,45 +40,77 @@ summary: >-
     </button></h2><p>Milvus 2.5 memperkenalkan versi baru API yang menyederhanakan operasi pemberian hak istimewa. Anda tidak perlu lagi mencari tipe objek ketika memberikan hak istimewa kepada sebuah role. Berikut ini adalah parameter dan penjelasan terkait.</p>
 <ul>
 <li><p><strong>role_name:</strong> Nama peran target yang perlu diberikan hak istimewa atau grup hak istimewa.</p></li>
-<li><p><strong>Resource</strong>: Sumber daya target hak istimewa, yang dapat berupa instance, database, atau koleksi tertentu. Tabel berikut ini menjelaskan cara menentukan sumber daya dalam metode <code translate="no">client.grantV2()</code>.</p>
-<p><table>
-<tr>
-<th><p><strong>Tingkat</strong></p></th>
-<th><p><strong>Sumber Daya</strong></p></th>
-<th><p><strong>Metode Pemberian</strong></p></th>
-<th><p><strong>Catatan</strong></p></th>
-</tr>
-<tr>
-<td rowspan="2"><p><strong>Koleksi</strong></p></td>
-<td><p>Koleksi tertentu</p></td>
-<td><p>client.grant_privilege_v2(nama_peran = "roleA", hak_keahlian = "CollectionAdmin", nama_koleksi = "col1", nama_db = "db1")</p></td>
-<td><p>Masukkan nama koleksi target Anda dan nama basis data tempat koleksi target berada.</p></td>
-</tr>
-<tr>
-<td><p>Semua koleksi di bawah basis data tertentu</p></td>
-<td><p>client.grant_privilege_v2(nama_peran = "peranA", hak_akses = "CollectionAdmin", nama_koleksi = "<em>", nama_db = "db1")</p></td>
-<td><p>Masukkan nama basis data target Anda dan wildcard <code translate="no"></em></code> sebagai nama koleksi.</p></td>
-</tr>
-<tr>
-<td><p><strong>Basis data</strong></p></td>
-<td><p>Basis data tertentu</p></td>
-<td><p>client.grant_privilege_v2(nama_peran = "peranA", hak_akses = "DatabaseAdmin", nama_koleksi = "<em>", nama_basis = "db1")</p></td>
-<td><p>Masukkan nama basis data target Anda dan wildcard <code translate="no"></em></code> sebagai nama koleksi.</p></td>
-</tr>
-<tr>
-<td></td>
-<td><p>Semua basis data di bawah instans saat ini</p></td>
-<td><p>client.grant_privilege_v2(nama_peran = "peranA", hak_akses = "DatabaseAdmin", nama_koleksi = "<em>", nama_basis = "</em>")</p></td>
-<td><p>Masukan <code translate="no"><em></code> sebagai nama basis data dan <code translate="no"></em></code> sebagai nama koleksi.</p></td>
-</tr>
-<tr>
-<td><p><strong>Instance</strong></p></td>
-<td><p>Instance saat ini</p></td>
-<td><p>client.grant_privilege_v2(nama_peran = "peranA", hak = "ClusterAdmin", nama_koleksi = "<em>", nama_db = "</em>")</p></td>
-<td><p>Masukan <code translate="no"><em></code> sebagai nama basis data dan <code translate="no"></em></code> sebagai nama koleksi.</p></td>
-</tr>
-</table></p></li>
-<li><p><strong>Hak istimewa</strong>: Privilege atau <a href="/docs/id/privilege_group.md">kelompok</a> privilese tertentu yang perlu Anda berikan kepada suatu role. Saat ini, Milvus menyediakan 56 jenis hak istimewa yang dapat anda berikan. Tabel di bawah ini mencantumkan daftar hak istimewa di Milvus.</p>
+<li><p><strong>Resource</strong>: Sumber daya target hak istimewa, yang dapat berupa instance, database, atau koleksi tertentu.</p></li>
+</ul>
+<p>Tabel berikut ini menjelaskan cara menentukan sumber daya dalam metode <code translate="no">client.grantV2()</code>.</p>
+<table>
+   <tr>
+     <th><p><strong>Tingkat</strong></p></th>
+     <th><p><strong>Sumber Daya</strong></p></th>
+     <th><p><strong>Metode Pemberian</strong></p></th>
+     <th><p><strong>Catatan</strong></p></th>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Koleksi</strong></p></td>
+     <td><p>Koleksi tertentu</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="col1", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Masukkan nama koleksi target Anda dan nama pangkalan data tempat koleksi target berada.</p></td>
+   </tr>
+   <tr>
+     <td><p>Semua koleksi di bawah pangkalan data tertentu</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Masukkan nama pangkalan data target Anda dan karakter pengganti <code translate="no">*</code> sebagai nama koleksi.</p></td>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Basis data</strong></p></td>
+     <td><p>Basis data tertentu</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Masukkan nama basis data target Anda dan wildcard <code translate="no">*</code> sebagai nama koleksi.</p></td>
+   </tr>
+   <tr>
+     <td><p>Semua basis data di bawah contoh saat ini</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Masukkan <code translate="no">*</code> sebagai nama basis data dan <code translate="no">*</code> sebagai nama koleksi.</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Instance</strong></p></td>
+     <td><p>Instance saat ini</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="ClusterAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Masukkan <code translate="no">*</code> sebagai nama basis data dan <code translate="no">*</code> sebagai nama koleksi.</p></td>
+   </tr>
+</table>
+<ul>
+<li><p><strong>Privilege</strong>: Hak istimewa atau <a href="/docs/id/privilege_group.md">kelompok hak istimewa</a> tertentu yang perlu Anda berikan kepada suatu peran. Saat ini, Milvus menyediakan 56 jenis privilese yang dapat Anda berikan. Tabel di bawah ini mencantumkan daftar hak istimewa di Milvus.</p>
 <p><div class="alert note"></p>
 <p>Kolom jenis pada tabel di bawah ini digunakan untuk memudahkan anda mencari hak istimewa dengan cepat dan hanya digunakan untuk tujuan klasifikasi. Ketika memberikan hak istimewa, anda tidak perlu memahami jenisnya. Anda hanya perlu memasukkan hak istimewa yang sesuai.</p>
 <p></div></p>

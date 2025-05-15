@@ -43,9 +43,9 @@ title: 版本说明
 </tbody>
 </table>
 <p>我们很高兴地宣布 Milvus 2.5.11 正式发布！该版本引入了强大的新功能，如多分析器功能和扩展的标记符支持（Jieba、Lindera、ICU、Language Identifier）。我们还进行了多项改进，包括动态分段加载线程池更新和优化 binlog 导入过程中的删除过滤。主要的错误修复解决了潜在的段丢失问题、BM25 搜索失败和 JSON 统计过滤错误。</p>
-<p>我们建议您升级到 2.5.11 以利用这些改进和修复！</p>
+<p>我们建议您升级到 2.5.11，以利用这些改进和修复！</p>
 <h3 id="Features" class="common-anchor-header">功能</h3><ul>
-<li>增加了配置多个分析器（标记器）并根据输入数据的指令选择适当分析器的功能<a href="https://github.com/milvus-io/milvus/pull/41444">（#41444</a>）。</li>
+<li>增加了为多语言支持配置多个分析器（标记器）的功能，并可根据输入数据的指令选择适当的分析器<a href="https://github.com/milvus-io/milvus/pull/41444">（#41444</a>）。</li>
 <li>增强了 BM25 分析器功能<a href="https://github.com/milvus-io/milvus/pull/41456">（#41456</a>）。<ul>
 <li>引入了用于干运行的<code translate="no">run_analyzer</code> API，以帮助分析标记化结果。有关详细信息，请参阅<a href="/docs/zh/analyzer-overview.md">分析器概述</a>。</li>
 <li>标记化器<ul>
@@ -71,10 +71,10 @@ title: 版本说明
 <li>添加了一个配置选项，以强制将索引重建为最新版本<a href="https://github.com/milvus-io/milvus/pull/41432">(#41432</a>)。</li>
 <li>改进了列表策略的错误日志信息<a href="https://github.com/milvus-io/milvus/pull/41368">（#41368</a>）。</li>
 <li>调整了对 gRPC 元数据头中连字符的处理<a href="https://github.com/milvus-io/milvus/pull/41372">（#41372</a>）。</li>
-<li>将 Go 版本升级至 1.21.4，以解决 CVE 问题<a href="https://github.com/milvus-io/milvus/pull/41522">（#41522</a>、<a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>）。<em>(注：原文提及 "2.14"，假定错字已更正为可信的最新版本 1.21.4</em>）。</li>
+<li>将 Go 版本升级至 1.24.1，以解决 CVE 问题<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>,<a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>)。</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">错误修复</h3><ul>
-<li>修正了下拉分区时可能无法正确下拉分段的问题<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>)。</li>
+<li>修正了在丢弃分区时可能无法正确丢弃分段的问题<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>)。</li>
 <li>修正了批量插入使用函数运行程序的输入字段列表而非 Schema 的字段列表的问题<a href="https://github.com/milvus-io/milvus/pull/41561">（#41561</a>）。</li>
 <li>修正了当<code translate="no">avgdl</code> （平均文档长度）为 NaN 时出现的 BM25 搜索失败问题<a href="https://github.com/milvus-io/milvus/pull/41503">（#41503</a>）。</li>
 <li>修正了查询节点指标中不准确的标签<a href="https://github.com/milvus-io/milvus/pull/41422">（#41422</a>）。</li>
@@ -109,7 +109,7 @@ title: 版本说明
 <tr><td>2.5.10</td><td>2.5.6</td><td>2.5.8</td><td>2.5.7</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.10 提高了搜索和加载性能，增强了度量报告功能，并扩大了对加速度量计算的 SVE 支持。该版本还包含多个错误修复，提高了稳定性和正确性。我们鼓励您升级或试用，您的反馈对我们改进 Milvus 非常有价值！</p>
+<p>Milvus 2.5.10 提高了搜索和加载性能，增强了度量报告功能，并扩大了对加速度量计算的 SVE 支持。该版本还包含多个错误修复，提高了稳定性和正确性。我们鼓励您升级或试用，您的反馈对我们改进 Milvus 非常宝贵！</p>
 <h3 id="Improvements" class="common-anchor-header">改进</h3><ul>
 <li>忽略为不存在的索引报告索引指标<a href="https://github.com/milvus-io/milvus/pull/41296">（#41296）</a></li>
 <li>即使存在反转索引，也为 LIKE 使用扫描模式<a href="https://github.com/milvus-io/milvus/pull/41309">(#41309</a>)</li>
@@ -298,7 +298,7 @@ title: 版本说明
 <li>修复了搜索/查询的引用 Collections 问题<a href="https://github.com/milvus-io/milvus/pull/40550">（#40550）</a></li>
 <li>处理稀疏向量的空行<a href="https://github.com/milvus-io/milvus/pull/40586">（＃40586）</a></li>
 <li>创建集合时添加了重复类型/索引参数检查<a href="https://github.com/milvus-io/milvus/pull/40465">（#40465）</a></li>
-<li>将<code translate="no">metaHeader</code> 移至客户端以避免数据竞赛<a href="https://github.com/milvus-io/milvus/pull/40444">（#40444）</a></li>
+<li>将<code translate="no">metaHeader</code> 移至客户端以避免数据竞赛<a href="https://github.com/milvus-io/milvus/pull/40444">（＃40444）</a></li>
 </ul>
 <h2 id="v256" class="common-anchor-header">v2.5.6<button data-href="#v256" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -424,7 +424,7 @@ title: 版本说明
 <li>[2.5] 修正了即使设置了<code translate="no">common.security.rootShouldBindRole</code> ，root 用户也能列出所有 Collections 的问题<a href="https://github.com/milvus-io/milvus/pull/39714">(#39714</a>)</li>
 <li>[2.5] 修正了 flowgraph 泄露<a href="https://github.com/milvus-io/milvus/pull/39686">(#39686</a>)</li>
 <li>[2.5] 使用参数项格式化以避免 setconfig 重叠<a href="https://github.com/milvus-io/milvus/pull/39636">(#39636</a>)</li>
-<li>[2.5] 用权限名称 "全部 "检查元存储权限名称<a href="https://github.com/milvus-io/milvus/pull/39492">(#39492</a>)</li>
+<li>[2.5] 使用权限名称 "全部 "检查元存储权限名称<a href="https://github.com/milvus-io/milvus/pull/39492">(#39492</a>)</li>
 <li>[2.5] 为 RESTful v1 添加了速率限制器<a href="https://github.com/milvus-io/milvus/pull/39555">(#39555</a>)</li>
 <li>[2.5] 删除了 RESTful 处理程序中的硬编码分区号<a href="https://github.com/milvus-io/milvus/pull/40113">(#40113</a>)</li>
 </ul>
@@ -437,7 +437,7 @@ title: 版本说明
 <li>[2.5] 为混合搜索添加了 DSL 日志字段<a href="https://github.com/milvus-io/milvus/pull/39598">(#39598</a>)</li>
 <li>[2.5] 如果索引被删除，则跳过更新索引指标<a href="https://github.com/milvus-io/milvus/pull/39572">(#39572</a>)</li>
 <li>[2.5] 如果组件停止进度超时，则转储 pprof 信息<a href="https://github.com/milvus-io/milvus/pull/39760">(#39760</a>)</li>
-<li>[2.5] 添加了管理 API，以检查 querycoord 平衡状态<a href="https://github.com/milvus-io/milvus/pull/39909">(#39909</a>)</li>
+<li>[2.5] 添加了管理 API 以检查 querycoord 平衡状态<a href="https://github.com/milvus-io/milvus/pull/39909">(#39909</a>)</li>
 </ul>
 <h4 id="StatsCompactionIndex-Task-Scheduler-Optimization" class="common-anchor-header">统计/压缩/索引任务调度器优化</h4><ul>
 <li>改进索引任务调度策略<a href="https://github.com/milvus-io/milvus/pull/40104">(#40104</a>)</li>
@@ -493,7 +493,7 @@ title: 版本说明
 </table>
 <p>我们很高兴地宣布 Milvus 2.5.4 版本发布，该版本引入了关键性能优化和新功能，如 PartitionKey 隔离、带 DAAT MaxScore 的稀疏索引和增强的锁定机制。该版本的一个突出亮点是支持 10,000 个 Collections 和 100 万个分区，是多租户使用案例的一个重要里程碑。该版本还解决了多个错误，提高了整体稳定性和可靠性，其中两个关键错误可能会导致数据丢失。我们鼓励您升级或试用这一最新版本，并期待您的反馈意见帮助我们不断完善 Milvus！</p>
 <h3 id="Features" class="common-anchor-header">功能特点</h3><ul>
-<li>支持 PartitionKey 隔离，以提高使用多个分区 Key 时的性能<a href="https://github.com/milvus-io/milvus/pull/39245">（#39245</a>）。更多信息，请参阅<a href="/docs/zh/use-partition-key.md">使用分区密钥</a>。</li>
+<li>支持 PartitionKey 隔离，以提高使用多个分区 Key 时的性能<a href="https://github.com/milvus-io/milvus/pull/39245">（#39245</a>）。有关详细信息，请参阅<a href="/docs/zh/use-partition-key.md">使用分区密钥</a>。</li>
 <li>稀疏索引现在支持 DAAT MaxScore<a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>。有关详细信息，请参阅<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</li>
 <li>在表达式中添加对<code translate="no">is_null</code> 的支持<a href="https://github.com/milvus-io/milvus/pull/38931">(#38931</a>)</li>
 <li>可自定义根权限<a href="https://github.com/milvus-io/milvus/pull/39324">(#39324</a>)</li>
@@ -700,7 +700,7 @@ title: 版本说明
 <h4 id="Faiss-based-HNSW-SQPQPRQ" class="common-anchor-header">基于 Faiss 的 HNSW SQ/PQ/PRQ</h4><p>通过与 Faiss 社区的密切合作，Faiss 中的 HNSW 算法在功能和性能方面都有了显著的改进。出于稳定性和可维护性的考虑，Milvus 2.5 正式将对 HNSW 的支持从 hnswlib 迁移到 Faiss。</p>
 <p>基于 Faiss，Milvus 2.5 支持 HNSW 上的多种量化方法，以满足不同场景的需求：SQ（标量量化器）、PQ（乘积量化器）和 PRQ（乘积残差量化器）。SQ 和 PQ 比较常见；SQ 提供了良好的查询性能和构建速度，而 PQ 在相同压缩比的情况下提供了更好的召回率。许多向量数据库通常使用二进制量化，这是 SQ 量化的一种简单形式。</p>
 <p>PRQ 是 PQ 和 AQ（加法量化器）的融合。与 PQ 相比，PRQ 需要更长的构建时间，但却能提供更好的召回率，尤其是在高压缩率的情况下，二进制压缩的召回率更高。</p>
-<h4 id="Clustering-Compaction-Beta" class="common-anchor-header">聚类压缩（测试版）</h4><p>Milvus 2.5 引入了聚类压缩（Clustering Compaction）功能，以加快搜索速度并降低大型 Collections 的成本。通过指定一个标量字段作为聚类关键字，数据会按范围重新分配，以优化存储和检索。该功能的作用类似于全局索引，可让 Milvus 在基于聚类元数据的查询过程中有效地剪裁数据，从而在应用标量过滤器时提高搜索性能。</p>
+<h4 id="Clustering-Compaction-Beta" class="common-anchor-header">聚类压缩（测试版）</h4><p>Milvus 2.5 引入了聚类压缩（Clustering Compaction）功能，以加快搜索速度并降低大型 Collections 的成本。通过指定一个标量字段作为聚类关键字，数据会按范围重新分配，以优化存储和检索。该功能的作用类似于全局索引，可使 Milvus 在基于聚类元数据的查询过程中有效地剪裁数据，从而在应用标量过滤器时提高搜索性能。</p>
 <p>有关详情，请参阅<a href="/docs/zh/clustering-compaction.md">聚类压缩</a>。</p>
 <h3 id="Other-Features" class="common-anchor-header">其他功能</h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">流节点（测试版）</h4><p>Milvus 2.5 引入了一个名为流节点的新组件，它提供了先写日志（WAL）服务。这使 Milvus 能够在读写通道前后达成共识，解锁新特性、功能和优化。Milvus 2.5 版默认禁用此功能，3.0 版将正式启用。</p>
 <h4 id="IPv6-Support" class="common-anchor-header">支持 IPv6</h4><p>Milvus 现在支持 IPv6，从而扩大了网络连接和兼容性。</p>

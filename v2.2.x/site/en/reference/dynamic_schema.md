@@ -154,4 +154,4 @@ expr='$meta["#key"] in ["a", "b", "c"]'
 
 [Supported data types](schema.md#Supported-data-type)
 [Boolean express rules](boolean.md)
-[JavaScript Object Notation (JSON)](json_data_type.md)
+[JavaScript Object Notation (JSON)](use-json-fields.md)

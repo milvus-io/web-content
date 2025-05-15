@@ -28,7 +28,7 @@ title: Pesquisa de texto para imagem com Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A pesquisa de texto para imagem é uma tecnologia avançada que permite aos utilizadores pesquisar imagens utilizando descrições de texto em linguagem natural. Esta tecnologia utiliza um modelo multimodal pré-treinado para converter texto e imagens em embeddings num espaço semântico partilhado, permitindo comparações baseadas em semelhanças.</p>
+    </button></h1><p>A pesquisa de texto para imagem é uma tecnologia avançada que permite aos utilizadores pesquisar imagens utilizando descrições de texto em linguagem natural. Utiliza um modelo multimodal pré-treinado para converter texto e imagens em embeddings num espaço semântico partilhado, permitindo comparações baseadas em semelhanças.</p>
 <p>Neste tutorial, vamos explorar como implementar a recuperação de imagens baseadas em texto usando o modelo CLIP (Contrastive Language-Image Pretraining) da OpenAI e o Milvus. Vamos gerar embeddings de imagens com o CLIP, armazená-los no Milvus e realizar pesquisas de similaridade eficientes.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +65,7 @@ title: Pesquisa de texto para imagem com Milvus
 <ul>
 <li><p><strong>Milvus Lite (recomendado por conveniência)</strong>: Defina o URI para um ficheiro local, como ./milvus.db. Isso aproveita automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados em um único arquivo.</p></li>
 <li><p><strong>Docker ou Kubernetes (para dados em grande escala)</strong>: Para lidar com conjuntos de dados maiores, implante um servidor Milvus de melhor desempenho usando <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Neste caso, utilize o URI do servidor, como http://localhost:19530, para se ligar.</p></li>
-<li><p><strong>Zilliz Cloud (serviço gerido)</strong>: Se estiver a utilizar o <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, o serviço de nuvem totalmente gerido do Milvus, defina o Public Endpoint como URI e a API Key como token.</p></li>
+<li><p><strong>Zilliz Cloud (Serviço Gerido)</strong>: Se estiver a utilizar o <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, o serviço de nuvem totalmente gerido do Milvus, defina o Public Endpoint como URI e a API Key como token.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -124,7 +124,7 @@ model.<span class="hljs-built_in">eval</span>()
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Data-Ingestion" class="common-anchor-header">Ingestão de dados</h3><p>Para permitir a pesquisa semântica de imagens, precisamos primeiro de gerar embeddings para todas as imagens e armazená-las numa base de dados de vectores para uma indexação e recuperação eficientes. Esta secção fornece um guia passo-a-passo para ingerir dados de imagens no Milvus.</p>
 <p><strong>1. Criar uma coleção Milvus</strong></p>
-<p>Antes de armazenar os embeddings de imagens, é necessário criar uma coleção Milvus. O código seguinte demonstra como criar uma coleção utilizando <a href="https://milvus.io/docs/create-collection-instantly.md">o modo de início rápido</a> com o tipo de métrica COSINE predefinido. A coleção inclui os seguintes campos:</p>
+<p>Antes de armazenar os embeddings de imagens, é necessário criar uma coleção Milvus. O código seguinte demonstra como criar uma coleção num modo de configuração rápida com o tipo de métrica COSINE predefinido. A coleção inclui os seguintes campos:</p>
 <ul>
 <li><p><code translate="no">id</code>: Um campo primário com a ID automática activada.</p></li>
 <li><p><code translate="no">vector</code>: Um campo para armazenar as incorporações de vectores de vírgula flutuante.</p></li>

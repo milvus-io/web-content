@@ -1,10 +1,12 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: Mécanisme d'indexation des disques dans Milvus.
-title: Indexation sur disque
+summary: >-
+  Mécanisme d'indexation des disques dans Milvus pour une recherche vectorielle
+  optimisée.
+title: Index sur disque
 ---
-<h1 id="On-disk-Index" class="common-anchor-header">Indexation sur disque<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
+<h1 id="On-disk-Index" class="common-anchor-header">Index sur disque<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +21,7 @@ title: Indexation sur disque
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cet article présente un algorithme d'indexation sur disque appelé DiskANN. Basé sur les graphes de Vamana, DiskANN permet d'effectuer des recherches efficaces dans les grands ensembles de données.</p>
+    </button></h1><p>Cet article présente DiskANN, un algorithme d'indexation sur disque pour les recherches vectorielles optimisées sur disque. Basé sur les graphes de Vamana, DiskANN permet d'effectuer des recherches vectorielles sur disque efficaces dans les grands ensembles de données.</p>
 <p>Pour améliorer les performances des requêtes, vous pouvez <a href="/docs/fr/index-vector-fields.md">spécifier un type d'index</a> pour chaque champ vectoriel.</p>
 <div class="alert note"> 
 Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Milvus supprime automatiquement l'ancien index lors du changement de type d'index.</div>
@@ -38,7 +40,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour utiliser DiskANN, il faut que</p>
+    </button></h2><p>Pour utiliser DiskANN dans Milvus, il faut que</p>
 <ul>
 <li>L'instance Milvus fonctionne sous Ubuntu 18.04.6 ou une version ultérieure.</li>
 <li>Le chemin de données Milvus doit être monté sur un disque SSD NVMe pour des performances optimales :<ul>

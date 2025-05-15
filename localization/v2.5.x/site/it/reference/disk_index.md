@@ -1,7 +1,9 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: Meccanismo di indicizzazione dei dischi in Milvus.
+summary: >-
+  Meccanismo di indicizzazione del disco in Milvus per la ricerca vettoriale
+  ottimizzata su disco.
 title: Indice su disco
 ---
 <h1 id="On-disk-Index" class="common-anchor-header">Indice su disco<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
@@ -19,10 +21,10 @@ title: Indice su disco
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questo articolo presenta un algoritmo di indicizzazione su disco chiamato DiskANN. Basato sui grafi Vamana, DiskANN consente ricerche efficienti all'interno di grandi insiemi di dati.</p>
+    </button></h1><p>Questo articolo presenta DiskANN, un algoritmo di indicizzazione su disco per ricerche vettoriali ottimizzate su disco. Basato sui grafi Vamana, DiskANN consente di effettuare ricerche vettoriali efficienti su disco all'interno di grandi insiemi di dati.</p>
 <p>Per migliorare le prestazioni delle query, è possibile <a href="/docs/it/index-vector-fields.md">specificare un tipo di indice</a> per ogni campo vettoriale.</p>
 <div class="alert note"> 
-Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus elimina automaticamente il vecchio indice quando si cambia tipo di indice.</div>
+Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancella automaticamente il vecchio indice quando si cambia tipo di indice.</div>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,9 +40,9 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus elimina
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per utilizzare DiskANN, è necessario che</p>
+    </button></h2><p>Per usare DiskANN in Milvus, è necessario che</p>
 <ul>
-<li>L'istanza di Milvus funziona su Ubuntu 18.04.6 o su una versione successiva.</li>
+<li>L'istanza di Milvus gira su Ubuntu 18.04.6 o su una versione successiva.</li>
 <li>Il percorso dati di Milvus deve essere montato su un'unità SSD NVMe per ottenere prestazioni ottimali:<ul>
 <li>Per un'istanza Milvus Standalone, il percorso dei dati deve essere <strong>/var/lib/milvus/data</strong> nel contenitore in cui viene eseguita l'istanza.</li>
 <li>Per un'istanza Milvus Cluster, il percorso dei dati dovrebbe essere <strong>/var/lib/milvus/data</strong> nei container in cui girano i QueryNode e gli IndexNode.</li>
@@ -127,7 +129,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus elimina
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>Grado massimo del grafo Vamana. <br/> Un valore maggiore offre un tasso di richiamo più elevato, ma aumenta le dimensioni e il tempo di costruzione dell'indice.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>Dimensione dell'elenco dei candidati. <br/> Un valore maggiore aumenta il tempo impiegato per costruire l'indice, ma offre un tasso di richiamo più elevato. <br/> Impostare un valore inferiore a <code translate="no">MaxDegree</code> a meno che non sia necessario ridurre il tempo di costruzione dell'indice.</td><td>[1, int32_max]</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Limite di dimensione del codice PQ. <br/> Un valore maggiore offre un tasso di richiamo più alto, ma aumenta l'uso della memoria.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Limite di dimensione del codice PQ. <br/> Un valore maggiore offre un tasso di richiamo più elevato, ma aumenta l'utilizzo della memoria.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Rapporto tra i numeri dei nodi in cache e i dati grezzi. <br/> Un valore maggiore migliora le prestazioni di costruzione dell'indice, ma aumenta l'uso della memoria.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>Rapporto tra il numero massimo di richieste IO per iterazione di ricerca e il numero di CPU.</td><td>[1, max(128/numero di CPU, 16)].</td><td>4.0</td></tr>
 </tbody>

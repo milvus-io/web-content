@@ -1,7 +1,7 @@
 ---
 id: grant_privileges.md
 title: ロールへの特権または特権グループの付与
-summary: ロールが作成されると、そのロールに権限を付与することができます。このガイドでは、ロールに特権または特権グループを付与する方法を紹介します。
+summary: ロールを作成すると、そのロールに権限を付与することができます。このガイドでは、ロールに特権または特権グループを付与する方法を紹介します。
 ---
 <h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">ロールへの特権または特権グループの付与<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,45 +37,77 @@ summary: ロールが作成されると、そのロールに権限を付与す�
     </button></h2><p>Milvus2.5では、付与操作を効率化する新しいバージョンのAPIが導入されました。ロールに権限を付与する際に、オブジェクトタイプを調べる必要がなくなりました。以下にパラメータとその説明を示します。</p>
 <ul>
 <li><p><strong>role_name:</strong>特権または特権グループを付与する対象となるロールの名前です。</p></li>
-<li><p><strong>リソース</strong>：特定のインスタンス、データベース、コレクションを指定することができます。以下の表では、<code translate="no">client.grantV2()</code> メソッドでリソースを指定する方法を説明します。</p>
-<p><table>
-<tr>
-<th><p><strong>レベル</strong></p></th>
-<th><p><strong>リソース</strong></p></th>
-<th><p><strong>付与方法</strong></p></th>
-<th><p><strong>注意事項</strong></p></th>
-</tr>
-<tr>
-<td rowspan="2"><p><strong>コレクション</strong></p></td>
-<td><p>特定のコレクション</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</p></td>
-<td><p>対象のコレクション名と、対象のコレクションが属するデータベース名を入力します。</p></td>
-</tr>
-<tr>
-<td><p>特定のデータベース配下のすべてのコレクション</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>対象のデータベース名と、コレクション名としてワイルドカード <code translate="no"></em></code>をコレクション名として入力します。</p></td>
-</tr>
-<tr>
-<td><p><strong>データベース</strong></p></td>
-<td><p>特定のデータベース</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>対象となるデータベースの名前と、コレクション名としてワイルドカード <code translate="no"></em></code>をコレクション名として入力します。</p></td>
-</tr>
-<tr>
-<td></td>
-<td><p>現在のインスタンス配下のすべてのデータベース</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="</em>")</p></td>
-<td><p>入力 <code translate="no"><em></code>をデータベース名 <code translate="no"></em></code>をコレクション名として入力します。</p></td>
-</tr>
-<tr>
-<td><p><strong>インスタンス</strong></p></td>
-<td><p>現在のインスタンス</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="<em>", db_name="</em>")</p></td>
-<td><p>入力 <code translate="no"><em></code>をデータベース名、 <code translate="no"></em></code>をコレクション名として入力します。</p></td>
-</tr>
-</table></p></li>
-<li><p><strong>特権</strong>：ロールに付与する必要のある特定の権限または<a href="/docs/ja/privilege_group.md">権限グループ</a>です。現在、Milvusでは56種類の権限を付与することができます。下の表はMilvusの権限の一覧です。</p>
+<li><p><strong>リソース</strong>：特定のインスタンス、データベース、コレクションを指定することができます。</p></li>
+</ul>
+<p>以下の表では、<code translate="no">client.grantV2()</code> メソッドでリソースを指定する方法を説明します。</p>
+<table>
+   <tr>
+     <th><p><strong>レベル</strong></p></th>
+     <th><p><strong>リソース</strong></p></th>
+     <th><p><strong>付与方法</strong></p></th>
+     <th><p><strong>注意事項</strong></p></th>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>コレクション</strong></p></td>
+     <td><p>特定のコレクション</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="col1", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>対象となるコレクションの名前と、対象となるコレクションが属するデータベースの名前を入力します。</p></td>
+   </tr>
+   <tr>
+     <td><p>特定のデータベース下のすべてのコレクション</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>対象のデータベース名と、コレクション名としてワイルドカード<code translate="no">*</code> を入力します。</p></td>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>データベース</strong></p></td>
+     <td><p>特定のデータベース</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>対象のデータベース名と、コレクション名としてワイルドカード<code translate="no">*</code> を入力します。</p></td>
+   </tr>
+   <tr>
+     <td><p>現在のインスタンス配下のすべてのデータベース</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>データベース名として<code translate="no">*</code> を、コレクション名として<code translate="no">*</code> を入力します。</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>インスタンス</strong></p></td>
+     <td><p>現在のインスタンス</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="ClusterAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>データベース名として<code translate="no">*</code> を、コレクション名として<code translate="no">*</code> を入力します。</p></td>
+   </tr>
+</table>
+<ul>
+<li><p><strong>特権</strong>：ロールに付与する必要のある特定の権限または<a href="/docs/ja/privilege_group.md">権限グループ</a>。現在、Milvusでは56種類の権限を付与することができます。下の表はMilvusの権限の一覧です。</p>
 <p><div class="alert note"></p>
 <p>下表のタイプ列は権限の検索を容易にするためのものであり、分類の目的のみに使用されます。権限を付与する際、タイプを理解する必要はありません。対応する権限を入力するだけです。</p>
 <p></div></p>

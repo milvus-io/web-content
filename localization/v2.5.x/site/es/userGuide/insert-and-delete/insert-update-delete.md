@@ -57,7 +57,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Antes de insertar los datos, es necesario organizarlos en una lista de diccionarios de acuerdo con el Esquema, donde cada diccionario representa una Entidad y contiene todos los campos definidos en el Esquema. Si la Colección tiene habilitado el campo dinámico, cada diccionario también puede incluir campos que no están definidos en el Esquema.</p>
-<p>En esta sección, usted insertará Entidades en una Colección creada de <a href="/docs/es/create-collection-instantly.md#Quick-Setup">la manera rápida</a>. Una Colección creada de esta manera tiene sólo dos campos, llamados <strong>id</strong> y <strong>vector</strong>. Además, esta Colección tiene el campo dinámico habilitado, por lo que las Entidades en el código de ejemplo incluyen un campo llamado <strong>color</strong> que no está definido en el Esquema.</p>
+<p>En esta sección, usted insertará Entidades en una Colección creada de la manera rápida. Una Colección creada de esta manera tiene sólo dos campos, llamados <strong>id</strong> y <strong>vector</strong>. Además, esta Colección tiene el campo dinámico habilitado, por lo que las Entidades en el código de ejemplo incluyen un campo llamado <strong>color</strong> que no está definido en el Esquema.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

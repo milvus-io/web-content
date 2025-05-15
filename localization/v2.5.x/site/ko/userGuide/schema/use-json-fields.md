@@ -388,7 +388,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>인덱스를 생성할 때 Milvus가 추출된 JSON 값을 캐스팅할 데이터 유형입니다. 유효한 값</p><ul><li><p><code translate="no">"bool"</code> 또는 <code translate="no">"BOOL"</code></p></li><li><p><code translate="no">"double"</code> 또는 <code translate="no">"DOUBLE"</code></p></li><li><p><code translate="no">"varchar"</code> 또는 <code translate="no">"VARCHAR"</code></p><p><strong>참고</strong>: 정수 값의 경우, Milvus는 내부적으로 인덱스에 더블을 사용합니다. 2^53 이상의 큰 정수는 정밀도가 떨어집니다. 유형 불일치로 인해 유형 캐스팅에 실패하면 오류가 발생하지 않으며 해당 행의 값은 색인되지 않습니다.</p></li></ul></td>
+     <td><p>인덱스를 생성할 때 Milvus가 추출된 JSON 값을 캐스팅할 데이터 유형입니다. 유효한 값</p><ul><li><code translate="no">"bool"</code> 또는 <code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> 또는 <code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> 또는 <code translate="no">"VARCHAR"</code><strong>참고</strong>: 정수 값의 경우, Milvus는 내부적으로 인덱스에 double을 사용합니다. 2^53 이상의 큰 정수는 정밀도가 떨어집니다. 유형 불일치로 인해 유형 캐스팅에 실패하면 오류가 발생하지 않으며 해당 행의 값은 색인되지 않습니다.</li></ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -405,11 +405,11 @@ curl --request POST \
 </ul></li>
 <li><p><strong>숫자 정밀도</strong>:</p>
 <ul>
-<li>내부적으로 Milvus는 모든 숫자 필드를 이중으로 색인합니다. 숫자 값이 2^{53}을 초과하면 정밀도가 떨어지며, 범위를 벗어난 값에 대한 쿼리는 정확히 일치하지 않을 수 있습니다.</li>
+<li>내부적으로 Milvus는 모든 숫자 필드를 이중으로 색인합니다. 숫자 값이 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53을</span></span></span></span></span></span></span></span></span></span></span></span> 초과하면 정밀도가 떨어지며, 범위를 벗어난 값에 대한 쿼리는 정확히 일치하지 않을 수 있습니다.</li>
 </ul></li>
 <li><p><strong>데이터 무결성</strong>:</p>
 <ul>
-<li>Milvus는 지정된 형 변환을 넘어서는 JSON 키를 구문 분석하거나 변환하지 않습니다. 소스 데이터가 일관성이 없는 경우(예: 일부 행은 <code translate="no">&quot;k&quot;</code> 키에 대해 문자열을 저장하고 다른 행은 숫자를 저장하는 경우), 일부 행은 색인되지 않습니다.</li>
+<li>Milvus는 사용자가 지정한 형 변환을 넘어서는 JSON 키를 구문 분석하거나 변환하지 않습니다. 소스 데이터가 일관성이 없는 경우(예: 일부 행은 <code translate="no">&quot;k&quot;</code> 키에 대해 문자열을 저장하고 다른 행은 숫자를 저장하는 경우), 일부 행은 색인되지 않습니다.</li>
 </ul></li>
 </ul>
 <h3 id="Index-a-vector-field" class="common-anchor-header">벡터 필드 색인 생성</h3><p>다음 예는 <code translate="no">AUTOINDEX</code> 인덱스 유형을 사용하여 벡터 필드 <code translate="no">embedding</code> 에 인덱스를 생성하는 예입니다. 이 유형을 사용하면 Milvus는 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 각 필드에 대한 인덱스 유형과 매개변수를 사용자 지정할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">인덱스 설명을</a> 참조하세요.</p>
@@ -473,7 +473,7 @@ indexOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>스키마와 인덱스가 정의되면 문자열 필드를 포함하는 컬렉션을 만듭니다.</p>
+    </button></h2><p>스키마와 인덱스가 정의되면 JSON 필드를 포함하는 컬렉션을 만듭니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(

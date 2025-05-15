@@ -39,47 +39,79 @@ summary: >-
     </button></h2><p>В Milvus 2.5 представлена новая версия API, которая упрощает операцию предоставления привилегий. Вам больше не нужно искать тип объекта при предоставлении привилегии роли. Ниже перечислены параметры и соответствующие пояснения.</p>
 <ul>
 <li><p><strong>Имя_роли:</strong> имя целевой роли, которой необходимо предоставить привилегию(и) или группу(ы) привилегий.</p></li>
-<li><p><strong>Ресурс</strong>: Целевой ресурс привилегии, которым может быть конкретный экземпляр, база данных или коллекция. В следующей таблице объясняется, как указать ресурс в методе <code translate="no">client.grantV2()</code>.</p>
-<p><table>
-<tr>
-<th><p><strong>Уровень</strong></p></th>
-<th><p><strong>Ресурс</strong></p></th>
-<th><p><strong>Метод предоставления</strong></p></th>
-<th><p><strong>Примечания</strong></p></th>
-</tr>
-<tr>
-<td rowspan="2"><p><strong>Коллекция</strong></p></td>
-<td><p>Определенная коллекция</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</p></td>
-<td><p>Введите имя целевой коллекции и имя базы данных, к которой принадлежит целевая коллекция.</p></td>
-</tr>
-<tr>
-<td><p>Все коллекции под определенной базой данных</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>Введите имя целевой базы данных и подстановочный знак <code translate="no"></em></code> в качестве имени коллекции.</p></td>
-</tr>
-<tr>
-<td><p><strong>База данных</strong></p></td>
-<td><p>Определенная база данных</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>Введите имя целевой базы данных и подстановочный знак <code translate="no"></em></code> в качестве имени коллекции.</p></td>
-</tr>
-<tr>
-<td></td>
-<td><p>Все базы данных под текущим экземпляром</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="</em>")</p></td>
-<td><p>Введите <code translate="no"><em></code> в качестве имени базы данных и <code translate="no"></em></code> имя коллекции.</p></td>
-</tr>
-<tr>
-<td><p><strong>Экземпляр</strong></p></td>
-<td><p>Текущий экземпляр</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="<em>", db_name="</em>")</p></td>
-<td><p>Введите <code translate="no"><em></code> в качестве имени базы данных и <code translate="no"></em></code> имя коллекции.</p></td>
-</tr>
-</table></p></li>
+<li><p><strong>Ресурс</strong>: Целевой ресурс привилегии, который может быть конкретным экземпляром, базой данных или коллекцией.</p></li>
+</ul>
+<p>В следующей таблице объясняется, как указать ресурс в методе <code translate="no">client.grantV2()</code>.</p>
+<table>
+   <tr>
+     <th><p><strong>Уровень</strong></p></th>
+     <th><p><strong>Ресурс</strong></p></th>
+     <th><p><strong>Метод предоставления</strong></p></th>
+     <th><p><strong>Примечания</strong></p></th>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Коллекция</strong></p></td>
+     <td><p>Определенная коллекция</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="col1", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Введите имя целевой коллекции и имя базы данных, к которой принадлежит целевая коллекция.</p></td>
+   </tr>
+   <tr>
+     <td><p>Все коллекции в определенной базе данных</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Введите имя целевой базы данных и подстановочный знак <code translate="no">*</code> в качестве имени коллекции.</p></td>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>База данных</strong></p></td>
+     <td><p>Определенная база данных</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Введите имя целевой базы данных и подстановочный знак <code translate="no">*</code> в качестве имени коллекции.</p></td>
+   </tr>
+   <tr>
+     <td><p>Все базы данных под текущим экземпляром</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Введите <code translate="no">*</code> в качестве имени базы данных и <code translate="no">*</code> в качестве имени коллекции.</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Экземпляр</strong></p></td>
+     <td><p>Текущий экземпляр</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="ClusterAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Введите <code translate="no">*</code> в качестве имени базы данных и <code translate="no">*</code> в качестве имени коллекции.</p></td>
+   </tr>
+</table>
+<ul>
 <li><p><strong>Привилегия</strong>: Конкретная привилегия или <a href="/docs/ru/privilege_group.md">группа привилегий</a>, которые необходимо предоставить роли. В настоящее время Milvus предоставляет 56 типов привилегий, которые вы можете назначить. В таблице ниже перечислены привилегии в Milvus.</p>
 <p><div class="alert note"></p>
-<p>Колонка типа в таблице ниже является пользовательской для облегчения быстрого поиска привилегий и используется только в целях классификации. При назначении привилегий вам не нужно разбираться в типах. Вам просто нужно ввести соответствующие привилегии.</p>
+<p>Колонка типа в таблице ниже является пользовательской для облегчения быстрого поиска привилегий и используется только для классификации. При назначении привилегий вам не нужно разбираться в типах. Вам просто нужно ввести соответствующие привилегии.</p>
 <p></div></p>
 <p><table>
 <tr>

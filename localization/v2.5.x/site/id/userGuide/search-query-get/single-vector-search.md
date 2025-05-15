@@ -72,7 +72,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Dalam pencarian ANN, pencarian vektor tunggal mengacu pada pencarian yang hanya melibatkan satu vektor kueri. Berdasarkan indeks yang telah dibuat sebelumnya dan jenis metrik yang dibawa dalam permintaan pencarian, Milvus akan menemukan vektor K teratas yang paling mirip dengan vektor kueri.</p>
-<p>Pada bagian ini, Anda akan belajar bagaimana melakukan pencarian vektor tunggal. Cuplikan kode mengasumsikan Anda telah membuat koleksi dengan cara <a href="/docs/id/create-collection-instantly.md#Quick-Setup">penyiapan cepat</a>. Permintaan pencarian membawa satu vektor kueri dan meminta Milvus menggunakan Inner Product (IP) untuk menghitung kemiripan antara vektor kueri dan vektor di dalam koleksi dan mengembalikan tiga vektor yang paling mirip.</p>
+<p>Pada bagian ini, Anda akan mempelajari cara melakukan pencarian vektor tunggal. Permintaan pencarian membawa satu vektor kueri dan meminta Milvus menggunakan Inner Product (IP) untuk menghitung kemiripan antara vektor kueri dan vektor dalam koleksi dan mengembalikan tiga vektor yang paling mirip.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

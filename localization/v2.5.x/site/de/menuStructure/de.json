@@ -348,12 +348,6 @@
             "children": []
           },
           {
-            "label": "Sofortige Erstellung einer Sammlung",
-            "id": "create-collection-instantly.md",
-            "order": 2,
-            "children": []
-          },
-          {
             "label": "Sammlungen ansehen",
             "id": "view-collections.md",
             "order": 3,
@@ -1449,7 +1443,7 @@
             "children": []
           },
           {
-            "label": "RBAC einschalten",
+            "label": "RBAC aktivieren",
             "id": "rbac",
             "order": 1,
             "isMenu": true,

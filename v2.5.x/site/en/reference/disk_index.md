@@ -1,13 +1,13 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: Disk index mechanism in Milvus for disk-based vector search.
+summary: Disk index mechanism in Milvus for disk-optimized vector search.
 title: On-disk Index
 ---
 
 # On-disk Index
 
-This article introduces an on-disk indexing algorithm named DiskANN. Based on Vamana graphs, DiskANN powers efficient disk-based vector searches within large datasets.
+This article introduces DiskANN, an on-disk indexing algorithm for disk-optimized vector searches. Based on Vamana graphs, DiskANN powers efficient on-disk vector searches within large datasets.
 
 To improve query performance, you can [specify an index type](index-vector-fields.md) for each vector field. 
 
@@ -17,7 +17,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 
 ## Prerequisites
 
-To use DiskANN, note that
+To use DiskANN in Milvus, note that
 
 - The Milvus instance runs on Ubuntu 18.04.6 or a later release.
 - The Milvus data path should be mounted to an NVMe SSD for full performance:

@@ -53,7 +53,7 @@ summary: Collections 中的实体是共享同一组字段的数据记录。每�
         ></path>
       </svg>
     </button></h2><p>在插入数据之前，需要根据 Schema 将数据组织到字典列表中，每个字典代表一个实体，并包含 Schema 中定义的所有字段。如果 Collections 启用了动态字段，每个字典还可以包含 Schema 中未定义的字段。</p>
-<p>本节将向<a href="/docs/zh/create-collection-instantly.md#Quick-Setup">以快速设置方式</a>创建的 Collection 中插入实体。以这种方式创建的 Collection 只有两个字段，分别名为<strong>id</strong>和<strong>向量</strong>。此外，该 Collections 启用了动态字段，因此示例代码中的 Entities 包含一个名为<strong>color</strong>的字段，该字段在 Schema 中未定义。</p>
+<p>本节将向以快速设置方式创建的 Collection 中插入实体。以这种方式创建的 Collection 只有两个字段，分别名为<strong>id</strong>和<strong>向量</strong>。此外，该 Collections 启用了动态字段，因此示例代码中的 Entities 包含一个名为<strong>color</strong>的字段，该字段在 Schema 中未定义。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

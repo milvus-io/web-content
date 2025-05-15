@@ -75,7 +75,7 @@ title: Integrations Overview
 <tr><td><a href="/docs/build_rag_on_arm.md">Build RAG on Arm Architecture</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 <tr><td><a href="/docs/build_RAG_with_milvus_and_fireworks.md">Build RAG with Milvus and Fireworks AI</a></td><td>LLMs</td><td>Milvus, Fireworks AI</td></tr>
 <tr><td><a href="/docs/build_RAG_with_milvus_and_lepton.md">Build RAG with Milvus and Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
-<tr><td><a href="/docs/build_RAG_with_milvus_and_siliconflow">Build RAG with Milvus and SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/build_RAG_with_milvus_and_siliconflow.md">Build RAG with Milvus and SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
 <tr><td><a href="/docs/rag_with_milvus_and_unstructured.md">Build a RAG with Milvus and Unstructured</a></td><td>Data Sources</td><td>Milvus, Unstructured</td></tr>
 <tr><td><a href="/docs/RAG_with_pii_and_milvus.md">Build RAG with Milvus + PII Masker</a></td><td>Data Sources</td><td>Milvus, PII Masker</td></tr>
 <tr><td><a href="/docs/knowledge_table_with_milvus.md">Knowledge Table with Milvus</a></td><td>Knowledge Engineering</td><td>Knowledge Table, Milvus</td></tr>

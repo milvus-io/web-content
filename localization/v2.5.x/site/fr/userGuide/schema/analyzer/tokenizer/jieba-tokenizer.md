@@ -114,12 +114,12 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">type</code></p></td>
-     <td><p>Le type de tokenizer. Il est fixé à <code translate="no">"jieba"</code>.</p></td>
+     <td><p>Le type de tokenizer. Cette valeur est fixée à <code translate="no">"jieba"</code>.</p></td>
      <td><p><code translate="no">"jieba"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>Une liste de dictionnaires utilisés pour définir le vocabulaire. Vous pouvez fournir vos propres mots de dictionnaire ou les combiner avec le dictionnaire par défaut en utilisant <code translate="no">"_default_"</code>. Par exemple, <code translate="no">["_default_", "结巴分词器"]</code>. Pour plus de détails sur le dictionnaire par défaut, reportez-vous à <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict</a>.</p></td>
+     <td><p>Une liste de dictionnaires que l'analyseur chargera comme source de vocabulaire. Options intégrées :</p><ul><li><p><code translate="no">"_default_"</code>: Charge le dictionnaire chinois simplifié intégré au moteur. Pour plus de détails, voir <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li><li><p><code translate="no">"_extend_default_"</code>: Charge tout ce qui se trouve à l'adresse <code translate="no">"_default_"</code>, ainsi qu'un supplément en chinois traditionnel. Pour plus de détails, voir <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p><p>Vous pouvez également combiner le dictionnaire intégré avec un nombre quelconque de dictionnaires personnalisés. Exemple : <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>

@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supporta due approcci di configurazione per il tokenizer <code translate="no">jieba</code>: una configurazione semplice e una configurazione personalizzata.</p>
+    </button></h2><p>Milvus supporta due approcci di configurazione per il tokenizzatore <code translate="no">jieba</code>: una configurazione semplice e una configurazione personalizzata.</p>
 <h3 id="Simple-configuration" class="common-anchor-header">Configurazione semplice</h3><p>Con la configurazione semplice, è sufficiente impostare il tokenizer su <code translate="no">&quot;jieba&quot;</code>. Ad esempio:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -121,12 +121,12 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>Un elenco di dizionari usati per definire il vocabolario. Si possono fornire parole del proprio dizionario o combinarle con il dizionario predefinito usando <code translate="no">"_default_"</code>. Ad esempio, <code translate="no">["_default_", "结巴分词器"]</code>. Per i dettagli sul dizionario predefinito, fare riferimento a <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict</a>.</p></td>
+     <td><p>Un elenco di dizionari che l'analizzatore caricherà come fonte di vocabolario. Opzioni integrate:</p><ul><li><p><code translate="no">"_default_"</code>: Carica il dizionario integrato del motore in cinese semplificato. Per i dettagli, fare riferimento a <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li><li><p><code translate="no">"_extend_default_"</code>: Carica tutto quello che c'è in <code translate="no">"_default_"</code> più un supplemento di cinese tradizionale. Per i dettagli, fare riferimento a <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p><p>È anche possibile combinare il dizionario integrato con un numero qualsiasi di dizionari personalizzati. Esempio: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mode</code></p></td>
-     <td><p>La modalità di segmentazione. Valori possibili:</p><ul><li><p><code translate="no">"exact"</code>: Cerca di segmentare la frase nel modo più preciso, il che lo rende ideale per l'analisi del testo.</p></li><li><p><code translate="no">"search"</code>: Si basa sulla modalità esatta, suddividendo ulteriormente le parole lunghe per migliorare il richiamo, rendendola adatta alla tokenizzazione dei motori di ricerca.</p><p>Per ulteriori informazioni, consultare il <a href="https://github.com/fxsjy/jieba">progetto GitHub di Jieba</a>.</p></li></ul></td>
+     <td><p>La modalità di segmentazione. Valori possibili:</p><ul><li><p><code translate="no">"exact"</code>: Cerca di segmentare la frase nel modo più preciso, il che la rende ideale per l'analisi del testo.</p></li><li><p><code translate="no">"search"</code>: Si basa sulla modalità esatta, suddividendo ulteriormente le parole lunghe per migliorare il richiamo, rendendola adatta alla tokenizzazione dei motori di ricerca.</p><p>Per ulteriori informazioni, consultare il <a href="https://github.com/fxsjy/jieba">progetto GitHub di Jieba</a>.</p></li></ul></td>
      <td><p><code translate="no">"search"</code></p></td>
    </tr>
    <tr>

@@ -125,7 +125,7 @@ model.<span class="hljs-built_in">eval</span>()
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Data-Ingestion" class="common-anchor-header">Konsumsi Data</h3><p>Untuk mengaktifkan pencarian gambar semantik, pertama-tama kita perlu menghasilkan penyematan untuk semua gambar dan menyimpannya dalam basis data vektor untuk pengindeksan dan pengambilan yang efisien. Bagian ini memberikan panduan langkah demi langkah untuk memasukkan data gambar ke dalam Milvus.</p>
 <p><strong>1. Membuat Koleksi Milvus</strong></p>
-<p>Sebelum menyimpan penyematan gambar, Anda perlu membuat koleksi Milvus. Kode berikut ini menunjukkan cara membuat koleksi menggunakan <a href="https://milvus.io/docs/create-collection-instantly.md">mode mulai cepat</a> dengan jenis metrik COSINE default. Koleksi ini mencakup bidang-bidang berikut ini:</p>
+<p>Sebelum menyimpan penyematan gambar, Anda perlu membuat koleksi Milvus. Kode berikut ini menunjukkan cara membuat koleksi dalam mode penyiapan cepat dengan tipe metrik COSINE default. Koleksi ini mencakup bidang-bidang berikut ini:</p>
 <ul>
 <li><p><code translate="no">id</code>: Bidang utama dengan ID otomatis diaktifkan.</p></li>
 <li><p><code translate="no">vector</code>: Bidang untuk menyimpan penyematan vektor floating-point.</p></li>

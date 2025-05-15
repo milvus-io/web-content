@@ -39,44 +39,76 @@ summary: >-
     </button></h2><p>Milvus 2.5 introduces a new version of API which streamlines the grant operation. You no longer need to look up the object type when granting a privilege to a role. The following are the parameters and corresponding explanations.</p>
 <ul>
 <li><p><strong>role_name:</strong> The name of the target role to which privilege(s) or privilege group(s) need to be granted.</p></li>
-<li><p><strong>Resource</strong>: The target resource of a privilege, which can be a specific instance, database or collection. The following table explains how to specify the resource in the <code translate="no">client.grantV2()</code> method.</p>
-<p><table>
-<tr>
-<th><p><strong>Level</strong></p></th>
-<th><p><strong>Resource</strong></p></th>
-<th><p><strong>Grant Method</strong></p></th>
-<th><p><strong>Notes</strong></p></th>
-</tr>
-<tr>
-<td rowspan="2"><p><strong>Collection</strong></p></td>
-<td><p>A specific collection</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</p></td>
-<td><p>Input the name of your target collection and the name of the database to which the target collection belongs.</p></td>
-</tr>
-<tr>
-<td><p>All collections under a specific database</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="<em>“, db_name="db1”)</p></td>
-<td><p>Input the name of your target database and a wildcard <code translate="no"></em></code> as the collection name.</p></td>
-</tr>
-<tr>
-<td><p><strong>Database</strong></p></td>
-<td><p>A specific database</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>“, db_name="db1”)</p></td>
-<td><p>Input the name of your target database and a wildcard <code translate="no"></em></code> as the collection name.</p></td>
-</tr>
-<tr>
-<td></td>
-<td><p>All databases under the current instance</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>“, db_name=”</em>")</p></td>
-<td><p>Input <code translate="no"><em></code> as the database name and <code translate="no"></em></code> as the collection name.</p></td>
-</tr>
-<tr>
-<td><p><strong>Instance</strong></p></td>
-<td><p>The current instance</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name="<em>“, db_name=”</em>")</p></td>
-<td><p>Input <code translate="no"><em></code> as the database name and <code translate="no"></em></code> as the collection name.</p></td>
-</tr>
-</table></p></li>
+<li><p><strong>Resource</strong>: The target resource of a privilege, which can be a specific instance, database, or collection.</p></li>
+</ul>
+<p>The following table explains how to specify the resource in the <code translate="no">client.grantV2()</code> method.</p>
+<table>
+   <tr>
+     <th><p><strong>Level</strong></p></th>
+     <th><p><strong>Resource</strong></p></th>
+     <th><p><strong>Grant Method</strong></p></th>
+     <th><p><strong>Notes</strong></p></th>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Collection</strong></p></td>
+     <td><p>A specific collection</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="col1", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Input the name of your target collection and the name of the database to which the target collection belongs.</p></td>
+   </tr>
+   <tr>
+     <td><p>All collections under a specific database</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Input the name of your target database and a wildcard <code translate="no">*</code> as the collection name.</p></td>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Database</strong></p></td>
+     <td><p>A specific database</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>Input the name of your target database and a wildcard <code translate="no">*</code> as the collection name.</p></td>
+   </tr>
+   <tr>
+     <td><p>All databases under the current instance</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Input <code translate="no">*</code> as the database name and <code translate="no">*</code> as the collection name.</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>Instance</strong></p></td>
+     <td><p>The current instance</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="ClusterAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>Input <code translate="no">*</code> as the database name and <code translate="no">*</code> as the collection name.</p></td>
+   </tr>
+</table>
+<ul>
 <li><p><strong>Privilege</strong>: The specific privilege or <a href="/docs/privilege_group.md">privilege group</a> that you need to grant to a role. Currently, Milvus provides 56 types of privileges that you can grant. The table below lists the privileges in Milvus.</p>
 <p><div class="alert note"></p>
 <p>The type column in the table below are user to facilitate your quick lookup for privileges and is used for classification purposes only. When granting privileges, you do not need to understand the types. You just need to input the corresponding privileges.</p>

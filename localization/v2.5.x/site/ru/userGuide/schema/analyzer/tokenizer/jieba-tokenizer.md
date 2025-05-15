@@ -121,7 +121,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>Список словарей, используемых для определения словарного запаса. Вы можете указать собственные словарные слова или объединить их со словарем по умолчанию с помощью <code translate="no">"_default_"</code>. Например, <code translate="no">["_default_", "结巴分词器"]</code>. Подробнее о словаре по умолчанию см. в разделе <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict</a>.</p></td>
+     <td><p>Список словарей, которые анализатор будет загружать в качестве источника словарного запаса. Встроенные опции:</p><ul><li><p><code translate="no">"_default_"</code>: Загружает встроенный в движок упрощенно-китайский словарь. Подробности см. в файле <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li><li><p><code translate="no">"_extend_default_"</code>: Загружает все, что есть в <code translate="no">"_default_"</code>, плюс дополнение к традиционно-китайскому. Подробности см. в файле <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p><p>Вы также можете смешивать встроенный словарь с любым количеством пользовательских словарей. Пример: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>

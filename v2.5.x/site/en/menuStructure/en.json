@@ -348,12 +348,6 @@
             "children": []
           },
           {
-            "label": "Create Collection Instantly",
-            "id": "create-collection-instantly.md",
-            "order": 2,
-            "children": []
-          },
-          {
             "label": "View Collections",
             "id": "view-collections.md",
             "order": 3,

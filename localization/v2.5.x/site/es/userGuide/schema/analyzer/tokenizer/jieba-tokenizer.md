@@ -121,12 +121,12 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>Una lista de diccionarios utilizados para definir el vocabulario. Puede proporcionar su propio diccionario de palabras o combinarlo con el diccionario predeterminado utilizando <code translate="no">"_default_"</code>. Por ejemplo, <code translate="no">["_default_", "结巴分词器"]</code>. Para más detalles sobre el diccionario por defecto, consulte <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict</a>.</p></td>
+     <td><p>Una lista de diccionarios que el analizador cargará como fuente de vocabulario. Opciones incorporadas:</p><ul><li><p><code translate="no">"_default_"</code>: Carga el diccionario de chino simplificado integrado en el motor. Para más detalles, consulte <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li><li><p><code translate="no">"_extend_default_"</code>: Carga todo lo que hay en <code translate="no">"_default_"</code> más un suplemento adicional de chino tradicional. Para más detalles, consulta <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p><p>También puedes combinar el diccionario incorporado con cualquier número de diccionarios personalizados. Ejemplo: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mode</code></p></td>
-     <td><p>El modo de segmentación. Valores posibles:</p><ul><li><p><code translate="no">"exact"</code>: Intenta segmentar la frase de la manera más precisa, por lo que es ideal para el análisis de texto.</p></li><li><p><code translate="no">"search"</code>: Se basa en el modo exacto al dividir aún más las palabras largas para mejorar la recuperación, por lo que es adecuado para la tokenización en motores de búsqueda.</p><p>Para obtener más información, consulte el <a href="https://github.com/fxsjy/jieba">proyecto GitHub de Jieba</a>.</p></li></ul></td>
+     <td><p>El modo de segmentación. Valores posibles:</p><ul><li><p><code translate="no">"exact"</code>: Intenta segmentar la frase de la manera más precisa, por lo que es ideal para el análisis de texto.</p></li><li><p><code translate="no">"search"</code>: Se basa en el modo exacto al dividir aún más las palabras largas para mejorar la recuperación, por lo que es adecuado para la tokenización en motores de búsqueda.</p><p>Para más información, consulte el <a href="https://github.com/fxsjy/jieba">proyecto GitHub de Jieba</a>.</p></li></ul></td>
      <td><p><code translate="no">"search"</code></p></td>
    </tr>
    <tr>

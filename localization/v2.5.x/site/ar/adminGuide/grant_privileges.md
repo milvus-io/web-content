@@ -39,45 +39,77 @@ summary: >-
     </button></h2><p>يقدم الإصدار Milvus 2.5 إصدارًا جديدًا من واجهة برمجة التطبيقات (API) التي تبسط عملية المنح. لم تعد بحاجة إلى البحث عن نوع الكائن عند منح امتياز إلى دور. فيما يلي المعلمات والتفسيرات المقابلة.</p>
 <ul>
 <li><p><strong>اسم الدور:</strong> اسم الدور المستهدف الذي يجب منحه الامتياز (الأدوار) أو مجموعة (مجموعات) الامتيازات.</p></li>
-<li><p><strong>المورد</strong>: المورد المستهدف للامتياز، والذي يمكن أن يكون مثيلًا أو قاعدة بيانات أو مجموعة محددة. يشرح الجدول التالي كيفية تحديد المورد في الأسلوب <code translate="no">client.grantV2()</code>.</p>
-<p><table>
-<tr>
-<th><p><strong>المستوى</strong></p></th>
-<th><p><strong>المورد</strong></p></th>
-<th><p><strong>طريقة المنح</strong></p></th>
-<th><p><strong>ملاحظات</strong></p></th>
-</tr>
-<tr>
-<td rowspan="2"><p><strong>المجموعة</strong></p></td>
-<td><p>مجموعة محددة</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA"، امتياز="CollectionAdmin"، collection_name="col1"، db_name="db1")</p></td>
-<td><p>أدخل اسم المجموعة المستهدفة واسم قاعدة البيانات التي تنتمي إليها المجموعة المستهدفة.</p></td>
-</tr>
-<tr>
-<td><p>جميع المجموعات ضمن قاعدة بيانات محددة</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA"، امتياز="CollectionAdmin"، collection_name="<em>"، db_name="db1")</p></td>
-<td><p>أدخل اسم قاعدة البيانات المستهدفة وحرف البدل <code translate="no"></em></code> كاسم المجموعة.</p></td>
-</tr>
-<tr>
-<td><p><strong>قاعدة البيانات</strong></p></td>
-<td><p>قاعدة بيانات محددة</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA"، امتياز="DatabaseAdmin"، collection_name="<em>"، db_name="db1")</p></td>
-<td><p>أدخل اسم قاعدة البيانات المستهدفة وحرف البدل <code translate="no"></em></code> كاسم المجموعة.</p></td>
-</tr>
-<tr>
-<td></td>
-<td><p>جميع قواعد البيانات ضمن المثيل الحالي</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA"، امتياز="DatabaseAdmin"، collection_name="<em>"، db_name=""، db_name=</em>""")</p></td>
-<td><p>إدخال <code translate="no"><em></code> كاسم قاعدة البيانات و <code translate="no"></em></code> كاسم المجموعة.</p></td>
-</tr>
-<tr>
-<td><p><strong>المثيل</strong></p></td>
-<td><p>المثيل الحالي</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA"، امتياز="ClusterAdmin"، collection_name="<em>"، db_name=""، db_name=</em>""")</p></td>
-<td><p>إدخال <code translate="no"><em></code> كاسم قاعدة البيانات و <code translate="no"></em></code> كاسم المجموعة.</p></td>
-</tr>
-</table></p></li>
-<li><p><strong>امتياز</strong>: الامتياز أو <a href="/docs/ar/privilege_group.md">مجموعة الامتيازات</a> المحددة التي تحتاج إلى منحها للدور. يوفر ملفوس حالياً 56 نوعاً من الامتيازات التي يمكنك منحها. يسرد الجدول أدناه الامتيازات في ملفوس.</p>
+<li><p><strong>المورد</strong>: المورد المستهدف للامتياز، والذي يمكن أن يكون مثيلًا أو قاعدة بيانات أو مجموعة محددة.</p></li>
+</ul>
+<p>يشرح الجدول التالي كيفية تحديد المورد في الأسلوب <code translate="no">client.grantV2()</code>.</p>
+<table>
+   <tr>
+     <th><p><strong>المستوى</strong></p></th>
+     <th><p><strong>المورد</strong></p></th>
+     <th><p><strong>طريقة المنح</strong></p></th>
+     <th><p><strong>ملاحظات</strong></p></th>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>المجموعة</strong></p></td>
+     <td><p>مجموعة محددة</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="col1", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>أدخل اسم المجموعة المستهدفة واسم قاعدة البيانات التي تنتمي إليها المجموعة المستهدفة.</p></td>
+   </tr>
+   <tr>
+     <td><p>جميع المجموعات ضمن قاعدة بيانات محددة</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>أدخل اسم قاعدة البيانات المستهدفة وحرف البدل <code translate="no">*</code> كاسم المجموعة.</p></td>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>قاعدة بيانات</strong></p></td>
+     <td><p>قاعدة بيانات محددة</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>أدخل اسم قاعدة البيانات المستهدفة وحرف البدل <code translate="no">*</code> كاسم المجموعة.</p></td>
+   </tr>
+   <tr>
+     <td><p>جميع قواعد البيانات ضمن المثيل الحالي</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>أدخل <code translate="no">*</code> كاسم قاعدة البيانات و <code translate="no">*</code> كاسم المجموعة.</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>المثيل</strong></p></td>
+     <td><p>المثيل الحالي</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="ClusterAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>أدخل <code translate="no">*</code> كاسم قاعدة البيانات و <code translate="no">*</code> كاسم المجموعة.</p></td>
+   </tr>
+</table>
+<ul>
+<li><p><strong>الامتياز</strong>: الامتياز المحدد أو <a href="/docs/ar/privilege_group.md">مجموعة الامتيازات</a> التي تحتاج إلى منحها للدور. يوفر Milvus حاليًا 56 نوعًا من الامتيازات التي يمكنك منحها. يسرد الجدول أدناه الامتيازات في ملفوس.</p>
 <p><div class="alert note"></p>
 <p>عمود النوع في الجدول أدناه مستخدم لتسهيل البحث السريع عن الامتيازات ويستخدم لأغراض التصنيف فقط. عند منح الامتيازات، لا تحتاج إلى فهم الأنواع. تحتاج فقط إلى إدخال الامتيازات المقابلة.</p>
 <p></div></p>
@@ -168,7 +200,7 @@ summary: >-
 <tr>
 <td><p>تحميل</p></td>
 <td><p>تحميل مجموعة</p></td>
-<td><p><a href="/docs/ar/load-and-release.md">تحميل مجموعة/تحميل مجموعة/تحميل تقدم التحميل/تحميل</a><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">حالة</a><a href="/docs/ar/load-and-release.md">التحميل</a></p></td>
+<td><p><a href="/docs/ar/load-and-release.md">تحميل مجموعة/تحميل مجموعة/تحميل</a><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">تقدم</a><a href="/docs/ar/load-and-release.md">التحميل/تحميل حالة التحميل</a></p></td>
 </tr>
 <tr>
 <td><p>تحرير</p></td>

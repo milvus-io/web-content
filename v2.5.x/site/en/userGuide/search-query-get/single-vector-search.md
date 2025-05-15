@@ -40,7 +40,7 @@ In this section, you will find detailed information about the following topics:
 
 In ANN searches, a single-vector search refers to a search that involves only one query vector. Based on the pre-built index and the metric type carried in the search request, Milvus will find the top-K vectors most similar to the query vector.
 
-In this section, you will learn how to conduct a single-vector search. The code snippet assumes you have created a collection in a [quick-setup](create-collection-instantly.md#Quick-Setup) manner. The search request carries a single query vector and asks Milvus to use Inner Product (IP) to calculate the similarity between query vectors and vectors in the collection and returns the three most similar ones.
+In this section, you will learn how to conduct a single-vector search. The search request carries a single query vector and asks Milvus to use Inner Product (IP) to calculate the similarity between query vectors and vectors in the collection and returns the three most similar ones.
 
 <div class="multipleCode">
     <a href="#python">Python</a>

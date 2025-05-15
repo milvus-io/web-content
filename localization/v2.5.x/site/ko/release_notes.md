@@ -45,7 +45,7 @@ title: 릴리스 노트
 <p>Milvus 2.5.11의 출시를 발표하게 되어 기쁩니다! 이번 버전에는 다중 분석기 기능과 확장된 토큰화 도구 지원(Jieba, Lindera, ICU, 언어 식별자)과 같은 강력한 새 기능이 도입되었습니다. 또한 동적 세그먼트 로딩 스레드 풀 업데이트와 빈로그 가져오기 중 최적화된 삭제 필터링 등 몇 가지 개선 사항도 있었습니다. 주요 버그 수정은 잠재적인 세그먼트 드롭 문제, BM25 검색 실패, JSON 통계 필터링 오류를 해결합니다.</p>
 <p>2.5.11로 업그레이드하여 이러한 개선 사항과 수정 사항을 활용하시기 바랍니다!</p>
 <h3 id="Features" class="common-anchor-header">주요 기능</h3><ul>
-<li>여러 분석기(토큰화기)를 구성하고 입력 데이터의 지시에 따라 적절한 분석기를 선택할 수 있는 기능이 추가되었습니다<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
+<li>다국어 지원을 위해 여러 분석기(토큰화기)를 구성하고 입력 데이터의 지시에 따라 적절한 분석기를 선택할 수 있는 기능이 추가되었습니다<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
 <li>BM25 분석기 기능 개선<a href="https://github.com/milvus-io/milvus/pull/41456">(#41456</a>).<ul>
 <li>토큰화 결과를 분석하는 데 도움이 되는 드라이런용 <code translate="no">run_analyzer</code> API를 도입했습니다. 자세한 내용은 <a href="/docs/ko/analyzer-overview.md">분석기 개요를</a> 참조하세요.</li>
 <li>토큰화 도구<ul>
@@ -71,7 +71,7 @@ title: 릴리스 노트
 <li>인덱스를 최신 버전으로 강제로 재구축하는 구성 옵션이 추가되었습니다<a href="https://github.com/milvus-io/milvus/pull/41432">(#41432</a>).</li>
 <li>목록 정책에 대한 오류 로그 메시지를 개선했습니다<a href="https://github.com/milvus-io/milvus/pull/41368">(#41368</a>).</li>
 <li>gRPC 메타데이터 헤더의 하이픈 처리를 조정했습니다<a href="https://github.com/milvus-io/milvus/pull/41372">(#41372</a>).</li>
-<li>CVE<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>)를 해결하기 위해 Go 버전을 1.21.4로 업그레이드했습니다.<em>(참고: 원본 텍스트에는 "2.14"라고 언급되어 있었으나, 오타가 그럴듯한 최신 버전 1.21.4로 수정되었습니다</em>.)</li>
+<li>CVE<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>)를 해결하기 위해 Go 버전을 1.24.1로 업그레이드했습니다.</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">버그 수정</h3><ul>
 <li>파티션을 삭제할 때 세그먼트가 제대로 삭제되지 않을 수 있는 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>).</li>
@@ -283,7 +283,7 @@ title: 릴리스 노트
 <h3 id="Bug-fixes" class="common-anchor-header">버그 수정</h3><ul>
 <li>빈로그 파일을 가져올 때 <code translate="no">newInsertDataWithFunctionOutputField</code> 사용<a href="https://github.com/milvus-io/milvus/pull/40742">(#40742</a>)</li>
 <li>컬렉션을 만들 때 mmap 속성을 적용하지 못하는 문제 수정<a href="https://github.com/milvus-io/milvus/pull/40515">(#40515</a>)</li>
-<li>샘플링에 실패할 때 centroids 파일을 삭제하지 말고 GC를 기다리세요<a href="https://github.com/milvus-io/milvus/pull/40702">(#40702</a>).</li>
+<li>샘플링에 실패할 때 centroids 파일을 삭제하지 말고 GC를 기다리도록 수정<a href="https://github.com/milvus-io/milvus/pull/40702">(#40702</a>).</li>
 <li>탐색 중 메시지 손실 문제 수정<a href="https://github.com/milvus-io/milvus/pull/40736">(#40736</a>)</li>
 <li>메인 디스패처 이후의 지연 타겟 제거<a href="https://github.com/milvus-io/milvus/pull/40717">(#40717</a>)</li>
 <li>모든 배치 루프에 대한 명확한 비트맵 입력 추가<a href="https://github.com/milvus-io/milvus/pull/40722">(#40722</a>).</li>
@@ -700,7 +700,7 @@ title: 릴리스 노트
 <h4 id="Faiss-based-HNSW-SQPQPRQ" class="common-anchor-header">Faiss 기반 HNSW SQ/PQ/PRQ</h4><p>Faiss 커뮤니티와의 긴밀한 협력을 통해 Faiss의 HNSW 알고리즘은 기능과 성능 모두에서 상당한 개선을 이루었습니다. 안정성과 유지보수성을 고려하여 Milvus 2.5는 HNSW에 대한 지원을 hnswlib에서 Faiss로 공식적으로 마이그레이션했습니다.</p>
 <p>Milvus 2.5는 Faiss를 기반으로 다양한 시나리오의 요구 사항을 충족하기 위해 HNSW에서 여러 양자화 방법을 지원합니다: SQ(스칼라 퀀타이저), PQ(제품 퀀타이저), PRQ(제품 잔여 퀀타이저)가 그것입니다. SQ와 PQ가 더 일반적으로 사용되는데, SQ는 쿼리 성능과 빌드 속도가 우수하고, PQ는 동일한 압축률에서 더 나은 리콜을 제공합니다. 많은 벡터 데이터베이스는 일반적으로 SQ 양자화의 간단한 형태인 이진 양자화를 사용합니다.</p>
 <p>PRQ는 PQ와 AQ(애디티브 퀀타이저)의 융합입니다. PQ와 비교했을 때, 특히 높은 압축률에서 더 나은 리콜을 제공하기 위해 더 긴 빌드 시간이 필요하며, 이진 압축이라고 합니다.</p>
-<h4 id="Clustering-Compaction-Beta" class="common-anchor-header">클러스터링 압축(베타)</h4><p>Milvus 2.5에는 대규모 컬렉션에서 검색을 가속화하고 비용을 절감하기 위해 클러스터링 압축이 도입되었습니다. 스칼라 필드를 클러스터링 키로 지정하면 데이터를 범위별로 재분배하여 저장 및 검색을 최적화할 수 있습니다. 글로벌 인덱스처럼 작동하는 이 기능은 클러스터링 메타데이터를 기반으로 쿼리 중에 데이터를 효율적으로 정리하여 스칼라 필터를 적용할 때 검색 성능을 향상시킬 수 있습니다.</p>
+<h4 id="Clustering-Compaction-Beta" class="common-anchor-header">클러스터링 압축(베타)</h4><p>Milvus 2.5에는 대규모 컬렉션에서 검색을 가속화하고 비용을 절감하기 위해 클러스터링 압축이 도입되었습니다. 스칼라 필드를 클러스터링 키로 지정하면 데이터를 범위별로 재분배하여 저장과 검색을 최적화할 수 있습니다. 글로벌 인덱스처럼 작동하는 이 기능은 클러스터링 메타데이터를 기반으로 쿼리 중에 데이터를 효율적으로 정리하여 스칼라 필터를 적용할 때 검색 성능을 향상시킬 수 있습니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/clustering-compaction.md">클러스터링 압축을</a> 참조하세요.</p>
 <h3 id="Other-Features" class="common-anchor-header">기타 기능</h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">스트리밍 노드(베타)</h4><p>Milvus 2.5에는 미리 쓰기 로깅(WAL) 서비스를 제공하는 스트리밍 노드라는 새로운 구성 요소가 도입되었습니다. 이를 통해 Milvus는 채널 읽기 및 쓰기 전후에 합의를 달성하여 새로운 특징, 기능 및 최적화를 실현할 수 있습니다. 이 기능은 Milvus 2.5에서는 기본적으로 비활성화되어 있으며 3.0 버전에서 공식적으로 제공될 예정입니다.</p>
 <h4 id="IPv6-Support" class="common-anchor-header">IPv6 지원</h4><p>Milvus는 이제 IPv6를 지원하여 네트워크 연결성과 호환성을 확장합니다.</p>

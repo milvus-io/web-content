@@ -39,6 +39,7 @@ You can set default values for any scalar field and make it nullable. For detail
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -404,7 +405,7 @@ curl --request POST \
 
 You can also create a collection without any index parameters and add them afterward. In this case, Milvus does not load the collection upon its creation. .
 
-The following code snippet demonstrates how to create a collection without a collection, and the load status of the collection remains unloaded upon creation.
+The following code snippet demonstrates how to create a collection without an index, and the load status of the collection remains unloaded upon creation.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -517,8 +518,6 @@ curl --request POST \
     \"collectionName\": \"customized_setup_2\"
 }"
 ```
-
-Milvus also provides a way for you to create a collection instantly. For details, refer to [Create Collection Instantly](create-collection-instantly.md).
 
 ## Set Collection Properties
 
@@ -833,6 +832,6 @@ For more on consistency levels, see [Consistency Level](tune_consistency.md).
 
 ### Enable Dynamic Field
 
-The dynamic field in a collection is a reserved JavaScript Object Notation (JSON) field named **$meta**. Once you have enabled this field, Milvus saves all non-schema-defined fields carried in each entity and their values as key-value pairs in the reserved field.
+The dynamic field in a collection is a reserved JavaScript Object Notation (JSON) field named **\$meta**. Once you have enabled this field, Milvus saves all non-schema-defined fields carried in each entity and their values as key-value pairs in the reserved field.
 
 For details on how to use the dynamic field, refer to [Dynamic Field](enable-dynamic-field.md).

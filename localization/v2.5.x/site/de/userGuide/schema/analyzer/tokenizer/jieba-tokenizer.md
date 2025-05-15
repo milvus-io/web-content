@@ -121,7 +121,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>Eine Liste von Wörterbüchern, die zur Definition des Vokabulars verwendet werden. Sie können Ihre eigenen Wörterbücher angeben oder sie mit dem Standardwörterbuch unter <code translate="no">"_default_"</code> kombinieren. Zum Beispiel: <code translate="no">["_default_", "结巴分词器"]</code>. Einzelheiten zum Standardwörterbuch finden Sie unter <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict</a>.</p></td>
+     <td><p>Eine Liste von Wörterbüchern, die der Analyzer als Vokabularquelle laden wird. Eingebaute Optionen:</p><ul><li><p><code translate="no">"_default_"</code>: Lädt das eingebaute Wörterbuch der Engine für vereinfachtes Chinesisch. Details finden Sie in <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li><li><p><code translate="no">"_extend_default_"</code>: Lädt alles, was in <code translate="no">"_default_"</code> steht, plus eine zusätzliche Ergänzung in traditionellem Chinesisch. Einzelheiten dazu finden Sie in <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p><p>Sie können auch das integrierte Wörterbuch mit einer beliebigen Anzahl von benutzerdefinierten Wörterbüchern mischen. Beispiel: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>
@@ -131,7 +131,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">hmm</code></p></td>
-     <td><p>Ein boolesches Flag, das angibt, ob das Hidden Markov Model (HMM) für die probabilistische Segmentierung von Wörtern, die nicht im Wörterbuch enthalten sind, aktiviert werden soll.</p></td>
+     <td><p>Ein boolesches Flag, das angibt, ob das Hidden Markov Model (HMM) zur probabilistischen Segmentierung von Wörtern, die nicht im Wörterbuch gefunden werden, aktiviert werden soll.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>

@@ -54,7 +54,7 @@ summary: >-
 <li><p><strong>Dizionari annidati</strong>: I dizionari annidati all'interno dei valori dei campi JSON vengono trattati come stringhe semplici per la memorizzazione.</p></li>
 <li><p><strong>Valori predefiniti</strong>: I campi JSON non supportano valori predefiniti. Tuttavia, è possibile impostare l'attributo <code translate="no">nullable</code> su <code translate="no">True</code> per consentire valori nulli. Per maggiori dettagli, consultare <a href="/docs/it/nullable-and-default.md">Nullable e Default</a>.</p></li>
 <li><p><strong>Corrispondenza di tipo</strong>: se il valore chiave di un campo JSON è un intero o un float, può essere confrontato (tramite filtri di espressione) solo con un'altra chiave numerica dello stesso tipo.</p></li>
-<li><p><strong>Nomi</strong>: Quando si nominano le chiavi JSON, si raccomanda di usare solo lettere, numeri e trattini bassi. L'uso di altri caratteri può causare problemi durante il filtraggio o la ricerca.</p></li>
+<li><p><strong>Denominazione</strong>: Quando si nominano le chiavi JSON, si raccomanda di usare solo lettere, numeri e trattini bassi. L'uso di altri caratteri può causare problemi durante il filtraggio o la ricerca.</p></li>
 <li><p><strong>Gestione delle stringhe</strong>: Milvus memorizza i valori delle stringhe nei campi JSON così come sono stati inseriti, senza conversione semantica. Ad esempio:</p>
 <ul>
 <li><p><code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, e <code translate="no">&quot;a\\&quot;b&quot;</code> sono memorizzati esattamente come sono.</p></li>
@@ -389,7 +389,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">params.json_cast_type</code></p></td>
-     <td><p>Tipo di dati in cui Milvus trasformerà i valori JSON estratti durante la creazione dell'indice. Valori validi:</p><ul><li><p><code translate="no">"bool"</code> o <code translate="no">"BOOL"</code></p></li><li><p><code translate="no">"double"</code> o <code translate="no">"DOUBLE"</code></p></li><li><p><code translate="no">"varchar"</code> o <code translate="no">"VARCHAR"</code></p><p><strong>Nota</strong>: Per i valori interi, Milvus utilizza internamente double per l'indice. I numeri interi di dimensioni superiori a 2^53 perdono precisione. Se il type casting fallisce (a causa di una mancata corrispondenza di tipo), non viene lanciato alcun errore e il valore della riga non viene indicizzato.</p></li></ul></td>
+     <td><p>Tipo di dati in cui Milvus trasformerà i valori JSON estratti durante la creazione dell'indice. Valori validi:</p><ul><li><code translate="no">"bool"</code> o <code translate="no">"BOOL"</code></li><li><code translate="no">"double"</code> o <code translate="no">"DOUBLE"</code></li><li><code translate="no">"varchar"</code> o <code translate="no">"VARCHAR"</code><strong>Nota</strong>: Per i valori interi, Milvus utilizza internamente double per l'indice. I valori interi di grandi dimensioni superiori a 2^53 perdono precisione. Se il type casting fallisce (a causa di una mancata corrispondenza di tipo), non viene lanciato alcun errore e il valore della riga non viene indicizzato.</li></ul></td>
      <td><p><code translate="no">"varchar"</code></p></td>
    </tr>
 </table>
@@ -406,7 +406,7 @@ curl --request POST \
 </ul></li>
 <li><p><strong>Precisione numerica</strong>:</p>
 <ul>
-<li>Internamente, Milvus indicizza tutti i campi numerici come doppi. Se un valore numerico supera 2^{53}, perde precisione e le query su questi valori fuori range potrebbero non corrispondere esattamente.</li>
+<li>Internamente, Milvus indicizza tutti i campi numerici come doppi. Se un valore numerico supera <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2532^{53}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">53</span></span></span></span></span></span></span></span></span></span></span></span>, perde precisione e le query su questi valori fuori range potrebbero non corrispondere esattamente.</li>
 </ul></li>
 <li><p><strong>Integrità dei dati</strong>:</p>
 <ul>
@@ -474,7 +474,7 @@ indexOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta definiti lo schema e l'indice, creare una collezione che includa i campi stringa.</p>
+    </button></h2><p>Una volta definiti lo schema e l'indice, creare una collezione che includa il campo JSON.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -711,7 +711,7 @@ rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;metadata\&quot;:{
       </svg>
     </button></h2><p>Dopo aver inserito le entità, utilizzare il metodo <code translate="no">query</code> per recuperare le entità che corrispondono alle espressioni di filtro specificate.</p>
 <div class="alert note">
-<p>Per i campi JSON che consentono valori nulli, il campo sarà trattato come nullo se l'intero oggetto JSON è mancante o impostato su <code translate="no">None</code>. Per ulteriori informazioni, consultare <a href="/docs/it/basic-operators.md#JSON-Fields-with-Null-Values">Campi JSON con valori nulli</a>.</p>
+<p>Per i campi JSON che consentono valori nulli, il campo sarà trattato come nullo se l'intero oggetto JSON è mancante o impostato su <code translate="no">None</code>. Per ulteriori informazioni, fare riferimento a <a href="/docs/it/basic-operators.md#JSON-Fields-with-Null-Values">Campi JSON con valori nulli</a>.</p>
 </div>
 <p>Per recuperare le entità in cui <code translate="no">metadata</code> non è nullo:</p>
 <div class="multipleCode">

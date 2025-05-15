@@ -1,7 +1,9 @@
 ---
 id: grant_privileges.md
 title: 为角色授予权限或权限组
-summary: 创建角色后，就可以向角色授予权限。本指南将介绍如何向角色授予权限或权限组。
+summary: >-
+  Once a role is created, you can grant privileges to the role. This guide
+  introduces how to grant privileges or privilege groups to a role.
 ---
 <h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">为角色授予权限或权限组<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,45 +39,77 @@ summary: 创建角色后，就可以向角色授予权限。本指南将介绍�
     </button></h2><p>Milvus 2.5 引入了新版本的 API，简化了授予操作。向角色授予权限时，不再需要查找对象类型。以下是参数和相应的解释。</p>
 <ul>
 <li><p><strong>role_name：</strong>需要授予权限或权限组的目标角色名称。</p></li>
-<li><p><strong>资源</strong>：权限的目标资源，可以是特定实例、数据库或 Collections。下表解释了如何在<code translate="no">client.grantV2()</code> 方法中指定资源。</p>
-<p><table>
-<tr>
-<th><p><strong>级别</strong></p></th>
-<th><p><strong>资源</strong></p></th>
-<th><p><strong>授予方法</strong></p></th>
-<th><p><strong>注释</strong></p></th>
-</tr>
-<tr>
-<td rowspan="2"><p><strong>Collections</strong></p></td>
-<td><p>特定的 Collection</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="col1", db_name="db1")</p></td>
-<td><p>输入目标集合的名称和目标集合所属数据库的名称。</p></td>
-</tr>
-<tr>
-<td><p>特定数据库下的所有 Collections</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="CollectionAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>输入目标数据库名称和通配符 <code translate="no"></em></code>作为 Collections 名称。</p></td>
-</tr>
-<tr>
-<td><p><strong>数据库</strong></p></td>
-<td><p>特定数据库</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name="<em>", db_name="db1")</p></td>
-<td><p>输入目标数据库的名称和通配符 <code translate="no"></em></code>作为 Collections 名称。</p></td>
-</tr>
-<tr>
-<td></td>
-<td><p>当前实例下的所有数据库</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="DatabaseAdmin", collection_name=""<em>, db_name=</em>"")</p></td>
-<td><p>输入 <code translate="no"><em></code>作为数据库名称， <code translate="no"></em></code>作为 Collections 名称。</p></td>
-</tr>
-<tr>
-<td><p><strong>实例</strong></p></td>
-<td><p>当前实例</p></td>
-<td><p>client.grant_privilege_v2(role_name="roleA", privilege="ClusterAdmin", collection_name=""<em>, db_name=</em>"")</p></td>
-<td><p>输入 <code translate="no"><em></code>作为数据库名称， <code translate="no"></em></code>作为 Collections 名称。</p></td>
-</tr>
-</table></p></li>
-<li><p><strong>权限</strong>：需要授予角色的特定权限或<a href="/docs/zh/privilege_group.md">权限组</a>。目前，Milvus 提供 56 种可授予的特权。下表列出了 Milvus 中的特权。</p>
+<li><p><strong>资源</strong>：特权的目标资源，可以是特定实例、数据库或 Collections。</p></li>
+</ul>
+<p>下表解释了如何在<code translate="no">client.grantV2()</code> 方法中指定资源。</p>
+<table>
+   <tr>
+     <th><p><strong>级别</strong></p></th>
+     <th><p><strong>资源</strong></p></th>
+     <th><p><strong>授予方法</strong></p></th>
+     <th><p><strong>注释</strong></p></th>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>Collections</strong></p></td>
+     <td><p>特定 Collections</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="col1", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>输入目标 Collection 的名称和目标 Collection 所属数据库的名称。</p></td>
+   </tr>
+   <tr>
+     <td><p>特定数据库下的所有集合</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="CollectionAdmin",
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>输入目标数据库名称和通配符<code translate="no">*</code> 作为 Collection 名称。</p></td>
+   </tr>
+   <tr>
+     <td rowspan="2"><p><strong>数据库</strong></p></td>
+     <td><p>特定数据库</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="db1"
+ )
+</code></pre></td>
+     <td><p>输入目标数据库的名称和通配符<code translate="no">*</code> 作为 Collections 名称。</p></td>
+   </tr>
+   <tr>
+     <td><p>当前实例下的所有数据库</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="DatabaseAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>输入<code translate="no">*</code> 作为数据库名称，输入<code translate="no">*</code> 作为 Collections 名称。</p></td>
+   </tr>
+   <tr>
+     <td><p><strong>实例</strong></p></td>
+     <td><p>当前实例</p></td>
+     <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
+     role_name="roleA", 
+     privilege="ClusterAdmin", 
+     collection_name="*", 
+     db_name="*"
+ )
+</code></pre></td>
+     <td><p>输入<code translate="no">*</code> 作为数据库名称，输入<code translate="no">*</code> 作为 Collections 名称。</p></td>
+   </tr>
+</table>
+<ul>
+<li><p><strong>权限</strong>：需要授予角色的特定权限或<a href="/docs/zh/privilege_group.md">权限组</a>。目前，Milvus 提供了 56 种可授予的特权。下表列出了 Milvus 中的特权。</p>
 <p><div class="alert note"></p>
 <p>下表中的类型列是用户为方便快速查找特权而设置的，仅用于分类目的。授予权限时，不需要了解类型。只需输入相应的权限即可。</p>
 <p></div></p>

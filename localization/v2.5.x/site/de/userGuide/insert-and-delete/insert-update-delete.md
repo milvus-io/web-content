@@ -2,7 +2,7 @@
 id: insert-update-delete.md
 title: Entitäten einfügen
 summary: >-
-  Entitäten in einer Sammlung sind Datensätze, die denselben Satz von Feldern
+  Entitäten in einer Sammlung sind Datensätze, die den gleichen Satz von Feldern
   haben. Die Feldwerte in jedem Datensatz bilden eine Entität. Auf dieser Seite
   wird erläutert, wie man Entitäten in eine Sammlung einfügt.
 ---
@@ -56,7 +56,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Bevor Sie Daten einfügen, müssen Sie Ihre Daten in einer Liste von Dictionaries gemäß dem Schema organisieren, wobei jedes Dictionary eine Entität darstellt und alle im Schema definierten Felder enthält. Wenn in der Sammlung das dynamische Feld aktiviert ist, kann jedes Wörterbuch auch Felder enthalten, die nicht im Schema definiert sind.</p>
-<p>In diesem Abschnitt werden Sie Entitäten in eine Sammlung einfügen, die <a href="/docs/de/create-collection-instantly.md#Quick-Setup">mit der Schnelleinstellungsmethode</a> erstellt wurde. Eine auf diese Weise erstellte Sammlung hat nur zwei Felder, nämlich <strong>id</strong> und <strong>vector</strong>. Außerdem ist bei dieser Collection das dynamische Feld aktiviert, so dass die Entities im Beispielcode ein Feld namens <strong>color</strong> enthalten, das nicht im Schema definiert ist.</p>
+<p>In diesem Abschnitt werden Sie Entitäten in eine Sammlung einfügen, die mit der Schnelleinstellungsmethode erstellt wurde. Eine auf diese Weise erstellte Sammlung hat nur zwei Felder, nämlich <strong>id</strong> und <strong>vector</strong>. Außerdem ist bei dieser Collection das dynamische Feld aktiviert, so dass die Entities im Beispielcode ein Feld namens <strong>color</strong> enthalten, das nicht im Schema definiert ist.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

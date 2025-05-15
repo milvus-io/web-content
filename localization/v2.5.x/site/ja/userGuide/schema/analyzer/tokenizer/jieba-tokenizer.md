@@ -81,7 +81,7 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>パラメータの詳細については、<a href="/docs/ja/jieba-tokenizer.md#Custom-configuration">カスタム</a>構成を参照してください。</p>
-<h3 id="Custom-configuration" class="common-anchor-header">カスタム設定</h3><p>より詳細に制御するには、カスタム辞書を指定し、セグメンテーション・モードを選択し、隠れマルコフ・モデル (HMM) を有効または無効にするカスタム設定を提供できます。例えば</p>
+<h3 id="Custom-configuration" class="common-anchor-header">カスタム設定</h3><p>より詳細に制御するには、カスタム辞書を指定し、セグメンテーションモードを選択し、隠れマルコフモデル（HMM）を有効または無効にするカスタム構成を提供できます。例えば</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Custom configuration with user-defined settings</span>
@@ -119,12 +119,12 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>語彙の定義に使用される辞書のリスト。独自の辞書単語を指定することも、<code translate="no">"_default_"</code> を使用してデフォルト辞書と組み合わせることもできます。たとえば、<code translate="no">["_default_", "结巴分词器"]</code> 。デフォルト辞書の詳細については、「<a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict</a>」を参照してください。</p></td>
+     <td><p>解析器が語彙ソースとして読み込む辞書のリスト。組み込みオプション：</p><ul><li><p><code translate="no">"_default_"</code>:エンジン内蔵の簡体字中国語辞書をロードします。詳細は<a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a> を参照してください。</p></li><li><p><code translate="no">"_extend_default_"</code>:<code translate="no">"_default_"</code> のすべてに加え、繁体字中国語の補足を読み込む。詳細は<a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.bigを</a>参照。</p><p>内蔵辞書と任意の数のカスタム辞書を混在させることもできます。例：<code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mode</code></p></td>
-     <td><p>セグメンテーション・モード。取り得る値：</p><ul><li><p><code translate="no">"exact"</code>:最も正確な方法で文を分割しようとするため、テキスト分析に最適です。</p></li><li><p><code translate="no">"search"</code>:検索エンジンのトークン化に適している。</p><p>詳細は<a href="https://github.com/fxsjy/jieba">Jieba GitHub Projectを</a>参照。</p></li></ul></td>
+     <td><p>セグメンテーション・モード。可能な値：</p><ul><li><p><code translate="no">"exact"</code>:最も正確な方法でセグメンテーションしようとするため、テキスト分析に最適です。</p></li><li><p><code translate="no">"search"</code>:検索エンジンのトークン化に適している。</p><p>詳細は<a href="https://github.com/fxsjy/jieba">Jieba GitHub Projectを</a>参照。</p></li></ul></td>
      <td><p><code translate="no">"search"</code></p></td>
    </tr>
    <tr>

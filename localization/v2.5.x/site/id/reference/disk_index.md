@@ -1,10 +1,12 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: Mekanisme indeks disk di Milvus.
-title: Indeks Pada Disk
+summary: >-
+  Mekanisme indeks disk di Milvus untuk pencarian vektor yang dioptimalkan untuk
+  disk.
+title: Indeks di dalam disk
 ---
-<h1 id="On-disk-Index" class="common-anchor-header">Indeks Pada Disk<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
+<h1 id="On-disk-Index" class="common-anchor-header">Indeks di dalam disk<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,10 +21,10 @@ title: Indeks Pada Disk
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Artikel ini memperkenalkan algoritme pengindeksan dalam disk yang dinamai DiskANN. Berdasarkan grafik Vamana, DiskANN mendukung pencarian yang efisien dalam kumpulan data yang besar.</p>
-<p>Untuk meningkatkan performa kueri, Anda dapat <a href="/docs/id/index-vector-fields.md">menentukan jenis indeks</a> untuk setiap bidang vektor.</p>
+    </button></h1><p>Artikel ini memperkenalkan DiskANN, sebuah algoritme pengindeksan dalam disk untuk pencarian vektor yang dioptimalkan untuk disk. Berdasarkan grafik Vamana, DiskANN mendukung pencarian vektor dalam disk yang efisien dalam kumpulan data yang besar.</p>
+<p>Untuk meningkatkan kinerja kueri, Anda dapat <a href="/docs/id/index-vector-fields.md">menentukan jenis indeks</a> untuk setiap bidang vektor.</p>
 <div class="alert note"> 
-Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomatis menghapus indeks lama ketika mengganti jenis indeks.</div>
+Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomatis menghapus indeks lama saat mengganti jenis indeks.</div>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +40,7 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menggunakan DiskANN, perhatikan bahwa</p>
+    </button></h2><p>Untuk menggunakan DiskANN di Milvus, perhatikan bahwa</p>
 <ul>
 <li>Instance Milvus berjalan pada Ubuntu 18.04.6 atau rilis yang lebih baru.</li>
 <li>Jalur data Milvus harus dipasang ke SSD NVMe untuk performa penuh:<ul>

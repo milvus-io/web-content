@@ -45,9 +45,9 @@ title: Note di rilascio
 <p>Siamo entusiasti di annunciare il rilascio di Milvus 2.5.11! Questa versione introduce nuove potenti funzionalità, come la capacità di analisi multipla e il supporto ampliato per i tokenizer (Jieba, Lindera, ICU, Language Identifier). Sono stati inoltre apportati diversi miglioramenti, tra cui gli aggiornamenti del pool di thread per il caricamento dinamico dei segmenti e l'ottimizzazione del filtraggio delle cancellazioni durante l'importazione dei binlog. Le principali correzioni di bug riguardano potenziali problemi di caduta dei segmenti, errori di ricerca BM25 ed errori di filtraggio delle statistiche JSON.</p>
 <p>Vi invitiamo ad aggiornare alla versione 2.5.11 per usufruire di questi miglioramenti e correzioni!</p>
 <h3 id="Features" class="common-anchor-header">Caratteristiche</h3><ul>
-<li>Aggiunta la possibilità di configurare più analizzatori (tokenizer) e di selezionare quello appropriato in base all'istruzione dei dati in ingresso<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
-<li>Miglioramento della funzionalità dell'analizzatore BM25<a href="https://github.com/milvus-io/milvus/pull/41456">(#41456</a>).<ul>
-<li>È stata introdotta un'API <code translate="no">run_analyzer</code> per l'analisi dei risultati della tokenizzazione. Per ulteriori informazioni, fare riferimento a <a href="/docs/it/analyzer-overview.md">Panoramica dell'analizzatore</a>.</li>
+<li>Aggiunta la possibilità di configurare più analizzatori (tokenizer) per il supporto di più lingue e di selezionare quello appropriato in base all'istruzione dei dati in ingresso<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
+<li>Migliorata la funzionalità dell'analizzatore BM25<a href="https://github.com/milvus-io/milvus/pull/41456">(#41456</a>).<ul>
+<li>Introdotta un'API <code translate="no">run_analyzer</code> per l'analisi dei risultati della tokenizzazione. Per ulteriori informazioni, fare riferimento a <a href="/docs/it/analyzer-overview.md">Panoramica dell'analizzatore</a>.</li>
 <li>Tokenizzatori<ul>
 <li>Aggiunto il supporto per la personalizzazione dei parametri del tokenizer Jieba.</li>
 <li>Aggiunto il supporto per il tokenizer Lindera. Per ulteriori informazioni, consultare <a href="/docs/it/lindera-tokenizer.md">Lindera</a>.</li>
@@ -71,7 +71,7 @@ title: Note di rilascio
 <li>Aggiunta un'opzione di configurazione per forzare la ricostruzione degli indici all'ultima versione<a href="https://github.com/milvus-io/milvus/pull/41432">(#41432</a>).</li>
 <li>Migliorato il messaggio di log degli errori per la politica degli elenchi<a href="https://github.com/milvus-io/milvus/pull/41368">(#41368</a>).</li>
 <li>Adattata la gestione dei trattini nelle intestazioni dei metadati di gRPC<a href="https://github.com/milvus-io/milvus/pull/41372">(#41372</a>).</li>
-<li>Aggiornata la versione di Go alla 1.21.4 per risolvere i CVE<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).<em>(Nota: il testo originale parlava di "2.14"; il refuso è stato corretto in una plausibile versione recente 1.21.4</em>).</li>
+<li>Aggiornata la versione di Go alla 1.24.1 per risolvere i CVE<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
 <li>Corretto un problema per cui i segmenti potevano non essere eliminati correttamente quando si eliminava una partizione<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>).</li>
@@ -112,7 +112,7 @@ title: Note di rilascio
 <p>Milvus 2.5.10 migliora le prestazioni di ricerca e caricamento, migliora la reportistica sulle metriche e amplia il supporto SVE per il calcolo accelerato delle metriche. Questa versione include anche numerose correzioni di bug che migliorano la stabilità e la correttezza. Vi invitiamo ad aggiornare o a provare: il vostro feedback è prezioso per aiutarci a rendere Milvus ancora migliore!</p>
 <h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
 <li>Ignorare la segnalazione delle metriche degli indici per indici inesistenti<a href="https://github.com/milvus-io/milvus/pull/41296">(#41296</a>)</li>
-<li>Utilizzo della modalità di scansione per LIKE anche quando esiste un indice invertito (<a href="https://github.com/milvus-io/milvus/pull/41309">#41309</a>)</li>
+<li>Utilizza la modalità di scansione per le LIKE anche quando esiste un indice invertito (<a href="https://github.com/milvus-io/milvus/pull/41309">#41309</a>)</li>
 <li>Ottimizzazione delle prestazioni per le espressioni LIKE (<a href="https://github.com/milvus-io/milvus/pull/41222">#41222</a>)</li>
 <li>Ottimizzare il formato degli indici per migliorare le prestazioni di caricamento (<a href="https://github.com/milvus-io/milvus/pull/41041">#41041</a>)</li>
 <li>RESTful: rendere configurabile il timeout predefinito (<a href="https://github.com/milvus-io/milvus/pull/41225">#41225</a>)</li>
@@ -457,7 +457,7 @@ title: Note di rilascio
 <li>Ottimizzate le prestazioni delle espressioni per alcuni punti<a href="https://github.com/milvus-io/milvus/pull/39938">(#39938</a>)</li>
 <li>[2.5] Ottimizzato il formato dei risultati di getQueryNodeDistribution (<a href="https://github.com/milvus-io/milvus/pull/39926">#39926</a>)</li>
 <li>[cp25] Abilitata l'osservazione dell'amplificazione della scrittura<a href="https://github.com/milvus-io/milvus/pull/39743">(#39743</a>)</li>
-<li>[2.5] Restituiti risultati top-k durante la ricerca in RESTful v2 (<a href="https://github.com/milvus-io/milvus/pull/39839">#39839</a>)</li>
+<li>[2.5] Restituiti i risultati top-k durante la ricerca in RESTful v2<a href="https://github.com/milvus-io/milvus/pull/39839">(#39839</a>)</li>
 <li>[2.5][GoSDK] Aggiunto lo zucchero sintattico withEnableMatch (<a href="https://github.com/milvus-io/milvus/pull/39853">#39853</a>)</li>
 <li>[2.5] L'indice intermedio supporta diversi tipi di indice e più tipi di dati (FP16/BF16)<a href="https://github.com/milvus-io/milvus/pull/39180">(#39180</a>)</li>
 <li>[GoSDK][2.5] Sincronizzati i commit di GoSDK dal ramo master (<a href="https://github.com/milvus-io/milvus/pull/39823">#39823</a>)</li>
@@ -491,7 +491,7 @@ title: Note di rilascio
 <tr><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td><td>2.5.4</td></tr>
 </tbody>
 </table>
-<p>Siamo lieti di annunciare il rilascio di Milvus 2.5.4, che introduce ottimizzazioni chiave delle prestazioni e nuove funzionalità come l'isolamento della PartitionKey, l'indice Sparse con DAAT MaxScore e meccanismi di blocco migliorati. Un punto di forza di questa versione è il supporto per 10.000 collezioni e 1 milione di partizioni, che rappresenta un'importante pietra miliare per i casi di utilizzo multi-tenant. Questa versione risolve anche diversi bug che migliorano la stabilità e l'affidabilità generali; due dei bug critici possono causare la perdita di dati. Vi invitiamo ad aggiornare o a provare quest'ultima versione e siamo ansiosi di ricevere il vostro feedback per aiutarci a perfezionare continuamente Milvus!</p>
+<p>Siamo lieti di annunciare il rilascio di Milvus 2.5.4, che introduce ottimizzazioni chiave delle prestazioni e nuove funzionalità come l'isolamento della PartitionKey, l'indice Sparse con DAAT MaxScore e meccanismi di blocco migliorati. Un punto di forza di questa versione è il supporto per 10.000 collezioni e 1 milione di partizioni, che rappresenta un'importante pietra miliare per i casi di utilizzo multi-tenant. Questa versione risolve anche diversi bug che migliorano la stabilità e l'affidabilità generali; due di questi bug critici possono causare la perdita di dati. Vi invitiamo ad aggiornare o a provare quest'ultima versione e siamo ansiosi di ricevere il vostro feedback per aiutarci a perfezionare continuamente Milvus!</p>
 <h3 id="Features" class="common-anchor-header">Caratteristiche</h3><ul>
 <li>Supporta l'isolamento delle chiavi di partizione per migliorare le prestazioni con chiavi di partizione multiple<a href="https://github.com/milvus-io/milvus/pull/39245">(#39245</a>). Per ulteriori informazioni, fare riferimento a <a href="/docs/it/use-partition-key.md">Utilizzare la chiave di partizione</a>.</li>
 <li>Sparse Index ora supporta DAAT MaxScore <a href="https://github.com/milvus-io/knowhere/pull/1015">knowhere/#1015</a>. Per ulteriori informazioni, fare riferimento a <a href="/docs/it/sparse_vector.md">Vettore sparso</a>.</li>
@@ -517,7 +517,7 @@ title: Note di rilascio
 </ul>
 <h3 id="Critial-Bug-fixs" class="common-anchor-header">Correzioni di bug critici</h3><ul>
 <li>Corretti gli errori di ricerca per le chiavi primarie con indici<a href="https://github.com/milvus-io/milvus/pull/39390">(#39390</a>)</li>
-<li>Corretto un potenziale problema di perdita di dati causato dal riavvio di MixCoord e dal flushing concomitante<a href="https://github.com/milvus-io/milvus/pull/39422">(#39422</a>)</li>
+<li>Corretto un potenziale problema di perdita di dati causato dal riavvio di MixCoord e dal flushing simultaneo<a href="https://github.com/milvus-io/milvus/pull/39422">(#39422</a>)</li>
 <li>Corretto un errore di cancellazione innescato da una concomitanza impropria tra i task di stats e la compattazione L0 dopo il riavvio di MixCoord<a href="https://github.com/milvus-io/milvus/pull/39460">(#39460</a>)</li>
 <li>Corretta l'incompatibilità degli indici scalari invertiti durante l'aggiornamento da 2.4 a 2.5<a href="https://github.com/milvus-io/milvus/pull/39272">(#39272</a>)</li>
 </ul>
@@ -693,7 +693,7 @@ title: Note di rilascio
 <p>Per ulteriori informazioni, consultare <a href="/docs/it/analyzer-overview.md">Panoramica dell'analizzatore</a> e <a href="/docs/it/keyword-match.md">Corrispondenza testo</a>.</p>
 <h4 id="Bitmap-Index" class="common-anchor-header">Indice Bitmap</h4><p>Alla famiglia Milvus è stato aggiunto un nuovo indice di dati scalari. L'indice BitMap utilizza un array di bit, di lunghezza pari al numero di righe, per rappresentare l'esistenza di valori e accelerare le ricerche.</p>
 <p>Gli indici Bitmap sono stati tradizionalmente efficaci per i campi a bassa cardinalità, che hanno un numero modesto di valori distinti, ad esempio una colonna contenente informazioni sul sesso con solo due valori possibili: maschio e femmina.</p>
-<p>Per maggiori dettagli, vedere <a href="/docs/it/bitmap.md">Indice bitmap</a>.</p>
+<p>Per ulteriori informazioni, consultare <a href="/docs/it/bitmap.md">Indice bitmap</a>.</p>
 <h4 id="Nullable--Default-Value" class="common-anchor-header">Nullable e valore predefinito</h4><p>Milvus supporta ora l'impostazione di proprietà nullable e di valori predefiniti per campi scalari diversi da quello della chiave primaria. Per i campi scalari contrassegnati come <code translate="no">nullable=True</code>, gli utenti possono omettere il campo durante l'inserimento dei dati; il sistema lo tratterà come valore nullo o valore predefinito (se impostato) senza lanciare un errore.</p>
 <p>I valori predefiniti e le proprietà annullabili offrono a Milvus una maggiore flessibilità. Gli utenti possono utilizzare questa funzione per i campi con valori incerti durante la creazione di collezioni. Inoltre, semplificano la migrazione dei dati da altri sistemi di database a Milvus, consentendo di gestire insiemi di dati contenenti valori nulli conservando le impostazioni originali dei valori predefiniti.</p>
 <p>Per maggiori dettagli, consultare <a href="/docs/it/nullable-and-default.md">Nullable &amp; Default Value</a>.</p>

@@ -45,9 +45,9 @@ title: Notes de mise à jour
 <p>Nous sommes ravis d'annoncer la sortie de Milvus 2.5.11 ! Cette version introduit de nouvelles fonctionnalités puissantes telles que la capacité multi-analyseur et la prise en charge élargie des tokenizers (Jieba, Lindera, ICU, Language Identifier). Nous avons également apporté plusieurs améliorations, notamment la mise à jour du pool de threads pour le chargement dynamique des segments et l'optimisation du filtrage des suppressions lors de l'importation de binlogs. Les principales corrections de bogues concernent les problèmes potentiels de chute de segments, les échecs de recherche BM25 et les erreurs de filtrage des statistiques JSON.</p>
 <p>Nous vous encourageons à mettre à jour vers la version 2.5.11 pour profiter de ces améliorations et corrections !</p>
 <h3 id="Features" class="common-anchor-header">Fonctionnalités</h3><ul>
-<li>Ajout de la possibilité de configurer plusieurs analyseurs (tokenizers) et de sélectionner celui qui convient en fonction de l'instruction des données d'entrée<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
+<li>Ajout de la possibilité de configurer plusieurs analyseurs (tokenizers) pour la prise en charge de plusieurs langues et de sélectionner l'analyseur approprié en fonction de l'instruction des données d'entrée<a href="https://github.com/milvus-io/milvus/pull/41444">(#41444</a>).</li>
 <li>Amélioration de la fonctionnalité de l'analyseur BM25<a href="https://github.com/milvus-io/milvus/pull/41456">(#41456</a>).<ul>
-<li>Introduction d'une API <code translate="no">run_analyzer</code> pour les essais à blanc afin de faciliter l'analyse des résultats de la tokenisation. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md">Vue d'ensemble de l'analyseur</a>.</li>
+<li>Introduction d'une API <code translate="no">run_analyzer</code> pour les essais à blanc afin d'aider à analyser les résultats de la tokenisation. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md">Vue d'ensemble de l'analyseur</a>.</li>
 <li>Tokenizers<ul>
 <li>Ajout de la prise en charge de la personnalisation des paramètres du tokenizer Jieba.</li>
 <li>Ajout de la prise en charge du tokenizer Lindera. Pour plus d'informations, reportez-vous à <a href="/docs/fr/lindera-tokenizer.md">Lindera</a>.</li>
@@ -71,7 +71,7 @@ title: Notes de mise à jour
 <li>Ajout d'une option de configuration pour forcer la reconstruction des index à la dernière version<a href="https://github.com/milvus-io/milvus/pull/41432">(#41432</a>).</li>
 <li>Amélioration du message d'erreur pour la politique de liste<a href="https://github.com/milvus-io/milvus/pull/41368">(#41368</a>).</li>
 <li>Adaptation de la gestion des traits d'union dans les en-têtes de métadonnées gRPC<a href="https://github.com/milvus-io/milvus/pull/41372">(#41372</a>).</li>
-<li>Mise à jour de la version Go vers 1.21.4 pour traiter les CVE<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).<em>(Note : Le texte original mentionnait "2.14", typographie supposée corrigée en une version récente et plausible 1.21.4</em>).</li>
+<li>Mise à jour de la version Go vers 1.24.1 pour corriger les CVE<a href="https://github.com/milvus-io/milvus/pull/41522">(#41522</a>, <a href="https://github.com/milvus-io/milvus/pull/41319">#41319</a>).</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Corrections de bogues</h3><ul>
 <li>Correction d'un problème où les segments pouvaient ne pas être correctement abandonnés lors de l'abandon d'une partition<a href="https://github.com/milvus-io/milvus/pull/41543">(#41543</a>).</li>
@@ -646,7 +646,7 @@ title: Notes de mise à jour
 <h3 id="Improvement" class="common-anchor-header">Amélioration</h3><ul>
 <li>Mise à jour des pages de collecte et de requête de l'interface web.<a href="https://github.com/milvus-io/milvus/pull/38701">(#38701</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Corrections de bugs</h3><ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Correction de bugs</h3><ul>
 <li>Correction des problèmes OOM en ajoutant un facteur de mémoire aux estimations de chargement.<a href="https://github.com/milvus-io/milvus/pull/38722">(#38722</a>)</li>
 <li>Correction de l'expansion des groupes de privilèges lors de l'énumération des politiques dans RootCoord.<a href="https://github.com/milvus-io/milvus/pull/38760">(#38760</a>)</li>
 <li>Correction des problèmes liés à l'énumération des groupes de privilèges et des collections.<a href="https://github.com/milvus-io/milvus/pull/38738">(#38738</a>)</li>

@@ -348,12 +348,6 @@
             "children": []
           },
           {
-            "label": "コレクションを即座に作成",
-            "id": "create-collection-instantly.md",
-            "order": 2,
-            "children": []
-          },
-          {
             "label": "コレクションを見る",
             "id": "view-collections.md",
             "order": 3,
@@ -825,7 +819,7 @@
             "children": []
           },
           {
-            "label": "Elasticsearchからmilvusへのクエリ",
+            "label": "Elasticsearchクエリからmilvusへ",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 9,
             "children": []

@@ -5,7 +5,7 @@ summary: Learn about bitsets in Milvus.
 
 # Bitset
 
-This topic introduces the bitset mechanism that helps enable key functionalities like [Time Travel](timetravel_ref.md), attribute filtering, and [delete operations](https://milvus.io/blog/2022-02-07-how-milvus-deletes-streaming-data-in-distributed-cluster.md) in Milvus.
+This topic introduces the bitset mechanism that helps enable key functionalities like Time Travel, attribute filtering, and [delete operations](https://milvus.io/blog/2022-02-07-how-milvus-deletes-streaming-data-in-distributed-cluster.md) in Milvus.
 
 ## Overview
 
