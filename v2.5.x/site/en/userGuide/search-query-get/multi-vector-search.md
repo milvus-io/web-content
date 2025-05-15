@@ -569,7 +569,7 @@ search_param_1 = {
 }
 request_1 = AnnSearchRequest(**search_param_1)
 
-query_sparse_vector = {3573: 0.34701499565746674}, {5263: 0.2639375518635271}
+query_sparse_vector = {3573: 0.34701499565746674, 5263: 0.2639375518635271}
 search_param_2 = {
     "data": [query_sparse_vector],
     "anns_field": "sparse",
