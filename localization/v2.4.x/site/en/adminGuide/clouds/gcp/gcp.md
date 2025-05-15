@@ -234,7 +234,7 @@ helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>In the preceding commands, we add the repo of Milvus Helm charts locally and update the repo to fetch the latest charts. Then we install a Milvus instance and name it <strong>my-release</strong>.</p>
 <p>Notice the config <code translate="no">service.type</code> value, which indicates that we would like to expose the Milvus instance through a Layer-4 load balancer.</p>
-<p>If you would like to expose your Milvus instance through a Layer-7 load balancer, <a href="/docs/gcp_layer7.md">read this</a>.</p>
+<p>If you would like to expose your Milvus instance through a Layer-7 load balancer, <a href="/docs/v2.4.x/gcp_layer7.md">read this</a>.</p>
 <h2 id="Verify-the-deployment" class="common-anchor-header">Verify the deployment<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -286,6 +286,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>If you want to learn how to deploy Milvus on other clouds:</p>
 <ul>
-<li><a href="/docs/eks.md">Deploy Milvus Cluster on AWS with Kubernetes</a></li>
-<li><a href="/docs/azure.md">Deploy Milvus Cluster on Azure With Kubernetes</a></li>
+<li><a href="/docs/v2.4.x/eks.md">Deploy Milvus Cluster on AWS with Kubernetes</a></li>
+<li><a href="/docs/v2.4.x/azure.md">Deploy Milvus Cluster on Azure With Kubernetes</a></li>
 </ul>

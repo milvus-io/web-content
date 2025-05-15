@@ -125,16 +125,16 @@ The default prometheus-k8s clusterrole can not capture milvus' metrics, need to 
     </button></h2><ul>
 <li>If you have deployed monitoring services for the Milvus cluster, you might also want to learn to:
 <ul>
-<li><a href="/docs/visualize.md">Visualize Milvus metrics in Grafana</a></li>
-<li><a href="/docs/alert.md">Create an Alert for Milvus Services</a></li>
-<li>Adjust your <a href="/docs/allocate.md">resource allocation</a></li>
+<li><a href="/docs/v2.4.x/visualize.md">Visualize Milvus metrics in Grafana</a></li>
+<li><a href="/docs/v2.4.x/alert.md">Create an Alert for Milvus Services</a></li>
+<li>Adjust your <a href="/docs/v2.4.x/allocate.md">resource allocation</a></li>
 </ul></li>
 <li>If you are looking for information about how to scale a Milvus cluster:
 <ul>
-<li>Learn <a href="/docs/scaleout.md">scale a Milvus cluster</a></li>
+<li>Learn <a href="/docs/v2.4.x/scaleout.md">scale a Milvus cluster</a></li>
 </ul></li>
 <li>If you are interested in upgrading the Milvus version,
 <ul>
-<li>Read the <a href="/docs/upgrade_milvus_cluster-operator.md">guide for upgrading Milvus cluster</a> and <a href="/docs/upgrade_milvus_standalone-operator.md">that for upgrade Milvus standalone</a>.</li>
+<li>Read the <a href="/docs/v2.4.x/upgrade_milvus_cluster-operator.md">guide for upgrading Milvus cluster</a> and <a href="/docs/v2.4.x/upgrade_milvus_standalone-operator.md">that for upgrade Milvus standalone</a>.</li>
 </ul></li>
 </ul>

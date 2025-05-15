@@ -38,7 +38,7 @@ title: 'Insert, Upsert & Delete'
       </svg>
     </button></h2><ul>
 <li><p>You have installed the SDK of your choice. To install an SDK, refer to <a href="https://milvus.io/docs/install-pymilvus.md">Install SDKs</a>.</p></li>
-<li><p>You have created a collection. To create a collection, refer to <a href="/docs/manage-collections.md">Manage Collections</a>.</p></li>
+<li><p>You have created a collection. To create a collection, refer to <a href="/docs/v2.4.x/manage-collections.md">Manage Collections</a>.</p></li>
 <li><p>To insert a large volume of data, you are advised to use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Data Import</a>.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -58,7 +58,7 @@ title: 'Insert, Upsert & Delete'
       </svg>
     </button></h2><p>An entity, within the context of Milvus collections, is a singular, identifiable instance within a collection. It represents a distinct member of a particular class, be it a book in a library, a gene in a genome, or any other identifiable entity.</p>
 <p>Entities within a collection share a common set of attributes, termed schema, outlining the structure that each entity must adhere to, including field names, data types, and any other constraints.</p>
-<p>Successful insertion of entities into a collection requires that the provided data should contain all the schema-defined fields of the target collection. Additionally, you can also include non-schema-defined fields only if you have enabled the dynamic field. For details, refer to <a href="/docs/enable-dynamic-field.md">Enable Dynamic Field</a>.</p>
+<p>Successful insertion of entities into a collection requires that the provided data should contain all the schema-defined fields of the target collection. Additionally, you can also include non-schema-defined fields only if you have enabled the dynamic field. For details, refer to <a href="/docs/v2.4.x/enable-dynamic-field.md">Enable Dynamic Field</a>.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparations<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -391,7 +391,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The output is a dictionary containing the statistics on the affected entities. For details on partition operations, refer to <a href="/docs/manage-partitions.md">Manage Partitions</a>.</p>
+<p>The output is a dictionary containing the statistics on the affected entities. For details on partition operations, refer to <a href="/docs/v2.4.x/manage-partitions.md">Manage Partitions</a>.</p>
 <h2 id="Upsert-entities" class="common-anchor-header">Upsert entities<button data-href="#Upsert-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -602,7 +602,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The output is a dictionary containing the statistics on the affected entities. For details on partition operations, refer to <a href="/docs/manage-partitions.md">Manage Partitions</a>.</p>
+<p>The output is a dictionary containing the statistics on the affected entities. For details on partition operations, refer to <a href="/docs/v2.4.x/manage-partitions.md">Manage Partitions</a>.</p>
 <h2 id="Delete-entities" class="common-anchor-header">Delete entities<button data-href="#Delete-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -729,7 +729,7 @@ System.out.println(deleteResp.getDeleteCnt());
 <span class="hljs-comment">// 2</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For details on how to use filter expressions, refer to <a href="/docs/get-and-scalar-query.md">Get & Scalar Query</a>.</p></li>
+<p>For details on how to use filter expressions, refer to <a href="/docs/v2.4.x/get-and-scalar-query.md">Get & Scalar Query</a>.</p></li>
 <li><p><strong>Delete entities by partition name</strong>.</p>
 <p>If you want to delete entities from a specific partition, you can specify the partition name with the <code translate="no">partition_name</code> parameter in the <code translate="no">delete()</code> method. The following example deletes entities from <code translate="no">partitionA</code> that have a color starting with <code translate="no">blue</code>.</p>
 <p><div class="multipleCode">

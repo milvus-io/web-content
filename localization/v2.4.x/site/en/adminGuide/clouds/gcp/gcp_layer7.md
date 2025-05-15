@@ -26,9 +26,9 @@ summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on 
 <p>To create a project, refer to <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Creating and managing projects</a>. The name of the project used in this guide is <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>You have locally installed <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a>, and <a href="https://helm.sh/docs/intro/install/">Helm</a>, or decided to use the browser-based <a href="https://cloud.google.com/shell">Cloud Shell</a> instead.</p></li>
 <li><p>You have <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">initialized the gcloud CLI</a> with your GCP account credentials.</p></li>
-<li><p>You have <a href="/docs/gcp.md">deployed a Milvus cluster behind a Layer-4 load balancer on GCP</a>.</p></li>
+<li><p>You have <a href="/docs/v2.4.x/gcp.md">deployed a Milvus cluster behind a Layer-4 load balancer on GCP</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Tweak Milvus configurations</h3><p>This guide assumes that you have already <a href="/docs/gcp.md">deployed a Milvus cluster behind a Layer-4 load balancer on GCP</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Tweak Milvus configurations</h3><p>This guide assumes that you have already <a href="/docs/v2.4.x/gcp.md">deployed a Milvus cluster behind a Layer-4 load balancer on GCP</a>.</p>
 <p>Before setting up a Layer-7 load balancer for this Milvus cluster, run the following command to remove the Layer-4 load balancer.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.type=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

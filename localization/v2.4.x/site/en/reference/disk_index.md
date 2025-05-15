@@ -20,7 +20,7 @@ title: On-disk Index
         ></path>
       </svg>
     </button></h1><p>This article introduces an on-disk indexing algorithm named DiskANN. Based on Vamana graphs, DiskANN powers efficient searches within large datasets.</p>
-<p>To improve query performance, you can <a href="/docs/index-vector-fields.md">specify an index type</a> for each vector field.</p>
+<p>To improve query performance, you can <a href="/docs/v2.4.x/index-vector-fields.md">specify an index type</a> for each vector field.</p>
 <div class="alert note"> 
 Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
 </div>

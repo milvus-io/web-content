@@ -141,7 +141,7 @@ summary: >-
 </table>
 </li>
 </ul>
-<p>To apply the above changes to your Milvus cluster, please follow the steps in <a href="/docs/configure-helm.md">Configure Milvus with Helm</a> and <a href="/docs/configure_operator.md">Configure Milvus with Milvus Operators</a>.</p>
+<p>To apply the above changes to your Milvus cluster, please follow the steps in <a href="/docs/v2.4.x/configure-helm.md">Configure Milvus with Helm</a> and <a href="/docs/v2.4.x/configure_operator.md">Configure Milvus with Milvus Operators</a>.</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">Collection Configuration</h3><p>For clustering compacting in a specific collection, you should select a scalar field from the collection as the clustering key.</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),

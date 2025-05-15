@@ -74,9 +74,9 @@ title: Manage Collections
     </button></h2><p>You can create a collection in either of the following manners:</p>
 <ul>
 <li><p><strong>Quick setup</strong></p>
-<p>In this manner, you can create a collection by simply giving it a name and specifying the number of dimensions of the vector embeddings to be stored in this collection. For details, refer to <a href="/docs/manage-collections.md">Quick setup</a>.</p></li>
+<p>In this manner, you can create a collection by simply giving it a name and specifying the number of dimensions of the vector embeddings to be stored in this collection. For details, refer to <a href="/docs/v2.4.x/manage-collections.md">Quick setup</a>.</p></li>
 <li><p><strong>Customized setup</strong></p>
-<p>Instead of letting In Milvus decide almost everything for your collection, you can determine the <strong>schema</strong> and <strong>index parameters</strong> of the collection on your own. For details, refer to <a href="/docs/manage-collections.md">Customized setup</a>.</p></li>
+<p>Instead of letting In Milvus decide almost everything for your collection, you can determine the <strong>schema</strong> and <strong>index parameters</strong> of the collection on your own. For details, refer to <a href="/docs/v2.4.x/manage-collections.md">Customized setup</a>.</p></li>
 </ul>
 <h3 id="Quick-setup" class="common-anchor-header">Quick setup</h3><p>Against the backdrop of the great leap in the AI industry, most developers just need a simple yet dynamic collection to start with. Milvus allows a quick setup of such a collection with just three arguments:</p>
 <ul>
@@ -277,7 +277,7 @@ $ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quo
 </ul>
 <p>The automatically indexed and loaded collection from the provided code is ready for immediate data insertions.</p>
 <h3 id="Customized-setup" class="common-anchor-header">Customized setup</h3><p>Instead of letting Milvus decide almost everything for your collection, you can determine the <strong>schema</strong> and <strong>index parameters</strong> of the collection on your own.</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Step 1: Set up schema</h4><p>A schema defines the structure of a collection. Within the schema, you have the option to enable or disable <code translate="no">enable_dynamic_field</code>, add pre-defined fields, and set attributes for each field. For a detailed explanation of the concept and available data types, refer to <a href="/docs/schema.md">Schema Explained</a>.</p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Step 1: Set up schema</h4><p>A schema defines the structure of a collection. Within the schema, you have the option to enable or disable <code translate="no">enable_dynamic_field</code>, add pre-defined fields, and set attributes for each field. For a detailed explanation of the concept and available data types, refer to <a href="/docs/v2.4.x/schema.md">Schema Explained</a>.</p>
 <div class="language-python">
 <p>To set up a schema, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> to create a schema object and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> to add fields to the schema.</p>
 </div>
@@ -536,7 +536,7 @@ schema.WithField(
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Step 2: Set up index parameters</h4><p>Index parameters dictate how Milvus organizes your data within a collection. You can tailor the indexing process for specific fields by adjusting their <code translate="no">metric_type</code> and <code translate="no">index_type</code>. For the vector field, you have the flexibility to select <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code>, or <code translate="no">JACCARD</code> as the <code translate="no">metric_type</code>, depending on the type of vectors you are working with. For more information, refer to <a href="/docs/metric.md">Similarity Metrics</a>.</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Step 2: Set up index parameters</h4><p>Index parameters dictate how Milvus organizes your data within a collection. You can tailor the indexing process for specific fields by adjusting their <code translate="no">metric_type</code> and <code translate="no">index_type</code>. For the vector field, you have the flexibility to select <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code>, or <code translate="no">JACCARD</code> as the <code translate="no">metric_type</code>, depending on the type of vectors you are working with. For more information, refer to <a href="/docs/v2.4.x/metric.md">Similarity Metrics</a>.</p>
 <div class="language-python">
 <p>To set up index parameters, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> to prepare index parameters and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> to add the index.</p>
 </div>
@@ -917,7 +917,7 @@ $ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quo
 <span class="hljs-meta prompt_"># </span><span class="language-bash">    }</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection created above is loaded automatically. To learn more about loading and releasing a collection, refer to <a href="/docs/manage-collections.md#Load--Release-Collection">Load & Release Collection</a>.</p></li>
+<p>The collection created above is loaded automatically. To learn more about loading and releasing a collection, refer to <a href="/docs/v2.4.x/manage-collections.md#Load--Release-Collection">Load & Release Collection</a>.</p></li>
 <li><p><strong>Create a collection and an index file separately.</strong></p>
 <p><div class="multipleCode">
 <a href="#python">Python </a>
@@ -1039,7 +1039,7 @@ $ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quo
 <span class="hljs-meta prompt_"># </span><span class="language-bash">    }</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/manage-collections.md#Load--Release-Collection">Load & Release Collection</a>.</p>
+<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/v2.4.x/manage-collections.md#Load--Release-Collection">Load & Release Collection</a>.</p>
 <p><table class="language-python">
 <thead>
 <tr>
@@ -1178,7 +1178,7 @@ $ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quo
 </tr>
 </tbody>
 </table></p>
-<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/manage-collections.md">Load & Release Collection</a>.</p>
+<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/v2.4.x/manage-collections.md">Load & Release Collection</a>.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a>
 <a href="#java">Java</a>

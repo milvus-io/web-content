@@ -19,7 +19,7 @@ title: In-Memory Replica
         ></path>
       </svg>
     </button></h1><p>This topic introduces the in-memory replica (replication) mechanism in Milvus that enables multiple segment replications in the working memory to improve performance and availability.</p>
-<p>For information on how to configure in-memory replicas, refer to <a href="/docs/configure_querynode.md#queryNodereplicas">Query Node-related Configurations</a>.</p>
+<p>For information on how to configure in-memory replicas, refer to <a href="/docs/v2.4.x/configure_querynode.md#queryNodereplicas">Query Node-related Configurations</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

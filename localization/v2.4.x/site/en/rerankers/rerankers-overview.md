@@ -21,7 +21,7 @@ title: Rerankers Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In the realm of information retrieval and generative AI, a reranker is an essential tool that optimizes the order of results from initial searches. Rerankers differ from traditional <a href="/docs/embeddings.md">embedding models</a> by taking a query and document as input and directly returning a similarity score instead of embeddings. This score indicates the relevance between the input query and document.</p>
+    </button></h1><p>In the realm of information retrieval and generative AI, a reranker is an essential tool that optimizes the order of results from initial searches. Rerankers differ from traditional <a href="/docs/v2.4.x/embeddings.md">embedding models</a> by taking a query and document as input and directly returning a similarity score instead of embeddings. This score indicates the relevance between the input query and document.</p>
 <p>Rerankers are often employed after the first stage retrieval, typically done via vector Approximate Nearest Neighbor (ANN) techniques. While ANN searches are efficient at fetching a broad set of potentially relevant results, they might not always prioritize results in terms of actual semantic closeness to the query. Here, rerankers is used to optimize the results order using deeper contextual analyses, often leveraging advanced machine learning models like BERT or other Transformer-based models. By doing this, rerankers can dramatically enhance the accuracy and relevance of the final results presented to the user.</p>
 <p>PyMilvus model library integrates rerank functions to optimize the order of results returned from initial searches. After you retrieved nearest embedings from Milvus, you can leverage these reranking tools to refine search results to enhance the precision of search outcomes.</p>
 <table>
@@ -57,7 +57,7 @@ title: Rerankers Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this example, we demonstrate how to rerank search results using the <a href="/docs/rerankers-bge.md">BGE reranker</a> based on a specific query.</p>
+    </button></h2><p>In this example, we demonstrate how to rerank search results using the <a href="/docs/v2.4.x/rerankers-bge.md">BGE reranker</a> based on a specific query.</p>
 <p>To use a reranker with <a href="https://github.com/milvus-io/milvus-model">PyMilvus model</a> library, start by installing the PyMilvus model library along with the model subpackage that contains all necessary reranking utilities:</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus[model]
 <span class="hljs-comment"># or pip install &quot;pymilvus[model]&quot; for zsh.</span>
@@ -115,7 +115,7 @@ bge_rf(query, documents)
 <p><strong>Dataset components</strong>:</p>
 <ul>
 <li><code translate="no">doc_id</code>: Unique identifier for each document.</li>
-<li><code translate="no">doc_vector</code>: Vector embeddings representing the document. For guidance on generating embeddings, refer to <a href="/docs/embeddings.md">Embeddings</a>.</li>
+<li><code translate="no">doc_vector</code>: Vector embeddings representing the document. For guidance on generating embeddings, refer to <a href="/docs/v2.4.x/embeddings.md">Embeddings</a>.</li>
 <li><code translate="no">doc_text</code>: Text content of the document.</li>
 </ul>
 <h3 id="Preparations" class="common-anchor-header">Preparations</h3><p>Before initiating a similarity search, you need to establish a connection with Milvus, create a collection, and prepare and insert data into that collection. The following code snippet illustrates these preliminary steps.</p>

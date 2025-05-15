@@ -75,10 +75,10 @@ title: Install Milvus Go SDK
 <ul>
 <li>Learn the basic operations of Milvus:
 <ul>
-<li><a href="/docs/manage-collections.md">Manage Collections</a></li>
-<li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert & Delete</a></li>
-<li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
+<li><a href="/docs/v2.4.x/manage-collections.md">Manage Collections</a></li>
+<li><a href="/docs/v2.4.x/manage-partitions.md">Manage Partitions</a></li>
+<li><a href="/docs/v2.4.x/insert-update-delete.md">Insert, Upsert & Delete</a></li>
+<li><a href="/docs/v2.4.x/single-vector-search.md">Single-Vector Search</a></li>
+<li><a href="/docs/v2.4.x/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>
 </ul>

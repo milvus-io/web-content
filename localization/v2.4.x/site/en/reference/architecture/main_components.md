@@ -98,5 +98,5 @@ title: Main Components
         ></path>
       </svg>
     </button></h2><ul>
-<li>Read <a href="/docs/four_layers.md">Computing/Storage Disaggregation</a> to understand the mechanism and design principle of Milvus.</li>
+<li>Read <a href="/docs/v2.4.x/four_layers.md">Computing/Storage Disaggregation</a> to understand the mechanism and design principle of Milvus.</li>
 </ul>

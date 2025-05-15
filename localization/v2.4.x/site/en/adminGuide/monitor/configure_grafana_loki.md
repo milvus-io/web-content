@@ -43,7 +43,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>You have <a href="/docs/install_cluster-helm.md">installed a Milvus cluster on K8s</a>.</li>
+<li>You have <a href="/docs/v2.4.x/install_cluster-helm.md">installed a Milvus cluster on K8s</a>.</li>
 <li>You have installed necessary tools, including <a href="https://helm.sh/docs/intro/install/">Helm</a> and <a href="https://kubernetes.io/docs/tasks/tools/">Kubectl</a>.</li>
 </ul>
 <h2 id="Deploy-Loki" class="common-anchor-header">Deploy Loki<button data-href="#Deploy-Loki" class="anchor-icon" translate="no">

@@ -21,7 +21,7 @@ title: Authenticate User Access
     </button></h1><p>This guide explains how to manage user authentication in Milvus, including enabling authentication, connecting as a user, and modifying user credentials.</p>
 <div class="alert note">
 <ul>
-<li><p>TLS and user authentication are two distinct security approaches. If you have enabled both user authentication and TLS in your Milvus system, you must provide a username, password, and certificate file paths. For information on how to enable TLS, refer to <a href="/docs/tls.md">Encryption in Transit</a>.</p></li>
+<li><p>TLS and user authentication are two distinct security approaches. If you have enabled both user authentication and TLS in your Milvus system, you must provide a username, password, and certificate file paths. For information on how to enable TLS, refer to <a href="/docs/v2.4.x/tls.md">Encryption in Transit</a>.</p></li>
 <li><p>The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.</p></li>
 </ul>
 </div>
@@ -273,12 +273,12 @@ client.list_users()
     </button></h2><ul>
 <li>You might also want to learn how to:
 <ul>
-<li><a href="/docs/scaleout.md">Scale a Milvus cluster</a></li>
+<li><a href="/docs/v2.4.x/scaleout.md">Scale a Milvus cluster</a></li>
 </ul></li>
 <li>If you are ready to deploy your cluster on clouds:
 <ul>
-<li>Learn how to <a href="/docs/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
-<li>Learn how to <a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
-<li>Learn how to <a href="/docs/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
+<li>Learn how to <a href="/docs/v2.4.x/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
+<li>Learn how to <a href="/docs/v2.4.x/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
+<li>Learn how to <a href="/docs/v2.4.x/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
 </ul></li>
 </ul>

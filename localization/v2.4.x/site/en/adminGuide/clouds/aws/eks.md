@@ -516,6 +516,6 @@ aws iam delete-policy --policy-arn &#x27;arn:aws:iam::12345678901:policy/MilvusS
       </svg>
     </button></h2><p>If you want to learn how to deploy Milvus on other clouds:</p>
 <ul>
-<li><a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
-<li><a href="/docs/azure.md">Deploy Milvus Cluster on Azure With Kubernetes</a></li>
+<li><a href="/docs/v2.4.x/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
+<li><a href="/docs/v2.4.x/azure.md">Deploy Milvus Cluster on Azure With Kubernetes</a></li>
 </ul>

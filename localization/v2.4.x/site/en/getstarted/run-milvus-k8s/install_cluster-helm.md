@@ -54,14 +54,14 @@ title: Install Milvus Cluster with Helm
       </svg>
     </button></h2><ul>
 <li><p><a href="https://helm.sh/docs/intro/install/">Install Helm CLI</a>.</p></li>
-<li><p><a href="/docs/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">Create a K8s cluster</a>.</p></li>
+<li><p><a href="/docs/v2.4.x/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">Create a K8s cluster</a>.</p></li>
 <li><p>Install a <a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>. You can check the installed StorageClass as follows.</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Check <a href="/docs/prerequisite-helm.md">the hardware and software requirements</a> before installation.</p></li>
+<li><p>Check <a href="/docs/v2.4.x/prerequisite-helm.md">the hardware and software requirements</a> before installation.</p></li>
 <li><p>Before installing Milvus, it is recommended to use the <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> to estimate the hardware requirements based on your data size. This helps ensure optimal performance and resource allocation for your Milvus installation.</p></li>
 </ul>
 <div class="alert note">
@@ -265,26 +265,26 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
       </svg>
     </button></h2><p>Having installed Milvus in Docker, you can:</p>
 <ul>
-<li><p>Check <a href="/docs/quickstart.md">Hello Milvus</a> to see what Milvus can do.</p></li>
+<li><p>Check <a href="/docs/v2.4.x/quickstart.md">Hello Milvus</a> to see what Milvus can do.</p></li>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/manage_databases.md">Manage Databases</a></li>
-<li><a href="/docs/manage-collections.md">Manage Collections</a></li>
-<li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert & Delete</a></li>
-<li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
+<li><a href="/docs/v2.4.x/manage_databases.md">Manage Databases</a></li>
+<li><a href="/docs/v2.4.x/manage-collections.md">Manage Collections</a></li>
+<li><a href="/docs/v2.4.x/manage-partitions.md">Manage Partitions</a></li>
+<li><a href="/docs/v2.4.x/insert-update-delete.md">Insert, Upsert & Delete</a></li>
+<li><a href="/docs/v2.4.x/single-vector-search.md">Single-Vector Search</a></li>
+<li><a href="/docs/v2.4.x/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>
-<li><p><a href="/docs/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
-<li><p><a href="/docs/scaleout.md">Scale your Milvus cluster</a>.</p></li>
+<li><p><a href="/docs/v2.4.x/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
+<li><p><a href="/docs/v2.4.x/scaleout.md">Scale your Milvus cluster</a>.</p></li>
 <li><p>Deploy your Milvus cluster on clouds:</p>
 <ul>
-<li><a href="/docs/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/v2.4.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/v2.4.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/v2.4.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
-<li><p>Explore <a href="/docs/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
+<li><p>Explore <a href="/docs/v2.4.x/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
+<li><p>Explore <a href="/docs/v2.4.x/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
 <li><p>Explore <a href="https://milvus.io/docs/attu.md">Attu</a>, an open-source GUI tool for intuitive Milvus management.</p></li>
-<li><p><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
+<li><p><a href="/docs/v2.4.x/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
 </ul>
