@@ -21,7 +21,7 @@ import {
   getTitleFromMarkdown,
 } from "./utils.js";
 import { remarkToHtml } from "./remark.js";
-import latestVersion from '../version.json'
+import latestVersion from '../version.json' assert { type: 'json' };
 
 const MOCK_TRANSLATE = false;
 const VERSIONS = ["v2.5.x", "v2.4.x"];
