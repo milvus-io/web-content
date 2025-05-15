@@ -170,6 +170,6 @@ spec:
       </svg>
     </button></h2><p>Learn how to configure other Milvus dependencies with Milvus Operator:</p>
 <ul>
-<li><a href="/docs/meta_storage_operator.md">Configure Meta Storage with Milvus Operator</a></li>
-<li><a href="/docs/message_storage_operator.md">Configure Message Storage with Milvus Operator</a></li>
+<li><a href="/docs/v2.1.x/meta_storage_operator.md">Configure Meta Storage with Milvus Operator</a></li>
+<li><a href="/docs/v2.1.x/message_storage_operator.md">Configure Message Storage with Milvus Operator</a></li>
 </ul>

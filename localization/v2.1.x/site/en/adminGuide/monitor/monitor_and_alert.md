@@ -20,9 +20,9 @@ summary: ''
       </svg>
     </button></h1><p>Milvus uses Prometheus to monitor metrics and Grafana to visualize metrics and create alerts.</p>
 <ul>
-<li><p><a href="/docs/monitor_overview.md">Monitoring Architecture</a>: An overview of the Milvus monitoring framework.</p></li>
-<li><p><a href="/docs/monitor.md">Deploy Monitoring Services</a>: Use Prometheus to deploy monitoring services on Kubernetes.</p></li>
-<li><p><a href="/docs/visualize.md">Visualize Milvus Metrics</a>: Visualize Milvus metrics using Grafana.</p></li>
-<li><p><a href="/docs/metrics_dashboard.md">Milvus Metrics Dashboard</a>: A detailed list of important metrics including search QPS and latency that are newly added to the Milvus metrics dashboard.</p></li>
-<li><p><a href="/docs/alert.md">Create an Alert</a>: Learn about why, when, and how to create alerts in Milvus.</p></li>
+<li><p><a href="/docs/v2.1.x/monitor_overview.md">Monitoring Architecture</a>: An overview of the Milvus monitoring framework.</p></li>
+<li><p><a href="/docs/v2.1.x/monitor.md">Deploy Monitoring Services</a>: Use Prometheus to deploy monitoring services on Kubernetes.</p></li>
+<li><p><a href="/docs/v2.1.x/visualize.md">Visualize Milvus Metrics</a>: Visualize Milvus metrics using Grafana.</p></li>
+<li><p><a href="/docs/v2.1.x/metrics_dashboard.md">Milvus Metrics Dashboard</a>: A detailed list of important metrics including search QPS and latency that are newly added to the Milvus metrics dashboard.</p></li>
+<li><p><a href="/docs/v2.1.x/alert.md">Create an Alert</a>: Learn about why, when, and how to create alerts in Milvus.</p></li>
 </ul>

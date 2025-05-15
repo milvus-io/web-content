@@ -21,7 +21,7 @@ title: ''
       </svg>
     </button></h1><p>This topic lists various types of indexes Milvus supports, scenarios each of them best suits, and parameters user can configure to achieve better search performance.</p>
 <p>Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets.</p>
-<p>To improve query performance, you can <a href="/docs/build_index.md">specify an index type</a> for each vector field.</p>
+<p>To improve query performance, you can <a href="/docs/v2.1.x/build_index.md">specify an index type</a> for each vector field.</p>
 <div class="alert note"> 
 Currently, a vector field only supports one index type. Milvus automatically deletes the old index when switching the index type.
 </div>
@@ -67,7 +67,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <ul>
 <li>Indexes for floating-point embeddings:
 <ul>
-<li>For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the <a href="/docs/metric.md">distance metrics</a> used for float-point embeddings are Euclidean distance (L2) and Inner product.</li>
+<li>For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the <a href="/docs/v2.1.x/metric.md">distance metrics</a> used for float-point embeddings are Euclidean distance (L2) and Inner product.</li>
 <li>This type of indexes include FLAT, IVF_FLAT, IVF_PQ, IVF_SQ8, ANNOY, and HNSW.</li>
 </ul></li>
 <li>Indexes for binary embeddings
@@ -163,7 +163,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/metric.md">Supported Metrics</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/v2.1.x/metric.md">Supported Metrics</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -344,7 +344,7 @@ Index building parameters and search parameters vary with Milvus distribution. S
 <tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/metric.md">Supported Metrics</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Optional] The chosen distance metric.</td><td>See <a href="/docs/v2.1.x/metric.md">Supported Metrics</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -420,5 +420,5 @@ See <a href="https://medium.com/unstructured-data-service/how-to-choose-an-index
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn more about the <a href="/docs/metric.md">Similarity Metrics</a> supported in Milvus.</li>
+<li>Learn more about the <a href="/docs/v2.1.x/metric.md">Similarity Metrics</a> supported in Milvus.</li>
 </ul>

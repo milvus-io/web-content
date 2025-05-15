@@ -20,6 +20,6 @@ summary: ''
       </svg>
     </button></h1><p>Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets.</p>
 <ul>
-<li><p><a href="/docs/build_index.md">Build an Index</a>: Build an index to accelerate your vector similarity search. Milvus 2.1 now supports indexes on the scalar field.</p></li>
-<li><p><a href="/docs/drop_index.md">Drop an Index</a>: Dropping an index irreversibly removes all corresponding index files.</p></li>
+<li><p><a href="/docs/v2.1.x/build_index.md">Build an Index</a>: Build an index to accelerate your vector similarity search. Milvus 2.1 now supports indexes on the scalar field.</p></li>
+<li><p><a href="/docs/v2.1.x/drop_index.md">Drop an Index</a>: Dropping an index irreversibly removes all corresponding index files.</p></li>
 </ul>

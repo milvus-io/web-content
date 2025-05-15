@@ -20,11 +20,11 @@ summary: ''
       </svg>
     </button></h1><p>Milvus is an open-source vector database built for scalable similarity search. Check out the following topics to learn more about the Milvus vector database.</p>
 <ul>
-<li><p><a href="/docs/overview.md">What is Milvus</a>: A gentle introduction to the Milvus vector database. Learn about what Milvus is, how it works, and why to choose Milvus.</p></li>
-<li><p><a href="/docs/milvus_adopters.md">Milvus Adopters</a>: A full list of the companies that leverage Milvus in their AI applications.</p></li>
+<li><p><a href="/docs/v2.1.x/overview.md">What is Milvus</a>: A gentle introduction to the Milvus vector database. Learn about what Milvus is, how it works, and why to choose Milvus.</p></li>
+<li><p><a href="/docs/v2.1.x/milvus_adopters.md">Milvus Adopters</a>: A full list of the companies that leverage Milvus in their AI applications.</p></li>
 <li><p><a href="https://wiki.lfaidata.foundation/display/MIL/Milvus+2.X+Roadmap+and+Time+schedule">Milvus Roadmap</a>: The roadmap and the release timeline of the Milvus project.</p></li>
-<li><p><a href="/docs/limitations.md">Milvus Limits</a>: Known limitations that you may encounter when using Milvus.</p></li>
-<li><p><a href="/docs/release_notes.md">Release Notes</a>: A summary of new features, improvements, known issues, and bug fixes in each release.</p></li>
+<li><p><a href="/docs/v2.1.x/limitations.md">Milvus Limits</a>: Known limitations that you may encounter when using Milvus.</p></li>
+<li><p><a href="/docs/v2.1.x/release_notes.md">Release Notes</a>: A summary of new features, improvements, known issues, and bug fixes in each release.</p></li>
 <li><p><a href="https://wiki.lfaidata.foundation/pages/viewpage.action?pageId=43287103">Enhancement Proposals</a>: Design documentation that provides information to the Milvus community and describes Milvus features in planning.</p></li>
 <li><p><a href="https://milvus.io/bootcamp">Bootcamp</a>: Hands-on instructions on how to build similarity search applications with Milvus.</p></li>
 </ul>

@@ -194,7 +194,7 @@ title: ''
 <ul>
 <li>Embedded Milvus</li>
 </ul>
-<p>Embedded Milvus enables you to <a href="/docs/install_embedded_milvus.md">pip install Milvus</a> in one command, try quick demos and run short scripts in Python on your Macbook, including on the ones with M1 processor.</p>
+<p>Embedded Milvus enables you to <a href="/docs/v2.1.x/install_embedded_milvus.md">pip install Milvus</a> in one command, try quick demos and run short scripts in Python on your Macbook, including on the ones with M1 processor.</p>
 <ul>
 <li>Kafka support (Beta)</li>
 </ul>
@@ -233,11 +233,11 @@ title: ''
 <ul>
 <li>Observability</li>
 </ul>
-<p>We refined monitoring metrics by adding important <a href="/docs/metrics_dashboard.md">metrics</a> including search QPS and latency to the new dashboard. Please notify us if any metrics critical to your production environment are not listed.</p>
+<p>We refined monitoring metrics by adding important <a href="/docs/v2.1.x/metrics_dashboard.md">metrics</a> including search QPS and latency to the new dashboard. Please notify us if any metrics critical to your production environment are not listed.</p>
 <ul>
 <li>Deployment</li>
 </ul>
-<p>For users who don’t have a K8s environment but still want to deploy a cluster, Milvus now supports Ansible deployment. See <a href="/docs/install_cluster-ansible.md">Install Milvus Cluster</a> for more information.</p>
+<p>For users who don’t have a K8s environment but still want to deploy a cluster, Milvus now supports Ansible deployment. See <a href="/docs/v2.1.x/install_cluster-ansible.md">Install Milvus Cluster</a> for more information.</p>
 <p><h3 id="v2.1.0">Known issues</h3></p>
 <ol>
 <li>Partition is not a fully released feature so we recommend user not to rely on it. <a href="https://github.com/milvus-io/milvus/issues/17648">#17648 When a partition is dropped, the data and index cannot be cleaned.</a></li>

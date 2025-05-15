@@ -23,7 +23,7 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This topic describes how to install Attu, an efficient open-source management tool for Milvus.</p>
-<div class="tab-wrapper"><a href="/docs/attu_install-docker.md" class=''>Install with Docker Compose</a><a href="/docs/attu_install-helm.md" class='active '>Install with Helm Chart</a><a href="/docs/attu_install-package.md" class=''>Install with Package</a></div>
+<div class="tab-wrapper"><a href="/docs/v2.1.x/attu_install-docker.md" class=''>Install with Docker Compose</a><a href="/docs/v2.1.x/attu_install-helm.md" class='active '>Install with Helm Chart</a><a href="/docs/v2.1.x/attu_install-package.md" class=''>Install with Package</a></div>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

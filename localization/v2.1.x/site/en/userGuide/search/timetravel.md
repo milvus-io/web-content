@@ -938,8 +938,8 @@ Output:
     </button></h2><ul>
 <li><p>Learn more basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/query.md">Query vectors</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.1.x/query.md">Query vectors</a></li>
+<li><a href="/docs/v2.1.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul></li>
 <li><p>Explore API references for Milvus SDKs:</p>
 <ul>

@@ -20,14 +20,14 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This topic describes how to build an index in Milvus.</p>
-<p>Vector indexes are an organizational unit of metadata used to accelerate <a href="/docs/search.md">vector similarity search</a>. Without index built on vectors, Milvus will perform a brute-force search by default.</p>
-<p>See <a href="/docs/index.md">Vector Index</a> for more information about mechanism and varieties of vector indexes.</p>
+<p>Vector indexes are an organizational unit of metadata used to accelerate <a href="/docs/v2.1.x/search.md">vector similarity search</a>. Without index built on vectors, Milvus will perform a brute-force search by default.</p>
+<p>See <a href="/docs/v2.1.x/index.md">Vector Index</a> for more information about mechanism and varieties of vector indexes.</p>
 <div class="alert note">
 <ul>
 <li>Milvus 2.1 supports index on scalar field.</li>
-<li>By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="/docs/configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a> in <code translate="no">milvus.yaml</code>.</li>
+<li>By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="/docs/v2.1.x/configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a> in <code translate="no">milvus.yaml</code>.</li>
 </div>
-<p>The following example builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metrics. You can choose the index and metrics that suit your scenario. See <a href="/docs/metric.md">Similarity Metrics</a> for more information.</p>
+<p>The following example builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metrics. You can choose the index and metrics that suit your scenario. See <a href="/docs/v2.1.x/metric.md">Similarity Metrics</a> for more information.</p>
 <h2 id="Prepare-index-parameter" class="common-anchor-header">Prepare index parameter<button data-href="#Prepare-index-parameter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -155,7 +155,7 @@ Timeout []:
     <tr>
         <td><code translate="no">params</code></td>
         <td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="/docs/index.md">Vector Index</a> for more information.</td>
+        <td>See <a href="/docs/v2.1.x/index.md">Vector Index</a> for more information.</td>
     </tr>
     </tbody>
 </table>
@@ -211,7 +211,7 @@ Timeout []:
     <tr>
         <td><code translate="no">params</code></td>
         <td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="/docs/index.md">Vector Index</a> for more information.</td>
+        <td>See <a href="/docs/v2.1.x/index.md">Vector Index</a> for more information.</td>
     </tr>
     </tbody>
 </table>
@@ -268,7 +268,7 @@ Timeout []:
     <tr>
         <td><code translate="no">ConstructParams</code></td>
         <td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="/docs/index.md">Vector Index</a> for more information.</td>
+        <td>See <a href="/docs/v2.1.x/index.md">Vector Index</a> for more information.</td>
     </tr>
     </tbody>
 </table>
@@ -306,7 +306,7 @@ Timeout []:
     <tr>
         <td><code translate="no">ExtraParam</code></td>
         <td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="/docs/index.md">Vector Index</a> for more information.</td>
+        <td>See <a href="/docs/v2.1.x/index.md">Vector Index</a> for more information.</td>
     </tr>
     </tbody>
 </table>
@@ -384,7 +384,7 @@ Timeout []:
     <tr>
         <td><code translate="no">params</code></td>
         <td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="/docs/index.md">Vector Index</a> for more information.</td>
+        <td>See <a href="/docs/v2.1.x/index.md">Vector Index</a> for more information.</td>
     </tr>
     </tbody>
 </table>
@@ -541,8 +541,8 @@ collection.create_index(
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
-<li><a href="/docs/timetravel.md">Search with Time Travel</a></li>
+<li><a href="/docs/v2.1.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.1.x/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.1.x/timetravel.md">Search with Time Travel</a></li>
 </ul></li>
 </ul>
