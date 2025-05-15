@@ -63,8 +63,8 @@ export const remarkableToHtml = async (
   options = { lang: "en", content: "", version: VERSION, betaTag: "", latestVersion: "" }
 ) => {
   const { lang, content, version, betaTag } = options;
-  const pathWithVersion = version === latestVersion ? PATH : `${PATH}/${version}`
-  const path = lang === "en" ? pathWithVersion : pathWithVersion + lang + "/";
+  const versionSuffix = version === latestVersion ? '': `${version}/`
+  const path = (lang === "en" ? PATH : PATH + lang + "/") + versionSuffix;
   const { tree, codeList, headingContent, anchorList } = Milvus.md2html(
     content,
     {
