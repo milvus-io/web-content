@@ -33,15 +33,36 @@ A Collection can store various types of scalar fields. You can have Milvus filte
    </tr>
    <tr>
      <td><p>Mandatory parameters</p></td>
-     <td><ul><li>Collection name</li><li>Primary keys</li></ul></td>
-     <td><ul><li>Collection name</li><li>Filtering expressions</li></ul></td>
-     <td><ul><li><p>Collection name</p></li><li><p>Filtering expressions</p></li><li><p>Number of entities to return per query</p></li></ul></td>
+     <td><ul>
+<li>Collection name</li>
+<li>Primary keys</li>
+</ul></td>
+     <td><ul>
+<li>Collection name</li>
+<li>Filtering expressions</li>
+</ul></td>
+     <td><ul>
+<li><p>Collection name</p></li>
+<li><p>Filtering expressions</p></li>
+<li><p>Number of entities to return per query</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>Optional parameters</p></td>
-     <td><ul><li>Partition name</li><li>Output fields</li></ul></td>
-     <td><ul><li><p>Partition name</p></li><li><p>Number of entities to return</p></li><li><p>Output fields</p></li></ul></td>
-     <td><ul><li><p>Partition name</p></li><li><p>Number of entities to return in total</p></li><li><p>Output fields</p></li></ul></td>
+     <td><ul>
+<li>Partition name</li>
+<li>Output fields</li>
+</ul></td>
+     <td><ul>
+<li><p>Partition name</p></li>
+<li><p>Number of entities to return</p></li>
+<li><p>Output fields</p></li>
+</ul></td>
+     <td><ul>
+<li><p>Partition name</p></li>
+<li><p>Number of entities to return in total</p></li>
+<li><p>Output fields</p></li>
+</ul></td>
    </tr>
    <tr>
      <td><p>Returns</p></td>
@@ -51,7 +72,7 @@ A Collection can store various types of scalar fields. You can have Milvus filte
    </tr>
 </table>
 
-For more on metadata filtering, refer to [Filtering](filtering).
+For more on metadata filtering, refer to .
 
 ## Use Get
 
