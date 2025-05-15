@@ -62,7 +62,7 @@ export function mkdir(filePath) {
 export const remarkableToHtml = async (
   options = { lang: "en", content: "", version: VERSION, betaTag: "", latestVersion: "" }
 ) => {
-  const { lang, content, version, betaTag } = options;
+  const { lang, content, version, betaTag, latestVersion } = options;
   const versionSuffix = version === latestVersion ? '': `${version}/`
   const path = (lang === "en" ? PATH : PATH + lang + "/") + versionSuffix;
   const { tree, codeList, headingContent, anchorList } = Milvus.md2html(
