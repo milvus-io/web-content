@@ -96,11 +96,12 @@ const loadComponents = async () => {
 };
 
 export const remarkToHtml = async (
-  options = { lang: "en", content: "", version: VERSION }
+  options = { lang: "en", content: "", version: VERSION, latestVersion: "" }
 ) => {
-  const { content, lang, version } = options;
+  const { content, lang, version, latestVersion } = options;
+  const pathWithVersion = version === latestVersion? 'docs': `docs/${version}`
 
-  const prefix = lang === "en" ? "docs/" : `docs/${lang}/`;
+  const prefix = lang === "en" ? pathWithVersion : `docs/${lang}/`;
   let codeList = [];
   let titles = [];
   let anchorList = [];
