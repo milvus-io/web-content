@@ -270,6 +270,6 @@ Milvus only supports deleting entities with clearly specified primary keys, whic
       </svg>
     </button></h2><p>Now that you know how bitsets work in Milvus, you might also want to:</p>
 <ul>
-<li>Learn how to conduct a  <a href="/docs/hybridsearch.md">Hybrid Search</a>.</li>
+<li>Learn how to conduct a  <a href="/docs/v2.1.x/hybridsearch.md">Hybrid Search</a>.</li>
 <li>Learn how to  <a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">use strings to filter</a> your search results.</li>
 </ul>

@@ -21,7 +21,7 @@ summary: Learn how to configure Milvus with Milvus Operator.
       </svg>
     </button></h1><p>In production environment, you need to allocate resources to the Milvus cluster based on machine type and workload. You can configure during deployment or update the configurations while the cluster is running.</p>
 <p>This topic introduces how to configure a Milvus cluster when you install it with Milvus Operator.</p>
-<p>This topic assumes that you have deployed Milvus Operator. See <a href="/docs/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information.</p>
+<p>This topic assumes that you have deployed Milvus Operator. See <a href="/docs/v2.1.x/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information.</p>
 <p>Configuring a Milvus cluster with Milvus Operator includes:</p>
 <ul>
 <li>Global resource configurations</li>
@@ -192,8 +192,8 @@ This example configures not only global resources but also private compute resou
     </button></h2><ul>
 <li>Learn how to manage the following Milvus dependencies with Milvus Operator:
 <ul>
-<li><a href="/docs/object_storage_operator.md">Configure Object Storage with Milvus Operator</a></li>
-<li><a href="/docs/meta_storage_operator.md">Configure Meta Storage with Milvus Operator</a></li>
-<li><a href="/docs/message_storage_operator.md">Configure Message Storage with Milvus Operator</a></li>
+<li><a href="/docs/v2.1.x/object_storage_operator.md">Configure Object Storage with Milvus Operator</a></li>
+<li><a href="/docs/v2.1.x/meta_storage_operator.md">Configure Meta Storage with Milvus Operator</a></li>
+<li><a href="/docs/v2.1.x/message_storage_operator.md">Configure Message Storage with Milvus Operator</a></li>
 </ul></li>
 </ul>

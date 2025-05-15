@@ -35,7 +35,7 @@ title: ''
         ></path>
       </svg>
     </button></h2><p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
-<p>Milvus supports four consistency levels:  strong, bounded staleness, session, and eventually. The default consistency level in Milvus is bounded staleness.  You can easily tune the consistency level when conducting a <a href="/docs/search.md">vector similarity search</a> or <a href="/docs/query.md">query</a> to make it best suit your application.</p>
+<p>Milvus supports four consistency levels:  strong, bounded staleness, session, and eventually. The default consistency level in Milvus is bounded staleness.  You can easily tune the consistency level when conducting a <a href="/docs/v2.1.x/search.md">vector similarity search</a> or <a href="/docs/v2.1.x/query.md">query</a> to make it best suit your application.</p>
 <h2 id="Consistency-levels" class="common-anchor-header">Consistency levels<button data-href="#Consistency-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,7 +127,7 @@ title: ''
     </button></h2><ul>
 <li>Learn how to tune consistency level when:
 <ul>
-<li><a href="/docs/search.md">conducting a vector similarity search</a></li>
-<li><a href="/docs/query.md">conducting a vector query</a></li>
+<li><a href="/docs/v2.1.x/search.md">conducting a vector similarity search</a></li>
+<li><a href="/docs/v2.1.x/query.md">conducting a vector query</a></li>
 </ul></li>
 </ul>

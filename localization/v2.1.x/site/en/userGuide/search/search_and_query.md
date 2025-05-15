@@ -20,7 +20,7 @@ summary: ''
       </svg>
     </button></h1><p>Conduct a search, query, or hybrid search to find relevant results.</p>
 <ul>
-<li><p><a href="/docs/search.md">Search</a>: A vector similarity search in Milvus calculates the distance between query vector(s) and vectors in a collection and returns the most similar results.</p></li>
-<li><p><a href="/docs/hybridsearch.md">Hybrid Search</a>: A hybrid search in Milvus is essentially a vector search with attribute filtering.</p></li>
-<li><p><a href="/docs/query.md">Query</a>: A vector query in Milvus retrieves vectors via scalar filtering based on boolean expression.</p></li>
+<li><p><a href="/docs/v2.1.x/search.md">Search</a>: A vector similarity search in Milvus calculates the distance between query vector(s) and vectors in a collection and returns the most similar results.</p></li>
+<li><p><a href="/docs/v2.1.x/hybridsearch.md">Hybrid Search</a>: A hybrid search in Milvus is essentially a vector search with attribute filtering.</p></li>
+<li><p><a href="/docs/v2.1.x/query.md">Query</a>: A vector query in Milvus retrieves vectors via scalar filtering based on boolean expression.</p></li>
 </ul>

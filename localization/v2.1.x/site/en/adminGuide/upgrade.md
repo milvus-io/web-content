@@ -241,13 +241,13 @@ my-release-pulsar-zookeeper-2                     1/1     Running   0          1
     </button></h2><ul>
 <li>You might also want to learn how to:
 <ul>
-<li><a href="/docs/scaleout.md">Scale a Milvus cluster</a></li>
+<li><a href="/docs/v2.1.x/scaleout.md">Scale a Milvus cluster</a></li>
 </ul></li>
 <li>If you are ready to deploy your cluster on clouds:
 <ul>
-<li>Learn how to <a href="/docs/aws.md">Deploy Milvus on AWS with Terraform and Ansible</a></li>
-<li>Learn how to <a href="/docs/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
-<li>Learn how to <a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
-<li>Learn how to <a href="/docs/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
+<li>Learn how to <a href="/docs/v2.1.x/aws.md">Deploy Milvus on AWS with Terraform and Ansible</a></li>
+<li>Learn how to <a href="/docs/v2.1.x/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
+<li>Learn how to <a href="/docs/v2.1.x/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
+<li>Learn how to <a href="/docs/v2.1.x/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
 </ul></li>
 </ul>

@@ -20,12 +20,12 @@ summary: ''
       </svg>
     </button></h1><p>Looking for more advanced guides and instructions on Milvus DevOps? Check out the administration guides below.</p>
 <ul>
-<li><p><a href="/docs/configure_milvus.md">Configure Milvus</a>: Configure Milvus components and dependencies according to your own needs.</p></li>
-<li><p><a href="/docs/manage_dependencies.md">Manage Dependencies</a>: Configure object, meta, and message storage in Milvus.</p></li>
-<li><p><a href="/docs/allocate.md">Allocate Resources</a>: Allocate resources to a Milvus cluster according to the machine workload and type.</p></li>
-<li><p><a href="/docs/deploy_on_clouds.md">Deploy on Clouds</a>: Deploy Milvus on various cloud platforms including Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP).</p></li>
-<li><p><a href="/docs/scaleout.md">Scale a Milvus Cluster</a>:  Flexibly increase or decrease the number of worker nodes of each type according to your own need.</p></li>
-<li><p><a href="/docs/upgrade.md">Upgrade</a>: Upgrade Milvus to the latest version with Helm Chart.</p></li>
-<li><p><a href="/docs/monitor_and_alert.md">Monitor and Alert</a>: Use Prometheus to monitor metrics and Grafana to visualize metrics and create alerts.</p></li>
-<li><p><a href="/docs/security.md">Security</a>: Milvus adopts measures on various levels to ensure that all your data are safe and kept confidential.</p></li>
+<li><p><a href="/docs/v2.1.x/configure_milvus.md">Configure Milvus</a>: Configure Milvus components and dependencies according to your own needs.</p></li>
+<li><p><a href="/docs/v2.1.x/manage_dependencies.md">Manage Dependencies</a>: Configure object, meta, and message storage in Milvus.</p></li>
+<li><p><a href="/docs/v2.1.x/allocate.md">Allocate Resources</a>: Allocate resources to a Milvus cluster according to the machine workload and type.</p></li>
+<li><p><a href="/docs/v2.1.x/deploy_on_clouds.md">Deploy on Clouds</a>: Deploy Milvus on various cloud platforms including Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP).</p></li>
+<li><p><a href="/docs/v2.1.x/scaleout.md">Scale a Milvus Cluster</a>:  Flexibly increase or decrease the number of worker nodes of each type according to your own need.</p></li>
+<li><p><a href="/docs/v2.1.x/upgrade.md">Upgrade</a>: Upgrade Milvus to the latest version with Helm Chart.</p></li>
+<li><p><a href="/docs/v2.1.x/monitor_and_alert.md">Monitor and Alert</a>: Use Prometheus to monitor metrics and Grafana to visualize metrics and create alerts.</p></li>
+<li><p><a href="/docs/v2.1.x/security.md">Security</a>: Milvus adopts measures on various levels to ensure that all your data are safe and kept confidential.</p></li>
 </ul>

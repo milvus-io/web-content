@@ -25,7 +25,7 @@ Do not use embedded Milvus in production environment or if you require high perf
 </div>
 <p>Embedded Milvus is suitable for the following scenarios:</p>
 <ul>
-<li>You want to use Milvus directly without having it installed using <a href="/docs/install_standalone-docker.md">Docker Compose, Helm, etc.</a>.</li>
+<li>You want to use Milvus directly without having it installed using <a href="/docs/v2.1.x/install_standalone-docker.md">Docker Compose, Helm, etc.</a>.</li>
 <li>You do not want to use any containers like Docker.</li>
 <li>You want to use Milvus without keeping a long-running Milvus process in your machine.</li>
 </ul>

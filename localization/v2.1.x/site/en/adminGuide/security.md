@@ -20,6 +20,6 @@ summary: ''
       </svg>
     </button></h1><p>Milvus attempts to ensure database security both on the access level and on the database level.</p>
 <ul>
-<li><p><a href="/docs/authenticate.md">Enable Authentication</a>: Milvus supports authenticated access by username and password.</p></li>
-<li><p><a href="/docs/tls.md">Encryption in Transit</a>: TLS (Transport Layer Security) is an encryption protocol to ensure communication security.</p></li>
+<li><p><a href="/docs/v2.1.x/authenticate.md">Enable Authentication</a>: Milvus supports authenticated access by username and password.</p></li>
+<li><p><a href="/docs/v2.1.x/tls.md">Encryption in Transit</a>: TLS (Transport Layer Security) is an encryption protocol to ensure communication security.</p></li>
 </ul>
