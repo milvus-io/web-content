@@ -18,8 +18,10 @@ import {
   CACHE_FILE,
 } from "./utils.js";
 import { remarkToHtml } from "./remark.js";
+import latestVersion from '../version.json'
 
 const VERSIONS = ["v2.5.x", "v2.4.x"];
+const LATEST_VERSION = latestVersion.version;
 const sourceFilePath = "site/en";
 const sourceLang = "en";
 const targetLang = "en";
@@ -77,6 +79,7 @@ async function bootstrap() {
         lang: targetLang,
         version,
         betaTag: data.beta,
+        latestVersion: LATEST_VERSION
       };
       const {
         html: htmlContent,
