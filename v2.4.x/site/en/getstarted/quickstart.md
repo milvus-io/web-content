@@ -15,7 +15,7 @@ Milvus is an open-source vector database that suits AI applications of every siz
 
 ## Install Milvus
 
-In this guide we use Milvus Lite, a python library included in `pymilvus` that can be embedded into the client application. Milvus also supports deployment on [Docker](https://milvus.io/docs/install_standalone-docker.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md) for production use cases.
+In this guide we use Milvus Lite, a python library included in `pymilvus` that can be embedded into the client application. Milvus also supports deployment on [Docker](install_standalone-docker.md) and [Kubernetes](install_cluster-milvusoperator.md) for production use cases.
 
 Before starting, make sure you have Python 3.8+ available in the local environment. Install `pymilvus` which contains both the python client library and Milvus Lite:
 
@@ -55,8 +55,8 @@ client.create_collection(
 In the above setup,
 
 - The primary key and vector fields use their default names ("id" and "vector").
-- The metric type (vector distance definition) is set to its default value ([COSINE](https://milvus.io/docs/metric.md#Cosine-Similarity)).
-- The primary key field accepts integers and does not automatically increments (namely not using [auto-id feature](https://milvus.io/docs/schema.md))
+- The metric type (vector distance definition) is set to its default value ([COSINE](metric.md#Cosine-Similarity)).
+- The primary key field accepts integers and does not automatically increments (namely not using [auto-id feature](schema.md))
   Alternatively, you can formally define the schema of the collection by following this [instruction](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md).
 
 ## Prepare Data
@@ -218,13 +218,13 @@ print(res)
 data: ["[{'id': 4, 'distance': 0.27030569314956665, 'entity': {'text': 'Computational synthesis with AI algorithms predicts molecular properties.', 'subject': 'biology'}}, {'id': 3, 'distance': 0.16425910592079163, 'entity': {'text': 'Machine learning has been used for drug design.', 'subject': 'biology'}}]"] , extra_info: {'cost': 0}
 ```
 
-By default, the scalar fields are not indexed. If you need to perform metadata filtered search in large dataset, you can consider using fixed schema and also turn on the [index](https://milvus.io/docs/scalar_index.md) to improve the search performance.
+By default, the scalar fields are not indexed. If you need to perform metadata filtered search in large dataset, you can consider using fixed schema and also turn on the [index](scalar_index.md) to improve the search performance.
 
 In addition to vector search, you can also perform other types of searches:
 
 ### Query
 
-A query() is an operation that retrieves all entities matching a criteria, such as a [filter expression](https://milvus.io/docs/boolean.md) or matching some ids.
+A query() is an operation that retrieves all entities matching a criteria, such as a [filter expression](boolean.md) or matching some ids.
 
 For example, retrieving all entities whose scalar field has a particular value:
 
@@ -291,10 +291,10 @@ client.drop_collection(collection_name="demo_collection")
 
 ## Learn More
 
-Milvus Lite is great for getting started with a local python program. If you have large scale data or would like to use Milvus in production, you can learn about deploying Milvus on [Docker](https://milvus.io/docs/install_standalone-docker.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md). All deployment modes of Milvus share the same API, so your client side code doesn't need to change much if moving to another deployment mode. Simply specify the [URI and Token](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) of a Milvus server deployed anywhere:
+Milvus Lite is great for getting started with a local python program. If you have large scale data or would like to use Milvus in production, you can learn about deploying Milvus on [Docker](install_standalone-docker.md) and [Kubernetes](install_cluster-milvusoperator.md). All deployment modes of Milvus share the same API, so your client side code doesn't need to change much if moving to another deployment mode. Simply specify the [URI and Token](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) of a Milvus server deployed anywhere:
 
 ```python
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 ```
 
-Milvus provides REST and gRPC API, with client libraries in languages such as [Python](https://milvus.io/docs/install-pymilvus.md), [Java](https://milvus.io/docs/install-java.md), [Go](https://milvus.io/docs/install-go.md), C# and [Node.js](https://milvus.io/docs/install-node.md).
+Milvus provides REST and gRPC API, with client libraries in languages such as [Python](install-pymilvus.md), [Java](install-java.md), [Go](install-go.md), C# and [Node.js](install-node.md).
