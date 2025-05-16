@@ -4,14 +4,14 @@ summary: In this notebook, we will use the BGE-M3 embedding model to extract emb
 title: HDBSCAN Clustering with Milvus
 ---
 
-# HDBSCAN Clustering with Milvus
-
 <a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_parent">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hdbscan_clustering_with_milvus.ipynb" target="_blank">
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
+
+# HDBSCAN Clustering with Milvus
 
 Data can be transformed into embeddings using deep learning models, which capture meaningful representations of the original data. By applying an unsupervised clustering algorithm, we can group similar data points together based on their inherent patterns. HDBSCAN (Hierarchical Density-Based Spatial Clustering of Applications with Noise) is a widely used clustering algorithm that efficiently groups data points by analyzing their density and distance. It is particularly useful for discovering clusters of varying shapes and sizes. In this notebook, we will use HDBSCAN with Milvus, a high-performance vector database, to cluster data points into distinct groups based on their embeddings.
 
@@ -34,6 +34,21 @@ $ pip install umap-learn
 
 ## Download Data
 Download news dataset from https://www.kaggle.com/datasets/dylanjcastillo/news-headlines-2024/, extract `news_data_dedup.csv` and put it into current directory.
+
+Or you can download via curl:
+
+
+```bash
+%%bash
+curl -L -o ~/Downloads/news-headlines-2024.zip\
+  https://www.kaggle.com/api/v1/datasets/download/dylanjcastillo/news-headlines-2024
+```
+
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+      0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0 --:--:--     0
+    100  225k  100  225k    0     0  33151      0  0:00:06  0:00:06 --:--:-- 62160:03  114k  0:00:07  0:00:06  0:00:01 66615    0  30519      0  0:00:07  0:00:06  0:00:01 61622
+
 
 ## Extract Embeddings to Milvus
 We will create a collection using Milvus, and extract dense embeddings using BGE-M3 model.
@@ -62,12 +77,11 @@ connections.connect(uri="milvus.db")
 
 <div class="alert note">
 
-- If you only need a local vector database for small scale data or prototyping, setting the uri as a local file, e.g.`./milvus.db`, is the most convenient method, as it automatically utilizes [Milvus Lite](https://milvus.io/docs/milvus_lite.md) to store all data in this file.
-- If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on [Docker or Kubernetes](https://milvus.io/docs/quickstart.md). In this setup, please use the server address and port as your uri, e.g.`http://localhost:19530`. If you enable the authentication feature on Milvus, use "<your_username>:<your_password>" as the token, otherwise don't set the token.
-- If you use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service for Milvus, adjust the `uri` and `token`, which correspond to the [Public Endpoint and API key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details) in Zilliz Cloud.
+> - If you only need a local vector database for small scale data or prototyping, setting the uri as a local file, e.g.`./milvus.db`, is the most convenient method, as it automatically utilizes [Milvus Lite](https://milvus.io/docs/milvus_lite.md) to store all data in this file.
+> - If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on [Docker or Kubernetes](https://milvus.io/docs/quickstart.md). In this setup, please use the server address and port as your uri, e.g.`http://localhost:19530`. If you enable the authentication feature on Milvus, use "<your_username>:<your_password>" as the token, otherwise don't set the token.
+> - If you use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service for Milvus, adjust the `uri` and `token`, which correspond to the [Public Endpoint and API key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details) in Zilliz Cloud.
 
 </div>
-
 
 ```python
 fields = [
@@ -215,6 +229,6 @@ fig = px.scatter(
 fig.show()
 ```
 
-![image](../../../assets/hdbscan_clustering_with_milvus.png)
+![image](../../../images/hdbscan_clustering_with_milvus.png)
 
 Here, we demonstrate that the data is well clustered, and you can hover over the points to check the text they represent. With this notebook, we hope you learn how to use HDBSCAN to cluster embeddings with Milvus efficiently, which can also be applied to other types of data. Combined with large language models, this approach allows for deeper analysis of your data at a large scale.

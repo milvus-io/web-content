@@ -125,7 +125,7 @@ vectorstore = Milvus.from_documents(
         "uri": URI,
     },
     consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
-    drop_old=True,
+    drop_old=False,
 )
 ```
 
@@ -201,7 +201,7 @@ vectorstore = Milvus.from_documents(
         "uri": URI,
     },
     consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
-    drop_old=True,
+    drop_old=False,
 )
 ```
 
@@ -230,7 +230,7 @@ vectorstore = Milvus.from_documents(
         "uri": URI,
     },
     consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
-    drop_old=True,
+    drop_old=False,
 )
 
 vectorstore.vector_fields
@@ -273,7 +273,7 @@ vectorstore = Milvus.from_documents(
         "uri": URI,
     },
     consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
-    drop_old=True,
+    drop_old=False,
 )
 
 vectorstore.vector_fields
@@ -306,7 +306,7 @@ vectorstore = Milvus.from_documents(
         "uri": URI,
     },
     consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
-    drop_old=True,
+    drop_old=False,
 )
 
 query = "What are the novels Lila has written and what are their contents?"
@@ -400,7 +400,7 @@ vectorstore = Milvus.from_documents(
         "uri": URI,
     },
     consistency_level="Strong",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
-    drop_old=True,
+    drop_old=False,
 )
 ```
 

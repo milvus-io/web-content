@@ -4,8 +4,6 @@ summary: In this notebook, we refer to this kind of multi-vector representation 
 title: Use ColPali for Multi-Modal Retrieval with Milvus
 ---
 
-# Use ColPali for Multi-Modal Retrieval with Milvus
-
 <a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
@@ -13,9 +11,11 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
 
+# Use ColPali for Multi-Modal Retrieval with Milvus
+
 Modern retrieval models typically use a single embedding to represent text or images. ColBERT, however, is a neural model that utilizes a list of embeddings for each data instance and employs a "MaxSim" operation to calculate the similarity between two texts. Beyond textual data, figures, tables, and diagrams also contain rich information, which is often disregarded in text-based information retrieval.
 
-![](../../../assets/colpali_formula.png)
+![](../../../images/colpali_formula.png)
 
 MaxSim function compares a query with a document (what you're searching in) by looking at their token embeddings. For each word in the query, it picks the most similar word from the document (using cosine similarity or squared L2 distance) and sums these maximum similarities across all words in the query
 
@@ -27,12 +27,13 @@ ColPali is a method that combines ColBERT's multi-vector representation with Pal
 
 ## Preparation
 
+
 ```shell
 $ pip install pdf2image
-$ pip pymilvus
+$ pip install pymilvus
 $ pip install colpali_engine
 $ pip install tqdm
-$ pip instal pillow
+$ pip install pillow
 ```
 
 ## Prepare the data
@@ -59,7 +60,6 @@ import concurrent.futures
 
 client = MilvusClient(uri="milvus.db")
 ```
-
 
 <div class="alert note">
 

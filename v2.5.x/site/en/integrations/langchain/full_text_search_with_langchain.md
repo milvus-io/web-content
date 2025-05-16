@@ -95,7 +95,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    drop_old=True,
+    drop_old=False,
 )
 ```
 
@@ -133,7 +133,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    drop_old=True,
+    drop_old=False,
 )
 
 vectorstore.vector_fields
@@ -184,7 +184,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    drop_old=True,
+    drop_old=False,
 )
 
 vectorstore.vector_fields
@@ -231,7 +231,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    drop_old=True,
+    drop_old=False,
 )
 ```
 
@@ -319,7 +319,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": URI,
     },
-    drop_old=True,
+    drop_old=False,
 )
 ```
 

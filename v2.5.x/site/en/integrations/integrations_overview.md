@@ -72,3 +72,6 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Integrate Milvus with MindsDB](integration_with_mindsdb.md) | Knowledge Engineering | Milvus, MindsDB |
 | [Build RAG with Milvus and Feast](build_RAG_with_milvus_and_feast.md) | Data Sources | Milvus, Feast |
 | [Build RAG with Milvus and Docling](build_RAG_with_milvus_and_docling.md) | Data Sources | Milvus, Docling |
+| [Building RAG with Milvus and EmbedAnything](build_RAG_with_milvus_and_embedAnything.md) | Embedding | Milvus, EmbedAnything |
+| [Getting Started with Milvus and n8n](milvus_and_n8n.md) | Orchestration | Milvus, n8n |
+| [Use Milvus in AnythingLLM](use_milvus_in_anythingllm.md) | Orchestration | Milvus, AnythingLLM |

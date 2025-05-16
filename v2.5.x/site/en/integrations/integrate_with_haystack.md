@@ -84,7 +84,7 @@ document_store = MilvusDocumentStore(
     connection_args={"uri": "./milvus.db"},
     # connection_args={"uri": "http://localhost:19530"},
     # connection_args={"uri": YOUR_ZILLIZ_CLOUD_URI, "token": Secret.from_env_var("ZILLIZ_CLOUD_API_KEY")},
-    drop_old=True,
+    drop_old=False,
 )
 ```
 

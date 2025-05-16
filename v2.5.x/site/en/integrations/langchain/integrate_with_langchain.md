@@ -105,7 +105,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         "uri": "./milvus_demo.db",
     },
-    drop_old=True,  # Drop the old Milvus collection if it exists
+    drop_old=False,  # Drop the old Milvus collection if it exists
 )
 ```
 
