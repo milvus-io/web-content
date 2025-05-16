@@ -349,7 +349,7 @@ array_length(int_array) <span class="hljs-comment"># ==&gt; 7</span>
       </svg>
     </button></h2><p>Now that you know how bitsets work in Milvus, you might also want to:</p>
 <ul>
-<li>Learn how to conduct a  <a href="/docs/hybridsearch.md">Hybrid Search</a>.</li>
+<li>Learn how to conduct a  <a href="/docs/v2.3.x/hybridsearch.md">Hybrid Search</a>.</li>
 <li>Learn how to <a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">use strings to filter</a> your search results.</li>
-<li>Learn how to <a href="/docs/dynamic_schema.md">use dynamic fields in building boolean expressions</a>.</li>
+<li>Learn how to <a href="/docs/v2.3.x/dynamic_schema.md">use dynamic fields in building boolean expressions</a>.</li>
 </ul>

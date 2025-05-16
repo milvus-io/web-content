@@ -7,7 +7,7 @@ group: install_standalone-helm-gpu.md
 summary: Learn how to install Milvus Cluster with Docker Compose.
 title: Install Milvus Cluster with Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/install_standalone-helm-gpu.md" class=''>Standalone (Helm)</a><a href="/docs/install_standalone-docker-compose-gpu.md" class='active '>Standalone (Docker Compose)</a><a href="/docs/install_cluster-helm-gpu.md" class=''>Cluster (Helm)</a></div>
+<div class="tab-wrapper"><a href="/docs/v2.3.x/install_standalone-helm-gpu.md" class=''>Standalone (Helm)</a><a href="/docs/v2.3.x/install_standalone-docker-compose-gpu.md" class='active '>Standalone (Docker Compose)</a><a href="/docs/v2.3.x/install_cluster-helm-gpu.md" class=''>Cluster (Helm)</a></div>
 <h1 id="Install-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">Install Milvus Cluster with Docker Compose<button data-href="#Install-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,7 +54,7 @@ title: Install Milvus Cluster with Docker Compose
 <p>You are recommended to use the drivers of version 535 and above.</p></li>
 <li><p>You have installed a Kubernetes cluster, and the <code translate="no">kubectl</code> command-line tool has been configured to communicate with your cluster. It is recommended to run this tutorial on a cluster with at least two nodes that are not acting as control plane hosts.</p></li>
 <li><p>You have installed Docker and Docker Compose on your local machine.</p></li>
-<li><p>Check <a href="/docs/prerequisite-docker.md">the requirements</a> for hardware and software requirements before installing Milvus.</p>
+<li><p>Check <a href="/docs/v2.3.x/prerequisite-docker.md">the requirements</a> for hardware and software requirements before installing Milvus.</p>
 <ul>
 <li>For the users using MacOS 10.14 or later, set the Docker virtual machine (VM) to use a minimum of 2 virtual CPUs (vCPUs) and 8 GB of initial memory. Otherwise, the installation might fail.</li>
 </ul></li>
@@ -238,19 +238,19 @@ docker start &lt;milvus_container_id&gt;
       </svg>
     </button></h2><p>Having installed Milvus, you can:</p>
 <ul>
-<li>Check <a href="/docs/example_code.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</li>
-<li>Check <a href="/docs/index.md">In-memory Index</a> for more about CPU-compatible index types.</li>
+<li>Check <a href="/docs/v2.3.x/example_code.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</li>
+<li>Check <a href="/docs/v2.3.x/index.md">In-memory Index</a> for more about CPU-compatible index types.</li>
 <li>Learn the basic operations of Milvus:
 <ul>
-<li><a href="/docs/manage_connection.md">Connect to Milvus server</a></li>
-<li><a href="/docs/manage_databases.md">Manage Databases</a></li>
-<li><a href="/docs/create_collection.md">Create a collection</a></li>
-<li><a href="/docs/create_partition.md">Create a partition</a></li>
-<li><a href="/docs/insert_data.md">Insert data</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.3.x/manage_connection.md">Connect to Milvus server</a></li>
+<li><a href="/docs/v2.3.x/manage_databases.md">Manage Databases</a></li>
+<li><a href="/docs/v2.3.x/create_collection.md">Create a collection</a></li>
+<li><a href="/docs/v2.3.x/create_partition.md">Create a partition</a></li>
+<li><a href="/docs/v2.3.x/insert_data.md">Insert data</a></li>
+<li><a href="/docs/v2.3.x/search.md">Conduct a vector search</a></li>
 </ul></li>
-<li>Explore <a href="/docs/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</li>
-<li>Explore <a href="/docs/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</li>
+<li>Explore <a href="/docs/v2.3.x/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</li>
+<li>Explore <a href="/docs/v2.3.x/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</li>
 <li>Explore <a href="https://milvus.io/docs/attu.md">Attu</a>, an open-source GUI tool for intuitive Milvus management.</li>
-<li><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a></li>
+<li><a href="/docs/v2.3.x/monitor.md">Monitor Milvus with Prometheus</a></li>
 </ul>

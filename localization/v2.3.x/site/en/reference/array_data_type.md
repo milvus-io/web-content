@@ -269,6 +269,6 @@ collection.query(
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/dynamic_schema.md">Dynamic Schema</a></li>
-<li><a href="/docs/json_data_type.md">JSON</a></li>
+<li><a href="/docs/v2.3.x/dynamic_schema.md">Dynamic Schema</a></li>
+<li><a href="/docs/v2.3.x/json_data_type.md">JSON</a></li>
 </ul>

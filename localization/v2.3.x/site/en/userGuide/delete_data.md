@@ -28,7 +28,7 @@ title: Delete Entities
           <li>Frequent deletion operations will impact the system performance.</li>
           <li>Before deleting entities by comlpex boolean expressions, make sure the collection has been loaded.</li>
           <li>Deleting entities by complex boolean expressions is not an atomic operation. Therefore, if it fails halfway through, some data may still be deleted.</li>
-          <li>Deleting entities by complex boolean expressions is supported only when the consistency is set to <b>Bounded</b>. For details, see <a href="/docs/consistency.md#Consistency-levels">Consistency</a>.</li>
+          <li>Deleting entities by complex boolean expressions is supported only when the consistency is set to <b>Bounded</b>. For details, see <a href="/docs/v2.3.x/consistency.md#Consistency-levels">Consistency</a>.</li>
     </ul>
 </div>
 <div class="alert note">
@@ -50,7 +50,7 @@ title: Delete Entities
         ></path>
       </svg>
     </button></h2><p>Prepare the boolean expression that filters the entities to delete.</p>
-<p>Milvus supports deleting entities by primary key or complex boolean expressions. For more information on expression rules and supported operators, see <a href="/docs/boolean.md">Boolean Expression Rules</a>.</p>
+<p>Milvus supports deleting entities by primary key or complex boolean expressions. For more information on expression rules and supported operators, see <a href="/docs/v2.3.x/boolean.md">Boolean Expression Rules</a>.</p>
 <h3 id="Simple-boolean-expression" class="common-anchor-header">Simple boolean expression</h3><p>Use a simple expression to filter data with primary key values of <code translate="no">0</code> and <code translate="no">1</code>:</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -278,8 +278,8 @@ Output:
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/build_index.md">Build an index for vectors</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.3.x/build_index.md">Build an index for vectors</a></li>
+<li><a href="/docs/v2.3.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.3.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul></li>
 </ul>

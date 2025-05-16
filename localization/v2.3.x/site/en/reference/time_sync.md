@@ -167,6 +167,6 @@ summary: Learn about the time synchronization system in Milvus.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn about the concept of <a href="/docs/timestamp.md">timestamp</a>.</li>
-<li>Learn about the <a href="/docs/data_processing.md">data processing workflow</a> in Milvus.</li>
+<li>Learn about the concept of <a href="/docs/v2.3.x/timestamp.md">timestamp</a>.</li>
+<li>Learn about the <a href="/docs/v2.3.x/data_processing.md">data processing workflow</a> in Milvus.</li>
 </ul>

@@ -38,7 +38,7 @@ title: Users and Roles
 <p>The relationship between object, privilege, role and user.</p>
 <p>Milvus creates a <code translate="no">root</code> user by default with a default password <code translate="no">Milvus</code>. The <code translate="no">root</code> user is granted the <code translate="no">admin</code> privileges, which means that this <code translate="no">root</code> user can have access to all resources and perform all actions.</p>
 <p>If a user is bind with a <code translate="no">public</code> role, this user is entitled to the privileges of <code translate="no">DescribeCollection</code>, <code translate="no">ShowCollections</code>, and <code translate="no">IndexDetail</code>.</p>
-<p>The following table lists the values you can choose when <a href="/docs/rbac.md">enabling RBAC</a>.</p>
+<p>The following table lists the values you can choose when <a href="/docs/v2.3.x/rbac.md">enabling RBAC</a>.</p>
 <table>
 <thead>
 <tr><th>Object name</th><th>Privilege name</th><th>Relevant API description on the client side</th></tr>
@@ -115,5 +115,5 @@ title: Users and Roles
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn how to <a href="/docs/rbac.md">enable RBAC</a>.</li>
+<li>Learn how to <a href="/docs/v2.3.x/rbac.md">enable RBAC</a>.</li>
 </ul>

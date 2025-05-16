@@ -20,10 +20,10 @@ summary: ''
       </svg>
     </button></h1><p>A Milvus collection is similar to a table in traditional databases and is used to store and manage data. Learn about the collection-level operations.</p>
 <ul>
-<li><p><a href="/docs/create_collection.md">Create a Collection</a>: Create a collection with the book collection example.</p></li>
-<li><p><a href="/docs/check_collection.md">Check Collection Information</a>: Check the basic information of a collection in Milvus including its name, number of entities, and more.</p></li>
-<li><p><a href="/docs/drop_collection.md">Drop a Collection</a>: Caution is needed as the delete operation irreversibly drops the collection and all data within it.</p></li>
-<li><p><a href="/docs/collection_alias.md">Manage Collection Alias</a>: Milvus supports specifying a unique alias for a collection.</p></li>
-<li><p><a href="/docs/load_collection.md">Load a Collection</a>: Load the collection to memory before a search or a query. Milvus 2.1 now supports loading a collection as multiple replicas.</p></li>
-<li><p><a href="/docs/release_collection.md">Release a Collection</a>: Release a collection from memory after a search or a query to reduce memory usage.</p></li>
+<li><p><a href="/docs/v2.3.x/create_collection.md">Create a Collection</a>: Create a collection with the book collection example.</p></li>
+<li><p><a href="/docs/v2.3.x/check_collection.md">Check Collection Information</a>: Check the basic information of a collection in Milvus including its name, number of entities, and more.</p></li>
+<li><p><a href="/docs/v2.3.x/drop_collection.md">Drop a Collection</a>: Caution is needed as the delete operation irreversibly drops the collection and all data within it.</p></li>
+<li><p><a href="/docs/v2.3.x/collection_alias.md">Manage Collection Alias</a>: Milvus supports specifying a unique alias for a collection.</p></li>
+<li><p><a href="/docs/v2.3.x/load_collection.md">Load a Collection</a>: Load the collection to memory before a search or a query. Milvus 2.1 now supports loading a collection as multiple replicas.</p></li>
+<li><p><a href="/docs/v2.3.x/release_collection.md">Release a Collection</a>: Release a collection from memory after a search or a query to reduce memory usage.</p></li>
 </ul>

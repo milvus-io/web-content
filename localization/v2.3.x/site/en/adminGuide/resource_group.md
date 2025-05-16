@@ -133,7 +133,7 @@ partition.load(replica_number=<span class="hljs-number">2</span>, _resource_grou
 <p>Note that <code translate="no">_resource_groups</code> is an optional parameter, and leaving it unspecified have Milvus load the replicas onto the query nodes in the default resource group.</p>
 <p>To have Milus load each replica of a collection in a separate resource group, ensure that the number of resource groups equals the number of replicas.</p></li>
 <li><p>Transfer replicas between resource groups.</p>
-<p>Milvus uses <a href="/docs/replica.md">replicas</a> to achieve load-balancing among <a href="/docs/glossary.md#Segment">segments</a> distributed across several query nodes. You can move certain replicas of a collection from one resource group to another as follows:</p>
+<p>Milvus uses <a href="/docs/v2.3.x/replica.md">replicas</a> to achieve load-balancing among <a href="/docs/v2.3.x/glossary.md#Segment">segments</a> distributed across several query nodes. You can move certain replicas of a collection from one resource group to another as follows:</p>
 <pre><code translate="no" class="language-Python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -178,6 +178,6 @@ num_nodes = <span class="hljs-number">1</span>
       </svg>
     </button></h2><p>To deploy a multi-tenant Milvus instance, read the following:</p>
 <ul>
-<li><a href="/docs/rbac.md">Enable RBAC</a></li>
-<li><a href="/docs/users_and_roles.md">Users and roles</a></li>
+<li><a href="/docs/v2.3.x/rbac.md">Enable RBAC</a></li>
+<li><a href="/docs/v2.3.x/users_and_roles.md">Users and roles</a></li>
 </ul>

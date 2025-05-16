@@ -7,7 +7,7 @@ group: install_standalone-helm-gpu.md
 summary: Learn how to install Milvus on Kubernetes using Helm.
 title: Install Milvus Cluster with GPU Support
 ---
-<div class="tab-wrapper"><a href="/docs/install_standalone-helm-gpu.md" class=''>Standalone (Helm)</a><a href="/docs/install_standalone-docker-compose-gpu.md" class=''>Standalone (Docker Compose)</a><a href="/docs/install_cluster-helm-gpu.md" class='active '>Cluster (Helm)</a></div>
+<div class="tab-wrapper"><a href="/docs/v2.3.x/install_standalone-helm-gpu.md" class=''>Standalone (Helm)</a><a href="/docs/v2.3.x/install_standalone-docker-compose-gpu.md" class=''>Standalone (Docker Compose)</a><a href="/docs/v2.3.x/install_cluster-helm-gpu.md" class='active '>Cluster (Helm)</a></div>
 <h1 id="Install-Milvus-Cluster-with-GPU-Support" class="common-anchor-header">Install Milvus Cluster with GPU Support<button data-href="#Install-Milvus-Cluster-with-GPU-Support" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,7 +69,7 @@ title: Install Milvus Cluster with GPU Support
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to <a href="/docs/install_cluster-helm.md#Install-Helm-Chart-for-Milvus">Install Helm Chart for Milvus</a>. If not, you can follow the steps below to quickly create a K8s for testing, and then use it to deploy a Milvus cluster with Helm.</p>
+    </button></h2><p>If you have already deployed a K8s cluster for production, you can skip this step and proceed directly to <a href="/docs/v2.3.x/install_cluster-helm.md#Install-Helm-Chart-for-Milvus">Install Helm Chart for Milvus</a>. If not, you can follow the steps below to quickly create a K8s for testing, and then use it to deploy a Milvus cluster with Helm.</p>
 <h3 id="1-Install-minikube" class="common-anchor-header">1. Install minikube</h3><p>See <a href="https://minikube.sigs.k8s.io/docs/start/">install minikube</a> for more information.</p>
 <h3 id="2-Start-a-K8s-cluster-using-minikube" class="common-anchor-header">2. Start a K8s cluster using minikube</h3><p>After installing minikube, run the following command to start a K8s cluster.</p>
 <pre><code translate="no">$ minikube start --gpus <span class="hljs-built_in">all</span>
@@ -387,29 +387,29 @@ Run <code translate="no">$ kubectl logs `pod_name`</code> to get the <code trans
       </svg>
     </button></h2><p>Having installed Milvus, you can:</p>
 <ul>
-<li><p>Check <a href="/docs/example_code.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
+<li><p>Check <a href="/docs/v2.3.x/example_code.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/manage_connection.md">Connect to Milvus server</a></li>
-<li><a href="/docs/manage_databases.md">Manage Databases</a></li>
-<li><a href="/docs/create_collection.md">Create a collection</a></li>
-<li><a href="/docs/create_partition.md">Create a partition</a></li>
-<li><a href="/docs/insert_data.md">Insert data</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.3.x/manage_connection.md">Connect to Milvus server</a></li>
+<li><a href="/docs/v2.3.x/manage_databases.md">Manage Databases</a></li>
+<li><a href="/docs/v2.3.x/create_collection.md">Create a collection</a></li>
+<li><a href="/docs/v2.3.x/create_partition.md">Create a partition</a></li>
+<li><a href="/docs/v2.3.x/insert_data.md">Insert data</a></li>
+<li><a href="/docs/v2.3.x/search.md">Conduct a vector search</a></li>
 </ul></li>
-<li><p><a href="/docs/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
-<li><p><a href="/docs/scaleout.md">Scale your Milvus cluster</a>.</p></li>
+<li><p><a href="/docs/v2.3.x/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
+<li><p><a href="/docs/v2.3.x/scaleout.md">Scale your Milvus cluster</a>.</p></li>
 <li><p>Deploy your Milvu cluster on clouds:</p>
 <ul>
-<li><a href="/docs/aws.md">Amazon EC2</a></li>
-<li><a href="/docs/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/gcs.md">Google Cloud Storage</a></li>
-<li><a href="/docs/azure.md">Microsoft Azure</a></li>
-<li><a href="/docs/abs.md">Microsoft Azure Blob Storage</a></li>
+<li><a href="/docs/v2.3.x/aws.md">Amazon EC2</a></li>
+<li><a href="/docs/v2.3.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/v2.3.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/v2.3.x/gcs.md">Google Cloud Storage</a></li>
+<li><a href="/docs/v2.3.x/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/v2.3.x/abs.md">Microsoft Azure Blob Storage</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
-<li><p>Explore <a href="/docs/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
+<li><p>Explore <a href="/docs/v2.3.x/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
+<li><p>Explore <a href="/docs/v2.3.x/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
 <li><p>Explore <a href="https://milvus.io/docs/attu.md">Attu</a>, an open-source GUI tool for intuitive Milvus management.</p></li>
-<li><p><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
+<li><p><a href="/docs/v2.3.x/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
 </ul>

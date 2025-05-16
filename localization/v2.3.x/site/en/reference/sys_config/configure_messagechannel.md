@@ -25,7 +25,7 @@ title: Message Channel-related Configurations
 <div class="alert note">
 <li>To share a Pulsar instance with multi-tenancy enabled among multiple Milvus instances, you need to change <code translate="no">pulsar.tenant</code> or <code translate="no">pulsar.namespace</code> to a unique value for each of the Milvus instances. </li>
 <li>To share a Pulsar instance with multi-tenancy disabled among multiple Milvus instances, you need to change <code translate="no">msgChannel.chanNamePrefix.cluster</code> to a unique value for each of the Milvus instances.</li>
-For details, refer to <a href="/docs/operational_faq.md#Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances">Operation FAQs</a>.
+For details, refer to <a href="/docs/v2.3.x/operational_faq.md#Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances">Operation FAQs</a>.
 </div>
 <h2 id="msgChannelchanNamePrefixcluster" class="common-anchor-header"><code translate="no">msgChannel.chanNamePrefix.cluster</code><button data-href="#msgChannelchanNamePrefixcluster" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -54,7 +54,7 @@ For details, refer to <a href="/docs/operational_faq.md#Can-I-share-a-Pulsar-ins
       <td>
         <li>Root name prefix of the channel when a message channel is created.</li>
         <li>It is recommended to change this parameter before starting Milvus for the first time.</li>
-        <li>To share a Pulsar instance among multiple Milvus instances, consider changing this to a name rather than the default one for each Milvus instance before you start them. For details, see <a href="/docs/operational_faq.md#Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances">Operational FAQs</a>.</li>
+        <li>To share a Pulsar instance among multiple Milvus instances, consider changing this to a name rather than the default one for each Milvus instance before you start them. For details, see <a href="/docs/v2.3.x/operational_faq.md#Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances">Operational FAQs</a>.</li>
       </td>
       <td>"by-dev"</td>
     </tr>

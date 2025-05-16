@@ -107,7 +107,7 @@ summary: >-
       </svg>
     </button></h2><p>After learning about the basic workflow of monitoring and alerting, learn:</p>
 <ul>
-<li><a href="/docs/monitor.md">Deploy monitoring services</a></li>
-<li><a href="/docs/visualize.md">Visualize Milvus metrics</a></li>
-<li><a href="/docs/alert.md">Create an alert</a></li>
+<li><a href="/docs/v2.3.x/monitor.md">Deploy monitoring services</a></li>
+<li><a href="/docs/v2.3.x/visualize.md">Visualize Milvus metrics</a></li>
+<li><a href="/docs/v2.3.x/alert.md">Create an alert</a></li>
 </ul>

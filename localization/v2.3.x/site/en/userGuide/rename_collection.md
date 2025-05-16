@@ -52,9 +52,9 @@ utility.has_collection(<span class="hljs-string">&quot;new_collection&quot;</spa
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/insert_data.md">Insert data into Milvus</a></li>
-<li><a href="/docs/create_partition.md">Create a partition</a></li>
-<li><a href="/docs/build_index.md">Build an index for vectors</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.3.x/insert_data.md">Insert data into Milvus</a></li>
+<li><a href="/docs/v2.3.x/create_partition.md">Create a partition</a></li>
+<li><a href="/docs/v2.3.x/build_index.md">Build an index for vectors</a></li>
+<li><a href="/docs/v2.3.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.3.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul>
