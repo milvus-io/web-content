@@ -973,7 +973,7 @@ AUTOINDEX considerably flattens the learning curve of ANN searches. However, the
 
     You can include filtering conditions in a search request so that Milvus conducts metadata filtering before conducting ANN searches, reducing the search scope from the whole collection to only the entities matching the specified filtering conditions.
 
-    For more about metadata filtering and filtering conditions, refer to [Filtered Search](filtered-search.md) and [Filtering](filtering).
+    For more about metadata filtering and filtering conditions, refer to [Filtered Search](filtered-search.md), [Filtering Explained](boolean.md), and related topics.
 
 - Range Search
 
