@@ -120,7 +120,7 @@ helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> s
 <button class="copy-code-btn"></button></code></pre>
 <p>In the preceding commands, we add the repo of Milvus Helm charts locally and update the repo to fetch the latest charts. Then we install a Milvus instance and name it <strong>my-release</strong>.</p>
 <p>Notice the arguments following the <code translate="no">--set</code> flag, which indicates that we would like to expose the Milvus instance through a Layer-4 load balancer.</p>
-<p>If you would like to expose your Milvus instance through a Layer-7 load balancer, <a href="/docs/gcp_layer7.md">read this</a>.</p>
+<p>If you would like to expose your Milvus instance through a Layer-7 load balancer, <a href="/docs/v2.2.x/gcp_layer7.md">read this</a>.</p>
 <h3 id="Verify-the-deployment" class="common-anchor-header">Verify the deployment</h3><p>Once all pods are running, run the following command to view the external IP address and port used to access the Milvus instance.</p>
 <pre><code translate="no" class="language-bash">kubectl <span class="hljs-keyword">get</span> services
 <button class="copy-code-btn"></button></code></pre>

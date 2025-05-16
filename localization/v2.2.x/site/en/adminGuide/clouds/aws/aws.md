@@ -485,7 +485,7 @@ dockernode03               : ok=4    changed=3    unreachable=0    failed=0    s
       </svg>
     </button></h2><p>If you want to learn how to deploy Milvus on other clouds:</p>
 <ul>
-<li><a href="/docs/eks.md">Deploy a Milvus Cluster on EKS</a></li>
-<li><a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
-<li><a href="/docs/azure.md">Guide to Deploying Milvus on Microsoft Azure With Kubernetes</a></li>
+<li><a href="/docs/v2.2.x/eks.md">Deploy a Milvus Cluster on EKS</a></li>
+<li><a href="/docs/v2.2.x/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
+<li><a href="/docs/v2.2.x/azure.md">Guide to Deploying Milvus on Microsoft Azure With Kubernetes</a></li>
 </ul>

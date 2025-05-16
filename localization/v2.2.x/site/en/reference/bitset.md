@@ -18,7 +18,7 @@ title: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic introduces the bitset mechanism that helps enable key functionalities like <a href="/docs/timetravel_ref.md">Time Travel</a>, attribute filtering, and <a href="https://milvus.io/blog/2022-02-07-how-milvus-deletes-streaming-data-in-distributed-cluster.md">delete operations</a> in Milvus.</p>
+    </button></h1><p>This topic introduces the bitset mechanism that helps enable key functionalities like <a href="/docs/v2.2.x/timetravel_ref.md">Time Travel</a>, attribute filtering, and <a href="https://milvus.io/blog/2022-02-07-how-milvus-deletes-streaming-data-in-distributed-cluster.md">delete operations</a> in Milvus.</p>
 <h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +35,7 @@ title: ''
         ></path>
       </svg>
     </button></h2><p>A bitset is a set of bits. Bits are elements with only two possible values, most typically <code translate="no">0</code> and <code translate="no">1</code>, or boolean values <code translate="no">true</code> and <code translate="no">false</code>. In Milvus, bitsets are arrays of bit numbers <code translate="no">0</code> and <code translate="no">1</code> that can be used to represent certain data compactly and efficiently as opposed to in ints, floats, or chars. A bit number is <code translate="no">0</code> by default and is only set to <code translate="no">1</code> if it meets certain requirements.</p>
-<p>Operations on bitsets are conducted with <a href="/docs/boolean.md">boolean logic</a>, under which an output value is either valid or invalid, also denoted by <code translate="no">1</code> and <code translate="no">0</code> respectively. For example, <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">logical operator</a> <code translate="no">AND</code> can be used to compare two bitsets based on items in the same index positions and produces a new bitset with the results. If two items in a position are the same, then in the new bitset <code translate="no">1</code> will be written in that position; <code translate="no">0</code> if they are different.</p>
+<p>Operations on bitsets are conducted with <a href="/docs/v2.2.x/boolean.md">boolean logic</a>, under which an output value is either valid or invalid, also denoted by <code translate="no">1</code> and <code translate="no">0</code> respectively. For example, <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">logical operator</a> <code translate="no">AND</code> can be used to compare two bitsets based on items in the same index positions and produces a new bitset with the results. If two items in a position are the same, then in the new bitset <code translate="no">1</code> will be written in that position; <code translate="no">0</code> if they are different.</p>
 <h2 id="Implementation" class="common-anchor-header">Implementation<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

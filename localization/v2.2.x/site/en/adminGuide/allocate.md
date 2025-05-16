@@ -19,7 +19,7 @@ summary: Learn how to allocate resources to Milvus on Kubernetes.
         ></path>
       </svg>
     </button></h1><p>This topic describes how to allocate resources to a Milvus cluster on Kubernetes.</p>
-<p>Generally, the resources you allocate to a Milvus cluster in production should be proportionate to the machine workload. You should also consider the machine type when allocating resources. Although you can update the configurations when the cluster is running, we recommend setting the values before <a href="/docs/install_cluster-helm.md">deploying the cluster</a>.</p>
+<p>Generally, the resources you allocate to a Milvus cluster in production should be proportionate to the machine workload. You should also consider the machine type when allocating resources. Although you can update the configurations when the cluster is running, we recommend setting the values before <a href="/docs/v2.2.x/install_cluster-helm.md">deploying the cluster</a>.</p>
 <h2 id="1-View-available-resources" class="common-anchor-header">1. View available resources<button data-href="#1-View-available-resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,8 +57,8 @@ Using Helm to upgrade resources will cause the running pods to perform rolling u
 </div>
 <p>There are two ways to allocate resources:</p>
 <ul>
-<li><a href="/docs/allocate.md#Allocate-resources-with-commands">Use the commands</a></li>
-<li><a href="/docs/allocate.md#Allocate-resources-by-setting-configuration-file">Set the parameters in the <code translate="no">YAML</code> file</a></li>
+<li><a href="/docs/v2.2.x/allocate.md#Allocate-resources-with-commands">Use the commands</a></li>
+<li><a href="/docs/v2.2.x/allocate.md#Allocate-resources-by-setting-configuration-file">Set the parameters in the <code translate="no">YAML</code> file</a></li>
 </ul>
 <h3 id="Allocate-resources-with-commands" class="common-anchor-header">Allocate resources with commands</h3><p>You need to set the resource variables for each Milvus component if you use <code translate="no">--set</code> to update the resource configurations.</p>
 <div class="filter">
@@ -130,15 +130,15 @@ If <code translate="no">resources.limits</code> is not specified, the pods will 
     </button></h2><ul>
 <li>You might also want to learn how to:
 <ul>
-<li><a href="/docs/scaleout.md">Scale a Milvus cluster</a></li>
-<li><a href="/docs/upgrade_milvus_cluster-operator.md">Upgrade Milvus Cluster</a></li>
-<li><a href="/docs/upgrade_milvus_standalone-operator.md">Upgrade Milvus Standalone</a></li>
+<li><a href="/docs/v2.2.x/scaleout.md">Scale a Milvus cluster</a></li>
+<li><a href="/docs/v2.2.x/upgrade_milvus_cluster-operator.md">Upgrade Milvus Cluster</a></li>
+<li><a href="/docs/v2.2.x/upgrade_milvus_standalone-operator.md">Upgrade Milvus Standalone</a></li>
 </ul></li>
 <li>If you are ready to deploy your cluster on clouds:
 <ul>
-<li>Learn how to <a href="/docs/aws.md">Deploy Milvus on AWS with Terraform and Ansible</a></li>
-<li>Learn how to <a href="/docs/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
-<li>Learn how to <a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
-<li>Learn how to <a href="/docs/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/aws.md">Deploy Milvus on AWS with Terraform and Ansible</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
 </ul></li>
 </ul>

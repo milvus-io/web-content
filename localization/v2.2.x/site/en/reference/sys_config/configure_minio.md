@@ -24,7 +24,7 @@ title: ''
 <p>Milvus supports MinIO and Amazon S3 as the storage engine for data persistence of insert log files and index files. Whereas MinIO is the de facto standard for S3 compatibility, you can configure S3 parameters directly under MinIO section.</p>
 <p>In this section, you can configure MinIO or S3 address, relevant access keys, etc.</p>
 <div class="alert note">
-To share a MinIO instance among multiple Milvus instances, you need to change <code translate="no">minio.bucketName</code> or <code translate="no">minio.rootPath</code> to a unique value for each of the Milvus instances. For details, refer to <a href="/docs/operational_faq.md#Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances">Operation FAQs</a>.
+To share a MinIO instance among multiple Milvus instances, you need to change <code translate="no">minio.bucketName</code> or <code translate="no">minio.rootPath</code> to a unique value for each of the Milvus instances. For details, refer to <a href="/docs/v2.2.x/operational_faq.md#Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances">Operation FAQs</a>.
 </div>
 <h2 id="minioaddress" class="common-anchor-header"><code translate="no">minio.address</code><button data-href="#minioaddress" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -226,7 +226,7 @@ To share a MinIO instance among multiple Milvus instances, you need to change <c
         <li>Name of the bucket where Milvus stores data in MinIO or S3.</li>
         <li>Milvus 2.0.0 does not support storing data in multiple buckets.</li>
         <li>Bucket with this name will be created if it does not exist. If the bucket already exists and is accessible, it will be used directly. Otherwise, there will be an error.</li>
-        <li>To share an MinIO instance among multiple Milvus instances, consider changing this to a different value for each Milvus instance before you start them. For details, see <a href="/docs/operational_faq.md#Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances">Operation FAQs</a>.</li>
+        <li>To share an MinIO instance among multiple Milvus instances, consider changing this to a different value for each Milvus instance before you start them. For details, see <a href="/docs/v2.2.x/operational_faq.md#Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances">Operation FAQs</a>.</li>
         <li>The data will be stored in the local Docker if Docker is used to start the MinIO service locally. Ensure that there is sufficient storage space.</li>
         <li>A bucket name is globally unique in one MinIO or S3 instance.</li>
       </td>
@@ -261,7 +261,7 @@ To share a MinIO instance among multiple Milvus instances, you need to change <c
       <td>
         <li>Root prefix of the key to where Milvus stores data in MinIO or S3.</li>
         <li>It is recommended to change this parameter before starting Milvus for the first time.</li>
-        <li>To share an MinIO instance among multiple Milvus instances, consider changing this to a different value for each Milvus instance before you start them. For details, see <a href="/docs/operational_faq.md#Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances">Operation FAQs</a>.</li>
+        <li>To share an MinIO instance among multiple Milvus instances, consider changing this to a different value for each Milvus instance before you start them. For details, see <a href="/docs/v2.2.x/operational_faq.md#Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances">Operation FAQs</a>.</li>
         <li>Set an easy-to-identify root key prefix for Milvus if etcd service already exists.</li>
         <li>Changing this for an already running Milvus instance may result in failures to read legacy data.</li>
       </td>

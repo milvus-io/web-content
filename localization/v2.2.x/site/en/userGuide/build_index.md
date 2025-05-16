@@ -20,12 +20,12 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This guide describes how to build an index on vectors in Milvus.</p>
-<p>Vector indexes are an organizational unit of metadata used to accelerate <a href="/docs/search.md">vector similarity search</a>. You need to create an index before you can perform ANN searches against your Milvus.</p>
-<p>See <a href="/docs/index.md">Vector Index</a> for more information about the mechanism and varieties of vector indexes.</p>
+<p>Vector indexes are an organizational unit of metadata used to accelerate <a href="/docs/v2.2.x/search.md">vector similarity search</a>. You need to create an index before you can perform ANN searches against your Milvus.</p>
+<p>See <a href="/docs/v2.2.x/index.md">Vector Index</a> for more information about the mechanism and varieties of vector indexes.</p>
 <div class="alert note">
-<p>By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="/docs/configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a> in <code translate="no">milvus.yaml</code>.</p>
+<p>By default, Milvus does not index a segment with less than 1,024 rows. To change this parameter, configure <a href="/docs/v2.2.x/configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a> in <code translate="no">milvus.yaml</code>.</p>
 </div>
-<p>The following example builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metric. You can choose the index and metrics that suit your scenario. See <a href="/docs/metric.md">Similarity Metrics</a> for more information.</p>
+<p>The following example builds a 1024-cluster IVF_FLAT index with Euclidean distance (L2) as the similarity metric. You can choose the index and metrics that suit your scenario. See <a href="/docs/v2.2.x/metric.md">Similarity Metrics</a> for more information.</p>
 <h2 id="Prepare-index-parameter" class="common-anchor-header">Prepare index parameter<button data-href="#Prepare-index-parameter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -126,10 +126,10 @@ title: ''
     <tr>
         <td><code translate="no">params</code></td>
         <td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="/docs/index.md">In-memory Index</a> and <a href="/docs/disk_index.md">On-disk Index</a> for more information.</td>
+        <td>See <a href="/docs/v2.2.x/index.md">In-memory Index</a> and <a href="/docs/v2.2.x/disk_index.md">On-disk Index</a> for more information.</td>
     </tr>
     <tr>
-        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="/docs/disk_index.md">On-disk Index</a>.</td>
+        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="/docs/v2.2.x/disk_index.md">On-disk Index</a>.</td>
     </tr>
     </tbody>
 </table>
@@ -182,7 +182,7 @@ title: ''
     <tr>
         <td><code translate="no">params</code></td>
         <td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="/docs/index.md">In-memory Index</a> and <a href="/docs/disk_index.md">On-disk Index</a> for more information.</td>
+        <td>See <a href="/docs/v2.2.x/index.md">In-memory Index</a> and <a href="/docs/v2.2.x/disk_index.md">On-disk Index</a> for more information.</td>
     </tr>
     </tbody>
 </table>
@@ -236,10 +236,10 @@ title: ''
     <tr>
         <td><code translate="no">ConstructParams</code></td>
         <td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="/docs/index.md">In-memory Index</a> and <a href="/docs/disk_index.md">On-disk Index</a> for more information.</td>
+        <td>See <a href="/docs/v2.2.x/index.md">In-memory Index</a> and <a href="/docs/v2.2.x/disk_index.md">On-disk Index</a> for more information.</td>
     </tr>
         <tr>
-        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="/docs/disk_index.md">On-disk Index</a>.</td>
+        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="/docs/v2.2.x/disk_index.md">On-disk Index</a>.</td>
         </tr>
     </tbody>
 </table>
@@ -275,10 +275,10 @@ title: ''
     <tr>
         <td><code translate="no">ExtraParam</code></td>
         <td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="/docs/index.md">In-memory Index</a> and <a href="/docs/disk_index.md">On-disk Index</a> for more information.</td>
+        <td>See <a href="/docs/v2.2.x/index.md">In-memory Index</a> and <a href="/docs/v2.2.x/disk_index.md">On-disk Index</a> for more information.</td>
     </tr>
     <tr>
-        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="/docs/disk_index.md">On-disk Index</a>.</td>
+        <td colspan=3>* DISKANN has certain prerequisites to meet. For details, see <a href="/docs/v2.2.x/disk_index.md">On-disk Index</a>.</td>
     </tr>
     </tbody>
 </table>
@@ -313,7 +313,7 @@ title: ''
     <tr>
         <td><code translate="no">ExtraParam</code></td>
         <td>Building parameter(s) specific to the index.</td>
-        <td>See <a href="/docs/index.md">In-memory Index</a> for more information.</td>
+        <td>See <a href="/docs/v2.2.x/index.md">In-memory Index</a> for more information.</td>
     </tr>
     </tbody>    
 </table>
@@ -469,8 +469,8 @@ utility.index_building_progress(<span class="hljs-string">&quot;book&quot;</span
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
-<li><a href="/docs/timetravel.md">Search with Time Travel</a></li>
+<li><a href="/docs/v2.2.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.2.x/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.2.x/timetravel.md">Search with Time Travel</a></li>
 </ul></li>
 </ul>

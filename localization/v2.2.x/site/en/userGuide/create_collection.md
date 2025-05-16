@@ -20,8 +20,8 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This topic describes how to create a collection in Milvus.</p>
-<p>A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition <code translate="no">_default</code>. See <a href="/docs/glossary.md#Collection">Glossary - Collection</a> for more information.</p>
-<p>The following example builds a two-<a href="/docs/glossary.md#Sharding">shard</a> collection named <code translate="no">book</code>, with a primary key field named <code translate="no">book_id</code>, an <code translate="no">INT64</code> scalar field named <code translate="no">word_count</code>, and a two-dimensional floating-point vector field named <code translate="no">book_intro</code>. Real applications will likely use much higher dimensional vectors than the example.</p>
+<p>A collection consists of one or more partitions. While creating a new collection, Milvus creates a default partition <code translate="no">_default</code>. See <a href="/docs/v2.2.x/glossary.md#Collection">Glossary - Collection</a> for more information.</p>
+<p>The following example builds a two-<a href="/docs/v2.2.x/glossary.md#Sharding">shard</a> collection named <code translate="no">book</code>, with a primary key field named <code translate="no">book_id</code>, an <code translate="no">INT64</code> scalar field named <code translate="no">word_count</code>, and a two-dimensional floating-point vector field named <code translate="no">book_intro</code>. Real applications will likely use much higher dimensional vectors than the example.</p>
 <h2 id="Prepare-Schema" class="common-anchor-header">Prepare Schema<button data-href="#Prepare-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -209,7 +209,7 @@ schema := &amp;entity.Schema{
     <tbody>
         <tr>
             <td><b><code translate="no">FieldSchema</code><b></td>
-            <td>Schema of the fields within the collection to create. Refer to <a href="/docs/schema.md">Schema</a> for more information.</td>
+            <td>Schema of the fields within the collection to create. Refer to <a href="/docs/v2.2.x/schema.md">Schema</a> for more information.</td>
             <td>N/A</td>
         </tr>
         <tr>
@@ -271,7 +271,7 @@ schema := &amp;entity.Schema{
         </tr>
         <tr>
             <td><b><code translate="no">CollectionSchema</code><b></td>
-        <td>Schema of the collection to create. Refer to <a href="/docs/schema.md">Schema</a> for more information.</td>
+        <td>Schema of the collection to create. Refer to <a href="/docs/v2.2.x/schema.md">Schema</a> for more information.</td>
         <td>N/A</td>
         </tr>
         <tr>
@@ -317,7 +317,7 @@ schema := &amp;entity.Schema{
         </tr>
         <tr>
             <td><code translate="no">Fields</code></td>
-            <td>Schema of the fields within the collection to create. Refer to <a href="/docs/schema.md">Schema</a> for more information.</td>
+            <td>Schema of the fields within the collection to create. Refer to <a href="/docs/v2.2.x/schema.md">Schema</a> for more information.</td>
             <td>N/A</td>
         </tr>
         <tr>
@@ -390,7 +390,7 @@ schema := &amp;entity.Schema{
         <tr>
             <td><code translate="no">fields</code></td>
             <td>Schema of the field and the collection to create.</td>
-            <td>Refer to <a href="/docs/schema.md">Schema</a> for more information.</td>
+            <td>Refer to <a href="/docs/v2.2.x/schema.md">Schema</a> for more information.</td>
         </tr>
         <tr>
             <td><code translate="no">data_type</code></td>
@@ -790,10 +790,10 @@ collection = <span class="hljs-title class_">Collection</span>(
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/insert_data.md">Insert data into Milvus</a></li>
-<li><a href="/docs/create_partition.md">Create a partition</a></li>
-<li><a href="/docs/build_index.md">Build an index for vectors</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.2.x/insert_data.md">Insert data into Milvus</a></li>
+<li><a href="/docs/v2.2.x/create_partition.md">Create a partition</a></li>
+<li><a href="/docs/v2.2.x/build_index.md">Build an index for vectors</a></li>
+<li><a href="/docs/v2.2.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.2.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul></li>
 </ul>

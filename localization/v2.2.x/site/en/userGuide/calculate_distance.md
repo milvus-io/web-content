@@ -20,7 +20,7 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This topic describes how to calculate distance between vectors with Milvus.</p>
-<p>Milvus searches most similar vectors based on the distance calculation of vectors. Vice versa, you can use Milvus to calculate the distance between vectors using distance metrics that suit specific scenario. See <a href="/docs/metric.md">Similarity Metrics</a> for more information.</p>
+<p>Milvus searches most similar vectors based on the distance calculation of vectors. Vice versa, you can use Milvus to calculate the distance between vectors using distance metrics that suit specific scenario. See <a href="/docs/v2.2.x/metric.md">Similarity Metrics</a> for more information.</p>
 <p>The following example simulates the scenarios when you want to calculate the distance between vectors in the collection and some other vectors.</p>
 <h2 id="Prepare-vectors" class="common-anchor-header">Prepare vectors<button data-href="#Prepare-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -379,8 +379,8 @@ Output:
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
-<li><a href="/docs/timetravel.md">Search with Time Travel</a></li>
+<li><a href="/docs/v2.2.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.2.x/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.2.x/timetravel.md">Search with Time Travel</a></li>
 </ul></li>
 </ul>

@@ -39,7 +39,7 @@ title: ''
 <a href="#docker">Docker Compose</a> <a href="#helm">Helm</a>
 </div>
 <div class="table-wrapper filter-docker" markdown="block">
-<p>Set <code translate="no">common.security.authorizationEnabled</code> in <code translate="no">milvus.yaml</code> as <code translate="no">true</code> when <a href="/docs/configure-docker.md">configuring Milvus</a> to enable authentication.</p>
+<p>Set <code translate="no">common.security.authorizationEnabled</code> in <code translate="no">milvus.yaml</code> as <code translate="no">true</code> when <a href="/docs/v2.2.x/configure-docker.md">configuring Milvus</a> to enable authentication.</p>
 </div>
 <div class="table-wrapper filter-helm" markdown="block">
 <p>As of Milvus Helm Chart 4.0.0, you can enable user authentication by modifying <code translate="no">values.yaml</code> as follows:</p>
@@ -246,13 +246,13 @@ users = utility.<span class="hljs-title function_">list_usernames</span>(using=<
     </button></h2><ul>
 <li>You might also want to learn how to:
 <ul>
-<li><a href="/docs/scaleout.md">Scale a Milvus cluster</a></li>
+<li><a href="/docs/v2.2.x/scaleout.md">Scale a Milvus cluster</a></li>
 </ul></li>
 <li>If you are ready to deploy your cluster on clouds:
 <ul>
-<li>Learn how to <a href="/docs/aws.md">Deploy Milvus on AWS with Terraform and Ansible</a></li>
-<li>Learn how to <a href="/docs/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
-<li>Learn how to <a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
-<li>Learn how to <a href="/docs/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/aws.md">Deploy Milvus on AWS with Terraform and Ansible</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
 </ul></li>
 </ul>

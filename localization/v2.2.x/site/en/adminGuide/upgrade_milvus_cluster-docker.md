@@ -3,7 +3,7 @@ id: upgrade_milvus_cluster-docker.md
 summary: Learn how to upgrade Milvus cluster with Docker Compose.
 title: ''
 ---
-<div class="tab-wrapper"><a href="/docs/upgrade_milvus_standalone-operator.md" class=''>Milvus Operator</a><a href="/docs/upgrade_milvus_cluster-operator.md" class=''>Milvus Operator</a><a href="/docs/configure_operator.md" class=''>Milvus Operator</a><a href="/docs/configure-helm.md" class=''>Helm</a><a href="/docs/configure-docker.md" class=''>Docker Compose</a><a href="/docs/upgrade_milvus_standalone-helm.md" class=''>Helm</a><a href="/docs/upgrade_milvus_standalone-docker.md" class=''>Docker Compose</a><a href="/docs/upgrade_milvus_cluster-helm.md" class=''>Helm</a></div>
+<div class="tab-wrapper"><a href="/docs/v2.2.x/upgrade_milvus_standalone-operator.md" class=''>Milvus Operator</a><a href="/docs/v2.2.x/upgrade_milvus_cluster-operator.md" class=''>Milvus Operator</a><a href="/docs/v2.2.x/configure_operator.md" class=''>Milvus Operator</a><a href="/docs/v2.2.x/configure-helm.md" class=''>Helm</a><a href="/docs/v2.2.x/configure-docker.md" class=''>Docker Compose</a><a href="/docs/v2.2.x/upgrade_milvus_standalone-helm.md" class=''>Helm</a><a href="/docs/v2.2.x/upgrade_milvus_standalone-docker.md" class=''>Docker Compose</a><a href="/docs/v2.2.x/upgrade_milvus_cluster-helm.md" class=''>Helm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">Upgrade Milvus Cluster with Docker Compose<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -145,13 +145,13 @@ docker-compose up -d
     </button></h2><ul>
 <li>You might also want to learn how to:
 <ul>
-<li><a href="/docs/scaleout.md">Scale a Milvus cluster</a></li>
+<li><a href="/docs/v2.2.x/scaleout.md">Scale a Milvus cluster</a></li>
 </ul></li>
 <li>If you are ready to deploy your cluster on clouds:
 <ul>
-<li>Learn how to <a href="/docs/aws.md">Deploy Milvus on AWS with Terraform and Ansible</a></li>
-<li>Learn how to <a href="/docs/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
-<li>Learn how to <a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
-<li>Learn how to <a href="/docs/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/aws.md">Deploy Milvus on AWS with Terraform and Ansible</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
 </ul></li>
 </ul>

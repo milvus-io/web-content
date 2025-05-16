@@ -20,8 +20,8 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This topic describes how to conduct a hybrid search.</p>
-<p>A hybrid search is essentially a vector search with attribute filtering. By specifying <a href="/docs/boolean.md">boolean expressions</a> that filter the scalar fields or the primary key field, you can limit your search with certain conditions.</p>
-<p>The following example shows how to perform a hybrid search on the basis of a regular <a href="/docs/search.md">vector search</a>. Suppose you want to search for certain books based on their vectorized introductions, but you only want those within a specific range of word count. You can then specify the boolean expression to filter the <code translate="no">word_count</code> field in the search parameters. Milvus will search for similar vectors only among those entities that match the expression.</p>
+<p>A hybrid search is essentially a vector search with attribute filtering. By specifying <a href="/docs/v2.2.x/boolean.md">boolean expressions</a> that filter the scalar fields or the primary key field, you can limit your search with certain conditions.</p>
+<p>The following example shows how to perform a hybrid search on the basis of a regular <a href="/docs/v2.2.x/search.md">vector search</a>. Suppose you want to search for certain books based on their vectorized introductions, but you only want those within a specific range of word count. You can then specify the boolean expression to filter the <code translate="no">word_count</code> field in the search parameters. Milvus will search for similar vectors only among those entities that match the expression.</p>
 <h2 id="Load-collection" class="common-anchor-header">Load collection<button data-href="#Load-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -86,7 +86,7 @@ collection.load()
         ></path>
       </svg>
     </button></h2><p>By specifying the boolean expression, you can filter the scalar field of the entities during the vector search. The following example limits the scale of search to the vectors within a specified <code translate="no">word_count</code> value range.</p>
-<p>You can also use dynamic fields in the filter expression and output fields in the search requests. For example, refer to <a href="/docs/dynamic_schema.md">Dynamic Schema</a>.</p>
+<p>You can also use dynamic fields in the filter expression and output fields in the search requests. For example, refer to <a href="/docs/v2.2.x/dynamic_schema.md">Dynamic Schema</a>.</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
@@ -196,10 +196,10 @@ R&lt;SearchResults&gt; respSearch = milvusClient.search(searchParam);
   <tr>
         <td><code translate="no">param</code></td>
         <td>Search parameters. Possible options are as follows: <ul>
-      <li><code translate="no">metric_type</code> Method used to measure the distance between vectors during search. It should be the same as the one specified for the index-building process. See <a href="/docs/metric.md">Simlarity Metrics</a> for more information.</li>
+      <li><code translate="no">metric_type</code> Method used to measure the distance between vectors during search. It should be the same as the one specified for the index-building process. See <a href="/docs/v2.2.x/metric.md">Simlarity Metrics</a> for more information.</li>
       <li><code translate="no">offset</code> Number of entities to skip during the search. The sum of this parameter and <code translate="no">limit</code> of the <code translate="no">search</code> method should be less than <code translate="no">16384</code>.</li>
       <li><code translate="no">ignore_growing</code> Whether to ignore growing segments during similarity searches. The value defaults to <code translate="no">False</code>, indicating that searches involve growing segments.</li>
-      <li><code translate="no">params</code> Search parameter(s) specific to the specified index type. See <a href="/docs/index.md">Vector Index</a> for more information. Possible options are as follows: <ul><li><code translate="no">nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_SQ8</code>, or <code translate="no">IVF_PQ</code>. The value should be less than <code translate="no">nlist</code> specified for the index-building process.</li>
+      <li><code translate="no">params</code> Search parameter(s) specific to the specified index type. See <a href="/docs/v2.2.x/index.md">Vector Index</a> for more information. Possible options are as follows: <ul><li><code translate="no">nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_SQ8</code>, or <code translate="no">IVF_PQ</code>. The value should be less than <code translate="no">nlist</code> specified for the index-building process.</li>
             <li><code translate="no">ef</code> Indicates the search scope. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">HNSW</code>. The value should be within the range from <code translate="no">top_k</code> to <code translate="no">32768</code>.</li>
             <li><code translate="no">search_k</code> Indicates the search scope. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">ANNOY</code>. The value should be greater than or equal to the top K. </li>
         </ul></li>
@@ -210,7 +210,7 @@ R&lt;SearchResults&gt; respSearch = milvusClient.search(searchParam);
     </tr>
   <tr>
         <td><code translate="no">expr</code></td>
-        <td>Boolean expression used to filter attribute. See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+        <td>Boolean expression used to filter attribute. See <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">output_fields</code> (optional)</td>
@@ -244,7 +244,7 @@ R&lt;SearchResults&gt; respSearch = milvusClient.search(searchParam);
     </tr>
     <tr>
         <td><code translate="no">expr</code> (optional)</td>
-        <td>Boolean expression used to filter attribute. See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+        <td>Boolean expression used to filter attribute. See <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">output_fields</code> (optional)</td>
@@ -287,7 +287,7 @@ R&lt;SearchResults&gt; respSearch = milvusClient.search(searchParam);
   <tr>
         <td><code translate="no">expr</code></td>
         <td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+    <td>See <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">output_fields</code></td>
@@ -317,7 +317,7 @@ R&lt;SearchResults&gt; respSearch = milvusClient.search(searchParam);
     <tr>
         <td><code translate="no">sp</code></td>
         <td>Search parameter(s) specific to the index.</td>
-    <td>See <a href="/docs/index.md">Vector Index</a> for more information. Possible options are as follows: 
+    <td>See <a href="/docs/v2.2.x/index.md">Vector Index</a> for more information. Possible options are as follows: 
         <ul><li>For floating point vectors:
             <ul>
                 <li><code translate="no">NewIndexFlatSearchParam()</code> (FLAT)</li>
@@ -388,12 +388,12 @@ R&lt;SearchResults&gt; respSearch = milvusClient.search(searchParam);
   <tr>
         <td><code translate="no">Expr</code></td>
         <td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+    <td>See <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
   <tr>
         <td><code translate="no">Params</code></td>
         <td>Search parameter(s) specific to the index.</td>
-    <td>See <a href="/docs/index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
+    <td>See <a href="/docs/v2.2.x/index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
         <li><code translate="no">nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_SQ8</code>, or <code translate="no">IVF_PQ</code>. The value should be less than <code translate="no">nlist</code> specified for the index-building process.</li>
         <li><code translate="no">ef</code> Indicates the search scope. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">HNSW</code>. The value should be within the range from <code translate="no">top_k</code> to <code translate="no">32768</code>.</li>
         <li><code translate="no">search_k</code> Indicates the search scope. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">ANNOY</code>. The value should be greater than or equal to the top K.</li>
@@ -432,11 +432,11 @@ R&lt;SearchResults&gt; respSearch = milvusClient.search(searchParam);
         </tr>
         <tr>
             <td>Expression</td>
-            <td>Boolean expression used to filter attribute. See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+            <td>Boolean expression used to filter attribute. See <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
         </tr>
         <tr>
             <td>ExtraParameters</td>
-            <td>Other applicable parameters. See <a href="/docs/index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
+            <td>Other applicable parameters. See <a href="/docs/v2.2.x/index.md">Vector Index</a> for more information. Possible options are as follows:<ul>
         <li><code translate="no">nprobe</code> Indicates the number of cluster units to search. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_SQ8</code>, or <code translate="no">IVF_PQ</code>. The value should be less than <code translate="no">nlist</code> specified for the index-building process.</li>
         <li><code translate="no">ef</code> Indicates the search scope. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">HNSW</code>. The value should be within the range from <code translate="no">top_k</code> to <code translate="no">32768</code>.</li>
         <li><code translate="no">search_k</code> Indicates the search scope. This parameter is available only when <code translate="no">index_type</code> is set to <code translate="no">ANNOY</code>. The value should be greater than or equal to the top K.</li>
@@ -495,7 +495,7 @@ Console.WriteLine(results.Ids.LongIds)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Try <a href="/docs/timetravel.md">Search with Time Travel</a></p></li>
+<li><p>Try <a href="/docs/v2.2.x/timetravel.md">Search with Time Travel</a></p></li>
 <li><p>Explore API references for Milvus SDKs:</p>
 <ul>
 <li><a href="/api-reference/pymilvus/v2.2.x/About.md">PyMilvus API reference</a></li>
