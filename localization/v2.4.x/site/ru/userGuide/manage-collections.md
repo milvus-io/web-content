@@ -74,9 +74,9 @@ title: Управление коллекциями
     </button></h2><p>Вы можете создать коллекцию одним из следующих способов:</p>
 <ul>
 <li><p><strong>Быстрая настройка</strong></p>
-<p>В этом случае вы можете создать коллекцию, просто дав ей имя и указав количество измерений векторных вкраплений, которые будут храниться в этой коллекции. Подробнее см. в разделе <a href="/docs/ru/manage-collections.md">Быстрая настройка</a>.</p></li>
+<p>В этом случае вы можете создать коллекцию, просто дав ей имя и указав количество измерений векторных вкраплений, которые будут храниться в этой коллекции. Подробнее см. в разделе <a href="/docs/ru/v2.4.x/manage-collections.md">Быстрая настройка</a>.</p></li>
 <li><p><strong>Индивидуальная настройка</strong></p>
-<p>Вместо того чтобы позволять In Milvus решать практически все за вашу коллекцию, вы можете самостоятельно определить <strong>схему</strong> и <strong>параметры индекса</strong> коллекции. Подробнее см. в разделе <a href="/docs/ru/manage-collections.md">Индивидуальная настройка</a>.</p></li>
+<p>Вместо того чтобы позволять In Milvus решать практически все за вашу коллекцию, вы можете самостоятельно определить <strong>схему</strong> и <strong>параметры индекса</strong> коллекции. Подробнее см. в разделе <a href="/docs/ru/v2.4.x/manage-collections.md">Индивидуальная настройка</a>.</p></li>
 </ul>
 <h3 id="Quick-setup" class="common-anchor-header">Быстрая настройка</h3><p>На фоне большого скачка в индустрии искусственного интеллекта большинству разработчиков для начала нужна простая, но динамичная коллекция. Milvus позволяет быстро создать такую коллекцию с помощью всего трех аргументов:</p>
 <ul>
@@ -272,7 +272,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </ul>
 <p>Автоматически проиндексированная и загруженная коллекция из предоставленного кода готова к немедленной вставке данных.</p>
 <h3 id="Customized-setup" class="common-anchor-header">Индивидуальная настройка</h3><p>Вместо того чтобы позволять Milvus решать практически все за вашу коллекцию, вы можете самостоятельно определить <strong>схему</strong> и <strong>параметры индексации</strong> коллекции.</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Шаг 1: Настройка схемы</h4><p>Схема определяет структуру коллекции. В рамках схемы у вас есть возможность включить или отключить <code translate="no">enable_dynamic_field</code>, добавить предопределенные поля и задать атрибуты для каждого поля. Подробное объяснение концепции и доступных типов данных см. в разделе <a href="/docs/ru/schema.md">"Объяснение схемы"</a>.</p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Шаг 1: Настройка схемы</h4><p>Схема определяет структуру коллекции. В рамках схемы у вас есть возможность включить или отключить <code translate="no">enable_dynamic_field</code>, добавить предопределенные поля и задать атрибуты для каждого поля. Подробное объяснение концепции и доступных типов данных см. в разделе <a href="/docs/ru/v2.4.x/schema.md">"Объяснение схемы"</a>.</p>
 <div class="language-python">
 <p>Чтобы создать схему, используйте <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> для создания объекта схемы и <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> чтобы добавить поля в схему.</p>
 </div>
@@ -526,7 +526,7 @@ schema.WithField(
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Шаг 2: Настройка параметров индекса</h4><p>Параметры индекса определяют, как Milvus организует ваши данные в коллекции. Вы можете настроить процесс индексирования для определенных полей, изменив их <code translate="no">metric_type</code> и <code translate="no">index_type</code>. Для векторного поля вы можете выбрать <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code> или <code translate="no">JACCARD</code> в качестве <code translate="no">metric_type</code>, в зависимости от типа векторов, с которыми вы работаете. Дополнительные сведения см. в разделе <a href="/docs/ru/metric.md">Метрики сходства</a>.</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Шаг 2: Настройка параметров индекса</h4><p>Параметры индекса определяют, как Milvus организует ваши данные в коллекции. Вы можете настроить процесс индексирования для определенных полей, изменив их <code translate="no">metric_type</code> и <code translate="no">index_type</code>. Для векторного поля вы можете выбрать <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code> или <code translate="no">JACCARD</code> в качестве <code translate="no">metric_type</code>, в зависимости от типа векторов, с которыми вы работаете. Дополнительные сведения см. в разделе <a href="/docs/ru/v2.4.x/metric.md">Метрики сходства</a>.</p>
 <div class="language-python">
 <p>Чтобы настроить параметры индекса, используйте <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> для подготовки параметров индекса и <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> чтобы добавить индекс.</p>
 </div>
@@ -898,7 +898,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Созданная выше коллекция загружается автоматически. Дополнительные сведения о загрузке и освобождении коллекции см. в разделе <a href="/docs/ru/manage-collections.md#Load--Release-Collection">Загрузка и освобождение коллекции</a>.</p></li>
+<p>Созданная выше коллекция загружается автоматически. Дополнительные сведения о загрузке и освобождении коллекции см. в разделе <a href="/docs/ru/v2.4.x/manage-collections.md#Load--Release-Collection">Загрузка и освобождение коллекции</a>.</p></li>
 <li><p><strong>Создайте коллекцию и индексный файл по отдельности.</strong></p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
@@ -1015,7 +1015,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Созданная выше коллекция не загружается автоматически. Вы можете создать индекс для коллекции следующим образом. Создание индекса для коллекции отдельным способом не приводит к автоматической загрузке коллекции. Подробнее см. в разделе <a href="/docs/ru/manage-collections.md#Load--Release-Collection">Загрузка и освобождение коллекции</a>.</p>
+<p>Созданная выше коллекция не загружается автоматически. Вы можете создать индекс для коллекции следующим образом. Создание индекса для коллекции отдельным способом не приводит к автоматической загрузке коллекции. Подробнее см. в разделе <a href="/docs/ru/v2.4.x/manage-collections.md#Load--Release-Collection">Загрузка и освобождение коллекции</a>.</p>
 <p><table class="language-python">
 <thead>
 <tr>
@@ -1154,7 +1154,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
-<p>Созданная выше коллекция не загружается автоматически. Вы можете создать индекс для коллекции следующим образом. Создание индекса для коллекции отдельным способом не приводит к автоматической загрузке коллекции. Подробнее см. в разделе <a href="/docs/ru/manage-collections.md">Загрузка и освобождение коллекции</a>.</p>
+<p>Созданная выше коллекция не загружается автоматически. Вы можете создать индекс для коллекции следующим образом. Создание индекса для коллекции отдельным способом не приводит к автоматической загрузке коллекции. Подробнее см. в разделе <a href="/docs/ru/v2.4.x/manage-collections.md">Загрузка и освобождение коллекции</a>.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>

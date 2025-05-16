@@ -21,7 +21,7 @@ title: Búsqueda híbrida
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Desde Milvus 2.4, hemos introducido el soporte multivectorial y un marco de búsqueda híbrida, lo que significa que los usuarios pueden introducir varios campos vectoriales (hasta 10) en una única colección. Estos vectores en diferentes columnas representan diversas facetas de los datos, procedentes de diferentes modelos de incrustación o sometidos a distintos métodos de procesamiento. Los resultados de las búsquedas híbridas se integran mediante estrategias de reordenación, como la fusión recíproca de rangos (RRF) y la puntuación ponderada. Para obtener más información sobre las estrategias de reordenación, consulte <a href="/docs/es/reranking.md">Reordenación</a>.</p>
+    </button></h1><p>Desde Milvus 2.4, hemos introducido el soporte multivectorial y un marco de búsqueda híbrida, lo que significa que los usuarios pueden introducir varios campos vectoriales (hasta 10) en una única colección. Estos vectores en diferentes columnas representan diversas facetas de los datos, procedentes de diferentes modelos de incrustación o sometidos a distintos métodos de procesamiento. Los resultados de las búsquedas híbridas se integran mediante estrategias de reordenación, como la fusión recíproca de rangos (RRF) y la puntuación ponderada. Para obtener más información sobre las estrategias de reordenación, consulte <a href="/docs/es/v2.4.x/reranking.md">Reordenación</a>.</p>
 <p>Esta función es especialmente útil en escenarios de búsqueda exhaustiva, como la identificación de la persona más similar en una biblioteca de vectores basada en varios atributos como imágenes, voz, huellas dactilares, etc.</p>
 <p>En este tutorial, aprenderá a:</p>
 <ul>
@@ -178,7 +178,7 @@ reqs = [request_1, request_2]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una vez creadas las instancias <code translate="no">AnnSearchRequest</code>, configure una estrategia de reordenación para combinar y reordenar los resultados. Actualmente, existen dos opciones: <code translate="no">WeightedRanker</code> y <code translate="no">RRFRanker</code>. Para obtener más información sobre las estrategias de reordenación, consulte <a href="/docs/es/reranking.md">Reordenación</a>.</p>
+    </button></h2><p>Una vez creadas las instancias <code translate="no">AnnSearchRequest</code>, configure una estrategia de reordenación para combinar y reordenar los resultados. Actualmente, existen dos opciones: <code translate="no">WeightedRanker</code> y <code translate="no">RRFRanker</code>. Para obtener más información sobre las estrategias de reordenación, consulte <a href="/docs/es/v2.4.x/reranking.md">Reordenación</a>.</p>
 <ul>
 <li><p>Utilizar puntuación ponderada</p>
 <p><code translate="no">WeightedRanker</code> se utiliza para asignar importancia a los resultados de cada búsqueda de campo vectorial con pesos especificados. Si da prioridad a unos campos vectoriales sobre otros, <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> puede reflejarlo en los resultados combinados de la búsqueda.</p>
@@ -232,7 +232,7 @@ res = collection.hybrid_search(
 <p>Una lista de peticiones de búsqueda, donde cada petición es un objeto <code translate="no">ANNSearchRequest</code>. Cada petición puede corresponder a un campo vectorial diferente y a un conjunto diferente de parámetros de búsqueda.</p></li>
 <li><p><code translate="no">rerank</code> <em>(objeto</em>)</p>
 <p>La estrategia de reordenación que se utilizará para la búsqueda híbrida. Valores posibles: <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> y <code translate="no">RRFRanker()</code>.</p>
-<p>Para más información sobre las estrategias de reordenación, consulte <a href="/docs/es/reranking.md">Reordenación</a>.</p></li>
+<p>Para más información sobre las estrategias de reordenación, consulte <a href="/docs/es/v2.4.x/reranking.md">Reordenación</a>.</p></li>
 <li><p><code translate="no">limit</code> <em>(int</em>)</p>
 <p>El número máximo de resultados finales a devolver en la búsqueda híbrida.</p></li>
 </ul>

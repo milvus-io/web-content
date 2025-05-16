@@ -44,7 +44,7 @@ title: From Milvus 2.3.x
 </ul></li>
 <li><strong>Required tools</strong>:
 <ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool. For installation details, refer to <a href="/docs/milvusdm_install.md">Install Migration Tool</a>.</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool. For installation details, refer to <a href="/docs/milvusdm_install.md/v2.4.x">Install Migration Tool</a>.</li>
 </ul></li>
 <li><strong>Data preparation</strong>:
 <ul>
@@ -123,8 +123,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">source.milvus2x.endpoint</code></td><td>Address of the source Milvus server.</td></tr>
-<tr><td><code translate="no">source.milvus2x.username</code></td><td>Username for the source Milvus server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="/docs/authenticate.md">Enable Authentication</a>.</td></tr>
-<tr><td><code translate="no">source.milvus2x.password</code></td><td>Password for the source Milvus server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="/docs/authenticate.md">Enable Authentication</a>.</td></tr>
+<tr><td><code translate="no">source.milvus2x.username</code></td><td>Username for the source Milvus server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="/docs/authenticate.md/v2.4.x">Enable Authentication</a>.</td></tr>
+<tr><td><code translate="no">source.milvus2x.password</code></td><td>Password for the source Milvus server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="/docs/authenticate.md/v2.4.x">Enable Authentication</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -135,8 +135,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>Address of the target Milvus server.</td></tr>
-<tr><td><code translate="no">target.milvus2x.username</code></td><td>Username for the target Milvus server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="/docs/authenticate.md">Enable Authentication</a>.</td></tr>
-<tr><td><code translate="no">target.milvus2x.password</code></td><td>Password for the target Milvus server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="/docs/authenticate.md">Enable Authentication</a>.</td></tr>
+<tr><td><code translate="no">target.milvus2x.username</code></td><td>Username for the target Milvus server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="/docs/authenticate.md/v2.4.x">Enable Authentication</a>.</td></tr>
+<tr><td><code translate="no">target.milvus2x.password</code></td><td>Password for the target Milvus server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="/docs/authenticate.md/v2.4.x">Enable Authentication</a>.</td></tr>
 </tbody>
 </table>
 </li>

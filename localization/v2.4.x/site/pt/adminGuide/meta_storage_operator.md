@@ -112,6 +112,6 @@ spec:
       </svg>
     </button></h2><p>Saiba como configurar outras dependências do Milvus com o Milvus Operator:</p>
 <ul>
-<li><a href="/docs/pt/object_storage_operator.md">Configurar o armazenamento de objectos com o Milvus Operator</a></li>
-<li><a href="/docs/pt/message_storage_operator.md">Configurar o armazenamento de mensagens com o Milvus Operator</a></li>
+<li><a href="/docs/pt/v2.4.x/object_storage_operator.md">Configurar o armazenamento de objectos com o Milvus Operator</a></li>
+<li><a href="/docs/pt/v2.4.x/message_storage_operator.md">Configurar o armazenamento de mensagens com o Milvus Operator</a></li>
 </ul>

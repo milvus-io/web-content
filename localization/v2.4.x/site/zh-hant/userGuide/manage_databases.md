@@ -592,6 +592,6 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/zh-hant/rbac.md">啟用 RBAC</a></p></li>
-<li><p><a href="/docs/zh-hant/multi_tenancy.md">多租戶</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.4.x/rbac.md">啟用 RBAC</a></p></li>
+<li><p><a href="/docs/zh-hant/v2.4.x/multi_tenancy.md">多租戶</a></p></li>
 </ul>

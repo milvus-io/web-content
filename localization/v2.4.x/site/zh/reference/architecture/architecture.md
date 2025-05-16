@@ -21,8 +21,8 @@ deprecate: true
       </svg>
     </button></h1><p>As a cloud-native vector database, Milvus separates storage and computation by design. To enhance elasticity and flexibility, all components in Milvus are stateless.</p>
 <ul>
-<li><p><a href="/docs/zh/architecture_overview.md">Milvus Architecture Overview</a>: Milvus adopts a shared-storage architecture featuring storage/computing disaggregation and scalability for its computing nodes.</p></li>
-<li><p><a href="/docs/zh/four_layers.md">Storage/Computing Disaggregation</a>: Milvus comprises four layers that are mutually independent in terms of scalability and disaster recovery.</p></li>
-<li><p><a href="/docs/zh/main_components.md">Main Components</a>: Milvus standalone includes three components while Milvus cluster includes eight microservice components and three third-party dependencies.</p></li>
-<li><p><a href="/docs/zh/data_processing.md">Data Processsing</a>: A detailed description of the implementation of data insertion, index building, and data query in Milvus.</p></li>
+<li><p><a href="/docs/zh/v2.4.x/architecture_overview.md">Milvus Architecture Overview</a>: Milvus adopts a shared-storage architecture featuring storage/computing disaggregation and scalability for its computing nodes.</p></li>
+<li><p><a href="/docs/zh/v2.4.x/four_layers.md">Storage/Computing Disaggregation</a>: Milvus comprises four layers that are mutually independent in terms of scalability and disaster recovery.</p></li>
+<li><p><a href="/docs/zh/v2.4.x/main_components.md">Main Components</a>: Milvus standalone includes three components while Milvus cluster includes eight microservice components and three third-party dependencies.</p></li>
+<li><p><a href="/docs/zh/v2.4.x/data_processing.md">Data Processsing</a>: A detailed description of the implementation of data insertion, index building, and data query in Milvus.</p></li>
 </ul>

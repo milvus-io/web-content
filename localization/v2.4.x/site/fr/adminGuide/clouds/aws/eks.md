@@ -513,6 +513,6 @@ aws iam <span class="hljs-keyword">delete</span>-policy --policy-arn <span class
       </svg>
     </button></h2><p>Si vous souhaitez apprendre à déployer Milvus sur d'autres clouds :</p>
 <ul>
-<li><a href="/docs/fr/gcp.md">Déployer Milvus Cluster sur GCP avec Kubernetes</a></li>
-<li><a href="/docs/fr/azure.md">Déployer Milvus Cluster sur Azure avec Kubernetes</a></li>
+<li><a href="/docs/fr/v2.4.x/gcp.md">Déployer Milvus Cluster sur GCP avec Kubernetes</a></li>
+<li><a href="/docs/fr/v2.4.x/azure.md">Déployer Milvus Cluster sur Azure avec Kubernetes</a></li>
 </ul>

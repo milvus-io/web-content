@@ -134,17 +134,17 @@ The images are stored in the <code translate="no">/images</code> folder.
       </svg>
     </button></h2><p>Having installed Milvus, you can:</p>
 <ul>
-<li><p>Check <a href="/docs/zh/quickstart.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
+<li><p>Check <a href="/docs/zh/v2.4.x/quickstart.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/zh/manage-collections.md">Manage Collections</a></li>
-<li><a href="/docs/zh/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/zh/insert-update-delete.md">Insert, Upsert &amp; Delete</a></li>
-<li><a href="/docs/zh/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/zh/multi-vector-search.md">Hybrid Search</a></li>
+<li><a href="/docs/zh/v2.4.x/manage-collections.md">Manage Collections</a></li>
+<li><a href="/docs/zh/v2.4.x/manage-partitions.md">Manage Partitions</a></li>
+<li><a href="/docs/zh/v2.4.x/insert-update-delete.md">Insert, Upsert &amp; Delete</a></li>
+<li><a href="/docs/zh/v2.4.x/single-vector-search.md">Single-Vector Search</a></li>
+<li><a href="/docs/zh/v2.4.x/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>
-<li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
-<li><p><a href="/docs/zh/scaleout.md">Scale your Milvus cluster</a>.</p></li>
-<li><p>Explore <a href="/docs/zh/migrate_overview.md">MilvusDM</a>, an open-source tool designed for importing and exporting data in Milvus.</p></li>
-<li><p><a href="/docs/zh/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
+<li><p><a href="/docs/zh/v2.4.x/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
+<li><p><a href="/docs/zh/v2.4.x/scaleout.md">Scale your Milvus cluster</a>.</p></li>
+<li><p>Explore <a href="/docs/zh/v2.4.x/migrate_overview.md">MilvusDM</a>, an open-source tool designed for importing and exporting data in Milvus.</p></li>
+<li><p><a href="/docs/zh/v2.4.x/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
 </ul>

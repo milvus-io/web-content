@@ -55,14 +55,14 @@ title: Instal Milvus Cluster dengan Operator Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/id/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">Buat cluster K8s</a>.</p></li>
+<li><p><a href="/docs/id/v2.4.x/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">Buat cluster K8s</a>.</p></li>
 <li><p>Instal <a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>. Anda dapat memeriksa StorageClass yang terinstal sebagai berikut.</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 <span class="hljs-title function_">standard</span> <span class="hljs-params">(<span class="hljs-keyword">default</span>)</span>    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Periksa <a href="/docs/id/prerequisite-helm.md">persyaratan perangkat keras dan perangkat lunak</a> sebelum instalasi.</p></li>
+<li><p>Periksa <a href="/docs/id/v2.4.x/prerequisite-helm.md">persyaratan perangkat keras dan perangkat lunak</a> sebelum instalasi.</p></li>
 <li><p>Sebelum menginstal Milvus, disarankan untuk menggunakan <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> untuk memperkirakan kebutuhan perangkat keras berdasarkan ukuran data Anda. Hal ini membantu memastikan kinerja dan alokasi sumber daya yang optimal untuk instalasi Milvus Anda.</p></li>
 </ul>
 <div class="alert note">
@@ -306,26 +306,26 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
       </svg>
     </button></h2><p>Setelah menginstal Milvus di Docker, Anda dapat:</p>
 <ul>
-<li><p>Memeriksa <a href="/docs/id/quickstart.md">Halo Milvus</a> untuk melihat apa yang dapat dilakukan Milvus.</p></li>
+<li><p>Memeriksa <a href="/docs/id/v2.4.x/quickstart.md">Halo Milvus</a> untuk melihat apa yang dapat dilakukan Milvus.</p></li>
 <li><p>Mempelajari operasi dasar Milvus:</p>
 <ul>
-<li><a href="/docs/id/manage_databases.md">Mengelola Basis Data</a></li>
-<li><a href="/docs/id/manage-collections.md">Mengelola Koleksi</a></li>
-<li><a href="/docs/id/manage-partitions.md">Mengelola Partisi</a></li>
-<li><a href="/docs/id/insert-update-delete.md">Menyisipkan, Menambah &amp; Menghapus</a></li>
-<li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
-<li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>
+<li><a href="/docs/id/v2.4.x/manage_databases.md">Mengelola Basis Data</a></li>
+<li><a href="/docs/id/v2.4.x/manage-collections.md">Mengelola Koleksi</a></li>
+<li><a href="/docs/id/v2.4.x/manage-partitions.md">Mengelola Partisi</a></li>
+<li><a href="/docs/id/v2.4.x/insert-update-delete.md">Menyisipkan, Menambah &amp; Menghapus</a></li>
+<li><a href="/docs/id/v2.4.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
+<li><a href="/docs/id/v2.4.x/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
-<li><p><a href="/docs/id/upgrade_milvus_cluster-helm.md">Tingkatkan Milvus Menggunakan Bagan Helm</a>.</p></li>
-<li><p>Mengatur<a href="/docs/id/scaleout.md">skala cluster Milvus Anda</a>.</p></li>
+<li><p><a href="/docs/id/v2.4.x/upgrade_milvus_cluster-helm.md">Tingkatkan Milvus Menggunakan Bagan Helm</a>.</p></li>
+<li><p>Mengatur<a href="/docs/id/v2.4.x/scaleout.md">skala cluster Milvus Anda</a>.</p></li>
 <li><p>Menerapkan cluster Milvu Anda di awan:</p>
 <ul>
-<li><a href="/docs/id/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/id/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/id/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/id/v2.4.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/id/v2.4.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/id/v2.4.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Jelajahi <a href="/docs/id/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.4.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.4.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk men-debug Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://milvus.io/docs/attu.md">Attu</a>, alat GUI sumber terbuka untuk manajemen Milvus yang intuitif.</p></li>
-<li><p><a href="/docs/id/monitor.md">Memantau Milvus dengan Prometheus</a>.</p></li>
+<li><p><a href="/docs/id/v2.4.x/monitor.md">Memantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

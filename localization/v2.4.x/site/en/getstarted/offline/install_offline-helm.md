@@ -134,17 +134,17 @@ The images are stored in the <code translate="no">/images</code> folder.
       </svg>
     </button></h2><p>Having installed Milvus, you can:</p>
 <ul>
-<li><p>Check <a href="/docs/quickstart.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
+<li><p>Check <a href="/docs/quickstart.md/v2.4.x">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/manage-collections.md">Manage Collections</a></li>
-<li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert &amp; Delete</a></li>
-<li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
+<li><a href="/docs/manage-collections.md/v2.4.x">Manage Collections</a></li>
+<li><a href="/docs/manage-partitions.md/v2.4.x">Manage Partitions</a></li>
+<li><a href="/docs/insert-update-delete.md/v2.4.x">Insert, Upsert &amp; Delete</a></li>
+<li><a href="/docs/single-vector-search.md/v2.4.x">Single-Vector Search</a></li>
+<li><a href="/docs/multi-vector-search.md/v2.4.x">Hybrid Search</a></li>
 </ul></li>
-<li><p><a href="/docs/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
-<li><p><a href="/docs/scaleout.md">Scale your Milvus cluster</a>.</p></li>
-<li><p>Explore <a href="/docs/migrate_overview.md">MilvusDM</a>, an open-source tool designed for importing and exporting data in Milvus.</p></li>
-<li><p><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
+<li><p><a href="/docs/upgrade_milvus_cluster-helm.md/v2.4.x">Upgrade Milvus Using Helm Chart</a>.</p></li>
+<li><p><a href="/docs/scaleout.md/v2.4.x">Scale your Milvus cluster</a>.</p></li>
+<li><p>Explore <a href="/docs/migrate_overview.md/v2.4.x">MilvusDM</a>, an open-source tool designed for importing and exporting data in Milvus.</p></li>
+<li><p><a href="/docs/monitor.md/v2.4.x">Monitor Milvus with Prometheus</a>.</p></li>
 </ul>

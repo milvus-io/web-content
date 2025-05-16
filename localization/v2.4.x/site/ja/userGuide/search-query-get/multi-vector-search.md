@@ -19,7 +19,7 @@ title: ハイブリッド検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus2.4からマルチベクターサポートとハイブリッド検索フレームワークが導入された。異なる列のこれらのベクトルは、異なる埋め込みモデルに由来する、または異なる処理方法を経た、データの多様な側面を表しています。ハイブリッド検索の結果は、RRF（Reciprocal Rank Fusion）やWeighted Scoringなどのリランキング戦略を使って統合されます。再ランク付け戦略の詳細については、<a href="/docs/ja/reranking.md">再ランク付けを</a>参照してください。</p>
+    </button></h1><p>Milvus2.4からマルチベクターサポートとハイブリッド検索フレームワークが導入された。異なる列のこれらのベクトルは、異なる埋め込みモデルに由来する、または異なる処理方法を経た、データの多様な側面を表しています。ハイブリッド検索の結果は、RRF（Reciprocal Rank Fusion）やWeighted Scoringなどのリランキング戦略を使って統合されます。再ランク付け戦略の詳細については、<a href="/docs/ja/v2.4.x/reranking.md">再ランク付けを</a>参照してください。</p>
 <p>この機能は、写真、音声、指紋などの様々な属性に基づいて、ベクトル・ライブラリ内で最も類似した人物を特定するような、包括的な検索シナリオで特に役立ちます。</p>
 <p>このチュートリアルでは、以下の方法を学びます：</p>
 <ul>
@@ -176,7 +176,7 @@ reqs = [request_1, request_2]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">AnnSearchRequest</code> 。インスタンスを作成したら、結果を結合して再ランク付けするための再ランク付け戦略を設定する。現在、<code translate="no">WeightedRanker</code> と<code translate="no">RRFRanker</code> の2つのオプションがある。再ランク付け戦略の詳細については、<a href="/docs/ja/reranking.md">再ランク付けを</a>参照のこと。</p>
+    </button></h2><p><code translate="no">AnnSearchRequest</code> 。インスタンスを作成したら、結果を結合して再ランク付けするための再ランク付け戦略を設定する。現在、<code translate="no">WeightedRanker</code> と<code translate="no">RRFRanker</code> の2つのオプションがある。再ランク付け戦略の詳細については、<a href="/docs/ja/v2.4.x/reranking.md">再ランク付けを</a>参照のこと。</p>
 <ul>
 <li><p>重み付きスコアリングを使用する</p>
 <p><code translate="no">WeightedRanker</code> を使用して、各ベクトルフィールドの検索結果に指定した重みで重要度を割り当てます。あるベクター・フィールドを他のベクター・フィールドより優先させる場合、<code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> を使用することで、検索結果の組み合わせにこれを反映させることができます。</p>
@@ -230,7 +230,7 @@ res = collection.hybrid_search(
 <p>検索リクエストのリスト。各リクエストは<code translate="no">ANNSearchRequest</code> オブジェクトである。各リクエストは異なるベクトルフィールドと異なる検索パラメータのセットに対応することができる。</p></li>
 <li><p><code translate="no">rerank</code> <em>(オブジェクト</em>)</p>
 <p>ハイブリッド検索に使用するリランキング戦略。取り得る値：<code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> と<code translate="no">RRFRanker()</code> 。</p>
-<p>リランキング戦略の詳細については、<a href="/docs/ja/reranking.md">リランキングを</a>参照のこと。</p></li>
+<p>リランキング戦略の詳細については、<a href="/docs/ja/v2.4.x/reranking.md">リランキングを</a>参照のこと。</p></li>
 <li><p><code translate="no">limit</code> <em>(int</em>)</p>
 <p>ハイブリッド検索で返す最終結果の最大数。</p></li>
 </ul>

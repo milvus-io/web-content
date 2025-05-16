@@ -37,7 +37,7 @@ title: ''
       </svg>
     </button></h2><p>Organize the data to be inserted into a Milvus collection in a row-based JSON file or multiple NumPy files.</p>
 <h3 id="Row-based-JSON-file" class="common-anchor-header">Row-based JSON file</h3><p>You can name the file whatever makes sense, but the root key must be <strong>rows</strong>. In the file, each entity is organized in a dictionary. The keys in the dictionary are field names, and the values are field values in the corresponding entity.</p>
-<p>The following is an example of a row-based JSON file. You can include fields not defined in the collection schema as dynamic fields. For details, refer to <a href="/docs/dynamic_schema.md">Dynamic Schema</a>.</p>
+<p>The following is an example of a row-based JSON file. You can include fields not defined in the collection schema as dynamic fields. For details, refer to <a href="/docs/v2.2.x/dynamic_schema.md">Dynamic Schema</a>.</p>
 <div class="none-filter">
 <pre><code translate="no" class="language-python">{
   <span class="hljs-string">&quot;rows&quot;</span>:[
@@ -65,7 +65,7 @@ title: ''
 <div class="alert note">
 <ul>
 <li>Do not add any field that does not exist in the target collection, and do not miss any field that the schema of the target collection defines.</li>
-<li>To add fields that are not predefined in the schema, you should enable dynamic schema for the collection. In this case, Milvus automatically adds these fields to an internal JSON field. For details, refer to <a href="/docs/dynamic_schema.md">Dynamic Schema</a>.</li>
+<li>To add fields that are not predefined in the schema, you should enable dynamic schema for the collection. In this case, Milvus automatically adds these fields to an internal JSON field. For details, refer to <a href="/docs/v2.2.x/dynamic_schema.md">Dynamic Schema</a>.</li>
 <li>Use the correct types of values in each field. For example, use integers in integer fields, floats in float fields, strings in varchar fields, and float arrays in vector fields.</li>
 <li>Do not include an auto-generated primary key in the JSON file.</li>
 <li>For binary vectors, use uint8 arrays. Each uint8 value represents 8 dimensions, and the value must be between 0 and 255. For example, <code translate="no">[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]</code> is a 16-dimensional binary vector and should be written as <code translate="no">[128, 7]</code> in the JSON file.</li>
@@ -91,7 +91,7 @@ arr = numpy.array([json.dumps({<span class="hljs-string">&quot;year&quot;</span>
 numpy.save(<span class="hljs-string">&#x27;book_props.npy&#x27;</span>, arr)
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<p>You can also add dynamic fields using NumPy files as follows. For details on dynamic fields, refer to <a href="/docs/dynamic_schema.md">Dynamic Schema</a>.</p>
+<p>You can also add dynamic fields using NumPy files as follows. For details on dynamic fields, refer to <a href="/docs/v2.2.x/dynamic_schema.md">Dynamic Schema</a>.</p>
 <div class="none-filter">
 <pre><code translate="no" class="language-python">numpy.<span class="hljs-title function_">save</span>(<span class="hljs-string">&#x27;$meta.py&#x27;</span>, numpy.<span class="hljs-title function_">array</span>([ json.<span class="hljs-title function_">dumps</span>({<span class="hljs-attr">x</span>: <span class="hljs-number">2</span>}), json.<span class="hljs-title function_">dumps</span>({<span class="hljs-attr">y</span>: <span class="hljs-number">8</span>, <span class="hljs-attr">z</span>: <span class="hljs-number">2</span>}) ]))
 <button class="copy-code-btn"></button></code></pre>
@@ -194,7 +194,7 @@ task_id = wrapper.getTaskID();
   </div>
 </li>
 </ul>
-<p>After inserting entities into a collection that has previously been indexed, you do not need to re-index the collection, as Milvus will automatically create an index for the newly inserted data. For more information, refer to <a href="/docs/product_faq.md#Can-indexes-be-created-after-inserting-vectors">Can indexes be created after inserting vectors?</a></p>
+<p>After inserting entities into a collection that has previously been indexed, you do not need to re-index the collection, as Milvus will automatically create an index for the newly inserted data. For more information, refer to <a href="/docs/v2.2.x/product_faq.md#Can-indexes-be-created-after-inserting-vectors">Can indexes be created after inserting vectors?</a></p>
 <h2 id="List-tasks" class="common-anchor-header">List tasks<button data-href="#List-tasks" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -299,7 +299,7 @@ List&lt;GetImportStateResponse&gt; tasks = response.getTasksList();
 <tr><td>limit (optional)</td><td>Specify this parameter to limit the number of returned tasks.</td></tr>
 </tbody>
 </table>
-<p>See <a href="/docs/configure_rootcoord.md">System Configurations</a> for more information about import task configurations.</p>
+<p>See <a href="/docs/v2.2.x/configure_rootcoord.md">System Configurations</a> for more information about import task configurations.</p>
 <h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -557,7 +557,7 @@ task_2 = utility.<span class="hljs-title function_">do_bulk_insert</span>(
       </svg>
     </button></h2><p>Learn more basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/build_index.md">Build an index for vectors</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.2.x/build_index.md">Build an index for vectors</a></li>
+<li><a href="/docs/v2.2.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.2.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul>

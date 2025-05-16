@@ -36,7 +36,7 @@ title: Indice scalare
         ></path>
       </svg>
     </button></h2><p>Quando si effettuano ricerche di similarità vettoriale in Milvus, è possibile utilizzare gli operatori logici per organizzare i campi scalari in espressioni booleane.</p>
-<p>Quando Milvus riceve una richiesta di ricerca con una tale espressione booleana, la analizza in un albero di sintassi astratta (AST) per generare un piano fisico per il filtraggio degli attributi. Milvus applica quindi il piano fisico in ogni segmento per generare un <a href="/docs/it/bitset.md">set di bit</a> come risultato del filtraggio e include il risultato come parametro di ricerca vettoriale per restringere l'ambito di ricerca. In questo caso, la velocità delle ricerche vettoriali dipende fortemente dalla velocità del filtraggio degli attributi.</p>
+<p>Quando Milvus riceve una richiesta di ricerca con una tale espressione booleana, la analizza in un albero di sintassi astratta (AST) per generare un piano fisico per il filtraggio degli attributi. Milvus applica quindi il piano fisico in ogni segmento per generare un <a href="/docs/it/v2.4.x/bitset.md">set di bit</a> come risultato del filtraggio e include il risultato come parametro di ricerca vettoriale per restringere l'ambito di ricerca. In questo caso, la velocità delle ricerche vettoriali dipende fortemente dalla velocità del filtraggio degli attributi.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
@@ -154,12 +154,12 @@ title: Indice scalare
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Per indicizzare un campo scalare, leggere <a href="/docs/it/index-scalar-fields.md">Costruire un indice sugli scalari</a>.</p></li>
+<li><p>Per indicizzare un campo scalare, leggere <a href="/docs/it/v2.4.x/index-scalar-fields.md">Costruire un indice sugli scalari</a>.</p></li>
 <li><p>Per saperne di più sui termini correlati e sulle regole sopra menzionate, leggete</p>
 <ul>
-<li><a href="/docs/it/bitset.md">Bitset</a></li>
-<li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>
-<li><a href="/docs/it/boolean.md">Regole delle espressioni booleane</a></li>
-<li><a href="/docs/it/schema.md#Supported-data-type">Tipi di dati supportati</a></li>
+<li><a href="/docs/it/v2.4.x/bitset.md">Bitset</a></li>
+<li><a href="/docs/it/v2.4.x/multi-vector-search.md">Ricerca ibrida</a></li>
+<li><a href="/docs/it/v2.4.x/boolean.md">Regole delle espressioni booleane</a></li>
+<li><a href="/docs/it/v2.4.x/schema.md#Supported-data-type">Tipi di dati supportati</a></li>
 </ul></li>
 </ul>

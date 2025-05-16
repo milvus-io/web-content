@@ -183,7 +183,7 @@ partition.load(replica_number=<span class="hljs-number">2</span>, _resource_grou
 <p><code translate="no">_resource_groups</code> 은 선택적 매개변수이며, 이 매개변수를 지정하지 않으면 Milvus가 기본 리소스 그룹의 쿼리 노드에 복제본을 로드하도록 합니다.</p>
 <p>Milus가 컬렉션의 각 복제본을 별도의 리소스 그룹에 로드하도록 하려면 리소스 그룹의 수가 복제본 수와 같은지 확인하세요.</p></li>
 <li><p>리소스 그룹 간에 복제본을 전송합니다.</p>
-<p>Milus는 <a href="/docs/ko/replica.md">복제본을</a> 사용하여 여러 쿼리 노드에 분산된 <a href="/docs/ko/glossary.md#Segment">세그먼트</a> 간에 로드 밸런싱을 달성합니다. 다음과 같이 컬렉션의 특정 복제본을 한 리소스 그룹에서 다른 리소스 그룹으로 이동할 수 있습니다:</p>
+<p>Milus는 <a href="/docs/ko/v2.4.x/replica.md">복제본을</a> 사용하여 여러 쿼리 노드에 분산된 <a href="/docs/ko/v2.4.x/glossary.md#Segment">세그먼트</a> 간에 로드 밸런싱을 달성합니다. 다음과 같이 컬렉션의 특정 복제본을 한 리소스 그룹에서 다른 리소스 그룹으로 이동할 수 있습니다:</p>
 <pre><code translate="no" class="language-Python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>멀티테넌트 Milvus 인스턴스를 배포하려면 다음을 따르세요:</p>
 <ul>
-<li><a href="/docs/ko/rbac.md">RBAC 활성화</a></li>
-<li><a href="/docs/ko/users_and_roles.md">사용자 및 역할</a></li>
+<li><a href="/docs/ko/v2.4.x/rbac.md">RBAC 활성화</a></li>
+<li><a href="/docs/ko/v2.4.x/users_and_roles.md">사용자 및 역할</a></li>
 </ul>

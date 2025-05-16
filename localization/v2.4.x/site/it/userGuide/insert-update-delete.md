@@ -38,7 +38,7 @@ title: 'Inserimento, upsert e cancellazione'
       </svg>
     </button></h2><ul>
 <li><p>È stato installato l'SDK prescelto. Per installare un SDK, consultare la sezione <a href="https://milvus.io/docs/install-pymilvus.md">Installazione degli SDK</a>.</p></li>
-<li><p>Avete creato una raccolta. Per creare una raccolta, consultare <a href="/docs/it/manage-collections.md">Gestione delle raccolte</a>.</p></li>
+<li><p>Avete creato una raccolta. Per creare una raccolta, consultare <a href="/docs/it/v2.4.x/manage-collections.md">Gestione delle raccolte</a>.</p></li>
 <li><p>Per inserire un grande volume di dati, si consiglia di usare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Importazione dati</a>.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -58,7 +58,7 @@ title: 'Inserimento, upsert e cancellazione'
       </svg>
     </button></h2><p>Un'entità, nel contesto delle raccolte Milvus, è un'istanza singola e identificabile all'interno di una raccolta. Rappresenta un membro distinto di una particolare classe, sia essa un libro in una biblioteca, un gene in un genoma o qualsiasi altra entità identificabile.</p>
 <p>Le entità all'interno di una collezione condividono un insieme comune di attributi, chiamato schema, che delinea la struttura a cui ogni entità deve aderire, compresi i nomi dei campi, i tipi di dati e qualsiasi altro vincolo.</p>
-<p>L'inserimento di entità in una collezione richiede che i dati forniti contengano tutti i campi definiti dallo schema della collezione di destinazione. Inoltre, è possibile includere campi non definiti dallo schema solo se si è abilitato il campo dinamico. Per i dettagli, consultare <a href="/docs/it/enable-dynamic-field.md">Abilita campo dinamico</a>.</p>
+<p>L'inserimento di entità in una collezione richiede che i dati forniti contengano tutti i campi definiti dallo schema della collezione di destinazione. Inoltre, è possibile includere campi non definiti dallo schema solo se si è abilitato il campo dinamico. Per i dettagli, consultare <a href="/docs/it/v2.4.x/enable-dynamic-field.md">Abilita campo dinamico</a>.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparazione<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -382,7 +382,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>L'output è un dizionario contenente le statistiche sulle entità interessate. Per informazioni dettagliate sulle operazioni di partizione, consultare <a href="/docs/it/manage-partitions.md">Gestione delle partizioni</a>.</p>
+<p>L'output è un dizionario contenente le statistiche sulle entità interessate. Per informazioni dettagliate sulle operazioni di partizione, consultare <a href="/docs/it/v2.4.x/manage-partitions.md">Gestione delle partizioni</a>.</p>
 <h2 id="Upsert-entities" class="common-anchor-header">Aggiungere entità<button data-href="#Upsert-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -587,7 +587,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>L'output è un dizionario contenente le statistiche sulle entità interessate. Per informazioni dettagliate sulle operazioni di partizione, consultare <a href="/docs/it/manage-partitions.md">Gestione delle partizioni</a>.</p>
+<p>L'output è un dizionario contenente le statistiche sulle entità interessate. Per informazioni dettagliate sulle operazioni di partizione, consultare <a href="/docs/it/v2.4.x/manage-partitions.md">Gestione delle partizioni</a>.</p>
 <h2 id="Delete-entities" class="common-anchor-header">Eliminare le entità<button data-href="#Delete-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -708,7 +708,7 @@ System.out.<span class="hljs-built_in">println</span>(deleteResp.getDeleteCnt())
 <span class="hljs-comment">// 2</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per i dettagli sull'uso delle espressioni di filtro, consultare <a href="/docs/it/get-and-scalar-query.md">Get &amp; Scalar Query</a>.</p></li>
+<p>Per i dettagli sull'uso delle espressioni di filtro, consultare <a href="/docs/it/v2.4.x/get-and-scalar-query.md">Get &amp; Scalar Query</a>.</p></li>
 <li><p><strong>Eliminare entità per nome di partizione</strong>.</p>
 <p>Se si desidera eliminare le entità da una partizione specifica, è possibile specificare il nome della partizione con il parametro <code translate="no">partition_name</code> nel metodo <code translate="no">delete()</code>. L'esempio seguente elimina le entità da <code translate="no">partitionA</code> che hanno un colore che inizia con <code translate="no">blue</code>.</p>
 <p><div class="multipleCode">

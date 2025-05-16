@@ -19,7 +19,7 @@ title: 混合搜尋
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>自 Milvus 2.4 起，我們引入了多向量支援和混合搜尋架構，這表示使用者可以將多個向量欄位（最多 10 個）整合到單一集合中。這些向量在不同的欄位代表資料的不同層面，來自不同的嵌入模型或經過不同的處理方法。混合搜尋的結果會使用 Reranking 策略進行整合，例如 Reciprocal Rank Fusion (RRF) 和 Weighted Scoring。若要瞭解有關重新排名策略的更多資訊，請參閱重新<a href="/docs/zh-hant/reranking.md">排名</a>。</p>
+    </button></h1><p>自 Milvus 2.4 起，我們引入了多向量支援和混合搜尋架構，這表示使用者可以將多個向量欄位（最多 10 個）整合到單一集合中。這些向量在不同的欄位代表資料的不同層面，來自不同的嵌入模型或經過不同的處理方法。混合搜尋的結果會使用 Reranking 策略進行整合，例如 Reciprocal Rank Fusion (RRF) 和 Weighted Scoring。若要瞭解有關重新排名策略的更多資訊，請參閱重新<a href="/docs/zh-hant/v2.4.x/reranking.md">排名</a>。</p>
 <p>此功能在綜合搜尋的情境中特別有用，例如根據圖片、語音、指紋等各種屬性在向量庫中找出最相似的人。</p>
 <p>在本教程中，您將學習如何</p>
 <ul>
@@ -176,7 +176,7 @@ reqs = [request_1, request_2]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>建立<code translate="no">AnnSearchRequest</code> 實體後，設定重新排序策略以合併和重新排序結果。目前有兩個選項：<code translate="no">WeightedRanker</code> 和<code translate="no">RRFRanker</code> 。有關重新排名策略的詳細資訊，請參閱重新<a href="/docs/zh-hant/reranking.md">排名</a>。</p>
+    </button></h2><p>建立<code translate="no">AnnSearchRequest</code> 實體後，設定重新排序策略以合併和重新排序結果。目前有兩個選項：<code translate="no">WeightedRanker</code> 和<code translate="no">RRFRanker</code> 。有關重新排名策略的詳細資訊，請參閱重新<a href="/docs/zh-hant/v2.4.x/reranking.md">排名</a>。</p>
 <ul>
 <li><p>使用加權評分</p>
 <p><code translate="no">WeightedRanker</code> 用指定的權重為每個向量領域搜尋的結果指定重要性。如果您將某些向量領域的優先順序排在其他向量領域之前，<code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> ，就可以在合併的搜尋結果中反映出來。</p>
@@ -230,7 +230,7 @@ res = collection.hybrid_search(
 <p>搜尋請求的清單，其中每個請求都是<code translate="no">ANNSearchRequest</code> 物件。每個請求可以對應不同的向量領域和不同的搜尋參數。</p></li>
 <li><p><code translate="no">rerank</code> <em>(物件</em>)</p>
 <p>混合搜尋要使用的重排策略。可能的值：<code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> 和<code translate="no">RRFRanker()</code> 。</p>
-<p>有關 reranking 策略的詳細資訊，請參閱<a href="/docs/zh-hant/reranking.md">Reranking</a>。</p></li>
+<p>有關 reranking 策略的詳細資訊，請參閱<a href="/docs/zh-hant/v2.4.x/reranking.md">Reranking</a>。</p></li>
 <li><p><code translate="no">limit</code> <em>(英特</em>)</p>
 <p>混合搜尋中要返回的最終結果的最大數目。</p></li>
 </ul>

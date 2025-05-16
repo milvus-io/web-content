@@ -19,9 +19,9 @@ title: 内存索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主题列出了 Milvus 支持的各种类型的内存索引，每种索引最适合的场景，以及用户可以配置的参数，以实现更好的搜索性能。有关磁盘索引，请参阅<strong><a href="/docs/zh/disk_index.md">磁盘索引</a></strong>。</p>
+    </button></h1><p>本主题列出了 Milvus 支持的各种类型的内存索引，每种索引最适合的场景，以及用户可以配置的参数，以实现更好的搜索性能。有关磁盘索引，请参阅<strong><a href="/docs/zh/v2.4.x/disk_index.md">磁盘索引</a></strong>。</p>
 <p>索引是有效组织数据的过程，它通过显著加速大型数据集上耗时的查询，在提高相似性搜索的实用性方面发挥着重要作用。</p>
-<p>为了提高查询性能，可以为每个向量场<a href="/docs/zh/index-vector-fields.md">指定一种索引类型</a>。</p>
+<p>为了提高查询性能，可以为每个向量场<a href="/docs/zh/v2.4.x/index-vector-fields.md">指定一种索引类型</a>。</p>
 <div class="alert note">
 目前，一个向量场只支持一种索引类型。切换索引类型时，Milvus 会自动删除旧索引。</div>
 <h2 id="ANNS-vector-indexes" class="common-anchor-header">ANNS 向量索引<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
@@ -60,7 +60,7 @@ title: 内存索引
 <div class="filter">
  <a href="#floating">浮点嵌入</a> <a href="#binary">二进制嵌入</a> <a href="#sparse">稀疏嵌入</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">浮点嵌入的索引</h3><p>对于 128 维浮点嵌入（向量），其占用的存储空间为 128 * float 的大小 = 512 字节。而用于浮点嵌入的<a href="/docs/zh/metric.md">距离度量</a>是欧氏距离（<code translate="no">L2</code> ）和内积（<code translate="no">IP</code> ）。</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">浮点嵌入的索引</h3><p>对于 128 维浮点嵌入（向量），其占用的存储空间为 128 * float 的大小 = 512 字节。而用于浮点嵌入的<a href="/docs/zh/v2.4.x/metric.md">距离度量</a>是欧氏距离（<code translate="no">L2</code> ）和内积（<code translate="no">IP</code> ）。</p>
 <p>这些类型的索引包括<code translate="no">FLAT</code>,<code translate="no">IVF_FLAT</code>,<code translate="no">IVF_PQ</code>,<code translate="no">IVF_SQ8</code>,<code translate="no">HNSW</code> 和<code translate="no">SCANN</code> ，用于基于 CPU 的 ANN 搜索。</p>
 </div>
 <div class="filter-binary">
@@ -218,7 +218,7 @@ title: 内存索引
 <tr><th>参数</th><th>描述</th><th>范围</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[可选] 选择的距离度量。</td><td>请参阅<a href="/docs/zh/metric.md">支持的度量</a>。</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[可选] 选择的距离度量。</td><td>请参阅<a href="/docs/zh/v2.4.x/metric.md">支持的度量</a>。</td></tr>
 </tbody>
 </table>
 </li>
@@ -418,7 +418,7 @@ title: 内存索引
 <tr><th>参数</th><th>描述</th><th>范围</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[可选] 选择的距离度量。</td><td>请参阅<a href="/docs/zh/metric.md">支持的度量</a>。</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[可选] 选择的距离度量。</td><td>请参阅<a href="/docs/zh/v2.4.x/metric.md">支持的度量</a>。</td></tr>
 </tbody>
 </table>
 </li>
@@ -488,7 +488,7 @@ title: 内存索引
 </li>
 </ul>
 <h3 id="SPARSEWAND" class="common-anchor-header">弧度</h3><p>该索引与<code translate="no">SPARSE_INVERTED_INDEX</code> 有相似之处，但它利用<a href="https://dl.acm.org/doi/10.1145/956863.956944">弱-AND</a>算法进一步减少了搜索过程中完整 IP 距离评估的次数。</p>
-<p>根据我们的测试，<code translate="no">SPARSE_WAND</code> 在速度上通常优于其他方法。不过，随着向量密度的增加，其性能会迅速下降。为了解决这个问题，引入非零<code translate="no">drop_ratio_search</code> 可以显著提高性能，同时只造成极小的精度损失。更多信息，请参阅<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</p>
+<p>根据我们的测试，<code translate="no">SPARSE_WAND</code> 在速度上通常优于其他方法。不过，随着向量密度的增加，其性能会迅速下降。为了解决这个问题，引入非零<code translate="no">drop_ratio_search</code> 可以显著提高性能，同时只造成极小的精度损失。更多信息，请参阅<a href="/docs/zh/v2.4.x/sparse_vector.md">稀疏向量</a>。</p>
 <ul>
 <li><p>索引建立参数</p>
 <table>
@@ -551,5 +551,5 @@ title: 内存索引
         ></path>
       </svg>
     </button></h2><ul>
-<li>进一步了解 Milvus 支持的<a href="/docs/zh/metric.md">相似度指标</a>。</li>
+<li>进一步了解 Milvus 支持的<a href="/docs/zh/v2.4.x/metric.md">相似度指标</a>。</li>
 </ul>

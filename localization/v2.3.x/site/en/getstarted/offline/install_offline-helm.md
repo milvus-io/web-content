@@ -132,17 +132,17 @@ The images are stored in the <code translate="no">/images</code> folder.
       </svg>
     </button></h2><p>Having installed Milvus, you can:</p>
 <ul>
-<li><p>Check <a href="/docs/example_code.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
+<li><p>Check <a href="/docs/v2.3.x/example_code.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/manage_connection.md">Connect to Milvus server</a></li>
-<li><a href="/docs/create_collection.md">Create a collection</a></li>
-<li><a href="/docs/create_partition.md">Create a partition</a></li>
-<li><a href="/docs/insert_data.md">Insert data</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.3.x/manage_connection.md">Connect to Milvus server</a></li>
+<li><a href="/docs/v2.3.x/create_collection.md">Create a collection</a></li>
+<li><a href="/docs/v2.3.x/create_partition.md">Create a partition</a></li>
+<li><a href="/docs/v2.3.x/insert_data.md">Insert data</a></li>
+<li><a href="/docs/v2.3.x/search.md">Conduct a vector search</a></li>
 </ul></li>
-<li><p><a href="/docs/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
-<li><p><a href="/docs/scaleout.md">Scale your Milvus cluster</a>.</p></li>
-<li><p>Explore <a href="/docs/migrate_overview.md">MilvusDM</a>, an open-source tool designed for importing and exporting data in Milvus.</p></li>
-<li><p><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
+<li><p><a href="/docs/v2.3.x/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
+<li><p><a href="/docs/v2.3.x/scaleout.md">Scale your Milvus cluster</a>.</p></li>
+<li><p>Explore <a href="/docs/v2.3.x/migrate_overview.md">MilvusDM</a>, an open-source tool designed for importing and exporting data in Milvus.</p></li>
+<li><p><a href="/docs/v2.3.x/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
 </ul>

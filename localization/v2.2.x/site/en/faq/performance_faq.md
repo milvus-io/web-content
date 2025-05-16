@@ -43,7 +43,7 @@ title: ''
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">What factors impact CPU usage?</h4><p>CPU usage increases when Milvus is building indexes or running queries. In general, index building is CPU intensive except when using Annoy, which runs on a single thread.</p>
 <p>When running queries, CPU usage is affected by <code translate="no">nq</code> and <code translate="no">nprobe</code>. When <code translate="no">nq</code> and <code translate="no">nprobe</code> are small, concurrency is low and CPU usage stays low.</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">Does simultaneously inserting data and searching impact query performance?</h4><p>Insert operations are not CPU intensive. However, because new segments may not have reached the threshold for index building, Milvus resorts to brute-force search—significantly impacting query performance.</p>
-<p>The <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> parameter determines the index-building threshold for a segment, and is set to 1024 rows by default. See <a href="/docs/system_configuration.md">System Configuration</a> for more information.</p>
+<p>The <code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> parameter determines the index-building threshold for a segment, and is set to 1024 rows by default. See <a href="/docs/v2.2.x/system_configuration.md">System Configuration</a> for more information.</p>
 <h4 id="Still-have-questions" class="common-anchor-header">Still have questions?</h4><p>You can:</p>
 <ul>
 <li>Check out <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> on GitHub. Feel free to ask questions, share ideas, and help others.</li>

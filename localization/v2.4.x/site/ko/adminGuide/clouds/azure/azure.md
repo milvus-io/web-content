@@ -294,6 +294,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>다른 클라우드에 Milvus를 배포하는 방법을 알아보려면 다음과 같이 하세요:</p>
 <ul>
-<li><a href="/docs/ko/eks.md">Kubernetes로 AWS에 Milvus 클러스터 배포하기</a></li>
-<li><a href="/docs/ko/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터 배포하기</a></li>
+<li><a href="/docs/ko/v2.4.x/eks.md">Kubernetes로 AWS에 Milvus 클러스터 배포하기</a></li>
+<li><a href="/docs/ko/v2.4.x/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터 배포하기</a></li>
 </ul>

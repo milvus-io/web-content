@@ -42,7 +42,7 @@ title: Desde Milvus 1.x
 <li>Milvus de destino: 2.x</li>
 </ul></li>
 <li><strong>Herramientas necesarias</strong>:<ul>
-<li>Herramienta de<a href="https://github.com/zilliztech/milvus-migration">migración Milvus</a>. Para más detalles sobre la instalación, consulte <a href="/docs/es/milvusdm_install.md">Instalar la herramienta de migración</a>.</li>
+<li>Herramienta de<a href="https://github.com/zilliztech/milvus-migration">migración Milvus</a>. Para más detalles sobre la instalación, consulte <a href="/docs/es/v2.4.x/milvusdm_install.md">Instalar la herramienta de migración</a>.</li>
 </ul></li>
 </ul>
 <h2 id="Export-metadata-of-the-source-Milvus-installation" class="common-anchor-header">Exportar metadatos de la instalación Milvus de origen<button data-href="#Export-metadata-of-the-source-Milvus-installation" class="anchor-icon" translate="no">

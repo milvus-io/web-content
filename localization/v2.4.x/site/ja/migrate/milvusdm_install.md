@@ -85,7 +85,7 @@ go get &amp; go build
       </svg>
     </button></h2><p>Milvus-migrationツールをインストールすると、様々なソースからデータを移行することができます：</p>
 <ul>
-<li><a href="/docs/ja/es2m.md">Elasticsearchから</a></li>
-<li><a href="/docs/ja/f2m.md">Faissから</a></li>
-<li><a href="/docs/ja/m2m.md">Milvus 1.xから</a></li>
+<li><a href="/docs/ja/v2.4.x/es2m.md">Elasticsearchから</a></li>
+<li><a href="/docs/ja/v2.4.x/f2m.md">Faissから</a></li>
+<li><a href="/docs/ja/v2.4.x/m2m.md">Milvus 1.xから</a></li>
 </ul>

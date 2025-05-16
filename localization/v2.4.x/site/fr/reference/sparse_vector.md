@@ -117,7 +117,7 @@ entities = [
 <p><b>Remarques</b></p>
 <p>Les dimensions du vecteur doivent être de type Python <code translate="no">int</code> ou <code translate="no">numpy.integer</code>, et les valeurs doivent être de type Python <code translate="no">float</code> ou <code translate="no">numpy.floating</code>.</p>
 </div>
-<p>Pour générer des embeddings, vous pouvez également utiliser le paquetage <code translate="no">model</code> intégré à la bibliothèque PyMilvus, qui offre une gamme de fonctions d'embedding. Pour plus d'informations, reportez-vous à <a href="/docs/fr/embeddings.md">Embeddings</a>.</p>
+<p>Pour générer des embeddings, vous pouvez également utiliser le paquetage <code translate="no">model</code> intégré à la bibliothèque PyMilvus, qui offre une gamme de fonctions d'embedding. Pour plus d'informations, reportez-vous à <a href="/docs/fr/v2.4.x/embeddings.md">Embeddings</a>.</p>
 <h2 id="Create-a-collection-with-a-sparse-vector-field" class="common-anchor-header">Création d'une collection avec un champ de vecteurs épars<button data-href="#Create-a-collection-with-a-sparse-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -214,7 +214,7 @@ client.create_index(collection_name=<span class="hljs-string">&quot;test_sparse_
 <li><p><code translate="no">metric_type</code>: Seule la métrique de distance <code translate="no">IP</code> (produit intérieur) est prise en charge pour les vecteurs peu denses.</p></li>
 <li><p><code translate="no">params.drop_ratio_build</code>: Paramètre d'index utilisé spécifiquement pour les vecteurs peu denses. Il contrôle la proportion de petites valeurs vectorielles qui sont exclues au cours du processus d'indexation. Ce paramètre permet d'affiner le compromis entre efficacité et précision en ignorant les petites valeurs lors de la construction de l'index. Par exemple, si <code translate="no">drop_ratio_build = 0.3</code>, lors de la construction de l'index, toutes les valeurs de tous les vecteurs épars sont rassemblées et triées. Les 30 % les plus petites de ces valeurs ne sont pas incluses dans l'index, ce qui réduit la charge de travail informatique pendant la recherche.</p></li>
 </ul>
-<p>Pour plus d'informations, voir <a href="/docs/fr/index.md">Index en mémoire</a>.</p>
+<p>Pour plus d'informations, voir <a href="/docs/fr/v2.4.x/index.md">Index en mémoire</a>.</p>
 <h2 id="Perform-ANN-search" class="common-anchor-header">Effectuer une recherche ANN<button data-href="#Perform-ANN-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

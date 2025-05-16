@@ -107,7 +107,7 @@ summary: >-
       </svg>
     </button></h2><p>Depois de aprender sobre o fluxo de trabalho básico de monitoramento e alerta, aprenda:</p>
 <ul>
-<li><a href="/docs/pt/monitor.md">Implantar serviços de monitoramento</a></li>
-<li><a href="/docs/pt/visualize.md">Visualizar as métricas do Milvus</a></li>
-<li><a href="/docs/pt/alert.md">Criar um alerta</a></li>
+<li><a href="/docs/pt/v2.4.x/monitor.md">Implantar serviços de monitoramento</a></li>
+<li><a href="/docs/pt/v2.4.x/visualize.md">Visualizar as métricas do Milvus</a></li>
+<li><a href="/docs/pt/v2.4.x/alert.md">Criar um alerta</a></li>
 </ul>

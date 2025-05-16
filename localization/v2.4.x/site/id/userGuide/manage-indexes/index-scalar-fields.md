@@ -192,7 +192,7 @@ client.createIndex(createIndexReq);
 <p>Jenis indeks skalar yang akan dibuat. Untuk pengindeksan implisit, biarkan kosong atau hilangkan parameter ini.</p>
 <p>Untuk pengindeksan khusus, nilai yang valid adalah:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (Disarankan) Indeks terbalik terdiri dari kamus istilah yang berisi semua kata bertanda yang diurutkan menurut abjad. Untuk detailnya, lihat <a href="/docs/id/scalar_index.md">Indeks Skalar</a>.</p></li>
+<li><p><strong>INVERTED</strong>: (Disarankan) Indeks terbalik terdiri dari kamus istilah yang berisi semua kata bertanda yang diurutkan menurut abjad. Untuk detailnya, lihat <a href="/docs/id/v2.4.x/scalar_index.md">Indeks Skalar</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Mengurutkan bidang skalar menggunakan algoritme pengurutan pustaka templat standar. Hanya mendukung bidang numerik (misalnya, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Struktur data pohon untuk pencarian dan pengambilan awalan yang cepat. Mendukung bidang VARCHAR.</p></li>
 </ul></li>
@@ -216,7 +216,7 @@ client.createIndex(createIndexReq);
 <li><strong>fieldName</strong><em>(String</em>) Nama bidang skalar yang akan diindeks.</li>
 <li><strong>indexName</strong><em>(String</em>) Nama indeks skalar yang akan dibuat. Setiap bidang skalar mendukung satu indeks.</li>
 <li><strong>indexType</strong><em>(String</em>) Jenis indeks skalar yang akan dibuat. Untuk pengindeksan implisit, biarkan kosong atau hilangkan parameter ini. Untuk pengindeksan khusus, nilai yang valid adalah:<ul>
-<li><strong>INVERTED</strong>: (Disarankan) Indeks terbalik terdiri dari kamus istilah yang berisi semua kata bertanda yang diurutkan menurut abjad. Untuk detailnya, lihat <a href="/docs/id/scalar_index.md">Indeks Skalar</a>.</li>
+<li><strong>INVERTED</strong>: (Disarankan) Indeks terbalik terdiri dari kamus istilah yang berisi semua kata bertanda yang diurutkan menurut abjad. Untuk detailnya, lihat <a href="/docs/id/v2.4.x/scalar_index.md">Indeks Skalar</a>.</li>
 <li><strong>STL_SORT</strong>: Mengurutkan bidang skalar menggunakan algoritme pengurutan pustaka templat standar. Mendukung bidang Boolean dan numerik (misalnya, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: Struktur data pohon untuk pencarian dan pengambilan awalan yang cepat. Mendukung bidang VARCHAR.</li>
 </ul></li>
@@ -237,7 +237,7 @@ client.createIndex(createIndexReq);
 <li><strong>field_name</strong><em>(string</em>) Nama bidang skalar yang akan diindeks.</li>
 <li><strong>index_name</strong><em>(string</em>) Nama indeks skalar yang akan dibuat. Setiap bidang skalar mendukung satu indeks.</li>
 <li><strong>index_type</strong><em>(string</em>) Jenis indeks skalar yang akan dibuat. Untuk pengindeksan implisit, biarkan kosong atau hilangkan parameter ini. Untuk pengindeksan khusus, nilai yang valid adalah:<ul>
-<li><strong>INVERTED</strong>: (Disarankan) Indeks terbalik terdiri dari kamus istilah yang berisi semua kata bertanda yang diurutkan menurut abjad. Untuk detailnya, lihat <a href="/docs/id/scalar_index.md">Indeks Skalar</a>.</li>
+<li><strong>INVERTED</strong>: (Disarankan) Indeks terbalik terdiri dari kamus istilah yang berisi semua kata bertanda yang diurutkan menurut abjad. Untuk detailnya, lihat <a href="/docs/id/v2.4.x/scalar_index.md">Indeks Skalar</a>.</li>
 <li><strong>STL_SORT</strong>: Mengurutkan bidang skalar menggunakan algoritme pengurutan pustaka templat standar. Mendukung bidang Boolean dan numerik (misalnya, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: Struktur data pohon untuk pencarian dan pengambilan awalan yang cepat. Mendukung bidang VARCHAR.</li>
 </ul></li>

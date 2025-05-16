@@ -34,7 +34,7 @@ title: Gérer les schémas
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un schéma de champ est la définition logique d'un champ. C'est la première chose à définir avant de définir un <a href="#Collection-schema">schéma de collection</a> et de <a href="/docs/fr/manage-collections.md">gérer les collections</a>.</p>
+    </button></h2><p>Un schéma de champ est la définition logique d'un champ. C'est la première chose à définir avant de définir un <a href="#Collection-schema">schéma de collection</a> et de <a href="/docs/fr/v2.4.x/manage-collections.md">gérer les collections</a>.</p>
 <p>Milvus ne prend en charge qu'un seul champ de clé primaire dans une collection.</p>
 <h3 id="Field-schema-properties" class="common-anchor-header">Propriétés du schéma de champ</h3><table class="properties">
     <thead>
@@ -124,19 +124,19 @@ fields = [
 <li>FLOAT : numpy.float32</li>
 <li>DOUBLE : numpy.double</li>
 <li>VARCHAR : VARCHAR</li>
-<li>JSON : <a href="/docs/fr/use-json-fields.md">JSON</a></li>
-<li>Array : <a href="/docs/fr/array_data_type.md">Array</a></li>
+<li>JSON : <a href="/docs/fr/v2.4.x/use-json-fields.md">JSON</a></li>
+<li>Array : <a href="/docs/fr/v2.4.x/array_data_type.md">Array</a></li>
 </ul>
-<p>JSON est disponible en tant que type de données composite. Un champ JSON comprend des paires clé-valeur. Chaque clé est une chaîne de caractères et une valeur peut être un nombre, une chaîne de caractères, une valeur booléenne, un tableau ou une liste. Pour plus de détails, voir <a href="/docs/fr/use-json-fields.md">JSON : un nouveau type de données</a>.</p></li>
+<p>JSON est disponible en tant que type de données composite. Un champ JSON comprend des paires clé-valeur. Chaque clé est une chaîne de caractères et une valeur peut être un nombre, une chaîne de caractères, une valeur booléenne, un tableau ou une liste. Pour plus de détails, voir <a href="/docs/fr/v2.4.x/use-json-fields.md">JSON : un nouveau type de données</a>.</p></li>
 <li><p>Prise en charge des champs vectoriels :</p>
 <ul>
 <li>BINARY_VECTOR : stocke les données binaires sous la forme d'une séquence de 0 et de 1. Il est utilisé pour la représentation compacte des caractéristiques dans le traitement des images et la recherche d'informations.</li>
 <li>FLOAT_VECTOR : stocke les nombres à virgule flottante de 32 bits, couramment utilisés dans l'informatique scientifique et l'apprentissage automatique pour représenter les nombres réels.</li>
 <li>FLOAT16_VECTOR : stocke des nombres à virgule flottante de 16 bits en demi-précision, utilisés dans l'apprentissage profond et les calculs GPU pour l'efficacité de la mémoire et de la bande passante.</li>
 <li>BFLOAT16_VECTOR : Stocke les nombres à virgule flottante de 16 bits avec une précision réduite mais la même plage d'exposants que Float32, populaire dans l'apprentissage profond pour réduire les exigences de mémoire et de calcul sans avoir un impact significatif sur la précision.</li>
-<li>SPARSE_FLOAT_VECTOR : stocke une liste d'éléments non nuls et leurs indices correspondants, utilisés pour représenter des vecteurs épars. Pour plus d'informations, voir <a href="/docs/fr/sparse_vector.md">Vecteurs épars</a>.</li>
+<li>SPARSE_FLOAT_VECTOR : stocke une liste d'éléments non nuls et leurs indices correspondants, utilisés pour représenter des vecteurs épars. Pour plus d'informations, voir <a href="/docs/fr/v2.4.x/sparse_vector.md">Vecteurs épars</a>.</li>
 </ul>
-<p>Milvus prend en charge plusieurs champs de vecteurs dans une collection. Pour plus d'informations, voir <a href="/docs/fr/multi-vector-search.md">Recherche hybride</a>.</p></li>
+<p>Milvus prend en charge plusieurs champs de vecteurs dans une collection. Pour plus d'informations, voir <a href="/docs/fr/v2.4.x/multi-vector-search.md">Recherche hybride</a>.</p></li>
 </ul>
 <h2 id="Collection-schema" class="common-anchor-header">Schéma de collection<button data-href="#Collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +153,7 @@ fields = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un schéma de collection est la définition logique d'une collection. En général, vous devez définir le <a href="#Field-schema">schéma des champs</a> avant de définir un schéma de collection et de <a href="/docs/fr/manage-collections.md">gérer les collections</a>.</p>
+    </button></h2><p>Un schéma de collection est la définition logique d'une collection. En général, vous devez définir le <a href="#Field-schema">schéma des champs</a> avant de définir un schéma de collection et de <a href="/docs/fr/v2.4.x/manage-collections.md">gérer les collections</a>.</p>
 <h3 id="Collection-schema-properties" class="common-anchor-header">Propriétés du schéma de collection</h3><table class="properties">
     <thead>
     <tr>
@@ -208,8 +208,8 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 <ul>
 <li>Vous pouvez définir le numéro de dépôt avec <code translate="no">shards_num</code>.</li>
 <li>Vous pouvez définir le serveur Milvus sur lequel vous souhaitez créer une collection en spécifiant l'alias dans <code translate="no">using</code>.</li>
-<li>Vous pouvez activer la fonction de clé de partition sur un champ en définissant <code translate="no">is_partition_key</code> sur <code translate="no">True</code> sur le champ si vous devez mettre en œuvre une <a href="/docs/fr/multi_tenancy.md">multi-location basée sur la clé de partition</a>.</li>
-<li>Vous pouvez activer le schéma dynamique en remplaçant <code translate="no">enable_dynamic_field</code> par <code translate="no">True</code> dans le schéma de la collection si vous devez <a href="/docs/fr/enable-dynamic-field.md">activer le champ dynamique</a>.</li>
+<li>Vous pouvez activer la fonction de clé de partition sur un champ en définissant <code translate="no">is_partition_key</code> sur <code translate="no">True</code> sur le champ si vous devez mettre en œuvre une <a href="/docs/fr/v2.4.x/multi_tenancy.md">multi-location basée sur la clé de partition</a>.</li>
+<li>Vous pouvez activer le schéma dynamique en remplaçant <code translate="no">enable_dynamic_field</code> par <code translate="no">True</code> dans le schéma de la collection si vous devez <a href="/docs/fr/v2.4.x/enable-dynamic-field.md">activer le champ dynamique</a>.</li>
 </ul>
 </div>
 <p><br/>
@@ -245,7 +245,7 @@ collection, ins_res = Collection.construct_from_dataframe(
         ></path>
       </svg>
     </button></h2><ul>
-<li>Apprenez à préparer le schéma lors de la <a href="/docs/fr/manage-collections.md">gestion des collections</a>.</li>
-<li>En savoir plus sur le <a href="/docs/fr/enable-dynamic-field.md">schéma dynamique</a>.</li>
-<li>En savoir plus sur la clé de partition dans <a href="/docs/fr/multi_tenancy.md">Multi-tenancy</a>.</li>
+<li>Apprenez à préparer le schéma lors de la <a href="/docs/fr/v2.4.x/manage-collections.md">gestion des collections</a>.</li>
+<li>En savoir plus sur le <a href="/docs/fr/v2.4.x/enable-dynamic-field.md">schéma dynamique</a>.</li>
+<li>En savoir plus sur la clé de partition dans <a href="/docs/fr/v2.4.x/multi_tenancy.md">Multi-tenancy</a>.</li>
 </ul>

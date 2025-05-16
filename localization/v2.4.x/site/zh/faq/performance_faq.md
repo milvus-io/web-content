@@ -31,14 +31,14 @@ title: 性能常见问题
 <h4 id="What-factors-impact-CPU-usage" class="common-anchor-header">哪些因素会影响 CPU 占用率？</h4><p>当 Milvus 正在建立索引或运行查询时，CPU 使用率会增加。一般来说，除了使用 Annoy（在单线程上运行）外，索引构建都是 CPU 密集型工作。</p>
 <p>运行查询时，CPU 使用率受<code translate="no">nq</code> 和<code translate="no">nprobe</code> 的影响。当<code translate="no">nq</code> 和<code translate="no">nprobe</code> 较小时，并发量较低，CPU 占用率也较低。</p>
 <h4 id="Does-simultaneously-inserting-data-and-searching-impact-query-performance" class="common-anchor-header">同时插入数据和搜索会影响查询性能吗？</h4><p>插入操作不占用 CPU。但是，由于新的数据段可能还没有达到建立索引的阈值，Milvus 会采用暴力搜索，这将严重影响查询性能。</p>
-<p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> 参数决定了段的索引建立阈值，默认设置为 1024 行。更多信息请参阅<a href="/docs/zh/system_configuration.md">系统配置</a>。</p>
+<p><code translate="no">rootcoord.minSegmentSizeToEnableIndex</code> 参数决定了段的索引建立阈值，默认设置为 1024 行。更多信息请参阅<a href="/docs/zh/v2.4.x/system_configuration.md">系统配置</a>。</p>
 <h4 id="Is-storage-space-released-right-after-data-deletion-in-Milvus" class="common-anchor-header">在 Milvus 中删除数据后，存储空间会立即释放吗？</h4><p>不，在 Milvus 中删除数据后，存储空间不会立即释放。虽然删除数据会将实体标记为 "逻辑删除"，但实际空间可能不会立即释放。原因如下：</p>
 <ul>
 <li><strong>压缩</strong>：Milvus 会在后台自动压缩数据。这个过程会将较小的数据段合并为较大的数据段，并删除逻辑上已删除的数据（标记为删除的实体）或已超过有效时间（TTL）的数据。不过，压缩会创建新的数据段，同时将旧数据段标记为 "已丢弃"。</li>
 <li><strong>垃圾收集</strong>：一个名为 Garbage Collection (GC) 的独立进程会定期删除这些 "已丢弃 "的数据段，从而释放它们占用的存储空间。这样可以确保存储空间的有效利用，但在删除和空间回收之间会有轻微延迟。</li>
 </ul>
 <h4 id="Can-I-see-inserted-deleted-or-upserted-data-immediately-after-the-operation-without-waiting-for-a-flush" class="common-anchor-header">操作符插入、删除或上插数据后，我能否立即看到这些数据，而无需等待刷新？</h4><p>是的，在 Milvus，由于其存储-计算分解架构，数据可见性与刷新操作没有直接联系。您可以使用一致性级别管理数据可读性。</p>
-<p>选择一致性级别时，要考虑一致性和性能之间的权衡。对于需要即时可见性的操作符，请使用 "强 "一致性级别。对于更快的写入，优先考虑较弱的一致性（数据可能不会立即可见）。有关详细信息，请参阅<a href="/docs/zh/consistency.md">一致性</a>。</p>
+<p>选择一致性级别时，要考虑一致性和性能之间的权衡。对于需要即时可见性的操作符，请使用 "强 "一致性级别。对于更快的写入，优先考虑较弱的一致性（数据可能不会立即可见）。有关详细信息，请参阅<a href="/docs/zh/v2.4.x/consistency.md">一致性</a>。</p>
 <h4 id="Can-indexing-a-VARCHAR-field-improve-deletion-speed" class="common-anchor-header">为 VARCHAR 字段建立索引能否提高删除速度？</h4><p>为 VARCHAR 字段建立索引可以加快 "按表达式删除 "操作的速度，但仅限于特定条件下：</p>
 <ul>
 <li><strong>反转索引</strong>：该索引有助于非主键 VARCHAR 字段上的<code translate="no">IN</code> 或<code translate="no">==</code> 表达式。</li>

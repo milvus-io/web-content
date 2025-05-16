@@ -33,13 +33,13 @@ Vous découvrirez ici ce qu'est Milvus et comment installer, utiliser et déploy
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/fr/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/fr/install_standalone-docker.md"> <p class="link-btn">Installer Milvus</p> </a><p>Apprenez à installer Milvus à l'aide de Docker Compose ou sur Kubernetes.</p>
+   <a href="/docs/fr/v2.4.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
+   </a> <a href="/docs/fr/v2.4.x/install_standalone-docker.md"> <p class="link-btn">Installer Milvus</p> </a><p>Apprenez à installer Milvus à l'aide de Docker Compose ou sur Kubernetes.</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/fr/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/fr/quickstart.md"> <p class="link-btn">Démarrage rapide</p> </a><p>Découvrez comment exécuter rapidement Milvus à l'aide d'un exemple de code.</p>
+   <a href="/docs/fr/v2.4.x/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
+   </a> <a href="/docs/fr/v2.4.x/quickstart.md"> <p class="link-btn">Démarrage rapide</p> </a><p>Découvrez comment exécuter rapidement Milvus à l'aide d'un exemple de code.</p>
 </div>
 <div class="start_card_container">
   
@@ -67,31 +67,31 @@ Vous découvrirez ici ce qu'est Milvus et comment installer, utiliser et déploy
 <div class="recomment-item">
   <p>Utiliser</p>
 <ul>
-<li><a href="/docs/fr/manage-collections.md">Gérer les collections</a></li>
-<li><a href="/docs/fr/insert-update-delete.md">Insérer, extraire et supprimer</a></li>
-<li><a href="/docs/fr/index-vector-fields.md">Indexation des champs vectoriels</a></li>
-<li><a href="/docs/fr/single-vector-search.md">Recherche sur un seul vecteur</a></li>
-<li><a href="/docs/fr/get-and-scalar-query.md">Requête Get &amp; Scalar</a></li>
+<li><a href="/docs/fr/v2.4.x/manage-collections.md">Gérer les collections</a></li>
+<li><a href="/docs/fr/v2.4.x/insert-update-delete.md">Insérer, extraire et supprimer</a></li>
+<li><a href="/docs/fr/v2.4.x/index-vector-fields.md">Indexation des champs vectoriels</a></li>
+<li><a href="/docs/fr/v2.4.x/single-vector-search.md">Recherche sur un seul vecteur</a></li>
+<li><a href="/docs/fr/v2.4.x/get-and-scalar-query.md">Requête Get &amp; Scalar</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Déployer</p>
 <ul>
-<li><a href="/docs/fr/configure-docker.md">Configurer Milvus</a></li>
-<li><a href="/docs/fr/deploy_s3.md">Gérer les dépendances</a></li>
-<li><a href="/docs/fr/eks.md">Déployer sur des nuages</a></li>
-<li><a href="/docs/fr/scaleout.md">Faire évoluer un cluster Milvus</a></li>
-<li><a href="/docs/fr/monitor_overview.md">Surveiller et alerter</a></li>
+<li><a href="/docs/fr/v2.4.x/configure-docker.md">Configurer Milvus</a></li>
+<li><a href="/docs/fr/v2.4.x/deploy_s3.md">Gérer les dépendances</a></li>
+<li><a href="/docs/fr/v2.4.x/eks.md">Déployer sur des nuages</a></li>
+<li><a href="/docs/fr/v2.4.x/scaleout.md">Faire évoluer un cluster Milvus</a></li>
+<li><a href="/docs/fr/v2.4.x/monitor_overview.md">Surveiller et alerter</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Apprendre</p>
 <ul>
-<li><a href="/docs/fr/system_configuration.md">Configuration du système</a></li>
-<li><a href="/docs/fr/architecture_overview.md">Présentation de l'architecture</a></li>
-<li><a href="/docs/fr/index.md">Index vectoriel</a></li>
-<li><a href="/docs/fr/metric.md">Mesures de similarité</a></li>
-<li><a href="/docs/fr/glossary.md">Glossaire</a></li>
+<li><a href="/docs/fr/v2.4.x/system_configuration.md">Configuration du système</a></li>
+<li><a href="/docs/fr/v2.4.x/architecture_overview.md">Présentation de l'architecture</a></li>
+<li><a href="/docs/fr/v2.4.x/index.md">Index vectoriel</a></li>
+<li><a href="/docs/fr/v2.4.x/metric.md">Mesures de similarité</a></li>
+<li><a href="/docs/fr/v2.4.x/glossary.md">Glossaire</a></li>
 </ul>
 </div>
 </div>
@@ -113,9 +113,9 @@ Vous découvrirez ici ce qu'est Milvus et comment installer, utiliser et déploy
       </svg>
     </button></h2><p><em>Mar 2024 - Sortie de Milvus 2.4.0</em></p>
 <ul>
-<li>Ajout de conseils sur la façon de <a href="/docs/fr/multi-vector-search.md">mener une recherche hybride</a>.</li>
-<li>Ajout d'une description de l'<a href="/docs/fr/gpu_index.md">index GPU</a>.</li>
-<li>Ajout de conseils sur la façon d'<a href="/docs/fr/embeddings.md">intégrer vos données en utilisant PyMilvus</a>.</li>
-<li>Ajout de descriptions de <a href="/docs/fr/milvus-cdc-overview.md">Milvus CDC</a>.</li>
+<li>Ajout de conseils sur la façon de <a href="/docs/fr/v2.4.x/multi-vector-search.md">mener une recherche hybride</a>.</li>
+<li>Ajout d'une description de l'<a href="/docs/fr/v2.4.x/gpu_index.md">index GPU</a>.</li>
+<li>Ajout de conseils sur la façon d'<a href="/docs/fr/v2.4.x/embeddings.md">intégrer vos données en utilisant PyMilvus</a>.</li>
+<li>Ajout de descriptions de <a href="/docs/fr/v2.4.x/milvus-cdc-overview.md">Milvus CDC</a>.</li>
 </ul>
 </div>

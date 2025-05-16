@@ -36,7 +36,7 @@ title: '삽입, 위로 올리기 및 삭제'
       </svg>
     </button></h2><ul>
 <li><p>원하는 SDK를 설치했습니다. SDK를 설치하려면 <a href="https://milvus.io/docs/install-pymilvus.md">SDK 설치를</a> 참조하세요.</p></li>
-<li><p>컬렉션을 만들었습니다. 컬렉션을 만들려면 <a href="/docs/ko/manage-collections.md">컬렉션 관리를</a> 참조하세요.</p></li>
+<li><p>컬렉션을 만들었습니다. 컬렉션을 만들려면 <a href="/docs/ko/v2.4.x/manage-collections.md">컬렉션 관리를</a> 참조하세요.</p></li>
 <li><p>대량의 데이터를 삽입하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">데이터 가져오기를</a> 사용하는 것이 좋습니다.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -56,7 +56,7 @@ title: '삽입, 위로 올리기 및 삭제'
       </svg>
     </button></h2><p>Milvus 컬렉션의 컨텍스트 내에서 엔티티는 컬렉션 내에서 식별 가능한 단일 인스턴스입니다. 도서관의 책, 게놈의 유전자 또는 기타 식별 가능한 엔티티 등 특정 클래스의 고유한 멤버를 나타냅니다.</p>
 <p>컬렉션 내의 엔티티는 스키마라고 하는 공통 속성 집합을 공유하며, 필드 이름, 데이터 유형 및 기타 제약 조건을 포함하여 각 엔티티가 준수해야 하는 구조를 간략하게 설명합니다.</p>
-<p>컬렉션에 엔티티를 성공적으로 삽입하려면 제공된 데이터에 대상 컬렉션의 모든 스키마 정의 필드가 포함되어야 합니다. 또한 동적 필드를 활성화한 경우에만 스키마에 정의되지 않은 필드도 포함할 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드 활성화를</a> 참조하세요.</p>
+<p>컬렉션에 엔티티를 성공적으로 삽입하려면 제공된 데이터에 대상 컬렉션의 모든 스키마 정의 필드가 포함되어야 합니다. 또한 동적 필드를 활성화한 경우에만 스키마에 정의되지 않은 필드도 포함할 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/enable-dynamic-field.md">동적 필드 활성화를</a> 참조하세요.</p>
 <h2 id="Preparations" class="common-anchor-header">준비<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -380,7 +380,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>출력은 영향을 받는 엔티티에 대한 통계가 포함된 딕셔너리입니다. 파티션 작업에 대한 자세한 내용은 <a href="/docs/ko/manage-partitions.md">파티션 관리를</a> 참조하세요.</p>
+<p>출력은 영향을 받는 엔티티에 대한 통계가 포함된 딕셔너리입니다. 파티션 작업에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/manage-partitions.md">파티션 관리를</a> 참조하세요.</p>
 <h2 id="Upsert-entities" class="common-anchor-header">엔티티 삽입<button data-href="#Upsert-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -585,7 +585,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>출력은 영향을 받는 엔티티에 대한 통계가 포함된 딕셔너리입니다. 파티션 작업에 대한 자세한 내용은 <a href="/docs/ko/manage-partitions.md">파티션 관리를</a> 참조하세요.</p>
+<p>출력은 영향을 받는 엔티티에 대한 통계가 포함된 딕셔너리입니다. 파티션 작업에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/manage-partitions.md">파티션 관리를</a> 참조하세요.</p>
 <h2 id="Delete-entities" class="common-anchor-header">엔터티 삭제<button data-href="#Delete-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -706,7 +706,7 @@ System.out.<span class="hljs-built_in">println</span>(deleteResp.getDeleteCnt())
 <span class="hljs-comment">// 2</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>필터 표현식을 사용하는 방법에 대한 자세한 내용은 <a href="/docs/ko/get-and-scalar-query.md">가져오기 및 스칼라 쿼리를</a> 참조하세요.</p></li>
+<p>필터 표현식을 사용하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/get-and-scalar-query.md">가져오기 및 스칼라 쿼리를</a> 참조하세요.</p></li>
 <li><p><strong>파티션 이름으로 엔터티 삭제하기</strong>.</p>
 <p>특정 파티션에서 엔티티를 삭제하려면 <code translate="no">delete()</code> 메서드에서 <code translate="no">partition_name</code> 파라미터로 파티션 이름을 지정하면 됩니다. 다음 예제는 <code translate="no">partitionA</code> 에서 <code translate="no">blue</code> 으로 시작하는 색상을 가진 엔티티를 삭제합니다.</p>
 <p><div class="multipleCode">

@@ -33,13 +33,13 @@ Milvusドキュメントへようこそ！</h1></p>
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/ja/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/ja/install_standalone-docker.md"> <p class="link-btn">Milvusのインストール</p> </a><p>Docker ComposeまたはKubernetesを使ってMilvusをインストールする方法をご紹介します。</p>
+   <a href="/docs/ja/v2.4.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
+   </a> <a href="/docs/ja/v2.4.x/install_standalone-docker.md"> <p class="link-btn">Milvusのインストール</p> </a><p>Docker ComposeまたはKubernetesを使ってMilvusをインストールする方法をご紹介します。</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/ja/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/ja/quickstart.md"> <p class="link-btn">クイックスタート</p> </a><p>サンプルコードを使ってMilvusを素早く実行する方法をご紹介します。</p>
+   <a href="/docs/ja/v2.4.x/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
+   </a> <a href="/docs/ja/v2.4.x/quickstart.md"> <p class="link-btn">クイックスタート</p> </a><p>サンプルコードを使ってMilvusを素早く実行する方法をご紹介します。</p>
 </div>
 <div class="start_card_container">
   
@@ -67,31 +67,31 @@ Milvusドキュメントへようこそ！</h1></p>
 <div class="recomment-item">
   <p>使用方法</p>
 <ul>
-<li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>
-<li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
-<li><a href="/docs/ja/index-vector-fields.md">インデックス・ベクトル・フィールド</a></li>
-<li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
-<li><a href="/docs/ja/get-and-scalar-query.md">取得とスカラークエリー</a></li>
+<li><a href="/docs/ja/v2.4.x/manage-collections.md">コレクションの管理</a></li>
+<li><a href="/docs/ja/v2.4.x/insert-update-delete.md">挿入、アップサート、削除</a></li>
+<li><a href="/docs/ja/v2.4.x/index-vector-fields.md">インデックス・ベクトル・フィールド</a></li>
+<li><a href="/docs/ja/v2.4.x/single-vector-search.md">単一ベクトル検索</a></li>
+<li><a href="/docs/ja/v2.4.x/get-and-scalar-query.md">取得とスカラークエリー</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>デプロイ</p>
 <ul>
-<li><a href="/docs/ja/configure-docker.md">Milvusの設定</a></li>
-<li><a href="/docs/ja/deploy_s3.md">依存関係の管理</a></li>
-<li><a href="/docs/ja/eks.md">クラウドへのデプロイ</a></li>
-<li><a href="/docs/ja/scaleout.md">Milvusクラスターのスケール</a></li>
-<li><a href="/docs/ja/monitor_overview.md">監視とアラート</a></li>
+<li><a href="/docs/ja/v2.4.x/configure-docker.md">Milvusの設定</a></li>
+<li><a href="/docs/ja/v2.4.x/deploy_s3.md">依存関係の管理</a></li>
+<li><a href="/docs/ja/v2.4.x/eks.md">クラウドへのデプロイ</a></li>
+<li><a href="/docs/ja/v2.4.x/scaleout.md">Milvusクラスターのスケール</a></li>
+<li><a href="/docs/ja/v2.4.x/monitor_overview.md">監視とアラート</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>学ぶ</p>
 <ul>
-<li><a href="/docs/ja/system_configuration.md">システム構成</a></li>
-<li><a href="/docs/ja/architecture_overview.md">アーキテクチャの概要</a></li>
-<li><a href="/docs/ja/index.md">ベクトルインデックス</a></li>
-<li><a href="/docs/ja/metric.md">類似性メトリクス</a></li>
-<li><a href="/docs/ja/glossary.md">用語集</a></li>
+<li><a href="/docs/ja/v2.4.x/system_configuration.md">システム構成</a></li>
+<li><a href="/docs/ja/v2.4.x/architecture_overview.md">アーキテクチャの概要</a></li>
+<li><a href="/docs/ja/v2.4.x/index.md">ベクトルインデックス</a></li>
+<li><a href="/docs/ja/v2.4.x/metric.md">類似性メトリクス</a></li>
+<li><a href="/docs/ja/v2.4.x/glossary.md">用語集</a></li>
 </ul>
 </div>
 </div>
@@ -113,9 +113,9 @@ Milvusドキュメントへようこそ！</h1></p>
       </svg>
     </button></h2><p><em>2024年3月 - Milvus 2.4.0リリース</em></p>
 <ul>
-<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a>方法のガイダンスを追加しました。</li>
-<li><a href="/docs/ja/gpu_index.md">GPUインデックスの</a>説明を追加。</li>
-<li><a href="/docs/ja/embeddings.md">PyMilvusを使ってデータを埋め込む</a>方法のガイダンスを追加。</li>
-<li><a href="/docs/ja/milvus-cdc-overview.md">Milvus CDCの</a>説明を追加。</li>
+<li><a href="/docs/ja/v2.4.x/multi-vector-search.md">ハイブリッド検索</a>方法のガイダンスを追加しました。</li>
+<li><a href="/docs/ja/v2.4.x/gpu_index.md">GPUインデックスの</a>説明を追加。</li>
+<li><a href="/docs/ja/v2.4.x/embeddings.md">PyMilvusを使ってデータを埋め込む</a>方法のガイダンスを追加。</li>
+<li><a href="/docs/ja/v2.4.x/milvus-cdc-overview.md">Milvus CDCの</a>説明を追加。</li>
 </ul>
 </div>

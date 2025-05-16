@@ -34,7 +34,7 @@ title: 스키마 관리
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>필드 스키마는 필드의 논리적 정의입니다. <a href="#Collection-schema">컬렉션 스키마를</a> 정의하고 <a href="/docs/ko/manage-collections.md">컬렉션을 관리하기</a> 전에 가장 먼저 정의해야 하는 항목입니다.</p>
+    </button></h2><p>필드 스키마는 필드의 논리적 정의입니다. <a href="#Collection-schema">컬렉션 스키마를</a> 정의하고 <a href="/docs/ko/v2.4.x/manage-collections.md">컬렉션을 관리하기</a> 전에 가장 먼저 정의해야 하는 항목입니다.</p>
 <p>Milvus는 컬렉션에서 하나의 기본 키 필드만 지원합니다.</p>
 <h3 id="Field-schema-properties" class="common-anchor-header">필드 스키마 속성</h3><table class="properties">
     <thead>
@@ -124,19 +124,19 @@ fields = [
 <li>FLOAT: numpy.float32</li>
 <li>DOUBLE: numpy.double</li>
 <li>VARCHAR: VARCHAR</li>
-<li>JSON: <a href="/docs/ko/use-json-fields.md">JSON</a></li>
-<li>Array: <a href="/docs/ko/array_data_type.md">Array</a></li>
+<li>JSON: <a href="/docs/ko/v2.4.x/use-json-fields.md">JSON</a></li>
+<li>Array: <a href="/docs/ko/v2.4.x/array_data_type.md">Array</a></li>
 </ul>
-<p>복합 데이터 유형으로 JSON을 사용할 수 있습니다. JSON 필드는 키-값 쌍으로 구성됩니다. 각 키는 문자열이고 값은 숫자, 문자열, 부울 값, 배열 또는 목록일 수 있습니다. 자세한 내용은 <a href="/docs/ko/use-json-fields.md">JSON: 새로운 데이터 유형을</a> 참조하세요.</p></li>
+<p>복합 데이터 유형으로 JSON을 사용할 수 있습니다. JSON 필드는 키-값 쌍으로 구성됩니다. 각 키는 문자열이고 값은 숫자, 문자열, 부울 값, 배열 또는 목록일 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/use-json-fields.md">JSON: 새로운 데이터 유형을</a> 참조하세요.</p></li>
 <li><p>벡터 필드 지원</p>
 <ul>
 <li>바이너리_벡터: 이진 데이터를 0과 1의 시퀀스로 저장하며, 이미지 처리 및 정보 검색에서 특징을 간결하게 표현하는 데 사용됩니다.</li>
 <li>FLOAT_VECTOR: 과학 컴퓨팅 및 머신 러닝에서 실수를 표현하는 데 일반적으로 사용되는 32비트 부동소수점 숫자를 저장합니다.</li>
 <li>FLOAT16_VECTOR: 메모리 및 대역폭 효율성을 위해 딥러닝 및 GPU 계산에 사용되는 16비트 반정밀도 부동소수점 숫자를 저장합니다.</li>
 <li>BFLOAT16_VECTOR: 정확도는 떨어지지만 Float32와 동일한 지수 범위를 가진 16비트 부동 소수점 숫자를 저장하며, 정확도에 큰 영향을 주지 않고 메모리 및 계산 요구 사항을 줄이기 위해 딥 러닝에서 널리 사용됩니다.</li>
-<li>SPARSE_FLOAT_VECTOR: 희소 벡터를 표현하는 데 사용되는 0이 아닌 요소 목록과 그에 해당하는 인덱스를 저장합니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</li>
+<li>SPARSE_FLOAT_VECTOR: 희소 벡터를 표현하는 데 사용되는 0이 아닌 요소 목록과 그에 해당하는 인덱스를 저장합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/sparse_vector.md">스파스 벡터를</a> 참조하세요.</li>
 </ul>
-<p>Milvus는 컬렉션에서 여러 개의 벡터 필드를 지원합니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p></li>
+<p>Milvus는 컬렉션에서 여러 개의 벡터 필드를 지원합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p></li>
 </ul>
 <h2 id="Collection-schema" class="common-anchor-header">컬렉션 스키마<button data-href="#Collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +153,7 @@ fields = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션 스키마는 컬렉션의 논리적 정의입니다. 일반적으로 컬렉션 스키마를 정의하고 <a href="/docs/ko/manage-collections.md">컬렉션을 관리하기</a> 전에 <a href="#Field-schema">필드 스키마를</a> 정의해야 합니다.</p>
+    </button></h2><p>컬렉션 스키마는 컬렉션의 논리적 정의입니다. 일반적으로 컬렉션 스키마를 정의하고 <a href="/docs/ko/v2.4.x/manage-collections.md">컬렉션을 관리하기</a> 전에 <a href="#Field-schema">필드 스키마를</a> 정의해야 합니다.</p>
 <h3 id="Collection-schema-properties" class="common-anchor-header">컬렉션 스키마 속성</h3><table class="properties">
     <thead>
     <tr>
@@ -208,8 +208,8 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 <ul>
 <li>샤드 번호는 <code translate="no">shards_num</code> 로 정의할 수 있습니다.</li>
 <li><code translate="no">using</code> 에 별칭을 지정하여 컬렉션을 생성할 Milvus 서버를 정의할 수 있습니다.</li>
-<li><a href="/docs/ko/multi_tenancy.md">파티션 키 기반 멀티 테넌시를</a> 구현해야 하는 경우 필드에서 <code translate="no">is_partition_key</code> 을 <code translate="no">True</code> 으로 설정하여 필드에서 파티션 키 기능을 활성화할 수 있습니다.</li>
-<li>동적 <a href="/docs/ko/enable-dynamic-field.md">필드를 활성화해야</a> 하는 경우 컬렉션 스키마에서 <code translate="no">enable_dynamic_field</code> 을 <code translate="no">True</code> 으로 설정하여 동적 스키마를 활성화할 수 있습니다.</li>
+<li><a href="/docs/ko/v2.4.x/multi_tenancy.md">파티션 키 기반 멀티 테넌시를</a> 구현해야 하는 경우 필드에서 <code translate="no">is_partition_key</code> 을 <code translate="no">True</code> 으로 설정하여 필드에서 파티션 키 기능을 활성화할 수 있습니다.</li>
+<li>동적 <a href="/docs/ko/v2.4.x/enable-dynamic-field.md">필드를 활성화해야</a> 하는 경우 컬렉션 스키마에서 <code translate="no">enable_dynamic_field</code> 을 <code translate="no">True</code> 으로 설정하여 동적 스키마를 활성화할 수 있습니다.</li>
 </ul>
 </div>
 <p><br/>
@@ -245,7 +245,7 @@ collection, ins_res = Collection.construct_from_dataframe(
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ko/manage-collections.md">컬렉션을 관리할</a> 때 스키마를 준비하는 방법을 알아보세요.</li>
-<li><a href="/docs/ko/enable-dynamic-field.md">동적 스키마에</a> 대해 자세히 알아보세요.</li>
-<li><a href="/docs/ko/multi_tenancy.md">멀티테넌시의</a> 파티션 키에 대해 자세히 알아보세요.</li>
+<li><a href="/docs/ko/v2.4.x/manage-collections.md">컬렉션을 관리할</a> 때 스키마를 준비하는 방법을 알아보세요.</li>
+<li><a href="/docs/ko/v2.4.x/enable-dynamic-field.md">동적 스키마에</a> 대해 자세히 알아보세요.</li>
+<li><a href="/docs/ko/v2.4.x/multi_tenancy.md">멀티테넌시의</a> 파티션 키에 대해 자세히 알아보세요.</li>
 </ul>

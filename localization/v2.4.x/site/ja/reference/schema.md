@@ -34,7 +34,7 @@ title: スキーマの管理
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>フィールドスキーマはフィールドの論理的定義です。<a href="#Collection-schema">コレクションスキーマを</a>定義し、<a href="/docs/ja/manage-collections.md">コレクションを管理する</a>前に最初に定義する必要があります。</p>
+    </button></h2><p>フィールドスキーマはフィールドの論理的定義です。<a href="#Collection-schema">コレクションスキーマを</a>定義し、<a href="/docs/ja/v2.4.x/manage-collections.md">コレクションを管理する</a>前に最初に定義する必要があります。</p>
 <p>Milvusはコレクション内の主キーフィールドを1つだけサポートしています。</p>
 <h3 id="Field-schema-properties" class="common-anchor-header">フィールドスキーマプロパティ</h3><table class="properties">
     <thead>
@@ -124,19 +124,19 @@ fields = [
 <li>FLOAT: numpy.float32</li>
 <li>DOUBLE: numpy.double</li>
 <li>varchar: varchar</li>
-<li>JSON:<a href="/docs/ja/use-json-fields.md">JSON</a></li>
-<li>配列：<a href="/docs/ja/array_data_type.md">配列</a></li>
+<li>JSON:<a href="/docs/ja/v2.4.x/use-json-fields.md">JSON</a></li>
+<li>配列：<a href="/docs/ja/v2.4.x/array_data_type.md">配列</a></li>
 </ul>
-<p>複合データ型としてのJSONが利用できます。JSONフィールドはキーと値のペアで構成されます。各キーは文字列で、値は数値、文字列、ブーリアン値、配列、リストのいずれかです。詳細は<a href="/docs/ja/use-json-fields.md">JSON: a new data typeを</a>参照。</p></li>
+<p>複合データ型としてのJSONが利用できます。JSONフィールドはキーと値のペアで構成されます。各キーは文字列で、値は数値、文字列、ブーリアン値、配列、リストのいずれかです。詳細は<a href="/docs/ja/v2.4.x/use-json-fields.md">JSON: a new data typeを</a>参照。</p></li>
 <li><p>ベクター・フィールドのサポート</p>
 <ul>
 <li>BINARY_VECTOR：バイナリ・データを0と1のシーケンスとして格納し、画像処理や情報検索でコンパクトな特徴表現に使用される。</li>
 <li>FLOAT_VECTOR：32ビット浮動小数点数を格納。科学計算や機械学習で実数を表現する際によく使用される。</li>
 <li>FLOAT16_VECTOR：16ビットの半精度浮動小数点数を格納し、ディープラーニングやGPU計算でメモリと帯域幅の効率化のために使用されます。</li>
 <li>BFLOAT16_VECTOR：精度を落とした16ビット浮動小数点数を格納しますが、指数範囲はFloat32と同じで、精度に大きな影響を与えることなくメモリと計算量を削減するためにディープラーニングでよく使用されます。</li>
-<li>SPARSE_FLOAT_VECTOR: スパース・ベクトルを表現するために使用される、非ゼロ要素とそれに対応するインデックスのリストを格納する。詳細は<a href="/docs/ja/sparse_vector.md">スパースベクタを</a>参照してください。</li>
+<li>SPARSE_FLOAT_VECTOR: スパース・ベクトルを表現するために使用される、非ゼロ要素とそれに対応するインデックスのリストを格納する。詳細は<a href="/docs/ja/v2.4.x/sparse_vector.md">スパースベクタを</a>参照してください。</li>
 </ul>
-<p>Milvusはコレクション内の複数のベクトルフィールドをサポートしています。詳細は<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>参照。</p></li>
+<p>Milvusはコレクション内の複数のベクトルフィールドをサポートしています。詳細は<a href="/docs/ja/v2.4.x/multi-vector-search.md">ハイブリッド検索を</a>参照。</p></li>
 </ul>
 <h2 id="Collection-schema" class="common-anchor-header">コレクションスキーマ<button data-href="#Collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +153,7 @@ fields = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションスキーマはコレクションの論理的定義です。通常、コレクションスキーマを定義して<a href="/docs/ja/manage-collections.md">コレクションを管理する</a>前に、<a href="#Field-schema">フィールドスキーマを</a>定義する必要があります。</p>
+    </button></h2><p>コレクションスキーマはコレクションの論理的定義です。通常、コレクションスキーマを定義して<a href="/docs/ja/v2.4.x/manage-collections.md">コレクションを管理する</a>前に、<a href="#Field-schema">フィールドスキーマを</a>定義する必要があります。</p>
 <h3 id="Collection-schema-properties" class="common-anchor-header">コレクションスキーマのプロパティ</h3><table class="properties">
     <thead>
     <tr>
@@ -208,8 +208,8 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 <ul>
 <li><code translate="no">shards_num</code> でシャード番号を定義できます。</li>
 <li><code translate="no">using</code> でエイリアスを指定して、コレクションを作成するMilvusサーバーを定義できます。</li>
-<li><a href="/docs/ja/multi_tenancy.md">パーティションキーベースのマルチテナンシーを</a>実装する必要がある場合、<code translate="no">is_partition_key</code> を<code translate="no">True</code> に設定することで、フィールドのパーティションキー機能を有効にできます。</li>
-<li><a href="/docs/ja/enable-dynamic-field.md">動的フィールドを有効にする</a>必要がある場合、コレクションスキーマで<code translate="no">enable_dynamic_field</code> を<code translate="no">True</code> に設定することで、動的スキーマを有効にできます。</li>
+<li><a href="/docs/ja/v2.4.x/multi_tenancy.md">パーティションキーベースのマルチテナンシーを</a>実装する必要がある場合、<code translate="no">is_partition_key</code> を<code translate="no">True</code> に設定することで、フィールドのパーティションキー機能を有効にできます。</li>
+<li><a href="/docs/ja/v2.4.x/enable-dynamic-field.md">動的フィールドを有効にする</a>必要がある場合、コレクションスキーマで<code translate="no">enable_dynamic_field</code> を<code translate="no">True</code> に設定することで、動的スキーマを有効にできます。</li>
 </ul>
 </div>
 <p><br/>
@@ -245,7 +245,7 @@ collection, ins_res = Collection.construct_from_dataframe(
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ja/manage-collections.md">コレクションを管理する</a>際にスキーマを準備する方法を学びます。</li>
-<li><a href="/docs/ja/enable-dynamic-field.md">動的スキーマの</a>詳細。</li>
-<li><a href="/docs/ja/multi_tenancy.md">マルチテナントにおける</a>パーティション・キーについて。</li>
+<li><a href="/docs/ja/v2.4.x/manage-collections.md">コレクションを管理する</a>際にスキーマを準備する方法を学びます。</li>
+<li><a href="/docs/ja/v2.4.x/enable-dynamic-field.md">動的スキーマの</a>詳細。</li>
+<li><a href="/docs/ja/v2.4.x/multi_tenancy.md">マルチテナントにおける</a>パーティション・キーについて。</li>
 </ul>

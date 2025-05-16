@@ -19,7 +19,7 @@ summary: Kubernetes에서 Milvus에 리소스를 할당하는 방법을 알아�
         ></path>
       </svg>
     </button></h1><p>이 항목에서는 쿠버네티스의 Milvus 클러스터에 리소스를 할당하는 방법을 설명합니다.</p>
-<p>일반적으로, 프로덕션 환경에서 Milvus 클러스터에 할당하는 리소스는 머신 워크로드에 비례해야 합니다. 리소스를 할당할 때 머신 유형도 고려해야 합니다. 클러스터가 실행 중일 때 구성을 업데이트할 수 있지만 <a href="/docs/ko/install_cluster-helm.md">클러스터를 배포하기</a> 전에 값을 설정하는 것이 좋습니다.</p>
+<p>일반적으로, 프로덕션 환경에서 Milvus 클러스터에 할당하는 리소스는 머신 워크로드에 비례해야 합니다. 리소스를 할당할 때 머신 유형도 고려해야 합니다. 클러스터가 실행 중일 때 구성을 업데이트할 수 있지만 <a href="/docs/ko/v2.4.x/install_cluster-helm.md">클러스터를 배포하기</a> 전에 값을 설정하는 것이 좋습니다.</p>
 <div class="alert note">
 <p>Milvus 운영자를 사용하여 리소스를 할당하는 방법에 대한 자세한 내용은 <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/allocate-resources.md#allocate-resources-with-milvus-operator">Milvus 운영자를 사용하여 리소스 할당하기를</a> 참조하세요.</p>
 </div>
@@ -59,8 +59,8 @@ summary: Kubernetes에서 Milvus에 리소스를 할당하는 방법을 알아�
 헬름을 사용하여 리소스를 업그레이드하면 실행 중인 파드가 롤링 업데이트를 수행하게 된다.</div>
 <p>리소스를 할당하는 방법에는 두 가지가 있다:</p>
 <ul>
-<li><a href="/docs/ko/allocate.md#Allocate-resources-with-commands">다음 명령을 사용한다.</a></li>
-<li><a href="/docs/ko/allocate.md#Allocate-resources-by-setting-configuration-file"> <code translate="no">YAML</code> 파일에서 파라미터를 설정한다.</a></li>
+<li><a href="/docs/ko/v2.4.x/allocate.md#Allocate-resources-with-commands">다음 명령을 사용한다.</a></li>
+<li><a href="/docs/ko/v2.4.x/allocate.md#Allocate-resources-by-setting-configuration-file"> <code translate="no">YAML</code> 파일에서 파라미터를 설정한다.</a></li>
 </ul>
 <h3 id="Allocate-resources-with-commands" class="common-anchor-header">명령어로 리소스 할당</h3><p><code translate="no">--set</code> 를 사용하여 리소스 구성을 업데이트하는 경우 각 Milvus 구성 요소에 대한 리소스 변수를 설정해야 합니다.</p>
 <div class="filter">
@@ -129,13 +129,13 @@ summary: Kubernetes에서 Milvus에 리소스를 할당하는 방법을 알아�
       </svg>
     </button></h2><ul>
 <li>다음 방법을 배울 수도 있습니다:<ul>
-<li><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장하기</a></li>
-<li><a href="/docs/ko/upgrade_milvus_cluster-operator.md">Milvus 클러스터 업그레이드</a></li>
-<li><a href="/docs/ko/upgrade_milvus_standalone-operator.md">Milvus 독립 실행형 업그레이드</a></li>
+<li><a href="/docs/ko/v2.4.x/scaleout.md">Milvus 클러스터 확장하기</a></li>
+<li><a href="/docs/ko/v2.4.x/upgrade_milvus_cluster-operator.md">Milvus 클러스터 업그레이드</a></li>
+<li><a href="/docs/ko/v2.4.x/upgrade_milvus_standalone-operator.md">Milvus 독립 실행형 업그레이드</a></li>
 </ul></li>
 <li>클라우드에 클러스터를 배포할 준비가 되셨다면:<ul>
-<li><a href="/docs/ko/eks.md">Terraform을 사용하여 Amazon EKS에 Milvus를 배포하는</a> 방법 알아보기</li>
-<li><a href="/docs/ko/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터를 배포하는</a> 방법 알아보기</li>
-<li><a href="/docs/ko/azure.md">Kubernetes를 사용하여 Microsoft Azure에 Milvus를 배포하는</a> 방법 알아보기</li>
+<li><a href="/docs/ko/v2.4.x/eks.md">Terraform을 사용하여 Amazon EKS에 Milvus를 배포하는</a> 방법 알아보기</li>
+<li><a href="/docs/ko/v2.4.x/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터를 배포하는</a> 방법 알아보기</li>
+<li><a href="/docs/ko/v2.4.x/azure.md">Kubernetes를 사용하여 Microsoft Azure에 Milvus를 배포하는</a> 방법 알아보기</li>
 </ul></li>
 </ul>

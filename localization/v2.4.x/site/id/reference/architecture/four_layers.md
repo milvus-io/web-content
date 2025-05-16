@@ -119,5 +119,5 @@ title: Pemilahan Penyimpanan/Komputasi
         ></path>
       </svg>
     </button></h2><ul>
-<li>Baca <a href="/docs/id/main_components.md">Komponen Utama</a> untuk detail lebih lanjut tentang arsitektur Milvus.</li>
+<li>Baca <a href="/docs/id/v2.4.x/main_components.md">Komponen Utama</a> untuk detail lebih lanjut tentang arsitektur Milvus.</li>
 </ul>

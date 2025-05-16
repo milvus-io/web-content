@@ -21,7 +21,7 @@ summary: 'Erfahren Sie, wie Sie einen Milvus-Cluster auf AWS EC2 bereitstellen.'
       </svg>
     </button></h1><p>Dieses Thema beschreibt die Bereitstellung eines Milvus-Clusters auf <a href="https://docs.aws.amazon.com/ec2/">Amazon EC2</a> mit Terraform und Ansible.</p>
 <div class="alert note">
-<p>Dieses Thema ist veraltet und wird bald entfernt werden. Wir empfehlen Ihnen, stattdessen auf <a href="/docs/de/eks.md">Deploy a Milvus Cluster on EKS</a> zu verweisen.</p>
+<p>Dieses Thema ist veraltet und wird bald entfernt werden. Wir empfehlen Ihnen, stattdessen auf <a href="/docs/de/v2.4.x/eks.md">Deploy a Milvus Cluster on EKS</a> zu verweisen.</p>
 </div>
 <h2 id="Provision-a-Milvus-cluster" class="common-anchor-header">Bereitstellung eines Milvus-Clusters<button data-href="#Provision-a-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -488,7 +488,7 @@ dockernode03               : ok=4    changed=3    unreachable=0    failed=0    s
       </svg>
     </button></h2><p>Wenn Sie erfahren möchten, wie Sie Milvus in anderen Clouds einsetzen können:</p>
 <ul>
-<li><a href="/docs/de/eks.md">Einrichten eines Milvus-Clusters auf EKS</a></li>
-<li><a href="/docs/de/gcp.md">Bereitstellen von Milvus Cluster auf GCP mit Kubernetes</a></li>
-<li><a href="/docs/de/azure.md">Anleitung zur Bereitstellung von Milvus auf Microsoft Azure mit Kubernetes</a></li>
+<li><a href="/docs/de/v2.4.x/eks.md">Einrichten eines Milvus-Clusters auf EKS</a></li>
+<li><a href="/docs/de/v2.4.x/gcp.md">Bereitstellen von Milvus Cluster auf GCP mit Kubernetes</a></li>
+<li><a href="/docs/de/v2.4.x/azure.md">Anleitung zur Bereitstellung von Milvus auf Microsoft Azure mit Kubernetes</a></li>
 </ul>

@@ -35,7 +35,7 @@ title: 比特集
         ></path>
       </svg>
     </button></h2><p>比特集是一组比特。比特是只有两个可能值的元素，最典型的是<code translate="no">0</code> 和<code translate="no">1</code> ，或布尔值<code translate="no">true</code> 和<code translate="no">false</code> 。在 Milvus 中，比特集是由比特数<code translate="no">0</code> 和<code translate="no">1</code> 组成的数组，与 ints、浮点数或字符相比，比特集可用于紧凑、高效地表示某些数据。比特数默认为<code translate="no">0</code> ，只有在满足特定要求时才会被设置为<code translate="no">1</code> 。</p>
-<p>对位集的操作采用<a href="/docs/zh/boolean.md">布尔逻辑</a>，在<a href="/docs/zh/boolean.md">布尔逻辑</a>下，输出值要么有效要么无效，也分别用<code translate="no">1</code> 和<code translate="no">0</code> 表示。例如，<a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">逻辑运算符</a> <code translate="no">AND</code> 可用于比较两个基于相同索引位置项的比特集，并根据结果生成一个新的比特集。如果某个位置上的两个项目相同，那么在新的比特集中，<code translate="no">1</code> 将写入该位置；如果两个项目不同，<code translate="no">0</code> 。</p>
+<p>对位集的操作采用<a href="/docs/zh/v2.4.x/boolean.md">布尔逻辑</a>，在<a href="/docs/zh/v2.4.x/boolean.md">布尔逻辑</a>下，输出值要么有效要么无效，也分别用<code translate="no">1</code> 和<code translate="no">0</code> 表示。例如，<a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">逻辑运算符</a> <code translate="no">AND</code> 可用于比较两个基于相同索引位置项的比特集，并根据结果生成一个新的比特集。如果某个位置上的两个项目相同，那么在新的比特集中，<code translate="no">1</code> 将写入该位置；如果两个项目不同，<code translate="no">0</code> 。</p>
 <h2 id="Implementation" class="common-anchor-header">实现<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

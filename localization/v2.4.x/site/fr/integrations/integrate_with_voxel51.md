@@ -37,7 +37,7 @@ title: Effectuer des recherches sur la vision avec Milvus et FiftyOne
       </svg>
     </button></h2><p>Avant de commencer, assurez-vous que vous disposez des éléments suivants :</p>
 <ul>
-<li>Un <a href="/docs/fr/install_standalone-docker.md">serveur Milvus</a> en cours d'exécution.</li>
+<li>Un <a href="/docs/fr/v2.4.x/install_standalone-docker.md">serveur Milvus</a> en cours d'exécution.</li>
 <li>Un environnement Python avec <code translate="no">pymilvus</code> et <code translate="no">fiftyone</code> installés.</li>
 <li>Un <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">ensemble de données d'</a> images à rechercher.</li>
 </ul>
@@ -262,7 +262,7 @@ milvus_index = fob.compute_similarity(
 <li><p><strong>metric</strong> (<em>"dotproduct")</em>: la métrique de distance d'intégration à utiliser lors de la création d'un nouvel index. Les valeurs supportées sont (<code translate="no">&quot;dotproduct&quot;</code>, <code translate="no">&quot;euclidean&quot;</code>)</p></li>
 <li><p><strong>consistency_level</strong> (<em>"Session")</em>: le niveau de cohérence à utiliser. Les valeurs prises en charge sont (<code translate="no">&quot;Strong&quot;</code>, <code translate="no">&quot;Session&quot;</code>, <code translate="no">&quot;Bounded&quot;</code>, <code translate="no">&quot;Eventually&quot;</code>)</p></li>
 </ul>
-<p>Pour des informations détaillées sur ces paramètres, voir la <a href="/docs/fr/authenticate.md">documentation</a> <a href="/docs/fr/consistency.md">sur l'</a> <a href="/docs/fr/authenticate.md">authentification Milvus</a> et la <a href="/docs/fr/consistency.md">documentation sur les niveaux de cohérence Milvus</a>.</p>
+<p>Pour des informations détaillées sur ces paramètres, voir la <a href="/docs/fr/v2.4.x/authenticate.md">documentation</a> <a href="/docs/fr/v2.4.x/consistency.md">sur l'</a> <a href="/docs/fr/v2.4.x/authenticate.md">authentification Milvus</a> et la <a href="/docs/fr/v2.4.x/consistency.md">documentation sur les niveaux de cohérence Milvus</a>.</p>
 <p>Vous pouvez spécifier ces paramètres via l'une des stratégies décrites dans la section précédente. Voici un exemple de <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">configuration de cerveau</a> qui inclut tous les paramètres disponibles :</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {

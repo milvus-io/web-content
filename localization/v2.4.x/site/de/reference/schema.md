@@ -34,7 +34,7 @@ title: Schema verwalten
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ein Feldschema ist die logische Definition eines Feldes. Es ist das erste, was Sie definieren müssen, bevor Sie ein <a href="#Collection-schema">Sammlungsschema</a> definieren und <a href="/docs/de/manage-collections.md">Sammlungen verwalten können</a>.</p>
+    </button></h2><p>Ein Feldschema ist die logische Definition eines Feldes. Es ist das erste, was Sie definieren müssen, bevor Sie ein <a href="#Collection-schema">Sammlungsschema</a> definieren und <a href="/docs/de/v2.4.x/manage-collections.md">Sammlungen verwalten können</a>.</p>
 <p>Milvus unterstützt nur ein Primärschlüsselfeld in einer Sammlung.</p>
 <h3 id="Field-schema-properties" class="common-anchor-header">Eigenschaften des Feldschemas</h3><table class="properties">
     <thead>
@@ -124,19 +124,19 @@ fields = [
 <li>FLOAT: numpy.float32</li>
 <li>DOUBLE: numpy.double</li>
 <li>VARCHAR: VARCHAR</li>
-<li>JSON: <a href="/docs/de/use-json-fields.md">JSON</a></li>
-<li>Array: <a href="/docs/de/array_data_type.md">Array</a></li>
+<li>JSON: <a href="/docs/de/v2.4.x/use-json-fields.md">JSON</a></li>
+<li>Array: <a href="/docs/de/v2.4.x/array_data_type.md">Array</a></li>
 </ul>
-<p>JSON ist als zusammengesetzter Datentyp verfügbar. Ein JSON-Feld besteht aus Schlüssel-Werte-Paaren. Jeder Schlüssel ist eine Zeichenfolge, und ein Wert kann eine Zahl, eine Zeichenfolge, ein boolescher Wert, ein Array oder eine Liste sein. Einzelheiten finden Sie unter <a href="/docs/de/use-json-fields.md">JSON: ein neuer Datentyp</a>.</p></li>
+<p>JSON ist als zusammengesetzter Datentyp verfügbar. Ein JSON-Feld besteht aus Schlüssel-Werte-Paaren. Jeder Schlüssel ist eine Zeichenfolge, und ein Wert kann eine Zahl, eine Zeichenfolge, ein boolescher Wert, ein Array oder eine Liste sein. Einzelheiten finden Sie unter <a href="/docs/de/v2.4.x/use-json-fields.md">JSON: ein neuer Datentyp</a>.</p></li>
 <li><p>Vektorfeld unterstützt:</p>
 <ul>
 <li>BINARY_VECTOR: Speichert binäre Daten als eine Folge von 0en und 1en, die für eine kompakte Merkmalsdarstellung in der Bildverarbeitung und beim Informationsabruf verwendet werden.</li>
 <li>FLOAT_VECTOR: Speichert 32-Bit-Gleitkommazahlen, die häufig in der wissenschaftlichen Datenverarbeitung und beim maschinellen Lernen zur Darstellung reeller Zahlen verwendet werden.</li>
 <li>FLOAT16_VECTOR: Speichert 16-Bit-Gleitkommazahlen mit halber Genauigkeit, die bei Deep Learning und GPU-Berechnungen für Speicher- und Bandbreiteneffizienz verwendet werden.</li>
 <li>BFLOAT16_VECTOR: Speichert 16-Bit-Gleitkommazahlen mit verringerter Genauigkeit, aber demselben Exponentenbereich wie Float32, die beim Deep Learning zur Verringerung der Speicher- und Berechnungsanforderungen ohne wesentliche Beeinträchtigung der Genauigkeit verwendet werden.</li>
-<li>SPARSE_FLOAT_VECTOR: Speichert eine Liste von Nicht-Null-Elementen und ihren entsprechenden Indizes, die zur Darstellung von Sparse-Vektoren verwendet werden. Weitere Informationen finden Sie unter <a href="/docs/de/sparse_vector.md">Sparse Vectors</a>.</li>
+<li>SPARSE_FLOAT_VECTOR: Speichert eine Liste von Nicht-Null-Elementen und ihren entsprechenden Indizes, die zur Darstellung von Sparse-Vektoren verwendet werden. Weitere Informationen finden Sie unter <a href="/docs/de/v2.4.x/sparse_vector.md">Sparse Vectors</a>.</li>
 </ul>
-<p>Milvus unterstützt mehrere Vektorfelder in einer Sammlung. Weitere Informationen finden Sie unter <a href="/docs/de/multi-vector-search.md">Hybride Suche</a>.</p></li>
+<p>Milvus unterstützt mehrere Vektorfelder in einer Sammlung. Weitere Informationen finden Sie unter <a href="/docs/de/v2.4.x/multi-vector-search.md">Hybride Suche</a>.</p></li>
 </ul>
 <h2 id="Collection-schema" class="common-anchor-header">Sammlungsschema<button data-href="#Collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +153,7 @@ fields = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ein Sammlungsschema ist die logische Definition einer Sammlung. Normalerweise müssen Sie das <a href="#Field-schema">Feldschema</a> definieren, bevor Sie ein Sammlungsschema definieren und <a href="/docs/de/manage-collections.md">Sammlungen verwalten können</a>.</p>
+    </button></h2><p>Ein Sammlungsschema ist die logische Definition einer Sammlung. Normalerweise müssen Sie das <a href="#Field-schema">Feldschema</a> definieren, bevor Sie ein Sammlungsschema definieren und <a href="/docs/de/v2.4.x/manage-collections.md">Sammlungen verwalten können</a>.</p>
 <h3 id="Collection-schema-properties" class="common-anchor-header">Eigenschaften des Sammlungsschemas</h3><table class="properties">
     <thead>
     <tr>
@@ -208,8 +208,8 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 <ul>
 <li>Sie können die Shard-Nummer mit <code translate="no">shards_num</code> definieren.</li>
 <li>Sie können den Milvus-Server definieren, auf dem Sie eine Sammlung erstellen möchten, indem Sie den Alias in <code translate="no">using</code> angeben.</li>
-<li>Sie können die Partitionsschlüssel-Funktion für ein Feld aktivieren, indem Sie <code translate="no">is_partition_key</code> auf <code translate="no">True</code> für das Feld setzen, wenn Sie eine <a href="/docs/de/multi_tenancy.md">auf Partitionsschlüsseln basierende Mandantenfähigkeit</a> implementieren möchten.</li>
-<li>Sie können das dynamische Schema aktivieren, indem Sie <code translate="no">enable_dynamic_field</code> auf <code translate="no">True</code> im Sammlungsschema setzen, wenn Sie <a href="/docs/de/enable-dynamic-field.md">ein dynamisches Feld aktivieren</a> müssen.</li>
+<li>Sie können die Partitionsschlüssel-Funktion für ein Feld aktivieren, indem Sie <code translate="no">is_partition_key</code> auf <code translate="no">True</code> für das Feld setzen, wenn Sie eine <a href="/docs/de/v2.4.x/multi_tenancy.md">auf Partitionsschlüsseln basierende Mandantenfähigkeit</a> implementieren möchten.</li>
+<li>Sie können das dynamische Schema aktivieren, indem Sie <code translate="no">enable_dynamic_field</code> auf <code translate="no">True</code> im Sammlungsschema setzen, wenn Sie <a href="/docs/de/v2.4.x/enable-dynamic-field.md">ein dynamisches Feld aktivieren</a> müssen.</li>
 </ul>
 </div>
 <p><br/>
@@ -245,7 +245,7 @@ collection, ins_res = Collection.construct_from_dataframe(
         ></path>
       </svg>
     </button></h2><ul>
-<li>Erfahren Sie, wie Sie bei der <a href="/docs/de/manage-collections.md">Verwaltung von Sammlungen</a> ein Schema vorbereiten.</li>
-<li>Lesen Sie mehr über <a href="/docs/de/enable-dynamic-field.md">dynamische Schemata</a>.</li>
-<li>Lesen Sie mehr über Partitionsschlüssel in <a href="/docs/de/multi_tenancy.md">Multi-Tenancy</a>.</li>
+<li>Erfahren Sie, wie Sie bei der <a href="/docs/de/v2.4.x/manage-collections.md">Verwaltung von Sammlungen</a> ein Schema vorbereiten.</li>
+<li>Lesen Sie mehr über <a href="/docs/de/v2.4.x/enable-dynamic-field.md">dynamische Schemata</a>.</li>
+<li>Lesen Sie mehr über Partitionsschlüssel in <a href="/docs/de/v2.4.x/multi_tenancy.md">Multi-Tenancy</a>.</li>
 </ul>

@@ -19,9 +19,9 @@ title: Index en mémoire
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cette rubrique répertorie les différents types d'index en mémoire pris en charge par Milvus, les scénarios les mieux adaptés à chacun d'entre eux et les paramètres que les utilisateurs peuvent configurer pour obtenir de meilleures performances de recherche. Pour les index sur disque, voir <strong><a href="/docs/fr/disk_index.md">Index sur disque</a></strong>.</p>
+    </button></h1><p>Cette rubrique répertorie les différents types d'index en mémoire pris en charge par Milvus, les scénarios les mieux adaptés à chacun d'entre eux et les paramètres que les utilisateurs peuvent configurer pour obtenir de meilleures performances de recherche. Pour les index sur disque, voir <strong><a href="/docs/fr/v2.4.x/disk_index.md">Index sur disque</a></strong>.</p>
 <p>L'indexation est le processus d'organisation efficace des données et joue un rôle majeur dans l'utilité de la recherche par similarité en accélérant considérablement les requêtes fastidieuses sur de grands ensembles de données.</p>
-<p>Pour améliorer les performances des requêtes, vous pouvez <a href="/docs/fr/index-vector-fields.md">spécifier un type d'index</a> pour chaque champ vectoriel.</p>
+<p>Pour améliorer les performances des requêtes, vous pouvez <a href="/docs/fr/v2.4.x/index-vector-fields.md">spécifier un type d'index</a> pour chaque champ vectoriel.</p>
 <div class="alert note">
 Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Milvus supprime automatiquement l'ancien index lors du changement de type d'index.</div>
 <h2 id="ANNS-vector-indexes" class="common-anchor-header">Index vectoriels ANNS<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
@@ -60,7 +60,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <div class="filter">
  <a href="#floating">Encastrements en virgule flottante</a> <a href="#binary">Encastrements binaires</a> <a href="#sparse">Encastrements épars</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indices pour les intégrations en virgule flottante</h3><p>Pour les encastrements en virgule flottante à 128 dimensions (vecteurs), l'espace de stockage qu'ils occupent est de 128 * la taille de la virgule flottante = 512 octets. Les <a href="/docs/fr/metric.md">mesures de distance</a> utilisées pour les enregistrements en virgule flottante sont la distance euclidienne (<code translate="no">L2</code>) et le produit intérieur (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indices pour les intégrations en virgule flottante</h3><p>Pour les encastrements en virgule flottante à 128 dimensions (vecteurs), l'espace de stockage qu'ils occupent est de 128 * la taille de la virgule flottante = 512 octets. Les <a href="/docs/fr/v2.4.x/metric.md">mesures de distance</a> utilisées pour les enregistrements en virgule flottante sont la distance euclidienne (<code translate="no">L2</code>) et le produit intérieur (<code translate="no">IP</code>).</p>
 <p>Ces types d'index comprennent <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, et <code translate="no">SCANN</code> pour les recherches ANN basées sur l'unité centrale.</p>
 </div>
 <div class="filter-binary">
@@ -218,7 +218,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><th>Paramètre</th><th>Description</th><th>Distance</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Facultatif] La métrique de distance choisie.</td><td>Voir <a href="/docs/fr/metric.md">Métriques prises en charge</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Facultatif] La métrique de distance choisie.</td><td>Voir <a href="/docs/fr/v2.4.x/metric.md">Métriques prises en charge</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -418,7 +418,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><th>Paramètre</th><th>Description de la recherche</th><th>Distance</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[Facultatif] La métrique de distance choisie.</td><td>Voir <a href="/docs/fr/metric.md">Métriques prises en charge</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[Facultatif] La métrique de distance choisie.</td><td>Voir <a href="/docs/fr/v2.4.x/metric.md">Métriques prises en charge</a>.</td></tr>
 </tbody>
 </table>
 </li>
@@ -488,7 +488,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </li>
 </ul>
 <h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND</h3><p>Cet indice présente des similitudes avec <code translate="no">SPARSE_INVERTED_INDEX</code>, mais il utilise l'algorithme <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> pour réduire davantage le nombre d'évaluations de la distance IP complète au cours du processus de recherche.</p>
-<p>D'après nos tests, <code translate="no">SPARSE_WAND</code> surpasse généralement les autres méthodes en termes de rapidité. Toutefois, ses performances peuvent se détériorer rapidement lorsque la densité des vecteurs augmente. Pour remédier à ce problème, l'introduction d'une adresse <code translate="no">drop_ratio_search</code> non nulle peut améliorer considérablement les performances tout en n'entraînant qu'une perte de précision minime. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/sparse_vector.md">Vecteur clairsemé</a>.</p>
+<p>D'après nos tests, <code translate="no">SPARSE_WAND</code> surpasse généralement les autres méthodes en termes de rapidité. Toutefois, ses performances peuvent se détériorer rapidement lorsque la densité des vecteurs augmente. Pour remédier à ce problème, l'introduction d'une adresse <code translate="no">drop_ratio_search</code> non nulle peut améliorer considérablement les performances tout en n'entraînant qu'une perte de précision minime. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/v2.4.x/sparse_vector.md">Vecteur clairsemé</a>.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
 <table>
@@ -551,5 +551,5 @@ Voir <a href="https://medium.com/unstructured-data-service/how-to-choose-an-inde
         ></path>
       </svg>
     </button></h2><ul>
-<li>En savoir plus sur les <a href="/docs/fr/metric.md">métriques de similarité</a> prises en charge dans Milvus.</li>
+<li>En savoir plus sur les <a href="/docs/fr/v2.4.x/metric.md">métriques de similarité</a> prises en charge dans Milvus.</li>
 </ul>

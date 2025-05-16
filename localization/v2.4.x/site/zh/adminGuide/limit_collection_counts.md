@@ -22,11 +22,11 @@ title: 设定收集数量限制
 <p>配置因安装 Milvus 实例的方式而异。</p>
 <ul>
 <li><p>对于使用 Helm Charts 安装的 Milvus 实例</p>
-<p>将配置添加到<code translate="no">values.yaml</code> 文件的<code translate="no">config</code> 部分。有关详细信息，请参阅<a href="/docs/zh/configure-helm.md">使用 Helm Charts 配置 Milvus</a>。</p></li>
+<p>将配置添加到<code translate="no">values.yaml</code> 文件的<code translate="no">config</code> 部分。有关详细信息，请参阅<a href="/docs/zh/v2.4.x/configure-helm.md">使用 Helm Charts 配置 Milvus</a>。</p></li>
 <li><p>对于使用 Docker Compose 安装的 Milvus 实例</p>
-<p>将配置添加到用于启动 Milvus 实例的<code translate="no">milvus.yaml</code> 文件中。有关详细信息，请参阅<a href="/docs/zh/configure-docker.md">使用 Docker Compose 配置 Milvus</a>。</p></li>
+<p>将配置添加到用于启动 Milvus 实例的<code translate="no">milvus.yaml</code> 文件中。有关详细信息，请参阅<a href="/docs/zh/v2.4.x/configure-docker.md">使用 Docker Compose 配置 Milvus</a>。</p></li>
 <li><p>对于使用 Operator 安装的 Milvus 实例</p>
-<p>将配置添加到<code translate="no">Milvus</code> 自定义资源的<code translate="no">spec.components</code> 部分。有关详情，请参阅<a href="/docs/zh/configure_operator.md">使用 Operator 配置 Milvus</a>。</p></li>
+<p>将配置添加到<code translate="no">Milvus</code> 自定义资源的<code translate="no">spec.components</code> 部分。有关详情，请参阅<a href="/docs/zh/v2.4.x/configure_operator.md">使用 Operator 配置 Milvus</a>。</p></li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">配置选项<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

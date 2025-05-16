@@ -185,5 +185,5 @@ title: 相似度量
         ></path>
       </svg>
     </button></h2><ul>
-<li>进一步了解 Milvus 支持的<a href="/docs/zh/index.md">索引类型</a>。</li>
+<li>进一步了解 Milvus 支持的<a href="/docs/zh/v2.4.x/index.md">索引类型</a>。</li>
 </ul>

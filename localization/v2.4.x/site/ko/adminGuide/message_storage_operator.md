@@ -343,6 +343,6 @@ spec:
       </svg>
     </button></h2><p>Milvus Operator로 다른 Milvus 종속 요소를 구성하는 방법을 알아보세요:</p>
 <ul>
-<li><a href="/docs/ko/object_storage_operator.md">Milvus 오퍼레이터로 오브젝트 스토리지 구성하기</a></li>
-<li><a href="/docs/ko/meta_storage_operator.md">Milvus 오퍼레이터로 메타 스토리지 구성하기</a></li>
+<li><a href="/docs/ko/v2.4.x/object_storage_operator.md">Milvus 오퍼레이터로 오브젝트 스토리지 구성하기</a></li>
+<li><a href="/docs/ko/v2.4.x/meta_storage_operator.md">Milvus 오퍼레이터로 메타 스토리지 구성하기</a></li>
 </ul>

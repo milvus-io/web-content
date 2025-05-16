@@ -19,7 +19,7 @@ summary: ''
         ></path>
       </svg>
     </button></h1><p>Milvus relies on various dependencies such as MinIO, Kafka, Pulsar, and etcd. Scaling these components can enhance Milvus’s adaptability to different requirements.</p>
-<p>For Milvus Operator users, please also refer to <a href="/docs/manage_dependencies.md">Manage Dependencies For Milvus Operator</a></p>
+<p>For Milvus Operator users, please also refer to <a href="/docs/v2.3.x/manage_dependencies.md">Manage Dependencies For Milvus Operator</a></p>
 <h2 id="Scale-MinIO" class="common-anchor-header">Scale MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

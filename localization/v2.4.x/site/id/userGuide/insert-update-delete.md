@@ -38,7 +38,7 @@ title: 'Menyisipkan, Menambah & Menghapus'
       </svg>
     </button></h2><ul>
 <li><p>Anda telah menginstal SDK pilihan Anda. Untuk menginstal SDK, lihat <a href="https://milvus.io/docs/install-pymilvus.md">Menginstal SDK</a>.</p></li>
-<li><p>Anda telah membuat koleksi. Untuk membuat koleksi, lihat <a href="/docs/id/manage-collections.md">Mengelola Koleksi</a>.</p></li>
+<li><p>Anda telah membuat koleksi. Untuk membuat koleksi, lihat <a href="/docs/id/v2.4.x/manage-collections.md">Mengelola Koleksi</a>.</p></li>
 <li><p>Untuk memasukkan data dalam jumlah besar, Anda disarankan untuk menggunakan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Impor Data</a>.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -58,7 +58,7 @@ title: 'Menyisipkan, Menambah & Menghapus'
       </svg>
     </button></h2><p>Entitas, dalam konteks koleksi Milvus, adalah contoh tunggal yang dapat diidentifikasi dalam sebuah koleksi. Entitas ini mewakili anggota yang berbeda dari kelas tertentu, baik itu buku di perpustakaan, gen dalam genom, atau entitas lain yang dapat diidentifikasi.</p>
 <p>Entitas dalam koleksi memiliki sekumpulan atribut yang sama, yang disebut skema, yang menguraikan struktur yang harus dipatuhi oleh setiap entitas, termasuk nama field, tipe data, dan batasan lainnya.</p>
-<p>Penyisipan entitas yang berhasil ke dalam koleksi mengharuskan data yang disediakan harus berisi semua bidang yang ditentukan skema dari koleksi target. Selain itu, Anda juga dapat menyertakan bidang yang tidak ditentukan skema hanya jika Anda telah mengaktifkan bidang dinamis. Untuk detailnya, lihat <a href="/docs/id/enable-dynamic-field.md">Mengaktifkan Bidang Dinamis</a>.</p>
+<p>Penyisipan entitas yang berhasil ke dalam koleksi mengharuskan data yang disediakan harus berisi semua bidang yang ditentukan skema dari koleksi target. Selain itu, Anda juga dapat menyertakan bidang yang tidak ditentukan skema hanya jika Anda telah mengaktifkan bidang dinamis. Untuk detailnya, lihat <a href="/docs/id/v2.4.x/enable-dynamic-field.md">Mengaktifkan Bidang Dinamis</a>.</p>
 <h2 id="Preparations" class="common-anchor-header">Persiapan<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -382,7 +382,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Keluarannya adalah kamus yang berisi statistik entitas yang terpengaruh. Untuk detail tentang operasi partisi, lihat <a href="/docs/id/manage-partitions.md">Mengelola Partisi</a>.</p>
+<p>Keluarannya adalah kamus yang berisi statistik entitas yang terpengaruh. Untuk detail tentang operasi partisi, lihat <a href="/docs/id/v2.4.x/manage-partitions.md">Mengelola Partisi</a>.</p>
 <h2 id="Upsert-entities" class="common-anchor-header">Memasukkan entitas<button data-href="#Upsert-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -587,7 +587,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Keluarannya adalah kamus yang berisi statistik entitas yang terpengaruh. Untuk detail tentang operasi partisi, lihat <a href="/docs/id/manage-partitions.md">Mengelola Partisi</a>.</p>
+<p>Keluarannya adalah kamus yang berisi statistik entitas yang terpengaruh. Untuk detail tentang operasi partisi, lihat <a href="/docs/id/v2.4.x/manage-partitions.md">Mengelola Partisi</a>.</p>
 <h2 id="Delete-entities" class="common-anchor-header">Menghapus entitas<button data-href="#Delete-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -708,7 +708,7 @@ System.out.<span class="hljs-built_in">println</span>(deleteResp.getDeleteCnt())
 <span class="hljs-comment">// 2</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk detail tentang cara menggunakan ekspresi filter, lihat <a href="/docs/id/get-and-scalar-query.md">Dapatkan &amp; Kueri Skalar</a>.</p></li>
+<p>Untuk detail tentang cara menggunakan ekspresi filter, lihat <a href="/docs/id/v2.4.x/get-and-scalar-query.md">Dapatkan &amp; Kueri Skalar</a>.</p></li>
 <li><p><strong>Menghapus entitas berdasarkan nama partisi</strong>.</p>
 <p>Jika Anda ingin menghapus entitas dari partisi tertentu, Anda dapat menentukan nama partisi dengan parameter <code translate="no">partition_name</code> dalam metode <code translate="no">delete()</code>. Contoh berikut ini menghapus entitas dari <code translate="no">partitionA</code> yang memiliki warna yang dimulai dengan <code translate="no">blue</code>.</p>
 <p><div class="multipleCode">

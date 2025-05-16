@@ -42,7 +42,7 @@ summary: Learn how to configure message storage with Docker Compose or Helm.
   port: <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
   maxMessageSize: <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>See <a href="/docs/configure_pulsar.md">Pulsar-related configurations</a> for more information.</p>
+<p>See <a href="/docs/v2.2.x/configure_pulsar.md">Pulsar-related configurations</a> for more information.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Run Milvus</h3><p>Run the following command to start Milvus that uses the Pulsar configurations.</p>
 <pre><code translate="no">docker-compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -167,6 +167,6 @@ summary: Learn how to configure message storage with Docker Compose or Helm.
       </svg>
     </button></h2><p>Learn how to configure other Milvus dependencies with Docker Compose or Helm:</p>
 <ul>
-<li><a href="/docs/deploy_s3.md">Configure Object Storage with Docker Compose or Helm</a></li>
-<li><a href="/docs/deploy_etcd.md">Configure Meta Storage with Docker Compose or Helm</a></li>
+<li><a href="/docs/v2.2.x/deploy_s3.md">Configure Object Storage with Docker Compose or Helm</a></li>
+<li><a href="/docs/v2.2.x/deploy_etcd.md">Configure Meta Storage with Docker Compose or Helm</a></li>
 </ul>

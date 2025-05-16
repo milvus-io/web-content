@@ -230,7 +230,7 @@ helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>Nei comandi precedenti, aggiungiamo il repo dei grafici di Milvus Helm in locale e aggiorniamo il repo per recuperare i grafici più recenti. Poi installiamo un'istanza di Milvus e la chiamiamo <strong>my-release</strong>.</p>
 <p>Notate il valore <code translate="no">service.type</code>, che indica che vogliamo esporre l'istanza di Milvus attraverso un bilanciatore di carico Layer-4.</p>
-<p>Se volete esporre la vostra istanza Milvus attraverso un bilanciatore di carico Layer-7, <a href="/docs/it/gcp_layer7.md">leggete qui</a>.</p>
+<p>Se volete esporre la vostra istanza Milvus attraverso un bilanciatore di carico Layer-7, <a href="/docs/it/v2.4.x/gcp_layer7.md">leggete qui</a>.</p>
 <h2 id="Verify-the-deployment" class="common-anchor-header">Verificare la distribuzione<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -282,6 +282,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>Se volete imparare a distribuire Milvus su altri cloud:</p>
 <ul>
-<li><a href="/docs/it/eks.md">Implementare il cluster Milvus su AWS con Kubernetes</a></li>
-<li><a href="/docs/it/azure.md">Distribuire il cluster Milvus su Azure con Kubernetes</a></li>
+<li><a href="/docs/it/v2.4.x/eks.md">Implementare il cluster Milvus su AWS con Kubernetes</a></li>
+<li><a href="/docs/it/v2.4.x/azure.md">Distribuire il cluster Milvus su Azure con Kubernetes</a></li>
 </ul>

@@ -19,7 +19,7 @@ title: インメモリレプリカ
         ></path>
       </svg>
     </button></h1><p>このトピックでは、Milvusのインメモリレプリカ(レプリケーション)メカニズムについて紹介します。このメカニズムでは、パフォーマンスと可用性を向上させるためにワーキングメモリ内で複数のセグメントレプリケーションを可能にします。</p>
-<p>インメモリ・レプリカの設定方法については、<a href="/docs/ja/configure_querynode.md#queryNodereplicas">クエリ・ノード関連の設定を</a>参照してください。</p>
+<p>インメモリ・レプリカの設定方法については、<a href="/docs/ja/v2.4.x/configure_querynode.md#queryNodereplicas">クエリ・ノード関連の設定を</a>参照してください。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

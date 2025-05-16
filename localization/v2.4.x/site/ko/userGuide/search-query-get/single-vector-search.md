@@ -1698,7 +1698,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <tr><td><code translate="no">HAMMING</code></td><td>해밍 거리가 작을수록 유사도가 높음을 나타냅니다.</td><td>결과에서 가장 가까운 벡터를 제외하려면<br/> <code translate="no">range_filter</code> &lt;= 거리 &lt;를 확인하세요. <code translate="no">radius</code></td></tr>
 </tbody>
 </table>
-<p>거리 메트릭 유형에 대해 자세히 알아보려면 <a href="/docs/ko/metric.md">유사성 메트릭을</a> 참조하세요.</p>
+<p>거리 메트릭 유형에 대해 자세히 알아보려면 <a href="/docs/ko/v2.4.x/metric.md">유사성 메트릭을</a> 참조하세요.</p>
 <h2 id="Grouping-search" class="common-anchor-header">그룹 검색<button data-href="#Grouping-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1826,8 +1826,8 @@ search_parameters = {
 <tr><td><code translate="no">metric_type</code></td><td>벡터 임베딩 간의 유사성을 측정하는 방법입니다.<br/> 사용 가능한 값은 <code translate="no">IP</code>, <code translate="no">L2</code>, <code translate="no">COSINE</code>, <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code> 이며, 기본값은 로드된 인덱스 파일의 값입니다.</td></tr>
 <tr><td><code translate="no">params.nprobe</code></td><td>검색 중에 쿼리할 단위 수입니다.<br/> 값은 [1, nlist<sub>[1]</sub>] 범위에 속합니다.</td></tr>
 <tr><td><code translate="no">params.level</code></td><td>검색 정밀도 수준.<br/> 가능한 값은 <code translate="no">1</code>, <code translate="no">2</code>, <code translate="no">3</code> 이며 기본값은 <code translate="no">1</code> 입니다. 값이 높을수록 더 정확한 결과를 얻을 수 있지만 성능이 느려집니다.</td></tr>
-<tr><td><code translate="no">params.radius</code></td><td>검색 공간의 외부 경계를 정의합니다. 쿼리 벡터로부터 이 거리 내에 있는 벡터만 잠재적 일치로 간주됩니다.<br/>값 범위는 <code translate="no">metric_type</code> 매개변수에 의해 결정됩니다. 예를 들어 <code translate="no">metric_type</code> 가 <code translate="no">L2</code> 으로 설정된 경우 유효한 값 범위는 <code translate="no">[0, ∞]</code> 입니다. <code translate="no">metric_type</code> 가 <code translate="no">COSINE</code> 로 설정된 경우 유효한 값 범위는 <code translate="no">[-1, 1]</code> 입니다. 자세한 내용은 <a href="/docs/ko/metric.md">유사성 지표를</a> 참조하세요.</td></tr>
-<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> 은 검색의 외부 한계를 설정하는 반면, <code translate="no">range_filter</code> 은 선택적으로 내부 경계를 정의하는 데 사용하여 벡터가 일치하는 것으로 간주되는 거리 범위를 만들 수 있습니다.<br/>값 범위는 <code translate="no">metric_type</code> 매개변수에 의해 결정됩니다. 예를 들어 <code translate="no">metric_type</code> 가 <code translate="no">L2</code> 로 설정된 경우 유효한 값 범위는 <code translate="no">[0, ∞]</code> 입니다. <code translate="no">metric_type</code> 가 <code translate="no">COSINE</code> 로 설정된 경우 유효한 값 범위는 <code translate="no">[-1, 1]</code> 입니다. 자세한 내용은 <a href="/docs/ko/metric.md">유사성 메트릭을</a> 참조하세요.</td></tr>
+<tr><td><code translate="no">params.radius</code></td><td>검색 공간의 외부 경계를 정의합니다. 쿼리 벡터로부터 이 거리 내에 있는 벡터만 잠재적 일치로 간주됩니다.<br/>값 범위는 <code translate="no">metric_type</code> 매개변수에 의해 결정됩니다. 예를 들어 <code translate="no">metric_type</code> 가 <code translate="no">L2</code> 으로 설정된 경우 유효한 값 범위는 <code translate="no">[0, ∞]</code> 입니다. <code translate="no">metric_type</code> 가 <code translate="no">COSINE</code> 로 설정된 경우 유효한 값 범위는 <code translate="no">[-1, 1]</code> 입니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/metric.md">유사성 지표를</a> 참조하세요.</td></tr>
+<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> 은 검색의 외부 한계를 설정하는 반면, <code translate="no">range_filter</code> 은 선택적으로 내부 경계를 정의하는 데 사용하여 벡터가 일치하는 것으로 간주되는 거리 범위를 만들 수 있습니다.<br/>값 범위는 <code translate="no">metric_type</code> 매개변수에 의해 결정됩니다. 예를 들어 <code translate="no">metric_type</code> 가 <code translate="no">L2</code> 로 설정된 경우 유효한 값 범위는 <code translate="no">[0, ∞]</code> 입니다. <code translate="no">metric_type</code> 가 <code translate="no">COSINE</code> 로 설정된 경우 유효한 값 범위는 <code translate="no">[-1, 1]</code> 입니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/metric.md">유사성 메트릭을</a> 참조하세요.</td></tr>
 </tbody>
 </table>
 <div class="admonition note">

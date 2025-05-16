@@ -7,7 +7,7 @@ group: install_standalone-docker.md
 summary: Learn how to install Milvus standalone with Docker.
 title: Install Milvus Standalone with Docker
 ---
-<div class="tab-wrapper"><a href="/docs/install_standalone-docker.md" class='active '>Docker</a><a href="/docs/install_standalone-operator.md" class=''>Milvus Operator</a><a href="/docs/install_standalone-helm.md" class=''>Helm</a><a href="/docs/install_standalone-aptyum.md" class=''>DEB/RPM</a><a href="/docs/install_standalone-docker-compose.md" class=''>Docker Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/v2.3.x/install_standalone-docker.md" class='active '>Docker</a><a href="/docs/v2.3.x/install_standalone-operator.md" class=''>Milvus Operator</a><a href="/docs/v2.3.x/install_standalone-helm.md" class=''>Helm</a><a href="/docs/v2.3.x/install_standalone-aptyum.md" class=''>DEB/RPM</a><a href="/docs/v2.3.x/install_standalone-docker-compose.md" class=''>Docker Compose</a></div>
 <h1 id="Install-Milvus-Standalone-with-Docker" class="common-anchor-header">Install Milvus Standalone with Docker<button data-href="#Install-Milvus-Standalone-with-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ title: Install Milvus Standalone with Docker
       </svg>
     </button></h2><ul>
 <li><p><a href="https://docs.docker.com/get-docker/">Install Docker</a>.</p></li>
-<li><p><a href="/docs/prerequisite-helm.md">Check the requirements for hardware and software</a> prior to your installation.</p></li>
+<li><p><a href="/docs/v2.3.x/prerequisite-helm.md">Check the requirements for hardware and software</a> prior to your installation.</p></li>
 </ul>
 <h2 id="Install-Milvus-Standalone-with-Docker" class="common-anchor-header">Install Milvus Standalone with Docker<button data-href="#Install-Milvus-Standalone-with-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,19 +92,19 @@ Please refer to <a href="https://milvus.io/docs/example_code.md">Hello Milvus</a
       </svg>
     </button></h2><p>Having installed Milvus, you can:</p>
 <ul>
-<li><p>Check <a href="/docs/example_code.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
-<li><p>Check <a href="/docs/index.md">In-memory Index</a> for more about CPU-compatible index types.</p></li>
+<li><p>Check <a href="/docs/v2.3.x/example_code.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
+<li><p>Check <a href="/docs/v2.3.x/index.md">In-memory Index</a> for more about CPU-compatible index types.</p></li>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/manage_connection.md">Connect to Milvus server</a></li>
-<li><a href="/docs/manage_databases.md">Manage Databases</a></li>
-<li><a href="/docs/create_collection.md">Create a collection</a></li>
-<li><a href="/docs/create_partition.md">Create a partition</a></li>
-<li><a href="/docs/insert_data.md">Insert data</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.3.x/manage_connection.md">Connect to Milvus server</a></li>
+<li><a href="/docs/v2.3.x/manage_databases.md">Manage Databases</a></li>
+<li><a href="/docs/v2.3.x/create_collection.md">Create a collection</a></li>
+<li><a href="/docs/v2.3.x/create_partition.md">Create a partition</a></li>
+<li><a href="/docs/v2.3.x/insert_data.md">Insert data</a></li>
+<li><a href="/docs/v2.3.x/search.md">Conduct a vector search</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
-<li><p>Explore <a href="/docs/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
+<li><p>Explore <a href="/docs/v2.3.x/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
+<li><p>Explore <a href="/docs/v2.3.x/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
 <li><p>Explore <a href="https://milvus.io/docs/attu.md">Attu</a>, an open-source GUI tool for intuitive Milvus management.</p></li>
-<li><p><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a></p></li>
+<li><p><a href="/docs/v2.3.x/monitor.md">Monitor Milvus with Prometheus</a></p></li>
 </ul>

@@ -21,7 +21,7 @@ title: Panoramica sui reranker
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Nel campo del recupero delle informazioni e dell'intelligenza artificiale generativa, un reranker è uno strumento essenziale che ottimizza l'ordine dei risultati delle ricerche iniziali. I reranker si differenziano dai tradizionali <a href="/docs/it/embeddings.md">modelli di embedding</a> perché prendono in input una query e un documento e restituiscono direttamente un punteggio di somiglianza, anziché un embedding. Questo punteggio indica la rilevanza tra la query e il documento in ingresso.</p>
+    </button></h1><p>Nel campo del recupero delle informazioni e dell'intelligenza artificiale generativa, un reranker è uno strumento essenziale che ottimizza l'ordine dei risultati delle ricerche iniziali. I reranker si differenziano dai tradizionali <a href="/docs/it/v2.4.x/embeddings.md">modelli di embedding</a> perché prendono in input una query e un documento e restituiscono direttamente un punteggio di somiglianza, anziché un embedding. Questo punteggio indica la rilevanza tra la query e il documento in ingresso.</p>
 <p>I rechercher sono spesso impiegati dopo il primo stadio di recupero, tipicamente effettuato tramite tecniche vettoriali di Approximate Nearest Neighbor (ANN). Sebbene le ricerche ANN siano efficienti nel reperire un ampio insieme di risultati potenzialmente rilevanti, non sempre riescono a dare priorità ai risultati in termini di effettiva vicinanza semantica alla query. In questo caso, rerankers viene utilizzato per ottimizzare l'ordine dei risultati utilizzando analisi contestuali più approfondite, spesso sfruttando modelli avanzati di apprendimento automatico come BERT o altri modelli basati su Transformer. In questo modo, rerankers può migliorare notevolmente l'accuratezza e la pertinenza dei risultati finali presentati all'utente.</p>
 <p>La libreria di modelli PyMilvus integra funzioni di rerank per ottimizzare l'ordine dei risultati restituiti dalle ricerche iniziali. Dopo aver recuperato gli incorporamenti più vicini da Milvus, è possibile sfruttare questi strumenti di reranking per affinare i risultati della ricerca e migliorare la precisione dei risultati.</p>
 <table>
@@ -57,7 +57,7 @@ title: Panoramica sui reranker
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In questo esempio, dimostriamo come classificare i risultati di una ricerca utilizzando il <a href="/docs/it/rerankers-bge.md">reranker</a> di <a href="/docs/it/rerankers-bge.md">BGE</a> in base a una query specifica.</p>
+    </button></h2><p>In questo esempio, dimostriamo come classificare i risultati di una ricerca utilizzando il <a href="/docs/it/v2.4.x/rerankers-bge.md">reranker</a> di <a href="/docs/it/v2.4.x/rerankers-bge.md">BGE</a> in base a una query specifica.</p>
 <p>Per utilizzare un reranker con la libreria <a href="https://github.com/milvus-io/milvus-model">di modelli PyMilvus</a>, è necessario installare la libreria di modelli PyMilvus e il sottopacchetto dei modelli, che contiene tutte le utility di reranking necessarie:</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus[model]
 <span class="hljs-comment"># or pip install &quot;pymilvus[model]&quot; for zsh.</span>
@@ -115,7 +115,7 @@ documents = [
 <p><strong>Componenti del dataset</strong>:</p>
 <ul>
 <li><code translate="no">doc_id</code>: Identificatore univoco per ogni documento.</li>
-<li><code translate="no">doc_vector</code>: Embeddings vettoriali che rappresentano il documento. Per una guida alla generazione di embeddings, fare riferimento a <a href="/docs/it/embeddings.md">Embeddings</a>.</li>
+<li><code translate="no">doc_vector</code>: Embeddings vettoriali che rappresentano il documento. Per una guida alla generazione di embeddings, fare riferimento a <a href="/docs/it/v2.4.x/embeddings.md">Embeddings</a>.</li>
 <li><code translate="no">doc_text</code>: Contenuto testuale del documento.</li>
 </ul>
 <h3 id="Preparations" class="common-anchor-header">Preparazione</h3><p>Prima di avviare una ricerca di somiglianza, è necessario stabilire una connessione con Milvus, creare una raccolta e preparare e inserire i dati in tale raccolta. Il seguente frammento di codice illustra queste fasi preliminari.</p>

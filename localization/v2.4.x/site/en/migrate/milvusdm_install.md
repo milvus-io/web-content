@@ -85,7 +85,7 @@ go get &amp; go build
       </svg>
     </button></h2><p>Having the Milvus-migration tool installed, you can migrate data from various sources:</p>
 <ul>
-<li><a href="/docs/es2m.md">From Elasticsearch</a></li>
-<li><a href="/docs/f2m.md">From Faiss</a></li>
-<li><a href="/docs/m2m.md">From Milvus 1.x</a></li>
+<li><a href="/docs/es2m.md/v2.4.x">From Elasticsearch</a></li>
+<li><a href="/docs/f2m.md/v2.4.x">From Faiss</a></li>
+<li><a href="/docs/m2m.md/v2.4.x">From Milvus 1.x</a></li>
 </ul>

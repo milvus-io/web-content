@@ -183,7 +183,7 @@ partition.load(replica_number=<span class="hljs-number">2</span>, _resource_grou
 <p>Обратите внимание, что <code translate="no">_resource_groups</code> - необязательный параметр, и если его не указывать, Milvus загрузит реплики на узлы запросов в группе ресурсов по умолчанию.</p>
 <p>Чтобы Milus загружал каждую реплику коллекции в отдельную группу ресурсов, убедитесь, что количество групп ресурсов равно количеству реплик.</p></li>
 <li><p>Передача реплик между группами ресурсов.</p>
-<p>Milvus использует <a href="/docs/ru/replica.md">реплики</a> для балансировки нагрузки между <a href="/docs/ru/glossary.md#Segment">сегментами</a>, распределенными по нескольким узлам запросов. Вы можете переместить определенные реплики коллекции из одной группы ресурсов в другую следующим образом:</p>
+<p>Milvus использует <a href="/docs/ru/v2.4.x/replica.md">реплики</a> для балансировки нагрузки между <a href="/docs/ru/v2.4.x/glossary.md#Segment">сегментами</a>, распределенными по нескольким узлам запросов. Вы можете переместить определенные реплики коллекции из одной группы ресурсов в другую следующим образом:</p>
 <pre><code translate="no" class="language-Python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>Чтобы развернуть многопользовательский экземпляр Milvus, прочтите следующее:</p>
 <ul>
-<li><a href="/docs/ru/rbac.md">Включение RBAC</a></li>
-<li><a href="/docs/ru/users_and_roles.md">Пользователи и роли</a></li>
+<li><a href="/docs/ru/v2.4.x/rbac.md">Включение RBAC</a></li>
+<li><a href="/docs/ru/v2.4.x/users_and_roles.md">Пользователи и роли</a></li>
 </ul>

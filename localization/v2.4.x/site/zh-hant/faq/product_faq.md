@@ -43,7 +43,7 @@ title: 產品常見問題
 <h4 id="Can-indexes-be-created-after-inserting-vectors" class="common-anchor-header">插入向量後可以建立索引嗎？</h4><p>是的。如果之前<code translate="no">create_index()</code> 已經為一個集合建立了索引，Milvus 會自動為隨後插入的向量建立索引。然而，Milvus 在新插入的向量填滿整個區段之前不會建立索引，而且新建立的索引檔案與之前的檔案是分開的。</p>
 <h4 id="How-are-the-FLAT-and-IVFFLAT-indexes-different" class="common-anchor-header">FLAT 和 IVF_FLAT 索引有什麼不同？</h4><p>IVF_FLAT 索引將向量空間分為列表簇。在預設的列表值為 16,384 時，Milvus 會比較目標向量與所有 16,384 個簇的中心點之間的距離，以回傳探針最近的簇。接著，Milvus 會比較目標向量和選取的叢集中向量之間的距離，以得到最近的向量。與 IVF_FLAT 不同，FLAT 直接比較目標向量與其他向量之間的距離。</p>
 <p>當向量的總數大約等於 nlist 時，IVF_FLAT 和 FLAT 在計算需求和搜尋效能上的距離不大。然而，當向量的數量超過 nlist 的兩倍以上時，IVF_FLAT 就開始展現出效能優勢。</p>
-<p>更多資訊請參閱<a href="/docs/zh-hant/index.md">向量索引</a>。</p>
+<p>更多資訊請參閱<a href="/docs/zh-hant/v2.4.x/index.md">向量索引</a>。</p>
 <h4 id="How-does-Milvus-flush-data" class="common-anchor-header">Milvus 如何刷新資料？</h4><p>當插入的資料被攝取到訊息佇列時，Milvus 會返回成功。然而，資料尚未刷新到磁碟。然後 Milvus 的資料節點會將訊息佇列中的資料以增量日誌的方式寫入持久性儲存空間。如果呼叫<code translate="no">flush()</code> ，資料節點會被強制立即將訊息佇列中的所有資料寫入持久性儲存空間。</p>
 <h4 id="What-is-normalization-Why-is-normalization-needed" class="common-anchor-header">什麼是規範化？為什麼需要規範化？</h4><p>規範化是指轉換向量使其規範等於 1 的過程。如果使用內積來計算向量相似性，向量就必須歸一化。歸一化之後，內積等於余弦相似度。</p>
 <p>更多資訊請參閱<a href="https://en.wikipedia.org/wiki/Unit_vector">維基百科</a>。</p>
@@ -55,11 +55,11 @@ title: 產品常見問題
 <h4 id="Why-do-I-get-fewer-than-k-vectors-when-searching-for-topk-vectors" class="common-anchor-header">搜尋<code translate="no">topk</code> 向量時，為何得到的向量少於 k 個？</h4><p>在 Milvus 支援的索引中，IVF_FLAT 和 IVF_SQ8 實作 k-means 聚類方法。一個資料空間會被分割成<code translate="no">nlist</code> 叢集，而插入的向量會分佈到這些叢集中。然後，Milvus 選擇<code translate="no">nprobe</code> 最近的簇，比較目標向量與所選簇中所有向量的距離，並傳回最後的結果。</p>
 <p>如果<code translate="no">nlist</code> 和<code translate="no">topk</code> 較大，而 nprobe 較小，則 nprobe 叢集中的向量數目可能會少於<code translate="no">k</code> 。因此，當您搜尋<code translate="no">topk</code> 最近的向量時，返回的向量數目會少於<code translate="no">k</code> 。</p>
 <p>要避免這種情況，請嘗試將<code translate="no">nprobe</code> 設得大一些，將<code translate="no">nlist</code> 和<code translate="no">k</code> 設得小一些。</p>
-<p>更多資訊請參閱<a href="/docs/zh-hant/index.md">向量索引</a>。</p>
+<p>更多資訊請參閱<a href="/docs/zh-hant/v2.4.x/index.md">向量索引</a>。</p>
 <h4 id="What-is-the-maximum-vector-dimension-supported-in-Milvus" class="common-anchor-header">Milvus 支援的最大向量維度是多少？</h4><p>Milvus 預設最多可以管理 32,768 維度的向量。您可以增加<code translate="no">Proxy.maxDimension</code> 的值，以允許更大維度的向量。</p>
 <h4 id="Does-Milvus-support-Apple-M1-CPU" class="common-anchor-header">Milvus 支援 Apple M1 CPU 嗎？</h4><p>目前的 Milvus 版本不直接支援蘋果 M1 CPU。Milvus 2.3 之後，Milvus 提供 ARM64 架構的 Docker 映像檔。</p>
 <h4 id="What-data-types-does-Milvus-support-on-the-primary-key-field" class="common-anchor-header">Milvus 的主鍵欄位支援哪些資料類型？</h4><p>在目前的版本中，Milvus 支援 INT64 和字串。</p>
-<h4 id="Is-Milvus-scalable" class="common-anchor-header">Milvus 是否可擴充？</h4><p>是的，您可以透過 Kubernetes 上的 Helm Chart 部署多個節點的 Milvus 集群。更多說明，請參考<a href="/docs/zh-hant/scaleout.md">Scale Guide</a>。</p>
+<h4 id="Is-Milvus-scalable" class="common-anchor-header">Milvus 是否可擴充？</h4><p>是的，您可以透過 Kubernetes 上的 Helm Chart 部署多個節點的 Milvus 集群。更多說明，請參考<a href="/docs/zh-hant/v2.4.x/scaleout.md">Scale Guide</a>。</p>
 <h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">什麼是 Growing segment 和 sealed segment？</h4><p>當有搜尋要求時，Milvus 會同時搜尋增量資料和歷史資料。增量資料是最近的更新，它們會儲存在成長中的區段，在它們達到要持久化到物件儲存的臨界值之前，這些區段會在記憶體中緩衝，並為它們建立更有效率的索引；而歷史資料是一段時間前的更新。歷史資料則是前一陣子的更新，它們位於已持久化到物件儲存空間的封存區段中。增量資料和歷史資料共同構成搜尋的整個資料集。這樣的設計使得任何輸入到 Milvus 的資料都可以立即搜尋。對於 Milvus Distributed 而言，有更多複雜的因素決定剛擷取的記錄何時可以顯示在搜尋結果中。了解更多關於<a href="https://milvus.io/docs/consistency.md">一致性層級</a>的細節。</p>
 <h4 id="Is-Milvus-available-for-concurrent-search" class="common-anchor-header">Milvus 是否可用於並發搜尋？</h4><p>是的。對於同一個資料集的查詢，Milvus 可以同時搜尋增量和歷史資料。但是，對不同集合的查詢是串聯進行的。而歷史資料可能是一個極為龐大的資料集，在歷史資料上的搜尋相對地更耗費時間，基本上是串聯進行的。</p>
 <h4 id="Why-does-the-data-in-MinIO-remain-after-the-corresponding-collection-is-dropped" class="common-anchor-header">為什麼 MinIO 中的資料在相對應的資料集被刪除後仍會保留？</h4><p>MinIO 中的資料被設計成保留一段時間，以方便資料回滾。</p>

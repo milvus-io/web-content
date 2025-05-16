@@ -154,6 +154,6 @@ summary: 이 문서에서는 Milvus를 다른 벡터 검색 솔루션과 비교�
       </svg>
     </button></h2><ul>
 <li><p><strong>체험판</strong>: Milvus <a href="https://milvus.io/docs/quickstart.md">퀵스타트로</a> 시작하거나 <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">Zilliz Cloud에 가입하여</a> Milvus를 직접 체험해 보세요.</p></li>
-<li><p><strong>자세히 알아보기</strong>: 포괄적인 <a href="/docs/ko/glossary.md">용어</a> 및 <a href="https://milvus.io/docs/manage-collections.md">사용 가이드를</a> 통해 Milvus의 기능에 대해 자세히 알아보세요.</p></li>
+<li><p><strong>자세히 알아보기</strong>: 포괄적인 <a href="/docs/ko/v2.4.x/glossary.md">용어</a> 및 <a href="https://milvus.io/docs/manage-collections.md">사용 가이드를</a> 통해 Milvus의 기능에 대해 자세히 알아보세요.</p></li>
 <li><p><strong>대안 살펴보기</strong>: 벡터 데이터베이스 옵션을 폭넓게 비교하려면 <a href="https://zilliz.com/comparison">이 페이지에서</a> 추가 리소스를 살펴보세요.</p></li>
 </ul>

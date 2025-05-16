@@ -28,9 +28,9 @@ summary: >-
 <p>Wie Sie ein Projekt erstellen, erfahren Sie unter <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Erstellen und Verwalten von Projekten</a>. Der Name des in diesem Leitfaden verwendeten Projekts ist <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>Sie haben <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> und <a href="https://helm.sh/docs/intro/install/">Helm</a> lokal installiert oder sich entschieden, stattdessen die browserbasierte <a href="https://cloud.google.com/shell">Cloud Shell</a> zu verwenden.</p></li>
 <li><p>Sie haben <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">die gcloud CLI</a> mit Ihren GCP-Kontoanmeldeinformationen <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">initialisiert</a>.</p></li>
-<li><p>Sie haben <a href="/docs/de/gcp.md">einen Milvus-Cluster hinter einem Layer-4-Loadbalancer auf GCP bereitgestellt</a>.</p></li>
+<li><p>Sie haben <a href="/docs/de/v2.4.x/gcp.md">einen Milvus-Cluster hinter einem Layer-4-Loadbalancer auf GCP bereitgestellt</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Anpassen der Milvus-Konfigurationen</h3><p>In dieser Anleitung wird davon ausgegangen, dass Sie bereits <a href="/docs/de/gcp.md">einen Milvus-Cluster hinter einem Layer-4-Loadbalancer auf GCP bereitgestellt</a> haben.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Anpassen der Milvus-Konfigurationen</h3><p>In dieser Anleitung wird davon ausgegangen, dass Sie bereits <a href="/docs/de/v2.4.x/gcp.md">einen Milvus-Cluster hinter einem Layer-4-Loadbalancer auf GCP bereitgestellt</a> haben.</p>
 <p>Bevor Sie einen Layer-7-Loadbalancer für diesen Milvus-Cluster einrichten, führen Sie den folgenden Befehl aus, um den Layer-4-Loadbalancer zu entfernen.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

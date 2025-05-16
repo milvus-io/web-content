@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: Découvrez comment mettre à niveau Milvus en mode autonome avec Docker Compose.
 title: Mise à niveau de Milvus Standalone avec Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/fr/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/fr/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/fr/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/fr/v2.4.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/fr/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/fr/v2.4.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Mise à niveau de Milvus Standalone avec Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,11 +122,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>Vous pouvez également apprendre à<ul>
-<li><a href="/docs/fr/scaleout.md">Faire évoluer un cluster Milvus</a></li>
+<li><a href="/docs/fr/v2.4.x/scaleout.md">Faire évoluer un cluster Milvus</a></li>
 </ul></li>
 <li>Si vous êtes prêt à déployer votre cluster sur des clouds :<ul>
-<li>Apprendre à <a href="/docs/fr/eks.md">déployer Milvus sur Amazon EKS avec Terraform</a></li>
-<li>Apprendre à <a href="/docs/fr/gcp.md">déployer le cluster Milvus sur GCP avec Kubernetes</a></li>
-<li>Apprendre à <a href="/docs/fr/azure.md">déployer Milvus sur Microsoft Azure avec Kubernetes</a></li>
+<li>Apprendre à <a href="/docs/fr/v2.4.x/eks.md">déployer Milvus sur Amazon EKS avec Terraform</a></li>
+<li>Apprendre à <a href="/docs/fr/v2.4.x/gcp.md">déployer le cluster Milvus sur GCP avec Kubernetes</a></li>
+<li>Apprendre à <a href="/docs/fr/v2.4.x/azure.md">déployer Milvus sur Microsoft Azure avec Kubernetes</a></li>
 </ul></li>
 </ul>

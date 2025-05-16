@@ -21,7 +21,7 @@ title: Visão geral dos rerankers
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>No domínio da recuperação de informação e da IA generativa, um reranker é uma ferramenta essencial que optimiza a ordem dos resultados das pesquisas iniciais. Os rerankers diferem dos <a href="/docs/pt/embeddings.md">modelos de incorporação</a> tradicionais, pois recebem uma consulta e um documento como entrada e devolvem diretamente uma pontuação de semelhança em vez de incorporação. Esta pontuação indica a relevância entre a consulta e o documento de entrada.</p>
+    </button></h1><p>No domínio da recuperação de informação e da IA generativa, um reranker é uma ferramenta essencial que optimiza a ordem dos resultados das pesquisas iniciais. Os rerankers diferem dos <a href="/docs/pt/v2.4.x/embeddings.md">modelos de incorporação</a> tradicionais, pois recebem uma consulta e um documento como entrada e devolvem diretamente uma pontuação de semelhança em vez de incorporação. Esta pontuação indica a relevância entre a consulta e o documento de entrada.</p>
 <p>Os reposicionadores são frequentemente utilizados após a primeira fase de recuperação, normalmente efectuada através de técnicas vectoriais de vizinho mais próximo aproximado (ANN). Embora as pesquisas ANN sejam eficientes na obtenção de um vasto conjunto de resultados potencialmente relevantes, podem nem sempre dar prioridade aos resultados em termos de proximidade semântica efectiva com a consulta. Neste caso, o rerankers é utilizado para otimizar a ordem dos resultados utilizando análises contextuais mais profundas, muitas vezes tirando partido de modelos avançados de aprendizagem automática como o BERT ou outros modelos baseados no Transformer. Ao fazê-lo, os rerankers podem aumentar drasticamente a precisão e a relevância dos resultados finais apresentados ao utilizador.</p>
 <p>A biblioteca de modelos PyMilvus integra funções de rerank para otimizar a ordem dos resultados devolvidos pelas pesquisas iniciais. Depois de ter recuperado as incorporações mais próximas do Milvus, pode utilizar estas ferramentas de classificação para refinar os resultados da pesquisa e aumentar a precisão dos resultados da pesquisa.</p>
 <table>
@@ -57,7 +57,7 @@ title: Visão geral dos rerankers
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Neste exemplo, demonstramos como classificar os resultados de pesquisa usando o <a href="/docs/pt/rerankers-bge.md">reranker do BGE</a> com base em uma consulta específica.</p>
+    </button></h2><p>Neste exemplo, demonstramos como classificar os resultados de pesquisa usando o <a href="/docs/pt/v2.4.x/rerankers-bge.md">reranker do BGE</a> com base em uma consulta específica.</p>
 <p>Para utilizar um reranker com a biblioteca de <a href="https://github.com/milvus-io/milvus-model">modelos PyMilvus</a>, comece por instalar a biblioteca de modelos PyMilvus juntamente com o subpacote de modelos que contém todos os utilitários de classificação necessários:</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus[model]
 <span class="hljs-comment"># or pip install &quot;pymilvus[model]&quot; for zsh.</span>
@@ -115,7 +115,7 @@ documents = [
 <p><strong>Componentes do conjunto de dados</strong>:</p>
 <ul>
 <li><code translate="no">doc_id</code>: Identificador único para cada documento.</li>
-<li><code translate="no">doc_vector</code>: Embeddings vectoriais que representam o documento. Para obter orientação sobre como gerar embeddings, consulte <a href="/docs/pt/embeddings.md">Embeddings</a>.</li>
+<li><code translate="no">doc_vector</code>: Embeddings vectoriais que representam o documento. Para obter orientação sobre como gerar embeddings, consulte <a href="/docs/pt/v2.4.x/embeddings.md">Embeddings</a>.</li>
 <li><code translate="no">doc_text</code>: Conteúdo do texto do documento.</li>
 </ul>
 <h3 id="Preparations" class="common-anchor-header">Preparativos</h3><p>Antes de iniciar uma pesquisa por semelhança, é necessário estabelecer uma ligação com o Milvus, criar uma coleção e preparar e inserir dados nessa coleção. O trecho de código a seguir ilustra essas etapas preliminares.</p>

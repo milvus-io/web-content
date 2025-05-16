@@ -156,6 +156,6 @@ summary: Milvusの時間同期システムについて学ぶ。
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ja/timestamp.md">タイムスタンプの</a>概念について学ぶ。</li>
-<li>Milvusの<a href="/docs/ja/data_processing.md">データ処理ワークフローについて</a>学ぶ。</li>
+<li><a href="/docs/ja/v2.4.x/timestamp.md">タイムスタンプの</a>概念について学ぶ。</li>
+<li>Milvusの<a href="/docs/ja/v2.4.x/data_processing.md">データ処理ワークフローについて</a>学ぶ。</li>
 </ul>

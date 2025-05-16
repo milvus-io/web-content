@@ -19,7 +19,7 @@ summary: Kubernetes上のMilvusにリソースを割り当てる方法を学ぶ�
         ></path>
       </svg>
     </button></h1><p>このトピックでは、Kubernetes上のMilvusクラスタにリソースを割り当てる方法について説明します。</p>
-<p>一般的に、本番環境のMilvusクラスタに割り当てるリソースは、マシンのワークロードに比例する必要があります。また、リソースを割り当てる際にはマシンタイプも考慮する必要があります。クラスタの実行中に設定を更新することもできますが、<a href="/docs/ja/install_cluster-helm.md">クラスタをデプロイする</a>前に値を設定することをお勧めします。</p>
+<p>一般的に、本番環境のMilvusクラスタに割り当てるリソースは、マシンのワークロードに比例する必要があります。また、リソースを割り当てる際にはマシンタイプも考慮する必要があります。クラスタの実行中に設定を更新することもできますが、<a href="/docs/ja/v2.4.x/install_cluster-helm.md">クラスタをデプロイする</a>前に値を設定することをお勧めします。</p>
 <div class="alert note">
 <p>Milvus Operatorを使用してリソースを割り当てる方法については、<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/allocate-resources.md#allocate-resources-with-milvus-operator">Milvus Operatorを使用してリソースを割り当てるを</a>参照してください。</p>
 </div>
@@ -59,8 +59,8 @@ summary: Kubernetes上のMilvusにリソースを割り当てる方法を学ぶ�
 Helmを使用してリソースをアップグレードすると、実行中のポッドがローリングアップデートを実行します。</div>
 <p>リソースを割り当てるには2つの方法があります：</p>
 <ul>
-<li><a href="/docs/ja/allocate.md#Allocate-resources-with-commands">コマンドを使用する</a></li>
-<li><a href="/docs/ja/allocate.md#Allocate-resources-by-setting-configuration-file"> <code translate="no">YAML</code> ファイルでパラメータを設定する</a></li>
+<li><a href="/docs/ja/v2.4.x/allocate.md#Allocate-resources-with-commands">コマンドを使用する</a></li>
+<li><a href="/docs/ja/v2.4.x/allocate.md#Allocate-resources-by-setting-configuration-file"> <code translate="no">YAML</code> ファイルでパラメータを設定する</a></li>
 </ul>
 <h3 id="Allocate-resources-with-commands" class="common-anchor-header">コマンドでリソースを割り当てる</h3><p><code translate="no">--set</code> を使用してリソース設定を更新する場合は、Milvus コンポーネントごとにリソース変数を設定する必要があります。</p>
 <div class="filter">
@@ -129,13 +129,13 @@ Helmを使用してリソースをアップグレードすると、実行中の�
       </svg>
     </button></h2><ul>
 <li>次の方法についても学びましょう：<ul>
-<li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></li>
-<li><a href="/docs/ja/upgrade_milvus_cluster-operator.md">Milvusクラスタのアップグレード</a></li>
-<li><a href="/docs/ja/upgrade_milvus_standalone-operator.md">Milvusスタンドアロンのアップグレード</a></li>
+<li><a href="/docs/ja/v2.4.x/scaleout.md">Milvusクラスタのスケール</a></li>
+<li><a href="/docs/ja/v2.4.x/upgrade_milvus_cluster-operator.md">Milvusクラスタのアップグレード</a></li>
+<li><a href="/docs/ja/v2.4.x/upgrade_milvus_standalone-operator.md">Milvusスタンドアロンのアップグレード</a></li>
 </ul></li>
 <li>クラウド上にクラスタをデプロイする準備ができたら<ul>
-<li><a href="/docs/ja/eks.md">Terraformを使ったAmazon EKSへのMilvusのデプロイ</a>方法</li>
-<li><a href="/docs/ja/gcp.md">Kubernetesを使ってGCPにMilvusクラスタをデプロイ</a>する方法</li>
-<li><a href="/docs/ja/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法</li>
+<li><a href="/docs/ja/v2.4.x/eks.md">Terraformを使ったAmazon EKSへのMilvusのデプロイ</a>方法</li>
+<li><a href="/docs/ja/v2.4.x/gcp.md">Kubernetesを使ってGCPにMilvusクラスタをデプロイ</a>する方法</li>
+<li><a href="/docs/ja/v2.4.x/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法</li>
 </ul></li>
 </ul>

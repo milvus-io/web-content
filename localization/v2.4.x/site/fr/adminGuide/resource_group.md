@@ -183,7 +183,7 @@ partition.load(replica_number=<span class="hljs-number">2</span>, _resource_grou
 <p>Notez que <code translate="no">_resource_groups</code> est un paramètre facultatif et que s'il n'est pas spécifié, Milvus chargera les répliques sur les nœuds de requête dans le groupe de ressources par défaut.</p>
 <p>Pour que Milus charge chaque réplique d'une collection dans un groupe de ressources distinct, assurez-vous que le nombre de groupes de ressources est égal au nombre de répliques.</p></li>
 <li><p>Transférer les répliques entre les groupes de ressources.</p>
-<p>Milvus utilise les <a href="/docs/fr/replica.md">répliques</a> pour équilibrer la charge entre les <a href="/docs/fr/glossary.md#Segment">segments</a> distribués sur plusieurs nœuds de requête. Vous pouvez déplacer certaines répliques d'une collection d'un groupe de ressources à un autre de la manière suivante :</p>
+<p>Milvus utilise les <a href="/docs/fr/v2.4.x/replica.md">répliques</a> pour équilibrer la charge entre les <a href="/docs/fr/v2.4.x/glossary.md#Segment">segments</a> distribués sur plusieurs nœuds de requête. Vous pouvez déplacer certaines répliques d'une collection d'un groupe de ressources à un autre de la manière suivante :</p>
 <pre><code translate="no" class="language-Python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>Pour déployer une instance Milvus multi-tenant, lisez ce qui suit :</p>
 <ul>
-<li><a href="/docs/fr/rbac.md">Activer le RBAC</a></li>
-<li><a href="/docs/fr/users_and_roles.md">Utilisateurs et rôles</a></li>
+<li><a href="/docs/fr/v2.4.x/rbac.md">Activer le RBAC</a></li>
+<li><a href="/docs/fr/v2.4.x/users_and_roles.md">Utilisateurs et rôles</a></li>
 </ul>

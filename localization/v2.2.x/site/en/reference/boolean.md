@@ -264,7 +264,7 @@ $meta[<span class="hljs-string">&quot;count&quot;</span>] &lt;= <span class="hlj
 count &lt;= <span class="hljs-number">400</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>You can use dynamic fields in building boolean expressions. For details, refer to <a href="/docs/dynamic_schema.md">Dynamic Schema</a>.</p>
+<p>You can use dynamic fields in building boolean expressions. For details, refer to <a href="/docs/v2.2.x/dynamic_schema.md">Dynamic Schema</a>.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -283,7 +283,7 @@ count &lt;= <span class="hljs-number">400</span>
       </svg>
     </button></h2><p>Now that you know how bitsets work in Milvus, you might also want to:</p>
 <ul>
-<li>Learn how to conduct a  <a href="/docs/hybridsearch.md">Hybrid Search</a>.</li>
+<li>Learn how to conduct a  <a href="/docs/v2.2.x/hybridsearch.md">Hybrid Search</a>.</li>
 <li>Learn how to <a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">use strings to filter</a> your search results.</li>
-<li>Learn how to <a href="/docs/dynamic_schema.md">use dynamic fields in building boolean expressions</a>.</li>
+<li>Learn how to <a href="/docs/v2.2.x/dynamic_schema.md">use dynamic fields in building boolean expressions</a>.</li>
 </ul>

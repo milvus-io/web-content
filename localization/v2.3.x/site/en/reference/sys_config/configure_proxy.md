@@ -679,7 +679,7 @@ title: Proxy-related Configurations
   </thead>
   <tbody>
     <tr>
-      <td>The log format with dynamic metrics. This format applies to all methods by default. For more information about metrics, see <a href="/docs/configure_access_logs.md">Configure Access Logs</a>.</td>
+      <td>The log format with dynamic metrics. This format applies to all methods by default. For more information about metrics, see <a href="/docs/v2.3.x/configure_access_logs.md">Configure Access Logs</a>.</td>
       <td>Empty string</td>
     </tr>
   </tbody>

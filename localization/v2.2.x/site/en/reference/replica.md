@@ -108,6 +108,6 @@ title: ''
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn how to <a href="/docs/load_collection.md">load a collection</a> as multiple replicas.</li>
-<li>Learn how to <a href="/docs/load_partition.md">load a partition</a> as multiple replicas.</li>
+<li>Learn how to <a href="/docs/v2.2.x/load_collection.md">load a collection</a> as multiple replicas.</li>
+<li>Learn how to <a href="/docs/v2.2.x/load_partition.md">load a partition</a> as multiple replicas.</li>
 </ul>

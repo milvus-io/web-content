@@ -21,7 +21,7 @@ summary: Saiba como implementar um cluster Milvus no AWS EC2.
       </svg>
     </button></h1><p>Este tópico descreve como implementar um cluster Milvus no <a href="https://docs.aws.amazon.com/ec2/">Amazon EC2</a> com Terraform e Ansible.</p>
 <div class="alert note">
-<p>Este tópico está desatualizado e será removido em breve. Recomendamos que consulte <a href="/docs/pt/eks.md">Implantar um cluster do Milvus no EKS</a>.</p>
+<p>Este tópico está desatualizado e será removido em breve. Recomendamos que consulte <a href="/docs/pt/v2.4.x/eks.md">Implantar um cluster do Milvus no EKS</a>.</p>
 </div>
 <h2 id="Provision-a-Milvus-cluster" class="common-anchor-header">Provisionar um cluster Milvus<button data-href="#Provision-a-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -488,7 +488,7 @@ dockernode03               : ok=4    changed=3    unreachable=0    failed=0    s
       </svg>
     </button></h2><p>Se você quiser aprender como implantar o Milvus em outras nuvens:</p>
 <ul>
-<li><a href="/docs/pt/eks.md">Implantar um cluster do Milvus no EKS</a></li>
-<li><a href="/docs/pt/gcp.md">Implantar o cluster do Milvus no GCP com o Kubernetes</a></li>
-<li><a href="/docs/pt/azure.md">Guia para implantar o Milvus no Microsoft Azure com o Kubernetes</a></li>
+<li><a href="/docs/pt/v2.4.x/eks.md">Implantar um cluster do Milvus no EKS</a></li>
+<li><a href="/docs/pt/v2.4.x/gcp.md">Implantar o cluster do Milvus no GCP com o Kubernetes</a></li>
+<li><a href="/docs/pt/v2.4.x/azure.md">Guia para implantar o Milvus no Microsoft Azure com o Kubernetes</a></li>
 </ul>

@@ -185,5 +185,5 @@ Milvusはユークリッド距離が距離メトリックとして選択され�
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvusでサポートされている<a href="/docs/ja/index.md">インデックスタイプについて</a>もっと知る。</li>
+<li>Milvusでサポートされている<a href="/docs/ja/v2.4.x/index.md">インデックスタイプについて</a>もっと知る。</li>
 </ul>

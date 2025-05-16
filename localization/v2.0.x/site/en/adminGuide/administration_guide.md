@@ -20,12 +20,12 @@ summary: ''
       </svg>
     </button></h1><p>Looking for more advanced guides and instructions on Milvus DevOps? Check out the administration guides below.</p>
 <ul>
-<li><a href="/docs/configure-docker.md">Configure Milvus</a>: Configure Milvus components and dependencies according to your own needs.</li>
-<li><a href="/docs/allocate.md">Allocate Resources</a>: Allocate resources to a Milvus cluster according to the machine workload and type.</li>
-<li><a href="/docs/deploy_on_clouds.md">Deploy on Clouds</a>: Deploy Milvus on various cloud platforms including Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP).</li>
-<li><a href="/docs/deploy_s3.md">Storage</a>: Use Docker Compose or K8s to set up S3 as persistent storage for log and index files.</li>
-<li><a href="/docs/operator.md">Configure Dependencies</a>: Configure object storage, etcd, and Pulsar when you install Milvus with Milvus Operator.</li>
-<li><a href="/docs/scaleout.md">Scale a Milvus Cluster</a>:  Flexibly increase or decrease the number of worker nodes of each type according to your own need.</li>
-<li><a href="/docs/upgrade.md">Upgrade</a>: Upgrade Milvus to the latest version with Helm Chart.</li>
-<li><a href="/docs/monitor_and_alert.md">Monitor and Alert</a>: Use Prometheus to monitor metrics and Grafana to visualize metrics and create alerts.</li>
+<li><a href="/docs/v2.0.x/configure-docker.md">Configure Milvus</a>: Configure Milvus components and dependencies according to your own needs.</li>
+<li><a href="/docs/v2.0.x/allocate.md">Allocate Resources</a>: Allocate resources to a Milvus cluster according to the machine workload and type.</li>
+<li><a href="/docs/v2.0.x/deploy_on_clouds.md">Deploy on Clouds</a>: Deploy Milvus on various cloud platforms including Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP).</li>
+<li><a href="/docs/v2.0.x/deploy_s3.md">Storage</a>: Use Docker Compose or K8s to set up S3 as persistent storage for log and index files.</li>
+<li><a href="/docs/v2.0.x/operator.md">Configure Dependencies</a>: Configure object storage, etcd, and Pulsar when you install Milvus with Milvus Operator.</li>
+<li><a href="/docs/v2.0.x/scaleout.md">Scale a Milvus Cluster</a>:  Flexibly increase or decrease the number of worker nodes of each type according to your own need.</li>
+<li><a href="/docs/v2.0.x/upgrade.md">Upgrade</a>: Upgrade Milvus to the latest version with Helm Chart.</li>
+<li><a href="/docs/v2.0.x/monitor_and_alert.md">Monitor and Alert</a>: Use Prometheus to monitor metrics and Grafana to visualize metrics and create alerts.</li>
 </ul>

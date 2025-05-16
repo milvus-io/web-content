@@ -154,6 +154,6 @@ summary: Este artículo compara Milvus con otras soluciones de búsqueda vectori
       </svg>
     </button></h2><ul>
 <li><p><strong>Prueba</strong>: Experimente Milvus de primera mano comenzando con el <a href="https://milvus.io/docs/quickstart.md">inicio rápido de</a> Milvus o <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">suscribiéndose a Zilliz Cloud</a>.</p></li>
-<li><p><strong>Obtenga más información</strong>: Profundice en las características de Milvus a través de nuestras completas <a href="https://milvus.io/docs/manage-collections.md">Guías de</a> <a href="/docs/es/glossary.md">Terminología</a> y de <a href="https://milvus.io/docs/manage-collections.md">Usuario</a>.</p></li>
+<li><p><strong>Obtenga más información</strong>: Profundice en las características de Milvus a través de nuestras completas <a href="https://milvus.io/docs/manage-collections.md">Guías de</a> <a href="/docs/es/v2.4.x/glossary.md">Terminología</a> y de <a href="https://milvus.io/docs/manage-collections.md">Usuario</a>.</p></li>
 <li><p><strong>Explore alternativas</strong>: Para una comparación más amplia de las opciones de bases de datos vectoriales, explore los recursos adicionales en <a href="https://zilliz.com/comparison">esta página</a>.</p></li>
 </ul>

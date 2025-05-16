@@ -19,7 +19,7 @@ title: 重排器概述
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在資訊檢索和生成式人工智慧領域中，Reranker 是優化初始搜尋結果順序的重要工具。Reranker 與傳統的<a href="/docs/zh-hant/embeddings.md">嵌入模型</a>不同，它將查詢和文件作為輸入，並直接返回相似性分數，而不是嵌入。此分數表示輸入查詢與文件之間的相關性。</p>
+    </button></h1><p>在資訊檢索和生成式人工智慧領域中，Reranker 是優化初始搜尋結果順序的重要工具。Reranker 與傳統的<a href="/docs/zh-hant/v2.4.x/embeddings.md">嵌入模型</a>不同，它將查詢和文件作為輸入，並直接返回相似性分數，而不是嵌入。此分數表示輸入查詢與文件之間的相關性。</p>
 <p>Reranker 通常在第一階段的檢索之後使用，通常是透過向量近似近鄰 (ANN) 技術完成。雖然 ANN 搜尋能夠有效率地取得廣泛的潛在相關結果集，但它們不一定會依據實際語意與查詢的接近程度來排列結果的優先順序。在此，reerankers 使用更深入的上下文分析來優化結果順序，通常會利用先進的機器學習模型，例如 BERT 或其他以 Transformer 為基礎的模型。如此一來，rerankers 就能大幅提升呈現給使用者的最終結果的準確性與相關性。</p>
 <p>PyMilvus 模型函式庫整合了 rerank 功能，以最佳化初始搜尋所返回結果的順序。當您從 Milvus 擷取最接近的 embedings 之後，您可以利用這些 reranking 工具來優化搜尋結果，以提高搜尋結果的精確度。</p>
 <table>
@@ -55,7 +55,7 @@ title: 重排器概述
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本範例中，我們將示範如何使用<a href="/docs/zh-hant/rerankers-bge.md">BGE reranker</a>根據特定查詢將搜尋結果重新排序。</p>
+    </button></h2><p>在本範例中，我們將示範如何使用<a href="/docs/zh-hant/v2.4.x/rerankers-bge.md">BGE reranker</a>根據特定查詢將搜尋結果重新排序。</p>
 <p>要在<a href="https://github.com/milvus-io/milvus-model">PyMilvus 模型</a>庫中使用 reranker，首先要安裝 PyMilvus 模型庫以及包含所有必要 reranking 工具的模型子套件：</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus[model]
 <span class="hljs-comment"># or pip install &quot;pymilvus[model]&quot; for zsh.</span>
@@ -113,7 +113,7 @@ documents = [
 <p><strong>資料集元件</strong>：</p>
 <ul>
 <li><code translate="no">doc_id</code>:每個文件的唯一識別碼。</li>
-<li><code translate="no">doc_vector</code>:代表文件的向量嵌入。關於產生內嵌的指引，請參閱<a href="/docs/zh-hant/embeddings.md">Embeddings</a>。</li>
+<li><code translate="no">doc_vector</code>:代表文件的向量嵌入。關於產生內嵌的指引，請參閱<a href="/docs/zh-hant/v2.4.x/embeddings.md">Embeddings</a>。</li>
 <li><code translate="no">doc_text</code>:文件的文字內容。</li>
 </ul>
 <h3 id="Preparations" class="common-anchor-header">準備工作</h3><p>在啟動相似性搜尋之前，您需要與 Milvus 建立連線、建立資料集、準備資料並將資料插入該資料集中。下面的程式碼片段說明了這些初步步驟。</p>

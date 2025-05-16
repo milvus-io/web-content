@@ -34,7 +34,7 @@ title: 管理模式
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>字段模式是字段的逻辑定义。在定义<a href="#Collection-schema">集合模式</a>和<a href="/docs/zh/manage-collections.md">管理集合</a>之前，首先需要定义它。</p>
+    </button></h2><p>字段模式是字段的逻辑定义。在定义<a href="#Collection-schema">集合模式</a>和<a href="/docs/zh/v2.4.x/manage-collections.md">管理集合</a>之前，首先需要定义它。</p>
 <p>Milvus 只支持在一个 Collection 中使用一个主键字段。</p>
 <h3 id="Field-schema-properties" class="common-anchor-header">字段模式属性</h3><table class="properties">
     <thead>
@@ -124,19 +124,19 @@ fields = [
 <li>FLOAT：numpy.float32</li>
 <li>DOUBLE: numpy.double</li>
 <li>varchar: varchar</li>
-<li>JSON:<a href="/docs/zh/use-json-fields.md">JSON</a></li>
-<li>Array: 数组<a href="/docs/zh/array_data_type.md">数组</a></li>
+<li>JSON:<a href="/docs/zh/v2.4.x/use-json-fields.md">JSON</a></li>
+<li>Array: 数组<a href="/docs/zh/v2.4.x/array_data_type.md">数组</a></li>
 </ul>
-<p>JSON 作为一种复合数据类型可用。JSON 字段由键值对组成。每个键都是字符串，值可以是数字、字符串、布尔值、数组或列表。有关详情，请参阅<a href="/docs/zh/use-json-fields.md">JSON：一种新的数据类型</a>。</p></li>
+<p>JSON 作为一种复合数据类型可用。JSON 字段由键值对组成。每个键都是字符串，值可以是数字、字符串、布尔值、数组或列表。有关详情，请参阅<a href="/docs/zh/v2.4.x/use-json-fields.md">JSON：一种新的数据类型</a>。</p></li>
 <li><p>向量字段支持：</p>
 <ul>
 <li>BINARY_VECTOR：将二进制数据存储为 0 和 1 的序列，用于图像处理和信息检索中的紧凑特征表示。</li>
 <li>FLOAT_VECTOR：存储 32 位浮点数，常用于科学计算和机器学习中的实数表示。</li>
 <li>FLOAT16_VECTOR：存储 16 位半精度浮点数，用于深度学习和 GPU 计算，以提高内存和带宽效率。</li>
 <li>BFLOAT16_VECTOR：存储精度降低但指数范围与 Float32 相同的 16 位浮点数，在深度学习中很受欢迎，可在不明显影响精度的情况下降低内存和计算要求。</li>
-<li>SPARSE_FLOAT_VECTOR：存储非零元素及其相应索引的列表，用于表示稀疏向量。更多信息，请参阅<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</li>
+<li>SPARSE_FLOAT_VECTOR：存储非零元素及其相应索引的列表，用于表示稀疏向量。更多信息，请参阅<a href="/docs/zh/v2.4.x/sparse_vector.md">稀疏向量</a>。</li>
 </ul>
-<p>Milvus 支持在一个 Collections 中使用多个向量场。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p></li>
+<p>Milvus 支持在一个 Collections 中使用多个向量场。更多信息，请参阅<a href="/docs/zh/v2.4.x/multi-vector-search.md">混合搜索</a>。</p></li>
 </ul>
 <h2 id="Collection-schema" class="common-anchor-header">Collections 模式<button data-href="#Collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +153,7 @@ fields = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Collections schema 是一个 Collection 的逻辑定义。通常，在定义集合模式和<a href="/docs/zh/manage-collections.md">管理集合</a>之前，需要先定义<a href="#Field-schema">字段</a>模式。</p>
+    </button></h2><p>Collections schema 是一个 Collection 的逻辑定义。通常，在定义集合模式和<a href="/docs/zh/v2.4.x/manage-collections.md">管理集合</a>之前，需要先定义<a href="#Field-schema">字段</a>模式。</p>
 <h3 id="Collection-schema-properties" class="common-anchor-header">集合模式属性</h3><table class="properties">
     <thead>
     <tr>
@@ -208,8 +208,8 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 <ul>
 <li>可以使用<code translate="no">shards_num</code> 定义分区编号。</li>
 <li>可以通过在<code translate="no">using</code> 中指定别名来定义要在其上创建集合的 Milvus 服务器。</li>
-<li>如果需要实施<a href="/docs/zh/multi_tenancy.md">基于分区</a>密钥<a href="/docs/zh/multi_tenancy.md">的多租户</a>，可以通过在字段上设置<code translate="no">is_partition_key</code> 至<code translate="no">True</code> 来启用<a href="/docs/zh/multi_tenancy.md">分区密钥</a>功能。</li>
-<li>如果需要<a href="/docs/zh/enable-dynamic-field.md">启用动态字段</a>，可以通过在 Collections Schema 中将<code translate="no">enable_dynamic_field</code> 设置为<code translate="no">True</code> 来启用<a href="/docs/zh/enable-dynamic-field.md">动态</a> Schema。</li>
+<li>如果需要实施<a href="/docs/zh/v2.4.x/multi_tenancy.md">基于分区</a>密钥<a href="/docs/zh/v2.4.x/multi_tenancy.md">的多租户</a>，可以通过在字段上设置<code translate="no">is_partition_key</code> 至<code translate="no">True</code> 来启用<a href="/docs/zh/v2.4.x/multi_tenancy.md">分区密钥</a>功能。</li>
+<li>如果需要<a href="/docs/zh/v2.4.x/enable-dynamic-field.md">启用动态字段</a>，可以通过在 Collections Schema 中将<code translate="no">enable_dynamic_field</code> 设置为<code translate="no">True</code> 来启用<a href="/docs/zh/v2.4.x/enable-dynamic-field.md">动态</a> Schema。</li>
 </ul>
 </div>
 <p><br/>
@@ -245,7 +245,7 @@ collection, ins_res = Collection.construct_from_dataframe(
         ></path>
       </svg>
     </button></h2><ul>
-<li>了解在<a href="/docs/zh/manage-collections.md">管理 Collections</a> 时如何准备 Schema。</li>
-<li>了解有关<a href="/docs/zh/enable-dynamic-field.md">动态 Schema</a> 的更多信息。</li>
-<li>进一步了解<a href="/docs/zh/multi_tenancy.md">多租户</a>中的 Partition Key。</li>
+<li>了解在<a href="/docs/zh/v2.4.x/manage-collections.md">管理 Collections</a> 时如何准备 Schema。</li>
+<li>了解有关<a href="/docs/zh/v2.4.x/enable-dynamic-field.md">动态 Schema</a> 的更多信息。</li>
+<li>进一步了解<a href="/docs/zh/v2.4.x/multi_tenancy.md">多租户</a>中的 Partition Key。</li>
 </ul>

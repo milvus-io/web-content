@@ -19,7 +19,7 @@ title: 스케일 종속성
       </svg>
     </button></h1><p>Milvus는 MinIO, Kafka, Pulsar 등 다양한 종속 요소에 의존합니다. 이러한 구성 요소를 확장하면 다양한 요구 사항에 대한 Milvus의 적응성을 향상시킬 수 있습니다.</p>
 <div class="alert note">
-<p>Milvus 오퍼레이터 사용자의 경우 <a href="/docs/ko/object_storage_operator.md">Milvus 오퍼레이터로 오브젝트 스토리지 구성하기</a>, Milvus 오퍼레이터로 <a href="/docs/ko/meta_storage_operator.md">메타 스토리지 구성하기</a>, Milvus <a href="/docs/ko/message_storage_operator.md">오퍼레이터로 메시지 스토리지 구성을</a> 참조하세요.</p>
+<p>Milvus 오퍼레이터 사용자의 경우 <a href="/docs/ko/v2.4.x/object_storage_operator.md">Milvus 오퍼레이터로 오브젝트 스토리지 구성하기</a>, Milvus 오퍼레이터로 <a href="/docs/ko/v2.4.x/meta_storage_operator.md">메타 스토리지 구성하기</a>, Milvus <a href="/docs/ko/v2.4.x/message_storage_operator.md">오퍼레이터로 메시지 스토리지 구성을</a> 참조하세요.</p>
 </div>
 <h2 id="Scale-MinIO" class="common-anchor-header">MinIO 스케일링<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -36,7 +36,7 @@ title: 스칼라 인덱스
         ></path>
       </svg>
     </button></h2><p>Milvus에서 벡터 유사도 검색을 수행한 후에는 논리 연산자를 사용하여 스칼라 필드를 부울 표현식으로 구성할 수 있습니다.</p>
-<p>이러한 부울 식이 포함된 검색 요청을 받으면 Milvus는 부울 식을 추상 구문 트리(AST)로 구문 분석하여 속성 필터링을 위한 물리적 계획을 생성합니다. 그런 다음 Milvus는 각 세그먼트에 물리적 계획을 적용하여 필터링 결과인 <a href="/docs/ko/bitset.md">비트셋을</a> 생성하고 그 결과를 벡터 검색 매개변수로 포함시켜 검색 범위를 좁힙니다. 이 경우 벡터 검색의 속도는 속성 필터링의 속도에 크게 좌우됩니다.</p>
+<p>이러한 부울 식이 포함된 검색 요청을 받으면 Milvus는 부울 식을 추상 구문 트리(AST)로 구문 분석하여 속성 필터링을 위한 물리적 계획을 생성합니다. 그런 다음 Milvus는 각 세그먼트에 물리적 계획을 적용하여 필터링 결과인 <a href="/docs/ko/v2.4.x/bitset.md">비트셋을</a> 생성하고 그 결과를 벡터 검색 매개변수로 포함시켜 검색 범위를 좁힙니다. 이 경우 벡터 검색의 속도는 속성 필터링의 속도에 크게 좌우됩니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
@@ -154,12 +154,12 @@ title: 스칼라 인덱스
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>스칼라 필드를 색인하려면 <a href="/docs/ko/index-scalar-fields.md">스칼라에 색인 만들기를</a> 참조하세요.</p></li>
+<li><p>스칼라 필드를 색인하려면 <a href="/docs/ko/v2.4.x/index-scalar-fields.md">스칼라에 색인 만들기를</a> 참조하세요.</p></li>
 <li><p>위에서 언급한 관련 용어와 규칙에 대해 자세히 알아보려면 다음을 읽어보세요.</p>
 <ul>
-<li><a href="/docs/ko/bitset.md">비트셋</a></li>
-<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
-<li><a href="/docs/ko/boolean.md">부울 표현식 규칙</a></li>
-<li><a href="/docs/ko/schema.md#Supported-data-type">지원되는 데이터 유형</a></li>
+<li><a href="/docs/ko/v2.4.x/bitset.md">비트셋</a></li>
+<li><a href="/docs/ko/v2.4.x/multi-vector-search.md">하이브리드 검색</a></li>
+<li><a href="/docs/ko/v2.4.x/boolean.md">부울 표현식 규칙</a></li>
+<li><a href="/docs/ko/v2.4.x/schema.md#Supported-data-type">지원되는 데이터 유형</a></li>
 </ul></li>
 </ul>

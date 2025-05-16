@@ -387,26 +387,26 @@ optional arguments:
       </svg>
     </button></h2><p>Depois de se ligar ao Milvus Lite, pode:</p>
 <ul>
-<li><p>Verificar <a href="/docs/pt/quickstart.md">o Quickstart</a> para ver o que Milvus pode fazer.</p></li>
+<li><p>Verificar <a href="/docs/pt/v2.4.x/quickstart.md">o Quickstart</a> para ver o que Milvus pode fazer.</p></li>
 <li><p>Aprender as operações básicas do Milvus:</p>
 <ul>
-<li><a href="/docs/pt/manage_databases.md">Gerir bases de dados</a></li>
-<li><a href="/docs/pt/manage-collections.md">Gerir colecções</a></li>
-<li><a href="/docs/pt/manage-partitions.md">Gerir partições</a></li>
-<li><a href="/docs/pt/insert-update-delete.md">Inserir, Upsert e Apagar</a></li>
-<li><a href="/docs/pt/single-vector-search.md">Pesquisa de vetor único</a></li>
-<li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
+<li><a href="/docs/pt/v2.4.x/manage_databases.md">Gerir bases de dados</a></li>
+<li><a href="/docs/pt/v2.4.x/manage-collections.md">Gerir colecções</a></li>
+<li><a href="/docs/pt/v2.4.x/manage-partitions.md">Gerir partições</a></li>
+<li><a href="/docs/pt/v2.4.x/insert-update-delete.md">Inserir, Upsert e Apagar</a></li>
+<li><a href="/docs/pt/v2.4.x/single-vector-search.md">Pesquisa de vetor único</a></li>
+<li><a href="/docs/pt/v2.4.x/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
-<li><p><a href="/docs/pt/upgrade_milvus_cluster-helm.md">Atualizar o Milvus usando o Helm Chart</a>.</p></li>
-<li><p><a href="/docs/pt/scaleout.md">Escalar seu cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/pt/v2.4.x/upgrade_milvus_cluster-helm.md">Atualizar o Milvus usando o Helm Chart</a>.</p></li>
+<li><p><a href="/docs/pt/v2.4.x/scaleout.md">Escalar seu cluster Milvus</a>.</p></li>
 <li><p>Implantar seu cluster Milvus em nuvens:</p>
 <ul>
-<li><a href="/docs/pt/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/pt/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/pt/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/pt/v2.4.x/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/pt/v2.4.x/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/pt/v2.4.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para backups de dados do Milvus.</p></li>
-<li><p>Explore o <a href="/docs/pt/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depurar o Milvus e actualizações de configuração dinâmica.</p></li>
+<li><p>Explore <a href="/docs/pt/v2.4.x/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para backups de dados do Milvus.</p></li>
+<li><p>Explore o <a href="/docs/pt/v2.4.x/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depurar o Milvus e actualizações de configuração dinâmica.</p></li>
 <li><p>Explore <a href="https://milvus.io/docs/attu.md">o Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
-<li><p><a href="/docs/pt/monitor.md">Monitore o Milvus com o Prometheus</a>.</p></li>
+<li><p><a href="/docs/pt/v2.4.x/monitor.md">Monitore o Milvus com o Prometheus</a>.</p></li>
 </ul>

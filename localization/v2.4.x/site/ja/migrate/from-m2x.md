@@ -40,7 +40,7 @@ title: Milvus 2.3.xより
 <li>ターゲットMilvus: 2.3.0+.</li>
 </ul></li>
 <li><strong>必要なツール</strong><ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>ツール。インストールの詳細については、<a href="/docs/ja/milvusdm_install.md">マイグレーションツールのインストールを</a>参照してください。</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>ツール。インストールの詳細については、<a href="/docs/ja/v2.4.x/milvusdm_install.md">マイグレーションツールのインストールを</a>参照してください。</li>
 </ul></li>
 <li><strong>データの準備</strong><ul>
 <li>移行元のMilvusコレクションがロードされ、データエクスポートの準備ができていることを確認する。</li>
@@ -118,8 +118,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">source.milvus2x.endpoint</code></td><td>ソースMilvusサーバのアドレス。</td></tr>
-<tr><td><code translate="no">source.milvus2x.username</code></td><td>ソースMilvusサーバのユーザ名。このパラメータは、Milvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、<a href="/docs/ja/authenticate.md">認証の有効</a>化を参照してください。</td></tr>
-<tr><td><code translate="no">source.milvus2x.password</code></td><td>ソース Milvus サーバのパスワード。このパラメータはMilvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、「<a href="/docs/ja/authenticate.md">認証の有効化</a>」を参照してください。</td></tr>
+<tr><td><code translate="no">source.milvus2x.username</code></td><td>ソースMilvusサーバのユーザ名。このパラメータは、Milvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、<a href="/docs/ja/v2.4.x/authenticate.md">認証の有効</a>化を参照してください。</td></tr>
+<tr><td><code translate="no">source.milvus2x.password</code></td><td>ソース Milvus サーバのパスワード。このパラメータはMilvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、「<a href="/docs/ja/v2.4.x/authenticate.md">認証の有効化</a>」を参照してください。</td></tr>
 </tbody>
 </table>
 </li>
@@ -130,8 +130,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>ターゲットMilvusサーバのアドレス.</td></tr>
-<tr><td><code translate="no">target.milvus2x.username</code></td><td>ターゲット Milvus サーバのユーザ名。このパラメータはMilvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、<a href="/docs/ja/authenticate.md">認証の有効</a>化を参照してください。</td></tr>
-<tr><td><code translate="no">target.milvus2x.password</code></td><td>ターゲットMilvusサーバのパスワード。このパラメータはMilvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、「<a href="/docs/ja/authenticate.md">認証の有効化</a>」を参照してください。</td></tr>
+<tr><td><code translate="no">target.milvus2x.username</code></td><td>ターゲット Milvus サーバのユーザ名。このパラメータはMilvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、<a href="/docs/ja/v2.4.x/authenticate.md">認証の有効</a>化を参照してください。</td></tr>
+<tr><td><code translate="no">target.milvus2x.password</code></td><td>ターゲットMilvusサーバのパスワード。このパラメータはMilvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、「<a href="/docs/ja/v2.4.x/authenticate.md">認証の有効化</a>」を参照してください。</td></tr>
 </tbody>
 </table>
 </li>

@@ -72,7 +72,7 @@ summary: Aprenda a crear una alerta para los servicios Milvus en Grafana.
         ></path>
       </svg>
     </button></h2><p>Esta guía toma como ejemplo la creación de una alerta para el uso de memoria de los componentes de Milvus. Para crear otros tipos de alertas, por favor ajuste sus comandos en consecuencia. Si encuentra algún problema durante el proceso, no dude en preguntar en <a href="https://github.com/milvus-io/milvus/discussions">las discusiones de Github</a> o iniciar un hilo en <a href="https://discord.com/invite/8uyFbECzPX">Discord</a>.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Requisitos previos</h3><p>Este tutorial asume que tienes Grafana instalado y configurado. Si no es así, recomendamos leer la <a href="/docs/es/monitor.md">guía de monitorización</a>.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Requisitos previos</h3><p>Este tutorial asume que tienes Grafana instalado y configurado. Si no es así, recomendamos leer la <a href="/docs/es/v2.4.x/monitor.md">guía de monitorización</a>.</p>
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. Añadir una nueva consulta</h3><p>Para añadir una alerta para el uso de memoria de los componentes de Milvus, edite el panel Memoria. A continuación, añada una nueva consulta con la métrica <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   
@@ -120,13 +120,13 @@ summary: Aprenda a crear una alerta para los servicios Milvus en Grafana.
       </svg>
     </button></h2><ul>
 <li>Si necesita iniciar servicios de monitorización para Milvus:<ul>
-<li>Lea la <a href="/docs/es/monitor.md">guía de monitorización</a></li>
-<li>Aprenda a <a href="/docs/es/visualize.md">visualizar las métricas de monitorización</a></li>
+<li>Lea la <a href="/docs/es/v2.4.x/monitor.md">guía de monitorización</a></li>
+<li>Aprenda a <a href="/docs/es/v2.4.x/visualize.md">visualizar las métricas de monitorización</a></li>
 </ul></li>
 <li>Si ha creado alertas para el uso de memoria por los componentes de Milvus:<ul>
-<li>Aprenda a <a href="/docs/es/allocate.md#standalone">asignar recursos</a></li>
+<li>Aprenda a <a href="/docs/es/v2.4.x/allocate.md#standalone">asignar recursos</a></li>
 </ul></li>
 <li>Si está buscando información sobre cómo escalar un cluster Milvus:<ul>
-<li>Aprenda a <a href="/docs/es/scaleout.md">escalar un cluster Milvus</a></li>
+<li>Aprenda a <a href="/docs/es/v2.4.x/scaleout.md">escalar un cluster Milvus</a></li>
 </ul></li>
 </ul>

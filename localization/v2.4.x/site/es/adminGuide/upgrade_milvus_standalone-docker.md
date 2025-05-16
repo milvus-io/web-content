@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: Aprenda a actualizar Milvus standalone con Docker Compose.
 title: Actualizar Milvus Standalone con Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/es/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/es/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/es/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/es/v2.4.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/es/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/es/v2.4.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Actualizar Milvus Standalone con Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,11 +122,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>También puede aprender a<ul>
-<li><a href="/docs/es/scaleout.md">Escalar un cluster Milvus</a></li>
+<li><a href="/docs/es/v2.4.x/scaleout.md">Escalar un cluster Milvus</a></li>
 </ul></li>
 <li>Si está listo para desplegar su cluster en nubes:<ul>
-<li>Aprenda a <a href="/docs/es/eks.md">implementar Milvus en Amazon EKS con Terraform</a></li>
-<li>Aprenda a <a href="/docs/es/gcp.md">implementar Milvus Cluster en GCP con Kubernetes</a></li>
-<li>Aprenda a <a href="/docs/es/azure.md">desplegar Milvus en Microsoft Azure con Kubernetes</a></li>
+<li>Aprenda a <a href="/docs/es/v2.4.x/eks.md">implementar Milvus en Amazon EKS con Terraform</a></li>
+<li>Aprenda a <a href="/docs/es/v2.4.x/gcp.md">implementar Milvus Cluster en GCP con Kubernetes</a></li>
+<li>Aprenda a <a href="/docs/es/v2.4.x/azure.md">desplegar Milvus en Microsoft Azure con Kubernetes</a></li>
 </ul></li>
 </ul>

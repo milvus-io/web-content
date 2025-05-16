@@ -37,8 +37,8 @@ summary: Questa pagina mostra la procedura per importare i dati preparati.
       </svg>
     </button></h2><ul>
 <li><p>I dati sono già stati preparati e inseriti nel bucket Milvus.</p>
-<p>In caso contrario, è necessario utilizzare <strong>RemoteBulkWriter</strong> per preparare i dati e assicurarsi che i dati preparati siano già stati trasferiti al bucket Milvus sull'istanza MinIO avviata insieme all'istanza Milvus. Per maggiori dettagli, consultare la sezione <a href="/docs/it/prepare-source-data.md">Preparare i dati di origine</a>.</p></li>
-<li><p>È già stata creata una raccolta con lo schema utilizzato per preparare i dati. In caso contrario, consultare <a href="/docs/it/manage-collections.md">Gestione delle raccolte</a>.</p></li>
+<p>In caso contrario, è necessario utilizzare <strong>RemoteBulkWriter</strong> per preparare i dati e assicurarsi che i dati preparati siano già stati trasferiti al bucket Milvus sull'istanza MinIO avviata insieme all'istanza Milvus. Per maggiori dettagli, consultare la sezione <a href="/docs/it/v2.4.x/prepare-source-data.md">Preparare i dati di origine</a>.</p></li>
+<li><p>È già stata creata una raccolta con lo schema utilizzato per preparare i dati. In caso contrario, consultare <a href="/docs/it/v2.4.x/manage-collections.md">Gestione delle raccolte</a>.</p></li>
 </ul>
 <div class="language-python">
 <p>Il seguente frammento di codice crea una semplice raccolta con lo schema dato. Per ulteriori informazioni sui parametri, fare riferimento a <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> nel riferimento dell'SDK.</p>

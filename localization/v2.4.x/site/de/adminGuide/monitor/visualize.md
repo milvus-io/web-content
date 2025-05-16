@@ -20,7 +20,7 @@ summary: 'Erfahren Sie, wie Sie Milvus-Metriken in Grafana visualisieren können
         ></path>
       </svg>
     </button></h1><p>Dieses Thema beschreibt, wie man Milvus-Metriken mit Grafana visualisiert.</p>
-<p>Wie im <a href="/docs/de/monitor.md">Überwachungshandbuch</a> beschrieben, enthalten Metriken nützliche Informationen, wie z. B. wie viel Speicher von einer bestimmten Milvus-Komponente verwendet wird. Die Überwachung von Metriken hilft Ihnen, die Leistung von Milvus und seinen Betriebsstatus besser zu verstehen, so dass Sie die Ressourcenzuweisung rechtzeitig anpassen können.</p>
+<p>Wie im <a href="/docs/de/v2.4.x/monitor.md">Überwachungshandbuch</a> beschrieben, enthalten Metriken nützliche Informationen, wie z. B. wie viel Speicher von einer bestimmten Milvus-Komponente verwendet wird. Die Überwachung von Metriken hilft Ihnen, die Leistung von Milvus und seinen Betriebsstatus besser zu verstehen, so dass Sie die Ressourcenzuweisung rechtzeitig anpassen können.</p>
 <p>Die Visualisierung ist ein Diagramm, das die Veränderung der Ressourcennutzung über die Zeit anzeigt, was es Ihnen erleichtert, die Veränderungen der Ressourcennutzung schnell zu sehen und zu bemerken, insbesondere wenn ein Ereignis eintritt.</p>
 <p>In diesem Tutorial wird Grafana, eine Open-Source-Plattform für Zeitreihenanalysen, verwendet, um verschiedene Leistungsmetriken eines Milvus-Clusters zu visualisieren, der auf Kubernetes (K8s) bereitgestellt wird.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -39,8 +39,8 @@ summary: 'Erfahren Sie, wie Sie Milvus-Metriken in Grafana visualisieren können
         ></path>
       </svg>
     </button></h2><ul>
-<li>Sie haben <a href="/docs/de/install_cluster-helm.md">einen Milvus-Cluster auf K8s) installiert</a>.</li>
-<li>Sie müssen <a href="/docs/de/monitor.md">Prometheus</a> für die Überwachung und Erfassung von Metriken <a href="/docs/de/monitor.md">konfigurieren</a>, bevor Sie Grafana zur Visualisierung der Metriken verwenden können. Wenn die Einrichtung erfolgreich war, können Sie auf Grafana unter <code translate="no">http://localhost:3000</code> zugreifen. Oder Sie können Grafana auch über die Standard-Grafana-Seite <code translate="no">user:password</code> von <code translate="no">admin:admin</code> aufrufen.</li>
+<li>Sie haben <a href="/docs/de/v2.4.x/install_cluster-helm.md">einen Milvus-Cluster auf K8s) installiert</a>.</li>
+<li>Sie müssen <a href="/docs/de/v2.4.x/monitor.md">Prometheus</a> für die Überwachung und Erfassung von Metriken <a href="/docs/de/v2.4.x/monitor.md">konfigurieren</a>, bevor Sie Grafana zur Visualisierung der Metriken verwenden können. Wenn die Einrichtung erfolgreich war, können Sie auf Grafana unter <code translate="no">http://localhost:3000</code> zugreifen. Oder Sie können Grafana auch über die Standard-Grafana-Seite <code translate="no">user:password</code> von <code translate="no">admin:admin</code> aufrufen.</li>
 </ul>
 <h2 id="Visualize-metrics-using-Grafana" class="common-anchor-header">Visualisieren von Metriken mit Grafana<button data-href="#Visualize-metrics-using-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,11 +90,11 @@ summary: 'Erfahren Sie, wie Sie Milvus-Metriken in Grafana visualisieren können
       </svg>
     </button></h2><ul>
 <li>Wenn Sie Grafana so eingestellt haben, dass es Milvus-Metriken visualisiert, möchten Sie das vielleicht auch:<ul>
-<li>Erfahren Sie, wie Sie <a href="/docs/de/alert.md">einen Alarm für Milvus-Dienste erstellen</a></li>
-<li>Ihre <a href="/docs/de/allocate.md">Ressourcenzuweisung</a> anpassen</li>
-<li><a href="/docs/de/scaleout.md">Skalieren Sie einen Milvus-Cluster aus oder ein</a></li>
+<li>Erfahren Sie, wie Sie <a href="/docs/de/v2.4.x/alert.md">einen Alarm für Milvus-Dienste erstellen</a></li>
+<li>Ihre <a href="/docs/de/v2.4.x/allocate.md">Ressourcenzuweisung</a> anpassen</li>
+<li><a href="/docs/de/v2.4.x/scaleout.md">Skalieren Sie einen Milvus-Cluster aus oder ein</a></li>
 </ul></li>
 <li>Wenn Sie an einem Upgrade der Milvus-Version interessiert sind,<ul>
-<li>Lesen Sie den <a href="/docs/de/upgrade_milvus_cluster-operator.md">Leitfaden für das Upgrade von Milvus-Cluster</a> und <a href="/docs/de/upgrade_milvus_standalone-operator.md">den Leitfaden für das Upgrade von Milvus-Standalone</a>.</li>
+<li>Lesen Sie den <a href="/docs/de/v2.4.x/upgrade_milvus_cluster-operator.md">Leitfaden für das Upgrade von Milvus-Cluster</a> und <a href="/docs/de/v2.4.x/upgrade_milvus_standalone-operator.md">den Leitfaden für das Upgrade von Milvus-Standalone</a>.</li>
 </ul></li>
 </ul>

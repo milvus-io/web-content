@@ -33,13 +33,13 @@ id: home.md
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/zh/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/zh/install_standalone-docker.md"> <p class="link-btn">安装 Milvus</p> </a><p>了解如何使用Docker Compose或Kubernetes安装Milvus。</p>
+   <a href="/docs/zh/v2.4.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
+   </a> <a href="/docs/zh/v2.4.x/install_standalone-docker.md"> <p class="link-btn">安装 Milvus</p> </a><p>了解如何使用Docker Compose或Kubernetes安装Milvus。</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/zh/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/zh/quickstart.md"> <p class="link-btn">快速启动</p> </a><p>了解如何使用示例代码快速运行 Milvus。</p>
+   <a href="/docs/zh/v2.4.x/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
+   </a> <a href="/docs/zh/v2.4.x/quickstart.md"> <p class="link-btn">快速启动</p> </a><p>了解如何使用示例代码快速运行 Milvus。</p>
 </div>
 <div class="start_card_container">
   
@@ -67,31 +67,31 @@ id: home.md
 <div class="recomment-item">
   <p>使用</p>
 <ul>
-<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
-<li><a href="/docs/zh/insert-update-delete.md">插入、增加和删除</a></li>
-<li><a href="/docs/zh/index-vector-fields.md">索引向量字段</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
-<li><a href="/docs/zh/get-and-scalar-query.md">获取和标量查询</a></li>
+<li><a href="/docs/zh/v2.4.x/manage-collections.md">管理 Collections</a></li>
+<li><a href="/docs/zh/v2.4.x/insert-update-delete.md">插入、增加和删除</a></li>
+<li><a href="/docs/zh/v2.4.x/index-vector-fields.md">索引向量字段</a></li>
+<li><a href="/docs/zh/v2.4.x/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/v2.4.x/get-and-scalar-query.md">获取和标量查询</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>部署</p>
 <ul>
-<li><a href="/docs/zh/configure-docker.md">配置 Milvus</a></li>
-<li><a href="/docs/zh/deploy_s3.md">管理依赖关系</a></li>
-<li><a href="/docs/zh/eks.md">在云上部署</a></li>
-<li><a href="/docs/zh/scaleout.md">扩展 Milvus 集群</a></li>
-<li><a href="/docs/zh/monitor_overview.md">监控和警报</a></li>
+<li><a href="/docs/zh/v2.4.x/configure-docker.md">配置 Milvus</a></li>
+<li><a href="/docs/zh/v2.4.x/deploy_s3.md">管理依赖关系</a></li>
+<li><a href="/docs/zh/v2.4.x/eks.md">在云上部署</a></li>
+<li><a href="/docs/zh/v2.4.x/scaleout.md">扩展 Milvus 集群</a></li>
+<li><a href="/docs/zh/v2.4.x/monitor_overview.md">监控和警报</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>学习</p>
 <ul>
-<li><a href="/docs/zh/system_configuration.md">系统配置</a></li>
-<li><a href="/docs/zh/architecture_overview.md">架构概述</a></li>
-<li><a href="/docs/zh/index.md">向量索引</a></li>
-<li><a href="/docs/zh/metric.md">相似度指标</a></li>
-<li><a href="/docs/zh/glossary.md">术语表</a></li>
+<li><a href="/docs/zh/v2.4.x/system_configuration.md">系统配置</a></li>
+<li><a href="/docs/zh/v2.4.x/architecture_overview.md">架构概述</a></li>
+<li><a href="/docs/zh/v2.4.x/index.md">向量索引</a></li>
+<li><a href="/docs/zh/v2.4.x/metric.md">相似度指标</a></li>
+<li><a href="/docs/zh/v2.4.x/glossary.md">术语表</a></li>
 </ul>
 </div>
 </div>
@@ -113,9 +113,9 @@ id: home.md
       </svg>
     </button></h2><p><em>2024 年 3 月 - Milvus 2.4.0 发布</em></p>
 <ul>
-<li>添加了如何<a href="/docs/zh/multi-vector-search.md">进行混合搜索的</a>指导。</li>
-<li>添加了<a href="/docs/zh/gpu_index.md">GPU 索引</a>的说明。</li>
-<li>添加了如何<a href="/docs/zh/embeddings.md">使用 PyMilvus 嵌入数据的</a>指导。</li>
-<li>添加了<a href="/docs/zh/milvus-cdc-overview.md">Milvus CDC</a> 的说明。</li>
+<li>添加了如何<a href="/docs/zh/v2.4.x/multi-vector-search.md">进行混合搜索的</a>指导。</li>
+<li>添加了<a href="/docs/zh/v2.4.x/gpu_index.md">GPU 索引</a>的说明。</li>
+<li>添加了如何<a href="/docs/zh/v2.4.x/embeddings.md">使用 PyMilvus 嵌入数据的</a>指导。</li>
+<li>添加了<a href="/docs/zh/v2.4.x/milvus-cdc-overview.md">Milvus CDC</a> 的说明。</li>
 </ul>
 </div>

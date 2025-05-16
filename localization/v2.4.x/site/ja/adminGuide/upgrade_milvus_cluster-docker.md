@@ -3,7 +3,7 @@ id: upgrade_milvus_cluster-docker.md
 summary: Docker ComposeでMilvusクラスタをアップグレードする方法をご紹介します。
 title: Docker Composeを使用したMilvusクラスタのアップグレード
 ---
-<div class="tab-wrapper"><a href="/docs/ja/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ja/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/ja/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/ja/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/ja/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
+<div class="tab-wrapper"><a href="/docs/ja/v2.4.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ja/v2.4.x/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/ja/v2.4.x/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/ja/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/ja/v2.4.x/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">Docker Composeを使用したMilvusクラスタのアップグレード<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,11 +144,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>次の方法もご覧ください：<ul>
-<li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></li>
+<li><a href="/docs/ja/v2.4.x/scaleout.md">Milvusクラスタのスケール</a></li>
 </ul></li>
 <li>クラウド上にクラスターをデプロイする準備ができている場合は、次の方法を参照してください：<ul>
-<li><a href="/docs/ja/eks.md">Terraformを使ってAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
-<li><a href="/docs/ja/gcp.md">Kubernetesを使用してGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
-<li><a href="/docs/ja/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/v2.4.x/eks.md">Terraformを使ってAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/v2.4.x/gcp.md">Kubernetesを使用してGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/v2.4.x/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
 </ul></li>
 </ul>

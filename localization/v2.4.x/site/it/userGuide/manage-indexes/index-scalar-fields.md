@@ -192,7 +192,7 @@ client.createIndex(createIndexReq);
 <p>Il tipo di indice scalare da creare. Per l'indicizzazione implicita, lasciare vuoto o omettere questo parametro.</p>
 <p>Per l'indicizzazione personalizzata, i valori validi sono:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (consigliato) Un indice invertito consiste in un dizionario di termini contenente tutte le parole tokenizzate ordinate alfabeticamente. Per maggiori dettagli, consultare <a href="/docs/it/scalar_index.md">Indice scalare</a>.</p></li>
+<li><p><strong>INVERTED</strong>: (consigliato) Un indice invertito consiste in un dizionario di termini contenente tutte le parole tokenizzate ordinate alfabeticamente. Per maggiori dettagli, consultare <a href="/docs/it/v2.4.x/scalar_index.md">Indice scalare</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Ordina i campi scalari usando l'algoritmo di ordinamento della libreria template standard. Supporta solo campi numerici (ad esempio, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Una struttura di dati ad albero per ricerche e recuperi rapidi di prefissi. Supporta campi VARCHAR.</p></li>
 </ul></li>
@@ -216,7 +216,7 @@ client.createIndex(createIndexReq);
 <li><strong>fieldName</strong><em>(String</em>) Il nome del campo scalare da indicizzare.</li>
 <li><strong>indexName</strong><em>(Stringa</em>) Il nome dell'indice scalare da creare. Ogni campo scalare supporta un indice.</li>
 <li><strong>indexType</strong><em>(String</em>) Il tipo di indice scalare da creare. Per l'indicizzazione implicita, lasciare vuoto o omettere questo parametro. Per l'indicizzazione personalizzata, i valori validi sono:<ul>
-<li><strong>INVERTED</strong>: (consigliato) Un indice invertito consiste in un dizionario di termini contenente tutte le parole tokenizzate ordinate alfabeticamente. Per maggiori dettagli, consultare <a href="/docs/it/scalar_index.md">Indice scalare</a>.</li>
+<li><strong>INVERTED</strong>: (consigliato) Un indice invertito consiste in un dizionario di termini contenente tutte le parole tokenizzate ordinate alfabeticamente. Per maggiori dettagli, consultare <a href="/docs/it/v2.4.x/scalar_index.md">Indice scalare</a>.</li>
 <li><strong>STL_SORT</strong>: Ordina i campi scalari utilizzando l'algoritmo di ordinamento standard della libreria template. Supporta campi booleani e numerici (ad esempio, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: Una struttura di dati ad albero per ricerche e recuperi rapidi di prefissi. Supporta campi VARCHAR.</li>
 </ul></li>
@@ -237,7 +237,7 @@ client.createIndex(createIndexReq);
 <li><strong>nome_campo</strong><em>(stringa</em>) Il nome del campo scalare da indicizzare.</li>
 <li><strong>nome_indice</strong><em>(stringa</em>) Il nome dell'indice scalare da creare. Ogni campo scalare supporta un indice.</li>
 <li><strong>index_type</strong><em>(stringa</em>) Il tipo di indice scalare da creare. Per l'indicizzazione implicita, lasciare vuoto o omettere questo parametro. Per l'indicizzazione personalizzata, i valori validi sono:<ul>
-<li><strong>INVERTED</strong>: (consigliato) Un indice invertito consiste in un dizionario di termini contenente tutte le parole tokenizzate ordinate alfabeticamente. Per maggiori dettagli, consultare <a href="/docs/it/scalar_index.md">Indice scalare</a>.</li>
+<li><strong>INVERTED</strong>: (consigliato) Un indice invertito consiste in un dizionario di termini contenente tutte le parole tokenizzate ordinate alfabeticamente. Per maggiori dettagli, consultare <a href="/docs/it/v2.4.x/scalar_index.md">Indice scalare</a>.</li>
 <li><strong>STL_SORT</strong>: Ordina i campi scalari utilizzando l'algoritmo di ordinamento standard della libreria template. Supporta campi booleani e numerici (ad esempio, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
 <li><strong>Trie</strong>: Una struttura di dati ad albero per ricerche e recuperi rapidi di prefissi. Supporta i campi VARCHAR.</li>
 </ul></li>

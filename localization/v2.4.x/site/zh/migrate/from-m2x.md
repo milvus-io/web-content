@@ -40,7 +40,7 @@ title: 来自 Milvus 2.3.x
 <li>目标 Milvus：2.3.0 以上</li>
 </ul></li>
 <li><strong>所需工具</strong><ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。有关安装细节，请参阅<a href="/docs/zh/milvusdm_install.md">安装迁移工具</a>。</li>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。有关安装细节，请参阅<a href="/docs/zh/v2.4.x/milvusdm_install.md">安装迁移工具</a>。</li>
 </ul></li>
 <li><strong>数据准备</strong>：<ul>
 <li>确保源 Milvus 数据集已加载并准备好导出数据。</li>
@@ -118,8 +118,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">source.milvus2x.endpoint</code></td><td>源 Milvus 服务器地址。</td></tr>
-<tr><td><code translate="no">source.milvus2x.username</code></td><td>源 Milvus 服务器的用户名。如果 Milvus 服务器启用了用户身份验证，则需要使用此参数。有关详细信息，请参阅<a href="/docs/zh/authenticate.md">启用身份验证</a>。</td></tr>
-<tr><td><code translate="no">source.milvus2x.password</code></td><td>源 Milvus 服务器的密码。如果 Milvus 服务器启用了用户身份验证，则需要使用此参数。有关更多信息，请参阅<a href="/docs/zh/authenticate.md">启用身份验证</a>。</td></tr>
+<tr><td><code translate="no">source.milvus2x.username</code></td><td>源 Milvus 服务器的用户名。如果 Milvus 服务器启用了用户身份验证，则需要使用此参数。有关详细信息，请参阅<a href="/docs/zh/v2.4.x/authenticate.md">启用身份验证</a>。</td></tr>
+<tr><td><code translate="no">source.milvus2x.password</code></td><td>源 Milvus 服务器的密码。如果 Milvus 服务器启用了用户身份验证，则需要使用此参数。有关更多信息，请参阅<a href="/docs/zh/v2.4.x/authenticate.md">启用身份验证</a>。</td></tr>
 </tbody>
 </table>
 </li>
@@ -130,8 +130,8 @@ target:
 </thead>
 <tbody>
 <tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>目标 Milvus 服务器地址。</td></tr>
-<tr><td><code translate="no">target.milvus2x.username</code></td><td>目标 Milvus 服务器的用户名。如果 Milvus 服务器启用了用户身份验证，则需要使用此参数。有关详细信息，请参阅<a href="/docs/zh/authenticate.md">启用身份验证</a>。</td></tr>
-<tr><td><code translate="no">target.milvus2x.password</code></td><td>目标 Milvus 服务器的密码。如果 Milvus 服务器启用了用户身份验证，则需要使用此参数。更多信息，请参阅<a href="/docs/zh/authenticate.md">启用身份验证</a>。</td></tr>
+<tr><td><code translate="no">target.milvus2x.username</code></td><td>目标 Milvus 服务器的用户名。如果 Milvus 服务器启用了用户身份验证，则需要使用此参数。有关详细信息，请参阅<a href="/docs/zh/v2.4.x/authenticate.md">启用身份验证</a>。</td></tr>
+<tr><td><code translate="no">target.milvus2x.password</code></td><td>目标 Milvus 服务器的密码。如果 Milvus 服务器启用了用户身份验证，则需要使用此参数。更多信息，请参阅<a href="/docs/zh/v2.4.x/authenticate.md">启用身份验证</a>。</td></tr>
 </tbody>
 </table>
 </li>

@@ -119,5 +119,5 @@ title: Desagregação Armazenamento/Computação
         ></path>
       </svg>
     </button></h2><ul>
-<li>Leia <a href="/docs/pt/main_components.md">Componentes principais</a> para obter mais detalhes sobre a arquitetura Milvus.</li>
+<li>Leia <a href="/docs/pt/v2.4.x/main_components.md">Componentes principais</a> para obter mais detalhes sobre a arquitetura Milvus.</li>
 </ul>

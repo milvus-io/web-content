@@ -105,5 +105,5 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Erfahren Sie, wie <a href="/docs/de/consistency.md">der garantierte Zeitstempel die abstimmbare Konsistenz in Milvus ermöglicht</a></li>
+<li>Erfahren Sie, wie <a href="/docs/de/v2.4.x/consistency.md">der garantierte Zeitstempel die abstimmbare Konsistenz in Milvus ermöglicht</a></li>
 </ul>

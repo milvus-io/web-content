@@ -28,9 +28,9 @@ summary: >-
 <p>Para criar um projeto, consulte <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Criar e gerenciar projetos</a>. O nome do projeto utilizado neste guia é <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>Você instalou localmente <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">a CLI do gcloud</a>, <a href="https://kubernetes.io/docs/tasks/tools/">o kubectl</a> e <a href="https://helm.sh/docs/intro/install/">o Helm</a> ou decidiu usar o <a href="https://cloud.google.com/shell">Cloud Shell</a> baseado em navegador.</p></li>
 <li><p>Você <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">inicializou a CLI do gcloud</a> com as credenciais da sua conta do GCP.</p></li>
-<li><p><a href="/docs/pt/gcp.md">Implantou um cluster do Milvus atrás de um balanceador de carga de camada 4 no GCP</a>.</p></li>
+<li><p><a href="/docs/pt/v2.4.x/gcp.md">Implantou um cluster do Milvus atrás de um balanceador de carga de camada 4 no GCP</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Ajustar as configurações do Milvus</h3><p>Este guia pressupõe que você já implantou <a href="/docs/pt/gcp.md">um cluster do Milvus por trás de um balanceador de carga de Camada 4 no GCP</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Ajustar as configurações do Milvus</h3><p>Este guia pressupõe que você já implantou <a href="/docs/pt/v2.4.x/gcp.md">um cluster do Milvus por trás de um balanceador de carga de Camada 4 no GCP</a>.</p>
 <p>Antes de configurar um balanceador de carga da Camada 7 para esse cluster do Milvus, execute o seguinte comando para remover o balanceador de carga da Camada 4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

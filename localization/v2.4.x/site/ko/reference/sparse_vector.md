@@ -117,7 +117,7 @@ entities = [
 <p><b>참고 사항</b></p>
 <p>벡터 차원은 Python <code translate="no">int</code> 또는 <code translate="no">numpy.integer</code> 유형이어야 하며, 값은 Python <code translate="no">float</code> 또는 <code translate="no">numpy.floating</code> 유형이어야 합니다.</p>
 </div>
-<p>임베딩을 생성하려면 다양한 임베딩 함수를 제공하는 PyMilvus 라이브러리에 내장된 <code translate="no">model</code> 패키지를 사용할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/embeddings.md">임베딩을</a> 참조하세요.</p>
+<p>임베딩을 생성하려면 다양한 임베딩 함수를 제공하는 PyMilvus 라이브러리에 내장된 <code translate="no">model</code> 패키지를 사용할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/embeddings.md">임베딩을</a> 참조하세요.</p>
 <h2 id="Create-a-collection-with-a-sparse-vector-field" class="common-anchor-header">스파스 벡터 필드로 컬렉션 만들기<button data-href="#Create-a-collection-with-a-sparse-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -214,7 +214,7 @@ client.create_index(collection_name=<span class="hljs-string">&quot;test_sparse_
 <li><p><code translate="no">metric_type</code>: 희소 벡터에 대해서는 <code translate="no">IP</code> (내부 제품) 거리 메트릭만 지원됩니다.</p></li>
 <li><p><code translate="no">params.drop_ratio_build</code>: 희소 벡터에 특별히 사용되는 인덱스 매개변수입니다. 인덱싱 과정에서 제외되는 작은 벡터 값의 비율을 제어합니다. 이 매개변수를 사용하면 인덱스를 구성할 때 작은 값을 무시함으로써 효율성과 정확성 사이의 균형을 미세 조정할 수 있습니다. 예를 들어 <code translate="no">drop_ratio_build = 0.3</code> 인 경우 인덱스를 구성하는 동안 모든 스파스 벡터의 모든 값이 수집되고 정렬됩니다. 이 중 가장 작은 30%의 값은 인덱스에 포함되지 않으므로 검색 시 계산 작업량이 줄어듭니다.</p></li>
 </ul>
-<p>자세한 내용은 <a href="/docs/ko/index.md">인메모리 인덱스를</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/v2.4.x/index.md">인메모리 인덱스를</a> 참조하세요.</p>
 <h2 id="Perform-ANN-search" class="common-anchor-header">ANN 검색 수행<button data-href="#Perform-ANN-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

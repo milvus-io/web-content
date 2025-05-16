@@ -134,7 +134,7 @@ common:
 </table>
 </li>
 </ul>
-<p>要將上述變更套用到您的 Milvus 叢集，請遵循「<a href="/docs/zh-hant/configure-helm.md">使用 Helm 設定 Milvus</a>」和<a href="/docs/zh-hant/configure_operator.md">「使用 Milvus Operators 設定 Milvus</a>」中的步驟。</p>
+<p>要將上述變更套用到您的 Milvus 叢集，請遵循「<a href="/docs/zh-hant/v2.4.x/configure-helm.md">使用 Helm 設定 Milvus</a>」和<a href="/docs/zh-hant/v2.4.x/configure_operator.md">「使用 Milvus Operators 設定 Milvus</a>」中的步驟。</p>
 <h3 id="Collection-Configuration" class="common-anchor-header">叢集設定</h3><p>若要在特定的集合中進行群集壓縮，您應該從集合中選擇一個標量欄位作為群集鍵。</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),

@@ -19,9 +19,9 @@ title: 인메모리 인덱스
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 항목에서는 Milvus가 지원하는 다양한 유형의 인메모리 인덱스, 각 인덱스가 가장 적합한 시나리오, 사용자가 더 나은 검색 성능을 달성하기 위해 구성할 수 있는 매개변수에 대해 설명합니다. 온디스크 인덱스에 대해서는 <strong><a href="/docs/ko/disk_index.md">온디스크 인덱스를</a></strong> 참조하세요.</p>
+    </button></h1><p>이 항목에서는 Milvus가 지원하는 다양한 유형의 인메모리 인덱스, 각 인덱스가 가장 적합한 시나리오, 사용자가 더 나은 검색 성능을 달성하기 위해 구성할 수 있는 매개변수에 대해 설명합니다. 온디스크 인덱스에 대해서는 <strong><a href="/docs/ko/v2.4.x/disk_index.md">온디스크 인덱스를</a></strong> 참조하세요.</p>
 <p>인덱싱은 데이터를 효율적으로 정리하는 과정으로, 대규모 데이터 세트에서 시간이 오래 걸리는 쿼리를 획기적으로 가속화하여 유사성 검색을 유용하게 만드는 데 중요한 역할을 합니다.</p>
-<p>쿼리 성능을 향상시키기 위해 각 벡터 필드에 <a href="/docs/ko/index-vector-fields.md">인덱스 유형을 지정할</a> 수 있습니다.</p>
+<p>쿼리 성능을 향상시키기 위해 각 벡터 필드에 <a href="/docs/ko/v2.4.x/index-vector-fields.md">인덱스 유형을 지정할</a> 수 있습니다.</p>
 <div class="alert note">
 현재 벡터 필드는 하나의 인덱스 유형만 지원합니다. 밀버스는 인덱스 유형을 전환할 때 이전 인덱스를 자동으로 삭제합니다.</div>
 <h2 id="ANNS-vector-indexes" class="common-anchor-header">ANNS 벡터 인덱스<button data-href="#ANNS-vector-indexes" class="anchor-icon" translate="no">
@@ -60,7 +60,7 @@ title: 인메모리 인덱스
 <div class="filter">
  <a href="#floating">부동 소수점 임베딩</a> <a href="#binary">이진 임베딩</a> <a href="#sparse">스파스 임베딩</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">부동 소수점 임베딩의 인덱스</h3><p>128차원 부동 소수점 임베딩(벡터)의 경우, 임베딩이 차지하는 저장 공간은 128*플로트 크기 = 512바이트입니다. 그리고 부동 소수점 임베딩에 사용되는 <a href="/docs/ko/metric.md">거리 메트릭은</a> 유클리드 거리(<code translate="no">L2</code>)와 내적 곱(<code translate="no">IP</code>)입니다.</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">부동 소수점 임베딩의 인덱스</h3><p>128차원 부동 소수점 임베딩(벡터)의 경우, 임베딩이 차지하는 저장 공간은 128*플로트 크기 = 512바이트입니다. 그리고 부동 소수점 임베딩에 사용되는 <a href="/docs/ko/v2.4.x/metric.md">거리 메트릭은</a> 유클리드 거리(<code translate="no">L2</code>)와 내적 곱(<code translate="no">IP</code>)입니다.</p>
 <p>이러한 유형의 인덱스에는 <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">SCANN</code> 등이 있습니다.</p>
 </div>
 <div class="filter-binary">
@@ -218,7 +218,7 @@ title: 인메모리 인덱스
 <tr><th>파라미터</th><th>설명</th><th>범위</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[선택 사항] 선택한 거리 메트릭입니다.</td><td><a href="/docs/ko/metric.md">지원되는 메트릭을</a> 참조하십시오.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[선택 사항] 선택한 거리 메트릭입니다.</td><td><a href="/docs/ko/v2.4.x/metric.md">지원되는 메트릭을</a> 참조하십시오.</td></tr>
 </tbody>
 </table>
 </li>
@@ -418,7 +418,7 @@ title: 인메모리 인덱스
 <tr><th>파라미터</th><th>설명</th><th>범위</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>[선택 사항] 선택한 거리 메트릭입니다.</td><td><a href="/docs/ko/metric.md">지원되는 메트릭을</a> 참조하십시오.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>[선택 사항] 선택한 거리 메트릭입니다.</td><td><a href="/docs/ko/v2.4.x/metric.md">지원되는 메트릭을</a> 참조하십시오.</td></tr>
 </tbody>
 </table>
 </li>
@@ -488,7 +488,7 @@ title: 인메모리 인덱스
 </li>
 </ul>
 <h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND</h3><p>이 인덱스는 <code translate="no">SPARSE_INVERTED_INDEX</code> 과 유사하지만, 검색 과정에서 전체 IP 거리 평가 횟수를 더 줄이기 위해 <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> 알고리즘을 활용합니다.</p>
-<p>테스트 결과, <code translate="no">SPARSE_WAND</code> 은 일반적으로 속도 면에서 다른 방법보다 우수한 성능을 보였습니다. 그러나 벡터의 밀도가 증가함에 따라 성능이 급격히 저하될 수 있습니다. 이 문제를 해결하기 위해 0이 아닌 <code translate="no">drop_ratio_search</code> 을 도입하면 정확도 손실은 최소화하면서 성능을 크게 향상시킬 수 있습니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>
+<p>테스트 결과, <code translate="no">SPARSE_WAND</code> 은 일반적으로 속도 면에서 다른 방법보다 우수한 성능을 보였습니다. 그러나 벡터의 밀도가 증가함에 따라 성능이 급격히 저하될 수 있습니다. 이 문제를 해결하기 위해 0이 아닌 <code translate="no">drop_ratio_search</code> 을 도입하면 정확도 손실은 최소화하면서 성능을 크게 향상시킬 수 있습니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>
 <ul>
 <li><p>인덱스 구축 매개변수</p>
 <table>
@@ -551,5 +551,5 @@ title: 인메모리 인덱스
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvus에서 지원되는 <a href="/docs/ko/metric.md">유사성 지표에</a> 대해 자세히 알아보세요.</li>
+<li>Milvus에서 지원되는 <a href="/docs/ko/v2.4.x/metric.md">유사성 지표에</a> 대해 자세히 알아보세요.</li>
 </ul>

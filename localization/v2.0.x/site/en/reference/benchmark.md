@@ -533,7 +533,7 @@ indexNode:
 <li>With the same dataset and the specified index parameters, it takes longer time to build HNSW index than to build IVF_FLAT index.</li>
 </ul>
 <p><strong>Suggestion</strong></p>
-<p>For large data sets which are mostly stored in <a href="/docs/glossary.md#Segment">sealed segments</a>, the more index nodes in the cluster, the less time it takes to build an index.</p>
+<p>For large data sets which are mostly stored in <a href="/docs/v2.0.x/glossary.md#Segment">sealed segments</a>, the more index nodes in the cluster, the less time it takes to build an index.</p>
 <h3 id="Vector-search-performance" class="common-anchor-header">Vector search performance</h3><p>The following tests observe the vector search of Milvus 2.0 from various perspectives.</p>
 <h4 id="nq--RT-group-by-topk" class="common-anchor-header">nq &amp; RT group by topk</h4><p>This test observes the RT of search with different search parameters (nq &amp; topk) under different data sets.</p>
 <p><details>
@@ -1556,7 +1556,7 @@ queryNode:
 <li>With the same search parameters, topk that is less than 200 makes little difference on RT of search.</li>
 </ul>
 <p><strong>Suggestion</strong></p>
-<p>For large data sets which are mostly stored in <a href="/docs/glossary.md#Segment">sealed segments</a>, adding query nodes to the cluster will shorten time it takes to search vectors.</p>
+<p>For large data sets which are mostly stored in <a href="/docs/v2.0.x/glossary.md#Segment">sealed segments</a>, adding query nodes to the cluster will shorten time it takes to search vectors.</p>
 <h4 id="nq--VPS-group-by-topk" class="common-anchor-header">nq &amp; VPS group by topk</h4><p>This test observes the VPS of search with different search parameters (nq &amp; topk) under different data sets.</p>
 <p><details>
 <summary><b>Method</b></summary>
@@ -3072,7 +3072,7 @@ queryNode:
 <p><strong>Conclusion</strong></p>
 <p>Under the same data set, when the number of query node increases, the QPS increases and RT decreases.</p>
 <p><strong>Suggestion</strong></p>
-<p>For large data sets which are mostly stored in <a href="/docs/glossary.md#Segment">sealed segments</a>, adding query nodes to the cluster will increase QPS.</p>
+<p>For large data sets which are mostly stored in <a href="/docs/v2.0.x/glossary.md#Segment">sealed segments</a>, adding query nodes to the cluster will increase QPS.</p>
 <h4 id="Recall--RT-group-by-ef-or-nprobe" class="common-anchor-header">Recall &amp; RT group by ef or nprobe</h4><p>This test observes the Recall and RT of search with different index types under different data sets.</p>
 <p><details>
 <summary><b>Method</b></summary>

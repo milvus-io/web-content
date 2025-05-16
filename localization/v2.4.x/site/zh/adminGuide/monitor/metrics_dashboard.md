@@ -20,7 +20,7 @@ summary: 本主题介绍 Milvus 仪表板中显示的监控指标。
       </svg>
     </button></h1><p>Milvus 会在运行期间输出详细的时间序列指标列表。您可以使用<a href="https://prometheus.io/">Prometheus</a>和<a href="https://grafana.com/">Grafana</a>将指标可视化。本主题介绍 Grafana Milvus 仪表板中显示的监控指标。</p>
 <p>本主题中的时间单位是毫秒。本主题中的 "第 99 百分位数 "指的是 99% 的时间统计数据控制在某一数值范围内。</p>
-<p>建议先阅读<a href="/docs/zh/monitor_overview.md">Milvus 监控框架概述</a>，了解 Prometheus 指标。</p>
+<p>建议先阅读<a href="/docs/zh/v2.4.x/monitor_overview.md">Milvus 监控框架概述</a>，了解 Prometheus 指标。</p>
 <p><details><summary>代理</summary></p>
 <table>
 <thead>

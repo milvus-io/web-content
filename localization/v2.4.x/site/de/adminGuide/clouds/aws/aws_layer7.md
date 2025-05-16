@@ -24,9 +24,9 @@ summary: >-
     </button></h1><p>Im Vergleich zu einem Layer-4-Load-Balancer bietet ein Layer-7-Load-Balancer intelligente Load-Balancing- und Caching-Funktionen und ist eine gute Wahl für Cloud-native Services.</p>
 <p>Diese Anleitung führt Sie durch die Einrichtung eines Layer-7 Load Balancers für einen Milvus-Cluster, der bereits hinter einem Layer-4 Load Balancer läuft.</p>
 <h3 id="Before-your-start" class="common-anchor-header">Bevor Sie beginnen</h3><ul>
-<li>Sie haben <a href="/docs/de/eks.md">einen Milvus-Cluster hinter einem Layer-4-Loadbalancer auf AWS bereitgestellt</a>.</li>
+<li>Sie haben <a href="/docs/de/v2.4.x/eks.md">einen Milvus-Cluster hinter einem Layer-4-Loadbalancer auf AWS bereitgestellt</a>.</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Anpassen der Milvus-Konfigurationen</h3><p>In dieser Anleitung wird davon ausgegangen, dass Sie bereits <a href="/docs/de/eks.md">einen Milvus-Cluster hinter einem Layer-4-Load-Balancer auf AWS bereitgestellt</a> haben.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Anpassen der Milvus-Konfigurationen</h3><p>In dieser Anleitung wird davon ausgegangen, dass Sie bereits <a href="/docs/de/v2.4.x/eks.md">einen Milvus-Cluster hinter einem Layer-4-Load-Balancer auf AWS bereitgestellt</a> haben.</p>
 <p>Bevor Sie einen Layer-7-Loadbalancer für diesen Milvus-Cluster einrichten, führen Sie den folgenden Befehl aus, um den Layer-4-Loadbalancer zu entfernen.</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

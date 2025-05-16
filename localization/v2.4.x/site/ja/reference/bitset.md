@@ -35,7 +35,7 @@ title: ビットセット
         ></path>
       </svg>
     </button></h2><p>ビットセットはビットの集合です。ビットは2つの値しか取り得ない要素であり、最も一般的なものは<code translate="no">0</code> と<code translate="no">1</code> 、またはブール値<code translate="no">true</code> と<code translate="no">false</code> です。Milvusでは、ビットセットはビット番号<code translate="no">0</code> と<code translate="no">1</code> の配列であり、int、float、または char とは対照的に、特定のデータをコンパクトかつ効率的に表現するために使用することができます。ビット番号はデフォルトで<code translate="no">0</code> 、特定の条件を満たした場合のみ<code translate="no">1</code> 。</p>
-<p>ビットセットに対する演算は<a href="/docs/ja/boolean.md">ブーリアンロジックで</a>行われ、出力値は有効か無効かのどちらかになり、それぞれ<code translate="no">1</code> 、<code translate="no">0</code> 。例えば、<a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">論理演算子</a> <code translate="no">AND</code> は、同じインデックス位置にある項目に基づいて2つのビットセットを比較し、その結果を新しいビットセットとして生成するために使用できます。ある位置にある2つの項目が同じであれば、新しいビットセットではその位置に<code translate="no">1</code> 、異なる場合は<code translate="no">0</code> 。</p>
+<p>ビットセットに対する演算は<a href="/docs/ja/v2.4.x/boolean.md">ブーリアンロジックで</a>行われ、出力値は有効か無効かのどちらかになり、それぞれ<code translate="no">1</code> 、<code translate="no">0</code> 。例えば、<a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">論理演算子</a> <code translate="no">AND</code> は、同じインデックス位置にある項目に基づいて2つのビットセットを比較し、その結果を新しいビットセットとして生成するために使用できます。ある位置にある2つの項目が同じであれば、新しいビットセットではその位置に<code translate="no">1</code> 、異なる場合は<code translate="no">0</code> 。</p>
 <h2 id="Implementation" class="common-anchor-header">実装<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

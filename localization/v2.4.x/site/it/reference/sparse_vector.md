@@ -117,7 +117,7 @@ entities = [
 <p><b>note</b></p>
 <p>Le dimensioni dei vettori devono essere di tipo Python <code translate="no">int</code> o <code translate="no">numpy.integer</code> e i valori di tipo Python <code translate="no">float</code> o <code translate="no">numpy.floating</code>.</p>
 </div>
-<p>Per generare embeddings, si può anche usare il pacchetto <code translate="no">model</code> integrato nella libreria PyMilvus, che offre una serie di funzioni di embedding. Per maggiori dettagli, consultare <a href="/docs/it/embeddings.md">Embeddings</a>.</p>
+<p>Per generare embeddings, si può anche usare il pacchetto <code translate="no">model</code> integrato nella libreria PyMilvus, che offre una serie di funzioni di embedding. Per maggiori dettagli, consultare <a href="/docs/it/v2.4.x/embeddings.md">Embeddings</a>.</p>
 <h2 id="Create-a-collection-with-a-sparse-vector-field" class="common-anchor-header">Creare un insieme con un campo vettoriale rado<button data-href="#Create-a-collection-with-a-sparse-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -214,7 +214,7 @@ client.create_index(collection_name=<span class="hljs-string">&quot;test_sparse_
 <li><p><code translate="no">metric_type</code>: Per i vettori sparsi è supportata solo la metrica di distanza <code translate="no">IP</code> (Prodotto Interno).</p></li>
 <li><p><code translate="no">params.drop_ratio_build</code>: Parametro dell'indice utilizzato specificamente per i vettori sparsi. Controlla la percentuale di valori piccoli del vettore che vengono esclusi durante il processo di indicizzazione. Questo parametro consente di regolare con precisione il compromesso tra efficienza e accuratezza, ignorando i valori piccoli durante la costruzione dell'indice. Ad esempio, se <code translate="no">drop_ratio_build = 0.3</code>, durante la costruzione dell'indice, tutti i valori di tutti i vettori sparsi vengono raccolti e ordinati. Il 30% più piccolo di questi valori non viene incluso nell'indice, riducendo così il carico di lavoro computazionale durante la ricerca.</p></li>
 </ul>
-<p>Per ulteriori informazioni, consultare <a href="/docs/it/index.md">Indice in-memory</a>.</p>
+<p>Per ulteriori informazioni, consultare <a href="/docs/it/v2.4.x/index.md">Indice in-memory</a>.</p>
 <h2 id="Perform-ANN-search" class="common-anchor-header">Esecuzione della ricerca RNA<button data-href="#Perform-ANN-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

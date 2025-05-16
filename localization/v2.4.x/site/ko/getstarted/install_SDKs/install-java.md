@@ -90,11 +90,11 @@ title: Milvus Java SDK 설치
 <ul>
 <li><p>Milvus의 기본 작업을 학습합니다:</p>
 <ul>
-<li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
-<li><a href="/docs/ko/manage-partitions.md">파티션 관리</a></li>
-<li><a href="/docs/ko/insert-update-delete.md">삽입, 업서트 및 삭제</a></li>
-<li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
-<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
+<li><a href="/docs/ko/v2.4.x/manage-collections.md">컬렉션 관리</a></li>
+<li><a href="/docs/ko/v2.4.x/manage-partitions.md">파티션 관리</a></li>
+<li><a href="/docs/ko/v2.4.x/insert-update-delete.md">삽입, 업서트 및 삭제</a></li>
+<li><a href="/docs/ko/v2.4.x/single-vector-search.md">단일 벡터 검색</a></li>
+<li><a href="/docs/ko/v2.4.x/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
 <li><p><a href="/api-reference/java/v2.4.x/About.md">Milvus Java API 참조</a> 살펴보기</p></li>
 </ul>

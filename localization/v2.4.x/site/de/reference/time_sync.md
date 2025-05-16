@@ -156,6 +156,6 @@ summary: Erfahren Sie mehr über das Zeitsynchronisationssystem in Milvus.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Lernen Sie das Konzept des <a href="/docs/de/timestamp.md">Zeitstempels</a> kennen.</li>
-<li>Lernen Sie den <a href="/docs/de/data_processing.md">Arbeitsablauf der Datenverarbeitung</a> in Milvus kennen.</li>
+<li>Lernen Sie das Konzept des <a href="/docs/de/v2.4.x/timestamp.md">Zeitstempels</a> kennen.</li>
+<li>Lernen Sie den <a href="/docs/de/v2.4.x/data_processing.md">Arbeitsablauf der Datenverarbeitung</a> in Milvus kennen.</li>
 </ul>

@@ -36,7 +36,7 @@ title: 一貫性
         ></path>
       </svg>
     </button></h2><p>分散データベースにおける一貫性とは、特にデータの書き込みまたは読み出し時に、すべてのノードまたはレプリカが同じデータのビューを持つことを保証する特性を指します。</p>
-<p>Milvusは、strong、bounded staleness、session、enduallyの4つの一貫性レベルをサポートしています。Milvusのデフォルトの一貫性レベルはbounded stalenessです。 <a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a>、<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a>、<a href="/docs/ja/get-and-scalar-query.md">クエリを</a>実行する際に一貫性レベルを簡単に調整し、アプリケーションに最適なものにすることができます。</p>
+<p>Milvusは、strong、bounded staleness、session、enduallyの4つの一貫性レベルをサポートしています。Milvusのデフォルトの一貫性レベルはbounded stalenessです。 <a href="/docs/ja/v2.4.x/single-vector-search.md">単一ベクトル検索</a>、<a href="/docs/ja/v2.4.x/multi-vector-search.md">ハイブリッド検索</a>、<a href="/docs/ja/v2.4.x/get-and-scalar-query.md">クエリを</a>実行する際に一貫性レベルを簡単に調整し、アプリケーションに最適なものにすることができます。</p>
 <h2 id="Consistency-levels" class="common-anchor-header">一貫性レベル<button data-href="#Consistency-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,8 +119,8 @@ title: 一貫性
       </svg>
     </button></h2><ul>
 <li>一貫性レベルの調整方法について説明します：<ul>
-<li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
-<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
-<li><a href="/docs/ja/get-and-scalar-query.md">スカラ検索を行う</a></li>
+<li><a href="/docs/ja/v2.4.x/single-vector-search.md">単一ベクトル検索</a></li>
+<li><a href="/docs/ja/v2.4.x/multi-vector-search.md">ハイブリッド検索</a></li>
+<li><a href="/docs/ja/v2.4.x/get-and-scalar-query.md">スカラ検索を行う</a></li>
 </ul></li>
 </ul>

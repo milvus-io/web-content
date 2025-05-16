@@ -37,7 +37,7 @@ title: Conduzione di ricerche visive con Milvus e FiftyOne
       </svg>
     </button></h2><p>Prima di iniziare, assicurarsi di disporre di quanto segue:</p>
 <ul>
-<li>Un <a href="/docs/it/install_standalone-docker.md">server Milvus</a> funzionante.</li>
+<li>Un <a href="/docs/it/v2.4.x/install_standalone-docker.md">server Milvus</a> funzionante.</li>
 <li>Un ambiente Python con <code translate="no">pymilvus</code> e <code translate="no">fiftyone</code> installati.</li>
 <li>Un <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">set di</a> immagini da ricercare.</li>
 </ul>
@@ -262,7 +262,7 @@ milvus_index = fob.compute_similarity(
 <li><p><strong>metrica</strong> (<em>"dotproduct")</em>: la metrica della distanza di incorporazione da usare quando si crea un nuovo indice. I valori supportati sono (<code translate="no">&quot;dotproduct&quot;</code>, <code translate="no">&quot;euclidean&quot;</code>)</p></li>
 <li><p><strong>consistency_level</strong> (<em>"Session")</em>: il livello di coerenza da utilizzare. I valori supportati sono (<code translate="no">&quot;Strong&quot;</code>, <code translate="no">&quot;Session&quot;</code>, <code translate="no">&quot;Bounded&quot;</code>, <code translate="no">&quot;Eventually&quot;</code>)</p></li>
 </ul>
-<p>Per informazioni dettagliate su questi parametri, consultare la <a href="/docs/it/authenticate.md">documentazione</a> sull'<a href="/docs/it/authenticate.md">autenticazione Milvus</a> e la <a href="/docs/it/consistency.md">documentazione sui livelli di coerenza Milvus</a>.</p>
+<p>Per informazioni dettagliate su questi parametri, consultare la <a href="/docs/it/v2.4.x/authenticate.md">documentazione</a> sull'<a href="/docs/it/v2.4.x/authenticate.md">autenticazione Milvus</a> e la <a href="/docs/it/v2.4.x/consistency.md">documentazione sui livelli di coerenza Milvus</a>.</p>
 <p>È possibile specificare questi parametri tramite una qualsiasi delle strategie descritte nella sezione precedente. Ecco un esempio di <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">configurazione del cervello</a> che include tutti i parametri disponibili:</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {

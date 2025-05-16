@@ -78,7 +78,7 @@ summary: >-
 <li>La nostra roadmap è tipicamente strutturata in tre parti: la release più recente, la prossima release in arrivo e una visione a medio-lungo termine entro il prossimo anno.</li>
 <li>Man mano che progrediamo, impariamo continuamente e occasionalmente modifichiamo la nostra attenzione, aggiungendo o rimuovendo elementi a seconda delle necessità.</li>
 <li>Questi piani sono indicativi e soggetti a modifiche, e possono variare in base ai servizi in abbonamento.</li>
-<li>Ci atteniamo costantemente alla nostra tabella di marcia, con le nostre <a href="/docs/it/release_notes.md">note di rilascio</a> come riferimento.</li>
+<li>Ci atteniamo costantemente alla nostra tabella di marcia, con le nostre <a href="/docs/it/v2.4.x/release_notes.md">note di rilascio</a> come riferimento.</li>
 </ul>
 <h2 id="How-to-contribute" class="common-anchor-header">Come contribuire<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"

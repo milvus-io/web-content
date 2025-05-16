@@ -190,7 +190,7 @@ client.createIndex(createIndexReq);
 <p>要建立的標量索引類型。對於隱含索引，請留空或省略此參數。</p>
 <p>對於自訂索引，有效值為</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (建議) 反向索引由包含按字母順序排序的所有標記化字詞的詞彙字典組成。如需詳細資訊，請參閱<a href="/docs/zh-hant/scalar_index.md">標量索引</a>。</p></li>
+<li><p><strong>INVERTED</strong>: (建議) 反向索引由包含按字母順序排序的所有標記化字詞的詞彙字典組成。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.4.x/scalar_index.md">標量索引</a>。</p></li>
 <li><p><strong>STL_SORT</strong>：使用標準模板函式庫排序演算法對標量字段排序。僅支援數值欄位 (例如：INT8、INT16、INT32、INT64、FLOAT、DOUBLE)。</p></li>
 <li><p><strong>Trie</strong>：樹狀資料結構，用於快速前綴搜尋和檢索。支援 VARCHAR 欄位。</p></li>
 </ul></li>
@@ -214,7 +214,7 @@ client.createIndex(createIndexReq);
 <li><strong>fieldName</strong><em>(String</em>) 要建立索引的標量欄位名稱。</li>
 <li><strong>indexName</strong><em>(字串</em>) 要建立的標量索引名稱。每個標量欄位支援一個索引。</li>
 <li><strong>indexType</strong><em>(字串</em>) 要建立的標量索引類型。對於隱含索引，請將它留空或省略此參數。 對於自訂索引，有效值為：<ul>
-<li><strong>INVERTED</strong>: (建議) 反向索引由包含按字母順序排序的所有標記化字詞的詞彙字典組成。如需詳細資訊，請參閱<a href="/docs/zh-hant/scalar_index.md">標量索引</a>。</li>
+<li><strong>INVERTED</strong>: (建議) 反向索引由包含按字母順序排序的所有標記化字詞的詞彙字典組成。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.4.x/scalar_index.md">標量索引</a>。</li>
 <li><strong>STL_SORT</strong>：使用標準模板函式庫排序演算法對標量字段排序。支援布林欄位和數值欄位 (例如：INT8、INT16、INT32、INT64、FLOAT、DOUBLE)。</li>
 <li><strong>Trie</strong>：一種樹狀資料結構，用於快速前綴搜尋和檢索。支援 VARCHAR 欄位。</li>
 </ul></li>
@@ -235,7 +235,7 @@ client.createIndex(createIndexReq);
 <li><strong>field_name</strong><em>(字串</em>) 要建立索引的標量欄位名稱。</li>
 <li><strong>index_name</strong><em>(string</em>) 要建立的標量索引的名稱。每個標量欄位支援一個索引。</li>
 <li><strong>index_type</strong><em>(string</em>) 要建立的標量索引類型。對於隱含索引，請將它留空或省略此參數。 對於自訂索引，有效值為：<ul>
-<li><strong>INVERTED</strong>: (建議) 反向索引由包含所有按字母順序排序的標記化字詞的詞彙字典組成。如需詳細資訊，請參閱<a href="/docs/zh-hant/scalar_index.md">標量索引</a>。</li>
+<li><strong>INVERTED</strong>: (建議) 反向索引由包含所有按字母順序排序的標記化字詞的詞彙字典組成。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.4.x/scalar_index.md">標量索引</a>。</li>
 <li><strong>STL_SORT</strong>：使用標準模板函式庫排序演算法對標量字段排序。支援布林欄位和數值欄位 (例如：INT8、INT16、INT32、INT64、FLOAT、DOUBLE)。</li>
 <li><strong>Trie</strong>：一種樹狀資料結構，用於快速前綴搜尋和檢索。支援 VARCHAR 欄位。</li>
 </ul></li>

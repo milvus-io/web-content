@@ -85,7 +85,7 @@ go get &amp; go build
       </svg>
     </button></h2><p>Milvus-migration 도구가 설치되면 다양한 소스에서 데이터를 마이그레이션할 수 있습니다:</p>
 <ul>
-<li><a href="/docs/ko/es2m.md">Elasticsearch에서</a></li>
-<li><a href="/docs/ko/f2m.md">Faiss에서</a></li>
-<li><a href="/docs/ko/m2m.md">Milvus 1.x에서</a></li>
+<li><a href="/docs/ko/v2.4.x/es2m.md">Elasticsearch에서</a></li>
+<li><a href="/docs/ko/v2.4.x/f2m.md">Faiss에서</a></li>
+<li><a href="/docs/ko/v2.4.x/m2m.md">Milvus 1.x에서</a></li>
 </ul>

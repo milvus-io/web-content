@@ -22,7 +22,7 @@ title: Scalare un cluster Milvus
         ></path>
       </svg>
     </button></h1><p>Milvus supporta la scalabilità orizzontale dei suoi componenti. Ciò significa che è possibile aumentare o diminuire il numero di nodi worker di ciascun tipo in base alle proprie esigenze.</p>
-<p>Questo argomento descrive come ridimensionare e scalare un cluster Milvus. Si presuppone che sia già stato <a href="/docs/it/install_cluster-helm.md">installato un cluster Milvus</a> prima di scalare. Inoltre, si consiglia di familiarizzare con l'<a href="/docs/it/architecture_overview.md">architettura</a> di <a href="/docs/it/architecture_overview.md">Milvus</a> prima di iniziare.</p>
+<p>Questo argomento descrive come ridimensionare e scalare un cluster Milvus. Si presuppone che sia già stato <a href="/docs/it/v2.4.x/install_cluster-helm.md">installato un cluster Milvus</a> prima di scalare. Inoltre, si consiglia di familiarizzare con l'<a href="/docs/it/v2.4.x/architecture_overview.md">architettura</a> di <a href="/docs/it/v2.4.x/architecture_overview.md">Milvus</a> prima di iniziare.</p>
 <p>Questa esercitazione prende come esempio il ridimensionamento di tre nodi di query. Per scalare altri tipi di nodi, sostituire <code translate="no">queryNode</code> con il tipo di nodo corrispondente nella riga di comando.</p>
 <div class="alert note">
 <p>Per informazioni su come scalare un cluster con Milvus Operator, consultare <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md">Scala un cluster con Milvus Operator</a>.</p>
@@ -52,7 +52,7 @@ title: Scalare un cluster Milvus
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>Scalare</span> </span></p>
-<p>Secondo l'<a href="/docs/it/architecture_overview.md">architettura Milvus</a>, i nodi worker stateless includono il nodo di interrogazione, il nodo dati, il nodo indice e il proxy. Pertanto, è possibile scalare questo tipo di nodi in base alle esigenze aziendali e agli scenari applicativi. È possibile ridimensionare il cluster Milvus manualmente o automaticamente.</p>
+<p>Secondo l'<a href="/docs/it/v2.4.x/architecture_overview.md">architettura Milvus</a>, i nodi worker stateless includono il nodo di interrogazione, il nodo dati, il nodo indice e il proxy. Pertanto, è possibile scalare questo tipo di nodi in base alle esigenze aziendali e agli scenari applicativi. È possibile ridimensionare il cluster Milvus manualmente o automaticamente.</p>
 <p>In genere, è necessario ridimensionare il cluster Milvus creato se è sovrautilizzato. Di seguito sono riportate alcune situazioni tipiche in cui potrebbe essere necessario ridimensionare il cluster Milvus:</p>
 <ul>
 <li>L'utilizzo della CPU e della memoria è elevato per un certo periodo di tempo.</li>
@@ -168,16 +168,16 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
     </button></h2><ul>
 <li><p>Se si desidera imparare a monitorare i servizi Milvus e a creare avvisi:</p>
 <ul>
-<li>Imparare a <a href="/docs/it/monitor.md">monitorare Milvus con Prometheus Operator su Kubernetes</a>.</li>
+<li>Imparare a <a href="/docs/it/v2.4.x/monitor.md">monitorare Milvus con Prometheus Operator su Kubernetes</a>.</li>
 </ul></li>
 <li><p>Se siete pronti a distribuire il vostro cluster su cloud:</p>
 <ul>
-<li>Imparare a <a href="/docs/it/eks.md">distribuire Milvus su Amazon EKS con Terraform</a></li>
-<li>Imparare a <a href="/docs/it/gcp.md">distribuire il cluster Milvus su GCP con Kubernetes</a></li>
-<li>Imparare a <a href="/docs/it/azure.md">distribuire Milvus su Microsoft Azure con Kubernetes</a></li>
+<li>Imparare a <a href="/docs/it/v2.4.x/eks.md">distribuire Milvus su Amazon EKS con Terraform</a></li>
+<li>Imparare a <a href="/docs/it/v2.4.x/gcp.md">distribuire il cluster Milvus su GCP con Kubernetes</a></li>
+<li>Imparare a <a href="/docs/it/v2.4.x/azure.md">distribuire Milvus su Microsoft Azure con Kubernetes</a></li>
 </ul></li>
 <li><p>Se state cercando istruzioni su come allocare le risorse:</p>
 <ul>
-<li><a href="/docs/it/allocate.md#standalone">Allocare le risorse su Kubernetes</a></li>
+<li><a href="/docs/it/v2.4.x/allocate.md#standalone">Allocare le risorse su Kubernetes</a></li>
 </ul></li>
 </ul>

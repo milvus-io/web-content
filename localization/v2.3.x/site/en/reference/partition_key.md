@@ -141,7 +141,7 @@ utility.list_collections()
 <li><p>If a search request includes boolean expressions related to the partition key, Milvus will hash that specific partition key to filter and identify the relevant partition. This narrows down the search scope, making searches faster and more efficient.</p></li>
 </ul></li>
 </ul>
-<p>For other possible options for <code translate="no">metric_type</code> and <code translate="no">index_type</code>, please refer to <a href="/docs/metric.md">Similarity Metrics</a>, <a href="/docs/index.md">In-memory Index</a> and <a href="/docs/disk_index.md">On-disk Index</a>.</p>
+<p>For other possible options for <code translate="no">metric_type</code> and <code translate="no">index_type</code>, please refer to <a href="/docs/v2.3.x/metric.md">Similarity Metrics</a>, <a href="/docs/v2.3.x/index.md">In-memory Index</a> and <a href="/docs/v2.3.x/disk_index.md">On-disk Index</a>.</p>
 <h2 id="Insert-Data" class="common-anchor-header">Insert Data<button data-href="#Insert-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -231,4 +231,4 @@ utility.list_collections()
       </svg>
     </button></h2><p>You can use the partition key feature to achieve multi-tenancy with better search performance.</p>
 <p>To do this, you can assign a tenant-specific value as the partition key field for each entity. Then, when you search or query the collection, you can include the partition key field in the boolean expression to filter entities by the tenant-specific value. This way, you can isolate data by tenants and avoid scanning unnecessary partitions.</p>
-<p>To learn more about multi-tenancy strategies, read <a href="/docs/multi_tenancy.md">Multi-tenancy</a> for details.</p>
+<p>To learn more about multi-tenancy strategies, read <a href="/docs/v2.3.x/multi_tenancy.md">Multi-tenancy</a> for details.</p>

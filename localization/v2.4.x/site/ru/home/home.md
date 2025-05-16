@@ -33,13 +33,13 @@ id: home.md
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
   
-   <a href="/docs/ru/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/ru/install_standalone-docker.md"> <p class="link-btn">Установите Milvus</p> </a><p>Узнайте, как установить Milvus с помощью Docker Compose или на Kubernetes.</p>
+   <a href="/docs/ru/v2.4.x/install_standalone-docker.md"> <img translate="no" src="/docs/v2.4.x/assets/home_install.svg" alt="icon" />
+   </a> <a href="/docs/ru/v2.4.x/install_standalone-docker.md"> <p class="link-btn">Установите Milvus</p> </a><p>Узнайте, как установить Milvus с помощью Docker Compose или на Kubernetes.</p>
 </div>
 <div class="start_card_container">
   
-   <a href="/docs/ru/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
-   </a> <a href="/docs/ru/quickstart.md"> <p class="link-btn">Быстрый запуск</p> </a><p>Узнайте, как быстро запустить Milvus с помощью примеров кода.</p>
+   <a href="/docs/ru/v2.4.x/quickstart.md"> <img translate="no" src="/docs/v2.4.x/assets/home_quick_start.svg" alt="icon" />
+   </a> <a href="/docs/ru/v2.4.x/quickstart.md"> <p class="link-btn">Быстрый запуск</p> </a><p>Узнайте, как быстро запустить Milvus с помощью примеров кода.</p>
 </div>
 <div class="start_card_container">
   
@@ -67,31 +67,31 @@ id: home.md
 <div class="recomment-item">
   <p>Использование</p>
 <ul>
-<li><a href="/docs/ru/manage-collections.md">Управление коллекциями</a></li>
-<li><a href="/docs/ru/insert-update-delete.md">Вставка, апсерт и удаление</a></li>
-<li><a href="/docs/ru/index-vector-fields.md">Индексирование векторных полей</a></li>
-<li><a href="/docs/ru/single-vector-search.md">Одновекторный поиск</a></li>
-<li><a href="/docs/ru/get-and-scalar-query.md">Получение и скалярный запрос</a></li>
+<li><a href="/docs/ru/v2.4.x/manage-collections.md">Управление коллекциями</a></li>
+<li><a href="/docs/ru/v2.4.x/insert-update-delete.md">Вставка, апсерт и удаление</a></li>
+<li><a href="/docs/ru/v2.4.x/index-vector-fields.md">Индексирование векторных полей</a></li>
+<li><a href="/docs/ru/v2.4.x/single-vector-search.md">Одновекторный поиск</a></li>
+<li><a href="/docs/ru/v2.4.x/get-and-scalar-query.md">Получение и скалярный запрос</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Развертывание</p>
 <ul>
-<li><a href="/docs/ru/configure-docker.md">Настройка Milvus</a></li>
-<li><a href="/docs/ru/deploy_s3.md">Управление зависимостями</a></li>
-<li><a href="/docs/ru/eks.md">Развертывание в облаках</a></li>
-<li><a href="/docs/ru/scaleout.md">Масштабирование кластера Milvus</a></li>
-<li><a href="/docs/ru/monitor_overview.md">Мониторинг и оповещение</a></li>
+<li><a href="/docs/ru/v2.4.x/configure-docker.md">Настройка Milvus</a></li>
+<li><a href="/docs/ru/v2.4.x/deploy_s3.md">Управление зависимостями</a></li>
+<li><a href="/docs/ru/v2.4.x/eks.md">Развертывание в облаках</a></li>
+<li><a href="/docs/ru/v2.4.x/scaleout.md">Масштабирование кластера Milvus</a></li>
+<li><a href="/docs/ru/v2.4.x/monitor_overview.md">Мониторинг и оповещение</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Изучите</p>
 <ul>
-<li><a href="/docs/ru/system_configuration.md">Конфигурация системы</a></li>
-<li><a href="/docs/ru/architecture_overview.md">Обзор архитектуры</a></li>
-<li><a href="/docs/ru/index.md">Векторный индекс</a></li>
-<li><a href="/docs/ru/metric.md">Метрики сходства</a></li>
-<li><a href="/docs/ru/glossary.md">Глоссарий</a></li>
+<li><a href="/docs/ru/v2.4.x/system_configuration.md">Конфигурация системы</a></li>
+<li><a href="/docs/ru/v2.4.x/architecture_overview.md">Обзор архитектуры</a></li>
+<li><a href="/docs/ru/v2.4.x/index.md">Векторный индекс</a></li>
+<li><a href="/docs/ru/v2.4.x/metric.md">Метрики сходства</a></li>
+<li><a href="/docs/ru/v2.4.x/glossary.md">Глоссарий</a></li>
 </ul>
 </div>
 </div>
@@ -113,9 +113,9 @@ id: home.md
       </svg>
     </button></h2><p><em>Мар 2024 - Выпуск Milvus 2.4.0</em></p>
 <ul>
-<li>Добавлено руководство по <a href="/docs/ru/multi-vector-search.md">проведению гибридного поиска</a>.</li>
-<li>Добавлено описание <a href="/docs/ru/gpu_index.md">индекса GPU</a>.</li>
-<li>Добавлено руководство по <a href="/docs/ru/embeddings.md">встраиванию данных с помощью PyMilvus</a>.</li>
-<li>Добавлено описание <a href="/docs/ru/milvus-cdc-overview.md">Milvus CDC</a>.</li>
+<li>Добавлено руководство по <a href="/docs/ru/v2.4.x/multi-vector-search.md">проведению гибридного поиска</a>.</li>
+<li>Добавлено описание <a href="/docs/ru/v2.4.x/gpu_index.md">индекса GPU</a>.</li>
+<li>Добавлено руководство по <a href="/docs/ru/v2.4.x/embeddings.md">встраиванию данных с помощью PyMilvus</a>.</li>
+<li>Добавлено описание <a href="/docs/ru/v2.4.x/milvus-cdc-overview.md">Milvus CDC</a>.</li>
 </ul>
 </div>

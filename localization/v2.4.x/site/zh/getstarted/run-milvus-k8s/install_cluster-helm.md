@@ -54,14 +54,14 @@ title: 使用 Helm 安装 Milvus 群集
       </svg>
     </button></h2><ul>
 <li><p><a href="https://helm.sh/docs/intro/install/">安装 Helm CLI</a>。</p></li>
-<li><p><a href="/docs/zh/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">创建 K8s 集群</a>。</p></li>
+<li><p><a href="/docs/zh/v2.4.x/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">创建 K8s 集群</a>。</p></li>
 <li><p>安装<a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>。您可以按以下步骤检查已安装的 StorageClass。</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
 NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
 <span class="hljs-title function_">standard</span> <span class="hljs-params">(<span class="hljs-keyword">default</span>)</span>    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>安装前检查<a href="/docs/zh/prerequisite-helm.md">硬件和软件要求</a>。</p></li>
+<li><p>安装前检查<a href="/docs/zh/v2.4.x/prerequisite-helm.md">硬件和软件要求</a>。</p></li>
 <li><p>安装 Milvus 之前，建议使用<a href="https://milvus.io/tools/sizing">Milvus 大小工具</a>，根据数据大小估算硬件需求。这有助于确保 Milvus 安装的最佳性能和资源分配。</p></li>
 </ul>
 <div class="alert note">
@@ -264,26 +264,26 @@ $ helm upgrade my-release zilliztech/milvus
       </svg>
     </button></h2><p>在 Docker 中安装 Milvus 后，你可以</p>
 <ul>
-<li><p>查看<a href="/docs/zh/quickstart.md">Hello Milvus</a>，了解 Milvus 的功能。</p></li>
+<li><p>查看<a href="/docs/zh/v2.4.x/quickstart.md">Hello Milvus</a>，了解 Milvus 的功能。</p></li>
 <li><p>了解 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh/manage_databases.md">管理数据库</a></li>
-<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
-<li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
-<li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
-<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/v2.4.x/manage_databases.md">管理数据库</a></li>
+<li><a href="/docs/zh/v2.4.x/manage-collections.md">管理 Collections</a></li>
+<li><a href="/docs/zh/v2.4.x/manage-partitions.md">管理分区</a></li>
+<li><a href="/docs/zh/v2.4.x/insert-update-delete.md">插入、倒置和删除</a></li>
+<li><a href="/docs/zh/v2.4.x/single-vector-search.md">单向量搜索</a></li>
+<li><a href="/docs/zh/v2.4.x/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
-<li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
+<li><p><a href="/docs/zh/v2.4.x/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/v2.4.x/scaleout.md">扩展你的 Milvus 集群</a>。</p></li>
 <li><p>在云上部署你的 Milvus 集群：</p>
 <ul>
-<li><a href="/docs/zh/eks.md">亚马逊 EKS</a></li>
-<li><a href="/docs/zh/gcp.md">谷歌云</a></li>
-<li><a href="/docs/zh/azure.md">微软 Azure</a></li>
+<li><a href="/docs/zh/v2.4.x/eks.md">亚马逊 EKS</a></li>
+<li><a href="/docs/zh/v2.4.x/gcp.md">谷歌云</a></li>
+<li><a href="/docs/zh/v2.4.x/azure.md">微软 Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
-<li><p>探索<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.4.x/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
+<li><p>探索<a href="/docs/zh/v2.4.x/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
 <li><p>探索<a href="https://milvus.io/docs/attu.md">Attu</a>，一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
-<li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh/v2.4.x/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

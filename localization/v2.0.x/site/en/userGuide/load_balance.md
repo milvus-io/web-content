@@ -20,7 +20,7 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This topic describes how to balance query load in Milvus.</p>
-<p>Milvus supports automatic load balance by default. You can <a href="/docs/configure-docker.md">configure</a> your Milvus to enable or disable <a href="/docs/configure_querycoord.md#queryCoordautoBalance">automatic load balance</a>. By specifying <a href="/docs/configure_querycoord.md#queryCoordbalanceIntervalSeconds"><code translate="no">queryCoord.balanceIntervalSeconds</code></a>, <a href="/docs/configure_querycoord.md#queryCoordoverloadedMemoryThresholdPercentage"><code translate="no">queryCoord.overloadedMemoryThresholdPercentage</code></a>, and <a href="/docs/configure_querycoord.md#queryCoordmemoryUsageMaxDifferencePercentage"><code translate="no">queryCoord.memoryUsageMaxDifferencePercentage</code></a>, you can change the thresholds that trigger the automatic load balance.</p>
+<p>Milvus supports automatic load balance by default. You can <a href="/docs/v2.0.x/configure-docker.md">configure</a> your Milvus to enable or disable <a href="/docs/v2.0.x/configure_querycoord.md#queryCoordautoBalance">automatic load balance</a>. By specifying <a href="/docs/v2.0.x/configure_querycoord.md#queryCoordbalanceIntervalSeconds"><code translate="no">queryCoord.balanceIntervalSeconds</code></a>, <a href="/docs/v2.0.x/configure_querycoord.md#queryCoordoverloadedMemoryThresholdPercentage"><code translate="no">queryCoord.overloadedMemoryThresholdPercentage</code></a>, and <a href="/docs/v2.0.x/configure_querycoord.md#queryCoordmemoryUsageMaxDifferencePercentage"><code translate="no">queryCoord.memoryUsageMaxDifferencePercentage</code></a>, you can change the thresholds that trigger the automatic load balance.</p>
 <p>If automatic load balance is disabled, you can still balance the load manually.</p>
 <h2 id="Check-segment-information" class="common-anchor-header">Check segment information<button data-href="#Check-segment-information" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -271,10 +271,10 @@ utility.<span class="hljs-title function_">get_query_segment_info</span>(<span c
     </button></h2><ul>
 <li>Learn more basic operations of Milvus:
 <ul>
-<li><a href="/docs/insert_data.md">Insert data into Milvus</a></li>
-<li><a href="/docs/create_partition.md">Create a partition</a></li>
-<li><a href="/docs/build_index.md">Build an index for vectors</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.0.x/insert_data.md">Insert data into Milvus</a></li>
+<li><a href="/docs/v2.0.x/create_partition.md">Create a partition</a></li>
+<li><a href="/docs/v2.0.x/build_index.md">Build an index for vectors</a></li>
+<li><a href="/docs/v2.0.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.0.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul></li>
 </ul>

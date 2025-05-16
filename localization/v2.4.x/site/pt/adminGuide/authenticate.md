@@ -21,7 +21,7 @@ title: Autenticar o acesso do utilizador
     </button></h1><p>Este guia explica como gerir a autenticação do utilizador no Milvus, incluindo a ativação da autenticação, a ligação como utilizador e a modificação das credenciais do utilizador.</p>
 <div class="alert note">
 <ul>
-<li><p>O TLS e a autenticação do utilizador são duas abordagens de segurança distintas. Se tiver ativado a autenticação do utilizador e o TLS no seu sistema Milvus, tem de fornecer um nome de utilizador, uma palavra-passe e caminhos de ficheiros de certificados. Para obter informações sobre como ativar o TLS, consulte <a href="/docs/pt/tls.md">Criptografia em trânsito</a>.</p></li>
+<li><p>O TLS e a autenticação do utilizador são duas abordagens de segurança distintas. Se tiver ativado a autenticação do utilizador e o TLS no seu sistema Milvus, tem de fornecer um nome de utilizador, uma palavra-passe e caminhos de ficheiros de certificados. Para obter informações sobre como ativar o TLS, consulte <a href="/docs/pt/v2.4.x/tls.md">Criptografia em trânsito</a>.</p></li>
 <li><p>Os trechos de código nesta página usam o novo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) para interagir com o Milvus. Os novos SDKs do MilvusClient para outras linguagens serão lançados em futuras actualizações.</p></li>
 </ul>
 </div>
@@ -267,11 +267,11 @@ client.list_users()
       </svg>
     </button></h2><ul>
 <li>Você também pode querer aprender como:<ul>
-<li><a href="/docs/pt/scaleout.md">Dimensionar um cluster Milvus</a></li>
+<li><a href="/docs/pt/v2.4.x/scaleout.md">Dimensionar um cluster Milvus</a></li>
 </ul></li>
 <li>Se estiver pronto para implantar seu cluster em nuvens:<ul>
-<li>Saiba como <a href="/docs/pt/eks.md">implantar o Milvus no Amazon EKS com o Terraform</a></li>
-<li>Saiba como <a href="/docs/pt/gcp.md">implantar o Milvus Cluster no GCP com Kubernetes</a></li>
-<li>Saiba como <a href="/docs/pt/azure.md">implantar o Milvus no Microsoft Azure com o Kubernetes</a></li>
+<li>Saiba como <a href="/docs/pt/v2.4.x/eks.md">implantar o Milvus no Amazon EKS com o Terraform</a></li>
+<li>Saiba como <a href="/docs/pt/v2.4.x/gcp.md">implantar o Milvus Cluster no GCP com Kubernetes</a></li>
+<li>Saiba como <a href="/docs/pt/v2.4.x/azure.md">implantar o Milvus no Microsoft Azure com o Kubernetes</a></li>
 </ul></li>
 </ul>

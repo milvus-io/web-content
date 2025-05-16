@@ -19,7 +19,7 @@ title: Skalenabhängigkeiten
       </svg>
     </button></h1><p>Milvus stützt sich auf verschiedene Abhängigkeiten wie MinIO, Kafka, Pulsar und etcd. Die Skalierung dieser Komponenten kann die Anpassungsfähigkeit von Milvus an unterschiedliche Anforderungen verbessern.</p>
 <div class="alert note">
-<p>Für Milvus Operator-Benutzer: <a href="/docs/de/object_storage_operator.md">Konfigurieren Sie Objektspeicher mit Milvus Operator</a>, <a href="/docs/de/meta_storage_operator.md">Konfigurieren Sie Metaspeicher mit Milvus Operator</a> und <a href="/docs/de/message_storage_operator.md">Konfigurieren Sie Nachrichtenspeicher mit Milvus Operator</a>.</p>
+<p>Für Milvus Operator-Benutzer: <a href="/docs/de/v2.4.x/object_storage_operator.md">Konfigurieren Sie Objektspeicher mit Milvus Operator</a>, <a href="/docs/de/v2.4.x/meta_storage_operator.md">Konfigurieren Sie Metaspeicher mit Milvus Operator</a> und <a href="/docs/de/v2.4.x/message_storage_operator.md">Konfigurieren Sie Nachrichtenspeicher mit Milvus Operator</a>.</p>
 </div>
 <h2 id="Scale-MinIO" class="common-anchor-header">MinIO skalieren<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"

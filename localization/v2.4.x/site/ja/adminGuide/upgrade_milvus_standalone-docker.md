@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: Docker ComposeでMilvusをスタンドアロンでアップグレードする方法をご紹介します。
 title: Docker Composeを使用したMilvusスタンドアロンのアップグレード
 ---
-<div class="tab-wrapper"><a href="/docs/ja/upgrade_milvus_standalone-operator.md" class=''>Milvus オペレータ</a><a href="/docs/ja/upgrade_milvus_standalone-helm.md" class=''>HelmDocker</a><a href="/docs/ja/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/ja/v2.4.x/upgrade_milvus_standalone-operator.md" class=''>Milvus オペレータ</a><a href="/docs/ja/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>HelmDocker</a><a href="/docs/ja/v2.4.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Docker Composeを使用したMilvusスタンドアロンのアップグレード<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,11 +122,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>次の方法もご覧ください：<ul>
-<li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></li>
+<li><a href="/docs/ja/v2.4.x/scaleout.md">Milvusクラスタのスケール</a></li>
 </ul></li>
 <li>クラウド上にクラスターをデプロイする準備ができている場合は、次の方法を参照してください：<ul>
-<li><a href="/docs/ja/eks.md">Terraformを使ってAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
-<li><a href="/docs/ja/gcp.md">Kubernetesを使用してGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
-<li><a href="/docs/ja/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/v2.4.x/eks.md">Terraformを使ってAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/v2.4.x/gcp.md">Kubernetesを使用してGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/v2.4.x/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
 </ul></li>
 </ul>

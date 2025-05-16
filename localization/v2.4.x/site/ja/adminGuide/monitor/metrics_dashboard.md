@@ -21,7 +21,7 @@ summary: このトピックでは、Milvus ダッシュボードに表示され�
       </svg>
     </button></h1><p>Milvusは実行時に詳細な時系列メトリクスのリストを出力します。<a href="https://prometheus.io/">Prometheusと</a> <a href="https://grafana.com/">Grafanaを</a>使用してメトリクスを可視化できます。このトピックでは、Grafana Milvusダッシュボードに表示される監視メトリクスを紹介します。</p>
 <p>このトピックでの時間単位はミリ秒です。また、本トピックにおける「99パーセンタイル」とは、時間統計の99パーセントが一定値内に制御されていることを指します。</p>
-<p>Prometheusのメトリクスを理解するために、まず<a href="/docs/ja/monitor_overview.md">Milvusモニタリングフレームワークの概要を</a>読むことをお勧めします。</p>
+<p>Prometheusのメトリクスを理解するために、まず<a href="/docs/ja/v2.4.x/monitor_overview.md">Milvusモニタリングフレームワークの概要を</a>読むことをお勧めします。</p>
 <p><details><summary>プロキシ</summary></p>
 <table>
 <thead>

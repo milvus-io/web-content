@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: Découvrez comment mettre à jour Milvus standalone avec Helm Chart.
 title: Mise à niveau de Milvus Standalone avec les cartes Helm
 ---
-<div class="tab-wrapper"><a href="/docs/fr/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/fr/upgrade_milvus_standalone-helm.md" class='active '>OperatorHelmDocker</a><a href="/docs/fr/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/fr/v2.4.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/fr/v2.4.x/upgrade_milvus_standalone-helm.md" class='active '>OperatorHelmDocker</a><a href="/docs/fr/v2.4.x/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">Mise à niveau de Milvus Standalone avec les cartes Helm<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

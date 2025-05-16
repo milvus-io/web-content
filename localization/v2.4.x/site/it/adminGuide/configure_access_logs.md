@@ -22,9 +22,9 @@ summary: ''
 <p>Questa guida fornisce istruzioni dettagliate sulla configurazione dei log di accesso in Milvus.</p>
 <p>La configurazione dei log di accesso dipende dal metodo di installazione di Milvus:</p>
 <ul>
-<li><strong>Installazione di Helm</strong>: Configurazione in <code translate="no">values.yaml</code>. Per ulteriori informazioni, vedere <a href="/docs/it/configure-helm.md">Configurazione di Milvus con i grafici Helm</a>.</li>
-<li><strong>Installazione di Docker</strong>: Configurare in <code translate="no">milvus.yaml</code>. Per ulteriori informazioni, vedere <a href="/docs/it/configure-docker.md">Configurazione di Milvus con Docker Compose</a>.</li>
-<li><strong>Installazione dell'operatore</strong>: Modificare <code translate="no">spec.components</code> nel file di configurazione. Per ulteriori informazioni, vedere <a href="/docs/it/configure_operator.md">Configurazione di Milvus con Milvus Operator</a>.</li>
+<li><strong>Installazione di Helm</strong>: Configurazione in <code translate="no">values.yaml</code>. Per ulteriori informazioni, vedere <a href="/docs/it/v2.4.x/configure-helm.md">Configurazione di Milvus con i grafici Helm</a>.</li>
+<li><strong>Installazione di Docker</strong>: Configurare in <code translate="no">milvus.yaml</code>. Per ulteriori informazioni, vedere <a href="/docs/it/v2.4.x/configure-docker.md">Configurazione di Milvus con Docker Compose</a>.</li>
+<li><strong>Installazione dell'operatore</strong>: Modificare <code translate="no">spec.components</code> nel file di configurazione. Per ulteriori informazioni, vedere <a href="/docs/it/v2.4.x/configure_operator.md">Configurazione di Milvus con Milvus Operator</a>.</li>
 </ul>
 <h2 id="Configuration-options" class="common-anchor-header">Opzioni di configurazione<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"

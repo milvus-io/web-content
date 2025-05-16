@@ -39,7 +39,7 @@ title: 'Inserción, inserción ascendente y supresión'
       </svg>
     </button></h2><ul>
 <li><p>Ha instalado el SDK de su elección. Para instalar un SDK, consulte <a href="https://milvus.io/docs/install-pymilvus.md">Instalar SDKs</a>.</p></li>
-<li><p>Ha creado una colección. Para crear una colección, consulte <a href="/docs/es/manage-collections.md">Gestión de colecciones</a>.</p></li>
+<li><p>Ha creado una colección. Para crear una colección, consulte <a href="/docs/es/v2.4.x/manage-collections.md">Gestión de colecciones</a>.</p></li>
 <li><p>Para insertar un gran volumen de datos, se recomienda utilizar <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Importación de datos</a>.</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">Visión general<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -59,7 +59,7 @@ title: 'Inserción, inserción ascendente y supresión'
       </svg>
     </button></h2><p>Una entidad, en el contexto de las colecciones Milvus, es una instancia singular e identificable dentro de una colección. Representa un miembro distinto de una clase particular, ya sea un libro en una biblioteca, un gen en un genoma o cualquier otra entidad identificable.</p>
 <p>Las entidades de una colección comparten un conjunto común de atributos, denominado esquema, que define la estructura que debe seguir cada entidad, incluidos los nombres de los campos, los tipos de datos y cualquier otra restricción.</p>
-<p>Para insertar con éxito entidades en una colección es necesario que los datos proporcionados contengan todos los campos definidos por el esquema de la colección de destino. Además, también puede incluir campos no definidos por el esquema sólo si ha habilitado el campo dinámico. Para obtener más información, consulte <a href="/docs/es/enable-dynamic-field.md">Activación del campo</a> dinámico.</p>
+<p>Para insertar con éxito entidades en una colección es necesario que los datos proporcionados contengan todos los campos definidos por el esquema de la colección de destino. Además, también puede incluir campos no definidos por el esquema sólo si ha habilitado el campo dinámico. Para obtener más información, consulte <a href="/docs/es/v2.4.x/enable-dynamic-field.md">Activación del campo</a> dinámico.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparativos<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -383,7 +383,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>La salida es un diccionario que contiene las estadísticas de las entidades afectadas. Para más detalles sobre las operaciones de partición, consulte <a href="/docs/es/manage-partitions.md">Gestionar particiones</a>.</p>
+<p>La salida es un diccionario que contiene las estadísticas de las entidades afectadas. Para más detalles sobre las operaciones de partición, consulte <a href="/docs/es/v2.4.x/manage-partitions.md">Gestionar particiones</a>.</p>
 <h2 id="Upsert-entities" class="common-anchor-header">Reinsertar entidades<button data-href="#Upsert-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -588,7 +588,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>La salida es un diccionario que contiene las estadísticas de las entidades afectadas. Para más detalles sobre las operaciones de partición, consulte <a href="/docs/es/manage-partitions.md">Gestionar particiones</a>.</p>
+<p>La salida es un diccionario que contiene las estadísticas de las entidades afectadas. Para más detalles sobre las operaciones de partición, consulte <a href="/docs/es/v2.4.x/manage-partitions.md">Gestionar particiones</a>.</p>
 <h2 id="Delete-entities" class="common-anchor-header">Borrar entidades<button data-href="#Delete-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -709,7 +709,7 @@ System.out.<span class="hljs-built_in">println</span>(deleteResp.getDeleteCnt())
 <span class="hljs-comment">// 2</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para más detalles sobre cómo utilizar expresiones de filtrado, consulte <a href="/docs/es/get-and-scalar-query.md">Get &amp; Scalar Query</a>.</p></li>
+<p>Para más detalles sobre cómo utilizar expresiones de filtrado, consulte <a href="/docs/es/v2.4.x/get-and-scalar-query.md">Get &amp; Scalar Query</a>.</p></li>
 <li><p><strong>Borrar entidades por nombre de partición</strong>.</p>
 <p>Si quieres borrar entidades de una partición específica, puedes especificar el nombre de la partición con el parámetro <code translate="no">partition_name</code> en el método <code translate="no">delete()</code>. El siguiente ejemplo elimina entidades de <code translate="no">partitionA</code> que tengan un color que empiece por <code translate="no">blue</code>.</p>
 <p><div class="multipleCode">

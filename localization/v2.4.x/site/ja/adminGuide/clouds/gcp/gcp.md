@@ -230,7 +230,7 @@ helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>先ほどのコマンドで、Milvus Helmチャートのリポジトリをローカルに追加し、最新のチャートを取得するようにリポジトリを更新します。そして、Milvusインスタンスをインストールし、<strong>my-releaseと</strong>名付ける。</p>
 <p>コンフィグ<code translate="no">service.type</code> 。これはMilvusインスタンスをレイヤ4ロードバランサー経由で公開することを示しています。</p>
-<p>Milvusインスタンスをレイヤ7ロードバランサー経由で公開したい場合は、<a href="/docs/ja/gcp_layer7.md">こちらをお読み</a>ください。</p>
+<p>Milvusインスタンスをレイヤ7ロードバランサー経由で公開したい場合は、<a href="/docs/ja/v2.4.x/gcp_layer7.md">こちらをお読み</a>ください。</p>
 <h2 id="Verify-the-deployment" class="common-anchor-header">デプロイの確認<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -282,6 +282,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>Milvusを他のクラウドにデプロイする方法を学びたい場合は、以下のリンクを参照してください：</p>
 <ul>
-<li><a href="/docs/ja/eks.md">Kubernetesを使ってAWS上にMilvusクラスタをデプロイする</a></li>
-<li><a href="/docs/ja/azure.md">KubernetesでAzureにMilvusクラスタをデプロイする</a></li>
+<li><a href="/docs/ja/v2.4.x/eks.md">Kubernetesを使ってAWS上にMilvusクラスタをデプロイする</a></li>
+<li><a href="/docs/ja/v2.4.x/azure.md">KubernetesでAzureにMilvusクラスタをデプロイする</a></li>
 </ul>

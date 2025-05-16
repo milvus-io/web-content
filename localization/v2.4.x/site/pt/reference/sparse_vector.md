@@ -117,7 +117,7 @@ entities = [
 <p><b>notas</b></p>
 <p>As dimensões do vetor têm de ser do tipo Python <code translate="no">int</code> ou <code translate="no">numpy.integer</code>, e os valores têm de ser do tipo Python <code translate="no">float</code> ou <code translate="no">numpy.floating</code>.</p>
 </div>
-<p>Para gerar embeddings, também pode utilizar o pacote <code translate="no">model</code> integrado na biblioteca PyMilvus, que oferece uma gama de funções de embedding. Para obter detalhes, consulte <a href="/docs/pt/embeddings.md">Embeddings</a>.</p>
+<p>Para gerar embeddings, também pode utilizar o pacote <code translate="no">model</code> integrado na biblioteca PyMilvus, que oferece uma gama de funções de embedding. Para obter detalhes, consulte <a href="/docs/pt/v2.4.x/embeddings.md">Embeddings</a>.</p>
 <h2 id="Create-a-collection-with-a-sparse-vector-field" class="common-anchor-header">Criar uma coleção com um campo vetorial esparso<button data-href="#Create-a-collection-with-a-sparse-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -214,7 +214,7 @@ client.create_index(collection_name=<span class="hljs-string">&quot;test_sparse_
 <li><p><code translate="no">metric_type</code>: Apenas a métrica de distância <code translate="no">IP</code> (Inner Product) é suportada para vectores esparsos.</p></li>
 <li><p><code translate="no">params.drop_ratio_build</code>: O parâmetro de índice utilizado especificamente para vectores esparsos. Controla a proporção de valores de vectores pequenos que são excluídos durante o processo de indexação. Este parâmetro permite o ajuste fino do compromisso entre eficiência e precisão, desconsiderando pequenos valores ao construir o índice. Por exemplo, se <code translate="no">drop_ratio_build = 0.3</code>, durante a construção do índice, todos os valores de todos os vectores esparsos são reunidos e ordenados. Os 30% mais pequenos destes valores não são incluídos no índice, reduzindo assim a carga de trabalho computacional durante a pesquisa.</p></li>
 </ul>
-<p>Para obter mais informações, consulte <a href="/docs/pt/index.md">Índice na memória</a>.</p>
+<p>Para obter mais informações, consulte <a href="/docs/pt/v2.4.x/index.md">Índice na memória</a>.</p>
 <h2 id="Perform-ANN-search" class="common-anchor-header">Executar pesquisa ANN<button data-href="#Perform-ANN-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

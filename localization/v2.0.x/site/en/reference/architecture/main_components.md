@@ -83,4 +83,4 @@ title: ''
     <span>Distributed_architecture</span>
   </span>
 </p>
-<p>For more details about Milvus’ architecture, see <a href="/docs/four_layers.md">Computing/Storage Disaggregation</a>.</p>
+<p>For more details about Milvus’ architecture, see <a href="/docs/v2.0.x/four_layers.md">Computing/Storage Disaggregation</a>.</p>

@@ -19,7 +19,7 @@ title: Rerankers 概览
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在信息检索和生成式人工智能领域，重排序器是优化初始搜索结果排序的重要工具。重排器与传统的<a href="/docs/zh/embeddings.md">嵌入模型</a>不同，它将查询和文档作为输入，直接返回相似度得分，而不是嵌入得分。该分数表示输入查询和文档之间的相关性。</p>
+    </button></h1><p>在信息检索和生成式人工智能领域，重排序器是优化初始搜索结果排序的重要工具。重排器与传统的<a href="/docs/zh/v2.4.x/embeddings.md">嵌入模型</a>不同，它将查询和文档作为输入，直接返回相似度得分，而不是嵌入得分。该分数表示输入查询和文档之间的相关性。</p>
 <p>Rerankers 通常在第一阶段检索后使用，一般通过向量近似近邻（ANN）技术完成。虽然 ANN 搜索能高效地获取大量潜在相关结果，但它们可能并不总是根据与查询的实际语义相关性来确定结果的优先级。在这里，Rerankers 利用更深入的上下文分析来优化结果顺序，通常利用先进的机器学习模型，如 BERT 或其他基于 Transformer 的模型。通过这样做，Rerankers 可以显著提高呈现给用户的最终结果的准确性和相关性。</p>
 <p>PyMilvus 模型库集成了 Rerankers 函数，用于优化初始搜索返回结果的顺序。从 Milvus 检索到最近的 Embeddings 后，您可以利用这些 Rerankers 工具来完善搜索结果，从而提高搜索结果的精确度。</p>
 <table>
@@ -55,7 +55,7 @@ title: Rerankers 概览
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本例中，我们将演示如何使用<a href="/docs/zh/rerankers-bge.md">BGE reranker</a>根据特定查询对搜索结果进行重排。</p>
+    </button></h2><p>在本例中，我们将演示如何使用<a href="/docs/zh/v2.4.x/rerankers-bge.md">BGE reranker</a>根据特定查询对搜索结果进行重排。</p>
 <p>要使用带有<a href="https://github.com/milvus-io/milvus-model">PyMilvus 模型库</a>的 Reranker，首先要安装 PyMilvus 模型库以及包含所有必要 Reranking 工具的模型子包：</p>
 <pre><code translate="no" class="language-bash">pip install pymilvus[model]
 <span class="hljs-comment"># or pip install &quot;pymilvus[model]&quot; for zsh.</span>
@@ -113,7 +113,7 @@ documents = [
 <p><strong>数据集组件</strong></p>
 <ul>
 <li><code translate="no">doc_id</code>:每个文档的唯一标识符。</li>
-<li><code translate="no">doc_vector</code>:代表文档的向量嵌入。有关生成 embeddings 的指导，请参阅<a href="/docs/zh/embeddings.md">Embeddings</a>。</li>
+<li><code translate="no">doc_vector</code>:代表文档的向量嵌入。有关生成 embeddings 的指导，请参阅<a href="/docs/zh/v2.4.x/embeddings.md">Embeddings</a>。</li>
 <li><code translate="no">doc_text</code>:文档的文本内容。</li>
 </ul>
 <h3 id="Preparations" class="common-anchor-header">准备工作</h3><p>在启动相似性搜索之前，您需要与 Milvus 建立连接，创建一个 Collections，并准备和插入数据到该 Collections 中。以下代码片段说明了这些初步步骤。</p>

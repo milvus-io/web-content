@@ -7,7 +7,7 @@ group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with Docker Compose.
 title: ''
 ---
-<div class="tab-wrapper"><a href="/docs/install_standalone-docker.md" class='active '>Docker Compose</a><a href="/docs/install_standalone-helm.md" class=''>Helm</a><a href="/docs/install_standalone-aptyum.md" class=''>APT or YUM</a></div>
+<div class="tab-wrapper"><a href="/docs/v2.0.x/install_standalone-docker.md" class='active '>Docker Compose</a><a href="/docs/v2.0.x/install_standalone-helm.md" class=''>Helm</a><a href="/docs/v2.0.x/install_standalone-aptyum.md" class=''>APT or YUM</a></div>
 <h1 id="Install-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Install Milvus Standalone with Docker Compose<button data-href="#Install-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,7 +39,7 @@ title: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Check <a href="/docs/prerequisite-docker.md">the requirements</a> for hardware and software prior to your installation.</p>
+    </button></h2><p>Check <a href="/docs/v2.0.x/prerequisite-docker.md">the requirements</a> for hardware and software prior to your installation.</p>
 <h2 id="Download-the-YAML-file" class="common-anchor-header">Download the <code translate="no">YAML</code> file<button data-href="#Download-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -131,15 +131,15 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
       </svg>
     </button></h2><p>Having installed Milvus, you can:</p>
 <ul>
-<li><p>Check <a href="/docs/example_code.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
+<li><p>Check <a href="/docs/v2.0.x/example_code.md">Hello Milvus</a> to run an example code with different SDKs to see what Milvus can do.</p></li>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/manage_connection.md">Connect to Milvus server</a></li>
-<li><a href="/docs/create_collection.md">Create a collection</a></li>
-<li><a href="/docs/create_partition.md">Create a partition</a></li>
-<li><a href="/docs/insert_data.md">Insert data</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.0.x/manage_connection.md">Connect to Milvus server</a></li>
+<li><a href="/docs/v2.0.x/create_collection.md">Create a collection</a></li>
+<li><a href="/docs/v2.0.x/create_partition.md">Create a partition</a></li>
+<li><a href="/docs/v2.0.x/insert_data.md">Insert data</a></li>
+<li><a href="/docs/v2.0.x/search.md">Conduct a vector search</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/migrate_overview.md">MilvusDM</a>, an open-source tool designed for importing and exporting data in Milvus.</p></li>
-<li><p><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
+<li><p>Explore <a href="/docs/v2.0.x/migrate_overview.md">MilvusDM</a>, an open-source tool designed for importing and exporting data in Milvus.</p></li>
+<li><p><a href="/docs/v2.0.x/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
 </ul>

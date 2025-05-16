@@ -24,10 +24,10 @@ Currently, MilvusDM is only supported in Milvus 1.x version.
 </div>
 <p>To substantially improve data management efficiency and reduce DevOps costs, MilvusDM supports the following migration channels:</p>
 <ul>
-<li><a href="/docs/m2m.md">Milvus to Milvus</a>: Migrates data between instances of Milvus.</li>
-<li><a href="/docs/f2m.md">Faiss to Milvus</a>: Imports unzipped data from Faiss to Milvus.</li>
-<li><a href="/docs/h2m.md">HDF5 to Milvus</a>: Imports HDF5 files into Milvus.</li>
-<li><a href="/docs/m2h.md">Milvus to HDF5</a>: Saves the data in Milvus as HDF5 files.</li>
+<li><a href="/docs/v2.3.x/m2m.md">Milvus to Milvus</a>: Migrates data between instances of Milvus.</li>
+<li><a href="/docs/v2.3.x/f2m.md">Faiss to Milvus</a>: Imports unzipped data from Faiss to Milvus.</li>
+<li><a href="/docs/v2.3.x/h2m.md">HDF5 to Milvus</a>: Imports HDF5 files into Milvus.</li>
+<li><a href="/docs/v2.3.x/m2h.md">Milvus to HDF5</a>: Saves the data in Milvus as HDF5 files.</li>
 </ul>
 <p>
   <span class="img-wrapper">

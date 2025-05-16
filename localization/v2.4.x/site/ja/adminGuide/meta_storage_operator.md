@@ -112,6 +112,6 @@ spec:
       </svg>
     </button></h2><p>Milvus Operatorを使用して他のMilvus依存関係を設定する方法については、こちらを参照してください：</p>
 <ul>
-<li><a href="/docs/ja/object_storage_operator.md">Milvus Operatorによるオブジェクトストレージの設定</a></li>
-<li><a href="/docs/ja/message_storage_operator.md">Milvus Operatorによるメッセージストレージの設定</a></li>
+<li><a href="/docs/ja/v2.4.x/object_storage_operator.md">Milvus Operatorによるオブジェクトストレージの設定</a></li>
+<li><a href="/docs/ja/v2.4.x/message_storage_operator.md">Milvus Operatorによるメッセージストレージの設定</a></li>
 </ul>

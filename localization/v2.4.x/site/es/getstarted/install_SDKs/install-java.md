@@ -90,11 +90,11 @@ title: Instalar Milvus Java SDK
 <ul>
 <li><p>Aprender las operaciones básicas de Milvus:</p>
 <ul>
-<li><a href="/docs/es/manage-collections.md">Gestionar colecciones</a></li>
-<li><a href="/docs/es/manage-partitions.md">Gestionar particiones</a></li>
-<li><a href="/docs/es/insert-update-delete.md">Insertar, sobreinsertar y eliminar</a></li>
-<li><a href="/docs/es/single-vector-search.md">Búsqueda de un solo vector</a></li>
-<li><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a></li>
+<li><a href="/docs/es/v2.4.x/manage-collections.md">Gestionar colecciones</a></li>
+<li><a href="/docs/es/v2.4.x/manage-partitions.md">Gestionar particiones</a></li>
+<li><a href="/docs/es/v2.4.x/insert-update-delete.md">Insertar, sobreinsertar y eliminar</a></li>
+<li><a href="/docs/es/v2.4.x/single-vector-search.md">Búsqueda de un solo vector</a></li>
+<li><a href="/docs/es/v2.4.x/multi-vector-search.md">Búsqueda híbrida</a></li>
 </ul></li>
 <li><p>Explorar <a href="/api-reference/java/v2.4.x/About.md">la referencia API Java de Milvus</a></p></li>
 </ul>

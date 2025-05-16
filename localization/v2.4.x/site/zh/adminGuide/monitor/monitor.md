@@ -121,14 +121,14 @@ my-release-milvus              54s
       </svg>
     </button></h2><ul>
 <li>如果你已经为 Milvus 群集部署了监控服务，你可能还想学习以下内容：<ul>
-<li><a href="/docs/zh/visualize.md">在 Grafana 中可视化 Milvus 指标</a></li>
-<li><a href="/docs/zh/alert.md">为 Milvus 服务创建警报</a></li>
-<li>调整<a href="/docs/zh/allocate.md">资源分配</a></li>
+<li><a href="/docs/zh/v2.4.x/visualize.md">在 Grafana 中可视化 Milvus 指标</a></li>
+<li><a href="/docs/zh/v2.4.x/alert.md">为 Milvus 服务创建警报</a></li>
+<li>调整<a href="/docs/zh/v2.4.x/allocate.md">资源分配</a></li>
 </ul></li>
 <li>如果你正在寻找有关如何扩展 Milvus 集群的信息：<ul>
-<li>了解如何<a href="/docs/zh/scaleout.md">扩展 Milvus 集群</a></li>
+<li>了解如何<a href="/docs/zh/v2.4.x/scaleout.md">扩展 Milvus 集群</a></li>
 </ul></li>
 <li>如果你有兴趣升级 Milvus 版本、<ul>
-<li>请阅读<a href="/docs/zh/upgrade_milvus_cluster-operator.md">Milvus 集群升级指南</a>和<a href="/docs/zh/upgrade_milvus_standalone-operator.md">Milvus 独立版本升级</a> <a href="/docs/zh/upgrade_milvus_cluster-operator.md">指南</a>。</li>
+<li>请阅读<a href="/docs/zh/v2.4.x/upgrade_milvus_cluster-operator.md">Milvus 集群升级指南</a>和<a href="/docs/zh/v2.4.x/upgrade_milvus_standalone-operator.md">Milvus 独立版本升级</a> <a href="/docs/zh/v2.4.x/upgrade_milvus_cluster-operator.md">指南</a>。</li>
 </ul></li>
 </ul>

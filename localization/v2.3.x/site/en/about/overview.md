@@ -62,7 +62,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>In case you are new to the world of vector database and similarity search, read the following explanation of key concepts to gain a better understanding.</p>
-<p>Learn more about <a href="/docs/glossary.md">Milvus glossary</a>.</p>
+<p>Learn more about <a href="/docs/v2.3.x/glossary.md">Milvus glossary</a>.</p>
 <h3 id="Unstructured-data" class="common-anchor-header">Unstructured data</h3><p>Unstructured data, including images, video, audio, and natural language, is information that doesn’t follow a pre-defined model or manner of organization. This data type accounts for around 80% of the world’s data, and can be converted into vectors using various artificial intelligence (AI) and machine learning (ML) models.</p>
 <h3 id="Embedding-vectors" class="common-anchor-header">Embedding vectors</h3><p>An embedding vector is a feature abstraction of unstructured data, such as emails, IoT sensor data, Instagram photos, protein structures, and much more. Mathematically speaking, an embedding vector is an array of floating-point numbers or binaries. Modern embedding techniques are used to convert unstructured data to embedding vectors.</p>
 <h3 id="Vector-similarity-search" class="common-anchor-header">Vector similarity search</h3><p>Vector similarity search is the process of comparing a vector to a database to find vectors that are most similar to the query vector. Approximate nearest neighbor (ANN) search algorithms are used to accelerate the searching process. If the two embedding vectors are very similar, it means that the original data sources are similar as well.</p>
@@ -111,7 +111,7 @@ summary: >-
 <li><strong>IVF_PQ</strong>: IVF_PQ is a quantization-based index and is best suited for scenarios that seek high query speed even at the cost of accuracy. There is also a GPU version <strong>GPU_IVF_PQ</strong>.</li>
 <li><strong>HNSW</strong>: HNSW is a graph-based index and is best suited for scenarios that have a high demand for search efficiency.</li>
 </ul>
-<p>See <a href="/docs/index.md">Vector Index</a> for more details.</p>
+<p>See <a href="/docs/v2.3.x/index.md">Vector Index</a> for more details.</p>
 <h3 id="Similarity-metrics" class="common-anchor-header">Similarity metrics</h3><p>In Milvus, similarity metrics are used to measure similarities among vectors. Choosing a good distance metric helps improve classification and clustering performance significantly. Depending on the input data forms, specific similarity metric is selected for optimal performance.</p>
 <p>The metrics that are widely used for floating point embeddings include:</p>
 <ul>
@@ -121,7 +121,7 @@ The metrics that are widely used for binary embeddings include:</li>
 <li><strong>Hamming</strong>: This metric is generally used in the field of natural language processing (NLP).</li>
 <li><strong>Jaccard</strong>: This metric is generally used in the field of molecular similarity search.</li>
 </ul>
-<p>See <a href="/docs/metric.md#floating">Similarity Metrics</a> for more information.</p>
+<p>See <a href="/docs/v2.3.x/metric.md#floating">Similarity Metrics</a> for more information.</p>
 <h2 id="Example-applications" class="common-anchor-header">Example applications<button data-href="#Example-applications" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -139,15 +139,15 @@ The metrics that are widely used for binary embeddings include:</li>
       </svg>
     </button></h2><p>Milvus makes it easy to add similarity search to your applications. Example applications of Milvus include:</p>
 <ul>
-<li><a href="/docs/image_similarity_search.md">Image similarity search</a>: Images made searchable and instantaneously return the most similar images from a massive database.</li>
-<li><a href="/docs/video_similarity_search.md">Video similarity search</a>: By converting key frames into vectors and then feeding the results into Milvus, billions of videos can be searched and recommended in near real-time.</li>
-<li><a href="/docs/audio_similarity_search.md">Audio similarity search</a>: Quickly query massive volumes of audio data such as speech, music, sound effects, and surface similar sounds.</li>
-<li><a href="/docs/recommendation_system.md">Recommender system</a>: Recommend information or products based on user behaviors and needs.</li>
-<li><a href="/docs/question_answering_system.md">Question answering system</a>: Interactive digital QA chatbot that automatically answers user questions.</li>
-<li><a href="/docs/dna_sequence_classification.md">DNA sequence classification</a>: Accurately sort out the classification of a gene in milliseconds by comparing similar DNA sequences.</li>
-<li><a href="/docs/text_search_engine.md">Text search engine</a>: Help users find the information they are looking for by comparing keywords against a database of texts.</li>
+<li><a href="/docs/v2.3.x/image_similarity_search.md">Image similarity search</a>: Images made searchable and instantaneously return the most similar images from a massive database.</li>
+<li><a href="/docs/v2.3.x/video_similarity_search.md">Video similarity search</a>: By converting key frames into vectors and then feeding the results into Milvus, billions of videos can be searched and recommended in near real-time.</li>
+<li><a href="/docs/v2.3.x/audio_similarity_search.md">Audio similarity search</a>: Quickly query massive volumes of audio data such as speech, music, sound effects, and surface similar sounds.</li>
+<li><a href="/docs/v2.3.x/recommendation_system.md">Recommender system</a>: Recommend information or products based on user behaviors and needs.</li>
+<li><a href="/docs/v2.3.x/question_answering_system.md">Question answering system</a>: Interactive digital QA chatbot that automatically answers user questions.</li>
+<li><a href="/docs/v2.3.x/dna_sequence_classification.md">DNA sequence classification</a>: Accurately sort out the classification of a gene in milliseconds by comparing similar DNA sequences.</li>
+<li><a href="/docs/v2.3.x/text_search_engine.md">Text search engine</a>: Help users find the information they are looking for by comparing keywords against a database of texts.</li>
 </ul>
-<p>See <a href="https://github.com/milvus-io/bootcamp/tree/master/solutions">Milvus tutorials</a> and <a href="/docs/milvus_adopters.md">Milvus Adopters</a> for more Milvus application scenarios.</p>
+<p>See <a href="https://github.com/milvus-io/bootcamp/tree/master/solutions">Milvus tutorials</a> and <a href="/docs/v2.3.x/milvus_adopters.md">Milvus Adopters</a> for more Milvus application scenarios.</p>
 <h2 id="How-is-Milvus-designed" class="common-anchor-header">How is Milvus designed?<button data-href="#How-is-Milvus-designed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -171,7 +171,7 @@ The metrics that are widely used for binary embeddings include:</li>
 <li>Worker nodes: The worker nodes function as arms and legs and are dumb executors that follow instructions from the coordinator service and execute user-triggered DML/DDL commands.</li>
 <li>Storage: Storage is the bone of the system, and is responsible for data persistence. It comprises meta storage, log broker, and object storage.</li>
 </ul>
-<p>For more information, see <a href="/docs/architecture_overview.md">Architecture Overview</a>.</p>
+<p>For more information, see <a href="/docs/v2.3.x/architecture_overview.md">Architecture Overview</a>.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.3.x/assets/architecture_02.jpg" alt="Architecture" class="doc-image" id="architecture" />
@@ -206,7 +206,7 @@ The metrics that are widely used for binary embeddings include:</li>
 <ul>
 <li><a href="https://github.com/zilliztech/milvus_cli#overview">Milvus CLI</a></li>
 <li><a href="https://github.com/zilliztech/attu">Attu</a>, a graphical management system for Milvus.</li>
-<li><a href="/docs/migrate_overview.md">MilvusDM</a> (Milvus Data Migration), an open-source tool designed specifically for importing and exporting data with Milvus.</li>
+<li><a href="/docs/v2.3.x/migrate_overview.md">MilvusDM</a> (Milvus Data Migration), an open-source tool designed specifically for importing and exporting data with Milvus.</li>
 <li><a href="https://milvus.io/tools/sizing/">Milvus sizing tool</a>, which helps you estimate the raw file size, memory size, and stable disk size needed for a specified number of vectors with various index types.</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -227,15 +227,15 @@ The metrics that are widely used for binary embeddings include:</li>
     </button></h2><ul>
 <li>Get started with a 3-minute tutorial:
 <ul>
-<li><a href="/docs/example_code.md">Hello Milvus</a></li>
+<li><a href="/docs/v2.3.x/example_code.md">Hello Milvus</a></li>
 </ul></li>
 <li>Install Milvus for your testing or production environment:
 <ul>
-<li><a href="/docs/prerequisite-docker.md">Installation Prerequisites</a></li>
-<li><a href="/docs/install_standalone-docker.md">Install Milvus Standalone</a></li>
+<li><a href="/docs/v2.3.x/prerequisite-docker.md">Installation Prerequisites</a></li>
+<li><a href="/docs/v2.3.x/install_standalone-docker.md">Install Milvus Standalone</a></li>
 </ul></li>
 <li>If you’re interested in diving deep into the design details of Milvus:
 <ul>
-<li>Read about <a href="/docs/architecture_overview.md">Milvus architecture</a></li>
+<li>Read about <a href="/docs/v2.3.x/architecture_overview.md">Milvus architecture</a></li>
 </ul></li>
 </ul>

@@ -20,7 +20,7 @@ title: ''
         ></path>
       </svg>
     </button></h1><p>This topic describes how to conduct a vector query.</p>
-<p>Unlike a vector similarity search, a vector query retrieves vectors via scalar filtering based on <a href="/docs/boolean.md">boolean expression</a>. Milvus supports many data types in the scalar fields and a variety of boolean expressions. The boolean expression filters on scalar fields or the primary key field, and it retrieves all results that match the filters.</p>
+<p>Unlike a vector similarity search, a vector query retrieves vectors via scalar filtering based on <a href="/docs/v2.2.x/boolean.md">boolean expression</a>. Milvus supports many data types in the scalar fields and a variety of boolean expressions. The boolean expression filters on scalar fields or the primary key field, and it retrieves all results that match the filters.</p>
 <p>The following example shows how to perform a vector query on a 2000-row dataset of book ID (primary key), word count (scalar field), and book introduction (vector field), simulating the situation where you query for certain books based on their IDs.</p>
 <h2 id="Load-collection" class="common-anchor-header">Load collection<button data-href="#Load-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,8 +86,8 @@ collection.load()
         ></path>
       </svg>
     </button></h2><p>The following example filters the vectors with certain <code translate="no">book_id</code> values, and returns the <code translate="no">book_id</code> field and <code translate="no">book_intro</code> of the results.</p>
-<p>Milvus supports setting consistency level specifically for a query. The example in this topic sets the consistency level as <code translate="no">Strong</code>. You can also set the consistency level as <code translate="no">Bounded</code>, <code translate="no">Session</code> or <code translate="no">Eventually</code>. See <a href="/docs/consistency.md">Consistency</a> for more information about the four consistency levels in Milvus.</p>
-<p>You can also use dynamic fields in the filter expression and output fields in the query requests. For example, refer to <a href="/docs/dynamic_schema.md">Dynamic Schema</a>.</p>
+<p>Milvus supports setting consistency level specifically for a query. The example in this topic sets the consistency level as <code translate="no">Strong</code>. You can also set the consistency level as <code translate="no">Bounded</code>, <code translate="no">Session</code> or <code translate="no">Eventually</code>. See <a href="/docs/v2.2.x/consistency.md">Consistency</a> for more information about the four consistency levels in Milvus.</p>
+<p>You can also use dynamic fields in the filter expression and output fields in the query requests. For example, refer to <a href="/docs/v2.2.x/dynamic_schema.md">Dynamic Schema</a>.</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
@@ -181,7 +181,7 @@ Output:
     <tbody>
     <tr>
         <td><code translate="no">expr</code></td>
-        <td>Boolean expression used to filter attribute. Find more expression details in <a href="/docs/boolean.md">Boolean Expression Rules</a>.</td>
+        <td>Boolean expression used to filter attribute. Find more expression details in <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a>.</td>
     </tr>
     <tr>
         <td><code translate="no">limit</code></td>
@@ -219,7 +219,7 @@ Output:
     </tr>
     <tr>
         <td><code translate="no">expr</code></td>
-        <td>Boolean expression used to filter attribute. Find more expression details in <a href="/docs/boolean.md">Boolean Expression Rules</a>.</td>
+        <td>Boolean expression used to filter attribute. Find more expression details in <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a>.</td>
     </tr>
     <tr>
         <td><code translate="no">output_fields</code> (optional)</td>
@@ -262,7 +262,7 @@ Output:
   <tr>
         <td><code translate="no">expr</code></td>
         <td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+    <td>See <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
     <tr>
         <td><code translate="no">OutputFields</code></td>
@@ -303,7 +303,7 @@ Output:
   <tr>
         <td><code translate="no">Expr</code></td>
         <td>Boolean expression used to filter attribute.</td>
-    <td>See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+    <td>See <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
     </tr>
     <tr>
         <td><code translate="no">Limit</code> (optional)</td>
@@ -330,7 +330,7 @@ Output:
     <tbody>
         <tr>
             <td>expression</td>
-            <td>Boolean expression used to filter attribute. See <a href="/docs/boolean.md">Boolean Expression Rules</a> for more information.</td>
+            <td>Boolean expression used to filter attribute. See <a href="/docs/v2.2.x/boolean.md">Boolean Expression Rules</a> for more information.</td>
         </tr>
         <tr>
             <td>parameters</td>
@@ -419,9 +419,9 @@ System.out.<span class="hljs-built_in">println</span>(wrapperQuery.getFieldWrapp
     </button></h2><ul>
 <li><p>Learn more basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
-<li><a href="/docs/timetravel.md">Search with Time Travel</a></li>
+<li><a href="/docs/v2.2.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.2.x/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.2.x/timetravel.md">Search with Time Travel</a></li>
 </ul></li>
 <li><p>Explore API references for Milvus SDKs:</p>
 <ul>

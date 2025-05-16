@@ -7,7 +7,7 @@ related_key: upgrade Milvus Cluster
 summary: 'Erfahren Sie, wie Sie Milvus-Cluster mit Milvus Operator aktualisieren können.'
 title: Milvus Cluster mit Milvus Operator aufrüsten
 ---
-<div class="tab-wrapper"><a href="/docs/de/upgrade_milvus_cluster-operator.md" class='active '>Milvus</a><a href="/docs/de/upgrade_milvus_cluster-helm.md" class=''>OperatorHelm</a></div>
+<div class="tab-wrapper"><a href="/docs/de/v2.4.x/upgrade_milvus_cluster-operator.md" class='active '>Milvus</a><a href="/docs/de/v2.4.x/upgrade_milvus_cluster-helm.md" class=''>OperatorHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Milvus-Operator" class="common-anchor-header">Milvus Cluster mit Milvus Operator aufrüsten<button data-href="#Upgrade-Milvus-Cluster-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

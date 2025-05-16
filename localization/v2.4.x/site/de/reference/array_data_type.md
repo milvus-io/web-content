@@ -35,8 +35,8 @@ title: Use Array Fields
       </svg>
     </button></h2><p>Ensure you have the following:</p>
 <ul>
-<li>Milvus installed and running. For information on how to install Milvus, refer to <a href="/docs/de/install-overview.md">Install Milvus</a>.</li>
-<li>One of Milvus SDKs installed in your environment. For details, refer to <a href="/docs/de/install-pymilvus.md">Install SDKs</a>.</li>
+<li>Milvus installed and running. For information on how to install Milvus, refer to <a href="/docs/de/v2.4.x/install-overview.md">Install Milvus</a>.</li>
+<li>One of Milvus SDKs installed in your environment. For details, refer to <a href="/docs/de/v2.4.x/install-pymilvus.md">Install SDKs</a>.</li>
 </ul>
 <h2 id="Prepare-data-with-an-array-field" class="common-anchor-header">Prepare data with an array field<button data-href="#Prepare-data-with-an-array-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -447,7 +447,7 @@ console.log(<span class="hljs-string">&quot;Vector index description: &quot;</sp
 <p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md">createIndex</a>, and <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md">describeIndex</a>.</p>
 </div>
 <h3 id="Index-array-field" class="common-anchor-header">Index array field</h3><p>Creating an index on a scalar field can improve the retrieval performance of queries on that field, which is optional but recommended for large datasets.</p>
-<p>In this example, we’ll create an inverted index on the <code translate="no">color_coord</code> array field. This will allow us to speed up filtering based on this field. The inverted index demonstrates excellent overall performance, significantly outperforming brute force filtering using raw data when data is not frequently retrieved, and maintaining comparable performance with frequent retrieval operations. For more information on inverted indexes, refer to <a href="/docs/de/scalar_index.md#Inverted-indexing">Scalar Index</a>.</p>
+<p>In this example, we’ll create an inverted index on the <code translate="no">color_coord</code> array field. This will allow us to speed up filtering based on this field. The inverted index demonstrates excellent overall performance, significantly outperforming brute force filtering using raw data when data is not frequently retrieved, and maintaining comparable performance with frequent retrieval operations. For more information on inverted indexes, refer to <a href="/docs/de/v2.4.x/scalar_index.md#Inverted-indexing">Scalar Index</a>.</p>
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>

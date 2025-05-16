@@ -35,7 +35,7 @@ title: Cohérence
         ></path>
       </svg>
     </button></h2><p>La cohérence dans une base de données distribuée fait spécifiquement référence à la propriété qui garantit que chaque nœud ou réplique a la même vue des données lors de l'écriture ou de la lecture des données à un moment donné.</p>
-<p>Milvus prend en charge quatre niveaux de cohérence : forte, staleness limité, session et éventuellement. Le niveau de cohérence par défaut dans Milvus est l'obsolescence limitée.  Vous pouvez facilement ajuster le niveau de cohérence lorsque vous effectuez une <a href="/docs/fr/single-vector-search.md">recherche monovectorielle</a>, une <a href="/docs/fr/multi-vector-search.md">recherche hybride</a> ou une <a href="/docs/fr/get-and-scalar-query.md">requête</a> afin qu'il corresponde le mieux possible à votre application.</p>
+<p>Milvus prend en charge quatre niveaux de cohérence : forte, staleness limité, session et éventuellement. Le niveau de cohérence par défaut dans Milvus est l'obsolescence limitée.  Vous pouvez facilement ajuster le niveau de cohérence lorsque vous effectuez une <a href="/docs/fr/v2.4.x/single-vector-search.md">recherche monovectorielle</a>, une <a href="/docs/fr/v2.4.x/multi-vector-search.md">recherche hybride</a> ou une <a href="/docs/fr/v2.4.x/get-and-scalar-query.md">requête</a> afin qu'il corresponde le mieux possible à votre application.</p>
 <h2 id="Consistency-levels" class="common-anchor-header">Niveaux de cohérence<button data-href="#Consistency-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,8 +118,8 @@ title: Cohérence
       </svg>
     </button></h2><ul>
 <li>Apprendre à régler le niveau de cohérence lorsque<ul>
-<li><a href="/docs/fr/single-vector-search.md">effectuer une recherche à vecteur unique</a></li>
-<li><a href="/docs/fr/multi-vector-search.md">d'une recherche hybride</a></li>
-<li><a href="/docs/fr/get-and-scalar-query.md">effectuer une requête scalaire</a></li>
+<li><a href="/docs/fr/v2.4.x/single-vector-search.md">effectuer une recherche à vecteur unique</a></li>
+<li><a href="/docs/fr/v2.4.x/multi-vector-search.md">d'une recherche hybride</a></li>
+<li><a href="/docs/fr/v2.4.x/get-and-scalar-query.md">effectuer une requête scalaire</a></li>
 </ul></li>
 </ul>

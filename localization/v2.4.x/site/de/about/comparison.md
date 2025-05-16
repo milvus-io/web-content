@@ -154,6 +154,6 @@ summary: Dieser Artikel vergleicht Milvus mit anderen Vektorsuchlösungen.
       </svg>
     </button></h2><ul>
 <li><p><strong>Testen</strong>: Erleben Sie Milvus aus erster Hand, indem Sie mit dem <a href="https://milvus.io/docs/quickstart.md">Milvus-Schnellstart</a> beginnen oder <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">sich für die Zilliz Cloud anmelden</a>.</p></li>
-<li><p><strong>Mehr erfahren</strong>: Vertiefen Sie die Funktionen von Milvus in unseren umfassenden <a href="/docs/de/glossary.md">Terminologie-</a> und <a href="https://milvus.io/docs/manage-collections.md">Benutzerhandbüchern</a>.</p></li>
+<li><p><strong>Mehr erfahren</strong>: Vertiefen Sie die Funktionen von Milvus in unseren umfassenden <a href="/docs/de/v2.4.x/glossary.md">Terminologie-</a> und <a href="https://milvus.io/docs/manage-collections.md">Benutzerhandbüchern</a>.</p></li>
 <li><p><strong>Erkunden Sie Alternativen</strong>: Für einen umfassenderen Vergleich von Vektordatenbankoptionen finden Sie weitere Ressourcen auf <a href="https://zilliz.com/comparison">dieser Seite</a>.</p></li>
 </ul>

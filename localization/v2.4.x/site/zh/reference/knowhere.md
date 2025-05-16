@@ -74,8 +74,8 @@ title: Knowhere
     </button></h2><p>以下是Knowhere与Faiss相比的优势。</p>
 <h4 id="Support-for-BitsetView" class="common-anchor-header">支持比特视图</h4><p>Milvus 引入了比特集机制来实现 &quot;软删除&quot;。软删除的向量仍然存在于数据库中，但在向量相似性搜索或查询时不会被计算。</p>
 <p>比特集中的每个比特都对应一个索引向量。如果某个向量在比特集中被标记为 "1"，则表示该向量已被软删除，在向量搜索过程中不会涉及。比特集参数适用于 Knowhere 中所有公开的 Faiss 索引查询 API，包括 CPU 和 GPU 索引。</p>
-<p>有关比特集机制的更多信息，请查看<a href="/docs/zh/bitset.md">比特集</a>。</p>
-<h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">支持二进制向量索引的多种相似性度量方法</h4><p>Knowhere支持<a href="/docs/zh/metric.md#Hamming-distance">Hamming</a>、<a href="/docs/zh/metric.md#Jaccard-distance">Jaccard</a>、<a href="/docs/zh/metric.md#Tanimoto-distance">Tanimoto</a>、<a href="/docs/zh/metric.md#Superstructure">Superstructure</a>和<a href="/docs/zh/metric.md#Substructure">Substructure</a>。Jaccard和Tanimoto可用于测量两个样本集之间的相似性，而Superstructure和Substructure可用于测量化学结构的相似性。</p>
+<p>有关比特集机制的更多信息，请查看<a href="/docs/zh/v2.4.x/bitset.md">比特集</a>。</p>
+<h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">支持二进制向量索引的多种相似性度量方法</h4><p>Knowhere支持<a href="/docs/zh/v2.4.x/metric.md#Hamming-distance">Hamming</a>、<a href="/docs/zh/v2.4.x/metric.md#Jaccard-distance">Jaccard</a>、<a href="/docs/zh/v2.4.x/metric.md#Tanimoto-distance">Tanimoto</a>、<a href="/docs/zh/v2.4.x/metric.md#Superstructure">Superstructure</a>和<a href="/docs/zh/v2.4.x/metric.md#Substructure">Substructure</a>。Jaccard和Tanimoto可用于测量两个样本集之间的相似性，而Superstructure和Substructure可用于测量化学结构的相似性。</p>
 <h4 id="Support-for-AVX512-instruction-set" class="common-anchor-header">支持 AVX512 指令集</h4><p>除了Faiss已经支持的<a href="https://en.wikipedia.org/wiki/AArch64">AArch64</a>、<a href="https://en.wikipedia.org/wiki/SSE4#SSE4.2">SSE4.2</a>和<a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX2</a>指令集外，Knowhere还支持<a href="https://en.wikipedia.org/wiki/AVX-512">AVX512</a>指令集，与AVX2指令集相比，<a href="https://en.wikipedia.org/wiki/AVX-512">AVX512</a>指令集可将<a href="https://milvus.io/blog/milvus-performance-AVX-512-vs-AVX2.md">索引构建和查询性能提高20%至30%</a>。</p>
 <h4 id="Automatic-SIMD-instruction-selection" class="common-anchor-header">自动选择SIMD指令</h4><p>Knowhere支持在任何CPU处理器（本地部署和云平台）上自动调用合适的SIMD指令（如SIMD SSE、AVX、AVX2和AVX512），因此用户无需在编译时手动指定SIMD标志（如"-msse4"）。</p>
 <p>Knowhere 是通过重构 Faiss 的代码库而构建的。依赖于 SIMD 加速的常用函数（如相似性计算）被分解出来。然后为每个函数实现四个版本（即 SSE、AVX、AVX2 和 AVX512），并将每个版本放入单独的源文件中。然后，使用相应的 SIMD 标志对源文件进行单独编译。因此，在运行时，Knowhere 可以根据当前的 CPU 标志自动选择最合适的 SIMD 指令，然后使用挂钩功能链接正确的函数指针。</p>
@@ -173,7 +173,7 @@ title: Knowhere
       </svg>
     </button></h2><p>在了解了 Knowhere 如何在 Milvus 中运行之后，你可能还想</p>
 <ul>
-<li><p>了解<a href="/docs/zh/index.md">Milvus 支持的各种类型的索引</a>。</p></li>
-<li><p>了解<a href="/docs/zh/bitset.md">比特集机制</a>。</p></li>
-<li><p>了解 Milvus<a href="/docs/zh/data_processing.md">如何处理数据</a>。</p></li>
+<li><p>了解<a href="/docs/zh/v2.4.x/index.md">Milvus 支持的各种类型的索引</a>。</p></li>
+<li><p>了解<a href="/docs/zh/v2.4.x/bitset.md">比特集机制</a>。</p></li>
+<li><p>了解 Milvus<a href="/docs/zh/v2.4.x/data_processing.md">如何处理数据</a>。</p></li>
 </ul>

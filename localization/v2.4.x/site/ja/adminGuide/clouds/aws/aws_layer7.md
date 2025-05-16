@@ -22,9 +22,9 @@ summary: AWS上のLayer-7ロードバランサーの背後にMilvusクラスタ�
     </button></h1><p>レイヤ4ロードバランサと比較すると、レイヤ7ロードバランサはスマートなロードバランシングとキャッシュ機能を提供し、クラウドネイティブなサービスに最適な選択です。</p>
 <p>このガイドでは、Layer-4 ロードバランサーの背後で既に稼働している Milvus クラスタに対して、Layer-7 ロードバランサーを設定する手順を説明します。</p>
 <h3 id="Before-your-start" class="common-anchor-header">始める前に</h3><ul>
-<li><a href="/docs/ja/eks.md">AWS上のLayer-4ロードバランサの後ろにMilvusクラスタをデプロイして</a>いる。</li>
+<li><a href="/docs/ja/v2.4.x/eks.md">AWS上のLayer-4ロードバランサの後ろにMilvusクラスタをデプロイして</a>いる。</li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvusの設定を調整する</h3><p>このガイドでは、<a href="/docs/ja/eks.md">AWS上のLayer-4ロードバランサの後ろにMilvusクラスタをデプロイ</a>済みであることを前提としています。</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Milvusの設定を調整する</h3><p>このガイドでは、<a href="/docs/ja/v2.4.x/eks.md">AWS上のLayer-4ロードバランサの後ろにMilvusクラスタをデプロイ</a>済みであることを前提としています。</p>
 <p>このMilvusクラスタにLayer-7ロードバランサをセットアップする前に、以下のコマンドを実行してLayer-4ロードバランサを削除します。</p>
 <pre><code translate="no" class="language-bash">helm upgrade milvus-demo milvus/milvus -n milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

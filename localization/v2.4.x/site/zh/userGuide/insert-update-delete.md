@@ -36,7 +36,7 @@ title: 插入、上插和删除
       </svg>
     </button></h2><ul>
 <li><p>您已安装了所选的 SDK。要安装 SDK，请参阅<a href="https://milvus.io/docs/install-pymilvus.md">安装 SDK</a>。</p></li>
-<li><p>您已创建了一个 Collections。要创建一个<a href="/docs/zh/manage-collections.md">Collections</a>，请参阅<a href="/docs/zh/manage-collections.md">管理 Collections</a>。</p></li>
+<li><p>您已创建了一个 Collections。要创建一个<a href="/docs/zh/v2.4.x/manage-collections.md">Collections</a>，请参阅<a href="/docs/zh/v2.4.x/manage-collections.md">管理 Collections</a>。</p></li>
 <li><p>要插入大量数据，建议使用<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">数据导入</a>。</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -56,7 +56,7 @@ title: 插入、上插和删除
       </svg>
     </button></h2><p>实体，在 Milvus 集合的上下文中，是集合中的一个单一的、可识别的实例。它代表特定类别中的一个独特成员，无论是图书馆中的一本书、基因组中的一个基因，还是其他任何可识别的实体。</p>
 <p>Collections 中的实体共享一组共同的属性（称为 Schema），这些属性概述了每个实体必须遵守的结构，包括字段名称、数据类型和其他限制条件。</p>
-<p>要将实体成功插入 Collections，所提供的数据必须包含目标 Collections 的所有 Schema 定义字段。此外，只有启用了动态字段，才能包含非 Schema 定义的字段。有关详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">启用动态字段</a>。</p>
+<p>要将实体成功插入 Collections，所提供的数据必须包含目标 Collections 的所有 Schema 定义字段。此外，只有启用了动态字段，才能包含非 Schema 定义的字段。有关详细信息，请参阅<a href="/docs/zh/v2.4.x/enable-dynamic-field.md">启用动态字段</a>。</p>
 <h2 id="Preparations" class="common-anchor-header">准备工作<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -380,7 +380,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>输出结果是一个字典，其中包含受影响实体的统计数据。有关分区操作的详细信息，请参阅<a href="/docs/zh/manage-partitions.md">管理分区</a>。</p>
+<p>输出结果是一个字典，其中包含受影响实体的统计数据。有关分区操作的详细信息，请参阅<a href="/docs/zh/v2.4.x/manage-partitions.md">管理分区</a>。</p>
 <h2 id="Upsert-entities" class="common-anchor-header">倒插实体<button data-href="#Upsert-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -585,7 +585,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 10</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>输出结果是一个字典，其中包含受影响实体的统计数据。有关分区操作的详细信息，请参阅<a href="/docs/zh/manage-partitions.md">管理分区</a>。</p>
+<p>输出结果是一个字典，其中包含受影响实体的统计数据。有关分区操作的详细信息，请参阅<a href="/docs/zh/v2.4.x/manage-partitions.md">管理分区</a>。</p>
 <h2 id="Delete-entities" class="common-anchor-header">删除实体<button data-href="#Delete-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -706,7 +706,7 @@ System.out.<span class="hljs-built_in">println</span>(deleteResp.getDeleteCnt())
 <span class="hljs-comment">// 2</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有关如何使用过滤表达式的详细信息，请参阅<a href="/docs/zh/get-and-scalar-query.md">获取和标量查询</a>。</p></li>
+<p>有关如何使用过滤表达式的详细信息，请参阅<a href="/docs/zh/v2.4.x/get-and-scalar-query.md">获取和标量查询</a>。</p></li>
 <li><p><strong>按分区名称删除实体</strong></p>
 <p>如果想删除特定分区中的实体，可以在<code translate="no">delete()</code> 方法中使用<code translate="no">partition_name</code> 参数指定分区名称。下面的示例删除了<code translate="no">partitionA</code> 中颜色以<code translate="no">blue</code> 开头的实体。</p>
 <p><div class="multipleCode">

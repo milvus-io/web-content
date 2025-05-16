@@ -28,9 +28,9 @@ summary: >-
 <p>Pour créer un projet, reportez-vous à la section <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects">Création et gestion de projets</a>. Le nom du projet utilisé dans ce guide est <strong>milvus-testing-nonprod</strong>.</p></li>
 <li><p>Vous avez installé localement <a href="https://cloud.google.com/sdk/docs/quickstart#installing_the_latest_version">gcloud CLI</a>, <a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> et <a href="https://helm.sh/docs/intro/install/">Helm</a>, ou vous avez décidé d'utiliser le <a href="https://cloud.google.com/shell">Cloud Shell</a> basé sur le navigateur à la place.</p></li>
 <li><p>Vous avez <a href="https://cloud.google.com/sdk/docs/install-sdk#initializing_the">initialisé le CLI gcloud</a> avec les informations d'identification de votre compte GCP.</p></li>
-<li><p>Vous avez <a href="/docs/fr/gcp.md">déployé un cluster Milvus derrière un équilibreur de charge de couche 4 sur GCP</a>.</p></li>
+<li><p>Vous avez <a href="/docs/fr/v2.4.x/gcp.md">déployé un cluster Milvus derrière un équilibreur de charge de couche 4 sur GCP</a>.</p></li>
 </ul>
-<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modifier les configurations Milvus</h3><p>Ce guide suppose que vous avez déjà <a href="/docs/fr/gcp.md">déployé un cluster Milvus derrière un équilibreur de charge de couche 4 sur GCP</a>.</p>
+<h3 id="Tweak-Milvus-configurations" class="common-anchor-header">Modifier les configurations Milvus</h3><p>Ce guide suppose que vous avez déjà <a href="/docs/fr/v2.4.x/gcp.md">déployé un cluster Milvus derrière un équilibreur de charge de couche 4 sur GCP</a>.</p>
 <p>Avant de configurer un équilibreur de charge de couche 7 pour ce cluster Milvus, exécutez la commande suivante pour supprimer l'équilibreur de charge de couche 4.</p>
 <pre><code translate="no" class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> service.<span class="hljs-built_in">type</span>=ClusterIP
 <button class="copy-code-btn"></button></code></pre>

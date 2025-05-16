@@ -119,5 +119,5 @@ title: 스토리지/컴퓨팅 분리
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvus 아키텍처에 대한 자세한 내용은 <a href="/docs/ko/main_components.md">주요 구성 요소를</a> 참조하세요.</li>
+<li>Milvus 아키텍처에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/main_components.md">주요 구성 요소를</a> 참조하세요.</li>
 </ul>

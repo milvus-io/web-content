@@ -37,8 +37,8 @@ summary: 이 페이지에서는 준비된 데이터를 가져오는 절차를 �
       </svg>
     </button></h2><ul>
 <li><p>이미 데이터를 준비하여 Milvus 버킷에 넣었습니다.</p>
-<p>그렇지 않은 경우, 먼저 <strong>RemoteBulkWriter를</strong> 사용하여 데이터를 준비하고, 준비된 데이터가 Milvus 인스턴스와 함께 시작된 MinIO 인스턴스의 Milvus 버킷으로 이미 전송되었는지 확인해야 합니다. 자세한 내용은 <a href="/docs/ko/prepare-source-data.md">소스 데이터 준비하기를</a> 참조하세요.</p></li>
-<li><p>데이터 준비에 사용하는 스키마로 컬렉션을 이미 만들었습니다. 그렇지 않은 경우 <a href="/docs/ko/manage-collections.md">컬렉션 관리를</a> 참조하세요.</p></li>
+<p>그렇지 않은 경우, 먼저 <strong>RemoteBulkWriter를</strong> 사용하여 데이터를 준비하고, 준비된 데이터가 Milvus 인스턴스와 함께 시작된 MinIO 인스턴스의 Milvus 버킷으로 이미 전송되었는지 확인해야 합니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/prepare-source-data.md">소스 데이터 준비하기를</a> 참조하세요.</p></li>
+<li><p>데이터 준비에 사용하는 스키마로 컬렉션을 이미 만들었습니다. 그렇지 않은 경우 <a href="/docs/ko/v2.4.x/manage-collections.md">컬렉션 관리를</a> 참조하세요.</p></li>
 </ul>
 <div class="language-python">
 <p>다음 코드 조각은 주어진 스키마로 간단한 컬렉션을 만듭니다. 매개 변수에 대한 자세한 내용은 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> 및 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> 를 참조하세요.</p>

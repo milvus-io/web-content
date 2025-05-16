@@ -19,7 +19,7 @@ title: Réplica en memoria
         ></path>
       </svg>
     </button></h1><p>Este tema presenta el mecanismo de réplica en memoria en Milvus que permite múltiples réplicas de segmentos en la memoria de trabajo para mejorar el rendimiento y la disponibilidad.</p>
-<p>Para obtener información sobre cómo configurar réplicas en memoria, consulte <a href="/docs/es/configure_querynode.md#queryNodereplicas">Configuraciones relacionadas con nodos de consulta</a>.</p>
+<p>Para obtener información sobre cómo configurar réplicas en memoria, consulte <a href="/docs/es/v2.4.x/configure_querynode.md#queryNodereplicas">Configuraciones relacionadas con nodos de consulta</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Resumen<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

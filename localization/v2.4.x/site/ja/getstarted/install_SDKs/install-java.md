@@ -90,11 +90,11 @@ title: Milvus Java SDKのインストール
 <ul>
 <li><p>Milvusの基本操作を学びます：</p>
 <ul>
-<li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>
-<li><a href="/docs/ja/manage-partitions.md">パーティションの管理</a></li>
-<li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
-<li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
-<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
+<li><a href="/docs/ja/v2.4.x/manage-collections.md">コレクションの管理</a></li>
+<li><a href="/docs/ja/v2.4.x/manage-partitions.md">パーティションの管理</a></li>
+<li><a href="/docs/ja/v2.4.x/insert-update-delete.md">挿入、アップサート、削除</a></li>
+<li><a href="/docs/ja/v2.4.x/single-vector-search.md">単一ベクトル検索</a></li>
+<li><a href="/docs/ja/v2.4.x/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
 <li><p><a href="/api-reference/java/v2.4.x/About.md">MilvusのJava APIリファレンスを</a>見る</p></li>
 </ul>

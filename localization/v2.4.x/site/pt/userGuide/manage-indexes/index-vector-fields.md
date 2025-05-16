@@ -38,7 +38,7 @@ title: Indexar campos vectoriais
         ></path>
       </svg>
     </button></h2><p>Aproveitando os metadados armazenados num ficheiro de índice, o Milvus organiza os seus dados numa estrutura especializada, facilitando a rápida recuperação da informação solicitada durante as pesquisas ou consultas.</p>
-<p>O Milvus fornece vários tipos de índices e métricas para ordenar os valores de campo para pesquisas de similaridade eficientes. A tabela seguinte lista os tipos de índices e métricas suportados para diferentes tipos de campos vectoriais. Atualmente, o Milvus suporta vários tipos de dados vectoriais, incluindo embeddings de vírgula flutuante (frequentemente conhecidos como vectores de vírgula flutuante ou vectores densos), embeddings binários (também conhecidos como vectores binários) e embeddings esparsos (também conhecidos como vectores esparsos). Para obter detalhes, consulte <a href="/docs/pt/index.md">Índice na memória</a> e <a href="/docs/pt/metric.md">métricas de similaridade</a>.</p>
+<p>O Milvus fornece vários tipos de índices e métricas para ordenar os valores de campo para pesquisas de similaridade eficientes. A tabela seguinte lista os tipos de índices e métricas suportados para diferentes tipos de campos vectoriais. Atualmente, o Milvus suporta vários tipos de dados vectoriais, incluindo embeddings de vírgula flutuante (frequentemente conhecidos como vectores de vírgula flutuante ou vectores densos), embeddings binários (também conhecidos como vectores binários) e embeddings esparsos (também conhecidos como vectores esparsos). Para obter detalhes, consulte <a href="/docs/pt/v2.4.x/index.md">Índice na memória</a> e <a href="/docs/pt/v2.4.x/metric.md">métricas de similaridade</a>.</p>
 <div class="filter">
  <a href="#floating">Incorporações de ponto flutuante</a> <a href="#binary">Incorporações binárias</a> <a href="#sparse">Incorporações esparsas</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -105,7 +105,7 @@ title: Indexar campos vectoriais
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Como explicado em <a href="/docs/pt/manage-collections.md">Gerir colecções</a>, o Milvus gera automaticamente um índice e carrega-o para a memória ao criar uma coleção se alguma das seguintes condições for especificada no pedido de criação da coleção:</p>
+    </button></h2><p>Como explicado em <a href="/docs/pt/v2.4.x/manage-collections.md">Gerir colecções</a>, o Milvus gera automaticamente um índice e carrega-o para a memória ao criar uma coleção se alguma das seguintes condições for especificada no pedido de criação da coleção:</p>
 <ul>
 <li><p>A dimensionalidade do campo vetorial e o tipo de métrica, ou</p></li>
 <li><p>O esquema e os parâmetros do índice.</p></li>

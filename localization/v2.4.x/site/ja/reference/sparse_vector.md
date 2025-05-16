@@ -117,7 +117,7 @@ entities = [
 <p><b>注釈</b></p>
 <p>ベクトルの次元は Python<code translate="no">int</code> または<code translate="no">numpy.integer</code> 型でなければならず、値は Python<code translate="no">float</code> または<code translate="no">numpy.floating</code> 型でなければなりません。</p>
 </div>
-<p>埋め込みを生成するには、PyMilvus ライブラリに組み込まれた<code translate="no">model</code> パッケージを使用することもできます。詳細については、<a href="/docs/ja/embeddings.md">埋め込みを</a>参照してください。</p>
+<p>埋め込みを生成するには、PyMilvus ライブラリに組み込まれた<code translate="no">model</code> パッケージを使用することもできます。詳細については、<a href="/docs/ja/v2.4.x/embeddings.md">埋め込みを</a>参照してください。</p>
 <h2 id="Create-a-collection-with-a-sparse-vector-field" class="common-anchor-header">疎なベクトル場を持つコレクションの作成<button data-href="#Create-a-collection-with-a-sparse-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -214,7 +214,7 @@ client.create_index(collection_name=<span class="hljs-string">&quot;test_sparse_
 <li><p><code translate="no">metric_type</code>:疎なベクトルに対しては、<code translate="no">IP</code> (Inner Product) 距離メトリックのみがサポートされる。</p></li>
 <li><p><code translate="no">params.drop_ratio_build</code>:特にスパースベクトルに使用されるインデックスパラメータ。インデックス作成時に除外される小さなベクトル値の割合を制御します。このパラメータは、インデックスを作成する際に小さな値を無視することで、効率と精度のトレードオフを微調整することができます。例えば、<code translate="no">drop_ratio_build = 0.3</code> の場合、インデックス構築時にすべてのスパース・ベクトルからすべての値が集められ、ソートされる。これらの値のうち最小の30%はインデックスに含まれないため、検索時の計算負荷が軽減される。</p></li>
 </ul>
-<p>詳細については、<a href="/docs/ja/index.md">インメモリ・インデックスを</a>参照のこと。</p>
+<p>詳細については、<a href="/docs/ja/v2.4.x/index.md">インメモリ・インデックスを</a>参照のこと。</p>
 <h2 id="Perform-ANN-search" class="common-anchor-header">ANN検索の実行<button data-href="#Perform-ANN-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

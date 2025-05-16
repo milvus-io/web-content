@@ -22,10 +22,10 @@ title: ''
       </svg>
     </button></h1><p>This page lists common issues that may occur when running Milvus, as well as possible troubleshooting tips. Issues on this page fall into the following categories:</p>
 <ul>
-<li><a href="/docs/troubleshooting.md#Boot-issues">Boot issues</a></li>
-<li><a href="/docs/troubleshooting.md#Runtime-issues">Runtime issues</a></li>
-<li><a href="/docs/troubleshooting.md#API-issues">API issues</a></li>
-<li><a href="/docs/troubleshooting.md#etcd-crash-issues">etcd crash issues</a></li>
+<li><a href="/docs/v2.0.x/troubleshooting.md#Boot-issues">Boot issues</a></li>
+<li><a href="/docs/v2.0.x/troubleshooting.md#Runtime-issues">Runtime issues</a></li>
+<li><a href="/docs/v2.0.x/troubleshooting.md#API-issues">API issues</a></li>
+<li><a href="/docs/v2.0.x/troubleshooting.md#etcd-crash-issues">etcd crash issues</a></li>
 </ul>
 <h2 id="Boot-issues" class="common-anchor-header">Boot issues<button data-href="#Boot-issues" class="anchor-icon" translate="no">
       <svg translate="no"

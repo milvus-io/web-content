@@ -37,14 +37,14 @@ title: Configurare Milvus al volo
       </svg>
     </button></h2><p>È necessario assicurarsi che</p>
 <ul>
-<li>Sia installato Birdwatcher. Per i dettagli, vedere <a href="/docs/it/birdwatcher_install_guides.md">Installazione di Birdwatcher</a>,</li>
+<li>Sia installato Birdwatcher. Per i dettagli, vedere <a href="/docs/it/v2.4.x/birdwatcher_install_guides.md">Installazione di Birdwatcher</a>,</li>
 <li>Sia installato etcdctl. Per i dettagli, fare riferimento a <a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">Interazione con etcd</a>, oppure</li>
 <li>Sono stati installati altri client etcd, come il client Python.</li>
 </ul>
 <div class="alert note">
 <ul>
-<li>Gli esempi di questa guida modificano il valore di <code translate="no">proxy.minPasswordLength</code> in <code translate="no">8</code>. È possibile sostituire la chiave con quelle applicabili elencate in <a href="/docs/it/dynamic_config.md#Applicable-configuration-items">Elementi di configurazione applicabili</a>.</li>
-<li>Gli esempi di questa guida presuppongono che il percorso principale di Milvus sia <code translate="no">by-dev</code>. Tutte le configurazioni sono elencate sotto il percorso <code translate="no">by-dev/config</code>. Il percorso principale di Milvus varia a seconda della modalità di installazione. Per le istanze installate utilizzando i grafici Helm, il percorso principale è predefinito a <code translate="no">by-dev</code>. Se non si conosce il percorso principale, fare riferimento a <a href="/docs/it/birdwatcher_usage_guides.md#Connect-to-etcd">Connessione a etcd</a>.</li>
+<li>Gli esempi di questa guida modificano il valore di <code translate="no">proxy.minPasswordLength</code> in <code translate="no">8</code>. È possibile sostituire la chiave con quelle applicabili elencate in <a href="/docs/it/v2.4.x/dynamic_config.md#Applicable-configuration-items">Elementi di configurazione applicabili</a>.</li>
+<li>Gli esempi di questa guida presuppongono che il percorso principale di Milvus sia <code translate="no">by-dev</code>. Tutte le configurazioni sono elencate sotto il percorso <code translate="no">by-dev/config</code>. Il percorso principale di Milvus varia a seconda della modalità di installazione. Per le istanze installate utilizzando i grafici Helm, il percorso principale è predefinito a <code translate="no">by-dev</code>. Se non si conosce il percorso principale, fare riferimento a <a href="/docs/it/v2.4.x/birdwatcher_usage_guides.md#Connect-to-etcd">Connessione a etcd</a>.</li>
 </ul>
 </div>
 <h2 id="Change-configurations" class="common-anchor-header">Cambiare le configurazioni<button data-href="#Change-configurations" class="anchor-icon" translate="no">
@@ -203,6 +203,6 @@ QueryCoord-<span class="hljs-number">1</span>(ip:port) &gt; configuration  <span
         ></path>
       </svg>
     </button></h2><ul>
-<li>Ulteriori informazioni sulle <a href="/docs/it/system_configuration.md">configurazioni di sistema</a>.</li>
-<li>Imparate a configurare Milvus installato usando <a href="/docs/it/configure_operator.md">Milvus Operator</a>, i <a href="/docs/it/configure-helm.md">grafici Helm</a> e <a href="/docs/it/configure-docker.md">Docker</a>.</li>
+<li>Ulteriori informazioni sulle <a href="/docs/it/v2.4.x/system_configuration.md">configurazioni di sistema</a>.</li>
+<li>Imparate a configurare Milvus installato usando <a href="/docs/it/v2.4.x/configure_operator.md">Milvus Operator</a>, i <a href="/docs/it/v2.4.x/configure-helm.md">grafici Helm</a> e <a href="/docs/it/v2.4.x/configure-docker.md">Docker</a>.</li>
 </ul>

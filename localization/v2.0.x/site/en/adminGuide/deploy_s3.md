@@ -45,7 +45,7 @@ summary: Learn how to set up S3 storage for Milvus.
   useSSL: &lt;<span class="hljs-literal">true</span>/<span class="hljs-literal">false</span>&gt;
   bucketName: <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>See <a href="/docs/configure_minio.md">MinIO/S3 Configurations</a> for more information.</p>
+<p>See <a href="/docs/v2.0.x/configure_minio.md">MinIO/S3 Configurations</a> for more information.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Run Milvus</h3><p>Run the following command to start Milvus that uses the S3 configurations.</p>
 <pre><code translate="no" class="language-shell">docker-compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -124,6 +124,6 @@ summary: Learn how to set up S3 storage for Milvus.
       </svg>
     </button></h2><p>If you want to learn how to use storage from other cloud providers:</p>
 <ul>
-<li><a href="/docs/gcp.md#Use-Google-Cloud-Storage">Use Google Cloud Storage</a></li>
-<li><a href="/docs/azure.md#Use-Azure-Blob-Storage">Use Azure Blob Storage</a></li>
+<li><a href="/docs/v2.0.x/gcp.md#Use-Google-Cloud-Storage">Use Google Cloud Storage</a></li>
+<li><a href="/docs/v2.0.x/azure.md#Use-Azure-Blob-Storage">Use Azure Blob Storage</a></li>
 </ul>

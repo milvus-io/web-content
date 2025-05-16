@@ -94,5 +94,5 @@ title: Componentes principales
         ></path>
       </svg>
     </button></h2><ul>
-<li>Lea <a href="/docs/es/four_layers.md">Computing/Storage Disaggregation</a> para comprender el mecanismo y el principio de diseño de Milvus.</li>
+<li>Lea <a href="/docs/es/v2.4.x/four_layers.md">Computing/Storage Disaggregation</a> para comprender el mecanismo y el principio de diseño de Milvus.</li>
 </ul>

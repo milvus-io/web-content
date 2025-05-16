@@ -3,7 +3,7 @@ id: upgrade_milvus_cluster-docker.md
 summary: Docker Compose로 Milvus 클러스터를 업그레이드하는 방법을 알아보세요.
 title: 도커 컴포즈로 밀버스 클러스터 업그레이드하기
 ---
-<div class="tab-wrapper"><a href="/docs/ko/upgrade_milvus_standalone-operator.md" class=''>밀버스</a><a href="/docs/ko/upgrade_milvus_cluster-operator.md" class=''>오퍼레이터밀버스 오퍼레이터밀버스</a><a href="/docs/ko/configure-helm.md" class=''>오퍼레이터헬름도커</a><a href="/docs/ko/upgrade_milvus_standalone-helm.md" class=''>컴포즈헬름도커</a><a href="/docs/ko/upgrade_milvus_cluster-helm.md" class=''>컴포즈헬름</a></div>
+<div class="tab-wrapper"><a href="/docs/ko/v2.4.x/upgrade_milvus_standalone-operator.md" class=''>밀버스</a><a href="/docs/ko/v2.4.x/upgrade_milvus_cluster-operator.md" class=''>오퍼레이터밀버스 오퍼레이터밀버스</a><a href="/docs/ko/v2.4.x/configure-helm.md" class=''>오퍼레이터헬름도커</a><a href="/docs/ko/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>컴포즈헬름도커</a><a href="/docs/ko/v2.4.x/upgrade_milvus_cluster-helm.md" class=''>컴포즈헬름</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">도커 컴포즈로 밀버스 클러스터 업그레이드하기<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -144,11 +144,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>다음 방법을 알아보세요:<ul>
-<li><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장하기</a></li>
+<li><a href="/docs/ko/v2.4.x/scaleout.md">Milvus 클러스터 확장하기</a></li>
 </ul></li>
 <li>클라우드에 클러스터를 배포할 준비가 되었다면:<ul>
-<li><a href="/docs/ko/eks.md">Terraform을 사용하여 Amazon EKS에 Milvus를 배포하는</a> 방법 알아보기</li>
-<li><a href="/docs/ko/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터를 배포하는</a> 방법 알아보기</li>
-<li><a href="/docs/ko/azure.md">Kubernetes를 사용하여 Microsoft Azure에 Milvus를 배포하는</a> 방법 알아보기</li>
+<li><a href="/docs/ko/v2.4.x/eks.md">Terraform을 사용하여 Amazon EKS에 Milvus를 배포하는</a> 방법 알아보기</li>
+<li><a href="/docs/ko/v2.4.x/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터를 배포하는</a> 방법 알아보기</li>
+<li><a href="/docs/ko/v2.4.x/azure.md">Kubernetes를 사용하여 Microsoft Azure에 Milvus를 배포하는</a> 방법 알아보기</li>
 </ul></li>
 </ul>

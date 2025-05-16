@@ -122,5 +122,5 @@ title: ''
         ></path>
       </svg>
     </button></h2><ul>
-<li>Read <a href="/docs/main_components.md">Main Components</a> for more details about the Milvus architecture.</li>
+<li>Read <a href="/docs/v2.2.x/main_components.md">Main Components</a> for more details about the Milvus architecture.</li>
 </ul>

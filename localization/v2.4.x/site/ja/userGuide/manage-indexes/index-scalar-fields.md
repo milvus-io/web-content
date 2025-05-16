@@ -190,7 +190,7 @@ client.createIndex(createIndexReq);
 <p>作成するスカラー・インデックスの型。暗黙的インデックス作成の場合は、このパラメータを空にするか省略します。</p>
 <p>カスタム・インデックスの場合、有効な値は以下のとおりです：</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (推奨) 転置インデックスは、すべてのトークン化された単語をアルファベット順に並べた用語辞書で構成されます。詳細については、「<a href="/docs/ja/scalar_index.md">スカラー・インデックス</a>」を参照してください。</p></li>
+<li><p><strong>INVERTED</strong>: (推奨) 転置インデックスは、すべてのトークン化された単語をアルファベット順に並べた用語辞書で構成されます。詳細については、「<a href="/docs/ja/v2.4.x/scalar_index.md">スカラー・インデックス</a>」を参照してください。</p></li>
 <li><p><strong>STL_SORT</strong>：標準テンプレート・ライブラリのソート・アルゴリズムを使用して、スカラー・フィールドをソートします。数値フィールド（INT8、INT16、INT32、INT64、FLOAT、DOUBLEなど）のみをサポート。</p></li>
 <li><p><strong>トライ</strong>：高速なプレフィックス検索と取得のためのツリーデータ構造。VARCHAR フィールドをサポート。</p></li>
 </ul></li>
@@ -214,7 +214,7 @@ client.createIndex(createIndexReq);
 <li><strong>fieldName</strong><em>(String</em>) インデックスを作成するスカラー・フィールドの名前。</li>
 <li><strong>indexName</strong><em>(String</em>) 作成するスカラー・インデックスの名前。各スカラー・フィールドは1つのインデックスをサポートする。</li>
 <li><strong>indexType</strong><em>(String</em>) 作成するスカラーインデックスのタイプ。暗黙的インデックス作成の場合は、このパラメータを空にするか省略します。 カスタム・インデックス作成の場合は、以下の値が有効です：<ul>
-<li><strong>INVERTED</strong>: (推奨) 転置インデックスは、すべてのトークン化された単語をアルファベット順に並べた用語辞書で構成されます。詳細については、「<a href="/docs/ja/scalar_index.md">スカラー・インデックス</a>」を参照してください。</li>
+<li><strong>INVERTED</strong>: (推奨) 転置インデックスは、すべてのトークン化された単語をアルファベット順に並べた用語辞書で構成されます。詳細については、「<a href="/docs/ja/v2.4.x/scalar_index.md">スカラー・インデックス</a>」を参照してください。</li>
 <li><strong>STL_SORT</strong>：標準テンプレート・ライブラリのソート・アルゴリズムを使用して、スカラー・フィールドをソートします。ブール値と数値フィールド（INT8、INT16、INT32、INT64、FLOAT、DOUBLEなど）をサポート。</li>
 <li><strong>トライ</strong>：高速なプレフィックス検索と取得のためのツリーデータ構造。VARCHAR フィールドをサポート。</li>
 </ul></li>
@@ -235,7 +235,7 @@ client.createIndex(createIndexReq);
 <li><strong>field_name</strong><em>(string</em>) インデックスを作成するスカラー・フィールドの名前。</li>
 <li><strong>index_name</strong><em>(string</em>) 作成するスカラー・インデックスの名前。各スカラー・フィールドは1つのインデックスをサポートします。</li>
 <li><strong>index_type</strong><em>(string</em>) 作成するスカラー・インデックスのタイプ。暗黙的インデックスの場合は、このパラメータを空にするか省略します。 カスタムインデックスの場合は、以下の値が有効です：<ul>
-<li><strong>INVERTED</strong>: (推奨) 転置インデックスは、すべてのトークン化された単語をアルファベット順に並べた用語辞書で構成されます。詳細については、「<a href="/docs/ja/scalar_index.md">スカラー・インデックス</a>」を参照してください。</li>
+<li><strong>INVERTED</strong>: (推奨) 転置インデックスは、すべてのトークン化された単語をアルファベット順に並べた用語辞書で構成されます。詳細については、「<a href="/docs/ja/v2.4.x/scalar_index.md">スカラー・インデックス</a>」を参照してください。</li>
 <li><strong>STL_SORT</strong>：標準テンプレート・ライブラリのソート・アルゴリズムを使用して、スカラー・フィールドをソートします。ブール値と数値フィールド（INT8、INT16、INT32、INT64、FLOAT、DOUBLEなど）をサポート。</li>
 <li><strong>トライ</strong>：高速なプレフィックス検索と取得のためのツリーデータ構造。VARCHAR フィールドをサポート。</li>
 </ul></li>

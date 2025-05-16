@@ -20,7 +20,7 @@ title: Milvusクラスターをスケールする
         ></path>
       </svg>
     </button></h1><p>Milvusはコンポーネントの水平スケーリングをサポートしています。つまり、必要に応じて各タイプのワーカーノードの数を増やしたり減らしたりすることができます。</p>
-<p>このトピックでは、Milvusクラスタのスケールアウトおよびスケールイン方法について説明します。スケールアウトする前に<a href="/docs/ja/install_cluster-helm.md">Milvusクラスタをインストール</a>済みであることを前提としています。また、始める前に<a href="/docs/ja/architecture_overview.md">Milvusアーキテクチャに慣れて</a>おくことをお勧めします。</p>
+<p>このトピックでは、Milvusクラスタのスケールアウトおよびスケールイン方法について説明します。スケールアウトする前に<a href="/docs/ja/v2.4.x/install_cluster-helm.md">Milvusクラスタをインストール</a>済みであることを前提としています。また、始める前に<a href="/docs/ja/v2.4.x/architecture_overview.md">Milvusアーキテクチャに慣れて</a>おくことをお勧めします。</p>
 <p>このチュートリアルでは、3つのクエリノードのスケールアウトを例として取り上げます。他の種類のノードをスケールアウトするには、コマンドラインで<code translate="no">queryNode</code> を対応するノードタイプに置き換えてください。</p>
 <div class="alert note">
 <p>Milvus Operatorを使用してクラスタをスケールアウトする方法については、<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md">Milvus Operatorを使用したクラスタのスケールアウトを</a>参照してください。</p>
@@ -50,7 +50,7 @@ title: Milvusクラスターをスケールする
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scale_up.jpg" alt="Scaleup" class="doc-image" id="scaleup" />
    </span> <span class="img-wrapper"> <span>スケールアップ</span> </span></p>
-<p><a href="/docs/ja/architecture_overview.md">Milvusアーキテクチャに</a>よると、ステートレスワーカーノードにはクエリノード、データノード、インデックスノード、プロキシが含まれます。そのため、ビジネスニーズやアプリケーションシナリオに合わせてこれらのタイプのノードをスケールアウトすることができます。Milvusクラスタは手動または自動でスケールアウトすることができます。</p>
+<p><a href="/docs/ja/v2.4.x/architecture_overview.md">Milvusアーキテクチャに</a>よると、ステートレスワーカーノードにはクエリノード、データノード、インデックスノード、プロキシが含まれます。そのため、ビジネスニーズやアプリケーションシナリオに合わせてこれらのタイプのノードをスケールアウトすることができます。Milvusクラスタは手動または自動でスケールアウトすることができます。</p>
 <p>一般的に、作成したMilvusクラスタが過剰に使用されている場合はスケールアウトする必要があります。以下はMilvusクラスタのスケールアウトが必要となる典型的な状況です：</p>
 <ul>
 <li>CPUとメモリの使用率が一定期間高い。</li>
@@ -166,16 +166,16 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
     </button></h2><ul>
 <li><p>Milvusのサービスを監視してアラートを作成する方法を学びたい場合は、次の手順に進んでください：</p>
 <ul>
-<li><a href="/docs/ja/monitor.md">Kubernetes上のPrometheus OperatorでMilvusを監視するを</a>参照してください。</li>
+<li><a href="/docs/ja/v2.4.x/monitor.md">Kubernetes上のPrometheus OperatorでMilvusを監視するを</a>参照してください。</li>
 </ul></li>
 <li><p>クラウド上にクラスタをデプロイする準備ができている場合は、こちらを参照してください：</p>
 <ul>
-<li><a href="/docs/ja/eks.md">Terraformを使ってAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
-<li><a href="/docs/ja/gcp.md">Kubernetesを使ってGCPにMilvusクラスタをデプロイ</a>する方法</li>
-<li><a href="/docs/ja/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法</li>
+<li><a href="/docs/ja/v2.4.x/eks.md">Terraformを使ってAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/v2.4.x/gcp.md">Kubernetesを使ってGCPにMilvusクラスタをデプロイ</a>する方法</li>
+<li><a href="/docs/ja/v2.4.x/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法</li>
 </ul></li>
 <li><p>リソースの割り当て方法をお探しの方は、こちらをご覧ください：</p>
 <ul>
-<li><a href="/docs/ja/allocate.md#standalone">Kubernetesでリソースを割り当てる</a></li>
+<li><a href="/docs/ja/v2.4.x/allocate.md#standalone">Kubernetesでリソースを割り当てる</a></li>
 </ul></li>
 </ul>

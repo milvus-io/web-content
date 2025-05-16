@@ -7,7 +7,7 @@ related_key: upgrade Milvus Standalone
 summary: 'Узнайте, как обновить автономный Milvus с помощью Docker Compose.'
 title: Обновление автономного Milvus с помощью Docker Compose
 ---
-<div class="tab-wrapper"><a href="/docs/ru/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ru/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/ru/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
+<div class="tab-wrapper"><a href="/docs/ru/v2.4.x/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/ru/v2.4.x/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/ru/v2.4.x/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Обновление автономного Milvus с помощью Docker Compose<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,11 +122,11 @@ docker compose up -d
       </svg>
     </button></h2><ul>
 <li>Вам также может быть интересно узнать, как:<ul>
-<li><a href="/docs/ru/scaleout.md">Масштабировать кластер Milvus</a></li>
+<li><a href="/docs/ru/v2.4.x/scaleout.md">Масштабировать кластер Milvus</a></li>
 </ul></li>
 <li>Если вы готовы развернуть свой кластер в облаке:<ul>
-<li>Узнайте, как <a href="/docs/ru/eks.md">развернуть Milvus на Amazon EKS с помощью Terraform</a>.</li>
-<li>Узнайте, как <a href="/docs/ru/gcp.md">развернуть кластер Milvus на GCP с помощью Kubernetes</a></li>
-<li>Узнайте, как <a href="/docs/ru/azure.md">развернуть Milvus на Microsoft Azure с помощью Kubernetes</a>.</li>
+<li>Узнайте, как <a href="/docs/ru/v2.4.x/eks.md">развернуть Milvus на Amazon EKS с помощью Terraform</a>.</li>
+<li>Узнайте, как <a href="/docs/ru/v2.4.x/gcp.md">развернуть кластер Milvus на GCP с помощью Kubernetes</a></li>
+<li>Узнайте, как <a href="/docs/ru/v2.4.x/azure.md">развернуть Milvus на Microsoft Azure с помощью Kubernetes</a>.</li>
 </ul></li>
 </ul>

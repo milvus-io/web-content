@@ -7,7 +7,7 @@ group: query.md
 summary: Learn how to search and query data with iterators.
 title: Conduct a Query With Iterators
 ---
-<div class="tab-wrapper"><a href="/docs/query.md" class=''>Conduct a Query</a><a href="/docs/with_iterators.md" class='active '>Conduct a Query with Iterators</a></div>
+<div class="tab-wrapper"><a href="/docs/v2.3.x/query.md" class=''>Conduct a Query</a><a href="/docs/v2.3.x/with_iterators.md" class='active '>Conduct a Query with Iterators</a></div>
 <h1 id="Conduct-a-Query-With-Iterators" class="common-anchor-header">Conduct a Query With Iterators<button data-href="#Conduct-a-Query-With-Iterators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -24,7 +24,7 @@ title: Conduct a Query With Iterators
         ></path>
       </svg>
     </button></h1><p>This topic describes how to search and query data with iterators.</p>
-<p>Before an iterator is introduced, one common way of querying or searching a large dataset in Milvus is to use <code translate="no">offset</code> and <code translate="no">limit</code> parameters in combination, which specify the starting position and the maximum number of items to return respectively. However, this method may lead to performance issues as the offset and limit continuously increase, potentially imposing a substantial memory burden on Milvus servers. For more information about <code translate="no">offset</code> and <code translate="no">limit</code>, see <a href="/docs/search.md#prepare-search-parameters">Conduct a Vector Similarity Search</a>.</p>
+<p>Before an iterator is introduced, one common way of querying or searching a large dataset in Milvus is to use <code translate="no">offset</code> and <code translate="no">limit</code> parameters in combination, which specify the starting position and the maximum number of items to return respectively. However, this method may lead to performance issues as the offset and limit continuously increase, potentially imposing a substantial memory burden on Milvus servers. For more information about <code translate="no">offset</code> and <code translate="no">limit</code>, see <a href="/docs/v2.3.x/search.md#prepare-search-parameters">Conduct a Vector Similarity Search</a>.</p>
 <p>For that to happen the database will need to perform an inefficient full scan every time you request a pagination. This means that if there are 100,000,000 search results and you request an <code translate="no">offset</code> of 50,000,000, the system will need to fetch all those records (which will not even be needed), cache them in memory, sort according to vector similarity and primary key and afterwards only retrieve the 20 results specified in <code translate="no">limit</code>.</p>
 <p>To address the performance issue, an alternative is to use an iterator, which is an object that allows you to use <code translate="no">expr</code> to filter scalar fields and then iterate over a sequence of search or query results. Using an iterator has some advantages:</p>
 <ul>
@@ -150,7 +150,7 @@ The <code translate="no">batch_size</code> parameter is also set to 10, which me
 And the parameter <code translate="no">limit</code> is set to 100, meaning that the iterator will return 100 entities in total at most.
 Note that iterator guarantees that no repeated results will be returned so if there are not enough entities, the iterator will return empty page and the whole iteration should terminate.</p>
 <p>Regarding the <code translate="no">radius</code> and <code translate="no">range_filter</code> parameters, search_iterators will ensure the returned entities are restricted
-in the range defined by these two parameters. More information is available in <a href="/docs/within_range.md#configure-a-range-for-vector-filtering">Within Range</a>.</p>
+in the range defined by these two parameters. More information is available in <a href="/docs/v2.3.x/within_range.md#configure-a-range-for-vector-filtering">Within Range</a>.</p>
 <pre><code translate="no" class="language-python">vectors_to_search = rng.random((SEARCH_NQ, DIM))
 
 search_params = {
@@ -201,14 +201,14 @@ search_iterator = collection.search_iterator(
 <tr><th>Parameter</th><th>Description</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">expr</code></td><td>Boolean expression used to filter attributes. Find more expression details in <a href="/docs/boolean.md">Boolean Expression Rules</a>.</td></tr>
+<tr><td><code translate="no">expr</code></td><td>Boolean expression used to filter attributes. Find more expression details in <a href="/docs/v2.3.x/boolean.md">Boolean Expression Rules</a>.</td></tr>
 <tr><td><code translate="no">data</code></td><td>The list of vectors to search with.</td></tr>
 <tr><td><code translate="no">anns_field</code></td><td>Name of the vector field.</td></tr>
-<tr><td><code translate="no">param</code></td><td>Search parameters specific to the index. Find more expression details in <a href="/docs/search.md#prepare-search-parameters">Conduct a Vector Similarity Search</a>.</td></tr>
+<tr><td><code translate="no">param</code></td><td>Search parameters specific to the index. Find more expression details in <a href="/docs/v2.3.x/search.md#prepare-search-parameters">Conduct a Vector Similarity Search</a>.</td></tr>
 <tr><td><code translate="no">batch_size</code></td><td>Number of entities to return per page.</td></tr>
 <tr><td><code translate="no">limit</code></td><td>Number of results to return totally in this iteration process.</td></tr>
-<tr><td><code translate="no">radius</code></td><td>Angle where the vector with the least similarity resides. Find more expression details in <a href="/docs/within_range.md#configure-a-range-for-vector-filtering">Within Range</a>.</td></tr>
-<tr><td><code translate="no">range_filter</code></td><td>The filter used to filter a part of entities. Find more expression details in <a href="/docs/within_range.md#configure-a-range-for-vector-filtering">Within Range</a>.</td></tr>
+<tr><td><code translate="no">radius</code></td><td>Angle where the vector with the least similarity resides. Find more expression details in <a href="/docs/v2.3.x/within_range.md#configure-a-range-for-vector-filtering">Within Range</a>.</td></tr>
+<tr><td><code translate="no">range_filter</code></td><td>The filter used to filter a part of entities. Find more expression details in <a href="/docs/v2.3.x/within_range.md#configure-a-range-for-vector-filtering">Within Range</a>.</td></tr>
 <tr><td><code translate="no">output_fields</code></td><td>Name of the field to return. Milvus supports returning the vector field.</td></tr>
 </tbody>
 </table>

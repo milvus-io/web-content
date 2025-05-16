@@ -20,7 +20,7 @@ title: Coordenador HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Como se pode ver na <a href="/docs/pt/architecture_overview.md">arquitetura do Milvus</a>, este é constituído por muitos componentes que funcionam de forma distribuída. Entre todos os componentes, o Milvus assegura a elevada disponibilidade dos trabalhadores através do <a href="/docs/pt/scaleout.md">aumento e da redução</a> dos nós, tornando os coordenadores o único elo fraco da cadeia.</p>
+    </button></h1><p>Como se pode ver na <a href="/docs/pt/v2.4.x/architecture_overview.md">arquitetura do Milvus</a>, este é constituído por muitos componentes que funcionam de forma distribuída. Entre todos os componentes, o Milvus assegura a elevada disponibilidade dos trabalhadores através do <a href="/docs/pt/v2.4.x/scaleout.md">aumento e da redução</a> dos nós, tornando os coordenadores o único elo fraco da cadeia.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -172,9 +172,9 @@ root        17739   0.1 0.3 410289872   91792 s003  SN  6:01PM  0:00.30 ./bin/mi
       </svg>
     </button></h2><p>A HA do coordenador é desativada por padrão. É possível ativar esse recurso manualmente alterando os seguintes itens no arquivo de configuração do Milvus.</p>
 <ul>
-<li><a href="/docs/pt/configure_rootcoord.md#rootCoordactiveStandbyenabled">rootCoord.activeStandby.enabled</a></li>
-<li><a href="/docs/pt/configure_querycoord.md#queryCoordactiveStandbyenabled">queryCoord.activeStandby.enabled</a></li>
-<li><a href="/docs/pt/configure_datacoord.md#dataCoordactiveStandbyenabled">dataCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/pt/v2.4.x/configure_rootcoord.md#rootCoordactiveStandbyenabled">rootCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/pt/v2.4.x/configure_querycoord.md#queryCoordactiveStandbyenabled">queryCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/pt/v2.4.x/configure_datacoord.md#dataCoordactiveStandbyenabled">dataCoord.activeStandby.enabled</a></li>
 </ul>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -72,7 +72,7 @@ summary: Learn how to create an alert for Milvus services in Grafana.
         ></path>
       </svg>
     </button></h2><p>This guide takes the example of creating an alert for the memory usage of Milvus components. To create other types of alerts, please adjust your commands accordingly. If you encounter any problems during the process, feel free to ask in the <a href="https://discuss.milvus.io/">Milvus forum</a> or initiate a discussion on <a href="https://join.slack.com/t/milvusio/shared_invite/zt-e0u4qu3k-bI2GDNys3ZqX1YCJ9OM~GQ">Slack</a>.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Prerequisites</h3><p>This tutorial assumes that you have Grafana installed and configured. If not, we recommend reading the <a href="/docs/monitor.md">monitoring guide</a>.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Prerequisites</h3><p>This tutorial assumes that you have Grafana installed and configured. If not, we recommend reading the <a href="/docs/v2.2.x/monitor.md">monitoring guide</a>.</p>
 <h3 id="1-Add-a-new-query" class="common-anchor-header">1. Add a new query</h3><p>To add an alert for the memory usage of Milvus components, edit the Memory panel. Then, add a new query with the metric: <code translate="no">process_resident_memory_bytes{app_kubernetes_io_name=&quot;milvus&quot;, app_kubernetes_io_instance=~&quot;my-release&quot;, namespace=&quot;default&quot;}</code></p>
 <p>
   <span class="img-wrapper">
@@ -133,15 +133,15 @@ summary: Learn how to create an alert for Milvus services in Grafana.
     </button></h2><ul>
 <li>If you need to start monitoring services for Milvus:
 <ul>
-<li>Read the <a href="/docs/monitor.md">monitoring guide</a></li>
-<li>Learn how to <a href="/docs/visualize.md">visualize monitoring metrics</a></li>
+<li>Read the <a href="/docs/v2.2.x/monitor.md">monitoring guide</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/visualize.md">visualize monitoring metrics</a></li>
 </ul></li>
 <li>If you have created alerts for memory usage by Milvus components:
 <ul>
-<li>Learn how to <a href="/docs/allocate.md#standalone">allocate resources</a></li>
+<li>Learn how to <a href="/docs/v2.2.x/allocate.md#standalone">allocate resources</a></li>
 </ul></li>
 <li>If you are looking for information about how to scale a Milvus cluster:
 <ul>
-<li>Learn <a href="/docs/scaleout.md">scale a Milvus cluster</a></li>
+<li>Learn <a href="/docs/v2.2.x/scaleout.md">scale a Milvus cluster</a></li>
 </ul></li>
 </ul>

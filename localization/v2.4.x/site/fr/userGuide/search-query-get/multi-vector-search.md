@@ -21,7 +21,7 @@ title: Recherche hybride
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Depuis Milvus 2.4, nous avons introduit la prise en charge de plusieurs vecteurs et un cadre de recherche hybride, ce qui signifie que les utilisateurs peuvent introduire plusieurs champs de vecteurs (jusqu'à 10) dans une seule collection. Ces vecteurs dans différentes colonnes représentent diverses facettes des données, provenant de différents modèles d'intégration ou subissant des méthodes de traitement distinctes. Les résultats des recherches hybrides sont intégrés à l'aide de stratégies de reclassement, telles que la fusion des rangs réciproques (RRF) et la notation pondérée. Pour en savoir plus sur les stratégies de reclassement, reportez-vous à la section <a href="/docs/fr/reranking.md">Reclassement</a>.</p>
+    </button></h1><p>Depuis Milvus 2.4, nous avons introduit la prise en charge de plusieurs vecteurs et un cadre de recherche hybride, ce qui signifie que les utilisateurs peuvent introduire plusieurs champs de vecteurs (jusqu'à 10) dans une seule collection. Ces vecteurs dans différentes colonnes représentent diverses facettes des données, provenant de différents modèles d'intégration ou subissant des méthodes de traitement distinctes. Les résultats des recherches hybrides sont intégrés à l'aide de stratégies de reclassement, telles que la fusion des rangs réciproques (RRF) et la notation pondérée. Pour en savoir plus sur les stratégies de reclassement, reportez-vous à la section <a href="/docs/fr/v2.4.x/reranking.md">Reclassement</a>.</p>
 <p>Cette fonctionnalité est particulièrement utile dans les scénarios de recherche exhaustive, tels que l'identification de la personne la plus similaire dans une bibliothèque de vecteurs sur la base de divers attributs tels que les images, la voix, les empreintes digitales, etc.</p>
 <p>Dans ce tutoriel, vous apprendrez à :</p>
 <ul>
@@ -178,7 +178,7 @@ reqs = [request_1, request_2]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Après avoir créé les instances <code translate="no">AnnSearchRequest</code>, configurez une stratégie de reclassement pour combiner et reclasser les résultats. Actuellement, il existe deux options : <code translate="no">WeightedRanker</code> et <code translate="no">RRFRanker</code>. Pour plus d'informations sur les stratégies de reranking, reportez-vous à la section <a href="/docs/fr/reranking.md">Reranking</a>.</p>
+    </button></h2><p>Après avoir créé les instances <code translate="no">AnnSearchRequest</code>, configurez une stratégie de reclassement pour combiner et reclasser les résultats. Actuellement, il existe deux options : <code translate="no">WeightedRanker</code> et <code translate="no">RRFRanker</code>. Pour plus d'informations sur les stratégies de reranking, reportez-vous à la section <a href="/docs/fr/v2.4.x/reranking.md">Reranking</a>.</p>
 <ul>
 <li><p>Utiliser la notation pondérée</p>
 <p>L'adresse <code translate="no">WeightedRanker</code> est utilisée pour attribuer une importance aux résultats de chaque recherche de champ vectoriel avec les poids spécifiés. Si vous donnez la priorité à certains champs vectoriels par rapport à d'autres, <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> peut en tenir compte dans les résultats combinés de la recherche.</p>
@@ -232,7 +232,7 @@ res = collection.hybrid_search(
 <p>Une liste de requêtes de recherche, chaque requête étant un objet <code translate="no">ANNSearchRequest</code>. Chaque requête peut correspondre à un champ vectoriel différent et à un ensemble différent de paramètres de recherche.</p></li>
 <li><p><code translate="no">rerank</code> <em>(objet</em>)</p>
 <p>La stratégie de reclassement à utiliser pour la recherche hybride. Valeurs possibles : <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> et <code translate="no">RRFRanker()</code>.</p>
-<p>Pour plus d'informations sur les stratégies de reclassement, voir <a href="/docs/fr/reranking.md">Reranking</a>.</p></li>
+<p>Pour plus d'informations sur les stratégies de reclassement, voir <a href="/docs/fr/v2.4.x/reranking.md">Reranking</a>.</p></li>
 <li><p><code translate="no">limit</code> <em>(int</em>)</p>
 <p>Nombre maximal de résultats finaux à renvoyer dans la recherche hybride.</p></li>
 </ul>

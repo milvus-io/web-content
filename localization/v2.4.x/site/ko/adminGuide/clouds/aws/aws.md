@@ -21,7 +21,7 @@ summary: AWS EC2에 Milvus 클러스터를 배포하는 방법을 알아보세�
       </svg>
     </button></h1><p>이 항목에서는 Terraform 및 Ansible을 사용하여 <a href="https://docs.aws.amazon.com/ec2/">Amazon EC2에</a> Milvus 클러스터를 배포하는 방법에 대해 설명합니다.</p>
 <div class="alert note">
-<p>이 항목은 오래되었으며 곧 삭제될 예정입니다. 대신 <a href="/docs/ko/eks.md">EKS에 Milvus 클러스터 배포를</a> 참조하시기 바랍니다.</p>
+<p>이 항목은 오래되었으며 곧 삭제될 예정입니다. 대신 <a href="/docs/ko/v2.4.x/eks.md">EKS에 Milvus 클러스터 배포를</a> 참조하시기 바랍니다.</p>
 </div>
 <h2 id="Provision-a-Milvus-cluster" class="common-anchor-header">Milvus 클러스터 프로비저닝<button data-href="#Provision-a-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -488,7 +488,7 @@ dockernode03               : ok=4    changed=3    unreachable=0    failed=0    s
       </svg>
     </button></h2><p>다른 클라우드에 Milvus를 배포하는 방법을 배우려면 다음과 같이 하세요:</p>
 <ul>
-<li><a href="/docs/ko/eks.md">EKS에 Milvus 클러스터 배포하기</a></li>
-<li><a href="/docs/ko/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터 배포하기</a></li>
-<li><a href="/docs/ko/azure.md">Kubernetes를 사용하여 Microsoft Azure에 Milvus 배포하기 가이드</a></li>
+<li><a href="/docs/ko/v2.4.x/eks.md">EKS에 Milvus 클러스터 배포하기</a></li>
+<li><a href="/docs/ko/v2.4.x/gcp.md">Kubernetes를 사용하여 GCP에 Milvus 클러스터 배포하기</a></li>
+<li><a href="/docs/ko/v2.4.x/azure.md">Kubernetes를 사용하여 Microsoft Azure에 Milvus 배포하기 가이드</a></li>
 </ul>

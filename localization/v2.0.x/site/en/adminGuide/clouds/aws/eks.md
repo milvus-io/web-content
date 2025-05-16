@@ -128,7 +128,7 @@ kubernetes       ClusterIP   <span class="hljs-number">172.20</span><span class=
       </svg>
     </button></h2><p>If you want to learn how to deploy Milvus on other clouds:</p>
 <ul>
-<li><a href="/docs/aws.md">Deploy a Milvus Cluster on EC2</a></li>
-<li><a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
-<li><a href="/docs/azure.md">Guide to Deploying Milvus on Microsoft Azure With Kubernetes</a></li>
+<li><a href="/docs/v2.0.x/aws.md">Deploy a Milvus Cluster on EC2</a></li>
+<li><a href="/docs/v2.0.x/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
+<li><a href="/docs/v2.0.x/azure.md">Guide to Deploying Milvus on Microsoft Azure With Kubernetes</a></li>
 </ul>

@@ -19,7 +19,7 @@ summary: Aprenda a asignar recursos a Milvus en Kubernetes.
         ></path>
       </svg>
     </button></h1><p>Este tema describe cómo asignar recursos a un clúster Milvus en Kubernetes.</p>
-<p>Generalmente, los recursos que usted asigna a un cluster Milvus en producción deben ser proporcionales a la carga de trabajo de la máquina. También debe considerar el tipo de máquina al asignar recursos. Aunque puede actualizar las configuraciones cuando el clúster se está ejecutando, recomendamos establecer los valores antes de <a href="/docs/es/install_cluster-helm.md">desplegar el clúster</a>.</p>
+<p>Generalmente, los recursos que usted asigna a un cluster Milvus en producción deben ser proporcionales a la carga de trabajo de la máquina. También debe considerar el tipo de máquina al asignar recursos. Aunque puede actualizar las configuraciones cuando el clúster se está ejecutando, recomendamos establecer los valores antes de <a href="/docs/es/v2.4.x/install_cluster-helm.md">desplegar el clúster</a>.</p>
 <div class="alert note">
 <p>Para obtener información sobre cómo asignar recursos con <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/allocate-resources.md#allocate-resources-with-milvus-operator">Milvus Operator</a>, consulte <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/allocate-resources.md#allocate-resources-with-milvus-operator">Asignar recursos con Milvus Operator</a>.</p>
 </div>
@@ -59,8 +59,8 @@ summary: Aprenda a asignar recursos a Milvus en Kubernetes.
 El uso de Helm para actualizar recursos hará que los pods en ejecución realicen una actualización continua.</div>
 <p>Hay dos formas de asignar recursos:</p>
 <ul>
-<li><a href="/docs/es/allocate.md#Allocate-resources-with-commands">Utilice los comandos</a></li>
-<li><a href="/docs/es/allocate.md#Allocate-resources-by-setting-configuration-file">Establezca los parámetros en el archivo <code translate="no">YAML</code> </a></li>
+<li><a href="/docs/es/v2.4.x/allocate.md#Allocate-resources-with-commands">Utilice los comandos</a></li>
+<li><a href="/docs/es/v2.4.x/allocate.md#Allocate-resources-by-setting-configuration-file">Establezca los parámetros en el archivo <code translate="no">YAML</code> </a></li>
 </ul>
 <h3 id="Allocate-resources-with-commands" class="common-anchor-header">Asignar recursos con comandos</h3><p>Debe establecer las variables de recursos para cada componente Milvus si utiliza <code translate="no">--set</code> para actualizar las configuraciones de recursos.</p>
 <div class="filter">
@@ -129,13 +129,13 @@ Si no se especifica <code translate="no">resources.limits</code>, los pods consu
       </svg>
     </button></h2><ul>
 <li>Puede que también quiera aprender cómo<ul>
-<li><a href="/docs/es/scaleout.md">Escalar un clúster Milvus</a></li>
-<li><a href="/docs/es/upgrade_milvus_cluster-operator.md">Actualizar Milvus Cluster</a></li>
-<li><a href="/docs/es/upgrade_milvus_standalone-operator.md">Actualizar Milvus Standalone</a></li>
+<li><a href="/docs/es/v2.4.x/scaleout.md">Escalar un clúster Milvus</a></li>
+<li><a href="/docs/es/v2.4.x/upgrade_milvus_cluster-operator.md">Actualizar Milvus Cluster</a></li>
+<li><a href="/docs/es/v2.4.x/upgrade_milvus_standalone-operator.md">Actualizar Milvus Standalone</a></li>
 </ul></li>
 <li>Si está listo para implementar su clúster en nubes:<ul>
-<li>Aprenda a <a href="/docs/es/eks.md">implementar Milvus en Amazon EKS con Terraform</a></li>
-<li>Aprenda a <a href="/docs/es/gcp.md">desplegar Milvus Cluster en GCP con Kubernetes</a></li>
-<li>Aprenda a <a href="/docs/es/azure.md">desplegar Milvus en Microsoft Azure con Kubernetes</a></li>
+<li>Aprenda a <a href="/docs/es/v2.4.x/eks.md">implementar Milvus en Amazon EKS con Terraform</a></li>
+<li>Aprenda a <a href="/docs/es/v2.4.x/gcp.md">desplegar Milvus Cluster en GCP con Kubernetes</a></li>
+<li>Aprenda a <a href="/docs/es/v2.4.x/azure.md">desplegar Milvus en Microsoft Azure con Kubernetes</a></li>
 </ul></li>
 </ul>

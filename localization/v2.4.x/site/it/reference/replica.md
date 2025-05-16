@@ -19,7 +19,7 @@ title: Replica in memoria
         ></path>
       </svg>
     </button></h1><p>Questo argomento introduce il meccanismo di replica in memoria (replicazione) di Milvus, che consente di replicare più segmenti nella memoria di lavoro per migliorare le prestazioni e la disponibilità.</p>
-<p>Per informazioni su come configurare le repliche in-memory, fare riferimento a <a href="/docs/it/configure_querynode.md#queryNodereplicas">Configurazioni relative ai nodi di query</a>.</p>
+<p>Per informazioni su come configurare le repliche in-memory, fare riferimento a <a href="/docs/it/v2.4.x/configure_querynode.md#queryNodereplicas">Configurazioni relative ai nodi di query</a>.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

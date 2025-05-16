@@ -22,7 +22,7 @@ title: Configurar o Milvus com o Milvus Operator
       </svg>
     </button></h1><p>No ambiente de produção, é necessário atribuir recursos ao cluster Milvus com base no tipo de máquina e na carga de trabalho. É possível configurar durante a implantação ou atualizar as configurações enquanto o cluster estiver em execução.</p>
 <p>Este tópico apresenta como configurar um cluster Milvus ao instalá-lo com o Milvus Operator.</p>
-<p>Este tópico pressupõe que você implantou o Milvus Operator. Consulte <a href="/docs/pt/install_cluster-milvusoperator.md">Implantar o Milvus Operator</a> para obter mais informações.</p>
+<p>Este tópico pressupõe que você implantou o Milvus Operator. Consulte <a href="/docs/pt/v2.4.x/install_cluster-milvusoperator.md">Implantar o Milvus Operator</a> para obter mais informações.</p>
 <p>A configuração de um cluster do Milvus com o Milvus Operator inclui:</p>
 <ul>
 <li>Configurações globais de recursos</li>
@@ -135,34 +135,34 @@ Além disso, ao configurar o proxy, há um campo extra chamado `serviceType`. Es
   <tr>
     <td>
         <ul>
-            <li><a href="/docs/pt/configure_etcd.md">etcd</a></li>
-            <li><a href="/docs/pt/configure_minio.md">MinIO ou S3</a></li>
-            <li><a href="/docs/pt/configure_pulsar.md">Pulsar</a></li>
-            <li><a href="/docs/pt/configure_rocksmq.md">RocksMQ</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_etcd.md">etcd</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_minio.md">MinIO ou S3</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_pulsar.md">Pulsar</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_rocksmq.md">RocksMQ</a></li>
         </ul>
     </td>
     <td>
         <ul>
-            <li><a href="/docs/pt/configure_rootcoord.md">Coordenada de raiz</a></li>
-            <li><a href="/docs/pt/configure_proxy.md">Proxy</a></li>
-            <li><a href="/docs/pt/configure_querycoord.md">Coordenada de consulta</a></li>
-            <li><a href="/docs/pt/configure_querynode.md">Nó de consulta</a></li>
-            <li><a href="/docs/pt/configure_indexnode.md">Nó de índice</a></li>
-            <li><a href="/docs/pt/configure_datacoord.md">Coordenada de dados</a></li>
-            <li><a href="/docs/pt/configure_datanode.md">Nó de dados</a></li>
-            <li><a href="/docs/pt/configure_localstorage.md">Armazenamento local</a></li>
-            <li><a href="/docs/pt/configure_log.md">Registo</a></li>
-            <li><a href="/docs/pt/configure_msgchannel.md">Canal de mensagem</a></li>
-            <li><a href="/docs/pt/configure_common.md">Comum</a></li>
-            <li><a href="/docs/pt/configure_gpu.md">GPU</a></li>
-            <li><a href="/docs/pt/configure_grpc.md">GRPC</a></li>
-            <li><a href="/docs/pt/configure_indexcoord.md">Coordenação de índices</a></li>
-            <li><a href="/docs/pt/configure_metastore.md">Metastore</a></li>
-            <li><a href="/docs/pt/configure_mq.md">Fila de mensagens</a></li>
-            <li><a href="/docs/pt/configure_natsmq.md">Natsmq</a></li>
-            <li><a href="/docs/pt/configure_tikv.md">Tikv</a></li>
-            <li><a href="/docs/pt/configure_trace.md">Rastreio</a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md">Quotas e limites</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_rootcoord.md">Coordenada de raiz</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_proxy.md">Proxy</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_querycoord.md">Coordenada de consulta</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_querynode.md">Nó de consulta</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_indexnode.md">Nó de índice</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_datacoord.md">Coordenada de dados</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_datanode.md">Nó de dados</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_localstorage.md">Armazenamento local</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_log.md">Registo</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_msgchannel.md">Canal de mensagem</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_common.md">Comum</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_gpu.md">GPU</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_grpc.md">GRPC</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_indexcoord.md">Coordenação de índices</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_metastore.md">Metastore</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_mq.md">Fila de mensagens</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_natsmq.md">Natsmq</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_tikv.md">Tikv</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_trace.md">Rastreio</a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md">Quotas e limites</a></li>
         </ul>
     </td>
   </tr>
@@ -182,14 +182,14 @@ Além disso, ao configurar o proxy, há um campo extra chamado `serviceType`. Es
     <td>Afinação do desempenho</td>
     <td>
         <ul>
-            <li><a href="/docs/pt/configure_querynode.md#queryNodegracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
-            <li><a href="/docs/pt/configure_rootcoord.md#rootCoordminSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a></li>
-            <li><a href="/docs/pt/configure_datacoord.md#dataCoordsegmentmaxSize"><code translate="no">dataCoord.segment.maxSize</code></a></li>
-            <li><a href="/docs/pt/configure_datacoord.md#dataCoordsegmentsealProportion"><code translate="no">dataCoord.segment.sealProportion</code></a></li>
-            <li><a href="/docs/pt/configure_datanode.md#dataNodeflushinsertBufSize"><code translate="no">dataNode.flush.insertBufSize</code></a></li>
-            <li><a href="/docs/pt/configure_querycoord.md#queryCoordautoHandoff"><code translate="no">queryCoord.autoHandoff</code></a></li>
-            <li><a href="/docs/pt/configure_querycoord.md#queryCoordautoBalance"><code translate="no">queryCoord.autoBalance</code></a></li>
-            <li><a href="/docs/pt/configure_localstorage.md#localStorageenabled"><code translate="no">localStorage.enabled</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_querynode.md#queryNodegracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_rootcoord.md#rootCoordminSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_datacoord.md#dataCoordsegmentmaxSize"><code translate="no">dataCoord.segment.maxSize</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_datacoord.md#dataCoordsegmentsealProportion"><code translate="no">dataCoord.segment.sealProportion</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_datanode.md#dataNodeflushinsertBufSize"><code translate="no">dataNode.flush.insertBufSize</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_querycoord.md#queryCoordautoHandoff"><code translate="no">queryCoord.autoHandoff</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_querycoord.md#queryCoordautoBalance"><code translate="no">queryCoord.autoBalance</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_localstorage.md#localStorageenabled"><code translate="no">localStorage.enabled</code></a></li>
         </ul>
     </td>
   </tr>
@@ -197,11 +197,11 @@ Além disso, ao configurar o proxy, há um campo extra chamado `serviceType`. Es
     <td>Dados e meta</td>
     <td>
         <ul>
-            <li><a href="/docs/pt/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>
-            <li><a href="/docs/pt/configure_rocksmq.md#rocksmqretentionTimeInMinutes"><code translate="no">rocksmq.retentionTimeInMinutes</code></a></li>
-            <li><a href="/docs/pt/configure_datacoord.md#dataCoordenableCompaction"><code translate="no">dataCoord.enableCompaction</code></a></li>
-            <li><a href="/docs/pt/configure_datacoord.md#dataCoordenableGarbageCollection"><code translate="no">dataCoord.enableGarbageCollection</code></a></li>
-            <li><a href="/docs/pt/configure_datacoord.md#dataCoordgcdropTolerance"><code translate="no">dataCoord.gc.dropTolerance</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_rocksmq.md#rocksmqretentionTimeInMinutes"><code translate="no">rocksmq.retentionTimeInMinutes</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_datacoord.md#dataCoordenableCompaction"><code translate="no">dataCoord.enableCompaction</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_datacoord.md#dataCoordenableGarbageCollection"><code translate="no">dataCoord.enableGarbageCollection</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_datacoord.md#dataCoordgcdropTolerance"><code translate="no">dataCoord.gc.dropTolerance</code></a></li>
         </ul>
     </td>
   </tr>
@@ -209,11 +209,11 @@ Além disso, ao configurar o proxy, há um campo extra chamado `serviceType`. Es
     <td>Administração</td>
     <td>
         <ul>
-            <li><a href="/docs/pt/configure_log.md#loglevel"><code translate="no">log.level</code></a></li>
-            <li><a href="/docs/pt/configure_log.md#logfilerootPath"><code translate="no">log.file.rootPath</code></a></li>
-            <li><a href="/docs/pt/configure_log.md#logfilemaxAge"><code translate="no">log.file.maxAge</code></a></li>
-            <li><a href="/docs/pt/configure_minio.md#minioaccessKeyID"><code translate="no">minio.accessKeyID</code></a></li>
-            <li><a href="/docs/pt/configure_minio.md#miniosecretAccessKey"><code translate="no">minio.secretAccessKey</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_log.md#loglevel"><code translate="no">log.level</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_log.md#logfilerootPath"><code translate="no">log.file.rootPath</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_log.md#logfilemaxAge"><code translate="no">log.file.maxAge</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_minio.md#minioaccessKeyID"><code translate="no">minio.accessKeyID</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_minio.md#miniosecretAccessKey"><code translate="no">minio.secretAccessKey</code></a></li>
         </ul>
     </td>
   </tr>
@@ -221,43 +221,43 @@ Além disso, ao configurar o proxy, há um campo extra chamado `serviceType`. Es
     <td>Quotas e limites</td>
     <td>
         <ul>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitsmaxCollectionNumPerDB"><code translate="no">quotaAndLimits.limits.maxCollectionNumPerDB</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsddlenabled"><code translate="no">quotaAndLimits.ddl.enabled</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsddlcollectionRate"><code translate="no">quotaAndLimits.ddl.collectionRate</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsddlpartitionRate"><code translate="no">quotaAndLimits.ddl.partitionRate</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsindexRateenabled"><code translate="no">quotaAndLimits.indexRate.enabled</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsindexRatemax"><code translate="no">quotaAndLimits.indexRate.max</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsflushRateenabled"><code translate="no">quotaAndLimits.flushRate.enabled</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsflushmax"><code translate="no">quotaAndLimits.flush.max</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitscompationenabled"><code translate="no">quotaAndLimits.compation.enabled</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitscompactionmax"><code translate="no">quotaAndLimits.compaction.max</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsdmlenabled"><code translate="no">quotaAndLimits.dml.enabled</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatemax"><code translate="no">quotaAndLimits.dml.insertRate.max</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatecollectionmax"><code translate="no">quotaAndLimits.dml.insertRate.collection.max</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatemax"><code translate="no">quotaAndLimits.dml.deleteRate.max</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatecollectionmax"><code translate="no">quotaAndLimits.dml.deleteRate.collection.max</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsdqlenabled"><code translate="no">quotaAndLimits.dql.enabled</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatemax"><code translate="no">quotaAndLimits.dql.searchRate.max</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatecollectionmax"><code translate="no">quotaAndLimits.dql.searchRate.collection.max</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatemax"><code translate="no">quotaAndLimits.dql.queryRate.max</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatecollectionmax"><code translate="no">quotaAndLimits.dql.queryRate.collection.max</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.ttProtection.enabled</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionmaxTimeTickDelay"><code translate="no">quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.memProtection.enabled</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.diskProtection.enabled</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuota"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuota</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuotaPerCollection"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuotaPerCollection</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitWritingforceDeny"><code translate="no">quotaAndLimits.limitWriting.forceDeny</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionenabled"><code translate="no">quotaAndLimits.limitReading.queueProtection.enabled</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionenabled"><code translate="no">quotaAndLimits.limitReading.resultProtection.enabled</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionmaxReadResultRate"><code translate="no">quotaAndLimits.limitReading.resultProtection.maxReadResultRate</code></a></li>
-            <li><a href="/docs/pt/configure_quotaandlimits.md#quotaAndLimitslimitReadingforceDeny"><code translate="no">quotaAndLimits.limitReading.forceDeny</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitsmaxCollectionNumPerDB"><code translate="no">quotaAndLimits.limits.maxCollectionNumPerDB</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsddlenabled"><code translate="no">quotaAndLimits.ddl.enabled</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsddlcollectionRate"><code translate="no">quotaAndLimits.ddl.collectionRate</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsddlpartitionRate"><code translate="no">quotaAndLimits.ddl.partitionRate</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsindexRateenabled"><code translate="no">quotaAndLimits.indexRate.enabled</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsindexRatemax"><code translate="no">quotaAndLimits.indexRate.max</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsflushRateenabled"><code translate="no">quotaAndLimits.flushRate.enabled</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsflushmax"><code translate="no">quotaAndLimits.flush.max</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitscompationenabled"><code translate="no">quotaAndLimits.compation.enabled</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitscompactionmax"><code translate="no">quotaAndLimits.compaction.max</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsdmlenabled"><code translate="no">quotaAndLimits.dml.enabled</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatemax"><code translate="no">quotaAndLimits.dml.insertRate.max</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatecollectionmax"><code translate="no">quotaAndLimits.dml.insertRate.collection.max</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatemax"><code translate="no">quotaAndLimits.dml.deleteRate.max</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatecollectionmax"><code translate="no">quotaAndLimits.dml.deleteRate.collection.max</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsdqlenabled"><code translate="no">quotaAndLimits.dql.enabled</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatemax"><code translate="no">quotaAndLimits.dql.searchRate.max</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatecollectionmax"><code translate="no">quotaAndLimits.dql.searchRate.collection.max</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatemax"><code translate="no">quotaAndLimits.dql.queryRate.max</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatecollectionmax"><code translate="no">quotaAndLimits.dql.queryRate.collection.max</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.ttProtection.enabled</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionmaxTimeTickDelay"><code translate="no">quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.memProtection.enabled</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.diskProtection.enabled</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuota"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuota</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuotaPerCollection"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuotaPerCollection</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitWritingforceDeny"><code translate="no">quotaAndLimits.limitWriting.forceDeny</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionenabled"><code translate="no">quotaAndLimits.limitReading.queueProtection.enabled</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionenabled"><code translate="no">quotaAndLimits.limitReading.resultProtection.enabled</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionmaxReadResultRate"><code translate="no">quotaAndLimits.limitReading.resultProtection.maxReadResultRate</code></a></li>
+            <li><a href="/docs/pt/v2.4.x/configure_quotaandlimits.md#quotaAndLimitslimitReadingforceDeny"><code translate="no">quotaAndLimits.limitReading.forceDeny</code></a></li>
         </ul>
     </td>
   </tr>
@@ -329,8 +329,8 @@ Este exemplo configura não apenas os recursos globais, mas também os recursos 
       </svg>
     </button></h2><ul>
 <li>Saiba como gerenciar as seguintes dependências do Milvus com o Milvus Operator:<ul>
-<li><a href="/docs/pt/object_storage_operator.md">Configurar o Armazenamento de Objetos com o Milvus Operator</a></li>
-<li><a href="/docs/pt/meta_storage_operator.md">Configurar o Meta Storage com Milvus Operator</a></li>
-<li><a href="/docs/pt/message_storage_operator.md">Configurar o armazenamento de mensagens com o Milvus Operator</a></li>
+<li><a href="/docs/pt/v2.4.x/object_storage_operator.md">Configurar o Armazenamento de Objetos com o Milvus Operator</a></li>
+<li><a href="/docs/pt/v2.4.x/meta_storage_operator.md">Configurar o Meta Storage com Milvus Operator</a></li>
+<li><a href="/docs/pt/v2.4.x/message_storage_operator.md">Configurar o armazenamento de mensagens com o Milvus Operator</a></li>
 </ul></li>
 </ul>

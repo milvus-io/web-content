@@ -7,7 +7,7 @@ related_key: upgrade Milvus Cluster
 summary: Découvrez comment mettre à niveau le cluster Milvus avec Helm Chart.
 title: Mise à niveau du cluster Milvus avec les cartes Helm
 ---
-<div class="tab-wrapper"><a href="/docs/fr/upgrade_milvus_cluster-helm.md" class='active '>Opérateur</a><a href="/docs/fr/upgrade_milvus_cluster-operator.md" class=''>MilvusHelm</a></div>
+<div class="tab-wrapper"><a href="/docs/fr/v2.4.x/upgrade_milvus_cluster-helm.md" class='active '>Opérateur</a><a href="/docs/fr/v2.4.x/upgrade_milvus_cluster-operator.md" class=''>MilvusHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">Mise à niveau du cluster Milvus avec les cartes Helm<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

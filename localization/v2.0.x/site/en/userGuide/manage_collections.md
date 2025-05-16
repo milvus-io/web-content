@@ -20,10 +20,10 @@ summary: ''
       </svg>
     </button></h1><p>A Milvus collection is similar to a table in traditional databases and is used to store and manage data. Learn about the collection-level operations.</p>
 <ul>
-<li><a href="/docs/create_collection.md">Create a Collection</a>: Create a collection with the book collection example.</li>
-<li><a href="/docs/check_collection.md">Check Collection Information</a>: Check the basic information of a collection in Milvus including its name, number of entities, and more.</li>
-<li><a href="/docs/drop_collection.md">Drop a Collection</a>: Caution is needed as the delete operation irreversibly drops the collection and all data within it.</li>
-<li><a href="/docs/collection_alias.md">Manage Collection Alias</a>: Milvus supports specifying a unique alias for a collection.</li>
-<li><a href="/docs/load_collection.md">Load a Collection</a>: Load the collection to memory before a search or a query.</li>
-<li><a href="/docs/release_collection.md">Release a Collection</a>: Release a collection from memory after a search or a query to reduce memory usage.</li>
+<li><a href="/docs/v2.0.x/create_collection.md">Create a Collection</a>: Create a collection with the book collection example.</li>
+<li><a href="/docs/v2.0.x/check_collection.md">Check Collection Information</a>: Check the basic information of a collection in Milvus including its name, number of entities, and more.</li>
+<li><a href="/docs/v2.0.x/drop_collection.md">Drop a Collection</a>: Caution is needed as the delete operation irreversibly drops the collection and all data within it.</li>
+<li><a href="/docs/v2.0.x/collection_alias.md">Manage Collection Alias</a>: Milvus supports specifying a unique alias for a collection.</li>
+<li><a href="/docs/v2.0.x/load_collection.md">Load a Collection</a>: Load the collection to memory before a search or a query.</li>
+<li><a href="/docs/v2.0.x/release_collection.md">Release a Collection</a>: Release a collection from memory after a search or a query to reduce memory usage.</li>
 </ul>

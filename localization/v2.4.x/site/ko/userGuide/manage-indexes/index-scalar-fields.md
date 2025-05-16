@@ -190,7 +190,7 @@ client.createIndex(createIndexReq);
 <p>생성할 스칼라 인덱스의 유형입니다. 암시적 인덱싱의 경우 이 매개변수를 비워 두거나 생략하세요.</p>
 <p>사용자 지정 인덱싱의 경우 유효한 값은 다음과 같습니다:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</p></li>
+<li><p><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</p></li>
 <li><p><strong>STL_SORT</strong>: 표준 템플릿 라이브러리 정렬 알고리즘을 사용하여 스칼라 필드를 정렬합니다. 숫자 필드(예: INT8, INT16, INT32, INT64, FLOAT, DOUBLE)만 지원합니다.</p></li>
 <li><p><strong>트라이</strong>: 빠른 접두사 검색 및 검색을 위한 트리 데이터 구조입니다. VARCHAR 필드를 지원합니다.</p></li>
 </ul></li>
@@ -214,7 +214,7 @@ client.createIndex(createIndexReq);
 <li><strong>fieldName</strong><em>(문자열</em>) 인덱싱할 스칼라 필드의 이름입니다.</li>
 <li><strong>indexName</strong><em>(문자열</em>) 생성할 스칼라 인덱스의 이름입니다. 각 스칼라 필드는 하나의 인덱스를 지원합니다.</li>
 <li><strong>indexType</strong><em>(문자열</em>) 생성할 스칼라 인덱스의 유형입니다. 암시적 인덱싱의 경우 이 매개변수를 비워 두거나 생략합니다. 사용자 정의 인덱싱의 경우 유효한 값은 다음과 같습니다:<ul>
-<li><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</li>
+<li><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</li>
 <li><strong>STL_SORT</strong>: 표준 템플릿 라이브러리 정렬 알고리즘을 사용하여 스칼라 필드를 정렬합니다. 부울 및 숫자 필드(예: INT8, INT16, INT32, INT64, FLOAT, DOUBLE)를 지원합니다.</li>
 <li><strong>트라이</strong>: 빠른 접두사 검색과 검색을 위한 트리 데이터 구조입니다. VARCHAR 필드를 지원합니다.</li>
 </ul></li>
@@ -235,7 +235,7 @@ client.createIndex(createIndexReq);
 <li><strong>field_name</strong><em>(문자열</em>) 인덱싱할 스칼라 필드의 이름입니다.</li>
 <li><strong>index_name</strong><em>(문자열</em>) 생성할 스칼라 인덱스의 이름입니다. 각 스칼라 필드는 하나의 인덱스를 지원합니다.</li>
 <li><strong>index_type</strong><em>(문자열</em>) 생성할 스칼라 인덱스의 유형입니다. 암시적 인덱싱의 경우 이 매개변수를 비워 두거나 생략합니다. 사용자 지정 인덱싱의 경우 유효한 값은 다음과 같습니다:<ul>
-<li><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</li>
+<li><strong>INVERTED</strong>: (권장) 반전 인덱스는 토큰화된 모든 단어가 알파벳순으로 정렬된 용어 사전으로 구성됩니다. 자세한 내용은 <a href="/docs/ko/v2.4.x/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</li>
 <li><strong>STL_SORT</strong>: 표준 템플릿 라이브러리 정렬 알고리즘을 사용하여 스칼라 필드를 정렬합니다. 부울 및 숫자 필드(예: INT8, INT16, INT32, INT64, FLOAT, DOUBLE)를 지원합니다.</li>
 <li><strong>트라이</strong>: 빠른 접두사 검색과 검색을 위한 트리 데이터 구조입니다. VARCHAR 필드를 지원합니다.</li>
 </ul></li>

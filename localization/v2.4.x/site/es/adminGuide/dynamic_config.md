@@ -37,14 +37,14 @@ title: Configurar Milvus sobre la marcha
       </svg>
     </button></h2><p>Necesita asegurarse de que：</p>
 <ul>
-<li>Tiene Birdwatcher instalado. Para más detalles, consulte <a href="/docs/es/birdwatcher_install_guides.md">Instalar Birdwatcher</a>,</li>
+<li>Tiene Birdwatcher instalado. Para más detalles, consulte <a href="/docs/es/v2.4.x/birdwatcher_install_guides.md">Instalar Birdwatcher</a>,</li>
 <li>Tiene instalado etcdctl. Para más detalles, consulte <a href="https://etcd.io/docs/v3.5/dev-guide/interacting_v3/">Interacción con etcd</a>, o</li>
 <li>Tiene instalados otros clientes etcd, como el cliente Python.</li>
 </ul>
 <div class="alert note">
 <ul>
-<li>Los ejemplos de esta guía cambian el valor de <code translate="no">proxy.minPasswordLength</code> a <code translate="no">8</code>. Puede reemplazar la clave por las que correspondan que se enumeran en <a href="/docs/es/dynamic_config.md#Applicable-configuration-items">Elementos de configuración aplicables</a>.</li>
-<li>Los ejemplos de esta guía asumen que la ruta raíz de su Milvus es <code translate="no">by-dev</code>. Todas las configuraciones se listan bajo la ruta <code translate="no">by-dev/config</code>. La ruta raíz de Milvus varía según la forma en que lo instale. Para las instancias instaladas utilizando las tablas Helm, la ruta raíz por defecto es <code translate="no">by-dev</code>. Si no conoce la ruta raíz, consulte <a href="/docs/es/birdwatcher_usage_guides.md#Connect-to-etcd">Conectarse a etcd</a>.</li>
+<li>Los ejemplos de esta guía cambian el valor de <code translate="no">proxy.minPasswordLength</code> a <code translate="no">8</code>. Puede reemplazar la clave por las que correspondan que se enumeran en <a href="/docs/es/v2.4.x/dynamic_config.md#Applicable-configuration-items">Elementos de configuración aplicables</a>.</li>
+<li>Los ejemplos de esta guía asumen que la ruta raíz de su Milvus es <code translate="no">by-dev</code>. Todas las configuraciones se listan bajo la ruta <code translate="no">by-dev/config</code>. La ruta raíz de Milvus varía según la forma en que lo instale. Para las instancias instaladas utilizando las tablas Helm, la ruta raíz por defecto es <code translate="no">by-dev</code>. Si no conoce la ruta raíz, consulte <a href="/docs/es/v2.4.x/birdwatcher_usage_guides.md#Connect-to-etcd">Conectarse a etcd</a>.</li>
 </ul>
 </div>
 <h2 id="Change-configurations" class="common-anchor-header">Cambiar configuraciones<button data-href="#Change-configurations" class="anchor-icon" translate="no">
@@ -203,6 +203,6 @@ QueryCoord-<span class="hljs-number">1</span>(ip:port) &gt; configuration  <span
         ></path>
       </svg>
     </button></h2><ul>
-<li>Aprenda más sobre <a href="/docs/es/system_configuration.md">Configuraciones del Sistema</a>.</li>
-<li>Aprenda a configurar Milvus instalado usando <a href="/docs/es/configure_operator.md">Milvus Operator</a>, <a href="/docs/es/configure-helm.md">gráficos Helm</a> y <a href="/docs/es/configure-docker.md">Docker</a>.</li>
+<li>Aprenda más sobre <a href="/docs/es/v2.4.x/system_configuration.md">Configuraciones del Sistema</a>.</li>
+<li>Aprenda a configurar Milvus instalado usando <a href="/docs/es/v2.4.x/configure_operator.md">Milvus Operator</a>, <a href="/docs/es/v2.4.x/configure-helm.md">gráficos Helm</a> y <a href="/docs/es/v2.4.x/configure-docker.md">Docker</a>.</li>
 </ul>

@@ -343,6 +343,6 @@ spec:
       </svg>
     </button></h2><p>Imparare a configurare altre dipendenze di Milvus con Milvus Operator:</p>
 <ul>
-<li><a href="/docs/it/object_storage_operator.md">Configurare l'archiviazione degli oggetti con Milvus Operator</a></li>
-<li><a href="/docs/it/meta_storage_operator.md">Configurazione del metaconservazione con Milvus Operator</a></li>
+<li><a href="/docs/it/v2.4.x/object_storage_operator.md">Configurare l'archiviazione degli oggetti con Milvus Operator</a></li>
+<li><a href="/docs/it/v2.4.x/meta_storage_operator.md">Configurazione del metaconservazione con Milvus Operator</a></li>
 </ul>

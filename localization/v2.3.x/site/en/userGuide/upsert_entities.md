@@ -38,7 +38,7 @@ summary: Learn how to upsert entities in Milvus.
         ></path>
       </svg>
     </button></h2><p>First, prepare the data to upsert.  The type of data to upsert must match the schema of the collection, otherwise Milvus will raise an exception.</p>
-<p>Milvus supports default values for scalar fields, excluding a primary key field. This indicates that some fields can be left empty during data inserts or upserts. For more information, refer to <a href="/docs/create_collection.md#prepare-schema">Create a Collection</a>.</p>
+<p>Milvus supports default values for scalar fields, excluding a primary key field. This indicates that some fields can be left empty during data inserts or upserts. For more information, refer to <a href="/docs/v2.3.x/create_collection.md#prepare-schema">Create a Collection</a>.</p>
 <div class="alert note">
 <p>When interacting with Milvus using Python code, you have the flexibility to choose between PyMilvus and MilvusClient (new). For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.3.x/About.md">Python SDK</a>.</p>
 </div>
@@ -162,7 +162,7 @@ err != <span class="hljs-literal">nil</span> {
   </tbody>
 </table>
 <div class="alert note">
-<p>After upserting entities into a collection that has previously been indexed, you do not need to re-index the collection, as Milvus will automatically create an index for the newly upserted data. For more information, refer to <a href="/docs/product_faq.md#Can-indexes-be-created-after-inserting-vectors">Can indexes be created after inserting vectors?</a></p>
+<p>After upserting entities into a collection that has previously been indexed, you do not need to re-index the collection, as Milvus will automatically create an index for the newly upserted data. For more information, refer to <a href="/docs/v2.3.x/product_faq.md#Can-indexes-be-created-after-inserting-vectors">Can indexes be created after inserting vectors?</a></p>
 </div>
 <h2 id="Flush-data" class="common-anchor-header">Flush data<button data-href="#Flush-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -216,7 +216,7 @@ err != <span class="hljs-literal">nil</span> {
       </svg>
     </button></h2><p>Learn more basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/build_index.md">Build an index for vectors</a></li>
-<li><a href="/docs/search.md">Conduct a vector search</a></li>
-<li><a href="/docs/hybridsearch.md">Conduct a hybrid search</a></li>
+<li><a href="/docs/v2.3.x/build_index.md">Build an index for vectors</a></li>
+<li><a href="/docs/v2.3.x/search.md">Conduct a vector search</a></li>
+<li><a href="/docs/v2.3.x/hybridsearch.md">Conduct a hybrid search</a></li>
 </ul>

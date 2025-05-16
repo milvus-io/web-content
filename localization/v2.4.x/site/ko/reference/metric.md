@@ -185,5 +185,5 @@ title: 유사성 메트릭
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvus에서 지원되는 <a href="/docs/ko/index.md">인덱스 유형에</a> 대해 자세히 알아보세요.</li>
+<li>Milvus에서 지원되는 <a href="/docs/ko/v2.4.x/index.md">인덱스 유형에</a> 대해 자세히 알아보세요.</li>
 </ul>

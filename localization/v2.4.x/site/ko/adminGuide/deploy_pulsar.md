@@ -42,7 +42,7 @@ summary: 도커 컴포즈 또는 헬름으로 메시지 저장소를 구성하�
   port: <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
   maxMessageSize: <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>자세한 내용은 <a href="/docs/ko/configure_pulsar.md">Pulsar 관련 구성을</a> 참조하세요.</p>
+<p>자세한 내용은 <a href="/docs/ko/v2.4.x/configure_pulsar.md">Pulsar 관련 구성을</a> 참조하세요.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Milvus 실행</h3><p>다음 명령어를 실행하여 Pulsar 설정을 사용하는 Milvus를 시작합니다.</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
@@ -63,7 +63,7 @@ summary: 도커 컴포즈 또는 헬름으로 메시지 저장소를 구성하�
         ></path>
       </svg>
     </button></h2><p>K8의 Milvus 클러스터의 경우, Milvus를 시작하는 것과 동일한 명령으로 Pulsar를 구성할 수 있습니다. 또는 Milvus를 시작하기 전에 <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> 리포지토리의 /charts/milvus 경로에 있는 <code translate="no">values.yml</code> 파일을 사용하여 Pulsar를 구성할 수 있습니다.</p>
-<p>헬름을 사용하여 Milvus를 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/configure-helm.md">헬름 차트로 Milvus 구성하기를</a> 참조하세요. 펄사 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/configure_pulsar.md">펄사 관련 구성을</a> 참고한다.</p>
+<p>헬름을 사용하여 Milvus를 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/configure-helm.md">헬름 차트로 Milvus 구성하기를</a> 참조하세요. 펄사 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/configure_pulsar.md">펄사 관련 구성을</a> 참고한다.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">YAML 파일 사용하기</h3><ol>
 <li><code translate="no">values.yaml</code> 파일에서 <code translate="no">externalConfigFiles</code> 섹션을 구성합니다.</li>
 </ol>
@@ -98,7 +98,7 @@ summary: 도커 컴포즈 또는 헬름으로 메시지 저장소를 구성하�
         ></path>
       </svg>
     </button></h2><p>K8의 Milvus 클러스터의 경우, Milvus를 시작하는 것과 동일한 명령으로 Kafka를 구성할 수 있습니다. 또는 Milvus를 시작하기 전에 <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> 리포지토리의 /charts/milvus 경로에 있는 <code translate="no">values.yml</code> 파일을 사용하여 Kafka를 구성할 수 있습니다.</p>
-<p>헬름을 사용하여 Milvus를 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/configure-helm.md">헬름 차트로 Milvus 구성을</a> 참조하세요. Pulsar 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/configure_pulsar.md">Pulsar 관련 구성을</a> 참고한다.</p>
+<p>헬름을 사용하여 Milvus를 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/configure-helm.md">헬름 차트로 Milvus 구성을</a> 참조하세요. Pulsar 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/configure_pulsar.md">Pulsar 관련 구성을</a> 참고한다.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">YAML 파일 사용하기</h3><ol>
 <li>Kafka를 메시지 저장 시스템으로 사용하려면 <code translate="no">values.yaml</code> 파일에서 <code translate="no">externalConfigFiles</code> 섹션을 구성합니다.</li>
 </ol>
@@ -132,7 +132,7 @@ summary: 도커 컴포즈 또는 헬름으로 메시지 저장소를 구성하�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 스탠드얼론은 기본 메시지 저장소로 RocksMQ를 사용합니다. 헬름으로 Milvus를 구성하는 방법에 대한 자세한 단계는 <a href="/docs/ko/configure-helm.md">헬름 차트로 Milvus 구성하기를</a> 참조하세요. RocksMQ 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/configure_rocksmq.md">RocksMQ 관련 구성을</a> 참조하세요.</p>
+    </button></h2><p>Milvus 스탠드얼론은 기본 메시지 저장소로 RocksMQ를 사용합니다. 헬름으로 Milvus를 구성하는 방법에 대한 자세한 단계는 <a href="/docs/ko/v2.4.x/configure-helm.md">헬름 차트로 Milvus 구성하기를</a> 참조하세요. RocksMQ 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/configure_rocksmq.md">RocksMQ 관련 구성을</a> 참조하세요.</p>
 <ul>
 <li><p>RocksMQ로 Milvus를 시작하고 설정을 변경하려면 다음 YAML 파일에서 변경된 설정으로 <code translate="no">helm upgrade -f</code> 을 실행하면 됩니다.</p></li>
 <li><p>헬름을 사용하여 RocksMQ가 아닌 다른 메시지 저장소를 사용하여 Milvus를 독립형으로 설치한 경우 다시 RocksMQ로 변경하려면 모든 컬렉션을 플러시하고 Milvus를 중지한 후 다음 YAML 파일로 <code translate="no">helm upgrade -f</code> 을 실행하세요.</p></li>
@@ -171,7 +171,7 @@ summary: 도커 컴포즈 또는 헬름으로 메시지 저장소를 구성하�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS는 RocksMQ를 대체하는 실험적인 메시지 저장소입니다. 헬름으로 밀버스를 구성하는 방법에 대한 자세한 단계는 <a href="/docs/ko/configure-helm.md">헬름 차트로 밀버스 구성하기를</a> 참조하세요. RocksMQ 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/configure_natsmq.md">NATS 관련 구성을</a> 참고한다.</p>
+    </button></h2><p>NATS는 RocksMQ를 대체하는 실험적인 메시지 저장소입니다. 헬름으로 밀버스를 구성하는 방법에 대한 자세한 단계는 <a href="/docs/ko/v2.4.x/configure-helm.md">헬름 차트로 밀버스 구성하기를</a> 참조하세요. RocksMQ 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/v2.4.x/configure_natsmq.md">NATS 관련 구성을</a> 참고한다.</p>
 <ul>
 <li><p>NATS로 Milvus를 시작하고 설정을 변경하려면 다음 YAML 파일에서 변경된 설정으로 <code translate="no">helm upgrade -f</code> 을 실행하면 됩니다.</p></li>
 <li><p>NATS가 아닌 다른 메시지 저장소가 있는 Milvus를 독립형으로 설치한 경우 이를 NATS로 변경하려면 모든 컬렉션을 플러시하고 Milvus를 중지한 후 다음 YAML 파일로 <code translate="no">helm upgrade -f</code> 을 실행하세요.</p></li>
@@ -235,6 +235,6 @@ summary: 도커 컴포즈 또는 헬름으로 메시지 저장소를 구성하�
       </svg>
     </button></h2><p>도커 컴포즈 또는 헬름으로 다른 Milvus 종속성을 구성하는 방법을 알아보세요:</p>
 <ul>
-<li><a href="/docs/ko/deploy_s3.md">도커 컴포즈 또는 헬름으로 오브젝트 스토리지 구성하기</a></li>
-<li><a href="/docs/ko/deploy_etcd.md">도커 컴포즈 또는 헬름으로 메타 스토리지 구성하기</a></li>
+<li><a href="/docs/ko/v2.4.x/deploy_s3.md">도커 컴포즈 또는 헬름으로 오브젝트 스토리지 구성하기</a></li>
+<li><a href="/docs/ko/v2.4.x/deploy_etcd.md">도커 컴포즈 또는 헬름으로 메타 스토리지 구성하기</a></li>
 </ul>

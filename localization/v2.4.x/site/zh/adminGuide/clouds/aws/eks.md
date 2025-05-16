@@ -513,6 +513,6 @@ aws iam <span class="hljs-keyword">delete</span>-policy --policy-arn <span class
       </svg>
     </button></h2><p>如果您想了解如何在其他云上部署 Milvus，请点击以下链接：</p>
 <ul>
-<li><a href="/docs/zh/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 群集</a></li>
-<li><a href="/docs/zh/azure.md">使用 Kubernetes 在 Azure 上部署 Milvus 群集</a></li>
+<li><a href="/docs/zh/v2.4.x/gcp.md">使用 Kubernetes 在 GCP 上部署 Milvus 群集</a></li>
+<li><a href="/docs/zh/v2.4.x/azure.md">使用 Kubernetes 在 Azure 上部署 Milvus 群集</a></li>
 </ul>

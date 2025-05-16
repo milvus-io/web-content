@@ -547,10 +547,10 @@ title: ''
 </ul>
 <p>Read these pages to learn more.</p>
 <ul>
-<li><a href="/docs/dynamic_schema.md">Dynamic Schema</a></li>
-<li><a href="/docs/schema.md">Schema</a></li>
-<li><a href="/docs/manage_databases.md">Manage Databases</a></li>
-<li><a href="/docs/multi_tenancy.md">Multi-tenancy</a></li>
+<li><a href="/docs/v2.2.x/dynamic_schema.md">Dynamic Schema</a></li>
+<li><a href="/docs/v2.2.x/schema.md">Schema</a></li>
+<li><a href="/docs/v2.2.x/manage_databases.md">Manage Databases</a></li>
+<li><a href="/docs/v2.2.x/multi_tenancy.md">Multi-tenancy</a></li>
 </ul>
 <p>For the use of these new features, please refer to related pages in the User Guides and the <a href="https://milvus.io/api-reference/pymilvus/v2.2.x/About.md">PyMilvus API reference</a>.</p>
 <h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
@@ -809,9 +809,9 @@ title: ''
 <p>We have also made several enhancements to make your Milvus cluster faster and consume less memory with reduced convergence time for failure recovery.</p>
 <h3 id="New-Features" class="common-anchor-header">New Features</h3><ul>
 <li><p>Resource grouping</p>
-<p>Milvus has implemented resource grouping for QueryNodes. A resource group is a collection of QueryNodes. Milvus supports grouping QueryNodes in the cluster into different resource groups, where access to physical resources in different resource groups is completely isolated. See <a href="/docs/resource_group.md">Manage Resource Group</a> for more information.</p></li>
+<p>Milvus has implemented resource grouping for QueryNodes. A resource group is a collection of QueryNodes. Milvus supports grouping QueryNodes in the cluster into different resource groups, where access to physical resources in different resource groups is completely isolated. See <a href="/docs/v2.2.x/resource_group.md">Manage Resource Group</a> for more information.</p></li>
 <li><p>Collection renaming</p>
-<p>The Collection-renaming API provides a way for users to change the name of a collection. Currently, PyMilvus supports this API, and SDKs for other programming languages are on the way. See <a href="/docs/rename_collection.md">Rename a Collection</a> for details.</p></li>
+<p>The Collection-renaming API provides a way for users to change the name of a collection. Currently, PyMilvus supports this API, and SDKs for other programming languages are on the way. See <a href="/docs/v2.2.x/rename_collection.md">Rename a Collection</a> for details.</p></li>
 <li><p>Google Cloud Storage support</p>
 <p>Milvus now supports Google Cloud Storage as the object storage.</p></li>
 <li><p>New option to the search and query APIs</p>
@@ -1152,23 +1152,23 @@ title: ''
 </table>
 <p>Milvus 2.2.0 introduces many new features including support for Disk-based approximate nearest neighbor (ANN) algorithm, bulk insertion of entities from files, and role-based access control (RBAC) for an improved security. In addition, this major release also ushers in a new era for vector search with enhanced stability, faster search speed, and more flexible scalability.</p>
 <p><h3 id="v2.2.0">Breaking changes</h3></p>
-<p>Since metadata storage is refined and API usage is normalized, Milvus 2.2 is <em>not</em> fully compatible with earlier releases. Read <a href="/docs/upgrade_milvus_cluster-helm.md">this guide</a> to learn how to safely upgrade from Milvus 2.1.x to 2.2.0.</p>
+<p>Since metadata storage is refined and API usage is normalized, Milvus 2.2 is <em>not</em> fully compatible with earlier releases. Read <a href="/docs/v2.2.x/upgrade_milvus_cluster-helm.md">this guide</a> to learn how to safely upgrade from Milvus 2.1.x to 2.2.0.</p>
 <p><h3 id="v2.2.0">Features</h3></p>
 <ul>
 <li><p>Support for bulk insertion of entities from files
-Milvus now offers a new set of bulk insertion APIs to make data insertion more efficient. You can now upload entities in a Json file directly to Milvus. See <a href="/docs/bulk_insert.md">Insert Entities from Files</a> for details.</p></li>
+Milvus now offers a new set of bulk insertion APIs to make data insertion more efficient. You can now upload entities in a Json file directly to Milvus. See <a href="/docs/v2.2.x/bulk_insert.md">Insert Entities from Files</a> for details.</p></li>
 <li><p>Query result pagination
-To avoid massive search and query results returned in a single RPC, Milvus now supports configuring offset and filtering results with keywords in searches and queries. See <a href="/docs/search.md">Search</a> and <a href="/docs/query.md">Query</a> for details.</p></li>
+To avoid massive search and query results returned in a single RPC, Milvus now supports configuring offset and filtering results with keywords in searches and queries. See <a href="/docs/v2.2.x/search.md">Search</a> and <a href="/docs/v2.2.x/query.md">Query</a> for details.</p></li>
 </ul>
 <ul>
 <li><p>Role-based access control (RBAC)
-Like other traditional databases, Milvus now supports RBAC so that you can manages users, roles and privileges. See <a href="/docs/rbac.md">Enable RBAC</a> for details.</p></li>
+Like other traditional databases, Milvus now supports RBAC so that you can manages users, roles and privileges. See <a href="/docs/v2.2.x/rbac.md">Enable RBAC</a> for details.</p></li>
 <li><p>Quotas and limits
-Quota is a new mechanism that protects the system from OOM and crash under a burst of traffic. By imposing quota limitations, you can limit ingestion rate, search rate, etc. See <a href="/docs/configure_quota_limits.md">Quota and Limitation Configurations</a> for details.</p></li>
+Quota is a new mechanism that protects the system from OOM and crash under a burst of traffic. By imposing quota limitations, you can limit ingestion rate, search rate, etc. See <a href="/docs/v2.2.x/configure_quota_limits.md">Quota and Limitation Configurations</a> for details.</p></li>
 </ul>
 <ul>
 <li>Time to live (TTL) at a collection level
-In prior releases, we only support configuring TTL at a cluster level. Milvus 2.2.0 now supports configuring collection TTL when you create or modify a collection. After setting TTL for a collection, the entities in this collection automatically expires after the specified period of time. See <a href="/docs/create_collection.md">Create a collection</a> or <a href="/docs/modify_collection.md">Modify a collection</a> for details.</li>
+In prior releases, we only support configuring TTL at a cluster level. Milvus 2.2.0 now supports configuring collection TTL when you create or modify a collection. After setting TTL for a collection, the entities in this collection automatically expires after the specified period of time. See <a href="/docs/v2.2.x/create_collection.md">Create a collection</a> or <a href="/docs/v2.2.x/modify_collection.md">Modify a collection</a> for details.</li>
 </ul>
 <ul>
 <li>Support for disk-based approximate nearest neighbor search (ANNS) indexes (Beta)

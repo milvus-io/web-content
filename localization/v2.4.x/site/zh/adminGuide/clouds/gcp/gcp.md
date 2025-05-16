@@ -230,7 +230,7 @@ helm install -f values.yaml my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>在前面的命令中，我们在本地添加了 Milvus Helm 图表的 repo，并更新该 repo 以获取最新图表。然后安装一个 Milvus 实例，并将其命名为<strong>my-release</strong>。</p>
 <p>注意配置<code translate="no">service.type</code> 的值，它表明我们希望通过第四层负载平衡器公开 Milvus 实例。</p>
-<p>如果你想通过第 7 层负载平衡器公开你的 Milvus 实例，请<a href="/docs/zh/gcp_layer7.md">阅读此文</a>。</p>
+<p>如果你想通过第 7 层负载平衡器公开你的 Milvus 实例，请<a href="/docs/zh/v2.4.x/gcp_layer7.md">阅读此文</a>。</p>
 <h2 id="Verify-the-deployment" class="common-anchor-header">验证部署<button data-href="#Verify-the-deployment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -282,6 +282,6 @@ helm install -f values.yaml my-release milvus/milvus
       </svg>
     </button></h2><p>如果你想了解如何在其他云上部署 Milvus：</p>
 <ul>
-<li><a href="/docs/zh/eks.md">使用 Kubernetes 在 AWS 上部署 Milvus 群集</a></li>
-<li><a href="/docs/zh/azure.md">使用 Kubernetes 在 Azure 上部署 Milvus 群集</a></li>
+<li><a href="/docs/zh/v2.4.x/eks.md">使用 Kubernetes 在 AWS 上部署 Milvus 群集</a></li>
+<li><a href="/docs/zh/v2.4.x/azure.md">使用 Kubernetes 在 Azure 上部署 Milvus 群集</a></li>
 </ul>

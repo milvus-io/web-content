@@ -112,6 +112,6 @@ spec:
       </svg>
     </button></h2><p>Imparare a configurare altre dipendenze di Milvus con Milvus Operator:</p>
 <ul>
-<li><a href="/docs/it/object_storage_operator.md">Configurare la memorizzazione degli oggetti con Milvus Operator</a></li>
-<li><a href="/docs/it/message_storage_operator.md">Configurazione della memorizzazione dei messaggi con Milvus Operator</a></li>
+<li><a href="/docs/it/v2.4.x/object_storage_operator.md">Configurare la memorizzazione degli oggetti con Milvus Operator</a></li>
+<li><a href="/docs/it/v2.4.x/message_storage_operator.md">Configurazione della memorizzazione dei messaggi con Milvus Operator</a></li>
 </ul>

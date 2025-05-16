@@ -21,7 +21,7 @@ title: Autenticare l'accesso dell'utente
     </button></h1><p>Questa guida spiega come gestire l'autenticazione degli utenti in Milvus, compresa l'abilitazione dell'autenticazione, la connessione come utente e la modifica delle credenziali dell'utente.</p>
 <div class="alert note">
 <ul>
-<li><p>TLS e l'autenticazione utente sono due approcci di sicurezza distinti. Se avete abilitato sia l'autenticazione utente che il TLS nel vostro sistema Milvus, dovete fornire un nome utente, una password e il percorso del file del certificato. Per informazioni su come abilitare TLS, consultare <a href="/docs/it/tls.md">Crittografia in transito</a>.</p></li>
+<li><p>TLS e l'autenticazione utente sono due approcci di sicurezza distinti. Se avete abilitato sia l'autenticazione utente che il TLS nel vostro sistema Milvus, dovete fornire un nome utente, una password e il percorso del file del certificato. Per informazioni su come abilitare TLS, consultare <a href="/docs/it/v2.4.x/tls.md">Crittografia in transito</a>.</p></li>
 <li><p>I frammenti di codice di questa pagina utilizzano il nuovo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) per interagire con Milvus. I nuovi SDK MilvusClient per altri linguaggi saranno rilasciati nei prossimi aggiornamenti.</p></li>
 </ul>
 </div>
@@ -267,11 +267,11 @@ client.list_users()
       </svg>
     </button></h2><ul>
 <li>Potreste anche voler imparare a:<ul>
-<li><a href="/docs/it/scaleout.md">Scalare un cluster Milvus</a></li>
+<li><a href="/docs/it/v2.4.x/scaleout.md">Scalare un cluster Milvus</a></li>
 </ul></li>
 <li>Se siete pronti a distribuire il vostro cluster su cloud:<ul>
-<li>Imparare a <a href="/docs/it/eks.md">distribuire Milvus su Amazon EKS con Terraform</a></li>
-<li>Imparare a <a href="/docs/it/gcp.md">distribuire il cluster Milvus su GCP con Kubernetes</a></li>
-<li>Imparare a <a href="/docs/it/azure.md">distribuire Milvus su Microsoft Azure con Kubernetes</a></li>
+<li>Imparare a <a href="/docs/it/v2.4.x/eks.md">distribuire Milvus su Amazon EKS con Terraform</a></li>
+<li>Imparare a <a href="/docs/it/v2.4.x/gcp.md">distribuire il cluster Milvus su GCP con Kubernetes</a></li>
+<li>Imparare a <a href="/docs/it/v2.4.x/azure.md">distribuire Milvus su Microsoft Azure con Kubernetes</a></li>
 </ul></li>
 </ul>
